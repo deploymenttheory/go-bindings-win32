@@ -4,6 +4,12 @@
 
 package wnet
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type CONNECTDLGSTRUCT_FLAGS uint32
 
 const (
@@ -15,6 +21,35 @@ const (
 	CONNDLG_NOT_PERSIST CONNECTDLGSTRUCT_FLAGS = 32
 )
 
+// String returns the CONNECTDLGSTRUCT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONNECTDLGSTRUCT_FLAGS) String() string {
+	var parts []string
+	if e&CONNDLG_RO_PATH != 0 {
+		parts = append(parts, "CONNDLG_RO_PATH")
+	}
+	if e&CONNDLG_CONN_POINT != 0 {
+		parts = append(parts, "CONNDLG_CONN_POINT")
+	}
+	if e&CONNDLG_USE_MRU != 0 {
+		parts = append(parts, "CONNDLG_USE_MRU")
+	}
+	if e&CONNDLG_HIDE_BOX != 0 {
+		parts = append(parts, "CONNDLG_HIDE_BOX")
+	}
+	if e&CONNDLG_PERSIST != 0 {
+		parts = append(parts, "CONNDLG_PERSIST")
+	}
+	if e&CONNDLG_NOT_PERSIST != 0 {
+		parts = append(parts, "CONNDLG_NOT_PERSIST")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DISCDLGSTRUCT_FLAGS uint32
 
 const (
@@ -22,6 +57,23 @@ const (
 	DISC_NO_FORCE       DISCDLGSTRUCT_FLAGS = 64
 )
 
+// String returns the DISCDLGSTRUCT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISCDLGSTRUCT_FLAGS) String() string {
+	var parts []string
+	if e&DISC_UPDATE_PROFILE != 0 {
+		parts = append(parts, "DISC_UPDATE_PROFILE")
+	}
+	if e&DISC_NO_FORCE != 0 {
+		parts = append(parts, "DISC_NO_FORCE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type NETINFOSTRUCT_CHARACTERISTICS uint32
 
 const (
@@ -30,6 +82,25 @@ const (
 	NETINFO_PRINTERRED NETINFOSTRUCT_CHARACTERISTICS = 8
 )
 
+// String returns the NETINFOSTRUCT_CHARACTERISTICS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETINFOSTRUCT_CHARACTERISTICS) String() string {
+	var parts []string
+	if e&NETINFO_DLL16 != 0 {
+		parts = append(parts, "NETINFO_DLL16")
+	}
+	if e&NETINFO_DISKRED != 0 {
+		parts = append(parts, "NETINFO_DISKRED")
+	}
+	if e&NETINFO_PRINTERRED != 0 {
+		parts = append(parts, "NETINFO_PRINTERRED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type NETWORK_NAME_FORMAT_FLAGS uint32
 
 const (
@@ -37,6 +108,20 @@ const (
 	WNFMT_ABBREVIATED NETWORK_NAME_FORMAT_FLAGS = 2
 )
 
+// String returns the NETWORK_NAME_FORMAT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETWORK_NAME_FORMAT_FLAGS) String() string {
+	switch e {
+	case WNFMT_MULTILINE:
+		return "WNFMT_MULTILINE"
+	case WNFMT_ABBREVIATED:
+		return "WNFMT_ABBREVIATED"
+	default:
+		return fmt.Sprintf("NETWORK_NAME_FORMAT_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NET_CONNECT_FLAGS uint32
 
 const (
@@ -61,6 +146,73 @@ const (
 	CONNECT_GLOBAL_MAPPING          NET_CONNECT_FLAGS = 262144
 )
 
+// String returns the NET_CONNECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_CONNECT_FLAGS) String() string {
+	var parts []string
+	if e&CONNECT_UPDATE_PROFILE != 0 {
+		parts = append(parts, "CONNECT_UPDATE_PROFILE")
+	}
+	if e&CONNECT_UPDATE_RECENT != 0 {
+		parts = append(parts, "CONNECT_UPDATE_RECENT")
+	}
+	if e&CONNECT_TEMPORARY != 0 {
+		parts = append(parts, "CONNECT_TEMPORARY")
+	}
+	if e&CONNECT_INTERACTIVE != 0 {
+		parts = append(parts, "CONNECT_INTERACTIVE")
+	}
+	if e&CONNECT_PROMPT != 0 {
+		parts = append(parts, "CONNECT_PROMPT")
+	}
+	if e&CONNECT_NEED_DRIVE != 0 {
+		parts = append(parts, "CONNECT_NEED_DRIVE")
+	}
+	if e&CONNECT_REFCOUNT != 0 {
+		parts = append(parts, "CONNECT_REFCOUNT")
+	}
+	if e&CONNECT_REDIRECT != 0 {
+		parts = append(parts, "CONNECT_REDIRECT")
+	}
+	if e&CONNECT_LOCALDRIVE != 0 {
+		parts = append(parts, "CONNECT_LOCALDRIVE")
+	}
+	if e&CONNECT_CURRENT_MEDIA != 0 {
+		parts = append(parts, "CONNECT_CURRENT_MEDIA")
+	}
+	if e&CONNECT_DEFERRED != 0 {
+		parts = append(parts, "CONNECT_DEFERRED")
+	}
+	if e&CONNECT_RESERVED != 0 {
+		parts = append(parts, "CONNECT_RESERVED")
+	}
+	if e&CONNECT_COMMANDLINE != 0 {
+		parts = append(parts, "CONNECT_COMMANDLINE")
+	}
+	if e&CONNECT_CMD_SAVECRED != 0 {
+		parts = append(parts, "CONNECT_CMD_SAVECRED")
+	}
+	if e&CONNECT_CRED_RESET != 0 {
+		parts = append(parts, "CONNECT_CRED_RESET")
+	}
+	if e&CONNECT_REQUIRE_INTEGRITY != 0 {
+		parts = append(parts, "CONNECT_REQUIRE_INTEGRITY")
+	}
+	if e&CONNECT_REQUIRE_PRIVACY != 0 {
+		parts = append(parts, "CONNECT_REQUIRE_PRIVACY")
+	}
+	if e&CONNECT_WRITE_THROUGH_SEMANTICS != 0 {
+		parts = append(parts, "CONNECT_WRITE_THROUGH_SEMANTICS")
+	}
+	if e&CONNECT_GLOBAL_MAPPING != 0 {
+		parts = append(parts, "CONNECT_GLOBAL_MAPPING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type NET_RESOURCE_SCOPE uint32
 
 const (
@@ -70,6 +222,24 @@ const (
 	RESOURCE_REMEMBERED NET_RESOURCE_SCOPE = 3
 )
 
+// String returns the NET_RESOURCE_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_RESOURCE_SCOPE) String() string {
+	switch e {
+	case RESOURCE_CONNECTED:
+		return "RESOURCE_CONNECTED"
+	case RESOURCE_CONTEXT:
+		return "RESOURCE_CONTEXT"
+	case RESOURCE_GLOBALNET:
+		return "RESOURCE_GLOBALNET"
+	case RESOURCE_REMEMBERED:
+		return "RESOURCE_REMEMBERED"
+	default:
+		return fmt.Sprintf("NET_RESOURCE_SCOPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NET_RESOURCE_TYPE uint32
 
 const (
@@ -77,6 +247,22 @@ const (
 	RESOURCETYPE_DISK  NET_RESOURCE_TYPE = 1
 	RESOURCETYPE_PRINT NET_RESOURCE_TYPE = 2
 )
+
+// String returns the NET_RESOURCE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_RESOURCE_TYPE) String() string {
+	var parts []string
+	if e&RESOURCETYPE_DISK != 0 {
+		parts = append(parts, "RESOURCETYPE_DISK")
+	}
+	if e&RESOURCETYPE_PRINT != 0 {
+		parts = append(parts, "RESOURCETYPE_PRINT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type NPDIRECTORY_NOTIFY_OPERATION uint32
 
@@ -86,6 +272,21 @@ const (
 	WNDN_MVDIR NPDIRECTORY_NOTIFY_OPERATION = 3
 )
 
+// String returns the NPDIRECTORY_NOTIFY_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NPDIRECTORY_NOTIFY_OPERATION) String() string {
+	switch e {
+	case WNDN_MKDIR:
+		return "WNDN_MKDIR"
+	case WNDN_RMDIR:
+		return "WNDN_RMDIR"
+	case WNDN_MVDIR:
+		return "WNDN_MVDIR"
+	default:
+		return fmt.Sprintf("NPDIRECTORY_NOTIFY_OPERATION(%d)", uint32(e))
+	}
+}
+
 type NP_PROPERTY_DIALOG_SELECTION uint32
 
 const (
@@ -94,6 +295,21 @@ const (
 	WNPS_MULT NP_PROPERTY_DIALOG_SELECTION = 2
 )
 
+// String returns the NP_PROPERTY_DIALOG_SELECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NP_PROPERTY_DIALOG_SELECTION) String() string {
+	switch e {
+	case WNPS_FILE:
+		return "WNPS_FILE"
+	case WNPS_DIR:
+		return "WNPS_DIR"
+	case WNPS_MULT:
+		return "WNPS_MULT"
+	default:
+		return fmt.Sprintf("NP_PROPERTY_DIALOG_SELECTION(%d)", uint32(e))
+	}
+}
+
 type UNC_INFO_LEVEL uint32
 
 const (
@@ -101,6 +317,20 @@ const (
 	REMOTE_NAME_INFO_LEVEL    UNC_INFO_LEVEL = 2
 )
 
+// String returns the UNC_INFO_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNC_INFO_LEVEL) String() string {
+	switch e {
+	case UNIVERSAL_NAME_INFO_LEVEL:
+		return "UNIVERSAL_NAME_INFO_LEVEL"
+	case REMOTE_NAME_INFO_LEVEL:
+		return "REMOTE_NAME_INFO_LEVEL"
+	default:
+		return fmt.Sprintf("UNC_INFO_LEVEL(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WNET_OPEN_ENUM_USAGE uint32
 
 const (
@@ -111,6 +341,28 @@ const (
 	RESOURCEUSAGE_ALL         WNET_OPEN_ENUM_USAGE = 19
 )
 
+// String returns the WNET_OPEN_ENUM_USAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WNET_OPEN_ENUM_USAGE) String() string {
+	var parts []string
+	if e&RESOURCEUSAGE_CONNECTABLE != 0 {
+		parts = append(parts, "RESOURCEUSAGE_CONNECTABLE")
+	}
+	if e&RESOURCEUSAGE_CONTAINER != 0 {
+		parts = append(parts, "RESOURCEUSAGE_CONTAINER")
+	}
+	if e&RESOURCEUSAGE_ATTACHED != 0 {
+		parts = append(parts, "RESOURCEUSAGE_ATTACHED")
+	}
+	if e&RESOURCEUSAGE_ALL != 0 {
+		parts = append(parts, "RESOURCEUSAGE_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type WNPERM_DLG uint32
 
 const (
@@ -118,3 +370,18 @@ const (
 	WNPERM_DLG_AUDIT WNPERM_DLG = 1
 	WNPERM_DLG_OWNER WNPERM_DLG = 2
 )
+
+// String returns the WNPERM_DLG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WNPERM_DLG) String() string {
+	switch e {
+	case WNPERM_DLG_PERM:
+		return "WNPERM_DLG_PERM"
+	case WNPERM_DLG_AUDIT:
+		return "WNPERM_DLG_AUDIT"
+	case WNPERM_DLG_OWNER:
+		return "WNPERM_DLG_OWNER"
+	default:
+		return fmt.Sprintf("WNPERM_DLG(%d)", uint32(e))
+	}
+}

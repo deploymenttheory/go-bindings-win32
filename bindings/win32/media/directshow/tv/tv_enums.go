@@ -4,6 +4,10 @@
 
 package tv
 
+import (
+	"fmt"
+)
+
 type BDA_DigitalSignalStandard int32
 
 const (
@@ -17,6 +21,31 @@ const (
 	Bda_DigitalStandard_ISDB_C BDA_DigitalSignalStandard = 64
 )
 
+// String returns the BDA_DigitalSignalStandard constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_DigitalSignalStandard) String() string {
+	switch e {
+	case Bda_DigitalStandard_None:
+		return "Bda_DigitalStandard_None"
+	case Bda_DigitalStandard_DVB_T:
+		return "Bda_DigitalStandard_DVB_T"
+	case Bda_DigitalStandard_DVB_S:
+		return "Bda_DigitalStandard_DVB_S"
+	case Bda_DigitalStandard_DVB_C:
+		return "Bda_DigitalStandard_DVB_C"
+	case Bda_DigitalStandard_ATSC:
+		return "Bda_DigitalStandard_ATSC"
+	case Bda_DigitalStandard_ISDB_T:
+		return "Bda_DigitalStandard_ISDB_T"
+	case Bda_DigitalStandard_ISDB_S:
+		return "Bda_DigitalStandard_ISDB_S"
+	case Bda_DigitalStandard_ISDB_C:
+		return "Bda_DigitalStandard_ISDB_C"
+	default:
+		return fmt.Sprintf("BDA_DigitalSignalStandard(%d)", int32(e))
+	}
+}
+
 type BDA_LockType int32
 
 const (
@@ -26,6 +55,23 @@ const (
 	Bda_LockType_Complete     BDA_LockType = 128
 )
 
+// String returns the BDA_LockType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_LockType) String() string {
+	switch e {
+	case Bda_LockType_None:
+		return "Bda_LockType_None"
+	case Bda_LockType_PLL:
+		return "Bda_LockType_PLL"
+	case Bda_LockType_DecoderDemod:
+		return "Bda_LockType_DecoderDemod"
+	case Bda_LockType_Complete:
+		return "Bda_LockType_Complete"
+	default:
+		return fmt.Sprintf("BDA_LockType(%d)", int32(e))
+	}
+}
+
 type BDA_SignalType int32
 
 const (
@@ -34,12 +80,38 @@ const (
 	Bda_SignalType_Digital BDA_SignalType = 2
 )
 
+// String returns the BDA_SignalType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_SignalType) String() string {
+	switch e {
+	case Bda_SignalType_Unknown:
+		return "Bda_SignalType_Unknown"
+	case Bda_SignalType_Analog:
+		return "Bda_SignalType_Analog"
+	case Bda_SignalType_Digital:
+		return "Bda_SignalType_Digital"
+	default:
+		return fmt.Sprintf("BDA_SignalType(%d)", int32(e))
+	}
+}
+
 type BfEnTvRat_Attributes_CAE_TV int32
 
 const (
 	CAE_IsBlocked        BfEnTvRat_Attributes_CAE_TV = 1
 	CAE_ValidAttrSubmask BfEnTvRat_Attributes_CAE_TV = 1
 )
+
+// String returns the BfEnTvRat_Attributes_CAE_TV constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BfEnTvRat_Attributes_CAE_TV) String() string {
+	switch e {
+	case CAE_IsBlocked:
+		return "CAE_IsBlocked"
+	default:
+		return fmt.Sprintf("BfEnTvRat_Attributes_CAE_TV(%d)", int32(e))
+	}
+}
 
 type BfEnTvRat_Attributes_CAF_TV int32
 
@@ -48,12 +120,34 @@ const (
 	CAF_ValidAttrSubmask BfEnTvRat_Attributes_CAF_TV = 1
 )
 
+// String returns the BfEnTvRat_Attributes_CAF_TV constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BfEnTvRat_Attributes_CAF_TV) String() string {
+	switch e {
+	case CAF_IsBlocked:
+		return "CAF_IsBlocked"
+	default:
+		return fmt.Sprintf("BfEnTvRat_Attributes_CAF_TV(%d)", int32(e))
+	}
+}
+
 type BfEnTvRat_Attributes_MPAA int32
 
 const (
 	MPAA_IsBlocked        BfEnTvRat_Attributes_MPAA = 1
 	MPAA_ValidAttrSubmask BfEnTvRat_Attributes_MPAA = 1
 )
+
+// String returns the BfEnTvRat_Attributes_MPAA constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BfEnTvRat_Attributes_MPAA) String() string {
+	switch e {
+	case MPAA_IsBlocked:
+		return "MPAA_IsBlocked"
+	default:
+		return fmt.Sprintf("BfEnTvRat_Attributes_MPAA(%d)", int32(e))
+	}
+}
 
 type BfEnTvRat_Attributes_US_TV int32
 
@@ -65,6 +159,27 @@ const (
 	US_TV_IsSexuallySuggestiveDialog BfEnTvRat_Attributes_US_TV = 16
 	US_TV_ValidAttrSubmask           BfEnTvRat_Attributes_US_TV = 31
 )
+
+// String returns the BfEnTvRat_Attributes_US_TV constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BfEnTvRat_Attributes_US_TV) String() string {
+	switch e {
+	case US_TV_IsBlocked:
+		return "US_TV_IsBlocked"
+	case US_TV_IsViolent:
+		return "US_TV_IsViolent"
+	case US_TV_IsSexualSituation:
+		return "US_TV_IsSexualSituation"
+	case US_TV_IsAdultLanguage:
+		return "US_TV_IsAdultLanguage"
+	case US_TV_IsSexuallySuggestiveDialog:
+		return "US_TV_IsSexuallySuggestiveDialog"
+	case US_TV_ValidAttrSubmask:
+		return "US_TV_ValidAttrSubmask"
+	default:
+		return fmt.Sprintf("BfEnTvRat_Attributes_US_TV(%d)", int32(e))
+	}
+}
 
 type BfEnTvRat_GenericAttributes int32
 
@@ -80,6 +195,35 @@ const (
 	BfIsAttr_7         BfEnTvRat_GenericAttributes = 128
 	BfValidAttrSubmask BfEnTvRat_GenericAttributes = 255
 )
+
+// String returns the BfEnTvRat_GenericAttributes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BfEnTvRat_GenericAttributes) String() string {
+	switch e {
+	case BfAttrNone:
+		return "BfAttrNone"
+	case BfIsBlocked:
+		return "BfIsBlocked"
+	case BfIsAttr_1:
+		return "BfIsAttr_1"
+	case BfIsAttr_2:
+		return "BfIsAttr_2"
+	case BfIsAttr_3:
+		return "BfIsAttr_3"
+	case BfIsAttr_4:
+		return "BfIsAttr_4"
+	case BfIsAttr_5:
+		return "BfIsAttr_5"
+	case BfIsAttr_6:
+		return "BfIsAttr_6"
+	case BfIsAttr_7:
+		return "BfIsAttr_7"
+	case BfValidAttrSubmask:
+		return "BfValidAttrSubmask"
+	default:
+		return fmt.Sprintf("BfEnTvRat_GenericAttributes(%d)", int32(e))
+	}
+}
 
 type COPPEventBlockReason int32
 
@@ -97,6 +241,37 @@ const (
 	COPP_DigitalAudioUnprotected COPPEventBlockReason = 9
 )
 
+// String returns the COPPEventBlockReason constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPPEventBlockReason) String() string {
+	switch e {
+	case COPP_Unknown:
+		return "COPP_Unknown"
+	case COPP_BadDriver:
+		return "COPP_BadDriver"
+	case COPP_NoCardHDCPSupport:
+		return "COPP_NoCardHDCPSupport"
+	case COPP_NoMonitorHDCPSupport:
+		return "COPP_NoMonitorHDCPSupport"
+	case COPP_BadCertificate:
+		return "COPP_BadCertificate"
+	case COPP_InvalidBusProtection:
+		return "COPP_InvalidBusProtection"
+	case COPP_AeroGlassOff:
+		return "COPP_AeroGlassOff"
+	case COPP_RogueApp:
+		return "COPP_RogueApp"
+	case COPP_ForbiddenVideo:
+		return "COPP_ForbiddenVideo"
+	case COPP_Activate:
+		return "COPP_Activate"
+	case COPP_DigitalAudioUnprotected:
+		return "COPP_DigitalAudioUnprotected"
+	default:
+		return fmt.Sprintf("COPPEventBlockReason(%d)", int32(e))
+	}
+}
+
 type CPEventBitShift int32
 
 const (
@@ -111,6 +286,35 @@ const (
 	CPEVENT_BITSHIFT_PENDING_CERTIFICATE CPEventBitShift = 8
 	CPEVENT_BITSHIFT_NO_PLAYREADY        CPEventBitShift = 9
 )
+
+// String returns the CPEventBitShift constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CPEventBitShift) String() string {
+	switch e {
+	case CPEVENT_BITSHIFT_RATINGS:
+		return "CPEVENT_BITSHIFT_RATINGS"
+	case CPEVENT_BITSHIFT_COPP:
+		return "CPEVENT_BITSHIFT_COPP"
+	case CPEVENT_BITSHIFT_LICENSE:
+		return "CPEVENT_BITSHIFT_LICENSE"
+	case CPEVENT_BITSHIFT_ROLLBACK:
+		return "CPEVENT_BITSHIFT_ROLLBACK"
+	case CPEVENT_BITSHIFT_SAC:
+		return "CPEVENT_BITSHIFT_SAC"
+	case CPEVENT_BITSHIFT_DOWNRES:
+		return "CPEVENT_BITSHIFT_DOWNRES"
+	case CPEVENT_BITSHIFT_STUBLIB:
+		return "CPEVENT_BITSHIFT_STUBLIB"
+	case CPEVENT_BITSHIFT_UNTRUSTEDGRAPH:
+		return "CPEVENT_BITSHIFT_UNTRUSTEDGRAPH"
+	case CPEVENT_BITSHIFT_PENDING_CERTIFICATE:
+		return "CPEVENT_BITSHIFT_PENDING_CERTIFICATE"
+	case CPEVENT_BITSHIFT_NO_PLAYREADY:
+		return "CPEVENT_BITSHIFT_NO_PLAYREADY"
+	default:
+		return fmt.Sprintf("CPEventBitShift(%d)", int32(e))
+	}
+}
 
 // CPEvents: https://learn.microsoft.com/windows/win32/api/encdec/ne-encdec-cpevents
 type CPEvents int32
@@ -128,12 +332,54 @@ const (
 	CPEVENT_PROTECTWINDOWED CPEvents = 9
 )
 
+// String returns the CPEvents constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CPEvents) String() string {
+	switch e {
+	case CPEVENT_NONE:
+		return "CPEVENT_NONE"
+	case CPEVENT_RATINGS:
+		return "CPEVENT_RATINGS"
+	case CPEVENT_COPP:
+		return "CPEVENT_COPP"
+	case CPEVENT_LICENSE:
+		return "CPEVENT_LICENSE"
+	case CPEVENT_ROLLBACK:
+		return "CPEVENT_ROLLBACK"
+	case CPEVENT_SAC:
+		return "CPEVENT_SAC"
+	case CPEVENT_DOWNRES:
+		return "CPEVENT_DOWNRES"
+	case CPEVENT_STUBLIB:
+		return "CPEVENT_STUBLIB"
+	case CPEVENT_UNTRUSTEDGRAPH:
+		return "CPEVENT_UNTRUSTEDGRAPH"
+	case CPEVENT_PROTECTWINDOWED:
+		return "CPEVENT_PROTECTWINDOWED"
+	default:
+		return fmt.Sprintf("CPEvents(%d)", int32(e))
+	}
+}
+
 type CPRecordingStatus int32
 
 const (
 	RECORDING_STOPPED CPRecordingStatus = 0
 	RECORDING_STARTED CPRecordingStatus = 1
 )
+
+// String returns the CPRecordingStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CPRecordingStatus) String() string {
+	switch e {
+	case RECORDING_STOPPED:
+		return "RECORDING_STOPPED"
+	case RECORDING_STARTED:
+		return "RECORDING_STARTED"
+	default:
+		return fmt.Sprintf("CPRecordingStatus(%d)", int32(e))
+	}
+}
 
 type CRID_LOCATION int32
 
@@ -144,6 +390,23 @@ const (
 	CRID_LOCATION_DVB_RESERVED2 CRID_LOCATION = 3
 )
 
+// String returns the CRID_LOCATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRID_LOCATION) String() string {
+	switch e {
+	case CRID_LOCATION_IN_DESCRIPTOR:
+		return "CRID_LOCATION_IN_DESCRIPTOR"
+	case CRID_LOCATION_IN_CIT:
+		return "CRID_LOCATION_IN_CIT"
+	case CRID_LOCATION_DVB_RESERVED1:
+		return "CRID_LOCATION_DVB_RESERVED1"
+	case CRID_LOCATION_DVB_RESERVED2:
+		return "CRID_LOCATION_DVB_RESERVED2"
+	default:
+		return fmt.Sprintf("CRID_LOCATION(%d)", int32(e))
+	}
+}
+
 type CROSSBAR_DEFAULT_FLAGS int32
 
 const (
@@ -151,12 +414,38 @@ const (
 	DEF_MODE_STREAMS CROSSBAR_DEFAULT_FLAGS = 2
 )
 
+// String returns the CROSSBAR_DEFAULT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CROSSBAR_DEFAULT_FLAGS) String() string {
+	switch e {
+	case DEF_MODE_PROFILE:
+		return "DEF_MODE_PROFILE"
+	case DEF_MODE_STREAMS:
+		return "DEF_MODE_STREAMS"
+	default:
+		return fmt.Sprintf("CROSSBAR_DEFAULT_FLAGS(%d)", int32(e))
+	}
+}
+
 type ChannelChangeSpanningEvent_State int32
 
 const (
 	ChannelChangeSpanningEvent_Start ChannelChangeSpanningEvent_State = 0
 	ChannelChangeSpanningEvent_End   ChannelChangeSpanningEvent_State = 2
 )
+
+// String returns the ChannelChangeSpanningEvent_State constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ChannelChangeSpanningEvent_State) String() string {
+	switch e {
+	case ChannelChangeSpanningEvent_Start:
+		return "ChannelChangeSpanningEvent_Start"
+	case ChannelChangeSpanningEvent_End:
+		return "ChannelChangeSpanningEvent_End"
+	default:
+		return fmt.Sprintf("ChannelChangeSpanningEvent_State(%d)", int32(e))
+	}
+}
 
 // ChannelType: https://learn.microsoft.com/windows/win32/WES/eventmanifestschema-channeltype-complextype
 type ChannelType int32
@@ -173,6 +462,33 @@ const (
 	ChannelTypeData        ChannelType = 128
 )
 
+// String returns the ChannelType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ChannelType) String() string {
+	switch e {
+	case ChannelTypeNone:
+		return "ChannelTypeNone"
+	case ChannelTypeOther:
+		return "ChannelTypeOther"
+	case ChannelTypeVideo:
+		return "ChannelTypeVideo"
+	case ChannelTypeAudio:
+		return "ChannelTypeAudio"
+	case ChannelTypeText:
+		return "ChannelTypeText"
+	case ChannelTypeSubtitles:
+		return "ChannelTypeSubtitles"
+	case ChannelTypeCaptions:
+		return "ChannelTypeCaptions"
+	case ChannelTypeSuperimpose:
+		return "ChannelTypeSuperimpose"
+	case ChannelTypeData:
+		return "ChannelTypeData"
+	default:
+		return fmt.Sprintf("ChannelType(%d)", int32(e))
+	}
+}
+
 type DESC_LINKAGE_TYPE int32
 
 const (
@@ -187,6 +503,35 @@ const (
 	DESC_LINKAGE_USER                    DESC_LINKAGE_TYPE = 8
 	DESC_LINKAGE_RESERVED2               DESC_LINKAGE_TYPE = 255
 )
+
+// String returns the DESC_LINKAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DESC_LINKAGE_TYPE) String() string {
+	switch e {
+	case DESC_LINKAGE_RESERVED0:
+		return "DESC_LINKAGE_RESERVED0"
+	case DESC_LINKAGE_INFORMATION:
+		return "DESC_LINKAGE_INFORMATION"
+	case DESC_LINKAGE_EPG:
+		return "DESC_LINKAGE_EPG"
+	case DESC_LINKAGE_CA_REPLACEMENT:
+		return "DESC_LINKAGE_CA_REPLACEMENT"
+	case DESC_LINKAGE_COMPLETE_NET_BOUQUET_SI:
+		return "DESC_LINKAGE_COMPLETE_NET_BOUQUET_SI"
+	case DESC_LINKAGE_REPLACEMENT:
+		return "DESC_LINKAGE_REPLACEMENT"
+	case DESC_LINKAGE_DATA:
+		return "DESC_LINKAGE_DATA"
+	case DESC_LINKAGE_RESERVED1:
+		return "DESC_LINKAGE_RESERVED1"
+	case DESC_LINKAGE_USER:
+		return "DESC_LINKAGE_USER"
+	case DESC_LINKAGE_RESERVED2:
+		return "DESC_LINKAGE_RESERVED2"
+	default:
+		return fmt.Sprintf("DESC_LINKAGE_TYPE(%d)", int32(e))
+	}
+}
 
 type DISPID_TUNER int32
 
@@ -305,6 +650,115 @@ const (
 	DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST          DISPID_TUNER = 1
 )
 
+// String returns the DISPID_TUNER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_TUNER) String() string {
+	switch e {
+	case DISPID_TUNER_TS_UNIQUENAME:
+		return "DISPID_TUNER_TS_UNIQUENAME"
+	case DISPID_TUNER_TS_FRIENDLYNAME:
+		return "DISPID_TUNER_TS_FRIENDLYNAME"
+	case DISPID_TUNER_TS_CLSID:
+		return "DISPID_TUNER_TS_CLSID"
+	case DISPID_TUNER_TS_NETWORKTYPE:
+		return "DISPID_TUNER_TS_NETWORKTYPE"
+	case DISPID_TUNER_TS__NETWORKTYPE:
+		return "DISPID_TUNER_TS__NETWORKTYPE"
+	case DISPID_TUNER_TS_CREATETUNEREQUEST:
+		return "DISPID_TUNER_TS_CREATETUNEREQUEST"
+	case DISPID_TUNER_TS_ENUMCATEGORYGUIDS:
+		return "DISPID_TUNER_TS_ENUMCATEGORYGUIDS"
+	case DISPID_TUNER_TS_ENUMDEVICEMONIKERS:
+		return "DISPID_TUNER_TS_ENUMDEVICEMONIKERS"
+	case DISPID_TUNER_TS_DEFAULTPREFERREDCOMPONENTTYPES:
+		return "DISPID_TUNER_TS_DEFAULTPREFERREDCOMPONENTTYPES"
+	case DISPID_TUNER_TS_FREQMAP:
+		return "DISPID_TUNER_TS_FREQMAP"
+	case DISPID_TUNER_TS_DEFLOCATOR:
+		return "DISPID_TUNER_TS_DEFLOCATOR"
+	case DISPID_TUNER_TS_CLONE:
+		return "DISPID_TUNER_TS_CLONE"
+	case DISPID_TUNER_LCT_LANGID:
+		return "DISPID_TUNER_LCT_LANGID"
+	case DISPID_TUNER_MP2CT_TYPE:
+		return "DISPID_TUNER_MP2CT_TYPE"
+	case DISPID_TUNER_ATSCCT_FLAGS:
+		return "DISPID_TUNER_ATSCCT_FLAGS"
+	case DISPID_TUNER_L_ATSC_PHYS_CHANNEL:
+		return "DISPID_TUNER_L_ATSC_PHYS_CHANNEL"
+	case DISPID_TUNER_L_ATSC_TSID:
+		return "DISPID_TUNER_L_ATSC_TSID"
+	case DISPID_TUNER_L_ATSC_MP2_PROGNO:
+		return "DISPID_TUNER_L_ATSC_MP2_PROGNO"
+	case DISPID_TUNER_L_DVBT_BANDWIDTH:
+		return "DISPID_TUNER_L_DVBT_BANDWIDTH"
+	case DISPID_TUNER_L_DVBT_LPINNERFECMETHOD:
+		return "DISPID_TUNER_L_DVBT_LPINNERFECMETHOD"
+	case DISPID_TUNER_L_DVBT_LPINNERFECRATE:
+		return "DISPID_TUNER_L_DVBT_LPINNERFECRATE"
+	case DISPID_TUNER_L_DVBT_GUARDINTERVAL:
+		return "DISPID_TUNER_L_DVBT_GUARDINTERVAL"
+	case DISPID_TUNER_L_DVBT_HALPHA:
+		return "DISPID_TUNER_L_DVBT_HALPHA"
+	case DISPID_TUNER_L_DVBT_TRANSMISSIONMODE:
+		return "DISPID_TUNER_L_DVBT_TRANSMISSIONMODE"
+	case DISPID_TUNER_L_DVBT_INUSE:
+		return "DISPID_TUNER_L_DVBT_INUSE"
+	case DISPID_TUNER_L_DVBT2_PHYSICALLAYERPIPEID:
+		return "DISPID_TUNER_L_DVBT2_PHYSICALLAYERPIPEID"
+	case DISPID_TUNER_L_DVBS_POLARISATION:
+		return "DISPID_TUNER_L_DVBS_POLARISATION"
+	case DISPID_TUNER_L_DVBS_WEST:
+		return "DISPID_TUNER_L_DVBS_WEST"
+	case DISPID_TUNER_L_DVBS_ORBITAL:
+		return "DISPID_TUNER_L_DVBS_ORBITAL"
+	case DISPID_TUNER_L_DVBS_AZIMUTH:
+		return "DISPID_TUNER_L_DVBS_AZIMUTH"
+	case DISPID_TUNER_L_DVBS_ELEVATION:
+		return "DISPID_TUNER_L_DVBS_ELEVATION"
+	case DISPID_TUNER_L_DVBS2_DISEQ_LNB_SOURCE:
+		return "DISPID_TUNER_L_DVBS2_DISEQ_LNB_SOURCE"
+	case DISPID_TUNER_TS_DVBS2_LOW_OSC_FREQ_OVERRIDE:
+		return "DISPID_TUNER_TS_DVBS2_LOW_OSC_FREQ_OVERRIDE"
+	case DISPID_TUNER_TS_DVBS2_HI_OSC_FREQ_OVERRIDE:
+		return "DISPID_TUNER_TS_DVBS2_HI_OSC_FREQ_OVERRIDE"
+	case DISPID_TUNER_TS_DVBS2_LNB_SWITCH_FREQ_OVERRIDE:
+		return "DISPID_TUNER_TS_DVBS2_LNB_SWITCH_FREQ_OVERRIDE"
+	case DISPID_TUNER_TS_DVBS2_SPECTRAL_INVERSION_OVERRIDE:
+		return "DISPID_TUNER_TS_DVBS2_SPECTRAL_INVERSION_OVERRIDE"
+	case DISPID_TUNER_L_DVBS2_ROLLOFF:
+		return "DISPID_TUNER_L_DVBS2_ROLLOFF"
+	case DISPID_TUNER_L_DVBS2_PILOT:
+		return "DISPID_TUNER_L_DVBS2_PILOT"
+	case DISPID_TUNER_L_ANALOG_STANDARD:
+		return "DISPID_TUNER_L_ANALOG_STANDARD"
+	case DISPID_TUNER_L_DTV_O_MAJOR_CHANNEL:
+		return "DISPID_TUNER_L_DTV_O_MAJOR_CHANNEL"
+	case DISPID_TUNER_C_MP2_PID:
+		return "DISPID_TUNER_C_MP2_PID"
+	case DISPID_TUNER_C_MP2_PCRPID:
+		return "DISPID_TUNER_C_MP2_PCRPID"
+	case DISPID_TUNER_C_MP2_PROGNO:
+		return "DISPID_TUNER_C_MP2_PROGNO"
+	case DISPID_TUNER_TS_DVBS_LOW_OSC_FREQ:
+		return "DISPID_TUNER_TS_DVBS_LOW_OSC_FREQ"
+	case DISPID_TUNER_TS_DVBS_HI_OSC_FREQ:
+		return "DISPID_TUNER_TS_DVBS_HI_OSC_FREQ"
+	case DISPID_TUNER_TS_DVBS_LNB_SWITCH_FREQ:
+		return "DISPID_TUNER_TS_DVBS_LNB_SWITCH_FREQ"
+	case DISPID_TUNER_TS_DVBS_INPUT_RANGE:
+		return "DISPID_TUNER_TS_DVBS_INPUT_RANGE"
+	case DISPID_TUNER_TS_DVBS_SPECTRAL_INVERSION:
+		return "DISPID_TUNER_TS_DVBS_SPECTRAL_INVERSION"
+	case DISPID_TUNER_TS_AR_COUNTRYCODE:
+		return "DISPID_TUNER_TS_AR_COUNTRYCODE"
+	case DISPID_TUNER_TS_ATSC_MAXPHYSCHANNEL:
+		return "DISPID_TUNER_TS_ATSC_MAXPHYSCHANNEL"
+	default:
+		return fmt.Sprintf("DISPID_TUNER(%d)", int32(e))
+	}
+}
+
 type DVB_STRCONV_MODE int32
 
 const (
@@ -313,6 +767,23 @@ const (
 	STRCONV_MODE_DVB_WITHOUT_EMPHASIS DVB_STRCONV_MODE = 2
 	STRCONV_MODE_ISDB                 DVB_STRCONV_MODE = 3
 )
+
+// String returns the DVB_STRCONV_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVB_STRCONV_MODE) String() string {
+	switch e {
+	case STRCONV_MODE_DVB:
+		return "STRCONV_MODE_DVB"
+	case STRCONV_MODE_DVB_EMPHASIS:
+		return "STRCONV_MODE_DVB_EMPHASIS"
+	case STRCONV_MODE_DVB_WITHOUT_EMPHASIS:
+		return "STRCONV_MODE_DVB_WITHOUT_EMPHASIS"
+	case STRCONV_MODE_ISDB:
+		return "STRCONV_MODE_ISDB"
+	default:
+		return fmt.Sprintf("DVB_STRCONV_MODE(%d)", int32(e))
+	}
+}
 
 type DVDFilterState int32
 
@@ -323,6 +794,25 @@ const (
 	DvdState_Paused      DVDFilterState = 1
 	DvdState_Running     DVDFilterState = 2
 )
+
+// String returns the DVDFilterState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVDFilterState) String() string {
+	switch e {
+	case DvdState_Undefined:
+		return "DvdState_Undefined"
+	case DvdState_Unitialized:
+		return "DvdState_Unitialized"
+	case DvdState_Stopped:
+		return "DvdState_Stopped"
+	case DvdState_Paused:
+		return "DvdState_Paused"
+	case DvdState_Running:
+		return "DvdState_Running"
+	default:
+		return fmt.Sprintf("DVDFilterState(%d)", int32(e))
+	}
+}
 
 // DVDMenuIDConstants: https://learn.microsoft.com/windows/win32/api/segment/ne-segment-dvdmenuidconstants
 type DVDMenuIDConstants int32
@@ -335,6 +825,27 @@ const (
 	DvdMenu_Angle      DVDMenuIDConstants = 6
 	DvdMenu_Chapter    DVDMenuIDConstants = 7
 )
+
+// String returns the DVDMenuIDConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVDMenuIDConstants) String() string {
+	switch e {
+	case DvdMenu_Title:
+		return "DvdMenu_Title"
+	case DvdMenu_Root:
+		return "DvdMenu_Root"
+	case DvdMenu_Subpicture:
+		return "DvdMenu_Subpicture"
+	case DvdMenu_Audio:
+		return "DvdMenu_Audio"
+	case DvdMenu_Angle:
+		return "DvdMenu_Angle"
+	case DvdMenu_Chapter:
+		return "DvdMenu_Chapter"
+	default:
+		return fmt.Sprintf("DVDMenuIDConstants(%d)", int32(e))
+	}
+}
 
 // DVDSPExt: https://learn.microsoft.com/windows/win32/api/segment/ne-segment-dvdspext
 type DVDSPExt int32
@@ -352,6 +863,37 @@ const (
 	DvdSPExt_DirectorComments_Big      DVDSPExt = 14
 	DvdSPExt_DirectorComments_Children DVDSPExt = 15
 )
+
+// String returns the DVDSPExt constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVDSPExt) String() string {
+	switch e {
+	case DvdSPExt_NotSpecified:
+		return "DvdSPExt_NotSpecified"
+	case DvdSPExt_Caption_Normal:
+		return "DvdSPExt_Caption_Normal"
+	case DvdSPExt_Caption_Big:
+		return "DvdSPExt_Caption_Big"
+	case DvdSPExt_Caption_Children:
+		return "DvdSPExt_Caption_Children"
+	case DvdSPExt_CC_Normal:
+		return "DvdSPExt_CC_Normal"
+	case DvdSPExt_CC_Big:
+		return "DvdSPExt_CC_Big"
+	case DvdSPExt_CC_Children:
+		return "DvdSPExt_CC_Children"
+	case DvdSPExt_Forced:
+		return "DvdSPExt_Forced"
+	case DvdSPExt_DirectorComments_Normal:
+		return "DvdSPExt_DirectorComments_Normal"
+	case DvdSPExt_DirectorComments_Big:
+		return "DvdSPExt_DirectorComments_Big"
+	case DvdSPExt_DirectorComments_Children:
+		return "DvdSPExt_DirectorComments_Children"
+	default:
+		return fmt.Sprintf("DVDSPExt(%d)", int32(e))
+	}
+}
 
 // DVDTextStringType: https://learn.microsoft.com/windows/win32/api/segment/ne-segment-dvdtextstringtype
 type DVDTextStringType int32
@@ -391,6 +933,79 @@ const (
 	DvdOther_Take         DVDTextStringType = 82
 )
 
+// String returns the DVDTextStringType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVDTextStringType) String() string {
+	switch e {
+	case DvdStruct_Volume:
+		return "DvdStruct_Volume"
+	case DvdStruct_Title:
+		return "DvdStruct_Title"
+	case DvdStruct_ParentalID:
+		return "DvdStruct_ParentalID"
+	case DvdStruct_PartOfTitle:
+		return "DvdStruct_PartOfTitle"
+	case DvdStruct_Cell:
+		return "DvdStruct_Cell"
+	case DvdStream_Audio:
+		return "DvdStream_Audio"
+	case DvdStream_Subpicture:
+		return "DvdStream_Subpicture"
+	case DvdStream_Angle:
+		return "DvdStream_Angle"
+	case DvdChannel_Audio:
+		return "DvdChannel_Audio"
+	case DvdGeneral_Name:
+		return "DvdGeneral_Name"
+	case DvdGeneral_Comments:
+		return "DvdGeneral_Comments"
+	case DvdTitle_Series:
+		return "DvdTitle_Series"
+	case DvdTitle_Movie:
+		return "DvdTitle_Movie"
+	case DvdTitle_Video:
+		return "DvdTitle_Video"
+	case DvdTitle_Album:
+		return "DvdTitle_Album"
+	case DvdTitle_Song:
+		return "DvdTitle_Song"
+	case DvdTitle_Other:
+		return "DvdTitle_Other"
+	case DvdTitle_Sub_Series:
+		return "DvdTitle_Sub_Series"
+	case DvdTitle_Sub_Movie:
+		return "DvdTitle_Sub_Movie"
+	case DvdTitle_Sub_Video:
+		return "DvdTitle_Sub_Video"
+	case DvdTitle_Sub_Album:
+		return "DvdTitle_Sub_Album"
+	case DvdTitle_Sub_Song:
+		return "DvdTitle_Sub_Song"
+	case DvdTitle_Sub_Other:
+		return "DvdTitle_Sub_Other"
+	case DvdTitle_Orig_Series:
+		return "DvdTitle_Orig_Series"
+	case DvdTitle_Orig_Movie:
+		return "DvdTitle_Orig_Movie"
+	case DvdTitle_Orig_Video:
+		return "DvdTitle_Orig_Video"
+	case DvdTitle_Orig_Album:
+		return "DvdTitle_Orig_Album"
+	case DvdTitle_Orig_Song:
+		return "DvdTitle_Orig_Song"
+	case DvdTitle_Orig_Other:
+		return "DvdTitle_Orig_Other"
+	case DvdOther_Scene:
+		return "DvdOther_Scene"
+	case DvdOther_Cut:
+		return "DvdOther_Cut"
+	case DvdOther_Take:
+		return "DvdOther_Take"
+	default:
+		return fmt.Sprintf("DVDTextStringType(%d)", int32(e))
+	}
+}
+
 // DisplaySizeList: https://learn.microsoft.com/windows/win32/api/msvidctl/ne-msvidctl-displaysizelist
 type DisplaySizeList int32
 
@@ -405,6 +1020,29 @@ const (
 	DslSixteenthScreen  DisplaySizeList = 6
 )
 
+// String returns the DisplaySizeList constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DisplaySizeList) String() string {
+	switch e {
+	case DslDefaultSize:
+		return "DslDefaultSize"
+	case DslHalfSourceSize:
+		return "DslHalfSourceSize"
+	case DslDoubleSourceSize:
+		return "DslDoubleSourceSize"
+	case DslFullScreen:
+		return "DslFullScreen"
+	case DslHalfScreen:
+		return "DslHalfScreen"
+	case DslQuarterScreen:
+		return "DslQuarterScreen"
+	case DslSixteenthScreen:
+		return "DslSixteenthScreen"
+	default:
+		return fmt.Sprintf("DisplaySizeList(%d)", int32(e))
+	}
+}
+
 type DownResEventParam int32
 
 const (
@@ -413,6 +1051,21 @@ const (
 	DOWNRES_Undefined    DownResEventParam = 2
 )
 
+// String returns the DownResEventParam constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DownResEventParam) String() string {
+	switch e {
+	case DOWNRES_Always:
+		return "DOWNRES_Always"
+	case DOWNRES_InWindowOnly:
+		return "DOWNRES_InWindowOnly"
+	case DOWNRES_Undefined:
+		return "DOWNRES_Undefined"
+	default:
+		return fmt.Sprintf("DownResEventParam(%d)", int32(e))
+	}
+}
+
 type EnTag_Mode int32
 
 const (
@@ -420,6 +1073,21 @@ const (
 	EnTag_Once   EnTag_Mode = 1
 	EnTag_Repeat EnTag_Mode = 2
 )
+
+// String returns the EnTag_Mode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EnTag_Mode) String() string {
+	switch e {
+	case EnTag_Remove:
+		return "EnTag_Remove"
+	case EnTag_Once:
+		return "EnTag_Once"
+	case EnTag_Repeat:
+		return "EnTag_Repeat"
+	default:
+		return fmt.Sprintf("EnTag_Mode(%d)", int32(e))
+	}
+}
 
 type EnTvRat_CAE_TV int32
 
@@ -434,6 +1102,31 @@ const (
 	CAE_TV_Reserved EnTvRat_CAE_TV = 7
 )
 
+// String returns the EnTvRat_CAE_TV constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EnTvRat_CAE_TV) String() string {
+	switch e {
+	case CAE_TV_Exempt:
+		return "CAE_TV_Exempt"
+	case CAE_TV_C:
+		return "CAE_TV_C"
+	case CAE_TV_C8:
+		return "CAE_TV_C8"
+	case CAE_TV_G:
+		return "CAE_TV_G"
+	case CAE_TV_PG:
+		return "CAE_TV_PG"
+	case CAE_TV_14:
+		return "CAE_TV_14"
+	case CAE_TV_18:
+		return "CAE_TV_18"
+	case CAE_TV_Reserved:
+		return "CAE_TV_Reserved"
+	default:
+		return fmt.Sprintf("EnTvRat_CAE_TV(%d)", int32(e))
+	}
+}
+
 type EnTvRat_CAF_TV int32
 
 const (
@@ -446,6 +1139,31 @@ const (
 	CAF_TV_Reserved6 EnTvRat_CAF_TV = 6
 	CAF_TV_Reserved  EnTvRat_CAF_TV = 7
 )
+
+// String returns the EnTvRat_CAF_TV constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EnTvRat_CAF_TV) String() string {
+	switch e {
+	case CAF_TV_Exempt:
+		return "CAF_TV_Exempt"
+	case CAF_TV_G:
+		return "CAF_TV_G"
+	case CAF_TV_8:
+		return "CAF_TV_8"
+	case CAF_TV_13:
+		return "CAF_TV_13"
+	case CAF_TV_16:
+		return "CAF_TV_16"
+	case CAF_TV_18:
+		return "CAF_TV_18"
+	case CAF_TV_Reserved6:
+		return "CAF_TV_Reserved6"
+	case CAF_TV_Reserved:
+		return "CAF_TV_Reserved"
+	default:
+		return fmt.Sprintf("EnTvRat_CAF_TV(%d)", int32(e))
+	}
+}
 
 type EnTvRat_GenericLevel int32
 
@@ -477,6 +1195,65 @@ const (
 	TvRat_LevelDontKnow EnTvRat_GenericLevel = 255
 )
 
+// String returns the EnTvRat_GenericLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EnTvRat_GenericLevel) String() string {
+	switch e {
+	case TvRat_0:
+		return "TvRat_0"
+	case TvRat_1:
+		return "TvRat_1"
+	case TvRat_2:
+		return "TvRat_2"
+	case TvRat_3:
+		return "TvRat_3"
+	case TvRat_4:
+		return "TvRat_4"
+	case TvRat_5:
+		return "TvRat_5"
+	case TvRat_6:
+		return "TvRat_6"
+	case TvRat_7:
+		return "TvRat_7"
+	case TvRat_8:
+		return "TvRat_8"
+	case TvRat_9:
+		return "TvRat_9"
+	case TvRat_10:
+		return "TvRat_10"
+	case TvRat_11:
+		return "TvRat_11"
+	case TvRat_12:
+		return "TvRat_12"
+	case TvRat_13:
+		return "TvRat_13"
+	case TvRat_14:
+		return "TvRat_14"
+	case TvRat_15:
+		return "TvRat_15"
+	case TvRat_16:
+		return "TvRat_16"
+	case TvRat_17:
+		return "TvRat_17"
+	case TvRat_18:
+		return "TvRat_18"
+	case TvRat_19:
+		return "TvRat_19"
+	case TvRat_20:
+		return "TvRat_20"
+	case TvRat_21:
+		return "TvRat_21"
+	case TvRat_kLevels:
+		return "TvRat_kLevels"
+	case TvRat_Unblock:
+		return "TvRat_Unblock"
+	case TvRat_LevelDontKnow:
+		return "TvRat_LevelDontKnow"
+	default:
+		return fmt.Sprintf("EnTvRat_GenericLevel(%d)", int32(e))
+	}
+}
+
 type EnTvRat_MPAA int32
 
 const (
@@ -489,6 +1266,31 @@ const (
 	MPAA_X             EnTvRat_MPAA = 6
 	MPAA_NotRated      EnTvRat_MPAA = 7
 )
+
+// String returns the EnTvRat_MPAA constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EnTvRat_MPAA) String() string {
+	switch e {
+	case MPAA_NotApplicable:
+		return "MPAA_NotApplicable"
+	case MPAA_G:
+		return "MPAA_G"
+	case MPAA_PG:
+		return "MPAA_PG"
+	case MPAA_PG13:
+		return "MPAA_PG13"
+	case MPAA_R:
+		return "MPAA_R"
+	case MPAA_NC17:
+		return "MPAA_NC17"
+	case MPAA_X:
+		return "MPAA_X"
+	case MPAA_NotRated:
+		return "MPAA_NotRated"
+	default:
+		return fmt.Sprintf("EnTvRat_MPAA(%d)", int32(e))
+	}
+}
 
 type EnTvRat_System int32
 
@@ -507,6 +1309,39 @@ const (
 	TvRat_SystemDontKnow EnTvRat_System = 255
 )
 
+// String returns the EnTvRat_System constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EnTvRat_System) String() string {
+	switch e {
+	case MPAA:
+		return "MPAA"
+	case US_TV:
+		return "US_TV"
+	case Canadian_English:
+		return "Canadian_English"
+	case Canadian_French:
+		return "Canadian_French"
+	case Reserved4:
+		return "Reserved4"
+	case System5:
+		return "System5"
+	case System6:
+		return "System6"
+	case Reserved7:
+		return "Reserved7"
+	case PBDA:
+		return "PBDA"
+	case AgeBased:
+		return "AgeBased"
+	case TvRat_kSystems:
+		return "TvRat_kSystems"
+	case TvRat_SystemDontKnow:
+		return "TvRat_SystemDontKnow"
+	default:
+		return fmt.Sprintf("EnTvRat_System(%d)", int32(e))
+	}
+}
+
 type EnTvRat_US_TV int32
 
 const (
@@ -520,12 +1355,50 @@ const (
 	US_TV_None7 EnTvRat_US_TV = 7
 )
 
+// String returns the EnTvRat_US_TV constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EnTvRat_US_TV) String() string {
+	switch e {
+	case US_TV_None:
+		return "US_TV_None"
+	case US_TV_Y:
+		return "US_TV_Y"
+	case US_TV_Y7:
+		return "US_TV_Y7"
+	case US_TV_G:
+		return "US_TV_G"
+	case US_TV_PG:
+		return "US_TV_PG"
+	case US_TV_14:
+		return "US_TV_14"
+	case US_TV_MA:
+		return "US_TV_MA"
+	case US_TV_None7:
+		return "US_TV_None7"
+	default:
+		return fmt.Sprintf("EnTvRat_US_TV(%d)", int32(e))
+	}
+}
+
 type EncDecEvents int32
 
 const (
 	ENCDEC_CPEVENT          EncDecEvents = 0
 	ENCDEC_RECORDING_STATUS EncDecEvents = 1
 )
+
+// String returns the EncDecEvents constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EncDecEvents) String() string {
+	switch e {
+	case ENCDEC_CPEVENT:
+		return "ENCDEC_CPEVENT"
+	case ENCDEC_RECORDING_STATUS:
+		return "ENCDEC_RECORDING_STATUS"
+	default:
+		return fmt.Sprintf("EncDecEvents(%d)", int32(e))
+	}
+}
 
 type FormatNotSupportedEvents int32
 
@@ -534,17 +1407,52 @@ const (
 	FORMATNOTSUPPORTED_NOTSUPPORTED FormatNotSupportedEvents = 1
 )
 
+// String returns the FormatNotSupportedEvents constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FormatNotSupportedEvents) String() string {
+	switch e {
+	case FORMATNOTSUPPORTED_CLEAR:
+		return "FORMATNOTSUPPORTED_CLEAR"
+	case FORMATNOTSUPPORTED_NOTSUPPORTED:
+		return "FORMATNOTSUPPORTED_NOTSUPPORTED"
+	default:
+		return fmt.Sprintf("FormatNotSupportedEvents(%d)", int32(e))
+	}
+}
+
 type KSEVENT_BDA_EVENT_TYPE int32
 
 const (
 	KSEVENT_BDA_EVENT_PENDINGEVENT KSEVENT_BDA_EVENT_TYPE = 0
 )
 
+// String returns the KSEVENT_BDA_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_BDA_EVENT_TYPE) String() string {
+	switch e {
+	case KSEVENT_BDA_EVENT_PENDINGEVENT:
+		return "KSEVENT_BDA_EVENT_PENDINGEVENT"
+	default:
+		return fmt.Sprintf("KSEVENT_BDA_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 type KSEVENT_BDA_TUNER int32
 
 const (
 	KSEVENT_BDA_TUNER_SCAN KSEVENT_BDA_TUNER = 0
 )
+
+// String returns the KSEVENT_BDA_TUNER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_BDA_TUNER) String() string {
+	switch e {
+	case KSEVENT_BDA_TUNER_SCAN:
+		return "KSEVENT_BDA_TUNER_SCAN"
+	default:
+		return fmt.Sprintf("KSEVENT_BDA_TUNER(%d)", int32(e))
+	}
+}
 
 type KSMETHOD_BDA_CAS_SERVICE int32
 
@@ -555,6 +1463,23 @@ const (
 	KSMETHOD_BDA_CAS_CLOSEMMIDIALOG        KSMETHOD_BDA_CAS_SERVICE = 3
 )
 
+// String returns the KSMETHOD_BDA_CAS_SERVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_CAS_SERVICE) String() string {
+	switch e {
+	case KSMETHOD_BDA_CAS_CHECKENTITLEMENTTOKEN:
+		return "KSMETHOD_BDA_CAS_CHECKENTITLEMENTTOKEN"
+	case KSMETHOD_BDA_CAS_SETCAPTURETOKEN:
+		return "KSMETHOD_BDA_CAS_SETCAPTURETOKEN"
+	case KSMETHOD_BDA_CAS_OPENBROADCASTMMI:
+		return "KSMETHOD_BDA_CAS_OPENBROADCASTMMI"
+	case KSMETHOD_BDA_CAS_CLOSEMMIDIALOG:
+		return "KSMETHOD_BDA_CAS_CLOSEMMIDIALOG"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_CAS_SERVICE(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_BDA_CHANGE_SYNC int32
 
 const (
@@ -564,12 +1489,42 @@ const (
 	KSMETHOD_BDA_GET_CHANGE_STATE KSMETHOD_BDA_CHANGE_SYNC = 3
 )
 
+// String returns the KSMETHOD_BDA_CHANGE_SYNC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_CHANGE_SYNC) String() string {
+	switch e {
+	case KSMETHOD_BDA_START_CHANGES:
+		return "KSMETHOD_BDA_START_CHANGES"
+	case KSMETHOD_BDA_CHECK_CHANGES:
+		return "KSMETHOD_BDA_CHECK_CHANGES"
+	case KSMETHOD_BDA_COMMIT_CHANGES:
+		return "KSMETHOD_BDA_COMMIT_CHANGES"
+	case KSMETHOD_BDA_GET_CHANGE_STATE:
+		return "KSMETHOD_BDA_GET_CHANGE_STATE"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_CHANGE_SYNC(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_BDA_DEBUG_SERVICE int32
 
 const (
 	KSMETHOD_BDA_DEBUG_LEVEL KSMETHOD_BDA_DEBUG_SERVICE = 0
 	KSMETHOD_BDA_DEBUG_DATA  KSMETHOD_BDA_DEBUG_SERVICE = 1
 )
+
+// String returns the KSMETHOD_BDA_DEBUG_SERVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_DEBUG_SERVICE) String() string {
+	switch e {
+	case KSMETHOD_BDA_DEBUG_LEVEL:
+		return "KSMETHOD_BDA_DEBUG_LEVEL"
+	case KSMETHOD_BDA_DEBUG_DATA:
+		return "KSMETHOD_BDA_DEBUG_DATA"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_DEBUG_SERVICE(%d)", int32(e))
+	}
+}
 
 type KSMETHOD_BDA_DEVICE_CONFIGURATION int32
 
@@ -579,6 +1534,21 @@ const (
 	KSMETHOD_BDA_CREATE_TOPOLOGY    KSMETHOD_BDA_DEVICE_CONFIGURATION = 2
 )
 
+// String returns the KSMETHOD_BDA_DEVICE_CONFIGURATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_DEVICE_CONFIGURATION) String() string {
+	switch e {
+	case KSMETHOD_BDA_CREATE_PIN_FACTORY:
+		return "KSMETHOD_BDA_CREATE_PIN_FACTORY"
+	case KSMETHOD_BDA_DELETE_PIN_FACTORY:
+		return "KSMETHOD_BDA_DELETE_PIN_FACTORY"
+	case KSMETHOD_BDA_CREATE_TOPOLOGY:
+		return "KSMETHOD_BDA_CREATE_TOPOLOGY"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_DEVICE_CONFIGURATION(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_BDA_DRM int32
 
 const (
@@ -586,12 +1556,38 @@ const (
 	KSMETHOD_BDA_DRM_DRMSTATUS KSMETHOD_BDA_DRM = 1
 )
 
+// String returns the KSMETHOD_BDA_DRM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_DRM) String() string {
+	switch e {
+	case KSMETHOD_BDA_DRM_CURRENT:
+		return "KSMETHOD_BDA_DRM_CURRENT"
+	case KSMETHOD_BDA_DRM_DRMSTATUS:
+		return "KSMETHOD_BDA_DRM_DRMSTATUS"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_DRM(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_BDA_EVENTING_SERVICE int32
 
 const (
 	KSMETHOD_BDA_EVENT_DATA     KSMETHOD_BDA_EVENTING_SERVICE = 0
 	KSMETHOD_BDA_EVENT_COMPLETE KSMETHOD_BDA_EVENTING_SERVICE = 1
 )
+
+// String returns the KSMETHOD_BDA_EVENTING_SERVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_EVENTING_SERVICE) String() string {
+	switch e {
+	case KSMETHOD_BDA_EVENT_DATA:
+		return "KSMETHOD_BDA_EVENT_DATA"
+	case KSMETHOD_BDA_EVENT_COMPLETE:
+		return "KSMETHOD_BDA_EVENT_COMPLETE"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_EVENTING_SERVICE(%d)", int32(e))
+	}
+}
 
 type KSMETHOD_BDA_GDDS_SERVICE int32
 
@@ -604,6 +1600,27 @@ const (
 	KSMETHOD_BDA_GDDS_DATAUPDATE         KSMETHOD_BDA_GDDS_SERVICE = 5
 )
 
+// String returns the KSMETHOD_BDA_GDDS_SERVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_GDDS_SERVICE) String() string {
+	switch e {
+	case KSMETHOD_BDA_GDDS_DATATYPE:
+		return "KSMETHOD_BDA_GDDS_DATATYPE"
+	case KSMETHOD_BDA_GDDS_DATA:
+		return "KSMETHOD_BDA_GDDS_DATA"
+	case KSMETHOD_BDA_GDDS_TUNEXMLFROMIDX:
+		return "KSMETHOD_BDA_GDDS_TUNEXMLFROMIDX"
+	case KSMETHOD_BDA_GDDS_GETSERVICES:
+		return "KSMETHOD_BDA_GDDS_GETSERVICES"
+	case KSMETHOD_BDA_GDDS_SERVICEFROMTUNEXML:
+		return "KSMETHOD_BDA_GDDS_SERVICEFROMTUNEXML"
+	case KSMETHOD_BDA_GDDS_DATAUPDATE:
+		return "KSMETHOD_BDA_GDDS_DATAUPDATE"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_GDDS_SERVICE(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_BDA_GPNV_SERVICE int32
 
 const (
@@ -613,6 +1630,23 @@ const (
 	KSMETHOD_BDA_GPNV_GETVALUEUPDATENAME KSMETHOD_BDA_GPNV_SERVICE = 3
 )
 
+// String returns the KSMETHOD_BDA_GPNV_SERVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_GPNV_SERVICE) String() string {
+	switch e {
+	case KSMETHOD_BDA_GPNV_GETVALUE:
+		return "KSMETHOD_BDA_GPNV_GETVALUE"
+	case KSMETHOD_BDA_GPNV_SETVALUE:
+		return "KSMETHOD_BDA_GPNV_SETVALUE"
+	case KSMETHOD_BDA_GPNV_NAMEFROMINDEX:
+		return "KSMETHOD_BDA_GPNV_NAMEFROMINDEX"
+	case KSMETHOD_BDA_GPNV_GETVALUEUPDATENAME:
+		return "KSMETHOD_BDA_GPNV_GETVALUEUPDATENAME"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_GPNV_SERVICE(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_BDA_ISDB_CAS int32
 
 const (
@@ -620,12 +1654,38 @@ const (
 	KSMETHOD_BDA_ISDBCAS_RESPONSEDATA KSMETHOD_BDA_ISDB_CAS = 1
 )
 
+// String returns the KSMETHOD_BDA_ISDB_CAS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_ISDB_CAS) String() string {
+	switch e {
+	case KSMETHOD_BDA_ISDBCAS_SETREQUEST:
+		return "KSMETHOD_BDA_ISDBCAS_SETREQUEST"
+	case KSMETHOD_BDA_ISDBCAS_RESPONSEDATA:
+		return "KSMETHOD_BDA_ISDBCAS_RESPONSEDATA"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_ISDB_CAS(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_BDA_MUX_SERVICE int32
 
 const (
 	KSMETHOD_BDA_MUX_GETPIDLIST KSMETHOD_BDA_MUX_SERVICE = 0
 	KSMETHOD_BDA_MUX_SETPIDLIST KSMETHOD_BDA_MUX_SERVICE = 1
 )
+
+// String returns the KSMETHOD_BDA_MUX_SERVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_MUX_SERVICE) String() string {
+	switch e {
+	case KSMETHOD_BDA_MUX_GETPIDLIST:
+		return "KSMETHOD_BDA_MUX_GETPIDLIST"
+	case KSMETHOD_BDA_MUX_SETPIDLIST:
+		return "KSMETHOD_BDA_MUX_SETPIDLIST"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_MUX_SERVICE(%d)", int32(e))
+	}
+}
 
 type KSMETHOD_BDA_SCAN_SERVICE int32
 
@@ -638,12 +1698,46 @@ const (
 	KSMETHOD_BDA_SCAN_STOP        KSMETHOD_BDA_SCAN_SERVICE = 5
 )
 
+// String returns the KSMETHOD_BDA_SCAN_SERVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_SCAN_SERVICE) String() string {
+	switch e {
+	case KSMETHOD_BDA_SCAN_CAPABILTIES:
+		return "KSMETHOD_BDA_SCAN_CAPABILTIES"
+	case KSMETHOD_BDA_SCANNING_STATE:
+		return "KSMETHOD_BDA_SCANNING_STATE"
+	case KSMETHOD_BDA_SCAN_FILTER:
+		return "KSMETHOD_BDA_SCAN_FILTER"
+	case KSMETHOD_BDA_SCAN_START:
+		return "KSMETHOD_BDA_SCAN_START"
+	case KSMETHOD_BDA_SCAN_RESUME:
+		return "KSMETHOD_BDA_SCAN_RESUME"
+	case KSMETHOD_BDA_SCAN_STOP:
+		return "KSMETHOD_BDA_SCAN_STOP"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_SCAN_SERVICE(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_BDA_TS_SELECTOR int32
 
 const (
 	KSMETHOD_BDA_TS_SELECTOR_SETTSID          KSMETHOD_BDA_TS_SELECTOR = 0
 	KSMETHOD_BDA_TS_SELECTOR_GETTSINFORMATION KSMETHOD_BDA_TS_SELECTOR = 1
 )
+
+// String returns the KSMETHOD_BDA_TS_SELECTOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_TS_SELECTOR) String() string {
+	switch e {
+	case KSMETHOD_BDA_TS_SELECTOR_SETTSID:
+		return "KSMETHOD_BDA_TS_SELECTOR_SETTSID"
+	case KSMETHOD_BDA_TS_SELECTOR_GETTSINFORMATION:
+		return "KSMETHOD_BDA_TS_SELECTOR_GETTSINFORMATION"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_TS_SELECTOR(%d)", int32(e))
+	}
+}
 
 type KSMETHOD_BDA_TUNER_SERVICE int32
 
@@ -653,6 +1747,21 @@ const (
 	KSMETHOD_BDA_TUNER_SIGNALNOISERATIO KSMETHOD_BDA_TUNER_SERVICE = 2
 )
 
+// String returns the KSMETHOD_BDA_TUNER_SERVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_TUNER_SERVICE) String() string {
+	switch e {
+	case KSMETHOD_BDA_TUNER_SETTUNER:
+		return "KSMETHOD_BDA_TUNER_SETTUNER"
+	case KSMETHOD_BDA_TUNER_GETTUNERSTATE:
+		return "KSMETHOD_BDA_TUNER_GETTUNERSTATE"
+	case KSMETHOD_BDA_TUNER_SIGNALNOISERATIO:
+		return "KSMETHOD_BDA_TUNER_SIGNALNOISERATIO"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_TUNER_SERVICE(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_BDA_USERACTIVITY_SERVICE int32
 
 const (
@@ -660,6 +1769,21 @@ const (
 	KSMETHOD_BDA_USERACTIVITY_INTERVAL  KSMETHOD_BDA_USERACTIVITY_SERVICE = 1
 	KSMETHOD_BDA_USERACTIVITY_DETECTED  KSMETHOD_BDA_USERACTIVITY_SERVICE = 2
 )
+
+// String returns the KSMETHOD_BDA_USERACTIVITY_SERVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_USERACTIVITY_SERVICE) String() string {
+	switch e {
+	case KSMETHOD_BDA_USERACTIVITY_USEREASON:
+		return "KSMETHOD_BDA_USERACTIVITY_USEREASON"
+	case KSMETHOD_BDA_USERACTIVITY_INTERVAL:
+		return "KSMETHOD_BDA_USERACTIVITY_INTERVAL"
+	case KSMETHOD_BDA_USERACTIVITY_DETECTED:
+		return "KSMETHOD_BDA_USERACTIVITY_DETECTED"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_USERACTIVITY_SERVICE(%d)", int32(e))
+	}
+}
 
 type KSMETHOD_BDA_WMDRM int32
 
@@ -674,6 +1798,31 @@ const (
 	KSMETHOD_BDA_WMDRM_KEYINFO        KSMETHOD_BDA_WMDRM = 7
 )
 
+// String returns the KSMETHOD_BDA_WMDRM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_WMDRM) String() string {
+	switch e {
+	case KSMETHOD_BDA_WMDRM_STATUS:
+		return "KSMETHOD_BDA_WMDRM_STATUS"
+	case KSMETHOD_BDA_WMDRM_REVINFO:
+		return "KSMETHOD_BDA_WMDRM_REVINFO"
+	case KSMETHOD_BDA_WMDRM_CRL:
+		return "KSMETHOD_BDA_WMDRM_CRL"
+	case KSMETHOD_BDA_WMDRM_MESSAGE:
+		return "KSMETHOD_BDA_WMDRM_MESSAGE"
+	case KSMETHOD_BDA_WMDRM_REISSUELICENSE:
+		return "KSMETHOD_BDA_WMDRM_REISSUELICENSE"
+	case KSMETHOD_BDA_WMDRM_RENEWLICENSE:
+		return "KSMETHOD_BDA_WMDRM_RENEWLICENSE"
+	case KSMETHOD_BDA_WMDRM_LICENSE:
+		return "KSMETHOD_BDA_WMDRM_LICENSE"
+	case KSMETHOD_BDA_WMDRM_KEYINFO:
+		return "KSMETHOD_BDA_WMDRM_KEYINFO"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_WMDRM(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_BDA_WMDRM_TUNER int32
 
 const (
@@ -685,12 +1834,46 @@ const (
 	KSMETHOD_BDA_WMDRMTUNER_PURCHASE_ENTITLEMENT KSMETHOD_BDA_WMDRM_TUNER = 5
 )
 
+// String returns the KSMETHOD_BDA_WMDRM_TUNER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_BDA_WMDRM_TUNER) String() string {
+	switch e {
+	case KSMETHOD_BDA_WMDRMTUNER_CANCELCAPTURETOKEN:
+		return "KSMETHOD_BDA_WMDRMTUNER_CANCELCAPTURETOKEN"
+	case KSMETHOD_BDA_WMDRMTUNER_SETPIDPROTECTION:
+		return "KSMETHOD_BDA_WMDRMTUNER_SETPIDPROTECTION"
+	case KSMETHOD_BDA_WMDRMTUNER_GETPIDPROTECTION:
+		return "KSMETHOD_BDA_WMDRMTUNER_GETPIDPROTECTION"
+	case KSMETHOD_BDA_WMDRMTUNER_SETSYNCVALUE:
+		return "KSMETHOD_BDA_WMDRMTUNER_SETSYNCVALUE"
+	case KSMETHOD_BDA_WMDRMTUNER_STARTCODEPROFILE:
+		return "KSMETHOD_BDA_WMDRMTUNER_STARTCODEPROFILE"
+	case KSMETHOD_BDA_WMDRMTUNER_PURCHASE_ENTITLEMENT:
+		return "KSMETHOD_BDA_WMDRMTUNER_PURCHASE_ENTITLEMENT"
+	default:
+		return fmt.Sprintf("KSMETHOD_BDA_WMDRM_TUNER(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_BDA_AUTODEMODULATE int32
 
 const (
 	KSPROPERTY_BDA_AUTODEMODULATE_START KSPROPERTY_BDA_AUTODEMODULATE = 0
 	KSPROPERTY_BDA_AUTODEMODULATE_STOP  KSPROPERTY_BDA_AUTODEMODULATE = 1
 )
+
+// String returns the KSPROPERTY_BDA_AUTODEMODULATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_AUTODEMODULATE) String() string {
+	switch e {
+	case KSPROPERTY_BDA_AUTODEMODULATE_START:
+		return "KSPROPERTY_BDA_AUTODEMODULATE_START"
+	case KSPROPERTY_BDA_AUTODEMODULATE_STOP:
+		return "KSPROPERTY_BDA_AUTODEMODULATE_STOP"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_AUTODEMODULATE(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_BDA_CA int32
 
@@ -703,6 +1886,27 @@ const (
 	KSPROPERTY_BDA_CA_REMOVE_PROGRAM    KSPROPERTY_BDA_CA = 5
 )
 
+// String returns the KSPROPERTY_BDA_CA constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_CA) String() string {
+	switch e {
+	case KSPROPERTY_BDA_ECM_MAP_STATUS:
+		return "KSPROPERTY_BDA_ECM_MAP_STATUS"
+	case KSPROPERTY_BDA_CA_MODULE_STATUS:
+		return "KSPROPERTY_BDA_CA_MODULE_STATUS"
+	case KSPROPERTY_BDA_CA_SMART_CARD_STATUS:
+		return "KSPROPERTY_BDA_CA_SMART_CARD_STATUS"
+	case KSPROPERTY_BDA_CA_MODULE_UI:
+		return "KSPROPERTY_BDA_CA_MODULE_UI"
+	case KSPROPERTY_BDA_CA_SET_PROGRAM_PIDS:
+		return "KSPROPERTY_BDA_CA_SET_PROGRAM_PIDS"
+	case KSPROPERTY_BDA_CA_REMOVE_PROGRAM:
+		return "KSPROPERTY_BDA_CA_REMOVE_PROGRAM"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_CA(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_BDA_CA_EVENT int32
 
 const (
@@ -711,6 +1915,23 @@ const (
 	KSEVENT_BDA_CA_SMART_CARD_STATUS_CHANGED KSPROPERTY_BDA_CA_EVENT = 2
 	KSEVENT_BDA_CA_MODULE_UI_REQUESTED       KSPROPERTY_BDA_CA_EVENT = 3
 )
+
+// String returns the KSPROPERTY_BDA_CA_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_CA_EVENT) String() string {
+	switch e {
+	case KSEVENT_BDA_PROGRAM_FLOW_STATUS_CHANGED:
+		return "KSEVENT_BDA_PROGRAM_FLOW_STATUS_CHANGED"
+	case KSEVENT_BDA_CA_MODULE_STATUS_CHANGED:
+		return "KSEVENT_BDA_CA_MODULE_STATUS_CHANGED"
+	case KSEVENT_BDA_CA_SMART_CARD_STATUS_CHANGED:
+		return "KSEVENT_BDA_CA_SMART_CARD_STATUS_CHANGED"
+	case KSEVENT_BDA_CA_MODULE_UI_REQUESTED:
+		return "KSEVENT_BDA_CA_MODULE_UI_REQUESTED"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_CA_EVENT(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_BDA_DIGITAL_DEMODULATOR int32
 
@@ -730,6 +1951,41 @@ const (
 	KSPROPERTY_BDA_PLP_NUMBER         KSPROPERTY_BDA_DIGITAL_DEMODULATOR = 12
 )
 
+// String returns the KSPROPERTY_BDA_DIGITAL_DEMODULATOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_DIGITAL_DEMODULATOR) String() string {
+	switch e {
+	case KSPROPERTY_BDA_MODULATION_TYPE:
+		return "KSPROPERTY_BDA_MODULATION_TYPE"
+	case KSPROPERTY_BDA_INNER_FEC_TYPE:
+		return "KSPROPERTY_BDA_INNER_FEC_TYPE"
+	case KSPROPERTY_BDA_INNER_FEC_RATE:
+		return "KSPROPERTY_BDA_INNER_FEC_RATE"
+	case KSPROPERTY_BDA_OUTER_FEC_TYPE:
+		return "KSPROPERTY_BDA_OUTER_FEC_TYPE"
+	case KSPROPERTY_BDA_OUTER_FEC_RATE:
+		return "KSPROPERTY_BDA_OUTER_FEC_RATE"
+	case KSPROPERTY_BDA_SYMBOL_RATE:
+		return "KSPROPERTY_BDA_SYMBOL_RATE"
+	case KSPROPERTY_BDA_SPECTRAL_INVERSION:
+		return "KSPROPERTY_BDA_SPECTRAL_INVERSION"
+	case KSPROPERTY_BDA_GUARD_INTERVAL:
+		return "KSPROPERTY_BDA_GUARD_INTERVAL"
+	case KSPROPERTY_BDA_TRANSMISSION_MODE:
+		return "KSPROPERTY_BDA_TRANSMISSION_MODE"
+	case KSPROPERTY_BDA_ROLL_OFF:
+		return "KSPROPERTY_BDA_ROLL_OFF"
+	case KSPROPERTY_BDA_PILOT:
+		return "KSPROPERTY_BDA_PILOT"
+	case KSPROPERTY_BDA_SIGNALTIMEOUTS:
+		return "KSPROPERTY_BDA_SIGNALTIMEOUTS"
+	case KSPROPERTY_BDA_PLP_NUMBER:
+		return "KSPROPERTY_BDA_PLP_NUMBER"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_DIGITAL_DEMODULATOR(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_BDA_DISEQC_COMMAND int32
 
 const (
@@ -741,11 +1997,43 @@ const (
 	KSPROPERTY_BDA_DISEQC_RESPONSE     KSPROPERTY_BDA_DISEQC_COMMAND = 5
 )
 
+// String returns the KSPROPERTY_BDA_DISEQC_COMMAND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_DISEQC_COMMAND) String() string {
+	switch e {
+	case KSPROPERTY_BDA_DISEQC_ENABLE:
+		return "KSPROPERTY_BDA_DISEQC_ENABLE"
+	case KSPROPERTY_BDA_DISEQC_LNB_SOURCE:
+		return "KSPROPERTY_BDA_DISEQC_LNB_SOURCE"
+	case KSPROPERTY_BDA_DISEQC_USETONEBURST:
+		return "KSPROPERTY_BDA_DISEQC_USETONEBURST"
+	case KSPROPERTY_BDA_DISEQC_REPEATS:
+		return "KSPROPERTY_BDA_DISEQC_REPEATS"
+	case KSPROPERTY_BDA_DISEQC_SEND:
+		return "KSPROPERTY_BDA_DISEQC_SEND"
+	case KSPROPERTY_BDA_DISEQC_RESPONSE:
+		return "KSPROPERTY_BDA_DISEQC_RESPONSE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_DISEQC_COMMAND(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_BDA_DISEQC_EVENT int32
 
 const (
 	KSEVENT_BDA_DISEQC_DATA_RECEIVED KSPROPERTY_BDA_DISEQC_EVENT = 0
 )
+
+// String returns the KSPROPERTY_BDA_DISEQC_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_DISEQC_EVENT) String() string {
+	switch e {
+	case KSEVENT_BDA_DISEQC_DATA_RECEIVED:
+		return "KSEVENT_BDA_DISEQC_DATA_RECEIVED"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_DISEQC_EVENT(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_BDA_ETHERNET_FILTER int32
 
@@ -754,6 +2042,21 @@ const (
 	KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_LIST      KSPROPERTY_BDA_ETHERNET_FILTER = 1
 	KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_MODE      KSPROPERTY_BDA_ETHERNET_FILTER = 2
 )
+
+// String returns the KSPROPERTY_BDA_ETHERNET_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_ETHERNET_FILTER) String() string {
+	switch e {
+	case KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_LIST_SIZE:
+		return "KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_LIST_SIZE"
+	case KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_LIST:
+		return "KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_LIST"
+	case KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_MODE:
+		return "KSPROPERTY_BDA_ETHERNET_FILTER_MULTICAST_MODE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_ETHERNET_FILTER(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_BDA_FREQUENCY_FILTER int32
 
@@ -770,6 +2073,35 @@ const (
 	KSPROPERTY_BDA_RF_TUNER_STANDARD_MODE        KSPROPERTY_BDA_FREQUENCY_FILTER = 9
 )
 
+// String returns the KSPROPERTY_BDA_FREQUENCY_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_FREQUENCY_FILTER) String() string {
+	switch e {
+	case KSPROPERTY_BDA_RF_TUNER_FREQUENCY:
+		return "KSPROPERTY_BDA_RF_TUNER_FREQUENCY"
+	case KSPROPERTY_BDA_RF_TUNER_POLARITY:
+		return "KSPROPERTY_BDA_RF_TUNER_POLARITY"
+	case KSPROPERTY_BDA_RF_TUNER_RANGE:
+		return "KSPROPERTY_BDA_RF_TUNER_RANGE"
+	case KSPROPERTY_BDA_RF_TUNER_TRANSPONDER:
+		return "KSPROPERTY_BDA_RF_TUNER_TRANSPONDER"
+	case KSPROPERTY_BDA_RF_TUNER_BANDWIDTH:
+		return "KSPROPERTY_BDA_RF_TUNER_BANDWIDTH"
+	case KSPROPERTY_BDA_RF_TUNER_FREQUENCY_MULTIPLIER:
+		return "KSPROPERTY_BDA_RF_TUNER_FREQUENCY_MULTIPLIER"
+	case KSPROPERTY_BDA_RF_TUNER_CAPS:
+		return "KSPROPERTY_BDA_RF_TUNER_CAPS"
+	case KSPROPERTY_BDA_RF_TUNER_SCAN_STATUS:
+		return "KSPROPERTY_BDA_RF_TUNER_SCAN_STATUS"
+	case KSPROPERTY_BDA_RF_TUNER_STANDARD:
+		return "KSPROPERTY_BDA_RF_TUNER_STANDARD"
+	case KSPROPERTY_BDA_RF_TUNER_STANDARD_MODE:
+		return "KSPROPERTY_BDA_RF_TUNER_STANDARD_MODE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_FREQUENCY_FILTER(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_BDA_IPv4_FILTER int32
 
 const (
@@ -777,6 +2109,21 @@ const (
 	KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_LIST      KSPROPERTY_BDA_IPv4_FILTER = 1
 	KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_MODE      KSPROPERTY_BDA_IPv4_FILTER = 2
 )
+
+// String returns the KSPROPERTY_BDA_IPv4_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_IPv4_FILTER) String() string {
+	switch e {
+	case KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_LIST_SIZE:
+		return "KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_LIST_SIZE"
+	case KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_LIST:
+		return "KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_LIST"
+	case KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_MODE:
+		return "KSPROPERTY_BDA_IPv4_FILTER_MULTICAST_MODE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_IPv4_FILTER(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_BDA_IPv6_FILTER int32
 
@@ -786,6 +2133,21 @@ const (
 	KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_MODE      KSPROPERTY_BDA_IPv6_FILTER = 2
 )
 
+// String returns the KSPROPERTY_BDA_IPv6_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_IPv6_FILTER) String() string {
+	switch e {
+	case KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_LIST_SIZE:
+		return "KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_LIST_SIZE"
+	case KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_LIST:
+		return "KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_LIST"
+	case KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_MODE:
+		return "KSPROPERTY_BDA_IPv6_FILTER_MULTICAST_MODE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_IPv6_FILTER(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_BDA_LNB_INFO int32
 
 const (
@@ -794,12 +2156,40 @@ const (
 	KSPROPERTY_BDA_LNB_SWITCH_FREQUENCY KSPROPERTY_BDA_LNB_INFO = 2
 )
 
+// String returns the KSPROPERTY_BDA_LNB_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_LNB_INFO) String() string {
+	switch e {
+	case KSPROPERTY_BDA_LNB_LOF_LOW_BAND:
+		return "KSPROPERTY_BDA_LNB_LOF_LOW_BAND"
+	case KSPROPERTY_BDA_LNB_LOF_HIGH_BAND:
+		return "KSPROPERTY_BDA_LNB_LOF_HIGH_BAND"
+	case KSPROPERTY_BDA_LNB_SWITCH_FREQUENCY:
+		return "KSPROPERTY_BDA_LNB_SWITCH_FREQUENCY"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_LNB_INFO(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_BDA_NULL_TRANSFORM int32
 
 const (
 	KSPROPERTY_BDA_NULL_TRANSFORM_START KSPROPERTY_BDA_NULL_TRANSFORM = 0
 	KSPROPERTY_BDA_NULL_TRANSFORM_STOP  KSPROPERTY_BDA_NULL_TRANSFORM = 1
 )
+
+// String returns the KSPROPERTY_BDA_NULL_TRANSFORM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_NULL_TRANSFORM) String() string {
+	switch e {
+	case KSPROPERTY_BDA_NULL_TRANSFORM_START:
+		return "KSPROPERTY_BDA_NULL_TRANSFORM_START"
+	case KSPROPERTY_BDA_NULL_TRANSFORM_STOP:
+		return "KSPROPERTY_BDA_NULL_TRANSFORM_STOP"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_NULL_TRANSFORM(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_BDA_PIDFILTER int32
 
@@ -809,6 +2199,21 @@ const (
 	KSPROPERTY_BDA_PIDFILTER_LIST_PIDS  KSPROPERTY_BDA_PIDFILTER = 2
 )
 
+// String returns the KSPROPERTY_BDA_PIDFILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_PIDFILTER) String() string {
+	switch e {
+	case KSPROPERTY_BDA_PIDFILTER_MAP_PIDS:
+		return "KSPROPERTY_BDA_PIDFILTER_MAP_PIDS"
+	case KSPROPERTY_BDA_PIDFILTER_UNMAP_PIDS:
+		return "KSPROPERTY_BDA_PIDFILTER_UNMAP_PIDS"
+	case KSPROPERTY_BDA_PIDFILTER_LIST_PIDS:
+		return "KSPROPERTY_BDA_PIDFILTER_LIST_PIDS"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_PIDFILTER(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_BDA_PIN_CONTROL int32
 
 const (
@@ -816,12 +2221,38 @@ const (
 	KSPROPERTY_BDA_PIN_TYPE KSPROPERTY_BDA_PIN_CONTROL = 1
 )
 
+// String returns the KSPROPERTY_BDA_PIN_CONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_PIN_CONTROL) String() string {
+	switch e {
+	case KSPROPERTY_BDA_PIN_ID:
+		return "KSPROPERTY_BDA_PIN_ID"
+	case KSPROPERTY_BDA_PIN_TYPE:
+		return "KSPROPERTY_BDA_PIN_TYPE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_PIN_CONTROL(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_BDA_PIN_EVENT int32
 
 const (
 	KSEVENT_BDA_PIN_CONNECTED    KSPROPERTY_BDA_PIN_EVENT = 0
 	KSEVENT_BDA_PIN_DISCONNECTED KSPROPERTY_BDA_PIN_EVENT = 1
 )
+
+// String returns the KSPROPERTY_BDA_PIN_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_PIN_EVENT) String() string {
+	switch e {
+	case KSEVENT_BDA_PIN_CONNECTED:
+		return "KSEVENT_BDA_PIN_CONNECTED"
+	case KSEVENT_BDA_PIN_DISCONNECTED:
+		return "KSEVENT_BDA_PIN_DISCONNECTED"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_PIN_EVENT(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_BDA_SIGNAL_STATS int32
 
@@ -834,6 +2265,29 @@ const (
 	KSPROPERTY_BDA_SIGNAL_LOCK_CAPS KSPROPERTY_BDA_SIGNAL_STATS = 5
 	KSPROPERTY_BDA_SIGNAL_LOCK_TYPE KSPROPERTY_BDA_SIGNAL_STATS = 6
 )
+
+// String returns the KSPROPERTY_BDA_SIGNAL_STATS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_SIGNAL_STATS) String() string {
+	switch e {
+	case KSPROPERTY_BDA_SIGNAL_STRENGTH:
+		return "KSPROPERTY_BDA_SIGNAL_STRENGTH"
+	case KSPROPERTY_BDA_SIGNAL_QUALITY:
+		return "KSPROPERTY_BDA_SIGNAL_QUALITY"
+	case KSPROPERTY_BDA_SIGNAL_PRESENT:
+		return "KSPROPERTY_BDA_SIGNAL_PRESENT"
+	case KSPROPERTY_BDA_SIGNAL_LOCKED:
+		return "KSPROPERTY_BDA_SIGNAL_LOCKED"
+	case KSPROPERTY_BDA_SAMPLE_TIME:
+		return "KSPROPERTY_BDA_SAMPLE_TIME"
+	case KSPROPERTY_BDA_SIGNAL_LOCK_CAPS:
+		return "KSPROPERTY_BDA_SIGNAL_LOCK_CAPS"
+	case KSPROPERTY_BDA_SIGNAL_LOCK_TYPE:
+		return "KSPROPERTY_BDA_SIGNAL_LOCK_TYPE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_SIGNAL_STATS(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_BDA_TOPOLOGY int32
 
@@ -848,6 +2302,31 @@ const (
 	KSPROPERTY_BDA_NODE_DESCRIPTORS     KSPROPERTY_BDA_TOPOLOGY = 7
 )
 
+// String returns the KSPROPERTY_BDA_TOPOLOGY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_TOPOLOGY) String() string {
+	switch e {
+	case KSPROPERTY_BDA_NODE_TYPES:
+		return "KSPROPERTY_BDA_NODE_TYPES"
+	case KSPROPERTY_BDA_PIN_TYPES:
+		return "KSPROPERTY_BDA_PIN_TYPES"
+	case KSPROPERTY_BDA_TEMPLATE_CONNECTIONS:
+		return "KSPROPERTY_BDA_TEMPLATE_CONNECTIONS"
+	case KSPROPERTY_BDA_NODE_METHODS:
+		return "KSPROPERTY_BDA_NODE_METHODS"
+	case KSPROPERTY_BDA_NODE_PROPERTIES:
+		return "KSPROPERTY_BDA_NODE_PROPERTIES"
+	case KSPROPERTY_BDA_NODE_EVENTS:
+		return "KSPROPERTY_BDA_NODE_EVENTS"
+	case KSPROPERTY_BDA_CONTROLLING_PIN_ID:
+		return "KSPROPERTY_BDA_CONTROLLING_PIN_ID"
+	case KSPROPERTY_BDA_NODE_DESCRIPTORS:
+		return "KSPROPERTY_BDA_NODE_DESCRIPTORS"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_TOPOLOGY(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_BDA_VOID_TRANSFORM int32
 
 const (
@@ -855,11 +2334,35 @@ const (
 	KSPROPERTY_BDA_VOID_TRANSFORM_STOP  KSPROPERTY_BDA_VOID_TRANSFORM = 1
 )
 
+// String returns the KSPROPERTY_BDA_VOID_TRANSFORM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BDA_VOID_TRANSFORM) String() string {
+	switch e {
+	case KSPROPERTY_BDA_VOID_TRANSFORM_START:
+		return "KSPROPERTY_BDA_VOID_TRANSFORM_START"
+	case KSPROPERTY_BDA_VOID_TRANSFORM_STOP:
+		return "KSPROPERTY_BDA_VOID_TRANSFORM_STOP"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BDA_VOID_TRANSFORM(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_IDS_BDA_TABLE int32
 
 const (
 	KSPROPERTY_BDA_TABLE_SECTION KSPROPERTY_IDS_BDA_TABLE = 0
 )
+
+// String returns the KSPROPERTY_IDS_BDA_TABLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_IDS_BDA_TABLE) String() string {
+	switch e {
+	case KSPROPERTY_BDA_TABLE_SECTION:
+		return "KSPROPERTY_BDA_TABLE_SECTION"
+	default:
+		return fmt.Sprintf("KSPROPERTY_IDS_BDA_TABLE(%d)", int32(e))
+	}
+}
 
 type LicenseEventBlockReason int32
 
@@ -871,6 +2374,25 @@ const (
 	LIC_ExtenderBlocked LicenseEventBlockReason = 4
 )
 
+// String returns the LicenseEventBlockReason constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LicenseEventBlockReason) String() string {
+	switch e {
+	case LIC_BadLicense:
+		return "LIC_BadLicense"
+	case LIC_NeedIndiv:
+		return "LIC_NeedIndiv"
+	case LIC_Expired:
+		return "LIC_Expired"
+	case LIC_NeedActivation:
+		return "LIC_NeedActivation"
+	case LIC_ExtenderBlocked:
+		return "LIC_ExtenderBlocked"
+	default:
+		return fmt.Sprintf("LicenseEventBlockReason(%d)", int32(e))
+	}
+}
+
 // MPEG_CONTEXT_TYPE: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ne-mpeg2structs-mpeg_context_type
 type MPEG_CONTEXT_TYPE int32
 
@@ -879,6 +2401,19 @@ const (
 	MPEG_CONTEXT_WINSOCK   MPEG_CONTEXT_TYPE = 1
 )
 
+// String returns the MPEG_CONTEXT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MPEG_CONTEXT_TYPE) String() string {
+	switch e {
+	case MPEG_CONTEXT_BCS_DEMUX:
+		return "MPEG_CONTEXT_BCS_DEMUX"
+	case MPEG_CONTEXT_WINSOCK:
+		return "MPEG_CONTEXT_WINSOCK"
+	default:
+		return fmt.Sprintf("MPEG_CONTEXT_TYPE(%d)", int32(e))
+	}
+}
+
 // MPEG_CURRENT_NEXT_BIT: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ne-mpeg2structs-mpeg_current_next_bit
 type MPEG_CURRENT_NEXT_BIT int32
 
@@ -886,6 +2421,19 @@ const (
 	MPEG_SECTION_IS_NEXT    MPEG_CURRENT_NEXT_BIT = 0
 	MPEG_SECTION_IS_CURRENT MPEG_CURRENT_NEXT_BIT = 1
 )
+
+// String returns the MPEG_CURRENT_NEXT_BIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MPEG_CURRENT_NEXT_BIT) String() string {
+	switch e {
+	case MPEG_SECTION_IS_NEXT:
+		return "MPEG_SECTION_IS_NEXT"
+	case MPEG_SECTION_IS_CURRENT:
+		return "MPEG_SECTION_IS_CURRENT"
+	default:
+		return fmt.Sprintf("MPEG_CURRENT_NEXT_BIT(%d)", int32(e))
+	}
+}
 
 // MPEG_REQUEST_TYPE: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ne-mpeg2structs-mpeg_request_type
 type MPEG_REQUEST_TYPE int32
@@ -902,6 +2450,33 @@ const (
 	MPEG_RQST_START_MPE_STREAM    MPEG_REQUEST_TYPE = 8
 )
 
+// String returns the MPEG_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MPEG_REQUEST_TYPE) String() string {
+	switch e {
+	case MPEG_RQST_UNKNOWN:
+		return "MPEG_RQST_UNKNOWN"
+	case MPEG_RQST_GET_SECTION:
+		return "MPEG_RQST_GET_SECTION"
+	case MPEG_RQST_GET_SECTION_ASYNC:
+		return "MPEG_RQST_GET_SECTION_ASYNC"
+	case MPEG_RQST_GET_TABLE:
+		return "MPEG_RQST_GET_TABLE"
+	case MPEG_RQST_GET_TABLE_ASYNC:
+		return "MPEG_RQST_GET_TABLE_ASYNC"
+	case MPEG_RQST_GET_SECTIONS_STREAM:
+		return "MPEG_RQST_GET_SECTIONS_STREAM"
+	case MPEG_RQST_GET_PES_STREAM:
+		return "MPEG_RQST_GET_PES_STREAM"
+	case MPEG_RQST_GET_TS_STREAM:
+		return "MPEG_RQST_GET_TS_STREAM"
+	case MPEG_RQST_START_MPE_STREAM:
+		return "MPEG_RQST_START_MPE_STREAM"
+	default:
+		return fmt.Sprintf("MPEG_REQUEST_TYPE(%d)", int32(e))
+	}
+}
+
 // MSVidCCService: https://learn.microsoft.com/windows/win32/api/segment/ne-segment-msvidccservice
 type MSVidCCService int32
 
@@ -913,6 +2488,27 @@ const (
 	Text2    MSVidCCService = 4
 	XDS      MSVidCCService = 5
 )
+
+// String returns the MSVidCCService constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSVidCCService) String() string {
+	switch e {
+	case None:
+		return "None"
+	case Caption1:
+		return "Caption1"
+	case Caption2:
+		return "Caption2"
+	case Text1:
+		return "Text1"
+	case Text2:
+		return "Text2"
+	case XDS:
+		return "XDS"
+	default:
+		return fmt.Sprintf("MSVidCCService(%d)", int32(e))
+	}
+}
 
 type MSVidCtlButtonstate int32
 
@@ -927,6 +2523,25 @@ const (
 	MSVIDCTL_ALT           MSVidCtlButtonstate = 4
 )
 
+// String returns the MSVidCtlButtonstate constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSVidCtlButtonstate) String() string {
+	switch e {
+	case MSVIDCTL_LEFT_BUTTON:
+		return "MSVIDCTL_LEFT_BUTTON"
+	case MSVIDCTL_RIGHT_BUTTON:
+		return "MSVIDCTL_RIGHT_BUTTON"
+	case MSVIDCTL_MIDDLE_BUTTON:
+		return "MSVIDCTL_MIDDLE_BUTTON"
+	case MSVIDCTL_X_BUTTON1:
+		return "MSVIDCTL_X_BUTTON1"
+	case MSVIDCTL_X_BUTTON2:
+		return "MSVIDCTL_X_BUTTON2"
+	default:
+		return fmt.Sprintf("MSVidCtlButtonstate(%d)", int32(e))
+	}
+}
+
 // MSVidCtlStateList: https://learn.microsoft.com/windows/win32/api/msvidctl/ne-msvidctl-msvidctlstatelist
 type MSVidCtlStateList int32
 
@@ -937,6 +2552,23 @@ const (
 	STATE_PLAY    MSVidCtlStateList = 2
 )
 
+// String returns the MSVidCtlStateList constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSVidCtlStateList) String() string {
+	switch e {
+	case STATE_UNBUILT:
+		return "STATE_UNBUILT"
+	case STATE_STOP:
+		return "STATE_STOP"
+	case STATE_PAUSE:
+		return "STATE_PAUSE"
+	case STATE_PLAY:
+		return "STATE_PLAY"
+	default:
+		return fmt.Sprintf("MSVidCtlStateList(%d)", int32(e))
+	}
+}
+
 type MSVidSegmentType int32
 
 const (
@@ -944,6 +2576,21 @@ const (
 	MSVidSEG_XFORM  MSVidSegmentType = 1
 	MSVidSEG_DEST   MSVidSegmentType = 2
 )
+
+// String returns the MSVidSegmentType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSVidSegmentType) String() string {
+	switch e {
+	case MSVidSEG_SOURCE:
+		return "MSVidSEG_SOURCE"
+	case MSVidSEG_XFORM:
+		return "MSVidSEG_XFORM"
+	case MSVidSEG_DEST:
+		return "MSVidSEG_DEST"
+	default:
+		return fmt.Sprintf("MSVidSegmentType(%d)", int32(e))
+	}
+}
 
 // MSVidSinkStreams: https://learn.microsoft.com/windows/win32/api/segment/ne-segment-msvidsinkstreams
 type MSVidSinkStreams int32
@@ -953,6 +2600,21 @@ const (
 	MSVidSink_Audio MSVidSinkStreams = 2
 	MSVidSink_Other MSVidSinkStreams = 4
 )
+
+// String returns the MSVidSinkStreams constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSVidSinkStreams) String() string {
+	switch e {
+	case MSVidSink_Video:
+		return "MSVidSink_Video"
+	case MSVidSink_Audio:
+		return "MSVidSink_Audio"
+	case MSVidSink_Other:
+		return "MSVidSink_Other"
+	default:
+		return fmt.Sprintf("MSVidSinkStreams(%d)", int32(e))
+	}
+}
 
 type MSViddispidList int32
 
@@ -988,12 +2650,92 @@ const (
 	DispidServiceP            MSViddispidList = 28
 )
 
+// String returns the MSViddispidList constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSViddispidList) String() string {
+	switch e {
+	case DispidInputs:
+		return "DispidInputs"
+	case DispidOutputs:
+		return "DispidOutputs"
+	case Dispid_Inputs:
+		return "Dispid_Inputs"
+	case Dispid_Outputs:
+		return "Dispid_Outputs"
+	case DispidVideoRenderers:
+		return "DispidVideoRenderers"
+	case DispidAudioRenderers:
+		return "DispidAudioRenderers"
+	case DispidFeatures:
+		return "DispidFeatures"
+	case DispidInput:
+		return "DispidInput"
+	case DispidOutput:
+		return "DispidOutput"
+	case DispidVideoRenderer:
+		return "DispidVideoRenderer"
+	case DispidAudioRenderer:
+		return "DispidAudioRenderer"
+	case DispidSelectedFeatures:
+		return "DispidSelectedFeatures"
+	case DispidView:
+		return "DispidView"
+	case DispidBuild:
+		return "DispidBuild"
+	case DispidPause:
+		return "DispidPause"
+	case DispidRun:
+		return "DispidRun"
+	case DispidStop:
+		return "DispidStop"
+	case DispidDecompose:
+		return "DispidDecompose"
+	case DispidDisplaySize:
+		return "DispidDisplaySize"
+	case DispidMaintainAspectRatio:
+		return "DispidMaintainAspectRatio"
+	case DispidColorKey:
+		return "DispidColorKey"
+	case DispidStateChange:
+		return "DispidStateChange"
+	case DispidgetState:
+		return "DispidgetState"
+	case Dispidunbind:
+		return "Dispidunbind"
+	case Dispidbind:
+		return "Dispidbind"
+	case DispidDisableVideo:
+		return "DispidDisableVideo"
+	case DispidDisableAudio:
+		return "DispidDisableAudio"
+	case DispidViewNext:
+		return "DispidViewNext"
+	case DispidServiceP:
+		return "DispidServiceP"
+	default:
+		return fmt.Sprintf("MSViddispidList(%d)", int32(e))
+	}
+}
+
 type PositionModeList int32
 
 const (
 	FrameMode         PositionModeList = 0
 	TenthsSecondsMode PositionModeList = 1
 )
+
+// String returns the PositionModeList constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PositionModeList) String() string {
+	switch e {
+	case FrameMode:
+		return "FrameMode"
+	case TenthsSecondsMode:
+		return "TenthsSecondsMode"
+	default:
+		return fmt.Sprintf("PositionModeList(%d)", int32(e))
+	}
+}
 
 // ProtType: https://learn.microsoft.com/windows/win32/api/encdec/ne-encdec-prottype
 type ProtType int32
@@ -1011,6 +2753,35 @@ const (
 	PROT_COPY_INVALID           ProtType = 50
 )
 
+// String returns the ProtType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ProtType) String() string {
+	switch e {
+	case PROT_COPY_FREE:
+		return "PROT_COPY_FREE"
+	case PROT_COPY_ONCE:
+		return "PROT_COPY_ONCE"
+	case PROT_COPY_NEVER:
+		return "PROT_COPY_NEVER"
+	case PROT_COPY_NEVER_REALLY:
+		return "PROT_COPY_NEVER_REALLY"
+	case PROT_COPY_NO_MORE:
+		return "PROT_COPY_NO_MORE"
+	case PROT_COPY_FREE_CIT:
+		return "PROT_COPY_FREE_CIT"
+	case PROT_COPY_BF:
+		return "PROT_COPY_BF"
+	case PROT_COPY_CN_RECORDING_STOP:
+		return "PROT_COPY_CN_RECORDING_STOP"
+	case PROT_COPY_FREE_SECURE:
+		return "PROT_COPY_FREE_SECURE"
+	case PROT_COPY_INVALID:
+		return "PROT_COPY_INVALID"
+	default:
+		return fmt.Sprintf("ProtType(%d)", int32(e))
+	}
+}
+
 type RECORDING_TYPE int32
 
 const (
@@ -1018,12 +2789,38 @@ const (
 	RECORDING_TYPE_REFERENCE RECORDING_TYPE = 1
 )
 
+// String returns the RECORDING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RECORDING_TYPE) String() string {
+	switch e {
+	case RECORDING_TYPE_CONTENT:
+		return "RECORDING_TYPE_CONTENT"
+	case RECORDING_TYPE_REFERENCE:
+		return "RECORDING_TYPE_REFERENCE"
+	default:
+		return fmt.Sprintf("RECORDING_TYPE(%d)", int32(e))
+	}
+}
+
 type RecordingType int32
 
 const (
 	CONTENT   RecordingType = 0
 	REFERENCE RecordingType = 1
 )
+
+// String returns the RecordingType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RecordingType) String() string {
+	switch e {
+	case CONTENT:
+		return "CONTENT"
+	case REFERENCE:
+		return "REFERENCE"
+	default:
+		return fmt.Sprintf("RecordingType(%d)", int32(e))
+	}
+}
 
 type RevokedComponent int32
 
@@ -1034,6 +2831,25 @@ const (
 	REVOKED_SECURE_PIPELINE RevokedComponent = 3
 	REVOKED_MAX_TYPES       RevokedComponent = 4
 )
+
+// String returns the RevokedComponent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RevokedComponent) String() string {
+	switch e {
+	case REVOKED_COPP:
+		return "REVOKED_COPP"
+	case REVOKED_SAC:
+		return "REVOKED_SAC"
+	case REVOKED_APP_STUB:
+		return "REVOKED_APP_STUB"
+	case REVOKED_SECURE_PIPELINE:
+		return "REVOKED_SECURE_PIPELINE"
+	case REVOKED_MAX_TYPES:
+		return "REVOKED_MAX_TYPES"
+	default:
+		return fmt.Sprintf("RevokedComponent(%d)", int32(e))
+	}
+}
 
 // STREAMBUFFER_ATTR_DATATYPE: https://learn.microsoft.com/windows/win32/api/sbe/ne-sbe-streambuffer_attr_datatype
 type STREAMBUFFER_ATTR_DATATYPE int32
@@ -1047,6 +2863,29 @@ const (
 	STREAMBUFFER_TYPE_WORD   STREAMBUFFER_ATTR_DATATYPE = 5
 	STREAMBUFFER_TYPE_GUID   STREAMBUFFER_ATTR_DATATYPE = 6
 )
+
+// String returns the STREAMBUFFER_ATTR_DATATYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STREAMBUFFER_ATTR_DATATYPE) String() string {
+	switch e {
+	case STREAMBUFFER_TYPE_DWORD:
+		return "STREAMBUFFER_TYPE_DWORD"
+	case STREAMBUFFER_TYPE_STRING:
+		return "STREAMBUFFER_TYPE_STRING"
+	case STREAMBUFFER_TYPE_BINARY:
+		return "STREAMBUFFER_TYPE_BINARY"
+	case STREAMBUFFER_TYPE_BOOL:
+		return "STREAMBUFFER_TYPE_BOOL"
+	case STREAMBUFFER_TYPE_QWORD:
+		return "STREAMBUFFER_TYPE_QWORD"
+	case STREAMBUFFER_TYPE_WORD:
+		return "STREAMBUFFER_TYPE_WORD"
+	case STREAMBUFFER_TYPE_GUID:
+		return "STREAMBUFFER_TYPE_GUID"
+	default:
+		return fmt.Sprintf("STREAMBUFFER_ATTR_DATATYPE(%d)", int32(e))
+	}
+}
 
 type SegDispidList int32
 
@@ -1276,6 +3115,461 @@ const (
 	LastReservedDeviceDispid               SegDispidList = 16383
 )
 
+// String returns the SegDispidList constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SegDispidList) String() string {
+	switch e {
+	case DispidName:
+		return "DispidName"
+	case DispidStatus:
+		return "DispidStatus"
+	case DispidDevImageSourceWidth:
+		return "DispidDevImageSourceWidth"
+	case DispidDevImageSourceHeight:
+		return "DispidDevImageSourceHeight"
+	case DispidDevCountryCode:
+		return "DispidDevCountryCode"
+	case DispidDevOverScan:
+		return "DispidDevOverScan"
+	case DispidSegment:
+		return "DispidSegment"
+	case DispidDevVolume:
+		return "DispidDevVolume"
+	case DispidDevBalance:
+		return "DispidDevBalance"
+	case DispidDevPower:
+		return "DispidDevPower"
+	case DispidTuneChan:
+		return "DispidTuneChan"
+	case DispidDevVideoSubchannel:
+		return "DispidDevVideoSubchannel"
+	case DispidDevAudioSubchannel:
+		return "DispidDevAudioSubchannel"
+	case DispidChannelAvailable:
+		return "DispidChannelAvailable"
+	case DispidDevVideoFrequency:
+		return "DispidDevVideoFrequency"
+	case DispidDevAudioFrequency:
+		return "DispidDevAudioFrequency"
+	case DispidCount:
+		return "DispidCount"
+	case DispidDevFileName:
+		return "DispidDevFileName"
+	case DispidVisible:
+		return "DispidVisible"
+	case DispidOwner:
+		return "DispidOwner"
+	case DispidMessageDrain:
+		return "DispidMessageDrain"
+	case DispidViewable:
+		return "DispidViewable"
+	case DispidDevView:
+		return "DispidDevView"
+	case DispidKSCat:
+		return "DispidKSCat"
+	case DispidCLSID:
+		return "DispidCLSID"
+	case Dispid_KSCat:
+		return "Dispid_KSCat"
+	case Dispid_CLSID:
+		return "Dispid_CLSID"
+	case DispidTune:
+		return "DispidTune"
+	case DispidTS:
+		return "DispidTS"
+	case DispidDevSAP:
+		return "DispidDevSAP"
+	case DispidClip:
+		return "DispidClip"
+	case DispidRequestedClipRect:
+		return "DispidRequestedClipRect"
+	case DispidClippedSourceRect:
+		return "DispidClippedSourceRect"
+	case DispidAvailableSourceRect:
+		return "DispidAvailableSourceRect"
+	case DispidMediaPosition:
+		return "DispidMediaPosition"
+	case DispidDevRun:
+		return "DispidDevRun"
+	case DispidDevPause:
+		return "DispidDevPause"
+	case DispidDevStop:
+		return "DispidDevStop"
+	case DispidCCEnable:
+		return "DispidCCEnable"
+	case DispidDevStep:
+		return "DispidDevStep"
+	case DispidDevCanStep:
+		return "DispidDevCanStep"
+	case DispidSourceSize:
+		return "DispidSourceSize"
+	case Dispid_playtitle:
+		return "Dispid_playtitle"
+	case Dispid_playchapterintitle:
+		return "Dispid_playchapterintitle"
+	case Dispid_playchapter:
+		return "Dispid_playchapter"
+	case Dispid_playchaptersautostop:
+		return "Dispid_playchaptersautostop"
+	case Dispid_playattime:
+		return "Dispid_playattime"
+	case Dispid_playattimeintitle:
+		return "Dispid_playattimeintitle"
+	case Dispid_playperiodintitleautostop:
+		return "Dispid_playperiodintitleautostop"
+	case Dispid_replaychapter:
+		return "Dispid_replaychapter"
+	case Dispid_playprevchapter:
+		return "Dispid_playprevchapter"
+	case Dispid_playnextchapter:
+		return "Dispid_playnextchapter"
+	case Dispid_playforwards:
+		return "Dispid_playforwards"
+	case Dispid_playbackwards:
+		return "Dispid_playbackwards"
+	case Dispid_stilloff:
+		return "Dispid_stilloff"
+	case Dispid_audiolanguage:
+		return "Dispid_audiolanguage"
+	case Dispid_showmenu:
+		return "Dispid_showmenu"
+	case Dispid_resume:
+		return "Dispid_resume"
+	case Dispid_returnfromsubmenu:
+		return "Dispid_returnfromsubmenu"
+	case Dispid_buttonsavailable:
+		return "Dispid_buttonsavailable"
+	case Dispid_currentbutton:
+		return "Dispid_currentbutton"
+	case Dispid_SelectAndActivateButton:
+		return "Dispid_SelectAndActivateButton"
+	case Dispid_ActivateButton:
+		return "Dispid_ActivateButton"
+	case Dispid_SelectRightButton:
+		return "Dispid_SelectRightButton"
+	case Dispid_SelectLeftButton:
+		return "Dispid_SelectLeftButton"
+	case Dispid_SelectLowerButton:
+		return "Dispid_SelectLowerButton"
+	case Dispid_SelectUpperButton:
+		return "Dispid_SelectUpperButton"
+	case Dispid_ActivateAtPosition:
+		return "Dispid_ActivateAtPosition"
+	case Dispid_SelectAtPosition:
+		return "Dispid_SelectAtPosition"
+	case Dispid_ButtonAtPosition:
+		return "Dispid_ButtonAtPosition"
+	case Dispid_NumberOfChapters:
+		return "Dispid_NumberOfChapters"
+	case Dispid_TotalTitleTime:
+		return "Dispid_TotalTitleTime"
+	case Dispid_TitlesAvailable:
+		return "Dispid_TitlesAvailable"
+	case Dispid_VolumesAvailable:
+		return "Dispid_VolumesAvailable"
+	case Dispid_CurrentVolume:
+		return "Dispid_CurrentVolume"
+	case Dispid_CurrentDiscSide:
+		return "Dispid_CurrentDiscSide"
+	case Dispid_CurrentDomain:
+		return "Dispid_CurrentDomain"
+	case Dispid_CurrentChapter:
+		return "Dispid_CurrentChapter"
+	case Dispid_CurrentTitle:
+		return "Dispid_CurrentTitle"
+	case Dispid_CurrentTime:
+		return "Dispid_CurrentTime"
+	case Dispid_FramesPerSecond:
+		return "Dispid_FramesPerSecond"
+	case Dispid_DVDTimeCode2bstr:
+		return "Dispid_DVDTimeCode2bstr"
+	case Dispid_DVDDirectory:
+		return "Dispid_DVDDirectory"
+	case Dispid_IsSubpictureStreamEnabled:
+		return "Dispid_IsSubpictureStreamEnabled"
+	case Dispid_IsAudioStreamEnabled:
+		return "Dispid_IsAudioStreamEnabled"
+	case Dispid_CurrentSubpictureStream:
+		return "Dispid_CurrentSubpictureStream"
+	case Dispid_SubpictureLanguage:
+		return "Dispid_SubpictureLanguage"
+	case Dispid_CurrentAudioStream:
+		return "Dispid_CurrentAudioStream"
+	case Dispid_AudioStreamsAvailable:
+		return "Dispid_AudioStreamsAvailable"
+	case Dispid_AnglesAvailable:
+		return "Dispid_AnglesAvailable"
+	case Dispid_CurrentAngle:
+		return "Dispid_CurrentAngle"
+	case Dispid_CCActive:
+		return "Dispid_CCActive"
+	case Dispid_CurrentCCService:
+		return "Dispid_CurrentCCService"
+	case Dispid_SubpictureStreamsAvailable:
+		return "Dispid_SubpictureStreamsAvailable"
+	case Dispid_SubpictureOn:
+		return "Dispid_SubpictureOn"
+	case Dispid_DVDUniqueID:
+		return "Dispid_DVDUniqueID"
+	case Dispid_EnableResetOnStop:
+		return "Dispid_EnableResetOnStop"
+	case Dispid_AcceptParentalLevelChange:
+		return "Dispid_AcceptParentalLevelChange"
+	case Dispid_NotifyParentalLevelChange:
+		return "Dispid_NotifyParentalLevelChange"
+	case Dispid_SelectParentalCountry:
+		return "Dispid_SelectParentalCountry"
+	case Dispid_SelectParentalLevel:
+		return "Dispid_SelectParentalLevel"
+	case Dispid_TitleParentalLevels:
+		return "Dispid_TitleParentalLevels"
+	case Dispid_PlayerParentalCountry:
+		return "Dispid_PlayerParentalCountry"
+	case Dispid_PlayerParentalLevel:
+		return "Dispid_PlayerParentalLevel"
+	case Dispid_Eject:
+		return "Dispid_Eject"
+	case Dispid_UOPValid:
+		return "Dispid_UOPValid"
+	case Dispid_SPRM:
+		return "Dispid_SPRM"
+	case Dispid_GPRM:
+		return "Dispid_GPRM"
+	case Dispid_DVDTextStringType:
+		return "Dispid_DVDTextStringType"
+	case Dispid_DVDTextString:
+		return "Dispid_DVDTextString"
+	case Dispid_DVDTextNumberOfStrings:
+		return "Dispid_DVDTextNumberOfStrings"
+	case Dispid_DVDTextNumberOfLanguages:
+		return "Dispid_DVDTextNumberOfLanguages"
+	case Dispid_DVDTextLanguageLCID:
+		return "Dispid_DVDTextLanguageLCID"
+	case Dispid_RegionChange:
+		return "Dispid_RegionChange"
+	case Dispid_DVDAdm:
+		return "Dispid_DVDAdm"
+	case Dispid_DeleteBookmark:
+		return "Dispid_DeleteBookmark"
+	case Dispid_RestoreBookmark:
+		return "Dispid_RestoreBookmark"
+	case Dispid_SaveBookmark:
+		return "Dispid_SaveBookmark"
+	case Dispid_SelectDefaultAudioLanguage:
+		return "Dispid_SelectDefaultAudioLanguage"
+	case Dispid_SelectDefaultSubpictureLanguage:
+		return "Dispid_SelectDefaultSubpictureLanguage"
+	case Dispid_PreferredSubpictureStream:
+		return "Dispid_PreferredSubpictureStream"
+	case Dispid_DefaultMenuLanguage:
+		return "Dispid_DefaultMenuLanguage"
+	case Dispid_DefaultSubpictureLanguage:
+		return "Dispid_DefaultSubpictureLanguage"
+	case Dispid_DefaultAudioLanguage:
+		return "Dispid_DefaultAudioLanguage"
+	case Dispid_DefaultSubpictureLanguageExt:
+		return "Dispid_DefaultSubpictureLanguageExt"
+	case Dispid_DefaultAudioLanguageExt:
+		return "Dispid_DefaultAudioLanguageExt"
+	case Dispid_LanguageFromLCID:
+		return "Dispid_LanguageFromLCID"
+	case Dispid_KaraokeAudioPresentationMode:
+		return "Dispid_KaraokeAudioPresentationMode"
+	case Dispid_KaraokeChannelContent:
+		return "Dispid_KaraokeChannelContent"
+	case Dispid_KaraokeChannelAssignment:
+		return "Dispid_KaraokeChannelAssignment"
+	case Dispid_RestorePreferredSettings:
+		return "Dispid_RestorePreferredSettings"
+	case Dispid_ButtonRect:
+		return "Dispid_ButtonRect"
+	case Dispid_DVDScreenInMouseCoordinates:
+		return "Dispid_DVDScreenInMouseCoordinates"
+	case Dispid_CustomCompositorClass:
+		return "Dispid_CustomCompositorClass"
+	case DispidCustomCompositorClass:
+		return "DispidCustomCompositorClass"
+	case Dispid_CustomCompositor:
+		return "Dispid_CustomCompositor"
+	case DispidMixerBitmap:
+		return "DispidMixerBitmap"
+	case Dispid_MixerBitmap:
+		return "Dispid_MixerBitmap"
+	case DispidMixerBitmapOpacity:
+		return "DispidMixerBitmapOpacity"
+	case DispidMixerBitmapRect:
+		return "DispidMixerBitmapRect"
+	case DispidSetupMixerBitmap:
+		return "DispidSetupMixerBitmap"
+	case DispidUsingOverlay:
+		return "DispidUsingOverlay"
+	case DispidDisplayChange:
+		return "DispidDisplayChange"
+	case DispidRePaint:
+		return "DispidRePaint"
+	case Dispid_IsEqualDevice:
+		return "Dispid_IsEqualDevice"
+	case Dispidrate:
+		return "Dispidrate"
+	case Dispidposition:
+		return "Dispidposition"
+	case Dispidpositionmode:
+		return "Dispidpositionmode"
+	case Dispidlength:
+		return "Dispidlength"
+	case DispidChangePassword:
+		return "DispidChangePassword"
+	case DispidSaveParentalLevel:
+		return "DispidSaveParentalLevel"
+	case DispidSaveParentalCountry:
+		return "DispidSaveParentalCountry"
+	case DispidConfirmPassword:
+		return "DispidConfirmPassword"
+	case DispidGetParentalLevel:
+		return "DispidGetParentalLevel"
+	case DispidGetParentalCountry:
+		return "DispidGetParentalCountry"
+	case DispidDefaultAudioLCID:
+		return "DispidDefaultAudioLCID"
+	case DispidDefaultSubpictureLCID:
+		return "DispidDefaultSubpictureLCID"
+	case DispidDefaultMenuLCID:
+		return "DispidDefaultMenuLCID"
+	case DispidBookmarkOnStop:
+		return "DispidBookmarkOnStop"
+	case DispidMaxVidRect:
+		return "DispidMaxVidRect"
+	case DispidMinVidRect:
+		return "DispidMinVidRect"
+	case DispidCapture:
+		return "DispidCapture"
+	case Dispid_DecimateInput:
+		return "Dispid_DecimateInput"
+	case DispidAlloctor:
+		return "DispidAlloctor"
+	case Dispid_Allocator:
+		return "Dispid_Allocator"
+	case DispidAllocPresentID:
+		return "DispidAllocPresentID"
+	case DispidSetAllocator:
+		return "DispidSetAllocator"
+	case Dispid_SetAllocator:
+		return "Dispid_SetAllocator"
+	case DispidStreamBufferSinkName:
+		return "DispidStreamBufferSinkName"
+	case DispidStreamBufferSourceName:
+		return "DispidStreamBufferSourceName"
+	case DispidStreamBufferContentRecording:
+		return "DispidStreamBufferContentRecording"
+	case DispidStreamBufferReferenceRecording:
+		return "DispidStreamBufferReferenceRecording"
+	case Dispidstarttime:
+		return "Dispidstarttime"
+	case Dispidstoptime:
+		return "Dispidstoptime"
+	case Dispidrecordingstopped:
+		return "Dispidrecordingstopped"
+	case Dispidrecordingstarted:
+		return "Dispidrecordingstarted"
+	case DispidNameSetLock:
+		return "DispidNameSetLock"
+	case Dispidrecordingtype:
+		return "Dispidrecordingtype"
+	case Dispidstart:
+		return "Dispidstart"
+	case DispidRecordingAttribute:
+		return "DispidRecordingAttribute"
+	case Dispid_RecordingAttribute:
+		return "Dispid_RecordingAttribute"
+	case DispidSBEConfigure:
+		return "DispidSBEConfigure"
+	case Dispid_CurrentRatings:
+		return "Dispid_CurrentRatings"
+	case Dispid_MaxRatingsLevel:
+		return "Dispid_MaxRatingsLevel"
+	case Dispid_audioencoderint:
+		return "Dispid_audioencoderint"
+	case Dispid_videoencoderint:
+		return "Dispid_videoencoderint"
+	case DispidService:
+		return "DispidService"
+	case Dispid_BlockUnrated:
+		return "Dispid_BlockUnrated"
+	case Dispid_UnratedDelay:
+		return "Dispid_UnratedDelay"
+	case Dispid_SuppressEffects:
+		return "Dispid_SuppressEffects"
+	case Dispidsbesource:
+		return "Dispidsbesource"
+	case DispidSetSinkFilter:
+		return "DispidSetSinkFilter"
+	case Dispid_SinkStreams:
+		return "Dispid_SinkStreams"
+	case DispidTVFormats:
+		return "DispidTVFormats"
+	case DispidModes:
+		return "DispidModes"
+	case DispidAuxInputs:
+		return "DispidAuxInputs"
+	case DispidTeleTextFilter:
+		return "DispidTeleTextFilter"
+	case Dispid_channelchangeint:
+		return "Dispid_channelchangeint"
+	case DispidUnlockProfile:
+		return "DispidUnlockProfile"
+	case Dispid_AddFilter:
+		return "Dispid_AddFilter"
+	case DispidSetMinSeek:
+		return "DispidSetMinSeek"
+	case DispidRateEx:
+		return "DispidRateEx"
+	case Dispidaudiocounter:
+		return "Dispidaudiocounter"
+	case Dispidvideocounter:
+		return "Dispidvideocounter"
+	case Dispidcccounter:
+		return "Dispidcccounter"
+	case Dispidwstcounter:
+		return "Dispidwstcounter"
+	case Dispid_audiocounter:
+		return "Dispid_audiocounter"
+	case Dispid_videocounter:
+		return "Dispid_videocounter"
+	case Dispid_cccounter:
+		return "Dispid_cccounter"
+	case Dispid_wstcounter:
+		return "Dispid_wstcounter"
+	case Dispidaudioanalysis:
+		return "Dispidaudioanalysis"
+	case Dispidvideoanalysis:
+		return "Dispidvideoanalysis"
+	case Dispiddataanalysis:
+		return "Dispiddataanalysis"
+	case Dispidaudio_analysis:
+		return "Dispidaudio_analysis"
+	case Dispidvideo_analysis:
+		return "Dispidvideo_analysis"
+	case Dispiddata_analysis:
+		return "Dispiddata_analysis"
+	case Dispid_resetFilterList:
+		return "Dispid_resetFilterList"
+	case DispidDevicePath:
+		return "DispidDevicePath"
+	case Dispid_SourceFilter:
+		return "Dispid_SourceFilter"
+	case Dispid__SourceFilter:
+		return "Dispid__SourceFilter"
+	case DispidUserEvent:
+		return "DispidUserEvent"
+	case Dispid_Bookmark:
+		return "Dispid_Bookmark"
+	case LastReservedDeviceDispid:
+		return "LastReservedDeviceDispid"
+	default:
+		return fmt.Sprintf("SegDispidList(%d)", int32(e))
+	}
+}
+
 type SegEventidList int32
 
 const (
@@ -1340,6 +3634,133 @@ const (
 	LastReservedDeviceEvent              SegEventidList = 16383
 )
 
+// String returns the SegEventidList constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SegEventidList) String() string {
+	switch e {
+	case EventidStateChange:
+		return "EventidStateChange"
+	case EventidOnTuneChanged:
+		return "EventidOnTuneChanged"
+	case EventidEndOfMedia:
+		return "EventidEndOfMedia"
+	case EventidDVDNotify:
+		return "EventidDVDNotify"
+	case EventidPlayForwards:
+		return "EventidPlayForwards"
+	case EventidPlayBackwards:
+		return "EventidPlayBackwards"
+	case EventidShowMenu:
+		return "EventidShowMenu"
+	case EventidResume:
+		return "EventidResume"
+	case EventidSelectOrActivateButton:
+		return "EventidSelectOrActivateButton"
+	case EventidStillOff:
+		return "EventidStillOff"
+	case EventidPauseOn:
+		return "EventidPauseOn"
+	case EventidChangeCurrentAudioStream:
+		return "EventidChangeCurrentAudioStream"
+	case EventidChangeCurrentSubpictureStream:
+		return "EventidChangeCurrentSubpictureStream"
+	case EventidChangeCurrentAngle:
+		return "EventidChangeCurrentAngle"
+	case EventidPlayAtTimeInTitle:
+		return "EventidPlayAtTimeInTitle"
+	case EventidPlayAtTime:
+		return "EventidPlayAtTime"
+	case EventidPlayChapterInTitle:
+		return "EventidPlayChapterInTitle"
+	case EventidPlayChapter:
+		return "EventidPlayChapter"
+	case EventidReplayChapter:
+		return "EventidReplayChapter"
+	case EventidPlayNextChapter:
+		return "EventidPlayNextChapter"
+	case EventidStop:
+		return "EventidStop"
+	case EventidReturnFromSubmenu:
+		return "EventidReturnFromSubmenu"
+	case EventidPlayTitle:
+		return "EventidPlayTitle"
+	case EventidPlayPrevChapter:
+		return "EventidPlayPrevChapter"
+	case EventidChangeKaraokePresMode:
+		return "EventidChangeKaraokePresMode"
+	case EventidChangeVideoPresMode:
+		return "EventidChangeVideoPresMode"
+	case EventidOverlayUnavailable:
+		return "EventidOverlayUnavailable"
+	case EventidSinkCertificateFailure:
+		return "EventidSinkCertificateFailure"
+	case EventidSinkCertificateSuccess:
+		return "EventidSinkCertificateSuccess"
+	case EventidSourceCertificateFailure:
+		return "EventidSourceCertificateFailure"
+	case EventidSourceCertificateSuccess:
+		return "EventidSourceCertificateSuccess"
+	case EventidRatingsBlocked:
+		return "EventidRatingsBlocked"
+	case EventidRatingsUnlocked:
+		return "EventidRatingsUnlocked"
+	case EventidRatingsChanged:
+		return "EventidRatingsChanged"
+	case EventidWriteFailure:
+		return "EventidWriteFailure"
+	case EventidTimeHole:
+		return "EventidTimeHole"
+	case EventidStaleDataRead:
+		return "EventidStaleDataRead"
+	case EventidContentBecomingStale:
+		return "EventidContentBecomingStale"
+	case EventidStaleFileDeleted:
+		return "EventidStaleFileDeleted"
+	case EventidEncryptionOn:
+		return "EventidEncryptionOn"
+	case EventidEncryptionOff:
+		return "EventidEncryptionOff"
+	case EventidRateChange:
+		return "EventidRateChange"
+	case EventidLicenseChange:
+		return "EventidLicenseChange"
+	case EventidCOPPBlocked:
+		return "EventidCOPPBlocked"
+	case EventidCOPPUnblocked:
+		return "EventidCOPPUnblocked"
+	case Dispidlicenseerrorcode:
+		return "Dispidlicenseerrorcode"
+	case EventidBroadcastEvent:
+		return "EventidBroadcastEvent"
+	case EventidBroadcastEventEx:
+		return "EventidBroadcastEventEx"
+	case EventidContentPrimarilyAudio:
+		return "EventidContentPrimarilyAudio"
+	case DispidAVDecAudioDualMonoEvent:
+		return "DispidAVDecAudioDualMonoEvent"
+	case DispidAVAudioSampleRateEvent:
+		return "DispidAVAudioSampleRateEvent"
+	case DispidAVAudioChannelConfigEvent:
+		return "DispidAVAudioChannelConfigEvent"
+	case DispidAVAudioChannelCountEvent:
+		return "DispidAVAudioChannelCountEvent"
+	case DispidAVDecCommonMeanBitRateEvent:
+		return "DispidAVDecCommonMeanBitRateEvent"
+	case DispidAVDDSurroundModeEvent:
+		return "DispidAVDDSurroundModeEvent"
+	case DispidAVDecCommonInputFormatEvent:
+		return "DispidAVDecCommonInputFormatEvent"
+	case DispidAVDecCommonOutputFormatEvent:
+		return "DispidAVDecCommonOutputFormatEvent"
+	case EventidWriteFailureClear:
+		return "EventidWriteFailureClear"
+	case LastReservedDeviceEvent:
+		return "LastReservedDeviceEvent"
+	default:
+		return fmt.Sprintf("SegEventidList(%d)", int32(e))
+	}
+}
+
 type SignalAndServiceStatusSpanningEvent_State int32
 
 const (
@@ -1352,6 +3773,29 @@ const (
 	SignalAndServiceStatusSpanningEvent_AllAVScrambled SignalAndServiceStatusSpanningEvent_State = 5
 )
 
+// String returns the SignalAndServiceStatusSpanningEvent_State constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SignalAndServiceStatusSpanningEvent_State) String() string {
+	switch e {
+	case SignalAndServiceStatusSpanningEvent_None:
+		return "SignalAndServiceStatusSpanningEvent_None"
+	case SignalAndServiceStatusSpanningEvent_Clear:
+		return "SignalAndServiceStatusSpanningEvent_Clear"
+	case SignalAndServiceStatusSpanningEvent_NoTVSignal:
+		return "SignalAndServiceStatusSpanningEvent_NoTVSignal"
+	case SignalAndServiceStatusSpanningEvent_ServiceOffAir:
+		return "SignalAndServiceStatusSpanningEvent_ServiceOffAir"
+	case SignalAndServiceStatusSpanningEvent_WeakTVSignal:
+		return "SignalAndServiceStatusSpanningEvent_WeakTVSignal"
+	case SignalAndServiceStatusSpanningEvent_NoSubscription:
+		return "SignalAndServiceStatusSpanningEvent_NoSubscription"
+	case SignalAndServiceStatusSpanningEvent_AllAVScrambled:
+		return "SignalAndServiceStatusSpanningEvent_AllAVScrambled"
+	default:
+		return fmt.Sprintf("SignalAndServiceStatusSpanningEvent_State(%d)", int32(e))
+	}
+}
+
 // SourceSizeList: https://learn.microsoft.com/windows/win32/api/segment/ne-segment-sourcesizelist
 type SourceSizeList int32
 
@@ -1360,6 +3804,21 @@ const (
 	SslClipByOverScan SourceSizeList = 1
 	SslClipByClipRect SourceSizeList = 2
 )
+
+// String returns the SourceSizeList constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SourceSizeList) String() string {
+	switch e {
+	case SslFullSize:
+		return "SslFullSize"
+	case SslClipByOverScan:
+		return "SslClipByOverScan"
+	case SslClipByClipRect:
+		return "SslClipByClipRect"
+	default:
+		return fmt.Sprintf("SourceSizeList(%d)", int32(e))
+	}
+}
 
 type VA_COLOR_PRIMARIES int32
 
@@ -1373,6 +3832,29 @@ const (
 	VA_PRIMARIES_H264_GENERIC_FILM       VA_COLOR_PRIMARIES = 8
 )
 
+// String returns the VA_COLOR_PRIMARIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VA_COLOR_PRIMARIES) String() string {
+	switch e {
+	case VA_PRIMARIES_ITU_R_BT_709:
+		return "VA_PRIMARIES_ITU_R_BT_709"
+	case VA_PRIMARIES_UNSPECIFIED:
+		return "VA_PRIMARIES_UNSPECIFIED"
+	case VA_PRIMARIES_ITU_R_BT_470_SYSTEM_M:
+		return "VA_PRIMARIES_ITU_R_BT_470_SYSTEM_M"
+	case VA_PRIMARIES_ITU_R_BT_470_SYSTEM_B_G:
+		return "VA_PRIMARIES_ITU_R_BT_470_SYSTEM_B_G"
+	case VA_PRIMARIES_SMPTE_170M:
+		return "VA_PRIMARIES_SMPTE_170M"
+	case VA_PRIMARIES_SMPTE_240M:
+		return "VA_PRIMARIES_SMPTE_240M"
+	case VA_PRIMARIES_H264_GENERIC_FILM:
+		return "VA_PRIMARIES_H264_GENERIC_FILM"
+	default:
+		return fmt.Sprintf("VA_COLOR_PRIMARIES(%d)", int32(e))
+	}
+}
+
 type VA_MATRIX_COEFFICIENTS int32
 
 const (
@@ -1385,6 +3867,31 @@ const (
 	VA_MATRIX_COEFF_SMPTE_240M              VA_MATRIX_COEFFICIENTS = 7
 	VA_MATRIX_COEFF_H264_YCgCo              VA_MATRIX_COEFFICIENTS = 8
 )
+
+// String returns the VA_MATRIX_COEFFICIENTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VA_MATRIX_COEFFICIENTS) String() string {
+	switch e {
+	case VA_MATRIX_COEFF_H264_RGB:
+		return "VA_MATRIX_COEFF_H264_RGB"
+	case VA_MATRIX_COEFF_ITU_R_BT_709:
+		return "VA_MATRIX_COEFF_ITU_R_BT_709"
+	case VA_MATRIX_COEFF_UNSPECIFIED:
+		return "VA_MATRIX_COEFF_UNSPECIFIED"
+	case VA_MATRIX_COEFF_FCC:
+		return "VA_MATRIX_COEFF_FCC"
+	case VA_MATRIX_COEFF_ITU_R_BT_470_SYSTEM_B_G:
+		return "VA_MATRIX_COEFF_ITU_R_BT_470_SYSTEM_B_G"
+	case VA_MATRIX_COEFF_SMPTE_170M:
+		return "VA_MATRIX_COEFF_SMPTE_170M"
+	case VA_MATRIX_COEFF_SMPTE_240M:
+		return "VA_MATRIX_COEFF_SMPTE_240M"
+	case VA_MATRIX_COEFF_H264_YCgCo:
+		return "VA_MATRIX_COEFF_H264_YCgCo"
+	default:
+		return fmt.Sprintf("VA_MATRIX_COEFFICIENTS(%d)", int32(e))
+	}
+}
 
 type VA_TRANSFER_CHARACTERISTICS int32
 
@@ -1400,6 +3907,33 @@ const (
 	VA_TRANSFER_CHARACTERISTICS_H264_LOG_316_TO_1       VA_TRANSFER_CHARACTERISTICS = 10
 )
 
+// String returns the VA_TRANSFER_CHARACTERISTICS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VA_TRANSFER_CHARACTERISTICS) String() string {
+	switch e {
+	case VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_709:
+		return "VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_709"
+	case VA_TRANSFER_CHARACTERISTICS_UNSPECIFIED:
+		return "VA_TRANSFER_CHARACTERISTICS_UNSPECIFIED"
+	case VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_470_SYSTEM_M:
+		return "VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_470_SYSTEM_M"
+	case VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_470_SYSTEM_B_G:
+		return "VA_TRANSFER_CHARACTERISTICS_ITU_R_BT_470_SYSTEM_B_G"
+	case VA_TRANSFER_CHARACTERISTICS_SMPTE_170M:
+		return "VA_TRANSFER_CHARACTERISTICS_SMPTE_170M"
+	case VA_TRANSFER_CHARACTERISTICS_SMPTE_240M:
+		return "VA_TRANSFER_CHARACTERISTICS_SMPTE_240M"
+	case VA_TRANSFER_CHARACTERISTICS_LINEAR:
+		return "VA_TRANSFER_CHARACTERISTICS_LINEAR"
+	case VA_TRANSFER_CHARACTERISTICS_H264_LOG_100_TO_1:
+		return "VA_TRANSFER_CHARACTERISTICS_H264_LOG_100_TO_1"
+	case VA_TRANSFER_CHARACTERISTICS_H264_LOG_316_TO_1:
+		return "VA_TRANSFER_CHARACTERISTICS_H264_LOG_316_TO_1"
+	default:
+		return fmt.Sprintf("VA_TRANSFER_CHARACTERISTICS(%d)", int32(e))
+	}
+}
+
 type VA_VIDEO_FORMAT int32
 
 const (
@@ -1410,3 +3944,24 @@ const (
 	VA_VIDEO_MAC         VA_VIDEO_FORMAT = 4
 	VA_VIDEO_UNSPECIFIED VA_VIDEO_FORMAT = 5
 )
+
+// String returns the VA_VIDEO_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VA_VIDEO_FORMAT) String() string {
+	switch e {
+	case VA_VIDEO_COMPONENT:
+		return "VA_VIDEO_COMPONENT"
+	case VA_VIDEO_PAL:
+		return "VA_VIDEO_PAL"
+	case VA_VIDEO_NTSC:
+		return "VA_VIDEO_NTSC"
+	case VA_VIDEO_SECAM:
+		return "VA_VIDEO_SECAM"
+	case VA_VIDEO_MAC:
+		return "VA_VIDEO_MAC"
+	case VA_VIDEO_UNSPECIFIED:
+		return "VA_VIDEO_UNSPECIFIED"
+	default:
+		return fmt.Sprintf("VA_VIDEO_FORMAT(%d)", int32(e))
+	}
+}

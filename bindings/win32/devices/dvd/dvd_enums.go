@@ -4,6 +4,10 @@
 
 package dvd
 
+import (
+	"fmt"
+)
+
 type DISC_CONTROL_BLOCK_TYPE int32
 
 const (
@@ -12,6 +16,23 @@ const (
 	SessionInfoDiscControlBlock  DISC_CONTROL_BLOCK_TYPE = 1396982528
 	DiscControlBlockList         DISC_CONTROL_BLOCK_TYPE = -1
 )
+
+// String returns the DISC_CONTROL_BLOCK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISC_CONTROL_BLOCK_TYPE) String() string {
+	switch e {
+	case FormattingDiscControlBlock:
+		return "FormattingDiscControlBlock"
+	case WriteInhibitDiscControlBlock:
+		return "WriteInhibitDiscControlBlock"
+	case SessionInfoDiscControlBlock:
+		return "SessionInfoDiscControlBlock"
+	case DiscControlBlockList:
+		return "DiscControlBlockList"
+	default:
+		return fmt.Sprintf("DISC_CONTROL_BLOCK_TYPE(%d)", int32(e))
+	}
+}
 
 type DVD_KEY_TYPE int32
 
@@ -27,6 +48,33 @@ const (
 	DvdInvalidateAGID DVD_KEY_TYPE = 63
 )
 
+// String returns the DVD_KEY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_KEY_TYPE) String() string {
+	switch e {
+	case DvdChallengeKey:
+		return "DvdChallengeKey"
+	case DvdBusKey1:
+		return "DvdBusKey1"
+	case DvdBusKey2:
+		return "DvdBusKey2"
+	case DvdTitleKey:
+		return "DvdTitleKey"
+	case DvdAsf:
+		return "DvdAsf"
+	case DvdSetRpcKey:
+		return "DvdSetRpcKey"
+	case DvdGetRpcKey:
+		return "DvdGetRpcKey"
+	case DvdDiskKey:
+		return "DvdDiskKey"
+	case DvdInvalidateAGID:
+		return "DvdInvalidateAGID"
+	default:
+		return fmt.Sprintf("DVD_KEY_TYPE(%d)", int32(e))
+	}
+}
+
 type DVD_STRUCTURE_FORMAT int32
 
 const (
@@ -37,3 +85,24 @@ const (
 	DvdManufacturerDescriptor DVD_STRUCTURE_FORMAT = 4
 	DvdMaxDescriptor          DVD_STRUCTURE_FORMAT = 5
 )
+
+// String returns the DVD_STRUCTURE_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_STRUCTURE_FORMAT) String() string {
+	switch e {
+	case DvdPhysicalDescriptor:
+		return "DvdPhysicalDescriptor"
+	case DvdCopyrightDescriptor:
+		return "DvdCopyrightDescriptor"
+	case DvdDiskKeyDescriptor:
+		return "DvdDiskKeyDescriptor"
+	case DvdBCADescriptor:
+		return "DvdBCADescriptor"
+	case DvdManufacturerDescriptor:
+		return "DvdManufacturerDescriptor"
+	case DvdMaxDescriptor:
+		return "DvdMaxDescriptor"
+	default:
+		return fmt.Sprintf("DVD_STRUCTURE_FORMAT(%d)", int32(e))
+	}
+}

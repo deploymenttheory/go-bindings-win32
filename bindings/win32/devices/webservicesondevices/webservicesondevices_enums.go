@@ -4,6 +4,10 @@
 
 package webservicesondevices
 
+import (
+	"fmt"
+)
+
 type DeviceDiscoveryMechanism int32
 
 const (
@@ -11,6 +15,21 @@ const (
 	DirectedDiscovery       DeviceDiscoveryMechanism = 1
 	SecureDirectedDiscovery DeviceDiscoveryMechanism = 2
 )
+
+// String returns the DeviceDiscoveryMechanism constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DeviceDiscoveryMechanism) String() string {
+	switch e {
+	case MulticastDiscovery:
+		return "MulticastDiscovery"
+	case DirectedDiscovery:
+		return "DirectedDiscovery"
+	case SecureDirectedDiscovery:
+		return "SecureDirectedDiscovery"
+	default:
+		return fmt.Sprintf("DeviceDiscoveryMechanism(%d)", int32(e))
+	}
+}
 
 // WSDEventType: https://learn.microsoft.com/windows/win32/api/wsdtypes/ne-wsdtypes-wsdeventtype
 type WSDEventType int32
@@ -23,6 +42,25 @@ const (
 	WSDET_RESPONSE_TIMEOUT     WSDEventType = 4
 )
 
+// String returns the WSDEventType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSDEventType) String() string {
+	switch e {
+	case WSDET_NONE:
+		return "WSDET_NONE"
+	case WSDET_INCOMING_MESSAGE:
+		return "WSDET_INCOMING_MESSAGE"
+	case WSDET_INCOMING_FAULT:
+		return "WSDET_INCOMING_FAULT"
+	case WSDET_TRANSMISSION_FAILURE:
+		return "WSDET_TRANSMISSION_FAILURE"
+	case WSDET_RESPONSE_TIMEOUT:
+		return "WSDET_RESPONSE_TIMEOUT"
+	default:
+		return fmt.Sprintf("WSDEventType(%d)", int32(e))
+	}
+}
+
 // WSDUdpMessageType: https://learn.microsoft.com/windows/win32/api/wsdbase/ne-wsdbase-wsdudpmessagetype
 type WSDUdpMessageType int32
 
@@ -30,6 +68,19 @@ const (
 	ONE_WAY WSDUdpMessageType = 0
 	TWO_WAY WSDUdpMessageType = 1
 )
+
+// String returns the WSDUdpMessageType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSDUdpMessageType) String() string {
+	switch e {
+	case ONE_WAY:
+		return "ONE_WAY"
+	case TWO_WAY:
+		return "TWO_WAY"
+	default:
+		return fmt.Sprintf("WSDUdpMessageType(%d)", int32(e))
+	}
+}
 
 type WSDXML_OP int32
 
@@ -83,6 +134,109 @@ const (
 	OpFormatMax             WSDXML_OP = 46
 )
 
+// String returns the WSDXML_OP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSDXML_OP) String() string {
+	switch e {
+	case OpNone:
+		return "OpNone"
+	case OpEndOfTable:
+		return "OpEndOfTable"
+	case OpBeginElement_:
+		return "OpBeginElement_"
+	case OpBeginAnyElement:
+		return "OpBeginAnyElement"
+	case OpEndElement:
+		return "OpEndElement"
+	case OpElement_:
+		return "OpElement_"
+	case OpAnyElement:
+		return "OpAnyElement"
+	case OpAnyElements:
+		return "OpAnyElements"
+	case OpAnyText:
+		return "OpAnyText"
+	case OpAttribute_:
+		return "OpAttribute_"
+	case OpBeginChoice:
+		return "OpBeginChoice"
+	case OpEndChoice:
+		return "OpEndChoice"
+	case OpBeginSequence:
+		return "OpBeginSequence"
+	case OpEndSequence:
+		return "OpEndSequence"
+	case OpBeginAll:
+		return "OpBeginAll"
+	case OpEndAll:
+		return "OpEndAll"
+	case OpAnything:
+		return "OpAnything"
+	case OpAnyNumber:
+		return "OpAnyNumber"
+	case OpOneOrMore:
+		return "OpOneOrMore"
+	case OpOptional:
+		return "OpOptional"
+	case OpFormatBool_:
+		return "OpFormatBool_"
+	case OpFormatInt8_:
+		return "OpFormatInt8_"
+	case OpFormatInt16_:
+		return "OpFormatInt16_"
+	case OpFormatInt32_:
+		return "OpFormatInt32_"
+	case OpFormatInt64_:
+		return "OpFormatInt64_"
+	case OpFormatUInt8_:
+		return "OpFormatUInt8_"
+	case OpFormatUInt16_:
+		return "OpFormatUInt16_"
+	case OpFormatUInt32_:
+		return "OpFormatUInt32_"
+	case OpFormatUInt64_:
+		return "OpFormatUInt64_"
+	case OpFormatUnicodeString_:
+		return "OpFormatUnicodeString_"
+	case OpFormatDom_:
+		return "OpFormatDom_"
+	case OpFormatStruct_:
+		return "OpFormatStruct_"
+	case OpFormatUri_:
+		return "OpFormatUri_"
+	case OpFormatUuidUri_:
+		return "OpFormatUuidUri_"
+	case OpFormatName_:
+		return "OpFormatName_"
+	case OpFormatListInsertTail_:
+		return "OpFormatListInsertTail_"
+	case OpFormatType_:
+		return "OpFormatType_"
+	case OpFormatDynamicType_:
+		return "OpFormatDynamicType_"
+	case OpFormatLookupType_:
+		return "OpFormatLookupType_"
+	case OpFormatDuration_:
+		return "OpFormatDuration_"
+	case OpFormatDateTime_:
+		return "OpFormatDateTime_"
+	case OpFormatFloat_:
+		return "OpFormatFloat_"
+	case OpFormatDouble_:
+		return "OpFormatDouble_"
+	case OpProcess_:
+		return "OpProcess_"
+	case OpQualifiedAttribute_:
+		return "OpQualifiedAttribute_"
+	case OpFormatXMLDeclaration_:
+		return "OpFormatXMLDeclaration_"
+	case OpFormatMax:
+		return "OpFormatMax"
+	default:
+		return fmt.Sprintf("WSDXML_OP(%d)", int32(e))
+	}
+}
+
 // WSD_CONFIG_PARAM_TYPE: https://learn.microsoft.com/windows/win32/api/wsdbase/ne-wsdbase-wsd_config_param_type
 type WSD_CONFIG_PARAM_TYPE int32
 
@@ -102,6 +256,41 @@ const (
 	WSD_SECURITY_USE_HTTP_CLIENT_AUTH                    WSD_CONFIG_PARAM_TYPE = 13
 )
 
+// String returns the WSD_CONFIG_PARAM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSD_CONFIG_PARAM_TYPE) String() string {
+	switch e {
+	case WSD_CONFIG_MAX_INBOUND_MESSAGE_SIZE:
+		return "WSD_CONFIG_MAX_INBOUND_MESSAGE_SIZE"
+	case WSD_CONFIG_MAX_OUTBOUND_MESSAGE_SIZE:
+		return "WSD_CONFIG_MAX_OUTBOUND_MESSAGE_SIZE"
+	case WSD_SECURITY_SSL_CERT_FOR_CLIENT_AUTH:
+		return "WSD_SECURITY_SSL_CERT_FOR_CLIENT_AUTH"
+	case WSD_SECURITY_SSL_SERVER_CERT_VALIDATION:
+		return "WSD_SECURITY_SSL_SERVER_CERT_VALIDATION"
+	case WSD_SECURITY_SSL_CLIENT_CERT_VALIDATION:
+		return "WSD_SECURITY_SSL_CLIENT_CERT_VALIDATION"
+	case WSD_SECURITY_SSL_NEGOTIATE_CLIENT_CERT:
+		return "WSD_SECURITY_SSL_NEGOTIATE_CLIENT_CERT"
+	case WSD_SECURITY_COMPACTSIG_SIGNING_CERT:
+		return "WSD_SECURITY_COMPACTSIG_SIGNING_CERT"
+	case WSD_SECURITY_COMPACTSIG_VALIDATION:
+		return "WSD_SECURITY_COMPACTSIG_VALIDATION"
+	case WSD_CONFIG_HOSTING_ADDRESSES:
+		return "WSD_CONFIG_HOSTING_ADDRESSES"
+	case WSD_CONFIG_DEVICE_ADDRESSES:
+		return "WSD_CONFIG_DEVICE_ADDRESSES"
+	case WSD_SECURITY_REQUIRE_HTTP_CLIENT_AUTH:
+		return "WSD_SECURITY_REQUIRE_HTTP_CLIENT_AUTH"
+	case WSD_SECURITY_REQUIRE_CLIENT_CERT_OR_HTTP_CLIENT_AUTH:
+		return "WSD_SECURITY_REQUIRE_CLIENT_CERT_OR_HTTP_CLIENT_AUTH"
+	case WSD_SECURITY_USE_HTTP_CLIENT_AUTH:
+		return "WSD_SECURITY_USE_HTTP_CLIENT_AUTH"
+	default:
+		return fmt.Sprintf("WSD_CONFIG_PARAM_TYPE(%d)", int32(e))
+	}
+}
+
 // WSD_PROTOCOL_TYPE: https://learn.microsoft.com/windows/win32/api/wsdtypes/ne-wsdtypes-wsd_protocol_type
 type WSD_PROTOCOL_TYPE int32
 
@@ -112,3 +301,22 @@ const (
 	WSD_PT_HTTPS WSD_PROTOCOL_TYPE = 4
 	WSD_PT_ALL   WSD_PROTOCOL_TYPE = 255
 )
+
+// String returns the WSD_PROTOCOL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSD_PROTOCOL_TYPE) String() string {
+	switch e {
+	case WSD_PT_NONE:
+		return "WSD_PT_NONE"
+	case WSD_PT_UDP:
+		return "WSD_PT_UDP"
+	case WSD_PT_HTTP:
+		return "WSD_PT_HTTP"
+	case WSD_PT_HTTPS:
+		return "WSD_PT_HTTPS"
+	case WSD_PT_ALL:
+		return "WSD_PT_ALL"
+	default:
+		return fmt.Sprintf("WSD_PROTOCOL_TYPE(%d)", int32(e))
+	}
+}

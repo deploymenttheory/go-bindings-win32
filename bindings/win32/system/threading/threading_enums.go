@@ -4,6 +4,11 @@
 
 package threading
 
+import (
+	"fmt"
+	"strings"
+)
+
 type AVRT_PRIORITY int32
 
 const (
@@ -14,6 +19,26 @@ const (
 	AVRT_PRIORITY_CRITICAL AVRT_PRIORITY = 2
 )
 
+// String returns the AVRT_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AVRT_PRIORITY) String() string {
+	switch e {
+	case AVRT_PRIORITY_VERYLOW:
+		return "AVRT_PRIORITY_VERYLOW"
+	case AVRT_PRIORITY_LOW:
+		return "AVRT_PRIORITY_LOW"
+	case AVRT_PRIORITY_NORMAL:
+		return "AVRT_PRIORITY_NORMAL"
+	case AVRT_PRIORITY_HIGH:
+		return "AVRT_PRIORITY_HIGH"
+	case AVRT_PRIORITY_CRITICAL:
+		return "AVRT_PRIORITY_CRITICAL"
+	default:
+		return fmt.Sprintf("AVRT_PRIORITY(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CREATE_EVENT uint32
 
 const (
@@ -21,12 +46,41 @@ const (
 	CREATE_EVENT_MANUAL_RESET CREATE_EVENT = 1
 )
 
+// String returns the CREATE_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATE_EVENT) String() string {
+	var parts []string
+	if e&CREATE_EVENT_INITIAL_SET != 0 {
+		parts = append(parts, "CREATE_EVENT_INITIAL_SET")
+	}
+	if e&CREATE_EVENT_MANUAL_RESET != 0 {
+		parts = append(parts, "CREATE_EVENT_MANUAL_RESET")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CREATE_PROCESS_LOGON_FLAGS uint32
 
 const (
 	LOGON_WITH_PROFILE        CREATE_PROCESS_LOGON_FLAGS = 1
 	LOGON_NETCREDENTIALS_ONLY CREATE_PROCESS_LOGON_FLAGS = 2
 )
+
+// String returns the CREATE_PROCESS_LOGON_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATE_PROCESS_LOGON_FLAGS) String() string {
+	switch e {
+	case LOGON_WITH_PROFILE:
+		return "LOGON_WITH_PROFILE"
+	case LOGON_NETCREDENTIALS_ONLY:
+		return "LOGON_NETCREDENTIALS_ONLY"
+	default:
+		return fmt.Sprintf("CREATE_PROCESS_LOGON_FLAGS(%d)", uint32(e))
+	}
+}
 
 type GET_GUI_RESOURCES_FLAGS uint32
 
@@ -38,7 +92,27 @@ const (
 	GR_USEROBJECTS_PEAK GET_GUI_RESOURCES_FLAGS = 4
 )
 
+// String returns the GET_GUI_RESOURCES_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_GUI_RESOURCES_FLAGS) String() string {
+	switch e {
+	case GR_GLOBAL:
+		return "GR_GLOBAL"
+	case GR_GDIOBJECTS:
+		return "GR_GDIOBJECTS"
+	case GR_GDIOBJECTS_PEAK:
+		return "GR_GDIOBJECTS_PEAK"
+	case GR_USEROBJECTS:
+		return "GR_USEROBJECTS"
+	case GR_USEROBJECTS_PEAK:
+		return "GR_USEROBJECTS_PEAK"
+	default:
+		return fmt.Sprintf("GET_GUI_RESOURCES_FLAGS(%d)", uint32(e))
+	}
+}
+
 // MACHINE_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/processthreadsapi/ne-processthreadsapi-machine_attributes
+// Bitmask — values may be combined with |.
 type MACHINE_ATTRIBUTES int32
 
 const (
@@ -46,6 +120,25 @@ const (
 	KernelEnabled  MACHINE_ATTRIBUTES = 2
 	Wow64Container MACHINE_ATTRIBUTES = 4
 )
+
+// String returns the MACHINE_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MACHINE_ATTRIBUTES) String() string {
+	var parts []string
+	if e&UserEnabled != 0 {
+		parts = append(parts, "UserEnabled")
+	}
+	if e&KernelEnabled != 0 {
+		parts = append(parts, "KernelEnabled")
+	}
+	if e&Wow64Container != 0 {
+		parts = append(parts, "Wow64Container")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type MEMORY_PRIORITY uint32
 
@@ -57,12 +150,44 @@ const (
 	MEMORY_PRIORITY_NORMAL       MEMORY_PRIORITY = 5
 )
 
+// String returns the MEMORY_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MEMORY_PRIORITY) String() string {
+	switch e {
+	case MEMORY_PRIORITY_VERY_LOW:
+		return "MEMORY_PRIORITY_VERY_LOW"
+	case MEMORY_PRIORITY_LOW:
+		return "MEMORY_PRIORITY_LOW"
+	case MEMORY_PRIORITY_MEDIUM:
+		return "MEMORY_PRIORITY_MEDIUM"
+	case MEMORY_PRIORITY_BELOW_NORMAL:
+		return "MEMORY_PRIORITY_BELOW_NORMAL"
+	case MEMORY_PRIORITY_NORMAL:
+		return "MEMORY_PRIORITY_NORMAL"
+	default:
+		return fmt.Sprintf("MEMORY_PRIORITY(%d)", uint32(e))
+	}
+}
+
 type POWER_REQUEST_CONTEXT_FLAGS uint32
 
 const (
 	POWER_REQUEST_CONTEXT_DETAILED_STRING POWER_REQUEST_CONTEXT_FLAGS = 2
 	POWER_REQUEST_CONTEXT_SIMPLE_STRING   POWER_REQUEST_CONTEXT_FLAGS = 1
 )
+
+// String returns the POWER_REQUEST_CONTEXT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_REQUEST_CONTEXT_FLAGS) String() string {
+	switch e {
+	case POWER_REQUEST_CONTEXT_DETAILED_STRING:
+		return "POWER_REQUEST_CONTEXT_DETAILED_STRING"
+	case POWER_REQUEST_CONTEXT_SIMPLE_STRING:
+		return "POWER_REQUEST_CONTEXT_SIMPLE_STRING"
+	default:
+		return fmt.Sprintf("POWER_REQUEST_CONTEXT_FLAGS(%d)", uint32(e))
+	}
+}
 
 type PROCESSOR_FEATURE_ID uint32
 
@@ -158,6 +283,194 @@ const (
 	PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE     PROCESSOR_FEATURE_ID = 88
 )
 
+// String returns the PROCESSOR_FEATURE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESSOR_FEATURE_ID) String() string {
+	switch e {
+	case PF_FLOATING_POINT_PRECISION_ERRATA:
+		return "PF_FLOATING_POINT_PRECISION_ERRATA"
+	case PF_FLOATING_POINT_EMULATED:
+		return "PF_FLOATING_POINT_EMULATED"
+	case PF_COMPARE_EXCHANGE_DOUBLE:
+		return "PF_COMPARE_EXCHANGE_DOUBLE"
+	case PF_MMX_INSTRUCTIONS_AVAILABLE:
+		return "PF_MMX_INSTRUCTIONS_AVAILABLE"
+	case PF_PPC_MOVEMEM_64BIT_OK:
+		return "PF_PPC_MOVEMEM_64BIT_OK"
+	case PF_ALPHA_BYTE_INSTRUCTIONS:
+		return "PF_ALPHA_BYTE_INSTRUCTIONS"
+	case PF_XMMI_INSTRUCTIONS_AVAILABLE:
+		return "PF_XMMI_INSTRUCTIONS_AVAILABLE"
+	case PF_3DNOW_INSTRUCTIONS_AVAILABLE:
+		return "PF_3DNOW_INSTRUCTIONS_AVAILABLE"
+	case PF_RDTSC_INSTRUCTION_AVAILABLE:
+		return "PF_RDTSC_INSTRUCTION_AVAILABLE"
+	case PF_PAE_ENABLED:
+		return "PF_PAE_ENABLED"
+	case PF_XMMI64_INSTRUCTIONS_AVAILABLE:
+		return "PF_XMMI64_INSTRUCTIONS_AVAILABLE"
+	case PF_SSE_DAZ_MODE_AVAILABLE:
+		return "PF_SSE_DAZ_MODE_AVAILABLE"
+	case PF_NX_ENABLED:
+		return "PF_NX_ENABLED"
+	case PF_SSE3_INSTRUCTIONS_AVAILABLE:
+		return "PF_SSE3_INSTRUCTIONS_AVAILABLE"
+	case PF_COMPARE_EXCHANGE128:
+		return "PF_COMPARE_EXCHANGE128"
+	case PF_COMPARE64_EXCHANGE128:
+		return "PF_COMPARE64_EXCHANGE128"
+	case PF_CHANNELS_ENABLED:
+		return "PF_CHANNELS_ENABLED"
+	case PF_XSAVE_ENABLED:
+		return "PF_XSAVE_ENABLED"
+	case PF_ARM_VFP_32_REGISTERS_AVAILABLE:
+		return "PF_ARM_VFP_32_REGISTERS_AVAILABLE"
+	case PF_ARM_NEON_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_NEON_INSTRUCTIONS_AVAILABLE"
+	case PF_SECOND_LEVEL_ADDRESS_TRANSLATION:
+		return "PF_SECOND_LEVEL_ADDRESS_TRANSLATION"
+	case PF_VIRT_FIRMWARE_ENABLED:
+		return "PF_VIRT_FIRMWARE_ENABLED"
+	case PF_RDWRFSGSBASE_AVAILABLE:
+		return "PF_RDWRFSGSBASE_AVAILABLE"
+	case PF_FASTFAIL_AVAILABLE:
+		return "PF_FASTFAIL_AVAILABLE"
+	case PF_ARM_DIVIDE_INSTRUCTION_AVAILABLE:
+		return "PF_ARM_DIVIDE_INSTRUCTION_AVAILABLE"
+	case PF_ARM_64BIT_LOADSTORE_ATOMIC:
+		return "PF_ARM_64BIT_LOADSTORE_ATOMIC"
+	case PF_ARM_EXTERNAL_CACHE_AVAILABLE:
+		return "PF_ARM_EXTERNAL_CACHE_AVAILABLE"
+	case PF_ARM_FMAC_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_FMAC_INSTRUCTIONS_AVAILABLE"
+	case PF_RDRAND_INSTRUCTION_AVAILABLE:
+		return "PF_RDRAND_INSTRUCTION_AVAILABLE"
+	case PF_ARM_V8_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_V8_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_V8_CRYPTO_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_V8_CRYPTO_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_V8_CRC32_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_V8_CRC32_INSTRUCTIONS_AVAILABLE"
+	case PF_RDTSCP_INSTRUCTION_AVAILABLE:
+		return "PF_RDTSCP_INSTRUCTION_AVAILABLE"
+	case PF_RDPID_INSTRUCTION_AVAILABLE:
+		return "PF_RDPID_INSTRUCTION_AVAILABLE"
+	case PF_ARM_V81_ATOMIC_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_V81_ATOMIC_INSTRUCTIONS_AVAILABLE"
+	case PF_MONITORX_INSTRUCTION_AVAILABLE:
+		return "PF_MONITORX_INSTRUCTION_AVAILABLE"
+	case PF_SSSE3_INSTRUCTIONS_AVAILABLE:
+		return "PF_SSSE3_INSTRUCTIONS_AVAILABLE"
+	case PF_SSE4_1_INSTRUCTIONS_AVAILABLE:
+		return "PF_SSE4_1_INSTRUCTIONS_AVAILABLE"
+	case PF_SSE4_2_INSTRUCTIONS_AVAILABLE:
+		return "PF_SSE4_2_INSTRUCTIONS_AVAILABLE"
+	case PF_AVX_INSTRUCTIONS_AVAILABLE:
+		return "PF_AVX_INSTRUCTIONS_AVAILABLE"
+	case PF_AVX2_INSTRUCTIONS_AVAILABLE:
+		return "PF_AVX2_INSTRUCTIONS_AVAILABLE"
+	case PF_AVX512F_INSTRUCTIONS_AVAILABLE:
+		return "PF_AVX512F_INSTRUCTIONS_AVAILABLE"
+	case PF_ERMS_AVAILABLE:
+		return "PF_ERMS_AVAILABLE"
+	case PF_ARM_V82_DP_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_V82_DP_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_V83_JSCVT_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_V83_JSCVT_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_V83_LRCPC_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_V83_LRCPC_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE2_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE2_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE2_1_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE2_1_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_AES_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_AES_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_PMULL128_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_PMULL128_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_BITPERM_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_BITPERM_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_BF16_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_BF16_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_EBF16_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_EBF16_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_B16B16_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_B16B16_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_SHA3_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_SHA3_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_SM4_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_SM4_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_I8MM_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_I8MM_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_F32MM_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_F32MM_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SVE_F64MM_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SVE_F64MM_INSTRUCTIONS_AVAILABLE"
+	case PF_BMI2_INSTRUCTIONS_AVAILABLE:
+		return "PF_BMI2_INSTRUCTIONS_AVAILABLE"
+	case PF_MOVDIR64B_INSTRUCTION_AVAILABLE:
+		return "PF_MOVDIR64B_INSTRUCTION_AVAILABLE"
+	case PF_ARM_LSE2_AVAILABLE:
+		return "PF_ARM_LSE2_AVAILABLE"
+	case PF_RESERVED_FEATURE:
+		return "PF_RESERVED_FEATURE"
+	case PF_ARM_SHA3_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SHA3_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SHA512_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SHA512_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_V82_I8MM_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_V82_I8MM_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_V82_FP16_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_V82_FP16_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_V86_BF16_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_V86_BF16_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_V86_EBF16_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_V86_EBF16_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME2_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME2_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME2_1_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME2_1_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME2_2_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME2_2_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_AES_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_AES_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_SBITPERM_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_SBITPERM_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_SF8MM4_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_SF8MM4_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_SF8MM8_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_SF8MM8_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_SF8DP2_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_SF8DP2_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_SF8DP4_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_SF8DP4_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_SF8FMA_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_SF8FMA_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_F8F32_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_F8F32_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_F8F16_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_F8F16_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_F16F16_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_F16F16_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_B16B16_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_B16B16_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_F64F64_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_F64F64_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_I16I64_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_I16I64_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE"
+	case PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE:
+		return "PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE"
+	default:
+		return fmt.Sprintf("PROCESSOR_FEATURE_ID(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PROCESS_ACCESS_RIGHTS uint32
 
 const (
@@ -184,6 +497,79 @@ const (
 	PROCESS_STANDARD_RIGHTS_REQUIRED  PROCESS_ACCESS_RIGHTS = 983040
 )
 
+// String returns the PROCESS_ACCESS_RIGHTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESS_ACCESS_RIGHTS) String() string {
+	var parts []string
+	if e&PROCESS_TERMINATE != 0 {
+		parts = append(parts, "PROCESS_TERMINATE")
+	}
+	if e&PROCESS_CREATE_THREAD != 0 {
+		parts = append(parts, "PROCESS_CREATE_THREAD")
+	}
+	if e&PROCESS_SET_SESSIONID != 0 {
+		parts = append(parts, "PROCESS_SET_SESSIONID")
+	}
+	if e&PROCESS_VM_OPERATION != 0 {
+		parts = append(parts, "PROCESS_VM_OPERATION")
+	}
+	if e&PROCESS_VM_READ != 0 {
+		parts = append(parts, "PROCESS_VM_READ")
+	}
+	if e&PROCESS_VM_WRITE != 0 {
+		parts = append(parts, "PROCESS_VM_WRITE")
+	}
+	if e&PROCESS_DUP_HANDLE != 0 {
+		parts = append(parts, "PROCESS_DUP_HANDLE")
+	}
+	if e&PROCESS_CREATE_PROCESS != 0 {
+		parts = append(parts, "PROCESS_CREATE_PROCESS")
+	}
+	if e&PROCESS_SET_QUOTA != 0 {
+		parts = append(parts, "PROCESS_SET_QUOTA")
+	}
+	if e&PROCESS_SET_INFORMATION != 0 {
+		parts = append(parts, "PROCESS_SET_INFORMATION")
+	}
+	if e&PROCESS_QUERY_INFORMATION != 0 {
+		parts = append(parts, "PROCESS_QUERY_INFORMATION")
+	}
+	if e&PROCESS_SUSPEND_RESUME != 0 {
+		parts = append(parts, "PROCESS_SUSPEND_RESUME")
+	}
+	if e&PROCESS_QUERY_LIMITED_INFORMATION != 0 {
+		parts = append(parts, "PROCESS_QUERY_LIMITED_INFORMATION")
+	}
+	if e&PROCESS_SET_LIMITED_INFORMATION != 0 {
+		parts = append(parts, "PROCESS_SET_LIMITED_INFORMATION")
+	}
+	if e&PROCESS_ALL_ACCESS != 0 {
+		parts = append(parts, "PROCESS_ALL_ACCESS")
+	}
+	if e&PROCESS_DELETE != 0 {
+		parts = append(parts, "PROCESS_DELETE")
+	}
+	if e&PROCESS_READ_CONTROL != 0 {
+		parts = append(parts, "PROCESS_READ_CONTROL")
+	}
+	if e&PROCESS_WRITE_DAC != 0 {
+		parts = append(parts, "PROCESS_WRITE_DAC")
+	}
+	if e&PROCESS_WRITE_OWNER != 0 {
+		parts = append(parts, "PROCESS_WRITE_OWNER")
+	}
+	if e&PROCESS_SYNCHRONIZE != 0 {
+		parts = append(parts, "PROCESS_SYNCHRONIZE")
+	}
+	if e&PROCESS_STANDARD_RIGHTS_REQUIRED != 0 {
+		parts = append(parts, "PROCESS_STANDARD_RIGHTS_REQUIRED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type PROCESS_AFFINITY_AUTO_UPDATE_FLAGS uint32
 
 const (
@@ -191,6 +577,20 @@ const (
 	PROCESS_AFFINITY_ENABLE_AUTO_UPDATE  PROCESS_AFFINITY_AUTO_UPDATE_FLAGS = 1
 )
 
+// String returns the PROCESS_AFFINITY_AUTO_UPDATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESS_AFFINITY_AUTO_UPDATE_FLAGS) String() string {
+	switch e {
+	case PROCESS_AFFINITY_DISABLE_AUTO_UPDATE:
+		return "PROCESS_AFFINITY_DISABLE_AUTO_UPDATE"
+	case PROCESS_AFFINITY_ENABLE_AUTO_UPDATE:
+		return "PROCESS_AFFINITY_ENABLE_AUTO_UPDATE"
+	default:
+		return fmt.Sprintf("PROCESS_AFFINITY_AUTO_UPDATE_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PROCESS_CREATION_FLAGS uint32
 
 const (
@@ -227,6 +627,110 @@ const (
 	CREATE_IGNORE_SYSTEM_DEFAULT     PROCESS_CREATION_FLAGS = 2147483648
 )
 
+// String returns the PROCESS_CREATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESS_CREATION_FLAGS) String() string {
+	var parts []string
+	if e&DEBUG_PROCESS != 0 {
+		parts = append(parts, "DEBUG_PROCESS")
+	}
+	if e&DEBUG_ONLY_THIS_PROCESS != 0 {
+		parts = append(parts, "DEBUG_ONLY_THIS_PROCESS")
+	}
+	if e&CREATE_SUSPENDED != 0 {
+		parts = append(parts, "CREATE_SUSPENDED")
+	}
+	if e&DETACHED_PROCESS != 0 {
+		parts = append(parts, "DETACHED_PROCESS")
+	}
+	if e&CREATE_NEW_CONSOLE != 0 {
+		parts = append(parts, "CREATE_NEW_CONSOLE")
+	}
+	if e&NORMAL_PRIORITY_CLASS != 0 {
+		parts = append(parts, "NORMAL_PRIORITY_CLASS")
+	}
+	if e&IDLE_PRIORITY_CLASS != 0 {
+		parts = append(parts, "IDLE_PRIORITY_CLASS")
+	}
+	if e&HIGH_PRIORITY_CLASS != 0 {
+		parts = append(parts, "HIGH_PRIORITY_CLASS")
+	}
+	if e&REALTIME_PRIORITY_CLASS != 0 {
+		parts = append(parts, "REALTIME_PRIORITY_CLASS")
+	}
+	if e&CREATE_NEW_PROCESS_GROUP != 0 {
+		parts = append(parts, "CREATE_NEW_PROCESS_GROUP")
+	}
+	if e&CREATE_UNICODE_ENVIRONMENT != 0 {
+		parts = append(parts, "CREATE_UNICODE_ENVIRONMENT")
+	}
+	if e&CREATE_SEPARATE_WOW_VDM != 0 {
+		parts = append(parts, "CREATE_SEPARATE_WOW_VDM")
+	}
+	if e&CREATE_SHARED_WOW_VDM != 0 {
+		parts = append(parts, "CREATE_SHARED_WOW_VDM")
+	}
+	if e&CREATE_FORCEDOS != 0 {
+		parts = append(parts, "CREATE_FORCEDOS")
+	}
+	if e&BELOW_NORMAL_PRIORITY_CLASS != 0 {
+		parts = append(parts, "BELOW_NORMAL_PRIORITY_CLASS")
+	}
+	if e&ABOVE_NORMAL_PRIORITY_CLASS != 0 {
+		parts = append(parts, "ABOVE_NORMAL_PRIORITY_CLASS")
+	}
+	if e&INHERIT_PARENT_AFFINITY != 0 {
+		parts = append(parts, "INHERIT_PARENT_AFFINITY")
+	}
+	if e&INHERIT_CALLER_PRIORITY != 0 {
+		parts = append(parts, "INHERIT_CALLER_PRIORITY")
+	}
+	if e&CREATE_PROTECTED_PROCESS != 0 {
+		parts = append(parts, "CREATE_PROTECTED_PROCESS")
+	}
+	if e&EXTENDED_STARTUPINFO_PRESENT != 0 {
+		parts = append(parts, "EXTENDED_STARTUPINFO_PRESENT")
+	}
+	if e&PROCESS_MODE_BACKGROUND_BEGIN != 0 {
+		parts = append(parts, "PROCESS_MODE_BACKGROUND_BEGIN")
+	}
+	if e&PROCESS_MODE_BACKGROUND_END != 0 {
+		parts = append(parts, "PROCESS_MODE_BACKGROUND_END")
+	}
+	if e&CREATE_SECURE_PROCESS != 0 {
+		parts = append(parts, "CREATE_SECURE_PROCESS")
+	}
+	if e&CREATE_BREAKAWAY_FROM_JOB != 0 {
+		parts = append(parts, "CREATE_BREAKAWAY_FROM_JOB")
+	}
+	if e&CREATE_PRESERVE_CODE_AUTHZ_LEVEL != 0 {
+		parts = append(parts, "CREATE_PRESERVE_CODE_AUTHZ_LEVEL")
+	}
+	if e&CREATE_DEFAULT_ERROR_MODE != 0 {
+		parts = append(parts, "CREATE_DEFAULT_ERROR_MODE")
+	}
+	if e&CREATE_NO_WINDOW != 0 {
+		parts = append(parts, "CREATE_NO_WINDOW")
+	}
+	if e&PROFILE_USER != 0 {
+		parts = append(parts, "PROFILE_USER")
+	}
+	if e&PROFILE_KERNEL != 0 {
+		parts = append(parts, "PROFILE_KERNEL")
+	}
+	if e&PROFILE_SERVER != 0 {
+		parts = append(parts, "PROFILE_SERVER")
+	}
+	if e&CREATE_IGNORE_SYSTEM_DEFAULT != 0 {
+		parts = append(parts, "CREATE_IGNORE_SYSTEM_DEFAULT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PROCESS_DEP_FLAGS uint32
 
 const (
@@ -234,6 +738,22 @@ const (
 	PROCESS_DEP_DISABLE_ATL_THUNK_EMULATION PROCESS_DEP_FLAGS = 2
 	PROCESS_DEP_NONE                        PROCESS_DEP_FLAGS = 0
 )
+
+// String returns the PROCESS_DEP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESS_DEP_FLAGS) String() string {
+	var parts []string
+	if e&PROCESS_DEP_ENABLE != 0 {
+		parts = append(parts, "PROCESS_DEP_ENABLE")
+	}
+	if e&PROCESS_DEP_DISABLE_ATL_THUNK_EMULATION != 0 {
+		parts = append(parts, "PROCESS_DEP_DISABLE_ATL_THUNK_EMULATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // PROCESS_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/processthreadsapi/ne-processthreadsapi-process_information_class
 type PROCESS_INFORMATION_CLASS int32
@@ -254,6 +774,41 @@ const (
 	ProcessInformationClassMax                 PROCESS_INFORMATION_CLASS = 12
 )
 
+// String returns the PROCESS_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESS_INFORMATION_CLASS) String() string {
+	switch e {
+	case ProcessMemoryPriority:
+		return "ProcessMemoryPriority"
+	case ProcessMemoryExhaustionInfo:
+		return "ProcessMemoryExhaustionInfo"
+	case ProcessAppMemoryInfo:
+		return "ProcessAppMemoryInfo"
+	case ProcessInPrivateInfo:
+		return "ProcessInPrivateInfo"
+	case ProcessPowerThrottling:
+		return "ProcessPowerThrottling"
+	case ProcessReservedValue1:
+		return "ProcessReservedValue1"
+	case ProcessTelemetryCoverageInfo:
+		return "ProcessTelemetryCoverageInfo"
+	case ProcessProtectionLevelInfo:
+		return "ProcessProtectionLevelInfo"
+	case ProcessLeapSecondInfo:
+		return "ProcessLeapSecondInfo"
+	case ProcessMachineTypeInfo:
+		return "ProcessMachineTypeInfo"
+	case ProcessOverrideSubsequentPrefetchParameter:
+		return "ProcessOverrideSubsequentPrefetchParameter"
+	case ProcessMaxOverridePrefetchParameter:
+		return "ProcessMaxOverridePrefetchParameter"
+	case ProcessInformationClassMax:
+		return "ProcessInformationClassMax"
+	default:
+		return fmt.Sprintf("PROCESS_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
+
 // PROCESS_MEMORY_EXHAUSTION_TYPE: https://learn.microsoft.com/windows/win32/api/processthreadsapi/ne-processthreadsapi-process_memory_exhaustion_type
 type PROCESS_MEMORY_EXHAUSTION_TYPE int32
 
@@ -261,6 +816,19 @@ const (
 	PMETypeFailFastOnCommitFailure PROCESS_MEMORY_EXHAUSTION_TYPE = 0
 	PMETypeMax                     PROCESS_MEMORY_EXHAUSTION_TYPE = 1
 )
+
+// String returns the PROCESS_MEMORY_EXHAUSTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESS_MEMORY_EXHAUSTION_TYPE) String() string {
+	switch e {
+	case PMETypeFailFastOnCommitFailure:
+		return "PMETypeFailFastOnCommitFailure"
+	case PMETypeMax:
+		return "PMETypeMax"
+	default:
+		return fmt.Sprintf("PROCESS_MEMORY_EXHAUSTION_TYPE(%d)", int32(e))
+	}
+}
 
 // PROCESS_MITIGATION_POLICY: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-process_mitigation_policy
 type PROCESS_MITIGATION_POLICY int32
@@ -288,12 +856,74 @@ const (
 	MaxProcessMitigationPolicy         PROCESS_MITIGATION_POLICY = 19
 )
 
+// String returns the PROCESS_MITIGATION_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESS_MITIGATION_POLICY) String() string {
+	switch e {
+	case ProcessDEPPolicy:
+		return "ProcessDEPPolicy"
+	case ProcessASLRPolicy:
+		return "ProcessASLRPolicy"
+	case ProcessDynamicCodePolicy:
+		return "ProcessDynamicCodePolicy"
+	case ProcessStrictHandleCheckPolicy:
+		return "ProcessStrictHandleCheckPolicy"
+	case ProcessSystemCallDisablePolicy:
+		return "ProcessSystemCallDisablePolicy"
+	case ProcessMitigationOptionsMask:
+		return "ProcessMitigationOptionsMask"
+	case ProcessExtensionPointDisablePolicy:
+		return "ProcessExtensionPointDisablePolicy"
+	case ProcessControlFlowGuardPolicy:
+		return "ProcessControlFlowGuardPolicy"
+	case ProcessSignaturePolicy:
+		return "ProcessSignaturePolicy"
+	case ProcessFontDisablePolicy:
+		return "ProcessFontDisablePolicy"
+	case ProcessImageLoadPolicy:
+		return "ProcessImageLoadPolicy"
+	case ProcessSystemCallFilterPolicy:
+		return "ProcessSystemCallFilterPolicy"
+	case ProcessPayloadRestrictionPolicy:
+		return "ProcessPayloadRestrictionPolicy"
+	case ProcessChildProcessPolicy:
+		return "ProcessChildProcessPolicy"
+	case ProcessSideChannelIsolationPolicy:
+		return "ProcessSideChannelIsolationPolicy"
+	case ProcessUserShadowStackPolicy:
+		return "ProcessUserShadowStackPolicy"
+	case ProcessRedirectionTrustPolicy:
+		return "ProcessRedirectionTrustPolicy"
+	case ProcessUserPointerAuthPolicy:
+		return "ProcessUserPointerAuthPolicy"
+	case ProcessSEHOPPolicy:
+		return "ProcessSEHOPPolicy"
+	case MaxProcessMitigationPolicy:
+		return "MaxProcessMitigationPolicy"
+	default:
+		return fmt.Sprintf("PROCESS_MITIGATION_POLICY(%d)", int32(e))
+	}
+}
+
 type PROCESS_NAME_FORMAT uint32
 
 const (
 	PROCESS_NAME_WIN32  PROCESS_NAME_FORMAT = 0
 	PROCESS_NAME_NATIVE PROCESS_NAME_FORMAT = 1
 )
+
+// String returns the PROCESS_NAME_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESS_NAME_FORMAT) String() string {
+	switch e {
+	case PROCESS_NAME_WIN32:
+		return "PROCESS_NAME_WIN32"
+	case PROCESS_NAME_NATIVE:
+		return "PROCESS_NAME_NATIVE"
+	default:
+		return fmt.Sprintf("PROCESS_NAME_FORMAT(%d)", uint32(e))
+	}
+}
 
 type PROCESS_PROTECTION_LEVEL uint32
 
@@ -309,6 +939,35 @@ const (
 	PROTECTION_LEVEL_PPL_APP           PROCESS_PROTECTION_LEVEL = 8
 	PROTECTION_LEVEL_NONE              PROCESS_PROTECTION_LEVEL = 4294967294
 )
+
+// String returns the PROCESS_PROTECTION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESS_PROTECTION_LEVEL) String() string {
+	switch e {
+	case PROTECTION_LEVEL_WINTCB_LIGHT:
+		return "PROTECTION_LEVEL_WINTCB_LIGHT"
+	case PROTECTION_LEVEL_WINDOWS:
+		return "PROTECTION_LEVEL_WINDOWS"
+	case PROTECTION_LEVEL_WINDOWS_LIGHT:
+		return "PROTECTION_LEVEL_WINDOWS_LIGHT"
+	case PROTECTION_LEVEL_ANTIMALWARE_LIGHT:
+		return "PROTECTION_LEVEL_ANTIMALWARE_LIGHT"
+	case PROTECTION_LEVEL_LSA_LIGHT:
+		return "PROTECTION_LEVEL_LSA_LIGHT"
+	case PROTECTION_LEVEL_WINTCB:
+		return "PROTECTION_LEVEL_WINTCB"
+	case PROTECTION_LEVEL_CODEGEN_LIGHT:
+		return "PROTECTION_LEVEL_CODEGEN_LIGHT"
+	case PROTECTION_LEVEL_AUTHENTICODE:
+		return "PROTECTION_LEVEL_AUTHENTICODE"
+	case PROTECTION_LEVEL_PPL_APP:
+		return "PROTECTION_LEVEL_PPL_APP"
+	case PROTECTION_LEVEL_NONE:
+		return "PROTECTION_LEVEL_NONE"
+	default:
+		return fmt.Sprintf("PROCESS_PROTECTION_LEVEL(%d)", uint32(e))
+	}
+}
 
 type PROC_THREAD_ATTRIBUTE_NUM uint32
 
@@ -337,6 +996,59 @@ const (
 	ProcThreadAttributeSveVectorLength              PROC_THREAD_ATTRIBUTE_NUM = 30
 )
 
+// String returns the PROC_THREAD_ATTRIBUTE_NUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROC_THREAD_ATTRIBUTE_NUM) String() string {
+	switch e {
+	case ProcThreadAttributeParentProcess:
+		return "ProcThreadAttributeParentProcess"
+	case ProcThreadAttributeHandleList:
+		return "ProcThreadAttributeHandleList"
+	case ProcThreadAttributeGroupAffinity:
+		return "ProcThreadAttributeGroupAffinity"
+	case ProcThreadAttributePreferredNode:
+		return "ProcThreadAttributePreferredNode"
+	case ProcThreadAttributeIdealProcessor:
+		return "ProcThreadAttributeIdealProcessor"
+	case ProcThreadAttributeUmsThread:
+		return "ProcThreadAttributeUmsThread"
+	case ProcThreadAttributeMitigationPolicy:
+		return "ProcThreadAttributeMitigationPolicy"
+	case ProcThreadAttributeSecurityCapabilities:
+		return "ProcThreadAttributeSecurityCapabilities"
+	case ProcThreadAttributeProtectionLevel:
+		return "ProcThreadAttributeProtectionLevel"
+	case ProcThreadAttributeJobList:
+		return "ProcThreadAttributeJobList"
+	case ProcThreadAttributeChildProcessPolicy:
+		return "ProcThreadAttributeChildProcessPolicy"
+	case ProcThreadAttributeAllApplicationPackagesPolicy:
+		return "ProcThreadAttributeAllApplicationPackagesPolicy"
+	case ProcThreadAttributeWin32kFilter:
+		return "ProcThreadAttributeWin32kFilter"
+	case ProcThreadAttributeSafeOpenPromptOriginClaim:
+		return "ProcThreadAttributeSafeOpenPromptOriginClaim"
+	case ProcThreadAttributeDesktopAppPolicy:
+		return "ProcThreadAttributeDesktopAppPolicy"
+	case ProcThreadAttributePseudoConsole:
+		return "ProcThreadAttributePseudoConsole"
+	case ProcThreadAttributeMitigationAuditPolicy:
+		return "ProcThreadAttributeMitigationAuditPolicy"
+	case ProcThreadAttributeMachineType:
+		return "ProcThreadAttributeMachineType"
+	case ProcThreadAttributeComponentFilter:
+		return "ProcThreadAttributeComponentFilter"
+	case ProcThreadAttributeEnableOptionalXStateFeatures:
+		return "ProcThreadAttributeEnableOptionalXStateFeatures"
+	case ProcThreadAttributeTrustedApp:
+		return "ProcThreadAttributeTrustedApp"
+	case ProcThreadAttributeSveVectorLength:
+		return "ProcThreadAttributeSveVectorLength"
+	default:
+		return fmt.Sprintf("PROC_THREAD_ATTRIBUTE_NUM(%d)", uint32(e))
+	}
+}
+
 // QUEUE_USER_APC_FLAGS: https://learn.microsoft.com/windows/win32/api/processthreadsapi/ne-processthreadsapi-queue_user_apc_flags
 type QUEUE_USER_APC_FLAGS int32
 
@@ -345,6 +1057,21 @@ const (
 	QUEUE_USER_APC_FLAGS_SPECIAL_USER_APC QUEUE_USER_APC_FLAGS = 1
 	QUEUE_USER_APC_CALLBACK_DATA_CONTEXT  QUEUE_USER_APC_FLAGS = 65536
 )
+
+// String returns the QUEUE_USER_APC_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QUEUE_USER_APC_FLAGS) String() string {
+	switch e {
+	case QUEUE_USER_APC_FLAGS_NONE:
+		return "QUEUE_USER_APC_FLAGS_NONE"
+	case QUEUE_USER_APC_FLAGS_SPECIAL_USER_APC:
+		return "QUEUE_USER_APC_FLAGS_SPECIAL_USER_APC"
+	case QUEUE_USER_APC_CALLBACK_DATA_CONTEXT:
+		return "QUEUE_USER_APC_CALLBACK_DATA_CONTEXT"
+	default:
+		return fmt.Sprintf("QUEUE_USER_APC_FLAGS(%d)", int32(e))
+	}
+}
 
 // RTWQ_WORKQUEUE_TYPE: https://learn.microsoft.com/windows/win32/api/rtworkq/ne-rtworkq-rtwq_workqueue_type
 type RTWQ_WORKQUEUE_TYPE int32
@@ -355,6 +1082,22 @@ const (
 	RTWQ_MULTITHREADED_WORKQUEUE RTWQ_WORKQUEUE_TYPE = 2
 )
 
+// String returns the RTWQ_WORKQUEUE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTWQ_WORKQUEUE_TYPE) String() string {
+	switch e {
+	case RTWQ_STANDARD_WORKQUEUE:
+		return "RTWQ_STANDARD_WORKQUEUE"
+	case RTWQ_WINDOW_WORKQUEUE:
+		return "RTWQ_WINDOW_WORKQUEUE"
+	case RTWQ_MULTITHREADED_WORKQUEUE:
+		return "RTWQ_MULTITHREADED_WORKQUEUE"
+	default:
+		return fmt.Sprintf("RTWQ_WORKQUEUE_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type STARTUPINFOW_FLAGS uint32
 
 const (
@@ -374,6 +1117,59 @@ const (
 	STARTF_USESTDHANDLES    STARTUPINFOW_FLAGS = 256
 )
 
+// String returns the STARTUPINFOW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STARTUPINFOW_FLAGS) String() string {
+	var parts []string
+	if e&STARTF_FORCEONFEEDBACK != 0 {
+		parts = append(parts, "STARTF_FORCEONFEEDBACK")
+	}
+	if e&STARTF_FORCEOFFFEEDBACK != 0 {
+		parts = append(parts, "STARTF_FORCEOFFFEEDBACK")
+	}
+	if e&STARTF_PREVENTPINNING != 0 {
+		parts = append(parts, "STARTF_PREVENTPINNING")
+	}
+	if e&STARTF_RUNFULLSCREEN != 0 {
+		parts = append(parts, "STARTF_RUNFULLSCREEN")
+	}
+	if e&STARTF_TITLEISAPPID != 0 {
+		parts = append(parts, "STARTF_TITLEISAPPID")
+	}
+	if e&STARTF_TITLEISLINKNAME != 0 {
+		parts = append(parts, "STARTF_TITLEISLINKNAME")
+	}
+	if e&STARTF_UNTRUSTEDSOURCE != 0 {
+		parts = append(parts, "STARTF_UNTRUSTEDSOURCE")
+	}
+	if e&STARTF_USECOUNTCHARS != 0 {
+		parts = append(parts, "STARTF_USECOUNTCHARS")
+	}
+	if e&STARTF_USEFILLATTRIBUTE != 0 {
+		parts = append(parts, "STARTF_USEFILLATTRIBUTE")
+	}
+	if e&STARTF_USEHOTKEY != 0 {
+		parts = append(parts, "STARTF_USEHOTKEY")
+	}
+	if e&STARTF_USEPOSITION != 0 {
+		parts = append(parts, "STARTF_USEPOSITION")
+	}
+	if e&STARTF_USESHOWWINDOW != 0 {
+		parts = append(parts, "STARTF_USESHOWWINDOW")
+	}
+	if e&STARTF_USESIZE != 0 {
+		parts = append(parts, "STARTF_USESIZE")
+	}
+	if e&STARTF_USESTDHANDLES != 0 {
+		parts = append(parts, "STARTF_USESTDHANDLES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SYNCHRONIZATION_ACCESS_RIGHTS uint32
 
 const (
@@ -393,6 +1189,59 @@ const (
 	SYNCHRONIZATION_SYNCHRONIZE  SYNCHRONIZATION_ACCESS_RIGHTS = 1048576
 )
 
+// String returns the SYNCHRONIZATION_ACCESS_RIGHTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCHRONIZATION_ACCESS_RIGHTS) String() string {
+	var parts []string
+	if e&EVENT_ALL_ACCESS != 0 {
+		parts = append(parts, "EVENT_ALL_ACCESS")
+	}
+	if e&EVENT_MODIFY_STATE != 0 {
+		parts = append(parts, "EVENT_MODIFY_STATE")
+	}
+	if e&MUTEX_ALL_ACCESS != 0 {
+		parts = append(parts, "MUTEX_ALL_ACCESS")
+	}
+	if e&MUTEX_MODIFY_STATE != 0 {
+		parts = append(parts, "MUTEX_MODIFY_STATE")
+	}
+	if e&SEMAPHORE_ALL_ACCESS != 0 {
+		parts = append(parts, "SEMAPHORE_ALL_ACCESS")
+	}
+	if e&SEMAPHORE_MODIFY_STATE != 0 {
+		parts = append(parts, "SEMAPHORE_MODIFY_STATE")
+	}
+	if e&TIMER_ALL_ACCESS != 0 {
+		parts = append(parts, "TIMER_ALL_ACCESS")
+	}
+	if e&TIMER_MODIFY_STATE != 0 {
+		parts = append(parts, "TIMER_MODIFY_STATE")
+	}
+	if e&TIMER_QUERY_STATE != 0 {
+		parts = append(parts, "TIMER_QUERY_STATE")
+	}
+	if e&SYNCHRONIZATION_DELETE != 0 {
+		parts = append(parts, "SYNCHRONIZATION_DELETE")
+	}
+	if e&SYNCHRONIZATION_READ_CONTROL != 0 {
+		parts = append(parts, "SYNCHRONIZATION_READ_CONTROL")
+	}
+	if e&SYNCHRONIZATION_WRITE_DAC != 0 {
+		parts = append(parts, "SYNCHRONIZATION_WRITE_DAC")
+	}
+	if e&SYNCHRONIZATION_WRITE_OWNER != 0 {
+		parts = append(parts, "SYNCHRONIZATION_WRITE_OWNER")
+	}
+	if e&SYNCHRONIZATION_SYNCHRONIZE != 0 {
+		parts = append(parts, "SYNCHRONIZATION_SYNCHRONIZE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type THREAD_ACCESS_RIGHTS uint32
 
 const (
@@ -417,6 +1266,74 @@ const (
 	THREAD_STANDARD_RIGHTS_REQUIRED  THREAD_ACCESS_RIGHTS = 983040
 )
 
+// String returns the THREAD_ACCESS_RIGHTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THREAD_ACCESS_RIGHTS) String() string {
+	var parts []string
+	if e&THREAD_TERMINATE != 0 {
+		parts = append(parts, "THREAD_TERMINATE")
+	}
+	if e&THREAD_SUSPEND_RESUME != 0 {
+		parts = append(parts, "THREAD_SUSPEND_RESUME")
+	}
+	if e&THREAD_GET_CONTEXT != 0 {
+		parts = append(parts, "THREAD_GET_CONTEXT")
+	}
+	if e&THREAD_SET_CONTEXT != 0 {
+		parts = append(parts, "THREAD_SET_CONTEXT")
+	}
+	if e&THREAD_SET_INFORMATION != 0 {
+		parts = append(parts, "THREAD_SET_INFORMATION")
+	}
+	if e&THREAD_QUERY_INFORMATION != 0 {
+		parts = append(parts, "THREAD_QUERY_INFORMATION")
+	}
+	if e&THREAD_SET_THREAD_TOKEN != 0 {
+		parts = append(parts, "THREAD_SET_THREAD_TOKEN")
+	}
+	if e&THREAD_IMPERSONATE != 0 {
+		parts = append(parts, "THREAD_IMPERSONATE")
+	}
+	if e&THREAD_DIRECT_IMPERSONATION != 0 {
+		parts = append(parts, "THREAD_DIRECT_IMPERSONATION")
+	}
+	if e&THREAD_SET_LIMITED_INFORMATION != 0 {
+		parts = append(parts, "THREAD_SET_LIMITED_INFORMATION")
+	}
+	if e&THREAD_QUERY_LIMITED_INFORMATION != 0 {
+		parts = append(parts, "THREAD_QUERY_LIMITED_INFORMATION")
+	}
+	if e&THREAD_RESUME != 0 {
+		parts = append(parts, "THREAD_RESUME")
+	}
+	if e&THREAD_ALL_ACCESS != 0 {
+		parts = append(parts, "THREAD_ALL_ACCESS")
+	}
+	if e&THREAD_DELETE != 0 {
+		parts = append(parts, "THREAD_DELETE")
+	}
+	if e&THREAD_READ_CONTROL != 0 {
+		parts = append(parts, "THREAD_READ_CONTROL")
+	}
+	if e&THREAD_WRITE_DAC != 0 {
+		parts = append(parts, "THREAD_WRITE_DAC")
+	}
+	if e&THREAD_WRITE_OWNER != 0 {
+		parts = append(parts, "THREAD_WRITE_OWNER")
+	}
+	if e&THREAD_SYNCHRONIZE != 0 {
+		parts = append(parts, "THREAD_SYNCHRONIZE")
+	}
+	if e&THREAD_STANDARD_RIGHTS_REQUIRED != 0 {
+		parts = append(parts, "THREAD_STANDARD_RIGHTS_REQUIRED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type THREAD_CREATION_FLAGS uint32
 
 const (
@@ -424,6 +1341,22 @@ const (
 	THREAD_CREATE_SUSPENDED           THREAD_CREATION_FLAGS = 4
 	STACK_SIZE_PARAM_IS_A_RESERVATION THREAD_CREATION_FLAGS = 65536
 )
+
+// String returns the THREAD_CREATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THREAD_CREATION_FLAGS) String() string {
+	var parts []string
+	if e&THREAD_CREATE_SUSPENDED != 0 {
+		parts = append(parts, "THREAD_CREATE_SUSPENDED")
+	}
+	if e&STACK_SIZE_PARAM_IS_A_RESERVATION != 0 {
+		parts = append(parts, "STACK_SIZE_PARAM_IS_A_RESERVATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // THREAD_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/processthreadsapi/ne-processthreadsapi-thread_information_class
 type THREAD_INFORMATION_CLASS int32
@@ -435,6 +1368,25 @@ const (
 	ThreadPowerThrottling     THREAD_INFORMATION_CLASS = 3
 	ThreadInformationClassMax THREAD_INFORMATION_CLASS = 4
 )
+
+// String returns the THREAD_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THREAD_INFORMATION_CLASS) String() string {
+	switch e {
+	case ThreadMemoryPriority:
+		return "ThreadMemoryPriority"
+	case ThreadAbsoluteCpuPriority:
+		return "ThreadAbsoluteCpuPriority"
+	case ThreadDynamicCodePolicy:
+		return "ThreadDynamicCodePolicy"
+	case ThreadPowerThrottling:
+		return "ThreadPowerThrottling"
+	case ThreadInformationClassMax:
+		return "ThreadInformationClassMax"
+	default:
+		return fmt.Sprintf("THREAD_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
 
 type THREAD_PRIORITY int32
 
@@ -451,6 +1403,33 @@ const (
 	THREAD_PRIORITY_TIME_CRITICAL THREAD_PRIORITY = 15
 )
 
+// String returns the THREAD_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THREAD_PRIORITY) String() string {
+	switch e {
+	case THREAD_MODE_BACKGROUND_BEGIN:
+		return "THREAD_MODE_BACKGROUND_BEGIN"
+	case THREAD_MODE_BACKGROUND_END:
+		return "THREAD_MODE_BACKGROUND_END"
+	case THREAD_PRIORITY_ABOVE_NORMAL:
+		return "THREAD_PRIORITY_ABOVE_NORMAL"
+	case THREAD_PRIORITY_BELOW_NORMAL:
+		return "THREAD_PRIORITY_BELOW_NORMAL"
+	case THREAD_PRIORITY_HIGHEST:
+		return "THREAD_PRIORITY_HIGHEST"
+	case THREAD_PRIORITY_IDLE:
+		return "THREAD_PRIORITY_IDLE"
+	case THREAD_PRIORITY_MIN:
+		return "THREAD_PRIORITY_MIN"
+	case THREAD_PRIORITY_NORMAL:
+		return "THREAD_PRIORITY_NORMAL"
+	case THREAD_PRIORITY_TIME_CRITICAL:
+		return "THREAD_PRIORITY_TIME_CRITICAL"
+	default:
+		return fmt.Sprintf("THREAD_PRIORITY(%d)", int32(e))
+	}
+}
+
 type TP_CALLBACK_PRIORITY int32
 
 const (
@@ -460,6 +1439,23 @@ const (
 	TP_CALLBACK_PRIORITY_INVALID TP_CALLBACK_PRIORITY = 3
 	TP_CALLBACK_PRIORITY_COUNT   TP_CALLBACK_PRIORITY = 3
 )
+
+// String returns the TP_CALLBACK_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TP_CALLBACK_PRIORITY) String() string {
+	switch e {
+	case TP_CALLBACK_PRIORITY_HIGH:
+		return "TP_CALLBACK_PRIORITY_HIGH"
+	case TP_CALLBACK_PRIORITY_NORMAL:
+		return "TP_CALLBACK_PRIORITY_NORMAL"
+	case TP_CALLBACK_PRIORITY_LOW:
+		return "TP_CALLBACK_PRIORITY_LOW"
+	case TP_CALLBACK_PRIORITY_INVALID:
+		return "TP_CALLBACK_PRIORITY_INVALID"
+	default:
+		return fmt.Sprintf("TP_CALLBACK_PRIORITY(%d)", int32(e))
+	}
+}
 
 type UMS_THREAD_INFO_CLASS int32
 
@@ -474,6 +1470,32 @@ const (
 	UmsThreadMaxInfoClass     UMS_THREAD_INFO_CLASS = 7
 )
 
+// String returns the UMS_THREAD_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UMS_THREAD_INFO_CLASS) String() string {
+	switch e {
+	case UmsThreadInvalidInfoClass:
+		return "UmsThreadInvalidInfoClass"
+	case UmsThreadUserContext:
+		return "UmsThreadUserContext"
+	case UmsThreadPriority:
+		return "UmsThreadPriority"
+	case UmsThreadAffinity:
+		return "UmsThreadAffinity"
+	case UmsThreadTeb:
+		return "UmsThreadTeb"
+	case UmsThreadIsSuspended:
+		return "UmsThreadIsSuspended"
+	case UmsThreadIsTerminated:
+		return "UmsThreadIsTerminated"
+	case UmsThreadMaxInfoClass:
+		return "UmsThreadMaxInfoClass"
+	default:
+		return fmt.Sprintf("UMS_THREAD_INFO_CLASS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WORKER_THREAD_FLAGS uint32
 
 const (
@@ -486,3 +1508,34 @@ const (
 	WT_TRANSFER_IMPERSONATION    WORKER_THREAD_FLAGS = 256
 	WT_EXECUTEINTIMERTHREAD      WORKER_THREAD_FLAGS = 32
 )
+
+// String returns the WORKER_THREAD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WORKER_THREAD_FLAGS) String() string {
+	var parts []string
+	if e&WT_EXECUTEINIOTHREAD != 0 {
+		parts = append(parts, "WT_EXECUTEINIOTHREAD")
+	}
+	if e&WT_EXECUTEINPERSISTENTTHREAD != 0 {
+		parts = append(parts, "WT_EXECUTEINPERSISTENTTHREAD")
+	}
+	if e&WT_EXECUTEINWAITTHREAD != 0 {
+		parts = append(parts, "WT_EXECUTEINWAITTHREAD")
+	}
+	if e&WT_EXECUTELONGFUNCTION != 0 {
+		parts = append(parts, "WT_EXECUTELONGFUNCTION")
+	}
+	if e&WT_EXECUTEONLYONCE != 0 {
+		parts = append(parts, "WT_EXECUTEONLYONCE")
+	}
+	if e&WT_TRANSFER_IMPERSONATION != 0 {
+		parts = append(parts, "WT_TRANSFER_IMPERSONATION")
+	}
+	if e&WT_EXECUTEINTIMERTHREAD != 0 {
+		parts = append(parts, "WT_EXECUTEINTIMERTHREAD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

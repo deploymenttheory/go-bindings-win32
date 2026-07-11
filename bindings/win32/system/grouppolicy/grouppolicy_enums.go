@@ -4,6 +4,11 @@
 
 package grouppolicy
 
+import (
+	"fmt"
+	"strings"
+)
+
 type APPSTATE int32
 
 const (
@@ -11,6 +16,21 @@ const (
 	ASSIGNED  APPSTATE = 1
 	PUBLISHED APPSTATE = 2
 )
+
+// String returns the APPSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPSTATE) String() string {
+	switch e {
+	case ABSENT:
+		return "ABSENT"
+	case ASSIGNED:
+		return "ASSIGNED"
+	case PUBLISHED:
+		return "PUBLISHED"
+	default:
+		return fmt.Sprintf("APPSTATE(%d)", int32(e))
+	}
+}
 
 // GPMBackupType: https://learn.microsoft.com/windows/win32/api/gpmgmt/ne-gpmgmt-gpmbackuptype
 type GPMBackupType int32
@@ -20,6 +40,19 @@ const (
 	TypeStarterGPO GPMBackupType = 1
 )
 
+// String returns the GPMBackupType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPMBackupType) String() string {
+	switch e {
+	case TypeGPO:
+		return "TypeGPO"
+	case TypeStarterGPO:
+		return "TypeStarterGPO"
+	default:
+		return fmt.Sprintf("GPMBackupType(%d)", int32(e))
+	}
+}
+
 type GPMDestinationOption int32
 
 const (
@@ -28,6 +61,23 @@ const (
 	OpDestinationByRelativeName GPMDestinationOption = 2
 	OpDestinationSet            GPMDestinationOption = 3
 )
+
+// String returns the GPMDestinationOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPMDestinationOption) String() string {
+	switch e {
+	case OpDestinationSameAsSource:
+		return "OpDestinationSameAsSource"
+	case OpDestinationNone:
+		return "OpDestinationNone"
+	case OpDestinationByRelativeName:
+		return "OpDestinationByRelativeName"
+	case OpDestinationSet:
+		return "OpDestinationSet"
+	default:
+		return fmt.Sprintf("GPMDestinationOption(%d)", int32(e))
+	}
+}
 
 type GPMEntryType int32
 
@@ -40,6 +90,29 @@ const (
 	TypeUNCPath        GPMEntryType = 5
 	TypeUnknown        GPMEntryType = 6
 )
+
+// String returns the GPMEntryType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPMEntryType) String() string {
+	switch e {
+	case TypeUser:
+		return "TypeUser"
+	case TypeComputer:
+		return "TypeComputer"
+	case TypeLocalGroup:
+		return "TypeLocalGroup"
+	case TypeGlobalGroup:
+		return "TypeGlobalGroup"
+	case TypeUniversalGroup:
+		return "TypeUniversalGroup"
+	case TypeUNCPath:
+		return "TypeUNCPath"
+	case TypeUnknown:
+		return "TypeUnknown"
+	default:
+		return fmt.Sprintf("GPMEntryType(%d)", int32(e))
+	}
+}
 
 // GPMPermissionType: https://learn.microsoft.com/windows/win32/api/gpmgmt/ne-gpmgmt-gpmpermissiontype
 type GPMPermissionType int32
@@ -66,6 +139,53 @@ const (
 	PermSOMStarterGPOCreate      GPMPermissionType = 1049856
 )
 
+// String returns the GPMPermissionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPMPermissionType) String() string {
+	switch e {
+	case PermGPOApply:
+		return "PermGPOApply"
+	case PermGPORead:
+		return "PermGPORead"
+	case PermGPOEdit:
+		return "PermGPOEdit"
+	case PermGPOEditSecurityAndDelete:
+		return "PermGPOEditSecurityAndDelete"
+	case PermGPOCustom:
+		return "PermGPOCustom"
+	case PermWMIFilterEdit:
+		return "PermWMIFilterEdit"
+	case PermWMIFilterFullControl:
+		return "PermWMIFilterFullControl"
+	case PermWMIFilterCustom:
+		return "PermWMIFilterCustom"
+	case PermSOMLink:
+		return "PermSOMLink"
+	case PermSOMLogging:
+		return "PermSOMLogging"
+	case PermSOMPlanning:
+		return "PermSOMPlanning"
+	case PermSOMWMICreate:
+		return "PermSOMWMICreate"
+	case PermSOMWMIFullControl:
+		return "PermSOMWMIFullControl"
+	case PermSOMGPOCreate:
+		return "PermSOMGPOCreate"
+	case PermStarterGPORead:
+		return "PermStarterGPORead"
+	case PermStarterGPOEdit:
+		return "PermStarterGPOEdit"
+	case PermStarterGPOFullControl:
+		return "PermStarterGPOFullControl"
+	case PermStarterGPOCustom:
+		return "PermStarterGPOCustom"
+	case PermSOMStarterGPOCreate:
+		return "PermSOMStarterGPOCreate"
+	default:
+		return fmt.Sprintf("GPMPermissionType(%d)", int32(e))
+	}
+}
+
 type GPMRSOPMode int32
 
 const (
@@ -73,6 +193,21 @@ const (
 	RsopPlanning GPMRSOPMode = 1
 	RsopLogging  GPMRSOPMode = 2
 )
+
+// String returns the GPMRSOPMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPMRSOPMode) String() string {
+	switch e {
+	case RsopUnknown:
+		return "RsopUnknown"
+	case RsopPlanning:
+		return "RsopPlanning"
+	case RsopLogging:
+		return "RsopLogging"
+	default:
+		return fmt.Sprintf("GPMRSOPMode(%d)", int32(e))
+	}
+}
 
 type GPMReportType int32
 
@@ -85,6 +220,27 @@ const (
 	RepClientHealthRefreshXML GPMReportType = 5
 )
 
+// String returns the GPMReportType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPMReportType) String() string {
+	switch e {
+	case RepXML:
+		return "RepXML"
+	case RepHTML:
+		return "RepHTML"
+	case RepInfraXML:
+		return "RepInfraXML"
+	case RepInfraRefreshXML:
+		return "RepInfraRefreshXML"
+	case RepClientHealthXML:
+		return "RepClientHealthXML"
+	case RepClientHealthRefreshXML:
+		return "RepClientHealthRefreshXML"
+	default:
+		return fmt.Sprintf("GPMReportType(%d)", int32(e))
+	}
+}
+
 // GPMReportingOptions: https://learn.microsoft.com/windows/win32/api/gpmgmt/ne-gpmgmt-gpmreportingoptions
 type GPMReportingOptions int32
 
@@ -92,6 +248,19 @@ const (
 	OpReportLegacy   GPMReportingOptions = 0
 	OpReportComments GPMReportingOptions = 1
 )
+
+// String returns the GPMReportingOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPMReportingOptions) String() string {
+	switch e {
+	case OpReportLegacy:
+		return "OpReportLegacy"
+	case OpReportComments:
+		return "OpReportComments"
+	default:
+		return fmt.Sprintf("GPMReportingOptions(%d)", int32(e))
+	}
+}
 
 type GPMSOMType int32
 
@@ -101,6 +270,21 @@ const (
 	SomOU     GPMSOMType = 2
 )
 
+// String returns the GPMSOMType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPMSOMType) String() string {
+	switch e {
+	case SomSite:
+		return "SomSite"
+	case SomDomain:
+		return "SomDomain"
+	case SomOU:
+		return "SomOU"
+	default:
+		return fmt.Sprintf("GPMSOMType(%d)", int32(e))
+	}
+}
+
 type GPMSearchOperation int32
 
 const (
@@ -109,6 +293,23 @@ const (
 	OpNotContains GPMSearchOperation = 2
 	OpNotEquals   GPMSearchOperation = 3
 )
+
+// String returns the GPMSearchOperation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPMSearchOperation) String() string {
+	switch e {
+	case OpEquals:
+		return "OpEquals"
+	case OpContains:
+		return "OpContains"
+	case OpNotContains:
+		return "OpNotContains"
+	case OpNotEquals:
+		return "OpNotEquals"
+	default:
+		return fmt.Sprintf("GPMSearchOperation(%d)", int32(e))
+	}
+}
 
 // GPMSearchProperty: https://learn.microsoft.com/windows/win32/api/gpmgmt/ne-gpmgmt-gpmsearchproperty
 type GPMSearchProperty int32
@@ -131,6 +332,45 @@ const (
 	StarterGPODomain               GPMSearchProperty = 14
 )
 
+// String returns the GPMSearchProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPMSearchProperty) String() string {
+	switch e {
+	case GpoPermissions:
+		return "GpoPermissions"
+	case GpoEffectivePermissions:
+		return "GpoEffectivePermissions"
+	case GpoDisplayName:
+		return "GpoDisplayName"
+	case GpoWMIFilter:
+		return "GpoWMIFilter"
+	case GpoID:
+		return "GpoID"
+	case GpoComputerExtensions:
+		return "GpoComputerExtensions"
+	case GpoUserExtensions:
+		return "GpoUserExtensions"
+	case SomLinks:
+		return "SomLinks"
+	case GpoDomain:
+		return "GpoDomain"
+	case BackupMostRecent:
+		return "BackupMostRecent"
+	case StarterGPOPermissions:
+		return "StarterGPOPermissions"
+	case StarterGPOEffectivePermissions:
+		return "StarterGPOEffectivePermissions"
+	case StarterGPODisplayName:
+		return "StarterGPODisplayName"
+	case StarterGPOID:
+		return "StarterGPOID"
+	case StarterGPODomain:
+		return "StarterGPODomain"
+	default:
+		return fmt.Sprintf("GPMSearchProperty(%d)", int32(e))
+	}
+}
+
 // GPMStarterGPOType: https://learn.microsoft.com/windows/win32/api/gpmgmt/ne-gpmgmt-gpmstartergpotype
 type GPMStarterGPOType int32
 
@@ -138,6 +378,19 @@ const (
 	TypeSystem GPMStarterGPOType = 0
 	TypeCustom GPMStarterGPOType = 1
 )
+
+// String returns the GPMStarterGPOType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPMStarterGPOType) String() string {
+	switch e {
+	case TypeSystem:
+		return "TypeSystem"
+	case TypeCustom:
+		return "TypeCustom"
+	default:
+		return fmt.Sprintf("GPMStarterGPOType(%d)", int32(e))
+	}
+}
 
 type GPO_LINK int32
 
@@ -149,6 +402,25 @@ const (
 	GPLinkOrganizationalUnit GPO_LINK = 4
 )
 
+// String returns the GPO_LINK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPO_LINK) String() string {
+	switch e {
+	case GPLinkUnknown:
+		return "GPLinkUnknown"
+	case GPLinkMachine:
+		return "GPLinkMachine"
+	case GPLinkSite:
+		return "GPLinkSite"
+	case GPLinkDomain:
+		return "GPLinkDomain"
+	case GPLinkOrganizationalUnit:
+		return "GPLinkOrganizationalUnit"
+	default:
+		return fmt.Sprintf("GPO_LINK(%d)", int32(e))
+	}
+}
+
 type GPO_OPEN_FLAGS uint32
 
 const (
@@ -156,12 +428,42 @@ const (
 	GPO_OPEN_READ_ONLY     GPO_OPEN_FLAGS = 2
 )
 
+// String returns the GPO_OPEN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPO_OPEN_FLAGS) String() string {
+	switch e {
+	case GPO_OPEN_LOAD_REGISTRY:
+		return "GPO_OPEN_LOAD_REGISTRY"
+	case GPO_OPEN_READ_ONLY:
+		return "GPO_OPEN_READ_ONLY"
+	default:
+		return fmt.Sprintf("GPO_OPEN_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GPO_OPTIONS uint32
 
 const (
 	GPO_OPTION_DISABLE_USER    GPO_OPTIONS = 1
 	GPO_OPTION_DISABLE_MACHINE GPO_OPTIONS = 2
 )
+
+// String returns the GPO_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPO_OPTIONS) String() string {
+	var parts []string
+	if e&GPO_OPTION_DISABLE_USER != 0 {
+		parts = append(parts, "GPO_OPTION_DISABLE_USER")
+	}
+	if e&GPO_OPTION_DISABLE_MACHINE != 0 {
+		parts = append(parts, "GPO_OPTION_DISABLE_MACHINE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type GPO_SECTION uint32
 
@@ -170,6 +472,21 @@ const (
 	GPO_SECTION_USER    GPO_SECTION = 1
 	GPO_SECTION_MACHINE GPO_SECTION = 2
 )
+
+// String returns the GPO_SECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPO_SECTION) String() string {
+	switch e {
+	case GPO_SECTION_ROOT:
+		return "GPO_SECTION_ROOT"
+	case GPO_SECTION_USER:
+		return "GPO_SECTION_USER"
+	case GPO_SECTION_MACHINE:
+		return "GPO_SECTION_MACHINE"
+	default:
+		return fmt.Sprintf("GPO_SECTION(%d)", uint32(e))
+	}
+}
 
 type GROUP_POLICY_HINT_TYPE int32
 
@@ -181,6 +498,25 @@ const (
 	GPHintOrganizationalUnit GROUP_POLICY_HINT_TYPE = 4
 )
 
+// String returns the GROUP_POLICY_HINT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GROUP_POLICY_HINT_TYPE) String() string {
+	switch e {
+	case GPHintUnknown:
+		return "GPHintUnknown"
+	case GPHintMachine:
+		return "GPHintMachine"
+	case GPHintSite:
+		return "GPHintSite"
+	case GPHintDomain:
+		return "GPHintDomain"
+	case GPHintOrganizationalUnit:
+		return "GPHintOrganizationalUnit"
+	default:
+		return fmt.Sprintf("GROUP_POLICY_HINT_TYPE(%d)", int32(e))
+	}
+}
+
 type GROUP_POLICY_OBJECT_TYPE int32
 
 const (
@@ -190,6 +526,25 @@ const (
 	GPOTypeLocalUser  GROUP_POLICY_OBJECT_TYPE = 3
 	GPOTypeLocalGroup GROUP_POLICY_OBJECT_TYPE = 4
 )
+
+// String returns the GROUP_POLICY_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GROUP_POLICY_OBJECT_TYPE) String() string {
+	switch e {
+	case GPOTypeLocal:
+		return "GPOTypeLocal"
+	case GPOTypeRemote:
+		return "GPOTypeRemote"
+	case GPOTypeDS:
+		return "GPOTypeDS"
+	case GPOTypeLocalUser:
+		return "GPOTypeLocalUser"
+	case GPOTypeLocalGroup:
+		return "GPOTypeLocalGroup"
+	default:
+		return fmt.Sprintf("GROUP_POLICY_OBJECT_TYPE(%d)", int32(e))
+	}
+}
 
 // INSTALLSPECTYPE: https://learn.microsoft.com/windows/win32/api/appmgmt/ne-appmgmt-installspectype
 type INSTALLSPECTYPE int32
@@ -201,6 +556,23 @@ const (
 	COMCLASS INSTALLSPECTYPE = 4
 )
 
+// String returns the INSTALLSPECTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INSTALLSPECTYPE) String() string {
+	switch e {
+	case APPNAME:
+		return "APPNAME"
+	case FILEEXT:
+		return "FILEEXT"
+	case PROGID:
+		return "PROGID"
+	case COMCLASS:
+		return "COMCLASS"
+	default:
+		return fmt.Sprintf("INSTALLSPECTYPE(%d)", int32(e))
+	}
+}
+
 type SETTINGSTATUS int32
 
 const (
@@ -210,3 +582,22 @@ const (
 	RSOPFailed           SETTINGSTATUS = 3
 	RSOPSubsettingFailed SETTINGSTATUS = 4
 )
+
+// String returns the SETTINGSTATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETTINGSTATUS) String() string {
+	switch e {
+	case RSOPUnspecified:
+		return "RSOPUnspecified"
+	case RSOPApplied:
+		return "RSOPApplied"
+	case RSOPIgnored:
+		return "RSOPIgnored"
+	case RSOPFailed:
+		return "RSOPFailed"
+	case RSOPSubsettingFailed:
+		return "RSOPSubsettingFailed"
+	default:
+		return fmt.Sprintf("SETTINGSTATUS(%d)", int32(e))
+	}
+}

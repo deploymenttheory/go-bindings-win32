@@ -4,7 +4,13 @@
 
 package display
 
+import (
+	"fmt"
+	"strings"
+)
+
 // AR_STATE: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-ar_state
+// Bitmask — values may be combined with |.
 type AR_STATE int32
 
 const (
@@ -19,6 +25,40 @@ const (
 	AR_LAPTOP        AR_STATE = 128
 )
 
+// String returns the AR_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AR_STATE) String() string {
+	var parts []string
+	if e&AR_DISABLED != 0 {
+		parts = append(parts, "AR_DISABLED")
+	}
+	if e&AR_SUPPRESSED != 0 {
+		parts = append(parts, "AR_SUPPRESSED")
+	}
+	if e&AR_REMOTESESSION != 0 {
+		parts = append(parts, "AR_REMOTESESSION")
+	}
+	if e&AR_MULTIMON != 0 {
+		parts = append(parts, "AR_MULTIMON")
+	}
+	if e&AR_NOSENSOR != 0 {
+		parts = append(parts, "AR_NOSENSOR")
+	}
+	if e&AR_NOT_SUPPORTED != 0 {
+		parts = append(parts, "AR_NOT_SUPPORTED")
+	}
+	if e&AR_DOCKED != 0 {
+		parts = append(parts, "AR_DOCKED")
+	}
+	if e&AR_LAPTOP != 0 {
+		parts = append(parts, "AR_LAPTOP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type BACKLIGHT_OPTIMIZATION_LEVEL int32
 
 const (
@@ -29,6 +69,25 @@ const (
 	BacklightOptimizationEDR     BACKLIGHT_OPTIMIZATION_LEVEL = 4
 )
 
+// String returns the BACKLIGHT_OPTIMIZATION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BACKLIGHT_OPTIMIZATION_LEVEL) String() string {
+	switch e {
+	case BacklightOptimizationDisable:
+		return "BacklightOptimizationDisable"
+	case BacklightOptimizationDesktop:
+		return "BacklightOptimizationDesktop"
+	case BacklightOptimizationDynamic:
+		return "BacklightOptimizationDynamic"
+	case BacklightOptimizationDimmed:
+		return "BacklightOptimizationDimmed"
+	case BacklightOptimizationEDR:
+		return "BacklightOptimizationEDR"
+	default:
+		return fmt.Sprintf("BACKLIGHT_OPTIMIZATION_LEVEL(%d)", int32(e))
+	}
+}
+
 type BRIGHTNESS_INTERFACE_VERSION int32
 
 const (
@@ -37,6 +96,21 @@ const (
 	BRIGHTNESS_INTERFACE_VERSION_3 BRIGHTNESS_INTERFACE_VERSION = 3
 )
 
+// String returns the BRIGHTNESS_INTERFACE_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BRIGHTNESS_INTERFACE_VERSION) String() string {
+	switch e {
+	case BRIGHTNESS_INTERFACE_VERSION_1:
+		return "BRIGHTNESS_INTERFACE_VERSION_1"
+	case BRIGHTNESS_INTERFACE_VERSION_2:
+		return "BRIGHTNESS_INTERFACE_VERSION_2"
+	case BRIGHTNESS_INTERFACE_VERSION_3:
+		return "BRIGHTNESS_INTERFACE_VERSION_3"
+	default:
+		return fmt.Sprintf("BRIGHTNESS_INTERFACE_VERSION(%d)", int32(e))
+	}
+}
+
 type BlackScreenDiagnosticsCalloutParam int32
 
 const (
@@ -44,12 +118,38 @@ const (
 	BlackScreenDisplayRecovery BlackScreenDiagnosticsCalloutParam = 2
 )
 
+// String returns the BlackScreenDiagnosticsCalloutParam constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BlackScreenDiagnosticsCalloutParam) String() string {
+	switch e {
+	case BlackScreenDiagnosticsData:
+		return "BlackScreenDiagnosticsData"
+	case BlackScreenDisplayRecovery:
+		return "BlackScreenDisplayRecovery"
+	default:
+		return fmt.Sprintf("BlackScreenDiagnosticsCalloutParam(%d)", int32(e))
+	}
+}
+
 type COLORSPACE_TRANSFORM_DATA_TYPE int32
 
 const (
 	COLORSPACE_TRANSFORM_DATA_TYPE_FIXED_POINT COLORSPACE_TRANSFORM_DATA_TYPE = 0
 	COLORSPACE_TRANSFORM_DATA_TYPE_FLOAT       COLORSPACE_TRANSFORM_DATA_TYPE = 1
 )
+
+// String returns the COLORSPACE_TRANSFORM_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COLORSPACE_TRANSFORM_DATA_TYPE) String() string {
+	switch e {
+	case COLORSPACE_TRANSFORM_DATA_TYPE_FIXED_POINT:
+		return "COLORSPACE_TRANSFORM_DATA_TYPE_FIXED_POINT"
+	case COLORSPACE_TRANSFORM_DATA_TYPE_FLOAT:
+		return "COLORSPACE_TRANSFORM_DATA_TYPE_FLOAT"
+	default:
+		return fmt.Sprintf("COLORSPACE_TRANSFORM_DATA_TYPE(%d)", int32(e))
+	}
+}
 
 type COLORSPACE_TRANSFORM_STAGE_CONTROL int32
 
@@ -59,6 +159,21 @@ const (
 	ColorSpaceTransformStageControl_Bypass    COLORSPACE_TRANSFORM_STAGE_CONTROL = 2
 )
 
+// String returns the COLORSPACE_TRANSFORM_STAGE_CONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COLORSPACE_TRANSFORM_STAGE_CONTROL) String() string {
+	switch e {
+	case ColorSpaceTransformStageControl_No_Change:
+		return "ColorSpaceTransformStageControl_No_Change"
+	case ColorSpaceTransformStageControl_Enable:
+		return "ColorSpaceTransformStageControl_Enable"
+	case ColorSpaceTransformStageControl_Bypass:
+		return "ColorSpaceTransformStageControl_Bypass"
+	default:
+		return fmt.Sprintf("COLORSPACE_TRANSFORM_STAGE_CONTROL(%d)", int32(e))
+	}
+}
+
 type COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION int32
 
 const (
@@ -66,6 +181,19 @@ const (
 	COLORSPACE_TRANSFORM_VERSION_1             COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION = 1
 	COLORSPACE_TRANSFORM_VERSION_NOT_SUPPORTED COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION = 0
 )
+
+// String returns the COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION) String() string {
+	switch e {
+	case COLORSPACE_TRANSFORM_VERSION_DEFAULT:
+		return "COLORSPACE_TRANSFORM_VERSION_DEFAULT"
+	case COLORSPACE_TRANSFORM_VERSION_1:
+		return "COLORSPACE_TRANSFORM_VERSION_1"
+	default:
+		return fmt.Sprintf("COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION(%d)", int32(e))
+	}
+}
 
 type COLORSPACE_TRANSFORM_TYPE int32
 
@@ -77,6 +205,27 @@ const (
 	COLORSPACE_TRANSFORM_TYPE_MATRIX_3x4    COLORSPACE_TRANSFORM_TYPE = 4
 	COLORSPACE_TRANSFORM_TYPE_MATRIX_V2     COLORSPACE_TRANSFORM_TYPE = 5
 )
+
+// String returns the COLORSPACE_TRANSFORM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COLORSPACE_TRANSFORM_TYPE) String() string {
+	switch e {
+	case COLORSPACE_TRANSFORM_TYPE_UNINITIALIZED:
+		return "COLORSPACE_TRANSFORM_TYPE_UNINITIALIZED"
+	case COLORSPACE_TRANSFORM_TYPE_DEFAULT:
+		return "COLORSPACE_TRANSFORM_TYPE_DEFAULT"
+	case COLORSPACE_TRANSFORM_TYPE_RGB256x3x16:
+		return "COLORSPACE_TRANSFORM_TYPE_RGB256x3x16"
+	case COLORSPACE_TRANSFORM_TYPE_DXGI_1:
+		return "COLORSPACE_TRANSFORM_TYPE_DXGI_1"
+	case COLORSPACE_TRANSFORM_TYPE_MATRIX_3x4:
+		return "COLORSPACE_TRANSFORM_TYPE_MATRIX_3x4"
+	case COLORSPACE_TRANSFORM_TYPE_MATRIX_V2:
+		return "COLORSPACE_TRANSFORM_TYPE_MATRIX_V2"
+	default:
+		return fmt.Sprintf("COLORSPACE_TRANSFORM_TYPE(%d)", int32(e))
+	}
+}
 
 // DISPLAYCONFIG_DEVICE_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/wingdi/ne-wingdi-displayconfig_device_info_type
 type DISPLAYCONFIG_DEVICE_INFO_TYPE int32
@@ -101,6 +250,49 @@ const (
 	DISPLAYCONFIG_DEVICE_INFO_SET_WCG_STATE                  DISPLAYCONFIG_DEVICE_INFO_TYPE = 17
 )
 
+// String returns the DISPLAYCONFIG_DEVICE_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAYCONFIG_DEVICE_INFO_TYPE) String() string {
+	switch e {
+	case DISPLAYCONFIG_DEVICE_INFO_GET_SOURCE_NAME:
+		return "DISPLAYCONFIG_DEVICE_INFO_GET_SOURCE_NAME"
+	case DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME:
+		return "DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME"
+	case DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_PREFERRED_MODE:
+		return "DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_PREFERRED_MODE"
+	case DISPLAYCONFIG_DEVICE_INFO_GET_ADAPTER_NAME:
+		return "DISPLAYCONFIG_DEVICE_INFO_GET_ADAPTER_NAME"
+	case DISPLAYCONFIG_DEVICE_INFO_SET_TARGET_PERSISTENCE:
+		return "DISPLAYCONFIG_DEVICE_INFO_SET_TARGET_PERSISTENCE"
+	case DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_BASE_TYPE:
+		return "DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_BASE_TYPE"
+	case DISPLAYCONFIG_DEVICE_INFO_GET_SUPPORT_VIRTUAL_RESOLUTION:
+		return "DISPLAYCONFIG_DEVICE_INFO_GET_SUPPORT_VIRTUAL_RESOLUTION"
+	case DISPLAYCONFIG_DEVICE_INFO_SET_SUPPORT_VIRTUAL_RESOLUTION:
+		return "DISPLAYCONFIG_DEVICE_INFO_SET_SUPPORT_VIRTUAL_RESOLUTION"
+	case DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO:
+		return "DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO"
+	case DISPLAYCONFIG_DEVICE_INFO_SET_ADVANCED_COLOR_STATE:
+		return "DISPLAYCONFIG_DEVICE_INFO_SET_ADVANCED_COLOR_STATE"
+	case DISPLAYCONFIG_DEVICE_INFO_GET_SDR_WHITE_LEVEL:
+		return "DISPLAYCONFIG_DEVICE_INFO_GET_SDR_WHITE_LEVEL"
+	case DISPLAYCONFIG_DEVICE_INFO_GET_MONITOR_SPECIALIZATION:
+		return "DISPLAYCONFIG_DEVICE_INFO_GET_MONITOR_SPECIALIZATION"
+	case DISPLAYCONFIG_DEVICE_INFO_SET_MONITOR_SPECIALIZATION:
+		return "DISPLAYCONFIG_DEVICE_INFO_SET_MONITOR_SPECIALIZATION"
+	case DISPLAYCONFIG_DEVICE_INFO_SET_RESERVED1:
+		return "DISPLAYCONFIG_DEVICE_INFO_SET_RESERVED1"
+	case DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO_2:
+		return "DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO_2"
+	case DISPLAYCONFIG_DEVICE_INFO_SET_HDR_STATE:
+		return "DISPLAYCONFIG_DEVICE_INFO_SET_HDR_STATE"
+	case DISPLAYCONFIG_DEVICE_INFO_SET_WCG_STATE:
+		return "DISPLAYCONFIG_DEVICE_INFO_SET_WCG_STATE"
+	default:
+		return fmt.Sprintf("DISPLAYCONFIG_DEVICE_INFO_TYPE(%d)", int32(e))
+	}
+}
+
 // DISPLAYCONFIG_MODE_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/wingdi/ne-wingdi-displayconfig_mode_info_type
 type DISPLAYCONFIG_MODE_INFO_TYPE int32
 
@@ -109,6 +301,21 @@ const (
 	DISPLAYCONFIG_MODE_INFO_TYPE_TARGET        DISPLAYCONFIG_MODE_INFO_TYPE = 2
 	DISPLAYCONFIG_MODE_INFO_TYPE_DESKTOP_IMAGE DISPLAYCONFIG_MODE_INFO_TYPE = 3
 )
+
+// String returns the DISPLAYCONFIG_MODE_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAYCONFIG_MODE_INFO_TYPE) String() string {
+	switch e {
+	case DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE:
+		return "DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE"
+	case DISPLAYCONFIG_MODE_INFO_TYPE_TARGET:
+		return "DISPLAYCONFIG_MODE_INFO_TYPE_TARGET"
+	case DISPLAYCONFIG_MODE_INFO_TYPE_DESKTOP_IMAGE:
+		return "DISPLAYCONFIG_MODE_INFO_TYPE_DESKTOP_IMAGE"
+	default:
+		return fmt.Sprintf("DISPLAYCONFIG_MODE_INFO_TYPE(%d)", int32(e))
+	}
+}
 
 // DISPLAYCONFIG_PIXELFORMAT: https://learn.microsoft.com/windows/win32/api/wingdi/ne-wingdi-displayconfig_pixelformat
 type DISPLAYCONFIG_PIXELFORMAT int32
@@ -121,6 +328,25 @@ const (
 	DISPLAYCONFIG_PIXELFORMAT_NONGDI DISPLAYCONFIG_PIXELFORMAT = 5
 )
 
+// String returns the DISPLAYCONFIG_PIXELFORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAYCONFIG_PIXELFORMAT) String() string {
+	switch e {
+	case DISPLAYCONFIG_PIXELFORMAT_8BPP:
+		return "DISPLAYCONFIG_PIXELFORMAT_8BPP"
+	case DISPLAYCONFIG_PIXELFORMAT_16BPP:
+		return "DISPLAYCONFIG_PIXELFORMAT_16BPP"
+	case DISPLAYCONFIG_PIXELFORMAT_24BPP:
+		return "DISPLAYCONFIG_PIXELFORMAT_24BPP"
+	case DISPLAYCONFIG_PIXELFORMAT_32BPP:
+		return "DISPLAYCONFIG_PIXELFORMAT_32BPP"
+	case DISPLAYCONFIG_PIXELFORMAT_NONGDI:
+		return "DISPLAYCONFIG_PIXELFORMAT_NONGDI"
+	default:
+		return fmt.Sprintf("DISPLAYCONFIG_PIXELFORMAT(%d)", int32(e))
+	}
+}
+
 // DISPLAYCONFIG_ROTATION: https://learn.microsoft.com/windows/win32/api/wingdi/ne-wingdi-displayconfig_rotation
 type DISPLAYCONFIG_ROTATION int32
 
@@ -130,6 +356,23 @@ const (
 	DISPLAYCONFIG_ROTATION_ROTATE180 DISPLAYCONFIG_ROTATION = 3
 	DISPLAYCONFIG_ROTATION_ROTATE270 DISPLAYCONFIG_ROTATION = 4
 )
+
+// String returns the DISPLAYCONFIG_ROTATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAYCONFIG_ROTATION) String() string {
+	switch e {
+	case DISPLAYCONFIG_ROTATION_IDENTITY:
+		return "DISPLAYCONFIG_ROTATION_IDENTITY"
+	case DISPLAYCONFIG_ROTATION_ROTATE90:
+		return "DISPLAYCONFIG_ROTATION_ROTATE90"
+	case DISPLAYCONFIG_ROTATION_ROTATE180:
+		return "DISPLAYCONFIG_ROTATION_ROTATE180"
+	case DISPLAYCONFIG_ROTATION_ROTATE270:
+		return "DISPLAYCONFIG_ROTATION_ROTATE270"
+	default:
+		return fmt.Sprintf("DISPLAYCONFIG_ROTATION(%d)", int32(e))
+	}
+}
 
 // DISPLAYCONFIG_SCALING: https://learn.microsoft.com/windows/win32/api/wingdi/ne-wingdi-displayconfig_scaling
 type DISPLAYCONFIG_SCALING int32
@@ -143,6 +386,27 @@ const (
 	DISPLAYCONFIG_SCALING_PREFERRED              DISPLAYCONFIG_SCALING = 128
 )
 
+// String returns the DISPLAYCONFIG_SCALING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAYCONFIG_SCALING) String() string {
+	switch e {
+	case DISPLAYCONFIG_SCALING_IDENTITY:
+		return "DISPLAYCONFIG_SCALING_IDENTITY"
+	case DISPLAYCONFIG_SCALING_CENTERED:
+		return "DISPLAYCONFIG_SCALING_CENTERED"
+	case DISPLAYCONFIG_SCALING_STRETCHED:
+		return "DISPLAYCONFIG_SCALING_STRETCHED"
+	case DISPLAYCONFIG_SCALING_ASPECTRATIOCENTEREDMAX:
+		return "DISPLAYCONFIG_SCALING_ASPECTRATIOCENTEREDMAX"
+	case DISPLAYCONFIG_SCALING_CUSTOM:
+		return "DISPLAYCONFIG_SCALING_CUSTOM"
+	case DISPLAYCONFIG_SCALING_PREFERRED:
+		return "DISPLAYCONFIG_SCALING_PREFERRED"
+	default:
+		return fmt.Sprintf("DISPLAYCONFIG_SCALING(%d)", int32(e))
+	}
+}
+
 // DISPLAYCONFIG_SCANLINE_ORDERING: https://learn.microsoft.com/windows/win32/api/wingdi/ne-wingdi-displayconfig_scanline_ordering
 type DISPLAYCONFIG_SCANLINE_ORDERING int32
 
@@ -154,6 +418,23 @@ const (
 	DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_LOWERFIELDFIRST DISPLAYCONFIG_SCANLINE_ORDERING = 3
 )
 
+// String returns the DISPLAYCONFIG_SCANLINE_ORDERING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAYCONFIG_SCANLINE_ORDERING) String() string {
+	switch e {
+	case DISPLAYCONFIG_SCANLINE_ORDERING_UNSPECIFIED:
+		return "DISPLAYCONFIG_SCANLINE_ORDERING_UNSPECIFIED"
+	case DISPLAYCONFIG_SCANLINE_ORDERING_PROGRESSIVE:
+		return "DISPLAYCONFIG_SCANLINE_ORDERING_PROGRESSIVE"
+	case DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED:
+		return "DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED"
+	case DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_LOWERFIELDFIRST:
+		return "DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_LOWERFIELDFIRST"
+	default:
+		return fmt.Sprintf("DISPLAYCONFIG_SCANLINE_ORDERING(%d)", int32(e))
+	}
+}
+
 // DISPLAYCONFIG_TOPOLOGY_ID: https://learn.microsoft.com/windows/win32/api/wingdi/ne-wingdi-displayconfig_topology_id
 type DISPLAYCONFIG_TOPOLOGY_ID int32
 
@@ -163,6 +444,23 @@ const (
 	DISPLAYCONFIG_TOPOLOGY_EXTEND   DISPLAYCONFIG_TOPOLOGY_ID = 4
 	DISPLAYCONFIG_TOPOLOGY_EXTERNAL DISPLAYCONFIG_TOPOLOGY_ID = 8
 )
+
+// String returns the DISPLAYCONFIG_TOPOLOGY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAYCONFIG_TOPOLOGY_ID) String() string {
+	switch e {
+	case DISPLAYCONFIG_TOPOLOGY_INTERNAL:
+		return "DISPLAYCONFIG_TOPOLOGY_INTERNAL"
+	case DISPLAYCONFIG_TOPOLOGY_CLONE:
+		return "DISPLAYCONFIG_TOPOLOGY_CLONE"
+	case DISPLAYCONFIG_TOPOLOGY_EXTEND:
+		return "DISPLAYCONFIG_TOPOLOGY_EXTEND"
+	case DISPLAYCONFIG_TOPOLOGY_EXTERNAL:
+		return "DISPLAYCONFIG_TOPOLOGY_EXTERNAL"
+	default:
+		return fmt.Sprintf("DISPLAYCONFIG_TOPOLOGY_ID(%d)", int32(e))
+	}
+}
 
 // DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY: https://learn.microsoft.com/windows/win32/api/wingdi/ne-wingdi-displayconfig_video_output_technology
 type DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY int32
@@ -190,6 +488,55 @@ const (
 	DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INTERNAL               DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY = -2147483648
 )
 
+// String returns the DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY) String() string {
+	switch e {
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_OTHER:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_OTHER"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_HD15:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_HD15"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SVIDEO:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SVIDEO"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_COMPOSITE_VIDEO:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_COMPOSITE_VIDEO"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_COMPONENT_VIDEO:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_COMPONENT_VIDEO"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DVI:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DVI"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_HDMI:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_HDMI"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_LVDS:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_LVDS"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_D_JPN:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_D_JPN"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SDI:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SDI"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_EXTERNAL:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_EXTERNAL"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_EMBEDDED:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_EMBEDDED"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_UDI_EXTERNAL:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_UDI_EXTERNAL"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_UDI_EMBEDDED:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_UDI_EMBEDDED"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SDTVDONGLE:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SDTVDONGLE"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_MIRACAST:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_MIRACAST"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INDIRECT_WIRED:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INDIRECT_WIRED"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INDIRECT_VIRTUAL:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INDIRECT_VIRTUAL"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_USB_TUNNEL:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_USB_TUNNEL"
+	case DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INTERNAL:
+		return "DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INTERNAL"
+	default:
+		return fmt.Sprintf("DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY(%d)", int32(e))
+	}
+}
+
 type DSI_CONTROL_TRANSMISSION_MODE int32
 
 const (
@@ -198,12 +545,40 @@ const (
 	DCT_FORCE_HIGH_PERFORMANCE DSI_CONTROL_TRANSMISSION_MODE = 2
 )
 
+// String returns the DSI_CONTROL_TRANSMISSION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DSI_CONTROL_TRANSMISSION_MODE) String() string {
+	switch e {
+	case DCT_DEFAULT:
+		return "DCT_DEFAULT"
+	case DCT_FORCE_LOW_POWER:
+		return "DCT_FORCE_LOW_POWER"
+	case DCT_FORCE_HIGH_PERFORMANCE:
+		return "DCT_FORCE_HIGH_PERFORMANCE"
+	default:
+		return fmt.Sprintf("DSI_CONTROL_TRANSMISSION_MODE(%d)", int32(e))
+	}
+}
+
 type ENG_DEVICE_ATTRIBUTE int32
 
 const (
 	QDA_RESERVED           ENG_DEVICE_ATTRIBUTE = 0
 	QDA_ACCELERATION_LEVEL ENG_DEVICE_ATTRIBUTE = 1
 )
+
+// String returns the ENG_DEVICE_ATTRIBUTE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENG_DEVICE_ATTRIBUTE) String() string {
+	switch e {
+	case QDA_RESERVED:
+		return "QDA_RESERVED"
+	case QDA_ACCELERATION_LEVEL:
+		return "QDA_ACCELERATION_LEVEL"
+	default:
+		return fmt.Sprintf("ENG_DEVICE_ATTRIBUTE(%d)", int32(e))
+	}
+}
 
 type ENG_SYSTEM_ATTRIBUTE int32
 
@@ -213,6 +588,23 @@ const (
 	EngOptimumAvailableUserMemory   ENG_SYSTEM_ATTRIBUTE = 3
 	EngOptimumAvailableSystemMemory ENG_SYSTEM_ATTRIBUTE = 4
 )
+
+// String returns the ENG_SYSTEM_ATTRIBUTE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENG_SYSTEM_ATTRIBUTE) String() string {
+	switch e {
+	case EngProcessorFeature:
+		return "EngProcessorFeature"
+	case EngNumberOfProcessors:
+		return "EngNumberOfProcessors"
+	case EngOptimumAvailableUserMemory:
+		return "EngOptimumAvailableUserMemory"
+	case EngOptimumAvailableSystemMemory:
+		return "EngOptimumAvailableSystemMemory"
+	default:
+		return fmt.Sprintf("ENG_SYSTEM_ATTRIBUTE(%d)", int32(e))
+	}
+}
 
 // MC_COLOR_TEMPERATURE: https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/ne-highlevelmonitorconfigurationapi-mc_color_temperature
 type MC_COLOR_TEMPERATURE int32
@@ -229,6 +621,33 @@ const (
 	MC_COLOR_TEMPERATURE_11500K  MC_COLOR_TEMPERATURE = 8
 )
 
+// String returns the MC_COLOR_TEMPERATURE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MC_COLOR_TEMPERATURE) String() string {
+	switch e {
+	case MC_COLOR_TEMPERATURE_UNKNOWN:
+		return "MC_COLOR_TEMPERATURE_UNKNOWN"
+	case MC_COLOR_TEMPERATURE_4000K:
+		return "MC_COLOR_TEMPERATURE_4000K"
+	case MC_COLOR_TEMPERATURE_5000K:
+		return "MC_COLOR_TEMPERATURE_5000K"
+	case MC_COLOR_TEMPERATURE_6500K:
+		return "MC_COLOR_TEMPERATURE_6500K"
+	case MC_COLOR_TEMPERATURE_7500K:
+		return "MC_COLOR_TEMPERATURE_7500K"
+	case MC_COLOR_TEMPERATURE_8200K:
+		return "MC_COLOR_TEMPERATURE_8200K"
+	case MC_COLOR_TEMPERATURE_9300K:
+		return "MC_COLOR_TEMPERATURE_9300K"
+	case MC_COLOR_TEMPERATURE_10000K:
+		return "MC_COLOR_TEMPERATURE_10000K"
+	case MC_COLOR_TEMPERATURE_11500K:
+		return "MC_COLOR_TEMPERATURE_11500K"
+	default:
+		return fmt.Sprintf("MC_COLOR_TEMPERATURE(%d)", int32(e))
+	}
+}
+
 // MC_DISPLAY_TECHNOLOGY_TYPE: https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/ne-highlevelmonitorconfigurationapi-mc_display_technology_type
 type MC_DISPLAY_TECHNOLOGY_TYPE int32
 
@@ -244,6 +663,33 @@ const (
 	MC_FIELD_EMISSION_DEVICE           MC_DISPLAY_TECHNOLOGY_TYPE = 8
 )
 
+// String returns the MC_DISPLAY_TECHNOLOGY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MC_DISPLAY_TECHNOLOGY_TYPE) String() string {
+	switch e {
+	case MC_SHADOW_MASK_CATHODE_RAY_TUBE:
+		return "MC_SHADOW_MASK_CATHODE_RAY_TUBE"
+	case MC_APERTURE_GRILL_CATHODE_RAY_TUBE:
+		return "MC_APERTURE_GRILL_CATHODE_RAY_TUBE"
+	case MC_THIN_FILM_TRANSISTOR:
+		return "MC_THIN_FILM_TRANSISTOR"
+	case MC_LIQUID_CRYSTAL_ON_SILICON:
+		return "MC_LIQUID_CRYSTAL_ON_SILICON"
+	case MC_PLASMA:
+		return "MC_PLASMA"
+	case MC_ORGANIC_LIGHT_EMITTING_DIODE:
+		return "MC_ORGANIC_LIGHT_EMITTING_DIODE"
+	case MC_ELECTROLUMINESCENT:
+		return "MC_ELECTROLUMINESCENT"
+	case MC_MICROELECTROMECHANICAL:
+		return "MC_MICROELECTROMECHANICAL"
+	case MC_FIELD_EMISSION_DEVICE:
+		return "MC_FIELD_EMISSION_DEVICE"
+	default:
+		return fmt.Sprintf("MC_DISPLAY_TECHNOLOGY_TYPE(%d)", int32(e))
+	}
+}
+
 // MC_DRIVE_TYPE: https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/ne-highlevelmonitorconfigurationapi-mc_drive_type
 type MC_DRIVE_TYPE int32
 
@@ -252,6 +698,21 @@ const (
 	MC_GREEN_DRIVE MC_DRIVE_TYPE = 1
 	MC_BLUE_DRIVE  MC_DRIVE_TYPE = 2
 )
+
+// String returns the MC_DRIVE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MC_DRIVE_TYPE) String() string {
+	switch e {
+	case MC_RED_DRIVE:
+		return "MC_RED_DRIVE"
+	case MC_GREEN_DRIVE:
+		return "MC_GREEN_DRIVE"
+	case MC_BLUE_DRIVE:
+		return "MC_BLUE_DRIVE"
+	default:
+		return fmt.Sprintf("MC_DRIVE_TYPE(%d)", int32(e))
+	}
+}
 
 // MC_GAIN_TYPE: https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/ne-highlevelmonitorconfigurationapi-mc_gain_type
 type MC_GAIN_TYPE int32
@@ -262,6 +723,21 @@ const (
 	MC_BLUE_GAIN  MC_GAIN_TYPE = 2
 )
 
+// String returns the MC_GAIN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MC_GAIN_TYPE) String() string {
+	switch e {
+	case MC_RED_GAIN:
+		return "MC_RED_GAIN"
+	case MC_GREEN_GAIN:
+		return "MC_GREEN_GAIN"
+	case MC_BLUE_GAIN:
+		return "MC_BLUE_GAIN"
+	default:
+		return fmt.Sprintf("MC_GAIN_TYPE(%d)", int32(e))
+	}
+}
+
 // MC_POSITION_TYPE: https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/ne-highlevelmonitorconfigurationapi-mc_position_type
 type MC_POSITION_TYPE int32
 
@@ -269,6 +745,19 @@ const (
 	MC_HORIZONTAL_POSITION MC_POSITION_TYPE = 0
 	MC_VERTICAL_POSITION   MC_POSITION_TYPE = 1
 )
+
+// String returns the MC_POSITION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MC_POSITION_TYPE) String() string {
+	switch e {
+	case MC_HORIZONTAL_POSITION:
+		return "MC_HORIZONTAL_POSITION"
+	case MC_VERTICAL_POSITION:
+		return "MC_VERTICAL_POSITION"
+	default:
+		return fmt.Sprintf("MC_POSITION_TYPE(%d)", int32(e))
+	}
+}
 
 // MC_SIZE_TYPE: https://learn.microsoft.com/windows/win32/api/highlevelmonitorconfigurationapi/ne-highlevelmonitorconfigurationapi-mc_size_type
 type MC_SIZE_TYPE int32
@@ -278,6 +767,19 @@ const (
 	MC_HEIGHT MC_SIZE_TYPE = 1
 )
 
+// String returns the MC_SIZE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MC_SIZE_TYPE) String() string {
+	switch e {
+	case MC_WIDTH:
+		return "MC_WIDTH"
+	case MC_HEIGHT:
+		return "MC_HEIGHT"
+	default:
+		return fmt.Sprintf("MC_SIZE_TYPE(%d)", int32(e))
+	}
+}
+
 // MC_VCP_CODE_TYPE: https://learn.microsoft.com/windows/win32/api/lowlevelmonitorconfigurationapi/ne-lowlevelmonitorconfigurationapi-mc_vcp_code_type
 type MC_VCP_CODE_TYPE int32
 
@@ -286,7 +788,21 @@ const (
 	MC_SET_PARAMETER MC_VCP_CODE_TYPE = 1
 )
 
+// String returns the MC_VCP_CODE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MC_VCP_CODE_TYPE) String() string {
+	switch e {
+	case MC_MOMENTARY:
+		return "MC_MOMENTARY"
+	case MC_SET_PARAMETER:
+		return "MC_SET_PARAMETER"
+	default:
+		return fmt.Sprintf("MC_VCP_CODE_TYPE(%d)", int32(e))
+	}
+}
+
 // ORIENTATION_PREFERENCE: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-orientation_preference
+// Bitmask — values may be combined with |.
 type ORIENTATION_PREFERENCE int32
 
 const (
@@ -297,6 +813,28 @@ const (
 	ORIENTATION_PREFERENCE_PORTRAIT_FLIPPED  ORIENTATION_PREFERENCE = 8
 )
 
+// String returns the ORIENTATION_PREFERENCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ORIENTATION_PREFERENCE) String() string {
+	var parts []string
+	if e&ORIENTATION_PREFERENCE_LANDSCAPE != 0 {
+		parts = append(parts, "ORIENTATION_PREFERENCE_LANDSCAPE")
+	}
+	if e&ORIENTATION_PREFERENCE_PORTRAIT != 0 {
+		parts = append(parts, "ORIENTATION_PREFERENCE_PORTRAIT")
+	}
+	if e&ORIENTATION_PREFERENCE_LANDSCAPE_FLIPPED != 0 {
+		parts = append(parts, "ORIENTATION_PREFERENCE_LANDSCAPE_FLIPPED")
+	}
+	if e&ORIENTATION_PREFERENCE_PORTRAIT_FLIPPED != 0 {
+		parts = append(parts, "ORIENTATION_PREFERENCE_PORTRAIT_FLIPPED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type OUTPUT_COLOR_ENCODING int32
 
 const (
@@ -306,6 +844,25 @@ const (
 	OUTPUT_COLOR_ENCODING_YCBCR420  OUTPUT_COLOR_ENCODING = 3
 	OUTPUT_COLOR_ENCODING_INTENSITY OUTPUT_COLOR_ENCODING = 4
 )
+
+// String returns the OUTPUT_COLOR_ENCODING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OUTPUT_COLOR_ENCODING) String() string {
+	switch e {
+	case OUTPUT_COLOR_ENCODING_RGB:
+		return "OUTPUT_COLOR_ENCODING_RGB"
+	case OUTPUT_COLOR_ENCODING_YCBCR444:
+		return "OUTPUT_COLOR_ENCODING_YCBCR444"
+	case OUTPUT_COLOR_ENCODING_YCBCR422:
+		return "OUTPUT_COLOR_ENCODING_YCBCR422"
+	case OUTPUT_COLOR_ENCODING_YCBCR420:
+		return "OUTPUT_COLOR_ENCODING_YCBCR420"
+	case OUTPUT_COLOR_ENCODING_INTENSITY:
+		return "OUTPUT_COLOR_ENCODING_INTENSITY"
+	default:
+		return fmt.Sprintf("OUTPUT_COLOR_ENCODING(%d)", int32(e))
+	}
+}
 
 type OUTPUT_WIRE_COLOR_SPACE_TYPE int32
 
@@ -319,6 +876,30 @@ const (
 	OUTPUT_WIRE_COLOR_SPACE_G2084_P2020_DVLL      OUTPUT_WIRE_COLOR_SPACE_TYPE = 33
 )
 
+// String returns the OUTPUT_WIRE_COLOR_SPACE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OUTPUT_WIRE_COLOR_SPACE_TYPE) String() string {
+	switch e {
+	case OUTPUT_WIRE_COLOR_SPACE_G22_P709:
+		return "OUTPUT_WIRE_COLOR_SPACE_G22_P709"
+	case OUTPUT_WIRE_COLOR_SPACE_RESERVED:
+		return "OUTPUT_WIRE_COLOR_SPACE_RESERVED"
+	case OUTPUT_WIRE_COLOR_SPACE_G2084_P2020:
+		return "OUTPUT_WIRE_COLOR_SPACE_G2084_P2020"
+	case OUTPUT_WIRE_COLOR_SPACE_G22_P709_WCG:
+		return "OUTPUT_WIRE_COLOR_SPACE_G22_P709_WCG"
+	case OUTPUT_WIRE_COLOR_SPACE_G22_P2020:
+		return "OUTPUT_WIRE_COLOR_SPACE_G22_P2020"
+	case OUTPUT_WIRE_COLOR_SPACE_G2084_P2020_HDR10PLUS:
+		return "OUTPUT_WIRE_COLOR_SPACE_G2084_P2020_HDR10PLUS"
+	case OUTPUT_WIRE_COLOR_SPACE_G2084_P2020_DVLL:
+		return "OUTPUT_WIRE_COLOR_SPACE_G2084_P2020_DVLL"
+	default:
+		return fmt.Sprintf("OUTPUT_WIRE_COLOR_SPACE_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type QUERY_DISPLAY_CONFIG_FLAGS uint32
 
 const (
@@ -330,6 +911,35 @@ const (
 	QDC_VIRTUAL_REFRESH_RATE_AWARE QUERY_DISPLAY_CONFIG_FLAGS = 64
 )
 
+// String returns the QUERY_DISPLAY_CONFIG_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QUERY_DISPLAY_CONFIG_FLAGS) String() string {
+	var parts []string
+	if e&QDC_ALL_PATHS != 0 {
+		parts = append(parts, "QDC_ALL_PATHS")
+	}
+	if e&QDC_ONLY_ACTIVE_PATHS != 0 {
+		parts = append(parts, "QDC_ONLY_ACTIVE_PATHS")
+	}
+	if e&QDC_DATABASE_CURRENT != 0 {
+		parts = append(parts, "QDC_DATABASE_CURRENT")
+	}
+	if e&QDC_VIRTUAL_MODE_AWARE != 0 {
+		parts = append(parts, "QDC_VIRTUAL_MODE_AWARE")
+	}
+	if e&QDC_INCLUDE_HMD != 0 {
+		parts = append(parts, "QDC_INCLUDE_HMD")
+	}
+	if e&QDC_VIRTUAL_REFRESH_RATE_AWARE != 0 {
+		parts = append(parts, "QDC_VIRTUAL_REFRESH_RATE_AWARE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SET_DISPLAY_CONFIG_FLAGS uint32
 
 const (
@@ -352,6 +962,67 @@ const (
 	SDC_VIRTUAL_REFRESH_RATE_AWARE  SET_DISPLAY_CONFIG_FLAGS = 131072
 )
 
+// String returns the SET_DISPLAY_CONFIG_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SET_DISPLAY_CONFIG_FLAGS) String() string {
+	var parts []string
+	if e&SDC_USE_DATABASE_CURRENT != 0 {
+		parts = append(parts, "SDC_USE_DATABASE_CURRENT")
+	}
+	if e&SDC_TOPOLOGY_INTERNAL != 0 {
+		parts = append(parts, "SDC_TOPOLOGY_INTERNAL")
+	}
+	if e&SDC_TOPOLOGY_CLONE != 0 {
+		parts = append(parts, "SDC_TOPOLOGY_CLONE")
+	}
+	if e&SDC_TOPOLOGY_EXTEND != 0 {
+		parts = append(parts, "SDC_TOPOLOGY_EXTEND")
+	}
+	if e&SDC_TOPOLOGY_EXTERNAL != 0 {
+		parts = append(parts, "SDC_TOPOLOGY_EXTERNAL")
+	}
+	if e&SDC_TOPOLOGY_SUPPLIED != 0 {
+		parts = append(parts, "SDC_TOPOLOGY_SUPPLIED")
+	}
+	if e&SDC_USE_SUPPLIED_DISPLAY_CONFIG != 0 {
+		parts = append(parts, "SDC_USE_SUPPLIED_DISPLAY_CONFIG")
+	}
+	if e&SDC_VALIDATE != 0 {
+		parts = append(parts, "SDC_VALIDATE")
+	}
+	if e&SDC_APPLY != 0 {
+		parts = append(parts, "SDC_APPLY")
+	}
+	if e&SDC_NO_OPTIMIZATION != 0 {
+		parts = append(parts, "SDC_NO_OPTIMIZATION")
+	}
+	if e&SDC_SAVE_TO_DATABASE != 0 {
+		parts = append(parts, "SDC_SAVE_TO_DATABASE")
+	}
+	if e&SDC_ALLOW_CHANGES != 0 {
+		parts = append(parts, "SDC_ALLOW_CHANGES")
+	}
+	if e&SDC_PATH_PERSIST_IF_REQUIRED != 0 {
+		parts = append(parts, "SDC_PATH_PERSIST_IF_REQUIRED")
+	}
+	if e&SDC_FORCE_MODE_ENUMERATION != 0 {
+		parts = append(parts, "SDC_FORCE_MODE_ENUMERATION")
+	}
+	if e&SDC_ALLOW_PATH_ORDER_CHANGES != 0 {
+		parts = append(parts, "SDC_ALLOW_PATH_ORDER_CHANGES")
+	}
+	if e&SDC_VIRTUAL_MODE_AWARE != 0 {
+		parts = append(parts, "SDC_VIRTUAL_MODE_AWARE")
+	}
+	if e&SDC_VIRTUAL_REFRESH_RATE_AWARE != 0 {
+		parts = append(parts, "SDC_VIRTUAL_REFRESH_RATE_AWARE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type VIDEO_BANK_TYPE int32
 
 const (
@@ -361,6 +1032,25 @@ const (
 	VideoBanked2RW    VIDEO_BANK_TYPE = 3
 	NumVideoBankTypes VIDEO_BANK_TYPE = 4
 )
+
+// String returns the VIDEO_BANK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIDEO_BANK_TYPE) String() string {
+	switch e {
+	case VideoNotBanked:
+		return "VideoNotBanked"
+	case VideoBanked1RW:
+		return "VideoBanked1RW"
+	case VideoBanked1R1W:
+		return "VideoBanked1R1W"
+	case VideoBanked2RW:
+		return "VideoBanked2RW"
+	case NumVideoBankTypes:
+		return "NumVideoBankTypes"
+	default:
+		return fmt.Sprintf("VIDEO_BANK_TYPE(%d)", int32(e))
+	}
+}
 
 type VIDEO_POWER_STATE int32
 
@@ -374,6 +1064,31 @@ const (
 	VideoPowerShutdown    VIDEO_POWER_STATE = 6
 	VideoPowerMaximum     VIDEO_POWER_STATE = 7
 )
+
+// String returns the VIDEO_POWER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIDEO_POWER_STATE) String() string {
+	switch e {
+	case VideoPowerUnspecified:
+		return "VideoPowerUnspecified"
+	case VideoPowerOn:
+		return "VideoPowerOn"
+	case VideoPowerStandBy:
+		return "VideoPowerStandBy"
+	case VideoPowerSuspend:
+		return "VideoPowerSuspend"
+	case VideoPowerOff:
+		return "VideoPowerOff"
+	case VideoPowerHibernate:
+		return "VideoPowerHibernate"
+	case VideoPowerShutdown:
+		return "VideoPowerShutdown"
+	case VideoPowerMaximum:
+		return "VideoPowerMaximum"
+	default:
+		return fmt.Sprintf("VIDEO_POWER_STATE(%d)", int32(e))
+	}
+}
 
 type VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE int32
 
@@ -392,3 +1107,38 @@ const (
 	VideoBlackScreenDiagnostics         VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE = 16
 	VideoForceCompositionRender         VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE = 17
 )
+
+// String returns the VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE) String() string {
+	switch e {
+	case VideoPowerNotifyCallout:
+		return "VideoPowerNotifyCallout"
+	case VideoEnumChildPdoNotifyCallout:
+		return "VideoEnumChildPdoNotifyCallout"
+	case VideoFindAdapterCallout:
+		return "VideoFindAdapterCallout"
+	case VideoPnpNotifyCallout:
+		return "VideoPnpNotifyCallout"
+	case VideoDxgkDisplaySwitchCallout:
+		return "VideoDxgkDisplaySwitchCallout"
+	case VideoDxgkFindAdapterTdrCallout:
+		return "VideoDxgkFindAdapterTdrCallout"
+	case VideoDxgkHardwareProtectionTeardown:
+		return "VideoDxgkHardwareProtectionTeardown"
+	case VideoRepaintDesktop:
+		return "VideoRepaintDesktop"
+	case VideoUpdateCursor:
+		return "VideoUpdateCursor"
+	case VideoDisableMultiPlaneOverlay:
+		return "VideoDisableMultiPlaneOverlay"
+	case VideoDesktopDuplicationChange:
+		return "VideoDesktopDuplicationChange"
+	case VideoBlackScreenDiagnostics:
+		return "VideoBlackScreenDiagnostics"
+	case VideoForceCompositionRender:
+		return "VideoForceCompositionRender"
+	default:
+		return fmt.Sprintf("VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE(%d)", int32(e))
+	}
+}

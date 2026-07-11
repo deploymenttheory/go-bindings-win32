@@ -4,6 +4,10 @@
 
 package deploymentservices
 
+import (
+	"fmt"
+)
+
 type CPU_ARCHITECTURE uint32
 
 const (
@@ -11,6 +15,21 @@ const (
 	CPU_ARCHITECTURE_IA64  CPU_ARCHITECTURE = 6
 	CPU_ARCHITECTURE_INTEL CPU_ARCHITECTURE = 0
 )
+
+// String returns the CPU_ARCHITECTURE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CPU_ARCHITECTURE) String() string {
+	switch e {
+	case CPU_ARCHITECTURE_AMD64:
+		return "CPU_ARCHITECTURE_AMD64"
+	case CPU_ARCHITECTURE_IA64:
+		return "CPU_ARCHITECTURE_IA64"
+	case CPU_ARCHITECTURE_INTEL:
+		return "CPU_ARCHITECTURE_INTEL"
+	default:
+		return fmt.Sprintf("CPU_ARCHITECTURE(%d)", uint32(e))
+	}
+}
 
 type PFN_WDS_CLI_CALLBACK_MESSAGE_ID uint32
 
@@ -20,6 +39,23 @@ const (
 	WDS_CLI_MSG_PROGRESS PFN_WDS_CLI_CALLBACK_MESSAGE_ID = 2
 	WDS_CLI_MSG_TEXT     PFN_WDS_CLI_CALLBACK_MESSAGE_ID = 3
 )
+
+// String returns the PFN_WDS_CLI_CALLBACK_MESSAGE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PFN_WDS_CLI_CALLBACK_MESSAGE_ID) String() string {
+	switch e {
+	case WDS_CLI_MSG_START:
+		return "WDS_CLI_MSG_START"
+	case WDS_CLI_MSG_COMPLETE:
+		return "WDS_CLI_MSG_COMPLETE"
+	case WDS_CLI_MSG_PROGRESS:
+		return "WDS_CLI_MSG_PROGRESS"
+	case WDS_CLI_MSG_TEXT:
+		return "WDS_CLI_MSG_TEXT"
+	default:
+		return fmt.Sprintf("PFN_WDS_CLI_CALLBACK_MESSAGE_ID(%d)", uint32(e))
+	}
+}
 
 // TRANSPORTCLIENT_CALLBACK_ID: https://learn.microsoft.com/windows/win32/api/wdstci/ne-wdstci-transportclient_callback_id
 type TRANSPORTCLIENT_CALLBACK_ID int32
@@ -33,6 +69,29 @@ const (
 	WDS_TRANSPORTCLIENT_SESSION_NEGOTIATE TRANSPORTCLIENT_CALLBACK_ID = 5
 	WDS_TRANSPORTCLIENT_MAX_CALLBACKS     TRANSPORTCLIENT_CALLBACK_ID = 6
 )
+
+// String returns the TRANSPORTCLIENT_CALLBACK_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSPORTCLIENT_CALLBACK_ID) String() string {
+	switch e {
+	case WDS_TRANSPORTCLIENT_SESSION_START:
+		return "WDS_TRANSPORTCLIENT_SESSION_START"
+	case WDS_TRANSPORTCLIENT_RECEIVE_CONTENTS:
+		return "WDS_TRANSPORTCLIENT_RECEIVE_CONTENTS"
+	case WDS_TRANSPORTCLIENT_SESSION_COMPLETE:
+		return "WDS_TRANSPORTCLIENT_SESSION_COMPLETE"
+	case WDS_TRANSPORTCLIENT_RECEIVE_METADATA:
+		return "WDS_TRANSPORTCLIENT_RECEIVE_METADATA"
+	case WDS_TRANSPORTCLIENT_SESSION_STARTEX:
+		return "WDS_TRANSPORTCLIENT_SESSION_STARTEX"
+	case WDS_TRANSPORTCLIENT_SESSION_NEGOTIATE:
+		return "WDS_TRANSPORTCLIENT_SESSION_NEGOTIATE"
+	case WDS_TRANSPORTCLIENT_MAX_CALLBACKS:
+		return "WDS_TRANSPORTCLIENT_MAX_CALLBACKS"
+	default:
+		return fmt.Sprintf("TRANSPORTCLIENT_CALLBACK_ID(%d)", int32(e))
+	}
+}
 
 // TRANSPORTPROVIDER_CALLBACK_ID: https://learn.microsoft.com/windows/win32/api/wdstpdi/ne-wdstpdi-transportprovider_callback_id
 type TRANSPORTPROVIDER_CALLBACK_ID int32
@@ -53,6 +112,41 @@ const (
 	WDS_TRANSPORTPROVIDER_MAX_CALLBACKS        TRANSPORTPROVIDER_CALLBACK_ID = 12
 )
 
+// String returns the TRANSPORTPROVIDER_CALLBACK_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSPORTPROVIDER_CALLBACK_ID) String() string {
+	switch e {
+	case WDS_TRANSPORTPROVIDER_CREATE_INSTANCE:
+		return "WDS_TRANSPORTPROVIDER_CREATE_INSTANCE"
+	case WDS_TRANSPORTPROVIDER_COMPARE_CONTENT:
+		return "WDS_TRANSPORTPROVIDER_COMPARE_CONTENT"
+	case WDS_TRANSPORTPROVIDER_OPEN_CONTENT:
+		return "WDS_TRANSPORTPROVIDER_OPEN_CONTENT"
+	case WDS_TRANSPORTPROVIDER_USER_ACCESS_CHECK:
+		return "WDS_TRANSPORTPROVIDER_USER_ACCESS_CHECK"
+	case WDS_TRANSPORTPROVIDER_GET_CONTENT_SIZE:
+		return "WDS_TRANSPORTPROVIDER_GET_CONTENT_SIZE"
+	case WDS_TRANSPORTPROVIDER_READ_CONTENT:
+		return "WDS_TRANSPORTPROVIDER_READ_CONTENT"
+	case WDS_TRANSPORTPROVIDER_CLOSE_CONTENT:
+		return "WDS_TRANSPORTPROVIDER_CLOSE_CONTENT"
+	case WDS_TRANSPORTPROVIDER_CLOSE_INSTANCE:
+		return "WDS_TRANSPORTPROVIDER_CLOSE_INSTANCE"
+	case WDS_TRANSPORTPROVIDER_SHUTDOWN:
+		return "WDS_TRANSPORTPROVIDER_SHUTDOWN"
+	case WDS_TRANSPORTPROVIDER_DUMP_STATE:
+		return "WDS_TRANSPORTPROVIDER_DUMP_STATE"
+	case WDS_TRANSPORTPROVIDER_REFRESH_SETTINGS:
+		return "WDS_TRANSPORTPROVIDER_REFRESH_SETTINGS"
+	case WDS_TRANSPORTPROVIDER_GET_CONTENT_METADATA:
+		return "WDS_TRANSPORTPROVIDER_GET_CONTENT_METADATA"
+	case WDS_TRANSPORTPROVIDER_MAX_CALLBACKS:
+		return "WDS_TRANSPORTPROVIDER_MAX_CALLBACKS"
+	default:
+		return fmt.Sprintf("TRANSPORTPROVIDER_CALLBACK_ID(%d)", int32(e))
+	}
+}
+
 // WDSTRANSPORT_DIAGNOSTICS_COMPONENT_FLAGS: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_diagnostics_component_flags
 type WDSTRANSPORT_DIAGNOSTICS_COMPONENT_FLAGS int32
 
@@ -63,6 +157,23 @@ const (
 	WdsTptDiagnosticsComponentMulticast   WDSTRANSPORT_DIAGNOSTICS_COMPONENT_FLAGS = 8
 )
 
+// String returns the WDSTRANSPORT_DIAGNOSTICS_COMPONENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_DIAGNOSTICS_COMPONENT_FLAGS) String() string {
+	switch e {
+	case WdsTptDiagnosticsComponentPxe:
+		return "WdsTptDiagnosticsComponentPxe"
+	case WdsTptDiagnosticsComponentTftp:
+		return "WdsTptDiagnosticsComponentTftp"
+	case WdsTptDiagnosticsComponentImageServer:
+		return "WdsTptDiagnosticsComponentImageServer"
+	case WdsTptDiagnosticsComponentMulticast:
+		return "WdsTptDiagnosticsComponentMulticast"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_DIAGNOSTICS_COMPONENT_FLAGS(%d)", int32(e))
+	}
+}
+
 // WDSTRANSPORT_DISCONNECT_TYPE: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_disconnect_type
 type WDSTRANSPORT_DISCONNECT_TYPE int32
 
@@ -71,6 +182,21 @@ const (
 	WdsTptDisconnectFallback WDSTRANSPORT_DISCONNECT_TYPE = 1
 	WdsTptDisconnectAbort    WDSTRANSPORT_DISCONNECT_TYPE = 2
 )
+
+// String returns the WDSTRANSPORT_DISCONNECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_DISCONNECT_TYPE) String() string {
+	switch e {
+	case WdsTptDisconnectUnknown:
+		return "WdsTptDisconnectUnknown"
+	case WdsTptDisconnectFallback:
+		return "WdsTptDisconnectFallback"
+	case WdsTptDisconnectAbort:
+		return "WdsTptDisconnectAbort"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_DISCONNECT_TYPE(%d)", int32(e))
+	}
+}
 
 // WDSTRANSPORT_FEATURE_FLAGS: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_feature_flags
 type WDSTRANSPORT_FEATURE_FLAGS int32
@@ -81,6 +207,21 @@ const (
 	WdsTptFeatureDeploymentServer WDSTRANSPORT_FEATURE_FLAGS = 4
 )
 
+// String returns the WDSTRANSPORT_FEATURE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_FEATURE_FLAGS) String() string {
+	switch e {
+	case WdsTptFeatureAdminPack:
+		return "WdsTptFeatureAdminPack"
+	case WdsTptFeatureTransportServer:
+		return "WdsTptFeatureTransportServer"
+	case WdsTptFeatureDeploymentServer:
+		return "WdsTptFeatureDeploymentServer"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_FEATURE_FLAGS(%d)", int32(e))
+	}
+}
+
 // WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_ip_address_source_type
 type WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE int32
 
@@ -89,6 +230,21 @@ const (
 	WdsTptIpAddressSourceDhcp    WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE = 1
 	WdsTptIpAddressSourceRange   WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE = 2
 )
+
+// String returns the WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE) String() string {
+	switch e {
+	case WdsTptIpAddressSourceUnknown:
+		return "WdsTptIpAddressSourceUnknown"
+	case WdsTptIpAddressSourceDhcp:
+		return "WdsTptIpAddressSourceDhcp"
+	case WdsTptIpAddressSourceRange:
+		return "WdsTptIpAddressSourceRange"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE(%d)", int32(e))
+	}
+}
 
 // WDSTRANSPORT_IP_ADDRESS_TYPE: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_ip_address_type
 type WDSTRANSPORT_IP_ADDRESS_TYPE int32
@@ -99,6 +255,21 @@ const (
 	WdsTptIpAddressIpv6    WDSTRANSPORT_IP_ADDRESS_TYPE = 2
 )
 
+// String returns the WDSTRANSPORT_IP_ADDRESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_IP_ADDRESS_TYPE) String() string {
+	switch e {
+	case WdsTptIpAddressUnknown:
+		return "WdsTptIpAddressUnknown"
+	case WdsTptIpAddressIpv4:
+		return "WdsTptIpAddressIpv4"
+	case WdsTptIpAddressIpv6:
+		return "WdsTptIpAddressIpv6"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_IP_ADDRESS_TYPE(%d)", int32(e))
+	}
+}
+
 // WDSTRANSPORT_NAMESPACE_TYPE: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_namespace_type
 type WDSTRANSPORT_NAMESPACE_TYPE int32
 
@@ -108,6 +279,23 @@ const (
 	WdsTptNamespaceTypeScheduledCastManualStart WDSTRANSPORT_NAMESPACE_TYPE = 2
 	WdsTptNamespaceTypeScheduledCastAutoStart   WDSTRANSPORT_NAMESPACE_TYPE = 3
 )
+
+// String returns the WDSTRANSPORT_NAMESPACE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_NAMESPACE_TYPE) String() string {
+	switch e {
+	case WdsTptNamespaceTypeUnknown:
+		return "WdsTptNamespaceTypeUnknown"
+	case WdsTptNamespaceTypeAutoCast:
+		return "WdsTptNamespaceTypeAutoCast"
+	case WdsTptNamespaceTypeScheduledCastManualStart:
+		return "WdsTptNamespaceTypeScheduledCastManualStart"
+	case WdsTptNamespaceTypeScheduledCastAutoStart:
+		return "WdsTptNamespaceTypeScheduledCastAutoStart"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_NAMESPACE_TYPE(%d)", int32(e))
+	}
+}
 
 // WDSTRANSPORT_NETWORK_PROFILE_TYPE: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_network_profile_type
 type WDSTRANSPORT_NETWORK_PROFILE_TYPE int32
@@ -120,6 +308,25 @@ const (
 	WdsTptNetworkProfile1Gbps   WDSTRANSPORT_NETWORK_PROFILE_TYPE = 4
 )
 
+// String returns the WDSTRANSPORT_NETWORK_PROFILE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_NETWORK_PROFILE_TYPE) String() string {
+	switch e {
+	case WdsTptNetworkProfileUnknown:
+		return "WdsTptNetworkProfileUnknown"
+	case WdsTptNetworkProfileCustom:
+		return "WdsTptNetworkProfileCustom"
+	case WdsTptNetworkProfile10Mbps:
+		return "WdsTptNetworkProfile10Mbps"
+	case WdsTptNetworkProfile100Mbps:
+		return "WdsTptNetworkProfile100Mbps"
+	case WdsTptNetworkProfile1Gbps:
+		return "WdsTptNetworkProfile1Gbps"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_NETWORK_PROFILE_TYPE(%d)", int32(e))
+	}
+}
+
 // WDSTRANSPORT_PROTOCOL_FLAGS: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_protocol_flags
 type WDSTRANSPORT_PROTOCOL_FLAGS int32
 
@@ -128,6 +335,19 @@ const (
 	WdsTptProtocolMulticast WDSTRANSPORT_PROTOCOL_FLAGS = 2
 )
 
+// String returns the WDSTRANSPORT_PROTOCOL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_PROTOCOL_FLAGS) String() string {
+	switch e {
+	case WdsTptProtocolUnicast:
+		return "WdsTptProtocolUnicast"
+	case WdsTptProtocolMulticast:
+		return "WdsTptProtocolMulticast"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_PROTOCOL_FLAGS(%d)", int32(e))
+	}
+}
+
 // WDSTRANSPORT_SERVICE_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_service_notification
 type WDSTRANSPORT_SERVICE_NOTIFICATION int32
 
@@ -135,6 +355,19 @@ const (
 	WdsTptServiceNotifyUnknown      WDSTRANSPORT_SERVICE_NOTIFICATION = 0
 	WdsTptServiceNotifyReadSettings WDSTRANSPORT_SERVICE_NOTIFICATION = 1
 )
+
+// String returns the WDSTRANSPORT_SERVICE_NOTIFICATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_SERVICE_NOTIFICATION) String() string {
+	switch e {
+	case WdsTptServiceNotifyUnknown:
+		return "WdsTptServiceNotifyUnknown"
+	case WdsTptServiceNotifyReadSettings:
+		return "WdsTptServiceNotifyReadSettings"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_SERVICE_NOTIFICATION(%d)", int32(e))
+	}
+}
 
 // WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_slow_client_handling_type
 type WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE int32
@@ -146,6 +379,23 @@ const (
 	WdsTptSlowClientHandlingMultistream    WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE = 3
 )
 
+// String returns the WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE) String() string {
+	switch e {
+	case WdsTptSlowClientHandlingUnknown:
+		return "WdsTptSlowClientHandlingUnknown"
+	case WdsTptSlowClientHandlingNone:
+		return "WdsTptSlowClientHandlingNone"
+	case WdsTptSlowClientHandlingAutoDisconnect:
+		return "WdsTptSlowClientHandlingAutoDisconnect"
+	case WdsTptSlowClientHandlingMultistream:
+		return "WdsTptSlowClientHandlingMultistream"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE(%d)", int32(e))
+	}
+}
+
 // WDSTRANSPORT_TFTP_CAPABILITY: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_tftp_capability
 type WDSTRANSPORT_TFTP_CAPABILITY int32
 
@@ -153,6 +403,19 @@ const (
 	WdsTptTftpCapMaximumBlockSize WDSTRANSPORT_TFTP_CAPABILITY = 1
 	WdsTptTftpCapVariableWindow   WDSTRANSPORT_TFTP_CAPABILITY = 2
 )
+
+// String returns the WDSTRANSPORT_TFTP_CAPABILITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_TFTP_CAPABILITY) String() string {
+	switch e {
+	case WdsTptTftpCapMaximumBlockSize:
+		return "WdsTptTftpCapMaximumBlockSize"
+	case WdsTptTftpCapVariableWindow:
+		return "WdsTptTftpCapVariableWindow"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_TFTP_CAPABILITY(%d)", int32(e))
+	}
+}
 
 // WDSTRANSPORT_UDP_PORT_POLICY: https://learn.microsoft.com/windows/win32/api/wdstptmgmt/ne-wdstptmgmt-wdstransport_udp_port_policy
 type WDSTRANSPORT_UDP_PORT_POLICY int32
@@ -162,6 +425,19 @@ const (
 	WdsTptUdpPortPolicyFixed   WDSTRANSPORT_UDP_PORT_POLICY = 1
 )
 
+// String returns the WDSTRANSPORT_UDP_PORT_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDSTRANSPORT_UDP_PORT_POLICY) String() string {
+	switch e {
+	case WdsTptUdpPortPolicyDynamic:
+		return "WdsTptUdpPortPolicyDynamic"
+	case WdsTptUdpPortPolicyFixed:
+		return "WdsTptUdpPortPolicyFixed"
+	default:
+		return fmt.Sprintf("WDSTRANSPORT_UDP_PORT_POLICY(%d)", int32(e))
+	}
+}
+
 type WDS_CLI_FIRMWARE_TYPE int32
 
 const (
@@ -170,6 +446,21 @@ const (
 	WDS_CLI_FIRMWARE_EFI     WDS_CLI_FIRMWARE_TYPE = 2
 )
 
+// String returns the WDS_CLI_FIRMWARE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDS_CLI_FIRMWARE_TYPE) String() string {
+	switch e {
+	case WDS_CLI_FIRMWARE_UNKNOWN:
+		return "WDS_CLI_FIRMWARE_UNKNOWN"
+	case WDS_CLI_FIRMWARE_BIOS:
+		return "WDS_CLI_FIRMWARE_BIOS"
+	case WDS_CLI_FIRMWARE_EFI:
+		return "WDS_CLI_FIRMWARE_EFI"
+	default:
+		return fmt.Sprintf("WDS_CLI_FIRMWARE_TYPE(%d)", int32(e))
+	}
+}
+
 type WDS_CLI_IMAGE_PARAM_TYPE int32
 
 const (
@@ -177,6 +468,21 @@ const (
 	WDS_CLI_IMAGE_PARAM_SPARSE_FILE         WDS_CLI_IMAGE_PARAM_TYPE = 1
 	WDS_CLI_IMAGE_PARAM_SUPPORTED_FIRMWARES WDS_CLI_IMAGE_PARAM_TYPE = 2
 )
+
+// String returns the WDS_CLI_IMAGE_PARAM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDS_CLI_IMAGE_PARAM_TYPE) String() string {
+	switch e {
+	case WDS_CLI_IMAGE_PARAM_UNKNOWN:
+		return "WDS_CLI_IMAGE_PARAM_UNKNOWN"
+	case WDS_CLI_IMAGE_PARAM_SPARSE_FILE:
+		return "WDS_CLI_IMAGE_PARAM_SPARSE_FILE"
+	case WDS_CLI_IMAGE_PARAM_SUPPORTED_FIRMWARES:
+		return "WDS_CLI_IMAGE_PARAM_SUPPORTED_FIRMWARES"
+	default:
+		return fmt.Sprintf("WDS_CLI_IMAGE_PARAM_TYPE(%d)", int32(e))
+	}
+}
 
 type WDS_CLI_IMAGE_TYPE int32
 
@@ -187,9 +493,39 @@ const (
 	WDS_CLI_IMAGE_TYPE_VHDX    WDS_CLI_IMAGE_TYPE = 3
 )
 
+// String returns the WDS_CLI_IMAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDS_CLI_IMAGE_TYPE) String() string {
+	switch e {
+	case WDS_CLI_IMAGE_TYPE_UNKNOWN:
+		return "WDS_CLI_IMAGE_TYPE_UNKNOWN"
+	case WDS_CLI_IMAGE_TYPE_WIM:
+		return "WDS_CLI_IMAGE_TYPE_WIM"
+	case WDS_CLI_IMAGE_TYPE_VHD:
+		return "WDS_CLI_IMAGE_TYPE_VHD"
+	case WDS_CLI_IMAGE_TYPE_VHDX:
+		return "WDS_CLI_IMAGE_TYPE_VHDX"
+	default:
+		return fmt.Sprintf("WDS_CLI_IMAGE_TYPE(%d)", int32(e))
+	}
+}
+
 type WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL uint32
 
 const (
 	WDS_TRANSPORTCLIENT_AUTH    WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL = 1
 	WDS_TRANSPORTCLIENT_NO_AUTH WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL = 2
 )
+
+// String returns the WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL) String() string {
+	switch e {
+	case WDS_TRANSPORTCLIENT_AUTH:
+		return "WDS_TRANSPORTCLIENT_AUTH"
+	case WDS_TRANSPORTCLIENT_NO_AUTH:
+		return "WDS_TRANSPORTCLIENT_NO_AUTH"
+	default:
+		return fmt.Sprintf("WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL(%d)", uint32(e))
+	}
+}

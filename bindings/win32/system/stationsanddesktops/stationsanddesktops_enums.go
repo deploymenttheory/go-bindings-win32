@@ -4,6 +4,12 @@
 
 package stationsanddesktops
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type BROADCAST_SYSTEM_MESSAGE_FLAGS uint32
 
 const (
@@ -20,6 +26,50 @@ const (
 	BSF_RETURNHDESK        BROADCAST_SYSTEM_MESSAGE_FLAGS = 512
 )
 
+// String returns the BROADCAST_SYSTEM_MESSAGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BROADCAST_SYSTEM_MESSAGE_FLAGS) String() string {
+	var parts []string
+	if e&BSF_ALLOWSFW != 0 {
+		parts = append(parts, "BSF_ALLOWSFW")
+	}
+	if e&BSF_FLUSHDISK != 0 {
+		parts = append(parts, "BSF_FLUSHDISK")
+	}
+	if e&BSF_FORCEIFHUNG != 0 {
+		parts = append(parts, "BSF_FORCEIFHUNG")
+	}
+	if e&BSF_IGNORECURRENTTASK != 0 {
+		parts = append(parts, "BSF_IGNORECURRENTTASK")
+	}
+	if e&BSF_NOHANG != 0 {
+		parts = append(parts, "BSF_NOHANG")
+	}
+	if e&BSF_NOTIMEOUTIFNOTHUNG != 0 {
+		parts = append(parts, "BSF_NOTIMEOUTIFNOTHUNG")
+	}
+	if e&BSF_POSTMESSAGE != 0 {
+		parts = append(parts, "BSF_POSTMESSAGE")
+	}
+	if e&BSF_QUERY != 0 {
+		parts = append(parts, "BSF_QUERY")
+	}
+	if e&BSF_SENDNOTIFYMESSAGE != 0 {
+		parts = append(parts, "BSF_SENDNOTIFYMESSAGE")
+	}
+	if e&BSF_LUID != 0 {
+		parts = append(parts, "BSF_LUID")
+	}
+	if e&BSF_RETURNHDESK != 0 {
+		parts = append(parts, "BSF_RETURNHDESK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type BROADCAST_SYSTEM_MESSAGE_INFO uint32
 
 const (
@@ -27,6 +77,22 @@ const (
 	BSM_ALLDESKTOPS   BROADCAST_SYSTEM_MESSAGE_INFO = 16
 	BSM_APPLICATIONS  BROADCAST_SYSTEM_MESSAGE_INFO = 8
 )
+
+// String returns the BROADCAST_SYSTEM_MESSAGE_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BROADCAST_SYSTEM_MESSAGE_INFO) String() string {
+	var parts []string
+	if e&BSM_ALLDESKTOPS != 0 {
+		parts = append(parts, "BSM_ALLDESKTOPS")
+	}
+	if e&BSM_APPLICATIONS != 0 {
+		parts = append(parts, "BSM_APPLICATIONS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type DESKTOP_ACCESS_FLAGS uint32
 
@@ -47,11 +113,59 @@ const (
 	DESKTOP_SWITCHDESKTOP   DESKTOP_ACCESS_FLAGS = 256
 )
 
+// String returns the DESKTOP_ACCESS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DESKTOP_ACCESS_FLAGS) String() string {
+	switch e {
+	case DESKTOP_DELETE:
+		return "DESKTOP_DELETE"
+	case DESKTOP_READ_CONTROL:
+		return "DESKTOP_READ_CONTROL"
+	case DESKTOP_WRITE_DAC:
+		return "DESKTOP_WRITE_DAC"
+	case DESKTOP_WRITE_OWNER:
+		return "DESKTOP_WRITE_OWNER"
+	case DESKTOP_SYNCHRONIZE:
+		return "DESKTOP_SYNCHRONIZE"
+	case DESKTOP_READOBJECTS:
+		return "DESKTOP_READOBJECTS"
+	case DESKTOP_CREATEWINDOW:
+		return "DESKTOP_CREATEWINDOW"
+	case DESKTOP_CREATEMENU:
+		return "DESKTOP_CREATEMENU"
+	case DESKTOP_HOOKCONTROL:
+		return "DESKTOP_HOOKCONTROL"
+	case DESKTOP_JOURNALRECORD:
+		return "DESKTOP_JOURNALRECORD"
+	case DESKTOP_JOURNALPLAYBACK:
+		return "DESKTOP_JOURNALPLAYBACK"
+	case DESKTOP_ENUMERATE:
+		return "DESKTOP_ENUMERATE"
+	case DESKTOP_WRITEOBJECTS:
+		return "DESKTOP_WRITEOBJECTS"
+	case DESKTOP_SWITCHDESKTOP:
+		return "DESKTOP_SWITCHDESKTOP"
+	default:
+		return fmt.Sprintf("DESKTOP_ACCESS_FLAGS(%d)", uint32(e))
+	}
+}
+
 type DESKTOP_CONTROL_FLAGS uint32
 
 const (
 	DF_ALLOWOTHERACCOUNTHOOK DESKTOP_CONTROL_FLAGS = 1
 )
+
+// String returns the DESKTOP_CONTROL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DESKTOP_CONTROL_FLAGS) String() string {
+	switch e {
+	case DF_ALLOWOTHERACCOUNTHOOK:
+		return "DF_ALLOWOTHERACCOUNTHOOK"
+	default:
+		return fmt.Sprintf("DESKTOP_CONTROL_FLAGS(%d)", uint32(e))
+	}
+}
 
 type USER_OBJECT_INFORMATION_INDEX int32
 
@@ -63,3 +177,24 @@ const (
 	UOI_TYPE     USER_OBJECT_INFORMATION_INDEX = 3
 	UOI_USER_SID USER_OBJECT_INFORMATION_INDEX = 4
 )
+
+// String returns the USER_OBJECT_INFORMATION_INDEX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USER_OBJECT_INFORMATION_INDEX) String() string {
+	switch e {
+	case UOI_FLAGS:
+		return "UOI_FLAGS"
+	case UOI_HEAPSIZE:
+		return "UOI_HEAPSIZE"
+	case UOI_IO:
+		return "UOI_IO"
+	case UOI_NAME:
+		return "UOI_NAME"
+	case UOI_TYPE:
+		return "UOI_TYPE"
+	case UOI_USER_SID:
+		return "UOI_USER_SID"
+	default:
+		return fmt.Sprintf("USER_OBJECT_INFORMATION_INDEX(%d)", int32(e))
+	}
+}

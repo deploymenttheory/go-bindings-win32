@@ -4,6 +4,10 @@
 
 package winwlx
 
+import (
+	"fmt"
+)
+
 type WLX_SHUTDOWN_TYPE uint32
 
 const (
@@ -11,3 +15,18 @@ const (
 	WLX_SAS_ACTION_SHUTDOWN_REBOOT    WLX_SHUTDOWN_TYPE = 11
 	WLX_SAS_ACTION_SHUTDOWN_POWER_OFF WLX_SHUTDOWN_TYPE = 10
 )
+
+// String returns the WLX_SHUTDOWN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLX_SHUTDOWN_TYPE) String() string {
+	switch e {
+	case WLX_SAS_ACTION_SHUTDOWN:
+		return "WLX_SAS_ACTION_SHUTDOWN"
+	case WLX_SAS_ACTION_SHUTDOWN_REBOOT:
+		return "WLX_SAS_ACTION_SHUTDOWN_REBOOT"
+	case WLX_SAS_ACTION_SHUTDOWN_POWER_OFF:
+		return "WLX_SAS_ACTION_SHUTDOWN_POWER_OFF"
+	default:
+		return fmt.Sprintf("WLX_SHUTDOWN_TYPE(%d)", uint32(e))
+	}
+}

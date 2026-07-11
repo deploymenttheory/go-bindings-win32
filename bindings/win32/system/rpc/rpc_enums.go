@@ -4,6 +4,11 @@
 
 package rpc
 
+import (
+	"fmt"
+	"strings"
+)
+
 type EXPR_TOKEN int32
 
 const (
@@ -17,6 +22,29 @@ const (
 	FC_EXPR_END     EXPR_TOKEN = 6
 )
 
+// String returns the EXPR_TOKEN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPR_TOKEN) String() string {
+	switch e {
+	case FC_EXPR_START:
+		return "FC_EXPR_START"
+	case FC_EXPR_CONST32:
+		return "FC_EXPR_CONST32"
+	case FC_EXPR_CONST64:
+		return "FC_EXPR_CONST64"
+	case FC_EXPR_VAR:
+		return "FC_EXPR_VAR"
+	case FC_EXPR_OPER:
+		return "FC_EXPR_OPER"
+	case FC_EXPR_NOOP:
+		return "FC_EXPR_NOOP"
+	case FC_EXPR_END:
+		return "FC_EXPR_END"
+	default:
+		return fmt.Sprintf("EXPR_TOKEN(%d)", int32(e))
+	}
+}
+
 type ExtendedErrorParamTypes int32
 
 const (
@@ -29,12 +57,48 @@ const (
 	EeptBinary        ExtendedErrorParamTypes = 7
 )
 
+// String returns the ExtendedErrorParamTypes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ExtendedErrorParamTypes) String() string {
+	switch e {
+	case EeptAnsiString:
+		return "EeptAnsiString"
+	case EeptUnicodeString:
+		return "EeptUnicodeString"
+	case EeptLongVal:
+		return "EeptLongVal"
+	case EeptShortVal:
+		return "EeptShortVal"
+	case EeptPointerVal:
+		return "EeptPointerVal"
+	case EeptNone:
+		return "EeptNone"
+	case EeptBinary:
+		return "EeptBinary"
+	default:
+		return fmt.Sprintf("ExtendedErrorParamTypes(%d)", int32(e))
+	}
+}
+
 type GROUP_NAME_SYNTAX uint32
 
 const (
 	RPC_C_NS_SYNTAX_DEFAULT GROUP_NAME_SYNTAX = 0
 	RPC_C_NS_SYNTAX_DCE     GROUP_NAME_SYNTAX = 3
 )
+
+// String returns the GROUP_NAME_SYNTAX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GROUP_NAME_SYNTAX) String() string {
+	switch e {
+	case RPC_C_NS_SYNTAX_DEFAULT:
+		return "RPC_C_NS_SYNTAX_DEFAULT"
+	case RPC_C_NS_SYNTAX_DCE:
+		return "RPC_C_NS_SYNTAX_DCE"
+	default:
+		return fmt.Sprintf("GROUP_NAME_SYNTAX(%d)", uint32(e))
+	}
+}
 
 type IDL_CS_CONVERT int32
 
@@ -44,12 +108,40 @@ const (
 	IDL_CS_NEW_BUFFER_CONVERT IDL_CS_CONVERT = 2
 )
 
+// String returns the IDL_CS_CONVERT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IDL_CS_CONVERT) String() string {
+	switch e {
+	case IDL_CS_NO_CONVERT:
+		return "IDL_CS_NO_CONVERT"
+	case IDL_CS_IN_PLACE_CONVERT:
+		return "IDL_CS_IN_PLACE_CONVERT"
+	case IDL_CS_NEW_BUFFER_CONVERT:
+		return "IDL_CS_NEW_BUFFER_CONVERT"
+	default:
+		return fmt.Sprintf("IDL_CS_CONVERT(%d)", int32(e))
+	}
+}
+
 type LRPC_SYSTEM_HANDLE_MARSHAL_DIRECTION int32
 
 const (
 	MarshalDirectionMarshal   LRPC_SYSTEM_HANDLE_MARSHAL_DIRECTION = 0
 	MarshalDirectionUnmarshal LRPC_SYSTEM_HANDLE_MARSHAL_DIRECTION = 1
 )
+
+// String returns the LRPC_SYSTEM_HANDLE_MARSHAL_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LRPC_SYSTEM_HANDLE_MARSHAL_DIRECTION) String() string {
+	switch e {
+	case MarshalDirectionMarshal:
+		return "MarshalDirectionMarshal"
+	case MarshalDirectionUnmarshal:
+		return "MarshalDirectionUnmarshal"
+	default:
+		return fmt.Sprintf("LRPC_SYSTEM_HANDLE_MARSHAL_DIRECTION(%d)", int32(e))
+	}
+}
 
 type MIDL_ES_CODE int32
 
@@ -59,6 +151,21 @@ const (
 	MES_ENCODE_NDR64 MIDL_ES_CODE = 2
 )
 
+// String returns the MIDL_ES_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIDL_ES_CODE) String() string {
+	switch e {
+	case MES_ENCODE:
+		return "MES_ENCODE"
+	case MES_DECODE:
+		return "MES_DECODE"
+	case MES_ENCODE_NDR64:
+		return "MES_ENCODE_NDR64"
+	default:
+		return fmt.Sprintf("MIDL_ES_CODE(%d)", int32(e))
+	}
+}
+
 type MIDL_ES_HANDLE_STYLE int32
 
 const (
@@ -66,6 +173,21 @@ const (
 	MES_FIXED_BUFFER_HANDLE   MIDL_ES_HANDLE_STYLE = 1
 	MES_DYNAMIC_BUFFER_HANDLE MIDL_ES_HANDLE_STYLE = 2
 )
+
+// String returns the MIDL_ES_HANDLE_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIDL_ES_HANDLE_STYLE) String() string {
+	switch e {
+	case MES_INCREMENTAL_HANDLE:
+		return "MES_INCREMENTAL_HANDLE"
+	case MES_FIXED_BUFFER_HANDLE:
+		return "MES_FIXED_BUFFER_HANDLE"
+	case MES_DYNAMIC_BUFFER_HANDLE:
+		return "MES_DYNAMIC_BUFFER_HANDLE"
+	default:
+		return fmt.Sprintf("MIDL_ES_HANDLE_STYLE(%d)", int32(e))
+	}
+}
 
 type PROXY_PHASE int32
 
@@ -77,6 +199,25 @@ const (
 	PROXY_UNMARSHAL   PROXY_PHASE = 4
 )
 
+// String returns the PROXY_PHASE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROXY_PHASE) String() string {
+	switch e {
+	case PROXY_CALCSIZE:
+		return "PROXY_CALCSIZE"
+	case PROXY_GETBUFFER:
+		return "PROXY_GETBUFFER"
+	case PROXY_MARSHAL:
+		return "PROXY_MARSHAL"
+	case PROXY_SENDRECEIVE:
+		return "PROXY_SENDRECEIVE"
+	case PROXY_UNMARSHAL:
+		return "PROXY_UNMARSHAL"
+	default:
+		return fmt.Sprintf("PROXY_PHASE(%d)", int32(e))
+	}
+}
+
 type RPC_ADDRESS_CHANGE_TYPE int32
 
 const (
@@ -84,6 +225,21 @@ const (
 	PROTOCOL_LOADED         RPC_ADDRESS_CHANGE_TYPE = 2
 	PROTOCOL_ADDRESS_CHANGE RPC_ADDRESS_CHANGE_TYPE = 3
 )
+
+// String returns the RPC_ADDRESS_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_ADDRESS_CHANGE_TYPE) String() string {
+	switch e {
+	case PROTOCOL_NOT_LOADED:
+		return "PROTOCOL_NOT_LOADED"
+	case PROTOCOL_LOADED:
+		return "PROTOCOL_LOADED"
+	case PROTOCOL_ADDRESS_CHANGE:
+		return "PROTOCOL_ADDRESS_CHANGE"
+	default:
+		return fmt.Sprintf("RPC_ADDRESS_CHANGE_TYPE(%d)", int32(e))
+	}
+}
 
 // RPC_ASYNC_EVENT: https://learn.microsoft.com/windows/win32/api/rpcasync/ne-rpcasync-rpc_async_event
 type RPC_ASYNC_EVENT int32
@@ -96,12 +252,48 @@ const (
 	RpcClientCancel     RPC_ASYNC_EVENT = 4
 )
 
+// String returns the RPC_ASYNC_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_ASYNC_EVENT) String() string {
+	switch e {
+	case RpcCallComplete:
+		return "RpcCallComplete"
+	case RpcSendComplete:
+		return "RpcSendComplete"
+	case RpcReceiveComplete:
+		return "RpcReceiveComplete"
+	case RpcClientDisconnect:
+		return "RpcClientDisconnect"
+	case RpcClientCancel:
+		return "RpcClientCancel"
+	default:
+		return fmt.Sprintf("RPC_ASYNC_EVENT(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type RPC_BINDING_HANDLE_OPTIONS_FLAGS uint32
 
 const (
 	RPC_BHO_NONCAUSAL  RPC_BINDING_HANDLE_OPTIONS_FLAGS = 1
 	RPC_BHO_DONTLINGER RPC_BINDING_HANDLE_OPTIONS_FLAGS = 2
 )
+
+// String returns the RPC_BINDING_HANDLE_OPTIONS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_BINDING_HANDLE_OPTIONS_FLAGS) String() string {
+	var parts []string
+	if e&RPC_BHO_NONCAUSAL != 0 {
+		parts = append(parts, "RPC_BHO_NONCAUSAL")
+	}
+	if e&RPC_BHO_DONTLINGER != 0 {
+		parts = append(parts, "RPC_BHO_DONTLINGER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type RPC_C_AUTHN_INFO_TYPE uint32
 
@@ -110,6 +302,20 @@ const (
 	RPC_C_AUTHN_INFO_TYPE_HTTP RPC_C_AUTHN_INFO_TYPE = 1
 )
 
+// String returns the RPC_C_AUTHN_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_C_AUTHN_INFO_TYPE) String() string {
+	switch e {
+	case RPC_C_AUTHN_INFO_NONE:
+		return "RPC_C_AUTHN_INFO_NONE"
+	case RPC_C_AUTHN_INFO_TYPE_HTTP:
+		return "RPC_C_AUTHN_INFO_TYPE_HTTP"
+	default:
+		return fmt.Sprintf("RPC_C_AUTHN_INFO_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type RPC_C_HTTP_AUTHN_TARGET uint32
 
 const (
@@ -117,6 +323,23 @@ const (
 	RPC_C_HTTP_AUTHN_TARGET_PROXY  RPC_C_HTTP_AUTHN_TARGET = 2
 )
 
+// String returns the RPC_C_HTTP_AUTHN_TARGET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_C_HTTP_AUTHN_TARGET) String() string {
+	var parts []string
+	if e&RPC_C_HTTP_AUTHN_TARGET_SERVER != 0 {
+		parts = append(parts, "RPC_C_HTTP_AUTHN_TARGET_SERVER")
+	}
+	if e&RPC_C_HTTP_AUTHN_TARGET_PROXY != 0 {
+		parts = append(parts, "RPC_C_HTTP_AUTHN_TARGET_PROXY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type RPC_C_HTTP_FLAGS uint32
 
 const (
@@ -126,6 +349,29 @@ const (
 	RPC_C_HTTP_FLAG_ENABLE_CERT_REVOCATION_CHECK RPC_C_HTTP_FLAGS = 16
 )
 
+// String returns the RPC_C_HTTP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_C_HTTP_FLAGS) String() string {
+	var parts []string
+	if e&RPC_C_HTTP_FLAG_USE_SSL != 0 {
+		parts = append(parts, "RPC_C_HTTP_FLAG_USE_SSL")
+	}
+	if e&RPC_C_HTTP_FLAG_USE_FIRST_AUTH_SCHEME != 0 {
+		parts = append(parts, "RPC_C_HTTP_FLAG_USE_FIRST_AUTH_SCHEME")
+	}
+	if e&RPC_C_HTTP_FLAG_IGNORE_CERT_CN_INVALID != 0 {
+		parts = append(parts, "RPC_C_HTTP_FLAG_IGNORE_CERT_CN_INVALID")
+	}
+	if e&RPC_C_HTTP_FLAG_ENABLE_CERT_REVOCATION_CHECK != 0 {
+		parts = append(parts, "RPC_C_HTTP_FLAG_ENABLE_CERT_REVOCATION_CHECK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type RPC_C_QOS_CAPABILITIES uint32
 
 const (
@@ -138,12 +384,53 @@ const (
 	RPC_C_QOS_CAPABILITIES_SCHANNEL_FULL_AUTH_IDENTITY RPC_C_QOS_CAPABILITIES = 32
 )
 
+// String returns the RPC_C_QOS_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_C_QOS_CAPABILITIES) String() string {
+	var parts []string
+	if e&RPC_C_QOS_CAPABILITIES_MUTUAL_AUTH != 0 {
+		parts = append(parts, "RPC_C_QOS_CAPABILITIES_MUTUAL_AUTH")
+	}
+	if e&RPC_C_QOS_CAPABILITIES_MAKE_FULLSIC != 0 {
+		parts = append(parts, "RPC_C_QOS_CAPABILITIES_MAKE_FULLSIC")
+	}
+	if e&RPC_C_QOS_CAPABILITIES_ANY_AUTHORITY != 0 {
+		parts = append(parts, "RPC_C_QOS_CAPABILITIES_ANY_AUTHORITY")
+	}
+	if e&RPC_C_QOS_CAPABILITIES_IGNORE_DELEGATE_FAILURE != 0 {
+		parts = append(parts, "RPC_C_QOS_CAPABILITIES_IGNORE_DELEGATE_FAILURE")
+	}
+	if e&RPC_C_QOS_CAPABILITIES_LOCAL_MA_HINT != 0 {
+		parts = append(parts, "RPC_C_QOS_CAPABILITIES_LOCAL_MA_HINT")
+	}
+	if e&RPC_C_QOS_CAPABILITIES_SCHANNEL_FULL_AUTH_IDENTITY != 0 {
+		parts = append(parts, "RPC_C_QOS_CAPABILITIES_SCHANNEL_FULL_AUTH_IDENTITY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type RPC_C_QOS_IDENTITY uint32
 
 const (
 	RPC_C_QOS_IDENTITY_STATIC  RPC_C_QOS_IDENTITY = 0
 	RPC_C_QOS_IDENTITY_DYNAMIC RPC_C_QOS_IDENTITY = 1
 )
+
+// String returns the RPC_C_QOS_IDENTITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_C_QOS_IDENTITY) String() string {
+	switch e {
+	case RPC_C_QOS_IDENTITY_STATIC:
+		return "RPC_C_QOS_IDENTITY_STATIC"
+	case RPC_C_QOS_IDENTITY_DYNAMIC:
+		return "RPC_C_QOS_IDENTITY_DYNAMIC"
+	default:
+		return fmt.Sprintf("RPC_C_QOS_IDENTITY(%d)", uint32(e))
+	}
+}
 
 type RPC_HTTP_REDIRECTOR_STAGE int32
 
@@ -155,6 +442,25 @@ const (
 	RPCHTTP_RS_INTERFACE RPC_HTTP_REDIRECTOR_STAGE = 5
 )
 
+// String returns the RPC_HTTP_REDIRECTOR_STAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_HTTP_REDIRECTOR_STAGE) String() string {
+	switch e {
+	case RPCHTTP_RS_REDIRECT:
+		return "RPCHTTP_RS_REDIRECT"
+	case RPCHTTP_RS_ACCESS_1:
+		return "RPCHTTP_RS_ACCESS_1"
+	case RPCHTTP_RS_SESSION:
+		return "RPCHTTP_RS_SESSION"
+	case RPCHTTP_RS_ACCESS_2:
+		return "RPCHTTP_RS_ACCESS_2"
+	case RPCHTTP_RS_INTERFACE:
+		return "RPCHTTP_RS_INTERFACE"
+	default:
+		return fmt.Sprintf("RPC_HTTP_REDIRECTOR_STAGE(%d)", int32(e))
+	}
+}
+
 // RPC_NOTIFICATIONS: https://learn.microsoft.com/windows/win32/api/rpcasync/ne-rpcasync-rpc_notifications
 type RPC_NOTIFICATIONS int32
 
@@ -163,6 +469,21 @@ const (
 	RpcNotificationClientDisconnect RPC_NOTIFICATIONS = 1
 	RpcNotificationCallCancel       RPC_NOTIFICATIONS = 2
 )
+
+// String returns the RPC_NOTIFICATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_NOTIFICATIONS) String() string {
+	switch e {
+	case RpcNotificationCallNone:
+		return "RpcNotificationCallNone"
+	case RpcNotificationClientDisconnect:
+		return "RpcNotificationClientDisconnect"
+	case RpcNotificationCallCancel:
+		return "RpcNotificationCallCancel"
+	default:
+		return fmt.Sprintf("RPC_NOTIFICATIONS(%d)", int32(e))
+	}
+}
 
 // RPC_NOTIFICATION_TYPES: https://learn.microsoft.com/windows/win32/api/rpcasync/ne-rpcasync-rpc_notification_types
 type RPC_NOTIFICATION_TYPES int32
@@ -175,6 +496,27 @@ const (
 	RpcNotificationTypeHwnd     RPC_NOTIFICATION_TYPES = 4
 	RpcNotificationTypeCallback RPC_NOTIFICATION_TYPES = 5
 )
+
+// String returns the RPC_NOTIFICATION_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_NOTIFICATION_TYPES) String() string {
+	switch e {
+	case RpcNotificationTypeNone:
+		return "RpcNotificationTypeNone"
+	case RpcNotificationTypeEvent:
+		return "RpcNotificationTypeEvent"
+	case RpcNotificationTypeApc:
+		return "RpcNotificationTypeApc"
+	case RpcNotificationTypeIoc:
+		return "RpcNotificationTypeIoc"
+	case RpcNotificationTypeHwnd:
+		return "RpcNotificationTypeHwnd"
+	case RpcNotificationTypeCallback:
+		return "RpcNotificationTypeCallback"
+	default:
+		return fmt.Sprintf("RPC_NOTIFICATION_TYPES(%d)", int32(e))
+	}
+}
 
 // RPC_STATUS: https://learn.microsoft.com/windows/win32/Rpc/rpc-status
 type RPC_STATUS int32
@@ -296,6 +638,241 @@ const (
 	RPC_S_GRP_ELT_NOT_REMOVED          RPC_STATUS = 1929
 )
 
+// String returns the RPC_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_STATUS) String() string {
+	switch e {
+	case RPC_S_OK:
+		return "RPC_S_OK"
+	case RPC_S_ACCESS_DENIED:
+		return "RPC_S_ACCESS_DENIED"
+	case RPC_S_INVALID_ARG:
+		return "RPC_S_INVALID_ARG"
+	case RPC_S_OUT_OF_MEMORY:
+		return "RPC_S_OUT_OF_MEMORY"
+	case RPC_S_OUT_OF_THREADS:
+		return "RPC_S_OUT_OF_THREADS"
+	case RPC_S_BUFFER_TOO_SMALL:
+		return "RPC_S_BUFFER_TOO_SMALL"
+	case RPC_S_INVALID_SECURITY_DESC:
+		return "RPC_S_INVALID_SECURITY_DESC"
+	case RPC_S_SERVER_OUT_OF_MEMORY:
+		return "RPC_S_SERVER_OUT_OF_MEMORY"
+	case RPC_S_ASYNC_CALL_PENDING:
+		return "RPC_S_ASYNC_CALL_PENDING"
+	case RPC_S_UNKNOWN_PRINCIPAL:
+		return "RPC_S_UNKNOWN_PRINCIPAL"
+	case RPC_S_TIMEOUT:
+		return "RPC_S_TIMEOUT"
+	case RPC_S_RUNTIME_UNINITIALIZED:
+		return "RPC_S_RUNTIME_UNINITIALIZED"
+	case RPC_S_NOT_ENOUGH_QUOTA:
+		return "RPC_S_NOT_ENOUGH_QUOTA"
+	case RPC_S_INVALID_STRING_BINDING:
+		return "RPC_S_INVALID_STRING_BINDING"
+	case RPC_S_WRONG_KIND_OF_BINDING:
+		return "RPC_S_WRONG_KIND_OF_BINDING"
+	case RPC_S_INVALID_BINDING:
+		return "RPC_S_INVALID_BINDING"
+	case RPC_S_PROTSEQ_NOT_SUPPORTED:
+		return "RPC_S_PROTSEQ_NOT_SUPPORTED"
+	case RPC_S_INVALID_RPC_PROTSEQ:
+		return "RPC_S_INVALID_RPC_PROTSEQ"
+	case RPC_S_INVALID_STRING_UUID:
+		return "RPC_S_INVALID_STRING_UUID"
+	case RPC_S_INVALID_ENDPOINT_FORMAT:
+		return "RPC_S_INVALID_ENDPOINT_FORMAT"
+	case RPC_S_INVALID_NET_ADDR:
+		return "RPC_S_INVALID_NET_ADDR"
+	case RPC_S_NO_ENDPOINT_FOUND:
+		return "RPC_S_NO_ENDPOINT_FOUND"
+	case RPC_S_INVALID_TIMEOUT:
+		return "RPC_S_INVALID_TIMEOUT"
+	case RPC_S_OBJECT_NOT_FOUND:
+		return "RPC_S_OBJECT_NOT_FOUND"
+	case RPC_S_ALREADY_REGISTERED:
+		return "RPC_S_ALREADY_REGISTERED"
+	case RPC_S_TYPE_ALREADY_REGISTERED:
+		return "RPC_S_TYPE_ALREADY_REGISTERED"
+	case RPC_S_ALREADY_LISTENING:
+		return "RPC_S_ALREADY_LISTENING"
+	case RPC_S_NO_PROTSEQS_REGISTERED:
+		return "RPC_S_NO_PROTSEQS_REGISTERED"
+	case RPC_S_NOT_LISTENING:
+		return "RPC_S_NOT_LISTENING"
+	case RPC_S_UNKNOWN_MGR_TYPE:
+		return "RPC_S_UNKNOWN_MGR_TYPE"
+	case RPC_S_UNKNOWN_IF:
+		return "RPC_S_UNKNOWN_IF"
+	case RPC_S_NO_BINDINGS:
+		return "RPC_S_NO_BINDINGS"
+	case RPC_S_NO_PROTSEQS:
+		return "RPC_S_NO_PROTSEQS"
+	case RPC_S_CANT_CREATE_ENDPOINT:
+		return "RPC_S_CANT_CREATE_ENDPOINT"
+	case RPC_S_OUT_OF_RESOURCES:
+		return "RPC_S_OUT_OF_RESOURCES"
+	case RPC_S_SERVER_UNAVAILABLE:
+		return "RPC_S_SERVER_UNAVAILABLE"
+	case RPC_S_SERVER_TOO_BUSY:
+		return "RPC_S_SERVER_TOO_BUSY"
+	case RPC_S_INVALID_NETWORK_OPTIONS:
+		return "RPC_S_INVALID_NETWORK_OPTIONS"
+	case RPC_S_NO_CALL_ACTIVE:
+		return "RPC_S_NO_CALL_ACTIVE"
+	case RPC_S_CALL_FAILED:
+		return "RPC_S_CALL_FAILED"
+	case RPC_S_CALL_FAILED_DNE:
+		return "RPC_S_CALL_FAILED_DNE"
+	case RPC_S_PROTOCOL_ERROR:
+		return "RPC_S_PROTOCOL_ERROR"
+	case RPC_S_PROXY_ACCESS_DENIED:
+		return "RPC_S_PROXY_ACCESS_DENIED"
+	case RPC_S_UNSUPPORTED_TRANS_SYN:
+		return "RPC_S_UNSUPPORTED_TRANS_SYN"
+	case RPC_S_UNSUPPORTED_TYPE:
+		return "RPC_S_UNSUPPORTED_TYPE"
+	case RPC_S_INVALID_TAG:
+		return "RPC_S_INVALID_TAG"
+	case RPC_S_INVALID_BOUND:
+		return "RPC_S_INVALID_BOUND"
+	case RPC_S_NO_ENTRY_NAME:
+		return "RPC_S_NO_ENTRY_NAME"
+	case RPC_S_INVALID_NAME_SYNTAX:
+		return "RPC_S_INVALID_NAME_SYNTAX"
+	case RPC_S_UNSUPPORTED_NAME_SYNTAX:
+		return "RPC_S_UNSUPPORTED_NAME_SYNTAX"
+	case RPC_S_UUID_NO_ADDRESS:
+		return "RPC_S_UUID_NO_ADDRESS"
+	case RPC_S_DUPLICATE_ENDPOINT:
+		return "RPC_S_DUPLICATE_ENDPOINT"
+	case RPC_S_UNKNOWN_AUTHN_TYPE:
+		return "RPC_S_UNKNOWN_AUTHN_TYPE"
+	case RPC_S_MAX_CALLS_TOO_SMALL:
+		return "RPC_S_MAX_CALLS_TOO_SMALL"
+	case RPC_S_STRING_TOO_LONG:
+		return "RPC_S_STRING_TOO_LONG"
+	case RPC_S_PROTSEQ_NOT_FOUND:
+		return "RPC_S_PROTSEQ_NOT_FOUND"
+	case RPC_S_PROCNUM_OUT_OF_RANGE:
+		return "RPC_S_PROCNUM_OUT_OF_RANGE"
+	case RPC_S_BINDING_HAS_NO_AUTH:
+		return "RPC_S_BINDING_HAS_NO_AUTH"
+	case RPC_S_UNKNOWN_AUTHN_SERVICE:
+		return "RPC_S_UNKNOWN_AUTHN_SERVICE"
+	case RPC_S_UNKNOWN_AUTHN_LEVEL:
+		return "RPC_S_UNKNOWN_AUTHN_LEVEL"
+	case RPC_S_INVALID_AUTH_IDENTITY:
+		return "RPC_S_INVALID_AUTH_IDENTITY"
+	case RPC_S_UNKNOWN_AUTHZ_SERVICE:
+		return "RPC_S_UNKNOWN_AUTHZ_SERVICE"
+	case EPT_S_INVALID_ENTRY:
+		return "EPT_S_INVALID_ENTRY"
+	case EPT_S_CANT_PERFORM_OP:
+		return "EPT_S_CANT_PERFORM_OP"
+	case EPT_S_NOT_REGISTERED:
+		return "EPT_S_NOT_REGISTERED"
+	case RPC_S_NOTHING_TO_EXPORT:
+		return "RPC_S_NOTHING_TO_EXPORT"
+	case RPC_S_INCOMPLETE_NAME:
+		return "RPC_S_INCOMPLETE_NAME"
+	case RPC_S_INVALID_VERS_OPTION:
+		return "RPC_S_INVALID_VERS_OPTION"
+	case RPC_S_NO_MORE_MEMBERS:
+		return "RPC_S_NO_MORE_MEMBERS"
+	case RPC_S_NOT_ALL_OBJS_UNEXPORTED:
+		return "RPC_S_NOT_ALL_OBJS_UNEXPORTED"
+	case RPC_S_INTERFACE_NOT_FOUND:
+		return "RPC_S_INTERFACE_NOT_FOUND"
+	case RPC_S_ENTRY_ALREADY_EXISTS:
+		return "RPC_S_ENTRY_ALREADY_EXISTS"
+	case RPC_S_ENTRY_NOT_FOUND:
+		return "RPC_S_ENTRY_NOT_FOUND"
+	case RPC_S_NAME_SERVICE_UNAVAILABLE:
+		return "RPC_S_NAME_SERVICE_UNAVAILABLE"
+	case RPC_S_INVALID_NAF_ID:
+		return "RPC_S_INVALID_NAF_ID"
+	case RPC_S_CANNOT_SUPPORT:
+		return "RPC_S_CANNOT_SUPPORT"
+	case RPC_S_NO_CONTEXT_AVAILABLE:
+		return "RPC_S_NO_CONTEXT_AVAILABLE"
+	case RPC_S_INTERNAL_ERROR:
+		return "RPC_S_INTERNAL_ERROR"
+	case RPC_S_ZERO_DIVIDE:
+		return "RPC_S_ZERO_DIVIDE"
+	case RPC_S_ADDRESS_ERROR:
+		return "RPC_S_ADDRESS_ERROR"
+	case RPC_S_FP_DIV_ZERO:
+		return "RPC_S_FP_DIV_ZERO"
+	case RPC_S_FP_UNDERFLOW:
+		return "RPC_S_FP_UNDERFLOW"
+	case RPC_S_FP_OVERFLOW:
+		return "RPC_S_FP_OVERFLOW"
+	case RPC_S_CALL_IN_PROGRESS:
+		return "RPC_S_CALL_IN_PROGRESS"
+	case RPC_S_NO_MORE_BINDINGS:
+		return "RPC_S_NO_MORE_BINDINGS"
+	case RPC_S_NO_INTERFACES:
+		return "RPC_S_NO_INTERFACES"
+	case RPC_S_CALL_CANCELLED:
+		return "RPC_S_CALL_CANCELLED"
+	case RPC_S_BINDING_INCOMPLETE:
+		return "RPC_S_BINDING_INCOMPLETE"
+	case RPC_S_COMM_FAILURE:
+		return "RPC_S_COMM_FAILURE"
+	case RPC_S_UNSUPPORTED_AUTHN_LEVEL:
+		return "RPC_S_UNSUPPORTED_AUTHN_LEVEL"
+	case RPC_S_NO_PRINC_NAME:
+		return "RPC_S_NO_PRINC_NAME"
+	case RPC_S_NOT_RPC_ERROR:
+		return "RPC_S_NOT_RPC_ERROR"
+	case RPC_S_UUID_LOCAL_ONLY:
+		return "RPC_S_UUID_LOCAL_ONLY"
+	case RPC_S_SEC_PKG_ERROR:
+		return "RPC_S_SEC_PKG_ERROR"
+	case RPC_S_NOT_CANCELLED:
+		return "RPC_S_NOT_CANCELLED"
+	case RPC_S_COOKIE_AUTH_FAILED:
+		return "RPC_S_COOKIE_AUTH_FAILED"
+	case RPC_S_DO_NOT_DISTURB:
+		return "RPC_S_DO_NOT_DISTURB"
+	case RPC_S_SYSTEM_HANDLE_COUNT_EXCEEDED:
+		return "RPC_S_SYSTEM_HANDLE_COUNT_EXCEEDED"
+	case RPC_S_SYSTEM_HANDLE_TYPE_MISMATCH:
+		return "RPC_S_SYSTEM_HANDLE_TYPE_MISMATCH"
+	case RPC_S_GROUP_MEMBER_NOT_FOUND:
+		return "RPC_S_GROUP_MEMBER_NOT_FOUND"
+	case EPT_S_CANT_CREATE:
+		return "EPT_S_CANT_CREATE"
+	case RPC_S_INVALID_OBJECT:
+		return "RPC_S_INVALID_OBJECT"
+	case RPC_S_SEND_INCOMPLETE:
+		return "RPC_S_SEND_INCOMPLETE"
+	case RPC_S_INVALID_ASYNC_HANDLE:
+		return "RPC_S_INVALID_ASYNC_HANDLE"
+	case RPC_S_INVALID_ASYNC_CALL:
+		return "RPC_S_INVALID_ASYNC_CALL"
+	case RPC_S_ENTRY_TYPE_MISMATCH:
+		return "RPC_S_ENTRY_TYPE_MISMATCH"
+	case RPC_S_NOT_ALL_OBJS_EXPORTED:
+		return "RPC_S_NOT_ALL_OBJS_EXPORTED"
+	case RPC_S_INTERFACE_NOT_EXPORTED:
+		return "RPC_S_INTERFACE_NOT_EXPORTED"
+	case RPC_S_PROFILE_NOT_ADDED:
+		return "RPC_S_PROFILE_NOT_ADDED"
+	case RPC_S_PRF_ELT_NOT_ADDED:
+		return "RPC_S_PRF_ELT_NOT_ADDED"
+	case RPC_S_PRF_ELT_NOT_REMOVED:
+		return "RPC_S_PRF_ELT_NOT_REMOVED"
+	case RPC_S_GRP_ELT_NOT_ADDED:
+		return "RPC_S_GRP_ELT_NOT_ADDED"
+	case RPC_S_GRP_ELT_NOT_REMOVED:
+		return "RPC_S_GRP_ELT_NOT_REMOVED"
+	default:
+		return fmt.Sprintf("RPC_STATUS(%d)", int32(e))
+	}
+}
+
 // RpcCallClientLocality: https://learn.microsoft.com/windows/win32/api/rpcasync/ne-rpcasync-rpccallclientlocality
 type RpcCallClientLocality int32
 
@@ -305,6 +882,23 @@ const (
 	RcclRemote                RpcCallClientLocality = 2
 	RcclClientUnknownLocality RpcCallClientLocality = 3
 )
+
+// String returns the RpcCallClientLocality constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RpcCallClientLocality) String() string {
+	switch e {
+	case RcclInvalid:
+		return "RcclInvalid"
+	case RcclLocal:
+		return "RcclLocal"
+	case RcclRemote:
+		return "RcclRemote"
+	case RcclClientUnknownLocality:
+		return "RcclClientUnknownLocality"
+	default:
+		return fmt.Sprintf("RpcCallClientLocality(%d)", int32(e))
+	}
+}
 
 // RpcCallType: https://learn.microsoft.com/windows/win32/api/rpcasync/ne-rpcasync-rpccalltype
 type RpcCallType int32
@@ -316,6 +910,23 @@ const (
 	RctGuaranteed RpcCallType = 3
 )
 
+// String returns the RpcCallType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RpcCallType) String() string {
+	switch e {
+	case RctInvalid:
+		return "RctInvalid"
+	case RctNormal:
+		return "RctNormal"
+	case RctTraining:
+		return "RctTraining"
+	case RctGuaranteed:
+		return "RctGuaranteed"
+	default:
+		return fmt.Sprintf("RpcCallType(%d)", int32(e))
+	}
+}
+
 // RpcLocalAddressFormat: https://learn.microsoft.com/windows/win32/api/rpcasync/ne-rpcasync-rpclocaladdressformat
 type RpcLocalAddressFormat int32
 
@@ -324,6 +935,21 @@ const (
 	RlafIPv4    RpcLocalAddressFormat = 1
 	RlafIPv6    RpcLocalAddressFormat = 2
 )
+
+// String returns the RpcLocalAddressFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RpcLocalAddressFormat) String() string {
+	switch e {
+	case RlafInvalid:
+		return "RlafInvalid"
+	case RlafIPv4:
+		return "RlafIPv4"
+	case RlafIPv6:
+		return "RlafIPv6"
+	default:
+		return fmt.Sprintf("RpcLocalAddressFormat(%d)", int32(e))
+	}
+}
 
 type RpcPerfCounters int32
 
@@ -342,6 +968,39 @@ const (
 	RpcLastCounter               RpcPerfCounters = 12
 )
 
+// String returns the RpcPerfCounters constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RpcPerfCounters) String() string {
+	switch e {
+	case RpcCurrentUniqueUser:
+		return "RpcCurrentUniqueUser"
+	case RpcBackEndConnectionAttempts:
+		return "RpcBackEndConnectionAttempts"
+	case RpcBackEndConnectionFailed:
+		return "RpcBackEndConnectionFailed"
+	case RpcRequestsPerSecond:
+		return "RpcRequestsPerSecond"
+	case RpcIncomingConnections:
+		return "RpcIncomingConnections"
+	case RpcIncomingBandwidth:
+		return "RpcIncomingBandwidth"
+	case RpcOutgoingBandwidth:
+		return "RpcOutgoingBandwidth"
+	case RpcAttemptedLbsDecisions:
+		return "RpcAttemptedLbsDecisions"
+	case RpcFailedLbsDecisions:
+		return "RpcFailedLbsDecisions"
+	case RpcAttemptedLbsMessages:
+		return "RpcAttemptedLbsMessages"
+	case RpcFailedLbsMessages:
+		return "RpcFailedLbsMessages"
+	case RpcLastCounter:
+		return "RpcLastCounter"
+	default:
+		return fmt.Sprintf("RpcPerfCounters(%d)", int32(e))
+	}
+}
+
 // SEC_WINNT_AUTH_IDENTITY: https://learn.microsoft.com/windows/win32/api/sspi/ns-sspi-sec_winnt_auth_identity_w
 type SEC_WINNT_AUTH_IDENTITY uint32
 
@@ -349,6 +1008,19 @@ const (
 	SEC_WINNT_AUTH_IDENTITY_ANSI    SEC_WINNT_AUTH_IDENTITY = 1
 	SEC_WINNT_AUTH_IDENTITY_UNICODE SEC_WINNT_AUTH_IDENTITY = 2
 )
+
+// String returns the SEC_WINNT_AUTH_IDENTITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SEC_WINNT_AUTH_IDENTITY) String() string {
+	switch e {
+	case SEC_WINNT_AUTH_IDENTITY_ANSI:
+		return "SEC_WINNT_AUTH_IDENTITY_ANSI"
+	case SEC_WINNT_AUTH_IDENTITY_UNICODE:
+		return "SEC_WINNT_AUTH_IDENTITY_UNICODE"
+	default:
+		return fmt.Sprintf("SEC_WINNT_AUTH_IDENTITY(%d)", uint32(e))
+	}
+}
 
 type STUB_PHASE int32
 
@@ -359,6 +1031,23 @@ const (
 	STUB_CALL_SERVER_NO_HRESULT STUB_PHASE = 3
 )
 
+// String returns the STUB_PHASE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STUB_PHASE) String() string {
+	switch e {
+	case STUB_UNMARSHAL:
+		return "STUB_UNMARSHAL"
+	case STUB_CALL_SERVER:
+		return "STUB_CALL_SERVER"
+	case STUB_MARSHAL:
+		return "STUB_MARSHAL"
+	case STUB_CALL_SERVER_NO_HRESULT:
+		return "STUB_CALL_SERVER_NO_HRESULT"
+	default:
+		return fmt.Sprintf("STUB_PHASE(%d)", int32(e))
+	}
+}
+
 type USER_MARSHAL_CB_TYPE int32
 
 const (
@@ -368,12 +1057,42 @@ const (
 	USER_MARSHAL_CB_FREE        USER_MARSHAL_CB_TYPE = 3
 )
 
+// String returns the USER_MARSHAL_CB_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USER_MARSHAL_CB_TYPE) String() string {
+	switch e {
+	case USER_MARSHAL_CB_BUFFER_SIZE:
+		return "USER_MARSHAL_CB_BUFFER_SIZE"
+	case USER_MARSHAL_CB_MARSHALL:
+		return "USER_MARSHAL_CB_MARSHALL"
+	case USER_MARSHAL_CB_UNMARSHALL:
+		return "USER_MARSHAL_CB_UNMARSHALL"
+	case USER_MARSHAL_CB_FREE:
+		return "USER_MARSHAL_CB_FREE"
+	default:
+		return fmt.Sprintf("USER_MARSHAL_CB_TYPE(%d)", int32(e))
+	}
+}
+
 type XLAT_SIDE int32
 
 const (
 	XLAT_SERVER XLAT_SIDE = 1
 	XLAT_CLIENT XLAT_SIDE = 2
 )
+
+// String returns the XLAT_SIDE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XLAT_SIDE) String() string {
+	switch e {
+	case XLAT_SERVER:
+		return "XLAT_SERVER"
+	case XLAT_CLIENT:
+		return "XLAT_CLIENT"
+	default:
+		return fmt.Sprintf("XLAT_SIDE(%d)", int32(e))
+	}
+}
 
 type System_handle_t int32
 
@@ -394,3 +1113,40 @@ const (
 	SYSTEM_HANDLE_MAX                System_handle_t = 12
 	SYSTEM_HANDLE_INVALID            System_handle_t = 255
 )
+
+// String returns the System_handle_t constant's name, or its numeric form when
+// the value is not a known constant.
+func (e System_handle_t) String() string {
+	switch e {
+	case SYSTEM_HANDLE_FILE:
+		return "SYSTEM_HANDLE_FILE"
+	case SYSTEM_HANDLE_SEMAPHORE:
+		return "SYSTEM_HANDLE_SEMAPHORE"
+	case SYSTEM_HANDLE_EVENT:
+		return "SYSTEM_HANDLE_EVENT"
+	case SYSTEM_HANDLE_MUTEX:
+		return "SYSTEM_HANDLE_MUTEX"
+	case SYSTEM_HANDLE_PROCESS:
+		return "SYSTEM_HANDLE_PROCESS"
+	case SYSTEM_HANDLE_TOKEN:
+		return "SYSTEM_HANDLE_TOKEN"
+	case SYSTEM_HANDLE_SECTION:
+		return "SYSTEM_HANDLE_SECTION"
+	case SYSTEM_HANDLE_REG_KEY:
+		return "SYSTEM_HANDLE_REG_KEY"
+	case SYSTEM_HANDLE_THREAD:
+		return "SYSTEM_HANDLE_THREAD"
+	case SYSTEM_HANDLE_COMPOSITION_OBJECT:
+		return "SYSTEM_HANDLE_COMPOSITION_OBJECT"
+	case SYSTEM_HANDLE_SOCKET:
+		return "SYSTEM_HANDLE_SOCKET"
+	case SYSTEM_HANDLE_JOB:
+		return "SYSTEM_HANDLE_JOB"
+	case SYSTEM_HANDLE_PIPE:
+		return "SYSTEM_HANDLE_PIPE"
+	case SYSTEM_HANDLE_INVALID:
+		return "SYSTEM_HANDLE_INVALID"
+	default:
+		return fmt.Sprintf("System_handle_t(%d)", int32(e))
+	}
+}

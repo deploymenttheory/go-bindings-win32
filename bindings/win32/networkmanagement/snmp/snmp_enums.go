@@ -4,6 +4,10 @@
 
 package snmp
 
+import (
+	"fmt"
+)
+
 type SNMP_API_TRANSLATE_MODE uint32
 
 const (
@@ -11,6 +15,21 @@ const (
 	SNMPAPI_UNTRANSLATED_V1 SNMP_API_TRANSLATE_MODE = 1
 	SNMPAPI_UNTRANSLATED_V2 SNMP_API_TRANSLATE_MODE = 2
 )
+
+// String returns the SNMP_API_TRANSLATE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SNMP_API_TRANSLATE_MODE) String() string {
+	switch e {
+	case SNMPAPI_TRANSLATED:
+		return "SNMPAPI_TRANSLATED"
+	case SNMPAPI_UNTRANSLATED_V1:
+		return "SNMPAPI_UNTRANSLATED_V1"
+	case SNMPAPI_UNTRANSLATED_V2:
+		return "SNMPAPI_UNTRANSLATED_V2"
+	default:
+		return fmt.Sprintf("SNMP_API_TRANSLATE_MODE(%d)", uint32(e))
+	}
+}
 
 type SNMP_ERROR uint32
 
@@ -36,6 +55,53 @@ const (
 	SNMP_ERROR_INCONSISTENTNAME    SNMP_ERROR = 18
 )
 
+// String returns the SNMP_ERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SNMP_ERROR) String() string {
+	switch e {
+	case SNMP_ERROR_NOERROR:
+		return "SNMP_ERROR_NOERROR"
+	case SNMP_ERROR_TOOBIG:
+		return "SNMP_ERROR_TOOBIG"
+	case SNMP_ERROR_NOSUCHNAME:
+		return "SNMP_ERROR_NOSUCHNAME"
+	case SNMP_ERROR_BADVALUE:
+		return "SNMP_ERROR_BADVALUE"
+	case SNMP_ERROR_READONLY:
+		return "SNMP_ERROR_READONLY"
+	case SNMP_ERROR_GENERR:
+		return "SNMP_ERROR_GENERR"
+	case SNMP_ERROR_NOACCESS:
+		return "SNMP_ERROR_NOACCESS"
+	case SNMP_ERROR_WRONGTYPE:
+		return "SNMP_ERROR_WRONGTYPE"
+	case SNMP_ERROR_WRONGLENGTH:
+		return "SNMP_ERROR_WRONGLENGTH"
+	case SNMP_ERROR_WRONGENCODING:
+		return "SNMP_ERROR_WRONGENCODING"
+	case SNMP_ERROR_WRONGVALUE:
+		return "SNMP_ERROR_WRONGVALUE"
+	case SNMP_ERROR_NOCREATION:
+		return "SNMP_ERROR_NOCREATION"
+	case SNMP_ERROR_INCONSISTENTVALUE:
+		return "SNMP_ERROR_INCONSISTENTVALUE"
+	case SNMP_ERROR_RESOURCEUNAVAILABLE:
+		return "SNMP_ERROR_RESOURCEUNAVAILABLE"
+	case SNMP_ERROR_COMMITFAILED:
+		return "SNMP_ERROR_COMMITFAILED"
+	case SNMP_ERROR_UNDOFAILED:
+		return "SNMP_ERROR_UNDOFAILED"
+	case SNMP_ERROR_AUTHORIZATIONERROR:
+		return "SNMP_ERROR_AUTHORIZATIONERROR"
+	case SNMP_ERROR_NOTWRITABLE:
+		return "SNMP_ERROR_NOTWRITABLE"
+	case SNMP_ERROR_INCONSISTENTNAME:
+		return "SNMP_ERROR_INCONSISTENTNAME"
+	default:
+		return fmt.Sprintf("SNMP_ERROR(%d)", uint32(e))
+	}
+}
+
 type SNMP_ERROR_STATUS uint32
 
 const (
@@ -60,6 +126,53 @@ const (
 	SNMP_ERRORSTATUS_INCONSISTENTNAME    SNMP_ERROR_STATUS = 18
 )
 
+// String returns the SNMP_ERROR_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SNMP_ERROR_STATUS) String() string {
+	switch e {
+	case SNMP_ERRORSTATUS_NOERROR:
+		return "SNMP_ERRORSTATUS_NOERROR"
+	case SNMP_ERRORSTATUS_TOOBIG:
+		return "SNMP_ERRORSTATUS_TOOBIG"
+	case SNMP_ERRORSTATUS_NOSUCHNAME:
+		return "SNMP_ERRORSTATUS_NOSUCHNAME"
+	case SNMP_ERRORSTATUS_BADVALUE:
+		return "SNMP_ERRORSTATUS_BADVALUE"
+	case SNMP_ERRORSTATUS_READONLY:
+		return "SNMP_ERRORSTATUS_READONLY"
+	case SNMP_ERRORSTATUS_GENERR:
+		return "SNMP_ERRORSTATUS_GENERR"
+	case SNMP_ERRORSTATUS_NOACCESS:
+		return "SNMP_ERRORSTATUS_NOACCESS"
+	case SNMP_ERRORSTATUS_WRONGTYPE:
+		return "SNMP_ERRORSTATUS_WRONGTYPE"
+	case SNMP_ERRORSTATUS_WRONGLENGTH:
+		return "SNMP_ERRORSTATUS_WRONGLENGTH"
+	case SNMP_ERRORSTATUS_WRONGENCODING:
+		return "SNMP_ERRORSTATUS_WRONGENCODING"
+	case SNMP_ERRORSTATUS_WRONGVALUE:
+		return "SNMP_ERRORSTATUS_WRONGVALUE"
+	case SNMP_ERRORSTATUS_NOCREATION:
+		return "SNMP_ERRORSTATUS_NOCREATION"
+	case SNMP_ERRORSTATUS_INCONSISTENTVALUE:
+		return "SNMP_ERRORSTATUS_INCONSISTENTVALUE"
+	case SNMP_ERRORSTATUS_RESOURCEUNAVAILABLE:
+		return "SNMP_ERRORSTATUS_RESOURCEUNAVAILABLE"
+	case SNMP_ERRORSTATUS_COMMITFAILED:
+		return "SNMP_ERRORSTATUS_COMMITFAILED"
+	case SNMP_ERRORSTATUS_UNDOFAILED:
+		return "SNMP_ERRORSTATUS_UNDOFAILED"
+	case SNMP_ERRORSTATUS_AUTHORIZATIONERROR:
+		return "SNMP_ERRORSTATUS_AUTHORIZATIONERROR"
+	case SNMP_ERRORSTATUS_NOTWRITABLE:
+		return "SNMP_ERRORSTATUS_NOTWRITABLE"
+	case SNMP_ERRORSTATUS_INCONSISTENTNAME:
+		return "SNMP_ERRORSTATUS_INCONSISTENTNAME"
+	default:
+		return fmt.Sprintf("SNMP_ERROR_STATUS(%d)", uint32(e))
+	}
+}
+
 type SNMP_EXTENSION_REQUEST_TYPE uint32
 
 const (
@@ -70,6 +183,27 @@ const (
 	SNMP_EXTENSION_SET_UNDO    SNMP_EXTENSION_REQUEST_TYPE = 225
 	SNMP_EXTENSION_SET_CLEANUP SNMP_EXTENSION_REQUEST_TYPE = 226
 )
+
+// String returns the SNMP_EXTENSION_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SNMP_EXTENSION_REQUEST_TYPE) String() string {
+	switch e {
+	case SNMP_EXTENSION_GET:
+		return "SNMP_EXTENSION_GET"
+	case SNMP_EXTENSION_GET_NEXT:
+		return "SNMP_EXTENSION_GET_NEXT"
+	case SNMP_EXTENSION_SET_TEST:
+		return "SNMP_EXTENSION_SET_TEST"
+	case SNMP_EXTENSION_SET_COMMIT:
+		return "SNMP_EXTENSION_SET_COMMIT"
+	case SNMP_EXTENSION_SET_UNDO:
+		return "SNMP_EXTENSION_SET_UNDO"
+	case SNMP_EXTENSION_SET_CLEANUP:
+		return "SNMP_EXTENSION_SET_CLEANUP"
+	default:
+		return fmt.Sprintf("SNMP_EXTENSION_REQUEST_TYPE(%d)", uint32(e))
+	}
+}
 
 type SNMP_GENERICTRAP uint32
 
@@ -83,6 +217,29 @@ const (
 	SNMP_GENERICTRAP_ENTERSPECIFIC SNMP_GENERICTRAP = 6
 )
 
+// String returns the SNMP_GENERICTRAP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SNMP_GENERICTRAP) String() string {
+	switch e {
+	case SNMP_GENERICTRAP_COLDSTART:
+		return "SNMP_GENERICTRAP_COLDSTART"
+	case SNMP_GENERICTRAP_WARMSTART:
+		return "SNMP_GENERICTRAP_WARMSTART"
+	case SNMP_GENERICTRAP_LINKDOWN:
+		return "SNMP_GENERICTRAP_LINKDOWN"
+	case SNMP_GENERICTRAP_LINKUP:
+		return "SNMP_GENERICTRAP_LINKUP"
+	case SNMP_GENERICTRAP_AUTHFAILURE:
+		return "SNMP_GENERICTRAP_AUTHFAILURE"
+	case SNMP_GENERICTRAP_EGPNEIGHLOSS:
+		return "SNMP_GENERICTRAP_EGPNEIGHLOSS"
+	case SNMP_GENERICTRAP_ENTERSPECIFIC:
+		return "SNMP_GENERICTRAP_ENTERSPECIFIC"
+	default:
+		return fmt.Sprintf("SNMP_GENERICTRAP(%d)", uint32(e))
+	}
+}
+
 type SNMP_LOG int32
 
 const (
@@ -94,6 +251,27 @@ const (
 	SNMP_LOG_VERBOSE SNMP_LOG = 5
 )
 
+// String returns the SNMP_LOG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SNMP_LOG) String() string {
+	switch e {
+	case SNMP_LOG_SILENT:
+		return "SNMP_LOG_SILENT"
+	case SNMP_LOG_FATAL:
+		return "SNMP_LOG_FATAL"
+	case SNMP_LOG_ERROR:
+		return "SNMP_LOG_ERROR"
+	case SNMP_LOG_WARNING:
+		return "SNMP_LOG_WARNING"
+	case SNMP_LOG_TRACE:
+		return "SNMP_LOG_TRACE"
+	case SNMP_LOG_VERBOSE:
+		return "SNMP_LOG_VERBOSE"
+	default:
+		return fmt.Sprintf("SNMP_LOG(%d)", int32(e))
+	}
+}
+
 type SNMP_OUTPUT_LOG_TYPE uint32
 
 const (
@@ -101,6 +279,21 @@ const (
 	SNMP_OUTPUT_TO_LOGFILE  SNMP_OUTPUT_LOG_TYPE = 2
 	SNMP_OUTPUT_TO_DEBUGGER SNMP_OUTPUT_LOG_TYPE = 8
 )
+
+// String returns the SNMP_OUTPUT_LOG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SNMP_OUTPUT_LOG_TYPE) String() string {
+	switch e {
+	case SNMP_OUTPUT_TO_CONSOLE:
+		return "SNMP_OUTPUT_TO_CONSOLE"
+	case SNMP_OUTPUT_TO_LOGFILE:
+		return "SNMP_OUTPUT_TO_LOGFILE"
+	case SNMP_OUTPUT_TO_DEBUGGER:
+		return "SNMP_OUTPUT_TO_DEBUGGER"
+	default:
+		return fmt.Sprintf("SNMP_OUTPUT_LOG_TYPE(%d)", uint32(e))
+	}
+}
 
 type SNMP_PDU_TYPE uint32
 
@@ -113,9 +306,43 @@ const (
 	SNMP_PDU_TRAP     SNMP_PDU_TYPE = 167
 )
 
+// String returns the SNMP_PDU_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SNMP_PDU_TYPE) String() string {
+	switch e {
+	case SNMP_PDU_GET:
+		return "SNMP_PDU_GET"
+	case SNMP_PDU_GETNEXT:
+		return "SNMP_PDU_GETNEXT"
+	case SNMP_PDU_RESPONSE:
+		return "SNMP_PDU_RESPONSE"
+	case SNMP_PDU_SET:
+		return "SNMP_PDU_SET"
+	case SNMP_PDU_GETBULK:
+		return "SNMP_PDU_GETBULK"
+	case SNMP_PDU_TRAP:
+		return "SNMP_PDU_TRAP"
+	default:
+		return fmt.Sprintf("SNMP_PDU_TYPE(%d)", uint32(e))
+	}
+}
+
 type SNMP_STATUS uint32
 
 const (
 	SNMPAPI_ON  SNMP_STATUS = 1
 	SNMPAPI_OFF SNMP_STATUS = 0
 )
+
+// String returns the SNMP_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SNMP_STATUS) String() string {
+	switch e {
+	case SNMPAPI_ON:
+		return "SNMPAPI_ON"
+	case SNMPAPI_OFF:
+		return "SNMPAPI_OFF"
+	default:
+		return fmt.Sprintf("SNMP_STATUS(%d)", uint32(e))
+	}
+}

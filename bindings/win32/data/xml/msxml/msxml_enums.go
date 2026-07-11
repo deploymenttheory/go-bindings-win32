@@ -4,6 +4,10 @@
 
 package msxml
 
+import (
+	"fmt"
+)
+
 type DOMNodeType int32
 
 const (
@@ -22,6 +26,41 @@ const (
 	NODE_NOTATION               DOMNodeType = 12
 )
 
+// String returns the DOMNodeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOMNodeType) String() string {
+	switch e {
+	case NODE_INVALID:
+		return "NODE_INVALID"
+	case NODE_ELEMENT:
+		return "NODE_ELEMENT"
+	case NODE_ATTRIBUTE:
+		return "NODE_ATTRIBUTE"
+	case NODE_TEXT:
+		return "NODE_TEXT"
+	case NODE_CDATA_SECTION:
+		return "NODE_CDATA_SECTION"
+	case NODE_ENTITY_REFERENCE:
+		return "NODE_ENTITY_REFERENCE"
+	case NODE_ENTITY:
+		return "NODE_ENTITY"
+	case NODE_PROCESSING_INSTRUCTION:
+		return "NODE_PROCESSING_INSTRUCTION"
+	case NODE_COMMENT:
+		return "NODE_COMMENT"
+	case NODE_DOCUMENT:
+		return "NODE_DOCUMENT"
+	case NODE_DOCUMENT_TYPE:
+		return "NODE_DOCUMENT_TYPE"
+	case NODE_DOCUMENT_FRAGMENT:
+		return "NODE_DOCUMENT_FRAGMENT"
+	case NODE_NOTATION:
+		return "NODE_NOTATION"
+	default:
+		return fmt.Sprintf("DOMNodeType(%d)", int32(e))
+	}
+}
+
 type SCHEMACONTENTTYPE int32
 
 const (
@@ -30,6 +69,23 @@ const (
 	SCHEMACONTENTTYPE_ELEMENTONLY SCHEMACONTENTTYPE = 2
 	SCHEMACONTENTTYPE_MIXED       SCHEMACONTENTTYPE = 3
 )
+
+// String returns the SCHEMACONTENTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCHEMACONTENTTYPE) String() string {
+	switch e {
+	case SCHEMACONTENTTYPE_EMPTY:
+		return "SCHEMACONTENTTYPE_EMPTY"
+	case SCHEMACONTENTTYPE_TEXTONLY:
+		return "SCHEMACONTENTTYPE_TEXTONLY"
+	case SCHEMACONTENTTYPE_ELEMENTONLY:
+		return "SCHEMACONTENTTYPE_ELEMENTONLY"
+	case SCHEMACONTENTTYPE_MIXED:
+		return "SCHEMACONTENTTYPE_MIXED"
+	default:
+		return fmt.Sprintf("SCHEMACONTENTTYPE(%d)", int32(e))
+	}
+}
 
 type SCHEMADERIVATIONMETHOD int32
 
@@ -44,6 +100,31 @@ const (
 	SCHEMADERIVATIONMETHOD_NONE         SCHEMADERIVATIONMETHOD = 256
 )
 
+// String returns the SCHEMADERIVATIONMETHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCHEMADERIVATIONMETHOD) String() string {
+	switch e {
+	case SCHEMADERIVATIONMETHOD_EMPTY:
+		return "SCHEMADERIVATIONMETHOD_EMPTY"
+	case SCHEMADERIVATIONMETHOD_SUBSTITUTION:
+		return "SCHEMADERIVATIONMETHOD_SUBSTITUTION"
+	case SCHEMADERIVATIONMETHOD_EXTENSION:
+		return "SCHEMADERIVATIONMETHOD_EXTENSION"
+	case SCHEMADERIVATIONMETHOD_RESTRICTION:
+		return "SCHEMADERIVATIONMETHOD_RESTRICTION"
+	case SCHEMADERIVATIONMETHOD_LIST:
+		return "SCHEMADERIVATIONMETHOD_LIST"
+	case SCHEMADERIVATIONMETHOD_UNION:
+		return "SCHEMADERIVATIONMETHOD_UNION"
+	case SCHEMADERIVATIONMETHOD_ALL:
+		return "SCHEMADERIVATIONMETHOD_ALL"
+	case SCHEMADERIVATIONMETHOD_NONE:
+		return "SCHEMADERIVATIONMETHOD_NONE"
+	default:
+		return fmt.Sprintf("SCHEMADERIVATIONMETHOD(%d)", int32(e))
+	}
+}
+
 type SCHEMAPROCESSCONTENTS int32
 
 const (
@@ -52,6 +133,23 @@ const (
 	SCHEMAPROCESSCONTENTS_LAX    SCHEMAPROCESSCONTENTS = 2
 	SCHEMAPROCESSCONTENTS_STRICT SCHEMAPROCESSCONTENTS = 3
 )
+
+// String returns the SCHEMAPROCESSCONTENTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCHEMAPROCESSCONTENTS) String() string {
+	switch e {
+	case SCHEMAPROCESSCONTENTS_NONE:
+		return "SCHEMAPROCESSCONTENTS_NONE"
+	case SCHEMAPROCESSCONTENTS_SKIP:
+		return "SCHEMAPROCESSCONTENTS_SKIP"
+	case SCHEMAPROCESSCONTENTS_LAX:
+		return "SCHEMAPROCESSCONTENTS_LAX"
+	case SCHEMAPROCESSCONTENTS_STRICT:
+		return "SCHEMAPROCESSCONTENTS_STRICT"
+	default:
+		return fmt.Sprintf("SCHEMAPROCESSCONTENTS(%d)", int32(e))
+	}
+}
 
 type SCHEMATYPEVARIETY int32
 
@@ -62,6 +160,23 @@ const (
 	SCHEMATYPEVARIETY_UNION  SCHEMATYPEVARIETY = 2
 )
 
+// String returns the SCHEMATYPEVARIETY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCHEMATYPEVARIETY) String() string {
+	switch e {
+	case SCHEMATYPEVARIETY_NONE:
+		return "SCHEMATYPEVARIETY_NONE"
+	case SCHEMATYPEVARIETY_ATOMIC:
+		return "SCHEMATYPEVARIETY_ATOMIC"
+	case SCHEMATYPEVARIETY_LIST:
+		return "SCHEMATYPEVARIETY_LIST"
+	case SCHEMATYPEVARIETY_UNION:
+		return "SCHEMATYPEVARIETY_UNION"
+	default:
+		return fmt.Sprintf("SCHEMATYPEVARIETY(%d)", int32(e))
+	}
+}
+
 type SCHEMAUSE int32
 
 const (
@@ -69,6 +184,21 @@ const (
 	SCHEMAUSE_PROHIBITED SCHEMAUSE = 1
 	SCHEMAUSE_REQUIRED   SCHEMAUSE = 2
 )
+
+// String returns the SCHEMAUSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCHEMAUSE) String() string {
+	switch e {
+	case SCHEMAUSE_OPTIONAL:
+		return "SCHEMAUSE_OPTIONAL"
+	case SCHEMAUSE_PROHIBITED:
+		return "SCHEMAUSE_PROHIBITED"
+	case SCHEMAUSE_REQUIRED:
+		return "SCHEMAUSE_REQUIRED"
+	default:
+		return fmt.Sprintf("SCHEMAUSE(%d)", int32(e))
+	}
+}
 
 type SCHEMAWHITESPACE int32
 
@@ -79,6 +209,23 @@ const (
 	SCHEMAWHITESPACE_COLLAPSE SCHEMAWHITESPACE = 2
 )
 
+// String returns the SCHEMAWHITESPACE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCHEMAWHITESPACE) String() string {
+	switch e {
+	case SCHEMAWHITESPACE_NONE:
+		return "SCHEMAWHITESPACE_NONE"
+	case SCHEMAWHITESPACE_PRESERVE:
+		return "SCHEMAWHITESPACE_PRESERVE"
+	case SCHEMAWHITESPACE_REPLACE:
+		return "SCHEMAWHITESPACE_REPLACE"
+	case SCHEMAWHITESPACE_COLLAPSE:
+		return "SCHEMAWHITESPACE_COLLAPSE"
+	default:
+		return fmt.Sprintf("SCHEMAWHITESPACE(%d)", int32(e))
+	}
+}
+
 type SERVERXMLHTTP_OPTION int32
 
 const (
@@ -88,6 +235,25 @@ const (
 	SXH_OPTION_IGNORE_SERVER_SSL_CERT_ERROR_FLAGS SERVERXMLHTTP_OPTION = 2
 	SXH_OPTION_SELECT_CLIENT_SSL_CERT             SERVERXMLHTTP_OPTION = 3
 )
+
+// String returns the SERVERXMLHTTP_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVERXMLHTTP_OPTION) String() string {
+	switch e {
+	case SXH_OPTION_URL:
+		return "SXH_OPTION_URL"
+	case SXH_OPTION_URL_CODEPAGE:
+		return "SXH_OPTION_URL_CODEPAGE"
+	case SXH_OPTION_ESCAPE_PERCENT_IN_URL:
+		return "SXH_OPTION_ESCAPE_PERCENT_IN_URL"
+	case SXH_OPTION_IGNORE_SERVER_SSL_CERT_ERROR_FLAGS:
+		return "SXH_OPTION_IGNORE_SERVER_SSL_CERT_ERROR_FLAGS"
+	case SXH_OPTION_SELECT_CLIENT_SSL_CERT:
+		return "SXH_OPTION_SELECT_CLIENT_SSL_CERT"
+	default:
+		return fmt.Sprintf("SERVERXMLHTTP_OPTION(%d)", int32(e))
+	}
+}
 
 type SOMITEMTYPE int32
 
@@ -167,6 +333,161 @@ const (
 	SOMITEM_NULL_ELEMENT                SOMITEMTYPE = 18435
 )
 
+// String returns the SOMITEMTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SOMITEMTYPE) String() string {
+	switch e {
+	case SOMITEM_SCHEMA:
+		return "SOMITEM_SCHEMA"
+	case SOMITEM_ATTRIBUTE:
+		return "SOMITEM_ATTRIBUTE"
+	case SOMITEM_ATTRIBUTEGROUP:
+		return "SOMITEM_ATTRIBUTEGROUP"
+	case SOMITEM_NOTATION:
+		return "SOMITEM_NOTATION"
+	case SOMITEM_ANNOTATION:
+		return "SOMITEM_ANNOTATION"
+	case SOMITEM_IDENTITYCONSTRAINT:
+		return "SOMITEM_IDENTITYCONSTRAINT"
+	case SOMITEM_KEY:
+		return "SOMITEM_KEY"
+	case SOMITEM_KEYREF:
+		return "SOMITEM_KEYREF"
+	case SOMITEM_UNIQUE:
+		return "SOMITEM_UNIQUE"
+	case SOMITEM_ANYTYPE:
+		return "SOMITEM_ANYTYPE"
+	case SOMITEM_DATATYPE:
+		return "SOMITEM_DATATYPE"
+	case SOMITEM_DATATYPE_ANYTYPE:
+		return "SOMITEM_DATATYPE_ANYTYPE"
+	case SOMITEM_DATATYPE_ANYURI:
+		return "SOMITEM_DATATYPE_ANYURI"
+	case SOMITEM_DATATYPE_BASE64BINARY:
+		return "SOMITEM_DATATYPE_BASE64BINARY"
+	case SOMITEM_DATATYPE_BOOLEAN:
+		return "SOMITEM_DATATYPE_BOOLEAN"
+	case SOMITEM_DATATYPE_BYTE:
+		return "SOMITEM_DATATYPE_BYTE"
+	case SOMITEM_DATATYPE_DATE:
+		return "SOMITEM_DATATYPE_DATE"
+	case SOMITEM_DATATYPE_DATETIME:
+		return "SOMITEM_DATATYPE_DATETIME"
+	case SOMITEM_DATATYPE_DAY:
+		return "SOMITEM_DATATYPE_DAY"
+	case SOMITEM_DATATYPE_DECIMAL:
+		return "SOMITEM_DATATYPE_DECIMAL"
+	case SOMITEM_DATATYPE_DOUBLE:
+		return "SOMITEM_DATATYPE_DOUBLE"
+	case SOMITEM_DATATYPE_DURATION:
+		return "SOMITEM_DATATYPE_DURATION"
+	case SOMITEM_DATATYPE_ENTITIES:
+		return "SOMITEM_DATATYPE_ENTITIES"
+	case SOMITEM_DATATYPE_ENTITY:
+		return "SOMITEM_DATATYPE_ENTITY"
+	case SOMITEM_DATATYPE_FLOAT:
+		return "SOMITEM_DATATYPE_FLOAT"
+	case SOMITEM_DATATYPE_HEXBINARY:
+		return "SOMITEM_DATATYPE_HEXBINARY"
+	case SOMITEM_DATATYPE_ID:
+		return "SOMITEM_DATATYPE_ID"
+	case SOMITEM_DATATYPE_IDREF:
+		return "SOMITEM_DATATYPE_IDREF"
+	case SOMITEM_DATATYPE_IDREFS:
+		return "SOMITEM_DATATYPE_IDREFS"
+	case SOMITEM_DATATYPE_INT:
+		return "SOMITEM_DATATYPE_INT"
+	case SOMITEM_DATATYPE_INTEGER:
+		return "SOMITEM_DATATYPE_INTEGER"
+	case SOMITEM_DATATYPE_LANGUAGE:
+		return "SOMITEM_DATATYPE_LANGUAGE"
+	case SOMITEM_DATATYPE_LONG:
+		return "SOMITEM_DATATYPE_LONG"
+	case SOMITEM_DATATYPE_MONTH:
+		return "SOMITEM_DATATYPE_MONTH"
+	case SOMITEM_DATATYPE_MONTHDAY:
+		return "SOMITEM_DATATYPE_MONTHDAY"
+	case SOMITEM_DATATYPE_NAME:
+		return "SOMITEM_DATATYPE_NAME"
+	case SOMITEM_DATATYPE_NCNAME:
+		return "SOMITEM_DATATYPE_NCNAME"
+	case SOMITEM_DATATYPE_NEGATIVEINTEGER:
+		return "SOMITEM_DATATYPE_NEGATIVEINTEGER"
+	case SOMITEM_DATATYPE_NMTOKEN:
+		return "SOMITEM_DATATYPE_NMTOKEN"
+	case SOMITEM_DATATYPE_NMTOKENS:
+		return "SOMITEM_DATATYPE_NMTOKENS"
+	case SOMITEM_DATATYPE_NONNEGATIVEINTEGER:
+		return "SOMITEM_DATATYPE_NONNEGATIVEINTEGER"
+	case SOMITEM_DATATYPE_NONPOSITIVEINTEGER:
+		return "SOMITEM_DATATYPE_NONPOSITIVEINTEGER"
+	case SOMITEM_DATATYPE_NORMALIZEDSTRING:
+		return "SOMITEM_DATATYPE_NORMALIZEDSTRING"
+	case SOMITEM_DATATYPE_NOTATION:
+		return "SOMITEM_DATATYPE_NOTATION"
+	case SOMITEM_DATATYPE_POSITIVEINTEGER:
+		return "SOMITEM_DATATYPE_POSITIVEINTEGER"
+	case SOMITEM_DATATYPE_QNAME:
+		return "SOMITEM_DATATYPE_QNAME"
+	case SOMITEM_DATATYPE_SHORT:
+		return "SOMITEM_DATATYPE_SHORT"
+	case SOMITEM_DATATYPE_STRING:
+		return "SOMITEM_DATATYPE_STRING"
+	case SOMITEM_DATATYPE_TIME:
+		return "SOMITEM_DATATYPE_TIME"
+	case SOMITEM_DATATYPE_TOKEN:
+		return "SOMITEM_DATATYPE_TOKEN"
+	case SOMITEM_DATATYPE_UNSIGNEDBYTE:
+		return "SOMITEM_DATATYPE_UNSIGNEDBYTE"
+	case SOMITEM_DATATYPE_UNSIGNEDINT:
+		return "SOMITEM_DATATYPE_UNSIGNEDINT"
+	case SOMITEM_DATATYPE_UNSIGNEDLONG:
+		return "SOMITEM_DATATYPE_UNSIGNEDLONG"
+	case SOMITEM_DATATYPE_UNSIGNEDSHORT:
+		return "SOMITEM_DATATYPE_UNSIGNEDSHORT"
+	case SOMITEM_DATATYPE_YEAR:
+		return "SOMITEM_DATATYPE_YEAR"
+	case SOMITEM_DATATYPE_YEARMONTH:
+		return "SOMITEM_DATATYPE_YEARMONTH"
+	case SOMITEM_DATATYPE_ANYSIMPLETYPE:
+		return "SOMITEM_DATATYPE_ANYSIMPLETYPE"
+	case SOMITEM_SIMPLETYPE:
+		return "SOMITEM_SIMPLETYPE"
+	case SOMITEM_COMPLEXTYPE:
+		return "SOMITEM_COMPLEXTYPE"
+	case SOMITEM_PARTICLE:
+		return "SOMITEM_PARTICLE"
+	case SOMITEM_ANY:
+		return "SOMITEM_ANY"
+	case SOMITEM_ANYATTRIBUTE:
+		return "SOMITEM_ANYATTRIBUTE"
+	case SOMITEM_ELEMENT:
+		return "SOMITEM_ELEMENT"
+	case SOMITEM_GROUP:
+		return "SOMITEM_GROUP"
+	case SOMITEM_ALL:
+		return "SOMITEM_ALL"
+	case SOMITEM_CHOICE:
+		return "SOMITEM_CHOICE"
+	case SOMITEM_SEQUENCE:
+		return "SOMITEM_SEQUENCE"
+	case SOMITEM_EMPTYPARTICLE:
+		return "SOMITEM_EMPTYPARTICLE"
+	case SOMITEM_NULL:
+		return "SOMITEM_NULL"
+	case SOMITEM_NULL_TYPE:
+		return "SOMITEM_NULL_TYPE"
+	case SOMITEM_NULL_ANY:
+		return "SOMITEM_NULL_ANY"
+	case SOMITEM_NULL_ANYATTRIBUTE:
+		return "SOMITEM_NULL_ANYATTRIBUTE"
+	case SOMITEM_NULL_ELEMENT:
+		return "SOMITEM_NULL_ELEMENT"
+	default:
+		return fmt.Sprintf("SOMITEMTYPE(%d)", int32(e))
+	}
+}
+
 type SXH_PROXY_SETTING int32
 
 const (
@@ -175,6 +496,21 @@ const (
 	SXH_PROXY_SET_DIRECT    SXH_PROXY_SETTING = 1
 	SXH_PROXY_SET_PROXY     SXH_PROXY_SETTING = 2
 )
+
+// String returns the SXH_PROXY_SETTING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SXH_PROXY_SETTING) String() string {
+	switch e {
+	case SXH_PROXY_SET_DEFAULT:
+		return "SXH_PROXY_SET_DEFAULT"
+	case SXH_PROXY_SET_DIRECT:
+		return "SXH_PROXY_SET_DIRECT"
+	case SXH_PROXY_SET_PROXY:
+		return "SXH_PROXY_SET_PROXY"
+	default:
+		return fmt.Sprintf("SXH_PROXY_SETTING(%d)", int32(e))
+	}
+}
 
 type SXH_SERVER_CERT_OPTION int32
 
@@ -186,6 +522,25 @@ const (
 	SXH_SERVER_CERT_IGNORE_ALL_SERVER_ERRORS SXH_SERVER_CERT_OPTION = 13056
 )
 
+// String returns the SXH_SERVER_CERT_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SXH_SERVER_CERT_OPTION) String() string {
+	switch e {
+	case SXH_SERVER_CERT_IGNORE_UNKNOWN_CA:
+		return "SXH_SERVER_CERT_IGNORE_UNKNOWN_CA"
+	case SXH_SERVER_CERT_IGNORE_WRONG_USAGE:
+		return "SXH_SERVER_CERT_IGNORE_WRONG_USAGE"
+	case SXH_SERVER_CERT_IGNORE_CERT_CN_INVALID:
+		return "SXH_SERVER_CERT_IGNORE_CERT_CN_INVALID"
+	case SXH_SERVER_CERT_IGNORE_CERT_DATE_INVALID:
+		return "SXH_SERVER_CERT_IGNORE_CERT_DATE_INVALID"
+	case SXH_SERVER_CERT_IGNORE_ALL_SERVER_ERRORS:
+		return "SXH_SERVER_CERT_IGNORE_ALL_SERVER_ERRORS"
+	default:
+		return fmt.Sprintf("SXH_SERVER_CERT_OPTION(%d)", int32(e))
+	}
+}
+
 // XHR_AUTH: https://learn.microsoft.com/windows/win32/api/msxml6/ne-msxml6-xhr_auth
 type XHR_AUTH int32
 
@@ -194,6 +549,21 @@ const (
 	XHR_AUTH_NONE  XHR_AUTH = 1
 	XHR_AUTH_PROXY XHR_AUTH = 2
 )
+
+// String returns the XHR_AUTH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XHR_AUTH) String() string {
+	switch e {
+	case XHR_AUTH_ALL:
+		return "XHR_AUTH_ALL"
+	case XHR_AUTH_NONE:
+		return "XHR_AUTH_NONE"
+	case XHR_AUTH_PROXY:
+		return "XHR_AUTH_PROXY"
+	default:
+		return fmt.Sprintf("XHR_AUTH(%d)", int32(e))
+	}
+}
 
 // XHR_CERT_ERROR_FLAG: https://learn.microsoft.com/windows/win32/api/msxml6/ne-msxml6-xhr_cert_error_flag
 type XHR_CERT_ERROR_FLAG uint32
@@ -206,6 +576,25 @@ const (
 	XHR_CERT_ERROR_ALL_SERVER_ERRORS XHR_CERT_ERROR_FLAG = 125829120
 )
 
+// String returns the XHR_CERT_ERROR_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XHR_CERT_ERROR_FLAG) String() string {
+	switch e {
+	case XHR_CERT_ERROR_REVOCATION_FAILED:
+		return "XHR_CERT_ERROR_REVOCATION_FAILED"
+	case XHR_CERT_ERROR_UNKNOWN_CA:
+		return "XHR_CERT_ERROR_UNKNOWN_CA"
+	case XHR_CERT_ERROR_CERT_CN_INVALID:
+		return "XHR_CERT_ERROR_CERT_CN_INVALID"
+	case XHR_CERT_ERROR_CERT_DATE_INVALID:
+		return "XHR_CERT_ERROR_CERT_DATE_INVALID"
+	case XHR_CERT_ERROR_ALL_SERVER_ERRORS:
+		return "XHR_CERT_ERROR_ALL_SERVER_ERRORS"
+	default:
+		return fmt.Sprintf("XHR_CERT_ERROR_FLAG(%d)", uint32(e))
+	}
+}
+
 // XHR_CERT_IGNORE_FLAG: https://learn.microsoft.com/windows/win32/api/msxml6/ne-msxml6-xhr_cert_ignore_flag
 type XHR_CERT_IGNORE_FLAG uint32
 
@@ -216,6 +605,25 @@ const (
 	XHR_CERT_IGNORE_CERT_DATE_INVALID XHR_CERT_IGNORE_FLAG = 8192
 	XHR_CERT_IGNORE_ALL_SERVER_ERRORS XHR_CERT_IGNORE_FLAG = 12672
 )
+
+// String returns the XHR_CERT_IGNORE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XHR_CERT_IGNORE_FLAG) String() string {
+	switch e {
+	case XHR_CERT_IGNORE_REVOCATION_FAILED:
+		return "XHR_CERT_IGNORE_REVOCATION_FAILED"
+	case XHR_CERT_IGNORE_UNKNOWN_CA:
+		return "XHR_CERT_IGNORE_UNKNOWN_CA"
+	case XHR_CERT_IGNORE_CERT_CN_INVALID:
+		return "XHR_CERT_IGNORE_CERT_CN_INVALID"
+	case XHR_CERT_IGNORE_CERT_DATE_INVALID:
+		return "XHR_CERT_IGNORE_CERT_DATE_INVALID"
+	case XHR_CERT_IGNORE_ALL_SERVER_ERRORS:
+		return "XHR_CERT_IGNORE_ALL_SERVER_ERRORS"
+	default:
+		return fmt.Sprintf("XHR_CERT_IGNORE_FLAG(%d)", uint32(e))
+	}
+}
 
 // XHR_COOKIE_FLAG: https://learn.microsoft.com/windows/win32/api/msxml6/ne-msxml6-xhr_cookie_flag
 type XHR_COOKIE_FLAG int32
@@ -235,6 +643,39 @@ const (
 	XHR_COOKIE_HTTPONLY        XHR_COOKIE_FLAG = 8192
 )
 
+// String returns the XHR_COOKIE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XHR_COOKIE_FLAG) String() string {
+	switch e {
+	case XHR_COOKIE_IS_SECURE:
+		return "XHR_COOKIE_IS_SECURE"
+	case XHR_COOKIE_IS_SESSION:
+		return "XHR_COOKIE_IS_SESSION"
+	case XHR_COOKIE_THIRD_PARTY:
+		return "XHR_COOKIE_THIRD_PARTY"
+	case XHR_COOKIE_PROMPT_REQUIRED:
+		return "XHR_COOKIE_PROMPT_REQUIRED"
+	case XHR_COOKIE_EVALUATE_P3P:
+		return "XHR_COOKIE_EVALUATE_P3P"
+	case XHR_COOKIE_APPLY_P3P:
+		return "XHR_COOKIE_APPLY_P3P"
+	case XHR_COOKIE_P3P_ENABLED:
+		return "XHR_COOKIE_P3P_ENABLED"
+	case XHR_COOKIE_IS_RESTRICTED:
+		return "XHR_COOKIE_IS_RESTRICTED"
+	case XHR_COOKIE_IE6:
+		return "XHR_COOKIE_IE6"
+	case XHR_COOKIE_IS_LEGACY:
+		return "XHR_COOKIE_IS_LEGACY"
+	case XHR_COOKIE_NON_SCRIPT:
+		return "XHR_COOKIE_NON_SCRIPT"
+	case XHR_COOKIE_HTTPONLY:
+		return "XHR_COOKIE_HTTPONLY"
+	default:
+		return fmt.Sprintf("XHR_COOKIE_FLAG(%d)", int32(e))
+	}
+}
+
 // XHR_COOKIE_STATE: https://learn.microsoft.com/windows/win32/api/msxml6/ne-msxml6-xhr_cookie_state
 type XHR_COOKIE_STATE int32
 
@@ -247,6 +688,27 @@ const (
 	XHR_COOKIE_STATE_REJECT    XHR_COOKIE_STATE = 5
 )
 
+// String returns the XHR_COOKIE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XHR_COOKIE_STATE) String() string {
+	switch e {
+	case XHR_COOKIE_STATE_UNKNOWN:
+		return "XHR_COOKIE_STATE_UNKNOWN"
+	case XHR_COOKIE_STATE_ACCEPT:
+		return "XHR_COOKIE_STATE_ACCEPT"
+	case XHR_COOKIE_STATE_PROMPT:
+		return "XHR_COOKIE_STATE_PROMPT"
+	case XHR_COOKIE_STATE_LEASH:
+		return "XHR_COOKIE_STATE_LEASH"
+	case XHR_COOKIE_STATE_DOWNGRADE:
+		return "XHR_COOKIE_STATE_DOWNGRADE"
+	case XHR_COOKIE_STATE_REJECT:
+		return "XHR_COOKIE_STATE_REJECT"
+	default:
+		return fmt.Sprintf("XHR_COOKIE_STATE(%d)", int32(e))
+	}
+}
+
 // XHR_CRED_PROMPT: https://learn.microsoft.com/windows/win32/api/msxml6/ne-msxml6-xhr_cred_prompt
 type XHR_CRED_PROMPT int32
 
@@ -255,6 +717,21 @@ const (
 	XHR_CRED_PROMPT_NONE  XHR_CRED_PROMPT = 1
 	XHR_CRED_PROMPT_PROXY XHR_CRED_PROMPT = 2
 )
+
+// String returns the XHR_CRED_PROMPT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XHR_CRED_PROMPT) String() string {
+	switch e {
+	case XHR_CRED_PROMPT_ALL:
+		return "XHR_CRED_PROMPT_ALL"
+	case XHR_CRED_PROMPT_NONE:
+		return "XHR_CRED_PROMPT_NONE"
+	case XHR_CRED_PROMPT_PROXY:
+		return "XHR_CRED_PROMPT_PROXY"
+	default:
+		return fmt.Sprintf("XHR_CRED_PROMPT(%d)", int32(e))
+	}
+}
 
 // XHR_PROPERTY: https://learn.microsoft.com/windows/win32/api/msxml6/ne-msxml6-xhr_property
 type XHR_PROPERTY int32
@@ -274,6 +751,39 @@ const (
 	XHR_PROP_MAX_CONNECTIONS        XHR_PROPERTY = 11
 )
 
+// String returns the XHR_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XHR_PROPERTY) String() string {
+	switch e {
+	case XHR_PROP_NO_CRED_PROMPT:
+		return "XHR_PROP_NO_CRED_PROMPT"
+	case XHR_PROP_NO_AUTH:
+		return "XHR_PROP_NO_AUTH"
+	case XHR_PROP_TIMEOUT:
+		return "XHR_PROP_TIMEOUT"
+	case XHR_PROP_NO_DEFAULT_HEADERS:
+		return "XHR_PROP_NO_DEFAULT_HEADERS"
+	case XHR_PROP_REPORT_REDIRECT_STATUS:
+		return "XHR_PROP_REPORT_REDIRECT_STATUS"
+	case XHR_PROP_NO_CACHE:
+		return "XHR_PROP_NO_CACHE"
+	case XHR_PROP_EXTENDED_ERROR:
+		return "XHR_PROP_EXTENDED_ERROR"
+	case XHR_PROP_QUERY_STRING_UTF8:
+		return "XHR_PROP_QUERY_STRING_UTF8"
+	case XHR_PROP_IGNORE_CERT_ERRORS:
+		return "XHR_PROP_IGNORE_CERT_ERRORS"
+	case XHR_PROP_ONDATA_THRESHOLD:
+		return "XHR_PROP_ONDATA_THRESHOLD"
+	case XHR_PROP_SET_ENTERPRISEID:
+		return "XHR_PROP_SET_ENTERPRISEID"
+	case XHR_PROP_MAX_CONNECTIONS:
+		return "XHR_PROP_MAX_CONNECTIONS"
+	default:
+		return fmt.Sprintf("XHR_PROPERTY(%d)", int32(e))
+	}
+}
+
 type XMLELEM_TYPE int32
 
 const (
@@ -285,3 +795,26 @@ const (
 	XMLELEMTYPE_PI       XMLELEM_TYPE = 5
 	XMLELEMTYPE_OTHER    XMLELEM_TYPE = 6
 )
+
+// String returns the XMLELEM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XMLELEM_TYPE) String() string {
+	switch e {
+	case XMLELEMTYPE_ELEMENT:
+		return "XMLELEMTYPE_ELEMENT"
+	case XMLELEMTYPE_TEXT:
+		return "XMLELEMTYPE_TEXT"
+	case XMLELEMTYPE_COMMENT:
+		return "XMLELEMTYPE_COMMENT"
+	case XMLELEMTYPE_DOCUMENT:
+		return "XMLELEMTYPE_DOCUMENT"
+	case XMLELEMTYPE_DTD:
+		return "XMLELEMTYPE_DTD"
+	case XMLELEMTYPE_PI:
+		return "XMLELEMTYPE_PI"
+	case XMLELEMTYPE_OTHER:
+		return "XMLELEMTYPE_OTHER"
+	default:
+		return fmt.Sprintf("XMLELEM_TYPE(%d)", int32(e))
+	}
+}

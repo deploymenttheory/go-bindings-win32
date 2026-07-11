@@ -11,12 +11,17 @@ type EnumModel struct {
 	IsFlags  bool
 	DocURL   string
 	Members  []EnumMemberModel
+	// UniqueMembers is Members deduped by value (first name wins) — the
+	// switch cases of String(); duplicate case values would not compile.
+	UniqueMembers []EnumMemberModel
 }
 
 // EnumMemberModel is one enum constant.
 type EnumMemberModel struct {
 	Name  string
 	Value string
+	// IsZero marks a zero-valued member, skipped by the bitmask String().
+	IsZero bool
 }
 
 // StructModel is one value struct (or an opaque blob — union or packed).

@@ -4,6 +4,10 @@
 
 package remotedifferentialcompression
 
+import (
+	"fmt"
+)
+
 // GeneratorParametersType: https://learn.microsoft.com/windows/win32/api/msrdc/ne-msrdc-generatorparameterstype
 type GeneratorParametersType int32
 
@@ -11,6 +15,19 @@ const (
 	RDCGENTYPE_Unused    GeneratorParametersType = 0
 	RDCGENTYPE_FilterMax GeneratorParametersType = 1
 )
+
+// String returns the GeneratorParametersType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GeneratorParametersType) String() string {
+	switch e {
+	case RDCGENTYPE_Unused:
+		return "RDCGENTYPE_Unused"
+	case RDCGENTYPE_FilterMax:
+		return "RDCGENTYPE_FilterMax"
+	default:
+		return fmt.Sprintf("GeneratorParametersType(%d)", int32(e))
+	}
+}
 
 // RDC_ErrorCode: https://learn.microsoft.com/windows/win32/api/msrdc/ne-msrdc-rdc_errorcode
 type RDC_ErrorCode int32
@@ -29,6 +46,37 @@ const (
 	RDC_Win32Error             RDC_ErrorCode = 10
 )
 
+// String returns the RDC_ErrorCode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RDC_ErrorCode) String() string {
+	switch e {
+	case RDC_NoError:
+		return "RDC_NoError"
+	case RDC_HeaderVersionNewer:
+		return "RDC_HeaderVersionNewer"
+	case RDC_HeaderVersionOlder:
+		return "RDC_HeaderVersionOlder"
+	case RDC_HeaderMissingOrCorrupt:
+		return "RDC_HeaderMissingOrCorrupt"
+	case RDC_HeaderWrongType:
+		return "RDC_HeaderWrongType"
+	case RDC_DataMissingOrCorrupt:
+		return "RDC_DataMissingOrCorrupt"
+	case RDC_DataTooManyRecords:
+		return "RDC_DataTooManyRecords"
+	case RDC_FileChecksumMismatch:
+		return "RDC_FileChecksumMismatch"
+	case RDC_ApplicationError:
+		return "RDC_ApplicationError"
+	case RDC_Aborted:
+		return "RDC_Aborted"
+	case RDC_Win32Error:
+		return "RDC_Win32Error"
+	default:
+		return fmt.Sprintf("RDC_ErrorCode(%d)", int32(e))
+	}
+}
+
 // RdcCreatedTables: https://learn.microsoft.com/windows/win32/api/msrdc/ne-msrdc-rdccreatedtables
 type RdcCreatedTables int32
 
@@ -37,6 +85,21 @@ const (
 	RDCTABLE_Existing         RdcCreatedTables = 1
 	RDCTABLE_New              RdcCreatedTables = 2
 )
+
+// String returns the RdcCreatedTables constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RdcCreatedTables) String() string {
+	switch e {
+	case RDCTABLE_InvalidOrUnknown:
+		return "RDCTABLE_InvalidOrUnknown"
+	case RDCTABLE_Existing:
+		return "RDCTABLE_Existing"
+	case RDCTABLE_New:
+		return "RDCTABLE_New"
+	default:
+		return fmt.Sprintf("RdcCreatedTables(%d)", int32(e))
+	}
+}
 
 // RdcMappingAccessMode: https://learn.microsoft.com/windows/win32/api/msrdc/ne-msrdc-rdcmappingaccessmode
 type RdcMappingAccessMode int32
@@ -47,6 +110,21 @@ const (
 	RDCMAPPING_ReadWrite RdcMappingAccessMode = 2
 )
 
+// String returns the RdcMappingAccessMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RdcMappingAccessMode) String() string {
+	switch e {
+	case RDCMAPPING_Undefined:
+		return "RDCMAPPING_Undefined"
+	case RDCMAPPING_ReadOnly:
+		return "RDCMAPPING_ReadOnly"
+	case RDCMAPPING_ReadWrite:
+		return "RDCMAPPING_ReadWrite"
+	default:
+		return fmt.Sprintf("RdcMappingAccessMode(%d)", int32(e))
+	}
+}
+
 // RdcNeedType: https://learn.microsoft.com/windows/win32/api/msrdc/ne-msrdc-rdcneedtype
 type RdcNeedType int32
 
@@ -56,3 +134,20 @@ const (
 	RDCNEED_SEED     RdcNeedType = 2
 	RDCNEED_SEED_MAX RdcNeedType = 255
 )
+
+// String returns the RdcNeedType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RdcNeedType) String() string {
+	switch e {
+	case RDCNEED_SOURCE:
+		return "RDCNEED_SOURCE"
+	case RDCNEED_TARGET:
+		return "RDCNEED_TARGET"
+	case RDCNEED_SEED:
+		return "RDCNEED_SEED"
+	case RDCNEED_SEED_MAX:
+		return "RDCNEED_SEED_MAX"
+	default:
+		return fmt.Sprintf("RdcNeedType(%d)", int32(e))
+	}
+}

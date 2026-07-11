@@ -4,6 +4,10 @@
 
 package sensors
 
+import (
+	"fmt"
+)
+
 type ACTIVITY_STATE int32
 
 const (
@@ -19,11 +23,51 @@ const (
 	ActivityState_Force_Dword ACTIVITY_STATE = -1
 )
 
+// String returns the ACTIVITY_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACTIVITY_STATE) String() string {
+	switch e {
+	case ActivityState_Unknown:
+		return "ActivityState_Unknown"
+	case ActivityState_Stationary:
+		return "ActivityState_Stationary"
+	case ActivityState_Fidgeting:
+		return "ActivityState_Fidgeting"
+	case ActivityState_Walking:
+		return "ActivityState_Walking"
+	case ActivityState_Running:
+		return "ActivityState_Running"
+	case ActivityState_InVehicle:
+		return "ActivityState_InVehicle"
+	case ActivityState_Biking:
+		return "ActivityState_Biking"
+	case ActivityState_Idle:
+		return "ActivityState_Idle"
+	case ActivityState_Max:
+		return "ActivityState_Max"
+	case ActivityState_Force_Dword:
+		return "ActivityState_Force_Dword"
+	default:
+		return fmt.Sprintf("ACTIVITY_STATE(%d)", int32(e))
+	}
+}
+
 type ACTIVITY_STATE_COUNT int32
 
 const (
 	ActivityStateCount ACTIVITY_STATE_COUNT = 8
 )
+
+// String returns the ACTIVITY_STATE_COUNT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACTIVITY_STATE_COUNT) String() string {
+	switch e {
+	case ActivityStateCount:
+		return "ActivityStateCount"
+	default:
+		return fmt.Sprintf("ACTIVITY_STATE_COUNT(%d)", int32(e))
+	}
+}
 
 type AXIS int32
 
@@ -34,6 +78,23 @@ const (
 	AXIS_MAX AXIS = 3
 )
 
+// String returns the AXIS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AXIS) String() string {
+	switch e {
+	case AXIS_X:
+		return "AXIS_X"
+	case AXIS_Y:
+		return "AXIS_Y"
+	case AXIS_Z:
+		return "AXIS_Z"
+	case AXIS_MAX:
+		return "AXIS_MAX"
+	default:
+		return fmt.Sprintf("AXIS(%d)", int32(e))
+	}
+}
+
 type ELEVATION_CHANGE_MODE int32
 
 const (
@@ -43,6 +104,25 @@ const (
 	ElevationChangeMode_Max         ELEVATION_CHANGE_MODE = 3
 	ElevationChangeMode_Force_Dword ELEVATION_CHANGE_MODE = -1
 )
+
+// String returns the ELEVATION_CHANGE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ELEVATION_CHANGE_MODE) String() string {
+	switch e {
+	case ElevationChangeMode_Unknown:
+		return "ElevationChangeMode_Unknown"
+	case ElevationChangeMode_Elevator:
+		return "ElevationChangeMode_Elevator"
+	case ElevationChangeMode_Stepping:
+		return "ElevationChangeMode_Stepping"
+	case ElevationChangeMode_Max:
+		return "ElevationChangeMode_Max"
+	case ElevationChangeMode_Force_Dword:
+		return "ElevationChangeMode_Force_Dword"
+	default:
+		return fmt.Sprintf("ELEVATION_CHANGE_MODE(%d)", int32(e))
+	}
+}
 
 type HUMAN_PRESENCE_DETECTION_TYPE int32
 
@@ -55,11 +135,43 @@ const (
 	HumanPresenceDetectionType_Force_Dword               HUMAN_PRESENCE_DETECTION_TYPE = -1
 )
 
+// String returns the HUMAN_PRESENCE_DETECTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HUMAN_PRESENCE_DETECTION_TYPE) String() string {
+	switch e {
+	case HumanPresenceDetectionType_Undefined:
+		return "HumanPresenceDetectionType_Undefined"
+	case HumanPresenceDetectionType_VendorDefinedNonBiometric:
+		return "HumanPresenceDetectionType_VendorDefinedNonBiometric"
+	case HumanPresenceDetectionType_VendorDefinedBiometric:
+		return "HumanPresenceDetectionType_VendorDefinedBiometric"
+	case HumanPresenceDetectionType_FacialBiometric:
+		return "HumanPresenceDetectionType_FacialBiometric"
+	case HumanPresenceDetectionType_AudioBiometric:
+		return "HumanPresenceDetectionType_AudioBiometric"
+	case HumanPresenceDetectionType_Force_Dword:
+		return "HumanPresenceDetectionType_Force_Dword"
+	default:
+		return fmt.Sprintf("HUMAN_PRESENCE_DETECTION_TYPE(%d)", int32(e))
+	}
+}
+
 type HUMAN_PRESENCE_DETECTION_TYPE_COUNT int32
 
 const (
 	HumanPresenceDetectionTypeCount HUMAN_PRESENCE_DETECTION_TYPE_COUNT = 4
 )
+
+// String returns the HUMAN_PRESENCE_DETECTION_TYPE_COUNT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HUMAN_PRESENCE_DETECTION_TYPE_COUNT) String() string {
+	switch e {
+	case HumanPresenceDetectionTypeCount:
+		return "HumanPresenceDetectionTypeCount"
+	default:
+		return fmt.Sprintf("HUMAN_PRESENCE_DETECTION_TYPE_COUNT(%d)", int32(e))
+	}
+}
 
 // LOCATION_DESIRED_ACCURACY: https://learn.microsoft.com/windows/win32/api/sensorsapi/ne-sensorsapi-location_desired_accuracy
 type LOCATION_DESIRED_ACCURACY int32
@@ -68,6 +180,19 @@ const (
 	LOCATION_DESIRED_ACCURACY_DEFAULT LOCATION_DESIRED_ACCURACY = 0
 	LOCATION_DESIRED_ACCURACY_HIGH    LOCATION_DESIRED_ACCURACY = 1
 )
+
+// String returns the LOCATION_DESIRED_ACCURACY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOCATION_DESIRED_ACCURACY) String() string {
+	switch e {
+	case LOCATION_DESIRED_ACCURACY_DEFAULT:
+		return "LOCATION_DESIRED_ACCURACY_DEFAULT"
+	case LOCATION_DESIRED_ACCURACY_HIGH:
+		return "LOCATION_DESIRED_ACCURACY_HIGH"
+	default:
+		return fmt.Sprintf("LOCATION_DESIRED_ACCURACY(%d)", int32(e))
+	}
+}
 
 type LOCATION_POSITION_SOURCE int32
 
@@ -79,6 +204,25 @@ const (
 	LOCATION_POSITION_SOURCE_UNKNOWN   LOCATION_POSITION_SOURCE = 4
 )
 
+// String returns the LOCATION_POSITION_SOURCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOCATION_POSITION_SOURCE) String() string {
+	switch e {
+	case LOCATION_POSITION_SOURCE_CELLULAR:
+		return "LOCATION_POSITION_SOURCE_CELLULAR"
+	case LOCATION_POSITION_SOURCE_SATELLITE:
+		return "LOCATION_POSITION_SOURCE_SATELLITE"
+	case LOCATION_POSITION_SOURCE_WIFI:
+		return "LOCATION_POSITION_SOURCE_WIFI"
+	case LOCATION_POSITION_SOURCE_IPADDRESS:
+		return "LOCATION_POSITION_SOURCE_IPADDRESS"
+	case LOCATION_POSITION_SOURCE_UNKNOWN:
+		return "LOCATION_POSITION_SOURCE_UNKNOWN"
+	default:
+		return fmt.Sprintf("LOCATION_POSITION_SOURCE(%d)", int32(e))
+	}
+}
+
 type MAGNETOMETER_ACCURACY int32
 
 const (
@@ -87,6 +231,23 @@ const (
 	MagnetometerAccuracy_Approximate MAGNETOMETER_ACCURACY = 2
 	MagnetometerAccuracy_High        MAGNETOMETER_ACCURACY = 3
 )
+
+// String returns the MAGNETOMETER_ACCURACY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MAGNETOMETER_ACCURACY) String() string {
+	switch e {
+	case MagnetometerAccuracy_Unknown:
+		return "MagnetometerAccuracy_Unknown"
+	case MagnetometerAccuracy_Unreliable:
+		return "MagnetometerAccuracy_Unreliable"
+	case MagnetometerAccuracy_Approximate:
+		return "MagnetometerAccuracy_Approximate"
+	case MagnetometerAccuracy_High:
+		return "MagnetometerAccuracy_High"
+	default:
+		return fmt.Sprintf("MAGNETOMETER_ACCURACY(%d)", int32(e))
+	}
+}
 
 // MagnetometerAccuracy: https://learn.microsoft.com/windows/win32/api/sensorsapi/ne-sensorsapi-magnetometeraccuracy
 type MagnetometerAccuracy int32
@@ -98,6 +259,23 @@ const (
 	MAGNETOMETER_ACCURACY_HIGH        MagnetometerAccuracy = 3
 )
 
+// String returns the MagnetometerAccuracy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MagnetometerAccuracy) String() string {
+	switch e {
+	case MAGNETOMETER_ACCURACY_UNKNOWN:
+		return "MAGNETOMETER_ACCURACY_UNKNOWN"
+	case MAGNETOMETER_ACCURACY_UNRELIABLE:
+		return "MAGNETOMETER_ACCURACY_UNRELIABLE"
+	case MAGNETOMETER_ACCURACY_APPROXIMATE:
+		return "MAGNETOMETER_ACCURACY_APPROXIMATE"
+	case MAGNETOMETER_ACCURACY_HIGH:
+		return "MAGNETOMETER_ACCURACY_HIGH"
+	default:
+		return fmt.Sprintf("MagnetometerAccuracy(%d)", int32(e))
+	}
+}
+
 type PEDOMETER_STEP_TYPE int32
 
 const (
@@ -108,11 +286,41 @@ const (
 	PedometerStepType_Force_Dword PEDOMETER_STEP_TYPE = -1
 )
 
+// String returns the PEDOMETER_STEP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEDOMETER_STEP_TYPE) String() string {
+	switch e {
+	case PedometerStepType_Unknown:
+		return "PedometerStepType_Unknown"
+	case PedometerStepType_Walking:
+		return "PedometerStepType_Walking"
+	case PedometerStepType_Running:
+		return "PedometerStepType_Running"
+	case PedometerStepType_Max:
+		return "PedometerStepType_Max"
+	case PedometerStepType_Force_Dword:
+		return "PedometerStepType_Force_Dword"
+	default:
+		return fmt.Sprintf("PEDOMETER_STEP_TYPE(%d)", int32(e))
+	}
+}
+
 type PEDOMETER_STEP_TYPE_COUNT int32
 
 const (
 	PedometerStepTypeCount PEDOMETER_STEP_TYPE_COUNT = 3
 )
+
+// String returns the PEDOMETER_STEP_TYPE_COUNT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEDOMETER_STEP_TYPE_COUNT) String() string {
+	switch e {
+	case PedometerStepTypeCount:
+		return "PedometerStepTypeCount"
+	default:
+		return fmt.Sprintf("PEDOMETER_STEP_TYPE_COUNT(%d)", int32(e))
+	}
+}
 
 type PROXIMITY_SENSOR_CAPABILITIES int32
 
@@ -129,6 +337,35 @@ const (
 	Proximity_Sensor_Supported_Capabilities         PROXIMITY_SENSOR_CAPABILITIES = 511
 )
 
+// String returns the PROXIMITY_SENSOR_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROXIMITY_SENSOR_CAPABILITIES) String() string {
+	switch e {
+	case Proximity_Sensor_Human_Presence_Capable:
+		return "Proximity_Sensor_Human_Presence_Capable"
+	case Proximity_Sensor_Human_Engagement_Capable:
+		return "Proximity_Sensor_Human_Engagement_Capable"
+	case Proximity_Sensor_Human_Head_Azimuth_Capable:
+		return "Proximity_Sensor_Human_Head_Azimuth_Capable"
+	case Proximity_Sensor_Human_Head_Altitude_Capable:
+		return "Proximity_Sensor_Human_Head_Altitude_Capable"
+	case Proximity_Sensor_Human_Head_Roll_Capable:
+		return "Proximity_Sensor_Human_Head_Roll_Capable"
+	case Proximity_Sensor_Human_Head_Pitch_Capable:
+		return "Proximity_Sensor_Human_Head_Pitch_Capable"
+	case Proximity_Sensor_Human_Head_Yaw_Capable:
+		return "Proximity_Sensor_Human_Head_Yaw_Capable"
+	case Proximity_Sensor_Human_Identification_Capable:
+		return "Proximity_Sensor_Human_Identification_Capable"
+	case Proximity_Sensor_Multi_Person_Detection_Capable:
+		return "Proximity_Sensor_Multi_Person_Detection_Capable"
+	case Proximity_Sensor_Supported_Capabilities:
+		return "Proximity_Sensor_Supported_Capabilities"
+	default:
+		return fmt.Sprintf("PROXIMITY_SENSOR_CAPABILITIES(%d)", int32(e))
+	}
+}
+
 type PROXIMITY_TYPE int32
 
 const (
@@ -136,6 +373,21 @@ const (
 	ProximityType_HumanProximity  PROXIMITY_TYPE = 1
 	ProximityType_Force_Dword     PROXIMITY_TYPE = -1
 )
+
+// String returns the PROXIMITY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROXIMITY_TYPE) String() string {
+	switch e {
+	case ProximityType_ObjectProximity:
+		return "ProximityType_ObjectProximity"
+	case ProximityType_HumanProximity:
+		return "ProximityType_HumanProximity"
+	case ProximityType_Force_Dword:
+		return "ProximityType_Force_Dword"
+	default:
+		return fmt.Sprintf("PROXIMITY_TYPE(%d)", int32(e))
+	}
+}
 
 type SENSOR_CONNECTION_TYPES int32
 
@@ -145,6 +397,21 @@ const (
 	SensorConnectionType_External   SENSOR_CONNECTION_TYPES = 2
 )
 
+// String returns the SENSOR_CONNECTION_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SENSOR_CONNECTION_TYPES) String() string {
+	switch e {
+	case SensorConnectionType_Integrated:
+		return "SensorConnectionType_Integrated"
+	case SensorConnectionType_Attached:
+		return "SensorConnectionType_Attached"
+	case SensorConnectionType_External:
+		return "SensorConnectionType_External"
+	default:
+		return fmt.Sprintf("SENSOR_CONNECTION_TYPES(%d)", int32(e))
+	}
+}
+
 type SENSOR_STATE int32
 
 const (
@@ -153,6 +420,23 @@ const (
 	SensorState_Active       SENSOR_STATE = 2
 	SensorState_Error        SENSOR_STATE = 3
 )
+
+// String returns the SENSOR_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SENSOR_STATE) String() string {
+	switch e {
+	case SensorState_Initializing:
+		return "SensorState_Initializing"
+	case SensorState_Idle:
+		return "SensorState_Idle"
+	case SensorState_Active:
+		return "SensorState_Active"
+	case SensorState_Error:
+		return "SensorState_Error"
+	default:
+		return fmt.Sprintf("SENSOR_STATE(%d)", int32(e))
+	}
+}
 
 type SIMPLE_DEVICE_ORIENTATION int32
 
@@ -165,6 +449,27 @@ const (
 	SimpleDeviceOrientation_Facedown                          SIMPLE_DEVICE_ORIENTATION = 5
 )
 
+// String returns the SIMPLE_DEVICE_ORIENTATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIMPLE_DEVICE_ORIENTATION) String() string {
+	switch e {
+	case SimpleDeviceOrientation_NotRotated:
+		return "SimpleDeviceOrientation_NotRotated"
+	case SimpleDeviceOrientation_Rotated90DegreesCounterclockwise:
+		return "SimpleDeviceOrientation_Rotated90DegreesCounterclockwise"
+	case SimpleDeviceOrientation_Rotated180DegreesCounterclockwise:
+		return "SimpleDeviceOrientation_Rotated180DegreesCounterclockwise"
+	case SimpleDeviceOrientation_Rotated270DegreesCounterclockwise:
+		return "SimpleDeviceOrientation_Rotated270DegreesCounterclockwise"
+	case SimpleDeviceOrientation_Faceup:
+		return "SimpleDeviceOrientation_Faceup"
+	case SimpleDeviceOrientation_Facedown:
+		return "SimpleDeviceOrientation_Facedown"
+	default:
+		return fmt.Sprintf("SIMPLE_DEVICE_ORIENTATION(%d)", int32(e))
+	}
+}
+
 // SensorConnectionType: https://learn.microsoft.com/windows/win32/api/sensorsapi/ne-sensorsapi-sensorconnectiontype
 type SensorConnectionType int32
 
@@ -173,6 +478,21 @@ const (
 	SENSOR_CONNECTION_TYPE_PC_ATTACHED   SensorConnectionType = 1
 	SENSOR_CONNECTION_TYPE_PC_EXTERNAL   SensorConnectionType = 2
 )
+
+// String returns the SensorConnectionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SensorConnectionType) String() string {
+	switch e {
+	case SENSOR_CONNECTION_TYPE_PC_INTEGRATED:
+		return "SENSOR_CONNECTION_TYPE_PC_INTEGRATED"
+	case SENSOR_CONNECTION_TYPE_PC_ATTACHED:
+		return "SENSOR_CONNECTION_TYPE_PC_ATTACHED"
+	case SENSOR_CONNECTION_TYPE_PC_EXTERNAL:
+		return "SENSOR_CONNECTION_TYPE_PC_EXTERNAL"
+	default:
+		return fmt.Sprintf("SensorConnectionType(%d)", int32(e))
+	}
+}
 
 // SensorState: https://learn.microsoft.com/windows/win32/api/sensorsapi/ne-sensorsapi-sensorstate
 type SensorState int32
@@ -188,6 +508,27 @@ const (
 	SENSOR_STATE_MAX           SensorState = 5
 )
 
+// String returns the SensorState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SensorState) String() string {
+	switch e {
+	case SENSOR_STATE_MIN:
+		return "SENSOR_STATE_MIN"
+	case SENSOR_STATE_NOT_AVAILABLE:
+		return "SENSOR_STATE_NOT_AVAILABLE"
+	case SENSOR_STATE_NO_DATA:
+		return "SENSOR_STATE_NO_DATA"
+	case SENSOR_STATE_INITIALIZING:
+		return "SENSOR_STATE_INITIALIZING"
+	case SENSOR_STATE_ACCESS_DENIED:
+		return "SENSOR_STATE_ACCESS_DENIED"
+	case SENSOR_STATE_ERROR:
+		return "SENSOR_STATE_ERROR"
+	default:
+		return fmt.Sprintf("SensorState(%d)", int32(e))
+	}
+}
+
 type SimpleDeviceOrientation int32
 
 const (
@@ -198,3 +539,24 @@ const (
 	SIMPLE_DEVICE_ORIENTATION_ROTATED_FACE_UP   SimpleDeviceOrientation = 4
 	SIMPLE_DEVICE_ORIENTATION_ROTATED_FACE_DOWN SimpleDeviceOrientation = 5
 )
+
+// String returns the SimpleDeviceOrientation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SimpleDeviceOrientation) String() string {
+	switch e {
+	case SIMPLE_DEVICE_ORIENTATION_NOT_ROTATED:
+		return "SIMPLE_DEVICE_ORIENTATION_NOT_ROTATED"
+	case SIMPLE_DEVICE_ORIENTATION_ROTATED_90:
+		return "SIMPLE_DEVICE_ORIENTATION_ROTATED_90"
+	case SIMPLE_DEVICE_ORIENTATION_ROTATED_180:
+		return "SIMPLE_DEVICE_ORIENTATION_ROTATED_180"
+	case SIMPLE_DEVICE_ORIENTATION_ROTATED_270:
+		return "SIMPLE_DEVICE_ORIENTATION_ROTATED_270"
+	case SIMPLE_DEVICE_ORIENTATION_ROTATED_FACE_UP:
+		return "SIMPLE_DEVICE_ORIENTATION_ROTATED_FACE_UP"
+	case SIMPLE_DEVICE_ORIENTATION_ROTATED_FACE_DOWN:
+		return "SIMPLE_DEVICE_ORIENTATION_ROTATED_FACE_DOWN"
+	default:
+		return fmt.Sprintf("SimpleDeviceOrientation(%d)", int32(e))
+	}
+}

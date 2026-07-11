@@ -4,6 +4,11 @@
 
 package variant
 
+import (
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type DRAWPROGRESSFLAGS int32
 
 const (
@@ -15,6 +20,32 @@ const (
 	DPF_STOPPED          DRAWPROGRESSFLAGS = 16
 )
 
+// String returns the DRAWPROGRESSFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRAWPROGRESSFLAGS) String() string {
+	var parts []string
+	if e&DPF_MARQUEE != 0 {
+		parts = append(parts, "DPF_MARQUEE")
+	}
+	if e&DPF_MARQUEE_COMPLETE != 0 {
+		parts = append(parts, "DPF_MARQUEE_COMPLETE")
+	}
+	if e&DPF_ERROR != 0 {
+		parts = append(parts, "DPF_ERROR")
+	}
+	if e&DPF_WARNING != 0 {
+		parts = append(parts, "DPF_WARNING")
+	}
+	if e&DPF_STOPPED != 0 {
+		parts = append(parts, "DPF_STOPPED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PSTIME_FLAGS int32
 
 const (
@@ -22,7 +53,21 @@ const (
 	PSTF_LOCAL PSTIME_FLAGS = 1
 )
 
+// String returns the PSTIME_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSTIME_FLAGS) String() string {
+	var parts []string
+	if e&PSTF_LOCAL != 0 {
+		parts = append(parts, "PSTF_LOCAL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // VARENUM: https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-varenum
+// Bitmask — values may be combined with |.
 type VARENUM uint16
 
 const (
@@ -80,6 +125,170 @@ const (
 	VT_TYPEMASK         VARENUM = 4095
 )
 
+// String returns the VARENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VARENUM) String() string {
+	var parts []string
+	if e&VT_NULL != 0 {
+		parts = append(parts, "VT_NULL")
+	}
+	if e&VT_I2 != 0 {
+		parts = append(parts, "VT_I2")
+	}
+	if e&VT_I4 != 0 {
+		parts = append(parts, "VT_I4")
+	}
+	if e&VT_R4 != 0 {
+		parts = append(parts, "VT_R4")
+	}
+	if e&VT_R8 != 0 {
+		parts = append(parts, "VT_R8")
+	}
+	if e&VT_CY != 0 {
+		parts = append(parts, "VT_CY")
+	}
+	if e&VT_DATE != 0 {
+		parts = append(parts, "VT_DATE")
+	}
+	if e&VT_BSTR != 0 {
+		parts = append(parts, "VT_BSTR")
+	}
+	if e&VT_DISPATCH != 0 {
+		parts = append(parts, "VT_DISPATCH")
+	}
+	if e&VT_ERROR != 0 {
+		parts = append(parts, "VT_ERROR")
+	}
+	if e&VT_BOOL != 0 {
+		parts = append(parts, "VT_BOOL")
+	}
+	if e&VT_VARIANT != 0 {
+		parts = append(parts, "VT_VARIANT")
+	}
+	if e&VT_UNKNOWN != 0 {
+		parts = append(parts, "VT_UNKNOWN")
+	}
+	if e&VT_DECIMAL != 0 {
+		parts = append(parts, "VT_DECIMAL")
+	}
+	if e&VT_I1 != 0 {
+		parts = append(parts, "VT_I1")
+	}
+	if e&VT_UI1 != 0 {
+		parts = append(parts, "VT_UI1")
+	}
+	if e&VT_UI2 != 0 {
+		parts = append(parts, "VT_UI2")
+	}
+	if e&VT_UI4 != 0 {
+		parts = append(parts, "VT_UI4")
+	}
+	if e&VT_I8 != 0 {
+		parts = append(parts, "VT_I8")
+	}
+	if e&VT_UI8 != 0 {
+		parts = append(parts, "VT_UI8")
+	}
+	if e&VT_INT != 0 {
+		parts = append(parts, "VT_INT")
+	}
+	if e&VT_UINT != 0 {
+		parts = append(parts, "VT_UINT")
+	}
+	if e&VT_VOID != 0 {
+		parts = append(parts, "VT_VOID")
+	}
+	if e&VT_HRESULT != 0 {
+		parts = append(parts, "VT_HRESULT")
+	}
+	if e&VT_PTR != 0 {
+		parts = append(parts, "VT_PTR")
+	}
+	if e&VT_SAFEARRAY != 0 {
+		parts = append(parts, "VT_SAFEARRAY")
+	}
+	if e&VT_CARRAY != 0 {
+		parts = append(parts, "VT_CARRAY")
+	}
+	if e&VT_USERDEFINED != 0 {
+		parts = append(parts, "VT_USERDEFINED")
+	}
+	if e&VT_LPSTR != 0 {
+		parts = append(parts, "VT_LPSTR")
+	}
+	if e&VT_LPWSTR != 0 {
+		parts = append(parts, "VT_LPWSTR")
+	}
+	if e&VT_RECORD != 0 {
+		parts = append(parts, "VT_RECORD")
+	}
+	if e&VT_INT_PTR != 0 {
+		parts = append(parts, "VT_INT_PTR")
+	}
+	if e&VT_UINT_PTR != 0 {
+		parts = append(parts, "VT_UINT_PTR")
+	}
+	if e&VT_FILETIME != 0 {
+		parts = append(parts, "VT_FILETIME")
+	}
+	if e&VT_BLOB != 0 {
+		parts = append(parts, "VT_BLOB")
+	}
+	if e&VT_STREAM != 0 {
+		parts = append(parts, "VT_STREAM")
+	}
+	if e&VT_STORAGE != 0 {
+		parts = append(parts, "VT_STORAGE")
+	}
+	if e&VT_STREAMED_OBJECT != 0 {
+		parts = append(parts, "VT_STREAMED_OBJECT")
+	}
+	if e&VT_STORED_OBJECT != 0 {
+		parts = append(parts, "VT_STORED_OBJECT")
+	}
+	if e&VT_BLOB_OBJECT != 0 {
+		parts = append(parts, "VT_BLOB_OBJECT")
+	}
+	if e&VT_CF != 0 {
+		parts = append(parts, "VT_CF")
+	}
+	if e&VT_CLSID != 0 {
+		parts = append(parts, "VT_CLSID")
+	}
+	if e&VT_VERSIONED_STREAM != 0 {
+		parts = append(parts, "VT_VERSIONED_STREAM")
+	}
+	if e&VT_BSTR_BLOB != 0 {
+		parts = append(parts, "VT_BSTR_BLOB")
+	}
+	if e&VT_VECTOR != 0 {
+		parts = append(parts, "VT_VECTOR")
+	}
+	if e&VT_ARRAY != 0 {
+		parts = append(parts, "VT_ARRAY")
+	}
+	if e&VT_BYREF != 0 {
+		parts = append(parts, "VT_BYREF")
+	}
+	if e&VT_RESERVED != 0 {
+		parts = append(parts, "VT_RESERVED")
+	}
+	if e&VT_ILLEGAL != 0 {
+		parts = append(parts, "VT_ILLEGAL")
+	}
+	if e&VT_ILLEGALMASKED != 0 {
+		parts = append(parts, "VT_ILLEGALMASKED")
+	}
+	if e&VT_TYPEMASK != 0 {
+		parts = append(parts, "VT_TYPEMASK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type VAR_CHANGE_FLAGS uint16
 
 const (
@@ -92,3 +301,37 @@ const (
 	VARIANT_CALENDAR_GREGORIAN VAR_CHANGE_FLAGS = 64
 	VARIANT_USE_NLS            VAR_CHANGE_FLAGS = 128
 )
+
+// String returns the VAR_CHANGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VAR_CHANGE_FLAGS) String() string {
+	var parts []string
+	if e&VARIANT_NOVALUEPROP != 0 {
+		parts = append(parts, "VARIANT_NOVALUEPROP")
+	}
+	if e&VARIANT_ALPHABOOL != 0 {
+		parts = append(parts, "VARIANT_ALPHABOOL")
+	}
+	if e&VARIANT_NOUSEROVERRIDE != 0 {
+		parts = append(parts, "VARIANT_NOUSEROVERRIDE")
+	}
+	if e&VARIANT_CALENDAR_HIJRI != 0 {
+		parts = append(parts, "VARIANT_CALENDAR_HIJRI")
+	}
+	if e&VARIANT_LOCALBOOL != 0 {
+		parts = append(parts, "VARIANT_LOCALBOOL")
+	}
+	if e&VARIANT_CALENDAR_THAI != 0 {
+		parts = append(parts, "VARIANT_CALENDAR_THAI")
+	}
+	if e&VARIANT_CALENDAR_GREGORIAN != 0 {
+		parts = append(parts, "VARIANT_CALENDAR_GREGORIAN")
+	}
+	if e&VARIANT_USE_NLS != 0 {
+		parts = append(parts, "VARIANT_USE_NLS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

@@ -4,6 +4,11 @@
 
 package keyboardandmouse
 
+import (
+	"fmt"
+	"strings"
+)
+
 type ACTIVATE_KEYBOARD_LAYOUT_FLAGS uint32
 
 const (
@@ -17,6 +22,31 @@ const (
 	KLF_SUBSTITUTE_OK ACTIVATE_KEYBOARD_LAYOUT_FLAGS = 2
 )
 
+// String returns the ACTIVATE_KEYBOARD_LAYOUT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACTIVATE_KEYBOARD_LAYOUT_FLAGS) String() string {
+	switch e {
+	case KLF_REORDER:
+		return "KLF_REORDER"
+	case KLF_RESET:
+		return "KLF_RESET"
+	case KLF_SETFORPROCESS:
+		return "KLF_SETFORPROCESS"
+	case KLF_SHIFTLOCK:
+		return "KLF_SHIFTLOCK"
+	case KLF_ACTIVATE:
+		return "KLF_ACTIVATE"
+	case KLF_NOTELLSHELL:
+		return "KLF_NOTELLSHELL"
+	case KLF_REPLACELANG:
+		return "KLF_REPLACELANG"
+	case KLF_SUBSTITUTE_OK:
+		return "KLF_SUBSTITUTE_OK"
+	default:
+		return fmt.Sprintf("ACTIVATE_KEYBOARD_LAYOUT_FLAGS(%d)", uint32(e))
+	}
+}
+
 type GET_MOUSE_MOVE_POINTS_EX_RESOLUTION uint32
 
 const (
@@ -24,6 +54,20 @@ const (
 	GMMP_USE_HIGH_RESOLUTION_POINTS GET_MOUSE_MOVE_POINTS_EX_RESOLUTION = 2
 )
 
+// String returns the GET_MOUSE_MOVE_POINTS_EX_RESOLUTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_MOUSE_MOVE_POINTS_EX_RESOLUTION) String() string {
+	switch e {
+	case GMMP_USE_DISPLAY_POINTS:
+		return "GMMP_USE_DISPLAY_POINTS"
+	case GMMP_USE_HIGH_RESOLUTION_POINTS:
+		return "GMMP_USE_HIGH_RESOLUTION_POINTS"
+	default:
+		return fmt.Sprintf("GET_MOUSE_MOVE_POINTS_EX_RESOLUTION(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HOT_KEY_MODIFIERS uint32
 
 const (
@@ -34,6 +78,31 @@ const (
 	MOD_WIN      HOT_KEY_MODIFIERS = 8
 )
 
+// String returns the HOT_KEY_MODIFIERS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HOT_KEY_MODIFIERS) String() string {
+	var parts []string
+	if e&MOD_ALT != 0 {
+		parts = append(parts, "MOD_ALT")
+	}
+	if e&MOD_CONTROL != 0 {
+		parts = append(parts, "MOD_CONTROL")
+	}
+	if e&MOD_NOREPEAT != 0 {
+		parts = append(parts, "MOD_NOREPEAT")
+	}
+	if e&MOD_SHIFT != 0 {
+		parts = append(parts, "MOD_SHIFT")
+	}
+	if e&MOD_WIN != 0 {
+		parts = append(parts, "MOD_WIN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type INPUT_TYPE uint32
 
 const (
@@ -42,6 +111,22 @@ const (
 	INPUT_HARDWARE INPUT_TYPE = 2
 )
 
+// String returns the INPUT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INPUT_TYPE) String() string {
+	switch e {
+	case INPUT_MOUSE:
+		return "INPUT_MOUSE"
+	case INPUT_KEYBOARD:
+		return "INPUT_KEYBOARD"
+	case INPUT_HARDWARE:
+		return "INPUT_HARDWARE"
+	default:
+		return fmt.Sprintf("INPUT_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type KEYBD_EVENT_FLAGS uint32
 
 const (
@@ -50,6 +135,28 @@ const (
 	KEYEVENTF_SCANCODE    KEYBD_EVENT_FLAGS = 8
 	KEYEVENTF_UNICODE     KEYBD_EVENT_FLAGS = 4
 )
+
+// String returns the KEYBD_EVENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KEYBD_EVENT_FLAGS) String() string {
+	var parts []string
+	if e&KEYEVENTF_EXTENDEDKEY != 0 {
+		parts = append(parts, "KEYEVENTF_EXTENDEDKEY")
+	}
+	if e&KEYEVENTF_KEYUP != 0 {
+		parts = append(parts, "KEYEVENTF_KEYUP")
+	}
+	if e&KEYEVENTF_SCANCODE != 0 {
+		parts = append(parts, "KEYEVENTF_SCANCODE")
+	}
+	if e&KEYEVENTF_UNICODE != 0 {
+		parts = append(parts, "KEYEVENTF_UNICODE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type MAP_VIRTUAL_KEY_TYPE uint32
 
@@ -61,6 +168,26 @@ const (
 	MAPVK_VK_TO_VSC_EX MAP_VIRTUAL_KEY_TYPE = 4
 )
 
+// String returns the MAP_VIRTUAL_KEY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MAP_VIRTUAL_KEY_TYPE) String() string {
+	switch e {
+	case MAPVK_VK_TO_VSC:
+		return "MAPVK_VK_TO_VSC"
+	case MAPVK_VSC_TO_VK:
+		return "MAPVK_VSC_TO_VK"
+	case MAPVK_VK_TO_CHAR:
+		return "MAPVK_VK_TO_CHAR"
+	case MAPVK_VSC_TO_VK_EX:
+		return "MAPVK_VSC_TO_VK_EX"
+	case MAPVK_VK_TO_VSC_EX:
+		return "MAPVK_VK_TO_VSC_EX"
+	default:
+		return fmt.Sprintf("MAP_VIRTUAL_KEY_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MOUSE_EVENT_FLAGS uint32
 
 const (
@@ -80,6 +207,59 @@ const (
 	MOUSEEVENTF_VIRTUALDESK     MOUSE_EVENT_FLAGS = 16384
 )
 
+// String returns the MOUSE_EVENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MOUSE_EVENT_FLAGS) String() string {
+	var parts []string
+	if e&MOUSEEVENTF_ABSOLUTE != 0 {
+		parts = append(parts, "MOUSEEVENTF_ABSOLUTE")
+	}
+	if e&MOUSEEVENTF_LEFTDOWN != 0 {
+		parts = append(parts, "MOUSEEVENTF_LEFTDOWN")
+	}
+	if e&MOUSEEVENTF_LEFTUP != 0 {
+		parts = append(parts, "MOUSEEVENTF_LEFTUP")
+	}
+	if e&MOUSEEVENTF_MIDDLEDOWN != 0 {
+		parts = append(parts, "MOUSEEVENTF_MIDDLEDOWN")
+	}
+	if e&MOUSEEVENTF_MIDDLEUP != 0 {
+		parts = append(parts, "MOUSEEVENTF_MIDDLEUP")
+	}
+	if e&MOUSEEVENTF_MOVE != 0 {
+		parts = append(parts, "MOUSEEVENTF_MOVE")
+	}
+	if e&MOUSEEVENTF_RIGHTDOWN != 0 {
+		parts = append(parts, "MOUSEEVENTF_RIGHTDOWN")
+	}
+	if e&MOUSEEVENTF_RIGHTUP != 0 {
+		parts = append(parts, "MOUSEEVENTF_RIGHTUP")
+	}
+	if e&MOUSEEVENTF_WHEEL != 0 {
+		parts = append(parts, "MOUSEEVENTF_WHEEL")
+	}
+	if e&MOUSEEVENTF_XDOWN != 0 {
+		parts = append(parts, "MOUSEEVENTF_XDOWN")
+	}
+	if e&MOUSEEVENTF_XUP != 0 {
+		parts = append(parts, "MOUSEEVENTF_XUP")
+	}
+	if e&MOUSEEVENTF_HWHEEL != 0 {
+		parts = append(parts, "MOUSEEVENTF_HWHEEL")
+	}
+	if e&MOUSEEVENTF_MOVE_NOCOALESCE != 0 {
+		parts = append(parts, "MOUSEEVENTF_MOVE_NOCOALESCE")
+	}
+	if e&MOUSEEVENTF_VIRTUALDESK != 0 {
+		parts = append(parts, "MOUSEEVENTF_VIRTUALDESK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type TRACKMOUSEEVENT_FLAGS uint32
 
 const (
@@ -89,6 +269,31 @@ const (
 	TME_NONCLIENT TRACKMOUSEEVENT_FLAGS = 16
 	TME_QUERY     TRACKMOUSEEVENT_FLAGS = 1073741824
 )
+
+// String returns the TRACKMOUSEEVENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRACKMOUSEEVENT_FLAGS) String() string {
+	var parts []string
+	if e&TME_CANCEL != 0 {
+		parts = append(parts, "TME_CANCEL")
+	}
+	if e&TME_HOVER != 0 {
+		parts = append(parts, "TME_HOVER")
+	}
+	if e&TME_LEAVE != 0 {
+		parts = append(parts, "TME_LEAVE")
+	}
+	if e&TME_NONCLIENT != 0 {
+		parts = append(parts, "TME_NONCLIENT")
+	}
+	if e&TME_QUERY != 0 {
+		parts = append(parts, "TME_QUERY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type VIRTUAL_KEY uint16
 
@@ -340,3 +545,468 @@ const (
 	VK_PA1                             VIRTUAL_KEY = 253
 	VK_OEM_CLEAR                       VIRTUAL_KEY = 254
 )
+
+// String returns the VIRTUAL_KEY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIRTUAL_KEY) String() string {
+	switch e {
+	case VK_0:
+		return "VK_0"
+	case VK_1:
+		return "VK_1"
+	case VK_2:
+		return "VK_2"
+	case VK_3:
+		return "VK_3"
+	case VK_4:
+		return "VK_4"
+	case VK_5:
+		return "VK_5"
+	case VK_6:
+		return "VK_6"
+	case VK_7:
+		return "VK_7"
+	case VK_8:
+		return "VK_8"
+	case VK_9:
+		return "VK_9"
+	case VK_A:
+		return "VK_A"
+	case VK_B:
+		return "VK_B"
+	case VK_C:
+		return "VK_C"
+	case VK_D:
+		return "VK_D"
+	case VK_E:
+		return "VK_E"
+	case VK_G:
+		return "VK_G"
+	case VK_H:
+		return "VK_H"
+	case VK_I:
+		return "VK_I"
+	case VK_J:
+		return "VK_J"
+	case VK_K:
+		return "VK_K"
+	case VK_L:
+		return "VK_L"
+	case VK_M:
+		return "VK_M"
+	case VK_N:
+		return "VK_N"
+	case VK_O:
+		return "VK_O"
+	case VK_P:
+		return "VK_P"
+	case VK_Q:
+		return "VK_Q"
+	case VK_R:
+		return "VK_R"
+	case VK_S:
+		return "VK_S"
+	case VK_T:
+		return "VK_T"
+	case VK_U:
+		return "VK_U"
+	case VK_V:
+		return "VK_V"
+	case VK_W:
+		return "VK_W"
+	case VK_X:
+		return "VK_X"
+	case VK_Y:
+		return "VK_Y"
+	case VK_Z:
+		return "VK_Z"
+	case VK_ABNT_C1:
+		return "VK_ABNT_C1"
+	case VK_ABNT_C2:
+		return "VK_ABNT_C2"
+	case VK_DBE_ALPHANUMERIC:
+		return "VK_DBE_ALPHANUMERIC"
+	case VK_DBE_CODEINPUT:
+		return "VK_DBE_CODEINPUT"
+	case VK_DBE_DBCSCHAR:
+		return "VK_DBE_DBCSCHAR"
+	case VK_DBE_DETERMINESTRING:
+		return "VK_DBE_DETERMINESTRING"
+	case VK_DBE_ENTERDLGCONVERSIONMODE:
+		return "VK_DBE_ENTERDLGCONVERSIONMODE"
+	case VK_DBE_ENTERIMECONFIGMODE:
+		return "VK_DBE_ENTERIMECONFIGMODE"
+	case VK_DBE_ENTERWORDREGISTERMODE:
+		return "VK_DBE_ENTERWORDREGISTERMODE"
+	case VK_DBE_FLUSHSTRING:
+		return "VK_DBE_FLUSHSTRING"
+	case VK_DBE_HIRAGANA:
+		return "VK_DBE_HIRAGANA"
+	case VK_DBE_KATAKANA:
+		return "VK_DBE_KATAKANA"
+	case VK_DBE_NOCODEINPUT:
+		return "VK_DBE_NOCODEINPUT"
+	case VK_DBE_NOROMAN:
+		return "VK_DBE_NOROMAN"
+	case VK_DBE_ROMAN:
+		return "VK_DBE_ROMAN"
+	case VK_DBE_SBCSCHAR:
+		return "VK_DBE_SBCSCHAR"
+	case VK__none_:
+		return "VK__none_"
+	case VK_LBUTTON:
+		return "VK_LBUTTON"
+	case VK_RBUTTON:
+		return "VK_RBUTTON"
+	case VK_CANCEL:
+		return "VK_CANCEL"
+	case VK_MBUTTON:
+		return "VK_MBUTTON"
+	case VK_XBUTTON1:
+		return "VK_XBUTTON1"
+	case VK_XBUTTON2:
+		return "VK_XBUTTON2"
+	case VK_BACK:
+		return "VK_BACK"
+	case VK_TAB:
+		return "VK_TAB"
+	case VK_CLEAR:
+		return "VK_CLEAR"
+	case VK_RETURN:
+		return "VK_RETURN"
+	case VK_SHIFT:
+		return "VK_SHIFT"
+	case VK_CONTROL:
+		return "VK_CONTROL"
+	case VK_MENU:
+		return "VK_MENU"
+	case VK_PAUSE:
+		return "VK_PAUSE"
+	case VK_CAPITAL:
+		return "VK_CAPITAL"
+	case VK_KANA:
+		return "VK_KANA"
+	case VK_IME_ON:
+		return "VK_IME_ON"
+	case VK_JUNJA:
+		return "VK_JUNJA"
+	case VK_FINAL:
+		return "VK_FINAL"
+	case VK_HANJA:
+		return "VK_HANJA"
+	case VK_IME_OFF:
+		return "VK_IME_OFF"
+	case VK_ESCAPE:
+		return "VK_ESCAPE"
+	case VK_CONVERT:
+		return "VK_CONVERT"
+	case VK_NONCONVERT:
+		return "VK_NONCONVERT"
+	case VK_ACCEPT:
+		return "VK_ACCEPT"
+	case VK_MODECHANGE:
+		return "VK_MODECHANGE"
+	case VK_SPACE:
+		return "VK_SPACE"
+	case VK_PRIOR:
+		return "VK_PRIOR"
+	case VK_NEXT:
+		return "VK_NEXT"
+	case VK_END:
+		return "VK_END"
+	case VK_HOME:
+		return "VK_HOME"
+	case VK_LEFT:
+		return "VK_LEFT"
+	case VK_UP:
+		return "VK_UP"
+	case VK_RIGHT:
+		return "VK_RIGHT"
+	case VK_DOWN:
+		return "VK_DOWN"
+	case VK_SELECT:
+		return "VK_SELECT"
+	case VK_PRINT:
+		return "VK_PRINT"
+	case VK_EXECUTE:
+		return "VK_EXECUTE"
+	case VK_SNAPSHOT:
+		return "VK_SNAPSHOT"
+	case VK_INSERT:
+		return "VK_INSERT"
+	case VK_DELETE:
+		return "VK_DELETE"
+	case VK_HELP:
+		return "VK_HELP"
+	case VK_LWIN:
+		return "VK_LWIN"
+	case VK_RWIN:
+		return "VK_RWIN"
+	case VK_APPS:
+		return "VK_APPS"
+	case VK_SLEEP:
+		return "VK_SLEEP"
+	case VK_NUMPAD0:
+		return "VK_NUMPAD0"
+	case VK_NUMPAD1:
+		return "VK_NUMPAD1"
+	case VK_NUMPAD2:
+		return "VK_NUMPAD2"
+	case VK_NUMPAD3:
+		return "VK_NUMPAD3"
+	case VK_NUMPAD4:
+		return "VK_NUMPAD4"
+	case VK_NUMPAD5:
+		return "VK_NUMPAD5"
+	case VK_NUMPAD6:
+		return "VK_NUMPAD6"
+	case VK_NUMPAD7:
+		return "VK_NUMPAD7"
+	case VK_NUMPAD8:
+		return "VK_NUMPAD8"
+	case VK_NUMPAD9:
+		return "VK_NUMPAD9"
+	case VK_MULTIPLY:
+		return "VK_MULTIPLY"
+	case VK_ADD:
+		return "VK_ADD"
+	case VK_SEPARATOR:
+		return "VK_SEPARATOR"
+	case VK_SUBTRACT:
+		return "VK_SUBTRACT"
+	case VK_DECIMAL:
+		return "VK_DECIMAL"
+	case VK_DIVIDE:
+		return "VK_DIVIDE"
+	case VK_F1:
+		return "VK_F1"
+	case VK_F2:
+		return "VK_F2"
+	case VK_F3:
+		return "VK_F3"
+	case VK_F4:
+		return "VK_F4"
+	case VK_F5:
+		return "VK_F5"
+	case VK_F6:
+		return "VK_F6"
+	case VK_F7:
+		return "VK_F7"
+	case VK_F8:
+		return "VK_F8"
+	case VK_F9:
+		return "VK_F9"
+	case VK_F10:
+		return "VK_F10"
+	case VK_F11:
+		return "VK_F11"
+	case VK_F12:
+		return "VK_F12"
+	case VK_F13:
+		return "VK_F13"
+	case VK_F14:
+		return "VK_F14"
+	case VK_F15:
+		return "VK_F15"
+	case VK_F16:
+		return "VK_F16"
+	case VK_F17:
+		return "VK_F17"
+	case VK_F18:
+		return "VK_F18"
+	case VK_F19:
+		return "VK_F19"
+	case VK_F20:
+		return "VK_F20"
+	case VK_F21:
+		return "VK_F21"
+	case VK_F22:
+		return "VK_F22"
+	case VK_F23:
+		return "VK_F23"
+	case VK_F24:
+		return "VK_F24"
+	case VK_NAVIGATION_VIEW:
+		return "VK_NAVIGATION_VIEW"
+	case VK_NAVIGATION_MENU:
+		return "VK_NAVIGATION_MENU"
+	case VK_NAVIGATION_UP:
+		return "VK_NAVIGATION_UP"
+	case VK_NAVIGATION_DOWN:
+		return "VK_NAVIGATION_DOWN"
+	case VK_NAVIGATION_LEFT:
+		return "VK_NAVIGATION_LEFT"
+	case VK_NAVIGATION_RIGHT:
+		return "VK_NAVIGATION_RIGHT"
+	case VK_NAVIGATION_ACCEPT:
+		return "VK_NAVIGATION_ACCEPT"
+	case VK_NAVIGATION_CANCEL:
+		return "VK_NAVIGATION_CANCEL"
+	case VK_NUMLOCK:
+		return "VK_NUMLOCK"
+	case VK_SCROLL:
+		return "VK_SCROLL"
+	case VK_OEM_NEC_EQUAL:
+		return "VK_OEM_NEC_EQUAL"
+	case VK_OEM_FJ_MASSHOU:
+		return "VK_OEM_FJ_MASSHOU"
+	case VK_OEM_FJ_TOUROKU:
+		return "VK_OEM_FJ_TOUROKU"
+	case VK_OEM_FJ_LOYA:
+		return "VK_OEM_FJ_LOYA"
+	case VK_OEM_FJ_ROYA:
+		return "VK_OEM_FJ_ROYA"
+	case VK_LSHIFT:
+		return "VK_LSHIFT"
+	case VK_RSHIFT:
+		return "VK_RSHIFT"
+	case VK_LCONTROL:
+		return "VK_LCONTROL"
+	case VK_RCONTROL:
+		return "VK_RCONTROL"
+	case VK_LMENU:
+		return "VK_LMENU"
+	case VK_RMENU:
+		return "VK_RMENU"
+	case VK_BROWSER_BACK:
+		return "VK_BROWSER_BACK"
+	case VK_BROWSER_FORWARD:
+		return "VK_BROWSER_FORWARD"
+	case VK_BROWSER_REFRESH:
+		return "VK_BROWSER_REFRESH"
+	case VK_BROWSER_STOP:
+		return "VK_BROWSER_STOP"
+	case VK_BROWSER_SEARCH:
+		return "VK_BROWSER_SEARCH"
+	case VK_BROWSER_FAVORITES:
+		return "VK_BROWSER_FAVORITES"
+	case VK_BROWSER_HOME:
+		return "VK_BROWSER_HOME"
+	case VK_VOLUME_MUTE:
+		return "VK_VOLUME_MUTE"
+	case VK_VOLUME_DOWN:
+		return "VK_VOLUME_DOWN"
+	case VK_VOLUME_UP:
+		return "VK_VOLUME_UP"
+	case VK_MEDIA_NEXT_TRACK:
+		return "VK_MEDIA_NEXT_TRACK"
+	case VK_MEDIA_PREV_TRACK:
+		return "VK_MEDIA_PREV_TRACK"
+	case VK_MEDIA_STOP:
+		return "VK_MEDIA_STOP"
+	case VK_MEDIA_PLAY_PAUSE:
+		return "VK_MEDIA_PLAY_PAUSE"
+	case VK_LAUNCH_MAIL:
+		return "VK_LAUNCH_MAIL"
+	case VK_LAUNCH_MEDIA_SELECT:
+		return "VK_LAUNCH_MEDIA_SELECT"
+	case VK_LAUNCH_APP1:
+		return "VK_LAUNCH_APP1"
+	case VK_LAUNCH_APP2:
+		return "VK_LAUNCH_APP2"
+	case VK_OEM_1:
+		return "VK_OEM_1"
+	case VK_OEM_PLUS:
+		return "VK_OEM_PLUS"
+	case VK_OEM_COMMA:
+		return "VK_OEM_COMMA"
+	case VK_OEM_MINUS:
+		return "VK_OEM_MINUS"
+	case VK_OEM_PERIOD:
+		return "VK_OEM_PERIOD"
+	case VK_OEM_2:
+		return "VK_OEM_2"
+	case VK_OEM_3:
+		return "VK_OEM_3"
+	case VK_GAMEPAD_A:
+		return "VK_GAMEPAD_A"
+	case VK_GAMEPAD_B:
+		return "VK_GAMEPAD_B"
+	case VK_GAMEPAD_X:
+		return "VK_GAMEPAD_X"
+	case VK_GAMEPAD_Y:
+		return "VK_GAMEPAD_Y"
+	case VK_GAMEPAD_RIGHT_SHOULDER:
+		return "VK_GAMEPAD_RIGHT_SHOULDER"
+	case VK_GAMEPAD_LEFT_SHOULDER:
+		return "VK_GAMEPAD_LEFT_SHOULDER"
+	case VK_GAMEPAD_LEFT_TRIGGER:
+		return "VK_GAMEPAD_LEFT_TRIGGER"
+	case VK_GAMEPAD_RIGHT_TRIGGER:
+		return "VK_GAMEPAD_RIGHT_TRIGGER"
+	case VK_GAMEPAD_DPAD_UP:
+		return "VK_GAMEPAD_DPAD_UP"
+	case VK_GAMEPAD_DPAD_DOWN:
+		return "VK_GAMEPAD_DPAD_DOWN"
+	case VK_GAMEPAD_DPAD_LEFT:
+		return "VK_GAMEPAD_DPAD_LEFT"
+	case VK_GAMEPAD_DPAD_RIGHT:
+		return "VK_GAMEPAD_DPAD_RIGHT"
+	case VK_GAMEPAD_MENU:
+		return "VK_GAMEPAD_MENU"
+	case VK_GAMEPAD_VIEW:
+		return "VK_GAMEPAD_VIEW"
+	case VK_GAMEPAD_LEFT_THUMBSTICK_BUTTON:
+		return "VK_GAMEPAD_LEFT_THUMBSTICK_BUTTON"
+	case VK_GAMEPAD_RIGHT_THUMBSTICK_BUTTON:
+		return "VK_GAMEPAD_RIGHT_THUMBSTICK_BUTTON"
+	case VK_GAMEPAD_LEFT_THUMBSTICK_UP:
+		return "VK_GAMEPAD_LEFT_THUMBSTICK_UP"
+	case VK_GAMEPAD_LEFT_THUMBSTICK_DOWN:
+		return "VK_GAMEPAD_LEFT_THUMBSTICK_DOWN"
+	case VK_GAMEPAD_LEFT_THUMBSTICK_RIGHT:
+		return "VK_GAMEPAD_LEFT_THUMBSTICK_RIGHT"
+	case VK_GAMEPAD_LEFT_THUMBSTICK_LEFT:
+		return "VK_GAMEPAD_LEFT_THUMBSTICK_LEFT"
+	case VK_GAMEPAD_RIGHT_THUMBSTICK_UP:
+		return "VK_GAMEPAD_RIGHT_THUMBSTICK_UP"
+	case VK_GAMEPAD_RIGHT_THUMBSTICK_DOWN:
+		return "VK_GAMEPAD_RIGHT_THUMBSTICK_DOWN"
+	case VK_GAMEPAD_RIGHT_THUMBSTICK_RIGHT:
+		return "VK_GAMEPAD_RIGHT_THUMBSTICK_RIGHT"
+	case VK_GAMEPAD_RIGHT_THUMBSTICK_LEFT:
+		return "VK_GAMEPAD_RIGHT_THUMBSTICK_LEFT"
+	case VK_OEM_4:
+		return "VK_OEM_4"
+	case VK_OEM_5:
+		return "VK_OEM_5"
+	case VK_OEM_6:
+		return "VK_OEM_6"
+	case VK_OEM_7:
+		return "VK_OEM_7"
+	case VK_OEM_8:
+		return "VK_OEM_8"
+	case VK_OEM_AX:
+		return "VK_OEM_AX"
+	case VK_OEM_102:
+		return "VK_OEM_102"
+	case VK_ICO_HELP:
+		return "VK_ICO_HELP"
+	case VK_ICO_00:
+		return "VK_ICO_00"
+	case VK_PROCESSKEY:
+		return "VK_PROCESSKEY"
+	case VK_ICO_CLEAR:
+		return "VK_ICO_CLEAR"
+	case VK_PACKET:
+		return "VK_PACKET"
+	case VK_OEM_RESET:
+		return "VK_OEM_RESET"
+	case VK_OEM_JUMP:
+		return "VK_OEM_JUMP"
+	case VK_OEM_PA1:
+		return "VK_OEM_PA1"
+	case VK_OEM_PA2:
+		return "VK_OEM_PA2"
+	case VK_OEM_PA3:
+		return "VK_OEM_PA3"
+	case VK_OEM_WSCTRL:
+		return "VK_OEM_WSCTRL"
+	case VK_OEM_CUSEL:
+		return "VK_OEM_CUSEL"
+	case VK_OEM_CLEAR:
+		return "VK_OEM_CLEAR"
+	default:
+		return fmt.Sprintf("VIRTUAL_KEY(%d)", uint16(e))
+	}
+}

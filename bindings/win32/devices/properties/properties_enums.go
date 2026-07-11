@@ -4,12 +4,29 @@
 
 package properties
 
+import (
+	"fmt"
+)
+
 type DEVPROPSTORE int32
 
 const (
 	DEVPROP_STORE_SYSTEM DEVPROPSTORE = 0
 	DEVPROP_STORE_USER   DEVPROPSTORE = 1
 )
+
+// String returns the DEVPROPSTORE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROPSTORE) String() string {
+	switch e {
+	case DEVPROP_STORE_SYSTEM:
+		return "DEVPROP_STORE_SYSTEM"
+	case DEVPROP_STORE_USER:
+		return "DEVPROP_STORE_USER"
+	default:
+		return fmt.Sprintf("DEVPROPSTORE(%d)", int32(e))
+	}
+}
 
 type DEVPROPTYPE uint32
 
@@ -45,3 +62,72 @@ const (
 	DEVPROP_TYPE_NTSTATUS                   DEVPROPTYPE = 24
 	DEVPROP_TYPE_STRING_INDIRECT            DEVPROPTYPE = 25
 )
+
+// String returns the DEVPROPTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROPTYPE) String() string {
+	switch e {
+	case DEVPROP_TYPEMOD_ARRAY:
+		return "DEVPROP_TYPEMOD_ARRAY"
+	case DEVPROP_TYPEMOD_LIST:
+		return "DEVPROP_TYPEMOD_LIST"
+	case DEVPROP_TYPE_EMPTY:
+		return "DEVPROP_TYPE_EMPTY"
+	case DEVPROP_TYPE_NULL:
+		return "DEVPROP_TYPE_NULL"
+	case DEVPROP_TYPE_SBYTE:
+		return "DEVPROP_TYPE_SBYTE"
+	case DEVPROP_TYPE_BYTE:
+		return "DEVPROP_TYPE_BYTE"
+	case DEVPROP_TYPE_INT16:
+		return "DEVPROP_TYPE_INT16"
+	case DEVPROP_TYPE_UINT16:
+		return "DEVPROP_TYPE_UINT16"
+	case DEVPROP_TYPE_INT32:
+		return "DEVPROP_TYPE_INT32"
+	case DEVPROP_TYPE_UINT32:
+		return "DEVPROP_TYPE_UINT32"
+	case DEVPROP_TYPE_INT64:
+		return "DEVPROP_TYPE_INT64"
+	case DEVPROP_TYPE_UINT64:
+		return "DEVPROP_TYPE_UINT64"
+	case DEVPROP_TYPE_FLOAT:
+		return "DEVPROP_TYPE_FLOAT"
+	case DEVPROP_TYPE_DOUBLE:
+		return "DEVPROP_TYPE_DOUBLE"
+	case DEVPROP_TYPE_DECIMAL:
+		return "DEVPROP_TYPE_DECIMAL"
+	case DEVPROP_TYPE_GUID:
+		return "DEVPROP_TYPE_GUID"
+	case DEVPROP_TYPE_CURRENCY:
+		return "DEVPROP_TYPE_CURRENCY"
+	case DEVPROP_TYPE_DATE:
+		return "DEVPROP_TYPE_DATE"
+	case DEVPROP_TYPE_FILETIME:
+		return "DEVPROP_TYPE_FILETIME"
+	case DEVPROP_TYPE_BOOLEAN:
+		return "DEVPROP_TYPE_BOOLEAN"
+	case DEVPROP_TYPE_STRING:
+		return "DEVPROP_TYPE_STRING"
+	case DEVPROP_TYPE_STRING_LIST:
+		return "DEVPROP_TYPE_STRING_LIST"
+	case DEVPROP_TYPE_SECURITY_DESCRIPTOR:
+		return "DEVPROP_TYPE_SECURITY_DESCRIPTOR"
+	case DEVPROP_TYPE_SECURITY_DESCRIPTOR_STRING:
+		return "DEVPROP_TYPE_SECURITY_DESCRIPTOR_STRING"
+	case DEVPROP_TYPE_DEVPROPKEY:
+		return "DEVPROP_TYPE_DEVPROPKEY"
+	case DEVPROP_TYPE_DEVPROPTYPE:
+		return "DEVPROP_TYPE_DEVPROPTYPE"
+	case DEVPROP_TYPE_BINARY:
+		return "DEVPROP_TYPE_BINARY"
+	case DEVPROP_TYPE_ERROR:
+		return "DEVPROP_TYPE_ERROR"
+	case DEVPROP_TYPE_NTSTATUS:
+		return "DEVPROP_TYPE_NTSTATUS"
+	case DEVPROP_TYPE_STRING_INDIRECT:
+		return "DEVPROP_TYPE_STRING_INDIRECT"
+	default:
+		return fmt.Sprintf("DEVPROPTYPE(%d)", uint32(e))
+	}
+}

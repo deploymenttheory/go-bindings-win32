@@ -4,6 +4,10 @@
 
 package serverbackup
 
+import (
+	"fmt"
+)
+
 // WSB_OB_STATUS_ENTRY_PAIR_TYPE: https://learn.microsoft.com/windows/win32/api/wsbonline/ne-wsbonline-wsb_ob_status_entry_pair_type
 type WSB_OB_STATUS_ENTRY_PAIR_TYPE int32
 
@@ -16,3 +20,26 @@ const (
 	WSB_OB_ET_SIZE      WSB_OB_STATUS_ENTRY_PAIR_TYPE = 5
 	WSB_OB_ET_MAX       WSB_OB_STATUS_ENTRY_PAIR_TYPE = 6
 )
+
+// String returns the WSB_OB_STATUS_ENTRY_PAIR_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSB_OB_STATUS_ENTRY_PAIR_TYPE) String() string {
+	switch e {
+	case WSB_OB_ET_UNDEFINED:
+		return "WSB_OB_ET_UNDEFINED"
+	case WSB_OB_ET_STRING:
+		return "WSB_OB_ET_STRING"
+	case WSB_OB_ET_NUMBER:
+		return "WSB_OB_ET_NUMBER"
+	case WSB_OB_ET_DATETIME:
+		return "WSB_OB_ET_DATETIME"
+	case WSB_OB_ET_TIME:
+		return "WSB_OB_ET_TIME"
+	case WSB_OB_ET_SIZE:
+		return "WSB_OB_ET_SIZE"
+	case WSB_OB_ET_MAX:
+		return "WSB_OB_ET_MAX"
+	default:
+		return fmt.Sprintf("WSB_OB_STATUS_ENTRY_PAIR_TYPE(%d)", int32(e))
+	}
+}

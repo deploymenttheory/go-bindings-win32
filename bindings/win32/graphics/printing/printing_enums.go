@@ -4,6 +4,11 @@
 
 package printing
 
+import (
+	"fmt"
+	"strings"
+)
+
 type BIDI_TYPE int32
 
 const (
@@ -16,6 +21,31 @@ const (
 	BIDI_ENUM   BIDI_TYPE = 6
 	BIDI_BLOB   BIDI_TYPE = 7
 )
+
+// String returns the BIDI_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BIDI_TYPE) String() string {
+	switch e {
+	case BIDI_NULL:
+		return "BIDI_NULL"
+	case BIDI_INT:
+		return "BIDI_INT"
+	case BIDI_FLOAT:
+		return "BIDI_FLOAT"
+	case BIDI_BOOL:
+		return "BIDI_BOOL"
+	case BIDI_STRING:
+		return "BIDI_STRING"
+	case BIDI_TEXT:
+		return "BIDI_TEXT"
+	case BIDI_ENUM:
+		return "BIDI_ENUM"
+	case BIDI_BLOB:
+		return "BIDI_BLOB"
+	default:
+		return fmt.Sprintf("BIDI_TYPE(%d)", int32(e))
+	}
+}
 
 type EATTRIBUTE_DATATYPE int32
 
@@ -33,6 +63,37 @@ const (
 	KADT_CUSTOMSIZEPARAMS EATTRIBUTE_DATATYPE = 10
 )
 
+// String returns the EATTRIBUTE_DATATYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EATTRIBUTE_DATATYPE) String() string {
+	switch e {
+	case KADT_UNKNOWN:
+		return "KADT_UNKNOWN"
+	case KADT_BOOL:
+		return "KADT_BOOL"
+	case KADT_INT:
+		return "KADT_INT"
+	case KADT_LONG:
+		return "KADT_LONG"
+	case KADT_DWORD:
+		return "KADT_DWORD"
+	case KADT_ASCII:
+		return "KADT_ASCII"
+	case KADT_UNICODE:
+		return "KADT_UNICODE"
+	case KADT_BINARY:
+		return "KADT_BINARY"
+	case KADT_SIZE:
+		return "KADT_SIZE"
+	case KADT_RECT:
+		return "KADT_RECT"
+	case KADT_CUSTOMSIZEPARAMS:
+		return "KADT_CUSTOMSIZEPARAMS"
+	default:
+		return fmt.Sprintf("EATTRIBUTE_DATATYPE(%d)", int32(e))
+	}
+}
+
 type EBranchOfficeJobEventType int32
 
 const (
@@ -43,6 +104,27 @@ const (
 	KLogJobPipelineError EBranchOfficeJobEventType = 4
 	KLogOfflineFileFull  EBranchOfficeJobEventType = 5
 )
+
+// String returns the EBranchOfficeJobEventType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EBranchOfficeJobEventType) String() string {
+	switch e {
+	case KInvalidJobState:
+		return "KInvalidJobState"
+	case KLogJobPrinted:
+		return "KLogJobPrinted"
+	case KLogJobRendered:
+		return "KLogJobRendered"
+	case KLogJobError:
+		return "KLogJobError"
+	case KLogJobPipelineError:
+		return "KLogJobPipelineError"
+	case KLogOfflineFileFull:
+		return "KLogOfflineFileFull"
+	default:
+		return fmt.Sprintf("EBranchOfficeJobEventType(%d)", int32(e))
+	}
+}
 
 type EPrintPropertyType int32
 
@@ -59,6 +141,35 @@ const (
 	KPropertyTypeBuffer              EPrintPropertyType = 10
 )
 
+// String returns the EPrintPropertyType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EPrintPropertyType) String() string {
+	switch e {
+	case KPropertyTypeString:
+		return "KPropertyTypeString"
+	case KPropertyTypeInt32:
+		return "KPropertyTypeInt32"
+	case KPropertyTypeInt64:
+		return "KPropertyTypeInt64"
+	case KPropertyTypeByte:
+		return "KPropertyTypeByte"
+	case KPropertyTypeTime:
+		return "KPropertyTypeTime"
+	case KPropertyTypeDevMode:
+		return "KPropertyTypeDevMode"
+	case KPropertyTypeSD:
+		return "KPropertyTypeSD"
+	case KPropertyTypeNotificationReply:
+		return "KPropertyTypeNotificationReply"
+	case KPropertyTypeNotificationOptions:
+		return "KPropertyTypeNotificationOptions"
+	case KPropertyTypeBuffer:
+		return "KPropertyTypeBuffer"
+	default:
+		return fmt.Sprintf("EPrintPropertyType(%d)", int32(e))
+	}
+}
+
 // EPrintXPSJobOperation: https://learn.microsoft.com/windows/win32/printdocs/eprintxpsjoboperation
 type EPrintXPSJobOperation int32
 
@@ -66,6 +177,19 @@ const (
 	KJobProduction  EPrintXPSJobOperation = 1
 	KJobConsumption EPrintXPSJobOperation = 2
 )
+
+// String returns the EPrintXPSJobOperation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EPrintXPSJobOperation) String() string {
+	switch e {
+	case KJobProduction:
+		return "KJobProduction"
+	case KJobConsumption:
+		return "KJobConsumption"
+	default:
+		return fmt.Sprintf("EPrintXPSJobOperation(%d)", int32(e))
+	}
+}
 
 // EPrintXPSJobProgress: https://learn.microsoft.com/windows/win32/printdocs/eprintxpsjobprogress
 type EPrintXPSJobProgress int32
@@ -83,6 +207,35 @@ const (
 	KXpsDocumentCommitted   EPrintXPSJobProgress = 9
 )
 
+// String returns the EPrintXPSJobProgress constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EPrintXPSJobProgress) String() string {
+	switch e {
+	case KAddingDocumentSequence:
+		return "KAddingDocumentSequence"
+	case KDocumentSequenceAdded:
+		return "KDocumentSequenceAdded"
+	case KAddingFixedDocument:
+		return "KAddingFixedDocument"
+	case KFixedDocumentAdded:
+		return "KFixedDocumentAdded"
+	case KAddingFixedPage:
+		return "KAddingFixedPage"
+	case KFixedPageAdded:
+		return "KFixedPageAdded"
+	case KResourceAdded:
+		return "KResourceAdded"
+	case KFontAdded:
+		return "KFontAdded"
+	case KImageAdded:
+		return "KImageAdded"
+	case KXpsDocumentCommitted:
+		return "KXpsDocumentCommitted"
+	default:
+		return fmt.Sprintf("EPrintXPSJobProgress(%d)", int32(e))
+	}
+}
+
 type EXpsCompressionOptions int32
 
 const (
@@ -92,12 +245,42 @@ const (
 	Compression_Fast          EXpsCompressionOptions = 3
 )
 
+// String returns the EXpsCompressionOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXpsCompressionOptions) String() string {
+	switch e {
+	case Compression_NotCompressed:
+		return "Compression_NotCompressed"
+	case Compression_Normal:
+		return "Compression_Normal"
+	case Compression_Small:
+		return "Compression_Small"
+	case Compression_Fast:
+		return "Compression_Fast"
+	default:
+		return fmt.Sprintf("EXpsCompressionOptions(%d)", int32(e))
+	}
+}
+
 type EXpsFontOptions int32
 
 const (
 	Font_Normal      EXpsFontOptions = 0
 	Font_Obfusticate EXpsFontOptions = 1
 )
+
+// String returns the EXpsFontOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXpsFontOptions) String() string {
+	switch e {
+	case Font_Normal:
+		return "Font_Normal"
+	case Font_Obfusticate:
+		return "Font_Obfusticate"
+	default:
+		return fmt.Sprintf("EXpsFontOptions(%d)", int32(e))
+	}
+}
 
 type EXpsFontRestriction int32
 
@@ -108,6 +291,23 @@ const (
 	Xps_Restricted_Font_Editable     EXpsFontRestriction = 8
 )
 
+// String returns the EXpsFontRestriction constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXpsFontRestriction) String() string {
+	switch e {
+	case Xps_Restricted_Font_Installable:
+		return "Xps_Restricted_Font_Installable"
+	case Xps_Restricted_Font_NoEmbedding:
+		return "Xps_Restricted_Font_NoEmbedding"
+	case Xps_Restricted_Font_PreviewPrint:
+		return "Xps_Restricted_Font_PreviewPrint"
+	case Xps_Restricted_Font_Editable:
+		return "Xps_Restricted_Font_Editable"
+	default:
+		return fmt.Sprintf("EXpsFontRestriction(%d)", int32(e))
+	}
+}
+
 type EXpsJobConsumption int32
 
 const (
@@ -115,6 +315,21 @@ const (
 	XpsJob_FixedDocumentAdded    EXpsJobConsumption = 1
 	XpsJob_FixedPageAdded        EXpsJobConsumption = 2
 )
+
+// String returns the EXpsJobConsumption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXpsJobConsumption) String() string {
+	switch e {
+	case XpsJob_DocumentSequenceAdded:
+		return "XpsJob_DocumentSequenceAdded"
+	case XpsJob_FixedDocumentAdded:
+		return "XpsJob_FixedDocumentAdded"
+	case XpsJob_FixedPageAdded:
+		return "XpsJob_FixedPageAdded"
+	default:
+		return fmt.Sprintf("EXpsJobConsumption(%d)", int32(e))
+	}
+}
 
 type MXDC_IMAGE_TYPE_ENUMS int32
 
@@ -125,6 +340,23 @@ const (
 	MXDC_IMAGETYPE_PNG                    MXDC_IMAGE_TYPE_ENUMS = 4
 )
 
+// String returns the MXDC_IMAGE_TYPE_ENUMS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MXDC_IMAGE_TYPE_ENUMS) String() string {
+	switch e {
+	case MXDC_IMAGETYPE_JPEGHIGH_COMPRESSION:
+		return "MXDC_IMAGETYPE_JPEGHIGH_COMPRESSION"
+	case MXDC_IMAGETYPE_JPEGMEDIUM_COMPRESSION:
+		return "MXDC_IMAGETYPE_JPEGMEDIUM_COMPRESSION"
+	case MXDC_IMAGETYPE_JPEGLOW_COMPRESSION:
+		return "MXDC_IMAGETYPE_JPEGLOW_COMPRESSION"
+	case MXDC_IMAGETYPE_PNG:
+		return "MXDC_IMAGETYPE_PNG"
+	default:
+		return fmt.Sprintf("MXDC_IMAGE_TYPE_ENUMS(%d)", int32(e))
+	}
+}
+
 type MXDC_LANDSCAPE_ROTATION_ENUMS int32
 
 const (
@@ -132,6 +364,21 @@ const (
 	MXDC_LANDSCAPE_ROTATE_NONE                         MXDC_LANDSCAPE_ROTATION_ENUMS = 0
 	MXDC_LANDSCAPE_ROTATE_COUNTERCLOCKWISE_270_DEGREES MXDC_LANDSCAPE_ROTATION_ENUMS = -90
 )
+
+// String returns the MXDC_LANDSCAPE_ROTATION_ENUMS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MXDC_LANDSCAPE_ROTATION_ENUMS) String() string {
+	switch e {
+	case MXDC_LANDSCAPE_ROTATE_COUNTERCLOCKWISE_90_DEGREES:
+		return "MXDC_LANDSCAPE_ROTATE_COUNTERCLOCKWISE_90_DEGREES"
+	case MXDC_LANDSCAPE_ROTATE_NONE:
+		return "MXDC_LANDSCAPE_ROTATE_NONE"
+	case MXDC_LANDSCAPE_ROTATE_COUNTERCLOCKWISE_270_DEGREES:
+		return "MXDC_LANDSCAPE_ROTATE_COUNTERCLOCKWISE_270_DEGREES"
+	default:
+		return fmt.Sprintf("MXDC_LANDSCAPE_ROTATION_ENUMS(%d)", int32(e))
+	}
+}
 
 // MXDC_S0_PAGE_ENUMS: https://learn.microsoft.com/windows/win32/printdocs/mxdcs0pageenums
 type MXDC_S0_PAGE_ENUMS int32
@@ -149,6 +396,35 @@ const (
 	MXDC_RESOURCE_MAX            MXDC_S0_PAGE_ENUMS = 9
 )
 
+// String returns the MXDC_S0_PAGE_ENUMS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MXDC_S0_PAGE_ENUMS) String() string {
+	switch e {
+	case MXDC_RESOURCE_TTF:
+		return "MXDC_RESOURCE_TTF"
+	case MXDC_RESOURCE_JPEG:
+		return "MXDC_RESOURCE_JPEG"
+	case MXDC_RESOURCE_PNG:
+		return "MXDC_RESOURCE_PNG"
+	case MXDC_RESOURCE_TIFF:
+		return "MXDC_RESOURCE_TIFF"
+	case MXDC_RESOURCE_WDP:
+		return "MXDC_RESOURCE_WDP"
+	case MXDC_RESOURCE_DICTIONARY:
+		return "MXDC_RESOURCE_DICTIONARY"
+	case MXDC_RESOURCE_ICC_PROFILE:
+		return "MXDC_RESOURCE_ICC_PROFILE"
+	case MXDC_RESOURCE_JPEG_THUMBNAIL:
+		return "MXDC_RESOURCE_JPEG_THUMBNAIL"
+	case MXDC_RESOURCE_PNG_THUMBNAIL:
+		return "MXDC_RESOURCE_PNG_THUMBNAIL"
+	case MXDC_RESOURCE_MAX:
+		return "MXDC_RESOURCE_MAX"
+	default:
+		return fmt.Sprintf("MXDC_S0_PAGE_ENUMS(%d)", int32(e))
+	}
+}
+
 type NOTIFICATION_CALLBACK_COMMANDS int32
 
 const (
@@ -156,6 +432,21 @@ const (
 	NOTIFICATION_COMMAND_CONTEXT_ACQUIRE NOTIFICATION_CALLBACK_COMMANDS = 1
 	NOTIFICATION_COMMAND_CONTEXT_RELEASE NOTIFICATION_CALLBACK_COMMANDS = 2
 )
+
+// String returns the NOTIFICATION_CALLBACK_COMMANDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NOTIFICATION_CALLBACK_COMMANDS) String() string {
+	switch e {
+	case NOTIFICATION_COMMAND_NOTIFY:
+		return "NOTIFICATION_COMMAND_NOTIFY"
+	case NOTIFICATION_COMMAND_CONTEXT_ACQUIRE:
+		return "NOTIFICATION_COMMAND_CONTEXT_ACQUIRE"
+	case NOTIFICATION_COMMAND_CONTEXT_RELEASE:
+		return "NOTIFICATION_COMMAND_CONTEXT_RELEASE"
+	default:
+		return fmt.Sprintf("NOTIFICATION_CALLBACK_COMMANDS(%d)", int32(e))
+	}
+}
 
 type NOTIFICATION_CONFIG_FLAGS int32
 
@@ -166,6 +457,24 @@ const (
 	NOTIFICATION_CONFIG_ASYNC_CHANNEL     NOTIFICATION_CONFIG_FLAGS = 8
 )
 
+// String returns the NOTIFICATION_CONFIG_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NOTIFICATION_CONFIG_FLAGS) String() string {
+	switch e {
+	case NOTIFICATION_CONFIG_CREATE_EVENT:
+		return "NOTIFICATION_CONFIG_CREATE_EVENT"
+	case NOTIFICATION_CONFIG_REGISTER_CALLBACK:
+		return "NOTIFICATION_CONFIG_REGISTER_CALLBACK"
+	case NOTIFICATION_CONFIG_EVENT_TRIGGER:
+		return "NOTIFICATION_CONFIG_EVENT_TRIGGER"
+	case NOTIFICATION_CONFIG_ASYNC_CHANNEL:
+		return "NOTIFICATION_CONFIG_ASYNC_CHANNEL"
+	default:
+		return fmt.Sprintf("NOTIFICATION_CONFIG_FLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PRINTER_ACCESS_RIGHTS uint32
 
 const (
@@ -193,6 +502,82 @@ const (
 	PRINTER_ACCESS_MANAGE_LIMITED    PRINTER_ACCESS_RIGHTS = 64
 )
 
+// String returns the PRINTER_ACCESS_RIGHTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRINTER_ACCESS_RIGHTS) String() string {
+	var parts []string
+	if e&PRINTER_ALL_ACCESS != 0 {
+		parts = append(parts, "PRINTER_ALL_ACCESS")
+	}
+	if e&PRINTER_READ != 0 {
+		parts = append(parts, "PRINTER_READ")
+	}
+	if e&PRINTER_WRITE != 0 {
+		parts = append(parts, "PRINTER_WRITE")
+	}
+	if e&PRINTER_EXECUTE != 0 {
+		parts = append(parts, "PRINTER_EXECUTE")
+	}
+	if e&SERVER_ALL_ACCESS != 0 {
+		parts = append(parts, "SERVER_ALL_ACCESS")
+	}
+	if e&SERVER_READ != 0 {
+		parts = append(parts, "SERVER_READ")
+	}
+	if e&SERVER_WRITE != 0 {
+		parts = append(parts, "SERVER_WRITE")
+	}
+	if e&SERVER_EXECUTE != 0 {
+		parts = append(parts, "SERVER_EXECUTE")
+	}
+	if e&PRINTER_DELETE != 0 {
+		parts = append(parts, "PRINTER_DELETE")
+	}
+	if e&PRINTER_READ_CONTROL != 0 {
+		parts = append(parts, "PRINTER_READ_CONTROL")
+	}
+	if e&PRINTER_WRITE_DAC != 0 {
+		parts = append(parts, "PRINTER_WRITE_DAC")
+	}
+	if e&PRINTER_WRITE_OWNER != 0 {
+		parts = append(parts, "PRINTER_WRITE_OWNER")
+	}
+	if e&PRINTER_SYNCHRONIZE != 0 {
+		parts = append(parts, "PRINTER_SYNCHRONIZE")
+	}
+	if e&PRINTER_STANDARD_RIGHTS_REQUIRED != 0 {
+		parts = append(parts, "PRINTER_STANDARD_RIGHTS_REQUIRED")
+	}
+	if e&PRINTER_STANDARD_RIGHTS_READ != 0 {
+		parts = append(parts, "PRINTER_STANDARD_RIGHTS_READ")
+	}
+	if e&PRINTER_STANDARD_RIGHTS_WRITE != 0 {
+		parts = append(parts, "PRINTER_STANDARD_RIGHTS_WRITE")
+	}
+	if e&PRINTER_STANDARD_RIGHTS_EXECUTE != 0 {
+		parts = append(parts, "PRINTER_STANDARD_RIGHTS_EXECUTE")
+	}
+	if e&SERVER_ACCESS_ADMINISTER != 0 {
+		parts = append(parts, "SERVER_ACCESS_ADMINISTER")
+	}
+	if e&SERVER_ACCESS_ENUMERATE != 0 {
+		parts = append(parts, "SERVER_ACCESS_ENUMERATE")
+	}
+	if e&PRINTER_ACCESS_ADMINISTER != 0 {
+		parts = append(parts, "PRINTER_ACCESS_ADMINISTER")
+	}
+	if e&PRINTER_ACCESS_USE != 0 {
+		parts = append(parts, "PRINTER_ACCESS_USE")
+	}
+	if e&PRINTER_ACCESS_MANAGE_LIMITED != 0 {
+		parts = append(parts, "PRINTER_ACCESS_MANAGE_LIMITED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // PRINTER_OPTION_FLAGS: https://learn.microsoft.com/windows/win32/printdocs/printer-option-flags
 type PRINTER_OPTION_FLAGS int32
 
@@ -202,6 +587,23 @@ const (
 	PRINTER_OPTION_CLIENT_CHANGE  PRINTER_OPTION_FLAGS = 4
 	PRINTER_OPTION_NO_CLIENT_DATA PRINTER_OPTION_FLAGS = 8
 )
+
+// String returns the PRINTER_OPTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRINTER_OPTION_FLAGS) String() string {
+	switch e {
+	case PRINTER_OPTION_NO_CACHE:
+		return "PRINTER_OPTION_NO_CACHE"
+	case PRINTER_OPTION_CACHE:
+		return "PRINTER_OPTION_CACHE"
+	case PRINTER_OPTION_CLIENT_CHANGE:
+		return "PRINTER_OPTION_CLIENT_CHANGE"
+	case PRINTER_OPTION_NO_CLIENT_DATA:
+		return "PRINTER_OPTION_NO_CLIENT_DATA"
+	default:
+		return fmt.Sprintf("PRINTER_OPTION_FLAGS(%d)", int32(e))
+	}
+}
 
 // PRINT_EXECUTION_CONTEXT: https://learn.microsoft.com/windows/win32/printdocs/print-execution-context
 type PRINT_EXECUTION_CONTEXT int32
@@ -214,12 +616,44 @@ const (
 	PRINT_EXECUTION_CONTEXT_WOW64                  PRINT_EXECUTION_CONTEXT = 4
 )
 
+// String returns the PRINT_EXECUTION_CONTEXT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRINT_EXECUTION_CONTEXT) String() string {
+	switch e {
+	case PRINT_EXECUTION_CONTEXT_APPLICATION:
+		return "PRINT_EXECUTION_CONTEXT_APPLICATION"
+	case PRINT_EXECUTION_CONTEXT_SPOOLER_SERVICE:
+		return "PRINT_EXECUTION_CONTEXT_SPOOLER_SERVICE"
+	case PRINT_EXECUTION_CONTEXT_SPOOLER_ISOLATION_HOST:
+		return "PRINT_EXECUTION_CONTEXT_SPOOLER_ISOLATION_HOST"
+	case PRINT_EXECUTION_CONTEXT_FILTER_PIPELINE:
+		return "PRINT_EXECUTION_CONTEXT_FILTER_PIPELINE"
+	case PRINT_EXECUTION_CONTEXT_WOW64:
+		return "PRINT_EXECUTION_CONTEXT_WOW64"
+	default:
+		return fmt.Sprintf("PRINT_EXECUTION_CONTEXT(%d)", int32(e))
+	}
+}
+
 type PageCountType int32
 
 const (
 	FinalPageCount        PageCountType = 0
 	IntermediatePageCount PageCountType = 1
 )
+
+// String returns the PageCountType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PageCountType) String() string {
+	switch e {
+	case FinalPageCount:
+		return "FinalPageCount"
+	case IntermediatePageCount:
+		return "IntermediatePageCount"
+	default:
+		return fmt.Sprintf("PageCountType(%d)", int32(e))
+	}
+}
 
 // PrintAsyncNotifyConversationStyle: https://learn.microsoft.com/windows/win32/api/prnasnot/ne-prnasnot-printasyncnotifyconversationstyle
 type PrintAsyncNotifyConversationStyle int32
@@ -228,6 +662,19 @@ const (
 	KBiDirectional  PrintAsyncNotifyConversationStyle = 0
 	KUniDirectional PrintAsyncNotifyConversationStyle = 1
 )
+
+// String returns the PrintAsyncNotifyConversationStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PrintAsyncNotifyConversationStyle) String() string {
+	switch e {
+	case KBiDirectional:
+		return "KBiDirectional"
+	case KUniDirectional:
+		return "KUniDirectional"
+	default:
+		return fmt.Sprintf("PrintAsyncNotifyConversationStyle(%d)", int32(e))
+	}
+}
 
 // PrintAsyncNotifyError: https://learn.microsoft.com/windows/win32/api/prnasnot/ne-prnasnot-printasyncnotifyerror
 type PrintAsyncNotifyError int32
@@ -259,6 +706,63 @@ const (
 	REMOTE_ONLY_REGISTRATION                PrintAsyncNotifyError = 24
 )
 
+// String returns the PrintAsyncNotifyError constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PrintAsyncNotifyError) String() string {
+	switch e {
+	case CHANNEL_CLOSED_BY_SERVER:
+		return "CHANNEL_CLOSED_BY_SERVER"
+	case CHANNEL_CLOSED_BY_ANOTHER_LISTENER:
+		return "CHANNEL_CLOSED_BY_ANOTHER_LISTENER"
+	case CHANNEL_CLOSED_BY_SAME_LISTENER:
+		return "CHANNEL_CLOSED_BY_SAME_LISTENER"
+	case CHANNEL_RELEASED_BY_LISTENER:
+		return "CHANNEL_RELEASED_BY_LISTENER"
+	case UNIRECTIONAL_NOTIFICATION_LOST:
+		return "UNIRECTIONAL_NOTIFICATION_LOST"
+	case ASYNC_NOTIFICATION_FAILURE:
+		return "ASYNC_NOTIFICATION_FAILURE"
+	case NO_LISTENERS:
+		return "NO_LISTENERS"
+	case CHANNEL_ALREADY_CLOSED:
+		return "CHANNEL_ALREADY_CLOSED"
+	case CHANNEL_ALREADY_OPENED:
+		return "CHANNEL_ALREADY_OPENED"
+	case CHANNEL_WAITING_FOR_CLIENT_NOTIFICATION:
+		return "CHANNEL_WAITING_FOR_CLIENT_NOTIFICATION"
+	case CHANNEL_NOT_OPENED:
+		return "CHANNEL_NOT_OPENED"
+	case ASYNC_CALL_ALREADY_PARKED:
+		return "ASYNC_CALL_ALREADY_PARKED"
+	case NOT_REGISTERED:
+		return "NOT_REGISTERED"
+	case ALREADY_UNREGISTERED:
+		return "ALREADY_UNREGISTERED"
+	case ALREADY_REGISTERED:
+		return "ALREADY_REGISTERED"
+	case CHANNEL_ACQUIRED:
+		return "CHANNEL_ACQUIRED"
+	case ASYNC_CALL_IN_PROGRESS:
+		return "ASYNC_CALL_IN_PROGRESS"
+	case MAX_NOTIFICATION_SIZE_EXCEEDED:
+		return "MAX_NOTIFICATION_SIZE_EXCEEDED"
+	case INTERNAL_NOTIFICATION_QUEUE_IS_FULL:
+		return "INTERNAL_NOTIFICATION_QUEUE_IS_FULL"
+	case INVALID_NOTIFICATION_TYPE:
+		return "INVALID_NOTIFICATION_TYPE"
+	case MAX_REGISTRATION_COUNT_EXCEEDED:
+		return "MAX_REGISTRATION_COUNT_EXCEEDED"
+	case MAX_CHANNEL_COUNT_EXCEEDED:
+		return "MAX_CHANNEL_COUNT_EXCEEDED"
+	case LOCAL_ONLY_REGISTRATION:
+		return "LOCAL_ONLY_REGISTRATION"
+	case REMOTE_ONLY_REGISTRATION:
+		return "REMOTE_ONLY_REGISTRATION"
+	default:
+		return fmt.Sprintf("PrintAsyncNotifyError(%d)", int32(e))
+	}
+}
+
 // PrintAsyncNotifyUserFilter: https://learn.microsoft.com/windows/win32/api/prnasnot/ne-prnasnot-printasyncnotifyuserfilter
 type PrintAsyncNotifyUserFilter int32
 
@@ -266,6 +770,19 @@ const (
 	KPerUser  PrintAsyncNotifyUserFilter = 0
 	KAllUsers PrintAsyncNotifyUserFilter = 1
 )
+
+// String returns the PrintAsyncNotifyUserFilter constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PrintAsyncNotifyUserFilter) String() string {
+	switch e {
+	case KPerUser:
+		return "KPerUser"
+	case KAllUsers:
+		return "KAllUsers"
+	default:
+		return fmt.Sprintf("PrintAsyncNotifyUserFilter(%d)", int32(e))
+	}
+}
 
 type PrintJobStatus int32
 
@@ -286,6 +803,43 @@ const (
 	PrintJobStatus_Retained           PrintJobStatus = 8192
 )
 
+// String returns the PrintJobStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PrintJobStatus) String() string {
+	switch e {
+	case PrintJobStatus_Paused:
+		return "PrintJobStatus_Paused"
+	case PrintJobStatus_Error:
+		return "PrintJobStatus_Error"
+	case PrintJobStatus_Deleting:
+		return "PrintJobStatus_Deleting"
+	case PrintJobStatus_Spooling:
+		return "PrintJobStatus_Spooling"
+	case PrintJobStatus_Printing:
+		return "PrintJobStatus_Printing"
+	case PrintJobStatus_Offline:
+		return "PrintJobStatus_Offline"
+	case PrintJobStatus_PaperOut:
+		return "PrintJobStatus_PaperOut"
+	case PrintJobStatus_Printed:
+		return "PrintJobStatus_Printed"
+	case PrintJobStatus_Deleted:
+		return "PrintJobStatus_Deleted"
+	case PrintJobStatus_BlockedDeviceQueue:
+		return "PrintJobStatus_BlockedDeviceQueue"
+	case PrintJobStatus_UserIntervention:
+		return "PrintJobStatus_UserIntervention"
+	case PrintJobStatus_Restarted:
+		return "PrintJobStatus_Restarted"
+	case PrintJobStatus_Complete:
+		return "PrintJobStatus_Complete"
+	case PrintJobStatus_Retained:
+		return "PrintJobStatus_Retained"
+	default:
+		return fmt.Sprintf("PrintJobStatus(%d)", int32(e))
+	}
+}
+
 type PrintSchemaConstrainedSetting int32
 
 const (
@@ -295,6 +849,23 @@ const (
 	PrintSchemaConstrainedSetting_Device      PrintSchemaConstrainedSetting = 3
 )
 
+// String returns the PrintSchemaConstrainedSetting constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PrintSchemaConstrainedSetting) String() string {
+	switch e {
+	case PrintSchemaConstrainedSetting_None:
+		return "PrintSchemaConstrainedSetting_None"
+	case PrintSchemaConstrainedSetting_PrintTicket:
+		return "PrintSchemaConstrainedSetting_PrintTicket"
+	case PrintSchemaConstrainedSetting_Admin:
+		return "PrintSchemaConstrainedSetting_Admin"
+	case PrintSchemaConstrainedSetting_Device:
+		return "PrintSchemaConstrainedSetting_Device"
+	default:
+		return fmt.Sprintf("PrintSchemaConstrainedSetting(%d)", int32(e))
+	}
+}
+
 type PrintSchemaParameterDataType int32
 
 const (
@@ -303,12 +874,40 @@ const (
 	PrintSchemaParameterDataType_String        PrintSchemaParameterDataType = 2
 )
 
+// String returns the PrintSchemaParameterDataType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PrintSchemaParameterDataType) String() string {
+	switch e {
+	case PrintSchemaParameterDataType_Integer:
+		return "PrintSchemaParameterDataType_Integer"
+	case PrintSchemaParameterDataType_NumericString:
+		return "PrintSchemaParameterDataType_NumericString"
+	case PrintSchemaParameterDataType_String:
+		return "PrintSchemaParameterDataType_String"
+	default:
+		return fmt.Sprintf("PrintSchemaParameterDataType(%d)", int32(e))
+	}
+}
+
 type PrintSchemaSelectionType int32
 
 const (
 	PrintSchemaSelectionType_PickOne  PrintSchemaSelectionType = 0
 	PrintSchemaSelectionType_PickMany PrintSchemaSelectionType = 1
 )
+
+// String returns the PrintSchemaSelectionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PrintSchemaSelectionType) String() string {
+	switch e {
+	case PrintSchemaSelectionType_PickOne:
+		return "PrintSchemaSelectionType_PickOne"
+	case PrintSchemaSelectionType_PickMany:
+		return "PrintSchemaSelectionType_PickMany"
+	default:
+		return fmt.Sprintf("PrintSchemaSelectionType(%d)", int32(e))
+	}
+}
 
 type SHIMOPTS int32
 
@@ -317,11 +916,35 @@ const (
 	PTSHIM_NOSNAPSHOT SHIMOPTS = 1
 )
 
+// String returns the SHIMOPTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHIMOPTS) String() string {
+	switch e {
+	case PTSHIM_DEFAULT:
+		return "PTSHIM_DEFAULT"
+	case PTSHIM_NOSNAPSHOT:
+		return "PTSHIM_NOSNAPSHOT"
+	default:
+		return fmt.Sprintf("SHIMOPTS(%d)", int32(e))
+	}
+}
+
 type UI_TYPE int32
 
 const (
 	KMessageBox UI_TYPE = 0
 )
+
+// String returns the UI_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_TYPE) String() string {
+	switch e {
+	case KMessageBox:
+		return "KMessageBox"
+	default:
+		return fmt.Sprintf("UI_TYPE(%d)", int32(e))
+	}
+}
 
 type XPSRAS_BACKGROUND_COLOR int32
 
@@ -329,6 +952,19 @@ const (
 	XPSRAS_BACKGROUND_COLOR_TRANSPARENT XPSRAS_BACKGROUND_COLOR = 0
 	XPSRAS_BACKGROUND_COLOR_OPAQUE      XPSRAS_BACKGROUND_COLOR = 1
 )
+
+// String returns the XPSRAS_BACKGROUND_COLOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPSRAS_BACKGROUND_COLOR) String() string {
+	switch e {
+	case XPSRAS_BACKGROUND_COLOR_TRANSPARENT:
+		return "XPSRAS_BACKGROUND_COLOR_TRANSPARENT"
+	case XPSRAS_BACKGROUND_COLOR_OPAQUE:
+		return "XPSRAS_BACKGROUND_COLOR_OPAQUE"
+	default:
+		return fmt.Sprintf("XPSRAS_BACKGROUND_COLOR(%d)", int32(e))
+	}
+}
 
 type XPSRAS_PIXEL_FORMAT int32
 
@@ -338,9 +974,37 @@ const (
 	XPSRAS_PIXEL_FORMAT_128BPP_PRGBA_FLOAT_SCRGB XPSRAS_PIXEL_FORMAT = 3
 )
 
+// String returns the XPSRAS_PIXEL_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPSRAS_PIXEL_FORMAT) String() string {
+	switch e {
+	case XPSRAS_PIXEL_FORMAT_32BPP_PBGRA_UINT_SRGB:
+		return "XPSRAS_PIXEL_FORMAT_32BPP_PBGRA_UINT_SRGB"
+	case XPSRAS_PIXEL_FORMAT_64BPP_PRGBA_HALF_SCRGB:
+		return "XPSRAS_PIXEL_FORMAT_64BPP_PRGBA_HALF_SCRGB"
+	case XPSRAS_PIXEL_FORMAT_128BPP_PRGBA_FLOAT_SCRGB:
+		return "XPSRAS_PIXEL_FORMAT_128BPP_PRGBA_FLOAT_SCRGB"
+	default:
+		return fmt.Sprintf("XPSRAS_PIXEL_FORMAT(%d)", int32(e))
+	}
+}
+
 type XPSRAS_RENDERING_MODE int32
 
 const (
 	XPSRAS_RENDERING_MODE_ANTIALIASED XPSRAS_RENDERING_MODE = 0
 	XPSRAS_RENDERING_MODE_ALIASED     XPSRAS_RENDERING_MODE = 1
 )
+
+// String returns the XPSRAS_RENDERING_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPSRAS_RENDERING_MODE) String() string {
+	switch e {
+	case XPSRAS_RENDERING_MODE_ANTIALIASED:
+		return "XPSRAS_RENDERING_MODE_ANTIALIASED"
+	case XPSRAS_RENDERING_MODE_ALIASED:
+		return "XPSRAS_RENDERING_MODE_ALIASED"
+	default:
+		return fmt.Sprintf("XPSRAS_RENDERING_MODE(%d)", int32(e))
+	}
+}

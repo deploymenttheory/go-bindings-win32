@@ -4,6 +4,12 @@
 
 package catalog
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type CRYPTCATATTRIBUTE_FLAGS uint32
 
 const (
@@ -17,6 +23,41 @@ const (
 	CRYPTCAT_ATTR_NO_AUTO_COMPAT_ENTRY CRYPTCATATTRIBUTE_FLAGS = 16777216
 )
 
+// String returns the CRYPTCATATTRIBUTE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTCATATTRIBUTE_FLAGS) String() string {
+	var parts []string
+	if e&CRYPTCAT_ATTR_AUTHENTICATED != 0 {
+		parts = append(parts, "CRYPTCAT_ATTR_AUTHENTICATED")
+	}
+	if e&CRYPTCAT_ATTR_UNAUTHENTICATED != 0 {
+		parts = append(parts, "CRYPTCAT_ATTR_UNAUTHENTICATED")
+	}
+	if e&CRYPTCAT_ATTR_NAMEASCII != 0 {
+		parts = append(parts, "CRYPTCAT_ATTR_NAMEASCII")
+	}
+	if e&CRYPTCAT_ATTR_NAMEOBJID != 0 {
+		parts = append(parts, "CRYPTCAT_ATTR_NAMEOBJID")
+	}
+	if e&CRYPTCAT_ATTR_DATAASCII != 0 {
+		parts = append(parts, "CRYPTCAT_ATTR_DATAASCII")
+	}
+	if e&CRYPTCAT_ATTR_DATABASE64 != 0 {
+		parts = append(parts, "CRYPTCAT_ATTR_DATABASE64")
+	}
+	if e&CRYPTCAT_ATTR_DATAREPLACE != 0 {
+		parts = append(parts, "CRYPTCAT_ATTR_DATAREPLACE")
+	}
+	if e&CRYPTCAT_ATTR_NO_AUTO_COMPAT_ENTRY != 0 {
+		parts = append(parts, "CRYPTCAT_ATTR_NO_AUTO_COMPAT_ENTRY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CRYPTCAT_OPEN_FLAGS uint32
 
 const (
@@ -31,9 +72,59 @@ const (
 	CRYPTCAT_OPEN_FLAGS_MASK           CRYPTCAT_OPEN_FLAGS = 4294901760
 )
 
+// String returns the CRYPTCAT_OPEN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTCAT_OPEN_FLAGS) String() string {
+	var parts []string
+	if e&CRYPTCAT_OPEN_ALWAYS != 0 {
+		parts = append(parts, "CRYPTCAT_OPEN_ALWAYS")
+	}
+	if e&CRYPTCAT_OPEN_CREATENEW != 0 {
+		parts = append(parts, "CRYPTCAT_OPEN_CREATENEW")
+	}
+	if e&CRYPTCAT_OPEN_EXISTING != 0 {
+		parts = append(parts, "CRYPTCAT_OPEN_EXISTING")
+	}
+	if e&CRYPTCAT_OPEN_EXCLUDE_PAGE_HASHES != 0 {
+		parts = append(parts, "CRYPTCAT_OPEN_EXCLUDE_PAGE_HASHES")
+	}
+	if e&CRYPTCAT_OPEN_INCLUDE_PAGE_HASHES != 0 {
+		parts = append(parts, "CRYPTCAT_OPEN_INCLUDE_PAGE_HASHES")
+	}
+	if e&CRYPTCAT_OPEN_VERIFYSIGHASH != 0 {
+		parts = append(parts, "CRYPTCAT_OPEN_VERIFYSIGHASH")
+	}
+	if e&CRYPTCAT_OPEN_NO_CONTENT_HCRYPTMSG != 0 {
+		parts = append(parts, "CRYPTCAT_OPEN_NO_CONTENT_HCRYPTMSG")
+	}
+	if e&CRYPTCAT_OPEN_SORTED != 0 {
+		parts = append(parts, "CRYPTCAT_OPEN_SORTED")
+	}
+	if e&CRYPTCAT_OPEN_FLAGS_MASK != 0 {
+		parts = append(parts, "CRYPTCAT_OPEN_FLAGS_MASK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CRYPTCAT_VERSION uint32
 
 const (
 	CRYPTCAT_VERSION_1 CRYPTCAT_VERSION = 256
 	CRYPTCAT_VERSION_2 CRYPTCAT_VERSION = 512
 )
+
+// String returns the CRYPTCAT_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTCAT_VERSION) String() string {
+	switch e {
+	case CRYPTCAT_VERSION_1:
+		return "CRYPTCAT_VERSION_1"
+	case CRYPTCAT_VERSION_2:
+		return "CRYPTCAT_VERSION_2"
+	default:
+		return fmt.Sprintf("CRYPTCAT_VERSION(%d)", uint32(e))
+	}
+}

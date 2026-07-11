@@ -4,6 +4,10 @@
 
 package licenseprotection
 
+import (
+	"fmt"
+)
+
 type LicenseProtectionStatus int32
 
 const (
@@ -13,3 +17,22 @@ const (
 	LicenseKeyCorrupted     LicenseProtectionStatus = 3
 	LicenseKeyAlreadyExists LicenseProtectionStatus = 4
 )
+
+// String returns the LicenseProtectionStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LicenseProtectionStatus) String() string {
+	switch e {
+	case Success:
+		return "Success"
+	case LicenseKeyNotFound:
+		return "LicenseKeyNotFound"
+	case LicenseKeyUnprotected:
+		return "LicenseKeyUnprotected"
+	case LicenseKeyCorrupted:
+		return "LicenseKeyCorrupted"
+	case LicenseKeyAlreadyExists:
+		return "LicenseKeyAlreadyExists"
+	default:
+		return fmt.Sprintf("LicenseProtectionStatus(%d)", int32(e))
+	}
+}

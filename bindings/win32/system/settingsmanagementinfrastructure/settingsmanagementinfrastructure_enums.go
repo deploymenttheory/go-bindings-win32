@@ -4,6 +4,10 @@
 
 package settingsmanagementinfrastructure
 
+import (
+	"fmt"
+)
+
 // WcmDataType: https://learn.microsoft.com/windows/win32/api/wcmconfig/ne-wcmconfig-wcmdatatype
 type WcmDataType int32
 
@@ -21,6 +25,37 @@ const (
 	DataTypeFlagArray WcmDataType = 32768
 )
 
+// String returns the WcmDataType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WcmDataType) String() string {
+	switch e {
+	case DataTypeByte:
+		return "DataTypeByte"
+	case DataTypeSByte:
+		return "DataTypeSByte"
+	case DataTypeUInt16:
+		return "DataTypeUInt16"
+	case DataTypeInt16:
+		return "DataTypeInt16"
+	case DataTypeUInt32:
+		return "DataTypeUInt32"
+	case DataTypeInt32:
+		return "DataTypeInt32"
+	case DataTypeUInt64:
+		return "DataTypeUInt64"
+	case DataTypeInt64:
+		return "DataTypeInt64"
+	case DataTypeBoolean:
+		return "DataTypeBoolean"
+	case DataTypeString:
+		return "DataTypeString"
+	case DataTypeFlagArray:
+		return "DataTypeFlagArray"
+	default:
+		return fmt.Sprintf("WcmDataType(%d)", int32(e))
+	}
+}
+
 // WcmNamespaceAccess: https://learn.microsoft.com/windows/win32/api/wcmconfig/ne-wcmconfig-wcmnamespaceaccess
 type WcmNamespaceAccess int32
 
@@ -28,6 +63,19 @@ const (
 	ReadOnlyAccess  WcmNamespaceAccess = 1
 	ReadWriteAccess WcmNamespaceAccess = 2
 )
+
+// String returns the WcmNamespaceAccess constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WcmNamespaceAccess) String() string {
+	switch e {
+	case ReadOnlyAccess:
+		return "ReadOnlyAccess"
+	case ReadWriteAccess:
+		return "ReadWriteAccess"
+	default:
+		return fmt.Sprintf("WcmNamespaceAccess(%d)", int32(e))
+	}
+}
 
 // WcmNamespaceEnumerationFlags: https://learn.microsoft.com/windows/win32/api/wcmconfig/ne-wcmconfig-wcmnamespaceenumerationflags
 type WcmNamespaceEnumerationFlags int32
@@ -37,6 +85,21 @@ const (
 	UserEnumeration   WcmNamespaceEnumerationFlags = 2
 	AllEnumeration    WcmNamespaceEnumerationFlags = 3
 )
+
+// String returns the WcmNamespaceEnumerationFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WcmNamespaceEnumerationFlags) String() string {
+	switch e {
+	case SharedEnumeration:
+		return "SharedEnumeration"
+	case UserEnumeration:
+		return "UserEnumeration"
+	case AllEnumeration:
+		return "AllEnumeration"
+	default:
+		return fmt.Sprintf("WcmNamespaceEnumerationFlags(%d)", int32(e))
+	}
+}
 
 // WcmRestrictionFacets: https://learn.microsoft.com/windows/win32/api/wcmconfig/ne-wcmconfig-wcmrestrictionfacets
 type WcmRestrictionFacets int32
@@ -48,6 +111,23 @@ const (
 	RestrictionFacetMinInclusive WcmRestrictionFacets = 8
 )
 
+// String returns the WcmRestrictionFacets constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WcmRestrictionFacets) String() string {
+	switch e {
+	case RestrictionFacetMaxLength:
+		return "RestrictionFacetMaxLength"
+	case RestrictionFacetEnumeration:
+		return "RestrictionFacetEnumeration"
+	case RestrictionFacetMaxInclusive:
+		return "RestrictionFacetMaxInclusive"
+	case RestrictionFacetMinInclusive:
+		return "RestrictionFacetMinInclusive"
+	default:
+		return fmt.Sprintf("WcmRestrictionFacets(%d)", int32(e))
+	}
+}
+
 // WcmSettingType: https://learn.microsoft.com/windows/win32/api/wcmconfig/ne-wcmconfig-wcmsettingtype
 type WcmSettingType int32
 
@@ -57,6 +137,21 @@ const (
 	SettingTypeList    WcmSettingType = 3
 )
 
+// String returns the WcmSettingType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WcmSettingType) String() string {
+	switch e {
+	case SettingTypeScalar:
+		return "SettingTypeScalar"
+	case SettingTypeComplex:
+		return "SettingTypeComplex"
+	case SettingTypeList:
+		return "SettingTypeList"
+	default:
+		return fmt.Sprintf("WcmSettingType(%d)", int32(e))
+	}
+}
+
 // WcmTargetMode: https://learn.microsoft.com/windows/win32/api/wcmconfig/ne-wcmconfig-wcmtargetmode
 type WcmTargetMode int32
 
@@ -64,6 +159,19 @@ const (
 	OfflineMode WcmTargetMode = 1
 	OnlineMode  WcmTargetMode = 2
 )
+
+// String returns the WcmTargetMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WcmTargetMode) String() string {
+	switch e {
+	case OfflineMode:
+		return "OfflineMode"
+	case OnlineMode:
+		return "OnlineMode"
+	default:
+		return fmt.Sprintf("WcmTargetMode(%d)", int32(e))
+	}
+}
 
 // WcmUserStatus: https://learn.microsoft.com/windows/win32/api/wcmconfig/ne-wcmconfig-wcmuserstatus
 type WcmUserStatus int32
@@ -75,3 +183,22 @@ const (
 	UserLoaded       WcmUserStatus = 3
 	UserUnloaded     WcmUserStatus = 4
 )
+
+// String returns the WcmUserStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WcmUserStatus) String() string {
+	switch e {
+	case UnknownStatus:
+		return "UnknownStatus"
+	case UserRegistered:
+		return "UserRegistered"
+	case UserUnregistered:
+		return "UserUnregistered"
+	case UserLoaded:
+		return "UserLoaded"
+	case UserUnloaded:
+		return "UserUnloaded"
+	default:
+		return fmt.Sprintf("WcmUserStatus(%d)", int32(e))
+	}
+}

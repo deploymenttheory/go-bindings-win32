@@ -4,6 +4,10 @@
 
 package callobj
 
+import (
+	"fmt"
+)
+
 // CALLFRAME_COPY: https://learn.microsoft.com/windows/win32/api/callobj/ne-callobj-callframe_copy
 type CALLFRAME_COPY int32
 
@@ -11,6 +15,19 @@ const (
 	CALLFRAME_COPY_NESTED      CALLFRAME_COPY = 1
 	CALLFRAME_COPY_INDEPENDENT CALLFRAME_COPY = 2
 )
+
+// String returns the CALLFRAME_COPY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLFRAME_COPY) String() string {
+	switch e {
+	case CALLFRAME_COPY_NESTED:
+		return "CALLFRAME_COPY_NESTED"
+	case CALLFRAME_COPY_INDEPENDENT:
+		return "CALLFRAME_COPY_INDEPENDENT"
+	default:
+		return fmt.Sprintf("CALLFRAME_COPY(%d)", int32(e))
+	}
+}
 
 // CALLFRAME_FREE: https://learn.microsoft.com/windows/win32/api/callobj/ne-callobj-callframe_free
 type CALLFRAME_FREE int32
@@ -25,6 +42,29 @@ const (
 	CALLFRAME_FREE_ALL       CALLFRAME_FREE = 31
 )
 
+// String returns the CALLFRAME_FREE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLFRAME_FREE) String() string {
+	switch e {
+	case CALLFRAME_FREE_NONE:
+		return "CALLFRAME_FREE_NONE"
+	case CALLFRAME_FREE_IN:
+		return "CALLFRAME_FREE_IN"
+	case CALLFRAME_FREE_INOUT:
+		return "CALLFRAME_FREE_INOUT"
+	case CALLFRAME_FREE_OUT:
+		return "CALLFRAME_FREE_OUT"
+	case CALLFRAME_FREE_TOP_INOUT:
+		return "CALLFRAME_FREE_TOP_INOUT"
+	case CALLFRAME_FREE_TOP_OUT:
+		return "CALLFRAME_FREE_TOP_OUT"
+	case CALLFRAME_FREE_ALL:
+		return "CALLFRAME_FREE_ALL"
+	default:
+		return fmt.Sprintf("CALLFRAME_FREE(%d)", int32(e))
+	}
+}
+
 // CALLFRAME_NULL: https://learn.microsoft.com/windows/win32/api/callobj/ne-callobj-callframe_null
 type CALLFRAME_NULL int32
 
@@ -35,6 +75,23 @@ const (
 	CALLFRAME_NULL_ALL   CALLFRAME_NULL = 6
 )
 
+// String returns the CALLFRAME_NULL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLFRAME_NULL) String() string {
+	switch e {
+	case CALLFRAME_NULL_NONE:
+		return "CALLFRAME_NULL_NONE"
+	case CALLFRAME_NULL_INOUT:
+		return "CALLFRAME_NULL_INOUT"
+	case CALLFRAME_NULL_OUT:
+		return "CALLFRAME_NULL_OUT"
+	case CALLFRAME_NULL_ALL:
+		return "CALLFRAME_NULL_ALL"
+	default:
+		return fmt.Sprintf("CALLFRAME_NULL(%d)", int32(e))
+	}
+}
+
 // CALLFRAME_WALK: https://learn.microsoft.com/windows/win32/api/callobj/ne-callobj-callframe_walk
 type CALLFRAME_WALK int32
 
@@ -43,3 +100,18 @@ const (
 	CALLFRAME_WALK_INOUT CALLFRAME_WALK = 2
 	CALLFRAME_WALK_OUT   CALLFRAME_WALK = 4
 )
+
+// String returns the CALLFRAME_WALK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLFRAME_WALK) String() string {
+	switch e {
+	case CALLFRAME_WALK_IN:
+		return "CALLFRAME_WALK_IN"
+	case CALLFRAME_WALK_INOUT:
+		return "CALLFRAME_WALK_INOUT"
+	case CALLFRAME_WALK_OUT:
+		return "CALLFRAME_WALK_OUT"
+	default:
+		return fmt.Sprintf("CALLFRAME_WALK(%d)", int32(e))
+	}
+}

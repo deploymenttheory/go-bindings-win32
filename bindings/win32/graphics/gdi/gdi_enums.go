@@ -4,6 +4,11 @@
 
 package gdi
 
+import (
+	"fmt"
+	"strings"
+)
+
 type ARC_DIRECTION int32
 
 const (
@@ -11,12 +16,38 @@ const (
 	AD_CLOCKWISE        ARC_DIRECTION = 2
 )
 
+// String returns the ARC_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ARC_DIRECTION) String() string {
+	switch e {
+	case AD_COUNTERCLOCKWISE:
+		return "AD_COUNTERCLOCKWISE"
+	case AD_CLOCKWISE:
+		return "AD_CLOCKWISE"
+	default:
+		return fmt.Sprintf("ARC_DIRECTION(%d)", int32(e))
+	}
+}
+
 type BACKGROUND_MODE uint32
 
 const (
 	OPAQUE      BACKGROUND_MODE = 2
 	TRANSPARENT BACKGROUND_MODE = 1
 )
+
+// String returns the BACKGROUND_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BACKGROUND_MODE) String() string {
+	switch e {
+	case OPAQUE:
+		return "OPAQUE"
+	case TRANSPARENT:
+		return "TRANSPARENT"
+	default:
+		return fmt.Sprintf("BACKGROUND_MODE(%d)", uint32(e))
+	}
+}
 
 type BI_COMPRESSION uint32
 
@@ -28,6 +59,27 @@ const (
 	BI_JPEG      BI_COMPRESSION = 4
 	BI_PNG       BI_COMPRESSION = 5
 )
+
+// String returns the BI_COMPRESSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BI_COMPRESSION) String() string {
+	switch e {
+	case BI_RGB:
+		return "BI_RGB"
+	case BI_RLE8:
+		return "BI_RLE8"
+	case BI_RLE4:
+		return "BI_RLE4"
+	case BI_BITFIELDS:
+		return "BI_BITFIELDS"
+	case BI_JPEG:
+		return "BI_JPEG"
+	case BI_PNG:
+		return "BI_PNG"
+	default:
+		return fmt.Sprintf("BI_COMPRESSION(%d)", uint32(e))
+	}
+}
 
 type BRUSH_STYLE uint32
 
@@ -45,6 +97,36 @@ const (
 	BS_MONOPATTERN   BRUSH_STYLE = 9
 )
 
+// String returns the BRUSH_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BRUSH_STYLE) String() string {
+	switch e {
+	case BS_SOLID:
+		return "BS_SOLID"
+	case BS_NULL:
+		return "BS_NULL"
+	case BS_HATCHED:
+		return "BS_HATCHED"
+	case BS_PATTERN:
+		return "BS_PATTERN"
+	case BS_INDEXED:
+		return "BS_INDEXED"
+	case BS_DIBPATTERN:
+		return "BS_DIBPATTERN"
+	case BS_DIBPATTERNPT:
+		return "BS_DIBPATTERNPT"
+	case BS_PATTERN8X8:
+		return "BS_PATTERN8X8"
+	case BS_DIBPATTERN8X8:
+		return "BS_DIBPATTERN8X8"
+	case BS_MONOPATTERN:
+		return "BS_MONOPATTERN"
+	default:
+		return fmt.Sprintf("BRUSH_STYLE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CDS_TYPE uint32
 
 const (
@@ -61,6 +143,49 @@ const (
 	CDS_RESET_EX             CDS_TYPE = 536870912
 )
 
+// String returns the CDS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CDS_TYPE) String() string {
+	var parts []string
+	if e&CDS_FULLSCREEN != 0 {
+		parts = append(parts, "CDS_FULLSCREEN")
+	}
+	if e&CDS_GLOBAL != 0 {
+		parts = append(parts, "CDS_GLOBAL")
+	}
+	if e&CDS_NORESET != 0 {
+		parts = append(parts, "CDS_NORESET")
+	}
+	if e&CDS_RESET != 0 {
+		parts = append(parts, "CDS_RESET")
+	}
+	if e&CDS_SET_PRIMARY != 0 {
+		parts = append(parts, "CDS_SET_PRIMARY")
+	}
+	if e&CDS_TEST != 0 {
+		parts = append(parts, "CDS_TEST")
+	}
+	if e&CDS_UPDATEREGISTRY != 0 {
+		parts = append(parts, "CDS_UPDATEREGISTRY")
+	}
+	if e&CDS_VIDEOPARAMETERS != 0 {
+		parts = append(parts, "CDS_VIDEOPARAMETERS")
+	}
+	if e&CDS_ENABLE_UNSAFE_MODES != 0 {
+		parts = append(parts, "CDS_ENABLE_UNSAFE_MODES")
+	}
+	if e&CDS_DISABLE_UNSAFE_MODES != 0 {
+		parts = append(parts, "CDS_DISABLE_UNSAFE_MODES")
+	}
+	if e&CDS_RESET_EX != 0 {
+		parts = append(parts, "CDS_RESET_EX")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CREATE_FONT_PACKAGE_SUBSET_ENCODING int16
 
 const (
@@ -69,12 +194,38 @@ const (
 	TTFCFP_UNICODE_CHAR_SET CREATE_FONT_PACKAGE_SUBSET_ENCODING = 1
 )
 
+// String returns the CREATE_FONT_PACKAGE_SUBSET_ENCODING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATE_FONT_PACKAGE_SUBSET_ENCODING) String() string {
+	switch e {
+	case TTFCFP_STD_MAC_CHAR_SET:
+		return "TTFCFP_STD_MAC_CHAR_SET"
+	case TTFCFP_UNICODE_CHAR_SET:
+		return "TTFCFP_UNICODE_CHAR_SET"
+	default:
+		return fmt.Sprintf("CREATE_FONT_PACKAGE_SUBSET_ENCODING(%d)", int16(e))
+	}
+}
+
 type CREATE_FONT_PACKAGE_SUBSET_PLATFORM int16
 
 const (
 	TTFCFP_UNICODE_PLATFORMID CREATE_FONT_PACKAGE_SUBSET_PLATFORM = 0
 	TTFCFP_ISO_PLATFORMID     CREATE_FONT_PACKAGE_SUBSET_PLATFORM = 2
 )
+
+// String returns the CREATE_FONT_PACKAGE_SUBSET_PLATFORM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATE_FONT_PACKAGE_SUBSET_PLATFORM) String() string {
+	switch e {
+	case TTFCFP_UNICODE_PLATFORMID:
+		return "TTFCFP_UNICODE_PLATFORMID"
+	case TTFCFP_ISO_PLATFORMID:
+		return "TTFCFP_ISO_PLATFORMID"
+	default:
+		return fmt.Sprintf("CREATE_FONT_PACKAGE_SUBSET_PLATFORM(%d)", int16(e))
+	}
+}
 
 type CREATE_POLYGON_RGN_MODE int32
 
@@ -83,12 +234,42 @@ const (
 	WINDING   CREATE_POLYGON_RGN_MODE = 2
 )
 
+// String returns the CREATE_POLYGON_RGN_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATE_POLYGON_RGN_MODE) String() string {
+	switch e {
+	case ALTERNATE:
+		return "ALTERNATE"
+	case WINDING:
+		return "WINDING"
+	default:
+		return fmt.Sprintf("CREATE_POLYGON_RGN_MODE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DC_LAYOUT uint32
 
 const (
 	LAYOUT_BITMAPORIENTATIONPRESERVED DC_LAYOUT = 8
 	LAYOUT_RTL                        DC_LAYOUT = 1
 )
+
+// String returns the DC_LAYOUT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DC_LAYOUT) String() string {
+	var parts []string
+	if e&LAYOUT_BITMAPORIENTATIONPRESERVED != 0 {
+		parts = append(parts, "LAYOUT_BITMAPORIENTATIONPRESERVED")
+	}
+	if e&LAYOUT_RTL != 0 {
+		parts = append(parts, "LAYOUT_RTL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type DEVMODE_COLLATE int16
 
@@ -97,12 +278,38 @@ const (
 	DMCOLLATE_TRUE  DEVMODE_COLLATE = 1
 )
 
+// String returns the DEVMODE_COLLATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVMODE_COLLATE) String() string {
+	switch e {
+	case DMCOLLATE_FALSE:
+		return "DMCOLLATE_FALSE"
+	case DMCOLLATE_TRUE:
+		return "DMCOLLATE_TRUE"
+	default:
+		return fmt.Sprintf("DEVMODE_COLLATE(%d)", int16(e))
+	}
+}
+
 type DEVMODE_COLOR int16
 
 const (
 	DMCOLOR_MONOCHROME DEVMODE_COLOR = 1
 	DMCOLOR_COLOR      DEVMODE_COLOR = 2
 )
+
+// String returns the DEVMODE_COLOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVMODE_COLOR) String() string {
+	switch e {
+	case DMCOLOR_MONOCHROME:
+		return "DMCOLOR_MONOCHROME"
+	case DMCOLOR_COLOR:
+		return "DMCOLOR_COLOR"
+	default:
+		return fmt.Sprintf("DEVMODE_COLOR(%d)", int16(e))
+	}
+}
 
 type DEVMODE_DISPLAY_FIXED_OUTPUT uint32
 
@@ -111,6 +318,21 @@ const (
 	DMDFO_STRETCH DEVMODE_DISPLAY_FIXED_OUTPUT = 1
 	DMDFO_CENTER  DEVMODE_DISPLAY_FIXED_OUTPUT = 2
 )
+
+// String returns the DEVMODE_DISPLAY_FIXED_OUTPUT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVMODE_DISPLAY_FIXED_OUTPUT) String() string {
+	switch e {
+	case DMDFO_DEFAULT:
+		return "DMDFO_DEFAULT"
+	case DMDFO_STRETCH:
+		return "DMDFO_STRETCH"
+	case DMDFO_CENTER:
+		return "DMDFO_CENTER"
+	default:
+		return fmt.Sprintf("DEVMODE_DISPLAY_FIXED_OUTPUT(%d)", uint32(e))
+	}
+}
 
 type DEVMODE_DISPLAY_ORIENTATION uint32
 
@@ -121,6 +343,23 @@ const (
 	DMDO_270     DEVMODE_DISPLAY_ORIENTATION = 3
 )
 
+// String returns the DEVMODE_DISPLAY_ORIENTATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVMODE_DISPLAY_ORIENTATION) String() string {
+	switch e {
+	case DMDO_DEFAULT:
+		return "DMDO_DEFAULT"
+	case DMDO_90:
+		return "DMDO_90"
+	case DMDO_180:
+		return "DMDO_180"
+	case DMDO_270:
+		return "DMDO_270"
+	default:
+		return fmt.Sprintf("DEVMODE_DISPLAY_ORIENTATION(%d)", uint32(e))
+	}
+}
+
 type DEVMODE_DUPLEX int16
 
 const (
@@ -129,6 +368,22 @@ const (
 	DMDUP_HORIZONTAL DEVMODE_DUPLEX = 3
 )
 
+// String returns the DEVMODE_DUPLEX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVMODE_DUPLEX) String() string {
+	switch e {
+	case DMDUP_SIMPLEX:
+		return "DMDUP_SIMPLEX"
+	case DMDUP_VERTICAL:
+		return "DMDUP_VERTICAL"
+	case DMDUP_HORIZONTAL:
+		return "DMDUP_HORIZONTAL"
+	default:
+		return fmt.Sprintf("DEVMODE_DUPLEX(%d)", int16(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DEVMODE_FIELD_FLAGS uint32
 
 const (
@@ -174,6 +429,136 @@ const (
 	DM_OUT_DEFAULT        DEVMODE_FIELD_FLAGS = 1
 )
 
+// String returns the DEVMODE_FIELD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVMODE_FIELD_FLAGS) String() string {
+	var parts []string
+	if e&DM_SPECVERSION != 0 {
+		parts = append(parts, "DM_SPECVERSION")
+	}
+	if e&DM_ORIENTATION != 0 {
+		parts = append(parts, "DM_ORIENTATION")
+	}
+	if e&DM_PAPERSIZE != 0 {
+		parts = append(parts, "DM_PAPERSIZE")
+	}
+	if e&DM_PAPERLENGTH != 0 {
+		parts = append(parts, "DM_PAPERLENGTH")
+	}
+	if e&DM_PAPERWIDTH != 0 {
+		parts = append(parts, "DM_PAPERWIDTH")
+	}
+	if e&DM_SCALE != 0 {
+		parts = append(parts, "DM_SCALE")
+	}
+	if e&DM_POSITION != 0 {
+		parts = append(parts, "DM_POSITION")
+	}
+	if e&DM_NUP != 0 {
+		parts = append(parts, "DM_NUP")
+	}
+	if e&DM_DISPLAYORIENTATION != 0 {
+		parts = append(parts, "DM_DISPLAYORIENTATION")
+	}
+	if e&DM_COPIES != 0 {
+		parts = append(parts, "DM_COPIES")
+	}
+	if e&DM_DEFAULTSOURCE != 0 {
+		parts = append(parts, "DM_DEFAULTSOURCE")
+	}
+	if e&DM_PRINTQUALITY != 0 {
+		parts = append(parts, "DM_PRINTQUALITY")
+	}
+	if e&DM_COLOR != 0 {
+		parts = append(parts, "DM_COLOR")
+	}
+	if e&DM_DUPLEX != 0 {
+		parts = append(parts, "DM_DUPLEX")
+	}
+	if e&DM_YRESOLUTION != 0 {
+		parts = append(parts, "DM_YRESOLUTION")
+	}
+	if e&DM_TTOPTION != 0 {
+		parts = append(parts, "DM_TTOPTION")
+	}
+	if e&DM_COLLATE != 0 {
+		parts = append(parts, "DM_COLLATE")
+	}
+	if e&DM_FORMNAME != 0 {
+		parts = append(parts, "DM_FORMNAME")
+	}
+	if e&DM_LOGPIXELS != 0 {
+		parts = append(parts, "DM_LOGPIXELS")
+	}
+	if e&DM_BITSPERPEL != 0 {
+		parts = append(parts, "DM_BITSPERPEL")
+	}
+	if e&DM_PELSWIDTH != 0 {
+		parts = append(parts, "DM_PELSWIDTH")
+	}
+	if e&DM_PELSHEIGHT != 0 {
+		parts = append(parts, "DM_PELSHEIGHT")
+	}
+	if e&DM_DISPLAYFLAGS != 0 {
+		parts = append(parts, "DM_DISPLAYFLAGS")
+	}
+	if e&DM_DISPLAYFREQUENCY != 0 {
+		parts = append(parts, "DM_DISPLAYFREQUENCY")
+	}
+	if e&DM_ICMMETHOD != 0 {
+		parts = append(parts, "DM_ICMMETHOD")
+	}
+	if e&DM_ICMINTENT != 0 {
+		parts = append(parts, "DM_ICMINTENT")
+	}
+	if e&DM_MEDIATYPE != 0 {
+		parts = append(parts, "DM_MEDIATYPE")
+	}
+	if e&DM_DITHERTYPE != 0 {
+		parts = append(parts, "DM_DITHERTYPE")
+	}
+	if e&DM_PANNINGWIDTH != 0 {
+		parts = append(parts, "DM_PANNINGWIDTH")
+	}
+	if e&DM_PANNINGHEIGHT != 0 {
+		parts = append(parts, "DM_PANNINGHEIGHT")
+	}
+	if e&DM_DISPLAYFIXEDOUTPUT != 0 {
+		parts = append(parts, "DM_DISPLAYFIXEDOUTPUT")
+	}
+	if e&DM_INTERLACED != 0 {
+		parts = append(parts, "DM_INTERLACED")
+	}
+	if e&DM_UPDATE != 0 {
+		parts = append(parts, "DM_UPDATE")
+	}
+	if e&DM_COPY != 0 {
+		parts = append(parts, "DM_COPY")
+	}
+	if e&DM_PROMPT != 0 {
+		parts = append(parts, "DM_PROMPT")
+	}
+	if e&DM_MODIFY != 0 {
+		parts = append(parts, "DM_MODIFY")
+	}
+	if e&DM_IN_BUFFER != 0 {
+		parts = append(parts, "DM_IN_BUFFER")
+	}
+	if e&DM_IN_PROMPT != 0 {
+		parts = append(parts, "DM_IN_PROMPT")
+	}
+	if e&DM_OUT_BUFFER != 0 {
+		parts = append(parts, "DM_OUT_BUFFER")
+	}
+	if e&DM_OUT_DEFAULT != 0 {
+		parts = append(parts, "DM_OUT_DEFAULT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type DEVMODE_TRUETYPE_OPTION int16
 
 const (
@@ -183,6 +568,24 @@ const (
 	DMTT_DOWNLOAD_OUTLINE DEVMODE_TRUETYPE_OPTION = 4
 )
 
+// String returns the DEVMODE_TRUETYPE_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVMODE_TRUETYPE_OPTION) String() string {
+	switch e {
+	case DMTT_BITMAP:
+		return "DMTT_BITMAP"
+	case DMTT_DOWNLOAD:
+		return "DMTT_DOWNLOAD"
+	case DMTT_SUBDEV:
+		return "DMTT_SUBDEV"
+	case DMTT_DOWNLOAD_OUTLINE:
+		return "DMTT_DOWNLOAD_OUTLINE"
+	default:
+		return fmt.Sprintf("DEVMODE_TRUETYPE_OPTION(%d)", int16(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DFCS_STATE uint32
 
 const (
@@ -218,6 +621,94 @@ const (
 	DFCS_MONO                DFCS_STATE = 32768
 )
 
+// String returns the DFCS_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DFCS_STATE) String() string {
+	var parts []string
+	if e&DFCS_CAPTIONMIN != 0 {
+		parts = append(parts, "DFCS_CAPTIONMIN")
+	}
+	if e&DFCS_CAPTIONMAX != 0 {
+		parts = append(parts, "DFCS_CAPTIONMAX")
+	}
+	if e&DFCS_CAPTIONRESTORE != 0 {
+		parts = append(parts, "DFCS_CAPTIONRESTORE")
+	}
+	if e&DFCS_CAPTIONHELP != 0 {
+		parts = append(parts, "DFCS_CAPTIONHELP")
+	}
+	if e&DFCS_MENUCHECK != 0 {
+		parts = append(parts, "DFCS_MENUCHECK")
+	}
+	if e&DFCS_MENUBULLET != 0 {
+		parts = append(parts, "DFCS_MENUBULLET")
+	}
+	if e&DFCS_MENUARROWRIGHT != 0 {
+		parts = append(parts, "DFCS_MENUARROWRIGHT")
+	}
+	if e&DFCS_SCROLLDOWN != 0 {
+		parts = append(parts, "DFCS_SCROLLDOWN")
+	}
+	if e&DFCS_SCROLLLEFT != 0 {
+		parts = append(parts, "DFCS_SCROLLLEFT")
+	}
+	if e&DFCS_SCROLLRIGHT != 0 {
+		parts = append(parts, "DFCS_SCROLLRIGHT")
+	}
+	if e&DFCS_SCROLLCOMBOBOX != 0 {
+		parts = append(parts, "DFCS_SCROLLCOMBOBOX")
+	}
+	if e&DFCS_SCROLLSIZEGRIP != 0 {
+		parts = append(parts, "DFCS_SCROLLSIZEGRIP")
+	}
+	if e&DFCS_SCROLLSIZEGRIPRIGHT != 0 {
+		parts = append(parts, "DFCS_SCROLLSIZEGRIPRIGHT")
+	}
+	if e&DFCS_BUTTONRADIOIMAGE != 0 {
+		parts = append(parts, "DFCS_BUTTONRADIOIMAGE")
+	}
+	if e&DFCS_BUTTONRADIOMASK != 0 {
+		parts = append(parts, "DFCS_BUTTONRADIOMASK")
+	}
+	if e&DFCS_BUTTONRADIO != 0 {
+		parts = append(parts, "DFCS_BUTTONRADIO")
+	}
+	if e&DFCS_BUTTON3STATE != 0 {
+		parts = append(parts, "DFCS_BUTTON3STATE")
+	}
+	if e&DFCS_BUTTONPUSH != 0 {
+		parts = append(parts, "DFCS_BUTTONPUSH")
+	}
+	if e&DFCS_INACTIVE != 0 {
+		parts = append(parts, "DFCS_INACTIVE")
+	}
+	if e&DFCS_PUSHED != 0 {
+		parts = append(parts, "DFCS_PUSHED")
+	}
+	if e&DFCS_CHECKED != 0 {
+		parts = append(parts, "DFCS_CHECKED")
+	}
+	if e&DFCS_TRANSPARENT != 0 {
+		parts = append(parts, "DFCS_TRANSPARENT")
+	}
+	if e&DFCS_HOT != 0 {
+		parts = append(parts, "DFCS_HOT")
+	}
+	if e&DFCS_ADJUSTRECT != 0 {
+		parts = append(parts, "DFCS_ADJUSTRECT")
+	}
+	if e&DFCS_FLAT != 0 {
+		parts = append(parts, "DFCS_FLAT")
+	}
+	if e&DFCS_MONO != 0 {
+		parts = append(parts, "DFCS_MONO")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type DFC_TYPE uint32
 
 const (
@@ -228,12 +719,44 @@ const (
 	DFC_POPUPMENU DFC_TYPE = 5
 )
 
+// String returns the DFC_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DFC_TYPE) String() string {
+	switch e {
+	case DFC_CAPTION:
+		return "DFC_CAPTION"
+	case DFC_MENU:
+		return "DFC_MENU"
+	case DFC_SCROLL:
+		return "DFC_SCROLL"
+	case DFC_BUTTON:
+		return "DFC_BUTTON"
+	case DFC_POPUPMENU:
+		return "DFC_POPUPMENU"
+	default:
+		return fmt.Sprintf("DFC_TYPE(%d)", uint32(e))
+	}
+}
+
 type DIB_USAGE uint32
 
 const (
 	DIB_RGB_COLORS DIB_USAGE = 0
 	DIB_PAL_COLORS DIB_USAGE = 1
 )
+
+// String returns the DIB_USAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIB_USAGE) String() string {
+	switch e {
+	case DIB_RGB_COLORS:
+		return "DIB_RGB_COLORS"
+	case DIB_PAL_COLORS:
+		return "DIB_PAL_COLORS"
+	default:
+		return fmt.Sprintf("DIB_USAGE(%d)", uint32(e))
+	}
+}
 
 type DISPLAYCONFIG_ADVANCED_COLOR_MODE int32
 
@@ -242,6 +765,21 @@ const (
 	DISPLAYCONFIG_ADVANCED_COLOR_MODE_WCG DISPLAYCONFIG_ADVANCED_COLOR_MODE = 1
 	DISPLAYCONFIG_ADVANCED_COLOR_MODE_HDR DISPLAYCONFIG_ADVANCED_COLOR_MODE = 2
 )
+
+// String returns the DISPLAYCONFIG_ADVANCED_COLOR_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAYCONFIG_ADVANCED_COLOR_MODE) String() string {
+	switch e {
+	case DISPLAYCONFIG_ADVANCED_COLOR_MODE_SDR:
+		return "DISPLAYCONFIG_ADVANCED_COLOR_MODE_SDR"
+	case DISPLAYCONFIG_ADVANCED_COLOR_MODE_WCG:
+		return "DISPLAYCONFIG_ADVANCED_COLOR_MODE_WCG"
+	case DISPLAYCONFIG_ADVANCED_COLOR_MODE_HDR:
+		return "DISPLAYCONFIG_ADVANCED_COLOR_MODE_HDR"
+	default:
+		return fmt.Sprintf("DISPLAYCONFIG_ADVANCED_COLOR_MODE(%d)", int32(e))
+	}
+}
 
 type DISPLAYCONFIG_COLOR_ENCODING int32
 
@@ -253,6 +791,26 @@ const (
 	DISPLAYCONFIG_COLOR_ENCODING_INTENSITY DISPLAYCONFIG_COLOR_ENCODING = 4
 )
 
+// String returns the DISPLAYCONFIG_COLOR_ENCODING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAYCONFIG_COLOR_ENCODING) String() string {
+	switch e {
+	case DISPLAYCONFIG_COLOR_ENCODING_RGB:
+		return "DISPLAYCONFIG_COLOR_ENCODING_RGB"
+	case DISPLAYCONFIG_COLOR_ENCODING_YCBCR444:
+		return "DISPLAYCONFIG_COLOR_ENCODING_YCBCR444"
+	case DISPLAYCONFIG_COLOR_ENCODING_YCBCR422:
+		return "DISPLAYCONFIG_COLOR_ENCODING_YCBCR422"
+	case DISPLAYCONFIG_COLOR_ENCODING_YCBCR420:
+		return "DISPLAYCONFIG_COLOR_ENCODING_YCBCR420"
+	case DISPLAYCONFIG_COLOR_ENCODING_INTENSITY:
+		return "DISPLAYCONFIG_COLOR_ENCODING_INTENSITY"
+	default:
+		return fmt.Sprintf("DISPLAYCONFIG_COLOR_ENCODING(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DISPLAY_DEVICE_STATE_FLAGS uint32
 
 const (
@@ -273,6 +831,61 @@ const (
 	DISPLAY_DEVICE_ATTACHED            DISPLAY_DEVICE_STATE_FLAGS = 2
 )
 
+// String returns the DISPLAY_DEVICE_STATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAY_DEVICE_STATE_FLAGS) String() string {
+	var parts []string
+	if e&DISPLAY_DEVICE_ATTACHED_TO_DESKTOP != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_ATTACHED_TO_DESKTOP")
+	}
+	if e&DISPLAY_DEVICE_MULTI_DRIVER != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_MULTI_DRIVER")
+	}
+	if e&DISPLAY_DEVICE_PRIMARY_DEVICE != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_PRIMARY_DEVICE")
+	}
+	if e&DISPLAY_DEVICE_MIRRORING_DRIVER != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_MIRRORING_DRIVER")
+	}
+	if e&DISPLAY_DEVICE_VGA_COMPATIBLE != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_VGA_COMPATIBLE")
+	}
+	if e&DISPLAY_DEVICE_REMOVABLE != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_REMOVABLE")
+	}
+	if e&DISPLAY_DEVICE_ACC_DRIVER != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_ACC_DRIVER")
+	}
+	if e&DISPLAY_DEVICE_MODESPRUNED != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_MODESPRUNED")
+	}
+	if e&DISPLAY_DEVICE_RDPUDD != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_RDPUDD")
+	}
+	if e&DISPLAY_DEVICE_REMOTE != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_REMOTE")
+	}
+	if e&DISPLAY_DEVICE_DISCONNECT != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_DISCONNECT")
+	}
+	if e&DISPLAY_DEVICE_TS_COMPATIBLE != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_TS_COMPATIBLE")
+	}
+	if e&DISPLAY_DEVICE_UNSAFE_MODES_ON != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_UNSAFE_MODES_ON")
+	}
+	if e&DISPLAY_DEVICE_ACTIVE != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_ACTIVE")
+	}
+	if e&DISPLAY_DEVICE_ATTACHED != 0 {
+		parts = append(parts, "DISPLAY_DEVICE_ATTACHED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type DISP_CHANGE int32
 
 const (
@@ -286,6 +899,32 @@ const (
 	DISP_CHANGE_BADDUALVIEW DISP_CHANGE = -6
 )
 
+// String returns the DISP_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISP_CHANGE) String() string {
+	switch e {
+	case DISP_CHANGE_SUCCESSFUL:
+		return "DISP_CHANGE_SUCCESSFUL"
+	case DISP_CHANGE_RESTART:
+		return "DISP_CHANGE_RESTART"
+	case DISP_CHANGE_FAILED:
+		return "DISP_CHANGE_FAILED"
+	case DISP_CHANGE_BADMODE:
+		return "DISP_CHANGE_BADMODE"
+	case DISP_CHANGE_NOTUPDATED:
+		return "DISP_CHANGE_NOTUPDATED"
+	case DISP_CHANGE_BADFLAGS:
+		return "DISP_CHANGE_BADFLAGS"
+	case DISP_CHANGE_BADPARAM:
+		return "DISP_CHANGE_BADPARAM"
+	case DISP_CHANGE_BADDUALVIEW:
+		return "DISP_CHANGE_BADDUALVIEW"
+	default:
+		return fmt.Sprintf("DISP_CHANGE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DRAWEDGE_FLAGS uint32
 
 const (
@@ -303,6 +942,53 @@ const (
 	EDGE_BUMP       DRAWEDGE_FLAGS = 9
 )
 
+// String returns the DRAWEDGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRAWEDGE_FLAGS) String() string {
+	var parts []string
+	if e&BDR_RAISEDOUTER != 0 {
+		parts = append(parts, "BDR_RAISEDOUTER")
+	}
+	if e&BDR_SUNKENOUTER != 0 {
+		parts = append(parts, "BDR_SUNKENOUTER")
+	}
+	if e&BDR_RAISEDINNER != 0 {
+		parts = append(parts, "BDR_RAISEDINNER")
+	}
+	if e&BDR_SUNKENINNER != 0 {
+		parts = append(parts, "BDR_SUNKENINNER")
+	}
+	if e&BDR_OUTER != 0 {
+		parts = append(parts, "BDR_OUTER")
+	}
+	if e&BDR_INNER != 0 {
+		parts = append(parts, "BDR_INNER")
+	}
+	if e&BDR_RAISED != 0 {
+		parts = append(parts, "BDR_RAISED")
+	}
+	if e&BDR_SUNKEN != 0 {
+		parts = append(parts, "BDR_SUNKEN")
+	}
+	if e&EDGE_RAISED != 0 {
+		parts = append(parts, "EDGE_RAISED")
+	}
+	if e&EDGE_SUNKEN != 0 {
+		parts = append(parts, "EDGE_SUNKEN")
+	}
+	if e&EDGE_ETCHED != 0 {
+		parts = append(parts, "EDGE_ETCHED")
+	}
+	if e&EDGE_BUMP != 0 {
+		parts = append(parts, "EDGE_BUMP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DRAWSTATE_FLAGS uint32
 
 const (
@@ -320,6 +1006,47 @@ const (
 	DSS_RIGHT      DRAWSTATE_FLAGS = 32768
 )
 
+// String returns the DRAWSTATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRAWSTATE_FLAGS) String() string {
+	var parts []string
+	if e&DST_TEXT != 0 {
+		parts = append(parts, "DST_TEXT")
+	}
+	if e&DST_PREFIXTEXT != 0 {
+		parts = append(parts, "DST_PREFIXTEXT")
+	}
+	if e&DST_ICON != 0 {
+		parts = append(parts, "DST_ICON")
+	}
+	if e&DST_BITMAP != 0 {
+		parts = append(parts, "DST_BITMAP")
+	}
+	if e&DSS_UNION != 0 {
+		parts = append(parts, "DSS_UNION")
+	}
+	if e&DSS_DISABLED != 0 {
+		parts = append(parts, "DSS_DISABLED")
+	}
+	if e&DSS_MONO != 0 {
+		parts = append(parts, "DSS_MONO")
+	}
+	if e&DSS_HIDEPREFIX != 0 {
+		parts = append(parts, "DSS_HIDEPREFIX")
+	}
+	if e&DSS_PREFIXONLY != 0 {
+		parts = append(parts, "DSS_PREFIXONLY")
+	}
+	if e&DSS_RIGHT != 0 {
+		parts = append(parts, "DSS_RIGHT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DRAW_CAPTION_FLAGS uint32
 
 const (
@@ -332,6 +1059,38 @@ const (
 	DC_TEXT     DRAW_CAPTION_FLAGS = 8
 )
 
+// String returns the DRAW_CAPTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRAW_CAPTION_FLAGS) String() string {
+	var parts []string
+	if e&DC_ACTIVE != 0 {
+		parts = append(parts, "DC_ACTIVE")
+	}
+	if e&DC_BUTTONS != 0 {
+		parts = append(parts, "DC_BUTTONS")
+	}
+	if e&DC_GRADIENT != 0 {
+		parts = append(parts, "DC_GRADIENT")
+	}
+	if e&DC_ICON != 0 {
+		parts = append(parts, "DC_ICON")
+	}
+	if e&DC_INBUTTON != 0 {
+		parts = append(parts, "DC_INBUTTON")
+	}
+	if e&DC_SMALLCAP != 0 {
+		parts = append(parts, "DC_SMALLCAP")
+	}
+	if e&DC_TEXT != 0 {
+		parts = append(parts, "DC_TEXT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DRAW_EDGE_FLAGS uint32
 
 const (
@@ -356,6 +1115,74 @@ const (
 	BF_TOPRIGHT                DRAW_EDGE_FLAGS = 6
 )
 
+// String returns the DRAW_EDGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRAW_EDGE_FLAGS) String() string {
+	var parts []string
+	if e&BF_ADJUST != 0 {
+		parts = append(parts, "BF_ADJUST")
+	}
+	if e&BF_BOTTOM != 0 {
+		parts = append(parts, "BF_BOTTOM")
+	}
+	if e&BF_BOTTOMLEFT != 0 {
+		parts = append(parts, "BF_BOTTOMLEFT")
+	}
+	if e&BF_BOTTOMRIGHT != 0 {
+		parts = append(parts, "BF_BOTTOMRIGHT")
+	}
+	if e&BF_DIAGONAL != 0 {
+		parts = append(parts, "BF_DIAGONAL")
+	}
+	if e&BF_DIAGONAL_ENDBOTTOMLEFT != 0 {
+		parts = append(parts, "BF_DIAGONAL_ENDBOTTOMLEFT")
+	}
+	if e&BF_DIAGONAL_ENDBOTTOMRIGHT != 0 {
+		parts = append(parts, "BF_DIAGONAL_ENDBOTTOMRIGHT")
+	}
+	if e&BF_DIAGONAL_ENDTOPLEFT != 0 {
+		parts = append(parts, "BF_DIAGONAL_ENDTOPLEFT")
+	}
+	if e&BF_DIAGONAL_ENDTOPRIGHT != 0 {
+		parts = append(parts, "BF_DIAGONAL_ENDTOPRIGHT")
+	}
+	if e&BF_FLAT != 0 {
+		parts = append(parts, "BF_FLAT")
+	}
+	if e&BF_LEFT != 0 {
+		parts = append(parts, "BF_LEFT")
+	}
+	if e&BF_MIDDLE != 0 {
+		parts = append(parts, "BF_MIDDLE")
+	}
+	if e&BF_MONO != 0 {
+		parts = append(parts, "BF_MONO")
+	}
+	if e&BF_RECT != 0 {
+		parts = append(parts, "BF_RECT")
+	}
+	if e&BF_RIGHT != 0 {
+		parts = append(parts, "BF_RIGHT")
+	}
+	if e&BF_SOFT != 0 {
+		parts = append(parts, "BF_SOFT")
+	}
+	if e&BF_TOP != 0 {
+		parts = append(parts, "BF_TOP")
+	}
+	if e&BF_TOPLEFT != 0 {
+		parts = append(parts, "BF_TOPLEFT")
+	}
+	if e&BF_TOPRIGHT != 0 {
+		parts = append(parts, "BF_TOPRIGHT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DRAW_TEXT_FORMAT uint32
 
 const (
@@ -385,6 +1212,82 @@ const (
 	DT_WORD_ELLIPSIS        DRAW_TEXT_FORMAT = 262144
 )
 
+// String returns the DRAW_TEXT_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRAW_TEXT_FORMAT) String() string {
+	var parts []string
+	if e&DT_BOTTOM != 0 {
+		parts = append(parts, "DT_BOTTOM")
+	}
+	if e&DT_CALCRECT != 0 {
+		parts = append(parts, "DT_CALCRECT")
+	}
+	if e&DT_CENTER != 0 {
+		parts = append(parts, "DT_CENTER")
+	}
+	if e&DT_EDITCONTROL != 0 {
+		parts = append(parts, "DT_EDITCONTROL")
+	}
+	if e&DT_END_ELLIPSIS != 0 {
+		parts = append(parts, "DT_END_ELLIPSIS")
+	}
+	if e&DT_EXPANDTABS != 0 {
+		parts = append(parts, "DT_EXPANDTABS")
+	}
+	if e&DT_EXTERNALLEADING != 0 {
+		parts = append(parts, "DT_EXTERNALLEADING")
+	}
+	if e&DT_HIDEPREFIX != 0 {
+		parts = append(parts, "DT_HIDEPREFIX")
+	}
+	if e&DT_INTERNAL != 0 {
+		parts = append(parts, "DT_INTERNAL")
+	}
+	if e&DT_MODIFYSTRING != 0 {
+		parts = append(parts, "DT_MODIFYSTRING")
+	}
+	if e&DT_NOCLIP != 0 {
+		parts = append(parts, "DT_NOCLIP")
+	}
+	if e&DT_NOFULLWIDTHCHARBREAK != 0 {
+		parts = append(parts, "DT_NOFULLWIDTHCHARBREAK")
+	}
+	if e&DT_NOPREFIX != 0 {
+		parts = append(parts, "DT_NOPREFIX")
+	}
+	if e&DT_PATH_ELLIPSIS != 0 {
+		parts = append(parts, "DT_PATH_ELLIPSIS")
+	}
+	if e&DT_PREFIXONLY != 0 {
+		parts = append(parts, "DT_PREFIXONLY")
+	}
+	if e&DT_RIGHT != 0 {
+		parts = append(parts, "DT_RIGHT")
+	}
+	if e&DT_RTLREADING != 0 {
+		parts = append(parts, "DT_RTLREADING")
+	}
+	if e&DT_SINGLELINE != 0 {
+		parts = append(parts, "DT_SINGLELINE")
+	}
+	if e&DT_TABSTOP != 0 {
+		parts = append(parts, "DT_TABSTOP")
+	}
+	if e&DT_VCENTER != 0 {
+		parts = append(parts, "DT_VCENTER")
+	}
+	if e&DT_WORDBREAK != 0 {
+		parts = append(parts, "DT_WORDBREAK")
+	}
+	if e&DT_WORD_ELLIPSIS != 0 {
+		parts = append(parts, "DT_WORD_ELLIPSIS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type EMBEDDED_FONT_PRIV_STATUS uint32
 
 const (
@@ -394,12 +1297,42 @@ const (
 	EMBED_NOEMBEDDING  EMBEDDED_FONT_PRIV_STATUS = 4
 )
 
+// String returns the EMBEDDED_FONT_PRIV_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EMBEDDED_FONT_PRIV_STATUS) String() string {
+	switch e {
+	case EMBED_PREVIEWPRINT:
+		return "EMBED_PREVIEWPRINT"
+	case EMBED_EDITABLE:
+		return "EMBED_EDITABLE"
+	case EMBED_INSTALLABLE:
+		return "EMBED_INSTALLABLE"
+	case EMBED_NOEMBEDDING:
+		return "EMBED_NOEMBEDDING"
+	default:
+		return fmt.Sprintf("EMBEDDED_FONT_PRIV_STATUS(%d)", uint32(e))
+	}
+}
+
 type EMBED_FONT_CHARSET uint32
 
 const (
 	CHARSET_UNICODE EMBED_FONT_CHARSET = 1
 	CHARSET_SYMBOL  EMBED_FONT_CHARSET = 2
 )
+
+// String returns the EMBED_FONT_CHARSET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EMBED_FONT_CHARSET) String() string {
+	switch e {
+	case CHARSET_UNICODE:
+		return "CHARSET_UNICODE"
+	case CHARSET_SYMBOL:
+		return "CHARSET_SYMBOL"
+	default:
+		return fmt.Sprintf("EMBED_FONT_CHARSET(%d)", uint32(e))
+	}
+}
 
 type ENHANCED_METAFILE_RECORD_TYPE uint32
 
@@ -529,12 +1462,280 @@ const (
 	EMR_MAX                     ENHANCED_METAFILE_RECORD_TYPE = 122
 )
 
+// String returns the ENHANCED_METAFILE_RECORD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENHANCED_METAFILE_RECORD_TYPE) String() string {
+	switch e {
+	case EMR_HEADER:
+		return "EMR_HEADER"
+	case EMR_POLYBEZIER:
+		return "EMR_POLYBEZIER"
+	case EMR_POLYGON:
+		return "EMR_POLYGON"
+	case EMR_POLYLINE:
+		return "EMR_POLYLINE"
+	case EMR_POLYBEZIERTO:
+		return "EMR_POLYBEZIERTO"
+	case EMR_POLYLINETO:
+		return "EMR_POLYLINETO"
+	case EMR_POLYPOLYLINE:
+		return "EMR_POLYPOLYLINE"
+	case EMR_POLYPOLYGON:
+		return "EMR_POLYPOLYGON"
+	case EMR_SETWINDOWEXTEX:
+		return "EMR_SETWINDOWEXTEX"
+	case EMR_SETWINDOWORGEX:
+		return "EMR_SETWINDOWORGEX"
+	case EMR_SETVIEWPORTEXTEX:
+		return "EMR_SETVIEWPORTEXTEX"
+	case EMR_SETVIEWPORTORGEX:
+		return "EMR_SETVIEWPORTORGEX"
+	case EMR_SETBRUSHORGEX:
+		return "EMR_SETBRUSHORGEX"
+	case EMR_EOF:
+		return "EMR_EOF"
+	case EMR_SETPIXELV:
+		return "EMR_SETPIXELV"
+	case EMR_SETMAPPERFLAGS:
+		return "EMR_SETMAPPERFLAGS"
+	case EMR_SETMAPMODE:
+		return "EMR_SETMAPMODE"
+	case EMR_SETBKMODE:
+		return "EMR_SETBKMODE"
+	case EMR_SETPOLYFILLMODE:
+		return "EMR_SETPOLYFILLMODE"
+	case EMR_SETROP2:
+		return "EMR_SETROP2"
+	case EMR_SETSTRETCHBLTMODE:
+		return "EMR_SETSTRETCHBLTMODE"
+	case EMR_SETTEXTALIGN:
+		return "EMR_SETTEXTALIGN"
+	case EMR_SETCOLORADJUSTMENT:
+		return "EMR_SETCOLORADJUSTMENT"
+	case EMR_SETTEXTCOLOR:
+		return "EMR_SETTEXTCOLOR"
+	case EMR_SETBKCOLOR:
+		return "EMR_SETBKCOLOR"
+	case EMR_OFFSETCLIPRGN:
+		return "EMR_OFFSETCLIPRGN"
+	case EMR_MOVETOEX:
+		return "EMR_MOVETOEX"
+	case EMR_SETMETARGN:
+		return "EMR_SETMETARGN"
+	case EMR_EXCLUDECLIPRECT:
+		return "EMR_EXCLUDECLIPRECT"
+	case EMR_INTERSECTCLIPRECT:
+		return "EMR_INTERSECTCLIPRECT"
+	case EMR_SCALEVIEWPORTEXTEX:
+		return "EMR_SCALEVIEWPORTEXTEX"
+	case EMR_SCALEWINDOWEXTEX:
+		return "EMR_SCALEWINDOWEXTEX"
+	case EMR_SAVEDC:
+		return "EMR_SAVEDC"
+	case EMR_RESTOREDC:
+		return "EMR_RESTOREDC"
+	case EMR_SETWORLDTRANSFORM:
+		return "EMR_SETWORLDTRANSFORM"
+	case EMR_MODIFYWORLDTRANSFORM:
+		return "EMR_MODIFYWORLDTRANSFORM"
+	case EMR_SELECTOBJECT:
+		return "EMR_SELECTOBJECT"
+	case EMR_CREATEPEN:
+		return "EMR_CREATEPEN"
+	case EMR_CREATEBRUSHINDIRECT:
+		return "EMR_CREATEBRUSHINDIRECT"
+	case EMR_DELETEOBJECT:
+		return "EMR_DELETEOBJECT"
+	case EMR_ANGLEARC:
+		return "EMR_ANGLEARC"
+	case EMR_ELLIPSE:
+		return "EMR_ELLIPSE"
+	case EMR_RECTANGLE:
+		return "EMR_RECTANGLE"
+	case EMR_ROUNDRECT:
+		return "EMR_ROUNDRECT"
+	case EMR_ARC:
+		return "EMR_ARC"
+	case EMR_CHORD:
+		return "EMR_CHORD"
+	case EMR_PIE:
+		return "EMR_PIE"
+	case EMR_SELECTPALETTE:
+		return "EMR_SELECTPALETTE"
+	case EMR_CREATEPALETTE:
+		return "EMR_CREATEPALETTE"
+	case EMR_SETPALETTEENTRIES:
+		return "EMR_SETPALETTEENTRIES"
+	case EMR_RESIZEPALETTE:
+		return "EMR_RESIZEPALETTE"
+	case EMR_REALIZEPALETTE:
+		return "EMR_REALIZEPALETTE"
+	case EMR_EXTFLOODFILL:
+		return "EMR_EXTFLOODFILL"
+	case EMR_LINETO:
+		return "EMR_LINETO"
+	case EMR_ARCTO:
+		return "EMR_ARCTO"
+	case EMR_POLYDRAW:
+		return "EMR_POLYDRAW"
+	case EMR_SETARCDIRECTION:
+		return "EMR_SETARCDIRECTION"
+	case EMR_SETMITERLIMIT:
+		return "EMR_SETMITERLIMIT"
+	case EMR_BEGINPATH:
+		return "EMR_BEGINPATH"
+	case EMR_ENDPATH:
+		return "EMR_ENDPATH"
+	case EMR_CLOSEFIGURE:
+		return "EMR_CLOSEFIGURE"
+	case EMR_FILLPATH:
+		return "EMR_FILLPATH"
+	case EMR_STROKEANDFILLPATH:
+		return "EMR_STROKEANDFILLPATH"
+	case EMR_STROKEPATH:
+		return "EMR_STROKEPATH"
+	case EMR_FLATTENPATH:
+		return "EMR_FLATTENPATH"
+	case EMR_WIDENPATH:
+		return "EMR_WIDENPATH"
+	case EMR_SELECTCLIPPATH:
+		return "EMR_SELECTCLIPPATH"
+	case EMR_ABORTPATH:
+		return "EMR_ABORTPATH"
+	case EMR_GDICOMMENT:
+		return "EMR_GDICOMMENT"
+	case EMR_FILLRGN:
+		return "EMR_FILLRGN"
+	case EMR_FRAMERGN:
+		return "EMR_FRAMERGN"
+	case EMR_INVERTRGN:
+		return "EMR_INVERTRGN"
+	case EMR_PAINTRGN:
+		return "EMR_PAINTRGN"
+	case EMR_EXTSELECTCLIPRGN:
+		return "EMR_EXTSELECTCLIPRGN"
+	case EMR_BITBLT:
+		return "EMR_BITBLT"
+	case EMR_STRETCHBLT:
+		return "EMR_STRETCHBLT"
+	case EMR_MASKBLT:
+		return "EMR_MASKBLT"
+	case EMR_PLGBLT:
+		return "EMR_PLGBLT"
+	case EMR_SETDIBITSTODEVICE:
+		return "EMR_SETDIBITSTODEVICE"
+	case EMR_STRETCHDIBITS:
+		return "EMR_STRETCHDIBITS"
+	case EMR_EXTCREATEFONTINDIRECTW:
+		return "EMR_EXTCREATEFONTINDIRECTW"
+	case EMR_EXTTEXTOUTA:
+		return "EMR_EXTTEXTOUTA"
+	case EMR_EXTTEXTOUTW:
+		return "EMR_EXTTEXTOUTW"
+	case EMR_POLYBEZIER16:
+		return "EMR_POLYBEZIER16"
+	case EMR_POLYGON16:
+		return "EMR_POLYGON16"
+	case EMR_POLYLINE16:
+		return "EMR_POLYLINE16"
+	case EMR_POLYBEZIERTO16:
+		return "EMR_POLYBEZIERTO16"
+	case EMR_POLYLINETO16:
+		return "EMR_POLYLINETO16"
+	case EMR_POLYPOLYLINE16:
+		return "EMR_POLYPOLYLINE16"
+	case EMR_POLYPOLYGON16:
+		return "EMR_POLYPOLYGON16"
+	case EMR_POLYDRAW16:
+		return "EMR_POLYDRAW16"
+	case EMR_CREATEMONOBRUSH:
+		return "EMR_CREATEMONOBRUSH"
+	case EMR_CREATEDIBPATTERNBRUSHPT:
+		return "EMR_CREATEDIBPATTERNBRUSHPT"
+	case EMR_EXTCREATEPEN:
+		return "EMR_EXTCREATEPEN"
+	case EMR_POLYTEXTOUTA:
+		return "EMR_POLYTEXTOUTA"
+	case EMR_POLYTEXTOUTW:
+		return "EMR_POLYTEXTOUTW"
+	case EMR_SETICMMODE:
+		return "EMR_SETICMMODE"
+	case EMR_CREATECOLORSPACE:
+		return "EMR_CREATECOLORSPACE"
+	case EMR_SETCOLORSPACE:
+		return "EMR_SETCOLORSPACE"
+	case EMR_DELETECOLORSPACE:
+		return "EMR_DELETECOLORSPACE"
+	case EMR_GLSRECORD:
+		return "EMR_GLSRECORD"
+	case EMR_GLSBOUNDEDRECORD:
+		return "EMR_GLSBOUNDEDRECORD"
+	case EMR_PIXELFORMAT:
+		return "EMR_PIXELFORMAT"
+	case EMR_RESERVED_105:
+		return "EMR_RESERVED_105"
+	case EMR_RESERVED_106:
+		return "EMR_RESERVED_106"
+	case EMR_RESERVED_107:
+		return "EMR_RESERVED_107"
+	case EMR_RESERVED_108:
+		return "EMR_RESERVED_108"
+	case EMR_RESERVED_109:
+		return "EMR_RESERVED_109"
+	case EMR_RESERVED_110:
+		return "EMR_RESERVED_110"
+	case EMR_COLORCORRECTPALETTE:
+		return "EMR_COLORCORRECTPALETTE"
+	case EMR_SETICMPROFILEA:
+		return "EMR_SETICMPROFILEA"
+	case EMR_SETICMPROFILEW:
+		return "EMR_SETICMPROFILEW"
+	case EMR_ALPHABLEND:
+		return "EMR_ALPHABLEND"
+	case EMR_SETLAYOUT:
+		return "EMR_SETLAYOUT"
+	case EMR_TRANSPARENTBLT:
+		return "EMR_TRANSPARENTBLT"
+	case EMR_RESERVED_117:
+		return "EMR_RESERVED_117"
+	case EMR_GRADIENTFILL:
+		return "EMR_GRADIENTFILL"
+	case EMR_RESERVED_119:
+		return "EMR_RESERVED_119"
+	case EMR_RESERVED_120:
+		return "EMR_RESERVED_120"
+	case EMR_COLORMATCHTOTARGETW:
+		return "EMR_COLORMATCHTOTARGETW"
+	case EMR_CREATECOLORSPACEW:
+		return "EMR_CREATECOLORSPACEW"
+	default:
+		return fmt.Sprintf("ENHANCED_METAFILE_RECORD_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type ENUM_DISPLAY_SETTINGS_FLAGS uint32
 
 const (
 	EDS_RAWMODE     ENUM_DISPLAY_SETTINGS_FLAGS = 2
 	EDS_ROTATEDMODE ENUM_DISPLAY_SETTINGS_FLAGS = 4
 )
+
+// String returns the ENUM_DISPLAY_SETTINGS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENUM_DISPLAY_SETTINGS_FLAGS) String() string {
+	var parts []string
+	if e&EDS_RAWMODE != 0 {
+		parts = append(parts, "EDS_RAWMODE")
+	}
+	if e&EDS_ROTATEDMODE != 0 {
+		parts = append(parts, "EDS_ROTATEDMODE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type ENUM_DISPLAY_SETTINGS_MODE uint32
 
@@ -543,6 +1744,20 @@ const (
 	ENUM_REGISTRY_SETTINGS ENUM_DISPLAY_SETTINGS_MODE = 4294967294
 )
 
+// String returns the ENUM_DISPLAY_SETTINGS_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENUM_DISPLAY_SETTINGS_MODE) String() string {
+	switch e {
+	case ENUM_CURRENT_SETTINGS:
+		return "ENUM_CURRENT_SETTINGS"
+	case ENUM_REGISTRY_SETTINGS:
+		return "ENUM_REGISTRY_SETTINGS"
+	default:
+		return fmt.Sprintf("ENUM_DISPLAY_SETTINGS_MODE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type ETO_OPTIONS uint32
 
 const (
@@ -557,12 +1772,62 @@ const (
 	ETO_REVERSE_INDEX_MAP ETO_OPTIONS = 65536
 )
 
+// String returns the ETO_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ETO_OPTIONS) String() string {
+	var parts []string
+	if e&ETO_OPAQUE != 0 {
+		parts = append(parts, "ETO_OPAQUE")
+	}
+	if e&ETO_CLIPPED != 0 {
+		parts = append(parts, "ETO_CLIPPED")
+	}
+	if e&ETO_GLYPH_INDEX != 0 {
+		parts = append(parts, "ETO_GLYPH_INDEX")
+	}
+	if e&ETO_RTLREADING != 0 {
+		parts = append(parts, "ETO_RTLREADING")
+	}
+	if e&ETO_NUMERICSLOCAL != 0 {
+		parts = append(parts, "ETO_NUMERICSLOCAL")
+	}
+	if e&ETO_NUMERICSLATIN != 0 {
+		parts = append(parts, "ETO_NUMERICSLATIN")
+	}
+	if e&ETO_IGNORELANGUAGE != 0 {
+		parts = append(parts, "ETO_IGNORELANGUAGE")
+	}
+	if e&ETO_PDY != 0 {
+		parts = append(parts, "ETO_PDY")
+	}
+	if e&ETO_REVERSE_INDEX_MAP != 0 {
+		parts = append(parts, "ETO_REVERSE_INDEX_MAP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type EXT_FLOOD_FILL_TYPE uint32
 
 const (
 	FLOODFILLBORDER  EXT_FLOOD_FILL_TYPE = 0
 	FLOODFILLSURFACE EXT_FLOOD_FILL_TYPE = 1
 )
+
+// String returns the EXT_FLOOD_FILL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXT_FLOOD_FILL_TYPE) String() string {
+	switch e {
+	case FLOODFILLBORDER:
+		return "FLOODFILLBORDER"
+	case FLOODFILLSURFACE:
+		return "FLOODFILLSURFACE"
+	default:
+		return fmt.Sprintf("EXT_FLOOD_FILL_TYPE(%d)", uint32(e))
+	}
+}
 
 type FONT_CHARSET uint8
 
@@ -589,6 +1854,54 @@ const (
 	BALTIC_CHARSET      FONT_CHARSET = 186
 )
 
+// String returns the FONT_CHARSET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FONT_CHARSET) String() string {
+	switch e {
+	case ANSI_CHARSET:
+		return "ANSI_CHARSET"
+	case DEFAULT_CHARSET:
+		return "DEFAULT_CHARSET"
+	case SYMBOL_CHARSET:
+		return "SYMBOL_CHARSET"
+	case SHIFTJIS_CHARSET:
+		return "SHIFTJIS_CHARSET"
+	case HANGEUL_CHARSET:
+		return "HANGEUL_CHARSET"
+	case GB2312_CHARSET:
+		return "GB2312_CHARSET"
+	case CHINESEBIG5_CHARSET:
+		return "CHINESEBIG5_CHARSET"
+	case OEM_CHARSET:
+		return "OEM_CHARSET"
+	case JOHAB_CHARSET:
+		return "JOHAB_CHARSET"
+	case HEBREW_CHARSET:
+		return "HEBREW_CHARSET"
+	case ARABIC_CHARSET:
+		return "ARABIC_CHARSET"
+	case GREEK_CHARSET:
+		return "GREEK_CHARSET"
+	case TURKISH_CHARSET:
+		return "TURKISH_CHARSET"
+	case VIETNAMESE_CHARSET:
+		return "VIETNAMESE_CHARSET"
+	case THAI_CHARSET:
+		return "THAI_CHARSET"
+	case EASTEUROPE_CHARSET:
+		return "EASTEUROPE_CHARSET"
+	case RUSSIAN_CHARSET:
+		return "RUSSIAN_CHARSET"
+	case MAC_CHARSET:
+		return "MAC_CHARSET"
+	case BALTIC_CHARSET:
+		return "BALTIC_CHARSET"
+	default:
+		return fmt.Sprintf("FONT_CHARSET(%d)", uint8(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FONT_CLIP_PRECISION uint8
 
 const (
@@ -603,6 +1916,40 @@ const (
 	CLIP_DFA_OVERRIDE     FONT_CLIP_PRECISION = 64
 )
 
+// String returns the FONT_CLIP_PRECISION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FONT_CLIP_PRECISION) String() string {
+	var parts []string
+	if e&CLIP_CHARACTER_PRECIS != 0 {
+		parts = append(parts, "CLIP_CHARACTER_PRECIS")
+	}
+	if e&CLIP_STROKE_PRECIS != 0 {
+		parts = append(parts, "CLIP_STROKE_PRECIS")
+	}
+	if e&CLIP_MASK != 0 {
+		parts = append(parts, "CLIP_MASK")
+	}
+	if e&CLIP_LH_ANGLES != 0 {
+		parts = append(parts, "CLIP_LH_ANGLES")
+	}
+	if e&CLIP_TT_ALWAYS != 0 {
+		parts = append(parts, "CLIP_TT_ALWAYS")
+	}
+	if e&CLIP_DFA_DISABLE != 0 {
+		parts = append(parts, "CLIP_DFA_DISABLE")
+	}
+	if e&CLIP_EMBEDDED != 0 {
+		parts = append(parts, "CLIP_EMBEDDED")
+	}
+	if e&CLIP_DFA_OVERRIDE != 0 {
+		parts = append(parts, "CLIP_DFA_OVERRIDE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type FONT_FAMILY uint8
 
 const (
@@ -614,6 +1961,27 @@ const (
 	FF_SWISS      FONT_FAMILY = 32
 )
 
+// String returns the FONT_FAMILY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FONT_FAMILY) String() string {
+	switch e {
+	case FF_DECORATIVE:
+		return "FF_DECORATIVE"
+	case FF_DONTCARE:
+		return "FF_DONTCARE"
+	case FF_MODERN:
+		return "FF_MODERN"
+	case FF_ROMAN:
+		return "FF_ROMAN"
+	case FF_SCRIPT:
+		return "FF_SCRIPT"
+	case FF_SWISS:
+		return "FF_SWISS"
+	default:
+		return fmt.Sprintf("FONT_FAMILY(%d)", uint8(e))
+	}
+}
+
 type FONT_LICENSE_PRIVS uint32
 
 const (
@@ -623,6 +1991,23 @@ const (
 	LICENSE_NOEMBEDDING  FONT_LICENSE_PRIVS = 2
 	LICENSE_DEFAULT      FONT_LICENSE_PRIVS = 0
 )
+
+// String returns the FONT_LICENSE_PRIVS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FONT_LICENSE_PRIVS) String() string {
+	switch e {
+	case LICENSE_PREVIEWPRINT:
+		return "LICENSE_PREVIEWPRINT"
+	case LICENSE_EDITABLE:
+		return "LICENSE_EDITABLE"
+	case LICENSE_INSTALLABLE:
+		return "LICENSE_INSTALLABLE"
+	case LICENSE_NOEMBEDDING:
+		return "LICENSE_NOEMBEDDING"
+	default:
+		return fmt.Sprintf("FONT_LICENSE_PRIVS(%d)", uint32(e))
+	}
+}
 
 type FONT_OUTPUT_PRECISION uint8
 
@@ -640,6 +2025,37 @@ const (
 	OUT_PS_ONLY_PRECIS        FONT_OUTPUT_PRECISION = 10
 )
 
+// String returns the FONT_OUTPUT_PRECISION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FONT_OUTPUT_PRECISION) String() string {
+	switch e {
+	case OUT_DEFAULT_PRECIS:
+		return "OUT_DEFAULT_PRECIS"
+	case OUT_STRING_PRECIS:
+		return "OUT_STRING_PRECIS"
+	case OUT_CHARACTER_PRECIS:
+		return "OUT_CHARACTER_PRECIS"
+	case OUT_STROKE_PRECIS:
+		return "OUT_STROKE_PRECIS"
+	case OUT_TT_PRECIS:
+		return "OUT_TT_PRECIS"
+	case OUT_DEVICE_PRECIS:
+		return "OUT_DEVICE_PRECIS"
+	case OUT_RASTER_PRECIS:
+		return "OUT_RASTER_PRECIS"
+	case OUT_TT_ONLY_PRECIS:
+		return "OUT_TT_ONLY_PRECIS"
+	case OUT_OUTLINE_PRECIS:
+		return "OUT_OUTLINE_PRECIS"
+	case OUT_SCREEN_OUTLINE_PRECIS:
+		return "OUT_SCREEN_OUTLINE_PRECIS"
+	case OUT_PS_ONLY_PRECIS:
+		return "OUT_PS_ONLY_PRECIS"
+	default:
+		return fmt.Sprintf("FONT_OUTPUT_PRECISION(%d)", uint8(e))
+	}
+}
+
 type FONT_PITCH uint8
 
 const (
@@ -647,6 +2063,21 @@ const (
 	FIXED_PITCH    FONT_PITCH = 1
 	VARIABLE_PITCH FONT_PITCH = 2
 )
+
+// String returns the FONT_PITCH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FONT_PITCH) String() string {
+	switch e {
+	case DEFAULT_PITCH:
+		return "DEFAULT_PITCH"
+	case FIXED_PITCH:
+		return "FIXED_PITCH"
+	case VARIABLE_PITCH:
+		return "VARIABLE_PITCH"
+	default:
+		return fmt.Sprintf("FONT_PITCH(%d)", uint8(e))
+	}
+}
 
 type FONT_QUALITY uint8
 
@@ -659,12 +2090,46 @@ const (
 	CLEARTYPE_QUALITY      FONT_QUALITY = 5
 )
 
+// String returns the FONT_QUALITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FONT_QUALITY) String() string {
+	switch e {
+	case DEFAULT_QUALITY:
+		return "DEFAULT_QUALITY"
+	case DRAFT_QUALITY:
+		return "DRAFT_QUALITY"
+	case PROOF_QUALITY:
+		return "PROOF_QUALITY"
+	case NONANTIALIASED_QUALITY:
+		return "NONANTIALIASED_QUALITY"
+	case ANTIALIASED_QUALITY:
+		return "ANTIALIASED_QUALITY"
+	case CLEARTYPE_QUALITY:
+		return "CLEARTYPE_QUALITY"
+	default:
+		return fmt.Sprintf("FONT_QUALITY(%d)", uint8(e))
+	}
+}
+
 type FONT_RESOURCE_CHARACTERISTICS uint32
 
 const (
 	FR_PRIVATE  FONT_RESOURCE_CHARACTERISTICS = 16
 	FR_NOT_ENUM FONT_RESOURCE_CHARACTERISTICS = 32
 )
+
+// String returns the FONT_RESOURCE_CHARACTERISTICS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FONT_RESOURCE_CHARACTERISTICS) String() string {
+	switch e {
+	case FR_PRIVATE:
+		return "FR_PRIVATE"
+	case FR_NOT_ENUM:
+		return "FR_NOT_ENUM"
+	default:
+		return fmt.Sprintf("FONT_RESOURCE_CHARACTERISTICS(%d)", uint32(e))
+	}
+}
 
 type FONT_WEIGHT uint32
 
@@ -686,6 +2151,35 @@ const (
 	FW_BLACK      FONT_WEIGHT = 900
 )
 
+// String returns the FONT_WEIGHT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FONT_WEIGHT) String() string {
+	switch e {
+	case FW_DONTCARE:
+		return "FW_DONTCARE"
+	case FW_THIN:
+		return "FW_THIN"
+	case FW_EXTRALIGHT:
+		return "FW_EXTRALIGHT"
+	case FW_LIGHT:
+		return "FW_LIGHT"
+	case FW_NORMAL:
+		return "FW_NORMAL"
+	case FW_MEDIUM:
+		return "FW_MEDIUM"
+	case FW_SEMIBOLD:
+		return "FW_SEMIBOLD"
+	case FW_BOLD:
+		return "FW_BOLD"
+	case FW_EXTRABOLD:
+		return "FW_EXTRABOLD"
+	case FW_HEAVY:
+		return "FW_HEAVY"
+	default:
+		return fmt.Sprintf("FONT_WEIGHT(%d)", uint32(e))
+	}
+}
+
 type GDI_REGION_TYPE int32
 
 const (
@@ -695,6 +2189,24 @@ const (
 	COMPLEXREGION GDI_REGION_TYPE = 3
 )
 
+// String returns the GDI_REGION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GDI_REGION_TYPE) String() string {
+	switch e {
+	case RGN_ERROR:
+		return "RGN_ERROR"
+	case NULLREGION:
+		return "NULLREGION"
+	case SIMPLEREGION:
+		return "SIMPLEREGION"
+	case COMPLEXREGION:
+		return "COMPLEXREGION"
+	default:
+		return fmt.Sprintf("GDI_REGION_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GET_CHARACTER_PLACEMENT_FLAGS uint32
 
 const (
@@ -715,6 +2227,62 @@ const (
 	GCP_USEKERNING      GET_CHARACTER_PLACEMENT_FLAGS = 8
 )
 
+// String returns the GET_CHARACTER_PLACEMENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_CHARACTER_PLACEMENT_FLAGS) String() string {
+	var parts []string
+	if e&GCP_CLASSIN != 0 {
+		parts = append(parts, "GCP_CLASSIN")
+	}
+	if e&GCP_DIACRITIC != 0 {
+		parts = append(parts, "GCP_DIACRITIC")
+	}
+	if e&GCP_DISPLAYZWG != 0 {
+		parts = append(parts, "GCP_DISPLAYZWG")
+	}
+	if e&GCP_GLYPHSHAPE != 0 {
+		parts = append(parts, "GCP_GLYPHSHAPE")
+	}
+	if e&GCP_JUSTIFY != 0 {
+		parts = append(parts, "GCP_JUSTIFY")
+	}
+	if e&GCP_KASHIDA != 0 {
+		parts = append(parts, "GCP_KASHIDA")
+	}
+	if e&GCP_LIGATE != 0 {
+		parts = append(parts, "GCP_LIGATE")
+	}
+	if e&GCP_MAXEXTENT != 0 {
+		parts = append(parts, "GCP_MAXEXTENT")
+	}
+	if e&GCP_NEUTRALOVERRIDE != 0 {
+		parts = append(parts, "GCP_NEUTRALOVERRIDE")
+	}
+	if e&GCP_NUMERICOVERRIDE != 0 {
+		parts = append(parts, "GCP_NUMERICOVERRIDE")
+	}
+	if e&GCP_NUMERICSLATIN != 0 {
+		parts = append(parts, "GCP_NUMERICSLATIN")
+	}
+	if e&GCP_NUMERICSLOCAL != 0 {
+		parts = append(parts, "GCP_NUMERICSLOCAL")
+	}
+	if e&GCP_REORDER != 0 {
+		parts = append(parts, "GCP_REORDER")
+	}
+	if e&GCP_SYMSWAPOFF != 0 {
+		parts = append(parts, "GCP_SYMSWAPOFF")
+	}
+	if e&GCP_USEKERNING != 0 {
+		parts = append(parts, "GCP_USEKERNING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type GET_DCX_FLAGS uint32
 
 const (
@@ -730,6 +2298,49 @@ const (
 	DCX_INTERSECTUPDATE  GET_DCX_FLAGS = 512
 	DCX_VALIDATE         GET_DCX_FLAGS = 2097152
 )
+
+// String returns the GET_DCX_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_DCX_FLAGS) String() string {
+	var parts []string
+	if e&DCX_WINDOW != 0 {
+		parts = append(parts, "DCX_WINDOW")
+	}
+	if e&DCX_CACHE != 0 {
+		parts = append(parts, "DCX_CACHE")
+	}
+	if e&DCX_PARENTCLIP != 0 {
+		parts = append(parts, "DCX_PARENTCLIP")
+	}
+	if e&DCX_CLIPSIBLINGS != 0 {
+		parts = append(parts, "DCX_CLIPSIBLINGS")
+	}
+	if e&DCX_CLIPCHILDREN != 0 {
+		parts = append(parts, "DCX_CLIPCHILDREN")
+	}
+	if e&DCX_NORESETATTRS != 0 {
+		parts = append(parts, "DCX_NORESETATTRS")
+	}
+	if e&DCX_LOCKWINDOWUPDATE != 0 {
+		parts = append(parts, "DCX_LOCKWINDOWUPDATE")
+	}
+	if e&DCX_EXCLUDERGN != 0 {
+		parts = append(parts, "DCX_EXCLUDERGN")
+	}
+	if e&DCX_INTERSECTRGN != 0 {
+		parts = append(parts, "DCX_INTERSECTRGN")
+	}
+	if e&DCX_INTERSECTUPDATE != 0 {
+		parts = append(parts, "DCX_INTERSECTUPDATE")
+	}
+	if e&DCX_VALIDATE != 0 {
+		parts = append(parts, "DCX_VALIDATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type GET_DEVICE_CAPS_INDEX uint32
 
@@ -776,6 +2387,95 @@ const (
 	COLORMGMTCAPS   GET_DEVICE_CAPS_INDEX = 121
 )
 
+// String returns the GET_DEVICE_CAPS_INDEX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_DEVICE_CAPS_INDEX) String() string {
+	switch e {
+	case DRIVERVERSION:
+		return "DRIVERVERSION"
+	case TECHNOLOGY:
+		return "TECHNOLOGY"
+	case HORZSIZE:
+		return "HORZSIZE"
+	case VERTSIZE:
+		return "VERTSIZE"
+	case HORZRES:
+		return "HORZRES"
+	case VERTRES:
+		return "VERTRES"
+	case BITSPIXEL:
+		return "BITSPIXEL"
+	case PLANES:
+		return "PLANES"
+	case NUMBRUSHES:
+		return "NUMBRUSHES"
+	case NUMPENS:
+		return "NUMPENS"
+	case NUMMARKERS:
+		return "NUMMARKERS"
+	case NUMFONTS:
+		return "NUMFONTS"
+	case NUMCOLORS:
+		return "NUMCOLORS"
+	case PDEVICESIZE:
+		return "PDEVICESIZE"
+	case CURVECAPS:
+		return "CURVECAPS"
+	case LINECAPS:
+		return "LINECAPS"
+	case POLYGONALCAPS:
+		return "POLYGONALCAPS"
+	case TEXTCAPS:
+		return "TEXTCAPS"
+	case CLIPCAPS:
+		return "CLIPCAPS"
+	case RASTERCAPS:
+		return "RASTERCAPS"
+	case ASPECTX:
+		return "ASPECTX"
+	case ASPECTY:
+		return "ASPECTY"
+	case ASPECTXY:
+		return "ASPECTXY"
+	case LOGPIXELSX:
+		return "LOGPIXELSX"
+	case LOGPIXELSY:
+		return "LOGPIXELSY"
+	case SIZEPALETTE:
+		return "SIZEPALETTE"
+	case NUMRESERVED:
+		return "NUMRESERVED"
+	case COLORRES:
+		return "COLORRES"
+	case PHYSICALWIDTH:
+		return "PHYSICALWIDTH"
+	case PHYSICALHEIGHT:
+		return "PHYSICALHEIGHT"
+	case PHYSICALOFFSETX:
+		return "PHYSICALOFFSETX"
+	case PHYSICALOFFSETY:
+		return "PHYSICALOFFSETY"
+	case SCALINGFACTORX:
+		return "SCALINGFACTORX"
+	case SCALINGFACTORY:
+		return "SCALINGFACTORY"
+	case VREFRESH:
+		return "VREFRESH"
+	case DESKTOPVERTRES:
+		return "DESKTOPVERTRES"
+	case DESKTOPHORZRES:
+		return "DESKTOPHORZRES"
+	case BLTALIGNMENT:
+		return "BLTALIGNMENT"
+	case SHADEBLENDCAPS:
+		return "SHADEBLENDCAPS"
+	case COLORMGMTCAPS:
+		return "COLORMGMTCAPS"
+	default:
+		return fmt.Sprintf("GET_DEVICE_CAPS_INDEX(%d)", uint32(e))
+	}
+}
+
 type GET_GLYPH_OUTLINE_FORMAT uint32
 
 const (
@@ -789,6 +2489,33 @@ const (
 	GGO_NATIVE       GET_GLYPH_OUTLINE_FORMAT = 2
 	GGO_UNHINTED     GET_GLYPH_OUTLINE_FORMAT = 256
 )
+
+// String returns the GET_GLYPH_OUTLINE_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_GLYPH_OUTLINE_FORMAT) String() string {
+	switch e {
+	case GGO_BEZIER:
+		return "GGO_BEZIER"
+	case GGO_BITMAP:
+		return "GGO_BITMAP"
+	case GGO_GLYPH_INDEX:
+		return "GGO_GLYPH_INDEX"
+	case GGO_GRAY2_BITMAP:
+		return "GGO_GRAY2_BITMAP"
+	case GGO_GRAY4_BITMAP:
+		return "GGO_GRAY4_BITMAP"
+	case GGO_GRAY8_BITMAP:
+		return "GGO_GRAY8_BITMAP"
+	case GGO_METRICS:
+		return "GGO_METRICS"
+	case GGO_NATIVE:
+		return "GGO_NATIVE"
+	case GGO_UNHINTED:
+		return "GGO_UNHINTED"
+	default:
+		return fmt.Sprintf("GET_GLYPH_OUTLINE_FORMAT(%d)", uint32(e))
+	}
+}
 
 type GET_STOCK_OBJECT_FLAGS int32
 
@@ -815,6 +2542,53 @@ const (
 	DEFAULT_PALETTE     GET_STOCK_OBJECT_FLAGS = 15
 )
 
+// String returns the GET_STOCK_OBJECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_STOCK_OBJECT_FLAGS) String() string {
+	switch e {
+	case BLACK_BRUSH:
+		return "BLACK_BRUSH"
+	case DKGRAY_BRUSH:
+		return "DKGRAY_BRUSH"
+	case DC_BRUSH:
+		return "DC_BRUSH"
+	case GRAY_BRUSH:
+		return "GRAY_BRUSH"
+	case HOLLOW_BRUSH:
+		return "HOLLOW_BRUSH"
+	case LTGRAY_BRUSH:
+		return "LTGRAY_BRUSH"
+	case WHITE_BRUSH:
+		return "WHITE_BRUSH"
+	case BLACK_PEN:
+		return "BLACK_PEN"
+	case DC_PEN:
+		return "DC_PEN"
+	case NULL_PEN:
+		return "NULL_PEN"
+	case WHITE_PEN:
+		return "WHITE_PEN"
+	case ANSI_FIXED_FONT:
+		return "ANSI_FIXED_FONT"
+	case ANSI_VAR_FONT:
+		return "ANSI_VAR_FONT"
+	case DEVICE_DEFAULT_FONT:
+		return "DEVICE_DEFAULT_FONT"
+	case DEFAULT_GUI_FONT:
+		return "DEFAULT_GUI_FONT"
+	case OEM_FIXED_FONT:
+		return "OEM_FIXED_FONT"
+	case SYSTEM_FONT:
+		return "SYSTEM_FONT"
+	case SYSTEM_FIXED_FONT:
+		return "SYSTEM_FIXED_FONT"
+	case DEFAULT_PALETTE:
+		return "DEFAULT_PALETTE"
+	default:
+		return fmt.Sprintf("GET_STOCK_OBJECT_FLAGS(%d)", int32(e))
+	}
+}
+
 type GRADIENT_FILL uint32
 
 const (
@@ -823,12 +2597,40 @@ const (
 	GRADIENT_FILL_TRIANGLE GRADIENT_FILL = 2
 )
 
+// String returns the GRADIENT_FILL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GRADIENT_FILL) String() string {
+	switch e {
+	case GRADIENT_FILL_RECT_H:
+		return "GRADIENT_FILL_RECT_H"
+	case GRADIENT_FILL_RECT_V:
+		return "GRADIENT_FILL_RECT_V"
+	case GRADIENT_FILL_TRIANGLE:
+		return "GRADIENT_FILL_TRIANGLE"
+	default:
+		return fmt.Sprintf("GRADIENT_FILL(%d)", uint32(e))
+	}
+}
+
 type GRAPHICS_MODE int32
 
 const (
 	GM_COMPATIBLE GRAPHICS_MODE = 1
 	GM_ADVANCED   GRAPHICS_MODE = 2
 )
+
+// String returns the GRAPHICS_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GRAPHICS_MODE) String() string {
+	switch e {
+	case GM_COMPATIBLE:
+		return "GM_COMPATIBLE"
+	case GM_ADVANCED:
+		return "GM_ADVANCED"
+	default:
+		return fmt.Sprintf("GRAPHICS_MODE(%d)", int32(e))
+	}
+}
 
 type HATCH_BRUSH_STYLE int32
 
@@ -840,6 +2642,27 @@ const (
 	HS_HORIZONTAL HATCH_BRUSH_STYLE = 0
 	HS_VERTICAL   HATCH_BRUSH_STYLE = 1
 )
+
+// String returns the HATCH_BRUSH_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HATCH_BRUSH_STYLE) String() string {
+	switch e {
+	case HS_BDIAGONAL:
+		return "HS_BDIAGONAL"
+	case HS_CROSS:
+		return "HS_CROSS"
+	case HS_DIAGCROSS:
+		return "HS_DIAGCROSS"
+	case HS_FDIAGONAL:
+		return "HS_FDIAGONAL"
+	case HS_HORIZONTAL:
+		return "HS_HORIZONTAL"
+	case HS_VERTICAL:
+		return "HS_VERTICAL"
+	default:
+		return fmt.Sprintf("HATCH_BRUSH_STYLE(%d)", int32(e))
+	}
+}
 
 type HDC_MAP_MODE int32
 
@@ -854,6 +2677,31 @@ const (
 	MM_TWIPS       HDC_MAP_MODE = 6
 )
 
+// String returns the HDC_MAP_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HDC_MAP_MODE) String() string {
+	switch e {
+	case MM_ANISOTROPIC:
+		return "MM_ANISOTROPIC"
+	case MM_HIENGLISH:
+		return "MM_HIENGLISH"
+	case MM_HIMETRIC:
+		return "MM_HIMETRIC"
+	case MM_ISOTROPIC:
+		return "MM_ISOTROPIC"
+	case MM_LOENGLISH:
+		return "MM_LOENGLISH"
+	case MM_LOMETRIC:
+		return "MM_LOMETRIC"
+	case MM_TEXT:
+		return "MM_TEXT"
+	case MM_TWIPS:
+		return "MM_TWIPS"
+	default:
+		return fmt.Sprintf("HDC_MAP_MODE(%d)", int32(e))
+	}
+}
+
 type MODIFY_WORLD_TRANSFORM_MODE uint32
 
 const (
@@ -862,6 +2710,21 @@ const (
 	MWT_RIGHTMULTIPLY MODIFY_WORLD_TRANSFORM_MODE = 3
 )
 
+// String returns the MODIFY_WORLD_TRANSFORM_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MODIFY_WORLD_TRANSFORM_MODE) String() string {
+	switch e {
+	case MWT_IDENTITY:
+		return "MWT_IDENTITY"
+	case MWT_LEFTMULTIPLY:
+		return "MWT_LEFTMULTIPLY"
+	case MWT_RIGHTMULTIPLY:
+		return "MWT_RIGHTMULTIPLY"
+	default:
+		return fmt.Sprintf("MODIFY_WORLD_TRANSFORM_MODE(%d)", uint32(e))
+	}
+}
+
 type MONITOR_FROM_FLAGS uint32
 
 const (
@@ -869,6 +2732,21 @@ const (
 	MONITOR_DEFAULTTONULL    MONITOR_FROM_FLAGS = 0
 	MONITOR_DEFAULTTOPRIMARY MONITOR_FROM_FLAGS = 1
 )
+
+// String returns the MONITOR_FROM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MONITOR_FROM_FLAGS) String() string {
+	switch e {
+	case MONITOR_DEFAULTTONEAREST:
+		return "MONITOR_DEFAULTTONEAREST"
+	case MONITOR_DEFAULTTONULL:
+		return "MONITOR_DEFAULTTONULL"
+	case MONITOR_DEFAULTTOPRIMARY:
+		return "MONITOR_DEFAULTTOPRIMARY"
+	default:
+		return fmt.Sprintf("MONITOR_FROM_FLAGS(%d)", uint32(e))
+	}
+}
 
 type OBJ_TYPE int32
 
@@ -889,6 +2767,43 @@ const (
 	OBJ_COLORSPACE  OBJ_TYPE = 14
 )
 
+// String returns the OBJ_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OBJ_TYPE) String() string {
+	switch e {
+	case OBJ_PEN:
+		return "OBJ_PEN"
+	case OBJ_BRUSH:
+		return "OBJ_BRUSH"
+	case OBJ_DC:
+		return "OBJ_DC"
+	case OBJ_METADC:
+		return "OBJ_METADC"
+	case OBJ_PAL:
+		return "OBJ_PAL"
+	case OBJ_FONT:
+		return "OBJ_FONT"
+	case OBJ_BITMAP:
+		return "OBJ_BITMAP"
+	case OBJ_REGION:
+		return "OBJ_REGION"
+	case OBJ_METAFILE:
+		return "OBJ_METAFILE"
+	case OBJ_MEMDC:
+		return "OBJ_MEMDC"
+	case OBJ_EXTPEN:
+		return "OBJ_EXTPEN"
+	case OBJ_ENHMETADC:
+		return "OBJ_ENHMETADC"
+	case OBJ_ENHMETAFILE:
+		return "OBJ_ENHMETAFILE"
+	case OBJ_COLORSPACE:
+		return "OBJ_COLORSPACE"
+	default:
+		return fmt.Sprintf("OBJ_TYPE(%d)", int32(e))
+	}
+}
+
 type PAN_ARM_STYLE uint8
 
 const (
@@ -906,6 +2821,39 @@ const (
 	PAN_BENT_ARMS_DOUBLE_SERIF     PAN_ARM_STYLE = 11
 )
 
+// String returns the PAN_ARM_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAN_ARM_STYLE) String() string {
+	switch e {
+	case PAN_ARM_ANY:
+		return "PAN_ARM_ANY"
+	case PAN_ARM_NO_FIT:
+		return "PAN_ARM_NO_FIT"
+	case PAN_STRAIGHT_ARMS_HORZ:
+		return "PAN_STRAIGHT_ARMS_HORZ"
+	case PAN_STRAIGHT_ARMS_WEDGE:
+		return "PAN_STRAIGHT_ARMS_WEDGE"
+	case PAN_STRAIGHT_ARMS_VERT:
+		return "PAN_STRAIGHT_ARMS_VERT"
+	case PAN_STRAIGHT_ARMS_SINGLE_SERIF:
+		return "PAN_STRAIGHT_ARMS_SINGLE_SERIF"
+	case PAN_STRAIGHT_ARMS_DOUBLE_SERIF:
+		return "PAN_STRAIGHT_ARMS_DOUBLE_SERIF"
+	case PAN_BENT_ARMS_HORZ:
+		return "PAN_BENT_ARMS_HORZ"
+	case PAN_BENT_ARMS_WEDGE:
+		return "PAN_BENT_ARMS_WEDGE"
+	case PAN_BENT_ARMS_VERT:
+		return "PAN_BENT_ARMS_VERT"
+	case PAN_BENT_ARMS_SINGLE_SERIF:
+		return "PAN_BENT_ARMS_SINGLE_SERIF"
+	case PAN_BENT_ARMS_DOUBLE_SERIF:
+		return "PAN_BENT_ARMS_DOUBLE_SERIF"
+	default:
+		return fmt.Sprintf("PAN_ARM_STYLE(%d)", uint8(e))
+	}
+}
+
 type PAN_CONTRAST uint8
 
 const (
@@ -922,6 +2870,35 @@ const (
 	PAN_CONTRAST_VERY_HIGH   PAN_CONTRAST = 9
 )
 
+// String returns the PAN_CONTRAST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAN_CONTRAST) String() string {
+	switch e {
+	case PAN_CONTRAST_ANY:
+		return "PAN_CONTRAST_ANY"
+	case PAN_CONTRAST_NO_FIT:
+		return "PAN_CONTRAST_NO_FIT"
+	case PAN_CONTRAST_INDEX:
+		return "PAN_CONTRAST_INDEX"
+	case PAN_CONTRAST_NONE:
+		return "PAN_CONTRAST_NONE"
+	case PAN_CONTRAST_VERY_LOW:
+		return "PAN_CONTRAST_VERY_LOW"
+	case PAN_CONTRAST_MEDIUM_LOW:
+		return "PAN_CONTRAST_MEDIUM_LOW"
+	case PAN_CONTRAST_MEDIUM:
+		return "PAN_CONTRAST_MEDIUM"
+	case PAN_CONTRAST_MEDIUM_HIGH:
+		return "PAN_CONTRAST_MEDIUM_HIGH"
+	case PAN_CONTRAST_HIGH:
+		return "PAN_CONTRAST_HIGH"
+	case PAN_CONTRAST_VERY_HIGH:
+		return "PAN_CONTRAST_VERY_HIGH"
+	default:
+		return fmt.Sprintf("PAN_CONTRAST(%d)", uint8(e))
+	}
+}
+
 type PAN_FAMILY_TYPE uint8
 
 const (
@@ -932,6 +2909,27 @@ const (
 	PAN_FAMILY_DECORATIVE   PAN_FAMILY_TYPE = 4
 	PAN_FAMILY_PICTORIAL    PAN_FAMILY_TYPE = 5
 )
+
+// String returns the PAN_FAMILY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAN_FAMILY_TYPE) String() string {
+	switch e {
+	case PAN_FAMILY_ANY:
+		return "PAN_FAMILY_ANY"
+	case PAN_FAMILY_NO_FIT:
+		return "PAN_FAMILY_NO_FIT"
+	case PAN_FAMILY_TEXT_DISPLAY:
+		return "PAN_FAMILY_TEXT_DISPLAY"
+	case PAN_FAMILY_SCRIPT:
+		return "PAN_FAMILY_SCRIPT"
+	case PAN_FAMILY_DECORATIVE:
+		return "PAN_FAMILY_DECORATIVE"
+	case PAN_FAMILY_PICTORIAL:
+		return "PAN_FAMILY_PICTORIAL"
+	default:
+		return fmt.Sprintf("PAN_FAMILY_TYPE(%d)", uint8(e))
+	}
+}
 
 type PAN_LETT_FORM uint8
 
@@ -954,6 +2952,47 @@ const (
 	PAN_LETT_OBLIQUE_SQUARE     PAN_LETT_FORM = 15
 )
 
+// String returns the PAN_LETT_FORM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAN_LETT_FORM) String() string {
+	switch e {
+	case PAN_LETT_FORM_ANY:
+		return "PAN_LETT_FORM_ANY"
+	case PAN_LETT_FORM_NO_FIT:
+		return "PAN_LETT_FORM_NO_FIT"
+	case PAN_LETT_NORMAL_CONTACT:
+		return "PAN_LETT_NORMAL_CONTACT"
+	case PAN_LETT_NORMAL_WEIGHTED:
+		return "PAN_LETT_NORMAL_WEIGHTED"
+	case PAN_LETT_NORMAL_BOXED:
+		return "PAN_LETT_NORMAL_BOXED"
+	case PAN_LETT_NORMAL_FLATTENED:
+		return "PAN_LETT_NORMAL_FLATTENED"
+	case PAN_LETT_NORMAL_ROUNDED:
+		return "PAN_LETT_NORMAL_ROUNDED"
+	case PAN_LETT_NORMAL_OFF_CENTER:
+		return "PAN_LETT_NORMAL_OFF_CENTER"
+	case PAN_LETT_NORMAL_SQUARE:
+		return "PAN_LETT_NORMAL_SQUARE"
+	case PAN_LETT_OBLIQUE_CONTACT:
+		return "PAN_LETT_OBLIQUE_CONTACT"
+	case PAN_LETT_OBLIQUE_WEIGHTED:
+		return "PAN_LETT_OBLIQUE_WEIGHTED"
+	case PAN_LETT_OBLIQUE_BOXED:
+		return "PAN_LETT_OBLIQUE_BOXED"
+	case PAN_LETT_OBLIQUE_FLATTENED:
+		return "PAN_LETT_OBLIQUE_FLATTENED"
+	case PAN_LETT_OBLIQUE_ROUNDED:
+		return "PAN_LETT_OBLIQUE_ROUNDED"
+	case PAN_LETT_OBLIQUE_OFF_CENTER:
+		return "PAN_LETT_OBLIQUE_OFF_CENTER"
+	case PAN_LETT_OBLIQUE_SQUARE:
+		return "PAN_LETT_OBLIQUE_SQUARE"
+	default:
+		return fmt.Sprintf("PAN_LETT_FORM(%d)", uint8(e))
+	}
+}
+
 type PAN_MIDLINE uint8
 
 const (
@@ -974,6 +3013,43 @@ const (
 	PAN_MIDLINE_LOW_SERIFED      PAN_MIDLINE = 13
 )
 
+// String returns the PAN_MIDLINE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAN_MIDLINE) String() string {
+	switch e {
+	case PAN_MIDLINE_ANY:
+		return "PAN_MIDLINE_ANY"
+	case PAN_MIDLINE_NO_FIT:
+		return "PAN_MIDLINE_NO_FIT"
+	case PAN_MIDLINE_INDEX:
+		return "PAN_MIDLINE_INDEX"
+	case PAN_MIDLINE_STANDARD_TRIMMED:
+		return "PAN_MIDLINE_STANDARD_TRIMMED"
+	case PAN_MIDLINE_STANDARD_POINTED:
+		return "PAN_MIDLINE_STANDARD_POINTED"
+	case PAN_MIDLINE_STANDARD_SERIFED:
+		return "PAN_MIDLINE_STANDARD_SERIFED"
+	case PAN_MIDLINE_HIGH_TRIMMED:
+		return "PAN_MIDLINE_HIGH_TRIMMED"
+	case PAN_MIDLINE_HIGH_POINTED:
+		return "PAN_MIDLINE_HIGH_POINTED"
+	case PAN_MIDLINE_HIGH_SERIFED:
+		return "PAN_MIDLINE_HIGH_SERIFED"
+	case PAN_MIDLINE_CONSTANT_POINTED:
+		return "PAN_MIDLINE_CONSTANT_POINTED"
+	case PAN_MIDLINE_CONSTANT_SERIFED:
+		return "PAN_MIDLINE_CONSTANT_SERIFED"
+	case PAN_MIDLINE_LOW_TRIMMED:
+		return "PAN_MIDLINE_LOW_TRIMMED"
+	case PAN_MIDLINE_LOW_POINTED:
+		return "PAN_MIDLINE_LOW_POINTED"
+	case PAN_MIDLINE_LOW_SERIFED:
+		return "PAN_MIDLINE_LOW_SERIFED"
+	default:
+		return fmt.Sprintf("PAN_MIDLINE(%d)", uint8(e))
+	}
+}
+
 type PAN_PROPORTION uint8
 
 const (
@@ -988,6 +3064,35 @@ const (
 	PAN_PROP_VERY_CONDENSED PAN_PROPORTION = 8
 	PAN_PROP_MONOSPACED     PAN_PROPORTION = 9
 )
+
+// String returns the PAN_PROPORTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAN_PROPORTION) String() string {
+	switch e {
+	case PAN_PROP_ANY:
+		return "PAN_PROP_ANY"
+	case PAN_PROP_NO_FIT:
+		return "PAN_PROP_NO_FIT"
+	case PAN_PROP_OLD_STYLE:
+		return "PAN_PROP_OLD_STYLE"
+	case PAN_PROP_MODERN:
+		return "PAN_PROP_MODERN"
+	case PAN_PROP_EVEN_WIDTH:
+		return "PAN_PROP_EVEN_WIDTH"
+	case PAN_PROP_EXPANDED:
+		return "PAN_PROP_EXPANDED"
+	case PAN_PROP_CONDENSED:
+		return "PAN_PROP_CONDENSED"
+	case PAN_PROP_VERY_EXPANDED:
+		return "PAN_PROP_VERY_EXPANDED"
+	case PAN_PROP_VERY_CONDENSED:
+		return "PAN_PROP_VERY_CONDENSED"
+	case PAN_PROP_MONOSPACED:
+		return "PAN_PROP_MONOSPACED"
+	default:
+		return fmt.Sprintf("PAN_PROPORTION(%d)", uint8(e))
+	}
+}
 
 type PAN_SERIF_STYLE uint8
 
@@ -1010,6 +3115,47 @@ const (
 	PAN_SERIF_ROUNDED            PAN_SERIF_STYLE = 15
 )
 
+// String returns the PAN_SERIF_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAN_SERIF_STYLE) String() string {
+	switch e {
+	case PAN_SERIF_ANY:
+		return "PAN_SERIF_ANY"
+	case PAN_SERIF_NO_FIT:
+		return "PAN_SERIF_NO_FIT"
+	case PAN_SERIF_COVE:
+		return "PAN_SERIF_COVE"
+	case PAN_SERIF_OBTUSE_COVE:
+		return "PAN_SERIF_OBTUSE_COVE"
+	case PAN_SERIF_SQUARE_COVE:
+		return "PAN_SERIF_SQUARE_COVE"
+	case PAN_SERIF_OBTUSE_SQUARE_COVE:
+		return "PAN_SERIF_OBTUSE_SQUARE_COVE"
+	case PAN_SERIF_SQUARE:
+		return "PAN_SERIF_SQUARE"
+	case PAN_SERIF_THIN:
+		return "PAN_SERIF_THIN"
+	case PAN_SERIF_BONE:
+		return "PAN_SERIF_BONE"
+	case PAN_SERIF_EXAGGERATED:
+		return "PAN_SERIF_EXAGGERATED"
+	case PAN_SERIF_TRIANGLE:
+		return "PAN_SERIF_TRIANGLE"
+	case PAN_SERIF_NORMAL_SANS:
+		return "PAN_SERIF_NORMAL_SANS"
+	case PAN_SERIF_OBTUSE_SANS:
+		return "PAN_SERIF_OBTUSE_SANS"
+	case PAN_SERIF_PERP_SANS:
+		return "PAN_SERIF_PERP_SANS"
+	case PAN_SERIF_FLARED:
+		return "PAN_SERIF_FLARED"
+	case PAN_SERIF_ROUNDED:
+		return "PAN_SERIF_ROUNDED"
+	default:
+		return fmt.Sprintf("PAN_SERIF_STYLE(%d)", uint8(e))
+	}
+}
+
 type PAN_STROKE_VARIATION uint8
 
 const (
@@ -1023,6 +3169,33 @@ const (
 	PAN_STROKE_RAPID_HORZ   PAN_STROKE_VARIATION = 7
 	PAN_STROKE_INSTANT_VERT PAN_STROKE_VARIATION = 8
 )
+
+// String returns the PAN_STROKE_VARIATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAN_STROKE_VARIATION) String() string {
+	switch e {
+	case PAN_STROKE_ANY:
+		return "PAN_STROKE_ANY"
+	case PAN_STROKE_NO_FIT:
+		return "PAN_STROKE_NO_FIT"
+	case PAN_STROKE_GRADUAL_DIAG:
+		return "PAN_STROKE_GRADUAL_DIAG"
+	case PAN_STROKE_GRADUAL_TRAN:
+		return "PAN_STROKE_GRADUAL_TRAN"
+	case PAN_STROKE_GRADUAL_VERT:
+		return "PAN_STROKE_GRADUAL_VERT"
+	case PAN_STROKE_GRADUAL_HORZ:
+		return "PAN_STROKE_GRADUAL_HORZ"
+	case PAN_STROKE_RAPID_VERT:
+		return "PAN_STROKE_RAPID_VERT"
+	case PAN_STROKE_RAPID_HORZ:
+		return "PAN_STROKE_RAPID_HORZ"
+	case PAN_STROKE_INSTANT_VERT:
+		return "PAN_STROKE_INSTANT_VERT"
+	default:
+		return fmt.Sprintf("PAN_STROKE_VARIATION(%d)", uint8(e))
+	}
+}
 
 type PAN_WEIGHT uint8
 
@@ -1042,6 +3215,39 @@ const (
 	PAN_WEIGHT_NORD       PAN_WEIGHT = 11
 )
 
+// String returns the PAN_WEIGHT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAN_WEIGHT) String() string {
+	switch e {
+	case PAN_WEIGHT_ANY:
+		return "PAN_WEIGHT_ANY"
+	case PAN_WEIGHT_NO_FIT:
+		return "PAN_WEIGHT_NO_FIT"
+	case PAN_WEIGHT_INDEX:
+		return "PAN_WEIGHT_INDEX"
+	case PAN_WEIGHT_LIGHT:
+		return "PAN_WEIGHT_LIGHT"
+	case PAN_WEIGHT_THIN:
+		return "PAN_WEIGHT_THIN"
+	case PAN_WEIGHT_BOOK:
+		return "PAN_WEIGHT_BOOK"
+	case PAN_WEIGHT_MEDIUM:
+		return "PAN_WEIGHT_MEDIUM"
+	case PAN_WEIGHT_DEMI:
+		return "PAN_WEIGHT_DEMI"
+	case PAN_WEIGHT_BOLD:
+		return "PAN_WEIGHT_BOLD"
+	case PAN_WEIGHT_HEAVY:
+		return "PAN_WEIGHT_HEAVY"
+	case PAN_WEIGHT_BLACK:
+		return "PAN_WEIGHT_BLACK"
+	case PAN_WEIGHT_NORD:
+		return "PAN_WEIGHT_NORD"
+	default:
+		return fmt.Sprintf("PAN_WEIGHT(%d)", uint8(e))
+	}
+}
+
 type PAN_XHEIGHT uint8
 
 const (
@@ -1056,6 +3262,34 @@ const (
 	PAN_XHEIGHT_DUCKING_LARGE  PAN_XHEIGHT = 7
 )
 
+// String returns the PAN_XHEIGHT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAN_XHEIGHT) String() string {
+	switch e {
+	case PAN_XHEIGHT_ANY:
+		return "PAN_XHEIGHT_ANY"
+	case PAN_XHEIGHT_NO_FIT:
+		return "PAN_XHEIGHT_NO_FIT"
+	case PAN_XHEIGHT_INDEX:
+		return "PAN_XHEIGHT_INDEX"
+	case PAN_XHEIGHT_CONSTANT_SMALL:
+		return "PAN_XHEIGHT_CONSTANT_SMALL"
+	case PAN_XHEIGHT_CONSTANT_STD:
+		return "PAN_XHEIGHT_CONSTANT_STD"
+	case PAN_XHEIGHT_CONSTANT_LARGE:
+		return "PAN_XHEIGHT_CONSTANT_LARGE"
+	case PAN_XHEIGHT_DUCKING_SMALL:
+		return "PAN_XHEIGHT_DUCKING_SMALL"
+	case PAN_XHEIGHT_DUCKING_STD:
+		return "PAN_XHEIGHT_DUCKING_STD"
+	case PAN_XHEIGHT_DUCKING_LARGE:
+		return "PAN_XHEIGHT_DUCKING_LARGE"
+	default:
+		return fmt.Sprintf("PAN_XHEIGHT(%d)", uint8(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PEN_STYLE int32
 
 const (
@@ -1082,6 +3316,67 @@ const (
 	PS_TYPE_MASK     PEN_STYLE = 983040
 )
 
+// String returns the PEN_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEN_STYLE) String() string {
+	var parts []string
+	if e&PS_GEOMETRIC != 0 {
+		parts = append(parts, "PS_GEOMETRIC")
+	}
+	if e&PS_DASH != 0 {
+		parts = append(parts, "PS_DASH")
+	}
+	if e&PS_DOT != 0 {
+		parts = append(parts, "PS_DOT")
+	}
+	if e&PS_DASHDOT != 0 {
+		parts = append(parts, "PS_DASHDOT")
+	}
+	if e&PS_DASHDOTDOT != 0 {
+		parts = append(parts, "PS_DASHDOTDOT")
+	}
+	if e&PS_NULL != 0 {
+		parts = append(parts, "PS_NULL")
+	}
+	if e&PS_INSIDEFRAME != 0 {
+		parts = append(parts, "PS_INSIDEFRAME")
+	}
+	if e&PS_USERSTYLE != 0 {
+		parts = append(parts, "PS_USERSTYLE")
+	}
+	if e&PS_ALTERNATE != 0 {
+		parts = append(parts, "PS_ALTERNATE")
+	}
+	if e&PS_STYLE_MASK != 0 {
+		parts = append(parts, "PS_STYLE_MASK")
+	}
+	if e&PS_ENDCAP_SQUARE != 0 {
+		parts = append(parts, "PS_ENDCAP_SQUARE")
+	}
+	if e&PS_ENDCAP_FLAT != 0 {
+		parts = append(parts, "PS_ENDCAP_FLAT")
+	}
+	if e&PS_ENDCAP_MASK != 0 {
+		parts = append(parts, "PS_ENDCAP_MASK")
+	}
+	if e&PS_JOIN_BEVEL != 0 {
+		parts = append(parts, "PS_JOIN_BEVEL")
+	}
+	if e&PS_JOIN_MITER != 0 {
+		parts = append(parts, "PS_JOIN_MITER")
+	}
+	if e&PS_JOIN_MASK != 0 {
+		parts = append(parts, "PS_JOIN_MASK")
+	}
+	if e&PS_TYPE_MASK != 0 {
+		parts = append(parts, "PS_TYPE_MASK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type R2_MODE int32
 
 const (
@@ -1104,6 +3399,48 @@ const (
 	R2_LAST        R2_MODE = 16
 )
 
+// String returns the R2_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e R2_MODE) String() string {
+	switch e {
+	case R2_BLACK:
+		return "R2_BLACK"
+	case R2_NOTMERGEPEN:
+		return "R2_NOTMERGEPEN"
+	case R2_MASKNOTPEN:
+		return "R2_MASKNOTPEN"
+	case R2_NOTCOPYPEN:
+		return "R2_NOTCOPYPEN"
+	case R2_MASKPENNOT:
+		return "R2_MASKPENNOT"
+	case R2_NOT:
+		return "R2_NOT"
+	case R2_XORPEN:
+		return "R2_XORPEN"
+	case R2_NOTMASKPEN:
+		return "R2_NOTMASKPEN"
+	case R2_MASKPEN:
+		return "R2_MASKPEN"
+	case R2_NOTXORPEN:
+		return "R2_NOTXORPEN"
+	case R2_NOP:
+		return "R2_NOP"
+	case R2_MERGENOTPEN:
+		return "R2_MERGENOTPEN"
+	case R2_COPYPEN:
+		return "R2_COPYPEN"
+	case R2_MERGEPENNOT:
+		return "R2_MERGEPENNOT"
+	case R2_MERGEPEN:
+		return "R2_MERGEPEN"
+	case R2_WHITE:
+		return "R2_WHITE"
+	default:
+		return fmt.Sprintf("R2_MODE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type REDRAW_WINDOW_FLAGS uint32
 
 const (
@@ -1121,6 +3458,52 @@ const (
 	RDW_NOFRAME         REDRAW_WINDOW_FLAGS = 2048
 )
 
+// String returns the REDRAW_WINDOW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REDRAW_WINDOW_FLAGS) String() string {
+	var parts []string
+	if e&RDW_INVALIDATE != 0 {
+		parts = append(parts, "RDW_INVALIDATE")
+	}
+	if e&RDW_INTERNALPAINT != 0 {
+		parts = append(parts, "RDW_INTERNALPAINT")
+	}
+	if e&RDW_ERASE != 0 {
+		parts = append(parts, "RDW_ERASE")
+	}
+	if e&RDW_VALIDATE != 0 {
+		parts = append(parts, "RDW_VALIDATE")
+	}
+	if e&RDW_NOINTERNALPAINT != 0 {
+		parts = append(parts, "RDW_NOINTERNALPAINT")
+	}
+	if e&RDW_NOERASE != 0 {
+		parts = append(parts, "RDW_NOERASE")
+	}
+	if e&RDW_NOCHILDREN != 0 {
+		parts = append(parts, "RDW_NOCHILDREN")
+	}
+	if e&RDW_ALLCHILDREN != 0 {
+		parts = append(parts, "RDW_ALLCHILDREN")
+	}
+	if e&RDW_UPDATENOW != 0 {
+		parts = append(parts, "RDW_UPDATENOW")
+	}
+	if e&RDW_ERASENOW != 0 {
+		parts = append(parts, "RDW_ERASENOW")
+	}
+	if e&RDW_FRAME != 0 {
+		parts = append(parts, "RDW_FRAME")
+	}
+	if e&RDW_NOFRAME != 0 {
+		parts = append(parts, "RDW_NOFRAME")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type RGN_COMBINE_MODE int32
 
 const (
@@ -1133,6 +3516,26 @@ const (
 	RGN_MAX  RGN_COMBINE_MODE = 5
 )
 
+// String returns the RGN_COMBINE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RGN_COMBINE_MODE) String() string {
+	switch e {
+	case RGN_AND:
+		return "RGN_AND"
+	case RGN_OR:
+		return "RGN_OR"
+	case RGN_XOR:
+		return "RGN_XOR"
+	case RGN_DIFF:
+		return "RGN_DIFF"
+	case RGN_COPY:
+		return "RGN_COPY"
+	default:
+		return fmt.Sprintf("RGN_COMBINE_MODE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type ROP_CODE uint32
 
 const (
@@ -1155,6 +3558,67 @@ const (
 	NOMIRRORBITMAP ROP_CODE = 2147483648
 )
 
+// String returns the ROP_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ROP_CODE) String() string {
+	var parts []string
+	if e&BLACKNESS != 0 {
+		parts = append(parts, "BLACKNESS")
+	}
+	if e&NOTSRCERASE != 0 {
+		parts = append(parts, "NOTSRCERASE")
+	}
+	if e&NOTSRCCOPY != 0 {
+		parts = append(parts, "NOTSRCCOPY")
+	}
+	if e&SRCERASE != 0 {
+		parts = append(parts, "SRCERASE")
+	}
+	if e&DSTINVERT != 0 {
+		parts = append(parts, "DSTINVERT")
+	}
+	if e&PATINVERT != 0 {
+		parts = append(parts, "PATINVERT")
+	}
+	if e&SRCINVERT != 0 {
+		parts = append(parts, "SRCINVERT")
+	}
+	if e&SRCAND != 0 {
+		parts = append(parts, "SRCAND")
+	}
+	if e&MERGEPAINT != 0 {
+		parts = append(parts, "MERGEPAINT")
+	}
+	if e&MERGECOPY != 0 {
+		parts = append(parts, "MERGECOPY")
+	}
+	if e&SRCCOPY != 0 {
+		parts = append(parts, "SRCCOPY")
+	}
+	if e&SRCPAINT != 0 {
+		parts = append(parts, "SRCPAINT")
+	}
+	if e&PATCOPY != 0 {
+		parts = append(parts, "PATCOPY")
+	}
+	if e&PATPAINT != 0 {
+		parts = append(parts, "PATPAINT")
+	}
+	if e&WHITENESS != 0 {
+		parts = append(parts, "WHITENESS")
+	}
+	if e&CAPTUREBLT != 0 {
+		parts = append(parts, "CAPTUREBLT")
+	}
+	if e&NOMIRRORBITMAP != 0 {
+		parts = append(parts, "NOMIRRORBITMAP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SET_BOUNDS_RECT_FLAGS uint32
 
 const (
@@ -1163,6 +3627,23 @@ const (
 	DCB_ENABLE     SET_BOUNDS_RECT_FLAGS = 4
 	DCB_RESET      SET_BOUNDS_RECT_FLAGS = 1
 )
+
+// String returns the SET_BOUNDS_RECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SET_BOUNDS_RECT_FLAGS) String() string {
+	switch e {
+	case DCB_ACCUMULATE:
+		return "DCB_ACCUMULATE"
+	case DCB_DISABLE:
+		return "DCB_DISABLE"
+	case DCB_ENABLE:
+		return "DCB_ENABLE"
+	case DCB_RESET:
+		return "DCB_RESET"
+	default:
+		return fmt.Sprintf("SET_BOUNDS_RECT_FLAGS(%d)", uint32(e))
+	}
+}
 
 type STRETCH_BLT_MODE int32
 
@@ -1177,6 +3658,23 @@ const (
 	WHITEONBLACK        STRETCH_BLT_MODE = 2
 )
 
+// String returns the STRETCH_BLT_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STRETCH_BLT_MODE) String() string {
+	switch e {
+	case BLACKONWHITE:
+		return "BLACKONWHITE"
+	case COLORONCOLOR:
+		return "COLORONCOLOR"
+	case HALFTONE:
+		return "HALFTONE"
+	case STRETCH_ORSCANS:
+		return "STRETCH_ORSCANS"
+	default:
+		return fmt.Sprintf("STRETCH_BLT_MODE(%d)", int32(e))
+	}
+}
+
 type SYSTEM_PALETTE_USE uint32
 
 const (
@@ -1184,6 +3682,21 @@ const (
 	SYSPAL_NOSTATIC256 SYSTEM_PALETTE_USE = 3
 	SYSPAL_STATIC      SYSTEM_PALETTE_USE = 1
 )
+
+// String returns the SYSTEM_PALETTE_USE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEM_PALETTE_USE) String() string {
+	switch e {
+	case SYSPAL_NOSTATIC:
+		return "SYSPAL_NOSTATIC"
+	case SYSPAL_NOSTATIC256:
+		return "SYSPAL_NOSTATIC256"
+	case SYSPAL_STATIC:
+		return "SYSPAL_STATIC"
+	default:
+		return fmt.Sprintf("SYSTEM_PALETTE_USE(%d)", uint32(e))
+	}
+}
 
 type SYS_COLOR_INDEX int32
 
@@ -1226,6 +3739,76 @@ const (
 	COLOR_BTNHILIGHT              SYS_COLOR_INDEX = 20
 )
 
+// String returns the SYS_COLOR_INDEX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYS_COLOR_INDEX) String() string {
+	switch e {
+	case COLOR_SCROLLBAR:
+		return "COLOR_SCROLLBAR"
+	case COLOR_BACKGROUND:
+		return "COLOR_BACKGROUND"
+	case COLOR_ACTIVECAPTION:
+		return "COLOR_ACTIVECAPTION"
+	case COLOR_INACTIVECAPTION:
+		return "COLOR_INACTIVECAPTION"
+	case COLOR_MENU:
+		return "COLOR_MENU"
+	case COLOR_WINDOW:
+		return "COLOR_WINDOW"
+	case COLOR_WINDOWFRAME:
+		return "COLOR_WINDOWFRAME"
+	case COLOR_MENUTEXT:
+		return "COLOR_MENUTEXT"
+	case COLOR_WINDOWTEXT:
+		return "COLOR_WINDOWTEXT"
+	case COLOR_CAPTIONTEXT:
+		return "COLOR_CAPTIONTEXT"
+	case COLOR_ACTIVEBORDER:
+		return "COLOR_ACTIVEBORDER"
+	case COLOR_INACTIVEBORDER:
+		return "COLOR_INACTIVEBORDER"
+	case COLOR_APPWORKSPACE:
+		return "COLOR_APPWORKSPACE"
+	case COLOR_HIGHLIGHT:
+		return "COLOR_HIGHLIGHT"
+	case COLOR_HIGHLIGHTTEXT:
+		return "COLOR_HIGHLIGHTTEXT"
+	case COLOR_BTNFACE:
+		return "COLOR_BTNFACE"
+	case COLOR_BTNSHADOW:
+		return "COLOR_BTNSHADOW"
+	case COLOR_GRAYTEXT:
+		return "COLOR_GRAYTEXT"
+	case COLOR_BTNTEXT:
+		return "COLOR_BTNTEXT"
+	case COLOR_INACTIVECAPTIONTEXT:
+		return "COLOR_INACTIVECAPTIONTEXT"
+	case COLOR_BTNHIGHLIGHT:
+		return "COLOR_BTNHIGHLIGHT"
+	case COLOR_3DDKSHADOW:
+		return "COLOR_3DDKSHADOW"
+	case COLOR_3DLIGHT:
+		return "COLOR_3DLIGHT"
+	case COLOR_INFOTEXT:
+		return "COLOR_INFOTEXT"
+	case COLOR_INFOBK:
+		return "COLOR_INFOBK"
+	case COLOR_HOTLIGHT:
+		return "COLOR_HOTLIGHT"
+	case COLOR_GRADIENTACTIVECAPTION:
+		return "COLOR_GRADIENTACTIVECAPTION"
+	case COLOR_GRADIENTINACTIVECAPTION:
+		return "COLOR_GRADIENTINACTIVECAPTION"
+	case COLOR_MENUHILIGHT:
+		return "COLOR_MENUHILIGHT"
+	case COLOR_MENUBAR:
+		return "COLOR_MENUBAR"
+	default:
+		return fmt.Sprintf("SYS_COLOR_INDEX(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TEXT_ALIGN_OPTIONS uint32
 
 const (
@@ -1247,6 +3830,50 @@ const (
 	VTA_TOP       TEXT_ALIGN_OPTIONS = 0
 )
 
+// String returns the TEXT_ALIGN_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TEXT_ALIGN_OPTIONS) String() string {
+	var parts []string
+	if e&TA_UPDATECP != 0 {
+		parts = append(parts, "TA_UPDATECP")
+	}
+	if e&TA_RIGHT != 0 {
+		parts = append(parts, "TA_RIGHT")
+	}
+	if e&TA_CENTER != 0 {
+		parts = append(parts, "TA_CENTER")
+	}
+	if e&TA_BOTTOM != 0 {
+		parts = append(parts, "TA_BOTTOM")
+	}
+	if e&TA_BASELINE != 0 {
+		parts = append(parts, "TA_BASELINE")
+	}
+	if e&TA_RTLREADING != 0 {
+		parts = append(parts, "TA_RTLREADING")
+	}
+	if e&TA_MASK != 0 {
+		parts = append(parts, "TA_MASK")
+	}
+	if e&VTA_BASELINE != 0 {
+		parts = append(parts, "VTA_BASELINE")
+	}
+	if e&VTA_LEFT != 0 {
+		parts = append(parts, "VTA_LEFT")
+	}
+	if e&VTA_CENTER != 0 {
+		parts = append(parts, "VTA_CENTER")
+	}
+	if e&VTA_BOTTOM != 0 {
+		parts = append(parts, "VTA_BOTTOM")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type TMPF_FLAGS uint8
 
 const (
@@ -1256,6 +3883,29 @@ const (
 	TMPF_TRUETYPE    TMPF_FLAGS = 4
 )
 
+// String returns the TMPF_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TMPF_FLAGS) String() string {
+	var parts []string
+	if e&TMPF_FIXED_PITCH != 0 {
+		parts = append(parts, "TMPF_FIXED_PITCH")
+	}
+	if e&TMPF_VECTOR != 0 {
+		parts = append(parts, "TMPF_VECTOR")
+	}
+	if e&TMPF_DEVICE != 0 {
+		parts = append(parts, "TMPF_DEVICE")
+	}
+	if e&TMPF_TRUETYPE != 0 {
+		parts = append(parts, "TMPF_TRUETYPE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type TTEMBED_FLAGS uint32
 
 const (
@@ -1265,9 +3915,45 @@ const (
 	TTEMBED_TTCOMPRESSED TTEMBED_FLAGS = 4
 )
 
+// String returns the TTEMBED_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TTEMBED_FLAGS) String() string {
+	var parts []string
+	if e&TTEMBED_EMBEDEUDC != 0 {
+		parts = append(parts, "TTEMBED_EMBEDEUDC")
+	}
+	if e&TTEMBED_SUBSET != 0 {
+		parts = append(parts, "TTEMBED_SUBSET")
+	}
+	if e&TTEMBED_TTCOMPRESSED != 0 {
+		parts = append(parts, "TTEMBED_TTCOMPRESSED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type TTLOAD_EMBEDDED_FONT_STATUS uint32
 
 const (
 	TTLOAD_FONT_SUBSETTED     TTLOAD_EMBEDDED_FONT_STATUS = 1
 	TTLOAD_FONT_IN_SYSSTARTUP TTLOAD_EMBEDDED_FONT_STATUS = 2
 )
+
+// String returns the TTLOAD_EMBEDDED_FONT_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TTLOAD_EMBEDDED_FONT_STATUS) String() string {
+	var parts []string
+	if e&TTLOAD_FONT_SUBSETTED != 0 {
+		parts = append(parts, "TTLOAD_FONT_SUBSETTED")
+	}
+	if e&TTLOAD_FONT_IN_SYSSTARTUP != 0 {
+		parts = append(parts, "TTLOAD_FONT_IN_SYSSTARTUP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

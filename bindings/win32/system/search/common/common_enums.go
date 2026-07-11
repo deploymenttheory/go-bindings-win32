@@ -4,6 +4,10 @@
 
 package common
 
+import (
+	"fmt"
+)
+
 // CONDITION_OPERATION: https://learn.microsoft.com/windows/win32/api/structuredquerycondition/ne-structuredquerycondition-condition_operation
 type CONDITION_OPERATION int32
 
@@ -25,6 +29,45 @@ const (
 	COP_APPLICATION_SPECIFIC CONDITION_OPERATION = 14
 )
 
+// String returns the CONDITION_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONDITION_OPERATION) String() string {
+	switch e {
+	case COP_IMPLICIT:
+		return "COP_IMPLICIT"
+	case COP_EQUAL:
+		return "COP_EQUAL"
+	case COP_NOTEQUAL:
+		return "COP_NOTEQUAL"
+	case COP_LESSTHAN:
+		return "COP_LESSTHAN"
+	case COP_GREATERTHAN:
+		return "COP_GREATERTHAN"
+	case COP_LESSTHANOREQUAL:
+		return "COP_LESSTHANOREQUAL"
+	case COP_GREATERTHANOREQUAL:
+		return "COP_GREATERTHANOREQUAL"
+	case COP_VALUE_STARTSWITH:
+		return "COP_VALUE_STARTSWITH"
+	case COP_VALUE_ENDSWITH:
+		return "COP_VALUE_ENDSWITH"
+	case COP_VALUE_CONTAINS:
+		return "COP_VALUE_CONTAINS"
+	case COP_VALUE_NOTCONTAINS:
+		return "COP_VALUE_NOTCONTAINS"
+	case COP_DOSWILDCARDS:
+		return "COP_DOSWILDCARDS"
+	case COP_WORD_EQUAL:
+		return "COP_WORD_EQUAL"
+	case COP_WORD_STARTSWITH:
+		return "COP_WORD_STARTSWITH"
+	case COP_APPLICATION_SPECIFIC:
+		return "COP_APPLICATION_SPECIFIC"
+	default:
+		return fmt.Sprintf("CONDITION_OPERATION(%d)", int32(e))
+	}
+}
+
 // CONDITION_TYPE: https://learn.microsoft.com/windows/win32/api/structuredquerycondition/ne-structuredquerycondition-condition_type
 type CONDITION_TYPE int32
 
@@ -34,3 +77,20 @@ const (
 	CT_NOT_CONDITION  CONDITION_TYPE = 2
 	CT_LEAF_CONDITION CONDITION_TYPE = 3
 )
+
+// String returns the CONDITION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONDITION_TYPE) String() string {
+	switch e {
+	case CT_AND_CONDITION:
+		return "CT_AND_CONDITION"
+	case CT_OR_CONDITION:
+		return "CT_OR_CONDITION"
+	case CT_NOT_CONDITION:
+		return "CT_NOT_CONDITION"
+	case CT_LEAF_CONDITION:
+		return "CT_LEAF_CONDITION"
+	default:
+		return fmt.Sprintf("CONDITION_TYPE(%d)", int32(e))
+	}
+}

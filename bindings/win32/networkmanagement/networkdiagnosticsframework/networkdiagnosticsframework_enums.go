@@ -4,6 +4,10 @@
 
 package networkdiagnosticsframework
 
+import (
+	"fmt"
+)
+
 // ATTRIBUTE_TYPE: https://learn.microsoft.com/windows/win32/api/ndattrib/ne-ndattrib-attribute_type
 type ATTRIBUTE_TYPE int32
 
@@ -25,6 +29,45 @@ const (
 	AT_OCTET_STRING ATTRIBUTE_TYPE = 14
 )
 
+// String returns the ATTRIBUTE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ATTRIBUTE_TYPE) String() string {
+	switch e {
+	case AT_INVALID:
+		return "AT_INVALID"
+	case AT_BOOLEAN:
+		return "AT_BOOLEAN"
+	case AT_INT8:
+		return "AT_INT8"
+	case AT_UINT8:
+		return "AT_UINT8"
+	case AT_INT16:
+		return "AT_INT16"
+	case AT_UINT16:
+		return "AT_UINT16"
+	case AT_INT32:
+		return "AT_INT32"
+	case AT_UINT32:
+		return "AT_UINT32"
+	case AT_INT64:
+		return "AT_INT64"
+	case AT_UINT64:
+		return "AT_UINT64"
+	case AT_STRING:
+		return "AT_STRING"
+	case AT_GUID:
+		return "AT_GUID"
+	case AT_LIFE_TIME:
+		return "AT_LIFE_TIME"
+	case AT_SOCKADDR:
+		return "AT_SOCKADDR"
+	case AT_OCTET_STRING:
+		return "AT_OCTET_STRING"
+	default:
+		return fmt.Sprintf("ATTRIBUTE_TYPE(%d)", int32(e))
+	}
+}
+
 // DIAGNOSIS_STATUS: https://learn.microsoft.com/windows/win32/api/ndhelper/ne-ndhelper-diagnosis_status
 type DIAGNOSIS_STATUS int32
 
@@ -36,6 +79,27 @@ const (
 	DS_DEFERRED        DIAGNOSIS_STATUS = 4
 	DS_PASSTHROUGH     DIAGNOSIS_STATUS = 5
 )
+
+// String returns the DIAGNOSIS_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIAGNOSIS_STATUS) String() string {
+	switch e {
+	case DS_NOT_IMPLEMENTED:
+		return "DS_NOT_IMPLEMENTED"
+	case DS_CONFIRMED:
+		return "DS_CONFIRMED"
+	case DS_REJECTED:
+		return "DS_REJECTED"
+	case DS_INDETERMINATE:
+		return "DS_INDETERMINATE"
+	case DS_DEFERRED:
+		return "DS_DEFERRED"
+	case DS_PASSTHROUGH:
+		return "DS_PASSTHROUGH"
+	default:
+		return fmt.Sprintf("DIAGNOSIS_STATUS(%d)", int32(e))
+	}
+}
 
 // PROBLEM_TYPE: https://learn.microsoft.com/windows/win32/api/ndhelper/ne-ndhelper-problem_type
 type PROBLEM_TYPE int32
@@ -50,6 +114,29 @@ const (
 	PT_UP_STREAM_UTILIZATION PROBLEM_TYPE = 32
 )
 
+// String returns the PROBLEM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROBLEM_TYPE) String() string {
+	switch e {
+	case PT_INVALID:
+		return "PT_INVALID"
+	case PT_LOW_HEALTH:
+		return "PT_LOW_HEALTH"
+	case PT_LOWER_HEALTH:
+		return "PT_LOWER_HEALTH"
+	case PT_DOWN_STREAM_HEALTH:
+		return "PT_DOWN_STREAM_HEALTH"
+	case PT_HIGH_UTILIZATION:
+		return "PT_HIGH_UTILIZATION"
+	case PT_HIGHER_UTILIZATION:
+		return "PT_HIGHER_UTILIZATION"
+	case PT_UP_STREAM_UTILIZATION:
+		return "PT_UP_STREAM_UTILIZATION"
+	default:
+		return fmt.Sprintf("PROBLEM_TYPE(%d)", int32(e))
+	}
+}
+
 // REPAIR_RISK: https://learn.microsoft.com/windows/win32/api/ndattrib/ne-ndattrib-repair_risk
 type REPAIR_RISK int32
 
@@ -58,6 +145,21 @@ const (
 	RR_ROLLBACK   REPAIR_RISK = 1
 	RR_NORISK     REPAIR_RISK = 2
 )
+
+// String returns the REPAIR_RISK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REPAIR_RISK) String() string {
+	switch e {
+	case RR_NOROLLBACK:
+		return "RR_NOROLLBACK"
+	case RR_ROLLBACK:
+		return "RR_ROLLBACK"
+	case RR_NORISK:
+		return "RR_NORISK"
+	default:
+		return fmt.Sprintf("REPAIR_RISK(%d)", int32(e))
+	}
+}
 
 // REPAIR_SCOPE: https://learn.microsoft.com/windows/win32/api/ndattrib/ne-ndattrib-repair_scope
 type REPAIR_SCOPE int32
@@ -68,6 +170,23 @@ const (
 	RS_APPLICATION REPAIR_SCOPE = 2
 	RS_PROCESS     REPAIR_SCOPE = 3
 )
+
+// String returns the REPAIR_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REPAIR_SCOPE) String() string {
+	switch e {
+	case RS_SYSTEM:
+		return "RS_SYSTEM"
+	case RS_USER:
+		return "RS_USER"
+	case RS_APPLICATION:
+		return "RS_APPLICATION"
+	case RS_PROCESS:
+		return "RS_PROCESS"
+	default:
+		return fmt.Sprintf("REPAIR_SCOPE(%d)", int32(e))
+	}
+}
 
 // REPAIR_STATUS: https://learn.microsoft.com/windows/win32/api/ndhelper/ne-ndhelper-repair_status
 type REPAIR_STATUS int32
@@ -80,6 +199,25 @@ const (
 	RS_USER_ACTION     REPAIR_STATUS = 4
 )
 
+// String returns the REPAIR_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REPAIR_STATUS) String() string {
+	switch e {
+	case RS_NOT_IMPLEMENTED:
+		return "RS_NOT_IMPLEMENTED"
+	case RS_REPAIRED:
+		return "RS_REPAIRED"
+	case RS_UNREPAIRED:
+		return "RS_UNREPAIRED"
+	case RS_DEFERRED:
+		return "RS_DEFERRED"
+	case RS_USER_ACTION:
+		return "RS_USER_ACTION"
+	default:
+		return fmt.Sprintf("REPAIR_STATUS(%d)", int32(e))
+	}
+}
+
 // UI_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/ndattrib/ne-ndattrib-ui_info_type
 type UI_INFO_TYPE int32
 
@@ -90,3 +228,22 @@ const (
 	UIT_HELP_PANE     UI_INFO_TYPE = 3
 	UIT_DUI           UI_INFO_TYPE = 4
 )
+
+// String returns the UI_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_INFO_TYPE) String() string {
+	switch e {
+	case UIT_INVALID:
+		return "UIT_INVALID"
+	case UIT_NONE:
+		return "UIT_NONE"
+	case UIT_SHELL_COMMAND:
+		return "UIT_SHELL_COMMAND"
+	case UIT_HELP_PANE:
+		return "UIT_HELP_PANE"
+	case UIT_DUI:
+		return "UIT_DUI"
+	default:
+		return fmt.Sprintf("UI_INFO_TYPE(%d)", int32(e))
+	}
+}

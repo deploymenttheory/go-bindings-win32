@@ -4,6 +4,10 @@
 
 package updateagent
 
+import (
+	"fmt"
+)
+
 // AddServiceFlag: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-addserviceflag
 type AddServiceFlag int32
 
@@ -12,6 +16,21 @@ const (
 	AsfAllowOnlineRegistration  AddServiceFlag = 2
 	AsfRegisterServiceWithAU    AddServiceFlag = 4
 )
+
+// String returns the AddServiceFlag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AddServiceFlag) String() string {
+	switch e {
+	case AsfAllowPendingRegistration:
+		return "AsfAllowPendingRegistration"
+	case AsfAllowOnlineRegistration:
+		return "AsfAllowOnlineRegistration"
+	case AsfRegisterServiceWithAU:
+		return "AsfRegisterServiceWithAU"
+	default:
+		return fmt.Sprintf("AddServiceFlag(%d)", int32(e))
+	}
+}
 
 // AutoDownloadMode: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-autodownloadmode
 type AutoDownloadMode int32
@@ -22,6 +41,21 @@ const (
 	AdAlwaysAutoDownload     AutoDownloadMode = 2
 )
 
+// String returns the AutoDownloadMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AutoDownloadMode) String() string {
+	switch e {
+	case AdLetWindowsUpdateDecide:
+		return "AdLetWindowsUpdateDecide"
+	case AdNeverAutoDownload:
+		return "AdNeverAutoDownload"
+	case AdAlwaysAutoDownload:
+		return "AdAlwaysAutoDownload"
+	default:
+		return fmt.Sprintf("AutoDownloadMode(%d)", int32(e))
+	}
+}
+
 // AutoSelectionMode: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-autoselectionmode
 type AutoSelectionMode int32
 
@@ -31,6 +65,23 @@ const (
 	AsNeverAutoSelect        AutoSelectionMode = 2
 	AsAlwaysAutoSelect       AutoSelectionMode = 3
 )
+
+// String returns the AutoSelectionMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AutoSelectionMode) String() string {
+	switch e {
+	case AsLetWindowsUpdateDecide:
+		return "AsLetWindowsUpdateDecide"
+	case AsAutoSelectIfDownloaded:
+		return "AsAutoSelectIfDownloaded"
+	case AsNeverAutoSelect:
+		return "AsNeverAutoSelect"
+	case AsAlwaysAutoSelect:
+		return "AsAlwaysAutoSelect"
+	default:
+		return fmt.Sprintf("AutoSelectionMode(%d)", int32(e))
+	}
+}
 
 // AutomaticUpdatesNotificationLevel: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-automaticupdatesnotificationlevel
 type AutomaticUpdatesNotificationLevel int32
@@ -43,6 +94,25 @@ const (
 	AunlScheduledInstallation    AutomaticUpdatesNotificationLevel = 4
 )
 
+// String returns the AutomaticUpdatesNotificationLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AutomaticUpdatesNotificationLevel) String() string {
+	switch e {
+	case AunlNotConfigured:
+		return "AunlNotConfigured"
+	case AunlDisabled:
+		return "AunlDisabled"
+	case AunlNotifyBeforeDownload:
+		return "AunlNotifyBeforeDownload"
+	case AunlNotifyBeforeInstallation:
+		return "AunlNotifyBeforeInstallation"
+	case AunlScheduledInstallation:
+		return "AunlScheduledInstallation"
+	default:
+		return fmt.Sprintf("AutomaticUpdatesNotificationLevel(%d)", int32(e))
+	}
+}
+
 // AutomaticUpdatesPermissionType: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-automaticupdatespermissiontype
 type AutomaticUpdatesPermissionType int32
 
@@ -53,6 +123,25 @@ const (
 	AuptSetFeaturedUpdatesEnabled    AutomaticUpdatesPermissionType = 4
 	AuptSetNonAdministratorsElevated AutomaticUpdatesPermissionType = 5
 )
+
+// String returns the AutomaticUpdatesPermissionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AutomaticUpdatesPermissionType) String() string {
+	switch e {
+	case AuptSetNotificationLevel:
+		return "AuptSetNotificationLevel"
+	case AuptDisableAutomaticUpdates:
+		return "AuptDisableAutomaticUpdates"
+	case AuptSetIncludeRecommendedUpdates:
+		return "AuptSetIncludeRecommendedUpdates"
+	case AuptSetFeaturedUpdatesEnabled:
+		return "AuptSetFeaturedUpdatesEnabled"
+	case AuptSetNonAdministratorsElevated:
+		return "AuptSetNonAdministratorsElevated"
+	default:
+		return fmt.Sprintf("AutomaticUpdatesPermissionType(%d)", int32(e))
+	}
+}
 
 // AutomaticUpdatesScheduledInstallationDay: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-automaticupdatesscheduledinstallationday
 type AutomaticUpdatesScheduledInstallationDay int32
@@ -68,6 +157,31 @@ const (
 	AusidEverySaturday  AutomaticUpdatesScheduledInstallationDay = 7
 )
 
+// String returns the AutomaticUpdatesScheduledInstallationDay constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AutomaticUpdatesScheduledInstallationDay) String() string {
+	switch e {
+	case AusidEveryDay:
+		return "AusidEveryDay"
+	case AusidEverySunday:
+		return "AusidEverySunday"
+	case AusidEveryMonday:
+		return "AusidEveryMonday"
+	case AusidEveryTuesday:
+		return "AusidEveryTuesday"
+	case AusidEveryWednesday:
+		return "AusidEveryWednesday"
+	case AusidEveryThursday:
+		return "AusidEveryThursday"
+	case AusidEveryFriday:
+		return "AusidEveryFriday"
+	case AusidEverySaturday:
+		return "AusidEverySaturday"
+	default:
+		return fmt.Sprintf("AutomaticUpdatesScheduledInstallationDay(%d)", int32(e))
+	}
+}
+
 // AutomaticUpdatesUserType: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-automaticupdatesusertype
 type AutomaticUpdatesUserType int32
 
@@ -75,6 +189,19 @@ const (
 	AuutCurrentUser        AutomaticUpdatesUserType = 1
 	AuutLocalAdministrator AutomaticUpdatesUserType = 2
 )
+
+// String returns the AutomaticUpdatesUserType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AutomaticUpdatesUserType) String() string {
+	switch e {
+	case AuutCurrentUser:
+		return "AuutCurrentUser"
+	case AuutLocalAdministrator:
+		return "AuutLocalAdministrator"
+	default:
+		return fmt.Sprintf("AutomaticUpdatesUserType(%d)", int32(e))
+	}
+}
 
 // DeploymentAction: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-deploymentaction
 type DeploymentAction int32
@@ -87,6 +214,25 @@ const (
 	DaOptionalInstallation DeploymentAction = 4
 )
 
+// String returns the DeploymentAction constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DeploymentAction) String() string {
+	switch e {
+	case DaNone:
+		return "DaNone"
+	case DaInstallation:
+		return "DaInstallation"
+	case DaUninstallation:
+		return "DaUninstallation"
+	case DaDetection:
+		return "DaDetection"
+	case DaOptionalInstallation:
+		return "DaOptionalInstallation"
+	default:
+		return fmt.Sprintf("DeploymentAction(%d)", int32(e))
+	}
+}
+
 // DownloadPhase: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-downloadphase
 type DownloadPhase int32
 
@@ -95,6 +241,21 @@ const (
 	DphDownloading  DownloadPhase = 2
 	DphVerifying    DownloadPhase = 3
 )
+
+// String returns the DownloadPhase constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DownloadPhase) String() string {
+	switch e {
+	case DphInitializing:
+		return "DphInitializing"
+	case DphDownloading:
+		return "DphDownloading"
+	case DphVerifying:
+		return "DphVerifying"
+	default:
+		return fmt.Sprintf("DownloadPhase(%d)", int32(e))
+	}
+}
 
 // DownloadPriority: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-downloadpriority
 type DownloadPriority int32
@@ -106,12 +267,42 @@ const (
 	DpExtraHigh DownloadPriority = 4
 )
 
+// String returns the DownloadPriority constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DownloadPriority) String() string {
+	switch e {
+	case DpLow:
+		return "DpLow"
+	case DpNormal:
+		return "DpNormal"
+	case DpHigh:
+		return "DpHigh"
+	case DpExtraHigh:
+		return "DpExtraHigh"
+	default:
+		return fmt.Sprintf("DownloadPriority(%d)", int32(e))
+	}
+}
+
 type DownloadType int32
 
 const (
 	DownloadTypeFull               DownloadType = 0
 	DownloadTypeUpdateBootstrapper DownloadType = 1
 )
+
+// String returns the DownloadType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DownloadType) String() string {
+	switch e {
+	case DownloadTypeFull:
+		return "DownloadTypeFull"
+	case DownloadTypeUpdateBootstrapper:
+		return "DownloadTypeUpdateBootstrapper"
+	default:
+		return fmt.Sprintf("DownloadType(%d)", int32(e))
+	}
+}
 
 // InstallationImpact: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-installationimpact
 type InstallationImpact int32
@@ -122,6 +313,21 @@ const (
 	IiRequiresExclusiveHandling InstallationImpact = 2
 )
 
+// String returns the InstallationImpact constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InstallationImpact) String() string {
+	switch e {
+	case IiNormal:
+		return "IiNormal"
+	case IiMinor:
+		return "IiMinor"
+	case IiRequiresExclusiveHandling:
+		return "IiRequiresExclusiveHandling"
+	default:
+		return fmt.Sprintf("InstallationImpact(%d)", int32(e))
+	}
+}
+
 // InstallationRebootBehavior: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-installationrebootbehavior
 type InstallationRebootBehavior int32
 
@@ -130,6 +336,21 @@ const (
 	IrbAlwaysRequiresReboot InstallationRebootBehavior = 1
 	IrbCanRequestReboot     InstallationRebootBehavior = 2
 )
+
+// String returns the InstallationRebootBehavior constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InstallationRebootBehavior) String() string {
+	switch e {
+	case IrbNeverReboots:
+		return "IrbNeverReboots"
+	case IrbAlwaysRequiresReboot:
+		return "IrbAlwaysRequiresReboot"
+	case IrbCanRequestReboot:
+		return "IrbCanRequestReboot"
+	default:
+		return fmt.Sprintf("InstallationRebootBehavior(%d)", int32(e))
+	}
+}
 
 // OperationResultCode: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-operationresultcode
 type OperationResultCode int32
@@ -143,6 +364,27 @@ const (
 	OrcAborted             OperationResultCode = 5
 )
 
+// String returns the OperationResultCode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OperationResultCode) String() string {
+	switch e {
+	case OrcNotStarted:
+		return "OrcNotStarted"
+	case OrcInProgress:
+		return "OrcInProgress"
+	case OrcSucceeded:
+		return "OrcSucceeded"
+	case OrcSucceededWithErrors:
+		return "OrcSucceededWithErrors"
+	case OrcFailed:
+		return "OrcFailed"
+	case OrcAborted:
+		return "OrcAborted"
+	default:
+		return fmt.Sprintf("OperationResultCode(%d)", int32(e))
+	}
+}
+
 // SearchScope: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-searchscope
 type SearchScope int32
 
@@ -155,6 +397,27 @@ const (
 	SearchScopeAllUsers              SearchScope = 5
 )
 
+// String returns the SearchScope constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SearchScope) String() string {
+	switch e {
+	case SearchScopeDefault:
+		return "SearchScopeDefault"
+	case SearchScopeMachineOnly:
+		return "SearchScopeMachineOnly"
+	case SearchScopeCurrentUserOnly:
+		return "SearchScopeCurrentUserOnly"
+	case SearchScopeMachineAndCurrentUser:
+		return "SearchScopeMachineAndCurrentUser"
+	case SearchScopeMachineAndAllUsers:
+		return "SearchScopeMachineAndAllUsers"
+	case SearchScopeAllUsers:
+		return "SearchScopeAllUsers"
+	default:
+		return fmt.Sprintf("SearchScope(%d)", int32(e))
+	}
+}
+
 // ServerSelection: https://learn.microsoft.com/windows/win32/api/wuapicommon/ne-wuapicommon-serverselection
 type ServerSelection int32
 
@@ -164,6 +427,23 @@ const (
 	SsWindowsUpdate ServerSelection = 2
 	SsOthers        ServerSelection = 3
 )
+
+// String returns the ServerSelection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ServerSelection) String() string {
+	switch e {
+	case SsDefault:
+		return "SsDefault"
+	case SsManagedServer:
+		return "SsManagedServer"
+	case SsWindowsUpdate:
+		return "SsWindowsUpdate"
+	case SsOthers:
+		return "SsOthers"
+	default:
+		return fmt.Sprintf("ServerSelection(%d)", int32(e))
+	}
+}
 
 // UpdateExceptionContext: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-updateexceptioncontext
 type UpdateExceptionContext int32
@@ -175,12 +455,40 @@ const (
 	UecSearchIncomplete UpdateExceptionContext = 4
 )
 
+// String returns the UpdateExceptionContext constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UpdateExceptionContext) String() string {
+	switch e {
+	case UecGeneral:
+		return "UecGeneral"
+	case UecWindowsDriver:
+		return "UecWindowsDriver"
+	case UecWindowsInstaller:
+		return "UecWindowsInstaller"
+	case UecSearchIncomplete:
+		return "UecSearchIncomplete"
+	default:
+		return fmt.Sprintf("UpdateExceptionContext(%d)", int32(e))
+	}
+}
+
 // UpdateLockdownOption: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-updatelockdownoption
 type UpdateLockdownOption int32
 
 const (
 	UloForWebsiteAccess UpdateLockdownOption = 1
 )
+
+// String returns the UpdateLockdownOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UpdateLockdownOption) String() string {
+	switch e {
+	case UloForWebsiteAccess:
+		return "UloForWebsiteAccess"
+	default:
+		return fmt.Sprintf("UpdateLockdownOption(%d)", int32(e))
+	}
+}
 
 // UpdateOperation: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-updateoperation
 type UpdateOperation int32
@@ -190,12 +498,36 @@ const (
 	UoUninstallation UpdateOperation = 2
 )
 
+// String returns the UpdateOperation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UpdateOperation) String() string {
+	switch e {
+	case UoInstallation:
+		return "UoInstallation"
+	case UoUninstallation:
+		return "UoUninstallation"
+	default:
+		return fmt.Sprintf("UpdateOperation(%d)", int32(e))
+	}
+}
+
 // UpdateServiceOption: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-updateserviceoption
 type UpdateServiceOption int32
 
 const (
 	UsoNonVolatileService UpdateServiceOption = 1
 )
+
+// String returns the UpdateServiceOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UpdateServiceOption) String() string {
+	switch e {
+	case UsoNonVolatileService:
+		return "UsoNonVolatileService"
+	default:
+		return fmt.Sprintf("UpdateServiceOption(%d)", int32(e))
+	}
+}
 
 // UpdateServiceRegistrationState: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-updateserviceregistrationstate
 type UpdateServiceRegistrationState int32
@@ -206,6 +538,21 @@ const (
 	UsrsRegistered          UpdateServiceRegistrationState = 3
 )
 
+// String returns the UpdateServiceRegistrationState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UpdateServiceRegistrationState) String() string {
+	switch e {
+	case UsrsNotRegistered:
+		return "UsrsNotRegistered"
+	case UsrsRegistrationPending:
+		return "UsrsRegistrationPending"
+	case UsrsRegistered:
+		return "UsrsRegistered"
+	default:
+		return fmt.Sprintf("UpdateServiceRegistrationState(%d)", int32(e))
+	}
+}
+
 // UpdateType: https://learn.microsoft.com/windows/win32/api/wuapi/ne-wuapi-updatetype
 type UpdateType int32
 
@@ -213,3 +560,16 @@ const (
 	UtSoftware UpdateType = 1
 	UtDriver   UpdateType = 2
 )
+
+// String returns the UpdateType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UpdateType) String() string {
+	switch e {
+	case UtSoftware:
+		return "UtSoftware"
+	case UtDriver:
+		return "UtDriver"
+	default:
+		return fmt.Sprintf("UpdateType(%d)", int32(e))
+	}
+}

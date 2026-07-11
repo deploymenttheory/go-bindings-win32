@@ -4,7 +4,13 @@
 
 package interactioncontext
 
+import (
+	"fmt"
+	"strings"
+)
+
 // CROSS_SLIDE_FLAGS: https://learn.microsoft.com/windows/win32/api/interactioncontext/ne-interactioncontext-cross_slide_flags
+// Bitmask — values may be combined with |.
 type CROSS_SLIDE_FLAGS uint32
 
 const (
@@ -14,6 +20,28 @@ const (
 	CROSS_SLIDE_FLAGS_REARRANGE  CROSS_SLIDE_FLAGS = 4
 	CROSS_SLIDE_FLAGS_MAX        CROSS_SLIDE_FLAGS = 4294967295
 )
+
+// String returns the CROSS_SLIDE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CROSS_SLIDE_FLAGS) String() string {
+	var parts []string
+	if e&CROSS_SLIDE_FLAGS_SELECT != 0 {
+		parts = append(parts, "CROSS_SLIDE_FLAGS_SELECT")
+	}
+	if e&CROSS_SLIDE_FLAGS_SPEED_BUMP != 0 {
+		parts = append(parts, "CROSS_SLIDE_FLAGS_SPEED_BUMP")
+	}
+	if e&CROSS_SLIDE_FLAGS_REARRANGE != 0 {
+		parts = append(parts, "CROSS_SLIDE_FLAGS_REARRANGE")
+	}
+	if e&CROSS_SLIDE_FLAGS_MAX != 0 {
+		parts = append(parts, "CROSS_SLIDE_FLAGS_MAX")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // CROSS_SLIDE_THRESHOLD: https://learn.microsoft.com/windows/win32/api/interactioncontext/ne-interactioncontext-cross_slide_threshold
 type CROSS_SLIDE_THRESHOLD int32
@@ -27,6 +55,27 @@ const (
 	CROSS_SLIDE_THRESHOLD_MAX              CROSS_SLIDE_THRESHOLD = -1
 )
 
+// String returns the CROSS_SLIDE_THRESHOLD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CROSS_SLIDE_THRESHOLD) String() string {
+	switch e {
+	case CROSS_SLIDE_THRESHOLD_SELECT_START:
+		return "CROSS_SLIDE_THRESHOLD_SELECT_START"
+	case CROSS_SLIDE_THRESHOLD_SPEED_BUMP_START:
+		return "CROSS_SLIDE_THRESHOLD_SPEED_BUMP_START"
+	case CROSS_SLIDE_THRESHOLD_SPEED_BUMP_END:
+		return "CROSS_SLIDE_THRESHOLD_SPEED_BUMP_END"
+	case CROSS_SLIDE_THRESHOLD_REARRANGE_START:
+		return "CROSS_SLIDE_THRESHOLD_REARRANGE_START"
+	case CROSS_SLIDE_THRESHOLD_COUNT:
+		return "CROSS_SLIDE_THRESHOLD_COUNT"
+	case CROSS_SLIDE_THRESHOLD_MAX:
+		return "CROSS_SLIDE_THRESHOLD_MAX"
+	default:
+		return fmt.Sprintf("CROSS_SLIDE_THRESHOLD(%d)", int32(e))
+	}
+}
+
 type HOLD_PARAMETER int32
 
 const (
@@ -36,6 +85,25 @@ const (
 	HOLD_PARAMETER_THRESHOLD_START_DELAY HOLD_PARAMETER = 3
 	HOLD_PARAMETER_MAX                   HOLD_PARAMETER = -1
 )
+
+// String returns the HOLD_PARAMETER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HOLD_PARAMETER) String() string {
+	switch e {
+	case HOLD_PARAMETER_MIN_CONTACT_COUNT:
+		return "HOLD_PARAMETER_MIN_CONTACT_COUNT"
+	case HOLD_PARAMETER_MAX_CONTACT_COUNT:
+		return "HOLD_PARAMETER_MAX_CONTACT_COUNT"
+	case HOLD_PARAMETER_THRESHOLD_RADIUS:
+		return "HOLD_PARAMETER_THRESHOLD_RADIUS"
+	case HOLD_PARAMETER_THRESHOLD_START_DELAY:
+		return "HOLD_PARAMETER_THRESHOLD_START_DELAY"
+	case HOLD_PARAMETER_MAX:
+		return "HOLD_PARAMETER_MAX"
+	default:
+		return fmt.Sprintf("HOLD_PARAMETER(%d)", int32(e))
+	}
+}
 
 // INERTIA_PARAMETER: https://learn.microsoft.com/windows/win32/api/interactioncontext/ne-interactioncontext-inertia_parameter
 type INERTIA_PARAMETER int32
@@ -50,7 +118,31 @@ const (
 	INERTIA_PARAMETER_MAX                      INERTIA_PARAMETER = -1
 )
 
+// String returns the INERTIA_PARAMETER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INERTIA_PARAMETER) String() string {
+	switch e {
+	case INERTIA_PARAMETER_TRANSLATION_DECELERATION:
+		return "INERTIA_PARAMETER_TRANSLATION_DECELERATION"
+	case INERTIA_PARAMETER_TRANSLATION_DISPLACEMENT:
+		return "INERTIA_PARAMETER_TRANSLATION_DISPLACEMENT"
+	case INERTIA_PARAMETER_ROTATION_DECELERATION:
+		return "INERTIA_PARAMETER_ROTATION_DECELERATION"
+	case INERTIA_PARAMETER_ROTATION_ANGLE:
+		return "INERTIA_PARAMETER_ROTATION_ANGLE"
+	case INERTIA_PARAMETER_EXPANSION_DECELERATION:
+		return "INERTIA_PARAMETER_EXPANSION_DECELERATION"
+	case INERTIA_PARAMETER_EXPANSION_EXPANSION:
+		return "INERTIA_PARAMETER_EXPANSION_EXPANSION"
+	case INERTIA_PARAMETER_MAX:
+		return "INERTIA_PARAMETER_MAX"
+	default:
+		return fmt.Sprintf("INERTIA_PARAMETER(%d)", int32(e))
+	}
+}
+
 // INTERACTION_CONFIGURATION_FLAGS: https://learn.microsoft.com/windows/win32/api/interactioncontext/ne-interactioncontext-interaction_configuration_flags
+// Bitmask — values may be combined with |.
 type INTERACTION_CONFIGURATION_FLAGS uint32
 
 const (
@@ -84,6 +176,97 @@ const (
 	INTERACTION_CONFIGURATION_FLAG_MAX                                  INTERACTION_CONFIGURATION_FLAGS = 4294967295
 )
 
+// String returns the INTERACTION_CONFIGURATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERACTION_CONFIGURATION_FLAGS) String() string {
+	var parts []string
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION_TRANSLATION_X != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION_TRANSLATION_X")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION_TRANSLATION_Y != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION_TRANSLATION_Y")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION_ROTATION != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION_ROTATION")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION_SCALING != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION_SCALING")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION_TRANSLATION_INERTIA != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION_TRANSLATION_INERTIA")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION_ROTATION_INERTIA != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION_ROTATION_INERTIA")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION_SCALING_INERTIA != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION_SCALING_INERTIA")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION_RAILS_X != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION_RAILS_X")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION_RAILS_Y != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION_RAILS_Y")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION_EXACT != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION_EXACT")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MANIPULATION_MULTIPLE_FINGER_PANNING != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MANIPULATION_MULTIPLE_FINGER_PANNING")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE_HORIZONTAL != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE_HORIZONTAL")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE_SELECT != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE_SELECT")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE_SPEED_BUMP != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE_SPEED_BUMP")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE_REARRANGE != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE_REARRANGE")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE_EXACT != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_CROSS_SLIDE_EXACT")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_TAP != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_TAP")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_TAP_DOUBLE != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_TAP_DOUBLE")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_TAP_MULTIPLE_FINGER != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_TAP_MULTIPLE_FINGER")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_SECONDARY_TAP != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_SECONDARY_TAP")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_HOLD != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_HOLD")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_HOLD_MOUSE != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_HOLD_MOUSE")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_HOLD_MULTIPLE_FINGER != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_HOLD_MULTIPLE_FINGER")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_DRAG != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_DRAG")
+	}
+	if e&INTERACTION_CONFIGURATION_FLAG_MAX != 0 {
+		parts = append(parts, "INTERACTION_CONFIGURATION_FLAG_MAX")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // INTERACTION_CONTEXT_PROPERTY: https://learn.microsoft.com/windows/win32/api/interactioncontext/ne-interactioncontext-interaction_context_property
 type INTERACTION_CONTEXT_PROPERTY int32
 
@@ -94,7 +277,25 @@ const (
 	INTERACTION_CONTEXT_PROPERTY_MAX                     INTERACTION_CONTEXT_PROPERTY = -1
 )
 
+// String returns the INTERACTION_CONTEXT_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERACTION_CONTEXT_PROPERTY) String() string {
+	switch e {
+	case INTERACTION_CONTEXT_PROPERTY_MEASUREMENT_UNITS:
+		return "INTERACTION_CONTEXT_PROPERTY_MEASUREMENT_UNITS"
+	case INTERACTION_CONTEXT_PROPERTY_INTERACTION_UI_FEEDBACK:
+		return "INTERACTION_CONTEXT_PROPERTY_INTERACTION_UI_FEEDBACK"
+	case INTERACTION_CONTEXT_PROPERTY_FILTER_POINTERS:
+		return "INTERACTION_CONTEXT_PROPERTY_FILTER_POINTERS"
+	case INTERACTION_CONTEXT_PROPERTY_MAX:
+		return "INTERACTION_CONTEXT_PROPERTY_MAX"
+	default:
+		return fmt.Sprintf("INTERACTION_CONTEXT_PROPERTY(%d)", int32(e))
+	}
+}
+
 // INTERACTION_FLAGS: https://learn.microsoft.com/windows/win32/api/interactioncontext/ne-interactioncontext-interaction_flags
+// Bitmask — values may be combined with |.
 type INTERACTION_FLAGS uint32
 
 const (
@@ -105,6 +306,31 @@ const (
 	INTERACTION_FLAG_INERTIA INTERACTION_FLAGS = 8
 	INTERACTION_FLAG_MAX     INTERACTION_FLAGS = 4294967295
 )
+
+// String returns the INTERACTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERACTION_FLAGS) String() string {
+	var parts []string
+	if e&INTERACTION_FLAG_BEGIN != 0 {
+		parts = append(parts, "INTERACTION_FLAG_BEGIN")
+	}
+	if e&INTERACTION_FLAG_END != 0 {
+		parts = append(parts, "INTERACTION_FLAG_END")
+	}
+	if e&INTERACTION_FLAG_CANCEL != 0 {
+		parts = append(parts, "INTERACTION_FLAG_CANCEL")
+	}
+	if e&INTERACTION_FLAG_INERTIA != 0 {
+		parts = append(parts, "INTERACTION_FLAG_INERTIA")
+	}
+	if e&INTERACTION_FLAG_MAX != 0 {
+		parts = append(parts, "INTERACTION_FLAG_MAX")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // INTERACTION_ID: https://learn.microsoft.com/windows/win32/api/interactioncontext/ne-interactioncontext-interaction_id
 type INTERACTION_ID int32
@@ -120,6 +346,31 @@ const (
 	INTERACTION_ID_MAX           INTERACTION_ID = -1
 )
 
+// String returns the INTERACTION_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERACTION_ID) String() string {
+	switch e {
+	case INTERACTION_ID_NONE:
+		return "INTERACTION_ID_NONE"
+	case INTERACTION_ID_MANIPULATION:
+		return "INTERACTION_ID_MANIPULATION"
+	case INTERACTION_ID_TAP:
+		return "INTERACTION_ID_TAP"
+	case INTERACTION_ID_SECONDARY_TAP:
+		return "INTERACTION_ID_SECONDARY_TAP"
+	case INTERACTION_ID_HOLD:
+		return "INTERACTION_ID_HOLD"
+	case INTERACTION_ID_DRAG:
+		return "INTERACTION_ID_DRAG"
+	case INTERACTION_ID_CROSS_SLIDE:
+		return "INTERACTION_ID_CROSS_SLIDE"
+	case INTERACTION_ID_MAX:
+		return "INTERACTION_ID_MAX"
+	default:
+		return fmt.Sprintf("INTERACTION_ID(%d)", int32(e))
+	}
+}
+
 // INTERACTION_STATE: https://learn.microsoft.com/windows/win32/api/interactioncontext/ne-interactioncontext-interaction_state
 type INTERACTION_STATE int32
 
@@ -130,6 +381,23 @@ const (
 	INTERACTION_STATE_MAX                 INTERACTION_STATE = -1
 )
 
+// String returns the INTERACTION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERACTION_STATE) String() string {
+	switch e {
+	case INTERACTION_STATE_IDLE:
+		return "INTERACTION_STATE_IDLE"
+	case INTERACTION_STATE_IN_INTERACTION:
+		return "INTERACTION_STATE_IN_INTERACTION"
+	case INTERACTION_STATE_POSSIBLE_DOUBLE_TAP:
+		return "INTERACTION_STATE_POSSIBLE_DOUBLE_TAP"
+	case INTERACTION_STATE_MAX:
+		return "INTERACTION_STATE_MAX"
+	default:
+		return fmt.Sprintf("INTERACTION_STATE(%d)", int32(e))
+	}
+}
+
 // MANIPULATION_RAILS_STATE: https://learn.microsoft.com/windows/win32/api/interactioncontext/ne-interactioncontext-manipulation_rails_state
 type MANIPULATION_RAILS_STATE int32
 
@@ -139,6 +407,23 @@ const (
 	MANIPULATION_RAILS_STATE_RAILED    MANIPULATION_RAILS_STATE = 2
 	MANIPULATION_RAILS_STATE_MAX       MANIPULATION_RAILS_STATE = -1
 )
+
+// String returns the MANIPULATION_RAILS_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MANIPULATION_RAILS_STATE) String() string {
+	switch e {
+	case MANIPULATION_RAILS_STATE_UNDECIDED:
+		return "MANIPULATION_RAILS_STATE_UNDECIDED"
+	case MANIPULATION_RAILS_STATE_FREE:
+		return "MANIPULATION_RAILS_STATE_FREE"
+	case MANIPULATION_RAILS_STATE_RAILED:
+		return "MANIPULATION_RAILS_STATE_RAILED"
+	case MANIPULATION_RAILS_STATE_MAX:
+		return "MANIPULATION_RAILS_STATE_MAX"
+	default:
+		return fmt.Sprintf("MANIPULATION_RAILS_STATE(%d)", int32(e))
+	}
+}
 
 // MOUSE_WHEEL_PARAMETER: https://learn.microsoft.com/windows/win32/api/interactioncontext/ne-interactioncontext-mouse_wheel_parameter
 type MOUSE_WHEEL_PARAMETER int32
@@ -153,6 +438,29 @@ const (
 	MOUSE_WHEEL_PARAMETER_MAX                MOUSE_WHEEL_PARAMETER = -1
 )
 
+// String returns the MOUSE_WHEEL_PARAMETER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MOUSE_WHEEL_PARAMETER) String() string {
+	switch e {
+	case MOUSE_WHEEL_PARAMETER_CHAR_TRANSLATION_X:
+		return "MOUSE_WHEEL_PARAMETER_CHAR_TRANSLATION_X"
+	case MOUSE_WHEEL_PARAMETER_CHAR_TRANSLATION_Y:
+		return "MOUSE_WHEEL_PARAMETER_CHAR_TRANSLATION_Y"
+	case MOUSE_WHEEL_PARAMETER_DELTA_SCALE:
+		return "MOUSE_WHEEL_PARAMETER_DELTA_SCALE"
+	case MOUSE_WHEEL_PARAMETER_DELTA_ROTATION:
+		return "MOUSE_WHEEL_PARAMETER_DELTA_ROTATION"
+	case MOUSE_WHEEL_PARAMETER_PAGE_TRANSLATION_X:
+		return "MOUSE_WHEEL_PARAMETER_PAGE_TRANSLATION_X"
+	case MOUSE_WHEEL_PARAMETER_PAGE_TRANSLATION_Y:
+		return "MOUSE_WHEEL_PARAMETER_PAGE_TRANSLATION_Y"
+	case MOUSE_WHEEL_PARAMETER_MAX:
+		return "MOUSE_WHEEL_PARAMETER_MAX"
+	default:
+		return fmt.Sprintf("MOUSE_WHEEL_PARAMETER(%d)", int32(e))
+	}
+}
+
 type TAP_PARAMETER int32
 
 const (
@@ -161,6 +469,21 @@ const (
 	TAP_PARAMETER_MAX               TAP_PARAMETER = -1
 )
 
+// String returns the TAP_PARAMETER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAP_PARAMETER) String() string {
+	switch e {
+	case TAP_PARAMETER_MIN_CONTACT_COUNT:
+		return "TAP_PARAMETER_MIN_CONTACT_COUNT"
+	case TAP_PARAMETER_MAX_CONTACT_COUNT:
+		return "TAP_PARAMETER_MAX_CONTACT_COUNT"
+	case TAP_PARAMETER_MAX:
+		return "TAP_PARAMETER_MAX"
+	default:
+		return fmt.Sprintf("TAP_PARAMETER(%d)", int32(e))
+	}
+}
+
 type TRANSLATION_PARAMETER int32
 
 const (
@@ -168,3 +491,18 @@ const (
 	TRANSLATION_PARAMETER_MAX_CONTACT_COUNT TRANSLATION_PARAMETER = 1
 	TRANSLATION_PARAMETER_MAX               TRANSLATION_PARAMETER = -1
 )
+
+// String returns the TRANSLATION_PARAMETER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSLATION_PARAMETER) String() string {
+	switch e {
+	case TRANSLATION_PARAMETER_MIN_CONTACT_COUNT:
+		return "TRANSLATION_PARAMETER_MIN_CONTACT_COUNT"
+	case TRANSLATION_PARAMETER_MAX_CONTACT_COUNT:
+		return "TRANSLATION_PARAMETER_MAX_CONTACT_COUNT"
+	case TRANSLATION_PARAMETER_MAX:
+		return "TRANSLATION_PARAMETER_MAX"
+	default:
+		return fmt.Sprintf("TRANSLATION_PARAMETER(%d)", int32(e))
+	}
+}

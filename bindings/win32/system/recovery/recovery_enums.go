@@ -4,6 +4,11 @@
 
 package recovery
 
+import (
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type REGISTER_APPLICATION_RESTART_FLAGS uint32
 
 const (
@@ -12,3 +17,25 @@ const (
 	RESTART_NO_PATCH  REGISTER_APPLICATION_RESTART_FLAGS = 4
 	RESTART_NO_REBOOT REGISTER_APPLICATION_RESTART_FLAGS = 8
 )
+
+// String returns the REGISTER_APPLICATION_RESTART_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REGISTER_APPLICATION_RESTART_FLAGS) String() string {
+	var parts []string
+	if e&RESTART_NO_CRASH != 0 {
+		parts = append(parts, "RESTART_NO_CRASH")
+	}
+	if e&RESTART_NO_HANG != 0 {
+		parts = append(parts, "RESTART_NO_HANG")
+	}
+	if e&RESTART_NO_PATCH != 0 {
+		parts = append(parts, "RESTART_NO_PATCH")
+	}
+	if e&RESTART_NO_REBOOT != 0 {
+		parts = append(parts, "RESTART_NO_REBOOT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

@@ -4,6 +4,10 @@
 
 package shell
 
+import (
+	"fmt"
+)
+
 type CreateProcessMethod int32
 
 const (
@@ -11,3 +15,18 @@ const (
 	CpCreateProcessAsUser   CreateProcessMethod = 1
 	CpAicLaunchAdminProcess CreateProcessMethod = 2
 )
+
+// String returns the CreateProcessMethod constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CreateProcessMethod) String() string {
+	switch e {
+	case CpCreateProcess:
+		return "CpCreateProcess"
+	case CpCreateProcessAsUser:
+		return "CpCreateProcessAsUser"
+	case CpAicLaunchAdminProcess:
+		return "CpAicLaunchAdminProcess"
+	default:
+		return fmt.Sprintf("CreateProcessMethod(%d)", int32(e))
+	}
+}

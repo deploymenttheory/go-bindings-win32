@@ -4,6 +4,11 @@
 
 package windowsprogramming
 
+import (
+	"fmt"
+	"strings"
+)
+
 type CameraUIControlCaptureMode int32
 
 const (
@@ -12,6 +17,21 @@ const (
 	Video        CameraUIControlCaptureMode = 2
 )
 
+// String returns the CameraUIControlCaptureMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CameraUIControlCaptureMode) String() string {
+	switch e {
+	case PhotoOrVideo:
+		return "PhotoOrVideo"
+	case Photo:
+		return "Photo"
+	case Video:
+		return "Video"
+	default:
+		return fmt.Sprintf("CameraUIControlCaptureMode(%d)", int32(e))
+	}
+}
+
 type CameraUIControlLinearSelectionMode int32
 
 const (
@@ -19,12 +39,38 @@ const (
 	Multiple CameraUIControlLinearSelectionMode = 1
 )
 
+// String returns the CameraUIControlLinearSelectionMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CameraUIControlLinearSelectionMode) String() string {
+	switch e {
+	case Single:
+		return "Single"
+	case Multiple:
+		return "Multiple"
+	default:
+		return fmt.Sprintf("CameraUIControlLinearSelectionMode(%d)", int32(e))
+	}
+}
+
 type CameraUIControlMode int32
 
 const (
 	Browse CameraUIControlMode = 0
 	Linear CameraUIControlMode = 1
 )
+
+// String returns the CameraUIControlMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CameraUIControlMode) String() string {
+	switch e {
+	case Browse:
+		return "Browse"
+	case Linear:
+		return "Linear"
+	default:
+		return fmt.Sprintf("CameraUIControlMode(%d)", int32(e))
+	}
+}
 
 type CameraUIControlPhotoFormat int32
 
@@ -34,6 +80,21 @@ const (
 	JpegXR CameraUIControlPhotoFormat = 2
 )
 
+// String returns the CameraUIControlPhotoFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CameraUIControlPhotoFormat) String() string {
+	switch e {
+	case Jpeg:
+		return "Jpeg"
+	case Png:
+		return "Png"
+	case JpegXR:
+		return "JpegXR"
+	default:
+		return fmt.Sprintf("CameraUIControlPhotoFormat(%d)", int32(e))
+	}
+}
+
 type CameraUIControlVideoFormat int32
 
 const (
@@ -41,12 +102,38 @@ const (
 	Wmv CameraUIControlVideoFormat = 1
 )
 
+// String returns the CameraUIControlVideoFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CameraUIControlVideoFormat) String() string {
+	switch e {
+	case Mp4:
+		return "Mp4"
+	case Wmv:
+		return "Wmv"
+	default:
+		return fmt.Sprintf("CameraUIControlVideoFormat(%d)", int32(e))
+	}
+}
+
 type CameraUIControlViewType int32
 
 const (
 	SingleItem CameraUIControlViewType = 0
 	ItemList   CameraUIControlViewType = 1
 )
+
+// String returns the CameraUIControlViewType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CameraUIControlViewType) String() string {
+	switch e {
+	case SingleItem:
+		return "SingleItem"
+	case ItemList:
+		return "ItemList"
+	default:
+		return fmt.Sprintf("CameraUIControlViewType(%d)", int32(e))
+	}
+}
 
 type DECISION_LOCATION int32
 
@@ -63,6 +150,35 @@ const (
 	DECISION_LOCATION_UNKNOWN                     DECISION_LOCATION = 9
 )
 
+// String returns the DECISION_LOCATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DECISION_LOCATION) String() string {
+	switch e {
+	case DECISION_LOCATION_REFRESH_GLOBAL_DATA:
+		return "DECISION_LOCATION_REFRESH_GLOBAL_DATA"
+	case DECISION_LOCATION_PARAMETER_VALIDATION:
+		return "DECISION_LOCATION_PARAMETER_VALIDATION"
+	case DECISION_LOCATION_AUDIT:
+		return "DECISION_LOCATION_AUDIT"
+	case DECISION_LOCATION_FAILED_CONVERT_GUID:
+		return "DECISION_LOCATION_FAILED_CONVERT_GUID"
+	case DECISION_LOCATION_ENTERPRISE_DEFINED_CLASS_ID:
+		return "DECISION_LOCATION_ENTERPRISE_DEFINED_CLASS_ID"
+	case DECISION_LOCATION_GLOBAL_BUILT_IN_LIST:
+		return "DECISION_LOCATION_GLOBAL_BUILT_IN_LIST"
+	case DECISION_LOCATION_PROVIDER_BUILT_IN_LIST:
+		return "DECISION_LOCATION_PROVIDER_BUILT_IN_LIST"
+	case DECISION_LOCATION_ENFORCE_STATE_LIST:
+		return "DECISION_LOCATION_ENFORCE_STATE_LIST"
+	case DECISION_LOCATION_NOT_FOUND:
+		return "DECISION_LOCATION_NOT_FOUND"
+	case DECISION_LOCATION_UNKNOWN:
+		return "DECISION_LOCATION_UNKNOWN"
+	default:
+		return fmt.Sprintf("DECISION_LOCATION(%d)", int32(e))
+	}
+}
+
 // FEATURE_CHANGE_TIME: https://learn.microsoft.com/windows/win32/api/featurestagingapi/ne-featurestagingapi-feature_change_time
 type FEATURE_CHANGE_TIME int32
 
@@ -73,6 +189,23 @@ const (
 	FEATURE_CHANGE_TIME_REBOOT        FEATURE_CHANGE_TIME = 3
 )
 
+// String returns the FEATURE_CHANGE_TIME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEATURE_CHANGE_TIME) String() string {
+	switch e {
+	case FEATURE_CHANGE_TIME_READ:
+		return "FEATURE_CHANGE_TIME_READ"
+	case FEATURE_CHANGE_TIME_MODULE_RELOAD:
+		return "FEATURE_CHANGE_TIME_MODULE_RELOAD"
+	case FEATURE_CHANGE_TIME_SESSION:
+		return "FEATURE_CHANGE_TIME_SESSION"
+	case FEATURE_CHANGE_TIME_REBOOT:
+		return "FEATURE_CHANGE_TIME_REBOOT"
+	default:
+		return fmt.Sprintf("FEATURE_CHANGE_TIME(%d)", int32(e))
+	}
+}
+
 // FEATURE_ENABLED_STATE: https://learn.microsoft.com/windows/win32/api/featurestagingapi/ne-featurestagingapi-feature_enabled_state
 type FEATURE_ENABLED_STATE int32
 
@@ -81,6 +214,21 @@ const (
 	FEATURE_ENABLED_STATE_DISABLED FEATURE_ENABLED_STATE = 1
 	FEATURE_ENABLED_STATE_ENABLED  FEATURE_ENABLED_STATE = 2
 )
+
+// String returns the FEATURE_ENABLED_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEATURE_ENABLED_STATE) String() string {
+	switch e {
+	case FEATURE_ENABLED_STATE_DEFAULT:
+		return "FEATURE_ENABLED_STATE_DEFAULT"
+	case FEATURE_ENABLED_STATE_DISABLED:
+		return "FEATURE_ENABLED_STATE_DISABLED"
+	case FEATURE_ENABLED_STATE_ENABLED:
+		return "FEATURE_ENABLED_STATE_ENABLED"
+	default:
+		return fmt.Sprintf("FEATURE_ENABLED_STATE(%d)", int32(e))
+	}
+}
 
 type TDIENTITY_ENTITY_TYPE uint32
 
@@ -95,6 +243,31 @@ const (
 	IF_ENTITY      TDIENTITY_ENTITY_TYPE = 512
 )
 
+// String returns the TDIENTITY_ENTITY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TDIENTITY_ENTITY_TYPE) String() string {
+	switch e {
+	case GENERIC_ENTITY:
+		return "GENERIC_ENTITY"
+	case AT_ENTITY:
+		return "AT_ENTITY"
+	case CL_NL_ENTITY:
+		return "CL_NL_ENTITY"
+	case CO_NL_ENTITY:
+		return "CO_NL_ENTITY"
+	case CL_TL_ENTITY:
+		return "CL_TL_ENTITY"
+	case CO_TL_ENTITY:
+		return "CO_TL_ENTITY"
+	case ER_ENTITY:
+		return "ER_ENTITY"
+	case IF_ENTITY:
+		return "IF_ENTITY"
+	default:
+		return fmt.Sprintf("TDIENTITY_ENTITY_TYPE(%d)", uint32(e))
+	}
+}
+
 type TDI_TL_IO_CONTROL_TYPE int32
 
 const (
@@ -104,6 +277,23 @@ const (
 	SocketIoControlType     TDI_TL_IO_CONTROL_TYPE = 3
 )
 
+// String returns the TDI_TL_IO_CONTROL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TDI_TL_IO_CONTROL_TYPE) String() string {
+	switch e {
+	case EndpointIoControlType:
+		return "EndpointIoControlType"
+	case SetSockOptIoControlType:
+		return "SetSockOptIoControlType"
+	case GetSockOptIoControlType:
+		return "GetSockOptIoControlType"
+	case SocketIoControlType:
+		return "SocketIoControlType"
+	default:
+		return fmt.Sprintf("TDI_TL_IO_CONTROL_TYPE(%d)", int32(e))
+	}
+}
+
 type VALUENAME int32
 
 const (
@@ -112,19 +302,59 @@ const (
 	VALUENAME_BUILT_IN_LIST               VALUENAME = 2
 )
 
+// String returns the VALUENAME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VALUENAME) String() string {
+	switch e {
+	case VALUENAME_UNKNOWN:
+		return "VALUENAME_UNKNOWN"
+	case VALUENAME_ENTERPRISE_DEFINED_CLASS_ID:
+		return "VALUENAME_ENTERPRISE_DEFINED_CLASS_ID"
+	case VALUENAME_BUILT_IN_LIST:
+		return "VALUENAME_BUILT_IN_LIST"
+	default:
+		return fmt.Sprintf("VALUENAME(%d)", int32(e))
+	}
+}
+
 type WINSTATIONINFOCLASS int32
 
 const (
 	WinStationInformation WINSTATIONINFOCLASS = 8
 )
 
+// String returns the WINSTATIONINFOCLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINSTATIONINFOCLASS) String() string {
+	switch e {
+	case WinStationInformation:
+		return "WinStationInformation"
+	default:
+		return fmt.Sprintf("WINSTATIONINFOCLASS(%d)", int32(e))
+	}
+}
+
 // WLDP_EXECUTION_EVALUATION_OPTIONS: https://learn.microsoft.com/windows/win32/api/wldp/ne-wldp-wldp_execution_evaluation_options
+// Bitmask — values may be combined with |.
 type WLDP_EXECUTION_EVALUATION_OPTIONS int32
 
 const (
 	WLDP_EXECUTION_EVALUATION_OPTION_NONE                           WLDP_EXECUTION_EVALUATION_OPTIONS = 0
 	WLDP_EXECUTION_EVALUATION_OPTION_EXECUTE_IN_INTERACTIVE_SESSION WLDP_EXECUTION_EVALUATION_OPTIONS = 1
 )
+
+// String returns the WLDP_EXECUTION_EVALUATION_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLDP_EXECUTION_EVALUATION_OPTIONS) String() string {
+	var parts []string
+	if e&WLDP_EXECUTION_EVALUATION_OPTION_EXECUTE_IN_INTERACTIVE_SESSION != 0 {
+		parts = append(parts, "WLDP_EXECUTION_EVALUATION_OPTION_EXECUTE_IN_INTERACTIVE_SESSION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // WLDP_EXECUTION_POLICY: https://learn.microsoft.com/windows/win32/api/wldp/ne-wldp-wldp_execution_policy
 type WLDP_EXECUTION_POLICY int32
@@ -135,6 +365,21 @@ const (
 	WLDP_EXECUTION_POLICY_REQUIRE_SANDBOX WLDP_EXECUTION_POLICY = 2
 )
 
+// String returns the WLDP_EXECUTION_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLDP_EXECUTION_POLICY) String() string {
+	switch e {
+	case WLDP_EXECUTION_POLICY_BLOCKED:
+		return "WLDP_EXECUTION_POLICY_BLOCKED"
+	case WLDP_EXECUTION_POLICY_ALLOWED:
+		return "WLDP_EXECUTION_POLICY_ALLOWED"
+	case WLDP_EXECUTION_POLICY_REQUIRE_SANDBOX:
+		return "WLDP_EXECUTION_POLICY_REQUIRE_SANDBOX"
+	default:
+		return fmt.Sprintf("WLDP_EXECUTION_POLICY(%d)", int32(e))
+	}
+}
+
 type WLDP_HOST int32
 
 const (
@@ -142,6 +387,21 @@ const (
 	WLDP_HOST_SVCHOST  WLDP_HOST = 1
 	WLDP_HOST_MAX      WLDP_HOST = 2
 )
+
+// String returns the WLDP_HOST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLDP_HOST) String() string {
+	switch e {
+	case WLDP_HOST_RUNDLL32:
+		return "WLDP_HOST_RUNDLL32"
+	case WLDP_HOST_SVCHOST:
+		return "WLDP_HOST_SVCHOST"
+	case WLDP_HOST_MAX:
+		return "WLDP_HOST_MAX"
+	default:
+		return fmt.Sprintf("WLDP_HOST(%d)", int32(e))
+	}
+}
 
 // WLDP_HOST_ID: https://learn.microsoft.com/windows/win32/api/wldp/ne-wldp-wldp_host_id
 type WLDP_HOST_ID int32
@@ -158,6 +418,33 @@ const (
 	WLDP_HOST_ID_MAX        WLDP_HOST_ID = 8
 )
 
+// String returns the WLDP_HOST_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLDP_HOST_ID) String() string {
+	switch e {
+	case WLDP_HOST_ID_UNKNOWN:
+		return "WLDP_HOST_ID_UNKNOWN"
+	case WLDP_HOST_ID_GLOBAL:
+		return "WLDP_HOST_ID_GLOBAL"
+	case WLDP_HOST_ID_VBA:
+		return "WLDP_HOST_ID_VBA"
+	case WLDP_HOST_ID_WSH:
+		return "WLDP_HOST_ID_WSH"
+	case WLDP_HOST_ID_POWERSHELL:
+		return "WLDP_HOST_ID_POWERSHELL"
+	case WLDP_HOST_ID_IE:
+		return "WLDP_HOST_ID_IE"
+	case WLDP_HOST_ID_MSI:
+		return "WLDP_HOST_ID_MSI"
+	case WLDP_HOST_ID_ALL:
+		return "WLDP_HOST_ID_ALL"
+	case WLDP_HOST_ID_MAX:
+		return "WLDP_HOST_ID_MAX"
+	default:
+		return fmt.Sprintf("WLDP_HOST_ID(%d)", int32(e))
+	}
+}
+
 type WLDP_KEY int32
 
 const (
@@ -166,11 +453,37 @@ const (
 	KEY_ALL_KEYS WLDP_KEY = 2
 )
 
+// String returns the WLDP_KEY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLDP_KEY) String() string {
+	switch e {
+	case KEY_UNKNOWN:
+		return "KEY_UNKNOWN"
+	case KEY_OVERRIDE:
+		return "KEY_OVERRIDE"
+	case KEY_ALL_KEYS:
+		return "KEY_ALL_KEYS"
+	default:
+		return fmt.Sprintf("WLDP_KEY(%d)", int32(e))
+	}
+}
+
 type WLDP_POLICY_SETTING int32
 
 const (
 	WLDP_POLICY_SETTING_AV_PERF_MODE WLDP_POLICY_SETTING = 1000
 )
+
+// String returns the WLDP_POLICY_SETTING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLDP_POLICY_SETTING) String() string {
+	switch e {
+	case WLDP_POLICY_SETTING_AV_PERF_MODE:
+		return "WLDP_POLICY_SETTING_AV_PERF_MODE"
+	default:
+		return fmt.Sprintf("WLDP_POLICY_SETTING(%d)", int32(e))
+	}
+}
 
 type WLDP_SECURE_SETTING_VALUE_TYPE int32
 
@@ -180,6 +493,23 @@ const (
 	WLDP_SECURE_SETTING_VALUE_TYPE_BINARY  WLDP_SECURE_SETTING_VALUE_TYPE = 2
 	WLDP_SECURE_SETTING_VALUE_TYPE_STRING  WLDP_SECURE_SETTING_VALUE_TYPE = 3
 )
+
+// String returns the WLDP_SECURE_SETTING_VALUE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLDP_SECURE_SETTING_VALUE_TYPE) String() string {
+	switch e {
+	case WLDP_SECURE_SETTING_VALUE_TYPE_BOOLEAN:
+		return "WLDP_SECURE_SETTING_VALUE_TYPE_BOOLEAN"
+	case WLDP_SECURE_SETTING_VALUE_TYPE_ULONG:
+		return "WLDP_SECURE_SETTING_VALUE_TYPE_ULONG"
+	case WLDP_SECURE_SETTING_VALUE_TYPE_BINARY:
+		return "WLDP_SECURE_SETTING_VALUE_TYPE_BINARY"
+	case WLDP_SECURE_SETTING_VALUE_TYPE_STRING:
+		return "WLDP_SECURE_SETTING_VALUE_TYPE_STRING"
+	default:
+		return fmt.Sprintf("WLDP_SECURE_SETTING_VALUE_TYPE(%d)", int32(e))
+	}
+}
 
 // WLDP_WINDOWS_LOCKDOWN_MODE: https://learn.microsoft.com/windows/win32/api/wldp/ne-wldp-wldp_windows_lockdown_mode
 type WLDP_WINDOWS_LOCKDOWN_MODE int32
@@ -191,6 +521,23 @@ const (
 	WLDP_WINDOWS_LOCKDOWN_MODE_MAX      WLDP_WINDOWS_LOCKDOWN_MODE = 3
 )
 
+// String returns the WLDP_WINDOWS_LOCKDOWN_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLDP_WINDOWS_LOCKDOWN_MODE) String() string {
+	switch e {
+	case WLDP_WINDOWS_LOCKDOWN_MODE_UNLOCKED:
+		return "WLDP_WINDOWS_LOCKDOWN_MODE_UNLOCKED"
+	case WLDP_WINDOWS_LOCKDOWN_MODE_TRIAL:
+		return "WLDP_WINDOWS_LOCKDOWN_MODE_TRIAL"
+	case WLDP_WINDOWS_LOCKDOWN_MODE_LOCKED:
+		return "WLDP_WINDOWS_LOCKDOWN_MODE_LOCKED"
+	case WLDP_WINDOWS_LOCKDOWN_MODE_MAX:
+		return "WLDP_WINDOWS_LOCKDOWN_MODE_MAX"
+	default:
+		return fmt.Sprintf("WLDP_WINDOWS_LOCKDOWN_MODE(%d)", int32(e))
+	}
+}
+
 type WLDP_WINDOWS_LOCKDOWN_RESTRICTION int32
 
 const (
@@ -199,3 +546,20 @@ const (
 	WLDP_WINDOWS_LOCKDOWN_RESTRICTION_NOUNLOCK_PERMANENT WLDP_WINDOWS_LOCKDOWN_RESTRICTION = 2
 	WLDP_WINDOWS_LOCKDOWN_RESTRICTION_MAX                WLDP_WINDOWS_LOCKDOWN_RESTRICTION = 3
 )
+
+// String returns the WLDP_WINDOWS_LOCKDOWN_RESTRICTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLDP_WINDOWS_LOCKDOWN_RESTRICTION) String() string {
+	switch e {
+	case WLDP_WINDOWS_LOCKDOWN_RESTRICTION_NONE:
+		return "WLDP_WINDOWS_LOCKDOWN_RESTRICTION_NONE"
+	case WLDP_WINDOWS_LOCKDOWN_RESTRICTION_NOUNLOCK:
+		return "WLDP_WINDOWS_LOCKDOWN_RESTRICTION_NOUNLOCK"
+	case WLDP_WINDOWS_LOCKDOWN_RESTRICTION_NOUNLOCK_PERMANENT:
+		return "WLDP_WINDOWS_LOCKDOWN_RESTRICTION_NOUNLOCK_PERMANENT"
+	case WLDP_WINDOWS_LOCKDOWN_RESTRICTION_MAX:
+		return "WLDP_WINDOWS_LOCKDOWN_RESTRICTION_MAX"
+	default:
+		return fmt.Sprintf("WLDP_WINDOWS_LOCKDOWN_RESTRICTION(%d)", int32(e))
+	}
+}

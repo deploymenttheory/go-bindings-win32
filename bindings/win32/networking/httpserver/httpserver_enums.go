@@ -4,6 +4,11 @@
 
 package httpserver
 
+import (
+	"fmt"
+	"strings"
+)
+
 // HTTP_503_RESPONSE_VERBOSITY: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_503_response_verbosity
 type HTTP_503_RESPONSE_VERBOSITY int32
 
@@ -12,6 +17,21 @@ const (
 	Http503ResponseVerbosityLimited HTTP_503_RESPONSE_VERBOSITY = 1
 	Http503ResponseVerbosityFull    HTTP_503_RESPONSE_VERBOSITY = 2
 )
+
+// String returns the HTTP_503_RESPONSE_VERBOSITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_503_RESPONSE_VERBOSITY) String() string {
+	switch e {
+	case Http503ResponseVerbosityBasic:
+		return "Http503ResponseVerbosityBasic"
+	case Http503ResponseVerbosityLimited:
+		return "Http503ResponseVerbosityLimited"
+	case Http503ResponseVerbosityFull:
+		return "Http503ResponseVerbosityFull"
+	default:
+		return fmt.Sprintf("HTTP_503_RESPONSE_VERBOSITY(%d)", int32(e))
+	}
+}
 
 // HTTP_AUTHENTICATION_HARDENING_LEVELS: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_authentication_hardening_levels
 type HTTP_AUTHENTICATION_HARDENING_LEVELS int32
@@ -22,6 +42,21 @@ const (
 	HttpAuthenticationHardeningStrict HTTP_AUTHENTICATION_HARDENING_LEVELS = 2
 )
 
+// String returns the HTTP_AUTHENTICATION_HARDENING_LEVELS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_AUTHENTICATION_HARDENING_LEVELS) String() string {
+	switch e {
+	case HttpAuthenticationHardeningLegacy:
+		return "HttpAuthenticationHardeningLegacy"
+	case HttpAuthenticationHardeningMedium:
+		return "HttpAuthenticationHardeningMedium"
+	case HttpAuthenticationHardeningStrict:
+		return "HttpAuthenticationHardeningStrict"
+	default:
+		return fmt.Sprintf("HTTP_AUTHENTICATION_HARDENING_LEVELS(%d)", int32(e))
+	}
+}
+
 // HTTP_AUTH_STATUS: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_auth_status
 type HTTP_AUTH_STATUS int32
 
@@ -30,6 +65,21 @@ const (
 	HttpAuthStatusNotAuthenticated HTTP_AUTH_STATUS = 1
 	HttpAuthStatusFailure          HTTP_AUTH_STATUS = 2
 )
+
+// String returns the HTTP_AUTH_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_AUTH_STATUS) String() string {
+	switch e {
+	case HttpAuthStatusSuccess:
+		return "HttpAuthStatusSuccess"
+	case HttpAuthStatusNotAuthenticated:
+		return "HttpAuthStatusNotAuthenticated"
+	case HttpAuthStatusFailure:
+		return "HttpAuthStatusFailure"
+	default:
+		return fmt.Sprintf("HTTP_AUTH_STATUS(%d)", int32(e))
+	}
+}
 
 // HTTP_CACHE_POLICY_TYPE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_cache_policy_type
 type HTTP_CACHE_POLICY_TYPE int32
@@ -41,12 +91,42 @@ const (
 	HttpCachePolicyMaximum         HTTP_CACHE_POLICY_TYPE = 3
 )
 
+// String returns the HTTP_CACHE_POLICY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_CACHE_POLICY_TYPE) String() string {
+	switch e {
+	case HttpCachePolicyNocache:
+		return "HttpCachePolicyNocache"
+	case HttpCachePolicyUserInvalidates:
+		return "HttpCachePolicyUserInvalidates"
+	case HttpCachePolicyTimeToLive:
+		return "HttpCachePolicyTimeToLive"
+	case HttpCachePolicyMaximum:
+		return "HttpCachePolicyMaximum"
+	default:
+		return fmt.Sprintf("HTTP_CACHE_POLICY_TYPE(%d)", int32(e))
+	}
+}
+
 type HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID int32
 
 const (
 	CreateRequestQueueExternalIdProperty HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID = 1
 	CreateRequestQueueMax                HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID = 2
 )
+
+// String returns the HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID) String() string {
+	switch e {
+	case CreateRequestQueueExternalIdProperty:
+		return "CreateRequestQueueExternalIdProperty"
+	case CreateRequestQueueMax:
+		return "CreateRequestQueueMax"
+	default:
+		return fmt.Sprintf("HTTP_CREATE_REQUEST_QUEUE_PROPERTY_ID(%d)", int32(e))
+	}
+}
 
 // HTTP_DATA_CHUNK_TYPE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_data_chunk_type
 type HTTP_DATA_CHUNK_TYPE int32
@@ -61,6 +141,29 @@ const (
 	HttpDataChunkMaximum                   HTTP_DATA_CHUNK_TYPE = 6
 )
 
+// String returns the HTTP_DATA_CHUNK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_DATA_CHUNK_TYPE) String() string {
+	switch e {
+	case HttpDataChunkFromMemory:
+		return "HttpDataChunkFromMemory"
+	case HttpDataChunkFromFileHandle:
+		return "HttpDataChunkFromFileHandle"
+	case HttpDataChunkFromFragmentCache:
+		return "HttpDataChunkFromFragmentCache"
+	case HttpDataChunkFromFragmentCacheEx:
+		return "HttpDataChunkFromFragmentCacheEx"
+	case HttpDataChunkTrailers:
+		return "HttpDataChunkTrailers"
+	case HttpDataChunkFromWinHttpFastForwarding:
+		return "HttpDataChunkFromWinHttpFastForwarding"
+	case HttpDataChunkMaximum:
+		return "HttpDataChunkMaximum"
+	default:
+		return fmt.Sprintf("HTTP_DATA_CHUNK_TYPE(%d)", int32(e))
+	}
+}
+
 // HTTP_DELEGATE_REQUEST_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_delegate_request_property_id
 type HTTP_DELEGATE_REQUEST_PROPERTY_ID int32
 
@@ -69,6 +172,19 @@ const (
 	DelegateRequestDelegateUrlProperty HTTP_DELEGATE_REQUEST_PROPERTY_ID = 1
 )
 
+// String returns the HTTP_DELEGATE_REQUEST_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_DELEGATE_REQUEST_PROPERTY_ID) String() string {
+	switch e {
+	case DelegateRequestReservedProperty:
+		return "DelegateRequestReservedProperty"
+	case DelegateRequestDelegateUrlProperty:
+		return "DelegateRequestDelegateUrlProperty"
+	default:
+		return fmt.Sprintf("HTTP_DELEGATE_REQUEST_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // HTTP_ENABLED_STATE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_enabled_state
 type HTTP_ENABLED_STATE int32
 
@@ -76,6 +192,19 @@ const (
 	HttpEnabledStateActive   HTTP_ENABLED_STATE = 0
 	HttpEnabledStateInactive HTTP_ENABLED_STATE = 1
 )
+
+// String returns the HTTP_ENABLED_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_ENABLED_STATE) String() string {
+	switch e {
+	case HttpEnabledStateActive:
+		return "HttpEnabledStateActive"
+	case HttpEnabledStateInactive:
+		return "HttpEnabledStateInactive"
+	default:
+		return fmt.Sprintf("HTTP_ENABLED_STATE(%d)", int32(e))
+	}
+}
 
 // HTTP_FEATURE_ID: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_feature_id
 type HTTP_FEATURE_ID int32
@@ -102,6 +231,55 @@ const (
 	HttpFeatureLast                                 HTTP_FEATURE_ID = 18
 	HttpFeaturemax                                  HTTP_FEATURE_ID = -1
 )
+
+// String returns the HTTP_FEATURE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_FEATURE_ID) String() string {
+	switch e {
+	case HttpFeatureUnknown:
+		return "HttpFeatureUnknown"
+	case HttpFeatureResponseTrailers:
+		return "HttpFeatureResponseTrailers"
+	case HttpFeatureApiTimings:
+		return "HttpFeatureApiTimings"
+	case HttpFeatureDelegateEx:
+		return "HttpFeatureDelegateEx"
+	case HttpFeatureHttp3:
+		return "HttpFeatureHttp3"
+	case HttpFeatureTlsSessionTickets:
+		return "HttpFeatureTlsSessionTickets"
+	case HttpFeatureDisableTlsSessionId:
+		return "HttpFeatureDisableTlsSessionId"
+	case HttpFeatureTlsDualCerts:
+		return "HttpFeatureTlsDualCerts"
+	case HttpFeatureAutomaticChunkedEncoding:
+		return "HttpFeatureAutomaticChunkedEncoding"
+	case HttpFeatureDedicatedReqQueueDelegationType:
+		return "HttpFeatureDedicatedReqQueueDelegationType"
+	case HttpFeatureFastForwardResponse:
+		return "HttpFeatureFastForwardResponse"
+	case HttpFeatureCacheTlsClientHello:
+		return "HttpFeatureCacheTlsClientHello"
+	case HttpFeatureIdleConnectionTimeoutRequestProperty:
+		return "HttpFeatureIdleConnectionTimeoutRequestProperty"
+	case HttpFeatureDisableAiaFlag:
+		return "HttpFeatureDisableAiaFlag"
+	case HttpFeatureDscp:
+		return "HttpFeatureDscp"
+	case HttpFeatureQueryCipherInfo:
+		return "HttpFeatureQueryCipherInfo"
+	case HttpFeatureQueryInitialPacketTtl:
+		return "HttpFeatureQueryInitialPacketTtl"
+	case HttpFeatureTlsHandshakePerformanceCounters:
+		return "HttpFeatureTlsHandshakePerformanceCounters"
+	case HttpFeatureLast:
+		return "HttpFeatureLast"
+	case HttpFeaturemax:
+		return "HttpFeaturemax"
+	default:
+		return fmt.Sprintf("HTTP_FEATURE_ID(%d)", int32(e))
+	}
+}
 
 // HTTP_HEADER_ID: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_header_id
 type HTTP_HEADER_ID int32
@@ -163,12 +341,122 @@ const (
 	HttpHeaderMaximum            HTTP_HEADER_ID = 41
 )
 
+// String returns the HTTP_HEADER_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_HEADER_ID) String() string {
+	switch e {
+	case HttpHeaderCacheControl:
+		return "HttpHeaderCacheControl"
+	case HttpHeaderConnection:
+		return "HttpHeaderConnection"
+	case HttpHeaderDate:
+		return "HttpHeaderDate"
+	case HttpHeaderKeepAlive:
+		return "HttpHeaderKeepAlive"
+	case HttpHeaderPragma:
+		return "HttpHeaderPragma"
+	case HttpHeaderTrailer:
+		return "HttpHeaderTrailer"
+	case HttpHeaderTransferEncoding:
+		return "HttpHeaderTransferEncoding"
+	case HttpHeaderUpgrade:
+		return "HttpHeaderUpgrade"
+	case HttpHeaderVia:
+		return "HttpHeaderVia"
+	case HttpHeaderWarning:
+		return "HttpHeaderWarning"
+	case HttpHeaderAllow:
+		return "HttpHeaderAllow"
+	case HttpHeaderContentLength:
+		return "HttpHeaderContentLength"
+	case HttpHeaderContentType:
+		return "HttpHeaderContentType"
+	case HttpHeaderContentEncoding:
+		return "HttpHeaderContentEncoding"
+	case HttpHeaderContentLanguage:
+		return "HttpHeaderContentLanguage"
+	case HttpHeaderContentLocation:
+		return "HttpHeaderContentLocation"
+	case HttpHeaderContentMd5:
+		return "HttpHeaderContentMd5"
+	case HttpHeaderContentRange:
+		return "HttpHeaderContentRange"
+	case HttpHeaderExpires:
+		return "HttpHeaderExpires"
+	case HttpHeaderLastModified:
+		return "HttpHeaderLastModified"
+	case HttpHeaderAccept:
+		return "HttpHeaderAccept"
+	case HttpHeaderAcceptCharset:
+		return "HttpHeaderAcceptCharset"
+	case HttpHeaderAcceptEncoding:
+		return "HttpHeaderAcceptEncoding"
+	case HttpHeaderAcceptLanguage:
+		return "HttpHeaderAcceptLanguage"
+	case HttpHeaderAuthorization:
+		return "HttpHeaderAuthorization"
+	case HttpHeaderCookie:
+		return "HttpHeaderCookie"
+	case HttpHeaderExpect:
+		return "HttpHeaderExpect"
+	case HttpHeaderFrom:
+		return "HttpHeaderFrom"
+	case HttpHeaderHost:
+		return "HttpHeaderHost"
+	case HttpHeaderIfMatch:
+		return "HttpHeaderIfMatch"
+	case HttpHeaderIfModifiedSince:
+		return "HttpHeaderIfModifiedSince"
+	case HttpHeaderIfNoneMatch:
+		return "HttpHeaderIfNoneMatch"
+	case HttpHeaderIfRange:
+		return "HttpHeaderIfRange"
+	case HttpHeaderIfUnmodifiedSince:
+		return "HttpHeaderIfUnmodifiedSince"
+	case HttpHeaderMaxForwards:
+		return "HttpHeaderMaxForwards"
+	case HttpHeaderProxyAuthorization:
+		return "HttpHeaderProxyAuthorization"
+	case HttpHeaderReferer:
+		return "HttpHeaderReferer"
+	case HttpHeaderRange:
+		return "HttpHeaderRange"
+	case HttpHeaderTe:
+		return "HttpHeaderTe"
+	case HttpHeaderTranslate:
+		return "HttpHeaderTranslate"
+	case HttpHeaderUserAgent:
+		return "HttpHeaderUserAgent"
+	case HttpHeaderRequestMaximum:
+		return "HttpHeaderRequestMaximum"
+	default:
+		return fmt.Sprintf("HTTP_HEADER_ID(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HTTP_INITIALIZE uint32
 
 const (
 	HTTP_INITIALIZE_CONFIG HTTP_INITIALIZE = 2
 	HTTP_INITIALIZE_SERVER HTTP_INITIALIZE = 1
 )
+
+// String returns the HTTP_INITIALIZE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_INITIALIZE) String() string {
+	var parts []string
+	if e&HTTP_INITIALIZE_CONFIG != 0 {
+		parts = append(parts, "HTTP_INITIALIZE_CONFIG")
+	}
+	if e&HTTP_INITIALIZE_SERVER != 0 {
+		parts = append(parts, "HTTP_INITIALIZE_SERVER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // HTTP_LOGGING_ROLLOVER_TYPE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_logging_rollover_type
 type HTTP_LOGGING_ROLLOVER_TYPE int32
@@ -181,6 +469,25 @@ const (
 	HttpLoggingRolloverHourly  HTTP_LOGGING_ROLLOVER_TYPE = 4
 )
 
+// String returns the HTTP_LOGGING_ROLLOVER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_LOGGING_ROLLOVER_TYPE) String() string {
+	switch e {
+	case HttpLoggingRolloverSize:
+		return "HttpLoggingRolloverSize"
+	case HttpLoggingRolloverDaily:
+		return "HttpLoggingRolloverDaily"
+	case HttpLoggingRolloverWeekly:
+		return "HttpLoggingRolloverWeekly"
+	case HttpLoggingRolloverMonthly:
+		return "HttpLoggingRolloverMonthly"
+	case HttpLoggingRolloverHourly:
+		return "HttpLoggingRolloverHourly"
+	default:
+		return fmt.Sprintf("HTTP_LOGGING_ROLLOVER_TYPE(%d)", int32(e))
+	}
+}
+
 // HTTP_LOGGING_TYPE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_logging_type
 type HTTP_LOGGING_TYPE int32
 
@@ -191,12 +498,40 @@ const (
 	HttpLoggingTypeRaw  HTTP_LOGGING_TYPE = 3
 )
 
+// String returns the HTTP_LOGGING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_LOGGING_TYPE) String() string {
+	switch e {
+	case HttpLoggingTypeW3C:
+		return "HttpLoggingTypeW3C"
+	case HttpLoggingTypeIIS:
+		return "HttpLoggingTypeIIS"
+	case HttpLoggingTypeNCSA:
+		return "HttpLoggingTypeNCSA"
+	case HttpLoggingTypeRaw:
+		return "HttpLoggingTypeRaw"
+	default:
+		return fmt.Sprintf("HTTP_LOGGING_TYPE(%d)", int32(e))
+	}
+}
+
 // HTTP_LOG_DATA_TYPE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_log_data_type
 type HTTP_LOG_DATA_TYPE int32
 
 const (
 	HttpLogDataTypeFields HTTP_LOG_DATA_TYPE = 0
 )
+
+// String returns the HTTP_LOG_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_LOG_DATA_TYPE) String() string {
+	switch e {
+	case HttpLogDataTypeFields:
+		return "HttpLogDataTypeFields"
+	default:
+		return fmt.Sprintf("HTTP_LOG_DATA_TYPE(%d)", int32(e))
+	}
+}
 
 type HTTP_PERFORMANCE_PARAM_TYPE int32
 
@@ -210,6 +545,29 @@ const (
 	PerformanceParamMax                        HTTP_PERFORMANCE_PARAM_TYPE = 6
 )
 
+// String returns the HTTP_PERFORMANCE_PARAM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_PERFORMANCE_PARAM_TYPE) String() string {
+	switch e {
+	case PerformanceParamSendBufferingFlags:
+		return "PerformanceParamSendBufferingFlags"
+	case PerformanceParamAggressiveICW:
+		return "PerformanceParamAggressiveICW"
+	case PerformanceParamMaxSendBufferSize:
+		return "PerformanceParamMaxSendBufferSize"
+	case PerformanceParamMaxConcurrentClientStreams:
+		return "PerformanceParamMaxConcurrentClientStreams"
+	case PerformanceParamMaxReceiveBufferSize:
+		return "PerformanceParamMaxReceiveBufferSize"
+	case PerformanceParamDecryptOnSspiThread:
+		return "PerformanceParamDecryptOnSspiThread"
+	case PerformanceParamMax:
+		return "PerformanceParamMax"
+	default:
+		return fmt.Sprintf("HTTP_PERFORMANCE_PARAM_TYPE(%d)", int32(e))
+	}
+}
+
 type HTTP_PROTECTION_LEVEL_TYPE int32
 
 const (
@@ -217,6 +575,21 @@ const (
 	HttpProtectionLevelEdgeRestricted HTTP_PROTECTION_LEVEL_TYPE = 1
 	HttpProtectionLevelRestricted     HTTP_PROTECTION_LEVEL_TYPE = 2
 )
+
+// String returns the HTTP_PROTECTION_LEVEL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_PROTECTION_LEVEL_TYPE) String() string {
+	switch e {
+	case HttpProtectionLevelUnrestricted:
+		return "HttpProtectionLevelUnrestricted"
+	case HttpProtectionLevelEdgeRestricted:
+		return "HttpProtectionLevelEdgeRestricted"
+	case HttpProtectionLevelRestricted:
+		return "HttpProtectionLevelRestricted"
+	default:
+		return fmt.Sprintf("HTTP_PROTECTION_LEVEL_TYPE(%d)", int32(e))
+	}
+}
 
 // HTTP_QOS_SETTING_TYPE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_qos_setting_type
 type HTTP_QOS_SETTING_TYPE int32
@@ -227,12 +600,40 @@ const (
 	HttpQosSettingTypeFlowRate        HTTP_QOS_SETTING_TYPE = 2
 )
 
+// String returns the HTTP_QOS_SETTING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_QOS_SETTING_TYPE) String() string {
+	switch e {
+	case HttpQosSettingTypeBandwidth:
+		return "HttpQosSettingTypeBandwidth"
+	case HttpQosSettingTypeConnectionLimit:
+		return "HttpQosSettingTypeConnectionLimit"
+	case HttpQosSettingTypeFlowRate:
+		return "HttpQosSettingTypeFlowRate"
+	default:
+		return fmt.Sprintf("HTTP_QOS_SETTING_TYPE(%d)", int32(e))
+	}
+}
+
 type HTTP_RECEIVE_HTTP_REQUEST_FLAGS uint32
 
 const (
 	HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY  HTTP_RECEIVE_HTTP_REQUEST_FLAGS = 1
 	HTTP_RECEIVE_REQUEST_FLAG_FLUSH_BODY HTTP_RECEIVE_HTTP_REQUEST_FLAGS = 2
 )
+
+// String returns the HTTP_RECEIVE_HTTP_REQUEST_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_RECEIVE_HTTP_REQUEST_FLAGS) String() string {
+	switch e {
+	case HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY:
+		return "HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY"
+	case HTTP_RECEIVE_REQUEST_FLAG_FLUSH_BODY:
+		return "HTTP_RECEIVE_REQUEST_FLAG_FLUSH_BODY"
+	default:
+		return fmt.Sprintf("HTTP_RECEIVE_HTTP_REQUEST_FLAGS(%d)", uint32(e))
+	}
+}
 
 // HTTP_REQUEST_AUTH_TYPE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_request_auth_type
 type HTTP_REQUEST_AUTH_TYPE int32
@@ -245,6 +646,27 @@ const (
 	HttpRequestAuthTypeNegotiate HTTP_REQUEST_AUTH_TYPE = 4
 	HttpRequestAuthTypeKerberos  HTTP_REQUEST_AUTH_TYPE = 5
 )
+
+// String returns the HTTP_REQUEST_AUTH_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_REQUEST_AUTH_TYPE) String() string {
+	switch e {
+	case HttpRequestAuthTypeNone:
+		return "HttpRequestAuthTypeNone"
+	case HttpRequestAuthTypeBasic:
+		return "HttpRequestAuthTypeBasic"
+	case HttpRequestAuthTypeDigest:
+		return "HttpRequestAuthTypeDigest"
+	case HttpRequestAuthTypeNTLM:
+		return "HttpRequestAuthTypeNTLM"
+	case HttpRequestAuthTypeNegotiate:
+		return "HttpRequestAuthTypeNegotiate"
+	case HttpRequestAuthTypeKerberos:
+		return "HttpRequestAuthTypeKerberos"
+	default:
+		return fmt.Sprintf("HTTP_REQUEST_AUTH_TYPE(%d)", int32(e))
+	}
+}
 
 // HTTP_REQUEST_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_request_info_type
 type HTTP_REQUEST_INFO_TYPE int32
@@ -267,6 +689,45 @@ const (
 	HttpRequestInfoTypeInitialPacketTtl               HTTP_REQUEST_INFO_TYPE = 14
 )
 
+// String returns the HTTP_REQUEST_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_REQUEST_INFO_TYPE) String() string {
+	switch e {
+	case HttpRequestInfoTypeAuth:
+		return "HttpRequestInfoTypeAuth"
+	case HttpRequestInfoTypeChannelBind:
+		return "HttpRequestInfoTypeChannelBind"
+	case HttpRequestInfoTypeSslProtocol:
+		return "HttpRequestInfoTypeSslProtocol"
+	case HttpRequestInfoTypeSslTokenBindingDraft:
+		return "HttpRequestInfoTypeSslTokenBindingDraft"
+	case HttpRequestInfoTypeSslTokenBinding:
+		return "HttpRequestInfoTypeSslTokenBinding"
+	case HttpRequestInfoTypeRequestTiming:
+		return "HttpRequestInfoTypeRequestTiming"
+	case HttpRequestInfoTypeTcpInfoV0:
+		return "HttpRequestInfoTypeTcpInfoV0"
+	case HttpRequestInfoTypeRequestSizing:
+		return "HttpRequestInfoTypeRequestSizing"
+	case HttpRequestInfoTypeQuicStats:
+		return "HttpRequestInfoTypeQuicStats"
+	case HttpRequestInfoTypeTcpInfoV1:
+		return "HttpRequestInfoTypeTcpInfoV1"
+	case HttpRequestInfoTypeQuicStatsV2:
+		return "HttpRequestInfoTypeQuicStatsV2"
+	case HttpRequestInfoTypeTcpInfoV2:
+		return "HttpRequestInfoTypeTcpInfoV2"
+	case HttpRequestInfoTypeTransportIdleConnectionTimeout:
+		return "HttpRequestInfoTypeTransportIdleConnectionTimeout"
+	case HttpRequestInfoTypeDscpTag:
+		return "HttpRequestInfoTypeDscpTag"
+	case HttpRequestInfoTypeInitialPacketTtl:
+		return "HttpRequestInfoTypeInitialPacketTtl"
+	default:
+		return fmt.Sprintf("HTTP_REQUEST_INFO_TYPE(%d)", int32(e))
+	}
+}
+
 // HTTP_REQUEST_PROPERTY: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_request_property
 type HTTP_REQUEST_PROPERTY int32
 
@@ -288,6 +749,45 @@ const (
 	HttpRequestPropertyTlsCipherInfo                  HTTP_REQUEST_PROPERTY = 14
 )
 
+// String returns the HTTP_REQUEST_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_REQUEST_PROPERTY) String() string {
+	switch e {
+	case HttpRequestPropertyIsb:
+		return "HttpRequestPropertyIsb"
+	case HttpRequestPropertyTcpInfoV0:
+		return "HttpRequestPropertyTcpInfoV0"
+	case HttpRequestPropertyQuicStats:
+		return "HttpRequestPropertyQuicStats"
+	case HttpRequestPropertyTcpInfoV1:
+		return "HttpRequestPropertyTcpInfoV1"
+	case HttpRequestPropertySni:
+		return "HttpRequestPropertySni"
+	case HttpRequestPropertyStreamError:
+		return "HttpRequestPropertyStreamError"
+	case HttpRequestPropertyWskApiTimings:
+		return "HttpRequestPropertyWskApiTimings"
+	case HttpRequestPropertyQuicApiTimings:
+		return "HttpRequestPropertyQuicApiTimings"
+	case HttpRequestPropertyQuicStatsV2:
+		return "HttpRequestPropertyQuicStatsV2"
+	case HttpRequestPropertyQuicStreamStats:
+		return "HttpRequestPropertyQuicStreamStats"
+	case HttpRequestPropertyTcpInfoV2:
+		return "HttpRequestPropertyTcpInfoV2"
+	case HttpRequestPropertyTlsClientHello:
+		return "HttpRequestPropertyTlsClientHello"
+	case HttpRequestPropertyTransportIdleConnectionTimeout:
+		return "HttpRequestPropertyTransportIdleConnectionTimeout"
+	case HttpRequestPropertyDscpTag:
+		return "HttpRequestPropertyDscpTag"
+	case HttpRequestPropertyTlsCipherInfo:
+		return "HttpRequestPropertyTlsCipherInfo"
+	default:
+		return fmt.Sprintf("HTTP_REQUEST_PROPERTY(%d)", int32(e))
+	}
+}
+
 type HTTP_REQUEST_SIZING_TYPE int32
 
 const (
@@ -298,6 +798,27 @@ const (
 	HttpRequestSizingTypeHeaders                    HTTP_REQUEST_SIZING_TYPE = 4
 	HttpRequestSizingTypeMax                        HTTP_REQUEST_SIZING_TYPE = 5
 )
+
+// String returns the HTTP_REQUEST_SIZING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_REQUEST_SIZING_TYPE) String() string {
+	switch e {
+	case HttpRequestSizingTypeTlsHandshakeLeg1ClientData:
+		return "HttpRequestSizingTypeTlsHandshakeLeg1ClientData"
+	case HttpRequestSizingTypeTlsHandshakeLeg1ServerData:
+		return "HttpRequestSizingTypeTlsHandshakeLeg1ServerData"
+	case HttpRequestSizingTypeTlsHandshakeLeg2ClientData:
+		return "HttpRequestSizingTypeTlsHandshakeLeg2ClientData"
+	case HttpRequestSizingTypeTlsHandshakeLeg2ServerData:
+		return "HttpRequestSizingTypeTlsHandshakeLeg2ServerData"
+	case HttpRequestSizingTypeHeaders:
+		return "HttpRequestSizingTypeHeaders"
+	case HttpRequestSizingTypeMax:
+		return "HttpRequestSizingTypeMax"
+	default:
+		return fmt.Sprintf("HTTP_REQUEST_SIZING_TYPE(%d)", int32(e))
+	}
+}
 
 type HTTP_REQUEST_TIMING_TYPE int32
 
@@ -335,6 +856,77 @@ const (
 	HttpRequestTimingTypeMax                            HTTP_REQUEST_TIMING_TYPE = 30
 )
 
+// String returns the HTTP_REQUEST_TIMING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_REQUEST_TIMING_TYPE) String() string {
+	switch e {
+	case HttpRequestTimingTypeConnectionStart:
+		return "HttpRequestTimingTypeConnectionStart"
+	case HttpRequestTimingTypeDataStart:
+		return "HttpRequestTimingTypeDataStart"
+	case HttpRequestTimingTypeTlsCertificateLoadStart:
+		return "HttpRequestTimingTypeTlsCertificateLoadStart"
+	case HttpRequestTimingTypeTlsCertificateLoadEnd:
+		return "HttpRequestTimingTypeTlsCertificateLoadEnd"
+	case HttpRequestTimingTypeTlsHandshakeLeg1Start:
+		return "HttpRequestTimingTypeTlsHandshakeLeg1Start"
+	case HttpRequestTimingTypeTlsHandshakeLeg1End:
+		return "HttpRequestTimingTypeTlsHandshakeLeg1End"
+	case HttpRequestTimingTypeTlsHandshakeLeg2Start:
+		return "HttpRequestTimingTypeTlsHandshakeLeg2Start"
+	case HttpRequestTimingTypeTlsHandshakeLeg2End:
+		return "HttpRequestTimingTypeTlsHandshakeLeg2End"
+	case HttpRequestTimingTypeTlsAttributesQueryStart:
+		return "HttpRequestTimingTypeTlsAttributesQueryStart"
+	case HttpRequestTimingTypeTlsAttributesQueryEnd:
+		return "HttpRequestTimingTypeTlsAttributesQueryEnd"
+	case HttpRequestTimingTypeTlsClientCertQueryStart:
+		return "HttpRequestTimingTypeTlsClientCertQueryStart"
+	case HttpRequestTimingTypeTlsClientCertQueryEnd:
+		return "HttpRequestTimingTypeTlsClientCertQueryEnd"
+	case HttpRequestTimingTypeHttp2StreamStart:
+		return "HttpRequestTimingTypeHttp2StreamStart"
+	case HttpRequestTimingTypeHttp2HeaderDecodeStart:
+		return "HttpRequestTimingTypeHttp2HeaderDecodeStart"
+	case HttpRequestTimingTypeHttp2HeaderDecodeEnd:
+		return "HttpRequestTimingTypeHttp2HeaderDecodeEnd"
+	case HttpRequestTimingTypeRequestHeaderParseStart:
+		return "HttpRequestTimingTypeRequestHeaderParseStart"
+	case HttpRequestTimingTypeRequestHeaderParseEnd:
+		return "HttpRequestTimingTypeRequestHeaderParseEnd"
+	case HttpRequestTimingTypeRequestRoutingStart:
+		return "HttpRequestTimingTypeRequestRoutingStart"
+	case HttpRequestTimingTypeRequestRoutingEnd:
+		return "HttpRequestTimingTypeRequestRoutingEnd"
+	case HttpRequestTimingTypeRequestQueuedForInspection:
+		return "HttpRequestTimingTypeRequestQueuedForInspection"
+	case HttpRequestTimingTypeRequestDeliveredForInspection:
+		return "HttpRequestTimingTypeRequestDeliveredForInspection"
+	case HttpRequestTimingTypeRequestReturnedAfterInspection:
+		return "HttpRequestTimingTypeRequestReturnedAfterInspection"
+	case HttpRequestTimingTypeRequestQueuedForDelegation:
+		return "HttpRequestTimingTypeRequestQueuedForDelegation"
+	case HttpRequestTimingTypeRequestDeliveredForDelegation:
+		return "HttpRequestTimingTypeRequestDeliveredForDelegation"
+	case HttpRequestTimingTypeRequestReturnedAfterDelegation:
+		return "HttpRequestTimingTypeRequestReturnedAfterDelegation"
+	case HttpRequestTimingTypeRequestQueuedForIO:
+		return "HttpRequestTimingTypeRequestQueuedForIO"
+	case HttpRequestTimingTypeRequestDeliveredForIO:
+		return "HttpRequestTimingTypeRequestDeliveredForIO"
+	case HttpRequestTimingTypeHttp3StreamStart:
+		return "HttpRequestTimingTypeHttp3StreamStart"
+	case HttpRequestTimingTypeHttp3HeaderDecodeStart:
+		return "HttpRequestTimingTypeHttp3HeaderDecodeStart"
+	case HttpRequestTimingTypeHttp3HeaderDecodeEnd:
+		return "HttpRequestTimingTypeHttp3HeaderDecodeEnd"
+	case HttpRequestTimingTypeMax:
+		return "HttpRequestTimingTypeMax"
+	default:
+		return fmt.Sprintf("HTTP_REQUEST_TIMING_TYPE(%d)", int32(e))
+	}
+}
+
 // HTTP_RESPONSE_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_response_info_type
 type HTTP_RESPONSE_INFO_TYPE int32
 
@@ -345,6 +937,23 @@ const (
 	HttpResponseInfoTypeChannelBind            HTTP_RESPONSE_INFO_TYPE = 3
 )
 
+// String returns the HTTP_RESPONSE_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_RESPONSE_INFO_TYPE) String() string {
+	switch e {
+	case HttpResponseInfoTypeMultipleKnownHeaders:
+		return "HttpResponseInfoTypeMultipleKnownHeaders"
+	case HttpResponseInfoTypeAuthenticationProperty:
+		return "HttpResponseInfoTypeAuthenticationProperty"
+	case HttpResponseInfoTypeQoSProperty:
+		return "HttpResponseInfoTypeQoSProperty"
+	case HttpResponseInfoTypeChannelBind:
+		return "HttpResponseInfoTypeChannelBind"
+	default:
+		return fmt.Sprintf("HTTP_RESPONSE_INFO_TYPE(%d)", int32(e))
+	}
+}
+
 type HTTP_SCHEME int32
 
 const (
@@ -352,6 +961,21 @@ const (
 	HttpSchemeHttps   HTTP_SCHEME = 1
 	HttpSchemeMaximum HTTP_SCHEME = 2
 )
+
+// String returns the HTTP_SCHEME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_SCHEME) String() string {
+	switch e {
+	case HttpSchemeHttp:
+		return "HttpSchemeHttp"
+	case HttpSchemeHttps:
+		return "HttpSchemeHttps"
+	case HttpSchemeMaximum:
+		return "HttpSchemeMaximum"
+	default:
+		return fmt.Sprintf("HTTP_SCHEME(%d)", int32(e))
+	}
+}
 
 // HTTP_SERVER_PROPERTY: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_server_property
 type HTTP_SERVER_PROPERTY int32
@@ -374,6 +998,45 @@ const (
 	HttpServerRequestInfoProperty            HTTP_SERVER_PROPERTY = 19
 )
 
+// String returns the HTTP_SERVER_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_SERVER_PROPERTY) String() string {
+	switch e {
+	case HttpServerAuthenticationProperty:
+		return "HttpServerAuthenticationProperty"
+	case HttpServerLoggingProperty:
+		return "HttpServerLoggingProperty"
+	case HttpServerQosProperty:
+		return "HttpServerQosProperty"
+	case HttpServerTimeoutsProperty:
+		return "HttpServerTimeoutsProperty"
+	case HttpServerQueueLengthProperty:
+		return "HttpServerQueueLengthProperty"
+	case HttpServerStateProperty:
+		return "HttpServerStateProperty"
+	case HttpServer503VerbosityProperty:
+		return "HttpServer503VerbosityProperty"
+	case HttpServerBindingProperty:
+		return "HttpServerBindingProperty"
+	case HttpServerExtendedAuthenticationProperty:
+		return "HttpServerExtendedAuthenticationProperty"
+	case HttpServerListenEndpointProperty:
+		return "HttpServerListenEndpointProperty"
+	case HttpServerChannelBindProperty:
+		return "HttpServerChannelBindProperty"
+	case HttpServerProtectionLevelProperty:
+		return "HttpServerProtectionLevelProperty"
+	case HttpServerDelegationProperty:
+		return "HttpServerDelegationProperty"
+	case HttpServerFastForwardingProperty:
+		return "HttpServerFastForwardingProperty"
+	case HttpServerRequestInfoProperty:
+		return "HttpServerRequestInfoProperty"
+	default:
+		return fmt.Sprintf("HTTP_SERVER_PROPERTY(%d)", int32(e))
+	}
+}
+
 // HTTP_SERVICE_BINDING_TYPE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_service_binding_type
 type HTTP_SERVICE_BINDING_TYPE int32
 
@@ -383,6 +1046,21 @@ const (
 	HttpServiceBindingTypeA    HTTP_SERVICE_BINDING_TYPE = 2
 )
 
+// String returns the HTTP_SERVICE_BINDING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_SERVICE_BINDING_TYPE) String() string {
+	switch e {
+	case HttpServiceBindingTypeNone:
+		return "HttpServiceBindingTypeNone"
+	case HttpServiceBindingTypeW:
+		return "HttpServiceBindingTypeW"
+	case HttpServiceBindingTypeA:
+		return "HttpServiceBindingTypeA"
+	default:
+		return fmt.Sprintf("HTTP_SERVICE_BINDING_TYPE(%d)", int32(e))
+	}
+}
+
 // HTTP_SERVICE_CONFIG_CACHE_KEY: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_service_config_cache_key
 type HTTP_SERVICE_CONFIG_CACHE_KEY int32
 
@@ -390,6 +1068,19 @@ const (
 	MaxCacheResponseSize HTTP_SERVICE_CONFIG_CACHE_KEY = 0
 	CacheRangeChunkSize  HTTP_SERVICE_CONFIG_CACHE_KEY = 1
 )
+
+// String returns the HTTP_SERVICE_CONFIG_CACHE_KEY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_SERVICE_CONFIG_CACHE_KEY) String() string {
+	switch e {
+	case MaxCacheResponseSize:
+		return "MaxCacheResponseSize"
+	case CacheRangeChunkSize:
+		return "CacheRangeChunkSize"
+	default:
+		return fmt.Sprintf("HTTP_SERVICE_CONFIG_CACHE_KEY(%d)", int32(e))
+	}
+}
 
 // HTTP_SERVICE_CONFIG_ID: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_service_config_id
 type HTTP_SERVICE_CONFIG_ID int32
@@ -411,6 +1102,43 @@ const (
 	HttpServiceConfigMax                    HTTP_SERVICE_CONFIG_ID = 13
 )
 
+// String returns the HTTP_SERVICE_CONFIG_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_SERVICE_CONFIG_ID) String() string {
+	switch e {
+	case HttpServiceConfigIPListenList:
+		return "HttpServiceConfigIPListenList"
+	case HttpServiceConfigSSLCertInfo:
+		return "HttpServiceConfigSSLCertInfo"
+	case HttpServiceConfigUrlAclInfo:
+		return "HttpServiceConfigUrlAclInfo"
+	case HttpServiceConfigTimeout:
+		return "HttpServiceConfigTimeout"
+	case HttpServiceConfigCache:
+		return "HttpServiceConfigCache"
+	case HttpServiceConfigSslSniCertInfo:
+		return "HttpServiceConfigSslSniCertInfo"
+	case HttpServiceConfigSslCcsCertInfo:
+		return "HttpServiceConfigSslCcsCertInfo"
+	case HttpServiceConfigSetting:
+		return "HttpServiceConfigSetting"
+	case HttpServiceConfigSslCertInfoEx:
+		return "HttpServiceConfigSslCertInfoEx"
+	case HttpServiceConfigSslSniCertInfoEx:
+		return "HttpServiceConfigSslSniCertInfoEx"
+	case HttpServiceConfigSslCcsCertInfoEx:
+		return "HttpServiceConfigSslCcsCertInfoEx"
+	case HttpServiceConfigSslScopedCcsCertInfo:
+		return "HttpServiceConfigSslScopedCcsCertInfo"
+	case HttpServiceConfigSslScopedCcsCertInfoEx:
+		return "HttpServiceConfigSslScopedCcsCertInfoEx"
+	case HttpServiceConfigMax:
+		return "HttpServiceConfigMax"
+	default:
+		return fmt.Sprintf("HTTP_SERVICE_CONFIG_ID(%d)", int32(e))
+	}
+}
+
 // HTTP_SERVICE_CONFIG_QUERY_TYPE: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_service_config_query_type
 type HTTP_SERVICE_CONFIG_QUERY_TYPE int32
 
@@ -420,12 +1148,40 @@ const (
 	HttpServiceConfigQueryMax   HTTP_SERVICE_CONFIG_QUERY_TYPE = 2
 )
 
+// String returns the HTTP_SERVICE_CONFIG_QUERY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_SERVICE_CONFIG_QUERY_TYPE) String() string {
+	switch e {
+	case HttpServiceConfigQueryExact:
+		return "HttpServiceConfigQueryExact"
+	case HttpServiceConfigQueryNext:
+		return "HttpServiceConfigQueryNext"
+	case HttpServiceConfigQueryMax:
+		return "HttpServiceConfigQueryMax"
+	default:
+		return fmt.Sprintf("HTTP_SERVICE_CONFIG_QUERY_TYPE(%d)", int32(e))
+	}
+}
+
 type HTTP_SERVICE_CONFIG_SETTING_KEY int32
 
 const (
 	HttpNone        HTTP_SERVICE_CONFIG_SETTING_KEY = 0
 	HttpTlsThrottle HTTP_SERVICE_CONFIG_SETTING_KEY = 1
 )
+
+// String returns the HTTP_SERVICE_CONFIG_SETTING_KEY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_SERVICE_CONFIG_SETTING_KEY) String() string {
+	switch e {
+	case HttpNone:
+		return "HttpNone"
+	case HttpTlsThrottle:
+		return "HttpTlsThrottle"
+	default:
+		return fmt.Sprintf("HTTP_SERVICE_CONFIG_SETTING_KEY(%d)", int32(e))
+	}
+}
 
 // HTTP_SERVICE_CONFIG_TIMEOUT_KEY: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_service_config_timeout_key
 type HTTP_SERVICE_CONFIG_TIMEOUT_KEY int32
@@ -434,6 +1190,19 @@ const (
 	IdleConnectionTimeout HTTP_SERVICE_CONFIG_TIMEOUT_KEY = 0
 	HeaderWaitTimeout     HTTP_SERVICE_CONFIG_TIMEOUT_KEY = 1
 )
+
+// String returns the HTTP_SERVICE_CONFIG_TIMEOUT_KEY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_SERVICE_CONFIG_TIMEOUT_KEY) String() string {
+	switch e {
+	case IdleConnectionTimeout:
+		return "IdleConnectionTimeout"
+	case HeaderWaitTimeout:
+		return "HeaderWaitTimeout"
+	default:
+		return fmt.Sprintf("HTTP_SERVICE_CONFIG_TIMEOUT_KEY(%d)", int32(e))
+	}
+}
 
 type HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE int32
 
@@ -447,6 +1216,31 @@ const (
 	ExParamTypeCertConfig           HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE = 6
 	ExParamTypeMax                  HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE = 7
 )
+
+// String returns the HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE) String() string {
+	switch e {
+	case ExParamTypeHttp2Window:
+		return "ExParamTypeHttp2Window"
+	case ExParamTypeHttp2SettingsLimits:
+		return "ExParamTypeHttp2SettingsLimits"
+	case ExParamTypeHttpPerformance:
+		return "ExParamTypeHttpPerformance"
+	case ExParamTypeTlsRestrictions:
+		return "ExParamTypeTlsRestrictions"
+	case ExParamTypeErrorHeaders:
+		return "ExParamTypeErrorHeaders"
+	case ExParamTypeTlsSessionTicketKeys:
+		return "ExParamTypeTlsSessionTicketKeys"
+	case ExParamTypeCertConfig:
+		return "ExParamTypeCertConfig"
+	case ExParamTypeMax:
+		return "ExParamTypeMax"
+	default:
+		return fmt.Sprintf("HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE(%d)", int32(e))
+	}
+}
 
 // HTTP_VERB: https://learn.microsoft.com/windows/win32/api/http/ne-http-http_verb
 type HTTP_VERB int32
@@ -474,3 +1268,54 @@ const (
 	HttpVerbSEARCH    HTTP_VERB = 19
 	HttpVerbMaximum   HTTP_VERB = 20
 )
+
+// String returns the HTTP_VERB constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_VERB) String() string {
+	switch e {
+	case HttpVerbUnparsed:
+		return "HttpVerbUnparsed"
+	case HttpVerbUnknown:
+		return "HttpVerbUnknown"
+	case HttpVerbInvalid:
+		return "HttpVerbInvalid"
+	case HttpVerbOPTIONS:
+		return "HttpVerbOPTIONS"
+	case HttpVerbGET:
+		return "HttpVerbGET"
+	case HttpVerbHEAD:
+		return "HttpVerbHEAD"
+	case HttpVerbPOST:
+		return "HttpVerbPOST"
+	case HttpVerbPUT:
+		return "HttpVerbPUT"
+	case HttpVerbDELETE:
+		return "HttpVerbDELETE"
+	case HttpVerbTRACE:
+		return "HttpVerbTRACE"
+	case HttpVerbCONNECT:
+		return "HttpVerbCONNECT"
+	case HttpVerbTRACK:
+		return "HttpVerbTRACK"
+	case HttpVerbMOVE:
+		return "HttpVerbMOVE"
+	case HttpVerbCOPY:
+		return "HttpVerbCOPY"
+	case HttpVerbPROPFIND:
+		return "HttpVerbPROPFIND"
+	case HttpVerbPROPPATCH:
+		return "HttpVerbPROPPATCH"
+	case HttpVerbMKCOL:
+		return "HttpVerbMKCOL"
+	case HttpVerbLOCK:
+		return "HttpVerbLOCK"
+	case HttpVerbUNLOCK:
+		return "HttpVerbUNLOCK"
+	case HttpVerbSEARCH:
+		return "HttpVerbSEARCH"
+	case HttpVerbMaximum:
+		return "HttpVerbMaximum"
+	default:
+		return fmt.Sprintf("HTTP_VERB(%d)", int32(e))
+	}
+}

@@ -4,6 +4,11 @@
 
 package console
 
+import (
+	"fmt"
+	"strings"
+)
+
 type ALLOC_CONSOLE_MODE int32
 
 const (
@@ -12,6 +17,21 @@ const (
 	ALLOC_CONSOLE_MODE_NO_WINDOW  ALLOC_CONSOLE_MODE = 2
 )
 
+// String returns the ALLOC_CONSOLE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ALLOC_CONSOLE_MODE) String() string {
+	switch e {
+	case ALLOC_CONSOLE_MODE_DEFAULT:
+		return "ALLOC_CONSOLE_MODE_DEFAULT"
+	case ALLOC_CONSOLE_MODE_NEW_WINDOW:
+		return "ALLOC_CONSOLE_MODE_NEW_WINDOW"
+	case ALLOC_CONSOLE_MODE_NO_WINDOW:
+		return "ALLOC_CONSOLE_MODE_NO_WINDOW"
+	default:
+		return fmt.Sprintf("ALLOC_CONSOLE_MODE(%d)", int32(e))
+	}
+}
+
 type ALLOC_CONSOLE_RESULT int32
 
 const (
@@ -19,6 +39,21 @@ const (
 	ALLOC_CONSOLE_RESULT_NEW_CONSOLE      ALLOC_CONSOLE_RESULT = 1
 	ALLOC_CONSOLE_RESULT_EXISTING_CONSOLE ALLOC_CONSOLE_RESULT = 2
 )
+
+// String returns the ALLOC_CONSOLE_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ALLOC_CONSOLE_RESULT) String() string {
+	switch e {
+	case ALLOC_CONSOLE_RESULT_NO_CONSOLE:
+		return "ALLOC_CONSOLE_RESULT_NO_CONSOLE"
+	case ALLOC_CONSOLE_RESULT_NEW_CONSOLE:
+		return "ALLOC_CONSOLE_RESULT_NEW_CONSOLE"
+	case ALLOC_CONSOLE_RESULT_EXISTING_CONSOLE:
+		return "ALLOC_CONSOLE_RESULT_EXISTING_CONSOLE"
+	default:
+		return fmt.Sprintf("ALLOC_CONSOLE_RESULT(%d)", int32(e))
+	}
+}
 
 type CONSOLECONTROL int32
 
@@ -33,6 +68,32 @@ const (
 	ConsoleEndTask                  CONSOLECONTROL = 7
 )
 
+// String returns the CONSOLECONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONSOLECONTROL) String() string {
+	switch e {
+	case Reserved1:
+		return "Reserved1"
+	case ConsoleNotifyConsoleApplication:
+		return "ConsoleNotifyConsoleApplication"
+	case Reserved2:
+		return "Reserved2"
+	case ConsoleSetCaretInfo:
+		return "ConsoleSetCaretInfo"
+	case Reserved3:
+		return "Reserved3"
+	case ConsoleSetForeground:
+		return "ConsoleSetForeground"
+	case ConsoleSetWindowOwner:
+		return "ConsoleSetWindowOwner"
+	case ConsoleEndTask:
+		return "ConsoleEndTask"
+	default:
+		return fmt.Sprintf("CONSOLECONTROL(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CONSOLE_CHARACTER_ATTRIBUTES uint16
 
 const (
@@ -54,6 +115,65 @@ const (
 	COMMON_LVB_SBCSDBCS        CONSOLE_CHARACTER_ATTRIBUTES = 768
 )
 
+// String returns the CONSOLE_CHARACTER_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONSOLE_CHARACTER_ATTRIBUTES) String() string {
+	var parts []string
+	if e&FOREGROUND_BLUE != 0 {
+		parts = append(parts, "FOREGROUND_BLUE")
+	}
+	if e&FOREGROUND_GREEN != 0 {
+		parts = append(parts, "FOREGROUND_GREEN")
+	}
+	if e&FOREGROUND_RED != 0 {
+		parts = append(parts, "FOREGROUND_RED")
+	}
+	if e&FOREGROUND_INTENSITY != 0 {
+		parts = append(parts, "FOREGROUND_INTENSITY")
+	}
+	if e&BACKGROUND_BLUE != 0 {
+		parts = append(parts, "BACKGROUND_BLUE")
+	}
+	if e&BACKGROUND_GREEN != 0 {
+		parts = append(parts, "BACKGROUND_GREEN")
+	}
+	if e&BACKGROUND_RED != 0 {
+		parts = append(parts, "BACKGROUND_RED")
+	}
+	if e&BACKGROUND_INTENSITY != 0 {
+		parts = append(parts, "BACKGROUND_INTENSITY")
+	}
+	if e&COMMON_LVB_LEADING_BYTE != 0 {
+		parts = append(parts, "COMMON_LVB_LEADING_BYTE")
+	}
+	if e&COMMON_LVB_TRAILING_BYTE != 0 {
+		parts = append(parts, "COMMON_LVB_TRAILING_BYTE")
+	}
+	if e&COMMON_LVB_GRID_HORIZONTAL != 0 {
+		parts = append(parts, "COMMON_LVB_GRID_HORIZONTAL")
+	}
+	if e&COMMON_LVB_GRID_LVERTICAL != 0 {
+		parts = append(parts, "COMMON_LVB_GRID_LVERTICAL")
+	}
+	if e&COMMON_LVB_GRID_RVERTICAL != 0 {
+		parts = append(parts, "COMMON_LVB_GRID_RVERTICAL")
+	}
+	if e&COMMON_LVB_REVERSE_VIDEO != 0 {
+		parts = append(parts, "COMMON_LVB_REVERSE_VIDEO")
+	}
+	if e&COMMON_LVB_UNDERSCORE != 0 {
+		parts = append(parts, "COMMON_LVB_UNDERSCORE")
+	}
+	if e&COMMON_LVB_SBCSDBCS != 0 {
+		parts = append(parts, "COMMON_LVB_SBCSDBCS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CONSOLE_MODE uint32
 
 const (
@@ -74,6 +194,61 @@ const (
 	ENABLE_LVB_GRID_WORLDWIDE          CONSOLE_MODE = 16
 )
 
+// String returns the CONSOLE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONSOLE_MODE) String() string {
+	var parts []string
+	if e&ENABLE_PROCESSED_INPUT != 0 {
+		parts = append(parts, "ENABLE_PROCESSED_INPUT")
+	}
+	if e&ENABLE_LINE_INPUT != 0 {
+		parts = append(parts, "ENABLE_LINE_INPUT")
+	}
+	if e&ENABLE_ECHO_INPUT != 0 {
+		parts = append(parts, "ENABLE_ECHO_INPUT")
+	}
+	if e&ENABLE_WINDOW_INPUT != 0 {
+		parts = append(parts, "ENABLE_WINDOW_INPUT")
+	}
+	if e&ENABLE_MOUSE_INPUT != 0 {
+		parts = append(parts, "ENABLE_MOUSE_INPUT")
+	}
+	if e&ENABLE_INSERT_MODE != 0 {
+		parts = append(parts, "ENABLE_INSERT_MODE")
+	}
+	if e&ENABLE_QUICK_EDIT_MODE != 0 {
+		parts = append(parts, "ENABLE_QUICK_EDIT_MODE")
+	}
+	if e&ENABLE_EXTENDED_FLAGS != 0 {
+		parts = append(parts, "ENABLE_EXTENDED_FLAGS")
+	}
+	if e&ENABLE_AUTO_POSITION != 0 {
+		parts = append(parts, "ENABLE_AUTO_POSITION")
+	}
+	if e&ENABLE_VIRTUAL_TERMINAL_INPUT != 0 {
+		parts = append(parts, "ENABLE_VIRTUAL_TERMINAL_INPUT")
+	}
+	if e&ENABLE_PROCESSED_OUTPUT != 0 {
+		parts = append(parts, "ENABLE_PROCESSED_OUTPUT")
+	}
+	if e&ENABLE_WRAP_AT_EOL_OUTPUT != 0 {
+		parts = append(parts, "ENABLE_WRAP_AT_EOL_OUTPUT")
+	}
+	if e&ENABLE_VIRTUAL_TERMINAL_PROCESSING != 0 {
+		parts = append(parts, "ENABLE_VIRTUAL_TERMINAL_PROCESSING")
+	}
+	if e&DISABLE_NEWLINE_AUTO_RETURN != 0 {
+		parts = append(parts, "DISABLE_NEWLINE_AUTO_RETURN")
+	}
+	if e&ENABLE_LVB_GRID_WORLDWIDE != 0 {
+		parts = append(parts, "ENABLE_LVB_GRID_WORLDWIDE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type STD_HANDLE uint32
 
 const (
@@ -81,3 +256,18 @@ const (
 	STD_OUTPUT_HANDLE STD_HANDLE = 4294967285
 	STD_ERROR_HANDLE  STD_HANDLE = 4294967284
 )
+
+// String returns the STD_HANDLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STD_HANDLE) String() string {
+	switch e {
+	case STD_INPUT_HANDLE:
+		return "STD_INPUT_HANDLE"
+	case STD_OUTPUT_HANDLE:
+		return "STD_OUTPUT_HANDLE"
+	case STD_ERROR_HANDLE:
+		return "STD_ERROR_HANDLE"
+	default:
+		return fmt.Sprintf("STD_HANDLE(%d)", uint32(e))
+	}
+}

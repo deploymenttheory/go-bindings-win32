@@ -4,6 +4,10 @@
 
 package common
 
+import (
+	"fmt"
+)
+
 // DEVICE_SCALE_FACTOR: https://learn.microsoft.com/windows/win32/api/shtypes/ne-shtypes-device_scale_factor
 type DEVICE_SCALE_FACTOR int32
 
@@ -27,6 +31,49 @@ const (
 	SCALE_500_PERCENT           DEVICE_SCALE_FACTOR = 500
 )
 
+// String returns the DEVICE_SCALE_FACTOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVICE_SCALE_FACTOR) String() string {
+	switch e {
+	case DEVICE_SCALE_FACTOR_INVALID:
+		return "DEVICE_SCALE_FACTOR_INVALID"
+	case SCALE_100_PERCENT:
+		return "SCALE_100_PERCENT"
+	case SCALE_120_PERCENT:
+		return "SCALE_120_PERCENT"
+	case SCALE_125_PERCENT:
+		return "SCALE_125_PERCENT"
+	case SCALE_140_PERCENT:
+		return "SCALE_140_PERCENT"
+	case SCALE_150_PERCENT:
+		return "SCALE_150_PERCENT"
+	case SCALE_160_PERCENT:
+		return "SCALE_160_PERCENT"
+	case SCALE_175_PERCENT:
+		return "SCALE_175_PERCENT"
+	case SCALE_180_PERCENT:
+		return "SCALE_180_PERCENT"
+	case SCALE_200_PERCENT:
+		return "SCALE_200_PERCENT"
+	case SCALE_225_PERCENT:
+		return "SCALE_225_PERCENT"
+	case SCALE_250_PERCENT:
+		return "SCALE_250_PERCENT"
+	case SCALE_300_PERCENT:
+		return "SCALE_300_PERCENT"
+	case SCALE_350_PERCENT:
+		return "SCALE_350_PERCENT"
+	case SCALE_400_PERCENT:
+		return "SCALE_400_PERCENT"
+	case SCALE_450_PERCENT:
+		return "SCALE_450_PERCENT"
+	case SCALE_500_PERCENT:
+		return "SCALE_500_PERCENT"
+	default:
+		return fmt.Sprintf("DEVICE_SCALE_FACTOR(%d)", int32(e))
+	}
+}
+
 // PERCEIVED: https://learn.microsoft.com/windows/win32/api/shtypes/ne-shtypes-perceived
 type PERCEIVED int32
 
@@ -48,6 +95,43 @@ const (
 	PERCEIVED_TYPE_CONTACTS    PERCEIVED = 10
 	PERCEIVED_TYPE_LAST        PERCEIVED = 10
 )
+
+// String returns the PERCEIVED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PERCEIVED) String() string {
+	switch e {
+	case PERCEIVED_TYPE_FIRST:
+		return "PERCEIVED_TYPE_FIRST"
+	case PERCEIVED_TYPE_UNSPECIFIED:
+		return "PERCEIVED_TYPE_UNSPECIFIED"
+	case PERCEIVED_TYPE_FOLDER:
+		return "PERCEIVED_TYPE_FOLDER"
+	case PERCEIVED_TYPE_UNKNOWN:
+		return "PERCEIVED_TYPE_UNKNOWN"
+	case PERCEIVED_TYPE_TEXT:
+		return "PERCEIVED_TYPE_TEXT"
+	case PERCEIVED_TYPE_IMAGE:
+		return "PERCEIVED_TYPE_IMAGE"
+	case PERCEIVED_TYPE_AUDIO:
+		return "PERCEIVED_TYPE_AUDIO"
+	case PERCEIVED_TYPE_VIDEO:
+		return "PERCEIVED_TYPE_VIDEO"
+	case PERCEIVED_TYPE_COMPRESSED:
+		return "PERCEIVED_TYPE_COMPRESSED"
+	case PERCEIVED_TYPE_DOCUMENT:
+		return "PERCEIVED_TYPE_DOCUMENT"
+	case PERCEIVED_TYPE_SYSTEM:
+		return "PERCEIVED_TYPE_SYSTEM"
+	case PERCEIVED_TYPE_APPLICATION:
+		return "PERCEIVED_TYPE_APPLICATION"
+	case PERCEIVED_TYPE_GAMEMEDIA:
+		return "PERCEIVED_TYPE_GAMEMEDIA"
+	case PERCEIVED_TYPE_CONTACTS:
+		return "PERCEIVED_TYPE_CONTACTS"
+	default:
+		return fmt.Sprintf("PERCEIVED(%d)", int32(e))
+	}
+}
 
 // SHCOLSTATE: https://learn.microsoft.com/windows/win32/api/shtypes/ne-shtypes-shcolstate
 type SHCOLSTATE int32
@@ -75,6 +159,55 @@ const (
 	SHCOLSTATE_DISPLAYMASK        SHCOLSTATE = 61440
 )
 
+// String returns the SHCOLSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHCOLSTATE) String() string {
+	switch e {
+	case SHCOLSTATE_DEFAULT:
+		return "SHCOLSTATE_DEFAULT"
+	case SHCOLSTATE_TYPE_STR:
+		return "SHCOLSTATE_TYPE_STR"
+	case SHCOLSTATE_TYPE_INT:
+		return "SHCOLSTATE_TYPE_INT"
+	case SHCOLSTATE_TYPE_DATE:
+		return "SHCOLSTATE_TYPE_DATE"
+	case SHCOLSTATE_TYPEMASK:
+		return "SHCOLSTATE_TYPEMASK"
+	case SHCOLSTATE_ONBYDEFAULT:
+		return "SHCOLSTATE_ONBYDEFAULT"
+	case SHCOLSTATE_SLOW:
+		return "SHCOLSTATE_SLOW"
+	case SHCOLSTATE_EXTENDED:
+		return "SHCOLSTATE_EXTENDED"
+	case SHCOLSTATE_SECONDARYUI:
+		return "SHCOLSTATE_SECONDARYUI"
+	case SHCOLSTATE_HIDDEN:
+		return "SHCOLSTATE_HIDDEN"
+	case SHCOLSTATE_PREFER_VARCMP:
+		return "SHCOLSTATE_PREFER_VARCMP"
+	case SHCOLSTATE_PREFER_FMTCMP:
+		return "SHCOLSTATE_PREFER_FMTCMP"
+	case SHCOLSTATE_NOSORTBYFOLDERNESS:
+		return "SHCOLSTATE_NOSORTBYFOLDERNESS"
+	case SHCOLSTATE_VIEWONLY:
+		return "SHCOLSTATE_VIEWONLY"
+	case SHCOLSTATE_BATCHREAD:
+		return "SHCOLSTATE_BATCHREAD"
+	case SHCOLSTATE_NO_GROUPBY:
+		return "SHCOLSTATE_NO_GROUPBY"
+	case SHCOLSTATE_FIXED_WIDTH:
+		return "SHCOLSTATE_FIXED_WIDTH"
+	case SHCOLSTATE_NODPISCALE:
+		return "SHCOLSTATE_NODPISCALE"
+	case SHCOLSTATE_FIXED_RATIO:
+		return "SHCOLSTATE_FIXED_RATIO"
+	case SHCOLSTATE_DISPLAYMASK:
+		return "SHCOLSTATE_DISPLAYMASK"
+	default:
+		return fmt.Sprintf("SHCOLSTATE(%d)", int32(e))
+	}
+}
+
 type STRRET_TYPE int32
 
 const (
@@ -82,3 +215,18 @@ const (
 	STRRET_OFFSET STRRET_TYPE = 1
 	STRRET_CSTR   STRRET_TYPE = 2
 )
+
+// String returns the STRRET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STRRET_TYPE) String() string {
+	switch e {
+	case STRRET_WSTR:
+		return "STRRET_WSTR"
+	case STRRET_OFFSET:
+		return "STRRET_OFFSET"
+	case STRRET_CSTR:
+		return "STRRET_CSTR"
+	default:
+		return fmt.Sprintf("STRRET_TYPE(%d)", int32(e))
+	}
+}

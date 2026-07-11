@@ -4,6 +4,10 @@
 
 package vss
 
+import (
+	"fmt"
+)
+
 // VSS_ALTERNATE_WRITER_STATE: https://learn.microsoft.com/windows/win32/api/vswriter/ne-vswriter-vss_alternate_writer_state
 type VSS_ALTERNATE_WRITER_STATE int32
 
@@ -13,6 +17,23 @@ const (
 	VSS_AWS_ALTERNATE_WRITER_EXISTS  VSS_ALTERNATE_WRITER_STATE = 2
 	VSS_AWS_THIS_IS_ALTERNATE_WRITER VSS_ALTERNATE_WRITER_STATE = 3
 )
+
+// String returns the VSS_ALTERNATE_WRITER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_ALTERNATE_WRITER_STATE) String() string {
+	switch e {
+	case VSS_AWS_UNDEFINED:
+		return "VSS_AWS_UNDEFINED"
+	case VSS_AWS_NO_ALTERNATE_WRITER:
+		return "VSS_AWS_NO_ALTERNATE_WRITER"
+	case VSS_AWS_ALTERNATE_WRITER_EXISTS:
+		return "VSS_AWS_ALTERNATE_WRITER_EXISTS"
+	case VSS_AWS_THIS_IS_ALTERNATE_WRITER:
+		return "VSS_AWS_THIS_IS_ALTERNATE_WRITER"
+	default:
+		return fmt.Sprintf("VSS_ALTERNATE_WRITER_STATE(%d)", int32(e))
+	}
+}
 
 // VSS_APPLICATION_LEVEL: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_application_level
 type VSS_APPLICATION_LEVEL int32
@@ -25,6 +46,27 @@ const (
 	VSS_APP_SYSTEM_RM VSS_APPLICATION_LEVEL = 4
 	VSS_APP_AUTO      VSS_APPLICATION_LEVEL = -1
 )
+
+// String returns the VSS_APPLICATION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_APPLICATION_LEVEL) String() string {
+	switch e {
+	case VSS_APP_UNKNOWN:
+		return "VSS_APP_UNKNOWN"
+	case VSS_APP_SYSTEM:
+		return "VSS_APP_SYSTEM"
+	case VSS_APP_BACK_END:
+		return "VSS_APP_BACK_END"
+	case VSS_APP_FRONT_END:
+		return "VSS_APP_FRONT_END"
+	case VSS_APP_SYSTEM_RM:
+		return "VSS_APP_SYSTEM_RM"
+	case VSS_APP_AUTO:
+		return "VSS_APP_AUTO"
+	default:
+		return fmt.Sprintf("VSS_APPLICATION_LEVEL(%d)", int32(e))
+	}
+}
 
 // VSS_BACKUP_SCHEMA: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_backup_schema
 type VSS_BACKUP_SCHEMA int32
@@ -48,6 +90,47 @@ const (
 	VSS_BS_WRITER_SUPPORTS_PARALLEL_RESTORES  VSS_BACKUP_SCHEMA = 32768
 )
 
+// String returns the VSS_BACKUP_SCHEMA constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_BACKUP_SCHEMA) String() string {
+	switch e {
+	case VSS_BS_UNDEFINED:
+		return "VSS_BS_UNDEFINED"
+	case VSS_BS_DIFFERENTIAL:
+		return "VSS_BS_DIFFERENTIAL"
+	case VSS_BS_INCREMENTAL:
+		return "VSS_BS_INCREMENTAL"
+	case VSS_BS_EXCLUSIVE_INCREMENTAL_DIFFERENTIAL:
+		return "VSS_BS_EXCLUSIVE_INCREMENTAL_DIFFERENTIAL"
+	case VSS_BS_LOG:
+		return "VSS_BS_LOG"
+	case VSS_BS_COPY:
+		return "VSS_BS_COPY"
+	case VSS_BS_TIMESTAMPED:
+		return "VSS_BS_TIMESTAMPED"
+	case VSS_BS_LAST_MODIFY:
+		return "VSS_BS_LAST_MODIFY"
+	case VSS_BS_LSN:
+		return "VSS_BS_LSN"
+	case VSS_BS_WRITER_SUPPORTS_NEW_TARGET:
+		return "VSS_BS_WRITER_SUPPORTS_NEW_TARGET"
+	case VSS_BS_WRITER_SUPPORTS_RESTORE_WITH_MOVE:
+		return "VSS_BS_WRITER_SUPPORTS_RESTORE_WITH_MOVE"
+	case VSS_BS_INDEPENDENT_SYSTEM_STATE:
+		return "VSS_BS_INDEPENDENT_SYSTEM_STATE"
+	case VSS_BS_ROLLFORWARD_RESTORE:
+		return "VSS_BS_ROLLFORWARD_RESTORE"
+	case VSS_BS_RESTORE_RENAME:
+		return "VSS_BS_RESTORE_RENAME"
+	case VSS_BS_AUTHORITATIVE_RESTORE:
+		return "VSS_BS_AUTHORITATIVE_RESTORE"
+	case VSS_BS_WRITER_SUPPORTS_PARALLEL_RESTORES:
+		return "VSS_BS_WRITER_SUPPORTS_PARALLEL_RESTORES"
+	default:
+		return fmt.Sprintf("VSS_BACKUP_SCHEMA(%d)", int32(e))
+	}
+}
+
 // VSS_BACKUP_TYPE: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_backup_type
 type VSS_BACKUP_TYPE int32
 
@@ -61,6 +144,29 @@ const (
 	VSS_BT_OTHER        VSS_BACKUP_TYPE = 6
 )
 
+// String returns the VSS_BACKUP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_BACKUP_TYPE) String() string {
+	switch e {
+	case VSS_BT_UNDEFINED:
+		return "VSS_BT_UNDEFINED"
+	case VSS_BT_FULL:
+		return "VSS_BT_FULL"
+	case VSS_BT_INCREMENTAL:
+		return "VSS_BT_INCREMENTAL"
+	case VSS_BT_DIFFERENTIAL:
+		return "VSS_BT_DIFFERENTIAL"
+	case VSS_BT_LOG:
+		return "VSS_BT_LOG"
+	case VSS_BT_COPY:
+		return "VSS_BT_COPY"
+	case VSS_BT_OTHER:
+		return "VSS_BT_OTHER"
+	default:
+		return fmt.Sprintf("VSS_BACKUP_TYPE(%d)", int32(e))
+	}
+}
+
 // VSS_COMPONENT_FLAGS: https://learn.microsoft.com/windows/win32/api/vswriter/ne-vswriter-vss_component_flags
 type VSS_COMPONENT_FLAGS int32
 
@@ -69,6 +175,21 @@ const (
 	VSS_CF_APP_ROLLBACK_RECOVERY VSS_COMPONENT_FLAGS = 2
 	VSS_CF_NOT_SYSTEM_STATE      VSS_COMPONENT_FLAGS = 4
 )
+
+// String returns the VSS_COMPONENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_COMPONENT_FLAGS) String() string {
+	switch e {
+	case VSS_CF_BACKUP_RECOVERY:
+		return "VSS_CF_BACKUP_RECOVERY"
+	case VSS_CF_APP_ROLLBACK_RECOVERY:
+		return "VSS_CF_APP_ROLLBACK_RECOVERY"
+	case VSS_CF_NOT_SYSTEM_STATE:
+		return "VSS_CF_NOT_SYSTEM_STATE"
+	default:
+		return fmt.Sprintf("VSS_COMPONENT_FLAGS(%d)", int32(e))
+	}
+}
 
 // VSS_COMPONENT_TYPE: https://learn.microsoft.com/windows/win32/api/vswriter/ne-vswriter-vss_component_type
 type VSS_COMPONENT_TYPE int32
@@ -79,6 +200,21 @@ const (
 	VSS_CT_FILEGROUP VSS_COMPONENT_TYPE = 2
 )
 
+// String returns the VSS_COMPONENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_COMPONENT_TYPE) String() string {
+	switch e {
+	case VSS_CT_UNDEFINED:
+		return "VSS_CT_UNDEFINED"
+	case VSS_CT_DATABASE:
+		return "VSS_CT_DATABASE"
+	case VSS_CT_FILEGROUP:
+		return "VSS_CT_FILEGROUP"
+	default:
+		return fmt.Sprintf("VSS_COMPONENT_TYPE(%d)", int32(e))
+	}
+}
+
 // VSS_FILE_RESTORE_STATUS: https://learn.microsoft.com/windows/win32/api/vswriter/ne-vswriter-vss_file_restore_status
 type VSS_FILE_RESTORE_STATUS int32
 
@@ -88,6 +224,23 @@ const (
 	VSS_RS_ALL       VSS_FILE_RESTORE_STATUS = 2
 	VSS_RS_FAILED    VSS_FILE_RESTORE_STATUS = 3
 )
+
+// String returns the VSS_FILE_RESTORE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_FILE_RESTORE_STATUS) String() string {
+	switch e {
+	case VSS_RS_UNDEFINED:
+		return "VSS_RS_UNDEFINED"
+	case VSS_RS_NONE:
+		return "VSS_RS_NONE"
+	case VSS_RS_ALL:
+		return "VSS_RS_ALL"
+	case VSS_RS_FAILED:
+		return "VSS_RS_FAILED"
+	default:
+		return fmt.Sprintf("VSS_FILE_RESTORE_STATUS(%d)", int32(e))
+	}
+}
 
 // VSS_FILE_SPEC_BACKUP_TYPE: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_file_spec_backup_type
 type VSS_FILE_SPEC_BACKUP_TYPE int32
@@ -106,6 +259,37 @@ const (
 	VSS_FSBT_ALL_SNAPSHOT_REQUIRED          VSS_FILE_SPEC_BACKUP_TYPE = 3840
 )
 
+// String returns the VSS_FILE_SPEC_BACKUP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_FILE_SPEC_BACKUP_TYPE) String() string {
+	switch e {
+	case VSS_FSBT_FULL_BACKUP_REQUIRED:
+		return "VSS_FSBT_FULL_BACKUP_REQUIRED"
+	case VSS_FSBT_DIFFERENTIAL_BACKUP_REQUIRED:
+		return "VSS_FSBT_DIFFERENTIAL_BACKUP_REQUIRED"
+	case VSS_FSBT_INCREMENTAL_BACKUP_REQUIRED:
+		return "VSS_FSBT_INCREMENTAL_BACKUP_REQUIRED"
+	case VSS_FSBT_LOG_BACKUP_REQUIRED:
+		return "VSS_FSBT_LOG_BACKUP_REQUIRED"
+	case VSS_FSBT_FULL_SNAPSHOT_REQUIRED:
+		return "VSS_FSBT_FULL_SNAPSHOT_REQUIRED"
+	case VSS_FSBT_DIFFERENTIAL_SNAPSHOT_REQUIRED:
+		return "VSS_FSBT_DIFFERENTIAL_SNAPSHOT_REQUIRED"
+	case VSS_FSBT_INCREMENTAL_SNAPSHOT_REQUIRED:
+		return "VSS_FSBT_INCREMENTAL_SNAPSHOT_REQUIRED"
+	case VSS_FSBT_LOG_SNAPSHOT_REQUIRED:
+		return "VSS_FSBT_LOG_SNAPSHOT_REQUIRED"
+	case VSS_FSBT_CREATED_DURING_BACKUP:
+		return "VSS_FSBT_CREATED_DURING_BACKUP"
+	case VSS_FSBT_ALL_BACKUP_REQUIRED:
+		return "VSS_FSBT_ALL_BACKUP_REQUIRED"
+	case VSS_FSBT_ALL_SNAPSHOT_REQUIRED:
+		return "VSS_FSBT_ALL_SNAPSHOT_REQUIRED"
+	default:
+		return fmt.Sprintf("VSS_FILE_SPEC_BACKUP_TYPE(%d)", int32(e))
+	}
+}
+
 // VSS_HARDWARE_OPTIONS: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_hardware_options
 type VSS_HARDWARE_OPTIONS int32
 
@@ -120,6 +304,31 @@ const (
 	VSS_ONLUNSTATECHANGE_DO_MASK_LUNS             VSS_HARDWARE_OPTIONS = 2048
 )
 
+// String returns the VSS_HARDWARE_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_HARDWARE_OPTIONS) String() string {
+	switch e {
+	case VSS_BREAKEX_FLAG_MASK_LUNS:
+		return "VSS_BREAKEX_FLAG_MASK_LUNS"
+	case VSS_BREAKEX_FLAG_MAKE_READ_WRITE:
+		return "VSS_BREAKEX_FLAG_MAKE_READ_WRITE"
+	case VSS_BREAKEX_FLAG_REVERT_IDENTITY_ALL:
+		return "VSS_BREAKEX_FLAG_REVERT_IDENTITY_ALL"
+	case VSS_BREAKEX_FLAG_REVERT_IDENTITY_NONE:
+		return "VSS_BREAKEX_FLAG_REVERT_IDENTITY_NONE"
+	case VSS_ONLUNSTATECHANGE_NOTIFY_READ_WRITE:
+		return "VSS_ONLUNSTATECHANGE_NOTIFY_READ_WRITE"
+	case VSS_ONLUNSTATECHANGE_NOTIFY_LUN_PRE_RECOVERY:
+		return "VSS_ONLUNSTATECHANGE_NOTIFY_LUN_PRE_RECOVERY"
+	case VSS_ONLUNSTATECHANGE_NOTIFY_LUN_POST_RECOVERY:
+		return "VSS_ONLUNSTATECHANGE_NOTIFY_LUN_POST_RECOVERY"
+	case VSS_ONLUNSTATECHANGE_DO_MASK_LUNS:
+		return "VSS_ONLUNSTATECHANGE_DO_MASK_LUNS"
+	default:
+		return fmt.Sprintf("VSS_HARDWARE_OPTIONS(%d)", int32(e))
+	}
+}
+
 // VSS_MGMT_OBJECT_TYPE: https://learn.microsoft.com/windows/win32/api/vsmgmt/ne-vsmgmt-vss_mgmt_object_type
 type VSS_MGMT_OBJECT_TYPE int32
 
@@ -129,6 +338,23 @@ const (
 	VSS_MGMT_OBJECT_DIFF_VOLUME VSS_MGMT_OBJECT_TYPE = 2
 	VSS_MGMT_OBJECT_DIFF_AREA   VSS_MGMT_OBJECT_TYPE = 3
 )
+
+// String returns the VSS_MGMT_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_MGMT_OBJECT_TYPE) String() string {
+	switch e {
+	case VSS_MGMT_OBJECT_UNKNOWN:
+		return "VSS_MGMT_OBJECT_UNKNOWN"
+	case VSS_MGMT_OBJECT_VOLUME:
+		return "VSS_MGMT_OBJECT_VOLUME"
+	case VSS_MGMT_OBJECT_DIFF_VOLUME:
+		return "VSS_MGMT_OBJECT_DIFF_VOLUME"
+	case VSS_MGMT_OBJECT_DIFF_AREA:
+		return "VSS_MGMT_OBJECT_DIFF_AREA"
+	default:
+		return fmt.Sprintf("VSS_MGMT_OBJECT_TYPE(%d)", int32(e))
+	}
+}
 
 // VSS_OBJECT_TYPE: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_object_type
 type VSS_OBJECT_TYPE int32
@@ -141,6 +367,27 @@ const (
 	VSS_OBJECT_PROVIDER     VSS_OBJECT_TYPE = 4
 	VSS_OBJECT_TYPE_COUNT   VSS_OBJECT_TYPE = 5
 )
+
+// String returns the VSS_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_OBJECT_TYPE) String() string {
+	switch e {
+	case VSS_OBJECT_UNKNOWN:
+		return "VSS_OBJECT_UNKNOWN"
+	case VSS_OBJECT_NONE:
+		return "VSS_OBJECT_NONE"
+	case VSS_OBJECT_SNAPSHOT_SET:
+		return "VSS_OBJECT_SNAPSHOT_SET"
+	case VSS_OBJECT_SNAPSHOT:
+		return "VSS_OBJECT_SNAPSHOT"
+	case VSS_OBJECT_PROVIDER:
+		return "VSS_OBJECT_PROVIDER"
+	case VSS_OBJECT_TYPE_COUNT:
+		return "VSS_OBJECT_TYPE_COUNT"
+	default:
+		return fmt.Sprintf("VSS_OBJECT_TYPE(%d)", int32(e))
+	}
+}
 
 // VSS_PROTECTION_FAULT: https://learn.microsoft.com/windows/win32/api/vsmgmt/ne-vsmgmt-vss_protection_fault
 type VSS_PROTECTION_FAULT int32
@@ -165,6 +412,49 @@ const (
 	VSS_PROTECTION_FAULT_MOUNT_DURING_CLUSTER_OFFLINE VSS_PROTECTION_FAULT = 16
 )
 
+// String returns the VSS_PROTECTION_FAULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_PROTECTION_FAULT) String() string {
+	switch e {
+	case VSS_PROTECTION_FAULT_NONE:
+		return "VSS_PROTECTION_FAULT_NONE"
+	case VSS_PROTECTION_FAULT_DIFF_AREA_MISSING:
+		return "VSS_PROTECTION_FAULT_DIFF_AREA_MISSING"
+	case VSS_PROTECTION_FAULT_IO_FAILURE_DURING_ONLINE:
+		return "VSS_PROTECTION_FAULT_IO_FAILURE_DURING_ONLINE"
+	case VSS_PROTECTION_FAULT_META_DATA_CORRUPTION:
+		return "VSS_PROTECTION_FAULT_META_DATA_CORRUPTION"
+	case VSS_PROTECTION_FAULT_MEMORY_ALLOCATION_FAILURE:
+		return "VSS_PROTECTION_FAULT_MEMORY_ALLOCATION_FAILURE"
+	case VSS_PROTECTION_FAULT_MAPPED_MEMORY_FAILURE:
+		return "VSS_PROTECTION_FAULT_MAPPED_MEMORY_FAILURE"
+	case VSS_PROTECTION_FAULT_COW_READ_FAILURE:
+		return "VSS_PROTECTION_FAULT_COW_READ_FAILURE"
+	case VSS_PROTECTION_FAULT_COW_WRITE_FAILURE:
+		return "VSS_PROTECTION_FAULT_COW_WRITE_FAILURE"
+	case VSS_PROTECTION_FAULT_DIFF_AREA_FULL:
+		return "VSS_PROTECTION_FAULT_DIFF_AREA_FULL"
+	case VSS_PROTECTION_FAULT_GROW_TOO_SLOW:
+		return "VSS_PROTECTION_FAULT_GROW_TOO_SLOW"
+	case VSS_PROTECTION_FAULT_GROW_FAILED:
+		return "VSS_PROTECTION_FAULT_GROW_FAILED"
+	case VSS_PROTECTION_FAULT_DESTROY_ALL_SNAPSHOTS:
+		return "VSS_PROTECTION_FAULT_DESTROY_ALL_SNAPSHOTS"
+	case VSS_PROTECTION_FAULT_FILE_SYSTEM_FAILURE:
+		return "VSS_PROTECTION_FAULT_FILE_SYSTEM_FAILURE"
+	case VSS_PROTECTION_FAULT_IO_FAILURE:
+		return "VSS_PROTECTION_FAULT_IO_FAILURE"
+	case VSS_PROTECTION_FAULT_DIFF_AREA_REMOVED:
+		return "VSS_PROTECTION_FAULT_DIFF_AREA_REMOVED"
+	case VSS_PROTECTION_FAULT_EXTERNAL_WRITER_TO_DIFF_AREA:
+		return "VSS_PROTECTION_FAULT_EXTERNAL_WRITER_TO_DIFF_AREA"
+	case VSS_PROTECTION_FAULT_MOUNT_DURING_CLUSTER_OFFLINE:
+		return "VSS_PROTECTION_FAULT_MOUNT_DURING_CLUSTER_OFFLINE"
+	default:
+		return fmt.Sprintf("VSS_PROTECTION_FAULT(%d)", int32(e))
+	}
+}
+
 // VSS_PROTECTION_LEVEL: https://learn.microsoft.com/windows/win32/api/vsmgmt/ne-vsmgmt-vss_protection_level
 type VSS_PROTECTION_LEVEL int32
 
@@ -172,6 +462,19 @@ const (
 	VSS_PROTECTION_LEVEL_ORIGINAL_VOLUME VSS_PROTECTION_LEVEL = 0
 	VSS_PROTECTION_LEVEL_SNAPSHOT        VSS_PROTECTION_LEVEL = 1
 )
+
+// String returns the VSS_PROTECTION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_PROTECTION_LEVEL) String() string {
+	switch e {
+	case VSS_PROTECTION_LEVEL_ORIGINAL_VOLUME:
+		return "VSS_PROTECTION_LEVEL_ORIGINAL_VOLUME"
+	case VSS_PROTECTION_LEVEL_SNAPSHOT:
+		return "VSS_PROTECTION_LEVEL_SNAPSHOT"
+	default:
+		return fmt.Sprintf("VSS_PROTECTION_LEVEL(%d)", int32(e))
+	}
+}
 
 // VSS_PROVIDER_CAPABILITIES: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_provider_capabilities
 type VSS_PROVIDER_CAPABILITIES int32
@@ -189,6 +492,35 @@ const (
 	VSS_PRV_CAPABILITY_CLUSTERED        VSS_PROVIDER_CAPABILITIES = 512
 )
 
+// String returns the VSS_PROVIDER_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_PROVIDER_CAPABILITIES) String() string {
+	switch e {
+	case VSS_PRV_CAPABILITY_LEGACY:
+		return "VSS_PRV_CAPABILITY_LEGACY"
+	case VSS_PRV_CAPABILITY_COMPLIANT:
+		return "VSS_PRV_CAPABILITY_COMPLIANT"
+	case VSS_PRV_CAPABILITY_LUN_REPOINT:
+		return "VSS_PRV_CAPABILITY_LUN_REPOINT"
+	case VSS_PRV_CAPABILITY_LUN_RESYNC:
+		return "VSS_PRV_CAPABILITY_LUN_RESYNC"
+	case VSS_PRV_CAPABILITY_OFFLINE_CREATION:
+		return "VSS_PRV_CAPABILITY_OFFLINE_CREATION"
+	case VSS_PRV_CAPABILITY_MULTIPLE_IMPORT:
+		return "VSS_PRV_CAPABILITY_MULTIPLE_IMPORT"
+	case VSS_PRV_CAPABILITY_RECYCLING:
+		return "VSS_PRV_CAPABILITY_RECYCLING"
+	case VSS_PRV_CAPABILITY_PLEX:
+		return "VSS_PRV_CAPABILITY_PLEX"
+	case VSS_PRV_CAPABILITY_DIFFERENTIAL:
+		return "VSS_PRV_CAPABILITY_DIFFERENTIAL"
+	case VSS_PRV_CAPABILITY_CLUSTERED:
+		return "VSS_PRV_CAPABILITY_CLUSTERED"
+	default:
+		return fmt.Sprintf("VSS_PROVIDER_CAPABILITIES(%d)", int32(e))
+	}
+}
+
 // VSS_PROVIDER_TYPE: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_provider_type
 type VSS_PROVIDER_TYPE int32
 
@@ -200,6 +532,25 @@ const (
 	VSS_PROV_FILESHARE VSS_PROVIDER_TYPE = 4
 )
 
+// String returns the VSS_PROVIDER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_PROVIDER_TYPE) String() string {
+	switch e {
+	case VSS_PROV_UNKNOWN:
+		return "VSS_PROV_UNKNOWN"
+	case VSS_PROV_SYSTEM:
+		return "VSS_PROV_SYSTEM"
+	case VSS_PROV_SOFTWARE:
+		return "VSS_PROV_SOFTWARE"
+	case VSS_PROV_HARDWARE:
+		return "VSS_PROV_HARDWARE"
+	case VSS_PROV_FILESHARE:
+		return "VSS_PROV_FILESHARE"
+	default:
+		return fmt.Sprintf("VSS_PROVIDER_TYPE(%d)", int32(e))
+	}
+}
+
 // VSS_RECOVERY_OPTIONS: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_recovery_options
 type VSS_RECOVERY_OPTIONS int32
 
@@ -207,6 +558,19 @@ const (
 	VSS_RECOVERY_REVERT_IDENTITY_ALL VSS_RECOVERY_OPTIONS = 256
 	VSS_RECOVERY_NO_VOLUME_CHECK     VSS_RECOVERY_OPTIONS = 512
 )
+
+// String returns the VSS_RECOVERY_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_RECOVERY_OPTIONS) String() string {
+	switch e {
+	case VSS_RECOVERY_REVERT_IDENTITY_ALL:
+		return "VSS_RECOVERY_REVERT_IDENTITY_ALL"
+	case VSS_RECOVERY_NO_VOLUME_CHECK:
+		return "VSS_RECOVERY_NO_VOLUME_CHECK"
+	default:
+		return fmt.Sprintf("VSS_RECOVERY_OPTIONS(%d)", int32(e))
+	}
+}
 
 // VSS_RESTOREMETHOD_ENUM: https://learn.microsoft.com/windows/win32/api/vswriter/ne-vswriter-vss_restoremethod_enum
 type VSS_RESTOREMETHOD_ENUM int32
@@ -223,6 +587,33 @@ const (
 	VSS_RME_RESTORE_STOP_START                  VSS_RESTOREMETHOD_ENUM = 8
 )
 
+// String returns the VSS_RESTOREMETHOD_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_RESTOREMETHOD_ENUM) String() string {
+	switch e {
+	case VSS_RME_UNDEFINED:
+		return "VSS_RME_UNDEFINED"
+	case VSS_RME_RESTORE_IF_NOT_THERE:
+		return "VSS_RME_RESTORE_IF_NOT_THERE"
+	case VSS_RME_RESTORE_IF_CAN_REPLACE:
+		return "VSS_RME_RESTORE_IF_CAN_REPLACE"
+	case VSS_RME_STOP_RESTORE_START:
+		return "VSS_RME_STOP_RESTORE_START"
+	case VSS_RME_RESTORE_TO_ALTERNATE_LOCATION:
+		return "VSS_RME_RESTORE_TO_ALTERNATE_LOCATION"
+	case VSS_RME_RESTORE_AT_REBOOT:
+		return "VSS_RME_RESTORE_AT_REBOOT"
+	case VSS_RME_RESTORE_AT_REBOOT_IF_CANNOT_REPLACE:
+		return "VSS_RME_RESTORE_AT_REBOOT_IF_CANNOT_REPLACE"
+	case VSS_RME_CUSTOM:
+		return "VSS_RME_CUSTOM"
+	case VSS_RME_RESTORE_STOP_START:
+		return "VSS_RME_RESTORE_STOP_START"
+	default:
+		return fmt.Sprintf("VSS_RESTOREMETHOD_ENUM(%d)", int32(e))
+	}
+}
+
 // VSS_RESTORE_TARGET: https://learn.microsoft.com/windows/win32/api/vswriter/ne-vswriter-vss_restore_target
 type VSS_RESTORE_TARGET int32
 
@@ -234,6 +625,25 @@ const (
 	VSS_RT_ORIGINAL_LOCATION VSS_RESTORE_TARGET = 4
 )
 
+// String returns the VSS_RESTORE_TARGET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_RESTORE_TARGET) String() string {
+	switch e {
+	case VSS_RT_UNDEFINED:
+		return "VSS_RT_UNDEFINED"
+	case VSS_RT_ORIGINAL:
+		return "VSS_RT_ORIGINAL"
+	case VSS_RT_ALTERNATE:
+		return "VSS_RT_ALTERNATE"
+	case VSS_RT_DIRECTED:
+		return "VSS_RT_DIRECTED"
+	case VSS_RT_ORIGINAL_LOCATION:
+		return "VSS_RT_ORIGINAL_LOCATION"
+	default:
+		return fmt.Sprintf("VSS_RESTORE_TARGET(%d)", int32(e))
+	}
+}
+
 // VSS_RESTORE_TYPE: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_restore_type
 type VSS_RESTORE_TYPE int32
 
@@ -243,6 +653,23 @@ const (
 	VSS_RTYPE_IMPORT    VSS_RESTORE_TYPE = 2
 	VSS_RTYPE_OTHER     VSS_RESTORE_TYPE = 3
 )
+
+// String returns the VSS_RESTORE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_RESTORE_TYPE) String() string {
+	switch e {
+	case VSS_RTYPE_UNDEFINED:
+		return "VSS_RTYPE_UNDEFINED"
+	case VSS_RTYPE_BY_COPY:
+		return "VSS_RTYPE_BY_COPY"
+	case VSS_RTYPE_IMPORT:
+		return "VSS_RTYPE_IMPORT"
+	case VSS_RTYPE_OTHER:
+		return "VSS_RTYPE_OTHER"
+	default:
+		return fmt.Sprintf("VSS_RESTORE_TYPE(%d)", int32(e))
+	}
+}
 
 // VSS_ROLLFORWARD_TYPE: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_rollforward_type
 type VSS_ROLLFORWARD_TYPE int32
@@ -254,6 +681,23 @@ const (
 	VSS_RF_PARTIAL   VSS_ROLLFORWARD_TYPE = 3
 )
 
+// String returns the VSS_ROLLFORWARD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_ROLLFORWARD_TYPE) String() string {
+	switch e {
+	case VSS_RF_UNDEFINED:
+		return "VSS_RF_UNDEFINED"
+	case VSS_RF_NONE:
+		return "VSS_RF_NONE"
+	case VSS_RF_ALL:
+		return "VSS_RF_ALL"
+	case VSS_RF_PARTIAL:
+		return "VSS_RF_PARTIAL"
+	default:
+		return fmt.Sprintf("VSS_ROLLFORWARD_TYPE(%d)", int32(e))
+	}
+}
+
 // VSS_SNAPSHOT_COMPATIBILITY: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_snapshot_compatibility
 type VSS_SNAPSHOT_COMPATIBILITY int32
 
@@ -261,6 +705,19 @@ const (
 	VSS_SC_DISABLE_DEFRAG       VSS_SNAPSHOT_COMPATIBILITY = 1
 	VSS_SC_DISABLE_CONTENTINDEX VSS_SNAPSHOT_COMPATIBILITY = 2
 )
+
+// String returns the VSS_SNAPSHOT_COMPATIBILITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_SNAPSHOT_COMPATIBILITY) String() string {
+	switch e {
+	case VSS_SC_DISABLE_DEFRAG:
+		return "VSS_SC_DISABLE_DEFRAG"
+	case VSS_SC_DISABLE_CONTENTINDEX:
+		return "VSS_SC_DISABLE_CONTENTINDEX"
+	default:
+		return fmt.Sprintf("VSS_SNAPSHOT_COMPATIBILITY(%d)", int32(e))
+	}
+}
 
 // VSS_SNAPSHOT_CONTEXT: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_snapshot_context
 type VSS_SNAPSHOT_CONTEXT int32
@@ -274,6 +731,29 @@ const (
 	VSS_CTX_CLIENT_ACCESSIBLE_WRITERS VSS_SNAPSHOT_CONTEXT = 13
 	VSS_CTX_ALL                       VSS_SNAPSHOT_CONTEXT = -1
 )
+
+// String returns the VSS_SNAPSHOT_CONTEXT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_SNAPSHOT_CONTEXT) String() string {
+	switch e {
+	case VSS_CTX_BACKUP:
+		return "VSS_CTX_BACKUP"
+	case VSS_CTX_FILE_SHARE_BACKUP:
+		return "VSS_CTX_FILE_SHARE_BACKUP"
+	case VSS_CTX_NAS_ROLLBACK:
+		return "VSS_CTX_NAS_ROLLBACK"
+	case VSS_CTX_APP_ROLLBACK:
+		return "VSS_CTX_APP_ROLLBACK"
+	case VSS_CTX_CLIENT_ACCESSIBLE:
+		return "VSS_CTX_CLIENT_ACCESSIBLE"
+	case VSS_CTX_CLIENT_ACCESSIBLE_WRITERS:
+		return "VSS_CTX_CLIENT_ACCESSIBLE_WRITERS"
+	case VSS_CTX_ALL:
+		return "VSS_CTX_ALL"
+	default:
+		return fmt.Sprintf("VSS_SNAPSHOT_CONTEXT(%d)", int32(e))
+	}
+}
 
 // VSS_SNAPSHOT_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_snapshot_property_id
 type VSS_SNAPSHOT_PROPERTY_ID int32
@@ -294,6 +774,43 @@ const (
 	VSS_SPROPID_CREATION_TIMESTAMP  VSS_SNAPSHOT_PROPERTY_ID = 12
 	VSS_SPROPID_STATUS              VSS_SNAPSHOT_PROPERTY_ID = 13
 )
+
+// String returns the VSS_SNAPSHOT_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_SNAPSHOT_PROPERTY_ID) String() string {
+	switch e {
+	case VSS_SPROPID_UNKNOWN:
+		return "VSS_SPROPID_UNKNOWN"
+	case VSS_SPROPID_SNAPSHOT_ID:
+		return "VSS_SPROPID_SNAPSHOT_ID"
+	case VSS_SPROPID_SNAPSHOT_SET_ID:
+		return "VSS_SPROPID_SNAPSHOT_SET_ID"
+	case VSS_SPROPID_SNAPSHOTS_COUNT:
+		return "VSS_SPROPID_SNAPSHOTS_COUNT"
+	case VSS_SPROPID_SNAPSHOT_DEVICE:
+		return "VSS_SPROPID_SNAPSHOT_DEVICE"
+	case VSS_SPROPID_ORIGINAL_VOLUME:
+		return "VSS_SPROPID_ORIGINAL_VOLUME"
+	case VSS_SPROPID_ORIGINATING_MACHINE:
+		return "VSS_SPROPID_ORIGINATING_MACHINE"
+	case VSS_SPROPID_SERVICE_MACHINE:
+		return "VSS_SPROPID_SERVICE_MACHINE"
+	case VSS_SPROPID_EXPOSED_NAME:
+		return "VSS_SPROPID_EXPOSED_NAME"
+	case VSS_SPROPID_EXPOSED_PATH:
+		return "VSS_SPROPID_EXPOSED_PATH"
+	case VSS_SPROPID_PROVIDER_ID:
+		return "VSS_SPROPID_PROVIDER_ID"
+	case VSS_SPROPID_SNAPSHOT_ATTRIBUTES:
+		return "VSS_SPROPID_SNAPSHOT_ATTRIBUTES"
+	case VSS_SPROPID_CREATION_TIMESTAMP:
+		return "VSS_SPROPID_CREATION_TIMESTAMP"
+	case VSS_SPROPID_STATUS:
+		return "VSS_SPROPID_STATUS"
+	default:
+		return fmt.Sprintf("VSS_SNAPSHOT_PROPERTY_ID(%d)", int32(e))
+	}
+}
 
 // VSS_SNAPSHOT_STATE: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_snapshot_state
 type VSS_SNAPSHOT_STATE int32
@@ -318,6 +835,49 @@ const (
 	VSS_SS_COUNT                      VSS_SNAPSHOT_STATE = 16
 )
 
+// String returns the VSS_SNAPSHOT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_SNAPSHOT_STATE) String() string {
+	switch e {
+	case VSS_SS_UNKNOWN:
+		return "VSS_SS_UNKNOWN"
+	case VSS_SS_PREPARING:
+		return "VSS_SS_PREPARING"
+	case VSS_SS_PROCESSING_PREPARE:
+		return "VSS_SS_PROCESSING_PREPARE"
+	case VSS_SS_PREPARED:
+		return "VSS_SS_PREPARED"
+	case VSS_SS_PROCESSING_PRECOMMIT:
+		return "VSS_SS_PROCESSING_PRECOMMIT"
+	case VSS_SS_PRECOMMITTED:
+		return "VSS_SS_PRECOMMITTED"
+	case VSS_SS_PROCESSING_COMMIT:
+		return "VSS_SS_PROCESSING_COMMIT"
+	case VSS_SS_COMMITTED:
+		return "VSS_SS_COMMITTED"
+	case VSS_SS_PROCESSING_POSTCOMMIT:
+		return "VSS_SS_PROCESSING_POSTCOMMIT"
+	case VSS_SS_PROCESSING_PREFINALCOMMIT:
+		return "VSS_SS_PROCESSING_PREFINALCOMMIT"
+	case VSS_SS_PREFINALCOMMITTED:
+		return "VSS_SS_PREFINALCOMMITTED"
+	case VSS_SS_PROCESSING_POSTFINALCOMMIT:
+		return "VSS_SS_PROCESSING_POSTFINALCOMMIT"
+	case VSS_SS_CREATED:
+		return "VSS_SS_CREATED"
+	case VSS_SS_ABORTED:
+		return "VSS_SS_ABORTED"
+	case VSS_SS_DELETED:
+		return "VSS_SS_DELETED"
+	case VSS_SS_POSTCOMMITTED:
+		return "VSS_SS_POSTCOMMITTED"
+	case VSS_SS_COUNT:
+		return "VSS_SS_COUNT"
+	default:
+		return fmt.Sprintf("VSS_SNAPSHOT_STATE(%d)", int32(e))
+	}
+}
+
 // VSS_SOURCE_TYPE: https://learn.microsoft.com/windows/win32/api/vswriter/ne-vswriter-vss_source_type
 type VSS_SOURCE_TYPE int32
 
@@ -327,6 +887,23 @@ const (
 	VSS_ST_NONTRANSACTEDDB VSS_SOURCE_TYPE = 2
 	VSS_ST_OTHER           VSS_SOURCE_TYPE = 3
 )
+
+// String returns the VSS_SOURCE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_SOURCE_TYPE) String() string {
+	switch e {
+	case VSS_ST_UNDEFINED:
+		return "VSS_ST_UNDEFINED"
+	case VSS_ST_TRANSACTEDDB:
+		return "VSS_ST_TRANSACTEDDB"
+	case VSS_ST_NONTRANSACTEDDB:
+		return "VSS_ST_NONTRANSACTEDDB"
+	case VSS_ST_OTHER:
+		return "VSS_ST_OTHER"
+	default:
+		return fmt.Sprintf("VSS_SOURCE_TYPE(%d)", int32(e))
+	}
+}
 
 // VSS_SUBSCRIBE_MASK: https://learn.microsoft.com/windows/win32/api/vswriter/ne-vswriter-vss_subscribe_mask
 type VSS_SUBSCRIBE_MASK int32
@@ -339,6 +916,25 @@ const (
 	VSS_SM_ALL_FLAGS           VSS_SUBSCRIBE_MASK = -1
 )
 
+// String returns the VSS_SUBSCRIBE_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_SUBSCRIBE_MASK) String() string {
+	switch e {
+	case VSS_SM_POST_SNAPSHOT_FLAG:
+		return "VSS_SM_POST_SNAPSHOT_FLAG"
+	case VSS_SM_BACKUP_EVENTS_FLAG:
+		return "VSS_SM_BACKUP_EVENTS_FLAG"
+	case VSS_SM_RESTORE_EVENTS_FLAG:
+		return "VSS_SM_RESTORE_EVENTS_FLAG"
+	case VSS_SM_IO_THROTTLING_FLAG:
+		return "VSS_SM_IO_THROTTLING_FLAG"
+	case VSS_SM_ALL_FLAGS:
+		return "VSS_SM_ALL_FLAGS"
+	default:
+		return fmt.Sprintf("VSS_SUBSCRIBE_MASK(%d)", int32(e))
+	}
+}
+
 // VSS_USAGE_TYPE: https://learn.microsoft.com/windows/win32/api/vswriter/ne-vswriter-vss_usage_type
 type VSS_USAGE_TYPE int32
 
@@ -349,6 +945,25 @@ const (
 	VSS_UT_USERDATA            VSS_USAGE_TYPE = 3
 	VSS_UT_OTHER               VSS_USAGE_TYPE = 4
 )
+
+// String returns the VSS_USAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_USAGE_TYPE) String() string {
+	switch e {
+	case VSS_UT_UNDEFINED:
+		return "VSS_UT_UNDEFINED"
+	case VSS_UT_BOOTABLESYSTEMSTATE:
+		return "VSS_UT_BOOTABLESYSTEMSTATE"
+	case VSS_UT_SYSTEMSERVICE:
+		return "VSS_UT_SYSTEMSERVICE"
+	case VSS_UT_USERDATA:
+		return "VSS_UT_USERDATA"
+	case VSS_UT_OTHER:
+		return "VSS_UT_OTHER"
+	default:
+		return fmt.Sprintf("VSS_USAGE_TYPE(%d)", int32(e))
+	}
+}
 
 // VSS_VOLUME_SNAPSHOT_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_volume_snapshot_attributes
 type VSS_VOLUME_SNAPSHOT_ATTRIBUTES int32
@@ -375,6 +990,53 @@ const (
 	VSS_VOLSNAP_ATTR_FILE_SHARE           VSS_VOLUME_SNAPSHOT_ATTRIBUTES = 67108864
 )
 
+// String returns the VSS_VOLUME_SNAPSHOT_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_VOLUME_SNAPSHOT_ATTRIBUTES) String() string {
+	switch e {
+	case VSS_VOLSNAP_ATTR_PERSISTENT:
+		return "VSS_VOLSNAP_ATTR_PERSISTENT"
+	case VSS_VOLSNAP_ATTR_NO_AUTORECOVERY:
+		return "VSS_VOLSNAP_ATTR_NO_AUTORECOVERY"
+	case VSS_VOLSNAP_ATTR_CLIENT_ACCESSIBLE:
+		return "VSS_VOLSNAP_ATTR_CLIENT_ACCESSIBLE"
+	case VSS_VOLSNAP_ATTR_NO_AUTO_RELEASE:
+		return "VSS_VOLSNAP_ATTR_NO_AUTO_RELEASE"
+	case VSS_VOLSNAP_ATTR_NO_WRITERS:
+		return "VSS_VOLSNAP_ATTR_NO_WRITERS"
+	case VSS_VOLSNAP_ATTR_TRANSPORTABLE:
+		return "VSS_VOLSNAP_ATTR_TRANSPORTABLE"
+	case VSS_VOLSNAP_ATTR_NOT_SURFACED:
+		return "VSS_VOLSNAP_ATTR_NOT_SURFACED"
+	case VSS_VOLSNAP_ATTR_NOT_TRANSACTED:
+		return "VSS_VOLSNAP_ATTR_NOT_TRANSACTED"
+	case VSS_VOLSNAP_ATTR_HARDWARE_ASSISTED:
+		return "VSS_VOLSNAP_ATTR_HARDWARE_ASSISTED"
+	case VSS_VOLSNAP_ATTR_DIFFERENTIAL:
+		return "VSS_VOLSNAP_ATTR_DIFFERENTIAL"
+	case VSS_VOLSNAP_ATTR_PLEX:
+		return "VSS_VOLSNAP_ATTR_PLEX"
+	case VSS_VOLSNAP_ATTR_IMPORTED:
+		return "VSS_VOLSNAP_ATTR_IMPORTED"
+	case VSS_VOLSNAP_ATTR_EXPOSED_LOCALLY:
+		return "VSS_VOLSNAP_ATTR_EXPOSED_LOCALLY"
+	case VSS_VOLSNAP_ATTR_EXPOSED_REMOTELY:
+		return "VSS_VOLSNAP_ATTR_EXPOSED_REMOTELY"
+	case VSS_VOLSNAP_ATTR_AUTORECOVER:
+		return "VSS_VOLSNAP_ATTR_AUTORECOVER"
+	case VSS_VOLSNAP_ATTR_ROLLBACK_RECOVERY:
+		return "VSS_VOLSNAP_ATTR_ROLLBACK_RECOVERY"
+	case VSS_VOLSNAP_ATTR_DELAYED_POSTSNAPSHOT:
+		return "VSS_VOLSNAP_ATTR_DELAYED_POSTSNAPSHOT"
+	case VSS_VOLSNAP_ATTR_TXF_RECOVERY:
+		return "VSS_VOLSNAP_ATTR_TXF_RECOVERY"
+	case VSS_VOLSNAP_ATTR_FILE_SHARE:
+		return "VSS_VOLSNAP_ATTR_FILE_SHARE"
+	default:
+		return fmt.Sprintf("VSS_VOLUME_SNAPSHOT_ATTRIBUTES(%d)", int32(e))
+	}
+}
+
 // VSS_WRITERRESTORE_ENUM: https://learn.microsoft.com/windows/win32/api/vswriter/ne-vswriter-vss_writerrestore_enum
 type VSS_WRITERRESTORE_ENUM int32
 
@@ -384,6 +1046,23 @@ const (
 	VSS_WRE_IF_REPLACE_FAILS VSS_WRITERRESTORE_ENUM = 2
 	VSS_WRE_ALWAYS           VSS_WRITERRESTORE_ENUM = 3
 )
+
+// String returns the VSS_WRITERRESTORE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_WRITERRESTORE_ENUM) String() string {
+	switch e {
+	case VSS_WRE_UNDEFINED:
+		return "VSS_WRE_UNDEFINED"
+	case VSS_WRE_NEVER:
+		return "VSS_WRE_NEVER"
+	case VSS_WRE_IF_REPLACE_FAILS:
+		return "VSS_WRE_IF_REPLACE_FAILS"
+	case VSS_WRE_ALWAYS:
+		return "VSS_WRE_ALWAYS"
+	default:
+		return fmt.Sprintf("VSS_WRITERRESTORE_ENUM(%d)", int32(e))
+	}
+}
 
 // VSS_WRITER_STATE: https://learn.microsoft.com/windows/win32/api/vss/ne-vss-vss_writer_state
 type VSS_WRITER_STATE int32
@@ -407,3 +1086,46 @@ const (
 	VSS_WS_FAILED_AT_BACKUPSHUTDOWN    VSS_WRITER_STATE = 15
 	VSS_WS_COUNT                       VSS_WRITER_STATE = 16
 )
+
+// String returns the VSS_WRITER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VSS_WRITER_STATE) String() string {
+	switch e {
+	case VSS_WS_UNKNOWN:
+		return "VSS_WS_UNKNOWN"
+	case VSS_WS_STABLE:
+		return "VSS_WS_STABLE"
+	case VSS_WS_WAITING_FOR_FREEZE:
+		return "VSS_WS_WAITING_FOR_FREEZE"
+	case VSS_WS_WAITING_FOR_THAW:
+		return "VSS_WS_WAITING_FOR_THAW"
+	case VSS_WS_WAITING_FOR_POST_SNAPSHOT:
+		return "VSS_WS_WAITING_FOR_POST_SNAPSHOT"
+	case VSS_WS_WAITING_FOR_BACKUP_COMPLETE:
+		return "VSS_WS_WAITING_FOR_BACKUP_COMPLETE"
+	case VSS_WS_FAILED_AT_IDENTIFY:
+		return "VSS_WS_FAILED_AT_IDENTIFY"
+	case VSS_WS_FAILED_AT_PREPARE_BACKUP:
+		return "VSS_WS_FAILED_AT_PREPARE_BACKUP"
+	case VSS_WS_FAILED_AT_PREPARE_SNAPSHOT:
+		return "VSS_WS_FAILED_AT_PREPARE_SNAPSHOT"
+	case VSS_WS_FAILED_AT_FREEZE:
+		return "VSS_WS_FAILED_AT_FREEZE"
+	case VSS_WS_FAILED_AT_THAW:
+		return "VSS_WS_FAILED_AT_THAW"
+	case VSS_WS_FAILED_AT_POST_SNAPSHOT:
+		return "VSS_WS_FAILED_AT_POST_SNAPSHOT"
+	case VSS_WS_FAILED_AT_BACKUP_COMPLETE:
+		return "VSS_WS_FAILED_AT_BACKUP_COMPLETE"
+	case VSS_WS_FAILED_AT_PRE_RESTORE:
+		return "VSS_WS_FAILED_AT_PRE_RESTORE"
+	case VSS_WS_FAILED_AT_POST_RESTORE:
+		return "VSS_WS_FAILED_AT_POST_RESTORE"
+	case VSS_WS_FAILED_AT_BACKUPSHUTDOWN:
+		return "VSS_WS_FAILED_AT_BACKUPSHUTDOWN"
+	case VSS_WS_COUNT:
+		return "VSS_WS_COUNT"
+	default:
+		return fmt.Sprintf("VSS_WRITER_STATE(%d)", int32(e))
+	}
+}

@@ -4,6 +4,12 @@
 
 package communication
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type CLEAR_COMM_ERROR_FLAGS uint32
 
 const (
@@ -14,6 +20,32 @@ const (
 	CE_RXPARITY CLEAR_COMM_ERROR_FLAGS = 4
 )
 
+// String returns the CLEAR_COMM_ERROR_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLEAR_COMM_ERROR_FLAGS) String() string {
+	var parts []string
+	if e&CE_BREAK != 0 {
+		parts = append(parts, "CE_BREAK")
+	}
+	if e&CE_FRAME != 0 {
+		parts = append(parts, "CE_FRAME")
+	}
+	if e&CE_OVERRUN != 0 {
+		parts = append(parts, "CE_OVERRUN")
+	}
+	if e&CE_RXOVER != 0 {
+		parts = append(parts, "CE_RXOVER")
+	}
+	if e&CE_RXPARITY != 0 {
+		parts = append(parts, "CE_RXPARITY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type COMMPROP_STOP_PARITY uint16
 
 const (
@@ -27,6 +59,41 @@ const (
 	PARITY_SPACE COMMPROP_STOP_PARITY = 4096
 )
 
+// String returns the COMMPROP_STOP_PARITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMMPROP_STOP_PARITY) String() string {
+	var parts []string
+	if e&STOPBITS_10 != 0 {
+		parts = append(parts, "STOPBITS_10")
+	}
+	if e&STOPBITS_15 != 0 {
+		parts = append(parts, "STOPBITS_15")
+	}
+	if e&STOPBITS_20 != 0 {
+		parts = append(parts, "STOPBITS_20")
+	}
+	if e&PARITY_NONE != 0 {
+		parts = append(parts, "PARITY_NONE")
+	}
+	if e&PARITY_ODD != 0 {
+		parts = append(parts, "PARITY_ODD")
+	}
+	if e&PARITY_EVEN != 0 {
+		parts = append(parts, "PARITY_EVEN")
+	}
+	if e&PARITY_MARK != 0 {
+		parts = append(parts, "PARITY_MARK")
+	}
+	if e&PARITY_SPACE != 0 {
+		parts = append(parts, "PARITY_SPACE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type COMM_EVENT_MASK uint32
 
 const (
@@ -45,6 +112,55 @@ const (
 	EV_TXEMPTY  COMM_EVENT_MASK = 4
 )
 
+// String returns the COMM_EVENT_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMM_EVENT_MASK) String() string {
+	var parts []string
+	if e&EV_BREAK != 0 {
+		parts = append(parts, "EV_BREAK")
+	}
+	if e&EV_CTS != 0 {
+		parts = append(parts, "EV_CTS")
+	}
+	if e&EV_DSR != 0 {
+		parts = append(parts, "EV_DSR")
+	}
+	if e&EV_ERR != 0 {
+		parts = append(parts, "EV_ERR")
+	}
+	if e&EV_EVENT1 != 0 {
+		parts = append(parts, "EV_EVENT1")
+	}
+	if e&EV_EVENT2 != 0 {
+		parts = append(parts, "EV_EVENT2")
+	}
+	if e&EV_PERR != 0 {
+		parts = append(parts, "EV_PERR")
+	}
+	if e&EV_RING != 0 {
+		parts = append(parts, "EV_RING")
+	}
+	if e&EV_RLSD != 0 {
+		parts = append(parts, "EV_RLSD")
+	}
+	if e&EV_RX80FULL != 0 {
+		parts = append(parts, "EV_RX80FULL")
+	}
+	if e&EV_RXCHAR != 0 {
+		parts = append(parts, "EV_RXCHAR")
+	}
+	if e&EV_RXFLAG != 0 {
+		parts = append(parts, "EV_RXFLAG")
+	}
+	if e&EV_TXEMPTY != 0 {
+		parts = append(parts, "EV_TXEMPTY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type DCB_PARITY uint8
 
 const (
@@ -55,6 +171,25 @@ const (
 	SPACEPARITY DCB_PARITY = 4
 )
 
+// String returns the DCB_PARITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DCB_PARITY) String() string {
+	switch e {
+	case EVENPARITY:
+		return "EVENPARITY"
+	case MARKPARITY:
+		return "MARKPARITY"
+	case NOPARITY:
+		return "NOPARITY"
+	case ODDPARITY:
+		return "ODDPARITY"
+	case SPACEPARITY:
+		return "SPACEPARITY"
+	default:
+		return fmt.Sprintf("DCB_PARITY(%d)", uint8(e))
+	}
+}
+
 type DCB_STOP_BITS uint8
 
 const (
@@ -62,6 +197,21 @@ const (
 	ONE5STOPBITS DCB_STOP_BITS = 1
 	TWOSTOPBITS  DCB_STOP_BITS = 2
 )
+
+// String returns the DCB_STOP_BITS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DCB_STOP_BITS) String() string {
+	switch e {
+	case ONESTOPBIT:
+		return "ONESTOPBIT"
+	case ONE5STOPBITS:
+		return "ONE5STOPBITS"
+	case TWOSTOPBITS:
+		return "TWOSTOPBITS"
+	default:
+		return fmt.Sprintf("DCB_STOP_BITS(%d)", uint8(e))
+	}
+}
 
 type ESCAPE_COMM_FUNCTION uint32
 
@@ -76,6 +226,32 @@ const (
 	SETXON   ESCAPE_COMM_FUNCTION = 2
 )
 
+// String returns the ESCAPE_COMM_FUNCTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ESCAPE_COMM_FUNCTION) String() string {
+	switch e {
+	case CLRBREAK:
+		return "CLRBREAK"
+	case CLRDTR:
+		return "CLRDTR"
+	case CLRRTS:
+		return "CLRRTS"
+	case SETBREAK:
+		return "SETBREAK"
+	case SETDTR:
+		return "SETDTR"
+	case SETRTS:
+		return "SETRTS"
+	case SETXOFF:
+		return "SETXOFF"
+	case SETXON:
+		return "SETXON"
+	default:
+		return fmt.Sprintf("ESCAPE_COMM_FUNCTION(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MODEMDEVCAPS_DIAL_OPTIONS uint32
 
 const (
@@ -84,6 +260,26 @@ const (
 	DIALOPTION_QUIET    MODEMDEVCAPS_DIAL_OPTIONS = 128
 )
 
+// String returns the MODEMDEVCAPS_DIAL_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MODEMDEVCAPS_DIAL_OPTIONS) String() string {
+	var parts []string
+	if e&DIALOPTION_BILLING != 0 {
+		parts = append(parts, "DIALOPTION_BILLING")
+	}
+	if e&DIALOPTION_DIALTONE != 0 {
+		parts = append(parts, "DIALOPTION_DIALTONE")
+	}
+	if e&DIALOPTION_QUIET != 0 {
+		parts = append(parts, "DIALOPTION_QUIET")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type MODEMDEVCAPS_SPEAKER_MODE uint32
 
 const (
@@ -93,6 +289,29 @@ const (
 	MDMSPKRFLAG_ON        MODEMDEVCAPS_SPEAKER_MODE = 4
 )
 
+// String returns the MODEMDEVCAPS_SPEAKER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MODEMDEVCAPS_SPEAKER_MODE) String() string {
+	var parts []string
+	if e&MDMSPKRFLAG_CALLSETUP != 0 {
+		parts = append(parts, "MDMSPKRFLAG_CALLSETUP")
+	}
+	if e&MDMSPKRFLAG_DIAL != 0 {
+		parts = append(parts, "MDMSPKRFLAG_DIAL")
+	}
+	if e&MDMSPKRFLAG_OFF != 0 {
+		parts = append(parts, "MDMSPKRFLAG_OFF")
+	}
+	if e&MDMSPKRFLAG_ON != 0 {
+		parts = append(parts, "MDMSPKRFLAG_ON")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type MODEMDEVCAPS_SPEAKER_VOLUME uint32
 
 const (
@@ -100,6 +319,25 @@ const (
 	MDMVOLFLAG_LOW    MODEMDEVCAPS_SPEAKER_VOLUME = 1
 	MDMVOLFLAG_MEDIUM MODEMDEVCAPS_SPEAKER_VOLUME = 2
 )
+
+// String returns the MODEMDEVCAPS_SPEAKER_VOLUME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MODEMDEVCAPS_SPEAKER_VOLUME) String() string {
+	var parts []string
+	if e&MDMVOLFLAG_HIGH != 0 {
+		parts = append(parts, "MDMVOLFLAG_HIGH")
+	}
+	if e&MDMVOLFLAG_LOW != 0 {
+		parts = append(parts, "MDMVOLFLAG_LOW")
+	}
+	if e&MDMVOLFLAG_MEDIUM != 0 {
+		parts = append(parts, "MDMVOLFLAG_MEDIUM")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type MODEMSETTINGS_SPEAKER_MODE uint32
 
@@ -110,6 +348,23 @@ const (
 	MDMSPKR_ON        MODEMSETTINGS_SPEAKER_MODE = 4
 )
 
+// String returns the MODEMSETTINGS_SPEAKER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MODEMSETTINGS_SPEAKER_MODE) String() string {
+	switch e {
+	case MDMSPKR_CALLSETUP:
+		return "MDMSPKR_CALLSETUP"
+	case MDMSPKR_DIAL:
+		return "MDMSPKR_DIAL"
+	case MDMSPKR_OFF:
+		return "MDMSPKR_OFF"
+	case MDMSPKR_ON:
+		return "MDMSPKR_ON"
+	default:
+		return fmt.Sprintf("MODEMSETTINGS_SPEAKER_MODE(%d)", uint32(e))
+	}
+}
+
 type MODEM_SPEAKER_VOLUME uint32
 
 const (
@@ -118,6 +373,22 @@ const (
 	MDMVOL_MEDIUM MODEM_SPEAKER_VOLUME = 1
 )
 
+// String returns the MODEM_SPEAKER_VOLUME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MODEM_SPEAKER_VOLUME) String() string {
+	switch e {
+	case MDMVOL_HIGH:
+		return "MDMVOL_HIGH"
+	case MDMVOL_LOW:
+		return "MDMVOL_LOW"
+	case MDMVOL_MEDIUM:
+		return "MDMVOL_MEDIUM"
+	default:
+		return fmt.Sprintf("MODEM_SPEAKER_VOLUME(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MODEM_STATUS_FLAGS uint32
 
 const (
@@ -127,6 +398,29 @@ const (
 	MS_RLSD_ON MODEM_STATUS_FLAGS = 128
 )
 
+// String returns the MODEM_STATUS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MODEM_STATUS_FLAGS) String() string {
+	var parts []string
+	if e&MS_CTS_ON != 0 {
+		parts = append(parts, "MS_CTS_ON")
+	}
+	if e&MS_DSR_ON != 0 {
+		parts = append(parts, "MS_DSR_ON")
+	}
+	if e&MS_RING_ON != 0 {
+		parts = append(parts, "MS_RING_ON")
+	}
+	if e&MS_RLSD_ON != 0 {
+		parts = append(parts, "MS_RLSD_ON")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PURGE_COMM_FLAGS uint32
 
 const (
@@ -135,3 +429,25 @@ const (
 	PURGE_TXABORT PURGE_COMM_FLAGS = 1
 	PURGE_TXCLEAR PURGE_COMM_FLAGS = 4
 )
+
+// String returns the PURGE_COMM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PURGE_COMM_FLAGS) String() string {
+	var parts []string
+	if e&PURGE_RXABORT != 0 {
+		parts = append(parts, "PURGE_RXABORT")
+	}
+	if e&PURGE_RXCLEAR != 0 {
+		parts = append(parts, "PURGE_RXCLEAR")
+	}
+	if e&PURGE_TXABORT != 0 {
+		parts = append(parts, "PURGE_TXABORT")
+	}
+	if e&PURGE_TXCLEAR != 0 {
+		parts = append(parts, "PURGE_TXCLEAR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

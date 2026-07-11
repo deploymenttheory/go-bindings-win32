@@ -4,6 +4,11 @@
 
 package wmi
 
+import (
+	"fmt"
+	"strings"
+)
+
 // CIMTYPE_ENUMERATION: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-cimtype_enumeration
 type CIMTYPE_ENUMERATION int32
 
@@ -29,6 +34,53 @@ const (
 	CIM_FLAG_ARRAY CIMTYPE_ENUMERATION = 8192
 )
 
+// String returns the CIMTYPE_ENUMERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CIMTYPE_ENUMERATION) String() string {
+	switch e {
+	case CIM_ILLEGAL:
+		return "CIM_ILLEGAL"
+	case CIM_EMPTY:
+		return "CIM_EMPTY"
+	case CIM_SINT8:
+		return "CIM_SINT8"
+	case CIM_UINT8:
+		return "CIM_UINT8"
+	case CIM_SINT16:
+		return "CIM_SINT16"
+	case CIM_UINT16:
+		return "CIM_UINT16"
+	case CIM_SINT32:
+		return "CIM_SINT32"
+	case CIM_UINT32:
+		return "CIM_UINT32"
+	case CIM_SINT64:
+		return "CIM_SINT64"
+	case CIM_UINT64:
+		return "CIM_UINT64"
+	case CIM_REAL32:
+		return "CIM_REAL32"
+	case CIM_REAL64:
+		return "CIM_REAL64"
+	case CIM_BOOLEAN:
+		return "CIM_BOOLEAN"
+	case CIM_STRING:
+		return "CIM_STRING"
+	case CIM_DATETIME:
+		return "CIM_DATETIME"
+	case CIM_REFERENCE:
+		return "CIM_REFERENCE"
+	case CIM_CHAR16:
+		return "CIM_CHAR16"
+	case CIM_OBJECT:
+		return "CIM_OBJECT"
+	case CIM_FLAG_ARRAY:
+		return "CIM_FLAG_ARRAY"
+	default:
+		return fmt.Sprintf("CIMTYPE_ENUMERATION(%d)", int32(e))
+	}
+}
+
 // MI_CallbackMode: https://learn.microsoft.com/windows/win32/api/mi/ne-mi-mi_callbackmode
 type MI_CallbackMode int32
 
@@ -37,6 +89,21 @@ const (
 	MI_CALLBACKMODE_INQUIRE MI_CallbackMode = 1
 	MI_CALLBACKMODE_IGNORE  MI_CallbackMode = 2
 )
+
+// String returns the MI_CallbackMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MI_CallbackMode) String() string {
+	switch e {
+	case MI_CALLBACKMODE_REPORT:
+		return "MI_CALLBACKMODE_REPORT"
+	case MI_CALLBACKMODE_INQUIRE:
+		return "MI_CALLBACKMODE_INQUIRE"
+	case MI_CALLBACKMODE_IGNORE:
+		return "MI_CALLBACKMODE_IGNORE"
+	default:
+		return fmt.Sprintf("MI_CallbackMode(%d)", int32(e))
+	}
+}
 
 // MI_CancellationReason: https://learn.microsoft.com/windows/win32/api/mi/ne-mi-mi_cancellationreason
 type MI_CancellationReason int32
@@ -48,6 +115,23 @@ const (
 	MI_REASON_SERVICESTOP MI_CancellationReason = 3
 )
 
+// String returns the MI_CancellationReason constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MI_CancellationReason) String() string {
+	switch e {
+	case MI_REASON_NONE:
+		return "MI_REASON_NONE"
+	case MI_REASON_TIMEOUT:
+		return "MI_REASON_TIMEOUT"
+	case MI_REASON_SHUTDOWN:
+		return "MI_REASON_SHUTDOWN"
+	case MI_REASON_SERVICESTOP:
+		return "MI_REASON_SERVICESTOP"
+	default:
+		return fmt.Sprintf("MI_CancellationReason(%d)", int32(e))
+	}
+}
+
 // MI_DestinationOptions_ImpersonationType: https://learn.microsoft.com/windows/win32/api/mi/ne-mi-mi_destinationoptions_impersonationtype
 type MI_DestinationOptions_ImpersonationType int32
 
@@ -58,6 +142,25 @@ const (
 	MI_DestinationOptions_ImpersonationType_Impersonate MI_DestinationOptions_ImpersonationType = 3
 	MI_DestinationOptions_ImpersonationType_Delegate    MI_DestinationOptions_ImpersonationType = 4
 )
+
+// String returns the MI_DestinationOptions_ImpersonationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MI_DestinationOptions_ImpersonationType) String() string {
+	switch e {
+	case MI_DestinationOptions_ImpersonationType_Default:
+		return "MI_DestinationOptions_ImpersonationType_Default"
+	case MI_DestinationOptions_ImpersonationType_None:
+		return "MI_DestinationOptions_ImpersonationType_None"
+	case MI_DestinationOptions_ImpersonationType_Identify:
+		return "MI_DestinationOptions_ImpersonationType_Identify"
+	case MI_DestinationOptions_ImpersonationType_Impersonate:
+		return "MI_DestinationOptions_ImpersonationType_Impersonate"
+	case MI_DestinationOptions_ImpersonationType_Delegate:
+		return "MI_DestinationOptions_ImpersonationType_Delegate"
+	default:
+		return fmt.Sprintf("MI_DestinationOptions_ImpersonationType(%d)", int32(e))
+	}
+}
 
 // MI_ErrorCategory: https://learn.microsoft.com/windows/win32/api/mi/ne-mi-mi_errorcategory
 type MI_ErrorCategory int32
@@ -97,6 +200,79 @@ const (
 	MI_ERRORCATEGORY_NOT_ENABLED          MI_ErrorCategory = 31
 )
 
+// String returns the MI_ErrorCategory constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MI_ErrorCategory) String() string {
+	switch e {
+	case MI_ERRORCATEGORY_NOT_SPECIFIED:
+		return "MI_ERRORCATEGORY_NOT_SPECIFIED"
+	case MI_ERRORCATEGORY_OPEN_ERROR:
+		return "MI_ERRORCATEGORY_OPEN_ERROR"
+	case MI_ERRORCATEGORY_CLOS_EERROR:
+		return "MI_ERRORCATEGORY_CLOS_EERROR"
+	case MI_ERRORCATEGORY_DEVICE_ERROR:
+		return "MI_ERRORCATEGORY_DEVICE_ERROR"
+	case MI_ERRORCATEGORY_DEADLOCK_DETECTED:
+		return "MI_ERRORCATEGORY_DEADLOCK_DETECTED"
+	case MI_ERRORCATEGORY_INVALID_ARGUMENT:
+		return "MI_ERRORCATEGORY_INVALID_ARGUMENT"
+	case MI_ERRORCATEGORY_INVALID_DATA:
+		return "MI_ERRORCATEGORY_INVALID_DATA"
+	case MI_ERRORCATEGORY_INVALID_OPERATION:
+		return "MI_ERRORCATEGORY_INVALID_OPERATION"
+	case MI_ERRORCATEGORY_INVALID_RESULT:
+		return "MI_ERRORCATEGORY_INVALID_RESULT"
+	case MI_ERRORCATEGORY_INVALID_TYPE:
+		return "MI_ERRORCATEGORY_INVALID_TYPE"
+	case MI_ERRORCATEGORY_METADATA_ERROR:
+		return "MI_ERRORCATEGORY_METADATA_ERROR"
+	case MI_ERRORCATEGORY_NOT_IMPLEMENTED:
+		return "MI_ERRORCATEGORY_NOT_IMPLEMENTED"
+	case MI_ERRORCATEGORY_NOT_INSTALLED:
+		return "MI_ERRORCATEGORY_NOT_INSTALLED"
+	case MI_ERRORCATEGORY_OBJECT_NOT_FOUND:
+		return "MI_ERRORCATEGORY_OBJECT_NOT_FOUND"
+	case MI_ERRORCATEGORY_OPERATION_STOPPED:
+		return "MI_ERRORCATEGORY_OPERATION_STOPPED"
+	case MI_ERRORCATEGORY_OPERATION_TIMEOUT:
+		return "MI_ERRORCATEGORY_OPERATION_TIMEOUT"
+	case MI_ERRORCATEGORY_SYNTAX_ERROR:
+		return "MI_ERRORCATEGORY_SYNTAX_ERROR"
+	case MI_ERRORCATEGORY_PARSER_ERROR:
+		return "MI_ERRORCATEGORY_PARSER_ERROR"
+	case MI_ERRORCATEGORY_ACCESS_DENIED:
+		return "MI_ERRORCATEGORY_ACCESS_DENIED"
+	case MI_ERRORCATEGORY_RESOURCE_BUSY:
+		return "MI_ERRORCATEGORY_RESOURCE_BUSY"
+	case MI_ERRORCATEGORY_RESOURCE_EXISTS:
+		return "MI_ERRORCATEGORY_RESOURCE_EXISTS"
+	case MI_ERRORCATEGORY_RESOURCE_UNAVAILABLE:
+		return "MI_ERRORCATEGORY_RESOURCE_UNAVAILABLE"
+	case MI_ERRORCATEGORY_READ_ERROR:
+		return "MI_ERRORCATEGORY_READ_ERROR"
+	case MI_ERRORCATEGORY_WRITE_ERROR:
+		return "MI_ERRORCATEGORY_WRITE_ERROR"
+	case MI_ERRORCATEGORY_FROM_STDERR:
+		return "MI_ERRORCATEGORY_FROM_STDERR"
+	case MI_ERRORCATEGORY_SECURITY_ERROR:
+		return "MI_ERRORCATEGORY_SECURITY_ERROR"
+	case MI_ERRORCATEGORY_PROTOCOL_ERROR:
+		return "MI_ERRORCATEGORY_PROTOCOL_ERROR"
+	case MI_ERRORCATEGORY_CONNECTION_ERROR:
+		return "MI_ERRORCATEGORY_CONNECTION_ERROR"
+	case MI_ERRORCATEGORY_AUTHENTICATION_ERROR:
+		return "MI_ERRORCATEGORY_AUTHENTICATION_ERROR"
+	case MI_ERRORCATEGORY_LIMITS_EXCEEDED:
+		return "MI_ERRORCATEGORY_LIMITS_EXCEEDED"
+	case MI_ERRORCATEGORY_QUOTA_EXCEEDED:
+		return "MI_ERRORCATEGORY_QUOTA_EXCEEDED"
+	case MI_ERRORCATEGORY_NOT_ENABLED:
+		return "MI_ERRORCATEGORY_NOT_ENABLED"
+	default:
+		return fmt.Sprintf("MI_ErrorCategory(%d)", int32(e))
+	}
+}
+
 // MI_LocaleType: https://learn.microsoft.com/windows/win32/api/mi/ne-mi-mi_localetype
 type MI_LocaleType int32
 
@@ -106,6 +282,23 @@ const (
 	MI_LOCALE_TYPE_CLOSEST_UI     MI_LocaleType = 2
 	MI_LOCALE_TYPE_CLOSEST_DATA   MI_LocaleType = 3
 )
+
+// String returns the MI_LocaleType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MI_LocaleType) String() string {
+	switch e {
+	case MI_LOCALE_TYPE_REQUESTED_UI:
+		return "MI_LOCALE_TYPE_REQUESTED_UI"
+	case MI_LOCALE_TYPE_REQUESTED_DATA:
+		return "MI_LOCALE_TYPE_REQUESTED_DATA"
+	case MI_LOCALE_TYPE_CLOSEST_UI:
+		return "MI_LOCALE_TYPE_CLOSEST_UI"
+	case MI_LOCALE_TYPE_CLOSEST_DATA:
+		return "MI_LOCALE_TYPE_CLOSEST_DATA"
+	default:
+		return fmt.Sprintf("MI_LocaleType(%d)", int32(e))
+	}
+}
 
 // MI_OperationCallback_ResponseType: https://learn.microsoft.com/windows/win32/api/mi/ne-mi-mi_operationcallback_responsetype
 type MI_OperationCallback_ResponseType int32
@@ -117,6 +310,23 @@ const (
 	MI_OperationCallback_ResponseType_YesToAll MI_OperationCallback_ResponseType = 3
 )
 
+// String returns the MI_OperationCallback_ResponseType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MI_OperationCallback_ResponseType) String() string {
+	switch e {
+	case MI_OperationCallback_ResponseType_No:
+		return "MI_OperationCallback_ResponseType_No"
+	case MI_OperationCallback_ResponseType_Yes:
+		return "MI_OperationCallback_ResponseType_Yes"
+	case MI_OperationCallback_ResponseType_NoToAll:
+		return "MI_OperationCallback_ResponseType_NoToAll"
+	case MI_OperationCallback_ResponseType_YesToAll:
+		return "MI_OperationCallback_ResponseType_YesToAll"
+	default:
+		return fmt.Sprintf("MI_OperationCallback_ResponseType(%d)", int32(e))
+	}
+}
+
 // MI_PromptType: https://learn.microsoft.com/windows/win32/api/mi/ne-mi-mi_prompttype
 type MI_PromptType int32
 
@@ -125,6 +335,19 @@ const (
 	MI_PROMPTTYPE_CRITICAL MI_PromptType = 1
 )
 
+// String returns the MI_PromptType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MI_PromptType) String() string {
+	switch e {
+	case MI_PROMPTTYPE_NORMAL:
+		return "MI_PROMPTTYPE_NORMAL"
+	case MI_PROMPTTYPE_CRITICAL:
+		return "MI_PROMPTTYPE_CRITICAL"
+	default:
+		return fmt.Sprintf("MI_PromptType(%d)", int32(e))
+	}
+}
+
 // MI_ProviderArchitecture: https://learn.microsoft.com/windows/win32/api/mi/ne-mi-mi_providerarchitecture
 type MI_ProviderArchitecture int32
 
@@ -132,6 +355,19 @@ const (
 	MI_PROVIDER_ARCHITECTURE_32BIT MI_ProviderArchitecture = 0
 	MI_PROVIDER_ARCHITECTURE_64BIT MI_ProviderArchitecture = 1
 )
+
+// String returns the MI_ProviderArchitecture constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MI_ProviderArchitecture) String() string {
+	switch e {
+	case MI_PROVIDER_ARCHITECTURE_32BIT:
+		return "MI_PROVIDER_ARCHITECTURE_32BIT"
+	case MI_PROVIDER_ARCHITECTURE_64BIT:
+		return "MI_PROVIDER_ARCHITECTURE_64BIT"
+	default:
+		return fmt.Sprintf("MI_ProviderArchitecture(%d)", int32(e))
+	}
+}
 
 // MI_Result: https://learn.microsoft.com/windows/win32/api/mi/ne-mi-mi_result
 type MI_Result int32
@@ -166,6 +402,69 @@ const (
 	MI_RESULT_SERVER_IS_SHUTTING_DOWN             MI_Result = 28
 )
 
+// String returns the MI_Result constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MI_Result) String() string {
+	switch e {
+	case MI_RESULT_OK:
+		return "MI_RESULT_OK"
+	case MI_RESULT_FAILED:
+		return "MI_RESULT_FAILED"
+	case MI_RESULT_ACCESS_DENIED:
+		return "MI_RESULT_ACCESS_DENIED"
+	case MI_RESULT_INVALID_NAMESPACE:
+		return "MI_RESULT_INVALID_NAMESPACE"
+	case MI_RESULT_INVALID_PARAMETER:
+		return "MI_RESULT_INVALID_PARAMETER"
+	case MI_RESULT_INVALID_CLASS:
+		return "MI_RESULT_INVALID_CLASS"
+	case MI_RESULT_NOT_FOUND:
+		return "MI_RESULT_NOT_FOUND"
+	case MI_RESULT_NOT_SUPPORTED:
+		return "MI_RESULT_NOT_SUPPORTED"
+	case MI_RESULT_CLASS_HAS_CHILDREN:
+		return "MI_RESULT_CLASS_HAS_CHILDREN"
+	case MI_RESULT_CLASS_HAS_INSTANCES:
+		return "MI_RESULT_CLASS_HAS_INSTANCES"
+	case MI_RESULT_INVALID_SUPERCLASS:
+		return "MI_RESULT_INVALID_SUPERCLASS"
+	case MI_RESULT_ALREADY_EXISTS:
+		return "MI_RESULT_ALREADY_EXISTS"
+	case MI_RESULT_NO_SUCH_PROPERTY:
+		return "MI_RESULT_NO_SUCH_PROPERTY"
+	case MI_RESULT_TYPE_MISMATCH:
+		return "MI_RESULT_TYPE_MISMATCH"
+	case MI_RESULT_QUERY_LANGUAGE_NOT_SUPPORTED:
+		return "MI_RESULT_QUERY_LANGUAGE_NOT_SUPPORTED"
+	case MI_RESULT_INVALID_QUERY:
+		return "MI_RESULT_INVALID_QUERY"
+	case MI_RESULT_METHOD_NOT_AVAILABLE:
+		return "MI_RESULT_METHOD_NOT_AVAILABLE"
+	case MI_RESULT_METHOD_NOT_FOUND:
+		return "MI_RESULT_METHOD_NOT_FOUND"
+	case MI_RESULT_NAMESPACE_NOT_EMPTY:
+		return "MI_RESULT_NAMESPACE_NOT_EMPTY"
+	case MI_RESULT_INVALID_ENUMERATION_CONTEXT:
+		return "MI_RESULT_INVALID_ENUMERATION_CONTEXT"
+	case MI_RESULT_INVALID_OPERATION_TIMEOUT:
+		return "MI_RESULT_INVALID_OPERATION_TIMEOUT"
+	case MI_RESULT_PULL_HAS_BEEN_ABANDONED:
+		return "MI_RESULT_PULL_HAS_BEEN_ABANDONED"
+	case MI_RESULT_PULL_CANNOT_BE_ABANDONED:
+		return "MI_RESULT_PULL_CANNOT_BE_ABANDONED"
+	case MI_RESULT_FILTERED_ENUMERATION_NOT_SUPPORTED:
+		return "MI_RESULT_FILTERED_ENUMERATION_NOT_SUPPORTED"
+	case MI_RESULT_CONTINUATION_ON_ERROR_NOT_SUPPORTED:
+		return "MI_RESULT_CONTINUATION_ON_ERROR_NOT_SUPPORTED"
+	case MI_RESULT_SERVER_LIMITS_EXCEEDED:
+		return "MI_RESULT_SERVER_LIMITS_EXCEEDED"
+	case MI_RESULT_SERVER_IS_SHUTTING_DOWN:
+		return "MI_RESULT_SERVER_IS_SHUTTING_DOWN"
+	default:
+		return fmt.Sprintf("MI_Result(%d)", int32(e))
+	}
+}
+
 // MI_SubscriptionDeliveryType: https://learn.microsoft.com/windows/win32/api/mi/ne-mi-mi_subscriptiondeliverytype
 type MI_SubscriptionDeliveryType int32
 
@@ -173,6 +472,19 @@ const (
 	MI_SubscriptionDeliveryType_Pull MI_SubscriptionDeliveryType = 1
 	MI_SubscriptionDeliveryType_Push MI_SubscriptionDeliveryType = 2
 )
+
+// String returns the MI_SubscriptionDeliveryType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MI_SubscriptionDeliveryType) String() string {
+	switch e {
+	case MI_SubscriptionDeliveryType_Pull:
+		return "MI_SubscriptionDeliveryType_Pull"
+	case MI_SubscriptionDeliveryType_Push:
+		return "MI_SubscriptionDeliveryType_Push"
+	default:
+		return fmt.Sprintf("MI_SubscriptionDeliveryType(%d)", int32(e))
+	}
+}
 
 // MI_Type: https://learn.microsoft.com/windows/win32/api/mi/ne-mi-mi_type
 type MI_Type int32
@@ -212,6 +524,79 @@ const (
 	MI_INSTANCEA  MI_Type = 31
 	MI_ARRAY      MI_Type = 16
 )
+
+// String returns the MI_Type constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MI_Type) String() string {
+	switch e {
+	case MI_BOOLEAN:
+		return "MI_BOOLEAN"
+	case MI_UINT8:
+		return "MI_UINT8"
+	case MI_SINT8:
+		return "MI_SINT8"
+	case MI_UINT16:
+		return "MI_UINT16"
+	case MI_SINT16:
+		return "MI_SINT16"
+	case MI_UINT32:
+		return "MI_UINT32"
+	case MI_SINT32:
+		return "MI_SINT32"
+	case MI_UINT64:
+		return "MI_UINT64"
+	case MI_SINT64:
+		return "MI_SINT64"
+	case MI_REAL32:
+		return "MI_REAL32"
+	case MI_REAL64:
+		return "MI_REAL64"
+	case MI_CHAR16:
+		return "MI_CHAR16"
+	case MI_DATETIME:
+		return "MI_DATETIME"
+	case MI_STRING:
+		return "MI_STRING"
+	case MI_REFERENCE:
+		return "MI_REFERENCE"
+	case MI_INSTANCE:
+		return "MI_INSTANCE"
+	case MI_BOOLEANA:
+		return "MI_BOOLEANA"
+	case MI_UINT8A:
+		return "MI_UINT8A"
+	case MI_SINT8A:
+		return "MI_SINT8A"
+	case MI_UINT16A:
+		return "MI_UINT16A"
+	case MI_SINT16A:
+		return "MI_SINT16A"
+	case MI_UINT32A:
+		return "MI_UINT32A"
+	case MI_SINT32A:
+		return "MI_SINT32A"
+	case MI_UINT64A:
+		return "MI_UINT64A"
+	case MI_SINT64A:
+		return "MI_SINT64A"
+	case MI_REAL32A:
+		return "MI_REAL32A"
+	case MI_REAL64A:
+		return "MI_REAL64A"
+	case MI_CHAR16A:
+		return "MI_CHAR16A"
+	case MI_DATETIMEA:
+		return "MI_DATETIMEA"
+	case MI_STRINGA:
+		return "MI_STRINGA"
+	case MI_REFERENCEA:
+		return "MI_REFERENCEA"
+	case MI_INSTANCEA:
+		return "MI_INSTANCEA"
+	default:
+		return fmt.Sprintf("MI_Type(%d)", int32(e))
+	}
+}
 
 // WBEMSTATUS: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbemstatus
 type WBEMSTATUS int32
@@ -412,12 +797,416 @@ const (
 	WBEMMOF_E_INVALID_DELETECLASS_SYNTAX      WBEMSTATUS = -2147205071
 )
 
+// String returns the WBEMSTATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEMSTATUS) String() string {
+	switch e {
+	case WBEM_NO_ERROR:
+		return "WBEM_NO_ERROR"
+	case WBEM_S_FALSE:
+		return "WBEM_S_FALSE"
+	case WBEM_S_ALREADY_EXISTS:
+		return "WBEM_S_ALREADY_EXISTS"
+	case WBEM_S_RESET_TO_DEFAULT:
+		return "WBEM_S_RESET_TO_DEFAULT"
+	case WBEM_S_DIFFERENT:
+		return "WBEM_S_DIFFERENT"
+	case WBEM_S_TIMEDOUT:
+		return "WBEM_S_TIMEDOUT"
+	case WBEM_S_NO_MORE_DATA:
+		return "WBEM_S_NO_MORE_DATA"
+	case WBEM_S_OPERATION_CANCELLED:
+		return "WBEM_S_OPERATION_CANCELLED"
+	case WBEM_S_PENDING:
+		return "WBEM_S_PENDING"
+	case WBEM_S_DUPLICATE_OBJECTS:
+		return "WBEM_S_DUPLICATE_OBJECTS"
+	case WBEM_S_ACCESS_DENIED:
+		return "WBEM_S_ACCESS_DENIED"
+	case WBEM_S_PARTIAL_RESULTS:
+		return "WBEM_S_PARTIAL_RESULTS"
+	case WBEM_S_SOURCE_NOT_AVAILABLE:
+		return "WBEM_S_SOURCE_NOT_AVAILABLE"
+	case WBEM_E_FAILED:
+		return "WBEM_E_FAILED"
+	case WBEM_E_NOT_FOUND:
+		return "WBEM_E_NOT_FOUND"
+	case WBEM_E_ACCESS_DENIED:
+		return "WBEM_E_ACCESS_DENIED"
+	case WBEM_E_PROVIDER_FAILURE:
+		return "WBEM_E_PROVIDER_FAILURE"
+	case WBEM_E_TYPE_MISMATCH:
+		return "WBEM_E_TYPE_MISMATCH"
+	case WBEM_E_OUT_OF_MEMORY:
+		return "WBEM_E_OUT_OF_MEMORY"
+	case WBEM_E_INVALID_CONTEXT:
+		return "WBEM_E_INVALID_CONTEXT"
+	case WBEM_E_INVALID_PARAMETER:
+		return "WBEM_E_INVALID_PARAMETER"
+	case WBEM_E_NOT_AVAILABLE:
+		return "WBEM_E_NOT_AVAILABLE"
+	case WBEM_E_CRITICAL_ERROR:
+		return "WBEM_E_CRITICAL_ERROR"
+	case WBEM_E_INVALID_STREAM:
+		return "WBEM_E_INVALID_STREAM"
+	case WBEM_E_NOT_SUPPORTED:
+		return "WBEM_E_NOT_SUPPORTED"
+	case WBEM_E_INVALID_SUPERCLASS:
+		return "WBEM_E_INVALID_SUPERCLASS"
+	case WBEM_E_INVALID_NAMESPACE:
+		return "WBEM_E_INVALID_NAMESPACE"
+	case WBEM_E_INVALID_OBJECT:
+		return "WBEM_E_INVALID_OBJECT"
+	case WBEM_E_INVALID_CLASS:
+		return "WBEM_E_INVALID_CLASS"
+	case WBEM_E_PROVIDER_NOT_FOUND:
+		return "WBEM_E_PROVIDER_NOT_FOUND"
+	case WBEM_E_INVALID_PROVIDER_REGISTRATION:
+		return "WBEM_E_INVALID_PROVIDER_REGISTRATION"
+	case WBEM_E_PROVIDER_LOAD_FAILURE:
+		return "WBEM_E_PROVIDER_LOAD_FAILURE"
+	case WBEM_E_INITIALIZATION_FAILURE:
+		return "WBEM_E_INITIALIZATION_FAILURE"
+	case WBEM_E_TRANSPORT_FAILURE:
+		return "WBEM_E_TRANSPORT_FAILURE"
+	case WBEM_E_INVALID_OPERATION:
+		return "WBEM_E_INVALID_OPERATION"
+	case WBEM_E_INVALID_QUERY:
+		return "WBEM_E_INVALID_QUERY"
+	case WBEM_E_INVALID_QUERY_TYPE:
+		return "WBEM_E_INVALID_QUERY_TYPE"
+	case WBEM_E_ALREADY_EXISTS:
+		return "WBEM_E_ALREADY_EXISTS"
+	case WBEM_E_OVERRIDE_NOT_ALLOWED:
+		return "WBEM_E_OVERRIDE_NOT_ALLOWED"
+	case WBEM_E_PROPAGATED_QUALIFIER:
+		return "WBEM_E_PROPAGATED_QUALIFIER"
+	case WBEM_E_PROPAGATED_PROPERTY:
+		return "WBEM_E_PROPAGATED_PROPERTY"
+	case WBEM_E_UNEXPECTED:
+		return "WBEM_E_UNEXPECTED"
+	case WBEM_E_ILLEGAL_OPERATION:
+		return "WBEM_E_ILLEGAL_OPERATION"
+	case WBEM_E_CANNOT_BE_KEY:
+		return "WBEM_E_CANNOT_BE_KEY"
+	case WBEM_E_INCOMPLETE_CLASS:
+		return "WBEM_E_INCOMPLETE_CLASS"
+	case WBEM_E_INVALID_SYNTAX:
+		return "WBEM_E_INVALID_SYNTAX"
+	case WBEM_E_NONDECORATED_OBJECT:
+		return "WBEM_E_NONDECORATED_OBJECT"
+	case WBEM_E_READ_ONLY:
+		return "WBEM_E_READ_ONLY"
+	case WBEM_E_PROVIDER_NOT_CAPABLE:
+		return "WBEM_E_PROVIDER_NOT_CAPABLE"
+	case WBEM_E_CLASS_HAS_CHILDREN:
+		return "WBEM_E_CLASS_HAS_CHILDREN"
+	case WBEM_E_CLASS_HAS_INSTANCES:
+		return "WBEM_E_CLASS_HAS_INSTANCES"
+	case WBEM_E_QUERY_NOT_IMPLEMENTED:
+		return "WBEM_E_QUERY_NOT_IMPLEMENTED"
+	case WBEM_E_ILLEGAL_NULL:
+		return "WBEM_E_ILLEGAL_NULL"
+	case WBEM_E_INVALID_QUALIFIER_TYPE:
+		return "WBEM_E_INVALID_QUALIFIER_TYPE"
+	case WBEM_E_INVALID_PROPERTY_TYPE:
+		return "WBEM_E_INVALID_PROPERTY_TYPE"
+	case WBEM_E_VALUE_OUT_OF_RANGE:
+		return "WBEM_E_VALUE_OUT_OF_RANGE"
+	case WBEM_E_CANNOT_BE_SINGLETON:
+		return "WBEM_E_CANNOT_BE_SINGLETON"
+	case WBEM_E_INVALID_CIM_TYPE:
+		return "WBEM_E_INVALID_CIM_TYPE"
+	case WBEM_E_INVALID_METHOD:
+		return "WBEM_E_INVALID_METHOD"
+	case WBEM_E_INVALID_METHOD_PARAMETERS:
+		return "WBEM_E_INVALID_METHOD_PARAMETERS"
+	case WBEM_E_SYSTEM_PROPERTY:
+		return "WBEM_E_SYSTEM_PROPERTY"
+	case WBEM_E_INVALID_PROPERTY:
+		return "WBEM_E_INVALID_PROPERTY"
+	case WBEM_E_CALL_CANCELLED:
+		return "WBEM_E_CALL_CANCELLED"
+	case WBEM_E_SHUTTING_DOWN:
+		return "WBEM_E_SHUTTING_DOWN"
+	case WBEM_E_PROPAGATED_METHOD:
+		return "WBEM_E_PROPAGATED_METHOD"
+	case WBEM_E_UNSUPPORTED_PARAMETER:
+		return "WBEM_E_UNSUPPORTED_PARAMETER"
+	case WBEM_E_MISSING_PARAMETER_ID:
+		return "WBEM_E_MISSING_PARAMETER_ID"
+	case WBEM_E_INVALID_PARAMETER_ID:
+		return "WBEM_E_INVALID_PARAMETER_ID"
+	case WBEM_E_NONCONSECUTIVE_PARAMETER_IDS:
+		return "WBEM_E_NONCONSECUTIVE_PARAMETER_IDS"
+	case WBEM_E_PARAMETER_ID_ON_RETVAL:
+		return "WBEM_E_PARAMETER_ID_ON_RETVAL"
+	case WBEM_E_INVALID_OBJECT_PATH:
+		return "WBEM_E_INVALID_OBJECT_PATH"
+	case WBEM_E_OUT_OF_DISK_SPACE:
+		return "WBEM_E_OUT_OF_DISK_SPACE"
+	case WBEM_E_BUFFER_TOO_SMALL:
+		return "WBEM_E_BUFFER_TOO_SMALL"
+	case WBEM_E_UNSUPPORTED_PUT_EXTENSION:
+		return "WBEM_E_UNSUPPORTED_PUT_EXTENSION"
+	case WBEM_E_UNKNOWN_OBJECT_TYPE:
+		return "WBEM_E_UNKNOWN_OBJECT_TYPE"
+	case WBEM_E_UNKNOWN_PACKET_TYPE:
+		return "WBEM_E_UNKNOWN_PACKET_TYPE"
+	case WBEM_E_MARSHAL_VERSION_MISMATCH:
+		return "WBEM_E_MARSHAL_VERSION_MISMATCH"
+	case WBEM_E_MARSHAL_INVALID_SIGNATURE:
+		return "WBEM_E_MARSHAL_INVALID_SIGNATURE"
+	case WBEM_E_INVALID_QUALIFIER:
+		return "WBEM_E_INVALID_QUALIFIER"
+	case WBEM_E_INVALID_DUPLICATE_PARAMETER:
+		return "WBEM_E_INVALID_DUPLICATE_PARAMETER"
+	case WBEM_E_TOO_MUCH_DATA:
+		return "WBEM_E_TOO_MUCH_DATA"
+	case WBEM_E_SERVER_TOO_BUSY:
+		return "WBEM_E_SERVER_TOO_BUSY"
+	case WBEM_E_INVALID_FLAVOR:
+		return "WBEM_E_INVALID_FLAVOR"
+	case WBEM_E_CIRCULAR_REFERENCE:
+		return "WBEM_E_CIRCULAR_REFERENCE"
+	case WBEM_E_UNSUPPORTED_CLASS_UPDATE:
+		return "WBEM_E_UNSUPPORTED_CLASS_UPDATE"
+	case WBEM_E_CANNOT_CHANGE_KEY_INHERITANCE:
+		return "WBEM_E_CANNOT_CHANGE_KEY_INHERITANCE"
+	case WBEM_E_CANNOT_CHANGE_INDEX_INHERITANCE:
+		return "WBEM_E_CANNOT_CHANGE_INDEX_INHERITANCE"
+	case WBEM_E_TOO_MANY_PROPERTIES:
+		return "WBEM_E_TOO_MANY_PROPERTIES"
+	case WBEM_E_UPDATE_TYPE_MISMATCH:
+		return "WBEM_E_UPDATE_TYPE_MISMATCH"
+	case WBEM_E_UPDATE_OVERRIDE_NOT_ALLOWED:
+		return "WBEM_E_UPDATE_OVERRIDE_NOT_ALLOWED"
+	case WBEM_E_UPDATE_PROPAGATED_METHOD:
+		return "WBEM_E_UPDATE_PROPAGATED_METHOD"
+	case WBEM_E_METHOD_NOT_IMPLEMENTED:
+		return "WBEM_E_METHOD_NOT_IMPLEMENTED"
+	case WBEM_E_METHOD_DISABLED:
+		return "WBEM_E_METHOD_DISABLED"
+	case WBEM_E_REFRESHER_BUSY:
+		return "WBEM_E_REFRESHER_BUSY"
+	case WBEM_E_UNPARSABLE_QUERY:
+		return "WBEM_E_UNPARSABLE_QUERY"
+	case WBEM_E_NOT_EVENT_CLASS:
+		return "WBEM_E_NOT_EVENT_CLASS"
+	case WBEM_E_MISSING_GROUP_WITHIN:
+		return "WBEM_E_MISSING_GROUP_WITHIN"
+	case WBEM_E_MISSING_AGGREGATION_LIST:
+		return "WBEM_E_MISSING_AGGREGATION_LIST"
+	case WBEM_E_PROPERTY_NOT_AN_OBJECT:
+		return "WBEM_E_PROPERTY_NOT_AN_OBJECT"
+	case WBEM_E_AGGREGATING_BY_OBJECT:
+		return "WBEM_E_AGGREGATING_BY_OBJECT"
+	case WBEM_E_UNINTERPRETABLE_PROVIDER_QUERY:
+		return "WBEM_E_UNINTERPRETABLE_PROVIDER_QUERY"
+	case WBEM_E_BACKUP_RESTORE_WINMGMT_RUNNING:
+		return "WBEM_E_BACKUP_RESTORE_WINMGMT_RUNNING"
+	case WBEM_E_QUEUE_OVERFLOW:
+		return "WBEM_E_QUEUE_OVERFLOW"
+	case WBEM_E_PRIVILEGE_NOT_HELD:
+		return "WBEM_E_PRIVILEGE_NOT_HELD"
+	case WBEM_E_INVALID_OPERATOR:
+		return "WBEM_E_INVALID_OPERATOR"
+	case WBEM_E_LOCAL_CREDENTIALS:
+		return "WBEM_E_LOCAL_CREDENTIALS"
+	case WBEM_E_CANNOT_BE_ABSTRACT:
+		return "WBEM_E_CANNOT_BE_ABSTRACT"
+	case WBEM_E_AMENDED_OBJECT:
+		return "WBEM_E_AMENDED_OBJECT"
+	case WBEM_E_CLIENT_TOO_SLOW:
+		return "WBEM_E_CLIENT_TOO_SLOW"
+	case WBEM_E_NULL_SECURITY_DESCRIPTOR:
+		return "WBEM_E_NULL_SECURITY_DESCRIPTOR"
+	case WBEM_E_TIMED_OUT:
+		return "WBEM_E_TIMED_OUT"
+	case WBEM_E_INVALID_ASSOCIATION:
+		return "WBEM_E_INVALID_ASSOCIATION"
+	case WBEM_E_AMBIGUOUS_OPERATION:
+		return "WBEM_E_AMBIGUOUS_OPERATION"
+	case WBEM_E_QUOTA_VIOLATION:
+		return "WBEM_E_QUOTA_VIOLATION"
+	case WBEM_E_RESERVED_001:
+		return "WBEM_E_RESERVED_001"
+	case WBEM_E_RESERVED_002:
+		return "WBEM_E_RESERVED_002"
+	case WBEM_E_UNSUPPORTED_LOCALE:
+		return "WBEM_E_UNSUPPORTED_LOCALE"
+	case WBEM_E_HANDLE_OUT_OF_DATE:
+		return "WBEM_E_HANDLE_OUT_OF_DATE"
+	case WBEM_E_CONNECTION_FAILED:
+		return "WBEM_E_CONNECTION_FAILED"
+	case WBEM_E_INVALID_HANDLE_REQUEST:
+		return "WBEM_E_INVALID_HANDLE_REQUEST"
+	case WBEM_E_PROPERTY_NAME_TOO_WIDE:
+		return "WBEM_E_PROPERTY_NAME_TOO_WIDE"
+	case WBEM_E_CLASS_NAME_TOO_WIDE:
+		return "WBEM_E_CLASS_NAME_TOO_WIDE"
+	case WBEM_E_METHOD_NAME_TOO_WIDE:
+		return "WBEM_E_METHOD_NAME_TOO_WIDE"
+	case WBEM_E_QUALIFIER_NAME_TOO_WIDE:
+		return "WBEM_E_QUALIFIER_NAME_TOO_WIDE"
+	case WBEM_E_RERUN_COMMAND:
+		return "WBEM_E_RERUN_COMMAND"
+	case WBEM_E_DATABASE_VER_MISMATCH:
+		return "WBEM_E_DATABASE_VER_MISMATCH"
+	case WBEM_E_VETO_DELETE:
+		return "WBEM_E_VETO_DELETE"
+	case WBEM_E_VETO_PUT:
+		return "WBEM_E_VETO_PUT"
+	case WBEM_E_INVALID_LOCALE:
+		return "WBEM_E_INVALID_LOCALE"
+	case WBEM_E_PROVIDER_SUSPENDED:
+		return "WBEM_E_PROVIDER_SUSPENDED"
+	case WBEM_E_SYNCHRONIZATION_REQUIRED:
+		return "WBEM_E_SYNCHRONIZATION_REQUIRED"
+	case WBEM_E_NO_SCHEMA:
+		return "WBEM_E_NO_SCHEMA"
+	case WBEM_E_PROVIDER_ALREADY_REGISTERED:
+		return "WBEM_E_PROVIDER_ALREADY_REGISTERED"
+	case WBEM_E_PROVIDER_NOT_REGISTERED:
+		return "WBEM_E_PROVIDER_NOT_REGISTERED"
+	case WBEM_E_FATAL_TRANSPORT_ERROR:
+		return "WBEM_E_FATAL_TRANSPORT_ERROR"
+	case WBEM_E_ENCRYPTED_CONNECTION_REQUIRED:
+		return "WBEM_E_ENCRYPTED_CONNECTION_REQUIRED"
+	case WBEM_E_PROVIDER_TIMED_OUT:
+		return "WBEM_E_PROVIDER_TIMED_OUT"
+	case WBEM_E_NO_KEY:
+		return "WBEM_E_NO_KEY"
+	case WBEM_E_PROVIDER_DISABLED:
+		return "WBEM_E_PROVIDER_DISABLED"
+	case WBEMESS_E_REGISTRATION_TOO_BROAD:
+		return "WBEMESS_E_REGISTRATION_TOO_BROAD"
+	case WBEMESS_E_REGISTRATION_TOO_PRECISE:
+		return "WBEMESS_E_REGISTRATION_TOO_PRECISE"
+	case WBEMESS_E_AUTHZ_NOT_PRIVILEGED:
+		return "WBEMESS_E_AUTHZ_NOT_PRIVILEGED"
+	case WBEMMOF_E_EXPECTED_QUALIFIER_NAME:
+		return "WBEMMOF_E_EXPECTED_QUALIFIER_NAME"
+	case WBEMMOF_E_EXPECTED_SEMI:
+		return "WBEMMOF_E_EXPECTED_SEMI"
+	case WBEMMOF_E_EXPECTED_OPEN_BRACE:
+		return "WBEMMOF_E_EXPECTED_OPEN_BRACE"
+	case WBEMMOF_E_EXPECTED_CLOSE_BRACE:
+		return "WBEMMOF_E_EXPECTED_CLOSE_BRACE"
+	case WBEMMOF_E_EXPECTED_CLOSE_BRACKET:
+		return "WBEMMOF_E_EXPECTED_CLOSE_BRACKET"
+	case WBEMMOF_E_EXPECTED_CLOSE_PAREN:
+		return "WBEMMOF_E_EXPECTED_CLOSE_PAREN"
+	case WBEMMOF_E_ILLEGAL_CONSTANT_VALUE:
+		return "WBEMMOF_E_ILLEGAL_CONSTANT_VALUE"
+	case WBEMMOF_E_EXPECTED_TYPE_IDENTIFIER:
+		return "WBEMMOF_E_EXPECTED_TYPE_IDENTIFIER"
+	case WBEMMOF_E_EXPECTED_OPEN_PAREN:
+		return "WBEMMOF_E_EXPECTED_OPEN_PAREN"
+	case WBEMMOF_E_UNRECOGNIZED_TOKEN:
+		return "WBEMMOF_E_UNRECOGNIZED_TOKEN"
+	case WBEMMOF_E_UNRECOGNIZED_TYPE:
+		return "WBEMMOF_E_UNRECOGNIZED_TYPE"
+	case WBEMMOF_E_EXPECTED_PROPERTY_NAME:
+		return "WBEMMOF_E_EXPECTED_PROPERTY_NAME"
+	case WBEMMOF_E_TYPEDEF_NOT_SUPPORTED:
+		return "WBEMMOF_E_TYPEDEF_NOT_SUPPORTED"
+	case WBEMMOF_E_UNEXPECTED_ALIAS:
+		return "WBEMMOF_E_UNEXPECTED_ALIAS"
+	case WBEMMOF_E_UNEXPECTED_ARRAY_INIT:
+		return "WBEMMOF_E_UNEXPECTED_ARRAY_INIT"
+	case WBEMMOF_E_INVALID_AMENDMENT_SYNTAX:
+		return "WBEMMOF_E_INVALID_AMENDMENT_SYNTAX"
+	case WBEMMOF_E_INVALID_DUPLICATE_AMENDMENT:
+		return "WBEMMOF_E_INVALID_DUPLICATE_AMENDMENT"
+	case WBEMMOF_E_INVALID_PRAGMA:
+		return "WBEMMOF_E_INVALID_PRAGMA"
+	case WBEMMOF_E_INVALID_NAMESPACE_SYNTAX:
+		return "WBEMMOF_E_INVALID_NAMESPACE_SYNTAX"
+	case WBEMMOF_E_EXPECTED_CLASS_NAME:
+		return "WBEMMOF_E_EXPECTED_CLASS_NAME"
+	case WBEMMOF_E_TYPE_MISMATCH:
+		return "WBEMMOF_E_TYPE_MISMATCH"
+	case WBEMMOF_E_EXPECTED_ALIAS_NAME:
+		return "WBEMMOF_E_EXPECTED_ALIAS_NAME"
+	case WBEMMOF_E_INVALID_CLASS_DECLARATION:
+		return "WBEMMOF_E_INVALID_CLASS_DECLARATION"
+	case WBEMMOF_E_INVALID_INSTANCE_DECLARATION:
+		return "WBEMMOF_E_INVALID_INSTANCE_DECLARATION"
+	case WBEMMOF_E_EXPECTED_DOLLAR:
+		return "WBEMMOF_E_EXPECTED_DOLLAR"
+	case WBEMMOF_E_CIMTYPE_QUALIFIER:
+		return "WBEMMOF_E_CIMTYPE_QUALIFIER"
+	case WBEMMOF_E_DUPLICATE_PROPERTY:
+		return "WBEMMOF_E_DUPLICATE_PROPERTY"
+	case WBEMMOF_E_INVALID_NAMESPACE_SPECIFICATION:
+		return "WBEMMOF_E_INVALID_NAMESPACE_SPECIFICATION"
+	case WBEMMOF_E_OUT_OF_RANGE:
+		return "WBEMMOF_E_OUT_OF_RANGE"
+	case WBEMMOF_E_INVALID_FILE:
+		return "WBEMMOF_E_INVALID_FILE"
+	case WBEMMOF_E_ALIASES_IN_EMBEDDED:
+		return "WBEMMOF_E_ALIASES_IN_EMBEDDED"
+	case WBEMMOF_E_NULL_ARRAY_ELEM:
+		return "WBEMMOF_E_NULL_ARRAY_ELEM"
+	case WBEMMOF_E_DUPLICATE_QUALIFIER:
+		return "WBEMMOF_E_DUPLICATE_QUALIFIER"
+	case WBEMMOF_E_EXPECTED_FLAVOR_TYPE:
+		return "WBEMMOF_E_EXPECTED_FLAVOR_TYPE"
+	case WBEMMOF_E_INCOMPATIBLE_FLAVOR_TYPES:
+		return "WBEMMOF_E_INCOMPATIBLE_FLAVOR_TYPES"
+	case WBEMMOF_E_MULTIPLE_ALIASES:
+		return "WBEMMOF_E_MULTIPLE_ALIASES"
+	case WBEMMOF_E_INCOMPATIBLE_FLAVOR_TYPES2:
+		return "WBEMMOF_E_INCOMPATIBLE_FLAVOR_TYPES2"
+	case WBEMMOF_E_NO_ARRAYS_RETURNED:
+		return "WBEMMOF_E_NO_ARRAYS_RETURNED"
+	case WBEMMOF_E_MUST_BE_IN_OR_OUT:
+		return "WBEMMOF_E_MUST_BE_IN_OR_OUT"
+	case WBEMMOF_E_INVALID_FLAGS_SYNTAX:
+		return "WBEMMOF_E_INVALID_FLAGS_SYNTAX"
+	case WBEMMOF_E_EXPECTED_BRACE_OR_BAD_TYPE:
+		return "WBEMMOF_E_EXPECTED_BRACE_OR_BAD_TYPE"
+	case WBEMMOF_E_UNSUPPORTED_CIMV22_QUAL_VALUE:
+		return "WBEMMOF_E_UNSUPPORTED_CIMV22_QUAL_VALUE"
+	case WBEMMOF_E_UNSUPPORTED_CIMV22_DATA_TYPE:
+		return "WBEMMOF_E_UNSUPPORTED_CIMV22_DATA_TYPE"
+	case WBEMMOF_E_INVALID_DELETEINSTANCE_SYNTAX:
+		return "WBEMMOF_E_INVALID_DELETEINSTANCE_SYNTAX"
+	case WBEMMOF_E_INVALID_QUALIFIER_SYNTAX:
+		return "WBEMMOF_E_INVALID_QUALIFIER_SYNTAX"
+	case WBEMMOF_E_QUALIFIER_USED_OUTSIDE_SCOPE:
+		return "WBEMMOF_E_QUALIFIER_USED_OUTSIDE_SCOPE"
+	case WBEMMOF_E_ERROR_CREATING_TEMP_FILE:
+		return "WBEMMOF_E_ERROR_CREATING_TEMP_FILE"
+	case WBEMMOF_E_ERROR_INVALID_INCLUDE_FILE:
+		return "WBEMMOF_E_ERROR_INVALID_INCLUDE_FILE"
+	case WBEMMOF_E_INVALID_DELETECLASS_SYNTAX:
+		return "WBEMMOF_E_INVALID_DELETECLASS_SYNTAX"
+	default:
+		return fmt.Sprintf("WBEMSTATUS(%d)", int32(e))
+	}
+}
+
 type WBEMSTATUS_FORMAT int32
 
 const (
 	WBEMSTATUS_FORMAT_NEWLINE    WBEMSTATUS_FORMAT = 0
 	WBEMSTATUS_FORMAT_NO_NEWLINE WBEMSTATUS_FORMAT = 1
 )
+
+// String returns the WBEMSTATUS_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEMSTATUS_FORMAT) String() string {
+	switch e {
+	case WBEMSTATUS_FORMAT_NEWLINE:
+		return "WBEMSTATUS_FORMAT_NEWLINE"
+	case WBEMSTATUS_FORMAT_NO_NEWLINE:
+		return "WBEMSTATUS_FORMAT_NO_NEWLINE"
+	default:
+		return fmt.Sprintf("WBEMSTATUS_FORMAT(%d)", int32(e))
+	}
+}
 
 // WBEM_BACKUP_RESTORE_FLAGS: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_backup_restore_flags
 type WBEM_BACKUP_RESTORE_FLAGS int32
@@ -427,6 +1216,19 @@ const (
 	WBEM_FLAG_BACKUP_RESTORE_FORCE_SHUTDOWN WBEM_BACKUP_RESTORE_FLAGS = 1
 )
 
+// String returns the WBEM_BACKUP_RESTORE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_BACKUP_RESTORE_FLAGS) String() string {
+	switch e {
+	case WBEM_FLAG_BACKUP_RESTORE_DEFAULT:
+		return "WBEM_FLAG_BACKUP_RESTORE_DEFAULT"
+	case WBEM_FLAG_BACKUP_RESTORE_FORCE_SHUTDOWN:
+		return "WBEM_FLAG_BACKUP_RESTORE_FORCE_SHUTDOWN"
+	default:
+		return fmt.Sprintf("WBEM_BACKUP_RESTORE_FLAGS(%d)", int32(e))
+	}
+}
+
 type WBEM_BATCH_TYPE int32
 
 const (
@@ -434,6 +1236,21 @@ const (
 	WBEM_FLAG_MUST_BATCH      WBEM_BATCH_TYPE = 1
 	WBEM_FLAG_MUST_NOT_BATCH  WBEM_BATCH_TYPE = 2
 )
+
+// String returns the WBEM_BATCH_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_BATCH_TYPE) String() string {
+	switch e {
+	case WBEM_FLAG_BATCH_IF_NEEDED:
+		return "WBEM_FLAG_BATCH_IF_NEEDED"
+	case WBEM_FLAG_MUST_BATCH:
+		return "WBEM_FLAG_MUST_BATCH"
+	case WBEM_FLAG_MUST_NOT_BATCH:
+		return "WBEM_FLAG_MUST_NOT_BATCH"
+	default:
+		return fmt.Sprintf("WBEM_BATCH_TYPE(%d)", int32(e))
+	}
+}
 
 // WBEM_CHANGE_FLAG_TYPE: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_change_flag_type
 type WBEM_CHANGE_FLAG_TYPE int32
@@ -449,6 +1266,29 @@ const (
 	WBEM_FLAG_ADVISORY          WBEM_CHANGE_FLAG_TYPE = 65536
 )
 
+// String returns the WBEM_CHANGE_FLAG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_CHANGE_FLAG_TYPE) String() string {
+	switch e {
+	case WBEM_FLAG_CREATE_OR_UPDATE:
+		return "WBEM_FLAG_CREATE_OR_UPDATE"
+	case WBEM_FLAG_UPDATE_ONLY:
+		return "WBEM_FLAG_UPDATE_ONLY"
+	case WBEM_FLAG_CREATE_ONLY:
+		return "WBEM_FLAG_CREATE_ONLY"
+	case WBEM_FLAG_UPDATE_SAFE_MODE:
+		return "WBEM_FLAG_UPDATE_SAFE_MODE"
+	case WBEM_FLAG_UPDATE_FORCE_MODE:
+		return "WBEM_FLAG_UPDATE_FORCE_MODE"
+	case WBEM_MASK_UPDATE_MODE:
+		return "WBEM_MASK_UPDATE_MODE"
+	case WBEM_FLAG_ADVISORY:
+		return "WBEM_FLAG_ADVISORY"
+	default:
+		return fmt.Sprintf("WBEM_CHANGE_FLAG_TYPE(%d)", int32(e))
+	}
+}
+
 // WBEM_COMPARISON_FLAG: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_comparison_flag
 type WBEM_COMPARISON_FLAG int32
 
@@ -462,6 +1302,29 @@ const (
 	WBEM_FLAG_IGNORE_FLAVOR         WBEM_COMPARISON_FLAG = 32
 )
 
+// String returns the WBEM_COMPARISON_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_COMPARISON_FLAG) String() string {
+	switch e {
+	case WBEM_COMPARISON_INCLUDE_ALL:
+		return "WBEM_COMPARISON_INCLUDE_ALL"
+	case WBEM_FLAG_IGNORE_QUALIFIERS:
+		return "WBEM_FLAG_IGNORE_QUALIFIERS"
+	case WBEM_FLAG_IGNORE_OBJECT_SOURCE:
+		return "WBEM_FLAG_IGNORE_OBJECT_SOURCE"
+	case WBEM_FLAG_IGNORE_DEFAULT_VALUES:
+		return "WBEM_FLAG_IGNORE_DEFAULT_VALUES"
+	case WBEM_FLAG_IGNORE_CLASS:
+		return "WBEM_FLAG_IGNORE_CLASS"
+	case WBEM_FLAG_IGNORE_CASE:
+		return "WBEM_FLAG_IGNORE_CASE"
+	case WBEM_FLAG_IGNORE_FLAVOR:
+		return "WBEM_FLAG_IGNORE_FLAVOR"
+	default:
+		return fmt.Sprintf("WBEM_COMPARISON_FLAG(%d)", int32(e))
+	}
+}
+
 // WBEM_COMPILER_OPTIONS: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_compiler_options
 type WBEM_COMPILER_OPTIONS int32
 
@@ -474,6 +1337,29 @@ const (
 	WBEM_FLAG_SPLIT_FILES      WBEM_COMPILER_OPTIONS = 32
 	WBEM_FLAG_STORE_FILE       WBEM_COMPILER_OPTIONS = 256
 )
+
+// String returns the WBEM_COMPILER_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_COMPILER_OPTIONS) String() string {
+	switch e {
+	case WBEM_FLAG_CHECK_ONLY:
+		return "WBEM_FLAG_CHECK_ONLY"
+	case WBEM_FLAG_AUTORECOVER:
+		return "WBEM_FLAG_AUTORECOVER"
+	case WBEM_FLAG_WMI_CHECK:
+		return "WBEM_FLAG_WMI_CHECK"
+	case WBEM_FLAG_CONSOLE_PRINT:
+		return "WBEM_FLAG_CONSOLE_PRINT"
+	case WBEM_FLAG_DONT_ADD_TO_LIST:
+		return "WBEM_FLAG_DONT_ADD_TO_LIST"
+	case WBEM_FLAG_SPLIT_FILES:
+		return "WBEM_FLAG_SPLIT_FILES"
+	case WBEM_FLAG_STORE_FILE:
+		return "WBEM_FLAG_STORE_FILE"
+	default:
+		return fmt.Sprintf("WBEM_COMPILER_OPTIONS(%d)", int32(e))
+	}
+}
 
 // WBEM_CONDITION_FLAG_TYPE: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_condition_flag_type
 type WBEM_CONDITION_FLAG_TYPE int32
@@ -496,6 +1382,43 @@ const (
 	WBEM_MASK_CLASS_CONDITION           WBEM_CONDITION_FLAG_TYPE = 768
 )
 
+// String returns the WBEM_CONDITION_FLAG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_CONDITION_FLAG_TYPE) String() string {
+	switch e {
+	case WBEM_FLAG_ALWAYS:
+		return "WBEM_FLAG_ALWAYS"
+	case WBEM_FLAG_ONLY_IF_TRUE:
+		return "WBEM_FLAG_ONLY_IF_TRUE"
+	case WBEM_FLAG_ONLY_IF_FALSE:
+		return "WBEM_FLAG_ONLY_IF_FALSE"
+	case WBEM_FLAG_ONLY_IF_IDENTICAL:
+		return "WBEM_FLAG_ONLY_IF_IDENTICAL"
+	case WBEM_FLAG_KEYS_ONLY:
+		return "WBEM_FLAG_KEYS_ONLY"
+	case WBEM_FLAG_REFS_ONLY:
+		return "WBEM_FLAG_REFS_ONLY"
+	case WBEM_FLAG_LOCAL_ONLY:
+		return "WBEM_FLAG_LOCAL_ONLY"
+	case WBEM_FLAG_PROPAGATED_ONLY:
+		return "WBEM_FLAG_PROPAGATED_ONLY"
+	case WBEM_FLAG_SYSTEM_ONLY:
+		return "WBEM_FLAG_SYSTEM_ONLY"
+	case WBEM_FLAG_NONSYSTEM_ONLY:
+		return "WBEM_FLAG_NONSYSTEM_ONLY"
+	case WBEM_MASK_CONDITION_ORIGIN:
+		return "WBEM_MASK_CONDITION_ORIGIN"
+	case WBEM_FLAG_CLASS_OVERRIDES_ONLY:
+		return "WBEM_FLAG_CLASS_OVERRIDES_ONLY"
+	case WBEM_FLAG_CLASS_LOCAL_AND_OVERRIDES:
+		return "WBEM_FLAG_CLASS_LOCAL_AND_OVERRIDES"
+	case WBEM_MASK_CLASS_CONDITION:
+		return "WBEM_MASK_CLASS_CONDITION"
+	default:
+		return fmt.Sprintf("WBEM_CONDITION_FLAG_TYPE(%d)", int32(e))
+	}
+}
+
 type WBEM_CONNECT_OPTIONS int32
 
 const (
@@ -503,6 +1426,21 @@ const (
 	WBEM_FLAG_CONNECT_USE_MAX_WAIT    WBEM_CONNECT_OPTIONS = 128
 	WBEM_FLAG_CONNECT_PROVIDERS       WBEM_CONNECT_OPTIONS = 256
 )
+
+// String returns the WBEM_CONNECT_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_CONNECT_OPTIONS) String() string {
+	switch e {
+	case WBEM_FLAG_CONNECT_REPOSITORY_ONLY:
+		return "WBEM_FLAG_CONNECT_REPOSITORY_ONLY"
+	case WBEM_FLAG_CONNECT_USE_MAX_WAIT:
+		return "WBEM_FLAG_CONNECT_USE_MAX_WAIT"
+	case WBEM_FLAG_CONNECT_PROVIDERS:
+		return "WBEM_FLAG_CONNECT_PROVIDERS"
+	default:
+		return fmt.Sprintf("WBEM_CONNECT_OPTIONS(%d)", int32(e))
+	}
+}
 
 type WBEM_EXTRA_RETURN_CODES int32
 
@@ -514,6 +1452,27 @@ const (
 	WBEM_E_RETRY_LATER         WBEM_EXTRA_RETURN_CODES = -2147209215
 	WBEM_E_RESOURCE_CONTENTION WBEM_EXTRA_RETURN_CODES = -2147209214
 )
+
+// String returns the WBEM_EXTRA_RETURN_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_EXTRA_RETURN_CODES) String() string {
+	switch e {
+	case WBEM_S_INITIALIZED:
+		return "WBEM_S_INITIALIZED"
+	case WBEM_S_LIMITED_SERVICE:
+		return "WBEM_S_LIMITED_SERVICE"
+	case WBEM_S_INDIRECTLY_UPDATED:
+		return "WBEM_S_INDIRECTLY_UPDATED"
+	case WBEM_S_SUBJECT_TO_SDS:
+		return "WBEM_S_SUBJECT_TO_SDS"
+	case WBEM_E_RETRY_LATER:
+		return "WBEM_E_RETRY_LATER"
+	case WBEM_E_RESOURCE_CONTENTION:
+		return "WBEM_E_RESOURCE_CONTENTION"
+	default:
+		return fmt.Sprintf("WBEM_EXTRA_RETURN_CODES(%d)", int32(e))
+	}
+}
 
 // WBEM_FLAVOR_TYPE: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_flavor_type
 type WBEM_FLAVOR_TYPE int32
@@ -535,7 +1494,35 @@ const (
 	WBEM_FLAVOR_MASK_AMENDED                    WBEM_FLAVOR_TYPE = 128
 )
 
+// String returns the WBEM_FLAVOR_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_FLAVOR_TYPE) String() string {
+	switch e {
+	case WBEM_FLAVOR_DONT_PROPAGATE:
+		return "WBEM_FLAVOR_DONT_PROPAGATE"
+	case WBEM_FLAVOR_FLAG_PROPAGATE_TO_INSTANCE:
+		return "WBEM_FLAVOR_FLAG_PROPAGATE_TO_INSTANCE"
+	case WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS:
+		return "WBEM_FLAVOR_FLAG_PROPAGATE_TO_DERIVED_CLASS"
+	case WBEM_FLAVOR_MASK_PROPAGATION:
+		return "WBEM_FLAVOR_MASK_PROPAGATION"
+	case WBEM_FLAVOR_NOT_OVERRIDABLE:
+		return "WBEM_FLAVOR_NOT_OVERRIDABLE"
+	case WBEM_FLAVOR_ORIGIN_PROPAGATED:
+		return "WBEM_FLAVOR_ORIGIN_PROPAGATED"
+	case WBEM_FLAVOR_ORIGIN_SYSTEM:
+		return "WBEM_FLAVOR_ORIGIN_SYSTEM"
+	case WBEM_FLAVOR_MASK_ORIGIN:
+		return "WBEM_FLAVOR_MASK_ORIGIN"
+	case WBEM_FLAVOR_AMENDED:
+		return "WBEM_FLAVOR_AMENDED"
+	default:
+		return fmt.Sprintf("WBEM_FLAVOR_TYPE(%d)", int32(e))
+	}
+}
+
 // WBEM_GENERIC_FLAG_TYPE: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_generic_flag_type
+// Bitmask — values may be combined with |.
 type WBEM_GENERIC_FLAG_TYPE int32
 
 const (
@@ -557,6 +1544,46 @@ const (
 	WBEM_FLAG_STRONG_VALIDATION      WBEM_GENERIC_FLAG_TYPE = 1048576
 )
 
+// String returns the WBEM_GENERIC_FLAG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_GENERIC_FLAG_TYPE) String() string {
+	var parts []string
+	if e&WBEM_FLAG_RETURN_IMMEDIATELY != 0 {
+		parts = append(parts, "WBEM_FLAG_RETURN_IMMEDIATELY")
+	}
+	if e&WBEM_FLAG_FORWARD_ONLY != 0 {
+		parts = append(parts, "WBEM_FLAG_FORWARD_ONLY")
+	}
+	if e&WBEM_FLAG_NO_ERROR_OBJECT != 0 {
+		parts = append(parts, "WBEM_FLAG_NO_ERROR_OBJECT")
+	}
+	if e&WBEM_FLAG_SEND_STATUS != 0 {
+		parts = append(parts, "WBEM_FLAG_SEND_STATUS")
+	}
+	if e&WBEM_FLAG_ENSURE_LOCATABLE != 0 {
+		parts = append(parts, "WBEM_FLAG_ENSURE_LOCATABLE")
+	}
+	if e&WBEM_FLAG_DIRECT_READ != 0 {
+		parts = append(parts, "WBEM_FLAG_DIRECT_READ")
+	}
+	if e&WBEM_RETURN_IMMEDIATELY != 0 {
+		parts = append(parts, "WBEM_RETURN_IMMEDIATELY")
+	}
+	if e&WBEM_MASK_RESERVED_FLAGS != 0 {
+		parts = append(parts, "WBEM_MASK_RESERVED_FLAGS")
+	}
+	if e&WBEM_FLAG_USE_AMENDED_QUALIFIERS != 0 {
+		parts = append(parts, "WBEM_FLAG_USE_AMENDED_QUALIFIERS")
+	}
+	if e&WBEM_FLAG_STRONG_VALIDATION != 0 {
+		parts = append(parts, "WBEM_FLAG_STRONG_VALIDATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // WBEM_GENUS_TYPE: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_genus_type
 type WBEM_GENUS_TYPE int32
 
@@ -565,12 +1592,38 @@ const (
 	WBEM_GENUS_INSTANCE WBEM_GENUS_TYPE = 2
 )
 
+// String returns the WBEM_GENUS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_GENUS_TYPE) String() string {
+	switch e {
+	case WBEM_GENUS_CLASS:
+		return "WBEM_GENUS_CLASS"
+	case WBEM_GENUS_INSTANCE:
+		return "WBEM_GENUS_INSTANCE"
+	default:
+		return fmt.Sprintf("WBEM_GENUS_TYPE(%d)", int32(e))
+	}
+}
+
 type WBEM_GET_KEY_FLAGS int32
 
 const (
 	WBEMPATH_TEXT       WBEM_GET_KEY_FLAGS = 1
 	WBEMPATH_QUOTEDTEXT WBEM_GET_KEY_FLAGS = 2
 )
+
+// String returns the WBEM_GET_KEY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_GET_KEY_FLAGS) String() string {
+	switch e {
+	case WBEMPATH_TEXT:
+		return "WBEMPATH_TEXT"
+	case WBEMPATH_QUOTEDTEXT:
+		return "WBEMPATH_QUOTEDTEXT"
+	default:
+		return fmt.Sprintf("WBEM_GET_KEY_FLAGS(%d)", int32(e))
+	}
+}
 
 type WBEM_GET_TEXT_FLAGS int32
 
@@ -583,6 +1636,27 @@ const (
 	WBEMPATH_GET_ORIGINAL                  WBEM_GET_TEXT_FLAGS = 32
 )
 
+// String returns the WBEM_GET_TEXT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_GET_TEXT_FLAGS) String() string {
+	switch e {
+	case WBEMPATH_COMPRESSED:
+		return "WBEMPATH_COMPRESSED"
+	case WBEMPATH_GET_RELATIVE_ONLY:
+		return "WBEMPATH_GET_RELATIVE_ONLY"
+	case WBEMPATH_GET_SERVER_TOO:
+		return "WBEMPATH_GET_SERVER_TOO"
+	case WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY:
+		return "WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY"
+	case WBEMPATH_GET_NAMESPACE_ONLY:
+		return "WBEMPATH_GET_NAMESPACE_ONLY"
+	case WBEMPATH_GET_ORIGINAL:
+		return "WBEMPATH_GET_ORIGINAL"
+	default:
+		return fmt.Sprintf("WBEM_GET_TEXT_FLAGS(%d)", int32(e))
+	}
+}
+
 type WBEM_INFORMATION_FLAG_TYPE int32
 
 const (
@@ -590,12 +1664,38 @@ const (
 	WBEM_FLAG_LONG_NAME  WBEM_INFORMATION_FLAG_TYPE = 2
 )
 
+// String returns the WBEM_INFORMATION_FLAG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_INFORMATION_FLAG_TYPE) String() string {
+	switch e {
+	case WBEM_FLAG_SHORT_NAME:
+		return "WBEM_FLAG_SHORT_NAME"
+	case WBEM_FLAG_LONG_NAME:
+		return "WBEM_FLAG_LONG_NAME"
+	default:
+		return fmt.Sprintf("WBEM_INFORMATION_FLAG_TYPE(%d)", int32(e))
+	}
+}
+
 type WBEM_LIMITATION_FLAG_TYPE int32
 
 const (
 	WBEM_FLAG_EXCLUDE_OBJECT_QUALIFIERS   WBEM_LIMITATION_FLAG_TYPE = 16
 	WBEM_FLAG_EXCLUDE_PROPERTY_QUALIFIERS WBEM_LIMITATION_FLAG_TYPE = 32
 )
+
+// String returns the WBEM_LIMITATION_FLAG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_LIMITATION_FLAG_TYPE) String() string {
+	switch e {
+	case WBEM_FLAG_EXCLUDE_OBJECT_QUALIFIERS:
+		return "WBEM_FLAG_EXCLUDE_OBJECT_QUALIFIERS"
+	case WBEM_FLAG_EXCLUDE_PROPERTY_QUALIFIERS:
+		return "WBEM_FLAG_EXCLUDE_PROPERTY_QUALIFIERS"
+	default:
+		return fmt.Sprintf("WBEM_LIMITATION_FLAG_TYPE(%d)", int32(e))
+	}
+}
 
 // WBEM_LIMITS: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_limits
 type WBEM_LIMITS int32
@@ -608,11 +1708,41 @@ const (
 	WBEM_MAX_USER_PROPERTIES WBEM_LIMITS = 1024
 )
 
+// String returns the WBEM_LIMITS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_LIMITS) String() string {
+	switch e {
+	case WBEM_MAX_IDENTIFIER:
+		return "WBEM_MAX_IDENTIFIER"
+	case WBEM_MAX_QUERY:
+		return "WBEM_MAX_QUERY"
+	case WBEM_MAX_PATH:
+		return "WBEM_MAX_PATH"
+	case WBEM_MAX_OBJECT_NESTING:
+		return "WBEM_MAX_OBJECT_NESTING"
+	case WBEM_MAX_USER_PROPERTIES:
+		return "WBEM_MAX_USER_PROPERTIES"
+	default:
+		return fmt.Sprintf("WBEM_LIMITS(%d)", int32(e))
+	}
+}
+
 type WBEM_LOCKING_FLAG_TYPE int32
 
 const (
 	WBEM_FLAG_ALLOW_READ WBEM_LOCKING_FLAG_TYPE = 1
 )
+
+// String returns the WBEM_LOCKING_FLAG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_LOCKING_FLAG_TYPE) String() string {
+	switch e {
+	case WBEM_FLAG_ALLOW_READ:
+		return "WBEM_FLAG_ALLOW_READ"
+	default:
+		return fmt.Sprintf("WBEM_LOCKING_FLAG_TYPE(%d)", int32(e))
+	}
+}
 
 type WBEM_LOGIN_TYPE int32
 
@@ -624,6 +1754,25 @@ const (
 	WBEM_FLAG_USE_MULTIPLE_CHALLENGES WBEM_LOGIN_TYPE = 16
 )
 
+// String returns the WBEM_LOGIN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_LOGIN_TYPE) String() string {
+	switch e {
+	case WBEM_FLAG_INPROC_LOGIN:
+		return "WBEM_FLAG_INPROC_LOGIN"
+	case WBEM_FLAG_LOCAL_LOGIN:
+		return "WBEM_FLAG_LOCAL_LOGIN"
+	case WBEM_FLAG_REMOTE_LOGIN:
+		return "WBEM_FLAG_REMOTE_LOGIN"
+	case WBEM_AUTHENTICATION_METHOD_MASK:
+		return "WBEM_AUTHENTICATION_METHOD_MASK"
+	case WBEM_FLAG_USE_MULTIPLE_CHALLENGES:
+		return "WBEM_FLAG_USE_MULTIPLE_CHALLENGES"
+	default:
+		return fmt.Sprintf("WBEM_LOGIN_TYPE(%d)", int32(e))
+	}
+}
+
 type WBEM_PATH_CREATE_FLAG int32
 
 const (
@@ -632,6 +1781,23 @@ const (
 	WBEMPATH_CREATE_ACCEPT_ALL        WBEM_PATH_CREATE_FLAG = 4
 	WBEMPATH_TREAT_SINGLE_IDENT_AS_NS WBEM_PATH_CREATE_FLAG = 8
 )
+
+// String returns the WBEM_PATH_CREATE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_PATH_CREATE_FLAG) String() string {
+	switch e {
+	case WBEMPATH_CREATE_ACCEPT_RELATIVE:
+		return "WBEMPATH_CREATE_ACCEPT_RELATIVE"
+	case WBEMPATH_CREATE_ACCEPT_ABSOLUTE:
+		return "WBEMPATH_CREATE_ACCEPT_ABSOLUTE"
+	case WBEMPATH_CREATE_ACCEPT_ALL:
+		return "WBEMPATH_CREATE_ACCEPT_ALL"
+	case WBEMPATH_TREAT_SINGLE_IDENT_AS_NS:
+		return "WBEMPATH_TREAT_SINGLE_IDENT_AS_NS"
+	default:
+		return fmt.Sprintf("WBEM_PATH_CREATE_FLAG(%d)", int32(e))
+	}
+}
 
 type WBEM_PATH_STATUS_FLAG int32
 
@@ -656,11 +1822,67 @@ const (
 	WBEMPATH_INFO_PATH_HAD_SERVER       WBEM_PATH_STATUS_FLAG = 131072
 )
 
+// String returns the WBEM_PATH_STATUS_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_PATH_STATUS_FLAG) String() string {
+	switch e {
+	case WBEMPATH_INFO_ANON_LOCAL_MACHINE:
+		return "WBEMPATH_INFO_ANON_LOCAL_MACHINE"
+	case WBEMPATH_INFO_HAS_MACHINE_NAME:
+		return "WBEMPATH_INFO_HAS_MACHINE_NAME"
+	case WBEMPATH_INFO_IS_CLASS_REF:
+		return "WBEMPATH_INFO_IS_CLASS_REF"
+	case WBEMPATH_INFO_IS_INST_REF:
+		return "WBEMPATH_INFO_IS_INST_REF"
+	case WBEMPATH_INFO_HAS_SUBSCOPES:
+		return "WBEMPATH_INFO_HAS_SUBSCOPES"
+	case WBEMPATH_INFO_IS_COMPOUND:
+		return "WBEMPATH_INFO_IS_COMPOUND"
+	case WBEMPATH_INFO_HAS_V2_REF_PATHS:
+		return "WBEMPATH_INFO_HAS_V2_REF_PATHS"
+	case WBEMPATH_INFO_HAS_IMPLIED_KEY:
+		return "WBEMPATH_INFO_HAS_IMPLIED_KEY"
+	case WBEMPATH_INFO_CONTAINS_SINGLETON:
+		return "WBEMPATH_INFO_CONTAINS_SINGLETON"
+	case WBEMPATH_INFO_V1_COMPLIANT:
+		return "WBEMPATH_INFO_V1_COMPLIANT"
+	case WBEMPATH_INFO_V2_COMPLIANT:
+		return "WBEMPATH_INFO_V2_COMPLIANT"
+	case WBEMPATH_INFO_CIM_COMPLIANT:
+		return "WBEMPATH_INFO_CIM_COMPLIANT"
+	case WBEMPATH_INFO_IS_SINGLETON:
+		return "WBEMPATH_INFO_IS_SINGLETON"
+	case WBEMPATH_INFO_IS_PARENT:
+		return "WBEMPATH_INFO_IS_PARENT"
+	case WBEMPATH_INFO_SERVER_NAMESPACE_ONLY:
+		return "WBEMPATH_INFO_SERVER_NAMESPACE_ONLY"
+	case WBEMPATH_INFO_NATIVE_PATH:
+		return "WBEMPATH_INFO_NATIVE_PATH"
+	case WBEMPATH_INFO_WMI_PATH:
+		return "WBEMPATH_INFO_WMI_PATH"
+	case WBEMPATH_INFO_PATH_HAD_SERVER:
+		return "WBEMPATH_INFO_PATH_HAD_SERVER"
+	default:
+		return fmt.Sprintf("WBEM_PATH_STATUS_FLAG(%d)", int32(e))
+	}
+}
+
 type WBEM_PROVIDER_FLAGS int32
 
 const (
 	WBEM_FLAG_OWNER_UPDATE WBEM_PROVIDER_FLAGS = 65536
 )
+
+// String returns the WBEM_PROVIDER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_PROVIDER_FLAGS) String() string {
+	switch e {
+	case WBEM_FLAG_OWNER_UPDATE:
+		return "WBEM_FLAG_OWNER_UPDATE"
+	default:
+		return fmt.Sprintf("WBEM_PROVIDER_FLAGS(%d)", int32(e))
+	}
+}
 
 type WBEM_PROVIDER_REQUIREMENTS_TYPE int32
 
@@ -669,6 +1891,21 @@ const (
 	WBEM_REQUIREMENTS_STOP_POSTFILTER       WBEM_PROVIDER_REQUIREMENTS_TYPE = 1
 	WBEM_REQUIREMENTS_RECHECK_SUBSCRIPTIONS WBEM_PROVIDER_REQUIREMENTS_TYPE = 2
 )
+
+// String returns the WBEM_PROVIDER_REQUIREMENTS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_PROVIDER_REQUIREMENTS_TYPE) String() string {
+	switch e {
+	case WBEM_REQUIREMENTS_START_POSTFILTER:
+		return "WBEM_REQUIREMENTS_START_POSTFILTER"
+	case WBEM_REQUIREMENTS_STOP_POSTFILTER:
+		return "WBEM_REQUIREMENTS_STOP_POSTFILTER"
+	case WBEM_REQUIREMENTS_RECHECK_SUBSCRIPTIONS:
+		return "WBEM_REQUIREMENTS_RECHECK_SUBSCRIPTIONS"
+	default:
+		return fmt.Sprintf("WBEM_PROVIDER_REQUIREMENTS_TYPE(%d)", int32(e))
+	}
+}
 
 // WBEM_QUERY_FLAG_TYPE: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_query_flag_type
 type WBEM_QUERY_FLAG_TYPE int32
@@ -679,6 +1916,21 @@ const (
 	WBEM_FLAG_PROTOTYPE WBEM_QUERY_FLAG_TYPE = 2
 )
 
+// String returns the WBEM_QUERY_FLAG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_QUERY_FLAG_TYPE) String() string {
+	switch e {
+	case WBEM_FLAG_DEEP:
+		return "WBEM_FLAG_DEEP"
+	case WBEM_FLAG_SHALLOW:
+		return "WBEM_FLAG_SHALLOW"
+	case WBEM_FLAG_PROTOTYPE:
+		return "WBEM_FLAG_PROTOTYPE"
+	default:
+		return fmt.Sprintf("WBEM_QUERY_FLAG_TYPE(%d)", int32(e))
+	}
+}
+
 // WBEM_REFRESHER_FLAGS: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_refresher_flags
 type WBEM_REFRESHER_FLAGS int32
 
@@ -686,6 +1938,19 @@ const (
 	WBEM_FLAG_REFRESH_AUTO_RECONNECT    WBEM_REFRESHER_FLAGS = 0
 	WBEM_FLAG_REFRESH_NO_AUTO_RECONNECT WBEM_REFRESHER_FLAGS = 1
 )
+
+// String returns the WBEM_REFRESHER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_REFRESHER_FLAGS) String() string {
+	switch e {
+	case WBEM_FLAG_REFRESH_AUTO_RECONNECT:
+		return "WBEM_FLAG_REFRESH_AUTO_RECONNECT"
+	case WBEM_FLAG_REFRESH_NO_AUTO_RECONNECT:
+		return "WBEM_FLAG_REFRESH_NO_AUTO_RECONNECT"
+	default:
+		return fmt.Sprintf("WBEM_REFRESHER_FLAGS(%d)", int32(e))
+	}
+}
 
 // WBEM_SECURITY_FLAGS: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_security_flags
 type WBEM_SECURITY_FLAGS int32
@@ -701,6 +1966,31 @@ const (
 	WBEM_RIGHT_PUBLISH     WBEM_SECURITY_FLAGS = 128
 )
 
+// String returns the WBEM_SECURITY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_SECURITY_FLAGS) String() string {
+	switch e {
+	case WBEM_ENABLE:
+		return "WBEM_ENABLE"
+	case WBEM_METHOD_EXECUTE:
+		return "WBEM_METHOD_EXECUTE"
+	case WBEM_FULL_WRITE_REP:
+		return "WBEM_FULL_WRITE_REP"
+	case WBEM_PARTIAL_WRITE_REP:
+		return "WBEM_PARTIAL_WRITE_REP"
+	case WBEM_WRITE_PROVIDER:
+		return "WBEM_WRITE_PROVIDER"
+	case WBEM_REMOTE_ACCESS:
+		return "WBEM_REMOTE_ACCESS"
+	case WBEM_RIGHT_SUBSCRIBE:
+		return "WBEM_RIGHT_SUBSCRIBE"
+	case WBEM_RIGHT_PUBLISH:
+		return "WBEM_RIGHT_PUBLISH"
+	default:
+		return fmt.Sprintf("WBEM_SECURITY_FLAGS(%d)", int32(e))
+	}
+}
+
 type WBEM_SHUTDOWN_FLAGS int32
 
 const (
@@ -708,6 +1998,21 @@ const (
 	WBEM_SHUTDOWN_WMI              WBEM_SHUTDOWN_FLAGS = 2
 	WBEM_SHUTDOWN_OS               WBEM_SHUTDOWN_FLAGS = 3
 )
+
+// String returns the WBEM_SHUTDOWN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_SHUTDOWN_FLAGS) String() string {
+	switch e {
+	case WBEM_SHUTDOWN_UNLOAD_COMPONENT:
+		return "WBEM_SHUTDOWN_UNLOAD_COMPONENT"
+	case WBEM_SHUTDOWN_WMI:
+		return "WBEM_SHUTDOWN_WMI"
+	case WBEM_SHUTDOWN_OS:
+		return "WBEM_SHUTDOWN_OS"
+	default:
+		return fmt.Sprintf("WBEM_SHUTDOWN_FLAGS(%d)", int32(e))
+	}
+}
 
 // WBEM_STATUS_TYPE: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_status_type
 type WBEM_STATUS_TYPE int32
@@ -723,12 +2028,48 @@ const (
 	WBEM_STATUS_LOGGING_INFORMATION_ESS        WBEM_STATUS_TYPE = 4096
 )
 
+// String returns the WBEM_STATUS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_STATUS_TYPE) String() string {
+	switch e {
+	case WBEM_STATUS_COMPLETE:
+		return "WBEM_STATUS_COMPLETE"
+	case WBEM_STATUS_REQUIREMENTS:
+		return "WBEM_STATUS_REQUIREMENTS"
+	case WBEM_STATUS_PROGRESS:
+		return "WBEM_STATUS_PROGRESS"
+	case WBEM_STATUS_LOGGING_INFORMATION:
+		return "WBEM_STATUS_LOGGING_INFORMATION"
+	case WBEM_STATUS_LOGGING_INFORMATION_PROVIDER:
+		return "WBEM_STATUS_LOGGING_INFORMATION_PROVIDER"
+	case WBEM_STATUS_LOGGING_INFORMATION_HOST:
+		return "WBEM_STATUS_LOGGING_INFORMATION_HOST"
+	case WBEM_STATUS_LOGGING_INFORMATION_REPOSITORY:
+		return "WBEM_STATUS_LOGGING_INFORMATION_REPOSITORY"
+	case WBEM_STATUS_LOGGING_INFORMATION_ESS:
+		return "WBEM_STATUS_LOGGING_INFORMATION_ESS"
+	default:
+		return fmt.Sprintf("WBEM_STATUS_TYPE(%d)", int32(e))
+	}
+}
+
 // WBEM_TEXT_FLAG_TYPE: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_text_flag_type
 type WBEM_TEXT_FLAG_TYPE int32
 
 const (
 	WBEM_FLAG_NO_FLAVORS WBEM_TEXT_FLAG_TYPE = 1
 )
+
+// String returns the WBEM_TEXT_FLAG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_TEXT_FLAG_TYPE) String() string {
+	switch e {
+	case WBEM_FLAG_NO_FLAVORS:
+		return "WBEM_FLAG_NO_FLAVORS"
+	default:
+		return fmt.Sprintf("WBEM_TEXT_FLAG_TYPE(%d)", int32(e))
+	}
+}
 
 // WBEM_UNSECAPP_FLAG_TYPE: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wbem_unsecapp_flag_type
 type WBEM_UNSECAPP_FLAG_TYPE int32
@@ -738,6 +2079,21 @@ const (
 	WBEM_FLAG_UNSECAPP_CHECK_ACCESS         WBEM_UNSECAPP_FLAG_TYPE = 1
 	WBEM_FLAG_UNSECAPP_DONT_CHECK_ACCESS    WBEM_UNSECAPP_FLAG_TYPE = 2
 )
+
+// String returns the WBEM_UNSECAPP_FLAG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WBEM_UNSECAPP_FLAG_TYPE) String() string {
+	switch e {
+	case WBEM_FLAG_UNSECAPP_DEFAULT_CHECK_ACCESS:
+		return "WBEM_FLAG_UNSECAPP_DEFAULT_CHECK_ACCESS"
+	case WBEM_FLAG_UNSECAPP_CHECK_ACCESS:
+		return "WBEM_FLAG_UNSECAPP_CHECK_ACCESS"
+	case WBEM_FLAG_UNSECAPP_DONT_CHECK_ACCESS:
+		return "WBEM_FLAG_UNSECAPP_DONT_CHECK_ACCESS"
+	default:
+		return fmt.Sprintf("WBEM_UNSECAPP_FLAG_TYPE(%d)", int32(e))
+	}
+}
 
 // WMIQ_ANALYSIS_TYPE: https://learn.microsoft.com/windows/win32/api/wmiutils/ne-wmiutils-wmiq_analysis_type
 type WMIQ_ANALYSIS_TYPE int32
@@ -749,6 +2105,25 @@ const (
 	WMIQ_ANALYSIS_QUERY_TEXT           WMIQ_ANALYSIS_TYPE = 4
 	WMIQ_ANALYSIS_RESERVED             WMIQ_ANALYSIS_TYPE = 134217728
 )
+
+// String returns the WMIQ_ANALYSIS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMIQ_ANALYSIS_TYPE) String() string {
+	switch e {
+	case WMIQ_ANALYSIS_RPN_SEQUENCE:
+		return "WMIQ_ANALYSIS_RPN_SEQUENCE"
+	case WMIQ_ANALYSIS_ASSOC_QUERY:
+		return "WMIQ_ANALYSIS_ASSOC_QUERY"
+	case WMIQ_ANALYSIS_PROP_ANALYSIS_MATRIX:
+		return "WMIQ_ANALYSIS_PROP_ANALYSIS_MATRIX"
+	case WMIQ_ANALYSIS_QUERY_TEXT:
+		return "WMIQ_ANALYSIS_QUERY_TEXT"
+	case WMIQ_ANALYSIS_RESERVED:
+		return "WMIQ_ANALYSIS_RESERVED"
+	default:
+		return fmt.Sprintf("WMIQ_ANALYSIS_TYPE(%d)", int32(e))
+	}
+}
 
 // WMIQ_ASSOCQ_FLAGS: https://learn.microsoft.com/windows/win32/api/wmiutils/ne-wmiutils-wmiq_assocq_flags
 type WMIQ_ASSOCQ_FLAGS int32
@@ -767,6 +2142,39 @@ const (
 	WMIQ_ASSOCQ_SCHEMAONLY             WMIQ_ASSOCQ_FLAGS = 1024
 	WMIQ_ASSOCQ_CLASSREFSONLY          WMIQ_ASSOCQ_FLAGS = 2048
 )
+
+// String returns the WMIQ_ASSOCQ_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMIQ_ASSOCQ_FLAGS) String() string {
+	switch e {
+	case WMIQ_ASSOCQ_ASSOCIATORS:
+		return "WMIQ_ASSOCQ_ASSOCIATORS"
+	case WMIQ_ASSOCQ_REFERENCES:
+		return "WMIQ_ASSOCQ_REFERENCES"
+	case WMIQ_ASSOCQ_RESULTCLASS:
+		return "WMIQ_ASSOCQ_RESULTCLASS"
+	case WMIQ_ASSOCQ_ASSOCCLASS:
+		return "WMIQ_ASSOCQ_ASSOCCLASS"
+	case WMIQ_ASSOCQ_ROLE:
+		return "WMIQ_ASSOCQ_ROLE"
+	case WMIQ_ASSOCQ_RESULTROLE:
+		return "WMIQ_ASSOCQ_RESULTROLE"
+	case WMIQ_ASSOCQ_REQUIREDQUALIFIER:
+		return "WMIQ_ASSOCQ_REQUIREDQUALIFIER"
+	case WMIQ_ASSOCQ_REQUIREDASSOCQUALIFIER:
+		return "WMIQ_ASSOCQ_REQUIREDASSOCQUALIFIER"
+	case WMIQ_ASSOCQ_CLASSDEFSONLY:
+		return "WMIQ_ASSOCQ_CLASSDEFSONLY"
+	case WMIQ_ASSOCQ_KEYSONLY:
+		return "WMIQ_ASSOCQ_KEYSONLY"
+	case WMIQ_ASSOCQ_SCHEMAONLY:
+		return "WMIQ_ASSOCQ_SCHEMAONLY"
+	case WMIQ_ASSOCQ_CLASSREFSONLY:
+		return "WMIQ_ASSOCQ_CLASSREFSONLY"
+	default:
+		return fmt.Sprintf("WMIQ_ASSOCQ_FLAGS(%d)", int32(e))
+	}
+}
 
 type WMIQ_LANGUAGE_FEATURES int32
 
@@ -814,6 +2222,95 @@ const (
 	WMIQ_LF_LAST                         WMIQ_LANGUAGE_FEATURES = 40
 )
 
+// String returns the WMIQ_LANGUAGE_FEATURES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMIQ_LANGUAGE_FEATURES) String() string {
+	switch e {
+	case WMIQ_LF1_BASIC_SELECT:
+		return "WMIQ_LF1_BASIC_SELECT"
+	case WMIQ_LF2_CLASS_NAME_IN_QUERY:
+		return "WMIQ_LF2_CLASS_NAME_IN_QUERY"
+	case WMIQ_LF3_STRING_CASE_FUNCTIONS:
+		return "WMIQ_LF3_STRING_CASE_FUNCTIONS"
+	case WMIQ_LF4_PROP_TO_PROP_TESTS:
+		return "WMIQ_LF4_PROP_TO_PROP_TESTS"
+	case WMIQ_LF5_COUNT_STAR:
+		return "WMIQ_LF5_COUNT_STAR"
+	case WMIQ_LF6_ORDER_BY:
+		return "WMIQ_LF6_ORDER_BY"
+	case WMIQ_LF7_DISTINCT:
+		return "WMIQ_LF7_DISTINCT"
+	case WMIQ_LF8_ISA:
+		return "WMIQ_LF8_ISA"
+	case WMIQ_LF9_THIS:
+		return "WMIQ_LF9_THIS"
+	case WMIQ_LF10_COMPEX_SUBEXPRESSIONS:
+		return "WMIQ_LF10_COMPEX_SUBEXPRESSIONS"
+	case WMIQ_LF11_ALIASING:
+		return "WMIQ_LF11_ALIASING"
+	case WMIQ_LF12_GROUP_BY_HAVING:
+		return "WMIQ_LF12_GROUP_BY_HAVING"
+	case WMIQ_LF13_WMI_WITHIN:
+		return "WMIQ_LF13_WMI_WITHIN"
+	case WMIQ_LF14_SQL_WRITE_OPERATIONS:
+		return "WMIQ_LF14_SQL_WRITE_OPERATIONS"
+	case WMIQ_LF15_GO:
+		return "WMIQ_LF15_GO"
+	case WMIQ_LF16_SINGLE_LEVEL_TRANSACTIONS:
+		return "WMIQ_LF16_SINGLE_LEVEL_TRANSACTIONS"
+	case WMIQ_LF17_QUALIFIED_NAMES:
+		return "WMIQ_LF17_QUALIFIED_NAMES"
+	case WMIQ_LF18_ASSOCIATONS:
+		return "WMIQ_LF18_ASSOCIATONS"
+	case WMIQ_LF19_SYSTEM_PROPERTIES:
+		return "WMIQ_LF19_SYSTEM_PROPERTIES"
+	case WMIQ_LF20_EXTENDED_SYSTEM_PROPERTIES:
+		return "WMIQ_LF20_EXTENDED_SYSTEM_PROPERTIES"
+	case WMIQ_LF21_SQL89_JOINS:
+		return "WMIQ_LF21_SQL89_JOINS"
+	case WMIQ_LF22_SQL92_JOINS:
+		return "WMIQ_LF22_SQL92_JOINS"
+	case WMIQ_LF23_SUBSELECTS:
+		return "WMIQ_LF23_SUBSELECTS"
+	case WMIQ_LF24_UMI_EXTENSIONS:
+		return "WMIQ_LF24_UMI_EXTENSIONS"
+	case WMIQ_LF25_DATEPART:
+		return "WMIQ_LF25_DATEPART"
+	case WMIQ_LF26_LIKE:
+		return "WMIQ_LF26_LIKE"
+	case WMIQ_LF27_CIM_TEMPORAL_CONSTRUCTS:
+		return "WMIQ_LF27_CIM_TEMPORAL_CONSTRUCTS"
+	case WMIQ_LF28_STANDARD_AGGREGATES:
+		return "WMIQ_LF28_STANDARD_AGGREGATES"
+	case WMIQ_LF29_MULTI_LEVEL_ORDER_BY:
+		return "WMIQ_LF29_MULTI_LEVEL_ORDER_BY"
+	case WMIQ_LF30_WMI_PRAGMAS:
+		return "WMIQ_LF30_WMI_PRAGMAS"
+	case WMIQ_LF31_QUALIFIER_TESTS:
+		return "WMIQ_LF31_QUALIFIER_TESTS"
+	case WMIQ_LF32_SP_EXECUTE:
+		return "WMIQ_LF32_SP_EXECUTE"
+	case WMIQ_LF33_ARRAY_ACCESS:
+		return "WMIQ_LF33_ARRAY_ACCESS"
+	case WMIQ_LF34_UNION:
+		return "WMIQ_LF34_UNION"
+	case WMIQ_LF35_COMPLEX_SELECT_TARGET:
+		return "WMIQ_LF35_COMPLEX_SELECT_TARGET"
+	case WMIQ_LF36_REFERENCE_TESTS:
+		return "WMIQ_LF36_REFERENCE_TESTS"
+	case WMIQ_LF37_SELECT_INTO:
+		return "WMIQ_LF37_SELECT_INTO"
+	case WMIQ_LF38_BASIC_DATETIME_TESTS:
+		return "WMIQ_LF38_BASIC_DATETIME_TESTS"
+	case WMIQ_LF39_COUNT_COLUMN:
+		return "WMIQ_LF39_COUNT_COLUMN"
+	case WMIQ_LF40_BETWEEN:
+		return "WMIQ_LF40_BETWEEN"
+	default:
+		return fmt.Sprintf("WMIQ_LANGUAGE_FEATURES(%d)", int32(e))
+	}
+}
+
 type WMIQ_RPNF_FEATURE int32
 
 const (
@@ -832,6 +2329,43 @@ const (
 	WMIQ_RPNF_GROUP_BY_HAVING      WMIQ_RPNF_FEATURE = 4096
 	WMIQ_RPNF_ARRAY_ACCESS_USED    WMIQ_RPNF_FEATURE = 8192
 )
+
+// String returns the WMIQ_RPNF_FEATURE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMIQ_RPNF_FEATURE) String() string {
+	switch e {
+	case WMIQ_RPNF_WHERE_CLAUSE_PRESENT:
+		return "WMIQ_RPNF_WHERE_CLAUSE_PRESENT"
+	case WMIQ_RPNF_QUERY_IS_CONJUNCTIVE:
+		return "WMIQ_RPNF_QUERY_IS_CONJUNCTIVE"
+	case WMIQ_RPNF_QUERY_IS_DISJUNCTIVE:
+		return "WMIQ_RPNF_QUERY_IS_DISJUNCTIVE"
+	case WMIQ_RPNF_PROJECTION:
+		return "WMIQ_RPNF_PROJECTION"
+	case WMIQ_RPNF_FEATURE_SELECT_STAR:
+		return "WMIQ_RPNF_FEATURE_SELECT_STAR"
+	case WMIQ_RPNF_EQUALITY_TESTS_ONLY:
+		return "WMIQ_RPNF_EQUALITY_TESTS_ONLY"
+	case WMIQ_RPNF_COUNT_STAR:
+		return "WMIQ_RPNF_COUNT_STAR"
+	case WMIQ_RPNF_QUALIFIED_NAMES_USED:
+		return "WMIQ_RPNF_QUALIFIED_NAMES_USED"
+	case WMIQ_RPNF_SYSPROP_CLASS_USED:
+		return "WMIQ_RPNF_SYSPROP_CLASS_USED"
+	case WMIQ_RPNF_PROP_TO_PROP_TESTS:
+		return "WMIQ_RPNF_PROP_TO_PROP_TESTS"
+	case WMIQ_RPNF_ORDER_BY:
+		return "WMIQ_RPNF_ORDER_BY"
+	case WMIQ_RPNF_ISA_USED:
+		return "WMIQ_RPNF_ISA_USED"
+	case WMIQ_RPNF_GROUP_BY_HAVING:
+		return "WMIQ_RPNF_GROUP_BY_HAVING"
+	case WMIQ_RPNF_ARRAY_ACCESS_USED:
+		return "WMIQ_RPNF_ARRAY_ACCESS_USED"
+	default:
+		return fmt.Sprintf("WMIQ_RPNF_FEATURE(%d)", int32(e))
+	}
+}
 
 // WMIQ_RPN_TOKEN_FLAGS: https://learn.microsoft.com/windows/win32/api/wmiutils/ne-wmiutils-wmiq_rpn_token_flags
 type WMIQ_RPN_TOKEN_FLAGS int32
@@ -872,6 +2406,45 @@ const (
 	WMIQ_RPN_FROM_MULTIPLE       WMIQ_RPN_TOKEN_FLAGS = 8
 )
 
+// String returns the WMIQ_RPN_TOKEN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMIQ_RPN_TOKEN_FLAGS) String() string {
+	switch e {
+	case WMIQ_RPN_TOKEN_EXPRESSION:
+		return "WMIQ_RPN_TOKEN_EXPRESSION"
+	case WMIQ_RPN_TOKEN_AND:
+		return "WMIQ_RPN_TOKEN_AND"
+	case WMIQ_RPN_TOKEN_OR:
+		return "WMIQ_RPN_TOKEN_OR"
+	case WMIQ_RPN_TOKEN_NOT:
+		return "WMIQ_RPN_TOKEN_NOT"
+	case WMIQ_RPN_OP_UNDEFINED:
+		return "WMIQ_RPN_OP_UNDEFINED"
+	case WMIQ_RPN_OP_LT:
+		return "WMIQ_RPN_OP_LT"
+	case WMIQ_RPN_OP_GT:
+		return "WMIQ_RPN_OP_GT"
+	case WMIQ_RPN_OP_LIKE:
+		return "WMIQ_RPN_OP_LIKE"
+	case WMIQ_RPN_OP_ISA:
+		return "WMIQ_RPN_OP_ISA"
+	case WMIQ_RPN_OP_ISNOTA:
+		return "WMIQ_RPN_OP_ISNOTA"
+	case WMIQ_RPN_OP_ISNULL:
+		return "WMIQ_RPN_OP_ISNULL"
+	case WMIQ_RPN_OP_ISNOTNULL:
+		return "WMIQ_RPN_OP_ISNOTNULL"
+	case WMIQ_RPN_RELOP:
+		return "WMIQ_RPN_RELOP"
+	case WMIQ_RPN_LEFT_FUNCTION:
+		return "WMIQ_RPN_LEFT_FUNCTION"
+	case WMIQ_RPN_RIGHT_FUNCTION:
+		return "WMIQ_RPN_RIGHT_FUNCTION"
+	default:
+		return fmt.Sprintf("WMIQ_RPN_TOKEN_FLAGS(%d)", int32(e))
+	}
+}
+
 // WMI_OBJ_TEXT: https://learn.microsoft.com/windows/win32/api/wbemcli/ne-wbemcli-wmi_obj_text
 type WMI_OBJ_TEXT int32
 
@@ -891,6 +2464,41 @@ const (
 	WMI_OBJ_TEXT_LAST        WMI_OBJ_TEXT = 13
 )
 
+// String returns the WMI_OBJ_TEXT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMI_OBJ_TEXT) String() string {
+	switch e {
+	case WMI_OBJ_TEXT_CIM_DTD_2_0:
+		return "WMI_OBJ_TEXT_CIM_DTD_2_0"
+	case WMI_OBJ_TEXT_WMI_DTD_2_0:
+		return "WMI_OBJ_TEXT_WMI_DTD_2_0"
+	case WMI_OBJ_TEXT_WMI_EXT1:
+		return "WMI_OBJ_TEXT_WMI_EXT1"
+	case WMI_OBJ_TEXT_WMI_EXT2:
+		return "WMI_OBJ_TEXT_WMI_EXT2"
+	case WMI_OBJ_TEXT_WMI_EXT3:
+		return "WMI_OBJ_TEXT_WMI_EXT3"
+	case WMI_OBJ_TEXT_WMI_EXT4:
+		return "WMI_OBJ_TEXT_WMI_EXT4"
+	case WMI_OBJ_TEXT_WMI_EXT5:
+		return "WMI_OBJ_TEXT_WMI_EXT5"
+	case WMI_OBJ_TEXT_WMI_EXT6:
+		return "WMI_OBJ_TEXT_WMI_EXT6"
+	case WMI_OBJ_TEXT_WMI_EXT7:
+		return "WMI_OBJ_TEXT_WMI_EXT7"
+	case WMI_OBJ_TEXT_WMI_EXT8:
+		return "WMI_OBJ_TEXT_WMI_EXT8"
+	case WMI_OBJ_TEXT_WMI_EXT9:
+		return "WMI_OBJ_TEXT_WMI_EXT9"
+	case WMI_OBJ_TEXT_WMI_EXT10:
+		return "WMI_OBJ_TEXT_WMI_EXT10"
+	case WMI_OBJ_TEXT_LAST:
+		return "WMI_OBJ_TEXT_LAST"
+	default:
+		return fmt.Sprintf("WMI_OBJ_TEXT(%d)", int32(e))
+	}
+}
+
 // WbemAuthenticationLevelEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemauthenticationlevelenum
 type WbemAuthenticationLevelEnum int32
 
@@ -903,6 +2511,29 @@ const (
 	WbemAuthenticationLevelPktIntegrity WbemAuthenticationLevelEnum = 5
 	WbemAuthenticationLevelPktPrivacy   WbemAuthenticationLevelEnum = 6
 )
+
+// String returns the WbemAuthenticationLevelEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemAuthenticationLevelEnum) String() string {
+	switch e {
+	case WbemAuthenticationLevelDefault:
+		return "WbemAuthenticationLevelDefault"
+	case WbemAuthenticationLevelNone:
+		return "WbemAuthenticationLevelNone"
+	case WbemAuthenticationLevelConnect:
+		return "WbemAuthenticationLevelConnect"
+	case WbemAuthenticationLevelCall:
+		return "WbemAuthenticationLevelCall"
+	case WbemAuthenticationLevelPkt:
+		return "WbemAuthenticationLevelPkt"
+	case WbemAuthenticationLevelPktIntegrity:
+		return "WbemAuthenticationLevelPktIntegrity"
+	case WbemAuthenticationLevelPktPrivacy:
+		return "WbemAuthenticationLevelPktPrivacy"
+	default:
+		return fmt.Sprintf("WbemAuthenticationLevelEnum(%d)", int32(e))
+	}
+}
 
 // WbemChangeFlagEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemchangeflagenum
 type WbemChangeFlagEnum int32
@@ -917,6 +2548,29 @@ const (
 	WbemChangeFlagStrongValidation WbemChangeFlagEnum = 128
 	WbemChangeFlagAdvisory         WbemChangeFlagEnum = 65536
 )
+
+// String returns the WbemChangeFlagEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemChangeFlagEnum) String() string {
+	switch e {
+	case WbemChangeFlagCreateOrUpdate:
+		return "WbemChangeFlagCreateOrUpdate"
+	case WbemChangeFlagUpdateOnly:
+		return "WbemChangeFlagUpdateOnly"
+	case WbemChangeFlagCreateOnly:
+		return "WbemChangeFlagCreateOnly"
+	case WbemChangeFlagUpdateSafeMode:
+		return "WbemChangeFlagUpdateSafeMode"
+	case WbemChangeFlagUpdateForceMode:
+		return "WbemChangeFlagUpdateForceMode"
+	case WbemChangeFlagStrongValidation:
+		return "WbemChangeFlagStrongValidation"
+	case WbemChangeFlagAdvisory:
+		return "WbemChangeFlagAdvisory"
+	default:
+		return fmt.Sprintf("WbemChangeFlagEnum(%d)", int32(e))
+	}
+}
 
 // WbemCimtypeEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemcimtypeenum
 type WbemCimtypeEnum int32
@@ -940,6 +2594,47 @@ const (
 	WbemCimtypeObject    WbemCimtypeEnum = 13
 )
 
+// String returns the WbemCimtypeEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemCimtypeEnum) String() string {
+	switch e {
+	case WbemCimtypeSint8:
+		return "WbemCimtypeSint8"
+	case WbemCimtypeUint8:
+		return "WbemCimtypeUint8"
+	case WbemCimtypeSint16:
+		return "WbemCimtypeSint16"
+	case WbemCimtypeUint16:
+		return "WbemCimtypeUint16"
+	case WbemCimtypeSint32:
+		return "WbemCimtypeSint32"
+	case WbemCimtypeUint32:
+		return "WbemCimtypeUint32"
+	case WbemCimtypeSint64:
+		return "WbemCimtypeSint64"
+	case WbemCimtypeUint64:
+		return "WbemCimtypeUint64"
+	case WbemCimtypeReal32:
+		return "WbemCimtypeReal32"
+	case WbemCimtypeReal64:
+		return "WbemCimtypeReal64"
+	case WbemCimtypeBoolean:
+		return "WbemCimtypeBoolean"
+	case WbemCimtypeString:
+		return "WbemCimtypeString"
+	case WbemCimtypeDatetime:
+		return "WbemCimtypeDatetime"
+	case WbemCimtypeReference:
+		return "WbemCimtypeReference"
+	case WbemCimtypeChar16:
+		return "WbemCimtypeChar16"
+	case WbemCimtypeObject:
+		return "WbemCimtypeObject"
+	default:
+		return fmt.Sprintf("WbemCimtypeEnum(%d)", int32(e))
+	}
+}
+
 // WbemComparisonFlagEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemcomparisonflagenum
 type WbemComparisonFlagEnum int32
 
@@ -953,12 +2648,46 @@ const (
 	WbemComparisonFlagIgnoreFlavor        WbemComparisonFlagEnum = 32
 )
 
+// String returns the WbemComparisonFlagEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemComparisonFlagEnum) String() string {
+	switch e {
+	case WbemComparisonFlagIncludeAll:
+		return "WbemComparisonFlagIncludeAll"
+	case WbemComparisonFlagIgnoreQualifiers:
+		return "WbemComparisonFlagIgnoreQualifiers"
+	case WbemComparisonFlagIgnoreObjectSource:
+		return "WbemComparisonFlagIgnoreObjectSource"
+	case WbemComparisonFlagIgnoreDefaultValues:
+		return "WbemComparisonFlagIgnoreDefaultValues"
+	case WbemComparisonFlagIgnoreClass:
+		return "WbemComparisonFlagIgnoreClass"
+	case WbemComparisonFlagIgnoreCase:
+		return "WbemComparisonFlagIgnoreCase"
+	case WbemComparisonFlagIgnoreFlavor:
+		return "WbemComparisonFlagIgnoreFlavor"
+	default:
+		return fmt.Sprintf("WbemComparisonFlagEnum(%d)", int32(e))
+	}
+}
+
 // WbemConnectOptionsEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemconnectoptionsenum
 type WbemConnectOptionsEnum int32
 
 const (
 	WbemConnectFlagUseMaxWait WbemConnectOptionsEnum = 128
 )
+
+// String returns the WbemConnectOptionsEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemConnectOptionsEnum) String() string {
+	switch e {
+	case WbemConnectFlagUseMaxWait:
+		return "WbemConnectFlagUseMaxWait"
+	default:
+		return fmt.Sprintf("WbemConnectOptionsEnum(%d)", int32(e))
+	}
+}
 
 // WbemErrorEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemerrorenum
 type WbemErrorEnum int32
@@ -1094,6 +2823,271 @@ const (
 	WbemErrResetToDefault               WbemErrorEnum = -2147209214
 )
 
+// String returns the WbemErrorEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemErrorEnum) String() string {
+	switch e {
+	case WbemNoErr:
+		return "WbemNoErr"
+	case WbemErrFailed:
+		return "WbemErrFailed"
+	case WbemErrNotFound:
+		return "WbemErrNotFound"
+	case WbemErrAccessDenied:
+		return "WbemErrAccessDenied"
+	case WbemErrProviderFailure:
+		return "WbemErrProviderFailure"
+	case WbemErrTypeMismatch:
+		return "WbemErrTypeMismatch"
+	case WbemErrOutOfMemory:
+		return "WbemErrOutOfMemory"
+	case WbemErrInvalidContext:
+		return "WbemErrInvalidContext"
+	case WbemErrInvalidParameter:
+		return "WbemErrInvalidParameter"
+	case WbemErrNotAvailable:
+		return "WbemErrNotAvailable"
+	case WbemErrCriticalError:
+		return "WbemErrCriticalError"
+	case WbemErrInvalidStream:
+		return "WbemErrInvalidStream"
+	case WbemErrNotSupported:
+		return "WbemErrNotSupported"
+	case WbemErrInvalidSuperclass:
+		return "WbemErrInvalidSuperclass"
+	case WbemErrInvalidNamespace:
+		return "WbemErrInvalidNamespace"
+	case WbemErrInvalidObject:
+		return "WbemErrInvalidObject"
+	case WbemErrInvalidClass:
+		return "WbemErrInvalidClass"
+	case WbemErrProviderNotFound:
+		return "WbemErrProviderNotFound"
+	case WbemErrInvalidProviderRegistration:
+		return "WbemErrInvalidProviderRegistration"
+	case WbemErrProviderLoadFailure:
+		return "WbemErrProviderLoadFailure"
+	case WbemErrInitializationFailure:
+		return "WbemErrInitializationFailure"
+	case WbemErrTransportFailure:
+		return "WbemErrTransportFailure"
+	case WbemErrInvalidOperation:
+		return "WbemErrInvalidOperation"
+	case WbemErrInvalidQuery:
+		return "WbemErrInvalidQuery"
+	case WbemErrInvalidQueryType:
+		return "WbemErrInvalidQueryType"
+	case WbemErrAlreadyExists:
+		return "WbemErrAlreadyExists"
+	case WbemErrOverrideNotAllowed:
+		return "WbemErrOverrideNotAllowed"
+	case WbemErrPropagatedQualifier:
+		return "WbemErrPropagatedQualifier"
+	case WbemErrPropagatedProperty:
+		return "WbemErrPropagatedProperty"
+	case WbemErrUnexpected:
+		return "WbemErrUnexpected"
+	case WbemErrIllegalOperation:
+		return "WbemErrIllegalOperation"
+	case WbemErrCannotBeKey:
+		return "WbemErrCannotBeKey"
+	case WbemErrIncompleteClass:
+		return "WbemErrIncompleteClass"
+	case WbemErrInvalidSyntax:
+		return "WbemErrInvalidSyntax"
+	case WbemErrNondecoratedObject:
+		return "WbemErrNondecoratedObject"
+	case WbemErrReadOnly:
+		return "WbemErrReadOnly"
+	case WbemErrProviderNotCapable:
+		return "WbemErrProviderNotCapable"
+	case WbemErrClassHasChildren:
+		return "WbemErrClassHasChildren"
+	case WbemErrClassHasInstances:
+		return "WbemErrClassHasInstances"
+	case WbemErrQueryNotImplemented:
+		return "WbemErrQueryNotImplemented"
+	case WbemErrIllegalNull:
+		return "WbemErrIllegalNull"
+	case WbemErrInvalidQualifierType:
+		return "WbemErrInvalidQualifierType"
+	case WbemErrInvalidPropertyType:
+		return "WbemErrInvalidPropertyType"
+	case WbemErrValueOutOfRange:
+		return "WbemErrValueOutOfRange"
+	case WbemErrCannotBeSingleton:
+		return "WbemErrCannotBeSingleton"
+	case WbemErrInvalidCimType:
+		return "WbemErrInvalidCimType"
+	case WbemErrInvalidMethod:
+		return "WbemErrInvalidMethod"
+	case WbemErrInvalidMethodParameters:
+		return "WbemErrInvalidMethodParameters"
+	case WbemErrSystemProperty:
+		return "WbemErrSystemProperty"
+	case WbemErrInvalidProperty:
+		return "WbemErrInvalidProperty"
+	case WbemErrCallCancelled:
+		return "WbemErrCallCancelled"
+	case WbemErrShuttingDown:
+		return "WbemErrShuttingDown"
+	case WbemErrPropagatedMethod:
+		return "WbemErrPropagatedMethod"
+	case WbemErrUnsupportedParameter:
+		return "WbemErrUnsupportedParameter"
+	case WbemErrMissingParameter:
+		return "WbemErrMissingParameter"
+	case WbemErrInvalidParameterId:
+		return "WbemErrInvalidParameterId"
+	case WbemErrNonConsecutiveParameterIds:
+		return "WbemErrNonConsecutiveParameterIds"
+	case WbemErrParameterIdOnRetval:
+		return "WbemErrParameterIdOnRetval"
+	case WbemErrInvalidObjectPath:
+		return "WbemErrInvalidObjectPath"
+	case WbemErrOutOfDiskSpace:
+		return "WbemErrOutOfDiskSpace"
+	case WbemErrBufferTooSmall:
+		return "WbemErrBufferTooSmall"
+	case WbemErrUnsupportedPutExtension:
+		return "WbemErrUnsupportedPutExtension"
+	case WbemErrUnknownObjectType:
+		return "WbemErrUnknownObjectType"
+	case WbemErrUnknownPacketType:
+		return "WbemErrUnknownPacketType"
+	case WbemErrMarshalVersionMismatch:
+		return "WbemErrMarshalVersionMismatch"
+	case WbemErrMarshalInvalidSignature:
+		return "WbemErrMarshalInvalidSignature"
+	case WbemErrInvalidQualifier:
+		return "WbemErrInvalidQualifier"
+	case WbemErrInvalidDuplicateParameter:
+		return "WbemErrInvalidDuplicateParameter"
+	case WbemErrTooMuchData:
+		return "WbemErrTooMuchData"
+	case WbemErrServerTooBusy:
+		return "WbemErrServerTooBusy"
+	case WbemErrInvalidFlavor:
+		return "WbemErrInvalidFlavor"
+	case WbemErrCircularReference:
+		return "WbemErrCircularReference"
+	case WbemErrUnsupportedClassUpdate:
+		return "WbemErrUnsupportedClassUpdate"
+	case WbemErrCannotChangeKeyInheritance:
+		return "WbemErrCannotChangeKeyInheritance"
+	case WbemErrCannotChangeIndexInheritance:
+		return "WbemErrCannotChangeIndexInheritance"
+	case WbemErrTooManyProperties:
+		return "WbemErrTooManyProperties"
+	case WbemErrUpdateTypeMismatch:
+		return "WbemErrUpdateTypeMismatch"
+	case WbemErrUpdateOverrideNotAllowed:
+		return "WbemErrUpdateOverrideNotAllowed"
+	case WbemErrUpdatePropagatedMethod:
+		return "WbemErrUpdatePropagatedMethod"
+	case WbemErrMethodNotImplemented:
+		return "WbemErrMethodNotImplemented"
+	case WbemErrMethodDisabled:
+		return "WbemErrMethodDisabled"
+	case WbemErrRefresherBusy:
+		return "WbemErrRefresherBusy"
+	case WbemErrUnparsableQuery:
+		return "WbemErrUnparsableQuery"
+	case WbemErrNotEventClass:
+		return "WbemErrNotEventClass"
+	case WbemErrMissingGroupWithin:
+		return "WbemErrMissingGroupWithin"
+	case WbemErrMissingAggregationList:
+		return "WbemErrMissingAggregationList"
+	case WbemErrPropertyNotAnObject:
+		return "WbemErrPropertyNotAnObject"
+	case WbemErrAggregatingByObject:
+		return "WbemErrAggregatingByObject"
+	case WbemErrUninterpretableProviderQuery:
+		return "WbemErrUninterpretableProviderQuery"
+	case WbemErrBackupRestoreWinmgmtRunning:
+		return "WbemErrBackupRestoreWinmgmtRunning"
+	case WbemErrQueueOverflow:
+		return "WbemErrQueueOverflow"
+	case WbemErrPrivilegeNotHeld:
+		return "WbemErrPrivilegeNotHeld"
+	case WbemErrInvalidOperator:
+		return "WbemErrInvalidOperator"
+	case WbemErrLocalCredentials:
+		return "WbemErrLocalCredentials"
+	case WbemErrCannotBeAbstract:
+		return "WbemErrCannotBeAbstract"
+	case WbemErrAmendedObject:
+		return "WbemErrAmendedObject"
+	case WbemErrClientTooSlow:
+		return "WbemErrClientTooSlow"
+	case WbemErrNullSecurityDescriptor:
+		return "WbemErrNullSecurityDescriptor"
+	case WbemErrTimeout:
+		return "WbemErrTimeout"
+	case WbemErrInvalidAssociation:
+		return "WbemErrInvalidAssociation"
+	case WbemErrAmbiguousOperation:
+		return "WbemErrAmbiguousOperation"
+	case WbemErrQuotaViolation:
+		return "WbemErrQuotaViolation"
+	case WbemErrTransactionConflict:
+		return "WbemErrTransactionConflict"
+	case WbemErrForcedRollback:
+		return "WbemErrForcedRollback"
+	case WbemErrUnsupportedLocale:
+		return "WbemErrUnsupportedLocale"
+	case WbemErrHandleOutOfDate:
+		return "WbemErrHandleOutOfDate"
+	case WbemErrConnectionFailed:
+		return "WbemErrConnectionFailed"
+	case WbemErrInvalidHandleRequest:
+		return "WbemErrInvalidHandleRequest"
+	case WbemErrPropertyNameTooWide:
+		return "WbemErrPropertyNameTooWide"
+	case WbemErrClassNameTooWide:
+		return "WbemErrClassNameTooWide"
+	case WbemErrMethodNameTooWide:
+		return "WbemErrMethodNameTooWide"
+	case WbemErrQualifierNameTooWide:
+		return "WbemErrQualifierNameTooWide"
+	case WbemErrRerunCommand:
+		return "WbemErrRerunCommand"
+	case WbemErrDatabaseVerMismatch:
+		return "WbemErrDatabaseVerMismatch"
+	case WbemErrVetoPut:
+		return "WbemErrVetoPut"
+	case WbemErrVetoDelete:
+		return "WbemErrVetoDelete"
+	case WbemErrInvalidLocale:
+		return "WbemErrInvalidLocale"
+	case WbemErrProviderSuspended:
+		return "WbemErrProviderSuspended"
+	case WbemErrSynchronizationRequired:
+		return "WbemErrSynchronizationRequired"
+	case WbemErrNoSchema:
+		return "WbemErrNoSchema"
+	case WbemErrProviderAlreadyRegistered:
+		return "WbemErrProviderAlreadyRegistered"
+	case WbemErrProviderNotRegistered:
+		return "WbemErrProviderNotRegistered"
+	case WbemErrFatalTransportError:
+		return "WbemErrFatalTransportError"
+	case WbemErrEncryptedConnectionRequired:
+		return "WbemErrEncryptedConnectionRequired"
+	case WbemErrRegistrationTooBroad:
+		return "WbemErrRegistrationTooBroad"
+	case WbemErrRegistrationTooPrecise:
+		return "WbemErrRegistrationTooPrecise"
+	case WbemErrTimedout:
+		return "WbemErrTimedout"
+	case WbemErrResetToDefault:
+		return "WbemErrResetToDefault"
+	default:
+		return fmt.Sprintf("WbemErrorEnum(%d)", int32(e))
+	}
+}
+
 // WbemFlagEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemflagenum
 type WbemFlagEnum int32
 
@@ -1115,6 +3109,33 @@ const (
 	WbemFlagUseCurrentTime       WbemFlagEnum = 1
 )
 
+// String returns the WbemFlagEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemFlagEnum) String() string {
+	switch e {
+	case WbemFlagReturnImmediately:
+		return "WbemFlagReturnImmediately"
+	case WbemFlagReturnWhenComplete:
+		return "WbemFlagReturnWhenComplete"
+	case WbemFlagForwardOnly:
+		return "WbemFlagForwardOnly"
+	case WbemFlagNoErrorObject:
+		return "WbemFlagNoErrorObject"
+	case WbemFlagSendStatus:
+		return "WbemFlagSendStatus"
+	case WbemFlagEnsureLocatable:
+		return "WbemFlagEnsureLocatable"
+	case WbemFlagDirectRead:
+		return "WbemFlagDirectRead"
+	case WbemFlagUseAmendedQualifiers:
+		return "WbemFlagUseAmendedQualifiers"
+	case WbemFlagSpawnInstance:
+		return "WbemFlagSpawnInstance"
+	default:
+		return fmt.Sprintf("WbemFlagEnum(%d)", int32(e))
+	}
+}
+
 // WbemImpersonationLevelEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemimpersonationlevelenum
 type WbemImpersonationLevelEnum int32
 
@@ -1125,6 +3146,23 @@ const (
 	WbemImpersonationLevelDelegate    WbemImpersonationLevelEnum = 4
 )
 
+// String returns the WbemImpersonationLevelEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemImpersonationLevelEnum) String() string {
+	switch e {
+	case WbemImpersonationLevelAnonymous:
+		return "WbemImpersonationLevelAnonymous"
+	case WbemImpersonationLevelIdentify:
+		return "WbemImpersonationLevelIdentify"
+	case WbemImpersonationLevelImpersonate:
+		return "WbemImpersonationLevelImpersonate"
+	case WbemImpersonationLevelDelegate:
+		return "WbemImpersonationLevelDelegate"
+	default:
+		return fmt.Sprintf("WbemImpersonationLevelEnum(%d)", int32(e))
+	}
+}
+
 // WbemObjectTextFormatEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemobjecttextformatenum
 type WbemObjectTextFormatEnum int32
 
@@ -1132,6 +3170,19 @@ const (
 	WbemObjectTextFormatCIMDTD20 WbemObjectTextFormatEnum = 1
 	WbemObjectTextFormatWMIDTD20 WbemObjectTextFormatEnum = 2
 )
+
+// String returns the WbemObjectTextFormatEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemObjectTextFormatEnum) String() string {
+	switch e {
+	case WbemObjectTextFormatCIMDTD20:
+		return "WbemObjectTextFormatCIMDTD20"
+	case WbemObjectTextFormatWMIDTD20:
+		return "WbemObjectTextFormatWMIDTD20"
+	default:
+		return fmt.Sprintf("WbemObjectTextFormatEnum(%d)", int32(e))
+	}
+}
 
 // WbemPrivilegeEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemprivilegeenum
 type WbemPrivilegeEnum int32
@@ -1166,6 +3217,69 @@ const (
 	WbemPrivilegeManageVolume         WbemPrivilegeEnum = 27
 )
 
+// String returns the WbemPrivilegeEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemPrivilegeEnum) String() string {
+	switch e {
+	case WbemPrivilegeCreateToken:
+		return "WbemPrivilegeCreateToken"
+	case WbemPrivilegePrimaryToken:
+		return "WbemPrivilegePrimaryToken"
+	case WbemPrivilegeLockMemory:
+		return "WbemPrivilegeLockMemory"
+	case WbemPrivilegeIncreaseQuota:
+		return "WbemPrivilegeIncreaseQuota"
+	case WbemPrivilegeMachineAccount:
+		return "WbemPrivilegeMachineAccount"
+	case WbemPrivilegeTcb:
+		return "WbemPrivilegeTcb"
+	case WbemPrivilegeSecurity:
+		return "WbemPrivilegeSecurity"
+	case WbemPrivilegeTakeOwnership:
+		return "WbemPrivilegeTakeOwnership"
+	case WbemPrivilegeLoadDriver:
+		return "WbemPrivilegeLoadDriver"
+	case WbemPrivilegeSystemProfile:
+		return "WbemPrivilegeSystemProfile"
+	case WbemPrivilegeSystemtime:
+		return "WbemPrivilegeSystemtime"
+	case WbemPrivilegeProfileSingleProcess:
+		return "WbemPrivilegeProfileSingleProcess"
+	case WbemPrivilegeIncreaseBasePriority:
+		return "WbemPrivilegeIncreaseBasePriority"
+	case WbemPrivilegeCreatePagefile:
+		return "WbemPrivilegeCreatePagefile"
+	case WbemPrivilegeCreatePermanent:
+		return "WbemPrivilegeCreatePermanent"
+	case WbemPrivilegeBackup:
+		return "WbemPrivilegeBackup"
+	case WbemPrivilegeRestore:
+		return "WbemPrivilegeRestore"
+	case WbemPrivilegeShutdown:
+		return "WbemPrivilegeShutdown"
+	case WbemPrivilegeDebug:
+		return "WbemPrivilegeDebug"
+	case WbemPrivilegeAudit:
+		return "WbemPrivilegeAudit"
+	case WbemPrivilegeSystemEnvironment:
+		return "WbemPrivilegeSystemEnvironment"
+	case WbemPrivilegeChangeNotify:
+		return "WbemPrivilegeChangeNotify"
+	case WbemPrivilegeRemoteShutdown:
+		return "WbemPrivilegeRemoteShutdown"
+	case WbemPrivilegeUndock:
+		return "WbemPrivilegeUndock"
+	case WbemPrivilegeSyncAgent:
+		return "WbemPrivilegeSyncAgent"
+	case WbemPrivilegeEnableDelegation:
+		return "WbemPrivilegeEnableDelegation"
+	case WbemPrivilegeManageVolume:
+		return "WbemPrivilegeManageVolume"
+	default:
+		return fmt.Sprintf("WbemPrivilegeEnum(%d)", int32(e))
+	}
+}
+
 // WbemQueryFlagEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemqueryflagenum
 type WbemQueryFlagEnum int32
 
@@ -1175,6 +3289,21 @@ const (
 	WbemQueryFlagPrototype WbemQueryFlagEnum = 2
 )
 
+// String returns the WbemQueryFlagEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemQueryFlagEnum) String() string {
+	switch e {
+	case WbemQueryFlagDeep:
+		return "WbemQueryFlagDeep"
+	case WbemQueryFlagShallow:
+		return "WbemQueryFlagShallow"
+	case WbemQueryFlagPrototype:
+		return "WbemQueryFlagPrototype"
+	default:
+		return fmt.Sprintf("WbemQueryFlagEnum(%d)", int32(e))
+	}
+}
+
 // WbemTextFlagEnum: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemtextflagenum
 type WbemTextFlagEnum int32
 
@@ -1182,9 +3311,31 @@ const (
 	WbemTextFlagNoFlavors WbemTextFlagEnum = 1
 )
 
+// String returns the WbemTextFlagEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemTextFlagEnum) String() string {
+	switch e {
+	case WbemTextFlagNoFlavors:
+		return "WbemTextFlagNoFlavors"
+	default:
+		return fmt.Sprintf("WbemTextFlagEnum(%d)", int32(e))
+	}
+}
+
 // WbemTimeout: https://learn.microsoft.com/windows/win32/api/wbemdisp/ne-wbemdisp-wbemtimeout
 type WbemTimeout int32
 
 const (
 	WbemTimeoutInfinite WbemTimeout = -1
 )
+
+// String returns the WbemTimeout constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WbemTimeout) String() string {
+	switch e {
+	case WbemTimeoutInfinite:
+		return "WbemTimeoutInfinite"
+	default:
+		return fmt.Sprintf("WbemTimeout(%d)", int32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package diagnostics
 
+import (
+	"fmt"
+)
+
 // BaseValueSource: https://learn.microsoft.com/windows/win32/api/xamlom/ne-xamlom-basevaluesource
 type BaseValueSource int32
 
@@ -25,6 +29,45 @@ const (
 	BaseValueSourceVisualState  BaseValueSource = 14
 )
 
+// String returns the BaseValueSource constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BaseValueSource) String() string {
+	switch e {
+	case BaseValueSourceUnknown:
+		return "BaseValueSourceUnknown"
+	case BaseValueSourceDefault:
+		return "BaseValueSourceDefault"
+	case BaseValueSourceBuiltInStyle:
+		return "BaseValueSourceBuiltInStyle"
+	case BaseValueSourceStyle:
+		return "BaseValueSourceStyle"
+	case BaseValueSourceLocal:
+		return "BaseValueSourceLocal"
+	case Inherited:
+		return "Inherited"
+	case DefaultStyleTrigger:
+		return "DefaultStyleTrigger"
+	case TemplateTrigger:
+		return "TemplateTrigger"
+	case StyleTrigger:
+		return "StyleTrigger"
+	case ImplicitStyleReference:
+		return "ImplicitStyleReference"
+	case ParentTemplate:
+		return "ParentTemplate"
+	case ParentTemplateTrigger:
+		return "ParentTemplateTrigger"
+	case Animation:
+		return "Animation"
+	case Coercion:
+		return "Coercion"
+	case BaseValueSourceVisualState:
+		return "BaseValueSourceVisualState"
+	default:
+		return fmt.Sprintf("BaseValueSource(%d)", int32(e))
+	}
+}
+
 // MetadataBit: https://learn.microsoft.com/windows/win32/api/xamlom/ne-xamlom-metadatabit
 type MetadataBit int32
 
@@ -39,6 +82,31 @@ const (
 	IsValueHandleAndEvaluatedValue MetadataBit = 64
 )
 
+// String returns the MetadataBit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MetadataBit) String() string {
+	switch e {
+	case None:
+		return "None"
+	case IsValueHandle:
+		return "IsValueHandle"
+	case IsPropertyReadOnly:
+		return "IsPropertyReadOnly"
+	case IsValueCollection:
+		return "IsValueCollection"
+	case IsValueCollectionReadOnly:
+		return "IsValueCollectionReadOnly"
+	case IsValueBindingExpression:
+		return "IsValueBindingExpression"
+	case IsValueNull:
+		return "IsValueNull"
+	case IsValueHandleAndEvaluatedValue:
+		return "IsValueHandleAndEvaluatedValue"
+	default:
+		return fmt.Sprintf("MetadataBit(%d)", int32(e))
+	}
+}
+
 // RenderTargetBitmapOptions: https://learn.microsoft.com/windows/win32/api/xamlom/ne-xamlom-rendertargetbitmapoptions
 type RenderTargetBitmapOptions int32
 
@@ -47,6 +115,19 @@ const (
 	RenderTargetAndChildren RenderTargetBitmapOptions = 1
 )
 
+// String returns the RenderTargetBitmapOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RenderTargetBitmapOptions) String() string {
+	switch e {
+	case RenderTarget:
+		return "RenderTarget"
+	case RenderTargetAndChildren:
+		return "RenderTargetAndChildren"
+	default:
+		return fmt.Sprintf("RenderTargetBitmapOptions(%d)", int32(e))
+	}
+}
+
 // ResourceType: https://learn.microsoft.com/windows/win32/api/xamlom/ne-xamlom-resourcetype
 type ResourceType int32
 
@@ -54,6 +135,19 @@ const (
 	ResourceTypeStatic ResourceType = 0
 	ResourceTypeTheme  ResourceType = 1
 )
+
+// String returns the ResourceType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ResourceType) String() string {
+	switch e {
+	case ResourceTypeStatic:
+		return "ResourceTypeStatic"
+	case ResourceTypeTheme:
+		return "ResourceTypeTheme"
+	default:
+		return fmt.Sprintf("ResourceType(%d)", int32(e))
+	}
+}
 
 // VisualElementState: https://learn.microsoft.com/windows/win32/api/xamlom/ne-xamlom-visualelementstate
 type VisualElementState int32
@@ -64,6 +158,21 @@ const (
 	ErrorInvalidResource  VisualElementState = 2
 )
 
+// String returns the VisualElementState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VisualElementState) String() string {
+	switch e {
+	case ErrorResolved:
+		return "ErrorResolved"
+	case ErrorResourceNotFound:
+		return "ErrorResourceNotFound"
+	case ErrorInvalidResource:
+		return "ErrorInvalidResource"
+	default:
+		return fmt.Sprintf("VisualElementState(%d)", int32(e))
+	}
+}
+
 // VisualMutationType: https://learn.microsoft.com/windows/win32/api/xamlom/ne-xamlom-visualmutationtype
 type VisualMutationType int32
 
@@ -71,3 +180,16 @@ const (
 	Add    VisualMutationType = 0
 	Remove VisualMutationType = 1
 )
+
+// String returns the VisualMutationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VisualMutationType) String() string {
+	switch e {
+	case Add:
+		return "Add"
+	case Remove:
+		return "Remove"
+	default:
+		return fmt.Sprintf("VisualMutationType(%d)", int32(e))
+	}
+}

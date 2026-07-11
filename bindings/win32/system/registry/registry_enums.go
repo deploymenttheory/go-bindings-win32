@@ -4,6 +4,11 @@
 
 package registry
 
+import (
+	"fmt"
+	"strings"
+)
+
 type REG_CREATE_KEY_DISPOSITION uint32
 
 const (
@@ -11,6 +16,20 @@ const (
 	REG_OPENED_EXISTING_KEY REG_CREATE_KEY_DISPOSITION = 2
 )
 
+// String returns the REG_CREATE_KEY_DISPOSITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REG_CREATE_KEY_DISPOSITION) String() string {
+	switch e {
+	case REG_CREATED_NEW_KEY:
+		return "REG_CREATED_NEW_KEY"
+	case REG_OPENED_EXISTING_KEY:
+		return "REG_OPENED_EXISTING_KEY"
+	default:
+		return fmt.Sprintf("REG_CREATE_KEY_DISPOSITION(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type REG_NOTIFY_FILTER uint32
 
 const (
@@ -21,6 +40,32 @@ const (
 	REG_NOTIFY_THREAD_AGNOSTIC   REG_NOTIFY_FILTER = 268435456
 )
 
+// String returns the REG_NOTIFY_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REG_NOTIFY_FILTER) String() string {
+	var parts []string
+	if e&REG_NOTIFY_CHANGE_NAME != 0 {
+		parts = append(parts, "REG_NOTIFY_CHANGE_NAME")
+	}
+	if e&REG_NOTIFY_CHANGE_ATTRIBUTES != 0 {
+		parts = append(parts, "REG_NOTIFY_CHANGE_ATTRIBUTES")
+	}
+	if e&REG_NOTIFY_CHANGE_LAST_SET != 0 {
+		parts = append(parts, "REG_NOTIFY_CHANGE_LAST_SET")
+	}
+	if e&REG_NOTIFY_CHANGE_SECURITY != 0 {
+		parts = append(parts, "REG_NOTIFY_CHANGE_SECURITY")
+	}
+	if e&REG_NOTIFY_THREAD_AGNOSTIC != 0 {
+		parts = append(parts, "REG_NOTIFY_THREAD_AGNOSTIC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type REG_OPEN_CREATE_OPTIONS uint32
 
 const (
@@ -33,6 +78,31 @@ const (
 	REG_OPTION_DONT_VIRTUALIZE REG_OPEN_CREATE_OPTIONS = 16
 )
 
+// String returns the REG_OPEN_CREATE_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REG_OPEN_CREATE_OPTIONS) String() string {
+	var parts []string
+	if e&REG_OPTION_VOLATILE != 0 {
+		parts = append(parts, "REG_OPTION_VOLATILE")
+	}
+	if e&REG_OPTION_CREATE_LINK != 0 {
+		parts = append(parts, "REG_OPTION_CREATE_LINK")
+	}
+	if e&REG_OPTION_BACKUP_RESTORE != 0 {
+		parts = append(parts, "REG_OPTION_BACKUP_RESTORE")
+	}
+	if e&REG_OPTION_OPEN_LINK != 0 {
+		parts = append(parts, "REG_OPTION_OPEN_LINK")
+	}
+	if e&REG_OPTION_DONT_VIRTUALIZE != 0 {
+		parts = append(parts, "REG_OPTION_DONT_VIRTUALIZE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type REG_RESTORE_KEY_FLAGS int32
 
 const (
@@ -40,6 +110,20 @@ const (
 	REG_WHOLE_HIVE_VOLATILE REG_RESTORE_KEY_FLAGS = 1
 )
 
+// String returns the REG_RESTORE_KEY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REG_RESTORE_KEY_FLAGS) String() string {
+	switch e {
+	case REG_FORCE_RESTORE:
+		return "REG_FORCE_RESTORE"
+	case REG_WHOLE_HIVE_VOLATILE:
+		return "REG_WHOLE_HIVE_VOLATILE"
+	default:
+		return fmt.Sprintf("REG_RESTORE_KEY_FLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type REG_ROUTINE_FLAGS uint32
 
 const (
@@ -60,6 +144,62 @@ const (
 	RRF_ZEROONFAILURE     REG_ROUTINE_FLAGS = 536870912
 )
 
+// String returns the REG_ROUTINE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REG_ROUTINE_FLAGS) String() string {
+	var parts []string
+	if e&RRF_RT_DWORD != 0 {
+		parts = append(parts, "RRF_RT_DWORD")
+	}
+	if e&RRF_RT_QWORD != 0 {
+		parts = append(parts, "RRF_RT_QWORD")
+	}
+	if e&RRF_RT_REG_NONE != 0 {
+		parts = append(parts, "RRF_RT_REG_NONE")
+	}
+	if e&RRF_RT_REG_SZ != 0 {
+		parts = append(parts, "RRF_RT_REG_SZ")
+	}
+	if e&RRF_RT_REG_EXPAND_SZ != 0 {
+		parts = append(parts, "RRF_RT_REG_EXPAND_SZ")
+	}
+	if e&RRF_RT_REG_BINARY != 0 {
+		parts = append(parts, "RRF_RT_REG_BINARY")
+	}
+	if e&RRF_RT_REG_DWORD != 0 {
+		parts = append(parts, "RRF_RT_REG_DWORD")
+	}
+	if e&RRF_RT_REG_MULTI_SZ != 0 {
+		parts = append(parts, "RRF_RT_REG_MULTI_SZ")
+	}
+	if e&RRF_RT_REG_QWORD != 0 {
+		parts = append(parts, "RRF_RT_REG_QWORD")
+	}
+	if e&RRF_RT_ANY != 0 {
+		parts = append(parts, "RRF_RT_ANY")
+	}
+	if e&RRF_SUBKEY_WOW6464KEY != 0 {
+		parts = append(parts, "RRF_SUBKEY_WOW6464KEY")
+	}
+	if e&RRF_SUBKEY_WOW6432KEY != 0 {
+		parts = append(parts, "RRF_SUBKEY_WOW6432KEY")
+	}
+	if e&RRF_WOW64_MASK != 0 {
+		parts = append(parts, "RRF_WOW64_MASK")
+	}
+	if e&RRF_NOEXPAND != 0 {
+		parts = append(parts, "RRF_NOEXPAND")
+	}
+	if e&RRF_ZEROONFAILURE != 0 {
+		parts = append(parts, "RRF_ZEROONFAILURE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type REG_SAM_FLAGS uint32
 
 const (
@@ -78,6 +218,55 @@ const (
 	KEY_ALL_ACCESS         REG_SAM_FLAGS = 983103
 )
 
+// String returns the REG_SAM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REG_SAM_FLAGS) String() string {
+	var parts []string
+	if e&KEY_QUERY_VALUE != 0 {
+		parts = append(parts, "KEY_QUERY_VALUE")
+	}
+	if e&KEY_SET_VALUE != 0 {
+		parts = append(parts, "KEY_SET_VALUE")
+	}
+	if e&KEY_CREATE_SUB_KEY != 0 {
+		parts = append(parts, "KEY_CREATE_SUB_KEY")
+	}
+	if e&KEY_ENUMERATE_SUB_KEYS != 0 {
+		parts = append(parts, "KEY_ENUMERATE_SUB_KEYS")
+	}
+	if e&KEY_NOTIFY != 0 {
+		parts = append(parts, "KEY_NOTIFY")
+	}
+	if e&KEY_CREATE_LINK != 0 {
+		parts = append(parts, "KEY_CREATE_LINK")
+	}
+	if e&KEY_WOW64_32KEY != 0 {
+		parts = append(parts, "KEY_WOW64_32KEY")
+	}
+	if e&KEY_WOW64_64KEY != 0 {
+		parts = append(parts, "KEY_WOW64_64KEY")
+	}
+	if e&KEY_WOW64_RES != 0 {
+		parts = append(parts, "KEY_WOW64_RES")
+	}
+	if e&KEY_READ != 0 {
+		parts = append(parts, "KEY_READ")
+	}
+	if e&KEY_WRITE != 0 {
+		parts = append(parts, "KEY_WRITE")
+	}
+	if e&KEY_EXECUTE != 0 {
+		parts = append(parts, "KEY_EXECUTE")
+	}
+	if e&KEY_ALL_ACCESS != 0 {
+		parts = append(parts, "KEY_ALL_ACCESS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type REG_SAVE_FORMAT uint32
 
 const (
@@ -85,6 +274,21 @@ const (
 	REG_LATEST_FORMAT   REG_SAVE_FORMAT = 2
 	REG_NO_COMPRESSION  REG_SAVE_FORMAT = 4
 )
+
+// String returns the REG_SAVE_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REG_SAVE_FORMAT) String() string {
+	switch e {
+	case REG_STANDARD_FORMAT:
+		return "REG_STANDARD_FORMAT"
+	case REG_LATEST_FORMAT:
+		return "REG_LATEST_FORMAT"
+	case REG_NO_COMPRESSION:
+		return "REG_NO_COMPRESSION"
+	default:
+		return fmt.Sprintf("REG_SAVE_FORMAT(%d)", uint32(e))
+	}
+}
 
 type REG_VALUE_TYPE uint32
 
@@ -104,3 +308,36 @@ const (
 	REG_QWORD                      REG_VALUE_TYPE = 11
 	REG_QWORD_LITTLE_ENDIAN        REG_VALUE_TYPE = 11
 )
+
+// String returns the REG_VALUE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REG_VALUE_TYPE) String() string {
+	switch e {
+	case REG_NONE:
+		return "REG_NONE"
+	case REG_SZ:
+		return "REG_SZ"
+	case REG_EXPAND_SZ:
+		return "REG_EXPAND_SZ"
+	case REG_BINARY:
+		return "REG_BINARY"
+	case REG_DWORD:
+		return "REG_DWORD"
+	case REG_DWORD_BIG_ENDIAN:
+		return "REG_DWORD_BIG_ENDIAN"
+	case REG_LINK:
+		return "REG_LINK"
+	case REG_MULTI_SZ:
+		return "REG_MULTI_SZ"
+	case REG_RESOURCE_LIST:
+		return "REG_RESOURCE_LIST"
+	case REG_FULL_RESOURCE_DESCRIPTOR:
+		return "REG_FULL_RESOURCE_DESCRIPTOR"
+	case REG_RESOURCE_REQUIREMENTS_LIST:
+		return "REG_RESOURCE_REQUIREMENTS_LIST"
+	case REG_QWORD:
+		return "REG_QWORD"
+	default:
+		return fmt.Sprintf("REG_VALUE_TYPE(%d)", uint32(e))
+	}
+}

@@ -4,12 +4,29 @@
 
 package kernelstreaming
 
+import (
+	"fmt"
+)
+
 type AUDIOLOOPBACK_TAPPOINT_TYPE int32
 
 const (
 	AUDIOLOOPBACK_TAPPOINT_PREVOLUMEMUTE  AUDIOLOOPBACK_TAPPOINT_TYPE = 0
 	AUDIOLOOPBACK_TAPPOINT_POSTVOLUMEMUTE AUDIOLOOPBACK_TAPPOINT_TYPE = 1
 )
+
+// String returns the AUDIOLOOPBACK_TAPPOINT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIOLOOPBACK_TAPPOINT_TYPE) String() string {
+	switch e {
+	case AUDIOLOOPBACK_TAPPOINT_PREVOLUMEMUTE:
+		return "AUDIOLOOPBACK_TAPPOINT_PREVOLUMEMUTE"
+	case AUDIOLOOPBACK_TAPPOINT_POSTVOLUMEMUTE:
+		return "AUDIOLOOPBACK_TAPPOINT_POSTVOLUMEMUTE"
+	default:
+		return fmt.Sprintf("AUDIOLOOPBACK_TAPPOINT_TYPE(%d)", int32(e))
+	}
+}
 
 type AUDIOPOSTURE_ORIENTATION int32
 
@@ -20,12 +37,42 @@ const (
 	AUDIOPOSTURE_ORIENTATION_ROTATED270DEGREESCOUNTERCLOCKWISE AUDIOPOSTURE_ORIENTATION = 3
 )
 
+// String returns the AUDIOPOSTURE_ORIENTATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIOPOSTURE_ORIENTATION) String() string {
+	switch e {
+	case AUDIOPOSTURE_ORIENTATION_NOTROTATED:
+		return "AUDIOPOSTURE_ORIENTATION_NOTROTATED"
+	case AUDIOPOSTURE_ORIENTATION_ROTATED90DEGREESCOUNTERCLOCKWISE:
+		return "AUDIOPOSTURE_ORIENTATION_ROTATED90DEGREESCOUNTERCLOCKWISE"
+	case AUDIOPOSTURE_ORIENTATION_ROTATED180DEGREESCOUNTERCLOCKWISE:
+		return "AUDIOPOSTURE_ORIENTATION_ROTATED180DEGREESCOUNTERCLOCKWISE"
+	case AUDIOPOSTURE_ORIENTATION_ROTATED270DEGREESCOUNTERCLOCKWISE:
+		return "AUDIOPOSTURE_ORIENTATION_ROTATED270DEGREESCOUNTERCLOCKWISE"
+	default:
+		return fmt.Sprintf("AUDIOPOSTURE_ORIENTATION(%d)", int32(e))
+	}
+}
+
 type AUDIO_CURVE_TYPE int32
 
 const (
 	AUDIO_CURVE_TYPE_NONE         AUDIO_CURVE_TYPE = 0
 	AUDIO_CURVE_TYPE_WINDOWS_FADE AUDIO_CURVE_TYPE = 1
 )
+
+// String returns the AUDIO_CURVE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIO_CURVE_TYPE) String() string {
+	switch e {
+	case AUDIO_CURVE_TYPE_NONE:
+		return "AUDIO_CURVE_TYPE_NONE"
+	case AUDIO_CURVE_TYPE_WINDOWS_FADE:
+		return "AUDIO_CURVE_TYPE_WINDOWS_FADE"
+	default:
+		return fmt.Sprintf("AUDIO_CURVE_TYPE(%d)", int32(e))
+	}
+}
 
 type CAPTURE_MEMORY_ALLOCATION_FLAGS int32
 
@@ -38,12 +85,46 @@ const (
 	KS_CAPTURE_ALLOC_SECURE_BUFFER CAPTURE_MEMORY_ALLOCATION_FLAGS = 16
 )
 
+// String returns the CAPTURE_MEMORY_ALLOCATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CAPTURE_MEMORY_ALLOCATION_FLAGS) String() string {
+	switch e {
+	case KS_CAPTURE_ALLOC_INVALID:
+		return "KS_CAPTURE_ALLOC_INVALID"
+	case KS_CAPTURE_ALLOC_SYSTEM:
+		return "KS_CAPTURE_ALLOC_SYSTEM"
+	case KS_CAPTURE_ALLOC_VRAM:
+		return "KS_CAPTURE_ALLOC_VRAM"
+	case KS_CAPTURE_ALLOC_SYSTEM_AGP:
+		return "KS_CAPTURE_ALLOC_SYSTEM_AGP"
+	case KS_CAPTURE_ALLOC_VRAM_MAPPED:
+		return "KS_CAPTURE_ALLOC_VRAM_MAPPED"
+	case KS_CAPTURE_ALLOC_SECURE_BUFFER:
+		return "KS_CAPTURE_ALLOC_SECURE_BUFFER"
+	default:
+		return fmt.Sprintf("CAPTURE_MEMORY_ALLOCATION_FLAGS(%d)", int32(e))
+	}
+}
+
 type CONSTRICTOR_OPTION int32
 
 const (
 	CONSTRICTOR_OPTION_DISABLE CONSTRICTOR_OPTION = 0
 	CONSTRICTOR_OPTION_MUTE    CONSTRICTOR_OPTION = 1
 )
+
+// String returns the CONSTRICTOR_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONSTRICTOR_OPTION) String() string {
+	switch e {
+	case CONSTRICTOR_OPTION_DISABLE:
+		return "CONSTRICTOR_OPTION_DISABLE"
+	case CONSTRICTOR_OPTION_MUTE:
+		return "CONSTRICTOR_OPTION_MUTE"
+	default:
+		return fmt.Sprintf("CONSTRICTOR_OPTION(%d)", int32(e))
+	}
+}
 
 type EDeviceControlUseType int32
 
@@ -52,6 +133,21 @@ const (
 	EDeviceControlUsePrimary   EDeviceControlUseType = 1
 	EDeviceControlUseSecondary EDeviceControlUseType = 2
 )
+
+// String returns the EDeviceControlUseType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDeviceControlUseType) String() string {
+	switch e {
+	case EDeviceControlUseMissing:
+		return "EDeviceControlUseMissing"
+	case EDeviceControlUsePrimary:
+		return "EDeviceControlUsePrimary"
+	case EDeviceControlUseSecondary:
+		return "EDeviceControlUseSecondary"
+	default:
+		return fmt.Sprintf("EDeviceControlUseType(%d)", int32(e))
+	}
+}
 
 type EPcxConnectionType int32
 
@@ -70,6 +166,39 @@ const (
 	EConnTypeCombination           EPcxConnectionType = 11
 )
 
+// String returns the EPcxConnectionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EPcxConnectionType) String() string {
+	switch e {
+	case EConnTypeUnknown:
+		return "EConnTypeUnknown"
+	case EConnType3Point5mm:
+		return "EConnType3Point5mm"
+	case EConnTypeQuarter:
+		return "EConnTypeQuarter"
+	case EConnTypeAtapiInternal:
+		return "EConnTypeAtapiInternal"
+	case EConnTypeRCA:
+		return "EConnTypeRCA"
+	case EConnTypeOptical:
+		return "EConnTypeOptical"
+	case EConnTypeOtherDigital:
+		return "EConnTypeOtherDigital"
+	case EConnTypeOtherAnalog:
+		return "EConnTypeOtherAnalog"
+	case EConnTypeMultichannelAnalogDIN:
+		return "EConnTypeMultichannelAnalogDIN"
+	case EConnTypeXlrProfessional:
+		return "EConnTypeXlrProfessional"
+	case EConnTypeRJ11Modem:
+		return "EConnTypeRJ11Modem"
+	case EConnTypeCombination:
+		return "EConnTypeCombination"
+	default:
+		return fmt.Sprintf("EPcxConnectionType(%d)", int32(e))
+	}
+}
+
 type EPcxGenLocation int32
 
 const (
@@ -79,6 +208,25 @@ const (
 	EGenLocOther               EPcxGenLocation = 3
 	EPcxGenLocation_enum_count EPcxGenLocation = 4
 )
+
+// String returns the EPcxGenLocation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EPcxGenLocation) String() string {
+	switch e {
+	case EGenLocPrimaryBox:
+		return "EGenLocPrimaryBox"
+	case EGenLocInternal:
+		return "EGenLocInternal"
+	case EGenLocSeparate:
+		return "EGenLocSeparate"
+	case EGenLocOther:
+		return "EGenLocOther"
+	case EPcxGenLocation_enum_count:
+		return "EPcxGenLocation_enum_count"
+	default:
+		return fmt.Sprintf("EPcxGenLocation(%d)", int32(e))
+	}
+}
 
 type EPcxGeoLocation int32
 
@@ -101,6 +249,47 @@ const (
 	EPcxGeoLocation_enum_count EPcxGeoLocation = 16
 )
 
+// String returns the EPcxGeoLocation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EPcxGeoLocation) String() string {
+	switch e {
+	case EGeoLocRear:
+		return "EGeoLocRear"
+	case EGeoLocFront:
+		return "EGeoLocFront"
+	case EGeoLocLeft:
+		return "EGeoLocLeft"
+	case EGeoLocRight:
+		return "EGeoLocRight"
+	case EGeoLocTop:
+		return "EGeoLocTop"
+	case EGeoLocBottom:
+		return "EGeoLocBottom"
+	case EGeoLocRearPanel:
+		return "EGeoLocRearPanel"
+	case EGeoLocRiser:
+		return "EGeoLocRiser"
+	case EGeoLocInsideMobileLid:
+		return "EGeoLocInsideMobileLid"
+	case EGeoLocDrivebay:
+		return "EGeoLocDrivebay"
+	case EGeoLocHDMI:
+		return "EGeoLocHDMI"
+	case EGeoLocOutsideMobileLid:
+		return "EGeoLocOutsideMobileLid"
+	case EGeoLocATAPI:
+		return "EGeoLocATAPI"
+	case EGeoLocNotApplicable:
+		return "EGeoLocNotApplicable"
+	case EGeoLocReserved6:
+		return "EGeoLocReserved6"
+	case EPcxGeoLocation_enum_count:
+		return "EPcxGeoLocation_enum_count"
+	default:
+		return fmt.Sprintf("EPcxGeoLocation(%d)", int32(e))
+	}
+}
+
 type EPxcPortConnection int32
 
 const (
@@ -109,6 +298,23 @@ const (
 	EPortConnBothIntegratedAndJack EPxcPortConnection = 2
 	EPortConnUnknown               EPxcPortConnection = 3
 )
+
+// String returns the EPxcPortConnection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EPxcPortConnection) String() string {
+	switch e {
+	case EPortConnJack:
+		return "EPortConnJack"
+	case EPortConnIntegratedDevice:
+		return "EPortConnIntegratedDevice"
+	case EPortConnBothIntegratedAndJack:
+		return "EPortConnBothIntegratedAndJack"
+	case EPortConnUnknown:
+		return "EPortConnUnknown"
+	default:
+		return fmt.Sprintf("EPxcPortConnection(%d)", int32(e))
+	}
+}
 
 type FRAMING_CACHE_OPS int32
 
@@ -119,6 +325,23 @@ const (
 	Framing_Cache_Write    FRAMING_CACHE_OPS = 3
 )
 
+// String returns the FRAMING_CACHE_OPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FRAMING_CACHE_OPS) String() string {
+	switch e {
+	case Framing_Cache_Update:
+		return "Framing_Cache_Update"
+	case Framing_Cache_ReadLast:
+		return "Framing_Cache_ReadLast"
+	case Framing_Cache_ReadOrig:
+		return "Framing_Cache_ReadOrig"
+	case Framing_Cache_Write:
+		return "Framing_Cache_Write"
+	default:
+		return fmt.Sprintf("FRAMING_CACHE_OPS(%d)", int32(e))
+	}
+}
+
 type FRAMING_PROP int32
 
 const (
@@ -128,12 +351,42 @@ const (
 	FramingProp_Ex            FRAMING_PROP = 3
 )
 
+// String returns the FRAMING_PROP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FRAMING_PROP) String() string {
+	switch e {
+	case FramingProp_Uninitialized:
+		return "FramingProp_Uninitialized"
+	case FramingProp_None:
+		return "FramingProp_None"
+	case FramingProp_Old:
+		return "FramingProp_Old"
+	case FramingProp_Ex:
+		return "FramingProp_Ex"
+	default:
+		return fmt.Sprintf("FRAMING_PROP(%d)", int32(e))
+	}
+}
+
 type KSALLOCATORMODE int32
 
 const (
 	KsAllocatorMode_User   KSALLOCATORMODE = 0
 	KsAllocatorMode_Kernel KSALLOCATORMODE = 1
 )
+
+// String returns the KSALLOCATORMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSALLOCATORMODE) String() string {
+	switch e {
+	case KsAllocatorMode_User:
+		return "KsAllocatorMode_User"
+	case KsAllocatorMode_Kernel:
+		return "KsAllocatorMode_Kernel"
+	default:
+		return fmt.Sprintf("KSALLOCATORMODE(%d)", int32(e))
+	}
+}
 
 type KSCAMERA_EXTENDEDPROP_FOCUSSTATE int32
 
@@ -144,6 +397,25 @@ const (
 	KSCAMERA_EXTENDEDPROP_FOCUSSTATE_FOCUSED       KSCAMERA_EXTENDEDPROP_FOCUSSTATE = 3
 	KSCAMERA_EXTENDEDPROP_FOCUSSTATE_FAILED        KSCAMERA_EXTENDEDPROP_FOCUSSTATE = 4
 )
+
+// String returns the KSCAMERA_EXTENDEDPROP_FOCUSSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSCAMERA_EXTENDEDPROP_FOCUSSTATE) String() string {
+	switch e {
+	case KSCAMERA_EXTENDEDPROP_FOCUSSTATE_UNINITIALIZED:
+		return "KSCAMERA_EXTENDEDPROP_FOCUSSTATE_UNINITIALIZED"
+	case KSCAMERA_EXTENDEDPROP_FOCUSSTATE_LOST:
+		return "KSCAMERA_EXTENDEDPROP_FOCUSSTATE_LOST"
+	case KSCAMERA_EXTENDEDPROP_FOCUSSTATE_SEARCHING:
+		return "KSCAMERA_EXTENDEDPROP_FOCUSSTATE_SEARCHING"
+	case KSCAMERA_EXTENDEDPROP_FOCUSSTATE_FOCUSED:
+		return "KSCAMERA_EXTENDEDPROP_FOCUSSTATE_FOCUSED"
+	case KSCAMERA_EXTENDEDPROP_FOCUSSTATE_FAILED:
+		return "KSCAMERA_EXTENDEDPROP_FOCUSSTATE_FAILED"
+	default:
+		return fmt.Sprintf("KSCAMERA_EXTENDEDPROP_FOCUSSTATE(%d)", int32(e))
+	}
+}
 
 type KSCAMERA_EXTENDEDPROP_MetadataAlignment int32
 
@@ -160,12 +432,54 @@ const (
 	KSCAMERA_EXTENDEDPROP_MetadataAlignment_8192 KSCAMERA_EXTENDEDPROP_MetadataAlignment = 13
 )
 
+// String returns the KSCAMERA_EXTENDEDPROP_MetadataAlignment constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSCAMERA_EXTENDEDPROP_MetadataAlignment) String() string {
+	switch e {
+	case KSCAMERA_EXTENDEDPROP_MetadataAlignment_16:
+		return "KSCAMERA_EXTENDEDPROP_MetadataAlignment_16"
+	case KSCAMERA_EXTENDEDPROP_MetadataAlignment_32:
+		return "KSCAMERA_EXTENDEDPROP_MetadataAlignment_32"
+	case KSCAMERA_EXTENDEDPROP_MetadataAlignment_64:
+		return "KSCAMERA_EXTENDEDPROP_MetadataAlignment_64"
+	case KSCAMERA_EXTENDEDPROP_MetadataAlignment_128:
+		return "KSCAMERA_EXTENDEDPROP_MetadataAlignment_128"
+	case KSCAMERA_EXTENDEDPROP_MetadataAlignment_256:
+		return "KSCAMERA_EXTENDEDPROP_MetadataAlignment_256"
+	case KSCAMERA_EXTENDEDPROP_MetadataAlignment_512:
+		return "KSCAMERA_EXTENDEDPROP_MetadataAlignment_512"
+	case KSCAMERA_EXTENDEDPROP_MetadataAlignment_1024:
+		return "KSCAMERA_EXTENDEDPROP_MetadataAlignment_1024"
+	case KSCAMERA_EXTENDEDPROP_MetadataAlignment_2048:
+		return "KSCAMERA_EXTENDEDPROP_MetadataAlignment_2048"
+	case KSCAMERA_EXTENDEDPROP_MetadataAlignment_4096:
+		return "KSCAMERA_EXTENDEDPROP_MetadataAlignment_4096"
+	case KSCAMERA_EXTENDEDPROP_MetadataAlignment_8192:
+		return "KSCAMERA_EXTENDEDPROP_MetadataAlignment_8192"
+	default:
+		return fmt.Sprintf("KSCAMERA_EXTENDEDPROP_MetadataAlignment(%d)", int32(e))
+	}
+}
+
 type KSCAMERA_EXTENDEDPROP_ROITYPE int32
 
 const (
 	KSCAMERA_EXTENDEDPROP_ROITYPE_UNKNOWN KSCAMERA_EXTENDEDPROP_ROITYPE = 0
 	KSCAMERA_EXTENDEDPROP_ROITYPE_FACE    KSCAMERA_EXTENDEDPROP_ROITYPE = 1
 )
+
+// String returns the KSCAMERA_EXTENDEDPROP_ROITYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSCAMERA_EXTENDEDPROP_ROITYPE) String() string {
+	switch e {
+	case KSCAMERA_EXTENDEDPROP_ROITYPE_UNKNOWN:
+		return "KSCAMERA_EXTENDEDPROP_ROITYPE_UNKNOWN"
+	case KSCAMERA_EXTENDEDPROP_ROITYPE_FACE:
+		return "KSCAMERA_EXTENDEDPROP_ROITYPE_FACE"
+	default:
+		return fmt.Sprintf("KSCAMERA_EXTENDEDPROP_ROITYPE(%d)", int32(e))
+	}
+}
 
 type KSCAMERA_EXTENDEDPROP_WBPRESET int32
 
@@ -178,12 +492,46 @@ const (
 	KSCAMERA_EXTENDEDPROP_WBPRESET_CANDLELIGHT KSCAMERA_EXTENDEDPROP_WBPRESET = 6
 )
 
+// String returns the KSCAMERA_EXTENDEDPROP_WBPRESET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSCAMERA_EXTENDEDPROP_WBPRESET) String() string {
+	switch e {
+	case KSCAMERA_EXTENDEDPROP_WBPRESET_CLOUDY:
+		return "KSCAMERA_EXTENDEDPROP_WBPRESET_CLOUDY"
+	case KSCAMERA_EXTENDEDPROP_WBPRESET_DAYLIGHT:
+		return "KSCAMERA_EXTENDEDPROP_WBPRESET_DAYLIGHT"
+	case KSCAMERA_EXTENDEDPROP_WBPRESET_FLASH:
+		return "KSCAMERA_EXTENDEDPROP_WBPRESET_FLASH"
+	case KSCAMERA_EXTENDEDPROP_WBPRESET_FLUORESCENT:
+		return "KSCAMERA_EXTENDEDPROP_WBPRESET_FLUORESCENT"
+	case KSCAMERA_EXTENDEDPROP_WBPRESET_TUNGSTEN:
+		return "KSCAMERA_EXTENDEDPROP_WBPRESET_TUNGSTEN"
+	case KSCAMERA_EXTENDEDPROP_WBPRESET_CANDLELIGHT:
+		return "KSCAMERA_EXTENDEDPROP_WBPRESET_CANDLELIGHT"
+	default:
+		return fmt.Sprintf("KSCAMERA_EXTENDEDPROP_WBPRESET(%d)", int32(e))
+	}
+}
+
 type KSCAMERA_EXTENDEDPROP_WHITEBALANCE_MODE int32
 
 const (
 	KSCAMERA_EXTENDEDPROP_WHITEBALANCE_TEMPERATURE KSCAMERA_EXTENDEDPROP_WHITEBALANCE_MODE = 1
 	KSCAMERA_EXTENDEDPROP_WHITEBALANCE_PRESET      KSCAMERA_EXTENDEDPROP_WHITEBALANCE_MODE = 2
 )
+
+// String returns the KSCAMERA_EXTENDEDPROP_WHITEBALANCE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSCAMERA_EXTENDEDPROP_WHITEBALANCE_MODE) String() string {
+	switch e {
+	case KSCAMERA_EXTENDEDPROP_WHITEBALANCE_TEMPERATURE:
+		return "KSCAMERA_EXTENDEDPROP_WHITEBALANCE_TEMPERATURE"
+	case KSCAMERA_EXTENDEDPROP_WHITEBALANCE_PRESET:
+		return "KSCAMERA_EXTENDEDPROP_WHITEBALANCE_PRESET"
+	default:
+		return fmt.Sprintf("KSCAMERA_EXTENDEDPROP_WHITEBALANCE_MODE(%d)", int32(e))
+	}
+}
 
 type KSCAMERA_MetadataId int32
 
@@ -201,6 +549,33 @@ const (
 	MetadataId_Custom_Start               KSCAMERA_MetadataId = -2147483648
 )
 
+// String returns the KSCAMERA_MetadataId constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSCAMERA_MetadataId) String() string {
+	switch e {
+	case MetadataId_Standard_Start:
+		return "MetadataId_Standard_Start"
+	case MetadataId_UsbVideoHeader:
+		return "MetadataId_UsbVideoHeader"
+	case MetadataId_CaptureStats:
+		return "MetadataId_CaptureStats"
+	case MetadataId_CameraExtrinsics:
+		return "MetadataId_CameraExtrinsics"
+	case MetadataId_CameraIntrinsics:
+		return "MetadataId_CameraIntrinsics"
+	case MetadataId_FrameIllumination:
+		return "MetadataId_FrameIllumination"
+	case MetadataId_DigitalWindow:
+		return "MetadataId_DigitalWindow"
+	case MetadataId_BackgroundSegmentationMask:
+		return "MetadataId_BackgroundSegmentationMask"
+	case MetadataId_Custom_Start:
+		return "MetadataId_Custom_Start"
+	default:
+		return fmt.Sprintf("KSCAMERA_MetadataId(%d)", int32(e))
+	}
+}
+
 type KSCAMERA_PERFRAMESETTING_ITEM_TYPE int32
 
 const (
@@ -213,6 +588,29 @@ const (
 	KSCAMERA_PERFRAMESETTING_ITEM_CUSTOM                KSCAMERA_PERFRAMESETTING_ITEM_TYPE = 7
 )
 
+// String returns the KSCAMERA_PERFRAMESETTING_ITEM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSCAMERA_PERFRAMESETTING_ITEM_TYPE) String() string {
+	switch e {
+	case KSCAMERA_PERFRAMESETTING_ITEM_EXPOSURE_TIME:
+		return "KSCAMERA_PERFRAMESETTING_ITEM_EXPOSURE_TIME"
+	case KSCAMERA_PERFRAMESETTING_ITEM_FLASH:
+		return "KSCAMERA_PERFRAMESETTING_ITEM_FLASH"
+	case KSCAMERA_PERFRAMESETTING_ITEM_EXPOSURE_COMPENSATION:
+		return "KSCAMERA_PERFRAMESETTING_ITEM_EXPOSURE_COMPENSATION"
+	case KSCAMERA_PERFRAMESETTING_ITEM_ISO:
+		return "KSCAMERA_PERFRAMESETTING_ITEM_ISO"
+	case KSCAMERA_PERFRAMESETTING_ITEM_FOCUS:
+		return "KSCAMERA_PERFRAMESETTING_ITEM_FOCUS"
+	case KSCAMERA_PERFRAMESETTING_ITEM_PHOTOCONFIRMATION:
+		return "KSCAMERA_PERFRAMESETTING_ITEM_PHOTOCONFIRMATION"
+	case KSCAMERA_PERFRAMESETTING_ITEM_CUSTOM:
+		return "KSCAMERA_PERFRAMESETTING_ITEM_CUSTOM"
+	default:
+		return fmt.Sprintf("KSCAMERA_PERFRAMESETTING_ITEM_TYPE(%d)", int32(e))
+	}
+}
+
 type KSDEGRADE_STANDARD int32
 
 const (
@@ -222,12 +620,42 @@ const (
 	KSDEGRADE_STANDARD_SKIP        KSDEGRADE_STANDARD = 3
 )
 
+// String returns the KSDEGRADE_STANDARD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSDEGRADE_STANDARD) String() string {
+	switch e {
+	case KSDEGRADE_STANDARD_SAMPLE:
+		return "KSDEGRADE_STANDARD_SAMPLE"
+	case KSDEGRADE_STANDARD_QUALITY:
+		return "KSDEGRADE_STANDARD_QUALITY"
+	case KSDEGRADE_STANDARD_COMPUTATION:
+		return "KSDEGRADE_STANDARD_COMPUTATION"
+	case KSDEGRADE_STANDARD_SKIP:
+		return "KSDEGRADE_STANDARD_SKIP"
+	default:
+		return fmt.Sprintf("KSDEGRADE_STANDARD(%d)", int32(e))
+	}
+}
+
 type KSDEVICE_THERMAL_STATE int32
 
 const (
 	KSDEVICE_THERMAL_STATE_LOW  KSDEVICE_THERMAL_STATE = 0
 	KSDEVICE_THERMAL_STATE_HIGH KSDEVICE_THERMAL_STATE = 1
 )
+
+// String returns the KSDEVICE_THERMAL_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSDEVICE_THERMAL_STATE) String() string {
+	switch e {
+	case KSDEVICE_THERMAL_STATE_LOW:
+		return "KSDEVICE_THERMAL_STATE_LOW"
+	case KSDEVICE_THERMAL_STATE_HIGH:
+		return "KSDEVICE_THERMAL_STATE_HIGH"
+	default:
+		return fmt.Sprintf("KSDEVICE_THERMAL_STATE(%d)", int32(e))
+	}
+}
 
 type KSDS3D_HRTF_COEFF_FORMAT int32
 
@@ -237,6 +665,21 @@ const (
 	KSDS3D_COEFF_COUNT KSDS3D_HRTF_COEFF_FORMAT = 2
 )
 
+// String returns the KSDS3D_HRTF_COEFF_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSDS3D_HRTF_COEFF_FORMAT) String() string {
+	switch e {
+	case FLOAT_COEFF:
+		return "FLOAT_COEFF"
+	case SHORT_COEFF:
+		return "SHORT_COEFF"
+	case KSDS3D_COEFF_COUNT:
+		return "KSDS3D_COEFF_COUNT"
+	default:
+		return fmt.Sprintf("KSDS3D_HRTF_COEFF_FORMAT(%d)", int32(e))
+	}
+}
+
 type KSDS3D_HRTF_FILTER_METHOD int32
 
 const (
@@ -244,6 +687,21 @@ const (
 	CASCADE_FORM               KSDS3D_HRTF_FILTER_METHOD = 1
 	KSDS3D_FILTER_METHOD_COUNT KSDS3D_HRTF_FILTER_METHOD = 2
 )
+
+// String returns the KSDS3D_HRTF_FILTER_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSDS3D_HRTF_FILTER_METHOD) String() string {
+	switch e {
+	case DIRECT_FORM:
+		return "DIRECT_FORM"
+	case CASCADE_FORM:
+		return "CASCADE_FORM"
+	case KSDS3D_FILTER_METHOD_COUNT:
+		return "KSDS3D_FILTER_METHOD_COUNT"
+	default:
+		return fmt.Sprintf("KSDS3D_HRTF_FILTER_METHOD(%d)", int32(e))
+	}
+}
 
 type KSDS3D_HRTF_FILTER_QUALITY int32
 
@@ -253,17 +711,54 @@ const (
 	KSDS3D_FILTER_QUALITY_COUNT KSDS3D_HRTF_FILTER_QUALITY = 2
 )
 
+// String returns the KSDS3D_HRTF_FILTER_QUALITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSDS3D_HRTF_FILTER_QUALITY) String() string {
+	switch e {
+	case FULL_FILTER:
+		return "FULL_FILTER"
+	case LIGHT_FILTER:
+		return "LIGHT_FILTER"
+	case KSDS3D_FILTER_QUALITY_COUNT:
+		return "KSDS3D_FILTER_QUALITY_COUNT"
+	default:
+		return fmt.Sprintf("KSDS3D_HRTF_FILTER_QUALITY(%d)", int32(e))
+	}
+}
+
 type KSDS3D_HRTF_FILTER_VERSION int32
 
 const (
 	DS3D_HRTF_VERSION_1 KSDS3D_HRTF_FILTER_VERSION = 0
 )
 
+// String returns the KSDS3D_HRTF_FILTER_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSDS3D_HRTF_FILTER_VERSION) String() string {
+	switch e {
+	case DS3D_HRTF_VERSION_1:
+		return "DS3D_HRTF_VERSION_1"
+	default:
+		return fmt.Sprintf("KSDS3D_HRTF_FILTER_VERSION(%d)", int32(e))
+	}
+}
+
 type KSEVENT_AUDIO_CONTROL_CHANGE int32
 
 const (
 	KSEVENT_CONTROL_CHANGE KSEVENT_AUDIO_CONTROL_CHANGE = 0
 )
+
+// String returns the KSEVENT_AUDIO_CONTROL_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_AUDIO_CONTROL_CHANGE) String() string {
+	switch e {
+	case KSEVENT_CONTROL_CHANGE:
+		return "KSEVENT_CONTROL_CHANGE"
+	default:
+		return fmt.Sprintf("KSEVENT_AUDIO_CONTROL_CHANGE(%d)", int32(e))
+	}
+}
 
 type KSEVENT_CAMERACONTROL int32
 
@@ -272,11 +767,35 @@ const (
 	KSEVENT_CAMERACONTROL_ZOOM  KSEVENT_CAMERACONTROL = 1
 )
 
+// String returns the KSEVENT_CAMERACONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_CAMERACONTROL) String() string {
+	switch e {
+	case KSEVENT_CAMERACONTROL_FOCUS:
+		return "KSEVENT_CAMERACONTROL_FOCUS"
+	case KSEVENT_CAMERACONTROL_ZOOM:
+		return "KSEVENT_CAMERACONTROL_ZOOM"
+	default:
+		return fmt.Sprintf("KSEVENT_CAMERACONTROL(%d)", int32(e))
+	}
+}
+
 type KSEVENT_CAMERAEVENT int32
 
 const (
 	KSEVENT_PHOTO_SAMPLE_SCANNED KSEVENT_CAMERAEVENT = 0
 )
+
+// String returns the KSEVENT_CAMERAEVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_CAMERAEVENT) String() string {
+	switch e {
+	case KSEVENT_PHOTO_SAMPLE_SCANNED:
+		return "KSEVENT_PHOTO_SAMPLE_SCANNED"
+	default:
+		return fmt.Sprintf("KSEVENT_CAMERAEVENT(%d)", int32(e))
+	}
+}
 
 type KSEVENT_CLOCK_POSITION int32
 
@@ -284,6 +803,19 @@ const (
 	KSEVENT_CLOCK_INTERVAL_MARK KSEVENT_CLOCK_POSITION = 0
 	KSEVENT_CLOCK_POSITION_MARK KSEVENT_CLOCK_POSITION = 1
 )
+
+// String returns the KSEVENT_CLOCK_POSITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_CLOCK_POSITION) String() string {
+	switch e {
+	case KSEVENT_CLOCK_INTERVAL_MARK:
+		return "KSEVENT_CLOCK_INTERVAL_MARK"
+	case KSEVENT_CLOCK_POSITION_MARK:
+		return "KSEVENT_CLOCK_POSITION_MARK"
+	default:
+		return fmt.Sprintf("KSEVENT_CLOCK_POSITION(%d)", int32(e))
+	}
+}
 
 type KSEVENT_CONNECTION int32
 
@@ -295,11 +827,41 @@ const (
 	KSEVENT_CONNECTION_ENDOFSTREAM       KSEVENT_CONNECTION = 4
 )
 
+// String returns the KSEVENT_CONNECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_CONNECTION) String() string {
+	switch e {
+	case KSEVENT_CONNECTION_POSITIONUPDATE:
+		return "KSEVENT_CONNECTION_POSITIONUPDATE"
+	case KSEVENT_CONNECTION_DATADISCONTINUITY:
+		return "KSEVENT_CONNECTION_DATADISCONTINUITY"
+	case KSEVENT_CONNECTION_TIMEDISCONTINUITY:
+		return "KSEVENT_CONNECTION_TIMEDISCONTINUITY"
+	case KSEVENT_CONNECTION_PRIORITY:
+		return "KSEVENT_CONNECTION_PRIORITY"
+	case KSEVENT_CONNECTION_ENDOFSTREAM:
+		return "KSEVENT_CONNECTION_ENDOFSTREAM"
+	default:
+		return fmt.Sprintf("KSEVENT_CONNECTION(%d)", int32(e))
+	}
+}
+
 type KSEVENT_CROSSBAR int32
 
 const (
 	KSEVENT_CROSSBAR_CHANGED KSEVENT_CROSSBAR = 0
 )
+
+// String returns the KSEVENT_CROSSBAR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_CROSSBAR) String() string {
+	switch e {
+	case KSEVENT_CROSSBAR_CHANGED:
+		return "KSEVENT_CROSSBAR_CHANGED"
+	default:
+		return fmt.Sprintf("KSEVENT_CROSSBAR(%d)", int32(e))
+	}
+}
 
 type KSEVENT_DEVCMD int32
 
@@ -314,6 +876,31 @@ const (
 	KSEVENT_EXTDEV_NOTIFY_MEDIUM_CHANGE          KSEVENT_DEVCMD = 7
 )
 
+// String returns the KSEVENT_DEVCMD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_DEVCMD) String() string {
+	switch e {
+	case KSEVENT_EXTDEV_COMMAND_NOTIFY_INTERIM_READY:
+		return "KSEVENT_EXTDEV_COMMAND_NOTIFY_INTERIM_READY"
+	case KSEVENT_EXTDEV_COMMAND_CONTROL_INTERIM_READY:
+		return "KSEVENT_EXTDEV_COMMAND_CONTROL_INTERIM_READY"
+	case KSEVENT_EXTDEV_COMMAND_BUSRESET:
+		return "KSEVENT_EXTDEV_COMMAND_BUSRESET"
+	case KSEVENT_EXTDEV_TIMECODE_UPDATE:
+		return "KSEVENT_EXTDEV_TIMECODE_UPDATE"
+	case KSEVENT_EXTDEV_OPERATION_MODE_UPDATE:
+		return "KSEVENT_EXTDEV_OPERATION_MODE_UPDATE"
+	case KSEVENT_EXTDEV_TRANSPORT_STATE_UPDATE:
+		return "KSEVENT_EXTDEV_TRANSPORT_STATE_UPDATE"
+	case KSEVENT_EXTDEV_NOTIFY_REMOVAL:
+		return "KSEVENT_EXTDEV_NOTIFY_REMOVAL"
+	case KSEVENT_EXTDEV_NOTIFY_MEDIUM_CHANGE:
+		return "KSEVENT_EXTDEV_NOTIFY_MEDIUM_CHANGE"
+	default:
+		return fmt.Sprintf("KSEVENT_DEVCMD(%d)", int32(e))
+	}
+}
+
 type KSEVENT_DEVICE int32
 
 const (
@@ -323,17 +910,56 @@ const (
 	KSEVENT_DEVICE_THERMAL_LOW  KSEVENT_DEVICE = 3
 )
 
+// String returns the KSEVENT_DEVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_DEVICE) String() string {
+	switch e {
+	case KSEVENT_DEVICE_LOST:
+		return "KSEVENT_DEVICE_LOST"
+	case KSEVENT_DEVICE_PREEMPTED:
+		return "KSEVENT_DEVICE_PREEMPTED"
+	case KSEVENT_DEVICE_THERMAL_HIGH:
+		return "KSEVENT_DEVICE_THERMAL_HIGH"
+	case KSEVENT_DEVICE_THERMAL_LOW:
+		return "KSEVENT_DEVICE_THERMAL_LOW"
+	default:
+		return fmt.Sprintf("KSEVENT_DEVICE(%d)", int32(e))
+	}
+}
+
 type KSEVENT_DYNAMICFORMATCHANGE int32
 
 const (
 	KSEVENT_DYNAMIC_FORMAT_CHANGE KSEVENT_DYNAMICFORMATCHANGE = 0
 )
 
+// String returns the KSEVENT_DYNAMICFORMATCHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_DYNAMICFORMATCHANGE) String() string {
+	switch e {
+	case KSEVENT_DYNAMIC_FORMAT_CHANGE:
+		return "KSEVENT_DYNAMIC_FORMAT_CHANGE"
+	default:
+		return fmt.Sprintf("KSEVENT_DYNAMICFORMATCHANGE(%d)", int32(e))
+	}
+}
+
 type KSEVENT_LOOPEDSTREAMING int32
 
 const (
 	KSEVENT_LOOPEDSTREAMING_POSITION KSEVENT_LOOPEDSTREAMING = 0
 )
+
+// String returns the KSEVENT_LOOPEDSTREAMING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_LOOPEDSTREAMING) String() string {
+	switch e {
+	case KSEVENT_LOOPEDSTREAMING_POSITION:
+		return "KSEVENT_LOOPEDSTREAMING_POSITION"
+	default:
+		return fmt.Sprintf("KSEVENT_LOOPEDSTREAMING(%d)", int32(e))
+	}
+}
 
 type KSEVENT_PINCAPS_CHANGENOTIFICATIONS int32
 
@@ -343,11 +969,37 @@ const (
 	KSEVENT_PINCAPS_INVALIDATECLIENTS KSEVENT_PINCAPS_CHANGENOTIFICATIONS = 2
 )
 
+// String returns the KSEVENT_PINCAPS_CHANGENOTIFICATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_PINCAPS_CHANGENOTIFICATIONS) String() string {
+	switch e {
+	case KSEVENT_PINCAPS_FORMATCHANGE:
+		return "KSEVENT_PINCAPS_FORMATCHANGE"
+	case KSEVENT_PINCAPS_JACKINFOCHANGE:
+		return "KSEVENT_PINCAPS_JACKINFOCHANGE"
+	case KSEVENT_PINCAPS_INVALIDATECLIENTS:
+		return "KSEVENT_PINCAPS_INVALIDATECLIENTS"
+	default:
+		return fmt.Sprintf("KSEVENT_PINCAPS_CHANGENOTIFICATIONS(%d)", int32(e))
+	}
+}
+
 type KSEVENT_SOUNDDETECTOR int32
 
 const (
 	KSEVENT_SOUNDDETECTOR_MATCHDETECTED KSEVENT_SOUNDDETECTOR = 1
 )
+
+// String returns the KSEVENT_SOUNDDETECTOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_SOUNDDETECTOR) String() string {
+	switch e {
+	case KSEVENT_SOUNDDETECTOR_MATCHDETECTED:
+		return "KSEVENT_SOUNDDETECTOR_MATCHDETECTED"
+	default:
+		return fmt.Sprintf("KSEVENT_SOUNDDETECTOR(%d)", int32(e))
+	}
+}
 
 type KSEVENT_STREAMALLOCATOR int32
 
@@ -356,11 +1008,35 @@ const (
 	KSEVENT_STREAMALLOCATOR_FREEFRAME          KSEVENT_STREAMALLOCATOR = 1
 )
 
+// String returns the KSEVENT_STREAMALLOCATOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_STREAMALLOCATOR) String() string {
+	switch e {
+	case KSEVENT_STREAMALLOCATOR_INTERNAL_FREEFRAME:
+		return "KSEVENT_STREAMALLOCATOR_INTERNAL_FREEFRAME"
+	case KSEVENT_STREAMALLOCATOR_FREEFRAME:
+		return "KSEVENT_STREAMALLOCATOR_FREEFRAME"
+	default:
+		return fmt.Sprintf("KSEVENT_STREAMALLOCATOR(%d)", int32(e))
+	}
+}
+
 type KSEVENT_TELEPHONY int32
 
 const (
 	KSEVENT_TELEPHONY_ENDPOINTPAIRS_CHANGED KSEVENT_TELEPHONY = 0
 )
+
+// String returns the KSEVENT_TELEPHONY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_TELEPHONY) String() string {
+	switch e {
+	case KSEVENT_TELEPHONY_ENDPOINTPAIRS_CHANGED:
+		return "KSEVENT_TELEPHONY_ENDPOINTPAIRS_CHANGED"
+	default:
+		return fmt.Sprintf("KSEVENT_TELEPHONY(%d)", int32(e))
+	}
+}
 
 type KSEVENT_TUNER int32
 
@@ -369,11 +1045,35 @@ const (
 	KSEVENT_TUNER_INITIATE_SCAN KSEVENT_TUNER = 1
 )
 
+// String returns the KSEVENT_TUNER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_TUNER) String() string {
+	switch e {
+	case KSEVENT_TUNER_CHANGED:
+		return "KSEVENT_TUNER_CHANGED"
+	case KSEVENT_TUNER_INITIATE_SCAN:
+		return "KSEVENT_TUNER_INITIATE_SCAN"
+	default:
+		return fmt.Sprintf("KSEVENT_TUNER(%d)", int32(e))
+	}
+}
+
 type KSEVENT_TVAUDIO int32
 
 const (
 	KSEVENT_TVAUDIO_CHANGED KSEVENT_TVAUDIO = 0
 )
+
+// String returns the KSEVENT_TVAUDIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_TVAUDIO) String() string {
+	switch e {
+	case KSEVENT_TVAUDIO_CHANGED:
+		return "KSEVENT_TVAUDIO_CHANGED"
+	default:
+		return fmt.Sprintf("KSEVENT_TVAUDIO(%d)", int32(e))
+	}
+}
 
 type KSEVENT_VIDCAPTOSTI int32
 
@@ -383,11 +1083,37 @@ const (
 	KSEVENT_VIDCAP_SEARCH           KSEVENT_VIDCAPTOSTI = 2
 )
 
+// String returns the KSEVENT_VIDCAPTOSTI constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_VIDCAPTOSTI) String() string {
+	switch e {
+	case KSEVENT_VIDCAPTOSTI_EXT_TRIGGER:
+		return "KSEVENT_VIDCAPTOSTI_EXT_TRIGGER"
+	case KSEVENT_VIDCAP_AUTO_UPDATE:
+		return "KSEVENT_VIDCAP_AUTO_UPDATE"
+	case KSEVENT_VIDCAP_SEARCH:
+		return "KSEVENT_VIDCAP_SEARCH"
+	default:
+		return fmt.Sprintf("KSEVENT_VIDCAPTOSTI(%d)", int32(e))
+	}
+}
+
 type KSEVENT_VIDEODECODER int32
 
 const (
 	KSEVENT_VIDEODECODER_CHANGED KSEVENT_VIDEODECODER = 0
 )
+
+// String returns the KSEVENT_VIDEODECODER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_VIDEODECODER) String() string {
+	switch e {
+	case KSEVENT_VIDEODECODER_CHANGED:
+		return "KSEVENT_VIDEODECODER_CHANGED"
+	default:
+		return fmt.Sprintf("KSEVENT_VIDEODECODER(%d)", int32(e))
+	}
+}
 
 type KSEVENT_VOLUMELIMIT int32
 
@@ -395,11 +1121,33 @@ const (
 	KSEVENT_VOLUMELIMIT_CHANGED KSEVENT_VOLUMELIMIT = 0
 )
 
+// String returns the KSEVENT_VOLUMELIMIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_VOLUMELIMIT) String() string {
+	switch e {
+	case KSEVENT_VOLUMELIMIT_CHANGED:
+		return "KSEVENT_VOLUMELIMIT_CHANGED"
+	default:
+		return fmt.Sprintf("KSEVENT_VOLUMELIMIT(%d)", int32(e))
+	}
+}
+
 type KSEVENT_VPNOTIFY int32
 
 const (
 	KSEVENT_VPNOTIFY_FORMATCHANGE KSEVENT_VPNOTIFY = 0
 )
+
+// String returns the KSEVENT_VPNOTIFY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_VPNOTIFY) String() string {
+	switch e {
+	case KSEVENT_VPNOTIFY_FORMATCHANGE:
+		return "KSEVENT_VPNOTIFY_FORMATCHANGE"
+	default:
+		return fmt.Sprintf("KSEVENT_VPNOTIFY(%d)", int32(e))
+	}
+}
 
 type KSEVENT_VPVBINOTIFY int32
 
@@ -407,11 +1155,33 @@ const (
 	KSEVENT_VPVBINOTIFY_FORMATCHANGE KSEVENT_VPVBINOTIFY = 0
 )
 
+// String returns the KSEVENT_VPVBINOTIFY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEVENT_VPVBINOTIFY) String() string {
+	switch e {
+	case KSEVENT_VPVBINOTIFY_FORMATCHANGE:
+		return "KSEVENT_VPVBINOTIFY_FORMATCHANGE"
+	default:
+		return fmt.Sprintf("KSEVENT_VPVBINOTIFY(%d)", int32(e))
+	}
+}
+
 type KSINTERFACE_FILEIO int32
 
 const (
 	KSINTERFACE_FILEIO_STREAMING KSINTERFACE_FILEIO = 0
 )
+
+// String returns the KSINTERFACE_FILEIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSINTERFACE_FILEIO) String() string {
+	switch e {
+	case KSINTERFACE_FILEIO_STREAMING:
+		return "KSINTERFACE_FILEIO_STREAMING"
+	default:
+		return fmt.Sprintf("KSINTERFACE_FILEIO(%d)", int32(e))
+	}
+}
 
 type KSINTERFACE_MEDIA int32
 
@@ -421,6 +1191,21 @@ const (
 	KSINTERFACE_MEDIA_WAVE_QUEUED   KSINTERFACE_MEDIA = 2
 )
 
+// String returns the KSINTERFACE_MEDIA constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSINTERFACE_MEDIA) String() string {
+	switch e {
+	case KSINTERFACE_MEDIA_MUSIC:
+		return "KSINTERFACE_MEDIA_MUSIC"
+	case KSINTERFACE_MEDIA_WAVE_BUFFERED:
+		return "KSINTERFACE_MEDIA_WAVE_BUFFERED"
+	case KSINTERFACE_MEDIA_WAVE_QUEUED:
+		return "KSINTERFACE_MEDIA_WAVE_QUEUED"
+	default:
+		return fmt.Sprintf("KSINTERFACE_MEDIA(%d)", int32(e))
+	}
+}
+
 type KSINTERFACE_STANDARD int32
 
 const (
@@ -429,12 +1214,40 @@ const (
 	KSINTERFACE_STANDARD_CONTROL          KSINTERFACE_STANDARD = 2
 )
 
+// String returns the KSINTERFACE_STANDARD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSINTERFACE_STANDARD) String() string {
+	switch e {
+	case KSINTERFACE_STANDARD_STREAMING:
+		return "KSINTERFACE_STANDARD_STREAMING"
+	case KSINTERFACE_STANDARD_LOOPED_STREAMING:
+		return "KSINTERFACE_STANDARD_LOOPED_STREAMING"
+	case KSINTERFACE_STANDARD_CONTROL:
+		return "KSINTERFACE_STANDARD_CONTROL"
+	default:
+		return fmt.Sprintf("KSINTERFACE_STANDARD(%d)", int32(e))
+	}
+}
+
 type KSIOOPERATION int32
 
 const (
 	KsIoOperation_Write KSIOOPERATION = 0
 	KsIoOperation_Read  KSIOOPERATION = 1
 )
+
+// String returns the KSIOOPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSIOOPERATION) String() string {
+	switch e {
+	case KsIoOperation_Write:
+		return "KsIoOperation_Write"
+	case KsIoOperation_Read:
+		return "KsIoOperation_Read"
+	default:
+		return fmt.Sprintf("KSIOOPERATION(%d)", int32(e))
+	}
+}
 
 // KSJACK_SINK_CONNECTIONTYPE: https://learn.microsoft.com/windows/win32/api/devicetopology/ne-devicetopology-ksjack_sink_connectiontype
 type KSJACK_SINK_CONNECTIONTYPE int32
@@ -444,6 +1257,19 @@ const (
 	KSJACK_SINK_CONNECTIONTYPE_DISPLAYPORT KSJACK_SINK_CONNECTIONTYPE = 1
 )
 
+// String returns the KSJACK_SINK_CONNECTIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSJACK_SINK_CONNECTIONTYPE) String() string {
+	switch e {
+	case KSJACK_SINK_CONNECTIONTYPE_HDMI:
+		return "KSJACK_SINK_CONNECTIONTYPE_HDMI"
+	case KSJACK_SINK_CONNECTIONTYPE_DISPLAYPORT:
+		return "KSJACK_SINK_CONNECTIONTYPE_DISPLAYPORT"
+	default:
+		return fmt.Sprintf("KSJACK_SINK_CONNECTIONTYPE(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_STREAMALLOCATOR int32
 
 const (
@@ -451,12 +1277,38 @@ const (
 	KSMETHOD_STREAMALLOCATOR_FREE  KSMETHOD_STREAMALLOCATOR = 1
 )
 
+// String returns the KSMETHOD_STREAMALLOCATOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_STREAMALLOCATOR) String() string {
+	switch e {
+	case KSMETHOD_STREAMALLOCATOR_ALLOC:
+		return "KSMETHOD_STREAMALLOCATOR_ALLOC"
+	case KSMETHOD_STREAMALLOCATOR_FREE:
+		return "KSMETHOD_STREAMALLOCATOR_FREE"
+	default:
+		return fmt.Sprintf("KSMETHOD_STREAMALLOCATOR(%d)", int32(e))
+	}
+}
+
 type KSMETHOD_STREAMIO int32
 
 const (
 	KSMETHOD_STREAMIO_READ  KSMETHOD_STREAMIO = 0
 	KSMETHOD_STREAMIO_WRITE KSMETHOD_STREAMIO = 1
 )
+
+// String returns the KSMETHOD_STREAMIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_STREAMIO) String() string {
+	switch e {
+	case KSMETHOD_STREAMIO_READ:
+		return "KSMETHOD_STREAMIO_READ"
+	case KSMETHOD_STREAMIO_WRITE:
+		return "KSMETHOD_STREAMIO_WRITE"
+	default:
+		return fmt.Sprintf("KSMETHOD_STREAMIO(%d)", int32(e))
+	}
+}
 
 type KSMETHOD_WAVETABLE int32
 
@@ -467,6 +1319,23 @@ const (
 	KSMETHOD_WAVETABLE_WAVE_WRITE KSMETHOD_WAVETABLE = 3
 )
 
+// String returns the KSMETHOD_WAVETABLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMETHOD_WAVETABLE) String() string {
+	switch e {
+	case KSMETHOD_WAVETABLE_WAVE_ALLOC:
+		return "KSMETHOD_WAVETABLE_WAVE_ALLOC"
+	case KSMETHOD_WAVETABLE_WAVE_FREE:
+		return "KSMETHOD_WAVETABLE_WAVE_FREE"
+	case KSMETHOD_WAVETABLE_WAVE_FIND:
+		return "KSMETHOD_WAVETABLE_WAVE_FIND"
+	case KSMETHOD_WAVETABLE_WAVE_WRITE:
+		return "KSMETHOD_WAVETABLE_WAVE_WRITE"
+	default:
+		return fmt.Sprintf("KSMETHOD_WAVETABLE(%d)", int32(e))
+	}
+}
+
 type KSMICARRAY_MICARRAYTYPE int32
 
 const (
@@ -474,6 +1343,21 @@ const (
 	KSMICARRAY_MICARRAYTYPE_PLANAR KSMICARRAY_MICARRAYTYPE = 1
 	KSMICARRAY_MICARRAYTYPE_3D     KSMICARRAY_MICARRAYTYPE = 2
 )
+
+// String returns the KSMICARRAY_MICARRAYTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMICARRAY_MICARRAYTYPE) String() string {
+	switch e {
+	case KSMICARRAY_MICARRAYTYPE_LINEAR:
+		return "KSMICARRAY_MICARRAYTYPE_LINEAR"
+	case KSMICARRAY_MICARRAYTYPE_PLANAR:
+		return "KSMICARRAY_MICARRAYTYPE_PLANAR"
+	case KSMICARRAY_MICARRAYTYPE_3D:
+		return "KSMICARRAY_MICARRAYTYPE_3D"
+	default:
+		return fmt.Sprintf("KSMICARRAY_MICARRAYTYPE(%d)", int32(e))
+	}
+}
 
 type KSMICARRAY_MICTYPE int32
 
@@ -487,12 +1371,48 @@ const (
 	KSMICARRAY_MICTYPE_VENDORDEFINED   KSMICARRAY_MICTYPE = 15
 )
 
+// String returns the KSMICARRAY_MICTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSMICARRAY_MICTYPE) String() string {
+	switch e {
+	case KSMICARRAY_MICTYPE_OMNIDIRECTIONAL:
+		return "KSMICARRAY_MICTYPE_OMNIDIRECTIONAL"
+	case KSMICARRAY_MICTYPE_SUBCARDIOID:
+		return "KSMICARRAY_MICTYPE_SUBCARDIOID"
+	case KSMICARRAY_MICTYPE_CARDIOID:
+		return "KSMICARRAY_MICTYPE_CARDIOID"
+	case KSMICARRAY_MICTYPE_SUPERCARDIOID:
+		return "KSMICARRAY_MICTYPE_SUPERCARDIOID"
+	case KSMICARRAY_MICTYPE_HYPERCARDIOID:
+		return "KSMICARRAY_MICTYPE_HYPERCARDIOID"
+	case KSMICARRAY_MICTYPE_8SHAPED:
+		return "KSMICARRAY_MICTYPE_8SHAPED"
+	case KSMICARRAY_MICTYPE_VENDORDEFINED:
+		return "KSMICARRAY_MICTYPE_VENDORDEFINED"
+	default:
+		return fmt.Sprintf("KSMICARRAY_MICTYPE(%d)", int32(e))
+	}
+}
+
 type KSPEEKOPERATION int32
 
 const (
 	KsPeekOperation_PeekOnly KSPEEKOPERATION = 0
 	KsPeekOperation_AddRef   KSPEEKOPERATION = 1
 )
+
+// String returns the KSPEEKOPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPEEKOPERATION) String() string {
+	switch e {
+	case KsPeekOperation_PeekOnly:
+		return "KsPeekOperation_PeekOnly"
+	case KsPeekOperation_AddRef:
+		return "KsPeekOperation_AddRef"
+	default:
+		return fmt.Sprintf("KSPEEKOPERATION(%d)", int32(e))
+	}
+}
 
 type KSPIN_COMMUNICATION int32
 
@@ -504,12 +1424,44 @@ const (
 	KSPIN_COMMUNICATION_BRIDGE KSPIN_COMMUNICATION = 4
 )
 
+// String returns the KSPIN_COMMUNICATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPIN_COMMUNICATION) String() string {
+	switch e {
+	case KSPIN_COMMUNICATION_NONE:
+		return "KSPIN_COMMUNICATION_NONE"
+	case KSPIN_COMMUNICATION_SINK:
+		return "KSPIN_COMMUNICATION_SINK"
+	case KSPIN_COMMUNICATION_SOURCE:
+		return "KSPIN_COMMUNICATION_SOURCE"
+	case KSPIN_COMMUNICATION_BOTH:
+		return "KSPIN_COMMUNICATION_BOTH"
+	case KSPIN_COMMUNICATION_BRIDGE:
+		return "KSPIN_COMMUNICATION_BRIDGE"
+	default:
+		return fmt.Sprintf("KSPIN_COMMUNICATION(%d)", int32(e))
+	}
+}
+
 type KSPIN_DATAFLOW int32
 
 const (
 	KSPIN_DATAFLOW_IN  KSPIN_DATAFLOW = 1
 	KSPIN_DATAFLOW_OUT KSPIN_DATAFLOW = 2
 )
+
+// String returns the KSPIN_DATAFLOW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPIN_DATAFLOW) String() string {
+	switch e {
+	case KSPIN_DATAFLOW_IN:
+		return "KSPIN_DATAFLOW_IN"
+	case KSPIN_DATAFLOW_OUT:
+		return "KSPIN_DATAFLOW_OUT"
+	default:
+		return fmt.Sprintf("KSPIN_DATAFLOW(%d)", int32(e))
+	}
+}
 
 type KSPIN_MDL_CACHING_EVENT int32
 
@@ -520,11 +1472,39 @@ const (
 	KSPIN_MDL_CACHING_NOTIFY_ADDSAMPLE       KSPIN_MDL_CACHING_EVENT = 3
 )
 
+// String returns the KSPIN_MDL_CACHING_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPIN_MDL_CACHING_EVENT) String() string {
+	switch e {
+	case KSPIN_MDL_CACHING_NOTIFY_CLEANUP:
+		return "KSPIN_MDL_CACHING_NOTIFY_CLEANUP"
+	case KSPIN_MDL_CACHING_NOTIFY_CLEANALL_WAIT:
+		return "KSPIN_MDL_CACHING_NOTIFY_CLEANALL_WAIT"
+	case KSPIN_MDL_CACHING_NOTIFY_CLEANALL_NOWAIT:
+		return "KSPIN_MDL_CACHING_NOTIFY_CLEANALL_NOWAIT"
+	case KSPIN_MDL_CACHING_NOTIFY_ADDSAMPLE:
+		return "KSPIN_MDL_CACHING_NOTIFY_ADDSAMPLE"
+	default:
+		return fmt.Sprintf("KSPIN_MDL_CACHING_EVENT(%d)", int32(e))
+	}
+}
+
 type KSPPROPERTY_ALLOCATOR_MDLCACHING int32
 
 const (
 	KSPROPERTY_ALLOCATOR_CLEANUP_CACHEDMDLPAGES KSPPROPERTY_ALLOCATOR_MDLCACHING = 1
 )
+
+// String returns the KSPPROPERTY_ALLOCATOR_MDLCACHING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPPROPERTY_ALLOCATOR_MDLCACHING) String() string {
+	switch e {
+	case KSPROPERTY_ALLOCATOR_CLEANUP_CACHEDMDLPAGES:
+		return "KSPROPERTY_ALLOCATOR_CLEANUP_CACHEDMDLPAGES"
+	default:
+		return fmt.Sprintf("KSPPROPERTY_ALLOCATOR_MDLCACHING(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_AC3 int32
 
@@ -538,6 +1518,29 @@ const (
 	KSPROPERTY_AC3_ROOM_TYPE         KSPROPERTY_AC3 = 7
 )
 
+// String returns the KSPROPERTY_AC3 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_AC3) String() string {
+	switch e {
+	case KSPROPERTY_AC3_ERROR_CONCEALMENT:
+		return "KSPROPERTY_AC3_ERROR_CONCEALMENT"
+	case KSPROPERTY_AC3_ALTERNATE_AUDIO:
+		return "KSPROPERTY_AC3_ALTERNATE_AUDIO"
+	case KSPROPERTY_AC3_DOWNMIX:
+		return "KSPROPERTY_AC3_DOWNMIX"
+	case KSPROPERTY_AC3_BIT_STREAM_MODE:
+		return "KSPROPERTY_AC3_BIT_STREAM_MODE"
+	case KSPROPERTY_AC3_DIALOGUE_LEVEL:
+		return "KSPROPERTY_AC3_DIALOGUE_LEVEL"
+	case KSPROPERTY_AC3_LANGUAGE_CODE:
+		return "KSPROPERTY_AC3_LANGUAGE_CODE"
+	case KSPROPERTY_AC3_ROOM_TYPE:
+		return "KSPROPERTY_AC3_ROOM_TYPE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_AC3(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_ALLOCATOR_CONTROL int32
 
 const (
@@ -547,12 +1550,42 @@ const (
 	KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_INTERLEAVE KSPROPERTY_ALLOCATOR_CONTROL = 3
 )
 
+// String returns the KSPROPERTY_ALLOCATOR_CONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_ALLOCATOR_CONTROL) String() string {
+	switch e {
+	case KSPROPERTY_ALLOCATOR_CONTROL_HONOR_COUNT:
+		return "KSPROPERTY_ALLOCATOR_CONTROL_HONOR_COUNT"
+	case KSPROPERTY_ALLOCATOR_CONTROL_SURFACE_SIZE:
+		return "KSPROPERTY_ALLOCATOR_CONTROL_SURFACE_SIZE"
+	case KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_CAPS:
+		return "KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_CAPS"
+	case KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_INTERLEAVE:
+		return "KSPROPERTY_ALLOCATOR_CONTROL_CAPTURE_INTERLEAVE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_ALLOCATOR_CONTROL(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_AUDDECOUT int32
 
 const (
 	KSPROPERTY_AUDDECOUT_MODES    KSPROPERTY_AUDDECOUT = 0
 	KSPROPERTY_AUDDECOUT_CUR_MODE KSPROPERTY_AUDDECOUT = 1
 )
+
+// String returns the KSPROPERTY_AUDDECOUT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_AUDDECOUT) String() string {
+	switch e {
+	case KSPROPERTY_AUDDECOUT_MODES:
+		return "KSPROPERTY_AUDDECOUT_MODES"
+	case KSPROPERTY_AUDDECOUT_CUR_MODE:
+		return "KSPROPERTY_AUDDECOUT_CUR_MODE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_AUDDECOUT(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_AUDIO int32
 
@@ -619,6 +1652,135 @@ const (
 	KSPROPERTY_AUDIO_MIC_SENSITIVITY2                         KSPROPERTY_AUDIO = 60
 )
 
+// String returns the KSPROPERTY_AUDIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_AUDIO) String() string {
+	switch e {
+	case KSPROPERTY_AUDIO_LATENCY:
+		return "KSPROPERTY_AUDIO_LATENCY"
+	case KSPROPERTY_AUDIO_COPY_PROTECTION:
+		return "KSPROPERTY_AUDIO_COPY_PROTECTION"
+	case KSPROPERTY_AUDIO_CHANNEL_CONFIG:
+		return "KSPROPERTY_AUDIO_CHANNEL_CONFIG"
+	case KSPROPERTY_AUDIO_VOLUMELEVEL:
+		return "KSPROPERTY_AUDIO_VOLUMELEVEL"
+	case KSPROPERTY_AUDIO_POSITION:
+		return "KSPROPERTY_AUDIO_POSITION"
+	case KSPROPERTY_AUDIO_DYNAMIC_RANGE:
+		return "KSPROPERTY_AUDIO_DYNAMIC_RANGE"
+	case KSPROPERTY_AUDIO_QUALITY:
+		return "KSPROPERTY_AUDIO_QUALITY"
+	case KSPROPERTY_AUDIO_SAMPLING_RATE:
+		return "KSPROPERTY_AUDIO_SAMPLING_RATE"
+	case KSPROPERTY_AUDIO_DYNAMIC_SAMPLING_RATE:
+		return "KSPROPERTY_AUDIO_DYNAMIC_SAMPLING_RATE"
+	case KSPROPERTY_AUDIO_MIX_LEVEL_TABLE:
+		return "KSPROPERTY_AUDIO_MIX_LEVEL_TABLE"
+	case KSPROPERTY_AUDIO_MIX_LEVEL_CAPS:
+		return "KSPROPERTY_AUDIO_MIX_LEVEL_CAPS"
+	case KSPROPERTY_AUDIO_MUX_SOURCE:
+		return "KSPROPERTY_AUDIO_MUX_SOURCE"
+	case KSPROPERTY_AUDIO_MUTE:
+		return "KSPROPERTY_AUDIO_MUTE"
+	case KSPROPERTY_AUDIO_BASS:
+		return "KSPROPERTY_AUDIO_BASS"
+	case KSPROPERTY_AUDIO_MID:
+		return "KSPROPERTY_AUDIO_MID"
+	case KSPROPERTY_AUDIO_TREBLE:
+		return "KSPROPERTY_AUDIO_TREBLE"
+	case KSPROPERTY_AUDIO_BASS_BOOST:
+		return "KSPROPERTY_AUDIO_BASS_BOOST"
+	case KSPROPERTY_AUDIO_EQ_LEVEL:
+		return "KSPROPERTY_AUDIO_EQ_LEVEL"
+	case KSPROPERTY_AUDIO_NUM_EQ_BANDS:
+		return "KSPROPERTY_AUDIO_NUM_EQ_BANDS"
+	case KSPROPERTY_AUDIO_EQ_BANDS:
+		return "KSPROPERTY_AUDIO_EQ_BANDS"
+	case KSPROPERTY_AUDIO_AGC:
+		return "KSPROPERTY_AUDIO_AGC"
+	case KSPROPERTY_AUDIO_DELAY:
+		return "KSPROPERTY_AUDIO_DELAY"
+	case KSPROPERTY_AUDIO_LOUDNESS:
+		return "KSPROPERTY_AUDIO_LOUDNESS"
+	case KSPROPERTY_AUDIO_WIDE_MODE:
+		return "KSPROPERTY_AUDIO_WIDE_MODE"
+	case KSPROPERTY_AUDIO_WIDENESS:
+		return "KSPROPERTY_AUDIO_WIDENESS"
+	case KSPROPERTY_AUDIO_REVERB_LEVEL:
+		return "KSPROPERTY_AUDIO_REVERB_LEVEL"
+	case KSPROPERTY_AUDIO_CHORUS_LEVEL:
+		return "KSPROPERTY_AUDIO_CHORUS_LEVEL"
+	case KSPROPERTY_AUDIO_DEV_SPECIFIC:
+		return "KSPROPERTY_AUDIO_DEV_SPECIFIC"
+	case KSPROPERTY_AUDIO_DEMUX_DEST:
+		return "KSPROPERTY_AUDIO_DEMUX_DEST"
+	case KSPROPERTY_AUDIO_STEREO_ENHANCE:
+		return "KSPROPERTY_AUDIO_STEREO_ENHANCE"
+	case KSPROPERTY_AUDIO_MANUFACTURE_GUID:
+		return "KSPROPERTY_AUDIO_MANUFACTURE_GUID"
+	case KSPROPERTY_AUDIO_PRODUCT_GUID:
+		return "KSPROPERTY_AUDIO_PRODUCT_GUID"
+	case KSPROPERTY_AUDIO_CPU_RESOURCES:
+		return "KSPROPERTY_AUDIO_CPU_RESOURCES"
+	case KSPROPERTY_AUDIO_STEREO_SPEAKER_GEOMETRY:
+		return "KSPROPERTY_AUDIO_STEREO_SPEAKER_GEOMETRY"
+	case KSPROPERTY_AUDIO_SURROUND_ENCODE:
+		return "KSPROPERTY_AUDIO_SURROUND_ENCODE"
+	case KSPROPERTY_AUDIO_3D_INTERFACE:
+		return "KSPROPERTY_AUDIO_3D_INTERFACE"
+	case KSPROPERTY_AUDIO_PEAKMETER:
+		return "KSPROPERTY_AUDIO_PEAKMETER"
+	case KSPROPERTY_AUDIO_ALGORITHM_INSTANCE:
+		return "KSPROPERTY_AUDIO_ALGORITHM_INSTANCE"
+	case KSPROPERTY_AUDIO_FILTER_STATE:
+		return "KSPROPERTY_AUDIO_FILTER_STATE"
+	case KSPROPERTY_AUDIO_PREFERRED_STATUS:
+		return "KSPROPERTY_AUDIO_PREFERRED_STATUS"
+	case KSPROPERTY_AUDIO_PEQ_MAX_BANDS:
+		return "KSPROPERTY_AUDIO_PEQ_MAX_BANDS"
+	case KSPROPERTY_AUDIO_PEQ_NUM_BANDS:
+		return "KSPROPERTY_AUDIO_PEQ_NUM_BANDS"
+	case KSPROPERTY_AUDIO_PEQ_BAND_CENTER_FREQ:
+		return "KSPROPERTY_AUDIO_PEQ_BAND_CENTER_FREQ"
+	case KSPROPERTY_AUDIO_PEQ_BAND_Q_FACTOR:
+		return "KSPROPERTY_AUDIO_PEQ_BAND_Q_FACTOR"
+	case KSPROPERTY_AUDIO_PEQ_BAND_LEVEL:
+		return "KSPROPERTY_AUDIO_PEQ_BAND_LEVEL"
+	case KSPROPERTY_AUDIO_CHORUS_MODULATION_RATE:
+		return "KSPROPERTY_AUDIO_CHORUS_MODULATION_RATE"
+	case KSPROPERTY_AUDIO_CHORUS_MODULATION_DEPTH:
+		return "KSPROPERTY_AUDIO_CHORUS_MODULATION_DEPTH"
+	case KSPROPERTY_AUDIO_REVERB_TIME:
+		return "KSPROPERTY_AUDIO_REVERB_TIME"
+	case KSPROPERTY_AUDIO_REVERB_DELAY_FEEDBACK:
+		return "KSPROPERTY_AUDIO_REVERB_DELAY_FEEDBACK"
+	case KSPROPERTY_AUDIO_POSITIONEX:
+		return "KSPROPERTY_AUDIO_POSITIONEX"
+	case KSPROPERTY_AUDIO_MIC_ARRAY_GEOMETRY:
+		return "KSPROPERTY_AUDIO_MIC_ARRAY_GEOMETRY"
+	case KSPROPERTY_AUDIO_PRESENTATION_POSITION:
+		return "KSPROPERTY_AUDIO_PRESENTATION_POSITION"
+	case KSPROPERTY_AUDIO_WAVERT_CURRENT_WRITE_POSITION:
+		return "KSPROPERTY_AUDIO_WAVERT_CURRENT_WRITE_POSITION"
+	case KSPROPERTY_AUDIO_LINEAR_BUFFER_POSITION:
+		return "KSPROPERTY_AUDIO_LINEAR_BUFFER_POSITION"
+	case KSPROPERTY_AUDIO_PEAKMETER2:
+		return "KSPROPERTY_AUDIO_PEAKMETER2"
+	case KSPROPERTY_AUDIO_WAVERT_CURRENT_WRITE_LASTBUFFER_POSITION:
+		return "KSPROPERTY_AUDIO_WAVERT_CURRENT_WRITE_LASTBUFFER_POSITION"
+	case KSPROPERTY_AUDIO_VOLUMELIMIT_ENGAGED:
+		return "KSPROPERTY_AUDIO_VOLUMELIMIT_ENGAGED"
+	case KSPROPERTY_AUDIO_MIC_SENSITIVITY:
+		return "KSPROPERTY_AUDIO_MIC_SENSITIVITY"
+	case KSPROPERTY_AUDIO_MIC_SNR:
+		return "KSPROPERTY_AUDIO_MIC_SNR"
+	case KSPROPERTY_AUDIO_MIC_SENSITIVITY2:
+		return "KSPROPERTY_AUDIO_MIC_SENSITIVITY2"
+	default:
+		return fmt.Sprintf("KSPROPERTY_AUDIO(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_AUDIOENGINE int32
 
 const (
@@ -634,11 +1796,51 @@ const (
 	KSPROPERTY_AUDIOENGINE_DEVICECONTROLS         KSPROPERTY_AUDIOENGINE = 10
 )
 
+// String returns the KSPROPERTY_AUDIOENGINE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_AUDIOENGINE) String() string {
+	switch e {
+	case KSPROPERTY_AUDIOENGINE_LFXENABLE:
+		return "KSPROPERTY_AUDIOENGINE_LFXENABLE"
+	case KSPROPERTY_AUDIOENGINE_GFXENABLE:
+		return "KSPROPERTY_AUDIOENGINE_GFXENABLE"
+	case KSPROPERTY_AUDIOENGINE_MIXFORMAT:
+		return "KSPROPERTY_AUDIOENGINE_MIXFORMAT"
+	case KSPROPERTY_AUDIOENGINE_DEVICEFORMAT:
+		return "KSPROPERTY_AUDIOENGINE_DEVICEFORMAT"
+	case KSPROPERTY_AUDIOENGINE_SUPPORTEDDEVICEFORMATS:
+		return "KSPROPERTY_AUDIOENGINE_SUPPORTEDDEVICEFORMATS"
+	case KSPROPERTY_AUDIOENGINE_DESCRIPTOR:
+		return "KSPROPERTY_AUDIOENGINE_DESCRIPTOR"
+	case KSPROPERTY_AUDIOENGINE_BUFFER_SIZE_RANGE:
+		return "KSPROPERTY_AUDIOENGINE_BUFFER_SIZE_RANGE"
+	case KSPROPERTY_AUDIOENGINE_LOOPBACK_PROTECTION:
+		return "KSPROPERTY_AUDIOENGINE_LOOPBACK_PROTECTION"
+	case KSPROPERTY_AUDIOENGINE_VOLUMELEVEL:
+		return "KSPROPERTY_AUDIOENGINE_VOLUMELEVEL"
+	case KSPROPERTY_AUDIOENGINE_DEVICECONTROLS:
+		return "KSPROPERTY_AUDIOENGINE_DEVICECONTROLS"
+	default:
+		return fmt.Sprintf("KSPROPERTY_AUDIOENGINE(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_AUDIOLOOPBACK int32
 
 const (
 	KSPROPERTY_AUDIOLOOPBACK_TAPPOINT_CAPS KSPROPERTY_AUDIOLOOPBACK = 0
 )
+
+// String returns the KSPROPERTY_AUDIOLOOPBACK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_AUDIOLOOPBACK) String() string {
+	switch e {
+	case KSPROPERTY_AUDIOLOOPBACK_TAPPOINT_CAPS:
+		return "KSPROPERTY_AUDIOLOOPBACK_TAPPOINT_CAPS"
+	default:
+		return fmt.Sprintf("KSPROPERTY_AUDIOLOOPBACK(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_AUDIOMODULE int32
 
@@ -648,11 +1850,37 @@ const (
 	KSPROPERTY_AUDIOMODULE_NOTIFICATION_DEVICE_ID KSPROPERTY_AUDIOMODULE = 3
 )
 
+// String returns the KSPROPERTY_AUDIOMODULE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_AUDIOMODULE) String() string {
+	switch e {
+	case KSPROPERTY_AUDIOMODULE_DESCRIPTORS:
+		return "KSPROPERTY_AUDIOMODULE_DESCRIPTORS"
+	case KSPROPERTY_AUDIOMODULE_COMMAND:
+		return "KSPROPERTY_AUDIOMODULE_COMMAND"
+	case KSPROPERTY_AUDIOMODULE_NOTIFICATION_DEVICE_ID:
+		return "KSPROPERTY_AUDIOMODULE_NOTIFICATION_DEVICE_ID"
+	default:
+		return fmt.Sprintf("KSPROPERTY_AUDIOMODULE(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_AUDIOPOSTURE int32
 
 const (
 	KSPROPERTY_AUDIOPOSTURE_ORIENTATION KSPROPERTY_AUDIOPOSTURE = 1
 )
+
+// String returns the KSPROPERTY_AUDIOPOSTURE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_AUDIOPOSTURE) String() string {
+	switch e {
+	case KSPROPERTY_AUDIOPOSTURE_ORIENTATION:
+		return "KSPROPERTY_AUDIOPOSTURE_ORIENTATION"
+	default:
+		return fmt.Sprintf("KSPROPERTY_AUDIOPOSTURE(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_AUDIORESOURCEMANAGEMENT int32
 
@@ -660,11 +1888,33 @@ const (
 	KSPROPERTY_AUDIORESOURCEMANAGEMENT_RESOURCEGROUP KSPROPERTY_AUDIORESOURCEMANAGEMENT = 0
 )
 
+// String returns the KSPROPERTY_AUDIORESOURCEMANAGEMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_AUDIORESOURCEMANAGEMENT) String() string {
+	switch e {
+	case KSPROPERTY_AUDIORESOURCEMANAGEMENT_RESOURCEGROUP:
+		return "KSPROPERTY_AUDIORESOURCEMANAGEMENT_RESOURCEGROUP"
+	default:
+		return fmt.Sprintf("KSPROPERTY_AUDIORESOURCEMANAGEMENT(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_AUDIOSIGNALPROCESSING int32
 
 const (
 	KSPROPERTY_AUDIOSIGNALPROCESSING_MODES KSPROPERTY_AUDIOSIGNALPROCESSING = 0
 )
+
+// String returns the KSPROPERTY_AUDIOSIGNALPROCESSING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_AUDIOSIGNALPROCESSING) String() string {
+	switch e {
+	case KSPROPERTY_AUDIOSIGNALPROCESSING_MODES:
+		return "KSPROPERTY_AUDIOSIGNALPROCESSING_MODES"
+	default:
+		return fmt.Sprintf("KSPROPERTY_AUDIOSIGNALPROCESSING(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_BIBLIOGRAPHIC int32
 
@@ -707,12 +1957,106 @@ const (
 	KSPROPERTY_BIBLIOGRAPHIC_SERIESSTATEMENTUNIFORMTITLE KSPROPERTY_BIBLIOGRAPHIC = 808663072
 )
 
+// String returns the KSPROPERTY_BIBLIOGRAPHIC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BIBLIOGRAPHIC) String() string {
+	switch e {
+	case KSPROPERTY_BIBLIOGRAPHIC_LEADER:
+		return "KSPROPERTY_BIBLIOGRAPHIC_LEADER"
+	case KSPROPERTY_BIBLIOGRAPHIC_LCCN:
+		return "KSPROPERTY_BIBLIOGRAPHIC_LCCN"
+	case KSPROPERTY_BIBLIOGRAPHIC_ISBN:
+		return "KSPROPERTY_BIBLIOGRAPHIC_ISBN"
+	case KSPROPERTY_BIBLIOGRAPHIC_ISSN:
+		return "KSPROPERTY_BIBLIOGRAPHIC_ISSN"
+	case KSPROPERTY_BIBLIOGRAPHIC_CATALOGINGSOURCE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_CATALOGINGSOURCE"
+	case KSPROPERTY_BIBLIOGRAPHIC_MAINPERSONALNAME:
+		return "KSPROPERTY_BIBLIOGRAPHIC_MAINPERSONALNAME"
+	case KSPROPERTY_BIBLIOGRAPHIC_MAINCORPORATEBODY:
+		return "KSPROPERTY_BIBLIOGRAPHIC_MAINCORPORATEBODY"
+	case KSPROPERTY_BIBLIOGRAPHIC_MAINMEETINGNAME:
+		return "KSPROPERTY_BIBLIOGRAPHIC_MAINMEETINGNAME"
+	case KSPROPERTY_BIBLIOGRAPHIC_MAINUNIFORMTITLE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_MAINUNIFORMTITLE"
+	case KSPROPERTY_BIBLIOGRAPHIC_UNIFORMTITLE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_UNIFORMTITLE"
+	case KSPROPERTY_BIBLIOGRAPHIC_TITLESTATEMENT:
+		return "KSPROPERTY_BIBLIOGRAPHIC_TITLESTATEMENT"
+	case KSPROPERTY_BIBLIOGRAPHIC_VARYINGFORMTITLE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_VARYINGFORMTITLE"
+	case KSPROPERTY_BIBLIOGRAPHIC_PUBLICATION:
+		return "KSPROPERTY_BIBLIOGRAPHIC_PUBLICATION"
+	case KSPROPERTY_BIBLIOGRAPHIC_PHYSICALDESCRIPTION:
+		return "KSPROPERTY_BIBLIOGRAPHIC_PHYSICALDESCRIPTION"
+	case KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYTITLE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYTITLE"
+	case KSPROPERTY_BIBLIOGRAPHIC_SERIESSTATEMENT:
+		return "KSPROPERTY_BIBLIOGRAPHIC_SERIESSTATEMENT"
+	case KSPROPERTY_BIBLIOGRAPHIC_GENERALNOTE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_GENERALNOTE"
+	case KSPROPERTY_BIBLIOGRAPHIC_BIBLIOGRAPHYNOTE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_BIBLIOGRAPHYNOTE"
+	case KSPROPERTY_BIBLIOGRAPHIC_CONTENTSNOTE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_CONTENTSNOTE"
+	case KSPROPERTY_BIBLIOGRAPHIC_CREATIONCREDIT:
+		return "KSPROPERTY_BIBLIOGRAPHIC_CREATIONCREDIT"
+	case KSPROPERTY_BIBLIOGRAPHIC_CITATION:
+		return "KSPROPERTY_BIBLIOGRAPHIC_CITATION"
+	case KSPROPERTY_BIBLIOGRAPHIC_PARTICIPANT:
+		return "KSPROPERTY_BIBLIOGRAPHIC_PARTICIPANT"
+	case KSPROPERTY_BIBLIOGRAPHIC_SUMMARY:
+		return "KSPROPERTY_BIBLIOGRAPHIC_SUMMARY"
+	case KSPROPERTY_BIBLIOGRAPHIC_TARGETAUDIENCE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_TARGETAUDIENCE"
+	case KSPROPERTY_BIBLIOGRAPHIC_ADDEDFORMAVAILABLE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_ADDEDFORMAVAILABLE"
+	case KSPROPERTY_BIBLIOGRAPHIC_SYSTEMDETAILS:
+		return "KSPROPERTY_BIBLIOGRAPHIC_SYSTEMDETAILS"
+	case KSPROPERTY_BIBLIOGRAPHIC_AWARDS:
+		return "KSPROPERTY_BIBLIOGRAPHIC_AWARDS"
+	case KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYPERSONALNAME:
+		return "KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYPERSONALNAME"
+	case KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYTOPICALTERM:
+		return "KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYTOPICALTERM"
+	case KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYGEOGRAPHIC:
+		return "KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYGEOGRAPHIC"
+	case KSPROPERTY_BIBLIOGRAPHIC_INDEXTERMGENRE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_INDEXTERMGENRE"
+	case KSPROPERTY_BIBLIOGRAPHIC_INDEXTERMCURRICULUM:
+		return "KSPROPERTY_BIBLIOGRAPHIC_INDEXTERMCURRICULUM"
+	case KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYUNIFORMTITLE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYUNIFORMTITLE"
+	case KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYRELATED:
+		return "KSPROPERTY_BIBLIOGRAPHIC_ADDEDENTRYRELATED"
+	case KSPROPERTY_BIBLIOGRAPHIC_SERIESSTATEMENTPERSONALNAME:
+		return "KSPROPERTY_BIBLIOGRAPHIC_SERIESSTATEMENTPERSONALNAME"
+	case KSPROPERTY_BIBLIOGRAPHIC_SERIESSTATEMENTUNIFORMTITLE:
+		return "KSPROPERTY_BIBLIOGRAPHIC_SERIESSTATEMENTUNIFORMTITLE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BIBLIOGRAPHIC(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_BTAUDIO int32
 
 const (
 	KSPROPERTY_ONESHOT_RECONNECT  KSPROPERTY_BTAUDIO = 0
 	KSPROPERTY_ONESHOT_DISCONNECT KSPROPERTY_BTAUDIO = 1
 )
+
+// String returns the KSPROPERTY_BTAUDIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_BTAUDIO) String() string {
+	switch e {
+	case KSPROPERTY_ONESHOT_RECONNECT:
+		return "KSPROPERTY_ONESHOT_RECONNECT"
+	case KSPROPERTY_ONESHOT_DISCONNECT:
+		return "KSPROPERTY_ONESHOT_DISCONNECT"
+	default:
+		return fmt.Sprintf("KSPROPERTY_BTAUDIO(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_CAMERACONTROL_EXTENDED_PROPERTY int32
 
@@ -768,17 +2112,144 @@ const (
 	KSPROPERTY_CAMERACONTROL_EXTENDED_END2                      KSPROPERTY_CAMERACONTROL_EXTENDED_PROPERTY = 47
 )
 
+// String returns the KSPROPERTY_CAMERACONTROL_EXTENDED_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_CAMERACONTROL_EXTENDED_PROPERTY) String() string {
+	switch e {
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOMODE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOMODE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOFRAMERATE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOFRAMERATE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOMAXFRAMERATE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOMAXFRAMERATE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOTRIGGERTIME:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOTRIGGERTIME"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_WARMSTART:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_WARMSTART"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_MAXVIDFPS_PHOTORES:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_MAXVIDFPS_PHOTORES"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOTHUMBNAIL:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOTHUMBNAIL"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_SCENEMODE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_SCENEMODE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_TORCHMODE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_TORCHMODE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_FLASHMODE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_FLASHMODE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_OPTIMIZATIONHINT:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_OPTIMIZATIONHINT"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_WHITEBALANCEMODE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_WHITEBALANCEMODE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_EXPOSUREMODE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_EXPOSUREMODE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_FOCUSMODE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_FOCUSMODE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_ISO:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_ISO"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_FIELDOFVIEW:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_FIELDOFVIEW"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_EVCOMPENSATION:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_EVCOMPENSATION"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_CAMERAANGLEOFFSET:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_CAMERAANGLEOFFSET"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_METADATA:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_METADATA"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_FOCUSPRIORITY:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_FOCUSPRIORITY"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_FOCUSSTATE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_FOCUSSTATE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_ROI_CONFIGCAPS:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_ROI_CONFIGCAPS"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_ROI_ISPCONTROL:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_ROI_ISPCONTROL"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOCONFIRMATION:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_PHOTOCONFIRMATION"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_ZOOM:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_ZOOM"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_MCC:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_MCC"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_ISO_ADVANCED:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_ISO_ADVANCED"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_VIDEOSTABILIZATION:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_VIDEOSTABILIZATION"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_VFR:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_VFR"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_FACEDETECTION:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_FACEDETECTION"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_VIDEOHDR:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_VIDEOHDR"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_HISTOGRAM:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_HISTOGRAM"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_OIS:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_OIS"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_ADVANCEDPHOTO:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_ADVANCEDPHOTO"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_PROFILE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_PROFILE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_FACEAUTH_MODE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_FACEAUTH_MODE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_SECURE_MODE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_SECURE_MODE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_VIDEOTEMPORALDENOISING:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_VIDEOTEMPORALDENOISING"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_IRTORCHMODE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_IRTORCHMODE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_RELATIVEPANELOPTIMIZATION:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_RELATIVEPANELOPTIMIZATION"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_EYEGAZECORRECTION:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_EYEGAZECORRECTION"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_BACKGROUNDSEGMENTATION:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_BACKGROUNDSEGMENTATION"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_DIGITALWINDOW_CONFIGCAPS:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_DIGITALWINDOW_CONFIGCAPS"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_DIGITALWINDOW:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_DIGITALWINDOW"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_FRAMERATE_THROTTLE:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_FRAMERATE_THROTTLE"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_FIELDOFVIEW2_CONFIGCAPS:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_FIELDOFVIEW2_CONFIGCAPS"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_FIELDOFVIEW2:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_FIELDOFVIEW2"
+	case KSPROPERTY_CAMERACONTROL_EXTENDED_END:
+		return "KSPROPERTY_CAMERACONTROL_EXTENDED_END"
+	default:
+		return fmt.Sprintf("KSPROPERTY_CAMERACONTROL_EXTENDED_PROPERTY(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_CAMERACONTROL_FLASH int32
 
 const (
 	KSPROPERTY_CAMERACONTROL_FLASH_PROPERTY_ID KSPROPERTY_CAMERACONTROL_FLASH = 0
 )
 
+// String returns the KSPROPERTY_CAMERACONTROL_FLASH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_CAMERACONTROL_FLASH) String() string {
+	switch e {
+	case KSPROPERTY_CAMERACONTROL_FLASH_PROPERTY_ID:
+		return "KSPROPERTY_CAMERACONTROL_FLASH_PROPERTY_ID"
+	default:
+		return fmt.Sprintf("KSPROPERTY_CAMERACONTROL_FLASH(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_CAMERACONTROL_IMAGE_PIN_CAPABILITY int32
 
 const (
 	KSPROPERTY_CAMERACONTROL_IMAGE_PIN_CAPABILITY_PROPERTY_ID KSPROPERTY_CAMERACONTROL_IMAGE_PIN_CAPABILITY = 0
 )
+
+// String returns the KSPROPERTY_CAMERACONTROL_IMAGE_PIN_CAPABILITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_CAMERACONTROL_IMAGE_PIN_CAPABILITY) String() string {
+	switch e {
+	case KSPROPERTY_CAMERACONTROL_IMAGE_PIN_CAPABILITY_PROPERTY_ID:
+		return "KSPROPERTY_CAMERACONTROL_IMAGE_PIN_CAPABILITY_PROPERTY_ID"
+	default:
+		return fmt.Sprintf("KSPROPERTY_CAMERACONTROL_IMAGE_PIN_CAPABILITY(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_PROPERTY int32
 
@@ -788,11 +2259,37 @@ const (
 	KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_CLEAR      KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_PROPERTY = 2
 )
 
+// String returns the KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_PROPERTY) String() string {
+	switch e {
+	case KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_CAPABILITY:
+		return "KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_CAPABILITY"
+	case KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_SET:
+		return "KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_SET"
+	case KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_CLEAR:
+		return "KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_CLEAR"
+	default:
+		return fmt.Sprintf("KSPROPERTY_CAMERACONTROL_PERFRAMESETTING_PROPERTY(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST int32
 
 const (
 	KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_PROPERTY_ID KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST = 0
 )
+
+// String returns the KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST) String() string {
+	switch e {
+	case KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_PROPERTY_ID:
+		return "KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST_PROPERTY_ID"
+	default:
+		return fmt.Sprintf("KSPROPERTY_CAMERACONTROL_REGION_OF_INTEREST(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_CAMERACONTROL_VIDEO_STABILIZATION_MODE int32
 
@@ -800,12 +2297,36 @@ const (
 	KSPROPERTY_CAMERACONTROL_VIDEO_STABILIZATION_MODE_PROPERTY_ID KSPROPERTY_CAMERACONTROL_VIDEO_STABILIZATION_MODE = 0
 )
 
+// String returns the KSPROPERTY_CAMERACONTROL_VIDEO_STABILIZATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_CAMERACONTROL_VIDEO_STABILIZATION_MODE) String() string {
+	switch e {
+	case KSPROPERTY_CAMERACONTROL_VIDEO_STABILIZATION_MODE_PROPERTY_ID:
+		return "KSPROPERTY_CAMERACONTROL_VIDEO_STABILIZATION_MODE_PROPERTY_ID"
+	default:
+		return fmt.Sprintf("KSPROPERTY_CAMERACONTROL_VIDEO_STABILIZATION_MODE(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_FLAGS int32
 
 const (
 	KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_CLEAR KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_FLAGS = 0
 	KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_SET   KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_FLAGS = 1
 )
+
+// String returns the KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_FLAGS) String() string {
+	switch e {
+	case KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_CLEAR:
+		return "KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_CLEAR"
+	case KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_SET:
+		return "KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_SET"
+	default:
+		return fmt.Sprintf("KSPROPERTY_CAMERA_PHOTOTRIGGERTIME_FLAGS(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_CLOCK int32
 
@@ -817,6 +2338,27 @@ const (
 	KSPROPERTY_CLOCK_RESOLUTION             KSPROPERTY_CLOCK = 4
 	KSPROPERTY_CLOCK_STATE                  KSPROPERTY_CLOCK = 5
 )
+
+// String returns the KSPROPERTY_CLOCK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_CLOCK) String() string {
+	switch e {
+	case KSPROPERTY_CLOCK_TIME:
+		return "KSPROPERTY_CLOCK_TIME"
+	case KSPROPERTY_CLOCK_PHYSICALTIME:
+		return "KSPROPERTY_CLOCK_PHYSICALTIME"
+	case KSPROPERTY_CLOCK_CORRELATEDTIME:
+		return "KSPROPERTY_CLOCK_CORRELATEDTIME"
+	case KSPROPERTY_CLOCK_CORRELATEDPHYSICALTIME:
+		return "KSPROPERTY_CLOCK_CORRELATEDPHYSICALTIME"
+	case KSPROPERTY_CLOCK_RESOLUTION:
+		return "KSPROPERTY_CLOCK_RESOLUTION"
+	case KSPROPERTY_CLOCK_STATE:
+		return "KSPROPERTY_CLOCK_STATE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_CLOCK(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_CONNECTION int32
 
@@ -831,6 +2373,31 @@ const (
 	KSPROPERTY_CONNECTION_STARTAT             KSPROPERTY_CONNECTION = 7
 )
 
+// String returns the KSPROPERTY_CONNECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_CONNECTION) String() string {
+	switch e {
+	case KSPROPERTY_CONNECTION_STATE:
+		return "KSPROPERTY_CONNECTION_STATE"
+	case KSPROPERTY_CONNECTION_PRIORITY:
+		return "KSPROPERTY_CONNECTION_PRIORITY"
+	case KSPROPERTY_CONNECTION_DATAFORMAT:
+		return "KSPROPERTY_CONNECTION_DATAFORMAT"
+	case KSPROPERTY_CONNECTION_ALLOCATORFRAMING:
+		return "KSPROPERTY_CONNECTION_ALLOCATORFRAMING"
+	case KSPROPERTY_CONNECTION_PROPOSEDATAFORMAT:
+		return "KSPROPERTY_CONNECTION_PROPOSEDATAFORMAT"
+	case KSPROPERTY_CONNECTION_ACQUIREORDERING:
+		return "KSPROPERTY_CONNECTION_ACQUIREORDERING"
+	case KSPROPERTY_CONNECTION_ALLOCATORFRAMING_EX:
+		return "KSPROPERTY_CONNECTION_ALLOCATORFRAMING_EX"
+	case KSPROPERTY_CONNECTION_STARTAT:
+		return "KSPROPERTY_CONNECTION_STARTAT"
+	default:
+		return fmt.Sprintf("KSPROPERTY_CONNECTION(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_COPYPROT int32
 
 const (
@@ -844,11 +2411,47 @@ const (
 	KSPROPERTY_DVDCOPY_DISC_KEY       KSPROPERTY_COPYPROT = 128
 )
 
+// String returns the KSPROPERTY_COPYPROT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_COPYPROT) String() string {
+	switch e {
+	case KSPROPERTY_DVDCOPY_CHLG_KEY:
+		return "KSPROPERTY_DVDCOPY_CHLG_KEY"
+	case KSPROPERTY_DVDCOPY_DVD_KEY1:
+		return "KSPROPERTY_DVDCOPY_DVD_KEY1"
+	case KSPROPERTY_DVDCOPY_DEC_KEY2:
+		return "KSPROPERTY_DVDCOPY_DEC_KEY2"
+	case KSPROPERTY_DVDCOPY_TITLE_KEY:
+		return "KSPROPERTY_DVDCOPY_TITLE_KEY"
+	case KSPROPERTY_COPY_MACROVISION:
+		return "KSPROPERTY_COPY_MACROVISION"
+	case KSPROPERTY_DVDCOPY_REGION:
+		return "KSPROPERTY_DVDCOPY_REGION"
+	case KSPROPERTY_DVDCOPY_SET_COPY_STATE:
+		return "KSPROPERTY_DVDCOPY_SET_COPY_STATE"
+	case KSPROPERTY_DVDCOPY_DISC_KEY:
+		return "KSPROPERTY_DVDCOPY_DISC_KEY"
+	default:
+		return fmt.Sprintf("KSPROPERTY_COPYPROT(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_CYCLIC int32
 
 const (
 	KSPROPERTY_CYCLIC_POSITION KSPROPERTY_CYCLIC = 0
 )
+
+// String returns the KSPROPERTY_CYCLIC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_CYCLIC) String() string {
+	switch e {
+	case KSPROPERTY_CYCLIC_POSITION:
+		return "KSPROPERTY_CYCLIC_POSITION"
+	default:
+		return fmt.Sprintf("KSPROPERTY_CYCLIC(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_DIRECTSOUND3DBUFFER int32
 
@@ -864,6 +2467,33 @@ const (
 	KSPROPERTY_DIRECTSOUND3DBUFFER_MODE              KSPROPERTY_DIRECTSOUND3DBUFFER = 8
 )
 
+// String returns the KSPROPERTY_DIRECTSOUND3DBUFFER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_DIRECTSOUND3DBUFFER) String() string {
+	switch e {
+	case KSPROPERTY_DIRECTSOUND3DBUFFER_ALL:
+		return "KSPROPERTY_DIRECTSOUND3DBUFFER_ALL"
+	case KSPROPERTY_DIRECTSOUND3DBUFFER_POSITION:
+		return "KSPROPERTY_DIRECTSOUND3DBUFFER_POSITION"
+	case KSPROPERTY_DIRECTSOUND3DBUFFER_VELOCITY:
+		return "KSPROPERTY_DIRECTSOUND3DBUFFER_VELOCITY"
+	case KSPROPERTY_DIRECTSOUND3DBUFFER_CONEANGLES:
+		return "KSPROPERTY_DIRECTSOUND3DBUFFER_CONEANGLES"
+	case KSPROPERTY_DIRECTSOUND3DBUFFER_CONEORIENTATION:
+		return "KSPROPERTY_DIRECTSOUND3DBUFFER_CONEORIENTATION"
+	case KSPROPERTY_DIRECTSOUND3DBUFFER_CONEOUTSIDEVOLUME:
+		return "KSPROPERTY_DIRECTSOUND3DBUFFER_CONEOUTSIDEVOLUME"
+	case KSPROPERTY_DIRECTSOUND3DBUFFER_MINDISTANCE:
+		return "KSPROPERTY_DIRECTSOUND3DBUFFER_MINDISTANCE"
+	case KSPROPERTY_DIRECTSOUND3DBUFFER_MAXDISTANCE:
+		return "KSPROPERTY_DIRECTSOUND3DBUFFER_MAXDISTANCE"
+	case KSPROPERTY_DIRECTSOUND3DBUFFER_MODE:
+		return "KSPROPERTY_DIRECTSOUND3DBUFFER_MODE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_DIRECTSOUND3DBUFFER(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_DIRECTSOUND3DLISTENER int32
 
 const (
@@ -878,11 +2508,49 @@ const (
 	KSPROPERTY_DIRECTSOUND3DLISTENER_ALLOCATION     KSPROPERTY_DIRECTSOUND3DLISTENER = 8
 )
 
+// String returns the KSPROPERTY_DIRECTSOUND3DLISTENER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_DIRECTSOUND3DLISTENER) String() string {
+	switch e {
+	case KSPROPERTY_DIRECTSOUND3DLISTENER_ALL:
+		return "KSPROPERTY_DIRECTSOUND3DLISTENER_ALL"
+	case KSPROPERTY_DIRECTSOUND3DLISTENER_POSITION:
+		return "KSPROPERTY_DIRECTSOUND3DLISTENER_POSITION"
+	case KSPROPERTY_DIRECTSOUND3DLISTENER_VELOCITY:
+		return "KSPROPERTY_DIRECTSOUND3DLISTENER_VELOCITY"
+	case KSPROPERTY_DIRECTSOUND3DLISTENER_ORIENTATION:
+		return "KSPROPERTY_DIRECTSOUND3DLISTENER_ORIENTATION"
+	case KSPROPERTY_DIRECTSOUND3DLISTENER_DISTANCEFACTOR:
+		return "KSPROPERTY_DIRECTSOUND3DLISTENER_DISTANCEFACTOR"
+	case KSPROPERTY_DIRECTSOUND3DLISTENER_ROLLOFFFACTOR:
+		return "KSPROPERTY_DIRECTSOUND3DLISTENER_ROLLOFFFACTOR"
+	case KSPROPERTY_DIRECTSOUND3DLISTENER_DOPPLERFACTOR:
+		return "KSPROPERTY_DIRECTSOUND3DLISTENER_DOPPLERFACTOR"
+	case KSPROPERTY_DIRECTSOUND3DLISTENER_BATCH:
+		return "KSPROPERTY_DIRECTSOUND3DLISTENER_BATCH"
+	case KSPROPERTY_DIRECTSOUND3DLISTENER_ALLOCATION:
+		return "KSPROPERTY_DIRECTSOUND3DLISTENER_ALLOCATION"
+	default:
+		return fmt.Sprintf("KSPROPERTY_DIRECTSOUND3DLISTENER(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_DRMAUDIOSTREAM int32
 
 const (
 	KSPROPERTY_DRMAUDIOSTREAM_CONTENTID KSPROPERTY_DRMAUDIOSTREAM = 0
 )
+
+// String returns the KSPROPERTY_DRMAUDIOSTREAM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_DRMAUDIOSTREAM) String() string {
+	switch e {
+	case KSPROPERTY_DRMAUDIOSTREAM_CONTENTID:
+		return "KSPROPERTY_DRMAUDIOSTREAM_CONTENTID"
+	default:
+		return fmt.Sprintf("KSPROPERTY_DRMAUDIOSTREAM(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_DVDSUBPIC int32
 
@@ -891,6 +2559,21 @@ const (
 	KSPROPERTY_DVDSUBPIC_HLI         KSPROPERTY_DVDSUBPIC = 1
 	KSPROPERTY_DVDSUBPIC_COMPOSIT_ON KSPROPERTY_DVDSUBPIC = 2
 )
+
+// String returns the KSPROPERTY_DVDSUBPIC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_DVDSUBPIC) String() string {
+	switch e {
+	case KSPROPERTY_DVDSUBPIC_PALETTE:
+		return "KSPROPERTY_DVDSUBPIC_PALETTE"
+	case KSPROPERTY_DVDSUBPIC_HLI:
+		return "KSPROPERTY_DVDSUBPIC_HLI"
+	case KSPROPERTY_DVDSUBPIC_COMPOSIT_ON:
+		return "KSPROPERTY_DVDSUBPIC_COMPOSIT_ON"
+	default:
+		return fmt.Sprintf("KSPROPERTY_DVDSUBPIC(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_EXTDEVICE int32
 
@@ -902,6 +2585,25 @@ const (
 	KSPROPERTY_EXTDEVICE_CAPABILITIES KSPROPERTY_EXTDEVICE = 4
 )
 
+// String returns the KSPROPERTY_EXTDEVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_EXTDEVICE) String() string {
+	switch e {
+	case KSPROPERTY_EXTDEVICE_ID:
+		return "KSPROPERTY_EXTDEVICE_ID"
+	case KSPROPERTY_EXTDEVICE_VERSION:
+		return "KSPROPERTY_EXTDEVICE_VERSION"
+	case KSPROPERTY_EXTDEVICE_POWER_STATE:
+		return "KSPROPERTY_EXTDEVICE_POWER_STATE"
+	case KSPROPERTY_EXTDEVICE_PORT:
+		return "KSPROPERTY_EXTDEVICE_PORT"
+	case KSPROPERTY_EXTDEVICE_CAPABILITIES:
+		return "KSPROPERTY_EXTDEVICE_CAPABILITIES"
+	default:
+		return fmt.Sprintf("KSPROPERTY_EXTDEVICE(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_EXTENSION_UNIT int32
 
 const (
@@ -909,6 +2611,21 @@ const (
 	KSPROPERTY_EXTENSION_UNIT_CONTROL      KSPROPERTY_EXTENSION_UNIT = 1
 	KSPROPERTY_EXTENSION_UNIT_PASS_THROUGH KSPROPERTY_EXTENSION_UNIT = 65535
 )
+
+// String returns the KSPROPERTY_EXTENSION_UNIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_EXTENSION_UNIT) String() string {
+	switch e {
+	case KSPROPERTY_EXTENSION_UNIT_INFO:
+		return "KSPROPERTY_EXTENSION_UNIT_INFO"
+	case KSPROPERTY_EXTENSION_UNIT_CONTROL:
+		return "KSPROPERTY_EXTENSION_UNIT_CONTROL"
+	case KSPROPERTY_EXTENSION_UNIT_PASS_THROUGH:
+		return "KSPROPERTY_EXTENSION_UNIT_PASS_THROUGH"
+	default:
+		return fmt.Sprintf("KSPROPERTY_EXTENSION_UNIT(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_EXTXPORT int32
 
@@ -926,11 +2643,53 @@ const (
 	KSPROPERTY_RAW_AVC_CMD                 KSPROPERTY_EXTXPORT = 10
 )
 
+// String returns the KSPROPERTY_EXTXPORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_EXTXPORT) String() string {
+	switch e {
+	case KSPROPERTY_EXTXPORT_CAPABILITIES:
+		return "KSPROPERTY_EXTXPORT_CAPABILITIES"
+	case KSPROPERTY_EXTXPORT_INPUT_SIGNAL_MODE:
+		return "KSPROPERTY_EXTXPORT_INPUT_SIGNAL_MODE"
+	case KSPROPERTY_EXTXPORT_OUTPUT_SIGNAL_MODE:
+		return "KSPROPERTY_EXTXPORT_OUTPUT_SIGNAL_MODE"
+	case KSPROPERTY_EXTXPORT_LOAD_MEDIUM:
+		return "KSPROPERTY_EXTXPORT_LOAD_MEDIUM"
+	case KSPROPERTY_EXTXPORT_MEDIUM_INFO:
+		return "KSPROPERTY_EXTXPORT_MEDIUM_INFO"
+	case KSPROPERTY_EXTXPORT_STATE:
+		return "KSPROPERTY_EXTXPORT_STATE"
+	case KSPROPERTY_EXTXPORT_STATE_NOTIFY:
+		return "KSPROPERTY_EXTXPORT_STATE_NOTIFY"
+	case KSPROPERTY_EXTXPORT_TIMECODE_SEARCH:
+		return "KSPROPERTY_EXTXPORT_TIMECODE_SEARCH"
+	case KSPROPERTY_EXTXPORT_ATN_SEARCH:
+		return "KSPROPERTY_EXTXPORT_ATN_SEARCH"
+	case KSPROPERTY_EXTXPORT_RTC_SEARCH:
+		return "KSPROPERTY_EXTXPORT_RTC_SEARCH"
+	case KSPROPERTY_RAW_AVC_CMD:
+		return "KSPROPERTY_RAW_AVC_CMD"
+	default:
+		return fmt.Sprintf("KSPROPERTY_EXTXPORT(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_FMRX_CONTROL int32
 
 const (
 	KSPROPERTY_FMRX_STATE KSPROPERTY_FMRX_CONTROL = 0
 )
+
+// String returns the KSPROPERTY_FMRX_CONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_FMRX_CONTROL) String() string {
+	switch e {
+	case KSPROPERTY_FMRX_STATE:
+		return "KSPROPERTY_FMRX_STATE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_FMRX_CONTROL(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_FMRX_TOPOLOGY int32
 
@@ -940,11 +2699,37 @@ const (
 	KSPROPERTY_FMRX_ANTENNAENDPOINTID KSPROPERTY_FMRX_TOPOLOGY = 2
 )
 
+// String returns the KSPROPERTY_FMRX_TOPOLOGY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_FMRX_TOPOLOGY) String() string {
+	switch e {
+	case KSPROPERTY_FMRX_ENDPOINTID:
+		return "KSPROPERTY_FMRX_ENDPOINTID"
+	case KSPROPERTY_FMRX_VOLUME:
+		return "KSPROPERTY_FMRX_VOLUME"
+	case KSPROPERTY_FMRX_ANTENNAENDPOINTID:
+		return "KSPROPERTY_FMRX_ANTENNAENDPOINTID"
+	default:
+		return fmt.Sprintf("KSPROPERTY_FMRX_TOPOLOGY(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_GENERAL int32
 
 const (
 	KSPROPERTY_GENERAL_COMPONENTID KSPROPERTY_GENERAL = 0
 )
+
+// String returns the KSPROPERTY_GENERAL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_GENERAL) String() string {
+	switch e {
+	case KSPROPERTY_GENERAL_COMPONENTID:
+		return "KSPROPERTY_GENERAL_COMPONENTID"
+	default:
+		return fmt.Sprintf("KSPROPERTY_GENERAL(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_HRTF3D int32
 
@@ -954,17 +2739,54 @@ const (
 	KSPROPERTY_HRTF3D_FILTER_FORMAT KSPROPERTY_HRTF3D = 2
 )
 
+// String returns the KSPROPERTY_HRTF3D constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_HRTF3D) String() string {
+	switch e {
+	case KSPROPERTY_HRTF3D_PARAMS:
+		return "KSPROPERTY_HRTF3D_PARAMS"
+	case KSPROPERTY_HRTF3D_INITIALIZE:
+		return "KSPROPERTY_HRTF3D_INITIALIZE"
+	case KSPROPERTY_HRTF3D_FILTER_FORMAT:
+		return "KSPROPERTY_HRTF3D_FILTER_FORMAT"
+	default:
+		return fmt.Sprintf("KSPROPERTY_HRTF3D(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_INTERLEAVEDAUDIO int32
 
 const (
 	KSPROPERTY_INTERLEAVEDAUDIO_FORMATINFORMATION KSPROPERTY_INTERLEAVEDAUDIO = 1
 )
 
+// String returns the KSPROPERTY_INTERLEAVEDAUDIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_INTERLEAVEDAUDIO) String() string {
+	switch e {
+	case KSPROPERTY_INTERLEAVEDAUDIO_FORMATINFORMATION:
+		return "KSPROPERTY_INTERLEAVEDAUDIO_FORMATINFORMATION"
+	default:
+		return fmt.Sprintf("KSPROPERTY_INTERLEAVEDAUDIO(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_ITD3D int32
 
 const (
 	KSPROPERTY_ITD3D_PARAMS KSPROPERTY_ITD3D = 0
 )
+
+// String returns the KSPROPERTY_ITD3D constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_ITD3D) String() string {
+	switch e {
+	case KSPROPERTY_ITD3D_PARAMS:
+		return "KSPROPERTY_ITD3D_PARAMS"
+	default:
+		return fmt.Sprintf("KSPROPERTY_ITD3D(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_JACK int32
 
@@ -975,6 +2797,25 @@ const (
 	KSPROPERTY_JACK_CONTAINERID  KSPROPERTY_JACK = 4
 	KSPROPERTY_JACK_DESCRIPTION3 KSPROPERTY_JACK = 5
 )
+
+// String returns the KSPROPERTY_JACK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_JACK) String() string {
+	switch e {
+	case KSPROPERTY_JACK_DESCRIPTION:
+		return "KSPROPERTY_JACK_DESCRIPTION"
+	case KSPROPERTY_JACK_DESCRIPTION2:
+		return "KSPROPERTY_JACK_DESCRIPTION2"
+	case KSPROPERTY_JACK_SINK_INFO:
+		return "KSPROPERTY_JACK_SINK_INFO"
+	case KSPROPERTY_JACK_CONTAINERID:
+		return "KSPROPERTY_JACK_CONTAINERID"
+	case KSPROPERTY_JACK_DESCRIPTION3:
+		return "KSPROPERTY_JACK_DESCRIPTION3"
+	default:
+		return fmt.Sprintf("KSPROPERTY_JACK(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_MEDIASEEKING int32
 
@@ -991,6 +2832,35 @@ const (
 	KSPROPERTY_MEDIASEEKING_CONVERTTIMEFORMAT KSPROPERTY_MEDIASEEKING = 9
 )
 
+// String returns the KSPROPERTY_MEDIASEEKING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_MEDIASEEKING) String() string {
+	switch e {
+	case KSPROPERTY_MEDIASEEKING_CAPABILITIES:
+		return "KSPROPERTY_MEDIASEEKING_CAPABILITIES"
+	case KSPROPERTY_MEDIASEEKING_FORMATS:
+		return "KSPROPERTY_MEDIASEEKING_FORMATS"
+	case KSPROPERTY_MEDIASEEKING_TIMEFORMAT:
+		return "KSPROPERTY_MEDIASEEKING_TIMEFORMAT"
+	case KSPROPERTY_MEDIASEEKING_POSITION:
+		return "KSPROPERTY_MEDIASEEKING_POSITION"
+	case KSPROPERTY_MEDIASEEKING_STOPPOSITION:
+		return "KSPROPERTY_MEDIASEEKING_STOPPOSITION"
+	case KSPROPERTY_MEDIASEEKING_POSITIONS:
+		return "KSPROPERTY_MEDIASEEKING_POSITIONS"
+	case KSPROPERTY_MEDIASEEKING_DURATION:
+		return "KSPROPERTY_MEDIASEEKING_DURATION"
+	case KSPROPERTY_MEDIASEEKING_AVAILABLE:
+		return "KSPROPERTY_MEDIASEEKING_AVAILABLE"
+	case KSPROPERTY_MEDIASEEKING_PREROLL:
+		return "KSPROPERTY_MEDIASEEKING_PREROLL"
+	case KSPROPERTY_MEDIASEEKING_CONVERTTIMEFORMAT:
+		return "KSPROPERTY_MEDIASEEKING_CONVERTTIMEFORMAT"
+	default:
+		return fmt.Sprintf("KSPROPERTY_MEDIASEEKING(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_MIDILOOPEDSTREAMING int32
 
 const (
@@ -998,6 +2868,21 @@ const (
 	KSPROPERTY_MIDILOOPEDSTREAMING_REGISTERS          KSPROPERTY_MIDILOOPEDSTREAMING = 1
 	KSPROPERTY_MIDILOOPEDSTREAMING_NOTIFICATION_EVENT KSPROPERTY_MIDILOOPEDSTREAMING = 2
 )
+
+// String returns the KSPROPERTY_MIDILOOPEDSTREAMING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_MIDILOOPEDSTREAMING) String() string {
+	switch e {
+	case KSPROPERTY_MIDILOOPEDSTREAMING_BUFFER:
+		return "KSPROPERTY_MIDILOOPEDSTREAMING_BUFFER"
+	case KSPROPERTY_MIDILOOPEDSTREAMING_REGISTERS:
+		return "KSPROPERTY_MIDILOOPEDSTREAMING_REGISTERS"
+	case KSPROPERTY_MIDILOOPEDSTREAMING_NOTIFICATION_EVENT:
+		return "KSPROPERTY_MIDILOOPEDSTREAMING_NOTIFICATION_EVENT"
+	default:
+		return fmt.Sprintf("KSPROPERTY_MIDILOOPEDSTREAMING(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_MPEG2VID int32
 
@@ -1009,17 +2894,58 @@ const (
 	KSPROPERTY_MPEG2VID_16_9_PANSCAN KSPROPERTY_MPEG2VID = 4
 )
 
+// String returns the KSPROPERTY_MPEG2VID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_MPEG2VID) String() string {
+	switch e {
+	case KSPROPERTY_MPEG2VID_MODES:
+		return "KSPROPERTY_MPEG2VID_MODES"
+	case KSPROPERTY_MPEG2VID_CUR_MODE:
+		return "KSPROPERTY_MPEG2VID_CUR_MODE"
+	case KSPROPERTY_MPEG2VID_4_3_RECT:
+		return "KSPROPERTY_MPEG2VID_4_3_RECT"
+	case KSPROPERTY_MPEG2VID_16_9_RECT:
+		return "KSPROPERTY_MPEG2VID_16_9_RECT"
+	case KSPROPERTY_MPEG2VID_16_9_PANSCAN:
+		return "KSPROPERTY_MPEG2VID_16_9_PANSCAN"
+	default:
+		return fmt.Sprintf("KSPROPERTY_MPEG2VID(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_MPEG4_MEDIATYPE_ATTRIBUTES int32
 
 const (
 	KSPROPERTY_MPEG4_MEDIATYPE_SD_BOX KSPROPERTY_MPEG4_MEDIATYPE_ATTRIBUTES = 1
 )
 
+// String returns the KSPROPERTY_MPEG4_MEDIATYPE_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_MPEG4_MEDIATYPE_ATTRIBUTES) String() string {
+	switch e {
+	case KSPROPERTY_MPEG4_MEDIATYPE_SD_BOX:
+		return "KSPROPERTY_MPEG4_MEDIATYPE_SD_BOX"
+	default:
+		return fmt.Sprintf("KSPROPERTY_MPEG4_MEDIATYPE_ATTRIBUTES(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_NETWORKCAMERACONTROL_METADATA_TYPE int32
 
 const (
 	KSPROPERTY_NETWORKCAMERACONTROL_METADATA_TYPE_EVENTSINFO KSPROPERTY_NETWORKCAMERACONTROL_METADATA_TYPE = 0
 )
+
+// String returns the KSPROPERTY_NETWORKCAMERACONTROL_METADATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_NETWORKCAMERACONTROL_METADATA_TYPE) String() string {
+	switch e {
+	case KSPROPERTY_NETWORKCAMERACONTROL_METADATA_TYPE_EVENTSINFO:
+		return "KSPROPERTY_NETWORKCAMERACONTROL_METADATA_TYPE_EVENTSINFO"
+	default:
+		return fmt.Sprintf("KSPROPERTY_NETWORKCAMERACONTROL_METADATA_TYPE(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE int32
 
@@ -1029,6 +2955,21 @@ const (
 	KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE_CUSTOM  KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE = 2
 )
 
+// String returns the KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE) String() string {
+	switch e {
+	case KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE_DISABLE:
+		return "KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE_DISABLE"
+	case KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE_HOSTNTP:
+		return "KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE_HOSTNTP"
+	case KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE_CUSTOM:
+		return "KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE_CUSTOM"
+	default:
+		return fmt.Sprintf("KSPROPERTY_NETWORKCAMERACONTROL_NTPINFO_TYPE(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_NETWORKCAMERACONTROL_PROPERTY int32
 
 const (
@@ -1037,6 +2978,23 @@ const (
 	KSPROPERTY_NETWORKCAMERACONTROL_METADATA        KSPROPERTY_NETWORKCAMERACONTROL_PROPERTY = 2
 	KSPROPERTY_NETWORKCAMERACONTROL_EVENTTOPICS_XML KSPROPERTY_NETWORKCAMERACONTROL_PROPERTY = 3
 )
+
+// String returns the KSPROPERTY_NETWORKCAMERACONTROL_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_NETWORKCAMERACONTROL_PROPERTY) String() string {
+	switch e {
+	case KSPROPERTY_NETWORKCAMERACONTROL_NTP:
+		return "KSPROPERTY_NETWORKCAMERACONTROL_NTP"
+	case KSPROPERTY_NETWORKCAMERACONTROL_URI:
+		return "KSPROPERTY_NETWORKCAMERACONTROL_URI"
+	case KSPROPERTY_NETWORKCAMERACONTROL_METADATA:
+		return "KSPROPERTY_NETWORKCAMERACONTROL_METADATA"
+	case KSPROPERTY_NETWORKCAMERACONTROL_EVENTTOPICS_XML:
+		return "KSPROPERTY_NETWORKCAMERACONTROL_EVENTTOPICS_XML"
+	default:
+		return fmt.Sprintf("KSPROPERTY_NETWORKCAMERACONTROL_PROPERTY(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_OVERLAYUPDATE int32
 
@@ -1049,6 +3007,29 @@ const (
 	KSPROPERTY_OVERLAYUPDATE_DISPLAYCHANGE KSPROPERTY_OVERLAYUPDATE = 16
 	KSPROPERTY_OVERLAYUPDATE_COLORREF      KSPROPERTY_OVERLAYUPDATE = 268435456
 )
+
+// String returns the KSPROPERTY_OVERLAYUPDATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_OVERLAYUPDATE) String() string {
+	switch e {
+	case KSPROPERTY_OVERLAYUPDATE_INTERESTS:
+		return "KSPROPERTY_OVERLAYUPDATE_INTERESTS"
+	case KSPROPERTY_OVERLAYUPDATE_CLIPLIST:
+		return "KSPROPERTY_OVERLAYUPDATE_CLIPLIST"
+	case KSPROPERTY_OVERLAYUPDATE_PALETTE:
+		return "KSPROPERTY_OVERLAYUPDATE_PALETTE"
+	case KSPROPERTY_OVERLAYUPDATE_COLORKEY:
+		return "KSPROPERTY_OVERLAYUPDATE_COLORKEY"
+	case KSPROPERTY_OVERLAYUPDATE_VIDEOPOSITION:
+		return "KSPROPERTY_OVERLAYUPDATE_VIDEOPOSITION"
+	case KSPROPERTY_OVERLAYUPDATE_DISPLAYCHANGE:
+		return "KSPROPERTY_OVERLAYUPDATE_DISPLAYCHANGE"
+	case KSPROPERTY_OVERLAYUPDATE_COLORREF:
+		return "KSPROPERTY_OVERLAYUPDATE_COLORREF"
+	default:
+		return fmt.Sprintf("KSPROPERTY_OVERLAYUPDATE(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_PIN int32
 
@@ -1072,12 +3053,68 @@ const (
 	KSPROPERTY_PIN_MODEDATAFORMATS       KSPROPERTY_PIN = 16
 )
 
+// String returns the KSPROPERTY_PIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_PIN) String() string {
+	switch e {
+	case KSPROPERTY_PIN_CINSTANCES:
+		return "KSPROPERTY_PIN_CINSTANCES"
+	case KSPROPERTY_PIN_CTYPES:
+		return "KSPROPERTY_PIN_CTYPES"
+	case KSPROPERTY_PIN_DATAFLOW:
+		return "KSPROPERTY_PIN_DATAFLOW"
+	case KSPROPERTY_PIN_DATARANGES:
+		return "KSPROPERTY_PIN_DATARANGES"
+	case KSPROPERTY_PIN_DATAINTERSECTION:
+		return "KSPROPERTY_PIN_DATAINTERSECTION"
+	case KSPROPERTY_PIN_INTERFACES:
+		return "KSPROPERTY_PIN_INTERFACES"
+	case KSPROPERTY_PIN_MEDIUMS:
+		return "KSPROPERTY_PIN_MEDIUMS"
+	case KSPROPERTY_PIN_COMMUNICATION:
+		return "KSPROPERTY_PIN_COMMUNICATION"
+	case KSPROPERTY_PIN_GLOBALCINSTANCES:
+		return "KSPROPERTY_PIN_GLOBALCINSTANCES"
+	case KSPROPERTY_PIN_NECESSARYINSTANCES:
+		return "KSPROPERTY_PIN_NECESSARYINSTANCES"
+	case KSPROPERTY_PIN_PHYSICALCONNECTION:
+		return "KSPROPERTY_PIN_PHYSICALCONNECTION"
+	case KSPROPERTY_PIN_CATEGORY:
+		return "KSPROPERTY_PIN_CATEGORY"
+	case KSPROPERTY_PIN_NAME:
+		return "KSPROPERTY_PIN_NAME"
+	case KSPROPERTY_PIN_CONSTRAINEDDATARANGES:
+		return "KSPROPERTY_PIN_CONSTRAINEDDATARANGES"
+	case KSPROPERTY_PIN_PROPOSEDATAFORMAT:
+		return "KSPROPERTY_PIN_PROPOSEDATAFORMAT"
+	case KSPROPERTY_PIN_PROPOSEDATAFORMAT2:
+		return "KSPROPERTY_PIN_PROPOSEDATAFORMAT2"
+	case KSPROPERTY_PIN_MODEDATAFORMATS:
+		return "KSPROPERTY_PIN_MODEDATAFORMATS"
+	default:
+		return fmt.Sprintf("KSPROPERTY_PIN(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_QUALITY int32
 
 const (
 	KSPROPERTY_QUALITY_REPORT KSPROPERTY_QUALITY = 0
 	KSPROPERTY_QUALITY_ERROR  KSPROPERTY_QUALITY = 1
 )
+
+// String returns the KSPROPERTY_QUALITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_QUALITY) String() string {
+	switch e {
+	case KSPROPERTY_QUALITY_REPORT:
+		return "KSPROPERTY_QUALITY_REPORT"
+	case KSPROPERTY_QUALITY_ERROR:
+		return "KSPROPERTY_QUALITY_ERROR"
+	default:
+		return fmt.Sprintf("KSPROPERTY_QUALITY(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_RTAUDIO int32
 
@@ -1098,6 +3135,43 @@ const (
 	KSPROPERTY_RTAUDIO_PACKETVREGISTER               KSPROPERTY_RTAUDIO = 13
 )
 
+// String returns the KSPROPERTY_RTAUDIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_RTAUDIO) String() string {
+	switch e {
+	case KSPROPERTY_RTAUDIO_GETPOSITIONFUNCTION:
+		return "KSPROPERTY_RTAUDIO_GETPOSITIONFUNCTION"
+	case KSPROPERTY_RTAUDIO_BUFFER:
+		return "KSPROPERTY_RTAUDIO_BUFFER"
+	case KSPROPERTY_RTAUDIO_HWLATENCY:
+		return "KSPROPERTY_RTAUDIO_HWLATENCY"
+	case KSPROPERTY_RTAUDIO_POSITIONREGISTER:
+		return "KSPROPERTY_RTAUDIO_POSITIONREGISTER"
+	case KSPROPERTY_RTAUDIO_CLOCKREGISTER:
+		return "KSPROPERTY_RTAUDIO_CLOCKREGISTER"
+	case KSPROPERTY_RTAUDIO_BUFFER_WITH_NOTIFICATION:
+		return "KSPROPERTY_RTAUDIO_BUFFER_WITH_NOTIFICATION"
+	case KSPROPERTY_RTAUDIO_REGISTER_NOTIFICATION_EVENT:
+		return "KSPROPERTY_RTAUDIO_REGISTER_NOTIFICATION_EVENT"
+	case KSPROPERTY_RTAUDIO_UNREGISTER_NOTIFICATION_EVENT:
+		return "KSPROPERTY_RTAUDIO_UNREGISTER_NOTIFICATION_EVENT"
+	case KSPROPERTY_RTAUDIO_QUERY_NOTIFICATION_SUPPORT:
+		return "KSPROPERTY_RTAUDIO_QUERY_NOTIFICATION_SUPPORT"
+	case KSPROPERTY_RTAUDIO_PACKETCOUNT:
+		return "KSPROPERTY_RTAUDIO_PACKETCOUNT"
+	case KSPROPERTY_RTAUDIO_PRESENTATION_POSITION:
+		return "KSPROPERTY_RTAUDIO_PRESENTATION_POSITION"
+	case KSPROPERTY_RTAUDIO_GETREADPACKET:
+		return "KSPROPERTY_RTAUDIO_GETREADPACKET"
+	case KSPROPERTY_RTAUDIO_SETWRITEPACKET:
+		return "KSPROPERTY_RTAUDIO_SETWRITEPACKET"
+	case KSPROPERTY_RTAUDIO_PACKETVREGISTER:
+		return "KSPROPERTY_RTAUDIO_PACKETVREGISTER"
+	default:
+		return fmt.Sprintf("KSPROPERTY_RTAUDIO(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_SOUNDDETECTOR int32
 
 const (
@@ -1108,6 +3182,27 @@ const (
 	KSPROPERTY_SOUNDDETECTOR_RESET             KSPROPERTY_SOUNDDETECTOR = 5
 	KSPROPERTY_SOUNDDETECTOR_STREAMINGSUPPORT  KSPROPERTY_SOUNDDETECTOR = 6
 )
+
+// String returns the KSPROPERTY_SOUNDDETECTOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_SOUNDDETECTOR) String() string {
+	switch e {
+	case KSPROPERTY_SOUNDDETECTOR_SUPPORTEDPATTERNS:
+		return "KSPROPERTY_SOUNDDETECTOR_SUPPORTEDPATTERNS"
+	case KSPROPERTY_SOUNDDETECTOR_PATTERNS:
+		return "KSPROPERTY_SOUNDDETECTOR_PATTERNS"
+	case KSPROPERTY_SOUNDDETECTOR_ARMED:
+		return "KSPROPERTY_SOUNDDETECTOR_ARMED"
+	case KSPROPERTY_SOUNDDETECTOR_MATCHRESULT:
+		return "KSPROPERTY_SOUNDDETECTOR_MATCHRESULT"
+	case KSPROPERTY_SOUNDDETECTOR_RESET:
+		return "KSPROPERTY_SOUNDDETECTOR_RESET"
+	case KSPROPERTY_SOUNDDETECTOR_STREAMINGSUPPORT:
+		return "KSPROPERTY_SOUNDDETECTOR_STREAMINGSUPPORT"
+	default:
+		return fmt.Sprintf("KSPROPERTY_SOUNDDETECTOR(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_STREAM int32
 
@@ -1125,11 +3220,53 @@ const (
 	KSPROPERTY_STREAM_PIPE_ID            KSPROPERTY_STREAM = 10
 )
 
+// String returns the KSPROPERTY_STREAM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_STREAM) String() string {
+	switch e {
+	case KSPROPERTY_STREAM_ALLOCATOR:
+		return "KSPROPERTY_STREAM_ALLOCATOR"
+	case KSPROPERTY_STREAM_QUALITY:
+		return "KSPROPERTY_STREAM_QUALITY"
+	case KSPROPERTY_STREAM_DEGRADATION:
+		return "KSPROPERTY_STREAM_DEGRADATION"
+	case KSPROPERTY_STREAM_MASTERCLOCK:
+		return "KSPROPERTY_STREAM_MASTERCLOCK"
+	case KSPROPERTY_STREAM_TIMEFORMAT:
+		return "KSPROPERTY_STREAM_TIMEFORMAT"
+	case KSPROPERTY_STREAM_PRESENTATIONTIME:
+		return "KSPROPERTY_STREAM_PRESENTATIONTIME"
+	case KSPROPERTY_STREAM_PRESENTATIONEXTENT:
+		return "KSPROPERTY_STREAM_PRESENTATIONEXTENT"
+	case KSPROPERTY_STREAM_FRAMETIME:
+		return "KSPROPERTY_STREAM_FRAMETIME"
+	case KSPROPERTY_STREAM_RATECAPABILITY:
+		return "KSPROPERTY_STREAM_RATECAPABILITY"
+	case KSPROPERTY_STREAM_RATE:
+		return "KSPROPERTY_STREAM_RATE"
+	case KSPROPERTY_STREAM_PIPE_ID:
+		return "KSPROPERTY_STREAM_PIPE_ID"
+	default:
+		return fmt.Sprintf("KSPROPERTY_STREAM(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_STREAMINTERFACE int32
 
 const (
 	KSPROPERTY_STREAMINTERFACE_HEADERSIZE KSPROPERTY_STREAMINTERFACE = 0
 )
+
+// String returns the KSPROPERTY_STREAMINTERFACE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_STREAMINTERFACE) String() string {
+	switch e {
+	case KSPROPERTY_STREAMINTERFACE_HEADERSIZE:
+		return "KSPROPERTY_STREAMINTERFACE_HEADERSIZE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_STREAMINTERFACE(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_TELEPHONY_CONTROL int32
 
@@ -1142,12 +3279,46 @@ const (
 	KSPROPERTY_TELEPHONY_MUTE_TX        KSPROPERTY_TELEPHONY_CONTROL = 5
 )
 
+// String returns the KSPROPERTY_TELEPHONY_CONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_TELEPHONY_CONTROL) String() string {
+	switch e {
+	case KSPROPERTY_TELEPHONY_PROVIDERID:
+		return "KSPROPERTY_TELEPHONY_PROVIDERID"
+	case KSPROPERTY_TELEPHONY_CALLINFO:
+		return "KSPROPERTY_TELEPHONY_CALLINFO"
+	case KSPROPERTY_TELEPHONY_CALLCONTROL:
+		return "KSPROPERTY_TELEPHONY_CALLCONTROL"
+	case KSPROPERTY_TELEPHONY_PROVIDERCHANGE:
+		return "KSPROPERTY_TELEPHONY_PROVIDERCHANGE"
+	case KSPROPERTY_TELEPHONY_CALLHOLD:
+		return "KSPROPERTY_TELEPHONY_CALLHOLD"
+	case KSPROPERTY_TELEPHONY_MUTE_TX:
+		return "KSPROPERTY_TELEPHONY_MUTE_TX"
+	default:
+		return fmt.Sprintf("KSPROPERTY_TELEPHONY_CONTROL(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_TELEPHONY_TOPOLOGY int32
 
 const (
 	KSPROPERTY_TELEPHONY_ENDPOINTIDPAIR KSPROPERTY_TELEPHONY_TOPOLOGY = 0
 	KSPROPERTY_TELEPHONY_VOLUME         KSPROPERTY_TELEPHONY_TOPOLOGY = 1
 )
+
+// String returns the KSPROPERTY_TELEPHONY_TOPOLOGY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_TELEPHONY_TOPOLOGY) String() string {
+	switch e {
+	case KSPROPERTY_TELEPHONY_ENDPOINTIDPAIR:
+		return "KSPROPERTY_TELEPHONY_ENDPOINTIDPAIR"
+	case KSPROPERTY_TELEPHONY_VOLUME:
+		return "KSPROPERTY_TELEPHONY_VOLUME"
+	default:
+		return fmt.Sprintf("KSPROPERTY_TELEPHONY_TOPOLOGY(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_TIMECODE int32
 
@@ -1156,6 +3327,21 @@ const (
 	KSPROPERTY_ATN_READER      KSPROPERTY_TIMECODE = 1
 	KSPROPERTY_RTC_READER      KSPROPERTY_TIMECODE = 2
 )
+
+// String returns the KSPROPERTY_TIMECODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_TIMECODE) String() string {
+	switch e {
+	case KSPROPERTY_TIMECODE_READER:
+		return "KSPROPERTY_TIMECODE_READER"
+	case KSPROPERTY_ATN_READER:
+		return "KSPROPERTY_ATN_READER"
+	case KSPROPERTY_RTC_READER:
+		return "KSPROPERTY_RTC_READER"
+	default:
+		return fmt.Sprintf("KSPROPERTY_TIMECODE(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_TOPOLOGY int32
 
@@ -1166,12 +3352,42 @@ const (
 	KSPROPERTY_TOPOLOGY_NAME        KSPROPERTY_TOPOLOGY = 3
 )
 
+// String returns the KSPROPERTY_TOPOLOGY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_TOPOLOGY) String() string {
+	switch e {
+	case KSPROPERTY_TOPOLOGY_CATEGORIES:
+		return "KSPROPERTY_TOPOLOGY_CATEGORIES"
+	case KSPROPERTY_TOPOLOGY_NODES:
+		return "KSPROPERTY_TOPOLOGY_NODES"
+	case KSPROPERTY_TOPOLOGY_CONNECTIONS:
+		return "KSPROPERTY_TOPOLOGY_CONNECTIONS"
+	case KSPROPERTY_TOPOLOGY_NAME:
+		return "KSPROPERTY_TOPOLOGY_NAME"
+	default:
+		return fmt.Sprintf("KSPROPERTY_TOPOLOGY(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_TOPOLOGYNODE int32
 
 const (
 	KSPROPERTY_TOPOLOGYNODE_ENABLE KSPROPERTY_TOPOLOGYNODE = 1
 	KSPROPERTY_TOPOLOGYNODE_RESET  KSPROPERTY_TOPOLOGYNODE = 2
 )
+
+// String returns the KSPROPERTY_TOPOLOGYNODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_TOPOLOGYNODE) String() string {
+	switch e {
+	case KSPROPERTY_TOPOLOGYNODE_ENABLE:
+		return "KSPROPERTY_TOPOLOGYNODE_ENABLE"
+	case KSPROPERTY_TOPOLOGYNODE_RESET:
+		return "KSPROPERTY_TOPOLOGYNODE_RESET"
+	default:
+		return fmt.Sprintf("KSPROPERTY_TOPOLOGYNODE(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_TUNER int32
 
@@ -1190,6 +3406,39 @@ const (
 	KSPROPERTY_TUNER_NETWORKTYPE_SCAN_CAPS KSPROPERTY_TUNER = 11
 )
 
+// String returns the KSPROPERTY_TUNER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_TUNER) String() string {
+	switch e {
+	case KSPROPERTY_TUNER_CAPS:
+		return "KSPROPERTY_TUNER_CAPS"
+	case KSPROPERTY_TUNER_MODE_CAPS:
+		return "KSPROPERTY_TUNER_MODE_CAPS"
+	case KSPROPERTY_TUNER_MODE:
+		return "KSPROPERTY_TUNER_MODE"
+	case KSPROPERTY_TUNER_STANDARD:
+		return "KSPROPERTY_TUNER_STANDARD"
+	case KSPROPERTY_TUNER_FREQUENCY:
+		return "KSPROPERTY_TUNER_FREQUENCY"
+	case KSPROPERTY_TUNER_INPUT:
+		return "KSPROPERTY_TUNER_INPUT"
+	case KSPROPERTY_TUNER_STATUS:
+		return "KSPROPERTY_TUNER_STATUS"
+	case KSPROPERTY_TUNER_IF_MEDIUM:
+		return "KSPROPERTY_TUNER_IF_MEDIUM"
+	case KSPROPERTY_TUNER_SCAN_CAPS:
+		return "KSPROPERTY_TUNER_SCAN_CAPS"
+	case KSPROPERTY_TUNER_SCAN_STATUS:
+		return "KSPROPERTY_TUNER_SCAN_STATUS"
+	case KSPROPERTY_TUNER_STANDARD_MODE:
+		return "KSPROPERTY_TUNER_STANDARD_MODE"
+	case KSPROPERTY_TUNER_NETWORKTYPE_SCAN_CAPS:
+		return "KSPROPERTY_TUNER_NETWORKTYPE_SCAN_CAPS"
+	default:
+		return fmt.Sprintf("KSPROPERTY_TUNER(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_TUNER_MODES int32
 
 const (
@@ -1200,11 +3449,41 @@ const (
 	KSPROPERTY_TUNER_MODE_ATSC     KSPROPERTY_TUNER_MODES = 16
 )
 
+// String returns the KSPROPERTY_TUNER_MODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_TUNER_MODES) String() string {
+	switch e {
+	case KSPROPERTY_TUNER_MODE_TV:
+		return "KSPROPERTY_TUNER_MODE_TV"
+	case KSPROPERTY_TUNER_MODE_FM_RADIO:
+		return "KSPROPERTY_TUNER_MODE_FM_RADIO"
+	case KSPROPERTY_TUNER_MODE_AM_RADIO:
+		return "KSPROPERTY_TUNER_MODE_AM_RADIO"
+	case KSPROPERTY_TUNER_MODE_DSS:
+		return "KSPROPERTY_TUNER_MODE_DSS"
+	case KSPROPERTY_TUNER_MODE_ATSC:
+		return "KSPROPERTY_TUNER_MODE_ATSC"
+	default:
+		return fmt.Sprintf("KSPROPERTY_TUNER_MODES(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_VBICAP int32
 
 const (
 	KSPROPERTY_VBICAP_PROPERTIES_PROTECTION KSPROPERTY_VBICAP = 1
 )
+
+// String returns the KSPROPERTY_VBICAP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VBICAP) String() string {
+	switch e {
+	case KSPROPERTY_VBICAP_PROPERTIES_PROTECTION:
+		return "KSPROPERTY_VBICAP_PROPERTIES_PROTECTION"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VBICAP(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_VBICODECFILTERING int32
 
@@ -1215,6 +3494,25 @@ const (
 	KSPROPERTY_VBICODECFILTERING_SUBSTREAMS_DISCOVERED_BIT_ARRAY KSPROPERTY_VBICODECFILTERING = 4
 	KSPROPERTY_VBICODECFILTERING_STATISTICS                      KSPROPERTY_VBICODECFILTERING = 5
 )
+
+// String returns the KSPROPERTY_VBICODECFILTERING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VBICODECFILTERING) String() string {
+	switch e {
+	case KSPROPERTY_VBICODECFILTERING_SCANLINES_REQUESTED_BIT_ARRAY:
+		return "KSPROPERTY_VBICODECFILTERING_SCANLINES_REQUESTED_BIT_ARRAY"
+	case KSPROPERTY_VBICODECFILTERING_SCANLINES_DISCOVERED_BIT_ARRAY:
+		return "KSPROPERTY_VBICODECFILTERING_SCANLINES_DISCOVERED_BIT_ARRAY"
+	case KSPROPERTY_VBICODECFILTERING_SUBSTREAMS_REQUESTED_BIT_ARRAY:
+		return "KSPROPERTY_VBICODECFILTERING_SUBSTREAMS_REQUESTED_BIT_ARRAY"
+	case KSPROPERTY_VBICODECFILTERING_SUBSTREAMS_DISCOVERED_BIT_ARRAY:
+		return "KSPROPERTY_VBICODECFILTERING_SUBSTREAMS_DISCOVERED_BIT_ARRAY"
+	case KSPROPERTY_VBICODECFILTERING_STATISTICS:
+		return "KSPROPERTY_VBICODECFILTERING_STATISTICS"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VBICODECFILTERING(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_VIDCAP_CAMERACONTROL int32
 
@@ -1241,6 +3539,55 @@ const (
 	KSPROPERTY_CAMERACONTROL_AUTO_EXPOSURE_PRIORITY KSPROPERTY_VIDCAP_CAMERACONTROL = 19
 )
 
+// String returns the KSPROPERTY_VIDCAP_CAMERACONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VIDCAP_CAMERACONTROL) String() string {
+	switch e {
+	case KSPROPERTY_CAMERACONTROL_PAN:
+		return "KSPROPERTY_CAMERACONTROL_PAN"
+	case KSPROPERTY_CAMERACONTROL_TILT:
+		return "KSPROPERTY_CAMERACONTROL_TILT"
+	case KSPROPERTY_CAMERACONTROL_ROLL:
+		return "KSPROPERTY_CAMERACONTROL_ROLL"
+	case KSPROPERTY_CAMERACONTROL_ZOOM:
+		return "KSPROPERTY_CAMERACONTROL_ZOOM"
+	case KSPROPERTY_CAMERACONTROL_EXPOSURE:
+		return "KSPROPERTY_CAMERACONTROL_EXPOSURE"
+	case KSPROPERTY_CAMERACONTROL_IRIS:
+		return "KSPROPERTY_CAMERACONTROL_IRIS"
+	case KSPROPERTY_CAMERACONTROL_FOCUS:
+		return "KSPROPERTY_CAMERACONTROL_FOCUS"
+	case KSPROPERTY_CAMERACONTROL_SCANMODE:
+		return "KSPROPERTY_CAMERACONTROL_SCANMODE"
+	case KSPROPERTY_CAMERACONTROL_PRIVACY:
+		return "KSPROPERTY_CAMERACONTROL_PRIVACY"
+	case KSPROPERTY_CAMERACONTROL_PANTILT:
+		return "KSPROPERTY_CAMERACONTROL_PANTILT"
+	case KSPROPERTY_CAMERACONTROL_PAN_RELATIVE:
+		return "KSPROPERTY_CAMERACONTROL_PAN_RELATIVE"
+	case KSPROPERTY_CAMERACONTROL_TILT_RELATIVE:
+		return "KSPROPERTY_CAMERACONTROL_TILT_RELATIVE"
+	case KSPROPERTY_CAMERACONTROL_ROLL_RELATIVE:
+		return "KSPROPERTY_CAMERACONTROL_ROLL_RELATIVE"
+	case KSPROPERTY_CAMERACONTROL_ZOOM_RELATIVE:
+		return "KSPROPERTY_CAMERACONTROL_ZOOM_RELATIVE"
+	case KSPROPERTY_CAMERACONTROL_EXPOSURE_RELATIVE:
+		return "KSPROPERTY_CAMERACONTROL_EXPOSURE_RELATIVE"
+	case KSPROPERTY_CAMERACONTROL_IRIS_RELATIVE:
+		return "KSPROPERTY_CAMERACONTROL_IRIS_RELATIVE"
+	case KSPROPERTY_CAMERACONTROL_FOCUS_RELATIVE:
+		return "KSPROPERTY_CAMERACONTROL_FOCUS_RELATIVE"
+	case KSPROPERTY_CAMERACONTROL_PANTILT_RELATIVE:
+		return "KSPROPERTY_CAMERACONTROL_PANTILT_RELATIVE"
+	case KSPROPERTY_CAMERACONTROL_FOCAL_LENGTH:
+		return "KSPROPERTY_CAMERACONTROL_FOCAL_LENGTH"
+	case KSPROPERTY_CAMERACONTROL_AUTO_EXPOSURE_PRIORITY:
+		return "KSPROPERTY_CAMERACONTROL_AUTO_EXPOSURE_PRIORITY"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VIDCAP_CAMERACONTROL(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_VIDCAP_CROSSBAR int32
 
 const (
@@ -1251,11 +3598,41 @@ const (
 	KSPROPERTY_CROSSBAR_INPUT_ACTIVE KSPROPERTY_VIDCAP_CROSSBAR = 4
 )
 
+// String returns the KSPROPERTY_VIDCAP_CROSSBAR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VIDCAP_CROSSBAR) String() string {
+	switch e {
+	case KSPROPERTY_CROSSBAR_CAPS:
+		return "KSPROPERTY_CROSSBAR_CAPS"
+	case KSPROPERTY_CROSSBAR_PININFO:
+		return "KSPROPERTY_CROSSBAR_PININFO"
+	case KSPROPERTY_CROSSBAR_CAN_ROUTE:
+		return "KSPROPERTY_CROSSBAR_CAN_ROUTE"
+	case KSPROPERTY_CROSSBAR_ROUTE:
+		return "KSPROPERTY_CROSSBAR_ROUTE"
+	case KSPROPERTY_CROSSBAR_INPUT_ACTIVE:
+		return "KSPROPERTY_CROSSBAR_INPUT_ACTIVE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VIDCAP_CROSSBAR(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_VIDCAP_DROPPEDFRAMES int32
 
 const (
 	KSPROPERTY_DROPPEDFRAMES_CURRENT KSPROPERTY_VIDCAP_DROPPEDFRAMES = 0
 )
+
+// String returns the KSPROPERTY_VIDCAP_DROPPEDFRAMES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VIDCAP_DROPPEDFRAMES) String() string {
+	switch e {
+	case KSPROPERTY_DROPPEDFRAMES_CURRENT:
+		return "KSPROPERTY_DROPPEDFRAMES_CURRENT"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VIDCAP_DROPPEDFRAMES(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_VIDCAP_SELECTOR int32
 
@@ -1264,6 +3641,19 @@ const (
 	KSPROPERTY_SELECTOR_NUM_SOURCES    KSPROPERTY_VIDCAP_SELECTOR = 1
 )
 
+// String returns the KSPROPERTY_VIDCAP_SELECTOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VIDCAP_SELECTOR) String() string {
+	switch e {
+	case KSPROPERTY_SELECTOR_SOURCE_NODE_ID:
+		return "KSPROPERTY_SELECTOR_SOURCE_NODE_ID"
+	case KSPROPERTY_SELECTOR_NUM_SOURCES:
+		return "KSPROPERTY_SELECTOR_NUM_SOURCES"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VIDCAP_SELECTOR(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_VIDCAP_TVAUDIO int32
 
 const (
@@ -1271,6 +3661,21 @@ const (
 	KSPROPERTY_TVAUDIO_MODE                      KSPROPERTY_VIDCAP_TVAUDIO = 1
 	KSPROPERTY_TVAUDIO_CURRENTLY_AVAILABLE_MODES KSPROPERTY_VIDCAP_TVAUDIO = 2
 )
+
+// String returns the KSPROPERTY_VIDCAP_TVAUDIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VIDCAP_TVAUDIO) String() string {
+	switch e {
+	case KSPROPERTY_TVAUDIO_CAPS:
+		return "KSPROPERTY_TVAUDIO_CAPS"
+	case KSPROPERTY_TVAUDIO_MODE:
+		return "KSPROPERTY_TVAUDIO_MODE"
+	case KSPROPERTY_TVAUDIO_CURRENTLY_AVAILABLE_MODES:
+		return "KSPROPERTY_TVAUDIO_CURRENTLY_AVAILABLE_MODES"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VIDCAP_TVAUDIO(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_VIDCAP_VIDEOCOMPRESSION int32
 
@@ -1284,6 +3689,29 @@ const (
 	KSPROPERTY_VIDEOCOMPRESSION_WINDOWSIZE           KSPROPERTY_VIDCAP_VIDEOCOMPRESSION = 6
 )
 
+// String returns the KSPROPERTY_VIDCAP_VIDEOCOMPRESSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VIDCAP_VIDEOCOMPRESSION) String() string {
+	switch e {
+	case KSPROPERTY_VIDEOCOMPRESSION_GETINFO:
+		return "KSPROPERTY_VIDEOCOMPRESSION_GETINFO"
+	case KSPROPERTY_VIDEOCOMPRESSION_KEYFRAME_RATE:
+		return "KSPROPERTY_VIDEOCOMPRESSION_KEYFRAME_RATE"
+	case KSPROPERTY_VIDEOCOMPRESSION_PFRAMES_PER_KEYFRAME:
+		return "KSPROPERTY_VIDEOCOMPRESSION_PFRAMES_PER_KEYFRAME"
+	case KSPROPERTY_VIDEOCOMPRESSION_QUALITY:
+		return "KSPROPERTY_VIDEOCOMPRESSION_QUALITY"
+	case KSPROPERTY_VIDEOCOMPRESSION_OVERRIDE_KEYFRAME:
+		return "KSPROPERTY_VIDEOCOMPRESSION_OVERRIDE_KEYFRAME"
+	case KSPROPERTY_VIDEOCOMPRESSION_OVERRIDE_FRAME_SIZE:
+		return "KSPROPERTY_VIDEOCOMPRESSION_OVERRIDE_FRAME_SIZE"
+	case KSPROPERTY_VIDEOCOMPRESSION_WINDOWSIZE:
+		return "KSPROPERTY_VIDEOCOMPRESSION_WINDOWSIZE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VIDCAP_VIDEOCOMPRESSION(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_VIDCAP_VIDEOCONTROL int32
 
 const (
@@ -1292,6 +3720,23 @@ const (
 	KSPROPERTY_VIDEOCONTROL_FRAME_RATES       KSPROPERTY_VIDCAP_VIDEOCONTROL = 2
 	KSPROPERTY_VIDEOCONTROL_MODE              KSPROPERTY_VIDCAP_VIDEOCONTROL = 3
 )
+
+// String returns the KSPROPERTY_VIDCAP_VIDEOCONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VIDCAP_VIDEOCONTROL) String() string {
+	switch e {
+	case KSPROPERTY_VIDEOCONTROL_CAPS:
+		return "KSPROPERTY_VIDEOCONTROL_CAPS"
+	case KSPROPERTY_VIDEOCONTROL_ACTUAL_FRAME_RATE:
+		return "KSPROPERTY_VIDEOCONTROL_ACTUAL_FRAME_RATE"
+	case KSPROPERTY_VIDEOCONTROL_FRAME_RATES:
+		return "KSPROPERTY_VIDEOCONTROL_FRAME_RATES"
+	case KSPROPERTY_VIDEOCONTROL_MODE:
+		return "KSPROPERTY_VIDEOCONTROL_MODE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VIDCAP_VIDEOCONTROL(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_VIDCAP_VIDEODECODER int32
 
@@ -1304,6 +3749,27 @@ const (
 	KSPROPERTY_VIDEODECODER_STATUS2       KSPROPERTY_VIDCAP_VIDEODECODER = 5
 )
 
+// String returns the KSPROPERTY_VIDCAP_VIDEODECODER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VIDCAP_VIDEODECODER) String() string {
+	switch e {
+	case KSPROPERTY_VIDEODECODER_CAPS:
+		return "KSPROPERTY_VIDEODECODER_CAPS"
+	case KSPROPERTY_VIDEODECODER_STANDARD:
+		return "KSPROPERTY_VIDEODECODER_STANDARD"
+	case KSPROPERTY_VIDEODECODER_STATUS:
+		return "KSPROPERTY_VIDEODECODER_STATUS"
+	case KSPROPERTY_VIDEODECODER_OUTPUT_ENABLE:
+		return "KSPROPERTY_VIDEODECODER_OUTPUT_ENABLE"
+	case KSPROPERTY_VIDEODECODER_VCR_TIMING:
+		return "KSPROPERTY_VIDEODECODER_VCR_TIMING"
+	case KSPROPERTY_VIDEODECODER_STATUS2:
+		return "KSPROPERTY_VIDEODECODER_STATUS2"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VIDCAP_VIDEODECODER(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_VIDCAP_VIDEOENCODER int32
 
 const (
@@ -1312,6 +3778,23 @@ const (
 	KSPROPERTY_VIDEOENCODER_COPYPROTECTION KSPROPERTY_VIDCAP_VIDEOENCODER = 2
 	KSPROPERTY_VIDEOENCODER_CC_ENABLE      KSPROPERTY_VIDCAP_VIDEOENCODER = 3
 )
+
+// String returns the KSPROPERTY_VIDCAP_VIDEOENCODER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VIDCAP_VIDEOENCODER) String() string {
+	switch e {
+	case KSPROPERTY_VIDEOENCODER_CAPS:
+		return "KSPROPERTY_VIDEOENCODER_CAPS"
+	case KSPROPERTY_VIDEOENCODER_STANDARD:
+		return "KSPROPERTY_VIDEOENCODER_STANDARD"
+	case KSPROPERTY_VIDEOENCODER_COPYPROTECTION:
+		return "KSPROPERTY_VIDEOENCODER_COPYPROTECTION"
+	case KSPROPERTY_VIDEOENCODER_CC_ENABLE:
+		return "KSPROPERTY_VIDEOENCODER_CC_ENABLE"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VIDCAP_VIDEOENCODER(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_VIDCAP_VIDEOPROCAMP int32
 
@@ -1332,6 +3815,43 @@ const (
 	KSPROPERTY_VIDEOPROCAMP_POWERLINE_FREQUENCY      KSPROPERTY_VIDCAP_VIDEOPROCAMP = 13
 )
 
+// String returns the KSPROPERTY_VIDCAP_VIDEOPROCAMP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VIDCAP_VIDEOPROCAMP) String() string {
+	switch e {
+	case KSPROPERTY_VIDEOPROCAMP_BRIGHTNESS:
+		return "KSPROPERTY_VIDEOPROCAMP_BRIGHTNESS"
+	case KSPROPERTY_VIDEOPROCAMP_CONTRAST:
+		return "KSPROPERTY_VIDEOPROCAMP_CONTRAST"
+	case KSPROPERTY_VIDEOPROCAMP_HUE:
+		return "KSPROPERTY_VIDEOPROCAMP_HUE"
+	case KSPROPERTY_VIDEOPROCAMP_SATURATION:
+		return "KSPROPERTY_VIDEOPROCAMP_SATURATION"
+	case KSPROPERTY_VIDEOPROCAMP_SHARPNESS:
+		return "KSPROPERTY_VIDEOPROCAMP_SHARPNESS"
+	case KSPROPERTY_VIDEOPROCAMP_GAMMA:
+		return "KSPROPERTY_VIDEOPROCAMP_GAMMA"
+	case KSPROPERTY_VIDEOPROCAMP_COLORENABLE:
+		return "KSPROPERTY_VIDEOPROCAMP_COLORENABLE"
+	case KSPROPERTY_VIDEOPROCAMP_WHITEBALANCE:
+		return "KSPROPERTY_VIDEOPROCAMP_WHITEBALANCE"
+	case KSPROPERTY_VIDEOPROCAMP_BACKLIGHT_COMPENSATION:
+		return "KSPROPERTY_VIDEOPROCAMP_BACKLIGHT_COMPENSATION"
+	case KSPROPERTY_VIDEOPROCAMP_GAIN:
+		return "KSPROPERTY_VIDEOPROCAMP_GAIN"
+	case KSPROPERTY_VIDEOPROCAMP_DIGITAL_MULTIPLIER:
+		return "KSPROPERTY_VIDEOPROCAMP_DIGITAL_MULTIPLIER"
+	case KSPROPERTY_VIDEOPROCAMP_DIGITAL_MULTIPLIER_LIMIT:
+		return "KSPROPERTY_VIDEOPROCAMP_DIGITAL_MULTIPLIER_LIMIT"
+	case KSPROPERTY_VIDEOPROCAMP_WHITEBALANCE_COMPONENT:
+		return "KSPROPERTY_VIDEOPROCAMP_WHITEBALANCE_COMPONENT"
+	case KSPROPERTY_VIDEOPROCAMP_POWERLINE_FREQUENCY:
+		return "KSPROPERTY_VIDEOPROCAMP_POWERLINE_FREQUENCY"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VIDCAP_VIDEOPROCAMP(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_VIDMEM_TRANSPORT int32
 
 const (
@@ -1340,6 +3860,23 @@ const (
 	KSPROPERTY_CURRENT_CAPTURE_SURFACE            KSPROPERTY_VIDMEM_TRANSPORT = 3
 	KSPROPERTY_MAP_CAPTURE_HANDLE_TO_VRAM_ADDRESS KSPROPERTY_VIDMEM_TRANSPORT = 4
 )
+
+// String returns the KSPROPERTY_VIDMEM_TRANSPORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VIDMEM_TRANSPORT) String() string {
+	switch e {
+	case KSPROPERTY_DISPLAY_ADAPTER_GUID:
+		return "KSPROPERTY_DISPLAY_ADAPTER_GUID"
+	case KSPROPERTY_PREFERRED_CAPTURE_SURFACE:
+		return "KSPROPERTY_PREFERRED_CAPTURE_SURFACE"
+	case KSPROPERTY_CURRENT_CAPTURE_SURFACE:
+		return "KSPROPERTY_CURRENT_CAPTURE_SURFACE"
+	case KSPROPERTY_MAP_CAPTURE_HANDLE_TO_VRAM_ADDRESS:
+		return "KSPROPERTY_MAP_CAPTURE_HANDLE_TO_VRAM_ADDRESS"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VIDMEM_TRANSPORT(%d)", int32(e))
+	}
+}
 
 type KSPROPERTY_VPCONFIG int32
 
@@ -1362,6 +3899,47 @@ const (
 	KSPROPERTY_VPCONFIG_SURFACEPARAMS        KSPROPERTY_VPCONFIG = 15
 )
 
+// String returns the KSPROPERTY_VPCONFIG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_VPCONFIG) String() string {
+	switch e {
+	case KSPROPERTY_VPCONFIG_NUMCONNECTINFO:
+		return "KSPROPERTY_VPCONFIG_NUMCONNECTINFO"
+	case KSPROPERTY_VPCONFIG_GETCONNECTINFO:
+		return "KSPROPERTY_VPCONFIG_GETCONNECTINFO"
+	case KSPROPERTY_VPCONFIG_SETCONNECTINFO:
+		return "KSPROPERTY_VPCONFIG_SETCONNECTINFO"
+	case KSPROPERTY_VPCONFIG_VPDATAINFO:
+		return "KSPROPERTY_VPCONFIG_VPDATAINFO"
+	case KSPROPERTY_VPCONFIG_MAXPIXELRATE:
+		return "KSPROPERTY_VPCONFIG_MAXPIXELRATE"
+	case KSPROPERTY_VPCONFIG_INFORMVPINPUT:
+		return "KSPROPERTY_VPCONFIG_INFORMVPINPUT"
+	case KSPROPERTY_VPCONFIG_NUMVIDEOFORMAT:
+		return "KSPROPERTY_VPCONFIG_NUMVIDEOFORMAT"
+	case KSPROPERTY_VPCONFIG_GETVIDEOFORMAT:
+		return "KSPROPERTY_VPCONFIG_GETVIDEOFORMAT"
+	case KSPROPERTY_VPCONFIG_SETVIDEOFORMAT:
+		return "KSPROPERTY_VPCONFIG_SETVIDEOFORMAT"
+	case KSPROPERTY_VPCONFIG_INVERTPOLARITY:
+		return "KSPROPERTY_VPCONFIG_INVERTPOLARITY"
+	case KSPROPERTY_VPCONFIG_DECIMATIONCAPABILITY:
+		return "KSPROPERTY_VPCONFIG_DECIMATIONCAPABILITY"
+	case KSPROPERTY_VPCONFIG_SCALEFACTOR:
+		return "KSPROPERTY_VPCONFIG_SCALEFACTOR"
+	case KSPROPERTY_VPCONFIG_DDRAWHANDLE:
+		return "KSPROPERTY_VPCONFIG_DDRAWHANDLE"
+	case KSPROPERTY_VPCONFIG_VIDEOPORTID:
+		return "KSPROPERTY_VPCONFIG_VIDEOPORTID"
+	case KSPROPERTY_VPCONFIG_DDRAWSURFACEHANDLE:
+		return "KSPROPERTY_VPCONFIG_DDRAWSURFACEHANDLE"
+	case KSPROPERTY_VPCONFIG_SURFACEPARAMS:
+		return "KSPROPERTY_VPCONFIG_SURFACEPARAMS"
+	default:
+		return fmt.Sprintf("KSPROPERTY_VPCONFIG(%d)", int32(e))
+	}
+}
+
 type KSPROPERTY_WAVE int32
 
 const (
@@ -1374,12 +3952,48 @@ const (
 	KSPROPERTY_WAVE_PAN                     KSPROPERTY_WAVE = 6
 )
 
+// String returns the KSPROPERTY_WAVE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_WAVE) String() string {
+	switch e {
+	case KSPROPERTY_WAVE_COMPATIBLE_CAPABILITIES:
+		return "KSPROPERTY_WAVE_COMPATIBLE_CAPABILITIES"
+	case KSPROPERTY_WAVE_INPUT_CAPABILITIES:
+		return "KSPROPERTY_WAVE_INPUT_CAPABILITIES"
+	case KSPROPERTY_WAVE_OUTPUT_CAPABILITIES:
+		return "KSPROPERTY_WAVE_OUTPUT_CAPABILITIES"
+	case KSPROPERTY_WAVE_BUFFER:
+		return "KSPROPERTY_WAVE_BUFFER"
+	case KSPROPERTY_WAVE_FREQUENCY:
+		return "KSPROPERTY_WAVE_FREQUENCY"
+	case KSPROPERTY_WAVE_VOLUME:
+		return "KSPROPERTY_WAVE_VOLUME"
+	case KSPROPERTY_WAVE_PAN:
+		return "KSPROPERTY_WAVE_PAN"
+	default:
+		return fmt.Sprintf("KSPROPERTY_WAVE(%d)", int32(e))
+	}
+}
+
 type KSRESET int32
 
 const (
 	KSRESET_BEGIN KSRESET = 0
 	KSRESET_END   KSRESET = 1
 )
+
+// String returns the KSRESET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSRESET) String() string {
+	switch e {
+	case KSRESET_BEGIN:
+		return "KSRESET_BEGIN"
+	case KSRESET_END:
+		return "KSRESET_END"
+	default:
+		return fmt.Sprintf("KSRESET(%d)", int32(e))
+	}
+}
 
 type KSSTATE int32
 
@@ -1390,6 +4004,23 @@ const (
 	KSSTATE_RUN     KSSTATE = 3
 )
 
+// String returns the KSSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSSTATE) String() string {
+	switch e {
+	case KSSTATE_STOP:
+		return "KSSTATE_STOP"
+	case KSSTATE_ACQUIRE:
+		return "KSSTATE_ACQUIRE"
+	case KSSTATE_PAUSE:
+		return "KSSTATE_PAUSE"
+	case KSSTATE_RUN:
+		return "KSSTATE_RUN"
+	default:
+		return fmt.Sprintf("KSSTATE(%d)", int32(e))
+	}
+}
+
 type KS_AMPixAspectRatio int32
 
 const (
@@ -1398,6 +4029,23 @@ const (
 	KS_PixAspectRatio_PAL4x3   KS_AMPixAspectRatio = 2
 	KS_PixAspectRatio_PAL16x9  KS_AMPixAspectRatio = 3
 )
+
+// String returns the KS_AMPixAspectRatio constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_AMPixAspectRatio) String() string {
+	switch e {
+	case KS_PixAspectRatio_NTSC4x3:
+		return "KS_PixAspectRatio_NTSC4x3"
+	case KS_PixAspectRatio_NTSC16x9:
+		return "KS_PixAspectRatio_NTSC16x9"
+	case KS_PixAspectRatio_PAL4x3:
+		return "KS_PixAspectRatio_PAL4x3"
+	case KS_PixAspectRatio_PAL16x9:
+		return "KS_PixAspectRatio_PAL16x9"
+	default:
+		return fmt.Sprintf("KS_AMPixAspectRatio(%d)", int32(e))
+	}
+}
 
 type KS_AMVP_MODE int32
 
@@ -1409,6 +4057,25 @@ const (
 	KS_AMVP_MODE_SKIPODD           KS_AMVP_MODE = 4
 )
 
+// String returns the KS_AMVP_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_AMVP_MODE) String() string {
+	switch e {
+	case KS_AMVP_MODE_WEAVE:
+		return "KS_AMVP_MODE_WEAVE"
+	case KS_AMVP_MODE_BOBINTERLEAVED:
+		return "KS_AMVP_MODE_BOBINTERLEAVED"
+	case KS_AMVP_MODE_BOBNONINTERLEAVED:
+		return "KS_AMVP_MODE_BOBNONINTERLEAVED"
+	case KS_AMVP_MODE_SKIPEVEN:
+		return "KS_AMVP_MODE_SKIPEVEN"
+	case KS_AMVP_MODE_SKIPODD:
+		return "KS_AMVP_MODE_SKIPODD"
+	default:
+		return fmt.Sprintf("KS_AMVP_MODE(%d)", int32(e))
+	}
+}
+
 type KS_AMVP_SELECTFORMATBY int32
 
 const (
@@ -1416,6 +4083,21 @@ const (
 	KS_AMVP_BEST_BANDWIDTH       KS_AMVP_SELECTFORMATBY = 1
 	KS_AMVP_INPUT_SAME_AS_OUTPUT KS_AMVP_SELECTFORMATBY = 2
 )
+
+// String returns the KS_AMVP_SELECTFORMATBY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_AMVP_SELECTFORMATBY) String() string {
+	switch e {
+	case KS_AMVP_DO_NOT_CARE:
+		return "KS_AMVP_DO_NOT_CARE"
+	case KS_AMVP_BEST_BANDWIDTH:
+		return "KS_AMVP_BEST_BANDWIDTH"
+	case KS_AMVP_INPUT_SAME_AS_OUTPUT:
+		return "KS_AMVP_INPUT_SAME_AS_OUTPUT"
+	default:
+		return fmt.Sprintf("KS_AMVP_SELECTFORMATBY(%d)", int32(e))
+	}
+}
 
 type KS_AM_PROPERTY_TS_RATE_CHANGE int32
 
@@ -1425,6 +4107,23 @@ const (
 	KS_AM_RATE_MaxFullDataRate  KS_AM_PROPERTY_TS_RATE_CHANGE = 3
 	KS_AM_RATE_Step             KS_AM_PROPERTY_TS_RATE_CHANGE = 4
 )
+
+// String returns the KS_AM_PROPERTY_TS_RATE_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_AM_PROPERTY_TS_RATE_CHANGE) String() string {
+	switch e {
+	case KS_AM_RATE_SimpleRateChange:
+		return "KS_AM_RATE_SimpleRateChange"
+	case KS_AM_RATE_ExactRateChange:
+		return "KS_AM_RATE_ExactRateChange"
+	case KS_AM_RATE_MaxFullDataRate:
+		return "KS_AM_RATE_MaxFullDataRate"
+	case KS_AM_RATE_Step:
+		return "KS_AM_RATE_Step"
+	default:
+		return fmt.Sprintf("KS_AM_PROPERTY_TS_RATE_CHANGE(%d)", int32(e))
+	}
+}
 
 type KS_AnalogVideoStandard int32
 
@@ -1452,6 +4151,57 @@ const (
 	KS_AnalogVideo_PAL_N_COMBO KS_AnalogVideoStandard = 1048576
 )
 
+// String returns the KS_AnalogVideoStandard constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_AnalogVideoStandard) String() string {
+	switch e {
+	case KS_AnalogVideo_None:
+		return "KS_AnalogVideo_None"
+	case KS_AnalogVideo_NTSC_M:
+		return "KS_AnalogVideo_NTSC_M"
+	case KS_AnalogVideo_NTSC_M_J:
+		return "KS_AnalogVideo_NTSC_M_J"
+	case KS_AnalogVideo_NTSC_433:
+		return "KS_AnalogVideo_NTSC_433"
+	case KS_AnalogVideo_PAL_B:
+		return "KS_AnalogVideo_PAL_B"
+	case KS_AnalogVideo_PAL_D:
+		return "KS_AnalogVideo_PAL_D"
+	case KS_AnalogVideo_PAL_G:
+		return "KS_AnalogVideo_PAL_G"
+	case KS_AnalogVideo_PAL_H:
+		return "KS_AnalogVideo_PAL_H"
+	case KS_AnalogVideo_PAL_I:
+		return "KS_AnalogVideo_PAL_I"
+	case KS_AnalogVideo_PAL_M:
+		return "KS_AnalogVideo_PAL_M"
+	case KS_AnalogVideo_PAL_N:
+		return "KS_AnalogVideo_PAL_N"
+	case KS_AnalogVideo_PAL_60:
+		return "KS_AnalogVideo_PAL_60"
+	case KS_AnalogVideo_SECAM_B:
+		return "KS_AnalogVideo_SECAM_B"
+	case KS_AnalogVideo_SECAM_D:
+		return "KS_AnalogVideo_SECAM_D"
+	case KS_AnalogVideo_SECAM_G:
+		return "KS_AnalogVideo_SECAM_G"
+	case KS_AnalogVideo_SECAM_H:
+		return "KS_AnalogVideo_SECAM_H"
+	case KS_AnalogVideo_SECAM_K:
+		return "KS_AnalogVideo_SECAM_K"
+	case KS_AnalogVideo_SECAM_K1:
+		return "KS_AnalogVideo_SECAM_K1"
+	case KS_AnalogVideo_SECAM_L:
+		return "KS_AnalogVideo_SECAM_L"
+	case KS_AnalogVideo_SECAM_L1:
+		return "KS_AnalogVideo_SECAM_L1"
+	case KS_AnalogVideo_PAL_N_COMBO:
+		return "KS_AnalogVideo_PAL_N_COMBO"
+	default:
+		return fmt.Sprintf("KS_AnalogVideoStandard(%d)", int32(e))
+	}
+}
+
 type KS_COPY_MACROVISION_LEVEL int32
 
 const (
@@ -1461,6 +4211,23 @@ const (
 	KS_MACROVISION_LEVEL3   KS_COPY_MACROVISION_LEVEL = 3
 )
 
+// String returns the KS_COPY_MACROVISION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_COPY_MACROVISION_LEVEL) String() string {
+	switch e {
+	case KS_MACROVISION_DISABLED:
+		return "KS_MACROVISION_DISABLED"
+	case KS_MACROVISION_LEVEL1:
+		return "KS_MACROVISION_LEVEL1"
+	case KS_MACROVISION_LEVEL2:
+		return "KS_MACROVISION_LEVEL2"
+	case KS_MACROVISION_LEVEL3:
+		return "KS_MACROVISION_LEVEL3"
+	default:
+		return fmt.Sprintf("KS_COPY_MACROVISION_LEVEL(%d)", int32(e))
+	}
+}
+
 type KS_CameraControlAsyncOperation int32
 
 const (
@@ -1468,6 +4235,21 @@ const (
 	KS_CAMERACONTROL_ASYNC_STOP  KS_CameraControlAsyncOperation = 2
 	KS_CAMERACONTROL_ASYNC_RESET KS_CameraControlAsyncOperation = 3
 )
+
+// String returns the KS_CameraControlAsyncOperation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_CameraControlAsyncOperation) String() string {
+	switch e {
+	case KS_CAMERACONTROL_ASYNC_START:
+		return "KS_CAMERACONTROL_ASYNC_START"
+	case KS_CAMERACONTROL_ASYNC_STOP:
+		return "KS_CAMERACONTROL_ASYNC_STOP"
+	case KS_CAMERACONTROL_ASYNC_RESET:
+		return "KS_CAMERACONTROL_ASYNC_RESET"
+	default:
+		return fmt.Sprintf("KS_CameraControlAsyncOperation(%d)", int32(e))
+	}
+}
 
 type KS_CompressionCaps int32
 
@@ -1479,6 +4261,25 @@ const (
 	KS_CompressionCaps_CanWindow   KS_CompressionCaps = 16
 )
 
+// String returns the KS_CompressionCaps constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_CompressionCaps) String() string {
+	switch e {
+	case KS_CompressionCaps_CanQuality:
+		return "KS_CompressionCaps_CanQuality"
+	case KS_CompressionCaps_CanCrunch:
+		return "KS_CompressionCaps_CanCrunch"
+	case KS_CompressionCaps_CanKeyFrame:
+		return "KS_CompressionCaps_CanKeyFrame"
+	case KS_CompressionCaps_CanBFrame:
+		return "KS_CompressionCaps_CanBFrame"
+	case KS_CompressionCaps_CanWindow:
+		return "KS_CompressionCaps_CanWindow"
+	default:
+		return fmt.Sprintf("KS_CompressionCaps(%d)", int32(e))
+	}
+}
+
 type KS_DVDCOPYSTATE int32
 
 const (
@@ -1488,6 +4289,25 @@ const (
 	KS_DVDCOPYSTATE_AUTHENTICATION_REQUIRED     KS_DVDCOPYSTATE = 3
 	KS_DVDCOPYSTATE_DONE                        KS_DVDCOPYSTATE = 4
 )
+
+// String returns the KS_DVDCOPYSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_DVDCOPYSTATE) String() string {
+	switch e {
+	case KS_DVDCOPYSTATE_INITIALIZE:
+		return "KS_DVDCOPYSTATE_INITIALIZE"
+	case KS_DVDCOPYSTATE_INITIALIZE_TITLE:
+		return "KS_DVDCOPYSTATE_INITIALIZE_TITLE"
+	case KS_DVDCOPYSTATE_AUTHENTICATION_NOT_REQUIRED:
+		return "KS_DVDCOPYSTATE_AUTHENTICATION_NOT_REQUIRED"
+	case KS_DVDCOPYSTATE_AUTHENTICATION_REQUIRED:
+		return "KS_DVDCOPYSTATE_AUTHENTICATION_REQUIRED"
+	case KS_DVDCOPYSTATE_DONE:
+		return "KS_DVDCOPYSTATE_DONE"
+	default:
+		return fmt.Sprintf("KS_DVDCOPYSTATE(%d)", int32(e))
+	}
+}
 
 type KS_LogicalMemoryType int32
 
@@ -1501,6 +4321,29 @@ const (
 	KS_MemoryTypeAnyHost          KS_LogicalMemoryType = 6
 )
 
+// String returns the KS_LogicalMemoryType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_LogicalMemoryType) String() string {
+	switch e {
+	case KS_MemoryTypeDontCare:
+		return "KS_MemoryTypeDontCare"
+	case KS_MemoryTypeKernelPaged:
+		return "KS_MemoryTypeKernelPaged"
+	case KS_MemoryTypeKernelNonPaged:
+		return "KS_MemoryTypeKernelNonPaged"
+	case KS_MemoryTypeDeviceHostMapped:
+		return "KS_MemoryTypeDeviceHostMapped"
+	case KS_MemoryTypeDeviceSpecific:
+		return "KS_MemoryTypeDeviceSpecific"
+	case KS_MemoryTypeUser:
+		return "KS_MemoryTypeUser"
+	case KS_MemoryTypeAnyHost:
+		return "KS_MemoryTypeAnyHost"
+	default:
+		return fmt.Sprintf("KS_LogicalMemoryType(%d)", int32(e))
+	}
+}
+
 type KS_MPEG2Level int32
 
 const (
@@ -1509,6 +4352,23 @@ const (
 	KS_MPEG2Level_High1440 KS_MPEG2Level = 2
 	KS_MPEG2Level_High     KS_MPEG2Level = 3
 )
+
+// String returns the KS_MPEG2Level constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_MPEG2Level) String() string {
+	switch e {
+	case KS_MPEG2Level_Low:
+		return "KS_MPEG2Level_Low"
+	case KS_MPEG2Level_Main:
+		return "KS_MPEG2Level_Main"
+	case KS_MPEG2Level_High1440:
+		return "KS_MPEG2Level_High1440"
+	case KS_MPEG2Level_High:
+		return "KS_MPEG2Level_High"
+	default:
+		return fmt.Sprintf("KS_MPEG2Level(%d)", int32(e))
+	}
+}
 
 type KS_MPEG2Profile int32
 
@@ -1519,6 +4379,25 @@ const (
 	KS_MPEG2Profile_SpatiallyScalable KS_MPEG2Profile = 3
 	KS_MPEG2Profile_High              KS_MPEG2Profile = 4
 )
+
+// String returns the KS_MPEG2Profile constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_MPEG2Profile) String() string {
+	switch e {
+	case KS_MPEG2Profile_Simple:
+		return "KS_MPEG2Profile_Simple"
+	case KS_MPEG2Profile_Main:
+		return "KS_MPEG2Profile_Main"
+	case KS_MPEG2Profile_SNRScalable:
+		return "KS_MPEG2Profile_SNRScalable"
+	case KS_MPEG2Profile_SpatiallyScalable:
+		return "KS_MPEG2Profile_SpatiallyScalable"
+	case KS_MPEG2Profile_High:
+		return "KS_MPEG2Profile_High"
+	default:
+		return fmt.Sprintf("KS_MPEG2Profile(%d)", int32(e))
+	}
+}
 
 type KS_PhysicalConnectorType int32
 
@@ -1549,6 +4428,63 @@ const (
 	KS_PhysConn_Audio_AudioDecoder    KS_PhysicalConnectorType = 4105
 )
 
+// String returns the KS_PhysicalConnectorType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_PhysicalConnectorType) String() string {
+	switch e {
+	case KS_PhysConn_Video_Tuner:
+		return "KS_PhysConn_Video_Tuner"
+	case KS_PhysConn_Video_Composite:
+		return "KS_PhysConn_Video_Composite"
+	case KS_PhysConn_Video_SVideo:
+		return "KS_PhysConn_Video_SVideo"
+	case KS_PhysConn_Video_RGB:
+		return "KS_PhysConn_Video_RGB"
+	case KS_PhysConn_Video_YRYBY:
+		return "KS_PhysConn_Video_YRYBY"
+	case KS_PhysConn_Video_SerialDigital:
+		return "KS_PhysConn_Video_SerialDigital"
+	case KS_PhysConn_Video_ParallelDigital:
+		return "KS_PhysConn_Video_ParallelDigital"
+	case KS_PhysConn_Video_SCSI:
+		return "KS_PhysConn_Video_SCSI"
+	case KS_PhysConn_Video_AUX:
+		return "KS_PhysConn_Video_AUX"
+	case KS_PhysConn_Video_1394:
+		return "KS_PhysConn_Video_1394"
+	case KS_PhysConn_Video_USB:
+		return "KS_PhysConn_Video_USB"
+	case KS_PhysConn_Video_VideoDecoder:
+		return "KS_PhysConn_Video_VideoDecoder"
+	case KS_PhysConn_Video_VideoEncoder:
+		return "KS_PhysConn_Video_VideoEncoder"
+	case KS_PhysConn_Video_SCART:
+		return "KS_PhysConn_Video_SCART"
+	case KS_PhysConn_Audio_Tuner:
+		return "KS_PhysConn_Audio_Tuner"
+	case KS_PhysConn_Audio_Line:
+		return "KS_PhysConn_Audio_Line"
+	case KS_PhysConn_Audio_Mic:
+		return "KS_PhysConn_Audio_Mic"
+	case KS_PhysConn_Audio_AESDigital:
+		return "KS_PhysConn_Audio_AESDigital"
+	case KS_PhysConn_Audio_SPDIFDigital:
+		return "KS_PhysConn_Audio_SPDIFDigital"
+	case KS_PhysConn_Audio_SCSI:
+		return "KS_PhysConn_Audio_SCSI"
+	case KS_PhysConn_Audio_AUX:
+		return "KS_PhysConn_Audio_AUX"
+	case KS_PhysConn_Audio_1394:
+		return "KS_PhysConn_Audio_1394"
+	case KS_PhysConn_Audio_USB:
+		return "KS_PhysConn_Audio_USB"
+	case KS_PhysConn_Audio_AudioDecoder:
+		return "KS_PhysConn_Audio_AudioDecoder"
+	default:
+		return fmt.Sprintf("KS_PhysicalConnectorType(%d)", int32(e))
+	}
+}
+
 type KS_SEEKING_CAPABILITIES int32
 
 const (
@@ -1560,6 +4496,29 @@ const (
 	KS_SEEKING_CanGetDuration   KS_SEEKING_CAPABILITIES = 32
 	KS_SEEKING_CanPlayBackwards KS_SEEKING_CAPABILITIES = 64
 )
+
+// String returns the KS_SEEKING_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_SEEKING_CAPABILITIES) String() string {
+	switch e {
+	case KS_SEEKING_CanSeekAbsolute:
+		return "KS_SEEKING_CanSeekAbsolute"
+	case KS_SEEKING_CanSeekForwards:
+		return "KS_SEEKING_CanSeekForwards"
+	case KS_SEEKING_CanSeekBackwards:
+		return "KS_SEEKING_CanSeekBackwards"
+	case KS_SEEKING_CanGetCurrentPos:
+		return "KS_SEEKING_CanGetCurrentPos"
+	case KS_SEEKING_CanGetStopPos:
+		return "KS_SEEKING_CanGetStopPos"
+	case KS_SEEKING_CanGetDuration:
+		return "KS_SEEKING_CanGetDuration"
+	case KS_SEEKING_CanPlayBackwards:
+		return "KS_SEEKING_CanPlayBackwards"
+	default:
+		return fmt.Sprintf("KS_SEEKING_CAPABILITIES(%d)", int32(e))
+	}
+}
 
 type KS_SEEKING_FLAGS int32
 
@@ -1573,6 +4532,27 @@ const (
 	KS_SEEKING_ReturnTime             KS_SEEKING_FLAGS = 8
 )
 
+// String returns the KS_SEEKING_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_SEEKING_FLAGS) String() string {
+	switch e {
+	case KS_SEEKING_NoPositioning:
+		return "KS_SEEKING_NoPositioning"
+	case KS_SEEKING_AbsolutePositioning:
+		return "KS_SEEKING_AbsolutePositioning"
+	case KS_SEEKING_RelativePositioning:
+		return "KS_SEEKING_RelativePositioning"
+	case KS_SEEKING_IncrementalPositioning:
+		return "KS_SEEKING_IncrementalPositioning"
+	case KS_SEEKING_SeekToKeyFrame:
+		return "KS_SEEKING_SeekToKeyFrame"
+	case KS_SEEKING_ReturnTime:
+		return "KS_SEEKING_ReturnTime"
+	default:
+		return fmt.Sprintf("KS_SEEKING_FLAGS(%d)", int32(e))
+	}
+}
+
 type KS_TUNER_STRATEGY int32
 
 const (
@@ -1580,6 +4560,21 @@ const (
 	KS_TUNER_STRATEGY_SIGNAL_STRENGTH KS_TUNER_STRATEGY = 2
 	KS_TUNER_STRATEGY_DRIVER_TUNES    KS_TUNER_STRATEGY = 4
 )
+
+// String returns the KS_TUNER_STRATEGY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_TUNER_STRATEGY) String() string {
+	switch e {
+	case KS_TUNER_STRATEGY_PLL:
+		return "KS_TUNER_STRATEGY_PLL"
+	case KS_TUNER_STRATEGY_SIGNAL_STRENGTH:
+		return "KS_TUNER_STRATEGY_SIGNAL_STRENGTH"
+	case KS_TUNER_STRATEGY_DRIVER_TUNES:
+		return "KS_TUNER_STRATEGY_DRIVER_TUNES"
+	default:
+		return fmt.Sprintf("KS_TUNER_STRATEGY(%d)", int32(e))
+	}
+}
 
 type KS_TUNER_TUNING_FLAGS int32
 
@@ -1589,6 +4584,21 @@ const (
 	KS_TUNER_TUNING_COARSE KS_TUNER_TUNING_FLAGS = 3
 )
 
+// String returns the KS_TUNER_TUNING_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_TUNER_TUNING_FLAGS) String() string {
+	switch e {
+	case KS_TUNER_TUNING_EXACT:
+		return "KS_TUNER_TUNING_EXACT"
+	case KS_TUNER_TUNING_FINE:
+		return "KS_TUNER_TUNING_FINE"
+	case KS_TUNER_TUNING_COARSE:
+		return "KS_TUNER_TUNING_COARSE"
+	default:
+		return fmt.Sprintf("KS_TUNER_TUNING_FLAGS(%d)", int32(e))
+	}
+}
+
 type KS_VIDEODECODER_FLAGS int32
 
 const (
@@ -1596,6 +4606,21 @@ const (
 	KS_VIDEODECODER_FLAGS_CAN_USE_VCR_LOCKING KS_VIDEODECODER_FLAGS = 2
 	KS_VIDEODECODER_FLAGS_CAN_INDICATE_LOCKED KS_VIDEODECODER_FLAGS = 4
 )
+
+// String returns the KS_VIDEODECODER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_VIDEODECODER_FLAGS) String() string {
+	switch e {
+	case KS_VIDEODECODER_FLAGS_CAN_DISABLE_OUTPUT:
+		return "KS_VIDEODECODER_FLAGS_CAN_DISABLE_OUTPUT"
+	case KS_VIDEODECODER_FLAGS_CAN_USE_VCR_LOCKING:
+		return "KS_VIDEODECODER_FLAGS_CAN_USE_VCR_LOCKING"
+	case KS_VIDEODECODER_FLAGS_CAN_INDICATE_LOCKED:
+		return "KS_VIDEODECODER_FLAGS_CAN_INDICATE_LOCKED"
+	default:
+		return fmt.Sprintf("KS_VIDEODECODER_FLAGS(%d)", int32(e))
+	}
+}
 
 type KS_VideoControlFlags int32
 
@@ -1612,6 +4637,35 @@ const (
 	KS_VideoControlFlag_StopPhotoSequenceCapture       KS_VideoControlFlags = 512
 )
 
+// String returns the KS_VideoControlFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_VideoControlFlags) String() string {
+	switch e {
+	case KS_VideoControlFlag_FlipHorizontal:
+		return "KS_VideoControlFlag_FlipHorizontal"
+	case KS_VideoControlFlag_FlipVertical:
+		return "KS_VideoControlFlag_FlipVertical"
+	case KS_Obsolete_VideoControlFlag_ExternalTriggerEnable:
+		return "KS_Obsolete_VideoControlFlag_ExternalTriggerEnable"
+	case KS_Obsolete_VideoControlFlag_Trigger:
+		return "KS_Obsolete_VideoControlFlag_Trigger"
+	case KS_VideoControlFlag_ExternalTriggerEnable:
+		return "KS_VideoControlFlag_ExternalTriggerEnable"
+	case KS_VideoControlFlag_Trigger:
+		return "KS_VideoControlFlag_Trigger"
+	case KS_VideoControlFlag_IndependentImagePin:
+		return "KS_VideoControlFlag_IndependentImagePin"
+	case KS_VideoControlFlag_StillCapturePreviewFrame:
+		return "KS_VideoControlFlag_StillCapturePreviewFrame"
+	case KS_VideoControlFlag_StartPhotoSequenceCapture:
+		return "KS_VideoControlFlag_StartPhotoSequenceCapture"
+	case KS_VideoControlFlag_StopPhotoSequenceCapture:
+		return "KS_VideoControlFlag_StopPhotoSequenceCapture"
+	default:
+		return fmt.Sprintf("KS_VideoControlFlags(%d)", int32(e))
+	}
+}
+
 type KS_VideoStreamingHints int32
 
 const (
@@ -1622,6 +4676,25 @@ const (
 	KS_StreamingHint_CompWindowSize KS_VideoStreamingHints = 4096
 )
 
+// String returns the KS_VideoStreamingHints constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KS_VideoStreamingHints) String() string {
+	switch e {
+	case KS_StreamingHint_FrameInterval:
+		return "KS_StreamingHint_FrameInterval"
+	case KS_StreamingHint_KeyFrameRate:
+		return "KS_StreamingHint_KeyFrameRate"
+	case KS_StreamingHint_PFrameRate:
+		return "KS_StreamingHint_PFrameRate"
+	case KS_StreamingHint_CompQuality:
+		return "KS_StreamingHint_CompQuality"
+	case KS_StreamingHint_CompWindowSize:
+		return "KS_StreamingHint_CompWindowSize"
+	default:
+		return fmt.Sprintf("KS_VideoStreamingHints(%d)", int32(e))
+	}
+}
+
 type PIPE_ALLOCATOR_PLACE int32
 
 const (
@@ -1630,6 +4703,23 @@ const (
 	Pipe_Allocator_LastPin   PIPE_ALLOCATOR_PLACE = 2
 	Pipe_Allocator_MiddlePin PIPE_ALLOCATOR_PLACE = 3
 )
+
+// String returns the PIPE_ALLOCATOR_PLACE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PIPE_ALLOCATOR_PLACE) String() string {
+	switch e {
+	case Pipe_Allocator_None:
+		return "Pipe_Allocator_None"
+	case Pipe_Allocator_FirstPin:
+		return "Pipe_Allocator_FirstPin"
+	case Pipe_Allocator_LastPin:
+		return "Pipe_Allocator_LastPin"
+	case Pipe_Allocator_MiddlePin:
+		return "Pipe_Allocator_MiddlePin"
+	default:
+		return fmt.Sprintf("PIPE_ALLOCATOR_PLACE(%d)", int32(e))
+	}
+}
 
 type PIPE_STATE int32
 
@@ -1641,12 +4731,44 @@ const (
 	PipeState_Finalized          PIPE_STATE = 4
 )
 
+// String returns the PIPE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PIPE_STATE) String() string {
+	switch e {
+	case PipeState_DontCare:
+		return "PipeState_DontCare"
+	case PipeState_RangeNotFixed:
+		return "PipeState_RangeNotFixed"
+	case PipeState_RangeFixed:
+		return "PipeState_RangeFixed"
+	case PipeState_CompressionUnknown:
+		return "PipeState_CompressionUnknown"
+	case PipeState_Finalized:
+		return "PipeState_Finalized"
+	default:
+		return fmt.Sprintf("PIPE_STATE(%d)", int32(e))
+	}
+}
+
 type TELEPHONY_CALLCONTROLOP int32
 
 const (
 	TELEPHONY_CALLCONTROLOP_DISABLE TELEPHONY_CALLCONTROLOP = 0
 	TELEPHONY_CALLCONTROLOP_ENABLE  TELEPHONY_CALLCONTROLOP = 1
 )
+
+// String returns the TELEPHONY_CALLCONTROLOP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TELEPHONY_CALLCONTROLOP) String() string {
+	switch e {
+	case TELEPHONY_CALLCONTROLOP_DISABLE:
+		return "TELEPHONY_CALLCONTROLOP_DISABLE"
+	case TELEPHONY_CALLCONTROLOP_ENABLE:
+		return "TELEPHONY_CALLCONTROLOP_ENABLE"
+	default:
+		return fmt.Sprintf("TELEPHONY_CALLCONTROLOP(%d)", int32(e))
+	}
+}
 
 type TELEPHONY_CALLSTATE int32
 
@@ -1657,6 +4779,23 @@ const (
 	TELEPHONY_CALLSTATE_PROVIDERTRANSITION TELEPHONY_CALLSTATE = 3
 )
 
+// String returns the TELEPHONY_CALLSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TELEPHONY_CALLSTATE) String() string {
+	switch e {
+	case TELEPHONY_CALLSTATE_DISABLED:
+		return "TELEPHONY_CALLSTATE_DISABLED"
+	case TELEPHONY_CALLSTATE_ENABLED:
+		return "TELEPHONY_CALLSTATE_ENABLED"
+	case TELEPHONY_CALLSTATE_HOLD:
+		return "TELEPHONY_CALLSTATE_HOLD"
+	case TELEPHONY_CALLSTATE_PROVIDERTRANSITION:
+		return "TELEPHONY_CALLSTATE_PROVIDERTRANSITION"
+	default:
+		return fmt.Sprintf("TELEPHONY_CALLSTATE(%d)", int32(e))
+	}
+}
+
 type TELEPHONY_CALLTYPE int32
 
 const (
@@ -1664,6 +4803,21 @@ const (
 	TELEPHONY_CALLTYPE_PACKETSWITCHED_LTE  TELEPHONY_CALLTYPE = 1
 	TELEPHONY_CALLTYPE_PACKETSWITCHED_WLAN TELEPHONY_CALLTYPE = 2
 )
+
+// String returns the TELEPHONY_CALLTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TELEPHONY_CALLTYPE) String() string {
+	switch e {
+	case TELEPHONY_CALLTYPE_CIRCUITSWITCHED:
+		return "TELEPHONY_CALLTYPE_CIRCUITSWITCHED"
+	case TELEPHONY_CALLTYPE_PACKETSWITCHED_LTE:
+		return "TELEPHONY_CALLTYPE_PACKETSWITCHED_LTE"
+	case TELEPHONY_CALLTYPE_PACKETSWITCHED_WLAN:
+		return "TELEPHONY_CALLTYPE_PACKETSWITCHED_WLAN"
+	default:
+		return fmt.Sprintf("TELEPHONY_CALLTYPE(%d)", int32(e))
+	}
+}
 
 type TELEPHONY_PROVIDERCHANGEOP int32
 
@@ -1673,6 +4827,21 @@ const (
 	TELEPHONY_PROVIDERCHANGEOP_CANCEL TELEPHONY_PROVIDERCHANGEOP = 2
 )
 
+// String returns the TELEPHONY_PROVIDERCHANGEOP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TELEPHONY_PROVIDERCHANGEOP) String() string {
+	switch e {
+	case TELEPHONY_PROVIDERCHANGEOP_END:
+		return "TELEPHONY_PROVIDERCHANGEOP_END"
+	case TELEPHONY_PROVIDERCHANGEOP_BEGIN:
+		return "TELEPHONY_PROVIDERCHANGEOP_BEGIN"
+	case TELEPHONY_PROVIDERCHANGEOP_CANCEL:
+		return "TELEPHONY_PROVIDERCHANGEOP_CANCEL"
+	default:
+		return fmt.Sprintf("TELEPHONY_PROVIDERCHANGEOP(%d)", int32(e))
+	}
+}
+
 type TunerLockType int32
 
 const (
@@ -1680,3 +4849,18 @@ const (
 	Tuner_LockType_Within_Scan_Sensing_Range TunerLockType = 1
 	Tuner_LockType_Locked                    TunerLockType = 2
 )
+
+// String returns the TunerLockType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TunerLockType) String() string {
+	switch e {
+	case Tuner_LockType_None:
+		return "Tuner_LockType_None"
+	case Tuner_LockType_Within_Scan_Sensing_Range:
+		return "Tuner_LockType_Within_Scan_Sensing_Range"
+	case Tuner_LockType_Locked:
+		return "Tuner_LockType_Locked"
+	default:
+		return fmt.Sprintf("TunerLockType(%d)", int32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package compression
 
+import (
+	"fmt"
+)
+
 type COMPRESS_ALGORITHM uint32
 
 const (
@@ -13,6 +17,23 @@ const (
 	COMPRESS_ALGORITHM_LZMS        COMPRESS_ALGORITHM = 5
 )
 
+// String returns the COMPRESS_ALGORITHM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPRESS_ALGORITHM) String() string {
+	switch e {
+	case COMPRESS_ALGORITHM_MSZIP:
+		return "COMPRESS_ALGORITHM_MSZIP"
+	case COMPRESS_ALGORITHM_XPRESS:
+		return "COMPRESS_ALGORITHM_XPRESS"
+	case COMPRESS_ALGORITHM_XPRESS_HUFF:
+		return "COMPRESS_ALGORITHM_XPRESS_HUFF"
+	case COMPRESS_ALGORITHM_LZMS:
+		return "COMPRESS_ALGORITHM_LZMS"
+	default:
+		return fmt.Sprintf("COMPRESS_ALGORITHM(%d)", uint32(e))
+	}
+}
+
 // COMPRESS_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/compressapi/ne-compressapi-compress_information_class
 type COMPRESS_INFORMATION_CLASS int32
 
@@ -21,3 +42,18 @@ const (
 	COMPRESS_INFORMATION_CLASS_BLOCK_SIZE COMPRESS_INFORMATION_CLASS = 1
 	COMPRESS_INFORMATION_CLASS_LEVEL      COMPRESS_INFORMATION_CLASS = 2
 )
+
+// String returns the COMPRESS_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPRESS_INFORMATION_CLASS) String() string {
+	switch e {
+	case COMPRESS_INFORMATION_CLASS_INVALID:
+		return "COMPRESS_INFORMATION_CLASS_INVALID"
+	case COMPRESS_INFORMATION_CLASS_BLOCK_SIZE:
+		return "COMPRESS_INFORMATION_CLASS_BLOCK_SIZE"
+	case COMPRESS_INFORMATION_CLASS_LEVEL:
+		return "COMPRESS_INFORMATION_CLASS_LEVEL"
+	default:
+		return fmt.Sprintf("COMPRESS_INFORMATION_CLASS(%d)", int32(e))
+	}
+}

@@ -4,6 +4,12 @@
 
 package opengl
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type PFD_FLAGS uint32
 
 const (
@@ -28,6 +34,73 @@ const (
 	PFD_STEREO_DONTCARE       PFD_FLAGS = 2147483648
 )
 
+// String returns the PFD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PFD_FLAGS) String() string {
+	var parts []string
+	if e&PFD_DOUBLEBUFFER != 0 {
+		parts = append(parts, "PFD_DOUBLEBUFFER")
+	}
+	if e&PFD_STEREO != 0 {
+		parts = append(parts, "PFD_STEREO")
+	}
+	if e&PFD_DRAW_TO_WINDOW != 0 {
+		parts = append(parts, "PFD_DRAW_TO_WINDOW")
+	}
+	if e&PFD_DRAW_TO_BITMAP != 0 {
+		parts = append(parts, "PFD_DRAW_TO_BITMAP")
+	}
+	if e&PFD_SUPPORT_GDI != 0 {
+		parts = append(parts, "PFD_SUPPORT_GDI")
+	}
+	if e&PFD_SUPPORT_OPENGL != 0 {
+		parts = append(parts, "PFD_SUPPORT_OPENGL")
+	}
+	if e&PFD_GENERIC_FORMAT != 0 {
+		parts = append(parts, "PFD_GENERIC_FORMAT")
+	}
+	if e&PFD_NEED_PALETTE != 0 {
+		parts = append(parts, "PFD_NEED_PALETTE")
+	}
+	if e&PFD_NEED_SYSTEM_PALETTE != 0 {
+		parts = append(parts, "PFD_NEED_SYSTEM_PALETTE")
+	}
+	if e&PFD_SWAP_EXCHANGE != 0 {
+		parts = append(parts, "PFD_SWAP_EXCHANGE")
+	}
+	if e&PFD_SWAP_COPY != 0 {
+		parts = append(parts, "PFD_SWAP_COPY")
+	}
+	if e&PFD_SWAP_LAYER_BUFFERS != 0 {
+		parts = append(parts, "PFD_SWAP_LAYER_BUFFERS")
+	}
+	if e&PFD_GENERIC_ACCELERATED != 0 {
+		parts = append(parts, "PFD_GENERIC_ACCELERATED")
+	}
+	if e&PFD_SUPPORT_DIRECTDRAW != 0 {
+		parts = append(parts, "PFD_SUPPORT_DIRECTDRAW")
+	}
+	if e&PFD_DIRECT3D_ACCELERATED != 0 {
+		parts = append(parts, "PFD_DIRECT3D_ACCELERATED")
+	}
+	if e&PFD_SUPPORT_COMPOSITION != 0 {
+		parts = append(parts, "PFD_SUPPORT_COMPOSITION")
+	}
+	if e&PFD_DEPTH_DONTCARE != 0 {
+		parts = append(parts, "PFD_DEPTH_DONTCARE")
+	}
+	if e&PFD_DOUBLEBUFFER_DONTCARE != 0 {
+		parts = append(parts, "PFD_DOUBLEBUFFER_DONTCARE")
+	}
+	if e&PFD_STEREO_DONTCARE != 0 {
+		parts = append(parts, "PFD_STEREO_DONTCARE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type PFD_LAYER_TYPE int8
 
 const (
@@ -36,9 +109,37 @@ const (
 	PFD_OVERLAY_PLANE  PFD_LAYER_TYPE = 1
 )
 
+// String returns the PFD_LAYER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PFD_LAYER_TYPE) String() string {
+	switch e {
+	case PFD_UNDERLAY_PLANE:
+		return "PFD_UNDERLAY_PLANE"
+	case PFD_MAIN_PLANE:
+		return "PFD_MAIN_PLANE"
+	case PFD_OVERLAY_PLANE:
+		return "PFD_OVERLAY_PLANE"
+	default:
+		return fmt.Sprintf("PFD_LAYER_TYPE(%d)", int8(e))
+	}
+}
+
 type PFD_PIXEL_TYPE uint8
 
 const (
 	PFD_TYPE_RGBA       PFD_PIXEL_TYPE = 0
 	PFD_TYPE_COLORINDEX PFD_PIXEL_TYPE = 1
 )
+
+// String returns the PFD_PIXEL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PFD_PIXEL_TYPE) String() string {
+	switch e {
+	case PFD_TYPE_RGBA:
+		return "PFD_TYPE_RGBA"
+	case PFD_TYPE_COLORINDEX:
+		return "PFD_TYPE_COLORINDEX"
+	default:
+		return fmt.Sprintf("PFD_PIXEL_TYPE(%d)", uint8(e))
+	}
+}

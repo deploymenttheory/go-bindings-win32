@@ -4,6 +4,11 @@
 
 package structuredstorage
 
+import (
+	"fmt"
+	"strings"
+)
+
 type PIDMSI_STATUS_VALUE int32
 
 const (
@@ -19,6 +24,35 @@ const (
 	PIDMSI_STATUS_OTHER      PIDMSI_STATUS_VALUE = 32767
 )
 
+// String returns the PIDMSI_STATUS_VALUE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PIDMSI_STATUS_VALUE) String() string {
+	switch e {
+	case PIDMSI_STATUS_NORMAL:
+		return "PIDMSI_STATUS_NORMAL"
+	case PIDMSI_STATUS_NEW:
+		return "PIDMSI_STATUS_NEW"
+	case PIDMSI_STATUS_PRELIM:
+		return "PIDMSI_STATUS_PRELIM"
+	case PIDMSI_STATUS_DRAFT:
+		return "PIDMSI_STATUS_DRAFT"
+	case PIDMSI_STATUS_INPROGRESS:
+		return "PIDMSI_STATUS_INPROGRESS"
+	case PIDMSI_STATUS_EDIT:
+		return "PIDMSI_STATUS_EDIT"
+	case PIDMSI_STATUS_REVIEW:
+		return "PIDMSI_STATUS_REVIEW"
+	case PIDMSI_STATUS_PROOF:
+		return "PIDMSI_STATUS_PROOF"
+	case PIDMSI_STATUS_FINAL:
+		return "PIDMSI_STATUS_FINAL"
+	case PIDMSI_STATUS_OTHER:
+		return "PIDMSI_STATUS_OTHER"
+	default:
+		return fmt.Sprintf("PIDMSI_STATUS_VALUE(%d)", int32(e))
+	}
+}
+
 type PROPSPEC_KIND uint32
 
 const (
@@ -26,6 +60,20 @@ const (
 	PRSPEC_PROPID PROPSPEC_KIND = 1
 )
 
+// String returns the PROPSPEC_KIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPSPEC_KIND) String() string {
+	switch e {
+	case PRSPEC_LPWSTR:
+		return "PRSPEC_LPWSTR"
+	case PRSPEC_PROPID:
+		return "PRSPEC_PROPID"
+	default:
+		return fmt.Sprintf("PROPSPEC_KIND(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PROPVAR_CHANGE_FLAGS int32
 
 const (
@@ -37,6 +85,32 @@ const (
 	PVCHF_NOHEXSTRING    PROPVAR_CHANGE_FLAGS = 16
 )
 
+// String returns the PROPVAR_CHANGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPVAR_CHANGE_FLAGS) String() string {
+	var parts []string
+	if e&PVCHF_NOVALUEPROP != 0 {
+		parts = append(parts, "PVCHF_NOVALUEPROP")
+	}
+	if e&PVCHF_ALPHABOOL != 0 {
+		parts = append(parts, "PVCHF_ALPHABOOL")
+	}
+	if e&PVCHF_NOUSEROVERRIDE != 0 {
+		parts = append(parts, "PVCHF_NOUSEROVERRIDE")
+	}
+	if e&PVCHF_LOCALBOOL != 0 {
+		parts = append(parts, "PVCHF_LOCALBOOL")
+	}
+	if e&PVCHF_NOHEXSTRING != 0 {
+		parts = append(parts, "PVCHF_NOHEXSTRING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PROPVAR_COMPARE_FLAGS int32
 
 const (
@@ -48,6 +122,34 @@ const (
 	PVCF_USESTRCMPIC                   PROPVAR_COMPARE_FLAGS = 16
 	PVCF_DIGITSASNUMBERS_CASESENSITIVE PROPVAR_COMPARE_FLAGS = 32
 )
+
+// String returns the PROPVAR_COMPARE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPVAR_COMPARE_FLAGS) String() string {
+	var parts []string
+	if e&PVCF_TREATEMPTYASGREATERTHAN != 0 {
+		parts = append(parts, "PVCF_TREATEMPTYASGREATERTHAN")
+	}
+	if e&PVCF_USESTRCMP != 0 {
+		parts = append(parts, "PVCF_USESTRCMP")
+	}
+	if e&PVCF_USESTRCMPC != 0 {
+		parts = append(parts, "PVCF_USESTRCMPC")
+	}
+	if e&PVCF_USESTRCMPI != 0 {
+		parts = append(parts, "PVCF_USESTRCMPI")
+	}
+	if e&PVCF_USESTRCMPIC != 0 {
+		parts = append(parts, "PVCF_USESTRCMPIC")
+	}
+	if e&PVCF_DIGITSASNUMBERS_CASESENSITIVE != 0 {
+		parts = append(parts, "PVCF_DIGITSASNUMBERS_CASESENSITIVE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // PROPVAR_COMPARE_UNIT: https://learn.microsoft.com/windows/win32/api/propvarutil/ne-propvarutil-propvar_compare_unit
 type PROPVAR_COMPARE_UNIT int32
@@ -62,6 +164,29 @@ const (
 	PVCU_YEAR    PROPVAR_COMPARE_UNIT = 6
 )
 
+// String returns the PROPVAR_COMPARE_UNIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPVAR_COMPARE_UNIT) String() string {
+	switch e {
+	case PVCU_DEFAULT:
+		return "PVCU_DEFAULT"
+	case PVCU_SECOND:
+		return "PVCU_SECOND"
+	case PVCU_MINUTE:
+		return "PVCU_MINUTE"
+	case PVCU_HOUR:
+		return "PVCU_HOUR"
+	case PVCU_DAY:
+		return "PVCU_DAY"
+	case PVCU_MONTH:
+		return "PVCU_MONTH"
+	case PVCU_YEAR:
+		return "PVCU_YEAR"
+	default:
+		return fmt.Sprintf("PROPVAR_COMPARE_UNIT(%d)", int32(e))
+	}
+}
+
 type STGFMT uint32
 
 const (
@@ -73,6 +198,25 @@ const (
 	STGFMT_DOCUMENT STGFMT = 0
 )
 
+// String returns the STGFMT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STGFMT) String() string {
+	switch e {
+	case STGFMT_STORAGE:
+		return "STGFMT_STORAGE"
+	case STGFMT_NATIVE:
+		return "STGFMT_NATIVE"
+	case STGFMT_FILE:
+		return "STGFMT_FILE"
+	case STGFMT_ANY:
+		return "STGFMT_ANY"
+	case STGFMT_DOCFILE:
+		return "STGFMT_DOCFILE"
+	default:
+		return fmt.Sprintf("STGFMT(%d)", uint32(e))
+	}
+}
+
 // STGMOVE: https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-stgmove
 type STGMOVE int32
 
@@ -81,3 +225,18 @@ const (
 	STGMOVE_COPY        STGMOVE = 1
 	STGMOVE_SHALLOWCOPY STGMOVE = 2
 )
+
+// String returns the STGMOVE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STGMOVE) String() string {
+	switch e {
+	case STGMOVE_MOVE:
+		return "STGMOVE_MOVE"
+	case STGMOVE_COPY:
+		return "STGMOVE_COPY"
+	case STGMOVE_SHALLOWCOPY:
+		return "STGMOVE_SHALLOWCOPY"
+	default:
+		return fmt.Sprintf("STGMOVE(%d)", int32(e))
+	}
+}

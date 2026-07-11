@@ -4,6 +4,11 @@
 
 package search
 
+import (
+	"fmt"
+	"strings"
+)
+
 type ACCESS_MASKENUM int32
 
 const (
@@ -26,6 +31,49 @@ const (
 	PERM_DROP             ACCESS_MASKENUM = 256
 )
 
+// String returns the ACCESS_MASKENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACCESS_MASKENUM) String() string {
+	switch e {
+	case PERM_EXCLUSIVE:
+		return "PERM_EXCLUSIVE"
+	case PERM_READDESIGN:
+		return "PERM_READDESIGN"
+	case PERM_WRITEDESIGN:
+		return "PERM_WRITEDESIGN"
+	case PERM_WITHGRANT:
+		return "PERM_WITHGRANT"
+	case PERM_REFERENCE:
+		return "PERM_REFERENCE"
+	case PERM_CREATE:
+		return "PERM_CREATE"
+	case PERM_INSERT:
+		return "PERM_INSERT"
+	case PERM_DELETE:
+		return "PERM_DELETE"
+	case PERM_READCONTROL:
+		return "PERM_READCONTROL"
+	case PERM_WRITEPERMISSIONS:
+		return "PERM_WRITEPERMISSIONS"
+	case PERM_WRITEOWNER:
+		return "PERM_WRITEOWNER"
+	case PERM_MAXIMUM_ALLOWED:
+		return "PERM_MAXIMUM_ALLOWED"
+	case PERM_ALL:
+		return "PERM_ALL"
+	case PERM_EXECUTE:
+		return "PERM_EXECUTE"
+	case PERM_READ:
+		return "PERM_READ"
+	case PERM_UPDATE:
+		return "PERM_UPDATE"
+	case PERM_DROP:
+		return "PERM_DROP"
+	default:
+		return fmt.Sprintf("ACCESS_MASKENUM(%d)", int32(e))
+	}
+}
+
 // AUTH_TYPE: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-auth_type
 type AUTH_TYPE int32
 
@@ -35,6 +83,21 @@ const (
 	EAUTH_TYPE_BASIC     AUTH_TYPE = 2
 )
 
+// String returns the AUTH_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTH_TYPE) String() string {
+	switch e {
+	case EAUTH_TYPE_ANONYMOUS:
+		return "EAUTH_TYPE_ANONYMOUS"
+	case EAUTH_TYPE_NTLM:
+		return "EAUTH_TYPE_NTLM"
+	case EAUTH_TYPE_BASIC:
+		return "EAUTH_TYPE_BASIC"
+	default:
+		return fmt.Sprintf("AUTH_TYPE(%d)", int32(e))
+	}
+}
+
 // CASE_REQUIREMENT: https://learn.microsoft.com/windows/win32/api/structuredquery/ne-structuredquery-case_requirement
 type CASE_REQUIREMENT int32
 
@@ -42,6 +105,19 @@ const (
 	CASE_REQUIREMENT_ANY          CASE_REQUIREMENT = 0
 	CASE_REQUIREMENT_UPPER_IF_AQS CASE_REQUIREMENT = 1
 )
+
+// String returns the CASE_REQUIREMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CASE_REQUIREMENT) String() string {
+	switch e {
+	case CASE_REQUIREMENT_ANY:
+		return "CASE_REQUIREMENT_ANY"
+	case CASE_REQUIREMENT_UPPER_IF_AQS:
+		return "CASE_REQUIREMENT_UPPER_IF_AQS"
+	default:
+		return fmt.Sprintf("CASE_REQUIREMENT(%d)", int32(e))
+	}
+}
 
 type CHANNEL_AGENT_FLAGS int32
 
@@ -51,6 +127,23 @@ const (
 	CHANNEL_AGENT_PRECACHE_ALL       CHANNEL_AGENT_FLAGS = 4
 	CHANNEL_AGENT_PRECACHE_SCRNSAVER CHANNEL_AGENT_FLAGS = 8
 )
+
+// String returns the CHANNEL_AGENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANNEL_AGENT_FLAGS) String() string {
+	switch e {
+	case CHANNEL_AGENT_DYNAMIC_SCHEDULE:
+		return "CHANNEL_AGENT_DYNAMIC_SCHEDULE"
+	case CHANNEL_AGENT_PRECACHE_SOME:
+		return "CHANNEL_AGENT_PRECACHE_SOME"
+	case CHANNEL_AGENT_PRECACHE_ALL:
+		return "CHANNEL_AGENT_PRECACHE_ALL"
+	case CHANNEL_AGENT_PRECACHE_SCRNSAVER:
+		return "CHANNEL_AGENT_PRECACHE_SCRNSAVER"
+	default:
+		return fmt.Sprintf("CHANNEL_AGENT_FLAGS(%d)", int32(e))
+	}
+}
 
 // CLUSION_REASON: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-clusion_reason
 type CLUSION_REASON int32
@@ -62,7 +155,25 @@ const (
 	CLUSIONREASON_GROUPPOLICY  CLUSION_REASON = 3
 )
 
+// String returns the CLUSION_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLUSION_REASON) String() string {
+	switch e {
+	case CLUSIONREASON_UNKNOWNSCOPE:
+		return "CLUSIONREASON_UNKNOWNSCOPE"
+	case CLUSIONREASON_DEFAULT:
+		return "CLUSIONREASON_DEFAULT"
+	case CLUSIONREASON_USER:
+		return "CLUSIONREASON_USER"
+	case CLUSIONREASON_GROUPPOLICY:
+		return "CLUSIONREASON_GROUPPOLICY"
+	default:
+		return fmt.Sprintf("CLUSION_REASON(%d)", int32(e))
+	}
+}
+
 // CONDITION_CREATION_OPTIONS: https://learn.microsoft.com/windows/win32/api/structuredquery/ne-structuredquery-condition_creation_options
+// Bitmask — values may be combined with |.
 type CONDITION_CREATION_OPTIONS int32
 
 const (
@@ -75,6 +186,31 @@ const (
 	CONDITION_CREATION_USE_CONTENT_LOCALE CONDITION_CREATION_OPTIONS = 16
 )
 
+// String returns the CONDITION_CREATION_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONDITION_CREATION_OPTIONS) String() string {
+	var parts []string
+	if e&CONDITION_CREATION_SIMPLIFY != 0 {
+		parts = append(parts, "CONDITION_CREATION_SIMPLIFY")
+	}
+	if e&CONDITION_CREATION_VECTOR_AND != 0 {
+		parts = append(parts, "CONDITION_CREATION_VECTOR_AND")
+	}
+	if e&CONDITION_CREATION_VECTOR_OR != 0 {
+		parts = append(parts, "CONDITION_CREATION_VECTOR_OR")
+	}
+	if e&CONDITION_CREATION_VECTOR_LEAF != 0 {
+		parts = append(parts, "CONDITION_CREATION_VECTOR_LEAF")
+	}
+	if e&CONDITION_CREATION_USE_CONTENT_LOCALE != 0 {
+		parts = append(parts, "CONDITION_CREATION_USE_CONTENT_LOCALE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CREATESUBSCRIPTIONFLAGS int32
 
 const (
@@ -84,6 +220,25 @@ const (
 	CREATESUBS_NOSAVE         CREATESUBSCRIPTIONFLAGS = 8
 	CREATESUBS_SOFTWAREUPDATE CREATESUBSCRIPTIONFLAGS = 16
 )
+
+// String returns the CREATESUBSCRIPTIONFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATESUBSCRIPTIONFLAGS) String() string {
+	switch e {
+	case CREATESUBS_ADDTOFAVORITES:
+		return "CREATESUBS_ADDTOFAVORITES"
+	case CREATESUBS_FROMFAVORITES:
+		return "CREATESUBS_FROMFAVORITES"
+	case CREATESUBS_NOUI:
+		return "CREATESUBS_NOUI"
+	case CREATESUBS_NOSAVE:
+		return "CREATESUBS_NOSAVE"
+	case CREATESUBS_SOFTWAREUPDATE:
+		return "CREATESUBS_SOFTWAREUPDATE"
+	default:
+		return fmt.Sprintf("CREATESUBSCRIPTIONFLAGS(%d)", int32(e))
+	}
+}
 
 // CatalogPausedReason: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-catalogpausedreason
 type CatalogPausedReason int32
@@ -102,6 +257,37 @@ const (
 	CATALOG_PAUSED_REASON_UPGRADING        CatalogPausedReason = 10
 )
 
+// String returns the CatalogPausedReason constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CatalogPausedReason) String() string {
+	switch e {
+	case CATALOG_PAUSED_REASON_NONE:
+		return "CATALOG_PAUSED_REASON_NONE"
+	case CATALOG_PAUSED_REASON_HIGH_IO:
+		return "CATALOG_PAUSED_REASON_HIGH_IO"
+	case CATALOG_PAUSED_REASON_HIGH_CPU:
+		return "CATALOG_PAUSED_REASON_HIGH_CPU"
+	case CATALOG_PAUSED_REASON_HIGH_NTF_RATE:
+		return "CATALOG_PAUSED_REASON_HIGH_NTF_RATE"
+	case CATALOG_PAUSED_REASON_LOW_BATTERY:
+		return "CATALOG_PAUSED_REASON_LOW_BATTERY"
+	case CATALOG_PAUSED_REASON_LOW_MEMORY:
+		return "CATALOG_PAUSED_REASON_LOW_MEMORY"
+	case CATALOG_PAUSED_REASON_LOW_DISK:
+		return "CATALOG_PAUSED_REASON_LOW_DISK"
+	case CATALOG_PAUSED_REASON_DELAYED_RECOVERY:
+		return "CATALOG_PAUSED_REASON_DELAYED_RECOVERY"
+	case CATALOG_PAUSED_REASON_USER_ACTIVE:
+		return "CATALOG_PAUSED_REASON_USER_ACTIVE"
+	case CATALOG_PAUSED_REASON_EXTERNAL:
+		return "CATALOG_PAUSED_REASON_EXTERNAL"
+	case CATALOG_PAUSED_REASON_UPGRADING:
+		return "CATALOG_PAUSED_REASON_UPGRADING"
+	default:
+		return fmt.Sprintf("CatalogPausedReason(%d)", int32(e))
+	}
+}
+
 // CatalogStatus: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-catalogstatus
 type CatalogStatus int32
 
@@ -115,6 +301,29 @@ const (
 	CATALOG_STATUS_SHUTTING_DOWN            CatalogStatus = 6
 )
 
+// String returns the CatalogStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CatalogStatus) String() string {
+	switch e {
+	case CATALOG_STATUS_IDLE:
+		return "CATALOG_STATUS_IDLE"
+	case CATALOG_STATUS_PAUSED:
+		return "CATALOG_STATUS_PAUSED"
+	case CATALOG_STATUS_RECOVERING:
+		return "CATALOG_STATUS_RECOVERING"
+	case CATALOG_STATUS_FULL_CRAWL:
+		return "CATALOG_STATUS_FULL_CRAWL"
+	case CATALOG_STATUS_INCREMENTAL_CRAWL:
+		return "CATALOG_STATUS_INCREMENTAL_CRAWL"
+	case CATALOG_STATUS_PROCESSING_NOTIFICATIONS:
+		return "CATALOG_STATUS_PROCESSING_NOTIFICATIONS"
+	case CATALOG_STATUS_SHUTTING_DOWN:
+		return "CATALOG_STATUS_SHUTTING_DOWN"
+	default:
+		return fmt.Sprintf("CatalogStatus(%d)", int32(e))
+	}
+}
+
 type DBACCESSORFLAGSENUM int32
 
 const (
@@ -126,11 +335,43 @@ const (
 	DBACCESSOR_INHERITED     DBACCESSORFLAGSENUM = 16
 )
 
+// String returns the DBACCESSORFLAGSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBACCESSORFLAGSENUM) String() string {
+	switch e {
+	case DBACCESSOR_INVALID:
+		return "DBACCESSOR_INVALID"
+	case DBACCESSOR_PASSBYREF:
+		return "DBACCESSOR_PASSBYREF"
+	case DBACCESSOR_ROWDATA:
+		return "DBACCESSOR_ROWDATA"
+	case DBACCESSOR_PARAMETERDATA:
+		return "DBACCESSOR_PARAMETERDATA"
+	case DBACCESSOR_OPTIMIZED:
+		return "DBACCESSOR_OPTIMIZED"
+	case DBACCESSOR_INHERITED:
+		return "DBACCESSOR_INHERITED"
+	default:
+		return fmt.Sprintf("DBACCESSORFLAGSENUM(%d)", int32(e))
+	}
+}
+
 type DBASYNCHOPENUM int32
 
 const (
 	DBASYNCHOP_OPEN DBASYNCHOPENUM = 0
 )
+
+// String returns the DBASYNCHOPENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBASYNCHOPENUM) String() string {
+	switch e {
+	case DBASYNCHOP_OPEN:
+		return "DBASYNCHOP_OPEN"
+	default:
+		return fmt.Sprintf("DBASYNCHOPENUM(%d)", int32(e))
+	}
+}
 
 type DBASYNCHPHASEENUM int32
 
@@ -141,11 +382,39 @@ const (
 	DBASYNCHPHASE_CANCELED       DBASYNCHPHASEENUM = 3
 )
 
+// String returns the DBASYNCHPHASEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBASYNCHPHASEENUM) String() string {
+	switch e {
+	case DBASYNCHPHASE_INITIALIZATION:
+		return "DBASYNCHPHASE_INITIALIZATION"
+	case DBASYNCHPHASE_POPULATION:
+		return "DBASYNCHPHASE_POPULATION"
+	case DBASYNCHPHASE_COMPLETE:
+		return "DBASYNCHPHASE_COMPLETE"
+	case DBASYNCHPHASE_CANCELED:
+		return "DBASYNCHPHASE_CANCELED"
+	default:
+		return fmt.Sprintf("DBASYNCHPHASEENUM(%d)", int32(e))
+	}
+}
+
 type DBBINDFLAGENUM int32
 
 const (
 	DBBINDFLAG_HTML DBBINDFLAGENUM = 1
 )
+
+// String returns the DBBINDFLAGENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBBINDFLAGENUM) String() string {
+	switch e {
+	case DBBINDFLAG_HTML:
+		return "DBBINDFLAG_HTML"
+	default:
+		return fmt.Sprintf("DBBINDFLAGENUM(%d)", int32(e))
+	}
+}
 
 type DBBINDSTATUSENUM int32
 
@@ -158,6 +427,29 @@ const (
 	DBBINDSTATUS_NOINTERFACE           DBBINDSTATUSENUM = 5
 	DBBINDSTATUS_MULTIPLESTORAGE       DBBINDSTATUSENUM = 6
 )
+
+// String returns the DBBINDSTATUSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBBINDSTATUSENUM) String() string {
+	switch e {
+	case DBBINDSTATUS_OK:
+		return "DBBINDSTATUS_OK"
+	case DBBINDSTATUS_BADORDINAL:
+		return "DBBINDSTATUS_BADORDINAL"
+	case DBBINDSTATUS_UNSUPPORTEDCONVERSION:
+		return "DBBINDSTATUS_UNSUPPORTEDCONVERSION"
+	case DBBINDSTATUS_BADBINDINFO:
+		return "DBBINDSTATUS_BADBINDINFO"
+	case DBBINDSTATUS_BADSTORAGEFLAGS:
+		return "DBBINDSTATUS_BADSTORAGEFLAGS"
+	case DBBINDSTATUS_NOINTERFACE:
+		return "DBBINDSTATUS_NOINTERFACE"
+	case DBBINDSTATUS_MULTIPLESTORAGE:
+		return "DBBINDSTATUS_MULTIPLESTORAGE"
+	default:
+		return fmt.Sprintf("DBBINDSTATUSENUM(%d)", int32(e))
+	}
+}
 
 type DBBINDURLFLAGENUM int32
 
@@ -181,6 +473,49 @@ const (
 	DBBINDURLFLAG_ISSTRUCTUREDDOCUMENT DBBINDURLFLAGENUM = 134217728
 )
 
+// String returns the DBBINDURLFLAGENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBBINDURLFLAGENUM) String() string {
+	switch e {
+	case DBBINDURLFLAG_READ:
+		return "DBBINDURLFLAG_READ"
+	case DBBINDURLFLAG_WRITE:
+		return "DBBINDURLFLAG_WRITE"
+	case DBBINDURLFLAG_READWRITE:
+		return "DBBINDURLFLAG_READWRITE"
+	case DBBINDURLFLAG_SHARE_DENY_READ:
+		return "DBBINDURLFLAG_SHARE_DENY_READ"
+	case DBBINDURLFLAG_SHARE_DENY_WRITE:
+		return "DBBINDURLFLAG_SHARE_DENY_WRITE"
+	case DBBINDURLFLAG_SHARE_EXCLUSIVE:
+		return "DBBINDURLFLAG_SHARE_EXCLUSIVE"
+	case DBBINDURLFLAG_SHARE_DENY_NONE:
+		return "DBBINDURLFLAG_SHARE_DENY_NONE"
+	case DBBINDURLFLAG_ASYNCHRONOUS:
+		return "DBBINDURLFLAG_ASYNCHRONOUS"
+	case DBBINDURLFLAG_COLLECTION:
+		return "DBBINDURLFLAG_COLLECTION"
+	case DBBINDURLFLAG_DELAYFETCHSTREAM:
+		return "DBBINDURLFLAG_DELAYFETCHSTREAM"
+	case DBBINDURLFLAG_DELAYFETCHCOLUMNS:
+		return "DBBINDURLFLAG_DELAYFETCHCOLUMNS"
+	case DBBINDURLFLAG_RECURSIVE:
+		return "DBBINDURLFLAG_RECURSIVE"
+	case DBBINDURLFLAG_OUTPUT:
+		return "DBBINDURLFLAG_OUTPUT"
+	case DBBINDURLFLAG_WAITFORINIT:
+		return "DBBINDURLFLAG_WAITFORINIT"
+	case DBBINDURLFLAG_OPENIFEXISTS:
+		return "DBBINDURLFLAG_OPENIFEXISTS"
+	case DBBINDURLFLAG_OVERWRITE:
+		return "DBBINDURLFLAG_OVERWRITE"
+	case DBBINDURLFLAG_ISSTRUCTUREDDOCUMENT:
+		return "DBBINDURLFLAG_ISSTRUCTUREDDOCUMENT"
+	default:
+		return fmt.Sprintf("DBBINDURLFLAGENUM(%d)", int32(e))
+	}
+}
+
 type DBBINDURLSTATUSENUM int32
 
 const (
@@ -190,6 +525,23 @@ const (
 	DBBINDURLSTATUS_S_REDIRECTED           DBBINDURLSTATUSENUM = 8
 )
 
+// String returns the DBBINDURLSTATUSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBBINDURLSTATUSENUM) String() string {
+	switch e {
+	case DBBINDURLSTATUS_S_OK:
+		return "DBBINDURLSTATUS_S_OK"
+	case DBBINDURLSTATUS_S_DENYNOTSUPPORTED:
+		return "DBBINDURLSTATUS_S_DENYNOTSUPPORTED"
+	case DBBINDURLSTATUS_S_DENYTYPENOTSUPPORTED:
+		return "DBBINDURLSTATUS_S_DENYTYPENOTSUPPORTED"
+	case DBBINDURLSTATUS_S_REDIRECTED:
+		return "DBBINDURLSTATUS_S_REDIRECTED"
+	default:
+		return fmt.Sprintf("DBBINDURLSTATUSENUM(%d)", int32(e))
+	}
+}
+
 type DBBOOKMARK int32
 
 const (
@@ -197,6 +549,21 @@ const (
 	DBBMK_FIRST   DBBOOKMARK = 1
 	DBBMK_LAST    DBBOOKMARK = 2
 )
+
+// String returns the DBBOOKMARK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBBOOKMARK) String() string {
+	switch e {
+	case DBBMK_INVALID:
+		return "DBBMK_INVALID"
+	case DBBMK_FIRST:
+		return "DBBMK_FIRST"
+	case DBBMK_LAST:
+		return "DBBMK_LAST"
+	default:
+		return fmt.Sprintf("DBBOOKMARK(%d)", int32(e))
+	}
+}
 
 type DBCOLUMNDESCFLAGSENUM int32
 
@@ -212,17 +579,66 @@ const (
 	DBCOLUMNDESCFLAGS_SCALE      DBCOLUMNDESCFLAGSENUM = 256
 )
 
+// String returns the DBCOLUMNDESCFLAGSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOLUMNDESCFLAGSENUM) String() string {
+	switch e {
+	case DBCOLUMNDESCFLAGS_TYPENAME:
+		return "DBCOLUMNDESCFLAGS_TYPENAME"
+	case DBCOLUMNDESCFLAGS_ITYPEINFO:
+		return "DBCOLUMNDESCFLAGS_ITYPEINFO"
+	case DBCOLUMNDESCFLAGS_PROPERTIES:
+		return "DBCOLUMNDESCFLAGS_PROPERTIES"
+	case DBCOLUMNDESCFLAGS_CLSID:
+		return "DBCOLUMNDESCFLAGS_CLSID"
+	case DBCOLUMNDESCFLAGS_COLSIZE:
+		return "DBCOLUMNDESCFLAGS_COLSIZE"
+	case DBCOLUMNDESCFLAGS_DBCID:
+		return "DBCOLUMNDESCFLAGS_DBCID"
+	case DBCOLUMNDESCFLAGS_WTYPE:
+		return "DBCOLUMNDESCFLAGS_WTYPE"
+	case DBCOLUMNDESCFLAGS_PRECISION:
+		return "DBCOLUMNDESCFLAGS_PRECISION"
+	case DBCOLUMNDESCFLAGS_SCALE:
+		return "DBCOLUMNDESCFLAGS_SCALE"
+	default:
+		return fmt.Sprintf("DBCOLUMNDESCFLAGSENUM(%d)", int32(e))
+	}
+}
+
 type DBCOLUMNFLAGS15ENUM int32
 
 const (
 	DBCOLUMNFLAGS_ISCHAPTER DBCOLUMNFLAGS15ENUM = 8192
 )
 
+// String returns the DBCOLUMNFLAGS15ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOLUMNFLAGS15ENUM) String() string {
+	switch e {
+	case DBCOLUMNFLAGS_ISCHAPTER:
+		return "DBCOLUMNFLAGS_ISCHAPTER"
+	default:
+		return fmt.Sprintf("DBCOLUMNFLAGS15ENUM(%d)", int32(e))
+	}
+}
+
 type DBCOLUMNFLAGSDEPRECATED int32
 
 const (
 	DBCOLUMNFLAGS_KEYCOLUMN DBCOLUMNFLAGSDEPRECATED = 32768
 )
+
+// String returns the DBCOLUMNFLAGSDEPRECATED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOLUMNFLAGSDEPRECATED) String() string {
+	switch e {
+	case DBCOLUMNFLAGS_KEYCOLUMN:
+		return "DBCOLUMNFLAGS_KEYCOLUMN"
+	default:
+		return fmt.Sprintf("DBCOLUMNFLAGSDEPRECATED(%d)", int32(e))
+	}
+}
 
 type DBCOLUMNFLAGSENUM int32
 
@@ -240,12 +656,56 @@ const (
 	DBCOLUMNFLAGS_CACHEDEFERRED DBCOLUMNFLAGSENUM = 4096
 )
 
+// String returns the DBCOLUMNFLAGSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOLUMNFLAGSENUM) String() string {
+	switch e {
+	case DBCOLUMNFLAGS_ISBOOKMARK:
+		return "DBCOLUMNFLAGS_ISBOOKMARK"
+	case DBCOLUMNFLAGS_MAYDEFER:
+		return "DBCOLUMNFLAGS_MAYDEFER"
+	case DBCOLUMNFLAGS_WRITE:
+		return "DBCOLUMNFLAGS_WRITE"
+	case DBCOLUMNFLAGS_WRITEUNKNOWN:
+		return "DBCOLUMNFLAGS_WRITEUNKNOWN"
+	case DBCOLUMNFLAGS_ISFIXEDLENGTH:
+		return "DBCOLUMNFLAGS_ISFIXEDLENGTH"
+	case DBCOLUMNFLAGS_ISNULLABLE:
+		return "DBCOLUMNFLAGS_ISNULLABLE"
+	case DBCOLUMNFLAGS_MAYBENULL:
+		return "DBCOLUMNFLAGS_MAYBENULL"
+	case DBCOLUMNFLAGS_ISLONG:
+		return "DBCOLUMNFLAGS_ISLONG"
+	case DBCOLUMNFLAGS_ISROWID:
+		return "DBCOLUMNFLAGS_ISROWID"
+	case DBCOLUMNFLAGS_ISROWVER:
+		return "DBCOLUMNFLAGS_ISROWVER"
+	case DBCOLUMNFLAGS_CACHEDEFERRED:
+		return "DBCOLUMNFLAGS_CACHEDEFERRED"
+	default:
+		return fmt.Sprintf("DBCOLUMNFLAGSENUM(%d)", int32(e))
+	}
+}
+
 type DBCOLUMNFLAGSENUM20 int32
 
 const (
 	DBCOLUMNFLAGS_SCALEISNEGATIVE DBCOLUMNFLAGSENUM20 = 16384
 	DBCOLUMNFLAGS_RESERVED        DBCOLUMNFLAGSENUM20 = 32768
 )
+
+// String returns the DBCOLUMNFLAGSENUM20 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOLUMNFLAGSENUM20) String() string {
+	switch e {
+	case DBCOLUMNFLAGS_SCALEISNEGATIVE:
+		return "DBCOLUMNFLAGS_SCALEISNEGATIVE"
+	case DBCOLUMNFLAGS_RESERVED:
+		return "DBCOLUMNFLAGS_RESERVED"
+	default:
+		return fmt.Sprintf("DBCOLUMNFLAGSENUM20(%d)", int32(e))
+	}
+}
 
 type DBCOLUMNFLAGSENUM21 int32
 
@@ -254,6 +714,21 @@ const (
 	DBCOLUMNFLAGS_ISDEFAULTSTREAM DBCOLUMNFLAGSENUM21 = 131072
 	DBCOLUMNFLAGS_ISCOLLECTION    DBCOLUMNFLAGSENUM21 = 262144
 )
+
+// String returns the DBCOLUMNFLAGSENUM21 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOLUMNFLAGSENUM21) String() string {
+	switch e {
+	case DBCOLUMNFLAGS_ISROWURL:
+		return "DBCOLUMNFLAGS_ISROWURL"
+	case DBCOLUMNFLAGS_ISDEFAULTSTREAM:
+		return "DBCOLUMNFLAGS_ISDEFAULTSTREAM"
+	case DBCOLUMNFLAGS_ISCOLLECTION:
+		return "DBCOLUMNFLAGS_ISCOLLECTION"
+	default:
+		return fmt.Sprintf("DBCOLUMNFLAGSENUM21(%d)", int32(e))
+	}
+}
 
 type DBCOLUMNFLAGSENUM26 int32
 
@@ -264,11 +739,39 @@ const (
 	DBCOLUMNFLAGS_ROWSPECIFICCOLUMN DBCOLUMNFLAGSENUM26 = 4194304
 )
 
+// String returns the DBCOLUMNFLAGSENUM26 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOLUMNFLAGSENUM26) String() string {
+	switch e {
+	case DBCOLUMNFLAGS_ISSTREAM:
+		return "DBCOLUMNFLAGS_ISSTREAM"
+	case DBCOLUMNFLAGS_ISROWSET:
+		return "DBCOLUMNFLAGS_ISROWSET"
+	case DBCOLUMNFLAGS_ISROW:
+		return "DBCOLUMNFLAGS_ISROW"
+	case DBCOLUMNFLAGS_ROWSPECIFICCOLUMN:
+		return "DBCOLUMNFLAGS_ROWSPECIFICCOLUMN"
+	default:
+		return fmt.Sprintf("DBCOLUMNFLAGSENUM26(%d)", int32(e))
+	}
+}
+
 type DBCOMMANDPERSISTFLAGENUM int32
 
 const (
 	DBCOMMANDPERSISTFLAG_NOSAVE DBCOMMANDPERSISTFLAGENUM = 1
 )
+
+// String returns the DBCOMMANDPERSISTFLAGENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOMMANDPERSISTFLAGENUM) String() string {
+	switch e {
+	case DBCOMMANDPERSISTFLAG_NOSAVE:
+		return "DBCOMMANDPERSISTFLAG_NOSAVE"
+	default:
+		return fmt.Sprintf("DBCOMMANDPERSISTFLAGENUM(%d)", int32(e))
+	}
+}
 
 type DBCOMMANDPERSISTFLAGENUM21 int32
 
@@ -277,6 +780,21 @@ const (
 	DBCOMMANDPERSISTFLAG_PERSISTVIEW      DBCOMMANDPERSISTFLAGENUM21 = 2
 	DBCOMMANDPERSISTFLAG_PERSISTPROCEDURE DBCOMMANDPERSISTFLAGENUM21 = 4
 )
+
+// String returns the DBCOMMANDPERSISTFLAGENUM21 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOMMANDPERSISTFLAGENUM21) String() string {
+	switch e {
+	case DBCOMMANDPERSISTFLAG_DEFAULT:
+		return "DBCOMMANDPERSISTFLAG_DEFAULT"
+	case DBCOMMANDPERSISTFLAG_PERSISTVIEW:
+		return "DBCOMMANDPERSISTFLAG_PERSISTVIEW"
+	case DBCOMMANDPERSISTFLAG_PERSISTPROCEDURE:
+		return "DBCOMMANDPERSISTFLAG_PERSISTPROCEDURE"
+	default:
+		return fmt.Sprintf("DBCOMMANDPERSISTFLAGENUM21(%d)", int32(e))
+	}
+}
 
 type DBCOMPAREENUM int32
 
@@ -287,6 +805,25 @@ const (
 	DBCOMPARE_NE            DBCOMPAREENUM = 3
 	DBCOMPARE_NOTCOMPARABLE DBCOMPAREENUM = 4
 )
+
+// String returns the DBCOMPAREENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOMPAREENUM) String() string {
+	switch e {
+	case DBCOMPARE_LT:
+		return "DBCOMPARE_LT"
+	case DBCOMPARE_EQ:
+		return "DBCOMPARE_EQ"
+	case DBCOMPARE_GT:
+		return "DBCOMPARE_GT"
+	case DBCOMPARE_NE:
+		return "DBCOMPARE_NE"
+	case DBCOMPARE_NOTCOMPARABLE:
+		return "DBCOMPARE_NOTCOMPARABLE"
+	default:
+		return fmt.Sprintf("DBCOMPAREENUM(%d)", int32(e))
+	}
+}
 
 type DBCOMPAREOPSENUM int32
 
@@ -304,12 +841,56 @@ const (
 	DBCOMPAREOPS_CASEINSENSITIVE DBCOMPAREOPSENUM = 8192
 )
 
+// String returns the DBCOMPAREOPSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOMPAREOPSENUM) String() string {
+	switch e {
+	case DBCOMPAREOPS_LT:
+		return "DBCOMPAREOPS_LT"
+	case DBCOMPAREOPS_LE:
+		return "DBCOMPAREOPS_LE"
+	case DBCOMPAREOPS_EQ:
+		return "DBCOMPAREOPS_EQ"
+	case DBCOMPAREOPS_GE:
+		return "DBCOMPAREOPS_GE"
+	case DBCOMPAREOPS_GT:
+		return "DBCOMPAREOPS_GT"
+	case DBCOMPAREOPS_BEGINSWITH:
+		return "DBCOMPAREOPS_BEGINSWITH"
+	case DBCOMPAREOPS_CONTAINS:
+		return "DBCOMPAREOPS_CONTAINS"
+	case DBCOMPAREOPS_NE:
+		return "DBCOMPAREOPS_NE"
+	case DBCOMPAREOPS_IGNORE:
+		return "DBCOMPAREOPS_IGNORE"
+	case DBCOMPAREOPS_CASESENSITIVE:
+		return "DBCOMPAREOPS_CASESENSITIVE"
+	case DBCOMPAREOPS_CASEINSENSITIVE:
+		return "DBCOMPAREOPS_CASEINSENSITIVE"
+	default:
+		return fmt.Sprintf("DBCOMPAREOPSENUM(%d)", int32(e))
+	}
+}
+
 type DBCOMPAREOPSENUM20 int32
 
 const (
 	DBCOMPAREOPS_NOTBEGINSWITH DBCOMPAREOPSENUM20 = 9
 	DBCOMPAREOPS_NOTCONTAINS   DBCOMPAREOPSENUM20 = 10
 )
+
+// String returns the DBCOMPAREOPSENUM20 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOMPAREOPSENUM20) String() string {
+	switch e {
+	case DBCOMPAREOPS_NOTBEGINSWITH:
+		return "DBCOMPAREOPS_NOTBEGINSWITH"
+	case DBCOMPAREOPS_NOTCONTAINS:
+		return "DBCOMPAREOPS_NOTCONTAINS"
+	default:
+		return fmt.Sprintf("DBCOMPAREOPSENUM20(%d)", int32(e))
+	}
+}
 
 type DBCONSTRAINTTYPEENUM int32
 
@@ -320,12 +901,42 @@ const (
 	DBCONSTRAINTTYPE_CHECK      DBCONSTRAINTTYPEENUM = 3
 )
 
+// String returns the DBCONSTRAINTTYPEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCONSTRAINTTYPEENUM) String() string {
+	switch e {
+	case DBCONSTRAINTTYPE_UNIQUE:
+		return "DBCONSTRAINTTYPE_UNIQUE"
+	case DBCONSTRAINTTYPE_FOREIGNKEY:
+		return "DBCONSTRAINTTYPE_FOREIGNKEY"
+	case DBCONSTRAINTTYPE_PRIMARYKEY:
+		return "DBCONSTRAINTTYPE_PRIMARYKEY"
+	case DBCONSTRAINTTYPE_CHECK:
+		return "DBCONSTRAINTTYPE_CHECK"
+	default:
+		return fmt.Sprintf("DBCONSTRAINTTYPEENUM(%d)", int32(e))
+	}
+}
+
 type DBCONVERTFLAGSENUM int32
 
 const (
 	DBCONVERTFLAGS_COLUMN    DBCONVERTFLAGSENUM = 0
 	DBCONVERTFLAGS_PARAMETER DBCONVERTFLAGSENUM = 1
 )
+
+// String returns the DBCONVERTFLAGSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCONVERTFLAGSENUM) String() string {
+	switch e {
+	case DBCONVERTFLAGS_COLUMN:
+		return "DBCONVERTFLAGS_COLUMN"
+	case DBCONVERTFLAGS_PARAMETER:
+		return "DBCONVERTFLAGS_PARAMETER"
+	default:
+		return fmt.Sprintf("DBCONVERTFLAGSENUM(%d)", int32(e))
+	}
+}
 
 type DBCONVERTFLAGSENUM20 int32
 
@@ -334,6 +945,21 @@ const (
 	DBCONVERTFLAGS_ISFIXEDLENGTH DBCONVERTFLAGSENUM20 = 4
 	DBCONVERTFLAGS_FROMVARIANT   DBCONVERTFLAGSENUM20 = 8
 )
+
+// String returns the DBCONVERTFLAGSENUM20 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCONVERTFLAGSENUM20) String() string {
+	switch e {
+	case DBCONVERTFLAGS_ISLONG:
+		return "DBCONVERTFLAGS_ISLONG"
+	case DBCONVERTFLAGS_ISFIXEDLENGTH:
+		return "DBCONVERTFLAGS_ISFIXEDLENGTH"
+	case DBCONVERTFLAGS_FROMVARIANT:
+		return "DBCONVERTFLAGS_FROMVARIANT"
+	default:
+		return fmt.Sprintf("DBCONVERTFLAGSENUM20(%d)", int32(e))
+	}
+}
 
 type DBCOPYFLAGSENUM int32
 
@@ -344,6 +970,25 @@ const (
 	DBCOPY_NON_RECURSIVE    DBCOPYFLAGSENUM = 2048
 	DBCOPY_ATOMIC           DBCOPYFLAGSENUM = 4096
 )
+
+// String returns the DBCOPYFLAGSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOPYFLAGSENUM) String() string {
+	switch e {
+	case DBCOPY_ASYNC:
+		return "DBCOPY_ASYNC"
+	case DBCOPY_REPLACE_EXISTING:
+		return "DBCOPY_REPLACE_EXISTING"
+	case DBCOPY_ALLOW_EMULATION:
+		return "DBCOPY_ALLOW_EMULATION"
+	case DBCOPY_NON_RECURSIVE:
+		return "DBCOPY_NON_RECURSIVE"
+	case DBCOPY_ATOMIC:
+		return "DBCOPY_ATOMIC"
+	default:
+		return fmt.Sprintf("DBCOPYFLAGSENUM(%d)", int32(e))
+	}
+}
 
 type DBCOSTUNITENUM int32
 
@@ -368,6 +1013,51 @@ const (
 	DBUNIT_OTHER        DBCOSTUNITENUM = 65536
 )
 
+// String returns the DBCOSTUNITENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBCOSTUNITENUM) String() string {
+	switch e {
+	case DBUNIT_INVALID:
+		return "DBUNIT_INVALID"
+	case DBUNIT_WEIGHT:
+		return "DBUNIT_WEIGHT"
+	case DBUNIT_PERCENT:
+		return "DBUNIT_PERCENT"
+	case DBUNIT_MAXIMUM:
+		return "DBUNIT_MAXIMUM"
+	case DBUNIT_MINIMUM:
+		return "DBUNIT_MINIMUM"
+	case DBUNIT_MICRO_SECOND:
+		return "DBUNIT_MICRO_SECOND"
+	case DBUNIT_MILLI_SECOND:
+		return "DBUNIT_MILLI_SECOND"
+	case DBUNIT_SECOND:
+		return "DBUNIT_SECOND"
+	case DBUNIT_MINUTE:
+		return "DBUNIT_MINUTE"
+	case DBUNIT_HOUR:
+		return "DBUNIT_HOUR"
+	case DBUNIT_BYTE:
+		return "DBUNIT_BYTE"
+	case DBUNIT_KILO_BYTE:
+		return "DBUNIT_KILO_BYTE"
+	case DBUNIT_MEGA_BYTE:
+		return "DBUNIT_MEGA_BYTE"
+	case DBUNIT_GIGA_BYTE:
+		return "DBUNIT_GIGA_BYTE"
+	case DBUNIT_NUM_MSGS:
+		return "DBUNIT_NUM_MSGS"
+	case DBUNIT_NUM_LOCKS:
+		return "DBUNIT_NUM_LOCKS"
+	case DBUNIT_NUM_ROWS:
+		return "DBUNIT_NUM_ROWS"
+	case DBUNIT_OTHER:
+		return "DBUNIT_OTHER"
+	default:
+		return fmt.Sprintf("DBCOSTUNITENUM(%d)", int32(e))
+	}
+}
+
 type DBDATACONVERTENUM int32
 
 const (
@@ -378,6 +1068,25 @@ const (
 	DBDATACONVERT_DECIMALSCALE     DBDATACONVERTENUM = 8
 )
 
+// String returns the DBDATACONVERTENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBDATACONVERTENUM) String() string {
+	switch e {
+	case DBDATACONVERT_DEFAULT:
+		return "DBDATACONVERT_DEFAULT"
+	case DBDATACONVERT_SETDATABEHAVIOR:
+		return "DBDATACONVERT_SETDATABEHAVIOR"
+	case DBDATACONVERT_LENGTHFROMNTS:
+		return "DBDATACONVERT_LENGTHFROMNTS"
+	case DBDATACONVERT_DSTISFIXEDLENGTH:
+		return "DBDATACONVERT_DSTISFIXEDLENGTH"
+	case DBDATACONVERT_DECIMALSCALE:
+		return "DBDATACONVERT_DECIMALSCALE"
+	default:
+		return fmt.Sprintf("DBDATACONVERTENUM(%d)", int32(e))
+	}
+}
+
 type DBDEFERRABILITYENUM int32
 
 const (
@@ -385,12 +1094,38 @@ const (
 	DBDEFERRABILITY_DEFERRABLE DBDEFERRABILITYENUM = 2
 )
 
+// String returns the DBDEFERRABILITYENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBDEFERRABILITYENUM) String() string {
+	switch e {
+	case DBDEFERRABILITY_DEFERRED:
+		return "DBDEFERRABILITY_DEFERRED"
+	case DBDEFERRABILITY_DEFERRABLE:
+		return "DBDEFERRABILITY_DEFERRABLE"
+	default:
+		return fmt.Sprintf("DBDEFERRABILITYENUM(%d)", int32(e))
+	}
+}
+
 type DBDELETEFLAGSENUM int32
 
 const (
 	DBDELETE_ASYNC  DBDELETEFLAGSENUM = 256
 	DBDELETE_ATOMIC DBDELETEFLAGSENUM = 4096
 )
+
+// String returns the DBDELETEFLAGSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBDELETEFLAGSENUM) String() string {
+	switch e {
+	case DBDELETE_ASYNC:
+		return "DBDELETE_ASYNC"
+	case DBDELETE_ATOMIC:
+		return "DBDELETE_ATOMIC"
+	default:
+		return fmt.Sprintf("DBDELETEFLAGSENUM(%d)", int32(e))
+	}
+}
 
 type DBEVENTPHASEENUM int32
 
@@ -402,6 +1137,25 @@ const (
 	DBEVENTPHASE_DIDEVENT   DBEVENTPHASEENUM = 4
 )
 
+// String returns the DBEVENTPHASEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBEVENTPHASEENUM) String() string {
+	switch e {
+	case DBEVENTPHASE_OKTODO:
+		return "DBEVENTPHASE_OKTODO"
+	case DBEVENTPHASE_ABOUTTODO:
+		return "DBEVENTPHASE_ABOUTTODO"
+	case DBEVENTPHASE_SYNCHAFTER:
+		return "DBEVENTPHASE_SYNCHAFTER"
+	case DBEVENTPHASE_FAILEDTODO:
+		return "DBEVENTPHASE_FAILEDTODO"
+	case DBEVENTPHASE_DIDEVENT:
+		return "DBEVENTPHASE_DIDEVENT"
+	default:
+		return fmt.Sprintf("DBEVENTPHASEENUM(%d)", int32(e))
+	}
+}
+
 type DBEXECLIMITSENUM int32
 
 const (
@@ -410,12 +1164,40 @@ const (
 	DBEXECLIMITS_SUSPEND DBEXECLIMITSENUM = 3
 )
 
+// String returns the DBEXECLIMITSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBEXECLIMITSENUM) String() string {
+	switch e {
+	case DBEXECLIMITS_ABORT:
+		return "DBEXECLIMITS_ABORT"
+	case DBEXECLIMITS_STOP:
+		return "DBEXECLIMITS_STOP"
+	case DBEXECLIMITS_SUSPEND:
+		return "DBEXECLIMITS_SUSPEND"
+	default:
+		return fmt.Sprintf("DBEXECLIMITSENUM(%d)", int32(e))
+	}
+}
+
 type DBINDEX_COL_ORDERENUM int32
 
 const (
 	DBINDEX_COL_ORDER_ASC  DBINDEX_COL_ORDERENUM = 0
 	DBINDEX_COL_ORDER_DESC DBINDEX_COL_ORDERENUM = 1
 )
+
+// String returns the DBINDEX_COL_ORDERENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBINDEX_COL_ORDERENUM) String() string {
+	switch e {
+	case DBINDEX_COL_ORDER_ASC:
+		return "DBINDEX_COL_ORDER_ASC"
+	case DBINDEX_COL_ORDER_DESC:
+		return "DBINDEX_COL_ORDER_DESC"
+	default:
+		return fmt.Sprintf("DBINDEX_COL_ORDERENUM(%d)", int32(e))
+	}
+}
 
 type DBLITERALENUM int32
 
@@ -443,6 +1225,57 @@ const (
 	DBLITERAL_VIEW_NAME         DBLITERALENUM = 20
 )
 
+// String returns the DBLITERALENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBLITERALENUM) String() string {
+	switch e {
+	case DBLITERAL_INVALID:
+		return "DBLITERAL_INVALID"
+	case DBLITERAL_BINARY_LITERAL:
+		return "DBLITERAL_BINARY_LITERAL"
+	case DBLITERAL_CATALOG_NAME:
+		return "DBLITERAL_CATALOG_NAME"
+	case DBLITERAL_CATALOG_SEPARATOR:
+		return "DBLITERAL_CATALOG_SEPARATOR"
+	case DBLITERAL_CHAR_LITERAL:
+		return "DBLITERAL_CHAR_LITERAL"
+	case DBLITERAL_COLUMN_ALIAS:
+		return "DBLITERAL_COLUMN_ALIAS"
+	case DBLITERAL_COLUMN_NAME:
+		return "DBLITERAL_COLUMN_NAME"
+	case DBLITERAL_CORRELATION_NAME:
+		return "DBLITERAL_CORRELATION_NAME"
+	case DBLITERAL_CURSOR_NAME:
+		return "DBLITERAL_CURSOR_NAME"
+	case DBLITERAL_ESCAPE_PERCENT:
+		return "DBLITERAL_ESCAPE_PERCENT"
+	case DBLITERAL_ESCAPE_UNDERSCORE:
+		return "DBLITERAL_ESCAPE_UNDERSCORE"
+	case DBLITERAL_INDEX_NAME:
+		return "DBLITERAL_INDEX_NAME"
+	case DBLITERAL_LIKE_PERCENT:
+		return "DBLITERAL_LIKE_PERCENT"
+	case DBLITERAL_LIKE_UNDERSCORE:
+		return "DBLITERAL_LIKE_UNDERSCORE"
+	case DBLITERAL_PROCEDURE_NAME:
+		return "DBLITERAL_PROCEDURE_NAME"
+	case DBLITERAL_QUOTE:
+		return "DBLITERAL_QUOTE"
+	case DBLITERAL_SCHEMA_NAME:
+		return "DBLITERAL_SCHEMA_NAME"
+	case DBLITERAL_TABLE_NAME:
+		return "DBLITERAL_TABLE_NAME"
+	case DBLITERAL_TEXT_COMMAND:
+		return "DBLITERAL_TEXT_COMMAND"
+	case DBLITERAL_USER_NAME:
+		return "DBLITERAL_USER_NAME"
+	case DBLITERAL_VIEW_NAME:
+		return "DBLITERAL_VIEW_NAME"
+	default:
+		return fmt.Sprintf("DBLITERALENUM(%d)", int32(e))
+	}
+}
+
 type DBLITERALENUM20 int32
 
 const (
@@ -456,12 +1289,50 @@ const (
 	DBLITERAL_QUOTE_SUFFIX     DBLITERALENUM20 = 28
 )
 
+// String returns the DBLITERALENUM20 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBLITERALENUM20) String() string {
+	switch e {
+	case DBLITERAL_CUBE_NAME:
+		return "DBLITERAL_CUBE_NAME"
+	case DBLITERAL_DIMENSION_NAME:
+		return "DBLITERAL_DIMENSION_NAME"
+	case DBLITERAL_HIERARCHY_NAME:
+		return "DBLITERAL_HIERARCHY_NAME"
+	case DBLITERAL_LEVEL_NAME:
+		return "DBLITERAL_LEVEL_NAME"
+	case DBLITERAL_MEMBER_NAME:
+		return "DBLITERAL_MEMBER_NAME"
+	case DBLITERAL_PROPERTY_NAME:
+		return "DBLITERAL_PROPERTY_NAME"
+	case DBLITERAL_SCHEMA_SEPARATOR:
+		return "DBLITERAL_SCHEMA_SEPARATOR"
+	case DBLITERAL_QUOTE_SUFFIX:
+		return "DBLITERAL_QUOTE_SUFFIX"
+	default:
+		return fmt.Sprintf("DBLITERALENUM20(%d)", int32(e))
+	}
+}
+
 type DBLITERALENUM21 int32
 
 const (
 	DBLITERAL_ESCAPE_PERCENT_SUFFIX    DBLITERALENUM21 = 29
 	DBLITERAL_ESCAPE_UNDERSCORE_SUFFIX DBLITERALENUM21 = 30
 )
+
+// String returns the DBLITERALENUM21 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBLITERALENUM21) String() string {
+	switch e {
+	case DBLITERAL_ESCAPE_PERCENT_SUFFIX:
+		return "DBLITERAL_ESCAPE_PERCENT_SUFFIX"
+	case DBLITERAL_ESCAPE_UNDERSCORE_SUFFIX:
+		return "DBLITERAL_ESCAPE_UNDERSCORE_SUFFIX"
+	default:
+		return fmt.Sprintf("DBLITERALENUM21(%d)", int32(e))
+	}
+}
 
 type DBMATCHTYPEENUM int32
 
@@ -471,12 +1342,40 @@ const (
 	DBMATCHTYPE_PARTIAL DBMATCHTYPEENUM = 2
 )
 
+// String returns the DBMATCHTYPEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBMATCHTYPEENUM) String() string {
+	switch e {
+	case DBMATCHTYPE_FULL:
+		return "DBMATCHTYPE_FULL"
+	case DBMATCHTYPE_NONE:
+		return "DBMATCHTYPE_NONE"
+	case DBMATCHTYPE_PARTIAL:
+		return "DBMATCHTYPE_PARTIAL"
+	default:
+		return fmt.Sprintf("DBMATCHTYPEENUM(%d)", int32(e))
+	}
+}
+
 type DBMEMOWNERENUM int32
 
 const (
 	DBMEMOWNER_CLIENTOWNED   DBMEMOWNERENUM = 0
 	DBMEMOWNER_PROVIDEROWNED DBMEMOWNERENUM = 1
 )
+
+// String returns the DBMEMOWNERENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBMEMOWNERENUM) String() string {
+	switch e {
+	case DBMEMOWNER_CLIENTOWNED:
+		return "DBMEMOWNER_CLIENTOWNED"
+	case DBMEMOWNER_PROVIDEROWNED:
+		return "DBMEMOWNER_PROVIDEROWNED"
+	default:
+		return fmt.Sprintf("DBMEMOWNERENUM(%d)", int32(e))
+	}
+}
 
 type DBMOVEFLAGSENUM int32
 
@@ -488,6 +1387,25 @@ const (
 	DBMOVE_ATOMIC            DBMOVEFLAGSENUM = 4096
 )
 
+// String returns the DBMOVEFLAGSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBMOVEFLAGSENUM) String() string {
+	switch e {
+	case DBMOVE_REPLACE_EXISTING:
+		return "DBMOVE_REPLACE_EXISTING"
+	case DBMOVE_ASYNC:
+		return "DBMOVE_ASYNC"
+	case DBMOVE_DONT_UPDATE_LINKS:
+		return "DBMOVE_DONT_UPDATE_LINKS"
+	case DBMOVE_ALLOW_EMULATION:
+		return "DBMOVE_ALLOW_EMULATION"
+	case DBMOVE_ATOMIC:
+		return "DBMOVE_ATOMIC"
+	default:
+		return fmt.Sprintf("DBMOVEFLAGSENUM(%d)", int32(e))
+	}
+}
+
 type DBPARAMFLAGSENUM int32
 
 const (
@@ -498,11 +1416,41 @@ const (
 	DBPARAMFLAGS_ISLONG     DBPARAMFLAGSENUM = 128
 )
 
+// String returns the DBPARAMFLAGSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPARAMFLAGSENUM) String() string {
+	switch e {
+	case DBPARAMFLAGS_ISINPUT:
+		return "DBPARAMFLAGS_ISINPUT"
+	case DBPARAMFLAGS_ISOUTPUT:
+		return "DBPARAMFLAGS_ISOUTPUT"
+	case DBPARAMFLAGS_ISSIGNED:
+		return "DBPARAMFLAGS_ISSIGNED"
+	case DBPARAMFLAGS_ISNULLABLE:
+		return "DBPARAMFLAGS_ISNULLABLE"
+	case DBPARAMFLAGS_ISLONG:
+		return "DBPARAMFLAGS_ISLONG"
+	default:
+		return fmt.Sprintf("DBPARAMFLAGSENUM(%d)", int32(e))
+	}
+}
+
 type DBPARAMFLAGSENUM20 int32
 
 const (
 	DBPARAMFLAGS_SCALEISNEGATIVE DBPARAMFLAGSENUM20 = 256
 )
+
+// String returns the DBPARAMFLAGSENUM20 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPARAMFLAGSENUM20) String() string {
+	switch e {
+	case DBPARAMFLAGS_SCALEISNEGATIVE:
+		return "DBPARAMFLAGS_SCALEISNEGATIVE"
+	default:
+		return fmt.Sprintf("DBPARAMFLAGSENUM20(%d)", int32(e))
+	}
+}
 
 type DBPARAMIOENUM int32
 
@@ -512,6 +1460,21 @@ const (
 	DBPARAMIO_OUTPUT   DBPARAMIOENUM = 2
 )
 
+// String returns the DBPARAMIOENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPARAMIOENUM) String() string {
+	switch e {
+	case DBPARAMIO_NOTPARAM:
+		return "DBPARAMIO_NOTPARAM"
+	case DBPARAMIO_INPUT:
+		return "DBPARAMIO_INPUT"
+	case DBPARAMIO_OUTPUT:
+		return "DBPARAMIO_OUTPUT"
+	default:
+		return fmt.Sprintf("DBPARAMIOENUM(%d)", int32(e))
+	}
+}
+
 type DBPARTENUM int32
 
 const (
@@ -520,6 +1483,23 @@ const (
 	DBPART_LENGTH  DBPARTENUM = 2
 	DBPART_STATUS  DBPARTENUM = 4
 )
+
+// String returns the DBPARTENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPARTENUM) String() string {
+	switch e {
+	case DBPART_INVALID:
+		return "DBPART_INVALID"
+	case DBPART_VALUE:
+		return "DBPART_VALUE"
+	case DBPART_LENGTH:
+		return "DBPART_LENGTH"
+	case DBPART_STATUS:
+		return "DBPART_STATUS"
+	default:
+		return fmt.Sprintf("DBPARTENUM(%d)", int32(e))
+	}
+}
 
 type DBPENDINGSTATUSENUM int32
 
@@ -531,6 +1511,25 @@ const (
 	DBPENDINGSTATUS_INVALIDROW DBPENDINGSTATUSENUM = 16
 )
 
+// String returns the DBPENDINGSTATUSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPENDINGSTATUSENUM) String() string {
+	switch e {
+	case DBPENDINGSTATUS_NEW:
+		return "DBPENDINGSTATUS_NEW"
+	case DBPENDINGSTATUS_CHANGED:
+		return "DBPENDINGSTATUS_CHANGED"
+	case DBPENDINGSTATUS_DELETED:
+		return "DBPENDINGSTATUS_DELETED"
+	case DBPENDINGSTATUS_UNCHANGED:
+		return "DBPENDINGSTATUS_UNCHANGED"
+	case DBPENDINGSTATUS_INVALIDROW:
+		return "DBPENDINGSTATUS_INVALIDROW"
+	default:
+		return fmt.Sprintf("DBPENDINGSTATUSENUM(%d)", int32(e))
+	}
+}
+
 type DBPOSITIONFLAGSENUM int32
 
 const (
@@ -539,6 +1538,23 @@ const (
 	DBPOSITION_BOF   DBPOSITIONFLAGSENUM = 2
 	DBPOSITION_EOF   DBPOSITIONFLAGSENUM = 3
 )
+
+// String returns the DBPOSITIONFLAGSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPOSITIONFLAGSENUM) String() string {
+	switch e {
+	case DBPOSITION_OK:
+		return "DBPOSITION_OK"
+	case DBPOSITION_NOROW:
+		return "DBPOSITION_NOROW"
+	case DBPOSITION_BOF:
+		return "DBPOSITION_BOF"
+	case DBPOSITION_EOF:
+		return "DBPOSITION_EOF"
+	default:
+		return fmt.Sprintf("DBPOSITIONFLAGSENUM(%d)", int32(e))
+	}
+}
 
 type DBPROMPTOPTIONSENUM int32
 
@@ -550,6 +1566,27 @@ const (
 	DBPROMPTOPTIONS_DISABLE_PROVIDER_SELECTION DBPROMPTOPTIONSENUM = 16
 	DBPROMPTOPTIONS_DISABLESAVEPASSWORD        DBPROMPTOPTIONSENUM = 32
 )
+
+// String returns the DBPROMPTOPTIONSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROMPTOPTIONSENUM) String() string {
+	switch e {
+	case DBPROMPTOPTIONS_NONE:
+		return "DBPROMPTOPTIONS_NONE"
+	case DBPROMPTOPTIONS_WIZARDSHEET:
+		return "DBPROMPTOPTIONS_WIZARDSHEET"
+	case DBPROMPTOPTIONS_PROPERTYSHEET:
+		return "DBPROMPTOPTIONS_PROPERTYSHEET"
+	case DBPROMPTOPTIONS_BROWSEONLY:
+		return "DBPROMPTOPTIONS_BROWSEONLY"
+	case DBPROMPTOPTIONS_DISABLE_PROVIDER_SELECTION:
+		return "DBPROMPTOPTIONS_DISABLE_PROVIDER_SELECTION"
+	case DBPROMPTOPTIONS_DISABLESAVEPASSWORD:
+		return "DBPROMPTOPTIONS_DISABLESAVEPASSWORD"
+	default:
+		return fmt.Sprintf("DBPROMPTOPTIONSENUM(%d)", int32(e))
+	}
+}
 
 type DBPROPENUM int32
 
@@ -716,6 +1753,335 @@ const (
 	DBPROP_USERNAME                        DBPROPENUM = 118
 )
 
+// String returns the DBPROPENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPENUM) String() string {
+	switch e {
+	case DBPROP_ABORTPRESERVE:
+		return "DBPROP_ABORTPRESERVE"
+	case DBPROP_ACTIVESESSIONS:
+		return "DBPROP_ACTIVESESSIONS"
+	case DBPROP_APPENDONLY:
+		return "DBPROP_APPENDONLY"
+	case DBPROP_ASYNCTXNABORT:
+		return "DBPROP_ASYNCTXNABORT"
+	case DBPROP_ASYNCTXNCOMMIT:
+		return "DBPROP_ASYNCTXNCOMMIT"
+	case DBPROP_AUTH_CACHE_AUTHINFO:
+		return "DBPROP_AUTH_CACHE_AUTHINFO"
+	case DBPROP_AUTH_ENCRYPT_PASSWORD:
+		return "DBPROP_AUTH_ENCRYPT_PASSWORD"
+	case DBPROP_AUTH_INTEGRATED:
+		return "DBPROP_AUTH_INTEGRATED"
+	case DBPROP_AUTH_MASK_PASSWORD:
+		return "DBPROP_AUTH_MASK_PASSWORD"
+	case DBPROP_AUTH_PASSWORD:
+		return "DBPROP_AUTH_PASSWORD"
+	case DBPROP_AUTH_PERSIST_ENCRYPTED:
+		return "DBPROP_AUTH_PERSIST_ENCRYPTED"
+	case DBPROP_AUTH_PERSIST_SENSITIVE_AUTHINFO:
+		return "DBPROP_AUTH_PERSIST_SENSITIVE_AUTHINFO"
+	case DBPROP_AUTH_USERID:
+		return "DBPROP_AUTH_USERID"
+	case DBPROP_BLOCKINGSTORAGEOBJECTS:
+		return "DBPROP_BLOCKINGSTORAGEOBJECTS"
+	case DBPROP_BOOKMARKS:
+		return "DBPROP_BOOKMARKS"
+	case DBPROP_BOOKMARKSKIPPED:
+		return "DBPROP_BOOKMARKSKIPPED"
+	case DBPROP_BOOKMARKTYPE:
+		return "DBPROP_BOOKMARKTYPE"
+	case DBPROP_BYREFACCESSORS:
+		return "DBPROP_BYREFACCESSORS"
+	case DBPROP_CACHEDEFERRED:
+		return "DBPROP_CACHEDEFERRED"
+	case DBPROP_CANFETCHBACKWARDS:
+		return "DBPROP_CANFETCHBACKWARDS"
+	case DBPROP_CANHOLDROWS:
+		return "DBPROP_CANHOLDROWS"
+	case DBPROP_CANSCROLLBACKWARDS:
+		return "DBPROP_CANSCROLLBACKWARDS"
+	case DBPROP_CATALOGLOCATION:
+		return "DBPROP_CATALOGLOCATION"
+	case DBPROP_CATALOGTERM:
+		return "DBPROP_CATALOGTERM"
+	case DBPROP_CATALOGUSAGE:
+		return "DBPROP_CATALOGUSAGE"
+	case DBPROP_CHANGEINSERTEDROWS:
+		return "DBPROP_CHANGEINSERTEDROWS"
+	case DBPROP_COL_AUTOINCREMENT:
+		return "DBPROP_COL_AUTOINCREMENT"
+	case DBPROP_COL_DEFAULT:
+		return "DBPROP_COL_DEFAULT"
+	case DBPROP_COL_DESCRIPTION:
+		return "DBPROP_COL_DESCRIPTION"
+	case DBPROP_COL_FIXEDLENGTH:
+		return "DBPROP_COL_FIXEDLENGTH"
+	case DBPROP_COL_NULLABLE:
+		return "DBPROP_COL_NULLABLE"
+	case DBPROP_COL_PRIMARYKEY:
+		return "DBPROP_COL_PRIMARYKEY"
+	case DBPROP_COL_UNIQUE:
+		return "DBPROP_COL_UNIQUE"
+	case DBPROP_COLUMNDEFINITION:
+		return "DBPROP_COLUMNDEFINITION"
+	case DBPROP_COLUMNRESTRICT:
+		return "DBPROP_COLUMNRESTRICT"
+	case DBPROP_COMMANDTIMEOUT:
+		return "DBPROP_COMMANDTIMEOUT"
+	case DBPROP_COMMITPRESERVE:
+		return "DBPROP_COMMITPRESERVE"
+	case DBPROP_CONCATNULLBEHAVIOR:
+		return "DBPROP_CONCATNULLBEHAVIOR"
+	case DBPROP_CURRENTCATALOG:
+		return "DBPROP_CURRENTCATALOG"
+	case DBPROP_DATASOURCENAME:
+		return "DBPROP_DATASOURCENAME"
+	case DBPROP_DATASOURCEREADONLY:
+		return "DBPROP_DATASOURCEREADONLY"
+	case DBPROP_DBMSNAME:
+		return "DBPROP_DBMSNAME"
+	case DBPROP_DBMSVER:
+		return "DBPROP_DBMSVER"
+	case DBPROP_DEFERRED:
+		return "DBPROP_DEFERRED"
+	case DBPROP_DELAYSTORAGEOBJECTS:
+		return "DBPROP_DELAYSTORAGEOBJECTS"
+	case DBPROP_DSOTHREADMODEL:
+		return "DBPROP_DSOTHREADMODEL"
+	case DBPROP_GROUPBY:
+		return "DBPROP_GROUPBY"
+	case DBPROP_HETEROGENEOUSTABLES:
+		return "DBPROP_HETEROGENEOUSTABLES"
+	case DBPROP_IAccessor:
+		return "DBPROP_IAccessor"
+	case DBPROP_IColumnsInfo:
+		return "DBPROP_IColumnsInfo"
+	case DBPROP_IColumnsRowset:
+		return "DBPROP_IColumnsRowset"
+	case DBPROP_IConnectionPointContainer:
+		return "DBPROP_IConnectionPointContainer"
+	case DBPROP_IConvertType:
+		return "DBPROP_IConvertType"
+	case DBPROP_IRowset:
+		return "DBPROP_IRowset"
+	case DBPROP_IRowsetChange:
+		return "DBPROP_IRowsetChange"
+	case DBPROP_IRowsetIdentity:
+		return "DBPROP_IRowsetIdentity"
+	case DBPROP_IRowsetIndex:
+		return "DBPROP_IRowsetIndex"
+	case DBPROP_IRowsetInfo:
+		return "DBPROP_IRowsetInfo"
+	case DBPROP_IRowsetLocate:
+		return "DBPROP_IRowsetLocate"
+	case DBPROP_IRowsetResynch:
+		return "DBPROP_IRowsetResynch"
+	case DBPROP_IRowsetScroll:
+		return "DBPROP_IRowsetScroll"
+	case DBPROP_IRowsetUpdate:
+		return "DBPROP_IRowsetUpdate"
+	case DBPROP_ISupportErrorInfo:
+		return "DBPROP_ISupportErrorInfo"
+	case DBPROP_ILockBytes:
+		return "DBPROP_ILockBytes"
+	case DBPROP_ISequentialStream:
+		return "DBPROP_ISequentialStream"
+	case DBPROP_IStorage:
+		return "DBPROP_IStorage"
+	case DBPROP_IStream:
+		return "DBPROP_IStream"
+	case DBPROP_IDENTIFIERCASE:
+		return "DBPROP_IDENTIFIERCASE"
+	case DBPROP_IMMOBILEROWS:
+		return "DBPROP_IMMOBILEROWS"
+	case DBPROP_INDEX_AUTOUPDATE:
+		return "DBPROP_INDEX_AUTOUPDATE"
+	case DBPROP_INDEX_CLUSTERED:
+		return "DBPROP_INDEX_CLUSTERED"
+	case DBPROP_INDEX_FILLFACTOR:
+		return "DBPROP_INDEX_FILLFACTOR"
+	case DBPROP_INDEX_INITIALSIZE:
+		return "DBPROP_INDEX_INITIALSIZE"
+	case DBPROP_INDEX_NULLCOLLATION:
+		return "DBPROP_INDEX_NULLCOLLATION"
+	case DBPROP_INDEX_NULLS:
+		return "DBPROP_INDEX_NULLS"
+	case DBPROP_INDEX_PRIMARYKEY:
+		return "DBPROP_INDEX_PRIMARYKEY"
+	case DBPROP_INDEX_SORTBOOKMARKS:
+		return "DBPROP_INDEX_SORTBOOKMARKS"
+	case DBPROP_INDEX_TEMPINDEX:
+		return "DBPROP_INDEX_TEMPINDEX"
+	case DBPROP_INDEX_TYPE:
+		return "DBPROP_INDEX_TYPE"
+	case DBPROP_INDEX_UNIQUE:
+		return "DBPROP_INDEX_UNIQUE"
+	case DBPROP_INIT_DATASOURCE:
+		return "DBPROP_INIT_DATASOURCE"
+	case DBPROP_INIT_HWND:
+		return "DBPROP_INIT_HWND"
+	case DBPROP_INIT_IMPERSONATION_LEVEL:
+		return "DBPROP_INIT_IMPERSONATION_LEVEL"
+	case DBPROP_INIT_LCID:
+		return "DBPROP_INIT_LCID"
+	case DBPROP_INIT_LOCATION:
+		return "DBPROP_INIT_LOCATION"
+	case DBPROP_INIT_MODE:
+		return "DBPROP_INIT_MODE"
+	case DBPROP_INIT_PROMPT:
+		return "DBPROP_INIT_PROMPT"
+	case DBPROP_INIT_PROTECTION_LEVEL:
+		return "DBPROP_INIT_PROTECTION_LEVEL"
+	case DBPROP_INIT_PROVIDERSTRING:
+		return "DBPROP_INIT_PROVIDERSTRING"
+	case DBPROP_INIT_TIMEOUT:
+		return "DBPROP_INIT_TIMEOUT"
+	case DBPROP_LITERALBOOKMARKS:
+		return "DBPROP_LITERALBOOKMARKS"
+	case DBPROP_LITERALIDENTITY:
+		return "DBPROP_LITERALIDENTITY"
+	case DBPROP_MAXINDEXSIZE:
+		return "DBPROP_MAXINDEXSIZE"
+	case DBPROP_MAXOPENROWS:
+		return "DBPROP_MAXOPENROWS"
+	case DBPROP_MAXPENDINGROWS:
+		return "DBPROP_MAXPENDINGROWS"
+	case DBPROP_MAXROWS:
+		return "DBPROP_MAXROWS"
+	case DBPROP_MAXROWSIZE:
+		return "DBPROP_MAXROWSIZE"
+	case DBPROP_MAXROWSIZEINCLUDESBLOB:
+		return "DBPROP_MAXROWSIZEINCLUDESBLOB"
+	case DBPROP_MAXTABLESINSELECT:
+		return "DBPROP_MAXTABLESINSELECT"
+	case DBPROP_MAYWRITECOLUMN:
+		return "DBPROP_MAYWRITECOLUMN"
+	case DBPROP_MEMORYUSAGE:
+		return "DBPROP_MEMORYUSAGE"
+	case DBPROP_MULTIPLEPARAMSETS:
+		return "DBPROP_MULTIPLEPARAMSETS"
+	case DBPROP_MULTIPLERESULTS:
+		return "DBPROP_MULTIPLERESULTS"
+	case DBPROP_MULTIPLESTORAGEOBJECTS:
+		return "DBPROP_MULTIPLESTORAGEOBJECTS"
+	case DBPROP_MULTITABLEUPDATE:
+		return "DBPROP_MULTITABLEUPDATE"
+	case DBPROP_NOTIFICATIONGRANULARITY:
+		return "DBPROP_NOTIFICATIONGRANULARITY"
+	case DBPROP_NOTIFICATIONPHASES:
+		return "DBPROP_NOTIFICATIONPHASES"
+	case DBPROP_NOTIFYCOLUMNSET:
+		return "DBPROP_NOTIFYCOLUMNSET"
+	case DBPROP_NOTIFYROWDELETE:
+		return "DBPROP_NOTIFYROWDELETE"
+	case DBPROP_NOTIFYROWFIRSTCHANGE:
+		return "DBPROP_NOTIFYROWFIRSTCHANGE"
+	case DBPROP_NOTIFYROWINSERT:
+		return "DBPROP_NOTIFYROWINSERT"
+	case DBPROP_NOTIFYROWRESYNCH:
+		return "DBPROP_NOTIFYROWRESYNCH"
+	case DBPROP_NOTIFYROWSETCHANGED:
+		return "DBPROP_NOTIFYROWSETCHANGED"
+	case DBPROP_NOTIFYROWSETRELEASE:
+		return "DBPROP_NOTIFYROWSETRELEASE"
+	case DBPROP_NOTIFYROWSETFETCHPOSITIONCHANGE:
+		return "DBPROP_NOTIFYROWSETFETCHPOSITIONCHANGE"
+	case DBPROP_NOTIFYROWUNDOCHANGE:
+		return "DBPROP_NOTIFYROWUNDOCHANGE"
+	case DBPROP_NOTIFYROWUNDODELETE:
+		return "DBPROP_NOTIFYROWUNDODELETE"
+	case DBPROP_NOTIFYROWUNDOINSERT:
+		return "DBPROP_NOTIFYROWUNDOINSERT"
+	case DBPROP_NOTIFYROWUPDATE:
+		return "DBPROP_NOTIFYROWUPDATE"
+	case DBPROP_NULLCOLLATION:
+		return "DBPROP_NULLCOLLATION"
+	case DBPROP_OLEOBJECTS:
+		return "DBPROP_OLEOBJECTS"
+	case DBPROP_ORDERBYCOLUMNSINSELECT:
+		return "DBPROP_ORDERBYCOLUMNSINSELECT"
+	case DBPROP_ORDEREDBOOKMARKS:
+		return "DBPROP_ORDEREDBOOKMARKS"
+	case DBPROP_OTHERINSERT:
+		return "DBPROP_OTHERINSERT"
+	case DBPROP_OTHERUPDATEDELETE:
+		return "DBPROP_OTHERUPDATEDELETE"
+	case DBPROP_OUTPUTPARAMETERAVAILABILITY:
+		return "DBPROP_OUTPUTPARAMETERAVAILABILITY"
+	case DBPROP_OWNINSERT:
+		return "DBPROP_OWNINSERT"
+	case DBPROP_OWNUPDATEDELETE:
+		return "DBPROP_OWNUPDATEDELETE"
+	case DBPROP_PERSISTENTIDTYPE:
+		return "DBPROP_PERSISTENTIDTYPE"
+	case DBPROP_PREPAREABORTBEHAVIOR:
+		return "DBPROP_PREPAREABORTBEHAVIOR"
+	case DBPROP_PREPARECOMMITBEHAVIOR:
+		return "DBPROP_PREPARECOMMITBEHAVIOR"
+	case DBPROP_PROCEDURETERM:
+		return "DBPROP_PROCEDURETERM"
+	case DBPROP_PROVIDERNAME:
+		return "DBPROP_PROVIDERNAME"
+	case DBPROP_PROVIDEROLEDBVER:
+		return "DBPROP_PROVIDEROLEDBVER"
+	case DBPROP_PROVIDERVER:
+		return "DBPROP_PROVIDERVER"
+	case DBPROP_QUICKRESTART:
+		return "DBPROP_QUICKRESTART"
+	case DBPROP_QUOTEDIDENTIFIERCASE:
+		return "DBPROP_QUOTEDIDENTIFIERCASE"
+	case DBPROP_REENTRANTEVENTS:
+		return "DBPROP_REENTRANTEVENTS"
+	case DBPROP_REMOVEDELETED:
+		return "DBPROP_REMOVEDELETED"
+	case DBPROP_REPORTMULTIPLECHANGES:
+		return "DBPROP_REPORTMULTIPLECHANGES"
+	case DBPROP_RETURNPENDINGINSERTS:
+		return "DBPROP_RETURNPENDINGINSERTS"
+	case DBPROP_ROWRESTRICT:
+		return "DBPROP_ROWRESTRICT"
+	case DBPROP_ROWSETCONVERSIONSONCOMMAND:
+		return "DBPROP_ROWSETCONVERSIONSONCOMMAND"
+	case DBPROP_ROWTHREADMODEL:
+		return "DBPROP_ROWTHREADMODEL"
+	case DBPROP_SCHEMATERM:
+		return "DBPROP_SCHEMATERM"
+	case DBPROP_SCHEMAUSAGE:
+		return "DBPROP_SCHEMAUSAGE"
+	case DBPROP_SERVERCURSOR:
+		return "DBPROP_SERVERCURSOR"
+	case DBPROP_SESS_AUTOCOMMITISOLEVELS:
+		return "DBPROP_SESS_AUTOCOMMITISOLEVELS"
+	case DBPROP_SQLSUPPORT:
+		return "DBPROP_SQLSUPPORT"
+	case DBPROP_STRONGIDENTITY:
+		return "DBPROP_STRONGIDENTITY"
+	case DBPROP_STRUCTUREDSTORAGE:
+		return "DBPROP_STRUCTUREDSTORAGE"
+	case DBPROP_SUBQUERIES:
+		return "DBPROP_SUBQUERIES"
+	case DBPROP_SUPPORTEDTXNDDL:
+		return "DBPROP_SUPPORTEDTXNDDL"
+	case DBPROP_SUPPORTEDTXNISOLEVELS:
+		return "DBPROP_SUPPORTEDTXNISOLEVELS"
+	case DBPROP_SUPPORTEDTXNISORETAIN:
+		return "DBPROP_SUPPORTEDTXNISORETAIN"
+	case DBPROP_TABLETERM:
+		return "DBPROP_TABLETERM"
+	case DBPROP_TBL_TEMPTABLE:
+		return "DBPROP_TBL_TEMPTABLE"
+	case DBPROP_TRANSACTEDOBJECT:
+		return "DBPROP_TRANSACTEDOBJECT"
+	case DBPROP_UPDATABILITY:
+		return "DBPROP_UPDATABILITY"
+	case DBPROP_USERNAME:
+		return "DBPROP_USERNAME"
+	default:
+		return fmt.Sprintf("DBPROPENUM(%d)", int32(e))
+	}
+}
+
 type DBPROPENUM15 int32
 
 const (
@@ -736,6 +2102,47 @@ const (
 	DBPROP_ROWSET_ASYNCH    DBPROPENUM15 = 201
 	DBPROP_SORTONINDEX      DBPROPENUM15 = 207
 )
+
+// String returns the DBPROPENUM15 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPENUM15) String() string {
+	switch e {
+	case DBPROP_FILTERCOMPAREOPS:
+		return "DBPROP_FILTERCOMPAREOPS"
+	case DBPROP_FINDCOMPAREOPS:
+		return "DBPROP_FINDCOMPAREOPS"
+	case DBPROP_IChapteredRowset:
+		return "DBPROP_IChapteredRowset"
+	case DBPROP_IDBAsynchStatus:
+		return "DBPROP_IDBAsynchStatus"
+	case DBPROP_IRowsetFind:
+		return "DBPROP_IRowsetFind"
+	case DBPROP_IRowsetView:
+		return "DBPROP_IRowsetView"
+	case DBPROP_IViewChapter:
+		return "DBPROP_IViewChapter"
+	case DBPROP_IViewFilter:
+		return "DBPROP_IViewFilter"
+	case DBPROP_IViewRowset:
+		return "DBPROP_IViewRowset"
+	case DBPROP_IViewSort:
+		return "DBPROP_IViewSort"
+	case DBPROP_INIT_ASYNCH:
+		return "DBPROP_INIT_ASYNCH"
+	case DBPROP_MAXOPENCHAPTERS:
+		return "DBPROP_MAXOPENCHAPTERS"
+	case DBPROP_MAXORSINFILTER:
+		return "DBPROP_MAXORSINFILTER"
+	case DBPROP_MAXSORTCOLUMNS:
+		return "DBPROP_MAXSORTCOLUMNS"
+	case DBPROP_ROWSET_ASYNCH:
+		return "DBPROP_ROWSET_ASYNCH"
+	case DBPROP_SORTONINDEX:
+		return "DBPROP_SORTONINDEX"
+	default:
+		return fmt.Sprintf("DBPROPENUM15(%d)", int32(e))
+	}
+}
 
 type DBPROPENUM20 int32
 
@@ -785,6 +2192,99 @@ const (
 	DBPROP_CLIENTCURSOR               DBPROPENUM20 = 260
 )
 
+// String returns the DBPROPENUM20 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPENUM20) String() string {
+	switch e {
+	case DBPROP_IMultipleResults:
+		return "DBPROP_IMultipleResults"
+	case DBPROP_DATASOURCE_TYPE:
+		return "DBPROP_DATASOURCE_TYPE"
+	case MDPROP_AXES:
+		return "MDPROP_AXES"
+	case MDPROP_FLATTENING_SUPPORT:
+		return "MDPROP_FLATTENING_SUPPORT"
+	case MDPROP_MDX_JOINCUBES:
+		return "MDPROP_MDX_JOINCUBES"
+	case MDPROP_NAMED_LEVELS:
+		return "MDPROP_NAMED_LEVELS"
+	case MDPROP_RANGEROWSET:
+		return "MDPROP_RANGEROWSET"
+	case MDPROP_MDX_SLICER:
+		return "MDPROP_MDX_SLICER"
+	case MDPROP_MDX_CUBEQUALIFICATION:
+		return "MDPROP_MDX_CUBEQUALIFICATION"
+	case MDPROP_MDX_OUTERREFERENCE:
+		return "MDPROP_MDX_OUTERREFERENCE"
+	case MDPROP_MDX_QUERYBYPROPERTY:
+		return "MDPROP_MDX_QUERYBYPROPERTY"
+	case MDPROP_MDX_CASESUPPORT:
+		return "MDPROP_MDX_CASESUPPORT"
+	case MDPROP_MDX_STRING_COMPOP:
+		return "MDPROP_MDX_STRING_COMPOP"
+	case MDPROP_MDX_DESCFLAGS:
+		return "MDPROP_MDX_DESCFLAGS"
+	case MDPROP_MDX_SET_FUNCTIONS:
+		return "MDPROP_MDX_SET_FUNCTIONS"
+	case MDPROP_MDX_MEMBER_FUNCTIONS:
+		return "MDPROP_MDX_MEMBER_FUNCTIONS"
+	case MDPROP_MDX_NUMERIC_FUNCTIONS:
+		return "MDPROP_MDX_NUMERIC_FUNCTIONS"
+	case MDPROP_MDX_FORMULAS:
+		return "MDPROP_MDX_FORMULAS"
+	case MDPROP_AGGREGATECELL_UPDATE:
+		return "MDPROP_AGGREGATECELL_UPDATE"
+	case MDPROP_MDX_OBJQUALIFICATION:
+		return "MDPROP_MDX_OBJQUALIFICATION"
+	case MDPROP_MDX_NONMEASURE_EXPRESSIONS:
+		return "MDPROP_MDX_NONMEASURE_EXPRESSIONS"
+	case DBPROP_ACCESSORDER:
+		return "DBPROP_ACCESSORDER"
+	case DBPROP_BOOKMARKINFO:
+		return "DBPROP_BOOKMARKINFO"
+	case DBPROP_INIT_CATALOG:
+		return "DBPROP_INIT_CATALOG"
+	case DBPROP_ROW_BULKOPS:
+		return "DBPROP_ROW_BULKOPS"
+	case DBPROP_PROVIDERFRIENDLYNAME:
+		return "DBPROP_PROVIDERFRIENDLYNAME"
+	case DBPROP_LOCKMODE:
+		return "DBPROP_LOCKMODE"
+	case DBPROP_MULTIPLECONNECTIONS:
+		return "DBPROP_MULTIPLECONNECTIONS"
+	case DBPROP_UNIQUEROWS:
+		return "DBPROP_UNIQUEROWS"
+	case DBPROP_SERVERDATAONINSERT:
+		return "DBPROP_SERVERDATAONINSERT"
+	case DBPROP_STORAGEFLAGS:
+		return "DBPROP_STORAGEFLAGS"
+	case DBPROP_CONNECTIONSTATUS:
+		return "DBPROP_CONNECTIONSTATUS"
+	case DBPROP_ALTERCOLUMN:
+		return "DBPROP_ALTERCOLUMN"
+	case DBPROP_COLUMNLCID:
+		return "DBPROP_COLUMNLCID"
+	case DBPROP_RESETDATASOURCE:
+		return "DBPROP_RESETDATASOURCE"
+	case DBPROP_INIT_OLEDBSERVICES:
+		return "DBPROP_INIT_OLEDBSERVICES"
+	case DBPROP_IRowsetRefresh:
+		return "DBPROP_IRowsetRefresh"
+	case DBPROP_SERVERNAME:
+		return "DBPROP_SERVERNAME"
+	case DBPROP_IParentRowset:
+		return "DBPROP_IParentRowset"
+	case DBPROP_HIDDENCOLUMNS:
+		return "DBPROP_HIDDENCOLUMNS"
+	case DBPROP_PROVIDERMEMORY:
+		return "DBPROP_PROVIDERMEMORY"
+	case DBPROP_CLIENTCURSOR:
+		return "DBPROP_CLIENTCURSOR"
+	default:
+		return fmt.Sprintf("DBPROPENUM20(%d)", int32(e))
+	}
+}
+
 type DBPROPENUM21 int32
 
 const (
@@ -811,6 +2311,57 @@ const (
 	DBPROP_COL_ISLONG                DBPROPENUM21 = 281
 )
 
+// String returns the DBPROPENUM21 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPENUM21) String() string {
+	switch e {
+	case DBPROP_TRUSTEE_USERNAME:
+		return "DBPROP_TRUSTEE_USERNAME"
+	case DBPROP_TRUSTEE_AUTHENTICATION:
+		return "DBPROP_TRUSTEE_AUTHENTICATION"
+	case DBPROP_TRUSTEE_NEWAUTHENTICATION:
+		return "DBPROP_TRUSTEE_NEWAUTHENTICATION"
+	case DBPROP_IRow:
+		return "DBPROP_IRow"
+	case DBPROP_IRowChange:
+		return "DBPROP_IRowChange"
+	case DBPROP_IRowSchemaChange:
+		return "DBPROP_IRowSchemaChange"
+	case DBPROP_IGetRow:
+		return "DBPROP_IGetRow"
+	case DBPROP_IScopedOperations:
+		return "DBPROP_IScopedOperations"
+	case DBPROP_IBindResource:
+		return "DBPROP_IBindResource"
+	case DBPROP_ICreateRow:
+		return "DBPROP_ICreateRow"
+	case DBPROP_INIT_BINDFLAGS:
+		return "DBPROP_INIT_BINDFLAGS"
+	case DBPROP_INIT_LOCKOWNER:
+		return "DBPROP_INIT_LOCKOWNER"
+	case DBPROP_GENERATEURL:
+		return "DBPROP_GENERATEURL"
+	case DBPROP_IDBBinderProperties:
+		return "DBPROP_IDBBinderProperties"
+	case DBPROP_IColumnsInfo2:
+		return "DBPROP_IColumnsInfo2"
+	case DBPROP_IRegisterProvider:
+		return "DBPROP_IRegisterProvider"
+	case DBPROP_IGetSession:
+		return "DBPROP_IGetSession"
+	case DBPROP_IGetSourceRow:
+		return "DBPROP_IGetSourceRow"
+	case DBPROP_IRowsetCurrentIndex:
+		return "DBPROP_IRowsetCurrentIndex"
+	case DBPROP_OPENROWSETSUPPORT:
+		return "DBPROP_OPENROWSETSUPPORT"
+	case DBPROP_COL_ISLONG:
+		return "DBPROP_COL_ISLONG"
+	default:
+		return fmt.Sprintf("DBPROPENUM21(%d)", int32(e))
+	}
+}
+
 type DBPROPENUM25 int32
 
 const (
@@ -819,6 +2370,23 @@ const (
 	DBPROP_INIT_GENERALTIMEOUT DBPROPENUM25 = 284
 	DBPROP_COMSERVICES         DBPROPENUM25 = 285
 )
+
+// String returns the DBPROPENUM25 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPENUM25) String() string {
+	switch e {
+	case DBPROP_COL_SEED:
+		return "DBPROP_COL_SEED"
+	case DBPROP_COL_INCREMENT:
+		return "DBPROP_COL_INCREMENT"
+	case DBPROP_INIT_GENERALTIMEOUT:
+		return "DBPROP_INIT_GENERALTIMEOUT"
+	case DBPROP_COMSERVICES:
+		return "DBPROP_COMSERVICES"
+	default:
+		return fmt.Sprintf("DBPROPENUM25(%d)", int32(e))
+	}
+}
 
 type DBPROPENUM25_DEPRECATED int32
 
@@ -841,6 +2409,47 @@ const (
 	DBPROP_IRowsetWithParameters DBPROPENUM25_DEPRECATED = 158
 )
 
+// String returns the DBPROPENUM25_DEPRECATED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPENUM25_DEPRECATED) String() string {
+	switch e {
+	case DBPROP_ICommandCost:
+		return "DBPROP_ICommandCost"
+	case DBPROP_ICommandTree:
+		return "DBPROP_ICommandTree"
+	case DBPROP_ICommandValidate:
+		return "DBPROP_ICommandValidate"
+	case DBPROP_IDBSchemaCommand:
+		return "DBPROP_IDBSchemaCommand"
+	case DBPROP_IProvideMoniker:
+		return "DBPROP_IProvideMoniker"
+	case DBPROP_IQuery:
+		return "DBPROP_IQuery"
+	case DBPROP_IReadData:
+		return "DBPROP_IReadData"
+	case DBPROP_IRowsetAsynch:
+		return "DBPROP_IRowsetAsynch"
+	case DBPROP_IRowsetCopyRows:
+		return "DBPROP_IRowsetCopyRows"
+	case DBPROP_IRowsetKeys:
+		return "DBPROP_IRowsetKeys"
+	case DBPROP_IRowsetNewRowAfter:
+		return "DBPROP_IRowsetNewRowAfter"
+	case DBPROP_IRowsetNextRowset:
+		return "DBPROP_IRowsetNextRowset"
+	case DBPROP_IRowsetWatchAll:
+		return "DBPROP_IRowsetWatchAll"
+	case DBPROP_IRowsetWatchNotify:
+		return "DBPROP_IRowsetWatchNotify"
+	case DBPROP_IRowsetWatchRegion:
+		return "DBPROP_IRowsetWatchRegion"
+	case DBPROP_IRowsetWithParameters:
+		return "DBPROP_IRowsetWithParameters"
+	default:
+		return fmt.Sprintf("DBPROPENUM25_DEPRECATED(%d)", int32(e))
+	}
+}
+
 type DBPROPENUM26 int32
 
 const (
@@ -852,6 +2461,27 @@ const (
 	MDPROP_VISUALMODE          DBPROPENUM26 = 293
 )
 
+// String returns the DBPROPENUM26 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPENUM26) String() string {
+	switch e {
+	case DBPROP_OUTPUTSTREAM:
+		return "DBPROP_OUTPUTSTREAM"
+	case DBPROP_OUTPUTENCODING:
+		return "DBPROP_OUTPUTENCODING"
+	case DBPROP_TABLESTATISTICS:
+		return "DBPROP_TABLESTATISTICS"
+	case DBPROP_SKIPROWCOUNTRESULTS:
+		return "DBPROP_SKIPROWCOUNTRESULTS"
+	case DBPROP_IRowsetBookmark:
+		return "DBPROP_IRowsetBookmark"
+	case MDPROP_VISUALMODE:
+		return "MDPROP_VISUALMODE"
+	default:
+		return fmt.Sprintf("DBPROPENUM26(%d)", int32(e))
+	}
+}
+
 type DBPROPENUMDEPRECATED int32
 
 const (
@@ -859,6 +2489,21 @@ const (
 	DBPROP_MARSHALLABLE       DBPROPENUMDEPRECATED = 197
 	DBPROP_FILTEROPS          DBPROPENUMDEPRECATED = 208
 )
+
+// String returns the DBPROPENUMDEPRECATED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPENUMDEPRECATED) String() string {
+	switch e {
+	case DBPROP_IRowsetExactScroll:
+		return "DBPROP_IRowsetExactScroll"
+	case DBPROP_MARSHALLABLE:
+		return "DBPROP_MARSHALLABLE"
+	case DBPROP_FILTEROPS:
+		return "DBPROP_FILTEROPS"
+	default:
+		return fmt.Sprintf("DBPROPENUMDEPRECATED(%d)", int32(e))
+	}
+}
 
 type DBPROPFLAGSENUM int32
 
@@ -879,11 +2524,59 @@ const (
 	DBPROPFLAGS_SESSION          DBPROPFLAGSENUM = 4096
 )
 
+// String returns the DBPROPFLAGSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPFLAGSENUM) String() string {
+	switch e {
+	case DBPROPFLAGS_NOTSUPPORTED:
+		return "DBPROPFLAGS_NOTSUPPORTED"
+	case DBPROPFLAGS_COLUMN:
+		return "DBPROPFLAGS_COLUMN"
+	case DBPROPFLAGS_DATASOURCE:
+		return "DBPROPFLAGS_DATASOURCE"
+	case DBPROPFLAGS_DATASOURCECREATE:
+		return "DBPROPFLAGS_DATASOURCECREATE"
+	case DBPROPFLAGS_DATASOURCEINFO:
+		return "DBPROPFLAGS_DATASOURCEINFO"
+	case DBPROPFLAGS_DBINIT:
+		return "DBPROPFLAGS_DBINIT"
+	case DBPROPFLAGS_INDEX:
+		return "DBPROPFLAGS_INDEX"
+	case DBPROPFLAGS_ROWSET:
+		return "DBPROPFLAGS_ROWSET"
+	case DBPROPFLAGS_TABLE:
+		return "DBPROPFLAGS_TABLE"
+	case DBPROPFLAGS_COLUMNOK:
+		return "DBPROPFLAGS_COLUMNOK"
+	case DBPROPFLAGS_READ:
+		return "DBPROPFLAGS_READ"
+	case DBPROPFLAGS_WRITE:
+		return "DBPROPFLAGS_WRITE"
+	case DBPROPFLAGS_REQUIRED:
+		return "DBPROPFLAGS_REQUIRED"
+	case DBPROPFLAGS_SESSION:
+		return "DBPROPFLAGS_SESSION"
+	default:
+		return fmt.Sprintf("DBPROPFLAGSENUM(%d)", int32(e))
+	}
+}
+
 type DBPROPFLAGSENUM21 int32
 
 const (
 	DBPROPFLAGS_TRUSTEE DBPROPFLAGSENUM21 = 8192
 )
+
+// String returns the DBPROPFLAGSENUM21 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPFLAGSENUM21) String() string {
+	switch e {
+	case DBPROPFLAGS_TRUSTEE:
+		return "DBPROPFLAGS_TRUSTEE"
+	default:
+		return fmt.Sprintf("DBPROPFLAGSENUM21(%d)", int32(e))
+	}
+}
 
 type DBPROPFLAGSENUM25 int32
 
@@ -891,11 +2584,33 @@ const (
 	DBPROPFLAGS_VIEW DBPROPFLAGSENUM25 = 16384
 )
 
+// String returns the DBPROPFLAGSENUM25 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPFLAGSENUM25) String() string {
+	switch e {
+	case DBPROPFLAGS_VIEW:
+		return "DBPROPFLAGS_VIEW"
+	default:
+		return fmt.Sprintf("DBPROPFLAGSENUM25(%d)", int32(e))
+	}
+}
+
 type DBPROPFLAGSENUM26 int32
 
 const (
 	DBPROPFLAGS_STREAM DBPROPFLAGSENUM26 = 32768
 )
+
+// String returns the DBPROPFLAGSENUM26 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPFLAGSENUM26) String() string {
+	switch e {
+	case DBPROPFLAGS_STREAM:
+		return "DBPROPFLAGS_STREAM"
+	default:
+		return fmt.Sprintf("DBPROPFLAGSENUM26(%d)", int32(e))
+	}
+}
 
 type DBPROPOPTIONSENUM int32
 
@@ -904,6 +2619,19 @@ const (
 	DBPROPOPTIONS_SETIFCHEAP DBPROPOPTIONSENUM = 1
 	DBPROPOPTIONS_OPTIONAL   DBPROPOPTIONSENUM = 1
 )
+
+// String returns the DBPROPOPTIONSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPOPTIONSENUM) String() string {
+	switch e {
+	case DBPROPOPTIONS_REQUIRED:
+		return "DBPROPOPTIONS_REQUIRED"
+	case DBPROPOPTIONS_SETIFCHEAP:
+		return "DBPROPOPTIONS_SETIFCHEAP"
+	default:
+		return fmt.Sprintf("DBPROPOPTIONSENUM(%d)", int32(e))
+	}
+}
 
 type DBPROPSTATUSENUM int32
 
@@ -919,11 +2647,49 @@ const (
 	DBPROPSTATUS_CONFLICTING    DBPROPSTATUSENUM = 8
 )
 
+// String returns the DBPROPSTATUSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPSTATUSENUM) String() string {
+	switch e {
+	case DBPROPSTATUS_OK:
+		return "DBPROPSTATUS_OK"
+	case DBPROPSTATUS_NOTSUPPORTED:
+		return "DBPROPSTATUS_NOTSUPPORTED"
+	case DBPROPSTATUS_BADVALUE:
+		return "DBPROPSTATUS_BADVALUE"
+	case DBPROPSTATUS_BADOPTION:
+		return "DBPROPSTATUS_BADOPTION"
+	case DBPROPSTATUS_BADCOLUMN:
+		return "DBPROPSTATUS_BADCOLUMN"
+	case DBPROPSTATUS_NOTALLSETTABLE:
+		return "DBPROPSTATUS_NOTALLSETTABLE"
+	case DBPROPSTATUS_NOTSETTABLE:
+		return "DBPROPSTATUS_NOTSETTABLE"
+	case DBPROPSTATUS_NOTSET:
+		return "DBPROPSTATUS_NOTSET"
+	case DBPROPSTATUS_CONFLICTING:
+		return "DBPROPSTATUS_CONFLICTING"
+	default:
+		return fmt.Sprintf("DBPROPSTATUSENUM(%d)", int32(e))
+	}
+}
+
 type DBPROPSTATUSENUM21 int32
 
 const (
 	DBPROPSTATUS_NOTAVAILABLE DBPROPSTATUSENUM21 = 9
 )
+
+// String returns the DBPROPSTATUSENUM21 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBPROPSTATUSENUM21) String() string {
+	switch e {
+	case DBPROPSTATUS_NOTAVAILABLE:
+		return "DBPROPSTATUS_NOTAVAILABLE"
+	default:
+		return fmt.Sprintf("DBPROPSTATUSENUM21(%d)", int32(e))
+	}
+}
 
 type DBRANGEENUM int32
 
@@ -937,12 +2703,46 @@ const (
 	DBRANGE_MATCH          DBRANGEENUM = 16
 )
 
+// String returns the DBRANGEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBRANGEENUM) String() string {
+	switch e {
+	case DBRANGE_INCLUSIVESTART:
+		return "DBRANGE_INCLUSIVESTART"
+	case DBRANGE_EXCLUSIVESTART:
+		return "DBRANGE_EXCLUSIVESTART"
+	case DBRANGE_EXCLUSIVEEND:
+		return "DBRANGE_EXCLUSIVEEND"
+	case DBRANGE_EXCLUDENULLS:
+		return "DBRANGE_EXCLUDENULLS"
+	case DBRANGE_PREFIX:
+		return "DBRANGE_PREFIX"
+	case DBRANGE_MATCH:
+		return "DBRANGE_MATCH"
+	default:
+		return fmt.Sprintf("DBRANGEENUM(%d)", int32(e))
+	}
+}
+
 type DBRANGEENUM20 int32
 
 const (
 	DBRANGE_MATCH_N_SHIFT DBRANGEENUM20 = 24
 	DBRANGE_MATCH_N_MASK  DBRANGEENUM20 = 255
 )
+
+// String returns the DBRANGEENUM20 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBRANGEENUM20) String() string {
+	switch e {
+	case DBRANGE_MATCH_N_SHIFT:
+		return "DBRANGE_MATCH_N_SHIFT"
+	case DBRANGE_MATCH_N_MASK:
+		return "DBRANGE_MATCH_N_MASK"
+	default:
+		return fmt.Sprintf("DBRANGEENUM20(%d)", int32(e))
+	}
+}
 
 type DBREASONENUM int32
 
@@ -964,6 +2764,45 @@ const (
 	DBREASON_ROWSET_CHANGED             DBREASONENUM = 14
 )
 
+// String returns the DBREASONENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBREASONENUM) String() string {
+	switch e {
+	case DBREASON_ROWSET_FETCHPOSITIONCHANGE:
+		return "DBREASON_ROWSET_FETCHPOSITIONCHANGE"
+	case DBREASON_ROWSET_RELEASE:
+		return "DBREASON_ROWSET_RELEASE"
+	case DBREASON_COLUMN_SET:
+		return "DBREASON_COLUMN_SET"
+	case DBREASON_COLUMN_RECALCULATED:
+		return "DBREASON_COLUMN_RECALCULATED"
+	case DBREASON_ROW_ACTIVATE:
+		return "DBREASON_ROW_ACTIVATE"
+	case DBREASON_ROW_RELEASE:
+		return "DBREASON_ROW_RELEASE"
+	case DBREASON_ROW_DELETE:
+		return "DBREASON_ROW_DELETE"
+	case DBREASON_ROW_FIRSTCHANGE:
+		return "DBREASON_ROW_FIRSTCHANGE"
+	case DBREASON_ROW_INSERT:
+		return "DBREASON_ROW_INSERT"
+	case DBREASON_ROW_RESYNCH:
+		return "DBREASON_ROW_RESYNCH"
+	case DBREASON_ROW_UNDOCHANGE:
+		return "DBREASON_ROW_UNDOCHANGE"
+	case DBREASON_ROW_UNDOINSERT:
+		return "DBREASON_ROW_UNDOINSERT"
+	case DBREASON_ROW_UNDODELETE:
+		return "DBREASON_ROW_UNDODELETE"
+	case DBREASON_ROW_UPDATE:
+		return "DBREASON_ROW_UPDATE"
+	case DBREASON_ROWSET_CHANGED:
+		return "DBREASON_ROWSET_CHANGED"
+	default:
+		return fmt.Sprintf("DBREASONENUM(%d)", int32(e))
+	}
+}
+
 type DBREASONENUM15 int32
 
 const (
@@ -973,6 +2812,23 @@ const (
 	DBREASON_ROW_ASYNCHINSERT           DBREASONENUM15 = 18
 )
 
+// String returns the DBREASONENUM15 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBREASONENUM15) String() string {
+	switch e {
+	case DBREASON_ROWPOSITION_CHANGED:
+		return "DBREASON_ROWPOSITION_CHANGED"
+	case DBREASON_ROWPOSITION_CHAPTERCHANGED:
+		return "DBREASON_ROWPOSITION_CHAPTERCHANGED"
+	case DBREASON_ROWPOSITION_CLEARED:
+		return "DBREASON_ROWPOSITION_CLEARED"
+	case DBREASON_ROW_ASYNCHINSERT:
+		return "DBREASON_ROW_ASYNCHINSERT"
+	default:
+		return fmt.Sprintf("DBREASONENUM15(%d)", int32(e))
+	}
+}
+
 type DBREASONENUM25 int32
 
 const (
@@ -980,6 +2836,21 @@ const (
 	DBREASON_ROWSET_POPULATIONCOMPLETE DBREASONENUM25 = 20
 	DBREASON_ROWSET_POPULATIONSTOPPED  DBREASONENUM25 = 21
 )
+
+// String returns the DBREASONENUM25 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBREASONENUM25) String() string {
+	switch e {
+	case DBREASON_ROWSET_ROWSADDED:
+		return "DBREASON_ROWSET_ROWSADDED"
+	case DBREASON_ROWSET_POPULATIONCOMPLETE:
+		return "DBREASON_ROWSET_POPULATIONCOMPLETE"
+	case DBREASON_ROWSET_POPULATIONSTOPPED:
+		return "DBREASON_ROWSET_POPULATIONSTOPPED"
+	default:
+		return fmt.Sprintf("DBREASONENUM25(%d)", int32(e))
+	}
+}
 
 type DBRESOURCEKINDENUM int32
 
@@ -995,6 +2866,33 @@ const (
 	DBRESOURCE_OTHER    DBRESOURCEKINDENUM = 8
 )
 
+// String returns the DBRESOURCEKINDENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBRESOURCEKINDENUM) String() string {
+	switch e {
+	case DBRESOURCE_INVALID:
+		return "DBRESOURCE_INVALID"
+	case DBRESOURCE_TOTAL:
+		return "DBRESOURCE_TOTAL"
+	case DBRESOURCE_CPU:
+		return "DBRESOURCE_CPU"
+	case DBRESOURCE_MEMORY:
+		return "DBRESOURCE_MEMORY"
+	case DBRESOURCE_DISK:
+		return "DBRESOURCE_DISK"
+	case DBRESOURCE_NETWORK:
+		return "DBRESOURCE_NETWORK"
+	case DBRESOURCE_RESPONSE:
+		return "DBRESOURCE_RESPONSE"
+	case DBRESOURCE_ROWS:
+		return "DBRESOURCE_ROWS"
+	case DBRESOURCE_OTHER:
+		return "DBRESOURCE_OTHER"
+	default:
+		return fmt.Sprintf("DBRESOURCEKINDENUM(%d)", int32(e))
+	}
+}
+
 type DBRESULTFLAGENUM int32
 
 const (
@@ -1002,6 +2900,21 @@ const (
 	DBRESULTFLAG_ROWSET  DBRESULTFLAGENUM = 1
 	DBRESULTFLAG_ROW     DBRESULTFLAGENUM = 2
 )
+
+// String returns the DBRESULTFLAGENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBRESULTFLAGENUM) String() string {
+	switch e {
+	case DBRESULTFLAG_DEFAULT:
+		return "DBRESULTFLAG_DEFAULT"
+	case DBRESULTFLAG_ROWSET:
+		return "DBRESULTFLAG_ROWSET"
+	case DBRESULTFLAG_ROW:
+		return "DBRESULTFLAG_ROW"
+	default:
+		return fmt.Sprintf("DBRESULTFLAGENUM(%d)", int32(e))
+	}
+}
 
 type DBROWCHANGEKINDENUM int32
 
@@ -1011,6 +2924,23 @@ const (
 	DBROWCHANGEKIND_UPDATE DBROWCHANGEKINDENUM = 2
 	DBROWCHANGEKIND_COUNT  DBROWCHANGEKINDENUM = 3
 )
+
+// String returns the DBROWCHANGEKINDENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBROWCHANGEKINDENUM) String() string {
+	switch e {
+	case DBROWCHANGEKIND_INSERT:
+		return "DBROWCHANGEKIND_INSERT"
+	case DBROWCHANGEKIND_DELETE:
+		return "DBROWCHANGEKIND_DELETE"
+	case DBROWCHANGEKIND_UPDATE:
+		return "DBROWCHANGEKIND_UPDATE"
+	case DBROWCHANGEKIND_COUNT:
+		return "DBROWCHANGEKIND_COUNT"
+	default:
+		return fmt.Sprintf("DBROWCHANGEKINDENUM(%d)", int32(e))
+	}
+}
 
 type DBROWSTATUSENUM int32
 
@@ -1035,11 +2965,67 @@ const (
 	DBROWSTATUS_E_FAIL                   DBROWSTATUSENUM = 19
 )
 
+// String returns the DBROWSTATUSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBROWSTATUSENUM) String() string {
+	switch e {
+	case DBROWSTATUS_S_OK:
+		return "DBROWSTATUS_S_OK"
+	case DBROWSTATUS_S_MULTIPLECHANGES:
+		return "DBROWSTATUS_S_MULTIPLECHANGES"
+	case DBROWSTATUS_S_PENDINGCHANGES:
+		return "DBROWSTATUS_S_PENDINGCHANGES"
+	case DBROWSTATUS_E_CANCELED:
+		return "DBROWSTATUS_E_CANCELED"
+	case DBROWSTATUS_E_CANTRELEASE:
+		return "DBROWSTATUS_E_CANTRELEASE"
+	case DBROWSTATUS_E_CONCURRENCYVIOLATION:
+		return "DBROWSTATUS_E_CONCURRENCYVIOLATION"
+	case DBROWSTATUS_E_DELETED:
+		return "DBROWSTATUS_E_DELETED"
+	case DBROWSTATUS_E_PENDINGINSERT:
+		return "DBROWSTATUS_E_PENDINGINSERT"
+	case DBROWSTATUS_E_NEWLYINSERTED:
+		return "DBROWSTATUS_E_NEWLYINSERTED"
+	case DBROWSTATUS_E_INTEGRITYVIOLATION:
+		return "DBROWSTATUS_E_INTEGRITYVIOLATION"
+	case DBROWSTATUS_E_INVALID:
+		return "DBROWSTATUS_E_INVALID"
+	case DBROWSTATUS_E_MAXPENDCHANGESEXCEEDED:
+		return "DBROWSTATUS_E_MAXPENDCHANGESEXCEEDED"
+	case DBROWSTATUS_E_OBJECTOPEN:
+		return "DBROWSTATUS_E_OBJECTOPEN"
+	case DBROWSTATUS_E_OUTOFMEMORY:
+		return "DBROWSTATUS_E_OUTOFMEMORY"
+	case DBROWSTATUS_E_PERMISSIONDENIED:
+		return "DBROWSTATUS_E_PERMISSIONDENIED"
+	case DBROWSTATUS_E_LIMITREACHED:
+		return "DBROWSTATUS_E_LIMITREACHED"
+	case DBROWSTATUS_E_SCHEMAVIOLATION:
+		return "DBROWSTATUS_E_SCHEMAVIOLATION"
+	case DBROWSTATUS_E_FAIL:
+		return "DBROWSTATUS_E_FAIL"
+	default:
+		return fmt.Sprintf("DBROWSTATUSENUM(%d)", int32(e))
+	}
+}
+
 type DBROWSTATUSENUM20 int32
 
 const (
 	DBROWSTATUS_S_NOCHANGE DBROWSTATUSENUM20 = 20
 )
+
+// String returns the DBROWSTATUSENUM20 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBROWSTATUSENUM20) String() string {
+	switch e {
+	case DBROWSTATUS_S_NOCHANGE:
+		return "DBROWSTATUS_S_NOCHANGE"
+	default:
+		return fmt.Sprintf("DBROWSTATUSENUM20(%d)", int32(e))
+	}
+}
 
 type DBSEEKENUM int32
 
@@ -1053,12 +3039,48 @@ const (
 	DBSEEK_BEFORE   DBSEEKENUM = 32
 )
 
+// String returns the DBSEEKENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBSEEKENUM) String() string {
+	switch e {
+	case DBSEEK_INVALID:
+		return "DBSEEK_INVALID"
+	case DBSEEK_FIRSTEQ:
+		return "DBSEEK_FIRSTEQ"
+	case DBSEEK_LASTEQ:
+		return "DBSEEK_LASTEQ"
+	case DBSEEK_AFTEREQ:
+		return "DBSEEK_AFTEREQ"
+	case DBSEEK_AFTER:
+		return "DBSEEK_AFTER"
+	case DBSEEK_BEFOREEQ:
+		return "DBSEEK_BEFOREEQ"
+	case DBSEEK_BEFORE:
+		return "DBSEEK_BEFORE"
+	default:
+		return fmt.Sprintf("DBSEEKENUM(%d)", int32(e))
+	}
+}
+
 type DBSORTENUM int32
 
 const (
 	DBSORT_ASCENDING  DBSORTENUM = 0
 	DBSORT_DESCENDING DBSORTENUM = 1
 )
+
+// String returns the DBSORTENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBSORTENUM) String() string {
+	switch e {
+	case DBSORT_ASCENDING:
+		return "DBSORT_ASCENDING"
+	case DBSORT_DESCENDING:
+		return "DBSORT_DESCENDING"
+	default:
+		return fmt.Sprintf("DBSORTENUM(%d)", int32(e))
+	}
+}
 
 type DBSOURCETYPEENUM int32
 
@@ -1067,6 +3089,19 @@ const (
 	DBSOURCETYPE_ENUMERATOR DBSOURCETYPEENUM = 2
 )
 
+// String returns the DBSOURCETYPEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBSOURCETYPEENUM) String() string {
+	switch e {
+	case DBSOURCETYPE_DATASOURCE:
+		return "DBSOURCETYPE_DATASOURCE"
+	case DBSOURCETYPE_ENUMERATOR:
+		return "DBSOURCETYPE_ENUMERATOR"
+	default:
+		return fmt.Sprintf("DBSOURCETYPEENUM(%d)", int32(e))
+	}
+}
+
 type DBSOURCETYPEENUM20 int32
 
 const (
@@ -1074,11 +3109,35 @@ const (
 	DBSOURCETYPE_DATASOURCE_MDP DBSOURCETYPEENUM20 = 3
 )
 
+// String returns the DBSOURCETYPEENUM20 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBSOURCETYPEENUM20) String() string {
+	switch e {
+	case DBSOURCETYPE_DATASOURCE_TDP:
+		return "DBSOURCETYPE_DATASOURCE_TDP"
+	case DBSOURCETYPE_DATASOURCE_MDP:
+		return "DBSOURCETYPE_DATASOURCE_MDP"
+	default:
+		return fmt.Sprintf("DBSOURCETYPEENUM20(%d)", int32(e))
+	}
+}
+
 type DBSOURCETYPEENUM25 int32
 
 const (
 	DBSOURCETYPE_BINDER DBSOURCETYPEENUM25 = 4
 )
+
+// String returns the DBSOURCETYPEENUM25 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBSOURCETYPEENUM25) String() string {
+	switch e {
+	case DBSOURCETYPE_BINDER:
+		return "DBSOURCETYPE_BINDER"
+	default:
+		return fmt.Sprintf("DBSOURCETYPEENUM25(%d)", int32(e))
+	}
+}
 
 type DBSTATUSENUM int32
 
@@ -1099,12 +3158,62 @@ const (
 	DBSTATUS_S_DEFAULT            DBSTATUSENUM = 13
 )
 
+// String returns the DBSTATUSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBSTATUSENUM) String() string {
+	switch e {
+	case DBSTATUS_S_OK:
+		return "DBSTATUS_S_OK"
+	case DBSTATUS_E_BADACCESSOR:
+		return "DBSTATUS_E_BADACCESSOR"
+	case DBSTATUS_E_CANTCONVERTVALUE:
+		return "DBSTATUS_E_CANTCONVERTVALUE"
+	case DBSTATUS_S_ISNULL:
+		return "DBSTATUS_S_ISNULL"
+	case DBSTATUS_S_TRUNCATED:
+		return "DBSTATUS_S_TRUNCATED"
+	case DBSTATUS_E_SIGNMISMATCH:
+		return "DBSTATUS_E_SIGNMISMATCH"
+	case DBSTATUS_E_DATAOVERFLOW:
+		return "DBSTATUS_E_DATAOVERFLOW"
+	case DBSTATUS_E_CANTCREATE:
+		return "DBSTATUS_E_CANTCREATE"
+	case DBSTATUS_E_UNAVAILABLE:
+		return "DBSTATUS_E_UNAVAILABLE"
+	case DBSTATUS_E_PERMISSIONDENIED:
+		return "DBSTATUS_E_PERMISSIONDENIED"
+	case DBSTATUS_E_INTEGRITYVIOLATION:
+		return "DBSTATUS_E_INTEGRITYVIOLATION"
+	case DBSTATUS_E_SCHEMAVIOLATION:
+		return "DBSTATUS_E_SCHEMAVIOLATION"
+	case DBSTATUS_E_BADSTATUS:
+		return "DBSTATUS_E_BADSTATUS"
+	case DBSTATUS_S_DEFAULT:
+		return "DBSTATUS_S_DEFAULT"
+	default:
+		return fmt.Sprintf("DBSTATUSENUM(%d)", int32(e))
+	}
+}
+
 type DBSTATUSENUM20 int32
 
 const (
 	MDSTATUS_S_CELLEMPTY DBSTATUSENUM20 = 14
 	DBSTATUS_S_IGNORE    DBSTATUSENUM20 = 15
 )
+
+// String returns the DBSTATUSENUM20 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBSTATUSENUM20) String() string {
+	switch e {
+	case MDSTATUS_S_CELLEMPTY:
+		return "MDSTATUS_S_CELLEMPTY"
+	case DBSTATUS_S_IGNORE:
+		return "DBSTATUS_S_IGNORE"
+	default:
+		return fmt.Sprintf("DBSTATUSENUM20(%d)", int32(e))
+	}
+}
 
 type DBSTATUSENUM21 int32
 
@@ -1122,6 +3231,37 @@ const (
 	DBSTATUS_S_ALREADYEXISTS      DBSTATUSENUM21 = 26
 )
 
+// String returns the DBSTATUSENUM21 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBSTATUSENUM21) String() string {
+	switch e {
+	case DBSTATUS_E_DOESNOTEXIST:
+		return "DBSTATUS_E_DOESNOTEXIST"
+	case DBSTATUS_E_INVALIDURL:
+		return "DBSTATUS_E_INVALIDURL"
+	case DBSTATUS_E_RESOURCELOCKED:
+		return "DBSTATUS_E_RESOURCELOCKED"
+	case DBSTATUS_E_RESOURCEEXISTS:
+		return "DBSTATUS_E_RESOURCEEXISTS"
+	case DBSTATUS_E_CANNOTCOMPLETE:
+		return "DBSTATUS_E_CANNOTCOMPLETE"
+	case DBSTATUS_E_VOLUMENOTFOUND:
+		return "DBSTATUS_E_VOLUMENOTFOUND"
+	case DBSTATUS_E_OUTOFSPACE:
+		return "DBSTATUS_E_OUTOFSPACE"
+	case DBSTATUS_S_CANNOTDELETESOURCE:
+		return "DBSTATUS_S_CANNOTDELETESOURCE"
+	case DBSTATUS_E_READONLY:
+		return "DBSTATUS_E_READONLY"
+	case DBSTATUS_E_RESOURCEOUTOFSCOPE:
+		return "DBSTATUS_E_RESOURCEOUTOFSCOPE"
+	case DBSTATUS_S_ALREADYEXISTS:
+		return "DBSTATUS_S_ALREADYEXISTS"
+	default:
+		return fmt.Sprintf("DBSTATUSENUM21(%d)", int32(e))
+	}
+}
+
 type DBSTATUSENUM25 int32
 
 const (
@@ -1129,11 +3269,35 @@ const (
 	DBSTATUS_E_NOTCOLLECTION DBSTATUSENUM25 = 28
 )
 
+// String returns the DBSTATUSENUM25 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBSTATUSENUM25) String() string {
+	switch e {
+	case DBSTATUS_E_CANCELED:
+		return "DBSTATUS_E_CANCELED"
+	case DBSTATUS_E_NOTCOLLECTION:
+		return "DBSTATUS_E_NOTCOLLECTION"
+	default:
+		return fmt.Sprintf("DBSTATUSENUM25(%d)", int32(e))
+	}
+}
+
 type DBSTATUSENUM26 int32
 
 const (
 	DBSTATUS_S_ROWSETCOLUMN DBSTATUSENUM26 = 29
 )
+
+// String returns the DBSTATUSENUM26 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBSTATUSENUM26) String() string {
+	switch e {
+	case DBSTATUS_S_ROWSETCOLUMN:
+		return "DBSTATUS_S_ROWSETCOLUMN"
+	default:
+		return fmt.Sprintf("DBSTATUSENUM26(%d)", int32(e))
+	}
+}
 
 type DBTABLESTATISTICSTYPE26 int32
 
@@ -1142,6 +3306,21 @@ const (
 	DBSTAT_COLUMN_CARDINALITY DBTABLESTATISTICSTYPE26 = 2
 	DBSTAT_TUPLE_CARDINALITY  DBTABLESTATISTICSTYPE26 = 4
 )
+
+// String returns the DBTABLESTATISTICSTYPE26 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBTABLESTATISTICSTYPE26) String() string {
+	switch e {
+	case DBSTAT_HISTOGRAM:
+		return "DBSTAT_HISTOGRAM"
+	case DBSTAT_COLUMN_CARDINALITY:
+		return "DBSTAT_COLUMN_CARDINALITY"
+	case DBSTAT_TUPLE_CARDINALITY:
+		return "DBSTAT_TUPLE_CARDINALITY"
+	default:
+		return fmt.Sprintf("DBTABLESTATISTICSTYPE26(%d)", int32(e))
+	}
+}
 
 type DBTYPEENUM int32
 
@@ -1182,11 +3361,99 @@ const (
 	DBTYPE_DBTIMESTAMP DBTYPEENUM = 135
 )
 
+// String returns the DBTYPEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBTYPEENUM) String() string {
+	switch e {
+	case DBTYPE_EMPTY:
+		return "DBTYPE_EMPTY"
+	case DBTYPE_NULL:
+		return "DBTYPE_NULL"
+	case DBTYPE_I2:
+		return "DBTYPE_I2"
+	case DBTYPE_I4:
+		return "DBTYPE_I4"
+	case DBTYPE_R4:
+		return "DBTYPE_R4"
+	case DBTYPE_R8:
+		return "DBTYPE_R8"
+	case DBTYPE_CY:
+		return "DBTYPE_CY"
+	case DBTYPE_DATE:
+		return "DBTYPE_DATE"
+	case DBTYPE_BSTR:
+		return "DBTYPE_BSTR"
+	case DBTYPE_IDISPATCH:
+		return "DBTYPE_IDISPATCH"
+	case DBTYPE_ERROR:
+		return "DBTYPE_ERROR"
+	case DBTYPE_BOOL:
+		return "DBTYPE_BOOL"
+	case DBTYPE_VARIANT:
+		return "DBTYPE_VARIANT"
+	case DBTYPE_IUNKNOWN:
+		return "DBTYPE_IUNKNOWN"
+	case DBTYPE_DECIMAL:
+		return "DBTYPE_DECIMAL"
+	case DBTYPE_UI1:
+		return "DBTYPE_UI1"
+	case DBTYPE_ARRAY:
+		return "DBTYPE_ARRAY"
+	case DBTYPE_BYREF:
+		return "DBTYPE_BYREF"
+	case DBTYPE_I1:
+		return "DBTYPE_I1"
+	case DBTYPE_UI2:
+		return "DBTYPE_UI2"
+	case DBTYPE_UI4:
+		return "DBTYPE_UI4"
+	case DBTYPE_I8:
+		return "DBTYPE_I8"
+	case DBTYPE_UI8:
+		return "DBTYPE_UI8"
+	case DBTYPE_GUID:
+		return "DBTYPE_GUID"
+	case DBTYPE_VECTOR:
+		return "DBTYPE_VECTOR"
+	case DBTYPE_RESERVED:
+		return "DBTYPE_RESERVED"
+	case DBTYPE_BYTES:
+		return "DBTYPE_BYTES"
+	case DBTYPE_STR:
+		return "DBTYPE_STR"
+	case DBTYPE_WSTR:
+		return "DBTYPE_WSTR"
+	case DBTYPE_NUMERIC:
+		return "DBTYPE_NUMERIC"
+	case DBTYPE_UDT:
+		return "DBTYPE_UDT"
+	case DBTYPE_DBDATE:
+		return "DBTYPE_DBDATE"
+	case DBTYPE_DBTIME:
+		return "DBTYPE_DBTIME"
+	case DBTYPE_DBTIMESTAMP:
+		return "DBTYPE_DBTIMESTAMP"
+	default:
+		return fmt.Sprintf("DBTYPEENUM(%d)", int32(e))
+	}
+}
+
 type DBTYPEENUM15 int32
 
 const (
 	DBTYPE_HCHAPTER DBTYPEENUM15 = 136
 )
+
+// String returns the DBTYPEENUM15 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBTYPEENUM15) String() string {
+	switch e {
+	case DBTYPE_HCHAPTER:
+		return "DBTYPE_HCHAPTER"
+	default:
+		return fmt.Sprintf("DBTYPEENUM15(%d)", int32(e))
+	}
+}
 
 type DBTYPEENUM20 int32
 
@@ -1195,6 +3462,21 @@ const (
 	DBTYPE_PROPVARIANT DBTYPEENUM20 = 138
 	DBTYPE_VARNUMERIC  DBTYPEENUM20 = 139
 )
+
+// String returns the DBTYPEENUM20 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBTYPEENUM20) String() string {
+	switch e {
+	case DBTYPE_FILETIME:
+		return "DBTYPE_FILETIME"
+	case DBTYPE_PROPVARIANT:
+		return "DBTYPE_PROPVARIANT"
+	case DBTYPE_VARNUMERIC:
+		return "DBTYPE_VARNUMERIC"
+	default:
+		return fmt.Sprintf("DBTYPEENUM20(%d)", int32(e))
+	}
+}
 
 type DBUPDELRULEENUM int32
 
@@ -1205,6 +3487,23 @@ const (
 	DBUPDELRULE_SETDEFAULT DBUPDELRULEENUM = 3
 )
 
+// String returns the DBUPDELRULEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBUPDELRULEENUM) String() string {
+	switch e {
+	case DBUPDELRULE_NOACTION:
+		return "DBUPDELRULE_NOACTION"
+	case DBUPDELRULE_CASCADE:
+		return "DBUPDELRULE_CASCADE"
+	case DBUPDELRULE_SETNULL:
+		return "DBUPDELRULE_SETNULL"
+	case DBUPDELRULE_SETDEFAULT:
+		return "DBUPDELRULE_SETDEFAULT"
+	default:
+		return fmt.Sprintf("DBUPDELRULEENUM(%d)", int32(e))
+	}
+}
+
 type DBWATCHMODEENUM int32
 
 const (
@@ -1214,6 +3513,23 @@ const (
 	DBWATCHMODE_COUNT  DBWATCHMODEENUM = 8
 )
 
+// String returns the DBWATCHMODEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBWATCHMODEENUM) String() string {
+	switch e {
+	case DBWATCHMODE_ALL:
+		return "DBWATCHMODE_ALL"
+	case DBWATCHMODE_EXTEND:
+		return "DBWATCHMODE_EXTEND"
+	case DBWATCHMODE_MOVE:
+		return "DBWATCHMODE_MOVE"
+	case DBWATCHMODE_COUNT:
+		return "DBWATCHMODE_COUNT"
+	default:
+		return fmt.Sprintf("DBWATCHMODEENUM(%d)", int32(e))
+	}
+}
+
 type DBWATCHNOTIFYENUM int32
 
 const (
@@ -1222,11 +3538,37 @@ const (
 	DBWATCHNOTIFY_QUERYREEXECUTED DBWATCHNOTIFYENUM = 3
 )
 
+// String returns the DBWATCHNOTIFYENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBWATCHNOTIFYENUM) String() string {
+	switch e {
+	case DBWATCHNOTIFY_ROWSCHANGED:
+		return "DBWATCHNOTIFY_ROWSCHANGED"
+	case DBWATCHNOTIFY_QUERYDONE:
+		return "DBWATCHNOTIFY_QUERYDONE"
+	case DBWATCHNOTIFY_QUERYREEXECUTED:
+		return "DBWATCHNOTIFY_QUERYREEXECUTED"
+	default:
+		return fmt.Sprintf("DBWATCHNOTIFYENUM(%d)", int32(e))
+	}
+}
+
 type DCINFOTYPEENUM int32
 
 const (
 	DCINFOTYPE_VERSION DCINFOTYPEENUM = 1
 )
+
+// String returns the DCINFOTYPEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DCINFOTYPEENUM) String() string {
+	switch e {
+	case DCINFOTYPE_VERSION:
+		return "DCINFOTYPE_VERSION"
+	default:
+		return fmt.Sprintf("DCINFOTYPEENUM(%d)", int32(e))
+	}
+}
 
 type DELIVERY_AGENT_FLAGS int32
 
@@ -1236,11 +3578,37 @@ const (
 	DELIVERY_AGENT_FLAG_SILENT_DIAL     DELIVERY_AGENT_FLAGS = 16
 )
 
+// String returns the DELIVERY_AGENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DELIVERY_AGENT_FLAGS) String() string {
+	switch e {
+	case DELIVERY_AGENT_FLAG_NO_BROADCAST:
+		return "DELIVERY_AGENT_FLAG_NO_BROADCAST"
+	case DELIVERY_AGENT_FLAG_NO_RESTRICTIONS:
+		return "DELIVERY_AGENT_FLAG_NO_RESTRICTIONS"
+	case DELIVERY_AGENT_FLAG_SILENT_DIAL:
+		return "DELIVERY_AGENT_FLAG_SILENT_DIAL"
+	default:
+		return fmt.Sprintf("DELIVERY_AGENT_FLAGS(%d)", int32(e))
+	}
+}
+
 type EBindInfoOptions int32
 
 const (
 	BIO_BINDER EBindInfoOptions = 1
 )
+
+// String returns the EBindInfoOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EBindInfoOptions) String() string {
+	switch e {
+	case BIO_BINDER:
+		return "BIO_BINDER"
+	default:
+		return fmt.Sprintf("EBindInfoOptions(%d)", int32(e))
+	}
+}
 
 // FOLLOW_FLAGS: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-follow_flags
 type FOLLOW_FLAGS int32
@@ -1249,6 +3617,19 @@ const (
 	FF_INDEXCOMPLEXURLS FOLLOW_FLAGS = 1
 	FF_SUPPRESSINDEXING FOLLOW_FLAGS = 2
 )
+
+// String returns the FOLLOW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FOLLOW_FLAGS) String() string {
+	switch e {
+	case FF_INDEXCOMPLEXURLS:
+		return "FF_INDEXCOMPLEXURLS"
+	case FF_SUPPRESSINDEXING:
+		return "FF_SUPPRESSINDEXING"
+	default:
+		return fmt.Sprintf("FOLLOW_FLAGS(%d)", int32(e))
+	}
+}
 
 // INTERVAL_LIMIT_KIND: https://learn.microsoft.com/windows/win32/api/structuredquery/ne-structuredquery-interval_limit_kind
 type INTERVAL_LIMIT_KIND int32
@@ -1260,12 +3641,42 @@ const (
 	ILK_POSITIVE_INFINITY INTERVAL_LIMIT_KIND = 3
 )
 
+// String returns the INTERVAL_LIMIT_KIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERVAL_LIMIT_KIND) String() string {
+	switch e {
+	case ILK_EXPLICIT_INCLUDED:
+		return "ILK_EXPLICIT_INCLUDED"
+	case ILK_EXPLICIT_EXCLUDED:
+		return "ILK_EXPLICIT_EXCLUDED"
+	case ILK_NEGATIVE_INFINITY:
+		return "ILK_NEGATIVE_INFINITY"
+	case ILK_POSITIVE_INFINITY:
+		return "ILK_POSITIVE_INFINITY"
+	default:
+		return fmt.Sprintf("INTERVAL_LIMIT_KIND(%d)", int32(e))
+	}
+}
+
 type KAGREQDIAGFLAGSENUM int32
 
 const (
 	KAGREQDIAGFLAGS_HEADER KAGREQDIAGFLAGSENUM = 1
 	KAGREQDIAGFLAGS_RECORD KAGREQDIAGFLAGSENUM = 2
 )
+
+// String returns the KAGREQDIAGFLAGSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KAGREQDIAGFLAGSENUM) String() string {
+	switch e {
+	case KAGREQDIAGFLAGS_HEADER:
+		return "KAGREQDIAGFLAGS_HEADER"
+	case KAGREQDIAGFLAGS_RECORD:
+		return "KAGREQDIAGFLAGS_RECORD"
+	default:
+		return fmt.Sprintf("KAGREQDIAGFLAGSENUM(%d)", int32(e))
+	}
+}
 
 type LOCKMODEENUM int32
 
@@ -1275,17 +3686,54 @@ const (
 	LOCKMODE_SHARED    LOCKMODEENUM = 2
 )
 
+// String returns the LOCKMODEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOCKMODEENUM) String() string {
+	switch e {
+	case LOCKMODE_INVALID:
+		return "LOCKMODE_INVALID"
+	case LOCKMODE_EXCLUSIVE:
+		return "LOCKMODE_EXCLUSIVE"
+	case LOCKMODE_SHARED:
+		return "LOCKMODE_SHARED"
+	default:
+		return fmt.Sprintf("LOCKMODEENUM(%d)", int32(e))
+	}
+}
+
 type MSDSDBINITPROPENUM int32
 
 const (
 	DBPROP_MSDS_DBINIT_DATAPROVIDER MSDSDBINITPROPENUM = 2
 )
 
+// String returns the MSDSDBINITPROPENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSDSDBINITPROPENUM) String() string {
+	switch e {
+	case DBPROP_MSDS_DBINIT_DATAPROVIDER:
+		return "DBPROP_MSDS_DBINIT_DATAPROVIDER"
+	default:
+		return fmt.Sprintf("MSDSDBINITPROPENUM(%d)", int32(e))
+	}
+}
+
 type MSDSSESSIONPROPENUM int32
 
 const (
 	DBPROP_MSDS_SESS_UNIQUENAMES MSDSSESSIONPROPENUM = 2
 )
+
+// String returns the MSDSSESSIONPROPENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSDSSESSIONPROPENUM) String() string {
+	switch e {
+	case DBPROP_MSDS_SESS_UNIQUENAMES:
+		return "DBPROP_MSDS_SESS_UNIQUENAMES"
+	default:
+		return fmt.Sprintf("MSDSSESSIONPROPENUM(%d)", int32(e))
+	}
+}
 
 // NAMED_ENTITY_CERTAINTY: https://learn.microsoft.com/windows/win32/api/structuredquery/ne-structuredquery-named_entity_certainty
 type NAMED_ENTITY_CERTAINTY int32
@@ -1295,6 +3743,21 @@ const (
 	NEC_MEDIUM NAMED_ENTITY_CERTAINTY = 1
 	NEC_HIGH   NAMED_ENTITY_CERTAINTY = 2
 )
+
+// String returns the NAMED_ENTITY_CERTAINTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAMED_ENTITY_CERTAINTY) String() string {
+	switch e {
+	case NEC_LOW:
+		return "NEC_LOW"
+	case NEC_MEDIUM:
+		return "NEC_MEDIUM"
+	case NEC_HIGH:
+		return "NEC_HIGH"
+	default:
+		return fmt.Sprintf("NAMED_ENTITY_CERTAINTY(%d)", int32(e))
+	}
+}
 
 type OSPCOMP int32
 
@@ -1308,6 +3771,27 @@ const (
 	OSPCOMP_NE      OSPCOMP = 6
 )
 
+// String returns the OSPCOMP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OSPCOMP) String() string {
+	switch e {
+	case OSPCOMP_EQ:
+		return "OSPCOMP_EQ"
+	case OSPCOMP_LT:
+		return "OSPCOMP_LT"
+	case OSPCOMP_LE:
+		return "OSPCOMP_LE"
+	case OSPCOMP_GE:
+		return "OSPCOMP_GE"
+	case OSPCOMP_GT:
+		return "OSPCOMP_GT"
+	case OSPCOMP_NE:
+		return "OSPCOMP_NE"
+	default:
+		return fmt.Sprintf("OSPCOMP(%d)", int32(e))
+	}
+}
+
 type OSPFIND int32
 
 const (
@@ -1316,6 +3800,23 @@ const (
 	OSPFIND_CASESENSITIVE   OSPFIND = 2
 	OSPFIND_UPCASESENSITIVE OSPFIND = 3
 )
+
+// String returns the OSPFIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OSPFIND) String() string {
+	switch e {
+	case OSPFIND_DEFAULT:
+		return "OSPFIND_DEFAULT"
+	case OSPFIND_UP:
+		return "OSPFIND_UP"
+	case OSPFIND_CASESENSITIVE:
+		return "OSPFIND_CASESENSITIVE"
+	case OSPFIND_UPCASESENSITIVE:
+		return "OSPFIND_UPCASESENSITIVE"
+	default:
+		return fmt.Sprintf("OSPFIND(%d)", int32(e))
+	}
+}
 
 type OSPFORMAT int32
 
@@ -1326,6 +3827,21 @@ const (
 	OSPFORMAT_HTML      OSPFORMAT = 2
 )
 
+// String returns the OSPFORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OSPFORMAT) String() string {
+	switch e {
+	case OSPFORMAT_RAW:
+		return "OSPFORMAT_RAW"
+	case OSPFORMAT_FORMATTED:
+		return "OSPFORMAT_FORMATTED"
+	case OSPFORMAT_HTML:
+		return "OSPFORMAT_HTML"
+	default:
+		return fmt.Sprintf("OSPFORMAT(%d)", int32(e))
+	}
+}
+
 type OSPRW int32
 
 const (
@@ -1335,6 +3851,21 @@ const (
 	OSPRW_MIXED     OSPRW = 2
 )
 
+// String returns the OSPRW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OSPRW) String() string {
+	switch e {
+	case OSPRW_DEFAULT:
+		return "OSPRW_DEFAULT"
+	case OSPRW_READONLY:
+		return "OSPRW_READONLY"
+	case OSPRW_MIXED:
+		return "OSPRW_MIXED"
+	default:
+		return fmt.Sprintf("OSPRW(%d)", int32(e))
+	}
+}
+
 type OSPXFER int32
 
 const (
@@ -1343,12 +3874,40 @@ const (
 	OSPXFER_ERROR    OSPXFER = 2
 )
 
+// String returns the OSPXFER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OSPXFER) String() string {
+	switch e {
+	case OSPXFER_COMPLETE:
+		return "OSPXFER_COMPLETE"
+	case OSPXFER_ABORT:
+		return "OSPXFER_ABORT"
+	case OSPXFER_ERROR:
+		return "OSPXFER_ERROR"
+	default:
+		return fmt.Sprintf("OSPXFER(%d)", int32(e))
+	}
+}
+
 type PRIORITIZE_FLAGS int32
 
 const (
 	PRIORITIZE_FLAG_RETRYFAILEDITEMS   PRIORITIZE_FLAGS = 1
 	PRIORITIZE_FLAG_IGNOREFAILURECOUNT PRIORITIZE_FLAGS = 2
 )
+
+// String returns the PRIORITIZE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRIORITIZE_FLAGS) String() string {
+	switch e {
+	case PRIORITIZE_FLAG_RETRYFAILEDITEMS:
+		return "PRIORITIZE_FLAG_RETRYFAILEDITEMS"
+	case PRIORITIZE_FLAG_IGNOREFAILURECOUNT:
+		return "PRIORITIZE_FLAG_IGNOREFAILURECOUNT"
+	default:
+		return fmt.Sprintf("PRIORITIZE_FLAGS(%d)", int32(e))
+	}
+}
 
 // PRIORITY_LEVEL: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-priority_level
 type PRIORITY_LEVEL int32
@@ -1360,6 +3919,23 @@ const (
 	PRIORITY_LEVEL_DEFAULT    PRIORITY_LEVEL = 3
 )
 
+// String returns the PRIORITY_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRIORITY_LEVEL) String() string {
+	switch e {
+	case PRIORITY_LEVEL_FOREGROUND:
+		return "PRIORITY_LEVEL_FOREGROUND"
+	case PRIORITY_LEVEL_HIGH:
+		return "PRIORITY_LEVEL_HIGH"
+	case PRIORITY_LEVEL_LOW:
+		return "PRIORITY_LEVEL_LOW"
+	case PRIORITY_LEVEL_DEFAULT:
+		return "PRIORITY_LEVEL_DEFAULT"
+	default:
+		return fmt.Sprintf("PRIORITY_LEVEL(%d)", int32(e))
+	}
+}
+
 // PROXY_ACCESS: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-proxy_access
 type PROXY_ACCESS int32
 
@@ -1368,6 +3944,21 @@ const (
 	PROXY_ACCESS_DIRECT    PROXY_ACCESS = 1
 	PROXY_ACCESS_PROXY     PROXY_ACCESS = 2
 )
+
+// String returns the PROXY_ACCESS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROXY_ACCESS) String() string {
+	switch e {
+	case PROXY_ACCESS_PRECONFIG:
+		return "PROXY_ACCESS_PRECONFIG"
+	case PROXY_ACCESS_DIRECT:
+		return "PROXY_ACCESS_DIRECT"
+	case PROXY_ACCESS_PROXY:
+		return "PROXY_ACCESS_PROXY"
+	default:
+		return fmt.Sprintf("PROXY_ACCESS(%d)", int32(e))
+	}
+}
 
 // QUERY_PARSER_MANAGER_OPTION: https://learn.microsoft.com/windows/win32/api/structuredquery/ne-structuredquery-query_parser_manager_option
 type QUERY_PARSER_MANAGER_OPTION int32
@@ -1381,6 +3972,27 @@ const (
 	QPMO_LOCALIZER_SUPPORT               QUERY_PARSER_MANAGER_OPTION = 5
 )
 
+// String returns the QUERY_PARSER_MANAGER_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QUERY_PARSER_MANAGER_OPTION) String() string {
+	switch e {
+	case QPMO_SCHEMA_BINARY_NAME:
+		return "QPMO_SCHEMA_BINARY_NAME"
+	case QPMO_PRELOCALIZED_SCHEMA_BINARY_PATH:
+		return "QPMO_PRELOCALIZED_SCHEMA_BINARY_PATH"
+	case QPMO_UNLOCALIZED_SCHEMA_BINARY_PATH:
+		return "QPMO_UNLOCALIZED_SCHEMA_BINARY_PATH"
+	case QPMO_LOCALIZED_SCHEMA_BINARY_PATH:
+		return "QPMO_LOCALIZED_SCHEMA_BINARY_PATH"
+	case QPMO_APPEND_LCID_TO_LOCALIZED_PATH:
+		return "QPMO_APPEND_LCID_TO_LOCALIZED_PATH"
+	case QPMO_LOCALIZER_SUPPORT:
+		return "QPMO_LOCALIZER_SUPPORT"
+	default:
+		return fmt.Sprintf("QUERY_PARSER_MANAGER_OPTION(%d)", int32(e))
+	}
+}
+
 // ROWSETEVENT_ITEMSTATE: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-rowsetevent_itemstate
 type ROWSETEVENT_ITEMSTATE int32
 
@@ -1389,6 +4001,21 @@ const (
 	ROWSETEVENT_ITEMSTATE_INROWSET    ROWSETEVENT_ITEMSTATE = 1
 	ROWSETEVENT_ITEMSTATE_UNKNOWN     ROWSETEVENT_ITEMSTATE = 2
 )
+
+// String returns the ROWSETEVENT_ITEMSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ROWSETEVENT_ITEMSTATE) String() string {
+	switch e {
+	case ROWSETEVENT_ITEMSTATE_NOTINROWSET:
+		return "ROWSETEVENT_ITEMSTATE_NOTINROWSET"
+	case ROWSETEVENT_ITEMSTATE_INROWSET:
+		return "ROWSETEVENT_ITEMSTATE_INROWSET"
+	case ROWSETEVENT_ITEMSTATE_UNKNOWN:
+		return "ROWSETEVENT_ITEMSTATE_UNKNOWN"
+	default:
+		return fmt.Sprintf("ROWSETEVENT_ITEMSTATE(%d)", int32(e))
+	}
+}
 
 // ROWSETEVENT_TYPE: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-rowsetevent_type
 type ROWSETEVENT_TYPE int32
@@ -1399,6 +4026,21 @@ const (
 	ROWSETEVENT_TYPE_SCOPESTATISTICS ROWSETEVENT_TYPE = 2
 )
 
+// String returns the ROWSETEVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ROWSETEVENT_TYPE) String() string {
+	switch e {
+	case ROWSETEVENT_TYPE_DATAEXPIRED:
+		return "ROWSETEVENT_TYPE_DATAEXPIRED"
+	case ROWSETEVENT_TYPE_FOREGROUNDLOST:
+		return "ROWSETEVENT_TYPE_FOREGROUNDLOST"
+	case ROWSETEVENT_TYPE_SCOPESTATISTICS:
+		return "ROWSETEVENT_TYPE_SCOPESTATISTICS"
+	default:
+		return fmt.Sprintf("ROWSETEVENT_TYPE(%d)", int32(e))
+	}
+}
+
 // SEARCH_INDEXING_PHASE: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-search_indexing_phase
 type SEARCH_INDEXING_PHASE int32
 
@@ -1407,6 +4049,21 @@ const (
 	SEARCH_INDEXING_PHASE_QUERYABLE SEARCH_INDEXING_PHASE = 1
 	SEARCH_INDEXING_PHASE_PERSISTED SEARCH_INDEXING_PHASE = 2
 )
+
+// String returns the SEARCH_INDEXING_PHASE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SEARCH_INDEXING_PHASE) String() string {
+	switch e {
+	case SEARCH_INDEXING_PHASE_GATHERER:
+		return "SEARCH_INDEXING_PHASE_GATHERER"
+	case SEARCH_INDEXING_PHASE_QUERYABLE:
+		return "SEARCH_INDEXING_PHASE_QUERYABLE"
+	case SEARCH_INDEXING_PHASE_PERSISTED:
+		return "SEARCH_INDEXING_PHASE_PERSISTED"
+	default:
+		return fmt.Sprintf("SEARCH_INDEXING_PHASE(%d)", int32(e))
+	}
+}
 
 // SEARCH_KIND_OF_CHANGE: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-search_kind_of_change
 type SEARCH_KIND_OF_CHANGE int32
@@ -1421,6 +4078,29 @@ const (
 	SEARCH_CHANGE_SEMANTICS_UPDATE_SECURITY SEARCH_KIND_OF_CHANGE = 4194304
 )
 
+// String returns the SEARCH_KIND_OF_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SEARCH_KIND_OF_CHANGE) String() string {
+	switch e {
+	case SEARCH_CHANGE_ADD:
+		return "SEARCH_CHANGE_ADD"
+	case SEARCH_CHANGE_DELETE:
+		return "SEARCH_CHANGE_DELETE"
+	case SEARCH_CHANGE_MODIFY:
+		return "SEARCH_CHANGE_MODIFY"
+	case SEARCH_CHANGE_MOVE_RENAME:
+		return "SEARCH_CHANGE_MOVE_RENAME"
+	case SEARCH_CHANGE_SEMANTICS_DIRECTORY:
+		return "SEARCH_CHANGE_SEMANTICS_DIRECTORY"
+	case SEARCH_CHANGE_SEMANTICS_SHALLOW:
+		return "SEARCH_CHANGE_SEMANTICS_SHALLOW"
+	case SEARCH_CHANGE_SEMANTICS_UPDATE_SECURITY:
+		return "SEARCH_CHANGE_SEMANTICS_UPDATE_SECURITY"
+	default:
+		return fmt.Sprintf("SEARCH_KIND_OF_CHANGE(%d)", int32(e))
+	}
+}
+
 // SEARCH_NOTIFICATION_PRIORITY: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-search_notification_priority
 type SEARCH_NOTIFICATION_PRIORITY int32
 
@@ -1428,6 +4108,19 @@ const (
 	SEARCH_NORMAL_PRIORITY SEARCH_NOTIFICATION_PRIORITY = 0
 	SEARCH_HIGH_PRIORITY   SEARCH_NOTIFICATION_PRIORITY = 1
 )
+
+// String returns the SEARCH_NOTIFICATION_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SEARCH_NOTIFICATION_PRIORITY) String() string {
+	switch e {
+	case SEARCH_NORMAL_PRIORITY:
+		return "SEARCH_NORMAL_PRIORITY"
+	case SEARCH_HIGH_PRIORITY:
+		return "SEARCH_HIGH_PRIORITY"
+	default:
+		return fmt.Sprintf("SEARCH_NOTIFICATION_PRIORITY(%d)", int32(e))
+	}
+}
 
 // SEARCH_QUERY_SYNTAX: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-search_query_syntax
 type SEARCH_QUERY_SYNTAX int32
@@ -1438,6 +4131,21 @@ const (
 	SEARCH_NATURAL_QUERY_SYNTAX  SEARCH_QUERY_SYNTAX = 2
 )
 
+// String returns the SEARCH_QUERY_SYNTAX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SEARCH_QUERY_SYNTAX) String() string {
+	switch e {
+	case SEARCH_NO_QUERY_SYNTAX:
+		return "SEARCH_NO_QUERY_SYNTAX"
+	case SEARCH_ADVANCED_QUERY_SYNTAX:
+		return "SEARCH_ADVANCED_QUERY_SYNTAX"
+	case SEARCH_NATURAL_QUERY_SYNTAX:
+		return "SEARCH_NATURAL_QUERY_SYNTAX"
+	default:
+		return fmt.Sprintf("SEARCH_QUERY_SYNTAX(%d)", int32(e))
+	}
+}
+
 // SEARCH_TERM_EXPANSION: https://learn.microsoft.com/windows/win32/api/searchapi/ne-searchapi-search_term_expansion
 type SEARCH_TERM_EXPANSION int32
 
@@ -1446,6 +4154,21 @@ const (
 	SEARCH_TERM_PREFIX_ALL   SEARCH_TERM_EXPANSION = 1
 	SEARCH_TERM_STEM_ALL     SEARCH_TERM_EXPANSION = 2
 )
+
+// String returns the SEARCH_TERM_EXPANSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SEARCH_TERM_EXPANSION) String() string {
+	switch e {
+	case SEARCH_TERM_NO_EXPANSION:
+		return "SEARCH_TERM_NO_EXPANSION"
+	case SEARCH_TERM_PREFIX_ALL:
+		return "SEARCH_TERM_PREFIX_ALL"
+	case SEARCH_TERM_STEM_ALL:
+		return "SEARCH_TERM_STEM_ALL"
+	default:
+		return fmt.Sprintf("SEARCH_TERM_EXPANSION(%d)", int32(e))
+	}
+}
 
 type SQLINTERVAL int32
 
@@ -1464,6 +4187,41 @@ const (
 	SQL_IS_HOUR_TO_SECOND   SQLINTERVAL = 12
 	SQL_IS_MINUTE_TO_SECOND SQLINTERVAL = 13
 )
+
+// String returns the SQLINTERVAL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SQLINTERVAL) String() string {
+	switch e {
+	case SQL_IS_YEAR:
+		return "SQL_IS_YEAR"
+	case SQL_IS_MONTH:
+		return "SQL_IS_MONTH"
+	case SQL_IS_DAY:
+		return "SQL_IS_DAY"
+	case SQL_IS_HOUR:
+		return "SQL_IS_HOUR"
+	case SQL_IS_MINUTE:
+		return "SQL_IS_MINUTE"
+	case SQL_IS_SECOND:
+		return "SQL_IS_SECOND"
+	case SQL_IS_YEAR_TO_MONTH:
+		return "SQL_IS_YEAR_TO_MONTH"
+	case SQL_IS_DAY_TO_HOUR:
+		return "SQL_IS_DAY_TO_HOUR"
+	case SQL_IS_DAY_TO_MINUTE:
+		return "SQL_IS_DAY_TO_MINUTE"
+	case SQL_IS_DAY_TO_SECOND:
+		return "SQL_IS_DAY_TO_SECOND"
+	case SQL_IS_HOUR_TO_MINUTE:
+		return "SQL_IS_HOUR_TO_MINUTE"
+	case SQL_IS_HOUR_TO_SECOND:
+		return "SQL_IS_HOUR_TO_SECOND"
+	case SQL_IS_MINUTE_TO_SECOND:
+		return "SQL_IS_MINUTE_TO_SECOND"
+	default:
+		return fmt.Sprintf("SQLINTERVAL(%d)", int32(e))
+	}
+}
 
 type SQLVARENUM int32
 
@@ -1493,6 +4251,61 @@ const (
 	VT_SS_UNKNOWN       SQLVARENUM = 209
 )
 
+// String returns the SQLVARENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SQLVARENUM) String() string {
+	switch e {
+	case VT_SS_EMPTY:
+		return "VT_SS_EMPTY"
+	case VT_SS_NULL:
+		return "VT_SS_NULL"
+	case VT_SS_UI1:
+		return "VT_SS_UI1"
+	case VT_SS_I2:
+		return "VT_SS_I2"
+	case VT_SS_I4:
+		return "VT_SS_I4"
+	case VT_SS_I8:
+		return "VT_SS_I8"
+	case VT_SS_R4:
+		return "VT_SS_R4"
+	case VT_SS_R8:
+		return "VT_SS_R8"
+	case VT_SS_MONEY:
+		return "VT_SS_MONEY"
+	case VT_SS_SMALLMONEY:
+		return "VT_SS_SMALLMONEY"
+	case VT_SS_WSTRING:
+		return "VT_SS_WSTRING"
+	case VT_SS_WVARSTRING:
+		return "VT_SS_WVARSTRING"
+	case VT_SS_STRING:
+		return "VT_SS_STRING"
+	case VT_SS_VARSTRING:
+		return "VT_SS_VARSTRING"
+	case VT_SS_BIT:
+		return "VT_SS_BIT"
+	case VT_SS_GUID:
+		return "VT_SS_GUID"
+	case VT_SS_NUMERIC:
+		return "VT_SS_NUMERIC"
+	case VT_SS_DECIMAL:
+		return "VT_SS_DECIMAL"
+	case VT_SS_DATETIME:
+		return "VT_SS_DATETIME"
+	case VT_SS_SMALLDATETIME:
+		return "VT_SS_SMALLDATETIME"
+	case VT_SS_BINARY:
+		return "VT_SS_BINARY"
+	case VT_SS_VARBINARY:
+		return "VT_SS_VARBINARY"
+	case VT_SS_UNKNOWN:
+		return "VT_SS_UNKNOWN"
+	default:
+		return fmt.Sprintf("SQLVARENUM(%d)", int32(e))
+	}
+}
+
 // STRUCTURED_QUERY_MULTIOPTION: https://learn.microsoft.com/windows/win32/api/structuredquery/ne-structuredquery-structured_query_multioption
 type STRUCTURED_QUERY_MULTIOPTION int32
 
@@ -1502,6 +4315,23 @@ const (
 	SQMO_GENERATOR_FOR_TYPE STRUCTURED_QUERY_MULTIOPTION = 2
 	SQMO_MAP_PROPERTY       STRUCTURED_QUERY_MULTIOPTION = 3
 )
+
+// String returns the STRUCTURED_QUERY_MULTIOPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STRUCTURED_QUERY_MULTIOPTION) String() string {
+	switch e {
+	case SQMO_VIRTUAL_PROPERTY:
+		return "SQMO_VIRTUAL_PROPERTY"
+	case SQMO_DEFAULT_PROPERTY:
+		return "SQMO_DEFAULT_PROPERTY"
+	case SQMO_GENERATOR_FOR_TYPE:
+		return "SQMO_GENERATOR_FOR_TYPE"
+	case SQMO_MAP_PROPERTY:
+		return "SQMO_MAP_PROPERTY"
+	default:
+		return fmt.Sprintf("STRUCTURED_QUERY_MULTIOPTION(%d)", int32(e))
+	}
+}
 
 // STRUCTURED_QUERY_PARSE_ERROR: https://learn.microsoft.com/windows/win32/api/structuredquery/ne-structuredquery-structured_query_parse_error
 type STRUCTURED_QUERY_PARSE_ERROR int32
@@ -1516,7 +4346,31 @@ const (
 	SQPE_UNHANDLED                 STRUCTURED_QUERY_PARSE_ERROR = 6
 )
 
+// String returns the STRUCTURED_QUERY_PARSE_ERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STRUCTURED_QUERY_PARSE_ERROR) String() string {
+	switch e {
+	case SQPE_NONE:
+		return "SQPE_NONE"
+	case SQPE_EXTRA_OPENING_PARENTHESIS:
+		return "SQPE_EXTRA_OPENING_PARENTHESIS"
+	case SQPE_EXTRA_CLOSING_PARENTHESIS:
+		return "SQPE_EXTRA_CLOSING_PARENTHESIS"
+	case SQPE_IGNORED_MODIFIER:
+		return "SQPE_IGNORED_MODIFIER"
+	case SQPE_IGNORED_CONNECTOR:
+		return "SQPE_IGNORED_CONNECTOR"
+	case SQPE_IGNORED_KEYWORD:
+		return "SQPE_IGNORED_KEYWORD"
+	case SQPE_UNHANDLED:
+		return "SQPE_UNHANDLED"
+	default:
+		return fmt.Sprintf("STRUCTURED_QUERY_PARSE_ERROR(%d)", int32(e))
+	}
+}
+
 // STRUCTURED_QUERY_RESOLVE_OPTION: https://learn.microsoft.com/windows/win32/api/structuredquery/ne-structuredquery-structured_query_resolve_option
+// Bitmask — values may be combined with |.
 type STRUCTURED_QUERY_RESOLVE_OPTION int32
 
 const (
@@ -1532,6 +4386,46 @@ const (
 	SQRO_ADD_VALUE_TYPE_FOR_PLAIN_VALUES   STRUCTURED_QUERY_RESOLVE_OPTION = 256
 	SQRO_ADD_ROBUST_ITEM_NAME              STRUCTURED_QUERY_RESOLVE_OPTION = 512
 )
+
+// String returns the STRUCTURED_QUERY_RESOLVE_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STRUCTURED_QUERY_RESOLVE_OPTION) String() string {
+	var parts []string
+	if e&SQRO_DONT_RESOLVE_DATETIME != 0 {
+		parts = append(parts, "SQRO_DONT_RESOLVE_DATETIME")
+	}
+	if e&SQRO_ALWAYS_ONE_INTERVAL != 0 {
+		parts = append(parts, "SQRO_ALWAYS_ONE_INTERVAL")
+	}
+	if e&SQRO_DONT_SIMPLIFY_CONDITION_TREES != 0 {
+		parts = append(parts, "SQRO_DONT_SIMPLIFY_CONDITION_TREES")
+	}
+	if e&SQRO_DONT_MAP_RELATIONS != 0 {
+		parts = append(parts, "SQRO_DONT_MAP_RELATIONS")
+	}
+	if e&SQRO_DONT_RESOLVE_RANGES != 0 {
+		parts = append(parts, "SQRO_DONT_RESOLVE_RANGES")
+	}
+	if e&SQRO_DONT_REMOVE_UNRESTRICTED_KEYWORDS != 0 {
+		parts = append(parts, "SQRO_DONT_REMOVE_UNRESTRICTED_KEYWORDS")
+	}
+	if e&SQRO_DONT_SPLIT_WORDS != 0 {
+		parts = append(parts, "SQRO_DONT_SPLIT_WORDS")
+	}
+	if e&SQRO_IGNORE_PHRASE_ORDER != 0 {
+		parts = append(parts, "SQRO_IGNORE_PHRASE_ORDER")
+	}
+	if e&SQRO_ADD_VALUE_TYPE_FOR_PLAIN_VALUES != 0 {
+		parts = append(parts, "SQRO_ADD_VALUE_TYPE_FOR_PLAIN_VALUES")
+	}
+	if e&SQRO_ADD_ROBUST_ITEM_NAME != 0 {
+		parts = append(parts, "SQRO_ADD_ROBUST_ITEM_NAME")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // STRUCTURED_QUERY_SINGLE_OPTION: https://learn.microsoft.com/windows/win32/api/structuredquery/ne-structuredquery-structured_query_single_option
 type STRUCTURED_QUERY_SINGLE_OPTION int32
@@ -1550,6 +4444,37 @@ const (
 	SQSO_CONNECTOR_CASE       STRUCTURED_QUERY_SINGLE_OPTION = 10
 )
 
+// String returns the STRUCTURED_QUERY_SINGLE_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STRUCTURED_QUERY_SINGLE_OPTION) String() string {
+	switch e {
+	case SQSO_SCHEMA:
+		return "SQSO_SCHEMA"
+	case SQSO_LOCALE_WORD_BREAKING:
+		return "SQSO_LOCALE_WORD_BREAKING"
+	case SQSO_WORD_BREAKER:
+		return "SQSO_WORD_BREAKER"
+	case SQSO_NATURAL_SYNTAX:
+		return "SQSO_NATURAL_SYNTAX"
+	case SQSO_AUTOMATIC_WILDCARD:
+		return "SQSO_AUTOMATIC_WILDCARD"
+	case SQSO_TRACE_LEVEL:
+		return "SQSO_TRACE_LEVEL"
+	case SQSO_LANGUAGE_KEYWORDS:
+		return "SQSO_LANGUAGE_KEYWORDS"
+	case SQSO_SYNTAX:
+		return "SQSO_SYNTAX"
+	case SQSO_TIME_ZONE:
+		return "SQSO_TIME_ZONE"
+	case SQSO_IMPLICIT_CONNECTOR:
+		return "SQSO_IMPLICIT_CONNECTOR"
+	case SQSO_CONNECTOR_CASE:
+		return "SQSO_CONNECTOR_CASE"
+	default:
+		return fmt.Sprintf("STRUCTURED_QUERY_SINGLE_OPTION(%d)", int32(e))
+	}
+}
+
 // STRUCTURED_QUERY_SYNTAX: https://learn.microsoft.com/windows/win32/api/structuredquery/ne-structuredquery-structured_query_syntax
 type STRUCTURED_QUERY_SYNTAX int32
 
@@ -1558,6 +4483,21 @@ const (
 	SQS_ADVANCED_QUERY_SYNTAX STRUCTURED_QUERY_SYNTAX = 1
 	SQS_NATURAL_QUERY_SYNTAX  STRUCTURED_QUERY_SYNTAX = 2
 )
+
+// String returns the STRUCTURED_QUERY_SYNTAX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STRUCTURED_QUERY_SYNTAX) String() string {
+	switch e {
+	case SQS_NO_SYNTAX:
+		return "SQS_NO_SYNTAX"
+	case SQS_ADVANCED_QUERY_SYNTAX:
+		return "SQS_ADVANCED_QUERY_SYNTAX"
+	case SQS_NATURAL_QUERY_SYNTAX:
+		return "SQS_NATURAL_QUERY_SYNTAX"
+	default:
+		return fmt.Sprintf("STRUCTURED_QUERY_SYNTAX(%d)", int32(e))
+	}
+}
 
 type SUBSCRIPTIONINFOFLAGS int32
 
@@ -1578,6 +4518,43 @@ const (
 	SUBSINFO_TYPE         SUBSCRIPTIONINFOFLAGS = 32768
 )
 
+// String returns the SUBSCRIPTIONINFOFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SUBSCRIPTIONINFOFLAGS) String() string {
+	switch e {
+	case SUBSINFO_SCHEDULE:
+		return "SUBSINFO_SCHEDULE"
+	case SUBSINFO_RECURSE:
+		return "SUBSINFO_RECURSE"
+	case SUBSINFO_WEBCRAWL:
+		return "SUBSINFO_WEBCRAWL"
+	case SUBSINFO_MAILNOT:
+		return "SUBSINFO_MAILNOT"
+	case SUBSINFO_MAXSIZEKB:
+		return "SUBSINFO_MAXSIZEKB"
+	case SUBSINFO_USER:
+		return "SUBSINFO_USER"
+	case SUBSINFO_PASSWORD:
+		return "SUBSINFO_PASSWORD"
+	case SUBSINFO_TASKFLAGS:
+		return "SUBSINFO_TASKFLAGS"
+	case SUBSINFO_GLEAM:
+		return "SUBSINFO_GLEAM"
+	case SUBSINFO_CHANGESONLY:
+		return "SUBSINFO_CHANGESONLY"
+	case SUBSINFO_CHANNELFLAGS:
+		return "SUBSINFO_CHANNELFLAGS"
+	case SUBSINFO_FRIENDLYNAME:
+		return "SUBSINFO_FRIENDLYNAME"
+	case SUBSINFO_NEEDPASSWORD:
+		return "SUBSINFO_NEEDPASSWORD"
+	case SUBSINFO_TYPE:
+		return "SUBSINFO_TYPE"
+	default:
+		return fmt.Sprintf("SUBSCRIPTIONINFOFLAGS(%d)", int32(e))
+	}
+}
+
 type SUBSCRIPTIONSCHEDULE int32
 
 const (
@@ -1588,6 +4565,25 @@ const (
 	SUBSSCHED_MANUAL SUBSCRIPTIONSCHEDULE = 4
 )
 
+// String returns the SUBSCRIPTIONSCHEDULE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SUBSCRIPTIONSCHEDULE) String() string {
+	switch e {
+	case SUBSSCHED_AUTO:
+		return "SUBSSCHED_AUTO"
+	case SUBSSCHED_DAILY:
+		return "SUBSSCHED_DAILY"
+	case SUBSSCHED_WEEKLY:
+		return "SUBSSCHED_WEEKLY"
+	case SUBSSCHED_CUSTOM:
+		return "SUBSSCHED_CUSTOM"
+	case SUBSSCHED_MANUAL:
+		return "SUBSSCHED_MANUAL"
+	default:
+		return fmt.Sprintf("SUBSCRIPTIONSCHEDULE(%d)", int32(e))
+	}
+}
+
 type SUBSCRIPTIONTYPE int32
 
 const (
@@ -1597,6 +4593,25 @@ const (
 	SUBSTYPE_EXTERNAL       SUBSCRIPTIONTYPE = 3
 	SUBSTYPE_DESKTOPCHANNEL SUBSCRIPTIONTYPE = 4
 )
+
+// String returns the SUBSCRIPTIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SUBSCRIPTIONTYPE) String() string {
+	switch e {
+	case SUBSTYPE_URL:
+		return "SUBSTYPE_URL"
+	case SUBSTYPE_CHANNEL:
+		return "SUBSTYPE_CHANNEL"
+	case SUBSTYPE_DESKTOPURL:
+		return "SUBSTYPE_DESKTOPURL"
+	case SUBSTYPE_EXTERNAL:
+		return "SUBSTYPE_EXTERNAL"
+	case SUBSTYPE_DESKTOPCHANNEL:
+		return "SUBSTYPE_DESKTOPCHANNEL"
+	default:
+		return fmt.Sprintf("SUBSCRIPTIONTYPE(%d)", int32(e))
+	}
+}
 
 type WEBCRAWL_RECURSEFLAGS int32
 
@@ -1610,3 +4625,28 @@ const (
 	WEBCRAWL_IGNORE_ROBOTSTXT   WEBCRAWL_RECURSEFLAGS = 128
 	WEBCRAWL_ONLY_LINKS_TO_HTML WEBCRAWL_RECURSEFLAGS = 256
 )
+
+// String returns the WEBCRAWL_RECURSEFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WEBCRAWL_RECURSEFLAGS) String() string {
+	switch e {
+	case WEBCRAWL_DONT_MAKE_STICKY:
+		return "WEBCRAWL_DONT_MAKE_STICKY"
+	case WEBCRAWL_GET_IMAGES:
+		return "WEBCRAWL_GET_IMAGES"
+	case WEBCRAWL_GET_VIDEOS:
+		return "WEBCRAWL_GET_VIDEOS"
+	case WEBCRAWL_GET_BGSOUNDS:
+		return "WEBCRAWL_GET_BGSOUNDS"
+	case WEBCRAWL_GET_CONTROLS:
+		return "WEBCRAWL_GET_CONTROLS"
+	case WEBCRAWL_LINKS_ELSEWHERE:
+		return "WEBCRAWL_LINKS_ELSEWHERE"
+	case WEBCRAWL_IGNORE_ROBOTSTXT:
+		return "WEBCRAWL_IGNORE_ROBOTSTXT"
+	case WEBCRAWL_ONLY_LINKS_TO_HTML:
+		return "WEBCRAWL_ONLY_LINKS_TO_HTML"
+	default:
+		return fmt.Sprintf("WEBCRAWL_RECURSEFLAGS(%d)", int32(e))
+	}
+}

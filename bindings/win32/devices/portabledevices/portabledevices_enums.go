@@ -4,6 +4,10 @@
 
 package portabledevices
 
+import (
+	"fmt"
+)
+
 // DELETE_OBJECT_OPTIONS: https://learn.microsoft.com/windows/win32/wpd_sdk/delete-object-options
 type DELETE_OBJECT_OPTIONS int32
 
@@ -11,6 +15,19 @@ const (
 	PORTABLE_DEVICE_DELETE_NO_RECURSION   DELETE_OBJECT_OPTIONS = 0
 	PORTABLE_DEVICE_DELETE_WITH_RECURSION DELETE_OBJECT_OPTIONS = 1
 )
+
+// String returns the DELETE_OBJECT_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DELETE_OBJECT_OPTIONS) String() string {
+	switch e {
+	case PORTABLE_DEVICE_DELETE_NO_RECURSION:
+		return "PORTABLE_DEVICE_DELETE_NO_RECURSION"
+	case PORTABLE_DEVICE_DELETE_WITH_RECURSION:
+		return "PORTABLE_DEVICE_DELETE_WITH_RECURSION"
+	default:
+		return fmt.Sprintf("DELETE_OBJECT_OPTIONS(%d)", int32(e))
+	}
+}
 
 type DEVICE_RADIO_STATE int32
 
@@ -25,6 +42,29 @@ const (
 	DRS_RADIO_MAX                   DEVICE_RADIO_STATE = 6
 )
 
+// String returns the DEVICE_RADIO_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVICE_RADIO_STATE) String() string {
+	switch e {
+	case DRS_RADIO_ON:
+		return "DRS_RADIO_ON"
+	case DRS_SW_RADIO_OFF:
+		return "DRS_SW_RADIO_OFF"
+	case DRS_HW_RADIO_OFF:
+		return "DRS_HW_RADIO_OFF"
+	case DRS_SW_HW_RADIO_OFF:
+		return "DRS_SW_HW_RADIO_OFF"
+	case DRS_HW_RADIO_ON_UNCONTROLLABLE:
+		return "DRS_HW_RADIO_ON_UNCONTROLLABLE"
+	case DRS_RADIO_INVALID:
+		return "DRS_RADIO_INVALID"
+	case DRS_HW_RADIO_OFF_UNCONTROLLABLE:
+		return "DRS_HW_RADIO_OFF_UNCONTROLLABLE"
+	default:
+		return fmt.Sprintf("DEVICE_RADIO_STATE(%d)", int32(e))
+	}
+}
+
 // SMS_MESSAGE_TYPES: https://learn.microsoft.com/windows/win32/wpd_sdk/sms-message-types
 type SMS_MESSAGE_TYPES int32
 
@@ -33,12 +73,38 @@ const (
 	SMS_BINARY_MESSAGE SMS_MESSAGE_TYPES = 1
 )
 
+// String returns the SMS_MESSAGE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SMS_MESSAGE_TYPES) String() string {
+	switch e {
+	case SMS_TEXT_MESSAGE:
+		return "SMS_TEXT_MESSAGE"
+	case SMS_BINARY_MESSAGE:
+		return "SMS_BINARY_MESSAGE"
+	default:
+		return fmt.Sprintf("SMS_MESSAGE_TYPES(%d)", int32(e))
+	}
+}
+
 type SYSTEM_RADIO_STATE int32
 
 const (
 	SRS_RADIO_ENABLED  SYSTEM_RADIO_STATE = 0
 	SRS_RADIO_DISABLED SYSTEM_RADIO_STATE = 1
 )
+
+// String returns the SYSTEM_RADIO_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEM_RADIO_STATE) String() string {
+	switch e {
+	case SRS_RADIO_ENABLED:
+		return "SRS_RADIO_ENABLED"
+	case SRS_RADIO_DISABLED:
+		return "SRS_RADIO_DISABLED"
+	default:
+		return fmt.Sprintf("SYSTEM_RADIO_STATE(%d)", int32(e))
+	}
+}
 
 // WPD_BITRATE_TYPES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-bitrate-types
 type WPD_BITRATE_TYPES int32
@@ -50,6 +116,23 @@ const (
 	WPD_BITRATE_TYPE_FREE     WPD_BITRATE_TYPES = 3
 )
 
+// String returns the WPD_BITRATE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_BITRATE_TYPES) String() string {
+	switch e {
+	case WPD_BITRATE_TYPE_UNUSED:
+		return "WPD_BITRATE_TYPE_UNUSED"
+	case WPD_BITRATE_TYPE_DISCRETE:
+		return "WPD_BITRATE_TYPE_DISCRETE"
+	case WPD_BITRATE_TYPE_VARIABLE:
+		return "WPD_BITRATE_TYPE_VARIABLE"
+	case WPD_BITRATE_TYPE_FREE:
+		return "WPD_BITRATE_TYPE_FREE"
+	default:
+		return fmt.Sprintf("WPD_BITRATE_TYPES(%d)", int32(e))
+	}
+}
+
 // WPD_CAPTURE_MODES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-capture-modes
 type WPD_CAPTURE_MODES int32
 
@@ -60,6 +143,23 @@ const (
 	WPD_CAPTURE_MODE_TIMELAPSE WPD_CAPTURE_MODES = 3
 )
 
+// String returns the WPD_CAPTURE_MODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_CAPTURE_MODES) String() string {
+	switch e {
+	case WPD_CAPTURE_MODE_UNDEFINED:
+		return "WPD_CAPTURE_MODE_UNDEFINED"
+	case WPD_CAPTURE_MODE_NORMAL:
+		return "WPD_CAPTURE_MODE_NORMAL"
+	case WPD_CAPTURE_MODE_BURST:
+		return "WPD_CAPTURE_MODE_BURST"
+	case WPD_CAPTURE_MODE_TIMELAPSE:
+		return "WPD_CAPTURE_MODE_TIMELAPSE"
+	default:
+		return fmt.Sprintf("WPD_CAPTURE_MODES(%d)", int32(e))
+	}
+}
+
 // WPD_COLOR_CORRECTED_STATUS_VALUES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-color-corrected-status-values
 type WPD_COLOR_CORRECTED_STATUS_VALUES int32
 
@@ -68,6 +168,21 @@ const (
 	WPD_COLOR_CORRECTED_STATUS_CORRECTED               WPD_COLOR_CORRECTED_STATUS_VALUES = 1
 	WPD_COLOR_CORRECTED_STATUS_SHOULD_NOT_BE_CORRECTED WPD_COLOR_CORRECTED_STATUS_VALUES = 2
 )
+
+// String returns the WPD_COLOR_CORRECTED_STATUS_VALUES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_COLOR_CORRECTED_STATUS_VALUES) String() string {
+	switch e {
+	case WPD_COLOR_CORRECTED_STATUS_NOT_CORRECTED:
+		return "WPD_COLOR_CORRECTED_STATUS_NOT_CORRECTED"
+	case WPD_COLOR_CORRECTED_STATUS_CORRECTED:
+		return "WPD_COLOR_CORRECTED_STATUS_CORRECTED"
+	case WPD_COLOR_CORRECTED_STATUS_SHOULD_NOT_BE_CORRECTED:
+		return "WPD_COLOR_CORRECTED_STATUS_SHOULD_NOT_BE_CORRECTED"
+	default:
+		return fmt.Sprintf("WPD_COLOR_CORRECTED_STATUS_VALUES(%d)", int32(e))
+	}
+}
 
 type WPD_COMMAND_ACCESS_TYPES int32
 
@@ -79,6 +194,25 @@ const (
 	WPD_COMMAND_ACCESS_FROM_ATTRIBUTE_WITH_METHOD_ACCESS WPD_COMMAND_ACCESS_TYPES = 16
 )
 
+// String returns the WPD_COMMAND_ACCESS_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_COMMAND_ACCESS_TYPES) String() string {
+	switch e {
+	case WPD_COMMAND_ACCESS_READ:
+		return "WPD_COMMAND_ACCESS_READ"
+	case WPD_COMMAND_ACCESS_READWRITE:
+		return "WPD_COMMAND_ACCESS_READWRITE"
+	case WPD_COMMAND_ACCESS_FROM_PROPERTY_WITH_STGM_ACCESS:
+		return "WPD_COMMAND_ACCESS_FROM_PROPERTY_WITH_STGM_ACCESS"
+	case WPD_COMMAND_ACCESS_FROM_PROPERTY_WITH_FILE_ACCESS:
+		return "WPD_COMMAND_ACCESS_FROM_PROPERTY_WITH_FILE_ACCESS"
+	case WPD_COMMAND_ACCESS_FROM_ATTRIBUTE_WITH_METHOD_ACCESS:
+		return "WPD_COMMAND_ACCESS_FROM_ATTRIBUTE_WITH_METHOD_ACCESS"
+	default:
+		return fmt.Sprintf("WPD_COMMAND_ACCESS_TYPES(%d)", int32(e))
+	}
+}
+
 // WPD_CROPPED_STATUS_VALUES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-cropped-status-values
 type WPD_CROPPED_STATUS_VALUES int32
 
@@ -87,6 +221,21 @@ const (
 	WPD_CROPPED_STATUS_CROPPED               WPD_CROPPED_STATUS_VALUES = 1
 	WPD_CROPPED_STATUS_SHOULD_NOT_BE_CROPPED WPD_CROPPED_STATUS_VALUES = 2
 )
+
+// String returns the WPD_CROPPED_STATUS_VALUES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_CROPPED_STATUS_VALUES) String() string {
+	switch e {
+	case WPD_CROPPED_STATUS_NOT_CROPPED:
+		return "WPD_CROPPED_STATUS_NOT_CROPPED"
+	case WPD_CROPPED_STATUS_CROPPED:
+		return "WPD_CROPPED_STATUS_CROPPED"
+	case WPD_CROPPED_STATUS_SHOULD_NOT_BE_CROPPED:
+		return "WPD_CROPPED_STATUS_SHOULD_NOT_BE_CROPPED"
+	default:
+		return fmt.Sprintf("WPD_CROPPED_STATUS_VALUES(%d)", int32(e))
+	}
+}
 
 // WPD_DEVICE_TRANSPORTS: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-device-transports
 type WPD_DEVICE_TRANSPORTS int32
@@ -97,6 +246,23 @@ const (
 	WPD_DEVICE_TRANSPORT_IP          WPD_DEVICE_TRANSPORTS = 2
 	WPD_DEVICE_TRANSPORT_BLUETOOTH   WPD_DEVICE_TRANSPORTS = 3
 )
+
+// String returns the WPD_DEVICE_TRANSPORTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_DEVICE_TRANSPORTS) String() string {
+	switch e {
+	case WPD_DEVICE_TRANSPORT_UNSPECIFIED:
+		return "WPD_DEVICE_TRANSPORT_UNSPECIFIED"
+	case WPD_DEVICE_TRANSPORT_USB:
+		return "WPD_DEVICE_TRANSPORT_USB"
+	case WPD_DEVICE_TRANSPORT_IP:
+		return "WPD_DEVICE_TRANSPORT_IP"
+	case WPD_DEVICE_TRANSPORT_BLUETOOTH:
+		return "WPD_DEVICE_TRANSPORT_BLUETOOTH"
+	default:
+		return fmt.Sprintf("WPD_DEVICE_TRANSPORTS(%d)", int32(e))
+	}
+}
 
 // WPD_DEVICE_TYPES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-device-types
 type WPD_DEVICE_TYPES int32
@@ -111,6 +277,29 @@ const (
 	WPD_DEVICE_TYPE_AUDIO_RECORDER               WPD_DEVICE_TYPES = 6
 )
 
+// String returns the WPD_DEVICE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_DEVICE_TYPES) String() string {
+	switch e {
+	case WPD_DEVICE_TYPE_GENERIC:
+		return "WPD_DEVICE_TYPE_GENERIC"
+	case WPD_DEVICE_TYPE_CAMERA:
+		return "WPD_DEVICE_TYPE_CAMERA"
+	case WPD_DEVICE_TYPE_MEDIA_PLAYER:
+		return "WPD_DEVICE_TYPE_MEDIA_PLAYER"
+	case WPD_DEVICE_TYPE_PHONE:
+		return "WPD_DEVICE_TYPE_PHONE"
+	case WPD_DEVICE_TYPE_VIDEO:
+		return "WPD_DEVICE_TYPE_VIDEO"
+	case WPD_DEVICE_TYPE_PERSONAL_INFORMATION_MANAGER:
+		return "WPD_DEVICE_TYPE_PERSONAL_INFORMATION_MANAGER"
+	case WPD_DEVICE_TYPE_AUDIO_RECORDER:
+		return "WPD_DEVICE_TYPE_AUDIO_RECORDER"
+	default:
+		return fmt.Sprintf("WPD_DEVICE_TYPES(%d)", int32(e))
+	}
+}
+
 // WPD_EFFECT_MODES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-effect-modes
 type WPD_EFFECT_MODES int32
 
@@ -120,6 +309,23 @@ const (
 	WPD_EFFECT_MODE_BLACK_AND_WHITE WPD_EFFECT_MODES = 2
 	WPD_EFFECT_MODE_SEPIA           WPD_EFFECT_MODES = 3
 )
+
+// String returns the WPD_EFFECT_MODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_EFFECT_MODES) String() string {
+	switch e {
+	case WPD_EFFECT_MODE_UNDEFINED:
+		return "WPD_EFFECT_MODE_UNDEFINED"
+	case WPD_EFFECT_MODE_COLOR:
+		return "WPD_EFFECT_MODE_COLOR"
+	case WPD_EFFECT_MODE_BLACK_AND_WHITE:
+		return "WPD_EFFECT_MODE_BLACK_AND_WHITE"
+	case WPD_EFFECT_MODE_SEPIA:
+		return "WPD_EFFECT_MODE_SEPIA"
+	default:
+		return fmt.Sprintf("WPD_EFFECT_MODES(%d)", int32(e))
+	}
+}
 
 // WPD_EXPOSURE_METERING_MODES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-exposure-metering-modes
 type WPD_EXPOSURE_METERING_MODES int32
@@ -131,6 +337,25 @@ const (
 	WPD_EXPOSURE_METERING_MODE_MULTI_SPOT              WPD_EXPOSURE_METERING_MODES = 3
 	WPD_EXPOSURE_METERING_MODE_CENTER_SPOT             WPD_EXPOSURE_METERING_MODES = 4
 )
+
+// String returns the WPD_EXPOSURE_METERING_MODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_EXPOSURE_METERING_MODES) String() string {
+	switch e {
+	case WPD_EXPOSURE_METERING_MODE_UNDEFINED:
+		return "WPD_EXPOSURE_METERING_MODE_UNDEFINED"
+	case WPD_EXPOSURE_METERING_MODE_AVERAGE:
+		return "WPD_EXPOSURE_METERING_MODE_AVERAGE"
+	case WPD_EXPOSURE_METERING_MODE_CENTER_WEIGHTED_AVERAGE:
+		return "WPD_EXPOSURE_METERING_MODE_CENTER_WEIGHTED_AVERAGE"
+	case WPD_EXPOSURE_METERING_MODE_MULTI_SPOT:
+		return "WPD_EXPOSURE_METERING_MODE_MULTI_SPOT"
+	case WPD_EXPOSURE_METERING_MODE_CENTER_SPOT:
+		return "WPD_EXPOSURE_METERING_MODE_CENTER_SPOT"
+	default:
+		return fmt.Sprintf("WPD_EXPOSURE_METERING_MODES(%d)", int32(e))
+	}
+}
 
 // WPD_EXPOSURE_PROGRAM_MODES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-exposure-program-modes
 type WPD_EXPOSURE_PROGRAM_MODES int32
@@ -146,6 +371,31 @@ const (
 	WPD_EXPOSURE_PROGRAM_MODE_PORTRAIT          WPD_EXPOSURE_PROGRAM_MODES = 7
 )
 
+// String returns the WPD_EXPOSURE_PROGRAM_MODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_EXPOSURE_PROGRAM_MODES) String() string {
+	switch e {
+	case WPD_EXPOSURE_PROGRAM_MODE_UNDEFINED:
+		return "WPD_EXPOSURE_PROGRAM_MODE_UNDEFINED"
+	case WPD_EXPOSURE_PROGRAM_MODE_MANUAL:
+		return "WPD_EXPOSURE_PROGRAM_MODE_MANUAL"
+	case WPD_EXPOSURE_PROGRAM_MODE_AUTO:
+		return "WPD_EXPOSURE_PROGRAM_MODE_AUTO"
+	case WPD_EXPOSURE_PROGRAM_MODE_APERTURE_PRIORITY:
+		return "WPD_EXPOSURE_PROGRAM_MODE_APERTURE_PRIORITY"
+	case WPD_EXPOSURE_PROGRAM_MODE_SHUTTER_PRIORITY:
+		return "WPD_EXPOSURE_PROGRAM_MODE_SHUTTER_PRIORITY"
+	case WPD_EXPOSURE_PROGRAM_MODE_CREATIVE:
+		return "WPD_EXPOSURE_PROGRAM_MODE_CREATIVE"
+	case WPD_EXPOSURE_PROGRAM_MODE_ACTION:
+		return "WPD_EXPOSURE_PROGRAM_MODE_ACTION"
+	case WPD_EXPOSURE_PROGRAM_MODE_PORTRAIT:
+		return "WPD_EXPOSURE_PROGRAM_MODE_PORTRAIT"
+	default:
+		return fmt.Sprintf("WPD_EXPOSURE_PROGRAM_MODES(%d)", int32(e))
+	}
+}
+
 // WPD_FLASH_MODES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-flash-modes
 type WPD_FLASH_MODES int32
 
@@ -159,6 +409,29 @@ const (
 	WPD_FLASH_MODE_EXTERNAL_SYNC WPD_FLASH_MODES = 6
 )
 
+// String returns the WPD_FLASH_MODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_FLASH_MODES) String() string {
+	switch e {
+	case WPD_FLASH_MODE_UNDEFINED:
+		return "WPD_FLASH_MODE_UNDEFINED"
+	case WPD_FLASH_MODE_AUTO:
+		return "WPD_FLASH_MODE_AUTO"
+	case WPD_FLASH_MODE_OFF:
+		return "WPD_FLASH_MODE_OFF"
+	case WPD_FLASH_MODE_FILL:
+		return "WPD_FLASH_MODE_FILL"
+	case WPD_FLASH_MODE_RED_EYE_AUTO:
+		return "WPD_FLASH_MODE_RED_EYE_AUTO"
+	case WPD_FLASH_MODE_RED_EYE_FILL:
+		return "WPD_FLASH_MODE_RED_EYE_FILL"
+	case WPD_FLASH_MODE_EXTERNAL_SYNC:
+		return "WPD_FLASH_MODE_EXTERNAL_SYNC"
+	default:
+		return fmt.Sprintf("WPD_FLASH_MODES(%d)", int32(e))
+	}
+}
+
 // WPD_FOCUS_METERING_MODES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-focus-metering-modes
 type WPD_FOCUS_METERING_MODES int32
 
@@ -167,6 +440,21 @@ const (
 	WPD_FOCUS_METERING_MODE_CENTER_SPOT WPD_FOCUS_METERING_MODES = 1
 	WPD_FOCUS_METERING_MODE_MULTI_SPOT  WPD_FOCUS_METERING_MODES = 2
 )
+
+// String returns the WPD_FOCUS_METERING_MODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_FOCUS_METERING_MODES) String() string {
+	switch e {
+	case WPD_FOCUS_METERING_MODE_UNDEFINED:
+		return "WPD_FOCUS_METERING_MODE_UNDEFINED"
+	case WPD_FOCUS_METERING_MODE_CENTER_SPOT:
+		return "WPD_FOCUS_METERING_MODE_CENTER_SPOT"
+	case WPD_FOCUS_METERING_MODE_MULTI_SPOT:
+		return "WPD_FOCUS_METERING_MODE_MULTI_SPOT"
+	default:
+		return fmt.Sprintf("WPD_FOCUS_METERING_MODES(%d)", int32(e))
+	}
+}
 
 // WPD_FOCUS_MODES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-focus-modes
 type WPD_FOCUS_MODES int32
@@ -177,6 +465,23 @@ const (
 	WPD_FOCUS_AUTOMATIC       WPD_FOCUS_MODES = 2
 	WPD_FOCUS_AUTOMATIC_MACRO WPD_FOCUS_MODES = 3
 )
+
+// String returns the WPD_FOCUS_MODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_FOCUS_MODES) String() string {
+	switch e {
+	case WPD_FOCUS_UNDEFINED:
+		return "WPD_FOCUS_UNDEFINED"
+	case WPD_FOCUS_MANUAL:
+		return "WPD_FOCUS_MANUAL"
+	case WPD_FOCUS_AUTOMATIC:
+		return "WPD_FOCUS_AUTOMATIC"
+	case WPD_FOCUS_AUTOMATIC_MACRO:
+		return "WPD_FOCUS_AUTOMATIC_MACRO"
+	default:
+		return fmt.Sprintf("WPD_FOCUS_MODES(%d)", int32(e))
+	}
+}
 
 // WPD_META_GENRES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-meta-genres
 type WPD_META_GENRES int32
@@ -203,6 +508,53 @@ const (
 	WPD_META_GENRE_MIXED_PODCAST                    WPD_META_GENRES = 66
 )
 
+// String returns the WPD_META_GENRES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_META_GENRES) String() string {
+	switch e {
+	case WPD_META_GENRE_UNUSED:
+		return "WPD_META_GENRE_UNUSED"
+	case WPD_META_GENRE_GENERIC_MUSIC_AUDIO_FILE:
+		return "WPD_META_GENRE_GENERIC_MUSIC_AUDIO_FILE"
+	case WPD_META_GENRE_GENERIC_NON_MUSIC_AUDIO_FILE:
+		return "WPD_META_GENRE_GENERIC_NON_MUSIC_AUDIO_FILE"
+	case WPD_META_GENRE_SPOKEN_WORD_AUDIO_BOOK_FILES:
+		return "WPD_META_GENRE_SPOKEN_WORD_AUDIO_BOOK_FILES"
+	case WPD_META_GENRE_SPOKEN_WORD_FILES_NON_AUDIO_BOOK:
+		return "WPD_META_GENRE_SPOKEN_WORD_FILES_NON_AUDIO_BOOK"
+	case WPD_META_GENRE_SPOKEN_WORD_NEWS:
+		return "WPD_META_GENRE_SPOKEN_WORD_NEWS"
+	case WPD_META_GENRE_SPOKEN_WORD_TALK_SHOWS:
+		return "WPD_META_GENRE_SPOKEN_WORD_TALK_SHOWS"
+	case WPD_META_GENRE_GENERIC_VIDEO_FILE:
+		return "WPD_META_GENRE_GENERIC_VIDEO_FILE"
+	case WPD_META_GENRE_NEWS_VIDEO_FILE:
+		return "WPD_META_GENRE_NEWS_VIDEO_FILE"
+	case WPD_META_GENRE_MUSIC_VIDEO_FILE:
+		return "WPD_META_GENRE_MUSIC_VIDEO_FILE"
+	case WPD_META_GENRE_HOME_VIDEO_FILE:
+		return "WPD_META_GENRE_HOME_VIDEO_FILE"
+	case WPD_META_GENRE_FEATURE_FILM_VIDEO_FILE:
+		return "WPD_META_GENRE_FEATURE_FILM_VIDEO_FILE"
+	case WPD_META_GENRE_TELEVISION_VIDEO_FILE:
+		return "WPD_META_GENRE_TELEVISION_VIDEO_FILE"
+	case WPD_META_GENRE_TRAINING_EDUCATIONAL_VIDEO_FILE:
+		return "WPD_META_GENRE_TRAINING_EDUCATIONAL_VIDEO_FILE"
+	case WPD_META_GENRE_PHOTO_MONTAGE_VIDEO_FILE:
+		return "WPD_META_GENRE_PHOTO_MONTAGE_VIDEO_FILE"
+	case WPD_META_GENRE_GENERIC_NON_AUDIO_NON_VIDEO:
+		return "WPD_META_GENRE_GENERIC_NON_AUDIO_NON_VIDEO"
+	case WPD_META_GENRE_AUDIO_PODCAST:
+		return "WPD_META_GENRE_AUDIO_PODCAST"
+	case WPD_META_GENRE_VIDEO_PODCAST:
+		return "WPD_META_GENRE_VIDEO_PODCAST"
+	case WPD_META_GENRE_MIXED_PODCAST:
+		return "WPD_META_GENRE_MIXED_PODCAST"
+	default:
+		return fmt.Sprintf("WPD_META_GENRES(%d)", int32(e))
+	}
+}
+
 // WPD_OPERATION_STATES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-operation-states
 type WPD_OPERATION_STATES int32
 
@@ -216,6 +568,29 @@ const (
 	WPD_OPERATION_STATE_ABORTED     WPD_OPERATION_STATES = 6
 )
 
+// String returns the WPD_OPERATION_STATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_OPERATION_STATES) String() string {
+	switch e {
+	case WPD_OPERATION_STATE_UNSPECIFIED:
+		return "WPD_OPERATION_STATE_UNSPECIFIED"
+	case WPD_OPERATION_STATE_STARTED:
+		return "WPD_OPERATION_STATE_STARTED"
+	case WPD_OPERATION_STATE_RUNNING:
+		return "WPD_OPERATION_STATE_RUNNING"
+	case WPD_OPERATION_STATE_PAUSED:
+		return "WPD_OPERATION_STATE_PAUSED"
+	case WPD_OPERATION_STATE_CANCELLED:
+		return "WPD_OPERATION_STATE_CANCELLED"
+	case WPD_OPERATION_STATE_FINISHED:
+		return "WPD_OPERATION_STATE_FINISHED"
+	case WPD_OPERATION_STATE_ABORTED:
+		return "WPD_OPERATION_STATE_ABORTED"
+	default:
+		return fmt.Sprintf("WPD_OPERATION_STATES(%d)", int32(e))
+	}
+}
+
 // WPD_PARAMETER_USAGE_TYPES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-parameter-usage-types
 type WPD_PARAMETER_USAGE_TYPES int32
 
@@ -226,6 +601,23 @@ const (
 	WPD_PARAMETER_USAGE_INOUT  WPD_PARAMETER_USAGE_TYPES = 3
 )
 
+// String returns the WPD_PARAMETER_USAGE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_PARAMETER_USAGE_TYPES) String() string {
+	switch e {
+	case WPD_PARAMETER_USAGE_RETURN:
+		return "WPD_PARAMETER_USAGE_RETURN"
+	case WPD_PARAMETER_USAGE_IN:
+		return "WPD_PARAMETER_USAGE_IN"
+	case WPD_PARAMETER_USAGE_OUT:
+		return "WPD_PARAMETER_USAGE_OUT"
+	case WPD_PARAMETER_USAGE_INOUT:
+		return "WPD_PARAMETER_USAGE_INOUT"
+	default:
+		return fmt.Sprintf("WPD_PARAMETER_USAGE_TYPES(%d)", int32(e))
+	}
+}
+
 // WPD_POWER_SOURCES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-power-sources
 type WPD_POWER_SOURCES int32
 
@@ -233,6 +625,19 @@ const (
 	WPD_POWER_SOURCE_BATTERY  WPD_POWER_SOURCES = 0
 	WPD_POWER_SOURCE_EXTERNAL WPD_POWER_SOURCES = 1
 )
+
+// String returns the WPD_POWER_SOURCES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_POWER_SOURCES) String() string {
+	switch e {
+	case WPD_POWER_SOURCE_BATTERY:
+		return "WPD_POWER_SOURCE_BATTERY"
+	case WPD_POWER_SOURCE_EXTERNAL:
+		return "WPD_POWER_SOURCE_EXTERNAL"
+	default:
+		return fmt.Sprintf("WPD_POWER_SOURCES(%d)", int32(e))
+	}
+}
 
 // WPD_RENDERING_INFORMATION_PROFILE_ENTRY_TYPES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-rendering-information-profile-entry-types
 type WPD_RENDERING_INFORMATION_PROFILE_ENTRY_TYPES int32
@@ -242,6 +647,19 @@ const (
 	WPD_RENDERING_INFORMATION_PROFILE_ENTRY_TYPE_RESOURCE WPD_RENDERING_INFORMATION_PROFILE_ENTRY_TYPES = 1
 )
 
+// String returns the WPD_RENDERING_INFORMATION_PROFILE_ENTRY_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_RENDERING_INFORMATION_PROFILE_ENTRY_TYPES) String() string {
+	switch e {
+	case WPD_RENDERING_INFORMATION_PROFILE_ENTRY_TYPE_OBJECT:
+		return "WPD_RENDERING_INFORMATION_PROFILE_ENTRY_TYPE_OBJECT"
+	case WPD_RENDERING_INFORMATION_PROFILE_ENTRY_TYPE_RESOURCE:
+		return "WPD_RENDERING_INFORMATION_PROFILE_ENTRY_TYPE_RESOURCE"
+	default:
+		return fmt.Sprintf("WPD_RENDERING_INFORMATION_PROFILE_ENTRY_TYPES(%d)", int32(e))
+	}
+}
+
 // WPD_SECTION_DATA_UNITS_VALUES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-section-data-units-values
 type WPD_SECTION_DATA_UNITS_VALUES int32
 
@@ -250,12 +668,36 @@ const (
 	WPD_SECTION_DATA_UNITS_MILLISECONDS WPD_SECTION_DATA_UNITS_VALUES = 1
 )
 
+// String returns the WPD_SECTION_DATA_UNITS_VALUES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_SECTION_DATA_UNITS_VALUES) String() string {
+	switch e {
+	case WPD_SECTION_DATA_UNITS_BYTES:
+		return "WPD_SECTION_DATA_UNITS_BYTES"
+	case WPD_SECTION_DATA_UNITS_MILLISECONDS:
+		return "WPD_SECTION_DATA_UNITS_MILLISECONDS"
+	default:
+		return fmt.Sprintf("WPD_SECTION_DATA_UNITS_VALUES(%d)", int32(e))
+	}
+}
+
 // WPD_SERVICE_INHERITANCE_TYPES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-service-inheritance-types2
 type WPD_SERVICE_INHERITANCE_TYPES int32
 
 const (
 	WPD_SERVICE_INHERITANCE_IMPLEMENTATION WPD_SERVICE_INHERITANCE_TYPES = 0
 )
+
+// String returns the WPD_SERVICE_INHERITANCE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_SERVICE_INHERITANCE_TYPES) String() string {
+	switch e {
+	case WPD_SERVICE_INHERITANCE_IMPLEMENTATION:
+		return "WPD_SERVICE_INHERITANCE_IMPLEMENTATION"
+	default:
+		return fmt.Sprintf("WPD_SERVICE_INHERITANCE_TYPES(%d)", int32(e))
+	}
+}
 
 // WPD_SMS_ENCODING_TYPES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-sms-encoding-types
 type WPD_SMS_ENCODING_TYPES int32
@@ -266,6 +708,21 @@ const (
 	SMS_ENCODING_UTF_16 WPD_SMS_ENCODING_TYPES = 2
 )
 
+// String returns the WPD_SMS_ENCODING_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_SMS_ENCODING_TYPES) String() string {
+	switch e {
+	case SMS_ENCODING_7_BIT:
+		return "SMS_ENCODING_7_BIT"
+	case SMS_ENCODING_8_BIT:
+		return "SMS_ENCODING_8_BIT"
+	case SMS_ENCODING_UTF_16:
+		return "SMS_ENCODING_UTF_16"
+	default:
+		return fmt.Sprintf("WPD_SMS_ENCODING_TYPES(%d)", int32(e))
+	}
+}
+
 type WPD_STORAGE_ACCESS_CAPABILITY_VALUES int32
 
 const (
@@ -273,6 +730,21 @@ const (
 	WPD_STORAGE_ACCESS_CAPABILITY_READ_ONLY_WITHOUT_OBJECT_DELETION WPD_STORAGE_ACCESS_CAPABILITY_VALUES = 1
 	WPD_STORAGE_ACCESS_CAPABILITY_READ_ONLY_WITH_OBJECT_DELETION    WPD_STORAGE_ACCESS_CAPABILITY_VALUES = 2
 )
+
+// String returns the WPD_STORAGE_ACCESS_CAPABILITY_VALUES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_STORAGE_ACCESS_CAPABILITY_VALUES) String() string {
+	switch e {
+	case WPD_STORAGE_ACCESS_CAPABILITY_READWRITE:
+		return "WPD_STORAGE_ACCESS_CAPABILITY_READWRITE"
+	case WPD_STORAGE_ACCESS_CAPABILITY_READ_ONLY_WITHOUT_OBJECT_DELETION:
+		return "WPD_STORAGE_ACCESS_CAPABILITY_READ_ONLY_WITHOUT_OBJECT_DELETION"
+	case WPD_STORAGE_ACCESS_CAPABILITY_READ_ONLY_WITH_OBJECT_DELETION:
+		return "WPD_STORAGE_ACCESS_CAPABILITY_READ_ONLY_WITH_OBJECT_DELETION"
+	default:
+		return fmt.Sprintf("WPD_STORAGE_ACCESS_CAPABILITY_VALUES(%d)", int32(e))
+	}
+}
 
 // WPD_STORAGE_TYPE_VALUES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-storage-type-values
 type WPD_STORAGE_TYPE_VALUES int32
@@ -285,6 +757,25 @@ const (
 	WPD_STORAGE_TYPE_REMOVABLE_RAM WPD_STORAGE_TYPE_VALUES = 4
 )
 
+// String returns the WPD_STORAGE_TYPE_VALUES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_STORAGE_TYPE_VALUES) String() string {
+	switch e {
+	case WPD_STORAGE_TYPE_UNDEFINED:
+		return "WPD_STORAGE_TYPE_UNDEFINED"
+	case WPD_STORAGE_TYPE_FIXED_ROM:
+		return "WPD_STORAGE_TYPE_FIXED_ROM"
+	case WPD_STORAGE_TYPE_REMOVABLE_ROM:
+		return "WPD_STORAGE_TYPE_REMOVABLE_ROM"
+	case WPD_STORAGE_TYPE_FIXED_RAM:
+		return "WPD_STORAGE_TYPE_FIXED_RAM"
+	case WPD_STORAGE_TYPE_REMOVABLE_RAM:
+		return "WPD_STORAGE_TYPE_REMOVABLE_RAM"
+	default:
+		return fmt.Sprintf("WPD_STORAGE_TYPE_VALUES(%d)", int32(e))
+	}
+}
+
 // WPD_STREAM_UNITS: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-stream-units
 type WPD_STREAM_UNITS int32
 
@@ -295,6 +786,25 @@ const (
 	WPD_STREAM_UNITS_MILLISECONDS WPD_STREAM_UNITS = 4
 	WPD_STREAM_UNITS_MICROSECONDS WPD_STREAM_UNITS = 8
 )
+
+// String returns the WPD_STREAM_UNITS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_STREAM_UNITS) String() string {
+	switch e {
+	case WPD_STREAM_UNITS_BYTES:
+		return "WPD_STREAM_UNITS_BYTES"
+	case WPD_STREAM_UNITS_FRAMES:
+		return "WPD_STREAM_UNITS_FRAMES"
+	case WPD_STREAM_UNITS_ROWS:
+		return "WPD_STREAM_UNITS_ROWS"
+	case WPD_STREAM_UNITS_MILLISECONDS:
+		return "WPD_STREAM_UNITS_MILLISECONDS"
+	case WPD_STREAM_UNITS_MICROSECONDS:
+		return "WPD_STREAM_UNITS_MICROSECONDS"
+	default:
+		return fmt.Sprintf("WPD_STREAM_UNITS(%d)", int32(e))
+	}
+}
 
 // WPD_VIDEO_SCAN_TYPES: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-video-scan-types
 type WPD_VIDEO_SCAN_TYPES int32
@@ -310,6 +820,31 @@ const (
 	WPD_VIDEO_SCAN_TYPE_MIXED_INTERLACE_AND_PROGRESSIVE WPD_VIDEO_SCAN_TYPES = 7
 )
 
+// String returns the WPD_VIDEO_SCAN_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_VIDEO_SCAN_TYPES) String() string {
+	switch e {
+	case WPD_VIDEO_SCAN_TYPE_UNUSED:
+		return "WPD_VIDEO_SCAN_TYPE_UNUSED"
+	case WPD_VIDEO_SCAN_TYPE_PROGRESSIVE:
+		return "WPD_VIDEO_SCAN_TYPE_PROGRESSIVE"
+	case WPD_VIDEO_SCAN_TYPE_FIELD_INTERLEAVED_UPPER_FIRST:
+		return "WPD_VIDEO_SCAN_TYPE_FIELD_INTERLEAVED_UPPER_FIRST"
+	case WPD_VIDEO_SCAN_TYPE_FIELD_INTERLEAVED_LOWER_FIRST:
+		return "WPD_VIDEO_SCAN_TYPE_FIELD_INTERLEAVED_LOWER_FIRST"
+	case WPD_VIDEO_SCAN_TYPE_FIELD_SINGLE_UPPER_FIRST:
+		return "WPD_VIDEO_SCAN_TYPE_FIELD_SINGLE_UPPER_FIRST"
+	case WPD_VIDEO_SCAN_TYPE_FIELD_SINGLE_LOWER_FIRST:
+		return "WPD_VIDEO_SCAN_TYPE_FIELD_SINGLE_LOWER_FIRST"
+	case WPD_VIDEO_SCAN_TYPE_MIXED_INTERLACE:
+		return "WPD_VIDEO_SCAN_TYPE_MIXED_INTERLACE"
+	case WPD_VIDEO_SCAN_TYPE_MIXED_INTERLACE_AND_PROGRESSIVE:
+		return "WPD_VIDEO_SCAN_TYPE_MIXED_INTERLACE_AND_PROGRESSIVE"
+	default:
+		return fmt.Sprintf("WPD_VIDEO_SCAN_TYPES(%d)", int32(e))
+	}
+}
+
 // WPD_WHITE_BALANCE_SETTINGS: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-white-balance-settings
 type WPD_WHITE_BALANCE_SETTINGS int32
 
@@ -324,6 +859,31 @@ const (
 	WPD_WHITE_BALANCE_FLASH              WPD_WHITE_BALANCE_SETTINGS = 7
 )
 
+// String returns the WPD_WHITE_BALANCE_SETTINGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPD_WHITE_BALANCE_SETTINGS) String() string {
+	switch e {
+	case WPD_WHITE_BALANCE_UNDEFINED:
+		return "WPD_WHITE_BALANCE_UNDEFINED"
+	case WPD_WHITE_BALANCE_MANUAL:
+		return "WPD_WHITE_BALANCE_MANUAL"
+	case WPD_WHITE_BALANCE_AUTOMATIC:
+		return "WPD_WHITE_BALANCE_AUTOMATIC"
+	case WPD_WHITE_BALANCE_ONE_PUSH_AUTOMATIC:
+		return "WPD_WHITE_BALANCE_ONE_PUSH_AUTOMATIC"
+	case WPD_WHITE_BALANCE_DAYLIGHT:
+		return "WPD_WHITE_BALANCE_DAYLIGHT"
+	case WPD_WHITE_BALANCE_FLORESCENT:
+		return "WPD_WHITE_BALANCE_FLORESCENT"
+	case WPD_WHITE_BALANCE_TUNGSTEN:
+		return "WPD_WHITE_BALANCE_TUNGSTEN"
+	case WPD_WHITE_BALANCE_FLASH:
+		return "WPD_WHITE_BALANCE_FLASH"
+	default:
+		return fmt.Sprintf("WPD_WHITE_BALANCE_SETTINGS(%d)", int32(e))
+	}
+}
+
 // WpdAttributeForm: https://learn.microsoft.com/windows/win32/wpd_sdk/wpdattributeform
 type WpdAttributeForm int32
 
@@ -335,6 +895,25 @@ const (
 	WPD_PROPERTY_ATTRIBUTE_FORM_OBJECT_IDENTIFIER  WpdAttributeForm = 4
 )
 
+// String returns the WpdAttributeForm constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WpdAttributeForm) String() string {
+	switch e {
+	case WPD_PROPERTY_ATTRIBUTE_FORM_UNSPECIFIED:
+		return "WPD_PROPERTY_ATTRIBUTE_FORM_UNSPECIFIED"
+	case WPD_PROPERTY_ATTRIBUTE_FORM_RANGE:
+		return "WPD_PROPERTY_ATTRIBUTE_FORM_RANGE"
+	case WPD_PROPERTY_ATTRIBUTE_FORM_ENUMERATION:
+		return "WPD_PROPERTY_ATTRIBUTE_FORM_ENUMERATION"
+	case WPD_PROPERTY_ATTRIBUTE_FORM_REGULAR_EXPRESSION:
+		return "WPD_PROPERTY_ATTRIBUTE_FORM_REGULAR_EXPRESSION"
+	case WPD_PROPERTY_ATTRIBUTE_FORM_OBJECT_IDENTIFIER:
+		return "WPD_PROPERTY_ATTRIBUTE_FORM_OBJECT_IDENTIFIER"
+	default:
+		return fmt.Sprintf("WpdAttributeForm(%d)", int32(e))
+	}
+}
+
 // WpdParameterAttributeForm: https://learn.microsoft.com/windows/win32/wpd_sdk/wpd-parameter-attribute-form
 type WpdParameterAttributeForm int32
 
@@ -345,3 +924,22 @@ const (
 	WPD_PARAMETER_ATTRIBUTE_FORM_REGULAR_EXPRESSION WpdParameterAttributeForm = 3
 	WPD_PARAMETER_ATTRIBUTE_FORM_OBJECT_IDENTIFIER  WpdParameterAttributeForm = 4
 )
+
+// String returns the WpdParameterAttributeForm constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WpdParameterAttributeForm) String() string {
+	switch e {
+	case WPD_PARAMETER_ATTRIBUTE_FORM_UNSPECIFIED:
+		return "WPD_PARAMETER_ATTRIBUTE_FORM_UNSPECIFIED"
+	case WPD_PARAMETER_ATTRIBUTE_FORM_RANGE:
+		return "WPD_PARAMETER_ATTRIBUTE_FORM_RANGE"
+	case WPD_PARAMETER_ATTRIBUTE_FORM_ENUMERATION:
+		return "WPD_PARAMETER_ATTRIBUTE_FORM_ENUMERATION"
+	case WPD_PARAMETER_ATTRIBUTE_FORM_REGULAR_EXPRESSION:
+		return "WPD_PARAMETER_ATTRIBUTE_FORM_REGULAR_EXPRESSION"
+	case WPD_PARAMETER_ATTRIBUTE_FORM_OBJECT_IDENTIFIER:
+		return "WPD_PARAMETER_ATTRIBUTE_FORM_OBJECT_IDENTIFIER"
+	default:
+		return fmt.Sprintf("WpdParameterAttributeForm(%d)", int32(e))
+	}
+}

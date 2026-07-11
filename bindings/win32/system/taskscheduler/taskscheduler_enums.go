@@ -4,6 +4,10 @@
 
 package taskscheduler
 
+import (
+	"fmt"
+)
+
 // TASKPAGE: https://learn.microsoft.com/windows/win32/api/mstask/ne-mstask-taskpage
 type TASKPAGE int32
 
@@ -12,6 +16,21 @@ const (
 	TASKPAGE_SCHEDULE TASKPAGE = 1
 	TASKPAGE_SETTINGS TASKPAGE = 2
 )
+
+// String returns the TASKPAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASKPAGE) String() string {
+	switch e {
+	case TASKPAGE_TASK:
+		return "TASKPAGE_TASK"
+	case TASKPAGE_SCHEDULE:
+		return "TASKPAGE_SCHEDULE"
+	case TASKPAGE_SETTINGS:
+		return "TASKPAGE_SETTINGS"
+	default:
+		return fmt.Sprintf("TASKPAGE(%d)", int32(e))
+	}
+}
 
 // TASK_ACTION_TYPE: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_action_type
 type TASK_ACTION_TYPE int32
@@ -22,6 +41,23 @@ const (
 	TASK_ACTION_SEND_EMAIL   TASK_ACTION_TYPE = 6
 	TASK_ACTION_SHOW_MESSAGE TASK_ACTION_TYPE = 7
 )
+
+// String returns the TASK_ACTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_ACTION_TYPE) String() string {
+	switch e {
+	case TASK_ACTION_EXEC:
+		return "TASK_ACTION_EXEC"
+	case TASK_ACTION_COM_HANDLER:
+		return "TASK_ACTION_COM_HANDLER"
+	case TASK_ACTION_SEND_EMAIL:
+		return "TASK_ACTION_SEND_EMAIL"
+	case TASK_ACTION_SHOW_MESSAGE:
+		return "TASK_ACTION_SHOW_MESSAGE"
+	default:
+		return fmt.Sprintf("TASK_ACTION_TYPE(%d)", int32(e))
+	}
+}
 
 // TASK_COMPATIBILITY: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_compatibility
 type TASK_COMPATIBILITY int32
@@ -36,6 +72,29 @@ const (
 	TASK_COMPATIBILITY_V2_4 TASK_COMPATIBILITY = 6
 )
 
+// String returns the TASK_COMPATIBILITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_COMPATIBILITY) String() string {
+	switch e {
+	case TASK_COMPATIBILITY_AT:
+		return "TASK_COMPATIBILITY_AT"
+	case TASK_COMPATIBILITY_V1:
+		return "TASK_COMPATIBILITY_V1"
+	case TASK_COMPATIBILITY_V2:
+		return "TASK_COMPATIBILITY_V2"
+	case TASK_COMPATIBILITY_V2_1:
+		return "TASK_COMPATIBILITY_V2_1"
+	case TASK_COMPATIBILITY_V2_2:
+		return "TASK_COMPATIBILITY_V2_2"
+	case TASK_COMPATIBILITY_V2_3:
+		return "TASK_COMPATIBILITY_V2_3"
+	case TASK_COMPATIBILITY_V2_4:
+		return "TASK_COMPATIBILITY_V2_4"
+	default:
+		return fmt.Sprintf("TASK_COMPATIBILITY(%d)", int32(e))
+	}
+}
+
 // TASK_CREATION: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_creation
 type TASK_CREATION int32
 
@@ -49,12 +108,46 @@ const (
 	TASK_IGNORE_REGISTRATION_TRIGGERS TASK_CREATION = 32
 )
 
+// String returns the TASK_CREATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_CREATION) String() string {
+	switch e {
+	case TASK_VALIDATE_ONLY:
+		return "TASK_VALIDATE_ONLY"
+	case TASK_CREATE:
+		return "TASK_CREATE"
+	case TASK_UPDATE:
+		return "TASK_UPDATE"
+	case TASK_CREATE_OR_UPDATE:
+		return "TASK_CREATE_OR_UPDATE"
+	case TASK_DISABLE:
+		return "TASK_DISABLE"
+	case TASK_DONT_ADD_PRINCIPAL_ACE:
+		return "TASK_DONT_ADD_PRINCIPAL_ACE"
+	case TASK_IGNORE_REGISTRATION_TRIGGERS:
+		return "TASK_IGNORE_REGISTRATION_TRIGGERS"
+	default:
+		return fmt.Sprintf("TASK_CREATION(%d)", int32(e))
+	}
+}
+
 // TASK_ENUM_FLAGS: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_enum_flags
 type TASK_ENUM_FLAGS int32
 
 const (
 	TASK_ENUM_HIDDEN TASK_ENUM_FLAGS = 1
 )
+
+// String returns the TASK_ENUM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_ENUM_FLAGS) String() string {
+	switch e {
+	case TASK_ENUM_HIDDEN:
+		return "TASK_ENUM_HIDDEN"
+	default:
+		return fmt.Sprintf("TASK_ENUM_FLAGS(%d)", int32(e))
+	}
+}
 
 // TASK_INSTANCES_POLICY: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_instances_policy
 type TASK_INSTANCES_POLICY int32
@@ -65,6 +158,23 @@ const (
 	TASK_INSTANCES_IGNORE_NEW    TASK_INSTANCES_POLICY = 2
 	TASK_INSTANCES_STOP_EXISTING TASK_INSTANCES_POLICY = 3
 )
+
+// String returns the TASK_INSTANCES_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_INSTANCES_POLICY) String() string {
+	switch e {
+	case TASK_INSTANCES_PARALLEL:
+		return "TASK_INSTANCES_PARALLEL"
+	case TASK_INSTANCES_QUEUE:
+		return "TASK_INSTANCES_QUEUE"
+	case TASK_INSTANCES_IGNORE_NEW:
+		return "TASK_INSTANCES_IGNORE_NEW"
+	case TASK_INSTANCES_STOP_EXISTING:
+		return "TASK_INSTANCES_STOP_EXISTING"
+	default:
+		return fmt.Sprintf("TASK_INSTANCES_POLICY(%d)", int32(e))
+	}
+}
 
 // TASK_LOGON_TYPE: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_logon_type
 type TASK_LOGON_TYPE int32
@@ -79,6 +189,29 @@ const (
 	TASK_LOGON_INTERACTIVE_TOKEN_OR_PASSWORD TASK_LOGON_TYPE = 6
 )
 
+// String returns the TASK_LOGON_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_LOGON_TYPE) String() string {
+	switch e {
+	case TASK_LOGON_NONE:
+		return "TASK_LOGON_NONE"
+	case TASK_LOGON_PASSWORD:
+		return "TASK_LOGON_PASSWORD"
+	case TASK_LOGON_S4U:
+		return "TASK_LOGON_S4U"
+	case TASK_LOGON_INTERACTIVE_TOKEN:
+		return "TASK_LOGON_INTERACTIVE_TOKEN"
+	case TASK_LOGON_GROUP:
+		return "TASK_LOGON_GROUP"
+	case TASK_LOGON_SERVICE_ACCOUNT:
+		return "TASK_LOGON_SERVICE_ACCOUNT"
+	case TASK_LOGON_INTERACTIVE_TOKEN_OR_PASSWORD:
+		return "TASK_LOGON_INTERACTIVE_TOKEN_OR_PASSWORD"
+	default:
+		return fmt.Sprintf("TASK_LOGON_TYPE(%d)", int32(e))
+	}
+}
+
 // TASK_PROCESSTOKENSID_TYPE: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_processtokensid_type
 type TASK_PROCESSTOKENSID_TYPE int32
 
@@ -88,6 +221,21 @@ const (
 	TASK_PROCESSTOKENSID_DEFAULT      TASK_PROCESSTOKENSID_TYPE = 2
 )
 
+// String returns the TASK_PROCESSTOKENSID_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_PROCESSTOKENSID_TYPE) String() string {
+	switch e {
+	case TASK_PROCESSTOKENSID_NONE:
+		return "TASK_PROCESSTOKENSID_NONE"
+	case TASK_PROCESSTOKENSID_UNRESTRICTED:
+		return "TASK_PROCESSTOKENSID_UNRESTRICTED"
+	case TASK_PROCESSTOKENSID_DEFAULT:
+		return "TASK_PROCESSTOKENSID_DEFAULT"
+	default:
+		return fmt.Sprintf("TASK_PROCESSTOKENSID_TYPE(%d)", int32(e))
+	}
+}
+
 // TASK_RUNLEVEL_TYPE: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_runlevel_type
 type TASK_RUNLEVEL_TYPE int32
 
@@ -95,6 +243,19 @@ const (
 	TASK_RUNLEVEL_LUA     TASK_RUNLEVEL_TYPE = 0
 	TASK_RUNLEVEL_HIGHEST TASK_RUNLEVEL_TYPE = 1
 )
+
+// String returns the TASK_RUNLEVEL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_RUNLEVEL_TYPE) String() string {
+	switch e {
+	case TASK_RUNLEVEL_LUA:
+		return "TASK_RUNLEVEL_LUA"
+	case TASK_RUNLEVEL_HIGHEST:
+		return "TASK_RUNLEVEL_HIGHEST"
+	default:
+		return fmt.Sprintf("TASK_RUNLEVEL_TYPE(%d)", int32(e))
+	}
+}
 
 // TASK_RUN_FLAGS: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_run_flags
 type TASK_RUN_FLAGS int32
@@ -106,6 +267,25 @@ const (
 	TASK_RUN_USE_SESSION_ID     TASK_RUN_FLAGS = 4
 	TASK_RUN_USER_SID           TASK_RUN_FLAGS = 8
 )
+
+// String returns the TASK_RUN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_RUN_FLAGS) String() string {
+	switch e {
+	case TASK_RUN_NO_FLAGS:
+		return "TASK_RUN_NO_FLAGS"
+	case TASK_RUN_AS_SELF:
+		return "TASK_RUN_AS_SELF"
+	case TASK_RUN_IGNORE_CONSTRAINTS:
+		return "TASK_RUN_IGNORE_CONSTRAINTS"
+	case TASK_RUN_USE_SESSION_ID:
+		return "TASK_RUN_USE_SESSION_ID"
+	case TASK_RUN_USER_SID:
+		return "TASK_RUN_USER_SID"
+	default:
+		return fmt.Sprintf("TASK_RUN_FLAGS(%d)", int32(e))
+	}
+}
 
 // TASK_SESSION_STATE_CHANGE_TYPE: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_session_state_change_type
 type TASK_SESSION_STATE_CHANGE_TYPE int32
@@ -119,6 +299,27 @@ const (
 	TASK_SESSION_UNLOCK     TASK_SESSION_STATE_CHANGE_TYPE = 8
 )
 
+// String returns the TASK_SESSION_STATE_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_SESSION_STATE_CHANGE_TYPE) String() string {
+	switch e {
+	case TASK_CONSOLE_CONNECT:
+		return "TASK_CONSOLE_CONNECT"
+	case TASK_CONSOLE_DISCONNECT:
+		return "TASK_CONSOLE_DISCONNECT"
+	case TASK_REMOTE_CONNECT:
+		return "TASK_REMOTE_CONNECT"
+	case TASK_REMOTE_DISCONNECT:
+		return "TASK_REMOTE_DISCONNECT"
+	case TASK_SESSION_LOCK:
+		return "TASK_SESSION_LOCK"
+	case TASK_SESSION_UNLOCK:
+		return "TASK_SESSION_UNLOCK"
+	default:
+		return fmt.Sprintf("TASK_SESSION_STATE_CHANGE_TYPE(%d)", int32(e))
+	}
+}
+
 // TASK_STATE: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_state
 type TASK_STATE int32
 
@@ -129,6 +330,25 @@ const (
 	TASK_STATE_READY    TASK_STATE = 3
 	TASK_STATE_RUNNING  TASK_STATE = 4
 )
+
+// String returns the TASK_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_STATE) String() string {
+	switch e {
+	case TASK_STATE_UNKNOWN:
+		return "TASK_STATE_UNKNOWN"
+	case TASK_STATE_DISABLED:
+		return "TASK_STATE_DISABLED"
+	case TASK_STATE_QUEUED:
+		return "TASK_STATE_QUEUED"
+	case TASK_STATE_READY:
+		return "TASK_STATE_READY"
+	case TASK_STATE_RUNNING:
+		return "TASK_STATE_RUNNING"
+	default:
+		return fmt.Sprintf("TASK_STATE(%d)", int32(e))
+	}
+}
 
 // TASK_TRIGGER_TYPE: https://learn.microsoft.com/windows/win32/api/mstask/ne-mstask-task_trigger_type
 type TASK_TRIGGER_TYPE int32
@@ -143,6 +363,31 @@ const (
 	TASK_EVENT_TRIGGER_AT_SYSTEMSTART TASK_TRIGGER_TYPE = 6
 	TASK_EVENT_TRIGGER_AT_LOGON       TASK_TRIGGER_TYPE = 7
 )
+
+// String returns the TASK_TRIGGER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_TRIGGER_TYPE) String() string {
+	switch e {
+	case TASK_TIME_TRIGGER_ONCE:
+		return "TASK_TIME_TRIGGER_ONCE"
+	case TASK_TIME_TRIGGER_DAILY:
+		return "TASK_TIME_TRIGGER_DAILY"
+	case TASK_TIME_TRIGGER_WEEKLY:
+		return "TASK_TIME_TRIGGER_WEEKLY"
+	case TASK_TIME_TRIGGER_MONTHLYDATE:
+		return "TASK_TIME_TRIGGER_MONTHLYDATE"
+	case TASK_TIME_TRIGGER_MONTHLYDOW:
+		return "TASK_TIME_TRIGGER_MONTHLYDOW"
+	case TASK_EVENT_TRIGGER_ON_IDLE:
+		return "TASK_EVENT_TRIGGER_ON_IDLE"
+	case TASK_EVENT_TRIGGER_AT_SYSTEMSTART:
+		return "TASK_EVENT_TRIGGER_AT_SYSTEMSTART"
+	case TASK_EVENT_TRIGGER_AT_LOGON:
+		return "TASK_EVENT_TRIGGER_AT_LOGON"
+	default:
+		return fmt.Sprintf("TASK_TRIGGER_TYPE(%d)", int32(e))
+	}
+}
 
 // TASK_TRIGGER_TYPE2: https://learn.microsoft.com/windows/win32/api/taskschd/ne-taskschd-task_trigger_type2
 type TASK_TRIGGER_TYPE2 int32
@@ -161,3 +406,36 @@ const (
 	TASK_TRIGGER_SESSION_STATE_CHANGE TASK_TRIGGER_TYPE2 = 11
 	TASK_TRIGGER_CUSTOM_TRIGGER_01    TASK_TRIGGER_TYPE2 = 12
 )
+
+// String returns the TASK_TRIGGER_TYPE2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASK_TRIGGER_TYPE2) String() string {
+	switch e {
+	case TASK_TRIGGER_EVENT:
+		return "TASK_TRIGGER_EVENT"
+	case TASK_TRIGGER_TIME:
+		return "TASK_TRIGGER_TIME"
+	case TASK_TRIGGER_DAILY:
+		return "TASK_TRIGGER_DAILY"
+	case TASK_TRIGGER_WEEKLY:
+		return "TASK_TRIGGER_WEEKLY"
+	case TASK_TRIGGER_MONTHLY:
+		return "TASK_TRIGGER_MONTHLY"
+	case TASK_TRIGGER_MONTHLYDOW:
+		return "TASK_TRIGGER_MONTHLYDOW"
+	case TASK_TRIGGER_IDLE:
+		return "TASK_TRIGGER_IDLE"
+	case TASK_TRIGGER_REGISTRATION:
+		return "TASK_TRIGGER_REGISTRATION"
+	case TASK_TRIGGER_BOOT:
+		return "TASK_TRIGGER_BOOT"
+	case TASK_TRIGGER_LOGON:
+		return "TASK_TRIGGER_LOGON"
+	case TASK_TRIGGER_SESSION_STATE_CHANGE:
+		return "TASK_TRIGGER_SESSION_STATE_CHANGE"
+	case TASK_TRIGGER_CUSTOM_TRIGGER_01:
+		return "TASK_TRIGGER_CUSTOM_TRIGGER_01"
+	default:
+		return fmt.Sprintf("TASK_TRIGGER_TYPE2(%d)", int32(e))
+	}
+}

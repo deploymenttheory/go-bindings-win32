@@ -4,6 +4,10 @@
 
 package gdiplus
 
+import (
+	"fmt"
+)
+
 type BrushType int32
 
 const (
@@ -13,6 +17,25 @@ const (
 	BrushTypePathGradient   BrushType = 3
 	BrushTypeLinearGradient BrushType = 4
 )
+
+// String returns the BrushType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BrushType) String() string {
+	switch e {
+	case BrushTypeSolidColor:
+		return "BrushTypeSolidColor"
+	case BrushTypeHatchFill:
+		return "BrushTypeHatchFill"
+	case BrushTypeTextureFill:
+		return "BrushTypeTextureFill"
+	case BrushTypePathGradient:
+		return "BrushTypePathGradient"
+	case BrushTypeLinearGradient:
+		return "BrushTypeLinearGradient"
+	default:
+		return fmt.Sprintf("BrushType(%d)", int32(e))
+	}
+}
 
 type ColorAdjustType int32
 
@@ -26,6 +49,29 @@ const (
 	ColorAdjustTypeAny     ColorAdjustType = 6
 )
 
+// String returns the ColorAdjustType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ColorAdjustType) String() string {
+	switch e {
+	case ColorAdjustTypeDefault:
+		return "ColorAdjustTypeDefault"
+	case ColorAdjustTypeBitmap:
+		return "ColorAdjustTypeBitmap"
+	case ColorAdjustTypeBrush:
+		return "ColorAdjustTypeBrush"
+	case ColorAdjustTypePen:
+		return "ColorAdjustTypePen"
+	case ColorAdjustTypeText:
+		return "ColorAdjustTypeText"
+	case ColorAdjustTypeCount:
+		return "ColorAdjustTypeCount"
+	case ColorAdjustTypeAny:
+		return "ColorAdjustTypeAny"
+	default:
+		return fmt.Sprintf("ColorAdjustType(%d)", int32(e))
+	}
+}
+
 type ColorChannelFlags int32
 
 const (
@@ -36,6 +82,25 @@ const (
 	ColorChannelFlagsLast ColorChannelFlags = 4
 )
 
+// String returns the ColorChannelFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ColorChannelFlags) String() string {
+	switch e {
+	case ColorChannelFlagsC:
+		return "ColorChannelFlagsC"
+	case ColorChannelFlagsM:
+		return "ColorChannelFlagsM"
+	case ColorChannelFlagsY:
+		return "ColorChannelFlagsY"
+	case ColorChannelFlagsK:
+		return "ColorChannelFlagsK"
+	case ColorChannelFlagsLast:
+		return "ColorChannelFlagsLast"
+	default:
+		return fmt.Sprintf("ColorChannelFlags(%d)", int32(e))
+	}
+}
+
 type ColorMatrixFlags int32
 
 const (
@@ -44,12 +109,40 @@ const (
 	ColorMatrixFlagsAltGray   ColorMatrixFlags = 2
 )
 
+// String returns the ColorMatrixFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ColorMatrixFlags) String() string {
+	switch e {
+	case ColorMatrixFlagsDefault:
+		return "ColorMatrixFlagsDefault"
+	case ColorMatrixFlagsSkipGrays:
+		return "ColorMatrixFlagsSkipGrays"
+	case ColorMatrixFlagsAltGray:
+		return "ColorMatrixFlagsAltGray"
+	default:
+		return fmt.Sprintf("ColorMatrixFlags(%d)", int32(e))
+	}
+}
+
 type ColorMode int32
 
 const (
 	ColorModeARGB32 ColorMode = 0
 	ColorModeARGB64 ColorMode = 1
 )
+
+// String returns the ColorMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ColorMode) String() string {
+	switch e {
+	case ColorModeARGB32:
+		return "ColorModeARGB32"
+	case ColorModeARGB64:
+		return "ColorModeARGB64"
+	default:
+		return fmt.Sprintf("ColorMode(%d)", int32(e))
+	}
+}
 
 type CombineMode int32
 
@@ -62,12 +155,46 @@ const (
 	CombineModeComplement CombineMode = 5
 )
 
+// String returns the CombineMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CombineMode) String() string {
+	switch e {
+	case CombineModeReplace:
+		return "CombineModeReplace"
+	case CombineModeIntersect:
+		return "CombineModeIntersect"
+	case CombineModeUnion:
+		return "CombineModeUnion"
+	case CombineModeXor:
+		return "CombineModeXor"
+	case CombineModeExclude:
+		return "CombineModeExclude"
+	case CombineModeComplement:
+		return "CombineModeComplement"
+	default:
+		return fmt.Sprintf("CombineMode(%d)", int32(e))
+	}
+}
+
 type CompositingMode int32
 
 const (
 	CompositingModeSourceOver CompositingMode = 0
 	CompositingModeSourceCopy CompositingMode = 1
 )
+
+// String returns the CompositingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CompositingMode) String() string {
+	switch e {
+	case CompositingModeSourceOver:
+		return "CompositingModeSourceOver"
+	case CompositingModeSourceCopy:
+		return "CompositingModeSourceCopy"
+	default:
+		return fmt.Sprintf("CompositingMode(%d)", int32(e))
+	}
+}
 
 type CompositingQuality int32
 
@@ -80,6 +207,27 @@ const (
 	CompositingQualityAssumeLinear   CompositingQuality = 4
 )
 
+// String returns the CompositingQuality constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CompositingQuality) String() string {
+	switch e {
+	case CompositingQualityInvalid:
+		return "CompositingQualityInvalid"
+	case CompositingQualityDefault:
+		return "CompositingQualityDefault"
+	case CompositingQualityHighSpeed:
+		return "CompositingQualityHighSpeed"
+	case CompositingQualityHighQuality:
+		return "CompositingQualityHighQuality"
+	case CompositingQualityGammaCorrected:
+		return "CompositingQualityGammaCorrected"
+	case CompositingQualityAssumeLinear:
+		return "CompositingQualityAssumeLinear"
+	default:
+		return fmt.Sprintf("CompositingQuality(%d)", int32(e))
+	}
+}
+
 type ConvertToEmfPlusFlags int32
 
 const (
@@ -89,6 +237,23 @@ const (
 	ConvertToEmfPlusFlagsInvalidRecord ConvertToEmfPlusFlags = 4
 )
 
+// String returns the ConvertToEmfPlusFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ConvertToEmfPlusFlags) String() string {
+	switch e {
+	case ConvertToEmfPlusFlagsDefault:
+		return "ConvertToEmfPlusFlagsDefault"
+	case ConvertToEmfPlusFlagsRopUsed:
+		return "ConvertToEmfPlusFlagsRopUsed"
+	case ConvertToEmfPlusFlagsText:
+		return "ConvertToEmfPlusFlagsText"
+	case ConvertToEmfPlusFlagsInvalidRecord:
+		return "ConvertToEmfPlusFlagsInvalidRecord"
+	default:
+		return fmt.Sprintf("ConvertToEmfPlusFlags(%d)", int32(e))
+	}
+}
+
 type CoordinateSpace int32
 
 const (
@@ -96,6 +261,21 @@ const (
 	CoordinateSpacePage   CoordinateSpace = 1
 	CoordinateSpaceDevice CoordinateSpace = 2
 )
+
+// String returns the CoordinateSpace constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CoordinateSpace) String() string {
+	switch e {
+	case CoordinateSpaceWorld:
+		return "CoordinateSpaceWorld"
+	case CoordinateSpacePage:
+		return "CoordinateSpacePage"
+	case CoordinateSpaceDevice:
+		return "CoordinateSpaceDevice"
+	default:
+		return fmt.Sprintf("CoordinateSpace(%d)", int32(e))
+	}
+}
 
 type CurveAdjustments int32
 
@@ -110,6 +290,31 @@ const (
 	AdjustBlackSaturation CurveAdjustments = 7
 )
 
+// String returns the CurveAdjustments constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CurveAdjustments) String() string {
+	switch e {
+	case AdjustExposure:
+		return "AdjustExposure"
+	case AdjustDensity:
+		return "AdjustDensity"
+	case AdjustContrast:
+		return "AdjustContrast"
+	case AdjustHighlight:
+		return "AdjustHighlight"
+	case AdjustShadow:
+		return "AdjustShadow"
+	case AdjustMidtone:
+		return "AdjustMidtone"
+	case AdjustWhiteSaturation:
+		return "AdjustWhiteSaturation"
+	case AdjustBlackSaturation:
+		return "AdjustBlackSaturation"
+	default:
+		return fmt.Sprintf("CurveAdjustments(%d)", int32(e))
+	}
+}
+
 type CurveChannel int32
 
 const (
@@ -119,12 +324,42 @@ const (
 	CurveChannelBlue  CurveChannel = 3
 )
 
+// String returns the CurveChannel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CurveChannel) String() string {
+	switch e {
+	case CurveChannelAll:
+		return "CurveChannelAll"
+	case CurveChannelRed:
+		return "CurveChannelRed"
+	case CurveChannelGreen:
+		return "CurveChannelGreen"
+	case CurveChannelBlue:
+		return "CurveChannelBlue"
+	default:
+		return fmt.Sprintf("CurveChannel(%d)", int32(e))
+	}
+}
+
 type CustomLineCapType int32
 
 const (
 	CustomLineCapTypeDefault         CustomLineCapType = 0
 	CustomLineCapTypeAdjustableArrow CustomLineCapType = 1
 )
+
+// String returns the CustomLineCapType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CustomLineCapType) String() string {
+	switch e {
+	case CustomLineCapTypeDefault:
+		return "CustomLineCapTypeDefault"
+	case CustomLineCapTypeAdjustableArrow:
+		return "CustomLineCapTypeAdjustableArrow"
+	default:
+		return fmt.Sprintf("CustomLineCapType(%d)", int32(e))
+	}
+}
 
 type DashCap int32
 
@@ -133,6 +368,21 @@ const (
 	DashCapRound    DashCap = 2
 	DashCapTriangle DashCap = 3
 )
+
+// String returns the DashCap constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DashCap) String() string {
+	switch e {
+	case DashCapFlat:
+		return "DashCapFlat"
+	case DashCapRound:
+		return "DashCapRound"
+	case DashCapTriangle:
+		return "DashCapTriangle"
+	default:
+		return fmt.Sprintf("DashCap(%d)", int32(e))
+	}
+}
 
 type DashStyle int32
 
@@ -145,12 +395,46 @@ const (
 	DashStyleCustom     DashStyle = 5
 )
 
+// String returns the DashStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DashStyle) String() string {
+	switch e {
+	case DashStyleSolid:
+		return "DashStyleSolid"
+	case DashStyleDash:
+		return "DashStyleDash"
+	case DashStyleDot:
+		return "DashStyleDot"
+	case DashStyleDashDot:
+		return "DashStyleDashDot"
+	case DashStyleDashDotDot:
+		return "DashStyleDashDotDot"
+	case DashStyleCustom:
+		return "DashStyleCustom"
+	default:
+		return fmt.Sprintf("DashStyle(%d)", int32(e))
+	}
+}
+
 type DebugEventLevel int32
 
 const (
 	DebugEventLevelFatal   DebugEventLevel = 0
 	DebugEventLevelWarning DebugEventLevel = 1
 )
+
+// String returns the DebugEventLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DebugEventLevel) String() string {
+	switch e {
+	case DebugEventLevelFatal:
+		return "DebugEventLevelFatal"
+	case DebugEventLevelWarning:
+		return "DebugEventLevelWarning"
+	default:
+		return fmt.Sprintf("DebugEventLevel(%d)", int32(e))
+	}
+}
 
 type DitherType int32
 
@@ -168,6 +452,37 @@ const (
 	DitherTypeMax            DitherType = 10
 )
 
+// String returns the DitherType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DitherType) String() string {
+	switch e {
+	case DitherTypeNone:
+		return "DitherTypeNone"
+	case DitherTypeSolid:
+		return "DitherTypeSolid"
+	case DitherTypeOrdered4x4:
+		return "DitherTypeOrdered4x4"
+	case DitherTypeOrdered8x8:
+		return "DitherTypeOrdered8x8"
+	case DitherTypeOrdered16x16:
+		return "DitherTypeOrdered16x16"
+	case DitherTypeSpiral4x4:
+		return "DitherTypeSpiral4x4"
+	case DitherTypeSpiral8x8:
+		return "DitherTypeSpiral8x8"
+	case DitherTypeDualSpiral4x4:
+		return "DitherTypeDualSpiral4x4"
+	case DitherTypeDualSpiral8x8:
+		return "DitherTypeDualSpiral8x8"
+	case DitherTypeErrorDiffusion:
+		return "DitherTypeErrorDiffusion"
+	case DitherTypeMax:
+		return "DitherTypeMax"
+	default:
+		return fmt.Sprintf("DitherType(%d)", int32(e))
+	}
+}
+
 type DriverStringOptions int32
 
 const (
@@ -176,6 +491,23 @@ const (
 	DriverStringOptionsRealizedAdvance DriverStringOptions = 4
 	DriverStringOptionsLimitSubpixel   DriverStringOptions = 8
 )
+
+// String returns the DriverStringOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DriverStringOptions) String() string {
+	switch e {
+	case DriverStringOptionsCmapLookup:
+		return "DriverStringOptionsCmapLookup"
+	case DriverStringOptionsVertical:
+		return "DriverStringOptionsVertical"
+	case DriverStringOptionsRealizedAdvance:
+		return "DriverStringOptionsRealizedAdvance"
+	case DriverStringOptionsLimitSubpixel:
+		return "DriverStringOptionsLimitSubpixel"
+	default:
+		return fmt.Sprintf("DriverStringOptions(%d)", int32(e))
+	}
+}
 
 type EmfPlusRecordType int32
 
@@ -447,6 +779,537 @@ const (
 	EmfPlusRecordTypeMin                     EmfPlusRecordType = 16385
 )
 
+// String returns the EmfPlusRecordType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EmfPlusRecordType) String() string {
+	switch e {
+	case WmfRecordTypeSetBkColor:
+		return "WmfRecordTypeSetBkColor"
+	case WmfRecordTypeSetBkMode:
+		return "WmfRecordTypeSetBkMode"
+	case WmfRecordTypeSetMapMode:
+		return "WmfRecordTypeSetMapMode"
+	case WmfRecordTypeSetROP2:
+		return "WmfRecordTypeSetROP2"
+	case WmfRecordTypeSetRelAbs:
+		return "WmfRecordTypeSetRelAbs"
+	case WmfRecordTypeSetPolyFillMode:
+		return "WmfRecordTypeSetPolyFillMode"
+	case WmfRecordTypeSetStretchBltMode:
+		return "WmfRecordTypeSetStretchBltMode"
+	case WmfRecordTypeSetTextCharExtra:
+		return "WmfRecordTypeSetTextCharExtra"
+	case WmfRecordTypeSetTextColor:
+		return "WmfRecordTypeSetTextColor"
+	case WmfRecordTypeSetTextJustification:
+		return "WmfRecordTypeSetTextJustification"
+	case WmfRecordTypeSetWindowOrg:
+		return "WmfRecordTypeSetWindowOrg"
+	case WmfRecordTypeSetWindowExt:
+		return "WmfRecordTypeSetWindowExt"
+	case WmfRecordTypeSetViewportOrg:
+		return "WmfRecordTypeSetViewportOrg"
+	case WmfRecordTypeSetViewportExt:
+		return "WmfRecordTypeSetViewportExt"
+	case WmfRecordTypeOffsetWindowOrg:
+		return "WmfRecordTypeOffsetWindowOrg"
+	case WmfRecordTypeScaleWindowExt:
+		return "WmfRecordTypeScaleWindowExt"
+	case WmfRecordTypeOffsetViewportOrg:
+		return "WmfRecordTypeOffsetViewportOrg"
+	case WmfRecordTypeScaleViewportExt:
+		return "WmfRecordTypeScaleViewportExt"
+	case WmfRecordTypeLineTo:
+		return "WmfRecordTypeLineTo"
+	case WmfRecordTypeMoveTo:
+		return "WmfRecordTypeMoveTo"
+	case WmfRecordTypeExcludeClipRect:
+		return "WmfRecordTypeExcludeClipRect"
+	case WmfRecordTypeIntersectClipRect:
+		return "WmfRecordTypeIntersectClipRect"
+	case WmfRecordTypeArc:
+		return "WmfRecordTypeArc"
+	case WmfRecordTypeEllipse:
+		return "WmfRecordTypeEllipse"
+	case WmfRecordTypeFloodFill:
+		return "WmfRecordTypeFloodFill"
+	case WmfRecordTypePie:
+		return "WmfRecordTypePie"
+	case WmfRecordTypeRectangle:
+		return "WmfRecordTypeRectangle"
+	case WmfRecordTypeRoundRect:
+		return "WmfRecordTypeRoundRect"
+	case WmfRecordTypePatBlt:
+		return "WmfRecordTypePatBlt"
+	case WmfRecordTypeSaveDC:
+		return "WmfRecordTypeSaveDC"
+	case WmfRecordTypeSetPixel:
+		return "WmfRecordTypeSetPixel"
+	case WmfRecordTypeOffsetClipRgn:
+		return "WmfRecordTypeOffsetClipRgn"
+	case WmfRecordTypeTextOut:
+		return "WmfRecordTypeTextOut"
+	case WmfRecordTypeBitBlt:
+		return "WmfRecordTypeBitBlt"
+	case WmfRecordTypeStretchBlt:
+		return "WmfRecordTypeStretchBlt"
+	case WmfRecordTypePolygon:
+		return "WmfRecordTypePolygon"
+	case WmfRecordTypePolyline:
+		return "WmfRecordTypePolyline"
+	case WmfRecordTypeEscape:
+		return "WmfRecordTypeEscape"
+	case WmfRecordTypeRestoreDC:
+		return "WmfRecordTypeRestoreDC"
+	case WmfRecordTypeFillRegion:
+		return "WmfRecordTypeFillRegion"
+	case WmfRecordTypeFrameRegion:
+		return "WmfRecordTypeFrameRegion"
+	case WmfRecordTypeInvertRegion:
+		return "WmfRecordTypeInvertRegion"
+	case WmfRecordTypePaintRegion:
+		return "WmfRecordTypePaintRegion"
+	case WmfRecordTypeSelectClipRegion:
+		return "WmfRecordTypeSelectClipRegion"
+	case WmfRecordTypeSelectObject:
+		return "WmfRecordTypeSelectObject"
+	case WmfRecordTypeSetTextAlign:
+		return "WmfRecordTypeSetTextAlign"
+	case WmfRecordTypeDrawText:
+		return "WmfRecordTypeDrawText"
+	case WmfRecordTypeChord:
+		return "WmfRecordTypeChord"
+	case WmfRecordTypeSetMapperFlags:
+		return "WmfRecordTypeSetMapperFlags"
+	case WmfRecordTypeExtTextOut:
+		return "WmfRecordTypeExtTextOut"
+	case WmfRecordTypeSetDIBToDev:
+		return "WmfRecordTypeSetDIBToDev"
+	case WmfRecordTypeSelectPalette:
+		return "WmfRecordTypeSelectPalette"
+	case WmfRecordTypeRealizePalette:
+		return "WmfRecordTypeRealizePalette"
+	case WmfRecordTypeAnimatePalette:
+		return "WmfRecordTypeAnimatePalette"
+	case WmfRecordTypeSetPalEntries:
+		return "WmfRecordTypeSetPalEntries"
+	case WmfRecordTypePolyPolygon:
+		return "WmfRecordTypePolyPolygon"
+	case WmfRecordTypeResizePalette:
+		return "WmfRecordTypeResizePalette"
+	case WmfRecordTypeDIBBitBlt:
+		return "WmfRecordTypeDIBBitBlt"
+	case WmfRecordTypeDIBStretchBlt:
+		return "WmfRecordTypeDIBStretchBlt"
+	case WmfRecordTypeDIBCreatePatternBrush:
+		return "WmfRecordTypeDIBCreatePatternBrush"
+	case WmfRecordTypeStretchDIB:
+		return "WmfRecordTypeStretchDIB"
+	case WmfRecordTypeExtFloodFill:
+		return "WmfRecordTypeExtFloodFill"
+	case WmfRecordTypeSetLayout:
+		return "WmfRecordTypeSetLayout"
+	case WmfRecordTypeResetDC:
+		return "WmfRecordTypeResetDC"
+	case WmfRecordTypeStartDoc:
+		return "WmfRecordTypeStartDoc"
+	case WmfRecordTypeStartPage:
+		return "WmfRecordTypeStartPage"
+	case WmfRecordTypeEndPage:
+		return "WmfRecordTypeEndPage"
+	case WmfRecordTypeAbortDoc:
+		return "WmfRecordTypeAbortDoc"
+	case WmfRecordTypeEndDoc:
+		return "WmfRecordTypeEndDoc"
+	case WmfRecordTypeDeleteObject:
+		return "WmfRecordTypeDeleteObject"
+	case WmfRecordTypeCreatePalette:
+		return "WmfRecordTypeCreatePalette"
+	case WmfRecordTypeCreateBrush:
+		return "WmfRecordTypeCreateBrush"
+	case WmfRecordTypeCreatePatternBrush:
+		return "WmfRecordTypeCreatePatternBrush"
+	case WmfRecordTypeCreatePenIndirect:
+		return "WmfRecordTypeCreatePenIndirect"
+	case WmfRecordTypeCreateFontIndirect:
+		return "WmfRecordTypeCreateFontIndirect"
+	case WmfRecordTypeCreateBrushIndirect:
+		return "WmfRecordTypeCreateBrushIndirect"
+	case WmfRecordTypeCreateBitmapIndirect:
+		return "WmfRecordTypeCreateBitmapIndirect"
+	case WmfRecordTypeCreateBitmap:
+		return "WmfRecordTypeCreateBitmap"
+	case WmfRecordTypeCreateRegion:
+		return "WmfRecordTypeCreateRegion"
+	case EmfRecordTypeHeader:
+		return "EmfRecordTypeHeader"
+	case EmfRecordTypePolyBezier:
+		return "EmfRecordTypePolyBezier"
+	case EmfRecordTypePolygon:
+		return "EmfRecordTypePolygon"
+	case EmfRecordTypePolyline:
+		return "EmfRecordTypePolyline"
+	case EmfRecordTypePolyBezierTo:
+		return "EmfRecordTypePolyBezierTo"
+	case EmfRecordTypePolyLineTo:
+		return "EmfRecordTypePolyLineTo"
+	case EmfRecordTypePolyPolyline:
+		return "EmfRecordTypePolyPolyline"
+	case EmfRecordTypePolyPolygon:
+		return "EmfRecordTypePolyPolygon"
+	case EmfRecordTypeSetWindowExtEx:
+		return "EmfRecordTypeSetWindowExtEx"
+	case EmfRecordTypeSetWindowOrgEx:
+		return "EmfRecordTypeSetWindowOrgEx"
+	case EmfRecordTypeSetViewportExtEx:
+		return "EmfRecordTypeSetViewportExtEx"
+	case EmfRecordTypeSetViewportOrgEx:
+		return "EmfRecordTypeSetViewportOrgEx"
+	case EmfRecordTypeSetBrushOrgEx:
+		return "EmfRecordTypeSetBrushOrgEx"
+	case EmfRecordTypeEOF:
+		return "EmfRecordTypeEOF"
+	case EmfRecordTypeSetPixelV:
+		return "EmfRecordTypeSetPixelV"
+	case EmfRecordTypeSetMapperFlags:
+		return "EmfRecordTypeSetMapperFlags"
+	case EmfRecordTypeSetMapMode:
+		return "EmfRecordTypeSetMapMode"
+	case EmfRecordTypeSetBkMode:
+		return "EmfRecordTypeSetBkMode"
+	case EmfRecordTypeSetPolyFillMode:
+		return "EmfRecordTypeSetPolyFillMode"
+	case EmfRecordTypeSetROP2:
+		return "EmfRecordTypeSetROP2"
+	case EmfRecordTypeSetStretchBltMode:
+		return "EmfRecordTypeSetStretchBltMode"
+	case EmfRecordTypeSetTextAlign:
+		return "EmfRecordTypeSetTextAlign"
+	case EmfRecordTypeSetColorAdjustment:
+		return "EmfRecordTypeSetColorAdjustment"
+	case EmfRecordTypeSetTextColor:
+		return "EmfRecordTypeSetTextColor"
+	case EmfRecordTypeSetBkColor:
+		return "EmfRecordTypeSetBkColor"
+	case EmfRecordTypeOffsetClipRgn:
+		return "EmfRecordTypeOffsetClipRgn"
+	case EmfRecordTypeMoveToEx:
+		return "EmfRecordTypeMoveToEx"
+	case EmfRecordTypeSetMetaRgn:
+		return "EmfRecordTypeSetMetaRgn"
+	case EmfRecordTypeExcludeClipRect:
+		return "EmfRecordTypeExcludeClipRect"
+	case EmfRecordTypeIntersectClipRect:
+		return "EmfRecordTypeIntersectClipRect"
+	case EmfRecordTypeScaleViewportExtEx:
+		return "EmfRecordTypeScaleViewportExtEx"
+	case EmfRecordTypeScaleWindowExtEx:
+		return "EmfRecordTypeScaleWindowExtEx"
+	case EmfRecordTypeSaveDC:
+		return "EmfRecordTypeSaveDC"
+	case EmfRecordTypeRestoreDC:
+		return "EmfRecordTypeRestoreDC"
+	case EmfRecordTypeSetWorldTransform:
+		return "EmfRecordTypeSetWorldTransform"
+	case EmfRecordTypeModifyWorldTransform:
+		return "EmfRecordTypeModifyWorldTransform"
+	case EmfRecordTypeSelectObject:
+		return "EmfRecordTypeSelectObject"
+	case EmfRecordTypeCreatePen:
+		return "EmfRecordTypeCreatePen"
+	case EmfRecordTypeCreateBrushIndirect:
+		return "EmfRecordTypeCreateBrushIndirect"
+	case EmfRecordTypeDeleteObject:
+		return "EmfRecordTypeDeleteObject"
+	case EmfRecordTypeAngleArc:
+		return "EmfRecordTypeAngleArc"
+	case EmfRecordTypeEllipse:
+		return "EmfRecordTypeEllipse"
+	case EmfRecordTypeRectangle:
+		return "EmfRecordTypeRectangle"
+	case EmfRecordTypeRoundRect:
+		return "EmfRecordTypeRoundRect"
+	case EmfRecordTypeArc:
+		return "EmfRecordTypeArc"
+	case EmfRecordTypeChord:
+		return "EmfRecordTypeChord"
+	case EmfRecordTypePie:
+		return "EmfRecordTypePie"
+	case EmfRecordTypeSelectPalette:
+		return "EmfRecordTypeSelectPalette"
+	case EmfRecordTypeCreatePalette:
+		return "EmfRecordTypeCreatePalette"
+	case EmfRecordTypeSetPaletteEntries:
+		return "EmfRecordTypeSetPaletteEntries"
+	case EmfRecordTypeResizePalette:
+		return "EmfRecordTypeResizePalette"
+	case EmfRecordTypeRealizePalette:
+		return "EmfRecordTypeRealizePalette"
+	case EmfRecordTypeExtFloodFill:
+		return "EmfRecordTypeExtFloodFill"
+	case EmfRecordTypeLineTo:
+		return "EmfRecordTypeLineTo"
+	case EmfRecordTypeArcTo:
+		return "EmfRecordTypeArcTo"
+	case EmfRecordTypePolyDraw:
+		return "EmfRecordTypePolyDraw"
+	case EmfRecordTypeSetArcDirection:
+		return "EmfRecordTypeSetArcDirection"
+	case EmfRecordTypeSetMiterLimit:
+		return "EmfRecordTypeSetMiterLimit"
+	case EmfRecordTypeBeginPath:
+		return "EmfRecordTypeBeginPath"
+	case EmfRecordTypeEndPath:
+		return "EmfRecordTypeEndPath"
+	case EmfRecordTypeCloseFigure:
+		return "EmfRecordTypeCloseFigure"
+	case EmfRecordTypeFillPath:
+		return "EmfRecordTypeFillPath"
+	case EmfRecordTypeStrokeAndFillPath:
+		return "EmfRecordTypeStrokeAndFillPath"
+	case EmfRecordTypeStrokePath:
+		return "EmfRecordTypeStrokePath"
+	case EmfRecordTypeFlattenPath:
+		return "EmfRecordTypeFlattenPath"
+	case EmfRecordTypeWidenPath:
+		return "EmfRecordTypeWidenPath"
+	case EmfRecordTypeSelectClipPath:
+		return "EmfRecordTypeSelectClipPath"
+	case EmfRecordTypeAbortPath:
+		return "EmfRecordTypeAbortPath"
+	case EmfRecordTypeReserved_069:
+		return "EmfRecordTypeReserved_069"
+	case EmfRecordTypeGdiComment:
+		return "EmfRecordTypeGdiComment"
+	case EmfRecordTypeFillRgn:
+		return "EmfRecordTypeFillRgn"
+	case EmfRecordTypeFrameRgn:
+		return "EmfRecordTypeFrameRgn"
+	case EmfRecordTypeInvertRgn:
+		return "EmfRecordTypeInvertRgn"
+	case EmfRecordTypePaintRgn:
+		return "EmfRecordTypePaintRgn"
+	case EmfRecordTypeExtSelectClipRgn:
+		return "EmfRecordTypeExtSelectClipRgn"
+	case EmfRecordTypeBitBlt:
+		return "EmfRecordTypeBitBlt"
+	case EmfRecordTypeStretchBlt:
+		return "EmfRecordTypeStretchBlt"
+	case EmfRecordTypeMaskBlt:
+		return "EmfRecordTypeMaskBlt"
+	case EmfRecordTypePlgBlt:
+		return "EmfRecordTypePlgBlt"
+	case EmfRecordTypeSetDIBitsToDevice:
+		return "EmfRecordTypeSetDIBitsToDevice"
+	case EmfRecordTypeStretchDIBits:
+		return "EmfRecordTypeStretchDIBits"
+	case EmfRecordTypeExtCreateFontIndirect:
+		return "EmfRecordTypeExtCreateFontIndirect"
+	case EmfRecordTypeExtTextOutA:
+		return "EmfRecordTypeExtTextOutA"
+	case EmfRecordTypeExtTextOutW:
+		return "EmfRecordTypeExtTextOutW"
+	case EmfRecordTypePolyBezier16:
+		return "EmfRecordTypePolyBezier16"
+	case EmfRecordTypePolygon16:
+		return "EmfRecordTypePolygon16"
+	case EmfRecordTypePolyline16:
+		return "EmfRecordTypePolyline16"
+	case EmfRecordTypePolyBezierTo16:
+		return "EmfRecordTypePolyBezierTo16"
+	case EmfRecordTypePolylineTo16:
+		return "EmfRecordTypePolylineTo16"
+	case EmfRecordTypePolyPolyline16:
+		return "EmfRecordTypePolyPolyline16"
+	case EmfRecordTypePolyPolygon16:
+		return "EmfRecordTypePolyPolygon16"
+	case EmfRecordTypePolyDraw16:
+		return "EmfRecordTypePolyDraw16"
+	case EmfRecordTypeCreateMonoBrush:
+		return "EmfRecordTypeCreateMonoBrush"
+	case EmfRecordTypeCreateDIBPatternBrushPt:
+		return "EmfRecordTypeCreateDIBPatternBrushPt"
+	case EmfRecordTypeExtCreatePen:
+		return "EmfRecordTypeExtCreatePen"
+	case EmfRecordTypePolyTextOutA:
+		return "EmfRecordTypePolyTextOutA"
+	case EmfRecordTypePolyTextOutW:
+		return "EmfRecordTypePolyTextOutW"
+	case EmfRecordTypeSetICMMode:
+		return "EmfRecordTypeSetICMMode"
+	case EmfRecordTypeCreateColorSpace:
+		return "EmfRecordTypeCreateColorSpace"
+	case EmfRecordTypeSetColorSpace:
+		return "EmfRecordTypeSetColorSpace"
+	case EmfRecordTypeDeleteColorSpace:
+		return "EmfRecordTypeDeleteColorSpace"
+	case EmfRecordTypeGLSRecord:
+		return "EmfRecordTypeGLSRecord"
+	case EmfRecordTypeGLSBoundedRecord:
+		return "EmfRecordTypeGLSBoundedRecord"
+	case EmfRecordTypePixelFormat:
+		return "EmfRecordTypePixelFormat"
+	case EmfRecordTypeDrawEscape:
+		return "EmfRecordTypeDrawEscape"
+	case EmfRecordTypeExtEscape:
+		return "EmfRecordTypeExtEscape"
+	case EmfRecordTypeStartDoc:
+		return "EmfRecordTypeStartDoc"
+	case EmfRecordTypeSmallTextOut:
+		return "EmfRecordTypeSmallTextOut"
+	case EmfRecordTypeForceUFIMapping:
+		return "EmfRecordTypeForceUFIMapping"
+	case EmfRecordTypeNamedEscape:
+		return "EmfRecordTypeNamedEscape"
+	case EmfRecordTypeColorCorrectPalette:
+		return "EmfRecordTypeColorCorrectPalette"
+	case EmfRecordTypeSetICMProfileA:
+		return "EmfRecordTypeSetICMProfileA"
+	case EmfRecordTypeSetICMProfileW:
+		return "EmfRecordTypeSetICMProfileW"
+	case EmfRecordTypeAlphaBlend:
+		return "EmfRecordTypeAlphaBlend"
+	case EmfRecordTypeSetLayout:
+		return "EmfRecordTypeSetLayout"
+	case EmfRecordTypeTransparentBlt:
+		return "EmfRecordTypeTransparentBlt"
+	case EmfRecordTypeReserved_117:
+		return "EmfRecordTypeReserved_117"
+	case EmfRecordTypeGradientFill:
+		return "EmfRecordTypeGradientFill"
+	case EmfRecordTypeSetLinkedUFIs:
+		return "EmfRecordTypeSetLinkedUFIs"
+	case EmfRecordTypeSetTextJustification:
+		return "EmfRecordTypeSetTextJustification"
+	case EmfRecordTypeColorMatchToTargetW:
+		return "EmfRecordTypeColorMatchToTargetW"
+	case EmfRecordTypeCreateColorSpaceW:
+		return "EmfRecordTypeCreateColorSpaceW"
+	case EmfPlusRecordTypeInvalid:
+		return "EmfPlusRecordTypeInvalid"
+	case EmfPlusRecordTypeHeader:
+		return "EmfPlusRecordTypeHeader"
+	case EmfPlusRecordTypeEndOfFile:
+		return "EmfPlusRecordTypeEndOfFile"
+	case EmfPlusRecordTypeComment:
+		return "EmfPlusRecordTypeComment"
+	case EmfPlusRecordTypeGetDC:
+		return "EmfPlusRecordTypeGetDC"
+	case EmfPlusRecordTypeMultiFormatStart:
+		return "EmfPlusRecordTypeMultiFormatStart"
+	case EmfPlusRecordTypeMultiFormatSection:
+		return "EmfPlusRecordTypeMultiFormatSection"
+	case EmfPlusRecordTypeMultiFormatEnd:
+		return "EmfPlusRecordTypeMultiFormatEnd"
+	case EmfPlusRecordTypeObject:
+		return "EmfPlusRecordTypeObject"
+	case EmfPlusRecordTypeClear:
+		return "EmfPlusRecordTypeClear"
+	case EmfPlusRecordTypeFillRects:
+		return "EmfPlusRecordTypeFillRects"
+	case EmfPlusRecordTypeDrawRects:
+		return "EmfPlusRecordTypeDrawRects"
+	case EmfPlusRecordTypeFillPolygon:
+		return "EmfPlusRecordTypeFillPolygon"
+	case EmfPlusRecordTypeDrawLines:
+		return "EmfPlusRecordTypeDrawLines"
+	case EmfPlusRecordTypeFillEllipse:
+		return "EmfPlusRecordTypeFillEllipse"
+	case EmfPlusRecordTypeDrawEllipse:
+		return "EmfPlusRecordTypeDrawEllipse"
+	case EmfPlusRecordTypeFillPie:
+		return "EmfPlusRecordTypeFillPie"
+	case EmfPlusRecordTypeDrawPie:
+		return "EmfPlusRecordTypeDrawPie"
+	case EmfPlusRecordTypeDrawArc:
+		return "EmfPlusRecordTypeDrawArc"
+	case EmfPlusRecordTypeFillRegion:
+		return "EmfPlusRecordTypeFillRegion"
+	case EmfPlusRecordTypeFillPath:
+		return "EmfPlusRecordTypeFillPath"
+	case EmfPlusRecordTypeDrawPath:
+		return "EmfPlusRecordTypeDrawPath"
+	case EmfPlusRecordTypeFillClosedCurve:
+		return "EmfPlusRecordTypeFillClosedCurve"
+	case EmfPlusRecordTypeDrawClosedCurve:
+		return "EmfPlusRecordTypeDrawClosedCurve"
+	case EmfPlusRecordTypeDrawCurve:
+		return "EmfPlusRecordTypeDrawCurve"
+	case EmfPlusRecordTypeDrawBeziers:
+		return "EmfPlusRecordTypeDrawBeziers"
+	case EmfPlusRecordTypeDrawImage:
+		return "EmfPlusRecordTypeDrawImage"
+	case EmfPlusRecordTypeDrawImagePoints:
+		return "EmfPlusRecordTypeDrawImagePoints"
+	case EmfPlusRecordTypeDrawString:
+		return "EmfPlusRecordTypeDrawString"
+	case EmfPlusRecordTypeSetRenderingOrigin:
+		return "EmfPlusRecordTypeSetRenderingOrigin"
+	case EmfPlusRecordTypeSetAntiAliasMode:
+		return "EmfPlusRecordTypeSetAntiAliasMode"
+	case EmfPlusRecordTypeSetTextRenderingHint:
+		return "EmfPlusRecordTypeSetTextRenderingHint"
+	case EmfPlusRecordTypeSetTextContrast:
+		return "EmfPlusRecordTypeSetTextContrast"
+	case EmfPlusRecordTypeSetInterpolationMode:
+		return "EmfPlusRecordTypeSetInterpolationMode"
+	case EmfPlusRecordTypeSetPixelOffsetMode:
+		return "EmfPlusRecordTypeSetPixelOffsetMode"
+	case EmfPlusRecordTypeSetCompositingMode:
+		return "EmfPlusRecordTypeSetCompositingMode"
+	case EmfPlusRecordTypeSetCompositingQuality:
+		return "EmfPlusRecordTypeSetCompositingQuality"
+	case EmfPlusRecordTypeSave:
+		return "EmfPlusRecordTypeSave"
+	case EmfPlusRecordTypeRestore:
+		return "EmfPlusRecordTypeRestore"
+	case EmfPlusRecordTypeBeginContainer:
+		return "EmfPlusRecordTypeBeginContainer"
+	case EmfPlusRecordTypeBeginContainerNoParams:
+		return "EmfPlusRecordTypeBeginContainerNoParams"
+	case EmfPlusRecordTypeEndContainer:
+		return "EmfPlusRecordTypeEndContainer"
+	case EmfPlusRecordTypeSetWorldTransform:
+		return "EmfPlusRecordTypeSetWorldTransform"
+	case EmfPlusRecordTypeResetWorldTransform:
+		return "EmfPlusRecordTypeResetWorldTransform"
+	case EmfPlusRecordTypeMultiplyWorldTransform:
+		return "EmfPlusRecordTypeMultiplyWorldTransform"
+	case EmfPlusRecordTypeTranslateWorldTransform:
+		return "EmfPlusRecordTypeTranslateWorldTransform"
+	case EmfPlusRecordTypeScaleWorldTransform:
+		return "EmfPlusRecordTypeScaleWorldTransform"
+	case EmfPlusRecordTypeRotateWorldTransform:
+		return "EmfPlusRecordTypeRotateWorldTransform"
+	case EmfPlusRecordTypeSetPageTransform:
+		return "EmfPlusRecordTypeSetPageTransform"
+	case EmfPlusRecordTypeResetClip:
+		return "EmfPlusRecordTypeResetClip"
+	case EmfPlusRecordTypeSetClipRect:
+		return "EmfPlusRecordTypeSetClipRect"
+	case EmfPlusRecordTypeSetClipPath:
+		return "EmfPlusRecordTypeSetClipPath"
+	case EmfPlusRecordTypeSetClipRegion:
+		return "EmfPlusRecordTypeSetClipRegion"
+	case EmfPlusRecordTypeOffsetClip:
+		return "EmfPlusRecordTypeOffsetClip"
+	case EmfPlusRecordTypeDrawDriverString:
+		return "EmfPlusRecordTypeDrawDriverString"
+	case EmfPlusRecordTypeStrokeFillPath:
+		return "EmfPlusRecordTypeStrokeFillPath"
+	case EmfPlusRecordTypeSerializableObject:
+		return "EmfPlusRecordTypeSerializableObject"
+	case EmfPlusRecordTypeSetTSGraphics:
+		return "EmfPlusRecordTypeSetTSGraphics"
+	case EmfPlusRecordTypeSetTSClip:
+		return "EmfPlusRecordTypeSetTSClip"
+	case EmfPlusRecordTotal:
+		return "EmfPlusRecordTotal"
+	default:
+		return fmt.Sprintf("EmfPlusRecordType(%d)", int32(e))
+	}
+}
+
 type EmfToWmfBitsFlags int32
 
 const (
@@ -456,6 +1319,23 @@ const (
 	EmfToWmfBitsFlagsNoXORClip        EmfToWmfBitsFlags = 4
 )
 
+// String returns the EmfToWmfBitsFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EmfToWmfBitsFlags) String() string {
+	switch e {
+	case EmfToWmfBitsFlagsDefault:
+		return "EmfToWmfBitsFlagsDefault"
+	case EmfToWmfBitsFlagsEmbedEmf:
+		return "EmfToWmfBitsFlagsEmbedEmf"
+	case EmfToWmfBitsFlagsIncludePlaceable:
+		return "EmfToWmfBitsFlagsIncludePlaceable"
+	case EmfToWmfBitsFlagsNoXORClip:
+		return "EmfToWmfBitsFlagsNoXORClip"
+	default:
+		return fmt.Sprintf("EmfToWmfBitsFlags(%d)", int32(e))
+	}
+}
+
 type EmfType int32
 
 const (
@@ -463,6 +1343,21 @@ const (
 	EmfTypeEmfPlusOnly EmfType = 4
 	EmfTypeEmfPlusDual EmfType = 5
 )
+
+// String returns the EmfType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EmfType) String() string {
+	switch e {
+	case EmfTypeEmfOnly:
+		return "EmfTypeEmfOnly"
+	case EmfTypeEmfPlusOnly:
+		return "EmfTypeEmfPlusOnly"
+	case EmfTypeEmfPlusDual:
+		return "EmfTypeEmfPlusDual"
+	default:
+		return fmt.Sprintf("EmfType(%d)", int32(e))
+	}
+}
 
 type EncoderParameterValueType int32
 
@@ -477,6 +1372,33 @@ const (
 	EncoderParameterValueTypeRationalRange EncoderParameterValueType = 8
 	EncoderParameterValueTypePointer       EncoderParameterValueType = 9
 )
+
+// String returns the EncoderParameterValueType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EncoderParameterValueType) String() string {
+	switch e {
+	case EncoderParameterValueTypeByte:
+		return "EncoderParameterValueTypeByte"
+	case EncoderParameterValueTypeASCII:
+		return "EncoderParameterValueTypeASCII"
+	case EncoderParameterValueTypeShort:
+		return "EncoderParameterValueTypeShort"
+	case EncoderParameterValueTypeLong:
+		return "EncoderParameterValueTypeLong"
+	case EncoderParameterValueTypeRational:
+		return "EncoderParameterValueTypeRational"
+	case EncoderParameterValueTypeLongRange:
+		return "EncoderParameterValueTypeLongRange"
+	case EncoderParameterValueTypeUndefined:
+		return "EncoderParameterValueTypeUndefined"
+	case EncoderParameterValueTypeRationalRange:
+		return "EncoderParameterValueTypeRationalRange"
+	case EncoderParameterValueTypePointer:
+		return "EncoderParameterValueTypePointer"
+	default:
+		return fmt.Sprintf("EncoderParameterValueType(%d)", int32(e))
+	}
+}
 
 type EncoderValue int32
 
@@ -509,6 +1431,67 @@ const (
 	EncoderValueColorTypeRGB             EncoderValue = 25
 )
 
+// String returns the EncoderValue constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EncoderValue) String() string {
+	switch e {
+	case EncoderValueColorTypeCMYK:
+		return "EncoderValueColorTypeCMYK"
+	case EncoderValueColorTypeYCCK:
+		return "EncoderValueColorTypeYCCK"
+	case EncoderValueCompressionLZW:
+		return "EncoderValueCompressionLZW"
+	case EncoderValueCompressionCCITT3:
+		return "EncoderValueCompressionCCITT3"
+	case EncoderValueCompressionCCITT4:
+		return "EncoderValueCompressionCCITT4"
+	case EncoderValueCompressionRle:
+		return "EncoderValueCompressionRle"
+	case EncoderValueCompressionNone:
+		return "EncoderValueCompressionNone"
+	case EncoderValueScanMethodInterlaced:
+		return "EncoderValueScanMethodInterlaced"
+	case EncoderValueScanMethodNonInterlaced:
+		return "EncoderValueScanMethodNonInterlaced"
+	case EncoderValueVersionGif87:
+		return "EncoderValueVersionGif87"
+	case EncoderValueVersionGif89:
+		return "EncoderValueVersionGif89"
+	case EncoderValueRenderProgressive:
+		return "EncoderValueRenderProgressive"
+	case EncoderValueRenderNonProgressive:
+		return "EncoderValueRenderNonProgressive"
+	case EncoderValueTransformRotate90:
+		return "EncoderValueTransformRotate90"
+	case EncoderValueTransformRotate180:
+		return "EncoderValueTransformRotate180"
+	case EncoderValueTransformRotate270:
+		return "EncoderValueTransformRotate270"
+	case EncoderValueTransformFlipHorizontal:
+		return "EncoderValueTransformFlipHorizontal"
+	case EncoderValueTransformFlipVertical:
+		return "EncoderValueTransformFlipVertical"
+	case EncoderValueMultiFrame:
+		return "EncoderValueMultiFrame"
+	case EncoderValueLastFrame:
+		return "EncoderValueLastFrame"
+	case EncoderValueFlush:
+		return "EncoderValueFlush"
+	case EncoderValueFrameDimensionTime:
+		return "EncoderValueFrameDimensionTime"
+	case EncoderValueFrameDimensionResolution:
+		return "EncoderValueFrameDimensionResolution"
+	case EncoderValueFrameDimensionPage:
+		return "EncoderValueFrameDimensionPage"
+	case EncoderValueColorTypeGray:
+		return "EncoderValueColorTypeGray"
+	case EncoderValueColorTypeRGB:
+		return "EncoderValueColorTypeRGB"
+	default:
+		return fmt.Sprintf("EncoderValue(%d)", int32(e))
+	}
+}
+
 type FillMode int32
 
 const (
@@ -516,12 +1499,38 @@ const (
 	FillModeWinding   FillMode = 1
 )
 
+// String returns the FillMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FillMode) String() string {
+	switch e {
+	case FillModeAlternate:
+		return "FillModeAlternate"
+	case FillModeWinding:
+		return "FillModeWinding"
+	default:
+		return fmt.Sprintf("FillMode(%d)", int32(e))
+	}
+}
+
 type FlushIntention int32
 
 const (
 	FlushIntentionFlush FlushIntention = 0
 	FlushIntentionSync  FlushIntention = 1
 )
+
+// String returns the FlushIntention constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FlushIntention) String() string {
+	switch e {
+	case FlushIntentionFlush:
+		return "FlushIntentionFlush"
+	case FlushIntentionSync:
+		return "FlushIntentionSync"
+	default:
+		return fmt.Sprintf("FlushIntention(%d)", int32(e))
+	}
+}
 
 type FontStyle int32
 
@@ -533,6 +1542,27 @@ const (
 	FontStyleUnderline  FontStyle = 4
 	FontStyleStrikeout  FontStyle = 8
 )
+
+// String returns the FontStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FontStyle) String() string {
+	switch e {
+	case FontStyleRegular:
+		return "FontStyleRegular"
+	case FontStyleBold:
+		return "FontStyleBold"
+	case FontStyleItalic:
+		return "FontStyleItalic"
+	case FontStyleBoldItalic:
+		return "FontStyleBoldItalic"
+	case FontStyleUnderline:
+		return "FontStyleUnderline"
+	case FontStyleStrikeout:
+		return "FontStyleStrikeout"
+	default:
+		return fmt.Sprintf("FontStyle(%d)", int32(e))
+	}
+}
 
 type GdiplusStartupParams int32
 
@@ -546,6 +1576,29 @@ const (
 	GdiplusStartupTransparencyMask GdiplusStartupParams = -16777216
 )
 
+// String returns the GdiplusStartupParams constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GdiplusStartupParams) String() string {
+	switch e {
+	case GdiplusStartupDefault:
+		return "GdiplusStartupDefault"
+	case GdiplusStartupNoSetRound:
+		return "GdiplusStartupNoSetRound"
+	case GdiplusStartupSetPSValue:
+		return "GdiplusStartupSetPSValue"
+	case GdiplusStartupReserved0:
+		return "GdiplusStartupReserved0"
+	case GdiplusStartupReserved1:
+		return "GdiplusStartupReserved1"
+	case GdiplusStartupReserved2:
+		return "GdiplusStartupReserved2"
+	case GdiplusStartupTransparencyMask:
+		return "GdiplusStartupTransparencyMask"
+	default:
+		return fmt.Sprintf("GdiplusStartupParams(%d)", int32(e))
+	}
+}
+
 type GenericFontFamily int32
 
 const (
@@ -554,6 +1607,21 @@ const (
 	GenericFontFamilyMonospace GenericFontFamily = 2
 )
 
+// String returns the GenericFontFamily constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GenericFontFamily) String() string {
+	switch e {
+	case GenericFontFamilySerif:
+		return "GenericFontFamilySerif"
+	case GenericFontFamilySansSerif:
+		return "GenericFontFamilySansSerif"
+	case GenericFontFamilyMonospace:
+		return "GenericFontFamilyMonospace"
+	default:
+		return fmt.Sprintf("GenericFontFamily(%d)", int32(e))
+	}
+}
+
 type GpTestControlEnum int32
 
 const (
@@ -561,6 +1629,21 @@ const (
 	TestControlNoICM          GpTestControlEnum = 1
 	TestControlGetBuildNumber GpTestControlEnum = 2
 )
+
+// String returns the GpTestControlEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GpTestControlEnum) String() string {
+	switch e {
+	case TestControlForceBilinear:
+		return "TestControlForceBilinear"
+	case TestControlNoICM:
+		return "TestControlNoICM"
+	case TestControlGetBuildNumber:
+		return "TestControlGetBuildNumber"
+	default:
+		return fmt.Sprintf("GpTestControlEnum(%d)", int32(e))
+	}
+}
 
 type HatchStyle int32
 
@@ -624,6 +1707,123 @@ const (
 	HatchStyleMax                    HatchStyle = 52
 )
 
+// String returns the HatchStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HatchStyle) String() string {
+	switch e {
+	case HatchStyleHorizontal:
+		return "HatchStyleHorizontal"
+	case HatchStyleVertical:
+		return "HatchStyleVertical"
+	case HatchStyleForwardDiagonal:
+		return "HatchStyleForwardDiagonal"
+	case HatchStyleBackwardDiagonal:
+		return "HatchStyleBackwardDiagonal"
+	case HatchStyleCross:
+		return "HatchStyleCross"
+	case HatchStyleDiagonalCross:
+		return "HatchStyleDiagonalCross"
+	case HatchStyle05Percent:
+		return "HatchStyle05Percent"
+	case HatchStyle10Percent:
+		return "HatchStyle10Percent"
+	case HatchStyle20Percent:
+		return "HatchStyle20Percent"
+	case HatchStyle25Percent:
+		return "HatchStyle25Percent"
+	case HatchStyle30Percent:
+		return "HatchStyle30Percent"
+	case HatchStyle40Percent:
+		return "HatchStyle40Percent"
+	case HatchStyle50Percent:
+		return "HatchStyle50Percent"
+	case HatchStyle60Percent:
+		return "HatchStyle60Percent"
+	case HatchStyle70Percent:
+		return "HatchStyle70Percent"
+	case HatchStyle75Percent:
+		return "HatchStyle75Percent"
+	case HatchStyle80Percent:
+		return "HatchStyle80Percent"
+	case HatchStyle90Percent:
+		return "HatchStyle90Percent"
+	case HatchStyleLightDownwardDiagonal:
+		return "HatchStyleLightDownwardDiagonal"
+	case HatchStyleLightUpwardDiagonal:
+		return "HatchStyleLightUpwardDiagonal"
+	case HatchStyleDarkDownwardDiagonal:
+		return "HatchStyleDarkDownwardDiagonal"
+	case HatchStyleDarkUpwardDiagonal:
+		return "HatchStyleDarkUpwardDiagonal"
+	case HatchStyleWideDownwardDiagonal:
+		return "HatchStyleWideDownwardDiagonal"
+	case HatchStyleWideUpwardDiagonal:
+		return "HatchStyleWideUpwardDiagonal"
+	case HatchStyleLightVertical:
+		return "HatchStyleLightVertical"
+	case HatchStyleLightHorizontal:
+		return "HatchStyleLightHorizontal"
+	case HatchStyleNarrowVertical:
+		return "HatchStyleNarrowVertical"
+	case HatchStyleNarrowHorizontal:
+		return "HatchStyleNarrowHorizontal"
+	case HatchStyleDarkVertical:
+		return "HatchStyleDarkVertical"
+	case HatchStyleDarkHorizontal:
+		return "HatchStyleDarkHorizontal"
+	case HatchStyleDashedDownwardDiagonal:
+		return "HatchStyleDashedDownwardDiagonal"
+	case HatchStyleDashedUpwardDiagonal:
+		return "HatchStyleDashedUpwardDiagonal"
+	case HatchStyleDashedHorizontal:
+		return "HatchStyleDashedHorizontal"
+	case HatchStyleDashedVertical:
+		return "HatchStyleDashedVertical"
+	case HatchStyleSmallConfetti:
+		return "HatchStyleSmallConfetti"
+	case HatchStyleLargeConfetti:
+		return "HatchStyleLargeConfetti"
+	case HatchStyleZigZag:
+		return "HatchStyleZigZag"
+	case HatchStyleWave:
+		return "HatchStyleWave"
+	case HatchStyleDiagonalBrick:
+		return "HatchStyleDiagonalBrick"
+	case HatchStyleHorizontalBrick:
+		return "HatchStyleHorizontalBrick"
+	case HatchStyleWeave:
+		return "HatchStyleWeave"
+	case HatchStylePlaid:
+		return "HatchStylePlaid"
+	case HatchStyleDivot:
+		return "HatchStyleDivot"
+	case HatchStyleDottedGrid:
+		return "HatchStyleDottedGrid"
+	case HatchStyleDottedDiamond:
+		return "HatchStyleDottedDiamond"
+	case HatchStyleShingle:
+		return "HatchStyleShingle"
+	case HatchStyleTrellis:
+		return "HatchStyleTrellis"
+	case HatchStyleSphere:
+		return "HatchStyleSphere"
+	case HatchStyleSmallGrid:
+		return "HatchStyleSmallGrid"
+	case HatchStyleSmallCheckerBoard:
+		return "HatchStyleSmallCheckerBoard"
+	case HatchStyleLargeCheckerBoard:
+		return "HatchStyleLargeCheckerBoard"
+	case HatchStyleOutlinedDiamond:
+		return "HatchStyleOutlinedDiamond"
+	case HatchStyleSolidDiamond:
+		return "HatchStyleSolidDiamond"
+	case HatchStyleTotal:
+		return "HatchStyleTotal"
+	default:
+		return fmt.Sprintf("HatchStyle(%d)", int32(e))
+	}
+}
+
 type HistogramFormat int32
 
 const (
@@ -637,6 +1837,31 @@ const (
 	HistogramFormatA     HistogramFormat = 7
 )
 
+// String returns the HistogramFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HistogramFormat) String() string {
+	switch e {
+	case HistogramFormatARGB:
+		return "HistogramFormatARGB"
+	case HistogramFormatPARGB:
+		return "HistogramFormatPARGB"
+	case HistogramFormatRGB:
+		return "HistogramFormatRGB"
+	case HistogramFormatGray:
+		return "HistogramFormatGray"
+	case HistogramFormatB:
+		return "HistogramFormatB"
+	case HistogramFormatG:
+		return "HistogramFormatG"
+	case HistogramFormatR:
+		return "HistogramFormatR"
+	case HistogramFormatA:
+		return "HistogramFormatA"
+	default:
+		return fmt.Sprintf("HistogramFormat(%d)", int32(e))
+	}
+}
+
 type HotkeyPrefix int32
 
 const (
@@ -644,6 +1869,21 @@ const (
 	HotkeyPrefixShow HotkeyPrefix = 1
 	HotkeyPrefixHide HotkeyPrefix = 2
 )
+
+// String returns the HotkeyPrefix constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HotkeyPrefix) String() string {
+	switch e {
+	case HotkeyPrefixNone:
+		return "HotkeyPrefixNone"
+	case HotkeyPrefixShow:
+		return "HotkeyPrefixShow"
+	case HotkeyPrefixHide:
+		return "HotkeyPrefixHide"
+	default:
+		return fmt.Sprintf("HotkeyPrefix(%d)", int32(e))
+	}
+}
 
 type ImageCodecFlags int32
 
@@ -658,6 +1898,33 @@ const (
 	ImageCodecFlagsSystem         ImageCodecFlags = 131072
 	ImageCodecFlagsUser           ImageCodecFlags = 262144
 )
+
+// String returns the ImageCodecFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ImageCodecFlags) String() string {
+	switch e {
+	case ImageCodecFlagsEncoder:
+		return "ImageCodecFlagsEncoder"
+	case ImageCodecFlagsDecoder:
+		return "ImageCodecFlagsDecoder"
+	case ImageCodecFlagsSupportBitmap:
+		return "ImageCodecFlagsSupportBitmap"
+	case ImageCodecFlagsSupportVector:
+		return "ImageCodecFlagsSupportVector"
+	case ImageCodecFlagsSeekableEncode:
+		return "ImageCodecFlagsSeekableEncode"
+	case ImageCodecFlagsBlockingDecode:
+		return "ImageCodecFlagsBlockingDecode"
+	case ImageCodecFlagsBuiltin:
+		return "ImageCodecFlagsBuiltin"
+	case ImageCodecFlagsSystem:
+		return "ImageCodecFlagsSystem"
+	case ImageCodecFlagsUser:
+		return "ImageCodecFlagsUser"
+	default:
+		return fmt.Sprintf("ImageCodecFlags(%d)", int32(e))
+	}
+}
 
 type ImageFlags int32
 
@@ -678,6 +1945,43 @@ const (
 	ImageFlagsCaching           ImageFlags = 131072
 )
 
+// String returns the ImageFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ImageFlags) String() string {
+	switch e {
+	case ImageFlagsNone:
+		return "ImageFlagsNone"
+	case ImageFlagsScalable:
+		return "ImageFlagsScalable"
+	case ImageFlagsHasAlpha:
+		return "ImageFlagsHasAlpha"
+	case ImageFlagsHasTranslucent:
+		return "ImageFlagsHasTranslucent"
+	case ImageFlagsPartiallyScalable:
+		return "ImageFlagsPartiallyScalable"
+	case ImageFlagsColorSpaceRGB:
+		return "ImageFlagsColorSpaceRGB"
+	case ImageFlagsColorSpaceCMYK:
+		return "ImageFlagsColorSpaceCMYK"
+	case ImageFlagsColorSpaceGRAY:
+		return "ImageFlagsColorSpaceGRAY"
+	case ImageFlagsColorSpaceYCBCR:
+		return "ImageFlagsColorSpaceYCBCR"
+	case ImageFlagsColorSpaceYCCK:
+		return "ImageFlagsColorSpaceYCCK"
+	case ImageFlagsHasRealDPI:
+		return "ImageFlagsHasRealDPI"
+	case ImageFlagsHasRealPixelSize:
+		return "ImageFlagsHasRealPixelSize"
+	case ImageFlagsReadOnly:
+		return "ImageFlagsReadOnly"
+	case ImageFlagsCaching:
+		return "ImageFlagsCaching"
+	default:
+		return fmt.Sprintf("ImageFlags(%d)", int32(e))
+	}
+}
+
 type ImageLockMode int32
 
 const (
@@ -685,6 +1989,21 @@ const (
 	ImageLockModeWrite        ImageLockMode = 2
 	ImageLockModeUserInputBuf ImageLockMode = 4
 )
+
+// String returns the ImageLockMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ImageLockMode) String() string {
+	switch e {
+	case ImageLockModeRead:
+		return "ImageLockModeRead"
+	case ImageLockModeWrite:
+		return "ImageLockModeWrite"
+	case ImageLockModeUserInputBuf:
+		return "ImageLockModeUserInputBuf"
+	default:
+		return fmt.Sprintf("ImageLockMode(%d)", int32(e))
+	}
+}
 
 // ImageType: https://learn.microsoft.com/windows/win32/tablet/imagetype-complex-type
 type ImageType int32
@@ -694,6 +2013,21 @@ const (
 	ImageTypeBitmap   ImageType = 1
 	ImageTypeMetafile ImageType = 2
 )
+
+// String returns the ImageType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ImageType) String() string {
+	switch e {
+	case ImageTypeUnknown:
+		return "ImageTypeUnknown"
+	case ImageTypeBitmap:
+		return "ImageTypeBitmap"
+	case ImageTypeMetafile:
+		return "ImageTypeMetafile"
+	default:
+		return fmt.Sprintf("ImageType(%d)", int32(e))
+	}
+}
 
 type InterpolationMode int32
 
@@ -709,6 +2043,33 @@ const (
 	InterpolationModeHighQualityBicubic  InterpolationMode = 7
 )
 
+// String returns the InterpolationMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InterpolationMode) String() string {
+	switch e {
+	case InterpolationModeInvalid:
+		return "InterpolationModeInvalid"
+	case InterpolationModeDefault:
+		return "InterpolationModeDefault"
+	case InterpolationModeLowQuality:
+		return "InterpolationModeLowQuality"
+	case InterpolationModeHighQuality:
+		return "InterpolationModeHighQuality"
+	case InterpolationModeBilinear:
+		return "InterpolationModeBilinear"
+	case InterpolationModeBicubic:
+		return "InterpolationModeBicubic"
+	case InterpolationModeNearestNeighbor:
+		return "InterpolationModeNearestNeighbor"
+	case InterpolationModeHighQualityBilinear:
+		return "InterpolationModeHighQualityBilinear"
+	case InterpolationModeHighQualityBicubic:
+		return "InterpolationModeHighQualityBicubic"
+	default:
+		return fmt.Sprintf("InterpolationMode(%d)", int32(e))
+	}
+}
+
 type ItemDataPosition int32
 
 const (
@@ -716,6 +2077,21 @@ const (
 	ItemDataPositionAfterPalette ItemDataPosition = 1
 	ItemDataPositionAfterBits    ItemDataPosition = 2
 )
+
+// String returns the ItemDataPosition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ItemDataPosition) String() string {
+	switch e {
+	case ItemDataPositionAfterHeader:
+		return "ItemDataPositionAfterHeader"
+	case ItemDataPositionAfterPalette:
+		return "ItemDataPositionAfterPalette"
+	case ItemDataPositionAfterBits:
+		return "ItemDataPositionAfterBits"
+	default:
+		return fmt.Sprintf("ItemDataPosition(%d)", int32(e))
+	}
+}
 
 type LineCap int32
 
@@ -733,6 +2109,37 @@ const (
 	LineCapAnchorMask    LineCap = 240
 )
 
+// String returns the LineCap constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LineCap) String() string {
+	switch e {
+	case LineCapFlat:
+		return "LineCapFlat"
+	case LineCapSquare:
+		return "LineCapSquare"
+	case LineCapRound:
+		return "LineCapRound"
+	case LineCapTriangle:
+		return "LineCapTriangle"
+	case LineCapNoAnchor:
+		return "LineCapNoAnchor"
+	case LineCapSquareAnchor:
+		return "LineCapSquareAnchor"
+	case LineCapRoundAnchor:
+		return "LineCapRoundAnchor"
+	case LineCapDiamondAnchor:
+		return "LineCapDiamondAnchor"
+	case LineCapArrowAnchor:
+		return "LineCapArrowAnchor"
+	case LineCapCustom:
+		return "LineCapCustom"
+	case LineCapAnchorMask:
+		return "LineCapAnchorMask"
+	default:
+		return fmt.Sprintf("LineCap(%d)", int32(e))
+	}
+}
+
 type LineJoin int32
 
 const (
@@ -741,6 +2148,23 @@ const (
 	LineJoinRound        LineJoin = 2
 	LineJoinMiterClipped LineJoin = 3
 )
+
+// String returns the LineJoin constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LineJoin) String() string {
+	switch e {
+	case LineJoinMiter:
+		return "LineJoinMiter"
+	case LineJoinBevel:
+		return "LineJoinBevel"
+	case LineJoinRound:
+		return "LineJoinRound"
+	case LineJoinMiterClipped:
+		return "LineJoinMiterClipped"
+	default:
+		return fmt.Sprintf("LineJoin(%d)", int32(e))
+	}
+}
 
 type LinearGradientMode int32
 
@@ -751,12 +2175,42 @@ const (
 	LinearGradientModeBackwardDiagonal LinearGradientMode = 3
 )
 
+// String returns the LinearGradientMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LinearGradientMode) String() string {
+	switch e {
+	case LinearGradientModeHorizontal:
+		return "LinearGradientModeHorizontal"
+	case LinearGradientModeVertical:
+		return "LinearGradientModeVertical"
+	case LinearGradientModeForwardDiagonal:
+		return "LinearGradientModeForwardDiagonal"
+	case LinearGradientModeBackwardDiagonal:
+		return "LinearGradientModeBackwardDiagonal"
+	default:
+		return fmt.Sprintf("LinearGradientMode(%d)", int32(e))
+	}
+}
+
 type MatrixOrder int32
 
 const (
 	MatrixOrderPrepend MatrixOrder = 0
 	MatrixOrderAppend  MatrixOrder = 1
 )
+
+// String returns the MatrixOrder constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MatrixOrder) String() string {
+	switch e {
+	case MatrixOrderPrepend:
+		return "MatrixOrderPrepend"
+	case MatrixOrderAppend:
+		return "MatrixOrderAppend"
+	default:
+		return fmt.Sprintf("MatrixOrder(%d)", int32(e))
+	}
+}
 
 type MetafileFrameUnit int32
 
@@ -769,6 +2223,27 @@ const (
 	MetafileFrameUnitGdi        MetafileFrameUnit = 7
 )
 
+// String returns the MetafileFrameUnit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MetafileFrameUnit) String() string {
+	switch e {
+	case MetafileFrameUnitPixel:
+		return "MetafileFrameUnitPixel"
+	case MetafileFrameUnitPoint:
+		return "MetafileFrameUnitPoint"
+	case MetafileFrameUnitInch:
+		return "MetafileFrameUnitInch"
+	case MetafileFrameUnitDocument:
+		return "MetafileFrameUnitDocument"
+	case MetafileFrameUnitMillimeter:
+		return "MetafileFrameUnitMillimeter"
+	case MetafileFrameUnitGdi:
+		return "MetafileFrameUnitGdi"
+	default:
+		return fmt.Sprintf("MetafileFrameUnit(%d)", int32(e))
+	}
+}
+
 type MetafileType int32
 
 const (
@@ -779,6 +2254,27 @@ const (
 	MetafileTypeEmfPlusOnly  MetafileType = 4
 	MetafileTypeEmfPlusDual  MetafileType = 5
 )
+
+// String returns the MetafileType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MetafileType) String() string {
+	switch e {
+	case MetafileTypeInvalid:
+		return "MetafileTypeInvalid"
+	case MetafileTypeWmf:
+		return "MetafileTypeWmf"
+	case MetafileTypeWmfPlaceable:
+		return "MetafileTypeWmfPlaceable"
+	case MetafileTypeEmf:
+		return "MetafileTypeEmf"
+	case MetafileTypeEmfPlusOnly:
+		return "MetafileTypeEmfPlusOnly"
+	case MetafileTypeEmfPlusDual:
+		return "MetafileTypeEmfPlusDual"
+	default:
+		return fmt.Sprintf("MetafileType(%d)", int32(e))
+	}
+}
 
 type ObjectType int32
 
@@ -798,6 +2294,37 @@ const (
 	ObjectTypeMin             ObjectType = 1
 )
 
+// String returns the ObjectType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ObjectType) String() string {
+	switch e {
+	case ObjectTypeInvalid:
+		return "ObjectTypeInvalid"
+	case ObjectTypeBrush:
+		return "ObjectTypeBrush"
+	case ObjectTypePen:
+		return "ObjectTypePen"
+	case ObjectTypePath:
+		return "ObjectTypePath"
+	case ObjectTypeRegion:
+		return "ObjectTypeRegion"
+	case ObjectTypeImage:
+		return "ObjectTypeImage"
+	case ObjectTypeFont:
+		return "ObjectTypeFont"
+	case ObjectTypeStringFormat:
+		return "ObjectTypeStringFormat"
+	case ObjectTypeImageAttributes:
+		return "ObjectTypeImageAttributes"
+	case ObjectTypeCustomLineCap:
+		return "ObjectTypeCustomLineCap"
+	case ObjectTypeGraphics:
+		return "ObjectTypeGraphics"
+	default:
+		return fmt.Sprintf("ObjectType(%d)", int32(e))
+	}
+}
+
 type PaletteFlags int32
 
 const (
@@ -805,6 +2332,21 @@ const (
 	PaletteFlagsGrayScale PaletteFlags = 2
 	PaletteFlagsHalftone  PaletteFlags = 4
 )
+
+// String returns the PaletteFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PaletteFlags) String() string {
+	switch e {
+	case PaletteFlagsHasAlpha:
+		return "PaletteFlagsHasAlpha"
+	case PaletteFlagsGrayScale:
+		return "PaletteFlagsGrayScale"
+	case PaletteFlagsHalftone:
+		return "PaletteFlagsHalftone"
+	default:
+		return fmt.Sprintf("PaletteFlags(%d)", int32(e))
+	}
+}
 
 type PaletteType int32
 
@@ -821,6 +2363,35 @@ const (
 	PaletteTypeFixedHalftone256 PaletteType = 9
 )
 
+// String returns the PaletteType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PaletteType) String() string {
+	switch e {
+	case PaletteTypeCustom:
+		return "PaletteTypeCustom"
+	case PaletteTypeOptimal:
+		return "PaletteTypeOptimal"
+	case PaletteTypeFixedBW:
+		return "PaletteTypeFixedBW"
+	case PaletteTypeFixedHalftone8:
+		return "PaletteTypeFixedHalftone8"
+	case PaletteTypeFixedHalftone27:
+		return "PaletteTypeFixedHalftone27"
+	case PaletteTypeFixedHalftone64:
+		return "PaletteTypeFixedHalftone64"
+	case PaletteTypeFixedHalftone125:
+		return "PaletteTypeFixedHalftone125"
+	case PaletteTypeFixedHalftone216:
+		return "PaletteTypeFixedHalftone216"
+	case PaletteTypeFixedHalftone252:
+		return "PaletteTypeFixedHalftone252"
+	case PaletteTypeFixedHalftone256:
+		return "PaletteTypeFixedHalftone256"
+	default:
+		return fmt.Sprintf("PaletteType(%d)", int32(e))
+	}
+}
+
 type PathPointType int32
 
 const (
@@ -834,12 +2405,48 @@ const (
 	PathPointTypeBezier3      PathPointType = 3
 )
 
+// String returns the PathPointType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PathPointType) String() string {
+	switch e {
+	case PathPointTypeStart:
+		return "PathPointTypeStart"
+	case PathPointTypeLine:
+		return "PathPointTypeLine"
+	case PathPointTypeBezier:
+		return "PathPointTypeBezier"
+	case PathPointTypePathTypeMask:
+		return "PathPointTypePathTypeMask"
+	case PathPointTypeDashMode:
+		return "PathPointTypeDashMode"
+	case PathPointTypePathMarker:
+		return "PathPointTypePathMarker"
+	case PathPointTypeCloseSubpath:
+		return "PathPointTypeCloseSubpath"
+	default:
+		return fmt.Sprintf("PathPointType(%d)", int32(e))
+	}
+}
+
 type PenAlignment int32
 
 const (
 	PenAlignmentCenter PenAlignment = 0
 	PenAlignmentInset  PenAlignment = 1
 )
+
+// String returns the PenAlignment constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PenAlignment) String() string {
+	switch e {
+	case PenAlignmentCenter:
+		return "PenAlignmentCenter"
+	case PenAlignmentInset:
+		return "PenAlignmentInset"
+	default:
+		return fmt.Sprintf("PenAlignment(%d)", int32(e))
+	}
+}
 
 type PenType int32
 
@@ -852,6 +2459,27 @@ const (
 	PenTypeUnknown        PenType = -1
 )
 
+// String returns the PenType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PenType) String() string {
+	switch e {
+	case PenTypeSolidColor:
+		return "PenTypeSolidColor"
+	case PenTypeHatchFill:
+		return "PenTypeHatchFill"
+	case PenTypeTextureFill:
+		return "PenTypeTextureFill"
+	case PenTypePathGradient:
+		return "PenTypePathGradient"
+	case PenTypeLinearGradient:
+		return "PenTypeLinearGradient"
+	case PenTypeUnknown:
+		return "PenTypeUnknown"
+	default:
+		return fmt.Sprintf("PenType(%d)", int32(e))
+	}
+}
+
 type PixelOffsetMode int32
 
 const (
@@ -863,6 +2491,27 @@ const (
 	PixelOffsetModeHalf        PixelOffsetMode = 4
 )
 
+// String returns the PixelOffsetMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PixelOffsetMode) String() string {
+	switch e {
+	case PixelOffsetModeInvalid:
+		return "PixelOffsetModeInvalid"
+	case PixelOffsetModeDefault:
+		return "PixelOffsetModeDefault"
+	case PixelOffsetModeHighSpeed:
+		return "PixelOffsetModeHighSpeed"
+	case PixelOffsetModeHighQuality:
+		return "PixelOffsetModeHighQuality"
+	case PixelOffsetModeNone:
+		return "PixelOffsetModeNone"
+	case PixelOffsetModeHalf:
+		return "PixelOffsetModeHalf"
+	default:
+		return fmt.Sprintf("PixelOffsetMode(%d)", int32(e))
+	}
+}
+
 type QualityMode int32
 
 const (
@@ -871,6 +2520,23 @@ const (
 	QualityModeLow     QualityMode = 1
 	QualityModeHigh    QualityMode = 2
 )
+
+// String returns the QualityMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QualityMode) String() string {
+	switch e {
+	case QualityModeInvalid:
+		return "QualityModeInvalid"
+	case QualityModeDefault:
+		return "QualityModeDefault"
+	case QualityModeLow:
+		return "QualityModeLow"
+	case QualityModeHigh:
+		return "QualityModeHigh"
+	default:
+		return fmt.Sprintf("QualityMode(%d)", int32(e))
+	}
+}
 
 type RotateFlipType int32
 
@@ -893,6 +2559,31 @@ const (
 	Rotate270FlipXY    RotateFlipType = 1
 )
 
+// String returns the RotateFlipType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RotateFlipType) String() string {
+	switch e {
+	case RotateNoneFlipNone:
+		return "RotateNoneFlipNone"
+	case Rotate90FlipNone:
+		return "Rotate90FlipNone"
+	case Rotate180FlipNone:
+		return "Rotate180FlipNone"
+	case Rotate270FlipNone:
+		return "Rotate270FlipNone"
+	case RotateNoneFlipX:
+		return "RotateNoneFlipX"
+	case Rotate90FlipX:
+		return "Rotate90FlipX"
+	case Rotate180FlipX:
+		return "Rotate180FlipX"
+	case Rotate270FlipX:
+		return "Rotate270FlipX"
+	default:
+		return fmt.Sprintf("RotateFlipType(%d)", int32(e))
+	}
+}
+
 type SmoothingMode int32
 
 const (
@@ -905,6 +2596,29 @@ const (
 	SmoothingModeAntiAlias8x4 SmoothingMode = 4
 	SmoothingModeAntiAlias8x8 SmoothingMode = 5
 )
+
+// String returns the SmoothingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SmoothingMode) String() string {
+	switch e {
+	case SmoothingModeInvalid:
+		return "SmoothingModeInvalid"
+	case SmoothingModeDefault:
+		return "SmoothingModeDefault"
+	case SmoothingModeHighSpeed:
+		return "SmoothingModeHighSpeed"
+	case SmoothingModeHighQuality:
+		return "SmoothingModeHighQuality"
+	case SmoothingModeNone:
+		return "SmoothingModeNone"
+	case SmoothingModeAntiAlias:
+		return "SmoothingModeAntiAlias"
+	case SmoothingModeAntiAlias8x8:
+		return "SmoothingModeAntiAlias8x8"
+	default:
+		return fmt.Sprintf("SmoothingMode(%d)", int32(e))
+	}
+}
 
 type Status int32
 
@@ -933,6 +2647,59 @@ const (
 	ProfileNotFound           Status = 21
 )
 
+// String returns the Status constant's name, or its numeric form when
+// the value is not a known constant.
+func (e Status) String() string {
+	switch e {
+	case Ok:
+		return "Ok"
+	case GenericError:
+		return "GenericError"
+	case InvalidParameter:
+		return "InvalidParameter"
+	case OutOfMemory:
+		return "OutOfMemory"
+	case ObjectBusy:
+		return "ObjectBusy"
+	case InsufficientBuffer:
+		return "InsufficientBuffer"
+	case NotImplemented:
+		return "NotImplemented"
+	case Win32Error:
+		return "Win32Error"
+	case WrongState:
+		return "WrongState"
+	case Aborted:
+		return "Aborted"
+	case FileNotFound:
+		return "FileNotFound"
+	case ValueOverflow:
+		return "ValueOverflow"
+	case AccessDenied:
+		return "AccessDenied"
+	case UnknownImageFormat:
+		return "UnknownImageFormat"
+	case FontFamilyNotFound:
+		return "FontFamilyNotFound"
+	case FontStyleNotFound:
+		return "FontStyleNotFound"
+	case NotTrueTypeFont:
+		return "NotTrueTypeFont"
+	case UnsupportedGdiplusVersion:
+		return "UnsupportedGdiplusVersion"
+	case GdiplusNotInitialized:
+		return "GdiplusNotInitialized"
+	case PropertyNotFound:
+		return "PropertyNotFound"
+	case PropertyNotSupported:
+		return "PropertyNotSupported"
+	case ProfileNotFound:
+		return "ProfileNotFound"
+	default:
+		return fmt.Sprintf("Status(%d)", int32(e))
+	}
+}
+
 type StringAlignment int32
 
 const (
@@ -940,6 +2707,21 @@ const (
 	StringAlignmentCenter StringAlignment = 1
 	StringAlignmentFar    StringAlignment = 2
 )
+
+// String returns the StringAlignment constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StringAlignment) String() string {
+	switch e {
+	case StringAlignmentNear:
+		return "StringAlignmentNear"
+	case StringAlignmentCenter:
+		return "StringAlignmentCenter"
+	case StringAlignmentFar:
+		return "StringAlignmentFar"
+	default:
+		return fmt.Sprintf("StringAlignment(%d)", int32(e))
+	}
+}
 
 type StringDigitSubstitute int32
 
@@ -949,6 +2731,23 @@ const (
 	StringDigitSubstituteNational    StringDigitSubstitute = 2
 	StringDigitSubstituteTraditional StringDigitSubstitute = 3
 )
+
+// String returns the StringDigitSubstitute constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StringDigitSubstitute) String() string {
+	switch e {
+	case StringDigitSubstituteUser:
+		return "StringDigitSubstituteUser"
+	case StringDigitSubstituteNone:
+		return "StringDigitSubstituteNone"
+	case StringDigitSubstituteNational:
+		return "StringDigitSubstituteNational"
+	case StringDigitSubstituteTraditional:
+		return "StringDigitSubstituteTraditional"
+	default:
+		return fmt.Sprintf("StringDigitSubstitute(%d)", int32(e))
+	}
+}
 
 type StringFormatFlags int32
 
@@ -965,6 +2764,35 @@ const (
 	StringFormatFlagsBypassGDI             StringFormatFlags = -2147483648
 )
 
+// String returns the StringFormatFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StringFormatFlags) String() string {
+	switch e {
+	case StringFormatFlagsDirectionRightToLeft:
+		return "StringFormatFlagsDirectionRightToLeft"
+	case StringFormatFlagsDirectionVertical:
+		return "StringFormatFlagsDirectionVertical"
+	case StringFormatFlagsNoFitBlackBox:
+		return "StringFormatFlagsNoFitBlackBox"
+	case StringFormatFlagsDisplayFormatControl:
+		return "StringFormatFlagsDisplayFormatControl"
+	case StringFormatFlagsNoFontFallback:
+		return "StringFormatFlagsNoFontFallback"
+	case StringFormatFlagsMeasureTrailingSpaces:
+		return "StringFormatFlagsMeasureTrailingSpaces"
+	case StringFormatFlagsNoWrap:
+		return "StringFormatFlagsNoWrap"
+	case StringFormatFlagsLineLimit:
+		return "StringFormatFlagsLineLimit"
+	case StringFormatFlagsNoClip:
+		return "StringFormatFlagsNoClip"
+	case StringFormatFlagsBypassGDI:
+		return "StringFormatFlagsBypassGDI"
+	default:
+		return fmt.Sprintf("StringFormatFlags(%d)", int32(e))
+	}
+}
+
 type StringTrimming int32
 
 const (
@@ -976,6 +2804,27 @@ const (
 	StringTrimmingEllipsisPath      StringTrimming = 5
 )
 
+// String returns the StringTrimming constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StringTrimming) String() string {
+	switch e {
+	case StringTrimmingNone:
+		return "StringTrimmingNone"
+	case StringTrimmingCharacter:
+		return "StringTrimmingCharacter"
+	case StringTrimmingWord:
+		return "StringTrimmingWord"
+	case StringTrimmingEllipsisCharacter:
+		return "StringTrimmingEllipsisCharacter"
+	case StringTrimmingEllipsisWord:
+		return "StringTrimmingEllipsisWord"
+	case StringTrimmingEllipsisPath:
+		return "StringTrimmingEllipsisPath"
+	default:
+		return fmt.Sprintf("StringTrimming(%d)", int32(e))
+	}
+}
+
 type TextRenderingHint int32
 
 const (
@@ -986,6 +2835,27 @@ const (
 	TextRenderingHintAntiAlias                TextRenderingHint = 4
 	TextRenderingHintClearTypeGridFit         TextRenderingHint = 5
 )
+
+// String returns the TextRenderingHint constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TextRenderingHint) String() string {
+	switch e {
+	case TextRenderingHintSystemDefault:
+		return "TextRenderingHintSystemDefault"
+	case TextRenderingHintSingleBitPerPixelGridFit:
+		return "TextRenderingHintSingleBitPerPixelGridFit"
+	case TextRenderingHintSingleBitPerPixel:
+		return "TextRenderingHintSingleBitPerPixel"
+	case TextRenderingHintAntiAliasGridFit:
+		return "TextRenderingHintAntiAliasGridFit"
+	case TextRenderingHintAntiAlias:
+		return "TextRenderingHintAntiAlias"
+	case TextRenderingHintClearTypeGridFit:
+		return "TextRenderingHintClearTypeGridFit"
+	default:
+		return fmt.Sprintf("TextRenderingHint(%d)", int32(e))
+	}
+}
 
 type Unit int32
 
@@ -999,12 +2869,48 @@ const (
 	UnitMillimeter Unit = 6
 )
 
+// String returns the Unit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e Unit) String() string {
+	switch e {
+	case UnitWorld:
+		return "UnitWorld"
+	case UnitDisplay:
+		return "UnitDisplay"
+	case UnitPixel:
+		return "UnitPixel"
+	case UnitPoint:
+		return "UnitPoint"
+	case UnitInch:
+		return "UnitInch"
+	case UnitDocument:
+		return "UnitDocument"
+	case UnitMillimeter:
+		return "UnitMillimeter"
+	default:
+		return fmt.Sprintf("Unit(%d)", int32(e))
+	}
+}
+
 type WarpMode int32
 
 const (
 	WarpModePerspective WarpMode = 0
 	WarpModeBilinear    WarpMode = 1
 )
+
+// String returns the WarpMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WarpMode) String() string {
+	switch e {
+	case WarpModePerspective:
+		return "WarpModePerspective"
+	case WarpModeBilinear:
+		return "WarpModeBilinear"
+	default:
+		return fmt.Sprintf("WarpMode(%d)", int32(e))
+	}
+}
 
 type WrapMode int32
 
@@ -1015,3 +2921,22 @@ const (
 	WrapModeTileFlipXY WrapMode = 3
 	WrapModeClamp      WrapMode = 4
 )
+
+// String returns the WrapMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WrapMode) String() string {
+	switch e {
+	case WrapModeTile:
+		return "WrapModeTile"
+	case WrapModeTileFlipX:
+		return "WrapModeTileFlipX"
+	case WrapModeTileFlipY:
+		return "WrapModeTileFlipY"
+	case WrapModeTileFlipXY:
+		return "WrapModeTileFlipXY"
+	case WrapModeClamp:
+		return "WrapModeClamp"
+	default:
+		return fmt.Sprintf("WrapMode(%d)", int32(e))
+	}
+}

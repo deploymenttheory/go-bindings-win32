@@ -4,6 +4,10 @@
 
 package rightsmanagement
 
+import (
+	"fmt"
+)
+
 // DRMATTESTTYPE: https://learn.microsoft.com/windows/win32/api/msdrmdefs/ne-msdrmdefs-drmattesttype
 type DRMATTESTTYPE int32
 
@@ -11,6 +15,19 @@ const (
 	DRMATTESTTYPE_FULLENVIRONMENT DRMATTESTTYPE = 0
 	DRMATTESTTYPE_HASHONLY        DRMATTESTTYPE = 1
 )
+
+// String returns the DRMATTESTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRMATTESTTYPE) String() string {
+	switch e {
+	case DRMATTESTTYPE_FULLENVIRONMENT:
+		return "DRMATTESTTYPE_FULLENVIRONMENT"
+	case DRMATTESTTYPE_HASHONLY:
+		return "DRMATTESTTYPE_HASHONLY"
+	default:
+		return fmt.Sprintf("DRMATTESTTYPE(%d)", int32(e))
+	}
+}
 
 // DRMENCODINGTYPE: https://learn.microsoft.com/windows/win32/api/msdrmdefs/ne-msdrmdefs-drmencodingtype
 type DRMENCODINGTYPE int32
@@ -24,6 +41,27 @@ const (
 	DRMENCODINGTYPE_RAW    DRMENCODINGTYPE = 5
 )
 
+// String returns the DRMENCODINGTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRMENCODINGTYPE) String() string {
+	switch e {
+	case DRMENCODINGTYPE_BASE64:
+		return "DRMENCODINGTYPE_BASE64"
+	case DRMENCODINGTYPE_STRING:
+		return "DRMENCODINGTYPE_STRING"
+	case DRMENCODINGTYPE_LONG:
+		return "DRMENCODINGTYPE_LONG"
+	case DRMENCODINGTYPE_TIME:
+		return "DRMENCODINGTYPE_TIME"
+	case DRMENCODINGTYPE_UINT:
+		return "DRMENCODINGTYPE_UINT"
+	case DRMENCODINGTYPE_RAW:
+		return "DRMENCODINGTYPE_RAW"
+	default:
+		return fmt.Sprintf("DRMENCODINGTYPE(%d)", int32(e))
+	}
+}
+
 // DRMGLOBALOPTIONS: https://learn.microsoft.com/windows/win32/api/msdrmdefs/ne-msdrmdefs-drmglobaloptions
 type DRMGLOBALOPTIONS int32
 
@@ -32,12 +70,36 @@ const (
 	DRMGLOBALOPTIONS_USE_SERVERSECURITYPROCESSOR DRMGLOBALOPTIONS = 1
 )
 
+// String returns the DRMGLOBALOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRMGLOBALOPTIONS) String() string {
+	switch e {
+	case DRMGLOBALOPTIONS_USE_WINHTTP:
+		return "DRMGLOBALOPTIONS_USE_WINHTTP"
+	case DRMGLOBALOPTIONS_USE_SERVERSECURITYPROCESSOR:
+		return "DRMGLOBALOPTIONS_USE_SERVERSECURITYPROCESSOR"
+	default:
+		return fmt.Sprintf("DRMGLOBALOPTIONS(%d)", int32(e))
+	}
+}
+
 // DRMSECURITYPROVIDERTYPE: https://learn.microsoft.com/windows/win32/api/msdrmdefs/ne-msdrmdefs-drmsecurityprovidertype
 type DRMSECURITYPROVIDERTYPE int32
 
 const (
 	DRMSECURITYPROVIDERTYPE_SOFTWARESECREP DRMSECURITYPROVIDERTYPE = 0
 )
+
+// String returns the DRMSECURITYPROVIDERTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRMSECURITYPROVIDERTYPE) String() string {
+	switch e {
+	case DRMSECURITYPROVIDERTYPE_SOFTWARESECREP:
+		return "DRMSECURITYPROVIDERTYPE_SOFTWARESECREP"
+	default:
+		return fmt.Sprintf("DRMSECURITYPROVIDERTYPE(%d)", int32(e))
+	}
+}
 
 // DRMSPECTYPE: https://learn.microsoft.com/windows/win32/api/msdrmdefs/ne-msdrmdefs-drmspectype
 type DRMSPECTYPE int32
@@ -47,6 +109,19 @@ const (
 	DRMSPECTYPE_FILENAME DRMSPECTYPE = 1
 )
 
+// String returns the DRMSPECTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRMSPECTYPE) String() string {
+	switch e {
+	case DRMSPECTYPE_UNKNOWN:
+		return "DRMSPECTYPE_UNKNOWN"
+	case DRMSPECTYPE_FILENAME:
+		return "DRMSPECTYPE_FILENAME"
+	default:
+		return fmt.Sprintf("DRMSPECTYPE(%d)", int32(e))
+	}
+}
+
 // DRMTIMETYPE: https://learn.microsoft.com/windows/win32/api/msdrmdefs/ne-msdrmdefs-drmtimetype
 type DRMTIMETYPE int32
 
@@ -54,6 +129,19 @@ const (
 	DRMTIMETYPE_SYSTEMUTC   DRMTIMETYPE = 0
 	DRMTIMETYPE_SYSTEMLOCAL DRMTIMETYPE = 1
 )
+
+// String returns the DRMTIMETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRMTIMETYPE) String() string {
+	switch e {
+	case DRMTIMETYPE_SYSTEMUTC:
+		return "DRMTIMETYPE_SYSTEMUTC"
+	case DRMTIMETYPE_SYSTEMLOCAL:
+		return "DRMTIMETYPE_SYSTEMLOCAL"
+	default:
+		return fmt.Sprintf("DRMTIMETYPE(%d)", int32(e))
+	}
+}
 
 // DRM_DISTRIBUTION_POINT_INFO: https://learn.microsoft.com/windows/win32/api/msdrmdefs/ne-msdrmdefs-drm_distribution_point_info
 type DRM_DISTRIBUTION_POINT_INFO int32
@@ -63,6 +151,21 @@ const (
 	DRM_DISTRIBUTION_POINT_PUBLISHING          DRM_DISTRIBUTION_POINT_INFO = 1
 	DRM_DISTRIBUTION_POINT_REFERRAL_INFO       DRM_DISTRIBUTION_POINT_INFO = 2
 )
+
+// String returns the DRM_DISTRIBUTION_POINT_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRM_DISTRIBUTION_POINT_INFO) String() string {
+	switch e {
+	case DRM_DISTRIBUTION_POINT_LICENSE_ACQUISITION:
+		return "DRM_DISTRIBUTION_POINT_LICENSE_ACQUISITION"
+	case DRM_DISTRIBUTION_POINT_PUBLISHING:
+		return "DRM_DISTRIBUTION_POINT_PUBLISHING"
+	case DRM_DISTRIBUTION_POINT_REFERRAL_INFO:
+		return "DRM_DISTRIBUTION_POINT_REFERRAL_INFO"
+	default:
+		return fmt.Sprintf("DRM_DISTRIBUTION_POINT_INFO(%d)", int32(e))
+	}
+}
 
 // DRM_STATUS_MSG: https://learn.microsoft.com/windows/win32/api/msdrmdefs/ne-msdrmdefs-drm_status_msg
 type DRM_STATUS_MSG int32
@@ -77,6 +180,29 @@ const (
 	DRM_MSG_ACQUIRE_ISSUANCE_LICENSE_TEMPLATE DRM_STATUS_MSG = 6
 )
 
+// String returns the DRM_STATUS_MSG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRM_STATUS_MSG) String() string {
+	switch e {
+	case DRM_MSG_ACTIVATE_MACHINE:
+		return "DRM_MSG_ACTIVATE_MACHINE"
+	case DRM_MSG_ACTIVATE_GROUPIDENTITY:
+		return "DRM_MSG_ACTIVATE_GROUPIDENTITY"
+	case DRM_MSG_ACQUIRE_LICENSE:
+		return "DRM_MSG_ACQUIRE_LICENSE"
+	case DRM_MSG_ACQUIRE_ADVISORY:
+		return "DRM_MSG_ACQUIRE_ADVISORY"
+	case DRM_MSG_SIGN_ISSUANCE_LICENSE:
+		return "DRM_MSG_SIGN_ISSUANCE_LICENSE"
+	case DRM_MSG_ACQUIRE_CLIENTLICENSOR:
+		return "DRM_MSG_ACQUIRE_CLIENTLICENSOR"
+	case DRM_MSG_ACQUIRE_ISSUANCE_LICENSE_TEMPLATE:
+		return "DRM_MSG_ACQUIRE_ISSUANCE_LICENSE_TEMPLATE"
+	default:
+		return fmt.Sprintf("DRM_STATUS_MSG(%d)", int32(e))
+	}
+}
+
 // DRM_USAGEPOLICY_TYPE: https://learn.microsoft.com/windows/win32/api/msdrmdefs/ne-msdrmdefs-drm_usagepolicy_type
 type DRM_USAGEPOLICY_TYPE int32
 
@@ -86,3 +212,20 @@ const (
 	DRM_USAGEPOLICY_TYPE_BYDIGEST    DRM_USAGEPOLICY_TYPE = 2
 	DRM_USAGEPOLICY_TYPE_OSEXCLUSION DRM_USAGEPOLICY_TYPE = 3
 )
+
+// String returns the DRM_USAGEPOLICY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRM_USAGEPOLICY_TYPE) String() string {
+	switch e {
+	case DRM_USAGEPOLICY_TYPE_BYNAME:
+		return "DRM_USAGEPOLICY_TYPE_BYNAME"
+	case DRM_USAGEPOLICY_TYPE_BYPUBLICKEY:
+		return "DRM_USAGEPOLICY_TYPE_BYPUBLICKEY"
+	case DRM_USAGEPOLICY_TYPE_BYDIGEST:
+		return "DRM_USAGEPOLICY_TYPE_BYDIGEST"
+	case DRM_USAGEPOLICY_TYPE_OSEXCLUSION:
+		return "DRM_USAGEPOLICY_TYPE_OSEXCLUSION"
+	default:
+		return fmt.Sprintf("DRM_USAGEPOLICY_TYPE(%d)", int32(e))
+	}
+}

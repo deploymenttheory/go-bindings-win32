@@ -4,6 +4,12 @@
 
 package dialogs
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type CHOOSECOLOR_FLAGS uint32
 
 const (
@@ -18,6 +24,44 @@ const (
 	CC_ANYCOLOR             CHOOSECOLOR_FLAGS = 256
 )
 
+// String returns the CHOOSECOLOR_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHOOSECOLOR_FLAGS) String() string {
+	var parts []string
+	if e&CC_RGBINIT != 0 {
+		parts = append(parts, "CC_RGBINIT")
+	}
+	if e&CC_FULLOPEN != 0 {
+		parts = append(parts, "CC_FULLOPEN")
+	}
+	if e&CC_PREVENTFULLOPEN != 0 {
+		parts = append(parts, "CC_PREVENTFULLOPEN")
+	}
+	if e&CC_SHOWHELP != 0 {
+		parts = append(parts, "CC_SHOWHELP")
+	}
+	if e&CC_ENABLEHOOK != 0 {
+		parts = append(parts, "CC_ENABLEHOOK")
+	}
+	if e&CC_ENABLETEMPLATE != 0 {
+		parts = append(parts, "CC_ENABLETEMPLATE")
+	}
+	if e&CC_ENABLETEMPLATEHANDLE != 0 {
+		parts = append(parts, "CC_ENABLETEMPLATEHANDLE")
+	}
+	if e&CC_SOLIDCOLOR != 0 {
+		parts = append(parts, "CC_SOLIDCOLOR")
+	}
+	if e&CC_ANYCOLOR != 0 {
+		parts = append(parts, "CC_ANYCOLOR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CHOOSEFONT_FLAGS uint32
 
 const (
@@ -52,6 +96,104 @@ const (
 	CF_WYSIWYG              CHOOSEFONT_FLAGS = 32768
 )
 
+// String returns the CHOOSEFONT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHOOSEFONT_FLAGS) String() string {
+	var parts []string
+	if e&CF_APPLY != 0 {
+		parts = append(parts, "CF_APPLY")
+	}
+	if e&CF_ANSIONLY != 0 {
+		parts = append(parts, "CF_ANSIONLY")
+	}
+	if e&CF_BOTH != 0 {
+		parts = append(parts, "CF_BOTH")
+	}
+	if e&CF_EFFECTS != 0 {
+		parts = append(parts, "CF_EFFECTS")
+	}
+	if e&CF_ENABLEHOOK != 0 {
+		parts = append(parts, "CF_ENABLEHOOK")
+	}
+	if e&CF_ENABLETEMPLATE != 0 {
+		parts = append(parts, "CF_ENABLETEMPLATE")
+	}
+	if e&CF_ENABLETEMPLATEHANDLE != 0 {
+		parts = append(parts, "CF_ENABLETEMPLATEHANDLE")
+	}
+	if e&CF_FIXEDPITCHONLY != 0 {
+		parts = append(parts, "CF_FIXEDPITCHONLY")
+	}
+	if e&CF_FORCEFONTEXIST != 0 {
+		parts = append(parts, "CF_FORCEFONTEXIST")
+	}
+	if e&CF_INACTIVEFONTS != 0 {
+		parts = append(parts, "CF_INACTIVEFONTS")
+	}
+	if e&CF_INITTOLOGFONTSTRUCT != 0 {
+		parts = append(parts, "CF_INITTOLOGFONTSTRUCT")
+	}
+	if e&CF_LIMITSIZE != 0 {
+		parts = append(parts, "CF_LIMITSIZE")
+	}
+	if e&CF_NOOEMFONTS != 0 {
+		parts = append(parts, "CF_NOOEMFONTS")
+	}
+	if e&CF_NOFACESEL != 0 {
+		parts = append(parts, "CF_NOFACESEL")
+	}
+	if e&CF_NOSCRIPTSEL != 0 {
+		parts = append(parts, "CF_NOSCRIPTSEL")
+	}
+	if e&CF_NOSIMULATIONS != 0 {
+		parts = append(parts, "CF_NOSIMULATIONS")
+	}
+	if e&CF_NOSIZESEL != 0 {
+		parts = append(parts, "CF_NOSIZESEL")
+	}
+	if e&CF_NOSTYLESEL != 0 {
+		parts = append(parts, "CF_NOSTYLESEL")
+	}
+	if e&CF_NOVECTORFONTS != 0 {
+		parts = append(parts, "CF_NOVECTORFONTS")
+	}
+	if e&CF_NOVERTFONTS != 0 {
+		parts = append(parts, "CF_NOVERTFONTS")
+	}
+	if e&CF_PRINTERFONTS != 0 {
+		parts = append(parts, "CF_PRINTERFONTS")
+	}
+	if e&CF_SCALABLEONLY != 0 {
+		parts = append(parts, "CF_SCALABLEONLY")
+	}
+	if e&CF_SCREENFONTS != 0 {
+		parts = append(parts, "CF_SCREENFONTS")
+	}
+	if e&CF_SCRIPTSONLY != 0 {
+		parts = append(parts, "CF_SCRIPTSONLY")
+	}
+	if e&CF_SELECTSCRIPT != 0 {
+		parts = append(parts, "CF_SELECTSCRIPT")
+	}
+	if e&CF_SHOWHELP != 0 {
+		parts = append(parts, "CF_SHOWHELP")
+	}
+	if e&CF_TTONLY != 0 {
+		parts = append(parts, "CF_TTONLY")
+	}
+	if e&CF_USESTYLE != 0 {
+		parts = append(parts, "CF_USESTYLE")
+	}
+	if e&CF_WYSIWYG != 0 {
+		parts = append(parts, "CF_WYSIWYG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CHOOSEFONT_FONT_TYPE uint16
 
 const (
@@ -62,6 +204,34 @@ const (
 	SCREEN_FONTTYPE    CHOOSEFONT_FONT_TYPE = 8192
 	SIMULATED_FONTTYPE CHOOSEFONT_FONT_TYPE = 32768
 )
+
+// String returns the CHOOSEFONT_FONT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHOOSEFONT_FONT_TYPE) String() string {
+	var parts []string
+	if e&BOLD_FONTTYPE != 0 {
+		parts = append(parts, "BOLD_FONTTYPE")
+	}
+	if e&ITALIC_FONTTYPE != 0 {
+		parts = append(parts, "ITALIC_FONTTYPE")
+	}
+	if e&PRINTER_FONTTYPE != 0 {
+		parts = append(parts, "PRINTER_FONTTYPE")
+	}
+	if e&REGULAR_FONTTYPE != 0 {
+		parts = append(parts, "REGULAR_FONTTYPE")
+	}
+	if e&SCREEN_FONTTYPE != 0 {
+		parts = append(parts, "SCREEN_FONTTYPE")
+	}
+	if e&SIMULATED_FONTTYPE != 0 {
+		parts = append(parts, "SIMULATED_FONTTYPE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type COMMON_DLG_ERRORS uint32
 
@@ -105,6 +275,90 @@ const (
 	CCERR_CHOOSECOLORCODES COMMON_DLG_ERRORS = 20480
 )
 
+// String returns the COMMON_DLG_ERRORS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMMON_DLG_ERRORS) String() string {
+	switch e {
+	case CDERR_DIALOGFAILURE:
+		return "CDERR_DIALOGFAILURE"
+	case CDERR_GENERALCODES:
+		return "CDERR_GENERALCODES"
+	case CDERR_STRUCTSIZE:
+		return "CDERR_STRUCTSIZE"
+	case CDERR_INITIALIZATION:
+		return "CDERR_INITIALIZATION"
+	case CDERR_NOTEMPLATE:
+		return "CDERR_NOTEMPLATE"
+	case CDERR_NOHINSTANCE:
+		return "CDERR_NOHINSTANCE"
+	case CDERR_LOADSTRFAILURE:
+		return "CDERR_LOADSTRFAILURE"
+	case CDERR_FINDRESFAILURE:
+		return "CDERR_FINDRESFAILURE"
+	case CDERR_LOADRESFAILURE:
+		return "CDERR_LOADRESFAILURE"
+	case CDERR_LOCKRESFAILURE:
+		return "CDERR_LOCKRESFAILURE"
+	case CDERR_MEMALLOCFAILURE:
+		return "CDERR_MEMALLOCFAILURE"
+	case CDERR_MEMLOCKFAILURE:
+		return "CDERR_MEMLOCKFAILURE"
+	case CDERR_NOHOOK:
+		return "CDERR_NOHOOK"
+	case CDERR_REGISTERMSGFAIL:
+		return "CDERR_REGISTERMSGFAIL"
+	case PDERR_PRINTERCODES:
+		return "PDERR_PRINTERCODES"
+	case PDERR_SETUPFAILURE:
+		return "PDERR_SETUPFAILURE"
+	case PDERR_PARSEFAILURE:
+		return "PDERR_PARSEFAILURE"
+	case PDERR_RETDEFFAILURE:
+		return "PDERR_RETDEFFAILURE"
+	case PDERR_LOADDRVFAILURE:
+		return "PDERR_LOADDRVFAILURE"
+	case PDERR_GETDEVMODEFAIL:
+		return "PDERR_GETDEVMODEFAIL"
+	case PDERR_INITFAILURE:
+		return "PDERR_INITFAILURE"
+	case PDERR_NODEVICES:
+		return "PDERR_NODEVICES"
+	case PDERR_NODEFAULTPRN:
+		return "PDERR_NODEFAULTPRN"
+	case PDERR_DNDMMISMATCH:
+		return "PDERR_DNDMMISMATCH"
+	case PDERR_CREATEICFAILURE:
+		return "PDERR_CREATEICFAILURE"
+	case PDERR_PRINTERNOTFOUND:
+		return "PDERR_PRINTERNOTFOUND"
+	case PDERR_DEFAULTDIFFERENT:
+		return "PDERR_DEFAULTDIFFERENT"
+	case CFERR_CHOOSEFONTCODES:
+		return "CFERR_CHOOSEFONTCODES"
+	case CFERR_NOFONTS:
+		return "CFERR_NOFONTS"
+	case CFERR_MAXLESSTHANMIN:
+		return "CFERR_MAXLESSTHANMIN"
+	case FNERR_FILENAMECODES:
+		return "FNERR_FILENAMECODES"
+	case FNERR_SUBCLASSFAILURE:
+		return "FNERR_SUBCLASSFAILURE"
+	case FNERR_INVALIDFILENAME:
+		return "FNERR_INVALIDFILENAME"
+	case FNERR_BUFFERTOOSMALL:
+		return "FNERR_BUFFERTOOSMALL"
+	case FRERR_FINDREPLACECODES:
+		return "FRERR_FINDREPLACECODES"
+	case FRERR_BUFFERLENGTHZERO:
+		return "FRERR_BUFFERLENGTHZERO"
+	case CCERR_CHOOSECOLORCODES:
+		return "CCERR_CHOOSECOLORCODES"
+	default:
+		return fmt.Sprintf("COMMON_DLG_ERRORS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FINDREPLACE_FLAGS uint32
 
 const (
@@ -134,6 +388,89 @@ const (
 	FR_MATCHALEFHAMZA       FINDREPLACE_FLAGS = 2147483648
 )
 
+// String returns the FINDREPLACE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FINDREPLACE_FLAGS) String() string {
+	var parts []string
+	if e&FR_DOWN != 0 {
+		parts = append(parts, "FR_DOWN")
+	}
+	if e&FR_WHOLEWORD != 0 {
+		parts = append(parts, "FR_WHOLEWORD")
+	}
+	if e&FR_MATCHCASE != 0 {
+		parts = append(parts, "FR_MATCHCASE")
+	}
+	if e&FR_FINDNEXT != 0 {
+		parts = append(parts, "FR_FINDNEXT")
+	}
+	if e&FR_REPLACE != 0 {
+		parts = append(parts, "FR_REPLACE")
+	}
+	if e&FR_REPLACEALL != 0 {
+		parts = append(parts, "FR_REPLACEALL")
+	}
+	if e&FR_DIALOGTERM != 0 {
+		parts = append(parts, "FR_DIALOGTERM")
+	}
+	if e&FR_SHOWHELP != 0 {
+		parts = append(parts, "FR_SHOWHELP")
+	}
+	if e&FR_ENABLEHOOK != 0 {
+		parts = append(parts, "FR_ENABLEHOOK")
+	}
+	if e&FR_ENABLETEMPLATE != 0 {
+		parts = append(parts, "FR_ENABLETEMPLATE")
+	}
+	if e&FR_NOUPDOWN != 0 {
+		parts = append(parts, "FR_NOUPDOWN")
+	}
+	if e&FR_NOMATCHCASE != 0 {
+		parts = append(parts, "FR_NOMATCHCASE")
+	}
+	if e&FR_NOWHOLEWORD != 0 {
+		parts = append(parts, "FR_NOWHOLEWORD")
+	}
+	if e&FR_ENABLETEMPLATEHANDLE != 0 {
+		parts = append(parts, "FR_ENABLETEMPLATEHANDLE")
+	}
+	if e&FR_HIDEUPDOWN != 0 {
+		parts = append(parts, "FR_HIDEUPDOWN")
+	}
+	if e&FR_HIDEMATCHCASE != 0 {
+		parts = append(parts, "FR_HIDEMATCHCASE")
+	}
+	if e&FR_HIDEWHOLEWORD != 0 {
+		parts = append(parts, "FR_HIDEWHOLEWORD")
+	}
+	if e&FR_RAW != 0 {
+		parts = append(parts, "FR_RAW")
+	}
+	if e&FR_SHOWWRAPAROUND != 0 {
+		parts = append(parts, "FR_SHOWWRAPAROUND")
+	}
+	if e&FR_NOWRAPAROUND != 0 {
+		parts = append(parts, "FR_NOWRAPAROUND")
+	}
+	if e&FR_WRAPAROUND != 0 {
+		parts = append(parts, "FR_WRAPAROUND")
+	}
+	if e&FR_MATCHDIAC != 0 {
+		parts = append(parts, "FR_MATCHDIAC")
+	}
+	if e&FR_MATCHKASHIDA != 0 {
+		parts = append(parts, "FR_MATCHKASHIDA")
+	}
+	if e&FR_MATCHALEFHAMZA != 0 {
+		parts = append(parts, "FR_MATCHALEFHAMZA")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type OPEN_FILENAME_FLAGS uint32
 
 const (
@@ -165,6 +502,95 @@ const (
 	OFN_FORCESHOWHIDDEN      OPEN_FILENAME_FLAGS = 268435456
 )
 
+// String returns the OPEN_FILENAME_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPEN_FILENAME_FLAGS) String() string {
+	var parts []string
+	if e&OFN_READONLY != 0 {
+		parts = append(parts, "OFN_READONLY")
+	}
+	if e&OFN_OVERWRITEPROMPT != 0 {
+		parts = append(parts, "OFN_OVERWRITEPROMPT")
+	}
+	if e&OFN_HIDEREADONLY != 0 {
+		parts = append(parts, "OFN_HIDEREADONLY")
+	}
+	if e&OFN_NOCHANGEDIR != 0 {
+		parts = append(parts, "OFN_NOCHANGEDIR")
+	}
+	if e&OFN_SHOWHELP != 0 {
+		parts = append(parts, "OFN_SHOWHELP")
+	}
+	if e&OFN_ENABLEHOOK != 0 {
+		parts = append(parts, "OFN_ENABLEHOOK")
+	}
+	if e&OFN_ENABLETEMPLATE != 0 {
+		parts = append(parts, "OFN_ENABLETEMPLATE")
+	}
+	if e&OFN_ENABLETEMPLATEHANDLE != 0 {
+		parts = append(parts, "OFN_ENABLETEMPLATEHANDLE")
+	}
+	if e&OFN_NOVALIDATE != 0 {
+		parts = append(parts, "OFN_NOVALIDATE")
+	}
+	if e&OFN_ALLOWMULTISELECT != 0 {
+		parts = append(parts, "OFN_ALLOWMULTISELECT")
+	}
+	if e&OFN_EXTENSIONDIFFERENT != 0 {
+		parts = append(parts, "OFN_EXTENSIONDIFFERENT")
+	}
+	if e&OFN_PATHMUSTEXIST != 0 {
+		parts = append(parts, "OFN_PATHMUSTEXIST")
+	}
+	if e&OFN_FILEMUSTEXIST != 0 {
+		parts = append(parts, "OFN_FILEMUSTEXIST")
+	}
+	if e&OFN_CREATEPROMPT != 0 {
+		parts = append(parts, "OFN_CREATEPROMPT")
+	}
+	if e&OFN_SHAREAWARE != 0 {
+		parts = append(parts, "OFN_SHAREAWARE")
+	}
+	if e&OFN_NOREADONLYRETURN != 0 {
+		parts = append(parts, "OFN_NOREADONLYRETURN")
+	}
+	if e&OFN_NOTESTFILECREATE != 0 {
+		parts = append(parts, "OFN_NOTESTFILECREATE")
+	}
+	if e&OFN_NONETWORKBUTTON != 0 {
+		parts = append(parts, "OFN_NONETWORKBUTTON")
+	}
+	if e&OFN_NOLONGNAMES != 0 {
+		parts = append(parts, "OFN_NOLONGNAMES")
+	}
+	if e&OFN_EXPLORER != 0 {
+		parts = append(parts, "OFN_EXPLORER")
+	}
+	if e&OFN_NODEREFERENCELINKS != 0 {
+		parts = append(parts, "OFN_NODEREFERENCELINKS")
+	}
+	if e&OFN_LONGNAMES != 0 {
+		parts = append(parts, "OFN_LONGNAMES")
+	}
+	if e&OFN_ENABLEINCLUDENOTIFY != 0 {
+		parts = append(parts, "OFN_ENABLEINCLUDENOTIFY")
+	}
+	if e&OFN_ENABLESIZING != 0 {
+		parts = append(parts, "OFN_ENABLESIZING")
+	}
+	if e&OFN_DONTADDTORECENT != 0 {
+		parts = append(parts, "OFN_DONTADDTORECENT")
+	}
+	if e&OFN_FORCESHOWHIDDEN != 0 {
+		parts = append(parts, "OFN_FORCESHOWHIDDEN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type OPEN_FILENAME_FLAGS_EX uint32
 
 const (
@@ -172,6 +598,20 @@ const (
 	OFN_EX_NOPLACESBAR OPEN_FILENAME_FLAGS_EX = 1
 )
 
+// String returns the OPEN_FILENAME_FLAGS_EX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPEN_FILENAME_FLAGS_EX) String() string {
+	var parts []string
+	if e&OFN_EX_NOPLACESBAR != 0 {
+		parts = append(parts, "OFN_EX_NOPLACESBAR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PAGESETUPDLG_FLAGS uint32
 
 const (
@@ -196,6 +636,68 @@ const (
 	PSD_SHOWHELP                      PAGESETUPDLG_FLAGS = 2048
 )
 
+// String returns the PAGESETUPDLG_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAGESETUPDLG_FLAGS) String() string {
+	var parts []string
+	if e&PSD_DISABLEMARGINS != 0 {
+		parts = append(parts, "PSD_DISABLEMARGINS")
+	}
+	if e&PSD_DISABLEORIENTATION != 0 {
+		parts = append(parts, "PSD_DISABLEORIENTATION")
+	}
+	if e&PSD_DISABLEPAGEPAINTING != 0 {
+		parts = append(parts, "PSD_DISABLEPAGEPAINTING")
+	}
+	if e&PSD_DISABLEPAPER != 0 {
+		parts = append(parts, "PSD_DISABLEPAPER")
+	}
+	if e&PSD_DISABLEPRINTER != 0 {
+		parts = append(parts, "PSD_DISABLEPRINTER")
+	}
+	if e&PSD_ENABLEPAGEPAINTHOOK != 0 {
+		parts = append(parts, "PSD_ENABLEPAGEPAINTHOOK")
+	}
+	if e&PSD_ENABLEPAGESETUPHOOK != 0 {
+		parts = append(parts, "PSD_ENABLEPAGESETUPHOOK")
+	}
+	if e&PSD_ENABLEPAGESETUPTEMPLATE != 0 {
+		parts = append(parts, "PSD_ENABLEPAGESETUPTEMPLATE")
+	}
+	if e&PSD_ENABLEPAGESETUPTEMPLATEHANDLE != 0 {
+		parts = append(parts, "PSD_ENABLEPAGESETUPTEMPLATEHANDLE")
+	}
+	if e&PSD_INHUNDREDTHSOFMILLIMETERS != 0 {
+		parts = append(parts, "PSD_INHUNDREDTHSOFMILLIMETERS")
+	}
+	if e&PSD_INTHOUSANDTHSOFINCHES != 0 {
+		parts = append(parts, "PSD_INTHOUSANDTHSOFINCHES")
+	}
+	if e&PSD_MARGINS != 0 {
+		parts = append(parts, "PSD_MARGINS")
+	}
+	if e&PSD_MINMARGINS != 0 {
+		parts = append(parts, "PSD_MINMARGINS")
+	}
+	if e&PSD_NONETWORKBUTTON != 0 {
+		parts = append(parts, "PSD_NONETWORKBUTTON")
+	}
+	if e&PSD_NOWARNING != 0 {
+		parts = append(parts, "PSD_NOWARNING")
+	}
+	if e&PSD_RETURNDEFAULT != 0 {
+		parts = append(parts, "PSD_RETURNDEFAULT")
+	}
+	if e&PSD_SHOWHELP != 0 {
+		parts = append(parts, "PSD_SHOWHELP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PRINTDLGEX_FLAGS uint32
 
 const (
@@ -228,3 +730,94 @@ const (
 	PD_PRINTSETUP                 PRINTDLGEX_FLAGS = 64
 	PD_SHOWHELP                   PRINTDLGEX_FLAGS = 2048
 )
+
+// String returns the PRINTDLGEX_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRINTDLGEX_FLAGS) String() string {
+	var parts []string
+	if e&PD_COLLATE != 0 {
+		parts = append(parts, "PD_COLLATE")
+	}
+	if e&PD_CURRENTPAGE != 0 {
+		parts = append(parts, "PD_CURRENTPAGE")
+	}
+	if e&PD_DISABLEPRINTTOFILE != 0 {
+		parts = append(parts, "PD_DISABLEPRINTTOFILE")
+	}
+	if e&PD_ENABLEPRINTTEMPLATE != 0 {
+		parts = append(parts, "PD_ENABLEPRINTTEMPLATE")
+	}
+	if e&PD_ENABLEPRINTTEMPLATEHANDLE != 0 {
+		parts = append(parts, "PD_ENABLEPRINTTEMPLATEHANDLE")
+	}
+	if e&PD_EXCLUSIONFLAGS != 0 {
+		parts = append(parts, "PD_EXCLUSIONFLAGS")
+	}
+	if e&PD_HIDEPRINTTOFILE != 0 {
+		parts = append(parts, "PD_HIDEPRINTTOFILE")
+	}
+	if e&PD_NOCURRENTPAGE != 0 {
+		parts = append(parts, "PD_NOCURRENTPAGE")
+	}
+	if e&PD_NOPAGENUMS != 0 {
+		parts = append(parts, "PD_NOPAGENUMS")
+	}
+	if e&PD_NOSELECTION != 0 {
+		parts = append(parts, "PD_NOSELECTION")
+	}
+	if e&PD_NOWARNING != 0 {
+		parts = append(parts, "PD_NOWARNING")
+	}
+	if e&PD_PAGENUMS != 0 {
+		parts = append(parts, "PD_PAGENUMS")
+	}
+	if e&PD_PRINTTOFILE != 0 {
+		parts = append(parts, "PD_PRINTTOFILE")
+	}
+	if e&PD_RETURNDC != 0 {
+		parts = append(parts, "PD_RETURNDC")
+	}
+	if e&PD_RETURNDEFAULT != 0 {
+		parts = append(parts, "PD_RETURNDEFAULT")
+	}
+	if e&PD_RETURNIC != 0 {
+		parts = append(parts, "PD_RETURNIC")
+	}
+	if e&PD_SELECTION != 0 {
+		parts = append(parts, "PD_SELECTION")
+	}
+	if e&PD_USEDEVMODECOPIES != 0 {
+		parts = append(parts, "PD_USEDEVMODECOPIES")
+	}
+	if e&PD_USEDEVMODECOPIESANDCOLLATE != 0 {
+		parts = append(parts, "PD_USEDEVMODECOPIESANDCOLLATE")
+	}
+	if e&PD_USELARGETEMPLATE != 0 {
+		parts = append(parts, "PD_USELARGETEMPLATE")
+	}
+	if e&PD_ENABLEPRINTHOOK != 0 {
+		parts = append(parts, "PD_ENABLEPRINTHOOK")
+	}
+	if e&PD_ENABLESETUPHOOK != 0 {
+		parts = append(parts, "PD_ENABLESETUPHOOK")
+	}
+	if e&PD_ENABLESETUPTEMPLATE != 0 {
+		parts = append(parts, "PD_ENABLESETUPTEMPLATE")
+	}
+	if e&PD_ENABLESETUPTEMPLATEHANDLE != 0 {
+		parts = append(parts, "PD_ENABLESETUPTEMPLATEHANDLE")
+	}
+	if e&PD_NONETWORKBUTTON != 0 {
+		parts = append(parts, "PD_NONETWORKBUTTON")
+	}
+	if e&PD_PRINTSETUP != 0 {
+		parts = append(parts, "PD_PRINTSETUP")
+	}
+	if e&PD_SHOWHELP != 0 {
+		parts = append(parts, "PD_SHOWHELP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

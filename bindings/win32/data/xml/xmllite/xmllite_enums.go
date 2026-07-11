@@ -4,6 +4,10 @@
 
 package xmllite
 
+import (
+	"fmt"
+)
+
 type DtdProcessing int32
 
 const (
@@ -11,6 +15,19 @@ const (
 	DtdProcessing_Parse    DtdProcessing = 1
 	DtdProcessing_Last     DtdProcessing = 1
 )
+
+// String returns the DtdProcessing constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DtdProcessing) String() string {
+	switch e {
+	case DtdProcessing_Prohibit:
+		return "DtdProcessing_Prohibit"
+	case DtdProcessing_Parse:
+		return "DtdProcessing_Parse"
+	default:
+		return fmt.Sprintf("DtdProcessing(%d)", int32(e))
+	}
+}
 
 type XmlConformanceLevel int32
 
@@ -20,6 +37,21 @@ const (
 	XmlConformanceLevel_Document XmlConformanceLevel = 2
 	XmlConformanceLevel_Last     XmlConformanceLevel = 2
 )
+
+// String returns the XmlConformanceLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XmlConformanceLevel) String() string {
+	switch e {
+	case XmlConformanceLevel_Auto:
+		return "XmlConformanceLevel_Auto"
+	case XmlConformanceLevel_Fragment:
+		return "XmlConformanceLevel_Fragment"
+	case XmlConformanceLevel_Document:
+		return "XmlConformanceLevel_Document"
+	default:
+		return fmt.Sprintf("XmlConformanceLevel(%d)", int32(e))
+	}
+}
 
 type XmlError int32
 
@@ -111,6 +143,185 @@ const (
 	XML_E_INVALIDENCODING       XmlError = -1072897938
 )
 
+// String returns the XmlError constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XmlError) String() string {
+	switch e {
+	case MX_E_MX:
+		return "MX_E_MX"
+	case MX_E_INPUTEND:
+		return "MX_E_INPUTEND"
+	case MX_E_ENCODING:
+		return "MX_E_ENCODING"
+	case MX_E_ENCODINGSWITCH:
+		return "MX_E_ENCODINGSWITCH"
+	case MX_E_ENCODINGSIGNATURE:
+		return "MX_E_ENCODINGSIGNATURE"
+	case WC_E_WC:
+		return "WC_E_WC"
+	case WC_E_WHITESPACE:
+		return "WC_E_WHITESPACE"
+	case WC_E_SEMICOLON:
+		return "WC_E_SEMICOLON"
+	case WC_E_GREATERTHAN:
+		return "WC_E_GREATERTHAN"
+	case WC_E_QUOTE:
+		return "WC_E_QUOTE"
+	case WC_E_EQUAL:
+		return "WC_E_EQUAL"
+	case WC_E_LESSTHAN:
+		return "WC_E_LESSTHAN"
+	case WC_E_HEXDIGIT:
+		return "WC_E_HEXDIGIT"
+	case WC_E_DIGIT:
+		return "WC_E_DIGIT"
+	case WC_E_LEFTBRACKET:
+		return "WC_E_LEFTBRACKET"
+	case WC_E_LEFTPAREN:
+		return "WC_E_LEFTPAREN"
+	case WC_E_XMLCHARACTER:
+		return "WC_E_XMLCHARACTER"
+	case WC_E_NAMECHARACTER:
+		return "WC_E_NAMECHARACTER"
+	case WC_E_SYNTAX:
+		return "WC_E_SYNTAX"
+	case WC_E_CDSECT:
+		return "WC_E_CDSECT"
+	case WC_E_COMMENT:
+		return "WC_E_COMMENT"
+	case WC_E_CONDSECT:
+		return "WC_E_CONDSECT"
+	case WC_E_DECLATTLIST:
+		return "WC_E_DECLATTLIST"
+	case WC_E_DECLDOCTYPE:
+		return "WC_E_DECLDOCTYPE"
+	case WC_E_DECLELEMENT:
+		return "WC_E_DECLELEMENT"
+	case WC_E_DECLENTITY:
+		return "WC_E_DECLENTITY"
+	case WC_E_DECLNOTATION:
+		return "WC_E_DECLNOTATION"
+	case WC_E_NDATA:
+		return "WC_E_NDATA"
+	case WC_E_PUBLIC:
+		return "WC_E_PUBLIC"
+	case WC_E_SYSTEM:
+		return "WC_E_SYSTEM"
+	case WC_E_NAME:
+		return "WC_E_NAME"
+	case WC_E_ROOTELEMENT:
+		return "WC_E_ROOTELEMENT"
+	case WC_E_ELEMENTMATCH:
+		return "WC_E_ELEMENTMATCH"
+	case WC_E_UNIQUEATTRIBUTE:
+		return "WC_E_UNIQUEATTRIBUTE"
+	case WC_E_TEXTXMLDECL:
+		return "WC_E_TEXTXMLDECL"
+	case WC_E_LEADINGXML:
+		return "WC_E_LEADINGXML"
+	case WC_E_TEXTDECL:
+		return "WC_E_TEXTDECL"
+	case WC_E_XMLDECL:
+		return "WC_E_XMLDECL"
+	case WC_E_ENCNAME:
+		return "WC_E_ENCNAME"
+	case WC_E_PUBLICID:
+		return "WC_E_PUBLICID"
+	case WC_E_PESINTERNALSUBSET:
+		return "WC_E_PESINTERNALSUBSET"
+	case WC_E_PESBETWEENDECLS:
+		return "WC_E_PESBETWEENDECLS"
+	case WC_E_NORECURSION:
+		return "WC_E_NORECURSION"
+	case WC_E_ENTITYCONTENT:
+		return "WC_E_ENTITYCONTENT"
+	case WC_E_UNDECLAREDENTITY:
+		return "WC_E_UNDECLAREDENTITY"
+	case WC_E_PARSEDENTITY:
+		return "WC_E_PARSEDENTITY"
+	case WC_E_NOEXTERNALENTITYREF:
+		return "WC_E_NOEXTERNALENTITYREF"
+	case WC_E_PI:
+		return "WC_E_PI"
+	case WC_E_SYSTEMID:
+		return "WC_E_SYSTEMID"
+	case WC_E_QUESTIONMARK:
+		return "WC_E_QUESTIONMARK"
+	case WC_E_CDSECTEND:
+		return "WC_E_CDSECTEND"
+	case WC_E_MOREDATA:
+		return "WC_E_MOREDATA"
+	case WC_E_DTDPROHIBITED:
+		return "WC_E_DTDPROHIBITED"
+	case WC_E_INVALIDXMLSPACE:
+		return "WC_E_INVALIDXMLSPACE"
+	case NC_E_NC:
+		return "NC_E_NC"
+	case NC_E_QNAMECHARACTER:
+		return "NC_E_QNAMECHARACTER"
+	case NC_E_QNAMECOLON:
+		return "NC_E_QNAMECOLON"
+	case NC_E_NAMECOLON:
+		return "NC_E_NAMECOLON"
+	case NC_E_DECLAREDPREFIX:
+		return "NC_E_DECLAREDPREFIX"
+	case NC_E_UNDECLAREDPREFIX:
+		return "NC_E_UNDECLAREDPREFIX"
+	case NC_E_EMPTYURI:
+		return "NC_E_EMPTYURI"
+	case NC_E_XMLPREFIXRESERVED:
+		return "NC_E_XMLPREFIXRESERVED"
+	case NC_E_XMLNSPREFIXRESERVED:
+		return "NC_E_XMLNSPREFIXRESERVED"
+	case NC_E_XMLURIRESERVED:
+		return "NC_E_XMLURIRESERVED"
+	case NC_E_XMLNSURIRESERVED:
+		return "NC_E_XMLNSURIRESERVED"
+	case SC_E_SC:
+		return "SC_E_SC"
+	case SC_E_MAXELEMENTDEPTH:
+		return "SC_E_MAXELEMENTDEPTH"
+	case SC_E_MAXENTITYEXPANSION:
+		return "SC_E_MAXENTITYEXPANSION"
+	case WR_E_WR:
+		return "WR_E_WR"
+	case WR_E_NONWHITESPACE:
+		return "WR_E_NONWHITESPACE"
+	case WR_E_NSPREFIXDECLARED:
+		return "WR_E_NSPREFIXDECLARED"
+	case WR_E_NSPREFIXWITHEMPTYNSURI:
+		return "WR_E_NSPREFIXWITHEMPTYNSURI"
+	case WR_E_DUPLICATEATTRIBUTE:
+		return "WR_E_DUPLICATEATTRIBUTE"
+	case WR_E_XMLNSPREFIXDECLARATION:
+		return "WR_E_XMLNSPREFIXDECLARATION"
+	case WR_E_XMLPREFIXDECLARATION:
+		return "WR_E_XMLPREFIXDECLARATION"
+	case WR_E_XMLURIDECLARATION:
+		return "WR_E_XMLURIDECLARATION"
+	case WR_E_XMLNSURIDECLARATION:
+		return "WR_E_XMLNSURIDECLARATION"
+	case WR_E_NAMESPACEUNDECLARED:
+		return "WR_E_NAMESPACEUNDECLARED"
+	case WR_E_INVALIDXMLSPACE:
+		return "WR_E_INVALIDXMLSPACE"
+	case WR_E_INVALIDACTION:
+		return "WR_E_INVALIDACTION"
+	case WR_E_INVALIDSURROGATEPAIR:
+		return "WR_E_INVALIDSURROGATEPAIR"
+	case XML_E_INVALID_DECIMAL:
+		return "XML_E_INVALID_DECIMAL"
+	case XML_E_INVALID_HEXIDECIMAL:
+		return "XML_E_INVALID_HEXIDECIMAL"
+	case XML_E_INVALID_UNICODE:
+		return "XML_E_INVALID_UNICODE"
+	case XML_E_INVALIDENCODING:
+		return "XML_E_INVALIDENCODING"
+	default:
+		return fmt.Sprintf("XmlError(%d)", int32(e))
+	}
+}
+
 type XmlNodeType int32
 
 const (
@@ -128,6 +339,37 @@ const (
 	XmlNodeType_Last                  XmlNodeType = 17
 )
 
+// String returns the XmlNodeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XmlNodeType) String() string {
+	switch e {
+	case XmlNodeType_None:
+		return "XmlNodeType_None"
+	case XmlNodeType_Element:
+		return "XmlNodeType_Element"
+	case XmlNodeType_Attribute:
+		return "XmlNodeType_Attribute"
+	case XmlNodeType_Text:
+		return "XmlNodeType_Text"
+	case XmlNodeType_CDATA:
+		return "XmlNodeType_CDATA"
+	case XmlNodeType_ProcessingInstruction:
+		return "XmlNodeType_ProcessingInstruction"
+	case XmlNodeType_Comment:
+		return "XmlNodeType_Comment"
+	case XmlNodeType_DocumentType:
+		return "XmlNodeType_DocumentType"
+	case XmlNodeType_Whitespace:
+		return "XmlNodeType_Whitespace"
+	case XmlNodeType_EndElement:
+		return "XmlNodeType_EndElement"
+	case XmlNodeType_XmlDeclaration:
+		return "XmlNodeType_XmlDeclaration"
+	default:
+		return fmt.Sprintf("XmlNodeType(%d)", int32(e))
+	}
+}
+
 type XmlReadState int32
 
 const (
@@ -137,6 +379,25 @@ const (
 	XmlReadState_EndOfFile   XmlReadState = 3
 	XmlReadState_Closed      XmlReadState = 4
 )
+
+// String returns the XmlReadState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XmlReadState) String() string {
+	switch e {
+	case XmlReadState_Initial:
+		return "XmlReadState_Initial"
+	case XmlReadState_Interactive:
+		return "XmlReadState_Interactive"
+	case XmlReadState_Error:
+		return "XmlReadState_Error"
+	case XmlReadState_EndOfFile:
+		return "XmlReadState_EndOfFile"
+	case XmlReadState_Closed:
+		return "XmlReadState_Closed"
+	default:
+		return fmt.Sprintf("XmlReadState(%d)", int32(e))
+	}
+}
 
 type XmlReaderProperty int32
 
@@ -152,6 +413,31 @@ const (
 	XmlReaderProperty_Last               XmlReaderProperty = 7
 )
 
+// String returns the XmlReaderProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XmlReaderProperty) String() string {
+	switch e {
+	case XmlReaderProperty_MultiLanguage:
+		return "XmlReaderProperty_MultiLanguage"
+	case XmlReaderProperty_ConformanceLevel:
+		return "XmlReaderProperty_ConformanceLevel"
+	case XmlReaderProperty_RandomAccess:
+		return "XmlReaderProperty_RandomAccess"
+	case XmlReaderProperty_XmlResolver:
+		return "XmlReaderProperty_XmlResolver"
+	case XmlReaderProperty_DtdProcessing:
+		return "XmlReaderProperty_DtdProcessing"
+	case XmlReaderProperty_ReadState:
+		return "XmlReaderProperty_ReadState"
+	case XmlReaderProperty_MaxElementDepth:
+		return "XmlReaderProperty_MaxElementDepth"
+	case XmlReaderProperty_MaxEntityExpansion:
+		return "XmlReaderProperty_MaxEntityExpansion"
+	default:
+		return fmt.Sprintf("XmlReaderProperty(%d)", int32(e))
+	}
+}
+
 type XmlStandalone int32
 
 const (
@@ -160,6 +446,21 @@ const (
 	XmlStandalone_No   XmlStandalone = 2
 	XmlStandalone_Last XmlStandalone = 2
 )
+
+// String returns the XmlStandalone constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XmlStandalone) String() string {
+	switch e {
+	case XmlStandalone_Omit:
+		return "XmlStandalone_Omit"
+	case XmlStandalone_Yes:
+		return "XmlStandalone_Yes"
+	case XmlStandalone_No:
+		return "XmlStandalone_No"
+	default:
+		return fmt.Sprintf("XmlStandalone(%d)", int32(e))
+	}
+}
 
 type XmlWriterProperty int32
 
@@ -172,3 +473,24 @@ const (
 	XmlWriterProperty_CompactEmptyElement XmlWriterProperty = 5
 	XmlWriterProperty_Last                XmlWriterProperty = 5
 )
+
+// String returns the XmlWriterProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XmlWriterProperty) String() string {
+	switch e {
+	case XmlWriterProperty_MultiLanguage:
+		return "XmlWriterProperty_MultiLanguage"
+	case XmlWriterProperty_Indent:
+		return "XmlWriterProperty_Indent"
+	case XmlWriterProperty_ByteOrderMark:
+		return "XmlWriterProperty_ByteOrderMark"
+	case XmlWriterProperty_OmitXmlDeclaration:
+		return "XmlWriterProperty_OmitXmlDeclaration"
+	case XmlWriterProperty_ConformanceLevel:
+		return "XmlWriterProperty_ConformanceLevel"
+	case XmlWriterProperty_CompactEmptyElement:
+		return "XmlWriterProperty_CompactEmptyElement"
+	default:
+		return fmt.Sprintf("XmlWriterProperty(%d)", int32(e))
+	}
+}

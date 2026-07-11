@@ -4,6 +4,10 @@
 
 package remoteassistance
 
+import (
+	"fmt"
+)
+
 // RENDEZVOUS_SESSION_FLAGS: https://learn.microsoft.com/windows/win32/api/rendezvoussession/ne-rendezvoussession-rendezvous_session_flags
 type RENDEZVOUS_SESSION_FLAGS int32
 
@@ -15,6 +19,27 @@ const (
 	RSF_REMOTE_LEGACYSESSION RENDEZVOUS_SESSION_FLAGS = 8
 	RSF_REMOTE_WIN7SESSION   RENDEZVOUS_SESSION_FLAGS = 16
 )
+
+// String returns the RENDEZVOUS_SESSION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RENDEZVOUS_SESSION_FLAGS) String() string {
+	switch e {
+	case RSF_NONE:
+		return "RSF_NONE"
+	case RSF_INVITER:
+		return "RSF_INVITER"
+	case RSF_INVITEE:
+		return "RSF_INVITEE"
+	case RSF_ORIGINAL_INVITER:
+		return "RSF_ORIGINAL_INVITER"
+	case RSF_REMOTE_LEGACYSESSION:
+		return "RSF_REMOTE_LEGACYSESSION"
+	case RSF_REMOTE_WIN7SESSION:
+		return "RSF_REMOTE_WIN7SESSION"
+	default:
+		return fmt.Sprintf("RENDEZVOUS_SESSION_FLAGS(%d)", int32(e))
+	}
+}
 
 // RENDEZVOUS_SESSION_STATE: https://learn.microsoft.com/windows/win32/api/rendezvoussession/ne-rendezvoussession-rendezvous_session_state
 type RENDEZVOUS_SESSION_STATE int32
@@ -29,3 +54,28 @@ const (
 	RSS_DECLINED   RENDEZVOUS_SESSION_STATE = 6
 	RSS_TERMINATED RENDEZVOUS_SESSION_STATE = 7
 )
+
+// String returns the RENDEZVOUS_SESSION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RENDEZVOUS_SESSION_STATE) String() string {
+	switch e {
+	case RSS_UNKNOWN:
+		return "RSS_UNKNOWN"
+	case RSS_READY:
+		return "RSS_READY"
+	case RSS_INVITATION:
+		return "RSS_INVITATION"
+	case RSS_ACCEPTED:
+		return "RSS_ACCEPTED"
+	case RSS_CONNECTED:
+		return "RSS_CONNECTED"
+	case RSS_CANCELLED:
+		return "RSS_CANCELLED"
+	case RSS_DECLINED:
+		return "RSS_DECLINED"
+	case RSS_TERMINATED:
+		return "RSS_TERMINATED"
+	default:
+		return fmt.Sprintf("RENDEZVOUS_SESSION_STATE(%d)", int32(e))
+	}
+}

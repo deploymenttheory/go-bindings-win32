@@ -4,7 +4,13 @@
 
 package animation
 
+import (
+	"fmt"
+	"strings"
+)
+
 // UI_ANIMATION_DEPENDENCIES: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_dependencies
+// Bitmask — values may be combined with |.
 type UI_ANIMATION_DEPENDENCIES int32
 
 const (
@@ -15,6 +21,28 @@ const (
 	UI_ANIMATION_DEPENDENCY_DURATION            UI_ANIMATION_DEPENDENCIES = 8
 )
 
+// String returns the UI_ANIMATION_DEPENDENCIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_DEPENDENCIES) String() string {
+	var parts []string
+	if e&UI_ANIMATION_DEPENDENCY_INTERMEDIATE_VALUES != 0 {
+		parts = append(parts, "UI_ANIMATION_DEPENDENCY_INTERMEDIATE_VALUES")
+	}
+	if e&UI_ANIMATION_DEPENDENCY_FINAL_VALUE != 0 {
+		parts = append(parts, "UI_ANIMATION_DEPENDENCY_FINAL_VALUE")
+	}
+	if e&UI_ANIMATION_DEPENDENCY_FINAL_VELOCITY != 0 {
+		parts = append(parts, "UI_ANIMATION_DEPENDENCY_FINAL_VELOCITY")
+	}
+	if e&UI_ANIMATION_DEPENDENCY_DURATION != 0 {
+		parts = append(parts, "UI_ANIMATION_DEPENDENCY_DURATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // UI_ANIMATION_IDLE_BEHAVIOR: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_idle_behavior
 type UI_ANIMATION_IDLE_BEHAVIOR int32
 
@@ -23,6 +51,19 @@ const (
 	UI_ANIMATION_IDLE_BEHAVIOR_DISABLE  UI_ANIMATION_IDLE_BEHAVIOR = 1
 )
 
+// String returns the UI_ANIMATION_IDLE_BEHAVIOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_IDLE_BEHAVIOR) String() string {
+	switch e {
+	case UI_ANIMATION_IDLE_BEHAVIOR_CONTINUE:
+		return "UI_ANIMATION_IDLE_BEHAVIOR_CONTINUE"
+	case UI_ANIMATION_IDLE_BEHAVIOR_DISABLE:
+		return "UI_ANIMATION_IDLE_BEHAVIOR_DISABLE"
+	default:
+		return fmt.Sprintf("UI_ANIMATION_IDLE_BEHAVIOR(%d)", int32(e))
+	}
+}
+
 // UI_ANIMATION_MANAGER_STATUS: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_manager_status
 type UI_ANIMATION_MANAGER_STATUS int32
 
@@ -30,6 +71,19 @@ const (
 	UI_ANIMATION_MANAGER_IDLE UI_ANIMATION_MANAGER_STATUS = 0
 	UI_ANIMATION_MANAGER_BUSY UI_ANIMATION_MANAGER_STATUS = 1
 )
+
+// String returns the UI_ANIMATION_MANAGER_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_MANAGER_STATUS) String() string {
+	switch e {
+	case UI_ANIMATION_MANAGER_IDLE:
+		return "UI_ANIMATION_MANAGER_IDLE"
+	case UI_ANIMATION_MANAGER_BUSY:
+		return "UI_ANIMATION_MANAGER_BUSY"
+	default:
+		return fmt.Sprintf("UI_ANIMATION_MANAGER_STATUS(%d)", int32(e))
+	}
+}
 
 // UI_ANIMATION_MODE: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_mode
 type UI_ANIMATION_MODE int32
@@ -40,6 +94,21 @@ const (
 	UI_ANIMATION_MODE_ENABLED        UI_ANIMATION_MODE = 2
 )
 
+// String returns the UI_ANIMATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_MODE) String() string {
+	switch e {
+	case UI_ANIMATION_MODE_DISABLED:
+		return "UI_ANIMATION_MODE_DISABLED"
+	case UI_ANIMATION_MODE_SYSTEM_DEFAULT:
+		return "UI_ANIMATION_MODE_SYSTEM_DEFAULT"
+	case UI_ANIMATION_MODE_ENABLED:
+		return "UI_ANIMATION_MODE_ENABLED"
+	default:
+		return fmt.Sprintf("UI_ANIMATION_MODE(%d)", int32(e))
+	}
+}
+
 // UI_ANIMATION_PRIORITY_EFFECT: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_priority_effect
 type UI_ANIMATION_PRIORITY_EFFECT int32
 
@@ -47,6 +116,19 @@ const (
 	UI_ANIMATION_PRIORITY_EFFECT_FAILURE UI_ANIMATION_PRIORITY_EFFECT = 0
 	UI_ANIMATION_PRIORITY_EFFECT_DELAY   UI_ANIMATION_PRIORITY_EFFECT = 1
 )
+
+// String returns the UI_ANIMATION_PRIORITY_EFFECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_PRIORITY_EFFECT) String() string {
+	switch e {
+	case UI_ANIMATION_PRIORITY_EFFECT_FAILURE:
+		return "UI_ANIMATION_PRIORITY_EFFECT_FAILURE"
+	case UI_ANIMATION_PRIORITY_EFFECT_DELAY:
+		return "UI_ANIMATION_PRIORITY_EFFECT_DELAY"
+	default:
+		return fmt.Sprintf("UI_ANIMATION_PRIORITY_EFFECT(%d)", int32(e))
+	}
+}
 
 // UI_ANIMATION_REPEAT_MODE: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_repeat_mode
 type UI_ANIMATION_REPEAT_MODE int32
@@ -56,6 +138,19 @@ const (
 	UI_ANIMATION_REPEAT_MODE_ALTERNATE UI_ANIMATION_REPEAT_MODE = 1
 )
 
+// String returns the UI_ANIMATION_REPEAT_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_REPEAT_MODE) String() string {
+	switch e {
+	case UI_ANIMATION_REPEAT_MODE_NORMAL:
+		return "UI_ANIMATION_REPEAT_MODE_NORMAL"
+	case UI_ANIMATION_REPEAT_MODE_ALTERNATE:
+		return "UI_ANIMATION_REPEAT_MODE_ALTERNATE"
+	default:
+		return fmt.Sprintf("UI_ANIMATION_REPEAT_MODE(%d)", int32(e))
+	}
+}
+
 // UI_ANIMATION_ROUNDING_MODE: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_rounding_mode
 type UI_ANIMATION_ROUNDING_MODE int32
 
@@ -64,6 +159,21 @@ const (
 	UI_ANIMATION_ROUNDING_FLOOR   UI_ANIMATION_ROUNDING_MODE = 1
 	UI_ANIMATION_ROUNDING_CEILING UI_ANIMATION_ROUNDING_MODE = 2
 )
+
+// String returns the UI_ANIMATION_ROUNDING_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_ROUNDING_MODE) String() string {
+	switch e {
+	case UI_ANIMATION_ROUNDING_NEAREST:
+		return "UI_ANIMATION_ROUNDING_NEAREST"
+	case UI_ANIMATION_ROUNDING_FLOOR:
+		return "UI_ANIMATION_ROUNDING_FLOOR"
+	case UI_ANIMATION_ROUNDING_CEILING:
+		return "UI_ANIMATION_ROUNDING_CEILING"
+	default:
+		return fmt.Sprintf("UI_ANIMATION_ROUNDING_MODE(%d)", int32(e))
+	}
+}
 
 // UI_ANIMATION_SCHEDULING_RESULT: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_scheduling_result
 type UI_ANIMATION_SCHEDULING_RESULT int32
@@ -76,6 +186,25 @@ const (
 	UI_ANIMATION_SCHEDULING_DEFERRED              UI_ANIMATION_SCHEDULING_RESULT = 4
 )
 
+// String returns the UI_ANIMATION_SCHEDULING_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_SCHEDULING_RESULT) String() string {
+	switch e {
+	case UI_ANIMATION_SCHEDULING_UNEXPECTED_FAILURE:
+		return "UI_ANIMATION_SCHEDULING_UNEXPECTED_FAILURE"
+	case UI_ANIMATION_SCHEDULING_INSUFFICIENT_PRIORITY:
+		return "UI_ANIMATION_SCHEDULING_INSUFFICIENT_PRIORITY"
+	case UI_ANIMATION_SCHEDULING_ALREADY_SCHEDULED:
+		return "UI_ANIMATION_SCHEDULING_ALREADY_SCHEDULED"
+	case UI_ANIMATION_SCHEDULING_SUCCEEDED:
+		return "UI_ANIMATION_SCHEDULING_SUCCEEDED"
+	case UI_ANIMATION_SCHEDULING_DEFERRED:
+		return "UI_ANIMATION_SCHEDULING_DEFERRED"
+	default:
+		return fmt.Sprintf("UI_ANIMATION_SCHEDULING_RESULT(%d)", int32(e))
+	}
+}
+
 // UI_ANIMATION_SLOPE: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_slope
 type UI_ANIMATION_SLOPE int32
 
@@ -83,6 +212,19 @@ const (
 	UI_ANIMATION_SLOPE_INCREASING UI_ANIMATION_SLOPE = 0
 	UI_ANIMATION_SLOPE_DECREASING UI_ANIMATION_SLOPE = 1
 )
+
+// String returns the UI_ANIMATION_SLOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_SLOPE) String() string {
+	switch e {
+	case UI_ANIMATION_SLOPE_INCREASING:
+		return "UI_ANIMATION_SLOPE_INCREASING"
+	case UI_ANIMATION_SLOPE_DECREASING:
+		return "UI_ANIMATION_SLOPE_DECREASING"
+	default:
+		return fmt.Sprintf("UI_ANIMATION_SLOPE(%d)", int32(e))
+	}
+}
 
 // UI_ANIMATION_STORYBOARD_STATUS: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_storyboard_status
 type UI_ANIMATION_STORYBOARD_STATUS int32
@@ -98,6 +240,31 @@ const (
 	UI_ANIMATION_STORYBOARD_INSUFFICIENT_PRIORITY UI_ANIMATION_STORYBOARD_STATUS = 7
 )
 
+// String returns the UI_ANIMATION_STORYBOARD_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_STORYBOARD_STATUS) String() string {
+	switch e {
+	case UI_ANIMATION_STORYBOARD_BUILDING:
+		return "UI_ANIMATION_STORYBOARD_BUILDING"
+	case UI_ANIMATION_STORYBOARD_SCHEDULED:
+		return "UI_ANIMATION_STORYBOARD_SCHEDULED"
+	case UI_ANIMATION_STORYBOARD_CANCELLED:
+		return "UI_ANIMATION_STORYBOARD_CANCELLED"
+	case UI_ANIMATION_STORYBOARD_PLAYING:
+		return "UI_ANIMATION_STORYBOARD_PLAYING"
+	case UI_ANIMATION_STORYBOARD_TRUNCATED:
+		return "UI_ANIMATION_STORYBOARD_TRUNCATED"
+	case UI_ANIMATION_STORYBOARD_FINISHED:
+		return "UI_ANIMATION_STORYBOARD_FINISHED"
+	case UI_ANIMATION_STORYBOARD_READY:
+		return "UI_ANIMATION_STORYBOARD_READY"
+	case UI_ANIMATION_STORYBOARD_INSUFFICIENT_PRIORITY:
+		return "UI_ANIMATION_STORYBOARD_INSUFFICIENT_PRIORITY"
+	default:
+		return fmt.Sprintf("UI_ANIMATION_STORYBOARD_STATUS(%d)", int32(e))
+	}
+}
+
 // UI_ANIMATION_TIMER_CLIENT_STATUS: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_timer_client_status
 type UI_ANIMATION_TIMER_CLIENT_STATUS int32
 
@@ -106,6 +273,19 @@ const (
 	UI_ANIMATION_TIMER_CLIENT_BUSY UI_ANIMATION_TIMER_CLIENT_STATUS = 1
 )
 
+// String returns the UI_ANIMATION_TIMER_CLIENT_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_TIMER_CLIENT_STATUS) String() string {
+	switch e {
+	case UI_ANIMATION_TIMER_CLIENT_IDLE:
+		return "UI_ANIMATION_TIMER_CLIENT_IDLE"
+	case UI_ANIMATION_TIMER_CLIENT_BUSY:
+		return "UI_ANIMATION_TIMER_CLIENT_BUSY"
+	default:
+		return fmt.Sprintf("UI_ANIMATION_TIMER_CLIENT_STATUS(%d)", int32(e))
+	}
+}
+
 // UI_ANIMATION_UPDATE_RESULT: https://learn.microsoft.com/windows/win32/api/uianimation/ne-uianimation-ui_animation_update_result
 type UI_ANIMATION_UPDATE_RESULT int32
 
@@ -113,3 +293,16 @@ const (
 	UI_ANIMATION_UPDATE_NO_CHANGE         UI_ANIMATION_UPDATE_RESULT = 0
 	UI_ANIMATION_UPDATE_VARIABLES_CHANGED UI_ANIMATION_UPDATE_RESULT = 1
 )
+
+// String returns the UI_ANIMATION_UPDATE_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_ANIMATION_UPDATE_RESULT) String() string {
+	switch e {
+	case UI_ANIMATION_UPDATE_NO_CHANGE:
+		return "UI_ANIMATION_UPDATE_NO_CHANGE"
+	case UI_ANIMATION_UPDATE_VARIABLES_CHANGED:
+		return "UI_ANIMATION_UPDATE_VARIABLES_CHANGED"
+	default:
+		return fmt.Sprintf("UI_ANIMATION_UPDATE_RESULT(%d)", int32(e))
+	}
+}

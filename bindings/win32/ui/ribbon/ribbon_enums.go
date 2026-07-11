@@ -4,6 +4,11 @@
 
 package ribbon
 
+import (
+	"fmt"
+	"strings"
+)
+
 // UI_COLLECTIONCHANGE: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_collectionchange
 type UI_COLLECTIONCHANGE int32
 
@@ -13,6 +18,23 @@ const (
 	UI_COLLECTIONCHANGE_REPLACE UI_COLLECTIONCHANGE = 2
 	UI_COLLECTIONCHANGE_RESET   UI_COLLECTIONCHANGE = 3
 )
+
+// String returns the UI_COLLECTIONCHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_COLLECTIONCHANGE) String() string {
+	switch e {
+	case UI_COLLECTIONCHANGE_INSERT:
+		return "UI_COLLECTIONCHANGE_INSERT"
+	case UI_COLLECTIONCHANGE_REMOVE:
+		return "UI_COLLECTIONCHANGE_REMOVE"
+	case UI_COLLECTIONCHANGE_REPLACE:
+		return "UI_COLLECTIONCHANGE_REPLACE"
+	case UI_COLLECTIONCHANGE_RESET:
+		return "UI_COLLECTIONCHANGE_RESET"
+	default:
+		return fmt.Sprintf("UI_COLLECTIONCHANGE(%d)", int32(e))
+	}
+}
 
 // UI_COMMANDTYPE: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_commandtype
 type UI_COMMANDTYPE int32
@@ -33,6 +55,41 @@ const (
 	UI_COMMANDTYPE_COLORCOLLECTION   UI_COMMANDTYPE = 12
 )
 
+// String returns the UI_COMMANDTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_COMMANDTYPE) String() string {
+	switch e {
+	case UI_COMMANDTYPE_UNKNOWN:
+		return "UI_COMMANDTYPE_UNKNOWN"
+	case UI_COMMANDTYPE_GROUP:
+		return "UI_COMMANDTYPE_GROUP"
+	case UI_COMMANDTYPE_ACTION:
+		return "UI_COMMANDTYPE_ACTION"
+	case UI_COMMANDTYPE_ANCHOR:
+		return "UI_COMMANDTYPE_ANCHOR"
+	case UI_COMMANDTYPE_CONTEXT:
+		return "UI_COMMANDTYPE_CONTEXT"
+	case UI_COMMANDTYPE_COLLECTION:
+		return "UI_COMMANDTYPE_COLLECTION"
+	case UI_COMMANDTYPE_COMMANDCOLLECTION:
+		return "UI_COMMANDTYPE_COMMANDCOLLECTION"
+	case UI_COMMANDTYPE_DECIMAL:
+		return "UI_COMMANDTYPE_DECIMAL"
+	case UI_COMMANDTYPE_BOOLEAN:
+		return "UI_COMMANDTYPE_BOOLEAN"
+	case UI_COMMANDTYPE_FONT:
+		return "UI_COMMANDTYPE_FONT"
+	case UI_COMMANDTYPE_RECENTITEMS:
+		return "UI_COMMANDTYPE_RECENTITEMS"
+	case UI_COMMANDTYPE_COLORANCHOR:
+		return "UI_COMMANDTYPE_COLORANCHOR"
+	case UI_COMMANDTYPE_COLORCOLLECTION:
+		return "UI_COMMANDTYPE_COLORCOLLECTION"
+	default:
+		return fmt.Sprintf("UI_COMMANDTYPE(%d)", int32(e))
+	}
+}
+
 // UI_CONTEXTAVAILABILITY: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_contextavailability
 type UI_CONTEXTAVAILABILITY int32
 
@@ -42,6 +99,21 @@ const (
 	UI_CONTEXTAVAILABILITY_ACTIVE       UI_CONTEXTAVAILABILITY = 2
 )
 
+// String returns the UI_CONTEXTAVAILABILITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_CONTEXTAVAILABILITY) String() string {
+	switch e {
+	case UI_CONTEXTAVAILABILITY_NOTAVAILABLE:
+		return "UI_CONTEXTAVAILABILITY_NOTAVAILABLE"
+	case UI_CONTEXTAVAILABILITY_AVAILABLE:
+		return "UI_CONTEXTAVAILABILITY_AVAILABLE"
+	case UI_CONTEXTAVAILABILITY_ACTIVE:
+		return "UI_CONTEXTAVAILABILITY_ACTIVE"
+	default:
+		return fmt.Sprintf("UI_CONTEXTAVAILABILITY(%d)", int32(e))
+	}
+}
+
 // UI_CONTROLDOCK: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_controldock
 type UI_CONTROLDOCK int32
 
@@ -49,6 +121,19 @@ const (
 	UI_CONTROLDOCK_TOP    UI_CONTROLDOCK = 1
 	UI_CONTROLDOCK_BOTTOM UI_CONTROLDOCK = 3
 )
+
+// String returns the UI_CONTROLDOCK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_CONTROLDOCK) String() string {
+	switch e {
+	case UI_CONTROLDOCK_TOP:
+		return "UI_CONTROLDOCK_TOP"
+	case UI_CONTROLDOCK_BOTTOM:
+		return "UI_CONTROLDOCK_BOTTOM"
+	default:
+		return fmt.Sprintf("UI_CONTROLDOCK(%d)", int32(e))
+	}
+}
 
 // UI_EVENTLOCATION: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_eventlocation
 type UI_EVENTLOCATION int32
@@ -59,6 +144,23 @@ const (
 	UI_EVENTLOCATION_ApplicationMenu UI_EVENTLOCATION = 2
 	UI_EVENTLOCATION_ContextPopup    UI_EVENTLOCATION = 3
 )
+
+// String returns the UI_EVENTLOCATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_EVENTLOCATION) String() string {
+	switch e {
+	case UI_EVENTLOCATION_Ribbon:
+		return "UI_EVENTLOCATION_Ribbon"
+	case UI_EVENTLOCATION_QAT:
+		return "UI_EVENTLOCATION_QAT"
+	case UI_EVENTLOCATION_ApplicationMenu:
+		return "UI_EVENTLOCATION_ApplicationMenu"
+	case UI_EVENTLOCATION_ContextPopup:
+		return "UI_EVENTLOCATION_ContextPopup"
+	default:
+		return fmt.Sprintf("UI_EVENTLOCATION(%d)", int32(e))
+	}
+}
 
 // UI_EVENTTYPE: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_eventtype
 type UI_EVENTTYPE int32
@@ -74,6 +176,31 @@ const (
 	UI_EVENTTYPE_TooltipShown            UI_EVENTTYPE = 7
 )
 
+// String returns the UI_EVENTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_EVENTTYPE) String() string {
+	switch e {
+	case UI_EVENTTYPE_ApplicationMenuOpened:
+		return "UI_EVENTTYPE_ApplicationMenuOpened"
+	case UI_EVENTTYPE_RibbonMinimized:
+		return "UI_EVENTTYPE_RibbonMinimized"
+	case UI_EVENTTYPE_RibbonExpanded:
+		return "UI_EVENTTYPE_RibbonExpanded"
+	case UI_EVENTTYPE_ApplicationModeSwitched:
+		return "UI_EVENTTYPE_ApplicationModeSwitched"
+	case UI_EVENTTYPE_TabActivated:
+		return "UI_EVENTTYPE_TabActivated"
+	case UI_EVENTTYPE_MenuOpened:
+		return "UI_EVENTTYPE_MenuOpened"
+	case UI_EVENTTYPE_CommandExecuted:
+		return "UI_EVENTTYPE_CommandExecuted"
+	case UI_EVENTTYPE_TooltipShown:
+		return "UI_EVENTTYPE_TooltipShown"
+	default:
+		return fmt.Sprintf("UI_EVENTTYPE(%d)", int32(e))
+	}
+}
+
 // UI_EXECUTIONVERB: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_executionverb
 type UI_EXECUTIONVERB int32
 
@@ -83,6 +210,21 @@ const (
 	UI_EXECUTIONVERB_CANCELPREVIEW UI_EXECUTIONVERB = 2
 )
 
+// String returns the UI_EXECUTIONVERB constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_EXECUTIONVERB) String() string {
+	switch e {
+	case UI_EXECUTIONVERB_EXECUTE:
+		return "UI_EXECUTIONVERB_EXECUTE"
+	case UI_EXECUTIONVERB_PREVIEW:
+		return "UI_EXECUTIONVERB_PREVIEW"
+	case UI_EXECUTIONVERB_CANCELPREVIEW:
+		return "UI_EXECUTIONVERB_CANCELPREVIEW"
+	default:
+		return fmt.Sprintf("UI_EXECUTIONVERB(%d)", int32(e))
+	}
+}
+
 // UI_FONTDELTASIZE: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_fontdeltasize
 type UI_FONTDELTASIZE int32
 
@@ -90,6 +232,19 @@ const (
 	UI_FONTDELTASIZE_GROW   UI_FONTDELTASIZE = 0
 	UI_FONTDELTASIZE_SHRINK UI_FONTDELTASIZE = 1
 )
+
+// String returns the UI_FONTDELTASIZE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_FONTDELTASIZE) String() string {
+	switch e {
+	case UI_FONTDELTASIZE_GROW:
+		return "UI_FONTDELTASIZE_GROW"
+	case UI_FONTDELTASIZE_SHRINK:
+		return "UI_FONTDELTASIZE_SHRINK"
+	default:
+		return fmt.Sprintf("UI_FONTDELTASIZE(%d)", int32(e))
+	}
+}
 
 // UI_FONTPROPERTIES: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_fontproperties
 type UI_FONTPROPERTIES int32
@@ -100,6 +255,21 @@ const (
 	UI_FONTPROPERTIES_SET          UI_FONTPROPERTIES = 2
 )
 
+// String returns the UI_FONTPROPERTIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_FONTPROPERTIES) String() string {
+	switch e {
+	case UI_FONTPROPERTIES_NOTAVAILABLE:
+		return "UI_FONTPROPERTIES_NOTAVAILABLE"
+	case UI_FONTPROPERTIES_NOTSET:
+		return "UI_FONTPROPERTIES_NOTSET"
+	case UI_FONTPROPERTIES_SET:
+		return "UI_FONTPROPERTIES_SET"
+	default:
+		return fmt.Sprintf("UI_FONTPROPERTIES(%d)", int32(e))
+	}
+}
+
 // UI_FONTUNDERLINE: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_fontunderline
 type UI_FONTUNDERLINE int32
 
@@ -108,6 +278,21 @@ const (
 	UI_FONTUNDERLINE_NOTSET       UI_FONTUNDERLINE = 1
 	UI_FONTUNDERLINE_SET          UI_FONTUNDERLINE = 2
 )
+
+// String returns the UI_FONTUNDERLINE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_FONTUNDERLINE) String() string {
+	switch e {
+	case UI_FONTUNDERLINE_NOTAVAILABLE:
+		return "UI_FONTUNDERLINE_NOTAVAILABLE"
+	case UI_FONTUNDERLINE_NOTSET:
+		return "UI_FONTUNDERLINE_NOTSET"
+	case UI_FONTUNDERLINE_SET:
+		return "UI_FONTUNDERLINE_SET"
+	default:
+		return fmt.Sprintf("UI_FONTUNDERLINE(%d)", int32(e))
+	}
+}
 
 // UI_FONTVERTICALPOSITION: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_fontverticalposition
 type UI_FONTVERTICALPOSITION int32
@@ -119,7 +304,25 @@ const (
 	UI_FONTVERTICALPOSITION_SUBSCRIPT    UI_FONTVERTICALPOSITION = 3
 )
 
+// String returns the UI_FONTVERTICALPOSITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_FONTVERTICALPOSITION) String() string {
+	switch e {
+	case UI_FONTVERTICALPOSITION_NOTAVAILABLE:
+		return "UI_FONTVERTICALPOSITION_NOTAVAILABLE"
+	case UI_FONTVERTICALPOSITION_NOTSET:
+		return "UI_FONTVERTICALPOSITION_NOTSET"
+	case UI_FONTVERTICALPOSITION_SUPERSCRIPT:
+		return "UI_FONTVERTICALPOSITION_SUPERSCRIPT"
+	case UI_FONTVERTICALPOSITION_SUBSCRIPT:
+		return "UI_FONTVERTICALPOSITION_SUBSCRIPT"
+	default:
+		return fmt.Sprintf("UI_FONTVERTICALPOSITION(%d)", int32(e))
+	}
+}
+
 // UI_INVALIDATIONS: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_invalidations
+// Bitmask — values may be combined with |.
 type UI_INVALIDATIONS int32
 
 const (
@@ -129,6 +332,28 @@ const (
 	UI_INVALIDATIONS_ALLPROPERTIES UI_INVALIDATIONS = 8
 )
 
+// String returns the UI_INVALIDATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_INVALIDATIONS) String() string {
+	var parts []string
+	if e&UI_INVALIDATIONS_STATE != 0 {
+		parts = append(parts, "UI_INVALIDATIONS_STATE")
+	}
+	if e&UI_INVALIDATIONS_VALUE != 0 {
+		parts = append(parts, "UI_INVALIDATIONS_VALUE")
+	}
+	if e&UI_INVALIDATIONS_PROPERTY != 0 {
+		parts = append(parts, "UI_INVALIDATIONS_PROPERTY")
+	}
+	if e&UI_INVALIDATIONS_ALLPROPERTIES != 0 {
+		parts = append(parts, "UI_INVALIDATIONS_ALLPROPERTIES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // UI_OWNERSHIP: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_ownership
 type UI_OWNERSHIP int32
 
@@ -137,6 +362,19 @@ const (
 	UI_OWNERSHIP_COPY     UI_OWNERSHIP = 1
 )
 
+// String returns the UI_OWNERSHIP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_OWNERSHIP) String() string {
+	switch e {
+	case UI_OWNERSHIP_TRANSFER:
+		return "UI_OWNERSHIP_TRANSFER"
+	case UI_OWNERSHIP_COPY:
+		return "UI_OWNERSHIP_COPY"
+	default:
+		return fmt.Sprintf("UI_OWNERSHIP(%d)", int32(e))
+	}
+}
+
 // UI_SWATCHCOLORMODE: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_swatchcolormode
 type UI_SWATCHCOLORMODE int32
 
@@ -144,6 +382,19 @@ const (
 	UI_SWATCHCOLORMODE_NORMAL     UI_SWATCHCOLORMODE = 0
 	UI_SWATCHCOLORMODE_MONOCHROME UI_SWATCHCOLORMODE = 1
 )
+
+// String returns the UI_SWATCHCOLORMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_SWATCHCOLORMODE) String() string {
+	switch e {
+	case UI_SWATCHCOLORMODE_NORMAL:
+		return "UI_SWATCHCOLORMODE_NORMAL"
+	case UI_SWATCHCOLORMODE_MONOCHROME:
+		return "UI_SWATCHCOLORMODE_MONOCHROME"
+	default:
+		return fmt.Sprintf("UI_SWATCHCOLORMODE(%d)", int32(e))
+	}
+}
 
 // UI_SWATCHCOLORTYPE: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_swatchcolortype
 type UI_SWATCHCOLORTYPE int32
@@ -154,12 +405,38 @@ const (
 	UI_SWATCHCOLORTYPE_RGB       UI_SWATCHCOLORTYPE = 2
 )
 
+// String returns the UI_SWATCHCOLORTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_SWATCHCOLORTYPE) String() string {
+	switch e {
+	case UI_SWATCHCOLORTYPE_NOCOLOR:
+		return "UI_SWATCHCOLORTYPE_NOCOLOR"
+	case UI_SWATCHCOLORTYPE_AUTOMATIC:
+		return "UI_SWATCHCOLORTYPE_AUTOMATIC"
+	case UI_SWATCHCOLORTYPE_RGB:
+		return "UI_SWATCHCOLORTYPE_RGB"
+	default:
+		return fmt.Sprintf("UI_SWATCHCOLORTYPE(%d)", int32(e))
+	}
+}
+
 // UI_VIEWTYPE: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_viewtype
 type UI_VIEWTYPE int32
 
 const (
 	UI_VIEWTYPE_RIBBON UI_VIEWTYPE = 1
 )
+
+// String returns the UI_VIEWTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_VIEWTYPE) String() string {
+	switch e {
+	case UI_VIEWTYPE_RIBBON:
+		return "UI_VIEWTYPE_RIBBON"
+	default:
+		return fmt.Sprintf("UI_VIEWTYPE(%d)", int32(e))
+	}
+}
 
 // UI_VIEWVERB: https://learn.microsoft.com/windows/win32/api/uiribbon/ne-uiribbon-ui_viewverb
 type UI_VIEWVERB int32
@@ -170,3 +447,20 @@ const (
 	UI_VIEWVERB_SIZE    UI_VIEWVERB = 2
 	UI_VIEWVERB_ERROR   UI_VIEWVERB = 3
 )
+
+// String returns the UI_VIEWVERB constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_VIEWVERB) String() string {
+	switch e {
+	case UI_VIEWVERB_CREATE:
+		return "UI_VIEWVERB_CREATE"
+	case UI_VIEWVERB_DESTROY:
+		return "UI_VIEWVERB_DESTROY"
+	case UI_VIEWVERB_SIZE:
+		return "UI_VIEWVERB_SIZE"
+	case UI_VIEWVERB_ERROR:
+		return "UI_VIEWVERB_ERROR"
+	default:
+		return fmt.Sprintf("UI_VIEWVERB(%d)", int32(e))
+	}
+}

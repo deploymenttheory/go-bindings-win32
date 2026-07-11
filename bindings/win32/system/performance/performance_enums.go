@@ -4,6 +4,10 @@
 
 package performance
 
+import (
+	"fmt"
+)
+
 // AutoPathFormat: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-autopathformat
 type AutoPathFormat int32
 
@@ -20,6 +24,35 @@ const (
 	PlaMonthDayHourMinute AutoPathFormat = 16384
 )
 
+// String returns the AutoPathFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AutoPathFormat) String() string {
+	switch e {
+	case PlaNone:
+		return "PlaNone"
+	case PlaPattern:
+		return "PlaPattern"
+	case PlaComputer:
+		return "PlaComputer"
+	case PlaMonthDayHour:
+		return "PlaMonthDayHour"
+	case PlaSerialNumber:
+		return "PlaSerialNumber"
+	case PlaYearDayOfYear:
+		return "PlaYearDayOfYear"
+	case PlaYearMonth:
+		return "PlaYearMonth"
+	case PlaYearMonthDay:
+		return "PlaYearMonthDay"
+	case PlaYearMonthDayHour:
+		return "PlaYearMonthDayHour"
+	case PlaMonthDayHourMinute:
+		return "PlaMonthDayHourMinute"
+	default:
+		return fmt.Sprintf("AutoPathFormat(%d)", int32(e))
+	}
+}
+
 // ClockType: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-clocktype
 type ClockType int32
 
@@ -29,6 +62,23 @@ const (
 	PlaSystem      ClockType = 2
 	PlaCycle       ClockType = 3
 )
+
+// String returns the ClockType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ClockType) String() string {
+	switch e {
+	case PlaTimeStamp:
+		return "PlaTimeStamp"
+	case PlaPerformance:
+		return "PlaPerformance"
+	case PlaSystem:
+		return "PlaSystem"
+	case PlaCycle:
+		return "PlaCycle"
+	default:
+		return fmt.Sprintf("ClockType(%d)", int32(e))
+	}
+}
 
 // CommitMode: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-commitmode
 type CommitMode int32
@@ -42,6 +92,27 @@ const (
 	PlaValidateOnly          CommitMode = 4096
 )
 
+// String returns the CommitMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CommitMode) String() string {
+	switch e {
+	case PlaCreateNew:
+		return "PlaCreateNew"
+	case PlaModify:
+		return "PlaModify"
+	case PlaCreateOrModify:
+		return "PlaCreateOrModify"
+	case PlaUpdateRunningInstance:
+		return "PlaUpdateRunningInstance"
+	case PlaFlushTrace:
+		return "PlaFlushTrace"
+	case PlaValidateOnly:
+		return "PlaValidateOnly"
+	default:
+		return fmt.Sprintf("CommitMode(%d)", int32(e))
+	}
+}
+
 // DataCollectorSetStatus: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-datacollectorsetstatus
 type DataCollectorSetStatus int32
 
@@ -52,6 +123,25 @@ const (
 	PlaPending   DataCollectorSetStatus = 3
 	PlaUndefined DataCollectorSetStatus = 4
 )
+
+// String returns the DataCollectorSetStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DataCollectorSetStatus) String() string {
+	switch e {
+	case PlaStopped:
+		return "PlaStopped"
+	case PlaRunning:
+		return "PlaRunning"
+	case PlaCompiling:
+		return "PlaCompiling"
+	case PlaPending:
+		return "PlaPending"
+	case PlaUndefined:
+		return "PlaUndefined"
+	default:
+		return fmt.Sprintf("DataCollectorSetStatus(%d)", int32(e))
+	}
+}
 
 // DataCollectorType: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-datacollectortype
 type DataCollectorType int32
@@ -64,6 +154,25 @@ const (
 	PlaApiTrace           DataCollectorType = 4
 )
 
+// String returns the DataCollectorType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DataCollectorType) String() string {
+	switch e {
+	case PlaPerformanceCounter:
+		return "PlaPerformanceCounter"
+	case PlaTrace:
+		return "PlaTrace"
+	case PlaConfiguration:
+		return "PlaConfiguration"
+	case PlaAlert:
+		return "PlaAlert"
+	case PlaApiTrace:
+		return "PlaApiTrace"
+	default:
+		return fmt.Sprintf("DataCollectorType(%d)", int32(e))
+	}
+}
+
 // DataManagerSteps: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-datamanagersteps
 type DataManagerSteps int32
 
@@ -75,6 +184,25 @@ const (
 	PlaResourceFreeing DataManagerSteps = 16
 )
 
+// String returns the DataManagerSteps constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DataManagerSteps) String() string {
+	switch e {
+	case PlaCreateReport:
+		return "PlaCreateReport"
+	case PlaRunRules:
+		return "PlaRunRules"
+	case PlaCreateHtml:
+		return "PlaCreateHtml"
+	case PlaFolderActions:
+		return "PlaFolderActions"
+	case PlaResourceFreeing:
+		return "PlaResourceFreeing"
+	default:
+		return fmt.Sprintf("DataManagerSteps(%d)", int32(e))
+	}
+}
+
 // DataSourceTypeConstants: https://learn.microsoft.com/windows/win32/api/isysmon/ne-isysmon-datasourcetypeconstants
 type DataSourceTypeConstants int32
 
@@ -84,6 +212,23 @@ const (
 	SysmonLogFiles        DataSourceTypeConstants = 2
 	SysmonSqlLog          DataSourceTypeConstants = 3
 )
+
+// String returns the DataSourceTypeConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DataSourceTypeConstants) String() string {
+	switch e {
+	case SysmonNullDataSource:
+		return "SysmonNullDataSource"
+	case SysmonCurrentActivity:
+		return "SysmonCurrentActivity"
+	case SysmonLogFiles:
+		return "SysmonLogFiles"
+	case SysmonSqlLog:
+		return "SysmonSqlLog"
+	default:
+		return fmt.Sprintf("DataSourceTypeConstants(%d)", int32(e))
+	}
+}
 
 // DisplayTypeConstants: https://learn.microsoft.com/windows/win32/api/isysmon/ne-isysmon-displaytypeconstants
 type DisplayTypeConstants int32
@@ -96,6 +241,25 @@ const (
 	SysmonChartStackedArea DisplayTypeConstants = 5
 )
 
+// String returns the DisplayTypeConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DisplayTypeConstants) String() string {
+	switch e {
+	case SysmonLineGraph:
+		return "SysmonLineGraph"
+	case SysmonHistogram:
+		return "SysmonHistogram"
+	case SysmonReport:
+		return "SysmonReport"
+	case SysmonChartArea:
+		return "SysmonChartArea"
+	case SysmonChartStackedArea:
+		return "SysmonChartStackedArea"
+	default:
+		return fmt.Sprintf("DisplayTypeConstants(%d)", int32(e))
+	}
+}
+
 // FileFormat: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-fileformat
 type FileFormat int32
 
@@ -105,6 +269,23 @@ const (
 	PlaSql            FileFormat = 2
 	PlaBinary         FileFormat = 3
 )
+
+// String returns the FileFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FileFormat) String() string {
+	switch e {
+	case PlaCommaSeparated:
+		return "PlaCommaSeparated"
+	case PlaTabSeparated:
+		return "PlaTabSeparated"
+	case PlaSql:
+		return "PlaSql"
+	case PlaBinary:
+		return "PlaBinary"
+	default:
+		return fmt.Sprintf("FileFormat(%d)", int32(e))
+	}
+}
 
 // FolderActionSteps: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-folderactionsteps
 type FolderActionSteps int32
@@ -117,12 +298,44 @@ const (
 	PlaDeleteReport FolderActionSteps = 16
 )
 
+// String returns the FolderActionSteps constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FolderActionSteps) String() string {
+	switch e {
+	case PlaCreateCab:
+		return "PlaCreateCab"
+	case PlaDeleteData:
+		return "PlaDeleteData"
+	case PlaSendCab:
+		return "PlaSendCab"
+	case PlaDeleteCab:
+		return "PlaDeleteCab"
+	case PlaDeleteReport:
+		return "PlaDeleteReport"
+	default:
+		return fmt.Sprintf("FolderActionSteps(%d)", int32(e))
+	}
+}
+
 type PDH_DLL_VERSION uint32
 
 const (
 	PDH_CVERSION_WIN50 PDH_DLL_VERSION = 1280
 	PDH_VERSION        PDH_DLL_VERSION = 1283
 )
+
+// String returns the PDH_DLL_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PDH_DLL_VERSION) String() string {
+	switch e {
+	case PDH_CVERSION_WIN50:
+		return "PDH_CVERSION_WIN50"
+	case PDH_VERSION:
+		return "PDH_VERSION"
+	default:
+		return fmt.Sprintf("PDH_DLL_VERSION(%d)", uint32(e))
+	}
+}
 
 type PDH_FMT uint32
 
@@ -132,6 +345,21 @@ const (
 	PDH_FMT_LONG   PDH_FMT = 256
 )
 
+// String returns the PDH_FMT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PDH_FMT) String() string {
+	switch e {
+	case PDH_FMT_DOUBLE:
+		return "PDH_FMT_DOUBLE"
+	case PDH_FMT_LARGE:
+		return "PDH_FMT_LARGE"
+	case PDH_FMT_LONG:
+		return "PDH_FMT_LONG"
+	default:
+		return fmt.Sprintf("PDH_FMT(%d)", uint32(e))
+	}
+}
+
 type PDH_LOG uint32
 
 const (
@@ -139,6 +367,21 @@ const (
 	PDH_LOG_WRITE_ACCESS  PDH_LOG = 131072
 	PDH_LOG_UPDATE_ACCESS PDH_LOG = 262144
 )
+
+// String returns the PDH_LOG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PDH_LOG) String() string {
+	switch e {
+	case PDH_LOG_READ_ACCESS:
+		return "PDH_LOG_READ_ACCESS"
+	case PDH_LOG_WRITE_ACCESS:
+		return "PDH_LOG_WRITE_ACCESS"
+	case PDH_LOG_UPDATE_ACCESS:
+		return "PDH_LOG_UPDATE_ACCESS"
+	default:
+		return fmt.Sprintf("PDH_LOG(%d)", uint32(e))
+	}
+}
 
 type PDH_LOG_TYPE uint32
 
@@ -151,6 +394,27 @@ const (
 	PDH_LOG_TYPE_PERFMON   PDH_LOG_TYPE = 6
 )
 
+// String returns the PDH_LOG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PDH_LOG_TYPE) String() string {
+	switch e {
+	case PDH_LOG_TYPE_UNDEFINED:
+		return "PDH_LOG_TYPE_UNDEFINED"
+	case PDH_LOG_TYPE_CSV:
+		return "PDH_LOG_TYPE_CSV"
+	case PDH_LOG_TYPE_SQL:
+		return "PDH_LOG_TYPE_SQL"
+	case PDH_LOG_TYPE_TSV:
+		return "PDH_LOG_TYPE_TSV"
+	case PDH_LOG_TYPE_BINARY:
+		return "PDH_LOG_TYPE_BINARY"
+	case PDH_LOG_TYPE_PERFMON:
+		return "PDH_LOG_TYPE_PERFMON"
+	default:
+		return fmt.Sprintf("PDH_LOG_TYPE(%d)", uint32(e))
+	}
+}
+
 type PDH_PATH_FLAGS uint32
 
 const (
@@ -159,12 +423,40 @@ const (
 	PDH_PATH_WBEM_NONE   PDH_PATH_FLAGS = 0
 )
 
+// String returns the PDH_PATH_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PDH_PATH_FLAGS) String() string {
+	switch e {
+	case PDH_PATH_WBEM_RESULT:
+		return "PDH_PATH_WBEM_RESULT"
+	case PDH_PATH_WBEM_INPUT:
+		return "PDH_PATH_WBEM_INPUT"
+	case PDH_PATH_WBEM_NONE:
+		return "PDH_PATH_WBEM_NONE"
+	default:
+		return fmt.Sprintf("PDH_PATH_FLAGS(%d)", uint32(e))
+	}
+}
+
 type PDH_SELECT_DATA_SOURCE_FLAGS uint32
 
 const (
 	PDH_FLAGS_FILE_BROWSER_ONLY PDH_SELECT_DATA_SOURCE_FLAGS = 1
 	PDH_FLAGS_NONE              PDH_SELECT_DATA_SOURCE_FLAGS = 0
 )
+
+// String returns the PDH_SELECT_DATA_SOURCE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PDH_SELECT_DATA_SOURCE_FLAGS) String() string {
+	switch e {
+	case PDH_FLAGS_FILE_BROWSER_ONLY:
+		return "PDH_FLAGS_FILE_BROWSER_ONLY"
+	case PDH_FLAGS_NONE:
+		return "PDH_FLAGS_NONE"
+	default:
+		return fmt.Sprintf("PDH_SELECT_DATA_SOURCE_FLAGS(%d)", uint32(e))
+	}
+}
 
 type PERF_COUNTER_AGGREGATE_FUNC uint32
 
@@ -176,6 +468,25 @@ const (
 	PERF_AGGREGATE_MAX       PERF_COUNTER_AGGREGATE_FUNC = 4
 )
 
+// String returns the PERF_COUNTER_AGGREGATE_FUNC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PERF_COUNTER_AGGREGATE_FUNC) String() string {
+	switch e {
+	case PERF_AGGREGATE_UNDEFINED:
+		return "PERF_AGGREGATE_UNDEFINED"
+	case PERF_AGGREGATE_TOTAL:
+		return "PERF_AGGREGATE_TOTAL"
+	case PERF_AGGREGATE_AVG:
+		return "PERF_AGGREGATE_AVG"
+	case PERF_AGGREGATE_MIN:
+		return "PERF_AGGREGATE_MIN"
+	case PERF_AGGREGATE_MAX:
+		return "PERF_AGGREGATE_MAX"
+	default:
+		return fmt.Sprintf("PERF_COUNTER_AGGREGATE_FUNC(%d)", uint32(e))
+	}
+}
+
 type PERF_DETAIL uint32
 
 const (
@@ -184,6 +495,23 @@ const (
 	PERF_DETAIL_EXPERT   PERF_DETAIL = 300
 	PERF_DETAIL_WIZARD   PERF_DETAIL = 400
 )
+
+// String returns the PERF_DETAIL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PERF_DETAIL) String() string {
+	switch e {
+	case PERF_DETAIL_NOVICE:
+		return "PERF_DETAIL_NOVICE"
+	case PERF_DETAIL_ADVANCED:
+		return "PERF_DETAIL_ADVANCED"
+	case PERF_DETAIL_EXPERT:
+		return "PERF_DETAIL_EXPERT"
+	case PERF_DETAIL_WIZARD:
+		return "PERF_DETAIL_WIZARD"
+	default:
+		return fmt.Sprintf("PERF_DETAIL(%d)", uint32(e))
+	}
+}
 
 // PerfCounterDataType: https://learn.microsoft.com/windows/win32/api/perflib/ne-perflib-perfcounterdatatype
 type PerfCounterDataType int32
@@ -195,6 +523,25 @@ const (
 	PERF_MULTIPLE_INSTANCES PerfCounterDataType = 4
 	PERF_COUNTERSET         PerfCounterDataType = 6
 )
+
+// String returns the PerfCounterDataType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PerfCounterDataType) String() string {
+	switch e {
+	case PERF_ERROR_RETURN:
+		return "PERF_ERROR_RETURN"
+	case PERF_SINGLE_COUNTER:
+		return "PERF_SINGLE_COUNTER"
+	case PERF_MULTIPLE_COUNTERS:
+		return "PERF_MULTIPLE_COUNTERS"
+	case PERF_MULTIPLE_INSTANCES:
+		return "PERF_MULTIPLE_INSTANCES"
+	case PERF_COUNTERSET:
+		return "PERF_COUNTERSET"
+	default:
+		return fmt.Sprintf("PerfCounterDataType(%d)", int32(e))
+	}
+}
 
 // PerfRegInfoType: https://learn.microsoft.com/windows/win32/api/perflib/ne-perflib-perfreginfotype
 type PerfRegInfoType int32
@@ -212,12 +559,54 @@ const (
 	PERF_REG_COUNTER_ENGLISH_NAMES   PerfRegInfoType = 10
 )
 
+// String returns the PerfRegInfoType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PerfRegInfoType) String() string {
+	switch e {
+	case PERF_REG_COUNTERSET_STRUCT:
+		return "PERF_REG_COUNTERSET_STRUCT"
+	case PERF_REG_COUNTER_STRUCT:
+		return "PERF_REG_COUNTER_STRUCT"
+	case PERF_REG_COUNTERSET_NAME_STRING:
+		return "PERF_REG_COUNTERSET_NAME_STRING"
+	case PERF_REG_COUNTERSET_HELP_STRING:
+		return "PERF_REG_COUNTERSET_HELP_STRING"
+	case PERF_REG_COUNTER_NAME_STRINGS:
+		return "PERF_REG_COUNTER_NAME_STRINGS"
+	case PERF_REG_COUNTER_HELP_STRINGS:
+		return "PERF_REG_COUNTER_HELP_STRINGS"
+	case PERF_REG_PROVIDER_NAME:
+		return "PERF_REG_PROVIDER_NAME"
+	case PERF_REG_PROVIDER_GUID:
+		return "PERF_REG_PROVIDER_GUID"
+	case PERF_REG_COUNTERSET_ENGLISH_NAME:
+		return "PERF_REG_COUNTERSET_ENGLISH_NAME"
+	case PERF_REG_COUNTER_ENGLISH_NAMES:
+		return "PERF_REG_COUNTER_ENGLISH_NAMES"
+	default:
+		return fmt.Sprintf("PerfRegInfoType(%d)", int32(e))
+	}
+}
+
 type REAL_TIME_DATA_SOURCE_ID_FLAGS uint32
 
 const (
 	DATA_SOURCE_REGISTRY REAL_TIME_DATA_SOURCE_ID_FLAGS = 1
 	DATA_SOURCE_WBEM     REAL_TIME_DATA_SOURCE_ID_FLAGS = 4
 )
+
+// String returns the REAL_TIME_DATA_SOURCE_ID_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REAL_TIME_DATA_SOURCE_ID_FLAGS) String() string {
+	switch e {
+	case DATA_SOURCE_REGISTRY:
+		return "DATA_SOURCE_REGISTRY"
+	case DATA_SOURCE_WBEM:
+		return "DATA_SOURCE_WBEM"
+	default:
+		return fmt.Sprintf("REAL_TIME_DATA_SOURCE_ID_FLAGS(%d)", uint32(e))
+	}
+}
 
 // ReportValueTypeConstants: https://learn.microsoft.com/windows/win32/api/isysmon/ne-isysmon-reportvaluetypeconstants
 type ReportValueTypeConstants int32
@@ -230,6 +619,25 @@ const (
 	SysmonMaximum      ReportValueTypeConstants = 4
 )
 
+// String returns the ReportValueTypeConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ReportValueTypeConstants) String() string {
+	switch e {
+	case SysmonDefaultValue:
+		return "SysmonDefaultValue"
+	case SysmonCurrentValue:
+		return "SysmonCurrentValue"
+	case SysmonAverage:
+		return "SysmonAverage"
+	case SysmonMinimum:
+		return "SysmonMinimum"
+	case SysmonMaximum:
+		return "SysmonMaximum"
+	default:
+		return fmt.Sprintf("ReportValueTypeConstants(%d)", int32(e))
+	}
+}
+
 // ResourcePolicy: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-resourcepolicy
 type ResourcePolicy int32
 
@@ -237,6 +645,19 @@ const (
 	PlaDeleteLargest ResourcePolicy = 0
 	PlaDeleteOldest  ResourcePolicy = 1
 )
+
+// String returns the ResourcePolicy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ResourcePolicy) String() string {
+	switch e {
+	case PlaDeleteLargest:
+		return "PlaDeleteLargest"
+	case PlaDeleteOldest:
+		return "PlaDeleteOldest"
+	default:
+		return fmt.Sprintf("ResourcePolicy(%d)", int32(e))
+	}
+}
 
 // StreamMode: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-streammode
 type StreamMode int32
@@ -248,6 +669,23 @@ const (
 	PlaBuffering StreamMode = 4
 )
 
+// String returns the StreamMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StreamMode) String() string {
+	switch e {
+	case PlaFile:
+		return "PlaFile"
+	case PlaRealTime:
+		return "PlaRealTime"
+	case PlaBoth:
+		return "PlaBoth"
+	case PlaBuffering:
+		return "PlaBuffering"
+	default:
+		return fmt.Sprintf("StreamMode(%d)", int32(e))
+	}
+}
+
 // SysmonBatchReason: https://learn.microsoft.com/windows/win32/api/isysmon/ne-isysmon-sysmonbatchreason
 type SysmonBatchReason int32
 
@@ -257,6 +695,23 @@ const (
 	SysmonBatchAddCounters          SysmonBatchReason = 2
 	SysmonBatchAddFilesAutoCounters SysmonBatchReason = 3
 )
+
+// String returns the SysmonBatchReason constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SysmonBatchReason) String() string {
+	switch e {
+	case SysmonBatchNone:
+		return "SysmonBatchNone"
+	case SysmonBatchAddFiles:
+		return "SysmonBatchAddFiles"
+	case SysmonBatchAddCounters:
+		return "SysmonBatchAddCounters"
+	case SysmonBatchAddFilesAutoCounters:
+		return "SysmonBatchAddFilesAutoCounters"
+	default:
+		return fmt.Sprintf("SysmonBatchReason(%d)", int32(e))
+	}
+}
 
 // SysmonDataType: https://learn.microsoft.com/windows/win32/api/isysmon/ne-isysmon-sysmondatatype
 type SysmonDataType int32
@@ -268,6 +723,25 @@ const (
 	SysmonDataTime  SysmonDataType = 4
 	SysmonDataCount SysmonDataType = 5
 )
+
+// String returns the SysmonDataType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SysmonDataType) String() string {
+	switch e {
+	case SysmonDataAvg:
+		return "SysmonDataAvg"
+	case SysmonDataMin:
+		return "SysmonDataMin"
+	case SysmonDataMax:
+		return "SysmonDataMax"
+	case SysmonDataTime:
+		return "SysmonDataTime"
+	case SysmonDataCount:
+		return "SysmonDataCount"
+	default:
+		return fmt.Sprintf("SysmonDataType(%d)", int32(e))
+	}
+}
 
 // SysmonFileType: https://learn.microsoft.com/windows/win32/api/isysmon/ne-isysmon-sysmonfiletype
 type SysmonFileType int32
@@ -282,6 +756,29 @@ const (
 	SysmonFileGif        SysmonFileType = 7
 )
 
+// String returns the SysmonFileType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SysmonFileType) String() string {
+	switch e {
+	case SysmonFileHtml:
+		return "SysmonFileHtml"
+	case SysmonFileReport:
+		return "SysmonFileReport"
+	case SysmonFileCsv:
+		return "SysmonFileCsv"
+	case SysmonFileTsv:
+		return "SysmonFileTsv"
+	case SysmonFileBlg:
+		return "SysmonFileBlg"
+	case SysmonFileRetiredBlg:
+		return "SysmonFileRetiredBlg"
+	case SysmonFileGif:
+		return "SysmonFileGif"
+	default:
+		return fmt.Sprintf("SysmonFileType(%d)", int32(e))
+	}
+}
+
 // ValueMapType: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-valuemaptype
 type ValueMapType int32
 
@@ -291,6 +788,23 @@ const (
 	PlaFlagArray  ValueMapType = 3
 	PlaValidation ValueMapType = 4
 )
+
+// String returns the ValueMapType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ValueMapType) String() string {
+	switch e {
+	case PlaIndex:
+		return "PlaIndex"
+	case PlaFlag:
+		return "PlaFlag"
+	case PlaFlagArray:
+		return "PlaFlagArray"
+	case PlaValidation:
+		return "PlaValidation"
+	default:
+		return fmt.Sprintf("ValueMapType(%d)", int32(e))
+	}
+}
 
 // WeekDays: https://learn.microsoft.com/windows/win32/api/pla/ne-pla-weekdays
 type WeekDays int32
@@ -306,3 +820,30 @@ const (
 	PlaSaturday  WeekDays = 64
 	PlaEveryday  WeekDays = 127
 )
+
+// String returns the WeekDays constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WeekDays) String() string {
+	switch e {
+	case PlaRunOnce:
+		return "PlaRunOnce"
+	case PlaSunday:
+		return "PlaSunday"
+	case PlaMonday:
+		return "PlaMonday"
+	case PlaTuesday:
+		return "PlaTuesday"
+	case PlaWednesday:
+		return "PlaWednesday"
+	case PlaThursday:
+		return "PlaThursday"
+	case PlaFriday:
+		return "PlaFriday"
+	case PlaSaturday:
+		return "PlaSaturday"
+	case PlaEveryday:
+		return "PlaEveryday"
+	default:
+		return fmt.Sprintf("WeekDays(%d)", int32(e))
+	}
+}

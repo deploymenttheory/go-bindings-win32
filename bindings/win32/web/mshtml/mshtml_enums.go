@@ -4,6 +4,10 @@
 
 package mshtml
 
+import (
+	"fmt"
+)
+
 type BEHAVIOR_EVENT int32
 
 const (
@@ -17,6 +21,27 @@ const (
 	BEHAVIOR_EVENT_Max                  BEHAVIOR_EVENT = 2147483647
 )
 
+// String returns the BEHAVIOR_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BEHAVIOR_EVENT) String() string {
+	switch e {
+	case BEHAVIOREVENT_FIRST:
+		return "BEHAVIOREVENT_FIRST"
+	case BEHAVIOREVENT_DOCUMENTREADY:
+		return "BEHAVIOREVENT_DOCUMENTREADY"
+	case BEHAVIOREVENT_APPLYSTYLE:
+		return "BEHAVIOREVENT_APPLYSTYLE"
+	case BEHAVIOREVENT_DOCUMENTCONTEXTCHANGE:
+		return "BEHAVIOREVENT_DOCUMENTCONTEXTCHANGE"
+	case BEHAVIOREVENT_CONTENTSAVE:
+		return "BEHAVIOREVENT_CONTENTSAVE"
+	case BEHAVIOR_EVENT_Max:
+		return "BEHAVIOR_EVENT_Max"
+	default:
+		return fmt.Sprintf("BEHAVIOR_EVENT(%d)", int32(e))
+	}
+}
+
 type BEHAVIOR_EVENT_FLAGS int32
 
 const (
@@ -24,6 +49,21 @@ const (
 	BEHAVIOREVENTFLAGS_STANDARDADDITIVE BEHAVIOR_EVENT_FLAGS = 2
 	BEHAVIOR_EVENT_FLAGS_Max            BEHAVIOR_EVENT_FLAGS = 2147483647
 )
+
+// String returns the BEHAVIOR_EVENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BEHAVIOR_EVENT_FLAGS) String() string {
+	switch e {
+	case BEHAVIOREVENTFLAGS_BUBBLE:
+		return "BEHAVIOREVENTFLAGS_BUBBLE"
+	case BEHAVIOREVENTFLAGS_STANDARDADDITIVE:
+		return "BEHAVIOREVENTFLAGS_STANDARDADDITIVE"
+	case BEHAVIOR_EVENT_FLAGS_Max:
+		return "BEHAVIOR_EVENT_FLAGS_Max"
+	default:
+		return fmt.Sprintf("BEHAVIOR_EVENT_FLAGS(%d)", int32(e))
+	}
+}
 
 type BEHAVIOR_LAYOUT_INFO int32
 
@@ -33,6 +73,23 @@ const (
 	BEHAVIORLAYOUTINFO_MAPSIZE        BEHAVIOR_LAYOUT_INFO = 4
 	BEHAVIOR_LAYOUT_INFO_Max          BEHAVIOR_LAYOUT_INFO = 2147483647
 )
+
+// String returns the BEHAVIOR_LAYOUT_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BEHAVIOR_LAYOUT_INFO) String() string {
+	switch e {
+	case BEHAVIORLAYOUTINFO_FULLDELEGATION:
+		return "BEHAVIORLAYOUTINFO_FULLDELEGATION"
+	case BEHAVIORLAYOUTINFO_MODIFYNATURAL:
+		return "BEHAVIORLAYOUTINFO_MODIFYNATURAL"
+	case BEHAVIORLAYOUTINFO_MAPSIZE:
+		return "BEHAVIORLAYOUTINFO_MAPSIZE"
+	case BEHAVIOR_LAYOUT_INFO_Max:
+		return "BEHAVIOR_LAYOUT_INFO_Max"
+	default:
+		return fmt.Sprintf("BEHAVIOR_LAYOUT_INFO(%d)", int32(e))
+	}
+}
 
 type BEHAVIOR_LAYOUT_MODE int32
 
@@ -45,6 +102,27 @@ const (
 	BEHAVIOR_LAYOUT_MODE_Max            BEHAVIOR_LAYOUT_MODE = 2147483647
 )
 
+// String returns the BEHAVIOR_LAYOUT_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BEHAVIOR_LAYOUT_MODE) String() string {
+	switch e {
+	case BEHAVIORLAYOUTMODE_NATURAL:
+		return "BEHAVIORLAYOUTMODE_NATURAL"
+	case BEHAVIORLAYOUTMODE_MINWIDTH:
+		return "BEHAVIORLAYOUTMODE_MINWIDTH"
+	case BEHAVIORLAYOUTMODE_MAXWIDTH:
+		return "BEHAVIORLAYOUTMODE_MAXWIDTH"
+	case BEHAVIORLAYOUTMODE_MEDIA_RESOLUTION:
+		return "BEHAVIORLAYOUTMODE_MEDIA_RESOLUTION"
+	case BEHAVIORLAYOUTMODE_FINAL_PERCENT:
+		return "BEHAVIORLAYOUTMODE_FINAL_PERCENT"
+	case BEHAVIOR_LAYOUT_MODE_Max:
+		return "BEHAVIOR_LAYOUT_MODE_Max"
+	default:
+		return fmt.Sprintf("BEHAVIOR_LAYOUT_MODE(%d)", int32(e))
+	}
+}
+
 type BEHAVIOR_RELATION int32
 
 const (
@@ -56,6 +134,25 @@ const (
 	BEHAVIOR_LASTRELATION  BEHAVIOR_RELATION = 3
 	BEHAVIOR_RELATION_Max  BEHAVIOR_RELATION = 2147483647
 )
+
+// String returns the BEHAVIOR_RELATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BEHAVIOR_RELATION) String() string {
+	switch e {
+	case BEHAVIOR_FIRSTRELATION:
+		return "BEHAVIOR_FIRSTRELATION"
+	case BEHAVIOR_PARENT:
+		return "BEHAVIOR_PARENT"
+	case BEHAVIOR_CHILD:
+		return "BEHAVIOR_CHILD"
+	case BEHAVIOR_SIBLING:
+		return "BEHAVIOR_SIBLING"
+	case BEHAVIOR_RELATION_Max:
+		return "BEHAVIOR_RELATION_Max"
+	default:
+		return fmt.Sprintf("BEHAVIOR_RELATION(%d)", int32(e))
+	}
+}
 
 type BEHAVIOR_RENDER_INFO int32
 
@@ -78,6 +175,47 @@ const (
 	BEHAVIOR_RENDER_INFO_Max             BEHAVIOR_RENDER_INFO = 2147483647
 )
 
+// String returns the BEHAVIOR_RENDER_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BEHAVIOR_RENDER_INFO) String() string {
+	switch e {
+	case BEHAVIORRENDERINFO_BEFOREBACKGROUND:
+		return "BEHAVIORRENDERINFO_BEFOREBACKGROUND"
+	case BEHAVIORRENDERINFO_AFTERBACKGROUND:
+		return "BEHAVIORRENDERINFO_AFTERBACKGROUND"
+	case BEHAVIORRENDERINFO_BEFORECONTENT:
+		return "BEHAVIORRENDERINFO_BEFORECONTENT"
+	case BEHAVIORRENDERINFO_AFTERCONTENT:
+		return "BEHAVIORRENDERINFO_AFTERCONTENT"
+	case BEHAVIORRENDERINFO_AFTERFOREGROUND:
+		return "BEHAVIORRENDERINFO_AFTERFOREGROUND"
+	case BEHAVIORRENDERINFO_ABOVECONTENT:
+		return "BEHAVIORRENDERINFO_ABOVECONTENT"
+	case BEHAVIORRENDERINFO_ALLLAYERS:
+		return "BEHAVIORRENDERINFO_ALLLAYERS"
+	case BEHAVIORRENDERINFO_DISABLEBACKGROUND:
+		return "BEHAVIORRENDERINFO_DISABLEBACKGROUND"
+	case BEHAVIORRENDERINFO_DISABLENEGATIVEZ:
+		return "BEHAVIORRENDERINFO_DISABLENEGATIVEZ"
+	case BEHAVIORRENDERINFO_DISABLECONTENT:
+		return "BEHAVIORRENDERINFO_DISABLECONTENT"
+	case BEHAVIORRENDERINFO_DISABLEPOSITIVEZ:
+		return "BEHAVIORRENDERINFO_DISABLEPOSITIVEZ"
+	case BEHAVIORRENDERINFO_DISABLEALLLAYERS:
+		return "BEHAVIORRENDERINFO_DISABLEALLLAYERS"
+	case BEHAVIORRENDERINFO_HITTESTING:
+		return "BEHAVIORRENDERINFO_HITTESTING"
+	case BEHAVIORRENDERINFO_SURFACE:
+		return "BEHAVIORRENDERINFO_SURFACE"
+	case BEHAVIORRENDERINFO_3DSURFACE:
+		return "BEHAVIORRENDERINFO_3DSURFACE"
+	case BEHAVIOR_RENDER_INFO_Max:
+		return "BEHAVIOR_RENDER_INFO_Max"
+	default:
+		return fmt.Sprintf("BEHAVIOR_RENDER_INFO(%d)", int32(e))
+	}
+}
+
 type CARET_DIRECTION int32
 
 const (
@@ -87,6 +225,25 @@ const (
 	CARET_DIRECTION_FORWARD       CARET_DIRECTION = 3
 	CARET_DIRECTION_Max           CARET_DIRECTION = 2147483647
 )
+
+// String returns the CARET_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CARET_DIRECTION) String() string {
+	switch e {
+	case CARET_DIRECTION_INDETERMINATE:
+		return "CARET_DIRECTION_INDETERMINATE"
+	case CARET_DIRECTION_SAME:
+		return "CARET_DIRECTION_SAME"
+	case CARET_DIRECTION_BACKWARD:
+		return "CARET_DIRECTION_BACKWARD"
+	case CARET_DIRECTION_FORWARD:
+		return "CARET_DIRECTION_FORWARD"
+	case CARET_DIRECTION_Max:
+		return "CARET_DIRECTION_Max"
+	default:
+		return fmt.Sprintf("CARET_DIRECTION(%d)", int32(e))
+	}
+}
 
 type COORD_SYSTEM int32
 
@@ -100,6 +257,29 @@ const (
 	COORD_SYSTEM_Max       COORD_SYSTEM = 2147483647
 )
 
+// String returns the COORD_SYSTEM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COORD_SYSTEM) String() string {
+	switch e {
+	case COORD_SYSTEM_GLOBAL:
+		return "COORD_SYSTEM_GLOBAL"
+	case COORD_SYSTEM_PARENT:
+		return "COORD_SYSTEM_PARENT"
+	case COORD_SYSTEM_CONTAINER:
+		return "COORD_SYSTEM_CONTAINER"
+	case COORD_SYSTEM_CONTENT:
+		return "COORD_SYSTEM_CONTENT"
+	case COORD_SYSTEM_FRAME:
+		return "COORD_SYSTEM_FRAME"
+	case COORD_SYSTEM_CLIENT:
+		return "COORD_SYSTEM_CLIENT"
+	case COORD_SYSTEM_Max:
+		return "COORD_SYSTEM_Max"
+	default:
+		return fmt.Sprintf("COORD_SYSTEM(%d)", int32(e))
+	}
+}
+
 type DEV_CONSOLE_MESSAGE_LEVEL int32
 
 const (
@@ -108,6 +288,23 @@ const (
 	DCML_ERROR                    DEV_CONSOLE_MESSAGE_LEVEL = 2
 	DEV_CONSOLE_MESSAGE_LEVEL_Max DEV_CONSOLE_MESSAGE_LEVEL = 2147483647
 )
+
+// String returns the DEV_CONSOLE_MESSAGE_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEV_CONSOLE_MESSAGE_LEVEL) String() string {
+	switch e {
+	case DCML_INFORMATIONAL:
+		return "DCML_INFORMATIONAL"
+	case DCML_WARNING:
+		return "DCML_WARNING"
+	case DCML_ERROR:
+		return "DCML_ERROR"
+	case DEV_CONSOLE_MESSAGE_LEVEL_Max:
+		return "DEV_CONSOLE_MESSAGE_LEVEL_Max"
+	default:
+		return fmt.Sprintf("DEV_CONSOLE_MESSAGE_LEVEL(%d)", int32(e))
+	}
+}
 
 type DISPLAY_BREAK int32
 
@@ -118,6 +315,23 @@ const (
 	DISPLAY_BREAK_Max   DISPLAY_BREAK = 2147483647
 )
 
+// String returns the DISPLAY_BREAK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAY_BREAK) String() string {
+	switch e {
+	case DISPLAY_BREAK_None:
+		return "DISPLAY_BREAK_None"
+	case DISPLAY_BREAK_Block:
+		return "DISPLAY_BREAK_Block"
+	case DISPLAY_BREAK_Break:
+		return "DISPLAY_BREAK_Break"
+	case DISPLAY_BREAK_Max:
+		return "DISPLAY_BREAK_Max"
+	default:
+		return fmt.Sprintf("DISPLAY_BREAK(%d)", int32(e))
+	}
+}
+
 type DISPLAY_GRAVITY int32
 
 const (
@@ -125,6 +339,21 @@ const (
 	DISPLAY_GRAVITY_NextLine     DISPLAY_GRAVITY = 2
 	DISPLAY_GRAVITY_Max          DISPLAY_GRAVITY = 2147483647
 )
+
+// String returns the DISPLAY_GRAVITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAY_GRAVITY) String() string {
+	switch e {
+	case DISPLAY_GRAVITY_PreviousLine:
+		return "DISPLAY_GRAVITY_PreviousLine"
+	case DISPLAY_GRAVITY_NextLine:
+		return "DISPLAY_GRAVITY_NextLine"
+	case DISPLAY_GRAVITY_Max:
+		return "DISPLAY_GRAVITY_Max"
+	default:
+		return fmt.Sprintf("DISPLAY_GRAVITY(%d)", int32(e))
+	}
+}
 
 type DISPLAY_MOVEUNIT int32
 
@@ -138,6 +367,29 @@ const (
 	DISPLAY_MOVEUNIT_Max              DISPLAY_MOVEUNIT = 2147483647
 )
 
+// String returns the DISPLAY_MOVEUNIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAY_MOVEUNIT) String() string {
+	switch e {
+	case DISPLAY_MOVEUNIT_PreviousLine:
+		return "DISPLAY_MOVEUNIT_PreviousLine"
+	case DISPLAY_MOVEUNIT_NextLine:
+		return "DISPLAY_MOVEUNIT_NextLine"
+	case DISPLAY_MOVEUNIT_CurrentLineStart:
+		return "DISPLAY_MOVEUNIT_CurrentLineStart"
+	case DISPLAY_MOVEUNIT_CurrentLineEnd:
+		return "DISPLAY_MOVEUNIT_CurrentLineEnd"
+	case DISPLAY_MOVEUNIT_TopOfWindow:
+		return "DISPLAY_MOVEUNIT_TopOfWindow"
+	case DISPLAY_MOVEUNIT_BottomOfWindow:
+		return "DISPLAY_MOVEUNIT_BottomOfWindow"
+	case DISPLAY_MOVEUNIT_Max:
+		return "DISPLAY_MOVEUNIT_Max"
+	default:
+		return fmt.Sprintf("DISPLAY_MOVEUNIT(%d)", int32(e))
+	}
+}
+
 type DOCHOSTUIDBLCLK int32
 
 const (
@@ -145,6 +397,21 @@ const (
 	DOCHOSTUIDBLCLK_SHOWPROPERTIES DOCHOSTUIDBLCLK = 1
 	DOCHOSTUIDBLCLK_SHOWCODE       DOCHOSTUIDBLCLK = 2
 )
+
+// String returns the DOCHOSTUIDBLCLK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOCHOSTUIDBLCLK) String() string {
+	switch e {
+	case DOCHOSTUIDBLCLK_DEFAULT:
+		return "DOCHOSTUIDBLCLK_DEFAULT"
+	case DOCHOSTUIDBLCLK_SHOWPROPERTIES:
+		return "DOCHOSTUIDBLCLK_SHOWPROPERTIES"
+	case DOCHOSTUIDBLCLK_SHOWCODE:
+		return "DOCHOSTUIDBLCLK_SHOWCODE"
+	default:
+		return fmt.Sprintf("DOCHOSTUIDBLCLK(%d)", int32(e))
+	}
+}
 
 type DOCHOSTUIFLAG int32
 
@@ -181,12 +448,94 @@ const (
 	DOCHOSTUIFLAG_DPI_AWARE                      DOCHOSTUIFLAG = 1073741824
 )
 
+// String returns the DOCHOSTUIFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOCHOSTUIFLAG) String() string {
+	switch e {
+	case DOCHOSTUIFLAG_DIALOG:
+		return "DOCHOSTUIFLAG_DIALOG"
+	case DOCHOSTUIFLAG_DISABLE_HELP_MENU:
+		return "DOCHOSTUIFLAG_DISABLE_HELP_MENU"
+	case DOCHOSTUIFLAG_NO3DBORDER:
+		return "DOCHOSTUIFLAG_NO3DBORDER"
+	case DOCHOSTUIFLAG_SCROLL_NO:
+		return "DOCHOSTUIFLAG_SCROLL_NO"
+	case DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE:
+		return "DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE"
+	case DOCHOSTUIFLAG_OPENNEWWIN:
+		return "DOCHOSTUIFLAG_OPENNEWWIN"
+	case DOCHOSTUIFLAG_DISABLE_OFFSCREEN:
+		return "DOCHOSTUIFLAG_DISABLE_OFFSCREEN"
+	case DOCHOSTUIFLAG_FLAT_SCROLLBAR:
+		return "DOCHOSTUIFLAG_FLAT_SCROLLBAR"
+	case DOCHOSTUIFLAG_DIV_BLOCKDEFAULT:
+		return "DOCHOSTUIFLAG_DIV_BLOCKDEFAULT"
+	case DOCHOSTUIFLAG_ACTIVATE_CLIENTHIT_ONLY:
+		return "DOCHOSTUIFLAG_ACTIVATE_CLIENTHIT_ONLY"
+	case DOCHOSTUIFLAG_OVERRIDEBEHAVIORFACTORY:
+		return "DOCHOSTUIFLAG_OVERRIDEBEHAVIORFACTORY"
+	case DOCHOSTUIFLAG_CODEPAGELINKEDFONTS:
+		return "DOCHOSTUIFLAG_CODEPAGELINKEDFONTS"
+	case DOCHOSTUIFLAG_URL_ENCODING_DISABLE_UTF8:
+		return "DOCHOSTUIFLAG_URL_ENCODING_DISABLE_UTF8"
+	case DOCHOSTUIFLAG_URL_ENCODING_ENABLE_UTF8:
+		return "DOCHOSTUIFLAG_URL_ENCODING_ENABLE_UTF8"
+	case DOCHOSTUIFLAG_ENABLE_FORMS_AUTOCOMPLETE:
+		return "DOCHOSTUIFLAG_ENABLE_FORMS_AUTOCOMPLETE"
+	case DOCHOSTUIFLAG_ENABLE_INPLACE_NAVIGATION:
+		return "DOCHOSTUIFLAG_ENABLE_INPLACE_NAVIGATION"
+	case DOCHOSTUIFLAG_IME_ENABLE_RECONVERSION:
+		return "DOCHOSTUIFLAG_IME_ENABLE_RECONVERSION"
+	case DOCHOSTUIFLAG_THEME:
+		return "DOCHOSTUIFLAG_THEME"
+	case DOCHOSTUIFLAG_NOTHEME:
+		return "DOCHOSTUIFLAG_NOTHEME"
+	case DOCHOSTUIFLAG_NOPICS:
+		return "DOCHOSTUIFLAG_NOPICS"
+	case DOCHOSTUIFLAG_NO3DOUTERBORDER:
+		return "DOCHOSTUIFLAG_NO3DOUTERBORDER"
+	case DOCHOSTUIFLAG_DISABLE_EDIT_NS_FIXUP:
+		return "DOCHOSTUIFLAG_DISABLE_EDIT_NS_FIXUP"
+	case DOCHOSTUIFLAG_LOCAL_MACHINE_ACCESS_CHECK:
+		return "DOCHOSTUIFLAG_LOCAL_MACHINE_ACCESS_CHECK"
+	case DOCHOSTUIFLAG_DISABLE_UNTRUSTEDPROTOCOL:
+		return "DOCHOSTUIFLAG_DISABLE_UNTRUSTEDPROTOCOL"
+	case DOCHOSTUIFLAG_HOST_NAVIGATES:
+		return "DOCHOSTUIFLAG_HOST_NAVIGATES"
+	case DOCHOSTUIFLAG_ENABLE_REDIRECT_NOTIFICATION:
+		return "DOCHOSTUIFLAG_ENABLE_REDIRECT_NOTIFICATION"
+	case DOCHOSTUIFLAG_USE_WINDOWLESS_SELECTCONTROL:
+		return "DOCHOSTUIFLAG_USE_WINDOWLESS_SELECTCONTROL"
+	case DOCHOSTUIFLAG_USE_WINDOWED_SELECTCONTROL:
+		return "DOCHOSTUIFLAG_USE_WINDOWED_SELECTCONTROL"
+	case DOCHOSTUIFLAG_ENABLE_ACTIVEX_INACTIVATE_MODE:
+		return "DOCHOSTUIFLAG_ENABLE_ACTIVEX_INACTIVATE_MODE"
+	case DOCHOSTUIFLAG_DPI_AWARE:
+		return "DOCHOSTUIFLAG_DPI_AWARE"
+	default:
+		return fmt.Sprintf("DOCHOSTUIFLAG(%d)", int32(e))
+	}
+}
+
 type DOCHOSTUITYPE int32
 
 const (
 	DOCHOSTUITYPE_BROWSE DOCHOSTUITYPE = 0
 	DOCHOSTUITYPE_AUTHOR DOCHOSTUITYPE = 1
 )
+
+// String returns the DOCHOSTUITYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOCHOSTUITYPE) String() string {
+	switch e {
+	case DOCHOSTUITYPE_BROWSE:
+		return "DOCHOSTUITYPE_BROWSE"
+	case DOCHOSTUITYPE_AUTHOR:
+		return "DOCHOSTUITYPE_AUTHOR"
+	default:
+		return fmt.Sprintf("DOCHOSTUITYPE(%d)", int32(e))
+	}
+}
 
 type DOM_EVENT_PHASE int32
 
@@ -196,6 +545,23 @@ const (
 	DEP_BUBBLING_PHASE  DOM_EVENT_PHASE = 3
 	DOM_EVENT_PHASE_Max DOM_EVENT_PHASE = 2147483647
 )
+
+// String returns the DOM_EVENT_PHASE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOM_EVENT_PHASE) String() string {
+	switch e {
+	case DEP_CAPTURING_PHASE:
+		return "DEP_CAPTURING_PHASE"
+	case DEP_AT_TARGET:
+		return "DEP_AT_TARGET"
+	case DEP_BUBBLING_PHASE:
+		return "DEP_BUBBLING_PHASE"
+	case DOM_EVENT_PHASE_Max:
+		return "DOM_EVENT_PHASE_Max"
+	default:
+		return fmt.Sprintf("DOM_EVENT_PHASE(%d)", int32(e))
+	}
+}
 
 type DomConstructor int32
 
@@ -311,6 +677,233 @@ const (
 	DomConstructor_Max                        DomConstructor = 2147483647
 )
 
+// String returns the DomConstructor constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DomConstructor) String() string {
+	switch e {
+	case DomConstructorObject:
+		return "DomConstructorObject"
+	case DomConstructorAttr:
+		return "DomConstructorAttr"
+	case DomConstructorBehaviorUrnsCollection:
+		return "DomConstructorBehaviorUrnsCollection"
+	case DomConstructorBookmarkCollection:
+		return "DomConstructorBookmarkCollection"
+	case DomConstructorCompatibleInfo:
+		return "DomConstructorCompatibleInfo"
+	case DomConstructorCompatibleInfoCollection:
+		return "DomConstructorCompatibleInfoCollection"
+	case DomConstructorControlRangeCollection:
+		return "DomConstructorControlRangeCollection"
+	case DomConstructorCSSCurrentStyleDeclaration:
+		return "DomConstructorCSSCurrentStyleDeclaration"
+	case DomConstructorCSSRuleList:
+		return "DomConstructorCSSRuleList"
+	case DomConstructorCSSRuleStyleDeclaration:
+		return "DomConstructorCSSRuleStyleDeclaration"
+	case DomConstructorCSSStyleDeclaration:
+		return "DomConstructorCSSStyleDeclaration"
+	case DomConstructorCSSStyleRule:
+		return "DomConstructorCSSStyleRule"
+	case DomConstructorCSSStyleSheet:
+		return "DomConstructorCSSStyleSheet"
+	case DomConstructorDataTransfer:
+		return "DomConstructorDataTransfer"
+	case DomConstructorDOMImplementation:
+		return "DomConstructorDOMImplementation"
+	case DomConstructorElement:
+		return "DomConstructorElement"
+	case DomConstructorEvent:
+		return "DomConstructorEvent"
+	case DomConstructorHistory:
+		return "DomConstructorHistory"
+	case DomConstructorHTCElementBehaviorDefaults:
+		return "DomConstructorHTCElementBehaviorDefaults"
+	case DomConstructorHTMLAnchorElement:
+		return "DomConstructorHTMLAnchorElement"
+	case DomConstructorHTMLAreaElement:
+		return "DomConstructorHTMLAreaElement"
+	case DomConstructorHTMLAreasCollection:
+		return "DomConstructorHTMLAreasCollection"
+	case DomConstructorHTMLBaseElement:
+		return "DomConstructorHTMLBaseElement"
+	case DomConstructorHTMLBaseFontElement:
+		return "DomConstructorHTMLBaseFontElement"
+	case DomConstructorHTMLBGSoundElement:
+		return "DomConstructorHTMLBGSoundElement"
+	case DomConstructorHTMLBlockElement:
+		return "DomConstructorHTMLBlockElement"
+	case DomConstructorHTMLBodyElement:
+		return "DomConstructorHTMLBodyElement"
+	case DomConstructorHTMLBRElement:
+		return "DomConstructorHTMLBRElement"
+	case DomConstructorHTMLButtonElement:
+		return "DomConstructorHTMLButtonElement"
+	case DomConstructorHTMLCollection:
+		return "DomConstructorHTMLCollection"
+	case DomConstructorHTMLCommentElement:
+		return "DomConstructorHTMLCommentElement"
+	case DomConstructorHTMLDDElement:
+		return "DomConstructorHTMLDDElement"
+	case DomConstructorHTMLDivElement:
+		return "DomConstructorHTMLDivElement"
+	case DomConstructorHTMLDocument:
+		return "DomConstructorHTMLDocument"
+	case DomConstructorHTMLDListElement:
+		return "DomConstructorHTMLDListElement"
+	case DomConstructorHTMLDTElement:
+		return "DomConstructorHTMLDTElement"
+	case DomConstructorHTMLEmbedElement:
+		return "DomConstructorHTMLEmbedElement"
+	case DomConstructorHTMLFieldSetElement:
+		return "DomConstructorHTMLFieldSetElement"
+	case DomConstructorHTMLFontElement:
+		return "DomConstructorHTMLFontElement"
+	case DomConstructorHTMLFormElement:
+		return "DomConstructorHTMLFormElement"
+	case DomConstructorHTMLFrameElement:
+		return "DomConstructorHTMLFrameElement"
+	case DomConstructorHTMLFrameSetElement:
+		return "DomConstructorHTMLFrameSetElement"
+	case DomConstructorHTMLGenericElement:
+		return "DomConstructorHTMLGenericElement"
+	case DomConstructorHTMLHeadElement:
+		return "DomConstructorHTMLHeadElement"
+	case DomConstructorHTMLHeadingElement:
+		return "DomConstructorHTMLHeadingElement"
+	case DomConstructorHTMLHRElement:
+		return "DomConstructorHTMLHRElement"
+	case DomConstructorHTMLHtmlElement:
+		return "DomConstructorHTMLHtmlElement"
+	case DomConstructorHTMLIFrameElement:
+		return "DomConstructorHTMLIFrameElement"
+	case DomConstructorHTMLImageElement:
+		return "DomConstructorHTMLImageElement"
+	case DomConstructorHTMLInputElement:
+		return "DomConstructorHTMLInputElement"
+	case DomConstructorHTMLIsIndexElement:
+		return "DomConstructorHTMLIsIndexElement"
+	case DomConstructorHTMLLabelElement:
+		return "DomConstructorHTMLLabelElement"
+	case DomConstructorHTMLLegendElement:
+		return "DomConstructorHTMLLegendElement"
+	case DomConstructorHTMLLIElement:
+		return "DomConstructorHTMLLIElement"
+	case DomConstructorHTMLLinkElement:
+		return "DomConstructorHTMLLinkElement"
+	case DomConstructorHTMLMapElement:
+		return "DomConstructorHTMLMapElement"
+	case DomConstructorHTMLMarqueeElement:
+		return "DomConstructorHTMLMarqueeElement"
+	case DomConstructorHTMLMetaElement:
+		return "DomConstructorHTMLMetaElement"
+	case DomConstructorHTMLModelessDialog:
+		return "DomConstructorHTMLModelessDialog"
+	case DomConstructorHTMLNamespaceInfo:
+		return "DomConstructorHTMLNamespaceInfo"
+	case DomConstructorHTMLNamespaceInfoCollection:
+		return "DomConstructorHTMLNamespaceInfoCollection"
+	case DomConstructorHTMLNextIdElement:
+		return "DomConstructorHTMLNextIdElement"
+	case DomConstructorHTMLNoShowElement:
+		return "DomConstructorHTMLNoShowElement"
+	case DomConstructorHTMLObjectElement:
+		return "DomConstructorHTMLObjectElement"
+	case DomConstructorHTMLOListElement:
+		return "DomConstructorHTMLOListElement"
+	case DomConstructorHTMLOptionElement:
+		return "DomConstructorHTMLOptionElement"
+	case DomConstructorHTMLParagraphElement:
+		return "DomConstructorHTMLParagraphElement"
+	case DomConstructorHTMLParamElement:
+		return "DomConstructorHTMLParamElement"
+	case DomConstructorHTMLPhraseElement:
+		return "DomConstructorHTMLPhraseElement"
+	case DomConstructorHTMLPluginsCollection:
+		return "DomConstructorHTMLPluginsCollection"
+	case DomConstructorHTMLPopup:
+		return "DomConstructorHTMLPopup"
+	case DomConstructorHTMLScriptElement:
+		return "DomConstructorHTMLScriptElement"
+	case DomConstructorHTMLSelectElement:
+		return "DomConstructorHTMLSelectElement"
+	case DomConstructorHTMLSpanElement:
+		return "DomConstructorHTMLSpanElement"
+	case DomConstructorHTMLStyleElement:
+		return "DomConstructorHTMLStyleElement"
+	case DomConstructorHTMLTableCaptionElement:
+		return "DomConstructorHTMLTableCaptionElement"
+	case DomConstructorHTMLTableCellElement:
+		return "DomConstructorHTMLTableCellElement"
+	case DomConstructorHTMLTableColElement:
+		return "DomConstructorHTMLTableColElement"
+	case DomConstructorHTMLTableElement:
+		return "DomConstructorHTMLTableElement"
+	case DomConstructorHTMLTableRowElement:
+		return "DomConstructorHTMLTableRowElement"
+	case DomConstructorHTMLTableSectionElement:
+		return "DomConstructorHTMLTableSectionElement"
+	case DomConstructorHTMLTextAreaElement:
+		return "DomConstructorHTMLTextAreaElement"
+	case DomConstructorHTMLTextElement:
+		return "DomConstructorHTMLTextElement"
+	case DomConstructorHTMLTitleElement:
+		return "DomConstructorHTMLTitleElement"
+	case DomConstructorHTMLUListElement:
+		return "DomConstructorHTMLUListElement"
+	case DomConstructorHTMLUnknownElement:
+		return "DomConstructorHTMLUnknownElement"
+	case DomConstructorImage:
+		return "DomConstructorImage"
+	case DomConstructorLocation:
+		return "DomConstructorLocation"
+	case DomConstructorNamedNodeMap:
+		return "DomConstructorNamedNodeMap"
+	case DomConstructorNavigator:
+		return "DomConstructorNavigator"
+	case DomConstructorNodeList:
+		return "DomConstructorNodeList"
+	case DomConstructorOption:
+		return "DomConstructorOption"
+	case DomConstructorScreen:
+		return "DomConstructorScreen"
+	case DomConstructorSelection:
+		return "DomConstructorSelection"
+	case DomConstructorStaticNodeList:
+		return "DomConstructorStaticNodeList"
+	case DomConstructorStorage:
+		return "DomConstructorStorage"
+	case DomConstructorStyleSheetList:
+		return "DomConstructorStyleSheetList"
+	case DomConstructorStyleSheetPage:
+		return "DomConstructorStyleSheetPage"
+	case DomConstructorStyleSheetPageList:
+		return "DomConstructorStyleSheetPageList"
+	case DomConstructorText:
+		return "DomConstructorText"
+	case DomConstructorTextRange:
+		return "DomConstructorTextRange"
+	case DomConstructorTextRangeCollection:
+		return "DomConstructorTextRangeCollection"
+	case DomConstructorTextRectangle:
+		return "DomConstructorTextRectangle"
+	case DomConstructorTextRectangleList:
+		return "DomConstructorTextRectangleList"
+	case DomConstructorWindow:
+		return "DomConstructorWindow"
+	case DomConstructorXDomainRequest:
+		return "DomConstructorXDomainRequest"
+	case DomConstructorXMLHttpRequest:
+		return "DomConstructorXMLHttpRequest"
+	case DomConstructorMax:
+		return "DomConstructorMax"
+	case DomConstructor_Max:
+		return "DomConstructor_Max"
+	default:
+		return fmt.Sprintf("DomConstructor(%d)", int32(e))
+	}
+}
+
 type ELEMENTDESCRIPTOR_FLAGS int32
 
 const (
@@ -319,6 +912,21 @@ const (
 	ELEMENTDESCRIPTOR_FLAGS_Max           ELEMENTDESCRIPTOR_FLAGS = 2147483647
 )
 
+// String returns the ELEMENTDESCRIPTOR_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ELEMENTDESCRIPTOR_FLAGS) String() string {
+	switch e {
+	case ELEMENTDESCRIPTORFLAGS_LITERAL:
+		return "ELEMENTDESCRIPTORFLAGS_LITERAL"
+	case ELEMENTDESCRIPTORFLAGS_NESTED_LITERAL:
+		return "ELEMENTDESCRIPTORFLAGS_NESTED_LITERAL"
+	case ELEMENTDESCRIPTOR_FLAGS_Max:
+		return "ELEMENTDESCRIPTOR_FLAGS_Max"
+	default:
+		return fmt.Sprintf("ELEMENTDESCRIPTOR_FLAGS(%d)", int32(e))
+	}
+}
+
 type ELEMENTNAMESPACE_FLAGS int32
 
 const (
@@ -326,6 +934,21 @@ const (
 	ELEMENTNAMESPACEFLAGS_QUERYFORUNKNOWNTAGS ELEMENTNAMESPACE_FLAGS = 2
 	ELEMENTNAMESPACE_FLAGS_Max                ELEMENTNAMESPACE_FLAGS = 2147483647
 )
+
+// String returns the ELEMENTNAMESPACE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ELEMENTNAMESPACE_FLAGS) String() string {
+	switch e {
+	case ELEMENTNAMESPACEFLAGS_ALLOWANYTAG:
+		return "ELEMENTNAMESPACEFLAGS_ALLOWANYTAG"
+	case ELEMENTNAMESPACEFLAGS_QUERYFORUNKNOWNTAGS:
+		return "ELEMENTNAMESPACEFLAGS_QUERYFORUNKNOWNTAGS"
+	case ELEMENTNAMESPACE_FLAGS_Max:
+		return "ELEMENTNAMESPACE_FLAGS_Max"
+	default:
+		return fmt.Sprintf("ELEMENTNAMESPACE_FLAGS(%d)", int32(e))
+	}
+}
 
 type ELEMENT_ADJACENCY int32
 
@@ -336,6 +959,25 @@ const (
 	ELEM_ADJ_AfterEnd     ELEMENT_ADJACENCY = 3
 	ELEMENT_ADJACENCY_Max ELEMENT_ADJACENCY = 2147483647
 )
+
+// String returns the ELEMENT_ADJACENCY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ELEMENT_ADJACENCY) String() string {
+	switch e {
+	case ELEM_ADJ_BeforeBegin:
+		return "ELEM_ADJ_BeforeBegin"
+	case ELEM_ADJ_AfterBegin:
+		return "ELEM_ADJ_AfterBegin"
+	case ELEM_ADJ_BeforeEnd:
+		return "ELEM_ADJ_BeforeEnd"
+	case ELEM_ADJ_AfterEnd:
+		return "ELEM_ADJ_AfterEnd"
+	case ELEMENT_ADJACENCY_Max:
+		return "ELEMENT_ADJACENCY_Max"
+	default:
+		return fmt.Sprintf("ELEMENT_ADJACENCY(%d)", int32(e))
+	}
+}
 
 type ELEMENT_CORNER int32
 
@@ -351,6 +993,35 @@ const (
 	ELEMENT_CORNER_BOTTOMRIGHT ELEMENT_CORNER = 8
 	ELEMENT_CORNER_Max         ELEMENT_CORNER = 2147483647
 )
+
+// String returns the ELEMENT_CORNER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ELEMENT_CORNER) String() string {
+	switch e {
+	case ELEMENT_CORNER_NONE:
+		return "ELEMENT_CORNER_NONE"
+	case ELEMENT_CORNER_TOP:
+		return "ELEMENT_CORNER_TOP"
+	case ELEMENT_CORNER_LEFT:
+		return "ELEMENT_CORNER_LEFT"
+	case ELEMENT_CORNER_BOTTOM:
+		return "ELEMENT_CORNER_BOTTOM"
+	case ELEMENT_CORNER_RIGHT:
+		return "ELEMENT_CORNER_RIGHT"
+	case ELEMENT_CORNER_TOPLEFT:
+		return "ELEMENT_CORNER_TOPLEFT"
+	case ELEMENT_CORNER_TOPRIGHT:
+		return "ELEMENT_CORNER_TOPRIGHT"
+	case ELEMENT_CORNER_BOTTOMLEFT:
+		return "ELEMENT_CORNER_BOTTOMLEFT"
+	case ELEMENT_CORNER_BOTTOMRIGHT:
+		return "ELEMENT_CORNER_BOTTOMRIGHT"
+	case ELEMENT_CORNER_Max:
+		return "ELEMENT_CORNER_Max"
+	default:
+		return fmt.Sprintf("ELEMENT_CORNER(%d)", int32(e))
+	}
+}
 
 type ELEMENT_TAG_ID int32
 
@@ -584,6 +1255,469 @@ const (
 	ELEMENT_TAG_ID_Max            ELEMENT_TAG_ID = 2147483647
 )
 
+// String returns the ELEMENT_TAG_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ELEMENT_TAG_ID) String() string {
+	switch e {
+	case TAGID_NULL:
+		return "TAGID_NULL"
+	case TAGID_UNKNOWN:
+		return "TAGID_UNKNOWN"
+	case TAGID_A:
+		return "TAGID_A"
+	case TAGID_ACRONYM:
+		return "TAGID_ACRONYM"
+	case TAGID_ADDRESS:
+		return "TAGID_ADDRESS"
+	case TAGID_APPLET:
+		return "TAGID_APPLET"
+	case TAGID_AREA:
+		return "TAGID_AREA"
+	case TAGID_B:
+		return "TAGID_B"
+	case TAGID_BASE:
+		return "TAGID_BASE"
+	case TAGID_BASEFONT:
+		return "TAGID_BASEFONT"
+	case TAGID_BDO:
+		return "TAGID_BDO"
+	case TAGID_BGSOUND:
+		return "TAGID_BGSOUND"
+	case TAGID_BIG:
+		return "TAGID_BIG"
+	case TAGID_BLINK:
+		return "TAGID_BLINK"
+	case TAGID_BLOCKQUOTE:
+		return "TAGID_BLOCKQUOTE"
+	case TAGID_BODY:
+		return "TAGID_BODY"
+	case TAGID_BR:
+		return "TAGID_BR"
+	case TAGID_BUTTON:
+		return "TAGID_BUTTON"
+	case TAGID_CAPTION:
+		return "TAGID_CAPTION"
+	case TAGID_CENTER:
+		return "TAGID_CENTER"
+	case TAGID_CITE:
+		return "TAGID_CITE"
+	case TAGID_CODE:
+		return "TAGID_CODE"
+	case TAGID_COL:
+		return "TAGID_COL"
+	case TAGID_COLGROUP:
+		return "TAGID_COLGROUP"
+	case TAGID_COMMENT:
+		return "TAGID_COMMENT"
+	case TAGID_COMMENT_RAW:
+		return "TAGID_COMMENT_RAW"
+	case TAGID_DD:
+		return "TAGID_DD"
+	case TAGID_DEL:
+		return "TAGID_DEL"
+	case TAGID_DFN:
+		return "TAGID_DFN"
+	case TAGID_DIR:
+		return "TAGID_DIR"
+	case TAGID_DIV:
+		return "TAGID_DIV"
+	case TAGID_DL:
+		return "TAGID_DL"
+	case TAGID_DT:
+		return "TAGID_DT"
+	case TAGID_EM:
+		return "TAGID_EM"
+	case TAGID_EMBED:
+		return "TAGID_EMBED"
+	case TAGID_FIELDSET:
+		return "TAGID_FIELDSET"
+	case TAGID_FONT:
+		return "TAGID_FONT"
+	case TAGID_FORM:
+		return "TAGID_FORM"
+	case TAGID_FRAME:
+		return "TAGID_FRAME"
+	case TAGID_FRAMESET:
+		return "TAGID_FRAMESET"
+	case TAGID_GENERIC:
+		return "TAGID_GENERIC"
+	case TAGID_H1:
+		return "TAGID_H1"
+	case TAGID_H2:
+		return "TAGID_H2"
+	case TAGID_H3:
+		return "TAGID_H3"
+	case TAGID_H4:
+		return "TAGID_H4"
+	case TAGID_H5:
+		return "TAGID_H5"
+	case TAGID_H6:
+		return "TAGID_H6"
+	case TAGID_HEAD:
+		return "TAGID_HEAD"
+	case TAGID_HR:
+		return "TAGID_HR"
+	case TAGID_HTML:
+		return "TAGID_HTML"
+	case TAGID_I:
+		return "TAGID_I"
+	case TAGID_IFRAME:
+		return "TAGID_IFRAME"
+	case TAGID_IMG:
+		return "TAGID_IMG"
+	case TAGID_INPUT:
+		return "TAGID_INPUT"
+	case TAGID_INS:
+		return "TAGID_INS"
+	case TAGID_KBD:
+		return "TAGID_KBD"
+	case TAGID_LABEL:
+		return "TAGID_LABEL"
+	case TAGID_LEGEND:
+		return "TAGID_LEGEND"
+	case TAGID_LI:
+		return "TAGID_LI"
+	case TAGID_LINK:
+		return "TAGID_LINK"
+	case TAGID_LISTING:
+		return "TAGID_LISTING"
+	case TAGID_MAP:
+		return "TAGID_MAP"
+	case TAGID_MARQUEE:
+		return "TAGID_MARQUEE"
+	case TAGID_MENU:
+		return "TAGID_MENU"
+	case TAGID_META:
+		return "TAGID_META"
+	case TAGID_NEXTID:
+		return "TAGID_NEXTID"
+	case TAGID_NOBR:
+		return "TAGID_NOBR"
+	case TAGID_NOEMBED:
+		return "TAGID_NOEMBED"
+	case TAGID_NOFRAMES:
+		return "TAGID_NOFRAMES"
+	case TAGID_NOSCRIPT:
+		return "TAGID_NOSCRIPT"
+	case TAGID_OBJECT:
+		return "TAGID_OBJECT"
+	case TAGID_OL:
+		return "TAGID_OL"
+	case TAGID_OPTION:
+		return "TAGID_OPTION"
+	case TAGID_P:
+		return "TAGID_P"
+	case TAGID_PARAM:
+		return "TAGID_PARAM"
+	case TAGID_PLAINTEXT:
+		return "TAGID_PLAINTEXT"
+	case TAGID_PRE:
+		return "TAGID_PRE"
+	case TAGID_Q:
+		return "TAGID_Q"
+	case TAGID_RP:
+		return "TAGID_RP"
+	case TAGID_RT:
+		return "TAGID_RT"
+	case TAGID_RUBY:
+		return "TAGID_RUBY"
+	case TAGID_S:
+		return "TAGID_S"
+	case TAGID_SAMP:
+		return "TAGID_SAMP"
+	case TAGID_SCRIPT:
+		return "TAGID_SCRIPT"
+	case TAGID_SELECT:
+		return "TAGID_SELECT"
+	case TAGID_SMALL:
+		return "TAGID_SMALL"
+	case TAGID_SPAN:
+		return "TAGID_SPAN"
+	case TAGID_STRIKE:
+		return "TAGID_STRIKE"
+	case TAGID_STRONG:
+		return "TAGID_STRONG"
+	case TAGID_STYLE:
+		return "TAGID_STYLE"
+	case TAGID_SUB:
+		return "TAGID_SUB"
+	case TAGID_SUP:
+		return "TAGID_SUP"
+	case TAGID_TABLE:
+		return "TAGID_TABLE"
+	case TAGID_TBODY:
+		return "TAGID_TBODY"
+	case TAGID_TC:
+		return "TAGID_TC"
+	case TAGID_TD:
+		return "TAGID_TD"
+	case TAGID_TEXTAREA:
+		return "TAGID_TEXTAREA"
+	case TAGID_TFOOT:
+		return "TAGID_TFOOT"
+	case TAGID_TH:
+		return "TAGID_TH"
+	case TAGID_THEAD:
+		return "TAGID_THEAD"
+	case TAGID_TITLE:
+		return "TAGID_TITLE"
+	case TAGID_TR:
+		return "TAGID_TR"
+	case TAGID_TT:
+		return "TAGID_TT"
+	case TAGID_U:
+		return "TAGID_U"
+	case TAGID_UL:
+		return "TAGID_UL"
+	case TAGID_VAR:
+		return "TAGID_VAR"
+	case TAGID_WBR:
+		return "TAGID_WBR"
+	case TAGID_XMP:
+		return "TAGID_XMP"
+	case TAGID_ROOT:
+		return "TAGID_ROOT"
+	case TAGID_OPTGROUP:
+		return "TAGID_OPTGROUP"
+	case TAGID_ABBR:
+		return "TAGID_ABBR"
+	case TAGID_SVG_A:
+		return "TAGID_SVG_A"
+	case TAGID_SVG_ALTGLYPH:
+		return "TAGID_SVG_ALTGLYPH"
+	case TAGID_SVG_ALTGLYPHDEF:
+		return "TAGID_SVG_ALTGLYPHDEF"
+	case TAGID_SVG_ALTGLYPHITEM:
+		return "TAGID_SVG_ALTGLYPHITEM"
+	case TAGID_SVG_ANIMATE:
+		return "TAGID_SVG_ANIMATE"
+	case TAGID_SVG_ANIMATECOLOR:
+		return "TAGID_SVG_ANIMATECOLOR"
+	case TAGID_SVG_ANIMATEMOTION:
+		return "TAGID_SVG_ANIMATEMOTION"
+	case TAGID_SVG_ANIMATETRANSFORM:
+		return "TAGID_SVG_ANIMATETRANSFORM"
+	case TAGID_SVG_CIRCLE:
+		return "TAGID_SVG_CIRCLE"
+	case TAGID_SVG_CLIPPATH:
+		return "TAGID_SVG_CLIPPATH"
+	case TAGID_SVG_COLOR_PROFILE:
+		return "TAGID_SVG_COLOR_PROFILE"
+	case TAGID_SVG_CURSOR:
+		return "TAGID_SVG_CURSOR"
+	case TAGID_SVG_DEFINITION_SRC:
+		return "TAGID_SVG_DEFINITION_SRC"
+	case TAGID_SVG_DEFS:
+		return "TAGID_SVG_DEFS"
+	case TAGID_SVG_DESC:
+		return "TAGID_SVG_DESC"
+	case TAGID_SVG_ELLIPSE:
+		return "TAGID_SVG_ELLIPSE"
+	case TAGID_SVG_FEBLEND:
+		return "TAGID_SVG_FEBLEND"
+	case TAGID_SVG_FECOLORMATRIX:
+		return "TAGID_SVG_FECOLORMATRIX"
+	case TAGID_SVG_FECOMPONENTTRANSFER:
+		return "TAGID_SVG_FECOMPONENTTRANSFER"
+	case TAGID_SVG_FECOMPOSITE:
+		return "TAGID_SVG_FECOMPOSITE"
+	case TAGID_SVG_FECONVOLVEMATRIX:
+		return "TAGID_SVG_FECONVOLVEMATRIX"
+	case TAGID_SVG_FEDIFFUSELIGHTING:
+		return "TAGID_SVG_FEDIFFUSELIGHTING"
+	case TAGID_SVG_FEDISPLACEMENTMAP:
+		return "TAGID_SVG_FEDISPLACEMENTMAP"
+	case TAGID_SVG_FEDISTANTLIGHT:
+		return "TAGID_SVG_FEDISTANTLIGHT"
+	case TAGID_SVG_FEFLOOD:
+		return "TAGID_SVG_FEFLOOD"
+	case TAGID_SVG_FEFUNCA:
+		return "TAGID_SVG_FEFUNCA"
+	case TAGID_SVG_FEFUNCB:
+		return "TAGID_SVG_FEFUNCB"
+	case TAGID_SVG_FEFUNCG:
+		return "TAGID_SVG_FEFUNCG"
+	case TAGID_SVG_FEFUNCR:
+		return "TAGID_SVG_FEFUNCR"
+	case TAGID_SVG_FEGAUSSIANBLUR:
+		return "TAGID_SVG_FEGAUSSIANBLUR"
+	case TAGID_SVG_FEIMAGE:
+		return "TAGID_SVG_FEIMAGE"
+	case TAGID_SVG_FEMERGE:
+		return "TAGID_SVG_FEMERGE"
+	case TAGID_SVG_FEMERGENODE:
+		return "TAGID_SVG_FEMERGENODE"
+	case TAGID_SVG_FEMORPHOLOGY:
+		return "TAGID_SVG_FEMORPHOLOGY"
+	case TAGID_SVG_FEOFFSET:
+		return "TAGID_SVG_FEOFFSET"
+	case TAGID_SVG_FEPOINTLIGHT:
+		return "TAGID_SVG_FEPOINTLIGHT"
+	case TAGID_SVG_FESPECULARLIGHTING:
+		return "TAGID_SVG_FESPECULARLIGHTING"
+	case TAGID_SVG_FESPOTLIGHT:
+		return "TAGID_SVG_FESPOTLIGHT"
+	case TAGID_SVG_FETILE:
+		return "TAGID_SVG_FETILE"
+	case TAGID_SVG_FETURBULENCE:
+		return "TAGID_SVG_FETURBULENCE"
+	case TAGID_SVG_FILTER:
+		return "TAGID_SVG_FILTER"
+	case TAGID_SVG_FONT:
+		return "TAGID_SVG_FONT"
+	case TAGID_SVG_FONT_FACE:
+		return "TAGID_SVG_FONT_FACE"
+	case TAGID_SVG_FONT_FACE_FORMAT:
+		return "TAGID_SVG_FONT_FACE_FORMAT"
+	case TAGID_SVG_FONT_FACE_NAME:
+		return "TAGID_SVG_FONT_FACE_NAME"
+	case TAGID_SVG_FONT_FACE_SRC:
+		return "TAGID_SVG_FONT_FACE_SRC"
+	case TAGID_SVG_FONT_FACE_URI:
+		return "TAGID_SVG_FONT_FACE_URI"
+	case TAGID_SVG_FOREIGNOBJECT:
+		return "TAGID_SVG_FOREIGNOBJECT"
+	case TAGID_SVG_G:
+		return "TAGID_SVG_G"
+	case TAGID_SVG_GLYPH:
+		return "TAGID_SVG_GLYPH"
+	case TAGID_SVG_GLYPHREF:
+		return "TAGID_SVG_GLYPHREF"
+	case TAGID_SVG_HKERN:
+		return "TAGID_SVG_HKERN"
+	case TAGID_SVG_IMAGE:
+		return "TAGID_SVG_IMAGE"
+	case TAGID_SVG_LINE:
+		return "TAGID_SVG_LINE"
+	case TAGID_SVG_LINEARGRADIENT:
+		return "TAGID_SVG_LINEARGRADIENT"
+	case TAGID_SVG_MARKER:
+		return "TAGID_SVG_MARKER"
+	case TAGID_SVG_MASK:
+		return "TAGID_SVG_MASK"
+	case TAGID_SVG_METADATA:
+		return "TAGID_SVG_METADATA"
+	case TAGID_SVG_MISSING_GLYPH:
+		return "TAGID_SVG_MISSING_GLYPH"
+	case TAGID_SVG_MPATH:
+		return "TAGID_SVG_MPATH"
+	case TAGID_SVG_PATH:
+		return "TAGID_SVG_PATH"
+	case TAGID_SVG_PATTERN:
+		return "TAGID_SVG_PATTERN"
+	case TAGID_SVG_POLYGON:
+		return "TAGID_SVG_POLYGON"
+	case TAGID_SVG_POLYLINE:
+		return "TAGID_SVG_POLYLINE"
+	case TAGID_SVG_RADIALGRADIENT:
+		return "TAGID_SVG_RADIALGRADIENT"
+	case TAGID_SVG_RECT:
+		return "TAGID_SVG_RECT"
+	case TAGID_SVG_SCRIPT:
+		return "TAGID_SVG_SCRIPT"
+	case TAGID_SVG_SET:
+		return "TAGID_SVG_SET"
+	case TAGID_SVG_STOP:
+		return "TAGID_SVG_STOP"
+	case TAGID_SVG_STYLE:
+		return "TAGID_SVG_STYLE"
+	case TAGID_SVG_SVG:
+		return "TAGID_SVG_SVG"
+	case TAGID_SVG_SWITCH:
+		return "TAGID_SVG_SWITCH"
+	case TAGID_SVG_SYMBOL:
+		return "TAGID_SVG_SYMBOL"
+	case TAGID_SVG_TEXT:
+		return "TAGID_SVG_TEXT"
+	case TAGID_SVG_TEXTPATH:
+		return "TAGID_SVG_TEXTPATH"
+	case TAGID_SVG_TITLE:
+		return "TAGID_SVG_TITLE"
+	case TAGID_SVG_TREF:
+		return "TAGID_SVG_TREF"
+	case TAGID_SVG_TSPAN:
+		return "TAGID_SVG_TSPAN"
+	case TAGID_SVG_USE:
+		return "TAGID_SVG_USE"
+	case TAGID_SVG_VIEW:
+		return "TAGID_SVG_VIEW"
+	case TAGID_SVG_VKERN:
+		return "TAGID_SVG_VKERN"
+	case TAGID_AUDIO:
+		return "TAGID_AUDIO"
+	case TAGID_SOURCE:
+		return "TAGID_SOURCE"
+	case TAGID_VIDEO:
+		return "TAGID_VIDEO"
+	case TAGID_CANVAS:
+		return "TAGID_CANVAS"
+	case TAGID_DOCTYPE:
+		return "TAGID_DOCTYPE"
+	case TAGID_KEYGEN:
+		return "TAGID_KEYGEN"
+	case TAGID_PROCESSINGINSTRUCTION:
+		return "TAGID_PROCESSINGINSTRUCTION"
+	case TAGID_ARTICLE:
+		return "TAGID_ARTICLE"
+	case TAGID_ASIDE:
+		return "TAGID_ASIDE"
+	case TAGID_FIGCAPTION:
+		return "TAGID_FIGCAPTION"
+	case TAGID_FIGURE:
+		return "TAGID_FIGURE"
+	case TAGID_FOOTER:
+		return "TAGID_FOOTER"
+	case TAGID_HEADER:
+		return "TAGID_HEADER"
+	case TAGID_HGROUP:
+		return "TAGID_HGROUP"
+	case TAGID_MARK:
+		return "TAGID_MARK"
+	case TAGID_NAV:
+		return "TAGID_NAV"
+	case TAGID_SECTION:
+		return "TAGID_SECTION"
+	case TAGID_PROGRESS:
+		return "TAGID_PROGRESS"
+	case TAGID_MATHML_ANNOTATION_XML:
+		return "TAGID_MATHML_ANNOTATION_XML"
+	case TAGID_MATHML_MATH:
+		return "TAGID_MATHML_MATH"
+	case TAGID_MATHML_MI:
+		return "TAGID_MATHML_MI"
+	case TAGID_MATHML_MN:
+		return "TAGID_MATHML_MN"
+	case TAGID_MATHML_MO:
+		return "TAGID_MATHML_MO"
+	case TAGID_MATHML_MS:
+		return "TAGID_MATHML_MS"
+	case TAGID_MATHML_MTEXT:
+		return "TAGID_MATHML_MTEXT"
+	case TAGID_DATALIST:
+		return "TAGID_DATALIST"
+	case TAGID_TRACK:
+		return "TAGID_TRACK"
+	case TAGID_ISINDEX:
+		return "TAGID_ISINDEX"
+	case TAGID_COMMAND:
+		return "TAGID_COMMAND"
+	case TAGID_DETAILS:
+		return "TAGID_DETAILS"
+	case TAGID_SUMMARY:
+		return "TAGID_SUMMARY"
+	case TAGID_X_MS_WEBVIEW:
+		return "TAGID_X_MS_WEBVIEW"
+	case TAGID_COUNT:
+		return "TAGID_COUNT"
+	case TAGID_LAST_PREDEFINED:
+		return "TAGID_LAST_PREDEFINED"
+	case ELEMENT_TAG_ID_Max:
+		return "ELEMENT_TAG_ID_Max"
+	default:
+		return fmt.Sprintf("ELEMENT_TAG_ID(%d)", int32(e))
+	}
+}
+
 type FINDTEXT_FLAGS int32
 
 const (
@@ -598,6 +1732,33 @@ const (
 	FINDTEXT_FLAGS_Max               FINDTEXT_FLAGS = 2147483647
 )
 
+// String returns the FINDTEXT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FINDTEXT_FLAGS) String() string {
+	switch e {
+	case FINDTEXT_BACKWARDS:
+		return "FINDTEXT_BACKWARDS"
+	case FINDTEXT_WHOLEWORD:
+		return "FINDTEXT_WHOLEWORD"
+	case FINDTEXT_MATCHCASE:
+		return "FINDTEXT_MATCHCASE"
+	case FINDTEXT_RAW:
+		return "FINDTEXT_RAW"
+	case FINDTEXT_MATCHREPEATEDWHITESPACE:
+		return "FINDTEXT_MATCHREPEATEDWHITESPACE"
+	case FINDTEXT_MATCHDIAC:
+		return "FINDTEXT_MATCHDIAC"
+	case FINDTEXT_MATCHKASHIDA:
+		return "FINDTEXT_MATCHKASHIDA"
+	case FINDTEXT_MATCHALEFHAMZA:
+		return "FINDTEXT_MATCHALEFHAMZA"
+	case FINDTEXT_FLAGS_Max:
+		return "FINDTEXT_FLAGS_Max"
+	default:
+		return fmt.Sprintf("FINDTEXT_FLAGS(%d)", int32(e))
+	}
+}
+
 type HTMLAppFlag int32
 
 const (
@@ -610,6 +1771,21 @@ const (
 	HTMLAppFlag_Max HTMLAppFlag = 2147483647
 )
 
+// String returns the HTMLAppFlag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLAppFlag) String() string {
+	switch e {
+	case HTMLAppFlagNo:
+		return "HTMLAppFlagNo"
+	case HTMLAppFlagYes:
+		return "HTMLAppFlagYes"
+	case HTMLAppFlag_Max:
+		return "HTMLAppFlag_Max"
+	default:
+		return fmt.Sprintf("HTMLAppFlag(%d)", int32(e))
+	}
+}
+
 type HTMLBorder int32
 
 const (
@@ -619,6 +1795,25 @@ const (
 	HTMLBorderThin   HTMLBorder = 8388608
 	HTMLBorder_Max   HTMLBorder = 2147483647
 )
+
+// String returns the HTMLBorder constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLBorder) String() string {
+	switch e {
+	case HTMLBorderNone:
+		return "HTMLBorderNone"
+	case HTMLBorderThick:
+		return "HTMLBorderThick"
+	case HTMLBorderDialog:
+		return "HTMLBorderDialog"
+	case HTMLBorderThin:
+		return "HTMLBorderThin"
+	case HTMLBorder_Max:
+		return "HTMLBorder_Max"
+	default:
+		return fmt.Sprintf("HTMLBorder(%d)", int32(e))
+	}
+}
 
 type HTMLBorderStyle int32
 
@@ -631,6 +1826,27 @@ const (
 	HTMLBorderStyle_Max     HTMLBorderStyle = 2147483647
 )
 
+// String returns the HTMLBorderStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLBorderStyle) String() string {
+	switch e {
+	case HTMLBorderStyleNormal:
+		return "HTMLBorderStyleNormal"
+	case HTMLBorderStyleRaised:
+		return "HTMLBorderStyleRaised"
+	case HTMLBorderStyleSunken:
+		return "HTMLBorderStyleSunken"
+	case HTMLBorderStylecombined:
+		return "HTMLBorderStylecombined"
+	case HTMLBorderStyleStatic:
+		return "HTMLBorderStyleStatic"
+	case HTMLBorderStyle_Max:
+		return "HTMLBorderStyle_Max"
+	default:
+		return fmt.Sprintf("HTMLBorderStyle(%d)", int32(e))
+	}
+}
+
 type HTMLCaptionFlag int32
 
 const (
@@ -639,6 +1855,21 @@ const (
 	HTMLCaptionFlag_Max HTMLCaptionFlag = 2147483647
 )
 
+// String returns the HTMLCaptionFlag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLCaptionFlag) String() string {
+	switch e {
+	case HTMLCaptionFlagNo:
+		return "HTMLCaptionFlagNo"
+	case HTMLCaptionFlagYes:
+		return "HTMLCaptionFlagYes"
+	case HTMLCaptionFlag_Max:
+		return "HTMLCaptionFlag_Max"
+	default:
+		return fmt.Sprintf("HTMLCaptionFlag(%d)", int32(e))
+	}
+}
+
 type HTMLDlgBorder int32
 
 const (
@@ -646,6 +1877,21 @@ const (
 	HTMLDlgBorderThick HTMLDlgBorder = 262144
 	HTMLDlgBorder_Max  HTMLDlgBorder = 2147483647
 )
+
+// String returns the HTMLDlgBorder constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLDlgBorder) String() string {
+	switch e {
+	case HTMLDlgBorderThin:
+		return "HTMLDlgBorderThin"
+	case HTMLDlgBorderThick:
+		return "HTMLDlgBorderThick"
+	case HTMLDlgBorder_Max:
+		return "HTMLDlgBorder_Max"
+	default:
+		return fmt.Sprintf("HTMLDlgBorder(%d)", int32(e))
+	}
+}
 
 type HTMLDlgCenter int32
 
@@ -661,6 +1907,23 @@ const (
 	HTMLDlgCenter_Max    HTMLDlgCenter = 2147483647
 )
 
+// String returns the HTMLDlgCenter constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLDlgCenter) String() string {
+	switch e {
+	case HTMLDlgCenterNo:
+		return "HTMLDlgCenterNo"
+	case HTMLDlgCenterYes:
+		return "HTMLDlgCenterYes"
+	case HTMLDlgCenterDesktop:
+		return "HTMLDlgCenterDesktop"
+	case HTMLDlgCenter_Max:
+		return "HTMLDlgCenter_Max"
+	default:
+		return fmt.Sprintf("HTMLDlgCenter(%d)", int32(e))
+	}
+}
+
 type HTMLDlgEdge int32
 
 const (
@@ -668,6 +1931,21 @@ const (
 	HTMLDlgEdgeRaised HTMLDlgEdge = 16
 	HTMLDlgEdge_Max   HTMLDlgEdge = 2147483647
 )
+
+// String returns the HTMLDlgEdge constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLDlgEdge) String() string {
+	switch e {
+	case HTMLDlgEdgeSunken:
+		return "HTMLDlgEdgeSunken"
+	case HTMLDlgEdgeRaised:
+		return "HTMLDlgEdgeRaised"
+	case HTMLDlgEdge_Max:
+		return "HTMLDlgEdge_Max"
+	default:
+		return fmt.Sprintf("HTMLDlgEdge(%d)", int32(e))
+	}
+}
 
 type HTMLDlgFlag int32
 
@@ -682,6 +1960,23 @@ const (
 	HTMLDlgFlag_Max   HTMLDlgFlag = 2147483647
 )
 
+// String returns the HTMLDlgFlag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLDlgFlag) String() string {
+	switch e {
+	case HTMLDlgFlagNo:
+		return "HTMLDlgFlagNo"
+	case HTMLDlgFlagYes:
+		return "HTMLDlgFlagYes"
+	case HTMLDlgFlagNotSet:
+		return "HTMLDlgFlagNotSet"
+	case HTMLDlgFlag_Max:
+		return "HTMLDlgFlag_Max"
+	default:
+		return fmt.Sprintf("HTMLDlgFlag(%d)", int32(e))
+	}
+}
+
 type HTMLMaximizeFlag int32
 
 const (
@@ -689,6 +1984,21 @@ const (
 	HTMLMaximizeFlagYes  HTMLMaximizeFlag = 65536
 	HTMLMaximizeFlag_Max HTMLMaximizeFlag = 2147483647
 )
+
+// String returns the HTMLMaximizeFlag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLMaximizeFlag) String() string {
+	switch e {
+	case HTMLMaximizeFlagNo:
+		return "HTMLMaximizeFlagNo"
+	case HTMLMaximizeFlagYes:
+		return "HTMLMaximizeFlagYes"
+	case HTMLMaximizeFlag_Max:
+		return "HTMLMaximizeFlag_Max"
+	default:
+		return fmt.Sprintf("HTMLMaximizeFlag(%d)", int32(e))
+	}
+}
 
 type HTMLMinimizeFlag int32
 
@@ -698,6 +2008,21 @@ const (
 	HTMLMinimizeFlag_Max HTMLMinimizeFlag = 2147483647
 )
 
+// String returns the HTMLMinimizeFlag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLMinimizeFlag) String() string {
+	switch e {
+	case HTMLMinimizeFlagNo:
+		return "HTMLMinimizeFlagNo"
+	case HTMLMinimizeFlagYes:
+		return "HTMLMinimizeFlagYes"
+	case HTMLMinimizeFlag_Max:
+		return "HTMLMinimizeFlag_Max"
+	default:
+		return fmt.Sprintf("HTMLMinimizeFlag(%d)", int32(e))
+	}
+}
+
 type HTMLSysMenuFlag int32
 
 const (
@@ -705,6 +2030,21 @@ const (
 	HTMLSysMenuFlagYes  HTMLSysMenuFlag = 524288
 	HTMLSysMenuFlag_Max HTMLSysMenuFlag = 2147483647
 )
+
+// String returns the HTMLSysMenuFlag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLSysMenuFlag) String() string {
+	switch e {
+	case HTMLSysMenuFlagNo:
+		return "HTMLSysMenuFlagNo"
+	case HTMLSysMenuFlagYes:
+		return "HTMLSysMenuFlagYes"
+	case HTMLSysMenuFlag_Max:
+		return "HTMLSysMenuFlag_Max"
+	default:
+		return fmt.Sprintf("HTMLSysMenuFlag(%d)", int32(e))
+	}
+}
 
 type HTMLWindowState int32
 
@@ -714,6 +2054,23 @@ const (
 	HTMLWindowStateMinimize HTMLWindowState = 6
 	HTMLWindowState_Max     HTMLWindowState = 2147483647
 )
+
+// String returns the HTMLWindowState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTMLWindowState) String() string {
+	switch e {
+	case HTMLWindowStateNormal:
+		return "HTMLWindowStateNormal"
+	case HTMLWindowStateMaximize:
+		return "HTMLWindowStateMaximize"
+	case HTMLWindowStateMinimize:
+		return "HTMLWindowStateMinimize"
+	case HTMLWindowState_Max:
+		return "HTMLWindowState_Max"
+	default:
+		return fmt.Sprintf("HTMLWindowState(%d)", int32(e))
+	}
+}
 
 type HTML_PAINTER int32
 
@@ -736,6 +2093,47 @@ const (
 	HTML_PAINTER_Max           HTML_PAINTER = 2147483647
 )
 
+// String returns the HTML_PAINTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTML_PAINTER) String() string {
+	switch e {
+	case HTMLPAINTER_OPAQUE:
+		return "HTMLPAINTER_OPAQUE"
+	case HTMLPAINTER_TRANSPARENT:
+		return "HTMLPAINTER_TRANSPARENT"
+	case HTMLPAINTER_ALPHA:
+		return "HTMLPAINTER_ALPHA"
+	case HTMLPAINTER_COMPLEX:
+		return "HTMLPAINTER_COMPLEX"
+	case HTMLPAINTER_OVERLAY:
+		return "HTMLPAINTER_OVERLAY"
+	case HTMLPAINTER_HITTEST:
+		return "HTMLPAINTER_HITTEST"
+	case HTMLPAINTER_SURFACE:
+		return "HTMLPAINTER_SURFACE"
+	case HTMLPAINTER_3DSURFACE:
+		return "HTMLPAINTER_3DSURFACE"
+	case HTMLPAINTER_NOBAND:
+		return "HTMLPAINTER_NOBAND"
+	case HTMLPAINTER_NODC:
+		return "HTMLPAINTER_NODC"
+	case HTMLPAINTER_NOPHYSICALCLIP:
+		return "HTMLPAINTER_NOPHYSICALCLIP"
+	case HTMLPAINTER_NOSAVEDC:
+		return "HTMLPAINTER_NOSAVEDC"
+	case HTMLPAINTER_SUPPORTS_XFORM:
+		return "HTMLPAINTER_SUPPORTS_XFORM"
+	case HTMLPAINTER_EXPAND:
+		return "HTMLPAINTER_EXPAND"
+	case HTMLPAINTER_NOSCROLLBITS:
+		return "HTMLPAINTER_NOSCROLLBITS"
+	case HTML_PAINTER_Max:
+		return "HTML_PAINTER_Max"
+	default:
+		return fmt.Sprintf("HTML_PAINTER(%d)", int32(e))
+	}
+}
+
 type HTML_PAINT_DRAW_FLAGS int32
 
 const (
@@ -743,6 +2141,21 @@ const (
 	HTMLPAINT_DRAW_USE_XFORM    HTML_PAINT_DRAW_FLAGS = 2
 	HTML_PAINT_DRAW_FLAGS_Max   HTML_PAINT_DRAW_FLAGS = 2147483647
 )
+
+// String returns the HTML_PAINT_DRAW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTML_PAINT_DRAW_FLAGS) String() string {
+	switch e {
+	case HTMLPAINT_DRAW_UPDATEREGION:
+		return "HTMLPAINT_DRAW_UPDATEREGION"
+	case HTMLPAINT_DRAW_USE_XFORM:
+		return "HTMLPAINT_DRAW_USE_XFORM"
+	case HTML_PAINT_DRAW_FLAGS_Max:
+		return "HTML_PAINT_DRAW_FLAGS_Max"
+	default:
+		return fmt.Sprintf("HTML_PAINT_DRAW_FLAGS(%d)", int32(e))
+	}
+}
 
 type HTML_PAINT_DRAW_INFO_FLAGS int32
 
@@ -753,6 +2166,23 @@ const (
 	HTML_PAINT_DRAW_INFO_FLAGS_Max  HTML_PAINT_DRAW_INFO_FLAGS = 2147483647
 )
 
+// String returns the HTML_PAINT_DRAW_INFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTML_PAINT_DRAW_INFO_FLAGS) String() string {
+	switch e {
+	case HTMLPAINT_DRAWINFO_VIEWPORT:
+		return "HTMLPAINT_DRAWINFO_VIEWPORT"
+	case HTMLPAINT_DRAWINFO_UPDATEREGION:
+		return "HTMLPAINT_DRAWINFO_UPDATEREGION"
+	case HTMLPAINT_DRAWINFO_XFORM:
+		return "HTMLPAINT_DRAWINFO_XFORM"
+	case HTML_PAINT_DRAW_INFO_FLAGS_Max:
+		return "HTML_PAINT_DRAW_INFO_FLAGS_Max"
+	default:
+		return fmt.Sprintf("HTML_PAINT_DRAW_INFO_FLAGS(%d)", int32(e))
+	}
+}
+
 type HTML_PAINT_EVENT_FLAGS int32
 
 const (
@@ -760,6 +2190,21 @@ const (
 	HTMLPAINT_EVENT_SETCURSOR  HTML_PAINT_EVENT_FLAGS = 2
 	HTML_PAINT_EVENT_FLAGS_Max HTML_PAINT_EVENT_FLAGS = 2147483647
 )
+
+// String returns the HTML_PAINT_EVENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTML_PAINT_EVENT_FLAGS) String() string {
+	switch e {
+	case HTMLPAINT_EVENT_TARGET:
+		return "HTMLPAINT_EVENT_TARGET"
+	case HTMLPAINT_EVENT_SETCURSOR:
+		return "HTMLPAINT_EVENT_SETCURSOR"
+	case HTML_PAINT_EVENT_FLAGS_Max:
+		return "HTML_PAINT_EVENT_FLAGS_Max"
+	default:
+		return fmt.Sprintf("HTML_PAINT_EVENT_FLAGS(%d)", int32(e))
+	}
+}
 
 type HTML_PAINT_ZORDER int32
 
@@ -776,12 +2221,54 @@ const (
 	HTML_PAINT_ZORDER_Max               HTML_PAINT_ZORDER = 2147483647
 )
 
+// String returns the HTML_PAINT_ZORDER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTML_PAINT_ZORDER) String() string {
+	switch e {
+	case HTMLPAINT_ZORDER_NONE:
+		return "HTMLPAINT_ZORDER_NONE"
+	case HTMLPAINT_ZORDER_REPLACE_ALL:
+		return "HTMLPAINT_ZORDER_REPLACE_ALL"
+	case HTMLPAINT_ZORDER_REPLACE_CONTENT:
+		return "HTMLPAINT_ZORDER_REPLACE_CONTENT"
+	case HTMLPAINT_ZORDER_REPLACE_BACKGROUND:
+		return "HTMLPAINT_ZORDER_REPLACE_BACKGROUND"
+	case HTMLPAINT_ZORDER_BELOW_CONTENT:
+		return "HTMLPAINT_ZORDER_BELOW_CONTENT"
+	case HTMLPAINT_ZORDER_BELOW_FLOW:
+		return "HTMLPAINT_ZORDER_BELOW_FLOW"
+	case HTMLPAINT_ZORDER_ABOVE_FLOW:
+		return "HTMLPAINT_ZORDER_ABOVE_FLOW"
+	case HTMLPAINT_ZORDER_ABOVE_CONTENT:
+		return "HTMLPAINT_ZORDER_ABOVE_CONTENT"
+	case HTMLPAINT_ZORDER_WINDOW_TOP:
+		return "HTMLPAINT_ZORDER_WINDOW_TOP"
+	case HTML_PAINT_ZORDER_Max:
+		return "HTML_PAINT_ZORDER_Max"
+	default:
+		return fmt.Sprintf("HTML_PAINT_ZORDER(%d)", int32(e))
+	}
+}
+
 type HT_OPTIONS int32
 
 const (
 	HT_OPT_AllowAfterEOL HT_OPTIONS = 1
 	HT_OPTIONS_Max       HT_OPTIONS = 2147483647
 )
+
+// String returns the HT_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HT_OPTIONS) String() string {
+	switch e {
+	case HT_OPT_AllowAfterEOL:
+		return "HT_OPT_AllowAfterEOL"
+	case HT_OPTIONS_Max:
+		return "HT_OPTIONS_Max"
+	default:
+		return fmt.Sprintf("HT_OPTIONS(%d)", int32(e))
+	}
+}
 
 type HT_RESULTS int32
 
@@ -790,6 +2277,19 @@ const (
 	HT_RESULTS_Max   HT_RESULTS = 2147483647
 )
 
+// String returns the HT_RESULTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HT_RESULTS) String() string {
+	switch e {
+	case HT_RESULTS_Glyph:
+		return "HT_RESULTS_Glyph"
+	case HT_RESULTS_Max:
+		return "HT_RESULTS_Max"
+	default:
+		return fmt.Sprintf("HT_RESULTS(%d)", int32(e))
+	}
+}
+
 type LINE_DIRECTION int32
 
 const (
@@ -797,6 +2297,21 @@ const (
 	LINE_DIRECTION_LeftToRight LINE_DIRECTION = 2
 	LINE_DIRECTION_Max         LINE_DIRECTION = 2147483647
 )
+
+// String returns the LINE_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LINE_DIRECTION) String() string {
+	switch e {
+	case LINE_DIRECTION_RightToLeft:
+		return "LINE_DIRECTION_RightToLeft"
+	case LINE_DIRECTION_LeftToRight:
+		return "LINE_DIRECTION_LeftToRight"
+	case LINE_DIRECTION_Max:
+		return "LINE_DIRECTION_Max"
+	default:
+		return fmt.Sprintf("LINE_DIRECTION(%d)", int32(e))
+	}
+}
 
 type MARKUP_CONTEXT_TYPE int32
 
@@ -808,6 +2323,27 @@ const (
 	CONTEXT_TYPE_NoScope    MARKUP_CONTEXT_TYPE = 4
 	MARKUP_CONTEXT_TYPE_Max MARKUP_CONTEXT_TYPE = 2147483647
 )
+
+// String returns the MARKUP_CONTEXT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MARKUP_CONTEXT_TYPE) String() string {
+	switch e {
+	case CONTEXT_TYPE_None:
+		return "CONTEXT_TYPE_None"
+	case CONTEXT_TYPE_Text:
+		return "CONTEXT_TYPE_Text"
+	case CONTEXT_TYPE_EnterScope:
+		return "CONTEXT_TYPE_EnterScope"
+	case CONTEXT_TYPE_ExitScope:
+		return "CONTEXT_TYPE_ExitScope"
+	case CONTEXT_TYPE_NoScope:
+		return "CONTEXT_TYPE_NoScope"
+	case MARKUP_CONTEXT_TYPE_Max:
+		return "MARKUP_CONTEXT_TYPE_Max"
+	default:
+		return fmt.Sprintf("MARKUP_CONTEXT_TYPE(%d)", int32(e))
+	}
+}
 
 type MOVEUNIT_ACTION int32
 
@@ -835,6 +2371,57 @@ const (
 	MOVEUNIT_ACTION_Max       MOVEUNIT_ACTION = 2147483647
 )
 
+// String returns the MOVEUNIT_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MOVEUNIT_ACTION) String() string {
+	switch e {
+	case MOVEUNIT_PREVCHAR:
+		return "MOVEUNIT_PREVCHAR"
+	case MOVEUNIT_NEXTCHAR:
+		return "MOVEUNIT_NEXTCHAR"
+	case MOVEUNIT_PREVCLUSTERBEGIN:
+		return "MOVEUNIT_PREVCLUSTERBEGIN"
+	case MOVEUNIT_NEXTCLUSTERBEGIN:
+		return "MOVEUNIT_NEXTCLUSTERBEGIN"
+	case MOVEUNIT_PREVCLUSTEREND:
+		return "MOVEUNIT_PREVCLUSTEREND"
+	case MOVEUNIT_NEXTCLUSTEREND:
+		return "MOVEUNIT_NEXTCLUSTEREND"
+	case MOVEUNIT_PREVWORDBEGIN:
+		return "MOVEUNIT_PREVWORDBEGIN"
+	case MOVEUNIT_NEXTWORDBEGIN:
+		return "MOVEUNIT_NEXTWORDBEGIN"
+	case MOVEUNIT_PREVWORDEND:
+		return "MOVEUNIT_PREVWORDEND"
+	case MOVEUNIT_NEXTWORDEND:
+		return "MOVEUNIT_NEXTWORDEND"
+	case MOVEUNIT_PREVPROOFWORD:
+		return "MOVEUNIT_PREVPROOFWORD"
+	case MOVEUNIT_NEXTPROOFWORD:
+		return "MOVEUNIT_NEXTPROOFWORD"
+	case MOVEUNIT_NEXTURLBEGIN:
+		return "MOVEUNIT_NEXTURLBEGIN"
+	case MOVEUNIT_PREVURLBEGIN:
+		return "MOVEUNIT_PREVURLBEGIN"
+	case MOVEUNIT_NEXTURLEND:
+		return "MOVEUNIT_NEXTURLEND"
+	case MOVEUNIT_PREVURLEND:
+		return "MOVEUNIT_PREVURLEND"
+	case MOVEUNIT_PREVSENTENCE:
+		return "MOVEUNIT_PREVSENTENCE"
+	case MOVEUNIT_NEXTSENTENCE:
+		return "MOVEUNIT_NEXTSENTENCE"
+	case MOVEUNIT_PREVBLOCK:
+		return "MOVEUNIT_PREVBLOCK"
+	case MOVEUNIT_NEXTBLOCK:
+		return "MOVEUNIT_NEXTBLOCK"
+	case MOVEUNIT_ACTION_Max:
+		return "MOVEUNIT_ACTION_Max"
+	default:
+		return fmt.Sprintf("MOVEUNIT_ACTION(%d)", int32(e))
+	}
+}
+
 type PARSE_FLAGS int32
 
 const (
@@ -842,6 +2429,21 @@ const (
 	PARSE_DISABLEVML         PARSE_FLAGS = 2
 	PARSE_FLAGS_Max          PARSE_FLAGS = 2147483647
 )
+
+// String returns the PARSE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PARSE_FLAGS) String() string {
+	switch e {
+	case PARSE_ABSOLUTIFYIE40URLS:
+		return "PARSE_ABSOLUTIFYIE40URLS"
+	case PARSE_DISABLEVML:
+		return "PARSE_DISABLEVML"
+	case PARSE_FLAGS_Max:
+		return "PARSE_FLAGS_Max"
+	default:
+		return fmt.Sprintf("PARSE_FLAGS(%d)", int32(e))
+	}
+}
 
 type POINTER_GRAVITY int32
 
@@ -851,12 +2453,40 @@ const (
 	POINTER_GRAVITY_Max   POINTER_GRAVITY = 2147483647
 )
 
+// String returns the POINTER_GRAVITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POINTER_GRAVITY) String() string {
+	switch e {
+	case POINTER_GRAVITY_Left:
+		return "POINTER_GRAVITY_Left"
+	case POINTER_GRAVITY_Right:
+		return "POINTER_GRAVITY_Right"
+	case POINTER_GRAVITY_Max:
+		return "POINTER_GRAVITY_Max"
+	default:
+		return fmt.Sprintf("POINTER_GRAVITY(%d)", int32(e))
+	}
+}
+
 type SAVE_SEGMENTS_FLAGS int32
 
 const (
 	SAVE_SEGMENTS_NoIE4SelectionCompat SAVE_SEGMENTS_FLAGS = 1
 	SAVE_SEGMENTS_FLAGS_Max            SAVE_SEGMENTS_FLAGS = 2147483647
 )
+
+// String returns the SAVE_SEGMENTS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SAVE_SEGMENTS_FLAGS) String() string {
+	switch e {
+	case SAVE_SEGMENTS_NoIE4SelectionCompat:
+		return "SAVE_SEGMENTS_NoIE4SelectionCompat"
+	case SAVE_SEGMENTS_FLAGS_Max:
+		return "SAVE_SEGMENTS_FLAGS_Max"
+	default:
+		return fmt.Sprintf("SAVE_SEGMENTS_FLAGS(%d)", int32(e))
+	}
+}
 
 type SCRIPT_TIMER_TYPE int32
 
@@ -868,6 +2498,25 @@ const (
 	SCRIPT_TIMER_TYPE_Max SCRIPT_TIMER_TYPE = 2147483647
 )
 
+// String returns the SCRIPT_TIMER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPT_TIMER_TYPE) String() string {
+	switch e {
+	case STT_TIMEOUT:
+		return "STT_TIMEOUT"
+	case STT_INTERVAL:
+		return "STT_INTERVAL"
+	case STT_IMMEDIATE:
+		return "STT_IMMEDIATE"
+	case STT_ANIMATION_FRAME:
+		return "STT_ANIMATION_FRAME"
+	case SCRIPT_TIMER_TYPE_Max:
+		return "SCRIPT_TIMER_TYPE_Max"
+	default:
+		return fmt.Sprintf("SCRIPT_TIMER_TYPE(%d)", int32(e))
+	}
+}
+
 type SECUREURLHOSTVALIDATE_FLAGS int32
 
 const (
@@ -876,6 +2525,23 @@ const (
 	SUHV_UNSECURESOURCE             SECUREURLHOSTVALIDATE_FLAGS = 4
 	SECUREURLHOSTVALIDATE_FLAGS_Max SECUREURLHOSTVALIDATE_FLAGS = 2147483647
 )
+
+// String returns the SECUREURLHOSTVALIDATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECUREURLHOSTVALIDATE_FLAGS) String() string {
+	switch e {
+	case SUHV_PROMPTBEFORENO:
+		return "SUHV_PROMPTBEFORENO"
+	case SUHV_SILENTYES:
+		return "SUHV_SILENTYES"
+	case SUHV_UNSECURESOURCE:
+		return "SUHV_UNSECURESOURCE"
+	case SECUREURLHOSTVALIDATE_FLAGS_Max:
+		return "SECUREURLHOSTVALIDATE_FLAGS_Max"
+	default:
+		return fmt.Sprintf("SECUREURLHOSTVALIDATE_FLAGS(%d)", int32(e))
+	}
+}
 
 type SELECTION_TYPE int32
 
@@ -887,6 +2553,25 @@ const (
 	SELECTION_TYPE_Max     SELECTION_TYPE = 2147483647
 )
 
+// String returns the SELECTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SELECTION_TYPE) String() string {
+	switch e {
+	case SELECTION_TYPE_None:
+		return "SELECTION_TYPE_None"
+	case SELECTION_TYPE_Caret:
+		return "SELECTION_TYPE_Caret"
+	case SELECTION_TYPE_Text:
+		return "SELECTION_TYPE_Text"
+	case SELECTION_TYPE_Control:
+		return "SELECTION_TYPE_Control"
+	case SELECTION_TYPE_Max:
+		return "SELECTION_TYPE_Max"
+	default:
+		return fmt.Sprintf("SELECTION_TYPE(%d)", int32(e))
+	}
+}
+
 type VIEW_OBJECT_ALPHA_MODE int32
 
 const (
@@ -895,6 +2580,21 @@ const (
 	VIEW_OBJECT_ALPHA_MODE_Max           VIEW_OBJECT_ALPHA_MODE = 2147483647
 )
 
+// String returns the VIEW_OBJECT_ALPHA_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIEW_OBJECT_ALPHA_MODE) String() string {
+	switch e {
+	case VIEW_OBJECT_ALPHA_MODE_IGNORE:
+		return "VIEW_OBJECT_ALPHA_MODE_IGNORE"
+	case VIEW_OBJECT_ALPHA_MODE_PREMULTIPLIED:
+		return "VIEW_OBJECT_ALPHA_MODE_PREMULTIPLIED"
+	case VIEW_OBJECT_ALPHA_MODE_Max:
+		return "VIEW_OBJECT_ALPHA_MODE_Max"
+	default:
+		return fmt.Sprintf("VIEW_OBJECT_ALPHA_MODE(%d)", int32(e))
+	}
+}
+
 type VIEW_OBJECT_COMPOSITION_MODE int32
 
 const (
@@ -902,6 +2602,21 @@ const (
 	VIEW_OBJECT_COMPOSITION_MODE_SURFACEPRESENTER VIEW_OBJECT_COMPOSITION_MODE = 1
 	VIEW_OBJECT_COMPOSITION_MODE_Max              VIEW_OBJECT_COMPOSITION_MODE = 2147483647
 )
+
+// String returns the VIEW_OBJECT_COMPOSITION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIEW_OBJECT_COMPOSITION_MODE) String() string {
+	switch e {
+	case VIEW_OBJECT_COMPOSITION_MODE_LEGACY:
+		return "VIEW_OBJECT_COMPOSITION_MODE_LEGACY"
+	case VIEW_OBJECT_COMPOSITION_MODE_SURFACEPRESENTER:
+		return "VIEW_OBJECT_COMPOSITION_MODE_SURFACEPRESENTER"
+	case VIEW_OBJECT_COMPOSITION_MODE_Max:
+		return "VIEW_OBJECT_COMPOSITION_MODE_Max"
+	default:
+		return fmt.Sprintf("VIEW_OBJECT_COMPOSITION_MODE(%d)", int32(e))
+	}
+}
 
 type BodyScroll int32
 
@@ -913,6 +2628,25 @@ const (
 	BodyScroll_Max    BodyScroll = 2147483647
 )
 
+// String returns the BodyScroll constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BodyScroll) String() string {
+	switch e {
+	case BodyScrollyes:
+		return "BodyScrollyes"
+	case BodyScrollno:
+		return "BodyScrollno"
+	case BodyScrollauto:
+		return "BodyScrollauto"
+	case BodyScrolldefault:
+		return "BodyScrolldefault"
+	case BodyScroll_Max:
+		return "BodyScroll_Max"
+	default:
+		return fmt.Sprintf("BodyScroll(%d)", int32(e))
+	}
+}
+
 type FrameScrolling int32
 
 const (
@@ -921,6 +2655,23 @@ const (
 	FrameScrollingauto FrameScrolling = 4
 	FrameScrolling_Max FrameScrolling = 2147483647
 )
+
+// String returns the FrameScrolling constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FrameScrolling) String() string {
+	switch e {
+	case FrameScrollingyes:
+		return "FrameScrollingyes"
+	case FrameScrollingno:
+		return "FrameScrollingno"
+	case FrameScrollingauto:
+		return "FrameScrollingauto"
+	case FrameScrolling_Max:
+		return "FrameScrolling_Max"
+	default:
+		return fmt.Sprintf("FrameScrolling(%d)", int32(e))
+	}
+}
 
 type HtmlAdjacency int32
 
@@ -932,6 +2683,25 @@ const (
 	HtmlAdjacency_Max        HtmlAdjacency = 2147483647
 )
 
+// String returns the HtmlAdjacency constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlAdjacency) String() string {
+	switch e {
+	case HtmlAdjacencyBeforeBegin:
+		return "HtmlAdjacencyBeforeBegin"
+	case HtmlAdjacencyAfterBegin:
+		return "HtmlAdjacencyAfterBegin"
+	case HtmlAdjacencyBeforeEnd:
+		return "HtmlAdjacencyBeforeEnd"
+	case HtmlAdjacencyAfterEnd:
+		return "HtmlAdjacencyAfterEnd"
+	case HtmlAdjacency_Max:
+		return "HtmlAdjacency_Max"
+	default:
+		return fmt.Sprintf("HtmlAdjacency(%d)", int32(e))
+	}
+}
+
 type HtmlApplyLocation int32
 
 const (
@@ -939,6 +2709,21 @@ const (
 	HtmlApplyLocationOutside HtmlApplyLocation = 1
 	HtmlApplyLocation_Max    HtmlApplyLocation = 2147483647
 )
+
+// String returns the HtmlApplyLocation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlApplyLocation) String() string {
+	switch e {
+	case HtmlApplyLocationInside:
+		return "HtmlApplyLocationInside"
+	case HtmlApplyLocationOutside:
+		return "HtmlApplyLocationOutside"
+	case HtmlApplyLocation_Max:
+		return "HtmlApplyLocation_Max"
+	default:
+		return fmt.Sprintf("HtmlApplyLocation(%d)", int32(e))
+	}
+}
 
 type HtmlBlockAlign int32
 
@@ -950,6 +2735,27 @@ const (
 	HtmlBlockAlignJustify HtmlBlockAlign = 4
 	HtmlBlockAlign_Max    HtmlBlockAlign = 2147483647
 )
+
+// String returns the HtmlBlockAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlBlockAlign) String() string {
+	switch e {
+	case HtmlBlockAlignNotSet:
+		return "HtmlBlockAlignNotSet"
+	case HtmlBlockAlignLeft:
+		return "HtmlBlockAlignLeft"
+	case HtmlBlockAlignCenter:
+		return "HtmlBlockAlignCenter"
+	case HtmlBlockAlignRight:
+		return "HtmlBlockAlignRight"
+	case HtmlBlockAlignJustify:
+		return "HtmlBlockAlignJustify"
+	case HtmlBlockAlign_Max:
+		return "HtmlBlockAlign_Max"
+	default:
+		return fmt.Sprintf("HtmlBlockAlign(%d)", int32(e))
+	}
+}
 
 type HtmlCaptionAlign int32
 
@@ -964,6 +2770,31 @@ const (
 	HtmlCaptionAlign_Max    HtmlCaptionAlign = 2147483647
 )
 
+// String returns the HtmlCaptionAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlCaptionAlign) String() string {
+	switch e {
+	case HtmlCaptionAlignNotSet:
+		return "HtmlCaptionAlignNotSet"
+	case HtmlCaptionAlignLeft:
+		return "HtmlCaptionAlignLeft"
+	case HtmlCaptionAlignCenter:
+		return "HtmlCaptionAlignCenter"
+	case HtmlCaptionAlignRight:
+		return "HtmlCaptionAlignRight"
+	case HtmlCaptionAlignJustify:
+		return "HtmlCaptionAlignJustify"
+	case HtmlCaptionAlignTop:
+		return "HtmlCaptionAlignTop"
+	case HtmlCaptionAlignBottom:
+		return "HtmlCaptionAlignBottom"
+	case HtmlCaptionAlign_Max:
+		return "HtmlCaptionAlign_Max"
+	default:
+		return fmt.Sprintf("HtmlCaptionAlign(%d)", int32(e))
+	}
+}
+
 type HtmlCaptionVAlign int32
 
 const (
@@ -972,6 +2803,23 @@ const (
 	HtmlCaptionVAlignBottom HtmlCaptionVAlign = 2
 	HtmlCaptionVAlign_Max   HtmlCaptionVAlign = 2147483647
 )
+
+// String returns the HtmlCaptionVAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlCaptionVAlign) String() string {
+	switch e {
+	case HtmlCaptionVAlignNotSet:
+		return "HtmlCaptionVAlignNotSet"
+	case HtmlCaptionVAlignTop:
+		return "HtmlCaptionVAlignTop"
+	case HtmlCaptionVAlignBottom:
+		return "HtmlCaptionVAlignBottom"
+	case HtmlCaptionVAlign_Max:
+		return "HtmlCaptionVAlign_Max"
+	default:
+		return fmt.Sprintf("HtmlCaptionVAlign(%d)", int32(e))
+	}
+}
 
 type HtmlCellAlign int32
 
@@ -983,6 +2831,25 @@ const (
 	HtmlCellAlignMiddle HtmlCellAlign = 2
 	HtmlCellAlign_Max   HtmlCellAlign = 2147483647
 )
+
+// String returns the HtmlCellAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlCellAlign) String() string {
+	switch e {
+	case HtmlCellAlignNotSet:
+		return "HtmlCellAlignNotSet"
+	case HtmlCellAlignLeft:
+		return "HtmlCellAlignLeft"
+	case HtmlCellAlignCenter:
+		return "HtmlCellAlignCenter"
+	case HtmlCellAlignRight:
+		return "HtmlCellAlignRight"
+	case HtmlCellAlign_Max:
+		return "HtmlCellAlign_Max"
+	default:
+		return fmt.Sprintf("HtmlCellAlign(%d)", int32(e))
+	}
+}
 
 type HtmlCellVAlign int32
 
@@ -996,6 +2863,27 @@ const (
 	HtmlCellVAlign_Max     HtmlCellVAlign = 2147483647
 )
 
+// String returns the HtmlCellVAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlCellVAlign) String() string {
+	switch e {
+	case HtmlCellVAlignNotSet:
+		return "HtmlCellVAlignNotSet"
+	case HtmlCellVAlignTop:
+		return "HtmlCellVAlignTop"
+	case HtmlCellVAlignMiddle:
+		return "HtmlCellVAlignMiddle"
+	case HtmlCellVAlignBottom:
+		return "HtmlCellVAlignBottom"
+	case HtmlCellVAlignBaseline:
+		return "HtmlCellVAlignBaseline"
+	case HtmlCellVAlign_Max:
+		return "HtmlCellVAlign_Max"
+	default:
+		return fmt.Sprintf("HtmlCellVAlign(%d)", int32(e))
+	}
+}
+
 type HtmlClear int32
 
 const (
@@ -1008,6 +2896,29 @@ const (
 	HtmlClear_Max   HtmlClear = 2147483647
 )
 
+// String returns the HtmlClear constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlClear) String() string {
+	switch e {
+	case HtmlClearNotSet:
+		return "HtmlClearNotSet"
+	case HtmlClearAll:
+		return "HtmlClearAll"
+	case HtmlClearLeft:
+		return "HtmlClearLeft"
+	case HtmlClearRight:
+		return "HtmlClearRight"
+	case HtmlClearBoth:
+		return "HtmlClearBoth"
+	case HtmlClearNone:
+		return "HtmlClearNone"
+	case HtmlClear_Max:
+		return "HtmlClear_Max"
+	default:
+		return fmt.Sprintf("HtmlClear(%d)", int32(e))
+	}
+}
+
 type HtmlCompatMode int32
 
 const (
@@ -1015,6 +2926,21 @@ const (
 	HtmlCompatModeCSS1Compat HtmlCompatMode = 1
 	HtmlCompatMode_Max       HtmlCompatMode = 2147483647
 )
+
+// String returns the HtmlCompatMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlCompatMode) String() string {
+	switch e {
+	case HtmlCompatModeBackCompat:
+		return "HtmlCompatModeBackCompat"
+	case HtmlCompatModeCSS1Compat:
+		return "HtmlCompatModeCSS1Compat"
+	case HtmlCompatMode_Max:
+		return "HtmlCompatMode_Max"
+	default:
+		return fmt.Sprintf("HtmlCompatMode(%d)", int32(e))
+	}
+}
 
 type HtmlComponent int32
 
@@ -1052,6 +2978,77 @@ const (
 	HtmlComponent_Max          HtmlComponent = 2147483647
 )
 
+// String returns the HtmlComponent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlComponent) String() string {
+	switch e {
+	case HtmlComponentClient:
+		return "HtmlComponentClient"
+	case HtmlComponentSbLeft:
+		return "HtmlComponentSbLeft"
+	case HtmlComponentSbPageLeft:
+		return "HtmlComponentSbPageLeft"
+	case HtmlComponentSbHThumb:
+		return "HtmlComponentSbHThumb"
+	case HtmlComponentSbPageRight:
+		return "HtmlComponentSbPageRight"
+	case HtmlComponentSbRight:
+		return "HtmlComponentSbRight"
+	case HtmlComponentSbUp:
+		return "HtmlComponentSbUp"
+	case HtmlComponentSbPageUp:
+		return "HtmlComponentSbPageUp"
+	case HtmlComponentSbVThumb:
+		return "HtmlComponentSbVThumb"
+	case HtmlComponentSbPageDown:
+		return "HtmlComponentSbPageDown"
+	case HtmlComponentSbDown:
+		return "HtmlComponentSbDown"
+	case HtmlComponentSbLeft2:
+		return "HtmlComponentSbLeft2"
+	case HtmlComponentSbPageLeft2:
+		return "HtmlComponentSbPageLeft2"
+	case HtmlComponentSbRight2:
+		return "HtmlComponentSbRight2"
+	case HtmlComponentSbPageRight2:
+		return "HtmlComponentSbPageRight2"
+	case HtmlComponentSbUp2:
+		return "HtmlComponentSbUp2"
+	case HtmlComponentSbPageUp2:
+		return "HtmlComponentSbPageUp2"
+	case HtmlComponentSbDown2:
+		return "HtmlComponentSbDown2"
+	case HtmlComponentSbPageDown2:
+		return "HtmlComponentSbPageDown2"
+	case HtmlComponentSbTop:
+		return "HtmlComponentSbTop"
+	case HtmlComponentSbBottom:
+		return "HtmlComponentSbBottom"
+	case HtmlComponentOutside:
+		return "HtmlComponentOutside"
+	case HtmlComponentGHTopLeft:
+		return "HtmlComponentGHTopLeft"
+	case HtmlComponentGHLeft:
+		return "HtmlComponentGHLeft"
+	case HtmlComponentGHTop:
+		return "HtmlComponentGHTop"
+	case HtmlComponentGHBottomLeft:
+		return "HtmlComponentGHBottomLeft"
+	case HtmlComponentGHTopRight:
+		return "HtmlComponentGHTopRight"
+	case HtmlComponentGHBottom:
+		return "HtmlComponentGHBottom"
+	case HtmlComponentGHRight:
+		return "HtmlComponentGHRight"
+	case HtmlComponentGHBottomRight:
+		return "HtmlComponentGHBottomRight"
+	case HtmlComponent_Max:
+		return "HtmlComponent_Max"
+	default:
+		return fmt.Sprintf("HtmlComponent(%d)", int32(e))
+	}
+}
+
 type HtmlControlAlign int32
 
 const (
@@ -1069,6 +3066,39 @@ const (
 	HtmlControlAlign_Max      HtmlControlAlign = 2147483647
 )
 
+// String returns the HtmlControlAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlControlAlign) String() string {
+	switch e {
+	case HtmlControlAlignNotSet:
+		return "HtmlControlAlignNotSet"
+	case HtmlControlAlignLeft:
+		return "HtmlControlAlignLeft"
+	case HtmlControlAlignCenter:
+		return "HtmlControlAlignCenter"
+	case HtmlControlAlignRight:
+		return "HtmlControlAlignRight"
+	case HtmlControlAlignTextTop:
+		return "HtmlControlAlignTextTop"
+	case HtmlControlAlignAbsMiddle:
+		return "HtmlControlAlignAbsMiddle"
+	case HtmlControlAlignBaseline:
+		return "HtmlControlAlignBaseline"
+	case HtmlControlAlignAbsBottom:
+		return "HtmlControlAlignAbsBottom"
+	case HtmlControlAlignBottom:
+		return "HtmlControlAlignBottom"
+	case HtmlControlAlignMiddle:
+		return "HtmlControlAlignMiddle"
+	case HtmlControlAlignTop:
+		return "HtmlControlAlignTop"
+	case HtmlControlAlign_Max:
+		return "HtmlControlAlign_Max"
+	default:
+		return fmt.Sprintf("HtmlControlAlign(%d)", int32(e))
+	}
+}
+
 type HtmlDesignMode int32
 
 const (
@@ -1077,6 +3107,23 @@ const (
 	HtmlDesignModeOff     HtmlDesignMode = 0
 	HtmlDesignMode_Max    HtmlDesignMode = 2147483647
 )
+
+// String returns the HtmlDesignMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlDesignMode) String() string {
+	switch e {
+	case HtmlDesignModeInherit:
+		return "HtmlDesignModeInherit"
+	case HtmlDesignModeOn:
+		return "HtmlDesignModeOn"
+	case HtmlDesignModeOff:
+		return "HtmlDesignModeOff"
+	case HtmlDesignMode_Max:
+		return "HtmlDesignMode_Max"
+	default:
+		return fmt.Sprintf("HtmlDesignMode(%d)", int32(e))
+	}
+}
 
 type HtmlDir int32
 
@@ -1087,6 +3134,23 @@ const (
 	HtmlDir_Max        HtmlDir = 2147483647
 )
 
+// String returns the HtmlDir constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlDir) String() string {
+	switch e {
+	case HtmlDirNotSet:
+		return "HtmlDirNotSet"
+	case HtmlDirLeftToRight:
+		return "HtmlDirLeftToRight"
+	case HtmlDirRightToLeft:
+		return "HtmlDirRightToLeft"
+	case HtmlDir_Max:
+		return "HtmlDir_Max"
+	default:
+		return fmt.Sprintf("HtmlDir(%d)", int32(e))
+	}
+}
+
 type HtmlDirection int32
 
 const (
@@ -1094,6 +3158,21 @@ const (
 	HtmlDirectionBackward HtmlDirection = -99999
 	HtmlDirection_Max     HtmlDirection = 2147483647
 )
+
+// String returns the HtmlDirection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlDirection) String() string {
+	switch e {
+	case HtmlDirectionForward:
+		return "HtmlDirectionForward"
+	case HtmlDirectionBackward:
+		return "HtmlDirectionBackward"
+	case HtmlDirection_Max:
+		return "HtmlDirection_Max"
+	default:
+		return fmt.Sprintf("HtmlDirection(%d)", int32(e))
+	}
+}
 
 type HtmlDraggable int32
 
@@ -1103,6 +3182,23 @@ const (
 	HtmlDraggableFalse HtmlDraggable = 2
 	HtmlDraggable_Max  HtmlDraggable = 2147483647
 )
+
+// String returns the HtmlDraggable constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlDraggable) String() string {
+	switch e {
+	case HtmlDraggableAuto:
+		return "HtmlDraggableAuto"
+	case HtmlDraggableTrue:
+		return "HtmlDraggableTrue"
+	case HtmlDraggableFalse:
+		return "HtmlDraggableFalse"
+	case HtmlDraggable_Max:
+		return "HtmlDraggable_Max"
+	default:
+		return fmt.Sprintf("HtmlDraggable(%d)", int32(e))
+	}
+}
 
 type HtmlDropEffect int32
 
@@ -1114,6 +3210,25 @@ const (
 	HtmlDropEffect_Max HtmlDropEffect = 2147483647
 )
 
+// String returns the HtmlDropEffect constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlDropEffect) String() string {
+	switch e {
+	case HtmlDropEffectCopy:
+		return "HtmlDropEffectCopy"
+	case HtmlDropEffectLink:
+		return "HtmlDropEffectLink"
+	case HtmlDropEffectMove:
+		return "HtmlDropEffectMove"
+	case HtmlDropEffectNone:
+		return "HtmlDropEffectNone"
+	case HtmlDropEffect_Max:
+		return "HtmlDropEffect_Max"
+	default:
+		return fmt.Sprintf("HtmlDropEffect(%d)", int32(e))
+	}
+}
+
 type HtmlEditable int32
 
 const (
@@ -1122,6 +3237,23 @@ const (
 	HtmlEditableFalse   HtmlEditable = 2
 	HtmlEditable_Max    HtmlEditable = 2147483647
 )
+
+// String returns the HtmlEditable constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlEditable) String() string {
+	switch e {
+	case HtmlEditableInherit:
+		return "HtmlEditableInherit"
+	case HtmlEditableTrue:
+		return "HtmlEditableTrue"
+	case HtmlEditableFalse:
+		return "HtmlEditableFalse"
+	case HtmlEditable_Max:
+		return "HtmlEditable_Max"
+	default:
+		return fmt.Sprintf("HtmlEditable(%d)", int32(e))
+	}
+}
 
 type HtmlEffectAllowed int32
 
@@ -1138,6 +3270,35 @@ const (
 	HtmlEffectAllowed_Max          HtmlEffectAllowed = 2147483647
 )
 
+// String returns the HtmlEffectAllowed constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlEffectAllowed) String() string {
+	switch e {
+	case HtmlEffectAllowedCopy:
+		return "HtmlEffectAllowedCopy"
+	case HtmlEffectAllowedLink:
+		return "HtmlEffectAllowedLink"
+	case HtmlEffectAllowedMove:
+		return "HtmlEffectAllowedMove"
+	case HtmlEffectAllowedCopyLink:
+		return "HtmlEffectAllowedCopyLink"
+	case HtmlEffectAllowedCopyMove:
+		return "HtmlEffectAllowedCopyMove"
+	case HtmlEffectAllowedLinkMove:
+		return "HtmlEffectAllowedLinkMove"
+	case HtmlEffectAllowedAll:
+		return "HtmlEffectAllowedAll"
+	case HtmlEffectAllowedNone:
+		return "HtmlEffectAllowedNone"
+	case HtmlEffectAllowedUninitialized:
+		return "HtmlEffectAllowedUninitialized"
+	case HtmlEffectAllowed_Max:
+		return "HtmlEffectAllowed_Max"
+	default:
+		return fmt.Sprintf("HtmlEffectAllowed(%d)", int32(e))
+	}
+}
+
 type HtmlEncoding int32
 
 const (
@@ -1146,6 +3307,23 @@ const (
 	HtmlEncodingText      HtmlEncoding = 2
 	HtmlEncoding_Max      HtmlEncoding = 2147483647
 )
+
+// String returns the HtmlEncoding constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlEncoding) String() string {
+	switch e {
+	case HtmlEncodingURL:
+		return "HtmlEncodingURL"
+	case HtmlEncodingMultipart:
+		return "HtmlEncodingMultipart"
+	case HtmlEncodingText:
+		return "HtmlEncodingText"
+	case HtmlEncoding_Max:
+		return "HtmlEncoding_Max"
+	default:
+		return fmt.Sprintf("HtmlEncoding(%d)", int32(e))
+	}
+}
 
 type HtmlEndPoints int32
 
@@ -1156,6 +3334,25 @@ const (
 	HtmlEndPointsEndToEnd     HtmlEndPoints = 4
 	HtmlEndPoints_Max         HtmlEndPoints = 2147483647
 )
+
+// String returns the HtmlEndPoints constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlEndPoints) String() string {
+	switch e {
+	case HtmlEndPointsStartToStart:
+		return "HtmlEndPointsStartToStart"
+	case HtmlEndPointsStartToEnd:
+		return "HtmlEndPointsStartToEnd"
+	case HtmlEndPointsEndToStart:
+		return "HtmlEndPointsEndToStart"
+	case HtmlEndPointsEndToEnd:
+		return "HtmlEndPointsEndToEnd"
+	case HtmlEndPoints_Max:
+		return "HtmlEndPoints_Max"
+	default:
+		return fmt.Sprintf("HtmlEndPoints(%d)", int32(e))
+	}
+}
 
 type HtmlFrame int32
 
@@ -1173,6 +3370,37 @@ const (
 	HtmlFrame_Max   HtmlFrame = 2147483647
 )
 
+// String returns the HtmlFrame constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlFrame) String() string {
+	switch e {
+	case HtmlFrameNotSet:
+		return "HtmlFrameNotSet"
+	case HtmlFramevoid:
+		return "HtmlFramevoid"
+	case HtmlFrameabove:
+		return "HtmlFrameabove"
+	case HtmlFramebelow:
+		return "HtmlFramebelow"
+	case HtmlFramehsides:
+		return "HtmlFramehsides"
+	case HtmlFramelhs:
+		return "HtmlFramelhs"
+	case HtmlFramerhs:
+		return "HtmlFramerhs"
+	case HtmlFramevsides:
+		return "HtmlFramevsides"
+	case HtmlFramebox:
+		return "HtmlFramebox"
+	case HtmlFrameborder:
+		return "HtmlFrameborder"
+	case HtmlFrame_Max:
+		return "HtmlFrame_Max"
+	default:
+		return fmt.Sprintf("HtmlFrame(%d)", int32(e))
+	}
+}
+
 type HtmlGlyphMode int32
 
 const (
@@ -1182,6 +3410,25 @@ const (
 	HtmlGlyphModeBoth  HtmlGlyphMode = 3
 	HtmlGlyphMode_Max  HtmlGlyphMode = 2147483647
 )
+
+// String returns the HtmlGlyphMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlGlyphMode) String() string {
+	switch e {
+	case HtmlGlyphModeNone:
+		return "HtmlGlyphModeNone"
+	case HtmlGlyphModeBegin:
+		return "HtmlGlyphModeBegin"
+	case HtmlGlyphModeEnd:
+		return "HtmlGlyphModeEnd"
+	case HtmlGlyphModeBoth:
+		return "HtmlGlyphModeBoth"
+	case HtmlGlyphMode_Max:
+		return "HtmlGlyphMode_Max"
+	default:
+		return fmt.Sprintf("HtmlGlyphMode(%d)", int32(e))
+	}
+}
 
 type HtmlInput int32
 
@@ -1210,6 +3457,59 @@ const (
 	HtmlInput_Max           HtmlInput = 2147483647
 )
 
+// String returns the HtmlInput constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlInput) String() string {
+	switch e {
+	case HtmlInputNotSet:
+		return "HtmlInputNotSet"
+	case HtmlInputButton:
+		return "HtmlInputButton"
+	case HtmlInputCheckbox:
+		return "HtmlInputCheckbox"
+	case HtmlInputFile:
+		return "HtmlInputFile"
+	case HtmlInputHidden:
+		return "HtmlInputHidden"
+	case HtmlInputImage:
+		return "HtmlInputImage"
+	case HtmlInputPassword:
+		return "HtmlInputPassword"
+	case HtmlInputRadio:
+		return "HtmlInputRadio"
+	case HtmlInputReset:
+		return "HtmlInputReset"
+	case HtmlInputSelectOne:
+		return "HtmlInputSelectOne"
+	case HtmlInputSelectMultiple:
+		return "HtmlInputSelectMultiple"
+	case HtmlInputSubmit:
+		return "HtmlInputSubmit"
+	case HtmlInputText:
+		return "HtmlInputText"
+	case HtmlInputTextarea:
+		return "HtmlInputTextarea"
+	case HtmlInputRichtext:
+		return "HtmlInputRichtext"
+	case HtmlInputRange:
+		return "HtmlInputRange"
+	case HtmlInputUrl:
+		return "HtmlInputUrl"
+	case HtmlInputEmail:
+		return "HtmlInputEmail"
+	case HtmlInputNumber:
+		return "HtmlInputNumber"
+	case HtmlInputTel:
+		return "HtmlInputTel"
+	case HtmlInputSearch:
+		return "HtmlInputSearch"
+	case HtmlInput_Max:
+		return "HtmlInput_Max"
+	default:
+		return fmt.Sprintf("HtmlInput(%d)", int32(e))
+	}
+}
+
 type HtmlListType int32
 
 const (
@@ -1225,12 +3525,54 @@ const (
 	HtmlListType_Max       HtmlListType = 2147483647
 )
 
+// String returns the HtmlListType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlListType) String() string {
+	switch e {
+	case HtmlListTypeNotSet:
+		return "HtmlListTypeNotSet"
+	case HtmlListTypeLargeAlpha:
+		return "HtmlListTypeLargeAlpha"
+	case HtmlListTypeSmallAlpha:
+		return "HtmlListTypeSmallAlpha"
+	case HtmlListTypeLargeRoman:
+		return "HtmlListTypeLargeRoman"
+	case HtmlListTypeSmallRoman:
+		return "HtmlListTypeSmallRoman"
+	case HtmlListTypeNumbers:
+		return "HtmlListTypeNumbers"
+	case HtmlListTypeDisc:
+		return "HtmlListTypeDisc"
+	case HtmlListTypeCircle:
+		return "HtmlListTypeCircle"
+	case HtmlListTypeSquare:
+		return "HtmlListTypeSquare"
+	case HtmlListType_Max:
+		return "HtmlListType_Max"
+	default:
+		return fmt.Sprintf("HtmlListType(%d)", int32(e))
+	}
+}
+
 type HtmlLoop int32
 
 const (
 	HtmlLoopLoopInfinite HtmlLoop = -1
 	HtmlLoop_Max         HtmlLoop = 2147483647
 )
+
+// String returns the HtmlLoop constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlLoop) String() string {
+	switch e {
+	case HtmlLoopLoopInfinite:
+		return "HtmlLoopLoopInfinite"
+	case HtmlLoop_Max:
+		return "HtmlLoop_Max"
+	default:
+		return fmt.Sprintf("HtmlLoop(%d)", int32(e))
+	}
+}
 
 type HtmlMarqueeBehavior int32
 
@@ -1240,6 +3582,23 @@ const (
 	HtmlMarqueeBehavioralternate HtmlMarqueeBehavior = 3
 	HtmlMarqueeBehavior_Max      HtmlMarqueeBehavior = 2147483647
 )
+
+// String returns the HtmlMarqueeBehavior constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlMarqueeBehavior) String() string {
+	switch e {
+	case HtmlMarqueeBehaviorscroll:
+		return "HtmlMarqueeBehaviorscroll"
+	case HtmlMarqueeBehaviorslide:
+		return "HtmlMarqueeBehaviorslide"
+	case HtmlMarqueeBehavioralternate:
+		return "HtmlMarqueeBehavioralternate"
+	case HtmlMarqueeBehavior_Max:
+		return "HtmlMarqueeBehavior_Max"
+	default:
+		return fmt.Sprintf("HtmlMarqueeBehavior(%d)", int32(e))
+	}
+}
 
 type HtmlMarqueeDirection int32
 
@@ -1251,6 +3610,25 @@ const (
 	HtmlMarqueeDirection_Max  HtmlMarqueeDirection = 2147483647
 )
 
+// String returns the HtmlMarqueeDirection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlMarqueeDirection) String() string {
+	switch e {
+	case HtmlMarqueeDirectionleft:
+		return "HtmlMarqueeDirectionleft"
+	case HtmlMarqueeDirectionright:
+		return "HtmlMarqueeDirectionright"
+	case HtmlMarqueeDirectionup:
+		return "HtmlMarqueeDirectionup"
+	case HtmlMarqueeDirectiondown:
+		return "HtmlMarqueeDirectiondown"
+	case HtmlMarqueeDirection_Max:
+		return "HtmlMarqueeDirection_Max"
+	default:
+		return fmt.Sprintf("HtmlMarqueeDirection(%d)", int32(e))
+	}
+}
+
 type HtmlMediaErr int32
 
 const (
@@ -1261,6 +3639,25 @@ const (
 	HtmlMediaErr_Max            HtmlMediaErr = 2147483647
 )
 
+// String returns the HtmlMediaErr constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlMediaErr) String() string {
+	switch e {
+	case HtmlMediaErrAborted:
+		return "HtmlMediaErrAborted"
+	case HtmlMediaErrNetwork:
+		return "HtmlMediaErrNetwork"
+	case HtmlMediaErrDecode:
+		return "HtmlMediaErrDecode"
+	case HtmlMediaErrSrcNotSupported:
+		return "HtmlMediaErrSrcNotSupported"
+	case HtmlMediaErr_Max:
+		return "HtmlMediaErr_Max"
+	default:
+		return fmt.Sprintf("HtmlMediaErr(%d)", int32(e))
+	}
+}
+
 type HtmlMediaNetworkState int32
 
 const (
@@ -1270,6 +3667,25 @@ const (
 	HtmlMediaNetworkStateNoSource HtmlMediaNetworkState = 3
 	HtmlMediaNetworkState_Max     HtmlMediaNetworkState = 2147483647
 )
+
+// String returns the HtmlMediaNetworkState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlMediaNetworkState) String() string {
+	switch e {
+	case HtmlMediaNetworkStateEmpty:
+		return "HtmlMediaNetworkStateEmpty"
+	case HtmlMediaNetworkStateIdle:
+		return "HtmlMediaNetworkStateIdle"
+	case HtmlMediaNetworkStateLoading:
+		return "HtmlMediaNetworkStateLoading"
+	case HtmlMediaNetworkStateNoSource:
+		return "HtmlMediaNetworkStateNoSource"
+	case HtmlMediaNetworkState_Max:
+		return "HtmlMediaNetworkState_Max"
+	default:
+		return fmt.Sprintf("HtmlMediaNetworkState(%d)", int32(e))
+	}
+}
 
 type HtmlMediaReadyState int32
 
@@ -1282,6 +3698,27 @@ const (
 	HtmlMediaReadyState_Max            HtmlMediaReadyState = 2147483647
 )
 
+// String returns the HtmlMediaReadyState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlMediaReadyState) String() string {
+	switch e {
+	case HtmlMediaReadyStateHaveNothing:
+		return "HtmlMediaReadyStateHaveNothing"
+	case HtmlMediaReadyStateHaveMetadata:
+		return "HtmlMediaReadyStateHaveMetadata"
+	case HtmlMediaReadyStateHaveCurrentData:
+		return "HtmlMediaReadyStateHaveCurrentData"
+	case HtmlMediaReadyStateHaveFutureData:
+		return "HtmlMediaReadyStateHaveFutureData"
+	case HtmlMediaReadyStateHaveEnoughData:
+		return "HtmlMediaReadyStateHaveEnoughData"
+	case HtmlMediaReadyState_Max:
+		return "HtmlMediaReadyState_Max"
+	default:
+		return fmt.Sprintf("HtmlMediaReadyState(%d)", int32(e))
+	}
+}
+
 type HtmlMethod int32
 
 const (
@@ -1290,6 +3727,23 @@ const (
 	HtmlMethodPost   HtmlMethod = 2
 	HtmlMethod_Max   HtmlMethod = 2147483647
 )
+
+// String returns the HtmlMethod constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlMethod) String() string {
+	switch e {
+	case HtmlMethodNotSet:
+		return "HtmlMethodNotSet"
+	case HtmlMethodGet:
+		return "HtmlMethodGet"
+	case HtmlMethodPost:
+		return "HtmlMethodPost"
+	case HtmlMethod_Max:
+		return "HtmlMethod_Max"
+	default:
+		return fmt.Sprintf("HtmlMethod(%d)", int32(e))
+	}
+}
 
 type HtmlPersistState int32
 
@@ -1302,6 +3756,27 @@ const (
 	HtmlPersistState_Max     HtmlPersistState = 2147483647
 )
 
+// String returns the HtmlPersistState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlPersistState) String() string {
+	switch e {
+	case HtmlPersistStateNormal:
+		return "HtmlPersistStateNormal"
+	case HtmlPersistStateFavorite:
+		return "HtmlPersistStateFavorite"
+	case HtmlPersistStateHistory:
+		return "HtmlPersistStateHistory"
+	case HtmlPersistStateSnapshot:
+		return "HtmlPersistStateSnapshot"
+	case HtmlPersistStateUserData:
+		return "HtmlPersistStateUserData"
+	case HtmlPersistState_Max:
+		return "HtmlPersistState_Max"
+	default:
+		return fmt.Sprintf("HtmlPersistState(%d)", int32(e))
+	}
+}
+
 type HtmlReadyState int32
 
 const (
@@ -1312,6 +3787,27 @@ const (
 	HtmlReadyStatecomplete      HtmlReadyState = 4
 	HtmlReadyState_Max          HtmlReadyState = 2147483647
 )
+
+// String returns the HtmlReadyState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlReadyState) String() string {
+	switch e {
+	case HtmlReadyStateuninitialized:
+		return "HtmlReadyStateuninitialized"
+	case HtmlReadyStateloading:
+		return "HtmlReadyStateloading"
+	case HtmlReadyStateloaded:
+		return "HtmlReadyStateloaded"
+	case HtmlReadyStateinteractive:
+		return "HtmlReadyStateinteractive"
+	case HtmlReadyStatecomplete:
+		return "HtmlReadyStatecomplete"
+	case HtmlReadyState_Max:
+		return "HtmlReadyState_Max"
+	default:
+		return fmt.Sprintf("HtmlReadyState(%d)", int32(e))
+	}
+}
 
 type HtmlRules int32
 
@@ -1325,6 +3821,29 @@ const (
 	HtmlRules_Max   HtmlRules = 2147483647
 )
 
+// String returns the HtmlRules constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlRules) String() string {
+	switch e {
+	case HtmlRulesNotSet:
+		return "HtmlRulesNotSet"
+	case HtmlRulesnone:
+		return "HtmlRulesnone"
+	case HtmlRulesgroups:
+		return "HtmlRulesgroups"
+	case HtmlRulesrows:
+		return "HtmlRulesrows"
+	case HtmlRulescols:
+		return "HtmlRulescols"
+	case HtmlRulesall:
+		return "HtmlRulesall"
+	case HtmlRules_Max:
+		return "HtmlRules_Max"
+	default:
+		return fmt.Sprintf("HtmlRules(%d)", int32(e))
+	}
+}
+
 type HtmlSelectExFlag int32
 
 const (
@@ -1333,6 +3852,21 @@ const (
 	HtmlSelectExFlag_Max                  HtmlSelectExFlag = 2147483647
 )
 
+// String returns the HtmlSelectExFlag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlSelectExFlag) String() string {
+	switch e {
+	case HtmlSelectExFlagNone:
+		return "HtmlSelectExFlagNone"
+	case HtmlSelectExFlagHideSelectionInDesign:
+		return "HtmlSelectExFlagHideSelectionInDesign"
+	case HtmlSelectExFlag_Max:
+		return "HtmlSelectExFlag_Max"
+	default:
+		return fmt.Sprintf("HtmlSelectExFlag(%d)", int32(e))
+	}
+}
+
 type HtmlSelectType int32
 
 const (
@@ -1340,6 +3874,21 @@ const (
 	HtmlSelectTypeSelectMultiple HtmlSelectType = 2
 	HtmlSelectType_Max           HtmlSelectType = 2147483647
 )
+
+// String returns the HtmlSelectType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlSelectType) String() string {
+	switch e {
+	case HtmlSelectTypeSelectOne:
+		return "HtmlSelectTypeSelectOne"
+	case HtmlSelectTypeSelectMultiple:
+		return "HtmlSelectTypeSelectMultiple"
+	case HtmlSelectType_Max:
+		return "HtmlSelectType_Max"
+	default:
+		return fmt.Sprintf("HtmlSelectType(%d)", int32(e))
+	}
+}
 
 type HtmlSelection int32
 
@@ -1351,6 +3900,25 @@ const (
 	HtmlSelection_Max    HtmlSelection = 2147483647
 )
 
+// String returns the HtmlSelection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlSelection) String() string {
+	switch e {
+	case HtmlSelectionNone:
+		return "HtmlSelectionNone"
+	case HtmlSelectionText:
+		return "HtmlSelectionText"
+	case HtmlSelectionControl:
+		return "HtmlSelectionControl"
+	case HtmlSelectionTable:
+		return "HtmlSelectionTable"
+	case HtmlSelection_Max:
+		return "HtmlSelection_Max"
+	default:
+		return fmt.Sprintf("HtmlSelection(%d)", int32(e))
+	}
+}
+
 type HtmlSpellCheck int32
 
 const (
@@ -1361,6 +3929,25 @@ const (
 	HtmlSpellCheck_Max    HtmlSpellCheck = 2147483647
 )
 
+// String returns the HtmlSpellCheck constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlSpellCheck) String() string {
+	switch e {
+	case HtmlSpellCheckNotSet:
+		return "HtmlSpellCheckNotSet"
+	case HtmlSpellCheckTrue:
+		return "HtmlSpellCheckTrue"
+	case HtmlSpellCheckFalse:
+		return "HtmlSpellCheckFalse"
+	case HtmlSpellCheckDefault:
+		return "HtmlSpellCheckDefault"
+	case HtmlSpellCheck_Max:
+		return "HtmlSpellCheck_Max"
+	default:
+		return fmt.Sprintf("HtmlSpellCheck(%d)", int32(e))
+	}
+}
+
 type HtmlStart int32
 
 const (
@@ -1369,12 +3956,40 @@ const (
 	HtmlStart_Max      HtmlStart = 2147483647
 )
 
+// String returns the HtmlStart constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlStart) String() string {
+	switch e {
+	case HtmlStartfileopen:
+		return "HtmlStartfileopen"
+	case HtmlStartmouseover:
+		return "HtmlStartmouseover"
+	case HtmlStart_Max:
+		return "HtmlStart_Max"
+	default:
+		return fmt.Sprintf("HtmlStart(%d)", int32(e))
+	}
+}
+
 type HtmlTabIndex int32
 
 const (
 	HtmlTabIndexNotSet HtmlTabIndex = -32768
 	HtmlTabIndex_Max   HtmlTabIndex = 2147483647
 )
+
+// String returns the HtmlTabIndex constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlTabIndex) String() string {
+	switch e {
+	case HtmlTabIndexNotSet:
+		return "HtmlTabIndexNotSet"
+	case HtmlTabIndex_Max:
+		return "HtmlTabIndex_Max"
+	default:
+		return fmt.Sprintf("HtmlTabIndex(%d)", int32(e))
+	}
+}
 
 type HtmlUnit int32
 
@@ -1386,6 +4001,25 @@ const (
 	HtmlUnit_Max      HtmlUnit = 2147483647
 )
 
+// String returns the HtmlUnit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlUnit) String() string {
+	switch e {
+	case HtmlUnitCharacter:
+		return "HtmlUnitCharacter"
+	case HtmlUnitWord:
+		return "HtmlUnitWord"
+	case HtmlUnitSentence:
+		return "HtmlUnitSentence"
+	case HtmlUnitTextEdit:
+		return "HtmlUnitTextEdit"
+	case HtmlUnit_Max:
+		return "HtmlUnit_Max"
+	default:
+		return fmt.Sprintf("HtmlUnit(%d)", int32(e))
+	}
+}
+
 type HtmlWrap int32
 
 const (
@@ -1395,6 +4029,23 @@ const (
 	HtmlWrap_Max HtmlWrap = 2147483647
 )
 
+// String returns the HtmlWrap constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlWrap) String() string {
+	switch e {
+	case HtmlWrapOff:
+		return "HtmlWrapOff"
+	case HtmlWrapSoft:
+		return "HtmlWrapSoft"
+	case HtmlWrapHard:
+		return "HtmlWrapHard"
+	case HtmlWrap_Max:
+		return "HtmlWrap_Max"
+	default:
+		return fmt.Sprintf("HtmlWrap(%d)", int32(e))
+	}
+}
+
 type HtmlZOrder int32
 
 const (
@@ -1402,6 +4053,21 @@ const (
 	HtmlZOrderBack  HtmlZOrder = 1
 	HtmlZOrder_Max  HtmlZOrder = 2147483647
 )
+
+// String returns the HtmlZOrder constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HtmlZOrder) String() string {
+	switch e {
+	case HtmlZOrderFront:
+		return "HtmlZOrderFront"
+	case HtmlZOrderBack:
+		return "HtmlZOrderBack"
+	case HtmlZOrder_Max:
+		return "HtmlZOrder_Max"
+	default:
+		return fmt.Sprintf("HtmlZOrder(%d)", int32(e))
+	}
+}
 
 type LengthAdjust int32
 
@@ -1411,6 +4077,23 @@ const (
 	LENGTHADJUST_SPACINGANDGLYPHS LengthAdjust = 2
 	LengthAdjust_Max              LengthAdjust = 2147483647
 )
+
+// String returns the LengthAdjust constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LengthAdjust) String() string {
+	switch e {
+	case LENGTHADJUST_UNKNOWN:
+		return "LENGTHADJUST_UNKNOWN"
+	case LENGTHADJUST_SPACING:
+		return "LENGTHADJUST_SPACING"
+	case LENGTHADJUST_SPACINGANDGLYPHS:
+		return "LENGTHADJUST_SPACINGANDGLYPHS"
+	case LengthAdjust_Max:
+		return "LengthAdjust_Max"
+	default:
+		return fmt.Sprintf("LengthAdjust(%d)", int32(e))
+	}
+}
 
 type MediaType int32
 
@@ -1429,6 +4112,39 @@ const (
 	MediaType_Max       MediaType = 2147483647
 )
 
+// String returns the MediaType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MediaType) String() string {
+	switch e {
+	case MediaTypeNotSet:
+		return "MediaTypeNotSet"
+	case MediaTypeAll:
+		return "MediaTypeAll"
+	case MediaTypeAural:
+		return "MediaTypeAural"
+	case MediaTypeBraille:
+		return "MediaTypeBraille"
+	case MediaTypeEmbossed:
+		return "MediaTypeEmbossed"
+	case MediaTypeHandheld:
+		return "MediaTypeHandheld"
+	case MediaTypePrint:
+		return "MediaTypePrint"
+	case MediaTypeProjection:
+		return "MediaTypeProjection"
+	case MediaTypeScreen:
+		return "MediaTypeScreen"
+	case MediaTypeTty:
+		return "MediaTypeTty"
+	case MediaTypeTv:
+		return "MediaTypeTv"
+	case MediaType_Max:
+		return "MediaType_Max"
+	default:
+		return fmt.Sprintf("MediaType(%d)", int32(e))
+	}
+}
+
 type SandboxAllow int32
 
 const (
@@ -1440,6 +4156,27 @@ const (
 	SandboxAllow_Max          SandboxAllow = 2147483647
 )
 
+// String returns the SandboxAllow constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SandboxAllow) String() string {
+	switch e {
+	case SandboxAllowScripts:
+		return "SandboxAllowScripts"
+	case SandboxAllowSameOrigin:
+		return "SandboxAllowSameOrigin"
+	case SandboxAllowTopNavigation:
+		return "SandboxAllowTopNavigation"
+	case SandboxAllowForms:
+		return "SandboxAllowForms"
+	case SandboxAllowPopups:
+		return "SandboxAllowPopups"
+	case SandboxAllow_Max:
+		return "SandboxAllow_Max"
+	default:
+		return fmt.Sprintf("SandboxAllow(%d)", int32(e))
+	}
+}
+
 type StyleAccelerator int32
 
 const (
@@ -1447,6 +4184,21 @@ const (
 	StyleAcceleratorTrue  StyleAccelerator = 1
 	StyleAccelerator_Max  StyleAccelerator = 2147483647
 )
+
+// String returns the StyleAccelerator constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleAccelerator) String() string {
+	switch e {
+	case StyleAcceleratorFalse:
+		return "StyleAcceleratorFalse"
+	case StyleAcceleratorTrue:
+		return "StyleAcceleratorTrue"
+	case StyleAccelerator_Max:
+		return "StyleAccelerator_Max"
+	default:
+		return fmt.Sprintf("StyleAccelerator(%d)", int32(e))
+	}
+}
 
 type StyleAlignContent int32
 
@@ -1461,6 +4213,31 @@ const (
 	StyleAlignContent_Max         StyleAlignContent = 2147483647
 )
 
+// String returns the StyleAlignContent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleAlignContent) String() string {
+	switch e {
+	case StyleAlignContentFlexStart:
+		return "StyleAlignContentFlexStart"
+	case StyleAlignContentFlexEnd:
+		return "StyleAlignContentFlexEnd"
+	case StyleAlignContentCenter:
+		return "StyleAlignContentCenter"
+	case StyleAlignContentSpaceBetween:
+		return "StyleAlignContentSpaceBetween"
+	case StyleAlignContentSpaceAround:
+		return "StyleAlignContentSpaceAround"
+	case StyleAlignContentStretch:
+		return "StyleAlignContentStretch"
+	case StyleAlignContentNotSet:
+		return "StyleAlignContentNotSet"
+	case StyleAlignContent_Max:
+		return "StyleAlignContent_Max"
+	default:
+		return fmt.Sprintf("StyleAlignContent(%d)", int32(e))
+	}
+}
+
 type StyleAlignItems int32
 
 const (
@@ -1472,6 +4249,29 @@ const (
 	StyleAlignItemsNotSet    StyleAlignItems = 5
 	StyleAlignItems_Max      StyleAlignItems = 2147483647
 )
+
+// String returns the StyleAlignItems constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleAlignItems) String() string {
+	switch e {
+	case StyleAlignItemsFlexStart:
+		return "StyleAlignItemsFlexStart"
+	case StyleAlignItemsFlexEnd:
+		return "StyleAlignItemsFlexEnd"
+	case StyleAlignItemsCenter:
+		return "StyleAlignItemsCenter"
+	case StyleAlignItemsBaseline:
+		return "StyleAlignItemsBaseline"
+	case StyleAlignItemsStretch:
+		return "StyleAlignItemsStretch"
+	case StyleAlignItemsNotSet:
+		return "StyleAlignItemsNotSet"
+	case StyleAlignItems_Max:
+		return "StyleAlignItems_Max"
+	default:
+		return fmt.Sprintf("StyleAlignItems(%d)", int32(e))
+	}
+}
 
 type StyleAlignSelf int32
 
@@ -1485,6 +4285,31 @@ const (
 	StyleAlignSelfNotSet    StyleAlignSelf = 6
 	StyleAlignSelf_Max      StyleAlignSelf = 2147483647
 )
+
+// String returns the StyleAlignSelf constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleAlignSelf) String() string {
+	switch e {
+	case StyleAlignSelfFlexStart:
+		return "StyleAlignSelfFlexStart"
+	case StyleAlignSelfFlexEnd:
+		return "StyleAlignSelfFlexEnd"
+	case StyleAlignSelfCenter:
+		return "StyleAlignSelfCenter"
+	case StyleAlignSelfBaseline:
+		return "StyleAlignSelfBaseline"
+	case StyleAlignSelfStretch:
+		return "StyleAlignSelfStretch"
+	case StyleAlignSelfAuto:
+		return "StyleAlignSelfAuto"
+	case StyleAlignSelfNotSet:
+		return "StyleAlignSelfNotSet"
+	case StyleAlignSelf_Max:
+		return "StyleAlignSelf_Max"
+	default:
+		return fmt.Sprintf("StyleAlignSelf(%d)", int32(e))
+	}
+}
 
 type StyleAlignmentBaseline int32
 
@@ -1504,6 +4329,43 @@ const (
 	StyleAlignmentBaselineIdeographic    StyleAlignmentBaseline = 12
 	StyleAlignmentBaseline_Max           StyleAlignmentBaseline = 2147483647
 )
+
+// String returns the StyleAlignmentBaseline constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleAlignmentBaseline) String() string {
+	switch e {
+	case StyleAlignmentBaselineNotSet:
+		return "StyleAlignmentBaselineNotSet"
+	case StyleAlignmentBaselineAfterEdge:
+		return "StyleAlignmentBaselineAfterEdge"
+	case StyleAlignmentBaselineAlphabetic:
+		return "StyleAlignmentBaselineAlphabetic"
+	case StyleAlignmentBaselineAuto:
+		return "StyleAlignmentBaselineAuto"
+	case StyleAlignmentBaselineBaseline:
+		return "StyleAlignmentBaselineBaseline"
+	case StyleAlignmentBaselineBeforeEdge:
+		return "StyleAlignmentBaselineBeforeEdge"
+	case StyleAlignmentBaselineCentral:
+		return "StyleAlignmentBaselineCentral"
+	case StyleAlignmentBaselineHanging:
+		return "StyleAlignmentBaselineHanging"
+	case StyleAlignmentBaselineMathematical:
+		return "StyleAlignmentBaselineMathematical"
+	case StyleAlignmentBaselineMiddle:
+		return "StyleAlignmentBaselineMiddle"
+	case StyleAlignmentBaselineTextAfterEdge:
+		return "StyleAlignmentBaselineTextAfterEdge"
+	case StyleAlignmentBaselineTextBeforeEdge:
+		return "StyleAlignmentBaselineTextBeforeEdge"
+	case StyleAlignmentBaselineIdeographic:
+		return "StyleAlignmentBaselineIdeographic"
+	case StyleAlignmentBaseline_Max:
+		return "StyleAlignmentBaseline_Max"
+	default:
+		return fmt.Sprintf("StyleAlignmentBaseline(%d)", int32(e))
+	}
+}
 
 type StyleAttrType int32
 
@@ -1538,12 +4400,90 @@ const (
 	StyleAttrType_Max       StyleAttrType = 2147483647
 )
 
+// String returns the StyleAttrType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleAttrType) String() string {
+	switch e {
+	case StyleAttrTypeString:
+		return "StyleAttrTypeString"
+	case StyleAttrTypeColor:
+		return "StyleAttrTypeColor"
+	case StyleAttrTypeUrl:
+		return "StyleAttrTypeUrl"
+	case StyleAttrTypeInteger:
+		return "StyleAttrTypeInteger"
+	case StyleAttrTypeNumber:
+		return "StyleAttrTypeNumber"
+	case StyleAttrTypeLength:
+		return "StyleAttrTypeLength"
+	case StyleAttrTypePx:
+		return "StyleAttrTypePx"
+	case StyleAttrTypeEm:
+		return "StyleAttrTypeEm"
+	case StyleAttrTypeEx:
+		return "StyleAttrTypeEx"
+	case StyleAttrTypeIn:
+		return "StyleAttrTypeIn"
+	case StyleAttrTypeCm:
+		return "StyleAttrTypeCm"
+	case StyleAttrTypeMm:
+		return "StyleAttrTypeMm"
+	case StyleAttrTypePt:
+		return "StyleAttrTypePt"
+	case StyleAttrTypePc:
+		return "StyleAttrTypePc"
+	case StyleAttrTypeRem:
+		return "StyleAttrTypeRem"
+	case StyleAttrTypeCh:
+		return "StyleAttrTypeCh"
+	case StyleAttrTypeVh:
+		return "StyleAttrTypeVh"
+	case StyleAttrTypeVw:
+		return "StyleAttrTypeVw"
+	case StyleAttrTypeVmin:
+		return "StyleAttrTypeVmin"
+	case StyleAttrTypePercentage:
+		return "StyleAttrTypePercentage"
+	case StyleAttrTypeAngle:
+		return "StyleAttrTypeAngle"
+	case StyleAttrTypeDeg:
+		return "StyleAttrTypeDeg"
+	case StyleAttrTypeRad:
+		return "StyleAttrTypeRad"
+	case StyleAttrTypeGrad:
+		return "StyleAttrTypeGrad"
+	case StyleAttrTypeTime:
+		return "StyleAttrTypeTime"
+	case StyleAttrTypeS:
+		return "StyleAttrTypeS"
+	case StyleAttrTypeMs:
+		return "StyleAttrTypeMs"
+	case StyleAttrType_Max:
+		return "StyleAttrType_Max"
+	default:
+		return fmt.Sprintf("StyleAttrType(%d)", int32(e))
+	}
+}
+
 type StyleAuto int32
 
 const (
 	StyleAutoAuto StyleAuto = 0
 	StyleAuto_Max StyleAuto = 2147483647
 )
+
+// String returns the StyleAuto constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleAuto) String() string {
+	switch e {
+	case StyleAutoAuto:
+		return "StyleAutoAuto"
+	case StyleAuto_Max:
+		return "StyleAuto_Max"
+	default:
+		return fmt.Sprintf("StyleAuto(%d)", int32(e))
+	}
+}
 
 type StyleBackfaceVisibility int32
 
@@ -1554,6 +4494,23 @@ const (
 	StyleBackfaceVisibility_Max    StyleBackfaceVisibility = 2147483647
 )
 
+// String returns the StyleBackfaceVisibility constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBackfaceVisibility) String() string {
+	switch e {
+	case StyleBackfaceVisibilityVisible:
+		return "StyleBackfaceVisibilityVisible"
+	case StyleBackfaceVisibilityHidden:
+		return "StyleBackfaceVisibilityHidden"
+	case StyleBackfaceVisibilityNotSet:
+		return "StyleBackfaceVisibilityNotSet"
+	case StyleBackfaceVisibility_Max:
+		return "StyleBackfaceVisibility_Max"
+	default:
+		return fmt.Sprintf("StyleBackfaceVisibility(%d)", int32(e))
+	}
+}
+
 type StyleBackgroundAttachment int32
 
 const (
@@ -1562,6 +4519,23 @@ const (
 	StyleBackgroundAttachmentNotSet StyleBackgroundAttachment = 2
 	StyleBackgroundAttachment_Max   StyleBackgroundAttachment = 2147483647
 )
+
+// String returns the StyleBackgroundAttachment constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBackgroundAttachment) String() string {
+	switch e {
+	case StyleBackgroundAttachmentFixed:
+		return "StyleBackgroundAttachmentFixed"
+	case StyleBackgroundAttachmentScroll:
+		return "StyleBackgroundAttachmentScroll"
+	case StyleBackgroundAttachmentNotSet:
+		return "StyleBackgroundAttachmentNotSet"
+	case StyleBackgroundAttachment_Max:
+		return "StyleBackgroundAttachment_Max"
+	default:
+		return fmt.Sprintf("StyleBackgroundAttachment(%d)", int32(e))
+	}
+}
 
 type StyleBackgroundAttachment3 int32
 
@@ -1573,6 +4547,25 @@ const (
 	StyleBackgroundAttachment3_Max   StyleBackgroundAttachment3 = 2147483647
 )
 
+// String returns the StyleBackgroundAttachment3 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBackgroundAttachment3) String() string {
+	switch e {
+	case StyleBackgroundAttachment3Fixed:
+		return "StyleBackgroundAttachment3Fixed"
+	case StyleBackgroundAttachment3Scroll:
+		return "StyleBackgroundAttachment3Scroll"
+	case StyleBackgroundAttachment3Local:
+		return "StyleBackgroundAttachment3Local"
+	case StyleBackgroundAttachment3NotSet:
+		return "StyleBackgroundAttachment3NotSet"
+	case StyleBackgroundAttachment3_Max:
+		return "StyleBackgroundAttachment3_Max"
+	default:
+		return fmt.Sprintf("StyleBackgroundAttachment3(%d)", int32(e))
+	}
+}
+
 type StyleBackgroundClip int32
 
 const (
@@ -1583,6 +4576,25 @@ const (
 	StyleBackgroundClip_Max       StyleBackgroundClip = 2147483647
 )
 
+// String returns the StyleBackgroundClip constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBackgroundClip) String() string {
+	switch e {
+	case StyleBackgroundClipBorderBox:
+		return "StyleBackgroundClipBorderBox"
+	case StyleBackgroundClipPaddingBox:
+		return "StyleBackgroundClipPaddingBox"
+	case StyleBackgroundClipContentBox:
+		return "StyleBackgroundClipContentBox"
+	case StyleBackgroundClipNotSet:
+		return "StyleBackgroundClipNotSet"
+	case StyleBackgroundClip_Max:
+		return "StyleBackgroundClip_Max"
+	default:
+		return fmt.Sprintf("StyleBackgroundClip(%d)", int32(e))
+	}
+}
+
 type StyleBackgroundOrigin int32
 
 const (
@@ -1592,6 +4604,25 @@ const (
 	StyleBackgroundOriginNotSet     StyleBackgroundOrigin = 3
 	StyleBackgroundOrigin_Max       StyleBackgroundOrigin = 2147483647
 )
+
+// String returns the StyleBackgroundOrigin constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBackgroundOrigin) String() string {
+	switch e {
+	case StyleBackgroundOriginBorderBox:
+		return "StyleBackgroundOriginBorderBox"
+	case StyleBackgroundOriginPaddingBox:
+		return "StyleBackgroundOriginPaddingBox"
+	case StyleBackgroundOriginContentBox:
+		return "StyleBackgroundOriginContentBox"
+	case StyleBackgroundOriginNotSet:
+		return "StyleBackgroundOriginNotSet"
+	case StyleBackgroundOrigin_Max:
+		return "StyleBackgroundOrigin_Max"
+	default:
+		return fmt.Sprintf("StyleBackgroundOrigin(%d)", int32(e))
+	}
+}
 
 type StyleBackgroundRepeat int32
 
@@ -1604,6 +4635,27 @@ const (
 	StyleBackgroundRepeat_Max     StyleBackgroundRepeat = 2147483647
 )
 
+// String returns the StyleBackgroundRepeat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBackgroundRepeat) String() string {
+	switch e {
+	case StyleBackgroundRepeatRepeat:
+		return "StyleBackgroundRepeatRepeat"
+	case StyleBackgroundRepeatRepeatX:
+		return "StyleBackgroundRepeatRepeatX"
+	case StyleBackgroundRepeatRepeatY:
+		return "StyleBackgroundRepeatRepeatY"
+	case StyleBackgroundRepeatNoRepeat:
+		return "StyleBackgroundRepeatNoRepeat"
+	case StyleBackgroundRepeatNotSet:
+		return "StyleBackgroundRepeatNotSet"
+	case StyleBackgroundRepeat_Max:
+		return "StyleBackgroundRepeat_Max"
+	default:
+		return fmt.Sprintf("StyleBackgroundRepeat(%d)", int32(e))
+	}
+}
+
 type StyleBaselineShift int32
 
 const (
@@ -1612,6 +4664,23 @@ const (
 	StyleBaselineShiftSuper    StyleBaselineShift = 2
 	StyleBaselineShift_Max     StyleBaselineShift = 2147483647
 )
+
+// String returns the StyleBaselineShift constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBaselineShift) String() string {
+	switch e {
+	case StyleBaselineShiftBaseline:
+		return "StyleBaselineShiftBaseline"
+	case StyleBaselineShiftSub:
+		return "StyleBaselineShiftSub"
+	case StyleBaselineShiftSuper:
+		return "StyleBaselineShiftSuper"
+	case StyleBaselineShift_Max:
+		return "StyleBaselineShift_Max"
+	default:
+		return fmt.Sprintf("StyleBaselineShift(%d)", int32(e))
+	}
+}
 
 type StyleBidi int32
 
@@ -1624,6 +4693,27 @@ const (
 	StyleBidi_Max     StyleBidi = 2147483647
 )
 
+// String returns the StyleBidi constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBidi) String() string {
+	switch e {
+	case StyleBidiNotSet:
+		return "StyleBidiNotSet"
+	case StyleBidiNormal:
+		return "StyleBidiNormal"
+	case StyleBidiEmbed:
+		return "StyleBidiEmbed"
+	case StyleBidiOverride:
+		return "StyleBidiOverride"
+	case StyleBidiInherit:
+		return "StyleBidiInherit"
+	case StyleBidi_Max:
+		return "StyleBidi_Max"
+	default:
+		return fmt.Sprintf("StyleBidi(%d)", int32(e))
+	}
+}
+
 type StyleBlockProgression int32
 
 const (
@@ -1635,6 +4725,27 @@ const (
 	StyleBlockProgression_Max   StyleBlockProgression = 2147483647
 )
 
+// String returns the StyleBlockProgression constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBlockProgression) String() string {
+	switch e {
+	case StyleBlockProgressionTb:
+		return "StyleBlockProgressionTb"
+	case StyleBlockProgressionRl:
+		return "StyleBlockProgressionRl"
+	case StyleBlockProgressionBt:
+		return "StyleBlockProgressionBt"
+	case StyleBlockProgressionLr:
+		return "StyleBlockProgressionLr"
+	case StyleBlockProgressionNotSet:
+		return "StyleBlockProgressionNotSet"
+	case StyleBlockProgression_Max:
+		return "StyleBlockProgression_Max"
+	default:
+		return fmt.Sprintf("StyleBlockProgression(%d)", int32(e))
+	}
+}
+
 type StyleBool int32
 
 const (
@@ -1642,6 +4753,21 @@ const (
 	StyleBoolTrue  StyleBool = 1
 	StyleBool_Max  StyleBool = 2147483647
 )
+
+// String returns the StyleBool constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBool) String() string {
+	switch e {
+	case StyleBoolFalse:
+		return "StyleBoolFalse"
+	case StyleBoolTrue:
+		return "StyleBoolTrue"
+	case StyleBool_Max:
+		return "StyleBool_Max"
+	default:
+		return fmt.Sprintf("StyleBool(%d)", int32(e))
+	}
+}
 
 type StyleBorderCollapse int32
 
@@ -1651,6 +4777,23 @@ const (
 	StyleBorderCollapseCollapse StyleBorderCollapse = 2
 	StyleBorderCollapse_Max     StyleBorderCollapse = 2147483647
 )
+
+// String returns the StyleBorderCollapse constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBorderCollapse) String() string {
+	switch e {
+	case StyleBorderCollapseNotSet:
+		return "StyleBorderCollapseNotSet"
+	case StyleBorderCollapseSeparate:
+		return "StyleBorderCollapseSeparate"
+	case StyleBorderCollapseCollapse:
+		return "StyleBorderCollapseCollapse"
+	case StyleBorderCollapse_Max:
+		return "StyleBorderCollapse_Max"
+	default:
+		return fmt.Sprintf("StyleBorderCollapse(%d)", int32(e))
+	}
+}
 
 type StyleBorderImageRepeat int32
 
@@ -1663,6 +4806,27 @@ const (
 	StyleBorderImageRepeat_Max    StyleBorderImageRepeat = 2147483647
 )
 
+// String returns the StyleBorderImageRepeat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBorderImageRepeat) String() string {
+	switch e {
+	case StyleBorderImageRepeatStretch:
+		return "StyleBorderImageRepeatStretch"
+	case StyleBorderImageRepeatRepeat:
+		return "StyleBorderImageRepeatRepeat"
+	case StyleBorderImageRepeatRound:
+		return "StyleBorderImageRepeatRound"
+	case StyleBorderImageRepeatSpace:
+		return "StyleBorderImageRepeatSpace"
+	case StyleBorderImageRepeatNotSet:
+		return "StyleBorderImageRepeatNotSet"
+	case StyleBorderImageRepeat_Max:
+		return "StyleBorderImageRepeat_Max"
+	default:
+		return fmt.Sprintf("StyleBorderImageRepeat(%d)", int32(e))
+	}
+}
+
 type StyleBorderImageSliceFill int32
 
 const (
@@ -1670,6 +4834,21 @@ const (
 	StyleBorderImageSliceFillFill   StyleBorderImageSliceFill = 1
 	StyleBorderImageSliceFill_Max   StyleBorderImageSliceFill = 2147483647
 )
+
+// String returns the StyleBorderImageSliceFill constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBorderImageSliceFill) String() string {
+	switch e {
+	case StyleBorderImageSliceFillNotSet:
+		return "StyleBorderImageSliceFillNotSet"
+	case StyleBorderImageSliceFillFill:
+		return "StyleBorderImageSliceFillFill"
+	case StyleBorderImageSliceFill_Max:
+		return "StyleBorderImageSliceFill_Max"
+	default:
+		return fmt.Sprintf("StyleBorderImageSliceFill(%d)", int32(e))
+	}
+}
 
 type StyleBorderStyle int32
 
@@ -1689,6 +4868,41 @@ const (
 	StyleBorderStyle_Max        StyleBorderStyle = 2147483647
 )
 
+// String returns the StyleBorderStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBorderStyle) String() string {
+	switch e {
+	case StyleBorderStyleNotSet:
+		return "StyleBorderStyleNotSet"
+	case StyleBorderStyleDotted:
+		return "StyleBorderStyleDotted"
+	case StyleBorderStyleDashed:
+		return "StyleBorderStyleDashed"
+	case StyleBorderStyleSolid:
+		return "StyleBorderStyleSolid"
+	case StyleBorderStyleDouble:
+		return "StyleBorderStyleDouble"
+	case StyleBorderStyleGroove:
+		return "StyleBorderStyleGroove"
+	case StyleBorderStyleRidge:
+		return "StyleBorderStyleRidge"
+	case StyleBorderStyleInset:
+		return "StyleBorderStyleInset"
+	case StyleBorderStyleOutset:
+		return "StyleBorderStyleOutset"
+	case StyleBorderStyleWindowInset:
+		return "StyleBorderStyleWindowInset"
+	case StyleBorderStyleNone:
+		return "StyleBorderStyleNone"
+	case StyleBorderStyleHidden:
+		return "StyleBorderStyleHidden"
+	case StyleBorderStyle_Max:
+		return "StyleBorderStyle_Max"
+	default:
+		return fmt.Sprintf("StyleBorderStyle(%d)", int32(e))
+	}
+}
+
 type StyleBorderWidth int32
 
 const (
@@ -1698,6 +4912,23 @@ const (
 	StyleBorderWidth_Max   StyleBorderWidth = 2147483647
 )
 
+// String returns the StyleBorderWidth constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBorderWidth) String() string {
+	switch e {
+	case StyleBorderWidthThin:
+		return "StyleBorderWidthThin"
+	case StyleBorderWidthMedium:
+		return "StyleBorderWidthMedium"
+	case StyleBorderWidthThick:
+		return "StyleBorderWidthThick"
+	case StyleBorderWidth_Max:
+		return "StyleBorderWidth_Max"
+	default:
+		return fmt.Sprintf("StyleBorderWidth(%d)", int32(e))
+	}
+}
+
 type StyleBoxSizing int32
 
 const (
@@ -1706,6 +4937,23 @@ const (
 	StyleBoxSizingBorderBox  StyleBoxSizing = 2
 	StyleBoxSizing_Max       StyleBoxSizing = 2147483647
 )
+
+// String returns the StyleBoxSizing constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBoxSizing) String() string {
+	switch e {
+	case StyleBoxSizingNotSet:
+		return "StyleBoxSizingNotSet"
+	case StyleBoxSizingContentBox:
+		return "StyleBoxSizingContentBox"
+	case StyleBoxSizingBorderBox:
+		return "StyleBoxSizingBorderBox"
+	case StyleBoxSizing_Max:
+		return "StyleBoxSizing_Max"
+	default:
+		return fmt.Sprintf("StyleBoxSizing(%d)", int32(e))
+	}
+}
 
 type StyleBreak int32
 
@@ -1723,6 +4971,37 @@ const (
 	StyleBreak_Max        StyleBreak = 2147483647
 )
 
+// String returns the StyleBreak constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBreak) String() string {
+	switch e {
+	case StyleBreakNotSet:
+		return "StyleBreakNotSet"
+	case StyleBreakAuto:
+		return "StyleBreakAuto"
+	case StyleBreakAlways:
+		return "StyleBreakAlways"
+	case StyleBreakAvoid:
+		return "StyleBreakAvoid"
+	case StyleBreakLeft:
+		return "StyleBreakLeft"
+	case StyleBreakRight:
+		return "StyleBreakRight"
+	case StyleBreakPage:
+		return "StyleBreakPage"
+	case StyleBreakColumn:
+		return "StyleBreakColumn"
+	case StyleBreakAvoidPage:
+		return "StyleBreakAvoidPage"
+	case StyleBreakAvoidColumn:
+		return "StyleBreakAvoidColumn"
+	case StyleBreak_Max:
+		return "StyleBreak_Max"
+	default:
+		return fmt.Sprintf("StyleBreak(%d)", int32(e))
+	}
+}
+
 type StyleBreakInside int32
 
 const (
@@ -1733,6 +5012,27 @@ const (
 	StyleBreakInsideAvoidColumn StyleBreakInside = 4
 	StyleBreakInside_Max        StyleBreakInside = 2147483647
 )
+
+// String returns the StyleBreakInside constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleBreakInside) String() string {
+	switch e {
+	case StyleBreakInsideNotSet:
+		return "StyleBreakInsideNotSet"
+	case StyleBreakInsideAuto:
+		return "StyleBreakInsideAuto"
+	case StyleBreakInsideAvoid:
+		return "StyleBreakInsideAvoid"
+	case StyleBreakInsideAvoidPage:
+		return "StyleBreakInsideAvoidPage"
+	case StyleBreakInsideAvoidColumn:
+		return "StyleBreakInsideAvoidColumn"
+	case StyleBreakInside_Max:
+		return "StyleBreakInside_Max"
+	default:
+		return fmt.Sprintf("StyleBreakInside(%d)", int32(e))
+	}
+}
 
 type StyleCaptionSide int32
 
@@ -1745,6 +5045,27 @@ const (
 	StyleCaptionSide_Max   StyleCaptionSide = 2147483647
 )
 
+// String returns the StyleCaptionSide constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleCaptionSide) String() string {
+	switch e {
+	case StyleCaptionSideNotSet:
+		return "StyleCaptionSideNotSet"
+	case StyleCaptionSideTop:
+		return "StyleCaptionSideTop"
+	case StyleCaptionSideBottom:
+		return "StyleCaptionSideBottom"
+	case StyleCaptionSideLeft:
+		return "StyleCaptionSideLeft"
+	case StyleCaptionSideRight:
+		return "StyleCaptionSideRight"
+	case StyleCaptionSide_Max:
+		return "StyleCaptionSide_Max"
+	default:
+		return fmt.Sprintf("StyleCaptionSide(%d)", int32(e))
+	}
+}
+
 type StyleClipRule int32
 
 const (
@@ -1753,6 +5074,23 @@ const (
 	StyleClipRuleEvenOdd StyleClipRule = 2
 	StyleClipRule_Max    StyleClipRule = 2147483647
 )
+
+// String returns the StyleClipRule constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleClipRule) String() string {
+	switch e {
+	case StyleClipRuleNotSet:
+		return "StyleClipRuleNotSet"
+	case StyleClipRuleNonZero:
+		return "StyleClipRuleNonZero"
+	case StyleClipRuleEvenOdd:
+		return "StyleClipRuleEvenOdd"
+	case StyleClipRule_Max:
+		return "StyleClipRule_Max"
+	default:
+		return fmt.Sprintf("StyleClipRule(%d)", int32(e))
+	}
+}
 
 type StyleColorInterpolationFilters int32
 
@@ -1764,6 +5102,25 @@ const (
 	StyleColorInterpolationFilters_Max      StyleColorInterpolationFilters = 2147483647
 )
 
+// String returns the StyleColorInterpolationFilters constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleColorInterpolationFilters) String() string {
+	switch e {
+	case StyleColorInterpolationFiltersAuto:
+		return "StyleColorInterpolationFiltersAuto"
+	case StyleColorInterpolationFiltersSRgb:
+		return "StyleColorInterpolationFiltersSRgb"
+	case StyleColorInterpolationFiltersLinearRgb:
+		return "StyleColorInterpolationFiltersLinearRgb"
+	case StyleColorInterpolationFiltersNotSet:
+		return "StyleColorInterpolationFiltersNotSet"
+	case StyleColorInterpolationFilters_Max:
+		return "StyleColorInterpolationFilters_Max"
+	default:
+		return fmt.Sprintf("StyleColorInterpolationFilters(%d)", int32(e))
+	}
+}
+
 type StyleColumnFill int32
 
 const (
@@ -1772,6 +5129,23 @@ const (
 	StyleColumnFillNotSet  StyleColumnFill = 2
 	StyleColumnFill_Max    StyleColumnFill = 2147483647
 )
+
+// String returns the StyleColumnFill constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleColumnFill) String() string {
+	switch e {
+	case StyleColumnFillAuto:
+		return "StyleColumnFillAuto"
+	case StyleColumnFillBalance:
+		return "StyleColumnFillBalance"
+	case StyleColumnFillNotSet:
+		return "StyleColumnFillNotSet"
+	case StyleColumnFill_Max:
+		return "StyleColumnFill_Max"
+	default:
+		return fmt.Sprintf("StyleColumnFill(%d)", int32(e))
+	}
+}
 
 type StyleColumnSpan int32
 
@@ -1782,6 +5156,25 @@ const (
 	StyleColumnSpanNotSet StyleColumnSpan = 3
 	StyleColumnSpan_Max   StyleColumnSpan = 2147483647
 )
+
+// String returns the StyleColumnSpan constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleColumnSpan) String() string {
+	switch e {
+	case StyleColumnSpanNone:
+		return "StyleColumnSpanNone"
+	case StyleColumnSpanAll:
+		return "StyleColumnSpanAll"
+	case StyleColumnSpanOne:
+		return "StyleColumnSpanOne"
+	case StyleColumnSpanNotSet:
+		return "StyleColumnSpanNotSet"
+	case StyleColumnSpan_Max:
+		return "StyleColumnSpan_Max"
+	default:
+		return fmt.Sprintf("StyleColumnSpan(%d)", int32(e))
+	}
+}
 
 type StyleCursor int32
 
@@ -1824,6 +5217,87 @@ const (
 	StyleCursor_Max          StyleCursor = 2147483647
 )
 
+// String returns the StyleCursor constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleCursor) String() string {
+	switch e {
+	case StyleCursorAuto:
+		return "StyleCursorAuto"
+	case StyleCursorCrosshair:
+		return "StyleCursorCrosshair"
+	case StyleCursorDefault:
+		return "StyleCursorDefault"
+	case StyleCursorHand:
+		return "StyleCursorHand"
+	case StyleCursorMove:
+		return "StyleCursorMove"
+	case StyleCursorE_resize:
+		return "StyleCursorE_resize"
+	case StyleCursorNe_resize:
+		return "StyleCursorNe_resize"
+	case StyleCursorNw_resize:
+		return "StyleCursorNw_resize"
+	case StyleCursorN_resize:
+		return "StyleCursorN_resize"
+	case StyleCursorSe_resize:
+		return "StyleCursorSe_resize"
+	case StyleCursorSw_resize:
+		return "StyleCursorSw_resize"
+	case StyleCursorS_resize:
+		return "StyleCursorS_resize"
+	case StyleCursorW_resize:
+		return "StyleCursorW_resize"
+	case StyleCursorText:
+		return "StyleCursorText"
+	case StyleCursorWait:
+		return "StyleCursorWait"
+	case StyleCursorHelp:
+		return "StyleCursorHelp"
+	case StyleCursorPointer:
+		return "StyleCursorPointer"
+	case StyleCursorProgress:
+		return "StyleCursorProgress"
+	case StyleCursorNot_allowed:
+		return "StyleCursorNot_allowed"
+	case StyleCursorNo_drop:
+		return "StyleCursorNo_drop"
+	case StyleCursorVertical_text:
+		return "StyleCursorVertical_text"
+	case StyleCursorall_scroll:
+		return "StyleCursorall_scroll"
+	case StyleCursorcol_resize:
+		return "StyleCursorcol_resize"
+	case StyleCursorrow_resize:
+		return "StyleCursorrow_resize"
+	case StyleCursorNone:
+		return "StyleCursorNone"
+	case StyleCursorContext_menu:
+		return "StyleCursorContext_menu"
+	case StyleCursorEw_resize:
+		return "StyleCursorEw_resize"
+	case StyleCursorNs_resize:
+		return "StyleCursorNs_resize"
+	case StyleCursorNesw_resize:
+		return "StyleCursorNesw_resize"
+	case StyleCursorNwse_resize:
+		return "StyleCursorNwse_resize"
+	case StyleCursorCell:
+		return "StyleCursorCell"
+	case StyleCursorCopy:
+		return "StyleCursorCopy"
+	case StyleCursorAlias:
+		return "StyleCursorAlias"
+	case StyleCursorcustom:
+		return "StyleCursorcustom"
+	case StyleCursorNotSet:
+		return "StyleCursorNotSet"
+	case StyleCursor_Max:
+		return "StyleCursor_Max"
+	default:
+		return fmt.Sprintf("StyleCursor(%d)", int32(e))
+	}
+}
+
 type StyleDataRepeat int32
 
 const (
@@ -1832,6 +5306,21 @@ const (
 	StyleDataRepeat_Max  StyleDataRepeat = 2147483647
 )
 
+// String returns the StyleDataRepeat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleDataRepeat) String() string {
+	switch e {
+	case StyleDataRepeatNone:
+		return "StyleDataRepeatNone"
+	case StyleDataRepeatInner:
+		return "StyleDataRepeatInner"
+	case StyleDataRepeat_Max:
+		return "StyleDataRepeat_Max"
+	default:
+		return fmt.Sprintf("StyleDataRepeat(%d)", int32(e))
+	}
+}
+
 type StyleDefaultTextSelection int32
 
 const (
@@ -1839,6 +5328,21 @@ const (
 	StyleDefaultTextSelectionTrue  StyleDefaultTextSelection = 1
 	StyleDefaultTextSelection_Max  StyleDefaultTextSelection = 2147483647
 )
+
+// String returns the StyleDefaultTextSelection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleDefaultTextSelection) String() string {
+	switch e {
+	case StyleDefaultTextSelectionFalse:
+		return "StyleDefaultTextSelectionFalse"
+	case StyleDefaultTextSelectionTrue:
+		return "StyleDefaultTextSelectionTrue"
+	case StyleDefaultTextSelection_Max:
+		return "StyleDefaultTextSelection_Max"
+	default:
+		return fmt.Sprintf("StyleDefaultTextSelection(%d)", int32(e))
+	}
+}
 
 type StyleDir int32
 
@@ -1849,6 +5353,25 @@ const (
 	StyleDirInherit     StyleDir = 3
 	StyleDir_Max        StyleDir = 2147483647
 )
+
+// String returns the StyleDir constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleDir) String() string {
+	switch e {
+	case StyleDirNotSet:
+		return "StyleDirNotSet"
+	case StyleDirLeftToRight:
+		return "StyleDirLeftToRight"
+	case StyleDirRightToLeft:
+		return "StyleDirRightToLeft"
+	case StyleDirInherit:
+		return "StyleDirInherit"
+	case StyleDir_Max:
+		return "StyleDir_Max"
+	default:
+		return fmt.Sprintf("StyleDir(%d)", int32(e))
+	}
+}
 
 type StyleDisplay int32
 
@@ -1886,6 +5409,77 @@ const (
 	StyleDisplay_Max              StyleDisplay = 2147483647
 )
 
+// String returns the StyleDisplay constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleDisplay) String() string {
+	switch e {
+	case StyleDisplayNotSet:
+		return "StyleDisplayNotSet"
+	case StyleDisplayBlock:
+		return "StyleDisplayBlock"
+	case StyleDisplayInline:
+		return "StyleDisplayInline"
+	case StyleDisplayListItem:
+		return "StyleDisplayListItem"
+	case StyleDisplayNone:
+		return "StyleDisplayNone"
+	case StyleDisplayTableHeaderGroup:
+		return "StyleDisplayTableHeaderGroup"
+	case StyleDisplayTableFooterGroup:
+		return "StyleDisplayTableFooterGroup"
+	case StyleDisplayInlineBlock:
+		return "StyleDisplayInlineBlock"
+	case StyleDisplayTable:
+		return "StyleDisplayTable"
+	case StyleDisplayInlineTable:
+		return "StyleDisplayInlineTable"
+	case StyleDisplayTableRow:
+		return "StyleDisplayTableRow"
+	case StyleDisplayTableRowGroup:
+		return "StyleDisplayTableRowGroup"
+	case StyleDisplayTableColumn:
+		return "StyleDisplayTableColumn"
+	case StyleDisplayTableColumnGroup:
+		return "StyleDisplayTableColumnGroup"
+	case StyleDisplayTableCell:
+		return "StyleDisplayTableCell"
+	case StyleDisplayTableCaption:
+		return "StyleDisplayTableCaption"
+	case StyleDisplayRunIn:
+		return "StyleDisplayRunIn"
+	case StyleDisplayRuby:
+		return "StyleDisplayRuby"
+	case StyleDisplayRubyBase:
+		return "StyleDisplayRubyBase"
+	case StyleDisplayRubyText:
+		return "StyleDisplayRubyText"
+	case StyleDisplayRubyBaseContainer:
+		return "StyleDisplayRubyBaseContainer"
+	case StyleDisplayRubyTextContainer:
+		return "StyleDisplayRubyTextContainer"
+	case StyleDisplayMsFlexbox:
+		return "StyleDisplayMsFlexbox"
+	case StyleDisplayMsInlineFlexbox:
+		return "StyleDisplayMsInlineFlexbox"
+	case StyleDisplayMsGrid:
+		return "StyleDisplayMsGrid"
+	case StyleDisplayMsInlineGrid:
+		return "StyleDisplayMsInlineGrid"
+	case StyleDisplayFlex:
+		return "StyleDisplayFlex"
+	case StyleDisplayInlineFlex:
+		return "StyleDisplayInlineFlex"
+	case StyleDisplayWebkitBox:
+		return "StyleDisplayWebkitBox"
+	case StyleDisplayWebkitInlineBox:
+		return "StyleDisplayWebkitInlineBox"
+	case StyleDisplay_Max:
+		return "StyleDisplay_Max"
+	default:
+		return fmt.Sprintf("StyleDisplay(%d)", int32(e))
+	}
+}
+
 type StyleDominantBaseline int32
 
 const (
@@ -1905,6 +5499,43 @@ const (
 	StyleDominantBaseline_Max           StyleDominantBaseline = 2147483647
 )
 
+// String returns the StyleDominantBaseline constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleDominantBaseline) String() string {
+	switch e {
+	case StyleDominantBaselineNotSet:
+		return "StyleDominantBaselineNotSet"
+	case StyleDominantBaselineAlphabetic:
+		return "StyleDominantBaselineAlphabetic"
+	case StyleDominantBaselineAuto:
+		return "StyleDominantBaselineAuto"
+	case StyleDominantBaselineCentral:
+		return "StyleDominantBaselineCentral"
+	case StyleDominantBaselineHanging:
+		return "StyleDominantBaselineHanging"
+	case StyleDominantBaselineIdeographic:
+		return "StyleDominantBaselineIdeographic"
+	case StyleDominantBaselineMathematical:
+		return "StyleDominantBaselineMathematical"
+	case StyleDominantBaselineMiddle:
+		return "StyleDominantBaselineMiddle"
+	case StyleDominantBaselineNoChange:
+		return "StyleDominantBaselineNoChange"
+	case StyleDominantBaselineResetSize:
+		return "StyleDominantBaselineResetSize"
+	case StyleDominantBaselineTextAfterEdge:
+		return "StyleDominantBaselineTextAfterEdge"
+	case StyleDominantBaselineTextBeforeEdge:
+		return "StyleDominantBaselineTextBeforeEdge"
+	case StyleDominantBaselineUseScript:
+		return "StyleDominantBaselineUseScript"
+	case StyleDominantBaseline_Max:
+		return "StyleDominantBaseline_Max"
+	default:
+		return fmt.Sprintf("StyleDominantBaseline(%d)", int32(e))
+	}
+}
+
 type StyleEmptyCells int32
 
 const (
@@ -1913,6 +5544,23 @@ const (
 	StyleEmptyCellsHide   StyleEmptyCells = 2
 	StyleEmptyCells_Max   StyleEmptyCells = 2147483647
 )
+
+// String returns the StyleEmptyCells constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleEmptyCells) String() string {
+	switch e {
+	case StyleEmptyCellsNotSet:
+		return "StyleEmptyCellsNotSet"
+	case StyleEmptyCellsShow:
+		return "StyleEmptyCellsShow"
+	case StyleEmptyCellsHide:
+		return "StyleEmptyCellsHide"
+	case StyleEmptyCells_Max:
+		return "StyleEmptyCells_Max"
+	default:
+		return fmt.Sprintf("StyleEmptyCells(%d)", int32(e))
+	}
+}
 
 type StyleEnableBackground int32
 
@@ -1924,6 +5572,25 @@ const (
 	StyleEnableBackground_Max       StyleEnableBackground = 2147483647
 )
 
+// String returns the StyleEnableBackground constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleEnableBackground) String() string {
+	switch e {
+	case StyleEnableBackgroundNotSet:
+		return "StyleEnableBackgroundNotSet"
+	case StyleEnableBackgroundAccumulate:
+		return "StyleEnableBackgroundAccumulate"
+	case StyleEnableBackgroundNew:
+		return "StyleEnableBackgroundNew"
+	case StyleEnableBackgroundInherit:
+		return "StyleEnableBackgroundInherit"
+	case StyleEnableBackground_Max:
+		return "StyleEnableBackground_Max"
+	default:
+		return fmt.Sprintf("StyleEnableBackground(%d)", int32(e))
+	}
+}
+
 type StyleFillRule int32
 
 const (
@@ -1933,6 +5600,23 @@ const (
 	StyleFillRule_Max    StyleFillRule = 2147483647
 )
 
+// String returns the StyleFillRule constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleFillRule) String() string {
+	switch e {
+	case StyleFillRuleNotSet:
+		return "StyleFillRuleNotSet"
+	case StyleFillRuleNonZero:
+		return "StyleFillRuleNonZero"
+	case StyleFillRuleEvenOdd:
+		return "StyleFillRuleEvenOdd"
+	case StyleFillRule_Max:
+		return "StyleFillRule_Max"
+	default:
+		return fmt.Sprintf("StyleFillRule(%d)", int32(e))
+	}
+}
+
 type StyleFlex int32
 
 const (
@@ -1941,6 +5625,21 @@ const (
 	StyleFlex_Max   StyleFlex = 2147483647
 )
 
+// String returns the StyleFlex constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleFlex) String() string {
+	switch e {
+	case StyleFlexNone:
+		return "StyleFlexNone"
+	case StyleFlexNotSet:
+		return "StyleFlexNotSet"
+	case StyleFlex_Max:
+		return "StyleFlex_Max"
+	default:
+		return fmt.Sprintf("StyleFlex(%d)", int32(e))
+	}
+}
+
 type StyleFlexBasis int32
 
 const (
@@ -1948,6 +5647,21 @@ const (
 	StyleFlexBasisNotSet StyleFlexBasis = 1
 	StyleFlexBasis_Max   StyleFlexBasis = 2147483647
 )
+
+// String returns the StyleFlexBasis constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleFlexBasis) String() string {
+	switch e {
+	case StyleFlexBasisAuto:
+		return "StyleFlexBasisAuto"
+	case StyleFlexBasisNotSet:
+		return "StyleFlexBasisNotSet"
+	case StyleFlexBasis_Max:
+		return "StyleFlexBasis_Max"
+	default:
+		return fmt.Sprintf("StyleFlexBasis(%d)", int32(e))
+	}
+}
 
 type StyleFlexDirection int32
 
@@ -1960,6 +5674,27 @@ const (
 	StyleFlexDirection_Max          StyleFlexDirection = 2147483647
 )
 
+// String returns the StyleFlexDirection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleFlexDirection) String() string {
+	switch e {
+	case StyleFlexDirectionRow:
+		return "StyleFlexDirectionRow"
+	case StyleFlexDirectionRowReverse:
+		return "StyleFlexDirectionRowReverse"
+	case StyleFlexDirectionColumn:
+		return "StyleFlexDirectionColumn"
+	case StyleFlexDirectionColumnReverse:
+		return "StyleFlexDirectionColumnReverse"
+	case StyleFlexDirectionNotSet:
+		return "StyleFlexDirectionNotSet"
+	case StyleFlexDirection_Max:
+		return "StyleFlexDirection_Max"
+	default:
+		return fmt.Sprintf("StyleFlexDirection(%d)", int32(e))
+	}
+}
+
 type StyleFlexWrap int32
 
 const (
@@ -1969,6 +5704,25 @@ const (
 	StyleFlexWrapNotSet      StyleFlexWrap = 3
 	StyleFlexWrap_Max        StyleFlexWrap = 2147483647
 )
+
+// String returns the StyleFlexWrap constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleFlexWrap) String() string {
+	switch e {
+	case StyleFlexWrapNowrap:
+		return "StyleFlexWrapNowrap"
+	case StyleFlexWrapWrap:
+		return "StyleFlexWrapWrap"
+	case StyleFlexWrapWrapReverse:
+		return "StyleFlexWrapWrapReverse"
+	case StyleFlexWrapNotSet:
+		return "StyleFlexWrapNotSet"
+	case StyleFlexWrap_Max:
+		return "StyleFlexWrap_Max"
+	default:
+		return fmt.Sprintf("StyleFlexWrap(%d)", int32(e))
+	}
+}
 
 type StyleFontSize int32
 
@@ -1984,6 +5738,35 @@ const (
 	StyleFontSizeLarger  StyleFontSize = 8
 	StyleFontSize_Max    StyleFontSize = 2147483647
 )
+
+// String returns the StyleFontSize constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleFontSize) String() string {
+	switch e {
+	case StyleFontSizeXXSmall:
+		return "StyleFontSizeXXSmall"
+	case StyleFontSizeXSmall:
+		return "StyleFontSizeXSmall"
+	case StyleFontSizeSmall:
+		return "StyleFontSizeSmall"
+	case StyleFontSizeMedium:
+		return "StyleFontSizeMedium"
+	case StyleFontSizeLarge:
+		return "StyleFontSizeLarge"
+	case StyleFontSizeXLarge:
+		return "StyleFontSizeXLarge"
+	case StyleFontSizeXXLarge:
+		return "StyleFontSizeXXLarge"
+	case StyleFontSizeSmaller:
+		return "StyleFontSizeSmaller"
+	case StyleFontSizeLarger:
+		return "StyleFontSizeLarger"
+	case StyleFontSize_Max:
+		return "StyleFontSize_Max"
+	default:
+		return fmt.Sprintf("StyleFontSize(%d)", int32(e))
+	}
+}
 
 type StyleFontStretch int32
 
@@ -2003,6 +5786,41 @@ const (
 	StyleFontStretch_Max           StyleFontStretch = 2147483647
 )
 
+// String returns the StyleFontStretch constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleFontStretch) String() string {
+	switch e {
+	case StyleFontStretchNotSet:
+		return "StyleFontStretchNotSet"
+	case StyleFontStretchWider:
+		return "StyleFontStretchWider"
+	case StyleFontStretchNarrower:
+		return "StyleFontStretchNarrower"
+	case StyleFontStretchUltraCondensed:
+		return "StyleFontStretchUltraCondensed"
+	case StyleFontStretchExtraCondensed:
+		return "StyleFontStretchExtraCondensed"
+	case StyleFontStretchCondensed:
+		return "StyleFontStretchCondensed"
+	case StyleFontStretchSemiCondensed:
+		return "StyleFontStretchSemiCondensed"
+	case StyleFontStretchNormal:
+		return "StyleFontStretchNormal"
+	case StyleFontStretchSemiExpanded:
+		return "StyleFontStretchSemiExpanded"
+	case StyleFontStretchExpanded:
+		return "StyleFontStretchExpanded"
+	case StyleFontStretchExtraExpanded:
+		return "StyleFontStretchExtraExpanded"
+	case StyleFontStretchUltraExpanded:
+		return "StyleFontStretchUltraExpanded"
+	case StyleFontStretch_Max:
+		return "StyleFontStretch_Max"
+	default:
+		return fmt.Sprintf("StyleFontStretch(%d)", int32(e))
+	}
+}
+
 type StyleFontStyle int32
 
 const (
@@ -2013,6 +5831,25 @@ const (
 	StyleFontStyle_Max    StyleFontStyle = 2147483647
 )
 
+// String returns the StyleFontStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleFontStyle) String() string {
+	switch e {
+	case StyleFontStyleNotSet:
+		return "StyleFontStyleNotSet"
+	case StyleFontStyleItalic:
+		return "StyleFontStyleItalic"
+	case StyleFontStyleOblique:
+		return "StyleFontStyleOblique"
+	case StyleFontStyleNormal:
+		return "StyleFontStyleNormal"
+	case StyleFontStyle_Max:
+		return "StyleFontStyle_Max"
+	default:
+		return fmt.Sprintf("StyleFontStyle(%d)", int32(e))
+	}
+}
+
 type StyleFontVariant int32
 
 const (
@@ -2021,6 +5858,23 @@ const (
 	StyleFontVariantNormal    StyleFontVariant = 2
 	StyleFontVariant_Max      StyleFontVariant = 2147483647
 )
+
+// String returns the StyleFontVariant constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleFontVariant) String() string {
+	switch e {
+	case StyleFontVariantNotSet:
+		return "StyleFontVariantNotSet"
+	case StyleFontVariantSmallCaps:
+		return "StyleFontVariantSmallCaps"
+	case StyleFontVariantNormal:
+		return "StyleFontVariantNormal"
+	case StyleFontVariant_Max:
+		return "StyleFontVariant_Max"
+	default:
+		return fmt.Sprintf("StyleFontVariant(%d)", int32(e))
+	}
+}
 
 type StyleFontWeight int32
 
@@ -2042,12 +5896,64 @@ const (
 	StyleFontWeight_Max    StyleFontWeight = 2147483647
 )
 
+// String returns the StyleFontWeight constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleFontWeight) String() string {
+	switch e {
+	case StyleFontWeightNotSet:
+		return "StyleFontWeightNotSet"
+	case StyleFontWeight100:
+		return "StyleFontWeight100"
+	case StyleFontWeight200:
+		return "StyleFontWeight200"
+	case StyleFontWeight300:
+		return "StyleFontWeight300"
+	case StyleFontWeight400:
+		return "StyleFontWeight400"
+	case StyleFontWeight500:
+		return "StyleFontWeight500"
+	case StyleFontWeight600:
+		return "StyleFontWeight600"
+	case StyleFontWeight700:
+		return "StyleFontWeight700"
+	case StyleFontWeight800:
+		return "StyleFontWeight800"
+	case StyleFontWeight900:
+		return "StyleFontWeight900"
+	case StyleFontWeightNormal:
+		return "StyleFontWeightNormal"
+	case StyleFontWeightBold:
+		return "StyleFontWeightBold"
+	case StyleFontWeightBolder:
+		return "StyleFontWeightBolder"
+	case StyleFontWeightLighter:
+		return "StyleFontWeightLighter"
+	case StyleFontWeight_Max:
+		return "StyleFontWeight_Max"
+	default:
+		return fmt.Sprintf("StyleFontWeight(%d)", int32(e))
+	}
+}
+
 type StyleGridColumn int32
 
 const (
 	StyleGridColumnNotSet StyleGridColumn = 0
 	StyleGridColumn_Max   StyleGridColumn = 2147483647
 )
+
+// String returns the StyleGridColumn constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleGridColumn) String() string {
+	switch e {
+	case StyleGridColumnNotSet:
+		return "StyleGridColumnNotSet"
+	case StyleGridColumn_Max:
+		return "StyleGridColumn_Max"
+	default:
+		return fmt.Sprintf("StyleGridColumn(%d)", int32(e))
+	}
+}
 
 type StyleGridColumnAlign int32
 
@@ -2060,6 +5966,27 @@ const (
 	StyleGridColumnAlign_Max    StyleGridColumnAlign = 2147483647
 )
 
+// String returns the StyleGridColumnAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleGridColumnAlign) String() string {
+	switch e {
+	case StyleGridColumnAlignCenter:
+		return "StyleGridColumnAlignCenter"
+	case StyleGridColumnAlignEnd:
+		return "StyleGridColumnAlignEnd"
+	case StyleGridColumnAlignStart:
+		return "StyleGridColumnAlignStart"
+	case StyleGridColumnAlignStretch:
+		return "StyleGridColumnAlignStretch"
+	case StyleGridColumnAlignNotSet:
+		return "StyleGridColumnAlignNotSet"
+	case StyleGridColumnAlign_Max:
+		return "StyleGridColumnAlign_Max"
+	default:
+		return fmt.Sprintf("StyleGridColumnAlign(%d)", int32(e))
+	}
+}
+
 type StyleGridColumnSpan int32
 
 const (
@@ -2067,12 +5994,38 @@ const (
 	StyleGridColumnSpan_Max   StyleGridColumnSpan = 2147483647
 )
 
+// String returns the StyleGridColumnSpan constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleGridColumnSpan) String() string {
+	switch e {
+	case StyleGridColumnSpanNotSet:
+		return "StyleGridColumnSpanNotSet"
+	case StyleGridColumnSpan_Max:
+		return "StyleGridColumnSpan_Max"
+	default:
+		return fmt.Sprintf("StyleGridColumnSpan(%d)", int32(e))
+	}
+}
+
 type StyleGridRow int32
 
 const (
 	StyleGridRowNotSet StyleGridRow = 0
 	StyleGridRow_Max   StyleGridRow = 2147483647
 )
+
+// String returns the StyleGridRow constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleGridRow) String() string {
+	switch e {
+	case StyleGridRowNotSet:
+		return "StyleGridRowNotSet"
+	case StyleGridRow_Max:
+		return "StyleGridRow_Max"
+	default:
+		return fmt.Sprintf("StyleGridRow(%d)", int32(e))
+	}
+}
 
 type StyleGridRowAlign int32
 
@@ -2085,6 +6038,27 @@ const (
 	StyleGridRowAlign_Max    StyleGridRowAlign = 2147483647
 )
 
+// String returns the StyleGridRowAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleGridRowAlign) String() string {
+	switch e {
+	case StyleGridRowAlignCenter:
+		return "StyleGridRowAlignCenter"
+	case StyleGridRowAlignEnd:
+		return "StyleGridRowAlignEnd"
+	case StyleGridRowAlignStart:
+		return "StyleGridRowAlignStart"
+	case StyleGridRowAlignStretch:
+		return "StyleGridRowAlignStretch"
+	case StyleGridRowAlignNotSet:
+		return "StyleGridRowAlignNotSet"
+	case StyleGridRowAlign_Max:
+		return "StyleGridRowAlign_Max"
+	default:
+		return fmt.Sprintf("StyleGridRowAlign(%d)", int32(e))
+	}
+}
+
 type StyleGridRowSpan int32
 
 const (
@@ -2092,12 +6066,38 @@ const (
 	StyleGridRowSpan_Max   StyleGridRowSpan = 2147483647
 )
 
+// String returns the StyleGridRowSpan constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleGridRowSpan) String() string {
+	switch e {
+	case StyleGridRowSpanNotSet:
+		return "StyleGridRowSpanNotSet"
+	case StyleGridRowSpan_Max:
+		return "StyleGridRowSpan_Max"
+	default:
+		return fmt.Sprintf("StyleGridRowSpan(%d)", int32(e))
+	}
+}
+
 type StyleHyphenateLimitLines int32
 
 const (
 	StyleHyphenateLimitLinesNoLimit StyleHyphenateLimitLines = 0
 	StyleHyphenateLimitLines_Max    StyleHyphenateLimitLines = 2147483647
 )
+
+// String returns the StyleHyphenateLimitLines constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleHyphenateLimitLines) String() string {
+	switch e {
+	case StyleHyphenateLimitLinesNoLimit:
+		return "StyleHyphenateLimitLinesNoLimit"
+	case StyleHyphenateLimitLines_Max:
+		return "StyleHyphenateLimitLines_Max"
+	default:
+		return fmt.Sprintf("StyleHyphenateLimitLines(%d)", int32(e))
+	}
+}
 
 type StyleHyphens int32
 
@@ -2108,6 +6108,25 @@ const (
 	StyleHyphensNotSet StyleHyphens = 3
 	StyleHyphens_Max   StyleHyphens = 2147483647
 )
+
+// String returns the StyleHyphens constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleHyphens) String() string {
+	switch e {
+	case StyleHyphensNone:
+		return "StyleHyphensNone"
+	case StyleHyphensManual:
+		return "StyleHyphensManual"
+	case StyleHyphensAuto:
+		return "StyleHyphensAuto"
+	case StyleHyphensNotSet:
+		return "StyleHyphensNotSet"
+	case StyleHyphens_Max:
+		return "StyleHyphens_Max"
+	default:
+		return fmt.Sprintf("StyleHyphens(%d)", int32(e))
+	}
+}
 
 type StyleImeMode int32
 
@@ -2120,6 +6139,27 @@ const (
 	StyleImeMode_Max     StyleImeMode = 2147483647
 )
 
+// String returns the StyleImeMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleImeMode) String() string {
+	switch e {
+	case StyleImeModeAuto:
+		return "StyleImeModeAuto"
+	case StyleImeModeActive:
+		return "StyleImeModeActive"
+	case StyleImeModeInactive:
+		return "StyleImeModeInactive"
+	case StyleImeModeDisabled:
+		return "StyleImeModeDisabled"
+	case StyleImeModeNotSet:
+		return "StyleImeModeNotSet"
+	case StyleImeMode_Max:
+		return "StyleImeMode_Max"
+	default:
+		return fmt.Sprintf("StyleImeMode(%d)", int32(e))
+	}
+}
+
 type StyleInitialColor int32
 
 const (
@@ -2129,6 +6169,25 @@ const (
 	StyleInitialColorInvert        StyleInitialColor = 3
 	StyleInitialColor_Max          StyleInitialColor = 2147483647
 )
+
+// String returns the StyleInitialColor constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleInitialColor) String() string {
+	switch e {
+	case StyleInitialColorNoInitial:
+		return "StyleInitialColorNoInitial"
+	case StyleInitialColorColorProperty:
+		return "StyleInitialColorColorProperty"
+	case StyleInitialColorTransparent:
+		return "StyleInitialColorTransparent"
+	case StyleInitialColorInvert:
+		return "StyleInitialColorInvert"
+	case StyleInitialColor_Max:
+		return "StyleInitialColor_Max"
+	default:
+		return fmt.Sprintf("StyleInitialColor(%d)", int32(e))
+	}
+}
 
 type StyleInitialString int32
 
@@ -2140,6 +6199,25 @@ const (
 	StyleInitialString_Max      StyleInitialString = 2147483647
 )
 
+// String returns the StyleInitialString constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleInitialString) String() string {
+	switch e {
+	case StyleInitialStringNoInitial:
+		return "StyleInitialStringNoInitial"
+	case StyleInitialStringNone:
+		return "StyleInitialStringNone"
+	case StyleInitialStringAuto:
+		return "StyleInitialStringAuto"
+	case StyleInitialStringNormal:
+		return "StyleInitialStringNormal"
+	case StyleInitialString_Max:
+		return "StyleInitialString_Max"
+	default:
+		return fmt.Sprintf("StyleInitialString(%d)", int32(e))
+	}
+}
+
 type StyleInterpolation int32
 
 const (
@@ -2148,6 +6226,23 @@ const (
 	StyleInterpolationBCH    StyleInterpolation = 2
 	StyleInterpolation_Max   StyleInterpolation = 2147483647
 )
+
+// String returns the StyleInterpolation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleInterpolation) String() string {
+	switch e {
+	case StyleInterpolationNotSet:
+		return "StyleInterpolationNotSet"
+	case StyleInterpolationNN:
+		return "StyleInterpolationNN"
+	case StyleInterpolationBCH:
+		return "StyleInterpolationBCH"
+	case StyleInterpolation_Max:
+		return "StyleInterpolation_Max"
+	default:
+		return fmt.Sprintf("StyleInterpolation(%d)", int32(e))
+	}
+}
 
 type StyleJustifyContent int32
 
@@ -2161,6 +6256,29 @@ const (
 	StyleJustifyContent_Max         StyleJustifyContent = 2147483647
 )
 
+// String returns the StyleJustifyContent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleJustifyContent) String() string {
+	switch e {
+	case StyleJustifyContentFlexStart:
+		return "StyleJustifyContentFlexStart"
+	case StyleJustifyContentFlexEnd:
+		return "StyleJustifyContentFlexEnd"
+	case StyleJustifyContentCenter:
+		return "StyleJustifyContentCenter"
+	case StyleJustifyContentSpaceBetween:
+		return "StyleJustifyContentSpaceBetween"
+	case StyleJustifyContentSpaceAround:
+		return "StyleJustifyContentSpaceAround"
+	case StyleJustifyContentNotSet:
+		return "StyleJustifyContentNotSet"
+	case StyleJustifyContent_Max:
+		return "StyleJustifyContent_Max"
+	default:
+		return fmt.Sprintf("StyleJustifyContent(%d)", int32(e))
+	}
+}
+
 type StyleLayoutFlow int32
 
 const (
@@ -2169,6 +6287,23 @@ const (
 	StyleLayoutFlowNotSet              StyleLayoutFlow = 2
 	StyleLayoutFlow_Max                StyleLayoutFlow = 2147483647
 )
+
+// String returns the StyleLayoutFlow constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleLayoutFlow) String() string {
+	switch e {
+	case StyleLayoutFlowHorizontal:
+		return "StyleLayoutFlowHorizontal"
+	case StyleLayoutFlowVerticalIdeographic:
+		return "StyleLayoutFlowVerticalIdeographic"
+	case StyleLayoutFlowNotSet:
+		return "StyleLayoutFlowNotSet"
+	case StyleLayoutFlow_Max:
+		return "StyleLayoutFlow_Max"
+	default:
+		return fmt.Sprintf("StyleLayoutFlow(%d)", int32(e))
+	}
+}
 
 type StyleLayoutGridChar int32
 
@@ -2179,6 +6314,23 @@ const (
 	StyleLayoutGridChar_Max   StyleLayoutGridChar = 2147483647
 )
 
+// String returns the StyleLayoutGridChar constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleLayoutGridChar) String() string {
+	switch e {
+	case StyleLayoutGridCharNotSet:
+		return "StyleLayoutGridCharNotSet"
+	case StyleLayoutGridCharAuto:
+		return "StyleLayoutGridCharAuto"
+	case StyleLayoutGridCharNone:
+		return "StyleLayoutGridCharNone"
+	case StyleLayoutGridChar_Max:
+		return "StyleLayoutGridChar_Max"
+	default:
+		return fmt.Sprintf("StyleLayoutGridChar(%d)", int32(e))
+	}
+}
+
 type StyleLayoutGridLine int32
 
 const (
@@ -2187,6 +6339,23 @@ const (
 	StyleLayoutGridLineNone   StyleLayoutGridLine = 2
 	StyleLayoutGridLine_Max   StyleLayoutGridLine = 2147483647
 )
+
+// String returns the StyleLayoutGridLine constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleLayoutGridLine) String() string {
+	switch e {
+	case StyleLayoutGridLineNotSet:
+		return "StyleLayoutGridLineNotSet"
+	case StyleLayoutGridLineAuto:
+		return "StyleLayoutGridLineAuto"
+	case StyleLayoutGridLineNone:
+		return "StyleLayoutGridLineNone"
+	case StyleLayoutGridLine_Max:
+		return "StyleLayoutGridLine_Max"
+	default:
+		return fmt.Sprintf("StyleLayoutGridLine(%d)", int32(e))
+	}
+}
 
 type StyleLayoutGridMode int32
 
@@ -2199,6 +6368,27 @@ const (
 	StyleLayoutGridMode_Max   StyleLayoutGridMode = 2147483647
 )
 
+// String returns the StyleLayoutGridMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleLayoutGridMode) String() string {
+	switch e {
+	case StyleLayoutGridModeNotSet:
+		return "StyleLayoutGridModeNotSet"
+	case StyleLayoutGridModeChar:
+		return "StyleLayoutGridModeChar"
+	case StyleLayoutGridModeLine:
+		return "StyleLayoutGridModeLine"
+	case StyleLayoutGridModeBoth:
+		return "StyleLayoutGridModeBoth"
+	case StyleLayoutGridModeNone:
+		return "StyleLayoutGridModeNone"
+	case StyleLayoutGridMode_Max:
+		return "StyleLayoutGridMode_Max"
+	default:
+		return fmt.Sprintf("StyleLayoutGridMode(%d)", int32(e))
+	}
+}
+
 type StyleLayoutGridType int32
 
 const (
@@ -2209,6 +6399,25 @@ const (
 	StyleLayoutGridType_Max   StyleLayoutGridType = 2147483647
 )
 
+// String returns the StyleLayoutGridType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleLayoutGridType) String() string {
+	switch e {
+	case StyleLayoutGridTypeNotSet:
+		return "StyleLayoutGridTypeNotSet"
+	case StyleLayoutGridTypeLoose:
+		return "StyleLayoutGridTypeLoose"
+	case StyleLayoutGridTypeStrict:
+		return "StyleLayoutGridTypeStrict"
+	case StyleLayoutGridTypeFixed:
+		return "StyleLayoutGridTypeFixed"
+	case StyleLayoutGridType_Max:
+		return "StyleLayoutGridType_Max"
+	default:
+		return fmt.Sprintf("StyleLayoutGridType(%d)", int32(e))
+	}
+}
+
 type StyleLineBreak int32
 
 const (
@@ -2218,6 +6427,23 @@ const (
 	StyleLineBreak_Max   StyleLineBreak = 2147483647
 )
 
+// String returns the StyleLineBreak constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleLineBreak) String() string {
+	switch e {
+	case StyleLineBreakNotSet:
+		return "StyleLineBreakNotSet"
+	case StyleLineBreakNormal:
+		return "StyleLineBreakNormal"
+	case StyleLineBreakStrict:
+		return "StyleLineBreakStrict"
+	case StyleLineBreak_Max:
+		return "StyleLineBreak_Max"
+	default:
+		return fmt.Sprintf("StyleLineBreak(%d)", int32(e))
+	}
+}
+
 type StyleListStylePosition int32
 
 const (
@@ -2226,6 +6452,23 @@ const (
 	StyleListStylePositionOutSide StyleListStylePosition = 2
 	StyleListStylePosition_Max    StyleListStylePosition = 2147483647
 )
+
+// String returns the StyleListStylePosition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleListStylePosition) String() string {
+	switch e {
+	case StyleListStylePositionNotSet:
+		return "StyleListStylePositionNotSet"
+	case StyleListStylePositionInside:
+		return "StyleListStylePositionInside"
+	case StyleListStylePositionOutSide:
+		return "StyleListStylePositionOutSide"
+	case StyleListStylePosition_Max:
+		return "StyleListStylePosition_Max"
+	default:
+		return fmt.Sprintf("StyleListStylePosition(%d)", int32(e))
+	}
+}
 
 type StyleListStyleType int32
 
@@ -2250,6 +6493,51 @@ const (
 	StyleListStyleType_Max               StyleListStyleType = 2147483647
 )
 
+// String returns the StyleListStyleType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleListStyleType) String() string {
+	switch e {
+	case StyleListStyleTypeNotSet:
+		return "StyleListStyleTypeNotSet"
+	case StyleListStyleTypeDisc:
+		return "StyleListStyleTypeDisc"
+	case StyleListStyleTypeCircle:
+		return "StyleListStyleTypeCircle"
+	case StyleListStyleTypeSquare:
+		return "StyleListStyleTypeSquare"
+	case StyleListStyleTypeDecimal:
+		return "StyleListStyleTypeDecimal"
+	case StyleListStyleTypeLowerRoman:
+		return "StyleListStyleTypeLowerRoman"
+	case StyleListStyleTypeUpperRoman:
+		return "StyleListStyleTypeUpperRoman"
+	case StyleListStyleTypeLowerAlpha:
+		return "StyleListStyleTypeLowerAlpha"
+	case StyleListStyleTypeUpperAlpha:
+		return "StyleListStyleTypeUpperAlpha"
+	case StyleListStyleTypeNone:
+		return "StyleListStyleTypeNone"
+	case StyleListStyleTypeDecimalLeadingZero:
+		return "StyleListStyleTypeDecimalLeadingZero"
+	case StyleListStyleTypeGeorgian:
+		return "StyleListStyleTypeGeorgian"
+	case StyleListStyleTypeArmenian:
+		return "StyleListStyleTypeArmenian"
+	case StyleListStyleTypeUpperLatin:
+		return "StyleListStyleTypeUpperLatin"
+	case StyleListStyleTypeLowerLatin:
+		return "StyleListStyleTypeLowerLatin"
+	case StyleListStyleTypeUpperGreek:
+		return "StyleListStyleTypeUpperGreek"
+	case StyleListStyleTypeLowerGreek:
+		return "StyleListStyleTypeLowerGreek"
+	case StyleListStyleType_Max:
+		return "StyleListStyleType_Max"
+	default:
+		return fmt.Sprintf("StyleListStyleType(%d)", int32(e))
+	}
+}
+
 type StyleMsAnimationDirection int32
 
 const (
@@ -2260,6 +6548,27 @@ const (
 	StyleMsAnimationDirectionNotSet           StyleMsAnimationDirection = 4
 	StyleMsAnimationDirection_Max             StyleMsAnimationDirection = 2147483647
 )
+
+// String returns the StyleMsAnimationDirection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsAnimationDirection) String() string {
+	switch e {
+	case StyleMsAnimationDirectionNormal:
+		return "StyleMsAnimationDirectionNormal"
+	case StyleMsAnimationDirectionAlternate:
+		return "StyleMsAnimationDirectionAlternate"
+	case StyleMsAnimationDirectionReverse:
+		return "StyleMsAnimationDirectionReverse"
+	case StyleMsAnimationDirectionAlternateReverse:
+		return "StyleMsAnimationDirectionAlternateReverse"
+	case StyleMsAnimationDirectionNotSet:
+		return "StyleMsAnimationDirectionNotSet"
+	case StyleMsAnimationDirection_Max:
+		return "StyleMsAnimationDirection_Max"
+	default:
+		return fmt.Sprintf("StyleMsAnimationDirection(%d)", int32(e))
+	}
+}
 
 type StyleMsAnimationFillMode int32
 
@@ -2272,6 +6581,27 @@ const (
 	StyleMsAnimationFillMode_Max      StyleMsAnimationFillMode = 2147483647
 )
 
+// String returns the StyleMsAnimationFillMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsAnimationFillMode) String() string {
+	switch e {
+	case StyleMsAnimationFillModeNone:
+		return "StyleMsAnimationFillModeNone"
+	case StyleMsAnimationFillModeForwards:
+		return "StyleMsAnimationFillModeForwards"
+	case StyleMsAnimationFillModeBackwards:
+		return "StyleMsAnimationFillModeBackwards"
+	case StyleMsAnimationFillModeBoth:
+		return "StyleMsAnimationFillModeBoth"
+	case StyleMsAnimationFillModeNotSet:
+		return "StyleMsAnimationFillModeNotSet"
+	case StyleMsAnimationFillMode_Max:
+		return "StyleMsAnimationFillMode_Max"
+	default:
+		return fmt.Sprintf("StyleMsAnimationFillMode(%d)", int32(e))
+	}
+}
+
 type StyleMsAnimationPlayState int32
 
 const (
@@ -2281,6 +6611,23 @@ const (
 	StyleMsAnimationPlayState_Max    StyleMsAnimationPlayState = 2147483647
 )
 
+// String returns the StyleMsAnimationPlayState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsAnimationPlayState) String() string {
+	switch e {
+	case StyleMsAnimationPlayStateRunning:
+		return "StyleMsAnimationPlayStateRunning"
+	case StyleMsAnimationPlayStatePaused:
+		return "StyleMsAnimationPlayStatePaused"
+	case StyleMsAnimationPlayStateNotSet:
+		return "StyleMsAnimationPlayStateNotSet"
+	case StyleMsAnimationPlayState_Max:
+		return "StyleMsAnimationPlayState_Max"
+	default:
+		return fmt.Sprintf("StyleMsAnimationPlayState(%d)", int32(e))
+	}
+}
+
 type StyleMsContentZoomChaining int32
 
 const (
@@ -2289,6 +6636,23 @@ const (
 	StyleMsContentZoomChainingChained StyleMsContentZoomChaining = 2
 	StyleMsContentZoomChaining_Max    StyleMsContentZoomChaining = 2147483647
 )
+
+// String returns the StyleMsContentZoomChaining constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsContentZoomChaining) String() string {
+	switch e {
+	case StyleMsContentZoomChainingNotSet:
+		return "StyleMsContentZoomChainingNotSet"
+	case StyleMsContentZoomChainingNone:
+		return "StyleMsContentZoomChainingNone"
+	case StyleMsContentZoomChainingChained:
+		return "StyleMsContentZoomChainingChained"
+	case StyleMsContentZoomChaining_Max:
+		return "StyleMsContentZoomChaining_Max"
+	default:
+		return fmt.Sprintf("StyleMsContentZoomChaining(%d)", int32(e))
+	}
+}
 
 type StyleMsContentZoomSnapType int32
 
@@ -2300,6 +6664,25 @@ const (
 	StyleMsContentZoomSnapType_Max      StyleMsContentZoomSnapType = 2147483647
 )
 
+// String returns the StyleMsContentZoomSnapType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsContentZoomSnapType) String() string {
+	switch e {
+	case StyleMsContentZoomSnapTypeNotSet:
+		return "StyleMsContentZoomSnapTypeNotSet"
+	case StyleMsContentZoomSnapTypeNone:
+		return "StyleMsContentZoomSnapTypeNone"
+	case StyleMsContentZoomSnapTypeMandatory:
+		return "StyleMsContentZoomSnapTypeMandatory"
+	case StyleMsContentZoomSnapTypeProximity:
+		return "StyleMsContentZoomSnapTypeProximity"
+	case StyleMsContentZoomSnapType_Max:
+		return "StyleMsContentZoomSnapType_Max"
+	default:
+		return fmt.Sprintf("StyleMsContentZoomSnapType(%d)", int32(e))
+	}
+}
+
 type StyleMsContentZooming int32
 
 const (
@@ -2308,6 +6691,23 @@ const (
 	StyleMsContentZoomingZoom   StyleMsContentZooming = 2
 	StyleMsContentZooming_Max   StyleMsContentZooming = 2147483647
 )
+
+// String returns the StyleMsContentZooming constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsContentZooming) String() string {
+	switch e {
+	case StyleMsContentZoomingNotSet:
+		return "StyleMsContentZoomingNotSet"
+	case StyleMsContentZoomingNone:
+		return "StyleMsContentZoomingNone"
+	case StyleMsContentZoomingZoom:
+		return "StyleMsContentZoomingZoom"
+	case StyleMsContentZooming_Max:
+		return "StyleMsContentZooming_Max"
+	default:
+		return fmt.Sprintf("StyleMsContentZooming(%d)", int32(e))
+	}
+}
 
 type StyleMsFlexAlign int32
 
@@ -2320,6 +6720,29 @@ const (
 	StyleMsFlexAlignNotSet   StyleMsFlexAlign = 5
 	StyleMsFlexAlign_Max     StyleMsFlexAlign = 2147483647
 )
+
+// String returns the StyleMsFlexAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsFlexAlign) String() string {
+	switch e {
+	case StyleMsFlexAlignStart:
+		return "StyleMsFlexAlignStart"
+	case StyleMsFlexAlignEnd:
+		return "StyleMsFlexAlignEnd"
+	case StyleMsFlexAlignCenter:
+		return "StyleMsFlexAlignCenter"
+	case StyleMsFlexAlignBaseline:
+		return "StyleMsFlexAlignBaseline"
+	case StyleMsFlexAlignStretch:
+		return "StyleMsFlexAlignStretch"
+	case StyleMsFlexAlignNotSet:
+		return "StyleMsFlexAlignNotSet"
+	case StyleMsFlexAlign_Max:
+		return "StyleMsFlexAlign_Max"
+	default:
+		return fmt.Sprintf("StyleMsFlexAlign(%d)", int32(e))
+	}
+}
 
 type StyleMsFlexItemAlign int32
 
@@ -2334,6 +6757,31 @@ const (
 	StyleMsFlexItemAlign_Max     StyleMsFlexItemAlign = 2147483647
 )
 
+// String returns the StyleMsFlexItemAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsFlexItemAlign) String() string {
+	switch e {
+	case StyleMsFlexItemAlignStart:
+		return "StyleMsFlexItemAlignStart"
+	case StyleMsFlexItemAlignEnd:
+		return "StyleMsFlexItemAlignEnd"
+	case StyleMsFlexItemAlignCenter:
+		return "StyleMsFlexItemAlignCenter"
+	case StyleMsFlexItemAlignBaseline:
+		return "StyleMsFlexItemAlignBaseline"
+	case StyleMsFlexItemAlignStretch:
+		return "StyleMsFlexItemAlignStretch"
+	case StyleMsFlexItemAlignAuto:
+		return "StyleMsFlexItemAlignAuto"
+	case StyleMsFlexItemAlignNotSet:
+		return "StyleMsFlexItemAlignNotSet"
+	case StyleMsFlexItemAlign_Max:
+		return "StyleMsFlexItemAlign_Max"
+	default:
+		return fmt.Sprintf("StyleMsFlexItemAlign(%d)", int32(e))
+	}
+}
+
 type StyleMsFlexLinePack int32
 
 const (
@@ -2347,6 +6795,31 @@ const (
 	StyleMsFlexLinePack_Max       StyleMsFlexLinePack = 2147483647
 )
 
+// String returns the StyleMsFlexLinePack constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsFlexLinePack) String() string {
+	switch e {
+	case StyleMsFlexLinePackStart:
+		return "StyleMsFlexLinePackStart"
+	case StyleMsFlexLinePackEnd:
+		return "StyleMsFlexLinePackEnd"
+	case StyleMsFlexLinePackCenter:
+		return "StyleMsFlexLinePackCenter"
+	case StyleMsFlexLinePackJustify:
+		return "StyleMsFlexLinePackJustify"
+	case StyleMsFlexLinePackDistribute:
+		return "StyleMsFlexLinePackDistribute"
+	case StyleMsFlexLinePackStretch:
+		return "StyleMsFlexLinePackStretch"
+	case StyleMsFlexLinePackNotSet:
+		return "StyleMsFlexLinePackNotSet"
+	case StyleMsFlexLinePack_Max:
+		return "StyleMsFlexLinePack_Max"
+	default:
+		return fmt.Sprintf("StyleMsFlexLinePack(%d)", int32(e))
+	}
+}
+
 type StyleMsFlexPack int32
 
 const (
@@ -2359,6 +6832,29 @@ const (
 	StyleMsFlexPack_Max       StyleMsFlexPack = 2147483647
 )
 
+// String returns the StyleMsFlexPack constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsFlexPack) String() string {
+	switch e {
+	case StyleMsFlexPackStart:
+		return "StyleMsFlexPackStart"
+	case StyleMsFlexPackEnd:
+		return "StyleMsFlexPackEnd"
+	case StyleMsFlexPackCenter:
+		return "StyleMsFlexPackCenter"
+	case StyleMsFlexPackJustify:
+		return "StyleMsFlexPackJustify"
+	case StyleMsFlexPackDistribute:
+		return "StyleMsFlexPackDistribute"
+	case StyleMsFlexPackNotSet:
+		return "StyleMsFlexPackNotSet"
+	case StyleMsFlexPack_Max:
+		return "StyleMsFlexPack_Max"
+	default:
+		return fmt.Sprintf("StyleMsFlexPack(%d)", int32(e))
+	}
+}
+
 type StyleMsHighContrastAdjust int32
 
 const (
@@ -2368,6 +6864,23 @@ const (
 	StyleMsHighContrastAdjust_Max   StyleMsHighContrastAdjust = 2147483647
 )
 
+// String returns the StyleMsHighContrastAdjust constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsHighContrastAdjust) String() string {
+	switch e {
+	case StyleMsHighContrastAdjustNotSet:
+		return "StyleMsHighContrastAdjustNotSet"
+	case StyleMsHighContrastAdjustAuto:
+		return "StyleMsHighContrastAdjustAuto"
+	case StyleMsHighContrastAdjustNone:
+		return "StyleMsHighContrastAdjustNone"
+	case StyleMsHighContrastAdjust_Max:
+		return "StyleMsHighContrastAdjust_Max"
+	default:
+		return fmt.Sprintf("StyleMsHighContrastAdjust(%d)", int32(e))
+	}
+}
+
 type StyleMsImeAlign int32
 
 const (
@@ -2376,6 +6889,23 @@ const (
 	StyleMsImeAlignNotSet StyleMsImeAlign = 2
 	StyleMsImeAlign_Max   StyleMsImeAlign = 2147483647
 )
+
+// String returns the StyleMsImeAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsImeAlign) String() string {
+	switch e {
+	case StyleMsImeAlignAuto:
+		return "StyleMsImeAlignAuto"
+	case StyleMsImeAlignAfter:
+		return "StyleMsImeAlignAfter"
+	case StyleMsImeAlignNotSet:
+		return "StyleMsImeAlignNotSet"
+	case StyleMsImeAlign_Max:
+		return "StyleMsImeAlign_Max"
+	default:
+		return fmt.Sprintf("StyleMsImeAlign(%d)", int32(e))
+	}
+}
 
 type StyleMsOverflowStyle int32
 
@@ -2388,6 +6918,27 @@ const (
 	StyleMsOverflowStyle_Max                  StyleMsOverflowStyle = 2147483647
 )
 
+// String returns the StyleMsOverflowStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsOverflowStyle) String() string {
+	switch e {
+	case StyleMsOverflowStyleNotSet:
+		return "StyleMsOverflowStyleNotSet"
+	case StyleMsOverflowStyleAuto:
+		return "StyleMsOverflowStyleAuto"
+	case StyleMsOverflowStyleNone:
+		return "StyleMsOverflowStyleNone"
+	case StyleMsOverflowStyleScrollbar:
+		return "StyleMsOverflowStyleScrollbar"
+	case StyleMsOverflowStyleMsAutoHidingScrollbar:
+		return "StyleMsOverflowStyleMsAutoHidingScrollbar"
+	case StyleMsOverflowStyle_Max:
+		return "StyleMsOverflowStyle_Max"
+	default:
+		return fmt.Sprintf("StyleMsOverflowStyle(%d)", int32(e))
+	}
+}
+
 type StyleMsScrollChaining int32
 
 const (
@@ -2397,6 +6948,23 @@ const (
 	StyleMsScrollChaining_Max    StyleMsScrollChaining = 2147483647
 )
 
+// String returns the StyleMsScrollChaining constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsScrollChaining) String() string {
+	switch e {
+	case StyleMsScrollChainingNotSet:
+		return "StyleMsScrollChainingNotSet"
+	case StyleMsScrollChainingNone:
+		return "StyleMsScrollChainingNone"
+	case StyleMsScrollChainingChained:
+		return "StyleMsScrollChainingChained"
+	case StyleMsScrollChaining_Max:
+		return "StyleMsScrollChaining_Max"
+	default:
+		return fmt.Sprintf("StyleMsScrollChaining(%d)", int32(e))
+	}
+}
+
 type StyleMsScrollRails int32
 
 const (
@@ -2405,6 +6973,23 @@ const (
 	StyleMsScrollRailsRailed StyleMsScrollRails = 2
 	StyleMsScrollRails_Max   StyleMsScrollRails = 2147483647
 )
+
+// String returns the StyleMsScrollRails constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsScrollRails) String() string {
+	switch e {
+	case StyleMsScrollRailsNotSet:
+		return "StyleMsScrollRailsNotSet"
+	case StyleMsScrollRailsNone:
+		return "StyleMsScrollRailsNone"
+	case StyleMsScrollRailsRailed:
+		return "StyleMsScrollRailsRailed"
+	case StyleMsScrollRails_Max:
+		return "StyleMsScrollRails_Max"
+	default:
+		return fmt.Sprintf("StyleMsScrollRails(%d)", int32(e))
+	}
+}
 
 type StyleMsScrollSnapType int32
 
@@ -2416,6 +7001,25 @@ const (
 	StyleMsScrollSnapType_Max      StyleMsScrollSnapType = 2147483647
 )
 
+// String returns the StyleMsScrollSnapType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsScrollSnapType) String() string {
+	switch e {
+	case StyleMsScrollSnapTypeNotSet:
+		return "StyleMsScrollSnapTypeNotSet"
+	case StyleMsScrollSnapTypeNone:
+		return "StyleMsScrollSnapTypeNone"
+	case StyleMsScrollSnapTypeMandatory:
+		return "StyleMsScrollSnapTypeMandatory"
+	case StyleMsScrollSnapTypeProximity:
+		return "StyleMsScrollSnapTypeProximity"
+	case StyleMsScrollSnapType_Max:
+		return "StyleMsScrollSnapType_Max"
+	default:
+		return fmt.Sprintf("StyleMsScrollSnapType(%d)", int32(e))
+	}
+}
+
 type StyleMsScrollTranslation int32
 
 const (
@@ -2424,6 +7028,23 @@ const (
 	StyleMsScrollTranslationVtoH   StyleMsScrollTranslation = 2
 	StyleMsScrollTranslation_Max   StyleMsScrollTranslation = 2147483647
 )
+
+// String returns the StyleMsScrollTranslation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsScrollTranslation) String() string {
+	switch e {
+	case StyleMsScrollTranslationNotSet:
+		return "StyleMsScrollTranslationNotSet"
+	case StyleMsScrollTranslationNone:
+		return "StyleMsScrollTranslationNone"
+	case StyleMsScrollTranslationVtoH:
+		return "StyleMsScrollTranslationVtoH"
+	case StyleMsScrollTranslation_Max:
+		return "StyleMsScrollTranslation_Max"
+	default:
+		return fmt.Sprintf("StyleMsScrollTranslation(%d)", int32(e))
+	}
+}
 
 type StyleMsTextCombineHorizontal int32
 
@@ -2434,6 +7055,25 @@ const (
 	StyleMsTextCombineHorizontalNotSet StyleMsTextCombineHorizontal = 3
 	StyleMsTextCombineHorizontal_Max   StyleMsTextCombineHorizontal = 2147483647
 )
+
+// String returns the StyleMsTextCombineHorizontal constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsTextCombineHorizontal) String() string {
+	switch e {
+	case StyleMsTextCombineHorizontalNone:
+		return "StyleMsTextCombineHorizontalNone"
+	case StyleMsTextCombineHorizontalAll:
+		return "StyleMsTextCombineHorizontalAll"
+	case StyleMsTextCombineHorizontalDigits:
+		return "StyleMsTextCombineHorizontalDigits"
+	case StyleMsTextCombineHorizontalNotSet:
+		return "StyleMsTextCombineHorizontalNotSet"
+	case StyleMsTextCombineHorizontal_Max:
+		return "StyleMsTextCombineHorizontal_Max"
+	default:
+		return fmt.Sprintf("StyleMsTextCombineHorizontal(%d)", int32(e))
+	}
+}
 
 type StyleMsTouchAction int32
 
@@ -2451,6 +7091,37 @@ const (
 	StyleMsTouchAction_Max          StyleMsTouchAction = 2147483647
 )
 
+// String returns the StyleMsTouchAction constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsTouchAction) String() string {
+	switch e {
+	case StyleMsTouchActionNotSet:
+		return "StyleMsTouchActionNotSet"
+	case StyleMsTouchActionNone:
+		return "StyleMsTouchActionNone"
+	case StyleMsTouchActionAuto:
+		return "StyleMsTouchActionAuto"
+	case StyleMsTouchActionManipulation:
+		return "StyleMsTouchActionManipulation"
+	case StyleMsTouchActionDoubleTapZoom:
+		return "StyleMsTouchActionDoubleTapZoom"
+	case StyleMsTouchActionPanX:
+		return "StyleMsTouchActionPanX"
+	case StyleMsTouchActionPanY:
+		return "StyleMsTouchActionPanY"
+	case StyleMsTouchActionPinchZoom:
+		return "StyleMsTouchActionPinchZoom"
+	case StyleMsTouchActionCrossSlideX:
+		return "StyleMsTouchActionCrossSlideX"
+	case StyleMsTouchActionCrossSlideY:
+		return "StyleMsTouchActionCrossSlideY"
+	case StyleMsTouchAction_Max:
+		return "StyleMsTouchAction_Max"
+	default:
+		return fmt.Sprintf("StyleMsTouchAction(%d)", int32(e))
+	}
+}
+
 type StyleMsTouchSelect int32
 
 const (
@@ -2459,6 +7130,23 @@ const (
 	StyleMsTouchSelectNotSet   StyleMsTouchSelect = 2
 	StyleMsTouchSelect_Max     StyleMsTouchSelect = 2147483647
 )
+
+// String returns the StyleMsTouchSelect constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsTouchSelect) String() string {
+	switch e {
+	case StyleMsTouchSelectGrippers:
+		return "StyleMsTouchSelectGrippers"
+	case StyleMsTouchSelectNone:
+		return "StyleMsTouchSelectNone"
+	case StyleMsTouchSelectNotSet:
+		return "StyleMsTouchSelectNotSet"
+	case StyleMsTouchSelect_Max:
+		return "StyleMsTouchSelect_Max"
+	default:
+		return fmt.Sprintf("StyleMsTouchSelect(%d)", int32(e))
+	}
+}
 
 type StyleMsUserSelect int32
 
@@ -2471,6 +7159,27 @@ const (
 	StyleMsUserSelect_Max    StyleMsUserSelect = 2147483647
 )
 
+// String returns the StyleMsUserSelect constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleMsUserSelect) String() string {
+	switch e {
+	case StyleMsUserSelectAuto:
+		return "StyleMsUserSelectAuto"
+	case StyleMsUserSelectText:
+		return "StyleMsUserSelectText"
+	case StyleMsUserSelectElement:
+		return "StyleMsUserSelectElement"
+	case StyleMsUserSelectNone:
+		return "StyleMsUserSelectNone"
+	case StyleMsUserSelectNotSet:
+		return "StyleMsUserSelectNotSet"
+	case StyleMsUserSelect_Max:
+		return "StyleMsUserSelect_Max"
+	default:
+		return fmt.Sprintf("StyleMsUserSelect(%d)", int32(e))
+	}
+}
+
 type StyleNone int32
 
 const (
@@ -2478,12 +7187,38 @@ const (
 	StyleNone_Max StyleNone = 2147483647
 )
 
+// String returns the StyleNone constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleNone) String() string {
+	switch e {
+	case StyleNoneNone:
+		return "StyleNoneNone"
+	case StyleNone_Max:
+		return "StyleNone_Max"
+	default:
+		return fmt.Sprintf("StyleNone(%d)", int32(e))
+	}
+}
+
 type StyleNormal int32
 
 const (
 	StyleNormalNormal StyleNormal = 0
 	StyleNormal_Max   StyleNormal = 2147483647
 )
+
+// String returns the StyleNormal constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleNormal) String() string {
+	switch e {
+	case StyleNormalNormal:
+		return "StyleNormalNormal"
+	case StyleNormal_Max:
+		return "StyleNormal_Max"
+	default:
+		return fmt.Sprintf("StyleNormal(%d)", int32(e))
+	}
+}
 
 type StyleOutlineStyle int32
 
@@ -2502,6 +7237,39 @@ const (
 	StyleOutlineStyle_Max        StyleOutlineStyle = 2147483647
 )
 
+// String returns the StyleOutlineStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleOutlineStyle) String() string {
+	switch e {
+	case StyleOutlineStyleNotSet:
+		return "StyleOutlineStyleNotSet"
+	case StyleOutlineStyleDotted:
+		return "StyleOutlineStyleDotted"
+	case StyleOutlineStyleDashed:
+		return "StyleOutlineStyleDashed"
+	case StyleOutlineStyleSolid:
+		return "StyleOutlineStyleSolid"
+	case StyleOutlineStyleDouble:
+		return "StyleOutlineStyleDouble"
+	case StyleOutlineStyleGroove:
+		return "StyleOutlineStyleGroove"
+	case StyleOutlineStyleRidge:
+		return "StyleOutlineStyleRidge"
+	case StyleOutlineStyleInset:
+		return "StyleOutlineStyleInset"
+	case StyleOutlineStyleOutset:
+		return "StyleOutlineStyleOutset"
+	case StyleOutlineStyleWindowInset:
+		return "StyleOutlineStyleWindowInset"
+	case StyleOutlineStyleNone:
+		return "StyleOutlineStyleNone"
+	case StyleOutlineStyle_Max:
+		return "StyleOutlineStyle_Max"
+	default:
+		return fmt.Sprintf("StyleOutlineStyle(%d)", int32(e))
+	}
+}
+
 type StyleOverflow int32
 
 const (
@@ -2512,6 +7280,27 @@ const (
 	StyleOverflowScroll  StyleOverflow = 4
 	StyleOverflow_Max    StyleOverflow = 2147483647
 )
+
+// String returns the StyleOverflow constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleOverflow) String() string {
+	switch e {
+	case StyleOverflowNotSet:
+		return "StyleOverflowNotSet"
+	case StyleOverflowAuto:
+		return "StyleOverflowAuto"
+	case StyleOverflowHidden:
+		return "StyleOverflowHidden"
+	case StyleOverflowVisible:
+		return "StyleOverflowVisible"
+	case StyleOverflowScroll:
+		return "StyleOverflowScroll"
+	case StyleOverflow_Max:
+		return "StyleOverflow_Max"
+	default:
+		return fmt.Sprintf("StyleOverflow(%d)", int32(e))
+	}
+}
 
 type StylePageBreak int32
 
@@ -2525,6 +7314,29 @@ const (
 	StylePageBreak_Max   StylePageBreak = 2147483647
 )
 
+// String returns the StylePageBreak constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StylePageBreak) String() string {
+	switch e {
+	case StylePageBreakNotSet:
+		return "StylePageBreakNotSet"
+	case StylePageBreakAuto:
+		return "StylePageBreakAuto"
+	case StylePageBreakAlways:
+		return "StylePageBreakAlways"
+	case StylePageBreakLeft:
+		return "StylePageBreakLeft"
+	case StylePageBreakRight:
+		return "StylePageBreakRight"
+	case StylePageBreakAvoid:
+		return "StylePageBreakAvoid"
+	case StylePageBreak_Max:
+		return "StylePageBreak_Max"
+	default:
+		return fmt.Sprintf("StylePageBreak(%d)", int32(e))
+	}
+}
+
 type StylePageBreakInside int32
 
 const (
@@ -2533,6 +7345,23 @@ const (
 	StylePageBreakInsideAvoid  StylePageBreakInside = 2
 	StylePageBreakInside_Max   StylePageBreakInside = 2147483647
 )
+
+// String returns the StylePageBreakInside constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StylePageBreakInside) String() string {
+	switch e {
+	case StylePageBreakInsideNotSet:
+		return "StylePageBreakInsideNotSet"
+	case StylePageBreakInsideAuto:
+		return "StylePageBreakInsideAuto"
+	case StylePageBreakInsideAvoid:
+		return "StylePageBreakInsideAvoid"
+	case StylePageBreakInside_Max:
+		return "StylePageBreakInside_Max"
+	default:
+		return fmt.Sprintf("StylePageBreakInside(%d)", int32(e))
+	}
+}
 
 type StylePerspectiveOriginX int32
 
@@ -2544,6 +7373,25 @@ const (
 	StylePerspectiveOriginX_Max   StylePerspectiveOriginX = 2147483647
 )
 
+// String returns the StylePerspectiveOriginX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StylePerspectiveOriginX) String() string {
+	switch e {
+	case StylePerspectiveOriginXNotSet:
+		return "StylePerspectiveOriginXNotSet"
+	case StylePerspectiveOriginXLeft:
+		return "StylePerspectiveOriginXLeft"
+	case StylePerspectiveOriginXCenter:
+		return "StylePerspectiveOriginXCenter"
+	case StylePerspectiveOriginXRight:
+		return "StylePerspectiveOriginXRight"
+	case StylePerspectiveOriginX_Max:
+		return "StylePerspectiveOriginX_Max"
+	default:
+		return fmt.Sprintf("StylePerspectiveOriginX(%d)", int32(e))
+	}
+}
+
 type StylePerspectiveOriginY int32
 
 const (
@@ -2553,6 +7401,25 @@ const (
 	StylePerspectiveOriginYBottom StylePerspectiveOriginY = 3
 	StylePerspectiveOriginY_Max   StylePerspectiveOriginY = 2147483647
 )
+
+// String returns the StylePerspectiveOriginY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StylePerspectiveOriginY) String() string {
+	switch e {
+	case StylePerspectiveOriginYNotSet:
+		return "StylePerspectiveOriginYNotSet"
+	case StylePerspectiveOriginYTop:
+		return "StylePerspectiveOriginYTop"
+	case StylePerspectiveOriginYCenter:
+		return "StylePerspectiveOriginYCenter"
+	case StylePerspectiveOriginYBottom:
+		return "StylePerspectiveOriginYBottom"
+	case StylePerspectiveOriginY_Max:
+		return "StylePerspectiveOriginY_Max"
+	default:
+		return fmt.Sprintf("StylePerspectiveOriginY(%d)", int32(e))
+	}
+}
 
 type StylePointerEvents int32
 
@@ -2572,6 +7439,41 @@ const (
 	StylePointerEvents_Max           StylePointerEvents = 2147483647
 )
 
+// String returns the StylePointerEvents constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StylePointerEvents) String() string {
+	switch e {
+	case StylePointerEventsNotSet:
+		return "StylePointerEventsNotSet"
+	case StylePointerEventsVisiblePainted:
+		return "StylePointerEventsVisiblePainted"
+	case StylePointerEventsVisibleFill:
+		return "StylePointerEventsVisibleFill"
+	case StylePointerEventsVisibleStroke:
+		return "StylePointerEventsVisibleStroke"
+	case StylePointerEventsVisible:
+		return "StylePointerEventsVisible"
+	case StylePointerEventsPainted:
+		return "StylePointerEventsPainted"
+	case StylePointerEventsFill:
+		return "StylePointerEventsFill"
+	case StylePointerEventsStroke:
+		return "StylePointerEventsStroke"
+	case StylePointerEventsAll:
+		return "StylePointerEventsAll"
+	case StylePointerEventsNone:
+		return "StylePointerEventsNone"
+	case StylePointerEventsInitial:
+		return "StylePointerEventsInitial"
+	case StylePointerEventsAuto:
+		return "StylePointerEventsAuto"
+	case StylePointerEvents_Max:
+		return "StylePointerEvents_Max"
+	default:
+		return fmt.Sprintf("StylePointerEvents(%d)", int32(e))
+	}
+}
+
 type StylePosition int32
 
 const (
@@ -2584,6 +7486,31 @@ const (
 	StylePositionMsDeviceFixed StylePosition = 6
 	StylePosition_Max          StylePosition = 2147483647
 )
+
+// String returns the StylePosition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StylePosition) String() string {
+	switch e {
+	case StylePositionNotSet:
+		return "StylePositionNotSet"
+	case StylePositionstatic:
+		return "StylePositionstatic"
+	case StylePositionrelative:
+		return "StylePositionrelative"
+	case StylePositionabsolute:
+		return "StylePositionabsolute"
+	case StylePositionfixed:
+		return "StylePositionfixed"
+	case StylePositionMsPage:
+		return "StylePositionMsPage"
+	case StylePositionMsDeviceFixed:
+		return "StylePositionMsDeviceFixed"
+	case StylePosition_Max:
+		return "StylePosition_Max"
+	default:
+		return fmt.Sprintf("StylePosition(%d)", int32(e))
+	}
+}
 
 type StyleRubyAlign int32
 
@@ -2599,6 +7526,33 @@ const (
 	StyleRubyAlign_Max             StyleRubyAlign = 2147483647
 )
 
+// String returns the StyleRubyAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleRubyAlign) String() string {
+	switch e {
+	case StyleRubyAlignNotSet:
+		return "StyleRubyAlignNotSet"
+	case StyleRubyAlignAuto:
+		return "StyleRubyAlignAuto"
+	case StyleRubyAlignLeft:
+		return "StyleRubyAlignLeft"
+	case StyleRubyAlignCenter:
+		return "StyleRubyAlignCenter"
+	case StyleRubyAlignRight:
+		return "StyleRubyAlignRight"
+	case StyleRubyAlignDistributeLetter:
+		return "StyleRubyAlignDistributeLetter"
+	case StyleRubyAlignDistributeSpace:
+		return "StyleRubyAlignDistributeSpace"
+	case StyleRubyAlignLineEdge:
+		return "StyleRubyAlignLineEdge"
+	case StyleRubyAlign_Max:
+		return "StyleRubyAlign_Max"
+	default:
+		return fmt.Sprintf("StyleRubyAlign(%d)", int32(e))
+	}
+}
+
 type StyleRubyOverhang int32
 
 const (
@@ -2609,6 +7563,25 @@ const (
 	StyleRubyOverhang_Max       StyleRubyOverhang = 2147483647
 )
 
+// String returns the StyleRubyOverhang constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleRubyOverhang) String() string {
+	switch e {
+	case StyleRubyOverhangNotSet:
+		return "StyleRubyOverhangNotSet"
+	case StyleRubyOverhangAuto:
+		return "StyleRubyOverhangAuto"
+	case StyleRubyOverhangWhitespace:
+		return "StyleRubyOverhangWhitespace"
+	case StyleRubyOverhangNone:
+		return "StyleRubyOverhangNone"
+	case StyleRubyOverhang_Max:
+		return "StyleRubyOverhang_Max"
+	default:
+		return fmt.Sprintf("StyleRubyOverhang(%d)", int32(e))
+	}
+}
+
 type StyleRubyPosition int32
 
 const (
@@ -2617,6 +7590,23 @@ const (
 	StyleRubyPositionInline StyleRubyPosition = 2
 	StyleRubyPosition_Max   StyleRubyPosition = 2147483647
 )
+
+// String returns the StyleRubyPosition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleRubyPosition) String() string {
+	switch e {
+	case StyleRubyPositionNotSet:
+		return "StyleRubyPositionNotSet"
+	case StyleRubyPositionAbove:
+		return "StyleRubyPositionAbove"
+	case StyleRubyPositionInline:
+		return "StyleRubyPositionInline"
+	case StyleRubyPosition_Max:
+		return "StyleRubyPosition_Max"
+	default:
+		return fmt.Sprintf("StyleRubyPosition(%d)", int32(e))
+	}
+}
 
 type StyleStrokeLinecap int32
 
@@ -2628,6 +7618,25 @@ const (
 	StyleStrokeLinecap_Max   StyleStrokeLinecap = 2147483647
 )
 
+// String returns the StyleStrokeLinecap constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleStrokeLinecap) String() string {
+	switch e {
+	case StyleStrokeLinecapNotSet:
+		return "StyleStrokeLinecapNotSet"
+	case StyleStrokeLinecapButt:
+		return "StyleStrokeLinecapButt"
+	case StyleStrokeLinecapRound:
+		return "StyleStrokeLinecapRound"
+	case StyleStrokeLinecapSquare:
+		return "StyleStrokeLinecapSquare"
+	case StyleStrokeLinecap_Max:
+		return "StyleStrokeLinecap_Max"
+	default:
+		return fmt.Sprintf("StyleStrokeLinecap(%d)", int32(e))
+	}
+}
+
 type StyleStrokeLinejoin int32
 
 const (
@@ -2637,6 +7646,25 @@ const (
 	StyleStrokeLinejoinBevel  StyleStrokeLinejoin = 3
 	StyleStrokeLinejoin_Max   StyleStrokeLinejoin = 2147483647
 )
+
+// String returns the StyleStrokeLinejoin constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleStrokeLinejoin) String() string {
+	switch e {
+	case StyleStrokeLinejoinNotSet:
+		return "StyleStrokeLinejoinNotSet"
+	case StyleStrokeLinejoinMiter:
+		return "StyleStrokeLinejoinMiter"
+	case StyleStrokeLinejoinRound:
+		return "StyleStrokeLinejoinRound"
+	case StyleStrokeLinejoinBevel:
+		return "StyleStrokeLinejoinBevel"
+	case StyleStrokeLinejoin_Max:
+		return "StyleStrokeLinejoin_Max"
+	default:
+		return fmt.Sprintf("StyleStrokeLinejoin(%d)", int32(e))
+	}
+}
 
 type StyleStyleFloat int32
 
@@ -2648,6 +7676,25 @@ const (
 	StyleStyleFloat_Max   StyleStyleFloat = 2147483647
 )
 
+// String returns the StyleStyleFloat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleStyleFloat) String() string {
+	switch e {
+	case StyleStyleFloatNotSet:
+		return "StyleStyleFloatNotSet"
+	case StyleStyleFloatLeft:
+		return "StyleStyleFloatLeft"
+	case StyleStyleFloatRight:
+		return "StyleStyleFloatRight"
+	case StyleStyleFloatNone:
+		return "StyleStyleFloatNone"
+	case StyleStyleFloat_Max:
+		return "StyleStyleFloat_Max"
+	default:
+		return fmt.Sprintf("StyleStyleFloat(%d)", int32(e))
+	}
+}
+
 type StyleTableLayout int32
 
 const (
@@ -2656,6 +7703,23 @@ const (
 	StyleTableLayoutFixed  StyleTableLayout = 2
 	StyleTableLayout_Max   StyleTableLayout = 2147483647
 )
+
+// String returns the StyleTableLayout constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTableLayout) String() string {
+	switch e {
+	case StyleTableLayoutNotSet:
+		return "StyleTableLayoutNotSet"
+	case StyleTableLayoutAuto:
+		return "StyleTableLayoutAuto"
+	case StyleTableLayoutFixed:
+		return "StyleTableLayoutFixed"
+	case StyleTableLayout_Max:
+		return "StyleTableLayout_Max"
+	default:
+		return fmt.Sprintf("StyleTableLayout(%d)", int32(e))
+	}
+}
 
 type StyleTextAlignLast int32
 
@@ -2669,6 +7733,29 @@ const (
 	StyleTextAlignLast_Max    StyleTextAlignLast = 2147483647
 )
 
+// String returns the StyleTextAlignLast constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextAlignLast) String() string {
+	switch e {
+	case StyleTextAlignLastNotSet:
+		return "StyleTextAlignLastNotSet"
+	case StyleTextAlignLastLeft:
+		return "StyleTextAlignLastLeft"
+	case StyleTextAlignLastCenter:
+		return "StyleTextAlignLastCenter"
+	case StyleTextAlignLastRight:
+		return "StyleTextAlignLastRight"
+	case StyleTextAlignLastJustify:
+		return "StyleTextAlignLastJustify"
+	case StyleTextAlignLastAuto:
+		return "StyleTextAlignLastAuto"
+	case StyleTextAlignLast_Max:
+		return "StyleTextAlignLast_Max"
+	default:
+		return fmt.Sprintf("StyleTextAlignLast(%d)", int32(e))
+	}
+}
+
 type StyleTextAnchor int32
 
 const (
@@ -2678,6 +7765,25 @@ const (
 	StyleTextAnchorEnd    StyleTextAnchor = 3
 	StyleTextAnchor_Max   StyleTextAnchor = 2147483647
 )
+
+// String returns the StyleTextAnchor constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextAnchor) String() string {
+	switch e {
+	case StyleTextAnchorNotSet:
+		return "StyleTextAnchorNotSet"
+	case StyleTextAnchorStart:
+		return "StyleTextAnchorStart"
+	case StyleTextAnchorMiddle:
+		return "StyleTextAnchorMiddle"
+	case StyleTextAnchorEnd:
+		return "StyleTextAnchorEnd"
+	case StyleTextAnchor_Max:
+		return "StyleTextAnchor_Max"
+	default:
+		return fmt.Sprintf("StyleTextAnchor(%d)", int32(e))
+	}
+}
 
 type StyleTextDecoration int32
 
@@ -2690,6 +7796,27 @@ const (
 	StyleTextDecoration_Max        StyleTextDecoration = 2147483647
 )
 
+// String returns the StyleTextDecoration constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextDecoration) String() string {
+	switch e {
+	case StyleTextDecorationNone:
+		return "StyleTextDecorationNone"
+	case StyleTextDecorationUnderline:
+		return "StyleTextDecorationUnderline"
+	case StyleTextDecorationOverline:
+		return "StyleTextDecorationOverline"
+	case StyleTextDecorationLineThrough:
+		return "StyleTextDecorationLineThrough"
+	case StyleTextDecorationBlink:
+		return "StyleTextDecorationBlink"
+	case StyleTextDecoration_Max:
+		return "StyleTextDecoration_Max"
+	default:
+		return fmt.Sprintf("StyleTextDecoration(%d)", int32(e))
+	}
+}
+
 type StyleTextEffect int32
 
 const (
@@ -2699,6 +7826,25 @@ const (
 	StyleTextEffectOutline StyleTextEffect = 3
 	StyleTextEffect_Max    StyleTextEffect = 2147483647
 )
+
+// String returns the StyleTextEffect constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextEffect) String() string {
+	switch e {
+	case StyleTextEffectNone:
+		return "StyleTextEffectNone"
+	case StyleTextEffectEmboss:
+		return "StyleTextEffectEmboss"
+	case StyleTextEffectEngrave:
+		return "StyleTextEffectEngrave"
+	case StyleTextEffectOutline:
+		return "StyleTextEffectOutline"
+	case StyleTextEffect_Max:
+		return "StyleTextEffect_Max"
+	default:
+		return fmt.Sprintf("StyleTextEffect(%d)", int32(e))
+	}
+}
 
 type StyleTextJustify int32
 
@@ -2715,6 +7861,35 @@ const (
 	StyleTextJustify_Max               StyleTextJustify = 2147483647
 )
 
+// String returns the StyleTextJustify constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextJustify) String() string {
+	switch e {
+	case StyleTextJustifyNotSet:
+		return "StyleTextJustifyNotSet"
+	case StyleTextJustifyInterWord:
+		return "StyleTextJustifyInterWord"
+	case StyleTextJustifyNewspaper:
+		return "StyleTextJustifyNewspaper"
+	case StyleTextJustifyDistribute:
+		return "StyleTextJustifyDistribute"
+	case StyleTextJustifyDistributeAllLines:
+		return "StyleTextJustifyDistributeAllLines"
+	case StyleTextJustifyInterIdeograph:
+		return "StyleTextJustifyInterIdeograph"
+	case StyleTextJustifyInterCluster:
+		return "StyleTextJustifyInterCluster"
+	case StyleTextJustifyKashida:
+		return "StyleTextJustifyKashida"
+	case StyleTextJustifyAuto:
+		return "StyleTextJustifyAuto"
+	case StyleTextJustify_Max:
+		return "StyleTextJustify_Max"
+	default:
+		return fmt.Sprintf("StyleTextJustify(%d)", int32(e))
+	}
+}
+
 type StyleTextJustifyTrim int32
 
 const (
@@ -2725,6 +7900,25 @@ const (
 	StyleTextJustifyTrim_Max         StyleTextJustifyTrim = 2147483647
 )
 
+// String returns the StyleTextJustifyTrim constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextJustifyTrim) String() string {
+	switch e {
+	case StyleTextJustifyTrimNotSet:
+		return "StyleTextJustifyTrimNotSet"
+	case StyleTextJustifyTrimNone:
+		return "StyleTextJustifyTrimNone"
+	case StyleTextJustifyTrimPunctuation:
+		return "StyleTextJustifyTrimPunctuation"
+	case StyleTextJustifyTrimPunctAndKana:
+		return "StyleTextJustifyTrimPunctAndKana"
+	case StyleTextJustifyTrim_Max:
+		return "StyleTextJustifyTrim_Max"
+	default:
+		return fmt.Sprintf("StyleTextJustifyTrim(%d)", int32(e))
+	}
+}
+
 type StyleTextLineThroughStyle int32
 
 const (
@@ -2733,6 +7927,23 @@ const (
 	StyleTextLineThroughStyleDouble    StyleTextLineThroughStyle = 2
 	StyleTextLineThroughStyle_Max      StyleTextLineThroughStyle = 2147483647
 )
+
+// String returns the StyleTextLineThroughStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextLineThroughStyle) String() string {
+	switch e {
+	case StyleTextLineThroughStyleUndefined:
+		return "StyleTextLineThroughStyleUndefined"
+	case StyleTextLineThroughStyleSingle:
+		return "StyleTextLineThroughStyleSingle"
+	case StyleTextLineThroughStyleDouble:
+		return "StyleTextLineThroughStyleDouble"
+	case StyleTextLineThroughStyle_Max:
+		return "StyleTextLineThroughStyle_Max"
+	default:
+		return fmt.Sprintf("StyleTextLineThroughStyle(%d)", int32(e))
+	}
+}
 
 type StyleTextOverflow int32
 
@@ -2743,6 +7954,23 @@ const (
 	StyleTextOverflow_Max     StyleTextOverflow = 2147483647
 )
 
+// String returns the StyleTextOverflow constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextOverflow) String() string {
+	switch e {
+	case StyleTextOverflowClip:
+		return "StyleTextOverflowClip"
+	case StyleTextOverflowEllipsis:
+		return "StyleTextOverflowEllipsis"
+	case StyleTextOverflowNotSet:
+		return "StyleTextOverflowNotSet"
+	case StyleTextOverflow_Max:
+		return "StyleTextOverflow_Max"
+	default:
+		return fmt.Sprintf("StyleTextOverflow(%d)", int32(e))
+	}
+}
+
 type StyleTextSizeAdjust int32
 
 const (
@@ -2750,6 +7978,21 @@ const (
 	StyleTextSizeAdjustAuto StyleTextSizeAdjust = 1
 	StyleTextSizeAdjust_Max StyleTextSizeAdjust = 2147483647
 )
+
+// String returns the StyleTextSizeAdjust constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextSizeAdjust) String() string {
+	switch e {
+	case StyleTextSizeAdjustNone:
+		return "StyleTextSizeAdjustNone"
+	case StyleTextSizeAdjustAuto:
+		return "StyleTextSizeAdjustAuto"
+	case StyleTextSizeAdjust_Max:
+		return "StyleTextSizeAdjust_Max"
+	default:
+		return fmt.Sprintf("StyleTextSizeAdjust(%d)", int32(e))
+	}
+}
 
 type StyleTextTransform int32
 
@@ -2762,6 +8005,27 @@ const (
 	StyleTextTransform_Max       StyleTextTransform = 2147483647
 )
 
+// String returns the StyleTextTransform constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextTransform) String() string {
+	switch e {
+	case StyleTextTransformNotSet:
+		return "StyleTextTransformNotSet"
+	case StyleTextTransformCapitalize:
+		return "StyleTextTransformCapitalize"
+	case StyleTextTransformLowercase:
+		return "StyleTextTransformLowercase"
+	case StyleTextTransformUppercase:
+		return "StyleTextTransformUppercase"
+	case StyleTextTransformNone:
+		return "StyleTextTransformNone"
+	case StyleTextTransform_Max:
+		return "StyleTextTransform_Max"
+	default:
+		return fmt.Sprintf("StyleTextTransform(%d)", int32(e))
+	}
+}
+
 type StyleTextUnderlinePosition int32
 
 const (
@@ -2771,6 +8035,25 @@ const (
 	StyleTextUnderlinePositionNotSet StyleTextUnderlinePosition = 3
 	StyleTextUnderlinePosition_Max   StyleTextUnderlinePosition = 2147483647
 )
+
+// String returns the StyleTextUnderlinePosition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextUnderlinePosition) String() string {
+	switch e {
+	case StyleTextUnderlinePositionBelow:
+		return "StyleTextUnderlinePositionBelow"
+	case StyleTextUnderlinePositionAbove:
+		return "StyleTextUnderlinePositionAbove"
+	case StyleTextUnderlinePositionAuto:
+		return "StyleTextUnderlinePositionAuto"
+	case StyleTextUnderlinePositionNotSet:
+		return "StyleTextUnderlinePositionNotSet"
+	case StyleTextUnderlinePosition_Max:
+		return "StyleTextUnderlinePosition_Max"
+	default:
+		return fmt.Sprintf("StyleTextUnderlinePosition(%d)", int32(e))
+	}
+}
 
 type StyleTextUnderlineStyle int32
 
@@ -2791,6 +8074,43 @@ const (
 	StyleTextUnderlineStyle_Max             StyleTextUnderlineStyle = 2147483647
 )
 
+// String returns the StyleTextUnderlineStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTextUnderlineStyle) String() string {
+	switch e {
+	case StyleTextUnderlineStyleUndefined:
+		return "StyleTextUnderlineStyleUndefined"
+	case StyleTextUnderlineStyleSingle:
+		return "StyleTextUnderlineStyleSingle"
+	case StyleTextUnderlineStyleDouble:
+		return "StyleTextUnderlineStyleDouble"
+	case StyleTextUnderlineStyleWords:
+		return "StyleTextUnderlineStyleWords"
+	case StyleTextUnderlineStyleDotted:
+		return "StyleTextUnderlineStyleDotted"
+	case StyleTextUnderlineStyleThick:
+		return "StyleTextUnderlineStyleThick"
+	case StyleTextUnderlineStyleDash:
+		return "StyleTextUnderlineStyleDash"
+	case StyleTextUnderlineStyleDotDash:
+		return "StyleTextUnderlineStyleDotDash"
+	case StyleTextUnderlineStyleDotDotDash:
+		return "StyleTextUnderlineStyleDotDotDash"
+	case StyleTextUnderlineStyleWave:
+		return "StyleTextUnderlineStyleWave"
+	case StyleTextUnderlineStyleSingleAccounting:
+		return "StyleTextUnderlineStyleSingleAccounting"
+	case StyleTextUnderlineStyleDoubleAccounting:
+		return "StyleTextUnderlineStyleDoubleAccounting"
+	case StyleTextUnderlineStyleThickDash:
+		return "StyleTextUnderlineStyleThickDash"
+	case StyleTextUnderlineStyle_Max:
+		return "StyleTextUnderlineStyle_Max"
+	default:
+		return fmt.Sprintf("StyleTextUnderlineStyle(%d)", int32(e))
+	}
+}
+
 type StyleTransformOriginX int32
 
 const (
@@ -2800,6 +8120,25 @@ const (
 	StyleTransformOriginXRight  StyleTransformOriginX = 3
 	StyleTransformOriginX_Max   StyleTransformOriginX = 2147483647
 )
+
+// String returns the StyleTransformOriginX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTransformOriginX) String() string {
+	switch e {
+	case StyleTransformOriginXNotSet:
+		return "StyleTransformOriginXNotSet"
+	case StyleTransformOriginXLeft:
+		return "StyleTransformOriginXLeft"
+	case StyleTransformOriginXCenter:
+		return "StyleTransformOriginXCenter"
+	case StyleTransformOriginXRight:
+		return "StyleTransformOriginXRight"
+	case StyleTransformOriginX_Max:
+		return "StyleTransformOriginX_Max"
+	default:
+		return fmt.Sprintf("StyleTransformOriginX(%d)", int32(e))
+	}
+}
 
 type StyleTransformOriginY int32
 
@@ -2811,6 +8150,25 @@ const (
 	StyleTransformOriginY_Max   StyleTransformOriginY = 2147483647
 )
 
+// String returns the StyleTransformOriginY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTransformOriginY) String() string {
+	switch e {
+	case StyleTransformOriginYNotSet:
+		return "StyleTransformOriginYNotSet"
+	case StyleTransformOriginYTop:
+		return "StyleTransformOriginYTop"
+	case StyleTransformOriginYCenter:
+		return "StyleTransformOriginYCenter"
+	case StyleTransformOriginYBottom:
+		return "StyleTransformOriginYBottom"
+	case StyleTransformOriginY_Max:
+		return "StyleTransformOriginY_Max"
+	default:
+		return fmt.Sprintf("StyleTransformOriginY(%d)", int32(e))
+	}
+}
+
 type StyleTransformStyle int32
 
 const (
@@ -2820,6 +8178,23 @@ const (
 	StyleTransformStyle_Max       StyleTransformStyle = 2147483647
 )
 
+// String returns the StyleTransformStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleTransformStyle) String() string {
+	switch e {
+	case StyleTransformStyleFlat:
+		return "StyleTransformStyleFlat"
+	case StyleTransformStylePreserve3D:
+		return "StyleTransformStylePreserve3D"
+	case StyleTransformStyleNotSet:
+		return "StyleTransformStyleNotSet"
+	case StyleTransformStyle_Max:
+		return "StyleTransformStyle_Max"
+	default:
+		return fmt.Sprintf("StyleTransformStyle(%d)", int32(e))
+	}
+}
+
 type StyleUserZoom int32
 
 const (
@@ -2828,6 +8203,23 @@ const (
 	StyleUserZoomFixed  StyleUserZoom = 2
 	StyleUserZoom_Max   StyleUserZoom = 2147483647
 )
+
+// String returns the StyleUserZoom constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleUserZoom) String() string {
+	switch e {
+	case StyleUserZoomNotSet:
+		return "StyleUserZoomNotSet"
+	case StyleUserZoomZoom:
+		return "StyleUserZoomZoom"
+	case StyleUserZoomFixed:
+		return "StyleUserZoomFixed"
+	case StyleUserZoom_Max:
+		return "StyleUserZoom_Max"
+	default:
+		return fmt.Sprintf("StyleUserZoom(%d)", int32(e))
+	}
+}
 
 type StyleVerticalAlign int32
 
@@ -2846,6 +8238,39 @@ const (
 	StyleVerticalAlign_Max       StyleVerticalAlign = 2147483647
 )
 
+// String returns the StyleVerticalAlign constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleVerticalAlign) String() string {
+	switch e {
+	case StyleVerticalAlignAuto:
+		return "StyleVerticalAlignAuto"
+	case StyleVerticalAlignBaseline:
+		return "StyleVerticalAlignBaseline"
+	case StyleVerticalAlignSub:
+		return "StyleVerticalAlignSub"
+	case StyleVerticalAlignSuper:
+		return "StyleVerticalAlignSuper"
+	case StyleVerticalAlignTop:
+		return "StyleVerticalAlignTop"
+	case StyleVerticalAlignTextTop:
+		return "StyleVerticalAlignTextTop"
+	case StyleVerticalAlignMiddle:
+		return "StyleVerticalAlignMiddle"
+	case StyleVerticalAlignBottom:
+		return "StyleVerticalAlignBottom"
+	case StyleVerticalAlignTextBottom:
+		return "StyleVerticalAlignTextBottom"
+	case StyleVerticalAlignInherit:
+		return "StyleVerticalAlignInherit"
+	case StyleVerticalAlignNotSet:
+		return "StyleVerticalAlignNotSet"
+	case StyleVerticalAlign_Max:
+		return "StyleVerticalAlign_Max"
+	default:
+		return fmt.Sprintf("StyleVerticalAlign(%d)", int32(e))
+	}
+}
+
 type StyleViewportSize int32
 
 const (
@@ -2854,6 +8279,23 @@ const (
 	StyleViewportSizeDeviceHeight StyleViewportSize = 2
 	StyleViewportSize_Max         StyleViewportSize = 2147483647
 )
+
+// String returns the StyleViewportSize constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleViewportSize) String() string {
+	switch e {
+	case StyleViewportSizeAuto:
+		return "StyleViewportSizeAuto"
+	case StyleViewportSizeDeviceWidth:
+		return "StyleViewportSizeDeviceWidth"
+	case StyleViewportSizeDeviceHeight:
+		return "StyleViewportSizeDeviceHeight"
+	case StyleViewportSize_Max:
+		return "StyleViewportSize_Max"
+	default:
+		return fmt.Sprintf("StyleViewportSize(%d)", int32(e))
+	}
+}
 
 type StyleVisibility int32
 
@@ -2865,6 +8307,27 @@ const (
 	StyleVisibilityCollapse StyleVisibility = 4
 	StyleVisibility_Max     StyleVisibility = 2147483647
 )
+
+// String returns the StyleVisibility constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleVisibility) String() string {
+	switch e {
+	case StyleVisibilityNotSet:
+		return "StyleVisibilityNotSet"
+	case StyleVisibilityInherit:
+		return "StyleVisibilityInherit"
+	case StyleVisibilityVisible:
+		return "StyleVisibilityVisible"
+	case StyleVisibilityHidden:
+		return "StyleVisibilityHidden"
+	case StyleVisibilityCollapse:
+		return "StyleVisibilityCollapse"
+	case StyleVisibility_Max:
+		return "StyleVisibility_Max"
+	default:
+		return fmt.Sprintf("StyleVisibility(%d)", int32(e))
+	}
+}
 
 type StyleWebkitAppearance int32
 
@@ -2907,6 +8370,87 @@ const (
 	StyleWebkitAppearance_Max                         StyleWebkitAppearance = 2147483647
 )
 
+// String returns the StyleWebkitAppearance constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleWebkitAppearance) String() string {
+	switch e {
+	case StyleWebkitAppearanceNone:
+		return "StyleWebkitAppearanceNone"
+	case StyleWebkitAppearanceCapsLockIndicator:
+		return "StyleWebkitAppearanceCapsLockIndicator"
+	case StyleWebkitAppearanceButton:
+		return "StyleWebkitAppearanceButton"
+	case StyleWebkitAppearanceButtonBevel:
+		return "StyleWebkitAppearanceButtonBevel"
+	case StyleWebkitAppearanceCaret:
+		return "StyleWebkitAppearanceCaret"
+	case StyleWebkitAppearanceCheckbox:
+		return "StyleWebkitAppearanceCheckbox"
+	case StyleWebkitAppearanceDefaultButton:
+		return "StyleWebkitAppearanceDefaultButton"
+	case StyleWebkitAppearanceListbox:
+		return "StyleWebkitAppearanceListbox"
+	case StyleWebkitAppearanceListitem:
+		return "StyleWebkitAppearanceListitem"
+	case StyleWebkitAppearanceMediaFullscreenButton:
+		return "StyleWebkitAppearanceMediaFullscreenButton"
+	case StyleWebkitAppearanceMediaMuteButton:
+		return "StyleWebkitAppearanceMediaMuteButton"
+	case StyleWebkitAppearanceMediaPlayButton:
+		return "StyleWebkitAppearanceMediaPlayButton"
+	case StyleWebkitAppearanceMediaSeekBackButton:
+		return "StyleWebkitAppearanceMediaSeekBackButton"
+	case StyleWebkitAppearanceMediaSeekForwardButton:
+		return "StyleWebkitAppearanceMediaSeekForwardButton"
+	case StyleWebkitAppearanceMediaSlider:
+		return "StyleWebkitAppearanceMediaSlider"
+	case StyleWebkitAppearanceMediaSliderthumb:
+		return "StyleWebkitAppearanceMediaSliderthumb"
+	case StyleWebkitAppearanceMenulist:
+		return "StyleWebkitAppearanceMenulist"
+	case StyleWebkitAppearanceMenulistButton:
+		return "StyleWebkitAppearanceMenulistButton"
+	case StyleWebkitAppearanceMenulistText:
+		return "StyleWebkitAppearanceMenulistText"
+	case StyleWebkitAppearanceMenulistTextfield:
+		return "StyleWebkitAppearanceMenulistTextfield"
+	case StyleWebkitAppearancePushButton:
+		return "StyleWebkitAppearancePushButton"
+	case StyleWebkitAppearanceRadio:
+		return "StyleWebkitAppearanceRadio"
+	case StyleWebkitAppearanceSearchfield:
+		return "StyleWebkitAppearanceSearchfield"
+	case StyleWebkitAppearanceSearchfieldCancelButton:
+		return "StyleWebkitAppearanceSearchfieldCancelButton"
+	case StyleWebkitAppearanceSearchfieldDecoration:
+		return "StyleWebkitAppearanceSearchfieldDecoration"
+	case StyleWebkitAppearanceSearchfieldResultsButton:
+		return "StyleWebkitAppearanceSearchfieldResultsButton"
+	case StyleWebkitAppearanceSearchfieldResultsDecoration:
+		return "StyleWebkitAppearanceSearchfieldResultsDecoration"
+	case StyleWebkitAppearanceSliderHorizontal:
+		return "StyleWebkitAppearanceSliderHorizontal"
+	case StyleWebkitAppearanceSliderVertical:
+		return "StyleWebkitAppearanceSliderVertical"
+	case StyleWebkitAppearanceSliderthumbHorizontal:
+		return "StyleWebkitAppearanceSliderthumbHorizontal"
+	case StyleWebkitAppearanceSliderthumbVertical:
+		return "StyleWebkitAppearanceSliderthumbVertical"
+	case StyleWebkitAppearanceSquareButton:
+		return "StyleWebkitAppearanceSquareButton"
+	case StyleWebkitAppearanceTextarea:
+		return "StyleWebkitAppearanceTextarea"
+	case StyleWebkitAppearanceTextfield:
+		return "StyleWebkitAppearanceTextfield"
+	case StyleWebkitAppearanceNotSet:
+		return "StyleWebkitAppearanceNotSet"
+	case StyleWebkitAppearance_Max:
+		return "StyleWebkitAppearance_Max"
+	default:
+		return fmt.Sprintf("StyleWebkitAppearance(%d)", int32(e))
+	}
+}
+
 type StyleWebkitBoxDirection int32
 
 const (
@@ -2915,6 +8459,23 @@ const (
 	StyleWebkitBoxDirectionNotSet  StyleWebkitBoxDirection = 2
 	StyleWebkitBoxDirection_Max    StyleWebkitBoxDirection = 2147483647
 )
+
+// String returns the StyleWebkitBoxDirection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleWebkitBoxDirection) String() string {
+	switch e {
+	case StyleWebkitBoxDirectionNormal:
+		return "StyleWebkitBoxDirectionNormal"
+	case StyleWebkitBoxDirectionReverse:
+		return "StyleWebkitBoxDirectionReverse"
+	case StyleWebkitBoxDirectionNotSet:
+		return "StyleWebkitBoxDirectionNotSet"
+	case StyleWebkitBoxDirection_Max:
+		return "StyleWebkitBoxDirection_Max"
+	default:
+		return fmt.Sprintf("StyleWebkitBoxDirection(%d)", int32(e))
+	}
+}
 
 type StyleWebkitBoxOrient int32
 
@@ -2927,6 +8488,27 @@ const (
 	StyleWebkitBoxOrient_Max       StyleWebkitBoxOrient = 2147483647
 )
 
+// String returns the StyleWebkitBoxOrient constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleWebkitBoxOrient) String() string {
+	switch e {
+	case StyleWebkitBoxOrientHorizontal:
+		return "StyleWebkitBoxOrientHorizontal"
+	case StyleWebkitBoxOrientInlineAxis:
+		return "StyleWebkitBoxOrientInlineAxis"
+	case StyleWebkitBoxOrientVertical:
+		return "StyleWebkitBoxOrientVertical"
+	case StyleWebkitBoxOrientBlockAxis:
+		return "StyleWebkitBoxOrientBlockAxis"
+	case StyleWebkitBoxOrientNotSet:
+		return "StyleWebkitBoxOrientNotSet"
+	case StyleWebkitBoxOrient_Max:
+		return "StyleWebkitBoxOrient_Max"
+	default:
+		return fmt.Sprintf("StyleWebkitBoxOrient(%d)", int32(e))
+	}
+}
+
 type StyleWebkitBoxPack int32
 
 const (
@@ -2937,6 +8519,27 @@ const (
 	StyleWebkitBoxPackNotSet  StyleWebkitBoxPack = 5
 	StyleWebkitBoxPack_Max    StyleWebkitBoxPack = 2147483647
 )
+
+// String returns the StyleWebkitBoxPack constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleWebkitBoxPack) String() string {
+	switch e {
+	case StyleWebkitBoxPackStart:
+		return "StyleWebkitBoxPackStart"
+	case StyleWebkitBoxPackEnd:
+		return "StyleWebkitBoxPackEnd"
+	case StyleWebkitBoxPackCenter:
+		return "StyleWebkitBoxPackCenter"
+	case StyleWebkitBoxPackJustify:
+		return "StyleWebkitBoxPackJustify"
+	case StyleWebkitBoxPackNotSet:
+		return "StyleWebkitBoxPackNotSet"
+	case StyleWebkitBoxPack_Max:
+		return "StyleWebkitBoxPack_Max"
+	default:
+		return fmt.Sprintf("StyleWebkitBoxPack(%d)", int32(e))
+	}
+}
 
 type StyleWhiteSpace int32
 
@@ -2950,12 +8553,48 @@ const (
 	StyleWhiteSpace_Max    StyleWhiteSpace = 2147483647
 )
 
+// String returns the StyleWhiteSpace constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleWhiteSpace) String() string {
+	switch e {
+	case StyleWhiteSpaceNotSet:
+		return "StyleWhiteSpaceNotSet"
+	case StyleWhiteSpaceNormal:
+		return "StyleWhiteSpaceNormal"
+	case StyleWhiteSpacePre:
+		return "StyleWhiteSpacePre"
+	case StyleWhiteSpaceNowrap:
+		return "StyleWhiteSpaceNowrap"
+	case StyleWhiteSpacePreline:
+		return "StyleWhiteSpacePreline"
+	case StyleWhiteSpacePrewrap:
+		return "StyleWhiteSpacePrewrap"
+	case StyleWhiteSpace_Max:
+		return "StyleWhiteSpace_Max"
+	default:
+		return fmt.Sprintf("StyleWhiteSpace(%d)", int32(e))
+	}
+}
+
 type StyleWidowsOrphans int32
 
 const (
 	StyleWidowsOrphansNotSet StyleWidowsOrphans = -2147483647
 	StyleWidowsOrphans_Max   StyleWidowsOrphans = 2147483647
 )
+
+// String returns the StyleWidowsOrphans constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleWidowsOrphans) String() string {
+	switch e {
+	case StyleWidowsOrphansNotSet:
+		return "StyleWidowsOrphansNotSet"
+	case StyleWidowsOrphans_Max:
+		return "StyleWidowsOrphans_Max"
+	default:
+		return fmt.Sprintf("StyleWidowsOrphans(%d)", int32(e))
+	}
+}
 
 type StyleWordBreak int32
 
@@ -2967,6 +8606,25 @@ const (
 	StyleWordBreak_Max     StyleWordBreak = 2147483647
 )
 
+// String returns the StyleWordBreak constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleWordBreak) String() string {
+	switch e {
+	case StyleWordBreakNotSet:
+		return "StyleWordBreakNotSet"
+	case StyleWordBreakNormal:
+		return "StyleWordBreakNormal"
+	case StyleWordBreakBreakAll:
+		return "StyleWordBreakBreakAll"
+	case StyleWordBreakKeepAll:
+		return "StyleWordBreakKeepAll"
+	case StyleWordBreak_Max:
+		return "StyleWordBreak_Max"
+	default:
+		return fmt.Sprintf("StyleWordBreak(%d)", int32(e))
+	}
+}
+
 type StyleWordWrap int32
 
 const (
@@ -2975,6 +8633,23 @@ const (
 	StyleWordWrapOn     StyleWordWrap = 2
 	StyleWordWrap_Max   StyleWordWrap = 2147483647
 )
+
+// String returns the StyleWordWrap constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleWordWrap) String() string {
+	switch e {
+	case StyleWordWrapNotSet:
+		return "StyleWordWrapNotSet"
+	case StyleWordWrapOff:
+		return "StyleWordWrapOff"
+	case StyleWordWrapOn:
+		return "StyleWordWrapOn"
+	case StyleWordWrap_Max:
+		return "StyleWordWrap_Max"
+	default:
+		return fmt.Sprintf("StyleWordWrap(%d)", int32(e))
+	}
+}
 
 type StyleWrapFlow int32
 
@@ -2990,6 +8665,33 @@ const (
 	StyleWrapFlow_Max    StyleWrapFlow = 2147483647
 )
 
+// String returns the StyleWrapFlow constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleWrapFlow) String() string {
+	switch e {
+	case StyleWrapFlowNotSet:
+		return "StyleWrapFlowNotSet"
+	case StyleWrapFlowAuto:
+		return "StyleWrapFlowAuto"
+	case StyleWrapFlowBoth:
+		return "StyleWrapFlowBoth"
+	case StyleWrapFlowStart:
+		return "StyleWrapFlowStart"
+	case StyleWrapFlowEnd:
+		return "StyleWrapFlowEnd"
+	case StyleWrapFlowClear:
+		return "StyleWrapFlowClear"
+	case StyleWrapFlowMinimum:
+		return "StyleWrapFlowMinimum"
+	case StyleWrapFlowMaximum:
+		return "StyleWrapFlowMaximum"
+	case StyleWrapFlow_Max:
+		return "StyleWrapFlow_Max"
+	default:
+		return fmt.Sprintf("StyleWrapFlow(%d)", int32(e))
+	}
+}
+
 type StyleWrapThrough int32
 
 const (
@@ -2998,6 +8700,23 @@ const (
 	StyleWrapThroughNone   StyleWrapThrough = 2
 	StyleWrapThrough_Max   StyleWrapThrough = 2147483647
 )
+
+// String returns the StyleWrapThrough constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleWrapThrough) String() string {
+	switch e {
+	case StyleWrapThroughNotSet:
+		return "StyleWrapThroughNotSet"
+	case StyleWrapThroughWrap:
+		return "StyleWrapThroughWrap"
+	case StyleWrapThroughNone:
+		return "StyleWrapThroughNone"
+	case StyleWrapThrough_Max:
+		return "StyleWrapThrough_Max"
+	default:
+		return fmt.Sprintf("StyleWrapThrough(%d)", int32(e))
+	}
+}
 
 type StyleWritingMode int32
 
@@ -3017,12 +8736,60 @@ const (
 	StyleWritingMode_Max   StyleWritingMode = 2147483647
 )
 
+// String returns the StyleWritingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleWritingMode) String() string {
+	switch e {
+	case StyleWritingModeLrtb:
+		return "StyleWritingModeLrtb"
+	case StyleWritingModeTbrl:
+		return "StyleWritingModeTbrl"
+	case StyleWritingModeRltb:
+		return "StyleWritingModeRltb"
+	case StyleWritingModeBtrl:
+		return "StyleWritingModeBtrl"
+	case StyleWritingModeNotSet:
+		return "StyleWritingModeNotSet"
+	case StyleWritingModeTblr:
+		return "StyleWritingModeTblr"
+	case StyleWritingModeBtlr:
+		return "StyleWritingModeBtlr"
+	case StyleWritingModeLrbt:
+		return "StyleWritingModeLrbt"
+	case StyleWritingModeRlbt:
+		return "StyleWritingModeRlbt"
+	case StyleWritingModeLr:
+		return "StyleWritingModeLr"
+	case StyleWritingModeRl:
+		return "StyleWritingModeRl"
+	case StyleWritingModeTb:
+		return "StyleWritingModeTb"
+	case StyleWritingMode_Max:
+		return "StyleWritingMode_Max"
+	default:
+		return fmt.Sprintf("StyleWritingMode(%d)", int32(e))
+	}
+}
+
 type StyleZIndex int32
 
 const (
 	StyleZIndexAuto StyleZIndex = -2147483647
 	StyleZIndex_Max StyleZIndex = 2147483647
 )
+
+// String returns the StyleZIndex constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StyleZIndex) String() string {
+	switch e {
+	case StyleZIndexAuto:
+		return "StyleZIndexAuto"
+	case StyleZIndex_Max:
+		return "StyleZIndex_Max"
+	default:
+		return fmt.Sprintf("StyleZIndex(%d)", int32(e))
+	}
+}
 
 type SvgAngleType int32
 
@@ -3035,6 +8802,27 @@ const (
 	SvgAngleType_Max          SvgAngleType = 2147483647
 )
 
+// String returns the SvgAngleType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgAngleType) String() string {
+	switch e {
+	case SVG_ANGLETYPE_UNKNOWN:
+		return "SVG_ANGLETYPE_UNKNOWN"
+	case SVG_ANGLETYPE_UNSPECIFIED:
+		return "SVG_ANGLETYPE_UNSPECIFIED"
+	case SVG_ANGLETYPE_DEG:
+		return "SVG_ANGLETYPE_DEG"
+	case SVG_ANGLETYPE_RAD:
+		return "SVG_ANGLETYPE_RAD"
+	case SVG_ANGLETYPE_GRAD:
+		return "SVG_ANGLETYPE_GRAD"
+	case SvgAngleType_Max:
+		return "SvgAngleType_Max"
+	default:
+		return fmt.Sprintf("SvgAngleType(%d)", int32(e))
+	}
+}
+
 type SvgChannel int32
 
 const (
@@ -3046,6 +8834,27 @@ const (
 	SvgChannel_Max      SvgChannel = 2147483647
 )
 
+// String returns the SvgChannel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgChannel) String() string {
+	switch e {
+	case SVG_CHANNEL_UNKNOWN:
+		return "SVG_CHANNEL_UNKNOWN"
+	case SVG_CHANNEL_R:
+		return "SVG_CHANNEL_R"
+	case SVG_CHANNEL_G:
+		return "SVG_CHANNEL_G"
+	case SVG_CHANNEL_B:
+		return "SVG_CHANNEL_B"
+	case SVG_CHANNEL_A:
+		return "SVG_CHANNEL_A"
+	case SvgChannel_Max:
+		return "SvgChannel_Max"
+	default:
+		return fmt.Sprintf("SvgChannel(%d)", int32(e))
+	}
+}
+
 type SvgEdgemode int32
 
 const (
@@ -3056,6 +8865,25 @@ const (
 	SvgEdgemode_Max        SvgEdgemode = 2147483647
 )
 
+// String returns the SvgEdgemode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgEdgemode) String() string {
+	switch e {
+	case SVG_EDGEMODE_UNKNOWN:
+		return "SVG_EDGEMODE_UNKNOWN"
+	case SVG_EDGEMODE_DUPLICATE:
+		return "SVG_EDGEMODE_DUPLICATE"
+	case SVG_EDGEMODE_WRAP:
+		return "SVG_EDGEMODE_WRAP"
+	case SVG_EDGEMODE_NONE:
+		return "SVG_EDGEMODE_NONE"
+	case SvgEdgemode_Max:
+		return "SvgEdgemode_Max"
+	default:
+		return fmt.Sprintf("SvgEdgemode(%d)", int32(e))
+	}
+}
+
 type SvgExternalResourcesRequired int32
 
 const (
@@ -3063,6 +8891,21 @@ const (
 	SvgExternalResourcesRequiredTrue  SvgExternalResourcesRequired = 1
 	SvgExternalResourcesRequired_Max  SvgExternalResourcesRequired = 2147483647
 )
+
+// String returns the SvgExternalResourcesRequired constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgExternalResourcesRequired) String() string {
+	switch e {
+	case SvgExternalResourcesRequiredFalse:
+		return "SvgExternalResourcesRequiredFalse"
+	case SvgExternalResourcesRequiredTrue:
+		return "SvgExternalResourcesRequiredTrue"
+	case SvgExternalResourcesRequired_Max:
+		return "SvgExternalResourcesRequired_Max"
+	default:
+		return fmt.Sprintf("SvgExternalResourcesRequired(%d)", int32(e))
+	}
+}
 
 type SvgFeblendMode int32
 
@@ -3076,6 +8919,29 @@ const (
 	SvgFeblendMode_Max        SvgFeblendMode = 2147483647
 )
 
+// String returns the SvgFeblendMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgFeblendMode) String() string {
+	switch e {
+	case SVG_FEBLEND_MODE_UNKNOWN:
+		return "SVG_FEBLEND_MODE_UNKNOWN"
+	case SVG_FEBLEND_MODE_NORMAL:
+		return "SVG_FEBLEND_MODE_NORMAL"
+	case SVG_FEBLEND_MODE_MULTIPLY:
+		return "SVG_FEBLEND_MODE_MULTIPLY"
+	case SVG_FEBLEND_MODE_SCREEN:
+		return "SVG_FEBLEND_MODE_SCREEN"
+	case SVG_FEBLEND_MODE_DARKEN:
+		return "SVG_FEBLEND_MODE_DARKEN"
+	case SVG_FEBLEND_MODE_LIGHTEN:
+		return "SVG_FEBLEND_MODE_LIGHTEN"
+	case SvgFeblendMode_Max:
+		return "SvgFeblendMode_Max"
+	default:
+		return fmt.Sprintf("SvgFeblendMode(%d)", int32(e))
+	}
+}
+
 type SvgFecolormatrixType int32
 
 const (
@@ -3086,6 +8952,27 @@ const (
 	SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA SvgFecolormatrixType = 4
 	SvgFecolormatrixType_Max                SvgFecolormatrixType = 2147483647
 )
+
+// String returns the SvgFecolormatrixType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgFecolormatrixType) String() string {
+	switch e {
+	case SVG_FECOLORMATRIX_TYPE_UNKNOWN:
+		return "SVG_FECOLORMATRIX_TYPE_UNKNOWN"
+	case SVG_FECOLORMATRIX_TYPE_MATRIX:
+		return "SVG_FECOLORMATRIX_TYPE_MATRIX"
+	case SVG_FECOLORMATRIX_TYPE_SATURATE:
+		return "SVG_FECOLORMATRIX_TYPE_SATURATE"
+	case SVG_FECOLORMATRIX_TYPE_HUEROTATE:
+		return "SVG_FECOLORMATRIX_TYPE_HUEROTATE"
+	case SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA:
+		return "SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA"
+	case SvgFecolormatrixType_Max:
+		return "SvgFecolormatrixType_Max"
+	default:
+		return fmt.Sprintf("SvgFecolormatrixType(%d)", int32(e))
+	}
+}
 
 type SvgFecomponenttransferType int32
 
@@ -3098,6 +8985,29 @@ const (
 	SVG_FECOMPONENTTRANSFER_TYPE_GAMMA    SvgFecomponenttransferType = 5
 	SvgFecomponenttransferType_Max        SvgFecomponenttransferType = 2147483647
 )
+
+// String returns the SvgFecomponenttransferType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgFecomponenttransferType) String() string {
+	switch e {
+	case SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN:
+		return "SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN"
+	case SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY:
+		return "SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY"
+	case SVG_FECOMPONENTTRANSFER_TYPE_TABLE:
+		return "SVG_FECOMPONENTTRANSFER_TYPE_TABLE"
+	case SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE:
+		return "SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE"
+	case SVG_FECOMPONENTTRANSFER_TYPE_LINEAR:
+		return "SVG_FECOMPONENTTRANSFER_TYPE_LINEAR"
+	case SVG_FECOMPONENTTRANSFER_TYPE_GAMMA:
+		return "SVG_FECOMPONENTTRANSFER_TYPE_GAMMA"
+	case SvgFecomponenttransferType_Max:
+		return "SvgFecomponenttransferType_Max"
+	default:
+		return fmt.Sprintf("SvgFecomponenttransferType(%d)", int32(e))
+	}
+}
 
 type SvgFecompositeOperator int32
 
@@ -3112,6 +9022,31 @@ const (
 	SvgFecompositeOperator_Max          SvgFecompositeOperator = 2147483647
 )
 
+// String returns the SvgFecompositeOperator constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgFecompositeOperator) String() string {
+	switch e {
+	case SVG_FECOMPOSITE_OPERATOR_UNKNOWN:
+		return "SVG_FECOMPOSITE_OPERATOR_UNKNOWN"
+	case SVG_FECOMPOSITE_OPERATOR_OVER:
+		return "SVG_FECOMPOSITE_OPERATOR_OVER"
+	case SVG_FECOMPOSITE_OPERATOR_IN:
+		return "SVG_FECOMPOSITE_OPERATOR_IN"
+	case SVG_FECOMPOSITE_OPERATOR_OUT:
+		return "SVG_FECOMPOSITE_OPERATOR_OUT"
+	case SVG_FECOMPOSITE_OPERATOR_ATOP:
+		return "SVG_FECOMPOSITE_OPERATOR_ATOP"
+	case SVG_FECOMPOSITE_OPERATOR_XOR:
+		return "SVG_FECOMPOSITE_OPERATOR_XOR"
+	case SVG_FECOMPOSITE_OPERATOR_ARITHMETIC:
+		return "SVG_FECOMPOSITE_OPERATOR_ARITHMETIC"
+	case SvgFecompositeOperator_Max:
+		return "SvgFecompositeOperator_Max"
+	default:
+		return fmt.Sprintf("SvgFecompositeOperator(%d)", int32(e))
+	}
+}
+
 type SvgFocusable int32
 
 const (
@@ -3121,6 +9056,25 @@ const (
 	SvgFocusableFalse  SvgFocusable = 3
 	SvgFocusable_Max   SvgFocusable = 2147483647
 )
+
+// String returns the SvgFocusable constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgFocusable) String() string {
+	switch e {
+	case SvgFocusableNotSet:
+		return "SvgFocusableNotSet"
+	case SvgFocusableAuto:
+		return "SvgFocusableAuto"
+	case SvgFocusableTrue:
+		return "SvgFocusableTrue"
+	case SvgFocusableFalse:
+		return "SvgFocusableFalse"
+	case SvgFocusable_Max:
+		return "SvgFocusable_Max"
+	default:
+		return fmt.Sprintf("SvgFocusable(%d)", int32(e))
+	}
+}
 
 type SvgLengthType int32
 
@@ -3139,6 +9093,39 @@ const (
 	SvgLengthType_Max         SvgLengthType = 2147483647
 )
 
+// String returns the SvgLengthType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgLengthType) String() string {
+	switch e {
+	case SVG_LENGTHTYPE_UNKNOWN:
+		return "SVG_LENGTHTYPE_UNKNOWN"
+	case SVG_LENGTHTYPE_NUMBER:
+		return "SVG_LENGTHTYPE_NUMBER"
+	case SVG_LENGTHTYPE_PERCENTAGE:
+		return "SVG_LENGTHTYPE_PERCENTAGE"
+	case SVG_LENGTHTYPE_EMS:
+		return "SVG_LENGTHTYPE_EMS"
+	case SVG_LENGTHTYPE_EXS:
+		return "SVG_LENGTHTYPE_EXS"
+	case SVG_LENGTHTYPE_PX:
+		return "SVG_LENGTHTYPE_PX"
+	case SVG_LENGTHTYPE_CM:
+		return "SVG_LENGTHTYPE_CM"
+	case SVG_LENGTHTYPE_MM:
+		return "SVG_LENGTHTYPE_MM"
+	case SVG_LENGTHTYPE_IN:
+		return "SVG_LENGTHTYPE_IN"
+	case SVG_LENGTHTYPE_PT:
+		return "SVG_LENGTHTYPE_PT"
+	case SVG_LENGTHTYPE_PC:
+		return "SVG_LENGTHTYPE_PC"
+	case SvgLengthType_Max:
+		return "SvgLengthType_Max"
+	default:
+		return fmt.Sprintf("SvgLengthType(%d)", int32(e))
+	}
+}
+
 type SvgMarkerOrient int32
 
 const (
@@ -3148,12 +9135,42 @@ const (
 	SvgMarkerOrient_Max       SvgMarkerOrient = 2147483647
 )
 
+// String returns the SvgMarkerOrient constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgMarkerOrient) String() string {
+	switch e {
+	case SVG_MARKER_ORIENT_UNKNOWN:
+		return "SVG_MARKER_ORIENT_UNKNOWN"
+	case SVG_MARKER_ORIENT_AUTO:
+		return "SVG_MARKER_ORIENT_AUTO"
+	case SVG_MARKER_ORIENT_ANGLE:
+		return "SVG_MARKER_ORIENT_ANGLE"
+	case SvgMarkerOrient_Max:
+		return "SvgMarkerOrient_Max"
+	default:
+		return fmt.Sprintf("SvgMarkerOrient(%d)", int32(e))
+	}
+}
+
 type SvgMarkerOrientAttribute int32
 
 const (
 	SvgMarkerOrientAttributeAuto SvgMarkerOrientAttribute = 0
 	SvgMarkerOrientAttribute_Max SvgMarkerOrientAttribute = 2147483647
 )
+
+// String returns the SvgMarkerOrientAttribute constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgMarkerOrientAttribute) String() string {
+	switch e {
+	case SvgMarkerOrientAttributeAuto:
+		return "SvgMarkerOrientAttributeAuto"
+	case SvgMarkerOrientAttribute_Max:
+		return "SvgMarkerOrientAttribute_Max"
+	default:
+		return fmt.Sprintf("SvgMarkerOrientAttribute(%d)", int32(e))
+	}
+}
 
 type SvgMarkerUnits int32
 
@@ -3164,6 +9181,23 @@ const (
 	SvgMarkerUnits_Max             SvgMarkerUnits = 2147483647
 )
 
+// String returns the SvgMarkerUnits constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgMarkerUnits) String() string {
+	switch e {
+	case SVG_MARKERUNITS_UNKNOWN:
+		return "SVG_MARKERUNITS_UNKNOWN"
+	case SVG_MARKERUNITS_USERSPACEONUSE:
+		return "SVG_MARKERUNITS_USERSPACEONUSE"
+	case SVG_MARKERUNITS_STROKEWIDTH:
+		return "SVG_MARKERUNITS_STROKEWIDTH"
+	case SvgMarkerUnits_Max:
+		return "SvgMarkerUnits_Max"
+	default:
+		return fmt.Sprintf("SvgMarkerUnits(%d)", int32(e))
+	}
+}
+
 type SvgMorphologyOperator int32
 
 const (
@@ -3172,6 +9206,23 @@ const (
 	SVG_MORPHOLOGY_OPERATOR_DILATE  SvgMorphologyOperator = 2
 	SvgMorphologyOperator_Max       SvgMorphologyOperator = 2147483647
 )
+
+// String returns the SvgMorphologyOperator constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgMorphologyOperator) String() string {
+	switch e {
+	case SVG_MORPHOLOGY_OPERATOR_UNKNOWN:
+		return "SVG_MORPHOLOGY_OPERATOR_UNKNOWN"
+	case SVG_MORPHOLOGY_OPERATOR_ERODE:
+		return "SVG_MORPHOLOGY_OPERATOR_ERODE"
+	case SVG_MORPHOLOGY_OPERATOR_DILATE:
+		return "SVG_MORPHOLOGY_OPERATOR_DILATE"
+	case SvgMorphologyOperator_Max:
+		return "SvgMorphologyOperator_Max"
+	default:
+		return fmt.Sprintf("SvgMorphologyOperator(%d)", int32(e))
+	}
+}
 
 type SvgPathSegType int32
 
@@ -3199,6 +9250,57 @@ const (
 	SvgPathSegType_Max                   SvgPathSegType = 2147483647
 )
 
+// String returns the SvgPathSegType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgPathSegType) String() string {
+	switch e {
+	case PATHSEG_UNKNOWN:
+		return "PATHSEG_UNKNOWN"
+	case PATHSEG_CLOSEPATH:
+		return "PATHSEG_CLOSEPATH"
+	case PATHSEG_MOVETO_ABS:
+		return "PATHSEG_MOVETO_ABS"
+	case PATHSEG_MOVETO_REL:
+		return "PATHSEG_MOVETO_REL"
+	case PATHSEG_LINETO_ABS:
+		return "PATHSEG_LINETO_ABS"
+	case PATHSEG_LINETO_REL:
+		return "PATHSEG_LINETO_REL"
+	case PATHSEG_CURVETO_CUBIC_ABS:
+		return "PATHSEG_CURVETO_CUBIC_ABS"
+	case PATHSEG_CURVETO_CUBIC_REL:
+		return "PATHSEG_CURVETO_CUBIC_REL"
+	case PATHSEG_CURVETO_QUADRATIC_ABS:
+		return "PATHSEG_CURVETO_QUADRATIC_ABS"
+	case PATHSEG_CURVETO_QUADRATIC_REL:
+		return "PATHSEG_CURVETO_QUADRATIC_REL"
+	case PATHSEG_ARC_ABS:
+		return "PATHSEG_ARC_ABS"
+	case PATHSEG_ARC_REL:
+		return "PATHSEG_ARC_REL"
+	case PATHSEG_LINETO_HORIZONTAL_ABS:
+		return "PATHSEG_LINETO_HORIZONTAL_ABS"
+	case PATHSEG_LINETO_HORIZONTAL_REL:
+		return "PATHSEG_LINETO_HORIZONTAL_REL"
+	case PATHSEG_LINETO_VERTICAL_ABS:
+		return "PATHSEG_LINETO_VERTICAL_ABS"
+	case PATHSEG_LINETO_VERTICAL_REL:
+		return "PATHSEG_LINETO_VERTICAL_REL"
+	case PATHSEG_CURVETO_CUBIC_SMOOTH_ABS:
+		return "PATHSEG_CURVETO_CUBIC_SMOOTH_ABS"
+	case PATHSEG_CURVETO_CUBIC_SMOOTH_REL:
+		return "PATHSEG_CURVETO_CUBIC_SMOOTH_REL"
+	case PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS:
+		return "PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS"
+	case PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL:
+		return "PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL"
+	case SvgPathSegType_Max:
+		return "SvgPathSegType_Max"
+	default:
+		return fmt.Sprintf("SvgPathSegType(%d)", int32(e))
+	}
+}
+
 type SvgPreserveAlpha int32
 
 const (
@@ -3206,6 +9308,21 @@ const (
 	SVG_PRESERVEALPHA_TRUE  SvgPreserveAlpha = 1
 	SvgPreserveAlpha_Max    SvgPreserveAlpha = 2147483647
 )
+
+// String returns the SvgPreserveAlpha constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgPreserveAlpha) String() string {
+	switch e {
+	case SVG_PRESERVEALPHA_FALSE:
+		return "SVG_PRESERVEALPHA_FALSE"
+	case SVG_PRESERVEALPHA_TRUE:
+		return "SVG_PRESERVEALPHA_TRUE"
+	case SvgPreserveAlpha_Max:
+		return "SvgPreserveAlpha_Max"
+	default:
+		return fmt.Sprintf("SvgPreserveAlpha(%d)", int32(e))
+	}
+}
 
 type SvgPreserveAspectMeetOrSliceType int32
 
@@ -3215,6 +9332,23 @@ const (
 	SVG_MEETORSLICE_SLICE                SvgPreserveAspectMeetOrSliceType = 2
 	SvgPreserveAspectMeetOrSliceType_Max SvgPreserveAspectMeetOrSliceType = 2147483647
 )
+
+// String returns the SvgPreserveAspectMeetOrSliceType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgPreserveAspectMeetOrSliceType) String() string {
+	switch e {
+	case SVG_MEETORSLICE_UNKNOWN:
+		return "SVG_MEETORSLICE_UNKNOWN"
+	case SVG_MEETORSLICE_MEET:
+		return "SVG_MEETORSLICE_MEET"
+	case SVG_MEETORSLICE_SLICE:
+		return "SVG_MEETORSLICE_SLICE"
+	case SvgPreserveAspectMeetOrSliceType_Max:
+		return "SvgPreserveAspectMeetOrSliceType_Max"
+	default:
+		return fmt.Sprintf("SvgPreserveAspectMeetOrSliceType(%d)", int32(e))
+	}
+}
 
 type SvgPreserveAspectRatioAlignType int32
 
@@ -3233,6 +9367,39 @@ const (
 	SvgPreserveAspectRatioAlignType_Max SvgPreserveAspectRatioAlignType = 2147483647
 )
 
+// String returns the SvgPreserveAspectRatioAlignType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgPreserveAspectRatioAlignType) String() string {
+	switch e {
+	case SVG_PRESERVEASPECTRATIO_UNKNOWN:
+		return "SVG_PRESERVEASPECTRATIO_UNKNOWN"
+	case SVG_PRESERVEASPECTRATIO_NONE:
+		return "SVG_PRESERVEASPECTRATIO_NONE"
+	case SVG_PRESERVEASPECTRATIO_XMINYMIN:
+		return "SVG_PRESERVEASPECTRATIO_XMINYMIN"
+	case SVG_PRESERVEASPECTRATIO_XMIDYMIN:
+		return "SVG_PRESERVEASPECTRATIO_XMIDYMIN"
+	case SVG_PRESERVEASPECTRATIO_XMAXYMIN:
+		return "SVG_PRESERVEASPECTRATIO_XMAXYMIN"
+	case SVG_PRESERVEASPECTRATIO_XMINYMID:
+		return "SVG_PRESERVEASPECTRATIO_XMINYMID"
+	case SVG_PRESERVEASPECTRATIO_XMIDYMID:
+		return "SVG_PRESERVEASPECTRATIO_XMIDYMID"
+	case SVG_PRESERVEASPECTRATIO_XMAXYMID:
+		return "SVG_PRESERVEASPECTRATIO_XMAXYMID"
+	case SVG_PRESERVEASPECTRATIO_XMINYMAX:
+		return "SVG_PRESERVEASPECTRATIO_XMINYMAX"
+	case SVG_PRESERVEASPECTRATIO_XMIDYMAX:
+		return "SVG_PRESERVEASPECTRATIO_XMIDYMAX"
+	case SVG_PRESERVEASPECTRATIO_XMAXYMAX:
+		return "SVG_PRESERVEASPECTRATIO_XMAXYMAX"
+	case SvgPreserveAspectRatioAlignType_Max:
+		return "SvgPreserveAspectRatioAlignType_Max"
+	default:
+		return fmt.Sprintf("SvgPreserveAspectRatioAlignType(%d)", int32(e))
+	}
+}
+
 type SvgSpreadMethod int32
 
 const (
@@ -3243,6 +9410,25 @@ const (
 	SvgSpreadMethod_Max      SvgSpreadMethod = 2147483647
 )
 
+// String returns the SvgSpreadMethod constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgSpreadMethod) String() string {
+	switch e {
+	case SVG_SPREADMETHOD_UNKNOWN:
+		return "SVG_SPREADMETHOD_UNKNOWN"
+	case SVG_SPREADMETHOD_PAD:
+		return "SVG_SPREADMETHOD_PAD"
+	case SVG_SPREADMETHOD_REFLECT:
+		return "SVG_SPREADMETHOD_REFLECT"
+	case SVG_SPREADMETHOD_REPEAT:
+		return "SVG_SPREADMETHOD_REPEAT"
+	case SvgSpreadMethod_Max:
+		return "SvgSpreadMethod_Max"
+	default:
+		return fmt.Sprintf("SvgSpreadMethod(%d)", int32(e))
+	}
+}
+
 type SvgStitchtype int32
 
 const (
@@ -3251,6 +9437,23 @@ const (
 	SVG_STITCHTYPE_NOSTITCH SvgStitchtype = 2
 	SvgStitchtype_Max       SvgStitchtype = 2147483647
 )
+
+// String returns the SvgStitchtype constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgStitchtype) String() string {
+	switch e {
+	case SVG_STITCHTYPE_UNKNOWN:
+		return "SVG_STITCHTYPE_UNKNOWN"
+	case SVG_STITCHTYPE_STITCH:
+		return "SVG_STITCHTYPE_STITCH"
+	case SVG_STITCHTYPE_NOSTITCH:
+		return "SVG_STITCHTYPE_NOSTITCH"
+	case SvgStitchtype_Max:
+		return "SvgStitchtype_Max"
+	default:
+		return fmt.Sprintf("SvgStitchtype(%d)", int32(e))
+	}
+}
 
 type SvgTransformType int32
 
@@ -3265,6 +9468,31 @@ const (
 	SvgTransformType_Max    SvgTransformType = 2147483647
 )
 
+// String returns the SvgTransformType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgTransformType) String() string {
+	switch e {
+	case SVG_TRANSFORM_UNKNOWN:
+		return "SVG_TRANSFORM_UNKNOWN"
+	case SVG_TRANSFORM_MATRIX:
+		return "SVG_TRANSFORM_MATRIX"
+	case SVG_TRANSFORM_TRANSLATE:
+		return "SVG_TRANSFORM_TRANSLATE"
+	case SVG_TRANSFORM_SCALE:
+		return "SVG_TRANSFORM_SCALE"
+	case SVG_TRANSFORM_ROTATE:
+		return "SVG_TRANSFORM_ROTATE"
+	case SVG_TRANSFORM_SKEWX:
+		return "SVG_TRANSFORM_SKEWX"
+	case SVG_TRANSFORM_SKEWY:
+		return "SVG_TRANSFORM_SKEWY"
+	case SvgTransformType_Max:
+		return "SvgTransformType_Max"
+	default:
+		return fmt.Sprintf("SvgTransformType(%d)", int32(e))
+	}
+}
+
 type SvgTurbulenceType int32
 
 const (
@@ -3274,6 +9502,23 @@ const (
 	SvgTurbulenceType_Max           SvgTurbulenceType = 2147483647
 )
 
+// String returns the SvgTurbulenceType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgTurbulenceType) String() string {
+	switch e {
+	case SVG_TURBULENCE_TYPE_UNKNOWN:
+		return "SVG_TURBULENCE_TYPE_UNKNOWN"
+	case SVG_TURBULENCE_TYPE_FACTALNOISE:
+		return "SVG_TURBULENCE_TYPE_FACTALNOISE"
+	case SVG_TURBULENCE_TYPE_TURBULENCE:
+		return "SVG_TURBULENCE_TYPE_TURBULENCE"
+	case SvgTurbulenceType_Max:
+		return "SvgTurbulenceType_Max"
+	default:
+		return fmt.Sprintf("SvgTurbulenceType(%d)", int32(e))
+	}
+}
+
 type SvgUnitTypes int32
 
 const (
@@ -3282,6 +9527,23 @@ const (
 	SVG_UNITTYPE_OBJECTBOUNDINGBOX SvgUnitTypes = 2
 	SvgUnitTypes_Max               SvgUnitTypes = 2147483647
 )
+
+// String returns the SvgUnitTypes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SvgUnitTypes) String() string {
+	switch e {
+	case SVG_UNITTYPE_UNKNOWN:
+		return "SVG_UNITTYPE_UNKNOWN"
+	case SVG_UNITTYPE_USERSPACEONUSE:
+		return "SVG_UNITTYPE_USERSPACEONUSE"
+	case SVG_UNITTYPE_OBJECTBOUNDINGBOX:
+		return "SVG_UNITTYPE_OBJECTBOUNDINGBOX"
+	case SvgUnitTypes_Max:
+		return "SvgUnitTypes_Max"
+	default:
+		return fmt.Sprintf("SvgUnitTypes(%d)", int32(e))
+	}
+}
 
 type TextDecoration int32
 
@@ -3294,6 +9556,27 @@ const (
 	TextDecoration_Max        TextDecoration = 2147483647
 )
 
+// String returns the TextDecoration constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TextDecoration) String() string {
+	switch e {
+	case TextDecorationNone:
+		return "TextDecorationNone"
+	case TextDecorationUnderline:
+		return "TextDecorationUnderline"
+	case TextDecorationOverline:
+		return "TextDecorationOverline"
+	case TextDecorationLineThrough:
+		return "TextDecorationLineThrough"
+	case TextDecorationBlink:
+		return "TextDecorationBlink"
+	case TextDecoration_Max:
+		return "TextDecoration_Max"
+	default:
+		return fmt.Sprintf("TextDecoration(%d)", int32(e))
+	}
+}
+
 type TextpathMethodtype int32
 
 const (
@@ -3303,6 +9586,23 @@ const (
 	TextpathMethodtype_Max      TextpathMethodtype = 2147483647
 )
 
+// String returns the TextpathMethodtype constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TextpathMethodtype) String() string {
+	switch e {
+	case TEXTPATH_METHODTYPE_UNKNOWN:
+		return "TEXTPATH_METHODTYPE_UNKNOWN"
+	case TEXTPATH_METHODTYPE_ALIGN:
+		return "TEXTPATH_METHODTYPE_ALIGN"
+	case TEXTPATH_METHODTYPE_STRETCH:
+		return "TEXTPATH_METHODTYPE_STRETCH"
+	case TextpathMethodtype_Max:
+		return "TextpathMethodtype_Max"
+	default:
+		return fmt.Sprintf("TextpathMethodtype(%d)", int32(e))
+	}
+}
+
 type TextpathSpacingtype int32
 
 const (
@@ -3311,3 +9611,20 @@ const (
 	TEXTPATH_SPACINGTYPE_EXACT   TextpathSpacingtype = 2
 	TextpathSpacingtype_Max      TextpathSpacingtype = 2147483647
 )
+
+// String returns the TextpathSpacingtype constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TextpathSpacingtype) String() string {
+	switch e {
+	case TEXTPATH_SPACINGTYPE_UNKNOWN:
+		return "TEXTPATH_SPACINGTYPE_UNKNOWN"
+	case TEXTPATH_SPACINGTYPE_AUTO:
+		return "TEXTPATH_SPACINGTYPE_AUTO"
+	case TEXTPATH_SPACINGTYPE_EXACT:
+		return "TEXTPATH_SPACINGTYPE_EXACT"
+	case TextpathSpacingtype_Max:
+		return "TextpathSpacingtype_Max"
+	default:
+		return fmt.Sprintf("TextpathSpacingtype(%d)", int32(e))
+	}
+}

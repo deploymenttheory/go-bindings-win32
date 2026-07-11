@@ -4,6 +4,12 @@
 
 package identity
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type ASC_REQ_FLAGS uint32
 
 const (
@@ -34,12 +40,114 @@ const (
 	ASC_REQ_ALLOW_MISSING_BINDINGS ASC_REQ_FLAGS = 268435456
 )
 
+// String returns the ASC_REQ_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ASC_REQ_FLAGS) String() string {
+	var parts []string
+	if e&ASC_REQ_DELEGATE != 0 {
+		parts = append(parts, "ASC_REQ_DELEGATE")
+	}
+	if e&ASC_REQ_MUTUAL_AUTH != 0 {
+		parts = append(parts, "ASC_REQ_MUTUAL_AUTH")
+	}
+	if e&ASC_REQ_REPLAY_DETECT != 0 {
+		parts = append(parts, "ASC_REQ_REPLAY_DETECT")
+	}
+	if e&ASC_REQ_SEQUENCE_DETECT != 0 {
+		parts = append(parts, "ASC_REQ_SEQUENCE_DETECT")
+	}
+	if e&ASC_REQ_CONFIDENTIALITY != 0 {
+		parts = append(parts, "ASC_REQ_CONFIDENTIALITY")
+	}
+	if e&ASC_REQ_USE_SESSION_KEY != 0 {
+		parts = append(parts, "ASC_REQ_USE_SESSION_KEY")
+	}
+	if e&ASC_REQ_SESSION_TICKET != 0 {
+		parts = append(parts, "ASC_REQ_SESSION_TICKET")
+	}
+	if e&ASC_REQ_ALLOCATE_MEMORY != 0 {
+		parts = append(parts, "ASC_REQ_ALLOCATE_MEMORY")
+	}
+	if e&ASC_REQ_USE_DCE_STYLE != 0 {
+		parts = append(parts, "ASC_REQ_USE_DCE_STYLE")
+	}
+	if e&ASC_REQ_DATAGRAM != 0 {
+		parts = append(parts, "ASC_REQ_DATAGRAM")
+	}
+	if e&ASC_REQ_CONNECTION != 0 {
+		parts = append(parts, "ASC_REQ_CONNECTION")
+	}
+	if e&ASC_REQ_CALL_LEVEL != 0 {
+		parts = append(parts, "ASC_REQ_CALL_LEVEL")
+	}
+	if e&ASC_REQ_FRAGMENT_SUPPLIED != 0 {
+		parts = append(parts, "ASC_REQ_FRAGMENT_SUPPLIED")
+	}
+	if e&ASC_REQ_EXTENDED_ERROR != 0 {
+		parts = append(parts, "ASC_REQ_EXTENDED_ERROR")
+	}
+	if e&ASC_REQ_STREAM != 0 {
+		parts = append(parts, "ASC_REQ_STREAM")
+	}
+	if e&ASC_REQ_INTEGRITY != 0 {
+		parts = append(parts, "ASC_REQ_INTEGRITY")
+	}
+	if e&ASC_REQ_LICENSING != 0 {
+		parts = append(parts, "ASC_REQ_LICENSING")
+	}
+	if e&ASC_REQ_IDENTIFY != 0 {
+		parts = append(parts, "ASC_REQ_IDENTIFY")
+	}
+	if e&ASC_REQ_ALLOW_NULL_SESSION != 0 {
+		parts = append(parts, "ASC_REQ_ALLOW_NULL_SESSION")
+	}
+	if e&ASC_REQ_ALLOW_NON_USER_LOGONS != 0 {
+		parts = append(parts, "ASC_REQ_ALLOW_NON_USER_LOGONS")
+	}
+	if e&ASC_REQ_ALLOW_CONTEXT_REPLAY != 0 {
+		parts = append(parts, "ASC_REQ_ALLOW_CONTEXT_REPLAY")
+	}
+	if e&ASC_REQ_FRAGMENT_TO_FIT != 0 {
+		parts = append(parts, "ASC_REQ_FRAGMENT_TO_FIT")
+	}
+	if e&ASC_REQ_NO_TOKEN != 0 {
+		parts = append(parts, "ASC_REQ_NO_TOKEN")
+	}
+	if e&ASC_REQ_PROXY_BINDINGS != 0 {
+		parts = append(parts, "ASC_REQ_PROXY_BINDINGS")
+	}
+	if e&ASC_REQ_ALLOW_MISSING_BINDINGS != 0 {
+		parts = append(parts, "ASC_REQ_ALLOW_MISSING_BINDINGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type ASC_REQ_HIGH_FLAGS uint64
 
 const (
 	ASC_REQ_MESSAGES         ASC_REQ_HIGH_FLAGS = 4294967296
 	ASC_REQ_EXPLICIT_SESSION ASC_REQ_HIGH_FLAGS = 68719476736
 )
+
+// String returns the ASC_REQ_HIGH_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ASC_REQ_HIGH_FLAGS) String() string {
+	var parts []string
+	if e&ASC_REQ_MESSAGES != 0 {
+		parts = append(parts, "ASC_REQ_MESSAGES")
+	}
+	if e&ASC_REQ_EXPLICIT_SESSION != 0 {
+		parts = append(parts, "ASC_REQ_EXPLICIT_SESSION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // CRED_FETCH: https://learn.microsoft.com/windows/win32/SecMgmt/cred-fetch
 type CRED_FETCH int32
@@ -50,6 +158,22 @@ const (
 	CredFetchForced  CRED_FETCH = 2
 )
 
+// String returns the CRED_FETCH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRED_FETCH) String() string {
+	switch e {
+	case CredFetchDefault:
+		return "CredFetchDefault"
+	case CredFetchDPAPI:
+		return "CredFetchDPAPI"
+	case CredFetchForced:
+		return "CredFetchForced"
+	default:
+		return fmt.Sprintf("CRED_FETCH(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DOMAIN_PASSWORD_PROPERTIES uint32
 
 const (
@@ -61,6 +185,35 @@ const (
 	DOMAIN_REFUSE_PASSWORD_CHANGE   DOMAIN_PASSWORD_PROPERTIES = 32
 )
 
+// String returns the DOMAIN_PASSWORD_PROPERTIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOMAIN_PASSWORD_PROPERTIES) String() string {
+	var parts []string
+	if e&DOMAIN_PASSWORD_COMPLEX != 0 {
+		parts = append(parts, "DOMAIN_PASSWORD_COMPLEX")
+	}
+	if e&DOMAIN_PASSWORD_NO_ANON_CHANGE != 0 {
+		parts = append(parts, "DOMAIN_PASSWORD_NO_ANON_CHANGE")
+	}
+	if e&DOMAIN_PASSWORD_NO_CLEAR_CHANGE != 0 {
+		parts = append(parts, "DOMAIN_PASSWORD_NO_CLEAR_CHANGE")
+	}
+	if e&DOMAIN_LOCKOUT_ADMINS != 0 {
+		parts = append(parts, "DOMAIN_LOCKOUT_ADMINS")
+	}
+	if e&DOMAIN_PASSWORD_STORE_CLEARTEXT != 0 {
+		parts = append(parts, "DOMAIN_PASSWORD_STORE_CLEARTEXT")
+	}
+	if e&DOMAIN_REFUSE_PASSWORD_CHANGE != 0 {
+		parts = append(parts, "DOMAIN_REFUSE_PASSWORD_CHANGE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type EXPORT_SECURITY_CONTEXT_FLAGS uint32
 
 const (
@@ -68,6 +221,25 @@ const (
 	SECPKG_CONTEXT_EXPORT_DELETE_OLD EXPORT_SECURITY_CONTEXT_FLAGS = 2
 	SECPKG_CONTEXT_EXPORT_TO_KERNEL  EXPORT_SECURITY_CONTEXT_FLAGS = 4
 )
+
+// String returns the EXPORT_SECURITY_CONTEXT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPORT_SECURITY_CONTEXT_FLAGS) String() string {
+	var parts []string
+	if e&SECPKG_CONTEXT_EXPORT_RESET_NEW != 0 {
+		parts = append(parts, "SECPKG_CONTEXT_EXPORT_RESET_NEW")
+	}
+	if e&SECPKG_CONTEXT_EXPORT_DELETE_OLD != 0 {
+		parts = append(parts, "SECPKG_CONTEXT_EXPORT_DELETE_OLD")
+	}
+	if e&SECPKG_CONTEXT_EXPORT_TO_KERNEL != 0 {
+		parts = append(parts, "SECPKG_CONTEXT_EXPORT_TO_KERNEL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // EXTENDED_NAME_FORMAT: https://learn.microsoft.com/windows/win32/api/secext/ne-secext-extended_name_format
 type EXTENDED_NAME_FORMAT int32
@@ -87,6 +259,40 @@ const (
 	NameSurname          EXTENDED_NAME_FORMAT = 14
 )
 
+// String returns the EXTENDED_NAME_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXTENDED_NAME_FORMAT) String() string {
+	switch e {
+	case NameUnknown:
+		return "NameUnknown"
+	case NameFullyQualifiedDN:
+		return "NameFullyQualifiedDN"
+	case NameSamCompatible:
+		return "NameSamCompatible"
+	case NameDisplay:
+		return "NameDisplay"
+	case NameUniqueId:
+		return "NameUniqueId"
+	case NameCanonical:
+		return "NameCanonical"
+	case NameUserPrincipal:
+		return "NameUserPrincipal"
+	case NameCanonicalEx:
+		return "NameCanonicalEx"
+	case NameServicePrincipal:
+		return "NameServicePrincipal"
+	case NameDnsDomain:
+		return "NameDnsDomain"
+	case NameGivenName:
+		return "NameGivenName"
+	case NameSurname:
+		return "NameSurname"
+	default:
+		return fmt.Sprintf("EXTENDED_NAME_FORMAT(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type ISC_REQ_FLAGS uint32
 
 const (
@@ -119,6 +325,98 @@ const (
 	ISC_REQ_CONFIDENTIALITY_ONLY   ISC_REQ_FLAGS = 1073741824
 )
 
+// String returns the ISC_REQ_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ISC_REQ_FLAGS) String() string {
+	var parts []string
+	if e&ISC_REQ_DELEGATE != 0 {
+		parts = append(parts, "ISC_REQ_DELEGATE")
+	}
+	if e&ISC_REQ_MUTUAL_AUTH != 0 {
+		parts = append(parts, "ISC_REQ_MUTUAL_AUTH")
+	}
+	if e&ISC_REQ_REPLAY_DETECT != 0 {
+		parts = append(parts, "ISC_REQ_REPLAY_DETECT")
+	}
+	if e&ISC_REQ_SEQUENCE_DETECT != 0 {
+		parts = append(parts, "ISC_REQ_SEQUENCE_DETECT")
+	}
+	if e&ISC_REQ_CONFIDENTIALITY != 0 {
+		parts = append(parts, "ISC_REQ_CONFIDENTIALITY")
+	}
+	if e&ISC_REQ_USE_SESSION_KEY != 0 {
+		parts = append(parts, "ISC_REQ_USE_SESSION_KEY")
+	}
+	if e&ISC_REQ_PROMPT_FOR_CREDS != 0 {
+		parts = append(parts, "ISC_REQ_PROMPT_FOR_CREDS")
+	}
+	if e&ISC_REQ_USE_SUPPLIED_CREDS != 0 {
+		parts = append(parts, "ISC_REQ_USE_SUPPLIED_CREDS")
+	}
+	if e&ISC_REQ_ALLOCATE_MEMORY != 0 {
+		parts = append(parts, "ISC_REQ_ALLOCATE_MEMORY")
+	}
+	if e&ISC_REQ_USE_DCE_STYLE != 0 {
+		parts = append(parts, "ISC_REQ_USE_DCE_STYLE")
+	}
+	if e&ISC_REQ_DATAGRAM != 0 {
+		parts = append(parts, "ISC_REQ_DATAGRAM")
+	}
+	if e&ISC_REQ_CONNECTION != 0 {
+		parts = append(parts, "ISC_REQ_CONNECTION")
+	}
+	if e&ISC_REQ_CALL_LEVEL != 0 {
+		parts = append(parts, "ISC_REQ_CALL_LEVEL")
+	}
+	if e&ISC_REQ_FRAGMENT_SUPPLIED != 0 {
+		parts = append(parts, "ISC_REQ_FRAGMENT_SUPPLIED")
+	}
+	if e&ISC_REQ_EXTENDED_ERROR != 0 {
+		parts = append(parts, "ISC_REQ_EXTENDED_ERROR")
+	}
+	if e&ISC_REQ_STREAM != 0 {
+		parts = append(parts, "ISC_REQ_STREAM")
+	}
+	if e&ISC_REQ_INTEGRITY != 0 {
+		parts = append(parts, "ISC_REQ_INTEGRITY")
+	}
+	if e&ISC_REQ_IDENTIFY != 0 {
+		parts = append(parts, "ISC_REQ_IDENTIFY")
+	}
+	if e&ISC_REQ_NULL_SESSION != 0 {
+		parts = append(parts, "ISC_REQ_NULL_SESSION")
+	}
+	if e&ISC_REQ_MANUAL_CRED_VALIDATION != 0 {
+		parts = append(parts, "ISC_REQ_MANUAL_CRED_VALIDATION")
+	}
+	if e&ISC_REQ_RESERVED1 != 0 {
+		parts = append(parts, "ISC_REQ_RESERVED1")
+	}
+	if e&ISC_REQ_FRAGMENT_TO_FIT != 0 {
+		parts = append(parts, "ISC_REQ_FRAGMENT_TO_FIT")
+	}
+	if e&ISC_REQ_FORWARD_CREDENTIALS != 0 {
+		parts = append(parts, "ISC_REQ_FORWARD_CREDENTIALS")
+	}
+	if e&ISC_REQ_NO_INTEGRITY != 0 {
+		parts = append(parts, "ISC_REQ_NO_INTEGRITY")
+	}
+	if e&ISC_REQ_USE_HTTP_STYLE != 0 {
+		parts = append(parts, "ISC_REQ_USE_HTTP_STYLE")
+	}
+	if e&ISC_REQ_UNVERIFIED_TARGET_NAME != 0 {
+		parts = append(parts, "ISC_REQ_UNVERIFIED_TARGET_NAME")
+	}
+	if e&ISC_REQ_CONFIDENTIALITY_ONLY != 0 {
+		parts = append(parts, "ISC_REQ_CONFIDENTIALITY_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type ISC_REQ_HIGH_FLAGS uint64
 
 const (
@@ -129,6 +427,31 @@ const (
 	ISC_REQ_EXPLICIT_SESSION         ISC_REQ_HIGH_FLAGS = 68719476736
 )
 
+// String returns the ISC_REQ_HIGH_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ISC_REQ_HIGH_FLAGS) String() string {
+	var parts []string
+	if e&ISC_REQ_MESSAGES != 0 {
+		parts = append(parts, "ISC_REQ_MESSAGES")
+	}
+	if e&ISC_REQ_DEFERRED_CRED_VALIDATION != 0 {
+		parts = append(parts, "ISC_REQ_DEFERRED_CRED_VALIDATION")
+	}
+	if e&ISC_REQ_NO_POST_HANDSHAKE_AUTH != 0 {
+		parts = append(parts, "ISC_REQ_NO_POST_HANDSHAKE_AUTH")
+	}
+	if e&ISC_REQ_REUSE_SESSION_TICKETS != 0 {
+		parts = append(parts, "ISC_REQ_REUSE_SESSION_TICKETS")
+	}
+	if e&ISC_REQ_EXPLICIT_SESSION != 0 {
+		parts = append(parts, "ISC_REQ_EXPLICIT_SESSION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type KERB_ADDRESS_TYPE uint32
 
 const (
@@ -136,12 +459,36 @@ const (
 	DS_NETBIOS_ADDRESS KERB_ADDRESS_TYPE = 2
 )
 
+// String returns the KERB_ADDRESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KERB_ADDRESS_TYPE) String() string {
+	switch e {
+	case DS_INET_ADDRESS:
+		return "DS_INET_ADDRESS"
+	case DS_NETBIOS_ADDRESS:
+		return "DS_NETBIOS_ADDRESS"
+	default:
+		return fmt.Sprintf("KERB_ADDRESS_TYPE(%d)", uint32(e))
+	}
+}
+
 // KERB_CERTIFICATE_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-kerb_certificate_info_type
 type KERB_CERTIFICATE_INFO_TYPE int32
 
 const (
 	CertHashInfo KERB_CERTIFICATE_INFO_TYPE = 1
 )
+
+// String returns the KERB_CERTIFICATE_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KERB_CERTIFICATE_INFO_TYPE) String() string {
+	switch e {
+	case CertHashInfo:
+		return "CertHashInfo"
+	default:
+		return fmt.Sprintf("KERB_CERTIFICATE_INFO_TYPE(%d)", int32(e))
+	}
+}
 
 type KERB_CRYPTO_KEY_TYPE int32
 
@@ -153,6 +500,27 @@ const (
 	KERB_ETYPE_RC4_HMAC_NT KERB_CRYPTO_KEY_TYPE = 23
 	KERB_ETYPE_RC4_MD4     KERB_CRYPTO_KEY_TYPE = -128
 )
+
+// String returns the KERB_CRYPTO_KEY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KERB_CRYPTO_KEY_TYPE) String() string {
+	switch e {
+	case KERB_ETYPE_DES_CBC_CRC:
+		return "KERB_ETYPE_DES_CBC_CRC"
+	case KERB_ETYPE_DES_CBC_MD4:
+		return "KERB_ETYPE_DES_CBC_MD4"
+	case KERB_ETYPE_DES_CBC_MD5:
+		return "KERB_ETYPE_DES_CBC_MD5"
+	case KERB_ETYPE_NULL:
+		return "KERB_ETYPE_NULL"
+	case KERB_ETYPE_RC4_HMAC_NT:
+		return "KERB_ETYPE_RC4_HMAC_NT"
+	case KERB_ETYPE_RC4_MD4:
+		return "KERB_ETYPE_RC4_MD4"
+	default:
+		return fmt.Sprintf("KERB_CRYPTO_KEY_TYPE(%d)", int32(e))
+	}
+}
 
 // KERB_LOGON_SUBMIT_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-kerb_logon_submit_type
 type KERB_LOGON_SUBMIT_TYPE int32
@@ -173,6 +541,41 @@ const (
 	KerbLuidLogon              KERB_LOGON_SUBMIT_TYPE = 84
 )
 
+// String returns the KERB_LOGON_SUBMIT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KERB_LOGON_SUBMIT_TYPE) String() string {
+	switch e {
+	case KerbInteractiveLogon:
+		return "KerbInteractiveLogon"
+	case KerbSmartCardLogon:
+		return "KerbSmartCardLogon"
+	case KerbWorkstationUnlockLogon:
+		return "KerbWorkstationUnlockLogon"
+	case KerbSmartCardUnlockLogon:
+		return "KerbSmartCardUnlockLogon"
+	case KerbProxyLogon:
+		return "KerbProxyLogon"
+	case KerbTicketLogon:
+		return "KerbTicketLogon"
+	case KerbTicketUnlockLogon:
+		return "KerbTicketUnlockLogon"
+	case KerbS4ULogon:
+		return "KerbS4ULogon"
+	case KerbCertificateLogon:
+		return "KerbCertificateLogon"
+	case KerbCertificateS4ULogon:
+		return "KerbCertificateS4ULogon"
+	case KerbCertificateUnlockLogon:
+		return "KerbCertificateUnlockLogon"
+	case KerbNoElevationLogon:
+		return "KerbNoElevationLogon"
+	case KerbLuidLogon:
+		return "KerbLuidLogon"
+	default:
+		return fmt.Sprintf("KERB_LOGON_SUBMIT_TYPE(%d)", int32(e))
+	}
+}
+
 // KERB_PROFILE_BUFFER_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-kerb_profile_buffer_type
 type KERB_PROFILE_BUFFER_TYPE int32
 
@@ -181,6 +584,21 @@ const (
 	KerbSmartCardProfile   KERB_PROFILE_BUFFER_TYPE = 4
 	KerbTicketProfile      KERB_PROFILE_BUFFER_TYPE = 6
 )
+
+// String returns the KERB_PROFILE_BUFFER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KERB_PROFILE_BUFFER_TYPE) String() string {
+	switch e {
+	case KerbInteractiveProfile:
+		return "KerbInteractiveProfile"
+	case KerbSmartCardProfile:
+		return "KerbSmartCardProfile"
+	case KerbTicketProfile:
+		return "KerbTicketProfile"
+	default:
+		return fmt.Sprintf("KERB_PROFILE_BUFFER_TYPE(%d)", int32(e))
+	}
+}
 
 // KERB_PROTOCOL_MESSAGE_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-kerb_protocol_message_type
 type KERB_PROTOCOL_MESSAGE_TYPE int32
@@ -227,6 +645,93 @@ const (
 	KerbNlChangeMachinePasswordMessage      KERB_PROTOCOL_MESSAGE_TYPE = 38
 )
 
+// String returns the KERB_PROTOCOL_MESSAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KERB_PROTOCOL_MESSAGE_TYPE) String() string {
+	switch e {
+	case KerbDebugRequestMessage:
+		return "KerbDebugRequestMessage"
+	case KerbQueryTicketCacheMessage:
+		return "KerbQueryTicketCacheMessage"
+	case KerbChangeMachinePasswordMessage:
+		return "KerbChangeMachinePasswordMessage"
+	case KerbVerifyPacMessage:
+		return "KerbVerifyPacMessage"
+	case KerbRetrieveTicketMessage:
+		return "KerbRetrieveTicketMessage"
+	case KerbUpdateAddressesMessage:
+		return "KerbUpdateAddressesMessage"
+	case KerbPurgeTicketCacheMessage:
+		return "KerbPurgeTicketCacheMessage"
+	case KerbChangePasswordMessage:
+		return "KerbChangePasswordMessage"
+	case KerbRetrieveEncodedTicketMessage:
+		return "KerbRetrieveEncodedTicketMessage"
+	case KerbDecryptDataMessage:
+		return "KerbDecryptDataMessage"
+	case KerbAddBindingCacheEntryMessage:
+		return "KerbAddBindingCacheEntryMessage"
+	case KerbSetPasswordMessage:
+		return "KerbSetPasswordMessage"
+	case KerbSetPasswordExMessage:
+		return "KerbSetPasswordExMessage"
+	case KerbVerifyCredentialsMessage:
+		return "KerbVerifyCredentialsMessage"
+	case KerbQueryTicketCacheExMessage:
+		return "KerbQueryTicketCacheExMessage"
+	case KerbPurgeTicketCacheExMessage:
+		return "KerbPurgeTicketCacheExMessage"
+	case KerbRefreshSmartcardCredentialsMessage:
+		return "KerbRefreshSmartcardCredentialsMessage"
+	case KerbAddExtraCredentialsMessage:
+		return "KerbAddExtraCredentialsMessage"
+	case KerbQuerySupplementalCredentialsMessage:
+		return "KerbQuerySupplementalCredentialsMessage"
+	case KerbTransferCredentialsMessage:
+		return "KerbTransferCredentialsMessage"
+	case KerbQueryTicketCacheEx2Message:
+		return "KerbQueryTicketCacheEx2Message"
+	case KerbSubmitTicketMessage:
+		return "KerbSubmitTicketMessage"
+	case KerbAddExtraCredentialsExMessage:
+		return "KerbAddExtraCredentialsExMessage"
+	case KerbQueryKdcProxyCacheMessage:
+		return "KerbQueryKdcProxyCacheMessage"
+	case KerbPurgeKdcProxyCacheMessage:
+		return "KerbPurgeKdcProxyCacheMessage"
+	case KerbQueryTicketCacheEx3Message:
+		return "KerbQueryTicketCacheEx3Message"
+	case KerbCleanupMachinePkinitCredsMessage:
+		return "KerbCleanupMachinePkinitCredsMessage"
+	case KerbAddBindingCacheEntryExMessage:
+		return "KerbAddBindingCacheEntryExMessage"
+	case KerbQueryBindingCacheMessage:
+		return "KerbQueryBindingCacheMessage"
+	case KerbPurgeBindingCacheMessage:
+		return "KerbPurgeBindingCacheMessage"
+	case KerbPinKdcMessage:
+		return "KerbPinKdcMessage"
+	case KerbUnpinAllKdcsMessage:
+		return "KerbUnpinAllKdcsMessage"
+	case KerbQueryDomainExtendedPoliciesMessage:
+		return "KerbQueryDomainExtendedPoliciesMessage"
+	case KerbQueryS4U2ProxyCacheMessage:
+		return "KerbQueryS4U2ProxyCacheMessage"
+	case KerbRetrieveKeyTabMessage:
+		return "KerbRetrieveKeyTabMessage"
+	case KerbRefreshPolicyMessage:
+		return "KerbRefreshPolicyMessage"
+	case KerbPrintCloudKerberosDebugMessage:
+		return "KerbPrintCloudKerberosDebugMessage"
+	case KerbNetworkTicketLogonMessage:
+		return "KerbNetworkTicketLogonMessage"
+	case KerbNlChangeMachinePasswordMessage:
+		return "KerbNlChangeMachinePasswordMessage"
+	default:
+		return fmt.Sprintf("KERB_PROTOCOL_MESSAGE_TYPE(%d)", int32(e))
+	}
+}
+
 type KERB_REQUEST_FLAGS uint32
 
 const (
@@ -235,6 +740,22 @@ const (
 	KERB_REQUEST_REMOVE_CREDENTIAL  KERB_REQUEST_FLAGS = 4
 )
 
+// String returns the KERB_REQUEST_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KERB_REQUEST_FLAGS) String() string {
+	switch e {
+	case KERB_REQUEST_ADD_CREDENTIAL:
+		return "KERB_REQUEST_ADD_CREDENTIAL"
+	case KERB_REQUEST_REPLACE_CREDENTIAL:
+		return "KERB_REQUEST_REPLACE_CREDENTIAL"
+	case KERB_REQUEST_REMOVE_CREDENTIAL:
+		return "KERB_REQUEST_REMOVE_CREDENTIAL"
+	default:
+		return fmt.Sprintf("KERB_REQUEST_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type KERB_TICKET_FLAGS uint32
 
 const (
@@ -254,12 +775,77 @@ const (
 	KERB_TICKET_FLAGS_reserved1      KERB_TICKET_FLAGS = 1
 )
 
+// String returns the KERB_TICKET_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KERB_TICKET_FLAGS) String() string {
+	var parts []string
+	if e&KERB_TICKET_FLAGS_forwardable != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_forwardable")
+	}
+	if e&KERB_TICKET_FLAGS_forwarded != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_forwarded")
+	}
+	if e&KERB_TICKET_FLAGS_hw_authent != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_hw_authent")
+	}
+	if e&KERB_TICKET_FLAGS_initial != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_initial")
+	}
+	if e&KERB_TICKET_FLAGS_invalid != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_invalid")
+	}
+	if e&KERB_TICKET_FLAGS_may_postdate != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_may_postdate")
+	}
+	if e&KERB_TICKET_FLAGS_ok_as_delegate != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_ok_as_delegate")
+	}
+	if e&KERB_TICKET_FLAGS_postdated != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_postdated")
+	}
+	if e&KERB_TICKET_FLAGS_pre_authent != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_pre_authent")
+	}
+	if e&KERB_TICKET_FLAGS_proxiable != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_proxiable")
+	}
+	if e&KERB_TICKET_FLAGS_proxy != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_proxy")
+	}
+	if e&KERB_TICKET_FLAGS_renewable != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_renewable")
+	}
+	if e&KERB_TICKET_FLAGS_reserved != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_reserved")
+	}
+	if e&KERB_TICKET_FLAGS_reserved1 != 0 {
+		parts = append(parts, "KERB_TICKET_FLAGS_reserved1")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type KSEC_CONTEXT_TYPE int32
 
 const (
 	KSecPaged    KSEC_CONTEXT_TYPE = 0
 	KSecNonPaged KSEC_CONTEXT_TYPE = 1
 )
+
+// String returns the KSEC_CONTEXT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSEC_CONTEXT_TYPE) String() string {
+	switch e {
+	case KSecPaged:
+		return "KSecPaged"
+	case KSecNonPaged:
+		return "KSecNonPaged"
+	default:
+		return fmt.Sprintf("KSEC_CONTEXT_TYPE(%d)", int32(e))
+	}
+}
 
 type LSA_AUTH_INFORMATION_AUTH_TYPE uint32
 
@@ -270,6 +856,23 @@ const (
 	TRUST_AUTH_TYPE_VERSION LSA_AUTH_INFORMATION_AUTH_TYPE = 3
 )
 
+// String returns the LSA_AUTH_INFORMATION_AUTH_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LSA_AUTH_INFORMATION_AUTH_TYPE) String() string {
+	switch e {
+	case TRUST_AUTH_TYPE_NONE:
+		return "TRUST_AUTH_TYPE_NONE"
+	case TRUST_AUTH_TYPE_NT4OWF:
+		return "TRUST_AUTH_TYPE_NT4OWF"
+	case TRUST_AUTH_TYPE_CLEAR:
+		return "TRUST_AUTH_TYPE_CLEAR"
+	case TRUST_AUTH_TYPE_VERSION:
+		return "TRUST_AUTH_TYPE_VERSION"
+	default:
+		return fmt.Sprintf("LSA_AUTH_INFORMATION_AUTH_TYPE(%d)", uint32(e))
+	}
+}
+
 // LSA_FOREST_TRUST_COLLISION_RECORD_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-lsa_forest_trust_collision_record_type
 type LSA_FOREST_TRUST_COLLISION_RECORD_TYPE int32
 
@@ -278,6 +881,21 @@ const (
 	CollisionXref  LSA_FOREST_TRUST_COLLISION_RECORD_TYPE = 1
 	CollisionOther LSA_FOREST_TRUST_COLLISION_RECORD_TYPE = 2
 )
+
+// String returns the LSA_FOREST_TRUST_COLLISION_RECORD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LSA_FOREST_TRUST_COLLISION_RECORD_TYPE) String() string {
+	switch e {
+	case CollisionTdo:
+		return "CollisionTdo"
+	case CollisionXref:
+		return "CollisionXref"
+	case CollisionOther:
+		return "CollisionOther"
+	default:
+		return fmt.Sprintf("LSA_FOREST_TRUST_COLLISION_RECORD_TYPE(%d)", int32(e))
+	}
+}
 
 // LSA_FOREST_TRUST_RECORD_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-lsa_forest_trust_record_type
 type LSA_FOREST_TRUST_RECORD_TYPE int32
@@ -291,12 +909,44 @@ const (
 	ForestTrustRecordTypeLast LSA_FOREST_TRUST_RECORD_TYPE = 4
 )
 
+// String returns the LSA_FOREST_TRUST_RECORD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LSA_FOREST_TRUST_RECORD_TYPE) String() string {
+	switch e {
+	case ForestTrustTopLevelName:
+		return "ForestTrustTopLevelName"
+	case ForestTrustTopLevelNameEx:
+		return "ForestTrustTopLevelNameEx"
+	case ForestTrustDomainInfo:
+		return "ForestTrustDomainInfo"
+	case ForestTrustBinaryInfo:
+		return "ForestTrustBinaryInfo"
+	case ForestTrustScannerInfo:
+		return "ForestTrustScannerInfo"
+	default:
+		return fmt.Sprintf("LSA_FOREST_TRUST_RECORD_TYPE(%d)", int32(e))
+	}
+}
+
 type LSA_LOOKUP_DOMAIN_INFO_CLASS int32
 
 const (
 	AccountDomainInformation LSA_LOOKUP_DOMAIN_INFO_CLASS = 5
 	DnsDomainInformation     LSA_LOOKUP_DOMAIN_INFO_CLASS = 12
 )
+
+// String returns the LSA_LOOKUP_DOMAIN_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LSA_LOOKUP_DOMAIN_INFO_CLASS) String() string {
+	switch e {
+	case AccountDomainInformation:
+		return "AccountDomainInformation"
+	case DnsDomainInformation:
+		return "DnsDomainInformation"
+	default:
+		return fmt.Sprintf("LSA_LOOKUP_DOMAIN_INFO_CLASS(%d)", int32(e))
+	}
+}
 
 // LSA_TOKEN_INFORMATION_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecpkg/ne-ntsecpkg-lsa_token_information_type
 type LSA_TOKEN_INFORMATION_TYPE int32
@@ -308,12 +958,42 @@ const (
 	LsaTokenInformationV3   LSA_TOKEN_INFORMATION_TYPE = 3
 )
 
+// String returns the LSA_TOKEN_INFORMATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LSA_TOKEN_INFORMATION_TYPE) String() string {
+	switch e {
+	case LsaTokenInformationNull:
+		return "LsaTokenInformationNull"
+	case LsaTokenInformationV1:
+		return "LsaTokenInformationV1"
+	case LsaTokenInformationV2:
+		return "LsaTokenInformationV2"
+	case LsaTokenInformationV3:
+		return "LsaTokenInformationV3"
+	default:
+		return fmt.Sprintf("LSA_TOKEN_INFORMATION_TYPE(%d)", int32(e))
+	}
+}
+
 type MSV1_0 uint32
 
 const (
 	MSV1_0_PASSTHRU    MSV1_0 = 1
 	MSV1_0_GUEST_LOGON MSV1_0 = 2
 )
+
+// String returns the MSV1_0 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSV1_0) String() string {
+	switch e {
+	case MSV1_0_PASSTHRU:
+		return "MSV1_0_PASSTHRU"
+	case MSV1_0_GUEST_LOGON:
+		return "MSV1_0_GUEST_LOGON"
+	default:
+		return fmt.Sprintf("MSV1_0(%d)", uint32(e))
+	}
+}
 
 type MSV1_0_AVID int32
 
@@ -331,6 +1011,37 @@ const (
 	MsvAvChannelBindings MSV1_0_AVID = 10
 )
 
+// String returns the MSV1_0_AVID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSV1_0_AVID) String() string {
+	switch e {
+	case MsvAvEOL:
+		return "MsvAvEOL"
+	case MsvAvNbComputerName:
+		return "MsvAvNbComputerName"
+	case MsvAvNbDomainName:
+		return "MsvAvNbDomainName"
+	case MsvAvDnsComputerName:
+		return "MsvAvDnsComputerName"
+	case MsvAvDnsDomainName:
+		return "MsvAvDnsDomainName"
+	case MsvAvDnsTreeName:
+		return "MsvAvDnsTreeName"
+	case MsvAvFlags:
+		return "MsvAvFlags"
+	case MsvAvTimestamp:
+		return "MsvAvTimestamp"
+	case MsvAvRestrictions:
+		return "MsvAvRestrictions"
+	case MsvAvTargetName:
+		return "MsvAvTargetName"
+	case MsvAvChannelBindings:
+		return "MsvAvChannelBindings"
+	default:
+		return fmt.Sprintf("MSV1_0_AVID(%d)", int32(e))
+	}
+}
+
 type MSV1_0_CREDENTIAL_KEY_TYPE int32
 
 const (
@@ -340,6 +1051,25 @@ const (
 	LocalUserCredKey          MSV1_0_CREDENTIAL_KEY_TYPE = 3
 	ExternallySuppliedCredKey MSV1_0_CREDENTIAL_KEY_TYPE = 4
 )
+
+// String returns the MSV1_0_CREDENTIAL_KEY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSV1_0_CREDENTIAL_KEY_TYPE) String() string {
+	switch e {
+	case InvalidCredKey:
+		return "InvalidCredKey"
+	case DeprecatedIUMCredKey:
+		return "DeprecatedIUMCredKey"
+	case DomainUserCredKey:
+		return "DomainUserCredKey"
+	case LocalUserCredKey:
+		return "LocalUserCredKey"
+	case ExternallySuppliedCredKey:
+		return "ExternallySuppliedCredKey"
+	default:
+		return fmt.Sprintf("MSV1_0_CREDENTIAL_KEY_TYPE(%d)", int32(e))
+	}
+}
 
 // MSV1_0_LOGON_SUBMIT_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-msv1_0_logon_submit_type
 type MSV1_0_LOGON_SUBMIT_TYPE int32
@@ -356,6 +1086,33 @@ const (
 	MsV1_0LuidLogon              MSV1_0_LOGON_SUBMIT_TYPE = 84
 )
 
+// String returns the MSV1_0_LOGON_SUBMIT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSV1_0_LOGON_SUBMIT_TYPE) String() string {
+	switch e {
+	case MsV1_0InteractiveLogon:
+		return "MsV1_0InteractiveLogon"
+	case MsV1_0Lm20Logon:
+		return "MsV1_0Lm20Logon"
+	case MsV1_0NetworkLogon:
+		return "MsV1_0NetworkLogon"
+	case MsV1_0SubAuthLogon:
+		return "MsV1_0SubAuthLogon"
+	case MsV1_0WorkstationUnlockLogon:
+		return "MsV1_0WorkstationUnlockLogon"
+	case MsV1_0S4ULogon:
+		return "MsV1_0S4ULogon"
+	case MsV1_0VirtualLogon:
+		return "MsV1_0VirtualLogon"
+	case MsV1_0NoElevationLogon:
+		return "MsV1_0NoElevationLogon"
+	case MsV1_0LuidLogon:
+		return "MsV1_0LuidLogon"
+	default:
+		return fmt.Sprintf("MSV1_0_LOGON_SUBMIT_TYPE(%d)", int32(e))
+	}
+}
+
 // MSV1_0_PROFILE_BUFFER_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-msv1_0_profile_buffer_type
 type MSV1_0_PROFILE_BUFFER_TYPE int32
 
@@ -364,6 +1121,21 @@ const (
 	MsV1_0Lm20LogonProfile   MSV1_0_PROFILE_BUFFER_TYPE = 3
 	MsV1_0SmartCardProfile   MSV1_0_PROFILE_BUFFER_TYPE = 4
 )
+
+// String returns the MSV1_0_PROFILE_BUFFER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSV1_0_PROFILE_BUFFER_TYPE) String() string {
+	switch e {
+	case MsV1_0InteractiveProfile:
+		return "MsV1_0InteractiveProfile"
+	case MsV1_0Lm20LogonProfile:
+		return "MsV1_0Lm20LogonProfile"
+	case MsV1_0SmartCardProfile:
+		return "MsV1_0SmartCardProfile"
+	default:
+		return fmt.Sprintf("MSV1_0_PROFILE_BUFFER_TYPE(%d)", int32(e))
+	}
+}
 
 // MSV1_0_PROTOCOL_MESSAGE_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-msv1_0_protocol_message_type
 type MSV1_0_PROTOCOL_MESSAGE_TYPE int32
@@ -396,6 +1168,66 @@ const (
 	MsV1_0DeleteTbalSecrets        MSV1_0_PROTOCOL_MESSAGE_TYPE = 24
 )
 
+// String returns the MSV1_0_PROTOCOL_MESSAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSV1_0_PROTOCOL_MESSAGE_TYPE) String() string {
+	switch e {
+	case MsV1_0Lm20ChallengeRequest:
+		return "MsV1_0Lm20ChallengeRequest"
+	case MsV1_0Lm20GetChallengeResponse:
+		return "MsV1_0Lm20GetChallengeResponse"
+	case MsV1_0EnumerateUsers:
+		return "MsV1_0EnumerateUsers"
+	case MsV1_0GetUserInfo:
+		return "MsV1_0GetUserInfo"
+	case MsV1_0ReLogonUsers:
+		return "MsV1_0ReLogonUsers"
+	case MsV1_0ChangePassword:
+		return "MsV1_0ChangePassword"
+	case MsV1_0ChangeCachedPassword:
+		return "MsV1_0ChangeCachedPassword"
+	case MsV1_0GenericPassthrough:
+		return "MsV1_0GenericPassthrough"
+	case MsV1_0CacheLogon:
+		return "MsV1_0CacheLogon"
+	case MsV1_0SubAuth:
+		return "MsV1_0SubAuth"
+	case MsV1_0DeriveCredential:
+		return "MsV1_0DeriveCredential"
+	case MsV1_0CacheLookup:
+		return "MsV1_0CacheLookup"
+	case MsV1_0SetProcessOption:
+		return "MsV1_0SetProcessOption"
+	case MsV1_0ConfigLocalAliases:
+		return "MsV1_0ConfigLocalAliases"
+	case MsV1_0ClearCachedCredentials:
+		return "MsV1_0ClearCachedCredentials"
+	case MsV1_0LookupToken:
+		return "MsV1_0LookupToken"
+	case MsV1_0ValidateAuth:
+		return "MsV1_0ValidateAuth"
+	case MsV1_0CacheLookupEx:
+		return "MsV1_0CacheLookupEx"
+	case MsV1_0GetCredentialKey:
+		return "MsV1_0GetCredentialKey"
+	case MsV1_0SetThreadOption:
+		return "MsV1_0SetThreadOption"
+	case MsV1_0DecryptDpapiMasterKey:
+		return "MsV1_0DecryptDpapiMasterKey"
+	case MsV1_0GetStrongCredentialKey:
+		return "MsV1_0GetStrongCredentialKey"
+	case MsV1_0TransferCred:
+		return "MsV1_0TransferCred"
+	case MsV1_0ProvisionTbal:
+		return "MsV1_0ProvisionTbal"
+	case MsV1_0DeleteTbalSecrets:
+		return "MsV1_0DeleteTbalSecrets"
+	default:
+		return fmt.Sprintf("MSV1_0_PROTOCOL_MESSAGE_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MSV_SUBAUTH_LOGON_PARAMETER_CONTROL uint32
 
 const (
@@ -411,6 +1243,46 @@ const (
 	MSV1_0_TRY_SPECIFIED_DOMAIN_ONLY       MSV_SUBAUTH_LOGON_PARAMETER_CONTROL = 1024
 )
 
+// String returns the MSV_SUBAUTH_LOGON_PARAMETER_CONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSV_SUBAUTH_LOGON_PARAMETER_CONTROL) String() string {
+	var parts []string
+	if e&MSV1_0_CLEARTEXT_PASSWORD_ALLOWED != 0 {
+		parts = append(parts, "MSV1_0_CLEARTEXT_PASSWORD_ALLOWED")
+	}
+	if e&MSV1_0_UPDATE_LOGON_STATISTICS != 0 {
+		parts = append(parts, "MSV1_0_UPDATE_LOGON_STATISTICS")
+	}
+	if e&MSV1_0_RETURN_USER_PARAMETERS != 0 {
+		parts = append(parts, "MSV1_0_RETURN_USER_PARAMETERS")
+	}
+	if e&MSV1_0_DONT_TRY_GUEST_ACCOUNT != 0 {
+		parts = append(parts, "MSV1_0_DONT_TRY_GUEST_ACCOUNT")
+	}
+	if e&MSV1_0_ALLOW_SERVER_TRUST_ACCOUNT != 0 {
+		parts = append(parts, "MSV1_0_ALLOW_SERVER_TRUST_ACCOUNT")
+	}
+	if e&MSV1_0_RETURN_PASSWORD_EXPIRY != 0 {
+		parts = append(parts, "MSV1_0_RETURN_PASSWORD_EXPIRY")
+	}
+	if e&MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT != 0 {
+		parts = append(parts, "MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT")
+	}
+	if e&MSV1_0_TRY_GUEST_ACCOUNT_ONLY != 0 {
+		parts = append(parts, "MSV1_0_TRY_GUEST_ACCOUNT_ONLY")
+	}
+	if e&MSV1_0_RETURN_PROFILE_PATH != 0 {
+		parts = append(parts, "MSV1_0_RETURN_PROFILE_PATH")
+	}
+	if e&MSV1_0_TRY_SPECIFIED_DOMAIN_ONLY != 0 {
+		parts = append(parts, "MSV1_0_TRY_SPECIFIED_DOMAIN_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type MSV_SUB_AUTHENTICATION_FILTER uint32
 
 const (
@@ -425,6 +1297,34 @@ const (
 	LOGON_RESOURCE_GROUPS       MSV_SUB_AUTHENTICATION_FILTER = 512
 )
 
+// String returns the MSV_SUB_AUTHENTICATION_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSV_SUB_AUTHENTICATION_FILTER) String() string {
+	switch e {
+	case LOGON_GUEST:
+		return "LOGON_GUEST"
+	case LOGON_NOENCRYPTION:
+		return "LOGON_NOENCRYPTION"
+	case LOGON_CACHED_ACCOUNT:
+		return "LOGON_CACHED_ACCOUNT"
+	case LOGON_USED_LM_PASSWORD:
+		return "LOGON_USED_LM_PASSWORD"
+	case LOGON_EXTRA_SIDS:
+		return "LOGON_EXTRA_SIDS"
+	case LOGON_SUBAUTH_SESSION_KEY:
+		return "LOGON_SUBAUTH_SESSION_KEY"
+	case LOGON_SERVER_TRUST_ACCOUNT:
+		return "LOGON_SERVER_TRUST_ACCOUNT"
+	case LOGON_PROFILE_PATH_RETURNED:
+		return "LOGON_PROFILE_PATH_RETURNED"
+	case LOGON_RESOURCE_GROUPS:
+		return "LOGON_RESOURCE_GROUPS"
+	default:
+		return fmt.Sprintf("MSV_SUB_AUTHENTICATION_FILTER(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS uint32
 
 const (
@@ -432,6 +1332,22 @@ const (
 	MSV1_0_CRED_NT_PRESENT MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS = 2
 	MSV1_0_CRED_VERSION    MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS = 0
 )
+
+// String returns the MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS) String() string {
+	var parts []string
+	if e&MSV1_0_CRED_LM_PRESENT != 0 {
+		parts = append(parts, "MSV1_0_CRED_LM_PRESENT")
+	}
+	if e&MSV1_0_CRED_NT_PRESENT != 0 {
+		parts = append(parts, "MSV1_0_CRED_NT_PRESENT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type NEGOTIATE_MESSAGES int32
 
@@ -442,6 +1358,25 @@ const (
 	NegMsgReserved1        NEGOTIATE_MESSAGES = 3
 	NegCallPackageMax      NEGOTIATE_MESSAGES = 4
 )
+
+// String returns the NEGOTIATE_MESSAGES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NEGOTIATE_MESSAGES) String() string {
+	switch e {
+	case NegEnumPackagePrefixes:
+		return "NegEnumPackagePrefixes"
+	case NegGetCallerName:
+		return "NegGetCallerName"
+	case NegTransferCredentials:
+		return "NegTransferCredentials"
+	case NegMsgReserved1:
+		return "NegMsgReserved1"
+	case NegCallPackageMax:
+		return "NegCallPackageMax"
+	default:
+		return fmt.Sprintf("NEGOTIATE_MESSAGES(%d)", int32(e))
+	}
+}
 
 type NETLOGON_LOGON_INFO_CLASS int32
 
@@ -456,12 +1391,48 @@ const (
 	NetlogonTicketLogonInformation           NETLOGON_LOGON_INFO_CLASS = 8
 )
 
+// String returns the NETLOGON_LOGON_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETLOGON_LOGON_INFO_CLASS) String() string {
+	switch e {
+	case NetlogonInteractiveInformation:
+		return "NetlogonInteractiveInformation"
+	case NetlogonNetworkInformation:
+		return "NetlogonNetworkInformation"
+	case NetlogonServiceInformation:
+		return "NetlogonServiceInformation"
+	case NetlogonGenericInformation:
+		return "NetlogonGenericInformation"
+	case NetlogonInteractiveTransitiveInformation:
+		return "NetlogonInteractiveTransitiveInformation"
+	case NetlogonNetworkTransitiveInformation:
+		return "NetlogonNetworkTransitiveInformation"
+	case NetlogonServiceTransitiveInformation:
+		return "NetlogonServiceTransitiveInformation"
+	case NetlogonTicketLogonInformation:
+		return "NetlogonTicketLogonInformation"
+	default:
+		return fmt.Sprintf("NETLOGON_LOGON_INFO_CLASS(%d)", int32(e))
+	}
+}
+
 // PKU2U_LOGON_SUBMIT_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-pku2u_logon_submit_type
 type PKU2U_LOGON_SUBMIT_TYPE int32
 
 const (
 	Pku2uCertificateS4ULogon PKU2U_LOGON_SUBMIT_TYPE = 14
 )
+
+// String returns the PKU2U_LOGON_SUBMIT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PKU2U_LOGON_SUBMIT_TYPE) String() string {
+	switch e {
+	case Pku2uCertificateS4ULogon:
+		return "Pku2uCertificateS4ULogon"
+	default:
+		return fmt.Sprintf("PKU2U_LOGON_SUBMIT_TYPE(%d)", int32(e))
+	}
+}
 
 // POLICY_AUDIT_EVENT_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-policy_audit_event_type
 type POLICY_AUDIT_EVENT_TYPE int32
@@ -478,6 +1449,33 @@ const (
 	AuditCategoryAccountLogon           POLICY_AUDIT_EVENT_TYPE = 8
 )
 
+// String returns the POLICY_AUDIT_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POLICY_AUDIT_EVENT_TYPE) String() string {
+	switch e {
+	case AuditCategorySystem:
+		return "AuditCategorySystem"
+	case AuditCategoryLogon:
+		return "AuditCategoryLogon"
+	case AuditCategoryObjectAccess:
+		return "AuditCategoryObjectAccess"
+	case AuditCategoryPrivilegeUse:
+		return "AuditCategoryPrivilegeUse"
+	case AuditCategoryDetailedTracking:
+		return "AuditCategoryDetailedTracking"
+	case AuditCategoryPolicyChange:
+		return "AuditCategoryPolicyChange"
+	case AuditCategoryAccountManagement:
+		return "AuditCategoryAccountManagement"
+	case AuditCategoryDirectoryServiceAccess:
+		return "AuditCategoryDirectoryServiceAccess"
+	case AuditCategoryAccountLogon:
+		return "AuditCategoryAccountLogon"
+	default:
+		return fmt.Sprintf("POLICY_AUDIT_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 // POLICY_DOMAIN_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-policy_domain_information_class
 type POLICY_DOMAIN_INFORMATION_CLASS int32
 
@@ -485,6 +1483,19 @@ const (
 	PolicyDomainEfsInformation            POLICY_DOMAIN_INFORMATION_CLASS = 2
 	PolicyDomainKerberosTicketInformation POLICY_DOMAIN_INFORMATION_CLASS = 3
 )
+
+// String returns the POLICY_DOMAIN_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POLICY_DOMAIN_INFORMATION_CLASS) String() string {
+	switch e {
+	case PolicyDomainEfsInformation:
+		return "PolicyDomainEfsInformation"
+	case PolicyDomainKerberosTicketInformation:
+		return "PolicyDomainKerberosTicketInformation"
+	default:
+		return fmt.Sprintf("POLICY_DOMAIN_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
 
 // POLICY_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-policy_information_class
 type POLICY_INFORMATION_CLASS int32
@@ -509,6 +1520,49 @@ const (
 	PolicyLastEntry                     POLICY_INFORMATION_CLASS = 17
 )
 
+// String returns the POLICY_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POLICY_INFORMATION_CLASS) String() string {
+	switch e {
+	case PolicyAuditLogInformation:
+		return "PolicyAuditLogInformation"
+	case PolicyAuditEventsInformation:
+		return "PolicyAuditEventsInformation"
+	case PolicyPrimaryDomainInformation:
+		return "PolicyPrimaryDomainInformation"
+	case PolicyPdAccountInformation:
+		return "PolicyPdAccountInformation"
+	case PolicyAccountDomainInformation:
+		return "PolicyAccountDomainInformation"
+	case PolicyLsaServerRoleInformation:
+		return "PolicyLsaServerRoleInformation"
+	case PolicyReplicaSourceInformation:
+		return "PolicyReplicaSourceInformation"
+	case PolicyDefaultQuotaInformation:
+		return "PolicyDefaultQuotaInformation"
+	case PolicyModificationInformation:
+		return "PolicyModificationInformation"
+	case PolicyAuditFullSetInformation:
+		return "PolicyAuditFullSetInformation"
+	case PolicyAuditFullQueryInformation:
+		return "PolicyAuditFullQueryInformation"
+	case PolicyDnsDomainInformation:
+		return "PolicyDnsDomainInformation"
+	case PolicyDnsDomainInformationInt:
+		return "PolicyDnsDomainInformationInt"
+	case PolicyLocalAccountDomainInformation:
+		return "PolicyLocalAccountDomainInformation"
+	case PolicyMachineAccountInformation:
+		return "PolicyMachineAccountInformation"
+	case PolicyMachineAccountInformation2:
+		return "PolicyMachineAccountInformation2"
+	case PolicyLastEntry:
+		return "PolicyLastEntry"
+	default:
+		return fmt.Sprintf("POLICY_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
+
 // POLICY_LSA_SERVER_ROLE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-policy_lsa_server_role
 type POLICY_LSA_SERVER_ROLE int32
 
@@ -516,6 +1570,19 @@ const (
 	PolicyServerRoleBackup  POLICY_LSA_SERVER_ROLE = 2
 	PolicyServerRolePrimary POLICY_LSA_SERVER_ROLE = 3
 )
+
+// String returns the POLICY_LSA_SERVER_ROLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POLICY_LSA_SERVER_ROLE) String() string {
+	switch e {
+	case PolicyServerRoleBackup:
+		return "PolicyServerRoleBackup"
+	case PolicyServerRolePrimary:
+		return "PolicyServerRolePrimary"
+	default:
+		return fmt.Sprintf("POLICY_LSA_SERVER_ROLE(%d)", int32(e))
+	}
+}
 
 // POLICY_NOTIFICATION_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-policy_notification_information_class
 type POLICY_NOTIFICATION_INFORMATION_CLASS int32
@@ -532,12 +1599,52 @@ const (
 	PolicyNotifyMax                               POLICY_NOTIFICATION_INFORMATION_CLASS = 9
 )
 
+// String returns the POLICY_NOTIFICATION_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POLICY_NOTIFICATION_INFORMATION_CLASS) String() string {
+	switch e {
+	case PolicyNotifyAuditEventsInformation:
+		return "PolicyNotifyAuditEventsInformation"
+	case PolicyNotifyAccountDomainInformation:
+		return "PolicyNotifyAccountDomainInformation"
+	case PolicyNotifyServerRoleInformation:
+		return "PolicyNotifyServerRoleInformation"
+	case PolicyNotifyDnsDomainInformation:
+		return "PolicyNotifyDnsDomainInformation"
+	case PolicyNotifyDomainEfsInformation:
+		return "PolicyNotifyDomainEfsInformation"
+	case PolicyNotifyDomainKerberosTicketInformation:
+		return "PolicyNotifyDomainKerberosTicketInformation"
+	case PolicyNotifyMachineAccountPasswordInformation:
+		return "PolicyNotifyMachineAccountPasswordInformation"
+	case PolicyNotifyGlobalSaclInformation:
+		return "PolicyNotifyGlobalSaclInformation"
+	case PolicyNotifyMax:
+		return "PolicyNotifyMax"
+	default:
+		return fmt.Sprintf("POLICY_NOTIFICATION_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
+
 type SASL_AUTHZID_STATE int32
 
 const (
 	Sasl_AuthZIDForbidden SASL_AUTHZID_STATE = 0
 	Sasl_AuthZIDProcessed SASL_AUTHZID_STATE = 1
 )
+
+// String returns the SASL_AUTHZID_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SASL_AUTHZID_STATE) String() string {
+	switch e {
+	case Sasl_AuthZIDForbidden:
+		return "Sasl_AuthZIDForbidden"
+	case Sasl_AuthZIDProcessed:
+		return "Sasl_AuthZIDProcessed"
+	default:
+		return fmt.Sprintf("SASL_AUTHZID_STATE(%d)", int32(e))
+	}
+}
 
 type SCHANNEL_ALERT_TOKEN_ALERT_TYPE uint32
 
@@ -546,6 +1653,20 @@ const (
 	TLS1_ALERT_FATAL   SCHANNEL_ALERT_TOKEN_ALERT_TYPE = 2
 )
 
+// String returns the SCHANNEL_ALERT_TOKEN_ALERT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCHANNEL_ALERT_TOKEN_ALERT_TYPE) String() string {
+	switch e {
+	case TLS1_ALERT_WARNING:
+		return "TLS1_ALERT_WARNING"
+	case TLS1_ALERT_FATAL:
+		return "TLS1_ALERT_FATAL"
+	default:
+		return fmt.Sprintf("SCHANNEL_ALERT_TOKEN_ALERT_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SCHANNEL_CRED_FLAGS uint32
 
 const (
@@ -568,12 +1689,86 @@ const (
 	SCH_USE_PRESHAREDKEY_ONLY                    SCHANNEL_CRED_FLAGS = 8388608
 )
 
+// String returns the SCHANNEL_CRED_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCHANNEL_CRED_FLAGS) String() string {
+	var parts []string
+	if e&SCH_CRED_AUTO_CRED_VALIDATION != 0 {
+		parts = append(parts, "SCH_CRED_AUTO_CRED_VALIDATION")
+	}
+	if e&SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE != 0 {
+		parts = append(parts, "SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE")
+	}
+	if e&SCH_DISABLE_RECONNECTS != 0 {
+		parts = append(parts, "SCH_DISABLE_RECONNECTS")
+	}
+	if e&SCH_CRED_IGNORE_NO_REVOCATION_CHECK != 0 {
+		parts = append(parts, "SCH_CRED_IGNORE_NO_REVOCATION_CHECK")
+	}
+	if e&SCH_CRED_IGNORE_REVOCATION_OFFLINE != 0 {
+		parts = append(parts, "SCH_CRED_IGNORE_REVOCATION_OFFLINE")
+	}
+	if e&SCH_CRED_MANUAL_CRED_VALIDATION != 0 {
+		parts = append(parts, "SCH_CRED_MANUAL_CRED_VALIDATION")
+	}
+	if e&SCH_CRED_NO_DEFAULT_CREDS != 0 {
+		parts = append(parts, "SCH_CRED_NO_DEFAULT_CREDS")
+	}
+	if e&SCH_CRED_NO_SERVERNAME_CHECK != 0 {
+		parts = append(parts, "SCH_CRED_NO_SERVERNAME_CHECK")
+	}
+	if e&SCH_CRED_NO_SYSTEM_MAPPER != 0 {
+		parts = append(parts, "SCH_CRED_NO_SYSTEM_MAPPER")
+	}
+	if e&SCH_CRED_REVOCATION_CHECK_CHAIN != 0 {
+		parts = append(parts, "SCH_CRED_REVOCATION_CHECK_CHAIN")
+	}
+	if e&SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT != 0 {
+		parts = append(parts, "SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT")
+	}
+	if e&SCH_CRED_REVOCATION_CHECK_END_CERT != 0 {
+		parts = append(parts, "SCH_CRED_REVOCATION_CHECK_END_CERT")
+	}
+	if e&SCH_CRED_USE_DEFAULT_CREDS != 0 {
+		parts = append(parts, "SCH_CRED_USE_DEFAULT_CREDS")
+	}
+	if e&SCH_SEND_AUX_RECORD != 0 {
+		parts = append(parts, "SCH_SEND_AUX_RECORD")
+	}
+	if e&SCH_SEND_ROOT_CERT != 0 {
+		parts = append(parts, "SCH_SEND_ROOT_CERT")
+	}
+	if e&SCH_USE_STRONG_CRYPTO != 0 {
+		parts = append(parts, "SCH_USE_STRONG_CRYPTO")
+	}
+	if e&SCH_USE_PRESHAREDKEY_ONLY != 0 {
+		parts = append(parts, "SCH_USE_PRESHAREDKEY_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SCHANNEL_SESSION_TOKEN_FLAGS uint32
 
 const (
 	SSL_SESSION_ENABLE_RECONNECTS  SCHANNEL_SESSION_TOKEN_FLAGS = 1
 	SSL_SESSION_DISABLE_RECONNECTS SCHANNEL_SESSION_TOKEN_FLAGS = 2
 )
+
+// String returns the SCHANNEL_SESSION_TOKEN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCHANNEL_SESSION_TOKEN_FLAGS) String() string {
+	switch e {
+	case SSL_SESSION_ENABLE_RECONNECTS:
+		return "SSL_SESSION_ENABLE_RECONNECTS"
+	case SSL_SESSION_DISABLE_RECONNECTS:
+		return "SSL_SESSION_DISABLE_RECONNECTS"
+	default:
+		return fmt.Sprintf("SCHANNEL_SESSION_TOKEN_FLAGS(%d)", uint32(e))
+	}
+}
 
 type SECPKG_ATTR uint32
 
@@ -621,6 +1816,97 @@ const (
 	SECPKG_ATTR_UNIQUE_BINDINGS             SECPKG_ATTR = 25
 )
 
+// String returns the SECPKG_ATTR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECPKG_ATTR) String() string {
+	switch e {
+	case SECPKG_ATTR_C_ACCESS_TOKEN:
+		return "SECPKG_ATTR_C_ACCESS_TOKEN"
+	case SECPKG_ATTR_C_FULL_ACCESS_TOKEN:
+		return "SECPKG_ATTR_C_FULL_ACCESS_TOKEN"
+	case SECPKG_ATTR_CERT_TRUST_STATUS:
+		return "SECPKG_ATTR_CERT_TRUST_STATUS"
+	case SECPKG_ATTR_CREDS:
+		return "SECPKG_ATTR_CREDS"
+	case SECPKG_ATTR_CREDS_2:
+		return "SECPKG_ATTR_CREDS_2"
+	case SECPKG_ATTR_NEGOTIATION_PACKAGE:
+		return "SECPKG_ATTR_NEGOTIATION_PACKAGE"
+	case SECPKG_ATTR_PACKAGE_INFO:
+		return "SECPKG_ATTR_PACKAGE_INFO"
+	case SECPKG_ATTR_SERVER_AUTH_FLAGS:
+		return "SECPKG_ATTR_SERVER_AUTH_FLAGS"
+	case SECPKG_ATTR_SIZES:
+		return "SECPKG_ATTR_SIZES"
+	case SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES:
+		return "SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES"
+	case SECPKG_ATTR_APP_DATA:
+		return "SECPKG_ATTR_APP_DATA"
+	case SECPKG_ATTR_EAP_PRF_INFO:
+		return "SECPKG_ATTR_EAP_PRF_INFO"
+	case SECPKG_ATTR_EARLY_START:
+		return "SECPKG_ATTR_EARLY_START"
+	case SECPKG_ATTR_DTLS_MTU:
+		return "SECPKG_ATTR_DTLS_MTU"
+	case SECPKG_ATTR_KEYING_MATERIAL_INFO:
+		return "SECPKG_ATTR_KEYING_MATERIAL_INFO"
+	case SECPKG_ATTR_ACCESS_TOKEN:
+		return "SECPKG_ATTR_ACCESS_TOKEN"
+	case SECPKG_ATTR_AUTHORITY:
+		return "SECPKG_ATTR_AUTHORITY"
+	case SECPKG_ATTR_CLIENT_SPECIFIED_TARGET:
+		return "SECPKG_ATTR_CLIENT_SPECIFIED_TARGET"
+	case SECPKG_ATTR_CONNECTION_INFO:
+		return "SECPKG_ATTR_CONNECTION_INFO"
+	case SECPKG_ATTR_DCE_INFO:
+		return "SECPKG_ATTR_DCE_INFO"
+	case SECPKG_ATTR_ENDPOINT_BINDINGS:
+		return "SECPKG_ATTR_ENDPOINT_BINDINGS"
+	case SECPKG_ATTR_EAP_KEY_BLOCK:
+		return "SECPKG_ATTR_EAP_KEY_BLOCK"
+	case SECPKG_ATTR_FLAGS:
+		return "SECPKG_ATTR_FLAGS"
+	case SECPKG_ATTR_ISSUER_LIST_EX:
+		return "SECPKG_ATTR_ISSUER_LIST_EX"
+	case SECPKG_ATTR_KEY_INFO:
+		return "SECPKG_ATTR_KEY_INFO"
+	case SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS:
+		return "SECPKG_ATTR_LAST_CLIENT_TOKEN_STATUS"
+	case SECPKG_ATTR_LIFESPAN:
+		return "SECPKG_ATTR_LIFESPAN"
+	case SECPKG_ATTR_LOCAL_CERT_CONTEXT:
+		return "SECPKG_ATTR_LOCAL_CERT_CONTEXT"
+	case SECPKG_ATTR_LOCAL_CRED:
+		return "SECPKG_ATTR_LOCAL_CRED"
+	case SECPKG_ATTR_NAMES:
+		return "SECPKG_ATTR_NAMES"
+	case SECPKG_ATTR_NATIVE_NAMES:
+		return "SECPKG_ATTR_NATIVE_NAMES"
+	case SECPKG_ATTR_NEGOTIATION_INFO:
+		return "SECPKG_ATTR_NEGOTIATION_INFO"
+	case SECPKG_ATTR_PASSWORD_EXPIRY:
+		return "SECPKG_ATTR_PASSWORD_EXPIRY"
+	case SECPKG_ATTR_REMOTE_CERT_CONTEXT:
+		return "SECPKG_ATTR_REMOTE_CERT_CONTEXT"
+	case SECPKG_ATTR_ROOT_STORE:
+		return "SECPKG_ATTR_ROOT_STORE"
+	case SECPKG_ATTR_SESSION_KEY:
+		return "SECPKG_ATTR_SESSION_KEY"
+	case SECPKG_ATTR_SESSION_INFO:
+		return "SECPKG_ATTR_SESSION_INFO"
+	case SECPKG_ATTR_STREAM_SIZES:
+		return "SECPKG_ATTR_STREAM_SIZES"
+	case SECPKG_ATTR_SUPPORTED_SIGNATURES:
+		return "SECPKG_ATTR_SUPPORTED_SIGNATURES"
+	case SECPKG_ATTR_TARGET_INFORMATION:
+		return "SECPKG_ATTR_TARGET_INFORMATION"
+	case SECPKG_ATTR_UNIQUE_BINDINGS:
+		return "SECPKG_ATTR_UNIQUE_BINDINGS"
+	default:
+		return fmt.Sprintf("SECPKG_ATTR(%d)", uint32(e))
+	}
+}
+
 // SECPKG_ATTR_LCT_STATUS: https://learn.microsoft.com/windows/win32/api/sspi/ne-sspi-secpkg_attr_lct_status
 type SECPKG_ATTR_LCT_STATUS int32
 
@@ -629,6 +1915,21 @@ const (
 	SecPkgAttrLastClientTokenNo    SECPKG_ATTR_LCT_STATUS = 1
 	SecPkgAttrLastClientTokenMaybe SECPKG_ATTR_LCT_STATUS = 2
 )
+
+// String returns the SECPKG_ATTR_LCT_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECPKG_ATTR_LCT_STATUS) String() string {
+	switch e {
+	case SecPkgAttrLastClientTokenYes:
+		return "SecPkgAttrLastClientTokenYes"
+	case SecPkgAttrLastClientTokenNo:
+		return "SecPkgAttrLastClientTokenNo"
+	case SecPkgAttrLastClientTokenMaybe:
+		return "SecPkgAttrLastClientTokenMaybe"
+	default:
+		return fmt.Sprintf("SECPKG_ATTR_LCT_STATUS(%d)", int32(e))
+	}
+}
 
 type SECPKG_CALL_PACKAGE_MESSAGE_TYPE int32
 
@@ -640,12 +1941,40 @@ const (
 	SecPkgCallPackageMaxMessage          SECPKG_CALL_PACKAGE_MESSAGE_TYPE = 1026
 )
 
+// String returns the SECPKG_CALL_PACKAGE_MESSAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECPKG_CALL_PACKAGE_MESSAGE_TYPE) String() string {
+	switch e {
+	case SecPkgCallPackageMinMessage:
+		return "SecPkgCallPackageMinMessage"
+	case SecPkgCallPackageUnpinAllDcsMessage:
+		return "SecPkgCallPackageUnpinAllDcsMessage"
+	case SecPkgCallPackageTransferCredMessage:
+		return "SecPkgCallPackageTransferCredMessage"
+	default:
+		return fmt.Sprintf("SECPKG_CALL_PACKAGE_MESSAGE_TYPE(%d)", int32(e))
+	}
+}
+
 type SECPKG_CRED uint32
 
 const (
 	SECPKG_CRED_INBOUND  SECPKG_CRED = 1
 	SECPKG_CRED_OUTBOUND SECPKG_CRED = 2
 )
+
+// String returns the SECPKG_CRED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECPKG_CRED) String() string {
+	switch e {
+	case SECPKG_CRED_INBOUND:
+		return "SECPKG_CRED_INBOUND"
+	case SECPKG_CRED_OUTBOUND:
+		return "SECPKG_CRED_OUTBOUND"
+	default:
+		return fmt.Sprintf("SECPKG_CRED(%d)", uint32(e))
+	}
+}
 
 // SECPKG_CRED_CLASS: https://learn.microsoft.com/windows/win32/api/sspi/ne-sspi-secpkg_cred_class
 type SECPKG_CRED_CLASS int32
@@ -657,6 +1986,25 @@ const (
 	SecPkgCredClass_PersistedSpecific SECPKG_CRED_CLASS = 30
 	SecPkgCredClass_Explicit          SECPKG_CRED_CLASS = 40
 )
+
+// String returns the SECPKG_CRED_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECPKG_CRED_CLASS) String() string {
+	switch e {
+	case SecPkgCredClass_None:
+		return "SecPkgCredClass_None"
+	case SecPkgCredClass_Ephemeral:
+		return "SecPkgCredClass_Ephemeral"
+	case SecPkgCredClass_PersistedGeneric:
+		return "SecPkgCredClass_PersistedGeneric"
+	case SecPkgCredClass_PersistedSpecific:
+		return "SecPkgCredClass_PersistedSpecific"
+	case SecPkgCredClass_Explicit:
+		return "SecPkgCredClass_Explicit"
+	default:
+		return fmt.Sprintf("SECPKG_CRED_CLASS(%d)", int32(e))
+	}
+}
 
 // SECPKG_EXTENDED_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/ntsecpkg/ne-ntsecpkg-secpkg_extended_information_class
 type SECPKG_EXTENDED_INFORMATION_CLASS int32
@@ -670,6 +2018,29 @@ const (
 	SecpkgMaxInfo         SECPKG_EXTENDED_INFORMATION_CLASS = 6
 	SecpkgNego2Info       SECPKG_EXTENDED_INFORMATION_CLASS = 7
 )
+
+// String returns the SECPKG_EXTENDED_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECPKG_EXTENDED_INFORMATION_CLASS) String() string {
+	switch e {
+	case SecpkgGssInfo:
+		return "SecpkgGssInfo"
+	case SecpkgContextThunks:
+		return "SecpkgContextThunks"
+	case SecpkgMutualAuthLevel:
+		return "SecpkgMutualAuthLevel"
+	case SecpkgWowClientDll:
+		return "SecpkgWowClientDll"
+	case SecpkgExtraOids:
+		return "SecpkgExtraOids"
+	case SecpkgMaxInfo:
+		return "SecpkgMaxInfo"
+	case SecpkgNego2Info:
+		return "SecpkgNego2Info"
+	default:
+		return fmt.Sprintf("SECPKG_EXTENDED_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
 
 type SECPKG_FAILURE_SPECIAL_REASON int32
 
@@ -688,6 +2059,39 @@ const (
 	SecpkgFailureReason_NullSession   SECPKG_FAILURE_SPECIAL_REASON = 11
 )
 
+// String returns the SECPKG_FAILURE_SPECIAL_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECPKG_FAILURE_SPECIAL_REASON) String() string {
+	switch e {
+	case SecpkgFailureReason_Unknown:
+		return "SecpkgFailureReason_Unknown"
+	case SecpkgFailureReason_NoFailure:
+		return "SecpkgFailureReason_NoFailure"
+	case SecpkgFailureReason_LocalAccount:
+		return "SecpkgFailureReason_LocalAccount"
+	case SecpkgFailureReason_DomainAccount:
+		return "SecpkgFailureReason_DomainAccount"
+	case SecpkgFailureReason_CloudAccount:
+		return "SecpkgFailureReason_CloudAccount"
+	case SecpkgFailureReason_NullTarget:
+		return "SecpkgFailureReason_NullTarget"
+	case SecpkgFailureReason_UnknownTarget:
+		return "SecpkgFailureReason_UnknownTarget"
+	case SecpkgFailureReason_IpAddress:
+		return "SecpkgFailureReason_IpAddress"
+	case SecpkgFailureReason_DupTarget:
+		return "SecpkgFailureReason_DupTarget"
+	case SecpkgFailureReason_NoLineOfSight:
+		return "SecpkgFailureReason_NoLineOfSight"
+	case SecpkgFailureReason_Loopback:
+		return "SecpkgFailureReason_Loopback"
+	case SecpkgFailureReason_NullSession:
+		return "SecpkgFailureReason_NullSession"
+	default:
+		return fmt.Sprintf("SECPKG_FAILURE_SPECIAL_REASON(%d)", int32(e))
+	}
+}
+
 // SECPKG_NAME_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecpkg/ne-ntsecpkg-secpkg_name_type
 type SECPKG_NAME_TYPE int32
 
@@ -699,6 +2103,25 @@ const (
 	SecNameSPN           SECPKG_NAME_TYPE = 4
 )
 
+// String returns the SECPKG_NAME_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECPKG_NAME_TYPE) String() string {
+	switch e {
+	case SecNameSamCompatible:
+		return "SecNameSamCompatible"
+	case SecNameAlternateId:
+		return "SecNameAlternateId"
+	case SecNameFlat:
+		return "SecNameFlat"
+	case SecNameDN:
+		return "SecNameDN"
+	case SecNameSPN:
+		return "SecNameSPN"
+	default:
+		return fmt.Sprintf("SECPKG_NAME_TYPE(%d)", int32(e))
+	}
+}
+
 type SECPKG_PACKAGE_CHANGE_TYPE uint32
 
 const (
@@ -707,12 +2130,38 @@ const (
 	SECPKG_PACKAGE_CHANGE_SELECT SECPKG_PACKAGE_CHANGE_TYPE = 2
 )
 
+// String returns the SECPKG_PACKAGE_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECPKG_PACKAGE_CHANGE_TYPE) String() string {
+	switch e {
+	case SECPKG_PACKAGE_CHANGE_LOAD:
+		return "SECPKG_PACKAGE_CHANGE_LOAD"
+	case SECPKG_PACKAGE_CHANGE_UNLOAD:
+		return "SECPKG_PACKAGE_CHANGE_UNLOAD"
+	case SECPKG_PACKAGE_CHANGE_SELECT:
+		return "SECPKG_PACKAGE_CHANGE_SELECT"
+	default:
+		return fmt.Sprintf("SECPKG_PACKAGE_CHANGE_TYPE(%d)", uint32(e))
+	}
+}
+
 // SECPKG_SESSIONINFO_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecpkg/ne-ntsecpkg-secpkg_sessioninfo_type
 type SECPKG_SESSIONINFO_TYPE int32
 
 const (
 	SecSessionPrimaryCred SECPKG_SESSIONINFO_TYPE = 0
 )
+
+// String returns the SECPKG_SESSIONINFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECPKG_SESSIONINFO_TYPE) String() string {
+	switch e {
+	case SecSessionPrimaryCred:
+		return "SecSessionPrimaryCred"
+	default:
+		return fmt.Sprintf("SECPKG_SESSIONINFO_TYPE(%d)", int32(e))
+	}
+}
 
 // SECURITY_LOGON_TYPE: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-security_logon_type
 type SECURITY_LOGON_TYPE int32
@@ -733,6 +2182,41 @@ const (
 	CachedUnlock            SECURITY_LOGON_TYPE = 13
 )
 
+// String returns the SECURITY_LOGON_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURITY_LOGON_TYPE) String() string {
+	switch e {
+	case UndefinedLogonType:
+		return "UndefinedLogonType"
+	case Interactive:
+		return "Interactive"
+	case Network:
+		return "Network"
+	case Batch:
+		return "Batch"
+	case Service:
+		return "Service"
+	case Proxy:
+		return "Proxy"
+	case Unlock:
+		return "Unlock"
+	case NetworkCleartext:
+		return "NetworkCleartext"
+	case NewCredentials:
+		return "NewCredentials"
+	case RemoteInteractive:
+		return "RemoteInteractive"
+	case CachedInteractive:
+		return "CachedInteractive"
+	case CachedRemoteInteractive:
+		return "CachedRemoteInteractive"
+	case CachedUnlock:
+		return "CachedUnlock"
+	default:
+		return fmt.Sprintf("SECURITY_LOGON_TYPE(%d)", int32(e))
+	}
+}
+
 type SECURITY_PACKAGE_OPTIONS_TYPE uint32
 
 const (
@@ -740,6 +2224,21 @@ const (
 	SECPKG_OPTIONS_TYPE_LSA     SECURITY_PACKAGE_OPTIONS_TYPE = 1
 	SECPKG_OPTIONS_TYPE_SSPI    SECURITY_PACKAGE_OPTIONS_TYPE = 2
 )
+
+// String returns the SECURITY_PACKAGE_OPTIONS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURITY_PACKAGE_OPTIONS_TYPE) String() string {
+	switch e {
+	case SECPKG_OPTIONS_TYPE_UNKNOWN:
+		return "SECPKG_OPTIONS_TYPE_UNKNOWN"
+	case SECPKG_OPTIONS_TYPE_LSA:
+		return "SECPKG_OPTIONS_TYPE_LSA"
+	case SECPKG_OPTIONS_TYPE_SSPI:
+		return "SECPKG_OPTIONS_TYPE_SSPI"
+	default:
+		return fmt.Sprintf("SECURITY_PACKAGE_OPTIONS_TYPE(%d)", uint32(e))
+	}
+}
 
 // SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT: https://learn.microsoft.com/windows/win32/api/sspi/ne-sspi-sec_application_protocol_negotiation_ext
 type SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT int32
@@ -750,6 +2249,21 @@ const (
 	SecApplicationProtocolNegotiationExt_ALPN SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT = 2
 )
 
+// String returns the SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT) String() string {
+	switch e {
+	case SecApplicationProtocolNegotiationExt_None:
+		return "SecApplicationProtocolNegotiationExt_None"
+	case SecApplicationProtocolNegotiationExt_NPN:
+		return "SecApplicationProtocolNegotiationExt_NPN"
+	case SecApplicationProtocolNegotiationExt_ALPN:
+		return "SecApplicationProtocolNegotiationExt_ALPN"
+	default:
+		return fmt.Sprintf("SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT(%d)", int32(e))
+	}
+}
+
 // SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS: https://learn.microsoft.com/windows/win32/api/sspi/ne-sspi-sec_application_protocol_negotiation_status
 type SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS int32
 
@@ -759,6 +2273,21 @@ const (
 	SecApplicationProtocolNegotiationStatus_SelectedClientOnly SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS = 2
 )
 
+// String returns the SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS) String() string {
+	switch e {
+	case SecApplicationProtocolNegotiationStatus_None:
+		return "SecApplicationProtocolNegotiationStatus_None"
+	case SecApplicationProtocolNegotiationStatus_Success:
+		return "SecApplicationProtocolNegotiationStatus_Success"
+	case SecApplicationProtocolNegotiationStatus_SelectedClientOnly:
+		return "SecApplicationProtocolNegotiationStatus_SelectedClientOnly"
+	default:
+		return fmt.Sprintf("SEC_APPLICATION_PROTOCOL_NEGOTIATION_STATUS(%d)", int32(e))
+	}
+}
+
 // SEC_TRAFFIC_SECRET_TYPE: https://learn.microsoft.com/windows/win32/api/sspi/ne-sspi-sec_traffic_secret_type
 type SEC_TRAFFIC_SECRET_TYPE int32
 
@@ -767,6 +2296,21 @@ const (
 	SecTrafficSecret_Client SEC_TRAFFIC_SECRET_TYPE = 1
 	SecTrafficSecret_Server SEC_TRAFFIC_SECRET_TYPE = 2
 )
+
+// String returns the SEC_TRAFFIC_SECRET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SEC_TRAFFIC_SECRET_TYPE) String() string {
+	switch e {
+	case SecTrafficSecret_None:
+		return "SecTrafficSecret_None"
+	case SecTrafficSecret_Client:
+		return "SecTrafficSecret_Client"
+	case SecTrafficSecret_Server:
+		return "SecTrafficSecret_Server"
+	default:
+		return fmt.Sprintf("SEC_TRAFFIC_SECRET_TYPE(%d)", int32(e))
+	}
+}
 
 type SE_ADT_PARAMETER_TYPE int32
 
@@ -809,6 +2353,87 @@ const (
 	SeAdtParmTypeLogonIdEx          SE_ADT_PARAMETER_TYPE = 35
 )
 
+// String returns the SE_ADT_PARAMETER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SE_ADT_PARAMETER_TYPE) String() string {
+	switch e {
+	case SeAdtParmTypeNone:
+		return "SeAdtParmTypeNone"
+	case SeAdtParmTypeString:
+		return "SeAdtParmTypeString"
+	case SeAdtParmTypeFileSpec:
+		return "SeAdtParmTypeFileSpec"
+	case SeAdtParmTypeUlong:
+		return "SeAdtParmTypeUlong"
+	case SeAdtParmTypeSid:
+		return "SeAdtParmTypeSid"
+	case SeAdtParmTypeLogonId:
+		return "SeAdtParmTypeLogonId"
+	case SeAdtParmTypeNoLogonId:
+		return "SeAdtParmTypeNoLogonId"
+	case SeAdtParmTypeAccessMask:
+		return "SeAdtParmTypeAccessMask"
+	case SeAdtParmTypePrivs:
+		return "SeAdtParmTypePrivs"
+	case SeAdtParmTypeObjectTypes:
+		return "SeAdtParmTypeObjectTypes"
+	case SeAdtParmTypeHexUlong:
+		return "SeAdtParmTypeHexUlong"
+	case SeAdtParmTypePtr:
+		return "SeAdtParmTypePtr"
+	case SeAdtParmTypeTime:
+		return "SeAdtParmTypeTime"
+	case SeAdtParmTypeGuid:
+		return "SeAdtParmTypeGuid"
+	case SeAdtParmTypeLuid:
+		return "SeAdtParmTypeLuid"
+	case SeAdtParmTypeHexInt64:
+		return "SeAdtParmTypeHexInt64"
+	case SeAdtParmTypeStringList:
+		return "SeAdtParmTypeStringList"
+	case SeAdtParmTypeSidList:
+		return "SeAdtParmTypeSidList"
+	case SeAdtParmTypeDuration:
+		return "SeAdtParmTypeDuration"
+	case SeAdtParmTypeUserAccountControl:
+		return "SeAdtParmTypeUserAccountControl"
+	case SeAdtParmTypeNoUac:
+		return "SeAdtParmTypeNoUac"
+	case SeAdtParmTypeMessage:
+		return "SeAdtParmTypeMessage"
+	case SeAdtParmTypeDateTime:
+		return "SeAdtParmTypeDateTime"
+	case SeAdtParmTypeSockAddr:
+		return "SeAdtParmTypeSockAddr"
+	case SeAdtParmTypeSD:
+		return "SeAdtParmTypeSD"
+	case SeAdtParmTypeLogonHours:
+		return "SeAdtParmTypeLogonHours"
+	case SeAdtParmTypeLogonIdNoSid:
+		return "SeAdtParmTypeLogonIdNoSid"
+	case SeAdtParmTypeUlongNoConv:
+		return "SeAdtParmTypeUlongNoConv"
+	case SeAdtParmTypeSockAddrNoPort:
+		return "SeAdtParmTypeSockAddrNoPort"
+	case SeAdtParmTypeAccessReason:
+		return "SeAdtParmTypeAccessReason"
+	case SeAdtParmTypeStagingReason:
+		return "SeAdtParmTypeStagingReason"
+	case SeAdtParmTypeResourceAttribute:
+		return "SeAdtParmTypeResourceAttribute"
+	case SeAdtParmTypeClaims:
+		return "SeAdtParmTypeClaims"
+	case SeAdtParmTypeLogonIdAsSid:
+		return "SeAdtParmTypeLogonIdAsSid"
+	case SeAdtParmTypeMultiSzString:
+		return "SeAdtParmTypeMultiSzString"
+	case SeAdtParmTypeLogonIdEx:
+		return "SeAdtParmTypeLogonIdEx"
+	default:
+		return fmt.Sprintf("SE_ADT_PARAMETER_TYPE(%d)", int32(e))
+	}
+}
+
 // SLDATATYPE: https://learn.microsoft.com/windows/win32/api/slpublic/ne-slpublic-sldatatype
 type SLDATATYPE uint32
 
@@ -820,6 +2445,27 @@ const (
 	SL_DATA_MULTI_SZ SLDATATYPE = 7
 	SL_DATA_SUM      SLDATATYPE = 100
 )
+
+// String returns the SLDATATYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SLDATATYPE) String() string {
+	switch e {
+	case SL_DATA_NONE:
+		return "SL_DATA_NONE"
+	case SL_DATA_SZ:
+		return "SL_DATA_SZ"
+	case SL_DATA_DWORD:
+		return "SL_DATA_DWORD"
+	case SL_DATA_BINARY:
+		return "SL_DATA_BINARY"
+	case SL_DATA_MULTI_SZ:
+		return "SL_DATA_MULTI_SZ"
+	case SL_DATA_SUM:
+		return "SL_DATA_SUM"
+	default:
+		return fmt.Sprintf("SLDATATYPE(%d)", uint32(e))
+	}
+}
 
 // SLIDTYPE: https://learn.microsoft.com/windows/win32/api/slpublic/ne-slpublic-slidtype
 type SLIDTYPE int32
@@ -836,6 +2482,33 @@ const (
 	SL_ID_LAST              SLIDTYPE = 8
 )
 
+// String returns the SLIDTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SLIDTYPE) String() string {
+	switch e {
+	case SL_ID_APPLICATION:
+		return "SL_ID_APPLICATION"
+	case SL_ID_PRODUCT_SKU:
+		return "SL_ID_PRODUCT_SKU"
+	case SL_ID_LICENSE_FILE:
+		return "SL_ID_LICENSE_FILE"
+	case SL_ID_LICENSE:
+		return "SL_ID_LICENSE"
+	case SL_ID_PKEY:
+		return "SL_ID_PKEY"
+	case SL_ID_ALL_LICENSES:
+		return "SL_ID_ALL_LICENSES"
+	case SL_ID_ALL_LICENSE_FILES:
+		return "SL_ID_ALL_LICENSE_FILES"
+	case SL_ID_STORE_TOKEN:
+		return "SL_ID_STORE_TOKEN"
+	case SL_ID_LAST:
+		return "SL_ID_LAST"
+	default:
+		return fmt.Sprintf("SLIDTYPE(%d)", int32(e))
+	}
+}
+
 // SLLICENSINGSTATUS: https://learn.microsoft.com/windows/win32/api/slpublic/ne-slpublic-sllicensingstatus
 type SLLICENSINGSTATUS int32
 
@@ -846,6 +2519,25 @@ const (
 	SL_LICENSING_STATUS_NOTIFICATION    SLLICENSINGSTATUS = 3
 	SL_LICENSING_STATUS_LAST            SLLICENSINGSTATUS = 4
 )
+
+// String returns the SLLICENSINGSTATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SLLICENSINGSTATUS) String() string {
+	switch e {
+	case SL_LICENSING_STATUS_UNLICENSED:
+		return "SL_LICENSING_STATUS_UNLICENSED"
+	case SL_LICENSING_STATUS_LICENSED:
+		return "SL_LICENSING_STATUS_LICENSED"
+	case SL_LICENSING_STATUS_IN_GRACE_PERIOD:
+		return "SL_LICENSING_STATUS_IN_GRACE_PERIOD"
+	case SL_LICENSING_STATUS_NOTIFICATION:
+		return "SL_LICENSING_STATUS_NOTIFICATION"
+	case SL_LICENSING_STATUS_LAST:
+		return "SL_LICENSING_STATUS_LAST"
+	default:
+		return fmt.Sprintf("SLLICENSINGSTATUS(%d)", int32(e))
+	}
+}
 
 // SLREFERRALTYPE: https://learn.microsoft.com/windows/win32/api/slpublic/ne-slpublic-slreferraltype
 type SLREFERRALTYPE int32
@@ -858,6 +2550,25 @@ const (
 	SL_REFERRALTYPE_BEST_MATCH     SLREFERRALTYPE = 4
 )
 
+// String returns the SLREFERRALTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SLREFERRALTYPE) String() string {
+	switch e {
+	case SL_REFERRALTYPE_SKUID:
+		return "SL_REFERRALTYPE_SKUID"
+	case SL_REFERRALTYPE_APPID:
+		return "SL_REFERRALTYPE_APPID"
+	case SL_REFERRALTYPE_OVERRIDE_SKUID:
+		return "SL_REFERRALTYPE_OVERRIDE_SKUID"
+	case SL_REFERRALTYPE_OVERRIDE_APPID:
+		return "SL_REFERRALTYPE_OVERRIDE_APPID"
+	case SL_REFERRALTYPE_BEST_MATCH:
+		return "SL_REFERRALTYPE_BEST_MATCH"
+	default:
+		return fmt.Sprintf("SLREFERRALTYPE(%d)", int32(e))
+	}
+}
+
 // SL_ACTIVATION_TYPE: https://learn.microsoft.com/windows/win32/api/slpublic/ne-slpublic-sl_activation_type
 type SL_ACTIVATION_TYPE int32
 
@@ -865,6 +2576,19 @@ const (
 	SL_ACTIVATION_TYPE_DEFAULT          SL_ACTIVATION_TYPE = 0
 	SL_ACTIVATION_TYPE_ACTIVE_DIRECTORY SL_ACTIVATION_TYPE = 1
 )
+
+// String returns the SL_ACTIVATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SL_ACTIVATION_TYPE) String() string {
+	switch e {
+	case SL_ACTIVATION_TYPE_DEFAULT:
+		return "SL_ACTIVATION_TYPE_DEFAULT"
+	case SL_ACTIVATION_TYPE_ACTIVE_DIRECTORY:
+		return "SL_ACTIVATION_TYPE_ACTIVE_DIRECTORY"
+	default:
+		return fmt.Sprintf("SL_ACTIVATION_TYPE(%d)", int32(e))
+	}
+}
 
 // SL_GENUINE_STATE: https://learn.microsoft.com/windows/win32/api/slpublic/ne-slpublic-sl_genuine_state
 type SL_GENUINE_STATE int32
@@ -877,12 +2601,45 @@ const (
 	SL_GEN_STATE_LAST            SL_GENUINE_STATE = 4
 )
 
+// String returns the SL_GENUINE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SL_GENUINE_STATE) String() string {
+	switch e {
+	case SL_GEN_STATE_IS_GENUINE:
+		return "SL_GEN_STATE_IS_GENUINE"
+	case SL_GEN_STATE_INVALID_LICENSE:
+		return "SL_GEN_STATE_INVALID_LICENSE"
+	case SL_GEN_STATE_TAMPERED:
+		return "SL_GEN_STATE_TAMPERED"
+	case SL_GEN_STATE_OFFLINE:
+		return "SL_GEN_STATE_OFFLINE"
+	case SL_GEN_STATE_LAST:
+		return "SL_GEN_STATE_LAST"
+	default:
+		return fmt.Sprintf("SL_GENUINE_STATE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SchGetExtensionsOptions int32
 
 const (
 	SCH_EXTENSIONS_OPTIONS_NONE SchGetExtensionsOptions = 0
 	SCH_NO_RECORD_HEADER        SchGetExtensionsOptions = 1
 )
+
+// String returns the SchGetExtensionsOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SchGetExtensionsOptions) String() string {
+	var parts []string
+	if e&SCH_NO_RECORD_HEADER != 0 {
+		parts = append(parts, "SCH_NO_RECORD_HEADER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // SecDelegationType: https://learn.microsoft.com/windows/win32/api/sspi/ne-sspi-secdelegationtype
 type SecDelegationType int32
@@ -895,12 +2652,42 @@ const (
 	SecObject    SecDelegationType = 4
 )
 
+// String returns the SecDelegationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SecDelegationType) String() string {
+	switch e {
+	case SecFull:
+		return "SecFull"
+	case SecService:
+		return "SecService"
+	case SecTree:
+		return "SecTree"
+	case SecDirectory:
+		return "SecDirectory"
+	case SecObject:
+		return "SecObject"
+	default:
+		return fmt.Sprintf("SecDelegationType(%d)", int32(e))
+	}
+}
+
 // TOKENBINDING_EXTENSION_FORMAT: https://learn.microsoft.com/windows/win32/api/tokenbinding/ne-tokenbinding-tokenbinding_extension_format
 type TOKENBINDING_EXTENSION_FORMAT int32
 
 const (
 	TOKENBINDING_EXTENSION_FORMAT_UNDEFINED TOKENBINDING_EXTENSION_FORMAT = 0
 )
+
+// String returns the TOKENBINDING_EXTENSION_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOKENBINDING_EXTENSION_FORMAT) String() string {
+	switch e {
+	case TOKENBINDING_EXTENSION_FORMAT_UNDEFINED:
+		return "TOKENBINDING_EXTENSION_FORMAT_UNDEFINED"
+	default:
+		return fmt.Sprintf("TOKENBINDING_EXTENSION_FORMAT(%d)", int32(e))
+	}
+}
 
 type TOKENBINDING_KEY_PARAMETERS_TYPE int32
 
@@ -911,6 +2698,23 @@ const (
 	TOKENBINDING_KEY_PARAMETERS_TYPE_ANYEXISTING  TOKENBINDING_KEY_PARAMETERS_TYPE = 255
 )
 
+// String returns the TOKENBINDING_KEY_PARAMETERS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOKENBINDING_KEY_PARAMETERS_TYPE) String() string {
+	switch e {
+	case TOKENBINDING_KEY_PARAMETERS_TYPE_RSA2048_PKCS:
+		return "TOKENBINDING_KEY_PARAMETERS_TYPE_RSA2048_PKCS"
+	case TOKENBINDING_KEY_PARAMETERS_TYPE_RSA2048_PSS:
+		return "TOKENBINDING_KEY_PARAMETERS_TYPE_RSA2048_PSS"
+	case TOKENBINDING_KEY_PARAMETERS_TYPE_ECDSAP256:
+		return "TOKENBINDING_KEY_PARAMETERS_TYPE_ECDSAP256"
+	case TOKENBINDING_KEY_PARAMETERS_TYPE_ANYEXISTING:
+		return "TOKENBINDING_KEY_PARAMETERS_TYPE_ANYEXISTING"
+	default:
+		return fmt.Sprintf("TOKENBINDING_KEY_PARAMETERS_TYPE(%d)", int32(e))
+	}
+}
+
 // TOKENBINDING_TYPE: https://learn.microsoft.com/windows/win32/api/tokenbinding/ne-tokenbinding-tokenbinding_type
 type TOKENBINDING_TYPE int32
 
@@ -918,6 +2722,19 @@ const (
 	TOKENBINDING_TYPE_PROVIDED TOKENBINDING_TYPE = 0
 	TOKENBINDING_TYPE_REFERRED TOKENBINDING_TYPE = 1
 )
+
+// String returns the TOKENBINDING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOKENBINDING_TYPE) String() string {
+	switch e {
+	case TOKENBINDING_TYPE_PROVIDED:
+		return "TOKENBINDING_TYPE_PROVIDED"
+	case TOKENBINDING_TYPE_REFERRED:
+		return "TOKENBINDING_TYPE_REFERRED"
+	default:
+		return fmt.Sprintf("TOKENBINDING_TYPE(%d)", int32(e))
+	}
+}
 
 type TRUSTED_DOMAIN_TRUST_ATTRIBUTES uint32
 
@@ -931,6 +2748,29 @@ const (
 	TRUST_ATTRIBUTE_WITHIN_FOREST      TRUSTED_DOMAIN_TRUST_ATTRIBUTES = 32
 )
 
+// String returns the TRUSTED_DOMAIN_TRUST_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRUSTED_DOMAIN_TRUST_ATTRIBUTES) String() string {
+	switch e {
+	case TRUST_ATTRIBUTE_NON_TRANSITIVE:
+		return "TRUST_ATTRIBUTE_NON_TRANSITIVE"
+	case TRUST_ATTRIBUTE_UPLEVEL_ONLY:
+		return "TRUST_ATTRIBUTE_UPLEVEL_ONLY"
+	case TRUST_ATTRIBUTE_FILTER_SIDS:
+		return "TRUST_ATTRIBUTE_FILTER_SIDS"
+	case TRUST_ATTRIBUTE_FOREST_TRANSITIVE:
+		return "TRUST_ATTRIBUTE_FOREST_TRANSITIVE"
+	case TRUST_ATTRIBUTE_CROSS_ORGANIZATION:
+		return "TRUST_ATTRIBUTE_CROSS_ORGANIZATION"
+	case TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL:
+		return "TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL"
+	case TRUST_ATTRIBUTE_WITHIN_FOREST:
+		return "TRUST_ATTRIBUTE_WITHIN_FOREST"
+	default:
+		return fmt.Sprintf("TRUSTED_DOMAIN_TRUST_ATTRIBUTES(%d)", uint32(e))
+	}
+}
+
 type TRUSTED_DOMAIN_TRUST_DIRECTION uint32
 
 const (
@@ -940,6 +2780,23 @@ const (
 	TRUST_DIRECTION_BIDIRECTIONAL TRUSTED_DOMAIN_TRUST_DIRECTION = 3
 )
 
+// String returns the TRUSTED_DOMAIN_TRUST_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRUSTED_DOMAIN_TRUST_DIRECTION) String() string {
+	switch e {
+	case TRUST_DIRECTION_DISABLED:
+		return "TRUST_DIRECTION_DISABLED"
+	case TRUST_DIRECTION_INBOUND:
+		return "TRUST_DIRECTION_INBOUND"
+	case TRUST_DIRECTION_OUTBOUND:
+		return "TRUST_DIRECTION_OUTBOUND"
+	case TRUST_DIRECTION_BIDIRECTIONAL:
+		return "TRUST_DIRECTION_BIDIRECTIONAL"
+	default:
+		return fmt.Sprintf("TRUSTED_DOMAIN_TRUST_DIRECTION(%d)", uint32(e))
+	}
+}
+
 type TRUSTED_DOMAIN_TRUST_TYPE uint32
 
 const (
@@ -948,6 +2805,23 @@ const (
 	TRUST_TYPE_MIT       TRUSTED_DOMAIN_TRUST_TYPE = 3
 	TRUST_TYPE_DCE       TRUSTED_DOMAIN_TRUST_TYPE = 4
 )
+
+// String returns the TRUSTED_DOMAIN_TRUST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRUSTED_DOMAIN_TRUST_TYPE) String() string {
+	switch e {
+	case TRUST_TYPE_DOWNLEVEL:
+		return "TRUST_TYPE_DOWNLEVEL"
+	case TRUST_TYPE_UPLEVEL:
+		return "TRUST_TYPE_UPLEVEL"
+	case TRUST_TYPE_MIT:
+		return "TRUST_TYPE_MIT"
+	case TRUST_TYPE_DCE:
+		return "TRUST_TYPE_DCE"
+	default:
+		return fmt.Sprintf("TRUSTED_DOMAIN_TRUST_TYPE(%d)", uint32(e))
+	}
+}
 
 // TRUSTED_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/ntsecapi/ne-ntsecapi-trusted_information_class
 type TRUSTED_INFORMATION_CLASS int32
@@ -970,6 +2844,45 @@ const (
 	TrustedDomainFullInformationInternalAes TRUSTED_INFORMATION_CLASS = 15
 )
 
+// String returns the TRUSTED_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRUSTED_INFORMATION_CLASS) String() string {
+	switch e {
+	case TrustedDomainNameInformation:
+		return "TrustedDomainNameInformation"
+	case TrustedControllersInformation:
+		return "TrustedControllersInformation"
+	case TrustedPosixOffsetInformation:
+		return "TrustedPosixOffsetInformation"
+	case TrustedPasswordInformation:
+		return "TrustedPasswordInformation"
+	case TrustedDomainInformationBasic:
+		return "TrustedDomainInformationBasic"
+	case TrustedDomainInformationEx:
+		return "TrustedDomainInformationEx"
+	case TrustedDomainAuthInformation:
+		return "TrustedDomainAuthInformation"
+	case TrustedDomainFullInformation:
+		return "TrustedDomainFullInformation"
+	case TrustedDomainAuthInformationInternal:
+		return "TrustedDomainAuthInformationInternal"
+	case TrustedDomainFullInformationInternal:
+		return "TrustedDomainFullInformationInternal"
+	case TrustedDomainInformationEx2Internal:
+		return "TrustedDomainInformationEx2Internal"
+	case TrustedDomainFullInformation2Internal:
+		return "TrustedDomainFullInformation2Internal"
+	case TrustedDomainSupportedEncryptionTypes:
+		return "TrustedDomainSupportedEncryptionTypes"
+	case TrustedDomainAuthInformationInternalAes:
+		return "TrustedDomainAuthInformationInternalAes"
+	case TrustedDomainFullInformationInternalAes:
+		return "TrustedDomainFullInformationInternalAes"
+	default:
+		return fmt.Sprintf("TRUSTED_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
+
 // ETlsAlgorithmUsage: https://learn.microsoft.com/windows/win32/api/schannel/ne-schannel-etlsalgorithmusage
 type ETlsAlgorithmUsage int32
 
@@ -980,6 +2893,25 @@ const (
 	TlsParametersCngAlgUsageDigest      ETlsAlgorithmUsage = 3
 	TlsParametersCngAlgUsageCertSig     ETlsAlgorithmUsage = 4
 )
+
+// String returns the ETlsAlgorithmUsage constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ETlsAlgorithmUsage) String() string {
+	switch e {
+	case TlsParametersCngAlgUsageKeyExchange:
+		return "TlsParametersCngAlgUsageKeyExchange"
+	case TlsParametersCngAlgUsageSignature:
+		return "TlsParametersCngAlgUsageSignature"
+	case TlsParametersCngAlgUsageCipher:
+		return "TlsParametersCngAlgUsageCipher"
+	case TlsParametersCngAlgUsageDigest:
+		return "TlsParametersCngAlgUsageDigest"
+	case TlsParametersCngAlgUsageCertSig:
+		return "TlsParametersCngAlgUsageCertSig"
+	default:
+		return fmt.Sprintf("ETlsAlgorithmUsage(%d)", int32(e))
+	}
+}
 
 type ETlsHashAlgorithm int32
 
@@ -993,6 +2925,29 @@ const (
 	TlsHashAlgorithm_Sha512 ETlsHashAlgorithm = 6
 )
 
+// String returns the ETlsHashAlgorithm constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ETlsHashAlgorithm) String() string {
+	switch e {
+	case TlsHashAlgorithm_None:
+		return "TlsHashAlgorithm_None"
+	case TlsHashAlgorithm_Md5:
+		return "TlsHashAlgorithm_Md5"
+	case TlsHashAlgorithm_Sha1:
+		return "TlsHashAlgorithm_Sha1"
+	case TlsHashAlgorithm_Sha224:
+		return "TlsHashAlgorithm_Sha224"
+	case TlsHashAlgorithm_Sha256:
+		return "TlsHashAlgorithm_Sha256"
+	case TlsHashAlgorithm_Sha384:
+		return "TlsHashAlgorithm_Sha384"
+	case TlsHashAlgorithm_Sha512:
+		return "TlsHashAlgorithm_Sha512"
+	default:
+		return fmt.Sprintf("ETlsHashAlgorithm(%d)", int32(e))
+	}
+}
+
 type ETlsSignatureAlgorithm int32
 
 const (
@@ -1001,3 +2956,20 @@ const (
 	TlsSignatureAlgorithm_Dsa       ETlsSignatureAlgorithm = 2
 	TlsSignatureAlgorithm_Ecdsa     ETlsSignatureAlgorithm = 3
 )
+
+// String returns the ETlsSignatureAlgorithm constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ETlsSignatureAlgorithm) String() string {
+	switch e {
+	case TlsSignatureAlgorithm_Anonymous:
+		return "TlsSignatureAlgorithm_Anonymous"
+	case TlsSignatureAlgorithm_Rsa:
+		return "TlsSignatureAlgorithm_Rsa"
+	case TlsSignatureAlgorithm_Dsa:
+		return "TlsSignatureAlgorithm_Dsa"
+	case TlsSignatureAlgorithm_Ecdsa:
+		return "TlsSignatureAlgorithm_Ecdsa"
+	default:
+		return fmt.Sprintf("ETlsSignatureAlgorithm(%d)", int32(e))
+	}
+}

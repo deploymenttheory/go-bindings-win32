@@ -4,6 +4,10 @@
 
 package mediaplayer
 
+import (
+	"fmt"
+)
+
 type FEEDS_BACKGROUNDSYNC_ACTION int32
 
 const (
@@ -12,12 +16,40 @@ const (
 	FBSA_RUNNOW  FEEDS_BACKGROUNDSYNC_ACTION = 2
 )
 
+// String returns the FEEDS_BACKGROUNDSYNC_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_BACKGROUNDSYNC_ACTION) String() string {
+	switch e {
+	case FBSA_DISABLE:
+		return "FBSA_DISABLE"
+	case FBSA_ENABLE:
+		return "FBSA_ENABLE"
+	case FBSA_RUNNOW:
+		return "FBSA_RUNNOW"
+	default:
+		return fmt.Sprintf("FEEDS_BACKGROUNDSYNC_ACTION(%d)", int32(e))
+	}
+}
+
 type FEEDS_BACKGROUNDSYNC_STATUS int32
 
 const (
 	FBSS_DISABLED FEEDS_BACKGROUNDSYNC_STATUS = 0
 	FBSS_ENABLED  FEEDS_BACKGROUNDSYNC_STATUS = 1
 )
+
+// String returns the FEEDS_BACKGROUNDSYNC_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_BACKGROUNDSYNC_STATUS) String() string {
+	switch e {
+	case FBSS_DISABLED:
+		return "FBSS_DISABLED"
+	case FBSS_ENABLED:
+		return "FBSS_ENABLED"
+	default:
+		return fmt.Sprintf("FEEDS_BACKGROUNDSYNC_STATUS(%d)", int32(e))
+	}
+}
 
 type FEEDS_DOWNLOAD_ERROR int32
 
@@ -40,6 +72,47 @@ const (
 	FDE_INVALID_AUTH                 FEEDS_DOWNLOAD_ERROR = 15
 )
 
+// String returns the FEEDS_DOWNLOAD_ERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_DOWNLOAD_ERROR) String() string {
+	switch e {
+	case FDE_NONE:
+		return "FDE_NONE"
+	case FDE_DOWNLOAD_FAILED:
+		return "FDE_DOWNLOAD_FAILED"
+	case FDE_INVALID_FEED_FORMAT:
+		return "FDE_INVALID_FEED_FORMAT"
+	case FDE_NORMALIZATION_FAILED:
+		return "FDE_NORMALIZATION_FAILED"
+	case FDE_PERSISTENCE_FAILED:
+		return "FDE_PERSISTENCE_FAILED"
+	case FDE_DOWNLOAD_BLOCKED:
+		return "FDE_DOWNLOAD_BLOCKED"
+	case FDE_CANCELED:
+		return "FDE_CANCELED"
+	case FDE_UNSUPPORTED_AUTH:
+		return "FDE_UNSUPPORTED_AUTH"
+	case FDE_BACKGROUND_DOWNLOAD_DISABLED:
+		return "FDE_BACKGROUND_DOWNLOAD_DISABLED"
+	case FDE_NOT_EXIST:
+		return "FDE_NOT_EXIST"
+	case FDE_UNSUPPORTED_MSXML:
+		return "FDE_UNSUPPORTED_MSXML"
+	case FDE_UNSUPPORTED_DTD:
+		return "FDE_UNSUPPORTED_DTD"
+	case FDE_DOWNLOAD_SIZE_LIMIT_EXCEEDED:
+		return "FDE_DOWNLOAD_SIZE_LIMIT_EXCEEDED"
+	case FDE_ACCESS_DENIED:
+		return "FDE_ACCESS_DENIED"
+	case FDE_AUTH_FAILED:
+		return "FDE_AUTH_FAILED"
+	case FDE_INVALID_AUTH:
+		return "FDE_INVALID_AUTH"
+	default:
+		return fmt.Sprintf("FEEDS_DOWNLOAD_ERROR(%d)", int32(e))
+	}
+}
+
 type FEEDS_DOWNLOAD_STATUS int32
 
 const (
@@ -50,6 +123,25 @@ const (
 	FDS_DOWNLOAD_FAILED FEEDS_DOWNLOAD_STATUS = 4
 )
 
+// String returns the FEEDS_DOWNLOAD_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_DOWNLOAD_STATUS) String() string {
+	switch e {
+	case FDS_NONE:
+		return "FDS_NONE"
+	case FDS_PENDING:
+		return "FDS_PENDING"
+	case FDS_DOWNLOADING:
+		return "FDS_DOWNLOADING"
+	case FDS_DOWNLOADED:
+		return "FDS_DOWNLOADED"
+	case FDS_DOWNLOAD_FAILED:
+		return "FDS_DOWNLOAD_FAILED"
+	default:
+		return fmt.Sprintf("FEEDS_DOWNLOAD_STATUS(%d)", int32(e))
+	}
+}
+
 type FEEDS_ERROR_CODE int32
 
 const (
@@ -58,12 +150,38 @@ const (
 	FEC_E_DOWNLOADSIZELIMITEXCEEDED FEEDS_ERROR_CODE = -1073479167
 )
 
+// String returns the FEEDS_ERROR_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_ERROR_CODE) String() string {
+	switch e {
+	case FEC_E_ERRORBASE:
+		return "FEC_E_ERRORBASE"
+	case FEC_E_DOWNLOADSIZELIMITEXCEEDED:
+		return "FEC_E_DOWNLOADSIZELIMITEXCEEDED"
+	default:
+		return fmt.Sprintf("FEEDS_ERROR_CODE(%d)", int32(e))
+	}
+}
+
 type FEEDS_EVENTS_ITEM_COUNT_FLAGS int32
 
 const (
 	FEICF_READ_ITEM_COUNT_CHANGED   FEEDS_EVENTS_ITEM_COUNT_FLAGS = 1
 	FEICF_UNREAD_ITEM_COUNT_CHANGED FEEDS_EVENTS_ITEM_COUNT_FLAGS = 2
 )
+
+// String returns the FEEDS_EVENTS_ITEM_COUNT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_EVENTS_ITEM_COUNT_FLAGS) String() string {
+	switch e {
+	case FEICF_READ_ITEM_COUNT_CHANGED:
+		return "FEICF_READ_ITEM_COUNT_CHANGED"
+	case FEICF_UNREAD_ITEM_COUNT_CHANGED:
+		return "FEICF_UNREAD_ITEM_COUNT_CHANGED"
+	default:
+		return fmt.Sprintf("FEEDS_EVENTS_ITEM_COUNT_FLAGS(%d)", int32(e))
+	}
+}
 
 type FEEDS_EVENTS_MASK int32
 
@@ -72,6 +190,19 @@ const (
 	FEM_FEEDEVENTS   FEEDS_EVENTS_MASK = 2
 )
 
+// String returns the FEEDS_EVENTS_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_EVENTS_MASK) String() string {
+	switch e {
+	case FEM_FOLDEREVENTS:
+		return "FEM_FOLDEREVENTS"
+	case FEM_FEEDEVENTS:
+		return "FEM_FEEDEVENTS"
+	default:
+		return fmt.Sprintf("FEEDS_EVENTS_MASK(%d)", int32(e))
+	}
+}
+
 type FEEDS_EVENTS_SCOPE int32
 
 const (
@@ -79,6 +210,21 @@ const (
 	FES_SELF_ONLY              FEEDS_EVENTS_SCOPE = 1
 	FES_SELF_AND_CHILDREN_ONLY FEEDS_EVENTS_SCOPE = 2
 )
+
+// String returns the FEEDS_EVENTS_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_EVENTS_SCOPE) String() string {
+	switch e {
+	case FES_ALL:
+		return "FES_ALL"
+	case FES_SELF_ONLY:
+		return "FES_SELF_ONLY"
+	case FES_SELF_AND_CHILDREN_ONLY:
+		return "FES_SELF_AND_CHILDREN_ONLY"
+	default:
+		return fmt.Sprintf("FEEDS_EVENTS_SCOPE(%d)", int32(e))
+	}
+}
 
 type FEEDS_SYNC_SETTING int32
 
@@ -89,6 +235,23 @@ const (
 	FSS_SUGGESTED FEEDS_SYNC_SETTING = 3
 )
 
+// String returns the FEEDS_SYNC_SETTING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_SYNC_SETTING) String() string {
+	switch e {
+	case FSS_DEFAULT:
+		return "FSS_DEFAULT"
+	case FSS_INTERVAL:
+		return "FSS_INTERVAL"
+	case FSS_MANUAL:
+		return "FSS_MANUAL"
+	case FSS_SUGGESTED:
+		return "FSS_SUGGESTED"
+	default:
+		return fmt.Sprintf("FEEDS_SYNC_SETTING(%d)", int32(e))
+	}
+}
+
 type FEEDS_XML_FILTER_FLAGS int32
 
 const (
@@ -97,12 +260,40 @@ const (
 	FXFF_READ   FEEDS_XML_FILTER_FLAGS = 2
 )
 
+// String returns the FEEDS_XML_FILTER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_XML_FILTER_FLAGS) String() string {
+	switch e {
+	case FXFF_ALL:
+		return "FXFF_ALL"
+	case FXFF_UNREAD:
+		return "FXFF_UNREAD"
+	case FXFF_READ:
+		return "FXFF_READ"
+	default:
+		return fmt.Sprintf("FEEDS_XML_FILTER_FLAGS(%d)", int32(e))
+	}
+}
+
 type FEEDS_XML_INCLUDE_FLAGS int32
 
 const (
 	FXIF_NONE          FEEDS_XML_INCLUDE_FLAGS = 0
 	FXIF_CF_EXTENSIONS FEEDS_XML_INCLUDE_FLAGS = 1
 )
+
+// String returns the FEEDS_XML_INCLUDE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_XML_INCLUDE_FLAGS) String() string {
+	switch e {
+	case FXIF_NONE:
+		return "FXIF_NONE"
+	case FXIF_CF_EXTENSIONS:
+		return "FXIF_CF_EXTENSIONS"
+	default:
+		return fmt.Sprintf("FEEDS_XML_INCLUDE_FLAGS(%d)", int32(e))
+	}
+}
 
 type FEEDS_XML_SORT_ORDER int32
 
@@ -112,6 +303,21 @@ const (
 	FXSO_DESCENDING FEEDS_XML_SORT_ORDER = 2
 )
 
+// String returns the FEEDS_XML_SORT_ORDER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_XML_SORT_ORDER) String() string {
+	switch e {
+	case FXSO_NONE:
+		return "FXSO_NONE"
+	case FXSO_ASCENDING:
+		return "FXSO_ASCENDING"
+	case FXSO_DESCENDING:
+		return "FXSO_DESCENDING"
+	default:
+		return fmt.Sprintf("FEEDS_XML_SORT_ORDER(%d)", int32(e))
+	}
+}
+
 type FEEDS_XML_SORT_PROPERTY int32
 
 const (
@@ -119,6 +325,21 @@ const (
 	FXSP_PUBDATE      FEEDS_XML_SORT_PROPERTY = 1
 	FXSP_DOWNLOADTIME FEEDS_XML_SORT_PROPERTY = 2
 )
+
+// String returns the FEEDS_XML_SORT_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDS_XML_SORT_PROPERTY) String() string {
+	switch e {
+	case FXSP_NONE:
+		return "FXSP_NONE"
+	case FXSP_PUBDATE:
+		return "FXSP_PUBDATE"
+	case FXSP_DOWNLOADTIME:
+		return "FXSP_DOWNLOADTIME"
+	default:
+		return fmt.Sprintf("FEEDS_XML_SORT_PROPERTY(%d)", int32(e))
+	}
+}
 
 // PlayerState: https://learn.microsoft.com/windows/win32/api/effects/ne-effects-playerstate
 type PlayerState int32
@@ -129,6 +350,21 @@ const (
 	Play_state  PlayerState = 2
 )
 
+// String returns the PlayerState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PlayerState) String() string {
+	switch e {
+	case Stop_state:
+		return "Stop_state"
+	case Pause_state:
+		return "Pause_state"
+	case Play_state:
+		return "Play_state"
+	default:
+		return fmt.Sprintf("PlayerState(%d)", int32(e))
+	}
+}
+
 // WMPAccountType: https://learn.microsoft.com/windows/win32/api/contentpartner/ne-contentpartner-wmpaccounttype
 type WMPAccountType int32
 
@@ -138,6 +374,21 @@ const (
 	WmpatJanus        WMPAccountType = 3
 )
 
+// String returns the WMPAccountType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPAccountType) String() string {
+	switch e {
+	case WmpatBuyOnly:
+		return "WmpatBuyOnly"
+	case WmpatSubscription:
+		return "WmpatSubscription"
+	case WmpatJanus:
+		return "WmpatJanus"
+	default:
+		return fmt.Sprintf("WMPAccountType(%d)", int32(e))
+	}
+}
+
 // WMPBurnFormat: https://learn.microsoft.com/windows/win32/api/wmp/ne-wmp-wmpburnformat
 type WMPBurnFormat int32
 
@@ -145,6 +396,19 @@ const (
 	WmpbfAudioCD WMPBurnFormat = 0
 	WmpbfDataCD  WMPBurnFormat = 1
 )
+
+// String returns the WMPBurnFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPBurnFormat) String() string {
+	switch e {
+	case WmpbfAudioCD:
+		return "WmpbfAudioCD"
+	case WmpbfDataCD:
+		return "WmpbfDataCD"
+	default:
+		return fmt.Sprintf("WMPBurnFormat(%d)", int32(e))
+	}
+}
 
 // WMPBurnState: https://learn.microsoft.com/windows/win32/api/wmp/ne-wmp-wmpburnstate
 type WMPBurnState int32
@@ -162,6 +426,35 @@ const (
 	WmpbsDownloading          WMPBurnState = 9
 )
 
+// String returns the WMPBurnState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPBurnState) String() string {
+	switch e {
+	case WmpbsUnknown:
+		return "WmpbsUnknown"
+	case WmpbsBusy:
+		return "WmpbsBusy"
+	case WmpbsReady:
+		return "WmpbsReady"
+	case WmpbsWaitingForDisc:
+		return "WmpbsWaitingForDisc"
+	case WmpbsRefreshStatusPending:
+		return "WmpbsRefreshStatusPending"
+	case WmpbsPreparingToBurn:
+		return "WmpbsPreparingToBurn"
+	case WmpbsBurning:
+		return "WmpbsBurning"
+	case WmpbsStopped:
+		return "WmpbsStopped"
+	case WmpbsErasing:
+		return "WmpbsErasing"
+	case WmpbsDownloading:
+		return "WmpbsDownloading"
+	default:
+		return fmt.Sprintf("WMPBurnState(%d)", int32(e))
+	}
+}
+
 // WMPCallbackNotification: https://learn.microsoft.com/windows/win32/api/contentpartner/ne-contentpartner-wmpcallbacknotification
 type WMPCallbackNotification int32
 
@@ -173,6 +466,27 @@ const (
 	WmpcnNewPluginAvailable   WMPCallbackNotification = 5
 	WmpcnDisableRadioSkipping WMPCallbackNotification = 6
 )
+
+// String returns the WMPCallbackNotification constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPCallbackNotification) String() string {
+	switch e {
+	case WmpcnLoginStateChange:
+		return "WmpcnLoginStateChange"
+	case WmpcnAuthResult:
+		return "WmpcnAuthResult"
+	case WmpcnLicenseUpdated:
+		return "WmpcnLicenseUpdated"
+	case WmpcnNewCatalogAvailable:
+		return "WmpcnNewCatalogAvailable"
+	case WmpcnNewPluginAvailable:
+		return "WmpcnNewPluginAvailable"
+	case WmpcnDisableRadioSkipping:
+		return "WmpcnDisableRadioSkipping"
+	default:
+		return fmt.Sprintf("WMPCallbackNotification(%d)", int32(e))
+	}
+}
 
 // WMPDeviceStatus: https://learn.microsoft.com/windows/win32/api/wmp/ne-wmp-wmpdevicestatus
 type WMPDeviceStatus int32
@@ -187,6 +501,29 @@ const (
 	WmpdsLast                WMPDeviceStatus = 6
 )
 
+// String returns the WMPDeviceStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPDeviceStatus) String() string {
+	switch e {
+	case WmpdsUnknown:
+		return "WmpdsUnknown"
+	case WmpdsPartnershipExists:
+		return "WmpdsPartnershipExists"
+	case WmpdsPartnershipDeclined:
+		return "WmpdsPartnershipDeclined"
+	case WmpdsPartnershipAnother:
+		return "WmpdsPartnershipAnother"
+	case WmpdsManualDevice:
+		return "WmpdsManualDevice"
+	case WmpdsNewDevice:
+		return "WmpdsNewDevice"
+	case WmpdsLast:
+		return "WmpdsLast"
+	default:
+		return fmt.Sprintf("WMPDeviceStatus(%d)", int32(e))
+	}
+}
+
 // WMPFolderScanState: https://learn.microsoft.com/windows/win32/api/wmp/ne-wmp-wmpfolderscanstate
 type WMPFolderScanState int32
 
@@ -196,6 +533,23 @@ const (
 	WmpfssUpdating WMPFolderScanState = 2
 	WmpfssStopped  WMPFolderScanState = 3
 )
+
+// String returns the WMPFolderScanState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPFolderScanState) String() string {
+	switch e {
+	case WmpfssUnknown:
+		return "WmpfssUnknown"
+	case WmpfssScanning:
+		return "WmpfssScanning"
+	case WmpfssUpdating:
+		return "WmpfssUpdating"
+	case WmpfssStopped:
+		return "WmpfssStopped"
+	default:
+		return fmt.Sprintf("WMPFolderScanState(%d)", int32(e))
+	}
+}
 
 // WMPLibraryType: https://learn.microsoft.com/windows/win32/api/wmp/ne-wmp-wmplibrarytype
 type WMPLibraryType int32
@@ -208,6 +562,27 @@ const (
 	WmpltDisc           WMPLibraryType = 4
 	WmpltPortableDevice WMPLibraryType = 5
 )
+
+// String returns the WMPLibraryType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPLibraryType) String() string {
+	switch e {
+	case WmpltUnknown:
+		return "WmpltUnknown"
+	case WmpltAll:
+		return "WmpltAll"
+	case WmpltLocal:
+		return "WmpltLocal"
+	case WmpltRemote:
+		return "WmpltRemote"
+	case WmpltDisc:
+		return "WmpltDisc"
+	case WmpltPortableDevice:
+		return "WmpltPortableDevice"
+	default:
+		return fmt.Sprintf("WMPLibraryType(%d)", int32(e))
+	}
+}
 
 // WMPOpenState: https://learn.microsoft.com/windows/win32/api/wmp/ne-wmp-wmpopenstate
 type WMPOpenState int32
@@ -237,6 +612,59 @@ const (
 	WmposOpeningUnknownURL       WMPOpenState = 21
 )
 
+// String returns the WMPOpenState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPOpenState) String() string {
+	switch e {
+	case WmposUndefined:
+		return "WmposUndefined"
+	case WmposPlaylistChanging:
+		return "WmposPlaylistChanging"
+	case WmposPlaylistLocating:
+		return "WmposPlaylistLocating"
+	case WmposPlaylistConnecting:
+		return "WmposPlaylistConnecting"
+	case WmposPlaylistLoading:
+		return "WmposPlaylistLoading"
+	case WmposPlaylistOpening:
+		return "WmposPlaylistOpening"
+	case WmposPlaylistOpenNoMedia:
+		return "WmposPlaylistOpenNoMedia"
+	case WmposPlaylistChanged:
+		return "WmposPlaylistChanged"
+	case WmposMediaChanging:
+		return "WmposMediaChanging"
+	case WmposMediaLocating:
+		return "WmposMediaLocating"
+	case WmposMediaConnecting:
+		return "WmposMediaConnecting"
+	case WmposMediaLoading:
+		return "WmposMediaLoading"
+	case WmposMediaOpening:
+		return "WmposMediaOpening"
+	case WmposMediaOpen:
+		return "WmposMediaOpen"
+	case WmposBeginCodecAcquisition:
+		return "WmposBeginCodecAcquisition"
+	case WmposEndCodecAcquisition:
+		return "WmposEndCodecAcquisition"
+	case WmposBeginLicenseAcquisition:
+		return "WmposBeginLicenseAcquisition"
+	case WmposEndLicenseAcquisition:
+		return "WmposEndLicenseAcquisition"
+	case WmposBeginIndividualization:
+		return "WmposBeginIndividualization"
+	case WmposEndIndividualization:
+		return "WmposEndIndividualization"
+	case WmposMediaWaiting:
+		return "WmposMediaWaiting"
+	case WmposOpeningUnknownURL:
+		return "WmposOpeningUnknownURL"
+	default:
+		return fmt.Sprintf("WMPOpenState(%d)", int32(e))
+	}
+}
+
 // WMPPartnerNotification: https://learn.microsoft.com/windows/win32/api/contentpartner/ne-contentpartner-wmppartnernotification
 type WMPPartnerNotification int32
 
@@ -246,6 +674,23 @@ const (
 	WmpsnCatalogDownloadFailure    WMPPartnerNotification = 3
 	WmpsnCatalogDownloadComplete   WMPPartnerNotification = 4
 )
+
+// String returns the WMPPartnerNotification constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPPartnerNotification) String() string {
+	switch e {
+	case WmpsnBackgroundProcessingBegin:
+		return "WmpsnBackgroundProcessingBegin"
+	case WmpsnBackgroundProcessingEnd:
+		return "WmpsnBackgroundProcessingEnd"
+	case WmpsnCatalogDownloadFailure:
+		return "WmpsnCatalogDownloadFailure"
+	case WmpsnCatalogDownloadComplete:
+		return "WmpsnCatalogDownloadComplete"
+	default:
+		return fmt.Sprintf("WMPPartnerNotification(%d)", int32(e))
+	}
+}
 
 // WMPPlayState: https://learn.microsoft.com/windows/win32/api/wmp/ne-wmp-wmpplaystate
 type WMPPlayState int32
@@ -266,6 +711,41 @@ const (
 	WmppsLast          WMPPlayState = 12
 )
 
+// String returns the WMPPlayState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPPlayState) String() string {
+	switch e {
+	case WmppsUndefined:
+		return "WmppsUndefined"
+	case WmppsStopped:
+		return "WmppsStopped"
+	case WmppsPaused:
+		return "WmppsPaused"
+	case WmppsPlaying:
+		return "WmppsPlaying"
+	case WmppsScanForward:
+		return "WmppsScanForward"
+	case WmppsScanReverse:
+		return "WmppsScanReverse"
+	case WmppsBuffering:
+		return "WmppsBuffering"
+	case WmppsWaiting:
+		return "WmppsWaiting"
+	case WmppsMediaEnded:
+		return "WmppsMediaEnded"
+	case WmppsTransitioning:
+		return "WmppsTransitioning"
+	case WmppsReady:
+		return "WmppsReady"
+	case WmppsReconnecting:
+		return "WmppsReconnecting"
+	case WmppsLast:
+		return "WmppsLast"
+	default:
+		return fmt.Sprintf("WMPPlayState(%d)", int32(e))
+	}
+}
+
 // WMPPlaylistChangeEventType: https://learn.microsoft.com/windows/win32/api/wmp/ne-wmp-wmpplaylistchangeeventtype
 type WMPPlaylistChangeEventType int32
 
@@ -284,12 +764,56 @@ const (
 	WmplcLast       WMPPlaylistChangeEventType = 11
 )
 
+// String returns the WMPPlaylistChangeEventType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPPlaylistChangeEventType) String() string {
+	switch e {
+	case WmplcUnknown:
+		return "WmplcUnknown"
+	case WmplcClear:
+		return "WmplcClear"
+	case WmplcInfoChange:
+		return "WmplcInfoChange"
+	case WmplcMove:
+		return "WmplcMove"
+	case WmplcDelete:
+		return "WmplcDelete"
+	case WmplcInsert:
+		return "WmplcInsert"
+	case WmplcAppend:
+		return "WmplcAppend"
+	case WmplcPrivate:
+		return "WmplcPrivate"
+	case WmplcNameChange:
+		return "WmplcNameChange"
+	case WmplcMorph:
+		return "WmplcMorph"
+	case WmplcSort:
+		return "WmplcSort"
+	case WmplcLast:
+		return "WmplcLast"
+	default:
+		return fmt.Sprintf("WMPPlaylistChangeEventType(%d)", int32(e))
+	}
+}
+
 // WMPPlugin_Caps: https://learn.microsoft.com/windows/win32/api/wmpservices/ne-wmpservices-wmpplugin_caps
 type WMPPlugin_Caps int32
 
 const (
 	WMPPlugin_Caps_CannotConvertFormats WMPPlugin_Caps = 1
 )
+
+// String returns the WMPPlugin_Caps constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPPlugin_Caps) String() string {
+	switch e {
+	case WMPPlugin_Caps_CannotConvertFormats:
+		return "WMPPlugin_Caps_CannotConvertFormats"
+	default:
+		return fmt.Sprintf("WMPPlugin_Caps(%d)", int32(e))
+	}
+}
 
 // WMPRipState: https://learn.microsoft.com/windows/win32/api/wmp/ne-wmp-wmpripstate
 type WMPRipState int32
@@ -300,6 +824,21 @@ const (
 	WmprsStopped WMPRipState = 2
 )
 
+// String returns the WMPRipState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPRipState) String() string {
+	switch e {
+	case WmprsUnknown:
+		return "WmprsUnknown"
+	case WmprsRipping:
+		return "WmprsRipping"
+	case WmprsStopped:
+		return "WmprsStopped"
+	default:
+		return fmt.Sprintf("WMPRipState(%d)", int32(e))
+	}
+}
+
 // WMPServices_StreamState: https://learn.microsoft.com/windows/win32/api/wmpservices/ne-wmpservices-wmpservices_streamstate
 type WMPServices_StreamState int32
 
@@ -308,6 +847,21 @@ const (
 	WMPServices_StreamState_Pause WMPServices_StreamState = 1
 	WMPServices_StreamState_Play  WMPServices_StreamState = 2
 )
+
+// String returns the WMPServices_StreamState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPServices_StreamState) String() string {
+	switch e {
+	case WMPServices_StreamState_Stop:
+		return "WMPServices_StreamState_Stop"
+	case WMPServices_StreamState_Pause:
+		return "WMPServices_StreamState_Pause"
+	case WMPServices_StreamState_Play:
+		return "WMPServices_StreamState_Play"
+	default:
+		return fmt.Sprintf("WMPServices_StreamState(%d)", int32(e))
+	}
+}
 
 // WMPStreamingType: https://learn.microsoft.com/windows/win32/api/contentpartner/ne-contentpartner-wmpstreamingtype
 type WMPStreamingType int32
@@ -318,6 +872,23 @@ const (
 	WmpstVideo   WMPStreamingType = 2
 	WmpstRadio   WMPStreamingType = 3
 )
+
+// String returns the WMPStreamingType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPStreamingType) String() string {
+	switch e {
+	case WmpstUnknown:
+		return "WmpstUnknown"
+	case WmpstMusic:
+		return "WmpstMusic"
+	case WmpstVideo:
+		return "WmpstVideo"
+	case WmpstRadio:
+		return "WmpstRadio"
+	default:
+		return fmt.Sprintf("WMPStreamingType(%d)", int32(e))
+	}
+}
 
 // WMPStringCollectionChangeEventType: https://learn.microsoft.com/windows/win32/api/wmp/ne-wmp-wmpstringcollectionchangeeventtype
 type WMPStringCollectionChangeEventType int32
@@ -332,6 +903,29 @@ const (
 	WmpsccetEndUpdates   WMPStringCollectionChangeEventType = 6
 )
 
+// String returns the WMPStringCollectionChangeEventType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPStringCollectionChangeEventType) String() string {
+	switch e {
+	case WmpsccetUnknown:
+		return "WmpsccetUnknown"
+	case WmpsccetInsert:
+		return "WmpsccetInsert"
+	case WmpsccetChange:
+		return "WmpsccetChange"
+	case WmpsccetDelete:
+		return "WmpsccetDelete"
+	case WmpsccetClear:
+		return "WmpsccetClear"
+	case WmpsccetBeginUpdates:
+		return "WmpsccetBeginUpdates"
+	case WmpsccetEndUpdates:
+		return "WmpsccetEndUpdates"
+	default:
+		return fmt.Sprintf("WMPStringCollectionChangeEventType(%d)", int32(e))
+	}
+}
+
 type WMPSubscriptionDownloadState int32
 
 const (
@@ -342,6 +936,25 @@ const (
 	WmpsdlsCancelled   WMPSubscriptionDownloadState = 4
 )
 
+// String returns the WMPSubscriptionDownloadState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPSubscriptionDownloadState) String() string {
+	switch e {
+	case WmpsdlsDownloading:
+		return "WmpsdlsDownloading"
+	case WmpsdlsPaused:
+		return "WmpsdlsPaused"
+	case WmpsdlsProcessing:
+		return "WmpsdlsProcessing"
+	case WmpsdlsCompleted:
+		return "WmpsdlsCompleted"
+	case WmpsdlsCancelled:
+		return "WmpsdlsCancelled"
+	default:
+		return fmt.Sprintf("WMPSubscriptionDownloadState(%d)", int32(e))
+	}
+}
+
 // WMPSubscriptionServiceEvent: https://learn.microsoft.com/windows/win32/api/subscriptionservices/ne-subscriptionservices-wmpsubscriptionserviceevent
 type WMPSubscriptionServiceEvent int32
 
@@ -351,6 +964,23 @@ const (
 	WmpsseFullBegin    WMPSubscriptionServiceEvent = 3
 	WmpsseFullEnd      WMPSubscriptionServiceEvent = 4
 )
+
+// String returns the WMPSubscriptionServiceEvent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPSubscriptionServiceEvent) String() string {
+	switch e {
+	case WmpsseCurrentBegin:
+		return "WmpsseCurrentBegin"
+	case WmpsseCurrentEnd:
+		return "WmpsseCurrentEnd"
+	case WmpsseFullBegin:
+		return "WmpsseFullBegin"
+	case WmpsseFullEnd:
+		return "WmpsseFullEnd"
+	default:
+		return fmt.Sprintf("WMPSubscriptionServiceEvent(%d)", int32(e))
+	}
+}
 
 // WMPSyncState: https://learn.microsoft.com/windows/win32/api/wmp/ne-wmp-wmpsyncstate
 type WMPSyncState int32
@@ -363,6 +993,25 @@ const (
 	WmpssLast          WMPSyncState = 4
 )
 
+// String returns the WMPSyncState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPSyncState) String() string {
+	switch e {
+	case WmpssUnknown:
+		return "WmpssUnknown"
+	case WmpssSynchronizing:
+		return "WmpssSynchronizing"
+	case WmpssStopped:
+		return "WmpssStopped"
+	case WmpssEstimating:
+		return "WmpssEstimating"
+	case WmpssLast:
+		return "WmpssLast"
+	default:
+		return fmt.Sprintf("WMPSyncState(%d)", int32(e))
+	}
+}
+
 // WMPTaskType: https://learn.microsoft.com/windows/win32/api/contentpartner/ne-contentpartner-wmptasktype
 type WMPTaskType int32
 
@@ -373,6 +1022,23 @@ const (
 	WmpttCurrent WMPTaskType = 4
 )
 
+// String returns the WMPTaskType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPTaskType) String() string {
+	switch e {
+	case WmpttBrowse:
+		return "WmpttBrowse"
+	case WmpttSync:
+		return "WmpttSync"
+	case WmpttBurn:
+		return "WmpttBurn"
+	case WmpttCurrent:
+		return "WmpttCurrent"
+	default:
+		return fmt.Sprintf("WMPTaskType(%d)", int32(e))
+	}
+}
+
 // WMPTemplateSize: https://learn.microsoft.com/windows/win32/api/contentpartner/ne-contentpartner-wmptemplatesize
 type WMPTemplateSize int32
 
@@ -382,6 +1048,21 @@ const (
 	WmptsLarge  WMPTemplateSize = 2
 )
 
+// String returns the WMPTemplateSize constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPTemplateSize) String() string {
+	switch e {
+	case WmptsSmall:
+		return "WmptsSmall"
+	case WmptsMedium:
+		return "WmptsMedium"
+	case WmptsLarge:
+		return "WmptsLarge"
+	default:
+		return fmt.Sprintf("WMPTemplateSize(%d)", int32(e))
+	}
+}
+
 // WMPTransactionType: https://learn.microsoft.com/windows/win32/api/contentpartner/ne-contentpartner-wmptransactiontype
 type WMPTransactionType int32
 
@@ -390,3 +1071,18 @@ const (
 	WmpttDownload      WMPTransactionType = 1
 	WmpttBuy           WMPTransactionType = 2
 )
+
+// String returns the WMPTransactionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMPTransactionType) String() string {
+	switch e {
+	case WmpttNoTransaction:
+		return "WmpttNoTransaction"
+	case WmpttDownload:
+		return "WmpttDownload"
+	case WmpttBuy:
+		return "WmpttBuy"
+	default:
+		return fmt.Sprintf("WMPTransactionType(%d)", int32(e))
+	}
+}

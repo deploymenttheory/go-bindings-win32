@@ -4,6 +4,10 @@
 
 package tpmbaseservices
 
+import (
+	"fmt"
+)
+
 type TBS_COMMAND_LOCALITY uint32
 
 const (
@@ -14,6 +18,25 @@ const (
 	TBS_COMMAND_LOCALITY_FOUR  TBS_COMMAND_LOCALITY = 4
 )
 
+// String returns the TBS_COMMAND_LOCALITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TBS_COMMAND_LOCALITY) String() string {
+	switch e {
+	case TBS_COMMAND_LOCALITY_ZERO:
+		return "TBS_COMMAND_LOCALITY_ZERO"
+	case TBS_COMMAND_LOCALITY_ONE:
+		return "TBS_COMMAND_LOCALITY_ONE"
+	case TBS_COMMAND_LOCALITY_TWO:
+		return "TBS_COMMAND_LOCALITY_TWO"
+	case TBS_COMMAND_LOCALITY_THREE:
+		return "TBS_COMMAND_LOCALITY_THREE"
+	case TBS_COMMAND_LOCALITY_FOUR:
+		return "TBS_COMMAND_LOCALITY_FOUR"
+	default:
+		return fmt.Sprintf("TBS_COMMAND_LOCALITY(%d)", uint32(e))
+	}
+}
+
 type TBS_COMMAND_PRIORITY uint32
 
 const (
@@ -23,3 +46,22 @@ const (
 	TBS_COMMAND_PRIORITY_HIGH   TBS_COMMAND_PRIORITY = 300
 	TBS_COMMAND_PRIORITY_MAX    TBS_COMMAND_PRIORITY = 2147483648
 )
+
+// String returns the TBS_COMMAND_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TBS_COMMAND_PRIORITY) String() string {
+	switch e {
+	case TBS_COMMAND_PRIORITY_LOW:
+		return "TBS_COMMAND_PRIORITY_LOW"
+	case TBS_COMMAND_PRIORITY_NORMAL:
+		return "TBS_COMMAND_PRIORITY_NORMAL"
+	case TBS_COMMAND_PRIORITY_SYSTEM:
+		return "TBS_COMMAND_PRIORITY_SYSTEM"
+	case TBS_COMMAND_PRIORITY_HIGH:
+		return "TBS_COMMAND_PRIORITY_HIGH"
+	case TBS_COMMAND_PRIORITY_MAX:
+		return "TBS_COMMAND_PRIORITY_MAX"
+	default:
+		return fmt.Sprintf("TBS_COMMAND_PRIORITY(%d)", uint32(e))
+	}
+}

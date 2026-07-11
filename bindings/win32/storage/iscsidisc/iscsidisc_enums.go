@@ -4,12 +4,27 @@
 
 package iscsidisc
 
+import (
+	"fmt"
+)
+
 // IKE_AUTHENTICATION_METHOD: https://learn.microsoft.com/windows/win32/api/iscsidsc/ne-iscsidsc-ike_authentication_method
 type IKE_AUTHENTICATION_METHOD int32
 
 const (
 	IKE_AUTHENTICATION_PRESHARED_KEY_METHOD IKE_AUTHENTICATION_METHOD = 1
 )
+
+// String returns the IKE_AUTHENTICATION_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKE_AUTHENTICATION_METHOD) String() string {
+	switch e {
+	case IKE_AUTHENTICATION_PRESHARED_KEY_METHOD:
+		return "IKE_AUTHENTICATION_PRESHARED_KEY_METHOD"
+	default:
+		return fmt.Sprintf("IKE_AUTHENTICATION_METHOD(%d)", int32(e))
+	}
+}
 
 // ISCSI_AUTH_TYPES: https://learn.microsoft.com/windows/win32/api/iscsidsc/ne-iscsidsc-iscsi_auth_types
 type ISCSI_AUTH_TYPES int32
@@ -20,6 +35,21 @@ const (
 	ISCSI_MUTUAL_CHAP_AUTH_TYPE ISCSI_AUTH_TYPES = 2
 )
 
+// String returns the ISCSI_AUTH_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ISCSI_AUTH_TYPES) String() string {
+	switch e {
+	case ISCSI_NO_AUTH_TYPE:
+		return "ISCSI_NO_AUTH_TYPE"
+	case ISCSI_CHAP_AUTH_TYPE:
+		return "ISCSI_CHAP_AUTH_TYPE"
+	case ISCSI_MUTUAL_CHAP_AUTH_TYPE:
+		return "ISCSI_MUTUAL_CHAP_AUTH_TYPE"
+	default:
+		return fmt.Sprintf("ISCSI_AUTH_TYPES(%d)", int32(e))
+	}
+}
+
 // ISCSI_DIGEST_TYPES: https://learn.microsoft.com/windows/win32/api/iscsidsc/ne-iscsidsc-iscsi_digest_types
 type ISCSI_DIGEST_TYPES int32
 
@@ -28,12 +58,38 @@ const (
 	ISCSI_DIGEST_TYPE_CRC32C ISCSI_DIGEST_TYPES = 1
 )
 
+// String returns the ISCSI_DIGEST_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ISCSI_DIGEST_TYPES) String() string {
+	switch e {
+	case ISCSI_DIGEST_TYPE_NONE:
+		return "ISCSI_DIGEST_TYPE_NONE"
+	case ISCSI_DIGEST_TYPE_CRC32C:
+		return "ISCSI_DIGEST_TYPE_CRC32C"
+	default:
+		return fmt.Sprintf("ISCSI_DIGEST_TYPES(%d)", int32(e))
+	}
+}
+
 type MP_STORAGE_DIAGNOSTIC_LEVEL int32
 
 const (
 	MpStorageDiagnosticLevelDefault MP_STORAGE_DIAGNOSTIC_LEVEL = 0
 	MpStorageDiagnosticLevelMax     MP_STORAGE_DIAGNOSTIC_LEVEL = 1
 )
+
+// String returns the MP_STORAGE_DIAGNOSTIC_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MP_STORAGE_DIAGNOSTIC_LEVEL) String() string {
+	switch e {
+	case MpStorageDiagnosticLevelDefault:
+		return "MpStorageDiagnosticLevelDefault"
+	case MpStorageDiagnosticLevelMax:
+		return "MpStorageDiagnosticLevelMax"
+	default:
+		return fmt.Sprintf("MP_STORAGE_DIAGNOSTIC_LEVEL(%d)", int32(e))
+	}
+}
 
 type MP_STORAGE_DIAGNOSTIC_TARGET_TYPE int32
 
@@ -44,6 +100,23 @@ const (
 	MpStorageDiagnosticTargetTypeMax         MP_STORAGE_DIAGNOSTIC_TARGET_TYPE = 4
 )
 
+// String returns the MP_STORAGE_DIAGNOSTIC_TARGET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MP_STORAGE_DIAGNOSTIC_TARGET_TYPE) String() string {
+	switch e {
+	case MpStorageDiagnosticTargetTypeUndefined:
+		return "MpStorageDiagnosticTargetTypeUndefined"
+	case MpStorageDiagnosticTargetTypeMiniport:
+		return "MpStorageDiagnosticTargetTypeMiniport"
+	case MpStorageDiagnosticTargetTypeHbaFirmware:
+		return "MpStorageDiagnosticTargetTypeHbaFirmware"
+	case MpStorageDiagnosticTargetTypeMax:
+		return "MpStorageDiagnosticTargetTypeMax"
+	default:
+		return fmt.Sprintf("MP_STORAGE_DIAGNOSTIC_TARGET_TYPE(%d)", int32(e))
+	}
+}
+
 type NVCACHE_STATUS int32
 
 const (
@@ -52,6 +125,23 @@ const (
 	NvCacheStatusDisabled  NVCACHE_STATUS = 2
 	NvCacheStatusEnabled   NVCACHE_STATUS = 3
 )
+
+// String returns the NVCACHE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVCACHE_STATUS) String() string {
+	switch e {
+	case NvCacheStatusUnknown:
+		return "NvCacheStatusUnknown"
+	case NvCacheStatusDisabling:
+		return "NvCacheStatusDisabling"
+	case NvCacheStatusDisabled:
+		return "NvCacheStatusDisabled"
+	case NvCacheStatusEnabled:
+		return "NvCacheStatusEnabled"
+	default:
+		return fmt.Sprintf("NVCACHE_STATUS(%d)", int32(e))
+	}
+}
 
 type NVCACHE_TYPE int32
 
@@ -62,6 +152,23 @@ const (
 	NvCacheTypeWriteThrough NVCACHE_TYPE = 3
 )
 
+// String returns the NVCACHE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVCACHE_TYPE) String() string {
+	switch e {
+	case NvCacheTypeUnknown:
+		return "NvCacheTypeUnknown"
+	case NvCacheTypeNone:
+		return "NvCacheTypeNone"
+	case NvCacheTypeWriteBack:
+		return "NvCacheTypeWriteBack"
+	case NvCacheTypeWriteThrough:
+		return "NvCacheTypeWriteThrough"
+	default:
+		return fmt.Sprintf("NVCACHE_TYPE(%d)", int32(e))
+	}
+}
+
 type NV_SEP_WRITE_CACHE_TYPE int32
 
 const (
@@ -71,12 +178,40 @@ const (
 	NVSEPWriteCacheTypeWriteThrough NV_SEP_WRITE_CACHE_TYPE = 3
 )
 
+// String returns the NV_SEP_WRITE_CACHE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NV_SEP_WRITE_CACHE_TYPE) String() string {
+	switch e {
+	case NVSEPWriteCacheTypeUnknown:
+		return "NVSEPWriteCacheTypeUnknown"
+	case NVSEPWriteCacheTypeNone:
+		return "NVSEPWriteCacheTypeNone"
+	case NVSEPWriteCacheTypeWriteBack:
+		return "NVSEPWriteCacheTypeWriteBack"
+	case NVSEPWriteCacheTypeWriteThrough:
+		return "NVSEPWriteCacheTypeWriteThrough"
+	default:
+		return fmt.Sprintf("NV_SEP_WRITE_CACHE_TYPE(%d)", int32(e))
+	}
+}
+
 // TARGETPROTOCOLTYPE: https://learn.microsoft.com/windows/win32/api/iscsidsc/ne-iscsidsc-targetprotocoltype
 type TARGETPROTOCOLTYPE int32
 
 const (
 	ISCSI_TCP_PROTOCOL_TYPE TARGETPROTOCOLTYPE = 0
 )
+
+// String returns the TARGETPROTOCOLTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TARGETPROTOCOLTYPE) String() string {
+	switch e {
+	case ISCSI_TCP_PROTOCOL_TYPE:
+		return "ISCSI_TCP_PROTOCOL_TYPE"
+	default:
+		return fmt.Sprintf("TARGETPROTOCOLTYPE(%d)", int32(e))
+	}
+}
 
 // TARGET_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/iscsidsc/ne-iscsidsc-target_information_class
 type TARGET_INFORMATION_CLASS int32
@@ -91,3 +226,28 @@ const (
 	TargetFlags              TARGET_INFORMATION_CLASS = 6
 	LoginOptions             TARGET_INFORMATION_CLASS = 7
 )
+
+// String returns the TARGET_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TARGET_INFORMATION_CLASS) String() string {
+	switch e {
+	case ProtocolType:
+		return "ProtocolType"
+	case TargetAlias:
+		return "TargetAlias"
+	case DiscoveryMechanisms:
+		return "DiscoveryMechanisms"
+	case PortalGroups:
+		return "PortalGroups"
+	case PersistentTargetMappings:
+		return "PersistentTargetMappings"
+	case InitiatorName:
+		return "InitiatorName"
+	case TargetFlags:
+		return "TargetFlags"
+	case LoginOptions:
+		return "LoginOptions"
+	default:
+		return fmt.Sprintf("TARGET_INFORMATION_CLASS(%d)", int32(e))
+	}
+}

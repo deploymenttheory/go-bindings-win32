@@ -4,6 +4,10 @@
 
 package direct3d9
 
+import (
+	"fmt"
+)
+
 type D3DANTIALIASMODE int32
 
 const (
@@ -11,6 +15,21 @@ const (
 	D3DANTIALIAS_SORTDEPENDENT   D3DANTIALIASMODE = 1
 	D3DANTIALIAS_SORTINDEPENDENT D3DANTIALIASMODE = 2
 )
+
+// String returns the D3DANTIALIASMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DANTIALIASMODE) String() string {
+	switch e {
+	case D3DANTIALIAS_NONE:
+		return "D3DANTIALIAS_NONE"
+	case D3DANTIALIAS_SORTDEPENDENT:
+		return "D3DANTIALIAS_SORTDEPENDENT"
+	case D3DANTIALIAS_SORTINDEPENDENT:
+		return "D3DANTIALIAS_SORTINDEPENDENT"
+	default:
+		return fmt.Sprintf("D3DANTIALIASMODE(%d)", int32(e))
+	}
+}
 
 // D3DAUTHENTICATEDCHANNELTYPE: https://learn.microsoft.com/windows/win32/medfound/d3dauthenticatedchanneltype
 type D3DAUTHENTICATEDCHANNELTYPE int32
@@ -21,6 +40,21 @@ const (
 	D3DAUTHENTICATEDCHANNEL_DRIVER_HARDWARE D3DAUTHENTICATEDCHANNELTYPE = 3
 )
 
+// String returns the D3DAUTHENTICATEDCHANNELTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DAUTHENTICATEDCHANNELTYPE) String() string {
+	switch e {
+	case D3DAUTHENTICATEDCHANNEL_D3D9:
+		return "D3DAUTHENTICATEDCHANNEL_D3D9"
+	case D3DAUTHENTICATEDCHANNEL_DRIVER_SOFTWARE:
+		return "D3DAUTHENTICATEDCHANNEL_DRIVER_SOFTWARE"
+	case D3DAUTHENTICATEDCHANNEL_DRIVER_HARDWARE:
+		return "D3DAUTHENTICATEDCHANNEL_DRIVER_HARDWARE"
+	default:
+		return fmt.Sprintf("D3DAUTHENTICATEDCHANNELTYPE(%d)", int32(e))
+	}
+}
+
 // D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE: https://learn.microsoft.com/windows/win32/medfound/d3dauthenticatedchannel-processidentifiertype
 type D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE int32
 
@@ -29,6 +63,21 @@ const (
 	PROCESSIDTYPE_DWM     D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE = 1
 	PROCESSIDTYPE_HANDLE  D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE = 2
 )
+
+// String returns the D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE) String() string {
+	switch e {
+	case PROCESSIDTYPE_UNKNOWN:
+		return "PROCESSIDTYPE_UNKNOWN"
+	case PROCESSIDTYPE_DWM:
+		return "PROCESSIDTYPE_DWM"
+	case PROCESSIDTYPE_HANDLE:
+		return "PROCESSIDTYPE_HANDLE"
+	default:
+		return fmt.Sprintf("D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE(%d)", int32(e))
+	}
+}
 
 // D3DBACKBUFFER_TYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dbackbuffer-type
 type D3DBACKBUFFER_TYPE int32
@@ -39,6 +88,21 @@ const (
 	D3DBACKBUFFER_TYPE_RIGHT D3DBACKBUFFER_TYPE = 2
 )
 
+// String returns the D3DBACKBUFFER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DBACKBUFFER_TYPE) String() string {
+	switch e {
+	case D3DBACKBUFFER_TYPE_MONO:
+		return "D3DBACKBUFFER_TYPE_MONO"
+	case D3DBACKBUFFER_TYPE_LEFT:
+		return "D3DBACKBUFFER_TYPE_LEFT"
+	case D3DBACKBUFFER_TYPE_RIGHT:
+		return "D3DBACKBUFFER_TYPE_RIGHT"
+	default:
+		return fmt.Sprintf("D3DBACKBUFFER_TYPE(%d)", int32(e))
+	}
+}
+
 // D3DBASISTYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dbasistype
 type D3DBASISTYPE int32
 
@@ -47,6 +111,21 @@ const (
 	D3DBASIS_BSPLINE     D3DBASISTYPE = 1
 	D3DBASIS_CATMULL_ROM D3DBASISTYPE = 2
 )
+
+// String returns the D3DBASISTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DBASISTYPE) String() string {
+	switch e {
+	case D3DBASIS_BEZIER:
+		return "D3DBASIS_BEZIER"
+	case D3DBASIS_BSPLINE:
+		return "D3DBASIS_BSPLINE"
+	case D3DBASIS_CATMULL_ROM:
+		return "D3DBASIS_CATMULL_ROM"
+	default:
+		return fmt.Sprintf("D3DBASISTYPE(%d)", int32(e))
+	}
+}
 
 // D3DBLEND: https://learn.microsoft.com/windows/win32/direct3d9/d3dblend
 type D3DBLEND int32
@@ -71,6 +150,49 @@ const (
 	D3DBLEND_INVSRCCOLOR2    D3DBLEND = 17
 )
 
+// String returns the D3DBLEND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DBLEND) String() string {
+	switch e {
+	case D3DBLEND_ZERO:
+		return "D3DBLEND_ZERO"
+	case D3DBLEND_ONE:
+		return "D3DBLEND_ONE"
+	case D3DBLEND_SRCCOLOR:
+		return "D3DBLEND_SRCCOLOR"
+	case D3DBLEND_INVSRCCOLOR:
+		return "D3DBLEND_INVSRCCOLOR"
+	case D3DBLEND_SRCALPHA:
+		return "D3DBLEND_SRCALPHA"
+	case D3DBLEND_INVSRCALPHA:
+		return "D3DBLEND_INVSRCALPHA"
+	case D3DBLEND_DESTALPHA:
+		return "D3DBLEND_DESTALPHA"
+	case D3DBLEND_INVDESTALPHA:
+		return "D3DBLEND_INVDESTALPHA"
+	case D3DBLEND_DESTCOLOR:
+		return "D3DBLEND_DESTCOLOR"
+	case D3DBLEND_INVDESTCOLOR:
+		return "D3DBLEND_INVDESTCOLOR"
+	case D3DBLEND_SRCALPHASAT:
+		return "D3DBLEND_SRCALPHASAT"
+	case D3DBLEND_BOTHSRCALPHA:
+		return "D3DBLEND_BOTHSRCALPHA"
+	case D3DBLEND_BOTHINVSRCALPHA:
+		return "D3DBLEND_BOTHINVSRCALPHA"
+	case D3DBLEND_BLENDFACTOR:
+		return "D3DBLEND_BLENDFACTOR"
+	case D3DBLEND_INVBLENDFACTOR:
+		return "D3DBLEND_INVBLENDFACTOR"
+	case D3DBLEND_SRCCOLOR2:
+		return "D3DBLEND_SRCCOLOR2"
+	case D3DBLEND_INVSRCCOLOR2:
+		return "D3DBLEND_INVSRCCOLOR2"
+	default:
+		return fmt.Sprintf("D3DBLEND(%d)", int32(e))
+	}
+}
+
 // D3DBLENDOP: https://learn.microsoft.com/windows/win32/direct3d9/d3dblendop
 type D3DBLENDOP int32
 
@@ -81,6 +203,25 @@ const (
 	D3DBLENDOP_MIN         D3DBLENDOP = 4
 	D3DBLENDOP_MAX         D3DBLENDOP = 5
 )
+
+// String returns the D3DBLENDOP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DBLENDOP) String() string {
+	switch e {
+	case D3DBLENDOP_ADD:
+		return "D3DBLENDOP_ADD"
+	case D3DBLENDOP_SUBTRACT:
+		return "D3DBLENDOP_SUBTRACT"
+	case D3DBLENDOP_REVSUBTRACT:
+		return "D3DBLENDOP_REVSUBTRACT"
+	case D3DBLENDOP_MIN:
+		return "D3DBLENDOP_MIN"
+	case D3DBLENDOP_MAX:
+		return "D3DBLENDOP_MAX"
+	default:
+		return fmt.Sprintf("D3DBLENDOP(%d)", int32(e))
+	}
+}
 
 // D3DBUSTYPE: https://learn.microsoft.com/windows/win32/medfound/d3dbustype
 type D3DBUSTYPE int32
@@ -99,6 +240,37 @@ const (
 	D3DBUSIMPL_MODIFIER_NON_STANDARD                            D3DBUSTYPE = -2147483648
 )
 
+// String returns the D3DBUSTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DBUSTYPE) String() string {
+	switch e {
+	case D3DBUSTYPE_OTHER:
+		return "D3DBUSTYPE_OTHER"
+	case D3DBUSTYPE_PCI:
+		return "D3DBUSTYPE_PCI"
+	case D3DBUSTYPE_PCIX:
+		return "D3DBUSTYPE_PCIX"
+	case D3DBUSTYPE_PCIEXPRESS:
+		return "D3DBUSTYPE_PCIEXPRESS"
+	case D3DBUSTYPE_AGP:
+		return "D3DBUSTYPE_AGP"
+	case D3DBUSIMPL_MODIFIER_INSIDE_OF_CHIPSET:
+		return "D3DBUSIMPL_MODIFIER_INSIDE_OF_CHIPSET"
+	case D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_CHIP:
+		return "D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_CHIP"
+	case D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_SOCKET:
+		return "D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_SOCKET"
+	case D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR:
+		return "D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR"
+	case D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR_INSIDE_OF_NUAE:
+		return "D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR_INSIDE_OF_NUAE"
+	case D3DBUSIMPL_MODIFIER_NON_STANDARD:
+		return "D3DBUSIMPL_MODIFIER_NON_STANDARD"
+	default:
+		return fmt.Sprintf("D3DBUSTYPE(%d)", int32(e))
+	}
+}
+
 // D3DCMPFUNC: https://learn.microsoft.com/windows/win32/direct3d9/d3dcmpfunc
 type D3DCMPFUNC int32
 
@@ -113,6 +285,31 @@ const (
 	D3DCMP_ALWAYS       D3DCMPFUNC = 8
 )
 
+// String returns the D3DCMPFUNC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DCMPFUNC) String() string {
+	switch e {
+	case D3DCMP_NEVER:
+		return "D3DCMP_NEVER"
+	case D3DCMP_LESS:
+		return "D3DCMP_LESS"
+	case D3DCMP_EQUAL:
+		return "D3DCMP_EQUAL"
+	case D3DCMP_LESSEQUAL:
+		return "D3DCMP_LESSEQUAL"
+	case D3DCMP_GREATER:
+		return "D3DCMP_GREATER"
+	case D3DCMP_NOTEQUAL:
+		return "D3DCMP_NOTEQUAL"
+	case D3DCMP_GREATEREQUAL:
+		return "D3DCMP_GREATEREQUAL"
+	case D3DCMP_ALWAYS:
+		return "D3DCMP_ALWAYS"
+	default:
+		return fmt.Sprintf("D3DCMPFUNC(%d)", int32(e))
+	}
+}
+
 // D3DCOMPOSERECTSOP: https://learn.microsoft.com/windows/win32/direct3d9/d3dcomposerectsop
 type D3DCOMPOSERECTSOP int32
 
@@ -122,6 +319,23 @@ const (
 	D3DCOMPOSERECTS_AND  D3DCOMPOSERECTSOP = 3
 	D3DCOMPOSERECTS_NEG  D3DCOMPOSERECTSOP = 4
 )
+
+// String returns the D3DCOMPOSERECTSOP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DCOMPOSERECTSOP) String() string {
+	switch e {
+	case D3DCOMPOSERECTS_COPY:
+		return "D3DCOMPOSERECTS_COPY"
+	case D3DCOMPOSERECTS_OR:
+		return "D3DCOMPOSERECTS_OR"
+	case D3DCOMPOSERECTS_AND:
+		return "D3DCOMPOSERECTS_AND"
+	case D3DCOMPOSERECTS_NEG:
+		return "D3DCOMPOSERECTS_NEG"
+	default:
+		return fmt.Sprintf("D3DCOMPOSERECTSOP(%d)", int32(e))
+	}
+}
 
 // D3DCUBEMAP_FACES: https://learn.microsoft.com/windows/win32/direct3d9/d3dcubemap-faces
 type D3DCUBEMAP_FACES int32
@@ -135,6 +349,27 @@ const (
 	D3DCUBEMAP_FACE_NEGATIVE_Z D3DCUBEMAP_FACES = 5
 )
 
+// String returns the D3DCUBEMAP_FACES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DCUBEMAP_FACES) String() string {
+	switch e {
+	case D3DCUBEMAP_FACE_POSITIVE_X:
+		return "D3DCUBEMAP_FACE_POSITIVE_X"
+	case D3DCUBEMAP_FACE_NEGATIVE_X:
+		return "D3DCUBEMAP_FACE_NEGATIVE_X"
+	case D3DCUBEMAP_FACE_POSITIVE_Y:
+		return "D3DCUBEMAP_FACE_POSITIVE_Y"
+	case D3DCUBEMAP_FACE_NEGATIVE_Y:
+		return "D3DCUBEMAP_FACE_NEGATIVE_Y"
+	case D3DCUBEMAP_FACE_POSITIVE_Z:
+		return "D3DCUBEMAP_FACE_POSITIVE_Z"
+	case D3DCUBEMAP_FACE_NEGATIVE_Z:
+		return "D3DCUBEMAP_FACE_NEGATIVE_Z"
+	default:
+		return fmt.Sprintf("D3DCUBEMAP_FACES(%d)", int32(e))
+	}
+}
+
 // D3DCULL: https://learn.microsoft.com/windows/win32/direct3d9/d3dcull
 type D3DCULL int32
 
@@ -144,6 +379,21 @@ const (
 	D3DCULL_CCW  D3DCULL = 3
 )
 
+// String returns the D3DCULL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DCULL) String() string {
+	switch e {
+	case D3DCULL_NONE:
+		return "D3DCULL_NONE"
+	case D3DCULL_CW:
+		return "D3DCULL_CW"
+	case D3DCULL_CCW:
+		return "D3DCULL_CCW"
+	default:
+		return fmt.Sprintf("D3DCULL(%d)", int32(e))
+	}
+}
+
 // D3DDEBUGMONITORTOKENS: https://learn.microsoft.com/windows/win32/direct3d9/d3ddebugmonitortokens
 type D3DDEBUGMONITORTOKENS int32
 
@@ -151,6 +401,19 @@ const (
 	D3DDMT_ENABLE  D3DDEBUGMONITORTOKENS = 0
 	D3DDMT_DISABLE D3DDEBUGMONITORTOKENS = 1
 )
+
+// String returns the D3DDEBUGMONITORTOKENS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DDEBUGMONITORTOKENS) String() string {
+	switch e {
+	case D3DDMT_ENABLE:
+		return "D3DDMT_ENABLE"
+	case D3DDMT_DISABLE:
+		return "D3DDMT_DISABLE"
+	default:
+		return fmt.Sprintf("D3DDEBUGMONITORTOKENS(%d)", int32(e))
+	}
+}
 
 // D3DDECLMETHOD: https://learn.microsoft.com/windows/win32/direct3d9/d3ddeclmethod
 type D3DDECLMETHOD int32
@@ -164,6 +427,29 @@ const (
 	D3DDECLMETHOD_LOOKUP           D3DDECLMETHOD = 5
 	D3DDECLMETHOD_LOOKUPPRESAMPLED D3DDECLMETHOD = 6
 )
+
+// String returns the D3DDECLMETHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DDECLMETHOD) String() string {
+	switch e {
+	case D3DDECLMETHOD_DEFAULT:
+		return "D3DDECLMETHOD_DEFAULT"
+	case D3DDECLMETHOD_PARTIALU:
+		return "D3DDECLMETHOD_PARTIALU"
+	case D3DDECLMETHOD_PARTIALV:
+		return "D3DDECLMETHOD_PARTIALV"
+	case D3DDECLMETHOD_CROSSUV:
+		return "D3DDECLMETHOD_CROSSUV"
+	case D3DDECLMETHOD_UV:
+		return "D3DDECLMETHOD_UV"
+	case D3DDECLMETHOD_LOOKUP:
+		return "D3DDECLMETHOD_LOOKUP"
+	case D3DDECLMETHOD_LOOKUPPRESAMPLED:
+		return "D3DDECLMETHOD_LOOKUPPRESAMPLED"
+	default:
+		return fmt.Sprintf("D3DDECLMETHOD(%d)", int32(e))
+	}
+}
 
 // D3DDECLTYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3ddecltype
 type D3DDECLTYPE int32
@@ -189,6 +475,51 @@ const (
 	D3DDECLTYPE_UNUSED    D3DDECLTYPE = 17
 )
 
+// String returns the D3DDECLTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DDECLTYPE) String() string {
+	switch e {
+	case D3DDECLTYPE_FLOAT1:
+		return "D3DDECLTYPE_FLOAT1"
+	case D3DDECLTYPE_FLOAT2:
+		return "D3DDECLTYPE_FLOAT2"
+	case D3DDECLTYPE_FLOAT3:
+		return "D3DDECLTYPE_FLOAT3"
+	case D3DDECLTYPE_FLOAT4:
+		return "D3DDECLTYPE_FLOAT4"
+	case D3DDECLTYPE_D3DCOLOR:
+		return "D3DDECLTYPE_D3DCOLOR"
+	case D3DDECLTYPE_UBYTE4:
+		return "D3DDECLTYPE_UBYTE4"
+	case D3DDECLTYPE_SHORT2:
+		return "D3DDECLTYPE_SHORT2"
+	case D3DDECLTYPE_SHORT4:
+		return "D3DDECLTYPE_SHORT4"
+	case D3DDECLTYPE_UBYTE4N:
+		return "D3DDECLTYPE_UBYTE4N"
+	case D3DDECLTYPE_SHORT2N:
+		return "D3DDECLTYPE_SHORT2N"
+	case D3DDECLTYPE_SHORT4N:
+		return "D3DDECLTYPE_SHORT4N"
+	case D3DDECLTYPE_USHORT2N:
+		return "D3DDECLTYPE_USHORT2N"
+	case D3DDECLTYPE_USHORT4N:
+		return "D3DDECLTYPE_USHORT4N"
+	case D3DDECLTYPE_UDEC3:
+		return "D3DDECLTYPE_UDEC3"
+	case D3DDECLTYPE_DEC3N:
+		return "D3DDECLTYPE_DEC3N"
+	case D3DDECLTYPE_FLOAT16_2:
+		return "D3DDECLTYPE_FLOAT16_2"
+	case D3DDECLTYPE_FLOAT16_4:
+		return "D3DDECLTYPE_FLOAT16_4"
+	case D3DDECLTYPE_UNUSED:
+		return "D3DDECLTYPE_UNUSED"
+	default:
+		return fmt.Sprintf("D3DDECLTYPE(%d)", int32(e))
+	}
+}
+
 // D3DDECLUSAGE: https://learn.microsoft.com/windows/win32/direct3d9/d3ddeclusage
 type D3DDECLUSAGE int32
 
@@ -209,6 +540,43 @@ const (
 	D3DDECLUSAGE_SAMPLE       D3DDECLUSAGE = 13
 )
 
+// String returns the D3DDECLUSAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DDECLUSAGE) String() string {
+	switch e {
+	case D3DDECLUSAGE_POSITION:
+		return "D3DDECLUSAGE_POSITION"
+	case D3DDECLUSAGE_BLENDWEIGHT:
+		return "D3DDECLUSAGE_BLENDWEIGHT"
+	case D3DDECLUSAGE_BLENDINDICES:
+		return "D3DDECLUSAGE_BLENDINDICES"
+	case D3DDECLUSAGE_NORMAL:
+		return "D3DDECLUSAGE_NORMAL"
+	case D3DDECLUSAGE_PSIZE:
+		return "D3DDECLUSAGE_PSIZE"
+	case D3DDECLUSAGE_TEXCOORD:
+		return "D3DDECLUSAGE_TEXCOORD"
+	case D3DDECLUSAGE_TANGENT:
+		return "D3DDECLUSAGE_TANGENT"
+	case D3DDECLUSAGE_BINORMAL:
+		return "D3DDECLUSAGE_BINORMAL"
+	case D3DDECLUSAGE_TESSFACTOR:
+		return "D3DDECLUSAGE_TESSFACTOR"
+	case D3DDECLUSAGE_POSITIONT:
+		return "D3DDECLUSAGE_POSITIONT"
+	case D3DDECLUSAGE_COLOR:
+		return "D3DDECLUSAGE_COLOR"
+	case D3DDECLUSAGE_FOG:
+		return "D3DDECLUSAGE_FOG"
+	case D3DDECLUSAGE_DEPTH:
+		return "D3DDECLUSAGE_DEPTH"
+	case D3DDECLUSAGE_SAMPLE:
+		return "D3DDECLUSAGE_SAMPLE"
+	default:
+		return fmt.Sprintf("D3DDECLUSAGE(%d)", int32(e))
+	}
+}
+
 // D3DDEGREETYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3ddegreetype
 type D3DDEGREETYPE int32
 
@@ -218,6 +586,23 @@ const (
 	D3DDEGREE_CUBIC     D3DDEGREETYPE = 3
 	D3DDEGREE_QUINTIC   D3DDEGREETYPE = 5
 )
+
+// String returns the D3DDEGREETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DDEGREETYPE) String() string {
+	switch e {
+	case D3DDEGREE_LINEAR:
+		return "D3DDEGREE_LINEAR"
+	case D3DDEGREE_QUADRATIC:
+		return "D3DDEGREE_QUADRATIC"
+	case D3DDEGREE_CUBIC:
+		return "D3DDEGREE_CUBIC"
+	case D3DDEGREE_QUINTIC:
+		return "D3DDEGREE_QUINTIC"
+	default:
+		return fmt.Sprintf("D3DDEGREETYPE(%d)", int32(e))
+	}
+}
 
 // D3DDEVTYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3ddevtype
 type D3DDEVTYPE int32
@@ -229,6 +614,23 @@ const (
 	D3DDEVTYPE_NULLREF D3DDEVTYPE = 4
 )
 
+// String returns the D3DDEVTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DDEVTYPE) String() string {
+	switch e {
+	case D3DDEVTYPE_HAL:
+		return "D3DDEVTYPE_HAL"
+	case D3DDEVTYPE_REF:
+		return "D3DDEVTYPE_REF"
+	case D3DDEVTYPE_SW:
+		return "D3DDEVTYPE_SW"
+	case D3DDEVTYPE_NULLREF:
+		return "D3DDEVTYPE_NULLREF"
+	default:
+		return fmt.Sprintf("D3DDEVTYPE(%d)", int32(e))
+	}
+}
+
 // D3DDISPLAYROTATION: https://learn.microsoft.com/windows/win32/direct3d9/d3ddisplayrotation
 type D3DDISPLAYROTATION int32
 
@@ -239,6 +641,23 @@ const (
 	D3DDISPLAYROTATION_270      D3DDISPLAYROTATION = 4
 )
 
+// String returns the D3DDISPLAYROTATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DDISPLAYROTATION) String() string {
+	switch e {
+	case D3DDISPLAYROTATION_IDENTITY:
+		return "D3DDISPLAYROTATION_IDENTITY"
+	case D3DDISPLAYROTATION_90:
+		return "D3DDISPLAYROTATION_90"
+	case D3DDISPLAYROTATION_180:
+		return "D3DDISPLAYROTATION_180"
+	case D3DDISPLAYROTATION_270:
+		return "D3DDISPLAYROTATION_270"
+	default:
+		return fmt.Sprintf("D3DDISPLAYROTATION(%d)", int32(e))
+	}
+}
+
 // D3DFILLMODE: https://learn.microsoft.com/windows/win32/direct3d9/d3dfillmode
 type D3DFILLMODE int32
 
@@ -247,6 +666,21 @@ const (
 	D3DFILL_WIREFRAME D3DFILLMODE = 2
 	D3DFILL_SOLID     D3DFILLMODE = 3
 )
+
+// String returns the D3DFILLMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DFILLMODE) String() string {
+	switch e {
+	case D3DFILL_POINT:
+		return "D3DFILL_POINT"
+	case D3DFILL_WIREFRAME:
+		return "D3DFILL_WIREFRAME"
+	case D3DFILL_SOLID:
+		return "D3DFILL_SOLID"
+	default:
+		return fmt.Sprintf("D3DFILLMODE(%d)", int32(e))
+	}
+}
 
 // D3DFOGMODE: https://learn.microsoft.com/windows/win32/direct3d9/d3dfogmode
 type D3DFOGMODE int32
@@ -257,6 +691,23 @@ const (
 	D3DFOG_EXP2   D3DFOGMODE = 2
 	D3DFOG_LINEAR D3DFOGMODE = 3
 )
+
+// String returns the D3DFOGMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DFOGMODE) String() string {
+	switch e {
+	case D3DFOG_NONE:
+		return "D3DFOG_NONE"
+	case D3DFOG_EXP:
+		return "D3DFOG_EXP"
+	case D3DFOG_EXP2:
+		return "D3DFOG_EXP2"
+	case D3DFOG_LINEAR:
+		return "D3DFOG_LINEAR"
+	default:
+		return fmt.Sprintf("D3DFOGMODE(%d)", int32(e))
+	}
+}
 
 // D3DFORMAT: https://learn.microsoft.com/windows/win32/direct3d9/d3dformat
 type D3DFORMAT uint32
@@ -329,6 +780,145 @@ const (
 	D3DFMT_BINARYBUFFER        D3DFORMAT = 199
 )
 
+// String returns the D3DFORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DFORMAT) String() string {
+	switch e {
+	case D3DFMT_UNKNOWN:
+		return "D3DFMT_UNKNOWN"
+	case D3DFMT_R8G8B8:
+		return "D3DFMT_R8G8B8"
+	case D3DFMT_A8R8G8B8:
+		return "D3DFMT_A8R8G8B8"
+	case D3DFMT_X8R8G8B8:
+		return "D3DFMT_X8R8G8B8"
+	case D3DFMT_R5G6B5:
+		return "D3DFMT_R5G6B5"
+	case D3DFMT_X1R5G5B5:
+		return "D3DFMT_X1R5G5B5"
+	case D3DFMT_A1R5G5B5:
+		return "D3DFMT_A1R5G5B5"
+	case D3DFMT_A4R4G4B4:
+		return "D3DFMT_A4R4G4B4"
+	case D3DFMT_R3G3B2:
+		return "D3DFMT_R3G3B2"
+	case D3DFMT_A8:
+		return "D3DFMT_A8"
+	case D3DFMT_A8R3G3B2:
+		return "D3DFMT_A8R3G3B2"
+	case D3DFMT_X4R4G4B4:
+		return "D3DFMT_X4R4G4B4"
+	case D3DFMT_A2B10G10R10:
+		return "D3DFMT_A2B10G10R10"
+	case D3DFMT_A8B8G8R8:
+		return "D3DFMT_A8B8G8R8"
+	case D3DFMT_X8B8G8R8:
+		return "D3DFMT_X8B8G8R8"
+	case D3DFMT_G16R16:
+		return "D3DFMT_G16R16"
+	case D3DFMT_A2R10G10B10:
+		return "D3DFMT_A2R10G10B10"
+	case D3DFMT_A16B16G16R16:
+		return "D3DFMT_A16B16G16R16"
+	case D3DFMT_A8P8:
+		return "D3DFMT_A8P8"
+	case D3DFMT_P8:
+		return "D3DFMT_P8"
+	case D3DFMT_L8:
+		return "D3DFMT_L8"
+	case D3DFMT_A8L8:
+		return "D3DFMT_A8L8"
+	case D3DFMT_A4L4:
+		return "D3DFMT_A4L4"
+	case D3DFMT_V8U8:
+		return "D3DFMT_V8U8"
+	case D3DFMT_L6V5U5:
+		return "D3DFMT_L6V5U5"
+	case D3DFMT_X8L8V8U8:
+		return "D3DFMT_X8L8V8U8"
+	case D3DFMT_Q8W8V8U8:
+		return "D3DFMT_Q8W8V8U8"
+	case D3DFMT_V16U16:
+		return "D3DFMT_V16U16"
+	case D3DFMT_A2W10V10U10:
+		return "D3DFMT_A2W10V10U10"
+	case D3DFMT_UYVY:
+		return "D3DFMT_UYVY"
+	case D3DFMT_R8G8_B8G8:
+		return "D3DFMT_R8G8_B8G8"
+	case D3DFMT_YUY2:
+		return "D3DFMT_YUY2"
+	case D3DFMT_G8R8_G8B8:
+		return "D3DFMT_G8R8_G8B8"
+	case D3DFMT_DXT1:
+		return "D3DFMT_DXT1"
+	case D3DFMT_DXT2:
+		return "D3DFMT_DXT2"
+	case D3DFMT_DXT3:
+		return "D3DFMT_DXT3"
+	case D3DFMT_DXT4:
+		return "D3DFMT_DXT4"
+	case D3DFMT_DXT5:
+		return "D3DFMT_DXT5"
+	case D3DFMT_D16_LOCKABLE:
+		return "D3DFMT_D16_LOCKABLE"
+	case D3DFMT_D32:
+		return "D3DFMT_D32"
+	case D3DFMT_D15S1:
+		return "D3DFMT_D15S1"
+	case D3DFMT_D24S8:
+		return "D3DFMT_D24S8"
+	case D3DFMT_D24X8:
+		return "D3DFMT_D24X8"
+	case D3DFMT_D24X4S4:
+		return "D3DFMT_D24X4S4"
+	case D3DFMT_D16:
+		return "D3DFMT_D16"
+	case D3DFMT_D32F_LOCKABLE:
+		return "D3DFMT_D32F_LOCKABLE"
+	case D3DFMT_D24FS8:
+		return "D3DFMT_D24FS8"
+	case D3DFMT_D32_LOCKABLE:
+		return "D3DFMT_D32_LOCKABLE"
+	case D3DFMT_S8_LOCKABLE:
+		return "D3DFMT_S8_LOCKABLE"
+	case D3DFMT_L16:
+		return "D3DFMT_L16"
+	case D3DFMT_VERTEXDATA:
+		return "D3DFMT_VERTEXDATA"
+	case D3DFMT_INDEX16:
+		return "D3DFMT_INDEX16"
+	case D3DFMT_INDEX32:
+		return "D3DFMT_INDEX32"
+	case D3DFMT_Q16W16V16U16:
+		return "D3DFMT_Q16W16V16U16"
+	case D3DFMT_MULTI2_ARGB8:
+		return "D3DFMT_MULTI2_ARGB8"
+	case D3DFMT_R16F:
+		return "D3DFMT_R16F"
+	case D3DFMT_G16R16F:
+		return "D3DFMT_G16R16F"
+	case D3DFMT_A16B16G16R16F:
+		return "D3DFMT_A16B16G16R16F"
+	case D3DFMT_R32F:
+		return "D3DFMT_R32F"
+	case D3DFMT_G32R32F:
+		return "D3DFMT_G32R32F"
+	case D3DFMT_A32B32G32R32F:
+		return "D3DFMT_A32B32G32R32F"
+	case D3DFMT_CxV8U8:
+		return "D3DFMT_CxV8U8"
+	case D3DFMT_A1:
+		return "D3DFMT_A1"
+	case D3DFMT_A2B10G10R10_XR_BIAS:
+		return "D3DFMT_A2B10G10R10_XR_BIAS"
+	case D3DFMT_BINARYBUFFER:
+		return "D3DFMT_BINARYBUFFER"
+	default:
+		return fmt.Sprintf("D3DFORMAT(%d)", uint32(e))
+	}
+}
+
 type D3DLIGHTSTATETYPE int32
 
 const (
@@ -342,6 +932,31 @@ const (
 	D3DLIGHTSTATE_COLORVERTEX D3DLIGHTSTATETYPE = 8
 )
 
+// String returns the D3DLIGHTSTATETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DLIGHTSTATETYPE) String() string {
+	switch e {
+	case D3DLIGHTSTATE_MATERIAL:
+		return "D3DLIGHTSTATE_MATERIAL"
+	case D3DLIGHTSTATE_AMBIENT:
+		return "D3DLIGHTSTATE_AMBIENT"
+	case D3DLIGHTSTATE_COLORMODEL:
+		return "D3DLIGHTSTATE_COLORMODEL"
+	case D3DLIGHTSTATE_FOGMODE:
+		return "D3DLIGHTSTATE_FOGMODE"
+	case D3DLIGHTSTATE_FOGSTART:
+		return "D3DLIGHTSTATE_FOGSTART"
+	case D3DLIGHTSTATE_FOGEND:
+		return "D3DLIGHTSTATE_FOGEND"
+	case D3DLIGHTSTATE_FOGDENSITY:
+		return "D3DLIGHTSTATE_FOGDENSITY"
+	case D3DLIGHTSTATE_COLORVERTEX:
+		return "D3DLIGHTSTATE_COLORVERTEX"
+	default:
+		return fmt.Sprintf("D3DLIGHTSTATETYPE(%d)", int32(e))
+	}
+}
+
 // D3DLIGHTTYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dlighttype
 type D3DLIGHTTYPE int32
 
@@ -351,6 +966,21 @@ const (
 	D3DLIGHT_DIRECTIONAL D3DLIGHTTYPE = 3
 )
 
+// String returns the D3DLIGHTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DLIGHTTYPE) String() string {
+	switch e {
+	case D3DLIGHT_POINT:
+		return "D3DLIGHT_POINT"
+	case D3DLIGHT_SPOT:
+		return "D3DLIGHT_SPOT"
+	case D3DLIGHT_DIRECTIONAL:
+		return "D3DLIGHT_DIRECTIONAL"
+	default:
+		return fmt.Sprintf("D3DLIGHTTYPE(%d)", int32(e))
+	}
+}
+
 // D3DMATERIALCOLORSOURCE: https://learn.microsoft.com/windows/win32/direct3d9/d3dmaterialcolorsource
 type D3DMATERIALCOLORSOURCE int32
 
@@ -359,6 +989,21 @@ const (
 	D3DMCS_COLOR1   D3DMATERIALCOLORSOURCE = 1
 	D3DMCS_COLOR2   D3DMATERIALCOLORSOURCE = 2
 )
+
+// String returns the D3DMATERIALCOLORSOURCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DMATERIALCOLORSOURCE) String() string {
+	switch e {
+	case D3DMCS_MATERIAL:
+		return "D3DMCS_MATERIAL"
+	case D3DMCS_COLOR1:
+		return "D3DMCS_COLOR1"
+	case D3DMCS_COLOR2:
+		return "D3DMCS_COLOR2"
+	default:
+		return fmt.Sprintf("D3DMATERIALCOLORSOURCE(%d)", int32(e))
+	}
+}
 
 // D3DMULTISAMPLE_TYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dmultisample-type
 type D3DMULTISAMPLE_TYPE int32
@@ -383,6 +1028,49 @@ const (
 	D3DMULTISAMPLE_16_SAMPLES  D3DMULTISAMPLE_TYPE = 16
 )
 
+// String returns the D3DMULTISAMPLE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DMULTISAMPLE_TYPE) String() string {
+	switch e {
+	case D3DMULTISAMPLE_NONE:
+		return "D3DMULTISAMPLE_NONE"
+	case D3DMULTISAMPLE_NONMASKABLE:
+		return "D3DMULTISAMPLE_NONMASKABLE"
+	case D3DMULTISAMPLE_2_SAMPLES:
+		return "D3DMULTISAMPLE_2_SAMPLES"
+	case D3DMULTISAMPLE_3_SAMPLES:
+		return "D3DMULTISAMPLE_3_SAMPLES"
+	case D3DMULTISAMPLE_4_SAMPLES:
+		return "D3DMULTISAMPLE_4_SAMPLES"
+	case D3DMULTISAMPLE_5_SAMPLES:
+		return "D3DMULTISAMPLE_5_SAMPLES"
+	case D3DMULTISAMPLE_6_SAMPLES:
+		return "D3DMULTISAMPLE_6_SAMPLES"
+	case D3DMULTISAMPLE_7_SAMPLES:
+		return "D3DMULTISAMPLE_7_SAMPLES"
+	case D3DMULTISAMPLE_8_SAMPLES:
+		return "D3DMULTISAMPLE_8_SAMPLES"
+	case D3DMULTISAMPLE_9_SAMPLES:
+		return "D3DMULTISAMPLE_9_SAMPLES"
+	case D3DMULTISAMPLE_10_SAMPLES:
+		return "D3DMULTISAMPLE_10_SAMPLES"
+	case D3DMULTISAMPLE_11_SAMPLES:
+		return "D3DMULTISAMPLE_11_SAMPLES"
+	case D3DMULTISAMPLE_12_SAMPLES:
+		return "D3DMULTISAMPLE_12_SAMPLES"
+	case D3DMULTISAMPLE_13_SAMPLES:
+		return "D3DMULTISAMPLE_13_SAMPLES"
+	case D3DMULTISAMPLE_14_SAMPLES:
+		return "D3DMULTISAMPLE_14_SAMPLES"
+	case D3DMULTISAMPLE_15_SAMPLES:
+		return "D3DMULTISAMPLE_15_SAMPLES"
+	case D3DMULTISAMPLE_16_SAMPLES:
+		return "D3DMULTISAMPLE_16_SAMPLES"
+	default:
+		return fmt.Sprintf("D3DMULTISAMPLE_TYPE(%d)", int32(e))
+	}
+}
+
 type D3DOPCODE int32
 
 const (
@@ -402,6 +1090,43 @@ const (
 	D3DOP_SETSTATUS       D3DOPCODE = 14
 )
 
+// String returns the D3DOPCODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DOPCODE) String() string {
+	switch e {
+	case D3DOP_POINT:
+		return "D3DOP_POINT"
+	case D3DOP_LINE:
+		return "D3DOP_LINE"
+	case D3DOP_TRIANGLE:
+		return "D3DOP_TRIANGLE"
+	case D3DOP_MATRIXLOAD:
+		return "D3DOP_MATRIXLOAD"
+	case D3DOP_MATRIXMULTIPLY:
+		return "D3DOP_MATRIXMULTIPLY"
+	case D3DOP_STATETRANSFORM:
+		return "D3DOP_STATETRANSFORM"
+	case D3DOP_STATELIGHT:
+		return "D3DOP_STATELIGHT"
+	case D3DOP_STATERENDER:
+		return "D3DOP_STATERENDER"
+	case D3DOP_PROCESSVERTICES:
+		return "D3DOP_PROCESSVERTICES"
+	case D3DOP_TEXTURELOAD:
+		return "D3DOP_TEXTURELOAD"
+	case D3DOP_EXIT:
+		return "D3DOP_EXIT"
+	case D3DOP_BRANCHFORWARD:
+		return "D3DOP_BRANCHFORWARD"
+	case D3DOP_SPAN:
+		return "D3DOP_SPAN"
+	case D3DOP_SETSTATUS:
+		return "D3DOP_SETSTATUS"
+	default:
+		return fmt.Sprintf("D3DOPCODE(%d)", int32(e))
+	}
+}
+
 // D3DPATCHEDGESTYLE: https://learn.microsoft.com/windows/win32/direct3d9/d3dpatchedgestyle
 type D3DPATCHEDGESTYLE int32
 
@@ -409,6 +1134,19 @@ const (
 	D3DPATCHEDGE_DISCRETE   D3DPATCHEDGESTYLE = 0
 	D3DPATCHEDGE_CONTINUOUS D3DPATCHEDGESTYLE = 1
 )
+
+// String returns the D3DPATCHEDGESTYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DPATCHEDGESTYLE) String() string {
+	switch e {
+	case D3DPATCHEDGE_DISCRETE:
+		return "D3DPATCHEDGE_DISCRETE"
+	case D3DPATCHEDGE_CONTINUOUS:
+		return "D3DPATCHEDGE_CONTINUOUS"
+	default:
+		return fmt.Sprintf("D3DPATCHEDGESTYLE(%d)", int32(e))
+	}
+}
 
 // D3DPOOL: https://learn.microsoft.com/windows/win32/direct3d9/d3dpool
 type D3DPOOL int32
@@ -419,6 +1157,23 @@ const (
 	D3DPOOL_SYSTEMMEM D3DPOOL = 2
 	D3DPOOL_SCRATCH   D3DPOOL = 3
 )
+
+// String returns the D3DPOOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DPOOL) String() string {
+	switch e {
+	case D3DPOOL_DEFAULT:
+		return "D3DPOOL_DEFAULT"
+	case D3DPOOL_MANAGED:
+		return "D3DPOOL_MANAGED"
+	case D3DPOOL_SYSTEMMEM:
+		return "D3DPOOL_SYSTEMMEM"
+	case D3DPOOL_SCRATCH:
+		return "D3DPOOL_SCRATCH"
+	default:
+		return fmt.Sprintf("D3DPOOL(%d)", int32(e))
+	}
+}
 
 // D3DPRIMITIVETYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dprimitivetype
 type D3DPRIMITIVETYPE int32
@@ -431,6 +1186,27 @@ const (
 	D3DPT_TRIANGLESTRIP D3DPRIMITIVETYPE = 5
 	D3DPT_TRIANGLEFAN   D3DPRIMITIVETYPE = 6
 )
+
+// String returns the D3DPRIMITIVETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DPRIMITIVETYPE) String() string {
+	switch e {
+	case D3DPT_POINTLIST:
+		return "D3DPT_POINTLIST"
+	case D3DPT_LINELIST:
+		return "D3DPT_LINELIST"
+	case D3DPT_LINESTRIP:
+		return "D3DPT_LINESTRIP"
+	case D3DPT_TRIANGLELIST:
+		return "D3DPT_TRIANGLELIST"
+	case D3DPT_TRIANGLESTRIP:
+		return "D3DPT_TRIANGLESTRIP"
+	case D3DPT_TRIANGLEFAN:
+		return "D3DPT_TRIANGLEFAN"
+	default:
+		return fmt.Sprintf("D3DPRIMITIVETYPE(%d)", int32(e))
+	}
+}
 
 // D3DQUERYTYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dquerytype
 type D3DQUERYTYPE int32
@@ -452,6 +1228,45 @@ const (
 	D3DQUERYTYPE_CACHEUTILIZATION  D3DQUERYTYPE = 18
 	D3DQUERYTYPE_MEMORYPRESSURE    D3DQUERYTYPE = 19
 )
+
+// String returns the D3DQUERYTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DQUERYTYPE) String() string {
+	switch e {
+	case D3DQUERYTYPE_VCACHE:
+		return "D3DQUERYTYPE_VCACHE"
+	case D3DQUERYTYPE_RESOURCEMANAGER:
+		return "D3DQUERYTYPE_RESOURCEMANAGER"
+	case D3DQUERYTYPE_VERTEXSTATS:
+		return "D3DQUERYTYPE_VERTEXSTATS"
+	case D3DQUERYTYPE_EVENT:
+		return "D3DQUERYTYPE_EVENT"
+	case D3DQUERYTYPE_OCCLUSION:
+		return "D3DQUERYTYPE_OCCLUSION"
+	case D3DQUERYTYPE_TIMESTAMP:
+		return "D3DQUERYTYPE_TIMESTAMP"
+	case D3DQUERYTYPE_TIMESTAMPDISJOINT:
+		return "D3DQUERYTYPE_TIMESTAMPDISJOINT"
+	case D3DQUERYTYPE_TIMESTAMPFREQ:
+		return "D3DQUERYTYPE_TIMESTAMPFREQ"
+	case D3DQUERYTYPE_PIPELINETIMINGS:
+		return "D3DQUERYTYPE_PIPELINETIMINGS"
+	case D3DQUERYTYPE_INTERFACETIMINGS:
+		return "D3DQUERYTYPE_INTERFACETIMINGS"
+	case D3DQUERYTYPE_VERTEXTIMINGS:
+		return "D3DQUERYTYPE_VERTEXTIMINGS"
+	case D3DQUERYTYPE_PIXELTIMINGS:
+		return "D3DQUERYTYPE_PIXELTIMINGS"
+	case D3DQUERYTYPE_BANDWIDTHTIMINGS:
+		return "D3DQUERYTYPE_BANDWIDTHTIMINGS"
+	case D3DQUERYTYPE_CACHEUTILIZATION:
+		return "D3DQUERYTYPE_CACHEUTILIZATION"
+	case D3DQUERYTYPE_MEMORYPRESSURE:
+		return "D3DQUERYTYPE_MEMORYPRESSURE"
+	default:
+		return fmt.Sprintf("D3DQUERYTYPE(%d)", int32(e))
+	}
+}
 
 // D3DRENDERSTATETYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3drenderstatetype
 type D3DRENDERSTATETYPE int32
@@ -562,6 +1377,221 @@ const (
 	D3DRS_BLENDOPALPHA               D3DRENDERSTATETYPE = 209
 )
 
+// String returns the D3DRENDERSTATETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DRENDERSTATETYPE) String() string {
+	switch e {
+	case D3DRS_ZENABLE:
+		return "D3DRS_ZENABLE"
+	case D3DRS_FILLMODE:
+		return "D3DRS_FILLMODE"
+	case D3DRS_SHADEMODE:
+		return "D3DRS_SHADEMODE"
+	case D3DRS_ZWRITEENABLE:
+		return "D3DRS_ZWRITEENABLE"
+	case D3DRS_ALPHATESTENABLE:
+		return "D3DRS_ALPHATESTENABLE"
+	case D3DRS_LASTPIXEL:
+		return "D3DRS_LASTPIXEL"
+	case D3DRS_SRCBLEND:
+		return "D3DRS_SRCBLEND"
+	case D3DRS_DESTBLEND:
+		return "D3DRS_DESTBLEND"
+	case D3DRS_CULLMODE:
+		return "D3DRS_CULLMODE"
+	case D3DRS_ZFUNC:
+		return "D3DRS_ZFUNC"
+	case D3DRS_ALPHAREF:
+		return "D3DRS_ALPHAREF"
+	case D3DRS_ALPHAFUNC:
+		return "D3DRS_ALPHAFUNC"
+	case D3DRS_DITHERENABLE:
+		return "D3DRS_DITHERENABLE"
+	case D3DRS_ALPHABLENDENABLE:
+		return "D3DRS_ALPHABLENDENABLE"
+	case D3DRS_FOGENABLE:
+		return "D3DRS_FOGENABLE"
+	case D3DRS_SPECULARENABLE:
+		return "D3DRS_SPECULARENABLE"
+	case D3DRS_FOGCOLOR:
+		return "D3DRS_FOGCOLOR"
+	case D3DRS_FOGTABLEMODE:
+		return "D3DRS_FOGTABLEMODE"
+	case D3DRS_FOGSTART:
+		return "D3DRS_FOGSTART"
+	case D3DRS_FOGEND:
+		return "D3DRS_FOGEND"
+	case D3DRS_FOGDENSITY:
+		return "D3DRS_FOGDENSITY"
+	case D3DRS_RANGEFOGENABLE:
+		return "D3DRS_RANGEFOGENABLE"
+	case D3DRS_STENCILENABLE:
+		return "D3DRS_STENCILENABLE"
+	case D3DRS_STENCILFAIL:
+		return "D3DRS_STENCILFAIL"
+	case D3DRS_STENCILZFAIL:
+		return "D3DRS_STENCILZFAIL"
+	case D3DRS_STENCILPASS:
+		return "D3DRS_STENCILPASS"
+	case D3DRS_STENCILFUNC:
+		return "D3DRS_STENCILFUNC"
+	case D3DRS_STENCILREF:
+		return "D3DRS_STENCILREF"
+	case D3DRS_STENCILMASK:
+		return "D3DRS_STENCILMASK"
+	case D3DRS_STENCILWRITEMASK:
+		return "D3DRS_STENCILWRITEMASK"
+	case D3DRS_TEXTUREFACTOR:
+		return "D3DRS_TEXTUREFACTOR"
+	case D3DRS_WRAP0:
+		return "D3DRS_WRAP0"
+	case D3DRS_WRAP1:
+		return "D3DRS_WRAP1"
+	case D3DRS_WRAP2:
+		return "D3DRS_WRAP2"
+	case D3DRS_WRAP3:
+		return "D3DRS_WRAP3"
+	case D3DRS_WRAP4:
+		return "D3DRS_WRAP4"
+	case D3DRS_WRAP5:
+		return "D3DRS_WRAP5"
+	case D3DRS_WRAP6:
+		return "D3DRS_WRAP6"
+	case D3DRS_WRAP7:
+		return "D3DRS_WRAP7"
+	case D3DRS_CLIPPING:
+		return "D3DRS_CLIPPING"
+	case D3DRS_LIGHTING:
+		return "D3DRS_LIGHTING"
+	case D3DRS_AMBIENT:
+		return "D3DRS_AMBIENT"
+	case D3DRS_FOGVERTEXMODE:
+		return "D3DRS_FOGVERTEXMODE"
+	case D3DRS_COLORVERTEX:
+		return "D3DRS_COLORVERTEX"
+	case D3DRS_LOCALVIEWER:
+		return "D3DRS_LOCALVIEWER"
+	case D3DRS_NORMALIZENORMALS:
+		return "D3DRS_NORMALIZENORMALS"
+	case D3DRS_DIFFUSEMATERIALSOURCE:
+		return "D3DRS_DIFFUSEMATERIALSOURCE"
+	case D3DRS_SPECULARMATERIALSOURCE:
+		return "D3DRS_SPECULARMATERIALSOURCE"
+	case D3DRS_AMBIENTMATERIALSOURCE:
+		return "D3DRS_AMBIENTMATERIALSOURCE"
+	case D3DRS_EMISSIVEMATERIALSOURCE:
+		return "D3DRS_EMISSIVEMATERIALSOURCE"
+	case D3DRS_VERTEXBLEND:
+		return "D3DRS_VERTEXBLEND"
+	case D3DRS_CLIPPLANEENABLE:
+		return "D3DRS_CLIPPLANEENABLE"
+	case D3DRS_POINTSIZE:
+		return "D3DRS_POINTSIZE"
+	case D3DRS_POINTSIZE_MIN:
+		return "D3DRS_POINTSIZE_MIN"
+	case D3DRS_POINTSPRITEENABLE:
+		return "D3DRS_POINTSPRITEENABLE"
+	case D3DRS_POINTSCALEENABLE:
+		return "D3DRS_POINTSCALEENABLE"
+	case D3DRS_POINTSCALE_A:
+		return "D3DRS_POINTSCALE_A"
+	case D3DRS_POINTSCALE_B:
+		return "D3DRS_POINTSCALE_B"
+	case D3DRS_POINTSCALE_C:
+		return "D3DRS_POINTSCALE_C"
+	case D3DRS_MULTISAMPLEANTIALIAS:
+		return "D3DRS_MULTISAMPLEANTIALIAS"
+	case D3DRS_MULTISAMPLEMASK:
+		return "D3DRS_MULTISAMPLEMASK"
+	case D3DRS_PATCHEDGESTYLE:
+		return "D3DRS_PATCHEDGESTYLE"
+	case D3DRS_DEBUGMONITORTOKEN:
+		return "D3DRS_DEBUGMONITORTOKEN"
+	case D3DRS_POINTSIZE_MAX:
+		return "D3DRS_POINTSIZE_MAX"
+	case D3DRS_INDEXEDVERTEXBLENDENABLE:
+		return "D3DRS_INDEXEDVERTEXBLENDENABLE"
+	case D3DRS_COLORWRITEENABLE:
+		return "D3DRS_COLORWRITEENABLE"
+	case D3DRS_TWEENFACTOR:
+		return "D3DRS_TWEENFACTOR"
+	case D3DRS_BLENDOP:
+		return "D3DRS_BLENDOP"
+	case D3DRS_POSITIONDEGREE:
+		return "D3DRS_POSITIONDEGREE"
+	case D3DRS_NORMALDEGREE:
+		return "D3DRS_NORMALDEGREE"
+	case D3DRS_SCISSORTESTENABLE:
+		return "D3DRS_SCISSORTESTENABLE"
+	case D3DRS_SLOPESCALEDEPTHBIAS:
+		return "D3DRS_SLOPESCALEDEPTHBIAS"
+	case D3DRS_ANTIALIASEDLINEENABLE:
+		return "D3DRS_ANTIALIASEDLINEENABLE"
+	case D3DRS_MINTESSELLATIONLEVEL:
+		return "D3DRS_MINTESSELLATIONLEVEL"
+	case D3DRS_MAXTESSELLATIONLEVEL:
+		return "D3DRS_MAXTESSELLATIONLEVEL"
+	case D3DRS_ADAPTIVETESS_X:
+		return "D3DRS_ADAPTIVETESS_X"
+	case D3DRS_ADAPTIVETESS_Y:
+		return "D3DRS_ADAPTIVETESS_Y"
+	case D3DRS_ADAPTIVETESS_Z:
+		return "D3DRS_ADAPTIVETESS_Z"
+	case D3DRS_ADAPTIVETESS_W:
+		return "D3DRS_ADAPTIVETESS_W"
+	case D3DRS_ENABLEADAPTIVETESSELLATION:
+		return "D3DRS_ENABLEADAPTIVETESSELLATION"
+	case D3DRS_TWOSIDEDSTENCILMODE:
+		return "D3DRS_TWOSIDEDSTENCILMODE"
+	case D3DRS_CCW_STENCILFAIL:
+		return "D3DRS_CCW_STENCILFAIL"
+	case D3DRS_CCW_STENCILZFAIL:
+		return "D3DRS_CCW_STENCILZFAIL"
+	case D3DRS_CCW_STENCILPASS:
+		return "D3DRS_CCW_STENCILPASS"
+	case D3DRS_CCW_STENCILFUNC:
+		return "D3DRS_CCW_STENCILFUNC"
+	case D3DRS_COLORWRITEENABLE1:
+		return "D3DRS_COLORWRITEENABLE1"
+	case D3DRS_COLORWRITEENABLE2:
+		return "D3DRS_COLORWRITEENABLE2"
+	case D3DRS_COLORWRITEENABLE3:
+		return "D3DRS_COLORWRITEENABLE3"
+	case D3DRS_BLENDFACTOR:
+		return "D3DRS_BLENDFACTOR"
+	case D3DRS_SRGBWRITEENABLE:
+		return "D3DRS_SRGBWRITEENABLE"
+	case D3DRS_DEPTHBIAS:
+		return "D3DRS_DEPTHBIAS"
+	case D3DRS_WRAP8:
+		return "D3DRS_WRAP8"
+	case D3DRS_WRAP9:
+		return "D3DRS_WRAP9"
+	case D3DRS_WRAP10:
+		return "D3DRS_WRAP10"
+	case D3DRS_WRAP11:
+		return "D3DRS_WRAP11"
+	case D3DRS_WRAP12:
+		return "D3DRS_WRAP12"
+	case D3DRS_WRAP13:
+		return "D3DRS_WRAP13"
+	case D3DRS_WRAP14:
+		return "D3DRS_WRAP14"
+	case D3DRS_WRAP15:
+		return "D3DRS_WRAP15"
+	case D3DRS_SEPARATEALPHABLENDENABLE:
+		return "D3DRS_SEPARATEALPHABLENDENABLE"
+	case D3DRS_SRCBLENDALPHA:
+		return "D3DRS_SRCBLENDALPHA"
+	case D3DRS_DESTBLENDALPHA:
+		return "D3DRS_DESTBLENDALPHA"
+	case D3DRS_BLENDOPALPHA:
+		return "D3DRS_BLENDOPALPHA"
+	default:
+		return fmt.Sprintf("D3DRENDERSTATETYPE(%d)", int32(e))
+	}
+}
+
 // D3DRESOURCETYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dresourcetype
 type D3DRESOURCETYPE int32
 
@@ -574,6 +1604,29 @@ const (
 	D3DRTYPE_VERTEXBUFFER  D3DRESOURCETYPE = 6
 	D3DRTYPE_INDEXBUFFER   D3DRESOURCETYPE = 7
 )
+
+// String returns the D3DRESOURCETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DRESOURCETYPE) String() string {
+	switch e {
+	case D3DRTYPE_SURFACE:
+		return "D3DRTYPE_SURFACE"
+	case D3DRTYPE_VOLUME:
+		return "D3DRTYPE_VOLUME"
+	case D3DRTYPE_TEXTURE:
+		return "D3DRTYPE_TEXTURE"
+	case D3DRTYPE_VOLUMETEXTURE:
+		return "D3DRTYPE_VOLUMETEXTURE"
+	case D3DRTYPE_CUBETEXTURE:
+		return "D3DRTYPE_CUBETEXTURE"
+	case D3DRTYPE_VERTEXBUFFER:
+		return "D3DRTYPE_VERTEXBUFFER"
+	case D3DRTYPE_INDEXBUFFER:
+		return "D3DRTYPE_INDEXBUFFER"
+	default:
+		return fmt.Sprintf("D3DRESOURCETYPE(%d)", int32(e))
+	}
+}
 
 // D3DSAMPLERSTATETYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dsamplerstatetype
 type D3DSAMPLERSTATETYPE int32
@@ -594,6 +1647,41 @@ const (
 	D3DSAMP_DMAPOFFSET    D3DSAMPLERSTATETYPE = 13
 )
 
+// String returns the D3DSAMPLERSTATETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSAMPLERSTATETYPE) String() string {
+	switch e {
+	case D3DSAMP_ADDRESSU:
+		return "D3DSAMP_ADDRESSU"
+	case D3DSAMP_ADDRESSV:
+		return "D3DSAMP_ADDRESSV"
+	case D3DSAMP_ADDRESSW:
+		return "D3DSAMP_ADDRESSW"
+	case D3DSAMP_BORDERCOLOR:
+		return "D3DSAMP_BORDERCOLOR"
+	case D3DSAMP_MAGFILTER:
+		return "D3DSAMP_MAGFILTER"
+	case D3DSAMP_MINFILTER:
+		return "D3DSAMP_MINFILTER"
+	case D3DSAMP_MIPFILTER:
+		return "D3DSAMP_MIPFILTER"
+	case D3DSAMP_MIPMAPLODBIAS:
+		return "D3DSAMP_MIPMAPLODBIAS"
+	case D3DSAMP_MAXMIPLEVEL:
+		return "D3DSAMP_MAXMIPLEVEL"
+	case D3DSAMP_MAXANISOTROPY:
+		return "D3DSAMP_MAXANISOTROPY"
+	case D3DSAMP_SRGBTEXTURE:
+		return "D3DSAMP_SRGBTEXTURE"
+	case D3DSAMP_ELEMENTINDEX:
+		return "D3DSAMP_ELEMENTINDEX"
+	case D3DSAMP_DMAPOFFSET:
+		return "D3DSAMP_DMAPOFFSET"
+	default:
+		return fmt.Sprintf("D3DSAMPLERSTATETYPE(%d)", int32(e))
+	}
+}
+
 // D3DSAMPLER_TEXTURE_TYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dsampler-texture-type
 type D3DSAMPLER_TEXTURE_TYPE int32
 
@@ -604,6 +1692,23 @@ const (
 	D3DSTT_VOLUME  D3DSAMPLER_TEXTURE_TYPE = 536870912
 )
 
+// String returns the D3DSAMPLER_TEXTURE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSAMPLER_TEXTURE_TYPE) String() string {
+	switch e {
+	case D3DSTT_UNKNOWN:
+		return "D3DSTT_UNKNOWN"
+	case D3DSTT_2D:
+		return "D3DSTT_2D"
+	case D3DSTT_CUBE:
+		return "D3DSTT_CUBE"
+	case D3DSTT_VOLUME:
+		return "D3DSTT_VOLUME"
+	default:
+		return fmt.Sprintf("D3DSAMPLER_TEXTURE_TYPE(%d)", int32(e))
+	}
+}
+
 // D3DSCANLINEORDERING: https://learn.microsoft.com/windows/win32/direct3d9/d3dscanlineordering
 type D3DSCANLINEORDERING int32
 
@@ -612,6 +1717,21 @@ const (
 	D3DSCANLINEORDERING_PROGRESSIVE D3DSCANLINEORDERING = 1
 	D3DSCANLINEORDERING_INTERLACED  D3DSCANLINEORDERING = 2
 )
+
+// String returns the D3DSCANLINEORDERING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSCANLINEORDERING) String() string {
+	switch e {
+	case D3DSCANLINEORDERING_UNKNOWN:
+		return "D3DSCANLINEORDERING_UNKNOWN"
+	case D3DSCANLINEORDERING_PROGRESSIVE:
+		return "D3DSCANLINEORDERING_PROGRESSIVE"
+	case D3DSCANLINEORDERING_INTERLACED:
+		return "D3DSCANLINEORDERING_INTERLACED"
+	default:
+		return fmt.Sprintf("D3DSCANLINEORDERING(%d)", int32(e))
+	}
+}
 
 // D3DSHADEMODE: https://learn.microsoft.com/windows/win32/direct3d9/d3dshademode
 type D3DSHADEMODE int32
@@ -622,12 +1742,40 @@ const (
 	D3DSHADE_PHONG   D3DSHADEMODE = 3
 )
 
+// String returns the D3DSHADEMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSHADEMODE) String() string {
+	switch e {
+	case D3DSHADE_FLAT:
+		return "D3DSHADE_FLAT"
+	case D3DSHADE_GOURAUD:
+		return "D3DSHADE_GOURAUD"
+	case D3DSHADE_PHONG:
+		return "D3DSHADE_PHONG"
+	default:
+		return fmt.Sprintf("D3DSHADEMODE(%d)", int32(e))
+	}
+}
+
 type D3DSHADER_ADDRESSMODE_TYPE int32
 
 const (
 	D3DSHADER_ADDRMODE_ABSOLUTE D3DSHADER_ADDRESSMODE_TYPE = 0
 	D3DSHADER_ADDRMODE_RELATIVE D3DSHADER_ADDRESSMODE_TYPE = 8192
 )
+
+// String returns the D3DSHADER_ADDRESSMODE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSHADER_ADDRESSMODE_TYPE) String() string {
+	switch e {
+	case D3DSHADER_ADDRMODE_ABSOLUTE:
+		return "D3DSHADER_ADDRMODE_ABSOLUTE"
+	case D3DSHADER_ADDRMODE_RELATIVE:
+		return "D3DSHADER_ADDRMODE_RELATIVE"
+	default:
+		return fmt.Sprintf("D3DSHADER_ADDRESSMODE_TYPE(%d)", int32(e))
+	}
+}
 
 type D3DSHADER_COMPARISON int32
 
@@ -641,6 +1789,31 @@ const (
 	D3DSPC_LE        D3DSHADER_COMPARISON = 6
 	D3DSPC_RESERVED1 D3DSHADER_COMPARISON = 7
 )
+
+// String returns the D3DSHADER_COMPARISON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSHADER_COMPARISON) String() string {
+	switch e {
+	case D3DSPC_RESERVED0:
+		return "D3DSPC_RESERVED0"
+	case D3DSPC_GT:
+		return "D3DSPC_GT"
+	case D3DSPC_EQ:
+		return "D3DSPC_EQ"
+	case D3DSPC_GE:
+		return "D3DSPC_GE"
+	case D3DSPC_LT:
+		return "D3DSPC_LT"
+	case D3DSPC_NE:
+		return "D3DSPC_NE"
+	case D3DSPC_LE:
+		return "D3DSPC_LE"
+	case D3DSPC_RESERVED1:
+		return "D3DSPC_RESERVED1"
+	default:
+		return fmt.Sprintf("D3DSHADER_COMPARISON(%d)", int32(e))
+	}
+}
 
 type D3DSHADER_INSTRUCTION_OPCODE_TYPE int32
 
@@ -732,6 +1905,185 @@ const (
 	D3DSIO_END          D3DSHADER_INSTRUCTION_OPCODE_TYPE = 65535
 )
 
+// String returns the D3DSHADER_INSTRUCTION_OPCODE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSHADER_INSTRUCTION_OPCODE_TYPE) String() string {
+	switch e {
+	case D3DSIO_NOP:
+		return "D3DSIO_NOP"
+	case D3DSIO_MOV:
+		return "D3DSIO_MOV"
+	case D3DSIO_ADD:
+		return "D3DSIO_ADD"
+	case D3DSIO_SUB:
+		return "D3DSIO_SUB"
+	case D3DSIO_MAD:
+		return "D3DSIO_MAD"
+	case D3DSIO_MUL:
+		return "D3DSIO_MUL"
+	case D3DSIO_RCP:
+		return "D3DSIO_RCP"
+	case D3DSIO_RSQ:
+		return "D3DSIO_RSQ"
+	case D3DSIO_DP3:
+		return "D3DSIO_DP3"
+	case D3DSIO_DP4:
+		return "D3DSIO_DP4"
+	case D3DSIO_MIN:
+		return "D3DSIO_MIN"
+	case D3DSIO_MAX:
+		return "D3DSIO_MAX"
+	case D3DSIO_SLT:
+		return "D3DSIO_SLT"
+	case D3DSIO_SGE:
+		return "D3DSIO_SGE"
+	case D3DSIO_EXP:
+		return "D3DSIO_EXP"
+	case D3DSIO_LOG:
+		return "D3DSIO_LOG"
+	case D3DSIO_LIT:
+		return "D3DSIO_LIT"
+	case D3DSIO_DST:
+		return "D3DSIO_DST"
+	case D3DSIO_LRP:
+		return "D3DSIO_LRP"
+	case D3DSIO_FRC:
+		return "D3DSIO_FRC"
+	case D3DSIO_M4x4:
+		return "D3DSIO_M4x4"
+	case D3DSIO_M4x3:
+		return "D3DSIO_M4x3"
+	case D3DSIO_M3x4:
+		return "D3DSIO_M3x4"
+	case D3DSIO_M3x3:
+		return "D3DSIO_M3x3"
+	case D3DSIO_M3x2:
+		return "D3DSIO_M3x2"
+	case D3DSIO_CALL:
+		return "D3DSIO_CALL"
+	case D3DSIO_CALLNZ:
+		return "D3DSIO_CALLNZ"
+	case D3DSIO_LOOP:
+		return "D3DSIO_LOOP"
+	case D3DSIO_RET:
+		return "D3DSIO_RET"
+	case D3DSIO_ENDLOOP:
+		return "D3DSIO_ENDLOOP"
+	case D3DSIO_LABEL:
+		return "D3DSIO_LABEL"
+	case D3DSIO_DCL:
+		return "D3DSIO_DCL"
+	case D3DSIO_POW:
+		return "D3DSIO_POW"
+	case D3DSIO_CRS:
+		return "D3DSIO_CRS"
+	case D3DSIO_SGN:
+		return "D3DSIO_SGN"
+	case D3DSIO_ABS:
+		return "D3DSIO_ABS"
+	case D3DSIO_NRM:
+		return "D3DSIO_NRM"
+	case D3DSIO_SINCOS:
+		return "D3DSIO_SINCOS"
+	case D3DSIO_REP:
+		return "D3DSIO_REP"
+	case D3DSIO_ENDREP:
+		return "D3DSIO_ENDREP"
+	case D3DSIO_IF:
+		return "D3DSIO_IF"
+	case D3DSIO_IFC:
+		return "D3DSIO_IFC"
+	case D3DSIO_ELSE:
+		return "D3DSIO_ELSE"
+	case D3DSIO_ENDIF:
+		return "D3DSIO_ENDIF"
+	case D3DSIO_BREAK:
+		return "D3DSIO_BREAK"
+	case D3DSIO_BREAKC:
+		return "D3DSIO_BREAKC"
+	case D3DSIO_MOVA:
+		return "D3DSIO_MOVA"
+	case D3DSIO_DEFB:
+		return "D3DSIO_DEFB"
+	case D3DSIO_DEFI:
+		return "D3DSIO_DEFI"
+	case D3DSIO_TEXCOORD:
+		return "D3DSIO_TEXCOORD"
+	case D3DSIO_TEXKILL:
+		return "D3DSIO_TEXKILL"
+	case D3DSIO_TEX:
+		return "D3DSIO_TEX"
+	case D3DSIO_TEXBEM:
+		return "D3DSIO_TEXBEM"
+	case D3DSIO_TEXBEML:
+		return "D3DSIO_TEXBEML"
+	case D3DSIO_TEXREG2AR:
+		return "D3DSIO_TEXREG2AR"
+	case D3DSIO_TEXREG2GB:
+		return "D3DSIO_TEXREG2GB"
+	case D3DSIO_TEXM3x2PAD:
+		return "D3DSIO_TEXM3x2PAD"
+	case D3DSIO_TEXM3x2TEX:
+		return "D3DSIO_TEXM3x2TEX"
+	case D3DSIO_TEXM3x3PAD:
+		return "D3DSIO_TEXM3x3PAD"
+	case D3DSIO_TEXM3x3TEX:
+		return "D3DSIO_TEXM3x3TEX"
+	case D3DSIO_RESERVED0:
+		return "D3DSIO_RESERVED0"
+	case D3DSIO_TEXM3x3SPEC:
+		return "D3DSIO_TEXM3x3SPEC"
+	case D3DSIO_TEXM3x3VSPEC:
+		return "D3DSIO_TEXM3x3VSPEC"
+	case D3DSIO_EXPP:
+		return "D3DSIO_EXPP"
+	case D3DSIO_LOGP:
+		return "D3DSIO_LOGP"
+	case D3DSIO_CND:
+		return "D3DSIO_CND"
+	case D3DSIO_DEF:
+		return "D3DSIO_DEF"
+	case D3DSIO_TEXREG2RGB:
+		return "D3DSIO_TEXREG2RGB"
+	case D3DSIO_TEXDP3TEX:
+		return "D3DSIO_TEXDP3TEX"
+	case D3DSIO_TEXM3x2DEPTH:
+		return "D3DSIO_TEXM3x2DEPTH"
+	case D3DSIO_TEXDP3:
+		return "D3DSIO_TEXDP3"
+	case D3DSIO_TEXM3x3:
+		return "D3DSIO_TEXM3x3"
+	case D3DSIO_TEXDEPTH:
+		return "D3DSIO_TEXDEPTH"
+	case D3DSIO_CMP:
+		return "D3DSIO_CMP"
+	case D3DSIO_BEM:
+		return "D3DSIO_BEM"
+	case D3DSIO_DP2ADD:
+		return "D3DSIO_DP2ADD"
+	case D3DSIO_DSX:
+		return "D3DSIO_DSX"
+	case D3DSIO_DSY:
+		return "D3DSIO_DSY"
+	case D3DSIO_TEXLDD:
+		return "D3DSIO_TEXLDD"
+	case D3DSIO_SETP:
+		return "D3DSIO_SETP"
+	case D3DSIO_TEXLDL:
+		return "D3DSIO_TEXLDL"
+	case D3DSIO_BREAKP:
+		return "D3DSIO_BREAKP"
+	case D3DSIO_PHASE:
+		return "D3DSIO_PHASE"
+	case D3DSIO_COMMENT:
+		return "D3DSIO_COMMENT"
+	case D3DSIO_END:
+		return "D3DSIO_END"
+	default:
+		return fmt.Sprintf("D3DSHADER_INSTRUCTION_OPCODE_TYPE(%d)", int32(e))
+	}
+}
+
 type D3DSHADER_MIN_PRECISION int32
 
 const (
@@ -740,12 +2092,40 @@ const (
 	D3DMP_2_8     D3DSHADER_MIN_PRECISION = 2
 )
 
+// String returns the D3DSHADER_MIN_PRECISION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSHADER_MIN_PRECISION) String() string {
+	switch e {
+	case D3DMP_DEFAULT:
+		return "D3DMP_DEFAULT"
+	case D3DMP_16:
+		return "D3DMP_16"
+	case D3DMP_2_8:
+		return "D3DMP_2_8"
+	default:
+		return fmt.Sprintf("D3DSHADER_MIN_PRECISION(%d)", int32(e))
+	}
+}
+
 type D3DSHADER_MISCTYPE_OFFSETS int32
 
 const (
 	D3DSMO_POSITION D3DSHADER_MISCTYPE_OFFSETS = 0
 	D3DSMO_FACE     D3DSHADER_MISCTYPE_OFFSETS = 1
 )
+
+// String returns the D3DSHADER_MISCTYPE_OFFSETS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSHADER_MISCTYPE_OFFSETS) String() string {
+	switch e {
+	case D3DSMO_POSITION:
+		return "D3DSMO_POSITION"
+	case D3DSMO_FACE:
+		return "D3DSMO_FACE"
+	default:
+		return fmt.Sprintf("D3DSHADER_MISCTYPE_OFFSETS(%d)", int32(e))
+	}
+}
 
 type D3DSHADER_PARAM_REGISTER_TYPE int32
 
@@ -774,6 +2154,55 @@ const (
 	D3DSPR_PREDICATE   D3DSHADER_PARAM_REGISTER_TYPE = 19
 )
 
+// String returns the D3DSHADER_PARAM_REGISTER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSHADER_PARAM_REGISTER_TYPE) String() string {
+	switch e {
+	case D3DSPR_TEMP:
+		return "D3DSPR_TEMP"
+	case D3DSPR_INPUT:
+		return "D3DSPR_INPUT"
+	case D3DSPR_CONST:
+		return "D3DSPR_CONST"
+	case D3DSPR_ADDR:
+		return "D3DSPR_ADDR"
+	case D3DSPR_RASTOUT:
+		return "D3DSPR_RASTOUT"
+	case D3DSPR_ATTROUT:
+		return "D3DSPR_ATTROUT"
+	case D3DSPR_TEXCRDOUT:
+		return "D3DSPR_TEXCRDOUT"
+	case D3DSPR_CONSTINT:
+		return "D3DSPR_CONSTINT"
+	case D3DSPR_COLOROUT:
+		return "D3DSPR_COLOROUT"
+	case D3DSPR_DEPTHOUT:
+		return "D3DSPR_DEPTHOUT"
+	case D3DSPR_SAMPLER:
+		return "D3DSPR_SAMPLER"
+	case D3DSPR_CONST2:
+		return "D3DSPR_CONST2"
+	case D3DSPR_CONST3:
+		return "D3DSPR_CONST3"
+	case D3DSPR_CONST4:
+		return "D3DSPR_CONST4"
+	case D3DSPR_CONSTBOOL:
+		return "D3DSPR_CONSTBOOL"
+	case D3DSPR_LOOP:
+		return "D3DSPR_LOOP"
+	case D3DSPR_TEMPFLOAT16:
+		return "D3DSPR_TEMPFLOAT16"
+	case D3DSPR_MISCTYPE:
+		return "D3DSPR_MISCTYPE"
+	case D3DSPR_LABEL:
+		return "D3DSPR_LABEL"
+	case D3DSPR_PREDICATE:
+		return "D3DSPR_PREDICATE"
+	default:
+		return fmt.Sprintf("D3DSHADER_PARAM_REGISTER_TYPE(%d)", int32(e))
+	}
+}
+
 type D3DSHADER_PARAM_SRCMOD_TYPE int32
 
 const (
@@ -793,6 +2222,43 @@ const (
 	D3DSPSM_NOT     D3DSHADER_PARAM_SRCMOD_TYPE = 218103808
 )
 
+// String returns the D3DSHADER_PARAM_SRCMOD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSHADER_PARAM_SRCMOD_TYPE) String() string {
+	switch e {
+	case D3DSPSM_NONE:
+		return "D3DSPSM_NONE"
+	case D3DSPSM_NEG:
+		return "D3DSPSM_NEG"
+	case D3DSPSM_BIAS:
+		return "D3DSPSM_BIAS"
+	case D3DSPSM_BIASNEG:
+		return "D3DSPSM_BIASNEG"
+	case D3DSPSM_SIGN:
+		return "D3DSPSM_SIGN"
+	case D3DSPSM_SIGNNEG:
+		return "D3DSPSM_SIGNNEG"
+	case D3DSPSM_COMP:
+		return "D3DSPSM_COMP"
+	case D3DSPSM_X2:
+		return "D3DSPSM_X2"
+	case D3DSPSM_X2NEG:
+		return "D3DSPSM_X2NEG"
+	case D3DSPSM_DZ:
+		return "D3DSPSM_DZ"
+	case D3DSPSM_DW:
+		return "D3DSPSM_DW"
+	case D3DSPSM_ABS:
+		return "D3DSPSM_ABS"
+	case D3DSPSM_ABSNEG:
+		return "D3DSPSM_ABSNEG"
+	case D3DSPSM_NOT:
+		return "D3DSPSM_NOT"
+	default:
+		return fmt.Sprintf("D3DSHADER_PARAM_SRCMOD_TYPE(%d)", int32(e))
+	}
+}
+
 // D3DSTATEBLOCKTYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dstateblocktype
 type D3DSTATEBLOCKTYPE int32
 
@@ -801,6 +2267,21 @@ const (
 	D3DSBT_PIXELSTATE  D3DSTATEBLOCKTYPE = 2
 	D3DSBT_VERTEXSTATE D3DSTATEBLOCKTYPE = 3
 )
+
+// String returns the D3DSTATEBLOCKTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSTATEBLOCKTYPE) String() string {
+	switch e {
+	case D3DSBT_ALL:
+		return "D3DSBT_ALL"
+	case D3DSBT_PIXELSTATE:
+		return "D3DSBT_PIXELSTATE"
+	case D3DSBT_VERTEXSTATE:
+		return "D3DSBT_VERTEXSTATE"
+	default:
+		return fmt.Sprintf("D3DSTATEBLOCKTYPE(%d)", int32(e))
+	}
+}
 
 // D3DSTENCILOP: https://learn.microsoft.com/windows/win32/direct3d9/d3dstencilop
 type D3DSTENCILOP int32
@@ -816,6 +2297,31 @@ const (
 	D3DSTENCILOP_DECR    D3DSTENCILOP = 8
 )
 
+// String returns the D3DSTENCILOP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSTENCILOP) String() string {
+	switch e {
+	case D3DSTENCILOP_KEEP:
+		return "D3DSTENCILOP_KEEP"
+	case D3DSTENCILOP_ZERO:
+		return "D3DSTENCILOP_ZERO"
+	case D3DSTENCILOP_REPLACE:
+		return "D3DSTENCILOP_REPLACE"
+	case D3DSTENCILOP_INCRSAT:
+		return "D3DSTENCILOP_INCRSAT"
+	case D3DSTENCILOP_DECRSAT:
+		return "D3DSTENCILOP_DECRSAT"
+	case D3DSTENCILOP_INVERT:
+		return "D3DSTENCILOP_INVERT"
+	case D3DSTENCILOP_INCR:
+		return "D3DSTENCILOP_INCR"
+	case D3DSTENCILOP_DECR:
+		return "D3DSTENCILOP_DECR"
+	default:
+		return fmt.Sprintf("D3DSTENCILOP(%d)", int32(e))
+	}
+}
+
 // D3DSWAPEFFECT: https://learn.microsoft.com/windows/win32/direct3d9/d3dswapeffect
 type D3DSWAPEFFECT int32
 
@@ -827,6 +2333,25 @@ const (
 	D3DSWAPEFFECT_FLIPEX  D3DSWAPEFFECT = 5
 )
 
+// String returns the D3DSWAPEFFECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DSWAPEFFECT) String() string {
+	switch e {
+	case D3DSWAPEFFECT_DISCARD:
+		return "D3DSWAPEFFECT_DISCARD"
+	case D3DSWAPEFFECT_FLIP:
+		return "D3DSWAPEFFECT_FLIP"
+	case D3DSWAPEFFECT_COPY:
+		return "D3DSWAPEFFECT_COPY"
+	case D3DSWAPEFFECT_OVERLAY:
+		return "D3DSWAPEFFECT_OVERLAY"
+	case D3DSWAPEFFECT_FLIPEX:
+		return "D3DSWAPEFFECT_FLIPEX"
+	default:
+		return fmt.Sprintf("D3DSWAPEFFECT(%d)", int32(e))
+	}
+}
+
 // D3DTEXTUREADDRESS: https://learn.microsoft.com/windows/win32/direct3d9/d3dtextureaddress
 type D3DTEXTUREADDRESS int32
 
@@ -837,6 +2362,25 @@ const (
 	D3DTADDRESS_BORDER     D3DTEXTUREADDRESS = 4
 	D3DTADDRESS_MIRRORONCE D3DTEXTUREADDRESS = 5
 )
+
+// String returns the D3DTEXTUREADDRESS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DTEXTUREADDRESS) String() string {
+	switch e {
+	case D3DTADDRESS_WRAP:
+		return "D3DTADDRESS_WRAP"
+	case D3DTADDRESS_MIRROR:
+		return "D3DTADDRESS_MIRROR"
+	case D3DTADDRESS_CLAMP:
+		return "D3DTADDRESS_CLAMP"
+	case D3DTADDRESS_BORDER:
+		return "D3DTADDRESS_BORDER"
+	case D3DTADDRESS_MIRRORONCE:
+		return "D3DTADDRESS_MIRRORONCE"
+	default:
+		return fmt.Sprintf("D3DTEXTUREADDRESS(%d)", int32(e))
+	}
+}
 
 type D3DTEXTUREBLEND int32
 
@@ -851,6 +2395,31 @@ const (
 	D3DTBLEND_ADD           D3DTEXTUREBLEND = 8
 )
 
+// String returns the D3DTEXTUREBLEND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DTEXTUREBLEND) String() string {
+	switch e {
+	case D3DTBLEND_DECAL:
+		return "D3DTBLEND_DECAL"
+	case D3DTBLEND_MODULATE:
+		return "D3DTBLEND_MODULATE"
+	case D3DTBLEND_DECALALPHA:
+		return "D3DTBLEND_DECALALPHA"
+	case D3DTBLEND_MODULATEALPHA:
+		return "D3DTBLEND_MODULATEALPHA"
+	case D3DTBLEND_DECALMASK:
+		return "D3DTBLEND_DECALMASK"
+	case D3DTBLEND_MODULATEMASK:
+		return "D3DTBLEND_MODULATEMASK"
+	case D3DTBLEND_COPY:
+		return "D3DTBLEND_COPY"
+	case D3DTBLEND_ADD:
+		return "D3DTBLEND_ADD"
+	default:
+		return fmt.Sprintf("D3DTEXTUREBLEND(%d)", int32(e))
+	}
+}
+
 type D3DTEXTUREFILTER int32
 
 const (
@@ -861,6 +2430,27 @@ const (
 	D3DFILTER_LINEARMIPNEAREST D3DTEXTUREFILTER = 5
 	D3DFILTER_LINEARMIPLINEAR  D3DTEXTUREFILTER = 6
 )
+
+// String returns the D3DTEXTUREFILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DTEXTUREFILTER) String() string {
+	switch e {
+	case D3DFILTER_NEAREST:
+		return "D3DFILTER_NEAREST"
+	case D3DFILTER_LINEAR:
+		return "D3DFILTER_LINEAR"
+	case D3DFILTER_MIPNEAREST:
+		return "D3DFILTER_MIPNEAREST"
+	case D3DFILTER_MIPLINEAR:
+		return "D3DFILTER_MIPLINEAR"
+	case D3DFILTER_LINEARMIPNEAREST:
+		return "D3DFILTER_LINEARMIPNEAREST"
+	case D3DFILTER_LINEARMIPLINEAR:
+		return "D3DFILTER_LINEARMIPLINEAR"
+	default:
+		return fmt.Sprintf("D3DTEXTUREFILTER(%d)", int32(e))
+	}
+}
 
 // D3DTEXTUREFILTERTYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dtexturefiltertype
 type D3DTEXTUREFILTERTYPE int32
@@ -875,6 +2465,29 @@ const (
 	D3DTEXF_CONVOLUTIONMONO D3DTEXTUREFILTERTYPE = 8
 )
 
+// String returns the D3DTEXTUREFILTERTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DTEXTUREFILTERTYPE) String() string {
+	switch e {
+	case D3DTEXF_NONE:
+		return "D3DTEXF_NONE"
+	case D3DTEXF_POINT:
+		return "D3DTEXF_POINT"
+	case D3DTEXF_LINEAR:
+		return "D3DTEXF_LINEAR"
+	case D3DTEXF_ANISOTROPIC:
+		return "D3DTEXF_ANISOTROPIC"
+	case D3DTEXF_PYRAMIDALQUAD:
+		return "D3DTEXF_PYRAMIDALQUAD"
+	case D3DTEXF_GAUSSIANQUAD:
+		return "D3DTEXF_GAUSSIANQUAD"
+	case D3DTEXF_CONVOLUTIONMONO:
+		return "D3DTEXF_CONVOLUTIONMONO"
+	default:
+		return fmt.Sprintf("D3DTEXTUREFILTERTYPE(%d)", int32(e))
+	}
+}
+
 type D3DTEXTUREMAGFILTER int32
 
 const (
@@ -885,6 +2498,25 @@ const (
 	D3DTFG_ANISOTROPIC   D3DTEXTUREMAGFILTER = 5
 )
 
+// String returns the D3DTEXTUREMAGFILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DTEXTUREMAGFILTER) String() string {
+	switch e {
+	case D3DTFG_POINT:
+		return "D3DTFG_POINT"
+	case D3DTFG_LINEAR:
+		return "D3DTFG_LINEAR"
+	case D3DTFG_FLATCUBIC:
+		return "D3DTFG_FLATCUBIC"
+	case D3DTFG_GAUSSIANCUBIC:
+		return "D3DTFG_GAUSSIANCUBIC"
+	case D3DTFG_ANISOTROPIC:
+		return "D3DTFG_ANISOTROPIC"
+	default:
+		return fmt.Sprintf("D3DTEXTUREMAGFILTER(%d)", int32(e))
+	}
+}
+
 type D3DTEXTUREMINFILTER int32
 
 const (
@@ -893,6 +2525,21 @@ const (
 	D3DTFN_ANISOTROPIC D3DTEXTUREMINFILTER = 3
 )
 
+// String returns the D3DTEXTUREMINFILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DTEXTUREMINFILTER) String() string {
+	switch e {
+	case D3DTFN_POINT:
+		return "D3DTFN_POINT"
+	case D3DTFN_LINEAR:
+		return "D3DTFN_LINEAR"
+	case D3DTFN_ANISOTROPIC:
+		return "D3DTFN_ANISOTROPIC"
+	default:
+		return fmt.Sprintf("D3DTEXTUREMINFILTER(%d)", int32(e))
+	}
+}
+
 type D3DTEXTUREMIPFILTER int32
 
 const (
@@ -900,6 +2547,21 @@ const (
 	D3DTFP_POINT  D3DTEXTUREMIPFILTER = 2
 	D3DTFP_LINEAR D3DTEXTUREMIPFILTER = 3
 )
+
+// String returns the D3DTEXTUREMIPFILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DTEXTUREMIPFILTER) String() string {
+	switch e {
+	case D3DTFP_NONE:
+		return "D3DTFP_NONE"
+	case D3DTFP_POINT:
+		return "D3DTFP_POINT"
+	case D3DTFP_LINEAR:
+		return "D3DTFP_LINEAR"
+	default:
+		return fmt.Sprintf("D3DTEXTUREMIPFILTER(%d)", int32(e))
+	}
+}
 
 // D3DTEXTUREOP: https://learn.microsoft.com/windows/win32/direct3d9/d3dtextureop
 type D3DTEXTUREOP int32
@@ -933,6 +2595,67 @@ const (
 	D3DTOP_LERP                      D3DTEXTUREOP = 26
 )
 
+// String returns the D3DTEXTUREOP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DTEXTUREOP) String() string {
+	switch e {
+	case D3DTOP_DISABLE:
+		return "D3DTOP_DISABLE"
+	case D3DTOP_SELECTARG1:
+		return "D3DTOP_SELECTARG1"
+	case D3DTOP_SELECTARG2:
+		return "D3DTOP_SELECTARG2"
+	case D3DTOP_MODULATE:
+		return "D3DTOP_MODULATE"
+	case D3DTOP_MODULATE2X:
+		return "D3DTOP_MODULATE2X"
+	case D3DTOP_MODULATE4X:
+		return "D3DTOP_MODULATE4X"
+	case D3DTOP_ADD:
+		return "D3DTOP_ADD"
+	case D3DTOP_ADDSIGNED:
+		return "D3DTOP_ADDSIGNED"
+	case D3DTOP_ADDSIGNED2X:
+		return "D3DTOP_ADDSIGNED2X"
+	case D3DTOP_SUBTRACT:
+		return "D3DTOP_SUBTRACT"
+	case D3DTOP_ADDSMOOTH:
+		return "D3DTOP_ADDSMOOTH"
+	case D3DTOP_BLENDDIFFUSEALPHA:
+		return "D3DTOP_BLENDDIFFUSEALPHA"
+	case D3DTOP_BLENDTEXTUREALPHA:
+		return "D3DTOP_BLENDTEXTUREALPHA"
+	case D3DTOP_BLENDFACTORALPHA:
+		return "D3DTOP_BLENDFACTORALPHA"
+	case D3DTOP_BLENDTEXTUREALPHAPM:
+		return "D3DTOP_BLENDTEXTUREALPHAPM"
+	case D3DTOP_BLENDCURRENTALPHA:
+		return "D3DTOP_BLENDCURRENTALPHA"
+	case D3DTOP_PREMODULATE:
+		return "D3DTOP_PREMODULATE"
+	case D3DTOP_MODULATEALPHA_ADDCOLOR:
+		return "D3DTOP_MODULATEALPHA_ADDCOLOR"
+	case D3DTOP_MODULATECOLOR_ADDALPHA:
+		return "D3DTOP_MODULATECOLOR_ADDALPHA"
+	case D3DTOP_MODULATEINVALPHA_ADDCOLOR:
+		return "D3DTOP_MODULATEINVALPHA_ADDCOLOR"
+	case D3DTOP_MODULATEINVCOLOR_ADDALPHA:
+		return "D3DTOP_MODULATEINVCOLOR_ADDALPHA"
+	case D3DTOP_BUMPENVMAP:
+		return "D3DTOP_BUMPENVMAP"
+	case D3DTOP_BUMPENVMAPLUMINANCE:
+		return "D3DTOP_BUMPENVMAPLUMINANCE"
+	case D3DTOP_DOTPRODUCT3:
+		return "D3DTOP_DOTPRODUCT3"
+	case D3DTOP_MULTIPLYADD:
+		return "D3DTOP_MULTIPLYADD"
+	case D3DTOP_LERP:
+		return "D3DTOP_LERP"
+	default:
+		return fmt.Sprintf("D3DTEXTUREOP(%d)", int32(e))
+	}
+}
+
 // D3DTEXTURESTAGESTATETYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dtexturestagestatetype
 type D3DTEXTURESTAGESTATETYPE int32
 
@@ -957,6 +2680,51 @@ const (
 	D3DTSS_CONSTANT              D3DTEXTURESTAGESTATETYPE = 32
 )
 
+// String returns the D3DTEXTURESTAGESTATETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DTEXTURESTAGESTATETYPE) String() string {
+	switch e {
+	case D3DTSS_COLOROP:
+		return "D3DTSS_COLOROP"
+	case D3DTSS_COLORARG1:
+		return "D3DTSS_COLORARG1"
+	case D3DTSS_COLORARG2:
+		return "D3DTSS_COLORARG2"
+	case D3DTSS_ALPHAOP:
+		return "D3DTSS_ALPHAOP"
+	case D3DTSS_ALPHAARG1:
+		return "D3DTSS_ALPHAARG1"
+	case D3DTSS_ALPHAARG2:
+		return "D3DTSS_ALPHAARG2"
+	case D3DTSS_BUMPENVMAT00:
+		return "D3DTSS_BUMPENVMAT00"
+	case D3DTSS_BUMPENVMAT01:
+		return "D3DTSS_BUMPENVMAT01"
+	case D3DTSS_BUMPENVMAT10:
+		return "D3DTSS_BUMPENVMAT10"
+	case D3DTSS_BUMPENVMAT11:
+		return "D3DTSS_BUMPENVMAT11"
+	case D3DTSS_TEXCOORDINDEX:
+		return "D3DTSS_TEXCOORDINDEX"
+	case D3DTSS_BUMPENVLSCALE:
+		return "D3DTSS_BUMPENVLSCALE"
+	case D3DTSS_BUMPENVLOFFSET:
+		return "D3DTSS_BUMPENVLOFFSET"
+	case D3DTSS_TEXTURETRANSFORMFLAGS:
+		return "D3DTSS_TEXTURETRANSFORMFLAGS"
+	case D3DTSS_COLORARG0:
+		return "D3DTSS_COLORARG0"
+	case D3DTSS_ALPHAARG0:
+		return "D3DTSS_ALPHAARG0"
+	case D3DTSS_RESULTARG:
+		return "D3DTSS_RESULTARG"
+	case D3DTSS_CONSTANT:
+		return "D3DTSS_CONSTANT"
+	default:
+		return fmt.Sprintf("D3DTEXTURESTAGESTATETYPE(%d)", int32(e))
+	}
+}
+
 // D3DTEXTURETRANSFORMFLAGS: https://learn.microsoft.com/windows/win32/direct3d9/d3dtexturetransformflags
 type D3DTEXTURETRANSFORMFLAGS int32
 
@@ -968,6 +2736,27 @@ const (
 	D3DTTFF_COUNT4    D3DTEXTURETRANSFORMFLAGS = 4
 	D3DTTFF_PROJECTED D3DTEXTURETRANSFORMFLAGS = 256
 )
+
+// String returns the D3DTEXTURETRANSFORMFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DTEXTURETRANSFORMFLAGS) String() string {
+	switch e {
+	case D3DTTFF_DISABLE:
+		return "D3DTTFF_DISABLE"
+	case D3DTTFF_COUNT1:
+		return "D3DTTFF_COUNT1"
+	case D3DTTFF_COUNT2:
+		return "D3DTTFF_COUNT2"
+	case D3DTTFF_COUNT3:
+		return "D3DTTFF_COUNT3"
+	case D3DTTFF_COUNT4:
+		return "D3DTTFF_COUNT4"
+	case D3DTTFF_PROJECTED:
+		return "D3DTTFF_PROJECTED"
+	default:
+		return fmt.Sprintf("D3DTEXTURETRANSFORMFLAGS(%d)", int32(e))
+	}
+}
 
 // D3DTRANSFORMSTATETYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dtransformstatetype
 type D3DTRANSFORMSTATETYPE int32
@@ -985,6 +2774,35 @@ const (
 	D3DTS_TEXTURE7   D3DTRANSFORMSTATETYPE = 23
 )
 
+// String returns the D3DTRANSFORMSTATETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DTRANSFORMSTATETYPE) String() string {
+	switch e {
+	case D3DTS_VIEW:
+		return "D3DTS_VIEW"
+	case D3DTS_PROJECTION:
+		return "D3DTS_PROJECTION"
+	case D3DTS_TEXTURE0:
+		return "D3DTS_TEXTURE0"
+	case D3DTS_TEXTURE1:
+		return "D3DTS_TEXTURE1"
+	case D3DTS_TEXTURE2:
+		return "D3DTS_TEXTURE2"
+	case D3DTS_TEXTURE3:
+		return "D3DTS_TEXTURE3"
+	case D3DTS_TEXTURE4:
+		return "D3DTS_TEXTURE4"
+	case D3DTS_TEXTURE5:
+		return "D3DTS_TEXTURE5"
+	case D3DTS_TEXTURE6:
+		return "D3DTS_TEXTURE6"
+	case D3DTS_TEXTURE7:
+		return "D3DTS_TEXTURE7"
+	default:
+		return fmt.Sprintf("D3DTRANSFORMSTATETYPE(%d)", int32(e))
+	}
+}
+
 // D3DVERTEXBLENDFLAGS: https://learn.microsoft.com/windows/win32/direct3d9/d3dvertexblendflags
 type D3DVERTEXBLENDFLAGS int32
 
@@ -997,6 +2815,27 @@ const (
 	D3DVBF_0WEIGHTS D3DVERTEXBLENDFLAGS = 256
 )
 
+// String returns the D3DVERTEXBLENDFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DVERTEXBLENDFLAGS) String() string {
+	switch e {
+	case D3DVBF_DISABLE:
+		return "D3DVBF_DISABLE"
+	case D3DVBF_1WEIGHTS:
+		return "D3DVBF_1WEIGHTS"
+	case D3DVBF_2WEIGHTS:
+		return "D3DVBF_2WEIGHTS"
+	case D3DVBF_3WEIGHTS:
+		return "D3DVBF_3WEIGHTS"
+	case D3DVBF_TWEENING:
+		return "D3DVBF_TWEENING"
+	case D3DVBF_0WEIGHTS:
+		return "D3DVBF_0WEIGHTS"
+	default:
+		return fmt.Sprintf("D3DVERTEXBLENDFLAGS(%d)", int32(e))
+	}
+}
+
 type D3DVERTEXTYPE int32
 
 const (
@@ -1005,12 +2844,40 @@ const (
 	D3DVT_TLVERTEX D3DVERTEXTYPE = 3
 )
 
+// String returns the D3DVERTEXTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DVERTEXTYPE) String() string {
+	switch e {
+	case D3DVT_VERTEX:
+		return "D3DVT_VERTEX"
+	case D3DVT_LVERTEX:
+		return "D3DVT_LVERTEX"
+	case D3DVT_TLVERTEX:
+		return "D3DVT_TLVERTEX"
+	default:
+		return fmt.Sprintf("D3DVERTEXTYPE(%d)", int32(e))
+	}
+}
+
 type D3DVS_ADDRESSMODE_TYPE int32
 
 const (
 	D3DVS_ADDRMODE_ABSOLUTE D3DVS_ADDRESSMODE_TYPE = 0
 	D3DVS_ADDRMODE_RELATIVE D3DVS_ADDRESSMODE_TYPE = 8192
 )
+
+// String returns the D3DVS_ADDRESSMODE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DVS_ADDRESSMODE_TYPE) String() string {
+	switch e {
+	case D3DVS_ADDRMODE_ABSOLUTE:
+		return "D3DVS_ADDRMODE_ABSOLUTE"
+	case D3DVS_ADDRMODE_RELATIVE:
+		return "D3DVS_ADDRMODE_RELATIVE"
+	default:
+		return fmt.Sprintf("D3DVS_ADDRESSMODE_TYPE(%d)", int32(e))
+	}
+}
 
 type D3DVS_RASTOUT_OFFSETS int32
 
@@ -1020,6 +2887,21 @@ const (
 	D3DSRO_POINT_SIZE D3DVS_RASTOUT_OFFSETS = 2
 )
 
+// String returns the D3DVS_RASTOUT_OFFSETS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DVS_RASTOUT_OFFSETS) String() string {
+	switch e {
+	case D3DSRO_POSITION:
+		return "D3DSRO_POSITION"
+	case D3DSRO_FOG:
+		return "D3DSRO_FOG"
+	case D3DSRO_POINT_SIZE:
+		return "D3DSRO_POINT_SIZE"
+	default:
+		return fmt.Sprintf("D3DVS_RASTOUT_OFFSETS(%d)", int32(e))
+	}
+}
+
 // D3DZBUFFERTYPE: https://learn.microsoft.com/windows/win32/direct3d9/d3dzbuffertype
 type D3DZBUFFERTYPE int32
 
@@ -1028,3 +2910,18 @@ const (
 	D3DZB_TRUE  D3DZBUFFERTYPE = 1
 	D3DZB_USEW  D3DZBUFFERTYPE = 2
 )
+
+// String returns the D3DZBUFFERTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DZBUFFERTYPE) String() string {
+	switch e {
+	case D3DZB_FALSE:
+		return "D3DZB_FALSE"
+	case D3DZB_TRUE:
+		return "D3DZB_TRUE"
+	case D3DZB_USEW:
+		return "D3DZB_USEW"
+	default:
+		return fmt.Sprintf("D3DZBUFFERTYPE(%d)", int32(e))
+	}
+}

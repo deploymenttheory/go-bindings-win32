@@ -4,6 +4,10 @@
 
 package webdav
 
+import (
+	"fmt"
+)
+
 // AUTHNEXTSTEP: https://learn.microsoft.com/windows/win32/api/davclnt/ne-davclnt-authnextstep
 type AUTHNEXTSTEP int32
 
@@ -12,3 +16,18 @@ const (
 	RetryRequest    AUTHNEXTSTEP = 1
 	CancelRequest   AUTHNEXTSTEP = 2
 )
+
+// String returns the AUTHNEXTSTEP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHNEXTSTEP) String() string {
+	switch e {
+	case DefaultBehavior:
+		return "DefaultBehavior"
+	case RetryRequest:
+		return "RetryRequest"
+	case CancelRequest:
+		return "CancelRequest"
+	default:
+		return fmt.Sprintf("AUTHNEXTSTEP(%d)", int32(e))
+	}
+}

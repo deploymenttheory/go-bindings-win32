@@ -4,6 +4,10 @@
 
 package pwm
 
+import (
+	"fmt"
+)
+
 // PWM_POLARITY: https://learn.microsoft.com/windows/win32/api/pwm/ne-pwm-pwm_polarity
 type PWM_POLARITY int32
 
@@ -11,3 +15,16 @@ const (
 	PWM_ACTIVE_HIGH PWM_POLARITY = 0
 	PWM_ACTIVE_LOW  PWM_POLARITY = 1
 )
+
+// String returns the PWM_POLARITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PWM_POLARITY) String() string {
+	switch e {
+	case PWM_ACTIVE_HIGH:
+		return "PWM_ACTIVE_HIGH"
+	case PWM_ACTIVE_LOW:
+		return "PWM_ACTIVE_LOW"
+	default:
+		return fmt.Sprintf("PWM_POLARITY(%d)", int32(e))
+	}
+}

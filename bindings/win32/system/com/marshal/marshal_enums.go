@@ -4,9 +4,26 @@
 
 package marshal
 
+import (
+	"fmt"
+)
+
 type STDMSHLFLAGS int32
 
 const (
 	SMEXF_SERVER  STDMSHLFLAGS = 1
 	SMEXF_HANDLER STDMSHLFLAGS = 2
 )
+
+// String returns the STDMSHLFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STDMSHLFLAGS) String() string {
+	switch e {
+	case SMEXF_SERVER:
+		return "SMEXF_SERVER"
+	case SMEXF_HANDLER:
+		return "SMEXF_HANDLER"
+	default:
+		return fmt.Sprintf("STDMSHLFLAGS(%d)", int32(e))
+	}
+}

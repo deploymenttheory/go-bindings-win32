@@ -4,6 +4,10 @@
 
 package distributedfilesystem
 
+import (
+	"fmt"
+)
+
 // DFS_NAMESPACE_VERSION_ORIGIN: https://learn.microsoft.com/windows/win32/api/lmdfs/ne-lmdfs-dfs_namespace_version_origin
 type DFS_NAMESPACE_VERSION_ORIGIN int32
 
@@ -12,6 +16,21 @@ const (
 	DFS_NAMESPACE_VERSION_ORIGIN_SERVER   DFS_NAMESPACE_VERSION_ORIGIN = 1
 	DFS_NAMESPACE_VERSION_ORIGIN_DOMAIN   DFS_NAMESPACE_VERSION_ORIGIN = 2
 )
+
+// String returns the DFS_NAMESPACE_VERSION_ORIGIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DFS_NAMESPACE_VERSION_ORIGIN) String() string {
+	switch e {
+	case DFS_NAMESPACE_VERSION_ORIGIN_COMBINED:
+		return "DFS_NAMESPACE_VERSION_ORIGIN_COMBINED"
+	case DFS_NAMESPACE_VERSION_ORIGIN_SERVER:
+		return "DFS_NAMESPACE_VERSION_ORIGIN_SERVER"
+	case DFS_NAMESPACE_VERSION_ORIGIN_DOMAIN:
+		return "DFS_NAMESPACE_VERSION_ORIGIN_DOMAIN"
+	default:
+		return fmt.Sprintf("DFS_NAMESPACE_VERSION_ORIGIN(%d)", int32(e))
+	}
+}
 
 // DFS_TARGET_PRIORITY_CLASS: https://learn.microsoft.com/windows/win32/api/lmdfs/ne-lmdfs-dfs_target_priority_class~r1
 type DFS_TARGET_PRIORITY_CLASS int32
@@ -24,3 +43,24 @@ const (
 	DfsSiteCostLowPriorityClass    DFS_TARGET_PRIORITY_CLASS = 3
 	DfsGlobalLowPriorityClass      DFS_TARGET_PRIORITY_CLASS = 4
 )
+
+// String returns the DFS_TARGET_PRIORITY_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DFS_TARGET_PRIORITY_CLASS) String() string {
+	switch e {
+	case DfsInvalidPriorityClass:
+		return "DfsInvalidPriorityClass"
+	case DfsSiteCostNormalPriorityClass:
+		return "DfsSiteCostNormalPriorityClass"
+	case DfsGlobalHighPriorityClass:
+		return "DfsGlobalHighPriorityClass"
+	case DfsSiteCostHighPriorityClass:
+		return "DfsSiteCostHighPriorityClass"
+	case DfsSiteCostLowPriorityClass:
+		return "DfsSiteCostLowPriorityClass"
+	case DfsGlobalLowPriorityClass:
+		return "DfsGlobalLowPriorityClass"
+	default:
+		return fmt.Sprintf("DFS_TARGET_PRIORITY_CLASS(%d)", int32(e))
+	}
+}

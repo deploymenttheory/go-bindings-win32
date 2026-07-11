@@ -4,6 +4,10 @@
 
 package compositionswapchain
 
+import (
+	"fmt"
+)
+
 // CompositionFrameInstanceKind: https://learn.microsoft.com/windows/win32/api/presentation/ne-presentation-compositionframeinstancekind
 type CompositionFrameInstanceKind int32
 
@@ -12,6 +16,21 @@ const (
 	CompositionFrameInstanceKind_ScanoutOnScreen        CompositionFrameInstanceKind = 1
 	CompositionFrameInstanceKind_ComposedToIntermediate CompositionFrameInstanceKind = 2
 )
+
+// String returns the CompositionFrameInstanceKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CompositionFrameInstanceKind) String() string {
+	switch e {
+	case CompositionFrameInstanceKind_ComposedOnScreen:
+		return "CompositionFrameInstanceKind_ComposedOnScreen"
+	case CompositionFrameInstanceKind_ScanoutOnScreen:
+		return "CompositionFrameInstanceKind_ScanoutOnScreen"
+	case CompositionFrameInstanceKind_ComposedToIntermediate:
+		return "CompositionFrameInstanceKind_ComposedToIntermediate"
+	default:
+		return fmt.Sprintf("CompositionFrameInstanceKind(%d)", int32(e))
+	}
+}
 
 // PresentStatisticsKind: https://learn.microsoft.com/windows/win32/api/presentationtypes/ne-presentationtypes-presentstatisticskind
 type PresentStatisticsKind int32
@@ -22,6 +41,21 @@ const (
 	PresentStatisticsKind_IndependentFlipFrame PresentStatisticsKind = 3
 )
 
+// String returns the PresentStatisticsKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PresentStatisticsKind) String() string {
+	switch e {
+	case PresentStatisticsKind_PresentStatus:
+		return "PresentStatisticsKind_PresentStatus"
+	case PresentStatisticsKind_CompositionFrame:
+		return "PresentStatisticsKind_CompositionFrame"
+	case PresentStatisticsKind_IndependentFlipFrame:
+		return "PresentStatisticsKind_IndependentFlipFrame"
+	default:
+		return fmt.Sprintf("PresentStatisticsKind(%d)", int32(e))
+	}
+}
+
 // PresentStatus: https://learn.microsoft.com/windows/win32/api/presentation/ne-presentation-presentstatus
 type PresentStatus int32
 
@@ -30,3 +64,18 @@ const (
 	PresentStatus_Skipped  PresentStatus = 1
 	PresentStatus_Canceled PresentStatus = 2
 )
+
+// String returns the PresentStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PresentStatus) String() string {
+	switch e {
+	case PresentStatus_Queued:
+		return "PresentStatus_Queued"
+	case PresentStatus_Skipped:
+		return "PresentStatus_Skipped"
+	case PresentStatus_Canceled:
+		return "PresentStatus_Canceled"
+	default:
+		return fmt.Sprintf("PresentStatus(%d)", int32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package imaging
 
+import (
+	"fmt"
+)
+
 // WIC8BIMIptcDigestProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wic8bimiptcdigestproperties
 type WIC8BIMIptcDigestProperties int32
 
@@ -12,6 +16,19 @@ const (
 	WIC8BIMIptcDigestIptcDigest WIC8BIMIptcDigestProperties = 2
 )
 
+// String returns the WIC8BIMIptcDigestProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WIC8BIMIptcDigestProperties) String() string {
+	switch e {
+	case WIC8BIMIptcDigestPString:
+		return "WIC8BIMIptcDigestPString"
+	case WIC8BIMIptcDigestIptcDigest:
+		return "WIC8BIMIptcDigestIptcDigest"
+	default:
+		return fmt.Sprintf("WIC8BIMIptcDigestProperties(%d)", int32(e))
+	}
+}
+
 // WIC8BIMIptcProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wic8bimiptcproperties
 type WIC8BIMIptcProperties int32
 
@@ -19,6 +36,19 @@ const (
 	WIC8BIMIptcPString      WIC8BIMIptcProperties = 0
 	WIC8BIMIptcEmbeddedIPTC WIC8BIMIptcProperties = 1
 )
+
+// String returns the WIC8BIMIptcProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WIC8BIMIptcProperties) String() string {
+	switch e {
+	case WIC8BIMIptcPString:
+		return "WIC8BIMIptcPString"
+	case WIC8BIMIptcEmbeddedIPTC:
+		return "WIC8BIMIptcEmbeddedIPTC"
+	default:
+		return fmt.Sprintf("WIC8BIMIptcProperties(%d)", int32(e))
+	}
+}
 
 // WIC8BIMResolutionInfoProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wic8bimresolutioninfoproperties
 type WIC8BIMResolutionInfoProperties int32
@@ -33,6 +63,29 @@ const (
 	WIC8BIMResolutionInfoHeightUnit      WIC8BIMResolutionInfoProperties = 7
 )
 
+// String returns the WIC8BIMResolutionInfoProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WIC8BIMResolutionInfoProperties) String() string {
+	switch e {
+	case WIC8BIMResolutionInfoPString:
+		return "WIC8BIMResolutionInfoPString"
+	case WIC8BIMResolutionInfoHResolution:
+		return "WIC8BIMResolutionInfoHResolution"
+	case WIC8BIMResolutionInfoHResolutionUnit:
+		return "WIC8BIMResolutionInfoHResolutionUnit"
+	case WIC8BIMResolutionInfoWidthUnit:
+		return "WIC8BIMResolutionInfoWidthUnit"
+	case WIC8BIMResolutionInfoVResolution:
+		return "WIC8BIMResolutionInfoVResolution"
+	case WIC8BIMResolutionInfoVResolutionUnit:
+		return "WIC8BIMResolutionInfoVResolutionUnit"
+	case WIC8BIMResolutionInfoHeightUnit:
+		return "WIC8BIMResolutionInfoHeightUnit"
+	default:
+		return fmt.Sprintf("WIC8BIMResolutionInfoProperties(%d)", int32(e))
+	}
+}
+
 // WICBitmapAlphaChannelOption: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicbitmapalphachanneloption
 type WICBitmapAlphaChannelOption int32
 
@@ -41,6 +94,21 @@ const (
 	WICBitmapUsePremultipliedAlpha WICBitmapAlphaChannelOption = 1
 	WICBitmapIgnoreAlpha           WICBitmapAlphaChannelOption = 2
 )
+
+// String returns the WICBitmapAlphaChannelOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICBitmapAlphaChannelOption) String() string {
+	switch e {
+	case WICBitmapUseAlpha:
+		return "WICBitmapUseAlpha"
+	case WICBitmapUsePremultipliedAlpha:
+		return "WICBitmapUsePremultipliedAlpha"
+	case WICBitmapIgnoreAlpha:
+		return "WICBitmapIgnoreAlpha"
+	default:
+		return fmt.Sprintf("WICBitmapAlphaChannelOption(%d)", int32(e))
+	}
+}
 
 type WICBitmapChainType int32
 
@@ -54,6 +122,29 @@ const (
 	WICBitmapChainType_GainMap   WICBitmapChainType = 7
 )
 
+// String returns the WICBitmapChainType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICBitmapChainType) String() string {
+	switch e {
+	case WICBitmapChainType_Alternate:
+		return "WICBitmapChainType_Alternate"
+	case WICBitmapChainType_Layer:
+		return "WICBitmapChainType_Layer"
+	case WICBitmapChainType_Preview:
+		return "WICBitmapChainType_Preview"
+	case WICBitmapChainType_Thumbnail:
+		return "WICBitmapChainType_Thumbnail"
+	case WICBitmapChainType_AlphaMap:
+		return "WICBitmapChainType_AlphaMap"
+	case WICBitmapChainType_DepthMap:
+		return "WICBitmapChainType_DepthMap"
+	case WICBitmapChainType_GainMap:
+		return "WICBitmapChainType_GainMap"
+	default:
+		return fmt.Sprintf("WICBitmapChainType(%d)", int32(e))
+	}
+}
+
 // WICBitmapCreateCacheOption: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicbitmapcreatecacheoption
 type WICBitmapCreateCacheOption int32
 
@@ -62,6 +153,21 @@ const (
 	WICBitmapCacheOnDemand WICBitmapCreateCacheOption = 1
 	WICBitmapCacheOnLoad   WICBitmapCreateCacheOption = 2
 )
+
+// String returns the WICBitmapCreateCacheOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICBitmapCreateCacheOption) String() string {
+	switch e {
+	case WICBitmapNoCache:
+		return "WICBitmapNoCache"
+	case WICBitmapCacheOnDemand:
+		return "WICBitmapCacheOnDemand"
+	case WICBitmapCacheOnLoad:
+		return "WICBitmapCacheOnLoad"
+	default:
+		return fmt.Sprintf("WICBitmapCreateCacheOption(%d)", int32(e))
+	}
+}
 
 // WICBitmapDecoderCapabilities: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicbitmapdecodercapabilities
 type WICBitmapDecoderCapabilities int32
@@ -73,6 +179,25 @@ const (
 	WICBitmapDecoderCapabilityCanEnumerateMetadata WICBitmapDecoderCapabilities = 8
 	WICBitmapDecoderCapabilityCanDecodeThumbnail   WICBitmapDecoderCapabilities = 16
 )
+
+// String returns the WICBitmapDecoderCapabilities constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICBitmapDecoderCapabilities) String() string {
+	switch e {
+	case WICBitmapDecoderCapabilitySameEncoder:
+		return "WICBitmapDecoderCapabilitySameEncoder"
+	case WICBitmapDecoderCapabilityCanDecodeAllImages:
+		return "WICBitmapDecoderCapabilityCanDecodeAllImages"
+	case WICBitmapDecoderCapabilityCanDecodeSomeImages:
+		return "WICBitmapDecoderCapabilityCanDecodeSomeImages"
+	case WICBitmapDecoderCapabilityCanEnumerateMetadata:
+		return "WICBitmapDecoderCapabilityCanEnumerateMetadata"
+	case WICBitmapDecoderCapabilityCanDecodeThumbnail:
+		return "WICBitmapDecoderCapabilityCanDecodeThumbnail"
+	default:
+		return fmt.Sprintf("WICBitmapDecoderCapabilities(%d)", int32(e))
+	}
+}
 
 // WICBitmapDitherType: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicbitmapdithertype
 type WICBitmapDitherType int32
@@ -90,6 +215,33 @@ const (
 	WICBitmapDitherTypeErrorDiffusion WICBitmapDitherType = 8
 )
 
+// String returns the WICBitmapDitherType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICBitmapDitherType) String() string {
+	switch e {
+	case WICBitmapDitherTypeNone:
+		return "WICBitmapDitherTypeNone"
+	case WICBitmapDitherTypeOrdered4x4:
+		return "WICBitmapDitherTypeOrdered4x4"
+	case WICBitmapDitherTypeOrdered8x8:
+		return "WICBitmapDitherTypeOrdered8x8"
+	case WICBitmapDitherTypeOrdered16x16:
+		return "WICBitmapDitherTypeOrdered16x16"
+	case WICBitmapDitherTypeSpiral4x4:
+		return "WICBitmapDitherTypeSpiral4x4"
+	case WICBitmapDitherTypeSpiral8x8:
+		return "WICBitmapDitherTypeSpiral8x8"
+	case WICBitmapDitherTypeDualSpiral4x4:
+		return "WICBitmapDitherTypeDualSpiral4x4"
+	case WICBitmapDitherTypeDualSpiral8x8:
+		return "WICBitmapDitherTypeDualSpiral8x8"
+	case WICBitmapDitherTypeErrorDiffusion:
+		return "WICBitmapDitherTypeErrorDiffusion"
+	default:
+		return fmt.Sprintf("WICBitmapDitherType(%d)", int32(e))
+	}
+}
+
 // WICBitmapEncoderCacheOption: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicbitmapencodercacheoption
 type WICBitmapEncoderCacheOption int32
 
@@ -98,6 +250,21 @@ const (
 	WICBitmapEncoderCacheTempFile WICBitmapEncoderCacheOption = 1
 	WICBitmapEncoderNoCache       WICBitmapEncoderCacheOption = 2
 )
+
+// String returns the WICBitmapEncoderCacheOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICBitmapEncoderCacheOption) String() string {
+	switch e {
+	case WICBitmapEncoderCacheInMemory:
+		return "WICBitmapEncoderCacheInMemory"
+	case WICBitmapEncoderCacheTempFile:
+		return "WICBitmapEncoderCacheTempFile"
+	case WICBitmapEncoderNoCache:
+		return "WICBitmapEncoderNoCache"
+	default:
+		return fmt.Sprintf("WICBitmapEncoderCacheOption(%d)", int32(e))
+	}
+}
 
 // WICBitmapInterpolationMode: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicbitmapinterpolationmode
 type WICBitmapInterpolationMode int32
@@ -110,6 +277,25 @@ const (
 	WICBitmapInterpolationModeHighQualityCubic WICBitmapInterpolationMode = 4
 )
 
+// String returns the WICBitmapInterpolationMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICBitmapInterpolationMode) String() string {
+	switch e {
+	case WICBitmapInterpolationModeNearestNeighbor:
+		return "WICBitmapInterpolationModeNearestNeighbor"
+	case WICBitmapInterpolationModeLinear:
+		return "WICBitmapInterpolationModeLinear"
+	case WICBitmapInterpolationModeCubic:
+		return "WICBitmapInterpolationModeCubic"
+	case WICBitmapInterpolationModeFant:
+		return "WICBitmapInterpolationModeFant"
+	case WICBitmapInterpolationModeHighQualityCubic:
+		return "WICBitmapInterpolationModeHighQualityCubic"
+	default:
+		return fmt.Sprintf("WICBitmapInterpolationMode(%d)", int32(e))
+	}
+}
+
 // WICBitmapLockFlags: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicbitmaplockflags
 type WICBitmapLockFlags int32
 
@@ -117,6 +303,19 @@ const (
 	WICBitmapLockRead  WICBitmapLockFlags = 1
 	WICBitmapLockWrite WICBitmapLockFlags = 2
 )
+
+// String returns the WICBitmapLockFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICBitmapLockFlags) String() string {
+	switch e {
+	case WICBitmapLockRead:
+		return "WICBitmapLockRead"
+	case WICBitmapLockWrite:
+		return "WICBitmapLockWrite"
+	default:
+		return fmt.Sprintf("WICBitmapLockFlags(%d)", int32(e))
+	}
+}
 
 // WICBitmapPaletteType: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicbitmappalettetype
 type WICBitmapPaletteType int32
@@ -138,6 +337,41 @@ const (
 	WICBitmapPaletteTypeFixedGray256     WICBitmapPaletteType = 12
 )
 
+// String returns the WICBitmapPaletteType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICBitmapPaletteType) String() string {
+	switch e {
+	case WICBitmapPaletteTypeCustom:
+		return "WICBitmapPaletteTypeCustom"
+	case WICBitmapPaletteTypeMedianCut:
+		return "WICBitmapPaletteTypeMedianCut"
+	case WICBitmapPaletteTypeFixedBW:
+		return "WICBitmapPaletteTypeFixedBW"
+	case WICBitmapPaletteTypeFixedHalftone8:
+		return "WICBitmapPaletteTypeFixedHalftone8"
+	case WICBitmapPaletteTypeFixedHalftone27:
+		return "WICBitmapPaletteTypeFixedHalftone27"
+	case WICBitmapPaletteTypeFixedHalftone64:
+		return "WICBitmapPaletteTypeFixedHalftone64"
+	case WICBitmapPaletteTypeFixedHalftone125:
+		return "WICBitmapPaletteTypeFixedHalftone125"
+	case WICBitmapPaletteTypeFixedHalftone216:
+		return "WICBitmapPaletteTypeFixedHalftone216"
+	case WICBitmapPaletteTypeFixedHalftone252:
+		return "WICBitmapPaletteTypeFixedHalftone252"
+	case WICBitmapPaletteTypeFixedHalftone256:
+		return "WICBitmapPaletteTypeFixedHalftone256"
+	case WICBitmapPaletteTypeFixedGray4:
+		return "WICBitmapPaletteTypeFixedGray4"
+	case WICBitmapPaletteTypeFixedGray16:
+		return "WICBitmapPaletteTypeFixedGray16"
+	case WICBitmapPaletteTypeFixedGray256:
+		return "WICBitmapPaletteTypeFixedGray256"
+	default:
+		return fmt.Sprintf("WICBitmapPaletteType(%d)", int32(e))
+	}
+}
+
 type WICBitmapToneMappingMode int32
 
 const (
@@ -146,6 +380,23 @@ const (
 	WICBitmapToneMappingMode_D2D     WICBitmapToneMappingMode = 2
 	WICBitmapToneMappingMode_GainMap WICBitmapToneMappingMode = 3
 )
+
+// String returns the WICBitmapToneMappingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICBitmapToneMappingMode) String() string {
+	switch e {
+	case WICBitmapToneMappingMode_None:
+		return "WICBitmapToneMappingMode_None"
+	case WICBitmapToneMappingMode_Default:
+		return "WICBitmapToneMappingMode_Default"
+	case WICBitmapToneMappingMode_D2D:
+		return "WICBitmapToneMappingMode_D2D"
+	case WICBitmapToneMappingMode_GainMap:
+		return "WICBitmapToneMappingMode_GainMap"
+	default:
+		return fmt.Sprintf("WICBitmapToneMappingMode(%d)", int32(e))
+	}
+}
 
 // WICBitmapTransformOptions: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicbitmaptransformoptions
 type WICBitmapTransformOptions int32
@@ -159,6 +410,27 @@ const (
 	WICBitmapTransformFlipVertical   WICBitmapTransformOptions = 16
 )
 
+// String returns the WICBitmapTransformOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICBitmapTransformOptions) String() string {
+	switch e {
+	case WICBitmapTransformRotate0:
+		return "WICBitmapTransformRotate0"
+	case WICBitmapTransformRotate90:
+		return "WICBitmapTransformRotate90"
+	case WICBitmapTransformRotate180:
+		return "WICBitmapTransformRotate180"
+	case WICBitmapTransformRotate270:
+		return "WICBitmapTransformRotate270"
+	case WICBitmapTransformFlipHorizontal:
+		return "WICBitmapTransformFlipHorizontal"
+	case WICBitmapTransformFlipVertical:
+		return "WICBitmapTransformFlipVertical"
+	default:
+		return fmt.Sprintf("WICBitmapTransformOptions(%d)", int32(e))
+	}
+}
+
 // WICColorContextType: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wiccolorcontexttype
 type WICColorContextType int32
 
@@ -167,6 +439,21 @@ const (
 	WICColorContextProfile        WICColorContextType = 1
 	WICColorContextExifColorSpace WICColorContextType = 2
 )
+
+// String returns the WICColorContextType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICColorContextType) String() string {
+	switch e {
+	case WICColorContextUninitialized:
+		return "WICColorContextUninitialized"
+	case WICColorContextProfile:
+		return "WICColorContextProfile"
+	case WICColorContextExifColorSpace:
+		return "WICColorContextExifColorSpace"
+	default:
+		return fmt.Sprintf("WICColorContextType(%d)", int32(e))
+	}
+}
 
 // WICComponentEnumerateOptions: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wiccomponentenumerateoptions
 type WICComponentEnumerateOptions int32
@@ -179,6 +466,25 @@ const (
 	WICComponentEnumerateBuiltInOnly WICComponentEnumerateOptions = 536870912
 )
 
+// String returns the WICComponentEnumerateOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICComponentEnumerateOptions) String() string {
+	switch e {
+	case WICComponentEnumerateDefault:
+		return "WICComponentEnumerateDefault"
+	case WICComponentEnumerateRefresh:
+		return "WICComponentEnumerateRefresh"
+	case WICComponentEnumerateDisabled:
+		return "WICComponentEnumerateDisabled"
+	case WICComponentEnumerateUnsigned:
+		return "WICComponentEnumerateUnsigned"
+	case WICComponentEnumerateBuiltInOnly:
+		return "WICComponentEnumerateBuiltInOnly"
+	default:
+		return fmt.Sprintf("WICComponentEnumerateOptions(%d)", int32(e))
+	}
+}
+
 // WICComponentSigning: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wiccomponentsigning
 type WICComponentSigning int32
 
@@ -188,6 +494,23 @@ const (
 	WICComponentSafe     WICComponentSigning = 4
 	WICComponentDisabled WICComponentSigning = -2147483648
 )
+
+// String returns the WICComponentSigning constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICComponentSigning) String() string {
+	switch e {
+	case WICComponentSigned:
+		return "WICComponentSigned"
+	case WICComponentUnsigned:
+		return "WICComponentUnsigned"
+	case WICComponentSafe:
+		return "WICComponentSafe"
+	case WICComponentDisabled:
+		return "WICComponentDisabled"
+	default:
+		return fmt.Sprintf("WICComponentSigning(%d)", int32(e))
+	}
+}
 
 // WICComponentType: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wiccomponenttype
 type WICComponentType int32
@@ -202,6 +525,29 @@ const (
 	WICAllComponents        WICComponentType = 63
 )
 
+// String returns the WICComponentType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICComponentType) String() string {
+	switch e {
+	case WICDecoder:
+		return "WICDecoder"
+	case WICEncoder:
+		return "WICEncoder"
+	case WICPixelFormatConverter:
+		return "WICPixelFormatConverter"
+	case WICMetadataReader:
+		return "WICMetadataReader"
+	case WICMetadataWriter:
+		return "WICMetadataWriter"
+	case WICPixelFormat:
+		return "WICPixelFormat"
+	case WICAllComponents:
+		return "WICAllComponents"
+	default:
+		return fmt.Sprintf("WICComponentType(%d)", int32(e))
+	}
+}
+
 // WICDdsAlphaMode: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicddsalphamode
 type WICDdsAlphaMode int32
 
@@ -213,6 +559,25 @@ const (
 	WICDdsAlphaModeCustom        WICDdsAlphaMode = 4
 )
 
+// String returns the WICDdsAlphaMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICDdsAlphaMode) String() string {
+	switch e {
+	case WICDdsAlphaModeUnknown:
+		return "WICDdsAlphaModeUnknown"
+	case WICDdsAlphaModeStraight:
+		return "WICDdsAlphaModeStraight"
+	case WICDdsAlphaModePremultiplied:
+		return "WICDdsAlphaModePremultiplied"
+	case WICDdsAlphaModeOpaque:
+		return "WICDdsAlphaModeOpaque"
+	case WICDdsAlphaModeCustom:
+		return "WICDdsAlphaModeCustom"
+	default:
+		return fmt.Sprintf("WICDdsAlphaMode(%d)", int32(e))
+	}
+}
+
 // WICDdsDimension: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicddsdimension
 type WICDdsDimension int32
 
@@ -223,6 +588,23 @@ const (
 	WICDdsTextureCube WICDdsDimension = 3
 )
 
+// String returns the WICDdsDimension constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICDdsDimension) String() string {
+	switch e {
+	case WICDdsTexture1D:
+		return "WICDdsTexture1D"
+	case WICDdsTexture2D:
+		return "WICDdsTexture2D"
+	case WICDdsTexture3D:
+		return "WICDdsTexture3D"
+	case WICDdsTextureCube:
+		return "WICDdsTextureCube"
+	default:
+		return fmt.Sprintf("WICDdsDimension(%d)", int32(e))
+	}
+}
+
 // WICDecodeOptions: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicdecodeoptions
 type WICDecodeOptions int32
 
@@ -231,11 +613,35 @@ const (
 	WICDecodeMetadataCacheOnLoad   WICDecodeOptions = 1
 )
 
+// String returns the WICDecodeOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICDecodeOptions) String() string {
+	switch e {
+	case WICDecodeMetadataCacheOnDemand:
+		return "WICDecodeMetadataCacheOnDemand"
+	case WICDecodeMetadataCacheOnLoad:
+		return "WICDecodeMetadataCacheOnLoad"
+	default:
+		return fmt.Sprintf("WICDecodeOptions(%d)", int32(e))
+	}
+}
+
 type WICGainMapProperties int32
 
 const (
 	WICGainMapMetadata WICGainMapProperties = 1
 )
+
+// String returns the WICGainMapProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICGainMapProperties) String() string {
+	switch e {
+	case WICGainMapMetadata:
+		return "WICGainMapMetadata"
+	default:
+		return fmt.Sprintf("WICGainMapProperties(%d)", int32(e))
+	}
+}
 
 // WICGifApplicationExtensionProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicgifapplicationextensionproperties
 type WICGifApplicationExtensionProperties int32
@@ -245,12 +651,36 @@ const (
 	WICGifApplicationExtensionData        WICGifApplicationExtensionProperties = 2
 )
 
+// String returns the WICGifApplicationExtensionProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICGifApplicationExtensionProperties) String() string {
+	switch e {
+	case WICGifApplicationExtensionApplication:
+		return "WICGifApplicationExtensionApplication"
+	case WICGifApplicationExtensionData:
+		return "WICGifApplicationExtensionData"
+	default:
+		return fmt.Sprintf("WICGifApplicationExtensionProperties(%d)", int32(e))
+	}
+}
+
 // WICGifCommentExtensionProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicgifcommentextensionproperties
 type WICGifCommentExtensionProperties int32
 
 const (
 	WICGifCommentExtensionText WICGifCommentExtensionProperties = 1
 )
+
+// String returns the WICGifCommentExtensionProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICGifCommentExtensionProperties) String() string {
+	switch e {
+	case WICGifCommentExtensionText:
+		return "WICGifCommentExtensionText"
+	default:
+		return fmt.Sprintf("WICGifCommentExtensionProperties(%d)", int32(e))
+	}
+}
 
 // WICGifGraphicControlExtensionProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicgifgraphiccontrolextensionproperties
 type WICGifGraphicControlExtensionProperties int32
@@ -262,6 +692,25 @@ const (
 	WICGifGraphicControlExtensionDelay                 WICGifGraphicControlExtensionProperties = 4
 	WICGifGraphicControlExtensionTransparentColorIndex WICGifGraphicControlExtensionProperties = 5
 )
+
+// String returns the WICGifGraphicControlExtensionProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICGifGraphicControlExtensionProperties) String() string {
+	switch e {
+	case WICGifGraphicControlExtensionDisposal:
+		return "WICGifGraphicControlExtensionDisposal"
+	case WICGifGraphicControlExtensionUserInputFlag:
+		return "WICGifGraphicControlExtensionUserInputFlag"
+	case WICGifGraphicControlExtensionTransparencyFlag:
+		return "WICGifGraphicControlExtensionTransparencyFlag"
+	case WICGifGraphicControlExtensionDelay:
+		return "WICGifGraphicControlExtensionDelay"
+	case WICGifGraphicControlExtensionTransparentColorIndex:
+		return "WICGifGraphicControlExtensionTransparentColorIndex"
+	default:
+		return fmt.Sprintf("WICGifGraphicControlExtensionProperties(%d)", int32(e))
+	}
+}
 
 // WICGifImageDescriptorProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicgifimagedescriptorproperties
 type WICGifImageDescriptorProperties int32
@@ -276,6 +725,31 @@ const (
 	WICGifImageDescriptorSortFlag            WICGifImageDescriptorProperties = 7
 	WICGifImageDescriptorLocalColorTableSize WICGifImageDescriptorProperties = 8
 )
+
+// String returns the WICGifImageDescriptorProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICGifImageDescriptorProperties) String() string {
+	switch e {
+	case WICGifImageDescriptorLeft:
+		return "WICGifImageDescriptorLeft"
+	case WICGifImageDescriptorTop:
+		return "WICGifImageDescriptorTop"
+	case WICGifImageDescriptorWidth:
+		return "WICGifImageDescriptorWidth"
+	case WICGifImageDescriptorHeight:
+		return "WICGifImageDescriptorHeight"
+	case WICGifImageDescriptorLocalColorTableFlag:
+		return "WICGifImageDescriptorLocalColorTableFlag"
+	case WICGifImageDescriptorInterlaceFlag:
+		return "WICGifImageDescriptorInterlaceFlag"
+	case WICGifImageDescriptorSortFlag:
+		return "WICGifImageDescriptorSortFlag"
+	case WICGifImageDescriptorLocalColorTableSize:
+		return "WICGifImageDescriptorLocalColorTableSize"
+	default:
+		return fmt.Sprintf("WICGifImageDescriptorProperties(%d)", int32(e))
+	}
+}
 
 // WICGifLogicalScreenDescriptorProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicgiflogicalscreendescriptorproperties
 type WICGifLogicalScreenDescriptorProperties int32
@@ -292,6 +766,33 @@ const (
 	WICGifLogicalScreenDescriptorPixelAspectRatio     WICGifLogicalScreenDescriptorProperties = 9
 )
 
+// String returns the WICGifLogicalScreenDescriptorProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICGifLogicalScreenDescriptorProperties) String() string {
+	switch e {
+	case WICGifLogicalScreenSignature:
+		return "WICGifLogicalScreenSignature"
+	case WICGifLogicalScreenDescriptorWidth:
+		return "WICGifLogicalScreenDescriptorWidth"
+	case WICGifLogicalScreenDescriptorHeight:
+		return "WICGifLogicalScreenDescriptorHeight"
+	case WICGifLogicalScreenDescriptorGlobalColorTableFlag:
+		return "WICGifLogicalScreenDescriptorGlobalColorTableFlag"
+	case WICGifLogicalScreenDescriptorColorResolution:
+		return "WICGifLogicalScreenDescriptorColorResolution"
+	case WICGifLogicalScreenDescriptorSortFlag:
+		return "WICGifLogicalScreenDescriptorSortFlag"
+	case WICGifLogicalScreenDescriptorGlobalColorTableSize:
+		return "WICGifLogicalScreenDescriptorGlobalColorTableSize"
+	case WICGifLogicalScreenDescriptorBackgroundColorIndex:
+		return "WICGifLogicalScreenDescriptorBackgroundColorIndex"
+	case WICGifLogicalScreenDescriptorPixelAspectRatio:
+		return "WICGifLogicalScreenDescriptorPixelAspectRatio"
+	default:
+		return fmt.Sprintf("WICGifLogicalScreenDescriptorProperties(%d)", int32(e))
+	}
+}
+
 type WICHeifCompressionOption int32
 
 const (
@@ -304,6 +805,29 @@ const (
 	WICHeifCompressionDeflate  WICHeifCompressionOption = 6
 )
 
+// String returns the WICHeifCompressionOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICHeifCompressionOption) String() string {
+	switch e {
+	case WICHeifCompressionDontCare:
+		return "WICHeifCompressionDontCare"
+	case WICHeifCompressionNone:
+		return "WICHeifCompressionNone"
+	case WICHeifCompressionHEVC:
+		return "WICHeifCompressionHEVC"
+	case WICHeifCompressionAV1:
+		return "WICHeifCompressionAV1"
+	case WICHeifCompressionJpegXL:
+		return "WICHeifCompressionJpegXL"
+	case WICHeifCompressionBrotli:
+		return "WICHeifCompressionBrotli"
+	case WICHeifCompressionDeflate:
+		return "WICHeifCompressionDeflate"
+	default:
+		return fmt.Sprintf("WICHeifCompressionOption(%d)", int32(e))
+	}
+}
+
 // WICHeifHdrProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicheifhdrproperties
 type WICHeifHdrProperties int32
 
@@ -315,6 +839,25 @@ const (
 	WICHeifHdrCustomVideoPrimaries                  WICHeifHdrProperties = 5
 )
 
+// String returns the WICHeifHdrProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICHeifHdrProperties) String() string {
+	switch e {
+	case WICHeifHdrMaximumLuminanceLevel:
+		return "WICHeifHdrMaximumLuminanceLevel"
+	case WICHeifHdrMaximumFrameAverageLuminanceLevel:
+		return "WICHeifHdrMaximumFrameAverageLuminanceLevel"
+	case WICHeifHdrMinimumMasteringDisplayLuminanceLevel:
+		return "WICHeifHdrMinimumMasteringDisplayLuminanceLevel"
+	case WICHeifHdrMaximumMasteringDisplayLuminanceLevel:
+		return "WICHeifHdrMaximumMasteringDisplayLuminanceLevel"
+	case WICHeifHdrCustomVideoPrimaries:
+		return "WICHeifHdrCustomVideoPrimaries"
+	default:
+		return fmt.Sprintf("WICHeifHdrProperties(%d)", int32(e))
+	}
+}
+
 // WICHeifProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicheifproperties
 type WICHeifProperties int32
 
@@ -324,6 +867,21 @@ const (
 	WICHeifLayeredImageLayerPositions WICHeifProperties = 3
 )
 
+// String returns the WICHeifProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICHeifProperties) String() string {
+	switch e {
+	case WICHeifOrientation:
+		return "WICHeifOrientation"
+	case WICHeifLayeredImageCanvasColor:
+		return "WICHeifLayeredImageCanvasColor"
+	case WICHeifLayeredImageLayerPositions:
+		return "WICHeifLayeredImageLayerPositions"
+	default:
+		return fmt.Sprintf("WICHeifProperties(%d)", int32(e))
+	}
+}
+
 // WICJpegChrominanceProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicjpegchrominanceproperties
 type WICJpegChrominanceProperties int32
 
@@ -331,12 +889,34 @@ const (
 	WICJpegChrominanceTable WICJpegChrominanceProperties = 1
 )
 
+// String returns the WICJpegChrominanceProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICJpegChrominanceProperties) String() string {
+	switch e {
+	case WICJpegChrominanceTable:
+		return "WICJpegChrominanceTable"
+	default:
+		return fmt.Sprintf("WICJpegChrominanceProperties(%d)", int32(e))
+	}
+}
+
 // WICJpegCommentProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicjpegcommentproperties
 type WICJpegCommentProperties int32
 
 const (
 	WICJpegCommentText WICJpegCommentProperties = 1
 )
+
+// String returns the WICJpegCommentProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICJpegCommentProperties) String() string {
+	switch e {
+	case WICJpegCommentText:
+		return "WICJpegCommentText"
+	default:
+		return fmt.Sprintf("WICJpegCommentProperties(%d)", int32(e))
+	}
+}
 
 // WICJpegIndexingOptions: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicjpegindexingoptions
 type WICJpegIndexingOptions int32
@@ -346,12 +926,36 @@ const (
 	WICJpegIndexingOptionsGenerateOnLoad   WICJpegIndexingOptions = 1
 )
 
+// String returns the WICJpegIndexingOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICJpegIndexingOptions) String() string {
+	switch e {
+	case WICJpegIndexingOptionsGenerateOnDemand:
+		return "WICJpegIndexingOptionsGenerateOnDemand"
+	case WICJpegIndexingOptionsGenerateOnLoad:
+		return "WICJpegIndexingOptionsGenerateOnLoad"
+	default:
+		return fmt.Sprintf("WICJpegIndexingOptions(%d)", int32(e))
+	}
+}
+
 // WICJpegLuminanceProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicjpegluminanceproperties
 type WICJpegLuminanceProperties int32
 
 const (
 	WICJpegLuminanceTable WICJpegLuminanceProperties = 1
 )
+
+// String returns the WICJpegLuminanceProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICJpegLuminanceProperties) String() string {
+	switch e {
+	case WICJpegLuminanceTable:
+		return "WICJpegLuminanceTable"
+	default:
+		return fmt.Sprintf("WICJpegLuminanceProperties(%d)", int32(e))
+	}
+}
 
 // WICJpegScanType: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicjpegscantype
 type WICJpegScanType int32
@@ -362,6 +966,21 @@ const (
 	WICJpegScanTypeProgressive      WICJpegScanType = 2
 )
 
+// String returns the WICJpegScanType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICJpegScanType) String() string {
+	switch e {
+	case WICJpegScanTypeInterleaved:
+		return "WICJpegScanTypeInterleaved"
+	case WICJpegScanTypePlanarComponents:
+		return "WICJpegScanTypePlanarComponents"
+	case WICJpegScanTypeProgressive:
+		return "WICJpegScanTypeProgressive"
+	default:
+		return fmt.Sprintf("WICJpegScanType(%d)", int32(e))
+	}
+}
+
 // WICJpegTransferMatrix: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicjpegtransfermatrix
 type WICJpegTransferMatrix int32
 
@@ -370,12 +989,38 @@ const (
 	WICJpegTransferMatrixBT601    WICJpegTransferMatrix = 1
 )
 
+// String returns the WICJpegTransferMatrix constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICJpegTransferMatrix) String() string {
+	switch e {
+	case WICJpegTransferMatrixIdentity:
+		return "WICJpegTransferMatrixIdentity"
+	case WICJpegTransferMatrixBT601:
+		return "WICJpegTransferMatrixBT601"
+	default:
+		return fmt.Sprintf("WICJpegTransferMatrix(%d)", int32(e))
+	}
+}
+
 type WICJpegXLAnimFrameProperties int32
 
 const (
 	WICJpegXLAnimFrameDurationInTicks WICJpegXLAnimFrameProperties = 1
 	WICJpegXLAnimFrameName            WICJpegXLAnimFrameProperties = 2
 )
+
+// String returns the WICJpegXLAnimFrameProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICJpegXLAnimFrameProperties) String() string {
+	switch e {
+	case WICJpegXLAnimFrameDurationInTicks:
+		return "WICJpegXLAnimFrameDurationInTicks"
+	case WICJpegXLAnimFrameName:
+		return "WICJpegXLAnimFrameName"
+	default:
+		return fmt.Sprintf("WICJpegXLAnimFrameProperties(%d)", int32(e))
+	}
+}
 
 type WICJpegXLAnimProperties int32
 
@@ -384,6 +1029,21 @@ const (
 	WICJpegXLAnimFrameTicksPerSecondNumerator   WICJpegXLAnimProperties = 2
 	WICJpegXLAnimFrameTicksPerSecondDenominator WICJpegXLAnimProperties = 3
 )
+
+// String returns the WICJpegXLAnimProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICJpegXLAnimProperties) String() string {
+	switch e {
+	case WICJpegXLAnimLoopCount:
+		return "WICJpegXLAnimLoopCount"
+	case WICJpegXLAnimFrameTicksPerSecondNumerator:
+		return "WICJpegXLAnimFrameTicksPerSecondNumerator"
+	case WICJpegXLAnimFrameTicksPerSecondDenominator:
+		return "WICJpegXLAnimFrameTicksPerSecondDenominator"
+	default:
+		return fmt.Sprintf("WICJpegXLAnimProperties(%d)", int32(e))
+	}
+}
 
 // WICJpegYCrCbSubsamplingOption: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicjpegycrcbsubsamplingoption
 type WICJpegYCrCbSubsamplingOption int32
@@ -396,6 +1056,25 @@ const (
 	WICJpegYCrCbSubsampling440     WICJpegYCrCbSubsamplingOption = 4
 )
 
+// String returns the WICJpegYCrCbSubsamplingOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICJpegYCrCbSubsamplingOption) String() string {
+	switch e {
+	case WICJpegYCrCbSubsamplingDefault:
+		return "WICJpegYCrCbSubsamplingDefault"
+	case WICJpegYCrCbSubsampling420:
+		return "WICJpegYCrCbSubsampling420"
+	case WICJpegYCrCbSubsampling422:
+		return "WICJpegYCrCbSubsampling422"
+	case WICJpegYCrCbSubsampling444:
+		return "WICJpegYCrCbSubsampling444"
+	case WICJpegYCrCbSubsampling440:
+		return "WICJpegYCrCbSubsampling440"
+	default:
+		return fmt.Sprintf("WICJpegYCrCbSubsamplingOption(%d)", int32(e))
+	}
+}
+
 // WICMetadataCreationOptions: https://learn.microsoft.com/windows/win32/api/wincodecsdk/ne-wincodecsdk-wicmetadatacreationoptions
 type WICMetadataCreationOptions int32
 
@@ -405,6 +1084,21 @@ const (
 	WICMetadataCreationFailUnknown  WICMetadataCreationOptions = 65536
 	WICMetadataCreationMask         WICMetadataCreationOptions = -65536
 )
+
+// String returns the WICMetadataCreationOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICMetadataCreationOptions) String() string {
+	switch e {
+	case WICMetadataCreationDefault:
+		return "WICMetadataCreationDefault"
+	case WICMetadataCreationFailUnknown:
+		return "WICMetadataCreationFailUnknown"
+	case WICMetadataCreationMask:
+		return "WICMetadataCreationMask"
+	default:
+		return fmt.Sprintf("WICMetadataCreationOptions(%d)", int32(e))
+	}
+}
 
 // WICNamedWhitePoint: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicnamedwhitepoint
 type WICNamedWhitePoint int32
@@ -423,6 +1117,35 @@ const (
 	WICWhitePointAsShot           WICNamedWhitePoint = 1
 )
 
+// String returns the WICNamedWhitePoint constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICNamedWhitePoint) String() string {
+	switch e {
+	case WICWhitePointDefault:
+		return "WICWhitePointDefault"
+	case WICWhitePointDaylight:
+		return "WICWhitePointDaylight"
+	case WICWhitePointCloudy:
+		return "WICWhitePointCloudy"
+	case WICWhitePointShade:
+		return "WICWhitePointShade"
+	case WICWhitePointTungsten:
+		return "WICWhitePointTungsten"
+	case WICWhitePointFluorescent:
+		return "WICWhitePointFluorescent"
+	case WICWhitePointFlash:
+		return "WICWhitePointFlash"
+	case WICWhitePointUnderwater:
+		return "WICWhitePointUnderwater"
+	case WICWhitePointCustom:
+		return "WICWhitePointCustom"
+	case WICWhitePointAutoWhiteBalance:
+		return "WICWhitePointAutoWhiteBalance"
+	default:
+		return fmt.Sprintf("WICNamedWhitePoint(%d)", int32(e))
+	}
+}
+
 // WICPersistOptions: https://learn.microsoft.com/windows/win32/api/wincodecsdk/ne-wincodecsdk-wicpersistoptions
 type WICPersistOptions int32
 
@@ -436,6 +1159,27 @@ const (
 	WICPersistOptionMask          WICPersistOptions = 65535
 )
 
+// String returns the WICPersistOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPersistOptions) String() string {
+	switch e {
+	case WICPersistOptionDefault:
+		return "WICPersistOptionDefault"
+	case WICPersistOptionBigEndian:
+		return "WICPersistOptionBigEndian"
+	case WICPersistOptionStrictFormat:
+		return "WICPersistOptionStrictFormat"
+	case WICPersistOptionNoCacheStream:
+		return "WICPersistOptionNoCacheStream"
+	case WICPersistOptionPreferUTF8:
+		return "WICPersistOptionPreferUTF8"
+	case WICPersistOptionMask:
+		return "WICPersistOptionMask"
+	default:
+		return fmt.Sprintf("WICPersistOptions(%d)", int32(e))
+	}
+}
+
 // WICPixelFormatNumericRepresentation: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicpixelformatnumericrepresentation
 type WICPixelFormatNumericRepresentation int32
 
@@ -448,6 +1192,27 @@ const (
 	WICPixelFormatNumericRepresentationFloat           WICPixelFormatNumericRepresentation = 5
 )
 
+// String returns the WICPixelFormatNumericRepresentation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPixelFormatNumericRepresentation) String() string {
+	switch e {
+	case WICPixelFormatNumericRepresentationUnspecified:
+		return "WICPixelFormatNumericRepresentationUnspecified"
+	case WICPixelFormatNumericRepresentationIndexed:
+		return "WICPixelFormatNumericRepresentationIndexed"
+	case WICPixelFormatNumericRepresentationUnsignedInteger:
+		return "WICPixelFormatNumericRepresentationUnsignedInteger"
+	case WICPixelFormatNumericRepresentationSignedInteger:
+		return "WICPixelFormatNumericRepresentationSignedInteger"
+	case WICPixelFormatNumericRepresentationFixed:
+		return "WICPixelFormatNumericRepresentationFixed"
+	case WICPixelFormatNumericRepresentationFloat:
+		return "WICPixelFormatNumericRepresentationFloat"
+	default:
+		return fmt.Sprintf("WICPixelFormatNumericRepresentation(%d)", int32(e))
+	}
+}
+
 // WICPlanarOptions: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicplanaroptions
 type WICPlanarOptions int32
 
@@ -456,12 +1221,36 @@ const (
 	WICPlanarOptionsPreserveSubsampling WICPlanarOptions = 1
 )
 
+// String returns the WICPlanarOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPlanarOptions) String() string {
+	switch e {
+	case WICPlanarOptionsDefault:
+		return "WICPlanarOptionsDefault"
+	case WICPlanarOptionsPreserveSubsampling:
+		return "WICPlanarOptionsPreserveSubsampling"
+	default:
+		return fmt.Sprintf("WICPlanarOptions(%d)", int32(e))
+	}
+}
+
 // WICPngBkgdProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicpngbkgdproperties
 type WICPngBkgdProperties int32
 
 const (
 	WICPngBkgdBackgroundColor WICPngBkgdProperties = 1
 )
+
+// String returns the WICPngBkgdProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPngBkgdProperties) String() string {
+	switch e {
+	case WICPngBkgdBackgroundColor:
+		return "WICPngBkgdBackgroundColor"
+	default:
+		return fmt.Sprintf("WICPngBkgdProperties(%d)", int32(e))
+	}
+}
 
 // WICPngChrmProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicpngchrmproperties
 type WICPngChrmProperties int32
@@ -477,6 +1266,31 @@ const (
 	WICPngChrmBlueY       WICPngChrmProperties = 8
 )
 
+// String returns the WICPngChrmProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPngChrmProperties) String() string {
+	switch e {
+	case WICPngChrmWhitePointX:
+		return "WICPngChrmWhitePointX"
+	case WICPngChrmWhitePointY:
+		return "WICPngChrmWhitePointY"
+	case WICPngChrmRedX:
+		return "WICPngChrmRedX"
+	case WICPngChrmRedY:
+		return "WICPngChrmRedY"
+	case WICPngChrmGreenX:
+		return "WICPngChrmGreenX"
+	case WICPngChrmGreenY:
+		return "WICPngChrmGreenY"
+	case WICPngChrmBlueX:
+		return "WICPngChrmBlueX"
+	case WICPngChrmBlueY:
+		return "WICPngChrmBlueY"
+	default:
+		return fmt.Sprintf("WICPngChrmProperties(%d)", int32(e))
+	}
+}
+
 // WICPngFilterOption: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicpngfilteroption
 type WICPngFilterOption int32
 
@@ -490,12 +1304,46 @@ const (
 	WICPngFilterAdaptive    WICPngFilterOption = 6
 )
 
+// String returns the WICPngFilterOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPngFilterOption) String() string {
+	switch e {
+	case WICPngFilterUnspecified:
+		return "WICPngFilterUnspecified"
+	case WICPngFilterNone:
+		return "WICPngFilterNone"
+	case WICPngFilterSub:
+		return "WICPngFilterSub"
+	case WICPngFilterUp:
+		return "WICPngFilterUp"
+	case WICPngFilterAverage:
+		return "WICPngFilterAverage"
+	case WICPngFilterPaeth:
+		return "WICPngFilterPaeth"
+	case WICPngFilterAdaptive:
+		return "WICPngFilterAdaptive"
+	default:
+		return fmt.Sprintf("WICPngFilterOption(%d)", int32(e))
+	}
+}
+
 // WICPngGamaProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicpnggamaproperties
 type WICPngGamaProperties int32
 
 const (
 	WICPngGamaGamma WICPngGamaProperties = 1
 )
+
+// String returns the WICPngGamaProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPngGamaProperties) String() string {
+	switch e {
+	case WICPngGamaGamma:
+		return "WICPngGamaGamma"
+	default:
+		return fmt.Sprintf("WICPngGamaProperties(%d)", int32(e))
+	}
+}
 
 // WICPngHistProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicpnghistproperties
 type WICPngHistProperties int32
@@ -504,6 +1352,17 @@ const (
 	WICPngHistFrequencies WICPngHistProperties = 1
 )
 
+// String returns the WICPngHistProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPngHistProperties) String() string {
+	switch e {
+	case WICPngHistFrequencies:
+		return "WICPngHistFrequencies"
+	default:
+		return fmt.Sprintf("WICPngHistProperties(%d)", int32(e))
+	}
+}
+
 // WICPngIccpProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicpngiccpproperties
 type WICPngIccpProperties int32
 
@@ -511,6 +1370,19 @@ const (
 	WICPngIccpProfileName WICPngIccpProperties = 1
 	WICPngIccpProfileData WICPngIccpProperties = 2
 )
+
+// String returns the WICPngIccpProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPngIccpProperties) String() string {
+	switch e {
+	case WICPngIccpProfileName:
+		return "WICPngIccpProfileName"
+	case WICPngIccpProfileData:
+		return "WICPngIccpProfileData"
+	default:
+		return fmt.Sprintf("WICPngIccpProperties(%d)", int32(e))
+	}
+}
 
 // WICPngItxtProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicpngitxtproperties
 type WICPngItxtProperties int32
@@ -523,12 +1395,42 @@ const (
 	WICPngItxtText              WICPngItxtProperties = 5
 )
 
+// String returns the WICPngItxtProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPngItxtProperties) String() string {
+	switch e {
+	case WICPngItxtKeyword:
+		return "WICPngItxtKeyword"
+	case WICPngItxtCompressionFlag:
+		return "WICPngItxtCompressionFlag"
+	case WICPngItxtLanguageTag:
+		return "WICPngItxtLanguageTag"
+	case WICPngItxtTranslatedKeyword:
+		return "WICPngItxtTranslatedKeyword"
+	case WICPngItxtText:
+		return "WICPngItxtText"
+	default:
+		return fmt.Sprintf("WICPngItxtProperties(%d)", int32(e))
+	}
+}
+
 // WICPngSrgbProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicpngsrgbproperties
 type WICPngSrgbProperties int32
 
 const (
 	WICPngSrgbRenderingIntent WICPngSrgbProperties = 1
 )
+
+// String returns the WICPngSrgbProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPngSrgbProperties) String() string {
+	switch e {
+	case WICPngSrgbRenderingIntent:
+		return "WICPngSrgbRenderingIntent"
+	default:
+		return fmt.Sprintf("WICPngSrgbProperties(%d)", int32(e))
+	}
+}
 
 // WICPngTimeProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicpngtimeproperties
 type WICPngTimeProperties int32
@@ -542,6 +1444,27 @@ const (
 	WICPngTimeSecond WICPngTimeProperties = 6
 )
 
+// String returns the WICPngTimeProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICPngTimeProperties) String() string {
+	switch e {
+	case WICPngTimeYear:
+		return "WICPngTimeYear"
+	case WICPngTimeMonth:
+		return "WICPngTimeMonth"
+	case WICPngTimeDay:
+		return "WICPngTimeDay"
+	case WICPngTimeHour:
+		return "WICPngTimeHour"
+	case WICPngTimeMinute:
+		return "WICPngTimeMinute"
+	case WICPngTimeSecond:
+		return "WICPngTimeSecond"
+	default:
+		return fmt.Sprintf("WICPngTimeProperties(%d)", int32(e))
+	}
+}
+
 // WICProgressNotification: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicprogressnotification
 type WICProgressNotification int32
 
@@ -552,6 +1475,23 @@ const (
 	WICProgressNotificationAll      WICProgressNotification = -65536
 )
 
+// String returns the WICProgressNotification constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICProgressNotification) String() string {
+	switch e {
+	case WICProgressNotificationBegin:
+		return "WICProgressNotificationBegin"
+	case WICProgressNotificationEnd:
+		return "WICProgressNotificationEnd"
+	case WICProgressNotificationFrequent:
+		return "WICProgressNotificationFrequent"
+	case WICProgressNotificationAll:
+		return "WICProgressNotificationAll"
+	default:
+		return fmt.Sprintf("WICProgressNotification(%d)", int32(e))
+	}
+}
+
 // WICProgressOperation: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicprogressoperation
 type WICProgressOperation int32
 
@@ -560,6 +1500,21 @@ const (
 	WICProgressOperationWritePixels WICProgressOperation = 2
 	WICProgressOperationAll         WICProgressOperation = 65535
 )
+
+// String returns the WICProgressOperation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICProgressOperation) String() string {
+	switch e {
+	case WICProgressOperationCopyPixels:
+		return "WICProgressOperationCopyPixels"
+	case WICProgressOperationWritePixels:
+		return "WICProgressOperationWritePixels"
+	case WICProgressOperationAll:
+		return "WICProgressOperationAll"
+	default:
+		return fmt.Sprintf("WICProgressOperation(%d)", int32(e))
+	}
+}
 
 // WICRawCapabilities: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicrawcapabilities
 type WICRawCapabilities int32
@@ -570,6 +1525,21 @@ const (
 	WICRawCapabilityFullySupported WICRawCapabilities = 2
 )
 
+// String returns the WICRawCapabilities constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICRawCapabilities) String() string {
+	switch e {
+	case WICRawCapabilityNotSupported:
+		return "WICRawCapabilityNotSupported"
+	case WICRawCapabilityGetSupported:
+		return "WICRawCapabilityGetSupported"
+	case WICRawCapabilityFullySupported:
+		return "WICRawCapabilityFullySupported"
+	default:
+		return fmt.Sprintf("WICRawCapabilities(%d)", int32(e))
+	}
+}
+
 // WICRawParameterSet: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicrawparameterset
 type WICRawParameterSet int32
 
@@ -579,6 +1549,21 @@ const (
 	WICAutoAdjustedParameterSet WICRawParameterSet = 3
 )
 
+// String returns the WICRawParameterSet constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICRawParameterSet) String() string {
+	switch e {
+	case WICAsShotParameterSet:
+		return "WICAsShotParameterSet"
+	case WICUserAdjustedParameterSet:
+		return "WICUserAdjustedParameterSet"
+	case WICAutoAdjustedParameterSet:
+		return "WICAutoAdjustedParameterSet"
+	default:
+		return fmt.Sprintf("WICRawParameterSet(%d)", int32(e))
+	}
+}
+
 // WICRawRenderMode: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicrawrendermode
 type WICRawRenderMode int32
 
@@ -587,6 +1572,21 @@ const (
 	WICRawRenderModeNormal      WICRawRenderMode = 2
 	WICRawRenderModeBestQuality WICRawRenderMode = 3
 )
+
+// String returns the WICRawRenderMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICRawRenderMode) String() string {
+	switch e {
+	case WICRawRenderModeDraft:
+		return "WICRawRenderModeDraft"
+	case WICRawRenderModeNormal:
+		return "WICRawRenderModeNormal"
+	case WICRawRenderModeBestQuality:
+		return "WICRawRenderModeBestQuality"
+	default:
+		return fmt.Sprintf("WICRawRenderMode(%d)", int32(e))
+	}
+}
 
 // WICRawRotationCapabilities: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicrawrotationcapabilities
 type WICRawRotationCapabilities int32
@@ -598,6 +1598,23 @@ const (
 	WICRawRotationCapabilityFullySupported         WICRawRotationCapabilities = 3
 )
 
+// String returns the WICRawRotationCapabilities constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICRawRotationCapabilities) String() string {
+	switch e {
+	case WICRawRotationCapabilityNotSupported:
+		return "WICRawRotationCapabilityNotSupported"
+	case WICRawRotationCapabilityGetSupported:
+		return "WICRawRotationCapabilityGetSupported"
+	case WICRawRotationCapabilityNinetyDegreesSupported:
+		return "WICRawRotationCapabilityNinetyDegreesSupported"
+	case WICRawRotationCapabilityFullySupported:
+		return "WICRawRotationCapabilityFullySupported"
+	default:
+		return fmt.Sprintf("WICRawRotationCapabilities(%d)", int32(e))
+	}
+}
+
 // WICSectionAccessLevel: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicsectionaccesslevel
 type WICSectionAccessLevel int32
 
@@ -605,6 +1622,19 @@ const (
 	WICSectionAccessLevelRead      WICSectionAccessLevel = 1
 	WICSectionAccessLevelReadWrite WICSectionAccessLevel = 3
 )
+
+// String returns the WICSectionAccessLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICSectionAccessLevel) String() string {
+	switch e {
+	case WICSectionAccessLevelRead:
+		return "WICSectionAccessLevelRead"
+	case WICSectionAccessLevelReadWrite:
+		return "WICSectionAccessLevelReadWrite"
+	default:
+		return fmt.Sprintf("WICSectionAccessLevel(%d)", int32(e))
+	}
+}
 
 // WICTiffCompressionOption: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wictiffcompressionoption
 type WICTiffCompressionOption int32
@@ -620,6 +1650,31 @@ const (
 	WICTiffCompressionLZWHDifferencing WICTiffCompressionOption = 7
 )
 
+// String returns the WICTiffCompressionOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICTiffCompressionOption) String() string {
+	switch e {
+	case WICTiffCompressionDontCare:
+		return "WICTiffCompressionDontCare"
+	case WICTiffCompressionNone:
+		return "WICTiffCompressionNone"
+	case WICTiffCompressionCCITT3:
+		return "WICTiffCompressionCCITT3"
+	case WICTiffCompressionCCITT4:
+		return "WICTiffCompressionCCITT4"
+	case WICTiffCompressionLZW:
+		return "WICTiffCompressionLZW"
+	case WICTiffCompressionRLE:
+		return "WICTiffCompressionRLE"
+	case WICTiffCompressionZIP:
+		return "WICTiffCompressionZIP"
+	case WICTiffCompressionLZWHDifferencing:
+		return "WICTiffCompressionLZWHDifferencing"
+	default:
+		return fmt.Sprintf("WICTiffCompressionOption(%d)", int32(e))
+	}
+}
+
 // WICWebpAnimProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicwebpanimproperties
 type WICWebpAnimProperties int32
 
@@ -627,9 +1682,31 @@ const (
 	WICWebpAnimLoopCount WICWebpAnimProperties = 1
 )
 
+// String returns the WICWebpAnimProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICWebpAnimProperties) String() string {
+	switch e {
+	case WICWebpAnimLoopCount:
+		return "WICWebpAnimLoopCount"
+	default:
+		return fmt.Sprintf("WICWebpAnimProperties(%d)", int32(e))
+	}
+}
+
 // WICWebpAnmfProperties: https://learn.microsoft.com/windows/win32/api/wincodec/ne-wincodec-wicwebpanmfproperties
 type WICWebpAnmfProperties int32
 
 const (
 	WICWebpAnmfFrameDuration WICWebpAnmfProperties = 1
 )
+
+// String returns the WICWebpAnmfProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WICWebpAnmfProperties) String() string {
+	switch e {
+	case WICWebpAnmfFrameDuration:
+		return "WICWebpAnmfFrameDuration"
+	default:
+		return fmt.Sprintf("WICWebpAnmfProperties(%d)", int32(e))
+	}
+}

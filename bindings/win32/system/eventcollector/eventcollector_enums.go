@@ -4,6 +4,10 @@
 
 package eventcollector
 
+import (
+	"fmt"
+)
+
 // EC_SUBSCRIPTION_CONFIGURATION_MODE: https://learn.microsoft.com/windows/win32/api/evcoll/ne-evcoll-ec_subscription_configuration_mode
 type EC_SUBSCRIPTION_CONFIGURATION_MODE int32
 
@@ -14,6 +18,23 @@ const (
 	EcConfigurationModeMinBandwidth EC_SUBSCRIPTION_CONFIGURATION_MODE = 3
 )
 
+// String returns the EC_SUBSCRIPTION_CONFIGURATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_SUBSCRIPTION_CONFIGURATION_MODE) String() string {
+	switch e {
+	case EcConfigurationModeNormal:
+		return "EcConfigurationModeNormal"
+	case EcConfigurationModeCustom:
+		return "EcConfigurationModeCustom"
+	case EcConfigurationModeMinLatency:
+		return "EcConfigurationModeMinLatency"
+	case EcConfigurationModeMinBandwidth:
+		return "EcConfigurationModeMinBandwidth"
+	default:
+		return fmt.Sprintf("EC_SUBSCRIPTION_CONFIGURATION_MODE(%d)", int32(e))
+	}
+}
+
 // EC_SUBSCRIPTION_CONTENT_FORMAT: https://learn.microsoft.com/windows/win32/api/evcoll/ne-evcoll-ec_subscription_content_format
 type EC_SUBSCRIPTION_CONTENT_FORMAT int32
 
@@ -21,6 +42,19 @@ const (
 	EcContentFormatEvents       EC_SUBSCRIPTION_CONTENT_FORMAT = 1
 	EcContentFormatRenderedText EC_SUBSCRIPTION_CONTENT_FORMAT = 2
 )
+
+// String returns the EC_SUBSCRIPTION_CONTENT_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_SUBSCRIPTION_CONTENT_FORMAT) String() string {
+	switch e {
+	case EcContentFormatEvents:
+		return "EcContentFormatEvents"
+	case EcContentFormatRenderedText:
+		return "EcContentFormatRenderedText"
+	default:
+		return fmt.Sprintf("EC_SUBSCRIPTION_CONTENT_FORMAT(%d)", int32(e))
+	}
+}
 
 // EC_SUBSCRIPTION_CREDENTIALS_TYPE: https://learn.microsoft.com/windows/win32/api/evcoll/ne-evcoll-ec_subscription_credentials_type
 type EC_SUBSCRIPTION_CREDENTIALS_TYPE int32
@@ -33,6 +67,25 @@ const (
 	EcSubscriptionCredLocalMachine EC_SUBSCRIPTION_CREDENTIALS_TYPE = 4
 )
 
+// String returns the EC_SUBSCRIPTION_CREDENTIALS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_SUBSCRIPTION_CREDENTIALS_TYPE) String() string {
+	switch e {
+	case EcSubscriptionCredDefault:
+		return "EcSubscriptionCredDefault"
+	case EcSubscriptionCredNegotiate:
+		return "EcSubscriptionCredNegotiate"
+	case EcSubscriptionCredDigest:
+		return "EcSubscriptionCredDigest"
+	case EcSubscriptionCredBasic:
+		return "EcSubscriptionCredBasic"
+	case EcSubscriptionCredLocalMachine:
+		return "EcSubscriptionCredLocalMachine"
+	default:
+		return fmt.Sprintf("EC_SUBSCRIPTION_CREDENTIALS_TYPE(%d)", int32(e))
+	}
+}
+
 // EC_SUBSCRIPTION_DELIVERY_MODE: https://learn.microsoft.com/windows/win32/api/evcoll/ne-evcoll-ec_subscription_delivery_mode
 type EC_SUBSCRIPTION_DELIVERY_MODE int32
 
@@ -40,6 +93,19 @@ const (
 	EcDeliveryModePull EC_SUBSCRIPTION_DELIVERY_MODE = 1
 	EcDeliveryModePush EC_SUBSCRIPTION_DELIVERY_MODE = 2
 )
+
+// String returns the EC_SUBSCRIPTION_DELIVERY_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_SUBSCRIPTION_DELIVERY_MODE) String() string {
+	switch e {
+	case EcDeliveryModePull:
+		return "EcDeliveryModePull"
+	case EcDeliveryModePush:
+		return "EcDeliveryModePush"
+	default:
+		return fmt.Sprintf("EC_SUBSCRIPTION_DELIVERY_MODE(%d)", int32(e))
+	}
+}
 
 // EC_SUBSCRIPTION_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/evcoll/ne-evcoll-ec_subscription_property_id
 type EC_SUBSCRIPTION_PROPERTY_ID int32
@@ -80,6 +146,81 @@ const (
 	EcSubscriptionPropertyIdEND                EC_SUBSCRIPTION_PROPERTY_ID = 32
 )
 
+// String returns the EC_SUBSCRIPTION_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_SUBSCRIPTION_PROPERTY_ID) String() string {
+	switch e {
+	case EcSubscriptionEnabled:
+		return "EcSubscriptionEnabled"
+	case EcSubscriptionEventSources:
+		return "EcSubscriptionEventSources"
+	case EcSubscriptionEventSourceAddress:
+		return "EcSubscriptionEventSourceAddress"
+	case EcSubscriptionEventSourceEnabled:
+		return "EcSubscriptionEventSourceEnabled"
+	case EcSubscriptionEventSourceUserName:
+		return "EcSubscriptionEventSourceUserName"
+	case EcSubscriptionEventSourcePassword:
+		return "EcSubscriptionEventSourcePassword"
+	case EcSubscriptionDescription:
+		return "EcSubscriptionDescription"
+	case EcSubscriptionURI:
+		return "EcSubscriptionURI"
+	case EcSubscriptionConfigurationMode:
+		return "EcSubscriptionConfigurationMode"
+	case EcSubscriptionExpires:
+		return "EcSubscriptionExpires"
+	case EcSubscriptionQuery:
+		return "EcSubscriptionQuery"
+	case EcSubscriptionTransportName:
+		return "EcSubscriptionTransportName"
+	case EcSubscriptionTransportPort:
+		return "EcSubscriptionTransportPort"
+	case EcSubscriptionDeliveryMode:
+		return "EcSubscriptionDeliveryMode"
+	case EcSubscriptionDeliveryMaxItems:
+		return "EcSubscriptionDeliveryMaxItems"
+	case EcSubscriptionDeliveryMaxLatencyTime:
+		return "EcSubscriptionDeliveryMaxLatencyTime"
+	case EcSubscriptionHeartbeatInterval:
+		return "EcSubscriptionHeartbeatInterval"
+	case EcSubscriptionLocale:
+		return "EcSubscriptionLocale"
+	case EcSubscriptionContentFormat:
+		return "EcSubscriptionContentFormat"
+	case EcSubscriptionLogFile:
+		return "EcSubscriptionLogFile"
+	case EcSubscriptionPublisherName:
+		return "EcSubscriptionPublisherName"
+	case EcSubscriptionCredentialsType:
+		return "EcSubscriptionCredentialsType"
+	case EcSubscriptionCommonUserName:
+		return "EcSubscriptionCommonUserName"
+	case EcSubscriptionCommonPassword:
+		return "EcSubscriptionCommonPassword"
+	case EcSubscriptionHostName:
+		return "EcSubscriptionHostName"
+	case EcSubscriptionReadExistingEvents:
+		return "EcSubscriptionReadExistingEvents"
+	case EcSubscriptionDialect:
+		return "EcSubscriptionDialect"
+	case EcSubscriptionType:
+		return "EcSubscriptionType"
+	case EcSubscriptionAllowedIssuerCAs:
+		return "EcSubscriptionAllowedIssuerCAs"
+	case EcSubscriptionAllowedSubjects:
+		return "EcSubscriptionAllowedSubjects"
+	case EcSubscriptionDeniedSubjects:
+		return "EcSubscriptionDeniedSubjects"
+	case EcSubscriptionAllowedSourceDomainComputers:
+		return "EcSubscriptionAllowedSourceDomainComputers"
+	case EcSubscriptionPropertyIdEND:
+		return "EcSubscriptionPropertyIdEND"
+	default:
+		return fmt.Sprintf("EC_SUBSCRIPTION_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS: https://learn.microsoft.com/windows/win32/api/evcoll/ne-evcoll-ec_subscription_runtime_status_active_status
 type EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS int32
 
@@ -89,6 +230,23 @@ const (
 	EcRuntimeStatusActiveStatusInactive EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS = 3
 	EcRuntimeStatusActiveStatusTrying   EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS = 4
 )
+
+// String returns the EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS) String() string {
+	switch e {
+	case EcRuntimeStatusActiveStatusDisabled:
+		return "EcRuntimeStatusActiveStatusDisabled"
+	case EcRuntimeStatusActiveStatusActive:
+		return "EcRuntimeStatusActiveStatusActive"
+	case EcRuntimeStatusActiveStatusInactive:
+		return "EcRuntimeStatusActiveStatusInactive"
+	case EcRuntimeStatusActiveStatusTrying:
+		return "EcRuntimeStatusActiveStatusTrying"
+	default:
+		return fmt.Sprintf("EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS(%d)", int32(e))
+	}
+}
 
 // EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID: https://learn.microsoft.com/windows/win32/api/evcoll/ne-evcoll-ec_subscription_runtime_status_info_id
 type EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID int32
@@ -104,6 +262,31 @@ const (
 	EcSubscriptionRunTimeStatusInfoIdEND         EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID = 7
 )
 
+// String returns the EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID) String() string {
+	switch e {
+	case EcSubscriptionRunTimeStatusActive:
+		return "EcSubscriptionRunTimeStatusActive"
+	case EcSubscriptionRunTimeStatusLastError:
+		return "EcSubscriptionRunTimeStatusLastError"
+	case EcSubscriptionRunTimeStatusLastErrorMessage:
+		return "EcSubscriptionRunTimeStatusLastErrorMessage"
+	case EcSubscriptionRunTimeStatusLastErrorTime:
+		return "EcSubscriptionRunTimeStatusLastErrorTime"
+	case EcSubscriptionRunTimeStatusNextRetryTime:
+		return "EcSubscriptionRunTimeStatusNextRetryTime"
+	case EcSubscriptionRunTimeStatusEventSources:
+		return "EcSubscriptionRunTimeStatusEventSources"
+	case EcSubscriptionRunTimeStatusLastHeartbeatTime:
+		return "EcSubscriptionRunTimeStatusLastHeartbeatTime"
+	case EcSubscriptionRunTimeStatusInfoIdEND:
+		return "EcSubscriptionRunTimeStatusInfoIdEND"
+	default:
+		return fmt.Sprintf("EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID(%d)", int32(e))
+	}
+}
+
 // EC_SUBSCRIPTION_TYPE: https://learn.microsoft.com/windows/win32/api/evcoll/ne-evcoll-ec_subscription_type
 type EC_SUBSCRIPTION_TYPE int32
 
@@ -111,6 +294,19 @@ const (
 	EcSubscriptionTypeSourceInitiated    EC_SUBSCRIPTION_TYPE = 0
 	EcSubscriptionTypeCollectorInitiated EC_SUBSCRIPTION_TYPE = 1
 )
+
+// String returns the EC_SUBSCRIPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_SUBSCRIPTION_TYPE) String() string {
+	switch e {
+	case EcSubscriptionTypeSourceInitiated:
+		return "EcSubscriptionTypeSourceInitiated"
+	case EcSubscriptionTypeCollectorInitiated:
+		return "EcSubscriptionTypeCollectorInitiated"
+	default:
+		return fmt.Sprintf("EC_SUBSCRIPTION_TYPE(%d)", int32(e))
+	}
+}
 
 // EC_VARIANT_TYPE: https://learn.microsoft.com/windows/win32/api/evcoll/ne-evcoll-ec_variant_type
 type EC_VARIANT_TYPE int32
@@ -123,3 +319,24 @@ const (
 	EcVarTypeString                EC_VARIANT_TYPE = 4
 	EcVarObjectArrayPropertyHandle EC_VARIANT_TYPE = 5
 )
+
+// String returns the EC_VARIANT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_VARIANT_TYPE) String() string {
+	switch e {
+	case EcVarTypeNull:
+		return "EcVarTypeNull"
+	case EcVarTypeBoolean:
+		return "EcVarTypeBoolean"
+	case EcVarTypeUInt32:
+		return "EcVarTypeUInt32"
+	case EcVarTypeDateTime:
+		return "EcVarTypeDateTime"
+	case EcVarTypeString:
+		return "EcVarTypeString"
+	case EcVarObjectArrayPropertyHandle:
+		return "EcVarObjectArrayPropertyHandle"
+	default:
+		return fmt.Sprintf("EC_VARIANT_TYPE(%d)", int32(e))
+	}
+}

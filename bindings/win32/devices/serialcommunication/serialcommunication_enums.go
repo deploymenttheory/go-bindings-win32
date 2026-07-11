@@ -4,6 +4,10 @@
 
 package serialcommunication
 
+import (
+	"fmt"
+)
+
 type SERENUM_PORTION int32
 
 const (
@@ -11,3 +15,18 @@ const (
 	SerenumSecondHalf SERENUM_PORTION = 1
 	SerenumWhole      SERENUM_PORTION = 2
 )
+
+// String returns the SERENUM_PORTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERENUM_PORTION) String() string {
+	switch e {
+	case SerenumFirstHalf:
+		return "SerenumFirstHalf"
+	case SerenumSecondHalf:
+		return "SerenumSecondHalf"
+	case SerenumWhole:
+		return "SerenumWhole"
+	default:
+		return fmt.Sprintf("SERENUM_PORTION(%d)", int32(e))
+	}
+}

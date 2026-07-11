@@ -4,6 +4,11 @@
 
 package opc
 
+import (
+	"fmt"
+	"strings"
+)
+
 // OPC_CANONICALIZATION_METHOD: https://learn.microsoft.com/windows/win32/api/msopc/ne-msopc-opc_canonicalization_method
 type OPC_CANONICALIZATION_METHOD int32
 
@@ -13,6 +18,21 @@ const (
 	OPC_CANONICALIZATION_C14N_WITH_COMMENTS OPC_CANONICALIZATION_METHOD = 2
 )
 
+// String returns the OPC_CANONICALIZATION_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPC_CANONICALIZATION_METHOD) String() string {
+	switch e {
+	case OPC_CANONICALIZATION_NONE:
+		return "OPC_CANONICALIZATION_NONE"
+	case OPC_CANONICALIZATION_C14N:
+		return "OPC_CANONICALIZATION_C14N"
+	case OPC_CANONICALIZATION_C14N_WITH_COMMENTS:
+		return "OPC_CANONICALIZATION_C14N_WITH_COMMENTS"
+	default:
+		return fmt.Sprintf("OPC_CANONICALIZATION_METHOD(%d)", int32(e))
+	}
+}
+
 // OPC_CERTIFICATE_EMBEDDING_OPTION: https://learn.microsoft.com/windows/win32/api/msopc/ne-msopc-opc_certificate_embedding_option
 type OPC_CERTIFICATE_EMBEDDING_OPTION int32
 
@@ -21,6 +41,21 @@ const (
 	OPC_CERTIFICATE_IN_SIGNATURE_PART   OPC_CERTIFICATE_EMBEDDING_OPTION = 1
 	OPC_CERTIFICATE_NOT_EMBEDDED        OPC_CERTIFICATE_EMBEDDING_OPTION = 2
 )
+
+// String returns the OPC_CERTIFICATE_EMBEDDING_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPC_CERTIFICATE_EMBEDDING_OPTION) String() string {
+	switch e {
+	case OPC_CERTIFICATE_IN_CERTIFICATE_PART:
+		return "OPC_CERTIFICATE_IN_CERTIFICATE_PART"
+	case OPC_CERTIFICATE_IN_SIGNATURE_PART:
+		return "OPC_CERTIFICATE_IN_SIGNATURE_PART"
+	case OPC_CERTIFICATE_NOT_EMBEDDED:
+		return "OPC_CERTIFICATE_NOT_EMBEDDED"
+	default:
+		return fmt.Sprintf("OPC_CERTIFICATE_EMBEDDING_OPTION(%d)", int32(e))
+	}
+}
 
 // OPC_COMPRESSION_OPTIONS: https://learn.microsoft.com/windows/win32/api/msopc/ne-msopc-opc_compression_options
 type OPC_COMPRESSION_OPTIONS int32
@@ -33,7 +68,27 @@ const (
 	OPC_COMPRESSION_SUPERFAST OPC_COMPRESSION_OPTIONS = 3
 )
 
+// String returns the OPC_COMPRESSION_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPC_COMPRESSION_OPTIONS) String() string {
+	switch e {
+	case OPC_COMPRESSION_NONE:
+		return "OPC_COMPRESSION_NONE"
+	case OPC_COMPRESSION_NORMAL:
+		return "OPC_COMPRESSION_NORMAL"
+	case OPC_COMPRESSION_MAXIMUM:
+		return "OPC_COMPRESSION_MAXIMUM"
+	case OPC_COMPRESSION_FAST:
+		return "OPC_COMPRESSION_FAST"
+	case OPC_COMPRESSION_SUPERFAST:
+		return "OPC_COMPRESSION_SUPERFAST"
+	default:
+		return fmt.Sprintf("OPC_COMPRESSION_OPTIONS(%d)", int32(e))
+	}
+}
+
 // OPC_READ_FLAGS: https://learn.microsoft.com/windows/win32/api/msopc/ne-msopc-opc_read_flags
+// Bitmask — values may be combined with |.
 type OPC_READ_FLAGS int32
 
 const (
@@ -41,6 +96,22 @@ const (
 	OPC_VALIDATE_ON_LOAD OPC_READ_FLAGS = 1
 	OPC_CACHE_ON_ACCESS  OPC_READ_FLAGS = 2
 )
+
+// String returns the OPC_READ_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPC_READ_FLAGS) String() string {
+	var parts []string
+	if e&OPC_VALIDATE_ON_LOAD != 0 {
+		parts = append(parts, "OPC_VALIDATE_ON_LOAD")
+	}
+	if e&OPC_CACHE_ON_ACCESS != 0 {
+		parts = append(parts, "OPC_CACHE_ON_ACCESS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // OPC_RELATIONSHIPS_SIGNING_OPTION: https://learn.microsoft.com/windows/win32/api/msopc/ne-msopc-opc_relationships_signing_option
 type OPC_RELATIONSHIPS_SIGNING_OPTION int32
@@ -50,6 +121,19 @@ const (
 	OPC_RELATIONSHIP_SIGN_PART            OPC_RELATIONSHIPS_SIGNING_OPTION = 1
 )
 
+// String returns the OPC_RELATIONSHIPS_SIGNING_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPC_RELATIONSHIPS_SIGNING_OPTION) String() string {
+	switch e {
+	case OPC_RELATIONSHIP_SIGN_USING_SELECTORS:
+		return "OPC_RELATIONSHIP_SIGN_USING_SELECTORS"
+	case OPC_RELATIONSHIP_SIGN_PART:
+		return "OPC_RELATIONSHIP_SIGN_PART"
+	default:
+		return fmt.Sprintf("OPC_RELATIONSHIPS_SIGNING_OPTION(%d)", int32(e))
+	}
+}
+
 // OPC_RELATIONSHIP_SELECTOR: https://learn.microsoft.com/windows/win32/api/msopc/ne-msopc-opc_relationship_selector
 type OPC_RELATIONSHIP_SELECTOR int32
 
@@ -57,6 +141,19 @@ const (
 	OPC_RELATIONSHIP_SELECT_BY_ID   OPC_RELATIONSHIP_SELECTOR = 0
 	OPC_RELATIONSHIP_SELECT_BY_TYPE OPC_RELATIONSHIP_SELECTOR = 1
 )
+
+// String returns the OPC_RELATIONSHIP_SELECTOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPC_RELATIONSHIP_SELECTOR) String() string {
+	switch e {
+	case OPC_RELATIONSHIP_SELECT_BY_ID:
+		return "OPC_RELATIONSHIP_SELECT_BY_ID"
+	case OPC_RELATIONSHIP_SELECT_BY_TYPE:
+		return "OPC_RELATIONSHIP_SELECT_BY_TYPE"
+	default:
+		return fmt.Sprintf("OPC_RELATIONSHIP_SELECTOR(%d)", int32(e))
+	}
+}
 
 // OPC_SIGNATURE_TIME_FORMAT: https://learn.microsoft.com/windows/win32/api/msopc/ne-msopc-opc_signature_time_format
 type OPC_SIGNATURE_TIME_FORMAT int32
@@ -70,6 +167,27 @@ const (
 	OPC_SIGNATURE_TIME_FORMAT_YEARS        OPC_SIGNATURE_TIME_FORMAT = 5
 )
 
+// String returns the OPC_SIGNATURE_TIME_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPC_SIGNATURE_TIME_FORMAT) String() string {
+	switch e {
+	case OPC_SIGNATURE_TIME_FORMAT_MILLISECONDS:
+		return "OPC_SIGNATURE_TIME_FORMAT_MILLISECONDS"
+	case OPC_SIGNATURE_TIME_FORMAT_SECONDS:
+		return "OPC_SIGNATURE_TIME_FORMAT_SECONDS"
+	case OPC_SIGNATURE_TIME_FORMAT_MINUTES:
+		return "OPC_SIGNATURE_TIME_FORMAT_MINUTES"
+	case OPC_SIGNATURE_TIME_FORMAT_DAYS:
+		return "OPC_SIGNATURE_TIME_FORMAT_DAYS"
+	case OPC_SIGNATURE_TIME_FORMAT_MONTHS:
+		return "OPC_SIGNATURE_TIME_FORMAT_MONTHS"
+	case OPC_SIGNATURE_TIME_FORMAT_YEARS:
+		return "OPC_SIGNATURE_TIME_FORMAT_YEARS"
+	default:
+		return fmt.Sprintf("OPC_SIGNATURE_TIME_FORMAT(%d)", int32(e))
+	}
+}
+
 // OPC_SIGNATURE_VALIDATION_RESULT: https://learn.microsoft.com/windows/win32/api/msopc/ne-msopc-opc_signature_validation_result
 type OPC_SIGNATURE_VALIDATION_RESULT int32
 
@@ -77,6 +195,19 @@ const (
 	OPC_SIGNATURE_VALID   OPC_SIGNATURE_VALIDATION_RESULT = 0
 	OPC_SIGNATURE_INVALID OPC_SIGNATURE_VALIDATION_RESULT = -1
 )
+
+// String returns the OPC_SIGNATURE_VALIDATION_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPC_SIGNATURE_VALIDATION_RESULT) String() string {
+	switch e {
+	case OPC_SIGNATURE_VALID:
+		return "OPC_SIGNATURE_VALID"
+	case OPC_SIGNATURE_INVALID:
+		return "OPC_SIGNATURE_INVALID"
+	default:
+		return fmt.Sprintf("OPC_SIGNATURE_VALIDATION_RESULT(%d)", int32(e))
+	}
+}
 
 // OPC_STREAM_IO_MODE: https://learn.microsoft.com/windows/win32/api/msopc/ne-msopc-opc_stream_io_mode
 type OPC_STREAM_IO_MODE int32
@@ -86,6 +217,19 @@ const (
 	OPC_STREAM_IO_WRITE OPC_STREAM_IO_MODE = 2
 )
 
+// String returns the OPC_STREAM_IO_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPC_STREAM_IO_MODE) String() string {
+	switch e {
+	case OPC_STREAM_IO_READ:
+		return "OPC_STREAM_IO_READ"
+	case OPC_STREAM_IO_WRITE:
+		return "OPC_STREAM_IO_WRITE"
+	default:
+		return fmt.Sprintf("OPC_STREAM_IO_MODE(%d)", int32(e))
+	}
+}
+
 // OPC_URI_TARGET_MODE: https://learn.microsoft.com/windows/win32/api/msopc/ne-msopc-opc_uri_target_mode
 type OPC_URI_TARGET_MODE int32
 
@@ -94,10 +238,37 @@ const (
 	OPC_URI_TARGET_MODE_EXTERNAL OPC_URI_TARGET_MODE = 1
 )
 
+// String returns the OPC_URI_TARGET_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPC_URI_TARGET_MODE) String() string {
+	switch e {
+	case OPC_URI_TARGET_MODE_INTERNAL:
+		return "OPC_URI_TARGET_MODE_INTERNAL"
+	case OPC_URI_TARGET_MODE_EXTERNAL:
+		return "OPC_URI_TARGET_MODE_EXTERNAL"
+	default:
+		return fmt.Sprintf("OPC_URI_TARGET_MODE(%d)", int32(e))
+	}
+}
+
 // OPC_WRITE_FLAGS: https://learn.microsoft.com/windows/win32/api/msopc/ne-msopc-opc_write_flags
+// Bitmask — values may be combined with |.
 type OPC_WRITE_FLAGS int32
 
 const (
 	OPC_WRITE_DEFAULT     OPC_WRITE_FLAGS = 0
 	OPC_WRITE_FORCE_ZIP32 OPC_WRITE_FLAGS = 1
 )
+
+// String returns the OPC_WRITE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPC_WRITE_FLAGS) String() string {
+	var parts []string
+	if e&OPC_WRITE_FORCE_ZIP32 != 0 {
+		parts = append(parts, "OPC_WRITE_FORCE_ZIP32")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

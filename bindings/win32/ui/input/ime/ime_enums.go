@@ -4,6 +4,11 @@
 
 package ime
 
+import (
+	"fmt"
+	"strings"
+)
+
 type GET_CONVERSION_LIST_FLAG uint32
 
 const (
@@ -11,6 +16,21 @@ const (
 	GCL_REVERSECONVERSION GET_CONVERSION_LIST_FLAG = 2
 	GCL_REVERSE_LENGTH    GET_CONVERSION_LIST_FLAG = 3
 )
+
+// String returns the GET_CONVERSION_LIST_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_CONVERSION_LIST_FLAG) String() string {
+	switch e {
+	case GCL_CONVERSION:
+		return "GCL_CONVERSION"
+	case GCL_REVERSECONVERSION:
+		return "GCL_REVERSECONVERSION"
+	case GCL_REVERSE_LENGTH:
+		return "GCL_REVERSE_LENGTH"
+	default:
+		return fmt.Sprintf("GET_CONVERSION_LIST_FLAG(%d)", uint32(e))
+	}
+}
 
 type GET_GUIDE_LINE_TYPE uint32
 
@@ -20,6 +40,23 @@ const (
 	GGL_STRING  GET_GUIDE_LINE_TYPE = 3
 	GGL_PRIVATE GET_GUIDE_LINE_TYPE = 4
 )
+
+// String returns the GET_GUIDE_LINE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_GUIDE_LINE_TYPE) String() string {
+	switch e {
+	case GGL_LEVEL:
+		return "GGL_LEVEL"
+	case GGL_INDEX:
+		return "GGL_INDEX"
+	case GGL_STRING:
+		return "GGL_STRING"
+	case GGL_PRIVATE:
+		return "GGL_PRIVATE"
+	default:
+		return fmt.Sprintf("GET_GUIDE_LINE_TYPE(%d)", uint32(e))
+	}
+}
 
 type IMEFMT int32
 
@@ -53,6 +90,69 @@ const (
 	IFED_PIME2_BIN_STANDARD_SYSTEM IMEFMT = 26
 )
 
+// String returns the IMEFMT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMEFMT) String() string {
+	switch e {
+	case IFED_UNKNOWN:
+		return "IFED_UNKNOWN"
+	case IFED_MSIME2_BIN_SYSTEM:
+		return "IFED_MSIME2_BIN_SYSTEM"
+	case IFED_MSIME2_BIN_USER:
+		return "IFED_MSIME2_BIN_USER"
+	case IFED_MSIME2_TEXT_USER:
+		return "IFED_MSIME2_TEXT_USER"
+	case IFED_MSIME95_BIN_SYSTEM:
+		return "IFED_MSIME95_BIN_SYSTEM"
+	case IFED_MSIME95_BIN_USER:
+		return "IFED_MSIME95_BIN_USER"
+	case IFED_MSIME95_TEXT_USER:
+		return "IFED_MSIME95_TEXT_USER"
+	case IFED_MSIME97_BIN_SYSTEM:
+		return "IFED_MSIME97_BIN_SYSTEM"
+	case IFED_MSIME97_BIN_USER:
+		return "IFED_MSIME97_BIN_USER"
+	case IFED_MSIME97_TEXT_USER:
+		return "IFED_MSIME97_TEXT_USER"
+	case IFED_MSIME98_BIN_SYSTEM:
+		return "IFED_MSIME98_BIN_SYSTEM"
+	case IFED_MSIME98_BIN_USER:
+		return "IFED_MSIME98_BIN_USER"
+	case IFED_MSIME98_TEXT_USER:
+		return "IFED_MSIME98_TEXT_USER"
+	case IFED_ACTIVE_DICT:
+		return "IFED_ACTIVE_DICT"
+	case IFED_ATOK9:
+		return "IFED_ATOK9"
+	case IFED_ATOK10:
+		return "IFED_ATOK10"
+	case IFED_NEC_AI_:
+		return "IFED_NEC_AI_"
+	case IFED_WX_II:
+		return "IFED_WX_II"
+	case IFED_WX_III:
+		return "IFED_WX_III"
+	case IFED_VJE_20:
+		return "IFED_VJE_20"
+	case IFED_MSIME98_SYSTEM_CE:
+		return "IFED_MSIME98_SYSTEM_CE"
+	case IFED_MSIME_BIN_SYSTEM:
+		return "IFED_MSIME_BIN_SYSTEM"
+	case IFED_MSIME_BIN_USER:
+		return "IFED_MSIME_BIN_USER"
+	case IFED_MSIME_TEXT_USER:
+		return "IFED_MSIME_TEXT_USER"
+	case IFED_PIME2_BIN_USER:
+		return "IFED_PIME2_BIN_USER"
+	case IFED_PIME2_BIN_SYSTEM:
+		return "IFED_PIME2_BIN_SYSTEM"
+	case IFED_PIME2_BIN_STANDARD_SYSTEM:
+		return "IFED_PIME2_BIN_STANDARD_SYSTEM"
+	default:
+		return fmt.Sprintf("IMEFMT(%d)", int32(e))
+	}
+}
+
 type IMEREG int32
 
 const (
@@ -60,6 +160,21 @@ const (
 	IFED_REG_TAIL IMEREG = 1
 	IFED_REG_DEL  IMEREG = 2
 )
+
+// String returns the IMEREG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMEREG) String() string {
+	switch e {
+	case IFED_REG_HEAD:
+		return "IFED_REG_HEAD"
+	case IFED_REG_TAIL:
+		return "IFED_REG_TAIL"
+	case IFED_REG_DEL:
+		return "IFED_REG_DEL"
+	default:
+		return fmt.Sprintf("IMEREG(%d)", int32(e))
+	}
+}
 
 type IMEREL int32
 
@@ -91,6 +206,65 @@ const (
 	IFED_REL_ALL                IMEREL = 24
 )
 
+// String returns the IMEREL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMEREL) String() string {
+	switch e {
+	case IFED_REL_NONE:
+		return "IFED_REL_NONE"
+	case IFED_REL_NO:
+		return "IFED_REL_NO"
+	case IFED_REL_GA:
+		return "IFED_REL_GA"
+	case IFED_REL_WO:
+		return "IFED_REL_WO"
+	case IFED_REL_NI:
+		return "IFED_REL_NI"
+	case IFED_REL_DE:
+		return "IFED_REL_DE"
+	case IFED_REL_YORI:
+		return "IFED_REL_YORI"
+	case IFED_REL_KARA:
+		return "IFED_REL_KARA"
+	case IFED_REL_MADE:
+		return "IFED_REL_MADE"
+	case IFED_REL_HE:
+		return "IFED_REL_HE"
+	case IFED_REL_TO:
+		return "IFED_REL_TO"
+	case IFED_REL_IDEOM:
+		return "IFED_REL_IDEOM"
+	case IFED_REL_FUKU_YOUGEN:
+		return "IFED_REL_FUKU_YOUGEN"
+	case IFED_REL_KEIYOU_YOUGEN:
+		return "IFED_REL_KEIYOU_YOUGEN"
+	case IFED_REL_KEIDOU1_YOUGEN:
+		return "IFED_REL_KEIDOU1_YOUGEN"
+	case IFED_REL_KEIDOU2_YOUGEN:
+		return "IFED_REL_KEIDOU2_YOUGEN"
+	case IFED_REL_TAIGEN:
+		return "IFED_REL_TAIGEN"
+	case IFED_REL_YOUGEN:
+		return "IFED_REL_YOUGEN"
+	case IFED_REL_RENTAI_MEI:
+		return "IFED_REL_RENTAI_MEI"
+	case IFED_REL_RENSOU:
+		return "IFED_REL_RENSOU"
+	case IFED_REL_KEIYOU_TO_YOUGEN:
+		return "IFED_REL_KEIYOU_TO_YOUGEN"
+	case IFED_REL_KEIYOU_TARU_YOUGEN:
+		return "IFED_REL_KEIYOU_TARU_YOUGEN"
+	case IFED_REL_UNKNOWN1:
+		return "IFED_REL_UNKNOWN1"
+	case IFED_REL_UNKNOWN2:
+		return "IFED_REL_UNKNOWN2"
+	case IFED_REL_ALL:
+		return "IFED_REL_ALL"
+	default:
+		return fmt.Sprintf("IMEREL(%d)", int32(e))
+	}
+}
+
 // IMEUCT: https://learn.microsoft.com/windows/win32/api/msime/ne-msime-imeuct
 type IMEUCT int32
 
@@ -102,6 +276,26 @@ const (
 	IFED_UCT_MAX            IMEUCT = 4
 )
 
+// String returns the IMEUCT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMEUCT) String() string {
+	switch e {
+	case IFED_UCT_NONE:
+		return "IFED_UCT_NONE"
+	case IFED_UCT_STRING_SJIS:
+		return "IFED_UCT_STRING_SJIS"
+	case IFED_UCT_STRING_UNICODE:
+		return "IFED_UCT_STRING_UNICODE"
+	case IFED_UCT_USER_DEFINED:
+		return "IFED_UCT_USER_DEFINED"
+	case IFED_UCT_MAX:
+		return "IFED_UCT_MAX"
+	default:
+		return fmt.Sprintf("IMEUCT(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IME_COMPOSITION_STRING uint32
 
 const (
@@ -119,6 +313,53 @@ const (
 	GCS_RESULTCLAUSE     IME_COMPOSITION_STRING = 4096
 )
 
+// String returns the IME_COMPOSITION_STRING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IME_COMPOSITION_STRING) String() string {
+	var parts []string
+	if e&GCS_COMPREADSTR != 0 {
+		parts = append(parts, "GCS_COMPREADSTR")
+	}
+	if e&GCS_COMPREADATTR != 0 {
+		parts = append(parts, "GCS_COMPREADATTR")
+	}
+	if e&GCS_COMPREADCLAUSE != 0 {
+		parts = append(parts, "GCS_COMPREADCLAUSE")
+	}
+	if e&GCS_COMPSTR != 0 {
+		parts = append(parts, "GCS_COMPSTR")
+	}
+	if e&GCS_COMPATTR != 0 {
+		parts = append(parts, "GCS_COMPATTR")
+	}
+	if e&GCS_COMPCLAUSE != 0 {
+		parts = append(parts, "GCS_COMPCLAUSE")
+	}
+	if e&GCS_CURSORPOS != 0 {
+		parts = append(parts, "GCS_CURSORPOS")
+	}
+	if e&GCS_DELTASTART != 0 {
+		parts = append(parts, "GCS_DELTASTART")
+	}
+	if e&GCS_RESULTREADSTR != 0 {
+		parts = append(parts, "GCS_RESULTREADSTR")
+	}
+	if e&GCS_RESULTREADCLAUSE != 0 {
+		parts = append(parts, "GCS_RESULTREADCLAUSE")
+	}
+	if e&GCS_RESULTSTR != 0 {
+		parts = append(parts, "GCS_RESULTSTR")
+	}
+	if e&GCS_RESULTCLAUSE != 0 {
+		parts = append(parts, "GCS_RESULTCLAUSE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type IME_CONVERSION_MODE uint32
 
 const (
@@ -143,6 +384,70 @@ const (
 	IME_CMODE_RESERVED     IME_CONVERSION_MODE = 4026531840
 )
 
+// String returns the IME_CONVERSION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IME_CONVERSION_MODE) String() string {
+	var parts []string
+	if e&IME_CMODE_NATIVE != 0 {
+		parts = append(parts, "IME_CMODE_NATIVE")
+	}
+	if e&IME_CMODE_CHINESE != 0 {
+		parts = append(parts, "IME_CMODE_CHINESE")
+	}
+	if e&IME_CMODE_HANGUL != 0 {
+		parts = append(parts, "IME_CMODE_HANGUL")
+	}
+	if e&IME_CMODE_JAPANESE != 0 {
+		parts = append(parts, "IME_CMODE_JAPANESE")
+	}
+	if e&IME_CMODE_KATAKANA != 0 {
+		parts = append(parts, "IME_CMODE_KATAKANA")
+	}
+	if e&IME_CMODE_LANGUAGE != 0 {
+		parts = append(parts, "IME_CMODE_LANGUAGE")
+	}
+	if e&IME_CMODE_FULLSHAPE != 0 {
+		parts = append(parts, "IME_CMODE_FULLSHAPE")
+	}
+	if e&IME_CMODE_ROMAN != 0 {
+		parts = append(parts, "IME_CMODE_ROMAN")
+	}
+	if e&IME_CMODE_CHARCODE != 0 {
+		parts = append(parts, "IME_CMODE_CHARCODE")
+	}
+	if e&IME_CMODE_HANJACONVERT != 0 {
+		parts = append(parts, "IME_CMODE_HANJACONVERT")
+	}
+	if e&IME_CMODE_NATIVESYMBOL != 0 {
+		parts = append(parts, "IME_CMODE_NATIVESYMBOL")
+	}
+	if e&IME_CMODE_HANGEUL != 0 {
+		parts = append(parts, "IME_CMODE_HANGEUL")
+	}
+	if e&IME_CMODE_SOFTKBD != 0 {
+		parts = append(parts, "IME_CMODE_SOFTKBD")
+	}
+	if e&IME_CMODE_NOCONVERSION != 0 {
+		parts = append(parts, "IME_CMODE_NOCONVERSION")
+	}
+	if e&IME_CMODE_EUDC != 0 {
+		parts = append(parts, "IME_CMODE_EUDC")
+	}
+	if e&IME_CMODE_SYMBOL != 0 {
+		parts = append(parts, "IME_CMODE_SYMBOL")
+	}
+	if e&IME_CMODE_FIXED != 0 {
+		parts = append(parts, "IME_CMODE_FIXED")
+	}
+	if e&IME_CMODE_RESERVED != 0 {
+		parts = append(parts, "IME_CMODE_RESERVED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type IME_ESCAPE uint32
 
 const (
@@ -163,6 +468,45 @@ const (
 	IME_ESC_GETHELPFILENAME      IME_ESCAPE = 4107
 )
 
+// String returns the IME_ESCAPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IME_ESCAPE) String() string {
+	switch e {
+	case IME_ESC_QUERY_SUPPORT:
+		return "IME_ESC_QUERY_SUPPORT"
+	case IME_ESC_RESERVED_FIRST:
+		return "IME_ESC_RESERVED_FIRST"
+	case IME_ESC_RESERVED_LAST:
+		return "IME_ESC_RESERVED_LAST"
+	case IME_ESC_PRIVATE_FIRST:
+		return "IME_ESC_PRIVATE_FIRST"
+	case IME_ESC_PRIVATE_LAST:
+		return "IME_ESC_PRIVATE_LAST"
+	case IME_ESC_SEQUENCE_TO_INTERNAL:
+		return "IME_ESC_SEQUENCE_TO_INTERNAL"
+	case IME_ESC_GET_EUDC_DICTIONARY:
+		return "IME_ESC_GET_EUDC_DICTIONARY"
+	case IME_ESC_SET_EUDC_DICTIONARY:
+		return "IME_ESC_SET_EUDC_DICTIONARY"
+	case IME_ESC_MAX_KEY:
+		return "IME_ESC_MAX_KEY"
+	case IME_ESC_IME_NAME:
+		return "IME_ESC_IME_NAME"
+	case IME_ESC_SYNC_HOTKEY:
+		return "IME_ESC_SYNC_HOTKEY"
+	case IME_ESC_HANJA_MODE:
+		return "IME_ESC_HANJA_MODE"
+	case IME_ESC_AUTOMATA:
+		return "IME_ESC_AUTOMATA"
+	case IME_ESC_PRIVATE_HOTKEY:
+		return "IME_ESC_PRIVATE_HOTKEY"
+	case IME_ESC_GETHELPFILENAME:
+		return "IME_ESC_GETHELPFILENAME"
+	default:
+		return fmt.Sprintf("IME_ESCAPE(%d)", uint32(e))
+	}
+}
+
 type IME_HOTKEY_IDENTIFIER uint32
 
 const (
@@ -181,6 +525,43 @@ const (
 	IME_ITHOTKEY_UISTYLE_TOGGLE       IME_HOTKEY_IDENTIFIER = 514
 	IME_ITHOTKEY_RECONVERTSTRING      IME_HOTKEY_IDENTIFIER = 515
 )
+
+// String returns the IME_HOTKEY_IDENTIFIER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IME_HOTKEY_IDENTIFIER) String() string {
+	switch e {
+	case IME_CHOTKEY_IME_NONIME_TOGGLE:
+		return "IME_CHOTKEY_IME_NONIME_TOGGLE"
+	case IME_CHOTKEY_SHAPE_TOGGLE:
+		return "IME_CHOTKEY_SHAPE_TOGGLE"
+	case IME_CHOTKEY_SYMBOL_TOGGLE:
+		return "IME_CHOTKEY_SYMBOL_TOGGLE"
+	case IME_JHOTKEY_CLOSE_OPEN:
+		return "IME_JHOTKEY_CLOSE_OPEN"
+	case IME_KHOTKEY_SHAPE_TOGGLE:
+		return "IME_KHOTKEY_SHAPE_TOGGLE"
+	case IME_KHOTKEY_HANJACONVERT:
+		return "IME_KHOTKEY_HANJACONVERT"
+	case IME_KHOTKEY_ENGLISH:
+		return "IME_KHOTKEY_ENGLISH"
+	case IME_THOTKEY_IME_NONIME_TOGGLE:
+		return "IME_THOTKEY_IME_NONIME_TOGGLE"
+	case IME_THOTKEY_SHAPE_TOGGLE:
+		return "IME_THOTKEY_SHAPE_TOGGLE"
+	case IME_THOTKEY_SYMBOL_TOGGLE:
+		return "IME_THOTKEY_SYMBOL_TOGGLE"
+	case IME_ITHOTKEY_RESEND_RESULTSTR:
+		return "IME_ITHOTKEY_RESEND_RESULTSTR"
+	case IME_ITHOTKEY_PREVIOUS_COMPOSITION:
+		return "IME_ITHOTKEY_PREVIOUS_COMPOSITION"
+	case IME_ITHOTKEY_UISTYLE_TOGGLE:
+		return "IME_ITHOTKEY_UISTYLE_TOGGLE"
+	case IME_ITHOTKEY_RECONVERTSTRING:
+		return "IME_ITHOTKEY_RECONVERTSTRING"
+	default:
+		return fmt.Sprintf("IME_HOTKEY_IDENTIFIER(%d)", uint32(e))
+	}
+}
 
 type IME_PAD_REQUEST_FLAGS uint32
 
@@ -206,6 +587,54 @@ const (
 	IMEPADREQ_GETCURRENTIMEINFO        IME_PAD_REQUEST_FLAGS = 4128
 )
 
+// String returns the IME_PAD_REQUEST_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IME_PAD_REQUEST_FLAGS) String() string {
+	switch e {
+	case IMEPADREQ_INSERTSTRING:
+		return "IMEPADREQ_INSERTSTRING"
+	case IMEPADREQ_SENDCONTROL:
+		return "IMEPADREQ_SENDCONTROL"
+	case IMEPADREQ_SETAPPLETSIZE:
+		return "IMEPADREQ_SETAPPLETSIZE"
+	case IMEPADREQ_GETCOMPOSITIONSTRING:
+		return "IMEPADREQ_GETCOMPOSITIONSTRING"
+	case IMEPADREQ_GETCOMPOSITIONSTRINGINFO:
+		return "IMEPADREQ_GETCOMPOSITIONSTRINGINFO"
+	case IMEPADREQ_DELETESTRING:
+		return "IMEPADREQ_DELETESTRING"
+	case IMEPADREQ_CHANGESTRING:
+		return "IMEPADREQ_CHANGESTRING"
+	case IMEPADREQ_GETAPPLHWND:
+		return "IMEPADREQ_GETAPPLHWND"
+	case IMEPADREQ_FORCEIMEPADWINDOWSHOW:
+		return "IMEPADREQ_FORCEIMEPADWINDOWSHOW"
+	case IMEPADREQ_POSTMODALNOTIFY:
+		return "IMEPADREQ_POSTMODALNOTIFY"
+	case IMEPADREQ_GETDEFAULTUILANGID:
+		return "IMEPADREQ_GETDEFAULTUILANGID"
+	case IMEPADREQ_GETAPPLETUISTYLE:
+		return "IMEPADREQ_GETAPPLETUISTYLE"
+	case IMEPADREQ_SETAPPLETUISTYLE:
+		return "IMEPADREQ_SETAPPLETUISTYLE"
+	case IMEPADREQ_ISAPPLETACTIVE:
+		return "IMEPADREQ_ISAPPLETACTIVE"
+	case IMEPADREQ_ISIMEPADWINDOWVISIBLE:
+		return "IMEPADREQ_ISIMEPADWINDOWVISIBLE"
+	case IMEPADREQ_SETAPPLETMINMAXSIZE:
+		return "IMEPADREQ_SETAPPLETMINMAXSIZE"
+	case IMEPADREQ_GETCONVERSIONSTATUS:
+		return "IMEPADREQ_GETCONVERSIONSTATUS"
+	case IMEPADREQ_GETVERSION:
+		return "IMEPADREQ_GETVERSION"
+	case IMEPADREQ_GETCURRENTIMEINFO:
+		return "IMEPADREQ_GETCURRENTIMEINFO"
+	default:
+		return fmt.Sprintf("IME_PAD_REQUEST_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IME_SENTENCE_MODE uint32
 
 const (
@@ -217,6 +646,34 @@ const (
 	IME_SMODE_CONVERSATION  IME_SENTENCE_MODE = 16
 	IME_SMODE_RESERVED      IME_SENTENCE_MODE = 61440
 )
+
+// String returns the IME_SENTENCE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IME_SENTENCE_MODE) String() string {
+	var parts []string
+	if e&IME_SMODE_PLAURALCLAUSE != 0 {
+		parts = append(parts, "IME_SMODE_PLAURALCLAUSE")
+	}
+	if e&IME_SMODE_SINGLECONVERT != 0 {
+		parts = append(parts, "IME_SMODE_SINGLECONVERT")
+	}
+	if e&IME_SMODE_AUTOMATIC != 0 {
+		parts = append(parts, "IME_SMODE_AUTOMATIC")
+	}
+	if e&IME_SMODE_PHRASEPREDICT != 0 {
+		parts = append(parts, "IME_SMODE_PHRASEPREDICT")
+	}
+	if e&IME_SMODE_CONVERSATION != 0 {
+		parts = append(parts, "IME_SMODE_CONVERSATION")
+	}
+	if e&IME_SMODE_RESERVED != 0 {
+		parts = append(parts, "IME_SMODE_RESERVED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type NOTIFY_IME_ACTION uint32
 
@@ -231,6 +688,31 @@ const (
 	NI_SETCANDIDATE_PAGESTART NOTIFY_IME_ACTION = 22
 )
 
+// String returns the NOTIFY_IME_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NOTIFY_IME_ACTION) String() string {
+	switch e {
+	case NI_CHANGECANDIDATELIST:
+		return "NI_CHANGECANDIDATELIST"
+	case NI_CLOSECANDIDATE:
+		return "NI_CLOSECANDIDATE"
+	case NI_COMPOSITIONSTR:
+		return "NI_COMPOSITIONSTR"
+	case NI_IMEMENUSELECTED:
+		return "NI_IMEMENUSELECTED"
+	case NI_OPENCANDIDATE:
+		return "NI_OPENCANDIDATE"
+	case NI_SELECTCANDIDATESTR:
+		return "NI_SELECTCANDIDATESTR"
+	case NI_SETCANDIDATE_PAGESIZE:
+		return "NI_SETCANDIDATE_PAGESIZE"
+	case NI_SETCANDIDATE_PAGESTART:
+		return "NI_SETCANDIDATE_PAGESTART"
+	default:
+		return fmt.Sprintf("NOTIFY_IME_ACTION(%d)", uint32(e))
+	}
+}
+
 type NOTIFY_IME_INDEX uint32
 
 const (
@@ -239,6 +721,23 @@ const (
 	CPS_CONVERT  NOTIFY_IME_INDEX = 2
 	CPS_REVERT   NOTIFY_IME_INDEX = 3
 )
+
+// String returns the NOTIFY_IME_INDEX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NOTIFY_IME_INDEX) String() string {
+	switch e {
+	case CPS_CANCEL:
+		return "CPS_CANCEL"
+	case CPS_COMPLETE:
+		return "CPS_COMPLETE"
+	case CPS_CONVERT:
+		return "CPS_CONVERT"
+	case CPS_REVERT:
+		return "CPS_REVERT"
+	default:
+		return fmt.Sprintf("NOTIFY_IME_INDEX(%d)", uint32(e))
+	}
+}
 
 type SET_COMPOSITION_STRING_TYPE uint32
 
@@ -249,3 +748,22 @@ const (
 	SCS_SETRECONVERTSTRING   SET_COMPOSITION_STRING_TYPE = 65536
 	SCS_QUERYRECONVERTSTRING SET_COMPOSITION_STRING_TYPE = 131072
 )
+
+// String returns the SET_COMPOSITION_STRING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SET_COMPOSITION_STRING_TYPE) String() string {
+	switch e {
+	case SCS_SETSTR:
+		return "SCS_SETSTR"
+	case SCS_CHANGEATTR:
+		return "SCS_CHANGEATTR"
+	case SCS_CHANGECLAUSE:
+		return "SCS_CHANGECLAUSE"
+	case SCS_SETRECONVERTSTRING:
+		return "SCS_SETRECONVERTSTRING"
+	case SCS_QUERYRECONVERTSTRING:
+		return "SCS_QUERYRECONVERTSTRING"
+	default:
+		return fmt.Sprintf("SET_COMPOSITION_STRING_TYPE(%d)", uint32(e))
+	}
+}

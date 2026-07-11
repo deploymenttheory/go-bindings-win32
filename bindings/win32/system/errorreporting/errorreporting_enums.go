@@ -4,6 +4,11 @@
 
 package errorreporting
 
+import (
+	"fmt"
+	"strings"
+)
+
 type EFaultRepRetVal int32
 
 const (
@@ -20,6 +25,37 @@ const (
 	FrrvErrDoubleFault     EFaultRepRetVal = 10
 )
 
+// String returns the EFaultRepRetVal constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EFaultRepRetVal) String() string {
+	switch e {
+	case FrrvOk:
+		return "FrrvOk"
+	case FrrvOkManifest:
+		return "FrrvOkManifest"
+	case FrrvOkQueued:
+		return "FrrvOkQueued"
+	case FrrvErr:
+		return "FrrvErr"
+	case FrrvErrNoDW:
+		return "FrrvErrNoDW"
+	case FrrvErrTimeout:
+		return "FrrvErrTimeout"
+	case FrrvLaunchDebugger:
+		return "FrrvLaunchDebugger"
+	case FrrvOkHeadless:
+		return "FrrvOkHeadless"
+	case FrrvErrAnotherInstance:
+		return "FrrvErrAnotherInstance"
+	case FrrvErrNoMemory:
+		return "FrrvErrNoMemory"
+	case FrrvErrDoubleFault:
+		return "FrrvErrDoubleFault"
+	default:
+		return fmt.Sprintf("EFaultRepRetVal(%d)", int32(e))
+	}
+}
+
 type REPORT_STORE_TYPES int32
 
 const (
@@ -30,6 +66,25 @@ const (
 	E_STORE_INVALID         REPORT_STORE_TYPES = 4
 )
 
+// String returns the REPORT_STORE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REPORT_STORE_TYPES) String() string {
+	switch e {
+	case E_STORE_USER_ARCHIVE:
+		return "E_STORE_USER_ARCHIVE"
+	case E_STORE_USER_QUEUE:
+		return "E_STORE_USER_QUEUE"
+	case E_STORE_MACHINE_ARCHIVE:
+		return "E_STORE_MACHINE_ARCHIVE"
+	case E_STORE_MACHINE_QUEUE:
+		return "E_STORE_MACHINE_QUEUE"
+	case E_STORE_INVALID:
+		return "E_STORE_INVALID"
+	default:
+		return fmt.Sprintf("REPORT_STORE_TYPES(%d)", int32(e))
+	}
+}
+
 type WER_CONSENT int32
 
 const (
@@ -39,6 +94,25 @@ const (
 	WerConsentAlwaysPrompt WER_CONSENT = 4
 	WerConsentMax          WER_CONSENT = 5
 )
+
+// String returns the WER_CONSENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WER_CONSENT) String() string {
+	switch e {
+	case WerConsentNotAsked:
+		return "WerConsentNotAsked"
+	case WerConsentApproved:
+		return "WerConsentApproved"
+	case WerConsentDenied:
+		return "WerConsentDenied"
+	case WerConsentAlwaysPrompt:
+		return "WerConsentAlwaysPrompt"
+	case WerConsentMax:
+		return "WerConsentMax"
+	default:
+		return fmt.Sprintf("WER_CONSENT(%d)", int32(e))
+	}
+}
 
 type WER_DUMP_TYPE int32
 
@@ -51,6 +125,28 @@ const (
 	WerDumpTypeMax        WER_DUMP_TYPE = 5
 )
 
+// String returns the WER_DUMP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WER_DUMP_TYPE) String() string {
+	switch e {
+	case WerDumpTypeNone:
+		return "WerDumpTypeNone"
+	case WerDumpTypeMicroDump:
+		return "WerDumpTypeMicroDump"
+	case WerDumpTypeMiniDump:
+		return "WerDumpTypeMiniDump"
+	case WerDumpTypeHeapDump:
+		return "WerDumpTypeHeapDump"
+	case WerDumpTypeTriageDump:
+		return "WerDumpTypeTriageDump"
+	case WerDumpTypeMax:
+		return "WerDumpTypeMax"
+	default:
+		return fmt.Sprintf("WER_DUMP_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WER_FAULT_REPORTING uint32
 
 const (
@@ -61,12 +157,54 @@ const (
 	WER_FAULT_REPORTING_ALWAYS_SHOW_UI                 WER_FAULT_REPORTING = 16
 )
 
+// String returns the WER_FAULT_REPORTING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WER_FAULT_REPORTING) String() string {
+	var parts []string
+	if e&WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION != 0 {
+		parts = append(parts, "WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION")
+	}
+	if e&WER_FAULT_REPORTING_FLAG_NOHEAP != 0 {
+		parts = append(parts, "WER_FAULT_REPORTING_FLAG_NOHEAP")
+	}
+	if e&WER_FAULT_REPORTING_FLAG_QUEUE != 0 {
+		parts = append(parts, "WER_FAULT_REPORTING_FLAG_QUEUE")
+	}
+	if e&WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD != 0 {
+		parts = append(parts, "WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD")
+	}
+	if e&WER_FAULT_REPORTING_ALWAYS_SHOW_UI != 0 {
+		parts = append(parts, "WER_FAULT_REPORTING_ALWAYS_SHOW_UI")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type WER_FILE uint32
 
 const (
 	WER_FILE_ANONYMOUS_DATA   WER_FILE = 2
 	WER_FILE_DELETE_WHEN_DONE WER_FILE = 1
 )
+
+// String returns the WER_FILE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WER_FILE) String() string {
+	var parts []string
+	if e&WER_FILE_ANONYMOUS_DATA != 0 {
+		parts = append(parts, "WER_FILE_ANONYMOUS_DATA")
+	}
+	if e&WER_FILE_DELETE_WHEN_DONE != 0 {
+		parts = append(parts, "WER_FILE_DELETE_WHEN_DONE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type WER_FILE_TYPE int32
 
@@ -84,6 +222,37 @@ const (
 	WerFileTypeMax               WER_FILE_TYPE = 11
 )
 
+// String returns the WER_FILE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WER_FILE_TYPE) String() string {
+	switch e {
+	case WerFileTypeMicrodump:
+		return "WerFileTypeMicrodump"
+	case WerFileTypeMinidump:
+		return "WerFileTypeMinidump"
+	case WerFileTypeHeapdump:
+		return "WerFileTypeHeapdump"
+	case WerFileTypeUserDocument:
+		return "WerFileTypeUserDocument"
+	case WerFileTypeOther:
+		return "WerFileTypeOther"
+	case WerFileTypeTriagedump:
+		return "WerFileTypeTriagedump"
+	case WerFileTypeCustomDump:
+		return "WerFileTypeCustomDump"
+	case WerFileTypeAuxiliaryDump:
+		return "WerFileTypeAuxiliaryDump"
+	case WerFileTypeEtlTrace:
+		return "WerFileTypeEtlTrace"
+	case WerFileTypeAuxiliaryHeapDump:
+		return "WerFileTypeAuxiliaryHeapDump"
+	case WerFileTypeMax:
+		return "WerFileTypeMax"
+	default:
+		return fmt.Sprintf("WER_FILE_TYPE(%d)", int32(e))
+	}
+}
+
 type WER_REGISTER_FILE_TYPE int32
 
 const (
@@ -91,6 +260,21 @@ const (
 	WerRegFileTypeOther        WER_REGISTER_FILE_TYPE = 2
 	WerRegFileTypeMax          WER_REGISTER_FILE_TYPE = 3
 )
+
+// String returns the WER_REGISTER_FILE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WER_REGISTER_FILE_TYPE) String() string {
+	switch e {
+	case WerRegFileTypeUserDocument:
+		return "WerRegFileTypeUserDocument"
+	case WerRegFileTypeOther:
+		return "WerRegFileTypeOther"
+	case WerRegFileTypeMax:
+		return "WerRegFileTypeMax"
+	default:
+		return fmt.Sprintf("WER_REGISTER_FILE_TYPE(%d)", int32(e))
+	}
+}
 
 type WER_REPORT_TYPE int32
 
@@ -102,6 +286,27 @@ const (
 	WerReportKernel           WER_REPORT_TYPE = 4
 	WerReportInvalid          WER_REPORT_TYPE = 5
 )
+
+// String returns the WER_REPORT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WER_REPORT_TYPE) String() string {
+	switch e {
+	case WerReportNonCritical:
+		return "WerReportNonCritical"
+	case WerReportCritical:
+		return "WerReportCritical"
+	case WerReportApplicationCrash:
+		return "WerReportApplicationCrash"
+	case WerReportApplicationHang:
+		return "WerReportApplicationHang"
+	case WerReportKernel:
+		return "WerReportKernel"
+	case WerReportInvalid:
+		return "WerReportInvalid"
+	default:
+		return fmt.Sprintf("WER_REPORT_TYPE(%d)", int32(e))
+	}
+}
 
 type WER_REPORT_UI int32
 
@@ -119,6 +324,38 @@ const (
 	WerUIMax                      WER_REPORT_UI = 11
 )
 
+// String returns the WER_REPORT_UI constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WER_REPORT_UI) String() string {
+	switch e {
+	case WerUIAdditionalDataDlgHeader:
+		return "WerUIAdditionalDataDlgHeader"
+	case WerUIIconFilePath:
+		return "WerUIIconFilePath"
+	case WerUIConsentDlgHeader:
+		return "WerUIConsentDlgHeader"
+	case WerUIConsentDlgBody:
+		return "WerUIConsentDlgBody"
+	case WerUIOnlineSolutionCheckText:
+		return "WerUIOnlineSolutionCheckText"
+	case WerUIOfflineSolutionCheckText:
+		return "WerUIOfflineSolutionCheckText"
+	case WerUICloseText:
+		return "WerUICloseText"
+	case WerUICloseDlgHeader:
+		return "WerUICloseDlgHeader"
+	case WerUICloseDlgBody:
+		return "WerUICloseDlgBody"
+	case WerUICloseDlgButtonText:
+		return "WerUICloseDlgButtonText"
+	case WerUIMax:
+		return "WerUIMax"
+	default:
+		return fmt.Sprintf("WER_REPORT_UI(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WER_SUBMIT_FLAGS uint32
 
 const (
@@ -138,6 +375,58 @@ const (
 	WER_SUBMIT_REPORT_MACHINE_ID       WER_SUBMIT_FLAGS = 8192
 )
 
+// String returns the WER_SUBMIT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WER_SUBMIT_FLAGS) String() string {
+	var parts []string
+	if e&WER_SUBMIT_ADD_REGISTERED_DATA != 0 {
+		parts = append(parts, "WER_SUBMIT_ADD_REGISTERED_DATA")
+	}
+	if e&WER_SUBMIT_HONOR_RECOVERY != 0 {
+		parts = append(parts, "WER_SUBMIT_HONOR_RECOVERY")
+	}
+	if e&WER_SUBMIT_HONOR_RESTART != 0 {
+		parts = append(parts, "WER_SUBMIT_HONOR_RESTART")
+	}
+	if e&WER_SUBMIT_NO_ARCHIVE != 0 {
+		parts = append(parts, "WER_SUBMIT_NO_ARCHIVE")
+	}
+	if e&WER_SUBMIT_NO_CLOSE_UI != 0 {
+		parts = append(parts, "WER_SUBMIT_NO_CLOSE_UI")
+	}
+	if e&WER_SUBMIT_NO_QUEUE != 0 {
+		parts = append(parts, "WER_SUBMIT_NO_QUEUE")
+	}
+	if e&WER_SUBMIT_OUTOFPROCESS != 0 {
+		parts = append(parts, "WER_SUBMIT_OUTOFPROCESS")
+	}
+	if e&WER_SUBMIT_OUTOFPROCESS_ASYNC != 0 {
+		parts = append(parts, "WER_SUBMIT_OUTOFPROCESS_ASYNC")
+	}
+	if e&WER_SUBMIT_QUEUE != 0 {
+		parts = append(parts, "WER_SUBMIT_QUEUE")
+	}
+	if e&WER_SUBMIT_SHOW_DEBUG != 0 {
+		parts = append(parts, "WER_SUBMIT_SHOW_DEBUG")
+	}
+	if e&WER_SUBMIT_START_MINIMIZED != 0 {
+		parts = append(parts, "WER_SUBMIT_START_MINIMIZED")
+	}
+	if e&WER_SUBMIT_BYPASS_DATA_THROTTLING != 0 {
+		parts = append(parts, "WER_SUBMIT_BYPASS_DATA_THROTTLING")
+	}
+	if e&WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY != 0 {
+		parts = append(parts, "WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY")
+	}
+	if e&WER_SUBMIT_REPORT_MACHINE_ID != 0 {
+		parts = append(parts, "WER_SUBMIT_REPORT_MACHINE_ID")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type WER_SUBMIT_RESULT int32
 
 const (
@@ -155,3 +444,38 @@ const (
 	WerStorageLocationNotFound WER_SUBMIT_RESULT = 12
 	WerSubmitResultMax         WER_SUBMIT_RESULT = 13
 )
+
+// String returns the WER_SUBMIT_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WER_SUBMIT_RESULT) String() string {
+	switch e {
+	case WerReportQueued:
+		return "WerReportQueued"
+	case WerReportUploaded:
+		return "WerReportUploaded"
+	case WerReportDebug:
+		return "WerReportDebug"
+	case WerReportFailed:
+		return "WerReportFailed"
+	case WerDisabled:
+		return "WerDisabled"
+	case WerReportCancelled:
+		return "WerReportCancelled"
+	case WerDisabledQueue:
+		return "WerDisabledQueue"
+	case WerReportAsync:
+		return "WerReportAsync"
+	case WerCustomAction:
+		return "WerCustomAction"
+	case WerThrottled:
+		return "WerThrottled"
+	case WerReportUploadedCab:
+		return "WerReportUploadedCab"
+	case WerStorageLocationNotFound:
+		return "WerStorageLocationNotFound"
+	case WerSubmitResultMax:
+		return "WerSubmitResultMax"
+	default:
+		return fmt.Sprintf("WER_SUBMIT_RESULT(%d)", int32(e))
+	}
+}

@@ -4,6 +4,12 @@
 
 package textservices
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type ANCHOR_CHANGE_HISTORY_FLAGS uint32
 
 const (
@@ -11,12 +17,42 @@ const (
 	TS_CH_FOLLOWING_DEL ANCHOR_CHANGE_HISTORY_FLAGS = 2
 )
 
+// String returns the ANCHOR_CHANGE_HISTORY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ANCHOR_CHANGE_HISTORY_FLAGS) String() string {
+	var parts []string
+	if e&TS_CH_PRECEDING_DEL != 0 {
+		parts = append(parts, "TS_CH_PRECEDING_DEL")
+	}
+	if e&TS_CH_FOLLOWING_DEL != 0 {
+		parts = append(parts, "TS_CH_FOLLOWING_DEL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type GET_TEXT_AND_PROPERTY_UPDATES_FLAGS uint32
 
 const (
 	TF_GTP_NONE      GET_TEXT_AND_PROPERTY_UPDATES_FLAGS = 0
 	TF_GTP_INCL_TEXT GET_TEXT_AND_PROPERTY_UPDATES_FLAGS = 1
 )
+
+// String returns the GET_TEXT_AND_PROPERTY_UPDATES_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_TEXT_AND_PROPERTY_UPDATES_FLAGS) String() string {
+	var parts []string
+	if e&TF_GTP_INCL_TEXT != 0 {
+		parts = append(parts, "TF_GTP_INCL_TEXT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type INSERT_TEXT_AT_SELECTION_FLAGS uint32
 
@@ -25,6 +61,21 @@ const (
 	TF_IAS_QUERYONLY              INSERT_TEXT_AT_SELECTION_FLAGS = 2
 	TF_IAS_NO_DEFAULT_COMPOSITION INSERT_TEXT_AT_SELECTION_FLAGS = 2147483648
 )
+
+// String returns the INSERT_TEXT_AT_SELECTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INSERT_TEXT_AT_SELECTION_FLAGS) String() string {
+	switch e {
+	case TF_IAS_NOQUERY:
+		return "TF_IAS_NOQUERY"
+	case TF_IAS_QUERYONLY:
+		return "TF_IAS_QUERYONLY"
+	case TF_IAS_NO_DEFAULT_COMPOSITION:
+		return "TF_IAS_NO_DEFAULT_COMPOSITION"
+	default:
+		return fmt.Sprintf("INSERT_TEXT_AT_SELECTION_FLAGS(%d)", uint32(e))
+	}
+}
 
 // InputScope: https://learn.microsoft.com/windows/win32/api/inputscope/ne-inputscope-inputscope
 type InputScope int32
@@ -106,6 +157,163 @@ const (
 	IS_ENUMSTRING                    InputScope = -5
 )
 
+// String returns the InputScope constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InputScope) String() string {
+	switch e {
+	case IS_DEFAULT:
+		return "IS_DEFAULT"
+	case IS_URL:
+		return "IS_URL"
+	case IS_FILE_FULLFILEPATH:
+		return "IS_FILE_FULLFILEPATH"
+	case IS_FILE_FILENAME:
+		return "IS_FILE_FILENAME"
+	case IS_EMAIL_USERNAME:
+		return "IS_EMAIL_USERNAME"
+	case IS_EMAIL_SMTPEMAILADDRESS:
+		return "IS_EMAIL_SMTPEMAILADDRESS"
+	case IS_LOGINNAME:
+		return "IS_LOGINNAME"
+	case IS_PERSONALNAME_FULLNAME:
+		return "IS_PERSONALNAME_FULLNAME"
+	case IS_PERSONALNAME_PREFIX:
+		return "IS_PERSONALNAME_PREFIX"
+	case IS_PERSONALNAME_GIVENNAME:
+		return "IS_PERSONALNAME_GIVENNAME"
+	case IS_PERSONALNAME_MIDDLENAME:
+		return "IS_PERSONALNAME_MIDDLENAME"
+	case IS_PERSONALNAME_SURNAME:
+		return "IS_PERSONALNAME_SURNAME"
+	case IS_PERSONALNAME_SUFFIX:
+		return "IS_PERSONALNAME_SUFFIX"
+	case IS_ADDRESS_FULLPOSTALADDRESS:
+		return "IS_ADDRESS_FULLPOSTALADDRESS"
+	case IS_ADDRESS_POSTALCODE:
+		return "IS_ADDRESS_POSTALCODE"
+	case IS_ADDRESS_STREET:
+		return "IS_ADDRESS_STREET"
+	case IS_ADDRESS_STATEORPROVINCE:
+		return "IS_ADDRESS_STATEORPROVINCE"
+	case IS_ADDRESS_CITY:
+		return "IS_ADDRESS_CITY"
+	case IS_ADDRESS_COUNTRYNAME:
+		return "IS_ADDRESS_COUNTRYNAME"
+	case IS_ADDRESS_COUNTRYSHORTNAME:
+		return "IS_ADDRESS_COUNTRYSHORTNAME"
+	case IS_CURRENCY_AMOUNTANDSYMBOL:
+		return "IS_CURRENCY_AMOUNTANDSYMBOL"
+	case IS_CURRENCY_AMOUNT:
+		return "IS_CURRENCY_AMOUNT"
+	case IS_DATE_FULLDATE:
+		return "IS_DATE_FULLDATE"
+	case IS_DATE_MONTH:
+		return "IS_DATE_MONTH"
+	case IS_DATE_DAY:
+		return "IS_DATE_DAY"
+	case IS_DATE_YEAR:
+		return "IS_DATE_YEAR"
+	case IS_DATE_MONTHNAME:
+		return "IS_DATE_MONTHNAME"
+	case IS_DATE_DAYNAME:
+		return "IS_DATE_DAYNAME"
+	case IS_DIGITS:
+		return "IS_DIGITS"
+	case IS_NUMBER:
+		return "IS_NUMBER"
+	case IS_ONECHAR:
+		return "IS_ONECHAR"
+	case IS_PASSWORD:
+		return "IS_PASSWORD"
+	case IS_TELEPHONE_FULLTELEPHONENUMBER:
+		return "IS_TELEPHONE_FULLTELEPHONENUMBER"
+	case IS_TELEPHONE_COUNTRYCODE:
+		return "IS_TELEPHONE_COUNTRYCODE"
+	case IS_TELEPHONE_AREACODE:
+		return "IS_TELEPHONE_AREACODE"
+	case IS_TELEPHONE_LOCALNUMBER:
+		return "IS_TELEPHONE_LOCALNUMBER"
+	case IS_TIME_FULLTIME:
+		return "IS_TIME_FULLTIME"
+	case IS_TIME_HOUR:
+		return "IS_TIME_HOUR"
+	case IS_TIME_MINORSEC:
+		return "IS_TIME_MINORSEC"
+	case IS_NUMBER_FULLWIDTH:
+		return "IS_NUMBER_FULLWIDTH"
+	case IS_ALPHANUMERIC_HALFWIDTH:
+		return "IS_ALPHANUMERIC_HALFWIDTH"
+	case IS_ALPHANUMERIC_FULLWIDTH:
+		return "IS_ALPHANUMERIC_FULLWIDTH"
+	case IS_CURRENCY_CHINESE:
+		return "IS_CURRENCY_CHINESE"
+	case IS_BOPOMOFO:
+		return "IS_BOPOMOFO"
+	case IS_HIRAGANA:
+		return "IS_HIRAGANA"
+	case IS_KATAKANA_HALFWIDTH:
+		return "IS_KATAKANA_HALFWIDTH"
+	case IS_KATAKANA_FULLWIDTH:
+		return "IS_KATAKANA_FULLWIDTH"
+	case IS_HANJA:
+		return "IS_HANJA"
+	case IS_HANGUL_HALFWIDTH:
+		return "IS_HANGUL_HALFWIDTH"
+	case IS_HANGUL_FULLWIDTH:
+		return "IS_HANGUL_FULLWIDTH"
+	case IS_SEARCH:
+		return "IS_SEARCH"
+	case IS_FORMULA:
+		return "IS_FORMULA"
+	case IS_SEARCH_INCREMENTAL:
+		return "IS_SEARCH_INCREMENTAL"
+	case IS_CHINESE_HALFWIDTH:
+		return "IS_CHINESE_HALFWIDTH"
+	case IS_CHINESE_FULLWIDTH:
+		return "IS_CHINESE_FULLWIDTH"
+	case IS_NATIVE_SCRIPT:
+		return "IS_NATIVE_SCRIPT"
+	case IS_YOMI:
+		return "IS_YOMI"
+	case IS_TEXT:
+		return "IS_TEXT"
+	case IS_CHAT:
+		return "IS_CHAT"
+	case IS_NAME_OR_PHONENUMBER:
+		return "IS_NAME_OR_PHONENUMBER"
+	case IS_EMAILNAME_OR_ADDRESS:
+		return "IS_EMAILNAME_OR_ADDRESS"
+	case IS_PRIVATE:
+		return "IS_PRIVATE"
+	case IS_MAPS:
+		return "IS_MAPS"
+	case IS_NUMERIC_PASSWORD:
+		return "IS_NUMERIC_PASSWORD"
+	case IS_NUMERIC_PIN:
+		return "IS_NUMERIC_PIN"
+	case IS_ALPHANUMERIC_PIN:
+		return "IS_ALPHANUMERIC_PIN"
+	case IS_ALPHANUMERIC_PIN_SET:
+		return "IS_ALPHANUMERIC_PIN_SET"
+	case IS_FORMULA_NUMBER:
+		return "IS_FORMULA_NUMBER"
+	case IS_CHAT_WITHOUT_EMOJI:
+		return "IS_CHAT_WITHOUT_EMOJI"
+	case IS_PHRASELIST:
+		return "IS_PHRASELIST"
+	case IS_REGULAREXPRESSION:
+		return "IS_REGULAREXPRESSION"
+	case IS_SRGS:
+		return "IS_SRGS"
+	case IS_XML:
+		return "IS_XML"
+	case IS_ENUMSTRING:
+		return "IS_ENUMSTRING"
+	default:
+		return fmt.Sprintf("InputScope(%d)", int32(e))
+	}
+}
+
 type LANG_BAR_ITEM_ICON_MODE_FLAGS uint32
 
 const (
@@ -113,12 +321,39 @@ const (
 	TF_DTLBI_USEPROFILEICON LANG_BAR_ITEM_ICON_MODE_FLAGS = 1
 )
 
+// String returns the LANG_BAR_ITEM_ICON_MODE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LANG_BAR_ITEM_ICON_MODE_FLAGS) String() string {
+	switch e {
+	case TF_DTLBI_NONE:
+		return "TF_DTLBI_NONE"
+	case TF_DTLBI_USEPROFILEICON:
+		return "TF_DTLBI_USEPROFILEICON"
+	default:
+		return fmt.Sprintf("LANG_BAR_ITEM_ICON_MODE_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TEXT_STORE_CHANGE_FLAGS uint32
 
 const (
 	TS_TC_NONE       TEXT_STORE_CHANGE_FLAGS = 0
 	TS_TC_CORRECTION TEXT_STORE_CHANGE_FLAGS = 1
 )
+
+// String returns the TEXT_STORE_CHANGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TEXT_STORE_CHANGE_FLAGS) String() string {
+	var parts []string
+	if e&TS_TC_CORRECTION != 0 {
+		parts = append(parts, "TS_TC_CORRECTION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type TEXT_STORE_LOCK_FLAGS uint32
 
@@ -127,6 +362,20 @@ const (
 	TS_LF_READWRITE TEXT_STORE_LOCK_FLAGS = 6
 )
 
+// String returns the TEXT_STORE_LOCK_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TEXT_STORE_LOCK_FLAGS) String() string {
+	switch e {
+	case TS_LF_READ:
+		return "TS_LF_READ"
+	case TS_LF_READWRITE:
+		return "TS_LF_READWRITE"
+	default:
+		return fmt.Sprintf("TEXT_STORE_LOCK_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TEXT_STORE_TEXT_CHANGE_FLAGS uint32
 
 const (
@@ -134,6 +383,20 @@ const (
 	TS_ST_CORRECTION TEXT_STORE_TEXT_CHANGE_FLAGS = 1
 )
 
+// String returns the TEXT_STORE_TEXT_CHANGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TEXT_STORE_TEXT_CHANGE_FLAGS) String() string {
+	var parts []string
+	if e&TS_ST_CORRECTION != 0 {
+		parts = append(parts, "TS_ST_CORRECTION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type TF_CONTEXT_EDIT_CONTEXT_FLAGS uint32
 
 const (
@@ -143,6 +406,28 @@ const (
 	TF_ES_READWRITE     TF_CONTEXT_EDIT_CONTEXT_FLAGS = 6
 	TF_ES_ASYNC         TF_CONTEXT_EDIT_CONTEXT_FLAGS = 8
 )
+
+// String returns the TF_CONTEXT_EDIT_CONTEXT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TF_CONTEXT_EDIT_CONTEXT_FLAGS) String() string {
+	var parts []string
+	if e&TF_ES_SYNC != 0 {
+		parts = append(parts, "TF_ES_SYNC")
+	}
+	if e&TF_ES_READ != 0 {
+		parts = append(parts, "TF_ES_READ")
+	}
+	if e&TF_ES_READWRITE != 0 {
+		parts = append(parts, "TF_ES_READWRITE")
+	}
+	if e&TF_ES_ASYNC != 0 {
+		parts = append(parts, "TF_ES_ASYNC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // TF_DA_ATTR_INFO: https://learn.microsoft.com/windows/win32/api/msctf/ne-msctf-tf_da_attr_info
 type TF_DA_ATTR_INFO int32
@@ -157,6 +442,29 @@ const (
 	TF_ATTR_OTHER               TF_DA_ATTR_INFO = -1
 )
 
+// String returns the TF_DA_ATTR_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TF_DA_ATTR_INFO) String() string {
+	switch e {
+	case TF_ATTR_INPUT:
+		return "TF_ATTR_INPUT"
+	case TF_ATTR_TARGET_CONVERTED:
+		return "TF_ATTR_TARGET_CONVERTED"
+	case TF_ATTR_CONVERTED:
+		return "TF_ATTR_CONVERTED"
+	case TF_ATTR_TARGET_NOTCONVERTED:
+		return "TF_ATTR_TARGET_NOTCONVERTED"
+	case TF_ATTR_INPUT_ERROR:
+		return "TF_ATTR_INPUT_ERROR"
+	case TF_ATTR_FIXEDCONVERTED:
+		return "TF_ATTR_FIXEDCONVERTED"
+	case TF_ATTR_OTHER:
+		return "TF_ATTR_OTHER"
+	default:
+		return fmt.Sprintf("TF_DA_ATTR_INFO(%d)", int32(e))
+	}
+}
+
 // TF_DA_COLORTYPE: https://learn.microsoft.com/windows/win32/api/msctf/ne-msctf-tf_da_colortype
 type TF_DA_COLORTYPE int32
 
@@ -165,6 +473,21 @@ const (
 	TF_CT_SYSCOLOR TF_DA_COLORTYPE = 1
 	TF_CT_COLORREF TF_DA_COLORTYPE = 2
 )
+
+// String returns the TF_DA_COLORTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TF_DA_COLORTYPE) String() string {
+	switch e {
+	case TF_CT_NONE:
+		return "TF_CT_NONE"
+	case TF_CT_SYSCOLOR:
+		return "TF_CT_SYSCOLOR"
+	case TF_CT_COLORREF:
+		return "TF_CT_COLORREF"
+	default:
+		return fmt.Sprintf("TF_DA_COLORTYPE(%d)", int32(e))
+	}
+}
 
 // TF_DA_LINESTYLE: https://learn.microsoft.com/windows/win32/api/msctf/ne-msctf-tf_da_linestyle
 type TF_DA_LINESTYLE int32
@@ -177,6 +500,25 @@ const (
 	TF_LS_SQUIGGLE TF_DA_LINESTYLE = 4
 )
 
+// String returns the TF_DA_LINESTYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TF_DA_LINESTYLE) String() string {
+	switch e {
+	case TF_LS_NONE:
+		return "TF_LS_NONE"
+	case TF_LS_SOLID:
+		return "TF_LS_SOLID"
+	case TF_LS_DOT:
+		return "TF_LS_DOT"
+	case TF_LS_DASH:
+		return "TF_LS_DASH"
+	case TF_LS_SQUIGGLE:
+		return "TF_LS_SQUIGGLE"
+	default:
+		return fmt.Sprintf("TF_DA_LINESTYLE(%d)", int32(e))
+	}
+}
+
 // TKBLayoutType: https://learn.microsoft.com/windows/win32/api/ctffunc/ne-ctffunc-tkblayouttype
 type TKBLayoutType int32
 
@@ -185,6 +527,21 @@ const (
 	TKBLT_CLASSIC   TKBLayoutType = 1
 	TKBLT_OPTIMIZED TKBLayoutType = 2
 )
+
+// String returns the TKBLayoutType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TKBLayoutType) String() string {
+	switch e {
+	case TKBLT_UNDEFINED:
+		return "TKBLT_UNDEFINED"
+	case TKBLT_CLASSIC:
+		return "TKBLT_CLASSIC"
+	case TKBLT_OPTIMIZED:
+		return "TKBLT_OPTIMIZED"
+	default:
+		return fmt.Sprintf("TKBLayoutType(%d)", int32(e))
+	}
+}
 
 // TfActiveSelEnd: https://learn.microsoft.com/windows/win32/api/msctf/ne-msctf-tfactiveselend
 type TfActiveSelEnd int32
@@ -195,6 +552,21 @@ const (
 	TF_AE_END   TfActiveSelEnd = 2
 )
 
+// String returns the TfActiveSelEnd constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TfActiveSelEnd) String() string {
+	switch e {
+	case TF_AE_NONE:
+		return "TF_AE_NONE"
+	case TF_AE_START:
+		return "TF_AE_START"
+	case TF_AE_END:
+		return "TF_AE_END"
+	default:
+		return fmt.Sprintf("TfActiveSelEnd(%d)", int32(e))
+	}
+}
+
 // TfAnchor: https://learn.microsoft.com/windows/win32/api/msctf/ne-msctf-tfanchor
 type TfAnchor int32
 
@@ -202,6 +574,19 @@ const (
 	TF_ANCHOR_START TfAnchor = 0
 	TF_ANCHOR_END   TfAnchor = 1
 )
+
+// String returns the TfAnchor constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TfAnchor) String() string {
+	switch e {
+	case TF_ANCHOR_START:
+		return "TF_ANCHOR_START"
+	case TF_ANCHOR_END:
+		return "TF_ANCHOR_END"
+	default:
+		return fmt.Sprintf("TfAnchor(%d)", int32(e))
+	}
+}
 
 // TfCandidateResult: https://learn.microsoft.com/windows/win32/api/ctffunc/ne-ctffunc-tfcandidateresult
 type TfCandidateResult int32
@@ -212,6 +597,21 @@ const (
 	CAND_CANCELED  TfCandidateResult = 2
 )
 
+// String returns the TfCandidateResult constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TfCandidateResult) String() string {
+	switch e {
+	case CAND_FINALIZED:
+		return "CAND_FINALIZED"
+	case CAND_SELECTED:
+		return "CAND_SELECTED"
+	case CAND_CANCELED:
+		return "CAND_CANCELED"
+	default:
+		return fmt.Sprintf("TfCandidateResult(%d)", int32(e))
+	}
+}
+
 // TfGravity: https://learn.microsoft.com/windows/win32/api/msctf/ne-msctf-tfgravity
 type TfGravity int32
 
@@ -220,6 +620,19 @@ const (
 	TF_GRAVITY_FORWARD  TfGravity = 1
 )
 
+// String returns the TfGravity constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TfGravity) String() string {
+	switch e {
+	case TF_GRAVITY_BACKWARD:
+		return "TF_GRAVITY_BACKWARD"
+	case TF_GRAVITY_FORWARD:
+		return "TF_GRAVITY_FORWARD"
+	default:
+		return fmt.Sprintf("TfGravity(%d)", int32(e))
+	}
+}
+
 // TfIntegratableCandidateListSelectionStyle: https://learn.microsoft.com/windows/win32/api/ctffunc/ne-ctffunc-tfintegratablecandidatelistselectionstyle
 type TfIntegratableCandidateListSelectionStyle int32
 
@@ -227,6 +640,19 @@ const (
 	STYLE_ACTIVE_SELECTION  TfIntegratableCandidateListSelectionStyle = 0
 	STYLE_IMPLIED_SELECTION TfIntegratableCandidateListSelectionStyle = 1
 )
+
+// String returns the TfIntegratableCandidateListSelectionStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TfIntegratableCandidateListSelectionStyle) String() string {
+	switch e {
+	case STYLE_ACTIVE_SELECTION:
+		return "STYLE_ACTIVE_SELECTION"
+	case STYLE_IMPLIED_SELECTION:
+		return "STYLE_IMPLIED_SELECTION"
+	default:
+		return fmt.Sprintf("TfIntegratableCandidateListSelectionStyle(%d)", int32(e))
+	}
+}
 
 // TfLBBalloonStyle: https://learn.microsoft.com/windows/win32/api/ctfutb/ne-ctfutb-tflbballoonstyle
 type TfLBBalloonStyle int32
@@ -237,6 +663,21 @@ const (
 	TF_LB_BALLOON_MISS TfLBBalloonStyle = 2
 )
 
+// String returns the TfLBBalloonStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TfLBBalloonStyle) String() string {
+	switch e {
+	case TF_LB_BALLOON_RECO:
+		return "TF_LB_BALLOON_RECO"
+	case TF_LB_BALLOON_SHOW:
+		return "TF_LB_BALLOON_SHOW"
+	case TF_LB_BALLOON_MISS:
+		return "TF_LB_BALLOON_MISS"
+	default:
+		return fmt.Sprintf("TfLBBalloonStyle(%d)", int32(e))
+	}
+}
+
 // TfLBIClick: https://learn.microsoft.com/windows/win32/api/ctfutb/ne-ctfutb-tflbiclick
 type TfLBIClick int32
 
@@ -244,6 +685,19 @@ const (
 	TF_LBI_CLK_RIGHT TfLBIClick = 1
 	TF_LBI_CLK_LEFT  TfLBIClick = 2
 )
+
+// String returns the TfLBIClick constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TfLBIClick) String() string {
+	switch e {
+	case TF_LBI_CLK_RIGHT:
+		return "TF_LBI_CLK_RIGHT"
+	case TF_LBI_CLK_LEFT:
+		return "TF_LBI_CLK_LEFT"
+	default:
+		return fmt.Sprintf("TfLBIClick(%d)", int32(e))
+	}
+}
 
 // TfLayoutCode: https://learn.microsoft.com/windows/win32/api/msctf/ne-msctf-tflayoutcode
 type TfLayoutCode int32
@@ -253,6 +707,21 @@ const (
 	TF_LC_CHANGE  TfLayoutCode = 1
 	TF_LC_DESTROY TfLayoutCode = 2
 )
+
+// String returns the TfLayoutCode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TfLayoutCode) String() string {
+	switch e {
+	case TF_LC_CREATE:
+		return "TF_LC_CREATE"
+	case TF_LC_CHANGE:
+		return "TF_LC_CHANGE"
+	case TF_LC_DESTROY:
+		return "TF_LC_DESTROY"
+	default:
+		return fmt.Sprintf("TfLayoutCode(%d)", int32(e))
+	}
+}
 
 // TfSapiObject: https://learn.microsoft.com/windows/win32/api/ctffunc/ne-ctffunc-tfsapiobject
 type TfSapiObject int32
@@ -266,6 +735,27 @@ const (
 	GETIF_RECOGNIZERNOINIT TfSapiObject = 5
 )
 
+// String returns the TfSapiObject constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TfSapiObject) String() string {
+	switch e {
+	case GETIF_RESMGR:
+		return "GETIF_RESMGR"
+	case GETIF_RECOCONTEXT:
+		return "GETIF_RECOCONTEXT"
+	case GETIF_RECOGNIZER:
+		return "GETIF_RECOGNIZER"
+	case GETIF_VOICE:
+		return "GETIF_VOICE"
+	case GETIF_DICTGRAM:
+		return "GETIF_DICTGRAM"
+	case GETIF_RECOGNIZERNOINIT:
+		return "GETIF_RECOGNIZERNOINIT"
+	default:
+		return fmt.Sprintf("TfSapiObject(%d)", int32(e))
+	}
+}
+
 // TfShiftDir: https://learn.microsoft.com/windows/win32/api/msctf/ne-msctf-tfshiftdir
 type TfShiftDir int32
 
@@ -273,6 +763,19 @@ const (
 	TF_SD_BACKWARD TfShiftDir = 0
 	TF_SD_FORWARD  TfShiftDir = 1
 )
+
+// String returns the TfShiftDir constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TfShiftDir) String() string {
+	switch e {
+	case TF_SD_BACKWARD:
+		return "TF_SD_BACKWARD"
+	case TF_SD_FORWARD:
+		return "TF_SD_FORWARD"
+	default:
+		return fmt.Sprintf("TfShiftDir(%d)", int32(e))
+	}
+}
 
 // TsActiveSelEnd: https://learn.microsoft.com/windows/win32/api/textstor/ne-textstor-tsactiveselend
 type TsActiveSelEnd int32
@@ -283,6 +786,21 @@ const (
 	TS_AE_END   TsActiveSelEnd = 2
 )
 
+// String returns the TsActiveSelEnd constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TsActiveSelEnd) String() string {
+	switch e {
+	case TS_AE_NONE:
+		return "TS_AE_NONE"
+	case TS_AE_START:
+		return "TS_AE_START"
+	case TS_AE_END:
+		return "TS_AE_END"
+	default:
+		return fmt.Sprintf("TsActiveSelEnd(%d)", int32(e))
+	}
+}
+
 // TsGravity: https://learn.microsoft.com/windows/win32/api/textstor/ne-textstor-tsgravity
 type TsGravity int32
 
@@ -290,6 +808,19 @@ const (
 	TS_GR_BACKWARD TsGravity = 0
 	TS_GR_FORWARD  TsGravity = 1
 )
+
+// String returns the TsGravity constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TsGravity) String() string {
+	switch e {
+	case TS_GR_BACKWARD:
+		return "TS_GR_BACKWARD"
+	case TS_GR_FORWARD:
+		return "TS_GR_FORWARD"
+	default:
+		return fmt.Sprintf("TsGravity(%d)", int32(e))
+	}
+}
 
 // TsLayoutCode: https://learn.microsoft.com/windows/win32/api/textstor/ne-textstor-tslayoutcode
 type TsLayoutCode int32
@@ -300,6 +831,21 @@ const (
 	TS_LC_DESTROY TsLayoutCode = 2
 )
 
+// String returns the TsLayoutCode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TsLayoutCode) String() string {
+	switch e {
+	case TS_LC_CREATE:
+		return "TS_LC_CREATE"
+	case TS_LC_CHANGE:
+		return "TS_LC_CHANGE"
+	case TS_LC_DESTROY:
+		return "TS_LC_DESTROY"
+	default:
+		return fmt.Sprintf("TsLayoutCode(%d)", int32(e))
+	}
+}
+
 // TsRunType: https://learn.microsoft.com/windows/win32/api/textstor/ne-textstor-tsruntype
 type TsRunType int32
 
@@ -309,6 +855,21 @@ const (
 	TS_RT_OPAQUE TsRunType = 2
 )
 
+// String returns the TsRunType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TsRunType) String() string {
+	switch e {
+	case TS_RT_PLAIN:
+		return "TS_RT_PLAIN"
+	case TS_RT_HIDDEN:
+		return "TS_RT_HIDDEN"
+	case TS_RT_OPAQUE:
+		return "TS_RT_OPAQUE"
+	default:
+		return fmt.Sprintf("TsRunType(%d)", int32(e))
+	}
+}
+
 // TsShiftDir: https://learn.microsoft.com/windows/win32/api/textstor/ne-textstor-tsshiftdir
 type TsShiftDir int32
 
@@ -316,3 +877,16 @@ const (
 	TS_SD_BACKWARD TsShiftDir = 0
 	TS_SD_FORWARD  TsShiftDir = 1
 )
+
+// String returns the TsShiftDir constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TsShiftDir) String() string {
+	switch e {
+	case TS_SD_BACKWARD:
+		return "TS_SD_BACKWARD"
+	case TS_SD_FORWARD:
+		return "TS_SD_FORWARD"
+	default:
+		return fmt.Sprintf("TsShiftDir(%d)", int32(e))
+	}
+}

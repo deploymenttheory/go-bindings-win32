@@ -4,6 +4,10 @@
 
 package deliveryoptimization
 
+import (
+	"fmt"
+)
+
 // DODownloadCostPolicy: https://learn.microsoft.com/windows/win32/api/deliveryoptimization/ne-deliveryoptimization-dodownloadcostpolicy
 type DODownloadCostPolicy int32
 
@@ -15,6 +19,27 @@ const (
 	DODownloadCostPolicy_NoSurcharge  DODownloadCostPolicy = 4
 	DODownloadCostPolicy_NoCellular   DODownloadCostPolicy = 5
 )
+
+// String returns the DODownloadCostPolicy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DODownloadCostPolicy) String() string {
+	switch e {
+	case DODownloadCostPolicy_Always:
+		return "DODownloadCostPolicy_Always"
+	case DODownloadCostPolicy_Unrestricted:
+		return "DODownloadCostPolicy_Unrestricted"
+	case DODownloadCostPolicy_Standard:
+		return "DODownloadCostPolicy_Standard"
+	case DODownloadCostPolicy_NoRoaming:
+		return "DODownloadCostPolicy_NoRoaming"
+	case DODownloadCostPolicy_NoSurcharge:
+		return "DODownloadCostPolicy_NoSurcharge"
+	case DODownloadCostPolicy_NoCellular:
+		return "DODownloadCostPolicy_NoCellular"
+	default:
+		return fmt.Sprintf("DODownloadCostPolicy(%d)", int32(e))
+	}
+}
 
 // DODownloadProperty: https://learn.microsoft.com/windows/win32/api/deliveryoptimization/ne-deliveryoptimization-dodownloadproperty
 type DODownloadProperty int32
@@ -52,6 +77,75 @@ const (
 	DODownloadProperty_HttpStatusCode                     DODownloadProperty = 29
 )
 
+// String returns the DODownloadProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DODownloadProperty) String() string {
+	switch e {
+	case DODownloadProperty_Id:
+		return "DODownloadProperty_Id"
+	case DODownloadProperty_Uri:
+		return "DODownloadProperty_Uri"
+	case DODownloadProperty_ContentId:
+		return "DODownloadProperty_ContentId"
+	case DODownloadProperty_DisplayName:
+		return "DODownloadProperty_DisplayName"
+	case DODownloadProperty_LocalPath:
+		return "DODownloadProperty_LocalPath"
+	case DODownloadProperty_HttpCustomHeaders:
+		return "DODownloadProperty_HttpCustomHeaders"
+	case DODownloadProperty_CostPolicy:
+		return "DODownloadProperty_CostPolicy"
+	case DODownloadProperty_SecurityFlags:
+		return "DODownloadProperty_SecurityFlags"
+	case DODownloadProperty_CallbackFreqPercent:
+		return "DODownloadProperty_CallbackFreqPercent"
+	case DODownloadProperty_CallbackFreqSeconds:
+		return "DODownloadProperty_CallbackFreqSeconds"
+	case DODownloadProperty_NoProgressTimeoutSeconds:
+		return "DODownloadProperty_NoProgressTimeoutSeconds"
+	case DODownloadProperty_ForegroundPriority:
+		return "DODownloadProperty_ForegroundPriority"
+	case DODownloadProperty_BlockingMode:
+		return "DODownloadProperty_BlockingMode"
+	case DODownloadProperty_CallbackInterface:
+		return "DODownloadProperty_CallbackInterface"
+	case DODownloadProperty_StreamInterface:
+		return "DODownloadProperty_StreamInterface"
+	case DODownloadProperty_SecurityContext:
+		return "DODownloadProperty_SecurityContext"
+	case DODownloadProperty_NetworkToken:
+		return "DODownloadProperty_NetworkToken"
+	case DODownloadProperty_CorrelationVector:
+		return "DODownloadProperty_CorrelationVector"
+	case DODownloadProperty_DecryptionInfo:
+		return "DODownloadProperty_DecryptionInfo"
+	case DODownloadProperty_IntegrityCheckInfo:
+		return "DODownloadProperty_IntegrityCheckInfo"
+	case DODownloadProperty_IntegrityCheckMandatory:
+		return "DODownloadProperty_IntegrityCheckMandatory"
+	case DODownloadProperty_TotalSizeBytes:
+		return "DODownloadProperty_TotalSizeBytes"
+	case DODownloadProperty_DisallowOnCellular:
+		return "DODownloadProperty_DisallowOnCellular"
+	case DODownloadProperty_HttpCustomAuthHeaders:
+		return "DODownloadProperty_HttpCustomAuthHeaders"
+	case DODownloadProperty_HttpAllowSecureToNonSecureRedirect:
+		return "DODownloadProperty_HttpAllowSecureToNonSecureRedirect"
+	case DODownloadProperty_NonVolatile:
+		return "DODownloadProperty_NonVolatile"
+	case DODownloadProperty_HttpRedirectionTarget:
+		return "DODownloadProperty_HttpRedirectionTarget"
+	case DODownloadProperty_HttpResponseHeaders:
+		return "DODownloadProperty_HttpResponseHeaders"
+	case DODownloadProperty_HttpServerIPAddress:
+		return "DODownloadProperty_HttpServerIPAddress"
+	case DODownloadProperty_HttpStatusCode:
+		return "DODownloadProperty_HttpStatusCode"
+	default:
+		return fmt.Sprintf("DODownloadProperty(%d)", int32(e))
+	}
+}
+
 // DODownloadState: https://learn.microsoft.com/windows/win32/api/deliveryoptimization/ne-deliveryoptimization-dodownloadstate
 type DODownloadState int32
 
@@ -63,3 +157,24 @@ const (
 	DODownloadState_Aborted      DODownloadState = 4
 	DODownloadState_Paused       DODownloadState = 5
 )
+
+// String returns the DODownloadState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DODownloadState) String() string {
+	switch e {
+	case DODownloadState_Created:
+		return "DODownloadState_Created"
+	case DODownloadState_Transferring:
+		return "DODownloadState_Transferring"
+	case DODownloadState_Transferred:
+		return "DODownloadState_Transferred"
+	case DODownloadState_Finalized:
+		return "DODownloadState_Finalized"
+	case DODownloadState_Aborted:
+		return "DODownloadState_Aborted"
+	case DODownloadState_Paused:
+		return "DODownloadState_Paused"
+	default:
+		return fmt.Sprintf("DODownloadState(%d)", int32(e))
+	}
+}

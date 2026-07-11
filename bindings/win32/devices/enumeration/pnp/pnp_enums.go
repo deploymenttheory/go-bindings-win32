@@ -4,6 +4,10 @@
 
 package pnp
 
+import (
+	"fmt"
+)
+
 type SW_DEVICE_CAPABILITIES int32
 
 const (
@@ -14,6 +18,25 @@ const (
 	SWDeviceCapabilitiesDriverRequired SW_DEVICE_CAPABILITIES = 8
 )
 
+// String returns the SW_DEVICE_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SW_DEVICE_CAPABILITIES) String() string {
+	switch e {
+	case SWDeviceCapabilitiesNone:
+		return "SWDeviceCapabilitiesNone"
+	case SWDeviceCapabilitiesRemovable:
+		return "SWDeviceCapabilitiesRemovable"
+	case SWDeviceCapabilitiesSilentInstall:
+		return "SWDeviceCapabilitiesSilentInstall"
+	case SWDeviceCapabilitiesNoDisplayInUI:
+		return "SWDeviceCapabilitiesNoDisplayInUI"
+	case SWDeviceCapabilitiesDriverRequired:
+		return "SWDeviceCapabilitiesDriverRequired"
+	default:
+		return fmt.Sprintf("SW_DEVICE_CAPABILITIES(%d)", int32(e))
+	}
+}
+
 type SW_DEVICE_LIFETIME int32
 
 const (
@@ -21,3 +44,18 @@ const (
 	SWDeviceLifetimeParentPresent SW_DEVICE_LIFETIME = 1
 	SWDeviceLifetimeMax           SW_DEVICE_LIFETIME = 2
 )
+
+// String returns the SW_DEVICE_LIFETIME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SW_DEVICE_LIFETIME) String() string {
+	switch e {
+	case SWDeviceLifetimeHandle:
+		return "SWDeviceLifetimeHandle"
+	case SWDeviceLifetimeParentPresent:
+		return "SWDeviceLifetimeParentPresent"
+	case SWDeviceLifetimeMax:
+		return "SWDeviceLifetimeMax"
+	default:
+		return fmt.Sprintf("SW_DEVICE_LIFETIME(%d)", int32(e))
+	}
+}

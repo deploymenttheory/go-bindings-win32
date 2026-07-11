@@ -4,6 +4,11 @@
 
 package winhttp
 
+import (
+	"fmt"
+	"strings"
+)
+
 type WINHTTP_ACCESS_TYPE uint32
 
 const (
@@ -13,6 +18,23 @@ const (
 	WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY WINHTTP_ACCESS_TYPE = 4
 )
 
+// String returns the WINHTTP_ACCESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_ACCESS_TYPE) String() string {
+	switch e {
+	case WINHTTP_ACCESS_TYPE_NO_PROXY:
+		return "WINHTTP_ACCESS_TYPE_NO_PROXY"
+	case WINHTTP_ACCESS_TYPE_DEFAULT_PROXY:
+		return "WINHTTP_ACCESS_TYPE_DEFAULT_PROXY"
+	case WINHTTP_ACCESS_TYPE_NAMED_PROXY:
+		return "WINHTTP_ACCESS_TYPE_NAMED_PROXY"
+	case WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY:
+		return "WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY"
+	default:
+		return fmt.Sprintf("WINHTTP_ACCESS_TYPE(%d)", uint32(e))
+	}
+}
+
 type WINHTTP_CREDS_AUTHSCHEME uint32
 
 const (
@@ -20,6 +42,21 @@ const (
 	WINHTTP_AUTH_SCHEME_NTLM      WINHTTP_CREDS_AUTHSCHEME = 2
 	WINHTTP_AUTH_SCHEME_NEGOTIATE WINHTTP_CREDS_AUTHSCHEME = 16
 )
+
+// String returns the WINHTTP_CREDS_AUTHSCHEME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_CREDS_AUTHSCHEME) String() string {
+	switch e {
+	case WINHTTP_AUTH_SCHEME_BASIC:
+		return "WINHTTP_AUTH_SCHEME_BASIC"
+	case WINHTTP_AUTH_SCHEME_NTLM:
+		return "WINHTTP_AUTH_SCHEME_NTLM"
+	case WINHTTP_AUTH_SCHEME_NEGOTIATE:
+		return "WINHTTP_AUTH_SCHEME_NEGOTIATE"
+	default:
+		return fmt.Sprintf("WINHTTP_CREDS_AUTHSCHEME(%d)", uint32(e))
+	}
+}
 
 type WINHTTP_FAST_FORWARDING_STATE int32
 
@@ -30,6 +67,23 @@ const (
 	WinHttpFastForwardingStateServerSideFailed WINHTTP_FAST_FORWARDING_STATE = 3
 )
 
+// String returns the WINHTTP_FAST_FORWARDING_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_FAST_FORWARDING_STATE) String() string {
+	switch e {
+	case WinHttpFastForwardingStateInProgress:
+		return "WinHttpFastForwardingStateInProgress"
+	case WinHttpFastForwardingStateSucceeded:
+		return "WinHttpFastForwardingStateSucceeded"
+	case WinHttpFastForwardingStateClientSideFailed:
+		return "WinHttpFastForwardingStateClientSideFailed"
+	case WinHttpFastForwardingStateServerSideFailed:
+		return "WinHttpFastForwardingStateServerSideFailed"
+	default:
+		return fmt.Sprintf("WINHTTP_FAST_FORWARDING_STATE(%d)", int32(e))
+	}
+}
+
 type WINHTTP_INTERNET_SCHEME int32
 
 const (
@@ -39,6 +93,24 @@ const (
 	WINHTTP_INTERNET_SCHEME_SOCKS WINHTTP_INTERNET_SCHEME = 4
 )
 
+// String returns the WINHTTP_INTERNET_SCHEME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_INTERNET_SCHEME) String() string {
+	switch e {
+	case WINHTTP_INTERNET_SCHEME_HTTP:
+		return "WINHTTP_INTERNET_SCHEME_HTTP"
+	case WINHTTP_INTERNET_SCHEME_HTTPS:
+		return "WINHTTP_INTERNET_SCHEME_HTTPS"
+	case WINHTTP_INTERNET_SCHEME_FTP:
+		return "WINHTTP_INTERNET_SCHEME_FTP"
+	case WINHTTP_INTERNET_SCHEME_SOCKS:
+		return "WINHTTP_INTERNET_SCHEME_SOCKS"
+	default:
+		return fmt.Sprintf("WINHTTP_INTERNET_SCHEME(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WINHTTP_OPEN_REQUEST_FLAGS uint32
 
 const (
@@ -51,12 +123,56 @@ const (
 	WINHTTP_FLAG_SECURE               WINHTTP_OPEN_REQUEST_FLAGS = 8388608
 )
 
+// String returns the WINHTTP_OPEN_REQUEST_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_OPEN_REQUEST_FLAGS) String() string {
+	var parts []string
+	if e&WINHTTP_FLAG_BYPASS_PROXY_CACHE != 0 {
+		parts = append(parts, "WINHTTP_FLAG_BYPASS_PROXY_CACHE")
+	}
+	if e&WINHTTP_FLAG_ESCAPE_DISABLE != 0 {
+		parts = append(parts, "WINHTTP_FLAG_ESCAPE_DISABLE")
+	}
+	if e&WINHTTP_FLAG_ESCAPE_DISABLE_QUERY != 0 {
+		parts = append(parts, "WINHTTP_FLAG_ESCAPE_DISABLE_QUERY")
+	}
+	if e&WINHTTP_FLAG_ESCAPE_PERCENT != 0 {
+		parts = append(parts, "WINHTTP_FLAG_ESCAPE_PERCENT")
+	}
+	if e&WINHTTP_FLAG_NULL_CODEPAGE != 0 {
+		parts = append(parts, "WINHTTP_FLAG_NULL_CODEPAGE")
+	}
+	if e&WINHTTP_FLAG_REFRESH != 0 {
+		parts = append(parts, "WINHTTP_FLAG_REFRESH")
+	}
+	if e&WINHTTP_FLAG_SECURE != 0 {
+		parts = append(parts, "WINHTTP_FLAG_SECURE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type WINHTTP_PROTOCOL_OPERATION int32
 
 const (
 	WINHTTP_PROTOCOL_SEND_OPERATION    WINHTTP_PROTOCOL_OPERATION = 0
 	WINHTTP_PROTOCOL_RECEIVE_OPERATION WINHTTP_PROTOCOL_OPERATION = 1
 )
+
+// String returns the WINHTTP_PROTOCOL_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_PROTOCOL_OPERATION) String() string {
+	switch e {
+	case WINHTTP_PROTOCOL_SEND_OPERATION:
+		return "WINHTTP_PROTOCOL_SEND_OPERATION"
+	case WINHTTP_PROTOCOL_RECEIVE_OPERATION:
+		return "WINHTTP_PROTOCOL_RECEIVE_OPERATION"
+	default:
+		return fmt.Sprintf("WINHTTP_PROTOCOL_OPERATION(%d)", int32(e))
+	}
+}
 
 // WINHTTP_PROXY_SETTINGS_TYPE: https://learn.microsoft.com/windows/win32/api/winhttp/ne-winhttp-winhttp_proxy_settings_type
 type WINHTTP_PROXY_SETTINGS_TYPE int32
@@ -67,6 +183,23 @@ const (
 	WinHttpProxySettingsTypeWsa     WINHTTP_PROXY_SETTINGS_TYPE = 2
 	WinHttpProxySettingsTypeXBox    WINHTTP_PROXY_SETTINGS_TYPE = 3
 )
+
+// String returns the WINHTTP_PROXY_SETTINGS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_PROXY_SETTINGS_TYPE) String() string {
+	switch e {
+	case WinHttpProxySettingsTypeUnknown:
+		return "WinHttpProxySettingsTypeUnknown"
+	case WinHttpProxySettingsTypeWsl:
+		return "WinHttpProxySettingsTypeWsl"
+	case WinHttpProxySettingsTypeWsa:
+		return "WinHttpProxySettingsTypeWsa"
+	case WinHttpProxySettingsTypeXBox:
+		return "WinHttpProxySettingsTypeXBox"
+	default:
+		return fmt.Sprintf("WINHTTP_PROXY_SETTINGS_TYPE(%d)", int32(e))
+	}
+}
 
 // WINHTTP_REQUEST_STAT_ENTRY: https://learn.microsoft.com/windows/win32/api/winhttp/ne-winhttp-winhttp_request_stat_entry
 type WINHTTP_REQUEST_STAT_ENTRY int32
@@ -91,6 +224,51 @@ const (
 	WinHttpRequestStatLast                 WINHTTP_REQUEST_STAT_ENTRY = 16
 	WinHttpRequestStatMax                  WINHTTP_REQUEST_STAT_ENTRY = 32
 )
+
+// String returns the WINHTTP_REQUEST_STAT_ENTRY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_REQUEST_STAT_ENTRY) String() string {
+	switch e {
+	case WinHttpConnectFailureCount:
+		return "WinHttpConnectFailureCount"
+	case WinHttpProxyFailureCount:
+		return "WinHttpProxyFailureCount"
+	case WinHttpTlsHandshakeClientLeg1Size:
+		return "WinHttpTlsHandshakeClientLeg1Size"
+	case WinHttpTlsHandshakeServerLeg1Size:
+		return "WinHttpTlsHandshakeServerLeg1Size"
+	case WinHttpTlsHandshakeClientLeg2Size:
+		return "WinHttpTlsHandshakeClientLeg2Size"
+	case WinHttpTlsHandshakeServerLeg2Size:
+		return "WinHttpTlsHandshakeServerLeg2Size"
+	case WinHttpRequestHeadersSize:
+		return "WinHttpRequestHeadersSize"
+	case WinHttpRequestHeadersCompressedSize:
+		return "WinHttpRequestHeadersCompressedSize"
+	case WinHttpResponseHeadersSize:
+		return "WinHttpResponseHeadersSize"
+	case WinHttpResponseHeadersCompressedSize:
+		return "WinHttpResponseHeadersCompressedSize"
+	case WinHttpResponseBodySize:
+		return "WinHttpResponseBodySize"
+	case WinHttpResponseBodyCompressedSize:
+		return "WinHttpResponseBodyCompressedSize"
+	case WinHttpProxyTlsHandshakeClientLeg1Size:
+		return "WinHttpProxyTlsHandshakeClientLeg1Size"
+	case WinHttpProxyTlsHandshakeServerLeg1Size:
+		return "WinHttpProxyTlsHandshakeServerLeg1Size"
+	case WinHttpProxyTlsHandshakeClientLeg2Size:
+		return "WinHttpProxyTlsHandshakeClientLeg2Size"
+	case WinHttpProxyTlsHandshakeServerLeg2Size:
+		return "WinHttpProxyTlsHandshakeServerLeg2Size"
+	case WinHttpRequestStatLast:
+		return "WinHttpRequestStatLast"
+	case WinHttpRequestStatMax:
+		return "WinHttpRequestStatMax"
+	default:
+		return fmt.Sprintf("WINHTTP_REQUEST_STAT_ENTRY(%d)", int32(e))
+	}
+}
 
 // WINHTTP_REQUEST_TIME_ENTRY: https://learn.microsoft.com/windows/win32/api/winhttp/ne-winhttp-winhttp_request_time_entry
 type WINHTTP_REQUEST_TIME_ENTRY int32
@@ -136,6 +314,91 @@ const (
 	WinHttpRequestTimeMax                           WINHTTP_REQUEST_TIME_ENTRY = 64
 )
 
+// String returns the WINHTTP_REQUEST_TIME_ENTRY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_REQUEST_TIME_ENTRY) String() string {
+	switch e {
+	case WinHttpProxyDetectionStart:
+		return "WinHttpProxyDetectionStart"
+	case WinHttpProxyDetectionEnd:
+		return "WinHttpProxyDetectionEnd"
+	case WinHttpConnectionAcquireStart:
+		return "WinHttpConnectionAcquireStart"
+	case WinHttpConnectionAcquireWaitEnd:
+		return "WinHttpConnectionAcquireWaitEnd"
+	case WinHttpConnectionAcquireEnd:
+		return "WinHttpConnectionAcquireEnd"
+	case WinHttpNameResolutionStart:
+		return "WinHttpNameResolutionStart"
+	case WinHttpNameResolutionEnd:
+		return "WinHttpNameResolutionEnd"
+	case WinHttpConnectionEstablishmentStart:
+		return "WinHttpConnectionEstablishmentStart"
+	case WinHttpConnectionEstablishmentEnd:
+		return "WinHttpConnectionEstablishmentEnd"
+	case WinHttpTlsHandshakeClientLeg1Start:
+		return "WinHttpTlsHandshakeClientLeg1Start"
+	case WinHttpTlsHandshakeClientLeg1End:
+		return "WinHttpTlsHandshakeClientLeg1End"
+	case WinHttpTlsHandshakeClientLeg2Start:
+		return "WinHttpTlsHandshakeClientLeg2Start"
+	case WinHttpTlsHandshakeClientLeg2End:
+		return "WinHttpTlsHandshakeClientLeg2End"
+	case WinHttpTlsHandshakeClientLeg3Start:
+		return "WinHttpTlsHandshakeClientLeg3Start"
+	case WinHttpTlsHandshakeClientLeg3End:
+		return "WinHttpTlsHandshakeClientLeg3End"
+	case WinHttpStreamWaitStart:
+		return "WinHttpStreamWaitStart"
+	case WinHttpStreamWaitEnd:
+		return "WinHttpStreamWaitEnd"
+	case WinHttpSendRequestStart:
+		return "WinHttpSendRequestStart"
+	case WinHttpSendRequestHeadersCompressionStart:
+		return "WinHttpSendRequestHeadersCompressionStart"
+	case WinHttpSendRequestHeadersCompressionEnd:
+		return "WinHttpSendRequestHeadersCompressionEnd"
+	case WinHttpSendRequestHeadersEnd:
+		return "WinHttpSendRequestHeadersEnd"
+	case WinHttpSendRequestEnd:
+		return "WinHttpSendRequestEnd"
+	case WinHttpReceiveResponseStart:
+		return "WinHttpReceiveResponseStart"
+	case WinHttpReceiveResponseHeadersDecompressionStart:
+		return "WinHttpReceiveResponseHeadersDecompressionStart"
+	case WinHttpReceiveResponseHeadersDecompressionEnd:
+		return "WinHttpReceiveResponseHeadersDecompressionEnd"
+	case WinHttpReceiveResponseHeadersEnd:
+		return "WinHttpReceiveResponseHeadersEnd"
+	case WinHttpReceiveResponseBodyDecompressionDelta:
+		return "WinHttpReceiveResponseBodyDecompressionDelta"
+	case WinHttpReceiveResponseEnd:
+		return "WinHttpReceiveResponseEnd"
+	case WinHttpProxyTunnelStart:
+		return "WinHttpProxyTunnelStart"
+	case WinHttpProxyTunnelEnd:
+		return "WinHttpProxyTunnelEnd"
+	case WinHttpProxyTlsHandshakeClientLeg1Start:
+		return "WinHttpProxyTlsHandshakeClientLeg1Start"
+	case WinHttpProxyTlsHandshakeClientLeg1End:
+		return "WinHttpProxyTlsHandshakeClientLeg1End"
+	case WinHttpProxyTlsHandshakeClientLeg2Start:
+		return "WinHttpProxyTlsHandshakeClientLeg2Start"
+	case WinHttpProxyTlsHandshakeClientLeg2End:
+		return "WinHttpProxyTlsHandshakeClientLeg2End"
+	case WinHttpProxyTlsHandshakeClientLeg3Start:
+		return "WinHttpProxyTlsHandshakeClientLeg3Start"
+	case WinHttpProxyTlsHandshakeClientLeg3End:
+		return "WinHttpProxyTlsHandshakeClientLeg3End"
+	case WinHttpRequestTimeLast:
+		return "WinHttpRequestTimeLast"
+	case WinHttpRequestTimeMax:
+		return "WinHttpRequestTimeMax"
+	default:
+		return fmt.Sprintf("WINHTTP_REQUEST_TIME_ENTRY(%d)", int32(e))
+	}
+}
+
 type WINHTTP_SECURE_DNS_SETTING int32
 
 const (
@@ -145,6 +408,25 @@ const (
 	WinHttpSecureDnsSettingTryEncryptionWithFallback WINHTTP_SECURE_DNS_SETTING = 3
 	WinHttpSecureDnsSettingMax                       WINHTTP_SECURE_DNS_SETTING = 4
 )
+
+// String returns the WINHTTP_SECURE_DNS_SETTING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_SECURE_DNS_SETTING) String() string {
+	switch e {
+	case WinHttpSecureDnsSettingDefault:
+		return "WinHttpSecureDnsSettingDefault"
+	case WinHttpSecureDnsSettingForcePlaintext:
+		return "WinHttpSecureDnsSettingForcePlaintext"
+	case WinHttpSecureDnsSettingRequireEncryption:
+		return "WinHttpSecureDnsSettingRequireEncryption"
+	case WinHttpSecureDnsSettingTryEncryptionWithFallback:
+		return "WinHttpSecureDnsSettingTryEncryptionWithFallback"
+	case WinHttpSecureDnsSettingMax:
+		return "WinHttpSecureDnsSettingMax"
+	default:
+		return fmt.Sprintf("WINHTTP_SECURE_DNS_SETTING(%d)", int32(e))
+	}
+}
 
 // WINHTTP_WEB_SOCKET_BUFFER_TYPE: https://learn.microsoft.com/windows/win32/api/winhttp/ne-winhttp-winhttp_web_socket_buffer_type
 type WINHTTP_WEB_SOCKET_BUFFER_TYPE int32
@@ -156,6 +438,25 @@ const (
 	WINHTTP_WEB_SOCKET_UTF8_FRAGMENT_BUFFER_TYPE   WINHTTP_WEB_SOCKET_BUFFER_TYPE = 3
 	WINHTTP_WEB_SOCKET_CLOSE_BUFFER_TYPE           WINHTTP_WEB_SOCKET_BUFFER_TYPE = 4
 )
+
+// String returns the WINHTTP_WEB_SOCKET_BUFFER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_WEB_SOCKET_BUFFER_TYPE) String() string {
+	switch e {
+	case WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE:
+		return "WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE"
+	case WINHTTP_WEB_SOCKET_BINARY_FRAGMENT_BUFFER_TYPE:
+		return "WINHTTP_WEB_SOCKET_BINARY_FRAGMENT_BUFFER_TYPE"
+	case WINHTTP_WEB_SOCKET_UTF8_MESSAGE_BUFFER_TYPE:
+		return "WINHTTP_WEB_SOCKET_UTF8_MESSAGE_BUFFER_TYPE"
+	case WINHTTP_WEB_SOCKET_UTF8_FRAGMENT_BUFFER_TYPE:
+		return "WINHTTP_WEB_SOCKET_UTF8_FRAGMENT_BUFFER_TYPE"
+	case WINHTTP_WEB_SOCKET_CLOSE_BUFFER_TYPE:
+		return "WINHTTP_WEB_SOCKET_CLOSE_BUFFER_TYPE"
+	default:
+		return fmt.Sprintf("WINHTTP_WEB_SOCKET_BUFFER_TYPE(%d)", int32(e))
+	}
+}
 
 // WINHTTP_WEB_SOCKET_CLOSE_STATUS: https://learn.microsoft.com/windows/win32/api/winhttp/ne-winhttp-winhttp_web_socket_close_status
 type WINHTTP_WEB_SOCKET_CLOSE_STATUS int32
@@ -175,6 +476,39 @@ const (
 	WINHTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS WINHTTP_WEB_SOCKET_CLOSE_STATUS = 1015
 )
 
+// String returns the WINHTTP_WEB_SOCKET_CLOSE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_WEB_SOCKET_CLOSE_STATUS) String() string {
+	switch e {
+	case WINHTTP_WEB_SOCKET_SUCCESS_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_SUCCESS_CLOSE_STATUS"
+	case WINHTTP_WEB_SOCKET_ENDPOINT_TERMINATED_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_ENDPOINT_TERMINATED_CLOSE_STATUS"
+	case WINHTTP_WEB_SOCKET_PROTOCOL_ERROR_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_PROTOCOL_ERROR_CLOSE_STATUS"
+	case WINHTTP_WEB_SOCKET_INVALID_DATA_TYPE_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_INVALID_DATA_TYPE_CLOSE_STATUS"
+	case WINHTTP_WEB_SOCKET_EMPTY_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_EMPTY_CLOSE_STATUS"
+	case WINHTTP_WEB_SOCKET_ABORTED_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_ABORTED_CLOSE_STATUS"
+	case WINHTTP_WEB_SOCKET_INVALID_PAYLOAD_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_INVALID_PAYLOAD_CLOSE_STATUS"
+	case WINHTTP_WEB_SOCKET_POLICY_VIOLATION_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_POLICY_VIOLATION_CLOSE_STATUS"
+	case WINHTTP_WEB_SOCKET_MESSAGE_TOO_BIG_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_MESSAGE_TOO_BIG_CLOSE_STATUS"
+	case WINHTTP_WEB_SOCKET_UNSUPPORTED_EXTENSIONS_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_UNSUPPORTED_EXTENSIONS_CLOSE_STATUS"
+	case WINHTTP_WEB_SOCKET_SERVER_ERROR_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_SERVER_ERROR_CLOSE_STATUS"
+	case WINHTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS:
+		return "WINHTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS"
+	default:
+		return fmt.Sprintf("WINHTTP_WEB_SOCKET_CLOSE_STATUS(%d)", int32(e))
+	}
+}
+
 // WINHTTP_WEB_SOCKET_OPERATION: https://learn.microsoft.com/windows/win32/api/winhttp/ne-winhttp-winhttp_web_socket_operation
 type WINHTTP_WEB_SOCKET_OPERATION int32
 
@@ -185,6 +519,23 @@ const (
 	WINHTTP_WEB_SOCKET_SHUTDOWN_OPERATION WINHTTP_WEB_SOCKET_OPERATION = 3
 )
 
+// String returns the WINHTTP_WEB_SOCKET_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINHTTP_WEB_SOCKET_OPERATION) String() string {
+	switch e {
+	case WINHTTP_WEB_SOCKET_SEND_OPERATION:
+		return "WINHTTP_WEB_SOCKET_SEND_OPERATION"
+	case WINHTTP_WEB_SOCKET_RECEIVE_OPERATION:
+		return "WINHTTP_WEB_SOCKET_RECEIVE_OPERATION"
+	case WINHTTP_WEB_SOCKET_CLOSE_OPERATION:
+		return "WINHTTP_WEB_SOCKET_CLOSE_OPERATION"
+	case WINHTTP_WEB_SOCKET_SHUTDOWN_OPERATION:
+		return "WINHTTP_WEB_SOCKET_SHUTDOWN_OPERATION"
+	default:
+		return fmt.Sprintf("WINHTTP_WEB_SOCKET_OPERATION(%d)", int32(e))
+	}
+}
+
 type WIN_HTTP_CREATE_URL_FLAGS uint32
 
 const (
@@ -192,6 +543,21 @@ const (
 	ICU_REJECT_USERPWD WIN_HTTP_CREATE_URL_FLAGS = 16384
 	ICU_DECODE         WIN_HTTP_CREATE_URL_FLAGS = 268435456
 )
+
+// String returns the WIN_HTTP_CREATE_URL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WIN_HTTP_CREATE_URL_FLAGS) String() string {
+	switch e {
+	case ICU_ESCAPE:
+		return "ICU_ESCAPE"
+	case ICU_REJECT_USERPWD:
+		return "ICU_REJECT_USERPWD"
+	case ICU_DECODE:
+		return "ICU_DECODE"
+	default:
+		return fmt.Sprintf("WIN_HTTP_CREATE_URL_FLAGS(%d)", uint32(e))
+	}
+}
 
 // WinHttpRequestAutoLogonPolicy: https://learn.microsoft.com/windows/win32/WinHttp/winhttprequestautologonpolicy
 type WinHttpRequestAutoLogonPolicy int32
@@ -201,6 +567,21 @@ const (
 	AutoLogonPolicy_OnlyIfBypassProxy WinHttpRequestAutoLogonPolicy = 1
 	AutoLogonPolicy_Never             WinHttpRequestAutoLogonPolicy = 2
 )
+
+// String returns the WinHttpRequestAutoLogonPolicy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WinHttpRequestAutoLogonPolicy) String() string {
+	switch e {
+	case AutoLogonPolicy_Always:
+		return "AutoLogonPolicy_Always"
+	case AutoLogonPolicy_OnlyIfBypassProxy:
+		return "AutoLogonPolicy_OnlyIfBypassProxy"
+	case AutoLogonPolicy_Never:
+		return "AutoLogonPolicy_Never"
+	default:
+		return fmt.Sprintf("WinHttpRequestAutoLogonPolicy(%d)", int32(e))
+	}
+}
 
 // WinHttpRequestOption: https://learn.microsoft.com/windows/win32/WinHttp/winhttprequestoption
 type WinHttpRequestOption int32
@@ -228,6 +609,55 @@ const (
 	WinHttpRequestOption_RejectUserpwd                    WinHttpRequestOption = 19
 )
 
+// String returns the WinHttpRequestOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WinHttpRequestOption) String() string {
+	switch e {
+	case WinHttpRequestOption_UserAgentString:
+		return "WinHttpRequestOption_UserAgentString"
+	case WinHttpRequestOption_URL:
+		return "WinHttpRequestOption_URL"
+	case WinHttpRequestOption_URLCodePage:
+		return "WinHttpRequestOption_URLCodePage"
+	case WinHttpRequestOption_EscapePercentInURL:
+		return "WinHttpRequestOption_EscapePercentInURL"
+	case WinHttpRequestOption_SslErrorIgnoreFlags:
+		return "WinHttpRequestOption_SslErrorIgnoreFlags"
+	case WinHttpRequestOption_SelectCertificate:
+		return "WinHttpRequestOption_SelectCertificate"
+	case WinHttpRequestOption_EnableRedirects:
+		return "WinHttpRequestOption_EnableRedirects"
+	case WinHttpRequestOption_UrlEscapeDisable:
+		return "WinHttpRequestOption_UrlEscapeDisable"
+	case WinHttpRequestOption_UrlEscapeDisableQuery:
+		return "WinHttpRequestOption_UrlEscapeDisableQuery"
+	case WinHttpRequestOption_SecureProtocols:
+		return "WinHttpRequestOption_SecureProtocols"
+	case WinHttpRequestOption_EnableTracing:
+		return "WinHttpRequestOption_EnableTracing"
+	case WinHttpRequestOption_RevertImpersonationOverSsl:
+		return "WinHttpRequestOption_RevertImpersonationOverSsl"
+	case WinHttpRequestOption_EnableHttpsToHttpRedirects:
+		return "WinHttpRequestOption_EnableHttpsToHttpRedirects"
+	case WinHttpRequestOption_EnablePassportAuthentication:
+		return "WinHttpRequestOption_EnablePassportAuthentication"
+	case WinHttpRequestOption_MaxAutomaticRedirects:
+		return "WinHttpRequestOption_MaxAutomaticRedirects"
+	case WinHttpRequestOption_MaxResponseHeaderSize:
+		return "WinHttpRequestOption_MaxResponseHeaderSize"
+	case WinHttpRequestOption_MaxResponseDrainSize:
+		return "WinHttpRequestOption_MaxResponseDrainSize"
+	case WinHttpRequestOption_EnableHttp1_1:
+		return "WinHttpRequestOption_EnableHttp1_1"
+	case WinHttpRequestOption_EnableCertificateRevocationCheck:
+		return "WinHttpRequestOption_EnableCertificateRevocationCheck"
+	case WinHttpRequestOption_RejectUserpwd:
+		return "WinHttpRequestOption_RejectUserpwd"
+	default:
+		return fmt.Sprintf("WinHttpRequestOption(%d)", int32(e))
+	}
+}
+
 type WinHttpRequestSecureProtocols int32
 
 const (
@@ -239,6 +669,27 @@ const (
 	SecureProtocol_ALL    WinHttpRequestSecureProtocols = 168
 )
 
+// String returns the WinHttpRequestSecureProtocols constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WinHttpRequestSecureProtocols) String() string {
+	switch e {
+	case SecureProtocol_SSL2:
+		return "SecureProtocol_SSL2"
+	case SecureProtocol_SSL3:
+		return "SecureProtocol_SSL3"
+	case SecureProtocol_TLS1:
+		return "SecureProtocol_TLS1"
+	case SecureProtocol_TLS1_1:
+		return "SecureProtocol_TLS1_1"
+	case SecureProtocol_TLS1_2:
+		return "SecureProtocol_TLS1_2"
+	case SecureProtocol_ALL:
+		return "SecureProtocol_ALL"
+	default:
+		return fmt.Sprintf("WinHttpRequestSecureProtocols(%d)", int32(e))
+	}
+}
+
 type WinHttpRequestSslErrorFlags int32
 
 const (
@@ -248,3 +699,22 @@ const (
 	SslErrorFlag_CertDateInvalid WinHttpRequestSslErrorFlags = 8192
 	SslErrorFlag_Ignore_All      WinHttpRequestSslErrorFlags = 13056
 )
+
+// String returns the WinHttpRequestSslErrorFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WinHttpRequestSslErrorFlags) String() string {
+	switch e {
+	case SslErrorFlag_UnknownCA:
+		return "SslErrorFlag_UnknownCA"
+	case SslErrorFlag_CertWrongUsage:
+		return "SslErrorFlag_CertWrongUsage"
+	case SslErrorFlag_CertCNInvalid:
+		return "SslErrorFlag_CertCNInvalid"
+	case SslErrorFlag_CertDateInvalid:
+		return "SslErrorFlag_CertDateInvalid"
+	case SslErrorFlag_Ignore_All:
+		return "SslErrorFlag_Ignore_All"
+	default:
+		return fmt.Sprintf("WinHttpRequestSslErrorFlags(%d)", int32(e))
+	}
+}

@@ -4,9 +4,26 @@
 
 package enhancedstorage
 
+import (
+	"fmt"
+)
+
 type ACT_AUTHORIZATION_STATE_VALUE int32
 
 const (
 	ACT_UNAUTHORIZED ACT_AUTHORIZATION_STATE_VALUE = 0
 	ACT_AUTHORIZED   ACT_AUTHORIZATION_STATE_VALUE = 1
 )
+
+// String returns the ACT_AUTHORIZATION_STATE_VALUE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACT_AUTHORIZATION_STATE_VALUE) String() string {
+	switch e {
+	case ACT_UNAUTHORIZED:
+		return "ACT_UNAUTHORIZED"
+	case ACT_AUTHORIZED:
+		return "ACT_AUTHORIZED"
+	default:
+		return fmt.Sprintf("ACT_AUTHORIZATION_STATE_VALUE(%d)", int32(e))
+	}
+}

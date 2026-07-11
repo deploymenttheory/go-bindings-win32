@@ -4,11 +4,26 @@
 
 package metadata
 
+import (
+	"fmt"
+)
+
 type COINITICOR int32
 
 const (
 	COINITCOR_DEFAULT COINITICOR = 0
 )
+
+// String returns the COINITICOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COINITICOR) String() string {
+	switch e {
+	case COINITCOR_DEFAULT:
+		return "COINITCOR_DEFAULT"
+	default:
+		return fmt.Sprintf("COINITICOR(%d)", int32(e))
+	}
+}
 
 type COINITIEE int32
 
@@ -18,12 +33,40 @@ const (
 	COINITEE_MAIN    COINITIEE = 2
 )
 
+// String returns the COINITIEE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COINITIEE) String() string {
+	switch e {
+	case COINITEE_DEFAULT:
+		return "COINITEE_DEFAULT"
+	case COINITEE_DLL:
+		return "COINITEE_DLL"
+	case COINITEE_MAIN:
+		return "COINITEE_MAIN"
+	default:
+		return fmt.Sprintf("COINITIEE(%d)", int32(e))
+	}
+}
+
 type COUNINITIEE int32
 
 const (
 	COUNINITEE_DEFAULT COUNINITIEE = 0
 	COUNINITEE_DLL     COUNINITIEE = 1
 )
+
+// String returns the COUNINITIEE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COUNINITIEE) String() string {
+	switch e {
+	case COUNINITEE_DEFAULT:
+		return "COUNINITEE_DEFAULT"
+	case COUNINITEE_DLL:
+		return "COUNINITEE_DLL"
+	default:
+		return fmt.Sprintf("COUNINITIEE(%d)", int32(e))
+	}
+}
 
 type CeeSectionAttr int64
 
@@ -33,6 +76,23 @@ const (
 	SdReadWrite CeeSectionAttr = 3221225536
 	SdExecute   CeeSectionAttr = 1610612768
 )
+
+// String returns the CeeSectionAttr constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CeeSectionAttr) String() string {
+	switch e {
+	case SdNone:
+		return "SdNone"
+	case SdReadOnly:
+		return "SdReadOnly"
+	case SdReadWrite:
+		return "SdReadWrite"
+	case SdExecute:
+		return "SdExecute"
+	default:
+		return fmt.Sprintf("CeeSectionAttr(%d)", int64(e))
+	}
+}
 
 type CeeSectionRelocType int32
 
@@ -59,11 +119,69 @@ const (
 	SrRelocDir64Ptr       CeeSectionRelocType = 32778
 )
 
+// String returns the CeeSectionRelocType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CeeSectionRelocType) String() string {
+	switch e {
+	case SrRelocAbsolute:
+		return "SrRelocAbsolute"
+	case SrRelocHighLow:
+		return "SrRelocHighLow"
+	case SrRelocHighAdj:
+		return "SrRelocHighAdj"
+	case SrRelocMapToken:
+		return "SrRelocMapToken"
+	case SrRelocRelative:
+		return "SrRelocRelative"
+	case SrRelocFilePos:
+		return "SrRelocFilePos"
+	case SrRelocCodeRelative:
+		return "SrRelocCodeRelative"
+	case SrRelocIA64Imm64:
+		return "SrRelocIA64Imm64"
+	case SrRelocDir64:
+		return "SrRelocDir64"
+	case SrRelocIA64PcRel25:
+		return "SrRelocIA64PcRel25"
+	case SrRelocIA64PcRel64:
+		return "SrRelocIA64PcRel64"
+	case SrRelocAbsoluteTagged:
+		return "SrRelocAbsoluteTagged"
+	case SrRelocSentinel:
+		return "SrRelocSentinel"
+	case SrNoBaseReloc:
+		return "SrNoBaseReloc"
+	case SrRelocPtr:
+		return "SrRelocPtr"
+	case SrRelocHighLowPtr:
+		return "SrRelocHighLowPtr"
+	case SrRelocRelativePtr:
+		return "SrRelocRelativePtr"
+	case SrRelocIA64Imm64Ptr:
+		return "SrRelocIA64Imm64Ptr"
+	case SrRelocDir64Ptr:
+		return "SrRelocDir64Ptr"
+	default:
+		return fmt.Sprintf("CeeSectionRelocType(%d)", int32(e))
+	}
+}
+
 type CompilationRelaxationsEnum int32
 
 const (
 	CompilationRelaxations_NoStringInterning CompilationRelaxationsEnum = 8
 )
+
+// String returns the CompilationRelaxationsEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CompilationRelaxationsEnum) String() string {
+	switch e {
+	case CompilationRelaxations_NoStringInterning:
+		return "CompilationRelaxations_NoStringInterning"
+	default:
+		return fmt.Sprintf("CompilationRelaxationsEnum(%d)", int32(e))
+	}
+}
 
 type CorArgType int32
 
@@ -80,6 +198,37 @@ const (
 	IMAGE_CEE_CS_STRUCT32 CorArgType = 9
 	IMAGE_CEE_CS_BYVALUE  CorArgType = 10
 )
+
+// String returns the CorArgType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorArgType) String() string {
+	switch e {
+	case IMAGE_CEE_CS_END:
+		return "IMAGE_CEE_CS_END"
+	case IMAGE_CEE_CS_VOID:
+		return "IMAGE_CEE_CS_VOID"
+	case IMAGE_CEE_CS_I4:
+		return "IMAGE_CEE_CS_I4"
+	case IMAGE_CEE_CS_I8:
+		return "IMAGE_CEE_CS_I8"
+	case IMAGE_CEE_CS_R4:
+		return "IMAGE_CEE_CS_R4"
+	case IMAGE_CEE_CS_R8:
+		return "IMAGE_CEE_CS_R8"
+	case IMAGE_CEE_CS_PTR:
+		return "IMAGE_CEE_CS_PTR"
+	case IMAGE_CEE_CS_OBJECT:
+		return "IMAGE_CEE_CS_OBJECT"
+	case IMAGE_CEE_CS_STRUCT4:
+		return "IMAGE_CEE_CS_STRUCT4"
+	case IMAGE_CEE_CS_STRUCT32:
+		return "IMAGE_CEE_CS_STRUCT32"
+	case IMAGE_CEE_CS_BYVALUE:
+		return "IMAGE_CEE_CS_BYVALUE"
+	default:
+		return fmt.Sprintf("CorArgType(%d)", int32(e))
+	}
+}
 
 type CorAssemblyFlags int32
 
@@ -104,6 +253,47 @@ const (
 	AfContentType_Mask           CorAssemblyFlags = 3584
 )
 
+// String returns the CorAssemblyFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorAssemblyFlags) String() string {
+	switch e {
+	case AfPublicKey:
+		return "AfPublicKey"
+	case AfPA_None:
+		return "AfPA_None"
+	case AfPA_MSIL:
+		return "AfPA_MSIL"
+	case AfPA_x86:
+		return "AfPA_x86"
+	case AfPA_IA64:
+		return "AfPA_IA64"
+	case AfPA_AMD64:
+		return "AfPA_AMD64"
+	case AfPA_ARM:
+		return "AfPA_ARM"
+	case AfPA_NoPlatform:
+		return "AfPA_NoPlatform"
+	case AfPA_Specified:
+		return "AfPA_Specified"
+	case AfPA_FullMask:
+		return "AfPA_FullMask"
+	case AfPA_Shift:
+		return "AfPA_Shift"
+	case AfEnableJITcompileTracking:
+		return "AfEnableJITcompileTracking"
+	case AfDisableJITcompileOptimizer:
+		return "AfDisableJITcompileOptimizer"
+	case AfRetargetable:
+		return "AfRetargetable"
+	case AfContentType_WindowsRuntime:
+		return "AfContentType_WindowsRuntime"
+	case AfContentType_Mask:
+		return "AfContentType_Mask"
+	default:
+		return fmt.Sprintf("CorAssemblyFlags(%d)", int32(e))
+	}
+}
+
 type CorAttributeTargets int32
 
 const (
@@ -125,6 +315,47 @@ const (
 	CatClassMembers     CorAttributeTargets = 6140
 )
 
+// String returns the CorAttributeTargets constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorAttributeTargets) String() string {
+	switch e {
+	case CatAssembly:
+		return "CatAssembly"
+	case CatModule:
+		return "CatModule"
+	case CatClass:
+		return "CatClass"
+	case CatStruct:
+		return "CatStruct"
+	case CatEnum:
+		return "CatEnum"
+	case CatConstructor:
+		return "CatConstructor"
+	case CatMethod:
+		return "CatMethod"
+	case CatProperty:
+		return "CatProperty"
+	case CatField:
+		return "CatField"
+	case CatEvent:
+		return "CatEvent"
+	case CatInterface:
+		return "CatInterface"
+	case CatParameter:
+		return "CatParameter"
+	case CatDelegate:
+		return "CatDelegate"
+	case CatGenericParameter:
+		return "CatGenericParameter"
+	case CatAll:
+		return "CatAll"
+	case CatClassMembers:
+		return "CatClassMembers"
+	default:
+		return fmt.Sprintf("CorAttributeTargets(%d)", int32(e))
+	}
+}
+
 type CorCallingConvention int32
 
 const (
@@ -142,6 +373,41 @@ const (
 	IMAGE_CEE_CS_CALLCONV_EXPLICITTHIS CorCallingConvention = 64
 	IMAGE_CEE_CS_CALLCONV_GENERIC      CorCallingConvention = 16
 )
+
+// String returns the CorCallingConvention constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorCallingConvention) String() string {
+	switch e {
+	case IMAGE_CEE_CS_CALLCONV_DEFAULT:
+		return "IMAGE_CEE_CS_CALLCONV_DEFAULT"
+	case IMAGE_CEE_CS_CALLCONV_VARARG:
+		return "IMAGE_CEE_CS_CALLCONV_VARARG"
+	case IMAGE_CEE_CS_CALLCONV_FIELD:
+		return "IMAGE_CEE_CS_CALLCONV_FIELD"
+	case IMAGE_CEE_CS_CALLCONV_LOCAL_SIG:
+		return "IMAGE_CEE_CS_CALLCONV_LOCAL_SIG"
+	case IMAGE_CEE_CS_CALLCONV_PROPERTY:
+		return "IMAGE_CEE_CS_CALLCONV_PROPERTY"
+	case IMAGE_CEE_CS_CALLCONV_UNMGD:
+		return "IMAGE_CEE_CS_CALLCONV_UNMGD"
+	case IMAGE_CEE_CS_CALLCONV_GENERICINST:
+		return "IMAGE_CEE_CS_CALLCONV_GENERICINST"
+	case IMAGE_CEE_CS_CALLCONV_NATIVEVARARG:
+		return "IMAGE_CEE_CS_CALLCONV_NATIVEVARARG"
+	case IMAGE_CEE_CS_CALLCONV_MAX:
+		return "IMAGE_CEE_CS_CALLCONV_MAX"
+	case IMAGE_CEE_CS_CALLCONV_MASK:
+		return "IMAGE_CEE_CS_CALLCONV_MASK"
+	case IMAGE_CEE_CS_CALLCONV_HASTHIS:
+		return "IMAGE_CEE_CS_CALLCONV_HASTHIS"
+	case IMAGE_CEE_CS_CALLCONV_EXPLICITTHIS:
+		return "IMAGE_CEE_CS_CALLCONV_EXPLICITTHIS"
+	case IMAGE_CEE_CS_CALLCONV_GENERIC:
+		return "IMAGE_CEE_CS_CALLCONV_GENERIC"
+	default:
+		return fmt.Sprintf("CorCallingConvention(%d)", int32(e))
+	}
+}
 
 type CorCheckDuplicatesFor int32
 
@@ -175,6 +441,67 @@ const (
 	MDDupDefault                CorCheckDuplicatesFor = 1058840
 )
 
+// String returns the CorCheckDuplicatesFor constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorCheckDuplicatesFor) String() string {
+	switch e {
+	case MDDupAll:
+		return "MDDupAll"
+	case MDNoDupChecks:
+		return "MDNoDupChecks"
+	case MDDupTypeDef:
+		return "MDDupTypeDef"
+	case MDDupInterfaceImpl:
+		return "MDDupInterfaceImpl"
+	case MDDupMethodDef:
+		return "MDDupMethodDef"
+	case MDDupTypeRef:
+		return "MDDupTypeRef"
+	case MDDupMemberRef:
+		return "MDDupMemberRef"
+	case MDDupCustomAttribute:
+		return "MDDupCustomAttribute"
+	case MDDupParamDef:
+		return "MDDupParamDef"
+	case MDDupPermission:
+		return "MDDupPermission"
+	case MDDupProperty:
+		return "MDDupProperty"
+	case MDDupEvent:
+		return "MDDupEvent"
+	case MDDupFieldDef:
+		return "MDDupFieldDef"
+	case MDDupSignature:
+		return "MDDupSignature"
+	case MDDupModuleRef:
+		return "MDDupModuleRef"
+	case MDDupTypeSpec:
+		return "MDDupTypeSpec"
+	case MDDupImplMap:
+		return "MDDupImplMap"
+	case MDDupAssemblyRef:
+		return "MDDupAssemblyRef"
+	case MDDupFile:
+		return "MDDupFile"
+	case MDDupExportedType:
+		return "MDDupExportedType"
+	case MDDupManifestResource:
+		return "MDDupManifestResource"
+	case MDDupGenericParam:
+		return "MDDupGenericParam"
+	case MDDupMethodSpec:
+		return "MDDupMethodSpec"
+	case MDDupGenericParamConstraint:
+		return "MDDupGenericParamConstraint"
+	case MDDupAssembly:
+		return "MDDupAssembly"
+	case MDDupDefault:
+		return "MDDupDefault"
+	default:
+		return fmt.Sprintf("CorCheckDuplicatesFor(%d)", int32(e))
+	}
+}
+
 type CorDeclSecurity int32
 
 const (
@@ -197,6 +524,49 @@ const (
 	DclNonCasInheritance CorDeclSecurity = 15
 	DclMaximumValue      CorDeclSecurity = 15
 )
+
+// String returns the CorDeclSecurity constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorDeclSecurity) String() string {
+	switch e {
+	case DclActionMask:
+		return "DclActionMask"
+	case DclActionNil:
+		return "DclActionNil"
+	case DclRequest:
+		return "DclRequest"
+	case DclDemand:
+		return "DclDemand"
+	case DclAssert:
+		return "DclAssert"
+	case DclDeny:
+		return "DclDeny"
+	case DclPermitOnly:
+		return "DclPermitOnly"
+	case DclLinktimeCheck:
+		return "DclLinktimeCheck"
+	case DclInheritanceCheck:
+		return "DclInheritanceCheck"
+	case DclRequestMinimum:
+		return "DclRequestMinimum"
+	case DclRequestOptional:
+		return "DclRequestOptional"
+	case DclRequestRefuse:
+		return "DclRequestRefuse"
+	case DclPrejitGrant:
+		return "DclPrejitGrant"
+	case DclPrejitDenied:
+		return "DclPrejitDenied"
+	case DclNonCasDemand:
+		return "DclNonCasDemand"
+	case DclNonCasLinkDemand:
+		return "DclNonCasLinkDemand"
+	case DclNonCasInheritance:
+		return "DclNonCasInheritance"
+	default:
+		return fmt.Sprintf("CorDeclSecurity(%d)", int32(e))
+	}
+}
 
 type CorElementType uint8
 
@@ -239,6 +609,87 @@ const (
 	ELEMENT_TYPE_PINNED      CorElementType = 69
 )
 
+// String returns the CorElementType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorElementType) String() string {
+	switch e {
+	case ELEMENT_TYPE_END:
+		return "ELEMENT_TYPE_END"
+	case ELEMENT_TYPE_VOID:
+		return "ELEMENT_TYPE_VOID"
+	case ELEMENT_TYPE_BOOLEAN:
+		return "ELEMENT_TYPE_BOOLEAN"
+	case ELEMENT_TYPE_CHAR:
+		return "ELEMENT_TYPE_CHAR"
+	case ELEMENT_TYPE_I1:
+		return "ELEMENT_TYPE_I1"
+	case ELEMENT_TYPE_U1:
+		return "ELEMENT_TYPE_U1"
+	case ELEMENT_TYPE_I2:
+		return "ELEMENT_TYPE_I2"
+	case ELEMENT_TYPE_U2:
+		return "ELEMENT_TYPE_U2"
+	case ELEMENT_TYPE_I4:
+		return "ELEMENT_TYPE_I4"
+	case ELEMENT_TYPE_U4:
+		return "ELEMENT_TYPE_U4"
+	case ELEMENT_TYPE_I8:
+		return "ELEMENT_TYPE_I8"
+	case ELEMENT_TYPE_U8:
+		return "ELEMENT_TYPE_U8"
+	case ELEMENT_TYPE_R4:
+		return "ELEMENT_TYPE_R4"
+	case ELEMENT_TYPE_R8:
+		return "ELEMENT_TYPE_R8"
+	case ELEMENT_TYPE_STRING:
+		return "ELEMENT_TYPE_STRING"
+	case ELEMENT_TYPE_PTR:
+		return "ELEMENT_TYPE_PTR"
+	case ELEMENT_TYPE_BYREF:
+		return "ELEMENT_TYPE_BYREF"
+	case ELEMENT_TYPE_VALUETYPE:
+		return "ELEMENT_TYPE_VALUETYPE"
+	case ELEMENT_TYPE_CLASS:
+		return "ELEMENT_TYPE_CLASS"
+	case ELEMENT_TYPE_VAR:
+		return "ELEMENT_TYPE_VAR"
+	case ELEMENT_TYPE_ARRAY:
+		return "ELEMENT_TYPE_ARRAY"
+	case ELEMENT_TYPE_GENERICINST:
+		return "ELEMENT_TYPE_GENERICINST"
+	case ELEMENT_TYPE_TYPEDBYREF:
+		return "ELEMENT_TYPE_TYPEDBYREF"
+	case ELEMENT_TYPE_I:
+		return "ELEMENT_TYPE_I"
+	case ELEMENT_TYPE_U:
+		return "ELEMENT_TYPE_U"
+	case ELEMENT_TYPE_FNPTR:
+		return "ELEMENT_TYPE_FNPTR"
+	case ELEMENT_TYPE_OBJECT:
+		return "ELEMENT_TYPE_OBJECT"
+	case ELEMENT_TYPE_SZARRAY:
+		return "ELEMENT_TYPE_SZARRAY"
+	case ELEMENT_TYPE_MVAR:
+		return "ELEMENT_TYPE_MVAR"
+	case ELEMENT_TYPE_CMOD_REQD:
+		return "ELEMENT_TYPE_CMOD_REQD"
+	case ELEMENT_TYPE_CMOD_OPT:
+		return "ELEMENT_TYPE_CMOD_OPT"
+	case ELEMENT_TYPE_INTERNAL:
+		return "ELEMENT_TYPE_INTERNAL"
+	case ELEMENT_TYPE_MAX:
+		return "ELEMENT_TYPE_MAX"
+	case ELEMENT_TYPE_MODIFIER:
+		return "ELEMENT_TYPE_MODIFIER"
+	case ELEMENT_TYPE_SENTINEL:
+		return "ELEMENT_TYPE_SENTINEL"
+	case ELEMENT_TYPE_PINNED:
+		return "ELEMENT_TYPE_PINNED"
+	default:
+		return fmt.Sprintf("CorElementType(%d)", uint8(e))
+	}
+}
+
 type CorErrorIfEmitOutOfOrder int32
 
 const (
@@ -252,6 +703,29 @@ const (
 	MDEventOutOfOrder        CorErrorIfEmitOutOfOrder = 16
 )
 
+// String returns the CorErrorIfEmitOutOfOrder constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorErrorIfEmitOutOfOrder) String() string {
+	switch e {
+	case MDErrorOutOfOrderDefault:
+		return "MDErrorOutOfOrderDefault"
+	case MDErrorOutOfOrderAll:
+		return "MDErrorOutOfOrderAll"
+	case MDMethodOutOfOrder:
+		return "MDMethodOutOfOrder"
+	case MDFieldOutOfOrder:
+		return "MDFieldOutOfOrder"
+	case MDParamOutOfOrder:
+		return "MDParamOutOfOrder"
+	case MDPropertyOutOfOrder:
+		return "MDPropertyOutOfOrder"
+	case MDEventOutOfOrder:
+		return "MDEventOutOfOrder"
+	default:
+		return fmt.Sprintf("CorErrorIfEmitOutOfOrder(%d)", int32(e))
+	}
+}
+
 type CorEventAttr int32
 
 const (
@@ -259,6 +733,19 @@ const (
 	EvReservedMask  CorEventAttr = 1024
 	EvRTSpecialName CorEventAttr = 1024
 )
+
+// String returns the CorEventAttr constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorEventAttr) String() string {
+	switch e {
+	case EvSpecialName:
+		return "EvSpecialName"
+	case EvReservedMask:
+		return "EvReservedMask"
+	default:
+		return fmt.Sprintf("CorEventAttr(%d)", int32(e))
+	}
+}
 
 type CorExceptionFlag int32
 
@@ -271,6 +758,25 @@ const (
 	COR_ILEXCEPTION_CLAUSE_FAULT      CorExceptionFlag = 4
 	COR_ILEXCEPTION_CLAUSE_DUPLICATED CorExceptionFlag = 8
 )
+
+// String returns the CorExceptionFlag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorExceptionFlag) String() string {
+	switch e {
+	case COR_ILEXCEPTION_CLAUSE_NONE:
+		return "COR_ILEXCEPTION_CLAUSE_NONE"
+	case COR_ILEXCEPTION_CLAUSE_FILTER:
+		return "COR_ILEXCEPTION_CLAUSE_FILTER"
+	case COR_ILEXCEPTION_CLAUSE_FINALLY:
+		return "COR_ILEXCEPTION_CLAUSE_FINALLY"
+	case COR_ILEXCEPTION_CLAUSE_FAULT:
+		return "COR_ILEXCEPTION_CLAUSE_FAULT"
+	case COR_ILEXCEPTION_CLAUSE_DUPLICATED:
+		return "COR_ILEXCEPTION_CLAUSE_DUPLICATED"
+	default:
+		return fmt.Sprintf("CorExceptionFlag(%d)", int32(e))
+	}
+}
 
 type CorFieldAttr int32
 
@@ -296,6 +802,53 @@ const (
 	FdHasFieldRVA     CorFieldAttr = 256
 )
 
+// String returns the CorFieldAttr constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorFieldAttr) String() string {
+	switch e {
+	case FdFieldAccessMask:
+		return "FdFieldAccessMask"
+	case FdPrivateScope:
+		return "FdPrivateScope"
+	case FdPrivate:
+		return "FdPrivate"
+	case FdFamANDAssem:
+		return "FdFamANDAssem"
+	case FdAssembly:
+		return "FdAssembly"
+	case FdFamily:
+		return "FdFamily"
+	case FdFamORAssem:
+		return "FdFamORAssem"
+	case FdPublic:
+		return "FdPublic"
+	case FdStatic:
+		return "FdStatic"
+	case FdInitOnly:
+		return "FdInitOnly"
+	case FdLiteral:
+		return "FdLiteral"
+	case FdNotSerialized:
+		return "FdNotSerialized"
+	case FdSpecialName:
+		return "FdSpecialName"
+	case FdPinvokeImpl:
+		return "FdPinvokeImpl"
+	case FdReservedMask:
+		return "FdReservedMask"
+	case FdRTSpecialName:
+		return "FdRTSpecialName"
+	case FdHasFieldMarshal:
+		return "FdHasFieldMarshal"
+	case FdHasDefault:
+		return "FdHasDefault"
+	case FdHasFieldRVA:
+		return "FdHasFieldRVA"
+	default:
+		return fmt.Sprintf("CorFieldAttr(%d)", int32(e))
+	}
+}
+
 type CorFileFlags int32
 
 const (
@@ -303,12 +856,38 @@ const (
 	FfContainsNoMetaData CorFileFlags = 1
 )
 
+// String returns the CorFileFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorFileFlags) String() string {
+	switch e {
+	case FfContainsMetaData:
+		return "FfContainsMetaData"
+	case FfContainsNoMetaData:
+		return "FfContainsNoMetaData"
+	default:
+		return fmt.Sprintf("CorFileFlags(%d)", int32(e))
+	}
+}
+
 type CorFileMapping int32
 
 const (
 	FmFlat            CorFileMapping = 0
 	FmExecutableImage CorFileMapping = 1
 )
+
+// String returns the CorFileMapping constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorFileMapping) String() string {
+	switch e {
+	case FmFlat:
+		return "FmFlat"
+	case FmExecutableImage:
+		return "FmExecutableImage"
+	default:
+		return fmt.Sprintf("CorFileMapping(%d)", int32(e))
+	}
+}
 
 type CorGenericParamAttr int32
 
@@ -324,6 +903,31 @@ const (
 	GpDefaultConstructorConstraint   CorGenericParamAttr = 16
 )
 
+// String returns the CorGenericParamAttr constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorGenericParamAttr) String() string {
+	switch e {
+	case GpVarianceMask:
+		return "GpVarianceMask"
+	case GpNonVariant:
+		return "GpNonVariant"
+	case GpCovariant:
+		return "GpCovariant"
+	case GpContravariant:
+		return "GpContravariant"
+	case GpSpecialConstraintMask:
+		return "GpSpecialConstraintMask"
+	case GpReferenceTypeConstraint:
+		return "GpReferenceTypeConstraint"
+	case GpNotNullableValueTypeConstraint:
+		return "GpNotNullableValueTypeConstraint"
+	case GpDefaultConstructorConstraint:
+		return "GpDefaultConstructorConstraint"
+	default:
+		return fmt.Sprintf("CorGenericParamAttr(%d)", int32(e))
+	}
+}
+
 type CorILMethodFlags int32
 
 const (
@@ -338,6 +942,31 @@ const (
 	CorILMethod_TinyFormat1  CorILMethodFlags = 6
 )
 
+// String returns the CorILMethodFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorILMethodFlags) String() string {
+	switch e {
+	case CorILMethod_InitLocals:
+		return "CorILMethod_InitLocals"
+	case CorILMethod_MoreSects:
+		return "CorILMethod_MoreSects"
+	case CorILMethod_CompressedIL:
+		return "CorILMethod_CompressedIL"
+	case CorILMethod_FormatShift:
+		return "CorILMethod_FormatShift"
+	case CorILMethod_FormatMask:
+		return "CorILMethod_FormatMask"
+	case CorILMethod_TinyFormat:
+		return "CorILMethod_TinyFormat"
+	case CorILMethod_SmallFormat:
+		return "CorILMethod_SmallFormat"
+	case CorILMethod_TinyFormat1:
+		return "CorILMethod_TinyFormat1"
+	default:
+		return fmt.Sprintf("CorILMethodFlags(%d)", int32(e))
+	}
+}
+
 type CorILMethodSect int32
 
 const (
@@ -348,6 +977,27 @@ const (
 	CorILMethod_Sect_FatFormat  CorILMethodSect = 64
 	CorILMethod_Sect_MoreSects  CorILMethodSect = 128
 )
+
+// String returns the CorILMethodSect constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorILMethodSect) String() string {
+	switch e {
+	case CorILMethod_Sect_Reserved:
+		return "CorILMethod_Sect_Reserved"
+	case CorILMethod_Sect_EHTable:
+		return "CorILMethod_Sect_EHTable"
+	case CorILMethod_Sect_OptILTable:
+		return "CorILMethod_Sect_OptILTable"
+	case CorILMethod_Sect_KindMask:
+		return "CorILMethod_Sect_KindMask"
+	case CorILMethod_Sect_FatFormat:
+		return "CorILMethod_Sect_FatFormat"
+	case CorILMethod_Sect_MoreSects:
+		return "CorILMethod_Sect_MoreSects"
+	default:
+		return fmt.Sprintf("CorILMethodSect(%d)", int32(e))
+	}
+}
 
 type CorImportOptions int32
 
@@ -363,12 +1013,52 @@ const (
 	MDImportOptionAllExportedTypes    CorImportOptions = 64
 )
 
+// String returns the CorImportOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorImportOptions) String() string {
+	switch e {
+	case MDImportOptionDefault:
+		return "MDImportOptionDefault"
+	case MDImportOptionAll:
+		return "MDImportOptionAll"
+	case MDImportOptionAllTypeDefs:
+		return "MDImportOptionAllTypeDefs"
+	case MDImportOptionAllMethodDefs:
+		return "MDImportOptionAllMethodDefs"
+	case MDImportOptionAllFieldDefs:
+		return "MDImportOptionAllFieldDefs"
+	case MDImportOptionAllProperties:
+		return "MDImportOptionAllProperties"
+	case MDImportOptionAllEvents:
+		return "MDImportOptionAllEvents"
+	case MDImportOptionAllCustomAttributes:
+		return "MDImportOptionAllCustomAttributes"
+	case MDImportOptionAllExportedTypes:
+		return "MDImportOptionAllExportedTypes"
+	default:
+		return fmt.Sprintf("CorImportOptions(%d)", int32(e))
+	}
+}
+
 type CorLinkerOptions int32
 
 const (
 	MDAssembly  CorLinkerOptions = 0
 	MDNetModule CorLinkerOptions = 1
 )
+
+// String returns the CorLinkerOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorLinkerOptions) String() string {
+	switch e {
+	case MDAssembly:
+		return "MDAssembly"
+	case MDNetModule:
+		return "MDNetModule"
+	default:
+		return fmt.Sprintf("CorLinkerOptions(%d)", int32(e))
+	}
+}
 
 type CorLocalRefPreservation int32
 
@@ -378,6 +1068,21 @@ const (
 	MDPreserveLocalMemberRef CorLocalRefPreservation = 2
 )
 
+// String returns the CorLocalRefPreservation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorLocalRefPreservation) String() string {
+	switch e {
+	case MDPreserveLocalRefsNone:
+		return "MDPreserveLocalRefsNone"
+	case MDPreserveLocalTypeRef:
+		return "MDPreserveLocalTypeRef"
+	case MDPreserveLocalMemberRef:
+		return "MDPreserveLocalMemberRef"
+	default:
+		return fmt.Sprintf("CorLocalRefPreservation(%d)", int32(e))
+	}
+}
+
 type CorManifestResourceFlags int32
 
 const (
@@ -385,6 +1090,21 @@ const (
 	MrPublic         CorManifestResourceFlags = 1
 	MrPrivate        CorManifestResourceFlags = 2
 )
+
+// String returns the CorManifestResourceFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorManifestResourceFlags) String() string {
+	switch e {
+	case MrVisibilityMask:
+		return "MrVisibilityMask"
+	case MrPublic:
+		return "MrPublic"
+	case MrPrivate:
+		return "MrPrivate"
+	default:
+		return fmt.Sprintf("CorManifestResourceFlags(%d)", int32(e))
+	}
+}
 
 type CorMethodAttr int32
 
@@ -415,6 +1135,59 @@ const (
 	MdRequireSecObject      CorMethodAttr = 32768
 )
 
+// String returns the CorMethodAttr constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorMethodAttr) String() string {
+	switch e {
+	case MdMemberAccessMask:
+		return "MdMemberAccessMask"
+	case MdPrivateScope:
+		return "MdPrivateScope"
+	case MdPrivate:
+		return "MdPrivate"
+	case MdFamANDAssem:
+		return "MdFamANDAssem"
+	case MdAssem:
+		return "MdAssem"
+	case MdFamily:
+		return "MdFamily"
+	case MdFamORAssem:
+		return "MdFamORAssem"
+	case MdPublic:
+		return "MdPublic"
+	case MdStatic:
+		return "MdStatic"
+	case MdFinal:
+		return "MdFinal"
+	case MdVirtual:
+		return "MdVirtual"
+	case MdHideBySig:
+		return "MdHideBySig"
+	case MdVtableLayoutMask:
+		return "MdVtableLayoutMask"
+	case MdCheckAccessOnOverride:
+		return "MdCheckAccessOnOverride"
+	case MdAbstract:
+		return "MdAbstract"
+	case MdSpecialName:
+		return "MdSpecialName"
+	case MdPinvokeImpl:
+		return "MdPinvokeImpl"
+	case MdUnmanagedExport:
+		return "MdUnmanagedExport"
+	case MdReservedMask:
+		return "MdReservedMask"
+	case MdRTSpecialName:
+		return "MdRTSpecialName"
+	case MdHasSecurity:
+		return "MdHasSecurity"
+	case MdRequireSecObject:
+		return "MdRequireSecObject"
+	default:
+		return fmt.Sprintf("CorMethodAttr(%d)", int32(e))
+	}
+}
+
 type CorMethodImpl int32
 
 const (
@@ -438,6 +1211,45 @@ const (
 	MiMaxMethodImplVal    CorMethodImpl = 65535
 )
 
+// String returns the CorMethodImpl constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorMethodImpl) String() string {
+	switch e {
+	case MiCodeTypeMask:
+		return "MiCodeTypeMask"
+	case MiIL:
+		return "MiIL"
+	case MiNative:
+		return "MiNative"
+	case MiOPTIL:
+		return "MiOPTIL"
+	case MiManagedMask:
+		return "MiManagedMask"
+	case MiForwardRef:
+		return "MiForwardRef"
+	case MiPreserveSig:
+		return "MiPreserveSig"
+	case MiInternalCall:
+		return "MiInternalCall"
+	case MiSynchronized:
+		return "MiSynchronized"
+	case MiNoInlining:
+		return "MiNoInlining"
+	case MiAggressiveInlining:
+		return "MiAggressiveInlining"
+	case MiNoOptimization:
+		return "MiNoOptimization"
+	case MiSecurityMitigations:
+		return "MiSecurityMitigations"
+	case MiUserMask:
+		return "MiUserMask"
+	case MiMaxMethodImplVal:
+		return "MiMaxMethodImplVal"
+	default:
+		return fmt.Sprintf("CorMethodImpl(%d)", int32(e))
+	}
+}
+
 type CorMethodSemanticsAttr int32
 
 const (
@@ -449,6 +1261,27 @@ const (
 	MsFire     CorMethodSemanticsAttr = 32
 )
 
+// String returns the CorMethodSemanticsAttr constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorMethodSemanticsAttr) String() string {
+	switch e {
+	case MsSetter:
+		return "MsSetter"
+	case MsGetter:
+		return "MsGetter"
+	case MsOther:
+		return "MsOther"
+	case MsAddOn:
+		return "MsAddOn"
+	case MsRemoveOn:
+		return "MsRemoveOn"
+	case MsFire:
+		return "MsFire"
+	default:
+		return fmt.Sprintf("CorMethodSemanticsAttr(%d)", int32(e))
+	}
+}
+
 type CorNativeLinkFlags int32
 
 const (
@@ -457,6 +1290,23 @@ const (
 	NlfNoMangle  CorNativeLinkFlags = 2
 	NlfMaxValue  CorNativeLinkFlags = 3
 )
+
+// String returns the CorNativeLinkFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorNativeLinkFlags) String() string {
+	switch e {
+	case NlfNone:
+		return "NlfNone"
+	case NlfLastError:
+		return "NlfLastError"
+	case NlfNoMangle:
+		return "NlfNoMangle"
+	case NlfMaxValue:
+		return "NlfMaxValue"
+	default:
+		return fmt.Sprintf("CorNativeLinkFlags(%d)", int32(e))
+	}
+}
 
 type CorNativeLinkType int32
 
@@ -468,6 +1318,27 @@ const (
 	NltOle      CorNativeLinkType = 5
 	NltMaxValue CorNativeLinkType = 7
 )
+
+// String returns the CorNativeLinkType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorNativeLinkType) String() string {
+	switch e {
+	case NltNone:
+		return "NltNone"
+	case NltAnsi:
+		return "NltAnsi"
+	case NltUnicode:
+		return "NltUnicode"
+	case NltAuto:
+		return "NltAuto"
+	case NltOle:
+		return "NltOle"
+	case NltMaxValue:
+		return "NltMaxValue"
+	default:
+		return fmt.Sprintf("CorNativeLinkType(%d)", int32(e))
+	}
+}
 
 type CorNativeType int32
 
@@ -522,6 +1393,111 @@ const (
 	NATIVE_TYPE_MAX             CorNativeType = 80
 )
 
+// String returns the CorNativeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorNativeType) String() string {
+	switch e {
+	case NATIVE_TYPE_END:
+		return "NATIVE_TYPE_END"
+	case NATIVE_TYPE_VOID:
+		return "NATIVE_TYPE_VOID"
+	case NATIVE_TYPE_BOOLEAN:
+		return "NATIVE_TYPE_BOOLEAN"
+	case NATIVE_TYPE_I1:
+		return "NATIVE_TYPE_I1"
+	case NATIVE_TYPE_U1:
+		return "NATIVE_TYPE_U1"
+	case NATIVE_TYPE_I2:
+		return "NATIVE_TYPE_I2"
+	case NATIVE_TYPE_U2:
+		return "NATIVE_TYPE_U2"
+	case NATIVE_TYPE_I4:
+		return "NATIVE_TYPE_I4"
+	case NATIVE_TYPE_U4:
+		return "NATIVE_TYPE_U4"
+	case NATIVE_TYPE_I8:
+		return "NATIVE_TYPE_I8"
+	case NATIVE_TYPE_U8:
+		return "NATIVE_TYPE_U8"
+	case NATIVE_TYPE_R4:
+		return "NATIVE_TYPE_R4"
+	case NATIVE_TYPE_R8:
+		return "NATIVE_TYPE_R8"
+	case NATIVE_TYPE_SYSCHAR:
+		return "NATIVE_TYPE_SYSCHAR"
+	case NATIVE_TYPE_VARIANT:
+		return "NATIVE_TYPE_VARIANT"
+	case NATIVE_TYPE_CURRENCY:
+		return "NATIVE_TYPE_CURRENCY"
+	case NATIVE_TYPE_PTR:
+		return "NATIVE_TYPE_PTR"
+	case NATIVE_TYPE_DECIMAL:
+		return "NATIVE_TYPE_DECIMAL"
+	case NATIVE_TYPE_DATE:
+		return "NATIVE_TYPE_DATE"
+	case NATIVE_TYPE_BSTR:
+		return "NATIVE_TYPE_BSTR"
+	case NATIVE_TYPE_LPSTR:
+		return "NATIVE_TYPE_LPSTR"
+	case NATIVE_TYPE_LPWSTR:
+		return "NATIVE_TYPE_LPWSTR"
+	case NATIVE_TYPE_LPTSTR:
+		return "NATIVE_TYPE_LPTSTR"
+	case NATIVE_TYPE_FIXEDSYSSTRING:
+		return "NATIVE_TYPE_FIXEDSYSSTRING"
+	case NATIVE_TYPE_OBJECTREF:
+		return "NATIVE_TYPE_OBJECTREF"
+	case NATIVE_TYPE_IUNKNOWN:
+		return "NATIVE_TYPE_IUNKNOWN"
+	case NATIVE_TYPE_IDISPATCH:
+		return "NATIVE_TYPE_IDISPATCH"
+	case NATIVE_TYPE_STRUCT:
+		return "NATIVE_TYPE_STRUCT"
+	case NATIVE_TYPE_INTF:
+		return "NATIVE_TYPE_INTF"
+	case NATIVE_TYPE_SAFEARRAY:
+		return "NATIVE_TYPE_SAFEARRAY"
+	case NATIVE_TYPE_FIXEDARRAY:
+		return "NATIVE_TYPE_FIXEDARRAY"
+	case NATIVE_TYPE_INT:
+		return "NATIVE_TYPE_INT"
+	case NATIVE_TYPE_UINT:
+		return "NATIVE_TYPE_UINT"
+	case NATIVE_TYPE_NESTEDSTRUCT:
+		return "NATIVE_TYPE_NESTEDSTRUCT"
+	case NATIVE_TYPE_BYVALSTR:
+		return "NATIVE_TYPE_BYVALSTR"
+	case NATIVE_TYPE_ANSIBSTR:
+		return "NATIVE_TYPE_ANSIBSTR"
+	case NATIVE_TYPE_TBSTR:
+		return "NATIVE_TYPE_TBSTR"
+	case NATIVE_TYPE_VARIANTBOOL:
+		return "NATIVE_TYPE_VARIANTBOOL"
+	case NATIVE_TYPE_FUNC:
+		return "NATIVE_TYPE_FUNC"
+	case NATIVE_TYPE_ASANY:
+		return "NATIVE_TYPE_ASANY"
+	case NATIVE_TYPE_ARRAY:
+		return "NATIVE_TYPE_ARRAY"
+	case NATIVE_TYPE_LPSTRUCT:
+		return "NATIVE_TYPE_LPSTRUCT"
+	case NATIVE_TYPE_CUSTOMMARSHALER:
+		return "NATIVE_TYPE_CUSTOMMARSHALER"
+	case NATIVE_TYPE_ERROR:
+		return "NATIVE_TYPE_ERROR"
+	case NATIVE_TYPE_IINSPECTABLE:
+		return "NATIVE_TYPE_IINSPECTABLE"
+	case NATIVE_TYPE_HSTRING:
+		return "NATIVE_TYPE_HSTRING"
+	case NATIVE_TYPE_LPUTF8STR:
+		return "NATIVE_TYPE_LPUTF8STR"
+	case NATIVE_TYPE_MAX:
+		return "NATIVE_TYPE_MAX"
+	default:
+		return fmt.Sprintf("CorNativeType(%d)", int32(e))
+	}
+}
+
 type CorNotificationForTokenMovement int32
 
 const (
@@ -550,6 +1526,61 @@ const (
 	MDNotifyResource        CorNotificationForTokenMovement = 134217728
 )
 
+// String returns the CorNotificationForTokenMovement constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorNotificationForTokenMovement) String() string {
+	switch e {
+	case MDNotifyDefault:
+		return "MDNotifyDefault"
+	case MDNotifyAll:
+		return "MDNotifyAll"
+	case MDNotifyNone:
+		return "MDNotifyNone"
+	case MDNotifyMethodDef:
+		return "MDNotifyMethodDef"
+	case MDNotifyMemberRef:
+		return "MDNotifyMemberRef"
+	case MDNotifyFieldDef:
+		return "MDNotifyFieldDef"
+	case MDNotifyTypeRef:
+		return "MDNotifyTypeRef"
+	case MDNotifyTypeDef:
+		return "MDNotifyTypeDef"
+	case MDNotifyParamDef:
+		return "MDNotifyParamDef"
+	case MDNotifyInterfaceImpl:
+		return "MDNotifyInterfaceImpl"
+	case MDNotifyProperty:
+		return "MDNotifyProperty"
+	case MDNotifyEvent:
+		return "MDNotifyEvent"
+	case MDNotifySignature:
+		return "MDNotifySignature"
+	case MDNotifyTypeSpec:
+		return "MDNotifyTypeSpec"
+	case MDNotifyCustomAttribute:
+		return "MDNotifyCustomAttribute"
+	case MDNotifySecurityValue:
+		return "MDNotifySecurityValue"
+	case MDNotifyPermission:
+		return "MDNotifyPermission"
+	case MDNotifyModuleRef:
+		return "MDNotifyModuleRef"
+	case MDNotifyNameSpace:
+		return "MDNotifyNameSpace"
+	case MDNotifyAssemblyRef:
+		return "MDNotifyAssemblyRef"
+	case MDNotifyFile:
+		return "MDNotifyFile"
+	case MDNotifyExportedType:
+		return "MDNotifyExportedType"
+	case MDNotifyResource:
+		return "MDNotifyResource"
+	default:
+		return fmt.Sprintf("CorNotificationForTokenMovement(%d)", int32(e))
+	}
+}
+
 type CorOpenFlags int32
 
 const (
@@ -568,6 +1599,39 @@ const (
 	OfReserved       CorOpenFlags = -6336
 )
 
+// String returns the CorOpenFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorOpenFlags) String() string {
+	switch e {
+	case OfRead:
+		return "OfRead"
+	case OfWrite:
+		return "OfWrite"
+	case OfCopyMemory:
+		return "OfCopyMemory"
+	case OfReadOnly:
+		return "OfReadOnly"
+	case OfTakeOwnership:
+		return "OfTakeOwnership"
+	case OfNoTypeLib:
+		return "OfNoTypeLib"
+	case OfNoTransform:
+		return "OfNoTransform"
+	case OfCheckIntegrity:
+		return "OfCheckIntegrity"
+	case OfReserved1:
+		return "OfReserved1"
+	case OfReserved2:
+		return "OfReserved2"
+	case OfReserved3:
+		return "OfReserved3"
+	case OfReserved:
+		return "OfReserved"
+	default:
+		return fmt.Sprintf("CorOpenFlags(%d)", int32(e))
+	}
+}
+
 type CorPEKind int32
 
 const (
@@ -578,6 +1642,27 @@ const (
 	Pe32Unmanaged    CorPEKind = 8
 	Pe32BitPreferred CorPEKind = 16
 )
+
+// String returns the CorPEKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorPEKind) String() string {
+	switch e {
+	case PeNot:
+		return "PeNot"
+	case PeILonly:
+		return "PeILonly"
+	case Pe32BitRequired:
+		return "Pe32BitRequired"
+	case Pe32Plus:
+		return "Pe32Plus"
+	case Pe32Unmanaged:
+		return "Pe32Unmanaged"
+	case Pe32BitPreferred:
+		return "Pe32BitPreferred"
+	default:
+		return fmt.Sprintf("CorPEKind(%d)", int32(e))
+	}
+}
 
 type CorParamAttr int32
 
@@ -590,6 +1675,29 @@ const (
 	PdHasFieldMarshal CorParamAttr = 8192
 	PdUnused          CorParamAttr = 53216
 )
+
+// String returns the CorParamAttr constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorParamAttr) String() string {
+	switch e {
+	case PdIn:
+		return "PdIn"
+	case PdOut:
+		return "PdOut"
+	case PdOptional:
+		return "PdOptional"
+	case PdReservedMask:
+		return "PdReservedMask"
+	case PdHasDefault:
+		return "PdHasDefault"
+	case PdHasFieldMarshal:
+		return "PdHasFieldMarshal"
+	case PdUnused:
+		return "PdUnused"
+	default:
+		return fmt.Sprintf("CorParamAttr(%d)", int32(e))
+	}
+}
 
 type CorPinvokeMap int32
 
@@ -618,6 +1726,53 @@ const (
 	PmMaxValue                      CorPinvokeMap = 65535
 )
 
+// String returns the CorPinvokeMap constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorPinvokeMap) String() string {
+	switch e {
+	case PmNoMangle:
+		return "PmNoMangle"
+	case PmCharSetMask:
+		return "PmCharSetMask"
+	case PmCharSetNotSpec:
+		return "PmCharSetNotSpec"
+	case PmCharSetAnsi:
+		return "PmCharSetAnsi"
+	case PmCharSetUnicode:
+		return "PmCharSetUnicode"
+	case PmBestFitEnabled:
+		return "PmBestFitEnabled"
+	case PmBestFitDisabled:
+		return "PmBestFitDisabled"
+	case PmBestFitMask:
+		return "PmBestFitMask"
+	case PmThrowOnUnmappableCharEnabled:
+		return "PmThrowOnUnmappableCharEnabled"
+	case PmThrowOnUnmappableCharDisabled:
+		return "PmThrowOnUnmappableCharDisabled"
+	case PmThrowOnUnmappableCharMask:
+		return "PmThrowOnUnmappableCharMask"
+	case PmSupportsLastError:
+		return "PmSupportsLastError"
+	case PmCallConvMask:
+		return "PmCallConvMask"
+	case PmCallConvWinapi:
+		return "PmCallConvWinapi"
+	case PmCallConvCdecl:
+		return "PmCallConvCdecl"
+	case PmCallConvStdcall:
+		return "PmCallConvStdcall"
+	case PmCallConvThiscall:
+		return "PmCallConvThiscall"
+	case PmCallConvFastcall:
+		return "PmCallConvFastcall"
+	case PmMaxValue:
+		return "PmMaxValue"
+	default:
+		return fmt.Sprintf("CorPinvokeMap(%d)", int32(e))
+	}
+}
+
 type CorPropertyAttr int32
 
 const (
@@ -627,6 +1782,25 @@ const (
 	PrHasDefault    CorPropertyAttr = 4096
 	PrUnused        CorPropertyAttr = 59903
 )
+
+// String returns the CorPropertyAttr constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorPropertyAttr) String() string {
+	switch e {
+	case PrSpecialName:
+		return "PrSpecialName"
+	case PrReservedMask:
+		return "PrReservedMask"
+	case PrRTSpecialName:
+		return "PrRTSpecialName"
+	case PrHasDefault:
+		return "PrHasDefault"
+	case PrUnused:
+		return "PrUnused"
+	default:
+		return fmt.Sprintf("CorPropertyAttr(%d)", int32(e))
+	}
+}
 
 type CorRefToDefCheck int32
 
@@ -638,6 +1812,25 @@ const (
 	MDMemberRefToDef  CorRefToDefCheck = 2
 )
 
+// String returns the CorRefToDefCheck constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorRefToDefCheck) String() string {
+	switch e {
+	case MDRefToDefDefault:
+		return "MDRefToDefDefault"
+	case MDRefToDefAll:
+		return "MDRefToDefAll"
+	case MDRefToDefNone:
+		return "MDRefToDefNone"
+	case MDTypeRefToDef:
+		return "MDTypeRefToDef"
+	case MDMemberRefToDef:
+		return "MDMemberRefToDef"
+	default:
+		return fmt.Sprintf("CorRefToDefCheck(%d)", int32(e))
+	}
+}
+
 type CorRegFlags int32
 
 const (
@@ -646,6 +1839,21 @@ const (
 	RegHasRefs CorRegFlags = 4
 )
 
+// String returns the CorRegFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorRegFlags) String() string {
+	switch e {
+	case RegNoCopy:
+		return "RegNoCopy"
+	case RegConfig:
+		return "RegConfig"
+	case RegHasRefs:
+		return "RegHasRefs"
+	default:
+		return fmt.Sprintf("CorRegFlags(%d)", int32(e))
+	}
+}
+
 type CorSaveSize int32
 
 const (
@@ -653,6 +1861,21 @@ const (
 	CssQuick               CorSaveSize = 1
 	CssDiscardTransientCAs CorSaveSize = 2
 )
+
+// String returns the CorSaveSize constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorSaveSize) String() string {
+	switch e {
+	case CssAccurate:
+		return "CssAccurate"
+	case CssQuick:
+		return "CssQuick"
+	case CssDiscardTransientCAs:
+		return "CssDiscardTransientCAs"
+	default:
+		return fmt.Sprintf("CorSaveSize(%d)", int32(e))
+	}
+}
 
 type CorSerializationType int32
 
@@ -679,6 +1902,55 @@ const (
 	SERIALIZATION_TYPE_ENUM          CorSerializationType = 85
 )
 
+// String returns the CorSerializationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorSerializationType) String() string {
+	switch e {
+	case SERIALIZATION_TYPE_UNDEFINED:
+		return "SERIALIZATION_TYPE_UNDEFINED"
+	case SERIALIZATION_TYPE_BOOLEAN:
+		return "SERIALIZATION_TYPE_BOOLEAN"
+	case SERIALIZATION_TYPE_CHAR:
+		return "SERIALIZATION_TYPE_CHAR"
+	case SERIALIZATION_TYPE_I1:
+		return "SERIALIZATION_TYPE_I1"
+	case SERIALIZATION_TYPE_U1:
+		return "SERIALIZATION_TYPE_U1"
+	case SERIALIZATION_TYPE_I2:
+		return "SERIALIZATION_TYPE_I2"
+	case SERIALIZATION_TYPE_U2:
+		return "SERIALIZATION_TYPE_U2"
+	case SERIALIZATION_TYPE_I4:
+		return "SERIALIZATION_TYPE_I4"
+	case SERIALIZATION_TYPE_U4:
+		return "SERIALIZATION_TYPE_U4"
+	case SERIALIZATION_TYPE_I8:
+		return "SERIALIZATION_TYPE_I8"
+	case SERIALIZATION_TYPE_U8:
+		return "SERIALIZATION_TYPE_U8"
+	case SERIALIZATION_TYPE_R4:
+		return "SERIALIZATION_TYPE_R4"
+	case SERIALIZATION_TYPE_R8:
+		return "SERIALIZATION_TYPE_R8"
+	case SERIALIZATION_TYPE_STRING:
+		return "SERIALIZATION_TYPE_STRING"
+	case SERIALIZATION_TYPE_SZARRAY:
+		return "SERIALIZATION_TYPE_SZARRAY"
+	case SERIALIZATION_TYPE_TYPE:
+		return "SERIALIZATION_TYPE_TYPE"
+	case SERIALIZATION_TYPE_TAGGED_OBJECT:
+		return "SERIALIZATION_TYPE_TAGGED_OBJECT"
+	case SERIALIZATION_TYPE_FIELD:
+		return "SERIALIZATION_TYPE_FIELD"
+	case SERIALIZATION_TYPE_PROPERTY:
+		return "SERIALIZATION_TYPE_PROPERTY"
+	case SERIALIZATION_TYPE_ENUM:
+		return "SERIALIZATION_TYPE_ENUM"
+	default:
+		return fmt.Sprintf("CorSerializationType(%d)", int32(e))
+	}
+}
+
 type CorSetENC int32
 
 const (
@@ -692,6 +1964,27 @@ const (
 	MDUpdateMask        CorSetENC = 7
 )
 
+// String returns the CorSetENC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorSetENC) String() string {
+	switch e {
+	case MDSetENCOn:
+		return "MDSetENCOn"
+	case MDSetENCOff:
+		return "MDSetENCOff"
+	case MDUpdateExtension:
+		return "MDUpdateExtension"
+	case MDUpdateIncremental:
+		return "MDUpdateIncremental"
+	case MDUpdateDelta:
+		return "MDUpdateDelta"
+	case MDUpdateMask:
+		return "MDUpdateMask"
+	default:
+		return fmt.Sprintf("CorSetENC(%d)", int32(e))
+	}
+}
+
 type CorThreadSafetyOptions int32
 
 const (
@@ -699,6 +1992,19 @@ const (
 	MDThreadSafetyOff     CorThreadSafetyOptions = 0
 	MDThreadSafetyOn      CorThreadSafetyOptions = 1
 )
+
+// String returns the CorThreadSafetyOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorThreadSafetyOptions) String() string {
+	switch e {
+	case MDThreadSafetyDefault:
+		return "MDThreadSafetyDefault"
+	case MDThreadSafetyOn:
+		return "MDThreadSafetyOn"
+	default:
+		return fmt.Sprintf("CorThreadSafetyOptions(%d)", int32(e))
+	}
+}
 
 type CorTokenType int32
 
@@ -731,6 +2037,69 @@ const (
 	MdtName                   CorTokenType = 1895825408
 	MdtBaseType               CorTokenType = 1912602624
 )
+
+// String returns the CorTokenType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorTokenType) String() string {
+	switch e {
+	case MdtModule:
+		return "MdtModule"
+	case MdtTypeRef:
+		return "MdtTypeRef"
+	case MdtTypeDef:
+		return "MdtTypeDef"
+	case MdtFieldDef:
+		return "MdtFieldDef"
+	case MdtMethodDef:
+		return "MdtMethodDef"
+	case MdtParamDef:
+		return "MdtParamDef"
+	case MdtInterfaceImpl:
+		return "MdtInterfaceImpl"
+	case MdtMemberRef:
+		return "MdtMemberRef"
+	case MdtCustomAttribute:
+		return "MdtCustomAttribute"
+	case MdtPermission:
+		return "MdtPermission"
+	case MdtSignature:
+		return "MdtSignature"
+	case MdtEvent:
+		return "MdtEvent"
+	case MdtProperty:
+		return "MdtProperty"
+	case MdtMethodImpl:
+		return "MdtMethodImpl"
+	case MdtModuleRef:
+		return "MdtModuleRef"
+	case MdtTypeSpec:
+		return "MdtTypeSpec"
+	case MdtAssembly:
+		return "MdtAssembly"
+	case MdtAssemblyRef:
+		return "MdtAssemblyRef"
+	case MdtFile:
+		return "MdtFile"
+	case MdtExportedType:
+		return "MdtExportedType"
+	case MdtManifestResource:
+		return "MdtManifestResource"
+	case MdtGenericParam:
+		return "MdtGenericParam"
+	case MdtMethodSpec:
+		return "MdtMethodSpec"
+	case MdtGenericParamConstraint:
+		return "MdtGenericParamConstraint"
+	case MdtString:
+		return "MdtString"
+	case MdtName:
+		return "MdtName"
+	case MdtBaseType:
+		return "MdtBaseType"
+	default:
+		return fmt.Sprintf("CorTokenType(%d)", int32(e))
+	}
+}
 
 type CorTypeAttr int32
 
@@ -770,6 +2139,69 @@ const (
 	TdHasSecurity        CorTypeAttr = 262144
 )
 
+// String returns the CorTypeAttr constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorTypeAttr) String() string {
+	switch e {
+	case TdVisibilityMask:
+		return "TdVisibilityMask"
+	case TdNotPublic:
+		return "TdNotPublic"
+	case TdPublic:
+		return "TdPublic"
+	case TdNestedPublic:
+		return "TdNestedPublic"
+	case TdNestedPrivate:
+		return "TdNestedPrivate"
+	case TdNestedFamily:
+		return "TdNestedFamily"
+	case TdNestedAssembly:
+		return "TdNestedAssembly"
+	case TdNestedFamANDAssem:
+		return "TdNestedFamANDAssem"
+	case TdLayoutMask:
+		return "TdLayoutMask"
+	case TdSequentialLayout:
+		return "TdSequentialLayout"
+	case TdExplicitLayout:
+		return "TdExplicitLayout"
+	case TdClassSemanticsMask:
+		return "TdClassSemanticsMask"
+	case TdAbstract:
+		return "TdAbstract"
+	case TdSealed:
+		return "TdSealed"
+	case TdSpecialName:
+		return "TdSpecialName"
+	case TdImport:
+		return "TdImport"
+	case TdSerializable:
+		return "TdSerializable"
+	case TdWindowsRuntime:
+		return "TdWindowsRuntime"
+	case TdStringFormatMask:
+		return "TdStringFormatMask"
+	case TdUnicodeClass:
+		return "TdUnicodeClass"
+	case TdAutoClass:
+		return "TdAutoClass"
+	case TdCustomFormatMask:
+		return "TdCustomFormatMask"
+	case TdBeforeFieldInit:
+		return "TdBeforeFieldInit"
+	case TdForwarder:
+		return "TdForwarder"
+	case TdReservedMask:
+		return "TdReservedMask"
+	case TdRTSpecialName:
+		return "TdRTSpecialName"
+	case TdHasSecurity:
+		return "TdHasSecurity"
+	default:
+		return fmt.Sprintf("CorTypeAttr(%d)", int32(e))
+	}
+}
+
 type CorUnmanagedCallingConvention int32
 
 const (
@@ -783,6 +2215,23 @@ const (
 	IMAGE_CEE_CS_CALLCONV_FASTCALL        CorUnmanagedCallingConvention = 4
 )
 
+// String returns the CorUnmanagedCallingConvention constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorUnmanagedCallingConvention) String() string {
+	switch e {
+	case IMAGE_CEE_UNMANAGED_CALLCONV_C:
+		return "IMAGE_CEE_UNMANAGED_CALLCONV_C"
+	case IMAGE_CEE_UNMANAGED_CALLCONV_STDCALL:
+		return "IMAGE_CEE_UNMANAGED_CALLCONV_STDCALL"
+	case IMAGE_CEE_UNMANAGED_CALLCONV_THISCALL:
+		return "IMAGE_CEE_UNMANAGED_CALLCONV_THISCALL"
+	case IMAGE_CEE_UNMANAGED_CALLCONV_FASTCALL:
+		return "IMAGE_CEE_UNMANAGED_CALLCONV_FASTCALL"
+	default:
+		return fmt.Sprintf("CorUnmanagedCallingConvention(%d)", int32(e))
+	}
+}
+
 type CorValidatorModuleType int32
 
 const (
@@ -795,6 +2244,25 @@ const (
 	ValidatorModuleTypeMax     CorValidatorModuleType = 4
 )
 
+// String returns the CorValidatorModuleType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorValidatorModuleType) String() string {
+	switch e {
+	case ValidatorModuleTypeInvalid:
+		return "ValidatorModuleTypeInvalid"
+	case ValidatorModuleTypeMin:
+		return "ValidatorModuleTypeMin"
+	case ValidatorModuleTypeObj:
+		return "ValidatorModuleTypeObj"
+	case ValidatorModuleTypeEnc:
+		return "ValidatorModuleTypeEnc"
+	case ValidatorModuleTypeIncr:
+		return "ValidatorModuleTypeIncr"
+	default:
+		return fmt.Sprintf("CorValidatorModuleType(%d)", int32(e))
+	}
+}
+
 type LoadHintEnum int32
 
 const (
@@ -803,6 +2271,23 @@ const (
 	LoadSometimes LoadHintEnum = 2
 	LoadNever     LoadHintEnum = 3
 )
+
+// String returns the LoadHintEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LoadHintEnum) String() string {
+	switch e {
+	case LoadDefault:
+		return "LoadDefault"
+	case LoadAlways:
+		return "LoadAlways"
+	case LoadSometimes:
+		return "LoadSometimes"
+	case LoadNever:
+		return "LoadNever"
+	default:
+		return fmt.Sprintf("LoadHintEnum(%d)", int32(e))
+	}
+}
 
 type MergeFlags int32
 
@@ -814,6 +2299,25 @@ const (
 	MergeExportedTypes MergeFlags = 8
 )
 
+// String returns the MergeFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MergeFlags) String() string {
+	switch e {
+	case MergeFlagsNone:
+		return "MergeFlagsNone"
+	case MergeManifest:
+		return "MergeManifest"
+	case DropMemberRefCAs:
+		return "DropMemberRefCAs"
+	case NoDupCheck:
+		return "NoDupCheck"
+	case MergeExportedTypes:
+		return "MergeExportedTypes"
+	default:
+		return fmt.Sprintf("MergeFlags(%d)", int32(e))
+	}
+}
+
 type NGenHintEnum int32
 
 const (
@@ -823,6 +2327,23 @@ const (
 	NGenNever   NGenHintEnum = 3
 )
 
+// String returns the NGenHintEnum constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NGenHintEnum) String() string {
+	switch e {
+	case NGenDefault:
+		return "NGenDefault"
+	case NGenEager:
+		return "NGenEager"
+	case NGenLazy:
+		return "NGenLazy"
+	case NGenNever:
+		return "NGenNever"
+	default:
+		return fmt.Sprintf("NGenHintEnum(%d)", int32(e))
+	}
+}
+
 type NativeTypeArrayFlags int32
 
 const (
@@ -830,8 +2351,32 @@ const (
 	NtaReserved                NativeTypeArrayFlags = 65534
 )
 
+// String returns the NativeTypeArrayFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NativeTypeArrayFlags) String() string {
+	switch e {
+	case NtaSizeParamIndexSpecified:
+		return "NtaSizeParamIndexSpecified"
+	case NtaReserved:
+		return "NtaReserved"
+	default:
+		return fmt.Sprintf("NativeTypeArrayFlags(%d)", int32(e))
+	}
+}
+
 type ReplacesGeneralNumericDefines int32
 
 const (
 	IMAGE_DIRECTORY_ENTRY_COMHEADER ReplacesGeneralNumericDefines = 14
 )
+
+// String returns the ReplacesGeneralNumericDefines constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ReplacesGeneralNumericDefines) String() string {
+	switch e {
+	case IMAGE_DIRECTORY_ENTRY_COMHEADER:
+		return "IMAGE_DIRECTORY_ENTRY_COMHEADER"
+	default:
+		return fmt.Sprintf("ReplacesGeneralNumericDefines(%d)", int32(e))
+	}
+}

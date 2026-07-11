@@ -4,6 +4,10 @@
 
 package endpoints
 
+import (
+	"fmt"
+)
+
 type EndpointConnectorType int32
 
 const (
@@ -14,3 +18,24 @@ const (
 	ELoopbackConnectorPostVolume EndpointConnectorType = 4
 	EConnectorCount              EndpointConnectorType = 5
 )
+
+// String returns the EndpointConnectorType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EndpointConnectorType) String() string {
+	switch e {
+	case EHostProcessConnector:
+		return "EHostProcessConnector"
+	case EOffloadConnector:
+		return "EOffloadConnector"
+	case ELoopbackConnector:
+		return "ELoopbackConnector"
+	case EKeywordDetectorConnector:
+		return "EKeywordDetectorConnector"
+	case ELoopbackConnectorPostVolume:
+		return "ELoopbackConnectorPostVolume"
+	case EConnectorCount:
+		return "EConnectorCount"
+	default:
+		return fmt.Sprintf("EndpointConnectorType(%d)", int32(e))
+	}
+}

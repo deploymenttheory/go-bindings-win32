@@ -4,7 +4,13 @@
 
 package hidpi
 
+import (
+	"fmt"
+	"strings"
+)
+
 // DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-dialog_control_dpi_change_behaviors
+// Bitmask — values may be combined with |.
 type DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS int32
 
 const (
@@ -13,7 +19,24 @@ const (
 	DCDC_DISABLE_RELAYOUT    DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS = 2
 )
 
+// String returns the DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS) String() string {
+	var parts []string
+	if e&DCDC_DISABLE_FONT_UPDATE != 0 {
+		parts = append(parts, "DCDC_DISABLE_FONT_UPDATE")
+	}
+	if e&DCDC_DISABLE_RELAYOUT != 0 {
+		parts = append(parts, "DCDC_DISABLE_RELAYOUT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DIALOG_DPI_CHANGE_BEHAVIORS: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-dialog_dpi_change_behaviors
+// Bitmask — values may be combined with |.
 type DIALOG_DPI_CHANGE_BEHAVIORS int32
 
 const (
@@ -22,6 +45,25 @@ const (
 	DDC_DISABLE_RESIZE           DIALOG_DPI_CHANGE_BEHAVIORS = 2
 	DDC_DISABLE_CONTROL_RELAYOUT DIALOG_DPI_CHANGE_BEHAVIORS = 4
 )
+
+// String returns the DIALOG_DPI_CHANGE_BEHAVIORS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIALOG_DPI_CHANGE_BEHAVIORS) String() string {
+	var parts []string
+	if e&DDC_DISABLE_ALL != 0 {
+		parts = append(parts, "DDC_DISABLE_ALL")
+	}
+	if e&DDC_DISABLE_RESIZE != 0 {
+		parts = append(parts, "DDC_DISABLE_RESIZE")
+	}
+	if e&DDC_DISABLE_CONTROL_RELAYOUT != 0 {
+		parts = append(parts, "DDC_DISABLE_CONTROL_RELAYOUT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DPI_AWARENESS: https://learn.microsoft.com/windows/win32/api/windef/ne-windef-dpi_awareness
 type DPI_AWARENESS int32
@@ -33,6 +75,23 @@ const (
 	DPI_AWARENESS_PER_MONITOR_AWARE DPI_AWARENESS = 2
 )
 
+// String returns the DPI_AWARENESS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DPI_AWARENESS) String() string {
+	switch e {
+	case DPI_AWARENESS_INVALID:
+		return "DPI_AWARENESS_INVALID"
+	case DPI_AWARENESS_UNAWARE:
+		return "DPI_AWARENESS_UNAWARE"
+	case DPI_AWARENESS_SYSTEM_AWARE:
+		return "DPI_AWARENESS_SYSTEM_AWARE"
+	case DPI_AWARENESS_PER_MONITOR_AWARE:
+		return "DPI_AWARENESS_PER_MONITOR_AWARE"
+	default:
+		return fmt.Sprintf("DPI_AWARENESS(%d)", int32(e))
+	}
+}
+
 // DPI_HOSTING_BEHAVIOR: https://learn.microsoft.com/windows/win32/api/windef/ne-windef-dpi_hosting_behavior
 type DPI_HOSTING_BEHAVIOR int32
 
@@ -41,6 +100,21 @@ const (
 	DPI_HOSTING_BEHAVIOR_DEFAULT DPI_HOSTING_BEHAVIOR = 0
 	DPI_HOSTING_BEHAVIOR_MIXED   DPI_HOSTING_BEHAVIOR = 1
 )
+
+// String returns the DPI_HOSTING_BEHAVIOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DPI_HOSTING_BEHAVIOR) String() string {
+	switch e {
+	case DPI_HOSTING_BEHAVIOR_INVALID:
+		return "DPI_HOSTING_BEHAVIOR_INVALID"
+	case DPI_HOSTING_BEHAVIOR_DEFAULT:
+		return "DPI_HOSTING_BEHAVIOR_DEFAULT"
+	case DPI_HOSTING_BEHAVIOR_MIXED:
+		return "DPI_HOSTING_BEHAVIOR_MIXED"
+	default:
+		return fmt.Sprintf("DPI_HOSTING_BEHAVIOR(%d)", int32(e))
+	}
+}
 
 // MONITOR_DPI_TYPE: https://learn.microsoft.com/windows/win32/api/shellscalingapi/ne-shellscalingapi-monitor_dpi_type
 type MONITOR_DPI_TYPE int32
@@ -52,6 +126,21 @@ const (
 	MDT_DEFAULT       MONITOR_DPI_TYPE = 0
 )
 
+// String returns the MONITOR_DPI_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MONITOR_DPI_TYPE) String() string {
+	switch e {
+	case MDT_EFFECTIVE_DPI:
+		return "MDT_EFFECTIVE_DPI"
+	case MDT_ANGULAR_DPI:
+		return "MDT_ANGULAR_DPI"
+	case MDT_RAW_DPI:
+		return "MDT_RAW_DPI"
+	default:
+		return fmt.Sprintf("MONITOR_DPI_TYPE(%d)", int32(e))
+	}
+}
+
 // PROCESS_DPI_AWARENESS: https://learn.microsoft.com/windows/win32/api/shellscalingapi/ne-shellscalingapi-process_dpi_awareness
 type PROCESS_DPI_AWARENESS int32
 
@@ -60,3 +149,18 @@ const (
 	PROCESS_SYSTEM_DPI_AWARE      PROCESS_DPI_AWARENESS = 1
 	PROCESS_PER_MONITOR_DPI_AWARE PROCESS_DPI_AWARENESS = 2
 )
+
+// String returns the PROCESS_DPI_AWARENESS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESS_DPI_AWARENESS) String() string {
+	switch e {
+	case PROCESS_DPI_UNAWARE:
+		return "PROCESS_DPI_UNAWARE"
+	case PROCESS_SYSTEM_DPI_AWARE:
+		return "PROCESS_SYSTEM_DPI_AWARE"
+	case PROCESS_PER_MONITOR_DPI_AWARE:
+		return "PROCESS_PER_MONITOR_DPI_AWARE"
+	default:
+		return fmt.Sprintf("PROCESS_DPI_AWARENESS(%d)", int32(e))
+	}
+}

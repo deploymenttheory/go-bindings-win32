@@ -4,6 +4,10 @@
 
 package usb
 
+import (
+	"fmt"
+)
+
 type PIPE_TYPE int32
 
 const (
@@ -12,6 +16,23 @@ const (
 	WRITE_DATA_PIPE PIPE_TYPE = 2
 	ALL_PIPE        PIPE_TYPE = 3
 )
+
+// String returns the PIPE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PIPE_TYPE) String() string {
+	switch e {
+	case EVENT_PIPE:
+		return "EVENT_PIPE"
+	case READ_DATA_PIPE:
+		return "READ_DATA_PIPE"
+	case WRITE_DATA_PIPE:
+		return "WRITE_DATA_PIPE"
+	case ALL_PIPE:
+		return "ALL_PIPE"
+	default:
+		return fmt.Sprintf("PIPE_TYPE(%d)", int32(e))
+	}
+}
 
 type RAW_PIPE_TYPE int32
 
@@ -22,6 +43,23 @@ const (
 	USBSCAN_PIPE_INTERRUPT   RAW_PIPE_TYPE = 3
 )
 
+// String returns the RAW_PIPE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RAW_PIPE_TYPE) String() string {
+	switch e {
+	case USBSCAN_PIPE_CONTROL:
+		return "USBSCAN_PIPE_CONTROL"
+	case USBSCAN_PIPE_ISOCHRONOUS:
+		return "USBSCAN_PIPE_ISOCHRONOUS"
+	case USBSCAN_PIPE_BULK:
+		return "USBSCAN_PIPE_BULK"
+	case USBSCAN_PIPE_INTERRUPT:
+		return "USBSCAN_PIPE_INTERRUPT"
+	default:
+		return fmt.Sprintf("RAW_PIPE_TYPE(%d)", int32(e))
+	}
+}
+
 type USB4_CONFIG_SPACE_TYPE int32
 
 const (
@@ -30,6 +68,23 @@ const (
 	USB4RouterConfigurationSpace  USB4_CONFIG_SPACE_TYPE = 2
 	USB4CounterConfigurationSpace USB4_CONFIG_SPACE_TYPE = 3
 )
+
+// String returns the USB4_CONFIG_SPACE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB4_CONFIG_SPACE_TYPE) String() string {
+	switch e {
+	case USB4PathConfigurationSpace:
+		return "USB4PathConfigurationSpace"
+	case USB4AdapterConfigurationSpace:
+		return "USB4AdapterConfigurationSpace"
+	case USB4RouterConfigurationSpace:
+		return "USB4RouterConfigurationSpace"
+	case USB4CounterConfigurationSpace:
+		return "USB4CounterConfigurationSpace"
+	default:
+		return fmt.Sprintf("USB4_CONFIG_SPACE_TYPE(%d)", int32(e))
+	}
+}
 
 type USB4_STATUS int32
 
@@ -60,6 +115,63 @@ const (
 	StatusUnknown  USB4_STATUS = 255
 )
 
+// String returns the USB4_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB4_STATUS) String() string {
+	switch e {
+	case ErrConn:
+		return "ErrConn"
+	case ErrLink:
+		return "ErrLink"
+	case ErrAddr:
+		return "ErrAddr"
+	case ErrAdp:
+		return "ErrAdp"
+	case HpAck:
+		return "HpAck"
+	case ErrEnum:
+		return "ErrEnum"
+	case ErrNua:
+		return "ErrNua"
+	case ErrLen:
+		return "ErrLen"
+	case ErrHec:
+		return "ErrHec"
+	case ErrFc:
+		return "ErrFc"
+	case ErrPlug:
+		return "ErrPlug"
+	case ErrLock:
+		return "ErrLock"
+	case DpBw:
+		return "DpBw"
+	case RopCmplt:
+		return "RopCmplt"
+	case PopCmplt:
+		return "PopCmplt"
+	case PcieWake:
+		return "PcieWake"
+	case DpConChange:
+		return "DpConChange"
+	case DpTxDiscovery:
+		return "DpTxDiscovery"
+	case LinkRecovery:
+		return "LinkRecovery"
+	case AsymLink:
+		return "AsymLink"
+	case PollingSkipped:
+		return "PollingSkipped"
+	case PollingTimeout:
+		return "PollingTimeout"
+	case StatusSuccess:
+		return "StatusSuccess"
+	case StatusUnknown:
+		return "StatusUnknown"
+	default:
+		return fmt.Sprintf("USB4_STATUS(%d)", int32(e))
+	}
+}
+
 type USBD_ENDPOINT_OFFLOAD_MODE int32
 
 const (
@@ -67,6 +179,21 @@ const (
 	UsbdEndpointOffloadSoftwareAssisted USBD_ENDPOINT_OFFLOAD_MODE = 1
 	UsbdEndpointOffloadHardwareAssisted USBD_ENDPOINT_OFFLOAD_MODE = 2
 )
+
+// String returns the USBD_ENDPOINT_OFFLOAD_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USBD_ENDPOINT_OFFLOAD_MODE) String() string {
+	switch e {
+	case UsbdEndpointOffloadModeNotSupported:
+		return "UsbdEndpointOffloadModeNotSupported"
+	case UsbdEndpointOffloadSoftwareAssisted:
+		return "UsbdEndpointOffloadSoftwareAssisted"
+	case UsbdEndpointOffloadHardwareAssisted:
+		return "UsbdEndpointOffloadHardwareAssisted"
+	default:
+		return fmt.Sprintf("USBD_ENDPOINT_OFFLOAD_MODE(%d)", int32(e))
+	}
+}
 
 type USBD_PIPE_TYPE int32
 
@@ -77,6 +204,23 @@ const (
 	UsbdPipeTypeInterrupt   USBD_PIPE_TYPE = 3
 )
 
+// String returns the USBD_PIPE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USBD_PIPE_TYPE) String() string {
+	switch e {
+	case UsbdPipeTypeControl:
+		return "UsbdPipeTypeControl"
+	case UsbdPipeTypeIsochronous:
+		return "UsbdPipeTypeIsochronous"
+	case UsbdPipeTypeBulk:
+		return "UsbdPipeTypeBulk"
+	case UsbdPipeTypeInterrupt:
+		return "UsbdPipeTypeInterrupt"
+	default:
+		return fmt.Sprintf("USBD_PIPE_TYPE(%d)", int32(e))
+	}
+}
+
 type USBFN_BUS_SPEED int32
 
 const (
@@ -86,6 +230,25 @@ const (
 	UsbfnBusSpeedSuper   USBFN_BUS_SPEED = 3
 	UsbfnBusSpeedMaximum USBFN_BUS_SPEED = 4
 )
+
+// String returns the USBFN_BUS_SPEED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USBFN_BUS_SPEED) String() string {
+	switch e {
+	case UsbfnBusSpeedLow:
+		return "UsbfnBusSpeedLow"
+	case UsbfnBusSpeedFull:
+		return "UsbfnBusSpeedFull"
+	case UsbfnBusSpeedHigh:
+		return "UsbfnBusSpeedHigh"
+	case UsbfnBusSpeedSuper:
+		return "UsbfnBusSpeedSuper"
+	case UsbfnBusSpeedMaximum:
+		return "UsbfnBusSpeedMaximum"
+	default:
+		return fmt.Sprintf("USBFN_BUS_SPEED(%d)", int32(e))
+	}
+}
 
 type USBFN_DEVICE_STATE int32
 
@@ -100,6 +263,31 @@ const (
 	UsbfnDeviceStateStateMaximum USBFN_DEVICE_STATE = 7
 )
 
+// String returns the USBFN_DEVICE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USBFN_DEVICE_STATE) String() string {
+	switch e {
+	case UsbfnDeviceStateMinimum:
+		return "UsbfnDeviceStateMinimum"
+	case UsbfnDeviceStateAttached:
+		return "UsbfnDeviceStateAttached"
+	case UsbfnDeviceStateDefault:
+		return "UsbfnDeviceStateDefault"
+	case UsbfnDeviceStateDetached:
+		return "UsbfnDeviceStateDetached"
+	case UsbfnDeviceStateAddressed:
+		return "UsbfnDeviceStateAddressed"
+	case UsbfnDeviceStateConfigured:
+		return "UsbfnDeviceStateConfigured"
+	case UsbfnDeviceStateSuspended:
+		return "UsbfnDeviceStateSuspended"
+	case UsbfnDeviceStateStateMaximum:
+		return "UsbfnDeviceStateStateMaximum"
+	default:
+		return fmt.Sprintf("USBFN_DEVICE_STATE(%d)", int32(e))
+	}
+}
+
 type USBFN_DIRECTION int32
 
 const (
@@ -110,6 +298,23 @@ const (
 	UsbfnDirectionRx      USBFN_DIRECTION = 2
 	UsbfnDirectionMaximum USBFN_DIRECTION = 3
 )
+
+// String returns the USBFN_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USBFN_DIRECTION) String() string {
+	switch e {
+	case UsbfnDirectionMinimum:
+		return "UsbfnDirectionMinimum"
+	case UsbfnDirectionIn:
+		return "UsbfnDirectionIn"
+	case UsbfnDirectionOut:
+		return "UsbfnDirectionOut"
+	case UsbfnDirectionMaximum:
+		return "UsbfnDirectionMaximum"
+	default:
+		return fmt.Sprintf("USBFN_DIRECTION(%d)", int32(e))
+	}
+}
 
 type USBFN_EVENT int32
 
@@ -129,6 +334,41 @@ const (
 	UsbfnEventMaximum      USBFN_EVENT = 12
 )
 
+// String returns the USBFN_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USBFN_EVENT) String() string {
+	switch e {
+	case UsbfnEventMinimum:
+		return "UsbfnEventMinimum"
+	case UsbfnEventAttach:
+		return "UsbfnEventAttach"
+	case UsbfnEventReset:
+		return "UsbfnEventReset"
+	case UsbfnEventDetach:
+		return "UsbfnEventDetach"
+	case UsbfnEventSuspend:
+		return "UsbfnEventSuspend"
+	case UsbfnEventResume:
+		return "UsbfnEventResume"
+	case UsbfnEventSetupPacket:
+		return "UsbfnEventSetupPacket"
+	case UsbfnEventConfigured:
+		return "UsbfnEventConfigured"
+	case UsbfnEventUnConfigured:
+		return "UsbfnEventUnConfigured"
+	case UsbfnEventPortType:
+		return "UsbfnEventPortType"
+	case UsbfnEventBusTearDown:
+		return "UsbfnEventBusTearDown"
+	case UsbfnEventSetInterface:
+		return "UsbfnEventSetInterface"
+	case UsbfnEventMaximum:
+		return "UsbfnEventMaximum"
+	default:
+		return fmt.Sprintf("USBFN_EVENT(%d)", int32(e))
+	}
+}
+
 type USBFN_PORT_TYPE int32
 
 const (
@@ -140,6 +380,29 @@ const (
 	UsbfnProprietaryDedicatedChargingPort USBFN_PORT_TYPE = 5
 	UsbfnPortTypeMaximum                  USBFN_PORT_TYPE = 6
 )
+
+// String returns the USBFN_PORT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USBFN_PORT_TYPE) String() string {
+	switch e {
+	case UsbfnUnknownPort:
+		return "UsbfnUnknownPort"
+	case UsbfnStandardDownstreamPort:
+		return "UsbfnStandardDownstreamPort"
+	case UsbfnChargingDownstreamPort:
+		return "UsbfnChargingDownstreamPort"
+	case UsbfnDedicatedChargingPort:
+		return "UsbfnDedicatedChargingPort"
+	case UsbfnInvalidDedicatedChargingPort:
+		return "UsbfnInvalidDedicatedChargingPort"
+	case UsbfnProprietaryDedicatedChargingPort:
+		return "UsbfnProprietaryDedicatedChargingPort"
+	case UsbfnPortTypeMaximum:
+		return "UsbfnPortTypeMaximum"
+	default:
+		return fmt.Sprintf("USBFN_PORT_TYPE(%d)", int32(e))
+	}
+}
 
 type USB_CONNECTION_STATUS int32
 
@@ -156,6 +419,37 @@ const (
 	DeviceEnumerating        USB_CONNECTION_STATUS = 9
 	DeviceReset              USB_CONNECTION_STATUS = 10
 )
+
+// String returns the USB_CONNECTION_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB_CONNECTION_STATUS) String() string {
+	switch e {
+	case NoDeviceConnected:
+		return "NoDeviceConnected"
+	case DeviceConnected:
+		return "DeviceConnected"
+	case DeviceFailedEnumeration:
+		return "DeviceFailedEnumeration"
+	case DeviceGeneralFailure:
+		return "DeviceGeneralFailure"
+	case DeviceCausedOvercurrent:
+		return "DeviceCausedOvercurrent"
+	case DeviceNotEnoughPower:
+		return "DeviceNotEnoughPower"
+	case DeviceNotEnoughBandwidth:
+		return "DeviceNotEnoughBandwidth"
+	case DeviceHubNestedTooDeeply:
+		return "DeviceHubNestedTooDeeply"
+	case DeviceInLegacyHub:
+		return "DeviceInLegacyHub"
+	case DeviceEnumerating:
+		return "DeviceEnumerating"
+	case DeviceReset:
+		return "DeviceReset"
+	default:
+		return fmt.Sprintf("USB_CONNECTION_STATUS(%d)", int32(e))
+	}
+}
 
 type USB_CONTROLLER_FLAVOR int32
 
@@ -189,6 +483,69 @@ const (
 	EHCI_Intel_Medfield USB_CONTROLLER_FLAVOR = 5001
 )
 
+// String returns the USB_CONTROLLER_FLAVOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB_CONTROLLER_FLAVOR) String() string {
+	switch e {
+	case USB_HcGeneric:
+		return "USB_HcGeneric"
+	case OHCI_Generic:
+		return "OHCI_Generic"
+	case OHCI_Hydra:
+		return "OHCI_Hydra"
+	case OHCI_NEC:
+		return "OHCI_NEC"
+	case UHCI_Generic:
+		return "UHCI_Generic"
+	case UHCI_Piix4:
+		return "UHCI_Piix4"
+	case UHCI_Piix3:
+		return "UHCI_Piix3"
+	case UHCI_Ich2:
+		return "UHCI_Ich2"
+	case UHCI_Reserved204:
+		return "UHCI_Reserved204"
+	case UHCI_Ich1:
+		return "UHCI_Ich1"
+	case UHCI_Ich3m:
+		return "UHCI_Ich3m"
+	case UHCI_Ich4:
+		return "UHCI_Ich4"
+	case UHCI_Ich5:
+		return "UHCI_Ich5"
+	case UHCI_Ich6:
+		return "UHCI_Ich6"
+	case UHCI_Intel:
+		return "UHCI_Intel"
+	case UHCI_VIA:
+		return "UHCI_VIA"
+	case UHCI_VIA_x01:
+		return "UHCI_VIA_x01"
+	case UHCI_VIA_x02:
+		return "UHCI_VIA_x02"
+	case UHCI_VIA_x03:
+		return "UHCI_VIA_x03"
+	case UHCI_VIA_x04:
+		return "UHCI_VIA_x04"
+	case UHCI_VIA_x0E_FIFO:
+		return "UHCI_VIA_x0E_FIFO"
+	case EHCI_Generic:
+		return "EHCI_Generic"
+	case EHCI_NEC:
+		return "EHCI_NEC"
+	case EHCI_Lucent:
+		return "EHCI_Lucent"
+	case EHCI_NVIDIA_Tegra2:
+		return "EHCI_NVIDIA_Tegra2"
+	case EHCI_NVIDIA_Tegra3:
+		return "EHCI_NVIDIA_Tegra3"
+	case EHCI_Intel_Medfield:
+		return "EHCI_Intel_Medfield"
+	default:
+		return fmt.Sprintf("USB_CONTROLLER_FLAVOR(%d)", int32(e))
+	}
+}
+
 type USB_DEVICE_SPEED int32
 
 const (
@@ -198,12 +555,42 @@ const (
 	UsbSuperSpeed USB_DEVICE_SPEED = 3
 )
 
+// String returns the USB_DEVICE_SPEED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB_DEVICE_SPEED) String() string {
+	switch e {
+	case UsbLowSpeed:
+		return "UsbLowSpeed"
+	case UsbFullSpeed:
+		return "UsbFullSpeed"
+	case UsbHighSpeed:
+		return "UsbHighSpeed"
+	case UsbSuperSpeed:
+		return "UsbSuperSpeed"
+	default:
+		return fmt.Sprintf("USB_DEVICE_SPEED(%d)", int32(e))
+	}
+}
+
 type USB_DEVICE_TYPE int32
 
 const (
 	Usb11Device USB_DEVICE_TYPE = 0
 	Usb20Device USB_DEVICE_TYPE = 1
 )
+
+// String returns the USB_DEVICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB_DEVICE_TYPE) String() string {
+	switch e {
+	case Usb11Device:
+		return "Usb11Device"
+	case Usb20Device:
+		return "Usb20Device"
+	default:
+		return fmt.Sprintf("USB_DEVICE_TYPE(%d)", int32(e))
+	}
+}
 
 type USB_HUB_NODE int32
 
@@ -212,6 +599,19 @@ const (
 	UsbMIParent USB_HUB_NODE = 1
 )
 
+// String returns the USB_HUB_NODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB_HUB_NODE) String() string {
+	switch e {
+	case UsbHub:
+		return "UsbHub"
+	case UsbMIParent:
+		return "UsbMIParent"
+	default:
+		return fmt.Sprintf("USB_HUB_NODE(%d)", int32(e))
+	}
+}
+
 type USB_HUB_TYPE int32
 
 const (
@@ -219,6 +619,21 @@ const (
 	Usb20Hub   USB_HUB_TYPE = 2
 	Usb30Hub   USB_HUB_TYPE = 3
 )
+
+// String returns the USB_HUB_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB_HUB_TYPE) String() string {
+	switch e {
+	case UsbRootHub:
+		return "UsbRootHub"
+	case Usb20Hub:
+		return "Usb20Hub"
+	case Usb30Hub:
+		return "Usb30Hub"
+	default:
+		return fmt.Sprintf("USB_HUB_TYPE(%d)", int32(e))
+	}
+}
 
 type USB_NOTIFICATION_TYPE int32
 
@@ -237,6 +652,39 @@ const (
 	ModernDeviceInLegacyHub USB_NOTIFICATION_TYPE = 11
 )
 
+// String returns the USB_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case EnumerationFailure:
+		return "EnumerationFailure"
+	case InsufficentBandwidth:
+		return "InsufficentBandwidth"
+	case InsufficentPower:
+		return "InsufficentPower"
+	case OverCurrent:
+		return "OverCurrent"
+	case ResetOvercurrent:
+		return "ResetOvercurrent"
+	case AcquireBusInfo:
+		return "AcquireBusInfo"
+	case AcquireHubName:
+		return "AcquireHubName"
+	case AcquireControllerName:
+		return "AcquireControllerName"
+	case HubOvercurrent:
+		return "HubOvercurrent"
+	case HubPowerChange:
+		return "HubPowerChange"
+	case HubNestedTooDeeply:
+		return "HubNestedTooDeeply"
+	case ModernDeviceInLegacyHub:
+		return "ModernDeviceInLegacyHub"
+	default:
+		return fmt.Sprintf("USB_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
+
 // USB_USER_ERROR_CODE: https://learn.microsoft.com/windows/win32/api/usbuser/ne-usbuser-usb_user_error_code
 type USB_USER_ERROR_CODE int32
 
@@ -254,6 +702,37 @@ const (
 	UsbUserNoDeviceConnected      USB_USER_ERROR_CODE = 10
 )
 
+// String returns the USB_USER_ERROR_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB_USER_ERROR_CODE) String() string {
+	switch e {
+	case UsbUserSuccess:
+		return "UsbUserSuccess"
+	case UsbUserNotSupported:
+		return "UsbUserNotSupported"
+	case UsbUserInvalidRequestCode:
+		return "UsbUserInvalidRequestCode"
+	case UsbUserFeatureDisabled:
+		return "UsbUserFeatureDisabled"
+	case UsbUserInvalidHeaderParameter:
+		return "UsbUserInvalidHeaderParameter"
+	case UsbUserInvalidParameter:
+		return "UsbUserInvalidParameter"
+	case UsbUserMiniportError:
+		return "UsbUserMiniportError"
+	case UsbUserBufferTooSmall:
+		return "UsbUserBufferTooSmall"
+	case UsbUserErrorNotMapped:
+		return "UsbUserErrorNotMapped"
+	case UsbUserDeviceNotStarted:
+		return "UsbUserDeviceNotStarted"
+	case UsbUserNoDeviceConnected:
+		return "UsbUserNoDeviceConnected"
+	default:
+		return fmt.Sprintf("USB_USER_ERROR_CODE(%d)", int32(e))
+	}
+}
+
 type USB_WMI_DEVICE_NODE_TYPE int32
 
 const (
@@ -262,6 +741,23 @@ const (
 	CompositeDevice USB_WMI_DEVICE_NODE_TYPE = 2
 	UsbController   USB_WMI_DEVICE_NODE_TYPE = 3
 )
+
+// String returns the USB_WMI_DEVICE_NODE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB_WMI_DEVICE_NODE_TYPE) String() string {
+	switch e {
+	case UsbDevice:
+		return "UsbDevice"
+	case HubDevice:
+		return "HubDevice"
+	case CompositeDevice:
+		return "CompositeDevice"
+	case UsbController:
+		return "UsbController"
+	default:
+		return fmt.Sprintf("USB_WMI_DEVICE_NODE_TYPE(%d)", int32(e))
+	}
+}
 
 // WDMUSB_POWER_STATE: https://learn.microsoft.com/windows/win32/api/usbuser/ne-usbuser-wdmusb_power_state
 type WDMUSB_POWER_STATE int32
@@ -282,6 +778,41 @@ const (
 	WdmUsbPowerDeviceD3          WDMUSB_POWER_STATE = 204
 )
 
+// String returns the WDMUSB_POWER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WDMUSB_POWER_STATE) String() string {
+	switch e {
+	case WdmUsbPowerNotMapped:
+		return "WdmUsbPowerNotMapped"
+	case WdmUsbPowerSystemUnspecified:
+		return "WdmUsbPowerSystemUnspecified"
+	case WdmUsbPowerSystemWorking:
+		return "WdmUsbPowerSystemWorking"
+	case WdmUsbPowerSystemSleeping1:
+		return "WdmUsbPowerSystemSleeping1"
+	case WdmUsbPowerSystemSleeping2:
+		return "WdmUsbPowerSystemSleeping2"
+	case WdmUsbPowerSystemSleeping3:
+		return "WdmUsbPowerSystemSleeping3"
+	case WdmUsbPowerSystemHibernate:
+		return "WdmUsbPowerSystemHibernate"
+	case WdmUsbPowerSystemShutdown:
+		return "WdmUsbPowerSystemShutdown"
+	case WdmUsbPowerDeviceUnspecified:
+		return "WdmUsbPowerDeviceUnspecified"
+	case WdmUsbPowerDeviceD0:
+		return "WdmUsbPowerDeviceD0"
+	case WdmUsbPowerDeviceD1:
+		return "WdmUsbPowerDeviceD1"
+	case WdmUsbPowerDeviceD2:
+		return "WdmUsbPowerDeviceD2"
+	case WdmUsbPowerDeviceD3:
+		return "WdmUsbPowerDeviceD3"
+	default:
+		return fmt.Sprintf("WDMUSB_POWER_STATE(%d)", int32(e))
+	}
+}
+
 type WINUSB_PIPE_POLICY uint32
 
 const (
@@ -296,9 +827,49 @@ const (
 	RESET_PIPE_ON_RESUME   WINUSB_PIPE_POLICY = 9
 )
 
+// String returns the WINUSB_PIPE_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINUSB_PIPE_POLICY) String() string {
+	switch e {
+	case SHORT_PACKET_TERMINATE:
+		return "SHORT_PACKET_TERMINATE"
+	case AUTO_CLEAR_STALL:
+		return "AUTO_CLEAR_STALL"
+	case PIPE_TRANSFER_TIMEOUT:
+		return "PIPE_TRANSFER_TIMEOUT"
+	case IGNORE_SHORT_PACKETS:
+		return "IGNORE_SHORT_PACKETS"
+	case ALLOW_PARTIAL_READS:
+		return "ALLOW_PARTIAL_READS"
+	case AUTO_FLUSH:
+		return "AUTO_FLUSH"
+	case RAW_IO:
+		return "RAW_IO"
+	case MAXIMUM_TRANSFER_SIZE:
+		return "MAXIMUM_TRANSFER_SIZE"
+	case RESET_PIPE_ON_RESUME:
+		return "RESET_PIPE_ON_RESUME"
+	default:
+		return fmt.Sprintf("WINUSB_PIPE_POLICY(%d)", uint32(e))
+	}
+}
+
 type WINUSB_POWER_POLICY uint32
 
 const (
 	AUTO_SUSPEND  WINUSB_POWER_POLICY = 129
 	SUSPEND_DELAY WINUSB_POWER_POLICY = 131
 )
+
+// String returns the WINUSB_POWER_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINUSB_POWER_POLICY) String() string {
+	switch e {
+	case AUTO_SUSPEND:
+		return "AUTO_SUSPEND"
+	case SUSPEND_DELAY:
+		return "SUSPEND_DELAY"
+	default:
+		return fmt.Sprintf("WINUSB_POWER_POLICY(%d)", uint32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package backgroundintelligenttransferservice
 
+import (
+	"fmt"
+)
+
 // BG_AUTH_SCHEME: https://learn.microsoft.com/windows/win32/api/bits1_5/ne-bits1_5-bg_auth_scheme
 type BG_AUTH_SCHEME int32
 
@@ -15,6 +19,25 @@ const (
 	BG_AUTH_SCHEME_PASSPORT  BG_AUTH_SCHEME = 5
 )
 
+// String returns the BG_AUTH_SCHEME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BG_AUTH_SCHEME) String() string {
+	switch e {
+	case BG_AUTH_SCHEME_BASIC:
+		return "BG_AUTH_SCHEME_BASIC"
+	case BG_AUTH_SCHEME_DIGEST:
+		return "BG_AUTH_SCHEME_DIGEST"
+	case BG_AUTH_SCHEME_NTLM:
+		return "BG_AUTH_SCHEME_NTLM"
+	case BG_AUTH_SCHEME_NEGOTIATE:
+		return "BG_AUTH_SCHEME_NEGOTIATE"
+	case BG_AUTH_SCHEME_PASSPORT:
+		return "BG_AUTH_SCHEME_PASSPORT"
+	default:
+		return fmt.Sprintf("BG_AUTH_SCHEME(%d)", int32(e))
+	}
+}
+
 // BG_AUTH_TARGET: https://learn.microsoft.com/windows/win32/api/bits1_5/ne-bits1_5-bg_auth_target
 type BG_AUTH_TARGET int32
 
@@ -22,6 +45,19 @@ const (
 	BG_AUTH_TARGET_SERVER BG_AUTH_TARGET = 1
 	BG_AUTH_TARGET_PROXY  BG_AUTH_TARGET = 2
 )
+
+// String returns the BG_AUTH_TARGET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BG_AUTH_TARGET) String() string {
+	switch e {
+	case BG_AUTH_TARGET_SERVER:
+		return "BG_AUTH_TARGET_SERVER"
+	case BG_AUTH_TARGET_PROXY:
+		return "BG_AUTH_TARGET_PROXY"
+	default:
+		return fmt.Sprintf("BG_AUTH_TARGET(%d)", int32(e))
+	}
+}
 
 // BG_CERT_STORE_LOCATION: https://learn.microsoft.com/windows/win32/api/bits2_5/ne-bits2_5-bg_cert_store_location
 type BG_CERT_STORE_LOCATION int32
@@ -36,6 +72,31 @@ const (
 	BG_CERT_STORE_LOCATION_LOCAL_MACHINE_GROUP_POLICY BG_CERT_STORE_LOCATION = 6
 	BG_CERT_STORE_LOCATION_LOCAL_MACHINE_ENTERPRISE   BG_CERT_STORE_LOCATION = 7
 )
+
+// String returns the BG_CERT_STORE_LOCATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BG_CERT_STORE_LOCATION) String() string {
+	switch e {
+	case BG_CERT_STORE_LOCATION_CURRENT_USER:
+		return "BG_CERT_STORE_LOCATION_CURRENT_USER"
+	case BG_CERT_STORE_LOCATION_LOCAL_MACHINE:
+		return "BG_CERT_STORE_LOCATION_LOCAL_MACHINE"
+	case BG_CERT_STORE_LOCATION_CURRENT_SERVICE:
+		return "BG_CERT_STORE_LOCATION_CURRENT_SERVICE"
+	case BG_CERT_STORE_LOCATION_SERVICES:
+		return "BG_CERT_STORE_LOCATION_SERVICES"
+	case BG_CERT_STORE_LOCATION_USERS:
+		return "BG_CERT_STORE_LOCATION_USERS"
+	case BG_CERT_STORE_LOCATION_CURRENT_USER_GROUP_POLICY:
+		return "BG_CERT_STORE_LOCATION_CURRENT_USER_GROUP_POLICY"
+	case BG_CERT_STORE_LOCATION_LOCAL_MACHINE_GROUP_POLICY:
+		return "BG_CERT_STORE_LOCATION_LOCAL_MACHINE_GROUP_POLICY"
+	case BG_CERT_STORE_LOCATION_LOCAL_MACHINE_ENTERPRISE:
+		return "BG_CERT_STORE_LOCATION_LOCAL_MACHINE_ENTERPRISE"
+	default:
+		return fmt.Sprintf("BG_CERT_STORE_LOCATION(%d)", int32(e))
+	}
+}
 
 // BG_ERROR_CONTEXT: https://learn.microsoft.com/windows/win32/api/bits/ne-bits-bg_error_context
 type BG_ERROR_CONTEXT int32
@@ -52,6 +113,33 @@ const (
 	BG_ERROR_CONTEXT_SERVER_CERTIFICATE_CALLBACK BG_ERROR_CONTEXT = 8
 )
 
+// String returns the BG_ERROR_CONTEXT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BG_ERROR_CONTEXT) String() string {
+	switch e {
+	case BG_ERROR_CONTEXT_NONE:
+		return "BG_ERROR_CONTEXT_NONE"
+	case BG_ERROR_CONTEXT_UNKNOWN:
+		return "BG_ERROR_CONTEXT_UNKNOWN"
+	case BG_ERROR_CONTEXT_GENERAL_QUEUE_MANAGER:
+		return "BG_ERROR_CONTEXT_GENERAL_QUEUE_MANAGER"
+	case BG_ERROR_CONTEXT_QUEUE_MANAGER_NOTIFICATION:
+		return "BG_ERROR_CONTEXT_QUEUE_MANAGER_NOTIFICATION"
+	case BG_ERROR_CONTEXT_LOCAL_FILE:
+		return "BG_ERROR_CONTEXT_LOCAL_FILE"
+	case BG_ERROR_CONTEXT_REMOTE_FILE:
+		return "BG_ERROR_CONTEXT_REMOTE_FILE"
+	case BG_ERROR_CONTEXT_GENERAL_TRANSPORT:
+		return "BG_ERROR_CONTEXT_GENERAL_TRANSPORT"
+	case BG_ERROR_CONTEXT_REMOTE_APPLICATION:
+		return "BG_ERROR_CONTEXT_REMOTE_APPLICATION"
+	case BG_ERROR_CONTEXT_SERVER_CERTIFICATE_CALLBACK:
+		return "BG_ERROR_CONTEXT_SERVER_CERTIFICATE_CALLBACK"
+	default:
+		return fmt.Sprintf("BG_ERROR_CONTEXT(%d)", int32(e))
+	}
+}
+
 // BG_JOB_PRIORITY: https://learn.microsoft.com/windows/win32/api/bits/ne-bits-bg_job_priority
 type BG_JOB_PRIORITY int32
 
@@ -62,6 +150,23 @@ const (
 	BG_JOB_PRIORITY_LOW        BG_JOB_PRIORITY = 3
 )
 
+// String returns the BG_JOB_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BG_JOB_PRIORITY) String() string {
+	switch e {
+	case BG_JOB_PRIORITY_FOREGROUND:
+		return "BG_JOB_PRIORITY_FOREGROUND"
+	case BG_JOB_PRIORITY_HIGH:
+		return "BG_JOB_PRIORITY_HIGH"
+	case BG_JOB_PRIORITY_NORMAL:
+		return "BG_JOB_PRIORITY_NORMAL"
+	case BG_JOB_PRIORITY_LOW:
+		return "BG_JOB_PRIORITY_LOW"
+	default:
+		return fmt.Sprintf("BG_JOB_PRIORITY(%d)", int32(e))
+	}
+}
+
 // BG_JOB_PROXY_USAGE: https://learn.microsoft.com/windows/win32/api/bits/ne-bits-bg_job_proxy_usage
 type BG_JOB_PROXY_USAGE int32
 
@@ -71,6 +176,23 @@ const (
 	BG_JOB_PROXY_USAGE_OVERRIDE   BG_JOB_PROXY_USAGE = 2
 	BG_JOB_PROXY_USAGE_AUTODETECT BG_JOB_PROXY_USAGE = 3
 )
+
+// String returns the BG_JOB_PROXY_USAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BG_JOB_PROXY_USAGE) String() string {
+	switch e {
+	case BG_JOB_PROXY_USAGE_PRECONFIG:
+		return "BG_JOB_PROXY_USAGE_PRECONFIG"
+	case BG_JOB_PROXY_USAGE_NO_PROXY:
+		return "BG_JOB_PROXY_USAGE_NO_PROXY"
+	case BG_JOB_PROXY_USAGE_OVERRIDE:
+		return "BG_JOB_PROXY_USAGE_OVERRIDE"
+	case BG_JOB_PROXY_USAGE_AUTODETECT:
+		return "BG_JOB_PROXY_USAGE_AUTODETECT"
+	default:
+		return fmt.Sprintf("BG_JOB_PROXY_USAGE(%d)", int32(e))
+	}
+}
 
 // BG_JOB_STATE: https://learn.microsoft.com/windows/win32/api/bits/ne-bits-bg_job_state
 type BG_JOB_STATE int32
@@ -87,6 +209,33 @@ const (
 	BG_JOB_STATE_CANCELLED       BG_JOB_STATE = 8
 )
 
+// String returns the BG_JOB_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BG_JOB_STATE) String() string {
+	switch e {
+	case BG_JOB_STATE_QUEUED:
+		return "BG_JOB_STATE_QUEUED"
+	case BG_JOB_STATE_CONNECTING:
+		return "BG_JOB_STATE_CONNECTING"
+	case BG_JOB_STATE_TRANSFERRING:
+		return "BG_JOB_STATE_TRANSFERRING"
+	case BG_JOB_STATE_SUSPENDED:
+		return "BG_JOB_STATE_SUSPENDED"
+	case BG_JOB_STATE_ERROR:
+		return "BG_JOB_STATE_ERROR"
+	case BG_JOB_STATE_TRANSIENT_ERROR:
+		return "BG_JOB_STATE_TRANSIENT_ERROR"
+	case BG_JOB_STATE_TRANSFERRED:
+		return "BG_JOB_STATE_TRANSFERRED"
+	case BG_JOB_STATE_ACKNOWLEDGED:
+		return "BG_JOB_STATE_ACKNOWLEDGED"
+	case BG_JOB_STATE_CANCELLED:
+		return "BG_JOB_STATE_CANCELLED"
+	default:
+		return fmt.Sprintf("BG_JOB_STATE(%d)", int32(e))
+	}
+}
+
 // BG_JOB_TYPE: https://learn.microsoft.com/windows/win32/api/bits/ne-bits-bg_job_type
 type BG_JOB_TYPE int32
 
@@ -96,6 +245,21 @@ const (
 	BG_JOB_TYPE_UPLOAD_REPLY BG_JOB_TYPE = 2
 )
 
+// String returns the BG_JOB_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BG_JOB_TYPE) String() string {
+	switch e {
+	case BG_JOB_TYPE_DOWNLOAD:
+		return "BG_JOB_TYPE_DOWNLOAD"
+	case BG_JOB_TYPE_UPLOAD:
+		return "BG_JOB_TYPE_UPLOAD"
+	case BG_JOB_TYPE_UPLOAD_REPLY:
+		return "BG_JOB_TYPE_UPLOAD_REPLY"
+	default:
+		return fmt.Sprintf("BG_JOB_TYPE(%d)", int32(e))
+	}
+}
+
 type BG_TOKEN uint32
 
 const (
@@ -103,12 +267,36 @@ const (
 	BG_TOKEN_NETWORK    BG_TOKEN = 2
 )
 
+// String returns the BG_TOKEN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BG_TOKEN) String() string {
+	switch e {
+	case BG_TOKEN_LOCAL_FILE:
+		return "BG_TOKEN_LOCAL_FILE"
+	case BG_TOKEN_NETWORK:
+		return "BG_TOKEN_NETWORK"
+	default:
+		return fmt.Sprintf("BG_TOKEN(%d)", uint32(e))
+	}
+}
+
 // BITS_FILE_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/bits5_0/ne-bits5_0-bits_file_property_id
 type BITS_FILE_PROPERTY_ID int32
 
 const (
 	BITS_FILE_PROPERTY_ID_HTTP_RESPONSE_HEADERS BITS_FILE_PROPERTY_ID = 1
 )
+
+// String returns the BITS_FILE_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BITS_FILE_PROPERTY_ID) String() string {
+	switch e {
+	case BITS_FILE_PROPERTY_ID_HTTP_RESPONSE_HEADERS:
+		return "BITS_FILE_PROPERTY_ID_HTTP_RESPONSE_HEADERS"
+	default:
+		return fmt.Sprintf("BITS_FILE_PROPERTY_ID(%d)", int32(e))
+	}
+}
 
 // BITS_JOB_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/bits5_0/ne-bits5_0-bits_job_property_id
 type BITS_JOB_PROPERTY_ID int32
@@ -124,6 +312,31 @@ const (
 	BITS_JOB_PROPERTY_ON_DEMAND_MODE                   BITS_JOB_PROPERTY_ID = 10
 )
 
+// String returns the BITS_JOB_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BITS_JOB_PROPERTY_ID) String() string {
+	switch e {
+	case BITS_JOB_PROPERTY_ID_COST_FLAGS:
+		return "BITS_JOB_PROPERTY_ID_COST_FLAGS"
+	case BITS_JOB_PROPERTY_NOTIFICATION_CLSID:
+		return "BITS_JOB_PROPERTY_NOTIFICATION_CLSID"
+	case BITS_JOB_PROPERTY_DYNAMIC_CONTENT:
+		return "BITS_JOB_PROPERTY_DYNAMIC_CONTENT"
+	case BITS_JOB_PROPERTY_HIGH_PERFORMANCE:
+		return "BITS_JOB_PROPERTY_HIGH_PERFORMANCE"
+	case BITS_JOB_PROPERTY_MAX_DOWNLOAD_SIZE:
+		return "BITS_JOB_PROPERTY_MAX_DOWNLOAD_SIZE"
+	case BITS_JOB_PROPERTY_USE_STORED_CREDENTIALS:
+		return "BITS_JOB_PROPERTY_USE_STORED_CREDENTIALS"
+	case BITS_JOB_PROPERTY_MINIMUM_NOTIFICATION_INTERVAL_MS:
+		return "BITS_JOB_PROPERTY_MINIMUM_NOTIFICATION_INTERVAL_MS"
+	case BITS_JOB_PROPERTY_ON_DEMAND_MODE:
+		return "BITS_JOB_PROPERTY_ON_DEMAND_MODE"
+	default:
+		return fmt.Sprintf("BITS_JOB_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // BITS_JOB_TRANSFER_POLICY: https://learn.microsoft.com/windows/win32/api/bits5_0/ne-bits5_0-bits_job_transfer_policy
 type BITS_JOB_TRANSFER_POLICY int32
 
@@ -134,6 +347,25 @@ const (
 	BITS_JOB_TRANSFER_POLICY_STANDARD     BITS_JOB_TRANSFER_POLICY = -2147483545
 	BITS_JOB_TRANSFER_POLICY_UNRESTRICTED BITS_JOB_TRANSFER_POLICY = -2147483615
 )
+
+// String returns the BITS_JOB_TRANSFER_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BITS_JOB_TRANSFER_POLICY) String() string {
+	switch e {
+	case BITS_JOB_TRANSFER_POLICY_ALWAYS:
+		return "BITS_JOB_TRANSFER_POLICY_ALWAYS"
+	case BITS_JOB_TRANSFER_POLICY_NOT_ROAMING:
+		return "BITS_JOB_TRANSFER_POLICY_NOT_ROAMING"
+	case BITS_JOB_TRANSFER_POLICY_NO_SURCHARGE:
+		return "BITS_JOB_TRANSFER_POLICY_NO_SURCHARGE"
+	case BITS_JOB_TRANSFER_POLICY_STANDARD:
+		return "BITS_JOB_TRANSFER_POLICY_STANDARD"
+	case BITS_JOB_TRANSFER_POLICY_UNRESTRICTED:
+		return "BITS_JOB_TRANSFER_POLICY_UNRESTRICTED"
+	default:
+		return fmt.Sprintf("BITS_JOB_TRANSFER_POLICY(%d)", int32(e))
+	}
+}
 
 // GROUPPROP: https://learn.microsoft.com/windows/win32/api/qmgr/ne-qmgr-groupprop
 type GROUPPROP int32
@@ -153,3 +385,38 @@ const (
 	GROUPPROP_DISPLAYNAME     GROUPPROP = 11
 	GROUPPROP_DESCRIPTION     GROUPPROP = 12
 )
+
+// String returns the GROUPPROP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GROUPPROP) String() string {
+	switch e {
+	case GROUPPROP_PRIORITY:
+		return "GROUPPROP_PRIORITY"
+	case GROUPPROP_REMOTEUSERID:
+		return "GROUPPROP_REMOTEUSERID"
+	case GROUPPROP_REMOTEUSERPWD:
+		return "GROUPPROP_REMOTEUSERPWD"
+	case GROUPPROP_LOCALUSERID:
+		return "GROUPPROP_LOCALUSERID"
+	case GROUPPROP_LOCALUSERPWD:
+		return "GROUPPROP_LOCALUSERPWD"
+	case GROUPPROP_PROTOCOLFLAGS:
+		return "GROUPPROP_PROTOCOLFLAGS"
+	case GROUPPROP_NOTIFYFLAGS:
+		return "GROUPPROP_NOTIFYFLAGS"
+	case GROUPPROP_NOTIFYCLSID:
+		return "GROUPPROP_NOTIFYCLSID"
+	case GROUPPROP_PROGRESSSIZE:
+		return "GROUPPROP_PROGRESSSIZE"
+	case GROUPPROP_PROGRESSPERCENT:
+		return "GROUPPROP_PROGRESSPERCENT"
+	case GROUPPROP_PROGRESSTIME:
+		return "GROUPPROP_PROGRESSTIME"
+	case GROUPPROP_DISPLAYNAME:
+		return "GROUPPROP_DISPLAYNAME"
+	case GROUPPROP_DESCRIPTION:
+		return "GROUPPROP_DESCRIPTION"
+	default:
+		return fmt.Sprintf("GROUPPROP(%d)", int32(e))
+	}
+}

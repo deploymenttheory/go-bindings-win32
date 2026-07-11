@@ -4,6 +4,10 @@
 
 package virtualdiskservice
 
+import (
+	"fmt"
+)
+
 // VDS_ASYNC_OUTPUT_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_async_output_type
 type VDS_ASYNC_OUTPUT_TYPE int32
 
@@ -42,6 +46,79 @@ const (
 	VDS_ASYNCOUT_EXPAND_VDISK      VDS_ASYNC_OUTPUT_TYPE = 204
 )
 
+// String returns the VDS_ASYNC_OUTPUT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_ASYNC_OUTPUT_TYPE) String() string {
+	switch e {
+	case VDS_ASYNCOUT_UNKNOWN:
+		return "VDS_ASYNCOUT_UNKNOWN"
+	case VDS_ASYNCOUT_CREATEVOLUME:
+		return "VDS_ASYNCOUT_CREATEVOLUME"
+	case VDS_ASYNCOUT_EXTENDVOLUME:
+		return "VDS_ASYNCOUT_EXTENDVOLUME"
+	case VDS_ASYNCOUT_SHRINKVOLUME:
+		return "VDS_ASYNCOUT_SHRINKVOLUME"
+	case VDS_ASYNCOUT_ADDVOLUMEPLEX:
+		return "VDS_ASYNCOUT_ADDVOLUMEPLEX"
+	case VDS_ASYNCOUT_BREAKVOLUMEPLEX:
+		return "VDS_ASYNCOUT_BREAKVOLUMEPLEX"
+	case VDS_ASYNCOUT_REMOVEVOLUMEPLEX:
+		return "VDS_ASYNCOUT_REMOVEVOLUMEPLEX"
+	case VDS_ASYNCOUT_REPAIRVOLUMEPLEX:
+		return "VDS_ASYNCOUT_REPAIRVOLUMEPLEX"
+	case VDS_ASYNCOUT_RECOVERPACK:
+		return "VDS_ASYNCOUT_RECOVERPACK"
+	case VDS_ASYNCOUT_REPLACEDISK:
+		return "VDS_ASYNCOUT_REPLACEDISK"
+	case VDS_ASYNCOUT_CREATEPARTITION:
+		return "VDS_ASYNCOUT_CREATEPARTITION"
+	case VDS_ASYNCOUT_CLEAN:
+		return "VDS_ASYNCOUT_CLEAN"
+	case VDS_ASYNCOUT_CREATELUN:
+		return "VDS_ASYNCOUT_CREATELUN"
+	case VDS_ASYNCOUT_ADDLUNPLEX:
+		return "VDS_ASYNCOUT_ADDLUNPLEX"
+	case VDS_ASYNCOUT_REMOVELUNPLEX:
+		return "VDS_ASYNCOUT_REMOVELUNPLEX"
+	case VDS_ASYNCOUT_EXTENDLUN:
+		return "VDS_ASYNCOUT_EXTENDLUN"
+	case VDS_ASYNCOUT_SHRINKLUN:
+		return "VDS_ASYNCOUT_SHRINKLUN"
+	case VDS_ASYNCOUT_RECOVERLUN:
+		return "VDS_ASYNCOUT_RECOVERLUN"
+	case VDS_ASYNCOUT_LOGINTOTARGET:
+		return "VDS_ASYNCOUT_LOGINTOTARGET"
+	case VDS_ASYNCOUT_LOGOUTFROMTARGET:
+		return "VDS_ASYNCOUT_LOGOUTFROMTARGET"
+	case VDS_ASYNCOUT_CREATETARGET:
+		return "VDS_ASYNCOUT_CREATETARGET"
+	case VDS_ASYNCOUT_CREATEPORTALGROUP:
+		return "VDS_ASYNCOUT_CREATEPORTALGROUP"
+	case VDS_ASYNCOUT_DELETETARGET:
+		return "VDS_ASYNCOUT_DELETETARGET"
+	case VDS_ASYNCOUT_ADDPORTAL:
+		return "VDS_ASYNCOUT_ADDPORTAL"
+	case VDS_ASYNCOUT_REMOVEPORTAL:
+		return "VDS_ASYNCOUT_REMOVEPORTAL"
+	case VDS_ASYNCOUT_DELETEPORTALGROUP:
+		return "VDS_ASYNCOUT_DELETEPORTALGROUP"
+	case VDS_ASYNCOUT_FORMAT:
+		return "VDS_ASYNCOUT_FORMAT"
+	case VDS_ASYNCOUT_CREATE_VDISK:
+		return "VDS_ASYNCOUT_CREATE_VDISK"
+	case VDS_ASYNCOUT_ATTACH_VDISK:
+		return "VDS_ASYNCOUT_ATTACH_VDISK"
+	case VDS_ASYNCOUT_COMPACT_VDISK:
+		return "VDS_ASYNCOUT_COMPACT_VDISK"
+	case VDS_ASYNCOUT_MERGE_VDISK:
+		return "VDS_ASYNCOUT_MERGE_VDISK"
+	case VDS_ASYNCOUT_EXPAND_VDISK:
+		return "VDS_ASYNCOUT_EXPAND_VDISK"
+	default:
+		return fmt.Sprintf("VDS_ASYNC_OUTPUT_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_CONTROLLER_STATUS: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_controller_status
 type VDS_CONTROLLER_STATUS int32
 
@@ -53,6 +130,27 @@ const (
 	VDS_CS_FAILED    VDS_CONTROLLER_STATUS = 5
 	VDS_CS_REMOVED   VDS_CONTROLLER_STATUS = 8
 )
+
+// String returns the VDS_CONTROLLER_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_CONTROLLER_STATUS) String() string {
+	switch e {
+	case VDS_CS_UNKNOWN:
+		return "VDS_CS_UNKNOWN"
+	case VDS_CS_ONLINE:
+		return "VDS_CS_ONLINE"
+	case VDS_CS_NOT_READY:
+		return "VDS_CS_NOT_READY"
+	case VDS_CS_OFFLINE:
+		return "VDS_CS_OFFLINE"
+	case VDS_CS_FAILED:
+		return "VDS_CS_FAILED"
+	case VDS_CS_REMOVED:
+		return "VDS_CS_REMOVED"
+	default:
+		return fmt.Sprintf("VDS_CONTROLLER_STATUS(%d)", int32(e))
+	}
+}
 
 // VDS_DISK_EXTENT_TYPE: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_disk_extent_type
 type VDS_DISK_EXTENT_TYPE int32
@@ -68,6 +166,33 @@ const (
 	VDS_DET_CLUSTER  VDS_DISK_EXTENT_TYPE = 7
 	VDS_DET_UNUSABLE VDS_DISK_EXTENT_TYPE = 32767
 )
+
+// String returns the VDS_DISK_EXTENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_DISK_EXTENT_TYPE) String() string {
+	switch e {
+	case VDS_DET_UNKNOWN:
+		return "VDS_DET_UNKNOWN"
+	case VDS_DET_FREE:
+		return "VDS_DET_FREE"
+	case VDS_DET_DATA:
+		return "VDS_DET_DATA"
+	case VDS_DET_OEM:
+		return "VDS_DET_OEM"
+	case VDS_DET_ESP:
+		return "VDS_DET_ESP"
+	case VDS_DET_MSR:
+		return "VDS_DET_MSR"
+	case VDS_DET_LDM:
+		return "VDS_DET_LDM"
+	case VDS_DET_CLUSTER:
+		return "VDS_DET_CLUSTER"
+	case VDS_DET_UNUSABLE:
+		return "VDS_DET_UNUSABLE"
+	default:
+		return fmt.Sprintf("VDS_DISK_EXTENT_TYPE(%d)", int32(e))
+	}
+}
 
 // VDS_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_disk_flag
 type VDS_DISK_FLAG int32
@@ -92,6 +217,49 @@ const (
 	VDS_DF_REFS_NOT_SUPPORTED   VDS_DISK_FLAG = 65536
 )
 
+// String returns the VDS_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_DISK_FLAG) String() string {
+	switch e {
+	case VDS_DF_AUDIO_CD:
+		return "VDS_DF_AUDIO_CD"
+	case VDS_DF_HOTSPARE:
+		return "VDS_DF_HOTSPARE"
+	case VDS_DF_RESERVE_CAPABLE:
+		return "VDS_DF_RESERVE_CAPABLE"
+	case VDS_DF_MASKED:
+		return "VDS_DF_MASKED"
+	case VDS_DF_STYLE_CONVERTIBLE:
+		return "VDS_DF_STYLE_CONVERTIBLE"
+	case VDS_DF_CLUSTERED:
+		return "VDS_DF_CLUSTERED"
+	case VDS_DF_READ_ONLY:
+		return "VDS_DF_READ_ONLY"
+	case VDS_DF_SYSTEM_DISK:
+		return "VDS_DF_SYSTEM_DISK"
+	case VDS_DF_BOOT_DISK:
+		return "VDS_DF_BOOT_DISK"
+	case VDS_DF_PAGEFILE_DISK:
+		return "VDS_DF_PAGEFILE_DISK"
+	case VDS_DF_HIBERNATIONFILE_DISK:
+		return "VDS_DF_HIBERNATIONFILE_DISK"
+	case VDS_DF_CRASHDUMP_DISK:
+		return "VDS_DF_CRASHDUMP_DISK"
+	case VDS_DF_HAS_ARC_PATH:
+		return "VDS_DF_HAS_ARC_PATH"
+	case VDS_DF_DYNAMIC:
+		return "VDS_DF_DYNAMIC"
+	case VDS_DF_BOOT_FROM_DISK:
+		return "VDS_DF_BOOT_FROM_DISK"
+	case VDS_DF_CURRENT_READ_ONLY:
+		return "VDS_DF_CURRENT_READ_ONLY"
+	case VDS_DF_REFS_NOT_SUPPORTED:
+		return "VDS_DF_REFS_NOT_SUPPORTED"
+	default:
+		return fmt.Sprintf("VDS_DISK_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_DISK_OFFLINE_REASON: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_disk_offline_reason
 type VDS_DISK_OFFLINE_REASON int32
 
@@ -107,6 +275,33 @@ const (
 	VDSDiskOfflineReasonLostDataPersistence VDS_DISK_OFFLINE_REASON = 8
 )
 
+// String returns the VDS_DISK_OFFLINE_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_DISK_OFFLINE_REASON) String() string {
+	switch e {
+	case VDSDiskOfflineReasonNone:
+		return "VDSDiskOfflineReasonNone"
+	case VDSDiskOfflineReasonPolicy:
+		return "VDSDiskOfflineReasonPolicy"
+	case VDSDiskOfflineReasonRedundantPath:
+		return "VDSDiskOfflineReasonRedundantPath"
+	case VDSDiskOfflineReasonSnapshot:
+		return "VDSDiskOfflineReasonSnapshot"
+	case VDSDiskOfflineReasonCollision:
+		return "VDSDiskOfflineReasonCollision"
+	case VDSDiskOfflineReasonResourceExhaustion:
+		return "VDSDiskOfflineReasonResourceExhaustion"
+	case VDSDiskOfflineReasonWriteFailure:
+		return "VDSDiskOfflineReasonWriteFailure"
+	case VDSDiskOfflineReasonDIScan:
+		return "VDSDiskOfflineReasonDIScan"
+	case VDSDiskOfflineReasonLostDataPersistence:
+		return "VDSDiskOfflineReasonLostDataPersistence"
+	default:
+		return fmt.Sprintf("VDS_DISK_OFFLINE_REASON(%d)", int32(e))
+	}
+}
+
 // VDS_DISK_STATUS: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_disk_status
 type VDS_DISK_STATUS int32
 
@@ -120,6 +315,29 @@ const (
 	VDS_DS_OFFLINE   VDS_DISK_STATUS = 4
 )
 
+// String returns the VDS_DISK_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_DISK_STATUS) String() string {
+	switch e {
+	case VDS_DS_UNKNOWN:
+		return "VDS_DS_UNKNOWN"
+	case VDS_DS_ONLINE:
+		return "VDS_DS_ONLINE"
+	case VDS_DS_NOT_READY:
+		return "VDS_DS_NOT_READY"
+	case VDS_DS_NO_MEDIA:
+		return "VDS_DS_NO_MEDIA"
+	case VDS_DS_FAILED:
+		return "VDS_DS_FAILED"
+	case VDS_DS_MISSING:
+		return "VDS_DS_MISSING"
+	case VDS_DS_OFFLINE:
+		return "VDS_DS_OFFLINE"
+	default:
+		return fmt.Sprintf("VDS_DISK_STATUS(%d)", int32(e))
+	}
+}
+
 // VDS_DRIVE_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_drive_flag
 type VDS_DRIVE_FLAG int32
 
@@ -131,12 +349,42 @@ const (
 	VDS_DRF_HOTSPARE_STANDBY VDS_DRIVE_FLAG = 16
 )
 
+// String returns the VDS_DRIVE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_DRIVE_FLAG) String() string {
+	switch e {
+	case VDS_DRF_HOTSPARE:
+		return "VDS_DRF_HOTSPARE"
+	case VDS_DRF_ASSIGNED:
+		return "VDS_DRF_ASSIGNED"
+	case VDS_DRF_UNASSIGNED:
+		return "VDS_DRF_UNASSIGNED"
+	case VDS_DRF_HOTSPARE_IN_USE:
+		return "VDS_DRF_HOTSPARE_IN_USE"
+	case VDS_DRF_HOTSPARE_STANDBY:
+		return "VDS_DRF_HOTSPARE_STANDBY"
+	default:
+		return fmt.Sprintf("VDS_DRIVE_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_DRIVE_LETTER_FLAG: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_drive_letter_flag
 type VDS_DRIVE_LETTER_FLAG int32
 
 const (
 	VDS_DLF_NON_PERSISTENT VDS_DRIVE_LETTER_FLAG = 1
 )
+
+// String returns the VDS_DRIVE_LETTER_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_DRIVE_LETTER_FLAG) String() string {
+	switch e {
+	case VDS_DLF_NON_PERSISTENT:
+		return "VDS_DLF_NON_PERSISTENT"
+	default:
+		return fmt.Sprintf("VDS_DRIVE_LETTER_FLAG(%d)", int32(e))
+	}
+}
 
 // VDS_DRIVE_STATUS: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_drive_status
 type VDS_DRIVE_STATUS int32
@@ -149,6 +397,27 @@ const (
 	VDS_DRS_FAILED    VDS_DRIVE_STATUS = 5
 	VDS_DRS_REMOVED   VDS_DRIVE_STATUS = 8
 )
+
+// String returns the VDS_DRIVE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_DRIVE_STATUS) String() string {
+	switch e {
+	case VDS_DRS_UNKNOWN:
+		return "VDS_DRS_UNKNOWN"
+	case VDS_DRS_ONLINE:
+		return "VDS_DRS_ONLINE"
+	case VDS_DRS_NOT_READY:
+		return "VDS_DRS_NOT_READY"
+	case VDS_DRS_OFFLINE:
+		return "VDS_DRS_OFFLINE"
+	case VDS_DRS_FAILED:
+		return "VDS_DRS_FAILED"
+	case VDS_DRS_REMOVED:
+		return "VDS_DRS_REMOVED"
+	default:
+		return fmt.Sprintf("VDS_DRIVE_STATUS(%d)", int32(e))
+	}
+}
 
 // VDS_FILE_SYSTEM_FLAG: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_file_system_flag
 type VDS_FILE_SYSTEM_FLAG int32
@@ -173,6 +442,49 @@ const (
 	VDS_FSF_ALLOCATION_UNIT_256K    VDS_FILE_SYSTEM_FLAG = 33554432
 )
 
+// String returns the VDS_FILE_SYSTEM_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_FILE_SYSTEM_FLAG) String() string {
+	switch e {
+	case VDS_FSF_SUPPORT_FORMAT:
+		return "VDS_FSF_SUPPORT_FORMAT"
+	case VDS_FSF_SUPPORT_QUICK_FORMAT:
+		return "VDS_FSF_SUPPORT_QUICK_FORMAT"
+	case VDS_FSF_SUPPORT_COMPRESS:
+		return "VDS_FSF_SUPPORT_COMPRESS"
+	case VDS_FSF_SUPPORT_SPECIFY_LABEL:
+		return "VDS_FSF_SUPPORT_SPECIFY_LABEL"
+	case VDS_FSF_SUPPORT_MOUNT_POINT:
+		return "VDS_FSF_SUPPORT_MOUNT_POINT"
+	case VDS_FSF_SUPPORT_REMOVABLE_MEDIA:
+		return "VDS_FSF_SUPPORT_REMOVABLE_MEDIA"
+	case VDS_FSF_SUPPORT_EXTEND:
+		return "VDS_FSF_SUPPORT_EXTEND"
+	case VDS_FSF_ALLOCATION_UNIT_512:
+		return "VDS_FSF_ALLOCATION_UNIT_512"
+	case VDS_FSF_ALLOCATION_UNIT_1K:
+		return "VDS_FSF_ALLOCATION_UNIT_1K"
+	case VDS_FSF_ALLOCATION_UNIT_2K:
+		return "VDS_FSF_ALLOCATION_UNIT_2K"
+	case VDS_FSF_ALLOCATION_UNIT_4K:
+		return "VDS_FSF_ALLOCATION_UNIT_4K"
+	case VDS_FSF_ALLOCATION_UNIT_8K:
+		return "VDS_FSF_ALLOCATION_UNIT_8K"
+	case VDS_FSF_ALLOCATION_UNIT_16K:
+		return "VDS_FSF_ALLOCATION_UNIT_16K"
+	case VDS_FSF_ALLOCATION_UNIT_32K:
+		return "VDS_FSF_ALLOCATION_UNIT_32K"
+	case VDS_FSF_ALLOCATION_UNIT_64K:
+		return "VDS_FSF_ALLOCATION_UNIT_64K"
+	case VDS_FSF_ALLOCATION_UNIT_128K:
+		return "VDS_FSF_ALLOCATION_UNIT_128K"
+	case VDS_FSF_ALLOCATION_UNIT_256K:
+		return "VDS_FSF_ALLOCATION_UNIT_256K"
+	default:
+		return fmt.Sprintf("VDS_FILE_SYSTEM_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_FILE_SYSTEM_FORMAT_SUPPORT_FLAG: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_file_system_format_support_flag
 type VDS_FILE_SYSTEM_FORMAT_SUPPORT_FLAG int32
 
@@ -182,12 +494,38 @@ const (
 	VDS_FSS_RECOMMENDED       VDS_FILE_SYSTEM_FORMAT_SUPPORT_FLAG = 4
 )
 
+// String returns the VDS_FILE_SYSTEM_FORMAT_SUPPORT_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_FILE_SYSTEM_FORMAT_SUPPORT_FLAG) String() string {
+	switch e {
+	case VDS_FSS_DEFAULT:
+		return "VDS_FSS_DEFAULT"
+	case VDS_FSS_PREVIOUS_REVISION:
+		return "VDS_FSS_PREVIOUS_REVISION"
+	case VDS_FSS_RECOMMENDED:
+		return "VDS_FSS_RECOMMENDED"
+	default:
+		return fmt.Sprintf("VDS_FILE_SYSTEM_FORMAT_SUPPORT_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_FILE_SYSTEM_PROP_FLAG: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_file_system_prop_flag
 type VDS_FILE_SYSTEM_PROP_FLAG int32
 
 const (
 	VDS_FPF_COMPRESSED VDS_FILE_SYSTEM_PROP_FLAG = 1
 )
+
+// String returns the VDS_FILE_SYSTEM_PROP_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_FILE_SYSTEM_PROP_FLAG) String() string {
+	switch e {
+	case VDS_FPF_COMPRESSED:
+		return "VDS_FPF_COMPRESSED"
+	default:
+		return fmt.Sprintf("VDS_FILE_SYSTEM_PROP_FLAG(%d)", int32(e))
+	}
+}
 
 // VDS_FILE_SYSTEM_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_file_system_type
 type VDS_FILE_SYSTEM_TYPE int32
@@ -205,6 +543,35 @@ const (
 	VDS_FST_REFS    VDS_FILE_SYSTEM_TYPE = 9
 )
 
+// String returns the VDS_FILE_SYSTEM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_FILE_SYSTEM_TYPE) String() string {
+	switch e {
+	case VDS_FST_UNKNOWN:
+		return "VDS_FST_UNKNOWN"
+	case VDS_FST_RAW:
+		return "VDS_FST_RAW"
+	case VDS_FST_FAT:
+		return "VDS_FST_FAT"
+	case VDS_FST_FAT32:
+		return "VDS_FST_FAT32"
+	case VDS_FST_NTFS:
+		return "VDS_FST_NTFS"
+	case VDS_FST_CDFS:
+		return "VDS_FST_CDFS"
+	case VDS_FST_UDF:
+		return "VDS_FST_UDF"
+	case VDS_FST_EXFAT:
+		return "VDS_FST_EXFAT"
+	case VDS_FST_CSVFS:
+		return "VDS_FST_CSVFS"
+	case VDS_FST_REFS:
+		return "VDS_FST_REFS"
+	default:
+		return fmt.Sprintf("VDS_FILE_SYSTEM_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_FORMAT_OPTION_FLAGS: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_format_option_flags
 type VDS_FORMAT_OPTION_FLAGS int32
 
@@ -215,6 +582,25 @@ const (
 	VDS_FSOF_COMPRESSION        VDS_FORMAT_OPTION_FLAGS = 4
 	VDS_FSOF_DUPLICATE_METADATA VDS_FORMAT_OPTION_FLAGS = 8
 )
+
+// String returns the VDS_FORMAT_OPTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_FORMAT_OPTION_FLAGS) String() string {
+	switch e {
+	case VDS_FSOF_NONE:
+		return "VDS_FSOF_NONE"
+	case VDS_FSOF_FORCE:
+		return "VDS_FSOF_FORCE"
+	case VDS_FSOF_QUICK:
+		return "VDS_FSOF_QUICK"
+	case VDS_FSOF_COMPRESSION:
+		return "VDS_FSOF_COMPRESSION"
+	case VDS_FSOF_DUPLICATE_METADATA:
+		return "VDS_FSOF_DUPLICATE_METADATA"
+	default:
+		return fmt.Sprintf("VDS_FORMAT_OPTION_FLAGS(%d)", int32(e))
+	}
+}
 
 // VDS_HBAPORT_SPEED_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_hbaport_speed_flag
 type VDS_HBAPORT_SPEED_FLAG int32
@@ -227,6 +613,27 @@ const (
 	VDS_HSF_4GBIT          VDS_HBAPORT_SPEED_FLAG = 8
 	VDS_HSF_NOT_NEGOTIATED VDS_HBAPORT_SPEED_FLAG = 32768
 )
+
+// String returns the VDS_HBAPORT_SPEED_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_HBAPORT_SPEED_FLAG) String() string {
+	switch e {
+	case VDS_HSF_UNKNOWN:
+		return "VDS_HSF_UNKNOWN"
+	case VDS_HSF_1GBIT:
+		return "VDS_HSF_1GBIT"
+	case VDS_HSF_2GBIT:
+		return "VDS_HSF_2GBIT"
+	case VDS_HSF_10GBIT:
+		return "VDS_HSF_10GBIT"
+	case VDS_HSF_4GBIT:
+		return "VDS_HSF_4GBIT"
+	case VDS_HSF_NOT_NEGOTIATED:
+		return "VDS_HSF_NOT_NEGOTIATED"
+	default:
+		return fmt.Sprintf("VDS_HBAPORT_SPEED_FLAG(%d)", int32(e))
+	}
+}
 
 // VDS_HBAPORT_STATUS: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_hbaport_status
 type VDS_HBAPORT_STATUS int32
@@ -241,6 +648,31 @@ const (
 	VDS_HPS_ERROR       VDS_HBAPORT_STATUS = 7
 	VDS_HPS_LOOPBACK    VDS_HBAPORT_STATUS = 8
 )
+
+// String returns the VDS_HBAPORT_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_HBAPORT_STATUS) String() string {
+	switch e {
+	case VDS_HPS_UNKNOWN:
+		return "VDS_HPS_UNKNOWN"
+	case VDS_HPS_ONLINE:
+		return "VDS_HPS_ONLINE"
+	case VDS_HPS_OFFLINE:
+		return "VDS_HPS_OFFLINE"
+	case VDS_HPS_BYPASSED:
+		return "VDS_HPS_BYPASSED"
+	case VDS_HPS_DIAGNOSTICS:
+		return "VDS_HPS_DIAGNOSTICS"
+	case VDS_HPS_LINKDOWN:
+		return "VDS_HPS_LINKDOWN"
+	case VDS_HPS_ERROR:
+		return "VDS_HPS_ERROR"
+	case VDS_HPS_LOOPBACK:
+		return "VDS_HPS_LOOPBACK"
+	default:
+		return fmt.Sprintf("VDS_HBAPORT_STATUS(%d)", int32(e))
+	}
+}
 
 // VDS_HBAPORT_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_hbaport_type
 type VDS_HBAPORT_TYPE int32
@@ -258,6 +690,37 @@ const (
 	VDS_HPT_LPORT      VDS_HBAPORT_TYPE = 20
 	VDS_HPT_PTP        VDS_HBAPORT_TYPE = 21
 )
+
+// String returns the VDS_HBAPORT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_HBAPORT_TYPE) String() string {
+	switch e {
+	case VDS_HPT_UNKNOWN:
+		return "VDS_HPT_UNKNOWN"
+	case VDS_HPT_OTHER:
+		return "VDS_HPT_OTHER"
+	case VDS_HPT_NOTPRESENT:
+		return "VDS_HPT_NOTPRESENT"
+	case VDS_HPT_NPORT:
+		return "VDS_HPT_NPORT"
+	case VDS_HPT_NLPORT:
+		return "VDS_HPT_NLPORT"
+	case VDS_HPT_FLPORT:
+		return "VDS_HPT_FLPORT"
+	case VDS_HPT_FPORT:
+		return "VDS_HPT_FPORT"
+	case VDS_HPT_EPORT:
+		return "VDS_HPT_EPORT"
+	case VDS_HPT_GPORT:
+		return "VDS_HPT_GPORT"
+	case VDS_HPT_LPORT:
+		return "VDS_HPT_LPORT"
+	case VDS_HPT_PTP:
+		return "VDS_HPT_PTP"
+	default:
+		return fmt.Sprintf("VDS_HBAPORT_TYPE(%d)", int32(e))
+	}
+}
 
 // VDS_HEALTH: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_health
 type VDS_HEALTH int32
@@ -277,6 +740,39 @@ const (
 	VDS_H_DEGRADED                  VDS_HEALTH = 11
 )
 
+// String returns the VDS_HEALTH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_HEALTH) String() string {
+	switch e {
+	case VDS_H_UNKNOWN:
+		return "VDS_H_UNKNOWN"
+	case VDS_H_HEALTHY:
+		return "VDS_H_HEALTHY"
+	case VDS_H_REBUILDING:
+		return "VDS_H_REBUILDING"
+	case VDS_H_STALE:
+		return "VDS_H_STALE"
+	case VDS_H_FAILING:
+		return "VDS_H_FAILING"
+	case VDS_H_FAILING_REDUNDANCY:
+		return "VDS_H_FAILING_REDUNDANCY"
+	case VDS_H_FAILED_REDUNDANCY:
+		return "VDS_H_FAILED_REDUNDANCY"
+	case VDS_H_FAILED_REDUNDANCY_FAILING:
+		return "VDS_H_FAILED_REDUNDANCY_FAILING"
+	case VDS_H_FAILED:
+		return "VDS_H_FAILED"
+	case VDS_H_REPLACED:
+		return "VDS_H_REPLACED"
+	case VDS_H_PENDING_FAILURE:
+		return "VDS_H_PENDING_FAILURE"
+	case VDS_H_DEGRADED:
+		return "VDS_H_DEGRADED"
+	default:
+		return fmt.Sprintf("VDS_HEALTH(%d)", int32(e))
+	}
+}
+
 // VDS_HWPROVIDER_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_hwprovider_type
 type VDS_HWPROVIDER_TYPE int32
 
@@ -288,6 +784,27 @@ const (
 	VDS_HWT_SAS           VDS_HWPROVIDER_TYPE = 4
 	VDS_HWT_HYBRID        VDS_HWPROVIDER_TYPE = 5
 )
+
+// String returns the VDS_HWPROVIDER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_HWPROVIDER_TYPE) String() string {
+	switch e {
+	case VDS_HWT_UNKNOWN:
+		return "VDS_HWT_UNKNOWN"
+	case VDS_HWT_PCI_RAID:
+		return "VDS_HWT_PCI_RAID"
+	case VDS_HWT_FIBRE_CHANNEL:
+		return "VDS_HWT_FIBRE_CHANNEL"
+	case VDS_HWT_ISCSI:
+		return "VDS_HWT_ISCSI"
+	case VDS_HWT_SAS:
+		return "VDS_HWT_SAS"
+	case VDS_HWT_HYBRID:
+		return "VDS_HWT_HYBRID"
+	default:
+		return fmt.Sprintf("VDS_HWPROVIDER_TYPE(%d)", int32(e))
+	}
+}
 
 // VDS_INTERCONNECT_ADDRESS_TYPE: https://learn.microsoft.com/windows/win32/api/vdslun/ne-vdslun-vds_interconnect_address_type
 type VDS_INTERCONNECT_ADDRESS_TYPE int32
@@ -301,6 +818,27 @@ const (
 	VDS_IA_SCSI    VDS_INTERCONNECT_ADDRESS_TYPE = 5
 )
 
+// String returns the VDS_INTERCONNECT_ADDRESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_INTERCONNECT_ADDRESS_TYPE) String() string {
+	switch e {
+	case VDS_IA_UNKNOWN:
+		return "VDS_IA_UNKNOWN"
+	case VDS_IA_FCFS:
+		return "VDS_IA_FCFS"
+	case VDS_IA_FCPH:
+		return "VDS_IA_FCPH"
+	case VDS_IA_FCPH3:
+		return "VDS_IA_FCPH3"
+	case VDS_IA_MAC:
+		return "VDS_IA_MAC"
+	case VDS_IA_SCSI:
+		return "VDS_IA_SCSI"
+	default:
+		return fmt.Sprintf("VDS_INTERCONNECT_ADDRESS_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_INTERCONNECT_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_interconnect_flag
 type VDS_INTERCONNECT_FLAG int32
 
@@ -310,6 +848,23 @@ const (
 	VDS_ITF_ISCSI         VDS_INTERCONNECT_FLAG = 4
 	VDS_ITF_SAS           VDS_INTERCONNECT_FLAG = 8
 )
+
+// String returns the VDS_INTERCONNECT_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_INTERCONNECT_FLAG) String() string {
+	switch e {
+	case VDS_ITF_PCI_RAID:
+		return "VDS_ITF_PCI_RAID"
+	case VDS_ITF_FIBRE_CHANNEL:
+		return "VDS_ITF_FIBRE_CHANNEL"
+	case VDS_ITF_ISCSI:
+		return "VDS_ITF_ISCSI"
+	case VDS_ITF_SAS:
+		return "VDS_ITF_SAS"
+	default:
+		return fmt.Sprintf("VDS_INTERCONNECT_FLAG(%d)", int32(e))
+	}
+}
 
 // VDS_IPADDRESS_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_ipaddress_type
 type VDS_IPADDRESS_TYPE int32
@@ -321,6 +876,23 @@ const (
 	VDS_IPT_EMPTY VDS_IPADDRESS_TYPE = 3
 )
 
+// String returns the VDS_IPADDRESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_IPADDRESS_TYPE) String() string {
+	switch e {
+	case VDS_IPT_TEXT:
+		return "VDS_IPT_TEXT"
+	case VDS_IPT_IPV4:
+		return "VDS_IPT_IPV4"
+	case VDS_IPT_IPV6:
+		return "VDS_IPT_IPV6"
+	case VDS_IPT_EMPTY:
+		return "VDS_IPT_EMPTY"
+	default:
+		return fmt.Sprintf("VDS_IPADDRESS_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_ISCSI_AUTH_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_iscsi_auth_type
 type VDS_ISCSI_AUTH_TYPE int32
 
@@ -329,6 +901,21 @@ const (
 	VDS_IAT_CHAP        VDS_ISCSI_AUTH_TYPE = 1
 	VDS_IAT_MUTUAL_CHAP VDS_ISCSI_AUTH_TYPE = 2
 )
+
+// String returns the VDS_ISCSI_AUTH_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_ISCSI_AUTH_TYPE) String() string {
+	switch e {
+	case VDS_IAT_NONE:
+		return "VDS_IAT_NONE"
+	case VDS_IAT_CHAP:
+		return "VDS_IAT_CHAP"
+	case VDS_IAT_MUTUAL_CHAP:
+		return "VDS_IAT_MUTUAL_CHAP"
+	default:
+		return fmt.Sprintf("VDS_ISCSI_AUTH_TYPE(%d)", int32(e))
+	}
+}
 
 // VDS_ISCSI_IPSEC_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_iscsi_ipsec_flag
 type VDS_ISCSI_IPSEC_FLAG int32
@@ -343,6 +930,29 @@ const (
 	VDS_IIF_TUNNEL_MODE_PREFERRED    VDS_ISCSI_IPSEC_FLAG = 64
 )
 
+// String returns the VDS_ISCSI_IPSEC_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_ISCSI_IPSEC_FLAG) String() string {
+	switch e {
+	case VDS_IIF_VALID:
+		return "VDS_IIF_VALID"
+	case VDS_IIF_IKE:
+		return "VDS_IIF_IKE"
+	case VDS_IIF_MAIN_MODE:
+		return "VDS_IIF_MAIN_MODE"
+	case VDS_IIF_AGGRESSIVE_MODE:
+		return "VDS_IIF_AGGRESSIVE_MODE"
+	case VDS_IIF_PFS_ENABLE:
+		return "VDS_IIF_PFS_ENABLE"
+	case VDS_IIF_TRANSPORT_MODE_PREFERRED:
+		return "VDS_IIF_TRANSPORT_MODE_PREFERRED"
+	case VDS_IIF_TUNNEL_MODE_PREFERRED:
+		return "VDS_IIF_TUNNEL_MODE_PREFERRED"
+	default:
+		return fmt.Sprintf("VDS_ISCSI_IPSEC_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_ISCSI_LOGIN_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_iscsi_login_flag
 type VDS_ISCSI_LOGIN_FLAG int32
 
@@ -350,6 +960,19 @@ const (
 	VDS_ILF_REQUIRE_IPSEC     VDS_ISCSI_LOGIN_FLAG = 1
 	VDS_ILF_MULTIPATH_ENABLED VDS_ISCSI_LOGIN_FLAG = 2
 )
+
+// String returns the VDS_ISCSI_LOGIN_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_ISCSI_LOGIN_FLAG) String() string {
+	switch e {
+	case VDS_ILF_REQUIRE_IPSEC:
+		return "VDS_ILF_REQUIRE_IPSEC"
+	case VDS_ILF_MULTIPATH_ENABLED:
+		return "VDS_ILF_MULTIPATH_ENABLED"
+	default:
+		return fmt.Sprintf("VDS_ISCSI_LOGIN_FLAG(%d)", int32(e))
+	}
+}
 
 // VDS_ISCSI_LOGIN_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_iscsi_login_type
 type VDS_ISCSI_LOGIN_TYPE int32
@@ -359,6 +982,21 @@ const (
 	VDS_ILT_PERSISTENT VDS_ISCSI_LOGIN_TYPE = 1
 	VDS_ILT_BOOT       VDS_ISCSI_LOGIN_TYPE = 2
 )
+
+// String returns the VDS_ISCSI_LOGIN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_ISCSI_LOGIN_TYPE) String() string {
+	switch e {
+	case VDS_ILT_MANUAL:
+		return "VDS_ILT_MANUAL"
+	case VDS_ILT_PERSISTENT:
+		return "VDS_ILT_PERSISTENT"
+	case VDS_ILT_BOOT:
+		return "VDS_ILT_BOOT"
+	default:
+		return fmt.Sprintf("VDS_ISCSI_LOGIN_TYPE(%d)", int32(e))
+	}
+}
 
 // VDS_ISCSI_PORTAL_STATUS: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_iscsi_portal_status
 type VDS_ISCSI_PORTAL_STATUS int32
@@ -370,6 +1008,25 @@ const (
 	VDS_IPS_OFFLINE   VDS_ISCSI_PORTAL_STATUS = 4
 	VDS_IPS_FAILED    VDS_ISCSI_PORTAL_STATUS = 5
 )
+
+// String returns the VDS_ISCSI_PORTAL_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_ISCSI_PORTAL_STATUS) String() string {
+	switch e {
+	case VDS_IPS_UNKNOWN:
+		return "VDS_IPS_UNKNOWN"
+	case VDS_IPS_ONLINE:
+		return "VDS_IPS_ONLINE"
+	case VDS_IPS_NOT_READY:
+		return "VDS_IPS_NOT_READY"
+	case VDS_IPS_OFFLINE:
+		return "VDS_IPS_OFFLINE"
+	case VDS_IPS_FAILED:
+		return "VDS_IPS_FAILED"
+	default:
+		return fmt.Sprintf("VDS_ISCSI_PORTAL_STATUS(%d)", int32(e))
+	}
+}
 
 // VDS_LOADBALANCE_POLICY_ENUM: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_loadbalance_policy_enum
 type VDS_LOADBALANCE_POLICY_ENUM int32
@@ -384,6 +1041,31 @@ const (
 	VDS_LBP_LEAST_BLOCKS            VDS_LOADBALANCE_POLICY_ENUM = 6
 	VDS_LBP_VENDOR_SPECIFIC         VDS_LOADBALANCE_POLICY_ENUM = 7
 )
+
+// String returns the VDS_LOADBALANCE_POLICY_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_LOADBALANCE_POLICY_ENUM) String() string {
+	switch e {
+	case VDS_LBP_UNKNOWN:
+		return "VDS_LBP_UNKNOWN"
+	case VDS_LBP_FAILOVER:
+		return "VDS_LBP_FAILOVER"
+	case VDS_LBP_ROUND_ROBIN:
+		return "VDS_LBP_ROUND_ROBIN"
+	case VDS_LBP_ROUND_ROBIN_WITH_SUBSET:
+		return "VDS_LBP_ROUND_ROBIN_WITH_SUBSET"
+	case VDS_LBP_DYN_LEAST_QUEUE_DEPTH:
+		return "VDS_LBP_DYN_LEAST_QUEUE_DEPTH"
+	case VDS_LBP_WEIGHTED_PATHS:
+		return "VDS_LBP_WEIGHTED_PATHS"
+	case VDS_LBP_LEAST_BLOCKS:
+		return "VDS_LBP_LEAST_BLOCKS"
+	case VDS_LBP_VENDOR_SPECIFIC:
+		return "VDS_LBP_VENDOR_SPECIFIC"
+	default:
+		return fmt.Sprintf("VDS_LOADBALANCE_POLICY_ENUM(%d)", int32(e))
+	}
+}
 
 // VDS_LUN_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_lun_flag
 type VDS_LUN_FLAG int32
@@ -400,12 +1082,50 @@ const (
 	VDS_LF_SNAPSHOT                      VDS_LUN_FLAG = 256
 )
 
+// String returns the VDS_LUN_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_LUN_FLAG) String() string {
+	switch e {
+	case VDS_LF_LBN_REMAP_ENABLED:
+		return "VDS_LF_LBN_REMAP_ENABLED"
+	case VDS_LF_READ_BACK_VERIFY_ENABLED:
+		return "VDS_LF_READ_BACK_VERIFY_ENABLED"
+	case VDS_LF_WRITE_THROUGH_CACHING_ENABLED:
+		return "VDS_LF_WRITE_THROUGH_CACHING_ENABLED"
+	case VDS_LF_HARDWARE_CHECKSUM_ENABLED:
+		return "VDS_LF_HARDWARE_CHECKSUM_ENABLED"
+	case VDS_LF_READ_CACHE_ENABLED:
+		return "VDS_LF_READ_CACHE_ENABLED"
+	case VDS_LF_WRITE_CACHE_ENABLED:
+		return "VDS_LF_WRITE_CACHE_ENABLED"
+	case VDS_LF_MEDIA_SCAN_ENABLED:
+		return "VDS_LF_MEDIA_SCAN_ENABLED"
+	case VDS_LF_CONSISTENCY_CHECK_ENABLED:
+		return "VDS_LF_CONSISTENCY_CHECK_ENABLED"
+	case VDS_LF_SNAPSHOT:
+		return "VDS_LF_SNAPSHOT"
+	default:
+		return fmt.Sprintf("VDS_LUN_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_LUN_PLEX_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_lun_plex_flag
 type VDS_LUN_PLEX_FLAG int32
 
 const (
 	VDS_LPF_LBN_REMAP_ENABLED VDS_LUN_PLEX_FLAG = 1
 )
+
+// String returns the VDS_LUN_PLEX_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_LUN_PLEX_FLAG) String() string {
+	switch e {
+	case VDS_LPF_LBN_REMAP_ENABLED:
+		return "VDS_LPF_LBN_REMAP_ENABLED"
+	default:
+		return fmt.Sprintf("VDS_LUN_PLEX_FLAG(%d)", int32(e))
+	}
+}
 
 // VDS_LUN_PLEX_STATUS: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_lun_plex_status
 type VDS_LUN_PLEX_STATUS int32
@@ -417,6 +1137,25 @@ const (
 	VDS_LPS_OFFLINE   VDS_LUN_PLEX_STATUS = 4
 	VDS_LPS_FAILED    VDS_LUN_PLEX_STATUS = 5
 )
+
+// String returns the VDS_LUN_PLEX_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_LUN_PLEX_STATUS) String() string {
+	switch e {
+	case VDS_LPS_UNKNOWN:
+		return "VDS_LPS_UNKNOWN"
+	case VDS_LPS_ONLINE:
+		return "VDS_LPS_ONLINE"
+	case VDS_LPS_NOT_READY:
+		return "VDS_LPS_NOT_READY"
+	case VDS_LPS_OFFLINE:
+		return "VDS_LPS_OFFLINE"
+	case VDS_LPS_FAILED:
+		return "VDS_LPS_FAILED"
+	default:
+		return fmt.Sprintf("VDS_LUN_PLEX_STATUS(%d)", int32(e))
+	}
+}
 
 // VDS_LUN_PLEX_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_lun_plex_type
 type VDS_LUN_PLEX_TYPE int32
@@ -442,6 +1181,51 @@ const (
 	VDS_LPT_RAID60  VDS_LUN_PLEX_TYPE = 29
 )
 
+// String returns the VDS_LUN_PLEX_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_LUN_PLEX_TYPE) String() string {
+	switch e {
+	case VDS_LPT_UNKNOWN:
+		return "VDS_LPT_UNKNOWN"
+	case VDS_LPT_SIMPLE:
+		return "VDS_LPT_SIMPLE"
+	case VDS_LPT_SPAN:
+		return "VDS_LPT_SPAN"
+	case VDS_LPT_STRIPE:
+		return "VDS_LPT_STRIPE"
+	case VDS_LPT_PARITY:
+		return "VDS_LPT_PARITY"
+	case VDS_LPT_RAID2:
+		return "VDS_LPT_RAID2"
+	case VDS_LPT_RAID3:
+		return "VDS_LPT_RAID3"
+	case VDS_LPT_RAID4:
+		return "VDS_LPT_RAID4"
+	case VDS_LPT_RAID5:
+		return "VDS_LPT_RAID5"
+	case VDS_LPT_RAID6:
+		return "VDS_LPT_RAID6"
+	case VDS_LPT_RAID03:
+		return "VDS_LPT_RAID03"
+	case VDS_LPT_RAID05:
+		return "VDS_LPT_RAID05"
+	case VDS_LPT_RAID10:
+		return "VDS_LPT_RAID10"
+	case VDS_LPT_RAID15:
+		return "VDS_LPT_RAID15"
+	case VDS_LPT_RAID30:
+		return "VDS_LPT_RAID30"
+	case VDS_LPT_RAID50:
+		return "VDS_LPT_RAID50"
+	case VDS_LPT_RAID53:
+		return "VDS_LPT_RAID53"
+	case VDS_LPT_RAID60:
+		return "VDS_LPT_RAID60"
+	default:
+		return fmt.Sprintf("VDS_LUN_PLEX_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_LUN_RESERVE_MODE: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_lun_reserve_mode
 type VDS_LUN_RESERVE_MODE int32
 
@@ -453,6 +1237,25 @@ const (
 	VDS_LRM_SHARED_RW    VDS_LUN_RESERVE_MODE = 4
 )
 
+// String returns the VDS_LUN_RESERVE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_LUN_RESERVE_MODE) String() string {
+	switch e {
+	case VDS_LRM_NONE:
+		return "VDS_LRM_NONE"
+	case VDS_LRM_EXCLUSIVE_RW:
+		return "VDS_LRM_EXCLUSIVE_RW"
+	case VDS_LRM_EXCLUSIVE_RO:
+		return "VDS_LRM_EXCLUSIVE_RO"
+	case VDS_LRM_SHARED_RO:
+		return "VDS_LRM_SHARED_RO"
+	case VDS_LRM_SHARED_RW:
+		return "VDS_LRM_SHARED_RW"
+	default:
+		return fmt.Sprintf("VDS_LUN_RESERVE_MODE(%d)", int32(e))
+	}
+}
+
 // VDS_LUN_STATUS: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_lun_status
 type VDS_LUN_STATUS int32
 
@@ -463,6 +1266,25 @@ const (
 	VDS_LS_OFFLINE   VDS_LUN_STATUS = 4
 	VDS_LS_FAILED    VDS_LUN_STATUS = 5
 )
+
+// String returns the VDS_LUN_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_LUN_STATUS) String() string {
+	switch e {
+	case VDS_LS_UNKNOWN:
+		return "VDS_LS_UNKNOWN"
+	case VDS_LS_ONLINE:
+		return "VDS_LS_ONLINE"
+	case VDS_LS_NOT_READY:
+		return "VDS_LS_NOT_READY"
+	case VDS_LS_OFFLINE:
+		return "VDS_LS_OFFLINE"
+	case VDS_LS_FAILED:
+		return "VDS_LS_FAILED"
+	default:
+		return fmt.Sprintf("VDS_LUN_STATUS(%d)", int32(e))
+	}
+}
 
 // VDS_LUN_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_lun_type
 type VDS_LUN_TYPE int32
@@ -495,6 +1317,65 @@ const (
 	VDS_LT_RAID61             VDS_LUN_TYPE = 30
 )
 
+// String returns the VDS_LUN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_LUN_TYPE) String() string {
+	switch e {
+	case VDS_LT_UNKNOWN:
+		return "VDS_LT_UNKNOWN"
+	case VDS_LT_DEFAULT:
+		return "VDS_LT_DEFAULT"
+	case VDS_LT_FAULT_TOLERANT:
+		return "VDS_LT_FAULT_TOLERANT"
+	case VDS_LT_NON_FAULT_TOLERANT:
+		return "VDS_LT_NON_FAULT_TOLERANT"
+	case VDS_LT_SIMPLE:
+		return "VDS_LT_SIMPLE"
+	case VDS_LT_SPAN:
+		return "VDS_LT_SPAN"
+	case VDS_LT_STRIPE:
+		return "VDS_LT_STRIPE"
+	case VDS_LT_MIRROR:
+		return "VDS_LT_MIRROR"
+	case VDS_LT_PARITY:
+		return "VDS_LT_PARITY"
+	case VDS_LT_RAID2:
+		return "VDS_LT_RAID2"
+	case VDS_LT_RAID3:
+		return "VDS_LT_RAID3"
+	case VDS_LT_RAID4:
+		return "VDS_LT_RAID4"
+	case VDS_LT_RAID5:
+		return "VDS_LT_RAID5"
+	case VDS_LT_RAID6:
+		return "VDS_LT_RAID6"
+	case VDS_LT_RAID01:
+		return "VDS_LT_RAID01"
+	case VDS_LT_RAID03:
+		return "VDS_LT_RAID03"
+	case VDS_LT_RAID05:
+		return "VDS_LT_RAID05"
+	case VDS_LT_RAID10:
+		return "VDS_LT_RAID10"
+	case VDS_LT_RAID15:
+		return "VDS_LT_RAID15"
+	case VDS_LT_RAID30:
+		return "VDS_LT_RAID30"
+	case VDS_LT_RAID50:
+		return "VDS_LT_RAID50"
+	case VDS_LT_RAID51:
+		return "VDS_LT_RAID51"
+	case VDS_LT_RAID53:
+		return "VDS_LT_RAID53"
+	case VDS_LT_RAID60:
+		return "VDS_LT_RAID60"
+	case VDS_LT_RAID61:
+		return "VDS_LT_RAID61"
+	default:
+		return fmt.Sprintf("VDS_LUN_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_MAINTENANCE_OPERATION: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_maintenance_operation
 type VDS_MAINTENANCE_OPERATION int32
 
@@ -506,6 +1387,25 @@ const (
 	Ping       VDS_MAINTENANCE_OPERATION = 5
 )
 
+// String returns the VDS_MAINTENANCE_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_MAINTENANCE_OPERATION) String() string {
+	switch e {
+	case BlinkLight:
+		return "BlinkLight"
+	case BeepAlarm:
+		return "BeepAlarm"
+	case SpinDown:
+		return "SpinDown"
+	case SpinUp:
+		return "SpinUp"
+	case Ping:
+		return "Ping"
+	default:
+		return fmt.Sprintf("VDS_MAINTENANCE_OPERATION(%d)", int32(e))
+	}
+}
+
 type VDS_NF_CONTROLLER uint32
 
 const (
@@ -515,6 +1415,23 @@ const (
 	VDS_NF_CONTROLLER_REMOVED VDS_NF_CONTROLLER = 351
 )
 
+// String returns the VDS_NF_CONTROLLER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_NF_CONTROLLER) String() string {
+	switch e {
+	case VDS_NF_CONTROLLER_ARRIVE:
+		return "VDS_NF_CONTROLLER_ARRIVE"
+	case VDS_NF_CONTROLLER_DEPART:
+		return "VDS_NF_CONTROLLER_DEPART"
+	case VDS_NF_CONTROLLER_MODIFY:
+		return "VDS_NF_CONTROLLER_MODIFY"
+	case VDS_NF_CONTROLLER_REMOVED:
+		return "VDS_NF_CONTROLLER_REMOVED"
+	default:
+		return fmt.Sprintf("VDS_NF_CONTROLLER(%d)", uint32(e))
+	}
+}
+
 type VDS_NF_DISK uint32
 
 const (
@@ -522,6 +1439,21 @@ const (
 	VDS_NF_DISK_DEPART VDS_NF_DISK = 9
 	VDS_NF_DISK_MODIFY VDS_NF_DISK = 10
 )
+
+// String returns the VDS_NF_DISK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_NF_DISK) String() string {
+	switch e {
+	case VDS_NF_DISK_ARRIVE:
+		return "VDS_NF_DISK_ARRIVE"
+	case VDS_NF_DISK_DEPART:
+		return "VDS_NF_DISK_DEPART"
+	case VDS_NF_DISK_MODIFY:
+		return "VDS_NF_DISK_MODIFY"
+	default:
+		return fmt.Sprintf("VDS_NF_DISK(%d)", uint32(e))
+	}
+}
 
 type VDS_NF_DRIVE uint32
 
@@ -532,12 +1464,42 @@ const (
 	VDS_NF_DRIVE_REMOVED VDS_NF_DRIVE = 354
 )
 
+// String returns the VDS_NF_DRIVE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_NF_DRIVE) String() string {
+	switch e {
+	case VDS_NF_DRIVE_ARRIVE:
+		return "VDS_NF_DRIVE_ARRIVE"
+	case VDS_NF_DRIVE_DEPART:
+		return "VDS_NF_DRIVE_DEPART"
+	case VDS_NF_DRIVE_MODIFY:
+		return "VDS_NF_DRIVE_MODIFY"
+	case VDS_NF_DRIVE_REMOVED:
+		return "VDS_NF_DRIVE_REMOVED"
+	default:
+		return fmt.Sprintf("VDS_NF_DRIVE(%d)", uint32(e))
+	}
+}
+
 type VDS_NF_FILE_SYSTEM uint32
 
 const (
 	VDS_NF_FILE_SYSTEM_MODIFY          VDS_NF_FILE_SYSTEM = 203
 	VDS_NF_FILE_SYSTEM_FORMAT_PROGRESS VDS_NF_FILE_SYSTEM = 204
 )
+
+// String returns the VDS_NF_FILE_SYSTEM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_NF_FILE_SYSTEM) String() string {
+	switch e {
+	case VDS_NF_FILE_SYSTEM_MODIFY:
+		return "VDS_NF_FILE_SYSTEM_MODIFY"
+	case VDS_NF_FILE_SYSTEM_FORMAT_PROGRESS:
+		return "VDS_NF_FILE_SYSTEM_FORMAT_PROGRESS"
+	default:
+		return fmt.Sprintf("VDS_NF_FILE_SYSTEM(%d)", uint32(e))
+	}
+}
 
 type VDS_NF_LUN uint32
 
@@ -547,6 +1509,21 @@ const (
 	VDS_NF_LUN_MODIFY VDS_NF_LUN = 110
 )
 
+// String returns the VDS_NF_LUN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_NF_LUN) String() string {
+	switch e {
+	case VDS_NF_LUN_ARRIVE:
+		return "VDS_NF_LUN_ARRIVE"
+	case VDS_NF_LUN_DEPART:
+		return "VDS_NF_LUN_DEPART"
+	case VDS_NF_LUN_MODIFY:
+		return "VDS_NF_LUN_MODIFY"
+	default:
+		return fmt.Sprintf("VDS_NF_LUN(%d)", uint32(e))
+	}
+}
+
 type VDS_NF_PACK uint32
 
 const (
@@ -554,6 +1531,21 @@ const (
 	VDS_NF_PACK_DEPART VDS_NF_PACK = 2
 	VDS_NF_PACK_MODIFY VDS_NF_PACK = 3
 )
+
+// String returns the VDS_NF_PACK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_NF_PACK) String() string {
+	switch e {
+	case VDS_NF_PACK_ARRIVE:
+		return "VDS_NF_PACK_ARRIVE"
+	case VDS_NF_PACK_DEPART:
+		return "VDS_NF_PACK_DEPART"
+	case VDS_NF_PACK_MODIFY:
+		return "VDS_NF_PACK_MODIFY"
+	default:
+		return fmt.Sprintf("VDS_NF_PACK(%d)", uint32(e))
+	}
+}
 
 type VDS_NF_PORT uint32
 
@@ -563,6 +1555,23 @@ const (
 	VDS_NF_PORT_MODIFY  VDS_NF_PORT = 352
 	VDS_NF_PORT_REMOVED VDS_NF_PORT = 353
 )
+
+// String returns the VDS_NF_PORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_NF_PORT) String() string {
+	switch e {
+	case VDS_NF_PORT_ARRIVE:
+		return "VDS_NF_PORT_ARRIVE"
+	case VDS_NF_PORT_DEPART:
+		return "VDS_NF_PORT_DEPART"
+	case VDS_NF_PORT_MODIFY:
+		return "VDS_NF_PORT_MODIFY"
+	case VDS_NF_PORT_REMOVED:
+		return "VDS_NF_PORT_REMOVED"
+	default:
+		return fmt.Sprintf("VDS_NF_PORT(%d)", uint32(e))
+	}
+}
 
 // VDS_NOTIFICATION_TARGET_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_notification_target_type
 type VDS_NOTIFICATION_TARGET_TYPE int32
@@ -586,6 +1595,49 @@ const (
 	VDS_NTT_PORTAL_GROUP VDS_NOTIFICATION_TARGET_TYPE = 38
 	VDS_NTT_SERVICE      VDS_NOTIFICATION_TARGET_TYPE = 200
 )
+
+// String returns the VDS_NOTIFICATION_TARGET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_NOTIFICATION_TARGET_TYPE) String() string {
+	switch e {
+	case VDS_NTT_UNKNOWN:
+		return "VDS_NTT_UNKNOWN"
+	case VDS_NTT_PACK:
+		return "VDS_NTT_PACK"
+	case VDS_NTT_VOLUME:
+		return "VDS_NTT_VOLUME"
+	case VDS_NTT_DISK:
+		return "VDS_NTT_DISK"
+	case VDS_NTT_PARTITION:
+		return "VDS_NTT_PARTITION"
+	case VDS_NTT_DRIVE_LETTER:
+		return "VDS_NTT_DRIVE_LETTER"
+	case VDS_NTT_FILE_SYSTEM:
+		return "VDS_NTT_FILE_SYSTEM"
+	case VDS_NTT_MOUNT_POINT:
+		return "VDS_NTT_MOUNT_POINT"
+	case VDS_NTT_SUB_SYSTEM:
+		return "VDS_NTT_SUB_SYSTEM"
+	case VDS_NTT_CONTROLLER:
+		return "VDS_NTT_CONTROLLER"
+	case VDS_NTT_DRIVE:
+		return "VDS_NTT_DRIVE"
+	case VDS_NTT_LUN:
+		return "VDS_NTT_LUN"
+	case VDS_NTT_PORT:
+		return "VDS_NTT_PORT"
+	case VDS_NTT_PORTAL:
+		return "VDS_NTT_PORTAL"
+	case VDS_NTT_TARGET:
+		return "VDS_NTT_TARGET"
+	case VDS_NTT_PORTAL_GROUP:
+		return "VDS_NTT_PORTAL_GROUP"
+	case VDS_NTT_SERVICE:
+		return "VDS_NTT_SERVICE"
+	default:
+		return fmt.Sprintf("VDS_NOTIFICATION_TARGET_TYPE(%d)", int32(e))
+	}
+}
 
 // VDS_OBJECT_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_object_type
 type VDS_OBJECT_TYPE int32
@@ -616,6 +1668,61 @@ const (
 	VDS_OT_OPEN_VDISK   VDS_OBJECT_TYPE = 201
 )
 
+// String returns the VDS_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_OBJECT_TYPE) String() string {
+	switch e {
+	case VDS_OT_UNKNOWN:
+		return "VDS_OT_UNKNOWN"
+	case VDS_OT_PROVIDER:
+		return "VDS_OT_PROVIDER"
+	case VDS_OT_PACK:
+		return "VDS_OT_PACK"
+	case VDS_OT_VOLUME:
+		return "VDS_OT_VOLUME"
+	case VDS_OT_VOLUME_PLEX:
+		return "VDS_OT_VOLUME_PLEX"
+	case VDS_OT_DISK:
+		return "VDS_OT_DISK"
+	case VDS_OT_SUB_SYSTEM:
+		return "VDS_OT_SUB_SYSTEM"
+	case VDS_OT_CONTROLLER:
+		return "VDS_OT_CONTROLLER"
+	case VDS_OT_DRIVE:
+		return "VDS_OT_DRIVE"
+	case VDS_OT_LUN:
+		return "VDS_OT_LUN"
+	case VDS_OT_LUN_PLEX:
+		return "VDS_OT_LUN_PLEX"
+	case VDS_OT_PORT:
+		return "VDS_OT_PORT"
+	case VDS_OT_PORTAL:
+		return "VDS_OT_PORTAL"
+	case VDS_OT_TARGET:
+		return "VDS_OT_TARGET"
+	case VDS_OT_PORTAL_GROUP:
+		return "VDS_OT_PORTAL_GROUP"
+	case VDS_OT_STORAGE_POOL:
+		return "VDS_OT_STORAGE_POOL"
+	case VDS_OT_HBAPORT:
+		return "VDS_OT_HBAPORT"
+	case VDS_OT_INIT_ADAPTER:
+		return "VDS_OT_INIT_ADAPTER"
+	case VDS_OT_INIT_PORTAL:
+		return "VDS_OT_INIT_PORTAL"
+	case VDS_OT_ASYNC:
+		return "VDS_OT_ASYNC"
+	case VDS_OT_ENUM:
+		return "VDS_OT_ENUM"
+	case VDS_OT_VDISK:
+		return "VDS_OT_VDISK"
+	case VDS_OT_OPEN_VDISK:
+		return "VDS_OT_OPEN_VDISK"
+	default:
+		return fmt.Sprintf("VDS_OBJECT_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_PACK_FLAG: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_pack_flag
 type VDS_PACK_FLAG int32
 
@@ -627,6 +1734,25 @@ const (
 	VDS_PKF_ONLINE_ERROR VDS_PACK_FLAG = 16
 )
 
+// String returns the VDS_PACK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_PACK_FLAG) String() string {
+	switch e {
+	case VDS_PKF_FOREIGN:
+		return "VDS_PKF_FOREIGN"
+	case VDS_PKF_NOQUORUM:
+		return "VDS_PKF_NOQUORUM"
+	case VDS_PKF_POLICY:
+		return "VDS_PKF_POLICY"
+	case VDS_PKF_CORRUPTED:
+		return "VDS_PKF_CORRUPTED"
+	case VDS_PKF_ONLINE_ERROR:
+		return "VDS_PKF_ONLINE_ERROR"
+	default:
+		return fmt.Sprintf("VDS_PACK_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_PACK_STATUS: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_pack_status
 type VDS_PACK_STATUS int32
 
@@ -636,12 +1762,38 @@ const (
 	VDS_PS_OFFLINE VDS_PACK_STATUS = 4
 )
 
+// String returns the VDS_PACK_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_PACK_STATUS) String() string {
+	switch e {
+	case VDS_PS_UNKNOWN:
+		return "VDS_PS_UNKNOWN"
+	case VDS_PS_ONLINE:
+		return "VDS_PS_ONLINE"
+	case VDS_PS_OFFLINE:
+		return "VDS_PS_OFFLINE"
+	default:
+		return fmt.Sprintf("VDS_PACK_STATUS(%d)", int32(e))
+	}
+}
+
 // VDS_PARTITION_FLAG: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_partition_flag
 type VDS_PARTITION_FLAG int32
 
 const (
 	VDS_PTF_SYSTEM VDS_PARTITION_FLAG = 1
 )
+
+// String returns the VDS_PARTITION_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_PARTITION_FLAG) String() string {
+	switch e {
+	case VDS_PTF_SYSTEM:
+		return "VDS_PTF_SYSTEM"
+	default:
+		return fmt.Sprintf("VDS_PARTITION_FLAG(%d)", int32(e))
+	}
+}
 
 // VDS_PARTITION_STYLE: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_partition_style
 type VDS_PARTITION_STYLE int32
@@ -652,6 +1804,21 @@ const (
 	VDS_PST_GPT     VDS_PARTITION_STYLE = 2
 )
 
+// String returns the VDS_PARTITION_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_PARTITION_STYLE) String() string {
+	switch e {
+	case VDS_PST_UNKNOWN:
+		return "VDS_PST_UNKNOWN"
+	case VDS_PST_MBR:
+		return "VDS_PST_MBR"
+	case VDS_PST_GPT:
+		return "VDS_PST_GPT"
+	default:
+		return fmt.Sprintf("VDS_PARTITION_STYLE(%d)", int32(e))
+	}
+}
+
 // VDS_PATH_STATUS: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_path_status
 type VDS_PATH_STATUS int32
 
@@ -661,6 +1828,23 @@ const (
 	VDS_MPS_FAILED  VDS_PATH_STATUS = 5
 	VDS_MPS_STANDBY VDS_PATH_STATUS = 7
 )
+
+// String returns the VDS_PATH_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_PATH_STATUS) String() string {
+	switch e {
+	case VDS_MPS_UNKNOWN:
+		return "VDS_MPS_UNKNOWN"
+	case VDS_MPS_ONLINE:
+		return "VDS_MPS_ONLINE"
+	case VDS_MPS_FAILED:
+		return "VDS_MPS_FAILED"
+	case VDS_MPS_STANDBY:
+		return "VDS_MPS_STANDBY"
+	default:
+		return fmt.Sprintf("VDS_PATH_STATUS(%d)", int32(e))
+	}
+}
 
 // VDS_PORT_STATUS: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_port_status
 type VDS_PORT_STATUS int32
@@ -673,6 +1857,27 @@ const (
 	VDS_PRS_FAILED    VDS_PORT_STATUS = 5
 	VDS_PRS_REMOVED   VDS_PORT_STATUS = 8
 )
+
+// String returns the VDS_PORT_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_PORT_STATUS) String() string {
+	switch e {
+	case VDS_PRS_UNKNOWN:
+		return "VDS_PRS_UNKNOWN"
+	case VDS_PRS_ONLINE:
+		return "VDS_PRS_ONLINE"
+	case VDS_PRS_NOT_READY:
+		return "VDS_PRS_NOT_READY"
+	case VDS_PRS_OFFLINE:
+		return "VDS_PRS_OFFLINE"
+	case VDS_PRS_FAILED:
+		return "VDS_PRS_FAILED"
+	case VDS_PRS_REMOVED:
+		return "VDS_PRS_REMOVED"
+	default:
+		return fmt.Sprintf("VDS_PORT_STATUS(%d)", int32(e))
+	}
+}
 
 // VDS_PROVIDER_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_provider_flag
 type VDS_PROVIDER_FLAG int32
@@ -690,6 +1895,35 @@ const (
 	VDS_PF_SUPPORT_RAID5                   VDS_PROVIDER_FLAG = 64
 )
 
+// String returns the VDS_PROVIDER_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_PROVIDER_FLAG) String() string {
+	switch e {
+	case VDS_PF_DYNAMIC:
+		return "VDS_PF_DYNAMIC"
+	case VDS_PF_INTERNAL_HARDWARE_PROVIDER:
+		return "VDS_PF_INTERNAL_HARDWARE_PROVIDER"
+	case VDS_PF_ONE_DISK_ONLY_PER_PACK:
+		return "VDS_PF_ONE_DISK_ONLY_PER_PACK"
+	case VDS_PF_ONE_PACK_ONLINE_ONLY:
+		return "VDS_PF_ONE_PACK_ONLINE_ONLY"
+	case VDS_PF_VOLUME_SPACE_MUST_BE_CONTIGUOUS:
+		return "VDS_PF_VOLUME_SPACE_MUST_BE_CONTIGUOUS"
+	case VDS_PF_SUPPORT_DYNAMIC:
+		return "VDS_PF_SUPPORT_DYNAMIC"
+	case VDS_PF_SUPPORT_FAULT_TOLERANT:
+		return "VDS_PF_SUPPORT_FAULT_TOLERANT"
+	case VDS_PF_SUPPORT_DYNAMIC_1394:
+		return "VDS_PF_SUPPORT_DYNAMIC_1394"
+	case VDS_PF_SUPPORT_MIRROR:
+		return "VDS_PF_SUPPORT_MIRROR"
+	case VDS_PF_SUPPORT_RAID5:
+		return "VDS_PF_SUPPORT_RAID5"
+	default:
+		return fmt.Sprintf("VDS_PROVIDER_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_PROVIDER_LBSUPPORT_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_provider_lbsupport_flag
 type VDS_PROVIDER_LBSUPPORT_FLAG int32
 
@@ -703,6 +1937,29 @@ const (
 	VDS_LBF_VENDOR_SPECIFIC         VDS_PROVIDER_LBSUPPORT_FLAG = 64
 )
 
+// String returns the VDS_PROVIDER_LBSUPPORT_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_PROVIDER_LBSUPPORT_FLAG) String() string {
+	switch e {
+	case VDS_LBF_FAILOVER:
+		return "VDS_LBF_FAILOVER"
+	case VDS_LBF_ROUND_ROBIN:
+		return "VDS_LBF_ROUND_ROBIN"
+	case VDS_LBF_ROUND_ROBIN_WITH_SUBSET:
+		return "VDS_LBF_ROUND_ROBIN_WITH_SUBSET"
+	case VDS_LBF_DYN_LEAST_QUEUE_DEPTH:
+		return "VDS_LBF_DYN_LEAST_QUEUE_DEPTH"
+	case VDS_LBF_WEIGHTED_PATHS:
+		return "VDS_LBF_WEIGHTED_PATHS"
+	case VDS_LBF_LEAST_BLOCKS:
+		return "VDS_LBF_LEAST_BLOCKS"
+	case VDS_LBF_VENDOR_SPECIFIC:
+		return "VDS_LBF_VENDOR_SPECIFIC"
+	default:
+		return fmt.Sprintf("VDS_PROVIDER_LBSUPPORT_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_PROVIDER_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_provider_type
 type VDS_PROVIDER_TYPE int32
 
@@ -714,6 +1971,25 @@ const (
 	VDS_PT_MAX         VDS_PROVIDER_TYPE = 4
 )
 
+// String returns the VDS_PROVIDER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_PROVIDER_TYPE) String() string {
+	switch e {
+	case VDS_PT_UNKNOWN:
+		return "VDS_PT_UNKNOWN"
+	case VDS_PT_SOFTWARE:
+		return "VDS_PT_SOFTWARE"
+	case VDS_PT_HARDWARE:
+		return "VDS_PT_HARDWARE"
+	case VDS_PT_VIRTUALDISK:
+		return "VDS_PT_VIRTUALDISK"
+	case VDS_PT_MAX:
+		return "VDS_PT_MAX"
+	default:
+		return fmt.Sprintf("VDS_PROVIDER_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_QUERY_PROVIDER_FLAG: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_query_provider_flag
 type VDS_QUERY_PROVIDER_FLAG int32
 
@@ -722,6 +1998,21 @@ const (
 	VDS_QUERY_HARDWARE_PROVIDERS    VDS_QUERY_PROVIDER_FLAG = 2
 	VDS_QUERY_VIRTUALDISK_PROVIDERS VDS_QUERY_PROVIDER_FLAG = 4
 )
+
+// String returns the VDS_QUERY_PROVIDER_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_QUERY_PROVIDER_FLAG) String() string {
+	switch e {
+	case VDS_QUERY_SOFTWARE_PROVIDERS:
+		return "VDS_QUERY_SOFTWARE_PROVIDERS"
+	case VDS_QUERY_HARDWARE_PROVIDERS:
+		return "VDS_QUERY_HARDWARE_PROVIDERS"
+	case VDS_QUERY_VIRTUALDISK_PROVIDERS:
+		return "VDS_QUERY_VIRTUALDISK_PROVIDERS"
+	default:
+		return fmt.Sprintf("VDS_QUERY_PROVIDER_FLAG(%d)", int32(e))
+	}
+}
 
 // VDS_RAID_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_raid_type
 type VDS_RAID_TYPE int32
@@ -748,6 +2039,53 @@ const (
 	VDS_RT_RAID61  VDS_RAID_TYPE = 27
 )
 
+// String returns the VDS_RAID_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_RAID_TYPE) String() string {
+	switch e {
+	case VDS_RT_UNKNOWN:
+		return "VDS_RT_UNKNOWN"
+	case VDS_RT_RAID0:
+		return "VDS_RT_RAID0"
+	case VDS_RT_RAID1:
+		return "VDS_RT_RAID1"
+	case VDS_RT_RAID2:
+		return "VDS_RT_RAID2"
+	case VDS_RT_RAID3:
+		return "VDS_RT_RAID3"
+	case VDS_RT_RAID4:
+		return "VDS_RT_RAID4"
+	case VDS_RT_RAID5:
+		return "VDS_RT_RAID5"
+	case VDS_RT_RAID6:
+		return "VDS_RT_RAID6"
+	case VDS_RT_RAID01:
+		return "VDS_RT_RAID01"
+	case VDS_RT_RAID03:
+		return "VDS_RT_RAID03"
+	case VDS_RT_RAID05:
+		return "VDS_RT_RAID05"
+	case VDS_RT_RAID10:
+		return "VDS_RT_RAID10"
+	case VDS_RT_RAID15:
+		return "VDS_RT_RAID15"
+	case VDS_RT_RAID30:
+		return "VDS_RT_RAID30"
+	case VDS_RT_RAID50:
+		return "VDS_RT_RAID50"
+	case VDS_RT_RAID51:
+		return "VDS_RT_RAID51"
+	case VDS_RT_RAID53:
+		return "VDS_RT_RAID53"
+	case VDS_RT_RAID60:
+		return "VDS_RT_RAID60"
+	case VDS_RT_RAID61:
+		return "VDS_RT_RAID61"
+	default:
+		return fmt.Sprintf("VDS_RAID_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_RECOVER_ACTION: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_recover_action
 type VDS_RECOVER_ACTION int32
 
@@ -756,6 +2094,21 @@ const (
 	VDS_RA_REFRESH VDS_RECOVER_ACTION = 1
 	VDS_RA_RESTART VDS_RECOVER_ACTION = 2
 )
+
+// String returns the VDS_RECOVER_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_RECOVER_ACTION) String() string {
+	switch e {
+	case VDS_RA_UNKNOWN:
+		return "VDS_RA_UNKNOWN"
+	case VDS_RA_REFRESH:
+		return "VDS_RA_REFRESH"
+	case VDS_RA_RESTART:
+		return "VDS_RA_RESTART"
+	default:
+		return fmt.Sprintf("VDS_RECOVER_ACTION(%d)", int32(e))
+	}
+}
 
 // VDS_SAN_POLICY: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_san_policy
 type VDS_SAN_POLICY int32
@@ -768,6 +2121,27 @@ const (
 	VDS_SP_OFFLINE_INTERNAL VDS_SAN_POLICY = 4
 	VDS_SP_MAX              VDS_SAN_POLICY = 5
 )
+
+// String returns the VDS_SAN_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_SAN_POLICY) String() string {
+	switch e {
+	case VDS_SP_UNKNOWN:
+		return "VDS_SP_UNKNOWN"
+	case VDS_SP_ONLINE:
+		return "VDS_SP_ONLINE"
+	case VDS_SP_OFFLINE_SHARED:
+		return "VDS_SP_OFFLINE_SHARED"
+	case VDS_SP_OFFLINE:
+		return "VDS_SP_OFFLINE"
+	case VDS_SP_OFFLINE_INTERNAL:
+		return "VDS_SP_OFFLINE_INTERNAL"
+	case VDS_SP_MAX:
+		return "VDS_SP_MAX"
+	default:
+		return fmt.Sprintf("VDS_SAN_POLICY(%d)", int32(e))
+	}
+}
 
 // VDS_SERVICE_FLAG: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_service_flag
 type VDS_SERVICE_FLAG int32
@@ -785,6 +2159,37 @@ const (
 	VDS_SVF_SUPPORT_RAID5              VDS_SERVICE_FLAG = 512
 	VDS_SVF_SUPPORT_REFS               VDS_SERVICE_FLAG = 1024
 )
+
+// String returns the VDS_SERVICE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_SERVICE_FLAG) String() string {
+	switch e {
+	case VDS_SVF_SUPPORT_DYNAMIC:
+		return "VDS_SVF_SUPPORT_DYNAMIC"
+	case VDS_SVF_SUPPORT_FAULT_TOLERANT:
+		return "VDS_SVF_SUPPORT_FAULT_TOLERANT"
+	case VDS_SVF_SUPPORT_GPT:
+		return "VDS_SVF_SUPPORT_GPT"
+	case VDS_SVF_SUPPORT_DYNAMIC_1394:
+		return "VDS_SVF_SUPPORT_DYNAMIC_1394"
+	case VDS_SVF_CLUSTER_SERVICE_CONFIGURED:
+		return "VDS_SVF_CLUSTER_SERVICE_CONFIGURED"
+	case VDS_SVF_AUTO_MOUNT_OFF:
+		return "VDS_SVF_AUTO_MOUNT_OFF"
+	case VDS_SVF_OS_UNINSTALL_VALID:
+		return "VDS_SVF_OS_UNINSTALL_VALID"
+	case VDS_SVF_EFI:
+		return "VDS_SVF_EFI"
+	case VDS_SVF_SUPPORT_MIRROR:
+		return "VDS_SVF_SUPPORT_MIRROR"
+	case VDS_SVF_SUPPORT_RAID5:
+		return "VDS_SVF_SUPPORT_RAID5"
+	case VDS_SVF_SUPPORT_REFS:
+		return "VDS_SVF_SUPPORT_REFS"
+	default:
+		return fmt.Sprintf("VDS_SERVICE_FLAG(%d)", int32(e))
+	}
+}
 
 // VDS_STORAGE_BUS_TYPE: https://learn.microsoft.com/windows/win32/api/vdslun/ne-vdslun-vds_storage_bus_type
 type VDS_STORAGE_BUS_TYPE int32
@@ -814,6 +2219,57 @@ const (
 	VDSBusTypeMaxReserved       VDS_STORAGE_BUS_TYPE = 127
 )
 
+// String returns the VDS_STORAGE_BUS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_STORAGE_BUS_TYPE) String() string {
+	switch e {
+	case VDSBusTypeUnknown:
+		return "VDSBusTypeUnknown"
+	case VDSBusTypeScsi:
+		return "VDSBusTypeScsi"
+	case VDSBusTypeAtapi:
+		return "VDSBusTypeAtapi"
+	case VDSBusTypeAta:
+		return "VDSBusTypeAta"
+	case VDSBusType1394:
+		return "VDSBusType1394"
+	case VDSBusTypeSsa:
+		return "VDSBusTypeSsa"
+	case VDSBusTypeFibre:
+		return "VDSBusTypeFibre"
+	case VDSBusTypeUsb:
+		return "VDSBusTypeUsb"
+	case VDSBusTypeRAID:
+		return "VDSBusTypeRAID"
+	case VDSBusTypeiScsi:
+		return "VDSBusTypeiScsi"
+	case VDSBusTypeSas:
+		return "VDSBusTypeSas"
+	case VDSBusTypeSata:
+		return "VDSBusTypeSata"
+	case VDSBusTypeSd:
+		return "VDSBusTypeSd"
+	case VDSBusTypeMmc:
+		return "VDSBusTypeMmc"
+	case VDSBusTypeMax:
+		return "VDSBusTypeMax"
+	case VDSBusTypeFileBackedVirtual:
+		return "VDSBusTypeFileBackedVirtual"
+	case VDSBusTypeSpaces:
+		return "VDSBusTypeSpaces"
+	case VDSBusTypeNVMe:
+		return "VDSBusTypeNVMe"
+	case VDSBusTypeScm:
+		return "VDSBusTypeScm"
+	case VDSBusTypeUfs:
+		return "VDSBusTypeUfs"
+	case VDSBusTypeMaxReserved:
+		return "VDSBusTypeMaxReserved"
+	default:
+		return fmt.Sprintf("VDS_STORAGE_BUS_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_STORAGE_IDENTIFIER_CODE_SET: https://learn.microsoft.com/windows/win32/api/vdslun/ne-vdslun-vds_storage_identifier_code_set
 type VDS_STORAGE_IDENTIFIER_CODE_SET int32
 
@@ -823,6 +2279,23 @@ const (
 	VDSStorageIdCodeSetAscii    VDS_STORAGE_IDENTIFIER_CODE_SET = 2
 	VDSStorageIdCodeSetUtf8     VDS_STORAGE_IDENTIFIER_CODE_SET = 3
 )
+
+// String returns the VDS_STORAGE_IDENTIFIER_CODE_SET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_STORAGE_IDENTIFIER_CODE_SET) String() string {
+	switch e {
+	case VDSStorageIdCodeSetReserved:
+		return "VDSStorageIdCodeSetReserved"
+	case VDSStorageIdCodeSetBinary:
+		return "VDSStorageIdCodeSetBinary"
+	case VDSStorageIdCodeSetAscii:
+		return "VDSStorageIdCodeSetAscii"
+	case VDSStorageIdCodeSetUtf8:
+		return "VDSStorageIdCodeSetUtf8"
+	default:
+		return fmt.Sprintf("VDS_STORAGE_IDENTIFIER_CODE_SET(%d)", int32(e))
+	}
+}
 
 // VDS_STORAGE_IDENTIFIER_TYPE: https://learn.microsoft.com/windows/win32/api/vdslun/ne-vdslun-vds_storage_identifier_type
 type VDS_STORAGE_IDENTIFIER_TYPE int32
@@ -839,6 +2312,33 @@ const (
 	VDSStorageIdTypeScsiNameString           VDS_STORAGE_IDENTIFIER_TYPE = 8
 )
 
+// String returns the VDS_STORAGE_IDENTIFIER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_STORAGE_IDENTIFIER_TYPE) String() string {
+	switch e {
+	case VDSStorageIdTypeVendorSpecific:
+		return "VDSStorageIdTypeVendorSpecific"
+	case VDSStorageIdTypeVendorId:
+		return "VDSStorageIdTypeVendorId"
+	case VDSStorageIdTypeEUI64:
+		return "VDSStorageIdTypeEUI64"
+	case VDSStorageIdTypeFCPHName:
+		return "VDSStorageIdTypeFCPHName"
+	case VDSStorageIdTypePortRelative:
+		return "VDSStorageIdTypePortRelative"
+	case VDSStorageIdTypeTargetPortGroup:
+		return "VDSStorageIdTypeTargetPortGroup"
+	case VDSStorageIdTypeLogicalUnitGroup:
+		return "VDSStorageIdTypeLogicalUnitGroup"
+	case VDSStorageIdTypeMD5LogicalUnitIdentifier:
+		return "VDSStorageIdTypeMD5LogicalUnitIdentifier"
+	case VDSStorageIdTypeScsiNameString:
+		return "VDSStorageIdTypeScsiNameString"
+	default:
+		return fmt.Sprintf("VDS_STORAGE_IDENTIFIER_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_STORAGE_POOL_STATUS: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_storage_pool_status
 type VDS_STORAGE_POOL_STATUS int32
 
@@ -849,6 +2349,23 @@ const (
 	VDS_SPS_OFFLINE   VDS_STORAGE_POOL_STATUS = 4
 )
 
+// String returns the VDS_STORAGE_POOL_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_STORAGE_POOL_STATUS) String() string {
+	switch e {
+	case VDS_SPS_UNKNOWN:
+		return "VDS_SPS_UNKNOWN"
+	case VDS_SPS_ONLINE:
+		return "VDS_SPS_ONLINE"
+	case VDS_SPS_NOT_READY:
+		return "VDS_SPS_NOT_READY"
+	case VDS_SPS_OFFLINE:
+		return "VDS_SPS_OFFLINE"
+	default:
+		return fmt.Sprintf("VDS_STORAGE_POOL_STATUS(%d)", int32(e))
+	}
+}
+
 // VDS_STORAGE_POOL_TYPE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_storage_pool_type
 type VDS_STORAGE_POOL_TYPE int32
 
@@ -857,6 +2374,21 @@ const (
 	VDS_SPT_PRIMORDIAL VDS_STORAGE_POOL_TYPE = 1
 	VDS_SPT_CONCRETE   VDS_STORAGE_POOL_TYPE = 2
 )
+
+// String returns the VDS_STORAGE_POOL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_STORAGE_POOL_TYPE) String() string {
+	switch e {
+	case VDS_SPT_UNKNOWN:
+		return "VDS_SPT_UNKNOWN"
+	case VDS_SPT_PRIMORDIAL:
+		return "VDS_SPT_PRIMORDIAL"
+	case VDS_SPT_CONCRETE:
+		return "VDS_SPT_CONCRETE"
+	default:
+		return fmt.Sprintf("VDS_STORAGE_POOL_TYPE(%d)", int32(e))
+	}
+}
 
 // VDS_SUB_SYSTEM_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_sub_system_flag
 type VDS_SUB_SYSTEM_FLAG int32
@@ -888,6 +2420,63 @@ const (
 	VDS_SF_CONSISTENCY_CHECK_CAPABLE        VDS_SUB_SYSTEM_FLAG = 16777216
 )
 
+// String returns the VDS_SUB_SYSTEM_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_SUB_SYSTEM_FLAG) String() string {
+	switch e {
+	case VDS_SF_LUN_MASKING_CAPABLE:
+		return "VDS_SF_LUN_MASKING_CAPABLE"
+	case VDS_SF_LUN_PLEXING_CAPABLE:
+		return "VDS_SF_LUN_PLEXING_CAPABLE"
+	case VDS_SF_LUN_REMAPPING_CAPABLE:
+		return "VDS_SF_LUN_REMAPPING_CAPABLE"
+	case VDS_SF_DRIVE_EXTENT_CAPABLE:
+		return "VDS_SF_DRIVE_EXTENT_CAPABLE"
+	case VDS_SF_HARDWARE_CHECKSUM_CAPABLE:
+		return "VDS_SF_HARDWARE_CHECKSUM_CAPABLE"
+	case VDS_SF_RADIUS_CAPABLE:
+		return "VDS_SF_RADIUS_CAPABLE"
+	case VDS_SF_READ_BACK_VERIFY_CAPABLE:
+		return "VDS_SF_READ_BACK_VERIFY_CAPABLE"
+	case VDS_SF_WRITE_THROUGH_CACHING_CAPABLE:
+		return "VDS_SF_WRITE_THROUGH_CACHING_CAPABLE"
+	case VDS_SF_SUPPORTS_FAULT_TOLERANT_LUNS:
+		return "VDS_SF_SUPPORTS_FAULT_TOLERANT_LUNS"
+	case VDS_SF_SUPPORTS_NON_FAULT_TOLERANT_LUNS:
+		return "VDS_SF_SUPPORTS_NON_FAULT_TOLERANT_LUNS"
+	case VDS_SF_SUPPORTS_SIMPLE_LUNS:
+		return "VDS_SF_SUPPORTS_SIMPLE_LUNS"
+	case VDS_SF_SUPPORTS_SPAN_LUNS:
+		return "VDS_SF_SUPPORTS_SPAN_LUNS"
+	case VDS_SF_SUPPORTS_STRIPE_LUNS:
+		return "VDS_SF_SUPPORTS_STRIPE_LUNS"
+	case VDS_SF_SUPPORTS_MIRROR_LUNS:
+		return "VDS_SF_SUPPORTS_MIRROR_LUNS"
+	case VDS_SF_SUPPORTS_PARITY_LUNS:
+		return "VDS_SF_SUPPORTS_PARITY_LUNS"
+	case VDS_SF_SUPPORTS_AUTH_CHAP:
+		return "VDS_SF_SUPPORTS_AUTH_CHAP"
+	case VDS_SF_SUPPORTS_AUTH_MUTUAL_CHAP:
+		return "VDS_SF_SUPPORTS_AUTH_MUTUAL_CHAP"
+	case VDS_SF_SUPPORTS_SIMPLE_TARGET_CONFIG:
+		return "VDS_SF_SUPPORTS_SIMPLE_TARGET_CONFIG"
+	case VDS_SF_SUPPORTS_LUN_NUMBER:
+		return "VDS_SF_SUPPORTS_LUN_NUMBER"
+	case VDS_SF_SUPPORTS_MIRRORED_CACHE:
+		return "VDS_SF_SUPPORTS_MIRRORED_CACHE"
+	case VDS_SF_READ_CACHING_CAPABLE:
+		return "VDS_SF_READ_CACHING_CAPABLE"
+	case VDS_SF_WRITE_CACHING_CAPABLE:
+		return "VDS_SF_WRITE_CACHING_CAPABLE"
+	case VDS_SF_MEDIA_SCAN_CAPABLE:
+		return "VDS_SF_MEDIA_SCAN_CAPABLE"
+	case VDS_SF_CONSISTENCY_CHECK_CAPABLE:
+		return "VDS_SF_CONSISTENCY_CHECK_CAPABLE"
+	default:
+		return fmt.Sprintf("VDS_SUB_SYSTEM_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_SUB_SYSTEM_STATUS: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_sub_system_status
 type VDS_SUB_SYSTEM_STATUS int32
 
@@ -899,6 +2488,27 @@ const (
 	VDS_SSS_FAILED            VDS_SUB_SYSTEM_STATUS = 5
 	VDS_SSS_PARTIALLY_MANAGED VDS_SUB_SYSTEM_STATUS = 9
 )
+
+// String returns the VDS_SUB_SYSTEM_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_SUB_SYSTEM_STATUS) String() string {
+	switch e {
+	case VDS_SSS_UNKNOWN:
+		return "VDS_SSS_UNKNOWN"
+	case VDS_SSS_ONLINE:
+		return "VDS_SSS_ONLINE"
+	case VDS_SSS_NOT_READY:
+		return "VDS_SSS_NOT_READY"
+	case VDS_SSS_OFFLINE:
+		return "VDS_SSS_OFFLINE"
+	case VDS_SSS_FAILED:
+		return "VDS_SSS_FAILED"
+	case VDS_SSS_PARTIALLY_MANAGED:
+		return "VDS_SSS_PARTIALLY_MANAGED"
+	default:
+		return fmt.Sprintf("VDS_SUB_SYSTEM_STATUS(%d)", int32(e))
+	}
+}
 
 // VDS_SUB_SYSTEM_SUPPORTED_RAID_TYPE_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_sub_system_supported_raid_type_flag
 type VDS_SUB_SYSTEM_SUPPORTED_RAID_TYPE_FLAG int32
@@ -922,6 +2532,47 @@ const (
 	VDS_SF_SUPPORTS_RAID61_LUNS VDS_SUB_SYSTEM_SUPPORTED_RAID_TYPE_FLAG = 32768
 )
 
+// String returns the VDS_SUB_SYSTEM_SUPPORTED_RAID_TYPE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_SUB_SYSTEM_SUPPORTED_RAID_TYPE_FLAG) String() string {
+	switch e {
+	case VDS_SF_SUPPORTS_RAID2_LUNS:
+		return "VDS_SF_SUPPORTS_RAID2_LUNS"
+	case VDS_SF_SUPPORTS_RAID3_LUNS:
+		return "VDS_SF_SUPPORTS_RAID3_LUNS"
+	case VDS_SF_SUPPORTS_RAID4_LUNS:
+		return "VDS_SF_SUPPORTS_RAID4_LUNS"
+	case VDS_SF_SUPPORTS_RAID5_LUNS:
+		return "VDS_SF_SUPPORTS_RAID5_LUNS"
+	case VDS_SF_SUPPORTS_RAID6_LUNS:
+		return "VDS_SF_SUPPORTS_RAID6_LUNS"
+	case VDS_SF_SUPPORTS_RAID01_LUNS:
+		return "VDS_SF_SUPPORTS_RAID01_LUNS"
+	case VDS_SF_SUPPORTS_RAID03_LUNS:
+		return "VDS_SF_SUPPORTS_RAID03_LUNS"
+	case VDS_SF_SUPPORTS_RAID05_LUNS:
+		return "VDS_SF_SUPPORTS_RAID05_LUNS"
+	case VDS_SF_SUPPORTS_RAID10_LUNS:
+		return "VDS_SF_SUPPORTS_RAID10_LUNS"
+	case VDS_SF_SUPPORTS_RAID15_LUNS:
+		return "VDS_SF_SUPPORTS_RAID15_LUNS"
+	case VDS_SF_SUPPORTS_RAID30_LUNS:
+		return "VDS_SF_SUPPORTS_RAID30_LUNS"
+	case VDS_SF_SUPPORTS_RAID50_LUNS:
+		return "VDS_SF_SUPPORTS_RAID50_LUNS"
+	case VDS_SF_SUPPORTS_RAID51_LUNS:
+		return "VDS_SF_SUPPORTS_RAID51_LUNS"
+	case VDS_SF_SUPPORTS_RAID53_LUNS:
+		return "VDS_SF_SUPPORTS_RAID53_LUNS"
+	case VDS_SF_SUPPORTS_RAID60_LUNS:
+		return "VDS_SF_SUPPORTS_RAID60_LUNS"
+	case VDS_SF_SUPPORTS_RAID61_LUNS:
+		return "VDS_SF_SUPPORTS_RAID61_LUNS"
+	default:
+		return fmt.Sprintf("VDS_SUB_SYSTEM_SUPPORTED_RAID_TYPE_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_TRANSITION_STATE: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_transition_state
 type VDS_TRANSITION_STATE int32
 
@@ -933,6 +2584,27 @@ const (
 	VDS_TS_RECONFIGING VDS_TRANSITION_STATE = 4
 	VDS_TS_RESTRIPING  VDS_TRANSITION_STATE = 5
 )
+
+// String returns the VDS_TRANSITION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_TRANSITION_STATE) String() string {
+	switch e {
+	case VDS_TS_UNKNOWN:
+		return "VDS_TS_UNKNOWN"
+	case VDS_TS_STABLE:
+		return "VDS_TS_STABLE"
+	case VDS_TS_EXTENDING:
+		return "VDS_TS_EXTENDING"
+	case VDS_TS_SHRINKING:
+		return "VDS_TS_SHRINKING"
+	case VDS_TS_RECONFIGING:
+		return "VDS_TS_RECONFIGING"
+	case VDS_TS_RESTRIPING:
+		return "VDS_TS_RESTRIPING"
+	default:
+		return fmt.Sprintf("VDS_TRANSITION_STATE(%d)", int32(e))
+	}
+}
 
 // VDS_VDISK_STATE: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_vdisk_state
 type VDS_VDISK_STATE int32
@@ -952,6 +2624,39 @@ const (
 	VDS_VST_MAX               VDS_VDISK_STATE = 11
 )
 
+// String returns the VDS_VDISK_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_VDISK_STATE) String() string {
+	switch e {
+	case VDS_VST_UNKNOWN:
+		return "VDS_VST_UNKNOWN"
+	case VDS_VST_ADDED:
+		return "VDS_VST_ADDED"
+	case VDS_VST_OPEN:
+		return "VDS_VST_OPEN"
+	case VDS_VST_ATTACH_PENDING:
+		return "VDS_VST_ATTACH_PENDING"
+	case VDS_VST_ATTACHED_NOT_OPEN:
+		return "VDS_VST_ATTACHED_NOT_OPEN"
+	case VDS_VST_ATTACHED:
+		return "VDS_VST_ATTACHED"
+	case VDS_VST_DETACH_PENDING:
+		return "VDS_VST_DETACH_PENDING"
+	case VDS_VST_COMPACTING:
+		return "VDS_VST_COMPACTING"
+	case VDS_VST_MERGING:
+		return "VDS_VST_MERGING"
+	case VDS_VST_EXPANDING:
+		return "VDS_VST_EXPANDING"
+	case VDS_VST_DELETED:
+		return "VDS_VST_DELETED"
+	case VDS_VST_MAX:
+		return "VDS_VST_MAX"
+	default:
+		return fmt.Sprintf("VDS_VDISK_STATE(%d)", int32(e))
+	}
+}
+
 // VDS_VERSION_SUPPORT_FLAG: https://learn.microsoft.com/windows/win32/api/vdshwprv/ne-vdshwprv-vds_version_support_flag
 type VDS_VERSION_SUPPORT_FLAG int32
 
@@ -962,6 +2667,25 @@ const (
 	VDS_VSF_2_1 VDS_VERSION_SUPPORT_FLAG = 8
 	VDS_VSF_3_0 VDS_VERSION_SUPPORT_FLAG = 16
 )
+
+// String returns the VDS_VERSION_SUPPORT_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_VERSION_SUPPORT_FLAG) String() string {
+	switch e {
+	case VDS_VSF_1_0:
+		return "VDS_VSF_1_0"
+	case VDS_VSF_1_1:
+		return "VDS_VSF_1_1"
+	case VDS_VSF_2_0:
+		return "VDS_VSF_2_0"
+	case VDS_VSF_2_1:
+		return "VDS_VSF_2_1"
+	case VDS_VSF_3_0:
+		return "VDS_VSF_3_0"
+	default:
+		return fmt.Sprintf("VDS_VERSION_SUPPORT_FLAG(%d)", int32(e))
+	}
+}
 
 // VDS_VOLUME_FLAG: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_volume_flag
 type VDS_VOLUME_FLAG int32
@@ -995,6 +2719,67 @@ const (
 	VDS_VF_BACKED_BY_WIM_IMAGE          VDS_VOLUME_FLAG = 33554432
 )
 
+// String returns the VDS_VOLUME_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_VOLUME_FLAG) String() string {
+	switch e {
+	case VDS_VF_SYSTEM_VOLUME:
+		return "VDS_VF_SYSTEM_VOLUME"
+	case VDS_VF_BOOT_VOLUME:
+		return "VDS_VF_BOOT_VOLUME"
+	case VDS_VF_ACTIVE:
+		return "VDS_VF_ACTIVE"
+	case VDS_VF_READONLY:
+		return "VDS_VF_READONLY"
+	case VDS_VF_HIDDEN:
+		return "VDS_VF_HIDDEN"
+	case VDS_VF_CAN_EXTEND:
+		return "VDS_VF_CAN_EXTEND"
+	case VDS_VF_CAN_SHRINK:
+		return "VDS_VF_CAN_SHRINK"
+	case VDS_VF_PAGEFILE:
+		return "VDS_VF_PAGEFILE"
+	case VDS_VF_HIBERNATION:
+		return "VDS_VF_HIBERNATION"
+	case VDS_VF_CRASHDUMP:
+		return "VDS_VF_CRASHDUMP"
+	case VDS_VF_INSTALLABLE:
+		return "VDS_VF_INSTALLABLE"
+	case VDS_VF_LBN_REMAP_ENABLED:
+		return "VDS_VF_LBN_REMAP_ENABLED"
+	case VDS_VF_FORMATTING:
+		return "VDS_VF_FORMATTING"
+	case VDS_VF_NOT_FORMATTABLE:
+		return "VDS_VF_NOT_FORMATTABLE"
+	case VDS_VF_NTFS_NOT_SUPPORTED:
+		return "VDS_VF_NTFS_NOT_SUPPORTED"
+	case VDS_VF_FAT32_NOT_SUPPORTED:
+		return "VDS_VF_FAT32_NOT_SUPPORTED"
+	case VDS_VF_FAT_NOT_SUPPORTED:
+		return "VDS_VF_FAT_NOT_SUPPORTED"
+	case VDS_VF_NO_DEFAULT_DRIVE_LETTER:
+		return "VDS_VF_NO_DEFAULT_DRIVE_LETTER"
+	case VDS_VF_PERMANENTLY_DISMOUNTED:
+		return "VDS_VF_PERMANENTLY_DISMOUNTED"
+	case VDS_VF_PERMANENT_DISMOUNT_SUPPORTED:
+		return "VDS_VF_PERMANENT_DISMOUNT_SUPPORTED"
+	case VDS_VF_SHADOW_COPY:
+		return "VDS_VF_SHADOW_COPY"
+	case VDS_VF_FVE_ENABLED:
+		return "VDS_VF_FVE_ENABLED"
+	case VDS_VF_DIRTY:
+		return "VDS_VF_DIRTY"
+	case VDS_VF_REFS_NOT_SUPPORTED:
+		return "VDS_VF_REFS_NOT_SUPPORTED"
+	case VDS_VF_BACKS_BOOT_VOLUME:
+		return "VDS_VF_BACKS_BOOT_VOLUME"
+	case VDS_VF_BACKED_BY_WIM_IMAGE:
+		return "VDS_VF_BACKED_BY_WIM_IMAGE"
+	default:
+		return fmt.Sprintf("VDS_VOLUME_FLAG(%d)", int32(e))
+	}
+}
+
 // VDS_VOLUME_PLEX_STATUS: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_volume_plex_status
 type VDS_VOLUME_PLEX_STATUS int32
 
@@ -1004,6 +2789,23 @@ const (
 	VDS_VPS_NO_MEDIA VDS_VOLUME_PLEX_STATUS = 3
 	VDS_VPS_FAILED   VDS_VOLUME_PLEX_STATUS = 5
 )
+
+// String returns the VDS_VOLUME_PLEX_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_VOLUME_PLEX_STATUS) String() string {
+	switch e {
+	case VDS_VPS_UNKNOWN:
+		return "VDS_VPS_UNKNOWN"
+	case VDS_VPS_ONLINE:
+		return "VDS_VPS_ONLINE"
+	case VDS_VPS_NO_MEDIA:
+		return "VDS_VPS_NO_MEDIA"
+	case VDS_VPS_FAILED:
+		return "VDS_VPS_FAILED"
+	default:
+		return fmt.Sprintf("VDS_VOLUME_PLEX_STATUS(%d)", int32(e))
+	}
+}
 
 // VDS_VOLUME_PLEX_TYPE: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_volume_plex_type
 type VDS_VOLUME_PLEX_TYPE int32
@@ -1016,6 +2818,25 @@ const (
 	VDS_VPT_PARITY  VDS_VOLUME_PLEX_TYPE = 14
 )
 
+// String returns the VDS_VOLUME_PLEX_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_VOLUME_PLEX_TYPE) String() string {
+	switch e {
+	case VDS_VPT_UNKNOWN:
+		return "VDS_VPT_UNKNOWN"
+	case VDS_VPT_SIMPLE:
+		return "VDS_VPT_SIMPLE"
+	case VDS_VPT_SPAN:
+		return "VDS_VPT_SPAN"
+	case VDS_VPT_STRIPE:
+		return "VDS_VPT_STRIPE"
+	case VDS_VPT_PARITY:
+		return "VDS_VPT_PARITY"
+	default:
+		return fmt.Sprintf("VDS_VOLUME_PLEX_TYPE(%d)", int32(e))
+	}
+}
+
 // VDS_VOLUME_STATUS: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_volume_status
 type VDS_VOLUME_STATUS int32
 
@@ -1026,6 +2847,25 @@ const (
 	VDS_VS_FAILED   VDS_VOLUME_STATUS = 5
 	VDS_VS_OFFLINE  VDS_VOLUME_STATUS = 4
 )
+
+// String returns the VDS_VOLUME_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_VOLUME_STATUS) String() string {
+	switch e {
+	case VDS_VS_UNKNOWN:
+		return "VDS_VS_UNKNOWN"
+	case VDS_VS_ONLINE:
+		return "VDS_VS_ONLINE"
+	case VDS_VS_NO_MEDIA:
+		return "VDS_VS_NO_MEDIA"
+	case VDS_VS_FAILED:
+		return "VDS_VS_FAILED"
+	case VDS_VS_OFFLINE:
+		return "VDS_VS_OFFLINE"
+	default:
+		return fmt.Sprintf("VDS_VOLUME_STATUS(%d)", int32(e))
+	}
+}
 
 // VDS_VOLUME_TYPE: https://learn.microsoft.com/windows/win32/api/vds/ne-vds-vds_volume_type
 type VDS_VOLUME_TYPE int32
@@ -1038,3 +2878,24 @@ const (
 	VDS_VT_MIRROR  VDS_VOLUME_TYPE = 13
 	VDS_VT_PARITY  VDS_VOLUME_TYPE = 14
 )
+
+// String returns the VDS_VOLUME_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VDS_VOLUME_TYPE) String() string {
+	switch e {
+	case VDS_VT_UNKNOWN:
+		return "VDS_VT_UNKNOWN"
+	case VDS_VT_SIMPLE:
+		return "VDS_VT_SIMPLE"
+	case VDS_VT_SPAN:
+		return "VDS_VT_SPAN"
+	case VDS_VT_STRIPE:
+		return "VDS_VT_STRIPE"
+	case VDS_VT_MIRROR:
+		return "VDS_VT_MIRROR"
+	case VDS_VT_PARITY:
+		return "VDS_VT_PARITY"
+	default:
+		return fmt.Sprintf("VDS_VOLUME_TYPE(%d)", int32(e))
+	}
+}

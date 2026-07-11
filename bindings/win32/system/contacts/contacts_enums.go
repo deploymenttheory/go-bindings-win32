@@ -4,6 +4,10 @@
 
 package contacts
 
+import (
+	"fmt"
+)
+
 type CONTACT_AGGREGATION_COLLECTION_OPTIONS int32
 
 const (
@@ -12,9 +16,37 @@ const (
 	CACO_EXTERNAL_ONLY    CONTACT_AGGREGATION_COLLECTION_OPTIONS = 2
 )
 
+// String returns the CONTACT_AGGREGATION_COLLECTION_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONTACT_AGGREGATION_COLLECTION_OPTIONS) String() string {
+	switch e {
+	case CACO_DEFAULT:
+		return "CACO_DEFAULT"
+	case CACO_INCLUDE_EXTERNAL:
+		return "CACO_INCLUDE_EXTERNAL"
+	case CACO_EXTERNAL_ONLY:
+		return "CACO_EXTERNAL_ONLY"
+	default:
+		return fmt.Sprintf("CONTACT_AGGREGATION_COLLECTION_OPTIONS(%d)", int32(e))
+	}
+}
+
 type CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS int32
 
 const (
 	CA_CREATE_LOCAL    CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS = 0
 	CA_CREATE_EXTERNAL CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS = 1
 )
+
+// String returns the CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS) String() string {
+	switch e {
+	case CA_CREATE_LOCAL:
+		return "CA_CREATE_LOCAL"
+	case CA_CREATE_EXTERNAL:
+		return "CA_CREATE_EXTERNAL"
+	default:
+		return fmt.Sprintf("CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS(%d)", int32(e))
+	}
+}

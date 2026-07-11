@@ -4,6 +4,10 @@
 
 package cabinets
 
+import (
+	"fmt"
+)
+
 type FCIERROR int32
 
 const (
@@ -19,6 +23,35 @@ const (
 	FCIERR_CAB_FORMAT_LIMIT FCIERROR = 9
 )
 
+// String returns the FCIERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FCIERROR) String() string {
+	switch e {
+	case FCIERR_NONE:
+		return "FCIERR_NONE"
+	case FCIERR_OPEN_SRC:
+		return "FCIERR_OPEN_SRC"
+	case FCIERR_READ_SRC:
+		return "FCIERR_READ_SRC"
+	case FCIERR_ALLOC_FAIL:
+		return "FCIERR_ALLOC_FAIL"
+	case FCIERR_TEMP_FILE:
+		return "FCIERR_TEMP_FILE"
+	case FCIERR_BAD_COMPR_TYPE:
+		return "FCIERR_BAD_COMPR_TYPE"
+	case FCIERR_CAB_FILE:
+		return "FCIERR_CAB_FILE"
+	case FCIERR_USER_ABORT:
+		return "FCIERR_USER_ABORT"
+	case FCIERR_MCI_FAIL:
+		return "FCIERR_MCI_FAIL"
+	case FCIERR_CAB_FORMAT_LIMIT:
+		return "FCIERR_CAB_FORMAT_LIMIT"
+	default:
+		return fmt.Sprintf("FCIERROR(%d)", int32(e))
+	}
+}
+
 type FDICREATE_CPU_TYPE int32
 
 const (
@@ -27,6 +60,21 @@ const (
 	Cpu80386   FDICREATE_CPU_TYPE = 1
 )
 
+// String returns the FDICREATE_CPU_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FDICREATE_CPU_TYPE) String() string {
+	switch e {
+	case CpuUNKNOWN:
+		return "CpuUNKNOWN"
+	case Cpu80286:
+		return "Cpu80286"
+	case Cpu80386:
+		return "Cpu80386"
+	default:
+		return fmt.Sprintf("FDICREATE_CPU_TYPE(%d)", int32(e))
+	}
+}
+
 type FDIDECRYPTTYPE int32
 
 const (
@@ -34,6 +82,21 @@ const (
 	FdidtNEW_FOLDER  FDIDECRYPTTYPE = 1
 	FdidtDECRYPT     FDIDECRYPTTYPE = 2
 )
+
+// String returns the FDIDECRYPTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FDIDECRYPTTYPE) String() string {
+	switch e {
+	case FdidtNEW_CABINET:
+		return "FdidtNEW_CABINET"
+	case FdidtNEW_FOLDER:
+		return "FdidtNEW_FOLDER"
+	case FdidtDECRYPT:
+		return "FdidtDECRYPT"
+	default:
+		return fmt.Sprintf("FDIDECRYPTTYPE(%d)", int32(e))
+	}
+}
 
 type FDIERROR int32
 
@@ -53,6 +116,41 @@ const (
 	FDIERROR_EOF                     FDIERROR = 12
 )
 
+// String returns the FDIERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FDIERROR) String() string {
+	switch e {
+	case FDIERROR_NONE:
+		return "FDIERROR_NONE"
+	case FDIERROR_CABINET_NOT_FOUND:
+		return "FDIERROR_CABINET_NOT_FOUND"
+	case FDIERROR_NOT_A_CABINET:
+		return "FDIERROR_NOT_A_CABINET"
+	case FDIERROR_UNKNOWN_CABINET_VERSION:
+		return "FDIERROR_UNKNOWN_CABINET_VERSION"
+	case FDIERROR_CORRUPT_CABINET:
+		return "FDIERROR_CORRUPT_CABINET"
+	case FDIERROR_ALLOC_FAIL:
+		return "FDIERROR_ALLOC_FAIL"
+	case FDIERROR_BAD_COMPR_TYPE:
+		return "FDIERROR_BAD_COMPR_TYPE"
+	case FDIERROR_MDI_FAIL:
+		return "FDIERROR_MDI_FAIL"
+	case FDIERROR_TARGET_FILE:
+		return "FDIERROR_TARGET_FILE"
+	case FDIERROR_RESERVE_MISMATCH:
+		return "FDIERROR_RESERVE_MISMATCH"
+	case FDIERROR_WRONG_CABINET:
+		return "FDIERROR_WRONG_CABINET"
+	case FDIERROR_USER_ABORT:
+		return "FDIERROR_USER_ABORT"
+	case FDIERROR_EOF:
+		return "FDIERROR_EOF"
+	default:
+		return fmt.Sprintf("FDIERROR(%d)", int32(e))
+	}
+}
+
 type FDINOTIFICATIONTYPE int32
 
 const (
@@ -63,3 +161,24 @@ const (
 	FdintNEXT_CABINET    FDINOTIFICATIONTYPE = 4
 	FdintENUMERATE       FDINOTIFICATIONTYPE = 5
 )
+
+// String returns the FDINOTIFICATIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FDINOTIFICATIONTYPE) String() string {
+	switch e {
+	case FdintCABINET_INFO:
+		return "FdintCABINET_INFO"
+	case FdintPARTIAL_FILE:
+		return "FdintPARTIAL_FILE"
+	case FdintCOPY_FILE:
+		return "FdintCOPY_FILE"
+	case FdintCLOSE_FILE_INFO:
+		return "FdintCLOSE_FILE_INFO"
+	case FdintNEXT_CABINET:
+		return "FdintNEXT_CABINET"
+	case FdintENUMERATE:
+		return "FdintENUMERATE"
+	default:
+		return fmt.Sprintf("FDINOTIFICATIONTYPE(%d)", int32(e))
+	}
+}

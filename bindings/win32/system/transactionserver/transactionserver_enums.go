@@ -4,6 +4,10 @@
 
 package transactionserver
 
+import (
+	"fmt"
+)
+
 type MTSAdminErrorCodes int32
 
 const (
@@ -54,14 +58,133 @@ const (
 	MtsErrCompFileNoRegistrar    MTSAdminErrorCodes = -2146368460
 )
 
+// String returns the MTSAdminErrorCodes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MTSAdminErrorCodes) String() string {
+	switch e {
+	case MtsErrObjectErrors:
+		return "MtsErrObjectErrors"
+	case MtsErrObjectInvalid:
+		return "MtsErrObjectInvalid"
+	case MtsErrKeyMissing:
+		return "MtsErrKeyMissing"
+	case MtsErrAlreadyInstalled:
+		return "MtsErrAlreadyInstalled"
+	case MtsErrDownloadFailed:
+		return "MtsErrDownloadFailed"
+	case MtsErrPDFWriteFail:
+		return "MtsErrPDFWriteFail"
+	case MtsErrPDFReadFail:
+		return "MtsErrPDFReadFail"
+	case MtsErrPDFVersion:
+		return "MtsErrPDFVersion"
+	case MtsErrCoReqCompInstalled:
+		return "MtsErrCoReqCompInstalled"
+	case MtsErrBadPath:
+		return "MtsErrBadPath"
+	case MtsErrPackageExists:
+		return "MtsErrPackageExists"
+	case MtsErrRoleExists:
+		return "MtsErrRoleExists"
+	case MtsErrCantCopyFile:
+		return "MtsErrCantCopyFile"
+	case MtsErrNoTypeLib:
+		return "MtsErrNoTypeLib"
+	case MtsErrNoUser:
+		return "MtsErrNoUser"
+	case MtsErrNoRegistryCLSID:
+		return "MtsErrNoRegistryCLSID"
+	case MtsErrBadRegistryProgID:
+		return "MtsErrBadRegistryProgID"
+	case MtsErrAuthenticationLevel:
+		return "MtsErrAuthenticationLevel"
+	case MtsErrUserPasswdNotValid:
+		return "MtsErrUserPasswdNotValid"
+	case MtsErrNoRegistryRead:
+		return "MtsErrNoRegistryRead"
+	case MtsErrNoRegistryWrite:
+		return "MtsErrNoRegistryWrite"
+	case MtsErrNoRegistryRepair:
+		return "MtsErrNoRegistryRepair"
+	case MtsErrCLSIDOrIIDMismatch:
+		return "MtsErrCLSIDOrIIDMismatch"
+	case MtsErrRemoteInterface:
+		return "MtsErrRemoteInterface"
+	case MtsErrDllRegisterServer:
+		return "MtsErrDllRegisterServer"
+	case MtsErrNoServerShare:
+		return "MtsErrNoServerShare"
+	case MtsErrNoAccessToUNC:
+		return "MtsErrNoAccessToUNC"
+	case MtsErrDllLoadFailed:
+		return "MtsErrDllLoadFailed"
+	case MtsErrBadRegistryLibID:
+		return "MtsErrBadRegistryLibID"
+	case MtsErrPackDirNotFound:
+		return "MtsErrPackDirNotFound"
+	case MtsErrTreatAs:
+		return "MtsErrTreatAs"
+	case MtsErrBadForward:
+		return "MtsErrBadForward"
+	case MtsErrBadIID:
+		return "MtsErrBadIID"
+	case MtsErrRegistrarFailed:
+		return "MtsErrRegistrarFailed"
+	case MtsErrCompFileDoesNotExist:
+		return "MtsErrCompFileDoesNotExist"
+	case MtsErrCompFileLoadDLLFail:
+		return "MtsErrCompFileLoadDLLFail"
+	case MtsErrCompFileGetClassObj:
+		return "MtsErrCompFileGetClassObj"
+	case MtsErrCompFileClassNotAvail:
+		return "MtsErrCompFileClassNotAvail"
+	case MtsErrCompFileBadTLB:
+		return "MtsErrCompFileBadTLB"
+	case MtsErrCompFileNotInstallable:
+		return "MtsErrCompFileNotInstallable"
+	case MtsErrNotChangeable:
+		return "MtsErrNotChangeable"
+	case MtsErrNotDeletable:
+		return "MtsErrNotDeletable"
+	case MtsErrSession:
+		return "MtsErrSession"
+	case MtsErrCompFileNoRegistrar:
+		return "MtsErrCompFileNoRegistrar"
+	default:
+		return fmt.Sprintf("MTSAdminErrorCodes(%d)", int32(e))
+	}
+}
+
 type MTSPackageExportOptions int32
 
 const (
 	MtsExportUsers MTSPackageExportOptions = 1
 )
 
+// String returns the MTSPackageExportOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MTSPackageExportOptions) String() string {
+	switch e {
+	case MtsExportUsers:
+		return "MtsExportUsers"
+	default:
+		return fmt.Sprintf("MTSPackageExportOptions(%d)", int32(e))
+	}
+}
+
 type MTSPackageInstallOptions int32
 
 const (
 	MtsInstallUsers MTSPackageInstallOptions = 1
 )
+
+// String returns the MTSPackageInstallOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MTSPackageInstallOptions) String() string {
+	switch e {
+	case MtsInstallUsers:
+		return "MtsInstallUsers"
+	default:
+		return fmt.Sprintf("MTSPackageInstallOptions(%d)", int32(e))
+	}
+}

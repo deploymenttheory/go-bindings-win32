@@ -4,6 +4,10 @@
 
 package realtimecommunications
 
+import (
+	"fmt"
+)
+
 type RTC_ACE_SCOPE int32
 
 const (
@@ -11,6 +15,21 @@ const (
 	RTCAS_SCOPE_DOMAIN RTC_ACE_SCOPE = 1
 	RTCAS_SCOPE_ALL    RTC_ACE_SCOPE = 2
 )
+
+// String returns the RTC_ACE_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_ACE_SCOPE) String() string {
+	switch e {
+	case RTCAS_SCOPE_USER:
+		return "RTCAS_SCOPE_USER"
+	case RTCAS_SCOPE_DOMAIN:
+		return "RTCAS_SCOPE_DOMAIN"
+	case RTCAS_SCOPE_ALL:
+		return "RTCAS_SCOPE_ALL"
+	default:
+		return fmt.Sprintf("RTC_ACE_SCOPE(%d)", int32(e))
+	}
+}
 
 type RTC_ANSWER_MODE int32
 
@@ -21,12 +40,42 @@ const (
 	RTCAM_NOT_SUPPORTED        RTC_ANSWER_MODE = 3
 )
 
+// String returns the RTC_ANSWER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_ANSWER_MODE) String() string {
+	switch e {
+	case RTCAM_OFFER_SESSION_EVENT:
+		return "RTCAM_OFFER_SESSION_EVENT"
+	case RTCAM_AUTOMATICALLY_ACCEPT:
+		return "RTCAM_AUTOMATICALLY_ACCEPT"
+	case RTCAM_AUTOMATICALLY_REJECT:
+		return "RTCAM_AUTOMATICALLY_REJECT"
+	case RTCAM_NOT_SUPPORTED:
+		return "RTCAM_NOT_SUPPORTED"
+	default:
+		return fmt.Sprintf("RTC_ANSWER_MODE(%d)", int32(e))
+	}
+}
+
 type RTC_AUDIO_DEVICE int32
 
 const (
 	RTCAD_SPEAKER    RTC_AUDIO_DEVICE = 0
 	RTCAD_MICROPHONE RTC_AUDIO_DEVICE = 1
 )
+
+// String returns the RTC_AUDIO_DEVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_AUDIO_DEVICE) String() string {
+	switch e {
+	case RTCAD_SPEAKER:
+		return "RTCAD_SPEAKER"
+	case RTCAD_MICROPHONE:
+		return "RTCAD_MICROPHONE"
+	default:
+		return fmt.Sprintf("RTC_AUDIO_DEVICE(%d)", int32(e))
+	}
+}
 
 type RTC_BUDDY_EVENT_TYPE int32
 
@@ -39,6 +88,27 @@ const (
 	RTCBET_BUDDY_SUBSCRIBED   RTC_BUDDY_EVENT_TYPE = 5
 )
 
+// String returns the RTC_BUDDY_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_BUDDY_EVENT_TYPE) String() string {
+	switch e {
+	case RTCBET_BUDDY_ADD:
+		return "RTCBET_BUDDY_ADD"
+	case RTCBET_BUDDY_REMOVE:
+		return "RTCBET_BUDDY_REMOVE"
+	case RTCBET_BUDDY_UPDATE:
+		return "RTCBET_BUDDY_UPDATE"
+	case RTCBET_BUDDY_STATE_CHANGE:
+		return "RTCBET_BUDDY_STATE_CHANGE"
+	case RTCBET_BUDDY_ROAMED:
+		return "RTCBET_BUDDY_ROAMED"
+	case RTCBET_BUDDY_SUBSCRIBED:
+		return "RTCBET_BUDDY_SUBSCRIBED"
+	default:
+		return fmt.Sprintf("RTC_BUDDY_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 type RTC_BUDDY_SUBSCRIPTION_TYPE int32
 
 const (
@@ -48,6 +118,23 @@ const (
 	RTCBT_POLL           RTC_BUDDY_SUBSCRIPTION_TYPE = 3
 )
 
+// String returns the RTC_BUDDY_SUBSCRIPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_BUDDY_SUBSCRIPTION_TYPE) String() string {
+	switch e {
+	case RTCBT_SUBSCRIBED:
+		return "RTCBT_SUBSCRIBED"
+	case RTCBT_ALWAYS_OFFLINE:
+		return "RTCBT_ALWAYS_OFFLINE"
+	case RTCBT_ALWAYS_ONLINE:
+		return "RTCBT_ALWAYS_ONLINE"
+	case RTCBT_POLL:
+		return "RTCBT_POLL"
+	default:
+		return fmt.Sprintf("RTC_BUDDY_SUBSCRIPTION_TYPE(%d)", int32(e))
+	}
+}
+
 type RTC_CLIENT_EVENT_TYPE int32
 
 const (
@@ -56,6 +143,23 @@ const (
 	RTCCET_NETWORK_QUALITY_CHANGE RTC_CLIENT_EVENT_TYPE = 2
 	RTCCET_ASYNC_CLEANUP_DONE     RTC_CLIENT_EVENT_TYPE = 3
 )
+
+// String returns the RTC_CLIENT_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_CLIENT_EVENT_TYPE) String() string {
+	switch e {
+	case RTCCET_VOLUME_CHANGE:
+		return "RTCCET_VOLUME_CHANGE"
+	case RTCCET_DEVICE_CHANGE:
+		return "RTCCET_DEVICE_CHANGE"
+	case RTCCET_NETWORK_QUALITY_CHANGE:
+		return "RTCCET_NETWORK_QUALITY_CHANGE"
+	case RTCCET_ASYNC_CLEANUP_DONE:
+		return "RTCCET_ASYNC_CLEANUP_DONE"
+	default:
+		return fmt.Sprintf("RTC_CLIENT_EVENT_TYPE(%d)", int32(e))
+	}
+}
 
 type RTC_DTMF int32
 
@@ -78,6 +182,49 @@ const (
 	RTC_DTMF_D     RTC_DTMF = 15
 	RTC_DTMF_FLASH RTC_DTMF = 16
 )
+
+// String returns the RTC_DTMF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_DTMF) String() string {
+	switch e {
+	case RTC_DTMF_0:
+		return "RTC_DTMF_0"
+	case RTC_DTMF_1:
+		return "RTC_DTMF_1"
+	case RTC_DTMF_2:
+		return "RTC_DTMF_2"
+	case RTC_DTMF_3:
+		return "RTC_DTMF_3"
+	case RTC_DTMF_4:
+		return "RTC_DTMF_4"
+	case RTC_DTMF_5:
+		return "RTC_DTMF_5"
+	case RTC_DTMF_6:
+		return "RTC_DTMF_6"
+	case RTC_DTMF_7:
+		return "RTC_DTMF_7"
+	case RTC_DTMF_8:
+		return "RTC_DTMF_8"
+	case RTC_DTMF_9:
+		return "RTC_DTMF_9"
+	case RTC_DTMF_STAR:
+		return "RTC_DTMF_STAR"
+	case RTC_DTMF_POUND:
+		return "RTC_DTMF_POUND"
+	case RTC_DTMF_A:
+		return "RTC_DTMF_A"
+	case RTC_DTMF_B:
+		return "RTC_DTMF_B"
+	case RTC_DTMF_C:
+		return "RTC_DTMF_C"
+	case RTC_DTMF_D:
+		return "RTC_DTMF_D"
+	case RTC_DTMF_FLASH:
+		return "RTC_DTMF_FLASH"
+	default:
+		return fmt.Sprintf("RTC_DTMF(%d)", int32(e))
+	}
+}
 
 type RTC_EVENT int32
 
@@ -106,6 +253,59 @@ const (
 	RTCE_REINVITE                   RTC_EVENT = 21
 )
 
+// String returns the RTC_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_EVENT) String() string {
+	switch e {
+	case RTCE_CLIENT:
+		return "RTCE_CLIENT"
+	case RTCE_REGISTRATION_STATE_CHANGE:
+		return "RTCE_REGISTRATION_STATE_CHANGE"
+	case RTCE_SESSION_STATE_CHANGE:
+		return "RTCE_SESSION_STATE_CHANGE"
+	case RTCE_SESSION_OPERATION_COMPLETE:
+		return "RTCE_SESSION_OPERATION_COMPLETE"
+	case RTCE_PARTICIPANT_STATE_CHANGE:
+		return "RTCE_PARTICIPANT_STATE_CHANGE"
+	case RTCE_MEDIA:
+		return "RTCE_MEDIA"
+	case RTCE_INTENSITY:
+		return "RTCE_INTENSITY"
+	case RTCE_MESSAGING:
+		return "RTCE_MESSAGING"
+	case RTCE_BUDDY:
+		return "RTCE_BUDDY"
+	case RTCE_WATCHER:
+		return "RTCE_WATCHER"
+	case RTCE_PROFILE:
+		return "RTCE_PROFILE"
+	case RTCE_USERSEARCH:
+		return "RTCE_USERSEARCH"
+	case RTCE_INFO:
+		return "RTCE_INFO"
+	case RTCE_GROUP:
+		return "RTCE_GROUP"
+	case RTCE_MEDIA_REQUEST:
+		return "RTCE_MEDIA_REQUEST"
+	case RTCE_ROAMING:
+		return "RTCE_ROAMING"
+	case RTCE_PRESENCE_PROPERTY:
+		return "RTCE_PRESENCE_PROPERTY"
+	case RTCE_PRESENCE_DATA:
+		return "RTCE_PRESENCE_DATA"
+	case RTCE_PRESENCE_STATUS:
+		return "RTCE_PRESENCE_STATUS"
+	case RTCE_SESSION_REFER_STATUS:
+		return "RTCE_SESSION_REFER_STATUS"
+	case RTCE_SESSION_REFERRED:
+		return "RTCE_SESSION_REFERRED"
+	case RTCE_REINVITE:
+		return "RTCE_REINVITE"
+	default:
+		return fmt.Sprintf("RTC_EVENT(%d)", int32(e))
+	}
+}
+
 type RTC_GROUP_EVENT_TYPE int32
 
 const (
@@ -117,6 +317,27 @@ const (
 	RTCGET_GROUP_ROAMED       RTC_GROUP_EVENT_TYPE = 5
 )
 
+// String returns the RTC_GROUP_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_GROUP_EVENT_TYPE) String() string {
+	switch e {
+	case RTCGET_GROUP_ADD:
+		return "RTCGET_GROUP_ADD"
+	case RTCGET_GROUP_REMOVE:
+		return "RTCGET_GROUP_REMOVE"
+	case RTCGET_GROUP_UPDATE:
+		return "RTCGET_GROUP_UPDATE"
+	case RTCGET_GROUP_BUDDY_ADD:
+		return "RTCGET_GROUP_BUDDY_ADD"
+	case RTCGET_GROUP_BUDDY_REMOVE:
+		return "RTCGET_GROUP_BUDDY_REMOVE"
+	case RTCGET_GROUP_ROAMED:
+		return "RTCGET_GROUP_ROAMED"
+	default:
+		return fmt.Sprintf("RTC_GROUP_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 type RTC_LISTEN_MODE int32
 
 const (
@@ -124,6 +345,21 @@ const (
 	RTCLM_DYNAMIC RTC_LISTEN_MODE = 1
 	RTCLM_BOTH    RTC_LISTEN_MODE = 2
 )
+
+// String returns the RTC_LISTEN_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_LISTEN_MODE) String() string {
+	switch e {
+	case RTCLM_NONE:
+		return "RTCLM_NONE"
+	case RTCLM_DYNAMIC:
+		return "RTCLM_DYNAMIC"
+	case RTCLM_BOTH:
+		return "RTCLM_BOTH"
+	default:
+		return fmt.Sprintf("RTC_LISTEN_MODE(%d)", int32(e))
+	}
+}
 
 type RTC_MEDIA_EVENT_REASON int32
 
@@ -137,6 +373,29 @@ const (
 	RTCMER_REMOTE_REQUEST      RTC_MEDIA_EVENT_REASON = 6
 )
 
+// String returns the RTC_MEDIA_EVENT_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_MEDIA_EVENT_REASON) String() string {
+	switch e {
+	case RTCMER_NORMAL:
+		return "RTCMER_NORMAL"
+	case RTCMER_HOLD:
+		return "RTCMER_HOLD"
+	case RTCMER_TIMEOUT:
+		return "RTCMER_TIMEOUT"
+	case RTCMER_BAD_DEVICE:
+		return "RTCMER_BAD_DEVICE"
+	case RTCMER_NO_PORT:
+		return "RTCMER_NO_PORT"
+	case RTCMER_PORT_MAPPING_FAILED:
+		return "RTCMER_PORT_MAPPING_FAILED"
+	case RTCMER_REMOTE_REQUEST:
+		return "RTCMER_REMOTE_REQUEST"
+	default:
+		return fmt.Sprintf("RTC_MEDIA_EVENT_REASON(%d)", int32(e))
+	}
+}
+
 type RTC_MEDIA_EVENT_TYPE int32
 
 const (
@@ -145,12 +404,40 @@ const (
 	RTCMET_FAILED  RTC_MEDIA_EVENT_TYPE = 2
 )
 
+// String returns the RTC_MEDIA_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_MEDIA_EVENT_TYPE) String() string {
+	switch e {
+	case RTCMET_STOPPED:
+		return "RTCMET_STOPPED"
+	case RTCMET_STARTED:
+		return "RTCMET_STARTED"
+	case RTCMET_FAILED:
+		return "RTCMET_FAILED"
+	default:
+		return fmt.Sprintf("RTC_MEDIA_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 type RTC_MESSAGING_EVENT_TYPE int32
 
 const (
 	RTCMSET_MESSAGE RTC_MESSAGING_EVENT_TYPE = 0
 	RTCMSET_STATUS  RTC_MESSAGING_EVENT_TYPE = 1
 )
+
+// String returns the RTC_MESSAGING_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_MESSAGING_EVENT_TYPE) String() string {
+	switch e {
+	case RTCMSET_MESSAGE:
+		return "RTCMSET_MESSAGE"
+	case RTCMSET_STATUS:
+		return "RTCMSET_STATUS"
+	default:
+		return fmt.Sprintf("RTC_MESSAGING_EVENT_TYPE(%d)", int32(e))
+	}
+}
 
 type RTC_MESSAGING_USER_STATUS int32
 
@@ -159,12 +446,38 @@ const (
 	RTCMUS_TYPING RTC_MESSAGING_USER_STATUS = 1
 )
 
+// String returns the RTC_MESSAGING_USER_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_MESSAGING_USER_STATUS) String() string {
+	switch e {
+	case RTCMUS_IDLE:
+		return "RTCMUS_IDLE"
+	case RTCMUS_TYPING:
+		return "RTCMUS_TYPING"
+	default:
+		return fmt.Sprintf("RTC_MESSAGING_USER_STATUS(%d)", int32(e))
+	}
+}
+
 type RTC_OFFER_WATCHER_MODE int32
 
 const (
 	RTCOWM_OFFER_WATCHER_EVENT       RTC_OFFER_WATCHER_MODE = 0
 	RTCOWM_AUTOMATICALLY_ADD_WATCHER RTC_OFFER_WATCHER_MODE = 1
 )
+
+// String returns the RTC_OFFER_WATCHER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_OFFER_WATCHER_MODE) String() string {
+	switch e {
+	case RTCOWM_OFFER_WATCHER_EVENT:
+		return "RTCOWM_OFFER_WATCHER_EVENT"
+	case RTCOWM_AUTOMATICALLY_ADD_WATCHER:
+		return "RTCOWM_AUTOMATICALLY_ADD_WATCHER"
+	default:
+		return fmt.Sprintf("RTC_OFFER_WATCHER_MODE(%d)", int32(e))
+	}
+}
 
 type RTC_PARTICIPANT_STATE int32
 
@@ -180,6 +493,33 @@ const (
 	RTCPS_DISCONNECTED  RTC_PARTICIPANT_STATE = 8
 )
 
+// String returns the RTC_PARTICIPANT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_PARTICIPANT_STATE) String() string {
+	switch e {
+	case RTCPS_IDLE:
+		return "RTCPS_IDLE"
+	case RTCPS_PENDING:
+		return "RTCPS_PENDING"
+	case RTCPS_INCOMING:
+		return "RTCPS_INCOMING"
+	case RTCPS_ANSWERING:
+		return "RTCPS_ANSWERING"
+	case RTCPS_INPROGRESS:
+		return "RTCPS_INPROGRESS"
+	case RTCPS_ALERTING:
+		return "RTCPS_ALERTING"
+	case RTCPS_CONNECTED:
+		return "RTCPS_CONNECTED"
+	case RTCPS_DISCONNECTING:
+		return "RTCPS_DISCONNECTING"
+	case RTCPS_DISCONNECTED:
+		return "RTCPS_DISCONNECTED"
+	default:
+		return fmt.Sprintf("RTC_PARTICIPANT_STATE(%d)", int32(e))
+	}
+}
+
 type RTC_PORT_TYPE int32
 
 const (
@@ -190,6 +530,25 @@ const (
 	RTCPT_SIP        RTC_PORT_TYPE = 4
 )
 
+// String returns the RTC_PORT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_PORT_TYPE) String() string {
+	switch e {
+	case RTCPT_AUDIO_RTP:
+		return "RTCPT_AUDIO_RTP"
+	case RTCPT_AUDIO_RTCP:
+		return "RTCPT_AUDIO_RTCP"
+	case RTCPT_VIDEO_RTP:
+		return "RTCPT_VIDEO_RTP"
+	case RTCPT_VIDEO_RTCP:
+		return "RTCPT_VIDEO_RTCP"
+	case RTCPT_SIP:
+		return "RTCPT_SIP"
+	default:
+		return fmt.Sprintf("RTC_PORT_TYPE(%d)", int32(e))
+	}
+}
+
 type RTC_PRESENCE_PROPERTY int32
 
 const (
@@ -199,6 +558,25 @@ const (
 	RTCPP_DEVICE_NAME RTC_PRESENCE_PROPERTY = 3
 	RTCPP_MULTIPLE    RTC_PRESENCE_PROPERTY = 4
 )
+
+// String returns the RTC_PRESENCE_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_PRESENCE_PROPERTY) String() string {
+	switch e {
+	case RTCPP_PHONENUMBER:
+		return "RTCPP_PHONENUMBER"
+	case RTCPP_DISPLAYNAME:
+		return "RTCPP_DISPLAYNAME"
+	case RTCPP_EMAIL:
+		return "RTCPP_EMAIL"
+	case RTCPP_DEVICE_NAME:
+		return "RTCPP_DEVICE_NAME"
+	case RTCPP_MULTIPLE:
+		return "RTCPP_MULTIPLE"
+	default:
+		return fmt.Sprintf("RTC_PRESENCE_PROPERTY(%d)", int32(e))
+	}
+}
 
 type RTC_PRESENCE_STATUS int32
 
@@ -213,6 +591,31 @@ const (
 	RTCXS_PRESENCE_OUT_TO_LUNCH  RTC_PRESENCE_STATUS = 7
 )
 
+// String returns the RTC_PRESENCE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_PRESENCE_STATUS) String() string {
+	switch e {
+	case RTCXS_PRESENCE_OFFLINE:
+		return "RTCXS_PRESENCE_OFFLINE"
+	case RTCXS_PRESENCE_ONLINE:
+		return "RTCXS_PRESENCE_ONLINE"
+	case RTCXS_PRESENCE_AWAY:
+		return "RTCXS_PRESENCE_AWAY"
+	case RTCXS_PRESENCE_IDLE:
+		return "RTCXS_PRESENCE_IDLE"
+	case RTCXS_PRESENCE_BUSY:
+		return "RTCXS_PRESENCE_BUSY"
+	case RTCXS_PRESENCE_BE_RIGHT_BACK:
+		return "RTCXS_PRESENCE_BE_RIGHT_BACK"
+	case RTCXS_PRESENCE_ON_THE_PHONE:
+		return "RTCXS_PRESENCE_ON_THE_PHONE"
+	case RTCXS_PRESENCE_OUT_TO_LUNCH:
+		return "RTCXS_PRESENCE_OUT_TO_LUNCH"
+	default:
+		return fmt.Sprintf("RTC_PRESENCE_STATUS(%d)", int32(e))
+	}
+}
+
 type RTC_PRIVACY_MODE int32
 
 const (
@@ -220,12 +623,38 @@ const (
 	RTCPM_ALLOW_LIST_ONLY     RTC_PRIVACY_MODE = 1
 )
 
+// String returns the RTC_PRIVACY_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_PRIVACY_MODE) String() string {
+	switch e {
+	case RTCPM_BLOCK_LIST_EXCLUDED:
+		return "RTCPM_BLOCK_LIST_EXCLUDED"
+	case RTCPM_ALLOW_LIST_ONLY:
+		return "RTCPM_ALLOW_LIST_ONLY"
+	default:
+		return fmt.Sprintf("RTC_PRIVACY_MODE(%d)", int32(e))
+	}
+}
+
 type RTC_PROFILE_EVENT_TYPE int32
 
 const (
 	RTCPFET_PROFILE_GET    RTC_PROFILE_EVENT_TYPE = 0
 	RTCPFET_PROFILE_UPDATE RTC_PROFILE_EVENT_TYPE = 1
 )
+
+// String returns the RTC_PROFILE_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_PROFILE_EVENT_TYPE) String() string {
+	switch e {
+	case RTCPFET_PROFILE_GET:
+		return "RTCPFET_PROFILE_GET"
+	case RTCPFET_PROFILE_UPDATE:
+		return "RTCPFET_PROFILE_UPDATE"
+	default:
+		return fmt.Sprintf("RTC_PROFILE_EVENT_TYPE(%d)", int32(e))
+	}
+}
 
 type RTC_PROVIDER_URI int32
 
@@ -236,6 +665,25 @@ const (
 	RTCPU_URIDISPLAYDURINGCALL RTC_PROVIDER_URI = 3
 	RTCPU_URIDISPLAYDURINGIDLE RTC_PROVIDER_URI = 4
 )
+
+// String returns the RTC_PROVIDER_URI constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_PROVIDER_URI) String() string {
+	switch e {
+	case RTCPU_URIHOMEPAGE:
+		return "RTCPU_URIHOMEPAGE"
+	case RTCPU_URIHELPDESK:
+		return "RTCPU_URIHELPDESK"
+	case RTCPU_URIPERSONALACCOUNT:
+		return "RTCPU_URIPERSONALACCOUNT"
+	case RTCPU_URIDISPLAYDURINGCALL:
+		return "RTCPU_URIDISPLAYDURINGCALL"
+	case RTCPU_URIDISPLAYDURINGIDLE:
+		return "RTCPU_URIDISPLAYDURINGIDLE"
+	default:
+		return fmt.Sprintf("RTC_PROVIDER_URI(%d)", int32(e))
+	}
+}
 
 type RTC_REGISTRATION_STATE int32
 
@@ -251,6 +699,33 @@ const (
 	RTCRS_REMOTE_PA_LOGGED_OFF RTC_REGISTRATION_STATE = 8
 )
 
+// String returns the RTC_REGISTRATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_REGISTRATION_STATE) String() string {
+	switch e {
+	case RTCRS_NOT_REGISTERED:
+		return "RTCRS_NOT_REGISTERED"
+	case RTCRS_REGISTERING:
+		return "RTCRS_REGISTERING"
+	case RTCRS_REGISTERED:
+		return "RTCRS_REGISTERED"
+	case RTCRS_REJECTED:
+		return "RTCRS_REJECTED"
+	case RTCRS_UNREGISTERING:
+		return "RTCRS_UNREGISTERING"
+	case RTCRS_ERROR:
+		return "RTCRS_ERROR"
+	case RTCRS_LOGGED_OFF:
+		return "RTCRS_LOGGED_OFF"
+	case RTCRS_LOCAL_PA_LOGGED_OFF:
+		return "RTCRS_LOCAL_PA_LOGGED_OFF"
+	case RTCRS_REMOTE_PA_LOGGED_OFF:
+		return "RTCRS_REMOTE_PA_LOGGED_OFF"
+	default:
+		return fmt.Sprintf("RTC_REGISTRATION_STATE(%d)", int32(e))
+	}
+}
+
 type RTC_REINVITE_STATE int32
 
 const (
@@ -259,6 +734,21 @@ const (
 	RTCRIN_FAIL      RTC_REINVITE_STATE = 2
 )
 
+// String returns the RTC_REINVITE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_REINVITE_STATE) String() string {
+	switch e {
+	case RTCRIN_INCOMING:
+		return "RTCRIN_INCOMING"
+	case RTCRIN_SUCCEEDED:
+		return "RTCRIN_SUCCEEDED"
+	case RTCRIN_FAIL:
+		return "RTCRIN_FAIL"
+	default:
+		return fmt.Sprintf("RTC_REINVITE_STATE(%d)", int32(e))
+	}
+}
+
 type RTC_RING_TYPE int32
 
 const (
@@ -266,6 +756,21 @@ const (
 	RTCRT_MESSAGE  RTC_RING_TYPE = 1
 	RTCRT_RINGBACK RTC_RING_TYPE = 2
 )
+
+// String returns the RTC_RING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_RING_TYPE) String() string {
+	switch e {
+	case RTCRT_PHONE:
+		return "RTCRT_PHONE"
+	case RTCRT_MESSAGE:
+		return "RTCRT_MESSAGE"
+	case RTCRT_RINGBACK:
+		return "RTCRT_RINGBACK"
+	default:
+		return fmt.Sprintf("RTC_RING_TYPE(%d)", int32(e))
+	}
+}
 
 type RTC_ROAMING_EVENT_TYPE int32
 
@@ -277,6 +782,25 @@ const (
 	RTCRET_WPENDING_ROAMING RTC_ROAMING_EVENT_TYPE = 4
 )
 
+// String returns the RTC_ROAMING_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_ROAMING_EVENT_TYPE) String() string {
+	switch e {
+	case RTCRET_BUDDY_ROAMING:
+		return "RTCRET_BUDDY_ROAMING"
+	case RTCRET_WATCHER_ROAMING:
+		return "RTCRET_WATCHER_ROAMING"
+	case RTCRET_PRESENCE_ROAMING:
+		return "RTCRET_PRESENCE_ROAMING"
+	case RTCRET_PROFILE_ROAMING:
+		return "RTCRET_PROFILE_ROAMING"
+	case RTCRET_WPENDING_ROAMING:
+		return "RTCRET_WPENDING_ROAMING"
+	default:
+		return fmt.Sprintf("RTC_ROAMING_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 type RTC_SECURITY_LEVEL int32
 
 const (
@@ -285,12 +809,40 @@ const (
 	RTCSECL_REQUIRED    RTC_SECURITY_LEVEL = 3
 )
 
+// String returns the RTC_SECURITY_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_SECURITY_LEVEL) String() string {
+	switch e {
+	case RTCSECL_UNSUPPORTED:
+		return "RTCSECL_UNSUPPORTED"
+	case RTCSECL_SUPPORTED:
+		return "RTCSECL_SUPPORTED"
+	case RTCSECL_REQUIRED:
+		return "RTCSECL_REQUIRED"
+	default:
+		return fmt.Sprintf("RTC_SECURITY_LEVEL(%d)", int32(e))
+	}
+}
+
 type RTC_SECURITY_TYPE int32
 
 const (
 	RTCSECT_AUDIO_VIDEO_MEDIA_ENCRYPTION RTC_SECURITY_TYPE = 0
 	RTCSECT_T120_MEDIA_ENCRYPTION        RTC_SECURITY_TYPE = 1
 )
+
+// String returns the RTC_SECURITY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_SECURITY_TYPE) String() string {
+	switch e {
+	case RTCSECT_AUDIO_VIDEO_MEDIA_ENCRYPTION:
+		return "RTCSECT_AUDIO_VIDEO_MEDIA_ENCRYPTION"
+	case RTCSECT_T120_MEDIA_ENCRYPTION:
+		return "RTCSECT_T120_MEDIA_ENCRYPTION"
+	default:
+		return fmt.Sprintf("RTC_SECURITY_TYPE(%d)", int32(e))
+	}
+}
 
 type RTC_SESSION_REFER_STATUS int32
 
@@ -302,6 +854,27 @@ const (
 	RTCSRS_DROPPED   RTC_SESSION_REFER_STATUS = 4
 	RTCSRS_DONE      RTC_SESSION_REFER_STATUS = 5
 )
+
+// String returns the RTC_SESSION_REFER_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_SESSION_REFER_STATUS) String() string {
+	switch e {
+	case RTCSRS_REFERRING:
+		return "RTCSRS_REFERRING"
+	case RTCSRS_ACCEPTED:
+		return "RTCSRS_ACCEPTED"
+	case RTCSRS_ERROR:
+		return "RTCSRS_ERROR"
+	case RTCSRS_REJECTED:
+		return "RTCSRS_REJECTED"
+	case RTCSRS_DROPPED:
+		return "RTCSRS_DROPPED"
+	case RTCSRS_DONE:
+		return "RTCSRS_DONE"
+	default:
+		return fmt.Sprintf("RTC_SESSION_REFER_STATUS(%d)", int32(e))
+	}
+}
 
 type RTC_SESSION_STATE int32
 
@@ -316,6 +889,31 @@ const (
 	RTCSS_REFER        RTC_SESSION_STATE = 7
 )
 
+// String returns the RTC_SESSION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_SESSION_STATE) String() string {
+	switch e {
+	case RTCSS_IDLE:
+		return "RTCSS_IDLE"
+	case RTCSS_INCOMING:
+		return "RTCSS_INCOMING"
+	case RTCSS_ANSWERING:
+		return "RTCSS_ANSWERING"
+	case RTCSS_INPROGRESS:
+		return "RTCSS_INPROGRESS"
+	case RTCSS_CONNECTED:
+		return "RTCSS_CONNECTED"
+	case RTCSS_DISCONNECTED:
+		return "RTCSS_DISCONNECTED"
+	case RTCSS_HOLD:
+		return "RTCSS_HOLD"
+	case RTCSS_REFER:
+		return "RTCSS_REFER"
+	default:
+		return fmt.Sprintf("RTC_SESSION_STATE(%d)", int32(e))
+	}
+}
+
 type RTC_SESSION_TYPE int32
 
 const (
@@ -327,12 +925,46 @@ const (
 	RTCST_APPLICATION    RTC_SESSION_TYPE = 5
 )
 
+// String returns the RTC_SESSION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_SESSION_TYPE) String() string {
+	switch e {
+	case RTCST_PC_TO_PC:
+		return "RTCST_PC_TO_PC"
+	case RTCST_PC_TO_PHONE:
+		return "RTCST_PC_TO_PHONE"
+	case RTCST_PHONE_TO_PHONE:
+		return "RTCST_PHONE_TO_PHONE"
+	case RTCST_IM:
+		return "RTCST_IM"
+	case RTCST_MULTIPARTY_IM:
+		return "RTCST_MULTIPARTY_IM"
+	case RTCST_APPLICATION:
+		return "RTCST_APPLICATION"
+	default:
+		return fmt.Sprintf("RTC_SESSION_TYPE(%d)", int32(e))
+	}
+}
+
 type RTC_T120_APPLET int32
 
 const (
 	RTCTA_WHITEBOARD RTC_T120_APPLET = 0
 	RTCTA_APPSHARING RTC_T120_APPLET = 1
 )
+
+// String returns the RTC_T120_APPLET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_T120_APPLET) String() string {
+	switch e {
+	case RTCTA_WHITEBOARD:
+		return "RTCTA_WHITEBOARD"
+	case RTCTA_APPSHARING:
+		return "RTCTA_APPSHARING"
+	default:
+		return fmt.Sprintf("RTC_T120_APPLET(%d)", int32(e))
+	}
+}
 
 type RTC_TERMINATE_REASON int32
 
@@ -346,6 +978,31 @@ const (
 	RTCTR_INSUFFICIENT_SECURITY_LEVEL RTC_TERMINATE_REASON = 6
 	RTCTR_NOT_SUPPORTED               RTC_TERMINATE_REASON = 7
 )
+
+// String returns the RTC_TERMINATE_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_TERMINATE_REASON) String() string {
+	switch e {
+	case RTCTR_NORMAL:
+		return "RTCTR_NORMAL"
+	case RTCTR_DND:
+		return "RTCTR_DND"
+	case RTCTR_BUSY:
+		return "RTCTR_BUSY"
+	case RTCTR_REJECT:
+		return "RTCTR_REJECT"
+	case RTCTR_TIMEOUT:
+		return "RTCTR_TIMEOUT"
+	case RTCTR_SHUTDOWN:
+		return "RTCTR_SHUTDOWN"
+	case RTCTR_INSUFFICIENT_SECURITY_LEVEL:
+		return "RTCTR_INSUFFICIENT_SECURITY_LEVEL"
+	case RTCTR_NOT_SUPPORTED:
+		return "RTCTR_NOT_SUPPORTED"
+	default:
+		return fmt.Sprintf("RTC_TERMINATE_REASON(%d)", int32(e))
+	}
+}
 
 type RTC_USER_SEARCH_COLUMN int32
 
@@ -362,6 +1019,35 @@ const (
 	RTCUSC_EMAIL       RTC_USER_SEARCH_COLUMN = 9
 )
 
+// String returns the RTC_USER_SEARCH_COLUMN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_USER_SEARCH_COLUMN) String() string {
+	switch e {
+	case RTCUSC_URI:
+		return "RTCUSC_URI"
+	case RTCUSC_DISPLAYNAME:
+		return "RTCUSC_DISPLAYNAME"
+	case RTCUSC_TITLE:
+		return "RTCUSC_TITLE"
+	case RTCUSC_OFFICE:
+		return "RTCUSC_OFFICE"
+	case RTCUSC_PHONE:
+		return "RTCUSC_PHONE"
+	case RTCUSC_COMPANY:
+		return "RTCUSC_COMPANY"
+	case RTCUSC_CITY:
+		return "RTCUSC_CITY"
+	case RTCUSC_STATE:
+		return "RTCUSC_STATE"
+	case RTCUSC_COUNTRY:
+		return "RTCUSC_COUNTRY"
+	case RTCUSC_EMAIL:
+		return "RTCUSC_EMAIL"
+	default:
+		return fmt.Sprintf("RTC_USER_SEARCH_COLUMN(%d)", int32(e))
+	}
+}
+
 type RTC_USER_SEARCH_PREFERENCE int32
 
 const (
@@ -369,12 +1055,38 @@ const (
 	RTCUSP_TIME_LIMIT  RTC_USER_SEARCH_PREFERENCE = 1
 )
 
+// String returns the RTC_USER_SEARCH_PREFERENCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_USER_SEARCH_PREFERENCE) String() string {
+	switch e {
+	case RTCUSP_MAX_MATCHES:
+		return "RTCUSP_MAX_MATCHES"
+	case RTCUSP_TIME_LIMIT:
+		return "RTCUSP_TIME_LIMIT"
+	default:
+		return fmt.Sprintf("RTC_USER_SEARCH_PREFERENCE(%d)", int32(e))
+	}
+}
+
 type RTC_VIDEO_DEVICE int32
 
 const (
 	RTCVD_RECEIVE RTC_VIDEO_DEVICE = 0
 	RTCVD_PREVIEW RTC_VIDEO_DEVICE = 1
 )
+
+// String returns the RTC_VIDEO_DEVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_VIDEO_DEVICE) String() string {
+	switch e {
+	case RTCVD_RECEIVE:
+		return "RTCVD_RECEIVE"
+	case RTCVD_PREVIEW:
+		return "RTCVD_PREVIEW"
+	default:
+		return fmt.Sprintf("RTC_VIDEO_DEVICE(%d)", int32(e))
+	}
+}
 
 type RTC_WATCHER_EVENT_TYPE int32
 
@@ -386,12 +1098,44 @@ const (
 	RTCWET_WATCHER_ROAMED   RTC_WATCHER_EVENT_TYPE = 4
 )
 
+// String returns the RTC_WATCHER_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_WATCHER_EVENT_TYPE) String() string {
+	switch e {
+	case RTCWET_WATCHER_ADD:
+		return "RTCWET_WATCHER_ADD"
+	case RTCWET_WATCHER_REMOVE:
+		return "RTCWET_WATCHER_REMOVE"
+	case RTCWET_WATCHER_UPDATE:
+		return "RTCWET_WATCHER_UPDATE"
+	case RTCWET_WATCHER_OFFERING:
+		return "RTCWET_WATCHER_OFFERING"
+	case RTCWET_WATCHER_ROAMED:
+		return "RTCWET_WATCHER_ROAMED"
+	default:
+		return fmt.Sprintf("RTC_WATCHER_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 type RTC_WATCHER_MATCH_MODE int32
 
 const (
 	RTCWMM_EXACT_MATCH    RTC_WATCHER_MATCH_MODE = 0
 	RTCWMM_BEST_ACE_MATCH RTC_WATCHER_MATCH_MODE = 1
 )
+
+// String returns the RTC_WATCHER_MATCH_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_WATCHER_MATCH_MODE) String() string {
+	switch e {
+	case RTCWMM_EXACT_MATCH:
+		return "RTCWMM_EXACT_MATCH"
+	case RTCWMM_BEST_ACE_MATCH:
+		return "RTCWMM_BEST_ACE_MATCH"
+	default:
+		return fmt.Sprintf("RTC_WATCHER_MATCH_MODE(%d)", int32(e))
+	}
+}
 
 type RTC_WATCHER_STATE int32
 
@@ -403,3 +1147,24 @@ const (
 	RTCWS_DENIED   RTC_WATCHER_STATE = 4
 	RTCWS_PROMPT   RTC_WATCHER_STATE = 5
 )
+
+// String returns the RTC_WATCHER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTC_WATCHER_STATE) String() string {
+	switch e {
+	case RTCWS_UNKNOWN:
+		return "RTCWS_UNKNOWN"
+	case RTCWS_OFFERING:
+		return "RTCWS_OFFERING"
+	case RTCWS_ALLOWED:
+		return "RTCWS_ALLOWED"
+	case RTCWS_BLOCKED:
+		return "RTCWS_BLOCKED"
+	case RTCWS_DENIED:
+		return "RTCWS_DENIED"
+	case RTCWS_PROMPT:
+		return "RTCWS_PROMPT"
+	default:
+		return fmt.Sprintf("RTC_WATCHER_STATE(%d)", int32(e))
+	}
+}

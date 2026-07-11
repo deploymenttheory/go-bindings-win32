@@ -4,6 +4,10 @@
 
 package pictureacquisition
 
+import (
+	"fmt"
+)
+
 // DEVICE_SELECTION_DEVICE_TYPE: https://learn.microsoft.com/windows/win32/api/photoacquire/ne-photoacquire-device_selection_device_type
 type DEVICE_SELECTION_DEVICE_TYPE int32
 
@@ -17,6 +21,29 @@ const (
 	DST_DV_DEVICE      DEVICE_SELECTION_DEVICE_TYPE = 6
 )
 
+// String returns the DEVICE_SELECTION_DEVICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVICE_SELECTION_DEVICE_TYPE) String() string {
+	switch e {
+	case DST_UNKNOWN_DEVICE:
+		return "DST_UNKNOWN_DEVICE"
+	case DST_WPD_DEVICE:
+		return "DST_WPD_DEVICE"
+	case DST_WIA_DEVICE:
+		return "DST_WIA_DEVICE"
+	case DST_STI_DEVICE:
+		return "DST_STI_DEVICE"
+	case DSF_TWAIN_DEVICE:
+		return "DSF_TWAIN_DEVICE"
+	case DST_FS_DEVICE:
+		return "DST_FS_DEVICE"
+	case DST_DV_DEVICE:
+		return "DST_DV_DEVICE"
+	default:
+		return fmt.Sprintf("DEVICE_SELECTION_DEVICE_TYPE(%d)", int32(e))
+	}
+}
+
 // ERROR_ADVISE_MESSAGE_TYPE: https://learn.microsoft.com/windows/win32/api/photoacquire/ne-photoacquire-error_advise_message_type
 type ERROR_ADVISE_MESSAGE_TYPE int32
 
@@ -26,6 +53,23 @@ const (
 	PHOTOACQUIRE_ERROR_YESNO           ERROR_ADVISE_MESSAGE_TYPE = 2
 	PHOTOACQUIRE_ERROR_OK              ERROR_ADVISE_MESSAGE_TYPE = 3
 )
+
+// String returns the ERROR_ADVISE_MESSAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ERROR_ADVISE_MESSAGE_TYPE) String() string {
+	switch e {
+	case PHOTOACQUIRE_ERROR_SKIPRETRYCANCEL:
+		return "PHOTOACQUIRE_ERROR_SKIPRETRYCANCEL"
+	case PHOTOACQUIRE_ERROR_RETRYCANCEL:
+		return "PHOTOACQUIRE_ERROR_RETRYCANCEL"
+	case PHOTOACQUIRE_ERROR_YESNO:
+		return "PHOTOACQUIRE_ERROR_YESNO"
+	case PHOTOACQUIRE_ERROR_OK:
+		return "PHOTOACQUIRE_ERROR_OK"
+	default:
+		return fmt.Sprintf("ERROR_ADVISE_MESSAGE_TYPE(%d)", int32(e))
+	}
+}
 
 // ERROR_ADVISE_RESULT: https://learn.microsoft.com/windows/win32/api/photoacquire/ne-photoacquire-error_advise_result
 type ERROR_ADVISE_RESULT int32
@@ -40,12 +84,46 @@ const (
 	PHOTOACQUIRE_RESULT_ABORT    ERROR_ADVISE_RESULT = 6
 )
 
+// String returns the ERROR_ADVISE_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ERROR_ADVISE_RESULT) String() string {
+	switch e {
+	case PHOTOACQUIRE_RESULT_YES:
+		return "PHOTOACQUIRE_RESULT_YES"
+	case PHOTOACQUIRE_RESULT_NO:
+		return "PHOTOACQUIRE_RESULT_NO"
+	case PHOTOACQUIRE_RESULT_OK:
+		return "PHOTOACQUIRE_RESULT_OK"
+	case PHOTOACQUIRE_RESULT_SKIP:
+		return "PHOTOACQUIRE_RESULT_SKIP"
+	case PHOTOACQUIRE_RESULT_SKIP_ALL:
+		return "PHOTOACQUIRE_RESULT_SKIP_ALL"
+	case PHOTOACQUIRE_RESULT_RETRY:
+		return "PHOTOACQUIRE_RESULT_RETRY"
+	case PHOTOACQUIRE_RESULT_ABORT:
+		return "PHOTOACQUIRE_RESULT_ABORT"
+	default:
+		return fmt.Sprintf("ERROR_ADVISE_RESULT(%d)", int32(e))
+	}
+}
+
 // PROGRESS_DIALOG_CHECKBOX_ID: https://learn.microsoft.com/windows/win32/api/photoacquire/ne-photoacquire-progress_dialog_checkbox_id
 type PROGRESS_DIALOG_CHECKBOX_ID int32
 
 const (
 	PROGRESS_DIALOG_CHECKBOX_ID_DEFAULT PROGRESS_DIALOG_CHECKBOX_ID = 0
 )
+
+// String returns the PROGRESS_DIALOG_CHECKBOX_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROGRESS_DIALOG_CHECKBOX_ID) String() string {
+	switch e {
+	case PROGRESS_DIALOG_CHECKBOX_ID_DEFAULT:
+		return "PROGRESS_DIALOG_CHECKBOX_ID_DEFAULT"
+	default:
+		return fmt.Sprintf("PROGRESS_DIALOG_CHECKBOX_ID(%d)", int32(e))
+	}
+}
 
 // PROGRESS_DIALOG_IMAGE_TYPE: https://learn.microsoft.com/windows/win32/api/photoacquire/ne-photoacquire-progress_dialog_image_type
 type PROGRESS_DIALOG_IMAGE_TYPE int32
@@ -57,6 +135,23 @@ const (
 	PROGRESS_DIALOG_BITMAP_THUMBNAIL PROGRESS_DIALOG_IMAGE_TYPE = 3
 )
 
+// String returns the PROGRESS_DIALOG_IMAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROGRESS_DIALOG_IMAGE_TYPE) String() string {
+	switch e {
+	case PROGRESS_DIALOG_ICON_SMALL:
+		return "PROGRESS_DIALOG_ICON_SMALL"
+	case PROGRESS_DIALOG_ICON_LARGE:
+		return "PROGRESS_DIALOG_ICON_LARGE"
+	case PROGRESS_DIALOG_ICON_THUMBNAIL:
+		return "PROGRESS_DIALOG_ICON_THUMBNAIL"
+	case PROGRESS_DIALOG_BITMAP_THUMBNAIL:
+		return "PROGRESS_DIALOG_BITMAP_THUMBNAIL"
+	default:
+		return fmt.Sprintf("PROGRESS_DIALOG_IMAGE_TYPE(%d)", int32(e))
+	}
+}
+
 // USER_INPUT_STRING_TYPE: https://learn.microsoft.com/windows/win32/api/photoacquire/ne-photoacquire-user_input_string_type
 type USER_INPUT_STRING_TYPE int32
 
@@ -64,3 +159,16 @@ const (
 	USER_INPUT_DEFAULT      USER_INPUT_STRING_TYPE = 0
 	USER_INPUT_PATH_ELEMENT USER_INPUT_STRING_TYPE = 1
 )
+
+// String returns the USER_INPUT_STRING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USER_INPUT_STRING_TYPE) String() string {
+	switch e {
+	case USER_INPUT_DEFAULT:
+		return "USER_INPUT_DEFAULT"
+	case USER_INPUT_PATH_ELEMENT:
+		return "USER_INPUT_PATH_ELEMENT"
+	default:
+		return fmt.Sprintf("USER_INPUT_STRING_TYPE(%d)", int32(e))
+	}
+}

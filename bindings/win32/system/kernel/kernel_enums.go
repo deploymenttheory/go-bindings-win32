@@ -4,6 +4,10 @@
 
 package kernel
 
+import (
+	"fmt"
+)
+
 // COMPARTMENT_ID: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-compartment_id
 type COMPARTMENT_ID int32
 
@@ -12,12 +16,38 @@ const (
 	DEFAULT_COMPARTMENT_ID     COMPARTMENT_ID = 1
 )
 
+// String returns the COMPARTMENT_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPARTMENT_ID) String() string {
+	switch e {
+	case UNSPECIFIED_COMPARTMENT_ID:
+		return "UNSPECIFIED_COMPARTMENT_ID"
+	case DEFAULT_COMPARTMENT_ID:
+		return "DEFAULT_COMPARTMENT_ID"
+	default:
+		return fmt.Sprintf("COMPARTMENT_ID(%d)", int32(e))
+	}
+}
+
 type EVENT_TYPE int32
 
 const (
 	NotificationEvent    EVENT_TYPE = 0
 	SynchronizationEvent EVENT_TYPE = 1
 )
+
+// String returns the EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVENT_TYPE) String() string {
+	switch e {
+	case NotificationEvent:
+		return "NotificationEvent"
+	case SynchronizationEvent:
+		return "SynchronizationEvent"
+	default:
+		return fmt.Sprintf("EVENT_TYPE(%d)", int32(e))
+	}
+}
 
 type EXCEPTION_DISPOSITION int32
 
@@ -28,6 +58,23 @@ const (
 	ExceptionCollidedUnwind    EXCEPTION_DISPOSITION = 3
 )
 
+// String returns the EXCEPTION_DISPOSITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXCEPTION_DISPOSITION) String() string {
+	switch e {
+	case ExceptionContinueExecution:
+		return "ExceptionContinueExecution"
+	case ExceptionContinueSearch:
+		return "ExceptionContinueSearch"
+	case ExceptionNestedException:
+		return "ExceptionNestedException"
+	case ExceptionCollidedUnwind:
+		return "ExceptionCollidedUnwind"
+	default:
+		return fmt.Sprintf("EXCEPTION_DISPOSITION(%d)", int32(e))
+	}
+}
+
 type NT_PRODUCT_TYPE int32
 
 const (
@@ -35,6 +82,21 @@ const (
 	NtProductLanManNt NT_PRODUCT_TYPE = 2
 	NtProductServer   NT_PRODUCT_TYPE = 3
 )
+
+// String returns the NT_PRODUCT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NT_PRODUCT_TYPE) String() string {
+	switch e {
+	case NtProductWinNt:
+		return "NtProductWinNt"
+	case NtProductLanManNt:
+		return "NtProductLanManNt"
+	case NtProductServer:
+		return "NtProductServer"
+	default:
+		return fmt.Sprintf("NT_PRODUCT_TYPE(%d)", int32(e))
+	}
+}
 
 type SUITE_TYPE int32
 
@@ -60,12 +122,72 @@ const (
 	MaxSuiteType            SUITE_TYPE = 18
 )
 
+// String returns the SUITE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SUITE_TYPE) String() string {
+	switch e {
+	case SmallBusiness:
+		return "SmallBusiness"
+	case Enterprise:
+		return "Enterprise"
+	case BackOffice:
+		return "BackOffice"
+	case CommunicationServer:
+		return "CommunicationServer"
+	case TerminalServer:
+		return "TerminalServer"
+	case SmallBusinessRestricted:
+		return "SmallBusinessRestricted"
+	case EmbeddedNT:
+		return "EmbeddedNT"
+	case DataCenter:
+		return "DataCenter"
+	case SingleUserTS:
+		return "SingleUserTS"
+	case Personal:
+		return "Personal"
+	case Blade:
+		return "Blade"
+	case EmbeddedRestricted:
+		return "EmbeddedRestricted"
+	case SecurityAppliance:
+		return "SecurityAppliance"
+	case StorageServer:
+		return "StorageServer"
+	case ComputeServer:
+		return "ComputeServer"
+	case WHServer:
+		return "WHServer"
+	case PhoneNT:
+		return "PhoneNT"
+	case MultiUserTS:
+		return "MultiUserTS"
+	case MaxSuiteType:
+		return "MaxSuiteType"
+	default:
+		return fmt.Sprintf("SUITE_TYPE(%d)", int32(e))
+	}
+}
+
 type TIMER_TYPE int32
 
 const (
 	NotificationTimer    TIMER_TYPE = 0
 	SynchronizationTimer TIMER_TYPE = 1
 )
+
+// String returns the TIMER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TIMER_TYPE) String() string {
+	switch e {
+	case NotificationTimer:
+		return "NotificationTimer"
+	case SynchronizationTimer:
+		return "SynchronizationTimer"
+	default:
+		return fmt.Sprintf("TIMER_TYPE(%d)", int32(e))
+	}
+}
 
 type WAIT_TYPE int32
 
@@ -76,3 +198,22 @@ const (
 	WaitDequeue      WAIT_TYPE = 3
 	WaitDpc          WAIT_TYPE = 4
 )
+
+// String returns the WAIT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WAIT_TYPE) String() string {
+	switch e {
+	case WaitAll:
+		return "WaitAll"
+	case WaitAny:
+		return "WaitAny"
+	case WaitNotification:
+		return "WaitNotification"
+	case WaitDequeue:
+		return "WaitDequeue"
+	case WaitDpc:
+		return "WaitDpc"
+	default:
+		return fmt.Sprintf("WAIT_TYPE(%d)", int32(e))
+	}
+}

@@ -4,7 +4,13 @@
 
 package enterprisedata
 
+import (
+	"fmt"
+	"strings"
+)
+
 // ENTERPRISE_DATA_POLICIES: https://learn.microsoft.com/windows/win32/api/srpapi/ne-srpapi-enterprise_data_policies
+// Bitmask — values may be combined with |.
 type ENTERPRISE_DATA_POLICIES int32
 
 const (
@@ -14,6 +20,25 @@ const (
 	ENTERPRISE_POLICY_EXEMPT      ENTERPRISE_DATA_POLICIES = 4
 )
 
+// String returns the ENTERPRISE_DATA_POLICIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENTERPRISE_DATA_POLICIES) String() string {
+	var parts []string
+	if e&ENTERPRISE_POLICY_ALLOWED != 0 {
+		parts = append(parts, "ENTERPRISE_POLICY_ALLOWED")
+	}
+	if e&ENTERPRISE_POLICY_ENLIGHTENED != 0 {
+		parts = append(parts, "ENTERPRISE_POLICY_ENLIGHTENED")
+	}
+	if e&ENTERPRISE_POLICY_EXEMPT != 0 {
+		parts = append(parts, "ENTERPRISE_POLICY_EXEMPT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SRPHOSTING_TYPE int32
 
 const (
@@ -22,8 +47,34 @@ const (
 	SRPHOSTING_TYPE_WININET SRPHOSTING_TYPE = 2
 )
 
+// String returns the SRPHOSTING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SRPHOSTING_TYPE) String() string {
+	switch e {
+	case SRPHOSTING_TYPE_NONE:
+		return "SRPHOSTING_TYPE_NONE"
+	case SRPHOSTING_TYPE_WINHTTP:
+		return "SRPHOSTING_TYPE_WINHTTP"
+	case SRPHOSTING_TYPE_WININET:
+		return "SRPHOSTING_TYPE_WININET"
+	default:
+		return fmt.Sprintf("SRPHOSTING_TYPE(%d)", int32(e))
+	}
+}
+
 type SRPHOSTING_VERSION int32
 
 const (
 	SRPHOSTING_VERSION1 SRPHOSTING_VERSION = 1
 )
+
+// String returns the SRPHOSTING_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SRPHOSTING_VERSION) String() string {
+	switch e {
+	case SRPHOSTING_VERSION1:
+		return "SRPHOSTING_VERSION1"
+	default:
+		return fmt.Sprintf("SRPHOSTING_VERSION(%d)", int32(e))
+	}
+}

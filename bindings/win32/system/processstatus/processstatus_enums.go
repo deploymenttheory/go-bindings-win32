@@ -4,6 +4,10 @@
 
 package processstatus
 
+import (
+	"fmt"
+)
+
 type ENUM_PROCESS_MODULES_EX_FLAGS uint32
 
 const (
@@ -12,3 +16,20 @@ const (
 	LIST_MODULES_32BIT   ENUM_PROCESS_MODULES_EX_FLAGS = 1
 	LIST_MODULES_64BIT   ENUM_PROCESS_MODULES_EX_FLAGS = 2
 )
+
+// String returns the ENUM_PROCESS_MODULES_EX_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENUM_PROCESS_MODULES_EX_FLAGS) String() string {
+	switch e {
+	case LIST_MODULES_ALL:
+		return "LIST_MODULES_ALL"
+	case LIST_MODULES_DEFAULT:
+		return "LIST_MODULES_DEFAULT"
+	case LIST_MODULES_32BIT:
+		return "LIST_MODULES_32BIT"
+	case LIST_MODULES_64BIT:
+		return "LIST_MODULES_64BIT"
+	default:
+		return fmt.Sprintf("ENUM_PROCESS_MODULES_EX_FLAGS(%d)", uint32(e))
+	}
+}

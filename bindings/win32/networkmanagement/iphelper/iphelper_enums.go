@@ -4,6 +4,11 @@
 
 package iphelper
 
+import (
+	"fmt"
+	"strings"
+)
+
 // DNS_SERVER_PROPERTY_TYPE: https://learn.microsoft.com/windows/win32/api/netioapi/ne-netioapi-dns_server_property_type
 type DNS_SERVER_PROPERTY_TYPE int32
 
@@ -13,6 +18,22 @@ const (
 	DnsServerDotProperty     DNS_SERVER_PROPERTY_TYPE = 2
 )
 
+// String returns the DNS_SERVER_PROPERTY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_SERVER_PROPERTY_TYPE) String() string {
+	switch e {
+	case DnsServerInvalidProperty:
+		return "DnsServerInvalidProperty"
+	case DnsServerDohProperty:
+		return "DnsServerDohProperty"
+	case DnsServerDotProperty:
+		return "DnsServerDotProperty"
+	default:
+		return fmt.Sprintf("DNS_SERVER_PROPERTY_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GET_ADAPTERS_ADDRESSES_FLAGS uint32
 
 const (
@@ -29,6 +50,49 @@ const (
 	GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER GET_ADAPTERS_ADDRESSES_FLAGS = 1024
 )
 
+// String returns the GET_ADAPTERS_ADDRESSES_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_ADAPTERS_ADDRESSES_FLAGS) String() string {
+	var parts []string
+	if e&GAA_FLAG_SKIP_UNICAST != 0 {
+		parts = append(parts, "GAA_FLAG_SKIP_UNICAST")
+	}
+	if e&GAA_FLAG_SKIP_ANYCAST != 0 {
+		parts = append(parts, "GAA_FLAG_SKIP_ANYCAST")
+	}
+	if e&GAA_FLAG_SKIP_MULTICAST != 0 {
+		parts = append(parts, "GAA_FLAG_SKIP_MULTICAST")
+	}
+	if e&GAA_FLAG_SKIP_DNS_SERVER != 0 {
+		parts = append(parts, "GAA_FLAG_SKIP_DNS_SERVER")
+	}
+	if e&GAA_FLAG_INCLUDE_PREFIX != 0 {
+		parts = append(parts, "GAA_FLAG_INCLUDE_PREFIX")
+	}
+	if e&GAA_FLAG_SKIP_FRIENDLY_NAME != 0 {
+		parts = append(parts, "GAA_FLAG_SKIP_FRIENDLY_NAME")
+	}
+	if e&GAA_FLAG_INCLUDE_WINS_INFO != 0 {
+		parts = append(parts, "GAA_FLAG_INCLUDE_WINS_INFO")
+	}
+	if e&GAA_FLAG_INCLUDE_GATEWAYS != 0 {
+		parts = append(parts, "GAA_FLAG_INCLUDE_GATEWAYS")
+	}
+	if e&GAA_FLAG_INCLUDE_ALL_INTERFACES != 0 {
+		parts = append(parts, "GAA_FLAG_INCLUDE_ALL_INTERFACES")
+	}
+	if e&GAA_FLAG_INCLUDE_ALL_COMPARTMENTS != 0 {
+		parts = append(parts, "GAA_FLAG_INCLUDE_ALL_COMPARTMENTS")
+	}
+	if e&GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER != 0 {
+		parts = append(parts, "GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type GLOBAL_FILTER int32
 
 const (
@@ -36,6 +100,21 @@ const (
 	GF_STRONGHOST GLOBAL_FILTER = 8
 	GF_FRAGCACHE  GLOBAL_FILTER = 9
 )
+
+// String returns the GLOBAL_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GLOBAL_FILTER) String() string {
+	switch e {
+	case GF_FRAGMENTS:
+		return "GF_FRAGMENTS"
+	case GF_STRONGHOST:
+		return "GF_STRONGHOST"
+	case GF_FRAGCACHE:
+		return "GF_FRAGCACHE"
+	default:
+		return fmt.Sprintf("GLOBAL_FILTER(%d)", int32(e))
+	}
+}
 
 // ICMP4_TYPE: https://learn.microsoft.com/windows/win32/api/ipmib/ne-ipmib-icmp4_type
 type ICMP4_TYPE int32
@@ -55,6 +134,41 @@ const (
 	ICMP4_MASK_REQUEST      ICMP4_TYPE = 17
 	ICMP4_MASK_REPLY        ICMP4_TYPE = 18
 )
+
+// String returns the ICMP4_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ICMP4_TYPE) String() string {
+	switch e {
+	case ICMP4_ECHO_REPLY:
+		return "ICMP4_ECHO_REPLY"
+	case ICMP4_DST_UNREACH:
+		return "ICMP4_DST_UNREACH"
+	case ICMP4_SOURCE_QUENCH:
+		return "ICMP4_SOURCE_QUENCH"
+	case ICMP4_REDIRECT:
+		return "ICMP4_REDIRECT"
+	case ICMP4_ECHO_REQUEST:
+		return "ICMP4_ECHO_REQUEST"
+	case ICMP4_ROUTER_ADVERT:
+		return "ICMP4_ROUTER_ADVERT"
+	case ICMP4_ROUTER_SOLICIT:
+		return "ICMP4_ROUTER_SOLICIT"
+	case ICMP4_TIME_EXCEEDED:
+		return "ICMP4_TIME_EXCEEDED"
+	case ICMP4_PARAM_PROB:
+		return "ICMP4_PARAM_PROB"
+	case ICMP4_TIMESTAMP_REQUEST:
+		return "ICMP4_TIMESTAMP_REQUEST"
+	case ICMP4_TIMESTAMP_REPLY:
+		return "ICMP4_TIMESTAMP_REPLY"
+	case ICMP4_MASK_REQUEST:
+		return "ICMP4_MASK_REQUEST"
+	case ICMP4_MASK_REPLY:
+		return "ICMP4_MASK_REPLY"
+	default:
+		return fmt.Sprintf("ICMP4_TYPE(%d)", int32(e))
+	}
+}
 
 // ICMP6_TYPE: https://learn.microsoft.com/windows/win32/api/ipmib/ne-ipmib-icmp6_type
 type ICMP6_TYPE int32
@@ -77,6 +191,45 @@ const (
 	ICMP6_V2_MEMBERSHIP_REPORT ICMP6_TYPE = 143
 )
 
+// String returns the ICMP6_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ICMP6_TYPE) String() string {
+	switch e {
+	case ICMP6_DST_UNREACH:
+		return "ICMP6_DST_UNREACH"
+	case ICMP6_PACKET_TOO_BIG:
+		return "ICMP6_PACKET_TOO_BIG"
+	case ICMP6_TIME_EXCEEDED:
+		return "ICMP6_TIME_EXCEEDED"
+	case ICMP6_PARAM_PROB:
+		return "ICMP6_PARAM_PROB"
+	case ICMP6_ECHO_REQUEST:
+		return "ICMP6_ECHO_REQUEST"
+	case ICMP6_ECHO_REPLY:
+		return "ICMP6_ECHO_REPLY"
+	case ICMP6_MEMBERSHIP_QUERY:
+		return "ICMP6_MEMBERSHIP_QUERY"
+	case ICMP6_MEMBERSHIP_REPORT:
+		return "ICMP6_MEMBERSHIP_REPORT"
+	case ICMP6_MEMBERSHIP_REDUCTION:
+		return "ICMP6_MEMBERSHIP_REDUCTION"
+	case ND_ROUTER_SOLICIT:
+		return "ND_ROUTER_SOLICIT"
+	case ND_ROUTER_ADVERT:
+		return "ND_ROUTER_ADVERT"
+	case ND_NEIGHBOR_SOLICIT:
+		return "ND_NEIGHBOR_SOLICIT"
+	case ND_NEIGHBOR_ADVERT:
+		return "ND_NEIGHBOR_ADVERT"
+	case ND_REDIRECT:
+		return "ND_REDIRECT"
+	case ICMP6_V2_MEMBERSHIP_REPORT:
+		return "ICMP6_V2_MEMBERSHIP_REPORT"
+	default:
+		return fmt.Sprintf("ICMP6_TYPE(%d)", int32(e))
+	}
+}
+
 type IF_ACCESS_TYPE int32
 
 const (
@@ -87,6 +240,23 @@ const (
 	IF_ACCESS_POINT_TO_MULTI_POINT IF_ACCESS_TYPE = 4
 	IF_ACCESS_POINTTOMULTIPOINT    IF_ACCESS_TYPE = 4
 )
+
+// String returns the IF_ACCESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IF_ACCESS_TYPE) String() string {
+	switch e {
+	case IF_ACCESS_LOOPBACK:
+		return "IF_ACCESS_LOOPBACK"
+	case IF_ACCESS_BROADCAST:
+		return "IF_ACCESS_BROADCAST"
+	case IF_ACCESS_POINT_TO_POINT:
+		return "IF_ACCESS_POINT_TO_POINT"
+	case IF_ACCESS_POINT_TO_MULTI_POINT:
+		return "IF_ACCESS_POINT_TO_MULTI_POINT"
+	default:
+		return fmt.Sprintf("IF_ACCESS_TYPE(%d)", int32(e))
+	}
+}
 
 type INTERNAL_IF_OPER_STATUS int32
 
@@ -99,12 +269,46 @@ const (
 	IF_OPER_STATUS_OPERATIONAL     INTERNAL_IF_OPER_STATUS = 5
 )
 
+// String returns the INTERNAL_IF_OPER_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERNAL_IF_OPER_STATUS) String() string {
+	switch e {
+	case IF_OPER_STATUS_NON_OPERATIONAL:
+		return "IF_OPER_STATUS_NON_OPERATIONAL"
+	case IF_OPER_STATUS_UNREACHABLE:
+		return "IF_OPER_STATUS_UNREACHABLE"
+	case IF_OPER_STATUS_DISCONNECTED:
+		return "IF_OPER_STATUS_DISCONNECTED"
+	case IF_OPER_STATUS_CONNECTING:
+		return "IF_OPER_STATUS_CONNECTING"
+	case IF_OPER_STATUS_CONNECTED:
+		return "IF_OPER_STATUS_CONNECTED"
+	case IF_OPER_STATUS_OPERATIONAL:
+		return "IF_OPER_STATUS_OPERATIONAL"
+	default:
+		return fmt.Sprintf("INTERNAL_IF_OPER_STATUS(%d)", int32(e))
+	}
+}
+
 type MIB_IF_ENTRY_LEVEL int32
 
 const (
 	MibIfEntryNormal                  MIB_IF_ENTRY_LEVEL = 0
 	MibIfEntryNormalWithoutStatistics MIB_IF_ENTRY_LEVEL = 2
 )
+
+// String returns the MIB_IF_ENTRY_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIB_IF_ENTRY_LEVEL) String() string {
+	switch e {
+	case MibIfEntryNormal:
+		return "MibIfEntryNormal"
+	case MibIfEntryNormalWithoutStatistics:
+		return "MibIfEntryNormalWithoutStatistics"
+	default:
+		return fmt.Sprintf("MIB_IF_ENTRY_LEVEL(%d)", int32(e))
+	}
+}
 
 // MIB_IF_TABLE_LEVEL: https://learn.microsoft.com/windows/win32/api/netioapi/ne-netioapi-mib_if_table_level
 type MIB_IF_TABLE_LEVEL int32
@@ -115,6 +319,21 @@ const (
 	MibIfTableNormalWithoutStatistics MIB_IF_TABLE_LEVEL = 2
 )
 
+// String returns the MIB_IF_TABLE_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIB_IF_TABLE_LEVEL) String() string {
+	switch e {
+	case MibIfTableNormal:
+		return "MibIfTableNormal"
+	case MibIfTableRaw:
+		return "MibIfTableRaw"
+	case MibIfTableNormalWithoutStatistics:
+		return "MibIfTableNormalWithoutStatistics"
+	default:
+		return fmt.Sprintf("MIB_IF_TABLE_LEVEL(%d)", int32(e))
+	}
+}
+
 type MIB_IPFORWARD_TYPE int32
 
 const (
@@ -123,6 +342,23 @@ const (
 	MIB_IPROUTE_TYPE_DIRECT   MIB_IPFORWARD_TYPE = 3
 	MIB_IPROUTE_TYPE_INDIRECT MIB_IPFORWARD_TYPE = 4
 )
+
+// String returns the MIB_IPFORWARD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIB_IPFORWARD_TYPE) String() string {
+	switch e {
+	case MIB_IPROUTE_TYPE_OTHER:
+		return "MIB_IPROUTE_TYPE_OTHER"
+	case MIB_IPROUTE_TYPE_INVALID:
+		return "MIB_IPROUTE_TYPE_INVALID"
+	case MIB_IPROUTE_TYPE_DIRECT:
+		return "MIB_IPROUTE_TYPE_DIRECT"
+	case MIB_IPROUTE_TYPE_INDIRECT:
+		return "MIB_IPROUTE_TYPE_INDIRECT"
+	default:
+		return fmt.Sprintf("MIB_IPFORWARD_TYPE(%d)", int32(e))
+	}
+}
 
 type MIB_IPNET_TYPE int32
 
@@ -133,12 +369,42 @@ const (
 	MIB_IPNET_TYPE_STATIC  MIB_IPNET_TYPE = 4
 )
 
+// String returns the MIB_IPNET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIB_IPNET_TYPE) String() string {
+	switch e {
+	case MIB_IPNET_TYPE_OTHER:
+		return "MIB_IPNET_TYPE_OTHER"
+	case MIB_IPNET_TYPE_INVALID:
+		return "MIB_IPNET_TYPE_INVALID"
+	case MIB_IPNET_TYPE_DYNAMIC:
+		return "MIB_IPNET_TYPE_DYNAMIC"
+	case MIB_IPNET_TYPE_STATIC:
+		return "MIB_IPNET_TYPE_STATIC"
+	default:
+		return fmt.Sprintf("MIB_IPNET_TYPE(%d)", int32(e))
+	}
+}
+
 type MIB_IPSTATS_FORWARDING int32
 
 const (
 	MIB_IP_FORWARDING     MIB_IPSTATS_FORWARDING = 1
 	MIB_IP_NOT_FORWARDING MIB_IPSTATS_FORWARDING = 2
 )
+
+// String returns the MIB_IPSTATS_FORWARDING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIB_IPSTATS_FORWARDING) String() string {
+	switch e {
+	case MIB_IP_FORWARDING:
+		return "MIB_IP_FORWARDING"
+	case MIB_IP_NOT_FORWARDING:
+		return "MIB_IP_NOT_FORWARDING"
+	default:
+		return fmt.Sprintf("MIB_IPSTATS_FORWARDING(%d)", int32(e))
+	}
+}
 
 // MIB_NOTIFICATION_TYPE: https://learn.microsoft.com/windows/win32/api/netioapi/ne-netioapi-mib_notification_type
 type MIB_NOTIFICATION_TYPE int32
@@ -149,6 +415,23 @@ const (
 	MibDeleteInstance        MIB_NOTIFICATION_TYPE = 2
 	MibInitialNotification   MIB_NOTIFICATION_TYPE = 3
 )
+
+// String returns the MIB_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIB_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case MibParameterNotification:
+		return "MibParameterNotification"
+	case MibAddInstance:
+		return "MibAddInstance"
+	case MibDeleteInstance:
+		return "MibDeleteInstance"
+	case MibInitialNotification:
+		return "MibInitialNotification"
+	default:
+		return fmt.Sprintf("MIB_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
 
 type MIB_TCP_STATE int32
 
@@ -168,6 +451,41 @@ const (
 	MIB_TCP_STATE_RESERVED   MIB_TCP_STATE = 100
 )
 
+// String returns the MIB_TCP_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIB_TCP_STATE) String() string {
+	switch e {
+	case MIB_TCP_STATE_CLOSED:
+		return "MIB_TCP_STATE_CLOSED"
+	case MIB_TCP_STATE_LISTEN:
+		return "MIB_TCP_STATE_LISTEN"
+	case MIB_TCP_STATE_SYN_SENT:
+		return "MIB_TCP_STATE_SYN_SENT"
+	case MIB_TCP_STATE_SYN_RCVD:
+		return "MIB_TCP_STATE_SYN_RCVD"
+	case MIB_TCP_STATE_ESTAB:
+		return "MIB_TCP_STATE_ESTAB"
+	case MIB_TCP_STATE_FIN_WAIT1:
+		return "MIB_TCP_STATE_FIN_WAIT1"
+	case MIB_TCP_STATE_FIN_WAIT2:
+		return "MIB_TCP_STATE_FIN_WAIT2"
+	case MIB_TCP_STATE_CLOSE_WAIT:
+		return "MIB_TCP_STATE_CLOSE_WAIT"
+	case MIB_TCP_STATE_CLOSING:
+		return "MIB_TCP_STATE_CLOSING"
+	case MIB_TCP_STATE_LAST_ACK:
+		return "MIB_TCP_STATE_LAST_ACK"
+	case MIB_TCP_STATE_TIME_WAIT:
+		return "MIB_TCP_STATE_TIME_WAIT"
+	case MIB_TCP_STATE_DELETE_TCB:
+		return "MIB_TCP_STATE_DELETE_TCB"
+	case MIB_TCP_STATE_RESERVED:
+		return "MIB_TCP_STATE_RESERVED"
+	default:
+		return fmt.Sprintf("MIB_TCP_STATE(%d)", int32(e))
+	}
+}
+
 // NET_ADDRESS_FORMAT: https://learn.microsoft.com/windows/win32/api/iphlpapi/ne-iphlpapi-net_address_format
 type NET_ADDRESS_FORMAT int32
 
@@ -178,6 +496,23 @@ const (
 	NET_ADDRESS_IPV6               NET_ADDRESS_FORMAT = 3
 )
 
+// String returns the NET_ADDRESS_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_ADDRESS_FORMAT) String() string {
+	switch e {
+	case NET_ADDRESS_FORMAT_UNSPECIFIED:
+		return "NET_ADDRESS_FORMAT_UNSPECIFIED"
+	case NET_ADDRESS_DNS_NAME:
+		return "NET_ADDRESS_DNS_NAME"
+	case NET_ADDRESS_IPV4:
+		return "NET_ADDRESS_IPV4"
+	case NET_ADDRESS_IPV6:
+		return "NET_ADDRESS_IPV6"
+	default:
+		return fmt.Sprintf("NET_ADDRESS_FORMAT(%d)", int32(e))
+	}
+}
+
 type NET_FL_ISOLATION_MODE int32
 
 const (
@@ -185,6 +520,21 @@ const (
 	NetFlIsolationModeVlan NET_FL_ISOLATION_MODE = 1
 	NetFlIsolationModeVsid NET_FL_ISOLATION_MODE = 2
 )
+
+// String returns the NET_FL_ISOLATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FL_ISOLATION_MODE) String() string {
+	switch e {
+	case NetFlIsolationModeNone:
+		return "NetFlIsolationModeNone"
+	case NetFlIsolationModeVlan:
+		return "NetFlIsolationModeVlan"
+	case NetFlIsolationModeVsid:
+		return "NetFlIsolationModeVsid"
+	default:
+		return fmt.Sprintf("NET_FL_ISOLATION_MODE(%d)", int32(e))
+	}
+}
 
 type NET_FL_VIRTUAL_INTERFACE_ORIGIN int32
 
@@ -194,6 +544,21 @@ const (
 	NetFlVirtualInterfaceOriginDefault NET_FL_VIRTUAL_INTERFACE_ORIGIN = 2
 )
 
+// String returns the NET_FL_VIRTUAL_INTERFACE_ORIGIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FL_VIRTUAL_INTERFACE_ORIGIN) String() string {
+	switch e {
+	case NetFlVirtualInterfaceOriginOid:
+		return "NetFlVirtualInterfaceOriginOid"
+	case NetFlVirtualInterfaceOriginApi:
+		return "NetFlVirtualInterfaceOriginApi"
+	case NetFlVirtualInterfaceOriginDefault:
+		return "NetFlVirtualInterfaceOriginDefault"
+	default:
+		return fmt.Sprintf("NET_FL_VIRTUAL_INTERFACE_ORIGIN(%d)", int32(e))
+	}
+}
+
 type PFADDRESSTYPE int32
 
 const (
@@ -201,12 +566,38 @@ const (
 	PF_IPV6 PFADDRESSTYPE = 1
 )
 
+// String returns the PFADDRESSTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PFADDRESSTYPE) String() string {
+	switch e {
+	case PF_IPV4:
+		return "PF_IPV4"
+	case PF_IPV6:
+		return "PF_IPV6"
+	default:
+		return fmt.Sprintf("PFADDRESSTYPE(%d)", int32(e))
+	}
+}
+
 type PFFORWARD_ACTION int32
 
 const (
 	PF_ACTION_FORWARD PFFORWARD_ACTION = 0
 	PF_ACTION_DROP    PFFORWARD_ACTION = 1
 )
+
+// String returns the PFFORWARD_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PFFORWARD_ACTION) String() string {
+	switch e {
+	case PF_ACTION_FORWARD:
+		return "PF_ACTION_FORWARD"
+	case PF_ACTION_DROP:
+		return "PF_ACTION_DROP"
+	default:
+		return fmt.Sprintf("PFFORWARD_ACTION(%d)", int32(e))
+	}
+}
 
 type PFFRAMETYPE int32
 
@@ -216,12 +607,38 @@ const (
 	PFFT_SPOOF  PFFRAMETYPE = 3
 )
 
+// String returns the PFFRAMETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PFFRAMETYPE) String() string {
+	switch e {
+	case PFFT_FILTER:
+		return "PFFT_FILTER"
+	case PFFT_FRAG:
+		return "PFFT_FRAG"
+	case PFFT_SPOOF:
+		return "PFFT_SPOOF"
+	default:
+		return fmt.Sprintf("PFFRAMETYPE(%d)", int32(e))
+	}
+}
+
 // TCPIP_OWNER_MODULE_INFO_CLASS: https://learn.microsoft.com/windows/win32/api/iprtrmib/ne-iprtrmib-tcpip_owner_module_info_class
 type TCPIP_OWNER_MODULE_INFO_CLASS int32
 
 const (
 	TCPIP_OWNER_MODULE_INFO_BASIC TCPIP_OWNER_MODULE_INFO_CLASS = 0
 )
+
+// String returns the TCPIP_OWNER_MODULE_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TCPIP_OWNER_MODULE_INFO_CLASS) String() string {
+	switch e {
+	case TCPIP_OWNER_MODULE_INFO_BASIC:
+		return "TCPIP_OWNER_MODULE_INFO_BASIC"
+	default:
+		return fmt.Sprintf("TCPIP_OWNER_MODULE_INFO_CLASS(%d)", int32(e))
+	}
+}
 
 // TCP_BOOLEAN_OPTIONAL: https://learn.microsoft.com/windows/win32/api/tcpestats/ne-tcpestats-tcp_boolean_optional
 type TCP_BOOLEAN_OPTIONAL int32
@@ -231,6 +648,21 @@ const (
 	TcpBoolOptEnabled   TCP_BOOLEAN_OPTIONAL = 1
 	TcpBoolOptUnchanged TCP_BOOLEAN_OPTIONAL = -1
 )
+
+// String returns the TCP_BOOLEAN_OPTIONAL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TCP_BOOLEAN_OPTIONAL) String() string {
+	switch e {
+	case TcpBoolOptDisabled:
+		return "TcpBoolOptDisabled"
+	case TcpBoolOptEnabled:
+		return "TcpBoolOptEnabled"
+	case TcpBoolOptUnchanged:
+		return "TcpBoolOptUnchanged"
+	default:
+		return fmt.Sprintf("TCP_BOOLEAN_OPTIONAL(%d)", int32(e))
+	}
+}
 
 // TCP_CONNECTION_OFFLOAD_STATE: https://learn.microsoft.com/windows/win32/api/tcpmib/ne-tcpmib-tcp_connection_offload_state
 type TCP_CONNECTION_OFFLOAD_STATE int32
@@ -242,6 +674,25 @@ const (
 	TcpConnectionOffloadStateUploading  TCP_CONNECTION_OFFLOAD_STATE = 3
 	TcpConnectionOffloadStateMax        TCP_CONNECTION_OFFLOAD_STATE = 4
 )
+
+// String returns the TCP_CONNECTION_OFFLOAD_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TCP_CONNECTION_OFFLOAD_STATE) String() string {
+	switch e {
+	case TcpConnectionOffloadStateInHost:
+		return "TcpConnectionOffloadStateInHost"
+	case TcpConnectionOffloadStateOffloading:
+		return "TcpConnectionOffloadStateOffloading"
+	case TcpConnectionOffloadStateOffloaded:
+		return "TcpConnectionOffloadStateOffloaded"
+	case TcpConnectionOffloadStateUploading:
+		return "TcpConnectionOffloadStateUploading"
+	case TcpConnectionOffloadStateMax:
+		return "TcpConnectionOffloadStateMax"
+	default:
+		return fmt.Sprintf("TCP_CONNECTION_OFFLOAD_STATE(%d)", int32(e))
+	}
+}
 
 // TCP_ESTATS_TYPE: https://learn.microsoft.com/windows/win32/api/tcpestats/ne-tcpestats-tcp_estats_type
 type TCP_ESTATS_TYPE int32
@@ -259,6 +710,35 @@ const (
 	TcpConnectionEstatsMaximum   TCP_ESTATS_TYPE = 9
 )
 
+// String returns the TCP_ESTATS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TCP_ESTATS_TYPE) String() string {
+	switch e {
+	case TcpConnectionEstatsSynOpts:
+		return "TcpConnectionEstatsSynOpts"
+	case TcpConnectionEstatsData:
+		return "TcpConnectionEstatsData"
+	case TcpConnectionEstatsSndCong:
+		return "TcpConnectionEstatsSndCong"
+	case TcpConnectionEstatsPath:
+		return "TcpConnectionEstatsPath"
+	case TcpConnectionEstatsSendBuff:
+		return "TcpConnectionEstatsSendBuff"
+	case TcpConnectionEstatsRec:
+		return "TcpConnectionEstatsRec"
+	case TcpConnectionEstatsObsRec:
+		return "TcpConnectionEstatsObsRec"
+	case TcpConnectionEstatsBandwidth:
+		return "TcpConnectionEstatsBandwidth"
+	case TcpConnectionEstatsFineRtt:
+		return "TcpConnectionEstatsFineRtt"
+	case TcpConnectionEstatsMaximum:
+		return "TcpConnectionEstatsMaximum"
+	default:
+		return fmt.Sprintf("TCP_ESTATS_TYPE(%d)", int32(e))
+	}
+}
+
 type TCP_RTO_ALGORITHM int32
 
 const (
@@ -271,6 +751,23 @@ const (
 	MIB_TCP_RTO_RSRE        TCP_RTO_ALGORITHM = 3
 	MIB_TCP_RTO_VANJ        TCP_RTO_ALGORITHM = 4
 )
+
+// String returns the TCP_RTO_ALGORITHM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TCP_RTO_ALGORITHM) String() string {
+	switch e {
+	case TcpRtoAlgorithmOther:
+		return "TcpRtoAlgorithmOther"
+	case TcpRtoAlgorithmConstant:
+		return "TcpRtoAlgorithmConstant"
+	case TcpRtoAlgorithmRsre:
+		return "TcpRtoAlgorithmRsre"
+	case TcpRtoAlgorithmVanj:
+		return "TcpRtoAlgorithmVanj"
+	default:
+		return fmt.Sprintf("TCP_RTO_ALGORITHM(%d)", int32(e))
+	}
+}
 
 // TCP_SOFT_ERROR: https://learn.microsoft.com/windows/win32/api/tcpestats/ne-tcpestats-tcp_soft_error
 type TCP_SOFT_ERROR int32
@@ -288,6 +785,35 @@ const (
 	TcpErrorMaxSoftError      TCP_SOFT_ERROR = 9
 )
 
+// String returns the TCP_SOFT_ERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TCP_SOFT_ERROR) String() string {
+	switch e {
+	case TcpErrorNone:
+		return "TcpErrorNone"
+	case TcpErrorBelowDataWindow:
+		return "TcpErrorBelowDataWindow"
+	case TcpErrorAboveDataWindow:
+		return "TcpErrorAboveDataWindow"
+	case TcpErrorBelowAckWindow:
+		return "TcpErrorBelowAckWindow"
+	case TcpErrorAboveAckWindow:
+		return "TcpErrorAboveAckWindow"
+	case TcpErrorBelowTsWindow:
+		return "TcpErrorBelowTsWindow"
+	case TcpErrorAboveTsWindow:
+		return "TcpErrorAboveTsWindow"
+	case TcpErrorDataChecksumError:
+		return "TcpErrorDataChecksumError"
+	case TcpErrorDataLengthError:
+		return "TcpErrorDataLengthError"
+	case TcpErrorMaxSoftError:
+		return "TcpErrorMaxSoftError"
+	default:
+		return fmt.Sprintf("TCP_SOFT_ERROR(%d)", int32(e))
+	}
+}
+
 // TCP_TABLE_CLASS: https://learn.microsoft.com/windows/win32/api/iprtrmib/ne-iprtrmib-tcp_table_class
 type TCP_TABLE_CLASS int32
 
@@ -303,6 +829,33 @@ const (
 	TCP_TABLE_OWNER_MODULE_ALL         TCP_TABLE_CLASS = 8
 )
 
+// String returns the TCP_TABLE_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TCP_TABLE_CLASS) String() string {
+	switch e {
+	case TCP_TABLE_BASIC_LISTENER:
+		return "TCP_TABLE_BASIC_LISTENER"
+	case TCP_TABLE_BASIC_CONNECTIONS:
+		return "TCP_TABLE_BASIC_CONNECTIONS"
+	case TCP_TABLE_BASIC_ALL:
+		return "TCP_TABLE_BASIC_ALL"
+	case TCP_TABLE_OWNER_PID_LISTENER:
+		return "TCP_TABLE_OWNER_PID_LISTENER"
+	case TCP_TABLE_OWNER_PID_CONNECTIONS:
+		return "TCP_TABLE_OWNER_PID_CONNECTIONS"
+	case TCP_TABLE_OWNER_PID_ALL:
+		return "TCP_TABLE_OWNER_PID_ALL"
+	case TCP_TABLE_OWNER_MODULE_LISTENER:
+		return "TCP_TABLE_OWNER_MODULE_LISTENER"
+	case TCP_TABLE_OWNER_MODULE_CONNECTIONS:
+		return "TCP_TABLE_OWNER_MODULE_CONNECTIONS"
+	case TCP_TABLE_OWNER_MODULE_ALL:
+		return "TCP_TABLE_OWNER_MODULE_ALL"
+	default:
+		return fmt.Sprintf("TCP_TABLE_CLASS(%d)", int32(e))
+	}
+}
+
 // UDP_TABLE_CLASS: https://learn.microsoft.com/windows/win32/api/iprtrmib/ne-iprtrmib-udp_table_class
 type UDP_TABLE_CLASS int32
 
@@ -311,3 +864,18 @@ const (
 	UDP_TABLE_OWNER_PID    UDP_TABLE_CLASS = 1
 	UDP_TABLE_OWNER_MODULE UDP_TABLE_CLASS = 2
 )
+
+// String returns the UDP_TABLE_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDP_TABLE_CLASS) String() string {
+	switch e {
+	case UDP_TABLE_BASIC:
+		return "UDP_TABLE_BASIC"
+	case UDP_TABLE_OWNER_PID:
+		return "UDP_TABLE_OWNER_PID"
+	case UDP_TABLE_OWNER_MODULE:
+		return "UDP_TABLE_OWNER_MODULE"
+	default:
+		return fmt.Sprintf("UDP_TABLE_CLASS(%d)", int32(e))
+	}
+}

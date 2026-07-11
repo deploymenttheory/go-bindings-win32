@@ -4,7 +4,13 @@
 
 package dxgi
 
+import (
+	"fmt"
+	"strings"
+)
+
 // DXGI_ADAPTER_FLAG: https://learn.microsoft.com/windows/win32/api/dxgi/ne-dxgi-dxgi_adapter_flag
+// Bitmask — values may be combined with |.
 type DXGI_ADAPTER_FLAG int32
 
 const (
@@ -13,7 +19,24 @@ const (
 	DXGI_ADAPTER_FLAG_SOFTWARE DXGI_ADAPTER_FLAG = 2
 )
 
+// String returns the DXGI_ADAPTER_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_ADAPTER_FLAG) String() string {
+	var parts []string
+	if e&DXGI_ADAPTER_FLAG_REMOTE != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG_REMOTE")
+	}
+	if e&DXGI_ADAPTER_FLAG_SOFTWARE != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG_SOFTWARE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_ADAPTER_FLAG3: https://learn.microsoft.com/windows/win32/api/dxgi1_6/ne-dxgi1_6-dxgi_adapter_flag3
+// Bitmask — values may be combined with |.
 type DXGI_ADAPTER_FLAG3 int32
 
 const (
@@ -26,6 +49,34 @@ const (
 	DXGI_ADAPTER_FLAG3_KEYED_MUTEX_CONFORMANCE      DXGI_ADAPTER_FLAG3 = 32
 )
 
+// String returns the DXGI_ADAPTER_FLAG3 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_ADAPTER_FLAG3) String() string {
+	var parts []string
+	if e&DXGI_ADAPTER_FLAG3_REMOTE != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG3_REMOTE")
+	}
+	if e&DXGI_ADAPTER_FLAG3_SOFTWARE != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG3_SOFTWARE")
+	}
+	if e&DXGI_ADAPTER_FLAG3_ACG_COMPATIBLE != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG3_ACG_COMPATIBLE")
+	}
+	if e&DXGI_ADAPTER_FLAG3_SUPPORT_MONITORED_FENCES != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG3_SUPPORT_MONITORED_FENCES")
+	}
+	if e&DXGI_ADAPTER_FLAG3_SUPPORT_NON_MONITORED_FENCES != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG3_SUPPORT_NON_MONITORED_FENCES")
+	}
+	if e&DXGI_ADAPTER_FLAG3_KEYED_MUTEX_CONFORMANCE != 0 {
+		parts = append(parts, "DXGI_ADAPTER_FLAG3_KEYED_MUTEX_CONFORMANCE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_COMPUTE_PREEMPTION_GRANULARITY: https://learn.microsoft.com/windows/win32/api/dxgi1_2/ne-dxgi1_2-dxgi_compute_preemption_granularity
 type DXGI_COMPUTE_PREEMPTION_GRANULARITY int32
 
@@ -37,13 +88,47 @@ const (
 	DXGI_COMPUTE_PREEMPTION_INSTRUCTION_BOUNDARY  DXGI_COMPUTE_PREEMPTION_GRANULARITY = 4
 )
 
+// String returns the DXGI_COMPUTE_PREEMPTION_GRANULARITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_COMPUTE_PREEMPTION_GRANULARITY) String() string {
+	switch e {
+	case DXGI_COMPUTE_PREEMPTION_DMA_BUFFER_BOUNDARY:
+		return "DXGI_COMPUTE_PREEMPTION_DMA_BUFFER_BOUNDARY"
+	case DXGI_COMPUTE_PREEMPTION_DISPATCH_BOUNDARY:
+		return "DXGI_COMPUTE_PREEMPTION_DISPATCH_BOUNDARY"
+	case DXGI_COMPUTE_PREEMPTION_THREAD_GROUP_BOUNDARY:
+		return "DXGI_COMPUTE_PREEMPTION_THREAD_GROUP_BOUNDARY"
+	case DXGI_COMPUTE_PREEMPTION_THREAD_BOUNDARY:
+		return "DXGI_COMPUTE_PREEMPTION_THREAD_BOUNDARY"
+	case DXGI_COMPUTE_PREEMPTION_INSTRUCTION_BOUNDARY:
+		return "DXGI_COMPUTE_PREEMPTION_INSTRUCTION_BOUNDARY"
+	default:
+		return fmt.Sprintf("DXGI_COMPUTE_PREEMPTION_GRANULARITY(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DXGI_CREATE_FACTORY_FLAGS uint32
 
 const (
 	DXGI_CREATE_FACTORY_DEBUG DXGI_CREATE_FACTORY_FLAGS = 1
 )
 
+// String returns the DXGI_CREATE_FACTORY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_CREATE_FACTORY_FLAGS) String() string {
+	var parts []string
+	if e&DXGI_CREATE_FACTORY_DEBUG != 0 {
+		parts = append(parts, "DXGI_CREATE_FACTORY_DEBUG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_DEBUG_RLO_FLAGS: https://learn.microsoft.com/windows/win32/api/dxgidebug/ne-dxgidebug-dxgi_debug_rlo_flags
+// Bitmask — values may be combined with |.
 type DXGI_DEBUG_RLO_FLAGS int32
 
 const (
@@ -53,7 +138,30 @@ const (
 	DXGI_DEBUG_RLO_ALL             DXGI_DEBUG_RLO_FLAGS = 7
 )
 
+// String returns the DXGI_DEBUG_RLO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_DEBUG_RLO_FLAGS) String() string {
+	var parts []string
+	if e&DXGI_DEBUG_RLO_SUMMARY != 0 {
+		parts = append(parts, "DXGI_DEBUG_RLO_SUMMARY")
+	}
+	if e&DXGI_DEBUG_RLO_DETAIL != 0 {
+		parts = append(parts, "DXGI_DEBUG_RLO_DETAIL")
+	}
+	if e&DXGI_DEBUG_RLO_IGNORE_INTERNAL != 0 {
+		parts = append(parts, "DXGI_DEBUG_RLO_IGNORE_INTERNAL")
+	}
+	if e&DXGI_DEBUG_RLO_ALL != 0 {
+		parts = append(parts, "DXGI_DEBUG_RLO_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_ENUM_MODES: https://learn.microsoft.com/windows/win32/direct3ddxgi/dxgi-enum-modes
+// Bitmask — values may be combined with |.
 type DXGI_ENUM_MODES uint32
 
 const (
@@ -63,12 +171,45 @@ const (
 	DXGI_ENUM_MODES_DISABLED_STEREO DXGI_ENUM_MODES = 8
 )
 
+// String returns the DXGI_ENUM_MODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_ENUM_MODES) String() string {
+	var parts []string
+	if e&DXGI_ENUM_MODES_INTERLACED != 0 {
+		parts = append(parts, "DXGI_ENUM_MODES_INTERLACED")
+	}
+	if e&DXGI_ENUM_MODES_SCALING != 0 {
+		parts = append(parts, "DXGI_ENUM_MODES_SCALING")
+	}
+	if e&DXGI_ENUM_MODES_STEREO != 0 {
+		parts = append(parts, "DXGI_ENUM_MODES_STEREO")
+	}
+	if e&DXGI_ENUM_MODES_DISABLED_STEREO != 0 {
+		parts = append(parts, "DXGI_ENUM_MODES_DISABLED_STEREO")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_FEATURE: https://learn.microsoft.com/windows/win32/api/dxgi1_5/ne-dxgi1_5-dxgi_feature
 type DXGI_FEATURE int32
 
 const (
 	DXGI_FEATURE_PRESENT_ALLOW_TEARING DXGI_FEATURE = 0
 )
+
+// String returns the DXGI_FEATURE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_FEATURE) String() string {
+	switch e {
+	case DXGI_FEATURE_PRESENT_ALLOW_TEARING:
+		return "DXGI_FEATURE_PRESENT_ALLOW_TEARING"
+	default:
+		return fmt.Sprintf("DXGI_FEATURE(%d)", int32(e))
+	}
+}
 
 // DXGI_FRAME_PRESENTATION_MODE: https://learn.microsoft.com/windows/win32/api/dxgi1_3/ne-dxgi1_3-dxgi_frame_presentation_mode
 type DXGI_FRAME_PRESENTATION_MODE int32
@@ -80,6 +221,23 @@ const (
 	DXGI_FRAME_PRESENTATION_MODE_COMPOSITION_FAILURE DXGI_FRAME_PRESENTATION_MODE = 3
 )
 
+// String returns the DXGI_FRAME_PRESENTATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_FRAME_PRESENTATION_MODE) String() string {
+	switch e {
+	case DXGI_FRAME_PRESENTATION_MODE_COMPOSED:
+		return "DXGI_FRAME_PRESENTATION_MODE_COMPOSED"
+	case DXGI_FRAME_PRESENTATION_MODE_OVERLAY:
+		return "DXGI_FRAME_PRESENTATION_MODE_OVERLAY"
+	case DXGI_FRAME_PRESENTATION_MODE_NONE:
+		return "DXGI_FRAME_PRESENTATION_MODE_NONE"
+	case DXGI_FRAME_PRESENTATION_MODE_COMPOSITION_FAILURE:
+		return "DXGI_FRAME_PRESENTATION_MODE_COMPOSITION_FAILURE"
+	default:
+		return fmt.Sprintf("DXGI_FRAME_PRESENTATION_MODE(%d)", int32(e))
+	}
+}
+
 // DXGI_GPU_PREFERENCE: https://learn.microsoft.com/windows/win32/api/dxgi1_6/ne-dxgi1_6-dxgi_gpu_preference
 type DXGI_GPU_PREFERENCE int32
 
@@ -88,6 +246,21 @@ const (
 	DXGI_GPU_PREFERENCE_MINIMUM_POWER    DXGI_GPU_PREFERENCE = 1
 	DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE DXGI_GPU_PREFERENCE = 2
 )
+
+// String returns the DXGI_GPU_PREFERENCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_GPU_PREFERENCE) String() string {
+	switch e {
+	case DXGI_GPU_PREFERENCE_UNSPECIFIED:
+		return "DXGI_GPU_PREFERENCE_UNSPECIFIED"
+	case DXGI_GPU_PREFERENCE_MINIMUM_POWER:
+		return "DXGI_GPU_PREFERENCE_MINIMUM_POWER"
+	case DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE:
+		return "DXGI_GPU_PREFERENCE_HIGH_PERFORMANCE"
+	default:
+		return fmt.Sprintf("DXGI_GPU_PREFERENCE(%d)", int32(e))
+	}
+}
 
 // DXGI_GRAPHICS_PREEMPTION_GRANULARITY: https://learn.microsoft.com/windows/win32/api/dxgi1_2/ne-dxgi1_2-dxgi_graphics_preemption_granularity
 type DXGI_GRAPHICS_PREEMPTION_GRANULARITY int32
@@ -100,7 +273,27 @@ const (
 	DXGI_GRAPHICS_PREEMPTION_INSTRUCTION_BOUNDARY DXGI_GRAPHICS_PREEMPTION_GRANULARITY = 4
 )
 
+// String returns the DXGI_GRAPHICS_PREEMPTION_GRANULARITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_GRAPHICS_PREEMPTION_GRANULARITY) String() string {
+	switch e {
+	case DXGI_GRAPHICS_PREEMPTION_DMA_BUFFER_BOUNDARY:
+		return "DXGI_GRAPHICS_PREEMPTION_DMA_BUFFER_BOUNDARY"
+	case DXGI_GRAPHICS_PREEMPTION_PRIMITIVE_BOUNDARY:
+		return "DXGI_GRAPHICS_PREEMPTION_PRIMITIVE_BOUNDARY"
+	case DXGI_GRAPHICS_PREEMPTION_TRIANGLE_BOUNDARY:
+		return "DXGI_GRAPHICS_PREEMPTION_TRIANGLE_BOUNDARY"
+	case DXGI_GRAPHICS_PREEMPTION_PIXEL_BOUNDARY:
+		return "DXGI_GRAPHICS_PREEMPTION_PIXEL_BOUNDARY"
+	case DXGI_GRAPHICS_PREEMPTION_INSTRUCTION_BOUNDARY:
+		return "DXGI_GRAPHICS_PREEMPTION_INSTRUCTION_BOUNDARY"
+	default:
+		return fmt.Sprintf("DXGI_GRAPHICS_PREEMPTION_GRANULARITY(%d)", int32(e))
+	}
+}
+
 // DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS: https://learn.microsoft.com/windows/win32/api/dxgi1_6/ne-dxgi1_6-dxgi_hardware_composition_support_flags
+// Bitmask — values may be combined with |.
 type DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS int32
 
 const (
@@ -108,6 +301,25 @@ const (
 	DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_WINDOWED         DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS = 2
 	DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_CURSOR_STRETCHED DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS = 4
 )
+
+// String returns the DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS) String() string {
+	var parts []string
+	if e&DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_FULLSCREEN != 0 {
+		parts = append(parts, "DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_FULLSCREEN")
+	}
+	if e&DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_WINDOWED != 0 {
+		parts = append(parts, "DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_WINDOWED")
+	}
+	if e&DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_CURSOR_STRETCHED != 0 {
+		parts = append(parts, "DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAG_CURSOR_STRETCHED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DXGI_HDR_METADATA_TYPE: https://learn.microsoft.com/windows/win32/api/dxgi1_5/ne-dxgi1_5-dxgi_hdr_metadata_type
 type DXGI_HDR_METADATA_TYPE int32
@@ -117,6 +329,21 @@ const (
 	DXGI_HDR_METADATA_TYPE_HDR10     DXGI_HDR_METADATA_TYPE = 1
 	DXGI_HDR_METADATA_TYPE_HDR10PLUS DXGI_HDR_METADATA_TYPE = 2
 )
+
+// String returns the DXGI_HDR_METADATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_HDR_METADATA_TYPE) String() string {
+	switch e {
+	case DXGI_HDR_METADATA_TYPE_NONE:
+		return "DXGI_HDR_METADATA_TYPE_NONE"
+	case DXGI_HDR_METADATA_TYPE_HDR10:
+		return "DXGI_HDR_METADATA_TYPE_HDR10"
+	case DXGI_HDR_METADATA_TYPE_HDR10PLUS:
+		return "DXGI_HDR_METADATA_TYPE_HDR10PLUS"
+	default:
+		return fmt.Sprintf("DXGI_HDR_METADATA_TYPE(%d)", int32(e))
+	}
+}
 
 // DXGI_INFO_QUEUE_MESSAGE_CATEGORY: https://learn.microsoft.com/windows/win32/api/dxgidebug/ne-dxgidebug-dxgi_info_queue_message_category
 type DXGI_INFO_QUEUE_MESSAGE_CATEGORY int32
@@ -135,6 +362,37 @@ const (
 	DXGI_INFO_QUEUE_MESSAGE_CATEGORY_SHADER                DXGI_INFO_QUEUE_MESSAGE_CATEGORY = 10
 )
 
+// String returns the DXGI_INFO_QUEUE_MESSAGE_CATEGORY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_INFO_QUEUE_MESSAGE_CATEGORY) String() string {
+	switch e {
+	case DXGI_INFO_QUEUE_MESSAGE_CATEGORY_UNKNOWN:
+		return "DXGI_INFO_QUEUE_MESSAGE_CATEGORY_UNKNOWN"
+	case DXGI_INFO_QUEUE_MESSAGE_CATEGORY_MISCELLANEOUS:
+		return "DXGI_INFO_QUEUE_MESSAGE_CATEGORY_MISCELLANEOUS"
+	case DXGI_INFO_QUEUE_MESSAGE_CATEGORY_INITIALIZATION:
+		return "DXGI_INFO_QUEUE_MESSAGE_CATEGORY_INITIALIZATION"
+	case DXGI_INFO_QUEUE_MESSAGE_CATEGORY_CLEANUP:
+		return "DXGI_INFO_QUEUE_MESSAGE_CATEGORY_CLEANUP"
+	case DXGI_INFO_QUEUE_MESSAGE_CATEGORY_COMPILATION:
+		return "DXGI_INFO_QUEUE_MESSAGE_CATEGORY_COMPILATION"
+	case DXGI_INFO_QUEUE_MESSAGE_CATEGORY_STATE_CREATION:
+		return "DXGI_INFO_QUEUE_MESSAGE_CATEGORY_STATE_CREATION"
+	case DXGI_INFO_QUEUE_MESSAGE_CATEGORY_STATE_SETTING:
+		return "DXGI_INFO_QUEUE_MESSAGE_CATEGORY_STATE_SETTING"
+	case DXGI_INFO_QUEUE_MESSAGE_CATEGORY_STATE_GETTING:
+		return "DXGI_INFO_QUEUE_MESSAGE_CATEGORY_STATE_GETTING"
+	case DXGI_INFO_QUEUE_MESSAGE_CATEGORY_RESOURCE_MANIPULATION:
+		return "DXGI_INFO_QUEUE_MESSAGE_CATEGORY_RESOURCE_MANIPULATION"
+	case DXGI_INFO_QUEUE_MESSAGE_CATEGORY_EXECUTION:
+		return "DXGI_INFO_QUEUE_MESSAGE_CATEGORY_EXECUTION"
+	case DXGI_INFO_QUEUE_MESSAGE_CATEGORY_SHADER:
+		return "DXGI_INFO_QUEUE_MESSAGE_CATEGORY_SHADER"
+	default:
+		return fmt.Sprintf("DXGI_INFO_QUEUE_MESSAGE_CATEGORY(%d)", int32(e))
+	}
+}
+
 // DXGI_INFO_QUEUE_MESSAGE_SEVERITY: https://learn.microsoft.com/windows/win32/api/dxgidebug/ne-dxgidebug-dxgi_info_queue_message_severity
 type DXGI_INFO_QUEUE_MESSAGE_SEVERITY int32
 
@@ -146,6 +404,26 @@ const (
 	DXGI_INFO_QUEUE_MESSAGE_SEVERITY_MESSAGE    DXGI_INFO_QUEUE_MESSAGE_SEVERITY = 4
 )
 
+// String returns the DXGI_INFO_QUEUE_MESSAGE_SEVERITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_INFO_QUEUE_MESSAGE_SEVERITY) String() string {
+	switch e {
+	case DXGI_INFO_QUEUE_MESSAGE_SEVERITY_CORRUPTION:
+		return "DXGI_INFO_QUEUE_MESSAGE_SEVERITY_CORRUPTION"
+	case DXGI_INFO_QUEUE_MESSAGE_SEVERITY_ERROR:
+		return "DXGI_INFO_QUEUE_MESSAGE_SEVERITY_ERROR"
+	case DXGI_INFO_QUEUE_MESSAGE_SEVERITY_WARNING:
+		return "DXGI_INFO_QUEUE_MESSAGE_SEVERITY_WARNING"
+	case DXGI_INFO_QUEUE_MESSAGE_SEVERITY_INFO:
+		return "DXGI_INFO_QUEUE_MESSAGE_SEVERITY_INFO"
+	case DXGI_INFO_QUEUE_MESSAGE_SEVERITY_MESSAGE:
+		return "DXGI_INFO_QUEUE_MESSAGE_SEVERITY_MESSAGE"
+	default:
+		return fmt.Sprintf("DXGI_INFO_QUEUE_MESSAGE_SEVERITY(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DXGI_MAP_FLAGS uint32
 
 const (
@@ -153,6 +431,25 @@ const (
 	DXGI_MAP_WRITE   DXGI_MAP_FLAGS = 2
 	DXGI_MAP_DISCARD DXGI_MAP_FLAGS = 4
 )
+
+// String returns the DXGI_MAP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_MAP_FLAGS) String() string {
+	var parts []string
+	if e&DXGI_MAP_READ != 0 {
+		parts = append(parts, "DXGI_MAP_READ")
+	}
+	if e&DXGI_MAP_WRITE != 0 {
+		parts = append(parts, "DXGI_MAP_WRITE")
+	}
+	if e&DXGI_MAP_DISCARD != 0 {
+		parts = append(parts, "DXGI_MAP_DISCARD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DXGI_MEMORY_SEGMENT_GROUP: https://learn.microsoft.com/windows/win32/api/dxgi1_4/ne-dxgi1_4-dxgi_memory_segment_group
 type DXGI_MEMORY_SEGMENT_GROUP int32
@@ -162,7 +459,21 @@ const (
 	DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL DXGI_MEMORY_SEGMENT_GROUP = 1
 )
 
+// String returns the DXGI_MEMORY_SEGMENT_GROUP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_MEMORY_SEGMENT_GROUP) String() string {
+	switch e {
+	case DXGI_MEMORY_SEGMENT_GROUP_LOCAL:
+		return "DXGI_MEMORY_SEGMENT_GROUP_LOCAL"
+	case DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL:
+		return "DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL"
+	default:
+		return fmt.Sprintf("DXGI_MEMORY_SEGMENT_GROUP(%d)", int32(e))
+	}
+}
+
 // DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS: https://learn.microsoft.com/windows/win32/api/dxgi1_3/ne-dxgi1_3-dxgi_multiplane_overlay_ycbcr_flags
+// Bitmask — values may be combined with |.
 type DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS int32
 
 const (
@@ -171,6 +482,26 @@ const (
 	DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_xvYCC         DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS = 4
 )
 
+// String returns the DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS) String() string {
+	var parts []string
+	if e&DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_NOMINAL_RANGE != 0 {
+		parts = append(parts, "DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_NOMINAL_RANGE")
+	}
+	if e&DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_BT709 != 0 {
+		parts = append(parts, "DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_BT709")
+	}
+	if e&DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_xvYCC != 0 {
+		parts = append(parts, "DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_xvYCC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DXGI_MWA_FLAGS uint32
 
 const (
@@ -179,6 +510,28 @@ const (
 	DXGI_MWA_NO_PRINT_SCREEN   DXGI_MWA_FLAGS = 4
 	DXGI_MWA_VALID             DXGI_MWA_FLAGS = 7
 )
+
+// String returns the DXGI_MWA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_MWA_FLAGS) String() string {
+	var parts []string
+	if e&DXGI_MWA_NO_WINDOW_CHANGES != 0 {
+		parts = append(parts, "DXGI_MWA_NO_WINDOW_CHANGES")
+	}
+	if e&DXGI_MWA_NO_ALT_ENTER != 0 {
+		parts = append(parts, "DXGI_MWA_NO_ALT_ENTER")
+	}
+	if e&DXGI_MWA_NO_PRINT_SCREEN != 0 {
+		parts = append(parts, "DXGI_MWA_NO_PRINT_SCREEN")
+	}
+	if e&DXGI_MWA_VALID != 0 {
+		parts = append(parts, "DXGI_MWA_VALID")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type DXGI_Message_Id int32
 
@@ -516,12 +869,697 @@ const (
 	DXGI_MSG_Phone_IDXGISwapChain_GetBackgroundColor_FlipSequentialRequired                                             DXGI_Message_Id = 1031
 )
 
+// String returns the DXGI_Message_Id constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_Message_Id) String() string {
+	switch e {
+	case DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_InvalidOutputWindow:
+		return "DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_InvalidOutputWindow"
+	case DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_BufferWidthInferred:
+		return "DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_BufferWidthInferred"
+	case DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_BufferHeightInferred:
+		return "DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_BufferHeightInferred"
+	case DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_NoScanoutFlagChanged:
+		return "DXGI_MSG_IDXGISwapChain_CreationOrResizeBuffers_NoScanoutFlagChanged"
+	case DXGI_MSG_IDXGISwapChain_Creation_MaxBufferCountExceeded:
+		return "DXGI_MSG_IDXGISwapChain_Creation_MaxBufferCountExceeded"
+	case DXGI_MSG_IDXGISwapChain_Creation_TooFewBuffers:
+		return "DXGI_MSG_IDXGISwapChain_Creation_TooFewBuffers"
+	case DXGI_MSG_IDXGISwapChain_Creation_NoOutputWindow:
+		return "DXGI_MSG_IDXGISwapChain_Creation_NoOutputWindow"
+	case DXGI_MSG_IDXGISwapChain_Destruction_OtherMethodsCalled:
+		return "DXGI_MSG_IDXGISwapChain_Destruction_OtherMethodsCalled"
+	case DXGI_MSG_IDXGISwapChain_GetDesc_pDescIsNULL:
+		return "DXGI_MSG_IDXGISwapChain_GetDesc_pDescIsNULL"
+	case DXGI_MSG_IDXGISwapChain_GetBuffer_ppSurfaceIsNULL:
+		return "DXGI_MSG_IDXGISwapChain_GetBuffer_ppSurfaceIsNULL"
+	case DXGI_MSG_IDXGISwapChain_GetBuffer_NoAllocatedBuffers:
+		return "DXGI_MSG_IDXGISwapChain_GetBuffer_NoAllocatedBuffers"
+	case DXGI_MSG_IDXGISwapChain_GetBuffer_iBufferMustBeZero:
+		return "DXGI_MSG_IDXGISwapChain_GetBuffer_iBufferMustBeZero"
+	case DXGI_MSG_IDXGISwapChain_GetBuffer_iBufferOOB:
+		return "DXGI_MSG_IDXGISwapChain_GetBuffer_iBufferOOB"
+	case DXGI_MSG_IDXGISwapChain_GetContainingOutput_ppOutputIsNULL:
+		return "DXGI_MSG_IDXGISwapChain_GetContainingOutput_ppOutputIsNULL"
+	case DXGI_MSG_IDXGISwapChain_Present_SyncIntervalOOB:
+		return "DXGI_MSG_IDXGISwapChain_Present_SyncIntervalOOB"
+	case DXGI_MSG_IDXGISwapChain_Present_InvalidNonPreRotatedFlag:
+		return "DXGI_MSG_IDXGISwapChain_Present_InvalidNonPreRotatedFlag"
+	case DXGI_MSG_IDXGISwapChain_Present_NoAllocatedBuffers:
+		return "DXGI_MSG_IDXGISwapChain_Present_NoAllocatedBuffers"
+	case DXGI_MSG_IDXGISwapChain_Present_GetDXGIAdapterFailed:
+		return "DXGI_MSG_IDXGISwapChain_Present_GetDXGIAdapterFailed"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_BufferCountOOB:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_BufferCountOOB"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_UnreleasedReferences:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_UnreleasedReferences"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidSwapChainFlag:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidSwapChainFlag"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidNonPreRotatedFlag:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidNonPreRotatedFlag"
+	case DXGI_MSG_IDXGISwapChain_ResizeTarget_RefreshRateDivideByZero:
+		return "DXGI_MSG_IDXGISwapChain_ResizeTarget_RefreshRateDivideByZero"
+	case DXGI_MSG_IDXGISwapChain_SetFullscreenState_InvalidTarget:
+		return "DXGI_MSG_IDXGISwapChain_SetFullscreenState_InvalidTarget"
+	case DXGI_MSG_IDXGISwapChain_GetFrameStatistics_pStatsIsNULL:
+		return "DXGI_MSG_IDXGISwapChain_GetFrameStatistics_pStatsIsNULL"
+	case DXGI_MSG_IDXGISwapChain_GetLastPresentCount_pLastPresentCountIsNULL:
+		return "DXGI_MSG_IDXGISwapChain_GetLastPresentCount_pLastPresentCountIsNULL"
+	case DXGI_MSG_IDXGISwapChain_SetFullscreenState_RemoteNotSupported:
+		return "DXGI_MSG_IDXGISwapChain_SetFullscreenState_RemoteNotSupported"
+	case DXGI_MSG_IDXGIOutput_TakeOwnership_FailedToAcquireFullscreenMutex:
+		return "DXGI_MSG_IDXGIOutput_TakeOwnership_FailedToAcquireFullscreenMutex"
+	case DXGI_MSG_IDXGIFactory_CreateSoftwareAdapter_ppAdapterInterfaceIsNULL:
+		return "DXGI_MSG_IDXGIFactory_CreateSoftwareAdapter_ppAdapterInterfaceIsNULL"
+	case DXGI_MSG_IDXGIFactory_EnumAdapters_ppAdapterInterfaceIsNULL:
+		return "DXGI_MSG_IDXGIFactory_EnumAdapters_ppAdapterInterfaceIsNULL"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_ppSwapChainIsNULL:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_ppSwapChainIsNULL"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_pDescIsNULL:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_pDescIsNULL"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_UnknownSwapEffect:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_UnknownSwapEffect"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidFlags:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidFlags"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_NonPreRotatedFlagAndWindowed:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_NonPreRotatedFlagAndWindowed"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_NullDeviceInterface:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_NullDeviceInterface"
+	case DXGI_MSG_IDXGIFactory_GetWindowAssociation_phWndIsNULL:
+		return "DXGI_MSG_IDXGIFactory_GetWindowAssociation_phWndIsNULL"
+	case DXGI_MSG_IDXGIFactory_MakeWindowAssociation_InvalidFlags:
+		return "DXGI_MSG_IDXGIFactory_MakeWindowAssociation_InvalidFlags"
+	case DXGI_MSG_IDXGISurface_Map_InvalidSurface:
+		return "DXGI_MSG_IDXGISurface_Map_InvalidSurface"
+	case DXGI_MSG_IDXGISurface_Map_FlagsSetToZero:
+		return "DXGI_MSG_IDXGISurface_Map_FlagsSetToZero"
+	case DXGI_MSG_IDXGISurface_Map_DiscardAndReadFlagSet:
+		return "DXGI_MSG_IDXGISurface_Map_DiscardAndReadFlagSet"
+	case DXGI_MSG_IDXGISurface_Map_DiscardButNotWriteFlagSet:
+		return "DXGI_MSG_IDXGISurface_Map_DiscardButNotWriteFlagSet"
+	case DXGI_MSG_IDXGISurface_Map_NoCPUAccess:
+		return "DXGI_MSG_IDXGISurface_Map_NoCPUAccess"
+	case DXGI_MSG_IDXGISurface_Map_ReadFlagSetButCPUAccessIsDynamic:
+		return "DXGI_MSG_IDXGISurface_Map_ReadFlagSetButCPUAccessIsDynamic"
+	case DXGI_MSG_IDXGISurface_Map_DiscardFlagSetButCPUAccessIsNotDynamic:
+		return "DXGI_MSG_IDXGISurface_Map_DiscardFlagSetButCPUAccessIsNotDynamic"
+	case DXGI_MSG_IDXGIOutput_GetDisplayModeList_pNumModesIsNULL:
+		return "DXGI_MSG_IDXGIOutput_GetDisplayModeList_pNumModesIsNULL"
+	case DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_ModeHasInvalidWidthOrHeight:
+		return "DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_ModeHasInvalidWidthOrHeight"
+	case DXGI_MSG_IDXGIOutput_GetCammaControlCapabilities_NoOwnerDevice:
+		return "DXGI_MSG_IDXGIOutput_GetCammaControlCapabilities_NoOwnerDevice"
+	case DXGI_MSG_IDXGIOutput_TakeOwnership_pDeviceIsNULL:
+		return "DXGI_MSG_IDXGIOutput_TakeOwnership_pDeviceIsNULL"
+	case DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_NoOwnerDevice:
+		return "DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_NoOwnerDevice"
+	case DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_pDestinationIsNULL:
+		return "DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_pDestinationIsNULL"
+	case DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_MapOfDestinationFailed:
+		return "DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_MapOfDestinationFailed"
+	case DXGI_MSG_IDXGIOutput_GetFrameStatistics_NoOwnerDevice:
+		return "DXGI_MSG_IDXGIOutput_GetFrameStatistics_NoOwnerDevice"
+	case DXGI_MSG_IDXGIOutput_GetFrameStatistics_pStatsIsNULL:
+		return "DXGI_MSG_IDXGIOutput_GetFrameStatistics_pStatsIsNULL"
+	case DXGI_MSG_IDXGIOutput_SetGammaControl_NoOwnerDevice:
+		return "DXGI_MSG_IDXGIOutput_SetGammaControl_NoOwnerDevice"
+	case DXGI_MSG_IDXGIOutput_GetGammaControl_NoOwnerDevice:
+		return "DXGI_MSG_IDXGIOutput_GetGammaControl_NoOwnerDevice"
+	case DXGI_MSG_IDXGIOutput_GetGammaControl_NoGammaControls:
+		return "DXGI_MSG_IDXGIOutput_GetGammaControl_NoGammaControls"
+	case DXGI_MSG_IDXGIOutput_SetDisplaySurface_IDXGIResourceNotSupportedBypPrimary:
+		return "DXGI_MSG_IDXGIOutput_SetDisplaySurface_IDXGIResourceNotSupportedBypPrimary"
+	case DXGI_MSG_IDXGIOutput_SetDisplaySurface_pPrimaryIsInvalid:
+		return "DXGI_MSG_IDXGIOutput_SetDisplaySurface_pPrimaryIsInvalid"
+	case DXGI_MSG_IDXGIOutput_SetDisplaySurface_NoOwnerDevice:
+		return "DXGI_MSG_IDXGIOutput_SetDisplaySurface_NoOwnerDevice"
+	case DXGI_MSG_IDXGIOutput_TakeOwnership_RemoteDeviceNotSupported:
+		return "DXGI_MSG_IDXGIOutput_TakeOwnership_RemoteDeviceNotSupported"
+	case DXGI_MSG_IDXGIOutput_GetDisplayModeList_RemoteDeviceNotSupported:
+		return "DXGI_MSG_IDXGIOutput_GetDisplayModeList_RemoteDeviceNotSupported"
+	case DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_RemoteDeviceNotSupported:
+		return "DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_RemoteDeviceNotSupported"
+	case DXGI_MSG_IDXGIDevice_CreateSurface_InvalidParametersWithpSharedResource:
+		return "DXGI_MSG_IDXGIDevice_CreateSurface_InvalidParametersWithpSharedResource"
+	case DXGI_MSG_IDXGIObject_GetPrivateData_puiDataSizeIsNULL:
+		return "DXGI_MSG_IDXGIObject_GetPrivateData_puiDataSizeIsNULL"
+	case DXGI_MSG_IDXGISwapChain_Creation_InvalidOutputWindow:
+		return "DXGI_MSG_IDXGISwapChain_Creation_InvalidOutputWindow"
+	case DXGI_MSG_IDXGISwapChain_Release_SwapChainIsFullscreen:
+		return "DXGI_MSG_IDXGISwapChain_Release_SwapChainIsFullscreen"
+	case DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_InvalidTargetSurfaceFormat:
+		return "DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_InvalidTargetSurfaceFormat"
+	case DXGI_MSG_IDXGIFactory_CreateSoftwareAdapter_ModuleIsNULL:
+		return "DXGI_MSG_IDXGIFactory_CreateSoftwareAdapter_ModuleIsNULL"
+	case DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_IDXGIDeviceNotSupportedBypConcernedDevice:
+		return "DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_IDXGIDeviceNotSupportedBypConcernedDevice"
+	case DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_pModeToMatchOrpClosestMatchIsNULL:
+		return "DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_pModeToMatchOrpClosestMatchIsNULL"
+	case DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_ModeHasRefreshRateDenominatorZero:
+		return "DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_ModeHasRefreshRateDenominatorZero"
+	case DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_UnknownFormatIsInvalidForConfiguration:
+		return "DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_UnknownFormatIsInvalidForConfiguration"
+	case DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_InvalidDisplayModeScanlineOrdering:
+		return "DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_InvalidDisplayModeScanlineOrdering"
+	case DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_InvalidDisplayModeScaling:
+		return "DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_InvalidDisplayModeScaling"
+	case DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_InvalidDisplayModeFormatAndDeviceCombination:
+		return "DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_InvalidDisplayModeFormatAndDeviceCombination"
+	case DXGI_MSG_IDXGIFactory_Creation_CalledFromDllMain:
+		return "DXGI_MSG_IDXGIFactory_Creation_CalledFromDllMain"
+	case DXGI_MSG_IDXGISwapChain_SetFullscreenState_OutputNotOwnedBySwapChainDevice:
+		return "DXGI_MSG_IDXGISwapChain_SetFullscreenState_OutputNotOwnedBySwapChainDevice"
+	case DXGI_MSG_IDXGISwapChain_Creation_InvalidWindowStyle:
+		return "DXGI_MSG_IDXGISwapChain_Creation_InvalidWindowStyle"
+	case DXGI_MSG_IDXGISwapChain_GetFrameStatistics_UnsupportedStatistics:
+		return "DXGI_MSG_IDXGISwapChain_GetFrameStatistics_UnsupportedStatistics"
+	case DXGI_MSG_IDXGISwapChain_GetContainingOutput_SwapchainAdapterDoesNotControlOutput:
+		return "DXGI_MSG_IDXGISwapChain_GetContainingOutput_SwapchainAdapterDoesNotControlOutput"
+	case DXGI_MSG_IDXGIOutput_SetOrGetGammaControl_pArrayIsNULL:
+		return "DXGI_MSG_IDXGIOutput_SetOrGetGammaControl_pArrayIsNULL"
+	case DXGI_MSG_IDXGISwapChain_SetFullscreenState_FullscreenInvalidForChildWindows:
+		return "DXGI_MSG_IDXGISwapChain_SetFullscreenState_FullscreenInvalidForChildWindows"
+	case DXGI_MSG_IDXGIFactory_Release_CalledFromDllMain:
+		return "DXGI_MSG_IDXGIFactory_Release_CalledFromDllMain"
+	case DXGI_MSG_IDXGISwapChain_Present_UnreleasedHDC:
+		return "DXGI_MSG_IDXGISwapChain_Present_UnreleasedHDC"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_NonPreRotatedAndGDICompatibleFlags:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_NonPreRotatedAndGDICompatibleFlags"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_NonPreRotatedAndGDICompatibleFlags:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_NonPreRotatedAndGDICompatibleFlags"
+	case DXGI_MSG_IDXGISurface1_GetDC_pHdcIsNULL:
+		return "DXGI_MSG_IDXGISurface1_GetDC_pHdcIsNULL"
+	case DXGI_MSG_IDXGISurface1_GetDC_SurfaceNotTexture2D:
+		return "DXGI_MSG_IDXGISurface1_GetDC_SurfaceNotTexture2D"
+	case DXGI_MSG_IDXGISurface1_GetDC_GDICompatibleFlagNotSet:
+		return "DXGI_MSG_IDXGISurface1_GetDC_GDICompatibleFlagNotSet"
+	case DXGI_MSG_IDXGISurface1_GetDC_UnreleasedHDC:
+		return "DXGI_MSG_IDXGISurface1_GetDC_UnreleasedHDC"
+	case DXGI_MSG_IDXGISurface_Map_NoCPUAccess2:
+		return "DXGI_MSG_IDXGISurface_Map_NoCPUAccess2"
+	case DXGI_MSG_IDXGISurface1_ReleaseDC_GetDCNotCalled:
+		return "DXGI_MSG_IDXGISurface1_ReleaseDC_GetDCNotCalled"
+	case DXGI_MSG_IDXGISurface1_ReleaseDC_InvalidRectangleDimensions:
+		return "DXGI_MSG_IDXGISurface1_ReleaseDC_InvalidRectangleDimensions"
+	case DXGI_MSG_IDXGIOutput_TakeOwnership_RemoteOutputNotSupported:
+		return "DXGI_MSG_IDXGIOutput_TakeOwnership_RemoteOutputNotSupported"
+	case DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_RemoteOutputNotSupported:
+		return "DXGI_MSG_IDXGIOutput_FindClosestMatchingMode_RemoteOutputNotSupported"
+	case DXGI_MSG_IDXGIOutput_GetDisplayModeList_RemoteOutputNotSupported:
+		return "DXGI_MSG_IDXGIOutput_GetDisplayModeList_RemoteOutputNotSupported"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_pDeviceHasMismatchedDXGIFactory:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_pDeviceHasMismatchedDXGIFactory"
+	case DXGI_MSG_IDXGISwapChain_Present_NonOptimalFSConfiguration:
+		return "DXGI_MSG_IDXGISwapChain_Present_NonOptimalFSConfiguration"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_FlipSequentialNotSupportedOnD3D10:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_FlipSequentialNotSupportedOnD3D10"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_BufferCountOOBForFlipSequential:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_BufferCountOOBForFlipSequential"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidFormatForFlipSequential:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidFormatForFlipSequential"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_MultiSamplingNotSupportedForFlipSequential:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_MultiSamplingNotSupportedForFlipSequential"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_BufferCountOOBForFlipSequential:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_BufferCountOOBForFlipSequential"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidFormatForFlipSequential:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidFormatForFlipSequential"
+	case DXGI_MSG_IDXGISwapChain_Present_PartialPresentationBeforeStandardPresentation:
+		return "DXGI_MSG_IDXGISwapChain_Present_PartialPresentationBeforeStandardPresentation"
+	case DXGI_MSG_IDXGISwapChain_Present_FullscreenPartialPresentIsInvalid:
+		return "DXGI_MSG_IDXGISwapChain_Present_FullscreenPartialPresentIsInvalid"
+	case DXGI_MSG_IDXGISwapChain_Present_InvalidPresentTestOrDoNotSequenceFlag:
+		return "DXGI_MSG_IDXGISwapChain_Present_InvalidPresentTestOrDoNotSequenceFlag"
+	case DXGI_MSG_IDXGISwapChain_Present_ScrollInfoWithNoDirtyRectsSpecified:
+		return "DXGI_MSG_IDXGISwapChain_Present_ScrollInfoWithNoDirtyRectsSpecified"
+	case DXGI_MSG_IDXGISwapChain_Present_EmptyScrollRect:
+		return "DXGI_MSG_IDXGISwapChain_Present_EmptyScrollRect"
+	case DXGI_MSG_IDXGISwapChain_Present_ScrollRectOutOfBackbufferBounds:
+		return "DXGI_MSG_IDXGISwapChain_Present_ScrollRectOutOfBackbufferBounds"
+	case DXGI_MSG_IDXGISwapChain_Present_ScrollRectOutOfBackbufferBoundsWithOffset:
+		return "DXGI_MSG_IDXGISwapChain_Present_ScrollRectOutOfBackbufferBoundsWithOffset"
+	case DXGI_MSG_IDXGISwapChain_Present_EmptyDirtyRect:
+		return "DXGI_MSG_IDXGISwapChain_Present_EmptyDirtyRect"
+	case DXGI_MSG_IDXGISwapChain_Present_DirtyRectOutOfBackbufferBounds:
+		return "DXGI_MSG_IDXGISwapChain_Present_DirtyRectOutOfBackbufferBounds"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_UnsupportedBufferUsageFlags:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_UnsupportedBufferUsageFlags"
+	case DXGI_MSG_IDXGISwapChain_Present_DoNotSequenceFlagSetButPreviousBufferIsUndefined:
+		return "DXGI_MSG_IDXGISwapChain_Present_DoNotSequenceFlagSetButPreviousBufferIsUndefined"
+	case DXGI_MSG_IDXGISwapChain_Present_UnsupportedFlags:
+		return "DXGI_MSG_IDXGISwapChain_Present_UnsupportedFlags"
+	case DXGI_MSG_IDXGISwapChain_Present_FlipModelChainMustResizeOrCreateOnFSTransition:
+		return "DXGI_MSG_IDXGISwapChain_Present_FlipModelChainMustResizeOrCreateOnFSTransition"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_pRestrictToOutputFromOtherIDXGIFactory:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_pRestrictToOutputFromOtherIDXGIFactory"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_RestrictOutputNotSupportedOnAdapter:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_RestrictOutputNotSupportedOnAdapter"
+	case DXGI_MSG_IDXGISwapChain_Present_RestrictToOutputFlagSetButInvalidpRestrictToOutput:
+		return "DXGI_MSG_IDXGISwapChain_Present_RestrictToOutputFlagSetButInvalidpRestrictToOutput"
+	case DXGI_MSG_IDXGISwapChain_Present_RestrictToOutputFlagdWithFullscreen:
+		return "DXGI_MSG_IDXGISwapChain_Present_RestrictToOutputFlagdWithFullscreen"
+	case DXGI_MSG_IDXGISwapChain_Present_RestrictOutputFlagWithStaleSwapChain:
+		return "DXGI_MSG_IDXGISwapChain_Present_RestrictOutputFlagWithStaleSwapChain"
+	case DXGI_MSG_IDXGISwapChain_Present_OtherFlagsCausingInvalidPresentTestFlag:
+		return "DXGI_MSG_IDXGISwapChain_Present_OtherFlagsCausingInvalidPresentTestFlag"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_UnavailableInSession0:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_UnavailableInSession0"
+	case DXGI_MSG_IDXGIFactory_MakeWindowAssociation_UnavailableInSession0:
+		return "DXGI_MSG_IDXGIFactory_MakeWindowAssociation_UnavailableInSession0"
+	case DXGI_MSG_IDXGIFactory_GetWindowAssociation_UnavailableInSession0:
+		return "DXGI_MSG_IDXGIFactory_GetWindowAssociation_UnavailableInSession0"
+	case DXGI_MSG_IDXGIAdapter_EnumOutputs_UnavailableInSession0:
+		return "DXGI_MSG_IDXGIAdapter_EnumOutputs_UnavailableInSession0"
+	case DXGI_MSG_IDXGISwapChain_CreationOrSetFullscreenState_StereoDisabled:
+		return "DXGI_MSG_IDXGISwapChain_CreationOrSetFullscreenState_StereoDisabled"
+	case DXGI_MSG_IDXGIFactory2_UnregisterStatus_CookieNotFound:
+		return "DXGI_MSG_IDXGIFactory2_UnregisterStatus_CookieNotFound"
+	case DXGI_MSG_IDXGISwapChain_Present_ProtectedContentInWindowedModeWithoutFSOrOverlay:
+		return "DXGI_MSG_IDXGISwapChain_Present_ProtectedContentInWindowedModeWithoutFSOrOverlay"
+	case DXGI_MSG_IDXGISwapChain_Present_ProtectedContentInWindowedModeWithoutFlipSequential:
+		return "DXGI_MSG_IDXGISwapChain_Present_ProtectedContentInWindowedModeWithoutFlipSequential"
+	case DXGI_MSG_IDXGISwapChain_Present_ProtectedContentWithRDPDriver:
+		return "DXGI_MSG_IDXGISwapChain_Present_ProtectedContentWithRDPDriver"
+	case DXGI_MSG_IDXGISwapChain_Present_ProtectedContentInWindowedModeWithDWMOffOrInvalidDisplayAffinity:
+		return "DXGI_MSG_IDXGISwapChain_Present_ProtectedContentInWindowedModeWithDWMOffOrInvalidDisplayAffinity"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_WidthOrHeightIsZero:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_WidthOrHeightIsZero"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_OnlyFlipSequentialSupported:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_OnlyFlipSequentialSupported"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_UnsupportedOnAdapter:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_UnsupportedOnAdapter"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_UnsupportedOnWindows7:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_UnsupportedOnWindows7"
+	case DXGI_MSG_IDXGISwapChain_SetFullscreenState_FSTransitionWithCompositionSwapChain:
+		return "DXGI_MSG_IDXGISwapChain_SetFullscreenState_FSTransitionWithCompositionSwapChain"
+	case DXGI_MSG_IDXGISwapChain_ResizeTarget_InvalidWithCompositionSwapChain:
+		return "DXGI_MSG_IDXGISwapChain_ResizeTarget_InvalidWithCompositionSwapChain"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_WidthOrHeightIsZero:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_WidthOrHeightIsZero"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_ScalingNoneIsFlipModelOnly:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_ScalingNoneIsFlipModelOnly"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_ScalingUnrecognized:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_ScalingUnrecognized"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_DisplayOnlyFullscreenUnsupported:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_DisplayOnlyFullscreenUnsupported"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_DisplayOnlyUnsupported:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_DisplayOnlyUnsupported"
+	case DXGI_MSG_IDXGISwapChain_Present_RestartIsFullscreenOnly:
+		return "DXGI_MSG_IDXGISwapChain_Present_RestartIsFullscreenOnly"
+	case DXGI_MSG_IDXGISwapChain_Present_ProtectedWindowlessPresentationRequiresDisplayOnly:
+		return "DXGI_MSG_IDXGISwapChain_Present_ProtectedWindowlessPresentationRequiresDisplayOnly"
+	case DXGI_MSG_IDXGISwapChain_SetFullscreenState_DisplayOnlyUnsupported:
+		return "DXGI_MSG_IDXGISwapChain_SetFullscreenState_DisplayOnlyUnsupported"
+	case DXGI_MSG_IDXGISwapChain1_SetBackgroundColor_OutOfRange:
+		return "DXGI_MSG_IDXGISwapChain1_SetBackgroundColor_OutOfRange"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_DisplayOnlyFullscreenUnsupported:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_DisplayOnlyFullscreenUnsupported"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_DisplayOnlyUnsupported:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_DisplayOnlyUnsupported"
+	case DXGI_MSG_IDXGISwapchain_Present_ScrollUnsupported:
+		return "DXGI_MSG_IDXGISwapchain_Present_ScrollUnsupported"
+	case DXGI_MSG_IDXGISwapChain1_SetRotation_UnsupportedOS:
+		return "DXGI_MSG_IDXGISwapChain1_SetRotation_UnsupportedOS"
+	case DXGI_MSG_IDXGISwapChain1_GetRotation_UnsupportedOS:
+		return "DXGI_MSG_IDXGISwapChain1_GetRotation_UnsupportedOS"
+	case DXGI_MSG_IDXGISwapchain_Present_FullscreenRotation:
+		return "DXGI_MSG_IDXGISwapchain_Present_FullscreenRotation"
+	case DXGI_MSG_IDXGISwapChain_Present_PartialPresentationWithMSAABuffers:
+		return "DXGI_MSG_IDXGISwapChain_Present_PartialPresentationWithMSAABuffers"
+	case DXGI_MSG_IDXGISwapChain1_SetRotation_FlipSequentialRequired:
+		return "DXGI_MSG_IDXGISwapChain1_SetRotation_FlipSequentialRequired"
+	case DXGI_MSG_IDXGISwapChain1_SetRotation_InvalidRotation:
+		return "DXGI_MSG_IDXGISwapChain1_SetRotation_InvalidRotation"
+	case DXGI_MSG_IDXGISwapChain1_GetRotation_FlipSequentialRequired:
+		return "DXGI_MSG_IDXGISwapChain1_GetRotation_FlipSequentialRequired"
+	case DXGI_MSG_IDXGISwapChain_GetHwnd_WrongType:
+		return "DXGI_MSG_IDXGISwapChain_GetHwnd_WrongType"
+	case DXGI_MSG_IDXGISwapChain_GetCompositionSurface_WrongType:
+		return "DXGI_MSG_IDXGISwapChain_GetCompositionSurface_WrongType"
+	case DXGI_MSG_IDXGISwapChain_GetCoreWindow_WrongType:
+		return "DXGI_MSG_IDXGISwapChain_GetCoreWindow_WrongType"
+	case DXGI_MSG_IDXGISwapChain_GetFullscreenDesc_NonHwnd:
+		return "DXGI_MSG_IDXGISwapChain_GetFullscreenDesc_NonHwnd"
+	case DXGI_MSG_IDXGISwapChain_SetFullscreenState_CoreWindow:
+		return "DXGI_MSG_IDXGISwapChain_SetFullscreenState_CoreWindow"
+	case DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_UnsupportedOnWindows7:
+		return "DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_UnsupportedOnWindows7"
+	case DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_pWindowIsNULL:
+		return "DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_pWindowIsNULL"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_FSUnsupportedForModernApps:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_FSUnsupportedForModernApps"
+	case DXGI_MSG_IDXGIFactory_MakeWindowAssociation_ModernApp:
+		return "DXGI_MSG_IDXGIFactory_MakeWindowAssociation_ModernApp"
+	case DXGI_MSG_IDXGISwapChain_ResizeTarget_ModernApp:
+		return "DXGI_MSG_IDXGISwapChain_ResizeTarget_ModernApp"
+	case DXGI_MSG_IDXGISwapChain_ResizeTarget_pNewTargetParametersIsNULL:
+		return "DXGI_MSG_IDXGISwapChain_ResizeTarget_pNewTargetParametersIsNULL"
+	case DXGI_MSG_IDXGIOutput_SetDisplaySurface_ModernApp:
+		return "DXGI_MSG_IDXGIOutput_SetDisplaySurface_ModernApp"
+	case DXGI_MSG_IDXGIOutput_TakeOwnership_ModernApp:
+		return "DXGI_MSG_IDXGIOutput_TakeOwnership_ModernApp"
+	case DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_pWindowIsInvalid:
+		return "DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_pWindowIsInvalid"
+	case DXGI_MSG_IDXGIFactory2_CreateSwapChainForCompositionSurface_InvalidHandle:
+		return "DXGI_MSG_IDXGIFactory2_CreateSwapChainForCompositionSurface_InvalidHandle"
+	case DXGI_MSG_IDXGISurface1_GetDC_ModernApp:
+		return "DXGI_MSG_IDXGISurface1_GetDC_ModernApp"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_ScalingNoneRequiresWindows8OrNewer:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_ScalingNoneRequiresWindows8OrNewer"
+	case DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoAndPreferRight:
+		return "DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoAndPreferRight"
+	case DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoOrPreferRightWithDoNotSequence:
+		return "DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoOrPreferRightWithDoNotSequence"
+	case DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoOrPreferRightWithoutStereo:
+		return "DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoOrPreferRightWithoutStereo"
+	case DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoUnsupported:
+		return "DXGI_MSG_IDXGISwapChain_Present_TemporaryMonoUnsupported"
+	case DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_ArraySizeMismatch:
+		return "DXGI_MSG_IDXGIOutput_GetDisplaySurfaceData_ArraySizeMismatch"
+	case DXGI_MSG_IDXGISwapChain_Present_PartialPresentationWithSwapEffectDiscard:
+		return "DXGI_MSG_IDXGISwapChain_Present_PartialPresentationWithSwapEffectDiscard"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_AlphaUnrecognized:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_AlphaUnrecognized"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_AlphaIsWindowlessOnly:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_AlphaIsWindowlessOnly"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_AlphaIsFlipModelOnly:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_AlphaIsFlipModelOnly"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_RestrictToOutputAdapterMismatch:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_RestrictToOutputAdapterMismatch"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_DisplayOnlyOnLegacy:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_DisplayOnlyOnLegacy"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_DisplayOnlyOnLegacy:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_DisplayOnlyOnLegacy"
+	case DXGI_MSG_IDXGIResource1_CreateSubresourceSurface_InvalidIndex:
+		return "DXGI_MSG_IDXGIResource1_CreateSubresourceSurface_InvalidIndex"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_InvalidScaling:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_InvalidScaling"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChainForCoreWindow_InvalidSwapEffect:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChainForCoreWindow_InvalidSwapEffect"
+	case DXGI_MSG_IDXGIResource1_CreateSharedHandle_UnsupportedOS:
+		return "DXGI_MSG_IDXGIResource1_CreateSharedHandle_UnsupportedOS"
+	case DXGI_MSG_IDXGIFactory2_RegisterOcclusionStatusWindow_UnsupportedOS:
+		return "DXGI_MSG_IDXGIFactory2_RegisterOcclusionStatusWindow_UnsupportedOS"
+	case DXGI_MSG_IDXGIFactory2_RegisterOcclusionStatusEvent_UnsupportedOS:
+		return "DXGI_MSG_IDXGIFactory2_RegisterOcclusionStatusEvent_UnsupportedOS"
+	case DXGI_MSG_IDXGIOutput1_DuplicateOutput_UnsupportedOS:
+		return "DXGI_MSG_IDXGIOutput1_DuplicateOutput_UnsupportedOS"
+	case DXGI_MSG_IDXGIDisplayControl_IsStereoEnabled_UnsupportedOS:
+		return "DXGI_MSG_IDXGIDisplayControl_IsStereoEnabled_UnsupportedOS"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_InvalidAlphaMode:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChainForComposition_InvalidAlphaMode"
+	case DXGI_MSG_IDXGIFactory_GetSharedResourceAdapterLuid_InvalidResource:
+		return "DXGI_MSG_IDXGIFactory_GetSharedResourceAdapterLuid_InvalidResource"
+	case DXGI_MSG_IDXGIFactory_GetSharedResourceAdapterLuid_InvalidLUID:
+		return "DXGI_MSG_IDXGIFactory_GetSharedResourceAdapterLuid_InvalidLUID"
+	case DXGI_MSG_IDXGIFactory_GetSharedResourceAdapterLuid_UnsupportedOS:
+		return "DXGI_MSG_IDXGIFactory_GetSharedResourceAdapterLuid_UnsupportedOS"
+	case DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_2DOnly:
+		return "DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_2DOnly"
+	case DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_StagingOnly:
+		return "DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_StagingOnly"
+	case DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_NeedCPUAccessWrite:
+		return "DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_NeedCPUAccessWrite"
+	case DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_NoShared:
+		return "DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_NoShared"
+	case DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_OnlyMipLevels1:
+		return "DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_OnlyMipLevels1"
+	case DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_MappedOrOfferedResource:
+		return "DXGI_MSG_IDXGIOutput1_GetDisplaySurfaceData1_MappedOrOfferedResource"
+	case DXGI_MSG_IDXGISwapChain_SetFullscreenState_FSUnsupportedForModernApps:
+		return "DXGI_MSG_IDXGISwapChain_SetFullscreenState_FSUnsupportedForModernApps"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_FailedToGoFSButNonPreRotated:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_FailedToGoFSButNonPreRotated"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChainOrRegisterOcclusionStatus_BlitModelUsedWhileRegisteredForOcclusionStatusEvents:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChainOrRegisterOcclusionStatus_BlitModelUsedWhileRegisteredForOcclusionStatusEvents"
+	case DXGI_MSG_IDXGISwapChain_Present_BlitModelUsedWhileRegisteredForOcclusionStatusEvents:
+		return "DXGI_MSG_IDXGISwapChain_Present_BlitModelUsedWhileRegisteredForOcclusionStatusEvents"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_WaitableSwapChainsAreFlipModelOnly:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_WaitableSwapChainsAreFlipModelOnly"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_WaitableSwapChainsAreNotFullscreen:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_WaitableSwapChainsAreNotFullscreen"
+	case DXGI_MSG_IDXGISwapChain_SetFullscreenState_Waitable:
+		return "DXGI_MSG_IDXGISwapChain_SetFullscreenState_Waitable"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveWaitableFlag:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveWaitableFlag"
+	case DXGI_MSG_IDXGISwapChain_GetFrameLatencyWaitableObject_OnlyWaitable:
+		return "DXGI_MSG_IDXGISwapChain_GetFrameLatencyWaitableObject_OnlyWaitable"
+	case DXGI_MSG_IDXGISwapChain_GetMaximumFrameLatency_OnlyWaitable:
+		return "DXGI_MSG_IDXGISwapChain_GetMaximumFrameLatency_OnlyWaitable"
+	case DXGI_MSG_IDXGISwapChain_GetMaximumFrameLatency_pMaxLatencyIsNULL:
+		return "DXGI_MSG_IDXGISwapChain_GetMaximumFrameLatency_pMaxLatencyIsNULL"
+	case DXGI_MSG_IDXGISwapChain_SetMaximumFrameLatency_OnlyWaitable:
+		return "DXGI_MSG_IDXGISwapChain_SetMaximumFrameLatency_OnlyWaitable"
+	case DXGI_MSG_IDXGISwapChain_SetMaximumFrameLatency_MaxLatencyIsOutOfBounds:
+		return "DXGI_MSG_IDXGISwapChain_SetMaximumFrameLatency_MaxLatencyIsOutOfBounds"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_ForegroundIsCoreWindowOnly:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_ForegroundIsCoreWindowOnly"
+	case DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_ForegroundUnsupportedOnAdapter:
+		return "DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_ForegroundUnsupportedOnAdapter"
+	case DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_InvalidScaling:
+		return "DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_InvalidScaling"
+	case DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_InvalidAlphaMode:
+		return "DXGI_MSG_IDXGIFactory2_CreateSwapChainForCoreWindow_InvalidAlphaMode"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveForegroundFlag:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveForegroundFlag"
+	case DXGI_MSG_IDXGISwapChain_SetMatrixTransform_MatrixPointerCannotBeNull:
+		return "DXGI_MSG_IDXGISwapChain_SetMatrixTransform_MatrixPointerCannotBeNull"
+	case DXGI_MSG_IDXGISwapChain_SetMatrixTransform_RequiresCompositionSwapChain:
+		return "DXGI_MSG_IDXGISwapChain_SetMatrixTransform_RequiresCompositionSwapChain"
+	case DXGI_MSG_IDXGISwapChain_SetMatrixTransform_MatrixMustBeFinite:
+		return "DXGI_MSG_IDXGISwapChain_SetMatrixTransform_MatrixMustBeFinite"
+	case DXGI_MSG_IDXGISwapChain_SetMatrixTransform_MatrixMustBeTranslateAndOrScale:
+		return "DXGI_MSG_IDXGISwapChain_SetMatrixTransform_MatrixMustBeTranslateAndOrScale"
+	case DXGI_MSG_IDXGISwapChain_GetMatrixTransform_MatrixPointerCannotBeNull:
+		return "DXGI_MSG_IDXGISwapChain_GetMatrixTransform_MatrixPointerCannotBeNull"
+	case DXGI_MSG_IDXGISwapChain_GetMatrixTransform_RequiresCompositionSwapChain:
+		return "DXGI_MSG_IDXGISwapChain_GetMatrixTransform_RequiresCompositionSwapChain"
+	case DXGI_MSG_DXGIGetDebugInterface1_NULL_ppDebug:
+		return "DXGI_MSG_DXGIGetDebugInterface1_NULL_ppDebug"
+	case DXGI_MSG_DXGIGetDebugInterface1_InvalidFlags:
+		return "DXGI_MSG_DXGIGetDebugInterface1_InvalidFlags"
+	case DXGI_MSG_IDXGISwapChain_Present_Decode:
+		return "DXGI_MSG_IDXGISwapChain_Present_Decode"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_Decode:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_Decode"
+	case DXGI_MSG_IDXGISwapChain_SetSourceSize_FlipModel:
+		return "DXGI_MSG_IDXGISwapChain_SetSourceSize_FlipModel"
+	case DXGI_MSG_IDXGISwapChain_SetSourceSize_Decode:
+		return "DXGI_MSG_IDXGISwapChain_SetSourceSize_Decode"
+	case DXGI_MSG_IDXGISwapChain_SetSourceSize_WidthHeight:
+		return "DXGI_MSG_IDXGISwapChain_SetSourceSize_WidthHeight"
+	case DXGI_MSG_IDXGISwapChain_GetSourceSize_NullPointers:
+		return "DXGI_MSG_IDXGISwapChain_GetSourceSize_NullPointers"
+	case DXGI_MSG_IDXGISwapChain_GetSourceSize_Decode:
+		return "DXGI_MSG_IDXGISwapChain_GetSourceSize_Decode"
+	case DXGI_MSG_IDXGIDecodeSwapChain_SetColorSpace_InvalidFlags:
+		return "DXGI_MSG_IDXGIDecodeSwapChain_SetColorSpace_InvalidFlags"
+	case DXGI_MSG_IDXGIDecodeSwapChain_SetSourceRect_InvalidRect:
+		return "DXGI_MSG_IDXGIDecodeSwapChain_SetSourceRect_InvalidRect"
+	case DXGI_MSG_IDXGIDecodeSwapChain_SetTargetRect_InvalidRect:
+		return "DXGI_MSG_IDXGIDecodeSwapChain_SetTargetRect_InvalidRect"
+	case DXGI_MSG_IDXGIDecodeSwapChain_SetDestSize_InvalidSize:
+		return "DXGI_MSG_IDXGIDecodeSwapChain_SetDestSize_InvalidSize"
+	case DXGI_MSG_IDXGIDecodeSwapChain_GetSourceRect_InvalidPointer:
+		return "DXGI_MSG_IDXGIDecodeSwapChain_GetSourceRect_InvalidPointer"
+	case DXGI_MSG_IDXGIDecodeSwapChain_GetTargetRect_InvalidPointer:
+		return "DXGI_MSG_IDXGIDecodeSwapChain_GetTargetRect_InvalidPointer"
+	case DXGI_MSG_IDXGIDecodeSwapChain_GetDestSize_InvalidPointer:
+		return "DXGI_MSG_IDXGIDecodeSwapChain_GetDestSize_InvalidPointer"
+	case DXGI_MSG_IDXGISwapChain_PresentBuffer_YUV:
+		return "DXGI_MSG_IDXGISwapChain_PresentBuffer_YUV"
+	case DXGI_MSG_IDXGISwapChain_SetSourceSize_YUV:
+		return "DXGI_MSG_IDXGISwapChain_SetSourceSize_YUV"
+	case DXGI_MSG_IDXGISwapChain_GetSourceSize_YUV:
+		return "DXGI_MSG_IDXGISwapChain_GetSourceSize_YUV"
+	case DXGI_MSG_IDXGISwapChain_SetMatrixTransform_YUV:
+		return "DXGI_MSG_IDXGISwapChain_SetMatrixTransform_YUV"
+	case DXGI_MSG_IDXGISwapChain_GetMatrixTransform_YUV:
+		return "DXGI_MSG_IDXGISwapChain_GetMatrixTransform_YUV"
+	case DXGI_MSG_IDXGISwapChain_Present_PartialPresentation_YUV:
+		return "DXGI_MSG_IDXGISwapChain_Present_PartialPresentation_YUV"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveFlag_YUV:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveFlag_YUV"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_Alignment_YUV:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_Alignment_YUV"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_ShaderInputUnsupported_YUV:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_ShaderInputUnsupported_YUV"
+	case DXGI_MSG_IDXGIOutput3_CheckOverlaySupport_NullPointers:
+		return "DXGI_MSG_IDXGIOutput3_CheckOverlaySupport_NullPointers"
+	case DXGI_MSG_IDXGIOutput3_CheckOverlaySupport_IDXGIDeviceNotSupportedBypConcernedDevice:
+		return "DXGI_MSG_IDXGIOutput3_CheckOverlaySupport_IDXGIDeviceNotSupportedBypConcernedDevice"
+	case DXGI_MSG_IDXGIAdapter_EnumOutputs2_InvalidEnumOutputs2Flag:
+		return "DXGI_MSG_IDXGIAdapter_EnumOutputs2_InvalidEnumOutputs2Flag"
+	case DXGI_MSG_IDXGISwapChain_CreationOrSetFullscreenState_FSUnsupportedForFlipDiscard:
+		return "DXGI_MSG_IDXGISwapChain_CreationOrSetFullscreenState_FSUnsupportedForFlipDiscard"
+	case DXGI_MSG_IDXGIOutput4_CheckOverlayColorSpaceSupport_NullPointers:
+		return "DXGI_MSG_IDXGIOutput4_CheckOverlayColorSpaceSupport_NullPointers"
+	case DXGI_MSG_IDXGIOutput4_CheckOverlayColorSpaceSupport_IDXGIDeviceNotSupportedBypConcernedDevice:
+		return "DXGI_MSG_IDXGIOutput4_CheckOverlayColorSpaceSupport_IDXGIDeviceNotSupportedBypConcernedDevice"
+	case DXGI_MSG_IDXGISwapChain3_CheckColorSpaceSupport_NullPointers:
+		return "DXGI_MSG_IDXGISwapChain3_CheckColorSpaceSupport_NullPointers"
+	case DXGI_MSG_IDXGISwapChain3_SetColorSpace1_InvalidColorSpace:
+		return "DXGI_MSG_IDXGISwapChain3_SetColorSpace1_InvalidColorSpace"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidHwProtect:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidHwProtect"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_HwProtectUnsupported:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_HwProtectUnsupported"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidHwProtect:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidHwProtect"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_HwProtectUnsupported:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_HwProtectUnsupported"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers1_D3D12Only:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers1_D3D12Only"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers1_FlipModel:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers1_FlipModel"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers1_NodeMaskAndQueueRequired:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers1_NodeMaskAndQueueRequired"
+	case DXGI_MSG_IDXGISwapChain_CreateSwapChain_InvalidHwProtectGdiFlag:
+		return "DXGI_MSG_IDXGISwapChain_CreateSwapChain_InvalidHwProtectGdiFlag"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidHwProtectGdiFlag:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_InvalidHwProtectGdiFlag"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_10BitFormatNotSupported:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_10BitFormatNotSupported"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_FlipSwapEffectRequired:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_FlipSwapEffectRequired"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidDevice:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidDevice"
+	case DXGI_MSG_IDXGIOutput_TakeOwnership_Unsupported:
+		return "DXGI_MSG_IDXGIOutput_TakeOwnership_Unsupported"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidQueue:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_InvalidQueue"
+	case DXGI_MSG_IDXGISwapChain3_ResizeBuffers1_InvalidQueue:
+		return "DXGI_MSG_IDXGISwapChain3_ResizeBuffers1_InvalidQueue"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChainForHwnd_InvalidScaling:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChainForHwnd_InvalidScaling"
+	case DXGI_MSG_IDXGISwapChain3_SetHDRMetaData_InvalidSize:
+		return "DXGI_MSG_IDXGISwapChain3_SetHDRMetaData_InvalidSize"
+	case DXGI_MSG_IDXGISwapChain3_SetHDRMetaData_InvalidPointer:
+		return "DXGI_MSG_IDXGISwapChain3_SetHDRMetaData_InvalidPointer"
+	case DXGI_MSG_IDXGISwapChain3_SetHDRMetaData_InvalidType:
+		return "DXGI_MSG_IDXGISwapChain3_SetHDRMetaData_InvalidType"
+	case DXGI_MSG_IDXGISwapChain_Present_FullscreenAllowTearingIsInvalid:
+		return "DXGI_MSG_IDXGISwapChain_Present_FullscreenAllowTearingIsInvalid"
+	case DXGI_MSG_IDXGISwapChain_Present_AllowTearingRequiresPresentIntervalZero:
+		return "DXGI_MSG_IDXGISwapChain_Present_AllowTearingRequiresPresentIntervalZero"
+	case DXGI_MSG_IDXGISwapChain_Present_AllowTearingRequiresCreationFlag:
+		return "DXGI_MSG_IDXGISwapChain_Present_AllowTearingRequiresCreationFlag"
+	case DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveAllowTearingFlag:
+		return "DXGI_MSG_IDXGISwapChain_ResizeBuffers_CannotAddOrRemoveAllowTearingFlag"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_AllowTearingFlagIsFlipModelOnly:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_AllowTearingFlagIsFlipModelOnly"
+	case DXGI_MSG_IDXGIFactory_CheckFeatureSupport_InvalidFeature:
+		return "DXGI_MSG_IDXGIFactory_CheckFeatureSupport_InvalidFeature"
+	case DXGI_MSG_IDXGIFactory_CheckFeatureSupport_InvalidSize:
+		return "DXGI_MSG_IDXGIFactory_CheckFeatureSupport_InvalidSize"
+	case DXGI_MSG_IDXGIOutput6_CheckHardwareCompositionSupport_NullPointer:
+		return "DXGI_MSG_IDXGIOutput6_CheckHardwareCompositionSupport_NullPointer"
+	case DXGI_MSG_IDXGISwapChain_SetFullscreenState_PerMonitorDpiShimApplied:
+		return "DXGI_MSG_IDXGISwapChain_SetFullscreenState_PerMonitorDpiShimApplied"
+	case DXGI_MSG_IDXGIOutput_DuplicateOutput_PerMonitorDpiShimApplied:
+		return "DXGI_MSG_IDXGIOutput_DuplicateOutput_PerMonitorDpiShimApplied"
+	case DXGI_MSG_IDXGIOutput_DuplicateOutput1_PerMonitorDpiRequired:
+		return "DXGI_MSG_IDXGIOutput_DuplicateOutput1_PerMonitorDpiRequired"
+	case DXGI_MSG_IDXGIFactory7_UnregisterAdaptersChangedEvent_CookieNotFound:
+		return "DXGI_MSG_IDXGIFactory7_UnregisterAdaptersChangedEvent_CookieNotFound"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_LegacyBltModelSwapEffect:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_LegacyBltModelSwapEffect"
+	case DXGI_MSG_IDXGISwapChain4_SetHDRMetaData_MetadataUnchanged:
+		return "DXGI_MSG_IDXGISwapChain4_SetHDRMetaData_MetadataUnchanged"
+	case DXGI_MSG_IDXGISwapChain_Present_11On12_Released_Resource:
+		return "DXGI_MSG_IDXGISwapChain_Present_11On12_Released_Resource"
+	case DXGI_MSG_IDXGIFactory_CreateSwapChain_MultipleSwapchainRefToSurface_DeferredDtr:
+		return "DXGI_MSG_IDXGIFactory_CreateSwapChain_MultipleSwapchainRefToSurface_DeferredDtr"
+	case DXGI_MSG_IDXGIFactory_MakeWindowAssociation_NoOpBehavior:
+		return "DXGI_MSG_IDXGIFactory_MakeWindowAssociation_NoOpBehavior"
+	case DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_NotForegroundWindow:
+		return "DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_NotForegroundWindow"
+	case DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_DISCARD_BufferCount:
+		return "DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_DISCARD_BufferCount"
+	case DXGI_MSG_Phone_IDXGISwapChain_SetFullscreenState_NotAvailable:
+		return "DXGI_MSG_Phone_IDXGISwapChain_SetFullscreenState_NotAvailable"
+	case DXGI_MSG_Phone_IDXGISwapChain_ResizeBuffers_NotAvailable:
+		return "DXGI_MSG_Phone_IDXGISwapChain_ResizeBuffers_NotAvailable"
+	case DXGI_MSG_Phone_IDXGISwapChain_ResizeTarget_NotAvailable:
+		return "DXGI_MSG_Phone_IDXGISwapChain_ResizeTarget_NotAvailable"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidLayerIndex:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidLayerIndex"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_MultipleLayerIndex:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_MultipleLayerIndex"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidLayerFlag:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidLayerFlag"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidRotation:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidRotation"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidBlend:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidBlend"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidResource:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidResource"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidMultiPlaneOverlayResource:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidMultiPlaneOverlayResource"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidIndexForPrimary:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidIndexForPrimary"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidIndexForOverlay:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidIndexForOverlay"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidSubResourceIndex:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidSubResourceIndex"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidSourceRect:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidSourceRect"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidDestinationRect:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidDestinationRect"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_MultipleResource:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_MultipleResource"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_NotSharedResource:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_NotSharedResource"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidFlag:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidFlag"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidInterval:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_InvalidInterval"
+	case DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_MSAA_NotSupported:
+		return "DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_MSAA_NotSupported"
+	case DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_ScalingAspectRatioStretch_Supported_ModernApp:
+		return "DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_ScalingAspectRatioStretch_Supported_ModernApp"
+	case DXGI_MSG_Phone_IDXGISwapChain_GetFrameStatistics_NotAvailable_ModernApp:
+		return "DXGI_MSG_Phone_IDXGISwapChain_GetFrameStatistics_NotAvailable_ModernApp"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present_ReplaceInterval0With1:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present_ReplaceInterval0With1"
+	case DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_FailedRegisterWithCompositor:
+		return "DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_FailedRegisterWithCompositor"
+	case DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_NotForegroundWindow_AtRendering:
+		return "DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_NotForegroundWindow_AtRendering"
+	case DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_FLIP_SEQUENTIAL_BufferCount:
+		return "DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_FLIP_SEQUENTIAL_BufferCount"
+	case DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_FLIP_Modern_CoreWindow_Only:
+		return "DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_FLIP_Modern_CoreWindow_Only"
+	case DXGI_MSG_Phone_IDXGISwapChain_Present1_RequiresOverlays:
+		return "DXGI_MSG_Phone_IDXGISwapChain_Present1_RequiresOverlays"
+	case DXGI_MSG_Phone_IDXGISwapChain_SetBackgroundColor_FlipSequentialRequired:
+		return "DXGI_MSG_Phone_IDXGISwapChain_SetBackgroundColor_FlipSequentialRequired"
+	case DXGI_MSG_Phone_IDXGISwapChain_GetBackgroundColor_FlipSequentialRequired:
+		return "DXGI_MSG_Phone_IDXGISwapChain_GetBackgroundColor_FlipSequentialRequired"
+	default:
+		return fmt.Sprintf("DXGI_Message_Id(%d)", int32(e))
+	}
+}
+
 // DXGI_OFFER_RESOURCE_FLAGS: https://learn.microsoft.com/windows/win32/api/dxgi1_5/ne-dxgi1_5-dxgi_offer_resource_flags
+// Bitmask — values may be combined with |.
 type DXGI_OFFER_RESOURCE_FLAGS int32
 
 const (
 	DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT DXGI_OFFER_RESOURCE_FLAGS = 1
 )
+
+// String returns the DXGI_OFFER_RESOURCE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_OFFER_RESOURCE_FLAGS) String() string {
+	var parts []string
+	if e&DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT != 0 {
+		parts = append(parts, "DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DXGI_OFFER_RESOURCE_PRIORITY: https://learn.microsoft.com/windows/win32/api/dxgi1_2/ne-dxgi1_2-dxgi_offer_resource_priority
 type DXGI_OFFER_RESOURCE_PRIORITY int32
@@ -532,11 +1570,40 @@ const (
 	DXGI_OFFER_RESOURCE_PRIORITY_HIGH   DXGI_OFFER_RESOURCE_PRIORITY = 3
 )
 
+// String returns the DXGI_OFFER_RESOURCE_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_OFFER_RESOURCE_PRIORITY) String() string {
+	switch e {
+	case DXGI_OFFER_RESOURCE_PRIORITY_LOW:
+		return "DXGI_OFFER_RESOURCE_PRIORITY_LOW"
+	case DXGI_OFFER_RESOURCE_PRIORITY_NORMAL:
+		return "DXGI_OFFER_RESOURCE_PRIORITY_NORMAL"
+	case DXGI_OFFER_RESOURCE_PRIORITY_HIGH:
+		return "DXGI_OFFER_RESOURCE_PRIORITY_HIGH"
+	default:
+		return fmt.Sprintf("DXGI_OFFER_RESOURCE_PRIORITY(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DXGI_OUTDUPL_FLAG int32
 
 const (
 	DXGI_OUTDUPL_COMPOSITED_UI_CAPTURE_ONLY DXGI_OUTDUPL_FLAG = 1
 )
+
+// String returns the DXGI_OUTDUPL_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_OUTDUPL_FLAG) String() string {
+	var parts []string
+	if e&DXGI_OUTDUPL_COMPOSITED_UI_CAPTURE_ONLY != 0 {
+		parts = append(parts, "DXGI_OUTDUPL_COMPOSITED_UI_CAPTURE_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DXGI_OUTDUPL_POINTER_SHAPE_TYPE: https://learn.microsoft.com/windows/win32/api/dxgi1_2/ne-dxgi1_2-dxgi_outdupl_pointer_shape_type
 type DXGI_OUTDUPL_POINTER_SHAPE_TYPE int32
@@ -547,14 +1614,44 @@ const (
 	DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MASKED_COLOR DXGI_OUTDUPL_POINTER_SHAPE_TYPE = 4
 )
 
+// String returns the DXGI_OUTDUPL_POINTER_SHAPE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_OUTDUPL_POINTER_SHAPE_TYPE) String() string {
+	switch e {
+	case DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MONOCHROME:
+		return "DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MONOCHROME"
+	case DXGI_OUTDUPL_POINTER_SHAPE_TYPE_COLOR:
+		return "DXGI_OUTDUPL_POINTER_SHAPE_TYPE_COLOR"
+	case DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MASKED_COLOR:
+		return "DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MASKED_COLOR"
+	default:
+		return fmt.Sprintf("DXGI_OUTDUPL_POINTER_SHAPE_TYPE(%d)", int32(e))
+	}
+}
+
 // DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG: https://learn.microsoft.com/windows/win32/api/dxgi1_4/ne-dxgi1_4-dxgi_overlay_color_space_support_flag
+// Bitmask — values may be combined with |.
 type DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG int32
 
 const (
 	DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG = 1
 )
 
+// String returns the DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG) String() string {
+	var parts []string
+	if e&DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT != 0 {
+		parts = append(parts, "DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_OVERLAY_SUPPORT_FLAG: https://learn.microsoft.com/windows/win32/api/dxgi1_3/ne-dxgi1_3-dxgi_overlay_support_flag
+// Bitmask — values may be combined with |.
 type DXGI_OVERLAY_SUPPORT_FLAG int32
 
 const (
@@ -562,7 +1659,24 @@ const (
 	DXGI_OVERLAY_SUPPORT_FLAG_SCALING DXGI_OVERLAY_SUPPORT_FLAG = 2
 )
 
+// String returns the DXGI_OVERLAY_SUPPORT_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_OVERLAY_SUPPORT_FLAG) String() string {
+	var parts []string
+	if e&DXGI_OVERLAY_SUPPORT_FLAG_DIRECT != 0 {
+		parts = append(parts, "DXGI_OVERLAY_SUPPORT_FLAG_DIRECT")
+	}
+	if e&DXGI_OVERLAY_SUPPORT_FLAG_SCALING != 0 {
+		parts = append(parts, "DXGI_OVERLAY_SUPPORT_FLAG_SCALING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_PRESENT: https://learn.microsoft.com/windows/win32/direct3ddxgi/dxgi-present
+// Bitmask — values may be combined with |.
 type DXGI_PRESENT uint32
 
 const (
@@ -577,6 +1691,43 @@ const (
 	DXGI_PRESENT_ALLOW_TEARING         DXGI_PRESENT = 512
 )
 
+// String returns the DXGI_PRESENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_PRESENT) String() string {
+	var parts []string
+	if e&DXGI_PRESENT_TEST != 0 {
+		parts = append(parts, "DXGI_PRESENT_TEST")
+	}
+	if e&DXGI_PRESENT_DO_NOT_SEQUENCE != 0 {
+		parts = append(parts, "DXGI_PRESENT_DO_NOT_SEQUENCE")
+	}
+	if e&DXGI_PRESENT_RESTART != 0 {
+		parts = append(parts, "DXGI_PRESENT_RESTART")
+	}
+	if e&DXGI_PRESENT_DO_NOT_WAIT != 0 {
+		parts = append(parts, "DXGI_PRESENT_DO_NOT_WAIT")
+	}
+	if e&DXGI_PRESENT_STEREO_PREFER_RIGHT != 0 {
+		parts = append(parts, "DXGI_PRESENT_STEREO_PREFER_RIGHT")
+	}
+	if e&DXGI_PRESENT_STEREO_TEMPORARY_MONO != 0 {
+		parts = append(parts, "DXGI_PRESENT_STEREO_TEMPORARY_MONO")
+	}
+	if e&DXGI_PRESENT_RESTRICT_TO_OUTPUT != 0 {
+		parts = append(parts, "DXGI_PRESENT_RESTRICT_TO_OUTPUT")
+	}
+	if e&DXGI_PRESENT_USE_DURATION != 0 {
+		parts = append(parts, "DXGI_PRESENT_USE_DURATION")
+	}
+	if e&DXGI_PRESENT_ALLOW_TEARING != 0 {
+		parts = append(parts, "DXGI_PRESENT_ALLOW_TEARING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_RECLAIM_RESOURCE_RESULTS: https://learn.microsoft.com/windows/win32/api/dxgi1_5/ne-dxgi1_5-dxgi_reclaim_resource_results
 type DXGI_RECLAIM_RESOURCE_RESULTS int32
 
@@ -586,6 +1737,21 @@ const (
 	DXGI_RECLAIM_RESOURCE_RESULT_NOT_COMMITTED DXGI_RECLAIM_RESOURCE_RESULTS = 2
 )
 
+// String returns the DXGI_RECLAIM_RESOURCE_RESULTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_RECLAIM_RESOURCE_RESULTS) String() string {
+	switch e {
+	case DXGI_RECLAIM_RESOURCE_RESULT_OK:
+		return "DXGI_RECLAIM_RESOURCE_RESULT_OK"
+	case DXGI_RECLAIM_RESOURCE_RESULT_DISCARDED:
+		return "DXGI_RECLAIM_RESOURCE_RESULT_DISCARDED"
+	case DXGI_RECLAIM_RESOURCE_RESULT_NOT_COMMITTED:
+		return "DXGI_RECLAIM_RESOURCE_RESULT_NOT_COMMITTED"
+	default:
+		return fmt.Sprintf("DXGI_RECLAIM_RESOURCE_RESULTS(%d)", int32(e))
+	}
+}
+
 // DXGI_RESIDENCY: https://learn.microsoft.com/windows/win32/api/dxgi/ne-dxgi-dxgi_residency
 type DXGI_RESIDENCY int32
 
@@ -594,6 +1760,21 @@ const (
 	DXGI_RESIDENCY_RESIDENT_IN_SHARED_MEMORY DXGI_RESIDENCY = 2
 	DXGI_RESIDENCY_EVICTED_TO_DISK           DXGI_RESIDENCY = 3
 )
+
+// String returns the DXGI_RESIDENCY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_RESIDENCY) String() string {
+	switch e {
+	case DXGI_RESIDENCY_FULLY_RESIDENT:
+		return "DXGI_RESIDENCY_FULLY_RESIDENT"
+	case DXGI_RESIDENCY_RESIDENT_IN_SHARED_MEMORY:
+		return "DXGI_RESIDENCY_RESIDENT_IN_SHARED_MEMORY"
+	case DXGI_RESIDENCY_EVICTED_TO_DISK:
+		return "DXGI_RESIDENCY_EVICTED_TO_DISK"
+	default:
+		return fmt.Sprintf("DXGI_RESIDENCY(%d)", int32(e))
+	}
+}
 
 type DXGI_RESOURCE_PRIORITY uint32
 
@@ -605,6 +1786,25 @@ const (
 	DXGI_RESOURCE_PRIORITY_MAXIMUM DXGI_RESOURCE_PRIORITY = 3355443200
 )
 
+// String returns the DXGI_RESOURCE_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_RESOURCE_PRIORITY) String() string {
+	switch e {
+	case DXGI_RESOURCE_PRIORITY_MINIMUM:
+		return "DXGI_RESOURCE_PRIORITY_MINIMUM"
+	case DXGI_RESOURCE_PRIORITY_LOW:
+		return "DXGI_RESOURCE_PRIORITY_LOW"
+	case DXGI_RESOURCE_PRIORITY_NORMAL:
+		return "DXGI_RESOURCE_PRIORITY_NORMAL"
+	case DXGI_RESOURCE_PRIORITY_HIGH:
+		return "DXGI_RESOURCE_PRIORITY_HIGH"
+	case DXGI_RESOURCE_PRIORITY_MAXIMUM:
+		return "DXGI_RESOURCE_PRIORITY_MAXIMUM"
+	default:
+		return fmt.Sprintf("DXGI_RESOURCE_PRIORITY(%d)", uint32(e))
+	}
+}
+
 // DXGI_SCALING: https://learn.microsoft.com/windows/win32/api/dxgi1_2/ne-dxgi1_2-dxgi_scaling
 type DXGI_SCALING int32
 
@@ -614,7 +1814,23 @@ const (
 	DXGI_SCALING_ASPECT_RATIO_STRETCH DXGI_SCALING = 2
 )
 
+// String returns the DXGI_SCALING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_SCALING) String() string {
+	switch e {
+	case DXGI_SCALING_STRETCH:
+		return "DXGI_SCALING_STRETCH"
+	case DXGI_SCALING_NONE:
+		return "DXGI_SCALING_NONE"
+	case DXGI_SCALING_ASPECT_RATIO_STRETCH:
+		return "DXGI_SCALING_ASPECT_RATIO_STRETCH"
+	default:
+		return fmt.Sprintf("DXGI_SCALING(%d)", int32(e))
+	}
+}
+
 // DXGI_SHARED_RESOURCE_RW: https://learn.microsoft.com/windows/win32/direct3ddxgi/dxgi-shared-resource-rw
+// Bitmask — values may be combined with |.
 type DXGI_SHARED_RESOURCE_RW uint32
 
 const (
@@ -622,7 +1838,24 @@ const (
 	DXGI_SHARED_RESOURCE_WRITE DXGI_SHARED_RESOURCE_RW = 1
 )
 
+// String returns the DXGI_SHARED_RESOURCE_RW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_SHARED_RESOURCE_RW) String() string {
+	var parts []string
+	if e&DXGI_SHARED_RESOURCE_READ != 0 {
+		parts = append(parts, "DXGI_SHARED_RESOURCE_READ")
+	}
+	if e&DXGI_SHARED_RESOURCE_WRITE != 0 {
+		parts = append(parts, "DXGI_SHARED_RESOURCE_WRITE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG: https://learn.microsoft.com/windows/win32/api/dxgi1_4/ne-dxgi1_4-dxgi_swap_chain_color_space_support_flag
+// Bitmask — values may be combined with |.
 type DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG int32
 
 const (
@@ -630,7 +1863,24 @@ const (
 	DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG = 2
 )
 
+// String returns the DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG) String() string {
+	var parts []string
+	if e&DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT")
+	}
+	if e&DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_SWAP_CHAIN_FLAG: https://learn.microsoft.com/windows/win32/api/dxgi/ne-dxgi-dxgi_swap_chain_flag
+// Bitmask — values may be combined with |.
 type DXGI_SWAP_CHAIN_FLAG int32
 
 const (
@@ -649,6 +1899,55 @@ const (
 	DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS DXGI_SWAP_CHAIN_FLAG = 4096
 )
 
+// String returns the DXGI_SWAP_CHAIN_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_SWAP_CHAIN_FLAG) String() string {
+	var parts []string
+	if e&DXGI_SWAP_CHAIN_FLAG_NONPREROTATED != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_NONPREROTATED")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING")
+	}
+	if e&DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS != 0 {
+		parts = append(parts, "DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DXGI_SWAP_EFFECT: https://learn.microsoft.com/windows/win32/api/dxgi/ne-dxgi-dxgi_swap_effect
 type DXGI_SWAP_EFFECT int32
 
@@ -659,7 +1958,25 @@ const (
 	DXGI_SWAP_EFFECT_FLIP_DISCARD    DXGI_SWAP_EFFECT = 4
 )
 
+// String returns the DXGI_SWAP_EFFECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_SWAP_EFFECT) String() string {
+	switch e {
+	case DXGI_SWAP_EFFECT_DISCARD:
+		return "DXGI_SWAP_EFFECT_DISCARD"
+	case DXGI_SWAP_EFFECT_SEQUENTIAL:
+		return "DXGI_SWAP_EFFECT_SEQUENTIAL"
+	case DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL:
+		return "DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL"
+	case DXGI_SWAP_EFFECT_FLIP_DISCARD:
+		return "DXGI_SWAP_EFFECT_FLIP_DISCARD"
+	default:
+		return fmt.Sprintf("DXGI_SWAP_EFFECT(%d)", int32(e))
+	}
+}
+
 // DXGI_USAGE: https://learn.microsoft.com/windows/win32/direct3ddxgi/dxgi-usage
+// Bitmask — values may be combined with |.
 type DXGI_USAGE uint32
 
 const (
@@ -671,3 +1988,34 @@ const (
 	DXGI_USAGE_DISCARD_ON_PRESENT   DXGI_USAGE = 512
 	DXGI_USAGE_UNORDERED_ACCESS     DXGI_USAGE = 1024
 )
+
+// String returns the DXGI_USAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXGI_USAGE) String() string {
+	var parts []string
+	if e&DXGI_USAGE_SHADER_INPUT != 0 {
+		parts = append(parts, "DXGI_USAGE_SHADER_INPUT")
+	}
+	if e&DXGI_USAGE_RENDER_TARGET_OUTPUT != 0 {
+		parts = append(parts, "DXGI_USAGE_RENDER_TARGET_OUTPUT")
+	}
+	if e&DXGI_USAGE_BACK_BUFFER != 0 {
+		parts = append(parts, "DXGI_USAGE_BACK_BUFFER")
+	}
+	if e&DXGI_USAGE_SHARED != 0 {
+		parts = append(parts, "DXGI_USAGE_SHARED")
+	}
+	if e&DXGI_USAGE_READ_ONLY != 0 {
+		parts = append(parts, "DXGI_USAGE_READ_ONLY")
+	}
+	if e&DXGI_USAGE_DISCARD_ON_PRESENT != 0 {
+		parts = append(parts, "DXGI_USAGE_DISCARD_ON_PRESENT")
+	}
+	if e&DXGI_USAGE_UNORDERED_ACCESS != 0 {
+		parts = append(parts, "DXGI_USAGE_UNORDERED_ACCESS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

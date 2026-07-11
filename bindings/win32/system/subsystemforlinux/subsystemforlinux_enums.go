@@ -4,7 +4,12 @@
 
 package subsystemforlinux
 
+import (
+	"strings"
+)
+
 // WSL_DISTRIBUTION_FLAGS: https://learn.microsoft.com/windows/win32/api/wslapi/ne-wslapi-wsl_distribution_flags
+// Bitmask — values may be combined with |.
 type WSL_DISTRIBUTION_FLAGS int32
 
 const (
@@ -13,3 +18,22 @@ const (
 	WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH        WSL_DISTRIBUTION_FLAGS = 2
 	WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING WSL_DISTRIBUTION_FLAGS = 4
 )
+
+// String returns the WSL_DISTRIBUTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSL_DISTRIBUTION_FLAGS) String() string {
+	var parts []string
+	if e&WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP != 0 {
+		parts = append(parts, "WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP")
+	}
+	if e&WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH != 0 {
+		parts = append(parts, "WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH")
+	}
+	if e&WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING != 0 {
+		parts = append(parts, "WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

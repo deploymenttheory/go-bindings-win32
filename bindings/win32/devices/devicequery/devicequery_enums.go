@@ -4,6 +4,12 @@
 
 package devicequery
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type DEVPROP_OPERATOR uint32
 
 const (
@@ -51,6 +57,139 @@ const (
 	DEVPROP_OPERATOR_MASK_ARRAY                           DEVPROP_OPERATOR = 4026531840
 )
 
+// String returns the DEVPROP_OPERATOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_OPERATOR) String() string {
+	var parts []string
+	if e&DEVPROP_OPERATOR_MODIFIER_NOT != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_MODIFIER_NOT")
+	}
+	if e&DEVPROP_OPERATOR_MODIFIER_IGNORE_CASE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_MODIFIER_IGNORE_CASE")
+	}
+	if e&DEVPROP_OPERATOR_EXISTS != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_EXISTS")
+	}
+	if e&DEVPROP_OPERATOR_NOT_EXISTS != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_NOT_EXISTS")
+	}
+	if e&DEVPROP_OPERATOR_EQUALS != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_EQUALS")
+	}
+	if e&DEVPROP_OPERATOR_NOT_EQUALS != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_NOT_EQUALS")
+	}
+	if e&DEVPROP_OPERATOR_GREATER_THAN != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_GREATER_THAN")
+	}
+	if e&DEVPROP_OPERATOR_LESS_THAN != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_LESS_THAN")
+	}
+	if e&DEVPROP_OPERATOR_GREATER_THAN_EQUALS != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_GREATER_THAN_EQUALS")
+	}
+	if e&DEVPROP_OPERATOR_LESS_THAN_EQUALS != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_LESS_THAN_EQUALS")
+	}
+	if e&DEVPROP_OPERATOR_EQUALS_IGNORE_CASE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_EQUALS_IGNORE_CASE")
+	}
+	if e&DEVPROP_OPERATOR_NOT_EQUALS_IGNORE_CASE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_NOT_EQUALS_IGNORE_CASE")
+	}
+	if e&DEVPROP_OPERATOR_BITWISE_AND != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_BITWISE_AND")
+	}
+	if e&DEVPROP_OPERATOR_BITWISE_OR != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_BITWISE_OR")
+	}
+	if e&DEVPROP_OPERATOR_BEGINS_WITH != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_BEGINS_WITH")
+	}
+	if e&DEVPROP_OPERATOR_ENDS_WITH != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_ENDS_WITH")
+	}
+	if e&DEVPROP_OPERATOR_CONTAINS != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_CONTAINS")
+	}
+	if e&DEVPROP_OPERATOR_BEGINS_WITH_IGNORE_CASE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_BEGINS_WITH_IGNORE_CASE")
+	}
+	if e&DEVPROP_OPERATOR_ENDS_WITH_IGNORE_CASE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_ENDS_WITH_IGNORE_CASE")
+	}
+	if e&DEVPROP_OPERATOR_CONTAINS_IGNORE_CASE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_CONTAINS_IGNORE_CASE")
+	}
+	if e&DEVPROP_OPERATOR_LIST_CONTAINS != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_LIST_CONTAINS")
+	}
+	if e&DEVPROP_OPERATOR_LIST_ELEMENT_BEGINS_WITH != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_LIST_ELEMENT_BEGINS_WITH")
+	}
+	if e&DEVPROP_OPERATOR_LIST_ELEMENT_ENDS_WITH != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_LIST_ELEMENT_ENDS_WITH")
+	}
+	if e&DEVPROP_OPERATOR_LIST_ELEMENT_CONTAINS != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_LIST_ELEMENT_CONTAINS")
+	}
+	if e&DEVPROP_OPERATOR_LIST_CONTAINS_IGNORE_CASE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_LIST_CONTAINS_IGNORE_CASE")
+	}
+	if e&DEVPROP_OPERATOR_LIST_ELEMENT_BEGINS_WITH_IGNORE_CASE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_LIST_ELEMENT_BEGINS_WITH_IGNORE_CASE")
+	}
+	if e&DEVPROP_OPERATOR_LIST_ELEMENT_ENDS_WITH_IGNORE_CASE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_LIST_ELEMENT_ENDS_WITH_IGNORE_CASE")
+	}
+	if e&DEVPROP_OPERATOR_LIST_ELEMENT_CONTAINS_IGNORE_CASE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_LIST_ELEMENT_CONTAINS_IGNORE_CASE")
+	}
+	if e&DEVPROP_OPERATOR_AND_OPEN != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_AND_OPEN")
+	}
+	if e&DEVPROP_OPERATOR_AND_CLOSE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_AND_CLOSE")
+	}
+	if e&DEVPROP_OPERATOR_OR_OPEN != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_OR_OPEN")
+	}
+	if e&DEVPROP_OPERATOR_OR_CLOSE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_OR_CLOSE")
+	}
+	if e&DEVPROP_OPERATOR_NOT_OPEN != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_NOT_OPEN")
+	}
+	if e&DEVPROP_OPERATOR_NOT_CLOSE != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_NOT_CLOSE")
+	}
+	if e&DEVPROP_OPERATOR_ARRAY_CONTAINS != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_ARRAY_CONTAINS")
+	}
+	if e&DEVPROP_OPERATOR_MASK_EVAL != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_MASK_EVAL")
+	}
+	if e&DEVPROP_OPERATOR_MASK_LIST != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_MASK_LIST")
+	}
+	if e&DEVPROP_OPERATOR_MASK_MODIFIER != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_MASK_MODIFIER")
+	}
+	if e&DEVPROP_OPERATOR_MASK_NOT_LOGICAL != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_MASK_NOT_LOGICAL")
+	}
+	if e&DEVPROP_OPERATOR_MASK_LOGICAL != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_MASK_LOGICAL")
+	}
+	if e&DEVPROP_OPERATOR_MASK_ARRAY != 0 {
+		parts = append(parts, "DEVPROP_OPERATOR_MASK_ARRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type DEV_OBJECT_TYPE int32
 
 const (
@@ -69,6 +208,41 @@ const (
 	DevObjectTypeAEPProtocol            DEV_OBJECT_TYPE = 12
 )
 
+// String returns the DEV_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEV_OBJECT_TYPE) String() string {
+	switch e {
+	case DevObjectTypeUnknown:
+		return "DevObjectTypeUnknown"
+	case DevObjectTypeDeviceInterface:
+		return "DevObjectTypeDeviceInterface"
+	case DevObjectTypeDeviceContainer:
+		return "DevObjectTypeDeviceContainer"
+	case DevObjectTypeDevice:
+		return "DevObjectTypeDevice"
+	case DevObjectTypeDeviceInterfaceClass:
+		return "DevObjectTypeDeviceInterfaceClass"
+	case DevObjectTypeAEP:
+		return "DevObjectTypeAEP"
+	case DevObjectTypeAEPContainer:
+		return "DevObjectTypeAEPContainer"
+	case DevObjectTypeDeviceInstallerClass:
+		return "DevObjectTypeDeviceInstallerClass"
+	case DevObjectTypeDeviceInterfaceDisplay:
+		return "DevObjectTypeDeviceInterfaceDisplay"
+	case DevObjectTypeDeviceContainerDisplay:
+		return "DevObjectTypeDeviceContainerDisplay"
+	case DevObjectTypeAEPService:
+		return "DevObjectTypeAEPService"
+	case DevObjectTypeDevicePanel:
+		return "DevObjectTypeDevicePanel"
+	case DevObjectTypeAEPProtocol:
+		return "DevObjectTypeAEPProtocol"
+	default:
+		return fmt.Sprintf("DEV_OBJECT_TYPE(%d)", int32(e))
+	}
+}
+
 type DEV_QUERY_FLAGS int32
 
 const (
@@ -79,6 +253,25 @@ const (
 	DevQueryFlagAsyncClose    DEV_QUERY_FLAGS = 8
 )
 
+// String returns the DEV_QUERY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEV_QUERY_FLAGS) String() string {
+	switch e {
+	case DevQueryFlagNone:
+		return "DevQueryFlagNone"
+	case DevQueryFlagUpdateResults:
+		return "DevQueryFlagUpdateResults"
+	case DevQueryFlagAllProperties:
+		return "DevQueryFlagAllProperties"
+	case DevQueryFlagLocalize:
+		return "DevQueryFlagLocalize"
+	case DevQueryFlagAsyncClose:
+		return "DevQueryFlagAsyncClose"
+	default:
+		return fmt.Sprintf("DEV_QUERY_FLAGS(%d)", int32(e))
+	}
+}
+
 type DEV_QUERY_RESULT_ACTION int32
 
 const (
@@ -88,6 +281,23 @@ const (
 	DevQueryResultRemove      DEV_QUERY_RESULT_ACTION = 3
 )
 
+// String returns the DEV_QUERY_RESULT_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEV_QUERY_RESULT_ACTION) String() string {
+	switch e {
+	case DevQueryResultStateChange:
+		return "DevQueryResultStateChange"
+	case DevQueryResultAdd:
+		return "DevQueryResultAdd"
+	case DevQueryResultUpdate:
+		return "DevQueryResultUpdate"
+	case DevQueryResultRemove:
+		return "DevQueryResultRemove"
+	default:
+		return fmt.Sprintf("DEV_QUERY_RESULT_ACTION(%d)", int32(e))
+	}
+}
+
 type DEV_QUERY_STATE int32
 
 const (
@@ -96,3 +306,20 @@ const (
 	DevQueryStateAborted       DEV_QUERY_STATE = 2
 	DevQueryStateClosed        DEV_QUERY_STATE = 3
 )
+
+// String returns the DEV_QUERY_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEV_QUERY_STATE) String() string {
+	switch e {
+	case DevQueryStateInitialized:
+		return "DevQueryStateInitialized"
+	case DevQueryStateEnumCompleted:
+		return "DevQueryStateEnumCompleted"
+	case DevQueryStateAborted:
+		return "DevQueryStateAborted"
+	case DevQueryStateClosed:
+		return "DevQueryStateClosed"
+	default:
+		return fmt.Sprintf("DEV_QUERY_STATE(%d)", int32(e))
+	}
+}

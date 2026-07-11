@@ -4,6 +4,10 @@
 
 package fxc
 
+import (
+	"fmt"
+)
+
 // D3DCOMPILER_STRIP_FLAGS: https://learn.microsoft.com/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3dcompiler_strip_flags
 type D3DCOMPILER_STRIP_FLAGS int32
 
@@ -14,6 +18,25 @@ const (
 	D3DCOMPILER_STRIP_PRIVATE_DATA    D3DCOMPILER_STRIP_FLAGS = 8
 	D3DCOMPILER_STRIP_ROOT_SIGNATURE  D3DCOMPILER_STRIP_FLAGS = 16
 )
+
+// String returns the D3DCOMPILER_STRIP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DCOMPILER_STRIP_FLAGS) String() string {
+	switch e {
+	case D3DCOMPILER_STRIP_REFLECTION_DATA:
+		return "D3DCOMPILER_STRIP_REFLECTION_DATA"
+	case D3DCOMPILER_STRIP_DEBUG_INFO:
+		return "D3DCOMPILER_STRIP_DEBUG_INFO"
+	case D3DCOMPILER_STRIP_TEST_BLOBS:
+		return "D3DCOMPILER_STRIP_TEST_BLOBS"
+	case D3DCOMPILER_STRIP_PRIVATE_DATA:
+		return "D3DCOMPILER_STRIP_PRIVATE_DATA"
+	case D3DCOMPILER_STRIP_ROOT_SIGNATURE:
+		return "D3DCOMPILER_STRIP_ROOT_SIGNATURE"
+	default:
+		return fmt.Sprintf("D3DCOMPILER_STRIP_FLAGS(%d)", int32(e))
+	}
+}
 
 // D3D_BLOB_PART: https://learn.microsoft.com/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3d_blob_part
 type D3D_BLOB_PART int32
@@ -37,3 +60,46 @@ const (
 	D3D_BLOB_TEST_COMPILE_PERF               D3D_BLOB_PART = 32770
 	D3D_BLOB_TEST_COMPILE_REPORT             D3D_BLOB_PART = 32771
 )
+
+// String returns the D3D_BLOB_PART constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D_BLOB_PART) String() string {
+	switch e {
+	case D3D_BLOB_INPUT_SIGNATURE_BLOB:
+		return "D3D_BLOB_INPUT_SIGNATURE_BLOB"
+	case D3D_BLOB_OUTPUT_SIGNATURE_BLOB:
+		return "D3D_BLOB_OUTPUT_SIGNATURE_BLOB"
+	case D3D_BLOB_INPUT_AND_OUTPUT_SIGNATURE_BLOB:
+		return "D3D_BLOB_INPUT_AND_OUTPUT_SIGNATURE_BLOB"
+	case D3D_BLOB_PATCH_CONSTANT_SIGNATURE_BLOB:
+		return "D3D_BLOB_PATCH_CONSTANT_SIGNATURE_BLOB"
+	case D3D_BLOB_ALL_SIGNATURE_BLOB:
+		return "D3D_BLOB_ALL_SIGNATURE_BLOB"
+	case D3D_BLOB_DEBUG_INFO:
+		return "D3D_BLOB_DEBUG_INFO"
+	case D3D_BLOB_LEGACY_SHADER:
+		return "D3D_BLOB_LEGACY_SHADER"
+	case D3D_BLOB_XNA_PREPASS_SHADER:
+		return "D3D_BLOB_XNA_PREPASS_SHADER"
+	case D3D_BLOB_XNA_SHADER:
+		return "D3D_BLOB_XNA_SHADER"
+	case D3D_BLOB_PDB:
+		return "D3D_BLOB_PDB"
+	case D3D_BLOB_PRIVATE_DATA:
+		return "D3D_BLOB_PRIVATE_DATA"
+	case D3D_BLOB_ROOT_SIGNATURE:
+		return "D3D_BLOB_ROOT_SIGNATURE"
+	case D3D_BLOB_DEBUG_NAME:
+		return "D3D_BLOB_DEBUG_NAME"
+	case D3D_BLOB_TEST_ALTERNATE_SHADER:
+		return "D3D_BLOB_TEST_ALTERNATE_SHADER"
+	case D3D_BLOB_TEST_COMPILE_DETAILS:
+		return "D3D_BLOB_TEST_COMPILE_DETAILS"
+	case D3D_BLOB_TEST_COMPILE_PERF:
+		return "D3D_BLOB_TEST_COMPILE_PERF"
+	case D3D_BLOB_TEST_COMPILE_REPORT:
+		return "D3D_BLOB_TEST_COMPILE_REPORT"
+	default:
+		return fmt.Sprintf("D3D_BLOB_PART(%d)", int32(e))
+	}
+}

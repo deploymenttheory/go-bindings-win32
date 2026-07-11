@@ -4,6 +4,10 @@
 
 package remotemanagement
 
+import (
+	"fmt"
+)
+
 // WSManAuthenticationFlags: https://learn.microsoft.com/windows/win32/api/wsman/ne-wsman-wsmanauthenticationflags
 type WSManAuthenticationFlags int32
 
@@ -17,6 +21,31 @@ const (
 	WSMAN_FLAG_AUTH_CREDSSP            WSManAuthenticationFlags = 128
 	WSMAN_FLAG_AUTH_CLIENT_CERTIFICATE WSManAuthenticationFlags = 32
 )
+
+// String returns the WSManAuthenticationFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSManAuthenticationFlags) String() string {
+	switch e {
+	case WSMAN_FLAG_DEFAULT_AUTHENTICATION:
+		return "WSMAN_FLAG_DEFAULT_AUTHENTICATION"
+	case WSMAN_FLAG_NO_AUTHENTICATION:
+		return "WSMAN_FLAG_NO_AUTHENTICATION"
+	case WSMAN_FLAG_AUTH_DIGEST:
+		return "WSMAN_FLAG_AUTH_DIGEST"
+	case WSMAN_FLAG_AUTH_NEGOTIATE:
+		return "WSMAN_FLAG_AUTH_NEGOTIATE"
+	case WSMAN_FLAG_AUTH_BASIC:
+		return "WSMAN_FLAG_AUTH_BASIC"
+	case WSMAN_FLAG_AUTH_KERBEROS:
+		return "WSMAN_FLAG_AUTH_KERBEROS"
+	case WSMAN_FLAG_AUTH_CREDSSP:
+		return "WSMAN_FLAG_AUTH_CREDSSP"
+	case WSMAN_FLAG_AUTH_CLIENT_CERTIFICATE:
+		return "WSMAN_FLAG_AUTH_CLIENT_CERTIFICATE"
+	default:
+		return fmt.Sprintf("WSManAuthenticationFlags(%d)", int32(e))
+	}
+}
 
 // WSManCallbackFlags: https://learn.microsoft.com/windows/win32/api/wsman/ne-wsman-wsmancallbackflags
 type WSManCallbackFlags int32
@@ -34,6 +63,35 @@ const (
 	WSMAN_FLAG_CALLBACK_RECEIVE_DELAY_STREAM_REQUEST_PROCESSED WSManCallbackFlags = 8192
 )
 
+// String returns the WSManCallbackFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSManCallbackFlags) String() string {
+	switch e {
+	case WSMAN_FLAG_CALLBACK_END_OF_OPERATION:
+		return "WSMAN_FLAG_CALLBACK_END_OF_OPERATION"
+	case WSMAN_FLAG_CALLBACK_END_OF_STREAM:
+		return "WSMAN_FLAG_CALLBACK_END_OF_STREAM"
+	case WSMAN_FLAG_CALLBACK_SHELL_SUPPORTS_DISCONNECT:
+		return "WSMAN_FLAG_CALLBACK_SHELL_SUPPORTS_DISCONNECT"
+	case WSMAN_FLAG_CALLBACK_SHELL_AUTODISCONNECTED:
+		return "WSMAN_FLAG_CALLBACK_SHELL_AUTODISCONNECTED"
+	case WSMAN_FLAG_CALLBACK_NETWORK_FAILURE_DETECTED:
+		return "WSMAN_FLAG_CALLBACK_NETWORK_FAILURE_DETECTED"
+	case WSMAN_FLAG_CALLBACK_RETRYING_AFTER_NETWORK_FAILURE:
+		return "WSMAN_FLAG_CALLBACK_RETRYING_AFTER_NETWORK_FAILURE"
+	case WSMAN_FLAG_CALLBACK_RECONNECTED_AFTER_NETWORK_FAILURE:
+		return "WSMAN_FLAG_CALLBACK_RECONNECTED_AFTER_NETWORK_FAILURE"
+	case WSMAN_FLAG_CALLBACK_SHELL_AUTODISCONNECTING:
+		return "WSMAN_FLAG_CALLBACK_SHELL_AUTODISCONNECTING"
+	case WSMAN_FLAG_CALLBACK_RETRY_ABORTED_DUE_TO_INTERNAL_ERROR:
+		return "WSMAN_FLAG_CALLBACK_RETRY_ABORTED_DUE_TO_INTERNAL_ERROR"
+	case WSMAN_FLAG_CALLBACK_RECEIVE_DELAY_STREAM_REQUEST_PROCESSED:
+		return "WSMAN_FLAG_CALLBACK_RECEIVE_DELAY_STREAM_REQUEST_PROCESSED"
+	default:
+		return fmt.Sprintf("WSManCallbackFlags(%d)", int32(e))
+	}
+}
+
 // WSManDataType: https://learn.microsoft.com/windows/win32/api/wsman/ne-wsman-wsmandatatype
 type WSManDataType int32
 
@@ -43,6 +101,23 @@ const (
 	WSMAN_DATA_TYPE_BINARY WSManDataType = 2
 	WSMAN_DATA_TYPE_DWORD  WSManDataType = 4
 )
+
+// String returns the WSManDataType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSManDataType) String() string {
+	switch e {
+	case WSMAN_DATA_NONE:
+		return "WSMAN_DATA_NONE"
+	case WSMAN_DATA_TYPE_TEXT:
+		return "WSMAN_DATA_TYPE_TEXT"
+	case WSMAN_DATA_TYPE_BINARY:
+		return "WSMAN_DATA_TYPE_BINARY"
+	case WSMAN_DATA_TYPE_DWORD:
+		return "WSMAN_DATA_TYPE_DWORD"
+	default:
+		return fmt.Sprintf("WSManDataType(%d)", int32(e))
+	}
+}
 
 type WSManEnumFlags int32
 
@@ -58,6 +133,29 @@ const (
 	WSManFlagAssociationInstance        WSManEnumFlags = 128
 )
 
+// String returns the WSManEnumFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSManEnumFlags) String() string {
+	switch e {
+	case WSManFlagNonXmlText:
+		return "WSManFlagNonXmlText"
+	case WSManFlagReturnObject:
+		return "WSManFlagReturnObject"
+	case WSManFlagReturnEPR:
+		return "WSManFlagReturnEPR"
+	case WSManFlagReturnObjectAndEPR:
+		return "WSManFlagReturnObjectAndEPR"
+	case WSManFlagHierarchyShallow:
+		return "WSManFlagHierarchyShallow"
+	case WSManFlagHierarchyDeepBasePropsOnly:
+		return "WSManFlagHierarchyDeepBasePropsOnly"
+	case WSManFlagAssociationInstance:
+		return "WSManFlagAssociationInstance"
+	default:
+		return fmt.Sprintf("WSManEnumFlags(%d)", int32(e))
+	}
+}
+
 // WSManProxyAccessType: https://learn.microsoft.com/windows/win32/api/wsman/ne-wsman-wsmanproxyaccesstype
 type WSManProxyAccessType int32
 
@@ -67,6 +165,23 @@ const (
 	WSMAN_OPTION_PROXY_AUTO_DETECT          WSManProxyAccessType = 4
 	WSMAN_OPTION_PROXY_NO_PROXY_SERVER      WSManProxyAccessType = 8
 )
+
+// String returns the WSManProxyAccessType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSManProxyAccessType) String() string {
+	switch e {
+	case WSMAN_OPTION_PROXY_IE_PROXY_CONFIG:
+		return "WSMAN_OPTION_PROXY_IE_PROXY_CONFIG"
+	case WSMAN_OPTION_PROXY_WINHTTP_PROXY_CONFIG:
+		return "WSMAN_OPTION_PROXY_WINHTTP_PROXY_CONFIG"
+	case WSMAN_OPTION_PROXY_AUTO_DETECT:
+		return "WSMAN_OPTION_PROXY_AUTO_DETECT"
+	case WSMAN_OPTION_PROXY_NO_PROXY_SERVER:
+		return "WSMAN_OPTION_PROXY_NO_PROXY_SERVER"
+	default:
+		return fmt.Sprintf("WSManProxyAccessType(%d)", int32(e))
+	}
+}
 
 // WSManProxyAccessTypeFlags: https://learn.microsoft.com/windows/win32/api/wsmandisp/ne-wsmandisp-wsmanproxyaccesstypeflags
 type WSManProxyAccessTypeFlags int32
@@ -78,6 +193,23 @@ const (
 	WSManProxyNoProxyServer WSManProxyAccessTypeFlags = 8
 )
 
+// String returns the WSManProxyAccessTypeFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSManProxyAccessTypeFlags) String() string {
+	switch e {
+	case WSManProxyIEConfig:
+		return "WSManProxyIEConfig"
+	case WSManProxyWinHttpConfig:
+		return "WSManProxyWinHttpConfig"
+	case WSManProxyAutoDetect:
+		return "WSManProxyAutoDetect"
+	case WSManProxyNoProxyServer:
+		return "WSManProxyNoProxyServer"
+	default:
+		return fmt.Sprintf("WSManProxyAccessTypeFlags(%d)", int32(e))
+	}
+}
+
 // WSManProxyAuthenticationFlags: https://learn.microsoft.com/windows/win32/api/wsmandisp/ne-wsmandisp-wsmanproxyauthenticationflags
 type WSManProxyAuthenticationFlags int32
 
@@ -86,6 +218,21 @@ const (
 	WSManFlagProxyAuthenticationUseBasic     WSManProxyAuthenticationFlags = 2
 	WSManFlagProxyAuthenticationUseDigest    WSManProxyAuthenticationFlags = 4
 )
+
+// String returns the WSManProxyAuthenticationFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSManProxyAuthenticationFlags) String() string {
+	switch e {
+	case WSManFlagProxyAuthenticationUseNegotiate:
+		return "WSManFlagProxyAuthenticationUseNegotiate"
+	case WSManFlagProxyAuthenticationUseBasic:
+		return "WSManFlagProxyAuthenticationUseBasic"
+	case WSManFlagProxyAuthenticationUseDigest:
+		return "WSManFlagProxyAuthenticationUseDigest"
+	default:
+		return fmt.Sprintf("WSManProxyAuthenticationFlags(%d)", int32(e))
+	}
+}
 
 type WSManSessionFlags int32
 
@@ -108,6 +255,49 @@ const (
 	WSManFlagAllowNegotiateImplicitCredentials WSManSessionFlags = 67108864
 	WSManFlagUseSsl                            WSManSessionFlags = 134217728
 )
+
+// String returns the WSManSessionFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSManSessionFlags) String() string {
+	switch e {
+	case WSManFlagUTF8:
+		return "WSManFlagUTF8"
+	case WSManFlagCredUsernamePassword:
+		return "WSManFlagCredUsernamePassword"
+	case WSManFlagSkipCACheck:
+		return "WSManFlagSkipCACheck"
+	case WSManFlagSkipCNCheck:
+		return "WSManFlagSkipCNCheck"
+	case WSManFlagUseNoAuthentication:
+		return "WSManFlagUseNoAuthentication"
+	case WSManFlagUseDigest:
+		return "WSManFlagUseDigest"
+	case WSManFlagUseNegotiate:
+		return "WSManFlagUseNegotiate"
+	case WSManFlagUseBasic:
+		return "WSManFlagUseBasic"
+	case WSManFlagUseKerberos:
+		return "WSManFlagUseKerberos"
+	case WSManFlagNoEncryption:
+		return "WSManFlagNoEncryption"
+	case WSManFlagUseClientCertificate:
+		return "WSManFlagUseClientCertificate"
+	case WSManFlagEnableSPNServerPort:
+		return "WSManFlagEnableSPNServerPort"
+	case WSManFlagUTF16:
+		return "WSManFlagUTF16"
+	case WSManFlagUseCredSsp:
+		return "WSManFlagUseCredSsp"
+	case WSManFlagSkipRevocationCheck:
+		return "WSManFlagSkipRevocationCheck"
+	case WSManFlagAllowNegotiateImplicitCredentials:
+		return "WSManFlagAllowNegotiateImplicitCredentials"
+	case WSManFlagUseSsl:
+		return "WSManFlagUseSsl"
+	default:
+		return fmt.Sprintf("WSManSessionFlags(%d)", int32(e))
+	}
+}
 
 // WSManSessionOption: https://learn.microsoft.com/windows/win32/api/wsman/ne-wsman-wsmansessionoption
 type WSManSessionOption int32
@@ -138,6 +328,61 @@ const (
 	WSMAN_OPTION_USE_INTEARACTIVE_TOKEN               WSManSessionOption = 34
 )
 
+// String returns the WSManSessionOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSManSessionOption) String() string {
+	switch e {
+	case WSMAN_OPTION_DEFAULT_OPERATION_TIMEOUTMS:
+		return "WSMAN_OPTION_DEFAULT_OPERATION_TIMEOUTMS"
+	case WSMAN_OPTION_MAX_RETRY_TIME:
+		return "WSMAN_OPTION_MAX_RETRY_TIME"
+	case WSMAN_OPTION_TIMEOUTMS_CREATE_SHELL:
+		return "WSMAN_OPTION_TIMEOUTMS_CREATE_SHELL"
+	case WSMAN_OPTION_TIMEOUTMS_RUN_SHELL_COMMAND:
+		return "WSMAN_OPTION_TIMEOUTMS_RUN_SHELL_COMMAND"
+	case WSMAN_OPTION_TIMEOUTMS_RECEIVE_SHELL_OUTPUT:
+		return "WSMAN_OPTION_TIMEOUTMS_RECEIVE_SHELL_OUTPUT"
+	case WSMAN_OPTION_TIMEOUTMS_SEND_SHELL_INPUT:
+		return "WSMAN_OPTION_TIMEOUTMS_SEND_SHELL_INPUT"
+	case WSMAN_OPTION_TIMEOUTMS_SIGNAL_SHELL:
+		return "WSMAN_OPTION_TIMEOUTMS_SIGNAL_SHELL"
+	case WSMAN_OPTION_TIMEOUTMS_CLOSE_SHELL:
+		return "WSMAN_OPTION_TIMEOUTMS_CLOSE_SHELL"
+	case WSMAN_OPTION_SKIP_CA_CHECK:
+		return "WSMAN_OPTION_SKIP_CA_CHECK"
+	case WSMAN_OPTION_SKIP_CN_CHECK:
+		return "WSMAN_OPTION_SKIP_CN_CHECK"
+	case WSMAN_OPTION_UNENCRYPTED_MESSAGES:
+		return "WSMAN_OPTION_UNENCRYPTED_MESSAGES"
+	case WSMAN_OPTION_UTF16:
+		return "WSMAN_OPTION_UTF16"
+	case WSMAN_OPTION_ENABLE_SPN_SERVER_PORT:
+		return "WSMAN_OPTION_ENABLE_SPN_SERVER_PORT"
+	case WSMAN_OPTION_MACHINE_ID:
+		return "WSMAN_OPTION_MACHINE_ID"
+	case WSMAN_OPTION_LOCALE:
+		return "WSMAN_OPTION_LOCALE"
+	case WSMAN_OPTION_UI_LANGUAGE:
+		return "WSMAN_OPTION_UI_LANGUAGE"
+	case WSMAN_OPTION_MAX_ENVELOPE_SIZE_KB:
+		return "WSMAN_OPTION_MAX_ENVELOPE_SIZE_KB"
+	case WSMAN_OPTION_SHELL_MAX_DATA_SIZE_PER_MESSAGE_KB:
+		return "WSMAN_OPTION_SHELL_MAX_DATA_SIZE_PER_MESSAGE_KB"
+	case WSMAN_OPTION_REDIRECT_LOCATION:
+		return "WSMAN_OPTION_REDIRECT_LOCATION"
+	case WSMAN_OPTION_SKIP_REVOCATION_CHECK:
+		return "WSMAN_OPTION_SKIP_REVOCATION_CHECK"
+	case WSMAN_OPTION_ALLOW_NEGOTIATE_IMPLICIT_CREDENTIALS:
+		return "WSMAN_OPTION_ALLOW_NEGOTIATE_IMPLICIT_CREDENTIALS"
+	case WSMAN_OPTION_USE_SSL:
+		return "WSMAN_OPTION_USE_SSL"
+	case WSMAN_OPTION_USE_INTEARACTIVE_TOKEN:
+		return "WSMAN_OPTION_USE_INTEARACTIVE_TOKEN"
+	default:
+		return fmt.Sprintf("WSManSessionOption(%d)", int32(e))
+	}
+}
+
 type WSManShellFlag int32
 
 const (
@@ -147,3 +392,22 @@ const (
 	WSMAN_FLAG_SERVER_BUFFERING_MODE_BLOCK WSManShellFlag = 8
 	WSMAN_FLAG_RECEIVE_DELAY_OUTPUT_STREAM WSManShellFlag = 16
 )
+
+// String returns the WSManShellFlag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSManShellFlag) String() string {
+	switch e {
+	case WSMAN_FLAG_NO_COMPRESSION:
+		return "WSMAN_FLAG_NO_COMPRESSION"
+	case WSMAN_FLAG_DELETE_SERVER_SESSION:
+		return "WSMAN_FLAG_DELETE_SERVER_SESSION"
+	case WSMAN_FLAG_SERVER_BUFFERING_MODE_DROP:
+		return "WSMAN_FLAG_SERVER_BUFFERING_MODE_DROP"
+	case WSMAN_FLAG_SERVER_BUFFERING_MODE_BLOCK:
+		return "WSMAN_FLAG_SERVER_BUFFERING_MODE_BLOCK"
+	case WSMAN_FLAG_RECEIVE_DELAY_OUTPUT_STREAM:
+		return "WSMAN_FLAG_RECEIVE_DELAY_OUTPUT_STREAM"
+	default:
+		return fmt.Sprintf("WSManShellFlag(%d)", int32(e))
+	}
+}

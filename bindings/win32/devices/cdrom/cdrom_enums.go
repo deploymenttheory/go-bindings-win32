@@ -4,11 +4,26 @@
 
 package cdrom
 
+import (
+	"fmt"
+)
+
 type CDROM_OPC_INFO_TYPE int32
 
 const (
 	SimpleOpcInfo CDROM_OPC_INFO_TYPE = 1
 )
+
+// String returns the CDROM_OPC_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CDROM_OPC_INFO_TYPE) String() string {
+	switch e {
+	case SimpleOpcInfo:
+		return "SimpleOpcInfo"
+	default:
+		return fmt.Sprintf("CDROM_OPC_INFO_TYPE(%d)", int32(e))
+	}
+}
 
 type CDROM_PERFORMANCE_EXCEPTION_TYPE int32
 
@@ -18,6 +33,21 @@ const (
 	CdromPerformanceExceptionsOnly CDROM_PERFORMANCE_EXCEPTION_TYPE = 3
 )
 
+// String returns the CDROM_PERFORMANCE_EXCEPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CDROM_PERFORMANCE_EXCEPTION_TYPE) String() string {
+	switch e {
+	case CdromNominalPerformance:
+		return "CdromNominalPerformance"
+	case CdromEntirePerformanceList:
+		return "CdromEntirePerformanceList"
+	case CdromPerformanceExceptionsOnly:
+		return "CdromPerformanceExceptionsOnly"
+	default:
+		return fmt.Sprintf("CDROM_PERFORMANCE_EXCEPTION_TYPE(%d)", int32(e))
+	}
+}
+
 type CDROM_PERFORMANCE_REQUEST_TYPE int32
 
 const (
@@ -25,11 +55,35 @@ const (
 	CdromWriteSpeedRequest  CDROM_PERFORMANCE_REQUEST_TYPE = 2
 )
 
+// String returns the CDROM_PERFORMANCE_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CDROM_PERFORMANCE_REQUEST_TYPE) String() string {
+	switch e {
+	case CdromPerformanceRequest:
+		return "CdromPerformanceRequest"
+	case CdromWriteSpeedRequest:
+		return "CdromWriteSpeedRequest"
+	default:
+		return fmt.Sprintf("CDROM_PERFORMANCE_REQUEST_TYPE(%d)", int32(e))
+	}
+}
+
 type CDROM_PERFORMANCE_TOLERANCE_TYPE int32
 
 const (
 	Cdrom10Nominal20Exceptions CDROM_PERFORMANCE_TOLERANCE_TYPE = 1
 )
+
+// String returns the CDROM_PERFORMANCE_TOLERANCE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CDROM_PERFORMANCE_TOLERANCE_TYPE) String() string {
+	switch e {
+	case Cdrom10Nominal20Exceptions:
+		return "Cdrom10Nominal20Exceptions"
+	default:
+		return fmt.Sprintf("CDROM_PERFORMANCE_TOLERANCE_TYPE(%d)", int32(e))
+	}
+}
 
 type CDROM_PERFORMANCE_TYPE int32
 
@@ -38,12 +92,38 @@ const (
 	CdromWritePerformance CDROM_PERFORMANCE_TYPE = 2
 )
 
+// String returns the CDROM_PERFORMANCE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CDROM_PERFORMANCE_TYPE) String() string {
+	switch e {
+	case CdromReadPerformance:
+		return "CdromReadPerformance"
+	case CdromWritePerformance:
+		return "CdromWritePerformance"
+	default:
+		return fmt.Sprintf("CDROM_PERFORMANCE_TYPE(%d)", int32(e))
+	}
+}
+
 type CDROM_SPEED_REQUEST int32
 
 const (
 	CdromSetSpeed     CDROM_SPEED_REQUEST = 0
 	CdromSetStreaming CDROM_SPEED_REQUEST = 1
 )
+
+// String returns the CDROM_SPEED_REQUEST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CDROM_SPEED_REQUEST) String() string {
+	switch e {
+	case CdromSetSpeed:
+		return "CdromSetSpeed"
+	case CdromSetStreaming:
+		return "CdromSetStreaming"
+	default:
+		return fmt.Sprintf("CDROM_SPEED_REQUEST(%d)", int32(e))
+	}
+}
 
 type EXCLUSIVE_ACCESS_REQUEST_TYPE int32
 
@@ -52,6 +132,21 @@ const (
 	ExclusiveAccessLockDevice   EXCLUSIVE_ACCESS_REQUEST_TYPE = 1
 	ExclusiveAccessUnlockDevice EXCLUSIVE_ACCESS_REQUEST_TYPE = 2
 )
+
+// String returns the EXCLUSIVE_ACCESS_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXCLUSIVE_ACCESS_REQUEST_TYPE) String() string {
+	switch e {
+	case ExclusiveAccessQueryState:
+		return "ExclusiveAccessQueryState"
+	case ExclusiveAccessLockDevice:
+		return "ExclusiveAccessLockDevice"
+	case ExclusiveAccessUnlockDevice:
+		return "ExclusiveAccessUnlockDevice"
+	default:
+		return fmt.Sprintf("EXCLUSIVE_ACCESS_REQUEST_TYPE(%d)", int32(e))
+	}
+}
 
 type MEDIA_BLANK_TYPE int32
 
@@ -65,6 +160,29 @@ const (
 	MediaBlankTypeEraseLastSession   MEDIA_BLANK_TYPE = 6
 )
 
+// String returns the MEDIA_BLANK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MEDIA_BLANK_TYPE) String() string {
+	switch e {
+	case MediaBlankTypeFull:
+		return "MediaBlankTypeFull"
+	case MediaBlankTypeMinimal:
+		return "MediaBlankTypeMinimal"
+	case MediaBlankTypeIncompleteTrack:
+		return "MediaBlankTypeIncompleteTrack"
+	case MediaBlankTypeUnreserveLastTrack:
+		return "MediaBlankTypeUnreserveLastTrack"
+	case MediaBlankTypeTrackTail:
+		return "MediaBlankTypeTrackTail"
+	case MediaBlankTypeUncloseLastSession:
+		return "MediaBlankTypeUncloseLastSession"
+	case MediaBlankTypeEraseLastSession:
+		return "MediaBlankTypeEraseLastSession"
+	default:
+		return fmt.Sprintf("MEDIA_BLANK_TYPE(%d)", int32(e))
+	}
+}
+
 type STREAMING_CONTROL_REQUEST_TYPE int32
 
 const (
@@ -73,6 +191,23 @@ const (
 	CdromStreamingEnableForWriteOnly STREAMING_CONTROL_REQUEST_TYPE = 3
 	CdromStreamingEnableForReadWrite STREAMING_CONTROL_REQUEST_TYPE = 4
 )
+
+// String returns the STREAMING_CONTROL_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STREAMING_CONTROL_REQUEST_TYPE) String() string {
+	switch e {
+	case CdromStreamingDisable:
+		return "CdromStreamingDisable"
+	case CdromStreamingEnableForReadOnly:
+		return "CdromStreamingEnableForReadOnly"
+	case CdromStreamingEnableForWriteOnly:
+		return "CdromStreamingEnableForWriteOnly"
+	case CdromStreamingEnableForReadWrite:
+		return "CdromStreamingEnableForReadWrite"
+	default:
+		return fmt.Sprintf("STREAMING_CONTROL_REQUEST_TYPE(%d)", int32(e))
+	}
+}
 
 type TRACK_MODE_TYPE int32
 
@@ -85,9 +220,43 @@ const (
 	RawWithSubCode      TRACK_MODE_TYPE = 5
 )
 
+// String returns the TRACK_MODE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRACK_MODE_TYPE) String() string {
+	switch e {
+	case YellowMode2:
+		return "YellowMode2"
+	case XAForm2:
+		return "XAForm2"
+	case CDDA:
+		return "CDDA"
+	case RawWithC2AndSubCode:
+		return "RawWithC2AndSubCode"
+	case RawWithC2:
+		return "RawWithC2"
+	case RawWithSubCode:
+		return "RawWithSubCode"
+	default:
+		return fmt.Sprintf("TRACK_MODE_TYPE(%d)", int32(e))
+	}
+}
+
 type WRITE_ROTATION int32
 
 const (
 	CdromDefaultRotation WRITE_ROTATION = 0
 	CdromCAVRotation     WRITE_ROTATION = 1
 )
+
+// String returns the WRITE_ROTATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRITE_ROTATION) String() string {
+	switch e {
+	case CdromDefaultRotation:
+		return "CdromDefaultRotation"
+	case CdromCAVRotation:
+		return "CdromCAVRotation"
+	default:
+		return fmt.Sprintf("WRITE_ROTATION(%d)", int32(e))
+	}
+}

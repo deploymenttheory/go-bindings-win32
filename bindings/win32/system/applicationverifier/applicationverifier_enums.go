@@ -4,12 +4,34 @@
 
 package applicationverifier
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type VERIFIER_ENUM_RESOURCE_FLAGS uint32
 
 const (
 	AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES VERIFIER_ENUM_RESOURCE_FLAGS = 2
 	AVRF_ENUM_RESOURCES_FLAGS_SUSPEND             VERIFIER_ENUM_RESOURCE_FLAGS = 1
 )
+
+// String returns the VERIFIER_ENUM_RESOURCE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VERIFIER_ENUM_RESOURCE_FLAGS) String() string {
+	var parts []string
+	if e&AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES != 0 {
+		parts = append(parts, "AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES")
+	}
+	if e&AVRF_ENUM_RESOURCES_FLAGS_SUSPEND != 0 {
+		parts = append(parts, "AVRF_ENUM_RESOURCES_FLAGS_SUSPEND")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // EAvrfResourceTypes: https://learn.microsoft.com/windows/win32/api/avrfsdk/ne-avrfsdk-eavrfresourcetypes
 type EAvrfResourceTypes int32
@@ -19,6 +41,21 @@ const (
 	AvrfResourceHandleTrace    EAvrfResourceTypes = 1
 	AvrfResourceMax            EAvrfResourceTypes = 2
 )
+
+// String returns the EAvrfResourceTypes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAvrfResourceTypes) String() string {
+	switch e {
+	case AvrfResourceHeapAllocation:
+		return "AvrfResourceHeapAllocation"
+	case AvrfResourceHandleTrace:
+		return "AvrfResourceHandleTrace"
+	case AvrfResourceMax:
+		return "AvrfResourceMax"
+	default:
+		return fmt.Sprintf("EAvrfResourceTypes(%d)", int32(e))
+	}
+}
 
 // EHANDLE_TRACE_OPERATIONS: https://learn.microsoft.com/windows/win32/api/avrfsdk/ne-avrfsdk-ehandle_trace_operations
 type EHANDLE_TRACE_OPERATIONS int32
@@ -30,6 +67,23 @@ const (
 	OperationDbBADREF EHANDLE_TRACE_OPERATIONS = 3
 )
 
+// String returns the EHANDLE_TRACE_OPERATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EHANDLE_TRACE_OPERATIONS) String() string {
+	switch e {
+	case OperationDbUnused:
+		return "OperationDbUnused"
+	case OperationDbOPEN:
+		return "OperationDbOPEN"
+	case OperationDbCLOSE:
+		return "OperationDbCLOSE"
+	case OperationDbBADREF:
+		return "OperationDbBADREF"
+	default:
+		return fmt.Sprintf("EHANDLE_TRACE_OPERATIONS(%d)", int32(e))
+	}
+}
+
 // EHeapAllocationState: https://learn.microsoft.com/windows/win32/api/avrfsdk/ne-avrfsdk-eheapallocationstate
 type EHeapAllocationState int32
 
@@ -39,6 +93,21 @@ const (
 	HeapStateMask    EHeapAllocationState = -65536
 )
 
+// String returns the EHeapAllocationState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EHeapAllocationState) String() string {
+	switch e {
+	case HeapFullPageHeap:
+		return "HeapFullPageHeap"
+	case HeapMetadata:
+		return "HeapMetadata"
+	case HeapStateMask:
+		return "HeapStateMask"
+	default:
+		return fmt.Sprintf("EHeapAllocationState(%d)", int32(e))
+	}
+}
+
 // EHeapEnumerationLevel: https://learn.microsoft.com/windows/win32/api/avrfsdk/ne-avrfsdk-eheapenumerationlevel
 type EHeapEnumerationLevel int32
 
@@ -46,6 +115,19 @@ const (
 	HeapEnumerationEverything EHeapEnumerationLevel = 0
 	HeapEnumerationStop       EHeapEnumerationLevel = -1
 )
+
+// String returns the EHeapEnumerationLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EHeapEnumerationLevel) String() string {
+	switch e {
+	case HeapEnumerationEverything:
+		return "HeapEnumerationEverything"
+	case HeapEnumerationStop:
+		return "HeapEnumerationStop"
+	default:
+		return fmt.Sprintf("EHeapEnumerationLevel(%d)", int32(e))
+	}
+}
 
 // EUserAllocationState: https://learn.microsoft.com/windows/win32/api/avrfsdk/ne-avrfsdk-euserallocationstate
 type EUserAllocationState int32
@@ -55,3 +137,18 @@ const (
 	AllocationStateBusy    EUserAllocationState = 1
 	AllocationStateFree    EUserAllocationState = 2
 )
+
+// String returns the EUserAllocationState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EUserAllocationState) String() string {
+	switch e {
+	case AllocationStateUnknown:
+		return "AllocationStateUnknown"
+	case AllocationStateBusy:
+		return "AllocationStateBusy"
+	case AllocationStateFree:
+		return "AllocationStateFree"
+	default:
+		return fmt.Sprintf("EUserAllocationState(%d)", int32(e))
+	}
+}

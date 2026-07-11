@@ -4,6 +4,11 @@
 
 package directmanipulation
 
+import (
+	"fmt"
+	"strings"
+)
+
 // DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_autoscroll_configuration
 type DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION int32
 
@@ -13,7 +18,23 @@ const (
 	DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION_REVERSE DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION = 2
 )
 
+// String returns the DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION) String() string {
+	switch e {
+	case DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION_STOP:
+		return "DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION_STOP"
+	case DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION_FORWARD:
+		return "DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION_FORWARD"
+	case DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION_REVERSE:
+		return "DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION_REVERSE"
+	default:
+		return fmt.Sprintf("DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION(%d)", int32(e))
+	}
+}
+
 // DIRECTMANIPULATION_CONFIGURATION: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_configuration
+// Bitmask — values may be combined with |.
 type DIRECTMANIPULATION_CONFIGURATION int32
 
 const (
@@ -28,7 +49,42 @@ const (
 	DIRECTMANIPULATION_CONFIGURATION_RAILS_Y             DIRECTMANIPULATION_CONFIGURATION = 512
 )
 
+// String returns the DIRECTMANIPULATION_CONFIGURATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_CONFIGURATION) String() string {
+	var parts []string
+	if e&DIRECTMANIPULATION_CONFIGURATION_INTERACTION != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_CONFIGURATION_INTERACTION")
+	}
+	if e&DIRECTMANIPULATION_CONFIGURATION_TRANSLATION_X != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_CONFIGURATION_TRANSLATION_X")
+	}
+	if e&DIRECTMANIPULATION_CONFIGURATION_TRANSLATION_Y != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_CONFIGURATION_TRANSLATION_Y")
+	}
+	if e&DIRECTMANIPULATION_CONFIGURATION_SCALING != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_CONFIGURATION_SCALING")
+	}
+	if e&DIRECTMANIPULATION_CONFIGURATION_TRANSLATION_INERTIA != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_CONFIGURATION_TRANSLATION_INERTIA")
+	}
+	if e&DIRECTMANIPULATION_CONFIGURATION_SCALING_INERTIA != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_CONFIGURATION_SCALING_INERTIA")
+	}
+	if e&DIRECTMANIPULATION_CONFIGURATION_RAILS_X != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_CONFIGURATION_RAILS_X")
+	}
+	if e&DIRECTMANIPULATION_CONFIGURATION_RAILS_Y != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_CONFIGURATION_RAILS_Y")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_drag_drop_configuration
+// Bitmask — values may be combined with |.
 type DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION int32
 
 const (
@@ -38,6 +94,31 @@ const (
 	DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_SELECT_DRAG DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION = 32
 	DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_HOLD_DRAG   DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION = 64
 )
+
+// String returns the DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION) String() string {
+	var parts []string
+	if e&DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_VERTICAL != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_VERTICAL")
+	}
+	if e&DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_HORIZONTAL != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_HORIZONTAL")
+	}
+	if e&DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_SELECT_ONLY != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_SELECT_ONLY")
+	}
+	if e&DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_SELECT_DRAG != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_SELECT_DRAG")
+	}
+	if e&DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_HOLD_DRAG != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION_HOLD_DRAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DIRECTMANIPULATION_DRAG_DROP_STATUS: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_drag_drop_status
 type DIRECTMANIPULATION_DRAG_DROP_STATUS int32
@@ -51,7 +132,29 @@ const (
 	DIRECTMANIPULATION_DRAG_DROP_COMMITTED DIRECTMANIPULATION_DRAG_DROP_STATUS = 5
 )
 
+// String returns the DIRECTMANIPULATION_DRAG_DROP_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_DRAG_DROP_STATUS) String() string {
+	switch e {
+	case DIRECTMANIPULATION_DRAG_DROP_READY:
+		return "DIRECTMANIPULATION_DRAG_DROP_READY"
+	case DIRECTMANIPULATION_DRAG_DROP_PRESELECT:
+		return "DIRECTMANIPULATION_DRAG_DROP_PRESELECT"
+	case DIRECTMANIPULATION_DRAG_DROP_SELECTING:
+		return "DIRECTMANIPULATION_DRAG_DROP_SELECTING"
+	case DIRECTMANIPULATION_DRAG_DROP_DRAGGING:
+		return "DIRECTMANIPULATION_DRAG_DROP_DRAGGING"
+	case DIRECTMANIPULATION_DRAG_DROP_CANCELLED:
+		return "DIRECTMANIPULATION_DRAG_DROP_CANCELLED"
+	case DIRECTMANIPULATION_DRAG_DROP_COMMITTED:
+		return "DIRECTMANIPULATION_DRAG_DROP_COMMITTED"
+	default:
+		return fmt.Sprintf("DIRECTMANIPULATION_DRAG_DROP_STATUS(%d)", int32(e))
+	}
+}
+
 // DIRECTMANIPULATION_GESTURE_CONFIGURATION: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_gesture_configuration
+// Bitmask — values may be combined with |.
 type DIRECTMANIPULATION_GESTURE_CONFIGURATION int32
 
 const (
@@ -62,7 +165,27 @@ const (
 	DIRECTMANIPULATION_GESTURE_PINCH_ZOOM             DIRECTMANIPULATION_GESTURE_CONFIGURATION = 32
 )
 
+// String returns the DIRECTMANIPULATION_GESTURE_CONFIGURATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_GESTURE_CONFIGURATION) String() string {
+	var parts []string
+	if e&DIRECTMANIPULATION_GESTURE_CROSS_SLIDE_VERTICAL != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_GESTURE_CROSS_SLIDE_VERTICAL")
+	}
+	if e&DIRECTMANIPULATION_GESTURE_CROSS_SLIDE_HORIZONTAL != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_GESTURE_CROSS_SLIDE_HORIZONTAL")
+	}
+	if e&DIRECTMANIPULATION_GESTURE_PINCH_ZOOM != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_GESTURE_PINCH_ZOOM")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DIRECTMANIPULATION_HITTEST_TYPE: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_hittest_type
+// Bitmask — values may be combined with |.
 type DIRECTMANIPULATION_HITTEST_TYPE int32
 
 const (
@@ -71,7 +194,24 @@ const (
 	DIRECTMANIPULATION_HITTEST_TYPE_AUTO_SYNCHRONOUS DIRECTMANIPULATION_HITTEST_TYPE = 2
 )
 
+// String returns the DIRECTMANIPULATION_HITTEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_HITTEST_TYPE) String() string {
+	var parts []string
+	if e&DIRECTMANIPULATION_HITTEST_TYPE_SYNCHRONOUS != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_HITTEST_TYPE_SYNCHRONOUS")
+	}
+	if e&DIRECTMANIPULATION_HITTEST_TYPE_AUTO_SYNCHRONOUS != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_HITTEST_TYPE_AUTO_SYNCHRONOUS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DIRECTMANIPULATION_HORIZONTALALIGNMENT: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_horizontalalignment
+// Bitmask — values may be combined with |.
 type DIRECTMANIPULATION_HORIZONTALALIGNMENT int32
 
 const (
@@ -82,6 +222,28 @@ const (
 	DIRECTMANIPULATION_HORIZONTALALIGNMENT_UNLOCKCENTER DIRECTMANIPULATION_HORIZONTALALIGNMENT = 8
 )
 
+// String returns the DIRECTMANIPULATION_HORIZONTALALIGNMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_HORIZONTALALIGNMENT) String() string {
+	var parts []string
+	if e&DIRECTMANIPULATION_HORIZONTALALIGNMENT_LEFT != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_HORIZONTALALIGNMENT_LEFT")
+	}
+	if e&DIRECTMANIPULATION_HORIZONTALALIGNMENT_CENTER != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_HORIZONTALALIGNMENT_CENTER")
+	}
+	if e&DIRECTMANIPULATION_HORIZONTALALIGNMENT_RIGHT != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_HORIZONTALALIGNMENT_RIGHT")
+	}
+	if e&DIRECTMANIPULATION_HORIZONTALALIGNMENT_UNLOCKCENTER != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_HORIZONTALALIGNMENT_UNLOCKCENTER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DIRECTMANIPULATION_INPUT_MODE: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_input_mode
 type DIRECTMANIPULATION_INPUT_MODE int32
 
@@ -89,6 +251,19 @@ const (
 	DIRECTMANIPULATION_INPUT_MODE_AUTOMATIC DIRECTMANIPULATION_INPUT_MODE = 0
 	DIRECTMANIPULATION_INPUT_MODE_MANUAL    DIRECTMANIPULATION_INPUT_MODE = 1
 )
+
+// String returns the DIRECTMANIPULATION_INPUT_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_INPUT_MODE) String() string {
+	switch e {
+	case DIRECTMANIPULATION_INPUT_MODE_AUTOMATIC:
+		return "DIRECTMANIPULATION_INPUT_MODE_AUTOMATIC"
+	case DIRECTMANIPULATION_INPUT_MODE_MANUAL:
+		return "DIRECTMANIPULATION_INPUT_MODE_MANUAL"
+	default:
+		return fmt.Sprintf("DIRECTMANIPULATION_INPUT_MODE(%d)", int32(e))
+	}
+}
 
 // DIRECTMANIPULATION_INTERACTION_TYPE: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_interaction_type
 type DIRECTMANIPULATION_INTERACTION_TYPE int32
@@ -103,7 +278,31 @@ const (
 	DIRECTMANIPULATION_INTERACTION_END                      DIRECTMANIPULATION_INTERACTION_TYPE = 100
 )
 
+// String returns the DIRECTMANIPULATION_INTERACTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_INTERACTION_TYPE) String() string {
+	switch e {
+	case DIRECTMANIPULATION_INTERACTION_BEGIN:
+		return "DIRECTMANIPULATION_INTERACTION_BEGIN"
+	case DIRECTMANIPULATION_INTERACTION_TYPE_MANIPULATION:
+		return "DIRECTMANIPULATION_INTERACTION_TYPE_MANIPULATION"
+	case DIRECTMANIPULATION_INTERACTION_TYPE_GESTURE_TAP:
+		return "DIRECTMANIPULATION_INTERACTION_TYPE_GESTURE_TAP"
+	case DIRECTMANIPULATION_INTERACTION_TYPE_GESTURE_HOLD:
+		return "DIRECTMANIPULATION_INTERACTION_TYPE_GESTURE_HOLD"
+	case DIRECTMANIPULATION_INTERACTION_TYPE_GESTURE_CROSS_SLIDE:
+		return "DIRECTMANIPULATION_INTERACTION_TYPE_GESTURE_CROSS_SLIDE"
+	case DIRECTMANIPULATION_INTERACTION_TYPE_GESTURE_PINCH_ZOOM:
+		return "DIRECTMANIPULATION_INTERACTION_TYPE_GESTURE_PINCH_ZOOM"
+	case DIRECTMANIPULATION_INTERACTION_END:
+		return "DIRECTMANIPULATION_INTERACTION_END"
+	default:
+		return fmt.Sprintf("DIRECTMANIPULATION_INTERACTION_TYPE(%d)", int32(e))
+	}
+}
+
 // DIRECTMANIPULATION_MOTION_TYPES: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_motion_types
+// Bitmask — values may be combined with |.
 type DIRECTMANIPULATION_MOTION_TYPES int32
 
 const (
@@ -116,7 +315,36 @@ const (
 	DIRECTMANIPULATION_MOTION_ALL        DIRECTMANIPULATION_MOTION_TYPES = 55
 )
 
+// String returns the DIRECTMANIPULATION_MOTION_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_MOTION_TYPES) String() string {
+	var parts []string
+	if e&DIRECTMANIPULATION_MOTION_TRANSLATEX != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_MOTION_TRANSLATEX")
+	}
+	if e&DIRECTMANIPULATION_MOTION_TRANSLATEY != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_MOTION_TRANSLATEY")
+	}
+	if e&DIRECTMANIPULATION_MOTION_ZOOM != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_MOTION_ZOOM")
+	}
+	if e&DIRECTMANIPULATION_MOTION_CENTERX != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_MOTION_CENTERX")
+	}
+	if e&DIRECTMANIPULATION_MOTION_CENTERY != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_MOTION_CENTERY")
+	}
+	if e&DIRECTMANIPULATION_MOTION_ALL != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_MOTION_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DIRECTMANIPULATION_SNAPPOINT_COORDINATE: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_snappoint_coordinate
+// Bitmask — values may be combined with |.
 type DIRECTMANIPULATION_SNAPPOINT_COORDINATE int32
 
 const (
@@ -124,6 +352,22 @@ const (
 	DIRECTMANIPULATION_COORDINATE_ORIGIN   DIRECTMANIPULATION_SNAPPOINT_COORDINATE = 1
 	DIRECTMANIPULATION_COORDINATE_MIRRORED DIRECTMANIPULATION_SNAPPOINT_COORDINATE = 16
 )
+
+// String returns the DIRECTMANIPULATION_SNAPPOINT_COORDINATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_SNAPPOINT_COORDINATE) String() string {
+	var parts []string
+	if e&DIRECTMANIPULATION_COORDINATE_ORIGIN != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_COORDINATE_ORIGIN")
+	}
+	if e&DIRECTMANIPULATION_COORDINATE_MIRRORED != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_COORDINATE_MIRRORED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DIRECTMANIPULATION_SNAPPOINT_TYPE: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_snappoint_type
 type DIRECTMANIPULATION_SNAPPOINT_TYPE int32
@@ -134,6 +378,23 @@ const (
 	DIRECTMANIPULATION_SNAPPOINT_MANDATORY_SINGLE DIRECTMANIPULATION_SNAPPOINT_TYPE = 2
 	DIRECTMANIPULATION_SNAPPOINT_OPTIONAL_SINGLE  DIRECTMANIPULATION_SNAPPOINT_TYPE = 3
 )
+
+// String returns the DIRECTMANIPULATION_SNAPPOINT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_SNAPPOINT_TYPE) String() string {
+	switch e {
+	case DIRECTMANIPULATION_SNAPPOINT_MANDATORY:
+		return "DIRECTMANIPULATION_SNAPPOINT_MANDATORY"
+	case DIRECTMANIPULATION_SNAPPOINT_OPTIONAL:
+		return "DIRECTMANIPULATION_SNAPPOINT_OPTIONAL"
+	case DIRECTMANIPULATION_SNAPPOINT_MANDATORY_SINGLE:
+		return "DIRECTMANIPULATION_SNAPPOINT_MANDATORY_SINGLE"
+	case DIRECTMANIPULATION_SNAPPOINT_OPTIONAL_SINGLE:
+		return "DIRECTMANIPULATION_SNAPPOINT_OPTIONAL_SINGLE"
+	default:
+		return fmt.Sprintf("DIRECTMANIPULATION_SNAPPOINT_TYPE(%d)", int32(e))
+	}
+}
 
 // DIRECTMANIPULATION_STATUS: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_status
 type DIRECTMANIPULATION_STATUS int32
@@ -148,7 +409,31 @@ const (
 	DIRECTMANIPULATION_SUSPENDED DIRECTMANIPULATION_STATUS = 6
 )
 
+// String returns the DIRECTMANIPULATION_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_STATUS) String() string {
+	switch e {
+	case DIRECTMANIPULATION_BUILDING:
+		return "DIRECTMANIPULATION_BUILDING"
+	case DIRECTMANIPULATION_ENABLED:
+		return "DIRECTMANIPULATION_ENABLED"
+	case DIRECTMANIPULATION_DISABLED:
+		return "DIRECTMANIPULATION_DISABLED"
+	case DIRECTMANIPULATION_RUNNING:
+		return "DIRECTMANIPULATION_RUNNING"
+	case DIRECTMANIPULATION_INERTIA:
+		return "DIRECTMANIPULATION_INERTIA"
+	case DIRECTMANIPULATION_READY:
+		return "DIRECTMANIPULATION_READY"
+	case DIRECTMANIPULATION_SUSPENDED:
+		return "DIRECTMANIPULATION_SUSPENDED"
+	default:
+		return fmt.Sprintf("DIRECTMANIPULATION_STATUS(%d)", int32(e))
+	}
+}
+
 // DIRECTMANIPULATION_VERTICALALIGNMENT: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_verticalalignment
+// Bitmask — values may be combined with |.
 type DIRECTMANIPULATION_VERTICALALIGNMENT int32
 
 const (
@@ -159,7 +444,30 @@ const (
 	DIRECTMANIPULATION_VERTICALALIGNMENT_UNLOCKCENTER DIRECTMANIPULATION_VERTICALALIGNMENT = 8
 )
 
+// String returns the DIRECTMANIPULATION_VERTICALALIGNMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_VERTICALALIGNMENT) String() string {
+	var parts []string
+	if e&DIRECTMANIPULATION_VERTICALALIGNMENT_TOP != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_VERTICALALIGNMENT_TOP")
+	}
+	if e&DIRECTMANIPULATION_VERTICALALIGNMENT_CENTER != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_VERTICALALIGNMENT_CENTER")
+	}
+	if e&DIRECTMANIPULATION_VERTICALALIGNMENT_BOTTOM != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_VERTICALALIGNMENT_BOTTOM")
+	}
+	if e&DIRECTMANIPULATION_VERTICALALIGNMENT_UNLOCKCENTER != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_VERTICALALIGNMENT_UNLOCKCENTER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DIRECTMANIPULATION_VIEWPORT_OPTIONS: https://learn.microsoft.com/windows/win32/api/directmanipulation/ne-directmanipulation-directmanipulation_viewport_options
+// Bitmask — values may be combined with |.
 type DIRECTMANIPULATION_VIEWPORT_OPTIONS int32
 
 const (
@@ -170,3 +478,28 @@ const (
 	DIRECTMANIPULATION_VIEWPORT_OPTIONS_EXPLICITHITTEST      DIRECTMANIPULATION_VIEWPORT_OPTIONS = 8
 	DIRECTMANIPULATION_VIEWPORT_OPTIONS_DISABLEPIXELSNAPPING DIRECTMANIPULATION_VIEWPORT_OPTIONS = 16
 )
+
+// String returns the DIRECTMANIPULATION_VIEWPORT_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTMANIPULATION_VIEWPORT_OPTIONS) String() string {
+	var parts []string
+	if e&DIRECTMANIPULATION_VIEWPORT_OPTIONS_AUTODISABLE != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_VIEWPORT_OPTIONS_AUTODISABLE")
+	}
+	if e&DIRECTMANIPULATION_VIEWPORT_OPTIONS_MANUALUPDATE != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_VIEWPORT_OPTIONS_MANUALUPDATE")
+	}
+	if e&DIRECTMANIPULATION_VIEWPORT_OPTIONS_INPUT != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_VIEWPORT_OPTIONS_INPUT")
+	}
+	if e&DIRECTMANIPULATION_VIEWPORT_OPTIONS_EXPLICITHITTEST != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_VIEWPORT_OPTIONS_EXPLICITHITTEST")
+	}
+	if e&DIRECTMANIPULATION_VIEWPORT_OPTIONS_DISABLEPIXELSNAPPING != 0 {
+		parts = append(parts, "DIRECTMANIPULATION_VIEWPORT_OPTIONS_DISABLEPIXELSNAPPING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

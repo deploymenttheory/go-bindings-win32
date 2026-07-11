@@ -60,16 +60,24 @@ func (g *Generator) buildEnumModels(meta *win32meta.NamespaceMeta) []view.EnumMo
 			IsFlags:  enum.IsFlags,
 			DocURL:   enum.Availability.DocURL,
 		}
+		seenValues := map[string]bool{}
 		for _, member := range enum.Members {
 			memberName := naming.Export(member.Name)
 			if !g.claimName(memberName) {
 				g.diag("enum member %s.%s: name already used", name, member.Name)
 				continue
 			}
-			model.Members = append(model.Members, view.EnumMemberModel{
-				Name:  memberName,
-				Value: literalForBase(member.Value, enum.BaseType),
-			})
+			value := literalForBase(member.Value, enum.BaseType)
+			memberModel := view.EnumMemberModel{
+				Name:   memberName,
+				Value:  value,
+				IsZero: value == "0",
+			}
+			model.Members = append(model.Members, memberModel)
+			if !seenValues[value] {
+				seenValues[value] = true
+				model.UniqueMembers = append(model.UniqueMembers, memberModel)
+			}
 		}
 		models = append(models, model)
 	}

@@ -4,6 +4,10 @@
 
 package bluetooth
 
+import (
+	"fmt"
+)
+
 type AUTHENTICATION_REQUIREMENTS int32
 
 const (
@@ -16,6 +20,29 @@ const (
 	MITMProtectionNotDefined                AUTHENTICATION_REQUIREMENTS = 255
 )
 
+// String returns the AUTHENTICATION_REQUIREMENTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHENTICATION_REQUIREMENTS) String() string {
+	switch e {
+	case MITMProtectionNotRequired:
+		return "MITMProtectionNotRequired"
+	case MITMProtectionRequired:
+		return "MITMProtectionRequired"
+	case MITMProtectionNotRequiredBonding:
+		return "MITMProtectionNotRequiredBonding"
+	case MITMProtectionRequiredBonding:
+		return "MITMProtectionRequiredBonding"
+	case MITMProtectionNotRequiredGeneralBonding:
+		return "MITMProtectionNotRequiredGeneralBonding"
+	case MITMProtectionRequiredGeneralBonding:
+		return "MITMProtectionRequiredGeneralBonding"
+	case MITMProtectionNotDefined:
+		return "MITMProtectionNotDefined"
+	default:
+		return fmt.Sprintf("AUTHENTICATION_REQUIREMENTS(%d)", int32(e))
+	}
+}
+
 // BLUETOOTH_AUTHENTICATION_METHOD: https://learn.microsoft.com/windows/win32/api/bluetoothapis/ne-bluetoothapis-bluetooth_authentication_method
 type BLUETOOTH_AUTHENTICATION_METHOD int32
 
@@ -26,6 +53,25 @@ const (
 	BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION BLUETOOTH_AUTHENTICATION_METHOD = 4
 	BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY              BLUETOOTH_AUTHENTICATION_METHOD = 5
 )
+
+// String returns the BLUETOOTH_AUTHENTICATION_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BLUETOOTH_AUTHENTICATION_METHOD) String() string {
+	switch e {
+	case BLUETOOTH_AUTHENTICATION_METHOD_LEGACY:
+		return "BLUETOOTH_AUTHENTICATION_METHOD_LEGACY"
+	case BLUETOOTH_AUTHENTICATION_METHOD_OOB:
+		return "BLUETOOTH_AUTHENTICATION_METHOD_OOB"
+	case BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON:
+		return "BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON"
+	case BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION:
+		return "BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION"
+	case BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY:
+		return "BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY"
+	default:
+		return fmt.Sprintf("BLUETOOTH_AUTHENTICATION_METHOD(%d)", int32(e))
+	}
+}
 
 // BLUETOOTH_AUTHENTICATION_REQUIREMENTS: https://learn.microsoft.com/windows/win32/api/bluetoothapis/ne-bluetoothapis-bluetooth_authentication_requirements
 type BLUETOOTH_AUTHENTICATION_REQUIREMENTS int32
@@ -40,6 +86,29 @@ const (
 	BLUETOOTH_MITM_ProtectionNotDefined                BLUETOOTH_AUTHENTICATION_REQUIREMENTS = 255
 )
 
+// String returns the BLUETOOTH_AUTHENTICATION_REQUIREMENTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BLUETOOTH_AUTHENTICATION_REQUIREMENTS) String() string {
+	switch e {
+	case BLUETOOTH_MITM_ProtectionNotRequired:
+		return "BLUETOOTH_MITM_ProtectionNotRequired"
+	case BLUETOOTH_MITM_ProtectionRequired:
+		return "BLUETOOTH_MITM_ProtectionRequired"
+	case BLUETOOTH_MITM_ProtectionNotRequiredBonding:
+		return "BLUETOOTH_MITM_ProtectionNotRequiredBonding"
+	case BLUETOOTH_MITM_ProtectionRequiredBonding:
+		return "BLUETOOTH_MITM_ProtectionRequiredBonding"
+	case BLUETOOTH_MITM_ProtectionNotRequiredGeneralBonding:
+		return "BLUETOOTH_MITM_ProtectionNotRequiredGeneralBonding"
+	case BLUETOOTH_MITM_ProtectionRequiredGeneralBonding:
+		return "BLUETOOTH_MITM_ProtectionRequiredGeneralBonding"
+	case BLUETOOTH_MITM_ProtectionNotDefined:
+		return "BLUETOOTH_MITM_ProtectionNotDefined"
+	default:
+		return fmt.Sprintf("BLUETOOTH_AUTHENTICATION_REQUIREMENTS(%d)", int32(e))
+	}
+}
+
 // BLUETOOTH_IO_CAPABILITY: https://learn.microsoft.com/windows/win32/api/bluetoothapis/ne-bluetoothapis-bluetooth_io_capability
 type BLUETOOTH_IO_CAPABILITY int32
 
@@ -50,6 +119,25 @@ const (
 	BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT BLUETOOTH_IO_CAPABILITY = 3
 	BLUETOOTH_IO_CAPABILITY_UNDEFINED       BLUETOOTH_IO_CAPABILITY = 255
 )
+
+// String returns the BLUETOOTH_IO_CAPABILITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BLUETOOTH_IO_CAPABILITY) String() string {
+	switch e {
+	case BLUETOOTH_IO_CAPABILITY_DISPLAYONLY:
+		return "BLUETOOTH_IO_CAPABILITY_DISPLAYONLY"
+	case BLUETOOTH_IO_CAPABILITY_DISPLAYYESNO:
+		return "BLUETOOTH_IO_CAPABILITY_DISPLAYYESNO"
+	case BLUETOOTH_IO_CAPABILITY_KEYBOARDONLY:
+		return "BLUETOOTH_IO_CAPABILITY_KEYBOARDONLY"
+	case BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT:
+		return "BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT"
+	case BLUETOOTH_IO_CAPABILITY_UNDEFINED:
+		return "BLUETOOTH_IO_CAPABILITY_UNDEFINED"
+	default:
+		return fmt.Sprintf("BLUETOOTH_IO_CAPABILITY(%d)", int32(e))
+	}
+}
 
 // BTH_LE_GATT_DESCRIPTOR_TYPE: https://learn.microsoft.com/windows/win32/api/bthledef/ne-bthledef-bth_le_gatt_descriptor_type
 type BTH_LE_GATT_DESCRIPTOR_TYPE int32
@@ -64,12 +152,46 @@ const (
 	CustomDescriptor                  BTH_LE_GATT_DESCRIPTOR_TYPE = 6
 )
 
+// String returns the BTH_LE_GATT_DESCRIPTOR_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BTH_LE_GATT_DESCRIPTOR_TYPE) String() string {
+	switch e {
+	case CharacteristicExtendedProperties:
+		return "CharacteristicExtendedProperties"
+	case CharacteristicUserDescription:
+		return "CharacteristicUserDescription"
+	case ClientCharacteristicConfiguration:
+		return "ClientCharacteristicConfiguration"
+	case ServerCharacteristicConfiguration:
+		return "ServerCharacteristicConfiguration"
+	case CharacteristicFormat:
+		return "CharacteristicFormat"
+	case CharacteristicAggregateFormat:
+		return "CharacteristicAggregateFormat"
+	case CustomDescriptor:
+		return "CustomDescriptor"
+	default:
+		return fmt.Sprintf("BTH_LE_GATT_DESCRIPTOR_TYPE(%d)", int32(e))
+	}
+}
+
 // BTH_LE_GATT_EVENT_TYPE: https://learn.microsoft.com/windows/win32/api/bthledef/ne-bthledef-bth_le_gatt_event_type
 type BTH_LE_GATT_EVENT_TYPE int32
 
 const (
 	CharacteristicValueChangedEvent BTH_LE_GATT_EVENT_TYPE = 0
 )
+
+// String returns the BTH_LE_GATT_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BTH_LE_GATT_EVENT_TYPE) String() string {
+	switch e {
+	case CharacteristicValueChangedEvent:
+		return "CharacteristicValueChangedEvent"
+	default:
+		return fmt.Sprintf("BTH_LE_GATT_EVENT_TYPE(%d)", int32(e))
+	}
+}
 
 type IO_CAPABILITY int32
 
@@ -81,12 +203,44 @@ const (
 	IoCaps_Undefined       IO_CAPABILITY = 255
 )
 
+// String returns the IO_CAPABILITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IO_CAPABILITY) String() string {
+	switch e {
+	case IoCaps_DisplayOnly:
+		return "IoCaps_DisplayOnly"
+	case IoCaps_DisplayYesNo:
+		return "IoCaps_DisplayYesNo"
+	case IoCaps_KeyboardOnly:
+		return "IoCaps_KeyboardOnly"
+	case IoCaps_NoInputNoOutput:
+		return "IoCaps_NoInputNoOutput"
+	case IoCaps_Undefined:
+		return "IoCaps_Undefined"
+	default:
+		return fmt.Sprintf("IO_CAPABILITY(%d)", int32(e))
+	}
+}
+
 type NodeContainerType int32
 
 const (
 	NodeContainerTypeSequence    NodeContainerType = 0
 	NodeContainerTypeAlternative NodeContainerType = 1
 )
+
+// String returns the NodeContainerType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NodeContainerType) String() string {
+	switch e {
+	case NodeContainerTypeSequence:
+		return "NodeContainerTypeSequence"
+	case NodeContainerTypeAlternative:
+		return "NodeContainerTypeAlternative"
+	default:
+		return fmt.Sprintf("NodeContainerType(%d)", int32(e))
+	}
+}
 
 type SDP_SPECIFICTYPE int32
 
@@ -107,6 +261,41 @@ const (
 	SDP_ST_UUID128 SDP_SPECIFICTYPE = 1072
 )
 
+// String returns the SDP_SPECIFICTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SDP_SPECIFICTYPE) String() string {
+	switch e {
+	case SDP_ST_NONE:
+		return "SDP_ST_NONE"
+	case SDP_ST_UINT8:
+		return "SDP_ST_UINT8"
+	case SDP_ST_UINT16:
+		return "SDP_ST_UINT16"
+	case SDP_ST_UINT32:
+		return "SDP_ST_UINT32"
+	case SDP_ST_UINT64:
+		return "SDP_ST_UINT64"
+	case SDP_ST_UINT128:
+		return "SDP_ST_UINT128"
+	case SDP_ST_INT8:
+		return "SDP_ST_INT8"
+	case SDP_ST_INT16:
+		return "SDP_ST_INT16"
+	case SDP_ST_INT32:
+		return "SDP_ST_INT32"
+	case SDP_ST_INT64:
+		return "SDP_ST_INT64"
+	case SDP_ST_INT128:
+		return "SDP_ST_INT128"
+	case SDP_ST_UUID16:
+		return "SDP_ST_UUID16"
+	case SDP_ST_UUID128:
+		return "SDP_ST_UUID128"
+	default:
+		return fmt.Sprintf("SDP_SPECIFICTYPE(%d)", int32(e))
+	}
+}
+
 type SDP_TYPE int32
 
 const (
@@ -121,3 +310,32 @@ const (
 	SDP_TYPE_URL         SDP_TYPE = 8
 	SDP_TYPE_CONTAINER   SDP_TYPE = 32
 )
+
+// String returns the SDP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SDP_TYPE) String() string {
+	switch e {
+	case SDP_TYPE_NIL:
+		return "SDP_TYPE_NIL"
+	case SDP_TYPE_UINT:
+		return "SDP_TYPE_UINT"
+	case SDP_TYPE_INT:
+		return "SDP_TYPE_INT"
+	case SDP_TYPE_UUID:
+		return "SDP_TYPE_UUID"
+	case SDP_TYPE_STRING:
+		return "SDP_TYPE_STRING"
+	case SDP_TYPE_BOOLEAN:
+		return "SDP_TYPE_BOOLEAN"
+	case SDP_TYPE_SEQUENCE:
+		return "SDP_TYPE_SEQUENCE"
+	case SDP_TYPE_ALTERNATIVE:
+		return "SDP_TYPE_ALTERNATIVE"
+	case SDP_TYPE_URL:
+		return "SDP_TYPE_URL"
+	case SDP_TYPE_CONTAINER:
+		return "SDP_TYPE_CONTAINER"
+	default:
+		return fmt.Sprintf("SDP_TYPE(%d)", int32(e))
+	}
+}

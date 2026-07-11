@@ -4,6 +4,10 @@
 
 package printticket
 
+import (
+	"fmt"
+)
+
 // EDefaultDevmodeType: https://learn.microsoft.com/windows/win32/api/prntvpt/ne-prntvpt-edefaultdevmodetype
 type EDefaultDevmodeType int32
 
@@ -11,6 +15,19 @@ const (
 	KUserDefaultDevmode    EDefaultDevmodeType = 0
 	KPrinterDefaultDevmode EDefaultDevmodeType = 1
 )
+
+// String returns the EDefaultDevmodeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDefaultDevmodeType) String() string {
+	switch e {
+	case KUserDefaultDevmode:
+		return "KUserDefaultDevmode"
+	case KPrinterDefaultDevmode:
+		return "KPrinterDefaultDevmode"
+	default:
+		return fmt.Sprintf("EDefaultDevmodeType(%d)", int32(e))
+	}
+}
 
 // EPrintTicketScope: https://learn.microsoft.com/windows/win32/api/prntvpt/ne-prntvpt-eprintticketscope
 type EPrintTicketScope int32
@@ -20,3 +37,18 @@ const (
 	KPTDocumentScope EPrintTicketScope = 1
 	KPTJobScope      EPrintTicketScope = 2
 )
+
+// String returns the EPrintTicketScope constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EPrintTicketScope) String() string {
+	switch e {
+	case KPTPageScope:
+		return "KPTPageScope"
+	case KPTDocumentScope:
+		return "KPTDocumentScope"
+	case KPTJobScope:
+		return "KPTJobScope"
+	default:
+		return fmt.Sprintf("EPrintTicketScope(%d)", int32(e))
+	}
+}

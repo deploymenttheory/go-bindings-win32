@@ -4,13 +4,30 @@
 
 package hostcomputesystem
 
+import (
+	"fmt"
+	"strings"
+)
+
 type HCS_CREATE_OPTIONS int32
 
 const (
 	HcsCreateOptions_1 HCS_CREATE_OPTIONS = 65536
 )
 
+// String returns the HCS_CREATE_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HCS_CREATE_OPTIONS) String() string {
+	switch e {
+	case HcsCreateOptions_1:
+		return "HcsCreateOptions_1"
+	default:
+		return fmt.Sprintf("HCS_CREATE_OPTIONS(%d)", int32(e))
+	}
+}
+
 // HCS_EVENT_OPTIONS: https://learn.microsoft.com/virtualization/api/hcs/Reference/HCS_EVENT_OPTIONS
+// Bitmask — values may be combined with |.
 type HCS_EVENT_OPTIONS int32
 
 const (
@@ -19,6 +36,25 @@ const (
 	HcsEventOptionEnableVmLifecycle         HCS_EVENT_OPTIONS = 2
 	HcsEventOptionEnableLiveMigrationEvents HCS_EVENT_OPTIONS = 4
 )
+
+// String returns the HCS_EVENT_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HCS_EVENT_OPTIONS) String() string {
+	var parts []string
+	if e&HcsEventOptionEnableOperationCallbacks != 0 {
+		parts = append(parts, "HcsEventOptionEnableOperationCallbacks")
+	}
+	if e&HcsEventOptionEnableVmLifecycle != 0 {
+		parts = append(parts, "HcsEventOptionEnableVmLifecycle")
+	}
+	if e&HcsEventOptionEnableLiveMigrationEvents != 0 {
+		parts = append(parts, "HcsEventOptionEnableLiveMigrationEvents")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // HCS_EVENT_TYPE: https://learn.microsoft.com/virtualization/api/hcs/Reference/HCS_EVENT_TYPE
 type HCS_EVENT_TYPE int32
@@ -38,6 +74,41 @@ const (
 	HcsEventGroupLiveMigration                HCS_EVENT_TYPE = -2147483645
 	HcsEventGroupOperationInfo                HCS_EVENT_TYPE = -1073741823
 )
+
+// String returns the HCS_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HCS_EVENT_TYPE) String() string {
+	switch e {
+	case HcsEventInvalid:
+		return "HcsEventInvalid"
+	case HcsEventSystemExited:
+		return "HcsEventSystemExited"
+	case HcsEventSystemCrashInitiated:
+		return "HcsEventSystemCrashInitiated"
+	case HcsEventSystemCrashReport:
+		return "HcsEventSystemCrashReport"
+	case HcsEventSystemRdpEnhancedModeStateChanged:
+		return "HcsEventSystemRdpEnhancedModeStateChanged"
+	case HcsEventSystemSiloJobCreated:
+		return "HcsEventSystemSiloJobCreated"
+	case HcsEventSystemGuestConnectionClosed:
+		return "HcsEventSystemGuestConnectionClosed"
+	case HcsEventProcessExited:
+		return "HcsEventProcessExited"
+	case HcsEventOperationCallback:
+		return "HcsEventOperationCallback"
+	case HcsEventServiceDisconnect:
+		return "HcsEventServiceDisconnect"
+	case HcsEventGroupVmLifecycle:
+		return "HcsEventGroupVmLifecycle"
+	case HcsEventGroupLiveMigration:
+		return "HcsEventGroupLiveMigration"
+	case HcsEventGroupOperationInfo:
+		return "HcsEventGroupOperationInfo"
+	default:
+		return fmt.Sprintf("HCS_EVENT_TYPE(%d)", int32(e))
+	}
+}
 
 type HCS_NOTIFICATIONS int32
 
@@ -66,6 +137,57 @@ const (
 	HcsNotificationFlagsReserved                     HCS_NOTIFICATIONS = -268435456
 )
 
+// String returns the HCS_NOTIFICATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HCS_NOTIFICATIONS) String() string {
+	switch e {
+	case HcsNotificationInvalid:
+		return "HcsNotificationInvalid"
+	case HcsNotificationSystemExited:
+		return "HcsNotificationSystemExited"
+	case HcsNotificationSystemCreateCompleted:
+		return "HcsNotificationSystemCreateCompleted"
+	case HcsNotificationSystemStartCompleted:
+		return "HcsNotificationSystemStartCompleted"
+	case HcsNotificationSystemPauseCompleted:
+		return "HcsNotificationSystemPauseCompleted"
+	case HcsNotificationSystemResumeCompleted:
+		return "HcsNotificationSystemResumeCompleted"
+	case HcsNotificationSystemCrashReport:
+		return "HcsNotificationSystemCrashReport"
+	case HcsNotificationSystemSiloJobCreated:
+		return "HcsNotificationSystemSiloJobCreated"
+	case HcsNotificationSystemSaveCompleted:
+		return "HcsNotificationSystemSaveCompleted"
+	case HcsNotificationSystemRdpEnhancedModeStateChanged:
+		return "HcsNotificationSystemRdpEnhancedModeStateChanged"
+	case HcsNotificationSystemShutdownFailed:
+		return "HcsNotificationSystemShutdownFailed"
+	case HcsNotificationSystemGetPropertiesCompleted:
+		return "HcsNotificationSystemGetPropertiesCompleted"
+	case HcsNotificationSystemModifyCompleted:
+		return "HcsNotificationSystemModifyCompleted"
+	case HcsNotificationSystemCrashInitiated:
+		return "HcsNotificationSystemCrashInitiated"
+	case HcsNotificationSystemGuestConnectionClosed:
+		return "HcsNotificationSystemGuestConnectionClosed"
+	case HcsNotificationSystemOperationCompletion:
+		return "HcsNotificationSystemOperationCompletion"
+	case HcsNotificationSystemPassThru:
+		return "HcsNotificationSystemPassThru"
+	case HcsNotificationOperationProgressUpdate:
+		return "HcsNotificationOperationProgressUpdate"
+	case HcsNotificationProcessExited:
+		return "HcsNotificationProcessExited"
+	case HcsNotificationServiceDisconnect:
+		return "HcsNotificationServiceDisconnect"
+	case HcsNotificationFlagsReserved:
+		return "HcsNotificationFlagsReserved"
+	default:
+		return fmt.Sprintf("HCS_NOTIFICATIONS(%d)", int32(e))
+	}
+}
+
 type HCS_NOTIFICATION_FLAGS int32
 
 const (
@@ -73,6 +195,20 @@ const (
 	HcsNotificationFlagFailure HCS_NOTIFICATION_FLAGS = -2147483648
 )
 
+// String returns the HCS_NOTIFICATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HCS_NOTIFICATION_FLAGS) String() string {
+	switch e {
+	case HcsNotificationFlagSuccess:
+		return "HcsNotificationFlagSuccess"
+	case HcsNotificationFlagFailure:
+		return "HcsNotificationFlagFailure"
+	default:
+		return fmt.Sprintf("HCS_NOTIFICATION_FLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HCS_OPERATION_OPTIONS int32
 
 const (
@@ -80,6 +216,22 @@ const (
 	HcsOperationOptionProgressUpdate HCS_OPERATION_OPTIONS = 1
 	HcsOperationOptionReserved1      HCS_OPERATION_OPTIONS = 2
 )
+
+// String returns the HCS_OPERATION_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HCS_OPERATION_OPTIONS) String() string {
+	var parts []string
+	if e&HcsOperationOptionProgressUpdate != 0 {
+		parts = append(parts, "HcsOperationOptionProgressUpdate")
+	}
+	if e&HcsOperationOptionReserved1 != 0 {
+		parts = append(parts, "HcsOperationOptionReserved1")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // HCS_OPERATION_TYPE: https://learn.microsoft.com/virtualization/api/hcs/Reference/HCS_OPERATION_TYPE
 type HCS_OPERATION_TYPE int32
@@ -108,6 +260,57 @@ const (
 	HcsOperationTypeReserved3            HCS_OPERATION_TYPE = 18
 )
 
+// String returns the HCS_OPERATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HCS_OPERATION_TYPE) String() string {
+	switch e {
+	case HcsOperationTypeNone:
+		return "HcsOperationTypeNone"
+	case HcsOperationTypeEnumerate:
+		return "HcsOperationTypeEnumerate"
+	case HcsOperationTypeCreate:
+		return "HcsOperationTypeCreate"
+	case HcsOperationTypeStart:
+		return "HcsOperationTypeStart"
+	case HcsOperationTypeShutdown:
+		return "HcsOperationTypeShutdown"
+	case HcsOperationTypePause:
+		return "HcsOperationTypePause"
+	case HcsOperationTypeResume:
+		return "HcsOperationTypeResume"
+	case HcsOperationTypeSave:
+		return "HcsOperationTypeSave"
+	case HcsOperationTypeTerminate:
+		return "HcsOperationTypeTerminate"
+	case HcsOperationTypeModify:
+		return "HcsOperationTypeModify"
+	case HcsOperationTypeGetProperties:
+		return "HcsOperationTypeGetProperties"
+	case HcsOperationTypeCreateProcess:
+		return "HcsOperationTypeCreateProcess"
+	case HcsOperationTypeSignalProcess:
+		return "HcsOperationTypeSignalProcess"
+	case HcsOperationTypeGetProcessInfo:
+		return "HcsOperationTypeGetProcessInfo"
+	case HcsOperationTypeGetProcessProperties:
+		return "HcsOperationTypeGetProcessProperties"
+	case HcsOperationTypeModifyProcess:
+		return "HcsOperationTypeModifyProcess"
+	case HcsOperationTypeCrash:
+		return "HcsOperationTypeCrash"
+	case HcsOperationTypeLiveMigration:
+		return "HcsOperationTypeLiveMigration"
+	case HcsOperationTypeReserved1:
+		return "HcsOperationTypeReserved1"
+	case HcsOperationTypeReserved2:
+		return "HcsOperationTypeReserved2"
+	case HcsOperationTypeReserved3:
+		return "HcsOperationTypeReserved3"
+	default:
+		return fmt.Sprintf("HCS_OPERATION_TYPE(%d)", int32(e))
+	}
+}
+
 type HCS_RESOURCE_TYPE int32
 
 const (
@@ -117,3 +320,22 @@ const (
 	HcsResourceTypeComObject HCS_RESOURCE_TYPE = 3
 	HcsResourceTypeSocket    HCS_RESOURCE_TYPE = 4
 )
+
+// String returns the HCS_RESOURCE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HCS_RESOURCE_TYPE) String() string {
+	switch e {
+	case HcsResourceTypeNone:
+		return "HcsResourceTypeNone"
+	case HcsResourceTypeFile:
+		return "HcsResourceTypeFile"
+	case HcsResourceTypeJob:
+		return "HcsResourceTypeJob"
+	case HcsResourceTypeComObject:
+		return "HcsResourceTypeComObject"
+	case HcsResourceTypeSocket:
+		return "HcsResourceTypeSocket"
+	default:
+		return fmt.Sprintf("HCS_RESOURCE_TYPE(%d)", int32(e))
+	}
+}

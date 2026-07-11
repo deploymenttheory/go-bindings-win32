@@ -4,6 +4,11 @@
 
 package services
 
+import (
+	"fmt"
+	"strings"
+)
+
 type ENUM_SERVICE_STATE uint32
 
 const (
@@ -12,6 +17,22 @@ const (
 	SERVICE_STATE_ALL ENUM_SERVICE_STATE = 3
 )
 
+// String returns the ENUM_SERVICE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENUM_SERVICE_STATE) String() string {
+	switch e {
+	case SERVICE_ACTIVE:
+		return "SERVICE_ACTIVE"
+	case SERVICE_INACTIVE:
+		return "SERVICE_INACTIVE"
+	case SERVICE_STATE_ALL:
+		return "SERVICE_STATE_ALL"
+	default:
+		return fmt.Sprintf("ENUM_SERVICE_STATE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type ENUM_SERVICE_TYPE uint32
 
 const (
@@ -27,6 +48,46 @@ const (
 	SERVICE_USER_SHARE_PROCESS  ENUM_SERVICE_TYPE = 96
 )
 
+// String returns the ENUM_SERVICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENUM_SERVICE_TYPE) String() string {
+	var parts []string
+	if e&SERVICE_DRIVER != 0 {
+		parts = append(parts, "SERVICE_DRIVER")
+	}
+	if e&SERVICE_KERNEL_DRIVER != 0 {
+		parts = append(parts, "SERVICE_KERNEL_DRIVER")
+	}
+	if e&SERVICE_WIN32 != 0 {
+		parts = append(parts, "SERVICE_WIN32")
+	}
+	if e&SERVICE_WIN32_SHARE_PROCESS != 0 {
+		parts = append(parts, "SERVICE_WIN32_SHARE_PROCESS")
+	}
+	if e&SERVICE_ADAPTER != 0 {
+		parts = append(parts, "SERVICE_ADAPTER")
+	}
+	if e&SERVICE_FILE_SYSTEM_DRIVER != 0 {
+		parts = append(parts, "SERVICE_FILE_SYSTEM_DRIVER")
+	}
+	if e&SERVICE_RECOGNIZER_DRIVER != 0 {
+		parts = append(parts, "SERVICE_RECOGNIZER_DRIVER")
+	}
+	if e&SERVICE_WIN32_OWN_PROCESS != 0 {
+		parts = append(parts, "SERVICE_WIN32_OWN_PROCESS")
+	}
+	if e&SERVICE_USER_OWN_PROCESS != 0 {
+		parts = append(parts, "SERVICE_USER_OWN_PROCESS")
+	}
+	if e&SERVICE_USER_SHARE_PROCESS != 0 {
+		parts = append(parts, "SERVICE_USER_SHARE_PROCESS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SC_ACTION_TYPE int32
 
 const (
@@ -37,11 +98,41 @@ const (
 	SC_ACTION_OWN_RESTART SC_ACTION_TYPE = 4
 )
 
+// String returns the SC_ACTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SC_ACTION_TYPE) String() string {
+	switch e {
+	case SC_ACTION_NONE:
+		return "SC_ACTION_NONE"
+	case SC_ACTION_RESTART:
+		return "SC_ACTION_RESTART"
+	case SC_ACTION_REBOOT:
+		return "SC_ACTION_REBOOT"
+	case SC_ACTION_RUN_COMMAND:
+		return "SC_ACTION_RUN_COMMAND"
+	case SC_ACTION_OWN_RESTART:
+		return "SC_ACTION_OWN_RESTART"
+	default:
+		return fmt.Sprintf("SC_ACTION_TYPE(%d)", int32(e))
+	}
+}
+
 type SC_ENUM_TYPE int32
 
 const (
 	SC_ENUM_PROCESS_INFO SC_ENUM_TYPE = 0
 )
+
+// String returns the SC_ENUM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SC_ENUM_TYPE) String() string {
+	switch e {
+	case SC_ENUM_PROCESS_INFO:
+		return "SC_ENUM_PROCESS_INFO"
+	default:
+		return fmt.Sprintf("SC_ENUM_TYPE(%d)", int32(e))
+	}
+}
 
 // SC_EVENT_TYPE: https://learn.microsoft.com/windows/win32/Services/sc-event-type
 type SC_EVENT_TYPE int32
@@ -52,11 +143,37 @@ const (
 	SC_EVENT_STATUS_CHANGE   SC_EVENT_TYPE = 2
 )
 
+// String returns the SC_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SC_EVENT_TYPE) String() string {
+	switch e {
+	case SC_EVENT_DATABASE_CHANGE:
+		return "SC_EVENT_DATABASE_CHANGE"
+	case SC_EVENT_PROPERTY_CHANGE:
+		return "SC_EVENT_PROPERTY_CHANGE"
+	case SC_EVENT_STATUS_CHANGE:
+		return "SC_EVENT_STATUS_CHANGE"
+	default:
+		return fmt.Sprintf("SC_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 type SC_STATUS_TYPE int32
 
 const (
 	SC_STATUS_PROCESS_INFO SC_STATUS_TYPE = 0
 )
+
+// String returns the SC_STATUS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SC_STATUS_TYPE) String() string {
+	switch e {
+	case SC_STATUS_PROCESS_INFO:
+		return "SC_STATUS_PROCESS_INFO"
+	default:
+		return fmt.Sprintf("SC_STATUS_TYPE(%d)", int32(e))
+	}
+}
 
 type SERVICE_CONFIG uint32
 
@@ -73,6 +190,35 @@ const (
 	SERVICE_CONFIG_LAUNCH_PROTECTED         SERVICE_CONFIG = 12
 )
 
+// String returns the SERVICE_CONFIG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_CONFIG) String() string {
+	switch e {
+	case SERVICE_CONFIG_DELAYED_AUTO_START_INFO:
+		return "SERVICE_CONFIG_DELAYED_AUTO_START_INFO"
+	case SERVICE_CONFIG_DESCRIPTION:
+		return "SERVICE_CONFIG_DESCRIPTION"
+	case SERVICE_CONFIG_FAILURE_ACTIONS:
+		return "SERVICE_CONFIG_FAILURE_ACTIONS"
+	case SERVICE_CONFIG_FAILURE_ACTIONS_FLAG:
+		return "SERVICE_CONFIG_FAILURE_ACTIONS_FLAG"
+	case SERVICE_CONFIG_PREFERRED_NODE:
+		return "SERVICE_CONFIG_PREFERRED_NODE"
+	case SERVICE_CONFIG_PRESHUTDOWN_INFO:
+		return "SERVICE_CONFIG_PRESHUTDOWN_INFO"
+	case SERVICE_CONFIG_REQUIRED_PRIVILEGES_INFO:
+		return "SERVICE_CONFIG_REQUIRED_PRIVILEGES_INFO"
+	case SERVICE_CONFIG_SERVICE_SID_INFO:
+		return "SERVICE_CONFIG_SERVICE_SID_INFO"
+	case SERVICE_CONFIG_TRIGGER_INFO:
+		return "SERVICE_CONFIG_TRIGGER_INFO"
+	case SERVICE_CONFIG_LAUNCH_PROTECTED:
+		return "SERVICE_CONFIG_LAUNCH_PROTECTED"
+	default:
+		return fmt.Sprintf("SERVICE_CONFIG(%d)", uint32(e))
+	}
+}
+
 // SERVICE_DIRECTORY_TYPE: https://learn.microsoft.com/windows/win32/api/winsvc/ne-winsvc-service_directory_type
 type SERVICE_DIRECTORY_TYPE int32
 
@@ -80,6 +226,19 @@ const (
 	ServiceDirectoryPersistentState SERVICE_DIRECTORY_TYPE = 0
 	ServiceDirectoryTypeMax         SERVICE_DIRECTORY_TYPE = 1
 )
+
+// String returns the SERVICE_DIRECTORY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_DIRECTORY_TYPE) String() string {
+	switch e {
+	case ServiceDirectoryPersistentState:
+		return "ServiceDirectoryPersistentState"
+	case ServiceDirectoryTypeMax:
+		return "ServiceDirectoryTypeMax"
+	default:
+		return fmt.Sprintf("SERVICE_DIRECTORY_TYPE(%d)", int32(e))
+	}
+}
 
 type SERVICE_ERROR uint32
 
@@ -90,6 +249,24 @@ const (
 	SERVICE_ERROR_SEVERE   SERVICE_ERROR = 2
 )
 
+// String returns the SERVICE_ERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_ERROR) String() string {
+	switch e {
+	case SERVICE_ERROR_CRITICAL:
+		return "SERVICE_ERROR_CRITICAL"
+	case SERVICE_ERROR_IGNORE:
+		return "SERVICE_ERROR_IGNORE"
+	case SERVICE_ERROR_NORMAL:
+		return "SERVICE_ERROR_NORMAL"
+	case SERVICE_ERROR_SEVERE:
+		return "SERVICE_ERROR_SEVERE"
+	default:
+		return fmt.Sprintf("SERVICE_ERROR(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SERVICE_NOTIFY uint32
 
 const (
@@ -105,6 +282,46 @@ const (
 	SERVICE_NOTIFY_STOPPED          SERVICE_NOTIFY = 1
 )
 
+// String returns the SERVICE_NOTIFY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_NOTIFY) String() string {
+	var parts []string
+	if e&SERVICE_NOTIFY_CREATED != 0 {
+		parts = append(parts, "SERVICE_NOTIFY_CREATED")
+	}
+	if e&SERVICE_NOTIFY_CONTINUE_PENDING != 0 {
+		parts = append(parts, "SERVICE_NOTIFY_CONTINUE_PENDING")
+	}
+	if e&SERVICE_NOTIFY_DELETE_PENDING != 0 {
+		parts = append(parts, "SERVICE_NOTIFY_DELETE_PENDING")
+	}
+	if e&SERVICE_NOTIFY_DELETED != 0 {
+		parts = append(parts, "SERVICE_NOTIFY_DELETED")
+	}
+	if e&SERVICE_NOTIFY_PAUSE_PENDING != 0 {
+		parts = append(parts, "SERVICE_NOTIFY_PAUSE_PENDING")
+	}
+	if e&SERVICE_NOTIFY_PAUSED != 0 {
+		parts = append(parts, "SERVICE_NOTIFY_PAUSED")
+	}
+	if e&SERVICE_NOTIFY_RUNNING != 0 {
+		parts = append(parts, "SERVICE_NOTIFY_RUNNING")
+	}
+	if e&SERVICE_NOTIFY_START_PENDING != 0 {
+		parts = append(parts, "SERVICE_NOTIFY_START_PENDING")
+	}
+	if e&SERVICE_NOTIFY_STOP_PENDING != 0 {
+		parts = append(parts, "SERVICE_NOTIFY_STOP_PENDING")
+	}
+	if e&SERVICE_NOTIFY_STOPPED != 0 {
+		parts = append(parts, "SERVICE_NOTIFY_STOPPED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // SERVICE_REGISTRY_STATE_TYPE: https://learn.microsoft.com/windows/win32/api/winsvc/ne-winsvc-service_registry_state_type
 type SERVICE_REGISTRY_STATE_TYPE int32
 
@@ -114,12 +331,40 @@ const (
 	MaxServiceRegistryStateType    SERVICE_REGISTRY_STATE_TYPE = 2
 )
 
+// String returns the SERVICE_REGISTRY_STATE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_REGISTRY_STATE_TYPE) String() string {
+	switch e {
+	case ServiceRegistryStateParameters:
+		return "ServiceRegistryStateParameters"
+	case ServiceRegistryStatePersistent:
+		return "ServiceRegistryStatePersistent"
+	case MaxServiceRegistryStateType:
+		return "MaxServiceRegistryStateType"
+	default:
+		return fmt.Sprintf("SERVICE_REGISTRY_STATE_TYPE(%d)", int32(e))
+	}
+}
+
 type SERVICE_RUNS_IN_PROCESS uint32
 
 const (
 	SERVICE_RUNS_IN_NON_SYSTEM_OR_NOT_RUNNING SERVICE_RUNS_IN_PROCESS = 0
 	SERVICE_RUNS_IN_SYSTEM_PROCESS            SERVICE_RUNS_IN_PROCESS = 1
 )
+
+// String returns the SERVICE_RUNS_IN_PROCESS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_RUNS_IN_PROCESS) String() string {
+	switch e {
+	case SERVICE_RUNS_IN_NON_SYSTEM_OR_NOT_RUNNING:
+		return "SERVICE_RUNS_IN_NON_SYSTEM_OR_NOT_RUNNING"
+	case SERVICE_RUNS_IN_SYSTEM_PROCESS:
+		return "SERVICE_RUNS_IN_SYSTEM_PROCESS"
+	default:
+		return fmt.Sprintf("SERVICE_RUNS_IN_PROCESS(%d)", uint32(e))
+	}
+}
 
 // SERVICE_SHARED_DIRECTORY_TYPE: https://learn.microsoft.com/windows/win32/api/winsvc/ne-winsvc-service_shared_directory_type
 type SERVICE_SHARED_DIRECTORY_TYPE int32
@@ -128,12 +373,34 @@ const (
 	ServiceSharedDirectoryPersistentState SERVICE_SHARED_DIRECTORY_TYPE = 0
 )
 
+// String returns the SERVICE_SHARED_DIRECTORY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_SHARED_DIRECTORY_TYPE) String() string {
+	switch e {
+	case ServiceSharedDirectoryPersistentState:
+		return "ServiceSharedDirectoryPersistentState"
+	default:
+		return fmt.Sprintf("SERVICE_SHARED_DIRECTORY_TYPE(%d)", int32(e))
+	}
+}
+
 // SERVICE_SHARED_REGISTRY_STATE_TYPE: https://learn.microsoft.com/windows/win32/api/winsvc/ne-winsvc-service_shared_registry_state_type
 type SERVICE_SHARED_REGISTRY_STATE_TYPE int32
 
 const (
 	ServiceSharedRegistryPersistentState SERVICE_SHARED_REGISTRY_STATE_TYPE = 0
 )
+
+// String returns the SERVICE_SHARED_REGISTRY_STATE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_SHARED_REGISTRY_STATE_TYPE) String() string {
+	switch e {
+	case ServiceSharedRegistryPersistentState:
+		return "ServiceSharedRegistryPersistentState"
+	default:
+		return fmt.Sprintf("SERVICE_SHARED_REGISTRY_STATE_TYPE(%d)", int32(e))
+	}
+}
 
 type SERVICE_START_TYPE uint32
 
@@ -144,6 +411,25 @@ const (
 	SERVICE_DISABLED     SERVICE_START_TYPE = 4
 	SERVICE_SYSTEM_START SERVICE_START_TYPE = 1
 )
+
+// String returns the SERVICE_START_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_START_TYPE) String() string {
+	switch e {
+	case SERVICE_AUTO_START:
+		return "SERVICE_AUTO_START"
+	case SERVICE_BOOT_START:
+		return "SERVICE_BOOT_START"
+	case SERVICE_DEMAND_START:
+		return "SERVICE_DEMAND_START"
+	case SERVICE_DISABLED:
+		return "SERVICE_DISABLED"
+	case SERVICE_SYSTEM_START:
+		return "SERVICE_SYSTEM_START"
+	default:
+		return fmt.Sprintf("SERVICE_START_TYPE(%d)", uint32(e))
+	}
+}
 
 type SERVICE_STATUS_CURRENT_STATE uint32
 
@@ -157,12 +443,48 @@ const (
 	SERVICE_STOPPED          SERVICE_STATUS_CURRENT_STATE = 1
 )
 
+// String returns the SERVICE_STATUS_CURRENT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_STATUS_CURRENT_STATE) String() string {
+	switch e {
+	case SERVICE_CONTINUE_PENDING:
+		return "SERVICE_CONTINUE_PENDING"
+	case SERVICE_PAUSE_PENDING:
+		return "SERVICE_PAUSE_PENDING"
+	case SERVICE_PAUSED:
+		return "SERVICE_PAUSED"
+	case SERVICE_RUNNING:
+		return "SERVICE_RUNNING"
+	case SERVICE_START_PENDING:
+		return "SERVICE_START_PENDING"
+	case SERVICE_STOP_PENDING:
+		return "SERVICE_STOP_PENDING"
+	case SERVICE_STOPPED:
+		return "SERVICE_STOPPED"
+	default:
+		return fmt.Sprintf("SERVICE_STATUS_CURRENT_STATE(%d)", uint32(e))
+	}
+}
+
 type SERVICE_TRIGGER_ACTION uint32
 
 const (
 	SERVICE_TRIGGER_ACTION_SERVICE_START SERVICE_TRIGGER_ACTION = 1
 	SERVICE_TRIGGER_ACTION_SERVICE_STOP  SERVICE_TRIGGER_ACTION = 2
 )
+
+// String returns the SERVICE_TRIGGER_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_TRIGGER_ACTION) String() string {
+	switch e {
+	case SERVICE_TRIGGER_ACTION_SERVICE_START:
+		return "SERVICE_TRIGGER_ACTION_SERVICE_START"
+	case SERVICE_TRIGGER_ACTION_SERVICE_STOP:
+		return "SERVICE_TRIGGER_ACTION_SERVICE_STOP"
+	default:
+		return fmt.Sprintf("SERVICE_TRIGGER_ACTION(%d)", uint32(e))
+	}
+}
 
 type SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE uint32
 
@@ -173,6 +495,25 @@ const (
 	SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ANY SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE = 4
 	SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ALL SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE = 5
 )
+
+// String returns the SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE) String() string {
+	switch e {
+	case SERVICE_TRIGGER_DATA_TYPE_BINARY:
+		return "SERVICE_TRIGGER_DATA_TYPE_BINARY"
+	case SERVICE_TRIGGER_DATA_TYPE_STRING:
+		return "SERVICE_TRIGGER_DATA_TYPE_STRING"
+	case SERVICE_TRIGGER_DATA_TYPE_LEVEL:
+		return "SERVICE_TRIGGER_DATA_TYPE_LEVEL"
+	case SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ANY:
+		return "SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ANY"
+	case SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ALL:
+		return "SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ALL"
+	default:
+		return fmt.Sprintf("SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE(%d)", uint32(e))
+	}
+}
 
 type SERVICE_TRIGGER_TYPE uint32
 
@@ -185,3 +526,26 @@ const (
 	SERVICE_TRIGGER_TYPE_IP_ADDRESS_AVAILABILITY  SERVICE_TRIGGER_TYPE = 2
 	SERVICE_TRIGGER_TYPE_NETWORK_ENDPOINT         SERVICE_TRIGGER_TYPE = 6
 )
+
+// String returns the SERVICE_TRIGGER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVICE_TRIGGER_TYPE) String() string {
+	switch e {
+	case SERVICE_TRIGGER_TYPE_CUSTOM:
+		return "SERVICE_TRIGGER_TYPE_CUSTOM"
+	case SERVICE_TRIGGER_TYPE_DEVICE_INTERFACE_ARRIVAL:
+		return "SERVICE_TRIGGER_TYPE_DEVICE_INTERFACE_ARRIVAL"
+	case SERVICE_TRIGGER_TYPE_DOMAIN_JOIN:
+		return "SERVICE_TRIGGER_TYPE_DOMAIN_JOIN"
+	case SERVICE_TRIGGER_TYPE_FIREWALL_PORT_EVENT:
+		return "SERVICE_TRIGGER_TYPE_FIREWALL_PORT_EVENT"
+	case SERVICE_TRIGGER_TYPE_GROUP_POLICY:
+		return "SERVICE_TRIGGER_TYPE_GROUP_POLICY"
+	case SERVICE_TRIGGER_TYPE_IP_ADDRESS_AVAILABILITY:
+		return "SERVICE_TRIGGER_TYPE_IP_ADDRESS_AVAILABILITY"
+	case SERVICE_TRIGGER_TYPE_NETWORK_ENDPOINT:
+		return "SERVICE_TRIGGER_TYPE_NETWORK_ENDPOINT"
+	default:
+		return fmt.Sprintf("SERVICE_TRIGGER_TYPE(%d)", uint32(e))
+	}
+}

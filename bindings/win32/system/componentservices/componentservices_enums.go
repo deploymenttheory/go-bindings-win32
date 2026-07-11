@@ -4,6 +4,10 @@
 
 package componentservices
 
+import (
+	"fmt"
+)
+
 type AutoSvcs_Error_Constants uint32
 
 const (
@@ -35,6 +39,67 @@ const (
 	ComqcErrBadMarshaledObject         AutoSvcs_Error_Constants = 2148599382
 )
 
+// String returns the AutoSvcs_Error_Constants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AutoSvcs_Error_Constants) String() string {
+	switch e {
+	case MtsErrCtxAborted:
+		return "MtsErrCtxAborted"
+	case MtsErrCtxAborting:
+		return "MtsErrCtxAborting"
+	case MtsErrCtxNoContext:
+		return "MtsErrCtxNoContext"
+	case MtsErrCtxNotRegistered:
+		return "MtsErrCtxNotRegistered"
+	case MtsErrCtxSynchTimeout:
+		return "MtsErrCtxSynchTimeout"
+	case MtsErrCtxOldReference:
+		return "MtsErrCtxOldReference"
+	case MtsErrCtxRoleNotFound:
+		return "MtsErrCtxRoleNotFound"
+	case MtsErrCtxNoSecurity:
+		return "MtsErrCtxNoSecurity"
+	case MtsErrCtxWrongThread:
+		return "MtsErrCtxWrongThread"
+	case MtsErrCtxTMNotAvailable:
+		return "MtsErrCtxTMNotAvailable"
+	case ComQCErrApplicationNotQueued:
+		return "ComQCErrApplicationNotQueued"
+	case ComQCErrNoQueueableInterfaces:
+		return "ComQCErrNoQueueableInterfaces"
+	case ComQCErrQueuingServiceNotAvailable:
+		return "ComQCErrQueuingServiceNotAvailable"
+	case ComQCErrQueueTransactMismatch:
+		return "ComQCErrQueueTransactMismatch"
+	case ComqcErrRecorderMarshalled:
+		return "ComqcErrRecorderMarshalled"
+	case ComqcErrOutParam:
+		return "ComqcErrOutParam"
+	case ComqcErrRecorderNotTrusted:
+		return "ComqcErrRecorderNotTrusted"
+	case ComqcErrPSLoad:
+		return "ComqcErrPSLoad"
+	case ComqcErrMarshaledObjSameTxn:
+		return "ComqcErrMarshaledObjSameTxn"
+	case ComqcErrInvalidMessage:
+		return "ComqcErrInvalidMessage"
+	case ComqcErrMsmqSidUnavailable:
+		return "ComqcErrMsmqSidUnavailable"
+	case ComqcErrWrongMsgExtension:
+		return "ComqcErrWrongMsgExtension"
+	case ComqcErrMsmqServiceUnavailable:
+		return "ComqcErrMsmqServiceUnavailable"
+	case ComqcErrMsgNotAuthenticated:
+		return "ComqcErrMsgNotAuthenticated"
+	case ComqcErrMsmqConnectorUsed:
+		return "ComqcErrMsmqConnectorUsed"
+	case ComqcErrBadMarshaledObject:
+		return "ComqcErrBadMarshaledObject"
+	default:
+		return fmt.Sprintf("AutoSvcs_Error_Constants(%d)", uint32(e))
+	}
+}
+
 type COMAdminAccessChecksLevelOptions int32
 
 const (
@@ -42,12 +107,38 @@ const (
 	COMAdminAccessChecksApplicationComponentLevel COMAdminAccessChecksLevelOptions = 1
 )
 
+// String returns the COMAdminAccessChecksLevelOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminAccessChecksLevelOptions) String() string {
+	switch e {
+	case COMAdminAccessChecksApplicationLevel:
+		return "COMAdminAccessChecksApplicationLevel"
+	case COMAdminAccessChecksApplicationComponentLevel:
+		return "COMAdminAccessChecksApplicationComponentLevel"
+	default:
+		return fmt.Sprintf("COMAdminAccessChecksLevelOptions(%d)", int32(e))
+	}
+}
+
 type COMAdminActivationOptions int32
 
 const (
 	COMAdminActivationInproc COMAdminActivationOptions = 0
 	COMAdminActivationLocal  COMAdminActivationOptions = 1
 )
+
+// String returns the COMAdminActivationOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminActivationOptions) String() string {
+	switch e {
+	case COMAdminActivationInproc:
+		return "COMAdminActivationInproc"
+	case COMAdminActivationLocal:
+		return "COMAdminActivationLocal"
+	default:
+		return fmt.Sprintf("COMAdminActivationOptions(%d)", int32(e))
+	}
+}
 
 type COMAdminApplicationExportOptions int32
 
@@ -59,6 +150,25 @@ const (
 	COMAdminExportIn10Format            COMAdminApplicationExportOptions = 16
 )
 
+// String returns the COMAdminApplicationExportOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminApplicationExportOptions) String() string {
+	switch e {
+	case COMAdminExportNoUsers:
+		return "COMAdminExportNoUsers"
+	case COMAdminExportUsers:
+		return "COMAdminExportUsers"
+	case COMAdminExportApplicationProxy:
+		return "COMAdminExportApplicationProxy"
+	case COMAdminExportForceOverwriteOfFiles:
+		return "COMAdminExportForceOverwriteOfFiles"
+	case COMAdminExportIn10Format:
+		return "COMAdminExportIn10Format"
+	default:
+		return fmt.Sprintf("COMAdminApplicationExportOptions(%d)", int32(e))
+	}
+}
+
 type COMAdminApplicationInstallOptions int32
 
 const (
@@ -66,6 +176,21 @@ const (
 	COMAdminInstallUsers                 COMAdminApplicationInstallOptions = 1
 	COMAdminInstallForceOverwriteOfFiles COMAdminApplicationInstallOptions = 2
 )
+
+// String returns the COMAdminApplicationInstallOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminApplicationInstallOptions) String() string {
+	switch e {
+	case COMAdminInstallNoUsers:
+		return "COMAdminInstallNoUsers"
+	case COMAdminInstallUsers:
+		return "COMAdminInstallUsers"
+	case COMAdminInstallForceOverwriteOfFiles:
+		return "COMAdminInstallForceOverwriteOfFiles"
+	default:
+		return fmt.Sprintf("COMAdminApplicationInstallOptions(%d)", int32(e))
+	}
+}
 
 type COMAdminAuthenticationCapabilitiesOptions int32
 
@@ -75,6 +200,23 @@ const (
 	COMAdminAuthenticationCapabilitiesStaticCloaking  COMAdminAuthenticationCapabilitiesOptions = 32
 	COMAdminAuthenticationCapabilitiesDynamicCloaking COMAdminAuthenticationCapabilitiesOptions = 64
 )
+
+// String returns the COMAdminAuthenticationCapabilitiesOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminAuthenticationCapabilitiesOptions) String() string {
+	switch e {
+	case COMAdminAuthenticationCapabilitiesNone:
+		return "COMAdminAuthenticationCapabilitiesNone"
+	case COMAdminAuthenticationCapabilitiesSecureReference:
+		return "COMAdminAuthenticationCapabilitiesSecureReference"
+	case COMAdminAuthenticationCapabilitiesStaticCloaking:
+		return "COMAdminAuthenticationCapabilitiesStaticCloaking"
+	case COMAdminAuthenticationCapabilitiesDynamicCloaking:
+		return "COMAdminAuthenticationCapabilitiesDynamicCloaking"
+	default:
+		return fmt.Sprintf("COMAdminAuthenticationCapabilitiesOptions(%d)", int32(e))
+	}
+}
 
 type COMAdminAuthenticationLevelOptions int32
 
@@ -88,6 +230,29 @@ const (
 	COMAdminAuthenticationPrivacy   COMAdminAuthenticationLevelOptions = 6
 )
 
+// String returns the COMAdminAuthenticationLevelOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminAuthenticationLevelOptions) String() string {
+	switch e {
+	case COMAdminAuthenticationDefault:
+		return "COMAdminAuthenticationDefault"
+	case COMAdminAuthenticationNone:
+		return "COMAdminAuthenticationNone"
+	case COMAdminAuthenticationConnect:
+		return "COMAdminAuthenticationConnect"
+	case COMAdminAuthenticationCall:
+		return "COMAdminAuthenticationCall"
+	case COMAdminAuthenticationPacket:
+		return "COMAdminAuthenticationPacket"
+	case COMAdminAuthenticationIntegrity:
+		return "COMAdminAuthenticationIntegrity"
+	case COMAdminAuthenticationPrivacy:
+		return "COMAdminAuthenticationPrivacy"
+	default:
+		return fmt.Sprintf("COMAdminAuthenticationLevelOptions(%d)", int32(e))
+	}
+}
+
 type COMAdminComponentFlags int32
 
 const (
@@ -99,12 +264,46 @@ const (
 	COMAdminCompFlagNotInApplication       COMAdminComponentFlags = 32
 )
 
+// String returns the COMAdminComponentFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminComponentFlags) String() string {
+	switch e {
+	case COMAdminCompFlagTypeInfoFound:
+		return "COMAdminCompFlagTypeInfoFound"
+	case COMAdminCompFlagCOMPlusPropertiesFound:
+		return "COMAdminCompFlagCOMPlusPropertiesFound"
+	case COMAdminCompFlagProxyFound:
+		return "COMAdminCompFlagProxyFound"
+	case COMAdminCompFlagInterfacesFound:
+		return "COMAdminCompFlagInterfacesFound"
+	case COMAdminCompFlagAlreadyInstalled:
+		return "COMAdminCompFlagAlreadyInstalled"
+	case COMAdminCompFlagNotInApplication:
+		return "COMAdminCompFlagNotInApplication"
+	default:
+		return fmt.Sprintf("COMAdminComponentFlags(%d)", int32(e))
+	}
+}
+
 type COMAdminComponentType int32
 
 const (
 	COMAdmin32BitComponent COMAdminComponentType = 1
 	COMAdmin64BitComponent COMAdminComponentType = 2
 )
+
+// String returns the COMAdminComponentType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminComponentType) String() string {
+	switch e {
+	case COMAdmin32BitComponent:
+		return "COMAdmin32BitComponent"
+	case COMAdmin64BitComponent:
+		return "COMAdmin64BitComponent"
+	default:
+		return fmt.Sprintf("COMAdminComponentType(%d)", int32(e))
+	}
+}
 
 type COMAdminErrorCodes int32
 
@@ -199,6 +398,191 @@ const (
 	COMAdminErrCannotCopyEventClass          COMAdminErrorCodes = -2146367456
 )
 
+// String returns the COMAdminErrorCodes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminErrorCodes) String() string {
+	switch e {
+	case COMAdminErrObjectErrors:
+		return "COMAdminErrObjectErrors"
+	case COMAdminErrObjectInvalid:
+		return "COMAdminErrObjectInvalid"
+	case COMAdminErrKeyMissing:
+		return "COMAdminErrKeyMissing"
+	case COMAdminErrAlreadyInstalled:
+		return "COMAdminErrAlreadyInstalled"
+	case COMAdminErrAppFileWriteFail:
+		return "COMAdminErrAppFileWriteFail"
+	case COMAdminErrAppFileReadFail:
+		return "COMAdminErrAppFileReadFail"
+	case COMAdminErrAppFileVersion:
+		return "COMAdminErrAppFileVersion"
+	case COMAdminErrBadPath:
+		return "COMAdminErrBadPath"
+	case COMAdminErrApplicationExists:
+		return "COMAdminErrApplicationExists"
+	case COMAdminErrRoleExists:
+		return "COMAdminErrRoleExists"
+	case COMAdminErrCantCopyFile:
+		return "COMAdminErrCantCopyFile"
+	case COMAdminErrNoUser:
+		return "COMAdminErrNoUser"
+	case COMAdminErrInvalidUserids:
+		return "COMAdminErrInvalidUserids"
+	case COMAdminErrNoRegistryCLSID:
+		return "COMAdminErrNoRegistryCLSID"
+	case COMAdminErrBadRegistryProgID:
+		return "COMAdminErrBadRegistryProgID"
+	case COMAdminErrAuthenticationLevel:
+		return "COMAdminErrAuthenticationLevel"
+	case COMAdminErrUserPasswdNotValid:
+		return "COMAdminErrUserPasswdNotValid"
+	case COMAdminErrCLSIDOrIIDMismatch:
+		return "COMAdminErrCLSIDOrIIDMismatch"
+	case COMAdminErrRemoteInterface:
+		return "COMAdminErrRemoteInterface"
+	case COMAdminErrDllRegisterServer:
+		return "COMAdminErrDllRegisterServer"
+	case COMAdminErrNoServerShare:
+		return "COMAdminErrNoServerShare"
+	case COMAdminErrDllLoadFailed:
+		return "COMAdminErrDllLoadFailed"
+	case COMAdminErrBadRegistryLibID:
+		return "COMAdminErrBadRegistryLibID"
+	case COMAdminErrAppDirNotFound:
+		return "COMAdminErrAppDirNotFound"
+	case COMAdminErrRegistrarFailed:
+		return "COMAdminErrRegistrarFailed"
+	case COMAdminErrCompFileDoesNotExist:
+		return "COMAdminErrCompFileDoesNotExist"
+	case COMAdminErrCompFileLoadDLLFail:
+		return "COMAdminErrCompFileLoadDLLFail"
+	case COMAdminErrCompFileGetClassObj:
+		return "COMAdminErrCompFileGetClassObj"
+	case COMAdminErrCompFileClassNotAvail:
+		return "COMAdminErrCompFileClassNotAvail"
+	case COMAdminErrCompFileBadTLB:
+		return "COMAdminErrCompFileBadTLB"
+	case COMAdminErrCompFileNotInstallable:
+		return "COMAdminErrCompFileNotInstallable"
+	case COMAdminErrNotChangeable:
+		return "COMAdminErrNotChangeable"
+	case COMAdminErrNotDeletable:
+		return "COMAdminErrNotDeletable"
+	case COMAdminErrSession:
+		return "COMAdminErrSession"
+	case COMAdminErrCompMoveLocked:
+		return "COMAdminErrCompMoveLocked"
+	case COMAdminErrCompMoveBadDest:
+		return "COMAdminErrCompMoveBadDest"
+	case COMAdminErrRegisterTLB:
+		return "COMAdminErrRegisterTLB"
+	case COMAdminErrSystemApp:
+		return "COMAdminErrSystemApp"
+	case COMAdminErrCompFileNoRegistrar:
+		return "COMAdminErrCompFileNoRegistrar"
+	case COMAdminErrCoReqCompInstalled:
+		return "COMAdminErrCoReqCompInstalled"
+	case COMAdminErrServiceNotInstalled:
+		return "COMAdminErrServiceNotInstalled"
+	case COMAdminErrPropertySaveFailed:
+		return "COMAdminErrPropertySaveFailed"
+	case COMAdminErrObjectExists:
+		return "COMAdminErrObjectExists"
+	case COMAdminErrComponentExists:
+		return "COMAdminErrComponentExists"
+	case COMAdminErrRegFileCorrupt:
+		return "COMAdminErrRegFileCorrupt"
+	case COMAdminErrPropertyOverflow:
+		return "COMAdminErrPropertyOverflow"
+	case COMAdminErrNotInRegistry:
+		return "COMAdminErrNotInRegistry"
+	case COMAdminErrObjectNotPoolable:
+		return "COMAdminErrObjectNotPoolable"
+	case COMAdminErrApplidMatchesClsid:
+		return "COMAdminErrApplidMatchesClsid"
+	case COMAdminErrRoleDoesNotExist:
+		return "COMAdminErrRoleDoesNotExist"
+	case COMAdminErrStartAppNeedsComponents:
+		return "COMAdminErrStartAppNeedsComponents"
+	case COMAdminErrRequiresDifferentPlatform:
+		return "COMAdminErrRequiresDifferentPlatform"
+	case COMAdminErrQueuingServiceNotAvailable:
+		return "COMAdminErrQueuingServiceNotAvailable"
+	case COMAdminErrObjectParentMissing:
+		return "COMAdminErrObjectParentMissing"
+	case COMAdminErrObjectDoesNotExist:
+		return "COMAdminErrObjectDoesNotExist"
+	case COMAdminErrCanNotExportAppProxy:
+		return "COMAdminErrCanNotExportAppProxy"
+	case COMAdminErrCanNotStartApp:
+		return "COMAdminErrCanNotStartApp"
+	case COMAdminErrCanNotExportSystemApp:
+		return "COMAdminErrCanNotExportSystemApp"
+	case COMAdminErrCanNotSubscribeToComponent:
+		return "COMAdminErrCanNotSubscribeToComponent"
+	case COMAdminErrAppNotRunning:
+		return "COMAdminErrAppNotRunning"
+	case COMAdminErrEventClassCannotBeSubscriber:
+		return "COMAdminErrEventClassCannotBeSubscriber"
+	case COMAdminErrLibAppProxyIncompatible:
+		return "COMAdminErrLibAppProxyIncompatible"
+	case COMAdminErrBasePartitionOnly:
+		return "COMAdminErrBasePartitionOnly"
+	case COMAdminErrDuplicatePartitionName:
+		return "COMAdminErrDuplicatePartitionName"
+	case COMAdminErrPartitionInUse:
+		return "COMAdminErrPartitionInUse"
+	case COMAdminErrImportedComponentsNotAllowed:
+		return "COMAdminErrImportedComponentsNotAllowed"
+	case COMAdminErrRegdbNotInitialized:
+		return "COMAdminErrRegdbNotInitialized"
+	case COMAdminErrRegdbNotOpen:
+		return "COMAdminErrRegdbNotOpen"
+	case COMAdminErrRegdbSystemErr:
+		return "COMAdminErrRegdbSystemErr"
+	case COMAdminErrRegdbAlreadyRunning:
+		return "COMAdminErrRegdbAlreadyRunning"
+	case COMAdminErrMigVersionNotSupported:
+		return "COMAdminErrMigVersionNotSupported"
+	case COMAdminErrMigSchemaNotFound:
+		return "COMAdminErrMigSchemaNotFound"
+	case COMAdminErrCatBitnessMismatch:
+		return "COMAdminErrCatBitnessMismatch"
+	case COMAdminErrCatUnacceptableBitness:
+		return "COMAdminErrCatUnacceptableBitness"
+	case COMAdminErrCatWrongAppBitnessBitness:
+		return "COMAdminErrCatWrongAppBitnessBitness"
+	case COMAdminErrCatPauseResumeNotSupported:
+		return "COMAdminErrCatPauseResumeNotSupported"
+	case COMAdminErrCatServerFault:
+		return "COMAdminErrCatServerFault"
+	case COMAdminErrCantRecycleLibraryApps:
+		return "COMAdminErrCantRecycleLibraryApps"
+	case COMAdminErrCantRecycleServiceApps:
+		return "COMAdminErrCantRecycleServiceApps"
+	case COMAdminErrProcessAlreadyRecycled:
+		return "COMAdminErrProcessAlreadyRecycled"
+	case COMAdminErrPausedProcessMayNotBeRecycled:
+		return "COMAdminErrPausedProcessMayNotBeRecycled"
+	case COMAdminErrInvalidPartition:
+		return "COMAdminErrInvalidPartition"
+	case COMAdminErrPartitionMsiOnly:
+		return "COMAdminErrPartitionMsiOnly"
+	case COMAdminErrStartAppDisabled:
+		return "COMAdminErrStartAppDisabled"
+	case COMAdminErrCompMoveSource:
+		return "COMAdminErrCompMoveSource"
+	case COMAdminErrCompMoveDest:
+		return "COMAdminErrCompMoveDest"
+	case COMAdminErrCompMovePrivate:
+		return "COMAdminErrCompMovePrivate"
+	case COMAdminErrCannotCopyEventClass:
+		return "COMAdminErrCannotCopyEventClass"
+	default:
+		return fmt.Sprintf("COMAdminErrorCodes(%d)", int32(e))
+	}
+}
+
 type COMAdminFileFlags int32
 
 const (
@@ -223,6 +607,53 @@ const (
 	COMAdminFileFlagError             COMAdminFileFlags = 262144
 )
 
+// String returns the COMAdminFileFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminFileFlags) String() string {
+	switch e {
+	case COMAdminFileFlagLoadable:
+		return "COMAdminFileFlagLoadable"
+	case COMAdminFileFlagCOM:
+		return "COMAdminFileFlagCOM"
+	case COMAdminFileFlagContainsPS:
+		return "COMAdminFileFlagContainsPS"
+	case COMAdminFileFlagContainsComp:
+		return "COMAdminFileFlagContainsComp"
+	case COMAdminFileFlagContainsTLB:
+		return "COMAdminFileFlagContainsTLB"
+	case COMAdminFileFlagSelfReg:
+		return "COMAdminFileFlagSelfReg"
+	case COMAdminFileFlagSelfUnReg:
+		return "COMAdminFileFlagSelfUnReg"
+	case COMAdminFileFlagUnloadableDLL:
+		return "COMAdminFileFlagUnloadableDLL"
+	case COMAdminFileFlagDoesNotExist:
+		return "COMAdminFileFlagDoesNotExist"
+	case COMAdminFileFlagAlreadyInstalled:
+		return "COMAdminFileFlagAlreadyInstalled"
+	case COMAdminFileFlagBadTLB:
+		return "COMAdminFileFlagBadTLB"
+	case COMAdminFileFlagGetClassObjFailed:
+		return "COMAdminFileFlagGetClassObjFailed"
+	case COMAdminFileFlagClassNotAvailable:
+		return "COMAdminFileFlagClassNotAvailable"
+	case COMAdminFileFlagRegistrar:
+		return "COMAdminFileFlagRegistrar"
+	case COMAdminFileFlagNoRegistrar:
+		return "COMAdminFileFlagNoRegistrar"
+	case COMAdminFileFlagDLLRegsvrFailed:
+		return "COMAdminFileFlagDLLRegsvrFailed"
+	case COMAdminFileFlagRegTLBFailed:
+		return "COMAdminFileFlagRegTLBFailed"
+	case COMAdminFileFlagRegistrarFailed:
+		return "COMAdminFileFlagRegistrarFailed"
+	case COMAdminFileFlagError:
+		return "COMAdminFileFlagError"
+	default:
+		return fmt.Sprintf("COMAdminFileFlags(%d)", int32(e))
+	}
+}
+
 type COMAdminImpersonationLevelOptions int32
 
 const (
@@ -231,6 +662,23 @@ const (
 	COMAdminImpersonationImpersonate COMAdminImpersonationLevelOptions = 3
 	COMAdminImpersonationDelegate    COMAdminImpersonationLevelOptions = 4
 )
+
+// String returns the COMAdminImpersonationLevelOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminImpersonationLevelOptions) String() string {
+	switch e {
+	case COMAdminImpersonationAnonymous:
+		return "COMAdminImpersonationAnonymous"
+	case COMAdminImpersonationIdentify:
+		return "COMAdminImpersonationIdentify"
+	case COMAdminImpersonationImpersonate:
+		return "COMAdminImpersonationImpersonate"
+	case COMAdminImpersonationDelegate:
+		return "COMAdminImpersonationDelegate"
+	default:
+		return fmt.Sprintf("COMAdminImpersonationLevelOptions(%d)", int32(e))
+	}
+}
 
 type COMAdminInUse int32
 
@@ -242,6 +690,27 @@ const (
 	COMAdminInUseByRegistryTypeLib   COMAdminInUse = 4
 	COMAdminInUseByRegistryClsid     COMAdminInUse = 5
 )
+
+// String returns the COMAdminInUse constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminInUse) String() string {
+	switch e {
+	case COMAdminNotInUse:
+		return "COMAdminNotInUse"
+	case COMAdminInUseByCatalog:
+		return "COMAdminInUseByCatalog"
+	case COMAdminInUseByRegistryUnknown:
+		return "COMAdminInUseByRegistryUnknown"
+	case COMAdminInUseByRegistryProxyStub:
+		return "COMAdminInUseByRegistryProxyStub"
+	case COMAdminInUseByRegistryTypeLib:
+		return "COMAdminInUseByRegistryTypeLib"
+	case COMAdminInUseByRegistryClsid:
+		return "COMAdminInUseByRegistryClsid"
+	default:
+		return fmt.Sprintf("COMAdminInUse(%d)", int32(e))
+	}
+}
 
 type COMAdminOS int32
 
@@ -285,6 +754,89 @@ const (
 	COMAdminOSWindowsBlueWebServer            COMAdminOS = 40
 )
 
+// String returns the COMAdminOS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminOS) String() string {
+	switch e {
+	case COMAdminOSNotInitialized:
+		return "COMAdminOSNotInitialized"
+	case COMAdminOSWindows3_1:
+		return "COMAdminOSWindows3_1"
+	case COMAdminOSWindows9x:
+		return "COMAdminOSWindows9x"
+	case COMAdminOSWindows2000:
+		return "COMAdminOSWindows2000"
+	case COMAdminOSWindows2000AdvancedServer:
+		return "COMAdminOSWindows2000AdvancedServer"
+	case COMAdminOSWindows2000Unknown:
+		return "COMAdminOSWindows2000Unknown"
+	case COMAdminOSUnknown:
+		return "COMAdminOSUnknown"
+	case COMAdminOSWindowsXPPersonal:
+		return "COMAdminOSWindowsXPPersonal"
+	case COMAdminOSWindowsXPProfessional:
+		return "COMAdminOSWindowsXPProfessional"
+	case COMAdminOSWindowsNETStandardServer:
+		return "COMAdminOSWindowsNETStandardServer"
+	case COMAdminOSWindowsNETEnterpriseServer:
+		return "COMAdminOSWindowsNETEnterpriseServer"
+	case COMAdminOSWindowsNETDatacenterServer:
+		return "COMAdminOSWindowsNETDatacenterServer"
+	case COMAdminOSWindowsNETWebServer:
+		return "COMAdminOSWindowsNETWebServer"
+	case COMAdminOSWindowsLonghornPersonal:
+		return "COMAdminOSWindowsLonghornPersonal"
+	case COMAdminOSWindowsLonghornProfessional:
+		return "COMAdminOSWindowsLonghornProfessional"
+	case COMAdminOSWindowsLonghornStandardServer:
+		return "COMAdminOSWindowsLonghornStandardServer"
+	case COMAdminOSWindowsLonghornEnterpriseServer:
+		return "COMAdminOSWindowsLonghornEnterpriseServer"
+	case COMAdminOSWindowsLonghornDatacenterServer:
+		return "COMAdminOSWindowsLonghornDatacenterServer"
+	case COMAdminOSWindowsLonghornWebServer:
+		return "COMAdminOSWindowsLonghornWebServer"
+	case COMAdminOSWindows7Personal:
+		return "COMAdminOSWindows7Personal"
+	case COMAdminOSWindows7Professional:
+		return "COMAdminOSWindows7Professional"
+	case COMAdminOSWindows7StandardServer:
+		return "COMAdminOSWindows7StandardServer"
+	case COMAdminOSWindows7EnterpriseServer:
+		return "COMAdminOSWindows7EnterpriseServer"
+	case COMAdminOSWindows7DatacenterServer:
+		return "COMAdminOSWindows7DatacenterServer"
+	case COMAdminOSWindows7WebServer:
+		return "COMAdminOSWindows7WebServer"
+	case COMAdminOSWindows8Personal:
+		return "COMAdminOSWindows8Personal"
+	case COMAdminOSWindows8Professional:
+		return "COMAdminOSWindows8Professional"
+	case COMAdminOSWindows8StandardServer:
+		return "COMAdminOSWindows8StandardServer"
+	case COMAdminOSWindows8EnterpriseServer:
+		return "COMAdminOSWindows8EnterpriseServer"
+	case COMAdminOSWindows8DatacenterServer:
+		return "COMAdminOSWindows8DatacenterServer"
+	case COMAdminOSWindows8WebServer:
+		return "COMAdminOSWindows8WebServer"
+	case COMAdminOSWindowsBluePersonal:
+		return "COMAdminOSWindowsBluePersonal"
+	case COMAdminOSWindowsBlueProfessional:
+		return "COMAdminOSWindowsBlueProfessional"
+	case COMAdminOSWindowsBlueStandardServer:
+		return "COMAdminOSWindowsBlueStandardServer"
+	case COMAdminOSWindowsBlueEnterpriseServer:
+		return "COMAdminOSWindowsBlueEnterpriseServer"
+	case COMAdminOSWindowsBlueDatacenterServer:
+		return "COMAdminOSWindowsBlueDatacenterServer"
+	case COMAdminOSWindowsBlueWebServer:
+		return "COMAdminOSWindowsBlueWebServer"
+	default:
+		return fmt.Sprintf("COMAdminOS(%d)", int32(e))
+	}
+}
+
 type COMAdminQCMessageAuthenticateOptions int32
 
 const (
@@ -293,11 +845,37 @@ const (
 	COMAdminQCMessageAuthenticateOn         COMAdminQCMessageAuthenticateOptions = 2
 )
 
+// String returns the COMAdminQCMessageAuthenticateOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminQCMessageAuthenticateOptions) String() string {
+	switch e {
+	case COMAdminQCMessageAuthenticateSecureApps:
+		return "COMAdminQCMessageAuthenticateSecureApps"
+	case COMAdminQCMessageAuthenticateOff:
+		return "COMAdminQCMessageAuthenticateOff"
+	case COMAdminQCMessageAuthenticateOn:
+		return "COMAdminQCMessageAuthenticateOn"
+	default:
+		return fmt.Sprintf("COMAdminQCMessageAuthenticateOptions(%d)", int32(e))
+	}
+}
+
 type COMAdminServiceOptions int32
 
 const (
 	COMAdminServiceLoadBalanceRouter COMAdminServiceOptions = 1
 )
+
+// String returns the COMAdminServiceOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminServiceOptions) String() string {
+	switch e {
+	case COMAdminServiceLoadBalanceRouter:
+		return "COMAdminServiceLoadBalanceRouter"
+	default:
+		return fmt.Sprintf("COMAdminServiceOptions(%d)", int32(e))
+	}
+}
 
 type COMAdminServiceStatusOptions int32
 
@@ -312,6 +890,31 @@ const (
 	COMAdminServiceUnknownState    COMAdminServiceStatusOptions = 7
 )
 
+// String returns the COMAdminServiceStatusOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminServiceStatusOptions) String() string {
+	switch e {
+	case COMAdminServiceStopped:
+		return "COMAdminServiceStopped"
+	case COMAdminServiceStartPending:
+		return "COMAdminServiceStartPending"
+	case COMAdminServiceStopPending:
+		return "COMAdminServiceStopPending"
+	case COMAdminServiceRunning:
+		return "COMAdminServiceRunning"
+	case COMAdminServiceContinuePending:
+		return "COMAdminServiceContinuePending"
+	case COMAdminServicePausePending:
+		return "COMAdminServicePausePending"
+	case COMAdminServicePaused:
+		return "COMAdminServicePaused"
+	case COMAdminServiceUnknownState:
+		return "COMAdminServiceUnknownState"
+	default:
+		return fmt.Sprintf("COMAdminServiceStatusOptions(%d)", int32(e))
+	}
+}
+
 type COMAdminSynchronizationOptions int32
 
 const (
@@ -321,6 +924,25 @@ const (
 	COMAdminSynchronizationRequired    COMAdminSynchronizationOptions = 3
 	COMAdminSynchronizationRequiresNew COMAdminSynchronizationOptions = 4
 )
+
+// String returns the COMAdminSynchronizationOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminSynchronizationOptions) String() string {
+	switch e {
+	case COMAdminSynchronizationIgnored:
+		return "COMAdminSynchronizationIgnored"
+	case COMAdminSynchronizationNone:
+		return "COMAdminSynchronizationNone"
+	case COMAdminSynchronizationSupported:
+		return "COMAdminSynchronizationSupported"
+	case COMAdminSynchronizationRequired:
+		return "COMAdminSynchronizationRequired"
+	case COMAdminSynchronizationRequiresNew:
+		return "COMAdminSynchronizationRequiresNew"
+	default:
+		return fmt.Sprintf("COMAdminSynchronizationOptions(%d)", int32(e))
+	}
+}
 
 type COMAdminThreadingModels int32
 
@@ -333,6 +955,27 @@ const (
 	COMAdminThreadingModelNotSpecified COMAdminThreadingModels = 5
 )
 
+// String returns the COMAdminThreadingModels constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminThreadingModels) String() string {
+	switch e {
+	case COMAdminThreadingModelApartment:
+		return "COMAdminThreadingModelApartment"
+	case COMAdminThreadingModelFree:
+		return "COMAdminThreadingModelFree"
+	case COMAdminThreadingModelMain:
+		return "COMAdminThreadingModelMain"
+	case COMAdminThreadingModelBoth:
+		return "COMAdminThreadingModelBoth"
+	case COMAdminThreadingModelNeutral:
+		return "COMAdminThreadingModelNeutral"
+	case COMAdminThreadingModelNotSpecified:
+		return "COMAdminThreadingModelNotSpecified"
+	default:
+		return fmt.Sprintf("COMAdminThreadingModels(%d)", int32(e))
+	}
+}
+
 type COMAdminTransactionOptions int32
 
 const (
@@ -342,6 +985,25 @@ const (
 	COMAdminTransactionRequired    COMAdminTransactionOptions = 3
 	COMAdminTransactionRequiresNew COMAdminTransactionOptions = 4
 )
+
+// String returns the COMAdminTransactionOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminTransactionOptions) String() string {
+	switch e {
+	case COMAdminTransactionIgnored:
+		return "COMAdminTransactionIgnored"
+	case COMAdminTransactionNone:
+		return "COMAdminTransactionNone"
+	case COMAdminTransactionSupported:
+		return "COMAdminTransactionSupported"
+	case COMAdminTransactionRequired:
+		return "COMAdminTransactionRequired"
+	case COMAdminTransactionRequiresNew:
+		return "COMAdminTransactionRequiresNew"
+	default:
+		return fmt.Sprintf("COMAdminTransactionOptions(%d)", int32(e))
+	}
+}
 
 // COMAdminTxIsolationLevelOptions: https://learn.microsoft.com/windows/win32/api/comadmin/ne-comadmin-comadmintxisolationleveloptions
 type COMAdminTxIsolationLevelOptions int32
@@ -354,6 +1016,25 @@ const (
 	COMAdminTxIsolationLevelSerializable    COMAdminTxIsolationLevelOptions = 4
 )
 
+// String returns the COMAdminTxIsolationLevelOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMAdminTxIsolationLevelOptions) String() string {
+	switch e {
+	case COMAdminTxIsolationLevelAny:
+		return "COMAdminTxIsolationLevelAny"
+	case COMAdminTxIsolationLevelReadUnCommitted:
+		return "COMAdminTxIsolationLevelReadUnCommitted"
+	case COMAdminTxIsolationLevelReadCommitted:
+		return "COMAdminTxIsolationLevelReadCommitted"
+	case COMAdminTxIsolationLevelRepeatableRead:
+		return "COMAdminTxIsolationLevelRepeatableRead"
+	case COMAdminTxIsolationLevelSerializable:
+		return "COMAdminTxIsolationLevelSerializable"
+	default:
+		return fmt.Sprintf("COMAdminTxIsolationLevelOptions(%d)", int32(e))
+	}
+}
+
 // COMPLUS_APPTYPE: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-complus_apptype
 type COMPLUS_APPTYPE int32
 
@@ -363,6 +1044,23 @@ const (
 	APPTYPE_LIBRARY COMPLUS_APPTYPE = 0
 	APPTYPE_SWC     COMPLUS_APPTYPE = 2
 )
+
+// String returns the COMPLUS_APPTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPLUS_APPTYPE) String() string {
+	switch e {
+	case APPTYPE_UNKNOWN:
+		return "APPTYPE_UNKNOWN"
+	case APPTYPE_SERVER:
+		return "APPTYPE_SERVER"
+	case APPTYPE_LIBRARY:
+		return "APPTYPE_LIBRARY"
+	case APPTYPE_SWC:
+		return "APPTYPE_SWC"
+	default:
+		return fmt.Sprintf("COMPLUS_APPTYPE(%d)", int32(e))
+	}
+}
 
 // CRMFLAGS: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-crmflags
 type CRMFLAGS int32
@@ -377,6 +1075,29 @@ const (
 	CRMFLAG_REPLAYINPROGRESS      CRMFLAGS = 64
 )
 
+// String returns the CRMFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRMFLAGS) String() string {
+	switch e {
+	case CRMFLAG_FORGETTARGET:
+		return "CRMFLAG_FORGETTARGET"
+	case CRMFLAG_WRITTENDURINGPREPARE:
+		return "CRMFLAG_WRITTENDURINGPREPARE"
+	case CRMFLAG_WRITTENDURINGCOMMIT:
+		return "CRMFLAG_WRITTENDURINGCOMMIT"
+	case CRMFLAG_WRITTENDURINGABORT:
+		return "CRMFLAG_WRITTENDURINGABORT"
+	case CRMFLAG_WRITTENDURINGRECOVERY:
+		return "CRMFLAG_WRITTENDURINGRECOVERY"
+	case CRMFLAG_WRITTENDURINGREPLAY:
+		return "CRMFLAG_WRITTENDURINGREPLAY"
+	case CRMFLAG_REPLAYINPROGRESS:
+		return "CRMFLAG_REPLAYINPROGRESS"
+	default:
+		return fmt.Sprintf("CRMFLAGS(%d)", int32(e))
+	}
+}
+
 // CRMREGFLAGS: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-crmregflags
 type CRMREGFLAGS int32
 
@@ -388,6 +1109,25 @@ const (
 	CRMREGFLAG_FAILIFINDOUBTSREMAIN CRMREGFLAGS = 16
 )
 
+// String returns the CRMREGFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRMREGFLAGS) String() string {
+	switch e {
+	case CRMREGFLAG_PREPAREPHASE:
+		return "CRMREGFLAG_PREPAREPHASE"
+	case CRMREGFLAG_COMMITPHASE:
+		return "CRMREGFLAG_COMMITPHASE"
+	case CRMREGFLAG_ABORTPHASE:
+		return "CRMREGFLAG_ABORTPHASE"
+	case CRMREGFLAG_ALLPHASES:
+		return "CRMREGFLAG_ALLPHASES"
+	case CRMREGFLAG_FAILIFINDOUBTSREMAIN:
+		return "CRMREGFLAG_FAILIFINDOUBTSREMAIN"
+	default:
+		return fmt.Sprintf("CRMREGFLAGS(%d)", int32(e))
+	}
+}
+
 // CSC_Binding: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-csc_binding
 type CSC_Binding int32
 
@@ -395,6 +1135,19 @@ const (
 	CSC_NoBinding        CSC_Binding = 0
 	CSC_BindToPoolThread CSC_Binding = 1
 )
+
+// String returns the CSC_Binding constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSC_Binding) String() string {
+	switch e {
+	case CSC_NoBinding:
+		return "CSC_NoBinding"
+	case CSC_BindToPoolThread:
+		return "CSC_BindToPoolThread"
+	default:
+		return fmt.Sprintf("CSC_Binding(%d)", int32(e))
+	}
+}
 
 // CSC_COMTIIntrinsicsConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-csc_comtiintrinsicsconfig
 type CSC_COMTIIntrinsicsConfig int32
@@ -404,6 +1157,19 @@ const (
 	CSC_InheritCOMTIIntrinsics CSC_COMTIIntrinsicsConfig = 1
 )
 
+// String returns the CSC_COMTIIntrinsicsConfig constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSC_COMTIIntrinsicsConfig) String() string {
+	switch e {
+	case CSC_NoCOMTIIntrinsics:
+		return "CSC_NoCOMTIIntrinsics"
+	case CSC_InheritCOMTIIntrinsics:
+		return "CSC_InheritCOMTIIntrinsics"
+	default:
+		return fmt.Sprintf("CSC_COMTIIntrinsicsConfig(%d)", int32(e))
+	}
+}
+
 // CSC_IISIntrinsicsConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-csc_iisintrinsicsconfig
 type CSC_IISIntrinsicsConfig int32
 
@@ -412,6 +1178,19 @@ const (
 	CSC_InheritIISIntrinsics CSC_IISIntrinsicsConfig = 1
 )
 
+// String returns the CSC_IISIntrinsicsConfig constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSC_IISIntrinsicsConfig) String() string {
+	switch e {
+	case CSC_NoIISIntrinsics:
+		return "CSC_NoIISIntrinsics"
+	case CSC_InheritIISIntrinsics:
+		return "CSC_InheritIISIntrinsics"
+	default:
+		return fmt.Sprintf("CSC_IISIntrinsicsConfig(%d)", int32(e))
+	}
+}
+
 // CSC_InheritanceConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-csc_inheritanceconfig
 type CSC_InheritanceConfig int32
 
@@ -419,6 +1198,19 @@ const (
 	CSC_Inherit CSC_InheritanceConfig = 0
 	CSC_Ignore  CSC_InheritanceConfig = 1
 )
+
+// String returns the CSC_InheritanceConfig constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSC_InheritanceConfig) String() string {
+	switch e {
+	case CSC_Inherit:
+		return "CSC_Inherit"
+	case CSC_Ignore:
+		return "CSC_Ignore"
+	default:
+		return fmt.Sprintf("CSC_InheritanceConfig(%d)", int32(e))
+	}
+}
 
 // CSC_PartitionConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-csc_partitionconfig
 type CSC_PartitionConfig int32
@@ -429,6 +1221,21 @@ const (
 	CSC_NewPartition     CSC_PartitionConfig = 2
 )
 
+// String returns the CSC_PartitionConfig constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSC_PartitionConfig) String() string {
+	switch e {
+	case CSC_NoPartition:
+		return "CSC_NoPartition"
+	case CSC_InheritPartition:
+		return "CSC_InheritPartition"
+	case CSC_NewPartition:
+		return "CSC_NewPartition"
+	default:
+		return fmt.Sprintf("CSC_PartitionConfig(%d)", int32(e))
+	}
+}
+
 // CSC_SxsConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-csc_sxsconfig
 type CSC_SxsConfig int32
 
@@ -437,6 +1244,21 @@ const (
 	CSC_InheritSxs CSC_SxsConfig = 1
 	CSC_NewSxs     CSC_SxsConfig = 2
 )
+
+// String returns the CSC_SxsConfig constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSC_SxsConfig) String() string {
+	switch e {
+	case CSC_NoSxs:
+		return "CSC_NoSxs"
+	case CSC_InheritSxs:
+		return "CSC_InheritSxs"
+	case CSC_NewSxs:
+		return "CSC_NewSxs"
+	default:
+		return fmt.Sprintf("CSC_SxsConfig(%d)", int32(e))
+	}
+}
 
 // CSC_SynchronizationConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-csc_synchronizationconfig
 type CSC_SynchronizationConfig int32
@@ -448,6 +1270,23 @@ const (
 	CSC_NewSynchronization            CSC_SynchronizationConfig = 3
 )
 
+// String returns the CSC_SynchronizationConfig constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSC_SynchronizationConfig) String() string {
+	switch e {
+	case CSC_NoSynchronization:
+		return "CSC_NoSynchronization"
+	case CSC_IfContainerIsSynchronized:
+		return "CSC_IfContainerIsSynchronized"
+	case CSC_NewSynchronizationIfNecessary:
+		return "CSC_NewSynchronizationIfNecessary"
+	case CSC_NewSynchronization:
+		return "CSC_NewSynchronization"
+	default:
+		return fmt.Sprintf("CSC_SynchronizationConfig(%d)", int32(e))
+	}
+}
+
 // CSC_ThreadPool: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-csc_threadpool
 type CSC_ThreadPool int32
 
@@ -458,6 +1297,23 @@ const (
 	CSC_MTAThreadPool     CSC_ThreadPool = 3
 )
 
+// String returns the CSC_ThreadPool constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSC_ThreadPool) String() string {
+	switch e {
+	case CSC_ThreadPoolNone:
+		return "CSC_ThreadPoolNone"
+	case CSC_ThreadPoolInherit:
+		return "CSC_ThreadPoolInherit"
+	case CSC_STAThreadPool:
+		return "CSC_STAThreadPool"
+	case CSC_MTAThreadPool:
+		return "CSC_MTAThreadPool"
+	default:
+		return fmt.Sprintf("CSC_ThreadPool(%d)", int32(e))
+	}
+}
+
 // CSC_TrackerConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-csc_trackerconfig
 type CSC_TrackerConfig int32
 
@@ -465,6 +1321,19 @@ const (
 	CSC_DontUseTracker CSC_TrackerConfig = 0
 	CSC_UseTracker     CSC_TrackerConfig = 1
 )
+
+// String returns the CSC_TrackerConfig constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSC_TrackerConfig) String() string {
+	switch e {
+	case CSC_DontUseTracker:
+		return "CSC_DontUseTracker"
+	case CSC_UseTracker:
+		return "CSC_UseTracker"
+	default:
+		return fmt.Sprintf("CSC_TrackerConfig(%d)", int32(e))
+	}
+}
 
 // CSC_TransactionConfig: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-csc_transactionconfig
 type CSC_TransactionConfig int32
@@ -476,6 +1345,23 @@ const (
 	CSC_NewTransaction               CSC_TransactionConfig = 3
 )
 
+// String returns the CSC_TransactionConfig constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSC_TransactionConfig) String() string {
+	switch e {
+	case CSC_NoTransaction:
+		return "CSC_NoTransaction"
+	case CSC_IfContainerIsTransactional:
+		return "CSC_IfContainerIsTransactional"
+	case CSC_CreateTransactionIfNecessary:
+		return "CSC_CreateTransactionIfNecessary"
+	case CSC_NewTransaction:
+		return "CSC_NewTransaction"
+	default:
+		return fmt.Sprintf("CSC_TransactionConfig(%d)", int32(e))
+	}
+}
+
 // CrmTransactionState: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-crmtransactionstate
 type CrmTransactionState int32
 
@@ -486,6 +1372,23 @@ const (
 	TxState_Indoubt   CrmTransactionState = 3
 )
 
+// String returns the CrmTransactionState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CrmTransactionState) String() string {
+	switch e {
+	case TxState_Active:
+		return "TxState_Active"
+	case TxState_Committed:
+		return "TxState_Committed"
+	case TxState_Aborted:
+		return "TxState_Aborted"
+	case TxState_Indoubt:
+		return "TxState_Indoubt"
+	default:
+		return fmt.Sprintf("CrmTransactionState(%d)", int32(e))
+	}
+}
+
 type DUMPTYPE int32
 
 const (
@@ -493,6 +1396,21 @@ const (
 	DUMPTYPE_MINI DUMPTYPE = 1
 	DUMPTYPE_NONE DUMPTYPE = 2
 )
+
+// String returns the DUMPTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DUMPTYPE) String() string {
+	switch e {
+	case DUMPTYPE_FULL:
+		return "DUMPTYPE_FULL"
+	case DUMPTYPE_MINI:
+		return "DUMPTYPE_MINI"
+	case DUMPTYPE_NONE:
+		return "DUMPTYPE_NONE"
+	default:
+		return fmt.Sprintf("DUMPTYPE(%d)", int32(e))
+	}
+}
 
 // GetAppTrackerDataFlags: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-getapptrackerdataflags
 type GetAppTrackerDataFlags int32
@@ -505,6 +1423,25 @@ const (
 	GATD_INCLUDE_APPLICATION_NAME GetAppTrackerDataFlags = 16
 )
 
+// String returns the GetAppTrackerDataFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GetAppTrackerDataFlags) String() string {
+	switch e {
+	case GATD_INCLUDE_PROCESS_EXE_NAME:
+		return "GATD_INCLUDE_PROCESS_EXE_NAME"
+	case GATD_INCLUDE_LIBRARY_APPS:
+		return "GATD_INCLUDE_LIBRARY_APPS"
+	case GATD_INCLUDE_SWC:
+		return "GATD_INCLUDE_SWC"
+	case GATD_INCLUDE_CLASS_NAME:
+		return "GATD_INCLUDE_CLASS_NAME"
+	case GATD_INCLUDE_APPLICATION_NAME:
+		return "GATD_INCLUDE_APPLICATION_NAME"
+	default:
+		return fmt.Sprintf("GetAppTrackerDataFlags(%d)", int32(e))
+	}
+}
+
 type LockModes int32
 
 const (
@@ -512,12 +1449,38 @@ const (
 	LockMethod LockModes = 1
 )
 
+// String returns the LockModes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LockModes) String() string {
+	switch e {
+	case LockSetGet:
+		return "LockSetGet"
+	case LockMethod:
+		return "LockMethod"
+	default:
+		return fmt.Sprintf("LockModes(%d)", int32(e))
+	}
+}
+
 type ReleaseModes int32
 
 const (
 	Standard ReleaseModes = 0
 	Process  ReleaseModes = 1
 )
+
+// String returns the ReleaseModes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ReleaseModes) String() string {
+	switch e {
+	case Standard:
+		return "Standard"
+	case Process:
+		return "Process"
+	default:
+		return fmt.Sprintf("ReleaseModes(%d)", int32(e))
+	}
+}
 
 // TRACKING_COLL_TYPE: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-tracking_coll_type
 type TRACKING_COLL_TYPE int32
@@ -528,6 +1491,21 @@ const (
 	TRKCOLL_COMPONENTS   TRACKING_COLL_TYPE = 2
 )
 
+// String returns the TRACKING_COLL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRACKING_COLL_TYPE) String() string {
+	switch e {
+	case TRKCOLL_PROCESSES:
+		return "TRKCOLL_PROCESSES"
+	case TRKCOLL_APPLICATIONS:
+		return "TRKCOLL_APPLICATIONS"
+	case TRKCOLL_COMPONENTS:
+		return "TRKCOLL_COMPONENTS"
+	default:
+		return fmt.Sprintf("TRACKING_COLL_TYPE(%d)", int32(e))
+	}
+}
+
 // TransactionVote: https://learn.microsoft.com/windows/win32/api/comsvcs/ne-comsvcs-transactionvote
 type TransactionVote int32
 
@@ -535,3 +1513,16 @@ const (
 	TxCommit TransactionVote = 0
 	TxAbort  TransactionVote = 1
 )
+
+// String returns the TransactionVote constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TransactionVote) String() string {
+	switch e {
+	case TxCommit:
+		return "TxCommit"
+	case TxAbort:
+		return "TxAbort"
+	default:
+		return fmt.Sprintf("TransactionVote(%d)", int32(e))
+	}
+}

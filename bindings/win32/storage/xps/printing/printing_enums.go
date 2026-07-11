@@ -4,6 +4,10 @@
 
 package printing
 
+import (
+	"fmt"
+)
+
 // PrintDocumentPackageCompletion: https://learn.microsoft.com/windows/win32/api/documenttarget/ne-documenttarget-printdocumentpackagecompletion
 type PrintDocumentPackageCompletion int32
 
@@ -14,6 +18,23 @@ const (
 	PrintDocumentPackageCompletion_Failed     PrintDocumentPackageCompletion = 3
 )
 
+// String returns the PrintDocumentPackageCompletion constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PrintDocumentPackageCompletion) String() string {
+	switch e {
+	case PrintDocumentPackageCompletion_InProgress:
+		return "PrintDocumentPackageCompletion_InProgress"
+	case PrintDocumentPackageCompletion_Completed:
+		return "PrintDocumentPackageCompletion_Completed"
+	case PrintDocumentPackageCompletion_Canceled:
+		return "PrintDocumentPackageCompletion_Canceled"
+	case PrintDocumentPackageCompletion_Failed:
+		return "PrintDocumentPackageCompletion_Failed"
+	default:
+		return fmt.Sprintf("PrintDocumentPackageCompletion(%d)", int32(e))
+	}
+}
+
 // XPS_JOB_COMPLETION: https://learn.microsoft.com/windows/win32/api/xpsprint/ne-xpsprint-xps_job_completion
 type XPS_JOB_COMPLETION int32
 
@@ -23,3 +44,20 @@ const (
 	XPS_JOB_CANCELLED   XPS_JOB_COMPLETION = 2
 	XPS_JOB_FAILED      XPS_JOB_COMPLETION = 3
 )
+
+// String returns the XPS_JOB_COMPLETION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_JOB_COMPLETION) String() string {
+	switch e {
+	case XPS_JOB_IN_PROGRESS:
+		return "XPS_JOB_IN_PROGRESS"
+	case XPS_JOB_COMPLETED:
+		return "XPS_JOB_COMPLETED"
+	case XPS_JOB_CANCELLED:
+		return "XPS_JOB_CANCELLED"
+	case XPS_JOB_FAILED:
+		return "XPS_JOB_FAILED"
+	default:
+		return fmt.Sprintf("XPS_JOB_COMPLETION(%d)", int32(e))
+	}
+}

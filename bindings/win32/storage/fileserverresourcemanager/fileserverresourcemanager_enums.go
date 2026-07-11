@@ -4,6 +4,10 @@
 
 package fileserverresourcemanager
 
+import (
+	"fmt"
+)
+
 // AdrClientDisplayFlags: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-adrclientdisplayflags
 type AdrClientDisplayFlags int32
 
@@ -11,6 +15,19 @@ const (
 	AdrClientDisplayFlags_AllowEmailRequests        AdrClientDisplayFlags = 1
 	AdrClientDisplayFlags_ShowDeviceTroubleshooting AdrClientDisplayFlags = 2
 )
+
+// String returns the AdrClientDisplayFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AdrClientDisplayFlags) String() string {
+	switch e {
+	case AdrClientDisplayFlags_AllowEmailRequests:
+		return "AdrClientDisplayFlags_AllowEmailRequests"
+	case AdrClientDisplayFlags_ShowDeviceTroubleshooting:
+		return "AdrClientDisplayFlags_ShowDeviceTroubleshooting"
+	default:
+		return fmt.Sprintf("AdrClientDisplayFlags(%d)", int32(e))
+	}
+}
 
 // AdrClientErrorType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-adrclienterrortype
 type AdrClientErrorType int32
@@ -20,6 +37,21 @@ const (
 	AdrClientErrorType_AccessDenied AdrClientErrorType = 1
 	AdrClientErrorType_FileNotFound AdrClientErrorType = 2
 )
+
+// String returns the AdrClientErrorType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AdrClientErrorType) String() string {
+	switch e {
+	case AdrClientErrorType_Unknown:
+		return "AdrClientErrorType_Unknown"
+	case AdrClientErrorType_AccessDenied:
+		return "AdrClientErrorType_AccessDenied"
+	case AdrClientErrorType_FileNotFound:
+		return "AdrClientErrorType_FileNotFound"
+	default:
+		return fmt.Sprintf("AdrClientErrorType(%d)", int32(e))
+	}
+}
 
 // AdrClientFlags: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-adrclientflags
 type AdrClientFlags int32
@@ -31,6 +63,23 @@ const (
 	AdrClientFlags_FailIfNotDomainJoined      AdrClientFlags = 4
 )
 
+// String returns the AdrClientFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AdrClientFlags) String() string {
+	switch e {
+	case AdrClientFlags_None:
+		return "AdrClientFlags_None"
+	case AdrClientFlags_FailForLocalPaths:
+		return "AdrClientFlags_FailForLocalPaths"
+	case AdrClientFlags_FailIfNotSupportedByServer:
+		return "AdrClientFlags_FailIfNotSupportedByServer"
+	case AdrClientFlags_FailIfNotDomainJoined:
+		return "AdrClientFlags_FailIfNotDomainJoined"
+	default:
+		return fmt.Sprintf("AdrClientFlags(%d)", int32(e))
+	}
+}
+
 // AdrEmailFlags: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-adremailflags
 type AdrEmailFlags int32
 
@@ -41,6 +90,25 @@ const (
 	AdrEmailFlags_IncludeUserInfo      AdrEmailFlags = 8
 	AdrEmailFlags_GenerateEventLog     AdrEmailFlags = 16
 )
+
+// String returns the AdrEmailFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AdrEmailFlags) String() string {
+	switch e {
+	case AdrEmailFlags_PutDataOwnerOnToLine:
+		return "AdrEmailFlags_PutDataOwnerOnToLine"
+	case AdrEmailFlags_PutAdminOnToLine:
+		return "AdrEmailFlags_PutAdminOnToLine"
+	case AdrEmailFlags_IncludeDeviceClaims:
+		return "AdrEmailFlags_IncludeDeviceClaims"
+	case AdrEmailFlags_IncludeUserInfo:
+		return "AdrEmailFlags_IncludeUserInfo"
+	case AdrEmailFlags_GenerateEventLog:
+		return "AdrEmailFlags_GenerateEventLog"
+	default:
+		return fmt.Sprintf("AdrEmailFlags(%d)", int32(e))
+	}
+}
 
 // FsrmAccountType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmaccounttype
 type FsrmAccountType int32
@@ -55,6 +123,29 @@ const (
 	FsrmAccountType_Automatic      FsrmAccountType = 500
 )
 
+// String returns the FsrmAccountType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmAccountType) String() string {
+	switch e {
+	case FsrmAccountType_Unknown:
+		return "FsrmAccountType_Unknown"
+	case FsrmAccountType_NetworkService:
+		return "FsrmAccountType_NetworkService"
+	case FsrmAccountType_LocalService:
+		return "FsrmAccountType_LocalService"
+	case FsrmAccountType_LocalSystem:
+		return "FsrmAccountType_LocalSystem"
+	case FsrmAccountType_InProc:
+		return "FsrmAccountType_InProc"
+	case FsrmAccountType_External:
+		return "FsrmAccountType_External"
+	case FsrmAccountType_Automatic:
+		return "FsrmAccountType_Automatic"
+	default:
+		return fmt.Sprintf("FsrmAccountType(%d)", int32(e))
+	}
+}
+
 // FsrmActionType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmactiontype
 type FsrmActionType int32
 
@@ -65,6 +156,25 @@ const (
 	FsrmActionType_Command  FsrmActionType = 3
 	FsrmActionType_Report   FsrmActionType = 4
 )
+
+// String returns the FsrmActionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmActionType) String() string {
+	switch e {
+	case FsrmActionType_Unknown:
+		return "FsrmActionType_Unknown"
+	case FsrmActionType_EventLog:
+		return "FsrmActionType_EventLog"
+	case FsrmActionType_Email:
+		return "FsrmActionType_Email"
+	case FsrmActionType_Command:
+		return "FsrmActionType_Command"
+	case FsrmActionType_Report:
+		return "FsrmActionType_Report"
+	default:
+		return fmt.Sprintf("FsrmActionType(%d)", int32(e))
+	}
+}
 
 // FsrmClassificationLoggingFlags: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmclassificationloggingflags
 type FsrmClassificationLoggingFlags int32
@@ -77,6 +187,25 @@ const (
 	FsrmClassificationLoggingFlags_ErrorsInSystemLog          FsrmClassificationLoggingFlags = 8
 )
 
+// String returns the FsrmClassificationLoggingFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmClassificationLoggingFlags) String() string {
+	switch e {
+	case FsrmClassificationLoggingFlags_None:
+		return "FsrmClassificationLoggingFlags_None"
+	case FsrmClassificationLoggingFlags_ClassificationsInLogFile:
+		return "FsrmClassificationLoggingFlags_ClassificationsInLogFile"
+	case FsrmClassificationLoggingFlags_ErrorsInLogFile:
+		return "FsrmClassificationLoggingFlags_ErrorsInLogFile"
+	case FsrmClassificationLoggingFlags_ClassificationsInSystemLog:
+		return "FsrmClassificationLoggingFlags_ClassificationsInSystemLog"
+	case FsrmClassificationLoggingFlags_ErrorsInSystemLog:
+		return "FsrmClassificationLoggingFlags_ErrorsInSystemLog"
+	default:
+		return fmt.Sprintf("FsrmClassificationLoggingFlags(%d)", int32(e))
+	}
+}
+
 // FsrmCollectionState: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmcollectionstate
 type FsrmCollectionState int32
 
@@ -87,6 +216,23 @@ const (
 	FsrmCollectionState_Cancelled  FsrmCollectionState = 4
 )
 
+// String returns the FsrmCollectionState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmCollectionState) String() string {
+	switch e {
+	case FsrmCollectionState_Fetching:
+		return "FsrmCollectionState_Fetching"
+	case FsrmCollectionState_Committing:
+		return "FsrmCollectionState_Committing"
+	case FsrmCollectionState_Complete:
+		return "FsrmCollectionState_Complete"
+	case FsrmCollectionState_Cancelled:
+		return "FsrmCollectionState_Cancelled"
+	default:
+		return fmt.Sprintf("FsrmCollectionState(%d)", int32(e))
+	}
+}
+
 // FsrmCommitOptions: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmcommitoptions
 type FsrmCommitOptions int32
 
@@ -94,6 +240,19 @@ const (
 	FsrmCommitOptions_None         FsrmCommitOptions = 0
 	FsrmCommitOptions_Asynchronous FsrmCommitOptions = 1
 )
+
+// String returns the FsrmCommitOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmCommitOptions) String() string {
+	switch e {
+	case FsrmCommitOptions_None:
+		return "FsrmCommitOptions_None"
+	case FsrmCommitOptions_Asynchronous:
+		return "FsrmCommitOptions_Asynchronous"
+	default:
+		return fmt.Sprintf("FsrmCommitOptions(%d)", int32(e))
+	}
+}
 
 // FsrmEnumOptions: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmenumoptions
 type FsrmEnumOptions int32
@@ -106,6 +265,25 @@ const (
 	FsrmEnumOptions_IncludeDeprecatedObjects FsrmEnumOptions = 8
 )
 
+// String returns the FsrmEnumOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmEnumOptions) String() string {
+	switch e {
+	case FsrmEnumOptions_None:
+		return "FsrmEnumOptions_None"
+	case FsrmEnumOptions_Asynchronous:
+		return "FsrmEnumOptions_Asynchronous"
+	case FsrmEnumOptions_CheckRecycleBin:
+		return "FsrmEnumOptions_CheckRecycleBin"
+	case FsrmEnumOptions_IncludeClusterNodes:
+		return "FsrmEnumOptions_IncludeClusterNodes"
+	case FsrmEnumOptions_IncludeDeprecatedObjects:
+		return "FsrmEnumOptions_IncludeDeprecatedObjects"
+	default:
+		return fmt.Sprintf("FsrmEnumOptions(%d)", int32(e))
+	}
+}
+
 // FsrmEventType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmeventtype
 type FsrmEventType int32
 
@@ -115,6 +293,23 @@ const (
 	FsrmEventType_Warning     FsrmEventType = 2
 	FsrmEventType_Error       FsrmEventType = 3
 )
+
+// String returns the FsrmEventType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmEventType) String() string {
+	switch e {
+	case FsrmEventType_Unknown:
+		return "FsrmEventType_Unknown"
+	case FsrmEventType_Information:
+		return "FsrmEventType_Information"
+	case FsrmEventType_Warning:
+		return "FsrmEventType_Warning"
+	case FsrmEventType_Error:
+		return "FsrmEventType_Error"
+	default:
+		return fmt.Sprintf("FsrmEventType(%d)", int32(e))
+	}
+}
 
 // FsrmExecutionOption: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmexecutionoption
 type FsrmExecutionOption int32
@@ -126,12 +321,42 @@ const (
 	FsrmExecutionOption_ReEvaluate_IgnoreExistingValue   FsrmExecutionOption = 3
 )
 
+// String returns the FsrmExecutionOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmExecutionOption) String() string {
+	switch e {
+	case FsrmExecutionOption_Unknown:
+		return "FsrmExecutionOption_Unknown"
+	case FsrmExecutionOption_EvaluateUnset:
+		return "FsrmExecutionOption_EvaluateUnset"
+	case FsrmExecutionOption_ReEvaluate_ConsiderExistingValue:
+		return "FsrmExecutionOption_ReEvaluate_ConsiderExistingValue"
+	case FsrmExecutionOption_ReEvaluate_IgnoreExistingValue:
+		return "FsrmExecutionOption_ReEvaluate_IgnoreExistingValue"
+	default:
+		return fmt.Sprintf("FsrmExecutionOption(%d)", int32(e))
+	}
+}
+
 type FsrmFileConditionType int32
 
 const (
 	FsrmFileConditionType_Unknown  FsrmFileConditionType = 0
 	FsrmFileConditionType_Property FsrmFileConditionType = 1
 )
+
+// String returns the FsrmFileConditionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmFileConditionType) String() string {
+	switch e {
+	case FsrmFileConditionType_Unknown:
+		return "FsrmFileConditionType_Unknown"
+	case FsrmFileConditionType_Property:
+		return "FsrmFileConditionType_Property"
+	default:
+		return fmt.Sprintf("FsrmFileConditionType(%d)", int32(e))
+	}
+}
 
 // FsrmFileManagementLoggingFlags: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmfilemanagementloggingflags
 type FsrmFileManagementLoggingFlags int32
@@ -143,6 +368,23 @@ const (
 	FsrmFileManagementLoggingFlags_Audit       FsrmFileManagementLoggingFlags = 4
 )
 
+// String returns the FsrmFileManagementLoggingFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmFileManagementLoggingFlags) String() string {
+	switch e {
+	case FsrmFileManagementLoggingFlags_None:
+		return "FsrmFileManagementLoggingFlags_None"
+	case FsrmFileManagementLoggingFlags_Error:
+		return "FsrmFileManagementLoggingFlags_Error"
+	case FsrmFileManagementLoggingFlags_Information:
+		return "FsrmFileManagementLoggingFlags_Information"
+	case FsrmFileManagementLoggingFlags_Audit:
+		return "FsrmFileManagementLoggingFlags_Audit"
+	default:
+		return fmt.Sprintf("FsrmFileManagementLoggingFlags(%d)", int32(e))
+	}
+}
+
 // FsrmFileManagementType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmfilemanagementtype
 type FsrmFileManagementType int32
 
@@ -153,12 +395,40 @@ const (
 	FsrmFileManagementType_Rms        FsrmFileManagementType = 3
 )
 
+// String returns the FsrmFileManagementType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmFileManagementType) String() string {
+	switch e {
+	case FsrmFileManagementType_Unknown:
+		return "FsrmFileManagementType_Unknown"
+	case FsrmFileManagementType_Expiration:
+		return "FsrmFileManagementType_Expiration"
+	case FsrmFileManagementType_Custom:
+		return "FsrmFileManagementType_Custom"
+	case FsrmFileManagementType_Rms:
+		return "FsrmFileManagementType_Rms"
+	default:
+		return fmt.Sprintf("FsrmFileManagementType(%d)", int32(e))
+	}
+}
+
 // FsrmFileScreenFlags: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmfilescreenflags
 type FsrmFileScreenFlags int32
 
 const (
 	FsrmFileScreenFlags_Enforce FsrmFileScreenFlags = 1
 )
+
+// String returns the FsrmFileScreenFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmFileScreenFlags) String() string {
+	switch e {
+	case FsrmFileScreenFlags_Enforce:
+		return "FsrmFileScreenFlags_Enforce"
+	default:
+		return fmt.Sprintf("FsrmFileScreenFlags(%d)", int32(e))
+	}
+}
 
 // FsrmFileStreamingInterfaceType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmfilestreaminginterfacetype
 type FsrmFileStreamingInterfaceType int32
@@ -169,6 +439,21 @@ const (
 	FsrmFileStreamingInterfaceType_IStream    FsrmFileStreamingInterfaceType = 2
 )
 
+// String returns the FsrmFileStreamingInterfaceType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmFileStreamingInterfaceType) String() string {
+	switch e {
+	case FsrmFileStreamingInterfaceType_Unknown:
+		return "FsrmFileStreamingInterfaceType_Unknown"
+	case FsrmFileStreamingInterfaceType_ILockBytes:
+		return "FsrmFileStreamingInterfaceType_ILockBytes"
+	case FsrmFileStreamingInterfaceType_IStream:
+		return "FsrmFileStreamingInterfaceType_IStream"
+	default:
+		return fmt.Sprintf("FsrmFileStreamingInterfaceType(%d)", int32(e))
+	}
+}
+
 // FsrmFileStreamingMode: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmfilestreamingmode
 type FsrmFileStreamingMode int32
 
@@ -177,6 +462,21 @@ const (
 	FsrmFileStreamingMode_Read    FsrmFileStreamingMode = 1
 	FsrmFileStreamingMode_Write   FsrmFileStreamingMode = 2
 )
+
+// String returns the FsrmFileStreamingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmFileStreamingMode) String() string {
+	switch e {
+	case FsrmFileStreamingMode_Unknown:
+		return "FsrmFileStreamingMode_Unknown"
+	case FsrmFileStreamingMode_Read:
+		return "FsrmFileStreamingMode_Read"
+	case FsrmFileStreamingMode_Write:
+		return "FsrmFileStreamingMode_Write"
+	default:
+		return fmt.Sprintf("FsrmFileStreamingMode(%d)", int32(e))
+	}
+}
 
 // FsrmFileSystemPropertyId: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmfilesystempropertyid
 type FsrmFileSystemPropertyId int32
@@ -190,6 +490,27 @@ const (
 	FsrmFileSystemPropertyId_DateNow          FsrmFileSystemPropertyId = 5
 )
 
+// String returns the FsrmFileSystemPropertyId constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmFileSystemPropertyId) String() string {
+	switch e {
+	case FsrmFileSystemPropertyId_Undefined:
+		return "FsrmFileSystemPropertyId_Undefined"
+	case FsrmFileSystemPropertyId_FileName:
+		return "FsrmFileSystemPropertyId_FileName"
+	case FsrmFileSystemPropertyId_DateCreated:
+		return "FsrmFileSystemPropertyId_DateCreated"
+	case FsrmFileSystemPropertyId_DateLastAccessed:
+		return "FsrmFileSystemPropertyId_DateLastAccessed"
+	case FsrmFileSystemPropertyId_DateLastModified:
+		return "FsrmFileSystemPropertyId_DateLastModified"
+	case FsrmFileSystemPropertyId_DateNow:
+		return "FsrmFileSystemPropertyId_DateNow"
+	default:
+		return fmt.Sprintf("FsrmFileSystemPropertyId(%d)", int32(e))
+	}
+}
+
 // FsrmGetFilePropertyOptions: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmgetfilepropertyoptions
 type FsrmGetFilePropertyOptions int32
 
@@ -201,6 +522,25 @@ const (
 	FsrmGetFilePropertyOptions_SkipOrphaned        FsrmGetFilePropertyOptions = 8
 )
 
+// String returns the FsrmGetFilePropertyOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmGetFilePropertyOptions) String() string {
+	switch e {
+	case FsrmGetFilePropertyOptions_None:
+		return "FsrmGetFilePropertyOptions_None"
+	case FsrmGetFilePropertyOptions_NoRuleEvaluation:
+		return "FsrmGetFilePropertyOptions_NoRuleEvaluation"
+	case FsrmGetFilePropertyOptions_Persistent:
+		return "FsrmGetFilePropertyOptions_Persistent"
+	case FsrmGetFilePropertyOptions_FailOnPersistErrors:
+		return "FsrmGetFilePropertyOptions_FailOnPersistErrors"
+	case FsrmGetFilePropertyOptions_SkipOrphaned:
+		return "FsrmGetFilePropertyOptions_SkipOrphaned"
+	default:
+		return fmt.Sprintf("FsrmGetFilePropertyOptions(%d)", int32(e))
+	}
+}
+
 // FsrmPipelineModuleType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmpipelinemoduletype
 type FsrmPipelineModuleType int32
 
@@ -210,6 +550,21 @@ const (
 	FsrmPipelineModuleType_Classifier FsrmPipelineModuleType = 2
 )
 
+// String returns the FsrmPipelineModuleType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmPipelineModuleType) String() string {
+	switch e {
+	case FsrmPipelineModuleType_Unknown:
+		return "FsrmPipelineModuleType_Unknown"
+	case FsrmPipelineModuleType_Storage:
+		return "FsrmPipelineModuleType_Storage"
+	case FsrmPipelineModuleType_Classifier:
+		return "FsrmPipelineModuleType_Classifier"
+	default:
+		return fmt.Sprintf("FsrmPipelineModuleType(%d)", int32(e))
+	}
+}
+
 // FsrmPropertyBagField: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmpropertybagfield
 type FsrmPropertyBagField int32
 
@@ -217,6 +572,19 @@ const (
 	FsrmPropertyBagField_AccessVolume   FsrmPropertyBagField = 0
 	FsrmPropertyBagField_VolumeGuidName FsrmPropertyBagField = 1
 )
+
+// String returns the FsrmPropertyBagField constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmPropertyBagField) String() string {
+	switch e {
+	case FsrmPropertyBagField_AccessVolume:
+		return "FsrmPropertyBagField_AccessVolume"
+	case FsrmPropertyBagField_VolumeGuidName:
+		return "FsrmPropertyBagField_VolumeGuidName"
+	default:
+		return fmt.Sprintf("FsrmPropertyBagField(%d)", int32(e))
+	}
+}
 
 // FsrmPropertyBagFlags: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmpropertybagflags
 type FsrmPropertyBagFlags int32
@@ -227,6 +595,23 @@ const (
 	FsrmPropertyBagFlags_FailedSavingProperties      FsrmPropertyBagFlags = 4
 	FsrmPropertyBagFlags_FailedClassifyingProperties FsrmPropertyBagFlags = 8
 )
+
+// String returns the FsrmPropertyBagFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmPropertyBagFlags) String() string {
+	switch e {
+	case FsrmPropertyBagFlags_UpdatedByClassifier:
+		return "FsrmPropertyBagFlags_UpdatedByClassifier"
+	case FsrmPropertyBagFlags_FailedLoadingProperties:
+		return "FsrmPropertyBagFlags_FailedLoadingProperties"
+	case FsrmPropertyBagFlags_FailedSavingProperties:
+		return "FsrmPropertyBagFlags_FailedSavingProperties"
+	case FsrmPropertyBagFlags_FailedClassifyingProperties:
+		return "FsrmPropertyBagFlags_FailedClassifyingProperties"
+	default:
+		return fmt.Sprintf("FsrmPropertyBagFlags(%d)", int32(e))
+	}
+}
 
 // FsrmPropertyConditionType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmpropertyconditiontype
 type FsrmPropertyConditionType int32
@@ -248,6 +633,43 @@ const (
 	FsrmPropertyConditionType_MatchesPattern FsrmPropertyConditionType = 13
 )
 
+// String returns the FsrmPropertyConditionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmPropertyConditionType) String() string {
+	switch e {
+	case FsrmPropertyConditionType_Unknown:
+		return "FsrmPropertyConditionType_Unknown"
+	case FsrmPropertyConditionType_Equal:
+		return "FsrmPropertyConditionType_Equal"
+	case FsrmPropertyConditionType_NotEqual:
+		return "FsrmPropertyConditionType_NotEqual"
+	case FsrmPropertyConditionType_GreaterThan:
+		return "FsrmPropertyConditionType_GreaterThan"
+	case FsrmPropertyConditionType_LessThan:
+		return "FsrmPropertyConditionType_LessThan"
+	case FsrmPropertyConditionType_Contain:
+		return "FsrmPropertyConditionType_Contain"
+	case FsrmPropertyConditionType_Exist:
+		return "FsrmPropertyConditionType_Exist"
+	case FsrmPropertyConditionType_NotExist:
+		return "FsrmPropertyConditionType_NotExist"
+	case FsrmPropertyConditionType_StartWith:
+		return "FsrmPropertyConditionType_StartWith"
+	case FsrmPropertyConditionType_EndWith:
+		return "FsrmPropertyConditionType_EndWith"
+	case FsrmPropertyConditionType_ContainedIn:
+		return "FsrmPropertyConditionType_ContainedIn"
+	case FsrmPropertyConditionType_PrefixOf:
+		return "FsrmPropertyConditionType_PrefixOf"
+	case FsrmPropertyConditionType_SuffixOf:
+		return "FsrmPropertyConditionType_SuffixOf"
+	case FsrmPropertyConditionType_MatchesPattern:
+		return "FsrmPropertyConditionType_MatchesPattern"
+	default:
+		return fmt.Sprintf("FsrmPropertyConditionType(%d)", int32(e))
+	}
+}
+
 // FsrmPropertyDefinitionAppliesTo: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmpropertydefinitionappliesto
 type FsrmPropertyDefinitionAppliesTo int32
 
@@ -255,6 +677,19 @@ const (
 	FsrmPropertyDefinitionAppliesTo_Files   FsrmPropertyDefinitionAppliesTo = 1
 	FsrmPropertyDefinitionAppliesTo_Folders FsrmPropertyDefinitionAppliesTo = 2
 )
+
+// String returns the FsrmPropertyDefinitionAppliesTo constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmPropertyDefinitionAppliesTo) String() string {
+	switch e {
+	case FsrmPropertyDefinitionAppliesTo_Files:
+		return "FsrmPropertyDefinitionAppliesTo_Files"
+	case FsrmPropertyDefinitionAppliesTo_Folders:
+		return "FsrmPropertyDefinitionAppliesTo_Folders"
+	default:
+		return fmt.Sprintf("FsrmPropertyDefinitionAppliesTo(%d)", int32(e))
+	}
+}
 
 // FsrmPropertyDefinitionFlags: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmpropertydefinitionflags
 type FsrmPropertyDefinitionFlags int32
@@ -264,6 +699,21 @@ const (
 	FsrmPropertyDefinitionFlags_Deprecated FsrmPropertyDefinitionFlags = 2
 	FsrmPropertyDefinitionFlags_Secure     FsrmPropertyDefinitionFlags = 4
 )
+
+// String returns the FsrmPropertyDefinitionFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmPropertyDefinitionFlags) String() string {
+	switch e {
+	case FsrmPropertyDefinitionFlags_Global:
+		return "FsrmPropertyDefinitionFlags_Global"
+	case FsrmPropertyDefinitionFlags_Deprecated:
+		return "FsrmPropertyDefinitionFlags_Deprecated"
+	case FsrmPropertyDefinitionFlags_Secure:
+		return "FsrmPropertyDefinitionFlags_Secure"
+	default:
+		return fmt.Sprintf("FsrmPropertyDefinitionFlags(%d)", int32(e))
+	}
+}
 
 // FsrmPropertyDefinitionType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmpropertydefinitiontype
 type FsrmPropertyDefinitionType int32
@@ -279,6 +729,33 @@ const (
 	FsrmPropertyDefinitionType_Bool             FsrmPropertyDefinitionType = 7
 	FsrmPropertyDefinitionType_Date             FsrmPropertyDefinitionType = 8
 )
+
+// String returns the FsrmPropertyDefinitionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmPropertyDefinitionType) String() string {
+	switch e {
+	case FsrmPropertyDefinitionType_Unknown:
+		return "FsrmPropertyDefinitionType_Unknown"
+	case FsrmPropertyDefinitionType_OrderedList:
+		return "FsrmPropertyDefinitionType_OrderedList"
+	case FsrmPropertyDefinitionType_MultiChoiceList:
+		return "FsrmPropertyDefinitionType_MultiChoiceList"
+	case FsrmPropertyDefinitionType_SingleChoiceList:
+		return "FsrmPropertyDefinitionType_SingleChoiceList"
+	case FsrmPropertyDefinitionType_String:
+		return "FsrmPropertyDefinitionType_String"
+	case FsrmPropertyDefinitionType_MultiString:
+		return "FsrmPropertyDefinitionType_MultiString"
+	case FsrmPropertyDefinitionType_Int:
+		return "FsrmPropertyDefinitionType_Int"
+	case FsrmPropertyDefinitionType_Bool:
+		return "FsrmPropertyDefinitionType_Bool"
+	case FsrmPropertyDefinitionType_Date:
+		return "FsrmPropertyDefinitionType_Date"
+	default:
+		return fmt.Sprintf("FsrmPropertyDefinitionType(%d)", int32(e))
+	}
+}
 
 // FsrmPropertyFlags: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmpropertyflags
 type FsrmPropertyFlags int32
@@ -306,6 +783,55 @@ const (
 	FsrmPropertyFlags_PersistentMask              FsrmPropertyFlags = 20480
 )
 
+// String returns the FsrmPropertyFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmPropertyFlags) String() string {
+	switch e {
+	case FsrmPropertyFlags_None:
+		return "FsrmPropertyFlags_None"
+	case FsrmPropertyFlags_Orphaned:
+		return "FsrmPropertyFlags_Orphaned"
+	case FsrmPropertyFlags_RetrievedFromCache:
+		return "FsrmPropertyFlags_RetrievedFromCache"
+	case FsrmPropertyFlags_RetrievedFromStorage:
+		return "FsrmPropertyFlags_RetrievedFromStorage"
+	case FsrmPropertyFlags_SetByClassifier:
+		return "FsrmPropertyFlags_SetByClassifier"
+	case FsrmPropertyFlags_Deleted:
+		return "FsrmPropertyFlags_Deleted"
+	case FsrmPropertyFlags_Reclassified:
+		return "FsrmPropertyFlags_Reclassified"
+	case FsrmPropertyFlags_AggregationFailed:
+		return "FsrmPropertyFlags_AggregationFailed"
+	case FsrmPropertyFlags_Existing:
+		return "FsrmPropertyFlags_Existing"
+	case FsrmPropertyFlags_FailedLoadingProperties:
+		return "FsrmPropertyFlags_FailedLoadingProperties"
+	case FsrmPropertyFlags_FailedClassifyingProperties:
+		return "FsrmPropertyFlags_FailedClassifyingProperties"
+	case FsrmPropertyFlags_FailedSavingProperties:
+		return "FsrmPropertyFlags_FailedSavingProperties"
+	case FsrmPropertyFlags_Secure:
+		return "FsrmPropertyFlags_Secure"
+	case FsrmPropertyFlags_PolicyDerived:
+		return "FsrmPropertyFlags_PolicyDerived"
+	case FsrmPropertyFlags_Inherited:
+		return "FsrmPropertyFlags_Inherited"
+	case FsrmPropertyFlags_Manual:
+		return "FsrmPropertyFlags_Manual"
+	case FsrmPropertyFlags_ExplicitValueDeleted:
+		return "FsrmPropertyFlags_ExplicitValueDeleted"
+	case FsrmPropertyFlags_PropertyDeletedFromClear:
+		return "FsrmPropertyFlags_PropertyDeletedFromClear"
+	case FsrmPropertyFlags_PropertySourceMask:
+		return "FsrmPropertyFlags_PropertySourceMask"
+	case FsrmPropertyFlags_PersistentMask:
+		return "FsrmPropertyFlags_PersistentMask"
+	default:
+		return fmt.Sprintf("FsrmPropertyFlags(%d)", int32(e))
+	}
+}
+
 // FsrmPropertyValueType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmpropertyvaluetype
 type FsrmPropertyValueType int32
 
@@ -314,6 +840,21 @@ const (
 	FsrmPropertyValueType_Literal    FsrmPropertyValueType = 1
 	FsrmPropertyValueType_DateOffset FsrmPropertyValueType = 2
 )
+
+// String returns the FsrmPropertyValueType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmPropertyValueType) String() string {
+	switch e {
+	case FsrmPropertyValueType_Undefined:
+		return "FsrmPropertyValueType_Undefined"
+	case FsrmPropertyValueType_Literal:
+		return "FsrmPropertyValueType_Literal"
+	case FsrmPropertyValueType_DateOffset:
+		return "FsrmPropertyValueType_DateOffset"
+	default:
+		return fmt.Sprintf("FsrmPropertyValueType(%d)", int32(e))
+	}
+}
 
 // FsrmQuotaFlags: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmquotaflags
 type FsrmQuotaFlags int32
@@ -324,6 +865,23 @@ const (
 	FsrmQuotaFlags_StatusIncomplete FsrmQuotaFlags = 65536
 	FsrmQuotaFlags_StatusRebuilding FsrmQuotaFlags = 131072
 )
+
+// String returns the FsrmQuotaFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmQuotaFlags) String() string {
+	switch e {
+	case FsrmQuotaFlags_Enforce:
+		return "FsrmQuotaFlags_Enforce"
+	case FsrmQuotaFlags_Disable:
+		return "FsrmQuotaFlags_Disable"
+	case FsrmQuotaFlags_StatusIncomplete:
+		return "FsrmQuotaFlags_StatusIncomplete"
+	case FsrmQuotaFlags_StatusRebuilding:
+		return "FsrmQuotaFlags_StatusRebuilding"
+	default:
+		return fmt.Sprintf("FsrmQuotaFlags(%d)", int32(e))
+	}
+}
 
 // FsrmReportFilter: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmreportfilter
 type FsrmReportFilter int32
@@ -339,6 +897,31 @@ const (
 	FsrmReportFilter_Property      FsrmReportFilter = 8
 )
 
+// String returns the FsrmReportFilter constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmReportFilter) String() string {
+	switch e {
+	case FsrmReportFilter_MinSize:
+		return "FsrmReportFilter_MinSize"
+	case FsrmReportFilter_MinAgeDays:
+		return "FsrmReportFilter_MinAgeDays"
+	case FsrmReportFilter_MaxAgeDays:
+		return "FsrmReportFilter_MaxAgeDays"
+	case FsrmReportFilter_MinQuotaUsage:
+		return "FsrmReportFilter_MinQuotaUsage"
+	case FsrmReportFilter_FileGroups:
+		return "FsrmReportFilter_FileGroups"
+	case FsrmReportFilter_Owners:
+		return "FsrmReportFilter_Owners"
+	case FsrmReportFilter_NamePattern:
+		return "FsrmReportFilter_NamePattern"
+	case FsrmReportFilter_Property:
+		return "FsrmReportFilter_Property"
+	default:
+		return fmt.Sprintf("FsrmReportFilter(%d)", int32(e))
+	}
+}
+
 // FsrmReportFormat: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmreportformat
 type FsrmReportFormat int32
 
@@ -351,6 +934,27 @@ const (
 	FsrmReportFormat_Xml     FsrmReportFormat = 5
 )
 
+// String returns the FsrmReportFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmReportFormat) String() string {
+	switch e {
+	case FsrmReportFormat_Unknown:
+		return "FsrmReportFormat_Unknown"
+	case FsrmReportFormat_DHtml:
+		return "FsrmReportFormat_DHtml"
+	case FsrmReportFormat_Html:
+		return "FsrmReportFormat_Html"
+	case FsrmReportFormat_Txt:
+		return "FsrmReportFormat_Txt"
+	case FsrmReportFormat_Csv:
+		return "FsrmReportFormat_Csv"
+	case FsrmReportFormat_Xml:
+		return "FsrmReportFormat_Xml"
+	default:
+		return fmt.Sprintf("FsrmReportFormat(%d)", int32(e))
+	}
+}
+
 // FsrmReportGenerationContext: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmreportgenerationcontext
 type FsrmReportGenerationContext int32
 
@@ -360,6 +964,23 @@ const (
 	FsrmReportGenerationContext_InteractiveReport FsrmReportGenerationContext = 3
 	FsrmReportGenerationContext_IncidentReport    FsrmReportGenerationContext = 4
 )
+
+// String returns the FsrmReportGenerationContext constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmReportGenerationContext) String() string {
+	switch e {
+	case FsrmReportGenerationContext_Undefined:
+		return "FsrmReportGenerationContext_Undefined"
+	case FsrmReportGenerationContext_ScheduledReport:
+		return "FsrmReportGenerationContext_ScheduledReport"
+	case FsrmReportGenerationContext_InteractiveReport:
+		return "FsrmReportGenerationContext_InteractiveReport"
+	case FsrmReportGenerationContext_IncidentReport:
+		return "FsrmReportGenerationContext_IncidentReport"
+	default:
+		return fmt.Sprintf("FsrmReportGenerationContext(%d)", int32(e))
+	}
+}
 
 // FsrmReportLimit: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmreportlimit
 type FsrmReportLimit int32
@@ -379,6 +1000,39 @@ const (
 	FsrmReportLimit_MaxFolders               FsrmReportLimit = 12
 )
 
+// String returns the FsrmReportLimit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmReportLimit) String() string {
+	switch e {
+	case FsrmReportLimit_MaxFiles:
+		return "FsrmReportLimit_MaxFiles"
+	case FsrmReportLimit_MaxFileGroups:
+		return "FsrmReportLimit_MaxFileGroups"
+	case FsrmReportLimit_MaxOwners:
+		return "FsrmReportLimit_MaxOwners"
+	case FsrmReportLimit_MaxFilesPerFileGroup:
+		return "FsrmReportLimit_MaxFilesPerFileGroup"
+	case FsrmReportLimit_MaxFilesPerOwner:
+		return "FsrmReportLimit_MaxFilesPerOwner"
+	case FsrmReportLimit_MaxFilesPerDuplGroup:
+		return "FsrmReportLimit_MaxFilesPerDuplGroup"
+	case FsrmReportLimit_MaxDuplicateGroups:
+		return "FsrmReportLimit_MaxDuplicateGroups"
+	case FsrmReportLimit_MaxQuotas:
+		return "FsrmReportLimit_MaxQuotas"
+	case FsrmReportLimit_MaxFileScreenEvents:
+		return "FsrmReportLimit_MaxFileScreenEvents"
+	case FsrmReportLimit_MaxPropertyValues:
+		return "FsrmReportLimit_MaxPropertyValues"
+	case FsrmReportLimit_MaxFilesPerPropertyValue:
+		return "FsrmReportLimit_MaxFilesPerPropertyValue"
+	case FsrmReportLimit_MaxFolders:
+		return "FsrmReportLimit_MaxFolders"
+	default:
+		return fmt.Sprintf("FsrmReportLimit(%d)", int32(e))
+	}
+}
+
 // FsrmReportRunningStatus: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmreportrunningstatus
 type FsrmReportRunningStatus int32
 
@@ -388,6 +1042,23 @@ const (
 	FsrmReportRunningStatus_Queued     FsrmReportRunningStatus = 2
 	FsrmReportRunningStatus_Running    FsrmReportRunningStatus = 3
 )
+
+// String returns the FsrmReportRunningStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmReportRunningStatus) String() string {
+	switch e {
+	case FsrmReportRunningStatus_Unknown:
+		return "FsrmReportRunningStatus_Unknown"
+	case FsrmReportRunningStatus_NotRunning:
+		return "FsrmReportRunningStatus_NotRunning"
+	case FsrmReportRunningStatus_Queued:
+		return "FsrmReportRunningStatus_Queued"
+	case FsrmReportRunningStatus_Running:
+		return "FsrmReportRunningStatus_Running"
+	default:
+		return fmt.Sprintf("FsrmReportRunningStatus(%d)", int32(e))
+	}
+}
 
 // FsrmReportType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmreporttype
 type FsrmReportType int32
@@ -409,6 +1080,43 @@ const (
 	FsrmReportType_FoldersByProperty       FsrmReportType = 13
 )
 
+// String returns the FsrmReportType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmReportType) String() string {
+	switch e {
+	case FsrmReportType_Unknown:
+		return "FsrmReportType_Unknown"
+	case FsrmReportType_LargeFiles:
+		return "FsrmReportType_LargeFiles"
+	case FsrmReportType_FilesByType:
+		return "FsrmReportType_FilesByType"
+	case FsrmReportType_LeastRecentlyAccessed:
+		return "FsrmReportType_LeastRecentlyAccessed"
+	case FsrmReportType_MostRecentlyAccessed:
+		return "FsrmReportType_MostRecentlyAccessed"
+	case FsrmReportType_QuotaUsage:
+		return "FsrmReportType_QuotaUsage"
+	case FsrmReportType_FilesByOwner:
+		return "FsrmReportType_FilesByOwner"
+	case FsrmReportType_ExportReport:
+		return "FsrmReportType_ExportReport"
+	case FsrmReportType_DuplicateFiles:
+		return "FsrmReportType_DuplicateFiles"
+	case FsrmReportType_FileScreenAudit:
+		return "FsrmReportType_FileScreenAudit"
+	case FsrmReportType_FilesByProperty:
+		return "FsrmReportType_FilesByProperty"
+	case FsrmReportType_AutomaticClassification:
+		return "FsrmReportType_AutomaticClassification"
+	case FsrmReportType_Expiration:
+		return "FsrmReportType_Expiration"
+	case FsrmReportType_FoldersByProperty:
+		return "FsrmReportType_FoldersByProperty"
+	default:
+		return fmt.Sprintf("FsrmReportType(%d)", int32(e))
+	}
+}
+
 // FsrmRuleFlags: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmruleflags
 type FsrmRuleFlags int32
 
@@ -419,6 +1127,23 @@ const (
 	FsrmRuleFlags_Invalid                              FsrmRuleFlags = 4096
 )
 
+// String returns the FsrmRuleFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmRuleFlags) String() string {
+	switch e {
+	case FsrmRuleFlags_Disabled:
+		return "FsrmRuleFlags_Disabled"
+	case FsrmRuleFlags_ClearAutomaticallyClassifiedProperty:
+		return "FsrmRuleFlags_ClearAutomaticallyClassifiedProperty"
+	case FsrmRuleFlags_ClearManuallyClassifiedProperty:
+		return "FsrmRuleFlags_ClearManuallyClassifiedProperty"
+	case FsrmRuleFlags_Invalid:
+		return "FsrmRuleFlags_Invalid"
+	default:
+		return fmt.Sprintf("FsrmRuleFlags(%d)", int32(e))
+	}
+}
+
 // FsrmRuleType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmruletype
 type FsrmRuleType int32
 
@@ -427,6 +1152,21 @@ const (
 	FsrmRuleType_Classification FsrmRuleType = 1
 	FsrmRuleType_Generic        FsrmRuleType = 2
 )
+
+// String returns the FsrmRuleType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmRuleType) String() string {
+	switch e {
+	case FsrmRuleType_Unknown:
+		return "FsrmRuleType_Unknown"
+	case FsrmRuleType_Classification:
+		return "FsrmRuleType_Classification"
+	case FsrmRuleType_Generic:
+		return "FsrmRuleType_Generic"
+	default:
+		return fmt.Sprintf("FsrmRuleType(%d)", int32(e))
+	}
+}
 
 // FsrmStorageModuleCaps: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmstoragemodulecaps
 type FsrmStorageModuleCaps int32
@@ -439,6 +1179,25 @@ const (
 	FsrmStorageModuleCaps_CanHandleFiles       FsrmStorageModuleCaps = 8
 )
 
+// String returns the FsrmStorageModuleCaps constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmStorageModuleCaps) String() string {
+	switch e {
+	case FsrmStorageModuleCaps_Unknown:
+		return "FsrmStorageModuleCaps_Unknown"
+	case FsrmStorageModuleCaps_CanGet:
+		return "FsrmStorageModuleCaps_CanGet"
+	case FsrmStorageModuleCaps_CanSet:
+		return "FsrmStorageModuleCaps_CanSet"
+	case FsrmStorageModuleCaps_CanHandleDirectories:
+		return "FsrmStorageModuleCaps_CanHandleDirectories"
+	case FsrmStorageModuleCaps_CanHandleFiles:
+		return "FsrmStorageModuleCaps_CanHandleFiles"
+	default:
+		return fmt.Sprintf("FsrmStorageModuleCaps(%d)", int32(e))
+	}
+}
+
 // FsrmStorageModuleType: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmstoragemoduletype
 type FsrmStorageModuleType int32
 
@@ -450,6 +1209,25 @@ const (
 	FsrmStorageModuleType_System   FsrmStorageModuleType = 100
 )
 
+// String returns the FsrmStorageModuleType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmStorageModuleType) String() string {
+	switch e {
+	case FsrmStorageModuleType_Unknown:
+		return "FsrmStorageModuleType_Unknown"
+	case FsrmStorageModuleType_Cache:
+		return "FsrmStorageModuleType_Cache"
+	case FsrmStorageModuleType_InFile:
+		return "FsrmStorageModuleType_InFile"
+	case FsrmStorageModuleType_Database:
+		return "FsrmStorageModuleType_Database"
+	case FsrmStorageModuleType_System:
+		return "FsrmStorageModuleType_System"
+	default:
+		return fmt.Sprintf("FsrmStorageModuleType(%d)", int32(e))
+	}
+}
+
 // FsrmTemplateApplyOptions: https://learn.microsoft.com/windows/win32/api/fsrmenums/ne-fsrmenums-fsrmtemplateapplyoptions
 type FsrmTemplateApplyOptions int32
 
@@ -457,3 +1235,16 @@ const (
 	FsrmTemplateApplyOptions_ApplyToDerivedMatching FsrmTemplateApplyOptions = 1
 	FsrmTemplateApplyOptions_ApplyToDerivedAll      FsrmTemplateApplyOptions = 2
 )
+
+// String returns the FsrmTemplateApplyOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FsrmTemplateApplyOptions) String() string {
+	switch e {
+	case FsrmTemplateApplyOptions_ApplyToDerivedMatching:
+		return "FsrmTemplateApplyOptions_ApplyToDerivedMatching"
+	case FsrmTemplateApplyOptions_ApplyToDerivedAll:
+		return "FsrmTemplateApplyOptions_ApplyToDerivedAll"
+	default:
+		return fmt.Sprintf("FsrmTemplateApplyOptions(%d)", int32(e))
+	}
+}

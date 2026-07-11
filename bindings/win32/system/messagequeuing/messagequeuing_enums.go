@@ -4,6 +4,11 @@
 
 package messagequeuing
 
+import (
+	"fmt"
+	"strings"
+)
+
 type FOREIGN_STATUS int32
 
 const (
@@ -11,6 +16,21 @@ const (
 	MQ_STATUS_NOT_FOREIGN FOREIGN_STATUS = 1
 	MQ_STATUS_UNKNOWN     FOREIGN_STATUS = 2
 )
+
+// String returns the FOREIGN_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FOREIGN_STATUS) String() string {
+	switch e {
+	case MQ_STATUS_FOREIGN:
+		return "MQ_STATUS_FOREIGN"
+	case MQ_STATUS_NOT_FOREIGN:
+		return "MQ_STATUS_NOT_FOREIGN"
+	case MQ_STATUS_UNKNOWN:
+		return "MQ_STATUS_UNKNOWN"
+	default:
+		return fmt.Sprintf("FOREIGN_STATUS(%d)", int32(e))
+	}
+}
 
 type MQACCESS int32
 
@@ -21,12 +41,42 @@ const (
 	MQ_ADMIN_ACCESS   MQACCESS = 128
 )
 
+// String returns the MQACCESS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQACCESS) String() string {
+	switch e {
+	case MQ_RECEIVE_ACCESS:
+		return "MQ_RECEIVE_ACCESS"
+	case MQ_SEND_ACCESS:
+		return "MQ_SEND_ACCESS"
+	case MQ_PEEK_ACCESS:
+		return "MQ_PEEK_ACCESS"
+	case MQ_ADMIN_ACCESS:
+		return "MQ_ADMIN_ACCESS"
+	default:
+		return fmt.Sprintf("MQACCESS(%d)", int32(e))
+	}
+}
+
 type MQAUTHENTICATE int32
 
 const (
 	MQ_AUTHENTICATE_NONE MQAUTHENTICATE = 0
 	MQ_AUTHENTICATE      MQAUTHENTICATE = 1
 )
+
+// String returns the MQAUTHENTICATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQAUTHENTICATE) String() string {
+	switch e {
+	case MQ_AUTHENTICATE_NONE:
+		return "MQ_AUTHENTICATE_NONE"
+	case MQ_AUTHENTICATE:
+		return "MQ_AUTHENTICATE"
+	default:
+		return fmt.Sprintf("MQAUTHENTICATE(%d)", int32(e))
+	}
+}
 
 type MQCALG int32
 
@@ -46,12 +96,58 @@ const (
 	MQMSG_CALG_SEAL     MQCALG = 26626
 )
 
+// String returns the MQCALG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQCALG) String() string {
+	switch e {
+	case MQMSG_CALG_MD2:
+		return "MQMSG_CALG_MD2"
+	case MQMSG_CALG_MD4:
+		return "MQMSG_CALG_MD4"
+	case MQMSG_CALG_MD5:
+		return "MQMSG_CALG_MD5"
+	case MQMSG_CALG_SHA:
+		return "MQMSG_CALG_SHA"
+	case MQMSG_CALG_MAC:
+		return "MQMSG_CALG_MAC"
+	case MQMSG_CALG_RSA_SIGN:
+		return "MQMSG_CALG_RSA_SIGN"
+	case MQMSG_CALG_DSS_SIGN:
+		return "MQMSG_CALG_DSS_SIGN"
+	case MQMSG_CALG_RSA_KEYX:
+		return "MQMSG_CALG_RSA_KEYX"
+	case MQMSG_CALG_DES:
+		return "MQMSG_CALG_DES"
+	case MQMSG_CALG_RC2:
+		return "MQMSG_CALG_RC2"
+	case MQMSG_CALG_RC4:
+		return "MQMSG_CALG_RC4"
+	case MQMSG_CALG_SEAL:
+		return "MQMSG_CALG_SEAL"
+	default:
+		return fmt.Sprintf("MQCALG(%d)", int32(e))
+	}
+}
+
 type MQCERT_REGISTER int32
 
 const (
 	MQCERT_REGISTER_ALWAYS       MQCERT_REGISTER = 1
 	MQCERT_REGISTER_IF_NOT_EXIST MQCERT_REGISTER = 2
 )
+
+// String returns the MQCERT_REGISTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQCERT_REGISTER) String() string {
+	switch e {
+	case MQCERT_REGISTER_ALWAYS:
+		return "MQCERT_REGISTER_ALWAYS"
+	case MQCERT_REGISTER_IF_NOT_EXIST:
+		return "MQCERT_REGISTER_IF_NOT_EXIST"
+	default:
+		return fmt.Sprintf("MQCERT_REGISTER(%d)", int32(e))
+	}
+}
 
 type MQConnectionState int32
 
@@ -75,6 +171,49 @@ const (
 	MQCONN_OUT_OF_MEMORY             MQConnectionState = -2147483635
 )
 
+// String returns the MQConnectionState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQConnectionState) String() string {
+	switch e {
+	case MQCONN_NOFAILURE:
+		return "MQCONN_NOFAILURE"
+	case MQCONN_ESTABLISH_PACKET_RECEIVED:
+		return "MQCONN_ESTABLISH_PACKET_RECEIVED"
+	case MQCONN_READY:
+		return "MQCONN_READY"
+	case MQCONN_UNKNOWN_FAILURE:
+		return "MQCONN_UNKNOWN_FAILURE"
+	case MQCONN_PING_FAILURE:
+		return "MQCONN_PING_FAILURE"
+	case MQCONN_CREATE_SOCKET_FAILURE:
+		return "MQCONN_CREATE_SOCKET_FAILURE"
+	case MQCONN_BIND_SOCKET_FAILURE:
+		return "MQCONN_BIND_SOCKET_FAILURE"
+	case MQCONN_CONNECT_SOCKET_FAILURE:
+		return "MQCONN_CONNECT_SOCKET_FAILURE"
+	case MQCONN_TCP_NOT_ENABLED:
+		return "MQCONN_TCP_NOT_ENABLED"
+	case MQCONN_SEND_FAILURE:
+		return "MQCONN_SEND_FAILURE"
+	case MQCONN_NOT_READY:
+		return "MQCONN_NOT_READY"
+	case MQCONN_NAME_RESOLUTION_FAILURE:
+		return "MQCONN_NAME_RESOLUTION_FAILURE"
+	case MQCONN_INVALID_SERVER_CERT:
+		return "MQCONN_INVALID_SERVER_CERT"
+	case MQCONN_LIMIT_REACHED:
+		return "MQCONN_LIMIT_REACHED"
+	case MQCONN_REFUSED_BY_OTHER_SIDE:
+		return "MQCONN_REFUSED_BY_OTHER_SIDE"
+	case MQCONN_ROUTING_FAILURE:
+		return "MQCONN_ROUTING_FAILURE"
+	case MQCONN_OUT_OF_MEMORY:
+		return "MQCONN_OUT_OF_MEMORY"
+	default:
+		return fmt.Sprintf("MQConnectionState(%d)", int32(e))
+	}
+}
+
 type MQDEFAULT int32
 
 const (
@@ -95,6 +234,23 @@ const (
 	DEFAULT_Q_PRIV_LEVEL    MQDEFAULT = 1
 	DEFAULT_M_LOOKUPID      MQDEFAULT = 0
 )
+
+// String returns the MQDEFAULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQDEFAULT) String() string {
+	switch e {
+	case DEFAULT_M_PRIORITY:
+		return "DEFAULT_M_PRIORITY"
+	case DEFAULT_M_DELIVERY:
+		return "DEFAULT_M_DELIVERY"
+	case DEFAULT_M_SENDERID_TYPE:
+		return "DEFAULT_M_SENDERID_TYPE"
+	case DEFAULT_Q_QUOTA:
+		return "DEFAULT_Q_QUOTA"
+	default:
+		return fmt.Sprintf("MQDEFAULT(%d)", int32(e))
+	}
+}
 
 type MQERROR int32
 
@@ -234,6 +390,277 @@ const (
 	MQ_ERROR_CANNOT_UPDATE_PSC_OBJECTS                  MQERROR = -1072824170
 )
 
+// String returns the MQERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQERROR) String() string {
+	switch e {
+	case MQ_ERROR:
+		return "MQ_ERROR"
+	case MQ_ERROR_PROPERTY:
+		return "MQ_ERROR_PROPERTY"
+	case MQ_ERROR_QUEUE_NOT_FOUND:
+		return "MQ_ERROR_QUEUE_NOT_FOUND"
+	case MQ_ERROR_QUEUE_NOT_ACTIVE:
+		return "MQ_ERROR_QUEUE_NOT_ACTIVE"
+	case MQ_ERROR_QUEUE_EXISTS:
+		return "MQ_ERROR_QUEUE_EXISTS"
+	case MQ_ERROR_INVALID_PARAMETER:
+		return "MQ_ERROR_INVALID_PARAMETER"
+	case MQ_ERROR_INVALID_HANDLE:
+		return "MQ_ERROR_INVALID_HANDLE"
+	case MQ_ERROR_OPERATION_CANCELLED:
+		return "MQ_ERROR_OPERATION_CANCELLED"
+	case MQ_ERROR_SHARING_VIOLATION:
+		return "MQ_ERROR_SHARING_VIOLATION"
+	case MQ_ERROR_SERVICE_NOT_AVAILABLE:
+		return "MQ_ERROR_SERVICE_NOT_AVAILABLE"
+	case MQ_ERROR_MACHINE_NOT_FOUND:
+		return "MQ_ERROR_MACHINE_NOT_FOUND"
+	case MQ_ERROR_ILLEGAL_SORT:
+		return "MQ_ERROR_ILLEGAL_SORT"
+	case MQ_ERROR_ILLEGAL_USER:
+		return "MQ_ERROR_ILLEGAL_USER"
+	case MQ_ERROR_NO_DS:
+		return "MQ_ERROR_NO_DS"
+	case MQ_ERROR_ILLEGAL_QUEUE_PATHNAME:
+		return "MQ_ERROR_ILLEGAL_QUEUE_PATHNAME"
+	case MQ_ERROR_ILLEGAL_PROPERTY_VALUE:
+		return "MQ_ERROR_ILLEGAL_PROPERTY_VALUE"
+	case MQ_ERROR_ILLEGAL_PROPERTY_VT:
+		return "MQ_ERROR_ILLEGAL_PROPERTY_VT"
+	case MQ_ERROR_BUFFER_OVERFLOW:
+		return "MQ_ERROR_BUFFER_OVERFLOW"
+	case MQ_ERROR_IO_TIMEOUT:
+		return "MQ_ERROR_IO_TIMEOUT"
+	case MQ_ERROR_ILLEGAL_CURSOR_ACTION:
+		return "MQ_ERROR_ILLEGAL_CURSOR_ACTION"
+	case MQ_ERROR_MESSAGE_ALREADY_RECEIVED:
+		return "MQ_ERROR_MESSAGE_ALREADY_RECEIVED"
+	case MQ_ERROR_ILLEGAL_FORMATNAME:
+		return "MQ_ERROR_ILLEGAL_FORMATNAME"
+	case MQ_ERROR_FORMATNAME_BUFFER_TOO_SMALL:
+		return "MQ_ERROR_FORMATNAME_BUFFER_TOO_SMALL"
+	case MQ_ERROR_UNSUPPORTED_FORMATNAME_OPERATION:
+		return "MQ_ERROR_UNSUPPORTED_FORMATNAME_OPERATION"
+	case MQ_ERROR_ILLEGAL_SECURITY_DESCRIPTOR:
+		return "MQ_ERROR_ILLEGAL_SECURITY_DESCRIPTOR"
+	case MQ_ERROR_SENDERID_BUFFER_TOO_SMALL:
+		return "MQ_ERROR_SENDERID_BUFFER_TOO_SMALL"
+	case MQ_ERROR_SECURITY_DESCRIPTOR_TOO_SMALL:
+		return "MQ_ERROR_SECURITY_DESCRIPTOR_TOO_SMALL"
+	case MQ_ERROR_CANNOT_IMPERSONATE_CLIENT:
+		return "MQ_ERROR_CANNOT_IMPERSONATE_CLIENT"
+	case MQ_ERROR_ACCESS_DENIED:
+		return "MQ_ERROR_ACCESS_DENIED"
+	case MQ_ERROR_PRIVILEGE_NOT_HELD:
+		return "MQ_ERROR_PRIVILEGE_NOT_HELD"
+	case MQ_ERROR_INSUFFICIENT_RESOURCES:
+		return "MQ_ERROR_INSUFFICIENT_RESOURCES"
+	case MQ_ERROR_USER_BUFFER_TOO_SMALL:
+		return "MQ_ERROR_USER_BUFFER_TOO_SMALL"
+	case MQ_ERROR_MESSAGE_STORAGE_FAILED:
+		return "MQ_ERROR_MESSAGE_STORAGE_FAILED"
+	case MQ_ERROR_SENDER_CERT_BUFFER_TOO_SMALL:
+		return "MQ_ERROR_SENDER_CERT_BUFFER_TOO_SMALL"
+	case MQ_ERROR_INVALID_CERTIFICATE:
+		return "MQ_ERROR_INVALID_CERTIFICATE"
+	case MQ_ERROR_CORRUPTED_INTERNAL_CERTIFICATE:
+		return "MQ_ERROR_CORRUPTED_INTERNAL_CERTIFICATE"
+	case MQ_ERROR_INTERNAL_USER_CERT_EXIST:
+		return "MQ_ERROR_INTERNAL_USER_CERT_EXIST"
+	case MQ_ERROR_NO_INTERNAL_USER_CERT:
+		return "MQ_ERROR_NO_INTERNAL_USER_CERT"
+	case MQ_ERROR_CORRUPTED_SECURITY_DATA:
+		return "MQ_ERROR_CORRUPTED_SECURITY_DATA"
+	case MQ_ERROR_CORRUPTED_PERSONAL_CERT_STORE:
+		return "MQ_ERROR_CORRUPTED_PERSONAL_CERT_STORE"
+	case MQ_ERROR_COMPUTER_DOES_NOT_SUPPORT_ENCRYPTION:
+		return "MQ_ERROR_COMPUTER_DOES_NOT_SUPPORT_ENCRYPTION"
+	case MQ_ERROR_BAD_SECURITY_CONTEXT:
+		return "MQ_ERROR_BAD_SECURITY_CONTEXT"
+	case MQ_ERROR_COULD_NOT_GET_USER_SID:
+		return "MQ_ERROR_COULD_NOT_GET_USER_SID"
+	case MQ_ERROR_COULD_NOT_GET_ACCOUNT_INFO:
+		return "MQ_ERROR_COULD_NOT_GET_ACCOUNT_INFO"
+	case MQ_ERROR_ILLEGAL_MQCOLUMNS:
+		return "MQ_ERROR_ILLEGAL_MQCOLUMNS"
+	case MQ_ERROR_ILLEGAL_PROPID:
+		return "MQ_ERROR_ILLEGAL_PROPID"
+	case MQ_ERROR_ILLEGAL_RELATION:
+		return "MQ_ERROR_ILLEGAL_RELATION"
+	case MQ_ERROR_ILLEGAL_PROPERTY_SIZE:
+		return "MQ_ERROR_ILLEGAL_PROPERTY_SIZE"
+	case MQ_ERROR_ILLEGAL_RESTRICTION_PROPID:
+		return "MQ_ERROR_ILLEGAL_RESTRICTION_PROPID"
+	case MQ_ERROR_ILLEGAL_MQQUEUEPROPS:
+		return "MQ_ERROR_ILLEGAL_MQQUEUEPROPS"
+	case MQ_ERROR_PROPERTY_NOTALLOWED:
+		return "MQ_ERROR_PROPERTY_NOTALLOWED"
+	case MQ_ERROR_INSUFFICIENT_PROPERTIES:
+		return "MQ_ERROR_INSUFFICIENT_PROPERTIES"
+	case MQ_ERROR_MACHINE_EXISTS:
+		return "MQ_ERROR_MACHINE_EXISTS"
+	case MQ_ERROR_ILLEGAL_MQQMPROPS:
+		return "MQ_ERROR_ILLEGAL_MQQMPROPS"
+	case MQ_ERROR_DS_IS_FULL:
+		return "MQ_ERROR_DS_IS_FULL"
+	case MQ_ERROR_DS_ERROR:
+		return "MQ_ERROR_DS_ERROR"
+	case MQ_ERROR_INVALID_OWNER:
+		return "MQ_ERROR_INVALID_OWNER"
+	case MQ_ERROR_UNSUPPORTED_ACCESS_MODE:
+		return "MQ_ERROR_UNSUPPORTED_ACCESS_MODE"
+	case MQ_ERROR_RESULT_BUFFER_TOO_SMALL:
+		return "MQ_ERROR_RESULT_BUFFER_TOO_SMALL"
+	case MQ_ERROR_DELETE_CN_IN_USE:
+		return "MQ_ERROR_DELETE_CN_IN_USE"
+	case MQ_ERROR_NO_RESPONSE_FROM_OBJECT_SERVER:
+		return "MQ_ERROR_NO_RESPONSE_FROM_OBJECT_SERVER"
+	case MQ_ERROR_OBJECT_SERVER_NOT_AVAILABLE:
+		return "MQ_ERROR_OBJECT_SERVER_NOT_AVAILABLE"
+	case MQ_ERROR_QUEUE_NOT_AVAILABLE:
+		return "MQ_ERROR_QUEUE_NOT_AVAILABLE"
+	case MQ_ERROR_DTC_CONNECT:
+		return "MQ_ERROR_DTC_CONNECT"
+	case MQ_ERROR_TRANSACTION_IMPORT:
+		return "MQ_ERROR_TRANSACTION_IMPORT"
+	case MQ_ERROR_TRANSACTION_USAGE:
+		return "MQ_ERROR_TRANSACTION_USAGE"
+	case MQ_ERROR_TRANSACTION_SEQUENCE:
+		return "MQ_ERROR_TRANSACTION_SEQUENCE"
+	case MQ_ERROR_MISSING_CONNECTOR_TYPE:
+		return "MQ_ERROR_MISSING_CONNECTOR_TYPE"
+	case MQ_ERROR_STALE_HANDLE:
+		return "MQ_ERROR_STALE_HANDLE"
+	case MQ_ERROR_TRANSACTION_ENLIST:
+		return "MQ_ERROR_TRANSACTION_ENLIST"
+	case MQ_ERROR_QUEUE_DELETED:
+		return "MQ_ERROR_QUEUE_DELETED"
+	case MQ_ERROR_ILLEGAL_CONTEXT:
+		return "MQ_ERROR_ILLEGAL_CONTEXT"
+	case MQ_ERROR_ILLEGAL_SORT_PROPID:
+		return "MQ_ERROR_ILLEGAL_SORT_PROPID"
+	case MQ_ERROR_LABEL_TOO_LONG:
+		return "MQ_ERROR_LABEL_TOO_LONG"
+	case MQ_ERROR_LABEL_BUFFER_TOO_SMALL:
+		return "MQ_ERROR_LABEL_BUFFER_TOO_SMALL"
+	case MQ_ERROR_MQIS_SERVER_EMPTY:
+		return "MQ_ERROR_MQIS_SERVER_EMPTY"
+	case MQ_ERROR_MQIS_READONLY_MODE:
+		return "MQ_ERROR_MQIS_READONLY_MODE"
+	case MQ_ERROR_SYMM_KEY_BUFFER_TOO_SMALL:
+		return "MQ_ERROR_SYMM_KEY_BUFFER_TOO_SMALL"
+	case MQ_ERROR_SIGNATURE_BUFFER_TOO_SMALL:
+		return "MQ_ERROR_SIGNATURE_BUFFER_TOO_SMALL"
+	case MQ_ERROR_PROV_NAME_BUFFER_TOO_SMALL:
+		return "MQ_ERROR_PROV_NAME_BUFFER_TOO_SMALL"
+	case MQ_ERROR_ILLEGAL_OPERATION:
+		return "MQ_ERROR_ILLEGAL_OPERATION"
+	case MQ_ERROR_WRITE_NOT_ALLOWED:
+		return "MQ_ERROR_WRITE_NOT_ALLOWED"
+	case MQ_ERROR_WKS_CANT_SERVE_CLIENT:
+		return "MQ_ERROR_WKS_CANT_SERVE_CLIENT"
+	case MQ_ERROR_DEPEND_WKS_LICENSE_OVERFLOW:
+		return "MQ_ERROR_DEPEND_WKS_LICENSE_OVERFLOW"
+	case MQ_CORRUPTED_QUEUE_WAS_DELETED:
+		return "MQ_CORRUPTED_QUEUE_WAS_DELETED"
+	case MQ_ERROR_REMOTE_MACHINE_NOT_AVAILABLE:
+		return "MQ_ERROR_REMOTE_MACHINE_NOT_AVAILABLE"
+	case MQ_ERROR_UNSUPPORTED_OPERATION:
+		return "MQ_ERROR_UNSUPPORTED_OPERATION"
+	case MQ_ERROR_ENCRYPTION_PROVIDER_NOT_SUPPORTED:
+		return "MQ_ERROR_ENCRYPTION_PROVIDER_NOT_SUPPORTED"
+	case MQ_ERROR_CANNOT_SET_CRYPTO_SEC_DESCR:
+		return "MQ_ERROR_CANNOT_SET_CRYPTO_SEC_DESCR"
+	case MQ_ERROR_CERTIFICATE_NOT_PROVIDED:
+		return "MQ_ERROR_CERTIFICATE_NOT_PROVIDED"
+	case MQ_ERROR_Q_DNS_PROPERTY_NOT_SUPPORTED:
+		return "MQ_ERROR_Q_DNS_PROPERTY_NOT_SUPPORTED"
+	case MQ_ERROR_CANT_CREATE_CERT_STORE:
+		return "MQ_ERROR_CANT_CREATE_CERT_STORE"
+	case MQ_ERROR_CANT_OPEN_CERT_STORE:
+		return "MQ_ERROR_CANT_OPEN_CERT_STORE"
+	case MQ_ERROR_ILLEGAL_ENTERPRISE_OPERATION:
+		return "MQ_ERROR_ILLEGAL_ENTERPRISE_OPERATION"
+	case MQ_ERROR_CANNOT_GRANT_ADD_GUID:
+		return "MQ_ERROR_CANNOT_GRANT_ADD_GUID"
+	case MQ_ERROR_CANNOT_LOAD_MSMQOCM:
+		return "MQ_ERROR_CANNOT_LOAD_MSMQOCM"
+	case MQ_ERROR_NO_ENTRY_POINT_MSMQOCM:
+		return "MQ_ERROR_NO_ENTRY_POINT_MSMQOCM"
+	case MQ_ERROR_NO_MSMQ_SERVERS_ON_DC:
+		return "MQ_ERROR_NO_MSMQ_SERVERS_ON_DC"
+	case MQ_ERROR_CANNOT_JOIN_DOMAIN:
+		return "MQ_ERROR_CANNOT_JOIN_DOMAIN"
+	case MQ_ERROR_CANNOT_CREATE_ON_GC:
+		return "MQ_ERROR_CANNOT_CREATE_ON_GC"
+	case MQ_ERROR_GUID_NOT_MATCHING:
+		return "MQ_ERROR_GUID_NOT_MATCHING"
+	case MQ_ERROR_PUBLIC_KEY_NOT_FOUND:
+		return "MQ_ERROR_PUBLIC_KEY_NOT_FOUND"
+	case MQ_ERROR_PUBLIC_KEY_DOES_NOT_EXIST:
+		return "MQ_ERROR_PUBLIC_KEY_DOES_NOT_EXIST"
+	case MQ_ERROR_ILLEGAL_MQPRIVATEPROPS:
+		return "MQ_ERROR_ILLEGAL_MQPRIVATEPROPS"
+	case MQ_ERROR_NO_GC_IN_DOMAIN:
+		return "MQ_ERROR_NO_GC_IN_DOMAIN"
+	case MQ_ERROR_NO_MSMQ_SERVERS_ON_GC:
+		return "MQ_ERROR_NO_MSMQ_SERVERS_ON_GC"
+	case MQ_ERROR_CANNOT_GET_DN:
+		return "MQ_ERROR_CANNOT_GET_DN"
+	case MQ_ERROR_CANNOT_HASH_DATA_EX:
+		return "MQ_ERROR_CANNOT_HASH_DATA_EX"
+	case MQ_ERROR_CANNOT_SIGN_DATA_EX:
+		return "MQ_ERROR_CANNOT_SIGN_DATA_EX"
+	case MQ_ERROR_CANNOT_CREATE_HASH_EX:
+		return "MQ_ERROR_CANNOT_CREATE_HASH_EX"
+	case MQ_ERROR_FAIL_VERIFY_SIGNATURE_EX:
+		return "MQ_ERROR_FAIL_VERIFY_SIGNATURE_EX"
+	case MQ_ERROR_CANNOT_DELETE_PSC_OBJECTS:
+		return "MQ_ERROR_CANNOT_DELETE_PSC_OBJECTS"
+	case MQ_ERROR_NO_MQUSER_OU:
+		return "MQ_ERROR_NO_MQUSER_OU"
+	case MQ_ERROR_CANNOT_LOAD_MQAD:
+		return "MQ_ERROR_CANNOT_LOAD_MQAD"
+	case MQ_ERROR_CANNOT_LOAD_MQDSSRV:
+		return "MQ_ERROR_CANNOT_LOAD_MQDSSRV"
+	case MQ_ERROR_PROPERTIES_CONFLICT:
+		return "MQ_ERROR_PROPERTIES_CONFLICT"
+	case MQ_ERROR_MESSAGE_NOT_FOUND:
+		return "MQ_ERROR_MESSAGE_NOT_FOUND"
+	case MQ_ERROR_CANT_RESOLVE_SITES:
+		return "MQ_ERROR_CANT_RESOLVE_SITES"
+	case MQ_ERROR_NOT_SUPPORTED_BY_DEPENDENT_CLIENTS:
+		return "MQ_ERROR_NOT_SUPPORTED_BY_DEPENDENT_CLIENTS"
+	case MQ_ERROR_OPERATION_NOT_SUPPORTED_BY_REMOTE_COMPUTER:
+		return "MQ_ERROR_OPERATION_NOT_SUPPORTED_BY_REMOTE_COMPUTER"
+	case MQ_ERROR_NOT_A_CORRECT_OBJECT_CLASS:
+		return "MQ_ERROR_NOT_A_CORRECT_OBJECT_CLASS"
+	case MQ_ERROR_MULTI_SORT_KEYS:
+		return "MQ_ERROR_MULTI_SORT_KEYS"
+	case MQ_ERROR_GC_NEEDED:
+		return "MQ_ERROR_GC_NEEDED"
+	case MQ_ERROR_DS_BIND_ROOT_FOREST:
+		return "MQ_ERROR_DS_BIND_ROOT_FOREST"
+	case MQ_ERROR_DS_LOCAL_USER:
+		return "MQ_ERROR_DS_LOCAL_USER"
+	case MQ_ERROR_Q_ADS_PROPERTY_NOT_SUPPORTED:
+		return "MQ_ERROR_Q_ADS_PROPERTY_NOT_SUPPORTED"
+	case MQ_ERROR_BAD_XML_FORMAT:
+		return "MQ_ERROR_BAD_XML_FORMAT"
+	case MQ_ERROR_UNSUPPORTED_CLASS:
+		return "MQ_ERROR_UNSUPPORTED_CLASS"
+	case MQ_ERROR_UNINITIALIZED_OBJECT:
+		return "MQ_ERROR_UNINITIALIZED_OBJECT"
+	case MQ_ERROR_CANNOT_CREATE_PSC_OBJECTS:
+		return "MQ_ERROR_CANNOT_CREATE_PSC_OBJECTS"
+	case MQ_ERROR_CANNOT_UPDATE_PSC_OBJECTS:
+		return "MQ_ERROR_CANNOT_UPDATE_PSC_OBJECTS"
+	default:
+		return fmt.Sprintf("MQERROR(%d)", int32(e))
+	}
+}
+
 type MQJOURNAL int32
 
 const (
@@ -241,12 +668,36 @@ const (
 	MQ_JOURNAL      MQJOURNAL = 1
 )
 
+// String returns the MQJOURNAL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQJOURNAL) String() string {
+	switch e {
+	case MQ_JOURNAL_NONE:
+		return "MQ_JOURNAL_NONE"
+	case MQ_JOURNAL:
+		return "MQ_JOURNAL"
+	default:
+		return fmt.Sprintf("MQJOURNAL(%d)", int32(e))
+	}
+}
+
 type MQMAX int32
 
 const (
 	MQ_MAX_Q_NAME_LEN  MQMAX = 124
 	MQ_MAX_Q_LABEL_LEN MQMAX = 124
 )
+
+// String returns the MQMAX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMAX) String() string {
+	switch e {
+	case MQ_MAX_Q_NAME_LEN:
+		return "MQ_MAX_Q_NAME_LEN"
+	default:
+		return fmt.Sprintf("MQMAX(%d)", int32(e))
+	}
+}
 
 type MQMSGACKNOWLEDGEMENT int32
 
@@ -262,6 +713,31 @@ const (
 	MQMSG_ACKNOWLEDGMENT_FULL_RECEIVE     MQMSGACKNOWLEDGEMENT = 14
 )
 
+// String returns the MQMSGACKNOWLEDGEMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGACKNOWLEDGEMENT) String() string {
+	switch e {
+	case MQMSG_ACKNOWLEDGMENT_NONE:
+		return "MQMSG_ACKNOWLEDGMENT_NONE"
+	case MQMSG_ACKNOWLEDGMENT_POS_ARRIVAL:
+		return "MQMSG_ACKNOWLEDGMENT_POS_ARRIVAL"
+	case MQMSG_ACKNOWLEDGMENT_POS_RECEIVE:
+		return "MQMSG_ACKNOWLEDGMENT_POS_RECEIVE"
+	case MQMSG_ACKNOWLEDGMENT_NEG_ARRIVAL:
+		return "MQMSG_ACKNOWLEDGMENT_NEG_ARRIVAL"
+	case MQMSG_ACKNOWLEDGMENT_NEG_RECEIVE:
+		return "MQMSG_ACKNOWLEDGMENT_NEG_RECEIVE"
+	case MQMSG_ACKNOWLEDGMENT_FULL_REACH_QUEUE:
+		return "MQMSG_ACKNOWLEDGMENT_FULL_REACH_QUEUE"
+	case MQMSG_ACKNOWLEDGMENT_NACK_RECEIVE:
+		return "MQMSG_ACKNOWLEDGMENT_NACK_RECEIVE"
+	case MQMSG_ACKNOWLEDGMENT_FULL_RECEIVE:
+		return "MQMSG_ACKNOWLEDGMENT_FULL_RECEIVE"
+	default:
+		return fmt.Sprintf("MQMSGACKNOWLEDGEMENT(%d)", int32(e))
+	}
+}
+
 type MQMSGAUTHENTICATION int32
 
 const (
@@ -274,6 +750,25 @@ const (
 	MQMSG_AUTHENTICATED_SIGXML         MQMSGAUTHENTICATION = 9
 )
 
+// String returns the MQMSGAUTHENTICATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGAUTHENTICATION) String() string {
+	switch e {
+	case MQMSG_AUTHENTICATION_NOT_REQUESTED:
+		return "MQMSG_AUTHENTICATION_NOT_REQUESTED"
+	case MQMSG_AUTHENTICATION_REQUESTED:
+		return "MQMSG_AUTHENTICATION_REQUESTED"
+	case MQMSG_AUTHENTICATION_REQUESTED_EX:
+		return "MQMSG_AUTHENTICATION_REQUESTED_EX"
+	case MQMSG_AUTHENTICATED_SIG30:
+		return "MQMSG_AUTHENTICATED_SIG30"
+	case MQMSG_AUTHENTICATED_SIGXML:
+		return "MQMSG_AUTHENTICATED_SIGXML"
+	default:
+		return fmt.Sprintf("MQMSGAUTHENTICATION(%d)", int32(e))
+	}
+}
+
 type MQMSGAUTHLEVEL int32
 
 const (
@@ -285,6 +780,25 @@ const (
 	MQMSG_AUTH_LEVEL_SIG20  MQMSGAUTHLEVEL = 4
 	MQMSG_AUTH_LEVEL_SIG30  MQMSGAUTHLEVEL = 8
 )
+
+// String returns the MQMSGAUTHLEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGAUTHLEVEL) String() string {
+	switch e {
+	case MQMSG_AUTH_LEVEL_NONE:
+		return "MQMSG_AUTH_LEVEL_NONE"
+	case MQMSG_AUTH_LEVEL_ALWAYS:
+		return "MQMSG_AUTH_LEVEL_ALWAYS"
+	case MQMSG_AUTH_LEVEL_MSMQ10:
+		return "MQMSG_AUTH_LEVEL_MSMQ10"
+	case MQMSG_AUTH_LEVEL_MSMQ20:
+		return "MQMSG_AUTH_LEVEL_MSMQ20"
+	case MQMSG_AUTH_LEVEL_SIG30:
+		return "MQMSG_AUTH_LEVEL_SIG30"
+	default:
+		return fmt.Sprintf("MQMSGAUTHLEVEL(%d)", int32(e))
+	}
+}
 
 type MQMSGCLASS int32
 
@@ -312,6 +826,57 @@ const (
 	MQMSG_CLASS_NACK_RECEIVE_TIMEOUT_AT_SENDER    MQMSGCLASS = 49155
 )
 
+// String returns the MQMSGCLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGCLASS) String() string {
+	switch e {
+	case MQMSG_CLASS_NORMAL:
+		return "MQMSG_CLASS_NORMAL"
+	case MQMSG_CLASS_REPORT:
+		return "MQMSG_CLASS_REPORT"
+	case MQMSG_CLASS_ACK_REACH_QUEUE:
+		return "MQMSG_CLASS_ACK_REACH_QUEUE"
+	case MQMSG_CLASS_ACK_RECEIVE:
+		return "MQMSG_CLASS_ACK_RECEIVE"
+	case MQMSG_CLASS_NACK_BAD_DST_Q:
+		return "MQMSG_CLASS_NACK_BAD_DST_Q"
+	case MQMSG_CLASS_NACK_PURGED:
+		return "MQMSG_CLASS_NACK_PURGED"
+	case MQMSG_CLASS_NACK_REACH_QUEUE_TIMEOUT:
+		return "MQMSG_CLASS_NACK_REACH_QUEUE_TIMEOUT"
+	case MQMSG_CLASS_NACK_Q_EXCEED_QUOTA:
+		return "MQMSG_CLASS_NACK_Q_EXCEED_QUOTA"
+	case MQMSG_CLASS_NACK_ACCESS_DENIED:
+		return "MQMSG_CLASS_NACK_ACCESS_DENIED"
+	case MQMSG_CLASS_NACK_HOP_COUNT_EXCEEDED:
+		return "MQMSG_CLASS_NACK_HOP_COUNT_EXCEEDED"
+	case MQMSG_CLASS_NACK_BAD_SIGNATURE:
+		return "MQMSG_CLASS_NACK_BAD_SIGNATURE"
+	case MQMSG_CLASS_NACK_BAD_ENCRYPTION:
+		return "MQMSG_CLASS_NACK_BAD_ENCRYPTION"
+	case MQMSG_CLASS_NACK_COULD_NOT_ENCRYPT:
+		return "MQMSG_CLASS_NACK_COULD_NOT_ENCRYPT"
+	case MQMSG_CLASS_NACK_NOT_TRANSACTIONAL_Q:
+		return "MQMSG_CLASS_NACK_NOT_TRANSACTIONAL_Q"
+	case MQMSG_CLASS_NACK_NOT_TRANSACTIONAL_MSG:
+		return "MQMSG_CLASS_NACK_NOT_TRANSACTIONAL_MSG"
+	case MQMSG_CLASS_NACK_UNSUPPORTED_CRYPTO_PROVIDER:
+		return "MQMSG_CLASS_NACK_UNSUPPORTED_CRYPTO_PROVIDER"
+	case MQMSG_CLASS_NACK_SOURCE_COMPUTER_GUID_CHANGED:
+		return "MQMSG_CLASS_NACK_SOURCE_COMPUTER_GUID_CHANGED"
+	case MQMSG_CLASS_NACK_Q_DELETED:
+		return "MQMSG_CLASS_NACK_Q_DELETED"
+	case MQMSG_CLASS_NACK_Q_PURGED:
+		return "MQMSG_CLASS_NACK_Q_PURGED"
+	case MQMSG_CLASS_NACK_RECEIVE_TIMEOUT:
+		return "MQMSG_CLASS_NACK_RECEIVE_TIMEOUT"
+	case MQMSG_CLASS_NACK_RECEIVE_TIMEOUT_AT_SENDER:
+		return "MQMSG_CLASS_NACK_RECEIVE_TIMEOUT_AT_SENDER"
+	default:
+		return fmt.Sprintf("MQMSGCLASS(%d)", int32(e))
+	}
+}
+
 type MQMSGCURSOR int32
 
 const (
@@ -320,12 +885,40 @@ const (
 	MQMSG_NEXT    MQMSGCURSOR = 2
 )
 
+// String returns the MQMSGCURSOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGCURSOR) String() string {
+	switch e {
+	case MQMSG_FIRST:
+		return "MQMSG_FIRST"
+	case MQMSG_CURRENT:
+		return "MQMSG_CURRENT"
+	case MQMSG_NEXT:
+		return "MQMSG_NEXT"
+	default:
+		return fmt.Sprintf("MQMSGCURSOR(%d)", int32(e))
+	}
+}
+
 type MQMSGDELIVERY int32
 
 const (
 	MQMSG_DELIVERY_EXPRESS     MQMSGDELIVERY = 0
 	MQMSG_DELIVERY_RECOVERABLE MQMSGDELIVERY = 1
 )
+
+// String returns the MQMSGDELIVERY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGDELIVERY) String() string {
+	switch e {
+	case MQMSG_DELIVERY_EXPRESS:
+		return "MQMSG_DELIVERY_EXPRESS"
+	case MQMSG_DELIVERY_RECOVERABLE:
+		return "MQMSG_DELIVERY_RECOVERABLE"
+	default:
+		return fmt.Sprintf("MQMSGDELIVERY(%d)", int32(e))
+	}
+}
 
 type MQMSGIDSIZE int32
 
@@ -335,6 +928,17 @@ const (
 	MQMSG_XACTID_SIZE        MQMSGIDSIZE = 20
 )
 
+// String returns the MQMSGIDSIZE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGIDSIZE) String() string {
+	switch e {
+	case MQMSG_MSGID_SIZE:
+		return "MQMSG_MSGID_SIZE"
+	default:
+		return fmt.Sprintf("MQMSGIDSIZE(%d)", int32(e))
+	}
+}
+
 type MQMSGJOURNAL int32
 
 const (
@@ -343,11 +947,37 @@ const (
 	MQMSG_JOURNAL      MQMSGJOURNAL = 2
 )
 
+// String returns the MQMSGJOURNAL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGJOURNAL) String() string {
+	switch e {
+	case MQMSG_JOURNAL_NONE:
+		return "MQMSG_JOURNAL_NONE"
+	case MQMSG_DEADLETTER:
+		return "MQMSG_DEADLETTER"
+	case MQMSG_JOURNAL:
+		return "MQMSG_JOURNAL"
+	default:
+		return fmt.Sprintf("MQMSGJOURNAL(%d)", int32(e))
+	}
+}
+
 type MQMSGMAX int32
 
 const (
 	MQ_MAX_MSG_LABEL_LEN MQMSGMAX = 249
 )
+
+// String returns the MQMSGMAX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGMAX) String() string {
+	switch e {
+	case MQ_MAX_MSG_LABEL_LEN:
+		return "MQ_MAX_MSG_LABEL_LEN"
+	default:
+		return fmt.Sprintf("MQMSGMAX(%d)", int32(e))
+	}
+}
 
 type MQMSGPRIVLEVEL int32
 
@@ -357,12 +987,40 @@ const (
 	MQMSG_PRIV_LEVEL_BODY_ENHANCED MQMSGPRIVLEVEL = 3
 )
 
+// String returns the MQMSGPRIVLEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGPRIVLEVEL) String() string {
+	switch e {
+	case MQMSG_PRIV_LEVEL_NONE:
+		return "MQMSG_PRIV_LEVEL_NONE"
+	case MQMSG_PRIV_LEVEL_BODY_BASE:
+		return "MQMSG_PRIV_LEVEL_BODY_BASE"
+	case MQMSG_PRIV_LEVEL_BODY_ENHANCED:
+		return "MQMSG_PRIV_LEVEL_BODY_ENHANCED"
+	default:
+		return fmt.Sprintf("MQMSGPRIVLEVEL(%d)", int32(e))
+	}
+}
+
 type MQMSGSENDERIDTYPE int32
 
 const (
 	MQMSG_SENDERID_TYPE_NONE MQMSGSENDERIDTYPE = 0
 	MQMSG_SENDERID_TYPE_SID  MQMSGSENDERIDTYPE = 1
 )
+
+// String returns the MQMSGSENDERIDTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGSENDERIDTYPE) String() string {
+	switch e {
+	case MQMSG_SENDERID_TYPE_NONE:
+		return "MQMSG_SENDERID_TYPE_NONE"
+	case MQMSG_SENDERID_TYPE_SID:
+		return "MQMSG_SENDERID_TYPE_SID"
+	default:
+		return fmt.Sprintf("MQMSGSENDERIDTYPE(%d)", int32(e))
+	}
+}
 
 type MQMSGTRACE int32
 
@@ -371,12 +1029,38 @@ const (
 	MQMSG_SEND_ROUTE_TO_REPORT_QUEUE MQMSGTRACE = 1
 )
 
+// String returns the MQMSGTRACE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQMSGTRACE) String() string {
+	switch e {
+	case MQMSG_TRACE_NONE:
+		return "MQMSG_TRACE_NONE"
+	case MQMSG_SEND_ROUTE_TO_REPORT_QUEUE:
+		return "MQMSG_SEND_ROUTE_TO_REPORT_QUEUE"
+	default:
+		return fmt.Sprintf("MQMSGTRACE(%d)", int32(e))
+	}
+}
+
 type MQPRIORITY int32
 
 const (
 	MQ_MIN_PRIORITY MQPRIORITY = 0
 	MQ_MAX_PRIORITY MQPRIORITY = 7
 )
+
+// String returns the MQPRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQPRIORITY) String() string {
+	switch e {
+	case MQ_MIN_PRIORITY:
+		return "MQ_MIN_PRIORITY"
+	case MQ_MAX_PRIORITY:
+		return "MQ_MAX_PRIORITY"
+	default:
+		return fmt.Sprintf("MQPRIORITY(%d)", int32(e))
+	}
+}
 
 type MQPRIVLEVEL int32
 
@@ -386,6 +1070,22 @@ const (
 	MQ_PRIV_LEVEL_BODY     MQPRIVLEVEL = 2
 )
 
+// String returns the MQPRIVLEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQPRIVLEVEL) String() string {
+	switch e {
+	case MQ_PRIV_LEVEL_NONE:
+		return "MQ_PRIV_LEVEL_NONE"
+	case MQ_PRIV_LEVEL_OPTIONAL:
+		return "MQ_PRIV_LEVEL_OPTIONAL"
+	case MQ_PRIV_LEVEL_BODY:
+		return "MQ_PRIV_LEVEL_BODY"
+	default:
+		return fmt.Sprintf("MQPRIVLEVEL(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MQQUEUEACCESSMASK uint32
 
 const (
@@ -407,12 +1107,80 @@ const (
 	MQSEC_QUEUE_GENERIC_EXECUTE    MQQUEUEACCESSMASK = 0
 )
 
+// String returns the MQQUEUEACCESSMASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQQUEUEACCESSMASK) String() string {
+	var parts []string
+	if e&MQSEC_DELETE_QUEUE != 0 {
+		parts = append(parts, "MQSEC_DELETE_QUEUE")
+	}
+	if e&MQSEC_GET_QUEUE_PERMISSIONS != 0 {
+		parts = append(parts, "MQSEC_GET_QUEUE_PERMISSIONS")
+	}
+	if e&MQSEC_CHANGE_QUEUE_PERMISSIONS != 0 {
+		parts = append(parts, "MQSEC_CHANGE_QUEUE_PERMISSIONS")
+	}
+	if e&MQSEC_TAKE_QUEUE_OWNERSHIP != 0 {
+		parts = append(parts, "MQSEC_TAKE_QUEUE_OWNERSHIP")
+	}
+	if e&MQSEC_RECEIVE_MESSAGE != 0 {
+		parts = append(parts, "MQSEC_RECEIVE_MESSAGE")
+	}
+	if e&MQSEC_RECEIVE_JOURNAL_MESSAGE != 0 {
+		parts = append(parts, "MQSEC_RECEIVE_JOURNAL_MESSAGE")
+	}
+	if e&MQSEC_QUEUE_GENERIC_READ != 0 {
+		parts = append(parts, "MQSEC_QUEUE_GENERIC_READ")
+	}
+	if e&MQSEC_QUEUE_GENERIC_WRITE != 0 {
+		parts = append(parts, "MQSEC_QUEUE_GENERIC_WRITE")
+	}
+	if e&MQSEC_QUEUE_GENERIC_ALL != 0 {
+		parts = append(parts, "MQSEC_QUEUE_GENERIC_ALL")
+	}
+	if e&MQSEC_DELETE_MESSAGE != 0 {
+		parts = append(parts, "MQSEC_DELETE_MESSAGE")
+	}
+	if e&MQSEC_PEEK_MESSAGE != 0 {
+		parts = append(parts, "MQSEC_PEEK_MESSAGE")
+	}
+	if e&MQSEC_WRITE_MESSAGE != 0 {
+		parts = append(parts, "MQSEC_WRITE_MESSAGE")
+	}
+	if e&MQSEC_DELETE_JOURNAL_MESSAGE != 0 {
+		parts = append(parts, "MQSEC_DELETE_JOURNAL_MESSAGE")
+	}
+	if e&MQSEC_SET_QUEUE_PROPERTIES != 0 {
+		parts = append(parts, "MQSEC_SET_QUEUE_PROPERTIES")
+	}
+	if e&MQSEC_GET_QUEUE_PROPERTIES != 0 {
+		parts = append(parts, "MQSEC_GET_QUEUE_PROPERTIES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type MQSHARE int32
 
 const (
 	MQ_DENY_NONE          MQSHARE = 0
 	MQ_DENY_RECEIVE_SHARE MQSHARE = 1
 )
+
+// String returns the MQSHARE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQSHARE) String() string {
+	switch e {
+	case MQ_DENY_NONE:
+		return "MQ_DENY_NONE"
+	case MQ_DENY_RECEIVE_SHARE:
+		return "MQ_DENY_RECEIVE_SHARE"
+	default:
+		return fmt.Sprintf("MQSHARE(%d)", int32(e))
+	}
+}
 
 type MQTRANSACTION int32
 
@@ -423,12 +1191,42 @@ const (
 	MQ_SINGLE_MESSAGE  MQTRANSACTION = 3
 )
 
+// String returns the MQTRANSACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQTRANSACTION) String() string {
+	switch e {
+	case MQ_NO_TRANSACTION:
+		return "MQ_NO_TRANSACTION"
+	case MQ_MTS_TRANSACTION:
+		return "MQ_MTS_TRANSACTION"
+	case MQ_XA_TRANSACTION:
+		return "MQ_XA_TRANSACTION"
+	case MQ_SINGLE_MESSAGE:
+		return "MQ_SINGLE_MESSAGE"
+	default:
+		return fmt.Sprintf("MQTRANSACTION(%d)", int32(e))
+	}
+}
+
 type MQTRANSACTIONAL int32
 
 const (
 	MQ_TRANSACTIONAL_NONE MQTRANSACTIONAL = 0
 	MQ_TRANSACTIONAL      MQTRANSACTIONAL = 1
 )
+
+// String returns the MQTRANSACTIONAL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQTRANSACTIONAL) String() string {
+	switch e {
+	case MQ_TRANSACTIONAL_NONE:
+		return "MQ_TRANSACTIONAL_NONE"
+	case MQ_TRANSACTIONAL:
+		return "MQ_TRANSACTIONAL"
+	default:
+		return fmt.Sprintf("MQTRANSACTIONAL(%d)", int32(e))
+	}
+}
 
 type MQWARNING int32
 
@@ -444,6 +1242,33 @@ const (
 	MQ_INFORMATION_OWNER_IGNORED               MQWARNING = 1074659339
 )
 
+// String returns the MQWARNING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MQWARNING) String() string {
+	switch e {
+	case MQ_INFORMATION_PROPERTY:
+		return "MQ_INFORMATION_PROPERTY"
+	case MQ_INFORMATION_ILLEGAL_PROPERTY:
+		return "MQ_INFORMATION_ILLEGAL_PROPERTY"
+	case MQ_INFORMATION_PROPERTY_IGNORED:
+		return "MQ_INFORMATION_PROPERTY_IGNORED"
+	case MQ_INFORMATION_UNSUPPORTED_PROPERTY:
+		return "MQ_INFORMATION_UNSUPPORTED_PROPERTY"
+	case MQ_INFORMATION_DUPLICATE_PROPERTY:
+		return "MQ_INFORMATION_DUPLICATE_PROPERTY"
+	case MQ_INFORMATION_OPERATION_PENDING:
+		return "MQ_INFORMATION_OPERATION_PENDING"
+	case MQ_INFORMATION_FORMATNAME_BUFFER_TOO_SMALL:
+		return "MQ_INFORMATION_FORMATNAME_BUFFER_TOO_SMALL"
+	case MQ_INFORMATION_INTERNAL_USER_CERT_EXIST:
+		return "MQ_INFORMATION_INTERNAL_USER_CERT_EXIST"
+	case MQ_INFORMATION_OWNER_IGNORED:
+		return "MQ_INFORMATION_OWNER_IGNORED"
+	default:
+		return fmt.Sprintf("MQWARNING(%d)", int32(e))
+	}
+}
+
 type QUEUE_STATE int32
 
 const (
@@ -458,6 +1283,33 @@ const (
 	MQ_QUEUE_STATE_LOCKED           QUEUE_STATE = 8
 )
 
+// String returns the QUEUE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QUEUE_STATE) String() string {
+	switch e {
+	case MQ_QUEUE_STATE_LOCAL_CONNECTION:
+		return "MQ_QUEUE_STATE_LOCAL_CONNECTION"
+	case MQ_QUEUE_STATE_DISCONNECTED:
+		return "MQ_QUEUE_STATE_DISCONNECTED"
+	case MQ_QUEUE_STATE_WAITING:
+		return "MQ_QUEUE_STATE_WAITING"
+	case MQ_QUEUE_STATE_NEEDVALIDATE:
+		return "MQ_QUEUE_STATE_NEEDVALIDATE"
+	case MQ_QUEUE_STATE_ONHOLD:
+		return "MQ_QUEUE_STATE_ONHOLD"
+	case MQ_QUEUE_STATE_NONACTIVE:
+		return "MQ_QUEUE_STATE_NONACTIVE"
+	case MQ_QUEUE_STATE_CONNECTED:
+		return "MQ_QUEUE_STATE_CONNECTED"
+	case MQ_QUEUE_STATE_DISCONNECTING:
+		return "MQ_QUEUE_STATE_DISCONNECTING"
+	case MQ_QUEUE_STATE_LOCKED:
+		return "MQ_QUEUE_STATE_LOCKED"
+	default:
+		return fmt.Sprintf("QUEUE_STATE(%d)", int32(e))
+	}
+}
+
 type QUEUE_TYPE int32
 
 const (
@@ -467,6 +1319,25 @@ const (
 	MQ_TYPE_CONNECTOR QUEUE_TYPE = 3
 	MQ_TYPE_MULTICAST QUEUE_TYPE = 4
 )
+
+// String returns the QUEUE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QUEUE_TYPE) String() string {
+	switch e {
+	case MQ_TYPE_PUBLIC:
+		return "MQ_TYPE_PUBLIC"
+	case MQ_TYPE_PRIVATE:
+		return "MQ_TYPE_PRIVATE"
+	case MQ_TYPE_MACHINE:
+		return "MQ_TYPE_MACHINE"
+	case MQ_TYPE_CONNECTOR:
+		return "MQ_TYPE_CONNECTOR"
+	case MQ_TYPE_MULTICAST:
+		return "MQ_TYPE_MULTICAST"
+	default:
+		return fmt.Sprintf("QUEUE_TYPE(%d)", int32(e))
+	}
+}
 
 type RELOPS int32
 
@@ -480,6 +1351,29 @@ const (
 	REL_GE  RELOPS = 6
 )
 
+// String returns the RELOPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RELOPS) String() string {
+	switch e {
+	case REL_NOP:
+		return "REL_NOP"
+	case REL_EQ:
+		return "REL_EQ"
+	case REL_NEQ:
+		return "REL_NEQ"
+	case REL_LT:
+		return "REL_LT"
+	case REL_GT:
+		return "REL_GT"
+	case REL_LE:
+		return "REL_LE"
+	case REL_GE:
+		return "REL_GE"
+	default:
+		return fmt.Sprintf("RELOPS(%d)", int32(e))
+	}
+}
+
 type XACT_STATUS int32
 
 const (
@@ -487,3 +1381,18 @@ const (
 	MQ_XACT_STATUS_NOT_XACT XACT_STATUS = 1
 	MQ_XACT_STATUS_UNKNOWN  XACT_STATUS = 2
 )
+
+// String returns the XACT_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XACT_STATUS) String() string {
+	switch e {
+	case MQ_XACT_STATUS_XACT:
+		return "MQ_XACT_STATUS_XACT"
+	case MQ_XACT_STATUS_NOT_XACT:
+		return "MQ_XACT_STATUS_NOT_XACT"
+	case MQ_XACT_STATUS_UNKNOWN:
+		return "MQ_XACT_STATUS_UNKNOWN"
+	default:
+		return fmt.Sprintf("XACT_STATUS(%d)", int32(e))
+	}
+}

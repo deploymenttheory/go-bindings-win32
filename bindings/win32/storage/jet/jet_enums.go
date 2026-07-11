@@ -4,6 +4,10 @@
 
 package jet
 
+import (
+	"fmt"
+)
+
 // JET_ERRCAT: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-errcat-enumeration
 type JET_ERRCAT int32
 
@@ -28,6 +32,51 @@ const (
 	JET_errcatMax           JET_ERRCAT = 17
 )
 
+// String returns the JET_ERRCAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JET_ERRCAT) String() string {
+	switch e {
+	case JET_errcatUnknown:
+		return "JET_errcatUnknown"
+	case JET_errcatError:
+		return "JET_errcatError"
+	case JET_errcatOperation:
+		return "JET_errcatOperation"
+	case JET_errcatFatal:
+		return "JET_errcatFatal"
+	case JET_errcatIO:
+		return "JET_errcatIO"
+	case JET_errcatResource:
+		return "JET_errcatResource"
+	case JET_errcatMemory:
+		return "JET_errcatMemory"
+	case JET_errcatQuota:
+		return "JET_errcatQuota"
+	case JET_errcatDisk:
+		return "JET_errcatDisk"
+	case JET_errcatData:
+		return "JET_errcatData"
+	case JET_errcatCorruption:
+		return "JET_errcatCorruption"
+	case JET_errcatInconsistent:
+		return "JET_errcatInconsistent"
+	case JET_errcatFragmentation:
+		return "JET_errcatFragmentation"
+	case JET_errcatApi:
+		return "JET_errcatApi"
+	case JET_errcatUsage:
+		return "JET_errcatUsage"
+	case JET_errcatState:
+		return "JET_errcatState"
+	case JET_errcatObsolete:
+		return "JET_errcatObsolete"
+	case JET_errcatMax:
+		return "JET_errcatMax"
+	default:
+		return fmt.Sprintf("JET_ERRCAT(%d)", int32(e))
+	}
+}
+
 type JET_INDEXCHECKING int32
 
 const (
@@ -36,6 +85,23 @@ const (
 	JET_IndexCheckingDeferToOpenTable JET_INDEXCHECKING = 2
 	JET_IndexCheckingMax              JET_INDEXCHECKING = 3
 )
+
+// String returns the JET_INDEXCHECKING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JET_INDEXCHECKING) String() string {
+	switch e {
+	case JET_IndexCheckingOff:
+		return "JET_IndexCheckingOff"
+	case JET_IndexCheckingOn:
+		return "JET_IndexCheckingOn"
+	case JET_IndexCheckingDeferToOpenTable:
+		return "JET_IndexCheckingDeferToOpenTable"
+	case JET_IndexCheckingMax:
+		return "JET_IndexCheckingMax"
+	default:
+		return fmt.Sprintf("JET_INDEXCHECKING(%d)", int32(e))
+	}
+}
 
 type JET_RELOP int32
 
@@ -50,3 +116,30 @@ const (
 	JET_relopBitmaskEqualsZero    JET_RELOP = 7
 	JET_relopBitmaskNotEqualsZero JET_RELOP = 8
 )
+
+// String returns the JET_RELOP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JET_RELOP) String() string {
+	switch e {
+	case JET_relopEquals:
+		return "JET_relopEquals"
+	case JET_relopPrefixEquals:
+		return "JET_relopPrefixEquals"
+	case JET_relopNotEquals:
+		return "JET_relopNotEquals"
+	case JET_relopLessThanOrEqual:
+		return "JET_relopLessThanOrEqual"
+	case JET_relopLessThan:
+		return "JET_relopLessThan"
+	case JET_relopGreaterThanOrEqual:
+		return "JET_relopGreaterThanOrEqual"
+	case JET_relopGreaterThan:
+		return "JET_relopGreaterThan"
+	case JET_relopBitmaskEqualsZero:
+		return "JET_relopBitmaskEqualsZero"
+	case JET_relopBitmaskNotEqualsZero:
+		return "JET_relopBitmaskNotEqualsZero"
+	default:
+		return fmt.Sprintf("JET_RELOP(%d)", int32(e))
+	}
+}

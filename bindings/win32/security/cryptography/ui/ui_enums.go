@@ -4,6 +4,12 @@
 
 package ui
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type CERT_SELECT_STRUCT_FLAGS uint32
 
 const (
@@ -15,6 +21,35 @@ const (
 	CSS_ENABLETEMPLATEHANDLE CERT_SELECT_STRUCT_FLAGS = 64
 )
 
+// String returns the CERT_SELECT_STRUCT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_SELECT_STRUCT_FLAGS) String() string {
+	var parts []string
+	if e&CSS_HIDE_PROPERTIES != 0 {
+		parts = append(parts, "CSS_HIDE_PROPERTIES")
+	}
+	if e&CSS_ENABLEHOOK != 0 {
+		parts = append(parts, "CSS_ENABLEHOOK")
+	}
+	if e&CSS_ALLOWMULTISELECT != 0 {
+		parts = append(parts, "CSS_ALLOWMULTISELECT")
+	}
+	if e&CSS_SHOW_HELP != 0 {
+		parts = append(parts, "CSS_SHOW_HELP")
+	}
+	if e&CSS_ENABLETEMPLATE != 0 {
+		parts = append(parts, "CSS_ENABLETEMPLATE")
+	}
+	if e&CSS_ENABLETEMPLATEHANDLE != 0 {
+		parts = append(parts, "CSS_ENABLETEMPLATEHANDLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CERT_VIEWPROPERTIES_STRUCT_FLAGS uint32
 
 const (
@@ -30,6 +65,47 @@ const (
 	CM_ADD_CERT_STORES  CERT_VIEWPROPERTIES_STRUCT_FLAGS = 512
 )
 
+// String returns the CERT_VIEWPROPERTIES_STRUCT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_VIEWPROPERTIES_STRUCT_FLAGS) String() string {
+	var parts []string
+	if e&CM_ENABLEHOOK != 0 {
+		parts = append(parts, "CM_ENABLEHOOK")
+	}
+	if e&CM_SHOW_HELP != 0 {
+		parts = append(parts, "CM_SHOW_HELP")
+	}
+	if e&CM_SHOW_HELPICON != 0 {
+		parts = append(parts, "CM_SHOW_HELPICON")
+	}
+	if e&CM_ENABLETEMPLATE != 0 {
+		parts = append(parts, "CM_ENABLETEMPLATE")
+	}
+	if e&CM_HIDE_ADVANCEPAGE != 0 {
+		parts = append(parts, "CM_HIDE_ADVANCEPAGE")
+	}
+	if e&CM_HIDE_TRUSTPAGE != 0 {
+		parts = append(parts, "CM_HIDE_TRUSTPAGE")
+	}
+	if e&CM_NO_NAMECHANGE != 0 {
+		parts = append(parts, "CM_NO_NAMECHANGE")
+	}
+	if e&CM_NO_EDITTRUST != 0 {
+		parts = append(parts, "CM_NO_EDITTRUST")
+	}
+	if e&CM_HIDE_DETAILPAGE != 0 {
+		parts = append(parts, "CM_HIDE_DETAILPAGE")
+	}
+	if e&CM_ADD_CERT_STORES != 0 {
+		parts = append(parts, "CM_ADD_CERT_STORES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CRYPTUI_VIEWCERTIFICATE_FLAGS uint32
 
 const (
@@ -55,6 +131,76 @@ const (
 	CRYPTUI_CACHE_ONLY_URL_RETRIEVAL                   CRYPTUI_VIEWCERTIFICATE_FLAGS = 262144
 )
 
+// String returns the CRYPTUI_VIEWCERTIFICATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTUI_VIEWCERTIFICATE_FLAGS) String() string {
+	var parts []string
+	if e&CRYPTUI_HIDE_HIERARCHYPAGE != 0 {
+		parts = append(parts, "CRYPTUI_HIDE_HIERARCHYPAGE")
+	}
+	if e&CRYPTUI_HIDE_DETAILPAGE != 0 {
+		parts = append(parts, "CRYPTUI_HIDE_DETAILPAGE")
+	}
+	if e&CRYPTUI_DISABLE_EDITPROPERTIES != 0 {
+		parts = append(parts, "CRYPTUI_DISABLE_EDITPROPERTIES")
+	}
+	if e&CRYPTUI_ENABLE_EDITPROPERTIES != 0 {
+		parts = append(parts, "CRYPTUI_ENABLE_EDITPROPERTIES")
+	}
+	if e&CRYPTUI_DISABLE_ADDTOSTORE != 0 {
+		parts = append(parts, "CRYPTUI_DISABLE_ADDTOSTORE")
+	}
+	if e&CRYPTUI_ENABLE_ADDTOSTORE != 0 {
+		parts = append(parts, "CRYPTUI_ENABLE_ADDTOSTORE")
+	}
+	if e&CRYPTUI_ACCEPT_DECLINE_STYLE != 0 {
+		parts = append(parts, "CRYPTUI_ACCEPT_DECLINE_STYLE")
+	}
+	if e&CRYPTUI_IGNORE_UNTRUSTED_ROOT != 0 {
+		parts = append(parts, "CRYPTUI_IGNORE_UNTRUSTED_ROOT")
+	}
+	if e&CRYPTUI_DONT_OPEN_STORES != 0 {
+		parts = append(parts, "CRYPTUI_DONT_OPEN_STORES")
+	}
+	if e&CRYPTUI_ONLY_OPEN_ROOT_STORE != 0 {
+		parts = append(parts, "CRYPTUI_ONLY_OPEN_ROOT_STORE")
+	}
+	if e&CRYPTUI_WARN_UNTRUSTED_ROOT != 0 {
+		parts = append(parts, "CRYPTUI_WARN_UNTRUSTED_ROOT")
+	}
+	if e&CRYPTUI_ENABLE_REVOCATION_CHECKING != 0 {
+		parts = append(parts, "CRYPTUI_ENABLE_REVOCATION_CHECKING")
+	}
+	if e&CRYPTUI_WARN_REMOTE_TRUST != 0 {
+		parts = append(parts, "CRYPTUI_WARN_REMOTE_TRUST")
+	}
+	if e&CRYPTUI_DISABLE_EXPORT != 0 {
+		parts = append(parts, "CRYPTUI_DISABLE_EXPORT")
+	}
+	if e&CRYPTUI_ENABLE_REVOCATION_CHECK_END_CERT != 0 {
+		parts = append(parts, "CRYPTUI_ENABLE_REVOCATION_CHECK_END_CERT")
+	}
+	if e&CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN != 0 {
+		parts = append(parts, "CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN")
+	}
+	if e&CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT != 0 {
+		parts = append(parts, "CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT")
+	}
+	if e&CRYPTUI_DISABLE_HTMLLINK != 0 {
+		parts = append(parts, "CRYPTUI_DISABLE_HTMLLINK")
+	}
+	if e&CRYPTUI_DISABLE_ISSUERSTATEMENT != 0 {
+		parts = append(parts, "CRYPTUI_DISABLE_ISSUERSTATEMENT")
+	}
+	if e&CRYPTUI_CACHE_ONLY_URL_RETRIEVAL != 0 {
+		parts = append(parts, "CRYPTUI_CACHE_ONLY_URL_RETRIEVAL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE uint32
 
 const (
@@ -62,6 +208,21 @@ const (
 	CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE = 2
 	CRYPTUI_WIZ_DIGITAL_SIGN_ADD_NONE          CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE = 0
 )
+
+// String returns the CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE) String() string {
+	switch e {
+	case CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN"
+	case CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT"
+	case CRYPTUI_WIZ_DIGITAL_SIGN_ADD_NONE:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_ADD_NONE"
+	default:
+		return fmt.Sprintf("CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE(%d)", uint32(e))
+	}
+}
 
 type CRYPTUI_WIZ_DIGITAL_SIGN uint32
 
@@ -72,12 +233,42 @@ const (
 	CRYPTUI_WIZ_DIGITAL_SIGN_NONE  CRYPTUI_WIZ_DIGITAL_SIGN = 0
 )
 
+// String returns the CRYPTUI_WIZ_DIGITAL_SIGN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTUI_WIZ_DIGITAL_SIGN) String() string {
+	switch e {
+	case CRYPTUI_WIZ_DIGITAL_SIGN_CERT:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_CERT"
+	case CRYPTUI_WIZ_DIGITAL_SIGN_STORE:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_STORE"
+	case CRYPTUI_WIZ_DIGITAL_SIGN_PVK:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_PVK"
+	case CRYPTUI_WIZ_DIGITAL_SIGN_NONE:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_NONE"
+	default:
+		return fmt.Sprintf("CRYPTUI_WIZ_DIGITAL_SIGN(%d)", uint32(e))
+	}
+}
+
 type CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION uint32
 
 const (
 	CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION = 1
 	CRYPTUI_WIZ_DIGITAL_SIGN_PVK_PROV CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION = 2
 )
+
+// String returns the CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION) String() string {
+	switch e {
+	case CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE"
+	case CRYPTUI_WIZ_DIGITAL_SIGN_PVK_PROV:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_PVK_PROV"
+	default:
+		return fmt.Sprintf("CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION(%d)", uint32(e))
+	}
+}
 
 type CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE uint32
 
@@ -86,6 +277,19 @@ const (
 	CRYPTUI_WIZ_DIGITAL_SIGN_INDIVIDUAL CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE = 2
 )
 
+// String returns the CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE) String() string {
+	switch e {
+	case CRYPTUI_WIZ_DIGITAL_SIGN_COMMERCIAL:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_COMMERCIAL"
+	case CRYPTUI_WIZ_DIGITAL_SIGN_INDIVIDUAL:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_INDIVIDUAL"
+	default:
+		return fmt.Sprintf("CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE(%d)", uint32(e))
+	}
+}
+
 type CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT uint32
 
 const (
@@ -93,6 +297,21 @@ const (
 	CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT = 1
 	CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_NONE CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT = 0
 )
+
+// String returns the CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT) String() string {
+	switch e {
+	case CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_BLOB:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_BLOB"
+	case CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE"
+	case CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_NONE:
+		return "CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_NONE"
+	default:
+		return fmt.Sprintf("CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT(%d)", uint32(e))
+	}
+}
 
 type CRYPTUI_WIZ_EXPORT_FORMAT uint32
 
@@ -105,6 +324,27 @@ const (
 	CRYPTUI_WIZ_EXPORT_FORMAT_CTL    CRYPTUI_WIZ_EXPORT_FORMAT = 7
 )
 
+// String returns the CRYPTUI_WIZ_EXPORT_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTUI_WIZ_EXPORT_FORMAT) String() string {
+	switch e {
+	case CRYPTUI_WIZ_EXPORT_FORMAT_DER:
+		return "CRYPTUI_WIZ_EXPORT_FORMAT_DER"
+	case CRYPTUI_WIZ_EXPORT_FORMAT_PFX:
+		return "CRYPTUI_WIZ_EXPORT_FORMAT_PFX"
+	case CRYPTUI_WIZ_EXPORT_FORMAT_PKCS7:
+		return "CRYPTUI_WIZ_EXPORT_FORMAT_PKCS7"
+	case CRYPTUI_WIZ_EXPORT_FORMAT_BASE64:
+		return "CRYPTUI_WIZ_EXPORT_FORMAT_BASE64"
+	case CRYPTUI_WIZ_EXPORT_FORMAT_CRL:
+		return "CRYPTUI_WIZ_EXPORT_FORMAT_CRL"
+	case CRYPTUI_WIZ_EXPORT_FORMAT_CTL:
+		return "CRYPTUI_WIZ_EXPORT_FORMAT_CTL"
+	default:
+		return fmt.Sprintf("CRYPTUI_WIZ_EXPORT_FORMAT(%d)", uint32(e))
+	}
+}
+
 type CRYPTUI_WIZ_EXPORT_SUBJECT uint32
 
 const (
@@ -115,6 +355,26 @@ const (
 	CRYPTUI_WIZ_EXPORT_CERT_STORE_CERTIFICATES_ONLY CRYPTUI_WIZ_EXPORT_SUBJECT = 5
 )
 
+// String returns the CRYPTUI_WIZ_EXPORT_SUBJECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTUI_WIZ_EXPORT_SUBJECT) String() string {
+	switch e {
+	case CRYPTUI_WIZ_EXPORT_CERT_CONTEXT:
+		return "CRYPTUI_WIZ_EXPORT_CERT_CONTEXT"
+	case CRYPTUI_WIZ_EXPORT_CTL_CONTEXT:
+		return "CRYPTUI_WIZ_EXPORT_CTL_CONTEXT"
+	case CRYPTUI_WIZ_EXPORT_CRL_CONTEXT:
+		return "CRYPTUI_WIZ_EXPORT_CRL_CONTEXT"
+	case CRYPTUI_WIZ_EXPORT_CERT_STORE:
+		return "CRYPTUI_WIZ_EXPORT_CERT_STORE"
+	case CRYPTUI_WIZ_EXPORT_CERT_STORE_CERTIFICATES_ONLY:
+		return "CRYPTUI_WIZ_EXPORT_CERT_STORE_CERTIFICATES_ONLY"
+	default:
+		return fmt.Sprintf("CRYPTUI_WIZ_EXPORT_SUBJECT(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CRYPTUI_WIZ_FLAGS uint32
 
 const (
@@ -132,6 +392,52 @@ const (
 	CRYPTUI_WIZ_EXPORT_NO_DELETE_PRIVATE_KEY CRYPTUI_WIZ_FLAGS = 512
 )
 
+// String returns the CRYPTUI_WIZ_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTUI_WIZ_FLAGS) String() string {
+	var parts []string
+	if e&CRYPTUI_WIZ_NO_UI != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_NO_UI")
+	}
+	if e&CRYPTUI_WIZ_IGNORE_NO_UI_FLAG_FOR_CSPS != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_IGNORE_NO_UI_FLAG_FOR_CSPS")
+	}
+	if e&CRYPTUI_WIZ_NO_UI_EXCEPT_CSP != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_NO_UI_EXCEPT_CSP")
+	}
+	if e&CRYPTUI_WIZ_IMPORT_ALLOW_CERT != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_IMPORT_ALLOW_CERT")
+	}
+	if e&CRYPTUI_WIZ_IMPORT_ALLOW_CRL != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_IMPORT_ALLOW_CRL")
+	}
+	if e&CRYPTUI_WIZ_IMPORT_ALLOW_CTL != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_IMPORT_ALLOW_CTL")
+	}
+	if e&CRYPTUI_WIZ_IMPORT_NO_CHANGE_DEST_STORE != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_IMPORT_NO_CHANGE_DEST_STORE")
+	}
+	if e&CRYPTUI_WIZ_IMPORT_TO_LOCALMACHINE != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_IMPORT_TO_LOCALMACHINE")
+	}
+	if e&CRYPTUI_WIZ_IMPORT_TO_CURRENTUSER != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_IMPORT_TO_CURRENTUSER")
+	}
+	if e&CRYPTUI_WIZ_IMPORT_REMOTE_DEST_STORE != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_IMPORT_REMOTE_DEST_STORE")
+	}
+	if e&CRYPTUI_WIZ_EXPORT_PRIVATE_KEY != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_EXPORT_PRIVATE_KEY")
+	}
+	if e&CRYPTUI_WIZ_EXPORT_NO_DELETE_PRIVATE_KEY != 0 {
+		parts = append(parts, "CRYPTUI_WIZ_EXPORT_NO_DELETE_PRIVATE_KEY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION uint32
 
 const (
@@ -142,6 +448,25 @@ const (
 	CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_STORE   CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION = 5
 )
 
+// String returns the CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION) String() string {
+	switch e {
+	case CRYPTUI_WIZ_IMPORT_SUBJECT_FILE:
+		return "CRYPTUI_WIZ_IMPORT_SUBJECT_FILE"
+	case CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_CONTEXT:
+		return "CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_CONTEXT"
+	case CRYPTUI_WIZ_IMPORT_SUBJECT_CTL_CONTEXT:
+		return "CRYPTUI_WIZ_IMPORT_SUBJECT_CTL_CONTEXT"
+	case CRYPTUI_WIZ_IMPORT_SUBJECT_CRL_CONTEXT:
+		return "CRYPTUI_WIZ_IMPORT_SUBJECT_CRL_CONTEXT"
+	case CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_STORE:
+		return "CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_STORE"
+	default:
+		return fmt.Sprintf("CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION(%d)", uint32(e))
+	}
+}
+
 type CTL_MODIFY_REQUEST_OPERATION uint32
 
 const (
@@ -149,3 +474,18 @@ const (
 	CTL_MODIFY_REQUEST_ADD_NOT_TRUSTED CTL_MODIFY_REQUEST_OPERATION = 1
 	CTL_MODIFY_REQUEST_REMOVE          CTL_MODIFY_REQUEST_OPERATION = 2
 )
+
+// String returns the CTL_MODIFY_REQUEST_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CTL_MODIFY_REQUEST_OPERATION) String() string {
+	switch e {
+	case CTL_MODIFY_REQUEST_ADD_TRUSTED:
+		return "CTL_MODIFY_REQUEST_ADD_TRUSTED"
+	case CTL_MODIFY_REQUEST_ADD_NOT_TRUSTED:
+		return "CTL_MODIFY_REQUEST_ADD_NOT_TRUSTED"
+	case CTL_MODIFY_REQUEST_REMOVE:
+		return "CTL_MODIFY_REQUEST_REMOVE"
+	default:
+		return fmt.Sprintf("CTL_MODIFY_REQUEST_OPERATION(%d)", uint32(e))
+	}
+}

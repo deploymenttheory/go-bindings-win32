@@ -4,6 +4,10 @@
 
 package windowsconnectnow
 
+import (
+	"fmt"
+)
+
 // WCN_ATTRIBUTE_TYPE: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_attribute_type
 type WCN_ATTRIBUTE_TYPE int32
 
@@ -111,6 +115,217 @@ const (
 	WCN_NUM_ATTRIBUTE_TYPES                      WCN_ATTRIBUTE_TYPE = 100
 )
 
+// String returns the WCN_ATTRIBUTE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_ATTRIBUTE_TYPE) String() string {
+	switch e {
+	case WCN_TYPE_AP_CHANNEL:
+		return "WCN_TYPE_AP_CHANNEL"
+	case WCN_TYPE_ASSOCIATION_STATE:
+		return "WCN_TYPE_ASSOCIATION_STATE"
+	case WCN_TYPE_AUTHENTICATION_TYPE:
+		return "WCN_TYPE_AUTHENTICATION_TYPE"
+	case WCN_TYPE_AUTHENTICATION_TYPE_FLAGS:
+		return "WCN_TYPE_AUTHENTICATION_TYPE_FLAGS"
+	case WCN_TYPE_AUTHENTICATOR:
+		return "WCN_TYPE_AUTHENTICATOR"
+	case WCN_TYPE_CONFIG_METHODS:
+		return "WCN_TYPE_CONFIG_METHODS"
+	case WCN_TYPE_CONFIGURATION_ERROR:
+		return "WCN_TYPE_CONFIGURATION_ERROR"
+	case WCN_TYPE_CONFIRMATION_URL4:
+		return "WCN_TYPE_CONFIRMATION_URL4"
+	case WCN_TYPE_CONFIRMATION_URL6:
+		return "WCN_TYPE_CONFIRMATION_URL6"
+	case WCN_TYPE_CONNECTION_TYPE:
+		return "WCN_TYPE_CONNECTION_TYPE"
+	case WCN_TYPE_CONNECTION_TYPE_FLAGS:
+		return "WCN_TYPE_CONNECTION_TYPE_FLAGS"
+	case WCN_TYPE_CREDENTIAL:
+		return "WCN_TYPE_CREDENTIAL"
+	case WCN_TYPE_DEVICE_NAME:
+		return "WCN_TYPE_DEVICE_NAME"
+	case WCN_TYPE_DEVICE_PASSWORD_ID:
+		return "WCN_TYPE_DEVICE_PASSWORD_ID"
+	case WCN_TYPE_E_HASH1:
+		return "WCN_TYPE_E_HASH1"
+	case WCN_TYPE_E_HASH2:
+		return "WCN_TYPE_E_HASH2"
+	case WCN_TYPE_E_SNONCE1:
+		return "WCN_TYPE_E_SNONCE1"
+	case WCN_TYPE_E_SNONCE2:
+		return "WCN_TYPE_E_SNONCE2"
+	case WCN_TYPE_ENCRYPTED_SETTINGS:
+		return "WCN_TYPE_ENCRYPTED_SETTINGS"
+	case WCN_TYPE_ENCRYPTION_TYPE:
+		return "WCN_TYPE_ENCRYPTION_TYPE"
+	case WCN_TYPE_ENCRYPTION_TYPE_FLAGS:
+		return "WCN_TYPE_ENCRYPTION_TYPE_FLAGS"
+	case WCN_TYPE_ENROLLEE_NONCE:
+		return "WCN_TYPE_ENROLLEE_NONCE"
+	case WCN_TYPE_FEATURE_ID:
+		return "WCN_TYPE_FEATURE_ID"
+	case WCN_TYPE_IDENTITY:
+		return "WCN_TYPE_IDENTITY"
+	case WCN_TYPE_IDENTITY_PROOF:
+		return "WCN_TYPE_IDENTITY_PROOF"
+	case WCN_TYPE_KEY_WRAP_AUTHENTICATOR:
+		return "WCN_TYPE_KEY_WRAP_AUTHENTICATOR"
+	case WCN_TYPE_KEY_IDENTIFIER:
+		return "WCN_TYPE_KEY_IDENTIFIER"
+	case WCN_TYPE_MAC_ADDRESS:
+		return "WCN_TYPE_MAC_ADDRESS"
+	case WCN_TYPE_MANUFACTURER:
+		return "WCN_TYPE_MANUFACTURER"
+	case WCN_TYPE_MESSAGE_TYPE:
+		return "WCN_TYPE_MESSAGE_TYPE"
+	case WCN_TYPE_MODEL_NAME:
+		return "WCN_TYPE_MODEL_NAME"
+	case WCN_TYPE_MODEL_NUMBER:
+		return "WCN_TYPE_MODEL_NUMBER"
+	case WCN_TYPE_NETWORK_INDEX:
+		return "WCN_TYPE_NETWORK_INDEX"
+	case WCN_TYPE_NETWORK_KEY:
+		return "WCN_TYPE_NETWORK_KEY"
+	case WCN_TYPE_NETWORK_KEY_INDEX:
+		return "WCN_TYPE_NETWORK_KEY_INDEX"
+	case WCN_TYPE_NEW_DEVICE_NAME:
+		return "WCN_TYPE_NEW_DEVICE_NAME"
+	case WCN_TYPE_NEW_PASSWORD:
+		return "WCN_TYPE_NEW_PASSWORD"
+	case WCN_TYPE_OOB_DEVICE_PASSWORD:
+		return "WCN_TYPE_OOB_DEVICE_PASSWORD"
+	case WCN_TYPE_OS_VERSION:
+		return "WCN_TYPE_OS_VERSION"
+	case WCN_TYPE_POWER_LEVEL:
+		return "WCN_TYPE_POWER_LEVEL"
+	case WCN_TYPE_PSK_CURRENT:
+		return "WCN_TYPE_PSK_CURRENT"
+	case WCN_TYPE_PSK_MAX:
+		return "WCN_TYPE_PSK_MAX"
+	case WCN_TYPE_PUBLIC_KEY:
+		return "WCN_TYPE_PUBLIC_KEY"
+	case WCN_TYPE_RADIO_ENABLED:
+		return "WCN_TYPE_RADIO_ENABLED"
+	case WCN_TYPE_REBOOT:
+		return "WCN_TYPE_REBOOT"
+	case WCN_TYPE_REGISTRAR_CURRENT:
+		return "WCN_TYPE_REGISTRAR_CURRENT"
+	case WCN_TYPE_REGISTRAR_ESTABLISHED:
+		return "WCN_TYPE_REGISTRAR_ESTABLISHED"
+	case WCN_TYPE_REGISTRAR_LIST:
+		return "WCN_TYPE_REGISTRAR_LIST"
+	case WCN_TYPE_REGISTRAR_MAX:
+		return "WCN_TYPE_REGISTRAR_MAX"
+	case WCN_TYPE_REGISTRAR_NONCE:
+		return "WCN_TYPE_REGISTRAR_NONCE"
+	case WCN_TYPE_REQUEST_TYPE:
+		return "WCN_TYPE_REQUEST_TYPE"
+	case WCN_TYPE_RESPONSE_TYPE:
+		return "WCN_TYPE_RESPONSE_TYPE"
+	case WCN_TYPE_RF_BANDS:
+		return "WCN_TYPE_RF_BANDS"
+	case WCN_TYPE_R_HASH1:
+		return "WCN_TYPE_R_HASH1"
+	case WCN_TYPE_R_HASH2:
+		return "WCN_TYPE_R_HASH2"
+	case WCN_TYPE_R_SNONCE1:
+		return "WCN_TYPE_R_SNONCE1"
+	case WCN_TYPE_R_SNONCE2:
+		return "WCN_TYPE_R_SNONCE2"
+	case WCN_TYPE_SELECTED_REGISTRAR:
+		return "WCN_TYPE_SELECTED_REGISTRAR"
+	case WCN_TYPE_SERIAL_NUMBER:
+		return "WCN_TYPE_SERIAL_NUMBER"
+	case WCN_TYPE_WI_FI_PROTECTED_SETUP_STATE:
+		return "WCN_TYPE_WI_FI_PROTECTED_SETUP_STATE"
+	case WCN_TYPE_SSID:
+		return "WCN_TYPE_SSID"
+	case WCN_TYPE_TOTAL_NETWORKS:
+		return "WCN_TYPE_TOTAL_NETWORKS"
+	case WCN_TYPE_UUID_E:
+		return "WCN_TYPE_UUID_E"
+	case WCN_TYPE_UUID_R:
+		return "WCN_TYPE_UUID_R"
+	case WCN_TYPE_VENDOR_EXTENSION:
+		return "WCN_TYPE_VENDOR_EXTENSION"
+	case WCN_TYPE_VERSION:
+		return "WCN_TYPE_VERSION"
+	case WCN_TYPE_X_509_CERTIFICATE_REQUEST:
+		return "WCN_TYPE_X_509_CERTIFICATE_REQUEST"
+	case WCN_TYPE_X_509_CERTIFICATE:
+		return "WCN_TYPE_X_509_CERTIFICATE"
+	case WCN_TYPE_EAP_IDENTITY:
+		return "WCN_TYPE_EAP_IDENTITY"
+	case WCN_TYPE_MESSAGE_COUNTER:
+		return "WCN_TYPE_MESSAGE_COUNTER"
+	case WCN_TYPE_PUBLIC_KEY_HASH:
+		return "WCN_TYPE_PUBLIC_KEY_HASH"
+	case WCN_TYPE_REKEY_KEY:
+		return "WCN_TYPE_REKEY_KEY"
+	case WCN_TYPE_KEY_LIFETIME:
+		return "WCN_TYPE_KEY_LIFETIME"
+	case WCN_TYPE_PERMITTED_CONFIG_METHODS:
+		return "WCN_TYPE_PERMITTED_CONFIG_METHODS"
+	case WCN_TYPE_SELECTED_REGISTRAR_CONFIG_METHODS:
+		return "WCN_TYPE_SELECTED_REGISTRAR_CONFIG_METHODS"
+	case WCN_TYPE_PRIMARY_DEVICE_TYPE:
+		return "WCN_TYPE_PRIMARY_DEVICE_TYPE"
+	case WCN_TYPE_SECONDARY_DEVICE_TYPE_LIST:
+		return "WCN_TYPE_SECONDARY_DEVICE_TYPE_LIST"
+	case WCN_TYPE_PORTABLE_DEVICE:
+		return "WCN_TYPE_PORTABLE_DEVICE"
+	case WCN_TYPE_AP_SETUP_LOCKED:
+		return "WCN_TYPE_AP_SETUP_LOCKED"
+	case WCN_TYPE_APPLICATION_EXTENSION:
+		return "WCN_TYPE_APPLICATION_EXTENSION"
+	case WCN_TYPE_EAP_TYPE:
+		return "WCN_TYPE_EAP_TYPE"
+	case WCN_TYPE_INITIALIZATION_VECTOR:
+		return "WCN_TYPE_INITIALIZATION_VECTOR"
+	case WCN_TYPE_KEY_PROVIDED_AUTOMATICALLY:
+		return "WCN_TYPE_KEY_PROVIDED_AUTOMATICALLY"
+	case WCN_TYPE_802_1X_ENABLED:
+		return "WCN_TYPE_802_1X_ENABLED"
+	case WCN_TYPE_APPSESSIONKEY:
+		return "WCN_TYPE_APPSESSIONKEY"
+	case WCN_TYPE_WEPTRANSMITKEY:
+		return "WCN_TYPE_WEPTRANSMITKEY"
+	case WCN_TYPE_UUID:
+		return "WCN_TYPE_UUID"
+	case WCN_TYPE_PRIMARY_DEVICE_TYPE_CATEGORY:
+		return "WCN_TYPE_PRIMARY_DEVICE_TYPE_CATEGORY"
+	case WCN_TYPE_PRIMARY_DEVICE_TYPE_SUBCATEGORY_OUI:
+		return "WCN_TYPE_PRIMARY_DEVICE_TYPE_SUBCATEGORY_OUI"
+	case WCN_TYPE_PRIMARY_DEVICE_TYPE_SUBCATEGORY:
+		return "WCN_TYPE_PRIMARY_DEVICE_TYPE_SUBCATEGORY"
+	case WCN_TYPE_CURRENT_SSID:
+		return "WCN_TYPE_CURRENT_SSID"
+	case WCN_TYPE_BSSID:
+		return "WCN_TYPE_BSSID"
+	case WCN_TYPE_DOT11_MAC_ADDRESS:
+		return "WCN_TYPE_DOT11_MAC_ADDRESS"
+	case WCN_TYPE_AUTHORIZED_MACS:
+		return "WCN_TYPE_AUTHORIZED_MACS"
+	case WCN_TYPE_NETWORK_KEY_SHAREABLE:
+		return "WCN_TYPE_NETWORK_KEY_SHAREABLE"
+	case WCN_TYPE_REQUEST_TO_ENROLL:
+		return "WCN_TYPE_REQUEST_TO_ENROLL"
+	case WCN_TYPE_REQUESTED_DEVICE_TYPE:
+		return "WCN_TYPE_REQUESTED_DEVICE_TYPE"
+	case WCN_TYPE_SETTINGS_DELAY_TIME:
+		return "WCN_TYPE_SETTINGS_DELAY_TIME"
+	case WCN_TYPE_VERSION2:
+		return "WCN_TYPE_VERSION2"
+	case WCN_TYPE_VENDOR_EXTENSION_WFA:
+		return "WCN_TYPE_VENDOR_EXTENSION_WFA"
+	case WCN_NUM_ATTRIBUTE_TYPES:
+		return "WCN_NUM_ATTRIBUTE_TYPES"
+	default:
+		return fmt.Sprintf("WCN_ATTRIBUTE_TYPE(%d)", int32(e))
+	}
+}
+
 // WCN_PASSWORD_TYPE: https://learn.microsoft.com/windows/win32/api/wcndevice/ne-wcndevice-wcn_password_type
 type WCN_PASSWORD_TYPE int32
 
@@ -122,6 +337,25 @@ const (
 	WCN_PASSWORD_TYPE_WFDS                    WCN_PASSWORD_TYPE = 4
 )
 
+// String returns the WCN_PASSWORD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_PASSWORD_TYPE) String() string {
+	switch e {
+	case WCN_PASSWORD_TYPE_PUSH_BUTTON:
+		return "WCN_PASSWORD_TYPE_PUSH_BUTTON"
+	case WCN_PASSWORD_TYPE_PIN:
+		return "WCN_PASSWORD_TYPE_PIN"
+	case WCN_PASSWORD_TYPE_PIN_REGISTRAR_SPECIFIED:
+		return "WCN_PASSWORD_TYPE_PIN_REGISTRAR_SPECIFIED"
+	case WCN_PASSWORD_TYPE_OOB_SPECIFIED:
+		return "WCN_PASSWORD_TYPE_OOB_SPECIFIED"
+	case WCN_PASSWORD_TYPE_WFDS:
+		return "WCN_PASSWORD_TYPE_WFDS"
+	default:
+		return fmt.Sprintf("WCN_PASSWORD_TYPE(%d)", int32(e))
+	}
+}
+
 // WCN_SESSION_STATUS: https://learn.microsoft.com/windows/win32/api/wcndevice/ne-wcndevice-wcn_session_status
 type WCN_SESSION_STATUS int32
 
@@ -130,6 +364,21 @@ const (
 	WCN_SESSION_STATUS_FAILURE_GENERIC WCN_SESSION_STATUS = 1
 	WCN_SESSION_STATUS_FAILURE_TIMEOUT WCN_SESSION_STATUS = 2
 )
+
+// String returns the WCN_SESSION_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_SESSION_STATUS) String() string {
+	switch e {
+	case WCN_SESSION_STATUS_SUCCESS:
+		return "WCN_SESSION_STATUS_SUCCESS"
+	case WCN_SESSION_STATUS_FAILURE_GENERIC:
+		return "WCN_SESSION_STATUS_FAILURE_GENERIC"
+	case WCN_SESSION_STATUS_FAILURE_TIMEOUT:
+		return "WCN_SESSION_STATUS_FAILURE_TIMEOUT"
+	default:
+		return fmt.Sprintf("WCN_SESSION_STATUS(%d)", int32(e))
+	}
+}
 
 // WCN_VALUE_TYPE_ASSOCIATION_STATE: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_value_type_association_state
 type WCN_VALUE_TYPE_ASSOCIATION_STATE int32
@@ -141,6 +390,25 @@ const (
 	WCN_VALUE_AS_ASSOCIATION_FAILURE   WCN_VALUE_TYPE_ASSOCIATION_STATE = 3
 	WCN_VALUE_AS_IP_FAILURE            WCN_VALUE_TYPE_ASSOCIATION_STATE = 4
 )
+
+// String returns the WCN_VALUE_TYPE_ASSOCIATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_ASSOCIATION_STATE) String() string {
+	switch e {
+	case WCN_VALUE_AS_NOT_ASSOCIATED:
+		return "WCN_VALUE_AS_NOT_ASSOCIATED"
+	case WCN_VALUE_AS_CONNECTION_SUCCESS:
+		return "WCN_VALUE_AS_CONNECTION_SUCCESS"
+	case WCN_VALUE_AS_CONFIGURATION_FAILURE:
+		return "WCN_VALUE_AS_CONFIGURATION_FAILURE"
+	case WCN_VALUE_AS_ASSOCIATION_FAILURE:
+		return "WCN_VALUE_AS_ASSOCIATION_FAILURE"
+	case WCN_VALUE_AS_IP_FAILURE:
+		return "WCN_VALUE_AS_IP_FAILURE"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_ASSOCIATION_STATE(%d)", int32(e))
+	}
+}
 
 // WCN_VALUE_TYPE_AUTHENTICATION_TYPE: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_value_type_authentication_type
 type WCN_VALUE_TYPE_AUTHENTICATION_TYPE int32
@@ -155,6 +423,29 @@ const (
 	WCN_VALUE_AT_WPAWPA2PSK_MIXED WCN_VALUE_TYPE_AUTHENTICATION_TYPE = 34
 )
 
+// String returns the WCN_VALUE_TYPE_AUTHENTICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_AUTHENTICATION_TYPE) String() string {
+	switch e {
+	case WCN_VALUE_AT_OPEN:
+		return "WCN_VALUE_AT_OPEN"
+	case WCN_VALUE_AT_WPAPSK:
+		return "WCN_VALUE_AT_WPAPSK"
+	case WCN_VALUE_AT_SHARED:
+		return "WCN_VALUE_AT_SHARED"
+	case WCN_VALUE_AT_WPA:
+		return "WCN_VALUE_AT_WPA"
+	case WCN_VALUE_AT_WPA2:
+		return "WCN_VALUE_AT_WPA2"
+	case WCN_VALUE_AT_WPA2PSK:
+		return "WCN_VALUE_AT_WPA2PSK"
+	case WCN_VALUE_AT_WPAWPA2PSK_MIXED:
+		return "WCN_VALUE_AT_WPAWPA2PSK_MIXED"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_AUTHENTICATION_TYPE(%d)", int32(e))
+	}
+}
+
 // WCN_VALUE_TYPE_BOOLEAN: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_value_type_boolean
 type WCN_VALUE_TYPE_BOOLEAN int32
 
@@ -162,6 +453,19 @@ const (
 	WCN_VALUE_FALSE WCN_VALUE_TYPE_BOOLEAN = 0
 	WCN_VALUE_TRUE  WCN_VALUE_TYPE_BOOLEAN = 1
 )
+
+// String returns the WCN_VALUE_TYPE_BOOLEAN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_BOOLEAN) String() string {
+	switch e {
+	case WCN_VALUE_FALSE:
+		return "WCN_VALUE_FALSE"
+	case WCN_VALUE_TRUE:
+		return "WCN_VALUE_TRUE"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_BOOLEAN(%d)", int32(e))
+	}
+}
 
 // WCN_VALUE_TYPE_CONFIGURATION_ERROR: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_value_type_configuration_error
 type WCN_VALUE_TYPE_CONFIGURATION_ERROR int32
@@ -188,6 +492,53 @@ const (
 	WCN_VALUE_CE_DEVICE_PASSWORD_AUTH_FAILURE   WCN_VALUE_TYPE_CONFIGURATION_ERROR = 18
 )
 
+// String returns the WCN_VALUE_TYPE_CONFIGURATION_ERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_CONFIGURATION_ERROR) String() string {
+	switch e {
+	case WCN_VALUE_CE_NO_ERROR:
+		return "WCN_VALUE_CE_NO_ERROR"
+	case WCN_VALUE_CE_OOB_INTERFACE_READ_ERROR:
+		return "WCN_VALUE_CE_OOB_INTERFACE_READ_ERROR"
+	case WCN_VALUE_CE_DECRYPTION_CRC_FAILURE:
+		return "WCN_VALUE_CE_DECRYPTION_CRC_FAILURE"
+	case WCN_VALUE_CE_2_4_CHANNEL_NOT_SUPPORTED:
+		return "WCN_VALUE_CE_2_4_CHANNEL_NOT_SUPPORTED"
+	case WCN_VALUE_CE_5_0_CHANNEL_NOT_SUPPORTED:
+		return "WCN_VALUE_CE_5_0_CHANNEL_NOT_SUPPORTED"
+	case WCN_VALUE_CE_SIGNAL_TOO_WEAK:
+		return "WCN_VALUE_CE_SIGNAL_TOO_WEAK"
+	case WCN_VALUE_CE_NETWORK_AUTHENTICATION_FAILURE:
+		return "WCN_VALUE_CE_NETWORK_AUTHENTICATION_FAILURE"
+	case WCN_VALUE_CE_NETWORK_ASSOCIATION_FAILURE:
+		return "WCN_VALUE_CE_NETWORK_ASSOCIATION_FAILURE"
+	case WCN_VALUE_CE_NO_DHCP_RESPONSE:
+		return "WCN_VALUE_CE_NO_DHCP_RESPONSE"
+	case WCN_VALUE_CE_FAILED_DHCP_CONFIG:
+		return "WCN_VALUE_CE_FAILED_DHCP_CONFIG"
+	case WCN_VALUE_CE_IP_ADDRESS_CONFLICT:
+		return "WCN_VALUE_CE_IP_ADDRESS_CONFLICT"
+	case WCN_VALUE_CE_COULD_NOT_CONNECT_TO_REGISTRAR:
+		return "WCN_VALUE_CE_COULD_NOT_CONNECT_TO_REGISTRAR"
+	case WCN_VALUE_CE_MULTIPLE_PBC_SESSIONS_DETECTED:
+		return "WCN_VALUE_CE_MULTIPLE_PBC_SESSIONS_DETECTED"
+	case WCN_VALUE_CE_ROGUE_ACTIVITY_SUSPECTED:
+		return "WCN_VALUE_CE_ROGUE_ACTIVITY_SUSPECTED"
+	case WCN_VALUE_CE_DEVICE_BUSY:
+		return "WCN_VALUE_CE_DEVICE_BUSY"
+	case WCN_VALUE_CE_SETUP_LOCKED:
+		return "WCN_VALUE_CE_SETUP_LOCKED"
+	case WCN_VALUE_CE_MESSAGE_TIMEOUT:
+		return "WCN_VALUE_CE_MESSAGE_TIMEOUT"
+	case WCN_VALUE_CE_REGISTRATION_SESSION_TIMEOUT:
+		return "WCN_VALUE_CE_REGISTRATION_SESSION_TIMEOUT"
+	case WCN_VALUE_CE_DEVICE_PASSWORD_AUTH_FAILURE:
+		return "WCN_VALUE_CE_DEVICE_PASSWORD_AUTH_FAILURE"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_CONFIGURATION_ERROR(%d)", int32(e))
+	}
+}
+
 // WCN_VALUE_TYPE_CONFIG_METHODS: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_value_type_config_methods
 type WCN_VALUE_TYPE_CONFIG_METHODS int32
 
@@ -207,6 +558,41 @@ const (
 	WCN_VALUE_CM_PHYS_DISPLAY    WCN_VALUE_TYPE_CONFIG_METHODS = 16392
 )
 
+// String returns the WCN_VALUE_TYPE_CONFIG_METHODS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_CONFIG_METHODS) String() string {
+	switch e {
+	case WCN_VALUE_CM_USBA:
+		return "WCN_VALUE_CM_USBA"
+	case WCN_VALUE_CM_ETHERNET:
+		return "WCN_VALUE_CM_ETHERNET"
+	case WCN_VALUE_CM_LABEL:
+		return "WCN_VALUE_CM_LABEL"
+	case WCN_VALUE_CM_DISPLAY:
+		return "WCN_VALUE_CM_DISPLAY"
+	case WCN_VALUE_CM_EXTERNAL_NFC:
+		return "WCN_VALUE_CM_EXTERNAL_NFC"
+	case WCN_VALUE_CM_INTEGRATED_NFC:
+		return "WCN_VALUE_CM_INTEGRATED_NFC"
+	case WCN_VALUE_CM_NFC_INTERFACE:
+		return "WCN_VALUE_CM_NFC_INTERFACE"
+	case WCN_VALUE_CM_PUSHBUTTON:
+		return "WCN_VALUE_CM_PUSHBUTTON"
+	case WCN_VALUE_CM_KEYPAD:
+		return "WCN_VALUE_CM_KEYPAD"
+	case WCN_VALUE_CM_VIRT_PUSHBUTTON:
+		return "WCN_VALUE_CM_VIRT_PUSHBUTTON"
+	case WCN_VALUE_CM_PHYS_PUSHBUTTON:
+		return "WCN_VALUE_CM_PHYS_PUSHBUTTON"
+	case WCN_VALUE_CM_VIRT_DISPLAY:
+		return "WCN_VALUE_CM_VIRT_DISPLAY"
+	case WCN_VALUE_CM_PHYS_DISPLAY:
+		return "WCN_VALUE_CM_PHYS_DISPLAY"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_CONFIG_METHODS(%d)", int32(e))
+	}
+}
+
 // WCN_VALUE_TYPE_CONNECTION_TYPE: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_value_type_connection_type
 type WCN_VALUE_TYPE_CONNECTION_TYPE int32
 
@@ -214,6 +600,19 @@ const (
 	WCN_VALUE_CT_ESS  WCN_VALUE_TYPE_CONNECTION_TYPE = 1
 	WCN_VALUE_CT_IBSS WCN_VALUE_TYPE_CONNECTION_TYPE = 2
 )
+
+// String returns the WCN_VALUE_TYPE_CONNECTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_CONNECTION_TYPE) String() string {
+	switch e {
+	case WCN_VALUE_CT_ESS:
+		return "WCN_VALUE_CT_ESS"
+	case WCN_VALUE_CT_IBSS:
+		return "WCN_VALUE_CT_IBSS"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_CONNECTION_TYPE(%d)", int32(e))
+	}
+}
 
 // WCN_VALUE_TYPE_DEVICE_PASSWORD_ID: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_value_type_device_password_id
 type WCN_VALUE_TYPE_DEVICE_PASSWORD_ID int32
@@ -231,6 +630,35 @@ const (
 	WCN_VALUE_DP_OUTOFBAND_MAX           WCN_VALUE_TYPE_DEVICE_PASSWORD_ID = 65535
 )
 
+// String returns the WCN_VALUE_TYPE_DEVICE_PASSWORD_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_DEVICE_PASSWORD_ID) String() string {
+	switch e {
+	case WCN_VALUE_DP_DEFAULT:
+		return "WCN_VALUE_DP_DEFAULT"
+	case WCN_VALUE_DP_USER_SPECIFIED:
+		return "WCN_VALUE_DP_USER_SPECIFIED"
+	case WCN_VALUE_DP_MACHINE_SPECIFIED:
+		return "WCN_VALUE_DP_MACHINE_SPECIFIED"
+	case WCN_VALUE_DP_REKEY:
+		return "WCN_VALUE_DP_REKEY"
+	case WCN_VALUE_DP_PUSHBUTTON:
+		return "WCN_VALUE_DP_PUSHBUTTON"
+	case WCN_VALUE_DP_REGISTRAR_SPECIFIED:
+		return "WCN_VALUE_DP_REGISTRAR_SPECIFIED"
+	case WCN_VALUE_DP_NFC_CONNECTION_HANDOVER:
+		return "WCN_VALUE_DP_NFC_CONNECTION_HANDOVER"
+	case WCN_VALUE_DP_WFD_SERVICES:
+		return "WCN_VALUE_DP_WFD_SERVICES"
+	case WCN_VALUE_DP_OUTOFBAND_MIN:
+		return "WCN_VALUE_DP_OUTOFBAND_MIN"
+	case WCN_VALUE_DP_OUTOFBAND_MAX:
+		return "WCN_VALUE_DP_OUTOFBAND_MAX"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_DEVICE_PASSWORD_ID(%d)", int32(e))
+	}
+}
+
 // WCN_VALUE_TYPE_ENCRYPTION_TYPE: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_value_type_encryption_type
 type WCN_VALUE_TYPE_ENCRYPTION_TYPE int32
 
@@ -241,6 +669,25 @@ const (
 	WCN_VALUE_ET_AES            WCN_VALUE_TYPE_ENCRYPTION_TYPE = 8
 	WCN_VALUE_ET_TKIP_AES_MIXED WCN_VALUE_TYPE_ENCRYPTION_TYPE = 12
 )
+
+// String returns the WCN_VALUE_TYPE_ENCRYPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_ENCRYPTION_TYPE) String() string {
+	switch e {
+	case WCN_VALUE_ET_NONE:
+		return "WCN_VALUE_ET_NONE"
+	case WCN_VALUE_ET_WEP:
+		return "WCN_VALUE_ET_WEP"
+	case WCN_VALUE_ET_TKIP:
+		return "WCN_VALUE_ET_TKIP"
+	case WCN_VALUE_ET_AES:
+		return "WCN_VALUE_ET_AES"
+	case WCN_VALUE_ET_TKIP_AES_MIXED:
+		return "WCN_VALUE_ET_TKIP_AES_MIXED"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_ENCRYPTION_TYPE(%d)", int32(e))
+	}
+}
 
 type WCN_VALUE_TYPE_MESSAGE_TYPE int32
 
@@ -262,6 +709,45 @@ const (
 	WCN_VALUE_MT_DONE           WCN_VALUE_TYPE_MESSAGE_TYPE = 15
 )
 
+// String returns the WCN_VALUE_TYPE_MESSAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_MESSAGE_TYPE) String() string {
+	switch e {
+	case WCN_VALUE_MT_BEACON:
+		return "WCN_VALUE_MT_BEACON"
+	case WCN_VALUE_MT_PROBE_REQUEST:
+		return "WCN_VALUE_MT_PROBE_REQUEST"
+	case WCN_VALUE_MT_PROBE_RESPONSE:
+		return "WCN_VALUE_MT_PROBE_RESPONSE"
+	case WCN_VALUE_MT_M1:
+		return "WCN_VALUE_MT_M1"
+	case WCN_VALUE_MT_M2:
+		return "WCN_VALUE_MT_M2"
+	case WCN_VALUE_MT_M2D:
+		return "WCN_VALUE_MT_M2D"
+	case WCN_VALUE_MT_M3:
+		return "WCN_VALUE_MT_M3"
+	case WCN_VALUE_MT_M4:
+		return "WCN_VALUE_MT_M4"
+	case WCN_VALUE_MT_M5:
+		return "WCN_VALUE_MT_M5"
+	case WCN_VALUE_MT_M6:
+		return "WCN_VALUE_MT_M6"
+	case WCN_VALUE_MT_M7:
+		return "WCN_VALUE_MT_M7"
+	case WCN_VALUE_MT_M8:
+		return "WCN_VALUE_MT_M8"
+	case WCN_VALUE_MT_ACK:
+		return "WCN_VALUE_MT_ACK"
+	case WCN_VALUE_MT_NACK:
+		return "WCN_VALUE_MT_NACK"
+	case WCN_VALUE_MT_DONE:
+		return "WCN_VALUE_MT_DONE"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_MESSAGE_TYPE(%d)", int32(e))
+	}
+}
+
 type WCN_VALUE_TYPE_REQUEST_TYPE int32
 
 const (
@@ -270,6 +756,23 @@ const (
 	WCN_VALUE_ReqT_REGISTRAR         WCN_VALUE_TYPE_REQUEST_TYPE = 2
 	WCN_VALUE_ReqT_MANAGER_REGISTRAR WCN_VALUE_TYPE_REQUEST_TYPE = 3
 )
+
+// String returns the WCN_VALUE_TYPE_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_REQUEST_TYPE) String() string {
+	switch e {
+	case WCN_VALUE_ReqT_ENROLLEE_INFO:
+		return "WCN_VALUE_ReqT_ENROLLEE_INFO"
+	case WCN_VALUE_ReqT_ENROLLEE_OPEN_1X:
+		return "WCN_VALUE_ReqT_ENROLLEE_OPEN_1X"
+	case WCN_VALUE_ReqT_REGISTRAR:
+		return "WCN_VALUE_ReqT_REGISTRAR"
+	case WCN_VALUE_ReqT_MANAGER_REGISTRAR:
+		return "WCN_VALUE_ReqT_MANAGER_REGISTRAR"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_REQUEST_TYPE(%d)", int32(e))
+	}
+}
 
 type WCN_VALUE_TYPE_RESPONSE_TYPE int32
 
@@ -280,6 +783,23 @@ const (
 	WCN_VALUE_RspT_AP               WCN_VALUE_TYPE_RESPONSE_TYPE = 3
 )
 
+// String returns the WCN_VALUE_TYPE_RESPONSE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_RESPONSE_TYPE) String() string {
+	switch e {
+	case WCN_VALUE_RspT_ENROLLEE_INFO:
+		return "WCN_VALUE_RspT_ENROLLEE_INFO"
+	case WCN_VALUE_RspT_ENROLLEE_OPEN_1X:
+		return "WCN_VALUE_RspT_ENROLLEE_OPEN_1X"
+	case WCN_VALUE_RspT_REGISTRAR:
+		return "WCN_VALUE_RspT_REGISTRAR"
+	case WCN_VALUE_RspT_AP:
+		return "WCN_VALUE_RspT_AP"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_RESPONSE_TYPE(%d)", int32(e))
+	}
+}
+
 // WCN_VALUE_TYPE_RF_BANDS: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_value_type_rf_bands
 type WCN_VALUE_TYPE_RF_BANDS int32
 
@@ -287,6 +807,19 @@ const (
 	WCN_VALUE_RB_24GHZ WCN_VALUE_TYPE_RF_BANDS = 1
 	WCN_VALUE_RB_50GHZ WCN_VALUE_TYPE_RF_BANDS = 2
 )
+
+// String returns the WCN_VALUE_TYPE_RF_BANDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_RF_BANDS) String() string {
+	switch e {
+	case WCN_VALUE_RB_24GHZ:
+		return "WCN_VALUE_RB_24GHZ"
+	case WCN_VALUE_RB_50GHZ:
+		return "WCN_VALUE_RB_50GHZ"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_RF_BANDS(%d)", int32(e))
+	}
+}
 
 // WCN_VALUE_TYPE_VERSION: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_value_type_version
 type WCN_VALUE_TYPE_VERSION int32
@@ -296,6 +829,19 @@ const (
 	WCN_VALUE_VERSION_2_0 WCN_VALUE_TYPE_VERSION = 32
 )
 
+// String returns the WCN_VALUE_TYPE_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_VERSION) String() string {
+	switch e {
+	case WCN_VALUE_VERSION_1_0:
+		return "WCN_VALUE_VERSION_1_0"
+	case WCN_VALUE_VERSION_2_0:
+		return "WCN_VALUE_VERSION_2_0"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_VERSION(%d)", int32(e))
+	}
+}
+
 // WCN_VALUE_TYPE_WI_FI_PROTECTED_SETUP_STATE: https://learn.microsoft.com/windows/win32/api/wcntypes/ne-wcntypes-wcn_value_type_wi_fi_protected_setup_state
 type WCN_VALUE_TYPE_WI_FI_PROTECTED_SETUP_STATE int32
 
@@ -304,3 +850,18 @@ const (
 	WCN_VALUE_SS_NOT_CONFIGURED WCN_VALUE_TYPE_WI_FI_PROTECTED_SETUP_STATE = 1
 	WCN_VALUE_SS_CONFIGURED     WCN_VALUE_TYPE_WI_FI_PROTECTED_SETUP_STATE = 2
 )
+
+// String returns the WCN_VALUE_TYPE_WI_FI_PROTECTED_SETUP_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCN_VALUE_TYPE_WI_FI_PROTECTED_SETUP_STATE) String() string {
+	switch e {
+	case WCN_VALUE_SS_RESERVED00:
+		return "WCN_VALUE_SS_RESERVED00"
+	case WCN_VALUE_SS_NOT_CONFIGURED:
+		return "WCN_VALUE_SS_NOT_CONFIGURED"
+	case WCN_VALUE_SS_CONFIGURED:
+		return "WCN_VALUE_SS_CONFIGURED"
+	default:
+		return fmt.Sprintf("WCN_VALUE_TYPE_WI_FI_PROTECTED_SETUP_STATE(%d)", int32(e))
+	}
+}

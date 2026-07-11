@@ -4,6 +4,10 @@
 
 package diagnosticdataquery
 
+import (
+	"fmt"
+)
+
 // DdqAccessLevel: https://learn.microsoft.com/windows/win32/api/diagnosticdataquerytypes/ne-diagnosticdataquerytypes-ddqaccesslevel
 type DdqAccessLevel int32
 
@@ -12,3 +16,18 @@ const (
 	CurrentUserData DdqAccessLevel = 1
 	AllUserData     DdqAccessLevel = 2
 )
+
+// String returns the DdqAccessLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DdqAccessLevel) String() string {
+	switch e {
+	case NoData:
+		return "NoData"
+	case CurrentUserData:
+		return "CurrentUserData"
+	case AllUserData:
+		return "AllUserData"
+	default:
+		return fmt.Sprintf("DdqAccessLevel(%d)", int32(e))
+	}
+}

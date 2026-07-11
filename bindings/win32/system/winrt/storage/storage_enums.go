@@ -4,7 +4,13 @@
 
 package storage
 
+import (
+	"fmt"
+	"strings"
+)
+
 // HANDLE_ACCESS_OPTIONS: https://learn.microsoft.com/windows/win32/api/windowsstoragecom/ne-windowsstoragecom-handle_access_options
+// Bitmask — values may be combined with |.
 type HANDLE_ACCESS_OPTIONS int32
 
 const (
@@ -14,6 +20,28 @@ const (
 	HAO_WRITE           HANDLE_ACCESS_OPTIONS = 1179926
 	HAO_DELETE          HANDLE_ACCESS_OPTIONS = 65536
 )
+
+// String returns the HANDLE_ACCESS_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HANDLE_ACCESS_OPTIONS) String() string {
+	var parts []string
+	if e&HAO_READ_ATTRIBUTES != 0 {
+		parts = append(parts, "HAO_READ_ATTRIBUTES")
+	}
+	if e&HAO_READ != 0 {
+		parts = append(parts, "HAO_READ")
+	}
+	if e&HAO_WRITE != 0 {
+		parts = append(parts, "HAO_WRITE")
+	}
+	if e&HAO_DELETE != 0 {
+		parts = append(parts, "HAO_DELETE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // HANDLE_CREATION_OPTIONS: https://learn.microsoft.com/windows/win32/api/windowsstoragecom/ne-windowsstoragecom-handle_creation_options
 type HANDLE_CREATION_OPTIONS int32
@@ -26,7 +54,27 @@ const (
 	HCO_TRUNCATE_EXISTING HANDLE_CREATION_OPTIONS = 5
 )
 
+// String returns the HANDLE_CREATION_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HANDLE_CREATION_OPTIONS) String() string {
+	switch e {
+	case HCO_CREATE_NEW:
+		return "HCO_CREATE_NEW"
+	case HCO_CREATE_ALWAYS:
+		return "HCO_CREATE_ALWAYS"
+	case HCO_OPEN_EXISTING:
+		return "HCO_OPEN_EXISTING"
+	case HCO_OPEN_ALWAYS:
+		return "HCO_OPEN_ALWAYS"
+	case HCO_TRUNCATE_EXISTING:
+		return "HCO_TRUNCATE_EXISTING"
+	default:
+		return fmt.Sprintf("HANDLE_CREATION_OPTIONS(%d)", int32(e))
+	}
+}
+
 // HANDLE_OPTIONS: https://learn.microsoft.com/windows/win32/api/windowsstoragecom/ne-windowsstoragecom-handle_options
+// Bitmask — values may be combined with |.
 type HANDLE_OPTIONS uint32
 
 const (
@@ -40,7 +88,39 @@ const (
 	HO_WRITE_THROUGH         HANDLE_OPTIONS = 2147483648
 )
 
+// String returns the HANDLE_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HANDLE_OPTIONS) String() string {
+	var parts []string
+	if e&HO_OPEN_REQUIRING_OPLOCK != 0 {
+		parts = append(parts, "HO_OPEN_REQUIRING_OPLOCK")
+	}
+	if e&HO_DELETE_ON_CLOSE != 0 {
+		parts = append(parts, "HO_DELETE_ON_CLOSE")
+	}
+	if e&HO_SEQUENTIAL_SCAN != 0 {
+		parts = append(parts, "HO_SEQUENTIAL_SCAN")
+	}
+	if e&HO_RANDOM_ACCESS != 0 {
+		parts = append(parts, "HO_RANDOM_ACCESS")
+	}
+	if e&HO_NO_BUFFERING != 0 {
+		parts = append(parts, "HO_NO_BUFFERING")
+	}
+	if e&HO_OVERLAPPED != 0 {
+		parts = append(parts, "HO_OVERLAPPED")
+	}
+	if e&HO_WRITE_THROUGH != 0 {
+		parts = append(parts, "HO_WRITE_THROUGH")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // HANDLE_SHARING_OPTIONS: https://learn.microsoft.com/windows/win32/api/windowsstoragecom/ne-windowsstoragecom-handle_sharing_options
+// Bitmask — values may be combined with |.
 type HANDLE_SHARING_OPTIONS int32
 
 const (
@@ -49,3 +129,22 @@ const (
 	HSO_SHARE_WRITE  HANDLE_SHARING_OPTIONS = 2
 	HSO_SHARE_DELETE HANDLE_SHARING_OPTIONS = 4
 )
+
+// String returns the HANDLE_SHARING_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HANDLE_SHARING_OPTIONS) String() string {
+	var parts []string
+	if e&HSO_SHARE_READ != 0 {
+		parts = append(parts, "HSO_SHARE_READ")
+	}
+	if e&HSO_SHARE_WRITE != 0 {
+		parts = append(parts, "HSO_SHARE_WRITE")
+	}
+	if e&HSO_SHARE_DELETE != 0 {
+		parts = append(parts, "HSO_SHARE_DELETE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

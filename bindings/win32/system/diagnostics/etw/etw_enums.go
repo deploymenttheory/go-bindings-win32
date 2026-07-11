@@ -4,6 +4,11 @@
 
 package etw
 
+import (
+	"fmt"
+	"strings"
+)
+
 // DECODING_SOURCE: https://learn.microsoft.com/windows/win32/api/tdh/ne-tdh-decoding_source
 type DECODING_SOURCE int32
 
@@ -15,6 +20,25 @@ const (
 	DecodingSourceMax     DECODING_SOURCE = 4
 )
 
+// String returns the DECODING_SOURCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DECODING_SOURCE) String() string {
+	switch e {
+	case DecodingSourceXMLFile:
+		return "DecodingSourceXMLFile"
+	case DecodingSourceWbem:
+		return "DecodingSourceWbem"
+	case DecodingSourceWPP:
+		return "DecodingSourceWPP"
+	case DecodingSourceTlg:
+		return "DecodingSourceTlg"
+	case DecodingSourceMax:
+		return "DecodingSourceMax"
+	default:
+		return fmt.Sprintf("DECODING_SOURCE(%d)", int32(e))
+	}
+}
+
 type ENABLECALLBACK_ENABLED_STATE uint32
 
 const (
@@ -22,6 +46,21 @@ const (
 	EVENT_CONTROL_CODE_ENABLE_PROVIDER  ENABLECALLBACK_ENABLED_STATE = 1
 	EVENT_CONTROL_CODE_CAPTURE_STATE    ENABLECALLBACK_ENABLED_STATE = 2
 )
+
+// String returns the ENABLECALLBACK_ENABLED_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENABLECALLBACK_ENABLED_STATE) String() string {
+	switch e {
+	case EVENT_CONTROL_CODE_DISABLE_PROVIDER:
+		return "EVENT_CONTROL_CODE_DISABLE_PROVIDER"
+	case EVENT_CONTROL_CODE_ENABLE_PROVIDER:
+		return "EVENT_CONTROL_CODE_ENABLE_PROVIDER"
+	case EVENT_CONTROL_CODE_CAPTURE_STATE:
+		return "EVENT_CONTROL_CODE_CAPTURE_STATE"
+	default:
+		return fmt.Sprintf("ENABLECALLBACK_ENABLED_STATE(%d)", uint32(e))
+	}
+}
 
 type ETW_COMPRESSION_RESUMPTION_MODE int32
 
@@ -31,6 +70,22 @@ const (
 	EtwCompressionModeNoRestart ETW_COMPRESSION_RESUMPTION_MODE = 2
 )
 
+// String returns the ETW_COMPRESSION_RESUMPTION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ETW_COMPRESSION_RESUMPTION_MODE) String() string {
+	switch e {
+	case EtwCompressionModeRestart:
+		return "EtwCompressionModeRestart"
+	case EtwCompressionModeNoDisable:
+		return "EtwCompressionModeNoDisable"
+	case EtwCompressionModeNoRestart:
+		return "EtwCompressionModeNoRestart"
+	default:
+		return fmt.Sprintf("ETW_COMPRESSION_RESUMPTION_MODE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type ETW_CONTEXT_REGISTER_TYPES int32
 
 const (
@@ -38,6 +93,22 @@ const (
 	EtwContextRegisterTypeControl ETW_CONTEXT_REGISTER_TYPES = 1
 	EtwContextRegisterTypeInteger ETW_CONTEXT_REGISTER_TYPES = 2
 )
+
+// String returns the ETW_CONTEXT_REGISTER_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ETW_CONTEXT_REGISTER_TYPES) String() string {
+	var parts []string
+	if e&EtwContextRegisterTypeControl != 0 {
+		parts = append(parts, "EtwContextRegisterTypeControl")
+	}
+	if e&EtwContextRegisterTypeInteger != 0 {
+		parts = append(parts, "EtwContextRegisterTypeInteger")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type ETW_PMC_COUNTER_OWNER_TYPE int32
 
@@ -47,6 +118,23 @@ const (
 	EtwPmcOwnerTagged           ETW_PMC_COUNTER_OWNER_TYPE = 2
 	EtwPmcOwnerTaggedWithSource ETW_PMC_COUNTER_OWNER_TYPE = 3
 )
+
+// String returns the ETW_PMC_COUNTER_OWNER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ETW_PMC_COUNTER_OWNER_TYPE) String() string {
+	switch e {
+	case EtwPmcOwnerFree:
+		return "EtwPmcOwnerFree"
+	case EtwPmcOwnerUntagged:
+		return "EtwPmcOwnerUntagged"
+	case EtwPmcOwnerTagged:
+		return "EtwPmcOwnerTagged"
+	case EtwPmcOwnerTaggedWithSource:
+		return "EtwPmcOwnerTaggedWithSource"
+	default:
+		return fmt.Sprintf("ETW_PMC_COUNTER_OWNER_TYPE(%d)", int32(e))
+	}
+}
 
 // ETW_PROCESS_HANDLE_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/evntrace/ne-evntrace-etw_process_handle_info_type
 type ETW_PROCESS_HANDLE_INFO_TYPE int32
@@ -59,12 +147,44 @@ const (
 	EtwQueryProcessHandleInfoMax   ETW_PROCESS_HANDLE_INFO_TYPE = 5
 )
 
+// String returns the ETW_PROCESS_HANDLE_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ETW_PROCESS_HANDLE_INFO_TYPE) String() string {
+	switch e {
+	case EtwQueryPartitionInformation:
+		return "EtwQueryPartitionInformation"
+	case EtwQueryPartitionInformationV2:
+		return "EtwQueryPartitionInformationV2"
+	case EtwQueryLastDroppedTimes:
+		return "EtwQueryLastDroppedTimes"
+	case EtwQueryLogFileHeader:
+		return "EtwQueryLogFileHeader"
+	case EtwQueryProcessHandleInfoMax:
+		return "EtwQueryProcessHandleInfoMax"
+	default:
+		return fmt.Sprintf("ETW_PROCESS_HANDLE_INFO_TYPE(%d)", int32(e))
+	}
+}
+
 type ETW_PROCESS_TRACE_MODES int32
 
 const (
 	ETW_PROCESS_TRACE_MODE_NONE          ETW_PROCESS_TRACE_MODES = 0
 	ETW_PROCESS_TRACE_MODE_RAW_TIMESTAMP ETW_PROCESS_TRACE_MODES = 1
 )
+
+// String returns the ETW_PROCESS_TRACE_MODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ETW_PROCESS_TRACE_MODES) String() string {
+	switch e {
+	case ETW_PROCESS_TRACE_MODE_NONE:
+		return "ETW_PROCESS_TRACE_MODE_NONE"
+	case ETW_PROCESS_TRACE_MODE_RAW_TIMESTAMP:
+		return "ETW_PROCESS_TRACE_MODE_RAW_TIMESTAMP"
+	default:
+		return fmt.Sprintf("ETW_PROCESS_TRACE_MODES(%d)", int32(e))
+	}
+}
 
 // ETW_PROVIDER_TRAIT_TYPE: https://learn.microsoft.com/windows/win32/api/evntcons/ne-evntcons-etw_provider_trait_type
 type ETW_PROVIDER_TRAIT_TYPE int32
@@ -74,6 +194,21 @@ const (
 	EtwProviderTraitDecodeGuid ETW_PROVIDER_TRAIT_TYPE = 2
 	EtwProviderTraitTypeMax    ETW_PROVIDER_TRAIT_TYPE = 3
 )
+
+// String returns the ETW_PROVIDER_TRAIT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ETW_PROVIDER_TRAIT_TYPE) String() string {
+	switch e {
+	case EtwProviderTraitTypeGroup:
+		return "EtwProviderTraitTypeGroup"
+	case EtwProviderTraitDecodeGuid:
+		return "EtwProviderTraitDecodeGuid"
+	case EtwProviderTraitTypeMax:
+		return "EtwProviderTraitTypeMax"
+	default:
+		return fmt.Sprintf("ETW_PROVIDER_TRAIT_TYPE(%d)", int32(e))
+	}
+}
 
 // EVENTSECURITYOPERATION: https://learn.microsoft.com/windows/win32/api/evntcons/ne-evntcons-eventsecurityoperation
 type EVENTSECURITYOPERATION int32
@@ -85,6 +220,25 @@ const (
 	EventSecurityAddSACL EVENTSECURITYOPERATION = 3
 	EventSecurityMax     EVENTSECURITYOPERATION = 4
 )
+
+// String returns the EVENTSECURITYOPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVENTSECURITYOPERATION) String() string {
+	switch e {
+	case EventSecuritySetDACL:
+		return "EventSecuritySetDACL"
+	case EventSecuritySetSACL:
+		return "EventSecuritySetSACL"
+	case EventSecurityAddDACL:
+		return "EventSecurityAddDACL"
+	case EventSecurityAddSACL:
+		return "EventSecurityAddSACL"
+	case EventSecurityMax:
+		return "EventSecurityMax"
+	default:
+		return fmt.Sprintf("EVENTSECURITYOPERATION(%d)", int32(e))
+	}
+}
 
 // EVENT_FIELD_TYPE: https://learn.microsoft.com/windows/win32/api/tdh/ne-tdh-event_field_type
 type EVENT_FIELD_TYPE int32
@@ -98,6 +252,27 @@ const (
 	EventInformationMax     EVENT_FIELD_TYPE = 5
 )
 
+// String returns the EVENT_FIELD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVENT_FIELD_TYPE) String() string {
+	switch e {
+	case EventKeywordInformation:
+		return "EventKeywordInformation"
+	case EventLevelInformation:
+		return "EventLevelInformation"
+	case EventChannelInformation:
+		return "EventChannelInformation"
+	case EventTaskInformation:
+		return "EventTaskInformation"
+	case EventOpcodeInformation:
+		return "EventOpcodeInformation"
+	case EventInformationMax:
+		return "EventInformationMax"
+	default:
+		return fmt.Sprintf("EVENT_FIELD_TYPE(%d)", int32(e))
+	}
+}
+
 // EVENT_INFO_CLASS: https://learn.microsoft.com/windows/win32/api/evntprov/ne-evntprov-event_info_class
 type EVENT_INFO_CLASS int32
 
@@ -109,6 +284,25 @@ const (
 	MaxEventInfo                   EVENT_INFO_CLASS = 4
 )
 
+// String returns the EVENT_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVENT_INFO_CLASS) String() string {
+	switch e {
+	case EventProviderBinaryTrackInfo:
+		return "EventProviderBinaryTrackInfo"
+	case EventProviderSetReserved1:
+		return "EventProviderSetReserved1"
+	case EventProviderSetTraits:
+		return "EventProviderSetTraits"
+	case EventProviderUseDescriptorType:
+		return "EventProviderUseDescriptorType"
+	case MaxEventInfo:
+		return "MaxEventInfo"
+	default:
+		return fmt.Sprintf("EVENT_INFO_CLASS(%d)", int32(e))
+	}
+}
+
 type EVENT_TRACE_CONTROL uint32
 
 const (
@@ -118,6 +312,24 @@ const (
 	EVENT_TRACE_CONTROL_UPDATE EVENT_TRACE_CONTROL = 2
 )
 
+// String returns the EVENT_TRACE_CONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVENT_TRACE_CONTROL) String() string {
+	switch e {
+	case EVENT_TRACE_CONTROL_FLUSH:
+		return "EVENT_TRACE_CONTROL_FLUSH"
+	case EVENT_TRACE_CONTROL_QUERY:
+		return "EVENT_TRACE_CONTROL_QUERY"
+	case EVENT_TRACE_CONTROL_STOP:
+		return "EVENT_TRACE_CONTROL_STOP"
+	case EVENT_TRACE_CONTROL_UPDATE:
+		return "EVENT_TRACE_CONTROL_UPDATE"
+	default:
+		return fmt.Sprintf("EVENT_TRACE_CONTROL(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type EVENT_TRACE_FLAG uint32
 
 const (
@@ -150,6 +362,97 @@ const (
 	EVENT_TRACE_FLAG_VIRTUAL_ALLOC      EVENT_TRACE_FLAG = 16384
 )
 
+// String returns the EVENT_TRACE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVENT_TRACE_FLAG) String() string {
+	var parts []string
+	if e&EVENT_TRACE_FLAG_ALPC != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_ALPC")
+	}
+	if e&EVENT_TRACE_FLAG_CSWITCH != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_CSWITCH")
+	}
+	if e&EVENT_TRACE_FLAG_DBGPRINT != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_DBGPRINT")
+	}
+	if e&EVENT_TRACE_FLAG_DISK_FILE_IO != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_DISK_FILE_IO")
+	}
+	if e&EVENT_TRACE_FLAG_DISK_IO != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_DISK_IO")
+	}
+	if e&EVENT_TRACE_FLAG_DISK_IO_INIT != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_DISK_IO_INIT")
+	}
+	if e&EVENT_TRACE_FLAG_DISPATCHER != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_DISPATCHER")
+	}
+	if e&EVENT_TRACE_FLAG_DPC != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_DPC")
+	}
+	if e&EVENT_TRACE_FLAG_DRIVER != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_DRIVER")
+	}
+	if e&EVENT_TRACE_FLAG_FILE_IO != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_FILE_IO")
+	}
+	if e&EVENT_TRACE_FLAG_FILE_IO_INIT != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_FILE_IO_INIT")
+	}
+	if e&EVENT_TRACE_FLAG_IMAGE_LOAD != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_IMAGE_LOAD")
+	}
+	if e&EVENT_TRACE_FLAG_INTERRUPT != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_INTERRUPT")
+	}
+	if e&EVENT_TRACE_FLAG_JOB != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_JOB")
+	}
+	if e&EVENT_TRACE_FLAG_MEMORY_HARD_FAULTS != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_MEMORY_HARD_FAULTS")
+	}
+	if e&EVENT_TRACE_FLAG_MEMORY_PAGE_FAULTS != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_MEMORY_PAGE_FAULTS")
+	}
+	if e&EVENT_TRACE_FLAG_NETWORK_TCPIP != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_NETWORK_TCPIP")
+	}
+	if e&EVENT_TRACE_FLAG_NO_SYSCONFIG != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_NO_SYSCONFIG")
+	}
+	if e&EVENT_TRACE_FLAG_PROCESS != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_PROCESS")
+	}
+	if e&EVENT_TRACE_FLAG_PROCESS_COUNTERS != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_PROCESS_COUNTERS")
+	}
+	if e&EVENT_TRACE_FLAG_PROFILE != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_PROFILE")
+	}
+	if e&EVENT_TRACE_FLAG_REGISTRY != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_REGISTRY")
+	}
+	if e&EVENT_TRACE_FLAG_SPLIT_IO != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_SPLIT_IO")
+	}
+	if e&EVENT_TRACE_FLAG_SYSTEMCALL != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_SYSTEMCALL")
+	}
+	if e&EVENT_TRACE_FLAG_THREAD != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_THREAD")
+	}
+	if e&EVENT_TRACE_FLAG_VAMAP != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_VAMAP")
+	}
+	if e&EVENT_TRACE_FLAG_VIRTUAL_ALLOC != 0 {
+		parts = append(parts, "EVENT_TRACE_FLAG_VIRTUAL_ALLOC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // MAP_FLAGS: https://learn.microsoft.com/windows/win32/api/tdh/ne-tdh-map_flags
 type MAP_FLAGS int32
 
@@ -163,6 +466,29 @@ const (
 	EVENTMAP_INFO_FLAG_WBEM_NO_MAP         MAP_FLAGS = 64
 )
 
+// String returns the MAP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MAP_FLAGS) String() string {
+	switch e {
+	case EVENTMAP_INFO_FLAG_MANIFEST_VALUEMAP:
+		return "EVENTMAP_INFO_FLAG_MANIFEST_VALUEMAP"
+	case EVENTMAP_INFO_FLAG_MANIFEST_BITMAP:
+		return "EVENTMAP_INFO_FLAG_MANIFEST_BITMAP"
+	case EVENTMAP_INFO_FLAG_MANIFEST_PATTERNMAP:
+		return "EVENTMAP_INFO_FLAG_MANIFEST_PATTERNMAP"
+	case EVENTMAP_INFO_FLAG_WBEM_VALUEMAP:
+		return "EVENTMAP_INFO_FLAG_WBEM_VALUEMAP"
+	case EVENTMAP_INFO_FLAG_WBEM_BITMAP:
+		return "EVENTMAP_INFO_FLAG_WBEM_BITMAP"
+	case EVENTMAP_INFO_FLAG_WBEM_FLAG:
+		return "EVENTMAP_INFO_FLAG_WBEM_FLAG"
+	case EVENTMAP_INFO_FLAG_WBEM_NO_MAP:
+		return "EVENTMAP_INFO_FLAG_WBEM_NO_MAP"
+	default:
+		return fmt.Sprintf("MAP_FLAGS(%d)", int32(e))
+	}
+}
+
 // MAP_VALUETYPE: https://learn.microsoft.com/windows/win32/api/tdh/ne-tdh-map_valuetype
 type MAP_VALUETYPE int32
 
@@ -170,6 +496,19 @@ const (
 	EVENTMAP_ENTRY_VALUETYPE_ULONG  MAP_VALUETYPE = 0
 	EVENTMAP_ENTRY_VALUETYPE_STRING MAP_VALUETYPE = 1
 )
+
+// String returns the MAP_VALUETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MAP_VALUETYPE) String() string {
+	switch e {
+	case EVENTMAP_ENTRY_VALUETYPE_ULONG:
+		return "EVENTMAP_ENTRY_VALUETYPE_ULONG"
+	case EVENTMAP_ENTRY_VALUETYPE_STRING:
+		return "EVENTMAP_ENTRY_VALUETYPE_STRING"
+	default:
+		return fmt.Sprintf("MAP_VALUETYPE(%d)", int32(e))
+	}
+}
 
 // PAYLOAD_OPERATOR: https://learn.microsoft.com/windows/win32/api/tdh/ne-tdh-payload_operator
 type PAYLOAD_OPERATOR int32
@@ -191,6 +530,43 @@ const (
 	PAYLOADFIELD_INVALID       PAYLOAD_OPERATOR = 32
 )
 
+// String returns the PAYLOAD_OPERATOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAYLOAD_OPERATOR) String() string {
+	switch e {
+	case PAYLOADFIELD_EQ:
+		return "PAYLOADFIELD_EQ"
+	case PAYLOADFIELD_NE:
+		return "PAYLOADFIELD_NE"
+	case PAYLOADFIELD_LE:
+		return "PAYLOADFIELD_LE"
+	case PAYLOADFIELD_GT:
+		return "PAYLOADFIELD_GT"
+	case PAYLOADFIELD_LT:
+		return "PAYLOADFIELD_LT"
+	case PAYLOADFIELD_GE:
+		return "PAYLOADFIELD_GE"
+	case PAYLOADFIELD_BETWEEN:
+		return "PAYLOADFIELD_BETWEEN"
+	case PAYLOADFIELD_NOTBETWEEN:
+		return "PAYLOADFIELD_NOTBETWEEN"
+	case PAYLOADFIELD_MODULO:
+		return "PAYLOADFIELD_MODULO"
+	case PAYLOADFIELD_CONTAINS:
+		return "PAYLOADFIELD_CONTAINS"
+	case PAYLOADFIELD_DOESNTCONTAIN:
+		return "PAYLOADFIELD_DOESNTCONTAIN"
+	case PAYLOADFIELD_IS:
+		return "PAYLOADFIELD_IS"
+	case PAYLOADFIELD_ISNOT:
+		return "PAYLOADFIELD_ISNOT"
+	case PAYLOADFIELD_INVALID:
+		return "PAYLOADFIELD_INVALID"
+	default:
+		return fmt.Sprintf("PAYLOAD_OPERATOR(%d)", int32(e))
+	}
+}
+
 // PROPERTY_FLAGS: https://learn.microsoft.com/windows/win32/api/tdh/ne-tdh-property_flags
 type PROPERTY_FLAGS int32
 
@@ -205,6 +581,31 @@ const (
 	PropertyHasCustomSchema  PROPERTY_FLAGS = 128
 )
 
+// String returns the PROPERTY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPERTY_FLAGS) String() string {
+	switch e {
+	case PropertyStruct:
+		return "PropertyStruct"
+	case PropertyParamLength:
+		return "PropertyParamLength"
+	case PropertyParamCount:
+		return "PropertyParamCount"
+	case PropertyWBEMXmlFragment:
+		return "PropertyWBEMXmlFragment"
+	case PropertyParamFixedLength:
+		return "PropertyParamFixedLength"
+	case PropertyParamFixedCount:
+		return "PropertyParamFixedCount"
+	case PropertyHasTags:
+		return "PropertyHasTags"
+	case PropertyHasCustomSchema:
+		return "PropertyHasCustomSchema"
+	default:
+		return fmt.Sprintf("PROPERTY_FLAGS(%d)", int32(e))
+	}
+}
+
 // TDH_CONTEXT_TYPE: https://learn.microsoft.com/windows/win32/api/tdh/ne-tdh-tdh_context_type
 type TDH_CONTEXT_TYPE int32
 
@@ -217,6 +618,27 @@ const (
 	TDH_CONTEXT_MAXIMUM           TDH_CONTEXT_TYPE = 5
 )
 
+// String returns the TDH_CONTEXT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TDH_CONTEXT_TYPE) String() string {
+	switch e {
+	case TDH_CONTEXT_WPP_TMFFILE:
+		return "TDH_CONTEXT_WPP_TMFFILE"
+	case TDH_CONTEXT_WPP_TMFSEARCHPATH:
+		return "TDH_CONTEXT_WPP_TMFSEARCHPATH"
+	case TDH_CONTEXT_WPP_GMT:
+		return "TDH_CONTEXT_WPP_GMT"
+	case TDH_CONTEXT_POINTERSIZE:
+		return "TDH_CONTEXT_POINTERSIZE"
+	case TDH_CONTEXT_PDB_PATH:
+		return "TDH_CONTEXT_PDB_PATH"
+	case TDH_CONTEXT_MAXIMUM:
+		return "TDH_CONTEXT_MAXIMUM"
+	default:
+		return fmt.Sprintf("TDH_CONTEXT_TYPE(%d)", int32(e))
+	}
+}
+
 // TEMPLATE_FLAGS: https://learn.microsoft.com/windows/win32/api/tdh/ne-tdh-template_flags
 type TEMPLATE_FLAGS int32
 
@@ -226,6 +648,22 @@ const (
 	TEMPLATE_CONTROL_GUID TEMPLATE_FLAGS = 4
 )
 
+// String returns the TEMPLATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TEMPLATE_FLAGS) String() string {
+	switch e {
+	case TEMPLATE_EVENT_DATA:
+		return "TEMPLATE_EVENT_DATA"
+	case TEMPLATE_USER_DATA:
+		return "TEMPLATE_USER_DATA"
+	case TEMPLATE_CONTROL_GUID:
+		return "TEMPLATE_CONTROL_GUID"
+	default:
+		return fmt.Sprintf("TEMPLATE_FLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TRACE_LBR_CONFIGURATION int32
 
 const (
@@ -243,6 +681,50 @@ const (
 	TRACE_LBR_CONFIGURATION_SAMPLED               TRACE_LBR_CONFIGURATION = 1024
 )
 
+// String returns the TRACE_LBR_CONFIGURATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRACE_LBR_CONFIGURATION) String() string {
+	var parts []string
+	if e&TRACE_LBR_CONFIGURATION_EXCLUDE_KERNEL != 0 {
+		parts = append(parts, "TRACE_LBR_CONFIGURATION_EXCLUDE_KERNEL")
+	}
+	if e&TRACE_LBR_CONFIGURATION_EXCLUDE_USER != 0 {
+		parts = append(parts, "TRACE_LBR_CONFIGURATION_EXCLUDE_USER")
+	}
+	if e&TRACE_LBR_CONFIGURATION_EXCLUDE_JCC != 0 {
+		parts = append(parts, "TRACE_LBR_CONFIGURATION_EXCLUDE_JCC")
+	}
+	if e&TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_REL_CALL != 0 {
+		parts = append(parts, "TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_REL_CALL")
+	}
+	if e&TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_IND_CALL != 0 {
+		parts = append(parts, "TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_IND_CALL")
+	}
+	if e&TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_RET != 0 {
+		parts = append(parts, "TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_RET")
+	}
+	if e&TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_IND_JMP != 0 {
+		parts = append(parts, "TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_IND_JMP")
+	}
+	if e&TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_REL_JMP != 0 {
+		parts = append(parts, "TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_REL_JMP")
+	}
+	if e&TRACE_LBR_CONFIGURATION_EXCLUDE_FAR_BRANCH != 0 {
+		parts = append(parts, "TRACE_LBR_CONFIGURATION_EXCLUDE_FAR_BRANCH")
+	}
+	if e&TRACE_LBR_CONFIGURATION_CALLSTACK_ENABLE != 0 {
+		parts = append(parts, "TRACE_LBR_CONFIGURATION_CALLSTACK_ENABLE")
+	}
+	if e&TRACE_LBR_CONFIGURATION_SAMPLED != 0 {
+		parts = append(parts, "TRACE_LBR_CONFIGURATION_SAMPLED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type TRACE_MESSAGE_FLAGS uint32
 
 const (
@@ -252,6 +734,31 @@ const (
 	TRACE_MESSAGE_SYSTEMINFO  TRACE_MESSAGE_FLAGS = 32
 	TRACE_MESSAGE_TIMESTAMP   TRACE_MESSAGE_FLAGS = 8
 )
+
+// String returns the TRACE_MESSAGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRACE_MESSAGE_FLAGS) String() string {
+	var parts []string
+	if e&TRACE_MESSAGE_COMPONENTID != 0 {
+		parts = append(parts, "TRACE_MESSAGE_COMPONENTID")
+	}
+	if e&TRACE_MESSAGE_GUID != 0 {
+		parts = append(parts, "TRACE_MESSAGE_GUID")
+	}
+	if e&TRACE_MESSAGE_SEQUENCE != 0 {
+		parts = append(parts, "TRACE_MESSAGE_SEQUENCE")
+	}
+	if e&TRACE_MESSAGE_SYSTEMINFO != 0 {
+		parts = append(parts, "TRACE_MESSAGE_SYSTEMINFO")
+	}
+	if e&TRACE_MESSAGE_TIMESTAMP != 0 {
+		parts = append(parts, "TRACE_MESSAGE_TIMESTAMP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // TRACE_QUERY_INFO_CLASS: https://learn.microsoft.com/windows/win32/api/evntrace/ne-evntrace-trace_query_info_class
 type TRACE_QUERY_INFO_CLASS int32
@@ -289,6 +796,75 @@ const (
 	MaxTraceSetInfoClass              TRACE_QUERY_INFO_CLASS = 29
 )
 
+// String returns the TRACE_QUERY_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRACE_QUERY_INFO_CLASS) String() string {
+	switch e {
+	case TraceGuidQueryList:
+		return "TraceGuidQueryList"
+	case TraceGuidQueryInfo:
+		return "TraceGuidQueryInfo"
+	case TraceGuidQueryProcess:
+		return "TraceGuidQueryProcess"
+	case TraceStackTracingInfo:
+		return "TraceStackTracingInfo"
+	case TraceSystemTraceEnableFlagsInfo:
+		return "TraceSystemTraceEnableFlagsInfo"
+	case TraceSampledProfileIntervalInfo:
+		return "TraceSampledProfileIntervalInfo"
+	case TraceProfileSourceConfigInfo:
+		return "TraceProfileSourceConfigInfo"
+	case TraceProfileSourceListInfo:
+		return "TraceProfileSourceListInfo"
+	case TracePmcEventListInfo:
+		return "TracePmcEventListInfo"
+	case TracePmcCounterListInfo:
+		return "TracePmcCounterListInfo"
+	case TraceSetDisallowList:
+		return "TraceSetDisallowList"
+	case TraceVersionInfo:
+		return "TraceVersionInfo"
+	case TraceGroupQueryList:
+		return "TraceGroupQueryList"
+	case TraceGroupQueryInfo:
+		return "TraceGroupQueryInfo"
+	case TraceDisallowListQuery:
+		return "TraceDisallowListQuery"
+	case TraceInfoReserved15:
+		return "TraceInfoReserved15"
+	case TracePeriodicCaptureStateListInfo:
+		return "TracePeriodicCaptureStateListInfo"
+	case TracePeriodicCaptureStateInfo:
+		return "TracePeriodicCaptureStateInfo"
+	case TraceProviderBinaryTracking:
+		return "TraceProviderBinaryTracking"
+	case TraceMaxLoggersQuery:
+		return "TraceMaxLoggersQuery"
+	case TraceLbrConfigurationInfo:
+		return "TraceLbrConfigurationInfo"
+	case TraceLbrEventListInfo:
+		return "TraceLbrEventListInfo"
+	case TraceMaxPmcCounterQuery:
+		return "TraceMaxPmcCounterQuery"
+	case TraceStreamCount:
+		return "TraceStreamCount"
+	case TraceStackCachingInfo:
+		return "TraceStackCachingInfo"
+	case TracePmcCounterOwners:
+		return "TracePmcCounterOwners"
+	case TraceUnifiedStackCachingInfo:
+		return "TraceUnifiedStackCachingInfo"
+	case TracePmcSessionInformation:
+		return "TracePmcSessionInformation"
+	case TraceContextRegisterInfo:
+		return "TraceContextRegisterInfo"
+	case MaxTraceSetInfoClass:
+		return "MaxTraceSetInfoClass"
+	default:
+		return fmt.Sprintf("TRACE_QUERY_INFO_CLASS(%d)", int32(e))
+	}
+}
+
 type WMIDPREQUESTCODE int32
 
 const (
@@ -304,6 +880,37 @@ const (
 	WMI_EXECUTE_METHOD      WMIDPREQUESTCODE = 9
 	WMI_CAPTURE_STATE       WMIDPREQUESTCODE = 10
 )
+
+// String returns the WMIDPREQUESTCODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMIDPREQUESTCODE) String() string {
+	switch e {
+	case WMI_GET_ALL_DATA:
+		return "WMI_GET_ALL_DATA"
+	case WMI_GET_SINGLE_INSTANCE:
+		return "WMI_GET_SINGLE_INSTANCE"
+	case WMI_SET_SINGLE_INSTANCE:
+		return "WMI_SET_SINGLE_INSTANCE"
+	case WMI_SET_SINGLE_ITEM:
+		return "WMI_SET_SINGLE_ITEM"
+	case WMI_ENABLE_EVENTS:
+		return "WMI_ENABLE_EVENTS"
+	case WMI_DISABLE_EVENTS:
+		return "WMI_DISABLE_EVENTS"
+	case WMI_ENABLE_COLLECTION:
+		return "WMI_ENABLE_COLLECTION"
+	case WMI_DISABLE_COLLECTION:
+		return "WMI_DISABLE_COLLECTION"
+	case WMI_REGINFO:
+		return "WMI_REGINFO"
+	case WMI_EXECUTE_METHOD:
+		return "WMI_EXECUTE_METHOD"
+	case WMI_CAPTURE_STATE:
+		return "WMI_CAPTURE_STATE"
+	default:
+		return fmt.Sprintf("WMIDPREQUESTCODE(%d)", int32(e))
+	}
+}
 
 type TDH_IN_TYPE int32
 
@@ -346,6 +953,89 @@ const (
 	TDH_INTYPE_HEXDUMP                     TDH_IN_TYPE = 309
 	TDH_INTYPE_WBEMSID                     TDH_IN_TYPE = 310
 )
+
+// String returns the TDH_IN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TDH_IN_TYPE) String() string {
+	switch e {
+	case TDH_INTYPE_NULL:
+		return "TDH_INTYPE_NULL"
+	case TDH_INTYPE_UNICODESTRING:
+		return "TDH_INTYPE_UNICODESTRING"
+	case TDH_INTYPE_ANSISTRING:
+		return "TDH_INTYPE_ANSISTRING"
+	case TDH_INTYPE_INT8:
+		return "TDH_INTYPE_INT8"
+	case TDH_INTYPE_UINT8:
+		return "TDH_INTYPE_UINT8"
+	case TDH_INTYPE_INT16:
+		return "TDH_INTYPE_INT16"
+	case TDH_INTYPE_UINT16:
+		return "TDH_INTYPE_UINT16"
+	case TDH_INTYPE_INT32:
+		return "TDH_INTYPE_INT32"
+	case TDH_INTYPE_UINT32:
+		return "TDH_INTYPE_UINT32"
+	case TDH_INTYPE_INT64:
+		return "TDH_INTYPE_INT64"
+	case TDH_INTYPE_UINT64:
+		return "TDH_INTYPE_UINT64"
+	case TDH_INTYPE_FLOAT:
+		return "TDH_INTYPE_FLOAT"
+	case TDH_INTYPE_DOUBLE:
+		return "TDH_INTYPE_DOUBLE"
+	case TDH_INTYPE_BOOLEAN:
+		return "TDH_INTYPE_BOOLEAN"
+	case TDH_INTYPE_BINARY:
+		return "TDH_INTYPE_BINARY"
+	case TDH_INTYPE_GUID:
+		return "TDH_INTYPE_GUID"
+	case TDH_INTYPE_POINTER:
+		return "TDH_INTYPE_POINTER"
+	case TDH_INTYPE_FILETIME:
+		return "TDH_INTYPE_FILETIME"
+	case TDH_INTYPE_SYSTEMTIME:
+		return "TDH_INTYPE_SYSTEMTIME"
+	case TDH_INTYPE_SID:
+		return "TDH_INTYPE_SID"
+	case TDH_INTYPE_HEXINT32:
+		return "TDH_INTYPE_HEXINT32"
+	case TDH_INTYPE_HEXINT64:
+		return "TDH_INTYPE_HEXINT64"
+	case TDH_INTYPE_MANIFEST_COUNTEDSTRING:
+		return "TDH_INTYPE_MANIFEST_COUNTEDSTRING"
+	case TDH_INTYPE_MANIFEST_COUNTEDANSISTRING:
+		return "TDH_INTYPE_MANIFEST_COUNTEDANSISTRING"
+	case TDH_INTYPE_RESERVED24:
+		return "TDH_INTYPE_RESERVED24"
+	case TDH_INTYPE_MANIFEST_COUNTEDBINARY:
+		return "TDH_INTYPE_MANIFEST_COUNTEDBINARY"
+	case TDH_INTYPE_COUNTEDSTRING:
+		return "TDH_INTYPE_COUNTEDSTRING"
+	case TDH_INTYPE_COUNTEDANSISTRING:
+		return "TDH_INTYPE_COUNTEDANSISTRING"
+	case TDH_INTYPE_REVERSEDCOUNTEDSTRING:
+		return "TDH_INTYPE_REVERSEDCOUNTEDSTRING"
+	case TDH_INTYPE_REVERSEDCOUNTEDANSISTRING:
+		return "TDH_INTYPE_REVERSEDCOUNTEDANSISTRING"
+	case TDH_INTYPE_NONNULLTERMINATEDSTRING:
+		return "TDH_INTYPE_NONNULLTERMINATEDSTRING"
+	case TDH_INTYPE_NONNULLTERMINATEDANSISTRING:
+		return "TDH_INTYPE_NONNULLTERMINATEDANSISTRING"
+	case TDH_INTYPE_UNICODECHAR:
+		return "TDH_INTYPE_UNICODECHAR"
+	case TDH_INTYPE_ANSICHAR:
+		return "TDH_INTYPE_ANSICHAR"
+	case TDH_INTYPE_SIZET:
+		return "TDH_INTYPE_SIZET"
+	case TDH_INTYPE_HEXDUMP:
+		return "TDH_INTYPE_HEXDUMP"
+	case TDH_INTYPE_WBEMSID:
+		return "TDH_INTYPE_WBEMSID"
+	default:
+		return fmt.Sprintf("TDH_IN_TYPE(%d)", int32(e))
+	}
+}
 
 type TDH_OUT_TYPE int32
 
@@ -392,3 +1082,94 @@ const (
 	TDH_OUTTYPE_REDUCEDSTRING                TDH_OUT_TYPE = 300
 	TDH_OUTTYPE_NOPRINT                      TDH_OUT_TYPE = 301
 )
+
+// String returns the TDH_OUT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TDH_OUT_TYPE) String() string {
+	switch e {
+	case TDH_OUTTYPE_NULL:
+		return "TDH_OUTTYPE_NULL"
+	case TDH_OUTTYPE_STRING:
+		return "TDH_OUTTYPE_STRING"
+	case TDH_OUTTYPE_DATETIME:
+		return "TDH_OUTTYPE_DATETIME"
+	case TDH_OUTTYPE_BYTE:
+		return "TDH_OUTTYPE_BYTE"
+	case TDH_OUTTYPE_UNSIGNEDBYTE:
+		return "TDH_OUTTYPE_UNSIGNEDBYTE"
+	case TDH_OUTTYPE_SHORT:
+		return "TDH_OUTTYPE_SHORT"
+	case TDH_OUTTYPE_UNSIGNEDSHORT:
+		return "TDH_OUTTYPE_UNSIGNEDSHORT"
+	case TDH_OUTTYPE_INT:
+		return "TDH_OUTTYPE_INT"
+	case TDH_OUTTYPE_UNSIGNEDINT:
+		return "TDH_OUTTYPE_UNSIGNEDINT"
+	case TDH_OUTTYPE_LONG:
+		return "TDH_OUTTYPE_LONG"
+	case TDH_OUTTYPE_UNSIGNEDLONG:
+		return "TDH_OUTTYPE_UNSIGNEDLONG"
+	case TDH_OUTTYPE_FLOAT:
+		return "TDH_OUTTYPE_FLOAT"
+	case TDH_OUTTYPE_DOUBLE:
+		return "TDH_OUTTYPE_DOUBLE"
+	case TDH_OUTTYPE_BOOLEAN:
+		return "TDH_OUTTYPE_BOOLEAN"
+	case TDH_OUTTYPE_GUID:
+		return "TDH_OUTTYPE_GUID"
+	case TDH_OUTTYPE_HEXBINARY:
+		return "TDH_OUTTYPE_HEXBINARY"
+	case TDH_OUTTYPE_HEXINT8:
+		return "TDH_OUTTYPE_HEXINT8"
+	case TDH_OUTTYPE_HEXINT16:
+		return "TDH_OUTTYPE_HEXINT16"
+	case TDH_OUTTYPE_HEXINT32:
+		return "TDH_OUTTYPE_HEXINT32"
+	case TDH_OUTTYPE_HEXINT64:
+		return "TDH_OUTTYPE_HEXINT64"
+	case TDH_OUTTYPE_PID:
+		return "TDH_OUTTYPE_PID"
+	case TDH_OUTTYPE_TID:
+		return "TDH_OUTTYPE_TID"
+	case TDH_OUTTYPE_PORT:
+		return "TDH_OUTTYPE_PORT"
+	case TDH_OUTTYPE_IPV4:
+		return "TDH_OUTTYPE_IPV4"
+	case TDH_OUTTYPE_IPV6:
+		return "TDH_OUTTYPE_IPV6"
+	case TDH_OUTTYPE_SOCKETADDRESS:
+		return "TDH_OUTTYPE_SOCKETADDRESS"
+	case TDH_OUTTYPE_CIMDATETIME:
+		return "TDH_OUTTYPE_CIMDATETIME"
+	case TDH_OUTTYPE_ETWTIME:
+		return "TDH_OUTTYPE_ETWTIME"
+	case TDH_OUTTYPE_XML:
+		return "TDH_OUTTYPE_XML"
+	case TDH_OUTTYPE_ERRORCODE:
+		return "TDH_OUTTYPE_ERRORCODE"
+	case TDH_OUTTYPE_WIN32ERROR:
+		return "TDH_OUTTYPE_WIN32ERROR"
+	case TDH_OUTTYPE_NTSTATUS:
+		return "TDH_OUTTYPE_NTSTATUS"
+	case TDH_OUTTYPE_HRESULT:
+		return "TDH_OUTTYPE_HRESULT"
+	case TDH_OUTTYPE_CULTURE_INSENSITIVE_DATETIME:
+		return "TDH_OUTTYPE_CULTURE_INSENSITIVE_DATETIME"
+	case TDH_OUTTYPE_JSON:
+		return "TDH_OUTTYPE_JSON"
+	case TDH_OUTTYPE_UTF8:
+		return "TDH_OUTTYPE_UTF8"
+	case TDH_OUTTYPE_PKCS7_WITH_TYPE_INFO:
+		return "TDH_OUTTYPE_PKCS7_WITH_TYPE_INFO"
+	case TDH_OUTTYPE_CODE_POINTER:
+		return "TDH_OUTTYPE_CODE_POINTER"
+	case TDH_OUTTYPE_DATETIME_UTC:
+		return "TDH_OUTTYPE_DATETIME_UTC"
+	case TDH_OUTTYPE_REDUCEDSTRING:
+		return "TDH_OUTTYPE_REDUCEDSTRING"
+	case TDH_OUTTYPE_NOPRINT:
+		return "TDH_OUTTYPE_NOPRINT"
+	default:
+		return fmt.Sprintf("TDH_OUT_TYPE(%d)", int32(e))
+	}
+}

@@ -4,12 +4,30 @@
 
 package xboxcontroller
 
+import (
+	"fmt"
+	"strings"
+)
+
 type BATTERY_DEVTYPE uint8
 
 const (
 	BATTERY_DEVTYPE_GAMEPAD BATTERY_DEVTYPE = 0
 	BATTERY_DEVTYPE_HEADSET BATTERY_DEVTYPE = 1
 )
+
+// String returns the BATTERY_DEVTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BATTERY_DEVTYPE) String() string {
+	switch e {
+	case BATTERY_DEVTYPE_GAMEPAD:
+		return "BATTERY_DEVTYPE_GAMEPAD"
+	case BATTERY_DEVTYPE_HEADSET:
+		return "BATTERY_DEVTYPE_HEADSET"
+	default:
+		return fmt.Sprintf("BATTERY_DEVTYPE(%d)", uint8(e))
+	}
+}
 
 type BATTERY_LEVEL uint8
 
@@ -19,6 +37,23 @@ const (
 	BATTERY_LEVEL_MEDIUM BATTERY_LEVEL = 2
 	BATTERY_LEVEL_FULL   BATTERY_LEVEL = 3
 )
+
+// String returns the BATTERY_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BATTERY_LEVEL) String() string {
+	switch e {
+	case BATTERY_LEVEL_EMPTY:
+		return "BATTERY_LEVEL_EMPTY"
+	case BATTERY_LEVEL_LOW:
+		return "BATTERY_LEVEL_LOW"
+	case BATTERY_LEVEL_MEDIUM:
+		return "BATTERY_LEVEL_MEDIUM"
+	case BATTERY_LEVEL_FULL:
+		return "BATTERY_LEVEL_FULL"
+	default:
+		return fmt.Sprintf("BATTERY_LEVEL(%d)", uint8(e))
+	}
+}
 
 type BATTERY_TYPE uint8
 
@@ -30,6 +65,26 @@ const (
 	BATTERY_TYPE_UNKNOWN      BATTERY_TYPE = 255
 )
 
+// String returns the BATTERY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BATTERY_TYPE) String() string {
+	switch e {
+	case BATTERY_TYPE_DISCONNECTED:
+		return "BATTERY_TYPE_DISCONNECTED"
+	case BATTERY_TYPE_WIRED:
+		return "BATTERY_TYPE_WIRED"
+	case BATTERY_TYPE_ALKALINE:
+		return "BATTERY_TYPE_ALKALINE"
+	case BATTERY_TYPE_NIMH:
+		return "BATTERY_TYPE_NIMH"
+	case BATTERY_TYPE_UNKNOWN:
+		return "BATTERY_TYPE_UNKNOWN"
+	default:
+		return fmt.Sprintf("BATTERY_TYPE(%d)", uint8(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type XINPUT_CAPABILITIES_FLAGS uint16
 
 const (
@@ -39,6 +94,31 @@ const (
 	XINPUT_CAPS_PMD_SUPPORTED   XINPUT_CAPABILITIES_FLAGS = 8
 	XINPUT_CAPS_NO_NAVIGATION   XINPUT_CAPABILITIES_FLAGS = 16
 )
+
+// String returns the XINPUT_CAPABILITIES_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XINPUT_CAPABILITIES_FLAGS) String() string {
+	var parts []string
+	if e&XINPUT_CAPS_VOICE_SUPPORTED != 0 {
+		parts = append(parts, "XINPUT_CAPS_VOICE_SUPPORTED")
+	}
+	if e&XINPUT_CAPS_FFB_SUPPORTED != 0 {
+		parts = append(parts, "XINPUT_CAPS_FFB_SUPPORTED")
+	}
+	if e&XINPUT_CAPS_WIRELESS != 0 {
+		parts = append(parts, "XINPUT_CAPS_WIRELESS")
+	}
+	if e&XINPUT_CAPS_PMD_SUPPORTED != 0 {
+		parts = append(parts, "XINPUT_CAPS_PMD_SUPPORTED")
+	}
+	if e&XINPUT_CAPS_NO_NAVIGATION != 0 {
+		parts = append(parts, "XINPUT_CAPS_NO_NAVIGATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type XINPUT_DEVSUBTYPE uint8
 
@@ -56,12 +136,55 @@ const (
 	XINPUT_DEVSUBTYPE_ARCADE_PAD       XINPUT_DEVSUBTYPE = 19
 )
 
+// String returns the XINPUT_DEVSUBTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XINPUT_DEVSUBTYPE) String() string {
+	switch e {
+	case XINPUT_DEVSUBTYPE_GAMEPAD:
+		return "XINPUT_DEVSUBTYPE_GAMEPAD"
+	case XINPUT_DEVSUBTYPE_UNKNOWN:
+		return "XINPUT_DEVSUBTYPE_UNKNOWN"
+	case XINPUT_DEVSUBTYPE_WHEEL:
+		return "XINPUT_DEVSUBTYPE_WHEEL"
+	case XINPUT_DEVSUBTYPE_ARCADE_STICK:
+		return "XINPUT_DEVSUBTYPE_ARCADE_STICK"
+	case XINPUT_DEVSUBTYPE_FLIGHT_STICK:
+		return "XINPUT_DEVSUBTYPE_FLIGHT_STICK"
+	case XINPUT_DEVSUBTYPE_DANCE_PAD:
+		return "XINPUT_DEVSUBTYPE_DANCE_PAD"
+	case XINPUT_DEVSUBTYPE_GUITAR:
+		return "XINPUT_DEVSUBTYPE_GUITAR"
+	case XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE:
+		return "XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE"
+	case XINPUT_DEVSUBTYPE_DRUM_KIT:
+		return "XINPUT_DEVSUBTYPE_DRUM_KIT"
+	case XINPUT_DEVSUBTYPE_GUITAR_BASS:
+		return "XINPUT_DEVSUBTYPE_GUITAR_BASS"
+	case XINPUT_DEVSUBTYPE_ARCADE_PAD:
+		return "XINPUT_DEVSUBTYPE_ARCADE_PAD"
+	default:
+		return fmt.Sprintf("XINPUT_DEVSUBTYPE(%d)", uint8(e))
+	}
+}
+
 type XINPUT_DEVTYPE uint8
 
 const (
 	XINPUT_DEVTYPE_GAMEPAD XINPUT_DEVTYPE = 1
 )
 
+// String returns the XINPUT_DEVTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XINPUT_DEVTYPE) String() string {
+	switch e {
+	case XINPUT_DEVTYPE_GAMEPAD:
+		return "XINPUT_DEVTYPE_GAMEPAD"
+	default:
+		return fmt.Sprintf("XINPUT_DEVTYPE(%d)", uint8(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type XINPUT_FLAG uint32
 
 const (
@@ -69,6 +192,20 @@ const (
 	XINPUT_FLAG_GAMEPAD XINPUT_FLAG = 1
 )
 
+// String returns the XINPUT_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XINPUT_FLAG) String() string {
+	var parts []string
+	if e&XINPUT_FLAG_GAMEPAD != 0 {
+		parts = append(parts, "XINPUT_FLAG_GAMEPAD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type XINPUT_GAMEPAD_BUTTON_FLAGS uint16
 
 const (
@@ -91,6 +228,68 @@ const (
 	XINPUT_GAMEPAD_TRIGGER_THRESHOLD    XINPUT_GAMEPAD_BUTTON_FLAGS = 30
 )
 
+// String returns the XINPUT_GAMEPAD_BUTTON_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XINPUT_GAMEPAD_BUTTON_FLAGS) String() string {
+	var parts []string
+	if e&XINPUT_GAMEPAD_DPAD_UP != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_DPAD_UP")
+	}
+	if e&XINPUT_GAMEPAD_DPAD_DOWN != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_DPAD_DOWN")
+	}
+	if e&XINPUT_GAMEPAD_DPAD_LEFT != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_DPAD_LEFT")
+	}
+	if e&XINPUT_GAMEPAD_DPAD_RIGHT != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_DPAD_RIGHT")
+	}
+	if e&XINPUT_GAMEPAD_START != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_START")
+	}
+	if e&XINPUT_GAMEPAD_BACK != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_BACK")
+	}
+	if e&XINPUT_GAMEPAD_LEFT_THUMB != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_LEFT_THUMB")
+	}
+	if e&XINPUT_GAMEPAD_RIGHT_THUMB != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_RIGHT_THUMB")
+	}
+	if e&XINPUT_GAMEPAD_LEFT_SHOULDER != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_LEFT_SHOULDER")
+	}
+	if e&XINPUT_GAMEPAD_RIGHT_SHOULDER != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_RIGHT_SHOULDER")
+	}
+	if e&XINPUT_GAMEPAD_A != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_A")
+	}
+	if e&XINPUT_GAMEPAD_B != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_B")
+	}
+	if e&XINPUT_GAMEPAD_X != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_X")
+	}
+	if e&XINPUT_GAMEPAD_Y != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_Y")
+	}
+	if e&XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE")
+	}
+	if e&XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE")
+	}
+	if e&XINPUT_GAMEPAD_TRIGGER_THRESHOLD != 0 {
+		parts = append(parts, "XINPUT_GAMEPAD_TRIGGER_THRESHOLD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type XINPUT_KEYSTROKE_FLAGS uint16
 
 const (
@@ -98,6 +297,25 @@ const (
 	XINPUT_KEYSTROKE_KEYUP   XINPUT_KEYSTROKE_FLAGS = 2
 	XINPUT_KEYSTROKE_REPEAT  XINPUT_KEYSTROKE_FLAGS = 4
 )
+
+// String returns the XINPUT_KEYSTROKE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XINPUT_KEYSTROKE_FLAGS) String() string {
+	var parts []string
+	if e&XINPUT_KEYSTROKE_KEYDOWN != 0 {
+		parts = append(parts, "XINPUT_KEYSTROKE_KEYDOWN")
+	}
+	if e&XINPUT_KEYSTROKE_KEYUP != 0 {
+		parts = append(parts, "XINPUT_KEYSTROKE_KEYUP")
+	}
+	if e&XINPUT_KEYSTROKE_REPEAT != 0 {
+		parts = append(parts, "XINPUT_KEYSTROKE_REPEAT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type XINPUT_VIRTUAL_KEY uint16
 
@@ -135,3 +353,76 @@ const (
 	VK_PAD_RTHUMB_DOWNRIGHT XINPUT_VIRTUAL_KEY = 22582
 	VK_PAD_RTHUMB_DOWNLEFT  XINPUT_VIRTUAL_KEY = 22583
 )
+
+// String returns the XINPUT_VIRTUAL_KEY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XINPUT_VIRTUAL_KEY) String() string {
+	switch e {
+	case VK_PAD_A:
+		return "VK_PAD_A"
+	case VK_PAD_B:
+		return "VK_PAD_B"
+	case VK_PAD_X:
+		return "VK_PAD_X"
+	case VK_PAD_Y:
+		return "VK_PAD_Y"
+	case VK_PAD_RSHOULDER:
+		return "VK_PAD_RSHOULDER"
+	case VK_PAD_LSHOULDER:
+		return "VK_PAD_LSHOULDER"
+	case VK_PAD_LTRIGGER:
+		return "VK_PAD_LTRIGGER"
+	case VK_PAD_RTRIGGER:
+		return "VK_PAD_RTRIGGER"
+	case VK_PAD_DPAD_UP:
+		return "VK_PAD_DPAD_UP"
+	case VK_PAD_DPAD_DOWN:
+		return "VK_PAD_DPAD_DOWN"
+	case VK_PAD_DPAD_LEFT:
+		return "VK_PAD_DPAD_LEFT"
+	case VK_PAD_DPAD_RIGHT:
+		return "VK_PAD_DPAD_RIGHT"
+	case VK_PAD_START:
+		return "VK_PAD_START"
+	case VK_PAD_BACK:
+		return "VK_PAD_BACK"
+	case VK_PAD_LTHUMB_PRESS:
+		return "VK_PAD_LTHUMB_PRESS"
+	case VK_PAD_RTHUMB_PRESS:
+		return "VK_PAD_RTHUMB_PRESS"
+	case VK_PAD_LTHUMB_UP:
+		return "VK_PAD_LTHUMB_UP"
+	case VK_PAD_LTHUMB_DOWN:
+		return "VK_PAD_LTHUMB_DOWN"
+	case VK_PAD_LTHUMB_RIGHT:
+		return "VK_PAD_LTHUMB_RIGHT"
+	case VK_PAD_LTHUMB_LEFT:
+		return "VK_PAD_LTHUMB_LEFT"
+	case VK_PAD_LTHUMB_UPLEFT:
+		return "VK_PAD_LTHUMB_UPLEFT"
+	case VK_PAD_LTHUMB_UPRIGHT:
+		return "VK_PAD_LTHUMB_UPRIGHT"
+	case VK_PAD_LTHUMB_DOWNRIGHT:
+		return "VK_PAD_LTHUMB_DOWNRIGHT"
+	case VK_PAD_LTHUMB_DOWNLEFT:
+		return "VK_PAD_LTHUMB_DOWNLEFT"
+	case VK_PAD_RTHUMB_UP:
+		return "VK_PAD_RTHUMB_UP"
+	case VK_PAD_RTHUMB_DOWN:
+		return "VK_PAD_RTHUMB_DOWN"
+	case VK_PAD_RTHUMB_RIGHT:
+		return "VK_PAD_RTHUMB_RIGHT"
+	case VK_PAD_RTHUMB_LEFT:
+		return "VK_PAD_RTHUMB_LEFT"
+	case VK_PAD_RTHUMB_UPLEFT:
+		return "VK_PAD_RTHUMB_UPLEFT"
+	case VK_PAD_RTHUMB_UPRIGHT:
+		return "VK_PAD_RTHUMB_UPRIGHT"
+	case VK_PAD_RTHUMB_DOWNRIGHT:
+		return "VK_PAD_RTHUMB_DOWNRIGHT"
+	case VK_PAD_RTHUMB_DOWNLEFT:
+		return "VK_PAD_RTHUMB_DOWNLEFT"
+	default:
+		return fmt.Sprintf("XINPUT_VIRTUAL_KEY(%d)", uint16(e))
+	}
+}

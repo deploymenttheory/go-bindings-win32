@@ -4,6 +4,11 @@
 
 package wifi
 
+import (
+	"fmt"
+	"strings"
+)
+
 type CH_DESCRIPTION_TYPE int32
 
 const (
@@ -11,6 +16,21 @@ const (
 	Ch_description_type_center_frequency CH_DESCRIPTION_TYPE = 2
 	Ch_description_type_phy_specific     CH_DESCRIPTION_TYPE = 3
 )
+
+// String returns the CH_DESCRIPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CH_DESCRIPTION_TYPE) String() string {
+	switch e {
+	case Ch_description_type_logical:
+		return "Ch_description_type_logical"
+	case Ch_description_type_center_frequency:
+		return "Ch_description_type_center_frequency"
+	case Ch_description_type_phy_specific:
+		return "Ch_description_type_phy_specific"
+	default:
+		return fmt.Sprintf("CH_DESCRIPTION_TYPE(%d)", int32(e))
+	}
+}
 
 type DEVPROP_PCIDEVICE_ACSCOMPATIBLEUPHIERARCHY uint32
 
@@ -22,6 +42,25 @@ const (
 	DevProp_PciDevice_AcsCompatibleUpHierarchy_Enhanced                DEVPROP_PCIDEVICE_ACSCOMPATIBLEUPHIERARCHY = 4
 )
 
+// String returns the DEVPROP_PCIDEVICE_ACSCOMPATIBLEUPHIERARCHY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIDEVICE_ACSCOMPATIBLEUPHIERARCHY) String() string {
+	switch e {
+	case DevProp_PciDevice_AcsCompatibleUpHierarchy_NotSupported:
+		return "DevProp_PciDevice_AcsCompatibleUpHierarchy_NotSupported"
+	case DevProp_PciDevice_AcsCompatibleUpHierarchy_SingleFunctionSupported:
+		return "DevProp_PciDevice_AcsCompatibleUpHierarchy_SingleFunctionSupported"
+	case DevProp_PciDevice_AcsCompatibleUpHierarchy_NoP2PSupported:
+		return "DevProp_PciDevice_AcsCompatibleUpHierarchy_NoP2PSupported"
+	case DevProp_PciDevice_AcsCompatibleUpHierarchy_Supported:
+		return "DevProp_PciDevice_AcsCompatibleUpHierarchy_Supported"
+	case DevProp_PciDevice_AcsCompatibleUpHierarchy_Enhanced:
+		return "DevProp_PciDevice_AcsCompatibleUpHierarchy_Enhanced"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIDEVICE_ACSCOMPATIBLEUPHIERARCHY(%d)", uint32(e))
+	}
+}
+
 type DEVPROP_PCIDEVICE_ACSSUPPORT uint32
 
 const (
@@ -29,6 +68,21 @@ const (
 	DevProp_PciDevice_AcsSupport_NotNeeded DEVPROP_PCIDEVICE_ACSSUPPORT = 1
 	DevProp_PciDevice_AcsSupport_Missing   DEVPROP_PCIDEVICE_ACSSUPPORT = 2
 )
+
+// String returns the DEVPROP_PCIDEVICE_ACSSUPPORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIDEVICE_ACSSUPPORT) String() string {
+	switch e {
+	case DevProp_PciDevice_AcsSupport_Present:
+		return "DevProp_PciDevice_AcsSupport_Present"
+	case DevProp_PciDevice_AcsSupport_NotNeeded:
+		return "DevProp_PciDevice_AcsSupport_NotNeeded"
+	case DevProp_PciDevice_AcsSupport_Missing:
+		return "DevProp_PciDevice_AcsSupport_Missing"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIDEVICE_ACSSUPPORT(%d)", uint32(e))
+	}
+}
 
 type DEVPROP_PCIDEVICE_CURRENTSPEEDANDMODE uint32
 
@@ -50,6 +104,41 @@ const (
 	DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_133MHz      DEVPROP_PCIDEVICE_CURRENTSPEEDANDMODE = 15
 )
 
+// String returns the DEVPROP_PCIDEVICE_CURRENTSPEEDANDMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIDEVICE_CURRENTSPEEDANDMODE) String() string {
+	switch e {
+	case DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_33MHz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_33MHz"
+	case DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_66MHz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_Pci_Conventional_66MHz"
+	case DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_100Mhz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_100Mhz"
+	case DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_133MHZ:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_133MHZ"
+	case DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_66Mhz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_66Mhz"
+	case DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_100Mhz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_100Mhz"
+	case DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_133Mhz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode1_ECC_133Mhz"
+	case DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_66MHz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_66MHz"
+	case DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_100MHz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_100MHz"
+	case DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_133MHz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_266_133MHz"
+	case DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_66MHz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_66MHz"
+	case DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_100MHz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_100MHz"
+	case DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_133MHz:
+		return "DevProp_PciDevice_CurrentSpeedAndMode_PciX_Mode2_533_133MHz"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIDEVICE_CURRENTSPEEDANDMODE(%d)", uint32(e))
+	}
+}
+
 type DEVPROP_PCIDEVICE_DEVICEBRIDGETYPE uint32
 
 const (
@@ -70,6 +159,45 @@ const (
 	DevProp_PciDevice_BridgeType_PciExpressEventCollector                DEVPROP_PCIDEVICE_DEVICEBRIDGETYPE = 14
 )
 
+// String returns the DEVPROP_PCIDEVICE_DEVICEBRIDGETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIDEVICE_DEVICEBRIDGETYPE) String() string {
+	switch e {
+	case DevProp_PciDevice_DeviceType_PciConventional:
+		return "DevProp_PciDevice_DeviceType_PciConventional"
+	case DevProp_PciDevice_DeviceType_PciX:
+		return "DevProp_PciDevice_DeviceType_PciX"
+	case DevProp_PciDevice_DeviceType_PciExpressEndpoint:
+		return "DevProp_PciDevice_DeviceType_PciExpressEndpoint"
+	case DevProp_PciDevice_DeviceType_PciExpressLegacyEndpoint:
+		return "DevProp_PciDevice_DeviceType_PciExpressLegacyEndpoint"
+	case DevProp_PciDevice_DeviceType_PciExpressRootComplexIntegratedEndpoint:
+		return "DevProp_PciDevice_DeviceType_PciExpressRootComplexIntegratedEndpoint"
+	case DevProp_PciDevice_DeviceType_PciExpressTreatedAsPci:
+		return "DevProp_PciDevice_DeviceType_PciExpressTreatedAsPci"
+	case DevProp_PciDevice_BridgeType_PciConventional:
+		return "DevProp_PciDevice_BridgeType_PciConventional"
+	case DevProp_PciDevice_BridgeType_PciX:
+		return "DevProp_PciDevice_BridgeType_PciX"
+	case DevProp_PciDevice_BridgeType_PciExpressRootPort:
+		return "DevProp_PciDevice_BridgeType_PciExpressRootPort"
+	case DevProp_PciDevice_BridgeType_PciExpressUpstreamSwitchPort:
+		return "DevProp_PciDevice_BridgeType_PciExpressUpstreamSwitchPort"
+	case DevProp_PciDevice_BridgeType_PciExpressDownstreamSwitchPort:
+		return "DevProp_PciDevice_BridgeType_PciExpressDownstreamSwitchPort"
+	case DevProp_PciDevice_BridgeType_PciExpressToPciXBridge:
+		return "DevProp_PciDevice_BridgeType_PciExpressToPciXBridge"
+	case DevProp_PciDevice_BridgeType_PciXToExpressBridge:
+		return "DevProp_PciDevice_BridgeType_PciXToExpressBridge"
+	case DevProp_PciDevice_BridgeType_PciExpressTreatedAsPci:
+		return "DevProp_PciDevice_BridgeType_PciExpressTreatedAsPci"
+	case DevProp_PciDevice_BridgeType_PciExpressEventCollector:
+		return "DevProp_PciDevice_BridgeType_PciExpressEventCollector"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIDEVICE_DEVICEBRIDGETYPE(%d)", uint32(e))
+	}
+}
+
 type DEVPROP_PCIDEVICE_INTERRUPTTYPE uint32
 
 const (
@@ -77,6 +205,21 @@ const (
 	DevProp_PciDevice_InterruptType_Msi       DEVPROP_PCIDEVICE_INTERRUPTTYPE = 2
 	DevProp_PciDevice_InterruptType_MsiX      DEVPROP_PCIDEVICE_INTERRUPTTYPE = 4
 )
+
+// String returns the DEVPROP_PCIDEVICE_INTERRUPTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIDEVICE_INTERRUPTTYPE) String() string {
+	switch e {
+	case DevProp_PciDevice_InterruptType_LineBased:
+		return "DevProp_PciDevice_InterruptType_LineBased"
+	case DevProp_PciDevice_InterruptType_Msi:
+		return "DevProp_PciDevice_InterruptType_Msi"
+	case DevProp_PciDevice_InterruptType_MsiX:
+		return "DevProp_PciDevice_InterruptType_MsiX"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIDEVICE_INTERRUPTTYPE(%d)", uint32(e))
+	}
+}
 
 type DEVPROP_PCIDEVICE_SRIOVSUPPORT uint32
 
@@ -88,12 +231,44 @@ const (
 	DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace DEVPROP_PCIDEVICE_SRIOVSUPPORT = 4
 )
 
+// String returns the DEVPROP_PCIDEVICE_SRIOVSUPPORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIDEVICE_SRIOVSUPPORT) String() string {
+	switch e {
+	case DevProp_PciDevice_SriovSupport_Ok:
+		return "DevProp_PciDevice_SriovSupport_Ok"
+	case DevProp_PciDevice_SriovSupport_MissingAcs:
+		return "DevProp_PciDevice_SriovSupport_MissingAcs"
+	case DevProp_PciDevice_SriovSupport_MissingPfDriver:
+		return "DevProp_PciDevice_SriovSupport_MissingPfDriver"
+	case DevProp_PciDevice_SriovSupport_NoBusResource:
+		return "DevProp_PciDevice_SriovSupport_NoBusResource"
+	case DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace:
+		return "DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIDEVICE_SRIOVSUPPORT(%d)", uint32(e))
+	}
+}
+
 type DEVPROP_PCIEXPRESSDEVICE_LINKSPEED uint32
 
 const (
 	DevProp_PciExpressDevice_LinkSpeed_TwoAndHalf_Gbps DEVPROP_PCIEXPRESSDEVICE_LINKSPEED = 1
 	DevProp_PciExpressDevice_LinkSpeed_Five_Gbps       DEVPROP_PCIEXPRESSDEVICE_LINKSPEED = 2
 )
+
+// String returns the DEVPROP_PCIEXPRESSDEVICE_LINKSPEED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIEXPRESSDEVICE_LINKSPEED) String() string {
+	switch e {
+	case DevProp_PciExpressDevice_LinkSpeed_TwoAndHalf_Gbps:
+		return "DevProp_PciExpressDevice_LinkSpeed_TwoAndHalf_Gbps"
+	case DevProp_PciExpressDevice_LinkSpeed_Five_Gbps:
+		return "DevProp_PciExpressDevice_LinkSpeed_Five_Gbps"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIEXPRESSDEVICE_LINKSPEED(%d)", uint32(e))
+	}
+}
 
 type DEVPROP_PCIEXPRESSDEVICE_LINKWIDTH uint32
 
@@ -107,6 +282,29 @@ const (
 	DevProp_PciExpressDevice_LinkWidth_By_32 DEVPROP_PCIEXPRESSDEVICE_LINKWIDTH = 32
 )
 
+// String returns the DEVPROP_PCIEXPRESSDEVICE_LINKWIDTH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIEXPRESSDEVICE_LINKWIDTH) String() string {
+	switch e {
+	case DevProp_PciExpressDevice_LinkWidth_By_1:
+		return "DevProp_PciExpressDevice_LinkWidth_By_1"
+	case DevProp_PciExpressDevice_LinkWidth_By_2:
+		return "DevProp_PciExpressDevice_LinkWidth_By_2"
+	case DevProp_PciExpressDevice_LinkWidth_By_4:
+		return "DevProp_PciExpressDevice_LinkWidth_By_4"
+	case DevProp_PciExpressDevice_LinkWidth_By_8:
+		return "DevProp_PciExpressDevice_LinkWidth_By_8"
+	case DevProp_PciExpressDevice_LinkWidth_By_12:
+		return "DevProp_PciExpressDevice_LinkWidth_By_12"
+	case DevProp_PciExpressDevice_LinkWidth_By_16:
+		return "DevProp_PciExpressDevice_LinkWidth_By_16"
+	case DevProp_PciExpressDevice_LinkWidth_By_32:
+		return "DevProp_PciExpressDevice_LinkWidth_By_32"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIEXPRESSDEVICE_LINKWIDTH(%d)", uint32(e))
+	}
+}
+
 type DEVPROP_PCIEXPRESSDEVICE_PAYLOADORREQUESTSIZE uint32
 
 const (
@@ -118,6 +316,27 @@ const (
 	DevProp_PciExpressDevice_PayloadOrRequestSize_4096Bytes DEVPROP_PCIEXPRESSDEVICE_PAYLOADORREQUESTSIZE = 5
 )
 
+// String returns the DEVPROP_PCIEXPRESSDEVICE_PAYLOADORREQUESTSIZE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIEXPRESSDEVICE_PAYLOADORREQUESTSIZE) String() string {
+	switch e {
+	case DevProp_PciExpressDevice_PayloadOrRequestSize_128Bytes:
+		return "DevProp_PciExpressDevice_PayloadOrRequestSize_128Bytes"
+	case DevProp_PciExpressDevice_PayloadOrRequestSize_256Bytes:
+		return "DevProp_PciExpressDevice_PayloadOrRequestSize_256Bytes"
+	case DevProp_PciExpressDevice_PayloadOrRequestSize_512Bytes:
+		return "DevProp_PciExpressDevice_PayloadOrRequestSize_512Bytes"
+	case DevProp_PciExpressDevice_PayloadOrRequestSize_1024Bytes:
+		return "DevProp_PciExpressDevice_PayloadOrRequestSize_1024Bytes"
+	case DevProp_PciExpressDevice_PayloadOrRequestSize_2048Bytes:
+		return "DevProp_PciExpressDevice_PayloadOrRequestSize_2048Bytes"
+	case DevProp_PciExpressDevice_PayloadOrRequestSize_4096Bytes:
+		return "DevProp_PciExpressDevice_PayloadOrRequestSize_4096Bytes"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIEXPRESSDEVICE_PAYLOADORREQUESTSIZE(%d)", uint32(e))
+	}
+}
+
 type DEVPROP_PCIEXPRESSDEVICE_SPEC_VERSION uint32
 
 const (
@@ -125,12 +344,38 @@ const (
 	DevProp_PciExpressDevice_Spec_Version_11 DEVPROP_PCIEXPRESSDEVICE_SPEC_VERSION = 2
 )
 
+// String returns the DEVPROP_PCIEXPRESSDEVICE_SPEC_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIEXPRESSDEVICE_SPEC_VERSION) String() string {
+	switch e {
+	case DevProp_PciExpressDevice_Spec_Version_10:
+		return "DevProp_PciExpressDevice_Spec_Version_10"
+	case DevProp_PciExpressDevice_Spec_Version_11:
+		return "DevProp_PciExpressDevice_Spec_Version_11"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIEXPRESSDEVICE_SPEC_VERSION(%d)", uint32(e))
+	}
+}
+
 type DEVPROP_PCIROOTBUS_BUSWIDTH uint32
 
 const (
 	DevProp_PciRootBus_BusWidth_32Bits DEVPROP_PCIROOTBUS_BUSWIDTH = 0
 	DevProp_PciRootBus_BusWidth_64Bits DEVPROP_PCIROOTBUS_BUSWIDTH = 1
 )
+
+// String returns the DEVPROP_PCIROOTBUS_BUSWIDTH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIROOTBUS_BUSWIDTH) String() string {
+	switch e {
+	case DevProp_PciRootBus_BusWidth_32Bits:
+		return "DevProp_PciRootBus_BusWidth_32Bits"
+	case DevProp_PciRootBus_BusWidth_64Bits:
+		return "DevProp_PciRootBus_BusWidth_64Bits"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIROOTBUS_BUSWIDTH(%d)", uint32(e))
+	}
+}
 
 type DEVPROP_PCIROOTBUS_CURRENTSPEEDANDMODE uint32
 
@@ -151,6 +396,43 @@ const (
 	DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_133Mhz DEVPROP_PCIROOTBUS_CURRENTSPEEDANDMODE = 13
 )
 
+// String returns the DEVPROP_PCIROOTBUS_CURRENTSPEEDANDMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIROOTBUS_CURRENTSPEEDANDMODE) String() string {
+	switch e {
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_33Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_33Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_66Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_Conventional_66Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_66Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_66Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_100Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_100Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_133Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_133Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_66Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_66Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_100Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_100Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_133Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_Mode1_ECC_133Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_66Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_66Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_100Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_100Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_133Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_266_Mode2_133Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_66Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_66Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_100Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_100Mhz"
+	case DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_133Mhz:
+		return "DevProp_PciRootBus_CurrentSpeedAndMode_Pci_X_533_Mode2_133Mhz"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIROOTBUS_CURRENTSPEEDANDMODE(%d)", uint32(e))
+	}
+}
+
 type DEVPROP_PCIROOTBUS_SECONDARYINTERFACE uint32
 
 const (
@@ -159,6 +441,23 @@ const (
 	DevProp_PciRootBus_SecondaryInterface_PciXMode2       DEVPROP_PCIROOTBUS_SECONDARYINTERFACE = 2
 	DevProp_PciRootBus_SecondaryInterface_PciExpress      DEVPROP_PCIROOTBUS_SECONDARYINTERFACE = 3
 )
+
+// String returns the DEVPROP_PCIROOTBUS_SECONDARYINTERFACE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIROOTBUS_SECONDARYINTERFACE) String() string {
+	switch e {
+	case DevProp_PciRootBus_SecondaryInterface_PciConventional:
+		return "DevProp_PciRootBus_SecondaryInterface_PciConventional"
+	case DevProp_PciRootBus_SecondaryInterface_PciXMode1:
+		return "DevProp_PciRootBus_SecondaryInterface_PciXMode1"
+	case DevProp_PciRootBus_SecondaryInterface_PciXMode2:
+		return "DevProp_PciRootBus_SecondaryInterface_PciXMode2"
+	case DevProp_PciRootBus_SecondaryInterface_PciExpress:
+		return "DevProp_PciRootBus_SecondaryInterface_PciExpress"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIROOTBUS_SECONDARYINTERFACE(%d)", uint32(e))
+	}
+}
 
 type DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES uint32
 
@@ -171,6 +470,27 @@ const (
 	DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_533Mhz           DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES = 32
 )
 
+// String returns the DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES) String() string {
+	switch e {
+	case DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_33Mhz:
+		return "DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_33Mhz"
+	case DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_66Mhz:
+		return "DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_Conventional_66Mhz"
+	case DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_66Mhz:
+		return "DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_66Mhz"
+	case DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_133Mhz:
+		return "DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_133Mhz"
+	case DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_266Mhz:
+		return "DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_266Mhz"
+	case DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_533Mhz:
+		return "DevProp_PciRootBus_SupportedSpeedsAndModes_Pci_X_533Mhz"
+	default:
+		return fmt.Sprintf("DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES(%d)", uint32(e))
+	}
+}
+
 type DOT11EXT_IHV_CONNECTION_PHASE int32
 
 const (
@@ -178,6 +498,21 @@ const (
 	Connection_phase_initial_connection DOT11EXT_IHV_CONNECTION_PHASE = 1
 	Connection_phase_post_l3_connection DOT11EXT_IHV_CONNECTION_PHASE = 2
 )
+
+// String returns the DOT11EXT_IHV_CONNECTION_PHASE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11EXT_IHV_CONNECTION_PHASE) String() string {
+	switch e {
+	case Connection_phase_any:
+		return "Connection_phase_any"
+	case Connection_phase_initial_connection:
+		return "Connection_phase_initial_connection"
+	case Connection_phase_post_l3_connection:
+		return "Connection_phase_post_l3_connection"
+	default:
+		return fmt.Sprintf("DOT11EXT_IHV_CONNECTION_PHASE(%d)", int32(e))
+	}
+}
 
 type DOT11EXT_IHV_INDICATION_TYPE int32
 
@@ -189,6 +524,25 @@ const (
 	IndicationTypeLinkQuality             DOT11EXT_IHV_INDICATION_TYPE = 4
 )
 
+// String returns the DOT11EXT_IHV_INDICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11EXT_IHV_INDICATION_TYPE) String() string {
+	switch e {
+	case IndicationTypeNicSpecificNotification:
+		return "IndicationTypeNicSpecificNotification"
+	case IndicationTypePmkidCandidateList:
+		return "IndicationTypePmkidCandidateList"
+	case IndicationTypeTkipMicFailure:
+		return "IndicationTypeTkipMicFailure"
+	case IndicationTypePhyStateChange:
+		return "IndicationTypePhyStateChange"
+	case IndicationTypeLinkQuality:
+		return "IndicationTypeLinkQuality"
+	default:
+		return fmt.Sprintf("DOT11EXT_IHV_INDICATION_TYPE(%d)", int32(e))
+	}
+}
+
 type DOT11_AC_PARAM int32
 
 const (
@@ -199,6 +553,25 @@ const (
 	Dot11_AC_param_max DOT11_AC_PARAM = 4
 )
 
+// String returns the DOT11_AC_PARAM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_AC_PARAM) String() string {
+	switch e {
+	case Dot11_AC_param_BE:
+		return "Dot11_AC_param_BE"
+	case Dot11_AC_param_BK:
+		return "Dot11_AC_param_BK"
+	case Dot11_AC_param_VI:
+		return "Dot11_AC_param_VI"
+	case Dot11_AC_param_VO:
+		return "Dot11_AC_param_VO"
+	case Dot11_AC_param_max:
+		return "Dot11_AC_param_max"
+	default:
+		return fmt.Sprintf("DOT11_AC_PARAM(%d)", int32(e))
+	}
+}
+
 // DOT11_ADHOC_AUTH_ALGORITHM: https://learn.microsoft.com/windows/win32/api/adhoc/ne-adhoc-dot11_adhoc_auth_algorithm
 type DOT11_ADHOC_AUTH_ALGORITHM int32
 
@@ -207,6 +580,21 @@ const (
 	DOT11_ADHOC_AUTH_ALGO_80211_OPEN DOT11_ADHOC_AUTH_ALGORITHM = 1
 	DOT11_ADHOC_AUTH_ALGO_RSNA_PSK   DOT11_ADHOC_AUTH_ALGORITHM = 7
 )
+
+// String returns the DOT11_ADHOC_AUTH_ALGORITHM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_ADHOC_AUTH_ALGORITHM) String() string {
+	switch e {
+	case DOT11_ADHOC_AUTH_ALGO_INVALID:
+		return "DOT11_ADHOC_AUTH_ALGO_INVALID"
+	case DOT11_ADHOC_AUTH_ALGO_80211_OPEN:
+		return "DOT11_ADHOC_AUTH_ALGO_80211_OPEN"
+	case DOT11_ADHOC_AUTH_ALGO_RSNA_PSK:
+		return "DOT11_ADHOC_AUTH_ALGO_RSNA_PSK"
+	default:
+		return fmt.Sprintf("DOT11_ADHOC_AUTH_ALGORITHM(%d)", int32(e))
+	}
+}
 
 // DOT11_ADHOC_CIPHER_ALGORITHM: https://learn.microsoft.com/windows/win32/api/adhoc/ne-adhoc-dot11_adhoc_cipher_algorithm
 type DOT11_ADHOC_CIPHER_ALGORITHM int32
@@ -218,6 +606,23 @@ const (
 	DOT11_ADHOC_CIPHER_ALGO_WEP     DOT11_ADHOC_CIPHER_ALGORITHM = 257
 )
 
+// String returns the DOT11_ADHOC_CIPHER_ALGORITHM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_ADHOC_CIPHER_ALGORITHM) String() string {
+	switch e {
+	case DOT11_ADHOC_CIPHER_ALGO_INVALID:
+		return "DOT11_ADHOC_CIPHER_ALGO_INVALID"
+	case DOT11_ADHOC_CIPHER_ALGO_NONE:
+		return "DOT11_ADHOC_CIPHER_ALGO_NONE"
+	case DOT11_ADHOC_CIPHER_ALGO_CCMP:
+		return "DOT11_ADHOC_CIPHER_ALGO_CCMP"
+	case DOT11_ADHOC_CIPHER_ALGO_WEP:
+		return "DOT11_ADHOC_CIPHER_ALGO_WEP"
+	default:
+		return fmt.Sprintf("DOT11_ADHOC_CIPHER_ALGORITHM(%d)", int32(e))
+	}
+}
+
 // DOT11_ADHOC_CONNECT_FAIL_REASON: https://learn.microsoft.com/windows/win32/api/adhoc/ne-adhoc-dot11_adhoc_connect_fail_reason
 type DOT11_ADHOC_CONNECT_FAIL_REASON int32
 
@@ -226,6 +631,21 @@ const (
 	DOT11_ADHOC_CONNECT_FAIL_PASSPHRASE_MISMATCH DOT11_ADHOC_CONNECT_FAIL_REASON = 1
 	DOT11_ADHOC_CONNECT_FAIL_OTHER               DOT11_ADHOC_CONNECT_FAIL_REASON = 2
 )
+
+// String returns the DOT11_ADHOC_CONNECT_FAIL_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_ADHOC_CONNECT_FAIL_REASON) String() string {
+	switch e {
+	case DOT11_ADHOC_CONNECT_FAIL_DOMAIN_MISMATCH:
+		return "DOT11_ADHOC_CONNECT_FAIL_DOMAIN_MISMATCH"
+	case DOT11_ADHOC_CONNECT_FAIL_PASSPHRASE_MISMATCH:
+		return "DOT11_ADHOC_CONNECT_FAIL_PASSPHRASE_MISMATCH"
+	case DOT11_ADHOC_CONNECT_FAIL_OTHER:
+		return "DOT11_ADHOC_CONNECT_FAIL_OTHER"
+	default:
+		return fmt.Sprintf("DOT11_ADHOC_CONNECT_FAIL_REASON(%d)", int32(e))
+	}
+}
 
 // DOT11_ADHOC_NETWORK_CONNECTION_STATUS: https://learn.microsoft.com/windows/win32/api/adhoc/ne-adhoc-dot11_adhoc_network_connection_status
 type DOT11_ADHOC_NETWORK_CONNECTION_STATUS int32
@@ -237,6 +657,25 @@ const (
 	DOT11_ADHOC_NETWORK_CONNECTION_STATUS_CONNECTED    DOT11_ADHOC_NETWORK_CONNECTION_STATUS = 13
 	DOT11_ADHOC_NETWORK_CONNECTION_STATUS_FORMED       DOT11_ADHOC_NETWORK_CONNECTION_STATUS = 14
 )
+
+// String returns the DOT11_ADHOC_NETWORK_CONNECTION_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_ADHOC_NETWORK_CONNECTION_STATUS) String() string {
+	switch e {
+	case DOT11_ADHOC_NETWORK_CONNECTION_STATUS_INVALID:
+		return "DOT11_ADHOC_NETWORK_CONNECTION_STATUS_INVALID"
+	case DOT11_ADHOC_NETWORK_CONNECTION_STATUS_DISCONNECTED:
+		return "DOT11_ADHOC_NETWORK_CONNECTION_STATUS_DISCONNECTED"
+	case DOT11_ADHOC_NETWORK_CONNECTION_STATUS_CONNECTING:
+		return "DOT11_ADHOC_NETWORK_CONNECTION_STATUS_CONNECTING"
+	case DOT11_ADHOC_NETWORK_CONNECTION_STATUS_CONNECTED:
+		return "DOT11_ADHOC_NETWORK_CONNECTION_STATUS_CONNECTED"
+	case DOT11_ADHOC_NETWORK_CONNECTION_STATUS_FORMED:
+		return "DOT11_ADHOC_NETWORK_CONNECTION_STATUS_FORMED"
+	default:
+		return fmt.Sprintf("DOT11_ADHOC_NETWORK_CONNECTION_STATUS(%d)", int32(e))
+	}
+}
 
 type DOT11_ANQP_QUERY_RESULT int32
 
@@ -251,6 +690,31 @@ const (
 	Dot11_ANQP_query_result_access_issues                                  DOT11_ANQP_QUERY_RESULT = 7
 )
 
+// String returns the DOT11_ANQP_QUERY_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_ANQP_QUERY_RESULT) String() string {
+	switch e {
+	case Dot11_ANQP_query_result_success:
+		return "Dot11_ANQP_query_result_success"
+	case Dot11_ANQP_query_result_failure:
+		return "Dot11_ANQP_query_result_failure"
+	case Dot11_ANQP_query_result_timed_out:
+		return "Dot11_ANQP_query_result_timed_out"
+	case Dot11_ANQP_query_result_resources:
+		return "Dot11_ANQP_query_result_resources"
+	case Dot11_ANQP_query_result_advertisement_protocol_not_supported_on_remote:
+		return "Dot11_ANQP_query_result_advertisement_protocol_not_supported_on_remote"
+	case Dot11_ANQP_query_result_gas_protocol_failure:
+		return "Dot11_ANQP_query_result_gas_protocol_failure"
+	case Dot11_ANQP_query_result_advertisement_server_not_responding:
+		return "Dot11_ANQP_query_result_advertisement_server_not_responding"
+	case Dot11_ANQP_query_result_access_issues:
+		return "Dot11_ANQP_query_result_access_issues"
+	default:
+		return fmt.Sprintf("DOT11_ANQP_QUERY_RESULT(%d)", int32(e))
+	}
+}
+
 type DOT11_ASSOCIATION_STATE int32
 
 const (
@@ -259,6 +723,23 @@ const (
 	Dot11_assoc_state_auth_unassoc   DOT11_ASSOCIATION_STATE = 2
 	Dot11_assoc_state_auth_assoc     DOT11_ASSOCIATION_STATE = 3
 )
+
+// String returns the DOT11_ASSOCIATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_ASSOCIATION_STATE) String() string {
+	switch e {
+	case Dot11_assoc_state_zero:
+		return "Dot11_assoc_state_zero"
+	case Dot11_assoc_state_unauth_unassoc:
+		return "Dot11_assoc_state_unauth_unassoc"
+	case Dot11_assoc_state_auth_unassoc:
+		return "Dot11_assoc_state_auth_unassoc"
+	case Dot11_assoc_state_auth_assoc:
+		return "Dot11_assoc_state_auth_assoc"
+	default:
+		return fmt.Sprintf("DOT11_ASSOCIATION_STATE(%d)", int32(e))
+	}
+}
 
 // DOT11_AUTH_ALGORITHM: https://learn.microsoft.com/windows/win32/NativeWiFi/dot11-auth-algorithm
 type DOT11_AUTH_ALGORITHM int32
@@ -280,6 +761,41 @@ const (
 	DOT11_AUTH_ALGO_IHV_END          DOT11_AUTH_ALGORITHM = -1
 )
 
+// String returns the DOT11_AUTH_ALGORITHM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_AUTH_ALGORITHM) String() string {
+	switch e {
+	case DOT11_AUTH_ALGO_80211_OPEN:
+		return "DOT11_AUTH_ALGO_80211_OPEN"
+	case DOT11_AUTH_ALGO_80211_SHARED_KEY:
+		return "DOT11_AUTH_ALGO_80211_SHARED_KEY"
+	case DOT11_AUTH_ALGO_WPA:
+		return "DOT11_AUTH_ALGO_WPA"
+	case DOT11_AUTH_ALGO_WPA_PSK:
+		return "DOT11_AUTH_ALGO_WPA_PSK"
+	case DOT11_AUTH_ALGO_WPA_NONE:
+		return "DOT11_AUTH_ALGO_WPA_NONE"
+	case DOT11_AUTH_ALGO_RSNA:
+		return "DOT11_AUTH_ALGO_RSNA"
+	case DOT11_AUTH_ALGO_RSNA_PSK:
+		return "DOT11_AUTH_ALGO_RSNA_PSK"
+	case DOT11_AUTH_ALGO_WPA3:
+		return "DOT11_AUTH_ALGO_WPA3"
+	case DOT11_AUTH_ALGO_WPA3_SAE:
+		return "DOT11_AUTH_ALGO_WPA3_SAE"
+	case DOT11_AUTH_ALGO_OWE:
+		return "DOT11_AUTH_ALGO_OWE"
+	case DOT11_AUTH_ALGO_WPA3_ENT:
+		return "DOT11_AUTH_ALGO_WPA3_ENT"
+	case DOT11_AUTH_ALGO_IHV_START:
+		return "DOT11_AUTH_ALGO_IHV_START"
+	case DOT11_AUTH_ALGO_IHV_END:
+		return "DOT11_AUTH_ALGO_IHV_END"
+	default:
+		return fmt.Sprintf("DOT11_AUTH_ALGORITHM(%d)", int32(e))
+	}
+}
+
 type DOT11_BAND int32
 
 const (
@@ -287,6 +803,21 @@ const (
 	Dot11_band_4p9g DOT11_BAND = 2
 	Dot11_band_5g   DOT11_BAND = 3
 )
+
+// String returns the DOT11_BAND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_BAND) String() string {
+	switch e {
+	case Dot11_band_2p4g:
+		return "Dot11_band_2p4g"
+	case Dot11_band_4p9g:
+		return "Dot11_band_4p9g"
+	case Dot11_band_5g:
+		return "Dot11_band_5g"
+	default:
+		return fmt.Sprintf("DOT11_BAND(%d)", int32(e))
+	}
+}
 
 // DOT11_BSS_TYPE: https://learn.microsoft.com/windows/win32/NativeWiFi/dot11-bss-type
 type DOT11_BSS_TYPE int32
@@ -296,6 +827,21 @@ const (
 	Dot11_BSS_type_independent    DOT11_BSS_TYPE = 2
 	Dot11_BSS_type_any            DOT11_BSS_TYPE = 3
 )
+
+// String returns the DOT11_BSS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_BSS_TYPE) String() string {
+	switch e {
+	case Dot11_BSS_type_infrastructure:
+		return "Dot11_BSS_type_infrastructure"
+	case Dot11_BSS_type_independent:
+		return "Dot11_BSS_type_independent"
+	case Dot11_BSS_type_any:
+		return "Dot11_BSS_type_any"
+	default:
+		return fmt.Sprintf("DOT11_BSS_TYPE(%d)", int32(e))
+	}
+}
 
 // DOT11_CIPHER_ALGORITHM: https://learn.microsoft.com/windows/win32/NativeWiFi/dot11-cipher-algorithm
 type DOT11_CIPHER_ALGORITHM int32
@@ -320,6 +866,47 @@ const (
 	DOT11_CIPHER_ALGO_IHV_END       DOT11_CIPHER_ALGORITHM = -1
 )
 
+// String returns the DOT11_CIPHER_ALGORITHM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_CIPHER_ALGORITHM) String() string {
+	switch e {
+	case DOT11_CIPHER_ALGO_NONE:
+		return "DOT11_CIPHER_ALGO_NONE"
+	case DOT11_CIPHER_ALGO_WEP40:
+		return "DOT11_CIPHER_ALGO_WEP40"
+	case DOT11_CIPHER_ALGO_TKIP:
+		return "DOT11_CIPHER_ALGO_TKIP"
+	case DOT11_CIPHER_ALGO_CCMP:
+		return "DOT11_CIPHER_ALGO_CCMP"
+	case DOT11_CIPHER_ALGO_WEP104:
+		return "DOT11_CIPHER_ALGO_WEP104"
+	case DOT11_CIPHER_ALGO_BIP:
+		return "DOT11_CIPHER_ALGO_BIP"
+	case DOT11_CIPHER_ALGO_GCMP:
+		return "DOT11_CIPHER_ALGO_GCMP"
+	case DOT11_CIPHER_ALGO_GCMP_256:
+		return "DOT11_CIPHER_ALGO_GCMP_256"
+	case DOT11_CIPHER_ALGO_CCMP_256:
+		return "DOT11_CIPHER_ALGO_CCMP_256"
+	case DOT11_CIPHER_ALGO_BIP_GMAC_128:
+		return "DOT11_CIPHER_ALGO_BIP_GMAC_128"
+	case DOT11_CIPHER_ALGO_BIP_GMAC_256:
+		return "DOT11_CIPHER_ALGO_BIP_GMAC_256"
+	case DOT11_CIPHER_ALGO_BIP_CMAC_256:
+		return "DOT11_CIPHER_ALGO_BIP_CMAC_256"
+	case DOT11_CIPHER_ALGO_WPA_USE_GROUP:
+		return "DOT11_CIPHER_ALGO_WPA_USE_GROUP"
+	case DOT11_CIPHER_ALGO_WEP:
+		return "DOT11_CIPHER_ALGO_WEP"
+	case DOT11_CIPHER_ALGO_IHV_START:
+		return "DOT11_CIPHER_ALGO_IHV_START"
+	case DOT11_CIPHER_ALGO_IHV_END:
+		return "DOT11_CIPHER_ALGO_IHV_END"
+	default:
+		return fmt.Sprintf("DOT11_CIPHER_ALGORITHM(%d)", int32(e))
+	}
+}
+
 type DOT11_DIRECTION int32
 
 const (
@@ -327,6 +914,21 @@ const (
 	DOT11_DIR_OUTBOUND DOT11_DIRECTION = 2
 	DOT11_DIR_BOTH     DOT11_DIRECTION = 3
 )
+
+// String returns the DOT11_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_DIRECTION) String() string {
+	switch e {
+	case DOT11_DIR_INBOUND:
+		return "DOT11_DIR_INBOUND"
+	case DOT11_DIR_OUTBOUND:
+		return "DOT11_DIR_OUTBOUND"
+	case DOT11_DIR_BOTH:
+		return "DOT11_DIR_BOTH"
+	default:
+		return fmt.Sprintf("DOT11_DIRECTION(%d)", int32(e))
+	}
+}
 
 type DOT11_DIVERSITY_SUPPORT int32
 
@@ -337,6 +939,23 @@ const (
 	Dot11_diversity_support_dynamic      DOT11_DIVERSITY_SUPPORT = 3
 )
 
+// String returns the DOT11_DIVERSITY_SUPPORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_DIVERSITY_SUPPORT) String() string {
+	switch e {
+	case Dot11_diversity_support_unknown:
+		return "Dot11_diversity_support_unknown"
+	case Dot11_diversity_support_fixedlist:
+		return "Dot11_diversity_support_fixedlist"
+	case Dot11_diversity_support_notsupported:
+		return "Dot11_diversity_support_notsupported"
+	case Dot11_diversity_support_dynamic:
+		return "Dot11_diversity_support_dynamic"
+	default:
+		return fmt.Sprintf("DOT11_DIVERSITY_SUPPORT(%d)", int32(e))
+	}
+}
+
 type DOT11_DS_INFO int32
 
 const (
@@ -344,6 +963,21 @@ const (
 	DOT11_DS_UNCHANGED DOT11_DS_INFO = 1
 	DOT11_DS_UNKNOWN   DOT11_DS_INFO = 2
 )
+
+// String returns the DOT11_DS_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_DS_INFO) String() string {
+	switch e {
+	case DOT11_DS_CHANGED:
+		return "DOT11_DS_CHANGED"
+	case DOT11_DS_UNCHANGED:
+		return "DOT11_DS_UNCHANGED"
+	case DOT11_DS_UNKNOWN:
+		return "DOT11_DS_UNKNOWN"
+	default:
+		return fmt.Sprintf("DOT11_DS_INFO(%d)", int32(e))
+	}
+}
 
 type DOT11_HOP_ALGO_ADOPTED int32
 
@@ -353,6 +987,21 @@ const (
 	Dot11_hop_algo_hcc       DOT11_HOP_ALGO_ADOPTED = 2
 )
 
+// String returns the DOT11_HOP_ALGO_ADOPTED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_HOP_ALGO_ADOPTED) String() string {
+	switch e {
+	case Dot11_hop_algo_current:
+		return "Dot11_hop_algo_current"
+	case Dot11_hop_algo_hop_index:
+		return "Dot11_hop_algo_hop_index"
+	case Dot11_hop_algo_hcc:
+		return "Dot11_hop_algo_hcc"
+	default:
+		return fmt.Sprintf("DOT11_HOP_ALGO_ADOPTED(%d)", int32(e))
+	}
+}
+
 type DOT11_KEY_DIRECTION int32
 
 const (
@@ -360,6 +1009,21 @@ const (
 	Dot11_key_direction_inbound  DOT11_KEY_DIRECTION = 2
 	Dot11_key_direction_outbound DOT11_KEY_DIRECTION = 3
 )
+
+// String returns the DOT11_KEY_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_KEY_DIRECTION) String() string {
+	switch e {
+	case Dot11_key_direction_both:
+		return "Dot11_key_direction_both"
+	case Dot11_key_direction_inbound:
+		return "Dot11_key_direction_inbound"
+	case Dot11_key_direction_outbound:
+		return "Dot11_key_direction_outbound"
+	default:
+		return fmt.Sprintf("DOT11_KEY_DIRECTION(%d)", int32(e))
+	}
+}
 
 type DOT11_MANUFACTURING_CALLBACK_TYPE int32
 
@@ -371,6 +1035,25 @@ const (
 	Dot11_manufacturing_callback_IHV_end            DOT11_MANUFACTURING_CALLBACK_TYPE = -1
 )
 
+// String returns the DOT11_MANUFACTURING_CALLBACK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_MANUFACTURING_CALLBACK_TYPE) String() string {
+	switch e {
+	case Dot11_manufacturing_callback_unknown:
+		return "Dot11_manufacturing_callback_unknown"
+	case Dot11_manufacturing_callback_self_test_complete:
+		return "Dot11_manufacturing_callback_self_test_complete"
+	case Dot11_manufacturing_callback_sleep_complete:
+		return "Dot11_manufacturing_callback_sleep_complete"
+	case Dot11_manufacturing_callback_IHV_start:
+		return "Dot11_manufacturing_callback_IHV_start"
+	case Dot11_manufacturing_callback_IHV_end:
+		return "Dot11_manufacturing_callback_IHV_end"
+	default:
+		return fmt.Sprintf("DOT11_MANUFACTURING_CALLBACK_TYPE(%d)", int32(e))
+	}
+}
+
 type DOT11_MANUFACTURING_SELF_TEST_TYPE int32
 
 const (
@@ -378,6 +1061,21 @@ const (
 	DOT11_MANUFACTURING_SELF_TEST_TYPE_RF_INTERFACE   DOT11_MANUFACTURING_SELF_TEST_TYPE = 2
 	DOT11_MANUFACTURING_SELF_TEST_TYPE_BT_COEXISTENCE DOT11_MANUFACTURING_SELF_TEST_TYPE = 3
 )
+
+// String returns the DOT11_MANUFACTURING_SELF_TEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_MANUFACTURING_SELF_TEST_TYPE) String() string {
+	switch e {
+	case DOT11_MANUFACTURING_SELF_TEST_TYPE_INTERFACE:
+		return "DOT11_MANUFACTURING_SELF_TEST_TYPE_INTERFACE"
+	case DOT11_MANUFACTURING_SELF_TEST_TYPE_RF_INTERFACE:
+		return "DOT11_MANUFACTURING_SELF_TEST_TYPE_RF_INTERFACE"
+	case DOT11_MANUFACTURING_SELF_TEST_TYPE_BT_COEXISTENCE:
+		return "DOT11_MANUFACTURING_SELF_TEST_TYPE_BT_COEXISTENCE"
+	default:
+		return fmt.Sprintf("DOT11_MANUFACTURING_SELF_TEST_TYPE(%d)", int32(e))
+	}
+}
 
 type DOT11_MANUFACTURING_TEST_TYPE int32
 
@@ -396,6 +1094,39 @@ const (
 	Dot11_manufacturing_test_IHV_end           DOT11_MANUFACTURING_TEST_TYPE = -1
 )
 
+// String returns the DOT11_MANUFACTURING_TEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_MANUFACTURING_TEST_TYPE) String() string {
+	switch e {
+	case Dot11_manufacturing_test_unknown:
+		return "Dot11_manufacturing_test_unknown"
+	case Dot11_manufacturing_test_self_start:
+		return "Dot11_manufacturing_test_self_start"
+	case Dot11_manufacturing_test_self_query_result:
+		return "Dot11_manufacturing_test_self_query_result"
+	case Dot11_manufacturing_test_rx:
+		return "Dot11_manufacturing_test_rx"
+	case Dot11_manufacturing_test_tx:
+		return "Dot11_manufacturing_test_tx"
+	case Dot11_manufacturing_test_query_adc:
+		return "Dot11_manufacturing_test_query_adc"
+	case Dot11_manufacturing_test_set_data:
+		return "Dot11_manufacturing_test_set_data"
+	case Dot11_manufacturing_test_query_data:
+		return "Dot11_manufacturing_test_query_data"
+	case Dot11_manufacturing_test_sleep:
+		return "Dot11_manufacturing_test_sleep"
+	case Dot11_manufacturing_test_awake:
+		return "Dot11_manufacturing_test_awake"
+	case Dot11_manufacturing_test_IHV_start:
+		return "Dot11_manufacturing_test_IHV_start"
+	case Dot11_manufacturing_test_IHV_end:
+		return "Dot11_manufacturing_test_IHV_end"
+	default:
+		return fmt.Sprintf("DOT11_MANUFACTURING_TEST_TYPE(%d)", int32(e))
+	}
+}
+
 type DOT11_MSONEX_RESULT int32
 
 const (
@@ -404,12 +1135,40 @@ const (
 	DOT11_MSONEX_IN_PROGRESS DOT11_MSONEX_RESULT = 2
 )
 
+// String returns the DOT11_MSONEX_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_MSONEX_RESULT) String() string {
+	switch e {
+	case DOT11_MSONEX_SUCCESS:
+		return "DOT11_MSONEX_SUCCESS"
+	case DOT11_MSONEX_FAILURE:
+		return "DOT11_MSONEX_FAILURE"
+	case DOT11_MSONEX_IN_PROGRESS:
+		return "DOT11_MSONEX_IN_PROGRESS"
+	default:
+		return fmt.Sprintf("DOT11_MSONEX_RESULT(%d)", int32(e))
+	}
+}
+
 type DOT11_OFFLOAD_TYPE int32
 
 const (
 	Dot11_offload_type_wep  DOT11_OFFLOAD_TYPE = 1
 	Dot11_offload_type_auth DOT11_OFFLOAD_TYPE = 2
 )
+
+// String returns the DOT11_OFFLOAD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_OFFLOAD_TYPE) String() string {
+	switch e {
+	case Dot11_offload_type_wep:
+		return "Dot11_offload_type_wep"
+	case Dot11_offload_type_auth:
+		return "Dot11_offload_type_auth"
+	default:
+		return fmt.Sprintf("DOT11_OFFLOAD_TYPE(%d)", int32(e))
+	}
+}
 
 // DOT11_PHY_TYPE: https://learn.microsoft.com/windows/win32/NativeWiFi/dot11-phy-type
 type DOT11_PHY_TYPE int32
@@ -432,6 +1191,43 @@ const (
 	Dot11_phy_type_IHV_end    DOT11_PHY_TYPE = -1
 )
 
+// String returns the DOT11_PHY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_PHY_TYPE) String() string {
+	switch e {
+	case Dot11_phy_type_unknown:
+		return "Dot11_phy_type_unknown"
+	case Dot11_phy_type_fhss:
+		return "Dot11_phy_type_fhss"
+	case Dot11_phy_type_dsss:
+		return "Dot11_phy_type_dsss"
+	case Dot11_phy_type_irbaseband:
+		return "Dot11_phy_type_irbaseband"
+	case Dot11_phy_type_ofdm:
+		return "Dot11_phy_type_ofdm"
+	case Dot11_phy_type_hrdsss:
+		return "Dot11_phy_type_hrdsss"
+	case Dot11_phy_type_erp:
+		return "Dot11_phy_type_erp"
+	case Dot11_phy_type_ht:
+		return "Dot11_phy_type_ht"
+	case Dot11_phy_type_vht:
+		return "Dot11_phy_type_vht"
+	case Dot11_phy_type_dmg:
+		return "Dot11_phy_type_dmg"
+	case Dot11_phy_type_he:
+		return "Dot11_phy_type_he"
+	case Dot11_phy_type_eht:
+		return "Dot11_phy_type_eht"
+	case Dot11_phy_type_IHV_start:
+		return "Dot11_phy_type_IHV_start"
+	case Dot11_phy_type_IHV_end:
+		return "Dot11_phy_type_IHV_end"
+	default:
+		return fmt.Sprintf("DOT11_PHY_TYPE(%d)", int32(e))
+	}
+}
+
 type DOT11_POWER_MODE int32
 
 const (
@@ -439,6 +1235,21 @@ const (
 	Dot11_power_mode_active    DOT11_POWER_MODE = 1
 	Dot11_power_mode_powersave DOT11_POWER_MODE = 2
 )
+
+// String returns the DOT11_POWER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_POWER_MODE) String() string {
+	switch e {
+	case Dot11_power_mode_unknown:
+		return "Dot11_power_mode_unknown"
+	case Dot11_power_mode_active:
+		return "Dot11_power_mode_active"
+	case Dot11_power_mode_powersave:
+		return "Dot11_power_mode_powersave"
+	default:
+		return fmt.Sprintf("DOT11_POWER_MODE(%d)", int32(e))
+	}
+}
 
 type DOT11_POWER_MODE_REASON int32
 
@@ -451,6 +1262,27 @@ const (
 	Dot11_power_mode_reason_others               DOT11_POWER_MODE_REASON = 5
 )
 
+// String returns the DOT11_POWER_MODE_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_POWER_MODE_REASON) String() string {
+	switch e {
+	case Dot11_power_mode_reason_no_change:
+		return "Dot11_power_mode_reason_no_change"
+	case Dot11_power_mode_reason_noncompliant_AP:
+		return "Dot11_power_mode_reason_noncompliant_AP"
+	case Dot11_power_mode_reason_legacy_WFD_device:
+		return "Dot11_power_mode_reason_legacy_WFD_device"
+	case Dot11_power_mode_reason_compliant_AP:
+		return "Dot11_power_mode_reason_compliant_AP"
+	case Dot11_power_mode_reason_compliant_WFD_device:
+		return "Dot11_power_mode_reason_compliant_WFD_device"
+	case Dot11_power_mode_reason_others:
+		return "Dot11_power_mode_reason_others"
+	default:
+		return fmt.Sprintf("DOT11_POWER_MODE_REASON(%d)", int32(e))
+	}
+}
+
 // DOT11_RADIO_STATE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-dot11_radio_state~r1
 type DOT11_RADIO_STATE int32
 
@@ -460,6 +1292,21 @@ const (
 	Dot11_radio_state_off     DOT11_RADIO_STATE = 2
 )
 
+// String returns the DOT11_RADIO_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_RADIO_STATE) String() string {
+	switch e {
+	case Dot11_radio_state_unknown:
+		return "Dot11_radio_state_unknown"
+	case Dot11_radio_state_on:
+		return "Dot11_radio_state_on"
+	case Dot11_radio_state_off:
+		return "Dot11_radio_state_off"
+	default:
+		return fmt.Sprintf("DOT11_RADIO_STATE(%d)", int32(e))
+	}
+}
+
 type DOT11_RESET_TYPE int32
 
 const (
@@ -467,6 +1314,21 @@ const (
 	Dot11_reset_type_mac         DOT11_RESET_TYPE = 2
 	Dot11_reset_type_phy_and_mac DOT11_RESET_TYPE = 3
 )
+
+// String returns the DOT11_RESET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_RESET_TYPE) String() string {
+	switch e {
+	case Dot11_reset_type_phy:
+		return "Dot11_reset_type_phy"
+	case Dot11_reset_type_mac:
+		return "Dot11_reset_type_mac"
+	case Dot11_reset_type_phy_and_mac:
+		return "Dot11_reset_type_phy_and_mac"
+	default:
+		return fmt.Sprintf("DOT11_RESET_TYPE(%d)", int32(e))
+	}
+}
 
 type DOT11_SCAN_TYPE int32
 
@@ -477,6 +1339,23 @@ const (
 	Dot11_scan_type_forced  DOT11_SCAN_TYPE = -2147483648
 )
 
+// String returns the DOT11_SCAN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_SCAN_TYPE) String() string {
+	switch e {
+	case Dot11_scan_type_active:
+		return "Dot11_scan_type_active"
+	case Dot11_scan_type_passive:
+		return "Dot11_scan_type_passive"
+	case Dot11_scan_type_auto:
+		return "Dot11_scan_type_auto"
+	case Dot11_scan_type_forced:
+		return "Dot11_scan_type_forced"
+	default:
+		return fmt.Sprintf("DOT11_SCAN_TYPE(%d)", int32(e))
+	}
+}
+
 type DOT11_TEMP_TYPE int32
 
 const (
@@ -485,12 +1364,40 @@ const (
 	Dot11_temp_type_2       DOT11_TEMP_TYPE = 2
 )
 
+// String returns the DOT11_TEMP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_TEMP_TYPE) String() string {
+	switch e {
+	case Dot11_temp_type_unknown:
+		return "Dot11_temp_type_unknown"
+	case Dot11_temp_type_1:
+		return "Dot11_temp_type_1"
+	case Dot11_temp_type_2:
+		return "Dot11_temp_type_2"
+	default:
+		return fmt.Sprintf("DOT11_TEMP_TYPE(%d)", int32(e))
+	}
+}
+
 type DOT11_UPDATE_IE_OP int32
 
 const (
 	Dot11_update_ie_op_create_replace DOT11_UPDATE_IE_OP = 1
 	Dot11_update_ie_op_delete         DOT11_UPDATE_IE_OP = 2
 )
+
+// String returns the DOT11_UPDATE_IE_OP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_UPDATE_IE_OP) String() string {
+	switch e {
+	case Dot11_update_ie_op_create_replace:
+		return "Dot11_update_ie_op_create_replace"
+	case Dot11_update_ie_op_delete:
+		return "Dot11_update_ie_op_delete"
+	default:
+		return fmt.Sprintf("DOT11_UPDATE_IE_OP(%d)", int32(e))
+	}
+}
 
 type DOT11_WFD_DISCOVER_TYPE int32
 
@@ -502,6 +1409,25 @@ const (
 	Dot11_wfd_discover_type_forced               DOT11_WFD_DISCOVER_TYPE = -2147483648
 )
 
+// String returns the DOT11_WFD_DISCOVER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_WFD_DISCOVER_TYPE) String() string {
+	switch e {
+	case Dot11_wfd_discover_type_scan_only:
+		return "Dot11_wfd_discover_type_scan_only"
+	case Dot11_wfd_discover_type_find_only:
+		return "Dot11_wfd_discover_type_find_only"
+	case Dot11_wfd_discover_type_auto:
+		return "Dot11_wfd_discover_type_auto"
+	case Dot11_wfd_discover_type_scan_social_channels:
+		return "Dot11_wfd_discover_type_scan_social_channels"
+	case Dot11_wfd_discover_type_forced:
+		return "Dot11_wfd_discover_type_forced"
+	default:
+		return fmt.Sprintf("DOT11_WFD_DISCOVER_TYPE(%d)", int32(e))
+	}
+}
+
 type DOT11_WFD_SCAN_TYPE int32
 
 const (
@@ -509,6 +1435,21 @@ const (
 	Dot11_wfd_scan_type_passive DOT11_WFD_SCAN_TYPE = 2
 	Dot11_wfd_scan_type_auto    DOT11_WFD_SCAN_TYPE = 3
 )
+
+// String returns the DOT11_WFD_SCAN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_WFD_SCAN_TYPE) String() string {
+	switch e {
+	case Dot11_wfd_scan_type_active:
+		return "Dot11_wfd_scan_type_active"
+	case Dot11_wfd_scan_type_passive:
+		return "Dot11_wfd_scan_type_passive"
+	case Dot11_wfd_scan_type_auto:
+		return "Dot11_wfd_scan_type_auto"
+	default:
+		return fmt.Sprintf("DOT11_WFD_SCAN_TYPE(%d)", int32(e))
+	}
+}
 
 type DOT11_WPS_CONFIG_METHOD int32
 
@@ -521,6 +1462,29 @@ const (
 	DOT11_WPS_CONFIG_METHOD_KEYPAD        DOT11_WPS_CONFIG_METHOD = 256
 	DOT11_WPS_CONFIG_METHOD_WFDS_DEFAULT  DOT11_WPS_CONFIG_METHOD = 4096
 )
+
+// String returns the DOT11_WPS_CONFIG_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_WPS_CONFIG_METHOD) String() string {
+	switch e {
+	case DOT11_WPS_CONFIG_METHOD_NULL:
+		return "DOT11_WPS_CONFIG_METHOD_NULL"
+	case DOT11_WPS_CONFIG_METHOD_DISPLAY:
+		return "DOT11_WPS_CONFIG_METHOD_DISPLAY"
+	case DOT11_WPS_CONFIG_METHOD_NFC_TAG:
+		return "DOT11_WPS_CONFIG_METHOD_NFC_TAG"
+	case DOT11_WPS_CONFIG_METHOD_NFC_INTERFACE:
+		return "DOT11_WPS_CONFIG_METHOD_NFC_INTERFACE"
+	case DOT11_WPS_CONFIG_METHOD_PUSHBUTTON:
+		return "DOT11_WPS_CONFIG_METHOD_PUSHBUTTON"
+	case DOT11_WPS_CONFIG_METHOD_KEYPAD:
+		return "DOT11_WPS_CONFIG_METHOD_KEYPAD"
+	case DOT11_WPS_CONFIG_METHOD_WFDS_DEFAULT:
+		return "DOT11_WPS_CONFIG_METHOD_WFDS_DEFAULT"
+	default:
+		return fmt.Sprintf("DOT11_WPS_CONFIG_METHOD(%d)", int32(e))
+	}
+}
 
 type DOT11_WPS_DEVICE_PASSWORD_ID int32
 
@@ -537,6 +1501,35 @@ const (
 	DOT11_WPS_PASSWORD_ID_OOB_RANGE_MAX           DOT11_WPS_DEVICE_PASSWORD_ID = 65535
 )
 
+// String returns the DOT11_WPS_DEVICE_PASSWORD_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOT11_WPS_DEVICE_PASSWORD_ID) String() string {
+	switch e {
+	case DOT11_WPS_PASSWORD_ID_DEFAULT:
+		return "DOT11_WPS_PASSWORD_ID_DEFAULT"
+	case DOT11_WPS_PASSWORD_ID_USER_SPECIFIED:
+		return "DOT11_WPS_PASSWORD_ID_USER_SPECIFIED"
+	case DOT11_WPS_PASSWORD_ID_MACHINE_SPECIFIED:
+		return "DOT11_WPS_PASSWORD_ID_MACHINE_SPECIFIED"
+	case DOT11_WPS_PASSWORD_ID_REKEY:
+		return "DOT11_WPS_PASSWORD_ID_REKEY"
+	case DOT11_WPS_PASSWORD_ID_PUSHBUTTON:
+		return "DOT11_WPS_PASSWORD_ID_PUSHBUTTON"
+	case DOT11_WPS_PASSWORD_ID_REGISTRAR_SPECIFIED:
+		return "DOT11_WPS_PASSWORD_ID_REGISTRAR_SPECIFIED"
+	case DOT11_WPS_PASSWORD_ID_NFC_CONNECTION_HANDOVER:
+		return "DOT11_WPS_PASSWORD_ID_NFC_CONNECTION_HANDOVER"
+	case DOT11_WPS_PASSWORD_ID_WFD_SERVICES:
+		return "DOT11_WPS_PASSWORD_ID_WFD_SERVICES"
+	case DOT11_WPS_PASSWORD_ID_OOB_RANGE_MIN:
+		return "DOT11_WPS_PASSWORD_ID_OOB_RANGE_MIN"
+	case DOT11_WPS_PASSWORD_ID_OOB_RANGE_MAX:
+		return "DOT11_WPS_PASSWORD_ID_OOB_RANGE_MAX"
+	default:
+		return fmt.Sprintf("DOT11_WPS_DEVICE_PASSWORD_ID(%d)", int32(e))
+	}
+}
+
 // ONEX_AUTH_IDENTITY: https://learn.microsoft.com/windows/win32/api/dot1x/ne-dot1x-onex_auth_identity
 type ONEX_AUTH_IDENTITY int32
 
@@ -548,6 +1541,27 @@ const (
 	OneXAuthIdentityGuest        ONEX_AUTH_IDENTITY = 4
 	OneXAuthIdentityInvalid      ONEX_AUTH_IDENTITY = 5
 )
+
+// String returns the ONEX_AUTH_IDENTITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ONEX_AUTH_IDENTITY) String() string {
+	switch e {
+	case OneXAuthIdentityNone:
+		return "OneXAuthIdentityNone"
+	case OneXAuthIdentityMachine:
+		return "OneXAuthIdentityMachine"
+	case OneXAuthIdentityUser:
+		return "OneXAuthIdentityUser"
+	case OneXAuthIdentityExplicitUser:
+		return "OneXAuthIdentityExplicitUser"
+	case OneXAuthIdentityGuest:
+		return "OneXAuthIdentityGuest"
+	case OneXAuthIdentityInvalid:
+		return "OneXAuthIdentityInvalid"
+	default:
+		return fmt.Sprintf("ONEX_AUTH_IDENTITY(%d)", int32(e))
+	}
+}
 
 // ONEX_AUTH_RESTART_REASON: https://learn.microsoft.com/windows/win32/api/dot1x/ne-dot1x-onex_auth_restart_reason
 type ONEX_AUTH_RESTART_REASON int32
@@ -564,6 +1578,33 @@ const (
 	OneXRestartReasonInvalid                  ONEX_AUTH_RESTART_REASON = 8
 )
 
+// String returns the ONEX_AUTH_RESTART_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ONEX_AUTH_RESTART_REASON) String() string {
+	switch e {
+	case OneXRestartReasonPeerInitiated:
+		return "OneXRestartReasonPeerInitiated"
+	case OneXRestartReasonMsmInitiated:
+		return "OneXRestartReasonMsmInitiated"
+	case OneXRestartReasonOneXHeldStateTimeout:
+		return "OneXRestartReasonOneXHeldStateTimeout"
+	case OneXRestartReasonOneXAuthTimeout:
+		return "OneXRestartReasonOneXAuthTimeout"
+	case OneXRestartReasonOneXConfigurationChanged:
+		return "OneXRestartReasonOneXConfigurationChanged"
+	case OneXRestartReasonOneXUserChanged:
+		return "OneXRestartReasonOneXUserChanged"
+	case OneXRestartReasonQuarantineStateChanged:
+		return "OneXRestartReasonQuarantineStateChanged"
+	case OneXRestartReasonAltCredsTrial:
+		return "OneXRestartReasonAltCredsTrial"
+	case OneXRestartReasonInvalid:
+		return "OneXRestartReasonInvalid"
+	default:
+		return fmt.Sprintf("ONEX_AUTH_RESTART_REASON(%d)", int32(e))
+	}
+}
+
 // ONEX_AUTH_STATUS: https://learn.microsoft.com/windows/win32/api/dot1x/ne-dot1x-onex_auth_status
 type ONEX_AUTH_STATUS int32
 
@@ -576,6 +1617,27 @@ const (
 	OneXAuthInvalid              ONEX_AUTH_STATUS = 5
 )
 
+// String returns the ONEX_AUTH_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ONEX_AUTH_STATUS) String() string {
+	switch e {
+	case OneXAuthNotStarted:
+		return "OneXAuthNotStarted"
+	case OneXAuthInProgress:
+		return "OneXAuthInProgress"
+	case OneXAuthNoAuthenticatorFound:
+		return "OneXAuthNoAuthenticatorFound"
+	case OneXAuthSuccess:
+		return "OneXAuthSuccess"
+	case OneXAuthFailure:
+		return "OneXAuthFailure"
+	case OneXAuthInvalid:
+		return "OneXAuthInvalid"
+	default:
+		return fmt.Sprintf("ONEX_AUTH_STATUS(%d)", int32(e))
+	}
+}
+
 // ONEX_EAP_METHOD_BACKEND_SUPPORT: https://learn.microsoft.com/windows/win32/api/dot1x/ne-dot1x-onex_eap_method_backend_support
 type ONEX_EAP_METHOD_BACKEND_SUPPORT int32
 
@@ -584,6 +1646,21 @@ const (
 	OneXEapMethodBackendSupported      ONEX_EAP_METHOD_BACKEND_SUPPORT = 1
 	OneXEapMethodBackendUnsupported    ONEX_EAP_METHOD_BACKEND_SUPPORT = 2
 )
+
+// String returns the ONEX_EAP_METHOD_BACKEND_SUPPORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ONEX_EAP_METHOD_BACKEND_SUPPORT) String() string {
+	switch e {
+	case OneXEapMethodBackendSupportUnknown:
+		return "OneXEapMethodBackendSupportUnknown"
+	case OneXEapMethodBackendSupported:
+		return "OneXEapMethodBackendSupported"
+	case OneXEapMethodBackendUnsupported:
+		return "OneXEapMethodBackendUnsupported"
+	default:
+		return fmt.Sprintf("ONEX_EAP_METHOD_BACKEND_SUPPORT(%d)", int32(e))
+	}
+}
 
 // ONEX_NOTIFICATION_TYPE: https://learn.microsoft.com/windows/win32/api/dot1x/ne-dot1x-onex_notification_type
 type ONEX_NOTIFICATION_TYPE int32
@@ -595,6 +1672,23 @@ const (
 	OneXNotificationTypeEventInvalid  ONEX_NOTIFICATION_TYPE = 3
 	OneXNumNotifications              ONEX_NOTIFICATION_TYPE = 3
 )
+
+// String returns the ONEX_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ONEX_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case OneXPublicNotificationBase:
+		return "OneXPublicNotificationBase"
+	case OneXNotificationTypeResultUpdate:
+		return "OneXNotificationTypeResultUpdate"
+	case OneXNotificationTypeAuthRestarted:
+		return "OneXNotificationTypeAuthRestarted"
+	case OneXNotificationTypeEventInvalid:
+		return "OneXNotificationTypeEventInvalid"
+	default:
+		return fmt.Sprintf("ONEX_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
 
 // ONEX_REASON_CODE: https://learn.microsoft.com/windows/win32/api/dot1x/ne-dot1x-onex_reason_code
 type ONEX_REASON_CODE int32
@@ -623,6 +1717,59 @@ const (
 	ONEX_PROFILE_EXPIRED_EXPLICIT_CREDENTIALS      ONEX_REASON_CODE = 327699
 	ONEX_UI_NOT_PERMITTED                          ONEX_REASON_CODE = 327700
 )
+
+// String returns the ONEX_REASON_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ONEX_REASON_CODE) String() string {
+	switch e {
+	case ONEX_REASON_CODE_SUCCESS:
+		return "ONEX_REASON_CODE_SUCCESS"
+	case ONEX_REASON_START:
+		return "ONEX_REASON_START"
+	case ONEX_UNABLE_TO_IDENTIFY_USER:
+		return "ONEX_UNABLE_TO_IDENTIFY_USER"
+	case ONEX_IDENTITY_NOT_FOUND:
+		return "ONEX_IDENTITY_NOT_FOUND"
+	case ONEX_UI_DISABLED:
+		return "ONEX_UI_DISABLED"
+	case ONEX_UI_FAILURE:
+		return "ONEX_UI_FAILURE"
+	case ONEX_EAP_FAILURE_RECEIVED:
+		return "ONEX_EAP_FAILURE_RECEIVED"
+	case ONEX_AUTHENTICATOR_NO_LONGER_PRESENT:
+		return "ONEX_AUTHENTICATOR_NO_LONGER_PRESENT"
+	case ONEX_NO_RESPONSE_TO_IDENTITY:
+		return "ONEX_NO_RESPONSE_TO_IDENTITY"
+	case ONEX_PROFILE_VERSION_NOT_SUPPORTED:
+		return "ONEX_PROFILE_VERSION_NOT_SUPPORTED"
+	case ONEX_PROFILE_INVALID_LENGTH:
+		return "ONEX_PROFILE_INVALID_LENGTH"
+	case ONEX_PROFILE_DISALLOWED_EAP_TYPE:
+		return "ONEX_PROFILE_DISALLOWED_EAP_TYPE"
+	case ONEX_PROFILE_INVALID_EAP_TYPE_OR_FLAG:
+		return "ONEX_PROFILE_INVALID_EAP_TYPE_OR_FLAG"
+	case ONEX_PROFILE_INVALID_ONEX_FLAGS:
+		return "ONEX_PROFILE_INVALID_ONEX_FLAGS"
+	case ONEX_PROFILE_INVALID_TIMER_VALUE:
+		return "ONEX_PROFILE_INVALID_TIMER_VALUE"
+	case ONEX_PROFILE_INVALID_SUPPLICANT_MODE:
+		return "ONEX_PROFILE_INVALID_SUPPLICANT_MODE"
+	case ONEX_PROFILE_INVALID_AUTH_MODE:
+		return "ONEX_PROFILE_INVALID_AUTH_MODE"
+	case ONEX_PROFILE_INVALID_EAP_CONNECTION_PROPERTIES:
+		return "ONEX_PROFILE_INVALID_EAP_CONNECTION_PROPERTIES"
+	case ONEX_UI_CANCELLED:
+		return "ONEX_UI_CANCELLED"
+	case ONEX_PROFILE_INVALID_EXPLICIT_CREDENTIALS:
+		return "ONEX_PROFILE_INVALID_EXPLICIT_CREDENTIALS"
+	case ONEX_PROFILE_EXPIRED_EXPLICIT_CREDENTIALS:
+		return "ONEX_PROFILE_EXPIRED_EXPLICIT_CREDENTIALS"
+	case ONEX_UI_NOT_PERMITTED:
+		return "ONEX_UI_NOT_PERMITTED"
+	default:
+		return fmt.Sprintf("ONEX_REASON_CODE(%d)", int32(e))
+	}
+}
 
 type RSNA_AKM_SUITE int32
 
@@ -655,6 +1802,65 @@ const (
 	Rsna_akm_max                  RSNA_AKM_SUITE = 430706432
 )
 
+// String returns the RSNA_AKM_SUITE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RSNA_AKM_SUITE) String() string {
+	switch e {
+	case Rsna_akm_none:
+		return "Rsna_akm_none"
+	case Rsna_akm_1x:
+		return "Rsna_akm_1x"
+	case Rsna_akm_psk:
+		return "Rsna_akm_psk"
+	case Rsna_akm_ft_1x_sha256:
+		return "Rsna_akm_ft_1x_sha256"
+	case Rsna_akm_ft_psk_sha256:
+		return "Rsna_akm_ft_psk_sha256"
+	case Rsna_akm_1x_sha256:
+		return "Rsna_akm_1x_sha256"
+	case Rsna_akm_psk_sha256:
+		return "Rsna_akm_psk_sha256"
+	case Rsna_akm_tdls_sha256:
+		return "Rsna_akm_tdls_sha256"
+	case Rsna_akm_sae_pmk256:
+		return "Rsna_akm_sae_pmk256"
+	case Rsna_akm_ft_sae_pmk256:
+		return "Rsna_akm_ft_sae_pmk256"
+	case Rsna_akm_peerkey_sha256:
+		return "Rsna_akm_peerkey_sha256"
+	case Rsna_akm_1x_suite_b_sha256:
+		return "Rsna_akm_1x_suite_b_sha256"
+	case Rsna_akm_1x_suite_b_sha384:
+		return "Rsna_akm_1x_suite_b_sha384"
+	case Rsna_akm_ft_1x_sha384_cmp_256:
+		return "Rsna_akm_ft_1x_sha384_cmp_256"
+	case Rsna_akm_fils_1x_sha256:
+		return "Rsna_akm_fils_1x_sha256"
+	case Rsna_akm_fils_1x_sha384:
+		return "Rsna_akm_fils_1x_sha384"
+	case Rsna_akm_ft_fils_1x_sha256:
+		return "Rsna_akm_ft_fils_1x_sha256"
+	case Rsna_akm_ft_fils_sha384:
+		return "Rsna_akm_ft_fils_sha384"
+	case Rsna_akm_owe:
+		return "Rsna_akm_owe"
+	case Rsna_akm_ft_psk_sha384:
+		return "Rsna_akm_ft_psk_sha384"
+	case Rsna_akm_psk_sha384:
+		return "Rsna_akm_psk_sha384"
+	case Rsna_akm_ft_1x_sha384:
+		return "Rsna_akm_ft_1x_sha384"
+	case Rsna_akm_1x_sha384:
+		return "Rsna_akm_1x_sha384"
+	case Rsna_akm_sae_pmk384:
+		return "Rsna_akm_sae_pmk384"
+	case Rsna_akm_ft_sae_pmk384:
+		return "Rsna_akm_ft_sae_pmk384"
+	default:
+		return fmt.Sprintf("RSNA_AKM_SUITE(%d)", int32(e))
+	}
+}
+
 type RSNA_CIPHER_SUITE int32
 
 const (
@@ -675,6 +1881,43 @@ const (
 	Rsna_cipher_max              RSNA_CIPHER_SUITE = 229379840
 )
 
+// String returns the RSNA_CIPHER_SUITE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RSNA_CIPHER_SUITE) String() string {
+	switch e {
+	case Rsna_cipher_group:
+		return "Rsna_cipher_group"
+	case Rsna_cipher_wep40:
+		return "Rsna_cipher_wep40"
+	case Rsna_cipher_tkip:
+		return "Rsna_cipher_tkip"
+	case Rsna_cipher_reserved:
+		return "Rsna_cipher_reserved"
+	case Rsna_cipher_ccmp_128:
+		return "Rsna_cipher_ccmp_128"
+	case Rsna_cipher_wep104:
+		return "Rsna_cipher_wep104"
+	case Rsna_cipher_bip_cmac_128:
+		return "Rsna_cipher_bip_cmac_128"
+	case Rsna_cipher_no_group_traffic:
+		return "Rsna_cipher_no_group_traffic"
+	case Rsna_cipher_gcmp_128:
+		return "Rsna_cipher_gcmp_128"
+	case Rsna_cipher_gcmp_256:
+		return "Rsna_cipher_gcmp_256"
+	case Rsna_cipher_ccmp_256:
+		return "Rsna_cipher_ccmp_256"
+	case Rsna_cipher_bip_gmac_128:
+		return "Rsna_cipher_bip_gmac_128"
+	case Rsna_cipher_bip_gmac_256:
+		return "Rsna_cipher_bip_gmac_256"
+	case Rsna_cipher_bip_cmac_256:
+		return "Rsna_cipher_bip_cmac_256"
+	default:
+		return fmt.Sprintf("RSNA_CIPHER_SUITE(%d)", int32(e))
+	}
+}
+
 type WFD_ROLE_TYPE int32
 
 const (
@@ -685,6 +1928,25 @@ const (
 	WFD_ROLE_TYPE_MAX         WFD_ROLE_TYPE = 5
 )
 
+// String returns the WFD_ROLE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WFD_ROLE_TYPE) String() string {
+	switch e {
+	case WFD_ROLE_TYPE_NONE:
+		return "WFD_ROLE_TYPE_NONE"
+	case WFD_ROLE_TYPE_DEVICE:
+		return "WFD_ROLE_TYPE_DEVICE"
+	case WFD_ROLE_TYPE_GROUP_OWNER:
+		return "WFD_ROLE_TYPE_GROUP_OWNER"
+	case WFD_ROLE_TYPE_CLIENT:
+		return "WFD_ROLE_TYPE_CLIENT"
+	case WFD_ROLE_TYPE_MAX:
+		return "WFD_ROLE_TYPE_MAX"
+	default:
+		return fmt.Sprintf("WFD_ROLE_TYPE(%d)", int32(e))
+	}
+}
+
 // WLAN_ADHOC_NETWORK_STATE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_adhoc_network_state~r1
 type WLAN_ADHOC_NETWORK_STATE int32
 
@@ -692,6 +1954,19 @@ const (
 	Wlan_adhoc_network_state_formed    WLAN_ADHOC_NETWORK_STATE = 0
 	Wlan_adhoc_network_state_connected WLAN_ADHOC_NETWORK_STATE = 1
 )
+
+// String returns the WLAN_ADHOC_NETWORK_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_ADHOC_NETWORK_STATE) String() string {
+	switch e {
+	case Wlan_adhoc_network_state_formed:
+		return "Wlan_adhoc_network_state_formed"
+	case Wlan_adhoc_network_state_connected:
+		return "Wlan_adhoc_network_state_connected"
+	default:
+		return fmt.Sprintf("WLAN_ADHOC_NETWORK_STATE(%d)", int32(e))
+	}
+}
 
 // WLAN_AUTOCONF_OPCODE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_autoconf_opcode~r1
 type WLAN_AUTOCONF_OPCODE int32
@@ -707,6 +1982,31 @@ const (
 	Wlan_autoconf_opcode_end                                       WLAN_AUTOCONF_OPCODE = 7
 )
 
+// String returns the WLAN_AUTOCONF_OPCODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_AUTOCONF_OPCODE) String() string {
+	switch e {
+	case Wlan_autoconf_opcode_start:
+		return "Wlan_autoconf_opcode_start"
+	case Wlan_autoconf_opcode_show_denied_networks:
+		return "Wlan_autoconf_opcode_show_denied_networks"
+	case Wlan_autoconf_opcode_power_setting:
+		return "Wlan_autoconf_opcode_power_setting"
+	case Wlan_autoconf_opcode_only_use_gp_profiles_for_allowed_networks:
+		return "Wlan_autoconf_opcode_only_use_gp_profiles_for_allowed_networks"
+	case Wlan_autoconf_opcode_allow_explicit_creds:
+		return "Wlan_autoconf_opcode_allow_explicit_creds"
+	case Wlan_autoconf_opcode_block_period:
+		return "Wlan_autoconf_opcode_block_period"
+	case Wlan_autoconf_opcode_allow_virtual_station_extensibility:
+		return "Wlan_autoconf_opcode_allow_virtual_station_extensibility"
+	case Wlan_autoconf_opcode_end:
+		return "Wlan_autoconf_opcode_end"
+	default:
+		return fmt.Sprintf("WLAN_AUTOCONF_OPCODE(%d)", int32(e))
+	}
+}
+
 // WLAN_CONNECTION_MODE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_connection_mode
 type WLAN_CONNECTION_MODE int32
 
@@ -719,12 +2019,46 @@ const (
 	Wlan_connection_mode_invalid            WLAN_CONNECTION_MODE = 5
 )
 
+// String returns the WLAN_CONNECTION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_CONNECTION_MODE) String() string {
+	switch e {
+	case Wlan_connection_mode_profile:
+		return "Wlan_connection_mode_profile"
+	case Wlan_connection_mode_temporary_profile:
+		return "Wlan_connection_mode_temporary_profile"
+	case Wlan_connection_mode_discovery_secure:
+		return "Wlan_connection_mode_discovery_secure"
+	case Wlan_connection_mode_discovery_unsecure:
+		return "Wlan_connection_mode_discovery_unsecure"
+	case Wlan_connection_mode_auto:
+		return "Wlan_connection_mode_auto"
+	case Wlan_connection_mode_invalid:
+		return "Wlan_connection_mode_invalid"
+	default:
+		return fmt.Sprintf("WLAN_CONNECTION_MODE(%d)", int32(e))
+	}
+}
+
 type WLAN_CONNECTION_NOTIFICATION_FLAGS uint32
 
 const (
 	WLAN_CONNECTION_NOTIFICATION_ADHOC_NETWORK_FORMED WLAN_CONNECTION_NOTIFICATION_FLAGS = 1
 	WLAN_CONNECTION_NOTIFICATION_CONSOLE_USER_PROFILE WLAN_CONNECTION_NOTIFICATION_FLAGS = 4
 )
+
+// String returns the WLAN_CONNECTION_NOTIFICATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_CONNECTION_NOTIFICATION_FLAGS) String() string {
+	switch e {
+	case WLAN_CONNECTION_NOTIFICATION_ADHOC_NETWORK_FORMED:
+		return "WLAN_CONNECTION_NOTIFICATION_ADHOC_NETWORK_FORMED"
+	case WLAN_CONNECTION_NOTIFICATION_CONSOLE_USER_PROFILE:
+		return "WLAN_CONNECTION_NOTIFICATION_CONSOLE_USER_PROFILE"
+	default:
+		return fmt.Sprintf("WLAN_CONNECTION_NOTIFICATION_FLAGS(%d)", uint32(e))
+	}
+}
 
 // WLAN_FILTER_LIST_TYPE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_filter_list_type
 type WLAN_FILTER_LIST_TYPE int32
@@ -736,6 +2070,23 @@ const (
 	Wlan_filter_list_type_user_deny   WLAN_FILTER_LIST_TYPE = 3
 )
 
+// String returns the WLAN_FILTER_LIST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_FILTER_LIST_TYPE) String() string {
+	switch e {
+	case Wlan_filter_list_type_gp_permit:
+		return "Wlan_filter_list_type_gp_permit"
+	case Wlan_filter_list_type_gp_deny:
+		return "Wlan_filter_list_type_gp_deny"
+	case Wlan_filter_list_type_user_permit:
+		return "Wlan_filter_list_type_user_permit"
+	case Wlan_filter_list_type_user_deny:
+		return "Wlan_filter_list_type_user_deny"
+	default:
+		return fmt.Sprintf("WLAN_FILTER_LIST_TYPE(%d)", int32(e))
+	}
+}
+
 // WLAN_HOSTED_NETWORK_NOTIFICATION_CODE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_hosted_network_notification_code
 type WLAN_HOSTED_NETWORK_NOTIFICATION_CODE int32
 
@@ -744,6 +2095,21 @@ const (
 	Wlan_hosted_network_peer_state_change  WLAN_HOSTED_NETWORK_NOTIFICATION_CODE = 4097
 	Wlan_hosted_network_radio_state_change WLAN_HOSTED_NETWORK_NOTIFICATION_CODE = 4098
 )
+
+// String returns the WLAN_HOSTED_NETWORK_NOTIFICATION_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_HOSTED_NETWORK_NOTIFICATION_CODE) String() string {
+	switch e {
+	case Wlan_hosted_network_state_change:
+		return "Wlan_hosted_network_state_change"
+	case Wlan_hosted_network_peer_state_change:
+		return "Wlan_hosted_network_peer_state_change"
+	case Wlan_hosted_network_radio_state_change:
+		return "Wlan_hosted_network_radio_state_change"
+	default:
+		return fmt.Sprintf("WLAN_HOSTED_NETWORK_NOTIFICATION_CODE(%d)", int32(e))
+	}
+}
 
 // WLAN_HOSTED_NETWORK_OPCODE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_hosted_network_opcode
 type WLAN_HOSTED_NETWORK_OPCODE int32
@@ -755,6 +2121,23 @@ const (
 	Wlan_hosted_network_opcode_enable              WLAN_HOSTED_NETWORK_OPCODE = 3
 )
 
+// String returns the WLAN_HOSTED_NETWORK_OPCODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_HOSTED_NETWORK_OPCODE) String() string {
+	switch e {
+	case Wlan_hosted_network_opcode_connection_settings:
+		return "Wlan_hosted_network_opcode_connection_settings"
+	case Wlan_hosted_network_opcode_security_settings:
+		return "Wlan_hosted_network_opcode_security_settings"
+	case Wlan_hosted_network_opcode_station_profile:
+		return "Wlan_hosted_network_opcode_station_profile"
+	case Wlan_hosted_network_opcode_enable:
+		return "Wlan_hosted_network_opcode_enable"
+	default:
+		return fmt.Sprintf("WLAN_HOSTED_NETWORK_OPCODE(%d)", int32(e))
+	}
+}
+
 // WLAN_HOSTED_NETWORK_PEER_AUTH_STATE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_hosted_network_peer_auth_state
 type WLAN_HOSTED_NETWORK_PEER_AUTH_STATE int32
 
@@ -762,6 +2145,19 @@ const (
 	Wlan_hosted_network_peer_state_invalid       WLAN_HOSTED_NETWORK_PEER_AUTH_STATE = 0
 	Wlan_hosted_network_peer_state_authenticated WLAN_HOSTED_NETWORK_PEER_AUTH_STATE = 1
 )
+
+// String returns the WLAN_HOSTED_NETWORK_PEER_AUTH_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_HOSTED_NETWORK_PEER_AUTH_STATE) String() string {
+	switch e {
+	case Wlan_hosted_network_peer_state_invalid:
+		return "Wlan_hosted_network_peer_state_invalid"
+	case Wlan_hosted_network_peer_state_authenticated:
+		return "Wlan_hosted_network_peer_state_authenticated"
+	default:
+		return fmt.Sprintf("WLAN_HOSTED_NETWORK_PEER_AUTH_STATE(%d)", int32(e))
+	}
+}
 
 // WLAN_HOSTED_NETWORK_REASON: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_hosted_network_reason
 type WLAN_HOSTED_NETWORK_REASON int32
@@ -798,6 +2194,73 @@ const (
 	Wlan_hosted_network_reason_service_available_on_virtual_station WLAN_HOSTED_NETWORK_REASON = 28
 )
 
+// String returns the WLAN_HOSTED_NETWORK_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_HOSTED_NETWORK_REASON) String() string {
+	switch e {
+	case Wlan_hosted_network_reason_success:
+		return "Wlan_hosted_network_reason_success"
+	case Wlan_hosted_network_reason_unspecified:
+		return "Wlan_hosted_network_reason_unspecified"
+	case Wlan_hosted_network_reason_bad_parameters:
+		return "Wlan_hosted_network_reason_bad_parameters"
+	case Wlan_hosted_network_reason_service_shutting_down:
+		return "Wlan_hosted_network_reason_service_shutting_down"
+	case Wlan_hosted_network_reason_insufficient_resources:
+		return "Wlan_hosted_network_reason_insufficient_resources"
+	case Wlan_hosted_network_reason_elevation_required:
+		return "Wlan_hosted_network_reason_elevation_required"
+	case Wlan_hosted_network_reason_read_only:
+		return "Wlan_hosted_network_reason_read_only"
+	case Wlan_hosted_network_reason_persistence_failed:
+		return "Wlan_hosted_network_reason_persistence_failed"
+	case Wlan_hosted_network_reason_crypt_error:
+		return "Wlan_hosted_network_reason_crypt_error"
+	case Wlan_hosted_network_reason_impersonation:
+		return "Wlan_hosted_network_reason_impersonation"
+	case Wlan_hosted_network_reason_stop_before_start:
+		return "Wlan_hosted_network_reason_stop_before_start"
+	case Wlan_hosted_network_reason_interface_available:
+		return "Wlan_hosted_network_reason_interface_available"
+	case Wlan_hosted_network_reason_interface_unavailable:
+		return "Wlan_hosted_network_reason_interface_unavailable"
+	case Wlan_hosted_network_reason_miniport_stopped:
+		return "Wlan_hosted_network_reason_miniport_stopped"
+	case Wlan_hosted_network_reason_miniport_started:
+		return "Wlan_hosted_network_reason_miniport_started"
+	case Wlan_hosted_network_reason_incompatible_connection_started:
+		return "Wlan_hosted_network_reason_incompatible_connection_started"
+	case Wlan_hosted_network_reason_incompatible_connection_stopped:
+		return "Wlan_hosted_network_reason_incompatible_connection_stopped"
+	case Wlan_hosted_network_reason_user_action:
+		return "Wlan_hosted_network_reason_user_action"
+	case Wlan_hosted_network_reason_client_abort:
+		return "Wlan_hosted_network_reason_client_abort"
+	case Wlan_hosted_network_reason_ap_start_failed:
+		return "Wlan_hosted_network_reason_ap_start_failed"
+	case Wlan_hosted_network_reason_peer_arrived:
+		return "Wlan_hosted_network_reason_peer_arrived"
+	case Wlan_hosted_network_reason_peer_departed:
+		return "Wlan_hosted_network_reason_peer_departed"
+	case Wlan_hosted_network_reason_peer_timeout:
+		return "Wlan_hosted_network_reason_peer_timeout"
+	case Wlan_hosted_network_reason_gp_denied:
+		return "Wlan_hosted_network_reason_gp_denied"
+	case Wlan_hosted_network_reason_service_unavailable:
+		return "Wlan_hosted_network_reason_service_unavailable"
+	case Wlan_hosted_network_reason_device_change:
+		return "Wlan_hosted_network_reason_device_change"
+	case Wlan_hosted_network_reason_properties_change:
+		return "Wlan_hosted_network_reason_properties_change"
+	case Wlan_hosted_network_reason_virtual_station_blocking_use:
+		return "Wlan_hosted_network_reason_virtual_station_blocking_use"
+	case Wlan_hosted_network_reason_service_available_on_virtual_station:
+		return "Wlan_hosted_network_reason_service_available_on_virtual_station"
+	default:
+		return fmt.Sprintf("WLAN_HOSTED_NETWORK_REASON(%d)", int32(e))
+	}
+}
+
 // WLAN_HOSTED_NETWORK_STATE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_hosted_network_state
 type WLAN_HOSTED_NETWORK_STATE int32
 
@@ -807,6 +2270,21 @@ const (
 	Wlan_hosted_network_active      WLAN_HOSTED_NETWORK_STATE = 2
 )
 
+// String returns the WLAN_HOSTED_NETWORK_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_HOSTED_NETWORK_STATE) String() string {
+	switch e {
+	case Wlan_hosted_network_unavailable:
+		return "Wlan_hosted_network_unavailable"
+	case Wlan_hosted_network_idle:
+		return "Wlan_hosted_network_idle"
+	case Wlan_hosted_network_active:
+		return "Wlan_hosted_network_active"
+	default:
+		return fmt.Sprintf("WLAN_HOSTED_NETWORK_STATE(%d)", int32(e))
+	}
+}
+
 // WLAN_IHV_CONTROL_TYPE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_ihv_control_type~r1
 type WLAN_IHV_CONTROL_TYPE int32
 
@@ -814,6 +2292,19 @@ const (
 	Wlan_ihv_control_type_service WLAN_IHV_CONTROL_TYPE = 0
 	Wlan_ihv_control_type_driver  WLAN_IHV_CONTROL_TYPE = 1
 )
+
+// String returns the WLAN_IHV_CONTROL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_IHV_CONTROL_TYPE) String() string {
+	switch e {
+	case Wlan_ihv_control_type_service:
+		return "Wlan_ihv_control_type_service"
+	case Wlan_ihv_control_type_driver:
+		return "Wlan_ihv_control_type_driver"
+	default:
+		return fmt.Sprintf("WLAN_IHV_CONTROL_TYPE(%d)", int32(e))
+	}
+}
 
 // WLAN_INTERFACE_STATE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_interface_state~r1
 type WLAN_INTERFACE_STATE int32
@@ -829,6 +2320,31 @@ const (
 	Wlan_interface_state_authenticating        WLAN_INTERFACE_STATE = 7
 )
 
+// String returns the WLAN_INTERFACE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_INTERFACE_STATE) String() string {
+	switch e {
+	case Wlan_interface_state_not_ready:
+		return "Wlan_interface_state_not_ready"
+	case Wlan_interface_state_connected:
+		return "Wlan_interface_state_connected"
+	case Wlan_interface_state_ad_hoc_network_formed:
+		return "Wlan_interface_state_ad_hoc_network_formed"
+	case Wlan_interface_state_disconnecting:
+		return "Wlan_interface_state_disconnecting"
+	case Wlan_interface_state_disconnected:
+		return "Wlan_interface_state_disconnected"
+	case Wlan_interface_state_associating:
+		return "Wlan_interface_state_associating"
+	case Wlan_interface_state_discovering:
+		return "Wlan_interface_state_discovering"
+	case Wlan_interface_state_authenticating:
+		return "Wlan_interface_state_authenticating"
+	default:
+		return fmt.Sprintf("WLAN_INTERFACE_STATE(%d)", int32(e))
+	}
+}
+
 // WLAN_INTERFACE_TYPE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_interface_type
 type WLAN_INTERFACE_TYPE int32
 
@@ -837,6 +2353,21 @@ const (
 	Wlan_interface_type_native_802_11   WLAN_INTERFACE_TYPE = 1
 	Wlan_interface_type_invalid         WLAN_INTERFACE_TYPE = 2
 )
+
+// String returns the WLAN_INTERFACE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_INTERFACE_TYPE) String() string {
+	switch e {
+	case Wlan_interface_type_emulated_802_11:
+		return "Wlan_interface_type_emulated_802_11"
+	case Wlan_interface_type_native_802_11:
+		return "Wlan_interface_type_native_802_11"
+	case Wlan_interface_type_invalid:
+		return "Wlan_interface_type_invalid"
+	default:
+		return fmt.Sprintf("WLAN_INTERFACE_TYPE(%d)", int32(e))
+	}
+}
 
 // WLAN_INTF_OPCODE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_intf_opcode~r1
 type WLAN_INTF_OPCODE int32
@@ -874,6 +2405,75 @@ const (
 	Wlan_intf_opcode_ihv_end                                    WLAN_INTF_OPCODE = 1073741823
 )
 
+// String returns the WLAN_INTF_OPCODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_INTF_OPCODE) String() string {
+	switch e {
+	case Wlan_intf_opcode_autoconf_start:
+		return "Wlan_intf_opcode_autoconf_start"
+	case Wlan_intf_opcode_autoconf_enabled:
+		return "Wlan_intf_opcode_autoconf_enabled"
+	case Wlan_intf_opcode_background_scan_enabled:
+		return "Wlan_intf_opcode_background_scan_enabled"
+	case Wlan_intf_opcode_media_streaming_mode:
+		return "Wlan_intf_opcode_media_streaming_mode"
+	case Wlan_intf_opcode_radio_state:
+		return "Wlan_intf_opcode_radio_state"
+	case Wlan_intf_opcode_bss_type:
+		return "Wlan_intf_opcode_bss_type"
+	case Wlan_intf_opcode_interface_state:
+		return "Wlan_intf_opcode_interface_state"
+	case Wlan_intf_opcode_current_connection:
+		return "Wlan_intf_opcode_current_connection"
+	case Wlan_intf_opcode_channel_number:
+		return "Wlan_intf_opcode_channel_number"
+	case Wlan_intf_opcode_supported_infrastructure_auth_cipher_pairs:
+		return "Wlan_intf_opcode_supported_infrastructure_auth_cipher_pairs"
+	case Wlan_intf_opcode_supported_adhoc_auth_cipher_pairs:
+		return "Wlan_intf_opcode_supported_adhoc_auth_cipher_pairs"
+	case Wlan_intf_opcode_supported_country_or_region_string_list:
+		return "Wlan_intf_opcode_supported_country_or_region_string_list"
+	case Wlan_intf_opcode_current_operation_mode:
+		return "Wlan_intf_opcode_current_operation_mode"
+	case Wlan_intf_opcode_supported_safe_mode:
+		return "Wlan_intf_opcode_supported_safe_mode"
+	case Wlan_intf_opcode_certified_safe_mode:
+		return "Wlan_intf_opcode_certified_safe_mode"
+	case Wlan_intf_opcode_hosted_network_capable:
+		return "Wlan_intf_opcode_hosted_network_capable"
+	case Wlan_intf_opcode_management_frame_protection_capable:
+		return "Wlan_intf_opcode_management_frame_protection_capable"
+	case Wlan_intf_opcode_secondary_sta_interfaces:
+		return "Wlan_intf_opcode_secondary_sta_interfaces"
+	case Wlan_intf_opcode_secondary_sta_synchronized_connections:
+		return "Wlan_intf_opcode_secondary_sta_synchronized_connections"
+	case Wlan_intf_opcode_realtime_connection_quality:
+		return "Wlan_intf_opcode_realtime_connection_quality"
+	case Wlan_intf_opcode_qos_info:
+		return "Wlan_intf_opcode_qos_info"
+	case Wlan_intf_opcode_autoconf_end:
+		return "Wlan_intf_opcode_autoconf_end"
+	case Wlan_intf_opcode_msm_start:
+		return "Wlan_intf_opcode_msm_start"
+	case Wlan_intf_opcode_statistics:
+		return "Wlan_intf_opcode_statistics"
+	case Wlan_intf_opcode_rssi:
+		return "Wlan_intf_opcode_rssi"
+	case Wlan_intf_opcode_msm_end:
+		return "Wlan_intf_opcode_msm_end"
+	case Wlan_intf_opcode_security_start:
+		return "Wlan_intf_opcode_security_start"
+	case Wlan_intf_opcode_security_end:
+		return "Wlan_intf_opcode_security_end"
+	case Wlan_intf_opcode_ihv_start:
+		return "Wlan_intf_opcode_ihv_start"
+	case Wlan_intf_opcode_ihv_end:
+		return "Wlan_intf_opcode_ihv_end"
+	default:
+		return fmt.Sprintf("WLAN_INTF_OPCODE(%d)", int32(e))
+	}
+}
+
 // WLAN_NOTIFICATION_ACM: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_notification_acm~r1
 type WLAN_NOTIFICATION_ACM int32
 
@@ -909,6 +2509,73 @@ const (
 	Wlan_notification_acm_end                        WLAN_NOTIFICATION_ACM = 28
 )
 
+// String returns the WLAN_NOTIFICATION_ACM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_NOTIFICATION_ACM) String() string {
+	switch e {
+	case Wlan_notification_acm_start:
+		return "Wlan_notification_acm_start"
+	case Wlan_notification_acm_autoconf_enabled:
+		return "Wlan_notification_acm_autoconf_enabled"
+	case Wlan_notification_acm_autoconf_disabled:
+		return "Wlan_notification_acm_autoconf_disabled"
+	case Wlan_notification_acm_background_scan_enabled:
+		return "Wlan_notification_acm_background_scan_enabled"
+	case Wlan_notification_acm_background_scan_disabled:
+		return "Wlan_notification_acm_background_scan_disabled"
+	case Wlan_notification_acm_bss_type_change:
+		return "Wlan_notification_acm_bss_type_change"
+	case Wlan_notification_acm_power_setting_change:
+		return "Wlan_notification_acm_power_setting_change"
+	case Wlan_notification_acm_scan_complete:
+		return "Wlan_notification_acm_scan_complete"
+	case Wlan_notification_acm_scan_fail:
+		return "Wlan_notification_acm_scan_fail"
+	case Wlan_notification_acm_connection_start:
+		return "Wlan_notification_acm_connection_start"
+	case Wlan_notification_acm_connection_complete:
+		return "Wlan_notification_acm_connection_complete"
+	case Wlan_notification_acm_connection_attempt_fail:
+		return "Wlan_notification_acm_connection_attempt_fail"
+	case Wlan_notification_acm_filter_list_change:
+		return "Wlan_notification_acm_filter_list_change"
+	case Wlan_notification_acm_interface_arrival:
+		return "Wlan_notification_acm_interface_arrival"
+	case Wlan_notification_acm_interface_removal:
+		return "Wlan_notification_acm_interface_removal"
+	case Wlan_notification_acm_profile_change:
+		return "Wlan_notification_acm_profile_change"
+	case Wlan_notification_acm_profile_name_change:
+		return "Wlan_notification_acm_profile_name_change"
+	case Wlan_notification_acm_profiles_exhausted:
+		return "Wlan_notification_acm_profiles_exhausted"
+	case Wlan_notification_acm_network_not_available:
+		return "Wlan_notification_acm_network_not_available"
+	case Wlan_notification_acm_network_available:
+		return "Wlan_notification_acm_network_available"
+	case Wlan_notification_acm_disconnecting:
+		return "Wlan_notification_acm_disconnecting"
+	case Wlan_notification_acm_disconnected:
+		return "Wlan_notification_acm_disconnected"
+	case Wlan_notification_acm_adhoc_network_state_change:
+		return "Wlan_notification_acm_adhoc_network_state_change"
+	case Wlan_notification_acm_profile_unblocked:
+		return "Wlan_notification_acm_profile_unblocked"
+	case Wlan_notification_acm_screen_power_change:
+		return "Wlan_notification_acm_screen_power_change"
+	case Wlan_notification_acm_profile_blocked:
+		return "Wlan_notification_acm_profile_blocked"
+	case Wlan_notification_acm_scan_list_refresh:
+		return "Wlan_notification_acm_scan_list_refresh"
+	case Wlan_notification_acm_operational_state_change:
+		return "Wlan_notification_acm_operational_state_change"
+	case Wlan_notification_acm_end:
+		return "Wlan_notification_acm_end"
+	default:
+		return fmt.Sprintf("WLAN_NOTIFICATION_ACM(%d)", int32(e))
+	}
+}
+
 // WLAN_NOTIFICATION_MSM: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_notification_msm~r1
 type WLAN_NOTIFICATION_MSM int32
 
@@ -933,6 +2600,51 @@ const (
 	Wlan_notification_msm_end                           WLAN_NOTIFICATION_MSM = 17
 )
 
+// String returns the WLAN_NOTIFICATION_MSM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_NOTIFICATION_MSM) String() string {
+	switch e {
+	case Wlan_notification_msm_start:
+		return "Wlan_notification_msm_start"
+	case Wlan_notification_msm_associating:
+		return "Wlan_notification_msm_associating"
+	case Wlan_notification_msm_associated:
+		return "Wlan_notification_msm_associated"
+	case Wlan_notification_msm_authenticating:
+		return "Wlan_notification_msm_authenticating"
+	case Wlan_notification_msm_connected:
+		return "Wlan_notification_msm_connected"
+	case Wlan_notification_msm_roaming_start:
+		return "Wlan_notification_msm_roaming_start"
+	case Wlan_notification_msm_roaming_end:
+		return "Wlan_notification_msm_roaming_end"
+	case Wlan_notification_msm_radio_state_change:
+		return "Wlan_notification_msm_radio_state_change"
+	case Wlan_notification_msm_signal_quality_change:
+		return "Wlan_notification_msm_signal_quality_change"
+	case Wlan_notification_msm_disassociating:
+		return "Wlan_notification_msm_disassociating"
+	case Wlan_notification_msm_disconnected:
+		return "Wlan_notification_msm_disconnected"
+	case Wlan_notification_msm_peer_join:
+		return "Wlan_notification_msm_peer_join"
+	case Wlan_notification_msm_peer_leave:
+		return "Wlan_notification_msm_peer_leave"
+	case Wlan_notification_msm_adapter_removal:
+		return "Wlan_notification_msm_adapter_removal"
+	case Wlan_notification_msm_adapter_operation_mode_change:
+		return "Wlan_notification_msm_adapter_operation_mode_change"
+	case Wlan_notification_msm_link_degraded:
+		return "Wlan_notification_msm_link_degraded"
+	case Wlan_notification_msm_link_improved:
+		return "Wlan_notification_msm_link_improved"
+	case Wlan_notification_msm_end:
+		return "Wlan_notification_msm_end"
+	default:
+		return fmt.Sprintf("WLAN_NOTIFICATION_MSM(%d)", int32(e))
+	}
+}
+
 type WLAN_NOTIFICATION_SECURITY int32
 
 const (
@@ -940,6 +2652,20 @@ const (
 	Wlan_notification_security_end   WLAN_NOTIFICATION_SECURITY = 1
 )
 
+// String returns the WLAN_NOTIFICATION_SECURITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_NOTIFICATION_SECURITY) String() string {
+	switch e {
+	case Wlan_notification_security_start:
+		return "Wlan_notification_security_start"
+	case Wlan_notification_security_end:
+		return "Wlan_notification_security_end"
+	default:
+		return fmt.Sprintf("WLAN_NOTIFICATION_SECURITY(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WLAN_NOTIFICATION_SOURCES uint32
 
 const (
@@ -954,6 +2680,40 @@ const (
 	WLAN_NOTIFICATION_SOURCE_DEVICE_SERVICE WLAN_NOTIFICATION_SOURCES = 2048
 )
 
+// String returns the WLAN_NOTIFICATION_SOURCES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_NOTIFICATION_SOURCES) String() string {
+	var parts []string
+	if e&WLAN_NOTIFICATION_SOURCE_ALL != 0 {
+		parts = append(parts, "WLAN_NOTIFICATION_SOURCE_ALL")
+	}
+	if e&WLAN_NOTIFICATION_SOURCE_ACM != 0 {
+		parts = append(parts, "WLAN_NOTIFICATION_SOURCE_ACM")
+	}
+	if e&WLAN_NOTIFICATION_SOURCE_MSM != 0 {
+		parts = append(parts, "WLAN_NOTIFICATION_SOURCE_MSM")
+	}
+	if e&WLAN_NOTIFICATION_SOURCE_SECURITY != 0 {
+		parts = append(parts, "WLAN_NOTIFICATION_SOURCE_SECURITY")
+	}
+	if e&WLAN_NOTIFICATION_SOURCE_IHV != 0 {
+		parts = append(parts, "WLAN_NOTIFICATION_SOURCE_IHV")
+	}
+	if e&WLAN_NOTIFICATION_SOURCE_HNWK != 0 {
+		parts = append(parts, "WLAN_NOTIFICATION_SOURCE_HNWK")
+	}
+	if e&WLAN_NOTIFICATION_SOURCE_ONEX != 0 {
+		parts = append(parts, "WLAN_NOTIFICATION_SOURCE_ONEX")
+	}
+	if e&WLAN_NOTIFICATION_SOURCE_DEVICE_SERVICE != 0 {
+		parts = append(parts, "WLAN_NOTIFICATION_SOURCE_DEVICE_SERVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // WLAN_OPCODE_VALUE_TYPE: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_opcode_value_type~r1
 type WLAN_OPCODE_VALUE_TYPE int32
 
@@ -963,6 +2723,23 @@ const (
 	Wlan_opcode_value_type_set_by_user         WLAN_OPCODE_VALUE_TYPE = 2
 	Wlan_opcode_value_type_invalid             WLAN_OPCODE_VALUE_TYPE = 3
 )
+
+// String returns the WLAN_OPCODE_VALUE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_OPCODE_VALUE_TYPE) String() string {
+	switch e {
+	case Wlan_opcode_value_type_query_only:
+		return "Wlan_opcode_value_type_query_only"
+	case Wlan_opcode_value_type_set_by_group_policy:
+		return "Wlan_opcode_value_type_set_by_group_policy"
+	case Wlan_opcode_value_type_set_by_user:
+		return "Wlan_opcode_value_type_set_by_user"
+	case Wlan_opcode_value_type_invalid:
+		return "Wlan_opcode_value_type_invalid"
+	default:
+		return fmt.Sprintf("WLAN_OPCODE_VALUE_TYPE(%d)", int32(e))
+	}
+}
 
 type WLAN_OPERATIONAL_STATE int32
 
@@ -974,6 +2751,25 @@ const (
 	Wlan_operational_state_going_on  WLAN_OPERATIONAL_STATE = 4
 )
 
+// String returns the WLAN_OPERATIONAL_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_OPERATIONAL_STATE) String() string {
+	switch e {
+	case Wlan_operational_state_unknown:
+		return "Wlan_operational_state_unknown"
+	case Wlan_operational_state_off:
+		return "Wlan_operational_state_off"
+	case Wlan_operational_state_on:
+		return "Wlan_operational_state_on"
+	case Wlan_operational_state_going_off:
+		return "Wlan_operational_state_going_off"
+	case Wlan_operational_state_going_on:
+		return "Wlan_operational_state_going_on"
+	default:
+		return fmt.Sprintf("WLAN_OPERATIONAL_STATE(%d)", int32(e))
+	}
+}
+
 // WLAN_POWER_SETTING: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_power_setting~r1
 type WLAN_POWER_SETTING int32
 
@@ -984,6 +2780,25 @@ const (
 	Wlan_power_setting_maximum_saving WLAN_POWER_SETTING = 3
 	Wlan_power_setting_invalid        WLAN_POWER_SETTING = 4
 )
+
+// String returns the WLAN_POWER_SETTING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_POWER_SETTING) String() string {
+	switch e {
+	case Wlan_power_setting_no_saving:
+		return "Wlan_power_setting_no_saving"
+	case Wlan_power_setting_low_saving:
+		return "Wlan_power_setting_low_saving"
+	case Wlan_power_setting_medium_saving:
+		return "Wlan_power_setting_medium_saving"
+	case Wlan_power_setting_maximum_saving:
+		return "Wlan_power_setting_maximum_saving"
+	case Wlan_power_setting_invalid:
+		return "Wlan_power_setting_invalid"
+	default:
+		return fmt.Sprintf("WLAN_POWER_SETTING(%d)", int32(e))
+	}
+}
 
 // WLAN_SECURABLE_OBJECT: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wlan_securable_object
 type WLAN_SECURABLE_OBJECT int32
@@ -1009,11 +2824,67 @@ const (
 	WLAN_SECURABLE_OBJECT_COUNT                WLAN_SECURABLE_OBJECT = 17
 )
 
+// String returns the WLAN_SECURABLE_OBJECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_SECURABLE_OBJECT) String() string {
+	switch e {
+	case Wlan_secure_permit_list:
+		return "Wlan_secure_permit_list"
+	case Wlan_secure_deny_list:
+		return "Wlan_secure_deny_list"
+	case Wlan_secure_ac_enabled:
+		return "Wlan_secure_ac_enabled"
+	case Wlan_secure_bc_scan_enabled:
+		return "Wlan_secure_bc_scan_enabled"
+	case Wlan_secure_bss_type:
+		return "Wlan_secure_bss_type"
+	case Wlan_secure_show_denied:
+		return "Wlan_secure_show_denied"
+	case Wlan_secure_interface_properties:
+		return "Wlan_secure_interface_properties"
+	case Wlan_secure_ihv_control:
+		return "Wlan_secure_ihv_control"
+	case Wlan_secure_all_user_profiles_order:
+		return "Wlan_secure_all_user_profiles_order"
+	case Wlan_secure_add_new_all_user_profiles:
+		return "Wlan_secure_add_new_all_user_profiles"
+	case Wlan_secure_add_new_per_user_profiles:
+		return "Wlan_secure_add_new_per_user_profiles"
+	case Wlan_secure_media_streaming_mode_enabled:
+		return "Wlan_secure_media_streaming_mode_enabled"
+	case Wlan_secure_current_operation_mode:
+		return "Wlan_secure_current_operation_mode"
+	case Wlan_secure_get_plaintext_key:
+		return "Wlan_secure_get_plaintext_key"
+	case Wlan_secure_hosted_network_elevated_access:
+		return "Wlan_secure_hosted_network_elevated_access"
+	case Wlan_secure_virtual_station_extensibility:
+		return "Wlan_secure_virtual_station_extensibility"
+	case Wlan_secure_wfd_elevated_access:
+		return "Wlan_secure_wfd_elevated_access"
+	case WLAN_SECURABLE_OBJECT_COUNT:
+		return "WLAN_SECURABLE_OBJECT_COUNT"
+	default:
+		return fmt.Sprintf("WLAN_SECURABLE_OBJECT(%d)", int32(e))
+	}
+}
+
 type WLAN_SET_EAPHOST_FLAGS uint32
 
 const (
 	WLAN_SET_EAPHOST_DATA_ALL_USERS WLAN_SET_EAPHOST_FLAGS = 1
 )
+
+// String returns the WLAN_SET_EAPHOST_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WLAN_SET_EAPHOST_FLAGS) String() string {
+	switch e {
+	case WLAN_SET_EAPHOST_DATA_ALL_USERS:
+		return "WLAN_SET_EAPHOST_DATA_ALL_USERS"
+	default:
+		return fmt.Sprintf("WLAN_SET_EAPHOST_FLAGS(%d)", uint32(e))
+	}
+}
 
 // WL_DISPLAY_PAGES: https://learn.microsoft.com/windows/win32/api/wlanapi/ne-wlanapi-wl_display_pages
 type WL_DISPLAY_PAGES int32
@@ -1024,6 +2895,21 @@ const (
 	WLAdvPage        WL_DISPLAY_PAGES = 2
 )
 
+// String returns the WL_DISPLAY_PAGES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WL_DISPLAY_PAGES) String() string {
+	switch e {
+	case WLConnectionPage:
+		return "WLConnectionPage"
+	case WLSecurityPage:
+		return "WLSecurityPage"
+	case WLAdvPage:
+		return "WLAdvPage"
+	default:
+		return fmt.Sprintf("WL_DISPLAY_PAGES(%d)", int32(e))
+	}
+}
+
 type WPA_AKM_SUITE int32
 
 const (
@@ -1032,6 +2918,21 @@ const (
 	Wpa_akm_psk  WPA_AKM_SUITE = 49434624
 	Wpa_akm_max  WPA_AKM_SUITE = 49434624
 )
+
+// String returns the WPA_AKM_SUITE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPA_AKM_SUITE) String() string {
+	switch e {
+	case Wpa_akm_none:
+		return "Wpa_akm_none"
+	case Wpa_akm_1x:
+		return "Wpa_akm_1x"
+	case Wpa_akm_psk:
+		return "Wpa_akm_psk"
+	default:
+		return fmt.Sprintf("WPA_AKM_SUITE(%d)", int32(e))
+	}
+}
 
 type WPA_CIPHER_SUITE int32
 
@@ -1044,3 +2945,24 @@ const (
 	Wpa_cipher_bip_cmac_128 WPA_CIPHER_SUITE = 116543488
 	Wpa_cipher_max          WPA_CIPHER_SUITE = 116543488
 )
+
+// String returns the WPA_CIPHER_SUITE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPA_CIPHER_SUITE) String() string {
+	switch e {
+	case Wpa_cipher_none:
+		return "Wpa_cipher_none"
+	case Wpa_cipher_wep40:
+		return "Wpa_cipher_wep40"
+	case Wpa_cipher_tkip:
+		return "Wpa_cipher_tkip"
+	case Wpa_cipher_ccmp_128:
+		return "Wpa_cipher_ccmp_128"
+	case Wpa_cipher_wep104:
+		return "Wpa_cipher_wep104"
+	case Wpa_cipher_bip_cmac_128:
+		return "Wpa_cipher_bip_cmac_128"
+	default:
+		return fmt.Sprintf("WPA_CIPHER_SUITE(%d)", int32(e))
+	}
+}

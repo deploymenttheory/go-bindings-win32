@@ -4,6 +4,10 @@
 
 package dxc
 
+import (
+	"fmt"
+)
+
 type DXC_CP uint32
 
 const (
@@ -13,6 +17,23 @@ const (
 	DXC_CP_UTF32 DXC_CP = 12000
 	DXC_CP_WIDE  DXC_CP = 1200
 )
+
+// String returns the DXC_CP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXC_CP) String() string {
+	switch e {
+	case DXC_CP_ACP:
+		return "DXC_CP_ACP"
+	case DXC_CP_UTF16:
+		return "DXC_CP_UTF16"
+	case DXC_CP_UTF8:
+		return "DXC_CP_UTF8"
+	case DXC_CP_UTF32:
+		return "DXC_CP_UTF32"
+	default:
+		return fmt.Sprintf("DXC_CP(%d)", uint32(e))
+	}
+}
 
 type DXC_OUT_KIND int32
 
@@ -34,3 +55,42 @@ const (
 	DXC_OUT_LAST           DXC_OUT_KIND = 13
 	DXC_OUT_NUM_ENUMS      DXC_OUT_KIND = 14
 )
+
+// String returns the DXC_OUT_KIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXC_OUT_KIND) String() string {
+	switch e {
+	case DXC_OUT_NONE:
+		return "DXC_OUT_NONE"
+	case DXC_OUT_OBJECT:
+		return "DXC_OUT_OBJECT"
+	case DXC_OUT_ERRORS:
+		return "DXC_OUT_ERRORS"
+	case DXC_OUT_PDB:
+		return "DXC_OUT_PDB"
+	case DXC_OUT_SHADER_HASH:
+		return "DXC_OUT_SHADER_HASH"
+	case DXC_OUT_DISASSEMBLY:
+		return "DXC_OUT_DISASSEMBLY"
+	case DXC_OUT_HLSL:
+		return "DXC_OUT_HLSL"
+	case DXC_OUT_TEXT:
+		return "DXC_OUT_TEXT"
+	case DXC_OUT_REFLECTION:
+		return "DXC_OUT_REFLECTION"
+	case DXC_OUT_ROOT_SIGNATURE:
+		return "DXC_OUT_ROOT_SIGNATURE"
+	case DXC_OUT_EXTRA_OUTPUTS:
+		return "DXC_OUT_EXTRA_OUTPUTS"
+	case DXC_OUT_REMARKS:
+		return "DXC_OUT_REMARKS"
+	case DXC_OUT_TIME_REPORT:
+		return "DXC_OUT_TIME_REPORT"
+	case DXC_OUT_TIME_TRACE:
+		return "DXC_OUT_TIME_TRACE"
+	case DXC_OUT_NUM_ENUMS:
+		return "DXC_OUT_NUM_ENUMS"
+	default:
+		return fmt.Sprintf("DXC_OUT_KIND(%d)", int32(e))
+	}
+}

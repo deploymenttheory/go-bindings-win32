@@ -4,6 +4,10 @@
 
 package networkaccessprotection
 
+import (
+	"fmt"
+)
+
 // ExtendedIsolationState: https://learn.microsoft.com/windows/win32/api/naptypes/ne-naptypes-extendedisolationstate
 type ExtendedIsolationState int32
 
@@ -13,6 +17,23 @@ const (
 	ExtendedIsolationStateInfected   ExtendedIsolationState = 2
 	ExtendedIsolationStateUnknown    ExtendedIsolationState = 3
 )
+
+// String returns the ExtendedIsolationState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ExtendedIsolationState) String() string {
+	switch e {
+	case ExtendedIsolationStateNoData:
+		return "ExtendedIsolationStateNoData"
+	case ExtendedIsolationStateTransition:
+		return "ExtendedIsolationStateTransition"
+	case ExtendedIsolationStateInfected:
+		return "ExtendedIsolationStateInfected"
+	case ExtendedIsolationStateUnknown:
+		return "ExtendedIsolationStateUnknown"
+	default:
+		return fmt.Sprintf("ExtendedIsolationState(%d)", int32(e))
+	}
+}
 
 // FailureCategory: https://learn.microsoft.com/windows/win32/api/naptypes/ne-naptypes-failurecategory
 type FailureCategory int32
@@ -26,6 +47,27 @@ const (
 	FailureCategoryServerCommunication FailureCategory = 5
 )
 
+// String returns the FailureCategory constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FailureCategory) String() string {
+	switch e {
+	case FailureCategoryNone:
+		return "FailureCategoryNone"
+	case FailureCategoryOther:
+		return "FailureCategoryOther"
+	case FailureCategoryClientComponent:
+		return "FailureCategoryClientComponent"
+	case FailureCategoryClientCommunication:
+		return "FailureCategoryClientCommunication"
+	case FailureCategoryServerComponent:
+		return "FailureCategoryServerComponent"
+	case FailureCategoryServerCommunication:
+		return "FailureCategoryServerCommunication"
+	default:
+		return fmt.Sprintf("FailureCategory(%d)", int32(e))
+	}
+}
+
 // FixupState: https://learn.microsoft.com/windows/win32/api/naptypes/ne-naptypes-fixupstate
 type FixupState int32
 
@@ -34,6 +76,21 @@ const (
 	FixupStateInProgress     FixupState = 1
 	FixupStateCouldNotUpdate FixupState = 2
 )
+
+// String returns the FixupState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FixupState) String() string {
+	switch e {
+	case FixupStateSuccess:
+		return "FixupStateSuccess"
+	case FixupStateInProgress:
+		return "FixupStateInProgress"
+	case FixupStateCouldNotUpdate:
+		return "FixupStateCouldNotUpdate"
+	default:
+		return fmt.Sprintf("FixupState(%d)", int32(e))
+	}
+}
 
 // IsolationState: https://learn.microsoft.com/windows/win32/api/naptypes/ne-naptypes-isolationstate
 type IsolationState int32
@@ -44,6 +101,21 @@ const (
 	IsolationStateRestrictedAccess IsolationState = 3
 )
 
+// String returns the IsolationState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IsolationState) String() string {
+	switch e {
+	case IsolationStateNotRestricted:
+		return "IsolationStateNotRestricted"
+	case IsolationStateInProbation:
+		return "IsolationStateInProbation"
+	case IsolationStateRestrictedAccess:
+		return "IsolationStateRestrictedAccess"
+	default:
+		return fmt.Sprintf("IsolationState(%d)", int32(e))
+	}
+}
+
 // NapNotifyType: https://learn.microsoft.com/windows/win32/api/naptypes/ne-naptypes-napnotifytype
 type NapNotifyType int32
 
@@ -52,6 +124,21 @@ const (
 	NapNotifyTypeServiceState NapNotifyType = 1
 	NapNotifyTypeQuarState    NapNotifyType = 2
 )
+
+// String returns the NapNotifyType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NapNotifyType) String() string {
+	switch e {
+	case NapNotifyTypeUnknown:
+		return "NapNotifyTypeUnknown"
+	case NapNotifyTypeServiceState:
+		return "NapNotifyTypeServiceState"
+	case NapNotifyTypeQuarState:
+		return "NapNotifyTypeQuarState"
+	default:
+		return fmt.Sprintf("NapNotifyType(%d)", int32(e))
+	}
+}
 
 type NapTracingLevel int32
 
@@ -62,6 +149,23 @@ const (
 	TracingLevelDebug     NapTracingLevel = 3
 )
 
+// String returns the NapTracingLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NapTracingLevel) String() string {
+	switch e {
+	case TracingLevelUndefined:
+		return "TracingLevelUndefined"
+	case TracingLevelBasic:
+		return "TracingLevelBasic"
+	case TracingLevelAdvanced:
+		return "TracingLevelAdvanced"
+	case TracingLevelDebug:
+		return "TracingLevelDebug"
+	default:
+		return fmt.Sprintf("NapTracingLevel(%d)", int32(e))
+	}
+}
+
 // RemoteConfigurationType: https://learn.microsoft.com/windows/win32/api/naptypes/ne-naptypes-remoteconfigurationtype
 type RemoteConfigurationType int32
 
@@ -69,3 +173,16 @@ const (
 	RemoteConfigTypeMachine    RemoteConfigurationType = 1
 	RemoteConfigTypeConfigBlob RemoteConfigurationType = 2
 )
+
+// String returns the RemoteConfigurationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RemoteConfigurationType) String() string {
+	switch e {
+	case RemoteConfigTypeMachine:
+		return "RemoteConfigTypeMachine"
+	case RemoteConfigTypeConfigBlob:
+		return "RemoteConfigTypeConfigBlob"
+	default:
+		return fmt.Sprintf("RemoteConfigurationType(%d)", int32(e))
+	}
+}

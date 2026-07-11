@@ -4,6 +4,10 @@
 
 package assessmenttool
 
+import (
+	"fmt"
+)
+
 // WINSAT_ASSESSMENT_STATE: https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/ne-winsatcominterfacei-winsat_assessment_state
 type WINSAT_ASSESSMENT_STATE int32
 
@@ -17,6 +21,25 @@ const (
 	WINSAT_ASSESSMENT_STATE_MAX                      WINSAT_ASSESSMENT_STATE = 4
 )
 
+// String returns the WINSAT_ASSESSMENT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINSAT_ASSESSMENT_STATE) String() string {
+	switch e {
+	case WINSAT_ASSESSMENT_STATE_MIN:
+		return "WINSAT_ASSESSMENT_STATE_MIN"
+	case WINSAT_ASSESSMENT_STATE_VALID:
+		return "WINSAT_ASSESSMENT_STATE_VALID"
+	case WINSAT_ASSESSMENT_STATE_INCOHERENT_WITH_HARDWARE:
+		return "WINSAT_ASSESSMENT_STATE_INCOHERENT_WITH_HARDWARE"
+	case WINSAT_ASSESSMENT_STATE_NOT_AVAILABLE:
+		return "WINSAT_ASSESSMENT_STATE_NOT_AVAILABLE"
+	case WINSAT_ASSESSMENT_STATE_INVALID:
+		return "WINSAT_ASSESSMENT_STATE_INVALID"
+	default:
+		return fmt.Sprintf("WINSAT_ASSESSMENT_STATE(%d)", int32(e))
+	}
+}
+
 // WINSAT_ASSESSMENT_TYPE: https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/ne-winsatcominterfacei-winsat_assessment_type
 type WINSAT_ASSESSMENT_TYPE int32
 
@@ -28,6 +51,25 @@ const (
 	WINSAT_ASSESSMENT_GRAPHICS WINSAT_ASSESSMENT_TYPE = 4
 )
 
+// String returns the WINSAT_ASSESSMENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINSAT_ASSESSMENT_TYPE) String() string {
+	switch e {
+	case WINSAT_ASSESSMENT_MEMORY:
+		return "WINSAT_ASSESSMENT_MEMORY"
+	case WINSAT_ASSESSMENT_CPU:
+		return "WINSAT_ASSESSMENT_CPU"
+	case WINSAT_ASSESSMENT_DISK:
+		return "WINSAT_ASSESSMENT_DISK"
+	case WINSAT_ASSESSMENT_D3D:
+		return "WINSAT_ASSESSMENT_D3D"
+	case WINSAT_ASSESSMENT_GRAPHICS:
+		return "WINSAT_ASSESSMENT_GRAPHICS"
+	default:
+		return fmt.Sprintf("WINSAT_ASSESSMENT_TYPE(%d)", int32(e))
+	}
+}
+
 // WINSAT_BITMAP_SIZE: https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/ne-winsatcominterfacei-winsat_bitmap_size
 type WINSAT_BITMAP_SIZE int32
 
@@ -35,6 +77,19 @@ const (
 	WINSAT_BITMAP_SIZE_SMALL  WINSAT_BITMAP_SIZE = 0
 	WINSAT_BITMAP_SIZE_NORMAL WINSAT_BITMAP_SIZE = 1
 )
+
+// String returns the WINSAT_BITMAP_SIZE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINSAT_BITMAP_SIZE) String() string {
+	switch e {
+	case WINSAT_BITMAP_SIZE_SMALL:
+		return "WINSAT_BITMAP_SIZE_SMALL"
+	case WINSAT_BITMAP_SIZE_NORMAL:
+		return "WINSAT_BITMAP_SIZE_NORMAL"
+	default:
+		return fmt.Sprintf("WINSAT_BITMAP_SIZE(%d)", int32(e))
+	}
+}
 
 type WINSAT_OEM_CUSTOMIZATION_STATE int32
 
@@ -44,3 +99,20 @@ const (
 	WINSAT_OEM_DATA_INVALID              WINSAT_OEM_CUSTOMIZATION_STATE = 2
 	WINSAT_OEM_NO_DATA_SUPPLIED          WINSAT_OEM_CUSTOMIZATION_STATE = 3
 )
+
+// String returns the WINSAT_OEM_CUSTOMIZATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINSAT_OEM_CUSTOMIZATION_STATE) String() string {
+	switch e {
+	case WINSAT_OEM_DATA_VALID:
+		return "WINSAT_OEM_DATA_VALID"
+	case WINSAT_OEM_DATA_NON_SYS_CONFIG_MATCH:
+		return "WINSAT_OEM_DATA_NON_SYS_CONFIG_MATCH"
+	case WINSAT_OEM_DATA_INVALID:
+		return "WINSAT_OEM_DATA_INVALID"
+	case WINSAT_OEM_NO_DATA_SUPPLIED:
+		return "WINSAT_OEM_NO_DATA_SUPPLIED"
+	default:
+		return fmt.Sprintf("WINSAT_OEM_CUSTOMIZATION_STATE(%d)", int32(e))
+	}
+}

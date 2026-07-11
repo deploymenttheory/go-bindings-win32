@@ -4,6 +4,10 @@
 
 package securitycenter
 
+import (
+	"fmt"
+)
+
 type SECURITY_PRODUCT_TYPE int32
 
 const (
@@ -11,6 +15,21 @@ const (
 	SECURITY_PRODUCT_TYPE_FIREWALL    SECURITY_PRODUCT_TYPE = 1
 	SECURITY_PRODUCT_TYPE_ANTISPYWARE SECURITY_PRODUCT_TYPE = 2
 )
+
+// String returns the SECURITY_PRODUCT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURITY_PRODUCT_TYPE) String() string {
+	switch e {
+	case SECURITY_PRODUCT_TYPE_ANTIVIRUS:
+		return "SECURITY_PRODUCT_TYPE_ANTIVIRUS"
+	case SECURITY_PRODUCT_TYPE_FIREWALL:
+		return "SECURITY_PRODUCT_TYPE_FIREWALL"
+	case SECURITY_PRODUCT_TYPE_ANTISPYWARE:
+		return "SECURITY_PRODUCT_TYPE_ANTISPYWARE"
+	default:
+		return fmt.Sprintf("SECURITY_PRODUCT_TYPE(%d)", int32(e))
+	}
+}
 
 // WSC_SECURITY_PRODUCT_STATE: https://learn.microsoft.com/windows/win32/api/iwscapi/ne-iwscapi-wsc_security_product_state
 type WSC_SECURITY_PRODUCT_STATE int32
@@ -22,6 +41,23 @@ const (
 	WSC_SECURITY_PRODUCT_STATE_EXPIRED WSC_SECURITY_PRODUCT_STATE = 3
 )
 
+// String returns the WSC_SECURITY_PRODUCT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSC_SECURITY_PRODUCT_STATE) String() string {
+	switch e {
+	case WSC_SECURITY_PRODUCT_STATE_ON:
+		return "WSC_SECURITY_PRODUCT_STATE_ON"
+	case WSC_SECURITY_PRODUCT_STATE_OFF:
+		return "WSC_SECURITY_PRODUCT_STATE_OFF"
+	case WSC_SECURITY_PRODUCT_STATE_SNOOZED:
+		return "WSC_SECURITY_PRODUCT_STATE_SNOOZED"
+	case WSC_SECURITY_PRODUCT_STATE_EXPIRED:
+		return "WSC_SECURITY_PRODUCT_STATE_EXPIRED"
+	default:
+		return fmt.Sprintf("WSC_SECURITY_PRODUCT_STATE(%d)", int32(e))
+	}
+}
+
 type WSC_SECURITY_PRODUCT_SUBSTATUS int32
 
 const (
@@ -30,6 +66,23 @@ const (
 	WSC_SECURITY_PRODUCT_SUBSTATUS_ACTION_RECOMMENDED WSC_SECURITY_PRODUCT_SUBSTATUS = 2
 	WSC_SECURITY_PRODUCT_SUBSTATUS_ACTION_NEEDED      WSC_SECURITY_PRODUCT_SUBSTATUS = 3
 )
+
+// String returns the WSC_SECURITY_PRODUCT_SUBSTATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSC_SECURITY_PRODUCT_SUBSTATUS) String() string {
+	switch e {
+	case WSC_SECURITY_PRODUCT_SUBSTATUS_NOT_SET:
+		return "WSC_SECURITY_PRODUCT_SUBSTATUS_NOT_SET"
+	case WSC_SECURITY_PRODUCT_SUBSTATUS_NO_ACTION:
+		return "WSC_SECURITY_PRODUCT_SUBSTATUS_NO_ACTION"
+	case WSC_SECURITY_PRODUCT_SUBSTATUS_ACTION_RECOMMENDED:
+		return "WSC_SECURITY_PRODUCT_SUBSTATUS_ACTION_RECOMMENDED"
+	case WSC_SECURITY_PRODUCT_SUBSTATUS_ACTION_NEEDED:
+		return "WSC_SECURITY_PRODUCT_SUBSTATUS_ACTION_NEEDED"
+	default:
+		return fmt.Sprintf("WSC_SECURITY_PRODUCT_SUBSTATUS(%d)", int32(e))
+	}
+}
 
 // WSC_SECURITY_PROVIDER: https://learn.microsoft.com/windows/win32/api/wscapi/ne-wscapi-wsc_security_provider
 type WSC_SECURITY_PROVIDER int32
@@ -46,6 +99,33 @@ const (
 	WSC_SECURITY_PROVIDER_ALL                  WSC_SECURITY_PROVIDER = 127
 )
 
+// String returns the WSC_SECURITY_PROVIDER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSC_SECURITY_PROVIDER) String() string {
+	switch e {
+	case WSC_SECURITY_PROVIDER_FIREWALL:
+		return "WSC_SECURITY_PROVIDER_FIREWALL"
+	case WSC_SECURITY_PROVIDER_AUTOUPDATE_SETTINGS:
+		return "WSC_SECURITY_PROVIDER_AUTOUPDATE_SETTINGS"
+	case WSC_SECURITY_PROVIDER_ANTIVIRUS:
+		return "WSC_SECURITY_PROVIDER_ANTIVIRUS"
+	case WSC_SECURITY_PROVIDER_ANTISPYWARE:
+		return "WSC_SECURITY_PROVIDER_ANTISPYWARE"
+	case WSC_SECURITY_PROVIDER_INTERNET_SETTINGS:
+		return "WSC_SECURITY_PROVIDER_INTERNET_SETTINGS"
+	case WSC_SECURITY_PROVIDER_USER_ACCOUNT_CONTROL:
+		return "WSC_SECURITY_PROVIDER_USER_ACCOUNT_CONTROL"
+	case WSC_SECURITY_PROVIDER_SERVICE:
+		return "WSC_SECURITY_PROVIDER_SERVICE"
+	case WSC_SECURITY_PROVIDER_NONE:
+		return "WSC_SECURITY_PROVIDER_NONE"
+	case WSC_SECURITY_PROVIDER_ALL:
+		return "WSC_SECURITY_PROVIDER_ALL"
+	default:
+		return fmt.Sprintf("WSC_SECURITY_PROVIDER(%d)", int32(e))
+	}
+}
+
 // WSC_SECURITY_PROVIDER_HEALTH: https://learn.microsoft.com/windows/win32/api/wscapi/ne-wscapi-wsc_security_provider_health
 type WSC_SECURITY_PROVIDER_HEALTH int32
 
@@ -56,6 +136,23 @@ const (
 	WSC_SECURITY_PROVIDER_HEALTH_SNOOZE       WSC_SECURITY_PROVIDER_HEALTH = 3
 )
 
+// String returns the WSC_SECURITY_PROVIDER_HEALTH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSC_SECURITY_PROVIDER_HEALTH) String() string {
+	switch e {
+	case WSC_SECURITY_PROVIDER_HEALTH_GOOD:
+		return "WSC_SECURITY_PROVIDER_HEALTH_GOOD"
+	case WSC_SECURITY_PROVIDER_HEALTH_NOTMONITORED:
+		return "WSC_SECURITY_PROVIDER_HEALTH_NOTMONITORED"
+	case WSC_SECURITY_PROVIDER_HEALTH_POOR:
+		return "WSC_SECURITY_PROVIDER_HEALTH_POOR"
+	case WSC_SECURITY_PROVIDER_HEALTH_SNOOZE:
+		return "WSC_SECURITY_PROVIDER_HEALTH_SNOOZE"
+	default:
+		return fmt.Sprintf("WSC_SECURITY_PROVIDER_HEALTH(%d)", int32(e))
+	}
+}
+
 // WSC_SECURITY_SIGNATURE_STATUS: https://learn.microsoft.com/windows/win32/api/iwscapi/ne-iwscapi-wsc_security_signature_status
 type WSC_SECURITY_SIGNATURE_STATUS int32
 
@@ -63,3 +160,16 @@ const (
 	WSC_SECURITY_PRODUCT_OUT_OF_DATE WSC_SECURITY_SIGNATURE_STATUS = 0
 	WSC_SECURITY_PRODUCT_UP_TO_DATE  WSC_SECURITY_SIGNATURE_STATUS = 1
 )
+
+// String returns the WSC_SECURITY_SIGNATURE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSC_SECURITY_SIGNATURE_STATUS) String() string {
+	switch e {
+	case WSC_SECURITY_PRODUCT_OUT_OF_DATE:
+		return "WSC_SECURITY_PRODUCT_OUT_OF_DATE"
+	case WSC_SECURITY_PRODUCT_UP_TO_DATE:
+		return "WSC_SECURITY_PRODUCT_UP_TO_DATE"
+	default:
+		return fmt.Sprintf("WSC_SECURITY_SIGNATURE_STATUS(%d)", int32(e))
+	}
+}

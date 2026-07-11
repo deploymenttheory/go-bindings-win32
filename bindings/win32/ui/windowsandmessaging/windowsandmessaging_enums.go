@@ -4,6 +4,12 @@
 
 package windowsandmessaging
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type ACCEL_VIRT_FLAGS uint8
 
 const (
@@ -14,6 +20,32 @@ const (
 	FALT      ACCEL_VIRT_FLAGS = 16
 )
 
+// String returns the ACCEL_VIRT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACCEL_VIRT_FLAGS) String() string {
+	var parts []string
+	if e&FVIRTKEY != 0 {
+		parts = append(parts, "FVIRTKEY")
+	}
+	if e&FNOINVERT != 0 {
+		parts = append(parts, "FNOINVERT")
+	}
+	if e&FSHIFT != 0 {
+		parts = append(parts, "FSHIFT")
+	}
+	if e&FCONTROL != 0 {
+		parts = append(parts, "FCONTROL")
+	}
+	if e&FALT != 0 {
+		parts = append(parts, "FALT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type ANIMATE_WINDOW_FLAGS uint32
 
 const (
@@ -28,12 +60,66 @@ const (
 	AW_VER_NEGATIVE ANIMATE_WINDOW_FLAGS = 8
 )
 
+// String returns the ANIMATE_WINDOW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ANIMATE_WINDOW_FLAGS) String() string {
+	var parts []string
+	if e&AW_ACTIVATE != 0 {
+		parts = append(parts, "AW_ACTIVATE")
+	}
+	if e&AW_BLEND != 0 {
+		parts = append(parts, "AW_BLEND")
+	}
+	if e&AW_CENTER != 0 {
+		parts = append(parts, "AW_CENTER")
+	}
+	if e&AW_HIDE != 0 {
+		parts = append(parts, "AW_HIDE")
+	}
+	if e&AW_HOR_POSITIVE != 0 {
+		parts = append(parts, "AW_HOR_POSITIVE")
+	}
+	if e&AW_HOR_NEGATIVE != 0 {
+		parts = append(parts, "AW_HOR_NEGATIVE")
+	}
+	if e&AW_SLIDE != 0 {
+		parts = append(parts, "AW_SLIDE")
+	}
+	if e&AW_VER_POSITIVE != 0 {
+		parts = append(parts, "AW_VER_POSITIVE")
+	}
+	if e&AW_VER_NEGATIVE != 0 {
+		parts = append(parts, "AW_VER_NEGATIVE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CASCADE_WINDOWS_HOW uint32
 
 const (
 	MDITILE_SKIPDISABLED CASCADE_WINDOWS_HOW = 2
 	MDITILE_ZORDER       CASCADE_WINDOWS_HOW = 4
 )
+
+// String returns the CASCADE_WINDOWS_HOW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CASCADE_WINDOWS_HOW) String() string {
+	var parts []string
+	if e&MDITILE_SKIPDISABLED != 0 {
+		parts = append(parts, "MDITILE_SKIPDISABLED")
+	}
+	if e&MDITILE_ZORDER != 0 {
+		parts = append(parts, "MDITILE_ZORDER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CHANGE_WINDOW_MESSAGE_FILTER_FLAGS uint32
 
@@ -42,6 +128,19 @@ const (
 	MSGFLT_REMOVE CHANGE_WINDOW_MESSAGE_FILTER_FLAGS = 2
 )
 
+// String returns the CHANGE_WINDOW_MESSAGE_FILTER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANGE_WINDOW_MESSAGE_FILTER_FLAGS) String() string {
+	switch e {
+	case MSGFLT_ADD:
+		return "MSGFLT_ADD"
+	case MSGFLT_REMOVE:
+		return "MSGFLT_REMOVE"
+	default:
+		return fmt.Sprintf("CHANGE_WINDOW_MESSAGE_FILTER_FLAGS(%d)", uint32(e))
+	}
+}
+
 type CURSORINFO_FLAGS uint32
 
 const (
@@ -49,6 +148,20 @@ const (
 	CURSOR_SUPPRESSED CURSORINFO_FLAGS = 2
 )
 
+// String returns the CURSORINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CURSORINFO_FLAGS) String() string {
+	switch e {
+	case CURSOR_SHOWING:
+		return "CURSOR_SHOWING"
+	case CURSOR_SUPPRESSED:
+		return "CURSOR_SUPPRESSED"
+	default:
+		return fmt.Sprintf("CURSORINFO_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CWP_FLAGS uint32
 
 const (
@@ -57,6 +170,25 @@ const (
 	CWP_SKIPDISABLED    CWP_FLAGS = 2
 	CWP_SKIPTRANSPARENT CWP_FLAGS = 4
 )
+
+// String returns the CWP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CWP_FLAGS) String() string {
+	var parts []string
+	if e&CWP_SKIPINVISIBLE != 0 {
+		parts = append(parts, "CWP_SKIPINVISIBLE")
+	}
+	if e&CWP_SKIPDISABLED != 0 {
+		parts = append(parts, "CWP_SKIPDISABLED")
+	}
+	if e&CWP_SKIPTRANSPARENT != 0 {
+		parts = append(parts, "CWP_SKIPTRANSPARENT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type DEV_BROADCAST_HDR_DEVICE_TYPE uint32
 
@@ -68,6 +200,25 @@ const (
 	DBT_DEVTYP_VOLUME          DEV_BROADCAST_HDR_DEVICE_TYPE = 2
 )
 
+// String returns the DEV_BROADCAST_HDR_DEVICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEV_BROADCAST_HDR_DEVICE_TYPE) String() string {
+	switch e {
+	case DBT_DEVTYP_DEVICEINTERFACE:
+		return "DBT_DEVTYP_DEVICEINTERFACE"
+	case DBT_DEVTYP_HANDLE:
+		return "DBT_DEVTYP_HANDLE"
+	case DBT_DEVTYP_OEM:
+		return "DBT_DEVTYP_OEM"
+	case DBT_DEVTYP_PORT:
+		return "DBT_DEVTYP_PORT"
+	case DBT_DEVTYP_VOLUME:
+		return "DBT_DEVTYP_VOLUME"
+	default:
+		return fmt.Sprintf("DEV_BROADCAST_HDR_DEVICE_TYPE(%d)", uint32(e))
+	}
+}
+
 type DEV_BROADCAST_VOLUME_FLAGS uint16
 
 const (
@@ -75,6 +226,20 @@ const (
 	DBTF_NET   DEV_BROADCAST_VOLUME_FLAGS = 2
 )
 
+// String returns the DEV_BROADCAST_VOLUME_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEV_BROADCAST_VOLUME_FLAGS) String() string {
+	switch e {
+	case DBTF_MEDIA:
+		return "DBTF_MEDIA"
+	case DBTF_NET:
+		return "DBTF_NET"
+	default:
+		return fmt.Sprintf("DEV_BROADCAST_VOLUME_FLAGS(%d)", uint16(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DI_FLAGS uint32
 
 const (
@@ -86,6 +251,34 @@ const (
 	DI_NOMIRROR    DI_FLAGS = 16
 )
 
+// String returns the DI_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DI_FLAGS) String() string {
+	var parts []string
+	if e&DI_MASK != 0 {
+		parts = append(parts, "DI_MASK")
+	}
+	if e&DI_IMAGE != 0 {
+		parts = append(parts, "DI_IMAGE")
+	}
+	if e&DI_NORMAL != 0 {
+		parts = append(parts, "DI_NORMAL")
+	}
+	if e&DI_COMPAT != 0 {
+		parts = append(parts, "DI_COMPAT")
+	}
+	if e&DI_DEFAULTSIZE != 0 {
+		parts = append(parts, "DI_DEFAULTSIZE")
+	}
+	if e&DI_NOMIRROR != 0 {
+		parts = append(parts, "DI_NOMIRROR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type EDIT_CONTROL_FEATURE int32
 
 const (
@@ -93,6 +286,20 @@ const (
 	EDIT_CONTROL_FEATURE_PASTE_NOTIFICATIONS                      EDIT_CONTROL_FEATURE = 1
 )
 
+// String returns the EDIT_CONTROL_FEATURE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDIT_CONTROL_FEATURE) String() string {
+	switch e {
+	case EDIT_CONTROL_FEATURE_ENTERPRISE_DATA_PROTECTION_PASTE_SUPPORT:
+		return "EDIT_CONTROL_FEATURE_ENTERPRISE_DATA_PROTECTION_PASTE_SUPPORT"
+	case EDIT_CONTROL_FEATURE_PASTE_NOTIFICATIONS:
+		return "EDIT_CONTROL_FEATURE_PASTE_NOTIFICATIONS"
+	default:
+		return fmt.Sprintf("EDIT_CONTROL_FEATURE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FLASHWINFO_FLAGS uint32
 
 const (
@@ -104,12 +311,50 @@ const (
 	FLASHW_TRAY      FLASHWINFO_FLAGS = 2
 )
 
+// String returns the FLASHWINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FLASHWINFO_FLAGS) String() string {
+	var parts []string
+	if e&FLASHW_ALL != 0 {
+		parts = append(parts, "FLASHW_ALL")
+	}
+	if e&FLASHW_CAPTION != 0 {
+		parts = append(parts, "FLASHW_CAPTION")
+	}
+	if e&FLASHW_TIMER != 0 {
+		parts = append(parts, "FLASHW_TIMER")
+	}
+	if e&FLASHW_TIMERNOFG != 0 {
+		parts = append(parts, "FLASHW_TIMERNOFG")
+	}
+	if e&FLASHW_TRAY != 0 {
+		parts = append(parts, "FLASHW_TRAY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type FOREGROUND_WINDOW_LOCK_CODE uint32
 
 const (
 	LSFW_LOCK   FOREGROUND_WINDOW_LOCK_CODE = 1
 	LSFW_UNLOCK FOREGROUND_WINDOW_LOCK_CODE = 2
 )
+
+// String returns the FOREGROUND_WINDOW_LOCK_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FOREGROUND_WINDOW_LOCK_CODE) String() string {
+	switch e {
+	case LSFW_LOCK:
+		return "LSFW_LOCK"
+	case LSFW_UNLOCK:
+		return "LSFW_UNLOCK"
+	default:
+		return fmt.Sprintf("FOREGROUND_WINDOW_LOCK_CODE(%d)", uint32(e))
+	}
+}
 
 type GDI_IMAGE_TYPE uint32
 
@@ -119,6 +364,21 @@ const (
 	IMAGE_ICON   GDI_IMAGE_TYPE = 1
 )
 
+// String returns the GDI_IMAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GDI_IMAGE_TYPE) String() string {
+	switch e {
+	case IMAGE_BITMAP:
+		return "IMAGE_BITMAP"
+	case IMAGE_CURSOR:
+		return "IMAGE_CURSOR"
+	case IMAGE_ICON:
+		return "IMAGE_ICON"
+	default:
+		return fmt.Sprintf("GDI_IMAGE_TYPE(%d)", uint32(e))
+	}
+}
+
 type GET_ANCESTOR_FLAGS uint32
 
 const (
@@ -126,6 +386,21 @@ const (
 	GA_ROOT      GET_ANCESTOR_FLAGS = 2
 	GA_ROOTOWNER GET_ANCESTOR_FLAGS = 3
 )
+
+// String returns the GET_ANCESTOR_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_ANCESTOR_FLAGS) String() string {
+	switch e {
+	case GA_PARENT:
+		return "GA_PARENT"
+	case GA_ROOT:
+		return "GA_ROOT"
+	case GA_ROOTOWNER:
+		return "GA_ROOTOWNER"
+	default:
+		return fmt.Sprintf("GET_ANCESTOR_FLAGS(%d)", uint32(e))
+	}
+}
 
 type GET_CLASS_LONG_INDEX int32
 
@@ -150,12 +425,60 @@ const (
 	GCLP_WNDPROC       GET_CLASS_LONG_INDEX = -24
 )
 
+// String returns the GET_CLASS_LONG_INDEX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_CLASS_LONG_INDEX) String() string {
+	switch e {
+	case GCW_ATOM:
+		return "GCW_ATOM"
+	case GCL_CBCLSEXTRA:
+		return "GCL_CBCLSEXTRA"
+	case GCL_CBWNDEXTRA:
+		return "GCL_CBWNDEXTRA"
+	case GCL_HBRBACKGROUND:
+		return "GCL_HBRBACKGROUND"
+	case GCL_HCURSOR:
+		return "GCL_HCURSOR"
+	case GCL_HICON:
+		return "GCL_HICON"
+	case GCL_HICONSM:
+		return "GCL_HICONSM"
+	case GCL_HMODULE:
+		return "GCL_HMODULE"
+	case GCL_MENUNAME:
+		return "GCL_MENUNAME"
+	case GCL_STYLE:
+		return "GCL_STYLE"
+	case GCL_WNDPROC:
+		return "GCL_WNDPROC"
+	default:
+		return fmt.Sprintf("GET_CLASS_LONG_INDEX(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GET_MENU_DEFAULT_ITEM_FLAGS uint32
 
 const (
 	GMDI_GOINTOPOPUPS GET_MENU_DEFAULT_ITEM_FLAGS = 2
 	GMDI_USEDISABLED  GET_MENU_DEFAULT_ITEM_FLAGS = 1
 )
+
+// String returns the GET_MENU_DEFAULT_ITEM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_MENU_DEFAULT_ITEM_FLAGS) String() string {
+	var parts []string
+	if e&GMDI_GOINTOPOPUPS != 0 {
+		parts = append(parts, "GMDI_GOINTOPOPUPS")
+	}
+	if e&GMDI_USEDISABLED != 0 {
+		parts = append(parts, "GMDI_USEDISABLED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type GET_WINDOW_CMD uint32
 
@@ -169,6 +492,30 @@ const (
 	GW_OWNER        GET_WINDOW_CMD = 4
 )
 
+// String returns the GET_WINDOW_CMD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_WINDOW_CMD) String() string {
+	switch e {
+	case GW_CHILD:
+		return "GW_CHILD"
+	case GW_ENABLEDPOPUP:
+		return "GW_ENABLEDPOPUP"
+	case GW_HWNDFIRST:
+		return "GW_HWNDFIRST"
+	case GW_HWNDLAST:
+		return "GW_HWNDLAST"
+	case GW_HWNDNEXT:
+		return "GW_HWNDNEXT"
+	case GW_HWNDPREV:
+		return "GW_HWNDPREV"
+	case GW_OWNER:
+		return "GW_OWNER"
+	default:
+		return fmt.Sprintf("GET_WINDOW_CMD(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GUITHREADINFO_FLAGS uint32
 
 const (
@@ -179,6 +526,31 @@ const (
 	GUI_SYSTEMMENUMODE GUITHREADINFO_FLAGS = 8
 )
 
+// String returns the GUITHREADINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GUITHREADINFO_FLAGS) String() string {
+	var parts []string
+	if e&GUI_CARETBLINKING != 0 {
+		parts = append(parts, "GUI_CARETBLINKING")
+	}
+	if e&GUI_INMENUMODE != 0 {
+		parts = append(parts, "GUI_INMENUMODE")
+	}
+	if e&GUI_INMOVESIZE != 0 {
+		parts = append(parts, "GUI_INMOVESIZE")
+	}
+	if e&GUI_POPUPMENUMODE != 0 {
+		parts = append(parts, "GUI_POPUPMENUMODE")
+	}
+	if e&GUI_SYSTEMMENUMODE != 0 {
+		parts = append(parts, "GUI_SYSTEMMENUMODE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type HANDEDNESS int32
 
 const (
@@ -186,6 +558,20 @@ const (
 	HANDEDNESS_RIGHT HANDEDNESS = 1
 )
 
+// String returns the HANDEDNESS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HANDEDNESS) String() string {
+	switch e {
+	case HANDEDNESS_LEFT:
+		return "HANDEDNESS_LEFT"
+	case HANDEDNESS_RIGHT:
+		return "HANDEDNESS_RIGHT"
+	default:
+		return fmt.Sprintf("HANDEDNESS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IMAGE_FLAGS uint32
 
 const (
@@ -203,6 +589,50 @@ const (
 	LR_COPYRETURNORG    IMAGE_FLAGS = 4
 )
 
+// String returns the IMAGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMAGE_FLAGS) String() string {
+	var parts []string
+	if e&LR_CREATEDIBSECTION != 0 {
+		parts = append(parts, "LR_CREATEDIBSECTION")
+	}
+	if e&LR_DEFAULTSIZE != 0 {
+		parts = append(parts, "LR_DEFAULTSIZE")
+	}
+	if e&LR_LOADFROMFILE != 0 {
+		parts = append(parts, "LR_LOADFROMFILE")
+	}
+	if e&LR_LOADMAP3DCOLORS != 0 {
+		parts = append(parts, "LR_LOADMAP3DCOLORS")
+	}
+	if e&LR_LOADTRANSPARENT != 0 {
+		parts = append(parts, "LR_LOADTRANSPARENT")
+	}
+	if e&LR_MONOCHROME != 0 {
+		parts = append(parts, "LR_MONOCHROME")
+	}
+	if e&LR_SHARED != 0 {
+		parts = append(parts, "LR_SHARED")
+	}
+	if e&LR_VGACOLOR != 0 {
+		parts = append(parts, "LR_VGACOLOR")
+	}
+	if e&LR_COPYDELETEORG != 0 {
+		parts = append(parts, "LR_COPYDELETEORG")
+	}
+	if e&LR_COPYFROMRESOURCE != 0 {
+		parts = append(parts, "LR_COPYFROMRESOURCE")
+	}
+	if e&LR_COPYRETURNORG != 0 {
+		parts = append(parts, "LR_COPYRETURNORG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type KBDLLHOOKSTRUCT_FLAGS uint32
 
 const (
@@ -213,6 +643,32 @@ const (
 	LLKHF_LOWER_IL_INJECTED KBDLLHOOKSTRUCT_FLAGS = 2
 )
 
+// String returns the KBDLLHOOKSTRUCT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KBDLLHOOKSTRUCT_FLAGS) String() string {
+	var parts []string
+	if e&LLKHF_EXTENDED != 0 {
+		parts = append(parts, "LLKHF_EXTENDED")
+	}
+	if e&LLKHF_ALTDOWN != 0 {
+		parts = append(parts, "LLKHF_ALTDOWN")
+	}
+	if e&LLKHF_UP != 0 {
+		parts = append(parts, "LLKHF_UP")
+	}
+	if e&LLKHF_INJECTED != 0 {
+		parts = append(parts, "LLKHF_INJECTED")
+	}
+	if e&LLKHF_LOWER_IL_INJECTED != 0 {
+		parts = append(parts, "LLKHF_LOWER_IL_INJECTED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LAYERED_WINDOW_ATTRIBUTES_FLAGS uint32
 
 const (
@@ -220,6 +676,23 @@ const (
 	LWA_COLORKEY LAYERED_WINDOW_ATTRIBUTES_FLAGS = 1
 )
 
+// String returns the LAYERED_WINDOW_ATTRIBUTES_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LAYERED_WINDOW_ATTRIBUTES_FLAGS) String() string {
+	var parts []string
+	if e&LWA_ALPHA != 0 {
+		parts = append(parts, "LWA_ALPHA")
+	}
+	if e&LWA_COLORKEY != 0 {
+		parts = append(parts, "LWA_COLORKEY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LEGACY_TOUCHPAD_FEATURES int32
 
 const (
@@ -228,6 +701,22 @@ const (
 	LEGACY_TOUCHPAD_FEATURE_REVERSE_SCROLL_DIRECTION LEGACY_TOUCHPAD_FEATURES = 4
 )
 
+// String returns the LEGACY_TOUCHPAD_FEATURES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LEGACY_TOUCHPAD_FEATURES) String() string {
+	var parts []string
+	if e&LEGACY_TOUCHPAD_FEATURE_ENABLE_DISABLE != 0 {
+		parts = append(parts, "LEGACY_TOUCHPAD_FEATURE_ENABLE_DISABLE")
+	}
+	if e&LEGACY_TOUCHPAD_FEATURE_REVERSE_SCROLL_DIRECTION != 0 {
+		parts = append(parts, "LEGACY_TOUCHPAD_FEATURE_REVERSE_SCROLL_DIRECTION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type MENUGETOBJECTINFO_FLAGS uint32
 
 const (
@@ -235,6 +724,20 @@ const (
 	MNGOF_TOPGAP    MENUGETOBJECTINFO_FLAGS = 1
 )
 
+// String returns the MENUGETOBJECTINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENUGETOBJECTINFO_FLAGS) String() string {
+	switch e {
+	case MNGOF_BOTTOMGAP:
+		return "MNGOF_BOTTOMGAP"
+	case MNGOF_TOPGAP:
+		return "MNGOF_TOPGAP"
+	default:
+		return fmt.Sprintf("MENUGETOBJECTINFO_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MENUINFO_MASK uint32
 
 const (
@@ -246,6 +749,35 @@ const (
 	MIM_STYLE           MENUINFO_MASK = 16
 )
 
+// String returns the MENUINFO_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENUINFO_MASK) String() string {
+	var parts []string
+	if e&MIM_APPLYTOSUBMENUS != 0 {
+		parts = append(parts, "MIM_APPLYTOSUBMENUS")
+	}
+	if e&MIM_BACKGROUND != 0 {
+		parts = append(parts, "MIM_BACKGROUND")
+	}
+	if e&MIM_HELPID != 0 {
+		parts = append(parts, "MIM_HELPID")
+	}
+	if e&MIM_MAXHEIGHT != 0 {
+		parts = append(parts, "MIM_MAXHEIGHT")
+	}
+	if e&MIM_MENUDATA != 0 {
+		parts = append(parts, "MIM_MENUDATA")
+	}
+	if e&MIM_STYLE != 0 {
+		parts = append(parts, "MIM_STYLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type MENUINFO_STYLE uint32
 
 const (
@@ -257,6 +789,35 @@ const (
 	MNS_NOTIFYBYPOS MENUINFO_STYLE = 134217728
 )
 
+// String returns the MENUINFO_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENUINFO_STYLE) String() string {
+	var parts []string
+	if e&MNS_AUTODISMISS != 0 {
+		parts = append(parts, "MNS_AUTODISMISS")
+	}
+	if e&MNS_CHECKORBMP != 0 {
+		parts = append(parts, "MNS_CHECKORBMP")
+	}
+	if e&MNS_DRAGDROP != 0 {
+		parts = append(parts, "MNS_DRAGDROP")
+	}
+	if e&MNS_MODELESS != 0 {
+		parts = append(parts, "MNS_MODELESS")
+	}
+	if e&MNS_NOCHECK != 0 {
+		parts = append(parts, "MNS_NOCHECK")
+	}
+	if e&MNS_NOTIFYBYPOS != 0 {
+		parts = append(parts, "MNS_NOTIFYBYPOS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type MENU_ITEM_FLAGS uint32
 
 const (
@@ -290,6 +851,83 @@ const (
 	MF_END             MENU_ITEM_FLAGS = 128
 )
 
+// String returns the MENU_ITEM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENU_ITEM_FLAGS) String() string {
+	var parts []string
+	if e&MF_BYPOSITION != 0 {
+		parts = append(parts, "MF_BYPOSITION")
+	}
+	if e&MF_BITMAP != 0 {
+		parts = append(parts, "MF_BITMAP")
+	}
+	if e&MF_CHECKED != 0 {
+		parts = append(parts, "MF_CHECKED")
+	}
+	if e&MF_DISABLED != 0 {
+		parts = append(parts, "MF_DISABLED")
+	}
+	if e&MF_GRAYED != 0 {
+		parts = append(parts, "MF_GRAYED")
+	}
+	if e&MF_MENUBARBREAK != 0 {
+		parts = append(parts, "MF_MENUBARBREAK")
+	}
+	if e&MF_MENUBREAK != 0 {
+		parts = append(parts, "MF_MENUBREAK")
+	}
+	if e&MF_OWNERDRAW != 0 {
+		parts = append(parts, "MF_OWNERDRAW")
+	}
+	if e&MF_POPUP != 0 {
+		parts = append(parts, "MF_POPUP")
+	}
+	if e&MF_SEPARATOR != 0 {
+		parts = append(parts, "MF_SEPARATOR")
+	}
+	if e&MF_CHANGE != 0 {
+		parts = append(parts, "MF_CHANGE")
+	}
+	if e&MF_APPEND != 0 {
+		parts = append(parts, "MF_APPEND")
+	}
+	if e&MF_DELETE != 0 {
+		parts = append(parts, "MF_DELETE")
+	}
+	if e&MF_REMOVE != 0 {
+		parts = append(parts, "MF_REMOVE")
+	}
+	if e&MF_USECHECKBITMAPS != 0 {
+		parts = append(parts, "MF_USECHECKBITMAPS")
+	}
+	if e&MF_HILITE != 0 {
+		parts = append(parts, "MF_HILITE")
+	}
+	if e&MF_DEFAULT != 0 {
+		parts = append(parts, "MF_DEFAULT")
+	}
+	if e&MF_SYSMENU != 0 {
+		parts = append(parts, "MF_SYSMENU")
+	}
+	if e&MF_HELP != 0 {
+		parts = append(parts, "MF_HELP")
+	}
+	if e&MF_RIGHTJUSTIFY != 0 {
+		parts = append(parts, "MF_RIGHTJUSTIFY")
+	}
+	if e&MF_MOUSESELECT != 0 {
+		parts = append(parts, "MF_MOUSESELECT")
+	}
+	if e&MF_END != 0 {
+		parts = append(parts, "MF_END")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type MENU_ITEM_MASK uint32
 
 const (
@@ -304,6 +942,44 @@ const (
 	MIIM_TYPE       MENU_ITEM_MASK = 16
 )
 
+// String returns the MENU_ITEM_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENU_ITEM_MASK) String() string {
+	var parts []string
+	if e&MIIM_BITMAP != 0 {
+		parts = append(parts, "MIIM_BITMAP")
+	}
+	if e&MIIM_CHECKMARKS != 0 {
+		parts = append(parts, "MIIM_CHECKMARKS")
+	}
+	if e&MIIM_DATA != 0 {
+		parts = append(parts, "MIIM_DATA")
+	}
+	if e&MIIM_FTYPE != 0 {
+		parts = append(parts, "MIIM_FTYPE")
+	}
+	if e&MIIM_ID != 0 {
+		parts = append(parts, "MIIM_ID")
+	}
+	if e&MIIM_STATE != 0 {
+		parts = append(parts, "MIIM_STATE")
+	}
+	if e&MIIM_STRING != 0 {
+		parts = append(parts, "MIIM_STRING")
+	}
+	if e&MIIM_SUBMENU != 0 {
+		parts = append(parts, "MIIM_SUBMENU")
+	}
+	if e&MIIM_TYPE != 0 {
+		parts = append(parts, "MIIM_TYPE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type MENU_ITEM_STATE uint32
 
 const (
@@ -317,6 +993,32 @@ const (
 	MFS_DEFAULT   MENU_ITEM_STATE = 4096
 )
 
+// String returns the MENU_ITEM_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENU_ITEM_STATE) String() string {
+	var parts []string
+	if e&MFS_GRAYED != 0 {
+		parts = append(parts, "MFS_GRAYED")
+	}
+	if e&MFS_DISABLED != 0 {
+		parts = append(parts, "MFS_DISABLED")
+	}
+	if e&MFS_CHECKED != 0 {
+		parts = append(parts, "MFS_CHECKED")
+	}
+	if e&MFS_HILITE != 0 {
+		parts = append(parts, "MFS_HILITE")
+	}
+	if e&MFS_DEFAULT != 0 {
+		parts = append(parts, "MFS_DEFAULT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type MENU_ITEM_TYPE uint32
 
 const (
@@ -330,6 +1032,40 @@ const (
 	MFT_SEPARATOR    MENU_ITEM_TYPE = 2048
 	MFT_STRING       MENU_ITEM_TYPE = 0
 )
+
+// String returns the MENU_ITEM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENU_ITEM_TYPE) String() string {
+	var parts []string
+	if e&MFT_BITMAP != 0 {
+		parts = append(parts, "MFT_BITMAP")
+	}
+	if e&MFT_MENUBARBREAK != 0 {
+		parts = append(parts, "MFT_MENUBARBREAK")
+	}
+	if e&MFT_MENUBREAK != 0 {
+		parts = append(parts, "MFT_MENUBREAK")
+	}
+	if e&MFT_OWNERDRAW != 0 {
+		parts = append(parts, "MFT_OWNERDRAW")
+	}
+	if e&MFT_RADIOCHECK != 0 {
+		parts = append(parts, "MFT_RADIOCHECK")
+	}
+	if e&MFT_RIGHTJUSTIFY != 0 {
+		parts = append(parts, "MFT_RIGHTJUSTIFY")
+	}
+	if e&MFT_RIGHTORDER != 0 {
+		parts = append(parts, "MFT_RIGHTORDER")
+	}
+	if e&MFT_SEPARATOR != 0 {
+		parts = append(parts, "MFT_SEPARATOR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type MESSAGEBOX_RESULT int32
 
@@ -349,6 +1085,42 @@ const (
 	IDTIMEOUT  MESSAGEBOX_RESULT = 32000
 )
 
+// String returns the MESSAGEBOX_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MESSAGEBOX_RESULT) String() string {
+	switch e {
+	case IDOK:
+		return "IDOK"
+	case IDCANCEL:
+		return "IDCANCEL"
+	case IDABORT:
+		return "IDABORT"
+	case IDRETRY:
+		return "IDRETRY"
+	case IDIGNORE:
+		return "IDIGNORE"
+	case IDYES:
+		return "IDYES"
+	case IDNO:
+		return "IDNO"
+	case IDCLOSE:
+		return "IDCLOSE"
+	case IDHELP:
+		return "IDHELP"
+	case IDTRYAGAIN:
+		return "IDTRYAGAIN"
+	case IDCONTINUE:
+		return "IDCONTINUE"
+	case IDASYNC:
+		return "IDASYNC"
+	case IDTIMEOUT:
+		return "IDTIMEOUT"
+	default:
+		return fmt.Sprintf("MESSAGEBOX_RESULT(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MESSAGEBOX_STYLE uint32
 
 const (
@@ -391,6 +1163,118 @@ const (
 	MB_MISCMASK                  MESSAGEBOX_STYLE = 49152
 )
 
+// String returns the MESSAGEBOX_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MESSAGEBOX_STYLE) String() string {
+	var parts []string
+	if e&MB_ABORTRETRYIGNORE != 0 {
+		parts = append(parts, "MB_ABORTRETRYIGNORE")
+	}
+	if e&MB_CANCELTRYCONTINUE != 0 {
+		parts = append(parts, "MB_CANCELTRYCONTINUE")
+	}
+	if e&MB_HELP != 0 {
+		parts = append(parts, "MB_HELP")
+	}
+	if e&MB_OKCANCEL != 0 {
+		parts = append(parts, "MB_OKCANCEL")
+	}
+	if e&MB_RETRYCANCEL != 0 {
+		parts = append(parts, "MB_RETRYCANCEL")
+	}
+	if e&MB_YESNO != 0 {
+		parts = append(parts, "MB_YESNO")
+	}
+	if e&MB_YESNOCANCEL != 0 {
+		parts = append(parts, "MB_YESNOCANCEL")
+	}
+	if e&MB_ICONHAND != 0 {
+		parts = append(parts, "MB_ICONHAND")
+	}
+	if e&MB_ICONQUESTION != 0 {
+		parts = append(parts, "MB_ICONQUESTION")
+	}
+	if e&MB_ICONEXCLAMATION != 0 {
+		parts = append(parts, "MB_ICONEXCLAMATION")
+	}
+	if e&MB_ICONASTERISK != 0 {
+		parts = append(parts, "MB_ICONASTERISK")
+	}
+	if e&MB_USERICON != 0 {
+		parts = append(parts, "MB_USERICON")
+	}
+	if e&MB_ICONWARNING != 0 {
+		parts = append(parts, "MB_ICONWARNING")
+	}
+	if e&MB_ICONERROR != 0 {
+		parts = append(parts, "MB_ICONERROR")
+	}
+	if e&MB_ICONINFORMATION != 0 {
+		parts = append(parts, "MB_ICONINFORMATION")
+	}
+	if e&MB_ICONSTOP != 0 {
+		parts = append(parts, "MB_ICONSTOP")
+	}
+	if e&MB_DEFBUTTON2 != 0 {
+		parts = append(parts, "MB_DEFBUTTON2")
+	}
+	if e&MB_DEFBUTTON3 != 0 {
+		parts = append(parts, "MB_DEFBUTTON3")
+	}
+	if e&MB_DEFBUTTON4 != 0 {
+		parts = append(parts, "MB_DEFBUTTON4")
+	}
+	if e&MB_SYSTEMMODAL != 0 {
+		parts = append(parts, "MB_SYSTEMMODAL")
+	}
+	if e&MB_TASKMODAL != 0 {
+		parts = append(parts, "MB_TASKMODAL")
+	}
+	if e&MB_NOFOCUS != 0 {
+		parts = append(parts, "MB_NOFOCUS")
+	}
+	if e&MB_SETFOREGROUND != 0 {
+		parts = append(parts, "MB_SETFOREGROUND")
+	}
+	if e&MB_DEFAULT_DESKTOP_ONLY != 0 {
+		parts = append(parts, "MB_DEFAULT_DESKTOP_ONLY")
+	}
+	if e&MB_TOPMOST != 0 {
+		parts = append(parts, "MB_TOPMOST")
+	}
+	if e&MB_RIGHT != 0 {
+		parts = append(parts, "MB_RIGHT")
+	}
+	if e&MB_RTLREADING != 0 {
+		parts = append(parts, "MB_RTLREADING")
+	}
+	if e&MB_SERVICE_NOTIFICATION != 0 {
+		parts = append(parts, "MB_SERVICE_NOTIFICATION")
+	}
+	if e&MB_SERVICE_NOTIFICATION_NT3X != 0 {
+		parts = append(parts, "MB_SERVICE_NOTIFICATION_NT3X")
+	}
+	if e&MB_TYPEMASK != 0 {
+		parts = append(parts, "MB_TYPEMASK")
+	}
+	if e&MB_ICONMASK != 0 {
+		parts = append(parts, "MB_ICONMASK")
+	}
+	if e&MB_DEFMASK != 0 {
+		parts = append(parts, "MB_DEFMASK")
+	}
+	if e&MB_MODEMASK != 0 {
+		parts = append(parts, "MB_MODEMASK")
+	}
+	if e&MB_MISCMASK != 0 {
+		parts = append(parts, "MB_MISCMASK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type MINIMIZEDMETRICS_ARRANGE int32
 
 const (
@@ -399,6 +1283,23 @@ const (
 	ARW_TOPLEFT     MINIMIZEDMETRICS_ARRANGE = 2
 	ARW_TOPRIGHT    MINIMIZEDMETRICS_ARRANGE = 3
 )
+
+// String returns the MINIMIZEDMETRICS_ARRANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MINIMIZEDMETRICS_ARRANGE) String() string {
+	switch e {
+	case ARW_BOTTOMLEFT:
+		return "ARW_BOTTOMLEFT"
+	case ARW_BOTTOMRIGHT:
+		return "ARW_BOTTOMRIGHT"
+	case ARW_TOPLEFT:
+		return "ARW_TOPLEFT"
+	case ARW_TOPRIGHT:
+		return "ARW_TOPRIGHT"
+	default:
+		return fmt.Sprintf("MINIMIZEDMETRICS_ARRANGE(%d)", int32(e))
+	}
+}
 
 type MOVESIZE_OPERATION int32
 
@@ -414,6 +1315,33 @@ const (
 	MSO_MOVE             MOVESIZE_OPERATION = 9
 )
 
+// String returns the MOVESIZE_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MOVESIZE_OPERATION) String() string {
+	switch e {
+	case MSO_SIZE_LEFT:
+		return "MSO_SIZE_LEFT"
+	case MSO_SIZE_RIGHT:
+		return "MSO_SIZE_RIGHT"
+	case MSO_SIZE_TOP:
+		return "MSO_SIZE_TOP"
+	case MSO_SIZE_TOPLEFT:
+		return "MSO_SIZE_TOPLEFT"
+	case MSO_SIZE_TOPRIGHT:
+		return "MSO_SIZE_TOPRIGHT"
+	case MSO_SIZE_BOTTOM:
+		return "MSO_SIZE_BOTTOM"
+	case MSO_SIZE_BOTTOMLEFT:
+		return "MSO_SIZE_BOTTOMLEFT"
+	case MSO_SIZE_BOTTOMRIGHT:
+		return "MSO_SIZE_BOTTOMRIGHT"
+	case MSO_MOVE:
+		return "MSO_MOVE"
+	default:
+		return fmt.Sprintf("MOVESIZE_OPERATION(%d)", int32(e))
+	}
+}
+
 type MSGFLTINFO_STATUS uint32
 
 const (
@@ -423,6 +1351,24 @@ const (
 	MSGFLTINFO_ALREADYDISALLOWED_FORWND MSGFLTINFO_STATUS = 2
 )
 
+// String returns the MSGFLTINFO_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSGFLTINFO_STATUS) String() string {
+	switch e {
+	case MSGFLTINFO_NONE:
+		return "MSGFLTINFO_NONE"
+	case MSGFLTINFO_ALLOWED_HIGHER:
+		return "MSGFLTINFO_ALLOWED_HIGHER"
+	case MSGFLTINFO_ALREADYALLOWED_FORWND:
+		return "MSGFLTINFO_ALREADYALLOWED_FORWND"
+	case MSGFLTINFO_ALREADYDISALLOWED_FORWND:
+		return "MSGFLTINFO_ALREADYDISALLOWED_FORWND"
+	default:
+		return fmt.Sprintf("MSGFLTINFO_STATUS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS uint32
 
 const (
@@ -431,6 +1377,25 @@ const (
 	MWMO_INPUTAVAILABLE MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS = 4
 	MWMO_WAITALL        MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS = 1
 )
+
+// String returns the MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS) String() string {
+	var parts []string
+	if e&MWMO_ALERTABLE != 0 {
+		parts = append(parts, "MWMO_ALERTABLE")
+	}
+	if e&MWMO_INPUTAVAILABLE != 0 {
+		parts = append(parts, "MWMO_INPUTAVAILABLE")
+	}
+	if e&MWMO_WAITALL != 0 {
+		parts = append(parts, "MWMO_WAITALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // MrmDumpType: https://learn.microsoft.com/windows/win32/menurc/mrmdumptype
 type MrmDumpType int32
@@ -441,6 +1406,21 @@ const (
 	MrmDumpType_Schema   MrmDumpType = 2
 )
 
+// String returns the MrmDumpType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MrmDumpType) String() string {
+	switch e {
+	case MrmDumpType_Basic:
+		return "MrmDumpType_Basic"
+	case MrmDumpType_Detailed:
+		return "MrmDumpType_Detailed"
+	case MrmDumpType_Schema:
+		return "MrmDumpType_Schema"
+	default:
+		return fmt.Sprintf("MrmDumpType(%d)", int32(e))
+	}
+}
+
 type MrmIndexerFlags int32
 
 const (
@@ -448,6 +1428,21 @@ const (
 	MrmIndexerFlagsAutoMerge             MrmIndexerFlags = 1
 	MrmIndexerFlagsCreateContentChecksum MrmIndexerFlags = 2
 )
+
+// String returns the MrmIndexerFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MrmIndexerFlags) String() string {
+	switch e {
+	case MrmIndexerFlagsNone:
+		return "MrmIndexerFlagsNone"
+	case MrmIndexerFlagsAutoMerge:
+		return "MrmIndexerFlagsAutoMerge"
+	case MrmIndexerFlagsCreateContentChecksum:
+		return "MrmIndexerFlagsCreateContentChecksum"
+	default:
+		return fmt.Sprintf("MrmIndexerFlags(%d)", int32(e))
+	}
+}
 
 // MrmPackagingMode: https://learn.microsoft.com/windows/win32/menurc/mrmpackagingmode
 type MrmPackagingMode int32
@@ -458,6 +1453,21 @@ const (
 	MrmPackagingModeResourcePack   MrmPackagingMode = 2
 )
 
+// String returns the MrmPackagingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MrmPackagingMode) String() string {
+	switch e {
+	case MrmPackagingModeStandaloneFile:
+		return "MrmPackagingModeStandaloneFile"
+	case MrmPackagingModeAutoSplit:
+		return "MrmPackagingModeAutoSplit"
+	case MrmPackagingModeResourcePack:
+		return "MrmPackagingModeResourcePack"
+	default:
+		return fmt.Sprintf("MrmPackagingMode(%d)", int32(e))
+	}
+}
+
 // MrmPackagingOptions: https://learn.microsoft.com/windows/win32/menurc/mrmpackagingoptions
 type MrmPackagingOptions int32
 
@@ -466,6 +1476,21 @@ const (
 	MrmPackagingOptionsOmitSchemaFromResourcePacks MrmPackagingOptions = 1
 	MrmPackagingOptionsSplitLanguageVariants       MrmPackagingOptions = 2
 )
+
+// String returns the MrmPackagingOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MrmPackagingOptions) String() string {
+	switch e {
+	case MrmPackagingOptionsNone:
+		return "MrmPackagingOptionsNone"
+	case MrmPackagingOptionsOmitSchemaFromResourcePacks:
+		return "MrmPackagingOptionsOmitSchemaFromResourcePacks"
+	case MrmPackagingOptionsSplitLanguageVariants:
+		return "MrmPackagingOptionsSplitLanguageVariants"
+	default:
+		return fmt.Sprintf("MrmPackagingOptions(%d)", int32(e))
+	}
+}
 
 // MrmPlatformVersion: https://learn.microsoft.com/windows/win32/menurc/mrmplatformversion
 type MrmPlatformVersion int32
@@ -476,6 +1501,21 @@ const (
 	MrmPlatformVersion_Windows10_0_0_5 MrmPlatformVersion = 17432581
 )
 
+// String returns the MrmPlatformVersion constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MrmPlatformVersion) String() string {
+	switch e {
+	case MrmPlatformVersion_Default:
+		return "MrmPlatformVersion_Default"
+	case MrmPlatformVersion_Windows10_0_0_0:
+		return "MrmPlatformVersion_Windows10_0_0_0"
+	case MrmPlatformVersion_Windows10_0_0_5:
+		return "MrmPlatformVersion_Windows10_0_0_5"
+	default:
+		return fmt.Sprintf("MrmPlatformVersion(%d)", int32(e))
+	}
+}
+
 // MrmResourceIndexerMessageSeverity: https://learn.microsoft.com/windows/win32/menurc/mrmresourceindexermessageseverity
 type MrmResourceIndexerMessageSeverity int32
 
@@ -485,6 +1525,23 @@ const (
 	MrmResourceIndexerMessageSeverityWarning MrmResourceIndexerMessageSeverity = 2
 	MrmResourceIndexerMessageSeverityError   MrmResourceIndexerMessageSeverity = 3
 )
+
+// String returns the MrmResourceIndexerMessageSeverity constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MrmResourceIndexerMessageSeverity) String() string {
+	switch e {
+	case MrmResourceIndexerMessageSeverityVerbose:
+		return "MrmResourceIndexerMessageSeverityVerbose"
+	case MrmResourceIndexerMessageSeverityInfo:
+		return "MrmResourceIndexerMessageSeverityInfo"
+	case MrmResourceIndexerMessageSeverityWarning:
+		return "MrmResourceIndexerMessageSeverityWarning"
+	case MrmResourceIndexerMessageSeverityError:
+		return "MrmResourceIndexerMessageSeverityError"
+	default:
+		return fmt.Sprintf("MrmResourceIndexerMessageSeverity(%d)", int32(e))
+	}
+}
 
 type OBJECT_IDENTIFIER int32
 
@@ -505,6 +1562,44 @@ const (
 	OBJID_NATIVEOM          OBJECT_IDENTIFIER = -16
 )
 
+// String returns the OBJECT_IDENTIFIER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OBJECT_IDENTIFIER) String() string {
+	switch e {
+	case OBJID_WINDOW:
+		return "OBJID_WINDOW"
+	case OBJID_SYSMENU:
+		return "OBJID_SYSMENU"
+	case OBJID_TITLEBAR:
+		return "OBJID_TITLEBAR"
+	case OBJID_MENU:
+		return "OBJID_MENU"
+	case OBJID_CLIENT:
+		return "OBJID_CLIENT"
+	case OBJID_VSCROLL:
+		return "OBJID_VSCROLL"
+	case OBJID_HSCROLL:
+		return "OBJID_HSCROLL"
+	case OBJID_SIZEGRIP:
+		return "OBJID_SIZEGRIP"
+	case OBJID_CARET:
+		return "OBJID_CARET"
+	case OBJID_CURSOR:
+		return "OBJID_CURSOR"
+	case OBJID_ALERT:
+		return "OBJID_ALERT"
+	case OBJID_SOUND:
+		return "OBJID_SOUND"
+	case OBJID_QUERYCLASSNAMEIDX:
+		return "OBJID_QUERYCLASSNAMEIDX"
+	case OBJID_NATIVEOM:
+		return "OBJID_NATIVEOM"
+	default:
+		return fmt.Sprintf("OBJECT_IDENTIFIER(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PEEK_MESSAGE_REMOVE_TYPE uint32
 
 const (
@@ -517,6 +1612,34 @@ const (
 	PM_QS_SENDMESSAGE PEEK_MESSAGE_REMOVE_TYPE = 4194304
 )
 
+// String returns the PEEK_MESSAGE_REMOVE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEEK_MESSAGE_REMOVE_TYPE) String() string {
+	var parts []string
+	if e&PM_REMOVE != 0 {
+		parts = append(parts, "PM_REMOVE")
+	}
+	if e&PM_NOYIELD != 0 {
+		parts = append(parts, "PM_NOYIELD")
+	}
+	if e&PM_QS_INPUT != 0 {
+		parts = append(parts, "PM_QS_INPUT")
+	}
+	if e&PM_QS_POSTMESSAGE != 0 {
+		parts = append(parts, "PM_QS_POSTMESSAGE")
+	}
+	if e&PM_QS_PAINT != 0 {
+		parts = append(parts, "PM_QS_PAINT")
+	}
+	if e&PM_QS_SENDMESSAGE != 0 {
+		parts = append(parts, "PM_QS_SENDMESSAGE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type POINTER_INPUT_TYPE int32
 
 const (
@@ -527,6 +1650,26 @@ const (
 	PT_TOUCHPAD POINTER_INPUT_TYPE = 5
 )
 
+// String returns the POINTER_INPUT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POINTER_INPUT_TYPE) String() string {
+	switch e {
+	case PT_POINTER:
+		return "PT_POINTER"
+	case PT_TOUCH:
+		return "PT_TOUCH"
+	case PT_PEN:
+		return "PT_PEN"
+	case PT_MOUSE:
+		return "PT_MOUSE"
+	case PT_TOUCHPAD:
+		return "PT_TOUCHPAD"
+	default:
+		return fmt.Sprintf("POINTER_INPUT_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type QUEUE_STATUS_FLAGS uint32
 
 const (
@@ -546,6 +1689,59 @@ const (
 	QS_TIMER          QUEUE_STATUS_FLAGS = 16
 )
 
+// String returns the QUEUE_STATUS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QUEUE_STATUS_FLAGS) String() string {
+	var parts []string
+	if e&QS_ALLEVENTS != 0 {
+		parts = append(parts, "QS_ALLEVENTS")
+	}
+	if e&QS_ALLINPUT != 0 {
+		parts = append(parts, "QS_ALLINPUT")
+	}
+	if e&QS_ALLPOSTMESSAGE != 0 {
+		parts = append(parts, "QS_ALLPOSTMESSAGE")
+	}
+	if e&QS_HOTKEY != 0 {
+		parts = append(parts, "QS_HOTKEY")
+	}
+	if e&QS_INPUT != 0 {
+		parts = append(parts, "QS_INPUT")
+	}
+	if e&QS_KEY != 0 {
+		parts = append(parts, "QS_KEY")
+	}
+	if e&QS_MOUSE != 0 {
+		parts = append(parts, "QS_MOUSE")
+	}
+	if e&QS_MOUSEBUTTON != 0 {
+		parts = append(parts, "QS_MOUSEBUTTON")
+	}
+	if e&QS_MOUSEMOVE != 0 {
+		parts = append(parts, "QS_MOUSEMOVE")
+	}
+	if e&QS_PAINT != 0 {
+		parts = append(parts, "QS_PAINT")
+	}
+	if e&QS_POSTMESSAGE != 0 {
+		parts = append(parts, "QS_POSTMESSAGE")
+	}
+	if e&QS_RAWINPUT != 0 {
+		parts = append(parts, "QS_RAWINPUT")
+	}
+	if e&QS_SENDMESSAGE != 0 {
+		parts = append(parts, "QS_SENDMESSAGE")
+	}
+	if e&QS_TIMER != 0 {
+		parts = append(parts, "QS_TIMER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type REGISTER_NOTIFICATION_FLAGS uint32
 
 const (
@@ -554,6 +1750,25 @@ const (
 	DEVICE_NOTIFY_WINDOW_HANDLE         REGISTER_NOTIFICATION_FLAGS = 0
 	DEVICE_NOTIFY_ALL_INTERFACE_CLASSES REGISTER_NOTIFICATION_FLAGS = 4
 )
+
+// String returns the REGISTER_NOTIFICATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REGISTER_NOTIFICATION_FLAGS) String() string {
+	var parts []string
+	if e&DEVICE_NOTIFY_SERVICE_HANDLE != 0 {
+		parts = append(parts, "DEVICE_NOTIFY_SERVICE_HANDLE")
+	}
+	if e&DEVICE_NOTIFY_CALLBACK != 0 {
+		parts = append(parts, "DEVICE_NOTIFY_CALLBACK")
+	}
+	if e&DEVICE_NOTIFY_ALL_INTERFACE_CLASSES != 0 {
+		parts = append(parts, "DEVICE_NOTIFY_ALL_INTERFACE_CLASSES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type SCROLLBAR_COMMAND int32
 
@@ -575,6 +1790,34 @@ const (
 	SB_ENDSCROLL     SCROLLBAR_COMMAND = 8
 )
 
+// String returns the SCROLLBAR_COMMAND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCROLLBAR_COMMAND) String() string {
+	switch e {
+	case SB_LINEUP:
+		return "SB_LINEUP"
+	case SB_LINEDOWN:
+		return "SB_LINEDOWN"
+	case SB_PAGEUP:
+		return "SB_PAGEUP"
+	case SB_PAGEDOWN:
+		return "SB_PAGEDOWN"
+	case SB_THUMBPOSITION:
+		return "SB_THUMBPOSITION"
+	case SB_THUMBTRACK:
+		return "SB_THUMBTRACK"
+	case SB_TOP:
+		return "SB_TOP"
+	case SB_RIGHT:
+		return "SB_RIGHT"
+	case SB_ENDSCROLL:
+		return "SB_ENDSCROLL"
+	default:
+		return fmt.Sprintf("SCROLLBAR_COMMAND(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SCROLLBAR_CONSTANTS int32
 
 const (
@@ -584,6 +1827,26 @@ const (
 	SB_BOTH SCROLLBAR_CONSTANTS = 3
 )
 
+// String returns the SCROLLBAR_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCROLLBAR_CONSTANTS) String() string {
+	var parts []string
+	if e&SB_CTL != 0 {
+		parts = append(parts, "SB_CTL")
+	}
+	if e&SB_VERT != 0 {
+		parts = append(parts, "SB_VERT")
+	}
+	if e&SB_BOTH != 0 {
+		parts = append(parts, "SB_BOTH")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SCROLLINFO_MASK uint32
 
 const (
@@ -595,6 +1858,35 @@ const (
 	SIF_TRACKPOS        SCROLLINFO_MASK = 16
 )
 
+// String returns the SCROLLINFO_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCROLLINFO_MASK) String() string {
+	var parts []string
+	if e&SIF_ALL != 0 {
+		parts = append(parts, "SIF_ALL")
+	}
+	if e&SIF_DISABLENOSCROLL != 0 {
+		parts = append(parts, "SIF_DISABLENOSCROLL")
+	}
+	if e&SIF_PAGE != 0 {
+		parts = append(parts, "SIF_PAGE")
+	}
+	if e&SIF_POS != 0 {
+		parts = append(parts, "SIF_POS")
+	}
+	if e&SIF_RANGE != 0 {
+		parts = append(parts, "SIF_RANGE")
+	}
+	if e&SIF_TRACKPOS != 0 {
+		parts = append(parts, "SIF_TRACKPOS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SCROLL_WINDOW_FLAGS uint32
 
 const (
@@ -604,6 +1896,29 @@ const (
 	SW_SMOOTHSCROLL   SCROLL_WINDOW_FLAGS = 16
 )
 
+// String returns the SCROLL_WINDOW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCROLL_WINDOW_FLAGS) String() string {
+	var parts []string
+	if e&SW_SCROLLCHILDREN != 0 {
+		parts = append(parts, "SW_SCROLLCHILDREN")
+	}
+	if e&SW_INVALIDATE != 0 {
+		parts = append(parts, "SW_INVALIDATE")
+	}
+	if e&SW_ERASE != 0 {
+		parts = append(parts, "SW_ERASE")
+	}
+	if e&SW_SMOOTHSCROLL != 0 {
+		parts = append(parts, "SW_SMOOTHSCROLL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SEND_MESSAGE_TIMEOUT_FLAGS uint32
 
 const (
@@ -614,6 +1929,29 @@ const (
 	SMTO_ERRORONEXIT        SEND_MESSAGE_TIMEOUT_FLAGS = 32
 )
 
+// String returns the SEND_MESSAGE_TIMEOUT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SEND_MESSAGE_TIMEOUT_FLAGS) String() string {
+	var parts []string
+	if e&SMTO_ABORTIFHUNG != 0 {
+		parts = append(parts, "SMTO_ABORTIFHUNG")
+	}
+	if e&SMTO_BLOCK != 0 {
+		parts = append(parts, "SMTO_BLOCK")
+	}
+	if e&SMTO_NOTIMEOUTIFNOTHUNG != 0 {
+		parts = append(parts, "SMTO_NOTIMEOUTIFNOTHUNG")
+	}
+	if e&SMTO_ERRORONEXIT != 0 {
+		parts = append(parts, "SMTO_ERRORONEXIT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SET_WINDOW_POS_FLAGS uint32
 
 const (
@@ -633,6 +1971,61 @@ const (
 	SWP_NOZORDER       SET_WINDOW_POS_FLAGS = 4
 	SWP_SHOWWINDOW     SET_WINDOW_POS_FLAGS = 64
 )
+
+// String returns the SET_WINDOW_POS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SET_WINDOW_POS_FLAGS) String() string {
+	var parts []string
+	if e&SWP_ASYNCWINDOWPOS != 0 {
+		parts = append(parts, "SWP_ASYNCWINDOWPOS")
+	}
+	if e&SWP_DEFERERASE != 0 {
+		parts = append(parts, "SWP_DEFERERASE")
+	}
+	if e&SWP_DRAWFRAME != 0 {
+		parts = append(parts, "SWP_DRAWFRAME")
+	}
+	if e&SWP_FRAMECHANGED != 0 {
+		parts = append(parts, "SWP_FRAMECHANGED")
+	}
+	if e&SWP_HIDEWINDOW != 0 {
+		parts = append(parts, "SWP_HIDEWINDOW")
+	}
+	if e&SWP_NOACTIVATE != 0 {
+		parts = append(parts, "SWP_NOACTIVATE")
+	}
+	if e&SWP_NOCOPYBITS != 0 {
+		parts = append(parts, "SWP_NOCOPYBITS")
+	}
+	if e&SWP_NOMOVE != 0 {
+		parts = append(parts, "SWP_NOMOVE")
+	}
+	if e&SWP_NOOWNERZORDER != 0 {
+		parts = append(parts, "SWP_NOOWNERZORDER")
+	}
+	if e&SWP_NOREDRAW != 0 {
+		parts = append(parts, "SWP_NOREDRAW")
+	}
+	if e&SWP_NOREPOSITION != 0 {
+		parts = append(parts, "SWP_NOREPOSITION")
+	}
+	if e&SWP_NOSENDCHANGING != 0 {
+		parts = append(parts, "SWP_NOSENDCHANGING")
+	}
+	if e&SWP_NOSIZE != 0 {
+		parts = append(parts, "SWP_NOSIZE")
+	}
+	if e&SWP_NOZORDER != 0 {
+		parts = append(parts, "SWP_NOZORDER")
+	}
+	if e&SWP_SHOWWINDOW != 0 {
+		parts = append(parts, "SWP_SHOWWINDOW")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type SHOW_WINDOW_CMD int32
 
@@ -654,6 +2047,39 @@ const (
 	SW_MAX             SHOW_WINDOW_CMD = 11
 )
 
+// String returns the SHOW_WINDOW_CMD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHOW_WINDOW_CMD) String() string {
+	switch e {
+	case SW_HIDE:
+		return "SW_HIDE"
+	case SW_SHOWNORMAL:
+		return "SW_SHOWNORMAL"
+	case SW_SHOWMINIMIZED:
+		return "SW_SHOWMINIMIZED"
+	case SW_SHOWMAXIMIZED:
+		return "SW_SHOWMAXIMIZED"
+	case SW_SHOWNOACTIVATE:
+		return "SW_SHOWNOACTIVATE"
+	case SW_SHOW:
+		return "SW_SHOW"
+	case SW_MINIMIZE:
+		return "SW_MINIMIZE"
+	case SW_SHOWMINNOACTIVE:
+		return "SW_SHOWMINNOACTIVE"
+	case SW_SHOWNA:
+		return "SW_SHOWNA"
+	case SW_RESTORE:
+		return "SW_RESTORE"
+	case SW_SHOWDEFAULT:
+		return "SW_SHOWDEFAULT"
+	case SW_FORCEMINIMIZE:
+		return "SW_FORCEMINIMIZE"
+	default:
+		return fmt.Sprintf("SHOW_WINDOW_CMD(%d)", int32(e))
+	}
+}
+
 type SHOW_WINDOW_STATUS uint32
 
 const (
@@ -662,6 +2088,23 @@ const (
 	SW_PARENTOPENING SHOW_WINDOW_STATUS = 3
 	SW_OTHERUNZOOM   SHOW_WINDOW_STATUS = 4
 )
+
+// String returns the SHOW_WINDOW_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHOW_WINDOW_STATUS) String() string {
+	switch e {
+	case SW_PARENTCLOSING:
+		return "SW_PARENTCLOSING"
+	case SW_OTHERZOOM:
+		return "SW_OTHERZOOM"
+	case SW_PARENTOPENING:
+		return "SW_PARENTOPENING"
+	case SW_OTHERUNZOOM:
+		return "SW_OTHERUNZOOM"
+	default:
+		return fmt.Sprintf("SHOW_WINDOW_STATUS(%d)", uint32(e))
+	}
+}
 
 type SYSTEM_CURSOR_ID uint32
 
@@ -681,6 +2124,43 @@ const (
 	OCR_UP          SYSTEM_CURSOR_ID = 32516
 	OCR_WAIT        SYSTEM_CURSOR_ID = 32514
 )
+
+// String returns the SYSTEM_CURSOR_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEM_CURSOR_ID) String() string {
+	switch e {
+	case OCR_APPSTARTING:
+		return "OCR_APPSTARTING"
+	case OCR_NORMAL:
+		return "OCR_NORMAL"
+	case OCR_CROSS:
+		return "OCR_CROSS"
+	case OCR_HAND:
+		return "OCR_HAND"
+	case OCR_HELP:
+		return "OCR_HELP"
+	case OCR_IBEAM:
+		return "OCR_IBEAM"
+	case OCR_NO:
+		return "OCR_NO"
+	case OCR_SIZEALL:
+		return "OCR_SIZEALL"
+	case OCR_SIZENESW:
+		return "OCR_SIZENESW"
+	case OCR_SIZENS:
+		return "OCR_SIZENS"
+	case OCR_SIZENWSE:
+		return "OCR_SIZENWSE"
+	case OCR_SIZEWE:
+		return "OCR_SIZEWE"
+	case OCR_UP:
+		return "OCR_UP"
+	case OCR_WAIT:
+		return "OCR_WAIT"
+	default:
+		return fmt.Sprintf("SYSTEM_CURSOR_ID(%d)", uint32(e))
+	}
+}
 
 type SYSTEM_METRICS_INDEX int32
 
@@ -782,6 +2262,198 @@ const (
 	SM_YVIRTUALSCREEN              SYSTEM_METRICS_INDEX = 77
 )
 
+// String returns the SYSTEM_METRICS_INDEX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEM_METRICS_INDEX) String() string {
+	switch e {
+	case SM_ARRANGE:
+		return "SM_ARRANGE"
+	case SM_CLEANBOOT:
+		return "SM_CLEANBOOT"
+	case SM_CMONITORS:
+		return "SM_CMONITORS"
+	case SM_CMOUSEBUTTONS:
+		return "SM_CMOUSEBUTTONS"
+	case SM_CONVERTIBLESLATEMODE:
+		return "SM_CONVERTIBLESLATEMODE"
+	case SM_CXBORDER:
+		return "SM_CXBORDER"
+	case SM_CXCURSOR:
+		return "SM_CXCURSOR"
+	case SM_CXDLGFRAME:
+		return "SM_CXDLGFRAME"
+	case SM_CXDOUBLECLK:
+		return "SM_CXDOUBLECLK"
+	case SM_CXDRAG:
+		return "SM_CXDRAG"
+	case SM_CXEDGE:
+		return "SM_CXEDGE"
+	case SM_CXFOCUSBORDER:
+		return "SM_CXFOCUSBORDER"
+	case SM_CXFRAME:
+		return "SM_CXFRAME"
+	case SM_CXFULLSCREEN:
+		return "SM_CXFULLSCREEN"
+	case SM_CXHSCROLL:
+		return "SM_CXHSCROLL"
+	case SM_CXHTHUMB:
+		return "SM_CXHTHUMB"
+	case SM_CXICON:
+		return "SM_CXICON"
+	case SM_CXICONSPACING:
+		return "SM_CXICONSPACING"
+	case SM_CXMAXIMIZED:
+		return "SM_CXMAXIMIZED"
+	case SM_CXMAXTRACK:
+		return "SM_CXMAXTRACK"
+	case SM_CXMENUCHECK:
+		return "SM_CXMENUCHECK"
+	case SM_CXMENUSIZE:
+		return "SM_CXMENUSIZE"
+	case SM_CXMIN:
+		return "SM_CXMIN"
+	case SM_CXMINIMIZED:
+		return "SM_CXMINIMIZED"
+	case SM_CXMINSPACING:
+		return "SM_CXMINSPACING"
+	case SM_CXMINTRACK:
+		return "SM_CXMINTRACK"
+	case SM_CXPADDEDBORDER:
+		return "SM_CXPADDEDBORDER"
+	case SM_CXSCREEN:
+		return "SM_CXSCREEN"
+	case SM_CXSIZE:
+		return "SM_CXSIZE"
+	case SM_CXSMICON:
+		return "SM_CXSMICON"
+	case SM_CXSMSIZE:
+		return "SM_CXSMSIZE"
+	case SM_CXVIRTUALSCREEN:
+		return "SM_CXVIRTUALSCREEN"
+	case SM_CXVSCROLL:
+		return "SM_CXVSCROLL"
+	case SM_CYBORDER:
+		return "SM_CYBORDER"
+	case SM_CYCAPTION:
+		return "SM_CYCAPTION"
+	case SM_CYCURSOR:
+		return "SM_CYCURSOR"
+	case SM_CYDLGFRAME:
+		return "SM_CYDLGFRAME"
+	case SM_CYDOUBLECLK:
+		return "SM_CYDOUBLECLK"
+	case SM_CYDRAG:
+		return "SM_CYDRAG"
+	case SM_CYEDGE:
+		return "SM_CYEDGE"
+	case SM_CYFOCUSBORDER:
+		return "SM_CYFOCUSBORDER"
+	case SM_CYFRAME:
+		return "SM_CYFRAME"
+	case SM_CYFULLSCREEN:
+		return "SM_CYFULLSCREEN"
+	case SM_CYHSCROLL:
+		return "SM_CYHSCROLL"
+	case SM_CYICON:
+		return "SM_CYICON"
+	case SM_CYICONSPACING:
+		return "SM_CYICONSPACING"
+	case SM_CYKANJIWINDOW:
+		return "SM_CYKANJIWINDOW"
+	case SM_CYMAXIMIZED:
+		return "SM_CYMAXIMIZED"
+	case SM_CYMAXTRACK:
+		return "SM_CYMAXTRACK"
+	case SM_CYMENU:
+		return "SM_CYMENU"
+	case SM_CYMENUCHECK:
+		return "SM_CYMENUCHECK"
+	case SM_CYMENUSIZE:
+		return "SM_CYMENUSIZE"
+	case SM_CYMIN:
+		return "SM_CYMIN"
+	case SM_CYMINIMIZED:
+		return "SM_CYMINIMIZED"
+	case SM_CYMINSPACING:
+		return "SM_CYMINSPACING"
+	case SM_CYMINTRACK:
+		return "SM_CYMINTRACK"
+	case SM_CYSCREEN:
+		return "SM_CYSCREEN"
+	case SM_CYSIZE:
+		return "SM_CYSIZE"
+	case SM_CYSMCAPTION:
+		return "SM_CYSMCAPTION"
+	case SM_CYSMICON:
+		return "SM_CYSMICON"
+	case SM_CYSMSIZE:
+		return "SM_CYSMSIZE"
+	case SM_CYVIRTUALSCREEN:
+		return "SM_CYVIRTUALSCREEN"
+	case SM_CYVSCROLL:
+		return "SM_CYVSCROLL"
+	case SM_CYVTHUMB:
+		return "SM_CYVTHUMB"
+	case SM_DBCSENABLED:
+		return "SM_DBCSENABLED"
+	case SM_DEBUG:
+		return "SM_DEBUG"
+	case SM_DIGITIZER:
+		return "SM_DIGITIZER"
+	case SM_IMMENABLED:
+		return "SM_IMMENABLED"
+	case SM_MAXIMUMTOUCHES:
+		return "SM_MAXIMUMTOUCHES"
+	case SM_MEDIACENTER:
+		return "SM_MEDIACENTER"
+	case SM_MENUDROPALIGNMENT:
+		return "SM_MENUDROPALIGNMENT"
+	case SM_MIDEASTENABLED:
+		return "SM_MIDEASTENABLED"
+	case SM_MOUSEPRESENT:
+		return "SM_MOUSEPRESENT"
+	case SM_MOUSEHORIZONTALWHEELPRESENT:
+		return "SM_MOUSEHORIZONTALWHEELPRESENT"
+	case SM_MOUSEWHEELPRESENT:
+		return "SM_MOUSEWHEELPRESENT"
+	case SM_NETWORK:
+		return "SM_NETWORK"
+	case SM_PENWINDOWS:
+		return "SM_PENWINDOWS"
+	case SM_REMOTECONTROL:
+		return "SM_REMOTECONTROL"
+	case SM_REMOTESESSION:
+		return "SM_REMOTESESSION"
+	case SM_SAMEDISPLAYFORMAT:
+		return "SM_SAMEDISPLAYFORMAT"
+	case SM_SECURE:
+		return "SM_SECURE"
+	case SM_SERVERR2:
+		return "SM_SERVERR2"
+	case SM_SHOWSOUNDS:
+		return "SM_SHOWSOUNDS"
+	case SM_SHUTTINGDOWN:
+		return "SM_SHUTTINGDOWN"
+	case SM_SLOWMACHINE:
+		return "SM_SLOWMACHINE"
+	case SM_STARTER:
+		return "SM_STARTER"
+	case SM_SWAPBUTTON:
+		return "SM_SWAPBUTTON"
+	case SM_SYSTEMDOCKED:
+		return "SM_SYSTEMDOCKED"
+	case SM_TABLETPC:
+		return "SM_TABLETPC"
+	case SM_XVIRTUALSCREEN:
+		return "SM_XVIRTUALSCREEN"
+	case SM_YVIRTUALSCREEN:
+		return "SM_YVIRTUALSCREEN"
+	default:
+		return fmt.Sprintf("SYSTEM_METRICS_INDEX(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SYSTEM_PARAMETERS_INFO_ACTION uint32
 
 const (
@@ -1030,6 +2702,746 @@ const (
 	SPI_SETHANDEDNESS                SYSTEM_PARAMETERS_INFO_ACTION = 8229
 )
 
+// String returns the SYSTEM_PARAMETERS_INFO_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEM_PARAMETERS_INFO_ACTION) String() string {
+	var parts []string
+	if e&SPI_GETBEEP != 0 {
+		parts = append(parts, "SPI_GETBEEP")
+	}
+	if e&SPI_SETBEEP != 0 {
+		parts = append(parts, "SPI_SETBEEP")
+	}
+	if e&SPI_GETMOUSE != 0 {
+		parts = append(parts, "SPI_GETMOUSE")
+	}
+	if e&SPI_SETMOUSE != 0 {
+		parts = append(parts, "SPI_SETMOUSE")
+	}
+	if e&SPI_GETBORDER != 0 {
+		parts = append(parts, "SPI_GETBORDER")
+	}
+	if e&SPI_SETBORDER != 0 {
+		parts = append(parts, "SPI_SETBORDER")
+	}
+	if e&SPI_GETKEYBOARDSPEED != 0 {
+		parts = append(parts, "SPI_GETKEYBOARDSPEED")
+	}
+	if e&SPI_SETKEYBOARDSPEED != 0 {
+		parts = append(parts, "SPI_SETKEYBOARDSPEED")
+	}
+	if e&SPI_LANGDRIVER != 0 {
+		parts = append(parts, "SPI_LANGDRIVER")
+	}
+	if e&SPI_ICONHORIZONTALSPACING != 0 {
+		parts = append(parts, "SPI_ICONHORIZONTALSPACING")
+	}
+	if e&SPI_GETSCREENSAVETIMEOUT != 0 {
+		parts = append(parts, "SPI_GETSCREENSAVETIMEOUT")
+	}
+	if e&SPI_SETSCREENSAVETIMEOUT != 0 {
+		parts = append(parts, "SPI_SETSCREENSAVETIMEOUT")
+	}
+	if e&SPI_GETSCREENSAVEACTIVE != 0 {
+		parts = append(parts, "SPI_GETSCREENSAVEACTIVE")
+	}
+	if e&SPI_SETSCREENSAVEACTIVE != 0 {
+		parts = append(parts, "SPI_SETSCREENSAVEACTIVE")
+	}
+	if e&SPI_GETGRIDGRANULARITY != 0 {
+		parts = append(parts, "SPI_GETGRIDGRANULARITY")
+	}
+	if e&SPI_SETGRIDGRANULARITY != 0 {
+		parts = append(parts, "SPI_SETGRIDGRANULARITY")
+	}
+	if e&SPI_SETDESKWALLPAPER != 0 {
+		parts = append(parts, "SPI_SETDESKWALLPAPER")
+	}
+	if e&SPI_SETDESKPATTERN != 0 {
+		parts = append(parts, "SPI_SETDESKPATTERN")
+	}
+	if e&SPI_GETKEYBOARDDELAY != 0 {
+		parts = append(parts, "SPI_GETKEYBOARDDELAY")
+	}
+	if e&SPI_SETKEYBOARDDELAY != 0 {
+		parts = append(parts, "SPI_SETKEYBOARDDELAY")
+	}
+	if e&SPI_ICONVERTICALSPACING != 0 {
+		parts = append(parts, "SPI_ICONVERTICALSPACING")
+	}
+	if e&SPI_GETICONTITLEWRAP != 0 {
+		parts = append(parts, "SPI_GETICONTITLEWRAP")
+	}
+	if e&SPI_SETICONTITLEWRAP != 0 {
+		parts = append(parts, "SPI_SETICONTITLEWRAP")
+	}
+	if e&SPI_GETMENUDROPALIGNMENT != 0 {
+		parts = append(parts, "SPI_GETMENUDROPALIGNMENT")
+	}
+	if e&SPI_SETMENUDROPALIGNMENT != 0 {
+		parts = append(parts, "SPI_SETMENUDROPALIGNMENT")
+	}
+	if e&SPI_SETDOUBLECLKWIDTH != 0 {
+		parts = append(parts, "SPI_SETDOUBLECLKWIDTH")
+	}
+	if e&SPI_SETDOUBLECLKHEIGHT != 0 {
+		parts = append(parts, "SPI_SETDOUBLECLKHEIGHT")
+	}
+	if e&SPI_GETICONTITLELOGFONT != 0 {
+		parts = append(parts, "SPI_GETICONTITLELOGFONT")
+	}
+	if e&SPI_SETDOUBLECLICKTIME != 0 {
+		parts = append(parts, "SPI_SETDOUBLECLICKTIME")
+	}
+	if e&SPI_SETMOUSEBUTTONSWAP != 0 {
+		parts = append(parts, "SPI_SETMOUSEBUTTONSWAP")
+	}
+	if e&SPI_SETICONTITLELOGFONT != 0 {
+		parts = append(parts, "SPI_SETICONTITLELOGFONT")
+	}
+	if e&SPI_GETFASTTASKSWITCH != 0 {
+		parts = append(parts, "SPI_GETFASTTASKSWITCH")
+	}
+	if e&SPI_SETFASTTASKSWITCH != 0 {
+		parts = append(parts, "SPI_SETFASTTASKSWITCH")
+	}
+	if e&SPI_SETDRAGFULLWINDOWS != 0 {
+		parts = append(parts, "SPI_SETDRAGFULLWINDOWS")
+	}
+	if e&SPI_GETDRAGFULLWINDOWS != 0 {
+		parts = append(parts, "SPI_GETDRAGFULLWINDOWS")
+	}
+	if e&SPI_GETNONCLIENTMETRICS != 0 {
+		parts = append(parts, "SPI_GETNONCLIENTMETRICS")
+	}
+	if e&SPI_SETNONCLIENTMETRICS != 0 {
+		parts = append(parts, "SPI_SETNONCLIENTMETRICS")
+	}
+	if e&SPI_GETMINIMIZEDMETRICS != 0 {
+		parts = append(parts, "SPI_GETMINIMIZEDMETRICS")
+	}
+	if e&SPI_SETMINIMIZEDMETRICS != 0 {
+		parts = append(parts, "SPI_SETMINIMIZEDMETRICS")
+	}
+	if e&SPI_GETICONMETRICS != 0 {
+		parts = append(parts, "SPI_GETICONMETRICS")
+	}
+	if e&SPI_SETICONMETRICS != 0 {
+		parts = append(parts, "SPI_SETICONMETRICS")
+	}
+	if e&SPI_SETWORKAREA != 0 {
+		parts = append(parts, "SPI_SETWORKAREA")
+	}
+	if e&SPI_GETWORKAREA != 0 {
+		parts = append(parts, "SPI_GETWORKAREA")
+	}
+	if e&SPI_SETPENWINDOWS != 0 {
+		parts = append(parts, "SPI_SETPENWINDOWS")
+	}
+	if e&SPI_GETHIGHCONTRAST != 0 {
+		parts = append(parts, "SPI_GETHIGHCONTRAST")
+	}
+	if e&SPI_SETHIGHCONTRAST != 0 {
+		parts = append(parts, "SPI_SETHIGHCONTRAST")
+	}
+	if e&SPI_GETKEYBOARDPREF != 0 {
+		parts = append(parts, "SPI_GETKEYBOARDPREF")
+	}
+	if e&SPI_SETKEYBOARDPREF != 0 {
+		parts = append(parts, "SPI_SETKEYBOARDPREF")
+	}
+	if e&SPI_GETSCREENREADER != 0 {
+		parts = append(parts, "SPI_GETSCREENREADER")
+	}
+	if e&SPI_SETSCREENREADER != 0 {
+		parts = append(parts, "SPI_SETSCREENREADER")
+	}
+	if e&SPI_GETANIMATION != 0 {
+		parts = append(parts, "SPI_GETANIMATION")
+	}
+	if e&SPI_SETANIMATION != 0 {
+		parts = append(parts, "SPI_SETANIMATION")
+	}
+	if e&SPI_GETFONTSMOOTHING != 0 {
+		parts = append(parts, "SPI_GETFONTSMOOTHING")
+	}
+	if e&SPI_SETFONTSMOOTHING != 0 {
+		parts = append(parts, "SPI_SETFONTSMOOTHING")
+	}
+	if e&SPI_SETDRAGWIDTH != 0 {
+		parts = append(parts, "SPI_SETDRAGWIDTH")
+	}
+	if e&SPI_SETDRAGHEIGHT != 0 {
+		parts = append(parts, "SPI_SETDRAGHEIGHT")
+	}
+	if e&SPI_SETHANDHELD != 0 {
+		parts = append(parts, "SPI_SETHANDHELD")
+	}
+	if e&SPI_GETLOWPOWERTIMEOUT != 0 {
+		parts = append(parts, "SPI_GETLOWPOWERTIMEOUT")
+	}
+	if e&SPI_GETPOWEROFFTIMEOUT != 0 {
+		parts = append(parts, "SPI_GETPOWEROFFTIMEOUT")
+	}
+	if e&SPI_SETLOWPOWERTIMEOUT != 0 {
+		parts = append(parts, "SPI_SETLOWPOWERTIMEOUT")
+	}
+	if e&SPI_SETPOWEROFFTIMEOUT != 0 {
+		parts = append(parts, "SPI_SETPOWEROFFTIMEOUT")
+	}
+	if e&SPI_GETLOWPOWERACTIVE != 0 {
+		parts = append(parts, "SPI_GETLOWPOWERACTIVE")
+	}
+	if e&SPI_GETPOWEROFFACTIVE != 0 {
+		parts = append(parts, "SPI_GETPOWEROFFACTIVE")
+	}
+	if e&SPI_SETLOWPOWERACTIVE != 0 {
+		parts = append(parts, "SPI_SETLOWPOWERACTIVE")
+	}
+	if e&SPI_SETPOWEROFFACTIVE != 0 {
+		parts = append(parts, "SPI_SETPOWEROFFACTIVE")
+	}
+	if e&SPI_SETCURSORS != 0 {
+		parts = append(parts, "SPI_SETCURSORS")
+	}
+	if e&SPI_SETICONS != 0 {
+		parts = append(parts, "SPI_SETICONS")
+	}
+	if e&SPI_GETDEFAULTINPUTLANG != 0 {
+		parts = append(parts, "SPI_GETDEFAULTINPUTLANG")
+	}
+	if e&SPI_SETDEFAULTINPUTLANG != 0 {
+		parts = append(parts, "SPI_SETDEFAULTINPUTLANG")
+	}
+	if e&SPI_SETLANGTOGGLE != 0 {
+		parts = append(parts, "SPI_SETLANGTOGGLE")
+	}
+	if e&SPI_GETWINDOWSEXTENSION != 0 {
+		parts = append(parts, "SPI_GETWINDOWSEXTENSION")
+	}
+	if e&SPI_SETMOUSETRAILS != 0 {
+		parts = append(parts, "SPI_SETMOUSETRAILS")
+	}
+	if e&SPI_GETMOUSETRAILS != 0 {
+		parts = append(parts, "SPI_GETMOUSETRAILS")
+	}
+	if e&SPI_SETSCREENSAVERRUNNING != 0 {
+		parts = append(parts, "SPI_SETSCREENSAVERRUNNING")
+	}
+	if e&SPI_SCREENSAVERRUNNING != 0 {
+		parts = append(parts, "SPI_SCREENSAVERRUNNING")
+	}
+	if e&SPI_GETFILTERKEYS != 0 {
+		parts = append(parts, "SPI_GETFILTERKEYS")
+	}
+	if e&SPI_SETFILTERKEYS != 0 {
+		parts = append(parts, "SPI_SETFILTERKEYS")
+	}
+	if e&SPI_GETTOGGLEKEYS != 0 {
+		parts = append(parts, "SPI_GETTOGGLEKEYS")
+	}
+	if e&SPI_SETTOGGLEKEYS != 0 {
+		parts = append(parts, "SPI_SETTOGGLEKEYS")
+	}
+	if e&SPI_GETMOUSEKEYS != 0 {
+		parts = append(parts, "SPI_GETMOUSEKEYS")
+	}
+	if e&SPI_SETMOUSEKEYS != 0 {
+		parts = append(parts, "SPI_SETMOUSEKEYS")
+	}
+	if e&SPI_GETSHOWSOUNDS != 0 {
+		parts = append(parts, "SPI_GETSHOWSOUNDS")
+	}
+	if e&SPI_SETSHOWSOUNDS != 0 {
+		parts = append(parts, "SPI_SETSHOWSOUNDS")
+	}
+	if e&SPI_GETSTICKYKEYS != 0 {
+		parts = append(parts, "SPI_GETSTICKYKEYS")
+	}
+	if e&SPI_SETSTICKYKEYS != 0 {
+		parts = append(parts, "SPI_SETSTICKYKEYS")
+	}
+	if e&SPI_GETACCESSTIMEOUT != 0 {
+		parts = append(parts, "SPI_GETACCESSTIMEOUT")
+	}
+	if e&SPI_SETACCESSTIMEOUT != 0 {
+		parts = append(parts, "SPI_SETACCESSTIMEOUT")
+	}
+	if e&SPI_GETSERIALKEYS != 0 {
+		parts = append(parts, "SPI_GETSERIALKEYS")
+	}
+	if e&SPI_SETSERIALKEYS != 0 {
+		parts = append(parts, "SPI_SETSERIALKEYS")
+	}
+	if e&SPI_GETSOUNDSENTRY != 0 {
+		parts = append(parts, "SPI_GETSOUNDSENTRY")
+	}
+	if e&SPI_SETSOUNDSENTRY != 0 {
+		parts = append(parts, "SPI_SETSOUNDSENTRY")
+	}
+	if e&SPI_GETSNAPTODEFBUTTON != 0 {
+		parts = append(parts, "SPI_GETSNAPTODEFBUTTON")
+	}
+	if e&SPI_SETSNAPTODEFBUTTON != 0 {
+		parts = append(parts, "SPI_SETSNAPTODEFBUTTON")
+	}
+	if e&SPI_GETMOUSEHOVERWIDTH != 0 {
+		parts = append(parts, "SPI_GETMOUSEHOVERWIDTH")
+	}
+	if e&SPI_SETMOUSEHOVERWIDTH != 0 {
+		parts = append(parts, "SPI_SETMOUSEHOVERWIDTH")
+	}
+	if e&SPI_GETMOUSEHOVERHEIGHT != 0 {
+		parts = append(parts, "SPI_GETMOUSEHOVERHEIGHT")
+	}
+	if e&SPI_SETMOUSEHOVERHEIGHT != 0 {
+		parts = append(parts, "SPI_SETMOUSEHOVERHEIGHT")
+	}
+	if e&SPI_GETMOUSEHOVERTIME != 0 {
+		parts = append(parts, "SPI_GETMOUSEHOVERTIME")
+	}
+	if e&SPI_SETMOUSEHOVERTIME != 0 {
+		parts = append(parts, "SPI_SETMOUSEHOVERTIME")
+	}
+	if e&SPI_GETWHEELSCROLLLINES != 0 {
+		parts = append(parts, "SPI_GETWHEELSCROLLLINES")
+	}
+	if e&SPI_SETWHEELSCROLLLINES != 0 {
+		parts = append(parts, "SPI_SETWHEELSCROLLLINES")
+	}
+	if e&SPI_GETMENUSHOWDELAY != 0 {
+		parts = append(parts, "SPI_GETMENUSHOWDELAY")
+	}
+	if e&SPI_SETMENUSHOWDELAY != 0 {
+		parts = append(parts, "SPI_SETMENUSHOWDELAY")
+	}
+	if e&SPI_GETWHEELSCROLLCHARS != 0 {
+		parts = append(parts, "SPI_GETWHEELSCROLLCHARS")
+	}
+	if e&SPI_SETWHEELSCROLLCHARS != 0 {
+		parts = append(parts, "SPI_SETWHEELSCROLLCHARS")
+	}
+	if e&SPI_GETSHOWIMEUI != 0 {
+		parts = append(parts, "SPI_GETSHOWIMEUI")
+	}
+	if e&SPI_SETSHOWIMEUI != 0 {
+		parts = append(parts, "SPI_SETSHOWIMEUI")
+	}
+	if e&SPI_GETMOUSESPEED != 0 {
+		parts = append(parts, "SPI_GETMOUSESPEED")
+	}
+	if e&SPI_SETMOUSESPEED != 0 {
+		parts = append(parts, "SPI_SETMOUSESPEED")
+	}
+	if e&SPI_GETSCREENSAVERRUNNING != 0 {
+		parts = append(parts, "SPI_GETSCREENSAVERRUNNING")
+	}
+	if e&SPI_GETDESKWALLPAPER != 0 {
+		parts = append(parts, "SPI_GETDESKWALLPAPER")
+	}
+	if e&SPI_GETAUDIODESCRIPTION != 0 {
+		parts = append(parts, "SPI_GETAUDIODESCRIPTION")
+	}
+	if e&SPI_SETAUDIODESCRIPTION != 0 {
+		parts = append(parts, "SPI_SETAUDIODESCRIPTION")
+	}
+	if e&SPI_GETSCREENSAVESECURE != 0 {
+		parts = append(parts, "SPI_GETSCREENSAVESECURE")
+	}
+	if e&SPI_SETSCREENSAVESECURE != 0 {
+		parts = append(parts, "SPI_SETSCREENSAVESECURE")
+	}
+	if e&SPI_GETHUNGAPPTIMEOUT != 0 {
+		parts = append(parts, "SPI_GETHUNGAPPTIMEOUT")
+	}
+	if e&SPI_SETHUNGAPPTIMEOUT != 0 {
+		parts = append(parts, "SPI_SETHUNGAPPTIMEOUT")
+	}
+	if e&SPI_GETWAITTOKILLTIMEOUT != 0 {
+		parts = append(parts, "SPI_GETWAITTOKILLTIMEOUT")
+	}
+	if e&SPI_SETWAITTOKILLTIMEOUT != 0 {
+		parts = append(parts, "SPI_SETWAITTOKILLTIMEOUT")
+	}
+	if e&SPI_GETWAITTOKILLSERVICETIMEOUT != 0 {
+		parts = append(parts, "SPI_GETWAITTOKILLSERVICETIMEOUT")
+	}
+	if e&SPI_SETWAITTOKILLSERVICETIMEOUT != 0 {
+		parts = append(parts, "SPI_SETWAITTOKILLSERVICETIMEOUT")
+	}
+	if e&SPI_GETMOUSEDOCKTHRESHOLD != 0 {
+		parts = append(parts, "SPI_GETMOUSEDOCKTHRESHOLD")
+	}
+	if e&SPI_SETMOUSEDOCKTHRESHOLD != 0 {
+		parts = append(parts, "SPI_SETMOUSEDOCKTHRESHOLD")
+	}
+	if e&SPI_GETPENDOCKTHRESHOLD != 0 {
+		parts = append(parts, "SPI_GETPENDOCKTHRESHOLD")
+	}
+	if e&SPI_SETPENDOCKTHRESHOLD != 0 {
+		parts = append(parts, "SPI_SETPENDOCKTHRESHOLD")
+	}
+	if e&SPI_GETWINARRANGING != 0 {
+		parts = append(parts, "SPI_GETWINARRANGING")
+	}
+	if e&SPI_SETWINARRANGING != 0 {
+		parts = append(parts, "SPI_SETWINARRANGING")
+	}
+	if e&SPI_GETMOUSEDRAGOUTTHRESHOLD != 0 {
+		parts = append(parts, "SPI_GETMOUSEDRAGOUTTHRESHOLD")
+	}
+	if e&SPI_SETMOUSEDRAGOUTTHRESHOLD != 0 {
+		parts = append(parts, "SPI_SETMOUSEDRAGOUTTHRESHOLD")
+	}
+	if e&SPI_GETPENDRAGOUTTHRESHOLD != 0 {
+		parts = append(parts, "SPI_GETPENDRAGOUTTHRESHOLD")
+	}
+	if e&SPI_SETPENDRAGOUTTHRESHOLD != 0 {
+		parts = append(parts, "SPI_SETPENDRAGOUTTHRESHOLD")
+	}
+	if e&SPI_GETMOUSESIDEMOVETHRESHOLD != 0 {
+		parts = append(parts, "SPI_GETMOUSESIDEMOVETHRESHOLD")
+	}
+	if e&SPI_SETMOUSESIDEMOVETHRESHOLD != 0 {
+		parts = append(parts, "SPI_SETMOUSESIDEMOVETHRESHOLD")
+	}
+	if e&SPI_GETPENSIDEMOVETHRESHOLD != 0 {
+		parts = append(parts, "SPI_GETPENSIDEMOVETHRESHOLD")
+	}
+	if e&SPI_SETPENSIDEMOVETHRESHOLD != 0 {
+		parts = append(parts, "SPI_SETPENSIDEMOVETHRESHOLD")
+	}
+	if e&SPI_GETDRAGFROMMAXIMIZE != 0 {
+		parts = append(parts, "SPI_GETDRAGFROMMAXIMIZE")
+	}
+	if e&SPI_SETDRAGFROMMAXIMIZE != 0 {
+		parts = append(parts, "SPI_SETDRAGFROMMAXIMIZE")
+	}
+	if e&SPI_GETSNAPSIZING != 0 {
+		parts = append(parts, "SPI_GETSNAPSIZING")
+	}
+	if e&SPI_SETSNAPSIZING != 0 {
+		parts = append(parts, "SPI_SETSNAPSIZING")
+	}
+	if e&SPI_GETDOCKMOVING != 0 {
+		parts = append(parts, "SPI_GETDOCKMOVING")
+	}
+	if e&SPI_SETDOCKMOVING != 0 {
+		parts = append(parts, "SPI_SETDOCKMOVING")
+	}
+	if e&SPI_GETTOUCHPREDICTIONPARAMETERS != 0 {
+		parts = append(parts, "SPI_GETTOUCHPREDICTIONPARAMETERS")
+	}
+	if e&SPI_SETTOUCHPREDICTIONPARAMETERS != 0 {
+		parts = append(parts, "SPI_SETTOUCHPREDICTIONPARAMETERS")
+	}
+	if e&SPI_GETLOGICALDPIOVERRIDE != 0 {
+		parts = append(parts, "SPI_GETLOGICALDPIOVERRIDE")
+	}
+	if e&SPI_SETLOGICALDPIOVERRIDE != 0 {
+		parts = append(parts, "SPI_SETLOGICALDPIOVERRIDE")
+	}
+	if e&SPI_GETMENURECT != 0 {
+		parts = append(parts, "SPI_GETMENURECT")
+	}
+	if e&SPI_SETMENURECT != 0 {
+		parts = append(parts, "SPI_SETMENURECT")
+	}
+	if e&SPI_GETTOUCHPADPARAMETERS != 0 {
+		parts = append(parts, "SPI_GETTOUCHPADPARAMETERS")
+	}
+	if e&SPI_SETTOUCHPADPARAMETERS != 0 {
+		parts = append(parts, "SPI_SETTOUCHPADPARAMETERS")
+	}
+	if e&SPI_GETACTIVEWINDOWTRACKING != 0 {
+		parts = append(parts, "SPI_GETACTIVEWINDOWTRACKING")
+	}
+	if e&SPI_SETACTIVEWINDOWTRACKING != 0 {
+		parts = append(parts, "SPI_SETACTIVEWINDOWTRACKING")
+	}
+	if e&SPI_GETMENUANIMATION != 0 {
+		parts = append(parts, "SPI_GETMENUANIMATION")
+	}
+	if e&SPI_SETMENUANIMATION != 0 {
+		parts = append(parts, "SPI_SETMENUANIMATION")
+	}
+	if e&SPI_GETCOMBOBOXANIMATION != 0 {
+		parts = append(parts, "SPI_GETCOMBOBOXANIMATION")
+	}
+	if e&SPI_SETCOMBOBOXANIMATION != 0 {
+		parts = append(parts, "SPI_SETCOMBOBOXANIMATION")
+	}
+	if e&SPI_GETLISTBOXSMOOTHSCROLLING != 0 {
+		parts = append(parts, "SPI_GETLISTBOXSMOOTHSCROLLING")
+	}
+	if e&SPI_SETLISTBOXSMOOTHSCROLLING != 0 {
+		parts = append(parts, "SPI_SETLISTBOXSMOOTHSCROLLING")
+	}
+	if e&SPI_GETGRADIENTCAPTIONS != 0 {
+		parts = append(parts, "SPI_GETGRADIENTCAPTIONS")
+	}
+	if e&SPI_SETGRADIENTCAPTIONS != 0 {
+		parts = append(parts, "SPI_SETGRADIENTCAPTIONS")
+	}
+	if e&SPI_GETKEYBOARDCUES != 0 {
+		parts = append(parts, "SPI_GETKEYBOARDCUES")
+	}
+	if e&SPI_SETKEYBOARDCUES != 0 {
+		parts = append(parts, "SPI_SETKEYBOARDCUES")
+	}
+	if e&SPI_GETMENUUNDERLINES != 0 {
+		parts = append(parts, "SPI_GETMENUUNDERLINES")
+	}
+	if e&SPI_SETMENUUNDERLINES != 0 {
+		parts = append(parts, "SPI_SETMENUUNDERLINES")
+	}
+	if e&SPI_GETACTIVEWNDTRKZORDER != 0 {
+		parts = append(parts, "SPI_GETACTIVEWNDTRKZORDER")
+	}
+	if e&SPI_SETACTIVEWNDTRKZORDER != 0 {
+		parts = append(parts, "SPI_SETACTIVEWNDTRKZORDER")
+	}
+	if e&SPI_GETHOTTRACKING != 0 {
+		parts = append(parts, "SPI_GETHOTTRACKING")
+	}
+	if e&SPI_SETHOTTRACKING != 0 {
+		parts = append(parts, "SPI_SETHOTTRACKING")
+	}
+	if e&SPI_GETMENUFADE != 0 {
+		parts = append(parts, "SPI_GETMENUFADE")
+	}
+	if e&SPI_SETMENUFADE != 0 {
+		parts = append(parts, "SPI_SETMENUFADE")
+	}
+	if e&SPI_GETSELECTIONFADE != 0 {
+		parts = append(parts, "SPI_GETSELECTIONFADE")
+	}
+	if e&SPI_SETSELECTIONFADE != 0 {
+		parts = append(parts, "SPI_SETSELECTIONFADE")
+	}
+	if e&SPI_GETTOOLTIPANIMATION != 0 {
+		parts = append(parts, "SPI_GETTOOLTIPANIMATION")
+	}
+	if e&SPI_SETTOOLTIPANIMATION != 0 {
+		parts = append(parts, "SPI_SETTOOLTIPANIMATION")
+	}
+	if e&SPI_GETTOOLTIPFADE != 0 {
+		parts = append(parts, "SPI_GETTOOLTIPFADE")
+	}
+	if e&SPI_SETTOOLTIPFADE != 0 {
+		parts = append(parts, "SPI_SETTOOLTIPFADE")
+	}
+	if e&SPI_GETCURSORSHADOW != 0 {
+		parts = append(parts, "SPI_GETCURSORSHADOW")
+	}
+	if e&SPI_SETCURSORSHADOW != 0 {
+		parts = append(parts, "SPI_SETCURSORSHADOW")
+	}
+	if e&SPI_GETMOUSESONAR != 0 {
+		parts = append(parts, "SPI_GETMOUSESONAR")
+	}
+	if e&SPI_SETMOUSESONAR != 0 {
+		parts = append(parts, "SPI_SETMOUSESONAR")
+	}
+	if e&SPI_GETMOUSECLICKLOCK != 0 {
+		parts = append(parts, "SPI_GETMOUSECLICKLOCK")
+	}
+	if e&SPI_SETMOUSECLICKLOCK != 0 {
+		parts = append(parts, "SPI_SETMOUSECLICKLOCK")
+	}
+	if e&SPI_GETMOUSEVANISH != 0 {
+		parts = append(parts, "SPI_GETMOUSEVANISH")
+	}
+	if e&SPI_SETMOUSEVANISH != 0 {
+		parts = append(parts, "SPI_SETMOUSEVANISH")
+	}
+	if e&SPI_GETFLATMENU != 0 {
+		parts = append(parts, "SPI_GETFLATMENU")
+	}
+	if e&SPI_SETFLATMENU != 0 {
+		parts = append(parts, "SPI_SETFLATMENU")
+	}
+	if e&SPI_GETDROPSHADOW != 0 {
+		parts = append(parts, "SPI_GETDROPSHADOW")
+	}
+	if e&SPI_SETDROPSHADOW != 0 {
+		parts = append(parts, "SPI_SETDROPSHADOW")
+	}
+	if e&SPI_GETBLOCKSENDINPUTRESETS != 0 {
+		parts = append(parts, "SPI_GETBLOCKSENDINPUTRESETS")
+	}
+	if e&SPI_SETBLOCKSENDINPUTRESETS != 0 {
+		parts = append(parts, "SPI_SETBLOCKSENDINPUTRESETS")
+	}
+	if e&SPI_GETUIEFFECTS != 0 {
+		parts = append(parts, "SPI_GETUIEFFECTS")
+	}
+	if e&SPI_SETUIEFFECTS != 0 {
+		parts = append(parts, "SPI_SETUIEFFECTS")
+	}
+	if e&SPI_GETDISABLEOVERLAPPEDCONTENT != 0 {
+		parts = append(parts, "SPI_GETDISABLEOVERLAPPEDCONTENT")
+	}
+	if e&SPI_SETDISABLEOVERLAPPEDCONTENT != 0 {
+		parts = append(parts, "SPI_SETDISABLEOVERLAPPEDCONTENT")
+	}
+	if e&SPI_GETCLIENTAREAANIMATION != 0 {
+		parts = append(parts, "SPI_GETCLIENTAREAANIMATION")
+	}
+	if e&SPI_SETCLIENTAREAANIMATION != 0 {
+		parts = append(parts, "SPI_SETCLIENTAREAANIMATION")
+	}
+	if e&SPI_GETCLEARTYPE != 0 {
+		parts = append(parts, "SPI_GETCLEARTYPE")
+	}
+	if e&SPI_SETCLEARTYPE != 0 {
+		parts = append(parts, "SPI_SETCLEARTYPE")
+	}
+	if e&SPI_GETSPEECHRECOGNITION != 0 {
+		parts = append(parts, "SPI_GETSPEECHRECOGNITION")
+	}
+	if e&SPI_SETSPEECHRECOGNITION != 0 {
+		parts = append(parts, "SPI_SETSPEECHRECOGNITION")
+	}
+	if e&SPI_GETCARETBROWSING != 0 {
+		parts = append(parts, "SPI_GETCARETBROWSING")
+	}
+	if e&SPI_SETCARETBROWSING != 0 {
+		parts = append(parts, "SPI_SETCARETBROWSING")
+	}
+	if e&SPI_GETTHREADLOCALINPUTSETTINGS != 0 {
+		parts = append(parts, "SPI_GETTHREADLOCALINPUTSETTINGS")
+	}
+	if e&SPI_SETTHREADLOCALINPUTSETTINGS != 0 {
+		parts = append(parts, "SPI_SETTHREADLOCALINPUTSETTINGS")
+	}
+	if e&SPI_GETSYSTEMLANGUAGEBAR != 0 {
+		parts = append(parts, "SPI_GETSYSTEMLANGUAGEBAR")
+	}
+	if e&SPI_SETSYSTEMLANGUAGEBAR != 0 {
+		parts = append(parts, "SPI_SETSYSTEMLANGUAGEBAR")
+	}
+	if e&SPI_GETFOREGROUNDLOCKTIMEOUT != 0 {
+		parts = append(parts, "SPI_GETFOREGROUNDLOCKTIMEOUT")
+	}
+	if e&SPI_SETFOREGROUNDLOCKTIMEOUT != 0 {
+		parts = append(parts, "SPI_SETFOREGROUNDLOCKTIMEOUT")
+	}
+	if e&SPI_GETACTIVEWNDTRKTIMEOUT != 0 {
+		parts = append(parts, "SPI_GETACTIVEWNDTRKTIMEOUT")
+	}
+	if e&SPI_SETACTIVEWNDTRKTIMEOUT != 0 {
+		parts = append(parts, "SPI_SETACTIVEWNDTRKTIMEOUT")
+	}
+	if e&SPI_GETFOREGROUNDFLASHCOUNT != 0 {
+		parts = append(parts, "SPI_GETFOREGROUNDFLASHCOUNT")
+	}
+	if e&SPI_SETFOREGROUNDFLASHCOUNT != 0 {
+		parts = append(parts, "SPI_SETFOREGROUNDFLASHCOUNT")
+	}
+	if e&SPI_GETCARETWIDTH != 0 {
+		parts = append(parts, "SPI_GETCARETWIDTH")
+	}
+	if e&SPI_SETCARETWIDTH != 0 {
+		parts = append(parts, "SPI_SETCARETWIDTH")
+	}
+	if e&SPI_GETMOUSECLICKLOCKTIME != 0 {
+		parts = append(parts, "SPI_GETMOUSECLICKLOCKTIME")
+	}
+	if e&SPI_SETMOUSECLICKLOCKTIME != 0 {
+		parts = append(parts, "SPI_SETMOUSECLICKLOCKTIME")
+	}
+	if e&SPI_GETFONTSMOOTHINGTYPE != 0 {
+		parts = append(parts, "SPI_GETFONTSMOOTHINGTYPE")
+	}
+	if e&SPI_SETFONTSMOOTHINGTYPE != 0 {
+		parts = append(parts, "SPI_SETFONTSMOOTHINGTYPE")
+	}
+	if e&SPI_GETFONTSMOOTHINGCONTRAST != 0 {
+		parts = append(parts, "SPI_GETFONTSMOOTHINGCONTRAST")
+	}
+	if e&SPI_SETFONTSMOOTHINGCONTRAST != 0 {
+		parts = append(parts, "SPI_SETFONTSMOOTHINGCONTRAST")
+	}
+	if e&SPI_GETFOCUSBORDERWIDTH != 0 {
+		parts = append(parts, "SPI_GETFOCUSBORDERWIDTH")
+	}
+	if e&SPI_SETFOCUSBORDERWIDTH != 0 {
+		parts = append(parts, "SPI_SETFOCUSBORDERWIDTH")
+	}
+	if e&SPI_GETFOCUSBORDERHEIGHT != 0 {
+		parts = append(parts, "SPI_GETFOCUSBORDERHEIGHT")
+	}
+	if e&SPI_SETFOCUSBORDERHEIGHT != 0 {
+		parts = append(parts, "SPI_SETFOCUSBORDERHEIGHT")
+	}
+	if e&SPI_GETFONTSMOOTHINGORIENTATION != 0 {
+		parts = append(parts, "SPI_GETFONTSMOOTHINGORIENTATION")
+	}
+	if e&SPI_SETFONTSMOOTHINGORIENTATION != 0 {
+		parts = append(parts, "SPI_SETFONTSMOOTHINGORIENTATION")
+	}
+	if e&SPI_GETMINIMUMHITRADIUS != 0 {
+		parts = append(parts, "SPI_GETMINIMUMHITRADIUS")
+	}
+	if e&SPI_SETMINIMUMHITRADIUS != 0 {
+		parts = append(parts, "SPI_SETMINIMUMHITRADIUS")
+	}
+	if e&SPI_GETMESSAGEDURATION != 0 {
+		parts = append(parts, "SPI_GETMESSAGEDURATION")
+	}
+	if e&SPI_SETMESSAGEDURATION != 0 {
+		parts = append(parts, "SPI_SETMESSAGEDURATION")
+	}
+	if e&SPI_GETCONTACTVISUALIZATION != 0 {
+		parts = append(parts, "SPI_GETCONTACTVISUALIZATION")
+	}
+	if e&SPI_SETCONTACTVISUALIZATION != 0 {
+		parts = append(parts, "SPI_SETCONTACTVISUALIZATION")
+	}
+	if e&SPI_GETGESTUREVISUALIZATION != 0 {
+		parts = append(parts, "SPI_GETGESTUREVISUALIZATION")
+	}
+	if e&SPI_SETGESTUREVISUALIZATION != 0 {
+		parts = append(parts, "SPI_SETGESTUREVISUALIZATION")
+	}
+	if e&SPI_GETMOUSEWHEELROUTING != 0 {
+		parts = append(parts, "SPI_GETMOUSEWHEELROUTING")
+	}
+	if e&SPI_SETMOUSEWHEELROUTING != 0 {
+		parts = append(parts, "SPI_SETMOUSEWHEELROUTING")
+	}
+	if e&SPI_GETPENVISUALIZATION != 0 {
+		parts = append(parts, "SPI_GETPENVISUALIZATION")
+	}
+	if e&SPI_SETPENVISUALIZATION != 0 {
+		parts = append(parts, "SPI_SETPENVISUALIZATION")
+	}
+	if e&SPI_GETPENARBITRATIONTYPE != 0 {
+		parts = append(parts, "SPI_GETPENARBITRATIONTYPE")
+	}
+	if e&SPI_SETPENARBITRATIONTYPE != 0 {
+		parts = append(parts, "SPI_SETPENARBITRATIONTYPE")
+	}
+	if e&SPI_GETCARETTIMEOUT != 0 {
+		parts = append(parts, "SPI_GETCARETTIMEOUT")
+	}
+	if e&SPI_SETCARETTIMEOUT != 0 {
+		parts = append(parts, "SPI_SETCARETTIMEOUT")
+	}
+	if e&SPI_GETHANDEDNESS != 0 {
+		parts = append(parts, "SPI_GETHANDEDNESS")
+	}
+	if e&SPI_SETHANDEDNESS != 0 {
+		parts = append(parts, "SPI_SETHANDEDNESS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS uint32
 
 const (
@@ -1038,12 +3450,44 @@ const (
 	SPIF_SENDWININICHANGE SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS = 2
 )
 
+// String returns the SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) String() string {
+	var parts []string
+	if e&SPIF_UPDATEINIFILE != 0 {
+		parts = append(parts, "SPIF_UPDATEINIFILE")
+	}
+	if e&SPIF_SENDCHANGE != 0 {
+		parts = append(parts, "SPIF_SENDCHANGE")
+	}
+	if e&SPIF_SENDWININICHANGE != 0 {
+		parts = append(parts, "SPIF_SENDWININICHANGE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type TILE_WINDOWS_HOW uint32
 
 const (
 	MDITILE_HORIZONTAL TILE_WINDOWS_HOW = 1
 	MDITILE_VERTICAL   TILE_WINDOWS_HOW = 0
 )
+
+// String returns the TILE_WINDOWS_HOW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TILE_WINDOWS_HOW) String() string {
+	switch e {
+	case MDITILE_HORIZONTAL:
+		return "MDITILE_HORIZONTAL"
+	case MDITILE_VERTICAL:
+		return "MDITILE_VERTICAL"
+	default:
+		return fmt.Sprintf("TILE_WINDOWS_HOW(%d)", uint32(e))
+	}
+}
 
 // TOOLTIP_DISMISS_FLAGS: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-tooltip_dismiss_flags
 type TOOLTIP_DISMISS_FLAGS int32
@@ -1052,6 +3496,19 @@ const (
 	TDF_REGISTER   TOOLTIP_DISMISS_FLAGS = 1
 	TDF_UNREGISTER TOOLTIP_DISMISS_FLAGS = 2
 )
+
+// String returns the TOOLTIP_DISMISS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOOLTIP_DISMISS_FLAGS) String() string {
+	switch e {
+	case TDF_REGISTER:
+		return "TDF_REGISTER"
+	case TDF_UNREGISTER:
+		return "TDF_UNREGISTER"
+	default:
+		return fmt.Sprintf("TOOLTIP_DISMISS_FLAGS(%d)", int32(e))
+	}
+}
 
 type TOUCHPAD_SENSITIVITY_LEVEL int32
 
@@ -1063,6 +3520,26 @@ const (
 	TOUCHPAD_SENSITIVITY_LEVEL_LEAST_SENSITIVE    TOUCHPAD_SENSITIVITY_LEVEL = 4
 )
 
+// String returns the TOUCHPAD_SENSITIVITY_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOUCHPAD_SENSITIVITY_LEVEL) String() string {
+	switch e {
+	case TOUCHPAD_SENSITIVITY_LEVEL_MOST_SENSITIVE:
+		return "TOUCHPAD_SENSITIVITY_LEVEL_MOST_SENSITIVE"
+	case TOUCHPAD_SENSITIVITY_LEVEL_HIGH_SENSITIVITY:
+		return "TOUCHPAD_SENSITIVITY_LEVEL_HIGH_SENSITIVITY"
+	case TOUCHPAD_SENSITIVITY_LEVEL_MEDIUM_SENSITIVITY:
+		return "TOUCHPAD_SENSITIVITY_LEVEL_MEDIUM_SENSITIVITY"
+	case TOUCHPAD_SENSITIVITY_LEVEL_LOW_SENSITIVITY:
+		return "TOUCHPAD_SENSITIVITY_LEVEL_LOW_SENSITIVITY"
+	case TOUCHPAD_SENSITIVITY_LEVEL_LEAST_SENSITIVE:
+		return "TOUCHPAD_SENSITIVITY_LEVEL_LEAST_SENSITIVE"
+	default:
+		return fmt.Sprintf("TOUCHPAD_SENSITIVITY_LEVEL(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TRACK_POPUP_MENU_FLAGS uint32
 
 const (
@@ -1088,6 +3565,64 @@ const (
 	TPM_WORKAREA        TRACK_POPUP_MENU_FLAGS = 65536
 )
 
+// String returns the TRACK_POPUP_MENU_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRACK_POPUP_MENU_FLAGS) String() string {
+	var parts []string
+	if e&TPM_RIGHTBUTTON != 0 {
+		parts = append(parts, "TPM_RIGHTBUTTON")
+	}
+	if e&TPM_CENTERALIGN != 0 {
+		parts = append(parts, "TPM_CENTERALIGN")
+	}
+	if e&TPM_RIGHTALIGN != 0 {
+		parts = append(parts, "TPM_RIGHTALIGN")
+	}
+	if e&TPM_VCENTERALIGN != 0 {
+		parts = append(parts, "TPM_VCENTERALIGN")
+	}
+	if e&TPM_BOTTOMALIGN != 0 {
+		parts = append(parts, "TPM_BOTTOMALIGN")
+	}
+	if e&TPM_VERTICAL != 0 {
+		parts = append(parts, "TPM_VERTICAL")
+	}
+	if e&TPM_NONOTIFY != 0 {
+		parts = append(parts, "TPM_NONOTIFY")
+	}
+	if e&TPM_RETURNCMD != 0 {
+		parts = append(parts, "TPM_RETURNCMD")
+	}
+	if e&TPM_RECURSE != 0 {
+		parts = append(parts, "TPM_RECURSE")
+	}
+	if e&TPM_HORPOSANIMATION != 0 {
+		parts = append(parts, "TPM_HORPOSANIMATION")
+	}
+	if e&TPM_HORNEGANIMATION != 0 {
+		parts = append(parts, "TPM_HORNEGANIMATION")
+	}
+	if e&TPM_VERPOSANIMATION != 0 {
+		parts = append(parts, "TPM_VERPOSANIMATION")
+	}
+	if e&TPM_VERNEGANIMATION != 0 {
+		parts = append(parts, "TPM_VERNEGANIMATION")
+	}
+	if e&TPM_NOANIMATION != 0 {
+		parts = append(parts, "TPM_NOANIMATION")
+	}
+	if e&TPM_LAYOUTRTL != 0 {
+		parts = append(parts, "TPM_LAYOUTRTL")
+	}
+	if e&TPM_WORKAREA != 0 {
+		parts = append(parts, "TPM_WORKAREA")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type UPDATE_LAYERED_WINDOW_FLAGS uint32
 
 const (
@@ -1097,6 +3632,24 @@ const (
 	ULW_EX_NORESIZE UPDATE_LAYERED_WINDOW_FLAGS = 8
 )
 
+// String returns the UPDATE_LAYERED_WINDOW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UPDATE_LAYERED_WINDOW_FLAGS) String() string {
+	switch e {
+	case ULW_ALPHA:
+		return "ULW_ALPHA"
+	case ULW_COLORKEY:
+		return "ULW_COLORKEY"
+	case ULW_OPAQUE:
+		return "ULW_OPAQUE"
+	case ULW_EX_NORESIZE:
+		return "ULW_EX_NORESIZE"
+	default:
+		return fmt.Sprintf("UPDATE_LAYERED_WINDOW_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WINDOWPLACEMENT_FLAGS uint32
 
 const (
@@ -1104,6 +3657,25 @@ const (
 	WPF_RESTORETOMAXIMIZED   WINDOWPLACEMENT_FLAGS = 2
 	WPF_SETMINPOSITION       WINDOWPLACEMENT_FLAGS = 1
 )
+
+// String returns the WINDOWPLACEMENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOWPLACEMENT_FLAGS) String() string {
+	var parts []string
+	if e&WPF_ASYNCWINDOWPLACEMENT != 0 {
+		parts = append(parts, "WPF_ASYNCWINDOWPLACEMENT")
+	}
+	if e&WPF_RESTORETOMAXIMIZED != 0 {
+		parts = append(parts, "WPF_RESTORETOMAXIMIZED")
+	}
+	if e&WPF_SETMINPOSITION != 0 {
+		parts = append(parts, "WPF_SETMINPOSITION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type WINDOWS_HOOK_ID int32
 
@@ -1125,6 +3697,46 @@ const (
 	WH_SYSMSGFILTER    WINDOWS_HOOK_ID = 6
 )
 
+// String returns the WINDOWS_HOOK_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOWS_HOOK_ID) String() string {
+	switch e {
+	case WH_CALLWNDPROC:
+		return "WH_CALLWNDPROC"
+	case WH_CALLWNDPROCRET:
+		return "WH_CALLWNDPROCRET"
+	case WH_CBT:
+		return "WH_CBT"
+	case WH_DEBUG:
+		return "WH_DEBUG"
+	case WH_FOREGROUNDIDLE:
+		return "WH_FOREGROUNDIDLE"
+	case WH_GETMESSAGE:
+		return "WH_GETMESSAGE"
+	case WH_JOURNALPLAYBACK:
+		return "WH_JOURNALPLAYBACK"
+	case WH_JOURNALRECORD:
+		return "WH_JOURNALRECORD"
+	case WH_KEYBOARD:
+		return "WH_KEYBOARD"
+	case WH_KEYBOARD_LL:
+		return "WH_KEYBOARD_LL"
+	case WH_MOUSE:
+		return "WH_MOUSE"
+	case WH_MOUSE_LL:
+		return "WH_MOUSE_LL"
+	case WH_MSGFILTER:
+		return "WH_MSGFILTER"
+	case WH_SHELL:
+		return "WH_SHELL"
+	case WH_SYSMSGFILTER:
+		return "WH_SYSMSGFILTER"
+	default:
+		return fmt.Sprintf("WINDOWS_HOOK_ID(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WINDOW_ACTION_KINDS int32
 
 const (
@@ -1143,6 +3755,53 @@ const (
 	WAK_COALESCEABLE     WINDOW_ACTION_KINDS = 31
 )
 
+// String returns the WINDOW_ACTION_KINDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOW_ACTION_KINDS) String() string {
+	var parts []string
+	if e&WAK_VISIBILITY != 0 {
+		parts = append(parts, "WAK_VISIBILITY")
+	}
+	if e&WAK_POSITION != 0 {
+		parts = append(parts, "WAK_POSITION")
+	}
+	if e&WAK_SIZE != 0 {
+		parts = append(parts, "WAK_SIZE")
+	}
+	if e&WAK_INSERT_AFTER != 0 {
+		parts = append(parts, "WAK_INSERT_AFTER")
+	}
+	if e&WAK_ACTIVATE != 0 {
+		parts = append(parts, "WAK_ACTIVATE")
+	}
+	if e&WAK_PLACEMENT_STATE != 0 {
+		parts = append(parts, "WAK_PLACEMENT_STATE")
+	}
+	if e&WAK_NORMAL_RECT != 0 {
+		parts = append(parts, "WAK_NORMAL_RECT")
+	}
+	if e&WAK_MOVE_TO_MONITOR != 0 {
+		parts = append(parts, "WAK_MOVE_TO_MONITOR")
+	}
+	if e&WAK_FIT_TO_MONITOR != 0 {
+		parts = append(parts, "WAK_FIT_TO_MONITOR")
+	}
+	if e&WAK_DISPLAY_CHANGE != 0 {
+		parts = append(parts, "WAK_DISPLAY_CHANGE")
+	}
+	if e&WAK_SYSTEM_OPERATION != 0 {
+		parts = append(parts, "WAK_SYSTEM_OPERATION")
+	}
+	if e&WAK_COALESCEABLE != 0 {
+		parts = append(parts, "WAK_COALESCEABLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type WINDOW_ACTION_MODIFIERS int32
 
 const (
@@ -1160,6 +3819,49 @@ const (
 	WAM_SCALED_TO_MONITOR     WINDOW_ACTION_MODIFIERS = 1024
 )
 
+// String returns the WINDOW_ACTION_MODIFIERS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOW_ACTION_MODIFIERS) String() string {
+	var parts []string
+	if e&WAM_FRAME_BOUNDS != 0 {
+		parts = append(parts, "WAM_FRAME_BOUNDS")
+	}
+	if e&WAM_ACTIVATE_FOREGROUND != 0 {
+		parts = append(parts, "WAM_ACTIVATE_FOREGROUND")
+	}
+	if e&WAM_ACTIVATE_INPUT != 0 {
+		parts = append(parts, "WAM_ACTIVATE_INPUT")
+	}
+	if e&WAM_ACTIVATE_NO_ZORDER != 0 {
+		parts = append(parts, "WAM_ACTIVATE_NO_ZORDER")
+	}
+	if e&WAM_INSERT_AFTER_NO_OWNER != 0 {
+		parts = append(parts, "WAM_INSERT_AFTER_NO_OWNER")
+	}
+	if e&WAM_RESTORE_TO_NORMAL != 0 {
+		parts = append(parts, "WAM_RESTORE_TO_NORMAL")
+	}
+	if e&WAM_RESTORE_TO_MAXIMIZED != 0 {
+		parts = append(parts, "WAM_RESTORE_TO_MAXIMIZED")
+	}
+	if e&WAM_RESTORE_TO_ARRANGED != 0 {
+		parts = append(parts, "WAM_RESTORE_TO_ARRANGED")
+	}
+	if e&WAM_WORK_AREA != 0 {
+		parts = append(parts, "WAM_WORK_AREA")
+	}
+	if e&WAM_DPI != 0 {
+		parts = append(parts, "WAM_DPI")
+	}
+	if e&WAM_SCALED_TO_MONITOR != 0 {
+		parts = append(parts, "WAM_SCALED_TO_MONITOR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type WINDOW_DISPLAY_AFFINITY uint32
 
 const (
@@ -1168,6 +3870,22 @@ const (
 	WDA_EXCLUDEFROMCAPTURE WINDOW_DISPLAY_AFFINITY = 17
 )
 
+// String returns the WINDOW_DISPLAY_AFFINITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOW_DISPLAY_AFFINITY) String() string {
+	switch e {
+	case WDA_NONE:
+		return "WDA_NONE"
+	case WDA_MONITOR:
+		return "WDA_MONITOR"
+	case WDA_EXCLUDEFROMCAPTURE:
+		return "WDA_EXCLUDEFROMCAPTURE"
+	default:
+		return fmt.Sprintf("WINDOW_DISPLAY_AFFINITY(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WINDOW_EX_STYLE uint32
 
 const (
@@ -1200,6 +3918,88 @@ const (
 	WS_EX_NOACTIVATE          WINDOW_EX_STYLE = 134217728
 )
 
+// String returns the WINDOW_EX_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOW_EX_STYLE) String() string {
+	var parts []string
+	if e&WS_EX_DLGMODALFRAME != 0 {
+		parts = append(parts, "WS_EX_DLGMODALFRAME")
+	}
+	if e&WS_EX_NOPARENTNOTIFY != 0 {
+		parts = append(parts, "WS_EX_NOPARENTNOTIFY")
+	}
+	if e&WS_EX_TOPMOST != 0 {
+		parts = append(parts, "WS_EX_TOPMOST")
+	}
+	if e&WS_EX_ACCEPTFILES != 0 {
+		parts = append(parts, "WS_EX_ACCEPTFILES")
+	}
+	if e&WS_EX_TRANSPARENT != 0 {
+		parts = append(parts, "WS_EX_TRANSPARENT")
+	}
+	if e&WS_EX_MDICHILD != 0 {
+		parts = append(parts, "WS_EX_MDICHILD")
+	}
+	if e&WS_EX_TOOLWINDOW != 0 {
+		parts = append(parts, "WS_EX_TOOLWINDOW")
+	}
+	if e&WS_EX_WINDOWEDGE != 0 {
+		parts = append(parts, "WS_EX_WINDOWEDGE")
+	}
+	if e&WS_EX_CLIENTEDGE != 0 {
+		parts = append(parts, "WS_EX_CLIENTEDGE")
+	}
+	if e&WS_EX_CONTEXTHELP != 0 {
+		parts = append(parts, "WS_EX_CONTEXTHELP")
+	}
+	if e&WS_EX_RIGHT != 0 {
+		parts = append(parts, "WS_EX_RIGHT")
+	}
+	if e&WS_EX_RTLREADING != 0 {
+		parts = append(parts, "WS_EX_RTLREADING")
+	}
+	if e&WS_EX_LEFTSCROLLBAR != 0 {
+		parts = append(parts, "WS_EX_LEFTSCROLLBAR")
+	}
+	if e&WS_EX_CONTROLPARENT != 0 {
+		parts = append(parts, "WS_EX_CONTROLPARENT")
+	}
+	if e&WS_EX_STATICEDGE != 0 {
+		parts = append(parts, "WS_EX_STATICEDGE")
+	}
+	if e&WS_EX_APPWINDOW != 0 {
+		parts = append(parts, "WS_EX_APPWINDOW")
+	}
+	if e&WS_EX_OVERLAPPEDWINDOW != 0 {
+		parts = append(parts, "WS_EX_OVERLAPPEDWINDOW")
+	}
+	if e&WS_EX_PALETTEWINDOW != 0 {
+		parts = append(parts, "WS_EX_PALETTEWINDOW")
+	}
+	if e&WS_EX_LAYERED != 0 {
+		parts = append(parts, "WS_EX_LAYERED")
+	}
+	if e&WS_EX_NOINHERITLAYOUT != 0 {
+		parts = append(parts, "WS_EX_NOINHERITLAYOUT")
+	}
+	if e&WS_EX_NOREDIRECTIONBITMAP != 0 {
+		parts = append(parts, "WS_EX_NOREDIRECTIONBITMAP")
+	}
+	if e&WS_EX_LAYOUTRTL != 0 {
+		parts = append(parts, "WS_EX_LAYOUTRTL")
+	}
+	if e&WS_EX_COMPOSITED != 0 {
+		parts = append(parts, "WS_EX_COMPOSITED")
+	}
+	if e&WS_EX_NOACTIVATE != 0 {
+		parts = append(parts, "WS_EX_NOACTIVATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type WINDOW_LONG_PTR_INDEX int32
 
 const (
@@ -1217,6 +4017,29 @@ const (
 	GWL_HWNDPARENT  WINDOW_LONG_PTR_INDEX = -8
 )
 
+// String returns the WINDOW_LONG_PTR_INDEX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOW_LONG_PTR_INDEX) String() string {
+	switch e {
+	case GWL_EXSTYLE:
+		return "GWL_EXSTYLE"
+	case GWLP_HINSTANCE:
+		return "GWLP_HINSTANCE"
+	case GWLP_HWNDPARENT:
+		return "GWLP_HWNDPARENT"
+	case GWLP_ID:
+		return "GWLP_ID"
+	case GWL_STYLE:
+		return "GWL_STYLE"
+	case GWLP_USERDATA:
+		return "GWLP_USERDATA"
+	case GWLP_WNDPROC:
+		return "GWLP_WNDPROC"
+	default:
+		return fmt.Sprintf("WINDOW_LONG_PTR_INDEX(%d)", int32(e))
+	}
+}
+
 type WINDOW_MESSAGE_FILTER_ACTION uint32
 
 const (
@@ -1224,6 +4047,21 @@ const (
 	MSGFLT_DISALLOW WINDOW_MESSAGE_FILTER_ACTION = 2
 	MSGFLT_RESET    WINDOW_MESSAGE_FILTER_ACTION = 0
 )
+
+// String returns the WINDOW_MESSAGE_FILTER_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOW_MESSAGE_FILTER_ACTION) String() string {
+	switch e {
+	case MSGFLT_ALLOW:
+		return "MSGFLT_ALLOW"
+	case MSGFLT_DISALLOW:
+		return "MSGFLT_DISALLOW"
+	case MSGFLT_RESET:
+		return "MSGFLT_RESET"
+	default:
+		return fmt.Sprintf("WINDOW_MESSAGE_FILTER_ACTION(%d)", uint32(e))
+	}
+}
 
 type WINDOW_PLACEMENT_STATE int32
 
@@ -1234,6 +4072,24 @@ const (
 	WPS_ARRANGED  WINDOW_PLACEMENT_STATE = 3
 )
 
+// String returns the WINDOW_PLACEMENT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOW_PLACEMENT_STATE) String() string {
+	switch e {
+	case WPS_NORMAL:
+		return "WPS_NORMAL"
+	case WPS_MAXIMIZED:
+		return "WPS_MAXIMIZED"
+	case WPS_MINIMIZED:
+		return "WPS_MINIMIZED"
+	case WPS_ARRANGED:
+		return "WPS_ARRANGED"
+	default:
+		return fmt.Sprintf("WINDOW_PLACEMENT_STATE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WINDOW_STYLE uint32
 
 const (
@@ -1267,6 +4123,95 @@ const (
 	WS_ACTIVECAPTION    WINDOW_STYLE = 1
 )
 
+// String returns the WINDOW_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOW_STYLE) String() string {
+	var parts []string
+	if e&WS_POPUP != 0 {
+		parts = append(parts, "WS_POPUP")
+	}
+	if e&WS_CHILD != 0 {
+		parts = append(parts, "WS_CHILD")
+	}
+	if e&WS_MINIMIZE != 0 {
+		parts = append(parts, "WS_MINIMIZE")
+	}
+	if e&WS_VISIBLE != 0 {
+		parts = append(parts, "WS_VISIBLE")
+	}
+	if e&WS_DISABLED != 0 {
+		parts = append(parts, "WS_DISABLED")
+	}
+	if e&WS_CLIPSIBLINGS != 0 {
+		parts = append(parts, "WS_CLIPSIBLINGS")
+	}
+	if e&WS_CLIPCHILDREN != 0 {
+		parts = append(parts, "WS_CLIPCHILDREN")
+	}
+	if e&WS_MAXIMIZE != 0 {
+		parts = append(parts, "WS_MAXIMIZE")
+	}
+	if e&WS_CAPTION != 0 {
+		parts = append(parts, "WS_CAPTION")
+	}
+	if e&WS_BORDER != 0 {
+		parts = append(parts, "WS_BORDER")
+	}
+	if e&WS_DLGFRAME != 0 {
+		parts = append(parts, "WS_DLGFRAME")
+	}
+	if e&WS_VSCROLL != 0 {
+		parts = append(parts, "WS_VSCROLL")
+	}
+	if e&WS_HSCROLL != 0 {
+		parts = append(parts, "WS_HSCROLL")
+	}
+	if e&WS_SYSMENU != 0 {
+		parts = append(parts, "WS_SYSMENU")
+	}
+	if e&WS_THICKFRAME != 0 {
+		parts = append(parts, "WS_THICKFRAME")
+	}
+	if e&WS_GROUP != 0 {
+		parts = append(parts, "WS_GROUP")
+	}
+	if e&WS_TABSTOP != 0 {
+		parts = append(parts, "WS_TABSTOP")
+	}
+	if e&WS_MINIMIZEBOX != 0 {
+		parts = append(parts, "WS_MINIMIZEBOX")
+	}
+	if e&WS_MAXIMIZEBOX != 0 {
+		parts = append(parts, "WS_MAXIMIZEBOX")
+	}
+	if e&WS_ICONIC != 0 {
+		parts = append(parts, "WS_ICONIC")
+	}
+	if e&WS_SIZEBOX != 0 {
+		parts = append(parts, "WS_SIZEBOX")
+	}
+	if e&WS_TILEDWINDOW != 0 {
+		parts = append(parts, "WS_TILEDWINDOW")
+	}
+	if e&WS_OVERLAPPEDWINDOW != 0 {
+		parts = append(parts, "WS_OVERLAPPEDWINDOW")
+	}
+	if e&WS_POPUPWINDOW != 0 {
+		parts = append(parts, "WS_POPUPWINDOW")
+	}
+	if e&WS_CHILDWINDOW != 0 {
+		parts = append(parts, "WS_CHILDWINDOW")
+	}
+	if e&WS_ACTIVECAPTION != 0 {
+		parts = append(parts, "WS_ACTIVECAPTION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type WNDCLASS_STYLES uint32
 
 const (
@@ -1284,3 +4229,52 @@ const (
 	CS_IME             WNDCLASS_STYLES = 65536
 	CS_DROPSHADOW      WNDCLASS_STYLES = 131072
 )
+
+// String returns the WNDCLASS_STYLES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WNDCLASS_STYLES) String() string {
+	var parts []string
+	if e&CS_VREDRAW != 0 {
+		parts = append(parts, "CS_VREDRAW")
+	}
+	if e&CS_HREDRAW != 0 {
+		parts = append(parts, "CS_HREDRAW")
+	}
+	if e&CS_DBLCLKS != 0 {
+		parts = append(parts, "CS_DBLCLKS")
+	}
+	if e&CS_OWNDC != 0 {
+		parts = append(parts, "CS_OWNDC")
+	}
+	if e&CS_CLASSDC != 0 {
+		parts = append(parts, "CS_CLASSDC")
+	}
+	if e&CS_PARENTDC != 0 {
+		parts = append(parts, "CS_PARENTDC")
+	}
+	if e&CS_NOCLOSE != 0 {
+		parts = append(parts, "CS_NOCLOSE")
+	}
+	if e&CS_SAVEBITS != 0 {
+		parts = append(parts, "CS_SAVEBITS")
+	}
+	if e&CS_BYTEALIGNCLIENT != 0 {
+		parts = append(parts, "CS_BYTEALIGNCLIENT")
+	}
+	if e&CS_BYTEALIGNWINDOW != 0 {
+		parts = append(parts, "CS_BYTEALIGNWINDOW")
+	}
+	if e&CS_GLOBALCLASS != 0 {
+		parts = append(parts, "CS_GLOBALCLASS")
+	}
+	if e&CS_IME != 0 {
+		parts = append(parts, "CS_IME")
+	}
+	if e&CS_DROPSHADOW != 0 {
+		parts = append(parts, "CS_DROPSHADOW")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

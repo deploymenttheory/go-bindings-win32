@@ -4,6 +4,11 @@
 
 package winrt
 
+import (
+	"fmt"
+	"strings"
+)
+
 // ACTIVATIONTYPE: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-activationtype
 type ACTIVATIONTYPE int32
 
@@ -16,6 +21,27 @@ const (
 	ACTIVATIONTYPE_FROM_FILE     ACTIVATIONTYPE = 16
 )
 
+// String returns the ACTIVATIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACTIVATIONTYPE) String() string {
+	switch e {
+	case ACTIVATIONTYPE_UNCATEGORIZED:
+		return "ACTIVATIONTYPE_UNCATEGORIZED"
+	case ACTIVATIONTYPE_FROM_MONIKER:
+		return "ACTIVATIONTYPE_FROM_MONIKER"
+	case ACTIVATIONTYPE_FROM_DATA:
+		return "ACTIVATIONTYPE_FROM_DATA"
+	case ACTIVATIONTYPE_FROM_STORAGE:
+		return "ACTIVATIONTYPE_FROM_STORAGE"
+	case ACTIVATIONTYPE_FROM_STREAM:
+		return "ACTIVATIONTYPE_FROM_STREAM"
+	case ACTIVATIONTYPE_FROM_FILE:
+		return "ACTIVATIONTYPE_FROM_FILE"
+	default:
+		return fmt.Sprintf("ACTIVATIONTYPE(%d)", int32(e))
+	}
+}
+
 // AgileReferenceOptions: https://learn.microsoft.com/windows/win32/api/combaseapi/ne-combaseapi-agilereferenceoptions
 type AgileReferenceOptions int32
 
@@ -24,6 +50,19 @@ const (
 	AGILEREFERENCE_DELAYEDMARSHAL AgileReferenceOptions = 1
 )
 
+// String returns the AgileReferenceOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AgileReferenceOptions) String() string {
+	switch e {
+	case AGILEREFERENCE_DEFAULT:
+		return "AGILEREFERENCE_DEFAULT"
+	case AGILEREFERENCE_DELAYEDMARSHAL:
+		return "AGILEREFERENCE_DELAYEDMARSHAL"
+	default:
+		return fmt.Sprintf("AgileReferenceOptions(%d)", int32(e))
+	}
+}
+
 // BSOS_OPTIONS: https://learn.microsoft.com/windows/win32/api/shcore/ne-shcore-bsos_options
 type BSOS_OPTIONS int32
 
@@ -31,6 +70,19 @@ const (
 	BSOS_DEFAULT                 BSOS_OPTIONS = 0
 	BSOS_PREFERDESTINATIONSTREAM BSOS_OPTIONS = 1
 )
+
+// String returns the BSOS_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BSOS_OPTIONS) String() string {
+	switch e {
+	case BSOS_DEFAULT:
+		return "BSOS_DEFAULT"
+	case BSOS_PREFERDESTINATIONSTREAM:
+		return "BSOS_PREFERDESTINATIONSTREAM"
+	default:
+		return fmt.Sprintf("BSOS_OPTIONS(%d)", int32(e))
+	}
+}
 
 type CASTING_CONNECTION_ERROR_STATUS int32
 
@@ -44,6 +96,29 @@ const (
 	CASTING_CONNECTION_ERROR_STATUS_UNKNOWN                   CASTING_CONNECTION_ERROR_STATUS = 6
 )
 
+// String returns the CASTING_CONNECTION_ERROR_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CASTING_CONNECTION_ERROR_STATUS) String() string {
+	switch e {
+	case CASTING_CONNECTION_ERROR_STATUS_SUCCEEDED:
+		return "CASTING_CONNECTION_ERROR_STATUS_SUCCEEDED"
+	case CASTING_CONNECTION_ERROR_STATUS_DEVICE_DID_NOT_RESPOND:
+		return "CASTING_CONNECTION_ERROR_STATUS_DEVICE_DID_NOT_RESPOND"
+	case CASTING_CONNECTION_ERROR_STATUS_DEVICE_ERROR:
+		return "CASTING_CONNECTION_ERROR_STATUS_DEVICE_ERROR"
+	case CASTING_CONNECTION_ERROR_STATUS_DEVICE_LOCKED:
+		return "CASTING_CONNECTION_ERROR_STATUS_DEVICE_LOCKED"
+	case CASTING_CONNECTION_ERROR_STATUS_PROTECTED_PLAYBACK_FAILED:
+		return "CASTING_CONNECTION_ERROR_STATUS_PROTECTED_PLAYBACK_FAILED"
+	case CASTING_CONNECTION_ERROR_STATUS_INVALID_CASTING_SOURCE:
+		return "CASTING_CONNECTION_ERROR_STATUS_INVALID_CASTING_SOURCE"
+	case CASTING_CONNECTION_ERROR_STATUS_UNKNOWN:
+		return "CASTING_CONNECTION_ERROR_STATUS_UNKNOWN"
+	default:
+		return fmt.Sprintf("CASTING_CONNECTION_ERROR_STATUS(%d)", int32(e))
+	}
+}
+
 type CASTING_CONNECTION_STATE int32
 
 const (
@@ -54,6 +129,25 @@ const (
 	CASTING_CONNECTION_STATE_CONNECTING    CASTING_CONNECTION_STATE = 4
 )
 
+// String returns the CASTING_CONNECTION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CASTING_CONNECTION_STATE) String() string {
+	switch e {
+	case CASTING_CONNECTION_STATE_DISCONNECTED:
+		return "CASTING_CONNECTION_STATE_DISCONNECTED"
+	case CASTING_CONNECTION_STATE_CONNECTED:
+		return "CASTING_CONNECTION_STATE_CONNECTED"
+	case CASTING_CONNECTION_STATE_RENDERING:
+		return "CASTING_CONNECTION_STATE_RENDERING"
+	case CASTING_CONNECTION_STATE_DISCONNECTING:
+		return "CASTING_CONNECTION_STATE_DISCONNECTING"
+	case CASTING_CONNECTION_STATE_CONNECTING:
+		return "CASTING_CONNECTION_STATE_CONNECTING"
+	default:
+		return fmt.Sprintf("CASTING_CONNECTION_STATE(%d)", int32(e))
+	}
+}
+
 // DISPATCHERQUEUE_THREAD_APARTMENTTYPE: https://learn.microsoft.com/windows/win32/api/dispatcherqueue/ne-dispatcherqueue-dispatcherqueue_thread_apartmenttype
 type DISPATCHERQUEUE_THREAD_APARTMENTTYPE int32
 
@@ -63,6 +157,21 @@ const (
 	DQTAT_COM_STA  DISPATCHERQUEUE_THREAD_APARTMENTTYPE = 2
 )
 
+// String returns the DISPATCHERQUEUE_THREAD_APARTMENTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPATCHERQUEUE_THREAD_APARTMENTTYPE) String() string {
+	switch e {
+	case DQTAT_COM_NONE:
+		return "DQTAT_COM_NONE"
+	case DQTAT_COM_ASTA:
+		return "DQTAT_COM_ASTA"
+	case DQTAT_COM_STA:
+		return "DQTAT_COM_STA"
+	default:
+		return fmt.Sprintf("DISPATCHERQUEUE_THREAD_APARTMENTTYPE(%d)", int32(e))
+	}
+}
+
 // DISPATCHERQUEUE_THREAD_TYPE: https://learn.microsoft.com/windows/win32/api/dispatcherqueue/ne-dispatcherqueue-dispatcherqueue_thread_type
 type DISPATCHERQUEUE_THREAD_TYPE int32
 
@@ -71,7 +180,21 @@ const (
 	DQTYPE_THREAD_CURRENT   DISPATCHERQUEUE_THREAD_TYPE = 2
 )
 
+// String returns the DISPATCHERQUEUE_THREAD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPATCHERQUEUE_THREAD_TYPE) String() string {
+	switch e {
+	case DQTYPE_THREAD_DEDICATED:
+		return "DQTYPE_THREAD_DEDICATED"
+	case DQTYPE_THREAD_CURRENT:
+		return "DQTYPE_THREAD_CURRENT"
+	default:
+		return fmt.Sprintf("DISPATCHERQUEUE_THREAD_TYPE(%d)", int32(e))
+	}
+}
+
 // RO_ERROR_REPORTING_FLAGS: https://learn.microsoft.com/windows/win32/api/roerrorapi/ne-roerrorapi-ro_error_reporting_flags
+// Bitmask — values may be combined with |.
 type RO_ERROR_REPORTING_FLAGS int32
 
 const (
@@ -82,6 +205,28 @@ const (
 	RO_ERROR_REPORTING_SUPPRESSSETERRORINFO RO_ERROR_REPORTING_FLAGS = 8
 )
 
+// String returns the RO_ERROR_REPORTING_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RO_ERROR_REPORTING_FLAGS) String() string {
+	var parts []string
+	if e&RO_ERROR_REPORTING_SUPPRESSEXCEPTIONS != 0 {
+		parts = append(parts, "RO_ERROR_REPORTING_SUPPRESSEXCEPTIONS")
+	}
+	if e&RO_ERROR_REPORTING_FORCEEXCEPTIONS != 0 {
+		parts = append(parts, "RO_ERROR_REPORTING_FORCEEXCEPTIONS")
+	}
+	if e&RO_ERROR_REPORTING_USESETERRORINFO != 0 {
+		parts = append(parts, "RO_ERROR_REPORTING_USESETERRORINFO")
+	}
+	if e&RO_ERROR_REPORTING_SUPPRESSSETERRORINFO != 0 {
+		parts = append(parts, "RO_ERROR_REPORTING_SUPPRESSSETERRORINFO")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // RO_INIT_TYPE: https://learn.microsoft.com/windows/win32/api/roapi/ne-roapi-ro_init_type
 type RO_INIT_TYPE int32
 
@@ -89,6 +234,19 @@ const (
 	RO_INIT_SINGLETHREADED RO_INIT_TYPE = 0
 	RO_INIT_MULTITHREADED  RO_INIT_TYPE = 1
 )
+
+// String returns the RO_INIT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RO_INIT_TYPE) String() string {
+	switch e {
+	case RO_INIT_SINGLETHREADED:
+		return "RO_INIT_SINGLETHREADED"
+	case RO_INIT_MULTITHREADED:
+		return "RO_INIT_MULTITHREADED"
+	default:
+		return fmt.Sprintf("RO_INIT_TYPE(%d)", int32(e))
+	}
+}
 
 // TrustLevel: https://learn.microsoft.com/windows/win32/api/inspectable/ne-inspectable-trustlevel
 type TrustLevel int32
@@ -98,3 +256,18 @@ const (
 	PartialTrust TrustLevel = 1
 	FullTrust    TrustLevel = 2
 )
+
+// String returns the TrustLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TrustLevel) String() string {
+	switch e {
+	case BaseTrust:
+		return "BaseTrust"
+	case PartialTrust:
+		return "PartialTrust"
+	case FullTrust:
+		return "FullTrust"
+	default:
+		return fmt.Sprintf("TrustLevel(%d)", int32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package restore
 
+import (
+	"fmt"
+)
+
 type RESTOREPOINTINFO_EVENT_TYPE uint32
 
 const (
@@ -12,6 +16,23 @@ const (
 	END_NESTED_SYSTEM_CHANGE   RESTOREPOINTINFO_EVENT_TYPE = 103
 	END_SYSTEM_CHANGE          RESTOREPOINTINFO_EVENT_TYPE = 101
 )
+
+// String returns the RESTOREPOINTINFO_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RESTOREPOINTINFO_EVENT_TYPE) String() string {
+	switch e {
+	case BEGIN_NESTED_SYSTEM_CHANGE:
+		return "BEGIN_NESTED_SYSTEM_CHANGE"
+	case BEGIN_SYSTEM_CHANGE:
+		return "BEGIN_SYSTEM_CHANGE"
+	case END_NESTED_SYSTEM_CHANGE:
+		return "END_NESTED_SYSTEM_CHANGE"
+	case END_SYSTEM_CHANGE:
+		return "END_SYSTEM_CHANGE"
+	default:
+		return fmt.Sprintf("RESTOREPOINTINFO_EVENT_TYPE(%d)", uint32(e))
+	}
+}
 
 type RESTOREPOINTINFO_TYPE uint32
 
@@ -22,3 +43,22 @@ const (
 	MODIFY_SETTINGS       RESTOREPOINTINFO_TYPE = 12
 	CANCELLED_OPERATION   RESTOREPOINTINFO_TYPE = 13
 )
+
+// String returns the RESTOREPOINTINFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RESTOREPOINTINFO_TYPE) String() string {
+	switch e {
+	case APPLICATION_INSTALL:
+		return "APPLICATION_INSTALL"
+	case APPLICATION_UNINSTALL:
+		return "APPLICATION_UNINSTALL"
+	case DEVICE_DRIVER_INSTALL:
+		return "DEVICE_DRIVER_INSTALL"
+	case MODIFY_SETTINGS:
+		return "MODIFY_SETTINGS"
+	case CANCELLED_OPERATION:
+		return "CANCELLED_OPERATION"
+	default:
+		return fmt.Sprintf("RESTOREPOINTINFO_TYPE(%d)", uint32(e))
+	}
+}

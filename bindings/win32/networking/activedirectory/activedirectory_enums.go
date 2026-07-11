@@ -4,6 +4,10 @@
 
 package activedirectory
 
+import (
+	"fmt"
+)
+
 // ADSI_DIALECT_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-adsi_dialect_enum
 type ADSI_DIALECT_ENUM int32
 
@@ -11,6 +15,19 @@ const (
 	ADSI_DIALECT_LDAP ADSI_DIALECT_ENUM = 0
 	ADSI_DIALECT_SQL  ADSI_DIALECT_ENUM = 1
 )
+
+// String returns the ADSI_DIALECT_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADSI_DIALECT_ENUM) String() string {
+	switch e {
+	case ADSI_DIALECT_LDAP:
+		return "ADSI_DIALECT_LDAP"
+	case ADSI_DIALECT_SQL:
+		return "ADSI_DIALECT_SQL"
+	default:
+		return fmt.Sprintf("ADSI_DIALECT_ENUM(%d)", int32(e))
+	}
+}
 
 type ADSTYPE int32
 
@@ -46,6 +63,73 @@ const (
 	ADSTYPE_DN_WITH_STRING         ADSTYPE = 28
 )
 
+// String returns the ADSTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADSTYPE) String() string {
+	switch e {
+	case ADSTYPE_INVALID:
+		return "ADSTYPE_INVALID"
+	case ADSTYPE_DN_STRING:
+		return "ADSTYPE_DN_STRING"
+	case ADSTYPE_CASE_EXACT_STRING:
+		return "ADSTYPE_CASE_EXACT_STRING"
+	case ADSTYPE_CASE_IGNORE_STRING:
+		return "ADSTYPE_CASE_IGNORE_STRING"
+	case ADSTYPE_PRINTABLE_STRING:
+		return "ADSTYPE_PRINTABLE_STRING"
+	case ADSTYPE_NUMERIC_STRING:
+		return "ADSTYPE_NUMERIC_STRING"
+	case ADSTYPE_BOOLEAN:
+		return "ADSTYPE_BOOLEAN"
+	case ADSTYPE_INTEGER:
+		return "ADSTYPE_INTEGER"
+	case ADSTYPE_OCTET_STRING:
+		return "ADSTYPE_OCTET_STRING"
+	case ADSTYPE_UTC_TIME:
+		return "ADSTYPE_UTC_TIME"
+	case ADSTYPE_LARGE_INTEGER:
+		return "ADSTYPE_LARGE_INTEGER"
+	case ADSTYPE_PROV_SPECIFIC:
+		return "ADSTYPE_PROV_SPECIFIC"
+	case ADSTYPE_OBJECT_CLASS:
+		return "ADSTYPE_OBJECT_CLASS"
+	case ADSTYPE_CASEIGNORE_LIST:
+		return "ADSTYPE_CASEIGNORE_LIST"
+	case ADSTYPE_OCTET_LIST:
+		return "ADSTYPE_OCTET_LIST"
+	case ADSTYPE_PATH:
+		return "ADSTYPE_PATH"
+	case ADSTYPE_POSTALADDRESS:
+		return "ADSTYPE_POSTALADDRESS"
+	case ADSTYPE_TIMESTAMP:
+		return "ADSTYPE_TIMESTAMP"
+	case ADSTYPE_BACKLINK:
+		return "ADSTYPE_BACKLINK"
+	case ADSTYPE_TYPEDNAME:
+		return "ADSTYPE_TYPEDNAME"
+	case ADSTYPE_HOLD:
+		return "ADSTYPE_HOLD"
+	case ADSTYPE_NETADDRESS:
+		return "ADSTYPE_NETADDRESS"
+	case ADSTYPE_REPLICAPOINTER:
+		return "ADSTYPE_REPLICAPOINTER"
+	case ADSTYPE_FAXNUMBER:
+		return "ADSTYPE_FAXNUMBER"
+	case ADSTYPE_EMAIL:
+		return "ADSTYPE_EMAIL"
+	case ADSTYPE_NT_SECURITY_DESCRIPTOR:
+		return "ADSTYPE_NT_SECURITY_DESCRIPTOR"
+	case ADSTYPE_UNKNOWN:
+		return "ADSTYPE_UNKNOWN"
+	case ADSTYPE_DN_WITH_BINARY:
+		return "ADSTYPE_DN_WITH_BINARY"
+	case ADSTYPE_DN_WITH_STRING:
+		return "ADSTYPE_DN_WITH_STRING"
+	default:
+		return fmt.Sprintf("ADSTYPE(%d)", int32(e))
+	}
+}
+
 // ADS_ACEFLAG_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_aceflag_enum
 type ADS_ACEFLAG_ENUM int32
 
@@ -58,6 +142,29 @@ const (
 	ADS_ACEFLAG_SUCCESSFUL_ACCESS        ADS_ACEFLAG_ENUM = 64
 	ADS_ACEFLAG_FAILED_ACCESS            ADS_ACEFLAG_ENUM = 128
 )
+
+// String returns the ADS_ACEFLAG_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_ACEFLAG_ENUM) String() string {
+	switch e {
+	case ADS_ACEFLAG_INHERIT_ACE:
+		return "ADS_ACEFLAG_INHERIT_ACE"
+	case ADS_ACEFLAG_NO_PROPAGATE_INHERIT_ACE:
+		return "ADS_ACEFLAG_NO_PROPAGATE_INHERIT_ACE"
+	case ADS_ACEFLAG_INHERIT_ONLY_ACE:
+		return "ADS_ACEFLAG_INHERIT_ONLY_ACE"
+	case ADS_ACEFLAG_INHERITED_ACE:
+		return "ADS_ACEFLAG_INHERITED_ACE"
+	case ADS_ACEFLAG_VALID_INHERIT_FLAGS:
+		return "ADS_ACEFLAG_VALID_INHERIT_FLAGS"
+	case ADS_ACEFLAG_SUCCESSFUL_ACCESS:
+		return "ADS_ACEFLAG_SUCCESSFUL_ACCESS"
+	case ADS_ACEFLAG_FAILED_ACCESS:
+		return "ADS_ACEFLAG_FAILED_ACCESS"
+	default:
+		return fmt.Sprintf("ADS_ACEFLAG_ENUM(%d)", int32(e))
+	}
+}
 
 // ADS_ACETYPE_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_acetype_enum
 type ADS_ACETYPE_ENUM int32
@@ -80,6 +187,45 @@ const (
 	ADS_ACETYPE_SYSTEM_ALARM_CALLBACK_OBJECT   ADS_ACETYPE_ENUM = 16
 )
 
+// String returns the ADS_ACETYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_ACETYPE_ENUM) String() string {
+	switch e {
+	case ADS_ACETYPE_ACCESS_ALLOWED:
+		return "ADS_ACETYPE_ACCESS_ALLOWED"
+	case ADS_ACETYPE_ACCESS_DENIED:
+		return "ADS_ACETYPE_ACCESS_DENIED"
+	case ADS_ACETYPE_SYSTEM_AUDIT:
+		return "ADS_ACETYPE_SYSTEM_AUDIT"
+	case ADS_ACETYPE_ACCESS_ALLOWED_OBJECT:
+		return "ADS_ACETYPE_ACCESS_ALLOWED_OBJECT"
+	case ADS_ACETYPE_ACCESS_DENIED_OBJECT:
+		return "ADS_ACETYPE_ACCESS_DENIED_OBJECT"
+	case ADS_ACETYPE_SYSTEM_AUDIT_OBJECT:
+		return "ADS_ACETYPE_SYSTEM_AUDIT_OBJECT"
+	case ADS_ACETYPE_SYSTEM_ALARM_OBJECT:
+		return "ADS_ACETYPE_SYSTEM_ALARM_OBJECT"
+	case ADS_ACETYPE_ACCESS_ALLOWED_CALLBACK:
+		return "ADS_ACETYPE_ACCESS_ALLOWED_CALLBACK"
+	case ADS_ACETYPE_ACCESS_DENIED_CALLBACK:
+		return "ADS_ACETYPE_ACCESS_DENIED_CALLBACK"
+	case ADS_ACETYPE_ACCESS_ALLOWED_CALLBACK_OBJECT:
+		return "ADS_ACETYPE_ACCESS_ALLOWED_CALLBACK_OBJECT"
+	case ADS_ACETYPE_ACCESS_DENIED_CALLBACK_OBJECT:
+		return "ADS_ACETYPE_ACCESS_DENIED_CALLBACK_OBJECT"
+	case ADS_ACETYPE_SYSTEM_AUDIT_CALLBACK:
+		return "ADS_ACETYPE_SYSTEM_AUDIT_CALLBACK"
+	case ADS_ACETYPE_SYSTEM_ALARM_CALLBACK:
+		return "ADS_ACETYPE_SYSTEM_ALARM_CALLBACK"
+	case ADS_ACETYPE_SYSTEM_AUDIT_CALLBACK_OBJECT:
+		return "ADS_ACETYPE_SYSTEM_AUDIT_CALLBACK_OBJECT"
+	case ADS_ACETYPE_SYSTEM_ALARM_CALLBACK_OBJECT:
+		return "ADS_ACETYPE_SYSTEM_ALARM_CALLBACK_OBJECT"
+	default:
+		return fmt.Sprintf("ADS_ACETYPE_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_AUTHENTICATION_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_authentication_enum
 type ADS_AUTHENTICATION_ENUM uint32
 
@@ -99,6 +245,39 @@ const (
 	ADS_AUTH_RESERVED         ADS_AUTHENTICATION_ENUM = 2147483648
 )
 
+// String returns the ADS_AUTHENTICATION_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_AUTHENTICATION_ENUM) String() string {
+	switch e {
+	case ADS_SECURE_AUTHENTICATION:
+		return "ADS_SECURE_AUTHENTICATION"
+	case ADS_USE_ENCRYPTION:
+		return "ADS_USE_ENCRYPTION"
+	case ADS_READONLY_SERVER:
+		return "ADS_READONLY_SERVER"
+	case ADS_PROMPT_CREDENTIALS:
+		return "ADS_PROMPT_CREDENTIALS"
+	case ADS_NO_AUTHENTICATION:
+		return "ADS_NO_AUTHENTICATION"
+	case ADS_FAST_BIND:
+		return "ADS_FAST_BIND"
+	case ADS_USE_SIGNING:
+		return "ADS_USE_SIGNING"
+	case ADS_USE_SEALING:
+		return "ADS_USE_SEALING"
+	case ADS_USE_DELEGATION:
+		return "ADS_USE_DELEGATION"
+	case ADS_SERVER_BIND:
+		return "ADS_SERVER_BIND"
+	case ADS_NO_REFERRAL_CHASING:
+		return "ADS_NO_REFERRAL_CHASING"
+	case ADS_AUTH_RESERVED:
+		return "ADS_AUTH_RESERVED"
+	default:
+		return fmt.Sprintf("ADS_AUTHENTICATION_ENUM(%d)", uint32(e))
+	}
+}
+
 // ADS_CHASE_REFERRALS_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_chase_referrals_enum
 type ADS_CHASE_REFERRALS_ENUM int32
 
@@ -108,6 +287,23 @@ const (
 	ADS_CHASE_REFERRALS_EXTERNAL    ADS_CHASE_REFERRALS_ENUM = 64
 	ADS_CHASE_REFERRALS_ALWAYS      ADS_CHASE_REFERRALS_ENUM = 96
 )
+
+// String returns the ADS_CHASE_REFERRALS_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_CHASE_REFERRALS_ENUM) String() string {
+	switch e {
+	case ADS_CHASE_REFERRALS_NEVER:
+		return "ADS_CHASE_REFERRALS_NEVER"
+	case ADS_CHASE_REFERRALS_SUBORDINATE:
+		return "ADS_CHASE_REFERRALS_SUBORDINATE"
+	case ADS_CHASE_REFERRALS_EXTERNAL:
+		return "ADS_CHASE_REFERRALS_EXTERNAL"
+	case ADS_CHASE_REFERRALS_ALWAYS:
+		return "ADS_CHASE_REFERRALS_ALWAYS"
+	default:
+		return fmt.Sprintf("ADS_CHASE_REFERRALS_ENUM(%d)", int32(e))
+	}
+}
 
 // ADS_DEREFENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_derefenum
 type ADS_DEREFENUM int32
@@ -119,6 +315,23 @@ const (
 	ADS_DEREF_ALWAYS    ADS_DEREFENUM = 3
 )
 
+// String returns the ADS_DEREFENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_DEREFENUM) String() string {
+	switch e {
+	case ADS_DEREF_NEVER:
+		return "ADS_DEREF_NEVER"
+	case ADS_DEREF_SEARCHING:
+		return "ADS_DEREF_SEARCHING"
+	case ADS_DEREF_FINDING:
+		return "ADS_DEREF_FINDING"
+	case ADS_DEREF_ALWAYS:
+		return "ADS_DEREF_ALWAYS"
+	default:
+		return fmt.Sprintf("ADS_DEREFENUM(%d)", int32(e))
+	}
+}
+
 // ADS_DISPLAY_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_display_enum
 type ADS_DISPLAY_ENUM int32
 
@@ -126,6 +339,19 @@ const (
 	ADS_DISPLAY_FULL       ADS_DISPLAY_ENUM = 1
 	ADS_DISPLAY_VALUE_ONLY ADS_DISPLAY_ENUM = 2
 )
+
+// String returns the ADS_DISPLAY_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_DISPLAY_ENUM) String() string {
+	switch e {
+	case ADS_DISPLAY_FULL:
+		return "ADS_DISPLAY_FULL"
+	case ADS_DISPLAY_VALUE_ONLY:
+		return "ADS_DISPLAY_VALUE_ONLY"
+	default:
+		return fmt.Sprintf("ADS_DISPLAY_ENUM(%d)", int32(e))
+	}
+}
 
 // ADS_ESCAPE_MODE_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_escape_mode_enum
 type ADS_ESCAPE_MODE_ENUM int32
@@ -137,6 +363,23 @@ const (
 	ADS_ESCAPEDMODE_OFF_EX  ADS_ESCAPE_MODE_ENUM = 4
 )
 
+// String returns the ADS_ESCAPE_MODE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_ESCAPE_MODE_ENUM) String() string {
+	switch e {
+	case ADS_ESCAPEDMODE_DEFAULT:
+		return "ADS_ESCAPEDMODE_DEFAULT"
+	case ADS_ESCAPEDMODE_ON:
+		return "ADS_ESCAPEDMODE_ON"
+	case ADS_ESCAPEDMODE_OFF:
+		return "ADS_ESCAPEDMODE_OFF"
+	case ADS_ESCAPEDMODE_OFF_EX:
+		return "ADS_ESCAPEDMODE_OFF_EX"
+	default:
+		return fmt.Sprintf("ADS_ESCAPE_MODE_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_FLAGTYPE_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_flagtype_enum
 type ADS_FLAGTYPE_ENUM int32
 
@@ -144,6 +387,19 @@ const (
 	ADS_FLAG_OBJECT_TYPE_PRESENT           ADS_FLAGTYPE_ENUM = 1
 	ADS_FLAG_INHERITED_OBJECT_TYPE_PRESENT ADS_FLAGTYPE_ENUM = 2
 )
+
+// String returns the ADS_FLAGTYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_FLAGTYPE_ENUM) String() string {
+	switch e {
+	case ADS_FLAG_OBJECT_TYPE_PRESENT:
+		return "ADS_FLAG_OBJECT_TYPE_PRESENT"
+	case ADS_FLAG_INHERITED_OBJECT_TYPE_PRESENT:
+		return "ADS_FLAG_INHERITED_OBJECT_TYPE_PRESENT"
+	default:
+		return fmt.Sprintf("ADS_FLAGTYPE_ENUM(%d)", int32(e))
+	}
+}
 
 // ADS_FORMAT_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_format_enum
 type ADS_FORMAT_ENUM int32
@@ -162,6 +418,37 @@ const (
 	ADS_FORMAT_LEAF              ADS_FORMAT_ENUM = 11
 )
 
+// String returns the ADS_FORMAT_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_FORMAT_ENUM) String() string {
+	switch e {
+	case ADS_FORMAT_WINDOWS:
+		return "ADS_FORMAT_WINDOWS"
+	case ADS_FORMAT_WINDOWS_NO_SERVER:
+		return "ADS_FORMAT_WINDOWS_NO_SERVER"
+	case ADS_FORMAT_WINDOWS_DN:
+		return "ADS_FORMAT_WINDOWS_DN"
+	case ADS_FORMAT_WINDOWS_PARENT:
+		return "ADS_FORMAT_WINDOWS_PARENT"
+	case ADS_FORMAT_X500:
+		return "ADS_FORMAT_X500"
+	case ADS_FORMAT_X500_NO_SERVER:
+		return "ADS_FORMAT_X500_NO_SERVER"
+	case ADS_FORMAT_X500_DN:
+		return "ADS_FORMAT_X500_DN"
+	case ADS_FORMAT_X500_PARENT:
+		return "ADS_FORMAT_X500_PARENT"
+	case ADS_FORMAT_SERVER:
+		return "ADS_FORMAT_SERVER"
+	case ADS_FORMAT_PROVIDER:
+		return "ADS_FORMAT_PROVIDER"
+	case ADS_FORMAT_LEAF:
+		return "ADS_FORMAT_LEAF"
+	default:
+		return fmt.Sprintf("ADS_FORMAT_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_GROUP_TYPE_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_group_type_enum
 type ADS_GROUP_TYPE_ENUM int32
 
@@ -173,6 +460,23 @@ const (
 	ADS_GROUP_TYPE_SECURITY_ENABLED   ADS_GROUP_TYPE_ENUM = -2147483648
 )
 
+// String returns the ADS_GROUP_TYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_GROUP_TYPE_ENUM) String() string {
+	switch e {
+	case ADS_GROUP_TYPE_GLOBAL_GROUP:
+		return "ADS_GROUP_TYPE_GLOBAL_GROUP"
+	case ADS_GROUP_TYPE_DOMAIN_LOCAL_GROUP:
+		return "ADS_GROUP_TYPE_DOMAIN_LOCAL_GROUP"
+	case ADS_GROUP_TYPE_UNIVERSAL_GROUP:
+		return "ADS_GROUP_TYPE_UNIVERSAL_GROUP"
+	case ADS_GROUP_TYPE_SECURITY_ENABLED:
+		return "ADS_GROUP_TYPE_SECURITY_ENABLED"
+	default:
+		return fmt.Sprintf("ADS_GROUP_TYPE_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_NAME_INITTYPE_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_name_inittype_enum
 type ADS_NAME_INITTYPE_ENUM int32
 
@@ -181,6 +485,21 @@ const (
 	ADS_NAME_INITTYPE_SERVER ADS_NAME_INITTYPE_ENUM = 2
 	ADS_NAME_INITTYPE_GC     ADS_NAME_INITTYPE_ENUM = 3
 )
+
+// String returns the ADS_NAME_INITTYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_NAME_INITTYPE_ENUM) String() string {
+	switch e {
+	case ADS_NAME_INITTYPE_DOMAIN:
+		return "ADS_NAME_INITTYPE_DOMAIN"
+	case ADS_NAME_INITTYPE_SERVER:
+		return "ADS_NAME_INITTYPE_SERVER"
+	case ADS_NAME_INITTYPE_GC:
+		return "ADS_NAME_INITTYPE_GC"
+	default:
+		return fmt.Sprintf("ADS_NAME_INITTYPE_ENUM(%d)", int32(e))
+	}
+}
 
 // ADS_NAME_TYPE_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_name_type_enum
 type ADS_NAME_TYPE_ENUM int32
@@ -200,6 +519,39 @@ const (
 	ADS_NAME_TYPE_SID_OR_SID_HISTORY_NAME ADS_NAME_TYPE_ENUM = 12
 )
 
+// String returns the ADS_NAME_TYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_NAME_TYPE_ENUM) String() string {
+	switch e {
+	case ADS_NAME_TYPE_1779:
+		return "ADS_NAME_TYPE_1779"
+	case ADS_NAME_TYPE_CANONICAL:
+		return "ADS_NAME_TYPE_CANONICAL"
+	case ADS_NAME_TYPE_NT4:
+		return "ADS_NAME_TYPE_NT4"
+	case ADS_NAME_TYPE_DISPLAY:
+		return "ADS_NAME_TYPE_DISPLAY"
+	case ADS_NAME_TYPE_DOMAIN_SIMPLE:
+		return "ADS_NAME_TYPE_DOMAIN_SIMPLE"
+	case ADS_NAME_TYPE_ENTERPRISE_SIMPLE:
+		return "ADS_NAME_TYPE_ENTERPRISE_SIMPLE"
+	case ADS_NAME_TYPE_GUID:
+		return "ADS_NAME_TYPE_GUID"
+	case ADS_NAME_TYPE_UNKNOWN:
+		return "ADS_NAME_TYPE_UNKNOWN"
+	case ADS_NAME_TYPE_USER_PRINCIPAL_NAME:
+		return "ADS_NAME_TYPE_USER_PRINCIPAL_NAME"
+	case ADS_NAME_TYPE_CANONICAL_EX:
+		return "ADS_NAME_TYPE_CANONICAL_EX"
+	case ADS_NAME_TYPE_SERVICE_PRINCIPAL_NAME:
+		return "ADS_NAME_TYPE_SERVICE_PRINCIPAL_NAME"
+	case ADS_NAME_TYPE_SID_OR_SID_HISTORY_NAME:
+		return "ADS_NAME_TYPE_SID_OR_SID_HISTORY_NAME"
+	default:
+		return fmt.Sprintf("ADS_NAME_TYPE_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_OPTION_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_option_enum
 type ADS_OPTION_ENUM int32
 
@@ -216,6 +568,35 @@ const (
 	ADS_OPTION_SKIP_SID_LOOKUP           ADS_OPTION_ENUM = 9
 )
 
+// String returns the ADS_OPTION_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_OPTION_ENUM) String() string {
+	switch e {
+	case ADS_OPTION_SERVERNAME:
+		return "ADS_OPTION_SERVERNAME"
+	case ADS_OPTION_REFERRALS:
+		return "ADS_OPTION_REFERRALS"
+	case ADS_OPTION_PAGE_SIZE:
+		return "ADS_OPTION_PAGE_SIZE"
+	case ADS_OPTION_SECURITY_MASK:
+		return "ADS_OPTION_SECURITY_MASK"
+	case ADS_OPTION_MUTUAL_AUTH_STATUS:
+		return "ADS_OPTION_MUTUAL_AUTH_STATUS"
+	case ADS_OPTION_QUOTA:
+		return "ADS_OPTION_QUOTA"
+	case ADS_OPTION_PASSWORD_PORTNUMBER:
+		return "ADS_OPTION_PASSWORD_PORTNUMBER"
+	case ADS_OPTION_PASSWORD_METHOD:
+		return "ADS_OPTION_PASSWORD_METHOD"
+	case ADS_OPTION_ACCUMULATIVE_MODIFICATION:
+		return "ADS_OPTION_ACCUMULATIVE_MODIFICATION"
+	case ADS_OPTION_SKIP_SID_LOOKUP:
+		return "ADS_OPTION_SKIP_SID_LOOKUP"
+	default:
+		return fmt.Sprintf("ADS_OPTION_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_PASSWORD_ENCODING_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_password_encoding_enum
 type ADS_PASSWORD_ENCODING_ENUM int32
 
@@ -223,6 +604,19 @@ const (
 	ADS_PASSWORD_ENCODE_REQUIRE_SSL ADS_PASSWORD_ENCODING_ENUM = 0
 	ADS_PASSWORD_ENCODE_CLEAR       ADS_PASSWORD_ENCODING_ENUM = 1
 )
+
+// String returns the ADS_PASSWORD_ENCODING_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_PASSWORD_ENCODING_ENUM) String() string {
+	switch e {
+	case ADS_PASSWORD_ENCODE_REQUIRE_SSL:
+		return "ADS_PASSWORD_ENCODE_REQUIRE_SSL"
+	case ADS_PASSWORD_ENCODE_CLEAR:
+		return "ADS_PASSWORD_ENCODE_CLEAR"
+	default:
+		return fmt.Sprintf("ADS_PASSWORD_ENCODING_ENUM(%d)", int32(e))
+	}
+}
 
 // ADS_PATHTYPE_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_pathtype_enum
 type ADS_PATHTYPE_ENUM int32
@@ -232,6 +626,21 @@ const (
 	ADS_PATH_FILESHARE ADS_PATHTYPE_ENUM = 2
 	ADS_PATH_REGISTRY  ADS_PATHTYPE_ENUM = 3
 )
+
+// String returns the ADS_PATHTYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_PATHTYPE_ENUM) String() string {
+	switch e {
+	case ADS_PATH_FILE:
+		return "ADS_PATH_FILE"
+	case ADS_PATH_FILESHARE:
+		return "ADS_PATH_FILESHARE"
+	case ADS_PATH_REGISTRY:
+		return "ADS_PATH_REGISTRY"
+	default:
+		return fmt.Sprintf("ADS_PATHTYPE_ENUM(%d)", int32(e))
+	}
+}
 
 // ADS_PREFERENCES_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_preferences_enum
 type ADS_PREFERENCES_ENUM int32
@@ -252,6 +661,41 @@ const (
 	ADSIPROP_ADSIFLAG         ADS_PREFERENCES_ENUM = 12
 )
 
+// String returns the ADS_PREFERENCES_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_PREFERENCES_ENUM) String() string {
+	switch e {
+	case ADSIPROP_ASYNCHRONOUS:
+		return "ADSIPROP_ASYNCHRONOUS"
+	case ADSIPROP_DEREF_ALIASES:
+		return "ADSIPROP_DEREF_ALIASES"
+	case ADSIPROP_SIZE_LIMIT:
+		return "ADSIPROP_SIZE_LIMIT"
+	case ADSIPROP_TIME_LIMIT:
+		return "ADSIPROP_TIME_LIMIT"
+	case ADSIPROP_ATTRIBTYPES_ONLY:
+		return "ADSIPROP_ATTRIBTYPES_ONLY"
+	case ADSIPROP_SEARCH_SCOPE:
+		return "ADSIPROP_SEARCH_SCOPE"
+	case ADSIPROP_TIMEOUT:
+		return "ADSIPROP_TIMEOUT"
+	case ADSIPROP_PAGESIZE:
+		return "ADSIPROP_PAGESIZE"
+	case ADSIPROP_PAGED_TIME_LIMIT:
+		return "ADSIPROP_PAGED_TIME_LIMIT"
+	case ADSIPROP_CHASE_REFERRALS:
+		return "ADSIPROP_CHASE_REFERRALS"
+	case ADSIPROP_SORT_ON:
+		return "ADSIPROP_SORT_ON"
+	case ADSIPROP_CACHE_RESULTS:
+		return "ADSIPROP_CACHE_RESULTS"
+	case ADSIPROP_ADSIFLAG:
+		return "ADSIPROP_ADSIFLAG"
+	default:
+		return fmt.Sprintf("ADS_PREFERENCES_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_PROPERTY_OPERATION_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_property_operation_enum
 type ADS_PROPERTY_OPERATION_ENUM int32
 
@@ -261,6 +705,23 @@ const (
 	ADS_PROPERTY_APPEND ADS_PROPERTY_OPERATION_ENUM = 3
 	ADS_PROPERTY_DELETE ADS_PROPERTY_OPERATION_ENUM = 4
 )
+
+// String returns the ADS_PROPERTY_OPERATION_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_PROPERTY_OPERATION_ENUM) String() string {
+	switch e {
+	case ADS_PROPERTY_CLEAR:
+		return "ADS_PROPERTY_CLEAR"
+	case ADS_PROPERTY_UPDATE:
+		return "ADS_PROPERTY_UPDATE"
+	case ADS_PROPERTY_APPEND:
+		return "ADS_PROPERTY_APPEND"
+	case ADS_PROPERTY_DELETE:
+		return "ADS_PROPERTY_DELETE"
+	default:
+		return fmt.Sprintf("ADS_PROPERTY_OPERATION_ENUM(%d)", int32(e))
+	}
+}
 
 // ADS_RIGHTS_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_rights_enum
 type ADS_RIGHTS_ENUM int32
@@ -287,6 +748,53 @@ const (
 	ADS_RIGHT_DS_CONTROL_ACCESS      ADS_RIGHTS_ENUM = 256
 )
 
+// String returns the ADS_RIGHTS_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_RIGHTS_ENUM) String() string {
+	switch e {
+	case ADS_RIGHT_DELETE:
+		return "ADS_RIGHT_DELETE"
+	case ADS_RIGHT_READ_CONTROL:
+		return "ADS_RIGHT_READ_CONTROL"
+	case ADS_RIGHT_WRITE_DAC:
+		return "ADS_RIGHT_WRITE_DAC"
+	case ADS_RIGHT_WRITE_OWNER:
+		return "ADS_RIGHT_WRITE_OWNER"
+	case ADS_RIGHT_SYNCHRONIZE:
+		return "ADS_RIGHT_SYNCHRONIZE"
+	case ADS_RIGHT_ACCESS_SYSTEM_SECURITY:
+		return "ADS_RIGHT_ACCESS_SYSTEM_SECURITY"
+	case ADS_RIGHT_GENERIC_READ:
+		return "ADS_RIGHT_GENERIC_READ"
+	case ADS_RIGHT_GENERIC_WRITE:
+		return "ADS_RIGHT_GENERIC_WRITE"
+	case ADS_RIGHT_GENERIC_EXECUTE:
+		return "ADS_RIGHT_GENERIC_EXECUTE"
+	case ADS_RIGHT_GENERIC_ALL:
+		return "ADS_RIGHT_GENERIC_ALL"
+	case ADS_RIGHT_DS_CREATE_CHILD:
+		return "ADS_RIGHT_DS_CREATE_CHILD"
+	case ADS_RIGHT_DS_DELETE_CHILD:
+		return "ADS_RIGHT_DS_DELETE_CHILD"
+	case ADS_RIGHT_ACTRL_DS_LIST:
+		return "ADS_RIGHT_ACTRL_DS_LIST"
+	case ADS_RIGHT_DS_SELF:
+		return "ADS_RIGHT_DS_SELF"
+	case ADS_RIGHT_DS_READ_PROP:
+		return "ADS_RIGHT_DS_READ_PROP"
+	case ADS_RIGHT_DS_WRITE_PROP:
+		return "ADS_RIGHT_DS_WRITE_PROP"
+	case ADS_RIGHT_DS_DELETE_TREE:
+		return "ADS_RIGHT_DS_DELETE_TREE"
+	case ADS_RIGHT_DS_LIST_OBJECT:
+		return "ADS_RIGHT_DS_LIST_OBJECT"
+	case ADS_RIGHT_DS_CONTROL_ACCESS:
+		return "ADS_RIGHT_DS_CONTROL_ACCESS"
+	default:
+		return fmt.Sprintf("ADS_RIGHTS_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_SCOPEENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_scopeenum
 type ADS_SCOPEENUM int32
 
@@ -295,6 +803,21 @@ const (
 	ADS_SCOPE_ONELEVEL ADS_SCOPEENUM = 1
 	ADS_SCOPE_SUBTREE  ADS_SCOPEENUM = 2
 )
+
+// String returns the ADS_SCOPEENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_SCOPEENUM) String() string {
+	switch e {
+	case ADS_SCOPE_BASE:
+		return "ADS_SCOPE_BASE"
+	case ADS_SCOPE_ONELEVEL:
+		return "ADS_SCOPE_ONELEVEL"
+	case ADS_SCOPE_SUBTREE:
+		return "ADS_SCOPE_SUBTREE"
+	default:
+		return fmt.Sprintf("ADS_SCOPEENUM(%d)", int32(e))
+	}
+}
 
 // ADS_SD_CONTROL_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_sd_control_enum
 type ADS_SD_CONTROL_ENUM int32
@@ -315,6 +838,41 @@ const (
 	ADS_SD_CONTROL_SE_SELF_RELATIVE         ADS_SD_CONTROL_ENUM = 32768
 )
 
+// String returns the ADS_SD_CONTROL_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_SD_CONTROL_ENUM) String() string {
+	switch e {
+	case ADS_SD_CONTROL_SE_OWNER_DEFAULTED:
+		return "ADS_SD_CONTROL_SE_OWNER_DEFAULTED"
+	case ADS_SD_CONTROL_SE_GROUP_DEFAULTED:
+		return "ADS_SD_CONTROL_SE_GROUP_DEFAULTED"
+	case ADS_SD_CONTROL_SE_DACL_PRESENT:
+		return "ADS_SD_CONTROL_SE_DACL_PRESENT"
+	case ADS_SD_CONTROL_SE_DACL_DEFAULTED:
+		return "ADS_SD_CONTROL_SE_DACL_DEFAULTED"
+	case ADS_SD_CONTROL_SE_SACL_PRESENT:
+		return "ADS_SD_CONTROL_SE_SACL_PRESENT"
+	case ADS_SD_CONTROL_SE_SACL_DEFAULTED:
+		return "ADS_SD_CONTROL_SE_SACL_DEFAULTED"
+	case ADS_SD_CONTROL_SE_DACL_AUTO_INHERIT_REQ:
+		return "ADS_SD_CONTROL_SE_DACL_AUTO_INHERIT_REQ"
+	case ADS_SD_CONTROL_SE_SACL_AUTO_INHERIT_REQ:
+		return "ADS_SD_CONTROL_SE_SACL_AUTO_INHERIT_REQ"
+	case ADS_SD_CONTROL_SE_DACL_AUTO_INHERITED:
+		return "ADS_SD_CONTROL_SE_DACL_AUTO_INHERITED"
+	case ADS_SD_CONTROL_SE_SACL_AUTO_INHERITED:
+		return "ADS_SD_CONTROL_SE_SACL_AUTO_INHERITED"
+	case ADS_SD_CONTROL_SE_DACL_PROTECTED:
+		return "ADS_SD_CONTROL_SE_DACL_PROTECTED"
+	case ADS_SD_CONTROL_SE_SACL_PROTECTED:
+		return "ADS_SD_CONTROL_SE_SACL_PROTECTED"
+	case ADS_SD_CONTROL_SE_SELF_RELATIVE:
+		return "ADS_SD_CONTROL_SE_SELF_RELATIVE"
+	default:
+		return fmt.Sprintf("ADS_SD_CONTROL_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_SD_FORMAT_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_sd_format_enum
 type ADS_SD_FORMAT_ENUM int32
 
@@ -324,12 +882,38 @@ const (
 	ADS_SD_FORMAT_HEXSTRING ADS_SD_FORMAT_ENUM = 3
 )
 
+// String returns the ADS_SD_FORMAT_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_SD_FORMAT_ENUM) String() string {
+	switch e {
+	case ADS_SD_FORMAT_IID:
+		return "ADS_SD_FORMAT_IID"
+	case ADS_SD_FORMAT_RAW:
+		return "ADS_SD_FORMAT_RAW"
+	case ADS_SD_FORMAT_HEXSTRING:
+		return "ADS_SD_FORMAT_HEXSTRING"
+	default:
+		return fmt.Sprintf("ADS_SD_FORMAT_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_SD_REVISION_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_sd_revision_enum
 type ADS_SD_REVISION_ENUM int32
 
 const (
 	ADS_SD_REVISION_DS ADS_SD_REVISION_ENUM = 4
 )
+
+// String returns the ADS_SD_REVISION_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_SD_REVISION_ENUM) String() string {
+	switch e {
+	case ADS_SD_REVISION_DS:
+		return "ADS_SD_REVISION_DS"
+	default:
+		return fmt.Sprintf("ADS_SD_REVISION_ENUM(%d)", int32(e))
+	}
+}
 
 // ADS_SEARCHPREF_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_searchpref_enum
 type ADS_SEARCHPREF_ENUM int32
@@ -356,6 +940,53 @@ const (
 	ADS_SEARCHPREF_EXTENDED_DN      ADS_SEARCHPREF_ENUM = 18
 )
 
+// String returns the ADS_SEARCHPREF_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_SEARCHPREF_ENUM) String() string {
+	switch e {
+	case ADS_SEARCHPREF_ASYNCHRONOUS:
+		return "ADS_SEARCHPREF_ASYNCHRONOUS"
+	case ADS_SEARCHPREF_DEREF_ALIASES:
+		return "ADS_SEARCHPREF_DEREF_ALIASES"
+	case ADS_SEARCHPREF_SIZE_LIMIT:
+		return "ADS_SEARCHPREF_SIZE_LIMIT"
+	case ADS_SEARCHPREF_TIME_LIMIT:
+		return "ADS_SEARCHPREF_TIME_LIMIT"
+	case ADS_SEARCHPREF_ATTRIBTYPES_ONLY:
+		return "ADS_SEARCHPREF_ATTRIBTYPES_ONLY"
+	case ADS_SEARCHPREF_SEARCH_SCOPE:
+		return "ADS_SEARCHPREF_SEARCH_SCOPE"
+	case ADS_SEARCHPREF_TIMEOUT:
+		return "ADS_SEARCHPREF_TIMEOUT"
+	case ADS_SEARCHPREF_PAGESIZE:
+		return "ADS_SEARCHPREF_PAGESIZE"
+	case ADS_SEARCHPREF_PAGED_TIME_LIMIT:
+		return "ADS_SEARCHPREF_PAGED_TIME_LIMIT"
+	case ADS_SEARCHPREF_CHASE_REFERRALS:
+		return "ADS_SEARCHPREF_CHASE_REFERRALS"
+	case ADS_SEARCHPREF_SORT_ON:
+		return "ADS_SEARCHPREF_SORT_ON"
+	case ADS_SEARCHPREF_CACHE_RESULTS:
+		return "ADS_SEARCHPREF_CACHE_RESULTS"
+	case ADS_SEARCHPREF_DIRSYNC:
+		return "ADS_SEARCHPREF_DIRSYNC"
+	case ADS_SEARCHPREF_TOMBSTONE:
+		return "ADS_SEARCHPREF_TOMBSTONE"
+	case ADS_SEARCHPREF_VLV:
+		return "ADS_SEARCHPREF_VLV"
+	case ADS_SEARCHPREF_ATTRIBUTE_QUERY:
+		return "ADS_SEARCHPREF_ATTRIBUTE_QUERY"
+	case ADS_SEARCHPREF_SECURITY_MASK:
+		return "ADS_SEARCHPREF_SECURITY_MASK"
+	case ADS_SEARCHPREF_DIRSYNC_FLAG:
+		return "ADS_SEARCHPREF_DIRSYNC_FLAG"
+	case ADS_SEARCHPREF_EXTENDED_DN:
+		return "ADS_SEARCHPREF_EXTENDED_DN"
+	default:
+		return fmt.Sprintf("ADS_SEARCHPREF_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_SECURITY_INFO_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_security_info_enum
 type ADS_SECURITY_INFO_ENUM int32
 
@@ -365,6 +996,23 @@ const (
 	ADS_SECURITY_INFO_DACL  ADS_SECURITY_INFO_ENUM = 4
 	ADS_SECURITY_INFO_SACL  ADS_SECURITY_INFO_ENUM = 8
 )
+
+// String returns the ADS_SECURITY_INFO_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_SECURITY_INFO_ENUM) String() string {
+	switch e {
+	case ADS_SECURITY_INFO_OWNER:
+		return "ADS_SECURITY_INFO_OWNER"
+	case ADS_SECURITY_INFO_GROUP:
+		return "ADS_SECURITY_INFO_GROUP"
+	case ADS_SECURITY_INFO_DACL:
+		return "ADS_SECURITY_INFO_DACL"
+	case ADS_SECURITY_INFO_SACL:
+		return "ADS_SECURITY_INFO_SACL"
+	default:
+		return fmt.Sprintf("ADS_SECURITY_INFO_ENUM(%d)", int32(e))
+	}
+}
 
 // ADS_SETTYPE_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_settype_enum
 type ADS_SETTYPE_ENUM int32
@@ -376,6 +1024,23 @@ const (
 	ADS_SETTYPE_DN       ADS_SETTYPE_ENUM = 4
 )
 
+// String returns the ADS_SETTYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_SETTYPE_ENUM) String() string {
+	switch e {
+	case ADS_SETTYPE_FULL:
+		return "ADS_SETTYPE_FULL"
+	case ADS_SETTYPE_PROVIDER:
+		return "ADS_SETTYPE_PROVIDER"
+	case ADS_SETTYPE_SERVER:
+		return "ADS_SETTYPE_SERVER"
+	case ADS_SETTYPE_DN:
+		return "ADS_SETTYPE_DN"
+	default:
+		return fmt.Sprintf("ADS_SETTYPE_ENUM(%d)", int32(e))
+	}
+}
+
 // ADS_STATUSENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_statusenum
 type ADS_STATUSENUM int32
 
@@ -384,6 +1049,21 @@ const (
 	ADS_STATUS_INVALID_SEARCHPREF      ADS_STATUSENUM = 1
 	ADS_STATUS_INVALID_SEARCHPREFVALUE ADS_STATUSENUM = 2
 )
+
+// String returns the ADS_STATUSENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_STATUSENUM) String() string {
+	switch e {
+	case ADS_STATUS_S_OK:
+		return "ADS_STATUS_S_OK"
+	case ADS_STATUS_INVALID_SEARCHPREF:
+		return "ADS_STATUS_INVALID_SEARCHPREF"
+	case ADS_STATUS_INVALID_SEARCHPREFVALUE:
+		return "ADS_STATUS_INVALID_SEARCHPREFVALUE"
+	default:
+		return fmt.Sprintf("ADS_STATUSENUM(%d)", int32(e))
+	}
+}
 
 // ADS_SYSTEMFLAG_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_systemflag_enum
 type ADS_SYSTEMFLAG_ENUM int32
@@ -400,6 +1080,33 @@ const (
 	ADS_SYSTEMFLAG_ATTR_NOT_REPLICATED       ADS_SYSTEMFLAG_ENUM = 1
 	ADS_SYSTEMFLAG_ATTR_IS_CONSTRUCTED       ADS_SYSTEMFLAG_ENUM = 4
 )
+
+// String returns the ADS_SYSTEMFLAG_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_SYSTEMFLAG_ENUM) String() string {
+	switch e {
+	case ADS_SYSTEMFLAG_DISALLOW_DELETE:
+		return "ADS_SYSTEMFLAG_DISALLOW_DELETE"
+	case ADS_SYSTEMFLAG_CONFIG_ALLOW_RENAME:
+		return "ADS_SYSTEMFLAG_CONFIG_ALLOW_RENAME"
+	case ADS_SYSTEMFLAG_CONFIG_ALLOW_MOVE:
+		return "ADS_SYSTEMFLAG_CONFIG_ALLOW_MOVE"
+	case ADS_SYSTEMFLAG_CONFIG_ALLOW_LIMITED_MOVE:
+		return "ADS_SYSTEMFLAG_CONFIG_ALLOW_LIMITED_MOVE"
+	case ADS_SYSTEMFLAG_DOMAIN_DISALLOW_RENAME:
+		return "ADS_SYSTEMFLAG_DOMAIN_DISALLOW_RENAME"
+	case ADS_SYSTEMFLAG_DOMAIN_DISALLOW_MOVE:
+		return "ADS_SYSTEMFLAG_DOMAIN_DISALLOW_MOVE"
+	case ADS_SYSTEMFLAG_CR_NTDS_NC:
+		return "ADS_SYSTEMFLAG_CR_NTDS_NC"
+	case ADS_SYSTEMFLAG_CR_NTDS_DOMAIN:
+		return "ADS_SYSTEMFLAG_CR_NTDS_DOMAIN"
+	case ADS_SYSTEMFLAG_ATTR_IS_CONSTRUCTED:
+		return "ADS_SYSTEMFLAG_ATTR_IS_CONSTRUCTED"
+	default:
+		return fmt.Sprintf("ADS_SYSTEMFLAG_ENUM(%d)", int32(e))
+	}
+}
 
 // ADS_USER_FLAG_ENUM: https://learn.microsoft.com/windows/win32/api/iads/ne-iads-ads_user_flag_enum
 type ADS_USER_FLAG_ENUM int32
@@ -428,6 +1135,57 @@ const (
 	ADS_UF_TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION ADS_USER_FLAG_ENUM = 16777216
 )
 
+// String returns the ADS_USER_FLAG_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADS_USER_FLAG_ENUM) String() string {
+	switch e {
+	case ADS_UF_SCRIPT:
+		return "ADS_UF_SCRIPT"
+	case ADS_UF_ACCOUNTDISABLE:
+		return "ADS_UF_ACCOUNTDISABLE"
+	case ADS_UF_HOMEDIR_REQUIRED:
+		return "ADS_UF_HOMEDIR_REQUIRED"
+	case ADS_UF_LOCKOUT:
+		return "ADS_UF_LOCKOUT"
+	case ADS_UF_PASSWD_NOTREQD:
+		return "ADS_UF_PASSWD_NOTREQD"
+	case ADS_UF_PASSWD_CANT_CHANGE:
+		return "ADS_UF_PASSWD_CANT_CHANGE"
+	case ADS_UF_ENCRYPTED_TEXT_PASSWORD_ALLOWED:
+		return "ADS_UF_ENCRYPTED_TEXT_PASSWORD_ALLOWED"
+	case ADS_UF_TEMP_DUPLICATE_ACCOUNT:
+		return "ADS_UF_TEMP_DUPLICATE_ACCOUNT"
+	case ADS_UF_NORMAL_ACCOUNT:
+		return "ADS_UF_NORMAL_ACCOUNT"
+	case ADS_UF_INTERDOMAIN_TRUST_ACCOUNT:
+		return "ADS_UF_INTERDOMAIN_TRUST_ACCOUNT"
+	case ADS_UF_WORKSTATION_TRUST_ACCOUNT:
+		return "ADS_UF_WORKSTATION_TRUST_ACCOUNT"
+	case ADS_UF_SERVER_TRUST_ACCOUNT:
+		return "ADS_UF_SERVER_TRUST_ACCOUNT"
+	case ADS_UF_DONT_EXPIRE_PASSWD:
+		return "ADS_UF_DONT_EXPIRE_PASSWD"
+	case ADS_UF_MNS_LOGON_ACCOUNT:
+		return "ADS_UF_MNS_LOGON_ACCOUNT"
+	case ADS_UF_SMARTCARD_REQUIRED:
+		return "ADS_UF_SMARTCARD_REQUIRED"
+	case ADS_UF_TRUSTED_FOR_DELEGATION:
+		return "ADS_UF_TRUSTED_FOR_DELEGATION"
+	case ADS_UF_NOT_DELEGATED:
+		return "ADS_UF_NOT_DELEGATED"
+	case ADS_UF_USE_DES_KEY_ONLY:
+		return "ADS_UF_USE_DES_KEY_ONLY"
+	case ADS_UF_DONT_REQUIRE_PREAUTH:
+		return "ADS_UF_DONT_REQUIRE_PREAUTH"
+	case ADS_UF_PASSWORD_EXPIRED:
+		return "ADS_UF_PASSWORD_EXPIRED"
+	case ADS_UF_TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION:
+		return "ADS_UF_TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION"
+	default:
+		return fmt.Sprintf("ADS_USER_FLAG_ENUM(%d)", int32(e))
+	}
+}
+
 // DSROLE_MACHINE_ROLE: https://learn.microsoft.com/windows/win32/api/dsrole/ne-dsrole-dsrole_machine_role
 type DSROLE_MACHINE_ROLE int32
 
@@ -440,6 +1198,27 @@ const (
 	DsRole_RolePrimaryDomainController DSROLE_MACHINE_ROLE = 5
 )
 
+// String returns the DSROLE_MACHINE_ROLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DSROLE_MACHINE_ROLE) String() string {
+	switch e {
+	case DsRole_RoleStandaloneWorkstation:
+		return "DsRole_RoleStandaloneWorkstation"
+	case DsRole_RoleMemberWorkstation:
+		return "DsRole_RoleMemberWorkstation"
+	case DsRole_RoleStandaloneServer:
+		return "DsRole_RoleStandaloneServer"
+	case DsRole_RoleMemberServer:
+		return "DsRole_RoleMemberServer"
+	case DsRole_RoleBackupDomainController:
+		return "DsRole_RoleBackupDomainController"
+	case DsRole_RolePrimaryDomainController:
+		return "DsRole_RolePrimaryDomainController"
+	default:
+		return fmt.Sprintf("DSROLE_MACHINE_ROLE(%d)", int32(e))
+	}
+}
+
 // DSROLE_OPERATION_STATE: https://learn.microsoft.com/windows/win32/api/dsrole/ne-dsrole-dsrole_operation_state
 type DSROLE_OPERATION_STATE int32
 
@@ -448,6 +1227,21 @@ const (
 	DsRoleOperationActive     DSROLE_OPERATION_STATE = 1
 	DsRoleOperationNeedReboot DSROLE_OPERATION_STATE = 2
 )
+
+// String returns the DSROLE_OPERATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DSROLE_OPERATION_STATE) String() string {
+	switch e {
+	case DsRoleOperationIdle:
+		return "DsRoleOperationIdle"
+	case DsRoleOperationActive:
+		return "DsRoleOperationActive"
+	case DsRoleOperationNeedReboot:
+		return "DsRoleOperationNeedReboot"
+	default:
+		return fmt.Sprintf("DSROLE_OPERATION_STATE(%d)", int32(e))
+	}
+}
 
 // DSROLE_PRIMARY_DOMAIN_INFO_LEVEL: https://learn.microsoft.com/windows/win32/api/dsrole/ne-dsrole-dsrole_primary_domain_info_level
 type DSROLE_PRIMARY_DOMAIN_INFO_LEVEL int32
@@ -458,6 +1252,21 @@ const (
 	DsRoleOperationState         DSROLE_PRIMARY_DOMAIN_INFO_LEVEL = 3
 )
 
+// String returns the DSROLE_PRIMARY_DOMAIN_INFO_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DSROLE_PRIMARY_DOMAIN_INFO_LEVEL) String() string {
+	switch e {
+	case DsRolePrimaryDomainInfoBasic:
+		return "DsRolePrimaryDomainInfoBasic"
+	case DsRoleUpgradeStatus:
+		return "DsRoleUpgradeStatus"
+	case DsRoleOperationState:
+		return "DsRoleOperationState"
+	default:
+		return fmt.Sprintf("DSROLE_PRIMARY_DOMAIN_INFO_LEVEL(%d)", int32(e))
+	}
+}
+
 // DSROLE_SERVER_STATE: https://learn.microsoft.com/windows/win32/api/dsrole/ne-dsrole-dsrole_server_state
 type DSROLE_SERVER_STATE int32
 
@@ -467,12 +1276,38 @@ const (
 	DsRoleServerBackup  DSROLE_SERVER_STATE = 2
 )
 
+// String returns the DSROLE_SERVER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DSROLE_SERVER_STATE) String() string {
+	switch e {
+	case DsRoleServerUnknown:
+		return "DsRoleServerUnknown"
+	case DsRoleServerPrimary:
+		return "DsRoleServerPrimary"
+	case DsRoleServerBackup:
+		return "DsRoleServerBackup"
+	default:
+		return fmt.Sprintf("DSROLE_SERVER_STATE(%d)", int32(e))
+	}
+}
+
 // DS_KCC_TASKID: https://learn.microsoft.com/windows/win32/api/ntdsapi/ne-ntdsapi-ds_kcc_taskid
 type DS_KCC_TASKID int32
 
 const (
 	DS_KCC_TASKID_UPDATE_TOPOLOGY DS_KCC_TASKID = 0
 )
+
+// String returns the DS_KCC_TASKID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DS_KCC_TASKID) String() string {
+	switch e {
+	case DS_KCC_TASKID_UPDATE_TOPOLOGY:
+		return "DS_KCC_TASKID_UPDATE_TOPOLOGY"
+	default:
+		return fmt.Sprintf("DS_KCC_TASKID(%d)", int32(e))
+	}
+}
 
 // DS_MANGLE_FOR: https://learn.microsoft.com/windows/win32/api/dsparse/ne-dsparse-ds_mangle_for
 type DS_MANGLE_FOR int32
@@ -482,6 +1317,21 @@ const (
 	DS_MANGLE_OBJECT_RDN_FOR_DELETION      DS_MANGLE_FOR = 1
 	DS_MANGLE_OBJECT_RDN_FOR_NAME_CONFLICT DS_MANGLE_FOR = 2
 )
+
+// String returns the DS_MANGLE_FOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DS_MANGLE_FOR) String() string {
+	switch e {
+	case DS_MANGLE_UNKNOWN:
+		return "DS_MANGLE_UNKNOWN"
+	case DS_MANGLE_OBJECT_RDN_FOR_DELETION:
+		return "DS_MANGLE_OBJECT_RDN_FOR_DELETION"
+	case DS_MANGLE_OBJECT_RDN_FOR_NAME_CONFLICT:
+		return "DS_MANGLE_OBJECT_RDN_FOR_NAME_CONFLICT"
+	default:
+		return fmt.Sprintf("DS_MANGLE_FOR(%d)", int32(e))
+	}
+}
 
 // DS_NAME_ERROR: https://learn.microsoft.com/windows/win32/api/ntdsapi/ne-ntdsapi-ds_name_error
 type DS_NAME_ERROR int32
@@ -497,6 +1347,31 @@ const (
 	DS_NAME_ERROR_TRUST_REFERRAL         DS_NAME_ERROR = 7
 )
 
+// String returns the DS_NAME_ERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DS_NAME_ERROR) String() string {
+	switch e {
+	case DS_NAME_NO_ERROR:
+		return "DS_NAME_NO_ERROR"
+	case DS_NAME_ERROR_RESOLVING:
+		return "DS_NAME_ERROR_RESOLVING"
+	case DS_NAME_ERROR_NOT_FOUND:
+		return "DS_NAME_ERROR_NOT_FOUND"
+	case DS_NAME_ERROR_NOT_UNIQUE:
+		return "DS_NAME_ERROR_NOT_UNIQUE"
+	case DS_NAME_ERROR_NO_MAPPING:
+		return "DS_NAME_ERROR_NO_MAPPING"
+	case DS_NAME_ERROR_DOMAIN_ONLY:
+		return "DS_NAME_ERROR_DOMAIN_ONLY"
+	case DS_NAME_ERROR_NO_SYNTACTICAL_MAPPING:
+		return "DS_NAME_ERROR_NO_SYNTACTICAL_MAPPING"
+	case DS_NAME_ERROR_TRUST_REFERRAL:
+		return "DS_NAME_ERROR_TRUST_REFERRAL"
+	default:
+		return fmt.Sprintf("DS_NAME_ERROR(%d)", int32(e))
+	}
+}
+
 // DS_NAME_FLAGS: https://learn.microsoft.com/windows/win32/api/ntdsapi/ne-ntdsapi-ds_name_flags
 type DS_NAME_FLAGS int32
 
@@ -507,6 +1382,25 @@ const (
 	DS_NAME_FLAG_GCVERIFY         DS_NAME_FLAGS = 4
 	DS_NAME_FLAG_TRUST_REFERRAL   DS_NAME_FLAGS = 8
 )
+
+// String returns the DS_NAME_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DS_NAME_FLAGS) String() string {
+	switch e {
+	case DS_NAME_NO_FLAGS:
+		return "DS_NAME_NO_FLAGS"
+	case DS_NAME_FLAG_SYNTACTICAL_ONLY:
+		return "DS_NAME_FLAG_SYNTACTICAL_ONLY"
+	case DS_NAME_FLAG_EVAL_AT_DC:
+		return "DS_NAME_FLAG_EVAL_AT_DC"
+	case DS_NAME_FLAG_GCVERIFY:
+		return "DS_NAME_FLAG_GCVERIFY"
+	case DS_NAME_FLAG_TRUST_REFERRAL:
+		return "DS_NAME_FLAG_TRUST_REFERRAL"
+	default:
+		return fmt.Sprintf("DS_NAME_FLAGS(%d)", int32(e))
+	}
+}
 
 // DS_NAME_FORMAT: https://learn.microsoft.com/windows/win32/api/ntdsapi/ne-ntdsapi-ds_name_format
 type DS_NAME_FORMAT int32
@@ -524,6 +1418,37 @@ const (
 	DS_SID_OR_SID_HISTORY_NAME DS_NAME_FORMAT = 11
 	DS_DNS_DOMAIN_NAME         DS_NAME_FORMAT = 12
 )
+
+// String returns the DS_NAME_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DS_NAME_FORMAT) String() string {
+	switch e {
+	case DS_UNKNOWN_NAME:
+		return "DS_UNKNOWN_NAME"
+	case DS_FQDN_1779_NAME:
+		return "DS_FQDN_1779_NAME"
+	case DS_NT4_ACCOUNT_NAME:
+		return "DS_NT4_ACCOUNT_NAME"
+	case DS_DISPLAY_NAME:
+		return "DS_DISPLAY_NAME"
+	case DS_UNIQUE_ID_NAME:
+		return "DS_UNIQUE_ID_NAME"
+	case DS_CANONICAL_NAME:
+		return "DS_CANONICAL_NAME"
+	case DS_USER_PRINCIPAL_NAME:
+		return "DS_USER_PRINCIPAL_NAME"
+	case DS_CANONICAL_NAME_EX:
+		return "DS_CANONICAL_NAME_EX"
+	case DS_SERVICE_PRINCIPAL_NAME:
+		return "DS_SERVICE_PRINCIPAL_NAME"
+	case DS_SID_OR_SID_HISTORY_NAME:
+		return "DS_SID_OR_SID_HISTORY_NAME"
+	case DS_DNS_DOMAIN_NAME:
+		return "DS_DNS_DOMAIN_NAME"
+	default:
+		return fmt.Sprintf("DS_NAME_FORMAT(%d)", int32(e))
+	}
+}
 
 // DS_REPL_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/ntdsapi/ne-ntdsapi-ds_repl_info_type
 type DS_REPL_INFO_TYPE int32
@@ -544,6 +1469,41 @@ const (
 	DS_REPL_INFO_TYPE_MAX                    DS_REPL_INFO_TYPE = 12
 )
 
+// String returns the DS_REPL_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DS_REPL_INFO_TYPE) String() string {
+	switch e {
+	case DS_REPL_INFO_NEIGHBORS:
+		return "DS_REPL_INFO_NEIGHBORS"
+	case DS_REPL_INFO_CURSORS_FOR_NC:
+		return "DS_REPL_INFO_CURSORS_FOR_NC"
+	case DS_REPL_INFO_METADATA_FOR_OBJ:
+		return "DS_REPL_INFO_METADATA_FOR_OBJ"
+	case DS_REPL_INFO_KCC_DSA_CONNECT_FAILURES:
+		return "DS_REPL_INFO_KCC_DSA_CONNECT_FAILURES"
+	case DS_REPL_INFO_KCC_DSA_LINK_FAILURES:
+		return "DS_REPL_INFO_KCC_DSA_LINK_FAILURES"
+	case DS_REPL_INFO_PENDING_OPS:
+		return "DS_REPL_INFO_PENDING_OPS"
+	case DS_REPL_INFO_METADATA_FOR_ATTR_VALUE:
+		return "DS_REPL_INFO_METADATA_FOR_ATTR_VALUE"
+	case DS_REPL_INFO_CURSORS_2_FOR_NC:
+		return "DS_REPL_INFO_CURSORS_2_FOR_NC"
+	case DS_REPL_INFO_CURSORS_3_FOR_NC:
+		return "DS_REPL_INFO_CURSORS_3_FOR_NC"
+	case DS_REPL_INFO_METADATA_2_FOR_OBJ:
+		return "DS_REPL_INFO_METADATA_2_FOR_OBJ"
+	case DS_REPL_INFO_METADATA_2_FOR_ATTR_VALUE:
+		return "DS_REPL_INFO_METADATA_2_FOR_ATTR_VALUE"
+	case DS_REPL_INFO_METADATA_EXT_FOR_ATTR_VALUE:
+		return "DS_REPL_INFO_METADATA_EXT_FOR_ATTR_VALUE"
+	case DS_REPL_INFO_TYPE_MAX:
+		return "DS_REPL_INFO_TYPE_MAX"
+	default:
+		return fmt.Sprintf("DS_REPL_INFO_TYPE(%d)", int32(e))
+	}
+}
+
 // DS_REPL_OP_TYPE: https://learn.microsoft.com/windows/win32/api/ntdsapi/ne-ntdsapi-ds_repl_op_type
 type DS_REPL_OP_TYPE int32
 
@@ -555,6 +1515,25 @@ const (
 	DS_REPL_OP_TYPE_UPDATE_REFS DS_REPL_OP_TYPE = 4
 )
 
+// String returns the DS_REPL_OP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DS_REPL_OP_TYPE) String() string {
+	switch e {
+	case DS_REPL_OP_TYPE_SYNC:
+		return "DS_REPL_OP_TYPE_SYNC"
+	case DS_REPL_OP_TYPE_ADD:
+		return "DS_REPL_OP_TYPE_ADD"
+	case DS_REPL_OP_TYPE_DELETE:
+		return "DS_REPL_OP_TYPE_DELETE"
+	case DS_REPL_OP_TYPE_MODIFY:
+		return "DS_REPL_OP_TYPE_MODIFY"
+	case DS_REPL_OP_TYPE_UPDATE_REFS:
+		return "DS_REPL_OP_TYPE_UPDATE_REFS"
+	default:
+		return fmt.Sprintf("DS_REPL_OP_TYPE(%d)", int32(e))
+	}
+}
+
 // DS_REPSYNCALL_ERROR: https://learn.microsoft.com/windows/win32/api/ntdsapi/ne-ntdsapi-ds_repsyncall_error
 type DS_REPSYNCALL_ERROR int32
 
@@ -563,6 +1542,21 @@ const (
 	DS_REPSYNCALL_WIN32_ERROR_REPLICATING       DS_REPSYNCALL_ERROR = 1
 	DS_REPSYNCALL_SERVER_UNREACHABLE            DS_REPSYNCALL_ERROR = 2
 )
+
+// String returns the DS_REPSYNCALL_ERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DS_REPSYNCALL_ERROR) String() string {
+	switch e {
+	case DS_REPSYNCALL_WIN32_ERROR_CONTACTING_SERVER:
+		return "DS_REPSYNCALL_WIN32_ERROR_CONTACTING_SERVER"
+	case DS_REPSYNCALL_WIN32_ERROR_REPLICATING:
+		return "DS_REPSYNCALL_WIN32_ERROR_REPLICATING"
+	case DS_REPSYNCALL_SERVER_UNREACHABLE:
+		return "DS_REPSYNCALL_SERVER_UNREACHABLE"
+	default:
+		return fmt.Sprintf("DS_REPSYNCALL_ERROR(%d)", int32(e))
+	}
+}
 
 // DS_REPSYNCALL_EVENT: https://learn.microsoft.com/windows/win32/api/ntdsapi/ne-ntdsapi-ds_repsyncall_event
 type DS_REPSYNCALL_EVENT int32
@@ -573,6 +1567,23 @@ const (
 	DS_REPSYNCALL_EVENT_SYNC_COMPLETED DS_REPSYNCALL_EVENT = 2
 	DS_REPSYNCALL_EVENT_FINISHED       DS_REPSYNCALL_EVENT = 3
 )
+
+// String returns the DS_REPSYNCALL_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DS_REPSYNCALL_EVENT) String() string {
+	switch e {
+	case DS_REPSYNCALL_EVENT_ERROR:
+		return "DS_REPSYNCALL_EVENT_ERROR"
+	case DS_REPSYNCALL_EVENT_SYNC_STARTED:
+		return "DS_REPSYNCALL_EVENT_SYNC_STARTED"
+	case DS_REPSYNCALL_EVENT_SYNC_COMPLETED:
+		return "DS_REPSYNCALL_EVENT_SYNC_COMPLETED"
+	case DS_REPSYNCALL_EVENT_FINISHED:
+		return "DS_REPSYNCALL_EVENT_FINISHED"
+	default:
+		return fmt.Sprintf("DS_REPSYNCALL_EVENT(%d)", int32(e))
+	}
+}
 
 // DS_SPN_NAME_TYPE: https://learn.microsoft.com/windows/win32/api/ntdsapi/ne-ntdsapi-ds_spn_name_type
 type DS_SPN_NAME_TYPE int32
@@ -586,6 +1597,27 @@ const (
 	DS_SPN_SERVICE   DS_SPN_NAME_TYPE = 5
 )
 
+// String returns the DS_SPN_NAME_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DS_SPN_NAME_TYPE) String() string {
+	switch e {
+	case DS_SPN_DNS_HOST:
+		return "DS_SPN_DNS_HOST"
+	case DS_SPN_DN_HOST:
+		return "DS_SPN_DN_HOST"
+	case DS_SPN_NB_HOST:
+		return "DS_SPN_NB_HOST"
+	case DS_SPN_DOMAIN:
+		return "DS_SPN_DOMAIN"
+	case DS_SPN_NB_DOMAIN:
+		return "DS_SPN_NB_DOMAIN"
+	case DS_SPN_SERVICE:
+		return "DS_SPN_SERVICE"
+	default:
+		return fmt.Sprintf("DS_SPN_NAME_TYPE(%d)", int32(e))
+	}
+}
+
 // DS_SPN_WRITE_OP: https://learn.microsoft.com/windows/win32/api/ntdsapi/ne-ntdsapi-ds_spn_write_op
 type DS_SPN_WRITE_OP int32
 
@@ -594,3 +1626,18 @@ const (
 	DS_SPN_REPLACE_SPN_OP DS_SPN_WRITE_OP = 1
 	DS_SPN_DELETE_SPN_OP  DS_SPN_WRITE_OP = 2
 )
+
+// String returns the DS_SPN_WRITE_OP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DS_SPN_WRITE_OP) String() string {
+	switch e {
+	case DS_SPN_ADD_SPN_OP:
+		return "DS_SPN_ADD_SPN_OP"
+	case DS_SPN_REPLACE_SPN_OP:
+		return "DS_SPN_REPLACE_SPN_OP"
+	case DS_SPN_DELETE_SPN_OP:
+		return "DS_SPN_DELETE_SPN_OP"
+	default:
+		return fmt.Sprintf("DS_SPN_WRITE_OP(%d)", int32(e))
+	}
+}

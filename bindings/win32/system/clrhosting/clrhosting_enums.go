@@ -4,6 +4,10 @@
 
 package clrhosting
 
+import (
+	"fmt"
+)
+
 type APPDOMAIN_SECURITY_FLAGS int32
 
 const (
@@ -12,6 +16,23 @@ const (
 	APPDOMAIN_SECURITY_FORBID_CROSSAD_REVERSE_PINVOKE APPDOMAIN_SECURITY_FLAGS = 2
 	APPDOMAIN_FORCE_TRIVIAL_WAIT_OPERATIONS           APPDOMAIN_SECURITY_FLAGS = 8
 )
+
+// String returns the APPDOMAIN_SECURITY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPDOMAIN_SECURITY_FLAGS) String() string {
+	switch e {
+	case APPDOMAIN_SECURITY_DEFAULT:
+		return "APPDOMAIN_SECURITY_DEFAULT"
+	case APPDOMAIN_SECURITY_SANDBOXED:
+		return "APPDOMAIN_SECURITY_SANDBOXED"
+	case APPDOMAIN_SECURITY_FORBID_CROSSAD_REVERSE_PINVOKE:
+		return "APPDOMAIN_SECURITY_FORBID_CROSSAD_REVERSE_PINVOKE"
+	case APPDOMAIN_FORCE_TRIVIAL_WAIT_OPERATIONS:
+		return "APPDOMAIN_FORCE_TRIVIAL_WAIT_OPERATIONS"
+	default:
+		return fmt.Sprintf("APPDOMAIN_SECURITY_FLAGS(%d)", int32(e))
+	}
+}
 
 type BucketParameterIndex int32
 
@@ -28,12 +49,54 @@ const (
 	InvalidBucketParamIndex BucketParameterIndex = 9
 )
 
+// String returns the BucketParameterIndex constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BucketParameterIndex) String() string {
+	switch e {
+	case Parameter1:
+		return "Parameter1"
+	case Parameter2:
+		return "Parameter2"
+	case Parameter3:
+		return "Parameter3"
+	case Parameter4:
+		return "Parameter4"
+	case Parameter5:
+		return "Parameter5"
+	case Parameter6:
+		return "Parameter6"
+	case Parameter7:
+		return "Parameter7"
+	case Parameter8:
+		return "Parameter8"
+	case Parameter9:
+		return "Parameter9"
+	case InvalidBucketParamIndex:
+		return "InvalidBucketParamIndex"
+	default:
+		return fmt.Sprintf("BucketParameterIndex(%d)", int32(e))
+	}
+}
+
 type CLR_DEBUGGING_PROCESS_FLAGS int32
 
 const (
 	CLR_DEBUGGING_MANAGED_EVENT_PENDING         CLR_DEBUGGING_PROCESS_FLAGS = 1
 	CLR_DEBUGGING_MANAGED_EVENT_DEBUGGER_LAUNCH CLR_DEBUGGING_PROCESS_FLAGS = 2
 )
+
+// String returns the CLR_DEBUGGING_PROCESS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLR_DEBUGGING_PROCESS_FLAGS) String() string {
+	switch e {
+	case CLR_DEBUGGING_MANAGED_EVENT_PENDING:
+		return "CLR_DEBUGGING_MANAGED_EVENT_PENDING"
+	case CLR_DEBUGGING_MANAGED_EVENT_DEBUGGER_LAUNCH:
+		return "CLR_DEBUGGING_MANAGED_EVENT_DEBUGGER_LAUNCH"
+	default:
+		return fmt.Sprintf("CLR_DEBUGGING_PROCESS_FLAGS(%d)", int32(e))
+	}
+}
 
 type CLSID_RESOLUTION_FLAGS int32
 
@@ -42,6 +105,19 @@ const (
 	CLSID_RESOLUTION_REGISTERED CLSID_RESOLUTION_FLAGS = 1
 )
 
+// String returns the CLSID_RESOLUTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLSID_RESOLUTION_FLAGS) String() string {
+	switch e {
+	case CLSID_RESOLUTION_DEFAULT:
+		return "CLSID_RESOLUTION_DEFAULT"
+	case CLSID_RESOLUTION_REGISTERED:
+		return "CLSID_RESOLUTION_REGISTERED"
+	default:
+		return fmt.Sprintf("CLSID_RESOLUTION_FLAGS(%d)", int32(e))
+	}
+}
+
 type COR_GC_STAT_TYPES int32
 
 const (
@@ -49,11 +125,35 @@ const (
 	COR_GC_MEMORYUSAGE COR_GC_STAT_TYPES = 2
 )
 
+// String returns the COR_GC_STAT_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_GC_STAT_TYPES) String() string {
+	switch e {
+	case COR_GC_COUNTS:
+		return "COR_GC_COUNTS"
+	case COR_GC_MEMORYUSAGE:
+		return "COR_GC_MEMORYUSAGE"
+	default:
+		return fmt.Sprintf("COR_GC_STAT_TYPES(%d)", int32(e))
+	}
+}
+
 type COR_GC_THREAD_STATS_TYPES int32
 
 const (
 	COR_GC_THREAD_HAS_PROMOTED_BYTES COR_GC_THREAD_STATS_TYPES = 1
 )
+
+// String returns the COR_GC_THREAD_STATS_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_GC_THREAD_STATS_TYPES) String() string {
+	switch e {
+	case COR_GC_THREAD_HAS_PROMOTED_BYTES:
+		return "COR_GC_THREAD_HAS_PROMOTED_BYTES"
+	default:
+		return fmt.Sprintf("COR_GC_THREAD_STATS_TYPES(%d)", int32(e))
+	}
+}
 
 type EApiCategories int32
 
@@ -71,6 +171,37 @@ const (
 	EAll                      EApiCategories = 511
 )
 
+// String returns the EApiCategories constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EApiCategories) String() string {
+	switch e {
+	case ENoChecks:
+		return "ENoChecks"
+	case ESynchronization:
+		return "ESynchronization"
+	case ESharedState:
+		return "ESharedState"
+	case EExternalProcessMgmt:
+		return "EExternalProcessMgmt"
+	case ESelfAffectingProcessMgmt:
+		return "ESelfAffectingProcessMgmt"
+	case EExternalThreading:
+		return "EExternalThreading"
+	case ESelfAffectingThreading:
+		return "ESelfAffectingThreading"
+	case ESecurityInfrastructure:
+		return "ESecurityInfrastructure"
+	case EUI:
+		return "EUI"
+	case EMayLeakOnAbort:
+		return "EMayLeakOnAbort"
+	case EAll:
+		return "EAll"
+	default:
+		return fmt.Sprintf("EApiCategories(%d)", int32(e))
+	}
+}
+
 type EBindPolicyLevels int32
 
 const (
@@ -84,11 +215,47 @@ const (
 	EPolicyPortability       EBindPolicyLevels = 64
 )
 
+// String returns the EBindPolicyLevels constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EBindPolicyLevels) String() string {
+	switch e {
+	case EPolicyLevelNone:
+		return "EPolicyLevelNone"
+	case EPolicyLevelRetargetable:
+		return "EPolicyLevelRetargetable"
+	case EPolicyUnifiedToCLR:
+		return "EPolicyUnifiedToCLR"
+	case EPolicyLevelApp:
+		return "EPolicyLevelApp"
+	case EPolicyLevelPublisher:
+		return "EPolicyLevelPublisher"
+	case EPolicyLevelHost:
+		return "EPolicyLevelHost"
+	case EPolicyLevelAdmin:
+		return "EPolicyLevelAdmin"
+	case EPolicyPortability:
+		return "EPolicyPortability"
+	default:
+		return fmt.Sprintf("EBindPolicyLevels(%d)", int32(e))
+	}
+}
+
 type ECLRAssemblyIdentityFlags int32
 
 const (
 	CLR_ASSEMBLY_IDENTITY_FLAGS_DEFAULT ECLRAssemblyIdentityFlags = 0
 )
+
+// String returns the ECLRAssemblyIdentityFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ECLRAssemblyIdentityFlags) String() string {
+	switch e {
+	case CLR_ASSEMBLY_IDENTITY_FLAGS_DEFAULT:
+		return "CLR_ASSEMBLY_IDENTITY_FLAGS_DEFAULT"
+	default:
+		return fmt.Sprintf("ECLRAssemblyIdentityFlags(%d)", int32(e))
+	}
+}
 
 type EClrEvent int32
 
@@ -99,6 +266,25 @@ const (
 	Event_StackOverflow EClrEvent = 3
 	MaxClrEvent         EClrEvent = 4
 )
+
+// String returns the EClrEvent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EClrEvent) String() string {
+	switch e {
+	case Event_DomainUnload:
+		return "Event_DomainUnload"
+	case Event_ClrDisabled:
+		return "Event_ClrDisabled"
+	case Event_MDAFired:
+		return "Event_MDAFired"
+	case Event_StackOverflow:
+		return "Event_StackOverflow"
+	case MaxClrEvent:
+		return "MaxClrEvent"
+	default:
+		return fmt.Sprintf("EClrEvent(%d)", int32(e))
+	}
+}
 
 type EClrFailure int32
 
@@ -113,6 +299,31 @@ const (
 	MaxClrFailure            EClrFailure = 7
 )
 
+// String returns the EClrFailure constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EClrFailure) String() string {
+	switch e {
+	case FAIL_NonCriticalResource:
+		return "FAIL_NonCriticalResource"
+	case FAIL_CriticalResource:
+		return "FAIL_CriticalResource"
+	case FAIL_FatalRuntime:
+		return "FAIL_FatalRuntime"
+	case FAIL_OrphanedLock:
+		return "FAIL_OrphanedLock"
+	case FAIL_StackOverflow:
+		return "FAIL_StackOverflow"
+	case FAIL_AccessViolation:
+		return "FAIL_AccessViolation"
+	case FAIL_CodeContract:
+		return "FAIL_CodeContract"
+	case MaxClrFailure:
+		return "MaxClrFailure"
+	default:
+		return fmt.Sprintf("EClrFailure(%d)", int32(e))
+	}
+}
+
 type EClrOperation int32
 
 const (
@@ -126,6 +337,31 @@ const (
 	MaxClrOperation                        EClrOperation = 7
 )
 
+// String returns the EClrOperation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EClrOperation) String() string {
+	switch e {
+	case OPR_ThreadAbort:
+		return "OPR_ThreadAbort"
+	case OPR_ThreadRudeAbortInNonCriticalRegion:
+		return "OPR_ThreadRudeAbortInNonCriticalRegion"
+	case OPR_ThreadRudeAbortInCriticalRegion:
+		return "OPR_ThreadRudeAbortInCriticalRegion"
+	case OPR_AppDomainUnload:
+		return "OPR_AppDomainUnload"
+	case OPR_AppDomainRudeUnload:
+		return "OPR_AppDomainRudeUnload"
+	case OPR_ProcessExit:
+		return "OPR_ProcessExit"
+	case OPR_FinalizerRun:
+		return "OPR_FinalizerRun"
+	case MaxClrOperation:
+		return "MaxClrOperation"
+	default:
+		return fmt.Sprintf("EClrOperation(%d)", int32(e))
+	}
+}
+
 type EClrUnhandledException int32
 
 const (
@@ -133,12 +369,38 @@ const (
 	EHostDeterminedPolicy    EClrUnhandledException = 1
 )
 
+// String returns the EClrUnhandledException constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EClrUnhandledException) String() string {
+	switch e {
+	case ERuntimeDeterminedPolicy:
+		return "ERuntimeDeterminedPolicy"
+	case EHostDeterminedPolicy:
+		return "EHostDeterminedPolicy"
+	default:
+		return fmt.Sprintf("EClrUnhandledException(%d)", int32(e))
+	}
+}
+
 type EContextType int32
 
 const (
 	ECurrentContext    EContextType = 0
 	ERestrictedContext EContextType = 1
 )
+
+// String returns the EContextType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EContextType) String() string {
+	switch e {
+	case ECurrentContext:
+		return "ECurrentContext"
+	case ERestrictedContext:
+		return "ERestrictedContext"
+	default:
+		return fmt.Sprintf("EContextType(%d)", int32(e))
+	}
+}
 
 type ECustomDumpFlavor int32
 
@@ -149,17 +411,54 @@ const (
 	DUMP_FLAVOR_Default          ECustomDumpFlavor = 0
 )
 
+// String returns the ECustomDumpFlavor constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ECustomDumpFlavor) String() string {
+	switch e {
+	case DUMP_FLAVOR_Mini:
+		return "DUMP_FLAVOR_Mini"
+	case DUMP_FLAVOR_CriticalCLRState:
+		return "DUMP_FLAVOR_CriticalCLRState"
+	case DUMP_FLAVOR_NonHeapCLRState:
+		return "DUMP_FLAVOR_NonHeapCLRState"
+	default:
+		return fmt.Sprintf("ECustomDumpFlavor(%d)", int32(e))
+	}
+}
+
 type ECustomDumpItemKind int32
 
 const (
 	DUMP_ITEM_None ECustomDumpItemKind = 0
 )
 
+// String returns the ECustomDumpItemKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ECustomDumpItemKind) String() string {
+	switch e {
+	case DUMP_ITEM_None:
+		return "DUMP_ITEM_None"
+	default:
+		return fmt.Sprintf("ECustomDumpItemKind(%d)", int32(e))
+	}
+}
+
 type EHostApplicationPolicy int32
 
 const (
 	HOST_APPLICATION_BINDING_POLICY EHostApplicationPolicy = 1
 )
+
+// String returns the EHostApplicationPolicy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EHostApplicationPolicy) String() string {
+	switch e {
+	case HOST_APPLICATION_BINDING_POLICY:
+		return "HOST_APPLICATION_BINDING_POLICY"
+	default:
+		return fmt.Sprintf("EHostApplicationPolicy(%d)", int32(e))
+	}
+}
 
 type EHostBindingPolicyModifyFlags int32
 
@@ -170,12 +469,42 @@ const (
 	HOST_BINDING_POLICY_MODIFY_MAX     EHostBindingPolicyModifyFlags = 3
 )
 
+// String returns the EHostBindingPolicyModifyFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EHostBindingPolicyModifyFlags) String() string {
+	switch e {
+	case HOST_BINDING_POLICY_MODIFY_DEFAULT:
+		return "HOST_BINDING_POLICY_MODIFY_DEFAULT"
+	case HOST_BINDING_POLICY_MODIFY_CHAIN:
+		return "HOST_BINDING_POLICY_MODIFY_CHAIN"
+	case HOST_BINDING_POLICY_MODIFY_REMOVE:
+		return "HOST_BINDING_POLICY_MODIFY_REMOVE"
+	case HOST_BINDING_POLICY_MODIFY_MAX:
+		return "HOST_BINDING_POLICY_MODIFY_MAX"
+	default:
+		return fmt.Sprintf("EHostBindingPolicyModifyFlags(%d)", int32(e))
+	}
+}
+
 type EInitializeNewDomainFlags int32
 
 const (
 	EInitializeNewDomainFlags_None              EInitializeNewDomainFlags = 0
 	EInitializeNewDomainFlags_NoSecurityChanges EInitializeNewDomainFlags = 2
 )
+
+// String returns the EInitializeNewDomainFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EInitializeNewDomainFlags) String() string {
+	switch e {
+	case EInitializeNewDomainFlags_None:
+		return "EInitializeNewDomainFlags_None"
+	case EInitializeNewDomainFlags_NoSecurityChanges:
+		return "EInitializeNewDomainFlags_NoSecurityChanges"
+	default:
+		return fmt.Sprintf("EInitializeNewDomainFlags(%d)", int32(e))
+	}
+}
 
 type EMemoryAvailable int32
 
@@ -185,6 +514,21 @@ const (
 	EMemoryAvailableHigh    EMemoryAvailable = 3
 )
 
+// String returns the EMemoryAvailable constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EMemoryAvailable) String() string {
+	switch e {
+	case EMemoryAvailableLow:
+		return "EMemoryAvailableLow"
+	case EMemoryAvailableNeutral:
+		return "EMemoryAvailableNeutral"
+	case EMemoryAvailableHigh:
+		return "EMemoryAvailableHigh"
+	default:
+		return fmt.Sprintf("EMemoryAvailable(%d)", int32(e))
+	}
+}
+
 type EMemoryCriticalLevel int32
 
 const (
@@ -192,6 +536,21 @@ const (
 	EAppDomainCritical EMemoryCriticalLevel = 1
 	EProcessCritical   EMemoryCriticalLevel = 2
 )
+
+// String returns the EMemoryCriticalLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EMemoryCriticalLevel) String() string {
+	switch e {
+	case ETaskCritical:
+		return "ETaskCritical"
+	case EAppDomainCritical:
+		return "EAppDomainCritical"
+	case EProcessCritical:
+		return "EProcessCritical"
+	default:
+		return fmt.Sprintf("EMemoryCriticalLevel(%d)", int32(e))
+	}
+}
 
 type EPolicyAction int32
 
@@ -209,6 +568,37 @@ const (
 	MaxPolicyAction      EPolicyAction = 10
 )
 
+// String returns the EPolicyAction constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EPolicyAction) String() string {
+	switch e {
+	case ENoAction:
+		return "ENoAction"
+	case EThrowException:
+		return "EThrowException"
+	case EAbortThread:
+		return "EAbortThread"
+	case ERudeAbortThread:
+		return "ERudeAbortThread"
+	case EUnloadAppDomain:
+		return "EUnloadAppDomain"
+	case ERudeUnloadAppDomain:
+		return "ERudeUnloadAppDomain"
+	case EExitProcess:
+		return "EExitProcess"
+	case EFastExitProcess:
+		return "EFastExitProcess"
+	case ERudeExitProcess:
+		return "ERudeExitProcess"
+	case EDisableRuntime:
+		return "EDisableRuntime"
+	case MaxPolicyAction:
+		return "MaxPolicyAction"
+	default:
+		return fmt.Sprintf("EPolicyAction(%d)", int32(e))
+	}
+}
+
 type ESymbolReadingPolicy int32
 
 const (
@@ -216,6 +606,21 @@ const (
 	ESymbolReadingAlways        ESymbolReadingPolicy = 1
 	ESymbolReadingFullTrustOnly ESymbolReadingPolicy = 2
 )
+
+// String returns the ESymbolReadingPolicy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ESymbolReadingPolicy) String() string {
+	switch e {
+	case ESymbolReadingNever:
+		return "ESymbolReadingNever"
+	case ESymbolReadingAlways:
+		return "ESymbolReadingAlways"
+	case ESymbolReadingFullTrustOnly:
+		return "ESymbolReadingFullTrustOnly"
+	default:
+		return fmt.Sprintf("ESymbolReadingPolicy(%d)", int32(e))
+	}
+}
 
 type ETaskType int32
 
@@ -233,6 +638,37 @@ const (
 	TT_UNKNOWN                 ETaskType = -2147483648
 )
 
+// String returns the ETaskType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ETaskType) String() string {
+	switch e {
+	case TT_DEBUGGERHELPER:
+		return "TT_DEBUGGERHELPER"
+	case TT_GC:
+		return "TT_GC"
+	case TT_FINALIZER:
+		return "TT_FINALIZER"
+	case TT_THREADPOOL_TIMER:
+		return "TT_THREADPOOL_TIMER"
+	case TT_THREADPOOL_GATE:
+		return "TT_THREADPOOL_GATE"
+	case TT_THREADPOOL_WORKER:
+		return "TT_THREADPOOL_WORKER"
+	case TT_THREADPOOL_IOCOMPLETION:
+		return "TT_THREADPOOL_IOCOMPLETION"
+	case TT_ADUNLOAD:
+		return "TT_ADUNLOAD"
+	case TT_USER:
+		return "TT_USER"
+	case TT_THREADPOOL_WAIT:
+		return "TT_THREADPOOL_WAIT"
+	case TT_UNKNOWN:
+		return "TT_UNKNOWN"
+	default:
+		return fmt.Sprintf("ETaskType(%d)", int32(e))
+	}
+}
+
 type HOST_TYPE int32
 
 const (
@@ -241,12 +677,40 @@ const (
 	HOST_TYPE_CORFLAG   HOST_TYPE = 2
 )
 
+// String returns the HOST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HOST_TYPE) String() string {
+	switch e {
+	case HOST_TYPE_DEFAULT:
+		return "HOST_TYPE_DEFAULT"
+	case HOST_TYPE_APPLAUNCH:
+		return "HOST_TYPE_APPLAUNCH"
+	case HOST_TYPE_CORFLAG:
+		return "HOST_TYPE_CORFLAG"
+	default:
+		return fmt.Sprintf("HOST_TYPE(%d)", int32(e))
+	}
+}
+
 type MALLOC_TYPE int32
 
 const (
 	MALLOC_THREADSAFE MALLOC_TYPE = 1
 	MALLOC_EXECUTABLE MALLOC_TYPE = 2
 )
+
+// String returns the MALLOC_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MALLOC_TYPE) String() string {
+	switch e {
+	case MALLOC_THREADSAFE:
+		return "MALLOC_THREADSAFE"
+	case MALLOC_EXECUTABLE:
+		return "MALLOC_EXECUTABLE"
+	default:
+		return fmt.Sprintf("MALLOC_TYPE(%d)", int32(e))
+	}
+}
 
 type METAHOST_CONFIG_FLAGS int32
 
@@ -256,6 +720,23 @@ const (
 	METAHOST_CONFIG_FLAGS_LEGACY_V2_ACTIVATION_POLICY_FALSE METAHOST_CONFIG_FLAGS = 2
 	METAHOST_CONFIG_FLAGS_LEGACY_V2_ACTIVATION_POLICY_MASK  METAHOST_CONFIG_FLAGS = 3
 )
+
+// String returns the METAHOST_CONFIG_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e METAHOST_CONFIG_FLAGS) String() string {
+	switch e {
+	case METAHOST_CONFIG_FLAGS_LEGACY_V2_ACTIVATION_POLICY_UNSET:
+		return "METAHOST_CONFIG_FLAGS_LEGACY_V2_ACTIVATION_POLICY_UNSET"
+	case METAHOST_CONFIG_FLAGS_LEGACY_V2_ACTIVATION_POLICY_TRUE:
+		return "METAHOST_CONFIG_FLAGS_LEGACY_V2_ACTIVATION_POLICY_TRUE"
+	case METAHOST_CONFIG_FLAGS_LEGACY_V2_ACTIVATION_POLICY_FALSE:
+		return "METAHOST_CONFIG_FLAGS_LEGACY_V2_ACTIVATION_POLICY_FALSE"
+	case METAHOST_CONFIG_FLAGS_LEGACY_V2_ACTIVATION_POLICY_MASK:
+		return "METAHOST_CONFIG_FLAGS_LEGACY_V2_ACTIVATION_POLICY_MASK"
+	default:
+		return fmt.Sprintf("METAHOST_CONFIG_FLAGS(%d)", int32(e))
+	}
+}
 
 type METAHOST_POLICY_FLAGS int32
 
@@ -268,6 +749,29 @@ const (
 	METAHOST_POLICY_ENSURE_SKU_SUPPORTED   METAHOST_POLICY_FLAGS = 128
 	METAHOST_POLICY_IGNORE_ERROR_MODE      METAHOST_POLICY_FLAGS = 4096
 )
+
+// String returns the METAHOST_POLICY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e METAHOST_POLICY_FLAGS) String() string {
+	switch e {
+	case METAHOST_POLICY_HIGHCOMPAT:
+		return "METAHOST_POLICY_HIGHCOMPAT"
+	case METAHOST_POLICY_APPLY_UPGRADE_POLICY:
+		return "METAHOST_POLICY_APPLY_UPGRADE_POLICY"
+	case METAHOST_POLICY_EMULATE_EXE_LAUNCH:
+		return "METAHOST_POLICY_EMULATE_EXE_LAUNCH"
+	case METAHOST_POLICY_SHOW_ERROR_DIALOG:
+		return "METAHOST_POLICY_SHOW_ERROR_DIALOG"
+	case METAHOST_POLICY_USE_PROCESS_IMAGE_PATH:
+		return "METAHOST_POLICY_USE_PROCESS_IMAGE_PATH"
+	case METAHOST_POLICY_ENSURE_SKU_SUPPORTED:
+		return "METAHOST_POLICY_ENSURE_SKU_SUPPORTED"
+	case METAHOST_POLICY_IGNORE_ERROR_MODE:
+		return "METAHOST_POLICY_IGNORE_ERROR_MODE"
+	default:
+		return fmt.Sprintf("METAHOST_POLICY_FLAGS(%d)", int32(e))
+	}
+}
 
 type RUNTIME_INFO_FLAGS int32
 
@@ -282,6 +786,33 @@ const (
 	RUNTIME_INFO_IGNORE_ERROR_MODE      RUNTIME_INFO_FLAGS = 4096
 	RUNTIME_INFO_REQUEST_ARM64          RUNTIME_INFO_FLAGS = 8192
 )
+
+// String returns the RUNTIME_INFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RUNTIME_INFO_FLAGS) String() string {
+	switch e {
+	case RUNTIME_INFO_UPGRADE_VERSION:
+		return "RUNTIME_INFO_UPGRADE_VERSION"
+	case RUNTIME_INFO_REQUEST_IA64:
+		return "RUNTIME_INFO_REQUEST_IA64"
+	case RUNTIME_INFO_REQUEST_AMD64:
+		return "RUNTIME_INFO_REQUEST_AMD64"
+	case RUNTIME_INFO_REQUEST_X86:
+		return "RUNTIME_INFO_REQUEST_X86"
+	case RUNTIME_INFO_DONT_RETURN_DIRECTORY:
+		return "RUNTIME_INFO_DONT_RETURN_DIRECTORY"
+	case RUNTIME_INFO_DONT_RETURN_VERSION:
+		return "RUNTIME_INFO_DONT_RETURN_VERSION"
+	case RUNTIME_INFO_DONT_SHOW_ERROR_DIALOG:
+		return "RUNTIME_INFO_DONT_SHOW_ERROR_DIALOG"
+	case RUNTIME_INFO_IGNORE_ERROR_MODE:
+		return "RUNTIME_INFO_IGNORE_ERROR_MODE"
+	case RUNTIME_INFO_REQUEST_ARM64:
+		return "RUNTIME_INFO_REQUEST_ARM64"
+	default:
+		return fmt.Sprintf("RUNTIME_INFO_FLAGS(%d)", int32(e))
+	}
+}
 
 type STARTUP_FLAGS int32
 
@@ -304,6 +835,45 @@ const (
 	STARTUP_ARM                                   STARTUP_FLAGS = 4194304
 )
 
+// String returns the STARTUP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STARTUP_FLAGS) String() string {
+	switch e {
+	case STARTUP_CONCURRENT_GC:
+		return "STARTUP_CONCURRENT_GC"
+	case STARTUP_LOADER_OPTIMIZATION_MASK:
+		return "STARTUP_LOADER_OPTIMIZATION_MASK"
+	case STARTUP_LOADER_OPTIMIZATION_SINGLE_DOMAIN:
+		return "STARTUP_LOADER_OPTIMIZATION_SINGLE_DOMAIN"
+	case STARTUP_LOADER_OPTIMIZATION_MULTI_DOMAIN:
+		return "STARTUP_LOADER_OPTIMIZATION_MULTI_DOMAIN"
+	case STARTUP_LOADER_SAFEMODE:
+		return "STARTUP_LOADER_SAFEMODE"
+	case STARTUP_LOADER_SETPREFERENCE:
+		return "STARTUP_LOADER_SETPREFERENCE"
+	case STARTUP_SERVER_GC:
+		return "STARTUP_SERVER_GC"
+	case STARTUP_HOARD_GC_VM:
+		return "STARTUP_HOARD_GC_VM"
+	case STARTUP_SINGLE_VERSION_HOSTING_INTERFACE:
+		return "STARTUP_SINGLE_VERSION_HOSTING_INTERFACE"
+	case STARTUP_LEGACY_IMPERSONATION:
+		return "STARTUP_LEGACY_IMPERSONATION"
+	case STARTUP_DISABLE_COMMITTHREADSTACK:
+		return "STARTUP_DISABLE_COMMITTHREADSTACK"
+	case STARTUP_ALWAYSFLOW_IMPERSONATION:
+		return "STARTUP_ALWAYSFLOW_IMPERSONATION"
+	case STARTUP_TRIM_GC_COMMIT:
+		return "STARTUP_TRIM_GC_COMMIT"
+	case STARTUP_ETW:
+		return "STARTUP_ETW"
+	case STARTUP_ARM:
+		return "STARTUP_ARM"
+	default:
+		return fmt.Sprintf("STARTUP_FLAGS(%d)", int32(e))
+	}
+}
+
 type StackOverflowType int32
 
 const (
@@ -312,6 +882,21 @@ const (
 	SO_Other     StackOverflowType = 2
 )
 
+// String returns the StackOverflowType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StackOverflowType) String() string {
+	switch e {
+	case SO_Managed:
+		return "SO_Managed"
+	case SO_ClrEngine:
+		return "SO_ClrEngine"
+	case SO_Other:
+		return "SO_Other"
+	default:
+		return fmt.Sprintf("StackOverflowType(%d)", int32(e))
+	}
+}
+
 type WAIT_OPTION int32
 
 const (
@@ -319,3 +904,18 @@ const (
 	WAIT_ALERTABLE     WAIT_OPTION = 2
 	WAIT_NOTINDEADLOCK WAIT_OPTION = 4
 )
+
+// String returns the WAIT_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WAIT_OPTION) String() string {
+	switch e {
+	case WAIT_MSGPUMP:
+		return "WAIT_MSGPUMP"
+	case WAIT_ALERTABLE:
+		return "WAIT_ALERTABLE"
+	case WAIT_NOTINDEADLOCK:
+		return "WAIT_NOTINDEADLOCK"
+	default:
+		return fmt.Sprintf("WAIT_OPTION(%d)", int32(e))
+	}
+}

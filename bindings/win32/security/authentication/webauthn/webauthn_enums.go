@@ -4,12 +4,29 @@
 
 package webauthn
 
+import (
+	"fmt"
+)
+
 type AUTHENTICATOR_STATE int32
 
 const (
 	AuthenticatorState_Disabled AUTHENTICATOR_STATE = 0
 	AuthenticatorState_Enabled  AUTHENTICATOR_STATE = 1
 )
+
+// String returns the AUTHENTICATOR_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHENTICATOR_STATE) String() string {
+	switch e {
+	case AuthenticatorState_Disabled:
+		return "AuthenticatorState_Disabled"
+	case AuthenticatorState_Enabled:
+		return "AuthenticatorState_Enabled"
+	default:
+		return fmt.Sprintf("AUTHENTICATOR_STATE(%d)", int32(e))
+	}
+}
 
 type EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE int32
 
@@ -19,6 +36,21 @@ const (
 	PluginAuthenticatorState_Enabled  EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE = 2
 )
 
+// String returns the EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE) String() string {
+	switch e {
+	case PluginAuthenticatorState_Unknown:
+		return "PluginAuthenticatorState_Unknown"
+	case PluginAuthenticatorState_Disabled:
+		return "PluginAuthenticatorState_Disabled"
+	case PluginAuthenticatorState_Enabled:
+		return "PluginAuthenticatorState_Enabled"
+	default:
+		return fmt.Sprintf("EXPERIMENTAL_PLUGIN_AUTHENTICATOR_STATE(%d)", int32(e))
+	}
+}
+
 type EXPERIMENTAL_WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE int32
 
 const (
@@ -27,12 +59,40 @@ const (
 	GetPubKey  EXPERIMENTAL_WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE = 3
 )
 
+// String returns the EXPERIMENTAL_WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPERIMENTAL_WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE) String() string {
+	switch e {
+	case PerformUv:
+		return "PerformUv"
+	case GetUvCount:
+		return "GetUvCount"
+	case GetPubKey:
+		return "GetPubKey"
+	default:
+		return fmt.Sprintf("EXPERIMENTAL_WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE(%d)", int32(e))
+	}
+}
+
 type PLUGIN_LOCK_STATUS int32
 
 const (
 	PluginLocked   PLUGIN_LOCK_STATUS = 0
 	PluginUnlocked PLUGIN_LOCK_STATUS = 1
 )
+
+// String returns the PLUGIN_LOCK_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PLUGIN_LOCK_STATUS) String() string {
+	switch e {
+	case PluginLocked:
+		return "PluginLocked"
+	case PluginUnlocked:
+		return "PluginUnlocked"
+	default:
+		return fmt.Sprintf("PLUGIN_LOCK_STATUS(%d)", int32(e))
+	}
+}
 
 type WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE int32
 
@@ -42,8 +102,34 @@ const (
 	GetPublicKey             WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE = 3
 )
 
+// String returns the WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE) String() string {
+	switch e {
+	case PerformUserVerification:
+		return "PerformUserVerification"
+	case GetUserVerificationCount:
+		return "GetUserVerificationCount"
+	case GetPublicKey:
+		return "GetPublicKey"
+	default:
+		return fmt.Sprintf("WEBAUTHN_PLUGIN_PERFORM_UV_OPERATION_TYPE(%d)", int32(e))
+	}
+}
+
 type WEBAUTHN_PLUGIN_REQUEST_TYPE int32
 
 const (
 	WEBAUTHN_PLUGIN_REQUEST_TYPE_CTAP2_CBOR WEBAUTHN_PLUGIN_REQUEST_TYPE = 1
 )
+
+// String returns the WEBAUTHN_PLUGIN_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WEBAUTHN_PLUGIN_REQUEST_TYPE) String() string {
+	switch e {
+	case WEBAUTHN_PLUGIN_REQUEST_TYPE_CTAP2_CBOR:
+		return "WEBAUTHN_PLUGIN_REQUEST_TYPE_CTAP2_CBOR"
+	default:
+		return fmt.Sprintf("WEBAUTHN_PLUGIN_REQUEST_TYPE(%d)", int32(e))
+	}
+}

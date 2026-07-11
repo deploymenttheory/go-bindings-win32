@@ -4,6 +4,10 @@
 
 package mobiledevicemanagementregistration
 
+import (
+	"fmt"
+)
+
 // REGISTRATION_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/mdmregistration/ne-mdmregistration-registration_information_class
 type REGISTRATION_INFORMATION_CLASS int32
 
@@ -11,3 +15,16 @@ const (
 	DeviceRegistrationBasicInfo REGISTRATION_INFORMATION_CLASS = 1
 	MaxDeviceInfoClass          REGISTRATION_INFORMATION_CLASS = 2
 )
+
+// String returns the REGISTRATION_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REGISTRATION_INFORMATION_CLASS) String() string {
+	switch e {
+	case DeviceRegistrationBasicInfo:
+		return "DeviceRegistrationBasicInfo"
+	case MaxDeviceInfoClass:
+		return "MaxDeviceInfoClass"
+	default:
+		return fmt.Sprintf("REGISTRATION_INFORMATION_CLASS(%d)", int32(e))
+	}
+}

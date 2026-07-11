@@ -4,6 +4,11 @@
 
 package credentials
 
+import (
+	"fmt"
+	"strings"
+)
+
 // CREDSPP_SUBMIT_TYPE: https://learn.microsoft.com/windows/win32/api/credssp/ne-credssp-credspp_submit_type
 type CREDSPP_SUBMIT_TYPE int32
 
@@ -16,6 +21,28 @@ const (
 	CredsspCredEx              CREDSPP_SUBMIT_TYPE = 100
 )
 
+// String returns the CREDSPP_SUBMIT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREDSPP_SUBMIT_TYPE) String() string {
+	switch e {
+	case CredsspPasswordCreds:
+		return "CredsspPasswordCreds"
+	case CredsspSchannelCreds:
+		return "CredsspSchannelCreds"
+	case CredsspCertificateCreds:
+		return "CredsspCertificateCreds"
+	case CredsspSubmitBufferBoth:
+		return "CredsspSubmitBufferBoth"
+	case CredsspSubmitBufferBothOld:
+		return "CredsspSubmitBufferBothOld"
+	case CredsspCredEx:
+		return "CredsspCredEx"
+	default:
+		return fmt.Sprintf("CREDSPP_SUBMIT_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CREDUIWIN_FLAGS uint32
 
 const (
@@ -30,6 +57,44 @@ const (
 	CREDUIWIN_PACK_32_WOW            CREDUIWIN_FLAGS = 268435456
 )
 
+// String returns the CREDUIWIN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREDUIWIN_FLAGS) String() string {
+	var parts []string
+	if e&CREDUIWIN_GENERIC != 0 {
+		parts = append(parts, "CREDUIWIN_GENERIC")
+	}
+	if e&CREDUIWIN_CHECKBOX != 0 {
+		parts = append(parts, "CREDUIWIN_CHECKBOX")
+	}
+	if e&CREDUIWIN_AUTHPACKAGE_ONLY != 0 {
+		parts = append(parts, "CREDUIWIN_AUTHPACKAGE_ONLY")
+	}
+	if e&CREDUIWIN_IN_CRED_ONLY != 0 {
+		parts = append(parts, "CREDUIWIN_IN_CRED_ONLY")
+	}
+	if e&CREDUIWIN_ENUMERATE_ADMINS != 0 {
+		parts = append(parts, "CREDUIWIN_ENUMERATE_ADMINS")
+	}
+	if e&CREDUIWIN_ENUMERATE_CURRENT_USER != 0 {
+		parts = append(parts, "CREDUIWIN_ENUMERATE_CURRENT_USER")
+	}
+	if e&CREDUIWIN_SECURE_PROMPT != 0 {
+		parts = append(parts, "CREDUIWIN_SECURE_PROMPT")
+	}
+	if e&CREDUIWIN_PREPROMPTING != 0 {
+		parts = append(parts, "CREDUIWIN_PREPROMPTING")
+	}
+	if e&CREDUIWIN_PACK_32_WOW != 0 {
+		parts = append(parts, "CREDUIWIN_PACK_32_WOW")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CREDUI_FLAGS uint32
 
 const (
@@ -52,12 +117,88 @@ const (
 	CREDUI_FLAGS_VALIDATE_USERNAME           CREDUI_FLAGS = 1024
 )
 
+// String returns the CREDUI_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREDUI_FLAGS) String() string {
+	var parts []string
+	if e&CREDUI_FLAGS_ALWAYS_SHOW_UI != 0 {
+		parts = append(parts, "CREDUI_FLAGS_ALWAYS_SHOW_UI")
+	}
+	if e&CREDUI_FLAGS_COMPLETE_USERNAME != 0 {
+		parts = append(parts, "CREDUI_FLAGS_COMPLETE_USERNAME")
+	}
+	if e&CREDUI_FLAGS_DO_NOT_PERSIST != 0 {
+		parts = append(parts, "CREDUI_FLAGS_DO_NOT_PERSIST")
+	}
+	if e&CREDUI_FLAGS_EXCLUDE_CERTIFICATES != 0 {
+		parts = append(parts, "CREDUI_FLAGS_EXCLUDE_CERTIFICATES")
+	}
+	if e&CREDUI_FLAGS_EXPECT_CONFIRMATION != 0 {
+		parts = append(parts, "CREDUI_FLAGS_EXPECT_CONFIRMATION")
+	}
+	if e&CREDUI_FLAGS_GENERIC_CREDENTIALS != 0 {
+		parts = append(parts, "CREDUI_FLAGS_GENERIC_CREDENTIALS")
+	}
+	if e&CREDUI_FLAGS_INCORRECT_PASSWORD != 0 {
+		parts = append(parts, "CREDUI_FLAGS_INCORRECT_PASSWORD")
+	}
+	if e&CREDUI_FLAGS_KEEP_USERNAME != 0 {
+		parts = append(parts, "CREDUI_FLAGS_KEEP_USERNAME")
+	}
+	if e&CREDUI_FLAGS_PASSWORD_ONLY_OK != 0 {
+		parts = append(parts, "CREDUI_FLAGS_PASSWORD_ONLY_OK")
+	}
+	if e&CREDUI_FLAGS_PERSIST != 0 {
+		parts = append(parts, "CREDUI_FLAGS_PERSIST")
+	}
+	if e&CREDUI_FLAGS_REQUEST_ADMINISTRATOR != 0 {
+		parts = append(parts, "CREDUI_FLAGS_REQUEST_ADMINISTRATOR")
+	}
+	if e&CREDUI_FLAGS_REQUIRE_CERTIFICATE != 0 {
+		parts = append(parts, "CREDUI_FLAGS_REQUIRE_CERTIFICATE")
+	}
+	if e&CREDUI_FLAGS_REQUIRE_SMARTCARD != 0 {
+		parts = append(parts, "CREDUI_FLAGS_REQUIRE_SMARTCARD")
+	}
+	if e&CREDUI_FLAGS_SERVER_CREDENTIAL != 0 {
+		parts = append(parts, "CREDUI_FLAGS_SERVER_CREDENTIAL")
+	}
+	if e&CREDUI_FLAGS_SHOW_SAVE_CHECK_BOX != 0 {
+		parts = append(parts, "CREDUI_FLAGS_SHOW_SAVE_CHECK_BOX")
+	}
+	if e&CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS != 0 {
+		parts = append(parts, "CREDUI_FLAGS_USERNAME_TARGET_CREDENTIALS")
+	}
+	if e&CREDUI_FLAGS_VALIDATE_USERNAME != 0 {
+		parts = append(parts, "CREDUI_FLAGS_VALIDATE_USERNAME")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CRED_ENUMERATE_FLAGS uint32
 
 const (
 	CRED_ENUMERATE_ALL_CREDENTIALS CRED_ENUMERATE_FLAGS = 1
 )
 
+// String returns the CRED_ENUMERATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRED_ENUMERATE_FLAGS) String() string {
+	var parts []string
+	if e&CRED_ENUMERATE_ALL_CREDENTIALS != 0 {
+		parts = append(parts, "CRED_ENUMERATE_ALL_CREDENTIALS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CRED_FLAGS uint32
 
 const (
@@ -73,6 +214,46 @@ const (
 	CRED_FLAGS_VALID_INPUT_FLAGS    CRED_FLAGS = 61599
 )
 
+// String returns the CRED_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRED_FLAGS) String() string {
+	var parts []string
+	if e&CRED_FLAGS_PASSWORD_FOR_CERT != 0 {
+		parts = append(parts, "CRED_FLAGS_PASSWORD_FOR_CERT")
+	}
+	if e&CRED_FLAGS_PROMPT_NOW != 0 {
+		parts = append(parts, "CRED_FLAGS_PROMPT_NOW")
+	}
+	if e&CRED_FLAGS_USERNAME_TARGET != 0 {
+		parts = append(parts, "CRED_FLAGS_USERNAME_TARGET")
+	}
+	if e&CRED_FLAGS_OWF_CRED_BLOB != 0 {
+		parts = append(parts, "CRED_FLAGS_OWF_CRED_BLOB")
+	}
+	if e&CRED_FLAGS_REQUIRE_CONFIRMATION != 0 {
+		parts = append(parts, "CRED_FLAGS_REQUIRE_CONFIRMATION")
+	}
+	if e&CRED_FLAGS_WILDCARD_MATCH != 0 {
+		parts = append(parts, "CRED_FLAGS_WILDCARD_MATCH")
+	}
+	if e&CRED_FLAGS_VSM_PROTECTED != 0 {
+		parts = append(parts, "CRED_FLAGS_VSM_PROTECTED")
+	}
+	if e&CRED_FLAGS_NGC_CERT != 0 {
+		parts = append(parts, "CRED_FLAGS_NGC_CERT")
+	}
+	if e&CRED_FLAGS_VALID_FLAGS != 0 {
+		parts = append(parts, "CRED_FLAGS_VALID_FLAGS")
+	}
+	if e&CRED_FLAGS_VALID_INPUT_FLAGS != 0 {
+		parts = append(parts, "CRED_FLAGS_VALID_INPUT_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CRED_MARSHAL_TYPE: https://learn.microsoft.com/windows/win32/api/wincred/ne-wincred-cred_marshal_type
 type CRED_MARSHAL_TYPE int32
 
@@ -84,6 +265,26 @@ const (
 	BinaryBlobForSystem          CRED_MARSHAL_TYPE = 5
 )
 
+// String returns the CRED_MARSHAL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRED_MARSHAL_TYPE) String() string {
+	switch e {
+	case CertCredential:
+		return "CertCredential"
+	case UsernameTargetCredential:
+		return "UsernameTargetCredential"
+	case BinaryBlobCredential:
+		return "BinaryBlobCredential"
+	case UsernameForPackedCredentials:
+		return "UsernameForPackedCredentials"
+	case BinaryBlobForSystem:
+		return "BinaryBlobForSystem"
+	default:
+		return fmt.Sprintf("CRED_MARSHAL_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CRED_PACK_FLAGS uint32
 
 const (
@@ -92,6 +293,28 @@ const (
 	CRED_PACK_GENERIC_CREDENTIALS     CRED_PACK_FLAGS = 4
 	CRED_PACK_ID_PROVIDER_CREDENTIALS CRED_PACK_FLAGS = 8
 )
+
+// String returns the CRED_PACK_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRED_PACK_FLAGS) String() string {
+	var parts []string
+	if e&CRED_PACK_PROTECTED_CREDENTIALS != 0 {
+		parts = append(parts, "CRED_PACK_PROTECTED_CREDENTIALS")
+	}
+	if e&CRED_PACK_WOW_BUFFER != 0 {
+		parts = append(parts, "CRED_PACK_WOW_BUFFER")
+	}
+	if e&CRED_PACK_GENERIC_CREDENTIALS != 0 {
+		parts = append(parts, "CRED_PACK_GENERIC_CREDENTIALS")
+	}
+	if e&CRED_PACK_ID_PROVIDER_CREDENTIALS != 0 {
+		parts = append(parts, "CRED_PACK_ID_PROVIDER_CREDENTIALS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CRED_PERSIST uint32
 
@@ -102,6 +325,23 @@ const (
 	CRED_PERSIST_ENTERPRISE    CRED_PERSIST = 3
 )
 
+// String returns the CRED_PERSIST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRED_PERSIST) String() string {
+	switch e {
+	case CRED_PERSIST_NONE:
+		return "CRED_PERSIST_NONE"
+	case CRED_PERSIST_SESSION:
+		return "CRED_PERSIST_SESSION"
+	case CRED_PERSIST_LOCAL_MACHINE:
+		return "CRED_PERSIST_LOCAL_MACHINE"
+	case CRED_PERSIST_ENTERPRISE:
+		return "CRED_PERSIST_ENTERPRISE"
+	default:
+		return fmt.Sprintf("CRED_PERSIST(%d)", uint32(e))
+	}
+}
+
 // CRED_PROTECTION_TYPE: https://learn.microsoft.com/windows/win32/api/wincred/ne-wincred-cred_protection_type
 type CRED_PROTECTION_TYPE int32
 
@@ -111,6 +351,23 @@ const (
 	CredTrustedProtection   CRED_PROTECTION_TYPE = 2
 	CredForSystemProtection CRED_PROTECTION_TYPE = 3
 )
+
+// String returns the CRED_PROTECTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRED_PROTECTION_TYPE) String() string {
+	switch e {
+	case CredUnprotected:
+		return "CredUnprotected"
+	case CredUserProtection:
+		return "CredUserProtection"
+	case CredTrustedProtection:
+		return "CredTrustedProtection"
+	case CredForSystemProtection:
+		return "CredForSystemProtection"
+	default:
+		return fmt.Sprintf("CRED_PROTECTION_TYPE(%d)", int32(e))
+	}
+}
 
 type CRED_TYPE uint32
 
@@ -125,7 +382,33 @@ const (
 	CRED_TYPE_MAXIMUM_EX              CRED_TYPE = 1007
 )
 
+// String returns the CRED_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRED_TYPE) String() string {
+	switch e {
+	case CRED_TYPE_GENERIC:
+		return "CRED_TYPE_GENERIC"
+	case CRED_TYPE_DOMAIN_PASSWORD:
+		return "CRED_TYPE_DOMAIN_PASSWORD"
+	case CRED_TYPE_DOMAIN_CERTIFICATE:
+		return "CRED_TYPE_DOMAIN_CERTIFICATE"
+	case CRED_TYPE_DOMAIN_VISIBLE_PASSWORD:
+		return "CRED_TYPE_DOMAIN_VISIBLE_PASSWORD"
+	case CRED_TYPE_GENERIC_CERTIFICATE:
+		return "CRED_TYPE_GENERIC_CERTIFICATE"
+	case CRED_TYPE_DOMAIN_EXTENDED:
+		return "CRED_TYPE_DOMAIN_EXTENDED"
+	case CRED_TYPE_MAXIMUM:
+		return "CRED_TYPE_MAXIMUM"
+	case CRED_TYPE_MAXIMUM_EX:
+		return "CRED_TYPE_MAXIMUM_EX"
+	default:
+		return fmt.Sprintf("CRED_TYPE(%d)", uint32(e))
+	}
+}
+
 // KeyCredentialManagerOperationErrorStates: https://learn.microsoft.com/windows/win32/api/keycredmgr/ne-keycredmgr-keycredentialmanageroperationerrorstates
+// Bitmask — values may be combined with |.
 type KeyCredentialManagerOperationErrorStates int32
 
 const (
@@ -139,6 +422,37 @@ const (
 	KeyCredentialManagerOperationErrorStatePinExistsFailure     KeyCredentialManagerOperationErrorStates = 64
 )
 
+// String returns the KeyCredentialManagerOperationErrorStates constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KeyCredentialManagerOperationErrorStates) String() string {
+	var parts []string
+	if e&KeyCredentialManagerOperationErrorStateDeviceJoinFailure != 0 {
+		parts = append(parts, "KeyCredentialManagerOperationErrorStateDeviceJoinFailure")
+	}
+	if e&KeyCredentialManagerOperationErrorStateTokenFailure != 0 {
+		parts = append(parts, "KeyCredentialManagerOperationErrorStateTokenFailure")
+	}
+	if e&KeyCredentialManagerOperationErrorStateCertificateFailure != 0 {
+		parts = append(parts, "KeyCredentialManagerOperationErrorStateCertificateFailure")
+	}
+	if e&KeyCredentialManagerOperationErrorStateRemoteSessionFailure != 0 {
+		parts = append(parts, "KeyCredentialManagerOperationErrorStateRemoteSessionFailure")
+	}
+	if e&KeyCredentialManagerOperationErrorStatePolicyFailure != 0 {
+		parts = append(parts, "KeyCredentialManagerOperationErrorStatePolicyFailure")
+	}
+	if e&KeyCredentialManagerOperationErrorStateHardwareFailure != 0 {
+		parts = append(parts, "KeyCredentialManagerOperationErrorStateHardwareFailure")
+	}
+	if e&KeyCredentialManagerOperationErrorStatePinExistsFailure != 0 {
+		parts = append(parts, "KeyCredentialManagerOperationErrorStatePinExistsFailure")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // KeyCredentialManagerOperationType: https://learn.microsoft.com/windows/win32/api/keycredmgr/ne-keycredmgr-keycredentialmanageroperationtype
 type KeyCredentialManagerOperationType int32
 
@@ -148,6 +462,21 @@ const (
 	KeyCredentialManagerPinReset     KeyCredentialManagerOperationType = 2
 )
 
+// String returns the KeyCredentialManagerOperationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KeyCredentialManagerOperationType) String() string {
+	switch e {
+	case KeyCredentialManagerProvisioning:
+		return "KeyCredentialManagerProvisioning"
+	case KeyCredentialManagerPinChange:
+		return "KeyCredentialManagerPinChange"
+	case KeyCredentialManagerPinReset:
+		return "KeyCredentialManagerPinReset"
+	default:
+		return fmt.Sprintf("KeyCredentialManagerOperationType(%d)", int32(e))
+	}
+}
+
 type READER_SEL_REQUEST_MATCH_TYPE int32
 
 const (
@@ -156,12 +485,40 @@ const (
 	RSR_MATCH_TYPE_ALL_CARDS            READER_SEL_REQUEST_MATCH_TYPE = 3
 )
 
+// String returns the READER_SEL_REQUEST_MATCH_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e READER_SEL_REQUEST_MATCH_TYPE) String() string {
+	switch e {
+	case RSR_MATCH_TYPE_READER_AND_CONTAINER:
+		return "RSR_MATCH_TYPE_READER_AND_CONTAINER"
+	case RSR_MATCH_TYPE_SERIAL_NUMBER:
+		return "RSR_MATCH_TYPE_SERIAL_NUMBER"
+	case RSR_MATCH_TYPE_ALL_CARDS:
+		return "RSR_MATCH_TYPE_ALL_CARDS"
+	default:
+		return fmt.Sprintf("READER_SEL_REQUEST_MATCH_TYPE(%d)", int32(e))
+	}
+}
+
 type SCARD_SCOPE uint32
 
 const (
 	SCARD_SCOPE_USER   SCARD_SCOPE = 0
 	SCARD_SCOPE_SYSTEM SCARD_SCOPE = 2
 )
+
+// String returns the SCARD_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCARD_SCOPE) String() string {
+	switch e {
+	case SCARD_SCOPE_USER:
+		return "SCARD_SCOPE_USER"
+	case SCARD_SCOPE_SYSTEM:
+		return "SCARD_SCOPE_SYSTEM"
+	default:
+		return fmt.Sprintf("SCARD_SCOPE(%d)", uint32(e))
+	}
+}
 
 type SCARD_STATE uint32
 
@@ -178,3 +535,34 @@ const (
 	SCARD_STATE_CHANGED     SCARD_STATE = 2
 	SCARD_STATE_UNKNOWN     SCARD_STATE = 4
 )
+
+// String returns the SCARD_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCARD_STATE) String() string {
+	switch e {
+	case SCARD_STATE_UNAWARE:
+		return "SCARD_STATE_UNAWARE"
+	case SCARD_STATE_IGNORE:
+		return "SCARD_STATE_IGNORE"
+	case SCARD_STATE_UNAVAILABLE:
+		return "SCARD_STATE_UNAVAILABLE"
+	case SCARD_STATE_EMPTY:
+		return "SCARD_STATE_EMPTY"
+	case SCARD_STATE_PRESENT:
+		return "SCARD_STATE_PRESENT"
+	case SCARD_STATE_ATRMATCH:
+		return "SCARD_STATE_ATRMATCH"
+	case SCARD_STATE_EXCLUSIVE:
+		return "SCARD_STATE_EXCLUSIVE"
+	case SCARD_STATE_INUSE:
+		return "SCARD_STATE_INUSE"
+	case SCARD_STATE_MUTE:
+		return "SCARD_STATE_MUTE"
+	case SCARD_STATE_CHANGED:
+		return "SCARD_STATE_CHANGED"
+	case SCARD_STATE_UNKNOWN:
+		return "SCARD_STATE_UNKNOWN"
+	default:
+		return fmt.Sprintf("SCARD_STATE(%d)", uint32(e))
+	}
+}

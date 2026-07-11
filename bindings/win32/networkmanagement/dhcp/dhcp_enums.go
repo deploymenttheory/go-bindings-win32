@@ -4,6 +4,10 @@
 
 package dhcp
 
+import (
+	"fmt"
+)
+
 // DHCPV6_STATELESS_PARAM_TYPE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcpv6_stateless_param_type
 type DHCPV6_STATELESS_PARAM_TYPE int32
 
@@ -11,6 +15,19 @@ const (
 	DhcpStatelessPurgeInterval DHCPV6_STATELESS_PARAM_TYPE = 1
 	DhcpStatelessStatus        DHCPV6_STATELESS_PARAM_TYPE = 2
 )
+
+// String returns the DHCPV6_STATELESS_PARAM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCPV6_STATELESS_PARAM_TYPE) String() string {
+	switch e {
+	case DhcpStatelessPurgeInterval:
+		return "DhcpStatelessPurgeInterval"
+	case DhcpStatelessStatus:
+		return "DhcpStatelessStatus"
+	default:
+		return fmt.Sprintf("DHCPV6_STATELESS_PARAM_TYPE(%d)", int32(e))
+	}
+}
 
 // DHCP_FAILOVER_MODE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_failover_mode
 type DHCP_FAILOVER_MODE int32
@@ -20,6 +37,19 @@ const (
 	HotStandby  DHCP_FAILOVER_MODE = 1
 )
 
+// String returns the DHCP_FAILOVER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_FAILOVER_MODE) String() string {
+	switch e {
+	case LoadBalance:
+		return "LoadBalance"
+	case HotStandby:
+		return "HotStandby"
+	default:
+		return fmt.Sprintf("DHCP_FAILOVER_MODE(%d)", int32(e))
+	}
+}
+
 // DHCP_FAILOVER_SERVER: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_failover_server
 type DHCP_FAILOVER_SERVER int32
 
@@ -27,6 +57,19 @@ const (
 	PrimaryServer   DHCP_FAILOVER_SERVER = 0
 	SecondaryServer DHCP_FAILOVER_SERVER = 1
 )
+
+// String returns the DHCP_FAILOVER_SERVER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_FAILOVER_SERVER) String() string {
+	switch e {
+	case PrimaryServer:
+		return "PrimaryServer"
+	case SecondaryServer:
+		return "SecondaryServer"
+	default:
+		return fmt.Sprintf("DHCP_FAILOVER_SERVER(%d)", int32(e))
+	}
+}
 
 // DHCP_FILTER_LIST_TYPE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_filter_list_type
 type DHCP_FILTER_LIST_TYPE int32
@@ -36,6 +79,19 @@ const (
 	Allow DHCP_FILTER_LIST_TYPE = 1
 )
 
+// String returns the DHCP_FILTER_LIST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_FILTER_LIST_TYPE) String() string {
+	switch e {
+	case Deny:
+		return "Deny"
+	case Allow:
+		return "Allow"
+	default:
+		return fmt.Sprintf("DHCP_FILTER_LIST_TYPE(%d)", int32(e))
+	}
+}
+
 // DHCP_FORCE_FLAG: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_force_flag
 type DHCP_FORCE_FLAG int32
 
@@ -44,6 +100,21 @@ const (
 	DhcpNoForce       DHCP_FORCE_FLAG = 1
 	DhcpFailoverForce DHCP_FORCE_FLAG = 2
 )
+
+// String returns the DHCP_FORCE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_FORCE_FLAG) String() string {
+	switch e {
+	case DhcpFullForce:
+		return "DhcpFullForce"
+	case DhcpNoForce:
+		return "DhcpNoForce"
+	case DhcpFailoverForce:
+		return "DhcpFailoverForce"
+	default:
+		return fmt.Sprintf("DHCP_FORCE_FLAG(%d)", int32(e))
+	}
+}
 
 // DHCP_OPTION_DATA_TYPE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_option_data_type
 type DHCP_OPTION_DATA_TYPE int32
@@ -60,6 +131,33 @@ const (
 	DhcpIpv6AddressOption      DHCP_OPTION_DATA_TYPE = 8
 )
 
+// String returns the DHCP_OPTION_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_OPTION_DATA_TYPE) String() string {
+	switch e {
+	case DhcpByteOption:
+		return "DhcpByteOption"
+	case DhcpWordOption:
+		return "DhcpWordOption"
+	case DhcpDWordOption:
+		return "DhcpDWordOption"
+	case DhcpDWordDWordOption:
+		return "DhcpDWordDWordOption"
+	case DhcpIpAddressOption:
+		return "DhcpIpAddressOption"
+	case DhcpStringDataOption:
+		return "DhcpStringDataOption"
+	case DhcpBinaryDataOption:
+		return "DhcpBinaryDataOption"
+	case DhcpEncapsulatedDataOption:
+		return "DhcpEncapsulatedDataOption"
+	case DhcpIpv6AddressOption:
+		return "DhcpIpv6AddressOption"
+	default:
+		return fmt.Sprintf("DHCP_OPTION_DATA_TYPE(%d)", int32(e))
+	}
+}
+
 // DHCP_OPTION_SCOPE_TYPE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_option_scope_type
 type DHCP_OPTION_SCOPE_TYPE int32
 
@@ -71,6 +169,25 @@ const (
 	DhcpMScopeOptions   DHCP_OPTION_SCOPE_TYPE = 4
 )
 
+// String returns the DHCP_OPTION_SCOPE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_OPTION_SCOPE_TYPE) String() string {
+	switch e {
+	case DhcpDefaultOptions:
+		return "DhcpDefaultOptions"
+	case DhcpGlobalOptions:
+		return "DhcpGlobalOptions"
+	case DhcpSubnetOptions:
+		return "DhcpSubnetOptions"
+	case DhcpReservedOptions:
+		return "DhcpReservedOptions"
+	case DhcpMScopeOptions:
+		return "DhcpMScopeOptions"
+	default:
+		return fmt.Sprintf("DHCP_OPTION_SCOPE_TYPE(%d)", int32(e))
+	}
+}
+
 // DHCP_OPTION_SCOPE_TYPE6: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_option_scope_type6
 type DHCP_OPTION_SCOPE_TYPE6 int32
 
@@ -81,6 +198,23 @@ const (
 	DhcpGlobalOptions6   DHCP_OPTION_SCOPE_TYPE6 = 3
 )
 
+// String returns the DHCP_OPTION_SCOPE_TYPE6 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_OPTION_SCOPE_TYPE6) String() string {
+	switch e {
+	case DhcpDefaultOptions6:
+		return "DhcpDefaultOptions6"
+	case DhcpScopeOptions6:
+		return "DhcpScopeOptions6"
+	case DhcpReservedOptions6:
+		return "DhcpReservedOptions6"
+	case DhcpGlobalOptions6:
+		return "DhcpGlobalOptions6"
+	default:
+		return fmt.Sprintf("DHCP_OPTION_SCOPE_TYPE6(%d)", int32(e))
+	}
+}
+
 // DHCP_OPTION_TYPE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_option_type
 type DHCP_OPTION_TYPE int32
 
@@ -88,6 +222,19 @@ const (
 	DhcpUnaryElementTypeOption DHCP_OPTION_TYPE = 0
 	DhcpArrayTypeOption        DHCP_OPTION_TYPE = 1
 )
+
+// String returns the DHCP_OPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_OPTION_TYPE) String() string {
+	switch e {
+	case DhcpUnaryElementTypeOption:
+		return "DhcpUnaryElementTypeOption"
+	case DhcpArrayTypeOption:
+		return "DhcpArrayTypeOption"
+	default:
+		return fmt.Sprintf("DHCP_OPTION_TYPE(%d)", int32(e))
+	}
+}
 
 // DHCP_POLICY_FIELDS_TO_UPDATE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_policy_fields_to_update
 type DHCP_POLICY_FIELDS_TO_UPDATE int32
@@ -102,6 +249,29 @@ const (
 	DhcpUpdatePolicyDnsSuffix DHCP_POLICY_FIELDS_TO_UPDATE = 64
 )
 
+// String returns the DHCP_POLICY_FIELDS_TO_UPDATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_POLICY_FIELDS_TO_UPDATE) String() string {
+	switch e {
+	case DhcpUpdatePolicyName:
+		return "DhcpUpdatePolicyName"
+	case DhcpUpdatePolicyOrder:
+		return "DhcpUpdatePolicyOrder"
+	case DhcpUpdatePolicyExpr:
+		return "DhcpUpdatePolicyExpr"
+	case DhcpUpdatePolicyRanges:
+		return "DhcpUpdatePolicyRanges"
+	case DhcpUpdatePolicyDescr:
+		return "DhcpUpdatePolicyDescr"
+	case DhcpUpdatePolicyStatus:
+		return "DhcpUpdatePolicyStatus"
+	case DhcpUpdatePolicyDnsSuffix:
+		return "DhcpUpdatePolicyDnsSuffix"
+	default:
+		return fmt.Sprintf("DHCP_POLICY_FIELDS_TO_UPDATE(%d)", int32(e))
+	}
+}
+
 // DHCP_POL_ATTR_TYPE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_pol_attr_type
 type DHCP_POL_ATTR_TYPE int32
 
@@ -112,6 +282,25 @@ const (
 	DhcpAttrFqdn            DHCP_POL_ATTR_TYPE = 3
 	DhcpAttrFqdnSingleLabel DHCP_POL_ATTR_TYPE = 4
 )
+
+// String returns the DHCP_POL_ATTR_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_POL_ATTR_TYPE) String() string {
+	switch e {
+	case DhcpAttrHWAddr:
+		return "DhcpAttrHWAddr"
+	case DhcpAttrOption:
+		return "DhcpAttrOption"
+	case DhcpAttrSubOption:
+		return "DhcpAttrSubOption"
+	case DhcpAttrFqdn:
+		return "DhcpAttrFqdn"
+	case DhcpAttrFqdnSingleLabel:
+		return "DhcpAttrFqdnSingleLabel"
+	default:
+		return fmt.Sprintf("DHCP_POL_ATTR_TYPE(%d)", int32(e))
+	}
+}
 
 // DHCP_POL_COMPARATOR: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_pol_comparator
 type DHCP_POL_COMPARATOR int32
@@ -125,6 +314,27 @@ const (
 	DhcpCompNotEndWith   DHCP_POL_COMPARATOR = 5
 )
 
+// String returns the DHCP_POL_COMPARATOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_POL_COMPARATOR) String() string {
+	switch e {
+	case DhcpCompEqual:
+		return "DhcpCompEqual"
+	case DhcpCompNotEqual:
+		return "DhcpCompNotEqual"
+	case DhcpCompBeginsWith:
+		return "DhcpCompBeginsWith"
+	case DhcpCompNotBeginWith:
+		return "DhcpCompNotBeginWith"
+	case DhcpCompEndsWith:
+		return "DhcpCompEndsWith"
+	case DhcpCompNotEndWith:
+		return "DhcpCompNotEndWith"
+	default:
+		return fmt.Sprintf("DHCP_POL_COMPARATOR(%d)", int32(e))
+	}
+}
+
 // DHCP_POL_LOGIC_OPER: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_pol_logic_oper
 type DHCP_POL_LOGIC_OPER int32
 
@@ -133,12 +343,38 @@ const (
 	DhcpLogicalAnd DHCP_POL_LOGIC_OPER = 1
 )
 
+// String returns the DHCP_POL_LOGIC_OPER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_POL_LOGIC_OPER) String() string {
+	switch e {
+	case DhcpLogicalOr:
+		return "DhcpLogicalOr"
+	case DhcpLogicalAnd:
+		return "DhcpLogicalAnd"
+	default:
+		return fmt.Sprintf("DHCP_POL_LOGIC_OPER(%d)", int32(e))
+	}
+}
+
 type DHCP_PROPERTY_ID int32
 
 const (
 	DhcpPropIdPolicyDnsSuffix      DHCP_PROPERTY_ID = 0
 	DhcpPropIdClientAddressStateEx DHCP_PROPERTY_ID = 1
 )
+
+// String returns the DHCP_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_PROPERTY_ID) String() string {
+	switch e {
+	case DhcpPropIdPolicyDnsSuffix:
+		return "DhcpPropIdPolicyDnsSuffix"
+	case DhcpPropIdClientAddressStateEx:
+		return "DhcpPropIdClientAddressStateEx"
+	default:
+		return fmt.Sprintf("DHCP_PROPERTY_ID(%d)", int32(e))
+	}
+}
 
 type DHCP_PROPERTY_TYPE int32
 
@@ -150,6 +386,25 @@ const (
 	DhcpPropTypeBinary DHCP_PROPERTY_TYPE = 4
 )
 
+// String returns the DHCP_PROPERTY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_PROPERTY_TYPE) String() string {
+	switch e {
+	case DhcpPropTypeByte:
+		return "DhcpPropTypeByte"
+	case DhcpPropTypeWord:
+		return "DhcpPropTypeWord"
+	case DhcpPropTypeDword:
+		return "DhcpPropTypeDword"
+	case DhcpPropTypeString:
+		return "DhcpPropTypeString"
+	case DhcpPropTypeBinary:
+		return "DhcpPropTypeBinary"
+	default:
+		return fmt.Sprintf("DHCP_PROPERTY_TYPE(%d)", int32(e))
+	}
+}
+
 // DHCP_SCAN_FLAG: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_scan_flag
 type DHCP_SCAN_FLAG int32
 
@@ -157,6 +412,19 @@ const (
 	DhcpRegistryFix DHCP_SCAN_FLAG = 0
 	DhcpDatabaseFix DHCP_SCAN_FLAG = 1
 )
+
+// String returns the DHCP_SCAN_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_SCAN_FLAG) String() string {
+	switch e {
+	case DhcpRegistryFix:
+		return "DhcpRegistryFix"
+	case DhcpDatabaseFix:
+		return "DhcpDatabaseFix"
+	default:
+		return fmt.Sprintf("DHCP_SCAN_FLAG(%d)", int32(e))
+	}
+}
 
 // DHCP_SEARCH_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_search_info_type
 type DHCP_SEARCH_INFO_TYPE int32
@@ -167,6 +435,21 @@ const (
 	DhcpClientName            DHCP_SEARCH_INFO_TYPE = 2
 )
 
+// String returns the DHCP_SEARCH_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_SEARCH_INFO_TYPE) String() string {
+	switch e {
+	case DhcpClientIpAddress:
+		return "DhcpClientIpAddress"
+	case DhcpClientHardwareAddress:
+		return "DhcpClientHardwareAddress"
+	case DhcpClientName:
+		return "DhcpClientName"
+	default:
+		return fmt.Sprintf("DHCP_SEARCH_INFO_TYPE(%d)", int32(e))
+	}
+}
+
 // DHCP_SEARCH_INFO_TYPE_V6: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_search_info_type_v6
 type DHCP_SEARCH_INFO_TYPE_V6 int32
 
@@ -175,6 +458,21 @@ const (
 	Dhcpv6ClientDUID      DHCP_SEARCH_INFO_TYPE_V6 = 1
 	Dhcpv6ClientName      DHCP_SEARCH_INFO_TYPE_V6 = 2
 )
+
+// String returns the DHCP_SEARCH_INFO_TYPE_V6 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_SEARCH_INFO_TYPE_V6) String() string {
+	switch e {
+	case Dhcpv6ClientIpAddress:
+		return "Dhcpv6ClientIpAddress"
+	case Dhcpv6ClientDUID:
+		return "Dhcpv6ClientDUID"
+	case Dhcpv6ClientName:
+		return "Dhcpv6ClientName"
+	default:
+		return fmt.Sprintf("DHCP_SEARCH_INFO_TYPE_V6(%d)", int32(e))
+	}
+}
 
 // DHCP_SUBNET_ELEMENT_TYPE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_subnet_element_type
 type DHCP_SUBNET_ELEMENT_TYPE int32
@@ -190,6 +488,31 @@ const (
 	DhcpIpRangesBootpOnly DHCP_SUBNET_ELEMENT_TYPE = 7
 )
 
+// String returns the DHCP_SUBNET_ELEMENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_SUBNET_ELEMENT_TYPE) String() string {
+	switch e {
+	case DhcpIpRanges:
+		return "DhcpIpRanges"
+	case DhcpSecondaryHosts:
+		return "DhcpSecondaryHosts"
+	case DhcpReservedIps:
+		return "DhcpReservedIps"
+	case DhcpExcludedIpRanges:
+		return "DhcpExcludedIpRanges"
+	case DhcpIpUsedClusters:
+		return "DhcpIpUsedClusters"
+	case DhcpIpRangesDhcpOnly:
+		return "DhcpIpRangesDhcpOnly"
+	case DhcpIpRangesDhcpBootp:
+		return "DhcpIpRangesDhcpBootp"
+	case DhcpIpRangesBootpOnly:
+		return "DhcpIpRangesBootpOnly"
+	default:
+		return fmt.Sprintf("DHCP_SUBNET_ELEMENT_TYPE(%d)", int32(e))
+	}
+}
+
 type DHCP_SUBNET_ELEMENT_TYPE_V6 int32
 
 const (
@@ -197,6 +520,21 @@ const (
 	Dhcpv6ReservedIps      DHCP_SUBNET_ELEMENT_TYPE_V6 = 1
 	Dhcpv6ExcludedIpRanges DHCP_SUBNET_ELEMENT_TYPE_V6 = 2
 )
+
+// String returns the DHCP_SUBNET_ELEMENT_TYPE_V6 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_SUBNET_ELEMENT_TYPE_V6) String() string {
+	switch e {
+	case Dhcpv6IpRanges:
+		return "Dhcpv6IpRanges"
+	case Dhcpv6ReservedIps:
+		return "Dhcpv6ReservedIps"
+	case Dhcpv6ExcludedIpRanges:
+		return "Dhcpv6ExcludedIpRanges"
+	default:
+		return fmt.Sprintf("DHCP_SUBNET_ELEMENT_TYPE_V6(%d)", int32(e))
+	}
+}
 
 // DHCP_SUBNET_STATE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-dhcp_subnet_state
 type DHCP_SUBNET_STATE int32
@@ -208,6 +546,25 @@ const (
 	DhcpSubnetDisabledSwitched DHCP_SUBNET_STATE = 3
 	DhcpSubnetInvalidState     DHCP_SUBNET_STATE = 4
 )
+
+// String returns the DHCP_SUBNET_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DHCP_SUBNET_STATE) String() string {
+	switch e {
+	case DhcpSubnetEnabled:
+		return "DhcpSubnetEnabled"
+	case DhcpSubnetDisabled:
+		return "DhcpSubnetDisabled"
+	case DhcpSubnetEnabledSwitched:
+		return "DhcpSubnetEnabledSwitched"
+	case DhcpSubnetDisabledSwitched:
+		return "DhcpSubnetDisabledSwitched"
+	case DhcpSubnetInvalidState:
+		return "DhcpSubnetInvalidState"
+	default:
+		return fmt.Sprintf("DHCP_SUBNET_STATE(%d)", int32(e))
+	}
+}
 
 // FSM_STATE: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-fsm_state
 type FSM_STATE int32
@@ -229,6 +586,43 @@ const (
 	SHUTDOWN           FSM_STATE = 13
 )
 
+// String returns the FSM_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FSM_STATE) String() string {
+	switch e {
+	case NO_STATE:
+		return "NO_STATE"
+	case INIT:
+		return "INIT"
+	case STARTUP:
+		return "STARTUP"
+	case NORMAL:
+		return "NORMAL"
+	case COMMUNICATION_INT:
+		return "COMMUNICATION_INT"
+	case PARTNER_DOWN:
+		return "PARTNER_DOWN"
+	case POTENTIAL_CONFLICT:
+		return "POTENTIAL_CONFLICT"
+	case CONFLICT_DONE:
+		return "CONFLICT_DONE"
+	case RESOLUTION_INT:
+		return "RESOLUTION_INT"
+	case RECOVER:
+		return "RECOVER"
+	case RECOVER_WAIT:
+		return "RECOVER_WAIT"
+	case RECOVER_DONE:
+		return "RECOVER_DONE"
+	case PAUSED:
+		return "PAUSED"
+	case SHUTDOWN:
+		return "SHUTDOWN"
+	default:
+		return fmt.Sprintf("FSM_STATE(%d)", int32(e))
+	}
+}
+
 // QuarantineStatus: https://learn.microsoft.com/windows/win32/api/dhcpsapi/ne-dhcpsapi-quarantinestatus
 type QuarantineStatus int32
 
@@ -242,6 +636,29 @@ const (
 	NOQUARINFO         QuarantineStatus = 6
 )
 
+// String returns the QuarantineStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QuarantineStatus) String() string {
+	switch e {
+	case NOQUARANTINE:
+		return "NOQUARANTINE"
+	case RESTRICTEDACCESS:
+		return "RESTRICTEDACCESS"
+	case DROPPACKET:
+		return "DROPPACKET"
+	case PROBATION:
+		return "PROBATION"
+	case EXEMPT:
+		return "EXEMPT"
+	case DEFAULTQUARSETTING:
+		return "DEFAULTQUARSETTING"
+	case NOQUARINFO:
+		return "NOQUARINFO"
+	default:
+		return fmt.Sprintf("QuarantineStatus(%d)", int32(e))
+	}
+}
+
 // StatusCode: https://learn.microsoft.com/windows/win32/api/dhcpv6csdk/ne-dhcpv6csdk-statuscode
 type StatusCode int32
 
@@ -251,3 +668,20 @@ const (
 	STATUS_NO_BINDING          StatusCode = 3
 	STATUS_NOPREFIX_AVAIL      StatusCode = 6
 )
+
+// String returns the StatusCode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StatusCode) String() string {
+	switch e {
+	case STATUS_NO_ERROR:
+		return "STATUS_NO_ERROR"
+	case STATUS_UNSPECIFIED_FAILURE:
+		return "STATUS_UNSPECIFIED_FAILURE"
+	case STATUS_NO_BINDING:
+		return "STATUS_NO_BINDING"
+	case STATUS_NOPREFIX_AVAIL:
+		return "STATUS_NOPREFIX_AVAIL"
+	default:
+		return fmt.Sprintf("StatusCode(%d)", int32(e))
+	}
+}

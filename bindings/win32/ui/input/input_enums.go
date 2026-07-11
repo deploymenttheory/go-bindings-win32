@@ -4,6 +4,11 @@
 
 package input
 
+import (
+	"fmt"
+	"strings"
+)
+
 // INPUT_MESSAGE_DEVICE_TYPE: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-input_message_device_type
 type INPUT_MESSAGE_DEVICE_TYPE int32
 
@@ -16,6 +21,27 @@ const (
 	IMDT_TOUCHPAD    INPUT_MESSAGE_DEVICE_TYPE = 16
 )
 
+// String returns the INPUT_MESSAGE_DEVICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INPUT_MESSAGE_DEVICE_TYPE) String() string {
+	switch e {
+	case IMDT_UNAVAILABLE:
+		return "IMDT_UNAVAILABLE"
+	case IMDT_KEYBOARD:
+		return "IMDT_KEYBOARD"
+	case IMDT_MOUSE:
+		return "IMDT_MOUSE"
+	case IMDT_TOUCH:
+		return "IMDT_TOUCH"
+	case IMDT_PEN:
+		return "IMDT_PEN"
+	case IMDT_TOUCHPAD:
+		return "IMDT_TOUCHPAD"
+	default:
+		return fmt.Sprintf("INPUT_MESSAGE_DEVICE_TYPE(%d)", int32(e))
+	}
+}
+
 // INPUT_MESSAGE_ORIGIN_ID: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-input_message_origin_id
 type INPUT_MESSAGE_ORIGIN_ID int32
 
@@ -25,6 +51,23 @@ const (
 	IMO_INJECTED    INPUT_MESSAGE_ORIGIN_ID = 2
 	IMO_SYSTEM      INPUT_MESSAGE_ORIGIN_ID = 4
 )
+
+// String returns the INPUT_MESSAGE_ORIGIN_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INPUT_MESSAGE_ORIGIN_ID) String() string {
+	switch e {
+	case IMO_UNAVAILABLE:
+		return "IMO_UNAVAILABLE"
+	case IMO_HARDWARE:
+		return "IMO_HARDWARE"
+	case IMO_INJECTED:
+		return "IMO_INJECTED"
+	case IMO_SYSTEM:
+		return "IMO_SYSTEM"
+	default:
+		return fmt.Sprintf("INPUT_MESSAGE_ORIGIN_ID(%d)", int32(e))
+	}
+}
 
 type MOUSE_STATE uint16
 
@@ -36,6 +79,26 @@ const (
 	MOUSE_MOVE_NOCOALESCE    MOUSE_STATE = 8
 )
 
+// String returns the MOUSE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MOUSE_STATE) String() string {
+	switch e {
+	case MOUSE_MOVE_RELATIVE:
+		return "MOUSE_MOVE_RELATIVE"
+	case MOUSE_MOVE_ABSOLUTE:
+		return "MOUSE_MOVE_ABSOLUTE"
+	case MOUSE_VIRTUAL_DESKTOP:
+		return "MOUSE_VIRTUAL_DESKTOP"
+	case MOUSE_ATTRIBUTES_CHANGED:
+		return "MOUSE_ATTRIBUTES_CHANGED"
+	case MOUSE_MOVE_NOCOALESCE:
+		return "MOUSE_MOVE_NOCOALESCE"
+	default:
+		return fmt.Sprintf("MOUSE_STATE(%d)", uint16(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type RAWINPUTDEVICE_FLAGS uint32
 
 const (
@@ -51,12 +114,65 @@ const (
 	RIDEV_DEVNOTIFY    RAWINPUTDEVICE_FLAGS = 8192
 )
 
+// String returns the RAWINPUTDEVICE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RAWINPUTDEVICE_FLAGS) String() string {
+	var parts []string
+	if e&RIDEV_REMOVE != 0 {
+		parts = append(parts, "RIDEV_REMOVE")
+	}
+	if e&RIDEV_EXCLUDE != 0 {
+		parts = append(parts, "RIDEV_EXCLUDE")
+	}
+	if e&RIDEV_PAGEONLY != 0 {
+		parts = append(parts, "RIDEV_PAGEONLY")
+	}
+	if e&RIDEV_NOLEGACY != 0 {
+		parts = append(parts, "RIDEV_NOLEGACY")
+	}
+	if e&RIDEV_INPUTSINK != 0 {
+		parts = append(parts, "RIDEV_INPUTSINK")
+	}
+	if e&RIDEV_CAPTUREMOUSE != 0 {
+		parts = append(parts, "RIDEV_CAPTUREMOUSE")
+	}
+	if e&RIDEV_NOHOTKEYS != 0 {
+		parts = append(parts, "RIDEV_NOHOTKEYS")
+	}
+	if e&RIDEV_APPKEYS != 0 {
+		parts = append(parts, "RIDEV_APPKEYS")
+	}
+	if e&RIDEV_EXINPUTSINK != 0 {
+		parts = append(parts, "RIDEV_EXINPUTSINK")
+	}
+	if e&RIDEV_DEVNOTIFY != 0 {
+		parts = append(parts, "RIDEV_DEVNOTIFY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type RAW_INPUT_DATA_COMMAND_FLAGS uint32
 
 const (
 	RID_HEADER RAW_INPUT_DATA_COMMAND_FLAGS = 268435461
 	RID_INPUT  RAW_INPUT_DATA_COMMAND_FLAGS = 268435459
 )
+
+// String returns the RAW_INPUT_DATA_COMMAND_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RAW_INPUT_DATA_COMMAND_FLAGS) String() string {
+	switch e {
+	case RID_HEADER:
+		return "RID_HEADER"
+	case RID_INPUT:
+		return "RID_INPUT"
+	default:
+		return fmt.Sprintf("RAW_INPUT_DATA_COMMAND_FLAGS(%d)", uint32(e))
+	}
+}
 
 type RAW_INPUT_DEVICE_INFO_COMMAND uint32
 
@@ -66,6 +182,21 @@ const (
 	RIDI_DEVICEINFO    RAW_INPUT_DEVICE_INFO_COMMAND = 536870923
 )
 
+// String returns the RAW_INPUT_DEVICE_INFO_COMMAND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RAW_INPUT_DEVICE_INFO_COMMAND) String() string {
+	switch e {
+	case RIDI_PREPARSEDDATA:
+		return "RIDI_PREPARSEDDATA"
+	case RIDI_DEVICENAME:
+		return "RIDI_DEVICENAME"
+	case RIDI_DEVICEINFO:
+		return "RIDI_DEVICEINFO"
+	default:
+		return fmt.Sprintf("RAW_INPUT_DEVICE_INFO_COMMAND(%d)", uint32(e))
+	}
+}
+
 type RID_DEVICE_INFO_TYPE uint32
 
 const (
@@ -73,3 +204,18 @@ const (
 	RIM_TYPEKEYBOARD RID_DEVICE_INFO_TYPE = 1
 	RIM_TYPEHID      RID_DEVICE_INFO_TYPE = 2
 )
+
+// String returns the RID_DEVICE_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RID_DEVICE_INFO_TYPE) String() string {
+	switch e {
+	case RIM_TYPEMOUSE:
+		return "RIM_TYPEMOUSE"
+	case RIM_TYPEKEYBOARD:
+		return "RIM_TYPEKEYBOARD"
+	case RIM_TYPEHID:
+		return "RIM_TYPEHID"
+	default:
+		return fmt.Sprintf("RID_DEVICE_INFO_TYPE(%d)", uint32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package ndis
 
+import (
+	"fmt"
+)
+
 type IF_ADMINISTRATIVE_STATE int32
 
 const (
@@ -11,6 +15,21 @@ const (
 	IF_ADMINISTRATIVE_ENABLED    IF_ADMINISTRATIVE_STATE = 1
 	IF_ADMINISTRATIVE_DEMANDDIAL IF_ADMINISTRATIVE_STATE = 2
 )
+
+// String returns the IF_ADMINISTRATIVE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IF_ADMINISTRATIVE_STATE) String() string {
+	switch e {
+	case IF_ADMINISTRATIVE_DISABLED:
+		return "IF_ADMINISTRATIVE_DISABLED"
+	case IF_ADMINISTRATIVE_ENABLED:
+		return "IF_ADMINISTRATIVE_ENABLED"
+	case IF_ADMINISTRATIVE_DEMANDDIAL:
+		return "IF_ADMINISTRATIVE_DEMANDDIAL"
+	default:
+		return fmt.Sprintf("IF_ADMINISTRATIVE_STATE(%d)", int32(e))
+	}
+}
 
 // IF_OPER_STATUS: https://learn.microsoft.com/windows/win32/api/ifdef/ne-ifdef-if_oper_status
 type IF_OPER_STATUS int32
@@ -24,6 +43,29 @@ const (
 	IfOperStatusNotPresent     IF_OPER_STATUS = 6
 	IfOperStatusLowerLayerDown IF_OPER_STATUS = 7
 )
+
+// String returns the IF_OPER_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IF_OPER_STATUS) String() string {
+	switch e {
+	case IfOperStatusUp:
+		return "IfOperStatusUp"
+	case IfOperStatusDown:
+		return "IfOperStatusDown"
+	case IfOperStatusTesting:
+		return "IfOperStatusTesting"
+	case IfOperStatusUnknown:
+		return "IfOperStatusUnknown"
+	case IfOperStatusDormant:
+		return "IfOperStatusDormant"
+	case IfOperStatusNotPresent:
+		return "IfOperStatusNotPresent"
+	case IfOperStatusLowerLayerDown:
+		return "IfOperStatusLowerLayerDown"
+	default:
+		return fmt.Sprintf("IF_OPER_STATUS(%d)", int32(e))
+	}
+}
 
 type NDIS_802_11_AUTHENTICATION_MODE int32
 
@@ -43,12 +85,58 @@ const (
 	Ndis802_11AuthModeMax        NDIS_802_11_AUTHENTICATION_MODE = 11
 )
 
+// String returns the NDIS_802_11_AUTHENTICATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_802_11_AUTHENTICATION_MODE) String() string {
+	switch e {
+	case Ndis802_11AuthModeOpen:
+		return "Ndis802_11AuthModeOpen"
+	case Ndis802_11AuthModeShared:
+		return "Ndis802_11AuthModeShared"
+	case Ndis802_11AuthModeAutoSwitch:
+		return "Ndis802_11AuthModeAutoSwitch"
+	case Ndis802_11AuthModeWPA:
+		return "Ndis802_11AuthModeWPA"
+	case Ndis802_11AuthModeWPAPSK:
+		return "Ndis802_11AuthModeWPAPSK"
+	case Ndis802_11AuthModeWPANone:
+		return "Ndis802_11AuthModeWPANone"
+	case Ndis802_11AuthModeWPA2:
+		return "Ndis802_11AuthModeWPA2"
+	case Ndis802_11AuthModeWPA2PSK:
+		return "Ndis802_11AuthModeWPA2PSK"
+	case Ndis802_11AuthModeWPA3:
+		return "Ndis802_11AuthModeWPA3"
+	case Ndis802_11AuthModeWPA3SAE:
+		return "Ndis802_11AuthModeWPA3SAE"
+	case Ndis802_11AuthModeWPA3Ent:
+		return "Ndis802_11AuthModeWPA3Ent"
+	case Ndis802_11AuthModeMax:
+		return "Ndis802_11AuthModeMax"
+	default:
+		return fmt.Sprintf("NDIS_802_11_AUTHENTICATION_MODE(%d)", int32(e))
+	}
+}
+
 type NDIS_802_11_MEDIA_STREAM_MODE int32
 
 const (
 	Ndis802_11MediaStreamOff NDIS_802_11_MEDIA_STREAM_MODE = 0
 	Ndis802_11MediaStreamOn  NDIS_802_11_MEDIA_STREAM_MODE = 1
 )
+
+// String returns the NDIS_802_11_MEDIA_STREAM_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_802_11_MEDIA_STREAM_MODE) String() string {
+	switch e {
+	case Ndis802_11MediaStreamOff:
+		return "Ndis802_11MediaStreamOff"
+	case Ndis802_11MediaStreamOn:
+		return "Ndis802_11MediaStreamOn"
+	default:
+		return fmt.Sprintf("NDIS_802_11_MEDIA_STREAM_MODE(%d)", int32(e))
+	}
+}
 
 type NDIS_802_11_NETWORK_INFRASTRUCTURE int32
 
@@ -58,6 +146,23 @@ const (
 	Ndis802_11AutoUnknown       NDIS_802_11_NETWORK_INFRASTRUCTURE = 2
 	Ndis802_11InfrastructureMax NDIS_802_11_NETWORK_INFRASTRUCTURE = 3
 )
+
+// String returns the NDIS_802_11_NETWORK_INFRASTRUCTURE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_802_11_NETWORK_INFRASTRUCTURE) String() string {
+	switch e {
+	case Ndis802_11IBSS:
+		return "Ndis802_11IBSS"
+	case Ndis802_11Infrastructure:
+		return "Ndis802_11Infrastructure"
+	case Ndis802_11AutoUnknown:
+		return "Ndis802_11AutoUnknown"
+	case Ndis802_11InfrastructureMax:
+		return "Ndis802_11InfrastructureMax"
+	default:
+		return fmt.Sprintf("NDIS_802_11_NETWORK_INFRASTRUCTURE(%d)", int32(e))
+	}
+}
 
 type NDIS_802_11_NETWORK_TYPE int32
 
@@ -70,6 +175,27 @@ const (
 	Ndis802_11NetworkTypeMax NDIS_802_11_NETWORK_TYPE = 5
 )
 
+// String returns the NDIS_802_11_NETWORK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_802_11_NETWORK_TYPE) String() string {
+	switch e {
+	case Ndis802_11FH:
+		return "Ndis802_11FH"
+	case Ndis802_11DS:
+		return "Ndis802_11DS"
+	case Ndis802_11OFDM5:
+		return "Ndis802_11OFDM5"
+	case Ndis802_11OFDM24:
+		return "Ndis802_11OFDM24"
+	case Ndis802_11Automode:
+		return "Ndis802_11Automode"
+	case Ndis802_11NetworkTypeMax:
+		return "Ndis802_11NetworkTypeMax"
+	default:
+		return fmt.Sprintf("NDIS_802_11_NETWORK_TYPE(%d)", int32(e))
+	}
+}
+
 type NDIS_802_11_POWER_MODE int32
 
 const (
@@ -79,12 +205,42 @@ const (
 	Ndis802_11PowerModeMax      NDIS_802_11_POWER_MODE = 3
 )
 
+// String returns the NDIS_802_11_POWER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_802_11_POWER_MODE) String() string {
+	switch e {
+	case Ndis802_11PowerModeCAM:
+		return "Ndis802_11PowerModeCAM"
+	case Ndis802_11PowerModeMAX_PSP:
+		return "Ndis802_11PowerModeMAX_PSP"
+	case Ndis802_11PowerModeFast_PSP:
+		return "Ndis802_11PowerModeFast_PSP"
+	case Ndis802_11PowerModeMax:
+		return "Ndis802_11PowerModeMax"
+	default:
+		return fmt.Sprintf("NDIS_802_11_POWER_MODE(%d)", int32(e))
+	}
+}
+
 type NDIS_802_11_PRIVACY_FILTER int32
 
 const (
 	Ndis802_11PrivFilterAcceptAll NDIS_802_11_PRIVACY_FILTER = 0
 	Ndis802_11PrivFilter8021xWEP  NDIS_802_11_PRIVACY_FILTER = 1
 )
+
+// String returns the NDIS_802_11_PRIVACY_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_802_11_PRIVACY_FILTER) String() string {
+	switch e {
+	case Ndis802_11PrivFilterAcceptAll:
+		return "Ndis802_11PrivFilterAcceptAll"
+	case Ndis802_11PrivFilter8021xWEP:
+		return "Ndis802_11PrivFilter8021xWEP"
+	default:
+		return fmt.Sprintf("NDIS_802_11_PRIVACY_FILTER(%d)", int32(e))
+	}
+}
 
 type NDIS_802_11_RADIO_STATUS int32
 
@@ -96,11 +252,41 @@ const (
 	Ndis802_11RadioStatusMax                 NDIS_802_11_RADIO_STATUS = 4
 )
 
+// String returns the NDIS_802_11_RADIO_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_802_11_RADIO_STATUS) String() string {
+	switch e {
+	case Ndis802_11RadioStatusOn:
+		return "Ndis802_11RadioStatusOn"
+	case Ndis802_11RadioStatusHardwareOff:
+		return "Ndis802_11RadioStatusHardwareOff"
+	case Ndis802_11RadioStatusSoftwareOff:
+		return "Ndis802_11RadioStatusSoftwareOff"
+	case Ndis802_11RadioStatusHardwareSoftwareOff:
+		return "Ndis802_11RadioStatusHardwareSoftwareOff"
+	case Ndis802_11RadioStatusMax:
+		return "Ndis802_11RadioStatusMax"
+	default:
+		return fmt.Sprintf("NDIS_802_11_RADIO_STATUS(%d)", int32(e))
+	}
+}
+
 type NDIS_802_11_RELOAD_DEFAULTS int32
 
 const (
 	Ndis802_11ReloadWEPKeys NDIS_802_11_RELOAD_DEFAULTS = 0
 )
+
+// String returns the NDIS_802_11_RELOAD_DEFAULTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_802_11_RELOAD_DEFAULTS) String() string {
+	switch e {
+	case Ndis802_11ReloadWEPKeys:
+		return "Ndis802_11ReloadWEPKeys"
+	default:
+		return fmt.Sprintf("NDIS_802_11_RELOAD_DEFAULTS(%d)", int32(e))
+	}
+}
 
 type NDIS_802_11_STATUS_TYPE int32
 
@@ -110,6 +296,23 @@ const (
 	Ndis802_11StatusType_PMKID_CandidateList NDIS_802_11_STATUS_TYPE = 2
 	Ndis802_11StatusTypeMax                  NDIS_802_11_STATUS_TYPE = 3
 )
+
+// String returns the NDIS_802_11_STATUS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_802_11_STATUS_TYPE) String() string {
+	switch e {
+	case Ndis802_11StatusType_Authentication:
+		return "Ndis802_11StatusType_Authentication"
+	case Ndis802_11StatusType_MediaStreamMode:
+		return "Ndis802_11StatusType_MediaStreamMode"
+	case Ndis802_11StatusType_PMKID_CandidateList:
+		return "Ndis802_11StatusType_PMKID_CandidateList"
+	case Ndis802_11StatusTypeMax:
+		return "Ndis802_11StatusTypeMax"
+	default:
+		return fmt.Sprintf("NDIS_802_11_STATUS_TYPE(%d)", int32(e))
+	}
+}
 
 type NDIS_802_11_WEP_STATUS int32
 
@@ -128,6 +331,31 @@ const (
 	Ndis802_11Encryption3KeyAbsent   NDIS_802_11_WEP_STATUS = 7
 )
 
+// String returns the NDIS_802_11_WEP_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_802_11_WEP_STATUS) String() string {
+	switch e {
+	case Ndis802_11WEPEnabled:
+		return "Ndis802_11WEPEnabled"
+	case Ndis802_11WEPDisabled:
+		return "Ndis802_11WEPDisabled"
+	case Ndis802_11WEPKeyAbsent:
+		return "Ndis802_11WEPKeyAbsent"
+	case Ndis802_11WEPNotSupported:
+		return "Ndis802_11WEPNotSupported"
+	case Ndis802_11Encryption2Enabled:
+		return "Ndis802_11Encryption2Enabled"
+	case Ndis802_11Encryption2KeyAbsent:
+		return "Ndis802_11Encryption2KeyAbsent"
+	case Ndis802_11Encryption3Enabled:
+		return "Ndis802_11Encryption3Enabled"
+	case Ndis802_11Encryption3KeyAbsent:
+		return "Ndis802_11Encryption3KeyAbsent"
+	default:
+		return fmt.Sprintf("NDIS_802_11_WEP_STATUS(%d)", int32(e))
+	}
+}
+
 type NDIS_802_5_RING_STATE int32
 
 const (
@@ -139,6 +367,27 @@ const (
 	NdisRingStateRingFailure NDIS_802_5_RING_STATE = 6
 )
 
+// String returns the NDIS_802_5_RING_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_802_5_RING_STATE) String() string {
+	switch e {
+	case NdisRingStateOpened:
+		return "NdisRingStateOpened"
+	case NdisRingStateClosed:
+		return "NdisRingStateClosed"
+	case NdisRingStateOpening:
+		return "NdisRingStateOpening"
+	case NdisRingStateClosing:
+		return "NdisRingStateClosing"
+	case NdisRingStateOpenFailure:
+		return "NdisRingStateOpenFailure"
+	case NdisRingStateRingFailure:
+		return "NdisRingStateRingFailure"
+	default:
+		return fmt.Sprintf("NDIS_802_5_RING_STATE(%d)", int32(e))
+	}
+}
+
 type NDIS_DEVICE_POWER_STATE int32
 
 const (
@@ -149,6 +398,27 @@ const (
 	NdisDeviceStateD3          NDIS_DEVICE_POWER_STATE = 4
 	NdisDeviceStateMaximum     NDIS_DEVICE_POWER_STATE = 5
 )
+
+// String returns the NDIS_DEVICE_POWER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_DEVICE_POWER_STATE) String() string {
+	switch e {
+	case NdisDeviceStateUnspecified:
+		return "NdisDeviceStateUnspecified"
+	case NdisDeviceStateD0:
+		return "NdisDeviceStateD0"
+	case NdisDeviceStateD1:
+		return "NdisDeviceStateD1"
+	case NdisDeviceStateD2:
+		return "NdisDeviceStateD2"
+	case NdisDeviceStateD3:
+		return "NdisDeviceStateD3"
+	case NdisDeviceStateMaximum:
+		return "NdisDeviceStateMaximum"
+	default:
+		return fmt.Sprintf("NDIS_DEVICE_POWER_STATE(%d)", int32(e))
+	}
+}
 
 type NDIS_FDDI_ATTACHMENT_TYPE int32
 
@@ -168,6 +438,41 @@ const (
 	NdisFddiTypeThrough  NDIS_FDDI_ATTACHMENT_TYPE = 13
 )
 
+// String returns the NDIS_FDDI_ATTACHMENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_FDDI_ATTACHMENT_TYPE) String() string {
+	switch e {
+	case NdisFddiTypeIsolated:
+		return "NdisFddiTypeIsolated"
+	case NdisFddiTypeLocalA:
+		return "NdisFddiTypeLocalA"
+	case NdisFddiTypeLocalB:
+		return "NdisFddiTypeLocalB"
+	case NdisFddiTypeLocalAB:
+		return "NdisFddiTypeLocalAB"
+	case NdisFddiTypeLocalS:
+		return "NdisFddiTypeLocalS"
+	case NdisFddiTypeWrapA:
+		return "NdisFddiTypeWrapA"
+	case NdisFddiTypeWrapB:
+		return "NdisFddiTypeWrapB"
+	case NdisFddiTypeWrapAB:
+		return "NdisFddiTypeWrapAB"
+	case NdisFddiTypeWrapS:
+		return "NdisFddiTypeWrapS"
+	case NdisFddiTypeCWrapA:
+		return "NdisFddiTypeCWrapA"
+	case NdisFddiTypeCWrapB:
+		return "NdisFddiTypeCWrapB"
+	case NdisFddiTypeCWrapS:
+		return "NdisFddiTypeCWrapS"
+	case NdisFddiTypeThrough:
+		return "NdisFddiTypeThrough"
+	default:
+		return fmt.Sprintf("NDIS_FDDI_ATTACHMENT_TYPE(%d)", int32(e))
+	}
+}
+
 type NDIS_FDDI_LCONNECTION_STATE int32
 
 const (
@@ -183,6 +488,35 @@ const (
 	NdisFddiStateMaintenance NDIS_FDDI_LCONNECTION_STATE = 10
 )
 
+// String returns the NDIS_FDDI_LCONNECTION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_FDDI_LCONNECTION_STATE) String() string {
+	switch e {
+	case NdisFddiStateOff:
+		return "NdisFddiStateOff"
+	case NdisFddiStateBreak:
+		return "NdisFddiStateBreak"
+	case NdisFddiStateTrace:
+		return "NdisFddiStateTrace"
+	case NdisFddiStateConnect:
+		return "NdisFddiStateConnect"
+	case NdisFddiStateNext:
+		return "NdisFddiStateNext"
+	case NdisFddiStateSignal:
+		return "NdisFddiStateSignal"
+	case NdisFddiStateJoin:
+		return "NdisFddiStateJoin"
+	case NdisFddiStateVerify:
+		return "NdisFddiStateVerify"
+	case NdisFddiStateActive:
+		return "NdisFddiStateActive"
+	case NdisFddiStateMaintenance:
+		return "NdisFddiStateMaintenance"
+	default:
+		return fmt.Sprintf("NDIS_FDDI_LCONNECTION_STATE(%d)", int32(e))
+	}
+}
+
 type NDIS_FDDI_RING_MGT_STATE int32
 
 const (
@@ -196,6 +530,31 @@ const (
 	NdisFddiRingTrace             NDIS_FDDI_RING_MGT_STATE = 8
 )
 
+// String returns the NDIS_FDDI_RING_MGT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_FDDI_RING_MGT_STATE) String() string {
+	switch e {
+	case NdisFddiRingIsolated:
+		return "NdisFddiRingIsolated"
+	case NdisFddiRingNonOperational:
+		return "NdisFddiRingNonOperational"
+	case NdisFddiRingOperational:
+		return "NdisFddiRingOperational"
+	case NdisFddiRingDetect:
+		return "NdisFddiRingDetect"
+	case NdisFddiRingNonOperationalDup:
+		return "NdisFddiRingNonOperationalDup"
+	case NdisFddiRingOperationalDup:
+		return "NdisFddiRingOperationalDup"
+	case NdisFddiRingDirected:
+		return "NdisFddiRingDirected"
+	case NdisFddiRingTrace:
+		return "NdisFddiRingTrace"
+	default:
+		return fmt.Sprintf("NDIS_FDDI_RING_MGT_STATE(%d)", int32(e))
+	}
+}
+
 type NDIS_HARDWARE_STATUS int32
 
 const (
@@ -206,6 +565,25 @@ const (
 	NdisHardwareStatusNotReady     NDIS_HARDWARE_STATUS = 4
 )
 
+// String returns the NDIS_HARDWARE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_HARDWARE_STATUS) String() string {
+	switch e {
+	case NdisHardwareStatusReady:
+		return "NdisHardwareStatusReady"
+	case NdisHardwareStatusInitializing:
+		return "NdisHardwareStatusInitializing"
+	case NdisHardwareStatusReset:
+		return "NdisHardwareStatusReset"
+	case NdisHardwareStatusClosing:
+		return "NdisHardwareStatusClosing"
+	case NdisHardwareStatusNotReady:
+		return "NdisHardwareStatusNotReady"
+	default:
+		return fmt.Sprintf("NDIS_HARDWARE_STATUS(%d)", int32(e))
+	}
+}
+
 type NDIS_INTERRUPT_MODERATION int32
 
 const (
@@ -215,12 +593,42 @@ const (
 	NdisInterruptModerationDisabled     NDIS_INTERRUPT_MODERATION = 3
 )
 
+// String returns the NDIS_INTERRUPT_MODERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_INTERRUPT_MODERATION) String() string {
+	switch e {
+	case NdisInterruptModerationUnknown:
+		return "NdisInterruptModerationUnknown"
+	case NdisInterruptModerationNotSupported:
+		return "NdisInterruptModerationNotSupported"
+	case NdisInterruptModerationEnabled:
+		return "NdisInterruptModerationEnabled"
+	case NdisInterruptModerationDisabled:
+		return "NdisInterruptModerationDisabled"
+	default:
+		return fmt.Sprintf("NDIS_INTERRUPT_MODERATION(%d)", int32(e))
+	}
+}
+
 type NDIS_MEDIA_STATE int32
 
 const (
 	NdisMediaStateConnected    NDIS_MEDIA_STATE = 0
 	NdisMediaStateDisconnected NDIS_MEDIA_STATE = 1
 )
+
+// String returns the NDIS_MEDIA_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_MEDIA_STATE) String() string {
+	switch e {
+	case NdisMediaStateConnected:
+		return "NdisMediaStateConnected"
+	case NdisMediaStateDisconnected:
+		return "NdisMediaStateDisconnected"
+	default:
+		return fmt.Sprintf("NDIS_MEDIA_STATE(%d)", int32(e))
+	}
+}
 
 type NDIS_MEDIUM int32
 
@@ -248,6 +656,57 @@ const (
 	NdisMediumMax          NDIS_MEDIUM = 20
 )
 
+// String returns the NDIS_MEDIUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_MEDIUM) String() string {
+	switch e {
+	case NdisMedium802_3:
+		return "NdisMedium802_3"
+	case NdisMedium802_5:
+		return "NdisMedium802_5"
+	case NdisMediumFddi:
+		return "NdisMediumFddi"
+	case NdisMediumWan:
+		return "NdisMediumWan"
+	case NdisMediumLocalTalk:
+		return "NdisMediumLocalTalk"
+	case NdisMediumDix:
+		return "NdisMediumDix"
+	case NdisMediumArcnetRaw:
+		return "NdisMediumArcnetRaw"
+	case NdisMediumArcnet878_2:
+		return "NdisMediumArcnet878_2"
+	case NdisMediumAtm:
+		return "NdisMediumAtm"
+	case NdisMediumWirelessWan:
+		return "NdisMediumWirelessWan"
+	case NdisMediumIrda:
+		return "NdisMediumIrda"
+	case NdisMediumBpc:
+		return "NdisMediumBpc"
+	case NdisMediumCoWan:
+		return "NdisMediumCoWan"
+	case NdisMedium1394:
+		return "NdisMedium1394"
+	case NdisMediumInfiniBand:
+		return "NdisMediumInfiniBand"
+	case NdisMediumTunnel:
+		return "NdisMediumTunnel"
+	case NdisMediumNative802_11:
+		return "NdisMediumNative802_11"
+	case NdisMediumLoopback:
+		return "NdisMediumLoopback"
+	case NdisMediumWiMAX:
+		return "NdisMediumWiMAX"
+	case NdisMediumIP:
+		return "NdisMediumIP"
+	case NdisMediumMax:
+		return "NdisMediumMax"
+	default:
+		return fmt.Sprintf("NDIS_MEDIUM(%d)", int32(e))
+	}
+}
+
 type NDIS_NETWORK_CHANGE_TYPE int32
 
 const (
@@ -256,6 +715,23 @@ const (
 	NdisNetworkChangeFromMediaConnect NDIS_NETWORK_CHANGE_TYPE = 3
 	NdisNetworkChangeMax              NDIS_NETWORK_CHANGE_TYPE = 4
 )
+
+// String returns the NDIS_NETWORK_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_NETWORK_CHANGE_TYPE) String() string {
+	switch e {
+	case NdisPossibleNetworkChange:
+		return "NdisPossibleNetworkChange"
+	case NdisDefinitelyNetworkChange:
+		return "NdisDefinitelyNetworkChange"
+	case NdisNetworkChangeFromMediaConnect:
+		return "NdisNetworkChangeFromMediaConnect"
+	case NdisNetworkChangeMax:
+		return "NdisNetworkChangeMax"
+	default:
+		return fmt.Sprintf("NDIS_NETWORK_CHANGE_TYPE(%d)", int32(e))
+	}
+}
 
 type NDIS_PHYSICAL_MEDIUM int32
 
@@ -284,6 +760,59 @@ const (
 	NdisPhysicalMediumMax            NDIS_PHYSICAL_MEDIUM = 21
 )
 
+// String returns the NDIS_PHYSICAL_MEDIUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_PHYSICAL_MEDIUM) String() string {
+	switch e {
+	case NdisPhysicalMediumUnspecified:
+		return "NdisPhysicalMediumUnspecified"
+	case NdisPhysicalMediumWirelessLan:
+		return "NdisPhysicalMediumWirelessLan"
+	case NdisPhysicalMediumCableModem:
+		return "NdisPhysicalMediumCableModem"
+	case NdisPhysicalMediumPhoneLine:
+		return "NdisPhysicalMediumPhoneLine"
+	case NdisPhysicalMediumPowerLine:
+		return "NdisPhysicalMediumPowerLine"
+	case NdisPhysicalMediumDSL:
+		return "NdisPhysicalMediumDSL"
+	case NdisPhysicalMediumFibreChannel:
+		return "NdisPhysicalMediumFibreChannel"
+	case NdisPhysicalMedium1394:
+		return "NdisPhysicalMedium1394"
+	case NdisPhysicalMediumWirelessWan:
+		return "NdisPhysicalMediumWirelessWan"
+	case NdisPhysicalMediumNative802_11:
+		return "NdisPhysicalMediumNative802_11"
+	case NdisPhysicalMediumBluetooth:
+		return "NdisPhysicalMediumBluetooth"
+	case NdisPhysicalMediumInfiniband:
+		return "NdisPhysicalMediumInfiniband"
+	case NdisPhysicalMediumWiMax:
+		return "NdisPhysicalMediumWiMax"
+	case NdisPhysicalMediumUWB:
+		return "NdisPhysicalMediumUWB"
+	case NdisPhysicalMedium802_3:
+		return "NdisPhysicalMedium802_3"
+	case NdisPhysicalMedium802_5:
+		return "NdisPhysicalMedium802_5"
+	case NdisPhysicalMediumIrda:
+		return "NdisPhysicalMediumIrda"
+	case NdisPhysicalMediumWiredWAN:
+		return "NdisPhysicalMediumWiredWAN"
+	case NdisPhysicalMediumWiredCoWan:
+		return "NdisPhysicalMediumWiredCoWan"
+	case NdisPhysicalMediumOther:
+		return "NdisPhysicalMediumOther"
+	case NdisPhysicalMediumNative802_15_4:
+		return "NdisPhysicalMediumNative802_15_4"
+	case NdisPhysicalMediumMax:
+		return "NdisPhysicalMediumMax"
+	default:
+		return fmt.Sprintf("NDIS_PHYSICAL_MEDIUM(%d)", int32(e))
+	}
+}
+
 type NDIS_PORT_AUTHORIZATION_STATE int32
 
 const (
@@ -293,6 +822,23 @@ const (
 	NdisPortReauthorizing        NDIS_PORT_AUTHORIZATION_STATE = 3
 )
 
+// String returns the NDIS_PORT_AUTHORIZATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_PORT_AUTHORIZATION_STATE) String() string {
+	switch e {
+	case NdisPortAuthorizationUnknown:
+		return "NdisPortAuthorizationUnknown"
+	case NdisPortAuthorized:
+		return "NdisPortAuthorized"
+	case NdisPortUnauthorized:
+		return "NdisPortUnauthorized"
+	case NdisPortReauthorizing:
+		return "NdisPortReauthorizing"
+	default:
+		return fmt.Sprintf("NDIS_PORT_AUTHORIZATION_STATE(%d)", int32(e))
+	}
+}
+
 type NDIS_PORT_CONTROL_STATE int32
 
 const (
@@ -300,6 +846,21 @@ const (
 	NdisPortControlStateControlled   NDIS_PORT_CONTROL_STATE = 1
 	NdisPortControlStateUncontrolled NDIS_PORT_CONTROL_STATE = 2
 )
+
+// String returns the NDIS_PORT_CONTROL_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_PORT_CONTROL_STATE) String() string {
+	switch e {
+	case NdisPortControlStateUnknown:
+		return "NdisPortControlStateUnknown"
+	case NdisPortControlStateControlled:
+		return "NdisPortControlStateControlled"
+	case NdisPortControlStateUncontrolled:
+		return "NdisPortControlStateUncontrolled"
+	default:
+		return fmt.Sprintf("NDIS_PORT_CONTROL_STATE(%d)", int32(e))
+	}
+}
 
 type NDIS_PORT_TYPE int32
 
@@ -311,6 +872,25 @@ const (
 	NdisPortTypeMax             NDIS_PORT_TYPE = 4
 )
 
+// String returns the NDIS_PORT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_PORT_TYPE) String() string {
+	switch e {
+	case NdisPortTypeUndefined:
+		return "NdisPortTypeUndefined"
+	case NdisPortTypeBridge:
+		return "NdisPortTypeBridge"
+	case NdisPortTypeRasConnection:
+		return "NdisPortTypeRasConnection"
+	case NdisPortType8021xSupplicant:
+		return "NdisPortType8021xSupplicant"
+	case NdisPortTypeMax:
+		return "NdisPortTypeMax"
+	default:
+		return fmt.Sprintf("NDIS_PORT_TYPE(%d)", int32(e))
+	}
+}
+
 type NDIS_PROCESSOR_VENDOR int32
 
 const (
@@ -319,6 +899,21 @@ const (
 	NdisProcessorVendorGenuineIntel NDIS_PROCESSOR_VENDOR = 1
 	NdisProcessorVendorAuthenticAMD NDIS_PROCESSOR_VENDOR = 2
 )
+
+// String returns the NDIS_PROCESSOR_VENDOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_PROCESSOR_VENDOR) String() string {
+	switch e {
+	case NdisProcessorVendorUnknown:
+		return "NdisProcessorVendorUnknown"
+	case NdisProcessorVendorGenuinIntel:
+		return "NdisProcessorVendorGenuinIntel"
+	case NdisProcessorVendorAuthenticAMD:
+		return "NdisProcessorVendorAuthenticAMD"
+	default:
+		return fmt.Sprintf("NDIS_PROCESSOR_VENDOR(%d)", int32(e))
+	}
+}
 
 type NDIS_REQUEST_TYPE int32
 
@@ -337,6 +932,39 @@ const (
 	NdisRequestGeneric4         NDIS_REQUEST_TYPE = 11
 )
 
+// String returns the NDIS_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_REQUEST_TYPE) String() string {
+	switch e {
+	case NdisRequestQueryInformation:
+		return "NdisRequestQueryInformation"
+	case NdisRequestSetInformation:
+		return "NdisRequestSetInformation"
+	case NdisRequestQueryStatistics:
+		return "NdisRequestQueryStatistics"
+	case NdisRequestOpen:
+		return "NdisRequestOpen"
+	case NdisRequestClose:
+		return "NdisRequestClose"
+	case NdisRequestSend:
+		return "NdisRequestSend"
+	case NdisRequestTransferData:
+		return "NdisRequestTransferData"
+	case NdisRequestReset:
+		return "NdisRequestReset"
+	case NdisRequestGeneric1:
+		return "NdisRequestGeneric1"
+	case NdisRequestGeneric2:
+		return "NdisRequestGeneric2"
+	case NdisRequestGeneric3:
+		return "NdisRequestGeneric3"
+	case NdisRequestGeneric4:
+		return "NdisRequestGeneric4"
+	default:
+		return fmt.Sprintf("NDIS_REQUEST_TYPE(%d)", int32(e))
+	}
+}
+
 type NDIS_SUPPORTED_PAUSE_FUNCTIONS int32
 
 const (
@@ -347,12 +975,44 @@ const (
 	NdisPauseFunctionsUnknown        NDIS_SUPPORTED_PAUSE_FUNCTIONS = 4
 )
 
+// String returns the NDIS_SUPPORTED_PAUSE_FUNCTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_SUPPORTED_PAUSE_FUNCTIONS) String() string {
+	switch e {
+	case NdisPauseFunctionsUnsupported:
+		return "NdisPauseFunctionsUnsupported"
+	case NdisPauseFunctionsSendOnly:
+		return "NdisPauseFunctionsSendOnly"
+	case NdisPauseFunctionsReceiveOnly:
+		return "NdisPauseFunctionsReceiveOnly"
+	case NdisPauseFunctionsSendAndReceive:
+		return "NdisPauseFunctionsSendAndReceive"
+	case NdisPauseFunctionsUnknown:
+		return "NdisPauseFunctionsUnknown"
+	default:
+		return fmt.Sprintf("NDIS_SUPPORTED_PAUSE_FUNCTIONS(%d)", int32(e))
+	}
+}
+
 type NDIS_WAN_HEADER_FORMAT int32
 
 const (
 	NdisWanHeaderNative   NDIS_WAN_HEADER_FORMAT = 0
 	NdisWanHeaderEthernet NDIS_WAN_HEADER_FORMAT = 1
 )
+
+// String returns the NDIS_WAN_HEADER_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_WAN_HEADER_FORMAT) String() string {
+	switch e {
+	case NdisWanHeaderNative:
+		return "NdisWanHeaderNative"
+	case NdisWanHeaderEthernet:
+		return "NdisWanHeaderEthernet"
+	default:
+		return fmt.Sprintf("NDIS_WAN_HEADER_FORMAT(%d)", int32(e))
+	}
+}
 
 type NDIS_WAN_MEDIUM_SUBTYPE int32
 
@@ -376,6 +1036,49 @@ const (
 	NdisWanMediumSubTypeMax NDIS_WAN_MEDIUM_SUBTYPE = 16
 )
 
+// String returns the NDIS_WAN_MEDIUM_SUBTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_WAN_MEDIUM_SUBTYPE) String() string {
+	switch e {
+	case NdisWanMediumHub:
+		return "NdisWanMediumHub"
+	case NdisWanMediumX_25:
+		return "NdisWanMediumX_25"
+	case NdisWanMediumIsdn:
+		return "NdisWanMediumIsdn"
+	case NdisWanMediumSerial:
+		return "NdisWanMediumSerial"
+	case NdisWanMediumFrameRelay:
+		return "NdisWanMediumFrameRelay"
+	case NdisWanMediumAtm:
+		return "NdisWanMediumAtm"
+	case NdisWanMediumSonet:
+		return "NdisWanMediumSonet"
+	case NdisWanMediumSW56K:
+		return "NdisWanMediumSW56K"
+	case NdisWanMediumPPTP:
+		return "NdisWanMediumPPTP"
+	case NdisWanMediumL2TP:
+		return "NdisWanMediumL2TP"
+	case NdisWanMediumIrda:
+		return "NdisWanMediumIrda"
+	case NdisWanMediumParallel:
+		return "NdisWanMediumParallel"
+	case NdisWanMediumPppoe:
+		return "NdisWanMediumPppoe"
+	case NdisWanMediumSSTP:
+		return "NdisWanMediumSSTP"
+	case NdisWanMediumAgileVPN:
+		return "NdisWanMediumAgileVPN"
+	case NdisWanMediumGre:
+		return "NdisWanMediumGre"
+	case NdisWanMediumSubTypeMax:
+		return "NdisWanMediumSubTypeMax"
+	default:
+		return fmt.Sprintf("NDIS_WAN_MEDIUM_SUBTYPE(%d)", int32(e))
+	}
+}
+
 type NDIS_WAN_QUALITY int32
 
 const (
@@ -383,6 +1086,21 @@ const (
 	NdisWanErrorControl NDIS_WAN_QUALITY = 1
 	NdisWanReliable     NDIS_WAN_QUALITY = 2
 )
+
+// String returns the NDIS_WAN_QUALITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDIS_WAN_QUALITY) String() string {
+	switch e {
+	case NdisWanRaw:
+		return "NdisWanRaw"
+	case NdisWanErrorControl:
+		return "NdisWanErrorControl"
+	case NdisWanReliable:
+		return "NdisWanReliable"
+	default:
+		return fmt.Sprintf("NDIS_WAN_QUALITY(%d)", int32(e))
+	}
+}
 
 type NDK_RDMA_TECHNOLOGY int32
 
@@ -395,6 +1113,27 @@ const (
 	NdkMaxTechnology NDK_RDMA_TECHNOLOGY = 5
 )
 
+// String returns the NDK_RDMA_TECHNOLOGY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NDK_RDMA_TECHNOLOGY) String() string {
+	switch e {
+	case NdkUndefined:
+		return "NdkUndefined"
+	case NdkiWarp:
+		return "NdkiWarp"
+	case NdkInfiniBand:
+		return "NdkInfiniBand"
+	case NdkRoCE:
+		return "NdkRoCE"
+	case NdkRoCEv2:
+		return "NdkRoCEv2"
+	case NdkMaxTechnology:
+		return "NdkMaxTechnology"
+	default:
+		return fmt.Sprintf("NDK_RDMA_TECHNOLOGY(%d)", int32(e))
+	}
+}
+
 // NET_IF_ACCESS_TYPE: https://learn.microsoft.com/windows/win32/api/ifdef/ne-ifdef-net_if_access_type
 type NET_IF_ACCESS_TYPE int32
 
@@ -406,6 +1145,25 @@ const (
 	NET_IF_ACCESS_MAXIMUM              NET_IF_ACCESS_TYPE = 5
 )
 
+// String returns the NET_IF_ACCESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_IF_ACCESS_TYPE) String() string {
+	switch e {
+	case NET_IF_ACCESS_LOOPBACK:
+		return "NET_IF_ACCESS_LOOPBACK"
+	case NET_IF_ACCESS_BROADCAST:
+		return "NET_IF_ACCESS_BROADCAST"
+	case NET_IF_ACCESS_POINT_TO_POINT:
+		return "NET_IF_ACCESS_POINT_TO_POINT"
+	case NET_IF_ACCESS_POINT_TO_MULTI_POINT:
+		return "NET_IF_ACCESS_POINT_TO_MULTI_POINT"
+	case NET_IF_ACCESS_MAXIMUM:
+		return "NET_IF_ACCESS_MAXIMUM"
+	default:
+		return fmt.Sprintf("NET_IF_ACCESS_TYPE(%d)", int32(e))
+	}
+}
+
 // NET_IF_ADMIN_STATUS: https://learn.microsoft.com/windows/win32/api/ifdef/ne-ifdef-net_if_admin_status
 type NET_IF_ADMIN_STATUS int32
 
@@ -414,6 +1172,21 @@ const (
 	NET_IF_ADMIN_STATUS_DOWN    NET_IF_ADMIN_STATUS = 2
 	NET_IF_ADMIN_STATUS_TESTING NET_IF_ADMIN_STATUS = 3
 )
+
+// String returns the NET_IF_ADMIN_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_IF_ADMIN_STATUS) String() string {
+	switch e {
+	case NET_IF_ADMIN_STATUS_UP:
+		return "NET_IF_ADMIN_STATUS_UP"
+	case NET_IF_ADMIN_STATUS_DOWN:
+		return "NET_IF_ADMIN_STATUS_DOWN"
+	case NET_IF_ADMIN_STATUS_TESTING:
+		return "NET_IF_ADMIN_STATUS_TESTING"
+	default:
+		return fmt.Sprintf("NET_IF_ADMIN_STATUS(%d)", int32(e))
+	}
+}
 
 // NET_IF_CONNECTION_TYPE: https://learn.microsoft.com/windows/win32/api/ifdef/ne-ifdef-net_if_connection_type
 type NET_IF_CONNECTION_TYPE int32
@@ -425,6 +1198,23 @@ const (
 	NET_IF_CONNECTION_MAXIMUM   NET_IF_CONNECTION_TYPE = 4
 )
 
+// String returns the NET_IF_CONNECTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_IF_CONNECTION_TYPE) String() string {
+	switch e {
+	case NET_IF_CONNECTION_DEDICATED:
+		return "NET_IF_CONNECTION_DEDICATED"
+	case NET_IF_CONNECTION_PASSIVE:
+		return "NET_IF_CONNECTION_PASSIVE"
+	case NET_IF_CONNECTION_DEMAND:
+		return "NET_IF_CONNECTION_DEMAND"
+	case NET_IF_CONNECTION_MAXIMUM:
+		return "NET_IF_CONNECTION_MAXIMUM"
+	default:
+		return fmt.Sprintf("NET_IF_CONNECTION_TYPE(%d)", int32(e))
+	}
+}
+
 // NET_IF_DIRECTION_TYPE: https://learn.microsoft.com/windows/win32/api/ifdef/ne-ifdef-net_if_direction_type
 type NET_IF_DIRECTION_TYPE int32
 
@@ -435,6 +1225,23 @@ const (
 	NET_IF_DIRECTION_MAXIMUM     NET_IF_DIRECTION_TYPE = 3
 )
 
+// String returns the NET_IF_DIRECTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_IF_DIRECTION_TYPE) String() string {
+	switch e {
+	case NET_IF_DIRECTION_SENDRECEIVE:
+		return "NET_IF_DIRECTION_SENDRECEIVE"
+	case NET_IF_DIRECTION_SENDONLY:
+		return "NET_IF_DIRECTION_SENDONLY"
+	case NET_IF_DIRECTION_RECEIVEONLY:
+		return "NET_IF_DIRECTION_RECEIVEONLY"
+	case NET_IF_DIRECTION_MAXIMUM:
+		return "NET_IF_DIRECTION_MAXIMUM"
+	default:
+		return fmt.Sprintf("NET_IF_DIRECTION_TYPE(%d)", int32(e))
+	}
+}
+
 // NET_IF_MEDIA_CONNECT_STATE: https://learn.microsoft.com/windows/win32/api/ifdef/ne-ifdef-net_if_media_connect_state
 type NET_IF_MEDIA_CONNECT_STATE int32
 
@@ -444,6 +1251,21 @@ const (
 	MediaConnectStateDisconnected NET_IF_MEDIA_CONNECT_STATE = 2
 )
 
+// String returns the NET_IF_MEDIA_CONNECT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_IF_MEDIA_CONNECT_STATE) String() string {
+	switch e {
+	case MediaConnectStateUnknown:
+		return "MediaConnectStateUnknown"
+	case MediaConnectStateConnected:
+		return "MediaConnectStateConnected"
+	case MediaConnectStateDisconnected:
+		return "MediaConnectStateDisconnected"
+	default:
+		return fmt.Sprintf("NET_IF_MEDIA_CONNECT_STATE(%d)", int32(e))
+	}
+}
+
 // NET_IF_MEDIA_DUPLEX_STATE: https://learn.microsoft.com/windows/win32/api/ifdef/ne-ifdef-net_if_media_duplex_state
 type NET_IF_MEDIA_DUPLEX_STATE int32
 
@@ -452,6 +1274,21 @@ const (
 	MediaDuplexStateHalf    NET_IF_MEDIA_DUPLEX_STATE = 1
 	MediaDuplexStateFull    NET_IF_MEDIA_DUPLEX_STATE = 2
 )
+
+// String returns the NET_IF_MEDIA_DUPLEX_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_IF_MEDIA_DUPLEX_STATE) String() string {
+	switch e {
+	case MediaDuplexStateUnknown:
+		return "MediaDuplexStateUnknown"
+	case MediaDuplexStateHalf:
+		return "MediaDuplexStateHalf"
+	case MediaDuplexStateFull:
+		return "MediaDuplexStateFull"
+	default:
+		return fmt.Sprintf("NET_IF_MEDIA_DUPLEX_STATE(%d)", int32(e))
+	}
+}
 
 // NET_IF_OPER_STATUS: https://learn.microsoft.com/windows/win32/api/ifdef/ne-ifdef-net_if_oper_status
 type NET_IF_OPER_STATUS int32
@@ -466,6 +1303,29 @@ const (
 	NET_IF_OPER_STATUS_LOWER_LAYER_DOWN NET_IF_OPER_STATUS = 7
 )
 
+// String returns the NET_IF_OPER_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_IF_OPER_STATUS) String() string {
+	switch e {
+	case NET_IF_OPER_STATUS_UP:
+		return "NET_IF_OPER_STATUS_UP"
+	case NET_IF_OPER_STATUS_DOWN:
+		return "NET_IF_OPER_STATUS_DOWN"
+	case NET_IF_OPER_STATUS_TESTING:
+		return "NET_IF_OPER_STATUS_TESTING"
+	case NET_IF_OPER_STATUS_UNKNOWN:
+		return "NET_IF_OPER_STATUS_UNKNOWN"
+	case NET_IF_OPER_STATUS_DORMANT:
+		return "NET_IF_OPER_STATUS_DORMANT"
+	case NET_IF_OPER_STATUS_NOT_PRESENT:
+		return "NET_IF_OPER_STATUS_NOT_PRESENT"
+	case NET_IF_OPER_STATUS_LOWER_LAYER_DOWN:
+		return "NET_IF_OPER_STATUS_LOWER_LAYER_DOWN"
+	default:
+		return fmt.Sprintf("NET_IF_OPER_STATUS(%d)", int32(e))
+	}
+}
+
 type NET_IF_RCV_ADDRESS_TYPE int32
 
 const (
@@ -473,6 +1333,21 @@ const (
 	NET_IF_RCV_ADDRESS_TYPE_VOLATILE     NET_IF_RCV_ADDRESS_TYPE = 2
 	NET_IF_RCV_ADDRESS_TYPE_NON_VOLATILE NET_IF_RCV_ADDRESS_TYPE = 3
 )
+
+// String returns the NET_IF_RCV_ADDRESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_IF_RCV_ADDRESS_TYPE) String() string {
+	switch e {
+	case NET_IF_RCV_ADDRESS_TYPE_OTHER:
+		return "NET_IF_RCV_ADDRESS_TYPE_OTHER"
+	case NET_IF_RCV_ADDRESS_TYPE_VOLATILE:
+		return "NET_IF_RCV_ADDRESS_TYPE_VOLATILE"
+	case NET_IF_RCV_ADDRESS_TYPE_NON_VOLATILE:
+		return "NET_IF_RCV_ADDRESS_TYPE_NON_VOLATILE"
+	default:
+		return fmt.Sprintf("NET_IF_RCV_ADDRESS_TYPE(%d)", int32(e))
+	}
+}
 
 type OFFLOAD_CONF_ALGO int32
 
@@ -484,6 +1359,25 @@ const (
 	OFFLOAD_IPSEC_CONF_MAX      OFFLOAD_CONF_ALGO = 4
 )
 
+// String returns the OFFLOAD_CONF_ALGO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OFFLOAD_CONF_ALGO) String() string {
+	switch e {
+	case OFFLOAD_IPSEC_CONF_NONE:
+		return "OFFLOAD_IPSEC_CONF_NONE"
+	case OFFLOAD_IPSEC_CONF_DES:
+		return "OFFLOAD_IPSEC_CONF_DES"
+	case OFFLOAD_IPSEC_CONF_RESERVED:
+		return "OFFLOAD_IPSEC_CONF_RESERVED"
+	case OFFLOAD_IPSEC_CONF_3_DES:
+		return "OFFLOAD_IPSEC_CONF_3_DES"
+	case OFFLOAD_IPSEC_CONF_MAX:
+		return "OFFLOAD_IPSEC_CONF_MAX"
+	default:
+		return fmt.Sprintf("OFFLOAD_CONF_ALGO(%d)", int32(e))
+	}
+}
+
 type OFFLOAD_INTEGRITY_ALGO int32
 
 const (
@@ -493,12 +1387,42 @@ const (
 	OFFLOAD_IPSEC_INTEGRITY_MAX  OFFLOAD_INTEGRITY_ALGO = 3
 )
 
+// String returns the OFFLOAD_INTEGRITY_ALGO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OFFLOAD_INTEGRITY_ALGO) String() string {
+	switch e {
+	case OFFLOAD_IPSEC_INTEGRITY_NONE:
+		return "OFFLOAD_IPSEC_INTEGRITY_NONE"
+	case OFFLOAD_IPSEC_INTEGRITY_MD5:
+		return "OFFLOAD_IPSEC_INTEGRITY_MD5"
+	case OFFLOAD_IPSEC_INTEGRITY_SHA:
+		return "OFFLOAD_IPSEC_INTEGRITY_SHA"
+	case OFFLOAD_IPSEC_INTEGRITY_MAX:
+		return "OFFLOAD_IPSEC_INTEGRITY_MAX"
+	default:
+		return fmt.Sprintf("OFFLOAD_INTEGRITY_ALGO(%d)", int32(e))
+	}
+}
+
 type OFFLOAD_OPERATION_E int32
 
 const (
 	AUTHENTICATE OFFLOAD_OPERATION_E = 1
 	ENCRYPT      OFFLOAD_OPERATION_E = 2
 )
+
+// String returns the OFFLOAD_OPERATION_E constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OFFLOAD_OPERATION_E) String() string {
+	switch e {
+	case AUTHENTICATE:
+		return "AUTHENTICATE"
+	case ENCRYPT:
+		return "ENCRYPT"
+	default:
+		return fmt.Sprintf("OFFLOAD_OPERATION_E(%d)", int32(e))
+	}
+}
 
 // TUNNEL_TYPE: https://learn.microsoft.com/windows/win32/api/ifdef/ne-ifdef-tunnel_type
 type TUNNEL_TYPE int32
@@ -513,9 +1437,45 @@ const (
 	TUNNEL_TYPE_IPHTTPS TUNNEL_TYPE = 15
 )
 
+// String returns the TUNNEL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TUNNEL_TYPE) String() string {
+	switch e {
+	case TUNNEL_TYPE_NONE:
+		return "TUNNEL_TYPE_NONE"
+	case TUNNEL_TYPE_OTHER:
+		return "TUNNEL_TYPE_OTHER"
+	case TUNNEL_TYPE_DIRECT:
+		return "TUNNEL_TYPE_DIRECT"
+	case TUNNEL_TYPE_6TO4:
+		return "TUNNEL_TYPE_6TO4"
+	case TUNNEL_TYPE_ISATAP:
+		return "TUNNEL_TYPE_ISATAP"
+	case TUNNEL_TYPE_TEREDO:
+		return "TUNNEL_TYPE_TEREDO"
+	case TUNNEL_TYPE_IPHTTPS:
+		return "TUNNEL_TYPE_IPHTTPS"
+	default:
+		return fmt.Sprintf("TUNNEL_TYPE(%d)", int32(e))
+	}
+}
+
 type UDP_ENCAP_TYPE int32
 
 const (
 	OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_IKE   UDP_ENCAP_TYPE = 0
 	OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_OTHER UDP_ENCAP_TYPE = 1
 )
+
+// String returns the UDP_ENCAP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDP_ENCAP_TYPE) String() string {
+	switch e {
+	case OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_IKE:
+		return "OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_IKE"
+	case OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_OTHER:
+		return "OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_OTHER"
+	default:
+		return fmt.Sprintf("UDP_ENCAP_TYPE(%d)", int32(e))
+	}
+}

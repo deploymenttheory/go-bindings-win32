@@ -4,6 +4,11 @@
 
 package richedit
 
+import (
+	"fmt"
+	"strings"
+)
+
 type CARET_FLAGS int32
 
 const (
@@ -15,6 +20,28 @@ const (
 	CARET_ROTATE90 CARET_FLAGS = 128
 )
 
+// String returns the CARET_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CARET_FLAGS) String() string {
+	switch e {
+	case CARET_NONE:
+		return "CARET_NONE"
+	case CARET_CUSTOM:
+		return "CARET_CUSTOM"
+	case CARET_RTL:
+		return "CARET_RTL"
+	case CARET_ITALIC:
+		return "CARET_ITALIC"
+	case CARET_NULL:
+		return "CARET_NULL"
+	case CARET_ROTATE90:
+		return "CARET_ROTATE90"
+	default:
+		return fmt.Sprintf("CARET_FLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CFE_EFFECTS uint32
 
 const (
@@ -45,6 +72,92 @@ const (
 	CFE_MATHORDINARY  CFE_EFFECTS = 536870912
 )
 
+// String returns the CFE_EFFECTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CFE_EFFECTS) String() string {
+	var parts []string
+	if e&CFE_ALLCAPS != 0 {
+		parts = append(parts, "CFE_ALLCAPS")
+	}
+	if e&CFE_AUTOBACKCOLOR != 0 {
+		parts = append(parts, "CFE_AUTOBACKCOLOR")
+	}
+	if e&CFE_DISABLED != 0 {
+		parts = append(parts, "CFE_DISABLED")
+	}
+	if e&CFE_EMBOSS != 0 {
+		parts = append(parts, "CFE_EMBOSS")
+	}
+	if e&CFE_HIDDEN != 0 {
+		parts = append(parts, "CFE_HIDDEN")
+	}
+	if e&CFE_IMPRINT != 0 {
+		parts = append(parts, "CFE_IMPRINT")
+	}
+	if e&CFE_OUTLINE != 0 {
+		parts = append(parts, "CFE_OUTLINE")
+	}
+	if e&CFE_REVISED != 0 {
+		parts = append(parts, "CFE_REVISED")
+	}
+	if e&CFE_SHADOW != 0 {
+		parts = append(parts, "CFE_SHADOW")
+	}
+	if e&CFE_SMALLCAPS != 0 {
+		parts = append(parts, "CFE_SMALLCAPS")
+	}
+	if e&CFE_AUTOCOLOR != 0 {
+		parts = append(parts, "CFE_AUTOCOLOR")
+	}
+	if e&CFE_BOLD != 0 {
+		parts = append(parts, "CFE_BOLD")
+	}
+	if e&CFE_ITALIC != 0 {
+		parts = append(parts, "CFE_ITALIC")
+	}
+	if e&CFE_STRIKEOUT != 0 {
+		parts = append(parts, "CFE_STRIKEOUT")
+	}
+	if e&CFE_UNDERLINE != 0 {
+		parts = append(parts, "CFE_UNDERLINE")
+	}
+	if e&CFE_PROTECTED != 0 {
+		parts = append(parts, "CFE_PROTECTED")
+	}
+	if e&CFE_LINK != 0 {
+		parts = append(parts, "CFE_LINK")
+	}
+	if e&CFE_SUBSCRIPT != 0 {
+		parts = append(parts, "CFE_SUBSCRIPT")
+	}
+	if e&CFE_SUPERSCRIPT != 0 {
+		parts = append(parts, "CFE_SUPERSCRIPT")
+	}
+	if e&CFE_FONTBOUND != 0 {
+		parts = append(parts, "CFE_FONTBOUND")
+	}
+	if e&CFE_LINKPROTECTED != 0 {
+		parts = append(parts, "CFE_LINKPROTECTED")
+	}
+	if e&CFE_EXTENDED != 0 {
+		parts = append(parts, "CFE_EXTENDED")
+	}
+	if e&CFE_MATHNOBUILDUP != 0 {
+		parts = append(parts, "CFE_MATHNOBUILDUP")
+	}
+	if e&CFE_MATH != 0 {
+		parts = append(parts, "CFE_MATH")
+	}
+	if e&CFE_MATHORDINARY != 0 {
+		parts = append(parts, "CFE_MATHORDINARY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CFM_MASK uint32
 
 const (
@@ -93,6 +206,145 @@ const (
 	CFM_ALLEFFECTS    CFM_MASK = 2115207167
 )
 
+// String returns the CFM_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CFM_MASK) String() string {
+	var parts []string
+	if e&CFM_SUBSCRIPT != 0 {
+		parts = append(parts, "CFM_SUBSCRIPT")
+	}
+	if e&CFM_SUPERSCRIPT != 0 {
+		parts = append(parts, "CFM_SUPERSCRIPT")
+	}
+	if e&CFM_EFFECTS != 0 {
+		parts = append(parts, "CFM_EFFECTS")
+	}
+	if e&CFM_ALL != 0 {
+		parts = append(parts, "CFM_ALL")
+	}
+	if e&CFM_BOLD != 0 {
+		parts = append(parts, "CFM_BOLD")
+	}
+	if e&CFM_CHARSET != 0 {
+		parts = append(parts, "CFM_CHARSET")
+	}
+	if e&CFM_COLOR != 0 {
+		parts = append(parts, "CFM_COLOR")
+	}
+	if e&CFM_FACE != 0 {
+		parts = append(parts, "CFM_FACE")
+	}
+	if e&CFM_ITALIC != 0 {
+		parts = append(parts, "CFM_ITALIC")
+	}
+	if e&CFM_OFFSET != 0 {
+		parts = append(parts, "CFM_OFFSET")
+	}
+	if e&CFM_PROTECTED != 0 {
+		parts = append(parts, "CFM_PROTECTED")
+	}
+	if e&CFM_SIZE != 0 {
+		parts = append(parts, "CFM_SIZE")
+	}
+	if e&CFM_STRIKEOUT != 0 {
+		parts = append(parts, "CFM_STRIKEOUT")
+	}
+	if e&CFM_UNDERLINE != 0 {
+		parts = append(parts, "CFM_UNDERLINE")
+	}
+	if e&CFM_LINK != 0 {
+		parts = append(parts, "CFM_LINK")
+	}
+	if e&CFM_SMALLCAPS != 0 {
+		parts = append(parts, "CFM_SMALLCAPS")
+	}
+	if e&CFM_ALLCAPS != 0 {
+		parts = append(parts, "CFM_ALLCAPS")
+	}
+	if e&CFM_HIDDEN != 0 {
+		parts = append(parts, "CFM_HIDDEN")
+	}
+	if e&CFM_OUTLINE != 0 {
+		parts = append(parts, "CFM_OUTLINE")
+	}
+	if e&CFM_SHADOW != 0 {
+		parts = append(parts, "CFM_SHADOW")
+	}
+	if e&CFM_EMBOSS != 0 {
+		parts = append(parts, "CFM_EMBOSS")
+	}
+	if e&CFM_IMPRINT != 0 {
+		parts = append(parts, "CFM_IMPRINT")
+	}
+	if e&CFM_DISABLED != 0 {
+		parts = append(parts, "CFM_DISABLED")
+	}
+	if e&CFM_REVISED != 0 {
+		parts = append(parts, "CFM_REVISED")
+	}
+	if e&CFM_REVAUTHOR != 0 {
+		parts = append(parts, "CFM_REVAUTHOR")
+	}
+	if e&CFM_ANIMATION != 0 {
+		parts = append(parts, "CFM_ANIMATION")
+	}
+	if e&CFM_STYLE != 0 {
+		parts = append(parts, "CFM_STYLE")
+	}
+	if e&CFM_KERNING != 0 {
+		parts = append(parts, "CFM_KERNING")
+	}
+	if e&CFM_SPACING != 0 {
+		parts = append(parts, "CFM_SPACING")
+	}
+	if e&CFM_WEIGHT != 0 {
+		parts = append(parts, "CFM_WEIGHT")
+	}
+	if e&CFM_UNDERLINETYPE != 0 {
+		parts = append(parts, "CFM_UNDERLINETYPE")
+	}
+	if e&CFM_COOKIE != 0 {
+		parts = append(parts, "CFM_COOKIE")
+	}
+	if e&CFM_LCID != 0 {
+		parts = append(parts, "CFM_LCID")
+	}
+	if e&CFM_BACKCOLOR != 0 {
+		parts = append(parts, "CFM_BACKCOLOR")
+	}
+	if e&CFM_EFFECTS2 != 0 {
+		parts = append(parts, "CFM_EFFECTS2")
+	}
+	if e&CFM_ALL2 != 0 {
+		parts = append(parts, "CFM_ALL2")
+	}
+	if e&CFM_FONTBOUND != 0 {
+		parts = append(parts, "CFM_FONTBOUND")
+	}
+	if e&CFM_LINKPROTECTED != 0 {
+		parts = append(parts, "CFM_LINKPROTECTED")
+	}
+	if e&CFM_EXTENDED != 0 {
+		parts = append(parts, "CFM_EXTENDED")
+	}
+	if e&CFM_MATHNOBUILDUP != 0 {
+		parts = append(parts, "CFM_MATHNOBUILDUP")
+	}
+	if e&CFM_MATH != 0 {
+		parts = append(parts, "CFM_MATH")
+	}
+	if e&CFM_MATHORDINARY != 0 {
+		parts = append(parts, "CFM_MATHORDINARY")
+	}
+	if e&CFM_ALLEFFECTS != 0 {
+		parts = append(parts, "CFM_ALLEFFECTS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CHANGETYPE int32
 
 const (
@@ -102,12 +354,42 @@ const (
 	CN_NEWREDO     CHANGETYPE = 4
 )
 
+// String returns the CHANGETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANGETYPE) String() string {
+	switch e {
+	case CN_GENERIC:
+		return "CN_GENERIC"
+	case CN_TEXTCHANGED:
+		return "CN_TEXTCHANGED"
+	case CN_NEWUNDO:
+		return "CN_NEWUNDO"
+	case CN_NEWREDO:
+		return "CN_NEWREDO"
+	default:
+		return fmt.Sprintf("CHANGETYPE(%d)", int32(e))
+	}
+}
+
 type ENDCOMPOSITIONNOTIFY_CODE uint32
 
 const (
 	ECN_ENDCOMPOSITION ENDCOMPOSITIONNOTIFY_CODE = 1
 	ECN_NEWTEXT        ENDCOMPOSITIONNOTIFY_CODE = 2
 )
+
+// String returns the ENDCOMPOSITIONNOTIFY_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENDCOMPOSITIONNOTIFY_CODE) String() string {
+	switch e {
+	case ECN_ENDCOMPOSITION:
+		return "ECN_ENDCOMPOSITION"
+	case ECN_NEWTEXT:
+		return "ECN_NEWTEXT"
+	default:
+		return fmt.Sprintf("ENDCOMPOSITIONNOTIFY_CODE(%d)", uint32(e))
+	}
+}
 
 type GETTEXTEX_FLAGS uint32
 
@@ -119,6 +401,26 @@ const (
 	GT_USECRLF      GETTEXTEX_FLAGS = 1
 )
 
+// String returns the GETTEXTEX_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GETTEXTEX_FLAGS) String() string {
+	switch e {
+	case GT_DEFAULT:
+		return "GT_DEFAULT"
+	case GT_NOHIDDENTEXT:
+		return "GT_NOHIDDENTEXT"
+	case GT_RAWTEXT:
+		return "GT_RAWTEXT"
+	case GT_SELECTION:
+		return "GT_SELECTION"
+	case GT_USECRLF:
+		return "GT_USECRLF"
+	default:
+		return fmt.Sprintf("GETTEXTEX_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GETTEXTLENGTHEX_FLAGS uint32
 
 const (
@@ -130,11 +432,47 @@ const (
 	GTL_NUMBYTES GETTEXTLENGTHEX_FLAGS = 16
 )
 
+// String returns the GETTEXTLENGTHEX_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GETTEXTLENGTHEX_FLAGS) String() string {
+	var parts []string
+	if e&GTL_USECRLF != 0 {
+		parts = append(parts, "GTL_USECRLF")
+	}
+	if e&GTL_PRECISE != 0 {
+		parts = append(parts, "GTL_PRECISE")
+	}
+	if e&GTL_CLOSE != 0 {
+		parts = append(parts, "GTL_CLOSE")
+	}
+	if e&GTL_NUMCHARS != 0 {
+		parts = append(parts, "GTL_NUMCHARS")
+	}
+	if e&GTL_NUMBYTES != 0 {
+		parts = append(parts, "GTL_NUMBYTES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type IMECOMPTEXT_FLAGS uint32
 
 const (
 	ICT_RESULTREADSTR IMECOMPTEXT_FLAGS = 1
 )
+
+// String returns the IMECOMPTEXT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMECOMPTEXT_FLAGS) String() string {
+	switch e {
+	case ICT_RESULTREADSTR:
+		return "ICT_RESULTREADSTR"
+	default:
+		return fmt.Sprintf("IMECOMPTEXT_FLAGS(%d)", uint32(e))
+	}
+}
 
 // KHYPH: https://learn.microsoft.com/windows/win32/api/richedit/ne-richedit-khyph
 type KHYPH int32
@@ -148,6 +486,29 @@ const (
 	KhyphChangeAfter  KHYPH = 5
 	KhyphDelAndChange KHYPH = 6
 )
+
+// String returns the KHYPH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KHYPH) String() string {
+	switch e {
+	case KhyphNil:
+		return "KhyphNil"
+	case KhyphNormal:
+		return "KhyphNormal"
+	case KhyphAddBefore:
+		return "KhyphAddBefore"
+	case KhyphChangeBefore:
+		return "KhyphChangeBefore"
+	case KhyphDeleteBefore:
+		return "KhyphDeleteBefore"
+	case KhyphChangeAfter:
+		return "KhyphChangeAfter"
+	case KhyphDelAndChange:
+		return "KhyphDelAndChange"
+	default:
+		return fmt.Sprintf("KHYPH(%d)", int32(e))
+	}
+}
 
 // MANCODE: https://learn.microsoft.com/windows/win32/api/tom/ne-tom-mancode
 type MANCODE int32
@@ -170,6 +531,47 @@ const (
 	MLOOP  MANCODE = 11
 	MOPENA MANCODE = 12
 )
+
+// String returns the MANCODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MANCODE) String() string {
+	switch e {
+	case MBOLD:
+		return "MBOLD"
+	case MITAL:
+		return "MITAL"
+	case MGREEK:
+		return "MGREEK"
+	case MROMN:
+		return "MROMN"
+	case MSCRP:
+		return "MSCRP"
+	case MFRAK:
+		return "MFRAK"
+	case MOPEN:
+		return "MOPEN"
+	case MSANS:
+		return "MSANS"
+	case MMONO:
+		return "MMONO"
+	case MMATH:
+		return "MMATH"
+	case MISOL:
+		return "MISOL"
+	case MINIT:
+		return "MINIT"
+	case MTAIL:
+		return "MTAIL"
+	case MSTRCH:
+		return "MSTRCH"
+	case MLOOP:
+		return "MLOOP"
+	case MOPENA:
+		return "MOPENA"
+	default:
+		return fmt.Sprintf("MANCODE(%d)", int32(e))
+	}
+}
 
 // OBJECTTYPE: https://learn.microsoft.com/windows/win32/api/tom/ne-tom-objecttype
 type OBJECTTYPE int32
@@ -208,6 +610,73 @@ const (
 	TomObjectMax        OBJECTTYPE = 33
 )
 
+// String returns the OBJECTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OBJECTTYPE) String() string {
+	switch e {
+	case TomSimpleText:
+		return "TomSimpleText"
+	case TomRuby:
+		return "TomRuby"
+	case TomHorzVert:
+		return "TomHorzVert"
+	case TomWarichu:
+		return "TomWarichu"
+	case TomEq:
+		return "TomEq"
+	case TomMath:
+		return "TomMath"
+	case TomBox:
+		return "TomBox"
+	case TomBoxedFormula:
+		return "TomBoxedFormula"
+	case TomBrackets:
+		return "TomBrackets"
+	case TomBracketsWithSeps:
+		return "TomBracketsWithSeps"
+	case TomEquationArray:
+		return "TomEquationArray"
+	case TomFraction:
+		return "TomFraction"
+	case TomFunctionApply:
+		return "TomFunctionApply"
+	case TomLeftSubSup:
+		return "TomLeftSubSup"
+	case TomLowerLimit:
+		return "TomLowerLimit"
+	case TomMatrix:
+		return "TomMatrix"
+	case TomNary:
+		return "TomNary"
+	case TomOpChar:
+		return "TomOpChar"
+	case TomOverbar:
+		return "TomOverbar"
+	case TomPhantom:
+		return "TomPhantom"
+	case TomRadical:
+		return "TomRadical"
+	case TomSlashedFraction:
+		return "TomSlashedFraction"
+	case TomStack:
+		return "TomStack"
+	case TomStretchStack:
+		return "TomStretchStack"
+	case TomSubscript:
+		return "TomSubscript"
+	case TomSubSup:
+		return "TomSubSup"
+	case TomSuperscript:
+		return "TomSuperscript"
+	case TomUnderbar:
+		return "TomUnderbar"
+	case TomUpperLimit:
+		return "TomUpperLimit"
+	default:
+		return fmt.Sprintf("OBJECTTYPE(%d)", int32(e))
+	}
+}
+
 type PARAFORMAT_ALIGNMENT uint16
 
 const (
@@ -222,6 +691,32 @@ const (
 	PFA_FULL_GLYPHS      PARAFORMAT_ALIGNMENT = 8
 )
 
+// String returns the PARAFORMAT_ALIGNMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PARAFORMAT_ALIGNMENT) String() string {
+	switch e {
+	case PFA_LEFT:
+		return "PFA_LEFT"
+	case PFA_RIGHT:
+		return "PFA_RIGHT"
+	case PFA_CENTER:
+		return "PFA_CENTER"
+	case PFA_JUSTIFY:
+		return "PFA_JUSTIFY"
+	case PFA_FULL_NEWSPAPER:
+		return "PFA_FULL_NEWSPAPER"
+	case PFA_FULL_INTERLETTER:
+		return "PFA_FULL_INTERLETTER"
+	case PFA_FULL_SCALED:
+		return "PFA_FULL_SCALED"
+	case PFA_FULL_GLYPHS:
+		return "PFA_FULL_GLYPHS"
+	default:
+		return fmt.Sprintf("PARAFORMAT_ALIGNMENT(%d)", uint16(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PARAFORMAT_BORDERS uint16
 
 const (
@@ -234,6 +729,38 @@ const (
 	PARAFORMAT_BORDERS_AUTOCOLOR PARAFORMAT_BORDERS = 64
 )
 
+// String returns the PARAFORMAT_BORDERS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PARAFORMAT_BORDERS) String() string {
+	var parts []string
+	if e&PARAFORMAT_BORDERS_LEFT != 0 {
+		parts = append(parts, "PARAFORMAT_BORDERS_LEFT")
+	}
+	if e&PARAFORMAT_BORDERS_RIGHT != 0 {
+		parts = append(parts, "PARAFORMAT_BORDERS_RIGHT")
+	}
+	if e&PARAFORMAT_BORDERS_TOP != 0 {
+		parts = append(parts, "PARAFORMAT_BORDERS_TOP")
+	}
+	if e&PARAFORMAT_BORDERS_BOTTOM != 0 {
+		parts = append(parts, "PARAFORMAT_BORDERS_BOTTOM")
+	}
+	if e&PARAFORMAT_BORDERS_INSIDE != 0 {
+		parts = append(parts, "PARAFORMAT_BORDERS_INSIDE")
+	}
+	if e&PARAFORMAT_BORDERS_OUTSIDE != 0 {
+		parts = append(parts, "PARAFORMAT_BORDERS_OUTSIDE")
+	}
+	if e&PARAFORMAT_BORDERS_AUTOCOLOR != 0 {
+		parts = append(parts, "PARAFORMAT_BORDERS_AUTOCOLOR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PARAFORMAT_MASK uint32
 
 const (
@@ -273,6 +800,119 @@ const (
 	PFM_ALL2              PARAFORMAT_MASK = 3506437631
 )
 
+// String returns the PARAFORMAT_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PARAFORMAT_MASK) String() string {
+	var parts []string
+	if e&PFM_STARTINDENT != 0 {
+		parts = append(parts, "PFM_STARTINDENT")
+	}
+	if e&PFM_RIGHTINDENT != 0 {
+		parts = append(parts, "PFM_RIGHTINDENT")
+	}
+	if e&PFM_OFFSET != 0 {
+		parts = append(parts, "PFM_OFFSET")
+	}
+	if e&PFM_ALIGNMENT != 0 {
+		parts = append(parts, "PFM_ALIGNMENT")
+	}
+	if e&PFM_TABSTOPS != 0 {
+		parts = append(parts, "PFM_TABSTOPS")
+	}
+	if e&PFM_NUMBERING != 0 {
+		parts = append(parts, "PFM_NUMBERING")
+	}
+	if e&PFM_OFFSETINDENT != 0 {
+		parts = append(parts, "PFM_OFFSETINDENT")
+	}
+	if e&PFM_SPACEBEFORE != 0 {
+		parts = append(parts, "PFM_SPACEBEFORE")
+	}
+	if e&PFM_SPACEAFTER != 0 {
+		parts = append(parts, "PFM_SPACEAFTER")
+	}
+	if e&PFM_LINESPACING != 0 {
+		parts = append(parts, "PFM_LINESPACING")
+	}
+	if e&PFM_STYLE != 0 {
+		parts = append(parts, "PFM_STYLE")
+	}
+	if e&PFM_BORDER != 0 {
+		parts = append(parts, "PFM_BORDER")
+	}
+	if e&PFM_SHADING != 0 {
+		parts = append(parts, "PFM_SHADING")
+	}
+	if e&PFM_NUMBERINGSTYLE != 0 {
+		parts = append(parts, "PFM_NUMBERINGSTYLE")
+	}
+	if e&PFM_NUMBERINGTAB != 0 {
+		parts = append(parts, "PFM_NUMBERINGTAB")
+	}
+	if e&PFM_NUMBERINGSTART != 0 {
+		parts = append(parts, "PFM_NUMBERINGSTART")
+	}
+	if e&PFM_RTLPARA != 0 {
+		parts = append(parts, "PFM_RTLPARA")
+	}
+	if e&PFM_KEEP != 0 {
+		parts = append(parts, "PFM_KEEP")
+	}
+	if e&PFM_KEEPNEXT != 0 {
+		parts = append(parts, "PFM_KEEPNEXT")
+	}
+	if e&PFM_PAGEBREAKBEFORE != 0 {
+		parts = append(parts, "PFM_PAGEBREAKBEFORE")
+	}
+	if e&PFM_NOLINENUMBER != 0 {
+		parts = append(parts, "PFM_NOLINENUMBER")
+	}
+	if e&PFM_NOWIDOWCONTROL != 0 {
+		parts = append(parts, "PFM_NOWIDOWCONTROL")
+	}
+	if e&PFM_DONOTHYPHEN != 0 {
+		parts = append(parts, "PFM_DONOTHYPHEN")
+	}
+	if e&PFM_SIDEBYSIDE != 0 {
+		parts = append(parts, "PFM_SIDEBYSIDE")
+	}
+	if e&PFM_COLLAPSED != 0 {
+		parts = append(parts, "PFM_COLLAPSED")
+	}
+	if e&PFM_OUTLINELEVEL != 0 {
+		parts = append(parts, "PFM_OUTLINELEVEL")
+	}
+	if e&PFM_BOX != 0 {
+		parts = append(parts, "PFM_BOX")
+	}
+	if e&PFM_RESERVED2 != 0 {
+		parts = append(parts, "PFM_RESERVED2")
+	}
+	if e&PFM_TABLEROWDELIMITER != 0 {
+		parts = append(parts, "PFM_TABLEROWDELIMITER")
+	}
+	if e&PFM_TEXTWRAPPINGBREAK != 0 {
+		parts = append(parts, "PFM_TEXTWRAPPINGBREAK")
+	}
+	if e&PFM_TABLE != 0 {
+		parts = append(parts, "PFM_TABLE")
+	}
+	if e&PFM_ALL != 0 {
+		parts = append(parts, "PFM_ALL")
+	}
+	if e&PFM_EFFECTS != 0 {
+		parts = append(parts, "PFM_EFFECTS")
+	}
+	if e&PFM_ALL2 != 0 {
+		parts = append(parts, "PFM_ALL2")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PARAFORMAT_NUMBERING uint16
 
 const (
@@ -284,6 +924,34 @@ const (
 	PFN_UCROMAN  PARAFORMAT_NUMBERING = 6
 )
 
+// String returns the PARAFORMAT_NUMBERING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PARAFORMAT_NUMBERING) String() string {
+	var parts []string
+	if e&PFN_BULLET != 0 {
+		parts = append(parts, "PFN_BULLET")
+	}
+	if e&PFN_ARABIC != 0 {
+		parts = append(parts, "PFN_ARABIC")
+	}
+	if e&PFN_LCLETTER != 0 {
+		parts = append(parts, "PFN_LCLETTER")
+	}
+	if e&PFN_UCLETTER != 0 {
+		parts = append(parts, "PFN_UCLETTER")
+	}
+	if e&PFN_LCROMAN != 0 {
+		parts = append(parts, "PFN_LCROMAN")
+	}
+	if e&PFN_UCROMAN != 0 {
+		parts = append(parts, "PFN_UCROMAN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type PARAFORMAT_NUMBERING_STYLE uint16
 
 const (
@@ -294,6 +962,27 @@ const (
 	PFNS_NONUMBER  PARAFORMAT_NUMBERING_STYLE = 1024
 	PFNS_NEWNUMBER PARAFORMAT_NUMBERING_STYLE = 32768
 )
+
+// String returns the PARAFORMAT_NUMBERING_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PARAFORMAT_NUMBERING_STYLE) String() string {
+	switch e {
+	case PFNS_PAREN:
+		return "PFNS_PAREN"
+	case PFNS_PARENS:
+		return "PFNS_PARENS"
+	case PFNS_PERIOD:
+		return "PFNS_PERIOD"
+	case PFNS_PLAIN:
+		return "PFNS_PLAIN"
+	case PFNS_NONUMBER:
+		return "PFNS_NONUMBER"
+	case PFNS_NEWNUMBER:
+		return "PFNS_NEWNUMBER"
+	default:
+		return fmt.Sprintf("PARAFORMAT_NUMBERING_STYLE(%d)", uint16(e))
+	}
+}
 
 type PARAFORMAT_SHADING_STYLE uint16
 
@@ -313,6 +1002,42 @@ const (
 	PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS   PARAFORMAT_SHADING_STYLE = 12
 )
 
+// String returns the PARAFORMAT_SHADING_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PARAFORMAT_SHADING_STYLE) String() string {
+	switch e {
+	case PARAFORMAT_SHADING_STYLE_NONE:
+		return "PARAFORMAT_SHADING_STYLE_NONE"
+	case PARAFORMAT_SHADING_STYLE_DARK_HORIZ:
+		return "PARAFORMAT_SHADING_STYLE_DARK_HORIZ"
+	case PARAFORMAT_SHADING_STYLE_DARK_VERT:
+		return "PARAFORMAT_SHADING_STYLE_DARK_VERT"
+	case PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG:
+		return "PARAFORMAT_SHADING_STYLE_DARK_DOWN_DIAG"
+	case PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG:
+		return "PARAFORMAT_SHADING_STYLE_DARK_UP_DIAG"
+	case PARAFORMAT_SHADING_STYLE_DARK_GRID:
+		return "PARAFORMAT_SHADING_STYLE_DARK_GRID"
+	case PARAFORMAT_SHADING_STYLE_DARK_TRELLIS:
+		return "PARAFORMAT_SHADING_STYLE_DARK_TRELLIS"
+	case PARAFORMAT_SHADING_STYLE_LIGHT_HORZ:
+		return "PARAFORMAT_SHADING_STYLE_LIGHT_HORZ"
+	case PARAFORMAT_SHADING_STYLE_LIGHT_VERT:
+		return "PARAFORMAT_SHADING_STYLE_LIGHT_VERT"
+	case PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG:
+		return "PARAFORMAT_SHADING_STYLE_LIGHT_DOWN_DIAG"
+	case PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG:
+		return "PARAFORMAT_SHADING_STYLE_LIGHT_UP_DIAG"
+	case PARAFORMAT_SHADING_STYLE_LIGHT_GRID:
+		return "PARAFORMAT_SHADING_STYLE_LIGHT_GRID"
+	case PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS:
+		return "PARAFORMAT_SHADING_STYLE_LIGHT_TRELLIS"
+	default:
+		return fmt.Sprintf("PARAFORMAT_SHADING_STYLE(%d)", uint16(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type REOBJECT_FLAGS uint32
 
 const (
@@ -337,6 +1062,74 @@ const (
 	REO_WRAPTEXTAROUND  REOBJECT_FLAGS = 512
 )
 
+// String returns the REOBJECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REOBJECT_FLAGS) String() string {
+	var parts []string
+	if e&REO_ALIGNTORIGHT != 0 {
+		parts = append(parts, "REO_ALIGNTORIGHT")
+	}
+	if e&REO_BELOWBASELINE != 0 {
+		parts = append(parts, "REO_BELOWBASELINE")
+	}
+	if e&REO_BLANK != 0 {
+		parts = append(parts, "REO_BLANK")
+	}
+	if e&REO_CANROTATE != 0 {
+		parts = append(parts, "REO_CANROTATE")
+	}
+	if e&REO_DONTNEEDPALETTE != 0 {
+		parts = append(parts, "REO_DONTNEEDPALETTE")
+	}
+	if e&REO_DYNAMICSIZE != 0 {
+		parts = append(parts, "REO_DYNAMICSIZE")
+	}
+	if e&REO_GETMETAFILE != 0 {
+		parts = append(parts, "REO_GETMETAFILE")
+	}
+	if e&REO_HILITED != 0 {
+		parts = append(parts, "REO_HILITED")
+	}
+	if e&REO_INPLACEACTIVE != 0 {
+		parts = append(parts, "REO_INPLACEACTIVE")
+	}
+	if e&REO_INVERTEDSELECT != 0 {
+		parts = append(parts, "REO_INVERTEDSELECT")
+	}
+	if e&REO_LINK != 0 {
+		parts = append(parts, "REO_LINK")
+	}
+	if e&REO_LINKAVAILABLE != 0 {
+		parts = append(parts, "REO_LINKAVAILABLE")
+	}
+	if e&REO_OPEN != 0 {
+		parts = append(parts, "REO_OPEN")
+	}
+	if e&REO_OWNERDRAWSELECT != 0 {
+		parts = append(parts, "REO_OWNERDRAWSELECT")
+	}
+	if e&REO_RESIZABLE != 0 {
+		parts = append(parts, "REO_RESIZABLE")
+	}
+	if e&REO_SELECTED != 0 {
+		parts = append(parts, "REO_SELECTED")
+	}
+	if e&REO_STATIC != 0 {
+		parts = append(parts, "REO_STATIC")
+	}
+	if e&REO_USEASBACKGROUND != 0 {
+		parts = append(parts, "REO_USEASBACKGROUND")
+	}
+	if e&REO_WRAPTEXTAROUND != 0 {
+		parts = append(parts, "REO_WRAPTEXTAROUND")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE uint16
 
 const (
@@ -348,6 +1141,32 @@ const (
 	GCM_RIGHTMOUSEDROP RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE = 32768
 )
 
+// String returns the RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE) String() string {
+	var parts []string
+	if e&SEL_TEXT != 0 {
+		parts = append(parts, "SEL_TEXT")
+	}
+	if e&SEL_OBJECT != 0 {
+		parts = append(parts, "SEL_OBJECT")
+	}
+	if e&SEL_MULTICHAR != 0 {
+		parts = append(parts, "SEL_MULTICHAR")
+	}
+	if e&SEL_MULTIOBJECT != 0 {
+		parts = append(parts, "SEL_MULTIOBJECT")
+	}
+	if e&GCM_RIGHTMOUSEDROP != 0 {
+		parts = append(parts, "GCM_RIGHTMOUSEDROP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type RICH_EDIT_GET_OBJECT_FLAGS uint32
 
 const (
@@ -357,6 +1176,28 @@ const (
 	REO_GETOBJ_NO_INTERFACES  RICH_EDIT_GET_OBJECT_FLAGS = 0
 	REO_GETOBJ_ALL_INTERFACES RICH_EDIT_GET_OBJECT_FLAGS = 7
 )
+
+// String returns the RICH_EDIT_GET_OBJECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RICH_EDIT_GET_OBJECT_FLAGS) String() string {
+	var parts []string
+	if e&REO_GETOBJ_POLEOBJ != 0 {
+		parts = append(parts, "REO_GETOBJ_POLEOBJ")
+	}
+	if e&REO_GETOBJ_PSTG != 0 {
+		parts = append(parts, "REO_GETOBJ_PSTG")
+	}
+	if e&REO_GETOBJ_POLESITE != 0 {
+		parts = append(parts, "REO_GETOBJ_POLESITE")
+	}
+	if e&REO_GETOBJ_ALL_INTERFACES != 0 {
+		parts = append(parts, "REO_GETOBJ_ALL_INTERFACES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // TEXTMODE: https://learn.microsoft.com/windows/win32/api/richedit/ne-richedit-textmode
 type TEXTMODE int32
@@ -370,12 +1211,46 @@ const (
 	TM_MULTICODEPAGE   TEXTMODE = 32
 )
 
+// String returns the TEXTMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TEXTMODE) String() string {
+	switch e {
+	case TM_PLAINTEXT:
+		return "TM_PLAINTEXT"
+	case TM_RICHTEXT:
+		return "TM_RICHTEXT"
+	case TM_SINGLELEVELUNDO:
+		return "TM_SINGLELEVELUNDO"
+	case TM_MULTILEVELUNDO:
+		return "TM_MULTILEVELUNDO"
+	case TM_SINGLECODEPAGE:
+		return "TM_SINGLECODEPAGE"
+	case TM_MULTICODEPAGE:
+		return "TM_MULTICODEPAGE"
+	default:
+		return fmt.Sprintf("TEXTMODE(%d)", int32(e))
+	}
+}
+
 type TXTBACKSTYLE int32
 
 const (
 	TXTBACK_TRANSPARENT TXTBACKSTYLE = 0
 	TXTBACK_OPAQUE      TXTBACKSTYLE = 1
 )
+
+// String returns the TXTBACKSTYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TXTBACKSTYLE) String() string {
+	switch e {
+	case TXTBACK_TRANSPARENT:
+		return "TXTBACK_TRANSPARENT"
+	case TXTBACK_OPAQUE:
+		return "TXTBACK_OPAQUE"
+	default:
+		return fmt.Sprintf("TXTBACKSTYLE(%d)", int32(e))
+	}
+}
 
 type TXTHITRESULT int32
 
@@ -385,6 +1260,23 @@ const (
 	TXTHITRESULT_CLOSE       TXTHITRESULT = 2
 	TXTHITRESULT_HIT         TXTHITRESULT = 3
 )
+
+// String returns the TXTHITRESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TXTHITRESULT) String() string {
+	switch e {
+	case TXTHITRESULT_NOHIT:
+		return "TXTHITRESULT_NOHIT"
+	case TXTHITRESULT_TRANSPARENT:
+		return "TXTHITRESULT_TRANSPARENT"
+	case TXTHITRESULT_CLOSE:
+		return "TXTHITRESULT_CLOSE"
+	case TXTHITRESULT_HIT:
+		return "TXTHITRESULT_HIT"
+	default:
+		return fmt.Sprintf("TXTHITRESULT(%d)", int32(e))
+	}
+}
 
 type TXTNATURALSIZE int32
 
@@ -398,12 +1290,48 @@ const (
 	TXTNS_EMU             TXTNATURALSIZE = -2147483648
 )
 
+// String returns the TXTNATURALSIZE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TXTNATURALSIZE) String() string {
+	switch e {
+	case TXTNS_FITTOCONTENT2:
+		return "TXTNS_FITTOCONTENT2"
+	case TXTNS_FITTOCONTENT:
+		return "TXTNS_FITTOCONTENT"
+	case TXTNS_ROUNDTOLINE:
+		return "TXTNS_ROUNDTOLINE"
+	case TXTNS_FITTOCONTENT3:
+		return "TXTNS_FITTOCONTENT3"
+	case TXTNS_FITTOCONTENTWSP:
+		return "TXTNS_FITTOCONTENTWSP"
+	case TXTNS_INCLUDELASTLINE:
+		return "TXTNS_INCLUDELASTLINE"
+	case TXTNS_EMU:
+		return "TXTNS_EMU"
+	default:
+		return fmt.Sprintf("TXTNATURALSIZE(%d)", int32(e))
+	}
+}
+
 type TXTVIEW int32
 
 const (
 	TXTVIEW_ACTIVE   TXTVIEW = 0
 	TXTVIEW_INACTIVE TXTVIEW = -1
 )
+
+// String returns the TXTVIEW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TXTVIEW) String() string {
+	switch e {
+	case TXTVIEW_ACTIVE:
+		return "TXTVIEW_ACTIVE"
+	case TXTVIEW_INACTIVE:
+		return "TXTVIEW_INACTIVE"
+	default:
+		return fmt.Sprintf("TXTVIEW(%d)", int32(e))
+	}
+}
 
 // UNDONAMEID: https://learn.microsoft.com/windows/win32/api/richedit/ne-richedit-undonameid
 type UNDONAMEID int32
@@ -417,6 +1345,29 @@ const (
 	UID_PASTE     UNDONAMEID = 5
 	UID_AUTOTABLE UNDONAMEID = 6
 )
+
+// String returns the UNDONAMEID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNDONAMEID) String() string {
+	switch e {
+	case UID_UNKNOWN:
+		return "UID_UNKNOWN"
+	case UID_TYPING:
+		return "UID_TYPING"
+	case UID_DELETE:
+		return "UID_DELETE"
+	case UID_DRAGDROP:
+		return "UID_DRAGDROP"
+	case UID_CUT:
+		return "UID_CUT"
+	case UID_PASTE:
+		return "UID_PASTE"
+	case UID_AUTOTABLE:
+		return "UID_AUTOTABLE"
+	default:
+		return fmt.Sprintf("UNDONAMEID(%d)", int32(e))
+	}
+}
 
 // TomConstants: https://learn.microsoft.com/windows/win32/api/tom/ne-tom-tomconstants
 type TomConstants int32
@@ -1007,3 +1958,360 @@ const (
 	TomCellStructureChangeOnly         TomConstants = 1
 	TomRowHeightActual                 TomConstants = 2059
 )
+
+// String returns the TomConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TomConstants) String() string {
+	switch e {
+	case TomFalse:
+		return "TomFalse"
+	case TomTrue:
+		return "TomTrue"
+	case TomUndefined:
+		return "TomUndefined"
+	case TomToggle:
+		return "TomToggle"
+	case TomAutoColor:
+		return "TomAutoColor"
+	case TomDefault:
+		return "TomDefault"
+	case TomSuspend:
+		return "TomSuspend"
+	case TomResume:
+		return "TomResume"
+	case TomApplyLater:
+		return "TomApplyLater"
+	case TomTrackParms:
+		return "TomTrackParms"
+	case TomCacheParms:
+		return "TomCacheParms"
+	case TomApplyTmp:
+		return "TomApplyTmp"
+	case TomDisableSmartFont:
+		return "TomDisableSmartFont"
+	case TomEnableSmartFont:
+		return "TomEnableSmartFont"
+	case TomUsePoints:
+		return "TomUsePoints"
+	case TomUseTwips:
+		return "TomUseTwips"
+	case TomBackward:
+		return "TomBackward"
+	case TomForward:
+		return "TomForward"
+	case TomSelectionRow:
+		return "TomSelectionRow"
+	case TomSelectionBlock:
+		return "TomSelectionBlock"
+	case TomSelectionInlineShape:
+		return "TomSelectionInlineShape"
+	case TomSelReplace:
+		return "TomSelReplace"
+	case TomStart:
+		return "TomStart"
+	case TomClientCoord:
+		return "TomClientCoord"
+	case TomAllowOffClient:
+		return "TomAllowOffClient"
+	case TomTransform:
+		return "TomTransform"
+	case TomObjectArg:
+		return "TomObjectArg"
+	case TomAtEnd:
+		return "TomAtEnd"
+	case TomHeavyWave:
+		return "TomHeavyWave"
+	case TomLongDash:
+		return "TomLongDash"
+	case TomThickDash:
+		return "TomThickDash"
+	case TomThickDashDot:
+		return "TomThickDashDot"
+	case TomThickDotted:
+		return "TomThickDotted"
+	case TomThickLongDash:
+		return "TomThickLongDash"
+	case TomTabBack:
+		return "TomTabBack"
+	case TomTabNext:
+		return "TomTabNext"
+	case TomListNumberedThaiAlpha:
+		return "TomListNumberedThaiAlpha"
+	case TomListNumberedThaiNum:
+		return "TomListNumberedThaiNum"
+	case TomListNumberedHindiAlpha:
+		return "TomListNumberedHindiAlpha"
+	case TomListNumberedHindiAlpha1:
+		return "TomListNumberedHindiAlpha1"
+	case TomListNumberedHindiNum:
+		return "TomListNumberedHindiNum"
+	case TomListParentheses:
+		return "TomListParentheses"
+	case TomListPeriod:
+		return "TomListPeriod"
+	case TomListPlain:
+		return "TomListPlain"
+	case TomListNoNumber:
+		return "TomListNoNumber"
+	case TomListMinus:
+		return "TomListMinus"
+	case TomIgnoreNumberStyle:
+		return "TomIgnoreNumberStyle"
+	case TomParaStyleHeading3:
+		return "TomParaStyleHeading3"
+	case TomParaStyleHeading4:
+		return "TomParaStyleHeading4"
+	case TomParaStyleHeading5:
+		return "TomParaStyleHeading5"
+	case TomParaStyleHeading6:
+		return "TomParaStyleHeading6"
+	case TomParaStyleHeading7:
+		return "TomParaStyleHeading7"
+	case TomParaStyleHeading8:
+		return "TomParaStyleHeading8"
+	case TomParaStyleHeading9:
+		return "TomParaStyleHeading9"
+	case TomProcessId:
+		return "TomProcessId"
+	case TomScratchStory:
+		return "TomScratchStory"
+	case TomFindStory:
+		return "TomFindStory"
+	case TomReplaceStory:
+		return "TomReplaceStory"
+	case TomOpenExisting:
+		return "TomOpenExisting"
+	case TomOpenAlways:
+		return "TomOpenAlways"
+	case TomTruncateExisting:
+		return "TomTruncateExisting"
+	case TomBold:
+		return "TomBold"
+	case TomItalic:
+		return "TomItalic"
+	case TomUnderline:
+		return "TomUnderline"
+	case TomStrikeout:
+		return "TomStrikeout"
+	case TomProtected:
+		return "TomProtected"
+	case TomLink:
+		return "TomLink"
+	case TomSmallCaps:
+		return "TomSmallCaps"
+	case TomAllCaps:
+		return "TomAllCaps"
+	case TomHidden:
+		return "TomHidden"
+	case TomOutline:
+		return "TomOutline"
+	case TomShadow:
+		return "TomShadow"
+	case TomEmboss:
+		return "TomEmboss"
+	case TomImprint:
+		return "TomImprint"
+	case TomDisabled:
+		return "TomDisabled"
+	case TomRevised:
+		return "TomRevised"
+	case TomSubscriptCF:
+		return "TomSubscriptCF"
+	case TomSuperscriptCF:
+		return "TomSuperscriptCF"
+	case TomFontBound:
+		return "TomFontBound"
+	case TomLinkProtected:
+		return "TomLinkProtected"
+	case TomInlineObjectStart:
+		return "TomInlineObjectStart"
+	case TomExtendedChar:
+		return "TomExtendedChar"
+	case TomAutoBackColor:
+		return "TomAutoBackColor"
+	case TomMathZoneNoBuildUp:
+		return "TomMathZoneNoBuildUp"
+	case TomMathZone:
+		return "TomMathZone"
+	case TomMathZoneOrdinary:
+		return "TomMathZoneOrdinary"
+	case TomAutoTextColor:
+		return "TomAutoTextColor"
+	case TomParaEffectTable:
+		return "TomParaEffectTable"
+	case TomCharset:
+		return "TomCharset"
+	case TomCharRepFromLcid:
+		return "TomCharRepFromLcid"
+	case TomGurmukhi:
+		return "TomGurmukhi"
+	case TomGujarati:
+		return "TomGujarati"
+	case TomOriya:
+		return "TomOriya"
+	case TomTamil:
+		return "TomTamil"
+	case TomTelugu:
+		return "TomTelugu"
+	case TomKannada:
+		return "TomKannada"
+	case TomMalayalam:
+		return "TomMalayalam"
+	case TomSinhala:
+		return "TomSinhala"
+	case TomTibetan:
+		return "TomTibetan"
+	case TomMyanmar:
+		return "TomMyanmar"
+	case TomGeorgian:
+		return "TomGeorgian"
+	case TomJamo:
+		return "TomJamo"
+	case TomEthiopic:
+		return "TomEthiopic"
+	case TomCherokee:
+		return "TomCherokee"
+	case TomAboriginal:
+		return "TomAboriginal"
+	case TomOgham:
+		return "TomOgham"
+	case TomRunic:
+		return "TomRunic"
+	case TomKhmer:
+		return "TomKhmer"
+	case TomMongolian:
+		return "TomMongolian"
+	case TomBraille:
+		return "TomBraille"
+	case TomYi:
+		return "TomYi"
+	case TomLimbu:
+		return "TomLimbu"
+	case TomTaiLe:
+		return "TomTaiLe"
+	case TomSylotiNagri:
+		return "TomSylotiNagri"
+	case TomKharoshthi:
+		return "TomKharoshthi"
+	case TomKayahli:
+		return "TomKayahli"
+	case TomUsymbol:
+		return "TomUsymbol"
+	case TomEmoji:
+		return "TomEmoji"
+	case TomGlagolitic:
+		return "TomGlagolitic"
+	case TomLisu:
+		return "TomLisu"
+	case TomVai:
+		return "TomVai"
+	case TomNKo:
+		return "TomNKo"
+	case TomOsmanya:
+		return "TomOsmanya"
+	case TomPhagsPa:
+		return "TomPhagsPa"
+	case TomGothic:
+		return "TomGothic"
+	case TomDeseret:
+		return "TomDeseret"
+	case TomTifinagh:
+		return "TomTifinagh"
+	case TomCharRepMax:
+		return "TomCharRepMax"
+	case TomDecDecSize:
+		return "TomDecDecSize"
+	case TomDecSize:
+		return "TomDecSize"
+	case TomIncSize:
+		return "TomIncSize"
+	case TomIncIncSize:
+		return "TomIncIncSize"
+	case TomGravityBackward:
+		return "TomGravityBackward"
+	case TomConvertRTF:
+		return "TomConvertRTF"
+	case TomSizeScriptScript:
+		return "TomSizeScriptScript"
+	case TomMathBreakLeft:
+		return "TomMathBreakLeft"
+	case TomMathBreakCenter:
+		return "TomMathBreakCenter"
+	case TomMathArgShadingStart:
+		return "TomMathArgShadingStart"
+	case TomMathArgShadingEnd:
+		return "TomMathArgShadingEnd"
+	case TomMathObjShadingStart:
+		return "TomMathObjShadingStart"
+	case TomMathObjShadingEnd:
+		return "TomMathObjShadingEnd"
+	case TomMathDocDiffMask:
+		return "TomMathDocDiffMask"
+	case TomMathBrkBinSubMask:
+		return "TomMathBrkBinSubMask"
+	case TomSelRange:
+		return "TomSelRange"
+	case TomFontPropTeXStyle:
+		return "TomFontPropTeXStyle"
+	case TomFontPropAlign:
+		return "TomFontPropAlign"
+	case TomFontStretch:
+		return "TomFontStretch"
+	case TomFontStyle:
+		return "TomFontStyle"
+	case TomFontWeightThin:
+		return "TomFontWeightThin"
+	case TomFontWeightExtraLight:
+		return "TomFontWeightExtraLight"
+	case TomFontWeightLight:
+		return "TomFontWeightLight"
+	case TomFontWeightNormal:
+		return "TomFontWeightNormal"
+	case TomFontWeightMedium:
+		return "TomFontWeightMedium"
+	case TomFontWeightSemiBold:
+		return "TomFontWeightSemiBold"
+	case TomFontWeightBold:
+		return "TomFontWeightBold"
+	case TomFontWeightExtraBold:
+		return "TomFontWeightExtraBold"
+	case TomFontWeightBlack:
+		return "TomFontWeightBlack"
+	case TomFontWeightExtraBlack:
+		return "TomFontWeightExtraBlack"
+	case TomParaPropMathAlign:
+		return "TomParaPropMathAlign"
+	case TomMathRMargin:
+		return "TomMathRMargin"
+	case TomMathWrapIndent:
+		return "TomMathWrapIndent"
+	case TomMathWrapRight:
+		return "TomMathWrapRight"
+	case TomMathPostSpace:
+		return "TomMathPostSpace"
+	case TomMathPreSpace:
+		return "TomMathPreSpace"
+	case TomMathInterSpace:
+		return "TomMathInterSpace"
+	case TomMathIntraSpace:
+		return "TomMathIntraSpace"
+	case TomCanCopy:
+		return "TomCanCopy"
+	case TomCanRedo:
+		return "TomCanRedo"
+	case TomCanUndo:
+		return "TomCanUndo"
+	case TomUndoLimit:
+		return "TomUndoLimit"
+	case TomDocAutoLink:
+		return "TomDocAutoLink"
+	case TomEllipsisMode:
+		return "TomEllipsisMode"
+	case TomEllipsisState:
+		return "TomEllipsisState"
+	case TomRowHeightActual:
+		return "TomRowHeightActual"
+	default:
+		return fmt.Sprintf("TomConstants(%d)", int32(e))
+	}
+}

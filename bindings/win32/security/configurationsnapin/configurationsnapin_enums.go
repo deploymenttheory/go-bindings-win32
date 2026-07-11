@@ -4,6 +4,10 @@
 
 package configurationsnapin
 
+import (
+	"fmt"
+)
+
 // SCESVC_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/scesvc/ne-scesvc-scesvc_info_type
 type SCESVC_INFO_TYPE int32
 
@@ -14,6 +18,23 @@ const (
 	SceSvcInternalUse       SCESVC_INFO_TYPE = 3
 )
 
+// String returns the SCESVC_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCESVC_INFO_TYPE) String() string {
+	switch e {
+	case SceSvcConfigurationInfo:
+		return "SceSvcConfigurationInfo"
+	case SceSvcMergedPolicyInfo:
+		return "SceSvcMergedPolicyInfo"
+	case SceSvcAnalysisInfo:
+		return "SceSvcAnalysisInfo"
+	case SceSvcInternalUse:
+		return "SceSvcInternalUse"
+	default:
+		return fmt.Sprintf("SCESVC_INFO_TYPE(%d)", int32(e))
+	}
+}
+
 type SCE_LOG_ERR_LEVEL int32
 
 const (
@@ -22,3 +43,20 @@ const (
 	SCE_LOG_LEVEL_DETAIL SCE_LOG_ERR_LEVEL = 2
 	SCE_LOG_LEVEL_DEBUG  SCE_LOG_ERR_LEVEL = 3
 )
+
+// String returns the SCE_LOG_ERR_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCE_LOG_ERR_LEVEL) String() string {
+	switch e {
+	case SCE_LOG_LEVEL_ALWAYS:
+		return "SCE_LOG_LEVEL_ALWAYS"
+	case SCE_LOG_LEVEL_ERROR:
+		return "SCE_LOG_LEVEL_ERROR"
+	case SCE_LOG_LEVEL_DETAIL:
+		return "SCE_LOG_LEVEL_DETAIL"
+	case SCE_LOG_LEVEL_DEBUG:
+		return "SCE_LOG_LEVEL_DEBUG"
+	default:
+		return fmt.Sprintf("SCE_LOG_ERR_LEVEL(%d)", int32(e))
+	}
+}

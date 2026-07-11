@@ -4,6 +4,12 @@
 
 package touch
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type GESTURECONFIG_ID uint32
 
 const (
@@ -17,7 +23,42 @@ const (
 	GID_ROLLOVER     GESTURECONFIG_ID = 7
 )
 
+// String returns the GESTURECONFIG_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GESTURECONFIG_ID) String() string {
+	var parts []string
+	if e&GID_BEGIN != 0 {
+		parts = append(parts, "GID_BEGIN")
+	}
+	if e&GID_END != 0 {
+		parts = append(parts, "GID_END")
+	}
+	if e&GID_ZOOM != 0 {
+		parts = append(parts, "GID_ZOOM")
+	}
+	if e&GID_PAN != 0 {
+		parts = append(parts, "GID_PAN")
+	}
+	if e&GID_ROTATE != 0 {
+		parts = append(parts, "GID_ROTATE")
+	}
+	if e&GID_TWOFINGERTAP != 0 {
+		parts = append(parts, "GID_TWOFINGERTAP")
+	}
+	if e&GID_PRESSANDTAP != 0 {
+		parts = append(parts, "GID_PRESSANDTAP")
+	}
+	if e&GID_ROLLOVER != 0 {
+		parts = append(parts, "GID_ROLLOVER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // MANIPULATION_PROCESSOR_MANIPULATIONS: https://learn.microsoft.com/windows/win32/api/manipulations/ne-manipulations-manipulation_processor_manipulations
+// Bitmask — values may be combined with |.
 type MANIPULATION_PROCESSOR_MANIPULATIONS int32
 
 const (
@@ -29,6 +70,31 @@ const (
 	MANIPULATION_ALL         MANIPULATION_PROCESSOR_MANIPULATIONS = 15
 )
 
+// String returns the MANIPULATION_PROCESSOR_MANIPULATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MANIPULATION_PROCESSOR_MANIPULATIONS) String() string {
+	var parts []string
+	if e&MANIPULATION_TRANSLATE_X != 0 {
+		parts = append(parts, "MANIPULATION_TRANSLATE_X")
+	}
+	if e&MANIPULATION_TRANSLATE_Y != 0 {
+		parts = append(parts, "MANIPULATION_TRANSLATE_Y")
+	}
+	if e&MANIPULATION_SCALE != 0 {
+		parts = append(parts, "MANIPULATION_SCALE")
+	}
+	if e&MANIPULATION_ROTATE != 0 {
+		parts = append(parts, "MANIPULATION_ROTATE")
+	}
+	if e&MANIPULATION_ALL != 0 {
+		parts = append(parts, "MANIPULATION_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type REGISTER_TOUCH_WINDOW_FLAGS uint32
 
 const (
@@ -36,6 +102,20 @@ const (
 	TWF_WANTPALM  REGISTER_TOUCH_WINDOW_FLAGS = 2
 )
 
+// String returns the REGISTER_TOUCH_WINDOW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REGISTER_TOUCH_WINDOW_FLAGS) String() string {
+	switch e {
+	case TWF_FINETOUCH:
+		return "TWF_FINETOUCH"
+	case TWF_WANTPALM:
+		return "TWF_WANTPALM"
+	default:
+		return fmt.Sprintf("REGISTER_TOUCH_WINDOW_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TOUCHEVENTF_FLAGS uint32
 
 const (
@@ -49,6 +129,41 @@ const (
 	TOUCHEVENTF_PALM       TOUCHEVENTF_FLAGS = 128
 )
 
+// String returns the TOUCHEVENTF_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOUCHEVENTF_FLAGS) String() string {
+	var parts []string
+	if e&TOUCHEVENTF_MOVE != 0 {
+		parts = append(parts, "TOUCHEVENTF_MOVE")
+	}
+	if e&TOUCHEVENTF_DOWN != 0 {
+		parts = append(parts, "TOUCHEVENTF_DOWN")
+	}
+	if e&TOUCHEVENTF_UP != 0 {
+		parts = append(parts, "TOUCHEVENTF_UP")
+	}
+	if e&TOUCHEVENTF_INRANGE != 0 {
+		parts = append(parts, "TOUCHEVENTF_INRANGE")
+	}
+	if e&TOUCHEVENTF_PRIMARY != 0 {
+		parts = append(parts, "TOUCHEVENTF_PRIMARY")
+	}
+	if e&TOUCHEVENTF_NOCOALESCE != 0 {
+		parts = append(parts, "TOUCHEVENTF_NOCOALESCE")
+	}
+	if e&TOUCHEVENTF_PEN != 0 {
+		parts = append(parts, "TOUCHEVENTF_PEN")
+	}
+	if e&TOUCHEVENTF_PALM != 0 {
+		parts = append(parts, "TOUCHEVENTF_PALM")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type TOUCHINPUTMASKF_MASK uint32
 
 const (
@@ -56,3 +171,22 @@ const (
 	TOUCHINPUTMASKF_EXTRAINFO      TOUCHINPUTMASKF_MASK = 2
 	TOUCHINPUTMASKF_CONTACTAREA    TOUCHINPUTMASKF_MASK = 4
 )
+
+// String returns the TOUCHINPUTMASKF_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOUCHINPUTMASKF_MASK) String() string {
+	var parts []string
+	if e&TOUCHINPUTMASKF_TIMEFROMSYSTEM != 0 {
+		parts = append(parts, "TOUCHINPUTMASKF_TIMEFROMSYSTEM")
+	}
+	if e&TOUCHINPUTMASKF_EXTRAINFO != 0 {
+		parts = append(parts, "TOUCHINPUTMASKF_EXTRAINFO")
+	}
+	if e&TOUCHINPUTMASKF_CONTACTAREA != 0 {
+		parts = append(parts, "TOUCHINPUTMASKF_CONTACTAREA")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

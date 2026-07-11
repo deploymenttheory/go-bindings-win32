@@ -4,12 +4,30 @@
 
 package winsock
 
+import (
+	"fmt"
+	"strings"
+)
+
 type AAL_TYPE int32
 
 const (
 	AALTYPE_5    AAL_TYPE = 5
 	AALTYPE_USER AAL_TYPE = 16
 )
+
+// String returns the AAL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AAL_TYPE) String() string {
+	switch e {
+	case AALTYPE_5:
+		return "AALTYPE_5"
+	case AALTYPE_USER:
+		return "AALTYPE_USER"
+	default:
+		return fmt.Sprintf("AAL_TYPE(%d)", int32(e))
+	}
+}
 
 type ADDRESS_FAMILY uint16
 
@@ -19,6 +37,21 @@ const (
 	AF_UNSPEC ADDRESS_FAMILY = 0
 )
 
+// String returns the ADDRESS_FAMILY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADDRESS_FAMILY) String() string {
+	switch e {
+	case AF_INET:
+		return "AF_INET"
+	case AF_INET6:
+		return "AF_INET6"
+	case AF_UNSPEC:
+		return "AF_UNSPEC"
+	default:
+		return fmt.Sprintf("ADDRESS_FAMILY(%d)", uint16(e))
+	}
+}
+
 type ARP_HARDWARE_TYPE int32
 
 const (
@@ -26,12 +59,38 @@ const (
 	ARP_HW_802  ARP_HARDWARE_TYPE = 6
 )
 
+// String returns the ARP_HARDWARE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ARP_HARDWARE_TYPE) String() string {
+	switch e {
+	case ARP_HW_ENET:
+		return "ARP_HW_ENET"
+	case ARP_HW_802:
+		return "ARP_HW_802"
+	default:
+		return fmt.Sprintf("ARP_HARDWARE_TYPE(%d)", int32(e))
+	}
+}
+
 type ARP_OPCODE int32
 
 const (
 	ARP_REQUEST  ARP_OPCODE = 1
 	ARP_RESPONSE ARP_OPCODE = 2
 )
+
+// String returns the ARP_OPCODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ARP_OPCODE) String() string {
+	switch e {
+	case ARP_REQUEST:
+		return "ARP_REQUEST"
+	case ARP_RESPONSE:
+		return "ARP_RESPONSE"
+	default:
+		return fmt.Sprintf("ARP_OPCODE(%d)", int32(e))
+	}
+}
 
 // CONTROL_CHANNEL_TRIGGER_STATUS: https://learn.microsoft.com/windows/win32/api/mstcpip/ne-mstcpip-control_channel_trigger_status
 type CONTROL_CHANNEL_TRIGGER_STATUS int32
@@ -46,6 +105,29 @@ const (
 	CONTROL_CHANNEL_TRIGGER_STATUS_SERVICE_UNAVAILABLE     CONTROL_CHANNEL_TRIGGER_STATUS = 6
 )
 
+// String returns the CONTROL_CHANNEL_TRIGGER_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONTROL_CHANNEL_TRIGGER_STATUS) String() string {
+	switch e {
+	case CONTROL_CHANNEL_TRIGGER_STATUS_INVALID:
+		return "CONTROL_CHANNEL_TRIGGER_STATUS_INVALID"
+	case CONTROL_CHANNEL_TRIGGER_STATUS_SOFTWARE_SLOT_ALLOCATED:
+		return "CONTROL_CHANNEL_TRIGGER_STATUS_SOFTWARE_SLOT_ALLOCATED"
+	case CONTROL_CHANNEL_TRIGGER_STATUS_HARDWARE_SLOT_ALLOCATED:
+		return "CONTROL_CHANNEL_TRIGGER_STATUS_HARDWARE_SLOT_ALLOCATED"
+	case CONTROL_CHANNEL_TRIGGER_STATUS_POLICY_ERROR:
+		return "CONTROL_CHANNEL_TRIGGER_STATUS_POLICY_ERROR"
+	case CONTROL_CHANNEL_TRIGGER_STATUS_SYSTEM_ERROR:
+		return "CONTROL_CHANNEL_TRIGGER_STATUS_SYSTEM_ERROR"
+	case CONTROL_CHANNEL_TRIGGER_STATUS_TRANSPORT_DISCONNECTED:
+		return "CONTROL_CHANNEL_TRIGGER_STATUS_TRANSPORT_DISCONNECTED"
+	case CONTROL_CHANNEL_TRIGGER_STATUS_SERVICE_UNAVAILABLE:
+		return "CONTROL_CHANNEL_TRIGGER_STATUS_SERVICE_UNAVAILABLE"
+	default:
+		return fmt.Sprintf("CONTROL_CHANNEL_TRIGGER_STATUS(%d)", int32(e))
+	}
+}
+
 type FALLBACK_INDEX int32
 
 const (
@@ -53,12 +135,38 @@ const (
 	FallbackIndexMax         FALLBACK_INDEX = 1
 )
 
+// String returns the FALLBACK_INDEX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FALLBACK_INDEX) String() string {
+	switch e {
+	case FallbackIndexTcpFastopen:
+		return "FallbackIndexTcpFastopen"
+	case FallbackIndexMax:
+		return "FallbackIndexMax"
+	default:
+		return fmt.Sprintf("FALLBACK_INDEX(%d)", int32(e))
+	}
+}
+
 type ICMP4_TIME_EXCEED_CODE int32
 
 const (
 	ICMP4_TIME_EXCEED_TRANSIT    ICMP4_TIME_EXCEED_CODE = 0
 	ICMP4_TIME_EXCEED_REASSEMBLY ICMP4_TIME_EXCEED_CODE = 1
 )
+
+// String returns the ICMP4_TIME_EXCEED_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ICMP4_TIME_EXCEED_CODE) String() string {
+	switch e {
+	case ICMP4_TIME_EXCEED_TRANSIT:
+		return "ICMP4_TIME_EXCEED_TRANSIT"
+	case ICMP4_TIME_EXCEED_REASSEMBLY:
+		return "ICMP4_TIME_EXCEED_REASSEMBLY"
+	default:
+		return fmt.Sprintf("ICMP4_TIME_EXCEED_CODE(%d)", int32(e))
+	}
+}
 
 type ICMP4_UNREACH_CODE int32
 
@@ -79,12 +187,62 @@ const (
 	ICMP4_UNREACH_ADMIN              ICMP4_UNREACH_CODE = 13
 )
 
+// String returns the ICMP4_UNREACH_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ICMP4_UNREACH_CODE) String() string {
+	switch e {
+	case ICMP4_UNREACH_NET:
+		return "ICMP4_UNREACH_NET"
+	case ICMP4_UNREACH_HOST:
+		return "ICMP4_UNREACH_HOST"
+	case ICMP4_UNREACH_PROTOCOL:
+		return "ICMP4_UNREACH_PROTOCOL"
+	case ICMP4_UNREACH_PORT:
+		return "ICMP4_UNREACH_PORT"
+	case ICMP4_UNREACH_FRAG_NEEDED:
+		return "ICMP4_UNREACH_FRAG_NEEDED"
+	case ICMP4_UNREACH_SOURCEROUTE_FAILED:
+		return "ICMP4_UNREACH_SOURCEROUTE_FAILED"
+	case ICMP4_UNREACH_NET_UNKNOWN:
+		return "ICMP4_UNREACH_NET_UNKNOWN"
+	case ICMP4_UNREACH_HOST_UNKNOWN:
+		return "ICMP4_UNREACH_HOST_UNKNOWN"
+	case ICMP4_UNREACH_ISOLATED:
+		return "ICMP4_UNREACH_ISOLATED"
+	case ICMP4_UNREACH_NET_ADMIN:
+		return "ICMP4_UNREACH_NET_ADMIN"
+	case ICMP4_UNREACH_HOST_ADMIN:
+		return "ICMP4_UNREACH_HOST_ADMIN"
+	case ICMP4_UNREACH_NET_TOS:
+		return "ICMP4_UNREACH_NET_TOS"
+	case ICMP4_UNREACH_HOST_TOS:
+		return "ICMP4_UNREACH_HOST_TOS"
+	case ICMP4_UNREACH_ADMIN:
+		return "ICMP4_UNREACH_ADMIN"
+	default:
+		return fmt.Sprintf("ICMP4_UNREACH_CODE(%d)", int32(e))
+	}
+}
+
 type IGMP_MAX_RESP_CODE_TYPE int32
 
 const (
 	IGMP_MAX_RESP_CODE_TYPE_NORMAL IGMP_MAX_RESP_CODE_TYPE = 0
 	IGMP_MAX_RESP_CODE_TYPE_FLOAT  IGMP_MAX_RESP_CODE_TYPE = 1
 )
+
+// String returns the IGMP_MAX_RESP_CODE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IGMP_MAX_RESP_CODE_TYPE) String() string {
+	switch e {
+	case IGMP_MAX_RESP_CODE_TYPE_NORMAL:
+		return "IGMP_MAX_RESP_CODE_TYPE_NORMAL"
+	case IGMP_MAX_RESP_CODE_TYPE_FLOAT:
+		return "IGMP_MAX_RESP_CODE_TYPE_FLOAT"
+	default:
+		return fmt.Sprintf("IGMP_MAX_RESP_CODE_TYPE(%d)", int32(e))
+	}
+}
 
 type IPPROTO int32
 
@@ -128,6 +286,85 @@ const (
 	IPPROTO_RM                    IPPROTO = 113
 )
 
+// String returns the IPPROTO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPPROTO) String() string {
+	switch e {
+	case IPPROTO_HOPOPTS:
+		return "IPPROTO_HOPOPTS"
+	case IPPROTO_ICMP:
+		return "IPPROTO_ICMP"
+	case IPPROTO_IGMP:
+		return "IPPROTO_IGMP"
+	case IPPROTO_GGP:
+		return "IPPROTO_GGP"
+	case IPPROTO_IPV4:
+		return "IPPROTO_IPV4"
+	case IPPROTO_ST:
+		return "IPPROTO_ST"
+	case IPPROTO_TCP:
+		return "IPPROTO_TCP"
+	case IPPROTO_CBT:
+		return "IPPROTO_CBT"
+	case IPPROTO_EGP:
+		return "IPPROTO_EGP"
+	case IPPROTO_IGP:
+		return "IPPROTO_IGP"
+	case IPPROTO_PUP:
+		return "IPPROTO_PUP"
+	case IPPROTO_UDP:
+		return "IPPROTO_UDP"
+	case IPPROTO_IDP:
+		return "IPPROTO_IDP"
+	case IPPROTO_RDP:
+		return "IPPROTO_RDP"
+	case IPPROTO_IPV6:
+		return "IPPROTO_IPV6"
+	case IPPROTO_ROUTING:
+		return "IPPROTO_ROUTING"
+	case IPPROTO_FRAGMENT:
+		return "IPPROTO_FRAGMENT"
+	case IPPROTO_ESP:
+		return "IPPROTO_ESP"
+	case IPPROTO_AH:
+		return "IPPROTO_AH"
+	case IPPROTO_ICMPV6:
+		return "IPPROTO_ICMPV6"
+	case IPPROTO_NONE:
+		return "IPPROTO_NONE"
+	case IPPROTO_DSTOPTS:
+		return "IPPROTO_DSTOPTS"
+	case IPPROTO_ND:
+		return "IPPROTO_ND"
+	case IPPROTO_ICLFXBM:
+		return "IPPROTO_ICLFXBM"
+	case IPPROTO_PIM:
+		return "IPPROTO_PIM"
+	case IPPROTO_PGM:
+		return "IPPROTO_PGM"
+	case IPPROTO_L2TP:
+		return "IPPROTO_L2TP"
+	case IPPROTO_SCTP:
+		return "IPPROTO_SCTP"
+	case IPPROTO_RAW:
+		return "IPPROTO_RAW"
+	case IPPROTO_MAX:
+		return "IPPROTO_MAX"
+	case IPPROTO_RESERVED_RAW:
+		return "IPPROTO_RESERVED_RAW"
+	case IPPROTO_RESERVED_IPSEC:
+		return "IPPROTO_RESERVED_IPSEC"
+	case IPPROTO_RESERVED_IPSECOFFLOAD:
+		return "IPPROTO_RESERVED_IPSECOFFLOAD"
+	case IPPROTO_RESERVED_WNV:
+		return "IPPROTO_RESERVED_WNV"
+	case IPPROTO_RESERVED_MAX:
+		return "IPPROTO_RESERVED_MAX"
+	default:
+		return fmt.Sprintf("IPPROTO(%d)", int32(e))
+	}
+}
+
 type IPV4_OPTION_TYPE int32
 
 const (
@@ -143,6 +380,35 @@ const (
 	IP_OPT_MULTIDEST    IPV4_OPTION_TYPE = 149
 )
 
+// String returns the IPV4_OPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPV4_OPTION_TYPE) String() string {
+	switch e {
+	case IP_OPT_EOL:
+		return "IP_OPT_EOL"
+	case IP_OPT_NOP:
+		return "IP_OPT_NOP"
+	case IP_OPT_SECURITY:
+		return "IP_OPT_SECURITY"
+	case IP_OPT_LSRR:
+		return "IP_OPT_LSRR"
+	case IP_OPT_TS:
+		return "IP_OPT_TS"
+	case IP_OPT_RR:
+		return "IP_OPT_RR"
+	case IP_OPT_SSRR:
+		return "IP_OPT_SSRR"
+	case IP_OPT_SID:
+		return "IP_OPT_SID"
+	case IP_OPT_ROUTER_ALERT:
+		return "IP_OPT_ROUTER_ALERT"
+	case IP_OPT_MULTIDEST:
+		return "IP_OPT_MULTIDEST"
+	default:
+		return fmt.Sprintf("IPV4_OPTION_TYPE(%d)", int32(e))
+	}
+}
+
 type IPV6_OPTION_TYPE int32
 
 const (
@@ -154,6 +420,27 @@ const (
 	IP6OPT_NSAP_ADDR    IPV6_OPTION_TYPE = 195
 )
 
+// String returns the IPV6_OPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPV6_OPTION_TYPE) String() string {
+	switch e {
+	case IP6OPT_PAD1:
+		return "IP6OPT_PAD1"
+	case IP6OPT_PADN:
+		return "IP6OPT_PADN"
+	case IP6OPT_TUNNEL_LIMIT:
+		return "IP6OPT_TUNNEL_LIMIT"
+	case IP6OPT_ROUTER_ALERT:
+		return "IP6OPT_ROUTER_ALERT"
+	case IP6OPT_JUMBO:
+		return "IP6OPT_JUMBO"
+	case IP6OPT_NSAP_ADDR:
+		return "IP6OPT_NSAP_ADDR"
+	default:
+		return fmt.Sprintf("IPV6_OPTION_TYPE(%d)", int32(e))
+	}
+}
+
 type IP_OPTION_TIMESTAMP_FLAGS int32
 
 const (
@@ -162,12 +449,40 @@ const (
 	IP_OPTION_TIMESTAMP_SPECIFIC_ADDRESS IP_OPTION_TIMESTAMP_FLAGS = 3
 )
 
+// String returns the IP_OPTION_TIMESTAMP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IP_OPTION_TIMESTAMP_FLAGS) String() string {
+	switch e {
+	case IP_OPTION_TIMESTAMP_ONLY:
+		return "IP_OPTION_TIMESTAMP_ONLY"
+	case IP_OPTION_TIMESTAMP_ADDRESS:
+		return "IP_OPTION_TIMESTAMP_ADDRESS"
+	case IP_OPTION_TIMESTAMP_SPECIFIC_ADDRESS:
+		return "IP_OPTION_TIMESTAMP_SPECIFIC_ADDRESS"
+	default:
+		return fmt.Sprintf("IP_OPTION_TIMESTAMP_FLAGS(%d)", int32(e))
+	}
+}
+
 type MLD_MAX_RESP_CODE_TYPE int32
 
 const (
 	MLD_MAX_RESP_CODE_TYPE_NORMAL MLD_MAX_RESP_CODE_TYPE = 0
 	MLD_MAX_RESP_CODE_TYPE_FLOAT  MLD_MAX_RESP_CODE_TYPE = 1
 )
+
+// String returns the MLD_MAX_RESP_CODE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLD_MAX_RESP_CODE_TYPE) String() string {
+	switch e {
+	case MLD_MAX_RESP_CODE_TYPE_NORMAL:
+		return "MLD_MAX_RESP_CODE_TYPE_NORMAL"
+	case MLD_MAX_RESP_CODE_TYPE_FLOAT:
+		return "MLD_MAX_RESP_CODE_TYPE_FLOAT"
+	default:
+		return fmt.Sprintf("MLD_MAX_RESP_CODE_TYPE(%d)", int32(e))
+	}
+}
 
 // MULTICAST_MODE_TYPE: https://learn.microsoft.com/windows/win32/api/ws2ipdef/ne-ws2ipdef-multicast_mode_type
 type MULTICAST_MODE_TYPE int32
@@ -176,6 +491,19 @@ const (
 	MCAST_INCLUDE MULTICAST_MODE_TYPE = 0
 	MCAST_EXCLUDE MULTICAST_MODE_TYPE = 1
 )
+
+// String returns the MULTICAST_MODE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MULTICAST_MODE_TYPE) String() string {
+	switch e {
+	case MCAST_INCLUDE:
+		return "MCAST_INCLUDE"
+	case MCAST_EXCLUDE:
+		return "MCAST_EXCLUDE"
+	default:
+		return fmt.Sprintf("MULTICAST_MODE_TYPE(%d)", int32(e))
+	}
+}
 
 // NAPI_PROVIDER_LEVEL: https://learn.microsoft.com/windows/win32/api/nsemail/ne-nsemail-napi_provider_level
 type NAPI_PROVIDER_LEVEL int32
@@ -186,6 +514,21 @@ const (
 	ProviderLevel_Primary   NAPI_PROVIDER_LEVEL = 2
 )
 
+// String returns the NAPI_PROVIDER_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAPI_PROVIDER_LEVEL) String() string {
+	switch e {
+	case ProviderLevel_None:
+		return "ProviderLevel_None"
+	case ProviderLevel_Secondary:
+		return "ProviderLevel_Secondary"
+	case ProviderLevel_Primary:
+		return "ProviderLevel_Primary"
+	default:
+		return fmt.Sprintf("NAPI_PROVIDER_LEVEL(%d)", int32(e))
+	}
+}
+
 // NAPI_PROVIDER_TYPE: https://learn.microsoft.com/windows/win32/api/nsemail/ne-nsemail-napi_provider_type
 type NAPI_PROVIDER_TYPE int32
 
@@ -193,6 +536,19 @@ const (
 	ProviderType_Application NAPI_PROVIDER_TYPE = 1
 	ProviderType_Service     NAPI_PROVIDER_TYPE = 2
 )
+
+// String returns the NAPI_PROVIDER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAPI_PROVIDER_TYPE) String() string {
+	switch e {
+	case ProviderType_Application:
+		return "ProviderType_Application"
+	case ProviderType_Service:
+		return "ProviderType_Service"
+	default:
+		return fmt.Sprintf("NAPI_PROVIDER_TYPE(%d)", int32(e))
+	}
+}
 
 type ND_OPTION_TYPE int32
 
@@ -213,6 +569,43 @@ const (
 	ND_OPT_PREF64                 ND_OPTION_TYPE = 38
 )
 
+// String returns the ND_OPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ND_OPTION_TYPE) String() string {
+	switch e {
+	case ND_OPT_SOURCE_LINKADDR:
+		return "ND_OPT_SOURCE_LINKADDR"
+	case ND_OPT_TARGET_LINKADDR:
+		return "ND_OPT_TARGET_LINKADDR"
+	case ND_OPT_PREFIX_INFORMATION:
+		return "ND_OPT_PREFIX_INFORMATION"
+	case ND_OPT_REDIRECTED_HEADER:
+		return "ND_OPT_REDIRECTED_HEADER"
+	case ND_OPT_MTU:
+		return "ND_OPT_MTU"
+	case ND_OPT_NBMA_SHORTCUT_LIMIT:
+		return "ND_OPT_NBMA_SHORTCUT_LIMIT"
+	case ND_OPT_ADVERTISEMENT_INTERVAL:
+		return "ND_OPT_ADVERTISEMENT_INTERVAL"
+	case ND_OPT_HOME_AGENT_INFORMATION:
+		return "ND_OPT_HOME_AGENT_INFORMATION"
+	case ND_OPT_SOURCE_ADDR_LIST:
+		return "ND_OPT_SOURCE_ADDR_LIST"
+	case ND_OPT_TARGET_ADDR_LIST:
+		return "ND_OPT_TARGET_ADDR_LIST"
+	case ND_OPT_ROUTE_INFO:
+		return "ND_OPT_ROUTE_INFO"
+	case ND_OPT_RDNSS:
+		return "ND_OPT_RDNSS"
+	case ND_OPT_DNSSL:
+		return "ND_OPT_DNSSL"
+	case ND_OPT_PREF64:
+		return "ND_OPT_PREF64"
+	default:
+		return fmt.Sprintf("ND_OPTION_TYPE(%d)", int32(e))
+	}
+}
+
 type ND_OPT_PREF64_PREFIX_LENGTH_CODE int32
 
 const (
@@ -224,6 +617,27 @@ const (
 	ND_OPT_PREF64_PREFIX_LENGTH_32 ND_OPT_PREF64_PREFIX_LENGTH_CODE = 5
 )
 
+// String returns the ND_OPT_PREF64_PREFIX_LENGTH_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ND_OPT_PREF64_PREFIX_LENGTH_CODE) String() string {
+	switch e {
+	case ND_OPT_PREF64_PREFIX_LENGTH_96:
+		return "ND_OPT_PREF64_PREFIX_LENGTH_96"
+	case ND_OPT_PREF64_PREFIX_LENGTH_64:
+		return "ND_OPT_PREF64_PREFIX_LENGTH_64"
+	case ND_OPT_PREF64_PREFIX_LENGTH_56:
+		return "ND_OPT_PREF64_PREFIX_LENGTH_56"
+	case ND_OPT_PREF64_PREFIX_LENGTH_48:
+		return "ND_OPT_PREF64_PREFIX_LENGTH_48"
+	case ND_OPT_PREF64_PREFIX_LENGTH_40:
+		return "ND_OPT_PREF64_PREFIX_LENGTH_40"
+	case ND_OPT_PREF64_PREFIX_LENGTH_32:
+		return "ND_OPT_PREF64_PREFIX_LENGTH_32"
+	default:
+		return fmt.Sprintf("ND_OPT_PREF64_PREFIX_LENGTH_CODE(%d)", int32(e))
+	}
+}
+
 type NLA_BLOB_DATA_TYPE int32
 
 const (
@@ -234,6 +648,25 @@ const (
 	NLA_ICS             NLA_BLOB_DATA_TYPE = 4
 )
 
+// String returns the NLA_BLOB_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLA_BLOB_DATA_TYPE) String() string {
+	switch e {
+	case NLA_RAW_DATA:
+		return "NLA_RAW_DATA"
+	case NLA_INTERFACE:
+		return "NLA_INTERFACE"
+	case NLA_802_1X_LOCATION:
+		return "NLA_802_1X_LOCATION"
+	case NLA_CONNECTIVITY:
+		return "NLA_CONNECTIVITY"
+	case NLA_ICS:
+		return "NLA_ICS"
+	default:
+		return fmt.Sprintf("NLA_BLOB_DATA_TYPE(%d)", int32(e))
+	}
+}
+
 type NLA_CONNECTIVITY_TYPE int32
 
 const (
@@ -243,6 +676,23 @@ const (
 	NLA_NETWORK_UNKNOWN   NLA_CONNECTIVITY_TYPE = 3
 )
 
+// String returns the NLA_CONNECTIVITY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLA_CONNECTIVITY_TYPE) String() string {
+	switch e {
+	case NLA_NETWORK_AD_HOC:
+		return "NLA_NETWORK_AD_HOC"
+	case NLA_NETWORK_MANAGED:
+		return "NLA_NETWORK_MANAGED"
+	case NLA_NETWORK_UNMANAGED:
+		return "NLA_NETWORK_UNMANAGED"
+	case NLA_NETWORK_UNKNOWN:
+		return "NLA_NETWORK_UNKNOWN"
+	default:
+		return fmt.Sprintf("NLA_CONNECTIVITY_TYPE(%d)", int32(e))
+	}
+}
+
 type NLA_INTERNET int32
 
 const (
@@ -250,6 +700,21 @@ const (
 	NLA_INTERNET_NO      NLA_INTERNET = 1
 	NLA_INTERNET_YES     NLA_INTERNET = 2
 )
+
+// String returns the NLA_INTERNET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLA_INTERNET) String() string {
+	switch e {
+	case NLA_INTERNET_UNKNOWN:
+		return "NLA_INTERNET_UNKNOWN"
+	case NLA_INTERNET_NO:
+		return "NLA_INTERNET_NO"
+	case NLA_INTERNET_YES:
+		return "NLA_INTERNET_YES"
+	default:
+		return fmt.Sprintf("NLA_INTERNET(%d)", int32(e))
+	}
+}
 
 // NL_ADDRESS_TYPE: https://learn.microsoft.com/windows/win32/api/nldef/ne-nldef-nl_address_type
 type NL_ADDRESS_TYPE int32
@@ -263,6 +728,27 @@ const (
 	NlatInvalid     NL_ADDRESS_TYPE = 5
 )
 
+// String returns the NL_ADDRESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_ADDRESS_TYPE) String() string {
+	switch e {
+	case NlatUnspecified:
+		return "NlatUnspecified"
+	case NlatUnicast:
+		return "NlatUnicast"
+	case NlatAnycast:
+		return "NlatAnycast"
+	case NlatMulticast:
+		return "NlatMulticast"
+	case NlatBroadcast:
+		return "NlatBroadcast"
+	case NlatInvalid:
+		return "NlatInvalid"
+	default:
+		return fmt.Sprintf("NL_ADDRESS_TYPE(%d)", int32(e))
+	}
+}
+
 type NL_BANDWIDTH_FLAG int32
 
 const (
@@ -270,6 +756,21 @@ const (
 	NlbwEnabled   NL_BANDWIDTH_FLAG = 1
 	NlbwUnchanged NL_BANDWIDTH_FLAG = -1
 )
+
+// String returns the NL_BANDWIDTH_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_BANDWIDTH_FLAG) String() string {
+	switch e {
+	case NlbwDisabled:
+		return "NlbwDisabled"
+	case NlbwEnabled:
+		return "NlbwEnabled"
+	case NlbwUnchanged:
+		return "NlbwUnchanged"
+	default:
+		return fmt.Sprintf("NL_BANDWIDTH_FLAG(%d)", int32(e))
+	}
+}
 
 // NL_DAD_STATE: https://learn.microsoft.com/windows/win32/api/nldef/ne-nldef-nl_dad_state
 type NL_DAD_STATE int32
@@ -287,6 +788,25 @@ const (
 	IpDadStatePreferred  NL_DAD_STATE = 4
 )
 
+// String returns the NL_DAD_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_DAD_STATE) String() string {
+	switch e {
+	case NldsInvalid:
+		return "NldsInvalid"
+	case NldsTentative:
+		return "NldsTentative"
+	case NldsDuplicate:
+		return "NldsDuplicate"
+	case NldsDeprecated:
+		return "NldsDeprecated"
+	case NldsPreferred:
+		return "NldsPreferred"
+	default:
+		return fmt.Sprintf("NL_DAD_STATE(%d)", int32(e))
+	}
+}
+
 type NL_INTERFACE_NETWORK_CATEGORY_STATE int32
 
 const (
@@ -297,6 +817,25 @@ const (
 	NlincCategoryStateMax    NL_INTERFACE_NETWORK_CATEGORY_STATE = 4
 )
 
+// String returns the NL_INTERFACE_NETWORK_CATEGORY_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_INTERFACE_NETWORK_CATEGORY_STATE) String() string {
+	switch e {
+	case NlincCategoryUnknown:
+		return "NlincCategoryUnknown"
+	case NlincPublic:
+		return "NlincPublic"
+	case NlincPrivate:
+		return "NlincPrivate"
+	case NlincDomainAuthenticated:
+		return "NlincDomainAuthenticated"
+	case NlincCategoryStateMax:
+		return "NlincCategoryStateMax"
+	default:
+		return fmt.Sprintf("NL_INTERFACE_NETWORK_CATEGORY_STATE(%d)", int32(e))
+	}
+}
+
 // NL_LINK_LOCAL_ADDRESS_BEHAVIOR: https://learn.microsoft.com/windows/win32/api/nldef/ne-nldef-nl_link_local_address_behavior
 type NL_LINK_LOCAL_ADDRESS_BEHAVIOR int32
 
@@ -306,6 +845,23 @@ const (
 	LinkLocalAlwaysOn  NL_LINK_LOCAL_ADDRESS_BEHAVIOR = 2
 	LinkLocalUnchanged NL_LINK_LOCAL_ADDRESS_BEHAVIOR = -1
 )
+
+// String returns the NL_LINK_LOCAL_ADDRESS_BEHAVIOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_LINK_LOCAL_ADDRESS_BEHAVIOR) String() string {
+	switch e {
+	case LinkLocalAlwaysOff:
+		return "LinkLocalAlwaysOff"
+	case LinkLocalDelayed:
+		return "LinkLocalDelayed"
+	case LinkLocalAlwaysOn:
+		return "LinkLocalAlwaysOn"
+	case LinkLocalUnchanged:
+		return "LinkLocalUnchanged"
+	default:
+		return fmt.Sprintf("NL_LINK_LOCAL_ADDRESS_BEHAVIOR(%d)", int32(e))
+	}
+}
 
 // NL_NEIGHBOR_STATE: https://learn.microsoft.com/windows/win32/api/nldef/ne-nldef-nl_neighbor_state
 type NL_NEIGHBOR_STATE int32
@@ -321,6 +877,31 @@ const (
 	NlnsMaximum     NL_NEIGHBOR_STATE = 7
 )
 
+// String returns the NL_NEIGHBOR_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_NEIGHBOR_STATE) String() string {
+	switch e {
+	case NlnsUnreachable:
+		return "NlnsUnreachable"
+	case NlnsIncomplete:
+		return "NlnsIncomplete"
+	case NlnsProbe:
+		return "NlnsProbe"
+	case NlnsDelay:
+		return "NlnsDelay"
+	case NlnsStale:
+		return "NlnsStale"
+	case NlnsReachable:
+		return "NlnsReachable"
+	case NlnsPermanent:
+		return "NlnsPermanent"
+	case NlnsMaximum:
+		return "NlnsMaximum"
+	default:
+		return fmt.Sprintf("NL_NEIGHBOR_STATE(%d)", int32(e))
+	}
+}
+
 type NL_NETWORK_CATEGORY int32
 
 const (
@@ -331,6 +912,23 @@ const (
 	NetworkCategoryUnknown             NL_NETWORK_CATEGORY = -1
 )
 
+// String returns the NL_NETWORK_CATEGORY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_NETWORK_CATEGORY) String() string {
+	switch e {
+	case NetworkCategoryPublic:
+		return "NetworkCategoryPublic"
+	case NetworkCategoryPrivate:
+		return "NetworkCategoryPrivate"
+	case NetworkCategoryDomainAuthenticated:
+		return "NetworkCategoryDomainAuthenticated"
+	case NetworkCategoryUnchanged:
+		return "NetworkCategoryUnchanged"
+	default:
+		return fmt.Sprintf("NL_NETWORK_CATEGORY(%d)", int32(e))
+	}
+}
+
 // NL_NETWORK_CONNECTIVITY_COST_HINT: https://learn.microsoft.com/windows/win32/api/nldef/ne-nldef-nl_network_connectivity_cost_hint
 type NL_NETWORK_CONNECTIVITY_COST_HINT int32
 
@@ -340,6 +938,23 @@ const (
 	NetworkConnectivityCostHintFixed        NL_NETWORK_CONNECTIVITY_COST_HINT = 2
 	NetworkConnectivityCostHintVariable     NL_NETWORK_CONNECTIVITY_COST_HINT = 3
 )
+
+// String returns the NL_NETWORK_CONNECTIVITY_COST_HINT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_NETWORK_CONNECTIVITY_COST_HINT) String() string {
+	switch e {
+	case NetworkConnectivityCostHintUnknown:
+		return "NetworkConnectivityCostHintUnknown"
+	case NetworkConnectivityCostHintUnrestricted:
+		return "NetworkConnectivityCostHintUnrestricted"
+	case NetworkConnectivityCostHintFixed:
+		return "NetworkConnectivityCostHintFixed"
+	case NetworkConnectivityCostHintVariable:
+		return "NetworkConnectivityCostHintVariable"
+	default:
+		return fmt.Sprintf("NL_NETWORK_CONNECTIVITY_COST_HINT(%d)", int32(e))
+	}
+}
 
 // NL_NETWORK_CONNECTIVITY_LEVEL_HINT: https://learn.microsoft.com/windows/win32/api/nldef/ne-nldef-nl_network_connectivity_level_hint
 type NL_NETWORK_CONNECTIVITY_LEVEL_HINT int32
@@ -353,6 +968,27 @@ const (
 	NetworkConnectivityLevelHintHidden                    NL_NETWORK_CONNECTIVITY_LEVEL_HINT = 5
 )
 
+// String returns the NL_NETWORK_CONNECTIVITY_LEVEL_HINT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_NETWORK_CONNECTIVITY_LEVEL_HINT) String() string {
+	switch e {
+	case NetworkConnectivityLevelHintUnknown:
+		return "NetworkConnectivityLevelHintUnknown"
+	case NetworkConnectivityLevelHintNone:
+		return "NetworkConnectivityLevelHintNone"
+	case NetworkConnectivityLevelHintLocalAccess:
+		return "NetworkConnectivityLevelHintLocalAccess"
+	case NetworkConnectivityLevelHintInternetAccess:
+		return "NetworkConnectivityLevelHintInternetAccess"
+	case NetworkConnectivityLevelHintConstrainedInternetAccess:
+		return "NetworkConnectivityLevelHintConstrainedInternetAccess"
+	case NetworkConnectivityLevelHintHidden:
+		return "NetworkConnectivityLevelHintHidden"
+	default:
+		return fmt.Sprintf("NL_NETWORK_CONNECTIVITY_LEVEL_HINT(%d)", int32(e))
+	}
+}
+
 // NL_PREFIX_ORIGIN: https://learn.microsoft.com/windows/win32/api/nldef/ne-nldef-nl_prefix_origin
 type NL_PREFIX_ORIGIN int32
 
@@ -365,6 +1001,27 @@ const (
 	IpPrefixOriginUnchanged           NL_PREFIX_ORIGIN = 16
 )
 
+// String returns the NL_PREFIX_ORIGIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_PREFIX_ORIGIN) String() string {
+	switch e {
+	case IpPrefixOriginOther:
+		return "IpPrefixOriginOther"
+	case IpPrefixOriginManual:
+		return "IpPrefixOriginManual"
+	case IpPrefixOriginWellKnown:
+		return "IpPrefixOriginWellKnown"
+	case IpPrefixOriginDhcp:
+		return "IpPrefixOriginDhcp"
+	case IpPrefixOriginRouterAdvertisement:
+		return "IpPrefixOriginRouterAdvertisement"
+	case IpPrefixOriginUnchanged:
+		return "IpPrefixOriginUnchanged"
+	default:
+		return fmt.Sprintf("NL_PREFIX_ORIGIN(%d)", int32(e))
+	}
+}
+
 // NL_ROUTER_DISCOVERY_BEHAVIOR: https://learn.microsoft.com/windows/win32/api/nldef/ne-nldef-nl_router_discovery_behavior
 type NL_ROUTER_DISCOVERY_BEHAVIOR int32
 
@@ -374,6 +1031,23 @@ const (
 	RouterDiscoveryDhcp      NL_ROUTER_DISCOVERY_BEHAVIOR = 2
 	RouterDiscoveryUnchanged NL_ROUTER_DISCOVERY_BEHAVIOR = -1
 )
+
+// String returns the NL_ROUTER_DISCOVERY_BEHAVIOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_ROUTER_DISCOVERY_BEHAVIOR) String() string {
+	switch e {
+	case RouterDiscoveryDisabled:
+		return "RouterDiscoveryDisabled"
+	case RouterDiscoveryEnabled:
+		return "RouterDiscoveryEnabled"
+	case RouterDiscoveryDhcp:
+		return "RouterDiscoveryDhcp"
+	case RouterDiscoveryUnchanged:
+		return "RouterDiscoveryUnchanged"
+	default:
+		return fmt.Sprintf("NL_ROUTER_DISCOVERY_BEHAVIOR(%d)", int32(e))
+	}
+}
 
 // NL_ROUTE_ORIGIN: https://learn.microsoft.com/windows/win32/api/nldef/ne-nldef-nl_route_origin
 type NL_ROUTE_ORIGIN int32
@@ -385,6 +1059,25 @@ const (
 	NlroRouterAdvertisement NL_ROUTE_ORIGIN = 3
 	Nlro6to4                NL_ROUTE_ORIGIN = 4
 )
+
+// String returns the NL_ROUTE_ORIGIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_ROUTE_ORIGIN) String() string {
+	switch e {
+	case NlroManual:
+		return "NlroManual"
+	case NlroWellKnown:
+		return "NlroWellKnown"
+	case NlroDHCP:
+		return "NlroDHCP"
+	case NlroRouterAdvertisement:
+		return "NlroRouterAdvertisement"
+	case Nlro6to4:
+		return "Nlro6to4"
+	default:
+		return fmt.Sprintf("NL_ROUTE_ORIGIN(%d)", int32(e))
+	}
+}
 
 // NL_ROUTE_PROTOCOL: https://learn.microsoft.com/windows/win32/api/nldef/ne-nldef-nl_route_protocol
 type NL_ROUTE_PROTOCOL int32
@@ -455,6 +1148,59 @@ const (
 	PROTO_IP_NT_STATIC_NON_DOD    NL_ROUTE_PROTOCOL = 10007
 )
 
+// String returns the NL_ROUTE_PROTOCOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_ROUTE_PROTOCOL) String() string {
+	switch e {
+	case RouteProtocolOther:
+		return "RouteProtocolOther"
+	case RouteProtocolLocal:
+		return "RouteProtocolLocal"
+	case RouteProtocolNetMgmt:
+		return "RouteProtocolNetMgmt"
+	case RouteProtocolIcmp:
+		return "RouteProtocolIcmp"
+	case RouteProtocolEgp:
+		return "RouteProtocolEgp"
+	case RouteProtocolGgp:
+		return "RouteProtocolGgp"
+	case RouteProtocolHello:
+		return "RouteProtocolHello"
+	case RouteProtocolRip:
+		return "RouteProtocolRip"
+	case RouteProtocolIsIs:
+		return "RouteProtocolIsIs"
+	case RouteProtocolEsIs:
+		return "RouteProtocolEsIs"
+	case RouteProtocolCisco:
+		return "RouteProtocolCisco"
+	case RouteProtocolBbn:
+		return "RouteProtocolBbn"
+	case RouteProtocolOspf:
+		return "RouteProtocolOspf"
+	case RouteProtocolBgp:
+		return "RouteProtocolBgp"
+	case RouteProtocolIdpr:
+		return "RouteProtocolIdpr"
+	case RouteProtocolEigrp:
+		return "RouteProtocolEigrp"
+	case RouteProtocolDvmrp:
+		return "RouteProtocolDvmrp"
+	case RouteProtocolRpl:
+		return "RouteProtocolRpl"
+	case RouteProtocolDhcp:
+		return "RouteProtocolDhcp"
+	case MIB_IPPROTO_NT_AUTOSTATIC:
+		return "MIB_IPPROTO_NT_AUTOSTATIC"
+	case MIB_IPPROTO_NT_STATIC:
+		return "MIB_IPPROTO_NT_STATIC"
+	case MIB_IPPROTO_NT_STATIC_NON_DOD:
+		return "MIB_IPPROTO_NT_STATIC_NON_DOD"
+	default:
+		return fmt.Sprintf("NL_ROUTE_PROTOCOL(%d)", int32(e))
+	}
+}
+
 // NL_SUFFIX_ORIGIN: https://learn.microsoft.com/windows/win32/api/nldef/ne-nldef-nl_suffix_origin
 type NL_SUFFIX_ORIGIN int32
 
@@ -474,12 +1220,48 @@ const (
 	IpSuffixOriginUnchanged        NL_SUFFIX_ORIGIN = 16
 )
 
+// String returns the NL_SUFFIX_ORIGIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NL_SUFFIX_ORIGIN) String() string {
+	switch e {
+	case NlsoOther:
+		return "NlsoOther"
+	case NlsoManual:
+		return "NlsoManual"
+	case NlsoWellKnown:
+		return "NlsoWellKnown"
+	case NlsoDhcp:
+		return "NlsoDhcp"
+	case NlsoLinkLayerAddress:
+		return "NlsoLinkLayerAddress"
+	case NlsoRandom:
+		return "NlsoRandom"
+	case IpSuffixOriginUnchanged:
+		return "IpSuffixOriginUnchanged"
+	default:
+		return fmt.Sprintf("NL_SUFFIX_ORIGIN(%d)", int32(e))
+	}
+}
+
 type NPI_MODULEID_TYPE int32
 
 const (
 	MIT_GUID    NPI_MODULEID_TYPE = 1
 	MIT_IF_LUID NPI_MODULEID_TYPE = 2
 )
+
+// String returns the NPI_MODULEID_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NPI_MODULEID_TYPE) String() string {
+	switch e {
+	case MIT_GUID:
+		return "MIT_GUID"
+	case MIT_IF_LUID:
+		return "MIT_IF_LUID"
+	default:
+		return fmt.Sprintf("NPI_MODULEID_TYPE(%d)", int32(e))
+	}
+}
 
 type PMTUD_STATE int32
 
@@ -490,6 +1272,25 @@ const (
 	IP_PMTUDISC_PROBE   PMTUD_STATE = 3
 	IP_PMTUDISC_MAX     PMTUD_STATE = 4
 )
+
+// String returns the PMTUD_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PMTUD_STATE) String() string {
+	switch e {
+	case IP_PMTUDISC_NOT_SET:
+		return "IP_PMTUDISC_NOT_SET"
+	case IP_PMTUDISC_DO:
+		return "IP_PMTUDISC_DO"
+	case IP_PMTUDISC_DONT:
+		return "IP_PMTUDISC_DONT"
+	case IP_PMTUDISC_PROBE:
+		return "IP_PMTUDISC_PROBE"
+	case IP_PMTUDISC_MAX:
+		return "IP_PMTUDISC_MAX"
+	default:
+		return fmt.Sprintf("PMTUD_STATE(%d)", int32(e))
+	}
+}
 
 type Q2931_IE_TYPE int32
 
@@ -508,6 +1309,39 @@ const (
 	IE_TransitNetworkSelection   Q2931_IE_TYPE = 11
 )
 
+// String returns the Q2931_IE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e Q2931_IE_TYPE) String() string {
+	switch e {
+	case IE_AALParameters:
+		return "IE_AALParameters"
+	case IE_TrafficDescriptor:
+		return "IE_TrafficDescriptor"
+	case IE_BroadbandBearerCapability:
+		return "IE_BroadbandBearerCapability"
+	case IE_BHLI:
+		return "IE_BHLI"
+	case IE_BLLI:
+		return "IE_BLLI"
+	case IE_CalledPartyNumber:
+		return "IE_CalledPartyNumber"
+	case IE_CalledPartySubaddress:
+		return "IE_CalledPartySubaddress"
+	case IE_CallingPartyNumber:
+		return "IE_CallingPartyNumber"
+	case IE_CallingPartySubaddress:
+		return "IE_CallingPartySubaddress"
+	case IE_Cause:
+		return "IE_Cause"
+	case IE_QOSClass:
+		return "IE_QOSClass"
+	case IE_TransitNetworkSelection:
+		return "IE_TransitNetworkSelection"
+	default:
+		return fmt.Sprintf("Q2931_IE_TYPE(%d)", int32(e))
+	}
+}
+
 type RCVALL_VALUE int32
 
 const (
@@ -516,6 +1350,23 @@ const (
 	RCVALL_SOCKETLEVELONLY RCVALL_VALUE = 2
 	RCVALL_IPLEVEL         RCVALL_VALUE = 3
 )
+
+// String returns the RCVALL_VALUE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RCVALL_VALUE) String() string {
+	switch e {
+	case RCVALL_OFF:
+		return "RCVALL_OFF"
+	case RCVALL_ON:
+		return "RCVALL_ON"
+	case RCVALL_SOCKETLEVELONLY:
+		return "RCVALL_SOCKETLEVELONLY"
+	case RCVALL_IPLEVEL:
+		return "RCVALL_IPLEVEL"
+	default:
+		return fmt.Sprintf("RCVALL_VALUE(%d)", int32(e))
+	}
+}
 
 type RESOURCE_DISPLAY_TYPE uint32
 
@@ -529,6 +1380,29 @@ const (
 	RESOURCEDISPLAYTYPE_TREE    RESOURCE_DISPLAY_TYPE = 10
 )
 
+// String returns the RESOURCE_DISPLAY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RESOURCE_DISPLAY_TYPE) String() string {
+	switch e {
+	case RESOURCEDISPLAYTYPE_DOMAIN:
+		return "RESOURCEDISPLAYTYPE_DOMAIN"
+	case RESOURCEDISPLAYTYPE_FILE:
+		return "RESOURCEDISPLAYTYPE_FILE"
+	case RESOURCEDISPLAYTYPE_GENERIC:
+		return "RESOURCEDISPLAYTYPE_GENERIC"
+	case RESOURCEDISPLAYTYPE_GROUP:
+		return "RESOURCEDISPLAYTYPE_GROUP"
+	case RESOURCEDISPLAYTYPE_SERVER:
+		return "RESOURCEDISPLAYTYPE_SERVER"
+	case RESOURCEDISPLAYTYPE_SHARE:
+		return "RESOURCEDISPLAYTYPE_SHARE"
+	case RESOURCEDISPLAYTYPE_TREE:
+		return "RESOURCEDISPLAYTYPE_TREE"
+	default:
+		return fmt.Sprintf("RESOURCE_DISPLAY_TYPE(%d)", uint32(e))
+	}
+}
+
 // RIO_NOTIFICATION_COMPLETION_TYPE: https://learn.microsoft.com/windows/win32/api/mswsock/ne-mswsock-rio_notification_completion_type
 type RIO_NOTIFICATION_COMPLETION_TYPE int32
 
@@ -536,6 +1410,19 @@ const (
 	RIO_EVENT_COMPLETION RIO_NOTIFICATION_COMPLETION_TYPE = 1
 	RIO_IOCP_COMPLETION  RIO_NOTIFICATION_COMPLETION_TYPE = 2
 )
+
+// String returns the RIO_NOTIFICATION_COMPLETION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RIO_NOTIFICATION_COMPLETION_TYPE) String() string {
+	switch e {
+	case RIO_EVENT_COMPLETION:
+		return "RIO_EVENT_COMPLETION"
+	case RIO_IOCP_COMPLETION:
+		return "RIO_IOCP_COMPLETION"
+	default:
+		return fmt.Sprintf("RIO_NOTIFICATION_COMPLETION_TYPE(%d)", int32(e))
+	}
+}
 
 // SCOPE_LEVEL: https://learn.microsoft.com/windows/win32/api/ws2def/ne-ws2def-scope_level
 type SCOPE_LEVEL int32
@@ -551,6 +1438,32 @@ const (
 	ScopeLevelCount        SCOPE_LEVEL = 16
 )
 
+// String returns the SCOPE_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCOPE_LEVEL) String() string {
+	switch e {
+	case ScopeLevelInterface:
+		return "ScopeLevelInterface"
+	case ScopeLevelLink:
+		return "ScopeLevelLink"
+	case ScopeLevelSubnet:
+		return "ScopeLevelSubnet"
+	case ScopeLevelAdmin:
+		return "ScopeLevelAdmin"
+	case ScopeLevelSite:
+		return "ScopeLevelSite"
+	case ScopeLevelOrganization:
+		return "ScopeLevelOrganization"
+	case ScopeLevelGlobal:
+		return "ScopeLevelGlobal"
+	case ScopeLevelCount:
+		return "ScopeLevelCount"
+	default:
+		return fmt.Sprintf("SCOPE_LEVEL(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SEND_RECV_FLAGS int32
 
 const (
@@ -560,6 +1473,31 @@ const (
 	MSG_WAITALL        SEND_RECV_FLAGS = 8
 	MSG_PUSH_IMMEDIATE SEND_RECV_FLAGS = 32
 )
+
+// String returns the SEND_RECV_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SEND_RECV_FLAGS) String() string {
+	var parts []string
+	if e&MSG_OOB != 0 {
+		parts = append(parts, "MSG_OOB")
+	}
+	if e&MSG_PEEK != 0 {
+		parts = append(parts, "MSG_PEEK")
+	}
+	if e&MSG_DONTROUTE != 0 {
+		parts = append(parts, "MSG_DONTROUTE")
+	}
+	if e&MSG_WAITALL != 0 {
+		parts = append(parts, "MSG_WAITALL")
+	}
+	if e&MSG_PUSH_IMMEDIATE != 0 {
+		parts = append(parts, "MSG_PUSH_IMMEDIATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type SET_SERVICE_OPERATION uint32
 
@@ -571,6 +1509,25 @@ const (
 	SERVICE_DELETE_TYPE SET_SERVICE_OPERATION = 5
 )
 
+// String returns the SET_SERVICE_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SET_SERVICE_OPERATION) String() string {
+	switch e {
+	case SERVICE_REGISTER:
+		return "SERVICE_REGISTER"
+	case SERVICE_DEREGISTER:
+		return "SERVICE_DEREGISTER"
+	case SERVICE_FLUSH:
+		return "SERVICE_FLUSH"
+	case SERVICE_ADD_TYPE:
+		return "SERVICE_ADD_TYPE"
+	case SERVICE_DELETE_TYPE:
+		return "SERVICE_DELETE_TYPE"
+	default:
+		return fmt.Sprintf("SET_SERVICE_OPERATION(%d)", uint32(e))
+	}
+}
+
 type SOCKET_PRIORITY_HINT int32
 
 const (
@@ -579,6 +1536,23 @@ const (
 	SocketPriorityHintNormal      SOCKET_PRIORITY_HINT = 2
 	SocketMaximumPriorityHintType SOCKET_PRIORITY_HINT = 3
 )
+
+// String returns the SOCKET_PRIORITY_HINT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SOCKET_PRIORITY_HINT) String() string {
+	switch e {
+	case SocketPriorityHintVeryLow:
+		return "SocketPriorityHintVeryLow"
+	case SocketPriorityHintLow:
+		return "SocketPriorityHintLow"
+	case SocketPriorityHintNormal:
+		return "SocketPriorityHintNormal"
+	case SocketMaximumPriorityHintType:
+		return "SocketMaximumPriorityHintType"
+	default:
+		return fmt.Sprintf("SOCKET_PRIORITY_HINT(%d)", int32(e))
+	}
+}
 
 // SOCKET_SECURITY_PROTOCOL: https://learn.microsoft.com/windows/win32/api/mstcpip/ne-mstcpip-socket_security_protocol
 type SOCKET_SECURITY_PROTOCOL int32
@@ -590,12 +1564,40 @@ const (
 	SOCKET_SECURITY_PROTOCOL_INVALID SOCKET_SECURITY_PROTOCOL = 3
 )
 
+// String returns the SOCKET_SECURITY_PROTOCOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SOCKET_SECURITY_PROTOCOL) String() string {
+	switch e {
+	case SOCKET_SECURITY_PROTOCOL_DEFAULT:
+		return "SOCKET_SECURITY_PROTOCOL_DEFAULT"
+	case SOCKET_SECURITY_PROTOCOL_IPSEC:
+		return "SOCKET_SECURITY_PROTOCOL_IPSEC"
+	case SOCKET_SECURITY_PROTOCOL_IPSEC2:
+		return "SOCKET_SECURITY_PROTOCOL_IPSEC2"
+	case SOCKET_SECURITY_PROTOCOL_INVALID:
+		return "SOCKET_SECURITY_PROTOCOL_INVALID"
+	default:
+		return fmt.Sprintf("SOCKET_SECURITY_PROTOCOL(%d)", int32(e))
+	}
+}
+
 // SOCKET_USAGE_TYPE: https://learn.microsoft.com/windows/win32/api/mstcpip/ne-mstcpip-socket_usage_type
 type SOCKET_USAGE_TYPE int32
 
 const (
 	SYSTEM_CRITICAL_SOCKET SOCKET_USAGE_TYPE = 1
 )
+
+// String returns the SOCKET_USAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SOCKET_USAGE_TYPE) String() string {
+	switch e {
+	case SYSTEM_CRITICAL_SOCKET:
+		return "SYSTEM_CRITICAL_SOCKET"
+	default:
+		return fmt.Sprintf("SOCKET_USAGE_TYPE(%d)", int32(e))
+	}
+}
 
 // TCPSTATE: https://learn.microsoft.com/windows/win32/api/mstcpip/ne-mstcpip-tcpstate
 type TCPSTATE int32
@@ -615,6 +1617,39 @@ const (
 	TCPSTATE_MAX         TCPSTATE = 11
 )
 
+// String returns the TCPSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TCPSTATE) String() string {
+	switch e {
+	case TCPSTATE_CLOSED:
+		return "TCPSTATE_CLOSED"
+	case TCPSTATE_LISTEN:
+		return "TCPSTATE_LISTEN"
+	case TCPSTATE_SYN_SENT:
+		return "TCPSTATE_SYN_SENT"
+	case TCPSTATE_SYN_RCVD:
+		return "TCPSTATE_SYN_RCVD"
+	case TCPSTATE_ESTABLISHED:
+		return "TCPSTATE_ESTABLISHED"
+	case TCPSTATE_FIN_WAIT_1:
+		return "TCPSTATE_FIN_WAIT_1"
+	case TCPSTATE_FIN_WAIT_2:
+		return "TCPSTATE_FIN_WAIT_2"
+	case TCPSTATE_CLOSE_WAIT:
+		return "TCPSTATE_CLOSE_WAIT"
+	case TCPSTATE_CLOSING:
+		return "TCPSTATE_CLOSING"
+	case TCPSTATE_LAST_ACK:
+		return "TCPSTATE_LAST_ACK"
+	case TCPSTATE_TIME_WAIT:
+		return "TCPSTATE_TIME_WAIT"
+	case TCPSTATE_MAX:
+		return "TCPSTATE_MAX"
+	default:
+		return fmt.Sprintf("TCPSTATE(%d)", int32(e))
+	}
+}
+
 type TCP_ICW_LEVEL int32
 
 const (
@@ -627,6 +1662,29 @@ const (
 	TCP_ICW_LEVEL_MAX          TCP_ICW_LEVEL = 255
 )
 
+// String returns the TCP_ICW_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TCP_ICW_LEVEL) String() string {
+	switch e {
+	case TCP_ICW_LEVEL_DEFAULT:
+		return "TCP_ICW_LEVEL_DEFAULT"
+	case TCP_ICW_LEVEL_HIGH:
+		return "TCP_ICW_LEVEL_HIGH"
+	case TCP_ICW_LEVEL_VERY_HIGH:
+		return "TCP_ICW_LEVEL_VERY_HIGH"
+	case TCP_ICW_LEVEL_AGGRESSIVE:
+		return "TCP_ICW_LEVEL_AGGRESSIVE"
+	case TCP_ICW_LEVEL_EXPERIMENTAL:
+		return "TCP_ICW_LEVEL_EXPERIMENTAL"
+	case TCP_ICW_LEVEL_COMPAT:
+		return "TCP_ICW_LEVEL_COMPAT"
+	case TCP_ICW_LEVEL_MAX:
+		return "TCP_ICW_LEVEL_MAX"
+	default:
+		return fmt.Sprintf("TCP_ICW_LEVEL(%d)", int32(e))
+	}
+}
+
 type TUNNEL_SUB_TYPE int32
 
 const (
@@ -636,6 +1694,23 @@ const (
 	TUNNEL_SUB_TYPE_HA    TUNNEL_SUB_TYPE = 3
 )
 
+// String returns the TUNNEL_SUB_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TUNNEL_SUB_TYPE) String() string {
+	switch e {
+	case TUNNEL_SUB_TYPE_NONE:
+		return "TUNNEL_SUB_TYPE_NONE"
+	case TUNNEL_SUB_TYPE_CP:
+		return "TUNNEL_SUB_TYPE_CP"
+	case TUNNEL_SUB_TYPE_IPTLS:
+		return "TUNNEL_SUB_TYPE_IPTLS"
+	case TUNNEL_SUB_TYPE_HA:
+		return "TUNNEL_SUB_TYPE_HA"
+	default:
+		return fmt.Sprintf("TUNNEL_SUB_TYPE(%d)", int32(e))
+	}
+}
+
 type WINSOCK_SHUTDOWN_HOW int32
 
 const (
@@ -643,6 +1718,21 @@ const (
 	SD_SEND    WINSOCK_SHUTDOWN_HOW = 1
 	SD_BOTH    WINSOCK_SHUTDOWN_HOW = 2
 )
+
+// String returns the WINSOCK_SHUTDOWN_HOW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINSOCK_SHUTDOWN_HOW) String() string {
+	switch e {
+	case SD_RECEIVE:
+		return "SD_RECEIVE"
+	case SD_SEND:
+		return "SD_SEND"
+	case SD_BOTH:
+		return "SD_BOTH"
+	default:
+		return fmt.Sprintf("WINSOCK_SHUTDOWN_HOW(%d)", int32(e))
+	}
+}
 
 type WINSOCK_SOCKET_TYPE int32
 
@@ -654,6 +1744,25 @@ const (
 	SOCK_SEQPACKET WINSOCK_SOCKET_TYPE = 5
 )
 
+// String returns the WINSOCK_SOCKET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINSOCK_SOCKET_TYPE) String() string {
+	switch e {
+	case SOCK_STREAM:
+		return "SOCK_STREAM"
+	case SOCK_DGRAM:
+		return "SOCK_DGRAM"
+	case SOCK_RAW:
+		return "SOCK_RAW"
+	case SOCK_RDM:
+		return "SOCK_RDM"
+	case SOCK_SEQPACKET:
+		return "SOCK_SEQPACKET"
+	default:
+		return fmt.Sprintf("WINSOCK_SOCKET_TYPE(%d)", int32(e))
+	}
+}
+
 type WSACOMPLETIONTYPE int32
 
 const (
@@ -664,6 +1773,25 @@ const (
 	NSP_NOTIFY_APC         WSACOMPLETIONTYPE = 4
 )
 
+// String returns the WSACOMPLETIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSACOMPLETIONTYPE) String() string {
+	switch e {
+	case NSP_NOTIFY_IMMEDIATELY:
+		return "NSP_NOTIFY_IMMEDIATELY"
+	case NSP_NOTIFY_HWND:
+		return "NSP_NOTIFY_HWND"
+	case NSP_NOTIFY_EVENT:
+		return "NSP_NOTIFY_EVENT"
+	case NSP_NOTIFY_PORT:
+		return "NSP_NOTIFY_PORT"
+	case NSP_NOTIFY_APC:
+		return "NSP_NOTIFY_APC"
+	default:
+		return fmt.Sprintf("WSACOMPLETIONTYPE(%d)", int32(e))
+	}
+}
+
 // WSAECOMPARATOR: https://learn.microsoft.com/windows/win32/api/winsock2/ne-winsock2-wsaecomparator
 type WSAECOMPARATOR int32
 
@@ -671,6 +1799,19 @@ const (
 	COMP_EQUAL   WSAECOMPARATOR = 0
 	COMP_NOTLESS WSAECOMPARATOR = 1
 )
+
+// String returns the WSAECOMPARATOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSAECOMPARATOR) String() string {
+	switch e {
+	case COMP_EQUAL:
+		return "COMP_EQUAL"
+	case COMP_NOTLESS:
+		return "COMP_NOTLESS"
+	default:
+		return fmt.Sprintf("WSAECOMPARATOR(%d)", int32(e))
+	}
+}
 
 type WSAESETSERVICEOP int32
 
@@ -680,6 +1821,22 @@ const (
 	RNRSERVICE_DELETE     WSAESETSERVICEOP = 2
 )
 
+// String returns the WSAESETSERVICEOP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSAESETSERVICEOP) String() string {
+	switch e {
+	case RNRSERVICE_REGISTER:
+		return "RNRSERVICE_REGISTER"
+	case RNRSERVICE_DEREGISTER:
+		return "RNRSERVICE_DEREGISTER"
+	case RNRSERVICE_DELETE:
+		return "RNRSERVICE_DELETE"
+	default:
+		return fmt.Sprintf("WSAESETSERVICEOP(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WSAPOLL_EVENT_FLAGS int16
 
 const (
@@ -695,6 +1852,46 @@ const (
 	POLLNVAL   WSAPOLL_EVENT_FLAGS = 4
 )
 
+// String returns the WSAPOLL_EVENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSAPOLL_EVENT_FLAGS) String() string {
+	var parts []string
+	if e&POLLRDNORM != 0 {
+		parts = append(parts, "POLLRDNORM")
+	}
+	if e&POLLRDBAND != 0 {
+		parts = append(parts, "POLLRDBAND")
+	}
+	if e&POLLIN != 0 {
+		parts = append(parts, "POLLIN")
+	}
+	if e&POLLPRI != 0 {
+		parts = append(parts, "POLLPRI")
+	}
+	if e&POLLWRNORM != 0 {
+		parts = append(parts, "POLLWRNORM")
+	}
+	if e&POLLOUT != 0 {
+		parts = append(parts, "POLLOUT")
+	}
+	if e&POLLWRBAND != 0 {
+		parts = append(parts, "POLLWRBAND")
+	}
+	if e&POLLERR != 0 {
+		parts = append(parts, "POLLERR")
+	}
+	if e&POLLHUP != 0 {
+		parts = append(parts, "POLLHUP")
+	}
+	if e&POLLNVAL != 0 {
+		parts = append(parts, "POLLNVAL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type WSA_COMPATIBILITY_BEHAVIOR_ID int32
 
 const (
@@ -702,6 +1899,21 @@ const (
 	WsaBehaviorReceiveBuffering WSA_COMPATIBILITY_BEHAVIOR_ID = 1
 	WsaBehaviorAutoTuning       WSA_COMPATIBILITY_BEHAVIOR_ID = 2
 )
+
+// String returns the WSA_COMPATIBILITY_BEHAVIOR_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSA_COMPATIBILITY_BEHAVIOR_ID) String() string {
+	switch e {
+	case WsaBehaviorAll:
+		return "WsaBehaviorAll"
+	case WsaBehaviorReceiveBuffering:
+		return "WsaBehaviorReceiveBuffering"
+	case WsaBehaviorAutoTuning:
+		return "WsaBehaviorAutoTuning"
+	default:
+		return fmt.Sprintf("WSA_COMPATIBILITY_BEHAVIOR_ID(%d)", int32(e))
+	}
+}
 
 type WSA_ERROR int32
 
@@ -808,6 +2020,215 @@ const (
 	WSA_IPSEC_NAME_POLICY_ERROR WSA_ERROR = 11033
 )
 
+// String returns the WSA_ERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSA_ERROR) String() string {
+	switch e {
+	case WSA_IO_PENDING:
+		return "WSA_IO_PENDING"
+	case WSA_IO_INCOMPLETE:
+		return "WSA_IO_INCOMPLETE"
+	case WSA_INVALID_HANDLE:
+		return "WSA_INVALID_HANDLE"
+	case WSA_INVALID_PARAMETER:
+		return "WSA_INVALID_PARAMETER"
+	case WSA_NOT_ENOUGH_MEMORY:
+		return "WSA_NOT_ENOUGH_MEMORY"
+	case WSA_OPERATION_ABORTED:
+		return "WSA_OPERATION_ABORTED"
+	case WSA_WAIT_EVENT_0:
+		return "WSA_WAIT_EVENT_0"
+	case WSA_WAIT_IO_COMPLETION:
+		return "WSA_WAIT_IO_COMPLETION"
+	case WSABASEERR:
+		return "WSABASEERR"
+	case WSAEINTR:
+		return "WSAEINTR"
+	case WSAEBADF:
+		return "WSAEBADF"
+	case WSAEACCES:
+		return "WSAEACCES"
+	case WSAEFAULT:
+		return "WSAEFAULT"
+	case WSAEINVAL:
+		return "WSAEINVAL"
+	case WSAEMFILE:
+		return "WSAEMFILE"
+	case WSAEWOULDBLOCK:
+		return "WSAEWOULDBLOCK"
+	case WSAEINPROGRESS:
+		return "WSAEINPROGRESS"
+	case WSAEALREADY:
+		return "WSAEALREADY"
+	case WSAENOTSOCK:
+		return "WSAENOTSOCK"
+	case WSAEDESTADDRREQ:
+		return "WSAEDESTADDRREQ"
+	case WSAEMSGSIZE:
+		return "WSAEMSGSIZE"
+	case WSAEPROTOTYPE:
+		return "WSAEPROTOTYPE"
+	case WSAENOPROTOOPT:
+		return "WSAENOPROTOOPT"
+	case WSAEPROTONOSUPPORT:
+		return "WSAEPROTONOSUPPORT"
+	case WSAESOCKTNOSUPPORT:
+		return "WSAESOCKTNOSUPPORT"
+	case WSAEOPNOTSUPP:
+		return "WSAEOPNOTSUPP"
+	case WSAEPFNOSUPPORT:
+		return "WSAEPFNOSUPPORT"
+	case WSAEAFNOSUPPORT:
+		return "WSAEAFNOSUPPORT"
+	case WSAEADDRINUSE:
+		return "WSAEADDRINUSE"
+	case WSAEADDRNOTAVAIL:
+		return "WSAEADDRNOTAVAIL"
+	case WSAENETDOWN:
+		return "WSAENETDOWN"
+	case WSAENETUNREACH:
+		return "WSAENETUNREACH"
+	case WSAENETRESET:
+		return "WSAENETRESET"
+	case WSAECONNABORTED:
+		return "WSAECONNABORTED"
+	case WSAECONNRESET:
+		return "WSAECONNRESET"
+	case WSAENOBUFS:
+		return "WSAENOBUFS"
+	case WSAEISCONN:
+		return "WSAEISCONN"
+	case WSAENOTCONN:
+		return "WSAENOTCONN"
+	case WSAESHUTDOWN:
+		return "WSAESHUTDOWN"
+	case WSAETOOMANYREFS:
+		return "WSAETOOMANYREFS"
+	case WSAETIMEDOUT:
+		return "WSAETIMEDOUT"
+	case WSAECONNREFUSED:
+		return "WSAECONNREFUSED"
+	case WSAELOOP:
+		return "WSAELOOP"
+	case WSAENAMETOOLONG:
+		return "WSAENAMETOOLONG"
+	case WSAEHOSTDOWN:
+		return "WSAEHOSTDOWN"
+	case WSAEHOSTUNREACH:
+		return "WSAEHOSTUNREACH"
+	case WSAENOTEMPTY:
+		return "WSAENOTEMPTY"
+	case WSAEPROCLIM:
+		return "WSAEPROCLIM"
+	case WSAEUSERS:
+		return "WSAEUSERS"
+	case WSAEDQUOT:
+		return "WSAEDQUOT"
+	case WSAESTALE:
+		return "WSAESTALE"
+	case WSAEREMOTE:
+		return "WSAEREMOTE"
+	case WSASYSNOTREADY:
+		return "WSASYSNOTREADY"
+	case WSAVERNOTSUPPORTED:
+		return "WSAVERNOTSUPPORTED"
+	case WSANOTINITIALISED:
+		return "WSANOTINITIALISED"
+	case WSAEDISCON:
+		return "WSAEDISCON"
+	case WSAENOMORE:
+		return "WSAENOMORE"
+	case WSAECANCELLED:
+		return "WSAECANCELLED"
+	case WSAEINVALIDPROCTABLE:
+		return "WSAEINVALIDPROCTABLE"
+	case WSAEINVALIDPROVIDER:
+		return "WSAEINVALIDPROVIDER"
+	case WSAEPROVIDERFAILEDINIT:
+		return "WSAEPROVIDERFAILEDINIT"
+	case WSASYSCALLFAILURE:
+		return "WSASYSCALLFAILURE"
+	case WSASERVICE_NOT_FOUND:
+		return "WSASERVICE_NOT_FOUND"
+	case WSATYPE_NOT_FOUND:
+		return "WSATYPE_NOT_FOUND"
+	case WSA_E_NO_MORE:
+		return "WSA_E_NO_MORE"
+	case WSA_E_CANCELLED:
+		return "WSA_E_CANCELLED"
+	case WSAEREFUSED:
+		return "WSAEREFUSED"
+	case WSAHOST_NOT_FOUND:
+		return "WSAHOST_NOT_FOUND"
+	case WSATRY_AGAIN:
+		return "WSATRY_AGAIN"
+	case WSANO_RECOVERY:
+		return "WSANO_RECOVERY"
+	case WSANO_DATA:
+		return "WSANO_DATA"
+	case WSA_QOS_RECEIVERS:
+		return "WSA_QOS_RECEIVERS"
+	case WSA_QOS_SENDERS:
+		return "WSA_QOS_SENDERS"
+	case WSA_QOS_NO_SENDERS:
+		return "WSA_QOS_NO_SENDERS"
+	case WSA_QOS_NO_RECEIVERS:
+		return "WSA_QOS_NO_RECEIVERS"
+	case WSA_QOS_REQUEST_CONFIRMED:
+		return "WSA_QOS_REQUEST_CONFIRMED"
+	case WSA_QOS_ADMISSION_FAILURE:
+		return "WSA_QOS_ADMISSION_FAILURE"
+	case WSA_QOS_POLICY_FAILURE:
+		return "WSA_QOS_POLICY_FAILURE"
+	case WSA_QOS_BAD_STYLE:
+		return "WSA_QOS_BAD_STYLE"
+	case WSA_QOS_BAD_OBJECT:
+		return "WSA_QOS_BAD_OBJECT"
+	case WSA_QOS_TRAFFIC_CTRL_ERROR:
+		return "WSA_QOS_TRAFFIC_CTRL_ERROR"
+	case WSA_QOS_GENERIC_ERROR:
+		return "WSA_QOS_GENERIC_ERROR"
+	case WSA_QOS_ESERVICETYPE:
+		return "WSA_QOS_ESERVICETYPE"
+	case WSA_QOS_EFLOWSPEC:
+		return "WSA_QOS_EFLOWSPEC"
+	case WSA_QOS_EPROVSPECBUF:
+		return "WSA_QOS_EPROVSPECBUF"
+	case WSA_QOS_EFILTERSTYLE:
+		return "WSA_QOS_EFILTERSTYLE"
+	case WSA_QOS_EFILTERTYPE:
+		return "WSA_QOS_EFILTERTYPE"
+	case WSA_QOS_EFILTERCOUNT:
+		return "WSA_QOS_EFILTERCOUNT"
+	case WSA_QOS_EOBJLENGTH:
+		return "WSA_QOS_EOBJLENGTH"
+	case WSA_QOS_EFLOWCOUNT:
+		return "WSA_QOS_EFLOWCOUNT"
+	case WSA_QOS_EUNKOWNPSOBJ:
+		return "WSA_QOS_EUNKOWNPSOBJ"
+	case WSA_QOS_EPOLICYOBJ:
+		return "WSA_QOS_EPOLICYOBJ"
+	case WSA_QOS_EFLOWDESC:
+		return "WSA_QOS_EFLOWDESC"
+	case WSA_QOS_EPSFLOWSPEC:
+		return "WSA_QOS_EPSFLOWSPEC"
+	case WSA_QOS_EPSFILTERSPEC:
+		return "WSA_QOS_EPSFILTERSPEC"
+	case WSA_QOS_ESDMODEOBJ:
+		return "WSA_QOS_ESDMODEOBJ"
+	case WSA_QOS_ESHAPERATEOBJ:
+		return "WSA_QOS_ESHAPERATEOBJ"
+	case WSA_QOS_RESERVED_PETYPE:
+		return "WSA_QOS_RESERVED_PETYPE"
+	case WSA_SECURE_HOST_NOT_FOUND:
+		return "WSA_SECURE_HOST_NOT_FOUND"
+	case WSA_IPSEC_NAME_POLICY_ERROR:
+		return "WSA_IPSEC_NAME_POLICY_ERROR"
+	default:
+		return fmt.Sprintf("WSA_ERROR(%d)", int32(e))
+	}
+}
+
 // WSC_PROVIDER_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/ws2spi/ne-ws2spi-wsc_provider_info_type
 type WSC_PROVIDER_INFO_TYPE int32
 
@@ -816,6 +2237,19 @@ const (
 	ProviderInfoAudit         WSC_PROVIDER_INFO_TYPE = 1
 )
 
+// String returns the WSC_PROVIDER_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSC_PROVIDER_INFO_TYPE) String() string {
+	switch e {
+	case ProviderInfoLspCategories:
+		return "ProviderInfoLspCategories"
+	case ProviderInfoAudit:
+		return "ProviderInfoAudit"
+	default:
+		return fmt.Sprintf("WSC_PROVIDER_INFO_TYPE(%d)", int32(e))
+	}
+}
+
 // EWINDOW_ADVANCE_METHOD: https://learn.microsoft.com/windows/win32/api/wsrm/ne-wsrm-ewindow_advance_method
 type EWINDOW_ADVANCE_METHOD int32
 
@@ -823,3 +2257,16 @@ const (
 	E_WINDOW_ADVANCE_BY_TIME   EWINDOW_ADVANCE_METHOD = 1
 	E_WINDOW_USE_AS_DATA_CACHE EWINDOW_ADVANCE_METHOD = 2
 )
+
+// String returns the EWINDOW_ADVANCE_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EWINDOW_ADVANCE_METHOD) String() string {
+	switch e {
+	case E_WINDOW_ADVANCE_BY_TIME:
+		return "E_WINDOW_ADVANCE_BY_TIME"
+	case E_WINDOW_USE_AS_DATA_CACHE:
+		return "E_WINDOW_USE_AS_DATA_CACHE"
+	default:
+		return fmt.Sprintf("EWINDOW_ADVANCE_METHOD(%d)", int32(e))
+	}
+}

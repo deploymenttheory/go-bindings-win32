@@ -4,6 +4,11 @@
 
 package authorization
 
+import (
+	"fmt"
+	"strings"
+)
+
 // ACCESS_MODE: https://learn.microsoft.com/windows/win32/api/accctrl/ne-accctrl-access_mode
 type ACCESS_MODE int32
 
@@ -17,6 +22,29 @@ const (
 	SET_AUDIT_FAILURE ACCESS_MODE = 6
 )
 
+// String returns the ACCESS_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACCESS_MODE) String() string {
+	switch e {
+	case NOT_USED_ACCESS:
+		return "NOT_USED_ACCESS"
+	case GRANT_ACCESS:
+		return "GRANT_ACCESS"
+	case SET_ACCESS:
+		return "SET_ACCESS"
+	case DENY_ACCESS:
+		return "DENY_ACCESS"
+	case REVOKE_ACCESS:
+		return "REVOKE_ACCESS"
+	case SET_AUDIT_SUCCESS:
+		return "SET_AUDIT_SUCCESS"
+	case SET_AUDIT_FAILURE:
+		return "SET_AUDIT_FAILURE"
+	default:
+		return fmt.Sprintf("ACCESS_MODE(%d)", int32(e))
+	}
+}
+
 type ACTRL_ACCESS_ENTRY_ACCESS_FLAGS uint32
 
 const (
@@ -25,6 +53,23 @@ const (
 	ACTRL_AUDIT_SUCCESS  ACTRL_ACCESS_ENTRY_ACCESS_FLAGS = 4
 	ACTRL_AUDIT_FAILURE  ACTRL_ACCESS_ENTRY_ACCESS_FLAGS = 8
 )
+
+// String returns the ACTRL_ACCESS_ENTRY_ACCESS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACTRL_ACCESS_ENTRY_ACCESS_FLAGS) String() string {
+	switch e {
+	case ACTRL_ACCESS_ALLOWED:
+		return "ACTRL_ACCESS_ALLOWED"
+	case ACTRL_ACCESS_DENIED:
+		return "ACTRL_ACCESS_DENIED"
+	case ACTRL_AUDIT_SUCCESS:
+		return "ACTRL_AUDIT_SUCCESS"
+	case ACTRL_AUDIT_FAILURE:
+		return "ACTRL_AUDIT_FAILURE"
+	default:
+		return fmt.Sprintf("ACTRL_ACCESS_ENTRY_ACCESS_FLAGS(%d)", uint32(e))
+	}
+}
 
 // AUDIT_PARAM_TYPE: https://learn.microsoft.com/windows/win32/api/adtgen/ne-adtgen-audit_param_type
 type AUDIT_PARAM_TYPE int32
@@ -45,11 +90,57 @@ const (
 	APT_LogonIdWithSid AUDIT_PARAM_TYPE = 13
 )
 
+// String returns the AUDIT_PARAM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIT_PARAM_TYPE) String() string {
+	switch e {
+	case APT_None:
+		return "APT_None"
+	case APT_String:
+		return "APT_String"
+	case APT_Ulong:
+		return "APT_Ulong"
+	case APT_Pointer:
+		return "APT_Pointer"
+	case APT_Sid:
+		return "APT_Sid"
+	case APT_LogonId:
+		return "APT_LogonId"
+	case APT_ObjectTypeList:
+		return "APT_ObjectTypeList"
+	case APT_Luid:
+		return "APT_Luid"
+	case APT_Guid:
+		return "APT_Guid"
+	case APT_Time:
+		return "APT_Time"
+	case APT_Int64:
+		return "APT_Int64"
+	case APT_IpAddress:
+		return "APT_IpAddress"
+	case APT_LogonIdWithSid:
+		return "APT_LogonIdWithSid"
+	default:
+		return fmt.Sprintf("AUDIT_PARAM_TYPE(%d)", int32(e))
+	}
+}
+
 type AUTHZ_ACCESS_CHECK_FLAGS uint32
 
 const (
 	AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD AUTHZ_ACCESS_CHECK_FLAGS = 1
 )
+
+// String returns the AUTHZ_ACCESS_CHECK_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHZ_ACCESS_CHECK_FLAGS) String() string {
+	switch e {
+	case AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD:
+		return "AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD"
+	default:
+		return fmt.Sprintf("AUTHZ_ACCESS_CHECK_FLAGS(%d)", uint32(e))
+	}
+}
 
 type AUTHZ_AUDIT_EVENT_INFORMATION_CLASS int32
 
@@ -60,6 +151,25 @@ const (
 	AuthzAuditEventInfoObjectName     AUTHZ_AUDIT_EVENT_INFORMATION_CLASS = 4
 	AuthzAuditEventInfoAdditionalInfo AUTHZ_AUDIT_EVENT_INFORMATION_CLASS = 5
 )
+
+// String returns the AUTHZ_AUDIT_EVENT_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHZ_AUDIT_EVENT_INFORMATION_CLASS) String() string {
+	switch e {
+	case AuthzAuditEventInfoFlags:
+		return "AuthzAuditEventInfoFlags"
+	case AuthzAuditEventInfoOperationType:
+		return "AuthzAuditEventInfoOperationType"
+	case AuthzAuditEventInfoObjectType:
+		return "AuthzAuditEventInfoObjectType"
+	case AuthzAuditEventInfoObjectName:
+		return "AuthzAuditEventInfoObjectName"
+	case AuthzAuditEventInfoAdditionalInfo:
+		return "AuthzAuditEventInfoAdditionalInfo"
+	default:
+		return fmt.Sprintf("AUTHZ_AUDIT_EVENT_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
 
 // AUTHZ_CONTEXT_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/authz/ne-authz-authz_context_information_class
 type AUTHZ_CONTEXT_INFORMATION_CLASS int32
@@ -83,12 +193,66 @@ const (
 	AuthzContextInfoCapabilitySids     AUTHZ_CONTEXT_INFORMATION_CLASS = 16
 )
 
+// String returns the AUTHZ_CONTEXT_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHZ_CONTEXT_INFORMATION_CLASS) String() string {
+	switch e {
+	case AuthzContextInfoUserSid:
+		return "AuthzContextInfoUserSid"
+	case AuthzContextInfoGroupsSids:
+		return "AuthzContextInfoGroupsSids"
+	case AuthzContextInfoRestrictedSids:
+		return "AuthzContextInfoRestrictedSids"
+	case AuthzContextInfoPrivileges:
+		return "AuthzContextInfoPrivileges"
+	case AuthzContextInfoExpirationTime:
+		return "AuthzContextInfoExpirationTime"
+	case AuthzContextInfoServerContext:
+		return "AuthzContextInfoServerContext"
+	case AuthzContextInfoIdentifier:
+		return "AuthzContextInfoIdentifier"
+	case AuthzContextInfoSource:
+		return "AuthzContextInfoSource"
+	case AuthzContextInfoAll:
+		return "AuthzContextInfoAll"
+	case AuthzContextInfoAuthenticationId:
+		return "AuthzContextInfoAuthenticationId"
+	case AuthzContextInfoSecurityAttributes:
+		return "AuthzContextInfoSecurityAttributes"
+	case AuthzContextInfoDeviceSids:
+		return "AuthzContextInfoDeviceSids"
+	case AuthzContextInfoUserClaims:
+		return "AuthzContextInfoUserClaims"
+	case AuthzContextInfoDeviceClaims:
+		return "AuthzContextInfoDeviceClaims"
+	case AuthzContextInfoAppContainerSid:
+		return "AuthzContextInfoAppContainerSid"
+	case AuthzContextInfoCapabilitySids:
+		return "AuthzContextInfoCapabilitySids"
+	default:
+		return fmt.Sprintf("AUTHZ_CONTEXT_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
+
 type AUTHZ_GENERATE_RESULTS uint32
 
 const (
 	AUTHZ_GENERATE_SUCCESS_AUDIT AUTHZ_GENERATE_RESULTS = 1
 	AUTHZ_GENERATE_FAILURE_AUDIT AUTHZ_GENERATE_RESULTS = 2
 )
+
+// String returns the AUTHZ_GENERATE_RESULTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHZ_GENERATE_RESULTS) String() string {
+	switch e {
+	case AUTHZ_GENERATE_SUCCESS_AUDIT:
+		return "AUTHZ_GENERATE_SUCCESS_AUDIT"
+	case AUTHZ_GENERATE_FAILURE_AUDIT:
+		return "AUTHZ_GENERATE_FAILURE_AUDIT"
+	default:
+		return fmt.Sprintf("AUTHZ_GENERATE_RESULTS(%d)", uint32(e))
+	}
+}
 
 type AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS uint32
 
@@ -98,6 +262,22 @@ const (
 	AUTHZ_NO_ALLOC_STRINGS AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS = 4
 )
 
+// String returns the AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS) String() string {
+	switch e {
+	case AUTHZ_NO_SUCCESS_AUDIT:
+		return "AUTHZ_NO_SUCCESS_AUDIT"
+	case AUTHZ_NO_FAILURE_AUDIT:
+		return "AUTHZ_NO_FAILURE_AUDIT"
+	case AUTHZ_NO_ALLOC_STRINGS:
+		return "AUTHZ_NO_ALLOC_STRINGS"
+	default:
+		return fmt.Sprintf("AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type AUTHZ_RESOURCE_MANAGER_FLAGS uint32
 
 const (
@@ -106,12 +286,48 @@ const (
 	AUTHZ_RM_FLAG_NO_CENTRAL_ACCESS_POLICIES     AUTHZ_RESOURCE_MANAGER_FLAGS = 4
 )
 
+// String returns the AUTHZ_RESOURCE_MANAGER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHZ_RESOURCE_MANAGER_FLAGS) String() string {
+	var parts []string
+	if e&AUTHZ_RM_FLAG_NO_AUDIT != 0 {
+		parts = append(parts, "AUTHZ_RM_FLAG_NO_AUDIT")
+	}
+	if e&AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION != 0 {
+		parts = append(parts, "AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION")
+	}
+	if e&AUTHZ_RM_FLAG_NO_CENTRAL_ACCESS_POLICIES != 0 {
+		parts = append(parts, "AUTHZ_RM_FLAG_NO_CENTRAL_ACCESS_POLICIES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type AUTHZ_SECURITY_ATTRIBUTE_FLAGS uint32
 
 const (
 	AUTHZ_SECURITY_ATTRIBUTE_NON_INHERITABLE      AUTHZ_SECURITY_ATTRIBUTE_FLAGS = 1
 	AUTHZ_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE AUTHZ_SECURITY_ATTRIBUTE_FLAGS = 2
 )
+
+// String returns the AUTHZ_SECURITY_ATTRIBUTE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHZ_SECURITY_ATTRIBUTE_FLAGS) String() string {
+	var parts []string
+	if e&AUTHZ_SECURITY_ATTRIBUTE_NON_INHERITABLE != 0 {
+		parts = append(parts, "AUTHZ_SECURITY_ATTRIBUTE_NON_INHERITABLE")
+	}
+	if e&AUTHZ_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE != 0 {
+		parts = append(parts, "AUTHZ_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // AUTHZ_SECURITY_ATTRIBUTE_OPERATION: https://learn.microsoft.com/windows/win32/api/authz/ne-authz-authz_security_attribute_operation
 type AUTHZ_SECURITY_ATTRIBUTE_OPERATION int32
@@ -124,6 +340,25 @@ const (
 	AUTHZ_SECURITY_ATTRIBUTE_OPERATION_REPLACE     AUTHZ_SECURITY_ATTRIBUTE_OPERATION = 4
 )
 
+// String returns the AUTHZ_SECURITY_ATTRIBUTE_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHZ_SECURITY_ATTRIBUTE_OPERATION) String() string {
+	switch e {
+	case AUTHZ_SECURITY_ATTRIBUTE_OPERATION_NONE:
+		return "AUTHZ_SECURITY_ATTRIBUTE_OPERATION_NONE"
+	case AUTHZ_SECURITY_ATTRIBUTE_OPERATION_REPLACE_ALL:
+		return "AUTHZ_SECURITY_ATTRIBUTE_OPERATION_REPLACE_ALL"
+	case AUTHZ_SECURITY_ATTRIBUTE_OPERATION_ADD:
+		return "AUTHZ_SECURITY_ATTRIBUTE_OPERATION_ADD"
+	case AUTHZ_SECURITY_ATTRIBUTE_OPERATION_DELETE:
+		return "AUTHZ_SECURITY_ATTRIBUTE_OPERATION_DELETE"
+	case AUTHZ_SECURITY_ATTRIBUTE_OPERATION_REPLACE:
+		return "AUTHZ_SECURITY_ATTRIBUTE_OPERATION_REPLACE"
+	default:
+		return fmt.Sprintf("AUTHZ_SECURITY_ATTRIBUTE_OPERATION(%d)", int32(e))
+	}
+}
+
 // AUTHZ_SID_OPERATION: https://learn.microsoft.com/windows/win32/api/authz/ne-authz-authz_sid_operation
 type AUTHZ_SID_OPERATION int32
 
@@ -134,6 +369,25 @@ const (
 	AUTHZ_SID_OPERATION_DELETE      AUTHZ_SID_OPERATION = 3
 	AUTHZ_SID_OPERATION_REPLACE     AUTHZ_SID_OPERATION = 4
 )
+
+// String returns the AUTHZ_SID_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHZ_SID_OPERATION) String() string {
+	switch e {
+	case AUTHZ_SID_OPERATION_NONE:
+		return "AUTHZ_SID_OPERATION_NONE"
+	case AUTHZ_SID_OPERATION_REPLACE_ALL:
+		return "AUTHZ_SID_OPERATION_REPLACE_ALL"
+	case AUTHZ_SID_OPERATION_ADD:
+		return "AUTHZ_SID_OPERATION_ADD"
+	case AUTHZ_SID_OPERATION_DELETE:
+		return "AUTHZ_SID_OPERATION_DELETE"
+	case AUTHZ_SID_OPERATION_REPLACE:
+		return "AUTHZ_SID_OPERATION_REPLACE"
+	default:
+		return fmt.Sprintf("AUTHZ_SID_OPERATION(%d)", int32(e))
+	}
+}
 
 // AZ_PROP_CONSTANTS: https://learn.microsoft.com/windows/win32/api/azroles/ne-azroles-az_prop_constants
 type AZ_PROP_CONSTANTS int32
@@ -239,6 +493,157 @@ const (
 	AZ_CLIENT_CONTEXT_GET_GROUPS_STORE_LEVEL_ONLY AZ_PROP_CONSTANTS = 2
 )
 
+// String returns the AZ_PROP_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AZ_PROP_CONSTANTS) String() string {
+	switch e {
+	case AZ_PROP_NAME:
+		return "AZ_PROP_NAME"
+	case AZ_PROP_DESCRIPTION:
+		return "AZ_PROP_DESCRIPTION"
+	case AZ_PROP_WRITABLE:
+		return "AZ_PROP_WRITABLE"
+	case AZ_PROP_APPLICATION_DATA:
+		return "AZ_PROP_APPLICATION_DATA"
+	case AZ_PROP_CHILD_CREATE:
+		return "AZ_PROP_CHILD_CREATE"
+	case AZ_MAX_APPLICATION_NAME_LENGTH:
+		return "AZ_MAX_APPLICATION_NAME_LENGTH"
+	case AZ_MAX_OPERATION_NAME_LENGTH:
+		return "AZ_MAX_OPERATION_NAME_LENGTH"
+	case AZ_MAX_SCOPE_NAME_LENGTH:
+		return "AZ_MAX_SCOPE_NAME_LENGTH"
+	case AZ_MAX_DESCRIPTION_LENGTH:
+		return "AZ_MAX_DESCRIPTION_LENGTH"
+	case AZ_MAX_APPLICATION_DATA_LENGTH:
+		return "AZ_MAX_APPLICATION_DATA_LENGTH"
+	case AZ_AZSTORE_FLAG_AUDIT_IS_CRITICAL:
+		return "AZ_AZSTORE_FLAG_AUDIT_IS_CRITICAL"
+	case AZ_AZSTORE_FORCE_APPLICATION_CLOSE:
+		return "AZ_AZSTORE_FORCE_APPLICATION_CLOSE"
+	case AZ_AZSTORE_NT6_FUNCTION_LEVEL:
+		return "AZ_AZSTORE_NT6_FUNCTION_LEVEL"
+	case AZ_AZSTORE_FLAG_MANAGE_ONLY_PASSIVE_SUBMIT:
+		return "AZ_AZSTORE_FLAG_MANAGE_ONLY_PASSIVE_SUBMIT"
+	case AZ_PROP_AZSTORE_DOMAIN_TIMEOUT:
+		return "AZ_PROP_AZSTORE_DOMAIN_TIMEOUT"
+	case AZ_AZSTORE_DEFAULT_DOMAIN_TIMEOUT:
+		return "AZ_AZSTORE_DEFAULT_DOMAIN_TIMEOUT"
+	case AZ_PROP_AZSTORE_SCRIPT_ENGINE_TIMEOUT:
+		return "AZ_PROP_AZSTORE_SCRIPT_ENGINE_TIMEOUT"
+	case AZ_AZSTORE_MIN_DOMAIN_TIMEOUT:
+		return "AZ_AZSTORE_MIN_DOMAIN_TIMEOUT"
+	case AZ_AZSTORE_MIN_SCRIPT_ENGINE_TIMEOUT:
+		return "AZ_AZSTORE_MIN_SCRIPT_ENGINE_TIMEOUT"
+	case AZ_AZSTORE_DEFAULT_SCRIPT_ENGINE_TIMEOUT:
+		return "AZ_AZSTORE_DEFAULT_SCRIPT_ENGINE_TIMEOUT"
+	case AZ_PROP_AZSTORE_MAX_SCRIPT_ENGINES:
+		return "AZ_PROP_AZSTORE_MAX_SCRIPT_ENGINES"
+	case AZ_AZSTORE_DEFAULT_MAX_SCRIPT_ENGINES:
+		return "AZ_AZSTORE_DEFAULT_MAX_SCRIPT_ENGINES"
+	case AZ_PROP_AZSTORE_MAJOR_VERSION:
+		return "AZ_PROP_AZSTORE_MAJOR_VERSION"
+	case AZ_PROP_AZSTORE_MINOR_VERSION:
+		return "AZ_PROP_AZSTORE_MINOR_VERSION"
+	case AZ_PROP_AZSTORE_TARGET_MACHINE:
+		return "AZ_PROP_AZSTORE_TARGET_MACHINE"
+	case AZ_PROP_AZTORE_IS_ADAM_INSTANCE:
+		return "AZ_PROP_AZTORE_IS_ADAM_INSTANCE"
+	case AZ_PROP_OPERATION_ID:
+		return "AZ_PROP_OPERATION_ID"
+	case AZ_PROP_TASK_OPERATIONS:
+		return "AZ_PROP_TASK_OPERATIONS"
+	case AZ_PROP_TASK_BIZRULE:
+		return "AZ_PROP_TASK_BIZRULE"
+	case AZ_PROP_TASK_BIZRULE_LANGUAGE:
+		return "AZ_PROP_TASK_BIZRULE_LANGUAGE"
+	case AZ_PROP_TASK_TASKS:
+		return "AZ_PROP_TASK_TASKS"
+	case AZ_PROP_TASK_BIZRULE_IMPORTED_PATH:
+		return "AZ_PROP_TASK_BIZRULE_IMPORTED_PATH"
+	case AZ_PROP_TASK_IS_ROLE_DEFINITION:
+		return "AZ_PROP_TASK_IS_ROLE_DEFINITION"
+	case AZ_PROP_GROUP_TYPE:
+		return "AZ_PROP_GROUP_TYPE"
+	case AZ_PROP_GROUP_APP_MEMBERS:
+		return "AZ_PROP_GROUP_APP_MEMBERS"
+	case AZ_PROP_GROUP_APP_NON_MEMBERS:
+		return "AZ_PROP_GROUP_APP_NON_MEMBERS"
+	case AZ_PROP_GROUP_LDAP_QUERY:
+		return "AZ_PROP_GROUP_LDAP_QUERY"
+	case AZ_PROP_GROUP_MEMBERS:
+		return "AZ_PROP_GROUP_MEMBERS"
+	case AZ_PROP_GROUP_NON_MEMBERS:
+		return "AZ_PROP_GROUP_NON_MEMBERS"
+	case AZ_PROP_GROUP_MEMBERS_NAME:
+		return "AZ_PROP_GROUP_MEMBERS_NAME"
+	case AZ_PROP_GROUP_NON_MEMBERS_NAME:
+		return "AZ_PROP_GROUP_NON_MEMBERS_NAME"
+	case AZ_PROP_GROUP_BIZRULE:
+		return "AZ_PROP_GROUP_BIZRULE"
+	case AZ_PROP_GROUP_BIZRULE_LANGUAGE:
+		return "AZ_PROP_GROUP_BIZRULE_LANGUAGE"
+	case AZ_PROP_GROUP_BIZRULE_IMPORTED_PATH:
+		return "AZ_PROP_GROUP_BIZRULE_IMPORTED_PATH"
+	case AZ_PROP_ROLE_MEMBERS:
+		return "AZ_PROP_ROLE_MEMBERS"
+	case AZ_PROP_ROLE_OPERATIONS:
+		return "AZ_PROP_ROLE_OPERATIONS"
+	case AZ_PROP_ROLE_TASKS:
+		return "AZ_PROP_ROLE_TASKS"
+	case AZ_PROP_ROLE_MEMBERS_NAME:
+		return "AZ_PROP_ROLE_MEMBERS_NAME"
+	case AZ_PROP_SCOPE_BIZRULES_WRITABLE:
+		return "AZ_PROP_SCOPE_BIZRULES_WRITABLE"
+	case AZ_PROP_SCOPE_CAN_BE_DELEGATED:
+		return "AZ_PROP_SCOPE_CAN_BE_DELEGATED"
+	case AZ_PROP_CLIENT_CONTEXT_USER_DN:
+		return "AZ_PROP_CLIENT_CONTEXT_USER_DN"
+	case AZ_PROP_CLIENT_CONTEXT_USER_SAM_COMPAT:
+		return "AZ_PROP_CLIENT_CONTEXT_USER_SAM_COMPAT"
+	case AZ_PROP_CLIENT_CONTEXT_USER_DISPLAY:
+		return "AZ_PROP_CLIENT_CONTEXT_USER_DISPLAY"
+	case AZ_PROP_CLIENT_CONTEXT_USER_GUID:
+		return "AZ_PROP_CLIENT_CONTEXT_USER_GUID"
+	case AZ_PROP_CLIENT_CONTEXT_USER_CANONICAL:
+		return "AZ_PROP_CLIENT_CONTEXT_USER_CANONICAL"
+	case AZ_PROP_CLIENT_CONTEXT_USER_UPN:
+		return "AZ_PROP_CLIENT_CONTEXT_USER_UPN"
+	case AZ_PROP_CLIENT_CONTEXT_USER_DNS_SAM_COMPAT:
+		return "AZ_PROP_CLIENT_CONTEXT_USER_DNS_SAM_COMPAT"
+	case AZ_PROP_CLIENT_CONTEXT_ROLE_FOR_ACCESS_CHECK:
+		return "AZ_PROP_CLIENT_CONTEXT_ROLE_FOR_ACCESS_CHECK"
+	case AZ_PROP_CLIENT_CONTEXT_LDAP_QUERY_DN:
+		return "AZ_PROP_CLIENT_CONTEXT_LDAP_QUERY_DN"
+	case AZ_PROP_APPLICATION_AUTHZ_INTERFACE_CLSID:
+		return "AZ_PROP_APPLICATION_AUTHZ_INTERFACE_CLSID"
+	case AZ_PROP_APPLICATION_VERSION:
+		return "AZ_PROP_APPLICATION_VERSION"
+	case AZ_PROP_APPLICATION_NAME:
+		return "AZ_PROP_APPLICATION_NAME"
+	case AZ_PROP_APPLICATION_BIZRULE_ENABLED:
+		return "AZ_PROP_APPLICATION_BIZRULE_ENABLED"
+	case AZ_PROP_APPLY_STORE_SACL:
+		return "AZ_PROP_APPLY_STORE_SACL"
+	case AZ_PROP_GENERATE_AUDITS:
+		return "AZ_PROP_GENERATE_AUDITS"
+	case AZ_PROP_POLICY_ADMINS:
+		return "AZ_PROP_POLICY_ADMINS"
+	case AZ_PROP_POLICY_READERS:
+		return "AZ_PROP_POLICY_READERS"
+	case AZ_PROP_DELEGATED_POLICY_USERS:
+		return "AZ_PROP_DELEGATED_POLICY_USERS"
+	case AZ_PROP_POLICY_ADMINS_NAME:
+		return "AZ_PROP_POLICY_ADMINS_NAME"
+	case AZ_PROP_POLICY_READERS_NAME:
+		return "AZ_PROP_POLICY_READERS_NAME"
+	case AZ_PROP_DELEGATED_POLICY_USERS_NAME:
+		return "AZ_PROP_DELEGATED_POLICY_USERS_NAME"
+	default:
+		return fmt.Sprintf("AZ_PROP_CONSTANTS(%d)", int32(e))
+	}
+}
+
 // MULTIPLE_TRUSTEE_OPERATION: https://learn.microsoft.com/windows/win32/api/accctrl/ne-accctrl-multiple_trustee_operation
 type MULTIPLE_TRUSTEE_OPERATION int32
 
@@ -246,6 +651,19 @@ const (
 	NO_MULTIPLE_TRUSTEE    MULTIPLE_TRUSTEE_OPERATION = 0
 	TRUSTEE_IS_IMPERSONATE MULTIPLE_TRUSTEE_OPERATION = 1
 )
+
+// String returns the MULTIPLE_TRUSTEE_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MULTIPLE_TRUSTEE_OPERATION) String() string {
+	switch e {
+	case NO_MULTIPLE_TRUSTEE:
+		return "NO_MULTIPLE_TRUSTEE"
+	case TRUSTEE_IS_IMPERSONATE:
+		return "TRUSTEE_IS_IMPERSONATE"
+	default:
+		return fmt.Sprintf("MULTIPLE_TRUSTEE_OPERATION(%d)", int32(e))
+	}
+}
 
 // PROG_INVOKE_SETTING: https://learn.microsoft.com/windows/win32/api/accctrl/ne-accctrl-prog_invoke_setting
 type PROG_INVOKE_SETTING int32
@@ -258,6 +676,27 @@ const (
 	ProgressRetryOperation     PROG_INVOKE_SETTING = 5
 	ProgressInvokePrePostError PROG_INVOKE_SETTING = 6
 )
+
+// String returns the PROG_INVOKE_SETTING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROG_INVOKE_SETTING) String() string {
+	switch e {
+	case ProgressInvokeNever:
+		return "ProgressInvokeNever"
+	case ProgressInvokeEveryObject:
+		return "ProgressInvokeEveryObject"
+	case ProgressInvokeOnError:
+		return "ProgressInvokeOnError"
+	case ProgressCancelOperation:
+		return "ProgressCancelOperation"
+	case ProgressRetryOperation:
+		return "ProgressRetryOperation"
+	case ProgressInvokePrePostError:
+		return "ProgressInvokePrePostError"
+	default:
+		return fmt.Sprintf("PROG_INVOKE_SETTING(%d)", int32(e))
+	}
+}
 
 // SE_OBJECT_TYPE: https://learn.microsoft.com/windows/win32/api/accctrl/ne-accctrl-se_object_type
 type SE_OBJECT_TYPE int32
@@ -279,6 +718,43 @@ const (
 	SE_REGISTRY_WOW64_64KEY    SE_OBJECT_TYPE = 13
 )
 
+// String returns the SE_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SE_OBJECT_TYPE) String() string {
+	switch e {
+	case SE_UNKNOWN_OBJECT_TYPE:
+		return "SE_UNKNOWN_OBJECT_TYPE"
+	case SE_FILE_OBJECT:
+		return "SE_FILE_OBJECT"
+	case SE_SERVICE:
+		return "SE_SERVICE"
+	case SE_PRINTER:
+		return "SE_PRINTER"
+	case SE_REGISTRY_KEY:
+		return "SE_REGISTRY_KEY"
+	case SE_LMSHARE:
+		return "SE_LMSHARE"
+	case SE_KERNEL_OBJECT:
+		return "SE_KERNEL_OBJECT"
+	case SE_WINDOW_OBJECT:
+		return "SE_WINDOW_OBJECT"
+	case SE_DS_OBJECT:
+		return "SE_DS_OBJECT"
+	case SE_DS_OBJECT_ALL:
+		return "SE_DS_OBJECT_ALL"
+	case SE_PROVIDER_DEFINED_OBJECT:
+		return "SE_PROVIDER_DEFINED_OBJECT"
+	case SE_WMIGUID_OBJECT:
+		return "SE_WMIGUID_OBJECT"
+	case SE_REGISTRY_WOW64_32KEY:
+		return "SE_REGISTRY_WOW64_32KEY"
+	case SE_REGISTRY_WOW64_64KEY:
+		return "SE_REGISTRY_WOW64_64KEY"
+	default:
+		return fmt.Sprintf("SE_OBJECT_TYPE(%d)", int32(e))
+	}
+}
+
 type TREE_SEC_INFO uint32
 
 const (
@@ -286,6 +762,21 @@ const (
 	TREE_SEC_INFO_RESET               TREE_SEC_INFO = 2
 	TREE_SEC_INFO_RESET_KEEP_EXPLICIT TREE_SEC_INFO = 3
 )
+
+// String returns the TREE_SEC_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TREE_SEC_INFO) String() string {
+	switch e {
+	case TREE_SEC_INFO_SET:
+		return "TREE_SEC_INFO_SET"
+	case TREE_SEC_INFO_RESET:
+		return "TREE_SEC_INFO_RESET"
+	case TREE_SEC_INFO_RESET_KEEP_EXPLICIT:
+		return "TREE_SEC_INFO_RESET_KEEP_EXPLICIT"
+	default:
+		return fmt.Sprintf("TREE_SEC_INFO(%d)", uint32(e))
+	}
+}
 
 // TRUSTEE_FORM: https://learn.microsoft.com/windows/win32/api/accctrl/ne-accctrl-trustee_form
 type TRUSTEE_FORM int32
@@ -297,6 +788,25 @@ const (
 	TRUSTEE_IS_OBJECTS_AND_SID  TRUSTEE_FORM = 3
 	TRUSTEE_IS_OBJECTS_AND_NAME TRUSTEE_FORM = 4
 )
+
+// String returns the TRUSTEE_FORM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRUSTEE_FORM) String() string {
+	switch e {
+	case TRUSTEE_IS_SID:
+		return "TRUSTEE_IS_SID"
+	case TRUSTEE_IS_NAME:
+		return "TRUSTEE_IS_NAME"
+	case TRUSTEE_BAD_FORM:
+		return "TRUSTEE_BAD_FORM"
+	case TRUSTEE_IS_OBJECTS_AND_SID:
+		return "TRUSTEE_IS_OBJECTS_AND_SID"
+	case TRUSTEE_IS_OBJECTS_AND_NAME:
+		return "TRUSTEE_IS_OBJECTS_AND_NAME"
+	default:
+		return fmt.Sprintf("TRUSTEE_FORM(%d)", int32(e))
+	}
+}
 
 // TRUSTEE_TYPE: https://learn.microsoft.com/windows/win32/api/accctrl/ne-accctrl-trustee_type
 type TRUSTEE_TYPE int32
@@ -312,3 +822,30 @@ const (
 	TRUSTEE_IS_INVALID          TRUSTEE_TYPE = 7
 	TRUSTEE_IS_COMPUTER         TRUSTEE_TYPE = 8
 )
+
+// String returns the TRUSTEE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRUSTEE_TYPE) String() string {
+	switch e {
+	case TRUSTEE_IS_UNKNOWN:
+		return "TRUSTEE_IS_UNKNOWN"
+	case TRUSTEE_IS_USER:
+		return "TRUSTEE_IS_USER"
+	case TRUSTEE_IS_GROUP:
+		return "TRUSTEE_IS_GROUP"
+	case TRUSTEE_IS_DOMAIN:
+		return "TRUSTEE_IS_DOMAIN"
+	case TRUSTEE_IS_ALIAS:
+		return "TRUSTEE_IS_ALIAS"
+	case TRUSTEE_IS_WELL_KNOWN_GROUP:
+		return "TRUSTEE_IS_WELL_KNOWN_GROUP"
+	case TRUSTEE_IS_DELETED:
+		return "TRUSTEE_IS_DELETED"
+	case TRUSTEE_IS_INVALID:
+		return "TRUSTEE_IS_INVALID"
+	case TRUSTEE_IS_COMPUTER:
+		return "TRUSTEE_IS_COMPUTER"
+	default:
+		return fmt.Sprintf("TRUSTEE_TYPE(%d)", int32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package networklistmanager
 
+import (
+	"fmt"
+)
+
 // NLM_CONNECTION_COST: https://learn.microsoft.com/windows/win32/api/netlistmgr/ne-netlistmgr-nlm_connection_cost
 type NLM_CONNECTION_COST int32
 
@@ -18,12 +22,48 @@ const (
 	NLM_CONNECTION_COST_APPROACHINGDATALIMIT NLM_CONNECTION_COST = 524288
 )
 
+// String returns the NLM_CONNECTION_COST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLM_CONNECTION_COST) String() string {
+	switch e {
+	case NLM_CONNECTION_COST_UNKNOWN:
+		return "NLM_CONNECTION_COST_UNKNOWN"
+	case NLM_CONNECTION_COST_UNRESTRICTED:
+		return "NLM_CONNECTION_COST_UNRESTRICTED"
+	case NLM_CONNECTION_COST_FIXED:
+		return "NLM_CONNECTION_COST_FIXED"
+	case NLM_CONNECTION_COST_VARIABLE:
+		return "NLM_CONNECTION_COST_VARIABLE"
+	case NLM_CONNECTION_COST_OVERDATALIMIT:
+		return "NLM_CONNECTION_COST_OVERDATALIMIT"
+	case NLM_CONNECTION_COST_CONGESTED:
+		return "NLM_CONNECTION_COST_CONGESTED"
+	case NLM_CONNECTION_COST_ROAMING:
+		return "NLM_CONNECTION_COST_ROAMING"
+	case NLM_CONNECTION_COST_APPROACHINGDATALIMIT:
+		return "NLM_CONNECTION_COST_APPROACHINGDATALIMIT"
+	default:
+		return fmt.Sprintf("NLM_CONNECTION_COST(%d)", int32(e))
+	}
+}
+
 // NLM_CONNECTION_PROPERTY_CHANGE: https://learn.microsoft.com/windows/win32/api/netlistmgr/ne-netlistmgr-nlm_connection_property_change
 type NLM_CONNECTION_PROPERTY_CHANGE int32
 
 const (
 	NLM_CONNECTION_PROPERTY_CHANGE_AUTHENTICATION NLM_CONNECTION_PROPERTY_CHANGE = 1
 )
+
+// String returns the NLM_CONNECTION_PROPERTY_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLM_CONNECTION_PROPERTY_CHANGE) String() string {
+	switch e {
+	case NLM_CONNECTION_PROPERTY_CHANGE_AUTHENTICATION:
+		return "NLM_CONNECTION_PROPERTY_CHANGE_AUTHENTICATION"
+	default:
+		return fmt.Sprintf("NLM_CONNECTION_PROPERTY_CHANGE(%d)", int32(e))
+	}
+}
 
 // NLM_CONNECTIVITY: https://learn.microsoft.com/windows/win32/api/netlistmgr/ne-netlistmgr-nlm_connectivity
 type NLM_CONNECTIVITY int32
@@ -40,6 +80,33 @@ const (
 	NLM_CONNECTIVITY_IPV6_INTERNET     NLM_CONNECTIVITY = 1024
 )
 
+// String returns the NLM_CONNECTIVITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLM_CONNECTIVITY) String() string {
+	switch e {
+	case NLM_CONNECTIVITY_DISCONNECTED:
+		return "NLM_CONNECTIVITY_DISCONNECTED"
+	case NLM_CONNECTIVITY_IPV4_NOTRAFFIC:
+		return "NLM_CONNECTIVITY_IPV4_NOTRAFFIC"
+	case NLM_CONNECTIVITY_IPV6_NOTRAFFIC:
+		return "NLM_CONNECTIVITY_IPV6_NOTRAFFIC"
+	case NLM_CONNECTIVITY_IPV4_SUBNET:
+		return "NLM_CONNECTIVITY_IPV4_SUBNET"
+	case NLM_CONNECTIVITY_IPV4_LOCALNETWORK:
+		return "NLM_CONNECTIVITY_IPV4_LOCALNETWORK"
+	case NLM_CONNECTIVITY_IPV4_INTERNET:
+		return "NLM_CONNECTIVITY_IPV4_INTERNET"
+	case NLM_CONNECTIVITY_IPV6_SUBNET:
+		return "NLM_CONNECTIVITY_IPV6_SUBNET"
+	case NLM_CONNECTIVITY_IPV6_LOCALNETWORK:
+		return "NLM_CONNECTIVITY_IPV6_LOCALNETWORK"
+	case NLM_CONNECTIVITY_IPV6_INTERNET:
+		return "NLM_CONNECTIVITY_IPV6_INTERNET"
+	default:
+		return fmt.Sprintf("NLM_CONNECTIVITY(%d)", int32(e))
+	}
+}
+
 // NLM_DOMAIN_AUTHENTICATION_KIND: https://learn.microsoft.com/windows/win32/api/netlistmgr/ne-netlistmgr-nlm_domain_authentication_kind
 type NLM_DOMAIN_AUTHENTICATION_KIND int32
 
@@ -48,6 +115,21 @@ const (
 	NLM_DOMAIN_AUTHENTICATION_KIND_LDAP NLM_DOMAIN_AUTHENTICATION_KIND = 1
 	NLM_DOMAIN_AUTHENTICATION_KIND_TLS  NLM_DOMAIN_AUTHENTICATION_KIND = 2
 )
+
+// String returns the NLM_DOMAIN_AUTHENTICATION_KIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLM_DOMAIN_AUTHENTICATION_KIND) String() string {
+	switch e {
+	case NLM_DOMAIN_AUTHENTICATION_KIND_NONE:
+		return "NLM_DOMAIN_AUTHENTICATION_KIND_NONE"
+	case NLM_DOMAIN_AUTHENTICATION_KIND_LDAP:
+		return "NLM_DOMAIN_AUTHENTICATION_KIND_LDAP"
+	case NLM_DOMAIN_AUTHENTICATION_KIND_TLS:
+		return "NLM_DOMAIN_AUTHENTICATION_KIND_TLS"
+	default:
+		return fmt.Sprintf("NLM_DOMAIN_AUTHENTICATION_KIND(%d)", int32(e))
+	}
+}
 
 // NLM_DOMAIN_TYPE: https://learn.microsoft.com/windows/win32/api/netlistmgr/ne-netlistmgr-nlm_domain_type
 type NLM_DOMAIN_TYPE int32
@@ -58,6 +140,21 @@ const (
 	NLM_DOMAIN_TYPE_DOMAIN_AUTHENTICATED NLM_DOMAIN_TYPE = 2
 )
 
+// String returns the NLM_DOMAIN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLM_DOMAIN_TYPE) String() string {
+	switch e {
+	case NLM_DOMAIN_TYPE_NON_DOMAIN_NETWORK:
+		return "NLM_DOMAIN_TYPE_NON_DOMAIN_NETWORK"
+	case NLM_DOMAIN_TYPE_DOMAIN_NETWORK:
+		return "NLM_DOMAIN_TYPE_DOMAIN_NETWORK"
+	case NLM_DOMAIN_TYPE_DOMAIN_AUTHENTICATED:
+		return "NLM_DOMAIN_TYPE_DOMAIN_AUTHENTICATED"
+	default:
+		return fmt.Sprintf("NLM_DOMAIN_TYPE(%d)", int32(e))
+	}
+}
+
 // NLM_ENUM_NETWORK: https://learn.microsoft.com/windows/win32/api/netlistmgr/ne-netlistmgr-nlm_enum_network
 type NLM_ENUM_NETWORK int32
 
@@ -66,6 +163,21 @@ const (
 	NLM_ENUM_NETWORK_DISCONNECTED NLM_ENUM_NETWORK = 2
 	NLM_ENUM_NETWORK_ALL          NLM_ENUM_NETWORK = 3
 )
+
+// String returns the NLM_ENUM_NETWORK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLM_ENUM_NETWORK) String() string {
+	switch e {
+	case NLM_ENUM_NETWORK_CONNECTED:
+		return "NLM_ENUM_NETWORK_CONNECTED"
+	case NLM_ENUM_NETWORK_DISCONNECTED:
+		return "NLM_ENUM_NETWORK_DISCONNECTED"
+	case NLM_ENUM_NETWORK_ALL:
+		return "NLM_ENUM_NETWORK_ALL"
+	default:
+		return fmt.Sprintf("NLM_ENUM_NETWORK(%d)", int32(e))
+	}
+}
 
 // NLM_INTERNET_CONNECTIVITY: https://learn.microsoft.com/windows/win32/api/netlistmgr/ne-netlistmgr-nlm_internet_connectivity
 type NLM_INTERNET_CONNECTIVITY int32
@@ -76,6 +188,21 @@ const (
 	NLM_INTERNET_CONNECTIVITY_CORPORATE NLM_INTERNET_CONNECTIVITY = 4
 )
 
+// String returns the NLM_INTERNET_CONNECTIVITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLM_INTERNET_CONNECTIVITY) String() string {
+	switch e {
+	case NLM_INTERNET_CONNECTIVITY_WEBHIJACK:
+		return "NLM_INTERNET_CONNECTIVITY_WEBHIJACK"
+	case NLM_INTERNET_CONNECTIVITY_PROXIED:
+		return "NLM_INTERNET_CONNECTIVITY_PROXIED"
+	case NLM_INTERNET_CONNECTIVITY_CORPORATE:
+		return "NLM_INTERNET_CONNECTIVITY_CORPORATE"
+	default:
+		return fmt.Sprintf("NLM_INTERNET_CONNECTIVITY(%d)", int32(e))
+	}
+}
+
 // NLM_NETWORK_CATEGORY: https://learn.microsoft.com/windows/win32/api/netlistmgr/ne-netlistmgr-nlm_network_category
 type NLM_NETWORK_CATEGORY int32
 
@@ -85,6 +212,21 @@ const (
 	NLM_NETWORK_CATEGORY_DOMAIN_AUTHENTICATED NLM_NETWORK_CATEGORY = 2
 )
 
+// String returns the NLM_NETWORK_CATEGORY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLM_NETWORK_CATEGORY) String() string {
+	switch e {
+	case NLM_NETWORK_CATEGORY_PUBLIC:
+		return "NLM_NETWORK_CATEGORY_PUBLIC"
+	case NLM_NETWORK_CATEGORY_PRIVATE:
+		return "NLM_NETWORK_CATEGORY_PRIVATE"
+	case NLM_NETWORK_CATEGORY_DOMAIN_AUTHENTICATED:
+		return "NLM_NETWORK_CATEGORY_DOMAIN_AUTHENTICATED"
+	default:
+		return fmt.Sprintf("NLM_NETWORK_CATEGORY(%d)", int32(e))
+	}
+}
+
 // NLM_NETWORK_CLASS: https://learn.microsoft.com/windows/win32/api/netlistmgr/ne-netlistmgr-nlm_network_class
 type NLM_NETWORK_CLASS int32
 
@@ -93,6 +235,21 @@ const (
 	NLM_NETWORK_IDENTIFIED   NLM_NETWORK_CLASS = 2
 	NLM_NETWORK_UNIDENTIFIED NLM_NETWORK_CLASS = 3
 )
+
+// String returns the NLM_NETWORK_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLM_NETWORK_CLASS) String() string {
+	switch e {
+	case NLM_NETWORK_IDENTIFYING:
+		return "NLM_NETWORK_IDENTIFYING"
+	case NLM_NETWORK_IDENTIFIED:
+		return "NLM_NETWORK_IDENTIFIED"
+	case NLM_NETWORK_UNIDENTIFIED:
+		return "NLM_NETWORK_UNIDENTIFIED"
+	default:
+		return fmt.Sprintf("NLM_NETWORK_CLASS(%d)", int32(e))
+	}
+}
 
 // NLM_NETWORK_PROPERTY_CHANGE: https://learn.microsoft.com/windows/win32/api/netlistmgr/ne-netlistmgr-nlm_network_property_change
 type NLM_NETWORK_PROPERTY_CHANGE int32
@@ -104,3 +261,22 @@ const (
 	NLM_NETWORK_PROPERTY_CHANGE_ICON           NLM_NETWORK_PROPERTY_CHANGE = 8
 	NLM_NETWORK_PROPERTY_CHANGE_CATEGORY_VALUE NLM_NETWORK_PROPERTY_CHANGE = 16
 )
+
+// String returns the NLM_NETWORK_PROPERTY_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NLM_NETWORK_PROPERTY_CHANGE) String() string {
+	switch e {
+	case NLM_NETWORK_PROPERTY_CHANGE_CONNECTION:
+		return "NLM_NETWORK_PROPERTY_CHANGE_CONNECTION"
+	case NLM_NETWORK_PROPERTY_CHANGE_DESCRIPTION:
+		return "NLM_NETWORK_PROPERTY_CHANGE_DESCRIPTION"
+	case NLM_NETWORK_PROPERTY_CHANGE_NAME:
+		return "NLM_NETWORK_PROPERTY_CHANGE_NAME"
+	case NLM_NETWORK_PROPERTY_CHANGE_ICON:
+		return "NLM_NETWORK_PROPERTY_CHANGE_ICON"
+	case NLM_NETWORK_PROPERTY_CHANGE_CATEGORY_VALUE:
+		return "NLM_NETWORK_PROPERTY_CHANGE_CATEGORY_VALUE"
+	default:
+		return fmt.Sprintf("NLM_NETWORK_PROPERTY_CHANGE(%d)", int32(e))
+	}
+}

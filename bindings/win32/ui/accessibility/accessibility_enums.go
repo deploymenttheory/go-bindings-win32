@@ -4,6 +4,12 @@
 
 package accessibility
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type ACC_UTILITY_STATE_FLAGS uint32
 
 const (
@@ -13,6 +19,28 @@ const (
 	ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK ACC_UTILITY_STATE_FLAGS = 8
 )
 
+// String returns the ACC_UTILITY_STATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACC_UTILITY_STATE_FLAGS) String() string {
+	var parts []string
+	if e&ANRUS_ON_SCREEN_KEYBOARD_ACTIVE != 0 {
+		parts = append(parts, "ANRUS_ON_SCREEN_KEYBOARD_ACTIVE")
+	}
+	if e&ANRUS_TOUCH_MODIFICATION_ACTIVE != 0 {
+		parts = append(parts, "ANRUS_TOUCH_MODIFICATION_ACTIVE")
+	}
+	if e&ANRUS_PRIORITY_AUDIO_ACTIVE != 0 {
+		parts = append(parts, "ANRUS_PRIORITY_AUDIO_ACTIVE")
+	}
+	if e&ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK != 0 {
+		parts = append(parts, "ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // ActiveEnd: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-activeend
 type ActiveEnd int32
 
@@ -21,6 +49,21 @@ const (
 	ActiveEnd_Start ActiveEnd = 1
 	ActiveEnd_End   ActiveEnd = 2
 )
+
+// String returns the ActiveEnd constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ActiveEnd) String() string {
+	switch e {
+	case ActiveEnd_None:
+		return "ActiveEnd_None"
+	case ActiveEnd_Start:
+		return "ActiveEnd_Start"
+	case ActiveEnd_End:
+		return "ActiveEnd_End"
+	default:
+		return fmt.Sprintf("ActiveEnd(%d)", int32(e))
+	}
+}
 
 // AnimationStyle: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-animationstyle
 type AnimationStyle int32
@@ -36,12 +79,50 @@ const (
 	AnimationStyle_Other              AnimationStyle = -1
 )
 
+// String returns the AnimationStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AnimationStyle) String() string {
+	switch e {
+	case AnimationStyle_None:
+		return "AnimationStyle_None"
+	case AnimationStyle_LasVegasLights:
+		return "AnimationStyle_LasVegasLights"
+	case AnimationStyle_BlinkingBackground:
+		return "AnimationStyle_BlinkingBackground"
+	case AnimationStyle_SparkleText:
+		return "AnimationStyle_SparkleText"
+	case AnimationStyle_MarchingBlackAnts:
+		return "AnimationStyle_MarchingBlackAnts"
+	case AnimationStyle_MarchingRedAnts:
+		return "AnimationStyle_MarchingRedAnts"
+	case AnimationStyle_Shimmer:
+		return "AnimationStyle_Shimmer"
+	case AnimationStyle_Other:
+		return "AnimationStyle_Other"
+	default:
+		return fmt.Sprintf("AnimationStyle(%d)", int32(e))
+	}
+}
+
 type AnnoScope int32
 
 const (
 	ANNO_THIS      AnnoScope = 0
 	ANNO_CONTAINER AnnoScope = 1
 )
+
+// String returns the AnnoScope constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AnnoScope) String() string {
+	switch e {
+	case ANNO_THIS:
+		return "ANNO_THIS"
+	case ANNO_CONTAINER:
+		return "ANNO_CONTAINER"
+	default:
+		return fmt.Sprintf("AnnoScope(%d)", int32(e))
+	}
+}
 
 // AsyncContentLoadedState: https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/ne-uiautomationcoreapi-asynccontentloadedstate
 type AsyncContentLoadedState int32
@@ -52,6 +133,21 @@ const (
 	AsyncContentLoadedState_Completed AsyncContentLoadedState = 2
 )
 
+// String returns the AsyncContentLoadedState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AsyncContentLoadedState) String() string {
+	switch e {
+	case AsyncContentLoadedState_Beginning:
+		return "AsyncContentLoadedState_Beginning"
+	case AsyncContentLoadedState_Progress:
+		return "AsyncContentLoadedState_Progress"
+	case AsyncContentLoadedState_Completed:
+		return "AsyncContentLoadedState_Completed"
+	default:
+		return fmt.Sprintf("AsyncContentLoadedState(%d)", int32(e))
+	}
+}
+
 // AutomationElementMode: https://learn.microsoft.com/windows/win32/api/uiautomationclient/ne-uiautomationclient-automationelementmode
 type AutomationElementMode int32
 
@@ -59,6 +155,19 @@ const (
 	AutomationElementMode_None AutomationElementMode = 0
 	AutomationElementMode_Full AutomationElementMode = 1
 )
+
+// String returns the AutomationElementMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AutomationElementMode) String() string {
+	switch e {
+	case AutomationElementMode_None:
+		return "AutomationElementMode_None"
+	case AutomationElementMode_Full:
+		return "AutomationElementMode_Full"
+	default:
+		return fmt.Sprintf("AutomationElementMode(%d)", int32(e))
+	}
+}
 
 // AutomationIdentifierType: https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/ne-uiautomationcoreapi-automationidentifiertype
 type AutomationIdentifierType int32
@@ -75,6 +184,33 @@ const (
 	AutomationIdentifierType_Style         AutomationIdentifierType = 8
 )
 
+// String returns the AutomationIdentifierType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AutomationIdentifierType) String() string {
+	switch e {
+	case AutomationIdentifierType_Property:
+		return "AutomationIdentifierType_Property"
+	case AutomationIdentifierType_Pattern:
+		return "AutomationIdentifierType_Pattern"
+	case AutomationIdentifierType_Event:
+		return "AutomationIdentifierType_Event"
+	case AutomationIdentifierType_ControlType:
+		return "AutomationIdentifierType_ControlType"
+	case AutomationIdentifierType_TextAttribute:
+		return "AutomationIdentifierType_TextAttribute"
+	case AutomationIdentifierType_LandmarkType:
+		return "AutomationIdentifierType_LandmarkType"
+	case AutomationIdentifierType_Annotation:
+		return "AutomationIdentifierType_Annotation"
+	case AutomationIdentifierType_Changes:
+		return "AutomationIdentifierType_Changes"
+	case AutomationIdentifierType_Style:
+		return "AutomationIdentifierType_Style"
+	default:
+		return fmt.Sprintf("AutomationIdentifierType(%d)", int32(e))
+	}
+}
+
 // BulletStyle: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-bulletstyle
 type BulletStyle int32
 
@@ -87,6 +223,29 @@ const (
 	BulletStyle_DashBullet         BulletStyle = 5
 	BulletStyle_Other              BulletStyle = -1
 )
+
+// String returns the BulletStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BulletStyle) String() string {
+	switch e {
+	case BulletStyle_None:
+		return "BulletStyle_None"
+	case BulletStyle_HollowRoundBullet:
+		return "BulletStyle_HollowRoundBullet"
+	case BulletStyle_FilledRoundBullet:
+		return "BulletStyle_FilledRoundBullet"
+	case BulletStyle_HollowSquareBullet:
+		return "BulletStyle_HollowSquareBullet"
+	case BulletStyle_FilledSquareBullet:
+		return "BulletStyle_FilledSquareBullet"
+	case BulletStyle_DashBullet:
+		return "BulletStyle_DashBullet"
+	case BulletStyle_Other:
+		return "BulletStyle_Other"
+	default:
+		return fmt.Sprintf("BulletStyle(%d)", int32(e))
+	}
+}
 
 // CapStyle: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-capstyle
 type CapStyle int32
@@ -102,6 +261,31 @@ const (
 	CapStyle_Other         CapStyle = -1
 )
 
+// String returns the CapStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CapStyle) String() string {
+	switch e {
+	case CapStyle_None:
+		return "CapStyle_None"
+	case CapStyle_SmallCap:
+		return "CapStyle_SmallCap"
+	case CapStyle_AllCap:
+		return "CapStyle_AllCap"
+	case CapStyle_AllPetiteCaps:
+		return "CapStyle_AllPetiteCaps"
+	case CapStyle_PetiteCaps:
+		return "CapStyle_PetiteCaps"
+	case CapStyle_Unicase:
+		return "CapStyle_Unicase"
+	case CapStyle_Titling:
+		return "CapStyle_Titling"
+	case CapStyle_Other:
+		return "CapStyle_Other"
+	default:
+		return fmt.Sprintf("CapStyle(%d)", int32(e))
+	}
+}
+
 // CaretBidiMode: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-caretbidimode
 type CaretBidiMode int32
 
@@ -109,6 +293,19 @@ const (
 	CaretBidiMode_LTR CaretBidiMode = 0
 	CaretBidiMode_RTL CaretBidiMode = 1
 )
+
+// String returns the CaretBidiMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CaretBidiMode) String() string {
+	switch e {
+	case CaretBidiMode_LTR:
+		return "CaretBidiMode_LTR"
+	case CaretBidiMode_RTL:
+		return "CaretBidiMode_RTL"
+	default:
+		return fmt.Sprintf("CaretBidiMode(%d)", int32(e))
+	}
+}
 
 // CaretPosition: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-caretposition
 type CaretPosition int32
@@ -119,6 +316,21 @@ const (
 	CaretPosition_BeginningOfLine CaretPosition = 2
 )
 
+// String returns the CaretPosition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CaretPosition) String() string {
+	switch e {
+	case CaretPosition_Unknown:
+		return "CaretPosition_Unknown"
+	case CaretPosition_EndOfLine:
+		return "CaretPosition_EndOfLine"
+	case CaretPosition_BeginningOfLine:
+		return "CaretPosition_BeginningOfLine"
+	default:
+		return fmt.Sprintf("CaretPosition(%d)", int32(e))
+	}
+}
+
 // CoalesceEventsOptions: https://learn.microsoft.com/windows/win32/api/uiautomationclient/ne-uiautomationclient-coalesceeventsoptions
 type CoalesceEventsOptions int32
 
@@ -126,6 +338,19 @@ const (
 	CoalesceEventsOptions_Disabled CoalesceEventsOptions = 0
 	CoalesceEventsOptions_Enabled  CoalesceEventsOptions = 1
 )
+
+// String returns the CoalesceEventsOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CoalesceEventsOptions) String() string {
+	switch e {
+	case CoalesceEventsOptions_Disabled:
+		return "CoalesceEventsOptions_Disabled"
+	case CoalesceEventsOptions_Enabled:
+		return "CoalesceEventsOptions_Enabled"
+	default:
+		return fmt.Sprintf("CoalesceEventsOptions(%d)", int32(e))
+	}
+}
 
 // ConditionType: https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/ne-uiautomationcoreapi-conditiontype
 type ConditionType int32
@@ -139,6 +364,27 @@ const (
 	ConditionType_Not      ConditionType = 5
 )
 
+// String returns the ConditionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ConditionType) String() string {
+	switch e {
+	case ConditionType_True:
+		return "ConditionType_True"
+	case ConditionType_False:
+		return "ConditionType_False"
+	case ConditionType_Property:
+		return "ConditionType_Property"
+	case ConditionType_And:
+		return "ConditionType_And"
+	case ConditionType_Or:
+		return "ConditionType_Or"
+	case ConditionType_Not:
+		return "ConditionType_Not"
+	default:
+		return fmt.Sprintf("ConditionType(%d)", int32(e))
+	}
+}
+
 // ConnectionRecoveryBehaviorOptions: https://learn.microsoft.com/windows/win32/api/uiautomationclient/ne-uiautomationclient-connectionrecoverybehavioroptions
 type ConnectionRecoveryBehaviorOptions int32
 
@@ -146,6 +392,19 @@ const (
 	ConnectionRecoveryBehaviorOptions_Disabled ConnectionRecoveryBehaviorOptions = 0
 	ConnectionRecoveryBehaviorOptions_Enabled  ConnectionRecoveryBehaviorOptions = 1
 )
+
+// String returns the ConnectionRecoveryBehaviorOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ConnectionRecoveryBehaviorOptions) String() string {
+	switch e {
+	case ConnectionRecoveryBehaviorOptions_Disabled:
+		return "ConnectionRecoveryBehaviorOptions_Disabled"
+	case ConnectionRecoveryBehaviorOptions_Enabled:
+		return "ConnectionRecoveryBehaviorOptions_Enabled"
+	default:
+		return fmt.Sprintf("ConnectionRecoveryBehaviorOptions(%d)", int32(e))
+	}
+}
 
 // DockPosition: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-dockposition
 type DockPosition int32
@@ -158,6 +417,27 @@ const (
 	DockPosition_Fill   DockPosition = 4
 	DockPosition_None   DockPosition = 5
 )
+
+// String returns the DockPosition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DockPosition) String() string {
+	switch e {
+	case DockPosition_Top:
+		return "DockPosition_Top"
+	case DockPosition_Left:
+		return "DockPosition_Left"
+	case DockPosition_Bottom:
+		return "DockPosition_Bottom"
+	case DockPosition_Right:
+		return "DockPosition_Right"
+	case DockPosition_Fill:
+		return "DockPosition_Fill"
+	case DockPosition_None:
+		return "DockPosition_None"
+	default:
+		return fmt.Sprintf("DockPosition(%d)", int32(e))
+	}
+}
 
 // EventArgsType: https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/ne-uiautomationcoreapi-eventargstype
 type EventArgsType int32
@@ -175,6 +455,35 @@ const (
 	EventArgsType_StructuredMarkup          EventArgsType = 9
 )
 
+// String returns the EventArgsType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EventArgsType) String() string {
+	switch e {
+	case EventArgsType_Simple:
+		return "EventArgsType_Simple"
+	case EventArgsType_PropertyChanged:
+		return "EventArgsType_PropertyChanged"
+	case EventArgsType_StructureChanged:
+		return "EventArgsType_StructureChanged"
+	case EventArgsType_AsyncContentLoaded:
+		return "EventArgsType_AsyncContentLoaded"
+	case EventArgsType_WindowClosed:
+		return "EventArgsType_WindowClosed"
+	case EventArgsType_TextEditTextChanged:
+		return "EventArgsType_TextEditTextChanged"
+	case EventArgsType_Changes:
+		return "EventArgsType_Changes"
+	case EventArgsType_Notification:
+		return "EventArgsType_Notification"
+	case EventArgsType_ActiveTextPositionChanged:
+		return "EventArgsType_ActiveTextPositionChanged"
+	case EventArgsType_StructuredMarkup:
+		return "EventArgsType_StructuredMarkup"
+	default:
+		return fmt.Sprintf("EventArgsType(%d)", int32(e))
+	}
+}
+
 // ExpandCollapseState: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-expandcollapsestate
 type ExpandCollapseState int32
 
@@ -184,6 +493,23 @@ const (
 	ExpandCollapseState_PartiallyExpanded ExpandCollapseState = 2
 	ExpandCollapseState_LeafNode          ExpandCollapseState = 3
 )
+
+// String returns the ExpandCollapseState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ExpandCollapseState) String() string {
+	switch e {
+	case ExpandCollapseState_Collapsed:
+		return "ExpandCollapseState_Collapsed"
+	case ExpandCollapseState_Expanded:
+		return "ExpandCollapseState_Expanded"
+	case ExpandCollapseState_PartiallyExpanded:
+		return "ExpandCollapseState_PartiallyExpanded"
+	case ExpandCollapseState_LeafNode:
+		return "ExpandCollapseState_LeafNode"
+	default:
+		return fmt.Sprintf("ExpandCollapseState(%d)", int32(e))
+	}
+}
 
 // FillType: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-filltype
 type FillType int32
@@ -196,6 +522,25 @@ const (
 	FillType_Pattern  FillType = 4
 )
 
+// String returns the FillType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FillType) String() string {
+	switch e {
+	case FillType_None:
+		return "FillType_None"
+	case FillType_Color:
+		return "FillType_Color"
+	case FillType_Gradient:
+		return "FillType_Gradient"
+	case FillType_Picture:
+		return "FillType_Picture"
+	case FillType_Pattern:
+		return "FillType_Pattern"
+	default:
+		return fmt.Sprintf("FillType(%d)", int32(e))
+	}
+}
+
 // FlowDirections: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-flowdirections
 type FlowDirections int32
 
@@ -206,6 +551,24 @@ const (
 	FlowDirections_Vertical    FlowDirections = 4
 )
 
+// String returns the FlowDirections constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FlowDirections) String() string {
+	switch e {
+	case FlowDirections_Default:
+		return "FlowDirections_Default"
+	case FlowDirections_RightToLeft:
+		return "FlowDirections_RightToLeft"
+	case FlowDirections_BottomToTop:
+		return "FlowDirections_BottomToTop"
+	case FlowDirections_Vertical:
+		return "FlowDirections_Vertical"
+	default:
+		return fmt.Sprintf("FlowDirections(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HIGHCONTRASTW_FLAGS uint32
 
 const (
@@ -219,6 +582,40 @@ const (
 	HCF_OPTION_NOTHEMECHANGE HIGHCONTRASTW_FLAGS = 4096
 )
 
+// String returns the HIGHCONTRASTW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HIGHCONTRASTW_FLAGS) String() string {
+	var parts []string
+	if e&HCF_HIGHCONTRASTON != 0 {
+		parts = append(parts, "HCF_HIGHCONTRASTON")
+	}
+	if e&HCF_AVAILABLE != 0 {
+		parts = append(parts, "HCF_AVAILABLE")
+	}
+	if e&HCF_HOTKEYACTIVE != 0 {
+		parts = append(parts, "HCF_HOTKEYACTIVE")
+	}
+	if e&HCF_CONFIRMHOTKEY != 0 {
+		parts = append(parts, "HCF_CONFIRMHOTKEY")
+	}
+	if e&HCF_HOTKEYSOUND != 0 {
+		parts = append(parts, "HCF_HOTKEYSOUND")
+	}
+	if e&HCF_INDICATOR != 0 {
+		parts = append(parts, "HCF_INDICATOR")
+	}
+	if e&HCF_HOTKEYAVAILABLE != 0 {
+		parts = append(parts, "HCF_HOTKEYAVAILABLE")
+	}
+	if e&HCF_OPTION_NOTHEMECHANGE != 0 {
+		parts = append(parts, "HCF_OPTION_NOTHEMECHANGE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type HorizontalTextAlignment int32
 
 const (
@@ -228,6 +625,23 @@ const (
 	HorizontalTextAlignment_Justified HorizontalTextAlignment = 3
 )
 
+// String returns the HorizontalTextAlignment constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HorizontalTextAlignment) String() string {
+	switch e {
+	case HorizontalTextAlignment_Left:
+		return "HorizontalTextAlignment_Left"
+	case HorizontalTextAlignment_Centered:
+		return "HorizontalTextAlignment_Centered"
+	case HorizontalTextAlignment_Right:
+		return "HorizontalTextAlignment_Right"
+	case HorizontalTextAlignment_Justified:
+		return "HorizontalTextAlignment_Justified"
+	default:
+		return fmt.Sprintf("HorizontalTextAlignment(%d)", int32(e))
+	}
+}
+
 // LiveSetting: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-livesetting
 type LiveSetting int32
 
@@ -236,6 +650,21 @@ const (
 	Polite    LiveSetting = 1
 	Assertive LiveSetting = 2
 )
+
+// String returns the LiveSetting constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LiveSetting) String() string {
+	switch e {
+	case Off:
+		return "Off"
+	case Polite:
+		return "Polite"
+	case Assertive:
+		return "Assertive"
+	default:
+		return fmt.Sprintf("LiveSetting(%d)", int32(e))
+	}
+}
 
 // NavigateDirection: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-navigatedirection
 type NavigateDirection int32
@@ -248,6 +677,25 @@ const (
 	NavigateDirection_LastChild       NavigateDirection = 4
 )
 
+// String returns the NavigateDirection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NavigateDirection) String() string {
+	switch e {
+	case NavigateDirection_Parent:
+		return "NavigateDirection_Parent"
+	case NavigateDirection_NextSibling:
+		return "NavigateDirection_NextSibling"
+	case NavigateDirection_PreviousSibling:
+		return "NavigateDirection_PreviousSibling"
+	case NavigateDirection_FirstChild:
+		return "NavigateDirection_FirstChild"
+	case NavigateDirection_LastChild:
+		return "NavigateDirection_LastChild"
+	default:
+		return fmt.Sprintf("NavigateDirection(%d)", int32(e))
+	}
+}
+
 // NormalizeState: https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/ne-uiautomationcoreapi-normalizestate
 type NormalizeState int32
 
@@ -256,6 +704,21 @@ const (
 	NormalizeState_View   NormalizeState = 1
 	NormalizeState_Custom NormalizeState = 2
 )
+
+// String returns the NormalizeState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NormalizeState) String() string {
+	switch e {
+	case NormalizeState_None:
+		return "NormalizeState_None"
+	case NormalizeState_View:
+		return "NormalizeState_View"
+	case NormalizeState_Custom:
+		return "NormalizeState_Custom"
+	default:
+		return fmt.Sprintf("NormalizeState(%d)", int32(e))
+	}
+}
 
 // NotificationKind: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-notificationkind
 type NotificationKind int32
@@ -267,6 +730,25 @@ const (
 	NotificationKind_ActionAborted   NotificationKind = 3
 	NotificationKind_Other           NotificationKind = 4
 )
+
+// String returns the NotificationKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NotificationKind) String() string {
+	switch e {
+	case NotificationKind_ItemAdded:
+		return "NotificationKind_ItemAdded"
+	case NotificationKind_ItemRemoved:
+		return "NotificationKind_ItemRemoved"
+	case NotificationKind_ActionCompleted:
+		return "NotificationKind_ActionCompleted"
+	case NotificationKind_ActionAborted:
+		return "NotificationKind_ActionAborted"
+	case NotificationKind_Other:
+		return "NotificationKind_Other"
+	default:
+		return fmt.Sprintf("NotificationKind(%d)", int32(e))
+	}
+}
 
 // NotificationProcessing: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-notificationprocessing
 type NotificationProcessing int32
@@ -280,6 +762,27 @@ const (
 	NotificationProcessing_ImportantCurrentThenMostRecent NotificationProcessing = 5
 )
 
+// String returns the NotificationProcessing constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NotificationProcessing) String() string {
+	switch e {
+	case NotificationProcessing_ImportantAll:
+		return "NotificationProcessing_ImportantAll"
+	case NotificationProcessing_ImportantMostRecent:
+		return "NotificationProcessing_ImportantMostRecent"
+	case NotificationProcessing_All:
+		return "NotificationProcessing_All"
+	case NotificationProcessing_MostRecent:
+		return "NotificationProcessing_MostRecent"
+	case NotificationProcessing_CurrentThenMostRecent:
+		return "NotificationProcessing_CurrentThenMostRecent"
+	case NotificationProcessing_ImportantCurrentThenMostRecent:
+		return "NotificationProcessing_ImportantCurrentThenMostRecent"
+	default:
+		return fmt.Sprintf("NotificationProcessing(%d)", int32(e))
+	}
+}
+
 // OrientationType: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-orientationtype
 type OrientationType int32
 
@@ -288,6 +791,21 @@ const (
 	OrientationType_Horizontal OrientationType = 1
 	OrientationType_Vertical   OrientationType = 2
 )
+
+// String returns the OrientationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OrientationType) String() string {
+	switch e {
+	case OrientationType_None:
+		return "OrientationType_None"
+	case OrientationType_Horizontal:
+		return "OrientationType_Horizontal"
+	case OrientationType_Vertical:
+		return "OrientationType_Vertical"
+	default:
+		return fmt.Sprintf("OrientationType(%d)", int32(e))
+	}
+}
 
 // OutlineStyles: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-outlinestyles
 type OutlineStyles int32
@@ -300,6 +818,25 @@ const (
 	OutlineStyles_Embossed OutlineStyles = 8
 )
 
+// String returns the OutlineStyles constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OutlineStyles) String() string {
+	switch e {
+	case OutlineStyles_None:
+		return "OutlineStyles_None"
+	case OutlineStyles_Outline:
+		return "OutlineStyles_Outline"
+	case OutlineStyles_Shadow:
+		return "OutlineStyles_Shadow"
+	case OutlineStyles_Engraved:
+		return "OutlineStyles_Engraved"
+	case OutlineStyles_Embossed:
+		return "OutlineStyles_Embossed"
+	default:
+		return fmt.Sprintf("OutlineStyles(%d)", int32(e))
+	}
+}
+
 // PropertyConditionFlags: https://learn.microsoft.com/windows/win32/api/uiautomationclient/ne-uiautomationclient-propertyconditionflags
 type PropertyConditionFlags int32
 
@@ -309,7 +846,23 @@ const (
 	PropertyConditionFlags_MatchSubstring PropertyConditionFlags = 2
 )
 
+// String returns the PropertyConditionFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PropertyConditionFlags) String() string {
+	switch e {
+	case PropertyConditionFlags_None:
+		return "PropertyConditionFlags_None"
+	case PropertyConditionFlags_IgnoreCase:
+		return "PropertyConditionFlags_IgnoreCase"
+	case PropertyConditionFlags_MatchSubstring:
+		return "PropertyConditionFlags_MatchSubstring"
+	default:
+		return fmt.Sprintf("PropertyConditionFlags(%d)", int32(e))
+	}
+}
+
 // ProviderOptions: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-provideroptions
+// Bitmask — values may be combined with |.
 type ProviderOptions int32
 
 const (
@@ -324,6 +877,43 @@ const (
 	ProviderOptions_UseClientCoordinates   ProviderOptions = 256
 )
 
+// String returns the ProviderOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ProviderOptions) String() string {
+	var parts []string
+	if e&ProviderOptions_ClientSideProvider != 0 {
+		parts = append(parts, "ProviderOptions_ClientSideProvider")
+	}
+	if e&ProviderOptions_ServerSideProvider != 0 {
+		parts = append(parts, "ProviderOptions_ServerSideProvider")
+	}
+	if e&ProviderOptions_NonClientAreaProvider != 0 {
+		parts = append(parts, "ProviderOptions_NonClientAreaProvider")
+	}
+	if e&ProviderOptions_OverrideProvider != 0 {
+		parts = append(parts, "ProviderOptions_OverrideProvider")
+	}
+	if e&ProviderOptions_ProviderOwnsSetFocus != 0 {
+		parts = append(parts, "ProviderOptions_ProviderOwnsSetFocus")
+	}
+	if e&ProviderOptions_UseComThreading != 0 {
+		parts = append(parts, "ProviderOptions_UseComThreading")
+	}
+	if e&ProviderOptions_RefuseNonClientSupport != 0 {
+		parts = append(parts, "ProviderOptions_RefuseNonClientSupport")
+	}
+	if e&ProviderOptions_HasNativeIAccessible != 0 {
+		parts = append(parts, "ProviderOptions_HasNativeIAccessible")
+	}
+	if e&ProviderOptions_UseClientCoordinates != 0 {
+		parts = append(parts, "ProviderOptions_UseClientCoordinates")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // ProviderType: https://learn.microsoft.com/windows/win32/api/uiautomationcoreapi/ne-uiautomationcoreapi-providertype
 type ProviderType int32
 
@@ -332,6 +922,21 @@ const (
 	ProviderType_Proxy         ProviderType = 1
 	ProviderType_NonClientArea ProviderType = 2
 )
+
+// String returns the ProviderType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ProviderType) String() string {
+	switch e {
+	case ProviderType_BaseHwnd:
+		return "ProviderType_BaseHwnd"
+	case ProviderType_Proxy:
+		return "ProviderType_Proxy"
+	case ProviderType_NonClientArea:
+		return "ProviderType_NonClientArea"
+	default:
+		return fmt.Sprintf("ProviderType(%d)", int32(e))
+	}
+}
 
 // RowOrColumnMajor: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-roworcolumnmajor
 type RowOrColumnMajor int32
@@ -342,6 +947,22 @@ const (
 	RowOrColumnMajor_Indeterminate RowOrColumnMajor = 2
 )
 
+// String returns the RowOrColumnMajor constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RowOrColumnMajor) String() string {
+	switch e {
+	case RowOrColumnMajor_RowMajor:
+		return "RowOrColumnMajor_RowMajor"
+	case RowOrColumnMajor_ColumnMajor:
+		return "RowOrColumnMajor_ColumnMajor"
+	case RowOrColumnMajor_Indeterminate:
+		return "RowOrColumnMajor_Indeterminate"
+	default:
+		return fmt.Sprintf("RowOrColumnMajor(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SERIALKEYS_FLAGS uint32
 
 const (
@@ -350,6 +971,26 @@ const (
 	SERKF_SERIALKEYSON SERIALKEYS_FLAGS = 1
 )
 
+// String returns the SERIALKEYS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERIALKEYS_FLAGS) String() string {
+	var parts []string
+	if e&SERKF_AVAILABLE != 0 {
+		parts = append(parts, "SERKF_AVAILABLE")
+	}
+	if e&SERKF_INDICATOR != 0 {
+		parts = append(parts, "SERKF_INDICATOR")
+	}
+	if e&SERKF_SERIALKEYSON != 0 {
+		parts = append(parts, "SERKF_SERIALKEYSON")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SOUNDSENTRY_FLAGS uint32
 
 const (
@@ -357,6 +998,25 @@ const (
 	SSF_AVAILABLE     SOUNDSENTRY_FLAGS = 2
 	SSF_INDICATOR     SOUNDSENTRY_FLAGS = 4
 )
+
+// String returns the SOUNDSENTRY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SOUNDSENTRY_FLAGS) String() string {
+	var parts []string
+	if e&SSF_SOUNDSENTRYON != 0 {
+		parts = append(parts, "SSF_SOUNDSENTRYON")
+	}
+	if e&SSF_AVAILABLE != 0 {
+		parts = append(parts, "SSF_AVAILABLE")
+	}
+	if e&SSF_INDICATOR != 0 {
+		parts = append(parts, "SSF_INDICATOR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type SOUNDSENTRY_TEXT_EFFECT uint32
 
@@ -366,6 +1026,23 @@ const (
 	SSTF_DISPLAY SOUNDSENTRY_TEXT_EFFECT = 3
 	SSTF_NONE    SOUNDSENTRY_TEXT_EFFECT = 0
 )
+
+// String returns the SOUNDSENTRY_TEXT_EFFECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SOUNDSENTRY_TEXT_EFFECT) String() string {
+	switch e {
+	case SSTF_BORDER:
+		return "SSTF_BORDER"
+	case SSTF_CHARS:
+		return "SSTF_CHARS"
+	case SSTF_DISPLAY:
+		return "SSTF_DISPLAY"
+	case SSTF_NONE:
+		return "SSTF_NONE"
+	default:
+		return fmt.Sprintf("SOUNDSENTRY_TEXT_EFFECT(%d)", uint32(e))
+	}
+}
 
 type SOUNDSENTRY_WINDOWS_EFFECT uint32
 
@@ -377,6 +1054,25 @@ const (
 	SSWF_WINDOW  SOUNDSENTRY_WINDOWS_EFFECT = 2
 )
 
+// String returns the SOUNDSENTRY_WINDOWS_EFFECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SOUNDSENTRY_WINDOWS_EFFECT) String() string {
+	switch e {
+	case SSWF_CUSTOM:
+		return "SSWF_CUSTOM"
+	case SSWF_DISPLAY:
+		return "SSWF_DISPLAY"
+	case SSWF_NONE:
+		return "SSWF_NONE"
+	case SSWF_TITLE:
+		return "SSWF_TITLE"
+	case SSWF_WINDOW:
+		return "SSWF_WINDOW"
+	default:
+		return fmt.Sprintf("SOUNDSENTRY_WINDOWS_EFFECT(%d)", uint32(e))
+	}
+}
+
 type SOUND_SENTRY_GRAPHICS_EFFECT uint32
 
 const (
@@ -384,6 +1080,20 @@ const (
 	SSGF_NONE    SOUND_SENTRY_GRAPHICS_EFFECT = 0
 )
 
+// String returns the SOUND_SENTRY_GRAPHICS_EFFECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SOUND_SENTRY_GRAPHICS_EFFECT) String() string {
+	switch e {
+	case SSGF_DISPLAY:
+		return "SSGF_DISPLAY"
+	case SSGF_NONE:
+		return "SSGF_NONE"
+	default:
+		return fmt.Sprintf("SOUND_SENTRY_GRAPHICS_EFFECT(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type STICKYKEYS_FLAGS uint32
 
 const (
@@ -413,6 +1123,91 @@ const (
 	SKF_LWINLOCKED      STICKYKEYS_FLAGS = 4194304
 	SKF_RWINLOCKED      STICKYKEYS_FLAGS = 8388608
 )
+
+// String returns the STICKYKEYS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STICKYKEYS_FLAGS) String() string {
+	var parts []string
+	if e&SKF_STICKYKEYSON != 0 {
+		parts = append(parts, "SKF_STICKYKEYSON")
+	}
+	if e&SKF_AVAILABLE != 0 {
+		parts = append(parts, "SKF_AVAILABLE")
+	}
+	if e&SKF_HOTKEYACTIVE != 0 {
+		parts = append(parts, "SKF_HOTKEYACTIVE")
+	}
+	if e&SKF_CONFIRMHOTKEY != 0 {
+		parts = append(parts, "SKF_CONFIRMHOTKEY")
+	}
+	if e&SKF_HOTKEYSOUND != 0 {
+		parts = append(parts, "SKF_HOTKEYSOUND")
+	}
+	if e&SKF_INDICATOR != 0 {
+		parts = append(parts, "SKF_INDICATOR")
+	}
+	if e&SKF_AUDIBLEFEEDBACK != 0 {
+		parts = append(parts, "SKF_AUDIBLEFEEDBACK")
+	}
+	if e&SKF_TRISTATE != 0 {
+		parts = append(parts, "SKF_TRISTATE")
+	}
+	if e&SKF_TWOKEYSOFF != 0 {
+		parts = append(parts, "SKF_TWOKEYSOFF")
+	}
+	if e&SKF_LALTLATCHED != 0 {
+		parts = append(parts, "SKF_LALTLATCHED")
+	}
+	if e&SKF_LCTLLATCHED != 0 {
+		parts = append(parts, "SKF_LCTLLATCHED")
+	}
+	if e&SKF_LSHIFTLATCHED != 0 {
+		parts = append(parts, "SKF_LSHIFTLATCHED")
+	}
+	if e&SKF_RALTLATCHED != 0 {
+		parts = append(parts, "SKF_RALTLATCHED")
+	}
+	if e&SKF_RCTLLATCHED != 0 {
+		parts = append(parts, "SKF_RCTLLATCHED")
+	}
+	if e&SKF_RSHIFTLATCHED != 0 {
+		parts = append(parts, "SKF_RSHIFTLATCHED")
+	}
+	if e&SKF_LWINLATCHED != 0 {
+		parts = append(parts, "SKF_LWINLATCHED")
+	}
+	if e&SKF_RWINLATCHED != 0 {
+		parts = append(parts, "SKF_RWINLATCHED")
+	}
+	if e&SKF_LALTLOCKED != 0 {
+		parts = append(parts, "SKF_LALTLOCKED")
+	}
+	if e&SKF_LCTLLOCKED != 0 {
+		parts = append(parts, "SKF_LCTLLOCKED")
+	}
+	if e&SKF_LSHIFTLOCKED != 0 {
+		parts = append(parts, "SKF_LSHIFTLOCKED")
+	}
+	if e&SKF_RALTLOCKED != 0 {
+		parts = append(parts, "SKF_RALTLOCKED")
+	}
+	if e&SKF_RCTLLOCKED != 0 {
+		parts = append(parts, "SKF_RCTLLOCKED")
+	}
+	if e&SKF_RSHIFTLOCKED != 0 {
+		parts = append(parts, "SKF_RSHIFTLOCKED")
+	}
+	if e&SKF_LWINLOCKED != 0 {
+		parts = append(parts, "SKF_LWINLOCKED")
+	}
+	if e&SKF_RWINLOCKED != 0 {
+		parts = append(parts, "SKF_RWINLOCKED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // SayAsInterpretAs: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-sayasinterpretas
 type SayAsInterpretAs int32
@@ -447,6 +1242,69 @@ const (
 	SayAsInterpretAs_Time_HoursMinutes24        SayAsInterpretAs = 26
 )
 
+// String returns the SayAsInterpretAs constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SayAsInterpretAs) String() string {
+	switch e {
+	case SayAsInterpretAs_None:
+		return "SayAsInterpretAs_None"
+	case SayAsInterpretAs_Spell:
+		return "SayAsInterpretAs_Spell"
+	case SayAsInterpretAs_Cardinal:
+		return "SayAsInterpretAs_Cardinal"
+	case SayAsInterpretAs_Ordinal:
+		return "SayAsInterpretAs_Ordinal"
+	case SayAsInterpretAs_Number:
+		return "SayAsInterpretAs_Number"
+	case SayAsInterpretAs_Date:
+		return "SayAsInterpretAs_Date"
+	case SayAsInterpretAs_Time:
+		return "SayAsInterpretAs_Time"
+	case SayAsInterpretAs_Telephone:
+		return "SayAsInterpretAs_Telephone"
+	case SayAsInterpretAs_Currency:
+		return "SayAsInterpretAs_Currency"
+	case SayAsInterpretAs_Net:
+		return "SayAsInterpretAs_Net"
+	case SayAsInterpretAs_Url:
+		return "SayAsInterpretAs_Url"
+	case SayAsInterpretAs_Address:
+		return "SayAsInterpretAs_Address"
+	case SayAsInterpretAs_Alphanumeric:
+		return "SayAsInterpretAs_Alphanumeric"
+	case SayAsInterpretAs_Name:
+		return "SayAsInterpretAs_Name"
+	case SayAsInterpretAs_Media:
+		return "SayAsInterpretAs_Media"
+	case SayAsInterpretAs_Date_MonthDayYear:
+		return "SayAsInterpretAs_Date_MonthDayYear"
+	case SayAsInterpretAs_Date_DayMonthYear:
+		return "SayAsInterpretAs_Date_DayMonthYear"
+	case SayAsInterpretAs_Date_YearMonthDay:
+		return "SayAsInterpretAs_Date_YearMonthDay"
+	case SayAsInterpretAs_Date_YearMonth:
+		return "SayAsInterpretAs_Date_YearMonth"
+	case SayAsInterpretAs_Date_MonthYear:
+		return "SayAsInterpretAs_Date_MonthYear"
+	case SayAsInterpretAs_Date_DayMonth:
+		return "SayAsInterpretAs_Date_DayMonth"
+	case SayAsInterpretAs_Date_MonthDay:
+		return "SayAsInterpretAs_Date_MonthDay"
+	case SayAsInterpretAs_Date_Year:
+		return "SayAsInterpretAs_Date_Year"
+	case SayAsInterpretAs_Time_HoursMinutesSeconds12:
+		return "SayAsInterpretAs_Time_HoursMinutesSeconds12"
+	case SayAsInterpretAs_Time_HoursMinutes12:
+		return "SayAsInterpretAs_Time_HoursMinutes12"
+	case SayAsInterpretAs_Time_HoursMinutesSeconds24:
+		return "SayAsInterpretAs_Time_HoursMinutesSeconds24"
+	case SayAsInterpretAs_Time_HoursMinutes24:
+		return "SayAsInterpretAs_Time_HoursMinutes24"
+	default:
+		return fmt.Sprintf("SayAsInterpretAs(%d)", int32(e))
+	}
+}
+
 // ScrollAmount: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-scrollamount
 type ScrollAmount int32
 
@@ -457,6 +1315,25 @@ const (
 	ScrollAmount_LargeIncrement ScrollAmount = 3
 	ScrollAmount_SmallIncrement ScrollAmount = 4
 )
+
+// String returns the ScrollAmount constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ScrollAmount) String() string {
+	switch e {
+	case ScrollAmount_LargeDecrement:
+		return "ScrollAmount_LargeDecrement"
+	case ScrollAmount_SmallDecrement:
+		return "ScrollAmount_SmallDecrement"
+	case ScrollAmount_NoAmount:
+		return "ScrollAmount_NoAmount"
+	case ScrollAmount_LargeIncrement:
+		return "ScrollAmount_LargeIncrement"
+	case ScrollAmount_SmallIncrement:
+		return "ScrollAmount_SmallIncrement"
+	default:
+		return fmt.Sprintf("ScrollAmount(%d)", int32(e))
+	}
+}
 
 // StructureChangeType: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-structurechangetype
 type StructureChangeType int32
@@ -470,6 +1347,27 @@ const (
 	StructureChangeType_ChildrenReordered   StructureChangeType = 5
 )
 
+// String returns the StructureChangeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StructureChangeType) String() string {
+	switch e {
+	case StructureChangeType_ChildAdded:
+		return "StructureChangeType_ChildAdded"
+	case StructureChangeType_ChildRemoved:
+		return "StructureChangeType_ChildRemoved"
+	case StructureChangeType_ChildrenInvalidated:
+		return "StructureChangeType_ChildrenInvalidated"
+	case StructureChangeType_ChildrenBulkAdded:
+		return "StructureChangeType_ChildrenBulkAdded"
+	case StructureChangeType_ChildrenBulkRemoved:
+		return "StructureChangeType_ChildrenBulkRemoved"
+	case StructureChangeType_ChildrenReordered:
+		return "StructureChangeType_ChildrenReordered"
+	default:
+		return fmt.Sprintf("StructureChangeType(%d)", int32(e))
+	}
+}
+
 // SupportedTextSelection: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-supportedtextselection
 type SupportedTextSelection int32
 
@@ -479,7 +1377,23 @@ const (
 	SupportedTextSelection_Multiple SupportedTextSelection = 2
 )
 
+// String returns the SupportedTextSelection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SupportedTextSelection) String() string {
+	switch e {
+	case SupportedTextSelection_None:
+		return "SupportedTextSelection_None"
+	case SupportedTextSelection_Single:
+		return "SupportedTextSelection_Single"
+	case SupportedTextSelection_Multiple:
+		return "SupportedTextSelection_Multiple"
+	default:
+		return fmt.Sprintf("SupportedTextSelection(%d)", int32(e))
+	}
+}
+
 // SynchronizedInputType: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-synchronizedinputtype
+// Bitmask — values may be combined with |.
 type SynchronizedInputType int32
 
 const (
@@ -490,6 +1404,34 @@ const (
 	SynchronizedInputType_RightMouseUp   SynchronizedInputType = 16
 	SynchronizedInputType_RightMouseDown SynchronizedInputType = 32
 )
+
+// String returns the SynchronizedInputType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SynchronizedInputType) String() string {
+	var parts []string
+	if e&SynchronizedInputType_KeyUp != 0 {
+		parts = append(parts, "SynchronizedInputType_KeyUp")
+	}
+	if e&SynchronizedInputType_KeyDown != 0 {
+		parts = append(parts, "SynchronizedInputType_KeyDown")
+	}
+	if e&SynchronizedInputType_LeftMouseUp != 0 {
+		parts = append(parts, "SynchronizedInputType_LeftMouseUp")
+	}
+	if e&SynchronizedInputType_LeftMouseDown != 0 {
+		parts = append(parts, "SynchronizedInputType_LeftMouseDown")
+	}
+	if e&SynchronizedInputType_RightMouseUp != 0 {
+		parts = append(parts, "SynchronizedInputType_RightMouseUp")
+	}
+	if e&SynchronizedInputType_RightMouseDown != 0 {
+		parts = append(parts, "SynchronizedInputType_RightMouseDown")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // TextDecorationLineStyle: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-textdecorationlinestyle
 type TextDecorationLineStyle int32
@@ -516,6 +1458,53 @@ const (
 	TextDecorationLineStyle_Other           TextDecorationLineStyle = -1
 )
 
+// String returns the TextDecorationLineStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TextDecorationLineStyle) String() string {
+	switch e {
+	case TextDecorationLineStyle_None:
+		return "TextDecorationLineStyle_None"
+	case TextDecorationLineStyle_Single:
+		return "TextDecorationLineStyle_Single"
+	case TextDecorationLineStyle_WordsOnly:
+		return "TextDecorationLineStyle_WordsOnly"
+	case TextDecorationLineStyle_Double:
+		return "TextDecorationLineStyle_Double"
+	case TextDecorationLineStyle_Dot:
+		return "TextDecorationLineStyle_Dot"
+	case TextDecorationLineStyle_Dash:
+		return "TextDecorationLineStyle_Dash"
+	case TextDecorationLineStyle_DashDot:
+		return "TextDecorationLineStyle_DashDot"
+	case TextDecorationLineStyle_DashDotDot:
+		return "TextDecorationLineStyle_DashDotDot"
+	case TextDecorationLineStyle_Wavy:
+		return "TextDecorationLineStyle_Wavy"
+	case TextDecorationLineStyle_ThickSingle:
+		return "TextDecorationLineStyle_ThickSingle"
+	case TextDecorationLineStyle_DoubleWavy:
+		return "TextDecorationLineStyle_DoubleWavy"
+	case TextDecorationLineStyle_ThickWavy:
+		return "TextDecorationLineStyle_ThickWavy"
+	case TextDecorationLineStyle_LongDash:
+		return "TextDecorationLineStyle_LongDash"
+	case TextDecorationLineStyle_ThickDash:
+		return "TextDecorationLineStyle_ThickDash"
+	case TextDecorationLineStyle_ThickDashDot:
+		return "TextDecorationLineStyle_ThickDashDot"
+	case TextDecorationLineStyle_ThickDashDotDot:
+		return "TextDecorationLineStyle_ThickDashDotDot"
+	case TextDecorationLineStyle_ThickDot:
+		return "TextDecorationLineStyle_ThickDot"
+	case TextDecorationLineStyle_ThickLongDash:
+		return "TextDecorationLineStyle_ThickLongDash"
+	case TextDecorationLineStyle_Other:
+		return "TextDecorationLineStyle_Other"
+	default:
+		return fmt.Sprintf("TextDecorationLineStyle(%d)", int32(e))
+	}
+}
+
 // TextEditChangeType: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-texteditchangetype
 type TextEditChangeType int32
 
@@ -527,6 +1516,25 @@ const (
 	TextEditChangeType_AutoComplete         TextEditChangeType = 4
 )
 
+// String returns the TextEditChangeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TextEditChangeType) String() string {
+	switch e {
+	case TextEditChangeType_None:
+		return "TextEditChangeType_None"
+	case TextEditChangeType_AutoCorrect:
+		return "TextEditChangeType_AutoCorrect"
+	case TextEditChangeType_Composition:
+		return "TextEditChangeType_Composition"
+	case TextEditChangeType_CompositionFinalized:
+		return "TextEditChangeType_CompositionFinalized"
+	case TextEditChangeType_AutoComplete:
+		return "TextEditChangeType_AutoComplete"
+	default:
+		return fmt.Sprintf("TextEditChangeType(%d)", int32(e))
+	}
+}
+
 // TextPatternRangeEndpoint: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-textpatternrangeendpoint
 type TextPatternRangeEndpoint int32
 
@@ -534,6 +1542,19 @@ const (
 	TextPatternRangeEndpoint_Start TextPatternRangeEndpoint = 0
 	TextPatternRangeEndpoint_End   TextPatternRangeEndpoint = 1
 )
+
+// String returns the TextPatternRangeEndpoint constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TextPatternRangeEndpoint) String() string {
+	switch e {
+	case TextPatternRangeEndpoint_Start:
+		return "TextPatternRangeEndpoint_Start"
+	case TextPatternRangeEndpoint_End:
+		return "TextPatternRangeEndpoint_End"
+	default:
+		return fmt.Sprintf("TextPatternRangeEndpoint(%d)", int32(e))
+	}
+}
 
 // TextUnit: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-textunit
 type TextUnit int32
@@ -548,6 +1569,29 @@ const (
 	TextUnit_Document  TextUnit = 6
 )
 
+// String returns the TextUnit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TextUnit) String() string {
+	switch e {
+	case TextUnit_Character:
+		return "TextUnit_Character"
+	case TextUnit_Format:
+		return "TextUnit_Format"
+	case TextUnit_Word:
+		return "TextUnit_Word"
+	case TextUnit_Line:
+		return "TextUnit_Line"
+	case TextUnit_Paragraph:
+		return "TextUnit_Paragraph"
+	case TextUnit_Page:
+		return "TextUnit_Page"
+	case TextUnit_Document:
+		return "TextUnit_Document"
+	default:
+		return fmt.Sprintf("TextUnit(%d)", int32(e))
+	}
+}
+
 // ToggleState: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-togglestate
 type ToggleState int32
 
@@ -556,6 +1600,21 @@ const (
 	ToggleState_On            ToggleState = 1
 	ToggleState_Indeterminate ToggleState = 2
 )
+
+// String returns the ToggleState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ToggleState) String() string {
+	switch e {
+	case ToggleState_Off:
+		return "ToggleState_Off"
+	case ToggleState_On:
+		return "ToggleState_On"
+	case ToggleState_Indeterminate:
+		return "ToggleState_Indeterminate"
+	default:
+		return fmt.Sprintf("ToggleState(%d)", int32(e))
+	}
+}
 
 // TreeScope: https://learn.microsoft.com/windows/win32/api/uiautomationclient/ne-uiautomationclient-treescope
 type TreeScope int32
@@ -570,6 +1629,29 @@ const (
 	TreeScope_Subtree     TreeScope = 7
 )
 
+// String returns the TreeScope constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TreeScope) String() string {
+	switch e {
+	case TreeScope_None:
+		return "TreeScope_None"
+	case TreeScope_Element:
+		return "TreeScope_Element"
+	case TreeScope_Children:
+		return "TreeScope_Children"
+	case TreeScope_Descendants:
+		return "TreeScope_Descendants"
+	case TreeScope_Parent:
+		return "TreeScope_Parent"
+	case TreeScope_Ancestors:
+		return "TreeScope_Ancestors"
+	case TreeScope_Subtree:
+		return "TreeScope_Subtree"
+	default:
+		return fmt.Sprintf("TreeScope(%d)", int32(e))
+	}
+}
+
 // TreeTraversalOptions: https://learn.microsoft.com/windows/win32/api/uiautomationclient/ne-uiautomationclient-treetraversaloptions
 type TreeTraversalOptions int32
 
@@ -578,6 +1660,21 @@ const (
 	TreeTraversalOptions_PostOrder        TreeTraversalOptions = 1
 	TreeTraversalOptions_LastToFirstOrder TreeTraversalOptions = 2
 )
+
+// String returns the TreeTraversalOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TreeTraversalOptions) String() string {
+	switch e {
+	case TreeTraversalOptions_Default:
+		return "TreeTraversalOptions_Default"
+	case TreeTraversalOptions_PostOrder:
+		return "TreeTraversalOptions_PostOrder"
+	case TreeTraversalOptions_LastToFirstOrder:
+		return "TreeTraversalOptions_LastToFirstOrder"
+	default:
+		return fmt.Sprintf("TreeTraversalOptions(%d)", int32(e))
+	}
+}
 
 type UIA_ANNOTATIONTYPE int32
 
@@ -609,11 +1706,81 @@ const (
 	AnnotationType_Sensitive              UIA_ANNOTATIONTYPE = 60024
 )
 
+// String returns the UIA_ANNOTATIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIA_ANNOTATIONTYPE) String() string {
+	switch e {
+	case AnnotationType_Unknown:
+		return "AnnotationType_Unknown"
+	case AnnotationType_SpellingError:
+		return "AnnotationType_SpellingError"
+	case AnnotationType_GrammarError:
+		return "AnnotationType_GrammarError"
+	case AnnotationType_Comment:
+		return "AnnotationType_Comment"
+	case AnnotationType_FormulaError:
+		return "AnnotationType_FormulaError"
+	case AnnotationType_TrackChanges:
+		return "AnnotationType_TrackChanges"
+	case AnnotationType_Header:
+		return "AnnotationType_Header"
+	case AnnotationType_Footer:
+		return "AnnotationType_Footer"
+	case AnnotationType_Highlighted:
+		return "AnnotationType_Highlighted"
+	case AnnotationType_Endnote:
+		return "AnnotationType_Endnote"
+	case AnnotationType_Footnote:
+		return "AnnotationType_Footnote"
+	case AnnotationType_InsertionChange:
+		return "AnnotationType_InsertionChange"
+	case AnnotationType_DeletionChange:
+		return "AnnotationType_DeletionChange"
+	case AnnotationType_MoveChange:
+		return "AnnotationType_MoveChange"
+	case AnnotationType_FormatChange:
+		return "AnnotationType_FormatChange"
+	case AnnotationType_UnsyncedChange:
+		return "AnnotationType_UnsyncedChange"
+	case AnnotationType_EditingLockedChange:
+		return "AnnotationType_EditingLockedChange"
+	case AnnotationType_ExternalChange:
+		return "AnnotationType_ExternalChange"
+	case AnnotationType_ConflictingChange:
+		return "AnnotationType_ConflictingChange"
+	case AnnotationType_Author:
+		return "AnnotationType_Author"
+	case AnnotationType_AdvancedProofingIssue:
+		return "AnnotationType_AdvancedProofingIssue"
+	case AnnotationType_DataValidationError:
+		return "AnnotationType_DataValidationError"
+	case AnnotationType_CircularReferenceError:
+		return "AnnotationType_CircularReferenceError"
+	case AnnotationType_Mathematics:
+		return "AnnotationType_Mathematics"
+	case AnnotationType_Sensitive:
+		return "AnnotationType_Sensitive"
+	default:
+		return fmt.Sprintf("UIA_ANNOTATIONTYPE(%d)", int32(e))
+	}
+}
+
 type UIA_CHANGE_ID int32
 
 const (
 	UIA_SummaryChangeId UIA_CHANGE_ID = 90000
 )
+
+// String returns the UIA_CHANGE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIA_CHANGE_ID) String() string {
+	switch e {
+	case UIA_SummaryChangeId:
+		return "UIA_SummaryChangeId"
+	default:
+		return fmt.Sprintf("UIA_CHANGE_ID(%d)", int32(e))
+	}
+}
 
 type UIA_CONTROLTYPE_ID int32
 
@@ -661,6 +1828,97 @@ const (
 	UIA_AppBarControlTypeId       UIA_CONTROLTYPE_ID = 50040
 )
 
+// String returns the UIA_CONTROLTYPE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIA_CONTROLTYPE_ID) String() string {
+	switch e {
+	case UIA_ButtonControlTypeId:
+		return "UIA_ButtonControlTypeId"
+	case UIA_CalendarControlTypeId:
+		return "UIA_CalendarControlTypeId"
+	case UIA_CheckBoxControlTypeId:
+		return "UIA_CheckBoxControlTypeId"
+	case UIA_ComboBoxControlTypeId:
+		return "UIA_ComboBoxControlTypeId"
+	case UIA_EditControlTypeId:
+		return "UIA_EditControlTypeId"
+	case UIA_HyperlinkControlTypeId:
+		return "UIA_HyperlinkControlTypeId"
+	case UIA_ImageControlTypeId:
+		return "UIA_ImageControlTypeId"
+	case UIA_ListItemControlTypeId:
+		return "UIA_ListItemControlTypeId"
+	case UIA_ListControlTypeId:
+		return "UIA_ListControlTypeId"
+	case UIA_MenuControlTypeId:
+		return "UIA_MenuControlTypeId"
+	case UIA_MenuBarControlTypeId:
+		return "UIA_MenuBarControlTypeId"
+	case UIA_MenuItemControlTypeId:
+		return "UIA_MenuItemControlTypeId"
+	case UIA_ProgressBarControlTypeId:
+		return "UIA_ProgressBarControlTypeId"
+	case UIA_RadioButtonControlTypeId:
+		return "UIA_RadioButtonControlTypeId"
+	case UIA_ScrollBarControlTypeId:
+		return "UIA_ScrollBarControlTypeId"
+	case UIA_SliderControlTypeId:
+		return "UIA_SliderControlTypeId"
+	case UIA_SpinnerControlTypeId:
+		return "UIA_SpinnerControlTypeId"
+	case UIA_StatusBarControlTypeId:
+		return "UIA_StatusBarControlTypeId"
+	case UIA_TabControlTypeId:
+		return "UIA_TabControlTypeId"
+	case UIA_TabItemControlTypeId:
+		return "UIA_TabItemControlTypeId"
+	case UIA_TextControlTypeId:
+		return "UIA_TextControlTypeId"
+	case UIA_ToolBarControlTypeId:
+		return "UIA_ToolBarControlTypeId"
+	case UIA_ToolTipControlTypeId:
+		return "UIA_ToolTipControlTypeId"
+	case UIA_TreeControlTypeId:
+		return "UIA_TreeControlTypeId"
+	case UIA_TreeItemControlTypeId:
+		return "UIA_TreeItemControlTypeId"
+	case UIA_CustomControlTypeId:
+		return "UIA_CustomControlTypeId"
+	case UIA_GroupControlTypeId:
+		return "UIA_GroupControlTypeId"
+	case UIA_ThumbControlTypeId:
+		return "UIA_ThumbControlTypeId"
+	case UIA_DataGridControlTypeId:
+		return "UIA_DataGridControlTypeId"
+	case UIA_DataItemControlTypeId:
+		return "UIA_DataItemControlTypeId"
+	case UIA_DocumentControlTypeId:
+		return "UIA_DocumentControlTypeId"
+	case UIA_SplitButtonControlTypeId:
+		return "UIA_SplitButtonControlTypeId"
+	case UIA_WindowControlTypeId:
+		return "UIA_WindowControlTypeId"
+	case UIA_PaneControlTypeId:
+		return "UIA_PaneControlTypeId"
+	case UIA_HeaderControlTypeId:
+		return "UIA_HeaderControlTypeId"
+	case UIA_HeaderItemControlTypeId:
+		return "UIA_HeaderItemControlTypeId"
+	case UIA_TableControlTypeId:
+		return "UIA_TableControlTypeId"
+	case UIA_TitleBarControlTypeId:
+		return "UIA_TitleBarControlTypeId"
+	case UIA_SeparatorControlTypeId:
+		return "UIA_SeparatorControlTypeId"
+	case UIA_SemanticZoomControlTypeId:
+		return "UIA_SemanticZoomControlTypeId"
+	case UIA_AppBarControlTypeId:
+		return "UIA_AppBarControlTypeId"
+	default:
+		return fmt.Sprintf("UIA_CONTROLTYPE_ID(%d)", int32(e))
+	}
+}
+
 type UIA_EVENT_ID int32
 
 const (
@@ -703,6 +1961,89 @@ const (
 	UIA_ActiveTextPositionChangedEventId                 UIA_EVENT_ID = 20036
 )
 
+// String returns the UIA_EVENT_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIA_EVENT_ID) String() string {
+	switch e {
+	case UIA_ToolTipOpenedEventId:
+		return "UIA_ToolTipOpenedEventId"
+	case UIA_ToolTipClosedEventId:
+		return "UIA_ToolTipClosedEventId"
+	case UIA_StructureChangedEventId:
+		return "UIA_StructureChangedEventId"
+	case UIA_MenuOpenedEventId:
+		return "UIA_MenuOpenedEventId"
+	case UIA_AutomationPropertyChangedEventId:
+		return "UIA_AutomationPropertyChangedEventId"
+	case UIA_AutomationFocusChangedEventId:
+		return "UIA_AutomationFocusChangedEventId"
+	case UIA_AsyncContentLoadedEventId:
+		return "UIA_AsyncContentLoadedEventId"
+	case UIA_MenuClosedEventId:
+		return "UIA_MenuClosedEventId"
+	case UIA_LayoutInvalidatedEventId:
+		return "UIA_LayoutInvalidatedEventId"
+	case UIA_Invoke_InvokedEventId:
+		return "UIA_Invoke_InvokedEventId"
+	case UIA_SelectionItem_ElementAddedToSelectionEventId:
+		return "UIA_SelectionItem_ElementAddedToSelectionEventId"
+	case UIA_SelectionItem_ElementRemovedFromSelectionEventId:
+		return "UIA_SelectionItem_ElementRemovedFromSelectionEventId"
+	case UIA_SelectionItem_ElementSelectedEventId:
+		return "UIA_SelectionItem_ElementSelectedEventId"
+	case UIA_Selection_InvalidatedEventId:
+		return "UIA_Selection_InvalidatedEventId"
+	case UIA_Text_TextSelectionChangedEventId:
+		return "UIA_Text_TextSelectionChangedEventId"
+	case UIA_Text_TextChangedEventId:
+		return "UIA_Text_TextChangedEventId"
+	case UIA_Window_WindowOpenedEventId:
+		return "UIA_Window_WindowOpenedEventId"
+	case UIA_Window_WindowClosedEventId:
+		return "UIA_Window_WindowClosedEventId"
+	case UIA_MenuModeStartEventId:
+		return "UIA_MenuModeStartEventId"
+	case UIA_MenuModeEndEventId:
+		return "UIA_MenuModeEndEventId"
+	case UIA_InputReachedTargetEventId:
+		return "UIA_InputReachedTargetEventId"
+	case UIA_InputReachedOtherElementEventId:
+		return "UIA_InputReachedOtherElementEventId"
+	case UIA_InputDiscardedEventId:
+		return "UIA_InputDiscardedEventId"
+	case UIA_SystemAlertEventId:
+		return "UIA_SystemAlertEventId"
+	case UIA_LiveRegionChangedEventId:
+		return "UIA_LiveRegionChangedEventId"
+	case UIA_HostedFragmentRootsInvalidatedEventId:
+		return "UIA_HostedFragmentRootsInvalidatedEventId"
+	case UIA_Drag_DragStartEventId:
+		return "UIA_Drag_DragStartEventId"
+	case UIA_Drag_DragCancelEventId:
+		return "UIA_Drag_DragCancelEventId"
+	case UIA_Drag_DragCompleteEventId:
+		return "UIA_Drag_DragCompleteEventId"
+	case UIA_DropTarget_DragEnterEventId:
+		return "UIA_DropTarget_DragEnterEventId"
+	case UIA_DropTarget_DragLeaveEventId:
+		return "UIA_DropTarget_DragLeaveEventId"
+	case UIA_DropTarget_DroppedEventId:
+		return "UIA_DropTarget_DroppedEventId"
+	case UIA_TextEdit_TextChangedEventId:
+		return "UIA_TextEdit_TextChangedEventId"
+	case UIA_TextEdit_ConversionTargetChangedEventId:
+		return "UIA_TextEdit_ConversionTargetChangedEventId"
+	case UIA_ChangesEventId:
+		return "UIA_ChangesEventId"
+	case UIA_NotificationEventId:
+		return "UIA_NotificationEventId"
+	case UIA_ActiveTextPositionChangedEventId:
+		return "UIA_ActiveTextPositionChangedEventId"
+	default:
+		return fmt.Sprintf("UIA_EVENT_ID(%d)", int32(e))
+	}
+}
+
 type UIA_HEADINGLEVEL_ID int32
 
 const (
@@ -718,6 +2059,35 @@ const (
 	HeadingLevel9     UIA_HEADINGLEVEL_ID = 80059
 )
 
+// String returns the UIA_HEADINGLEVEL_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIA_HEADINGLEVEL_ID) String() string {
+	switch e {
+	case HeadingLevel_None:
+		return "HeadingLevel_None"
+	case HeadingLevel1:
+		return "HeadingLevel1"
+	case HeadingLevel2:
+		return "HeadingLevel2"
+	case HeadingLevel3:
+		return "HeadingLevel3"
+	case HeadingLevel4:
+		return "HeadingLevel4"
+	case HeadingLevel5:
+		return "HeadingLevel5"
+	case HeadingLevel6:
+		return "HeadingLevel6"
+	case HeadingLevel7:
+		return "HeadingLevel7"
+	case HeadingLevel8:
+		return "HeadingLevel8"
+	case HeadingLevel9:
+		return "HeadingLevel9"
+	default:
+		return fmt.Sprintf("UIA_HEADINGLEVEL_ID(%d)", int32(e))
+	}
+}
+
 type UIA_LANDMARKTYPE_ID int32
 
 const (
@@ -728,11 +2098,41 @@ const (
 	UIA_SearchLandmarkTypeId     UIA_LANDMARKTYPE_ID = 80004
 )
 
+// String returns the UIA_LANDMARKTYPE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIA_LANDMARKTYPE_ID) String() string {
+	switch e {
+	case UIA_CustomLandmarkTypeId:
+		return "UIA_CustomLandmarkTypeId"
+	case UIA_FormLandmarkTypeId:
+		return "UIA_FormLandmarkTypeId"
+	case UIA_MainLandmarkTypeId:
+		return "UIA_MainLandmarkTypeId"
+	case UIA_NavigationLandmarkTypeId:
+		return "UIA_NavigationLandmarkTypeId"
+	case UIA_SearchLandmarkTypeId:
+		return "UIA_SearchLandmarkTypeId"
+	default:
+		return fmt.Sprintf("UIA_LANDMARKTYPE_ID(%d)", int32(e))
+	}
+}
+
 type UIA_METADATA_ID int32
 
 const (
 	UIA_SayAsInterpretAsMetadataId UIA_METADATA_ID = 100000
 )
+
+// String returns the UIA_METADATA_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIA_METADATA_ID) String() string {
+	switch e {
+	case UIA_SayAsInterpretAsMetadataId:
+		return "UIA_SayAsInterpretAsMetadataId"
+	default:
+		return fmt.Sprintf("UIA_METADATA_ID(%d)", int32(e))
+	}
+}
 
 type UIA_PATTERN_ID int32
 
@@ -773,6 +2173,85 @@ const (
 	UIA_CustomNavigationPatternId  UIA_PATTERN_ID = 10033
 	UIA_SelectionPattern2Id        UIA_PATTERN_ID = 10034
 )
+
+// String returns the UIA_PATTERN_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIA_PATTERN_ID) String() string {
+	switch e {
+	case UIA_InvokePatternId:
+		return "UIA_InvokePatternId"
+	case UIA_SelectionPatternId:
+		return "UIA_SelectionPatternId"
+	case UIA_ValuePatternId:
+		return "UIA_ValuePatternId"
+	case UIA_RangeValuePatternId:
+		return "UIA_RangeValuePatternId"
+	case UIA_ScrollPatternId:
+		return "UIA_ScrollPatternId"
+	case UIA_ExpandCollapsePatternId:
+		return "UIA_ExpandCollapsePatternId"
+	case UIA_GridPatternId:
+		return "UIA_GridPatternId"
+	case UIA_GridItemPatternId:
+		return "UIA_GridItemPatternId"
+	case UIA_MultipleViewPatternId:
+		return "UIA_MultipleViewPatternId"
+	case UIA_WindowPatternId:
+		return "UIA_WindowPatternId"
+	case UIA_SelectionItemPatternId:
+		return "UIA_SelectionItemPatternId"
+	case UIA_DockPatternId:
+		return "UIA_DockPatternId"
+	case UIA_TablePatternId:
+		return "UIA_TablePatternId"
+	case UIA_TableItemPatternId:
+		return "UIA_TableItemPatternId"
+	case UIA_TextPatternId:
+		return "UIA_TextPatternId"
+	case UIA_TogglePatternId:
+		return "UIA_TogglePatternId"
+	case UIA_TransformPatternId:
+		return "UIA_TransformPatternId"
+	case UIA_ScrollItemPatternId:
+		return "UIA_ScrollItemPatternId"
+	case UIA_LegacyIAccessiblePatternId:
+		return "UIA_LegacyIAccessiblePatternId"
+	case UIA_ItemContainerPatternId:
+		return "UIA_ItemContainerPatternId"
+	case UIA_VirtualizedItemPatternId:
+		return "UIA_VirtualizedItemPatternId"
+	case UIA_SynchronizedInputPatternId:
+		return "UIA_SynchronizedInputPatternId"
+	case UIA_ObjectModelPatternId:
+		return "UIA_ObjectModelPatternId"
+	case UIA_AnnotationPatternId:
+		return "UIA_AnnotationPatternId"
+	case UIA_TextPattern2Id:
+		return "UIA_TextPattern2Id"
+	case UIA_StylesPatternId:
+		return "UIA_StylesPatternId"
+	case UIA_SpreadsheetPatternId:
+		return "UIA_SpreadsheetPatternId"
+	case UIA_SpreadsheetItemPatternId:
+		return "UIA_SpreadsheetItemPatternId"
+	case UIA_TransformPattern2Id:
+		return "UIA_TransformPattern2Id"
+	case UIA_TextChildPatternId:
+		return "UIA_TextChildPatternId"
+	case UIA_DragPatternId:
+		return "UIA_DragPatternId"
+	case UIA_DropTargetPatternId:
+		return "UIA_DropTargetPatternId"
+	case UIA_TextEditPatternId:
+		return "UIA_TextEditPatternId"
+	case UIA_CustomNavigationPatternId:
+		return "UIA_CustomNavigationPatternId"
+	case UIA_SelectionPattern2Id:
+		return "UIA_SelectionPattern2Id"
+	default:
+		return fmt.Sprintf("UIA_PATTERN_ID(%d)", int32(e))
+	}
+}
 
 type UIA_PROPERTY_ID int32
 
@@ -954,6 +2433,365 @@ const (
 	UIA_IsDialogPropertyId                            UIA_PROPERTY_ID = 30174
 )
 
+// String returns the UIA_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIA_PROPERTY_ID) String() string {
+	switch e {
+	case UIA_RuntimeIdPropertyId:
+		return "UIA_RuntimeIdPropertyId"
+	case UIA_BoundingRectanglePropertyId:
+		return "UIA_BoundingRectanglePropertyId"
+	case UIA_ProcessIdPropertyId:
+		return "UIA_ProcessIdPropertyId"
+	case UIA_ControlTypePropertyId:
+		return "UIA_ControlTypePropertyId"
+	case UIA_LocalizedControlTypePropertyId:
+		return "UIA_LocalizedControlTypePropertyId"
+	case UIA_NamePropertyId:
+		return "UIA_NamePropertyId"
+	case UIA_AcceleratorKeyPropertyId:
+		return "UIA_AcceleratorKeyPropertyId"
+	case UIA_AccessKeyPropertyId:
+		return "UIA_AccessKeyPropertyId"
+	case UIA_HasKeyboardFocusPropertyId:
+		return "UIA_HasKeyboardFocusPropertyId"
+	case UIA_IsKeyboardFocusablePropertyId:
+		return "UIA_IsKeyboardFocusablePropertyId"
+	case UIA_IsEnabledPropertyId:
+		return "UIA_IsEnabledPropertyId"
+	case UIA_AutomationIdPropertyId:
+		return "UIA_AutomationIdPropertyId"
+	case UIA_ClassNamePropertyId:
+		return "UIA_ClassNamePropertyId"
+	case UIA_HelpTextPropertyId:
+		return "UIA_HelpTextPropertyId"
+	case UIA_ClickablePointPropertyId:
+		return "UIA_ClickablePointPropertyId"
+	case UIA_CulturePropertyId:
+		return "UIA_CulturePropertyId"
+	case UIA_IsControlElementPropertyId:
+		return "UIA_IsControlElementPropertyId"
+	case UIA_IsContentElementPropertyId:
+		return "UIA_IsContentElementPropertyId"
+	case UIA_LabeledByPropertyId:
+		return "UIA_LabeledByPropertyId"
+	case UIA_IsPasswordPropertyId:
+		return "UIA_IsPasswordPropertyId"
+	case UIA_NativeWindowHandlePropertyId:
+		return "UIA_NativeWindowHandlePropertyId"
+	case UIA_ItemTypePropertyId:
+		return "UIA_ItemTypePropertyId"
+	case UIA_IsOffscreenPropertyId:
+		return "UIA_IsOffscreenPropertyId"
+	case UIA_OrientationPropertyId:
+		return "UIA_OrientationPropertyId"
+	case UIA_FrameworkIdPropertyId:
+		return "UIA_FrameworkIdPropertyId"
+	case UIA_IsRequiredForFormPropertyId:
+		return "UIA_IsRequiredForFormPropertyId"
+	case UIA_ItemStatusPropertyId:
+		return "UIA_ItemStatusPropertyId"
+	case UIA_IsDockPatternAvailablePropertyId:
+		return "UIA_IsDockPatternAvailablePropertyId"
+	case UIA_IsExpandCollapsePatternAvailablePropertyId:
+		return "UIA_IsExpandCollapsePatternAvailablePropertyId"
+	case UIA_IsGridItemPatternAvailablePropertyId:
+		return "UIA_IsGridItemPatternAvailablePropertyId"
+	case UIA_IsGridPatternAvailablePropertyId:
+		return "UIA_IsGridPatternAvailablePropertyId"
+	case UIA_IsInvokePatternAvailablePropertyId:
+		return "UIA_IsInvokePatternAvailablePropertyId"
+	case UIA_IsMultipleViewPatternAvailablePropertyId:
+		return "UIA_IsMultipleViewPatternAvailablePropertyId"
+	case UIA_IsRangeValuePatternAvailablePropertyId:
+		return "UIA_IsRangeValuePatternAvailablePropertyId"
+	case UIA_IsScrollPatternAvailablePropertyId:
+		return "UIA_IsScrollPatternAvailablePropertyId"
+	case UIA_IsScrollItemPatternAvailablePropertyId:
+		return "UIA_IsScrollItemPatternAvailablePropertyId"
+	case UIA_IsSelectionItemPatternAvailablePropertyId:
+		return "UIA_IsSelectionItemPatternAvailablePropertyId"
+	case UIA_IsSelectionPatternAvailablePropertyId:
+		return "UIA_IsSelectionPatternAvailablePropertyId"
+	case UIA_IsTablePatternAvailablePropertyId:
+		return "UIA_IsTablePatternAvailablePropertyId"
+	case UIA_IsTableItemPatternAvailablePropertyId:
+		return "UIA_IsTableItemPatternAvailablePropertyId"
+	case UIA_IsTextPatternAvailablePropertyId:
+		return "UIA_IsTextPatternAvailablePropertyId"
+	case UIA_IsTogglePatternAvailablePropertyId:
+		return "UIA_IsTogglePatternAvailablePropertyId"
+	case UIA_IsTransformPatternAvailablePropertyId:
+		return "UIA_IsTransformPatternAvailablePropertyId"
+	case UIA_IsValuePatternAvailablePropertyId:
+		return "UIA_IsValuePatternAvailablePropertyId"
+	case UIA_IsWindowPatternAvailablePropertyId:
+		return "UIA_IsWindowPatternAvailablePropertyId"
+	case UIA_ValueValuePropertyId:
+		return "UIA_ValueValuePropertyId"
+	case UIA_ValueIsReadOnlyPropertyId:
+		return "UIA_ValueIsReadOnlyPropertyId"
+	case UIA_RangeValueValuePropertyId:
+		return "UIA_RangeValueValuePropertyId"
+	case UIA_RangeValueIsReadOnlyPropertyId:
+		return "UIA_RangeValueIsReadOnlyPropertyId"
+	case UIA_RangeValueMinimumPropertyId:
+		return "UIA_RangeValueMinimumPropertyId"
+	case UIA_RangeValueMaximumPropertyId:
+		return "UIA_RangeValueMaximumPropertyId"
+	case UIA_RangeValueLargeChangePropertyId:
+		return "UIA_RangeValueLargeChangePropertyId"
+	case UIA_RangeValueSmallChangePropertyId:
+		return "UIA_RangeValueSmallChangePropertyId"
+	case UIA_ScrollHorizontalScrollPercentPropertyId:
+		return "UIA_ScrollHorizontalScrollPercentPropertyId"
+	case UIA_ScrollHorizontalViewSizePropertyId:
+		return "UIA_ScrollHorizontalViewSizePropertyId"
+	case UIA_ScrollVerticalScrollPercentPropertyId:
+		return "UIA_ScrollVerticalScrollPercentPropertyId"
+	case UIA_ScrollVerticalViewSizePropertyId:
+		return "UIA_ScrollVerticalViewSizePropertyId"
+	case UIA_ScrollHorizontallyScrollablePropertyId:
+		return "UIA_ScrollHorizontallyScrollablePropertyId"
+	case UIA_ScrollVerticallyScrollablePropertyId:
+		return "UIA_ScrollVerticallyScrollablePropertyId"
+	case UIA_SelectionSelectionPropertyId:
+		return "UIA_SelectionSelectionPropertyId"
+	case UIA_SelectionCanSelectMultiplePropertyId:
+		return "UIA_SelectionCanSelectMultiplePropertyId"
+	case UIA_SelectionIsSelectionRequiredPropertyId:
+		return "UIA_SelectionIsSelectionRequiredPropertyId"
+	case UIA_GridRowCountPropertyId:
+		return "UIA_GridRowCountPropertyId"
+	case UIA_GridColumnCountPropertyId:
+		return "UIA_GridColumnCountPropertyId"
+	case UIA_GridItemRowPropertyId:
+		return "UIA_GridItemRowPropertyId"
+	case UIA_GridItemColumnPropertyId:
+		return "UIA_GridItemColumnPropertyId"
+	case UIA_GridItemRowSpanPropertyId:
+		return "UIA_GridItemRowSpanPropertyId"
+	case UIA_GridItemColumnSpanPropertyId:
+		return "UIA_GridItemColumnSpanPropertyId"
+	case UIA_GridItemContainingGridPropertyId:
+		return "UIA_GridItemContainingGridPropertyId"
+	case UIA_DockDockPositionPropertyId:
+		return "UIA_DockDockPositionPropertyId"
+	case UIA_ExpandCollapseExpandCollapseStatePropertyId:
+		return "UIA_ExpandCollapseExpandCollapseStatePropertyId"
+	case UIA_MultipleViewCurrentViewPropertyId:
+		return "UIA_MultipleViewCurrentViewPropertyId"
+	case UIA_MultipleViewSupportedViewsPropertyId:
+		return "UIA_MultipleViewSupportedViewsPropertyId"
+	case UIA_WindowCanMaximizePropertyId:
+		return "UIA_WindowCanMaximizePropertyId"
+	case UIA_WindowCanMinimizePropertyId:
+		return "UIA_WindowCanMinimizePropertyId"
+	case UIA_WindowWindowVisualStatePropertyId:
+		return "UIA_WindowWindowVisualStatePropertyId"
+	case UIA_WindowWindowInteractionStatePropertyId:
+		return "UIA_WindowWindowInteractionStatePropertyId"
+	case UIA_WindowIsModalPropertyId:
+		return "UIA_WindowIsModalPropertyId"
+	case UIA_WindowIsTopmostPropertyId:
+		return "UIA_WindowIsTopmostPropertyId"
+	case UIA_SelectionItemIsSelectedPropertyId:
+		return "UIA_SelectionItemIsSelectedPropertyId"
+	case UIA_SelectionItemSelectionContainerPropertyId:
+		return "UIA_SelectionItemSelectionContainerPropertyId"
+	case UIA_TableRowHeadersPropertyId:
+		return "UIA_TableRowHeadersPropertyId"
+	case UIA_TableColumnHeadersPropertyId:
+		return "UIA_TableColumnHeadersPropertyId"
+	case UIA_TableRowOrColumnMajorPropertyId:
+		return "UIA_TableRowOrColumnMajorPropertyId"
+	case UIA_TableItemRowHeaderItemsPropertyId:
+		return "UIA_TableItemRowHeaderItemsPropertyId"
+	case UIA_TableItemColumnHeaderItemsPropertyId:
+		return "UIA_TableItemColumnHeaderItemsPropertyId"
+	case UIA_ToggleToggleStatePropertyId:
+		return "UIA_ToggleToggleStatePropertyId"
+	case UIA_TransformCanMovePropertyId:
+		return "UIA_TransformCanMovePropertyId"
+	case UIA_TransformCanResizePropertyId:
+		return "UIA_TransformCanResizePropertyId"
+	case UIA_TransformCanRotatePropertyId:
+		return "UIA_TransformCanRotatePropertyId"
+	case UIA_IsLegacyIAccessiblePatternAvailablePropertyId:
+		return "UIA_IsLegacyIAccessiblePatternAvailablePropertyId"
+	case UIA_LegacyIAccessibleChildIdPropertyId:
+		return "UIA_LegacyIAccessibleChildIdPropertyId"
+	case UIA_LegacyIAccessibleNamePropertyId:
+		return "UIA_LegacyIAccessibleNamePropertyId"
+	case UIA_LegacyIAccessibleValuePropertyId:
+		return "UIA_LegacyIAccessibleValuePropertyId"
+	case UIA_LegacyIAccessibleDescriptionPropertyId:
+		return "UIA_LegacyIAccessibleDescriptionPropertyId"
+	case UIA_LegacyIAccessibleRolePropertyId:
+		return "UIA_LegacyIAccessibleRolePropertyId"
+	case UIA_LegacyIAccessibleStatePropertyId:
+		return "UIA_LegacyIAccessibleStatePropertyId"
+	case UIA_LegacyIAccessibleHelpPropertyId:
+		return "UIA_LegacyIAccessibleHelpPropertyId"
+	case UIA_LegacyIAccessibleKeyboardShortcutPropertyId:
+		return "UIA_LegacyIAccessibleKeyboardShortcutPropertyId"
+	case UIA_LegacyIAccessibleSelectionPropertyId:
+		return "UIA_LegacyIAccessibleSelectionPropertyId"
+	case UIA_LegacyIAccessibleDefaultActionPropertyId:
+		return "UIA_LegacyIAccessibleDefaultActionPropertyId"
+	case UIA_AriaRolePropertyId:
+		return "UIA_AriaRolePropertyId"
+	case UIA_AriaPropertiesPropertyId:
+		return "UIA_AriaPropertiesPropertyId"
+	case UIA_IsDataValidForFormPropertyId:
+		return "UIA_IsDataValidForFormPropertyId"
+	case UIA_ControllerForPropertyId:
+		return "UIA_ControllerForPropertyId"
+	case UIA_DescribedByPropertyId:
+		return "UIA_DescribedByPropertyId"
+	case UIA_FlowsToPropertyId:
+		return "UIA_FlowsToPropertyId"
+	case UIA_ProviderDescriptionPropertyId:
+		return "UIA_ProviderDescriptionPropertyId"
+	case UIA_IsItemContainerPatternAvailablePropertyId:
+		return "UIA_IsItemContainerPatternAvailablePropertyId"
+	case UIA_IsVirtualizedItemPatternAvailablePropertyId:
+		return "UIA_IsVirtualizedItemPatternAvailablePropertyId"
+	case UIA_IsSynchronizedInputPatternAvailablePropertyId:
+		return "UIA_IsSynchronizedInputPatternAvailablePropertyId"
+	case UIA_OptimizeForVisualContentPropertyId:
+		return "UIA_OptimizeForVisualContentPropertyId"
+	case UIA_IsObjectModelPatternAvailablePropertyId:
+		return "UIA_IsObjectModelPatternAvailablePropertyId"
+	case UIA_AnnotationAnnotationTypeIdPropertyId:
+		return "UIA_AnnotationAnnotationTypeIdPropertyId"
+	case UIA_AnnotationAnnotationTypeNamePropertyId:
+		return "UIA_AnnotationAnnotationTypeNamePropertyId"
+	case UIA_AnnotationAuthorPropertyId:
+		return "UIA_AnnotationAuthorPropertyId"
+	case UIA_AnnotationDateTimePropertyId:
+		return "UIA_AnnotationDateTimePropertyId"
+	case UIA_AnnotationTargetPropertyId:
+		return "UIA_AnnotationTargetPropertyId"
+	case UIA_IsAnnotationPatternAvailablePropertyId:
+		return "UIA_IsAnnotationPatternAvailablePropertyId"
+	case UIA_IsTextPattern2AvailablePropertyId:
+		return "UIA_IsTextPattern2AvailablePropertyId"
+	case UIA_StylesStyleIdPropertyId:
+		return "UIA_StylesStyleIdPropertyId"
+	case UIA_StylesStyleNamePropertyId:
+		return "UIA_StylesStyleNamePropertyId"
+	case UIA_StylesFillColorPropertyId:
+		return "UIA_StylesFillColorPropertyId"
+	case UIA_StylesFillPatternStylePropertyId:
+		return "UIA_StylesFillPatternStylePropertyId"
+	case UIA_StylesShapePropertyId:
+		return "UIA_StylesShapePropertyId"
+	case UIA_StylesFillPatternColorPropertyId:
+		return "UIA_StylesFillPatternColorPropertyId"
+	case UIA_StylesExtendedPropertiesPropertyId:
+		return "UIA_StylesExtendedPropertiesPropertyId"
+	case UIA_IsStylesPatternAvailablePropertyId:
+		return "UIA_IsStylesPatternAvailablePropertyId"
+	case UIA_IsSpreadsheetPatternAvailablePropertyId:
+		return "UIA_IsSpreadsheetPatternAvailablePropertyId"
+	case UIA_SpreadsheetItemFormulaPropertyId:
+		return "UIA_SpreadsheetItemFormulaPropertyId"
+	case UIA_SpreadsheetItemAnnotationObjectsPropertyId:
+		return "UIA_SpreadsheetItemAnnotationObjectsPropertyId"
+	case UIA_SpreadsheetItemAnnotationTypesPropertyId:
+		return "UIA_SpreadsheetItemAnnotationTypesPropertyId"
+	case UIA_IsSpreadsheetItemPatternAvailablePropertyId:
+		return "UIA_IsSpreadsheetItemPatternAvailablePropertyId"
+	case UIA_Transform2CanZoomPropertyId:
+		return "UIA_Transform2CanZoomPropertyId"
+	case UIA_IsTransformPattern2AvailablePropertyId:
+		return "UIA_IsTransformPattern2AvailablePropertyId"
+	case UIA_LiveSettingPropertyId:
+		return "UIA_LiveSettingPropertyId"
+	case UIA_IsTextChildPatternAvailablePropertyId:
+		return "UIA_IsTextChildPatternAvailablePropertyId"
+	case UIA_IsDragPatternAvailablePropertyId:
+		return "UIA_IsDragPatternAvailablePropertyId"
+	case UIA_DragIsGrabbedPropertyId:
+		return "UIA_DragIsGrabbedPropertyId"
+	case UIA_DragDropEffectPropertyId:
+		return "UIA_DragDropEffectPropertyId"
+	case UIA_DragDropEffectsPropertyId:
+		return "UIA_DragDropEffectsPropertyId"
+	case UIA_IsDropTargetPatternAvailablePropertyId:
+		return "UIA_IsDropTargetPatternAvailablePropertyId"
+	case UIA_DropTargetDropTargetEffectPropertyId:
+		return "UIA_DropTargetDropTargetEffectPropertyId"
+	case UIA_DropTargetDropTargetEffectsPropertyId:
+		return "UIA_DropTargetDropTargetEffectsPropertyId"
+	case UIA_DragGrabbedItemsPropertyId:
+		return "UIA_DragGrabbedItemsPropertyId"
+	case UIA_Transform2ZoomLevelPropertyId:
+		return "UIA_Transform2ZoomLevelPropertyId"
+	case UIA_Transform2ZoomMinimumPropertyId:
+		return "UIA_Transform2ZoomMinimumPropertyId"
+	case UIA_Transform2ZoomMaximumPropertyId:
+		return "UIA_Transform2ZoomMaximumPropertyId"
+	case UIA_FlowsFromPropertyId:
+		return "UIA_FlowsFromPropertyId"
+	case UIA_IsTextEditPatternAvailablePropertyId:
+		return "UIA_IsTextEditPatternAvailablePropertyId"
+	case UIA_IsPeripheralPropertyId:
+		return "UIA_IsPeripheralPropertyId"
+	case UIA_IsCustomNavigationPatternAvailablePropertyId:
+		return "UIA_IsCustomNavigationPatternAvailablePropertyId"
+	case UIA_PositionInSetPropertyId:
+		return "UIA_PositionInSetPropertyId"
+	case UIA_SizeOfSetPropertyId:
+		return "UIA_SizeOfSetPropertyId"
+	case UIA_LevelPropertyId:
+		return "UIA_LevelPropertyId"
+	case UIA_AnnotationTypesPropertyId:
+		return "UIA_AnnotationTypesPropertyId"
+	case UIA_AnnotationObjectsPropertyId:
+		return "UIA_AnnotationObjectsPropertyId"
+	case UIA_LandmarkTypePropertyId:
+		return "UIA_LandmarkTypePropertyId"
+	case UIA_LocalizedLandmarkTypePropertyId:
+		return "UIA_LocalizedLandmarkTypePropertyId"
+	case UIA_FullDescriptionPropertyId:
+		return "UIA_FullDescriptionPropertyId"
+	case UIA_FillColorPropertyId:
+		return "UIA_FillColorPropertyId"
+	case UIA_OutlineColorPropertyId:
+		return "UIA_OutlineColorPropertyId"
+	case UIA_FillTypePropertyId:
+		return "UIA_FillTypePropertyId"
+	case UIA_VisualEffectsPropertyId:
+		return "UIA_VisualEffectsPropertyId"
+	case UIA_OutlineThicknessPropertyId:
+		return "UIA_OutlineThicknessPropertyId"
+	case UIA_CenterPointPropertyId:
+		return "UIA_CenterPointPropertyId"
+	case UIA_RotationPropertyId:
+		return "UIA_RotationPropertyId"
+	case UIA_SizePropertyId:
+		return "UIA_SizePropertyId"
+	case UIA_IsSelectionPattern2AvailablePropertyId:
+		return "UIA_IsSelectionPattern2AvailablePropertyId"
+	case UIA_Selection2FirstSelectedItemPropertyId:
+		return "UIA_Selection2FirstSelectedItemPropertyId"
+	case UIA_Selection2LastSelectedItemPropertyId:
+		return "UIA_Selection2LastSelectedItemPropertyId"
+	case UIA_Selection2CurrentSelectedItemPropertyId:
+		return "UIA_Selection2CurrentSelectedItemPropertyId"
+	case UIA_Selection2ItemCountPropertyId:
+		return "UIA_Selection2ItemCountPropertyId"
+	case UIA_HeadingLevelPropertyId:
+		return "UIA_HeadingLevelPropertyId"
+	case UIA_IsDialogPropertyId:
+		return "UIA_IsDialogPropertyId"
+	default:
+		return fmt.Sprintf("UIA_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 type UIA_STYLE_ID int32
 
 const (
@@ -975,6 +2813,49 @@ const (
 	StyleId_BulletedList UIA_STYLE_ID = 70015
 	StyleId_NumberedList UIA_STYLE_ID = 70016
 )
+
+// String returns the UIA_STYLE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIA_STYLE_ID) String() string {
+	switch e {
+	case StyleId_Custom:
+		return "StyleId_Custom"
+	case StyleId_Heading1:
+		return "StyleId_Heading1"
+	case StyleId_Heading2:
+		return "StyleId_Heading2"
+	case StyleId_Heading3:
+		return "StyleId_Heading3"
+	case StyleId_Heading4:
+		return "StyleId_Heading4"
+	case StyleId_Heading5:
+		return "StyleId_Heading5"
+	case StyleId_Heading6:
+		return "StyleId_Heading6"
+	case StyleId_Heading7:
+		return "StyleId_Heading7"
+	case StyleId_Heading8:
+		return "StyleId_Heading8"
+	case StyleId_Heading9:
+		return "StyleId_Heading9"
+	case StyleId_Title:
+		return "StyleId_Title"
+	case StyleId_Subtitle:
+		return "StyleId_Subtitle"
+	case StyleId_Normal:
+		return "StyleId_Normal"
+	case StyleId_Emphasis:
+		return "StyleId_Emphasis"
+	case StyleId_Quote:
+		return "StyleId_Quote"
+	case StyleId_BulletedList:
+		return "StyleId_BulletedList"
+	case StyleId_NumberedList:
+		return "StyleId_NumberedList"
+	default:
+		return fmt.Sprintf("UIA_STYLE_ID(%d)", int32(e))
+	}
+}
 
 type UIA_TEXTATTRIBUTE_ID int32
 
@@ -1025,7 +2906,105 @@ const (
 	UIA_SayAsInterpretAsAttributeId        UIA_TEXTATTRIBUTE_ID = 40043
 )
 
+// String returns the UIA_TEXTATTRIBUTE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIA_TEXTATTRIBUTE_ID) String() string {
+	switch e {
+	case UIA_AnimationStyleAttributeId:
+		return "UIA_AnimationStyleAttributeId"
+	case UIA_BackgroundColorAttributeId:
+		return "UIA_BackgroundColorAttributeId"
+	case UIA_BulletStyleAttributeId:
+		return "UIA_BulletStyleAttributeId"
+	case UIA_CapStyleAttributeId:
+		return "UIA_CapStyleAttributeId"
+	case UIA_CultureAttributeId:
+		return "UIA_CultureAttributeId"
+	case UIA_FontNameAttributeId:
+		return "UIA_FontNameAttributeId"
+	case UIA_FontSizeAttributeId:
+		return "UIA_FontSizeAttributeId"
+	case UIA_FontWeightAttributeId:
+		return "UIA_FontWeightAttributeId"
+	case UIA_ForegroundColorAttributeId:
+		return "UIA_ForegroundColorAttributeId"
+	case UIA_HorizontalTextAlignmentAttributeId:
+		return "UIA_HorizontalTextAlignmentAttributeId"
+	case UIA_IndentationFirstLineAttributeId:
+		return "UIA_IndentationFirstLineAttributeId"
+	case UIA_IndentationLeadingAttributeId:
+		return "UIA_IndentationLeadingAttributeId"
+	case UIA_IndentationTrailingAttributeId:
+		return "UIA_IndentationTrailingAttributeId"
+	case UIA_IsHiddenAttributeId:
+		return "UIA_IsHiddenAttributeId"
+	case UIA_IsItalicAttributeId:
+		return "UIA_IsItalicAttributeId"
+	case UIA_IsReadOnlyAttributeId:
+		return "UIA_IsReadOnlyAttributeId"
+	case UIA_IsSubscriptAttributeId:
+		return "UIA_IsSubscriptAttributeId"
+	case UIA_IsSuperscriptAttributeId:
+		return "UIA_IsSuperscriptAttributeId"
+	case UIA_MarginBottomAttributeId:
+		return "UIA_MarginBottomAttributeId"
+	case UIA_MarginLeadingAttributeId:
+		return "UIA_MarginLeadingAttributeId"
+	case UIA_MarginTopAttributeId:
+		return "UIA_MarginTopAttributeId"
+	case UIA_MarginTrailingAttributeId:
+		return "UIA_MarginTrailingAttributeId"
+	case UIA_OutlineStylesAttributeId:
+		return "UIA_OutlineStylesAttributeId"
+	case UIA_OverlineColorAttributeId:
+		return "UIA_OverlineColorAttributeId"
+	case UIA_OverlineStyleAttributeId:
+		return "UIA_OverlineStyleAttributeId"
+	case UIA_StrikethroughColorAttributeId:
+		return "UIA_StrikethroughColorAttributeId"
+	case UIA_StrikethroughStyleAttributeId:
+		return "UIA_StrikethroughStyleAttributeId"
+	case UIA_TabsAttributeId:
+		return "UIA_TabsAttributeId"
+	case UIA_TextFlowDirectionsAttributeId:
+		return "UIA_TextFlowDirectionsAttributeId"
+	case UIA_UnderlineColorAttributeId:
+		return "UIA_UnderlineColorAttributeId"
+	case UIA_UnderlineStyleAttributeId:
+		return "UIA_UnderlineStyleAttributeId"
+	case UIA_AnnotationTypesAttributeId:
+		return "UIA_AnnotationTypesAttributeId"
+	case UIA_AnnotationObjectsAttributeId:
+		return "UIA_AnnotationObjectsAttributeId"
+	case UIA_StyleNameAttributeId:
+		return "UIA_StyleNameAttributeId"
+	case UIA_StyleIdAttributeId:
+		return "UIA_StyleIdAttributeId"
+	case UIA_LinkAttributeId:
+		return "UIA_LinkAttributeId"
+	case UIA_IsActiveAttributeId:
+		return "UIA_IsActiveAttributeId"
+	case UIA_SelectionActiveEndAttributeId:
+		return "UIA_SelectionActiveEndAttributeId"
+	case UIA_CaretPositionAttributeId:
+		return "UIA_CaretPositionAttributeId"
+	case UIA_CaretBidiModeAttributeId:
+		return "UIA_CaretBidiModeAttributeId"
+	case UIA_LineSpacingAttributeId:
+		return "UIA_LineSpacingAttributeId"
+	case UIA_BeforeParagraphSpacingAttributeId:
+		return "UIA_BeforeParagraphSpacingAttributeId"
+	case UIA_AfterParagraphSpacingAttributeId:
+		return "UIA_AfterParagraphSpacingAttributeId"
+	case UIA_SayAsInterpretAsAttributeId:
+		return "UIA_SayAsInterpretAsAttributeId"
+	default:
+		return fmt.Sprintf("UIA_TEXTATTRIBUTE_ID(%d)", int32(e))
+	}
+}
+
 // UIAutomationType: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-uiautomationtype
+// Bitmask — values may be combined with |.
 type UIAutomationType int32
 
 const (
@@ -1061,6 +3040,106 @@ const (
 	UIAutomationType_OutElementArray UIAutomationType = 196615
 )
 
+// String returns the UIAutomationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIAutomationType) String() string {
+	var parts []string
+	if e&UIAutomationType_Int != 0 {
+		parts = append(parts, "UIAutomationType_Int")
+	}
+	if e&UIAutomationType_Bool != 0 {
+		parts = append(parts, "UIAutomationType_Bool")
+	}
+	if e&UIAutomationType_String != 0 {
+		parts = append(parts, "UIAutomationType_String")
+	}
+	if e&UIAutomationType_Double != 0 {
+		parts = append(parts, "UIAutomationType_Double")
+	}
+	if e&UIAutomationType_Point != 0 {
+		parts = append(parts, "UIAutomationType_Point")
+	}
+	if e&UIAutomationType_Rect != 0 {
+		parts = append(parts, "UIAutomationType_Rect")
+	}
+	if e&UIAutomationType_Element != 0 {
+		parts = append(parts, "UIAutomationType_Element")
+	}
+	if e&UIAutomationType_Array != 0 {
+		parts = append(parts, "UIAutomationType_Array")
+	}
+	if e&UIAutomationType_Out != 0 {
+		parts = append(parts, "UIAutomationType_Out")
+	}
+	if e&UIAutomationType_IntArray != 0 {
+		parts = append(parts, "UIAutomationType_IntArray")
+	}
+	if e&UIAutomationType_BoolArray != 0 {
+		parts = append(parts, "UIAutomationType_BoolArray")
+	}
+	if e&UIAutomationType_StringArray != 0 {
+		parts = append(parts, "UIAutomationType_StringArray")
+	}
+	if e&UIAutomationType_DoubleArray != 0 {
+		parts = append(parts, "UIAutomationType_DoubleArray")
+	}
+	if e&UIAutomationType_PointArray != 0 {
+		parts = append(parts, "UIAutomationType_PointArray")
+	}
+	if e&UIAutomationType_RectArray != 0 {
+		parts = append(parts, "UIAutomationType_RectArray")
+	}
+	if e&UIAutomationType_ElementArray != 0 {
+		parts = append(parts, "UIAutomationType_ElementArray")
+	}
+	if e&UIAutomationType_OutInt != 0 {
+		parts = append(parts, "UIAutomationType_OutInt")
+	}
+	if e&UIAutomationType_OutBool != 0 {
+		parts = append(parts, "UIAutomationType_OutBool")
+	}
+	if e&UIAutomationType_OutString != 0 {
+		parts = append(parts, "UIAutomationType_OutString")
+	}
+	if e&UIAutomationType_OutDouble != 0 {
+		parts = append(parts, "UIAutomationType_OutDouble")
+	}
+	if e&UIAutomationType_OutPoint != 0 {
+		parts = append(parts, "UIAutomationType_OutPoint")
+	}
+	if e&UIAutomationType_OutRect != 0 {
+		parts = append(parts, "UIAutomationType_OutRect")
+	}
+	if e&UIAutomationType_OutElement != 0 {
+		parts = append(parts, "UIAutomationType_OutElement")
+	}
+	if e&UIAutomationType_OutIntArray != 0 {
+		parts = append(parts, "UIAutomationType_OutIntArray")
+	}
+	if e&UIAutomationType_OutBoolArray != 0 {
+		parts = append(parts, "UIAutomationType_OutBoolArray")
+	}
+	if e&UIAutomationType_OutStringArray != 0 {
+		parts = append(parts, "UIAutomationType_OutStringArray")
+	}
+	if e&UIAutomationType_OutDoubleArray != 0 {
+		parts = append(parts, "UIAutomationType_OutDoubleArray")
+	}
+	if e&UIAutomationType_OutPointArray != 0 {
+		parts = append(parts, "UIAutomationType_OutPointArray")
+	}
+	if e&UIAutomationType_OutRectArray != 0 {
+		parts = append(parts, "UIAutomationType_OutRectArray")
+	}
+	if e&UIAutomationType_OutElementArray != 0 {
+		parts = append(parts, "UIAutomationType_OutElementArray")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // VisualEffects: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-visualeffects
 type VisualEffects int32
 
@@ -1073,6 +3152,27 @@ const (
 	VisualEffects_Bevel      VisualEffects = 16
 )
 
+// String returns the VisualEffects constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VisualEffects) String() string {
+	switch e {
+	case VisualEffects_None:
+		return "VisualEffects_None"
+	case VisualEffects_Shadow:
+		return "VisualEffects_Shadow"
+	case VisualEffects_Reflection:
+		return "VisualEffects_Reflection"
+	case VisualEffects_Glow:
+		return "VisualEffects_Glow"
+	case VisualEffects_SoftEdges:
+		return "VisualEffects_SoftEdges"
+	case VisualEffects_Bevel:
+		return "VisualEffects_Bevel"
+	default:
+		return fmt.Sprintf("VisualEffects(%d)", int32(e))
+	}
+}
+
 // WindowInteractionState: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-windowinteractionstate
 type WindowInteractionState int32
 
@@ -1084,6 +3184,25 @@ const (
 	WindowInteractionState_NotResponding           WindowInteractionState = 4
 )
 
+// String returns the WindowInteractionState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WindowInteractionState) String() string {
+	switch e {
+	case WindowInteractionState_Running:
+		return "WindowInteractionState_Running"
+	case WindowInteractionState_Closing:
+		return "WindowInteractionState_Closing"
+	case WindowInteractionState_ReadyForUserInteraction:
+		return "WindowInteractionState_ReadyForUserInteraction"
+	case WindowInteractionState_BlockedByModalWindow:
+		return "WindowInteractionState_BlockedByModalWindow"
+	case WindowInteractionState_NotResponding:
+		return "WindowInteractionState_NotResponding"
+	default:
+		return fmt.Sprintf("WindowInteractionState(%d)", int32(e))
+	}
+}
+
 // WindowVisualState: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-windowvisualstate
 type WindowVisualState int32
 
@@ -1092,6 +3211,21 @@ const (
 	WindowVisualState_Maximized WindowVisualState = 1
 	WindowVisualState_Minimized WindowVisualState = 2
 )
+
+// String returns the WindowVisualState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WindowVisualState) String() string {
+	switch e {
+	case WindowVisualState_Normal:
+		return "WindowVisualState_Normal"
+	case WindowVisualState_Maximized:
+		return "WindowVisualState_Maximized"
+	case WindowVisualState_Minimized:
+		return "WindowVisualState_Minimized"
+	default:
+		return fmt.Sprintf("WindowVisualState(%d)", int32(e))
+	}
+}
 
 // ZoomUnit: https://learn.microsoft.com/windows/win32/api/uiautomationcore/ne-uiautomationcore-zoomunit
 type ZoomUnit int32
@@ -1103,3 +3237,22 @@ const (
 	ZoomUnit_LargeIncrement ZoomUnit = 3
 	ZoomUnit_SmallIncrement ZoomUnit = 4
 )
+
+// String returns the ZoomUnit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ZoomUnit) String() string {
+	switch e {
+	case ZoomUnit_NoAmount:
+		return "ZoomUnit_NoAmount"
+	case ZoomUnit_LargeDecrement:
+		return "ZoomUnit_LargeDecrement"
+	case ZoomUnit_SmallDecrement:
+		return "ZoomUnit_SmallDecrement"
+	case ZoomUnit_LargeIncrement:
+		return "ZoomUnit_LargeIncrement"
+	case ZoomUnit_SmallIncrement:
+		return "ZoomUnit_SmallIncrement"
+	default:
+		return fmt.Sprintf("ZoomUnit(%d)", int32(e))
+	}
+}

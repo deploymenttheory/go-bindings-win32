@@ -4,14 +4,46 @@
 
 package operationrecorder
 
+import (
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type OPERATION_END_PARAMETERS_FLAGS uint32
 
 const (
 	OPERATION_END_DISCARD OPERATION_END_PARAMETERS_FLAGS = 1
 )
 
+// String returns the OPERATION_END_PARAMETERS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPERATION_END_PARAMETERS_FLAGS) String() string {
+	var parts []string
+	if e&OPERATION_END_DISCARD != 0 {
+		parts = append(parts, "OPERATION_END_DISCARD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type OPERATION_START_FLAGS uint32
 
 const (
 	OPERATION_START_TRACE_CURRENT_THREAD OPERATION_START_FLAGS = 1
 )
+
+// String returns the OPERATION_START_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPERATION_START_FLAGS) String() string {
+	var parts []string
+	if e&OPERATION_START_TRACE_CURRENT_THREAD != 0 {
+		parts = append(parts, "OPERATION_START_TRACE_CURRENT_THREAD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

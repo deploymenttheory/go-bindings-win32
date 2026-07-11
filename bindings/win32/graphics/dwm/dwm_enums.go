@@ -4,6 +4,11 @@
 
 package dwm
 
+import (
+	"fmt"
+	"strings"
+)
+
 // DWMFLIP3DWINDOWPOLICY: https://learn.microsoft.com/windows/win32/api/dwmapi/ne-dwmapi-dwmflip3dwindowpolicy
 type DWMFLIP3DWINDOWPOLICY int32
 
@@ -13,6 +18,23 @@ const (
 	DWMFLIP3D_EXCLUDEABOVE DWMFLIP3DWINDOWPOLICY = 2
 	DWMFLIP3D_LAST         DWMFLIP3DWINDOWPOLICY = 3
 )
+
+// String returns the DWMFLIP3DWINDOWPOLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DWMFLIP3DWINDOWPOLICY) String() string {
+	switch e {
+	case DWMFLIP3D_DEFAULT:
+		return "DWMFLIP3D_DEFAULT"
+	case DWMFLIP3D_EXCLUDEBELOW:
+		return "DWMFLIP3D_EXCLUDEBELOW"
+	case DWMFLIP3D_EXCLUDEABOVE:
+		return "DWMFLIP3D_EXCLUDEABOVE"
+	case DWMFLIP3D_LAST:
+		return "DWMFLIP3D_LAST"
+	default:
+		return fmt.Sprintf("DWMFLIP3DWINDOWPOLICY(%d)", int32(e))
+	}
+}
 
 // DWMNCRENDERINGPOLICY: https://learn.microsoft.com/windows/win32/api/dwmapi/ne-dwmapi-dwmncrenderingpolicy
 type DWMNCRENDERINGPOLICY int32
@@ -24,6 +46,23 @@ const (
 	DWMNCRP_LAST           DWMNCRENDERINGPOLICY = 3
 )
 
+// String returns the DWMNCRENDERINGPOLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DWMNCRENDERINGPOLICY) String() string {
+	switch e {
+	case DWMNCRP_USEWINDOWSTYLE:
+		return "DWMNCRP_USEWINDOWSTYLE"
+	case DWMNCRP_DISABLED:
+		return "DWMNCRP_DISABLED"
+	case DWMNCRP_ENABLED:
+		return "DWMNCRP_ENABLED"
+	case DWMNCRP_LAST:
+		return "DWMNCRP_LAST"
+	default:
+		return fmt.Sprintf("DWMNCRENDERINGPOLICY(%d)", int32(e))
+	}
+}
+
 // DWMTRANSITION_OWNEDWINDOW_TARGET: https://learn.microsoft.com/windows/win32/api/dwmapi/ne-dwmapi-dwmtransition_ownedwindow_target
 type DWMTRANSITION_OWNEDWINDOW_TARGET int32
 
@@ -31,6 +70,19 @@ const (
 	DWMTRANSITION_OWNEDWINDOW_NULL       DWMTRANSITION_OWNEDWINDOW_TARGET = -1
 	DWMTRANSITION_OWNEDWINDOW_REPOSITION DWMTRANSITION_OWNEDWINDOW_TARGET = 0
 )
+
+// String returns the DWMTRANSITION_OWNEDWINDOW_TARGET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DWMTRANSITION_OWNEDWINDOW_TARGET) String() string {
+	switch e {
+	case DWMTRANSITION_OWNEDWINDOW_NULL:
+		return "DWMTRANSITION_OWNEDWINDOW_NULL"
+	case DWMTRANSITION_OWNEDWINDOW_REPOSITION:
+		return "DWMTRANSITION_OWNEDWINDOW_REPOSITION"
+	default:
+		return fmt.Sprintf("DWMTRANSITION_OWNEDWINDOW_TARGET(%d)", int32(e))
+	}
+}
 
 // DWMWINDOWATTRIBUTE: https://learn.microsoft.com/windows/win32/api/dwmapi/ne-dwmapi-dwmwindowattribute
 type DWMWINDOWATTRIBUTE int32
@@ -65,7 +117,71 @@ const (
 	DWMWA_LAST                           DWMWINDOWATTRIBUTE = 41
 )
 
+// String returns the DWMWINDOWATTRIBUTE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DWMWINDOWATTRIBUTE) String() string {
+	switch e {
+	case DWMWA_NCRENDERING_ENABLED:
+		return "DWMWA_NCRENDERING_ENABLED"
+	case DWMWA_NCRENDERING_POLICY:
+		return "DWMWA_NCRENDERING_POLICY"
+	case DWMWA_TRANSITIONS_FORCEDISABLED:
+		return "DWMWA_TRANSITIONS_FORCEDISABLED"
+	case DWMWA_ALLOW_NCPAINT:
+		return "DWMWA_ALLOW_NCPAINT"
+	case DWMWA_CAPTION_BUTTON_BOUNDS:
+		return "DWMWA_CAPTION_BUTTON_BOUNDS"
+	case DWMWA_NONCLIENT_RTL_LAYOUT:
+		return "DWMWA_NONCLIENT_RTL_LAYOUT"
+	case DWMWA_FORCE_ICONIC_REPRESENTATION:
+		return "DWMWA_FORCE_ICONIC_REPRESENTATION"
+	case DWMWA_FLIP3D_POLICY:
+		return "DWMWA_FLIP3D_POLICY"
+	case DWMWA_EXTENDED_FRAME_BOUNDS:
+		return "DWMWA_EXTENDED_FRAME_BOUNDS"
+	case DWMWA_HAS_ICONIC_BITMAP:
+		return "DWMWA_HAS_ICONIC_BITMAP"
+	case DWMWA_DISALLOW_PEEK:
+		return "DWMWA_DISALLOW_PEEK"
+	case DWMWA_EXCLUDED_FROM_PEEK:
+		return "DWMWA_EXCLUDED_FROM_PEEK"
+	case DWMWA_CLOAK:
+		return "DWMWA_CLOAK"
+	case DWMWA_CLOAKED:
+		return "DWMWA_CLOAKED"
+	case DWMWA_FREEZE_REPRESENTATION:
+		return "DWMWA_FREEZE_REPRESENTATION"
+	case DWMWA_PASSIVE_UPDATE_MODE:
+		return "DWMWA_PASSIVE_UPDATE_MODE"
+	case DWMWA_USE_HOSTBACKDROPBRUSH:
+		return "DWMWA_USE_HOSTBACKDROPBRUSH"
+	case DWMWA_USE_IMMERSIVE_DARK_MODE:
+		return "DWMWA_USE_IMMERSIVE_DARK_MODE"
+	case DWMWA_WINDOW_CORNER_PREFERENCE:
+		return "DWMWA_WINDOW_CORNER_PREFERENCE"
+	case DWMWA_BORDER_COLOR:
+		return "DWMWA_BORDER_COLOR"
+	case DWMWA_CAPTION_COLOR:
+		return "DWMWA_CAPTION_COLOR"
+	case DWMWA_TEXT_COLOR:
+		return "DWMWA_TEXT_COLOR"
+	case DWMWA_VISIBLE_FRAME_BORDER_THICKNESS:
+		return "DWMWA_VISIBLE_FRAME_BORDER_THICKNESS"
+	case DWMWA_SYSTEMBACKDROP_TYPE:
+		return "DWMWA_SYSTEMBACKDROP_TYPE"
+	case DWMWA_REDIRECTIONBITMAP_ALPHA:
+		return "DWMWA_REDIRECTIONBITMAP_ALPHA"
+	case DWMWA_BORDER_MARGINS:
+		return "DWMWA_BORDER_MARGINS"
+	case DWMWA_LAST:
+		return "DWMWA_LAST"
+	default:
+		return fmt.Sprintf("DWMWINDOWATTRIBUTE(%d)", int32(e))
+	}
+}
+
 // DWM_SHOWCONTACT: https://learn.microsoft.com/windows/win32/api/dwmapi/ne-dwmapi-dwm_showcontact
+// Bitmask — values may be combined with |.
 type DWM_SHOWCONTACT uint32
 
 const (
@@ -78,6 +194,34 @@ const (
 	DWMSC_ALL       DWM_SHOWCONTACT = 4294967295
 )
 
+// String returns the DWM_SHOWCONTACT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DWM_SHOWCONTACT) String() string {
+	var parts []string
+	if e&DWMSC_DOWN != 0 {
+		parts = append(parts, "DWMSC_DOWN")
+	}
+	if e&DWMSC_UP != 0 {
+		parts = append(parts, "DWMSC_UP")
+	}
+	if e&DWMSC_DRAG != 0 {
+		parts = append(parts, "DWMSC_DRAG")
+	}
+	if e&DWMSC_HOLD != 0 {
+		parts = append(parts, "DWMSC_HOLD")
+	}
+	if e&DWMSC_PENBARREL != 0 {
+		parts = append(parts, "DWMSC_PENBARREL")
+	}
+	if e&DWMSC_ALL != 0 {
+		parts = append(parts, "DWMSC_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DWM_SOURCE_FRAME_SAMPLING: https://learn.microsoft.com/windows/win32/api/dwmapi/ne-dwmapi-dwm_source_frame_sampling
 type DWM_SOURCE_FRAME_SAMPLING int32
 
@@ -86,6 +230,21 @@ const (
 	DWM_SOURCE_FRAME_SAMPLING_COVERAGE DWM_SOURCE_FRAME_SAMPLING = 1
 	DWM_SOURCE_FRAME_SAMPLING_LAST     DWM_SOURCE_FRAME_SAMPLING = 2
 )
+
+// String returns the DWM_SOURCE_FRAME_SAMPLING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DWM_SOURCE_FRAME_SAMPLING) String() string {
+	switch e {
+	case DWM_SOURCE_FRAME_SAMPLING_POINT:
+		return "DWM_SOURCE_FRAME_SAMPLING_POINT"
+	case DWM_SOURCE_FRAME_SAMPLING_COVERAGE:
+		return "DWM_SOURCE_FRAME_SAMPLING_COVERAGE"
+	case DWM_SOURCE_FRAME_SAMPLING_LAST:
+		return "DWM_SOURCE_FRAME_SAMPLING_LAST"
+	default:
+		return fmt.Sprintf("DWM_SOURCE_FRAME_SAMPLING(%d)", int32(e))
+	}
+}
 
 // DWM_SYSTEMBACKDROP_TYPE: https://learn.microsoft.com/windows/win32/api/dwmapi/ne-dwmapi-dwm_systembackdrop_type
 type DWM_SYSTEMBACKDROP_TYPE int32
@@ -98,7 +257,27 @@ const (
 	DWMSBT_TABBEDWINDOW    DWM_SYSTEMBACKDROP_TYPE = 4
 )
 
+// String returns the DWM_SYSTEMBACKDROP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DWM_SYSTEMBACKDROP_TYPE) String() string {
+	switch e {
+	case DWMSBT_AUTO:
+		return "DWMSBT_AUTO"
+	case DWMSBT_NONE:
+		return "DWMSBT_NONE"
+	case DWMSBT_MAINWINDOW:
+		return "DWMSBT_MAINWINDOW"
+	case DWMSBT_TRANSIENTWINDOW:
+		return "DWMSBT_TRANSIENTWINDOW"
+	case DWMSBT_TABBEDWINDOW:
+		return "DWMSBT_TABBEDWINDOW"
+	default:
+		return fmt.Sprintf("DWM_SYSTEMBACKDROP_TYPE(%d)", int32(e))
+	}
+}
+
 // DWM_TAB_WINDOW_REQUIREMENTS: https://learn.microsoft.com/windows/win32/api/dwmapi/ne-dwmapi-dwm_tab_window_requirements
+// Bitmask — values may be combined with |.
 type DWM_TAB_WINDOW_REQUIREMENTS int32
 
 const (
@@ -115,6 +294,46 @@ const (
 	DWMTWR_APP_COMPAT            DWM_TAB_WINDOW_REQUIREMENTS = 512
 )
 
+// String returns the DWM_TAB_WINDOW_REQUIREMENTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DWM_TAB_WINDOW_REQUIREMENTS) String() string {
+	var parts []string
+	if e&DWMTWR_IMPLEMENTED_BY_SYSTEM != 0 {
+		parts = append(parts, "DWMTWR_IMPLEMENTED_BY_SYSTEM")
+	}
+	if e&DWMTWR_WINDOW_RELATIONSHIP != 0 {
+		parts = append(parts, "DWMTWR_WINDOW_RELATIONSHIP")
+	}
+	if e&DWMTWR_WINDOW_STYLES != 0 {
+		parts = append(parts, "DWMTWR_WINDOW_STYLES")
+	}
+	if e&DWMTWR_WINDOW_REGION != 0 {
+		parts = append(parts, "DWMTWR_WINDOW_REGION")
+	}
+	if e&DWMTWR_WINDOW_DWM_ATTRIBUTES != 0 {
+		parts = append(parts, "DWMTWR_WINDOW_DWM_ATTRIBUTES")
+	}
+	if e&DWMTWR_WINDOW_MARGINS != 0 {
+		parts = append(parts, "DWMTWR_WINDOW_MARGINS")
+	}
+	if e&DWMTWR_TABBING_ENABLED != 0 {
+		parts = append(parts, "DWMTWR_TABBING_ENABLED")
+	}
+	if e&DWMTWR_USER_POLICY != 0 {
+		parts = append(parts, "DWMTWR_USER_POLICY")
+	}
+	if e&DWMTWR_GROUP_POLICY != 0 {
+		parts = append(parts, "DWMTWR_GROUP_POLICY")
+	}
+	if e&DWMTWR_APP_COMPAT != 0 {
+		parts = append(parts, "DWMTWR_APP_COMPAT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DWM_WINDOW_CORNER_PREFERENCE: https://learn.microsoft.com/windows/win32/api/dwmapi/ne-dwmapi-dwm_window_corner_preference
 type DWM_WINDOW_CORNER_PREFERENCE int32
 
@@ -124,6 +343,23 @@ const (
 	DWMWCP_ROUND      DWM_WINDOW_CORNER_PREFERENCE = 2
 	DWMWCP_ROUNDSMALL DWM_WINDOW_CORNER_PREFERENCE = 3
 )
+
+// String returns the DWM_WINDOW_CORNER_PREFERENCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DWM_WINDOW_CORNER_PREFERENCE) String() string {
+	switch e {
+	case DWMWCP_DEFAULT:
+		return "DWMWCP_DEFAULT"
+	case DWMWCP_DONOTROUND:
+		return "DWMWCP_DONOTROUND"
+	case DWMWCP_ROUND:
+		return "DWMWCP_ROUND"
+	case DWMWCP_ROUNDSMALL:
+		return "DWMWCP_ROUNDSMALL"
+	default:
+		return fmt.Sprintf("DWM_WINDOW_CORNER_PREFERENCE(%d)", int32(e))
+	}
+}
 
 // GESTURE_TYPE: https://learn.microsoft.com/windows/win32/api/dwmapi/ne-dwmapi-gesture_type
 type GESTURE_TYPE int32
@@ -141,3 +377,34 @@ const (
 	GT_TOUCH_PRESSANDHOLDABORT GESTURE_TYPE = 9
 	GT_TOUCH_PRESSANDTAP       GESTURE_TYPE = 10
 )
+
+// String returns the GESTURE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GESTURE_TYPE) String() string {
+	switch e {
+	case GT_PEN_TAP:
+		return "GT_PEN_TAP"
+	case GT_PEN_DOUBLETAP:
+		return "GT_PEN_DOUBLETAP"
+	case GT_PEN_RIGHTTAP:
+		return "GT_PEN_RIGHTTAP"
+	case GT_PEN_PRESSANDHOLD:
+		return "GT_PEN_PRESSANDHOLD"
+	case GT_PEN_PRESSANDHOLDABORT:
+		return "GT_PEN_PRESSANDHOLDABORT"
+	case GT_TOUCH_TAP:
+		return "GT_TOUCH_TAP"
+	case GT_TOUCH_DOUBLETAP:
+		return "GT_TOUCH_DOUBLETAP"
+	case GT_TOUCH_RIGHTTAP:
+		return "GT_TOUCH_RIGHTTAP"
+	case GT_TOUCH_PRESSANDHOLD:
+		return "GT_TOUCH_PRESSANDHOLD"
+	case GT_TOUCH_PRESSANDHOLDABORT:
+		return "GT_TOUCH_PRESSANDHOLDABORT"
+	case GT_TOUCH_PRESSANDTAP:
+		return "GT_TOUCH_PRESSANDTAP"
+	default:
+		return fmt.Sprintf("GESTURE_TYPE(%d)", int32(e))
+	}
+}

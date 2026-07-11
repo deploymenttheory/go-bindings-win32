@@ -4,6 +4,11 @@
 
 package media
 
+import (
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type TIMECODE_SAMPLE_FLAGS uint32
 
 const (
@@ -11,3 +16,22 @@ const (
 	ED_DEVCAP_ATN_READ      TIMECODE_SAMPLE_FLAGS = 5047
 	ED_DEVCAP_RTC_READ      TIMECODE_SAMPLE_FLAGS = 5050
 )
+
+// String returns the TIMECODE_SAMPLE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TIMECODE_SAMPLE_FLAGS) String() string {
+	var parts []string
+	if e&ED_DEVCAP_TIMECODE_READ != 0 {
+		parts = append(parts, "ED_DEVCAP_TIMECODE_READ")
+	}
+	if e&ED_DEVCAP_ATN_READ != 0 {
+		parts = append(parts, "ED_DEVCAP_ATN_READ")
+	}
+	if e&ED_DEVCAP_RTC_READ != 0 {
+		parts = append(parts, "ED_DEVCAP_RTC_READ")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

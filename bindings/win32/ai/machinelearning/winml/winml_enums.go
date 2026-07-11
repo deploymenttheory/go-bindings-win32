@@ -4,6 +4,11 @@
 
 package winml
 
+import (
+	"fmt"
+	"strings"
+)
+
 type MLOperatorAttributeType uint32
 
 const (
@@ -16,6 +21,29 @@ const (
 	StringArray MLOperatorAttributeType = 9
 )
 
+// String returns the MLOperatorAttributeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLOperatorAttributeType) String() string {
+	switch e {
+	case Undefined:
+		return "Undefined"
+	case Float:
+		return "Float"
+	case Int:
+		return "Int"
+	case String:
+		return "String"
+	case FloatArray:
+		return "FloatArray"
+	case IntArray:
+		return "IntArray"
+	case StringArray:
+		return "StringArray"
+	default:
+		return fmt.Sprintf("MLOperatorAttributeType(%d)", uint32(e))
+	}
+}
+
 type MLOperatorEdgeType uint32
 
 const (
@@ -24,6 +52,21 @@ const (
 	Primitive      MLOperatorEdgeType = 3
 )
 
+// String returns the MLOperatorEdgeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLOperatorEdgeType) String() string {
+	switch e {
+	case Tensor:
+		return "Tensor"
+	case SequenceTensor:
+		return "SequenceTensor"
+	case Primitive:
+		return "Primitive"
+	default:
+		return fmt.Sprintf("MLOperatorEdgeType(%d)", uint32(e))
+	}
+}
+
 type MLOperatorExecutionType uint32
 
 const (
@@ -31,6 +74,20 @@ const (
 	D3D12 MLOperatorExecutionType = 2
 )
 
+// String returns the MLOperatorExecutionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLOperatorExecutionType) String() string {
+	switch e {
+	case Cpu:
+		return "Cpu"
+	case D3D12:
+		return "D3D12"
+	default:
+		return fmt.Sprintf("MLOperatorExecutionType(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MLOperatorKernelOptions uint32
 
 const (
@@ -38,6 +95,20 @@ const (
 	AllowDynamicInputShapes MLOperatorKernelOptions = 1
 )
 
+// String returns the MLOperatorKernelOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLOperatorKernelOptions) String() string {
+	var parts []string
+	if e&AllowDynamicInputShapes != 0 {
+		parts = append(parts, "AllowDynamicInputShapes")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type MLOperatorParameterOptions uint32
 
 const (
@@ -46,12 +117,41 @@ const (
 	Variadic MLOperatorParameterOptions = 2
 )
 
+// String returns the MLOperatorParameterOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLOperatorParameterOptions) String() string {
+	var parts []string
+	if e&Optional != 0 {
+		parts = append(parts, "Optional")
+	}
+	if e&Variadic != 0 {
+		parts = append(parts, "Variadic")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type MLOperatorSchemaEdgeTypeFormat int32
 
 const (
 	EdgeDescription MLOperatorSchemaEdgeTypeFormat = 0
 	Label           MLOperatorSchemaEdgeTypeFormat = 1
 )
+
+// String returns the MLOperatorSchemaEdgeTypeFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLOperatorSchemaEdgeTypeFormat) String() string {
+	switch e {
+	case EdgeDescription:
+		return "EdgeDescription"
+	case Label:
+		return "Label"
+	default:
+		return fmt.Sprintf("MLOperatorSchemaEdgeTypeFormat(%d)", int32(e))
+	}
+}
 
 type MLOperatorTensorDataType uint32
 
@@ -71,6 +171,41 @@ const (
 	Complex128 MLOperatorTensorDataType = 15
 )
 
+// String returns the MLOperatorTensorDataType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLOperatorTensorDataType) String() string {
+	switch e {
+	case UInt8:
+		return "UInt8"
+	case Int8:
+		return "Int8"
+	case UInt16:
+		return "UInt16"
+	case Int16:
+		return "Int16"
+	case Int32:
+		return "Int32"
+	case Int64:
+		return "Int64"
+	case Bool:
+		return "Bool"
+	case Float16:
+		return "Float16"
+	case Double:
+		return "Double"
+	case UInt32:
+		return "UInt32"
+	case UInt64:
+		return "UInt64"
+	case Complex64:
+		return "Complex64"
+	case Complex128:
+		return "Complex128"
+	default:
+		return fmt.Sprintf("MLOperatorTensorDataType(%d)", uint32(e))
+	}
+}
+
 // WINML_BINDING_TYPE: https://learn.microsoft.com/windows/win32/api/winml/ne-winml-winml_binding_type
 type WINML_BINDING_TYPE int32
 
@@ -83,6 +218,27 @@ const (
 	WINML_BINDING_RESOURCE  WINML_BINDING_TYPE = 5
 )
 
+// String returns the WINML_BINDING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINML_BINDING_TYPE) String() string {
+	switch e {
+	case WINML_BINDING_UNDEFINED:
+		return "WINML_BINDING_UNDEFINED"
+	case WINML_BINDING_TENSOR:
+		return "WINML_BINDING_TENSOR"
+	case WINML_BINDING_SEQUENCE:
+		return "WINML_BINDING_SEQUENCE"
+	case WINML_BINDING_MAP:
+		return "WINML_BINDING_MAP"
+	case WINML_BINDING_IMAGE:
+		return "WINML_BINDING_IMAGE"
+	case WINML_BINDING_RESOURCE:
+		return "WINML_BINDING_RESOURCE"
+	default:
+		return fmt.Sprintf("WINML_BINDING_TYPE(%d)", int32(e))
+	}
+}
+
 // WINML_FEATURE_TYPE: https://learn.microsoft.com/windows/win32/api/winml/ne-winml-winml_feature_type
 type WINML_FEATURE_TYPE int32
 
@@ -94,12 +250,42 @@ const (
 	WINML_FEATURE_IMAGE     WINML_FEATURE_TYPE = 4
 )
 
+// String returns the WINML_FEATURE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINML_FEATURE_TYPE) String() string {
+	switch e {
+	case WINML_FEATURE_UNDEFINED:
+		return "WINML_FEATURE_UNDEFINED"
+	case WINML_FEATURE_TENSOR:
+		return "WINML_FEATURE_TENSOR"
+	case WINML_FEATURE_SEQUENCE:
+		return "WINML_FEATURE_SEQUENCE"
+	case WINML_FEATURE_MAP:
+		return "WINML_FEATURE_MAP"
+	case WINML_FEATURE_IMAGE:
+		return "WINML_FEATURE_IMAGE"
+	default:
+		return fmt.Sprintf("WINML_FEATURE_TYPE(%d)", int32(e))
+	}
+}
+
 // WINML_RUNTIME_TYPE: https://learn.microsoft.com/windows/win32/api/winml/ne-winml-winml_runtime_type
 type WINML_RUNTIME_TYPE int32
 
 const (
 	WINML_RUNTIME_CNTK WINML_RUNTIME_TYPE = 0
 )
+
+// String returns the WINML_RUNTIME_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINML_RUNTIME_TYPE) String() string {
+	switch e {
+	case WINML_RUNTIME_CNTK:
+		return "WINML_RUNTIME_CNTK"
+	default:
+		return fmt.Sprintf("WINML_RUNTIME_TYPE(%d)", int32(e))
+	}
+}
 
 // WINML_TENSOR_DATA_TYPE: https://learn.microsoft.com/windows/win32/api/winml/ne-winml-winml_tensor_data_type
 type WINML_TENSOR_DATA_TYPE int32
@@ -122,3 +308,44 @@ const (
 	WINML_TENSOR_COMPLEX64  WINML_TENSOR_DATA_TYPE = 14
 	WINML_TENSOR_COMPLEX128 WINML_TENSOR_DATA_TYPE = 15
 )
+
+// String returns the WINML_TENSOR_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINML_TENSOR_DATA_TYPE) String() string {
+	switch e {
+	case WINML_TENSOR_UNDEFINED:
+		return "WINML_TENSOR_UNDEFINED"
+	case WINML_TENSOR_FLOAT:
+		return "WINML_TENSOR_FLOAT"
+	case WINML_TENSOR_UINT8:
+		return "WINML_TENSOR_UINT8"
+	case WINML_TENSOR_INT8:
+		return "WINML_TENSOR_INT8"
+	case WINML_TENSOR_UINT16:
+		return "WINML_TENSOR_UINT16"
+	case WINML_TENSOR_INT16:
+		return "WINML_TENSOR_INT16"
+	case WINML_TENSOR_INT32:
+		return "WINML_TENSOR_INT32"
+	case WINML_TENSOR_INT64:
+		return "WINML_TENSOR_INT64"
+	case WINML_TENSOR_STRING:
+		return "WINML_TENSOR_STRING"
+	case WINML_TENSOR_BOOLEAN:
+		return "WINML_TENSOR_BOOLEAN"
+	case WINML_TENSOR_FLOAT16:
+		return "WINML_TENSOR_FLOAT16"
+	case WINML_TENSOR_DOUBLE:
+		return "WINML_TENSOR_DOUBLE"
+	case WINML_TENSOR_UINT32:
+		return "WINML_TENSOR_UINT32"
+	case WINML_TENSOR_UINT64:
+		return "WINML_TENSOR_UINT64"
+	case WINML_TENSOR_COMPLEX64:
+		return "WINML_TENSOR_COMPLEX64"
+	case WINML_TENSOR_COMPLEX128:
+		return "WINML_TENSOR_COMPLEX128"
+	default:
+		return fmt.Sprintf("WINML_TENSOR_DATA_TYPE(%d)", int32(e))
+	}
+}

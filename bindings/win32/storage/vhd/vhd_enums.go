@@ -4,13 +4,32 @@
 
 package vhd
 
+import (
+	"fmt"
+	"strings"
+)
+
 // APPLY_SNAPSHOT_VHDSET_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-apply_snapshot_vhdset_flag
+// Bitmask — values may be combined with |.
 type APPLY_SNAPSHOT_VHDSET_FLAG int32
 
 const (
 	APPLY_SNAPSHOT_VHDSET_FLAG_NONE      APPLY_SNAPSHOT_VHDSET_FLAG = 0
 	APPLY_SNAPSHOT_VHDSET_FLAG_WRITEABLE APPLY_SNAPSHOT_VHDSET_FLAG = 1
 )
+
+// String returns the APPLY_SNAPSHOT_VHDSET_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPLY_SNAPSHOT_VHDSET_FLAG) String() string {
+	var parts []string
+	if e&APPLY_SNAPSHOT_VHDSET_FLAG_WRITEABLE != 0 {
+		parts = append(parts, "APPLY_SNAPSHOT_VHDSET_FLAG_WRITEABLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // APPLY_SNAPSHOT_VHDSET_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-apply_snapshot_vhdset_version
 type APPLY_SNAPSHOT_VHDSET_VERSION int32
@@ -20,7 +39,21 @@ const (
 	APPLY_SNAPSHOT_VHDSET_VERSION_1           APPLY_SNAPSHOT_VHDSET_VERSION = 1
 )
 
+// String returns the APPLY_SNAPSHOT_VHDSET_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPLY_SNAPSHOT_VHDSET_VERSION) String() string {
+	switch e {
+	case APPLY_SNAPSHOT_VHDSET_VERSION_UNSPECIFIED:
+		return "APPLY_SNAPSHOT_VHDSET_VERSION_UNSPECIFIED"
+	case APPLY_SNAPSHOT_VHDSET_VERSION_1:
+		return "APPLY_SNAPSHOT_VHDSET_VERSION_1"
+	default:
+		return fmt.Sprintf("APPLY_SNAPSHOT_VHDSET_VERSION(%d)", int32(e))
+	}
+}
+
 // ATTACH_VIRTUAL_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-attach_virtual_disk_flag
+// Bitmask — values may be combined with |.
 type ATTACH_VIRTUAL_DISK_FLAG int32
 
 const (
@@ -38,6 +71,49 @@ const (
 	ATTACH_VIRTUAL_DISK_FLAG_AT_BOOT                          ATTACH_VIRTUAL_DISK_FLAG = 1024
 )
 
+// String returns the ATTACH_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ATTACH_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if e&ATTACH_VIRTUAL_DISK_FLAG_READ_ONLY != 0 {
+		parts = append(parts, "ATTACH_VIRTUAL_DISK_FLAG_READ_ONLY")
+	}
+	if e&ATTACH_VIRTUAL_DISK_FLAG_NO_DRIVE_LETTER != 0 {
+		parts = append(parts, "ATTACH_VIRTUAL_DISK_FLAG_NO_DRIVE_LETTER")
+	}
+	if e&ATTACH_VIRTUAL_DISK_FLAG_PERMANENT_LIFETIME != 0 {
+		parts = append(parts, "ATTACH_VIRTUAL_DISK_FLAG_PERMANENT_LIFETIME")
+	}
+	if e&ATTACH_VIRTUAL_DISK_FLAG_NO_LOCAL_HOST != 0 {
+		parts = append(parts, "ATTACH_VIRTUAL_DISK_FLAG_NO_LOCAL_HOST")
+	}
+	if e&ATTACH_VIRTUAL_DISK_FLAG_NO_SECURITY_DESCRIPTOR != 0 {
+		parts = append(parts, "ATTACH_VIRTUAL_DISK_FLAG_NO_SECURITY_DESCRIPTOR")
+	}
+	if e&ATTACH_VIRTUAL_DISK_FLAG_BYPASS_DEFAULT_ENCRYPTION_POLICY != 0 {
+		parts = append(parts, "ATTACH_VIRTUAL_DISK_FLAG_BYPASS_DEFAULT_ENCRYPTION_POLICY")
+	}
+	if e&ATTACH_VIRTUAL_DISK_FLAG_NON_PNP != 0 {
+		parts = append(parts, "ATTACH_VIRTUAL_DISK_FLAG_NON_PNP")
+	}
+	if e&ATTACH_VIRTUAL_DISK_FLAG_RESTRICTED_RANGE != 0 {
+		parts = append(parts, "ATTACH_VIRTUAL_DISK_FLAG_RESTRICTED_RANGE")
+	}
+	if e&ATTACH_VIRTUAL_DISK_FLAG_SINGLE_PARTITION != 0 {
+		parts = append(parts, "ATTACH_VIRTUAL_DISK_FLAG_SINGLE_PARTITION")
+	}
+	if e&ATTACH_VIRTUAL_DISK_FLAG_REGISTER_VOLUME != 0 {
+		parts = append(parts, "ATTACH_VIRTUAL_DISK_FLAG_REGISTER_VOLUME")
+	}
+	if e&ATTACH_VIRTUAL_DISK_FLAG_AT_BOOT != 0 {
+		parts = append(parts, "ATTACH_VIRTUAL_DISK_FLAG_AT_BOOT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // ATTACH_VIRTUAL_DISK_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-attach_virtual_disk_version
 type ATTACH_VIRTUAL_DISK_VERSION int32
 
@@ -47,7 +123,23 @@ const (
 	ATTACH_VIRTUAL_DISK_VERSION_2           ATTACH_VIRTUAL_DISK_VERSION = 2
 )
 
+// String returns the ATTACH_VIRTUAL_DISK_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ATTACH_VIRTUAL_DISK_VERSION) String() string {
+	switch e {
+	case ATTACH_VIRTUAL_DISK_VERSION_UNSPECIFIED:
+		return "ATTACH_VIRTUAL_DISK_VERSION_UNSPECIFIED"
+	case ATTACH_VIRTUAL_DISK_VERSION_1:
+		return "ATTACH_VIRTUAL_DISK_VERSION_1"
+	case ATTACH_VIRTUAL_DISK_VERSION_2:
+		return "ATTACH_VIRTUAL_DISK_VERSION_2"
+	default:
+		return fmt.Sprintf("ATTACH_VIRTUAL_DISK_VERSION(%d)", int32(e))
+	}
+}
+
 // COMPACT_VIRTUAL_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-compact_virtual_disk_flag
+// Bitmask — values may be combined with |.
 type COMPACT_VIRTUAL_DISK_FLAG int32
 
 const (
@@ -55,6 +147,22 @@ const (
 	COMPACT_VIRTUAL_DISK_FLAG_NO_ZERO_SCAN   COMPACT_VIRTUAL_DISK_FLAG = 1
 	COMPACT_VIRTUAL_DISK_FLAG_NO_BLOCK_MOVES COMPACT_VIRTUAL_DISK_FLAG = 2
 )
+
+// String returns the COMPACT_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPACT_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if e&COMPACT_VIRTUAL_DISK_FLAG_NO_ZERO_SCAN != 0 {
+		parts = append(parts, "COMPACT_VIRTUAL_DISK_FLAG_NO_ZERO_SCAN")
+	}
+	if e&COMPACT_VIRTUAL_DISK_FLAG_NO_BLOCK_MOVES != 0 {
+		parts = append(parts, "COMPACT_VIRTUAL_DISK_FLAG_NO_BLOCK_MOVES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // COMPACT_VIRTUAL_DISK_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-compact_virtual_disk_version
 type COMPACT_VIRTUAL_DISK_VERSION int32
@@ -64,7 +172,21 @@ const (
 	COMPACT_VIRTUAL_DISK_VERSION_1           COMPACT_VIRTUAL_DISK_VERSION = 1
 )
 
+// String returns the COMPACT_VIRTUAL_DISK_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPACT_VIRTUAL_DISK_VERSION) String() string {
+	switch e {
+	case COMPACT_VIRTUAL_DISK_VERSION_UNSPECIFIED:
+		return "COMPACT_VIRTUAL_DISK_VERSION_UNSPECIFIED"
+	case COMPACT_VIRTUAL_DISK_VERSION_1:
+		return "COMPACT_VIRTUAL_DISK_VERSION_1"
+	default:
+		return fmt.Sprintf("COMPACT_VIRTUAL_DISK_VERSION(%d)", int32(e))
+	}
+}
+
 // CREATE_VIRTUAL_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-create_virtual_disk_flag
+// Bitmask — values may be combined with |.
 type CREATE_VIRTUAL_DISK_FLAG int32
 
 const (
@@ -82,6 +204,49 @@ const (
 	CREATE_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS           CREATE_VIRTUAL_DISK_FLAG = 1024
 )
 
+// String returns the CREATE_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATE_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if e&CREATE_VIRTUAL_DISK_FLAG_FULL_PHYSICAL_ALLOCATION != 0 {
+		parts = append(parts, "CREATE_VIRTUAL_DISK_FLAG_FULL_PHYSICAL_ALLOCATION")
+	}
+	if e&CREATE_VIRTUAL_DISK_FLAG_PREVENT_WRITES_TO_SOURCE_DISK != 0 {
+		parts = append(parts, "CREATE_VIRTUAL_DISK_FLAG_PREVENT_WRITES_TO_SOURCE_DISK")
+	}
+	if e&CREATE_VIRTUAL_DISK_FLAG_DO_NOT_COPY_METADATA_FROM_PARENT != 0 {
+		parts = append(parts, "CREATE_VIRTUAL_DISK_FLAG_DO_NOT_COPY_METADATA_FROM_PARENT")
+	}
+	if e&CREATE_VIRTUAL_DISK_FLAG_CREATE_BACKING_STORAGE != 0 {
+		parts = append(parts, "CREATE_VIRTUAL_DISK_FLAG_CREATE_BACKING_STORAGE")
+	}
+	if e&CREATE_VIRTUAL_DISK_FLAG_USE_CHANGE_TRACKING_SOURCE_LIMIT != 0 {
+		parts = append(parts, "CREATE_VIRTUAL_DISK_FLAG_USE_CHANGE_TRACKING_SOURCE_LIMIT")
+	}
+	if e&CREATE_VIRTUAL_DISK_FLAG_PRESERVE_PARENT_CHANGE_TRACKING_STATE != 0 {
+		parts = append(parts, "CREATE_VIRTUAL_DISK_FLAG_PRESERVE_PARENT_CHANGE_TRACKING_STATE")
+	}
+	if e&CREATE_VIRTUAL_DISK_FLAG_VHD_SET_USE_ORIGINAL_BACKING_STORAGE != 0 {
+		parts = append(parts, "CREATE_VIRTUAL_DISK_FLAG_VHD_SET_USE_ORIGINAL_BACKING_STORAGE")
+	}
+	if e&CREATE_VIRTUAL_DISK_FLAG_SPARSE_FILE != 0 {
+		parts = append(parts, "CREATE_VIRTUAL_DISK_FLAG_SPARSE_FILE")
+	}
+	if e&CREATE_VIRTUAL_DISK_FLAG_PMEM_COMPATIBLE != 0 {
+		parts = append(parts, "CREATE_VIRTUAL_DISK_FLAG_PMEM_COMPATIBLE")
+	}
+	if e&CREATE_VIRTUAL_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES != 0 {
+		parts = append(parts, "CREATE_VIRTUAL_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES")
+	}
+	if e&CREATE_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS != 0 {
+		parts = append(parts, "CREATE_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CREATE_VIRTUAL_DISK_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-create_virtual_disk_version
 type CREATE_VIRTUAL_DISK_VERSION int32
 
@@ -93,13 +258,46 @@ const (
 	CREATE_VIRTUAL_DISK_VERSION_4           CREATE_VIRTUAL_DISK_VERSION = 4
 )
 
+// String returns the CREATE_VIRTUAL_DISK_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATE_VIRTUAL_DISK_VERSION) String() string {
+	switch e {
+	case CREATE_VIRTUAL_DISK_VERSION_UNSPECIFIED:
+		return "CREATE_VIRTUAL_DISK_VERSION_UNSPECIFIED"
+	case CREATE_VIRTUAL_DISK_VERSION_1:
+		return "CREATE_VIRTUAL_DISK_VERSION_1"
+	case CREATE_VIRTUAL_DISK_VERSION_2:
+		return "CREATE_VIRTUAL_DISK_VERSION_2"
+	case CREATE_VIRTUAL_DISK_VERSION_3:
+		return "CREATE_VIRTUAL_DISK_VERSION_3"
+	case CREATE_VIRTUAL_DISK_VERSION_4:
+		return "CREATE_VIRTUAL_DISK_VERSION_4"
+	default:
+		return fmt.Sprintf("CREATE_VIRTUAL_DISK_VERSION(%d)", int32(e))
+	}
+}
+
 // DELETE_SNAPSHOT_VHDSET_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-delete_snapshot_vhdset_flag
+// Bitmask — values may be combined with |.
 type DELETE_SNAPSHOT_VHDSET_FLAG int32
 
 const (
 	DELETE_SNAPSHOT_VHDSET_FLAG_NONE        DELETE_SNAPSHOT_VHDSET_FLAG = 0
 	DELETE_SNAPSHOT_VHDSET_FLAG_PERSIST_RCT DELETE_SNAPSHOT_VHDSET_FLAG = 1
 )
+
+// String returns the DELETE_SNAPSHOT_VHDSET_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DELETE_SNAPSHOT_VHDSET_FLAG) String() string {
+	var parts []string
+	if e&DELETE_SNAPSHOT_VHDSET_FLAG_PERSIST_RCT != 0 {
+		parts = append(parts, "DELETE_SNAPSHOT_VHDSET_FLAG_PERSIST_RCT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DELETE_SNAPSHOT_VHDSET_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-delete_snapshot_vhdset_version
 type DELETE_SNAPSHOT_VHDSET_VERSION int32
@@ -109,7 +307,21 @@ const (
 	DELETE_SNAPSHOT_VHDSET_VERSION_1           DELETE_SNAPSHOT_VHDSET_VERSION = 1
 )
 
+// String returns the DELETE_SNAPSHOT_VHDSET_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DELETE_SNAPSHOT_VHDSET_VERSION) String() string {
+	switch e {
+	case DELETE_SNAPSHOT_VHDSET_VERSION_UNSPECIFIED:
+		return "DELETE_SNAPSHOT_VHDSET_VERSION_UNSPECIFIED"
+	case DELETE_SNAPSHOT_VHDSET_VERSION_1:
+		return "DELETE_SNAPSHOT_VHDSET_VERSION_1"
+	default:
+		return fmt.Sprintf("DELETE_SNAPSHOT_VHDSET_VERSION(%d)", int32(e))
+	}
+}
+
 // DEPENDENT_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-dependent_disk_flag
+// Bitmask — values may be combined with |.
 type DEPENDENT_DISK_FLAG int32
 
 const (
@@ -130,20 +342,97 @@ const (
 	DEPENDENT_DISK_FLAG_SUPPORT_ENCRYPTED_FILES    DEPENDENT_DISK_FLAG = 8192
 )
 
+// String returns the DEPENDENT_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEPENDENT_DISK_FLAG) String() string {
+	var parts []string
+	if e&DEPENDENT_DISK_FLAG_MULT_BACKING_FILES != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_MULT_BACKING_FILES")
+	}
+	if e&DEPENDENT_DISK_FLAG_FULLY_ALLOCATED != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_FULLY_ALLOCATED")
+	}
+	if e&DEPENDENT_DISK_FLAG_READ_ONLY != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_READ_ONLY")
+	}
+	if e&DEPENDENT_DISK_FLAG_REMOTE != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_REMOTE")
+	}
+	if e&DEPENDENT_DISK_FLAG_SYSTEM_VOLUME != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_SYSTEM_VOLUME")
+	}
+	if e&DEPENDENT_DISK_FLAG_SYSTEM_VOLUME_PARENT != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_SYSTEM_VOLUME_PARENT")
+	}
+	if e&DEPENDENT_DISK_FLAG_REMOVABLE != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_REMOVABLE")
+	}
+	if e&DEPENDENT_DISK_FLAG_NO_DRIVE_LETTER != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_NO_DRIVE_LETTER")
+	}
+	if e&DEPENDENT_DISK_FLAG_PARENT != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_PARENT")
+	}
+	if e&DEPENDENT_DISK_FLAG_NO_HOST_DISK != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_NO_HOST_DISK")
+	}
+	if e&DEPENDENT_DISK_FLAG_PERMANENT_LIFETIME != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_PERMANENT_LIFETIME")
+	}
+	if e&DEPENDENT_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES")
+	}
+	if e&DEPENDENT_DISK_FLAG_ALWAYS_ALLOW_SPARSE != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_ALWAYS_ALLOW_SPARSE")
+	}
+	if e&DEPENDENT_DISK_FLAG_SUPPORT_ENCRYPTED_FILES != 0 {
+		parts = append(parts, "DEPENDENT_DISK_FLAG_SUPPORT_ENCRYPTED_FILES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DETACH_VIRTUAL_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-detach_virtual_disk_flag
+// Bitmask — values may be combined with |.
 type DETACH_VIRTUAL_DISK_FLAG int32
 
 const (
 	DETACH_VIRTUAL_DISK_FLAG_NONE DETACH_VIRTUAL_DISK_FLAG = 0
 )
 
+// String returns the DETACH_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DETACH_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // EXPAND_VIRTUAL_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-expand_virtual_disk_flag
+// Bitmask — values may be combined with |.
 type EXPAND_VIRTUAL_DISK_FLAG int32
 
 const (
 	EXPAND_VIRTUAL_DISK_FLAG_NONE          EXPAND_VIRTUAL_DISK_FLAG = 0
 	EXPAND_VIRTUAL_DISK_FLAG_NOTIFY_CHANGE EXPAND_VIRTUAL_DISK_FLAG = 1
 )
+
+// String returns the EXPAND_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPAND_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if e&EXPAND_VIRTUAL_DISK_FLAG_NOTIFY_CHANGE != 0 {
+		parts = append(parts, "EXPAND_VIRTUAL_DISK_FLAG_NOTIFY_CHANGE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // EXPAND_VIRTUAL_DISK_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-expand_virtual_disk_version
 type EXPAND_VIRTUAL_DISK_VERSION int32
@@ -153,12 +442,39 @@ const (
 	EXPAND_VIRTUAL_DISK_VERSION_1           EXPAND_VIRTUAL_DISK_VERSION = 1
 )
 
+// String returns the EXPAND_VIRTUAL_DISK_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPAND_VIRTUAL_DISK_VERSION) String() string {
+	switch e {
+	case EXPAND_VIRTUAL_DISK_VERSION_UNSPECIFIED:
+		return "EXPAND_VIRTUAL_DISK_VERSION_UNSPECIFIED"
+	case EXPAND_VIRTUAL_DISK_VERSION_1:
+		return "EXPAND_VIRTUAL_DISK_VERSION_1"
+	default:
+		return fmt.Sprintf("EXPAND_VIRTUAL_DISK_VERSION(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FORK_VIRTUAL_DISK_FLAG int32
 
 const (
 	FORK_VIRTUAL_DISK_FLAG_NONE          FORK_VIRTUAL_DISK_FLAG = 0
 	FORK_VIRTUAL_DISK_FLAG_EXISTING_FILE FORK_VIRTUAL_DISK_FLAG = 1
 )
+
+// String returns the FORK_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FORK_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if e&FORK_VIRTUAL_DISK_FLAG_EXISTING_FILE != 0 {
+		parts = append(parts, "FORK_VIRTUAL_DISK_FLAG_EXISTING_FILE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type FORK_VIRTUAL_DISK_VERSION int32
 
@@ -167,7 +483,21 @@ const (
 	FORK_VIRTUAL_DISK_VERSION_1           FORK_VIRTUAL_DISK_VERSION = 1
 )
 
+// String returns the FORK_VIRTUAL_DISK_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FORK_VIRTUAL_DISK_VERSION) String() string {
+	switch e {
+	case FORK_VIRTUAL_DISK_VERSION_UNSPECIFIED:
+		return "FORK_VIRTUAL_DISK_VERSION_UNSPECIFIED"
+	case FORK_VIRTUAL_DISK_VERSION_1:
+		return "FORK_VIRTUAL_DISK_VERSION_1"
+	default:
+		return fmt.Sprintf("FORK_VIRTUAL_DISK_VERSION(%d)", int32(e))
+	}
+}
+
 // GET_STORAGE_DEPENDENCY_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-get_storage_dependency_flag
+// Bitmask — values may be combined with |.
 type GET_STORAGE_DEPENDENCY_FLAG int32
 
 const (
@@ -175,6 +505,22 @@ const (
 	GET_STORAGE_DEPENDENCY_FLAG_HOST_VOLUMES GET_STORAGE_DEPENDENCY_FLAG = 1
 	GET_STORAGE_DEPENDENCY_FLAG_DISK_HANDLE  GET_STORAGE_DEPENDENCY_FLAG = 2
 )
+
+// String returns the GET_STORAGE_DEPENDENCY_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_STORAGE_DEPENDENCY_FLAG) String() string {
+	var parts []string
+	if e&GET_STORAGE_DEPENDENCY_FLAG_HOST_VOLUMES != 0 {
+		parts = append(parts, "GET_STORAGE_DEPENDENCY_FLAG_HOST_VOLUMES")
+	}
+	if e&GET_STORAGE_DEPENDENCY_FLAG_DISK_HANDLE != 0 {
+		parts = append(parts, "GET_STORAGE_DEPENDENCY_FLAG_DISK_HANDLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // GET_VIRTUAL_DISK_INFO_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-get_virtual_disk_info_version
 type GET_VIRTUAL_DISK_INFO_VERSION int32
@@ -198,12 +544,64 @@ const (
 	GET_VIRTUAL_DISK_INFO_CHANGE_TRACKING_STATE      GET_VIRTUAL_DISK_INFO_VERSION = 15
 )
 
+// String returns the GET_VIRTUAL_DISK_INFO_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_VIRTUAL_DISK_INFO_VERSION) String() string {
+	switch e {
+	case GET_VIRTUAL_DISK_INFO_UNSPECIFIED:
+		return "GET_VIRTUAL_DISK_INFO_UNSPECIFIED"
+	case GET_VIRTUAL_DISK_INFO_SIZE:
+		return "GET_VIRTUAL_DISK_INFO_SIZE"
+	case GET_VIRTUAL_DISK_INFO_IDENTIFIER:
+		return "GET_VIRTUAL_DISK_INFO_IDENTIFIER"
+	case GET_VIRTUAL_DISK_INFO_PARENT_LOCATION:
+		return "GET_VIRTUAL_DISK_INFO_PARENT_LOCATION"
+	case GET_VIRTUAL_DISK_INFO_PARENT_IDENTIFIER:
+		return "GET_VIRTUAL_DISK_INFO_PARENT_IDENTIFIER"
+	case GET_VIRTUAL_DISK_INFO_PARENT_TIMESTAMP:
+		return "GET_VIRTUAL_DISK_INFO_PARENT_TIMESTAMP"
+	case GET_VIRTUAL_DISK_INFO_VIRTUAL_STORAGE_TYPE:
+		return "GET_VIRTUAL_DISK_INFO_VIRTUAL_STORAGE_TYPE"
+	case GET_VIRTUAL_DISK_INFO_PROVIDER_SUBTYPE:
+		return "GET_VIRTUAL_DISK_INFO_PROVIDER_SUBTYPE"
+	case GET_VIRTUAL_DISK_INFO_IS_4K_ALIGNED:
+		return "GET_VIRTUAL_DISK_INFO_IS_4K_ALIGNED"
+	case GET_VIRTUAL_DISK_INFO_PHYSICAL_DISK:
+		return "GET_VIRTUAL_DISK_INFO_PHYSICAL_DISK"
+	case GET_VIRTUAL_DISK_INFO_VHD_PHYSICAL_SECTOR_SIZE:
+		return "GET_VIRTUAL_DISK_INFO_VHD_PHYSICAL_SECTOR_SIZE"
+	case GET_VIRTUAL_DISK_INFO_SMALLEST_SAFE_VIRTUAL_SIZE:
+		return "GET_VIRTUAL_DISK_INFO_SMALLEST_SAFE_VIRTUAL_SIZE"
+	case GET_VIRTUAL_DISK_INFO_FRAGMENTATION:
+		return "GET_VIRTUAL_DISK_INFO_FRAGMENTATION"
+	case GET_VIRTUAL_DISK_INFO_IS_LOADED:
+		return "GET_VIRTUAL_DISK_INFO_IS_LOADED"
+	case GET_VIRTUAL_DISK_INFO_VIRTUAL_DISK_ID:
+		return "GET_VIRTUAL_DISK_INFO_VIRTUAL_DISK_ID"
+	case GET_VIRTUAL_DISK_INFO_CHANGE_TRACKING_STATE:
+		return "GET_VIRTUAL_DISK_INFO_CHANGE_TRACKING_STATE"
+	default:
+		return fmt.Sprintf("GET_VIRTUAL_DISK_INFO_VERSION(%d)", int32(e))
+	}
+}
+
 // MERGE_VIRTUAL_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-merge_virtual_disk_flag
+// Bitmask — values may be combined with |.
 type MERGE_VIRTUAL_DISK_FLAG int32
 
 const (
 	MERGE_VIRTUAL_DISK_FLAG_NONE MERGE_VIRTUAL_DISK_FLAG = 0
 )
+
+// String returns the MERGE_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MERGE_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // MERGE_VIRTUAL_DISK_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-merge_virtual_disk_version
 type MERGE_VIRTUAL_DISK_VERSION int32
@@ -214,7 +612,23 @@ const (
 	MERGE_VIRTUAL_DISK_VERSION_2           MERGE_VIRTUAL_DISK_VERSION = 2
 )
 
+// String returns the MERGE_VIRTUAL_DISK_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MERGE_VIRTUAL_DISK_VERSION) String() string {
+	switch e {
+	case MERGE_VIRTUAL_DISK_VERSION_UNSPECIFIED:
+		return "MERGE_VIRTUAL_DISK_VERSION_UNSPECIFIED"
+	case MERGE_VIRTUAL_DISK_VERSION_1:
+		return "MERGE_VIRTUAL_DISK_VERSION_1"
+	case MERGE_VIRTUAL_DISK_VERSION_2:
+		return "MERGE_VIRTUAL_DISK_VERSION_2"
+	default:
+		return fmt.Sprintf("MERGE_VIRTUAL_DISK_VERSION(%d)", int32(e))
+	}
+}
+
 // MIRROR_VIRTUAL_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-mirror_virtual_disk_flag
+// Bitmask — values may be combined with |.
 type MIRROR_VIRTUAL_DISK_FLAG int32
 
 const (
@@ -225,6 +639,28 @@ const (
 	MIRROR_VIRTUAL_DISK_FLAG_IS_LIVE_MIGRATION      MIRROR_VIRTUAL_DISK_FLAG = 8
 )
 
+// String returns the MIRROR_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIRROR_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if e&MIRROR_VIRTUAL_DISK_FLAG_EXISTING_FILE != 0 {
+		parts = append(parts, "MIRROR_VIRTUAL_DISK_FLAG_EXISTING_FILE")
+	}
+	if e&MIRROR_VIRTUAL_DISK_FLAG_SKIP_MIRROR_ACTIVATION != 0 {
+		parts = append(parts, "MIRROR_VIRTUAL_DISK_FLAG_SKIP_MIRROR_ACTIVATION")
+	}
+	if e&MIRROR_VIRTUAL_DISK_FLAG_ENABLE_SMB_COMPRESSION != 0 {
+		parts = append(parts, "MIRROR_VIRTUAL_DISK_FLAG_ENABLE_SMB_COMPRESSION")
+	}
+	if e&MIRROR_VIRTUAL_DISK_FLAG_IS_LIVE_MIGRATION != 0 {
+		parts = append(parts, "MIRROR_VIRTUAL_DISK_FLAG_IS_LIVE_MIGRATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // MIRROR_VIRTUAL_DISK_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-mirror_virtual_disk_version
 type MIRROR_VIRTUAL_DISK_VERSION int32
 
@@ -233,13 +669,40 @@ const (
 	MIRROR_VIRTUAL_DISK_VERSION_1           MIRROR_VIRTUAL_DISK_VERSION = 1
 )
 
+// String returns the MIRROR_VIRTUAL_DISK_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIRROR_VIRTUAL_DISK_VERSION) String() string {
+	switch e {
+	case MIRROR_VIRTUAL_DISK_VERSION_UNSPECIFIED:
+		return "MIRROR_VIRTUAL_DISK_VERSION_UNSPECIFIED"
+	case MIRROR_VIRTUAL_DISK_VERSION_1:
+		return "MIRROR_VIRTUAL_DISK_VERSION_1"
+	default:
+		return fmt.Sprintf("MIRROR_VIRTUAL_DISK_VERSION(%d)", int32(e))
+	}
+}
+
 // MODIFY_VHDSET_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-modify_vhdset_flag
+// Bitmask — values may be combined with |.
 type MODIFY_VHDSET_FLAG int32
 
 const (
 	MODIFY_VHDSET_FLAG_NONE               MODIFY_VHDSET_FLAG = 0
 	MODIFY_VHDSET_FLAG_WRITEABLE_SNAPSHOT MODIFY_VHDSET_FLAG = 1
 )
+
+// String returns the MODIFY_VHDSET_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MODIFY_VHDSET_FLAG) String() string {
+	var parts []string
+	if e&MODIFY_VHDSET_FLAG_WRITEABLE_SNAPSHOT != 0 {
+		parts = append(parts, "MODIFY_VHDSET_FLAG_WRITEABLE_SNAPSHOT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // MODIFY_VHDSET_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-modify_vhdset_version
 type MODIFY_VHDSET_VERSION int32
@@ -251,7 +714,25 @@ const (
 	MODIFY_VHDSET_DEFAULT_SNAPSHOT_PATH MODIFY_VHDSET_VERSION = 3
 )
 
+// String returns the MODIFY_VHDSET_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MODIFY_VHDSET_VERSION) String() string {
+	switch e {
+	case MODIFY_VHDSET_UNSPECIFIED:
+		return "MODIFY_VHDSET_UNSPECIFIED"
+	case MODIFY_VHDSET_SNAPSHOT_PATH:
+		return "MODIFY_VHDSET_SNAPSHOT_PATH"
+	case MODIFY_VHDSET_REMOVE_SNAPSHOT:
+		return "MODIFY_VHDSET_REMOVE_SNAPSHOT"
+	case MODIFY_VHDSET_DEFAULT_SNAPSHOT_PATH:
+		return "MODIFY_VHDSET_DEFAULT_SNAPSHOT_PATH"
+	default:
+		return fmt.Sprintf("MODIFY_VHDSET_VERSION(%d)", int32(e))
+	}
+}
+
 // OPEN_VIRTUAL_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-open_virtual_disk_flag
+// Bitmask — values may be combined with |.
 type OPEN_VIRTUAL_DISK_FLAG int32
 
 const (
@@ -270,6 +751,52 @@ const (
 	OPEN_VIRTUAL_DISK_FLAG_SUPPORT_ENCRYPTED_FILES        OPEN_VIRTUAL_DISK_FLAG = 2048
 )
 
+// String returns the OPEN_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPEN_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if e&OPEN_VIRTUAL_DISK_FLAG_NO_PARENTS != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_NO_PARENTS")
+	}
+	if e&OPEN_VIRTUAL_DISK_FLAG_BLANK_FILE != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_BLANK_FILE")
+	}
+	if e&OPEN_VIRTUAL_DISK_FLAG_BOOT_DRIVE != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_BOOT_DRIVE")
+	}
+	if e&OPEN_VIRTUAL_DISK_FLAG_CACHED_IO != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_CACHED_IO")
+	}
+	if e&OPEN_VIRTUAL_DISK_FLAG_CUSTOM_DIFF_CHAIN != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_CUSTOM_DIFF_CHAIN")
+	}
+	if e&OPEN_VIRTUAL_DISK_FLAG_PARENT_CACHED_IO != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_PARENT_CACHED_IO")
+	}
+	if e&OPEN_VIRTUAL_DISK_FLAG_VHDSET_FILE_ONLY != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_VHDSET_FILE_ONLY")
+	}
+	if e&OPEN_VIRTUAL_DISK_FLAG_IGNORE_RELATIVE_PARENT_LOCATOR != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_IGNORE_RELATIVE_PARENT_LOCATOR")
+	}
+	if e&OPEN_VIRTUAL_DISK_FLAG_NO_WRITE_HARDENING != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_NO_WRITE_HARDENING")
+	}
+	if e&OPEN_VIRTUAL_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_SUPPORT_COMPRESSED_VOLUMES")
+	}
+	if e&OPEN_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_SUPPORT_SPARSE_FILES_ANY_FS")
+	}
+	if e&OPEN_VIRTUAL_DISK_FLAG_SUPPORT_ENCRYPTED_FILES != 0 {
+		parts = append(parts, "OPEN_VIRTUAL_DISK_FLAG_SUPPORT_ENCRYPTED_FILES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // OPEN_VIRTUAL_DISK_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-open_virtual_disk_version
 type OPEN_VIRTUAL_DISK_VERSION int32
 
@@ -280,18 +807,57 @@ const (
 	OPEN_VIRTUAL_DISK_VERSION_3           OPEN_VIRTUAL_DISK_VERSION = 3
 )
 
+// String returns the OPEN_VIRTUAL_DISK_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPEN_VIRTUAL_DISK_VERSION) String() string {
+	switch e {
+	case OPEN_VIRTUAL_DISK_VERSION_UNSPECIFIED:
+		return "OPEN_VIRTUAL_DISK_VERSION_UNSPECIFIED"
+	case OPEN_VIRTUAL_DISK_VERSION_1:
+		return "OPEN_VIRTUAL_DISK_VERSION_1"
+	case OPEN_VIRTUAL_DISK_VERSION_2:
+		return "OPEN_VIRTUAL_DISK_VERSION_2"
+	case OPEN_VIRTUAL_DISK_VERSION_3:
+		return "OPEN_VIRTUAL_DISK_VERSION_3"
+	default:
+		return fmt.Sprintf("OPEN_VIRTUAL_DISK_VERSION(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type QUERY_CHANGES_VIRTUAL_DISK_FLAG int32
 
 const (
 	QUERY_CHANGES_VIRTUAL_DISK_FLAG_NONE QUERY_CHANGES_VIRTUAL_DISK_FLAG = 0
 )
 
+// String returns the QUERY_CHANGES_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QUERY_CHANGES_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // RAW_SCSI_VIRTUAL_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-raw_scsi_virtual_disk_flag
+// Bitmask — values may be combined with |.
 type RAW_SCSI_VIRTUAL_DISK_FLAG int32
 
 const (
 	RAW_SCSI_VIRTUAL_DISK_FLAG_NONE RAW_SCSI_VIRTUAL_DISK_FLAG = 0
 )
+
+// String returns the RAW_SCSI_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RAW_SCSI_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // RAW_SCSI_VIRTUAL_DISK_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-raw_scsi_virtual_disk_version
 type RAW_SCSI_VIRTUAL_DISK_VERSION int32
@@ -301,7 +867,21 @@ const (
 	RAW_SCSI_VIRTUAL_DISK_VERSION_1           RAW_SCSI_VIRTUAL_DISK_VERSION = 1
 )
 
+// String returns the RAW_SCSI_VIRTUAL_DISK_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RAW_SCSI_VIRTUAL_DISK_VERSION) String() string {
+	switch e {
+	case RAW_SCSI_VIRTUAL_DISK_VERSION_UNSPECIFIED:
+		return "RAW_SCSI_VIRTUAL_DISK_VERSION_UNSPECIFIED"
+	case RAW_SCSI_VIRTUAL_DISK_VERSION_1:
+		return "RAW_SCSI_VIRTUAL_DISK_VERSION_1"
+	default:
+		return fmt.Sprintf("RAW_SCSI_VIRTUAL_DISK_VERSION(%d)", int32(e))
+	}
+}
+
 // RESIZE_VIRTUAL_DISK_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-resize_virtual_disk_flag
+// Bitmask — values may be combined with |.
 type RESIZE_VIRTUAL_DISK_FLAG int32
 
 const (
@@ -310,6 +890,22 @@ const (
 	RESIZE_VIRTUAL_DISK_FLAG_RESIZE_TO_SMALLEST_SAFE_VIRTUAL_SIZE RESIZE_VIRTUAL_DISK_FLAG = 2
 )
 
+// String returns the RESIZE_VIRTUAL_DISK_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RESIZE_VIRTUAL_DISK_FLAG) String() string {
+	var parts []string
+	if e&RESIZE_VIRTUAL_DISK_FLAG_ALLOW_UNSAFE_VIRTUAL_SIZE != 0 {
+		parts = append(parts, "RESIZE_VIRTUAL_DISK_FLAG_ALLOW_UNSAFE_VIRTUAL_SIZE")
+	}
+	if e&RESIZE_VIRTUAL_DISK_FLAG_RESIZE_TO_SMALLEST_SAFE_VIRTUAL_SIZE != 0 {
+		parts = append(parts, "RESIZE_VIRTUAL_DISK_FLAG_RESIZE_TO_SMALLEST_SAFE_VIRTUAL_SIZE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // RESIZE_VIRTUAL_DISK_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-resize_virtual_disk_version
 type RESIZE_VIRTUAL_DISK_VERSION int32
 
@@ -317,6 +913,19 @@ const (
 	RESIZE_VIRTUAL_DISK_VERSION_UNSPECIFIED RESIZE_VIRTUAL_DISK_VERSION = 0
 	RESIZE_VIRTUAL_DISK_VERSION_1           RESIZE_VIRTUAL_DISK_VERSION = 1
 )
+
+// String returns the RESIZE_VIRTUAL_DISK_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RESIZE_VIRTUAL_DISK_VERSION) String() string {
+	switch e {
+	case RESIZE_VIRTUAL_DISK_VERSION_UNSPECIFIED:
+		return "RESIZE_VIRTUAL_DISK_VERSION_UNSPECIFIED"
+	case RESIZE_VIRTUAL_DISK_VERSION_1:
+		return "RESIZE_VIRTUAL_DISK_VERSION_1"
+	default:
+		return fmt.Sprintf("RESIZE_VIRTUAL_DISK_VERSION(%d)", int32(e))
+	}
+}
 
 // SET_VIRTUAL_DISK_INFO_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-set_virtual_disk_info_version
 type SET_VIRTUAL_DISK_INFO_VERSION int32
@@ -332,6 +941,31 @@ const (
 	SET_VIRTUAL_DISK_INFO_PARENT_LOCATOR         SET_VIRTUAL_DISK_INFO_VERSION = 7
 )
 
+// String returns the SET_VIRTUAL_DISK_INFO_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SET_VIRTUAL_DISK_INFO_VERSION) String() string {
+	switch e {
+	case SET_VIRTUAL_DISK_INFO_UNSPECIFIED:
+		return "SET_VIRTUAL_DISK_INFO_UNSPECIFIED"
+	case SET_VIRTUAL_DISK_INFO_PARENT_PATH:
+		return "SET_VIRTUAL_DISK_INFO_PARENT_PATH"
+	case SET_VIRTUAL_DISK_INFO_IDENTIFIER:
+		return "SET_VIRTUAL_DISK_INFO_IDENTIFIER"
+	case SET_VIRTUAL_DISK_INFO_PARENT_PATH_WITH_DEPTH:
+		return "SET_VIRTUAL_DISK_INFO_PARENT_PATH_WITH_DEPTH"
+	case SET_VIRTUAL_DISK_INFO_PHYSICAL_SECTOR_SIZE:
+		return "SET_VIRTUAL_DISK_INFO_PHYSICAL_SECTOR_SIZE"
+	case SET_VIRTUAL_DISK_INFO_VIRTUAL_DISK_ID:
+		return "SET_VIRTUAL_DISK_INFO_VIRTUAL_DISK_ID"
+	case SET_VIRTUAL_DISK_INFO_CHANGE_TRACKING_STATE:
+		return "SET_VIRTUAL_DISK_INFO_CHANGE_TRACKING_STATE"
+	case SET_VIRTUAL_DISK_INFO_PARENT_LOCATOR:
+		return "SET_VIRTUAL_DISK_INFO_PARENT_LOCATOR"
+	default:
+		return fmt.Sprintf("SET_VIRTUAL_DISK_INFO_VERSION(%d)", int32(e))
+	}
+}
+
 // STORAGE_DEPENDENCY_INFO_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-storage_dependency_info_version
 type STORAGE_DEPENDENCY_INFO_VERSION int32
 
@@ -341,13 +975,42 @@ const (
 	STORAGE_DEPENDENCY_INFO_VERSION_2           STORAGE_DEPENDENCY_INFO_VERSION = 2
 )
 
+// String returns the STORAGE_DEPENDENCY_INFO_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_DEPENDENCY_INFO_VERSION) String() string {
+	switch e {
+	case STORAGE_DEPENDENCY_INFO_VERSION_UNSPECIFIED:
+		return "STORAGE_DEPENDENCY_INFO_VERSION_UNSPECIFIED"
+	case STORAGE_DEPENDENCY_INFO_VERSION_1:
+		return "STORAGE_DEPENDENCY_INFO_VERSION_1"
+	case STORAGE_DEPENDENCY_INFO_VERSION_2:
+		return "STORAGE_DEPENDENCY_INFO_VERSION_2"
+	default:
+		return fmt.Sprintf("STORAGE_DEPENDENCY_INFO_VERSION(%d)", int32(e))
+	}
+}
+
 // TAKE_SNAPSHOT_VHDSET_FLAG: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-take_snapshot_vhdset_flag
+// Bitmask — values may be combined with |.
 type TAKE_SNAPSHOT_VHDSET_FLAG int32
 
 const (
 	TAKE_SNAPSHOT_VHDSET_FLAG_NONE      TAKE_SNAPSHOT_VHDSET_FLAG = 0
 	TAKE_SNAPSHOT_VHDSET_FLAG_WRITEABLE TAKE_SNAPSHOT_VHDSET_FLAG = 1
 )
+
+// String returns the TAKE_SNAPSHOT_VHDSET_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAKE_SNAPSHOT_VHDSET_FLAG) String() string {
+	var parts []string
+	if e&TAKE_SNAPSHOT_VHDSET_FLAG_WRITEABLE != 0 {
+		parts = append(parts, "TAKE_SNAPSHOT_VHDSET_FLAG_WRITEABLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // TAKE_SNAPSHOT_VHDSET_VERSION: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-take_snapshot_vhdset_version
 type TAKE_SNAPSHOT_VHDSET_VERSION int32
@@ -357,7 +1020,21 @@ const (
 	TAKE_SNAPSHOT_VHDSET_VERSION_1           TAKE_SNAPSHOT_VHDSET_VERSION = 1
 )
 
+// String returns the TAKE_SNAPSHOT_VHDSET_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAKE_SNAPSHOT_VHDSET_VERSION) String() string {
+	switch e {
+	case TAKE_SNAPSHOT_VHDSET_VERSION_UNSPECIFIED:
+		return "TAKE_SNAPSHOT_VHDSET_VERSION_UNSPECIFIED"
+	case TAKE_SNAPSHOT_VHDSET_VERSION_1:
+		return "TAKE_SNAPSHOT_VHDSET_VERSION_1"
+	default:
+		return fmt.Sprintf("TAKE_SNAPSHOT_VHDSET_VERSION(%d)", int32(e))
+	}
+}
+
 // VIRTUAL_DISK_ACCESS_MASK: https://learn.microsoft.com/windows/win32/api/virtdisk/ne-virtdisk-virtual_disk_access_mask~r1
+// Bitmask — values may be combined with |.
 type VIRTUAL_DISK_ACCESS_MASK int32
 
 const (
@@ -372,3 +1049,40 @@ const (
 	VIRTUAL_DISK_ACCESS_ALL       VIRTUAL_DISK_ACCESS_MASK = 4128768
 	VIRTUAL_DISK_ACCESS_WRITABLE  VIRTUAL_DISK_ACCESS_MASK = 3276800
 )
+
+// String returns the VIRTUAL_DISK_ACCESS_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIRTUAL_DISK_ACCESS_MASK) String() string {
+	var parts []string
+	if e&VIRTUAL_DISK_ACCESS_ATTACH_RO != 0 {
+		parts = append(parts, "VIRTUAL_DISK_ACCESS_ATTACH_RO")
+	}
+	if e&VIRTUAL_DISK_ACCESS_ATTACH_RW != 0 {
+		parts = append(parts, "VIRTUAL_DISK_ACCESS_ATTACH_RW")
+	}
+	if e&VIRTUAL_DISK_ACCESS_DETACH != 0 {
+		parts = append(parts, "VIRTUAL_DISK_ACCESS_DETACH")
+	}
+	if e&VIRTUAL_DISK_ACCESS_GET_INFO != 0 {
+		parts = append(parts, "VIRTUAL_DISK_ACCESS_GET_INFO")
+	}
+	if e&VIRTUAL_DISK_ACCESS_CREATE != 0 {
+		parts = append(parts, "VIRTUAL_DISK_ACCESS_CREATE")
+	}
+	if e&VIRTUAL_DISK_ACCESS_METAOPS != 0 {
+		parts = append(parts, "VIRTUAL_DISK_ACCESS_METAOPS")
+	}
+	if e&VIRTUAL_DISK_ACCESS_READ != 0 {
+		parts = append(parts, "VIRTUAL_DISK_ACCESS_READ")
+	}
+	if e&VIRTUAL_DISK_ACCESS_ALL != 0 {
+		parts = append(parts, "VIRTUAL_DISK_ACCESS_ALL")
+	}
+	if e&VIRTUAL_DISK_ACCESS_WRITABLE != 0 {
+		parts = append(parts, "VIRTUAL_DISK_ACCESS_WRITABLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

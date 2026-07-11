@@ -4,6 +4,11 @@
 
 package eventlog
 
+import (
+	"fmt"
+	"strings"
+)
+
 // EVT_CHANNEL_CLOCK_TYPE: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_channel_clock_type
 type EVT_CHANNEL_CLOCK_TYPE int32
 
@@ -11,6 +16,19 @@ const (
 	EvtChannelClockTypeSystemTime EVT_CHANNEL_CLOCK_TYPE = 0
 	EvtChannelClockTypeQPC        EVT_CHANNEL_CLOCK_TYPE = 1
 )
+
+// String returns the EVT_CHANNEL_CLOCK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_CHANNEL_CLOCK_TYPE) String() string {
+	switch e {
+	case EvtChannelClockTypeSystemTime:
+		return "EvtChannelClockTypeSystemTime"
+	case EvtChannelClockTypeQPC:
+		return "EvtChannelClockTypeQPC"
+	default:
+		return fmt.Sprintf("EVT_CHANNEL_CLOCK_TYPE(%d)", int32(e))
+	}
+}
 
 // EVT_CHANNEL_CONFIG_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_channel_config_property_id
 type EVT_CHANNEL_CONFIG_PROPERTY_ID int32
@@ -40,6 +58,59 @@ const (
 	EvtChannelConfigPropertyIdEND         EVT_CHANNEL_CONFIG_PROPERTY_ID = 21
 )
 
+// String returns the EVT_CHANNEL_CONFIG_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_CHANNEL_CONFIG_PROPERTY_ID) String() string {
+	switch e {
+	case EvtChannelConfigEnabled:
+		return "EvtChannelConfigEnabled"
+	case EvtChannelConfigIsolation:
+		return "EvtChannelConfigIsolation"
+	case EvtChannelConfigType:
+		return "EvtChannelConfigType"
+	case EvtChannelConfigOwningPublisher:
+		return "EvtChannelConfigOwningPublisher"
+	case EvtChannelConfigClassicEventlog:
+		return "EvtChannelConfigClassicEventlog"
+	case EvtChannelConfigAccess:
+		return "EvtChannelConfigAccess"
+	case EvtChannelLoggingConfigRetention:
+		return "EvtChannelLoggingConfigRetention"
+	case EvtChannelLoggingConfigAutoBackup:
+		return "EvtChannelLoggingConfigAutoBackup"
+	case EvtChannelLoggingConfigMaxSize:
+		return "EvtChannelLoggingConfigMaxSize"
+	case EvtChannelLoggingConfigLogFilePath:
+		return "EvtChannelLoggingConfigLogFilePath"
+	case EvtChannelPublishingConfigLevel:
+		return "EvtChannelPublishingConfigLevel"
+	case EvtChannelPublishingConfigKeywords:
+		return "EvtChannelPublishingConfigKeywords"
+	case EvtChannelPublishingConfigControlGuid:
+		return "EvtChannelPublishingConfigControlGuid"
+	case EvtChannelPublishingConfigBufferSize:
+		return "EvtChannelPublishingConfigBufferSize"
+	case EvtChannelPublishingConfigMinBuffers:
+		return "EvtChannelPublishingConfigMinBuffers"
+	case EvtChannelPublishingConfigMaxBuffers:
+		return "EvtChannelPublishingConfigMaxBuffers"
+	case EvtChannelPublishingConfigLatency:
+		return "EvtChannelPublishingConfigLatency"
+	case EvtChannelPublishingConfigClockType:
+		return "EvtChannelPublishingConfigClockType"
+	case EvtChannelPublishingConfigSidType:
+		return "EvtChannelPublishingConfigSidType"
+	case EvtChannelPublisherList:
+		return "EvtChannelPublisherList"
+	case EvtChannelPublishingConfigFileMax:
+		return "EvtChannelPublishingConfigFileMax"
+	case EvtChannelConfigPropertyIdEND:
+		return "EvtChannelConfigPropertyIdEND"
+	default:
+		return fmt.Sprintf("EVT_CHANNEL_CONFIG_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // EVT_CHANNEL_ISOLATION_TYPE: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_channel_isolation_type
 type EVT_CHANNEL_ISOLATION_TYPE int32
 
@@ -49,12 +120,38 @@ const (
 	EvtChannelIsolationTypeCustom      EVT_CHANNEL_ISOLATION_TYPE = 2
 )
 
+// String returns the EVT_CHANNEL_ISOLATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_CHANNEL_ISOLATION_TYPE) String() string {
+	switch e {
+	case EvtChannelIsolationTypeApplication:
+		return "EvtChannelIsolationTypeApplication"
+	case EvtChannelIsolationTypeSystem:
+		return "EvtChannelIsolationTypeSystem"
+	case EvtChannelIsolationTypeCustom:
+		return "EvtChannelIsolationTypeCustom"
+	default:
+		return fmt.Sprintf("EVT_CHANNEL_ISOLATION_TYPE(%d)", int32(e))
+	}
+}
+
 // EVT_CHANNEL_REFERENCE_FLAGS: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_channel_reference_flags
 type EVT_CHANNEL_REFERENCE_FLAGS uint32
 
 const (
 	EvtChannelReferenceImported EVT_CHANNEL_REFERENCE_FLAGS = 1
 )
+
+// String returns the EVT_CHANNEL_REFERENCE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_CHANNEL_REFERENCE_FLAGS) String() string {
+	switch e {
+	case EvtChannelReferenceImported:
+		return "EvtChannelReferenceImported"
+	default:
+		return fmt.Sprintf("EVT_CHANNEL_REFERENCE_FLAGS(%d)", uint32(e))
+	}
+}
 
 // EVT_CHANNEL_SID_TYPE: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_channel_sid_type
 type EVT_CHANNEL_SID_TYPE int32
@@ -63,6 +160,19 @@ const (
 	EvtChannelSidTypeNone       EVT_CHANNEL_SID_TYPE = 0
 	EvtChannelSidTypePublishing EVT_CHANNEL_SID_TYPE = 1
 )
+
+// String returns the EVT_CHANNEL_SID_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_CHANNEL_SID_TYPE) String() string {
+	switch e {
+	case EvtChannelSidTypeNone:
+		return "EvtChannelSidTypeNone"
+	case EvtChannelSidTypePublishing:
+		return "EvtChannelSidTypePublishing"
+	default:
+		return fmt.Sprintf("EVT_CHANNEL_SID_TYPE(%d)", int32(e))
+	}
+}
 
 // EVT_CHANNEL_TYPE: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_channel_type
 type EVT_CHANNEL_TYPE int32
@@ -73,6 +183,23 @@ const (
 	EvtChannelTypeAnalytic    EVT_CHANNEL_TYPE = 2
 	EvtChannelTypeDebug       EVT_CHANNEL_TYPE = 3
 )
+
+// String returns the EVT_CHANNEL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_CHANNEL_TYPE) String() string {
+	switch e {
+	case EvtChannelTypeAdmin:
+		return "EvtChannelTypeAdmin"
+	case EvtChannelTypeOperational:
+		return "EvtChannelTypeOperational"
+	case EvtChannelTypeAnalytic:
+		return "EvtChannelTypeAnalytic"
+	case EvtChannelTypeDebug:
+		return "EvtChannelTypeDebug"
+	default:
+		return fmt.Sprintf("EVT_CHANNEL_TYPE(%d)", int32(e))
+	}
+}
 
 // EVT_EVENT_METADATA_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_event_metadata_property_id
 type EVT_EVENT_METADATA_PROPERTY_ID int32
@@ -90,6 +217,35 @@ const (
 	EvtEventMetadataPropertyIdEND EVT_EVENT_METADATA_PROPERTY_ID = 9
 )
 
+// String returns the EVT_EVENT_METADATA_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_EVENT_METADATA_PROPERTY_ID) String() string {
+	switch e {
+	case EventMetadataEventID:
+		return "EventMetadataEventID"
+	case EventMetadataEventVersion:
+		return "EventMetadataEventVersion"
+	case EventMetadataEventChannel:
+		return "EventMetadataEventChannel"
+	case EventMetadataEventLevel:
+		return "EventMetadataEventLevel"
+	case EventMetadataEventOpcode:
+		return "EventMetadataEventOpcode"
+	case EventMetadataEventTask:
+		return "EventMetadataEventTask"
+	case EventMetadataEventKeyword:
+		return "EventMetadataEventKeyword"
+	case EventMetadataEventMessageID:
+		return "EventMetadataEventMessageID"
+	case EventMetadataEventTemplate:
+		return "EventMetadataEventTemplate"
+	case EvtEventMetadataPropertyIdEND:
+		return "EvtEventMetadataPropertyIdEND"
+	default:
+		return fmt.Sprintf("EVT_EVENT_METADATA_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // EVT_EVENT_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_event_property_id
 type EVT_EVENT_PROPERTY_ID int32
 
@@ -98,6 +254,21 @@ const (
 	EvtEventPath          EVT_EVENT_PROPERTY_ID = 1
 	EvtEventPropertyIdEND EVT_EVENT_PROPERTY_ID = 2
 )
+
+// String returns the EVT_EVENT_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_EVENT_PROPERTY_ID) String() string {
+	switch e {
+	case EvtEventQueryIDs:
+		return "EvtEventQueryIDs"
+	case EvtEventPath:
+		return "EvtEventPath"
+	case EvtEventPropertyIdEND:
+		return "EvtEventPropertyIdEND"
+	default:
+		return fmt.Sprintf("EVT_EVENT_PROPERTY_ID(%d)", int32(e))
+	}
+}
 
 // EVT_EXPORTLOG_FLAGS: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_exportlog_flags
 type EVT_EXPORTLOG_FLAGS uint32
@@ -108,6 +279,23 @@ const (
 	EvtExportLogTolerateQueryErrors EVT_EXPORTLOG_FLAGS = 4096
 	EvtExportLogOverwrite           EVT_EXPORTLOG_FLAGS = 8192
 )
+
+// String returns the EVT_EXPORTLOG_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_EXPORTLOG_FLAGS) String() string {
+	switch e {
+	case EvtExportLogChannelPath:
+		return "EvtExportLogChannelPath"
+	case EvtExportLogFilePath:
+		return "EvtExportLogFilePath"
+	case EvtExportLogTolerateQueryErrors:
+		return "EvtExportLogTolerateQueryErrors"
+	case EvtExportLogOverwrite:
+		return "EvtExportLogOverwrite"
+	default:
+		return fmt.Sprintf("EVT_EXPORTLOG_FLAGS(%d)", uint32(e))
+	}
+}
 
 // EVT_FORMAT_MESSAGE_FLAGS: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_format_message_flags
 type EVT_FORMAT_MESSAGE_FLAGS uint32
@@ -124,12 +312,50 @@ const (
 	EvtFormatMessageXml      EVT_FORMAT_MESSAGE_FLAGS = 9
 )
 
+// String returns the EVT_FORMAT_MESSAGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_FORMAT_MESSAGE_FLAGS) String() string {
+	switch e {
+	case EvtFormatMessageEvent:
+		return "EvtFormatMessageEvent"
+	case EvtFormatMessageLevel:
+		return "EvtFormatMessageLevel"
+	case EvtFormatMessageTask:
+		return "EvtFormatMessageTask"
+	case EvtFormatMessageOpcode:
+		return "EvtFormatMessageOpcode"
+	case EvtFormatMessageKeyword:
+		return "EvtFormatMessageKeyword"
+	case EvtFormatMessageChannel:
+		return "EvtFormatMessageChannel"
+	case EvtFormatMessageProvider:
+		return "EvtFormatMessageProvider"
+	case EvtFormatMessageId:
+		return "EvtFormatMessageId"
+	case EvtFormatMessageXml:
+		return "EvtFormatMessageXml"
+	default:
+		return fmt.Sprintf("EVT_FORMAT_MESSAGE_FLAGS(%d)", uint32(e))
+	}
+}
+
 // EVT_LOGIN_CLASS: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_login_class
 type EVT_LOGIN_CLASS int32
 
 const (
 	EvtRpcLogin EVT_LOGIN_CLASS = 1
 )
+
+// String returns the EVT_LOGIN_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_LOGIN_CLASS) String() string {
+	switch e {
+	case EvtRpcLogin:
+		return "EvtRpcLogin"
+	default:
+		return fmt.Sprintf("EVT_LOGIN_CLASS(%d)", int32(e))
+	}
+}
 
 // EVT_LOG_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_log_property_id
 type EVT_LOG_PROPERTY_ID int32
@@ -145,6 +371,31 @@ const (
 	EvtLogFull               EVT_LOG_PROPERTY_ID = 7
 )
 
+// String returns the EVT_LOG_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_LOG_PROPERTY_ID) String() string {
+	switch e {
+	case EvtLogCreationTime:
+		return "EvtLogCreationTime"
+	case EvtLogLastAccessTime:
+		return "EvtLogLastAccessTime"
+	case EvtLogLastWriteTime:
+		return "EvtLogLastWriteTime"
+	case EvtLogFileSize:
+		return "EvtLogFileSize"
+	case EvtLogAttributes:
+		return "EvtLogAttributes"
+	case EvtLogNumberOfLogRecords:
+		return "EvtLogNumberOfLogRecords"
+	case EvtLogOldestRecordNumber:
+		return "EvtLogOldestRecordNumber"
+	case EvtLogFull:
+		return "EvtLogFull"
+	default:
+		return fmt.Sprintf("EVT_LOG_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // EVT_OPEN_LOG_FLAGS: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_open_log_flags
 type EVT_OPEN_LOG_FLAGS uint32
 
@@ -152,6 +403,19 @@ const (
 	EvtOpenChannelPath EVT_OPEN_LOG_FLAGS = 1
 	EvtOpenFilePath    EVT_OPEN_LOG_FLAGS = 2
 )
+
+// String returns the EVT_OPEN_LOG_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_OPEN_LOG_FLAGS) String() string {
+	switch e {
+	case EvtOpenChannelPath:
+		return "EvtOpenChannelPath"
+	case EvtOpenFilePath:
+		return "EvtOpenFilePath"
+	default:
+		return fmt.Sprintf("EVT_OPEN_LOG_FLAGS(%d)", uint32(e))
+	}
+}
 
 // EVT_PUBLISHER_METADATA_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_publisher_metadata_property_id
 type EVT_PUBLISHER_METADATA_PROPERTY_ID int32
@@ -189,6 +453,75 @@ const (
 	EvtPublisherMetadataPropertyIdEND             EVT_PUBLISHER_METADATA_PROPERTY_ID = 29
 )
 
+// String returns the EVT_PUBLISHER_METADATA_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_PUBLISHER_METADATA_PROPERTY_ID) String() string {
+	switch e {
+	case EvtPublisherMetadataPublisherGuid:
+		return "EvtPublisherMetadataPublisherGuid"
+	case EvtPublisherMetadataResourceFilePath:
+		return "EvtPublisherMetadataResourceFilePath"
+	case EvtPublisherMetadataParameterFilePath:
+		return "EvtPublisherMetadataParameterFilePath"
+	case EvtPublisherMetadataMessageFilePath:
+		return "EvtPublisherMetadataMessageFilePath"
+	case EvtPublisherMetadataHelpLink:
+		return "EvtPublisherMetadataHelpLink"
+	case EvtPublisherMetadataPublisherMessageID:
+		return "EvtPublisherMetadataPublisherMessageID"
+	case EvtPublisherMetadataChannelReferences:
+		return "EvtPublisherMetadataChannelReferences"
+	case EvtPublisherMetadataChannelReferencePath:
+		return "EvtPublisherMetadataChannelReferencePath"
+	case EvtPublisherMetadataChannelReferenceIndex:
+		return "EvtPublisherMetadataChannelReferenceIndex"
+	case EvtPublisherMetadataChannelReferenceID:
+		return "EvtPublisherMetadataChannelReferenceID"
+	case EvtPublisherMetadataChannelReferenceFlags:
+		return "EvtPublisherMetadataChannelReferenceFlags"
+	case EvtPublisherMetadataChannelReferenceMessageID:
+		return "EvtPublisherMetadataChannelReferenceMessageID"
+	case EvtPublisherMetadataLevels:
+		return "EvtPublisherMetadataLevels"
+	case EvtPublisherMetadataLevelName:
+		return "EvtPublisherMetadataLevelName"
+	case EvtPublisherMetadataLevelValue:
+		return "EvtPublisherMetadataLevelValue"
+	case EvtPublisherMetadataLevelMessageID:
+		return "EvtPublisherMetadataLevelMessageID"
+	case EvtPublisherMetadataTasks:
+		return "EvtPublisherMetadataTasks"
+	case EvtPublisherMetadataTaskName:
+		return "EvtPublisherMetadataTaskName"
+	case EvtPublisherMetadataTaskEventGuid:
+		return "EvtPublisherMetadataTaskEventGuid"
+	case EvtPublisherMetadataTaskValue:
+		return "EvtPublisherMetadataTaskValue"
+	case EvtPublisherMetadataTaskMessageID:
+		return "EvtPublisherMetadataTaskMessageID"
+	case EvtPublisherMetadataOpcodes:
+		return "EvtPublisherMetadataOpcodes"
+	case EvtPublisherMetadataOpcodeName:
+		return "EvtPublisherMetadataOpcodeName"
+	case EvtPublisherMetadataOpcodeValue:
+		return "EvtPublisherMetadataOpcodeValue"
+	case EvtPublisherMetadataOpcodeMessageID:
+		return "EvtPublisherMetadataOpcodeMessageID"
+	case EvtPublisherMetadataKeywords:
+		return "EvtPublisherMetadataKeywords"
+	case EvtPublisherMetadataKeywordName:
+		return "EvtPublisherMetadataKeywordName"
+	case EvtPublisherMetadataKeywordValue:
+		return "EvtPublisherMetadataKeywordValue"
+	case EvtPublisherMetadataKeywordMessageID:
+		return "EvtPublisherMetadataKeywordMessageID"
+	case EvtPublisherMetadataPropertyIdEND:
+		return "EvtPublisherMetadataPropertyIdEND"
+	default:
+		return fmt.Sprintf("EVT_PUBLISHER_METADATA_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // EVT_QUERY_FLAGS: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_query_flags
 type EVT_QUERY_FLAGS uint32
 
@@ -200,6 +533,25 @@ const (
 	EvtQueryTolerateQueryErrors EVT_QUERY_FLAGS = 4096
 )
 
+// String returns the EVT_QUERY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_QUERY_FLAGS) String() string {
+	switch e {
+	case EvtQueryChannelPath:
+		return "EvtQueryChannelPath"
+	case EvtQueryFilePath:
+		return "EvtQueryFilePath"
+	case EvtQueryForwardDirection:
+		return "EvtQueryForwardDirection"
+	case EvtQueryReverseDirection:
+		return "EvtQueryReverseDirection"
+	case EvtQueryTolerateQueryErrors:
+		return "EvtQueryTolerateQueryErrors"
+	default:
+		return fmt.Sprintf("EVT_QUERY_FLAGS(%d)", uint32(e))
+	}
+}
+
 // EVT_QUERY_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_query_property_id
 type EVT_QUERY_PROPERTY_ID int32
 
@@ -208,6 +560,21 @@ const (
 	EvtQueryStatuses      EVT_QUERY_PROPERTY_ID = 1
 	EvtQueryPropertyIdEND EVT_QUERY_PROPERTY_ID = 2
 )
+
+// String returns the EVT_QUERY_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_QUERY_PROPERTY_ID) String() string {
+	switch e {
+	case EvtQueryNames:
+		return "EvtQueryNames"
+	case EvtQueryStatuses:
+		return "EvtQueryStatuses"
+	case EvtQueryPropertyIdEND:
+		return "EvtQueryPropertyIdEND"
+	default:
+		return fmt.Sprintf("EVT_QUERY_PROPERTY_ID(%d)", int32(e))
+	}
+}
 
 // EVT_RENDER_CONTEXT_FLAGS: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_render_context_flags
 type EVT_RENDER_CONTEXT_FLAGS uint32
@@ -218,6 +585,21 @@ const (
 	EvtRenderContextUser   EVT_RENDER_CONTEXT_FLAGS = 2
 )
 
+// String returns the EVT_RENDER_CONTEXT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_RENDER_CONTEXT_FLAGS) String() string {
+	switch e {
+	case EvtRenderContextValues:
+		return "EvtRenderContextValues"
+	case EvtRenderContextSystem:
+		return "EvtRenderContextSystem"
+	case EvtRenderContextUser:
+		return "EvtRenderContextUser"
+	default:
+		return fmt.Sprintf("EVT_RENDER_CONTEXT_FLAGS(%d)", uint32(e))
+	}
+}
+
 // EVT_RENDER_FLAGS: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_render_flags
 type EVT_RENDER_FLAGS uint32
 
@@ -226,6 +608,21 @@ const (
 	EvtRenderEventXml    EVT_RENDER_FLAGS = 1
 	EvtRenderBookmark    EVT_RENDER_FLAGS = 2
 )
+
+// String returns the EVT_RENDER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_RENDER_FLAGS) String() string {
+	switch e {
+	case EvtRenderEventValues:
+		return "EvtRenderEventValues"
+	case EvtRenderEventXml:
+		return "EvtRenderEventXml"
+	case EvtRenderBookmark:
+		return "EvtRenderBookmark"
+	default:
+		return fmt.Sprintf("EVT_RENDER_FLAGS(%d)", uint32(e))
+	}
+}
 
 // EVT_RPC_LOGIN_FLAGS: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_rpc_login_flags
 type EVT_RPC_LOGIN_FLAGS uint32
@@ -236,6 +633,23 @@ const (
 	EvtRpcLoginAuthKerberos  EVT_RPC_LOGIN_FLAGS = 2
 	EvtRpcLoginAuthNTLM      EVT_RPC_LOGIN_FLAGS = 3
 )
+
+// String returns the EVT_RPC_LOGIN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_RPC_LOGIN_FLAGS) String() string {
+	switch e {
+	case EvtRpcLoginAuthDefault:
+		return "EvtRpcLoginAuthDefault"
+	case EvtRpcLoginAuthNegotiate:
+		return "EvtRpcLoginAuthNegotiate"
+	case EvtRpcLoginAuthKerberos:
+		return "EvtRpcLoginAuthKerberos"
+	case EvtRpcLoginAuthNTLM:
+		return "EvtRpcLoginAuthNTLM"
+	default:
+		return fmt.Sprintf("EVT_RPC_LOGIN_FLAGS(%d)", uint32(e))
+	}
+}
 
 // EVT_SEEK_FLAGS: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_seek_flags
 type EVT_SEEK_FLAGS uint32
@@ -249,6 +663,27 @@ const (
 	EvtSeekStrict             EVT_SEEK_FLAGS = 65536
 )
 
+// String returns the EVT_SEEK_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_SEEK_FLAGS) String() string {
+	switch e {
+	case EvtSeekRelativeToFirst:
+		return "EvtSeekRelativeToFirst"
+	case EvtSeekRelativeToLast:
+		return "EvtSeekRelativeToLast"
+	case EvtSeekRelativeToCurrent:
+		return "EvtSeekRelativeToCurrent"
+	case EvtSeekRelativeToBookmark:
+		return "EvtSeekRelativeToBookmark"
+	case EvtSeekOriginMask:
+		return "EvtSeekOriginMask"
+	case EvtSeekStrict:
+		return "EvtSeekStrict"
+	default:
+		return fmt.Sprintf("EVT_SEEK_FLAGS(%d)", uint32(e))
+	}
+}
+
 // EVT_SUBSCRIBE_FLAGS: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_subscribe_flags
 type EVT_SUBSCRIBE_FLAGS uint32
 
@@ -261,6 +696,25 @@ const (
 	EvtSubscribeStrict              EVT_SUBSCRIBE_FLAGS = 65536
 )
 
+// String returns the EVT_SUBSCRIBE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_SUBSCRIBE_FLAGS) String() string {
+	switch e {
+	case EvtSubscribeToFutureEvents:
+		return "EvtSubscribeToFutureEvents"
+	case EvtSubscribeStartAtOldestRecord:
+		return "EvtSubscribeStartAtOldestRecord"
+	case EvtSubscribeStartAfterBookmark:
+		return "EvtSubscribeStartAfterBookmark"
+	case EvtSubscribeTolerateQueryErrors:
+		return "EvtSubscribeTolerateQueryErrors"
+	case EvtSubscribeStrict:
+		return "EvtSubscribeStrict"
+	default:
+		return fmt.Sprintf("EVT_SUBSCRIBE_FLAGS(%d)", uint32(e))
+	}
+}
+
 // EVT_SUBSCRIBE_NOTIFY_ACTION: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_subscribe_notify_action
 type EVT_SUBSCRIBE_NOTIFY_ACTION int32
 
@@ -268,6 +722,19 @@ const (
 	EvtSubscribeActionError   EVT_SUBSCRIBE_NOTIFY_ACTION = 0
 	EvtSubscribeActionDeliver EVT_SUBSCRIBE_NOTIFY_ACTION = 1
 )
+
+// String returns the EVT_SUBSCRIBE_NOTIFY_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_SUBSCRIBE_NOTIFY_ACTION) String() string {
+	switch e {
+	case EvtSubscribeActionError:
+		return "EvtSubscribeActionError"
+	case EvtSubscribeActionDeliver:
+		return "EvtSubscribeActionDeliver"
+	default:
+		return fmt.Sprintf("EVT_SUBSCRIBE_NOTIFY_ACTION(%d)", int32(e))
+	}
+}
 
 // EVT_SYSTEM_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_system_property_id
 type EVT_SYSTEM_PROPERTY_ID int32
@@ -293,6 +760,53 @@ const (
 	EvtSystemVersion           EVT_SYSTEM_PROPERTY_ID = 17
 	EvtSystemPropertyIdEND     EVT_SYSTEM_PROPERTY_ID = 18
 )
+
+// String returns the EVT_SYSTEM_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_SYSTEM_PROPERTY_ID) String() string {
+	switch e {
+	case EvtSystemProviderName:
+		return "EvtSystemProviderName"
+	case EvtSystemProviderGuid:
+		return "EvtSystemProviderGuid"
+	case EvtSystemEventID:
+		return "EvtSystemEventID"
+	case EvtSystemQualifiers:
+		return "EvtSystemQualifiers"
+	case EvtSystemLevel:
+		return "EvtSystemLevel"
+	case EvtSystemTask:
+		return "EvtSystemTask"
+	case EvtSystemOpcode:
+		return "EvtSystemOpcode"
+	case EvtSystemKeywords:
+		return "EvtSystemKeywords"
+	case EvtSystemTimeCreated:
+		return "EvtSystemTimeCreated"
+	case EvtSystemEventRecordId:
+		return "EvtSystemEventRecordId"
+	case EvtSystemActivityID:
+		return "EvtSystemActivityID"
+	case EvtSystemRelatedActivityID:
+		return "EvtSystemRelatedActivityID"
+	case EvtSystemProcessID:
+		return "EvtSystemProcessID"
+	case EvtSystemThreadID:
+		return "EvtSystemThreadID"
+	case EvtSystemChannel:
+		return "EvtSystemChannel"
+	case EvtSystemComputer:
+		return "EvtSystemComputer"
+	case EvtSystemUserID:
+		return "EvtSystemUserID"
+	case EvtSystemVersion:
+		return "EvtSystemVersion"
+	case EvtSystemPropertyIdEND:
+		return "EvtSystemPropertyIdEND"
+	default:
+		return fmt.Sprintf("EVT_SYSTEM_PROPERTY_ID(%d)", int32(e))
+	}
+}
 
 // EVT_VARIANT_TYPE: https://learn.microsoft.com/windows/win32/api/winevt/ne-winevt-evt_variant_type
 type EVT_VARIANT_TYPE int32
@@ -324,6 +838,64 @@ const (
 	EvtVarTypeEvtXml     EVT_VARIANT_TYPE = 35
 )
 
+// String returns the EVT_VARIANT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EVT_VARIANT_TYPE) String() string {
+	switch e {
+	case EvtVarTypeNull:
+		return "EvtVarTypeNull"
+	case EvtVarTypeString:
+		return "EvtVarTypeString"
+	case EvtVarTypeAnsiString:
+		return "EvtVarTypeAnsiString"
+	case EvtVarTypeSByte:
+		return "EvtVarTypeSByte"
+	case EvtVarTypeByte:
+		return "EvtVarTypeByte"
+	case EvtVarTypeInt16:
+		return "EvtVarTypeInt16"
+	case EvtVarTypeUInt16:
+		return "EvtVarTypeUInt16"
+	case EvtVarTypeInt32:
+		return "EvtVarTypeInt32"
+	case EvtVarTypeUInt32:
+		return "EvtVarTypeUInt32"
+	case EvtVarTypeInt64:
+		return "EvtVarTypeInt64"
+	case EvtVarTypeUInt64:
+		return "EvtVarTypeUInt64"
+	case EvtVarTypeSingle:
+		return "EvtVarTypeSingle"
+	case EvtVarTypeDouble:
+		return "EvtVarTypeDouble"
+	case EvtVarTypeBoolean:
+		return "EvtVarTypeBoolean"
+	case EvtVarTypeBinary:
+		return "EvtVarTypeBinary"
+	case EvtVarTypeGuid:
+		return "EvtVarTypeGuid"
+	case EvtVarTypeSizeT:
+		return "EvtVarTypeSizeT"
+	case EvtVarTypeFileTime:
+		return "EvtVarTypeFileTime"
+	case EvtVarTypeSysTime:
+		return "EvtVarTypeSysTime"
+	case EvtVarTypeSid:
+		return "EvtVarTypeSid"
+	case EvtVarTypeHexInt32:
+		return "EvtVarTypeHexInt32"
+	case EvtVarTypeHexInt64:
+		return "EvtVarTypeHexInt64"
+	case EvtVarTypeEvtHandle:
+		return "EvtVarTypeEvtHandle"
+	case EvtVarTypeEvtXml:
+		return "EvtVarTypeEvtXml"
+	default:
+		return fmt.Sprintf("EVT_VARIANT_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type READ_EVENT_LOG_READ_FLAGS uint32
 
 const (
@@ -332,6 +904,28 @@ const (
 	EVENTLOG_FORWARDS_READ   READ_EVENT_LOG_READ_FLAGS = 4
 	EVENTLOG_BACKWARDS_READ  READ_EVENT_LOG_READ_FLAGS = 8
 )
+
+// String returns the READ_EVENT_LOG_READ_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e READ_EVENT_LOG_READ_FLAGS) String() string {
+	var parts []string
+	if e&EVENTLOG_SEEK_READ != 0 {
+		parts = append(parts, "EVENTLOG_SEEK_READ")
+	}
+	if e&EVENTLOG_SEQUENTIAL_READ != 0 {
+		parts = append(parts, "EVENTLOG_SEQUENTIAL_READ")
+	}
+	if e&EVENTLOG_FORWARDS_READ != 0 {
+		parts = append(parts, "EVENTLOG_FORWARDS_READ")
+	}
+	if e&EVENTLOG_BACKWARDS_READ != 0 {
+		parts = append(parts, "EVENTLOG_BACKWARDS_READ")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type REPORT_EVENT_TYPE uint16
 
@@ -343,3 +937,24 @@ const (
 	EVENTLOG_INFORMATION_TYPE REPORT_EVENT_TYPE = 4
 	EVENTLOG_WARNING_TYPE     REPORT_EVENT_TYPE = 2
 )
+
+// String returns the REPORT_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REPORT_EVENT_TYPE) String() string {
+	switch e {
+	case EVENTLOG_SUCCESS:
+		return "EVENTLOG_SUCCESS"
+	case EVENTLOG_AUDIT_FAILURE:
+		return "EVENTLOG_AUDIT_FAILURE"
+	case EVENTLOG_AUDIT_SUCCESS:
+		return "EVENTLOG_AUDIT_SUCCESS"
+	case EVENTLOG_ERROR_TYPE:
+		return "EVENTLOG_ERROR_TYPE"
+	case EVENTLOG_INFORMATION_TYPE:
+		return "EVENTLOG_INFORMATION_TYPE"
+	case EVENTLOG_WARNING_TYPE:
+		return "EVENTLOG_WARNING_TYPE"
+	default:
+		return fmt.Sprintf("REPORT_EVENT_TYPE(%d)", uint16(e))
+	}
+}

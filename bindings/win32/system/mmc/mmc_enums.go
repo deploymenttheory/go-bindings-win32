@@ -4,11 +4,26 @@
 
 package mmc
 
+import (
+	"fmt"
+)
+
 type CCM_COMMANDID_MASK_CONSTANTS uint32
 
 const (
 	CCM_COMMANDID_MASK_RESERVED CCM_COMMANDID_MASK_CONSTANTS = 4294901760
 )
+
+// String returns the CCM_COMMANDID_MASK_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CCM_COMMANDID_MASK_CONSTANTS) String() string {
+	switch e {
+	case CCM_COMMANDID_MASK_RESERVED:
+		return "CCM_COMMANDID_MASK_RESERVED"
+	default:
+		return fmt.Sprintf("CCM_COMMANDID_MASK_CONSTANTS(%d)", uint32(e))
+	}
+}
 
 type CCM_INSERTIONALLOWED int32
 
@@ -18,6 +33,23 @@ const (
 	CCM_INSERTIONALLOWED_TASK CCM_INSERTIONALLOWED = 4
 	CCM_INSERTIONALLOWED_VIEW CCM_INSERTIONALLOWED = 8
 )
+
+// String returns the CCM_INSERTIONALLOWED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CCM_INSERTIONALLOWED) String() string {
+	switch e {
+	case CCM_INSERTIONALLOWED_TOP:
+		return "CCM_INSERTIONALLOWED_TOP"
+	case CCM_INSERTIONALLOWED_NEW:
+		return "CCM_INSERTIONALLOWED_NEW"
+	case CCM_INSERTIONALLOWED_TASK:
+		return "CCM_INSERTIONALLOWED_TASK"
+	case CCM_INSERTIONALLOWED_VIEW:
+		return "CCM_INSERTIONALLOWED_VIEW"
+	default:
+		return fmt.Sprintf("CCM_INSERTIONALLOWED(%d)", int32(e))
+	}
+}
 
 type CCM_INSERTIONPOINTID int32
 
@@ -39,6 +71,43 @@ const (
 	CCM_INSERTIONPOINTID_ROOT_MENU           CCM_INSERTIONPOINTID = -2147483648
 )
 
+// String returns the CCM_INSERTIONPOINTID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CCM_INSERTIONPOINTID) String() string {
+	switch e {
+	case CCM_INSERTIONPOINTID_MASK_SPECIAL:
+		return "CCM_INSERTIONPOINTID_MASK_SPECIAL"
+	case CCM_INSERTIONPOINTID_MASK_SHARED:
+		return "CCM_INSERTIONPOINTID_MASK_SHARED"
+	case CCM_INSERTIONPOINTID_MASK_CREATE_PRIMARY:
+		return "CCM_INSERTIONPOINTID_MASK_CREATE_PRIMARY"
+	case CCM_INSERTIONPOINTID_MASK_ADD_PRIMARY:
+		return "CCM_INSERTIONPOINTID_MASK_ADD_PRIMARY"
+	case CCM_INSERTIONPOINTID_MASK_ADD_3RDPARTY:
+		return "CCM_INSERTIONPOINTID_MASK_ADD_3RDPARTY"
+	case CCM_INSERTIONPOINTID_MASK_RESERVED:
+		return "CCM_INSERTIONPOINTID_MASK_RESERVED"
+	case CCM_INSERTIONPOINTID_MASK_FLAGINDEX:
+		return "CCM_INSERTIONPOINTID_MASK_FLAGINDEX"
+	case CCM_INSERTIONPOINTID_PRIMARY_TOP:
+		return "CCM_INSERTIONPOINTID_PRIMARY_TOP"
+	case CCM_INSERTIONPOINTID_PRIMARY_NEW:
+		return "CCM_INSERTIONPOINTID_PRIMARY_NEW"
+	case CCM_INSERTIONPOINTID_PRIMARY_TASK:
+		return "CCM_INSERTIONPOINTID_PRIMARY_TASK"
+	case CCM_INSERTIONPOINTID_PRIMARY_VIEW:
+		return "CCM_INSERTIONPOINTID_PRIMARY_VIEW"
+	case CCM_INSERTIONPOINTID_PRIMARY_HELP:
+		return "CCM_INSERTIONPOINTID_PRIMARY_HELP"
+	case CCM_INSERTIONPOINTID_3RDPARTY_NEW:
+		return "CCM_INSERTIONPOINTID_3RDPARTY_NEW"
+	case CCM_INSERTIONPOINTID_3RDPARTY_TASK:
+		return "CCM_INSERTIONPOINTID_3RDPARTY_TASK"
+	default:
+		return fmt.Sprintf("CCM_INSERTIONPOINTID(%d)", int32(e))
+	}
+}
+
 type CCM_SPECIAL int32
 
 const (
@@ -50,6 +119,27 @@ const (
 	CCM_SPECIAL_ELEVATION_ICON  CCM_SPECIAL = 32
 )
 
+// String returns the CCM_SPECIAL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CCM_SPECIAL) String() string {
+	switch e {
+	case CCM_SPECIAL_SEPARATOR:
+		return "CCM_SPECIAL_SEPARATOR"
+	case CCM_SPECIAL_SUBMENU:
+		return "CCM_SPECIAL_SUBMENU"
+	case CCM_SPECIAL_DEFAULT_ITEM:
+		return "CCM_SPECIAL_DEFAULT_ITEM"
+	case CCM_SPECIAL_INSERTION_POINT:
+		return "CCM_SPECIAL_INSERTION_POINT"
+	case CCM_SPECIAL_TESTONLY:
+		return "CCM_SPECIAL_TESTONLY"
+	case CCM_SPECIAL_ELEVATION_ICON:
+		return "CCM_SPECIAL_ELEVATION_ICON"
+	default:
+		return fmt.Sprintf("CCM_SPECIAL(%d)", int32(e))
+	}
+}
+
 // DATA_OBJECT_TYPES: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-data_object_types
 type DATA_OBJECT_TYPES int32
 
@@ -59,6 +149,23 @@ const (
 	CCT_SNAPIN_MANAGER DATA_OBJECT_TYPES = 32770
 	CCT_UNINITIALIZED  DATA_OBJECT_TYPES = 65535
 )
+
+// String returns the DATA_OBJECT_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DATA_OBJECT_TYPES) String() string {
+	switch e {
+	case CCT_SCOPE:
+		return "CCT_SCOPE"
+	case CCT_RESULT:
+		return "CCT_RESULT"
+	case CCT_SNAPIN_MANAGER:
+		return "CCT_SNAPIN_MANAGER"
+	case CCT_UNINITIALIZED:
+		return "CCT_UNINITIALIZED"
+	default:
+		return fmt.Sprintf("DATA_OBJECT_TYPES(%d)", int32(e))
+	}
+}
 
 // IconIdentifier: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-iconidentifier
 type IconIdentifier int32
@@ -73,6 +180,25 @@ const (
 	Icon_Last        IconIdentifier = 32516
 )
 
+// String returns the IconIdentifier constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IconIdentifier) String() string {
+	switch e {
+	case Icon_None:
+		return "Icon_None"
+	case Icon_Error:
+		return "Icon_Error"
+	case Icon_Question:
+		return "Icon_Question"
+	case Icon_Warning:
+		return "Icon_Warning"
+	case Icon_Information:
+		return "Icon_Information"
+	default:
+		return fmt.Sprintf("IconIdentifier(%d)", int32(e))
+	}
+}
+
 // MMC_ACTION_TYPE: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_action_type
 type MMC_ACTION_TYPE int32
 
@@ -82,6 +208,23 @@ const (
 	MMC_ACTION_LINK          MMC_ACTION_TYPE = 1
 	MMC_ACTION_SCRIPT        MMC_ACTION_TYPE = 2
 )
+
+// String returns the MMC_ACTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_ACTION_TYPE) String() string {
+	switch e {
+	case MMC_ACTION_UNINITIALIZED:
+		return "MMC_ACTION_UNINITIALIZED"
+	case MMC_ACTION_ID:
+		return "MMC_ACTION_ID"
+	case MMC_ACTION_LINK:
+		return "MMC_ACTION_LINK"
+	case MMC_ACTION_SCRIPT:
+		return "MMC_ACTION_SCRIPT"
+	default:
+		return fmt.Sprintf("MMC_ACTION_TYPE(%d)", int32(e))
+	}
+}
 
 // MMC_BUTTON_STATE: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_button_state
 type MMC_BUTTON_STATE int32
@@ -93,6 +236,25 @@ const (
 	INDETERMINATE MMC_BUTTON_STATE = 8
 	BUTTONPRESSED MMC_BUTTON_STATE = 16
 )
+
+// String returns the MMC_BUTTON_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_BUTTON_STATE) String() string {
+	switch e {
+	case ENABLED:
+		return "ENABLED"
+	case CHECKED:
+		return "CHECKED"
+	case HIDDEN:
+		return "HIDDEN"
+	case INDETERMINATE:
+		return "INDETERMINATE"
+	case BUTTONPRESSED:
+		return "BUTTONPRESSED"
+	default:
+		return fmt.Sprintf("MMC_BUTTON_STATE(%d)", int32(e))
+	}
+}
 
 // MMC_CONSOLE_VERB: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_console_verb
 type MMC_CONSOLE_VERB int32
@@ -113,6 +275,37 @@ const (
 	MMC_VERB_LAST       MMC_CONSOLE_VERB = 32776
 )
 
+// String returns the MMC_CONSOLE_VERB constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_CONSOLE_VERB) String() string {
+	switch e {
+	case MMC_VERB_NONE:
+		return "MMC_VERB_NONE"
+	case MMC_VERB_OPEN:
+		return "MMC_VERB_OPEN"
+	case MMC_VERB_COPY:
+		return "MMC_VERB_COPY"
+	case MMC_VERB_PASTE:
+		return "MMC_VERB_PASTE"
+	case MMC_VERB_DELETE:
+		return "MMC_VERB_DELETE"
+	case MMC_VERB_PROPERTIES:
+		return "MMC_VERB_PROPERTIES"
+	case MMC_VERB_RENAME:
+		return "MMC_VERB_RENAME"
+	case MMC_VERB_REFRESH:
+		return "MMC_VERB_REFRESH"
+	case MMC_VERB_PRINT:
+		return "MMC_VERB_PRINT"
+	case MMC_VERB_CUT:
+		return "MMC_VERB_CUT"
+	case MMC_VERB_MAX:
+		return "MMC_VERB_MAX"
+	default:
+		return fmt.Sprintf("MMC_CONSOLE_VERB(%d)", int32(e))
+	}
+}
+
 // MMC_CONTROL_TYPE: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_control_type
 type MMC_CONTROL_TYPE int32
 
@@ -121,6 +314,21 @@ const (
 	MENUBUTTON  MMC_CONTROL_TYPE = 1
 	COMBOBOXBAR MMC_CONTROL_TYPE = 2
 )
+
+// String returns the MMC_CONTROL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_CONTROL_TYPE) String() string {
+	switch e {
+	case TOOLBAR:
+		return "TOOLBAR"
+	case MENUBUTTON:
+		return "MENUBUTTON"
+	case COMBOBOXBAR:
+		return "COMBOBOXBAR"
+	default:
+		return fmt.Sprintf("MMC_CONTROL_TYPE(%d)", int32(e))
+	}
+}
 
 // MMC_FILTER_CHANGE_CODE: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_filter_change_code
 type MMC_FILTER_CHANGE_CODE int32
@@ -131,6 +339,21 @@ const (
 	MFCC_VALUE_CHANGE MMC_FILTER_CHANGE_CODE = 2
 )
 
+// String returns the MMC_FILTER_CHANGE_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_FILTER_CHANGE_CODE) String() string {
+	switch e {
+	case MFCC_DISABLE:
+		return "MFCC_DISABLE"
+	case MFCC_ENABLE:
+		return "MFCC_ENABLE"
+	case MFCC_VALUE_CHANGE:
+		return "MFCC_VALUE_CHANGE"
+	default:
+		return fmt.Sprintf("MMC_FILTER_CHANGE_CODE(%d)", int32(e))
+	}
+}
+
 // MMC_FILTER_TYPE: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_filter_type
 type MMC_FILTER_TYPE int32
 
@@ -140,12 +363,38 @@ const (
 	MMC_FILTER_NOVALUE MMC_FILTER_TYPE = 32768
 )
 
+// String returns the MMC_FILTER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_FILTER_TYPE) String() string {
+	switch e {
+	case MMC_STRING_FILTER:
+		return "MMC_STRING_FILTER"
+	case MMC_INT_FILTER:
+		return "MMC_INT_FILTER"
+	case MMC_FILTER_NOVALUE:
+		return "MMC_FILTER_NOVALUE"
+	default:
+		return fmt.Sprintf("MMC_FILTER_TYPE(%d)", int32(e))
+	}
+}
+
 // MMC_MENU_COMMAND_IDS: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_menu_command_ids
 type MMC_MENU_COMMAND_IDS int32
 
 const (
 	MMCC_STANDARD_VIEW_SELECT MMC_MENU_COMMAND_IDS = -1
 )
+
+// String returns the MMC_MENU_COMMAND_IDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_MENU_COMMAND_IDS) String() string {
+	switch e {
+	case MMCC_STANDARD_VIEW_SELECT:
+		return "MMCC_STANDARD_VIEW_SELECT"
+	default:
+		return fmt.Sprintf("MMC_MENU_COMMAND_IDS(%d)", int32(e))
+	}
+}
 
 // MMC_NOTIFY_TYPE: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_notify_type
 type MMC_NOTIFY_TYPE int32
@@ -188,6 +437,85 @@ const (
 	MMCN_CANPASTE_OUTOFPROC MMC_NOTIFY_TYPE = 32803
 )
 
+// String returns the MMC_NOTIFY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_NOTIFY_TYPE) String() string {
+	switch e {
+	case MMCN_ACTIVATE:
+		return "MMCN_ACTIVATE"
+	case MMCN_ADD_IMAGES:
+		return "MMCN_ADD_IMAGES"
+	case MMCN_BTN_CLICK:
+		return "MMCN_BTN_CLICK"
+	case MMCN_CLICK:
+		return "MMCN_CLICK"
+	case MMCN_COLUMN_CLICK:
+		return "MMCN_COLUMN_CLICK"
+	case MMCN_CONTEXTMENU:
+		return "MMCN_CONTEXTMENU"
+	case MMCN_CUTORMOVE:
+		return "MMCN_CUTORMOVE"
+	case MMCN_DBLCLICK:
+		return "MMCN_DBLCLICK"
+	case MMCN_DELETE:
+		return "MMCN_DELETE"
+	case MMCN_DESELECT_ALL:
+		return "MMCN_DESELECT_ALL"
+	case MMCN_EXPAND:
+		return "MMCN_EXPAND"
+	case MMCN_HELP:
+		return "MMCN_HELP"
+	case MMCN_MENU_BTNCLICK:
+		return "MMCN_MENU_BTNCLICK"
+	case MMCN_MINIMIZED:
+		return "MMCN_MINIMIZED"
+	case MMCN_PASTE:
+		return "MMCN_PASTE"
+	case MMCN_PROPERTY_CHANGE:
+		return "MMCN_PROPERTY_CHANGE"
+	case MMCN_QUERY_PASTE:
+		return "MMCN_QUERY_PASTE"
+	case MMCN_REFRESH:
+		return "MMCN_REFRESH"
+	case MMCN_REMOVE_CHILDREN:
+		return "MMCN_REMOVE_CHILDREN"
+	case MMCN_RENAME:
+		return "MMCN_RENAME"
+	case MMCN_SELECT:
+		return "MMCN_SELECT"
+	case MMCN_SHOW:
+		return "MMCN_SHOW"
+	case MMCN_VIEW_CHANGE:
+		return "MMCN_VIEW_CHANGE"
+	case MMCN_SNAPINHELP:
+		return "MMCN_SNAPINHELP"
+	case MMCN_CONTEXTHELP:
+		return "MMCN_CONTEXTHELP"
+	case MMCN_INITOCX:
+		return "MMCN_INITOCX"
+	case MMCN_FILTER_CHANGE:
+		return "MMCN_FILTER_CHANGE"
+	case MMCN_FILTERBTN_CLICK:
+		return "MMCN_FILTERBTN_CLICK"
+	case MMCN_RESTORE_VIEW:
+		return "MMCN_RESTORE_VIEW"
+	case MMCN_PRINT:
+		return "MMCN_PRINT"
+	case MMCN_PRELOAD:
+		return "MMCN_PRELOAD"
+	case MMCN_LISTPAD:
+		return "MMCN_LISTPAD"
+	case MMCN_EXPANDSYNC:
+		return "MMCN_EXPANDSYNC"
+	case MMCN_COLUMNS_CHANGED:
+		return "MMCN_COLUMNS_CHANGED"
+	case MMCN_CANPASTE_OUTOFPROC:
+		return "MMCN_CANPASTE_OUTOFPROC"
+	default:
+		return fmt.Sprintf("MMC_NOTIFY_TYPE(%d)", int32(e))
+	}
+}
+
 // MMC_PROPERTY_ACTION: https://learn.microsoft.com/windows/win32/api/mmcobj/ne-mmcobj-mmc_property_action
 type MMC_PROPERTY_ACTION int32
 
@@ -196,6 +524,21 @@ const (
 	MMC_PROPACT_CHANGING    MMC_PROPERTY_ACTION = 2
 	MMC_PROPACT_INITIALIZED MMC_PROPERTY_ACTION = 3
 )
+
+// String returns the MMC_PROPERTY_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_PROPERTY_ACTION) String() string {
+	switch e {
+	case MMC_PROPACT_DELETING:
+		return "MMC_PROPACT_DELETING"
+	case MMC_PROPACT_CHANGING:
+		return "MMC_PROPACT_CHANGING"
+	case MMC_PROPACT_INITIALIZED:
+		return "MMC_PROPACT_INITIALIZED"
+	default:
+		return fmt.Sprintf("MMC_PROPERTY_ACTION(%d)", int32(e))
+	}
+}
 
 // MMC_RESULT_VIEW_STYLE: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_result_view_style
 type MMC_RESULT_VIEW_STYLE int32
@@ -207,6 +550,23 @@ const (
 	MMC_ENSUREFOCUSVISIBLE MMC_RESULT_VIEW_STYLE = 8
 )
 
+// String returns the MMC_RESULT_VIEW_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_RESULT_VIEW_STYLE) String() string {
+	switch e {
+	case MMC_SINGLESEL:
+		return "MMC_SINGLESEL"
+	case MMC_SHOWSELALWAYS:
+		return "MMC_SHOWSELALWAYS"
+	case MMC_NOSORTHEADER:
+		return "MMC_NOSORTHEADER"
+	case MMC_ENSUREFOCUSVISIBLE:
+		return "MMC_ENSUREFOCUSVISIBLE"
+	default:
+		return fmt.Sprintf("MMC_RESULT_VIEW_STYLE(%d)", int32(e))
+	}
+}
+
 // MMC_SCOPE_ITEM_STATE: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_scope_item_state
 type MMC_SCOPE_ITEM_STATE int32
 
@@ -215,6 +575,21 @@ const (
 	MMC_SCOPE_ITEM_STATE_BOLD         MMC_SCOPE_ITEM_STATE = 2
 	MMC_SCOPE_ITEM_STATE_EXPANDEDONCE MMC_SCOPE_ITEM_STATE = 3
 )
+
+// String returns the MMC_SCOPE_ITEM_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_SCOPE_ITEM_STATE) String() string {
+	switch e {
+	case MMC_SCOPE_ITEM_STATE_NORMAL:
+		return "MMC_SCOPE_ITEM_STATE_NORMAL"
+	case MMC_SCOPE_ITEM_STATE_BOLD:
+		return "MMC_SCOPE_ITEM_STATE_BOLD"
+	case MMC_SCOPE_ITEM_STATE_EXPANDEDONCE:
+		return "MMC_SCOPE_ITEM_STATE_EXPANDEDONCE"
+	default:
+		return fmt.Sprintf("MMC_SCOPE_ITEM_STATE(%d)", int32(e))
+	}
+}
 
 // MMC_TASK_DISPLAY_TYPE: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_task_display_type
 type MMC_TASK_DISPLAY_TYPE int32
@@ -227,6 +602,25 @@ const (
 	MMC_TASK_DISPLAY_TYPE_BITMAP        MMC_TASK_DISPLAY_TYPE = 4
 )
 
+// String returns the MMC_TASK_DISPLAY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_TASK_DISPLAY_TYPE) String() string {
+	switch e {
+	case MMC_TASK_DISPLAY_UNINITIALIZED:
+		return "MMC_TASK_DISPLAY_UNINITIALIZED"
+	case MMC_TASK_DISPLAY_TYPE_SYMBOL:
+		return "MMC_TASK_DISPLAY_TYPE_SYMBOL"
+	case MMC_TASK_DISPLAY_TYPE_VANILLA_GIF:
+		return "MMC_TASK_DISPLAY_TYPE_VANILLA_GIF"
+	case MMC_TASK_DISPLAY_TYPE_CHOCOLATE_GIF:
+		return "MMC_TASK_DISPLAY_TYPE_CHOCOLATE_GIF"
+	case MMC_TASK_DISPLAY_TYPE_BITMAP:
+		return "MMC_TASK_DISPLAY_TYPE_BITMAP"
+	default:
+		return fmt.Sprintf("MMC_TASK_DISPLAY_TYPE(%d)", int32(e))
+	}
+}
+
 // MMC_VIEW_TYPE: https://learn.microsoft.com/windows/win32/api/mmc/ne-mmc-mmc_view_type
 type MMC_VIEW_TYPE int32
 
@@ -236,6 +630,21 @@ const (
 	MMC_VIEW_TYPE_OCX  MMC_VIEW_TYPE = 2
 )
 
+// String returns the MMC_VIEW_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMC_VIEW_TYPE) String() string {
+	switch e {
+	case MMC_VIEW_TYPE_LIST:
+		return "MMC_VIEW_TYPE_LIST"
+	case MMC_VIEW_TYPE_HTML:
+		return "MMC_VIEW_TYPE_HTML"
+	case MMC_VIEW_TYPE_OCX:
+		return "MMC_VIEW_TYPE_OCX"
+	default:
+		return fmt.Sprintf("MMC_VIEW_TYPE(%d)", int32(e))
+	}
+}
+
 // ColumnSortOrder: https://learn.microsoft.com/windows/win32/api/mmcobj/ne-mmcobj-_columnsortorder
 type ColumnSortOrder int32
 
@@ -243,6 +652,19 @@ const (
 	SortOrder_Ascending  ColumnSortOrder = 0
 	SortOrder_Descending ColumnSortOrder = 1
 )
+
+// String returns the ColumnSortOrder constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ColumnSortOrder) String() string {
+	switch e {
+	case SortOrder_Ascending:
+		return "SortOrder_Ascending"
+	case SortOrder_Descending:
+		return "SortOrder_Descending"
+	default:
+		return fmt.Sprintf("ColumnSortOrder(%d)", int32(e))
+	}
+}
 
 // DocumentMode: https://learn.microsoft.com/windows/win32/api/mmcobj/ne-mmcobj-_documentmode
 type DocumentMode int32
@@ -254,6 +676,23 @@ const (
 	DocumentMode_User_SDI DocumentMode = 3
 )
 
+// String returns the DocumentMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DocumentMode) String() string {
+	switch e {
+	case DocumentMode_Author:
+		return "DocumentMode_Author"
+	case DocumentMode_User:
+		return "DocumentMode_User"
+	case DocumentMode_User_MDI:
+		return "DocumentMode_User_MDI"
+	case DocumentMode_User_SDI:
+		return "DocumentMode_User_SDI"
+	default:
+		return fmt.Sprintf("DocumentMode(%d)", int32(e))
+	}
+}
+
 // ExportListOptions: https://learn.microsoft.com/windows/win32/api/mmcobj/ne-mmcobj-_exportlistoptions
 type ExportListOptions int32
 
@@ -263,6 +702,23 @@ const (
 	ExportListOptions_TabDelimited      ExportListOptions = 2
 	ExportListOptions_SelectedItemsOnly ExportListOptions = 4
 )
+
+// String returns the ExportListOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ExportListOptions) String() string {
+	switch e {
+	case ExportListOptions_Default:
+		return "ExportListOptions_Default"
+	case ExportListOptions_Unicode:
+		return "ExportListOptions_Unicode"
+	case ExportListOptions_TabDelimited:
+		return "ExportListOptions_TabDelimited"
+	case ExportListOptions_SelectedItemsOnly:
+		return "ExportListOptions_SelectedItemsOnly"
+	default:
+		return fmt.Sprintf("ExportListOptions(%d)", int32(e))
+	}
+}
 
 // ListViewMode: https://learn.microsoft.com/windows/win32/api/mmcobj/ne-mmcobj-_listviewmode
 type ListViewMode int32
@@ -275,6 +731,25 @@ const (
 	ListMode_Filtered    ListViewMode = 4
 )
 
+// String returns the ListViewMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ListViewMode) String() string {
+	switch e {
+	case ListMode_Small_Icons:
+		return "ListMode_Small_Icons"
+	case ListMode_Large_Icons:
+		return "ListMode_Large_Icons"
+	case ListMode_List:
+		return "ListMode_List"
+	case ListMode_Detail:
+		return "ListMode_Detail"
+	case ListMode_Filtered:
+		return "ListMode_Filtered"
+	default:
+		return fmt.Sprintf("ListViewMode(%d)", int32(e))
+	}
+}
+
 // ViewOptions: https://learn.microsoft.com/windows/win32/api/mmcobj/ne-mmcobj-_viewoptions
 type ViewOptions int32
 
@@ -285,3 +760,22 @@ const (
 	ViewOption_NotPersistable   ViewOptions = 4
 	ViewOption_ActionPaneHidden ViewOptions = 8
 )
+
+// String returns the ViewOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ViewOptions) String() string {
+	switch e {
+	case ViewOption_Default:
+		return "ViewOption_Default"
+	case ViewOption_ScopeTreeHidden:
+		return "ViewOption_ScopeTreeHidden"
+	case ViewOption_NoToolBars:
+		return "ViewOption_NoToolBars"
+	case ViewOption_NotPersistable:
+		return "ViewOption_NotPersistable"
+	case ViewOption_ActionPaneHidden:
+		return "ViewOption_ActionPaneHidden"
+	default:
+		return fmt.Sprintf("ViewOptions(%d)", int32(e))
+	}
+}

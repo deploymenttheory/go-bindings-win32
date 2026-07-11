@@ -4,6 +4,11 @@
 
 package jobobjects
 
+import (
+	"fmt"
+	"strings"
+)
+
 type JOBOBJECTINFOCLASS int32
 
 const (
@@ -61,6 +66,119 @@ const (
 	MaxJobObjectInfoClass                       JOBOBJECTINFOCLASS = 52
 )
 
+// String returns the JOBOBJECTINFOCLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JOBOBJECTINFOCLASS) String() string {
+	switch e {
+	case JobObjectBasicAccountingInformation:
+		return "JobObjectBasicAccountingInformation"
+	case JobObjectBasicLimitInformation:
+		return "JobObjectBasicLimitInformation"
+	case JobObjectBasicProcessIdList:
+		return "JobObjectBasicProcessIdList"
+	case JobObjectBasicUIRestrictions:
+		return "JobObjectBasicUIRestrictions"
+	case JobObjectSecurityLimitInformation:
+		return "JobObjectSecurityLimitInformation"
+	case JobObjectEndOfJobTimeInformation:
+		return "JobObjectEndOfJobTimeInformation"
+	case JobObjectAssociateCompletionPortInformation:
+		return "JobObjectAssociateCompletionPortInformation"
+	case JobObjectBasicAndIoAccountingInformation:
+		return "JobObjectBasicAndIoAccountingInformation"
+	case JobObjectExtendedLimitInformation:
+		return "JobObjectExtendedLimitInformation"
+	case JobObjectJobSetInformation:
+		return "JobObjectJobSetInformation"
+	case JobObjectGroupInformation:
+		return "JobObjectGroupInformation"
+	case JobObjectNotificationLimitInformation:
+		return "JobObjectNotificationLimitInformation"
+	case JobObjectLimitViolationInformation:
+		return "JobObjectLimitViolationInformation"
+	case JobObjectGroupInformationEx:
+		return "JobObjectGroupInformationEx"
+	case JobObjectCpuRateControlInformation:
+		return "JobObjectCpuRateControlInformation"
+	case JobObjectCompletionFilter:
+		return "JobObjectCompletionFilter"
+	case JobObjectCompletionCounter:
+		return "JobObjectCompletionCounter"
+	case JobObjectReserved1Information:
+		return "JobObjectReserved1Information"
+	case JobObjectReserved2Information:
+		return "JobObjectReserved2Information"
+	case JobObjectReserved3Information:
+		return "JobObjectReserved3Information"
+	case JobObjectReserved4Information:
+		return "JobObjectReserved4Information"
+	case JobObjectReserved5Information:
+		return "JobObjectReserved5Information"
+	case JobObjectReserved6Information:
+		return "JobObjectReserved6Information"
+	case JobObjectReserved7Information:
+		return "JobObjectReserved7Information"
+	case JobObjectReserved8Information:
+		return "JobObjectReserved8Information"
+	case JobObjectReserved9Information:
+		return "JobObjectReserved9Information"
+	case JobObjectReserved10Information:
+		return "JobObjectReserved10Information"
+	case JobObjectReserved11Information:
+		return "JobObjectReserved11Information"
+	case JobObjectReserved12Information:
+		return "JobObjectReserved12Information"
+	case JobObjectReserved13Information:
+		return "JobObjectReserved13Information"
+	case JobObjectReserved14Information:
+		return "JobObjectReserved14Information"
+	case JobObjectNetRateControlInformation:
+		return "JobObjectNetRateControlInformation"
+	case JobObjectNotificationLimitInformation2:
+		return "JobObjectNotificationLimitInformation2"
+	case JobObjectLimitViolationInformation2:
+		return "JobObjectLimitViolationInformation2"
+	case JobObjectCreateSilo:
+		return "JobObjectCreateSilo"
+	case JobObjectSiloBasicInformation:
+		return "JobObjectSiloBasicInformation"
+	case JobObjectReserved15Information:
+		return "JobObjectReserved15Information"
+	case JobObjectReserved16Information:
+		return "JobObjectReserved16Information"
+	case JobObjectReserved17Information:
+		return "JobObjectReserved17Information"
+	case JobObjectReserved18Information:
+		return "JobObjectReserved18Information"
+	case JobObjectReserved19Information:
+		return "JobObjectReserved19Information"
+	case JobObjectReserved20Information:
+		return "JobObjectReserved20Information"
+	case JobObjectReserved21Information:
+		return "JobObjectReserved21Information"
+	case JobObjectReserved22Information:
+		return "JobObjectReserved22Information"
+	case JobObjectReserved23Information:
+		return "JobObjectReserved23Information"
+	case JobObjectReserved24Information:
+		return "JobObjectReserved24Information"
+	case JobObjectReserved25Information:
+		return "JobObjectReserved25Information"
+	case JobObjectReserved26Information:
+		return "JobObjectReserved26Information"
+	case JobObjectReserved27Information:
+		return "JobObjectReserved27Information"
+	case JobObjectReserved28Information:
+		return "JobObjectReserved28Information"
+	case JobObjectNetworkAccountingInformation:
+		return "JobObjectNetworkAccountingInformation"
+	case MaxJobObjectInfoClass:
+		return "MaxJobObjectInfoClass"
+	default:
+		return fmt.Sprintf("JOBOBJECTINFOCLASS(%d)", int32(e))
+	}
+}
+
 type JOBOBJECT_IO_ATTRIBUTION_CONTROL_FLAGS int32
 
 const (
@@ -68,6 +186,21 @@ const (
 	JOBOBJECT_IO_ATTRIBUTION_CONTROL_DISABLE     JOBOBJECT_IO_ATTRIBUTION_CONTROL_FLAGS = 2
 	JOBOBJECT_IO_ATTRIBUTION_CONTROL_VALID_FLAGS JOBOBJECT_IO_ATTRIBUTION_CONTROL_FLAGS = 3
 )
+
+// String returns the JOBOBJECT_IO_ATTRIBUTION_CONTROL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JOBOBJECT_IO_ATTRIBUTION_CONTROL_FLAGS) String() string {
+	switch e {
+	case JOBOBJECT_IO_ATTRIBUTION_CONTROL_ENABLE:
+		return "JOBOBJECT_IO_ATTRIBUTION_CONTROL_ENABLE"
+	case JOBOBJECT_IO_ATTRIBUTION_CONTROL_DISABLE:
+		return "JOBOBJECT_IO_ATTRIBUTION_CONTROL_DISABLE"
+	case JOBOBJECT_IO_ATTRIBUTION_CONTROL_VALID_FLAGS:
+		return "JOBOBJECT_IO_ATTRIBUTION_CONTROL_VALID_FLAGS"
+	default:
+		return fmt.Sprintf("JOBOBJECT_IO_ATTRIBUTION_CONTROL_FLAGS(%d)", int32(e))
+	}
+}
 
 type JOBOBJECT_RATE_CONTROL_TOLERANCE int32
 
@@ -77,6 +210,21 @@ const (
 	ToleranceHigh   JOBOBJECT_RATE_CONTROL_TOLERANCE = 3
 )
 
+// String returns the JOBOBJECT_RATE_CONTROL_TOLERANCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JOBOBJECT_RATE_CONTROL_TOLERANCE) String() string {
+	switch e {
+	case ToleranceLow:
+		return "ToleranceLow"
+	case ToleranceMedium:
+		return "ToleranceMedium"
+	case ToleranceHigh:
+		return "ToleranceHigh"
+	default:
+		return fmt.Sprintf("JOBOBJECT_RATE_CONTROL_TOLERANCE(%d)", int32(e))
+	}
+}
+
 type JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL int32
 
 const (
@@ -85,6 +233,22 @@ const (
 	ToleranceIntervalLong   JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL = 3
 )
 
+// String returns the JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL) String() string {
+	switch e {
+	case ToleranceIntervalShort:
+		return "ToleranceIntervalShort"
+	case ToleranceIntervalMedium:
+		return "ToleranceIntervalMedium"
+	case ToleranceIntervalLong:
+		return "ToleranceIntervalLong"
+	default:
+		return fmt.Sprintf("JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type JOB_OBJECT_CPU_RATE_CONTROL uint32
 
 const (
@@ -96,6 +260,35 @@ const (
 	JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS  JOB_OBJECT_CPU_RATE_CONTROL = 63
 )
 
+// String returns the JOB_OBJECT_CPU_RATE_CONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JOB_OBJECT_CPU_RATE_CONTROL) String() string {
+	var parts []string
+	if e&JOB_OBJECT_CPU_RATE_CONTROL_ENABLE != 0 {
+		parts = append(parts, "JOB_OBJECT_CPU_RATE_CONTROL_ENABLE")
+	}
+	if e&JOB_OBJECT_CPU_RATE_CONTROL_WEIGHT_BASED != 0 {
+		parts = append(parts, "JOB_OBJECT_CPU_RATE_CONTROL_WEIGHT_BASED")
+	}
+	if e&JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP != 0 {
+		parts = append(parts, "JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP")
+	}
+	if e&JOB_OBJECT_CPU_RATE_CONTROL_NOTIFY != 0 {
+		parts = append(parts, "JOB_OBJECT_CPU_RATE_CONTROL_NOTIFY")
+	}
+	if e&JOB_OBJECT_CPU_RATE_CONTROL_MIN_MAX_RATE != 0 {
+		parts = append(parts, "JOB_OBJECT_CPU_RATE_CONTROL_MIN_MAX_RATE")
+	}
+	if e&JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS != 0 {
+		parts = append(parts, "JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type JOB_OBJECT_IO_RATE_CONTROL_FLAGS int32
 
 const (
@@ -106,6 +299,32 @@ const (
 	JOB_OBJECT_IO_RATE_CONTROL_VALID_FLAGS                   JOB_OBJECT_IO_RATE_CONTROL_FLAGS = 15
 )
 
+// String returns the JOB_OBJECT_IO_RATE_CONTROL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JOB_OBJECT_IO_RATE_CONTROL_FLAGS) String() string {
+	var parts []string
+	if e&JOB_OBJECT_IO_RATE_CONTROL_ENABLE != 0 {
+		parts = append(parts, "JOB_OBJECT_IO_RATE_CONTROL_ENABLE")
+	}
+	if e&JOB_OBJECT_IO_RATE_CONTROL_STANDALONE_VOLUME != 0 {
+		parts = append(parts, "JOB_OBJECT_IO_RATE_CONTROL_STANDALONE_VOLUME")
+	}
+	if e&JOB_OBJECT_IO_RATE_CONTROL_FORCE_UNIT_ACCESS_ALL != 0 {
+		parts = append(parts, "JOB_OBJECT_IO_RATE_CONTROL_FORCE_UNIT_ACCESS_ALL")
+	}
+	if e&JOB_OBJECT_IO_RATE_CONTROL_FORCE_UNIT_ACCESS_ON_SOFT_CAP != 0 {
+		parts = append(parts, "JOB_OBJECT_IO_RATE_CONTROL_FORCE_UNIT_ACCESS_ON_SOFT_CAP")
+	}
+	if e&JOB_OBJECT_IO_RATE_CONTROL_VALID_FLAGS != 0 {
+		parts = append(parts, "JOB_OBJECT_IO_RATE_CONTROL_VALID_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type JOB_OBJECT_LIMIT uint32
 
 const (
@@ -138,7 +357,99 @@ const (
 	JOB_OBJECT_NOTIFICATION_LIMIT_VALID_FLAGS   JOB_OBJECT_LIMIT = 2064900
 )
 
+// String returns the JOB_OBJECT_LIMIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JOB_OBJECT_LIMIT) String() string {
+	var parts []string
+	if e&JOB_OBJECT_LIMIT_WORKINGSET != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_WORKINGSET")
+	}
+	if e&JOB_OBJECT_LIMIT_PROCESS_TIME != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_PROCESS_TIME")
+	}
+	if e&JOB_OBJECT_LIMIT_JOB_TIME != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_JOB_TIME")
+	}
+	if e&JOB_OBJECT_LIMIT_ACTIVE_PROCESS != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_ACTIVE_PROCESS")
+	}
+	if e&JOB_OBJECT_LIMIT_AFFINITY != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_AFFINITY")
+	}
+	if e&JOB_OBJECT_LIMIT_PRIORITY_CLASS != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_PRIORITY_CLASS")
+	}
+	if e&JOB_OBJECT_LIMIT_PRESERVE_JOB_TIME != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_PRESERVE_JOB_TIME")
+	}
+	if e&JOB_OBJECT_LIMIT_SCHEDULING_CLASS != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_SCHEDULING_CLASS")
+	}
+	if e&JOB_OBJECT_LIMIT_PROCESS_MEMORY != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_PROCESS_MEMORY")
+	}
+	if e&JOB_OBJECT_LIMIT_JOB_MEMORY != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_JOB_MEMORY")
+	}
+	if e&JOB_OBJECT_LIMIT_JOB_MEMORY_HIGH != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_JOB_MEMORY_HIGH")
+	}
+	if e&JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_DIE_ON_UNHANDLED_EXCEPTION")
+	}
+	if e&JOB_OBJECT_LIMIT_BREAKAWAY_OK != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_BREAKAWAY_OK")
+	}
+	if e&JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK")
+	}
+	if e&JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE")
+	}
+	if e&JOB_OBJECT_LIMIT_SUBSET_AFFINITY != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_SUBSET_AFFINITY")
+	}
+	if e&JOB_OBJECT_LIMIT_JOB_MEMORY_LOW != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_JOB_MEMORY_LOW")
+	}
+	if e&JOB_OBJECT_LIMIT_JOB_READ_BYTES != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_JOB_READ_BYTES")
+	}
+	if e&JOB_OBJECT_LIMIT_JOB_WRITE_BYTES != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_JOB_WRITE_BYTES")
+	}
+	if e&JOB_OBJECT_LIMIT_RATE_CONTROL != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_RATE_CONTROL")
+	}
+	if e&JOB_OBJECT_LIMIT_CPU_RATE_CONTROL != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_CPU_RATE_CONTROL")
+	}
+	if e&JOB_OBJECT_LIMIT_IO_RATE_CONTROL != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_IO_RATE_CONTROL")
+	}
+	if e&JOB_OBJECT_LIMIT_NET_RATE_CONTROL != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_NET_RATE_CONTROL")
+	}
+	if e&JOB_OBJECT_LIMIT_VALID_FLAGS != 0 {
+		parts = append(parts, "JOB_OBJECT_LIMIT_VALID_FLAGS")
+	}
+	if e&JOB_OBJECT_BASIC_LIMIT_VALID_FLAGS != 0 {
+		parts = append(parts, "JOB_OBJECT_BASIC_LIMIT_VALID_FLAGS")
+	}
+	if e&JOB_OBJECT_EXTENDED_LIMIT_VALID_FLAGS != 0 {
+		parts = append(parts, "JOB_OBJECT_EXTENDED_LIMIT_VALID_FLAGS")
+	}
+	if e&JOB_OBJECT_NOTIFICATION_LIMIT_VALID_FLAGS != 0 {
+		parts = append(parts, "JOB_OBJECT_NOTIFICATION_LIMIT_VALID_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // JOB_OBJECT_NET_RATE_CONTROL_FLAGS: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-job_object_net_rate_control_flags
+// Bitmask — values may be combined with |.
 type JOB_OBJECT_NET_RATE_CONTROL_FLAGS int32
 
 const (
@@ -148,6 +459,29 @@ const (
 	JOB_OBJECT_NET_RATE_CONTROL_VALID_FLAGS   JOB_OBJECT_NET_RATE_CONTROL_FLAGS = 7
 )
 
+// String returns the JOB_OBJECT_NET_RATE_CONTROL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JOB_OBJECT_NET_RATE_CONTROL_FLAGS) String() string {
+	var parts []string
+	if e&JOB_OBJECT_NET_RATE_CONTROL_ENABLE != 0 {
+		parts = append(parts, "JOB_OBJECT_NET_RATE_CONTROL_ENABLE")
+	}
+	if e&JOB_OBJECT_NET_RATE_CONTROL_MAX_BANDWIDTH != 0 {
+		parts = append(parts, "JOB_OBJECT_NET_RATE_CONTROL_MAX_BANDWIDTH")
+	}
+	if e&JOB_OBJECT_NET_RATE_CONTROL_DSCP_TAG != 0 {
+		parts = append(parts, "JOB_OBJECT_NET_RATE_CONTROL_DSCP_TAG")
+	}
+	if e&JOB_OBJECT_NET_RATE_CONTROL_VALID_FLAGS != 0 {
+		parts = append(parts, "JOB_OBJECT_NET_RATE_CONTROL_VALID_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type JOB_OBJECT_SECURITY uint32
 
 const (
@@ -158,6 +492,31 @@ const (
 	JOB_OBJECT_SECURITY_VALID_FLAGS      JOB_OBJECT_SECURITY = 15
 )
 
+// String returns the JOB_OBJECT_SECURITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JOB_OBJECT_SECURITY) String() string {
+	var parts []string
+	if e&JOB_OBJECT_SECURITY_NO_ADMIN != 0 {
+		parts = append(parts, "JOB_OBJECT_SECURITY_NO_ADMIN")
+	}
+	if e&JOB_OBJECT_SECURITY_RESTRICTED_TOKEN != 0 {
+		parts = append(parts, "JOB_OBJECT_SECURITY_RESTRICTED_TOKEN")
+	}
+	if e&JOB_OBJECT_SECURITY_ONLY_TOKEN != 0 {
+		parts = append(parts, "JOB_OBJECT_SECURITY_ONLY_TOKEN")
+	}
+	if e&JOB_OBJECT_SECURITY_FILTER_TOKENS != 0 {
+		parts = append(parts, "JOB_OBJECT_SECURITY_FILTER_TOKENS")
+	}
+	if e&JOB_OBJECT_SECURITY_VALID_FLAGS != 0 {
+		parts = append(parts, "JOB_OBJECT_SECURITY_VALID_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type JOB_OBJECT_TERMINATE_AT_END_ACTION uint32
 
 const (
@@ -165,6 +524,20 @@ const (
 	JOB_OBJECT_POST_AT_END_OF_JOB      JOB_OBJECT_TERMINATE_AT_END_ACTION = 1
 )
 
+// String returns the JOB_OBJECT_TERMINATE_AT_END_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JOB_OBJECT_TERMINATE_AT_END_ACTION) String() string {
+	switch e {
+	case JOB_OBJECT_TERMINATE_AT_END_OF_JOB:
+		return "JOB_OBJECT_TERMINATE_AT_END_OF_JOB"
+	case JOB_OBJECT_POST_AT_END_OF_JOB:
+		return "JOB_OBJECT_POST_AT_END_OF_JOB"
+	default:
+		return fmt.Sprintf("JOB_OBJECT_TERMINATE_AT_END_ACTION(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type JOB_OBJECT_UILIMIT uint32
 
 const (
@@ -178,3 +551,37 @@ const (
 	JOB_OBJECT_UILIMIT_DESKTOP          JOB_OBJECT_UILIMIT = 64
 	JOB_OBJECT_UILIMIT_EXITWINDOWS      JOB_OBJECT_UILIMIT = 128
 )
+
+// String returns the JOB_OBJECT_UILIMIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JOB_OBJECT_UILIMIT) String() string {
+	var parts []string
+	if e&JOB_OBJECT_UILIMIT_HANDLES != 0 {
+		parts = append(parts, "JOB_OBJECT_UILIMIT_HANDLES")
+	}
+	if e&JOB_OBJECT_UILIMIT_READCLIPBOARD != 0 {
+		parts = append(parts, "JOB_OBJECT_UILIMIT_READCLIPBOARD")
+	}
+	if e&JOB_OBJECT_UILIMIT_WRITECLIPBOARD != 0 {
+		parts = append(parts, "JOB_OBJECT_UILIMIT_WRITECLIPBOARD")
+	}
+	if e&JOB_OBJECT_UILIMIT_SYSTEMPARAMETERS != 0 {
+		parts = append(parts, "JOB_OBJECT_UILIMIT_SYSTEMPARAMETERS")
+	}
+	if e&JOB_OBJECT_UILIMIT_DISPLAYSETTINGS != 0 {
+		parts = append(parts, "JOB_OBJECT_UILIMIT_DISPLAYSETTINGS")
+	}
+	if e&JOB_OBJECT_UILIMIT_GLOBALATOMS != 0 {
+		parts = append(parts, "JOB_OBJECT_UILIMIT_GLOBALATOMS")
+	}
+	if e&JOB_OBJECT_UILIMIT_DESKTOP != 0 {
+		parts = append(parts, "JOB_OBJECT_UILIMIT_DESKTOP")
+	}
+	if e&JOB_OBJECT_UILIMIT_EXITWINDOWS != 0 {
+		parts = append(parts, "JOB_OBJECT_UILIMIT_EXITWINDOWS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

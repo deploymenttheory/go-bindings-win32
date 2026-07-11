@@ -4,6 +4,10 @@
 
 package js
 
+import (
+	"fmt"
+)
+
 type JsErrorCode uint32
 
 const (
@@ -38,6 +42,73 @@ const (
 	JsErrorFatal                      JsErrorCode = 262145
 )
 
+// String returns the JsErrorCode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JsErrorCode) String() string {
+	switch e {
+	case JsNoError:
+		return "JsNoError"
+	case JsErrorCategoryUsage:
+		return "JsErrorCategoryUsage"
+	case JsErrorInvalidArgument:
+		return "JsErrorInvalidArgument"
+	case JsErrorNullArgument:
+		return "JsErrorNullArgument"
+	case JsErrorNoCurrentContext:
+		return "JsErrorNoCurrentContext"
+	case JsErrorInExceptionState:
+		return "JsErrorInExceptionState"
+	case JsErrorNotImplemented:
+		return "JsErrorNotImplemented"
+	case JsErrorWrongThread:
+		return "JsErrorWrongThread"
+	case JsErrorRuntimeInUse:
+		return "JsErrorRuntimeInUse"
+	case JsErrorBadSerializedScript:
+		return "JsErrorBadSerializedScript"
+	case JsErrorInDisabledState:
+		return "JsErrorInDisabledState"
+	case JsErrorCannotDisableExecution:
+		return "JsErrorCannotDisableExecution"
+	case JsErrorHeapEnumInProgress:
+		return "JsErrorHeapEnumInProgress"
+	case JsErrorArgumentNotObject:
+		return "JsErrorArgumentNotObject"
+	case JsErrorInProfileCallback:
+		return "JsErrorInProfileCallback"
+	case JsErrorInThreadServiceCallback:
+		return "JsErrorInThreadServiceCallback"
+	case JsErrorCannotSerializeDebugScript:
+		return "JsErrorCannotSerializeDebugScript"
+	case JsErrorAlreadyDebuggingContext:
+		return "JsErrorAlreadyDebuggingContext"
+	case JsErrorAlreadyProfilingContext:
+		return "JsErrorAlreadyProfilingContext"
+	case JsErrorIdleNotEnabled:
+		return "JsErrorIdleNotEnabled"
+	case JsErrorCategoryEngine:
+		return "JsErrorCategoryEngine"
+	case JsErrorOutOfMemory:
+		return "JsErrorOutOfMemory"
+	case JsErrorCategoryScript:
+		return "JsErrorCategoryScript"
+	case JsErrorScriptException:
+		return "JsErrorScriptException"
+	case JsErrorScriptCompile:
+		return "JsErrorScriptCompile"
+	case JsErrorScriptTerminated:
+		return "JsErrorScriptTerminated"
+	case JsErrorScriptEvalDisabled:
+		return "JsErrorScriptEvalDisabled"
+	case JsErrorCategoryFatal:
+		return "JsErrorCategoryFatal"
+	case JsErrorFatal:
+		return "JsErrorFatal"
+	default:
+		return fmt.Sprintf("JsErrorCode(%d)", uint32(e))
+	}
+}
+
 type JsMemoryEventType int32
 
 const (
@@ -45,6 +116,21 @@ const (
 	JsMemoryFree     JsMemoryEventType = 1
 	JsMemoryFailure  JsMemoryEventType = 2
 )
+
+// String returns the JsMemoryEventType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JsMemoryEventType) String() string {
+	switch e {
+	case JsMemoryAllocate:
+		return "JsMemoryAllocate"
+	case JsMemoryFree:
+		return "JsMemoryFree"
+	case JsMemoryFailure:
+		return "JsMemoryFailure"
+	default:
+		return fmt.Sprintf("JsMemoryEventType(%d)", int32(e))
+	}
+}
 
 type JsRuntimeAttributes int32
 
@@ -57,6 +143,27 @@ const (
 	JsRuntimeAttributeDisableEval                 JsRuntimeAttributes = 16
 )
 
+// String returns the JsRuntimeAttributes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JsRuntimeAttributes) String() string {
+	switch e {
+	case JsRuntimeAttributeNone:
+		return "JsRuntimeAttributeNone"
+	case JsRuntimeAttributeDisableBackgroundWork:
+		return "JsRuntimeAttributeDisableBackgroundWork"
+	case JsRuntimeAttributeAllowScriptInterrupt:
+		return "JsRuntimeAttributeAllowScriptInterrupt"
+	case JsRuntimeAttributeEnableIdleProcessing:
+		return "JsRuntimeAttributeEnableIdleProcessing"
+	case JsRuntimeAttributeDisableNativeCodeGeneration:
+		return "JsRuntimeAttributeDisableNativeCodeGeneration"
+	case JsRuntimeAttributeDisableEval:
+		return "JsRuntimeAttributeDisableEval"
+	default:
+		return fmt.Sprintf("JsRuntimeAttributes(%d)", int32(e))
+	}
+}
+
 type JsRuntimeVersion int32
 
 const (
@@ -64,6 +171,21 @@ const (
 	JsRuntimeVersion11   JsRuntimeVersion = 1
 	JsRuntimeVersionEdge JsRuntimeVersion = -1
 )
+
+// String returns the JsRuntimeVersion constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JsRuntimeVersion) String() string {
+	switch e {
+	case JsRuntimeVersion10:
+		return "JsRuntimeVersion10"
+	case JsRuntimeVersion11:
+		return "JsRuntimeVersion11"
+	case JsRuntimeVersionEdge:
+		return "JsRuntimeVersionEdge"
+	default:
+		return fmt.Sprintf("JsRuntimeVersion(%d)", int32(e))
+	}
+}
 
 type JsValueType int32
 
@@ -78,3 +200,30 @@ const (
 	JsError     JsValueType = 7
 	JsArray     JsValueType = 8
 )
+
+// String returns the JsValueType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JsValueType) String() string {
+	switch e {
+	case JsUndefined:
+		return "JsUndefined"
+	case JsNull:
+		return "JsNull"
+	case JsNumber:
+		return "JsNumber"
+	case JsString:
+		return "JsString"
+	case JsBoolean:
+		return "JsBoolean"
+	case JsObject:
+		return "JsObject"
+	case JsFunction:
+		return "JsFunction"
+	case JsError:
+		return "JsError"
+	case JsArray:
+		return "JsArray"
+	default:
+		return fmt.Sprintf("JsValueType(%d)", int32(e))
+	}
+}

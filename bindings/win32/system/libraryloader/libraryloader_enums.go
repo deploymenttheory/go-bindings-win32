@@ -4,6 +4,11 @@
 
 package libraryloader
 
+import (
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type LOAD_LIBRARY_FLAGS uint32
 
 const (
@@ -22,3 +27,55 @@ const (
 	LOAD_LIBRARY_SAFE_CURRENT_DIRS            LOAD_LIBRARY_FLAGS = 8192
 	LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER LOAD_LIBRARY_FLAGS = 16384
 )
+
+// String returns the LOAD_LIBRARY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOAD_LIBRARY_FLAGS) String() string {
+	var parts []string
+	if e&DONT_RESOLVE_DLL_REFERENCES != 0 {
+		parts = append(parts, "DONT_RESOLVE_DLL_REFERENCES")
+	}
+	if e&LOAD_LIBRARY_AS_DATAFILE != 0 {
+		parts = append(parts, "LOAD_LIBRARY_AS_DATAFILE")
+	}
+	if e&LOAD_WITH_ALTERED_SEARCH_PATH != 0 {
+		parts = append(parts, "LOAD_WITH_ALTERED_SEARCH_PATH")
+	}
+	if e&LOAD_IGNORE_CODE_AUTHZ_LEVEL != 0 {
+		parts = append(parts, "LOAD_IGNORE_CODE_AUTHZ_LEVEL")
+	}
+	if e&LOAD_LIBRARY_AS_IMAGE_RESOURCE != 0 {
+		parts = append(parts, "LOAD_LIBRARY_AS_IMAGE_RESOURCE")
+	}
+	if e&LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE != 0 {
+		parts = append(parts, "LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE")
+	}
+	if e&LOAD_LIBRARY_REQUIRE_SIGNED_TARGET != 0 {
+		parts = append(parts, "LOAD_LIBRARY_REQUIRE_SIGNED_TARGET")
+	}
+	if e&LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR != 0 {
+		parts = append(parts, "LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR")
+	}
+	if e&LOAD_LIBRARY_SEARCH_APPLICATION_DIR != 0 {
+		parts = append(parts, "LOAD_LIBRARY_SEARCH_APPLICATION_DIR")
+	}
+	if e&LOAD_LIBRARY_SEARCH_USER_DIRS != 0 {
+		parts = append(parts, "LOAD_LIBRARY_SEARCH_USER_DIRS")
+	}
+	if e&LOAD_LIBRARY_SEARCH_SYSTEM32 != 0 {
+		parts = append(parts, "LOAD_LIBRARY_SEARCH_SYSTEM32")
+	}
+	if e&LOAD_LIBRARY_SEARCH_DEFAULT_DIRS != 0 {
+		parts = append(parts, "LOAD_LIBRARY_SEARCH_DEFAULT_DIRS")
+	}
+	if e&LOAD_LIBRARY_SAFE_CURRENT_DIRS != 0 {
+		parts = append(parts, "LOAD_LIBRARY_SAFE_CURRENT_DIRS")
+	}
+	if e&LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER != 0 {
+		parts = append(parts, "LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

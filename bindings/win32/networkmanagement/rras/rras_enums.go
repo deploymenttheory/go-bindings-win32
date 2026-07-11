@@ -4,6 +4,11 @@
 
 package rras
 
+import (
+	"fmt"
+	"strings"
+)
+
 type IKEV2_ID_PAYLOAD_TYPE int32
 
 const (
@@ -22,6 +27,41 @@ const (
 	IKEV2_ID_PAYLOAD_TYPE_MAX          IKEV2_ID_PAYLOAD_TYPE = 12
 )
 
+// String returns the IKEV2_ID_PAYLOAD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEV2_ID_PAYLOAD_TYPE) String() string {
+	switch e {
+	case IKEV2_ID_PAYLOAD_TYPE_INVALID:
+		return "IKEV2_ID_PAYLOAD_TYPE_INVALID"
+	case IKEV2_ID_PAYLOAD_TYPE_IPV4_ADDR:
+		return "IKEV2_ID_PAYLOAD_TYPE_IPV4_ADDR"
+	case IKEV2_ID_PAYLOAD_TYPE_FQDN:
+		return "IKEV2_ID_PAYLOAD_TYPE_FQDN"
+	case IKEV2_ID_PAYLOAD_TYPE_RFC822_ADDR:
+		return "IKEV2_ID_PAYLOAD_TYPE_RFC822_ADDR"
+	case IKEV2_ID_PAYLOAD_TYPE_RESERVED1:
+		return "IKEV2_ID_PAYLOAD_TYPE_RESERVED1"
+	case IKEV2_ID_PAYLOAD_TYPE_ID_IPV6_ADDR:
+		return "IKEV2_ID_PAYLOAD_TYPE_ID_IPV6_ADDR"
+	case IKEV2_ID_PAYLOAD_TYPE_RESERVED2:
+		return "IKEV2_ID_PAYLOAD_TYPE_RESERVED2"
+	case IKEV2_ID_PAYLOAD_TYPE_RESERVED3:
+		return "IKEV2_ID_PAYLOAD_TYPE_RESERVED3"
+	case IKEV2_ID_PAYLOAD_TYPE_RESERVED4:
+		return "IKEV2_ID_PAYLOAD_TYPE_RESERVED4"
+	case IKEV2_ID_PAYLOAD_TYPE_DER_ASN1_DN:
+		return "IKEV2_ID_PAYLOAD_TYPE_DER_ASN1_DN"
+	case IKEV2_ID_PAYLOAD_TYPE_DER_ASN1_GN:
+		return "IKEV2_ID_PAYLOAD_TYPE_DER_ASN1_GN"
+	case IKEV2_ID_PAYLOAD_TYPE_KEY_ID:
+		return "IKEV2_ID_PAYLOAD_TYPE_KEY_ID"
+	case IKEV2_ID_PAYLOAD_TYPE_MAX:
+		return "IKEV2_ID_PAYLOAD_TYPE_MAX"
+	default:
+		return fmt.Sprintf("IKEV2_ID_PAYLOAD_TYPE(%d)", int32(e))
+	}
+}
+
 // MGM_ENUM_TYPES: https://learn.microsoft.com/windows/win32/api/mgm/ne-mgm-mgm_enum_types
 type MGM_ENUM_TYPES int32
 
@@ -29,6 +69,19 @@ const (
 	ANY_SOURCE  MGM_ENUM_TYPES = 0
 	ALL_SOURCES MGM_ENUM_TYPES = 1
 )
+
+// String returns the MGM_ENUM_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MGM_ENUM_TYPES) String() string {
+	switch e {
+	case ANY_SOURCE:
+		return "ANY_SOURCE"
+	case ALL_SOURCES:
+		return "ALL_SOURCES"
+	default:
+		return fmt.Sprintf("MGM_ENUM_TYPES(%d)", int32(e))
+	}
+}
 
 // MPRAPI_OBJECT_TYPE: https://learn.microsoft.com/windows/win32/api/mprapi/ne-mprapi-mprapi_object_type
 type MPRAPI_OBJECT_TYPE int32
@@ -42,6 +95,27 @@ const (
 	MPRAPI_OBJECT_TYPE_IF_CUSTOM_CONFIG_OBJECT      MPRAPI_OBJECT_TYPE = 6
 )
 
+// String returns the MPRAPI_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MPRAPI_OBJECT_TYPE) String() string {
+	switch e {
+	case MPRAPI_OBJECT_TYPE_RAS_CONNECTION_OBJECT:
+		return "MPRAPI_OBJECT_TYPE_RAS_CONNECTION_OBJECT"
+	case MPRAPI_OBJECT_TYPE_MPR_SERVER_OBJECT:
+		return "MPRAPI_OBJECT_TYPE_MPR_SERVER_OBJECT"
+	case MPRAPI_OBJECT_TYPE_MPR_SERVER_SET_CONFIG_OBJECT:
+		return "MPRAPI_OBJECT_TYPE_MPR_SERVER_SET_CONFIG_OBJECT"
+	case MPRAPI_OBJECT_TYPE_AUTH_VALIDATION_OBJECT:
+		return "MPRAPI_OBJECT_TYPE_AUTH_VALIDATION_OBJECT"
+	case MPRAPI_OBJECT_TYPE_UPDATE_CONNECTION_OBJECT:
+		return "MPRAPI_OBJECT_TYPE_UPDATE_CONNECTION_OBJECT"
+	case MPRAPI_OBJECT_TYPE_IF_CUSTOM_CONFIG_OBJECT:
+		return "MPRAPI_OBJECT_TYPE_IF_CUSTOM_CONFIG_OBJECT"
+	default:
+		return fmt.Sprintf("MPRAPI_OBJECT_TYPE(%d)", int32(e))
+	}
+}
+
 type MPR_ET uint32
 
 const (
@@ -51,6 +125,23 @@ const (
 	MPR_ET_Optional   MPR_ET = 3
 )
 
+// String returns the MPR_ET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MPR_ET) String() string {
+	switch e {
+	case MPR_ET_None:
+		return "MPR_ET_None"
+	case MPR_ET_Require:
+		return "MPR_ET_Require"
+	case MPR_ET_RequireMax:
+		return "MPR_ET_RequireMax"
+	case MPR_ET_Optional:
+		return "MPR_ET_Optional"
+	default:
+		return fmt.Sprintf("MPR_ET(%d)", uint32(e))
+	}
+}
+
 type MPR_INTERFACE_DIAL_MODE uint32
 
 const (
@@ -59,12 +150,40 @@ const (
 	MPRDM_DialAsNeeded MPR_INTERFACE_DIAL_MODE = 2
 )
 
+// String returns the MPR_INTERFACE_DIAL_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MPR_INTERFACE_DIAL_MODE) String() string {
+	switch e {
+	case MPRDM_DialFirst:
+		return "MPRDM_DialFirst"
+	case MPRDM_DialAll:
+		return "MPRDM_DialAll"
+	case MPRDM_DialAsNeeded:
+		return "MPRDM_DialAsNeeded"
+	default:
+		return fmt.Sprintf("MPR_INTERFACE_DIAL_MODE(%d)", uint32(e))
+	}
+}
+
 type MPR_VPN_TS_TYPE int32
 
 const (
 	MPR_VPN_TS_IPv4_ADDR_RANGE MPR_VPN_TS_TYPE = 7
 	MPR_VPN_TS_IPv6_ADDR_RANGE MPR_VPN_TS_TYPE = 8
 )
+
+// String returns the MPR_VPN_TS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MPR_VPN_TS_TYPE) String() string {
+	switch e {
+	case MPR_VPN_TS_IPv4_ADDR_RANGE:
+		return "MPR_VPN_TS_IPv4_ADDR_RANGE"
+	case MPR_VPN_TS_IPv6_ADDR_RANGE:
+		return "MPR_VPN_TS_IPv6_ADDR_RANGE"
+	default:
+		return fmt.Sprintf("MPR_VPN_TS_TYPE(%d)", int32(e))
+	}
+}
 
 type MPR_VS uint32
 
@@ -76,6 +195,25 @@ const (
 	MPR_VS_L2tpFirst MPR_VS = 4
 )
 
+// String returns the MPR_VS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MPR_VS) String() string {
+	switch e {
+	case MPR_VS_Default:
+		return "MPR_VS_Default"
+	case MPR_VS_PptpOnly:
+		return "MPR_VS_PptpOnly"
+	case MPR_VS_PptpFirst:
+		return "MPR_VS_PptpFirst"
+	case MPR_VS_L2tpOnly:
+		return "MPR_VS_L2tpOnly"
+	case MPR_VS_L2tpFirst:
+		return "MPR_VS_L2tpFirst"
+	default:
+		return fmt.Sprintf("MPR_VS(%d)", uint32(e))
+	}
+}
+
 type PPP_LCP uint32
 
 const (
@@ -85,6 +223,23 @@ const (
 	PPP_LCP_SPAP PPP_LCP = 49191
 )
 
+// String returns the PPP_LCP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PPP_LCP) String() string {
+	switch e {
+	case PPP_LCP_PAP:
+		return "PPP_LCP_PAP"
+	case PPP_LCP_CHAP:
+		return "PPP_LCP_CHAP"
+	case PPP_LCP_EAP:
+		return "PPP_LCP_EAP"
+	case PPP_LCP_SPAP:
+		return "PPP_LCP_SPAP"
+	default:
+		return fmt.Sprintf("PPP_LCP(%d)", uint32(e))
+	}
+}
+
 type PPP_LCP_INFO_AUTH_DATA uint32
 
 const (
@@ -92,6 +247,21 @@ const (
 	PPP_LCP_CHAP_MS   PPP_LCP_INFO_AUTH_DATA = 128
 	PPP_LCP_CHAP_MSV2 PPP_LCP_INFO_AUTH_DATA = 129
 )
+
+// String returns the PPP_LCP_INFO_AUTH_DATA constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PPP_LCP_INFO_AUTH_DATA) String() string {
+	switch e {
+	case PPP_LCP_CHAP_MD5:
+		return "PPP_LCP_CHAP_MD5"
+	case PPP_LCP_CHAP_MS:
+		return "PPP_LCP_CHAP_MS"
+	case PPP_LCP_CHAP_MSV2:
+		return "PPP_LCP_CHAP_MSV2"
+	default:
+		return fmt.Sprintf("PPP_LCP_INFO_AUTH_DATA(%d)", uint32(e))
+	}
+}
 
 type RASAPIVERSION int32
 
@@ -101,6 +271,23 @@ const (
 	RASAPIVERSION_600 RASAPIVERSION = 3
 	RASAPIVERSION_601 RASAPIVERSION = 4
 )
+
+// String returns the RASAPIVERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RASAPIVERSION) String() string {
+	switch e {
+	case RASAPIVERSION_500:
+		return "RASAPIVERSION_500"
+	case RASAPIVERSION_501:
+		return "RASAPIVERSION_501"
+	case RASAPIVERSION_600:
+		return "RASAPIVERSION_600"
+	case RASAPIVERSION_601:
+		return "RASAPIVERSION_601"
+	default:
+		return fmt.Sprintf("RASAPIVERSION(%d)", int32(e))
+	}
+}
 
 type RASCONNSTATE int32
 
@@ -139,6 +326,79 @@ const (
 	RASCS_Disconnected         RASCONNSTATE = 8193
 )
 
+// String returns the RASCONNSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RASCONNSTATE) String() string {
+	switch e {
+	case RASCS_OpenPort:
+		return "RASCS_OpenPort"
+	case RASCS_PortOpened:
+		return "RASCS_PortOpened"
+	case RASCS_ConnectDevice:
+		return "RASCS_ConnectDevice"
+	case RASCS_DeviceConnected:
+		return "RASCS_DeviceConnected"
+	case RASCS_AllDevicesConnected:
+		return "RASCS_AllDevicesConnected"
+	case RASCS_Authenticate:
+		return "RASCS_Authenticate"
+	case RASCS_AuthNotify:
+		return "RASCS_AuthNotify"
+	case RASCS_AuthRetry:
+		return "RASCS_AuthRetry"
+	case RASCS_AuthCallback:
+		return "RASCS_AuthCallback"
+	case RASCS_AuthChangePassword:
+		return "RASCS_AuthChangePassword"
+	case RASCS_AuthProject:
+		return "RASCS_AuthProject"
+	case RASCS_AuthLinkSpeed:
+		return "RASCS_AuthLinkSpeed"
+	case RASCS_AuthAck:
+		return "RASCS_AuthAck"
+	case RASCS_ReAuthenticate:
+		return "RASCS_ReAuthenticate"
+	case RASCS_Authenticated:
+		return "RASCS_Authenticated"
+	case RASCS_PrepareForCallback:
+		return "RASCS_PrepareForCallback"
+	case RASCS_WaitForModemReset:
+		return "RASCS_WaitForModemReset"
+	case RASCS_WaitForCallback:
+		return "RASCS_WaitForCallback"
+	case RASCS_Projected:
+		return "RASCS_Projected"
+	case RASCS_StartAuthentication:
+		return "RASCS_StartAuthentication"
+	case RASCS_CallbackComplete:
+		return "RASCS_CallbackComplete"
+	case RASCS_LogonNetwork:
+		return "RASCS_LogonNetwork"
+	case RASCS_SubEntryConnected:
+		return "RASCS_SubEntryConnected"
+	case RASCS_SubEntryDisconnected:
+		return "RASCS_SubEntryDisconnected"
+	case RASCS_ApplySettings:
+		return "RASCS_ApplySettings"
+	case RASCS_Interactive:
+		return "RASCS_Interactive"
+	case RASCS_RetryAuthentication:
+		return "RASCS_RetryAuthentication"
+	case RASCS_CallbackSetByCaller:
+		return "RASCS_CallbackSetByCaller"
+	case RASCS_PasswordExpired:
+		return "RASCS_PasswordExpired"
+	case RASCS_InvokeEapUI:
+		return "RASCS_InvokeEapUI"
+	case RASCS_Connected:
+		return "RASCS_Connected"
+	case RASCS_Disconnected:
+		return "RASCS_Disconnected"
+	default:
+		return fmt.Sprintf("RASCONNSTATE(%d)", int32(e))
+	}
+}
+
 type RASCONNSUBSTATE int32
 
 const (
@@ -148,6 +408,23 @@ const (
 	RASCSS_Reconnected  RASCONNSUBSTATE = 8192
 )
 
+// String returns the RASCONNSUBSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RASCONNSUBSTATE) String() string {
+	switch e {
+	case RASCSS_None:
+		return "RASCSS_None"
+	case RASCSS_Dormant:
+		return "RASCSS_Dormant"
+	case RASCSS_Reconnecting:
+		return "RASCSS_Reconnecting"
+	case RASCSS_Reconnected:
+		return "RASCSS_Reconnected"
+	default:
+		return fmt.Sprintf("RASCONNSUBSTATE(%d)", int32(e))
+	}
+}
+
 type RASENTRY_DIAL_MODE uint32
 
 const (
@@ -155,6 +432,20 @@ const (
 	RASEDM_DialAsNeeded RASENTRY_DIAL_MODE = 2
 )
 
+// String returns the RASENTRY_DIAL_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RASENTRY_DIAL_MODE) String() string {
+	switch e {
+	case RASEDM_DialAll:
+		return "RASEDM_DialAll"
+	case RASEDM_DialAsNeeded:
+		return "RASEDM_DialAsNeeded"
+	default:
+		return fmt.Sprintf("RASENTRY_DIAL_MODE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type RASIKEV_PROJECTION_INFO_FLAGS uint32
 
 const (
@@ -162,6 +453,25 @@ const (
 	RASIKEv2_FLAGS_BEHIND_NAT       RASIKEV_PROJECTION_INFO_FLAGS = 2
 	RASIKEv2_FLAGS_SERVERBEHIND_NAT RASIKEV_PROJECTION_INFO_FLAGS = 4
 )
+
+// String returns the RASIKEV_PROJECTION_INFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RASIKEV_PROJECTION_INFO_FLAGS) String() string {
+	var parts []string
+	if e&RASIKEv2_FLAGS_MOBIKESUPPORTED != 0 {
+		parts = append(parts, "RASIKEv2_FLAGS_MOBIKESUPPORTED")
+	}
+	if e&RASIKEv2_FLAGS_BEHIND_NAT != 0 {
+		parts = append(parts, "RASIKEv2_FLAGS_BEHIND_NAT")
+	}
+	if e&RASIKEv2_FLAGS_SERVERBEHIND_NAT != 0 {
+		parts = append(parts, "RASIKEv2_FLAGS_SERVERBEHIND_NAT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA uint32
 
@@ -171,6 +481,21 @@ const (
 	RASLCPAD_CHAP_MSV2 RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA = 129
 )
 
+// String returns the RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA) String() string {
+	switch e {
+	case RASLCPAD_CHAP_MD5:
+		return "RASLCPAD_CHAP_MD5"
+	case RASLCPAD_CHAP_MS:
+		return "RASLCPAD_CHAP_MS"
+	case RASLCPAD_CHAP_MSV2:
+		return "RASLCPAD_CHAP_MSV2"
+	default:
+		return fmt.Sprintf("RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA(%d)", uint32(e))
+	}
+}
+
 type RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL uint32
 
 const (
@@ -179,6 +504,23 @@ const (
 	RASLCPAP_CHAP RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL = 49699
 	RASLCPAP_EAP  RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL = 49703
 )
+
+// String returns the RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL) String() string {
+	switch e {
+	case RASLCPAP_PAP:
+		return "RASLCPAP_PAP"
+	case RASLCPAP_SPAP:
+		return "RASLCPAP_SPAP"
+	case RASLCPAP_CHAP:
+		return "RASLCPAP_CHAP"
+	case RASLCPAP_EAP:
+		return "RASLCPAP_EAP"
+	default:
+		return fmt.Sprintf("RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL(%d)", uint32(e))
+	}
+}
 
 type RASPROJECTION int32
 
@@ -192,6 +534,29 @@ const (
 	RASP_PppIpv6 RASPROJECTION = 32855
 )
 
+// String returns the RASPROJECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RASPROJECTION) String() string {
+	switch e {
+	case RASP_Amb:
+		return "RASP_Amb"
+	case RASP_PppNbf:
+		return "RASP_PppNbf"
+	case RASP_PppIpx:
+		return "RASP_PppIpx"
+	case RASP_PppIp:
+		return "RASP_PppIp"
+	case RASP_PppCcp:
+		return "RASP_PppCcp"
+	case RASP_PppLcp:
+		return "RASP_PppLcp"
+	case RASP_PppIpv6:
+		return "RASP_PppIpv6"
+	default:
+		return fmt.Sprintf("RASPROJECTION(%d)", int32(e))
+	}
+}
+
 // RASPROJECTION_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/ras/ne-ras-rasprojection_info_type
 type RASPROJECTION_INFO_TYPE int32
 
@@ -199,6 +564,19 @@ const (
 	PROJECTION_INFO_TYPE_PPP   RASPROJECTION_INFO_TYPE = 1
 	PROJECTION_INFO_TYPE_IKEv2 RASPROJECTION_INFO_TYPE = 2
 )
+
+// String returns the RASPROJECTION_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RASPROJECTION_INFO_TYPE) String() string {
+	switch e {
+	case PROJECTION_INFO_TYPE_PPP:
+		return "PROJECTION_INFO_TYPE_PPP"
+	case PROJECTION_INFO_TYPE_IKEv2:
+		return "PROJECTION_INFO_TYPE_IKEv2"
+	default:
+		return fmt.Sprintf("RASPROJECTION_INFO_TYPE(%d)", int32(e))
+	}
+}
 
 type RAS_FLAGS uint32
 
@@ -211,6 +589,25 @@ const (
 	RAS_FLAGS_DORMANT            RAS_FLAGS = 32
 )
 
+// String returns the RAS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RAS_FLAGS) String() string {
+	switch e {
+	case RAS_FLAGS_PPP_CONNECTION:
+		return "RAS_FLAGS_PPP_CONNECTION"
+	case RAS_FLAGS_MESSENGER_PRESENT:
+		return "RAS_FLAGS_MESSENGER_PRESENT"
+	case RAS_FLAGS_QUARANTINE_PRESENT:
+		return "RAS_FLAGS_QUARANTINE_PRESENT"
+	case RAS_FLAGS_ARAP_CONNECTION:
+		return "RAS_FLAGS_ARAP_CONNECTION"
+	case RAS_FLAGS_DORMANT:
+		return "RAS_FLAGS_DORMANT"
+	default:
+		return fmt.Sprintf("RAS_FLAGS(%d)", uint32(e))
+	}
+}
+
 // RAS_HARDWARE_CONDITION: https://learn.microsoft.com/windows/win32/api/mprapi/ne-mprapi-ras_hardware_condition
 type RAS_HARDWARE_CONDITION int32
 
@@ -218,6 +615,19 @@ const (
 	RAS_HARDWARE_OPERATIONAL RAS_HARDWARE_CONDITION = 0
 	RAS_HARDWARE_FAILURE     RAS_HARDWARE_CONDITION = 1
 )
+
+// String returns the RAS_HARDWARE_CONDITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RAS_HARDWARE_CONDITION) String() string {
+	switch e {
+	case RAS_HARDWARE_OPERATIONAL:
+		return "RAS_HARDWARE_OPERATIONAL"
+	case RAS_HARDWARE_FAILURE:
+		return "RAS_HARDWARE_FAILURE"
+	default:
+		return fmt.Sprintf("RAS_HARDWARE_CONDITION(%d)", int32(e))
+	}
+}
 
 // RAS_PORT_CONDITION: https://learn.microsoft.com/windows/win32/api/mprapi/ne-mprapi-ras_port_condition
 type RAS_PORT_CONDITION int32
@@ -232,6 +642,29 @@ const (
 	RAS_PORT_INITIALIZING    RAS_PORT_CONDITION = 6
 )
 
+// String returns the RAS_PORT_CONDITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RAS_PORT_CONDITION) String() string {
+	switch e {
+	case RAS_PORT_NON_OPERATIONAL:
+		return "RAS_PORT_NON_OPERATIONAL"
+	case RAS_PORT_DISCONNECTED:
+		return "RAS_PORT_DISCONNECTED"
+	case RAS_PORT_CALLING_BACK:
+		return "RAS_PORT_CALLING_BACK"
+	case RAS_PORT_LISTENING:
+		return "RAS_PORT_LISTENING"
+	case RAS_PORT_AUTHENTICATING:
+		return "RAS_PORT_AUTHENTICATING"
+	case RAS_PORT_AUTHENTICATED:
+		return "RAS_PORT_AUTHENTICATED"
+	case RAS_PORT_INITIALIZING:
+		return "RAS_PORT_INITIALIZING"
+	default:
+		return fmt.Sprintf("RAS_PORT_CONDITION(%d)", int32(e))
+	}
+}
+
 // RAS_QUARANTINE_STATE: https://learn.microsoft.com/windows/win32/api/mprapi/ne-mprapi-ras_quarantine_state
 type RAS_QUARANTINE_STATE int32
 
@@ -242,6 +675,23 @@ const (
 	RAS_QUAR_STATE_NOT_CAPABLE RAS_QUARANTINE_STATE = 3
 )
 
+// String returns the RAS_QUARANTINE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RAS_QUARANTINE_STATE) String() string {
+	switch e {
+	case RAS_QUAR_STATE_NORMAL:
+		return "RAS_QUAR_STATE_NORMAL"
+	case RAS_QUAR_STATE_QUARANTINE:
+		return "RAS_QUAR_STATE_QUARANTINE"
+	case RAS_QUAR_STATE_PROBATION:
+		return "RAS_QUAR_STATE_PROBATION"
+	case RAS_QUAR_STATE_NOT_CAPABLE:
+		return "RAS_QUAR_STATE_NOT_CAPABLE"
+	default:
+		return fmt.Sprintf("RAS_QUARANTINE_STATE(%d)", int32(e))
+	}
+}
+
 // ROUTER_CONNECTION_STATE: https://learn.microsoft.com/windows/win32/api/mprapi/ne-mprapi-router_connection_state
 type ROUTER_CONNECTION_STATE int32
 
@@ -251,6 +701,23 @@ const (
 	ROUTER_IF_STATE_CONNECTING   ROUTER_CONNECTION_STATE = 2
 	ROUTER_IF_STATE_CONNECTED    ROUTER_CONNECTION_STATE = 3
 )
+
+// String returns the ROUTER_CONNECTION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ROUTER_CONNECTION_STATE) String() string {
+	switch e {
+	case ROUTER_IF_STATE_UNREACHABLE:
+		return "ROUTER_IF_STATE_UNREACHABLE"
+	case ROUTER_IF_STATE_DISCONNECTED:
+		return "ROUTER_IF_STATE_DISCONNECTED"
+	case ROUTER_IF_STATE_CONNECTING:
+		return "ROUTER_IF_STATE_CONNECTING"
+	case ROUTER_IF_STATE_CONNECTED:
+		return "ROUTER_IF_STATE_CONNECTED"
+	default:
+		return fmt.Sprintf("ROUTER_CONNECTION_STATE(%d)", int32(e))
+	}
+}
 
 // ROUTER_INTERFACE_TYPE: https://learn.microsoft.com/windows/win32/api/mprapi/ne-mprapi-router_interface_type
 type ROUTER_INTERFACE_TYPE int32
@@ -267,6 +734,33 @@ const (
 	ROUTER_IF_TYPE_MAX         ROUTER_INTERFACE_TYPE = 8
 )
 
+// String returns the ROUTER_INTERFACE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ROUTER_INTERFACE_TYPE) String() string {
+	switch e {
+	case ROUTER_IF_TYPE_CLIENT:
+		return "ROUTER_IF_TYPE_CLIENT"
+	case ROUTER_IF_TYPE_HOME_ROUTER:
+		return "ROUTER_IF_TYPE_HOME_ROUTER"
+	case ROUTER_IF_TYPE_FULL_ROUTER:
+		return "ROUTER_IF_TYPE_FULL_ROUTER"
+	case ROUTER_IF_TYPE_DEDICATED:
+		return "ROUTER_IF_TYPE_DEDICATED"
+	case ROUTER_IF_TYPE_INTERNAL:
+		return "ROUTER_IF_TYPE_INTERNAL"
+	case ROUTER_IF_TYPE_LOOPBACK:
+		return "ROUTER_IF_TYPE_LOOPBACK"
+	case ROUTER_IF_TYPE_TUNNEL1:
+		return "ROUTER_IF_TYPE_TUNNEL1"
+	case ROUTER_IF_TYPE_DIALOUT:
+		return "ROUTER_IF_TYPE_DIALOUT"
+	case ROUTER_IF_TYPE_MAX:
+		return "ROUTER_IF_TYPE_MAX"
+	default:
+		return fmt.Sprintf("ROUTER_INTERFACE_TYPE(%d)", int32(e))
+	}
+}
+
 // RTM_EVENT_TYPE: https://learn.microsoft.com/windows/win32/api/rtmv2/ne-rtmv2-rtm_event_type
 type RTM_EVENT_TYPE int32
 
@@ -277,6 +771,23 @@ const (
 	RTM_CHANGE_NOTIFICATION RTM_EVENT_TYPE = 3
 )
 
+// String returns the RTM_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RTM_EVENT_TYPE) String() string {
+	switch e {
+	case RTM_ENTITY_REGISTERED:
+		return "RTM_ENTITY_REGISTERED"
+	case RTM_ENTITY_DEREGISTERED:
+		return "RTM_ENTITY_DEREGISTERED"
+	case RTM_ROUTE_EXPIRED:
+		return "RTM_ROUTE_EXPIRED"
+	case RTM_CHANGE_NOTIFICATION:
+		return "RTM_CHANGE_NOTIFICATION"
+	default:
+		return fmt.Sprintf("RTM_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 type SECURITY_MESSAGE_MSG_ID uint32
 
 const (
@@ -284,3 +795,18 @@ const (
 	SECURITYMSG_FAILURE SECURITY_MESSAGE_MSG_ID = 2
 	SECURITYMSG_ERROR   SECURITY_MESSAGE_MSG_ID = 3
 )
+
+// String returns the SECURITY_MESSAGE_MSG_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURITY_MESSAGE_MSG_ID) String() string {
+	switch e {
+	case SECURITYMSG_SUCCESS:
+		return "SECURITYMSG_SUCCESS"
+	case SECURITYMSG_FAILURE:
+		return "SECURITYMSG_FAILURE"
+	case SECURITYMSG_ERROR:
+		return "SECURITYMSG_ERROR"
+	default:
+		return fmt.Sprintf("SECURITY_MESSAGE_MSG_ID(%d)", uint32(e))
+	}
+}

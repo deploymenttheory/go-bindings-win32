@@ -4,6 +4,10 @@
 
 package events
 
+import (
+	"fmt"
+)
+
 // EOC_ChangeType: https://learn.microsoft.com/windows/win32/api/eventsys/ne-eventsys-eoc_changetype
 type EOC_ChangeType int32
 
@@ -12,3 +16,18 @@ const (
 	EOC_ModifiedObject EOC_ChangeType = 1
 	EOC_DeletedObject  EOC_ChangeType = 2
 )
+
+// String returns the EOC_ChangeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EOC_ChangeType) String() string {
+	switch e {
+	case EOC_NewObject:
+		return "EOC_NewObject"
+	case EOC_ModifiedObject:
+		return "EOC_ModifiedObject"
+	case EOC_DeletedObject:
+		return "EOC_DeletedObject"
+	default:
+		return fmt.Sprintf("EOC_ChangeType(%d)", int32(e))
+	}
+}

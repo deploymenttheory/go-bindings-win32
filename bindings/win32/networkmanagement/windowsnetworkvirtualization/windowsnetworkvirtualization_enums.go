@@ -4,6 +4,10 @@
 
 package windowsnetworkvirtualization
 
+import (
+	"fmt"
+)
+
 type WNV_CA_NOTIFICATION_TYPE int32
 
 const (
@@ -12,6 +16,23 @@ const (
 	WnvCustomerAddressMoved   WNV_CA_NOTIFICATION_TYPE = 2
 	WnvCustomerAddressMax     WNV_CA_NOTIFICATION_TYPE = 3
 )
+
+// String returns the WNV_CA_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WNV_CA_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case WnvCustomerAddressAdded:
+		return "WnvCustomerAddressAdded"
+	case WnvCustomerAddressDeleted:
+		return "WnvCustomerAddressDeleted"
+	case WnvCustomerAddressMoved:
+		return "WnvCustomerAddressMoved"
+	case WnvCustomerAddressMax:
+		return "WnvCustomerAddressMax"
+	default:
+		return fmt.Sprintf("WNV_CA_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
 
 // WNV_NOTIFICATION_TYPE: https://learn.microsoft.com/windows/win32/api/wnvapi/ne-wnvapi-wnv_notification_type
 type WNV_NOTIFICATION_TYPE int32
@@ -23,6 +44,23 @@ const (
 	WnvNotificationTypeMax WNV_NOTIFICATION_TYPE = 3
 )
 
+// String returns the WNV_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WNV_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case WnvPolicyMismatchType:
+		return "WnvPolicyMismatchType"
+	case WnvRedirectType:
+		return "WnvRedirectType"
+	case WnvObjectChangeType:
+		return "WnvObjectChangeType"
+	case WnvNotificationTypeMax:
+		return "WnvNotificationTypeMax"
+	default:
+		return fmt.Sprintf("WNV_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
+
 // WNV_OBJECT_TYPE: https://learn.microsoft.com/windows/win32/api/wnvapi/ne-wnvapi-wnv_object_type
 type WNV_OBJECT_TYPE int32
 
@@ -31,3 +69,18 @@ const (
 	WnvCustomerAddressType WNV_OBJECT_TYPE = 1
 	WnvObjectTypeMax       WNV_OBJECT_TYPE = 2
 )
+
+// String returns the WNV_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WNV_OBJECT_TYPE) String() string {
+	switch e {
+	case WnvProviderAddressType:
+		return "WnvProviderAddressType"
+	case WnvCustomerAddressType:
+		return "WnvCustomerAddressType"
+	case WnvObjectTypeMax:
+		return "WnvObjectTypeMax"
+	default:
+		return fmt.Sprintf("WNV_OBJECT_TYPE(%d)", int32(e))
+	}
+}

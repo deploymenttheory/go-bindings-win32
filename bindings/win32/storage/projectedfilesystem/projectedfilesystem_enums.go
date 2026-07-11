@@ -4,6 +4,11 @@
 
 package projectedfilesystem
 
+import (
+	"fmt"
+	"strings"
+)
+
 // PRJ_CALLBACK_DATA_FLAGS: https://learn.microsoft.com/windows/win32/api/projectedfslib/ne-projectedfslib-prj_callback_data_flags
 type PRJ_CALLBACK_DATA_FLAGS int32
 
@@ -11,6 +16,19 @@ const (
 	PRJ_CB_DATA_FLAG_ENUM_RESTART_SCAN        PRJ_CALLBACK_DATA_FLAGS = 1
 	PRJ_CB_DATA_FLAG_ENUM_RETURN_SINGLE_ENTRY PRJ_CALLBACK_DATA_FLAGS = 2
 )
+
+// String returns the PRJ_CALLBACK_DATA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRJ_CALLBACK_DATA_FLAGS) String() string {
+	switch e {
+	case PRJ_CB_DATA_FLAG_ENUM_RESTART_SCAN:
+		return "PRJ_CB_DATA_FLAG_ENUM_RESTART_SCAN"
+	case PRJ_CB_DATA_FLAG_ENUM_RETURN_SINGLE_ENTRY:
+		return "PRJ_CB_DATA_FLAG_ENUM_RETURN_SINGLE_ENTRY"
+	default:
+		return fmt.Sprintf("PRJ_CALLBACK_DATA_FLAGS(%d)", int32(e))
+	}
+}
 
 // PRJ_COMPLETE_COMMAND_TYPE: https://learn.microsoft.com/windows/win32/api/projectedfslib/ne-projectedfslib-prj_complete_command_type
 type PRJ_COMPLETE_COMMAND_TYPE int32
@@ -20,6 +38,19 @@ const (
 	PRJ_COMPLETE_COMMAND_TYPE_ENUMERATION  PRJ_COMPLETE_COMMAND_TYPE = 2
 )
 
+// String returns the PRJ_COMPLETE_COMMAND_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRJ_COMPLETE_COMMAND_TYPE) String() string {
+	switch e {
+	case PRJ_COMPLETE_COMMAND_TYPE_NOTIFICATION:
+		return "PRJ_COMPLETE_COMMAND_TYPE_NOTIFICATION"
+	case PRJ_COMPLETE_COMMAND_TYPE_ENUMERATION:
+		return "PRJ_COMPLETE_COMMAND_TYPE_ENUMERATION"
+	default:
+		return fmt.Sprintf("PRJ_COMPLETE_COMMAND_TYPE(%d)", int32(e))
+	}
+}
+
 // PRJ_EXT_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/projectedfslib/ne-projectedfslib-prj_ext_info_type
 type PRJ_EXT_INFO_TYPE int32
 
@@ -27,7 +58,19 @@ const (
 	PRJ_EXT_INFO_TYPE_SYMLINK PRJ_EXT_INFO_TYPE = 1
 )
 
+// String returns the PRJ_EXT_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRJ_EXT_INFO_TYPE) String() string {
+	switch e {
+	case PRJ_EXT_INFO_TYPE_SYMLINK:
+		return "PRJ_EXT_INFO_TYPE_SYMLINK"
+	default:
+		return fmt.Sprintf("PRJ_EXT_INFO_TYPE(%d)", int32(e))
+	}
+}
+
 // PRJ_FILE_STATE: https://learn.microsoft.com/windows/win32/api/projectedfslib/ne-projectedfslib-prj_file_state
+// Bitmask — values may be combined with |.
 type PRJ_FILE_STATE int32
 
 const (
@@ -37,6 +80,31 @@ const (
 	PRJ_FILE_STATE_FULL                 PRJ_FILE_STATE = 8
 	PRJ_FILE_STATE_TOMBSTONE            PRJ_FILE_STATE = 16
 )
+
+// String returns the PRJ_FILE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRJ_FILE_STATE) String() string {
+	var parts []string
+	if e&PRJ_FILE_STATE_PLACEHOLDER != 0 {
+		parts = append(parts, "PRJ_FILE_STATE_PLACEHOLDER")
+	}
+	if e&PRJ_FILE_STATE_HYDRATED_PLACEHOLDER != 0 {
+		parts = append(parts, "PRJ_FILE_STATE_HYDRATED_PLACEHOLDER")
+	}
+	if e&PRJ_FILE_STATE_DIRTY_PLACEHOLDER != 0 {
+		parts = append(parts, "PRJ_FILE_STATE_DIRTY_PLACEHOLDER")
+	}
+	if e&PRJ_FILE_STATE_FULL != 0 {
+		parts = append(parts, "PRJ_FILE_STATE_FULL")
+	}
+	if e&PRJ_FILE_STATE_TOMBSTONE != 0 {
+		parts = append(parts, "PRJ_FILE_STATE_TOMBSTONE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // PRJ_NOTIFICATION: https://learn.microsoft.com/windows/win32/api/projectedfslib/ne-projectedfslib-prj_notification
 type PRJ_NOTIFICATION int32
@@ -56,7 +124,41 @@ const (
 	PRJ_NOTIFICATION_FILE_PRE_CONVERT_TO_FULL           PRJ_NOTIFICATION = 4096
 )
 
+// String returns the PRJ_NOTIFICATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRJ_NOTIFICATION) String() string {
+	switch e {
+	case PRJ_NOTIFICATION_FILE_OPENED:
+		return "PRJ_NOTIFICATION_FILE_OPENED"
+	case PRJ_NOTIFICATION_NEW_FILE_CREATED:
+		return "PRJ_NOTIFICATION_NEW_FILE_CREATED"
+	case PRJ_NOTIFICATION_FILE_OVERWRITTEN:
+		return "PRJ_NOTIFICATION_FILE_OVERWRITTEN"
+	case PRJ_NOTIFICATION_PRE_DELETE:
+		return "PRJ_NOTIFICATION_PRE_DELETE"
+	case PRJ_NOTIFICATION_PRE_RENAME:
+		return "PRJ_NOTIFICATION_PRE_RENAME"
+	case PRJ_NOTIFICATION_PRE_SET_HARDLINK:
+		return "PRJ_NOTIFICATION_PRE_SET_HARDLINK"
+	case PRJ_NOTIFICATION_FILE_RENAMED:
+		return "PRJ_NOTIFICATION_FILE_RENAMED"
+	case PRJ_NOTIFICATION_HARDLINK_CREATED:
+		return "PRJ_NOTIFICATION_HARDLINK_CREATED"
+	case PRJ_NOTIFICATION_FILE_HANDLE_CLOSED_NO_MODIFICATION:
+		return "PRJ_NOTIFICATION_FILE_HANDLE_CLOSED_NO_MODIFICATION"
+	case PRJ_NOTIFICATION_FILE_HANDLE_CLOSED_FILE_MODIFIED:
+		return "PRJ_NOTIFICATION_FILE_HANDLE_CLOSED_FILE_MODIFIED"
+	case PRJ_NOTIFICATION_FILE_HANDLE_CLOSED_FILE_DELETED:
+		return "PRJ_NOTIFICATION_FILE_HANDLE_CLOSED_FILE_DELETED"
+	case PRJ_NOTIFICATION_FILE_PRE_CONVERT_TO_FULL:
+		return "PRJ_NOTIFICATION_FILE_PRE_CONVERT_TO_FULL"
+	default:
+		return fmt.Sprintf("PRJ_NOTIFICATION(%d)", int32(e))
+	}
+}
+
 // PRJ_NOTIFY_TYPES: https://learn.microsoft.com/windows/win32/api/projectedfslib/ne-projectedfslib-prj_notify_types
+// Bitmask — values may be combined with |.
 type PRJ_NOTIFY_TYPES uint32
 
 const (
@@ -77,6 +179,58 @@ const (
 	PRJ_NOTIFY_USE_EXISTING_MASK                  PRJ_NOTIFY_TYPES = 4294967295
 )
 
+// String returns the PRJ_NOTIFY_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRJ_NOTIFY_TYPES) String() string {
+	var parts []string
+	if e&PRJ_NOTIFY_SUPPRESS_NOTIFICATIONS != 0 {
+		parts = append(parts, "PRJ_NOTIFY_SUPPRESS_NOTIFICATIONS")
+	}
+	if e&PRJ_NOTIFY_FILE_OPENED != 0 {
+		parts = append(parts, "PRJ_NOTIFY_FILE_OPENED")
+	}
+	if e&PRJ_NOTIFY_NEW_FILE_CREATED != 0 {
+		parts = append(parts, "PRJ_NOTIFY_NEW_FILE_CREATED")
+	}
+	if e&PRJ_NOTIFY_FILE_OVERWRITTEN != 0 {
+		parts = append(parts, "PRJ_NOTIFY_FILE_OVERWRITTEN")
+	}
+	if e&PRJ_NOTIFY_PRE_DELETE != 0 {
+		parts = append(parts, "PRJ_NOTIFY_PRE_DELETE")
+	}
+	if e&PRJ_NOTIFY_PRE_RENAME != 0 {
+		parts = append(parts, "PRJ_NOTIFY_PRE_RENAME")
+	}
+	if e&PRJ_NOTIFY_PRE_SET_HARDLINK != 0 {
+		parts = append(parts, "PRJ_NOTIFY_PRE_SET_HARDLINK")
+	}
+	if e&PRJ_NOTIFY_FILE_RENAMED != 0 {
+		parts = append(parts, "PRJ_NOTIFY_FILE_RENAMED")
+	}
+	if e&PRJ_NOTIFY_HARDLINK_CREATED != 0 {
+		parts = append(parts, "PRJ_NOTIFY_HARDLINK_CREATED")
+	}
+	if e&PRJ_NOTIFY_FILE_HANDLE_CLOSED_NO_MODIFICATION != 0 {
+		parts = append(parts, "PRJ_NOTIFY_FILE_HANDLE_CLOSED_NO_MODIFICATION")
+	}
+	if e&PRJ_NOTIFY_FILE_HANDLE_CLOSED_FILE_MODIFIED != 0 {
+		parts = append(parts, "PRJ_NOTIFY_FILE_HANDLE_CLOSED_FILE_MODIFIED")
+	}
+	if e&PRJ_NOTIFY_FILE_HANDLE_CLOSED_FILE_DELETED != 0 {
+		parts = append(parts, "PRJ_NOTIFY_FILE_HANDLE_CLOSED_FILE_DELETED")
+	}
+	if e&PRJ_NOTIFY_FILE_PRE_CONVERT_TO_FULL != 0 {
+		parts = append(parts, "PRJ_NOTIFY_FILE_PRE_CONVERT_TO_FULL")
+	}
+	if e&PRJ_NOTIFY_USE_EXISTING_MASK != 0 {
+		parts = append(parts, "PRJ_NOTIFY_USE_EXISTING_MASK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // PRJ_PLACEHOLDER_ID: https://learn.microsoft.com/windows/win32/api/projectedfslib/ne-projectedfslib-prj_placeholder_id
 type PRJ_PLACEHOLDER_ID int32
 
@@ -84,7 +238,19 @@ const (
 	PRJ_PLACEHOLDER_ID_LENGTH PRJ_PLACEHOLDER_ID = 128
 )
 
+// String returns the PRJ_PLACEHOLDER_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRJ_PLACEHOLDER_ID) String() string {
+	switch e {
+	case PRJ_PLACEHOLDER_ID_LENGTH:
+		return "PRJ_PLACEHOLDER_ID_LENGTH"
+	default:
+		return fmt.Sprintf("PRJ_PLACEHOLDER_ID(%d)", int32(e))
+	}
+}
+
 // PRJ_STARTVIRTUALIZING_FLAGS: https://learn.microsoft.com/windows/win32/api/projectedfslib/ne-projectedfslib-prj_startvirtualizing_flags
+// Bitmask — values may be combined with |.
 type PRJ_STARTVIRTUALIZING_FLAGS int32
 
 const (
@@ -92,7 +258,21 @@ const (
 	PRJ_FLAG_USE_NEGATIVE_PATH_CACHE PRJ_STARTVIRTUALIZING_FLAGS = 1
 )
 
+// String returns the PRJ_STARTVIRTUALIZING_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRJ_STARTVIRTUALIZING_FLAGS) String() string {
+	var parts []string
+	if e&PRJ_FLAG_USE_NEGATIVE_PATH_CACHE != 0 {
+		parts = append(parts, "PRJ_FLAG_USE_NEGATIVE_PATH_CACHE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // PRJ_UPDATE_FAILURE_CAUSES: https://learn.microsoft.com/windows/win32/api/projectedfslib/ne-projectedfslib-prj_update_failure_causes
+// Bitmask — values may be combined with |.
 type PRJ_UPDATE_FAILURE_CAUSES int32
 
 const (
@@ -103,7 +283,30 @@ const (
 	PRJ_UPDATE_FAILURE_CAUSE_READ_ONLY      PRJ_UPDATE_FAILURE_CAUSES = 8
 )
 
+// String returns the PRJ_UPDATE_FAILURE_CAUSES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRJ_UPDATE_FAILURE_CAUSES) String() string {
+	var parts []string
+	if e&PRJ_UPDATE_FAILURE_CAUSE_DIRTY_METADATA != 0 {
+		parts = append(parts, "PRJ_UPDATE_FAILURE_CAUSE_DIRTY_METADATA")
+	}
+	if e&PRJ_UPDATE_FAILURE_CAUSE_DIRTY_DATA != 0 {
+		parts = append(parts, "PRJ_UPDATE_FAILURE_CAUSE_DIRTY_DATA")
+	}
+	if e&PRJ_UPDATE_FAILURE_CAUSE_TOMBSTONE != 0 {
+		parts = append(parts, "PRJ_UPDATE_FAILURE_CAUSE_TOMBSTONE")
+	}
+	if e&PRJ_UPDATE_FAILURE_CAUSE_READ_ONLY != 0 {
+		parts = append(parts, "PRJ_UPDATE_FAILURE_CAUSE_READ_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // PRJ_UPDATE_TYPES: https://learn.microsoft.com/windows/win32/api/projectedfslib/ne-projectedfslib-prj_update_types
+// Bitmask — values may be combined with |.
 type PRJ_UPDATE_TYPES int32
 
 const (
@@ -116,3 +319,34 @@ const (
 	PRJ_UPDATE_ALLOW_READ_ONLY      PRJ_UPDATE_TYPES = 32
 	PRJ_UPDATE_MAX_VAL              PRJ_UPDATE_TYPES = 64
 )
+
+// String returns the PRJ_UPDATE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRJ_UPDATE_TYPES) String() string {
+	var parts []string
+	if e&PRJ_UPDATE_ALLOW_DIRTY_METADATA != 0 {
+		parts = append(parts, "PRJ_UPDATE_ALLOW_DIRTY_METADATA")
+	}
+	if e&PRJ_UPDATE_ALLOW_DIRTY_DATA != 0 {
+		parts = append(parts, "PRJ_UPDATE_ALLOW_DIRTY_DATA")
+	}
+	if e&PRJ_UPDATE_ALLOW_TOMBSTONE != 0 {
+		parts = append(parts, "PRJ_UPDATE_ALLOW_TOMBSTONE")
+	}
+	if e&PRJ_UPDATE_RESERVED1 != 0 {
+		parts = append(parts, "PRJ_UPDATE_RESERVED1")
+	}
+	if e&PRJ_UPDATE_RESERVED2 != 0 {
+		parts = append(parts, "PRJ_UPDATE_RESERVED2")
+	}
+	if e&PRJ_UPDATE_ALLOW_READ_ONLY != 0 {
+		parts = append(parts, "PRJ_UPDATE_ALLOW_READ_ONLY")
+	}
+	if e&PRJ_UPDATE_MAX_VAL != 0 {
+		parts = append(parts, "PRJ_UPDATE_MAX_VAL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

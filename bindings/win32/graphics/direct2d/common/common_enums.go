@@ -4,6 +4,11 @@
 
 package common
 
+import (
+	"fmt"
+	"strings"
+)
+
 // D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE: https://learn.microsoft.com/windows/win32/api/d2d1effects/ne-d2d1effects-d2d1_2daffinetransform_interpolation_mode
 type D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE int32
 
@@ -16,6 +21,27 @@ const (
 	D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_HIGH_QUALITY_CUBIC  D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE = 5
 )
 
+// String returns the D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE) String() string {
+	switch e {
+	case D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_NEAREST_NEIGHBOR:
+		return "D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_NEAREST_NEIGHBOR"
+	case D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_LINEAR:
+		return "D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_LINEAR"
+	case D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_CUBIC:
+		return "D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_CUBIC"
+	case D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_MULTI_SAMPLE_LINEAR:
+		return "D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_MULTI_SAMPLE_LINEAR"
+	case D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_ANISOTROPIC:
+		return "D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_ANISOTROPIC"
+	case D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_HIGH_QUALITY_CUBIC:
+		return "D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE_HIGH_QUALITY_CUBIC"
+	default:
+		return fmt.Sprintf("D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE(%d)", int32(e))
+	}
+}
+
 // D2D1_ALPHA_MODE: https://learn.microsoft.com/windows/win32/api/dcommon/ne-dcommon-d2d1_alpha_mode
 type D2D1_ALPHA_MODE int32
 
@@ -25,6 +51,23 @@ const (
 	D2D1_ALPHA_MODE_STRAIGHT      D2D1_ALPHA_MODE = 2
 	D2D1_ALPHA_MODE_IGNORE        D2D1_ALPHA_MODE = 3
 )
+
+// String returns the D2D1_ALPHA_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D2D1_ALPHA_MODE) String() string {
+	switch e {
+	case D2D1_ALPHA_MODE_UNKNOWN:
+		return "D2D1_ALPHA_MODE_UNKNOWN"
+	case D2D1_ALPHA_MODE_PREMULTIPLIED:
+		return "D2D1_ALPHA_MODE_PREMULTIPLIED"
+	case D2D1_ALPHA_MODE_STRAIGHT:
+		return "D2D1_ALPHA_MODE_STRAIGHT"
+	case D2D1_ALPHA_MODE_IGNORE:
+		return "D2D1_ALPHA_MODE_IGNORE"
+	default:
+		return fmt.Sprintf("D2D1_ALPHA_MODE(%d)", int32(e))
+	}
+}
 
 // D2D1_BLEND_MODE: https://learn.microsoft.com/windows/win32/api/d2d1effects/ne-d2d1effects-d2d1_blend_mode
 type D2D1_BLEND_MODE int32
@@ -58,6 +101,67 @@ const (
 	D2D1_BLEND_MODE_DIVISION      D2D1_BLEND_MODE = 25
 )
 
+// String returns the D2D1_BLEND_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D2D1_BLEND_MODE) String() string {
+	switch e {
+	case D2D1_BLEND_MODE_MULTIPLY:
+		return "D2D1_BLEND_MODE_MULTIPLY"
+	case D2D1_BLEND_MODE_SCREEN:
+		return "D2D1_BLEND_MODE_SCREEN"
+	case D2D1_BLEND_MODE_DARKEN:
+		return "D2D1_BLEND_MODE_DARKEN"
+	case D2D1_BLEND_MODE_LIGHTEN:
+		return "D2D1_BLEND_MODE_LIGHTEN"
+	case D2D1_BLEND_MODE_DISSOLVE:
+		return "D2D1_BLEND_MODE_DISSOLVE"
+	case D2D1_BLEND_MODE_COLOR_BURN:
+		return "D2D1_BLEND_MODE_COLOR_BURN"
+	case D2D1_BLEND_MODE_LINEAR_BURN:
+		return "D2D1_BLEND_MODE_LINEAR_BURN"
+	case D2D1_BLEND_MODE_DARKER_COLOR:
+		return "D2D1_BLEND_MODE_DARKER_COLOR"
+	case D2D1_BLEND_MODE_LIGHTER_COLOR:
+		return "D2D1_BLEND_MODE_LIGHTER_COLOR"
+	case D2D1_BLEND_MODE_COLOR_DODGE:
+		return "D2D1_BLEND_MODE_COLOR_DODGE"
+	case D2D1_BLEND_MODE_LINEAR_DODGE:
+		return "D2D1_BLEND_MODE_LINEAR_DODGE"
+	case D2D1_BLEND_MODE_OVERLAY:
+		return "D2D1_BLEND_MODE_OVERLAY"
+	case D2D1_BLEND_MODE_SOFT_LIGHT:
+		return "D2D1_BLEND_MODE_SOFT_LIGHT"
+	case D2D1_BLEND_MODE_HARD_LIGHT:
+		return "D2D1_BLEND_MODE_HARD_LIGHT"
+	case D2D1_BLEND_MODE_VIVID_LIGHT:
+		return "D2D1_BLEND_MODE_VIVID_LIGHT"
+	case D2D1_BLEND_MODE_LINEAR_LIGHT:
+		return "D2D1_BLEND_MODE_LINEAR_LIGHT"
+	case D2D1_BLEND_MODE_PIN_LIGHT:
+		return "D2D1_BLEND_MODE_PIN_LIGHT"
+	case D2D1_BLEND_MODE_HARD_MIX:
+		return "D2D1_BLEND_MODE_HARD_MIX"
+	case D2D1_BLEND_MODE_DIFFERENCE:
+		return "D2D1_BLEND_MODE_DIFFERENCE"
+	case D2D1_BLEND_MODE_EXCLUSION:
+		return "D2D1_BLEND_MODE_EXCLUSION"
+	case D2D1_BLEND_MODE_HUE:
+		return "D2D1_BLEND_MODE_HUE"
+	case D2D1_BLEND_MODE_SATURATION:
+		return "D2D1_BLEND_MODE_SATURATION"
+	case D2D1_BLEND_MODE_COLOR:
+		return "D2D1_BLEND_MODE_COLOR"
+	case D2D1_BLEND_MODE_LUMINOSITY:
+		return "D2D1_BLEND_MODE_LUMINOSITY"
+	case D2D1_BLEND_MODE_SUBTRACT:
+		return "D2D1_BLEND_MODE_SUBTRACT"
+	case D2D1_BLEND_MODE_DIVISION:
+		return "D2D1_BLEND_MODE_DIVISION"
+	default:
+		return fmt.Sprintf("D2D1_BLEND_MODE(%d)", int32(e))
+	}
+}
+
 // D2D1_BORDER_MODE: https://learn.microsoft.com/windows/win32/api/d2d1effects/ne-d2d1effects-d2d1_border_mode
 type D2D1_BORDER_MODE int32
 
@@ -66,6 +170,19 @@ const (
 	D2D1_BORDER_MODE_HARD D2D1_BORDER_MODE = 1
 )
 
+// String returns the D2D1_BORDER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D2D1_BORDER_MODE) String() string {
+	switch e {
+	case D2D1_BORDER_MODE_SOFT:
+		return "D2D1_BORDER_MODE_SOFT"
+	case D2D1_BORDER_MODE_HARD:
+		return "D2D1_BORDER_MODE_HARD"
+	default:
+		return fmt.Sprintf("D2D1_BORDER_MODE(%d)", int32(e))
+	}
+}
+
 // D2D1_COLORMATRIX_ALPHA_MODE: https://learn.microsoft.com/windows/win32/api/d2d1effects/ne-d2d1effects-d2d1_colormatrix_alpha_mode
 type D2D1_COLORMATRIX_ALPHA_MODE int32
 
@@ -73,6 +190,19 @@ const (
 	D2D1_COLORMATRIX_ALPHA_MODE_PREMULTIPLIED D2D1_COLORMATRIX_ALPHA_MODE = 1
 	D2D1_COLORMATRIX_ALPHA_MODE_STRAIGHT      D2D1_COLORMATRIX_ALPHA_MODE = 2
 )
+
+// String returns the D2D1_COLORMATRIX_ALPHA_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D2D1_COLORMATRIX_ALPHA_MODE) String() string {
+	switch e {
+	case D2D1_COLORMATRIX_ALPHA_MODE_PREMULTIPLIED:
+		return "D2D1_COLORMATRIX_ALPHA_MODE_PREMULTIPLIED"
+	case D2D1_COLORMATRIX_ALPHA_MODE_STRAIGHT:
+		return "D2D1_COLORMATRIX_ALPHA_MODE_STRAIGHT"
+	default:
+		return fmt.Sprintf("D2D1_COLORMATRIX_ALPHA_MODE(%d)", int32(e))
+	}
+}
 
 // D2D1_COMPOSITE_MODE: https://learn.microsoft.com/windows/win32/api/d2d1_1/ne-d2d1_1-d2d1_composite_mode
 type D2D1_COMPOSITE_MODE int32
@@ -93,6 +223,41 @@ const (
 	D2D1_COMPOSITE_MODE_MASK_INVERT         D2D1_COMPOSITE_MODE = 12
 )
 
+// String returns the D2D1_COMPOSITE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D2D1_COMPOSITE_MODE) String() string {
+	switch e {
+	case D2D1_COMPOSITE_MODE_SOURCE_OVER:
+		return "D2D1_COMPOSITE_MODE_SOURCE_OVER"
+	case D2D1_COMPOSITE_MODE_DESTINATION_OVER:
+		return "D2D1_COMPOSITE_MODE_DESTINATION_OVER"
+	case D2D1_COMPOSITE_MODE_SOURCE_IN:
+		return "D2D1_COMPOSITE_MODE_SOURCE_IN"
+	case D2D1_COMPOSITE_MODE_DESTINATION_IN:
+		return "D2D1_COMPOSITE_MODE_DESTINATION_IN"
+	case D2D1_COMPOSITE_MODE_SOURCE_OUT:
+		return "D2D1_COMPOSITE_MODE_SOURCE_OUT"
+	case D2D1_COMPOSITE_MODE_DESTINATION_OUT:
+		return "D2D1_COMPOSITE_MODE_DESTINATION_OUT"
+	case D2D1_COMPOSITE_MODE_SOURCE_ATOP:
+		return "D2D1_COMPOSITE_MODE_SOURCE_ATOP"
+	case D2D1_COMPOSITE_MODE_DESTINATION_ATOP:
+		return "D2D1_COMPOSITE_MODE_DESTINATION_ATOP"
+	case D2D1_COMPOSITE_MODE_XOR:
+		return "D2D1_COMPOSITE_MODE_XOR"
+	case D2D1_COMPOSITE_MODE_PLUS:
+		return "D2D1_COMPOSITE_MODE_PLUS"
+	case D2D1_COMPOSITE_MODE_SOURCE_COPY:
+		return "D2D1_COMPOSITE_MODE_SOURCE_COPY"
+	case D2D1_COMPOSITE_MODE_BOUNDED_SOURCE_COPY:
+		return "D2D1_COMPOSITE_MODE_BOUNDED_SOURCE_COPY"
+	case D2D1_COMPOSITE_MODE_MASK_INVERT:
+		return "D2D1_COMPOSITE_MODE_MASK_INVERT"
+	default:
+		return fmt.Sprintf("D2D1_COMPOSITE_MODE(%d)", int32(e))
+	}
+}
+
 // D2D1_FIGURE_BEGIN: https://learn.microsoft.com/windows/win32/api/d2d1/ne-d2d1-d2d1_figure_begin
 type D2D1_FIGURE_BEGIN int32
 
@@ -100,6 +265,19 @@ const (
 	D2D1_FIGURE_BEGIN_FILLED D2D1_FIGURE_BEGIN = 0
 	D2D1_FIGURE_BEGIN_HOLLOW D2D1_FIGURE_BEGIN = 1
 )
+
+// String returns the D2D1_FIGURE_BEGIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D2D1_FIGURE_BEGIN) String() string {
+	switch e {
+	case D2D1_FIGURE_BEGIN_FILLED:
+		return "D2D1_FIGURE_BEGIN_FILLED"
+	case D2D1_FIGURE_BEGIN_HOLLOW:
+		return "D2D1_FIGURE_BEGIN_HOLLOW"
+	default:
+		return fmt.Sprintf("D2D1_FIGURE_BEGIN(%d)", int32(e))
+	}
+}
 
 // D2D1_FIGURE_END: https://learn.microsoft.com/windows/win32/api/d2d1/ne-d2d1-d2d1_figure_end
 type D2D1_FIGURE_END int32
@@ -109,6 +287,19 @@ const (
 	D2D1_FIGURE_END_CLOSED D2D1_FIGURE_END = 1
 )
 
+// String returns the D2D1_FIGURE_END constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D2D1_FIGURE_END) String() string {
+	switch e {
+	case D2D1_FIGURE_END_OPEN:
+		return "D2D1_FIGURE_END_OPEN"
+	case D2D1_FIGURE_END_CLOSED:
+		return "D2D1_FIGURE_END_CLOSED"
+	default:
+		return fmt.Sprintf("D2D1_FIGURE_END(%d)", int32(e))
+	}
+}
+
 // D2D1_FILL_MODE: https://learn.microsoft.com/windows/win32/api/d2d1/ne-d2d1-d2d1_fill_mode
 type D2D1_FILL_MODE int32
 
@@ -117,7 +308,21 @@ const (
 	D2D1_FILL_MODE_WINDING   D2D1_FILL_MODE = 1
 )
 
+// String returns the D2D1_FILL_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D2D1_FILL_MODE) String() string {
+	switch e {
+	case D2D1_FILL_MODE_ALTERNATE:
+		return "D2D1_FILL_MODE_ALTERNATE"
+	case D2D1_FILL_MODE_WINDING:
+		return "D2D1_FILL_MODE_WINDING"
+	default:
+		return fmt.Sprintf("D2D1_FILL_MODE(%d)", int32(e))
+	}
+}
+
 // D2D1_PATH_SEGMENT: https://learn.microsoft.com/windows/win32/api/d2d1/ne-d2d1-d2d1_path_segment
+// Bitmask — values may be combined with |.
 type D2D1_PATH_SEGMENT int32
 
 const (
@@ -126,6 +331,22 @@ const (
 	D2D1_PATH_SEGMENT_FORCE_ROUND_LINE_JOIN D2D1_PATH_SEGMENT = 2
 )
 
+// String returns the D2D1_PATH_SEGMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D2D1_PATH_SEGMENT) String() string {
+	var parts []string
+	if e&D2D1_PATH_SEGMENT_FORCE_UNSTROKED != 0 {
+		parts = append(parts, "D2D1_PATH_SEGMENT_FORCE_UNSTROKED")
+	}
+	if e&D2D1_PATH_SEGMENT_FORCE_ROUND_LINE_JOIN != 0 {
+		parts = append(parts, "D2D1_PATH_SEGMENT_FORCE_ROUND_LINE_JOIN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // D2D1_TURBULENCE_NOISE: https://learn.microsoft.com/windows/win32/api/d2d1effects/ne-d2d1effects-d2d1_turbulence_noise
 type D2D1_TURBULENCE_NOISE int32
 
@@ -133,3 +354,16 @@ const (
 	D2D1_TURBULENCE_NOISE_FRACTAL_SUM D2D1_TURBULENCE_NOISE = 0
 	D2D1_TURBULENCE_NOISE_TURBULENCE  D2D1_TURBULENCE_NOISE = 1
 )
+
+// String returns the D2D1_TURBULENCE_NOISE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D2D1_TURBULENCE_NOISE) String() string {
+	switch e {
+	case D2D1_TURBULENCE_NOISE_FRACTAL_SUM:
+		return "D2D1_TURBULENCE_NOISE_FRACTAL_SUM"
+	case D2D1_TURBULENCE_NOISE_TURBULENCE:
+		return "D2D1_TURBULENCE_NOISE_TURBULENCE"
+	default:
+		return fmt.Sprintf("D2D1_TURBULENCE_NOISE(%d)", int32(e))
+	}
+}

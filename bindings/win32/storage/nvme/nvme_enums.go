@@ -4,6 +4,10 @@
 
 package nvme
 
+import (
+	"fmt"
+)
+
 type NVMEOF_ADDRESS_FAMILY int32
 
 const (
@@ -15,6 +19,29 @@ const (
 	NvmeofAddressLoopback NVMEOF_ADDRESS_FAMILY = 254
 	NvmeofAddressMax      NVMEOF_ADDRESS_FAMILY = 255
 )
+
+// String returns the NVMEOF_ADDRESS_FAMILY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_ADDRESS_FAMILY) String() string {
+	switch e {
+	case NvmeofAddressUnknown:
+		return "NvmeofAddressUnknown"
+	case NvmeofAddressIPv4:
+		return "NvmeofAddressIPv4"
+	case NvmeofAddressIPv6:
+		return "NvmeofAddressIPv6"
+	case NvmeofAddressIB:
+		return "NvmeofAddressIB"
+	case NvmeofAddressFC:
+		return "NvmeofAddressFC"
+	case NvmeofAddressLoopback:
+		return "NvmeofAddressLoopback"
+	case NvmeofAddressMax:
+		return "NvmeofAddressMax"
+	default:
+		return fmt.Sprintf("NVMEOF_ADDRESS_FAMILY(%d)", int32(e))
+	}
+}
 
 type NVMEOF_AUTH_DHCHAP_GROUP_ID int32
 
@@ -28,6 +55,29 @@ const (
 	NvmeofAuthDHCHAPGroupMax  NVMEOF_AUTH_DHCHAP_GROUP_ID = 255
 )
 
+// String returns the NVMEOF_AUTH_DHCHAP_GROUP_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_AUTH_DHCHAP_GROUP_ID) String() string {
+	switch e {
+	case NvmeofAuthDHCHAPGroupNull:
+		return "NvmeofAuthDHCHAPGroupNull"
+	case NvmeofAuthDHCHAPGroup2048:
+		return "NvmeofAuthDHCHAPGroup2048"
+	case NvmeofAuthDHCHAPGroup3072:
+		return "NvmeofAuthDHCHAPGroup3072"
+	case NvmeofAuthDHCHAPGroup4096:
+		return "NvmeofAuthDHCHAPGroup4096"
+	case NvmeofAuthDHCHAPGroup6144:
+		return "NvmeofAuthDHCHAPGroup6144"
+	case NvmeofAuthDHCHAPGroup8192:
+		return "NvmeofAuthDHCHAPGroup8192"
+	case NvmeofAuthDHCHAPGroupMax:
+		return "NvmeofAuthDHCHAPGroupMax"
+	default:
+		return fmt.Sprintf("NVMEOF_AUTH_DHCHAP_GROUP_ID(%d)", int32(e))
+	}
+}
+
 type NVMEOF_AUTH_DHCHAP_HASH_ID int32
 
 const (
@@ -38,11 +88,41 @@ const (
 	NvmeofAuthDHCHAPHashMax      NVMEOF_AUTH_DHCHAP_HASH_ID = 255
 )
 
+// String returns the NVMEOF_AUTH_DHCHAP_HASH_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_AUTH_DHCHAP_HASH_ID) String() string {
+	switch e {
+	case NvmeofAuthDHCHAPHashReserved:
+		return "NvmeofAuthDHCHAPHashReserved"
+	case NvmeofAuthDHCHAPHashSha256:
+		return "NvmeofAuthDHCHAPHashSha256"
+	case NvmeofAuthDHCHAPHashSha384:
+		return "NvmeofAuthDHCHAPHashSha384"
+	case NvmeofAuthDHCHAPHashSha512:
+		return "NvmeofAuthDHCHAPHashSha512"
+	case NvmeofAuthDHCHAPHashMax:
+		return "NvmeofAuthDHCHAPHashMax"
+	default:
+		return fmt.Sprintf("NVMEOF_AUTH_DHCHAP_HASH_ID(%d)", int32(e))
+	}
+}
+
 type NVMEOF_AUTH_FAIL_REASON_CODE int32
 
 const (
 	NvmeofAuthFailureReasonFailed NVMEOF_AUTH_FAIL_REASON_CODE = 1
 )
+
+// String returns the NVMEOF_AUTH_FAIL_REASON_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_AUTH_FAIL_REASON_CODE) String() string {
+	switch e {
+	case NvmeofAuthFailureReasonFailed:
+		return "NvmeofAuthFailureReasonFailed"
+	default:
+		return fmt.Sprintf("NVMEOF_AUTH_FAIL_REASON_CODE(%d)", int32(e))
+	}
+}
 
 type NVMEOF_AUTH_FAIL_REASON_EXPLANATION int32
 
@@ -56,6 +136,29 @@ const (
 	NvmeofAuthIncorrectProtocolMessage    NVMEOF_AUTH_FAIL_REASON_EXPLANATION = 7
 )
 
+// String returns the NVMEOF_AUTH_FAIL_REASON_EXPLANATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_AUTH_FAIL_REASON_EXPLANATION) String() string {
+	switch e {
+	case NvmeofAuthFailed:
+		return "NvmeofAuthFailed"
+	case NvmeofAuthProtocolNotUsable:
+		return "NvmeofAuthProtocolNotUsable"
+	case NvmeofAuthSecureChannelConcatMismatch:
+		return "NvmeofAuthSecureChannelConcatMismatch"
+	case NvmeofAuthHashFunctionNotUsable:
+		return "NvmeofAuthHashFunctionNotUsable"
+	case NvmeofAuthDHGroupNotUsable:
+		return "NvmeofAuthDHGroupNotUsable"
+	case NvmeofAuthIncorrectPayload:
+		return "NvmeofAuthIncorrectPayload"
+	case NvmeofAuthIncorrectProtocolMessage:
+		return "NvmeofAuthIncorrectProtocolMessage"
+	default:
+		return fmt.Sprintf("NVMEOF_AUTH_FAIL_REASON_EXPLANATION(%d)", int32(e))
+	}
+}
+
 type NVMEOF_AUTH_ID int32
 
 const (
@@ -68,11 +171,45 @@ const (
 	NvmeofAuthIdFailure1  NVMEOF_AUTH_ID = 241
 )
 
+// String returns the NVMEOF_AUTH_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_AUTH_ID) String() string {
+	switch e {
+	case NvmeofAuthIdNegotiate:
+		return "NvmeofAuthIdNegotiate"
+	case NvmeofAuthIdChallenge:
+		return "NvmeofAuthIdChallenge"
+	case NvmeofAuthIdReply:
+		return "NvmeofAuthIdReply"
+	case NvmeofAuthIdSuccess1:
+		return "NvmeofAuthIdSuccess1"
+	case NvmeofAuthIdSuccess2:
+		return "NvmeofAuthIdSuccess2"
+	case NvmeofAuthIdFailure2:
+		return "NvmeofAuthIdFailure2"
+	case NvmeofAuthIdFailure1:
+		return "NvmeofAuthIdFailure1"
+	default:
+		return fmt.Sprintf("NVMEOF_AUTH_ID(%d)", int32(e))
+	}
+}
+
 type NVMEOF_AUTH_PROTOCOL int32
 
 const (
 	NvmeofAuthProtocolDHCHAP NVMEOF_AUTH_PROTOCOL = 233
 )
+
+// String returns the NVMEOF_AUTH_PROTOCOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_AUTH_PROTOCOL) String() string {
+	switch e {
+	case NvmeofAuthProtocolDHCHAP:
+		return "NvmeofAuthProtocolDHCHAP"
+	default:
+		return fmt.Sprintf("NVMEOF_AUTH_PROTOCOL(%d)", int32(e))
+	}
+}
 
 type NVMEOF_AUTH_SECURE_CHANNEL int32
 
@@ -83,12 +220,42 @@ const (
 	NvmeofAuthSCReserved             NVMEOF_AUTH_SECURE_CHANNEL = 3
 )
 
+// String returns the NVMEOF_AUTH_SECURE_CHANNEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_AUTH_SECURE_CHANNEL) String() string {
+	switch e {
+	case NvmeofAuthSCUnspecified:
+		return "NvmeofAuthSCUnspecified"
+	case NvmeofAuthSCAuthRequired:
+		return "NvmeofAuthSCAuthRequired"
+	case NvmeofAuthSCAuthConcatSCRequired:
+		return "NvmeofAuthSCAuthConcatSCRequired"
+	case NvmeofAuthSCReserved:
+		return "NvmeofAuthSCReserved"
+	default:
+		return fmt.Sprintf("NVMEOF_AUTH_SECURE_CHANNEL(%d)", int32(e))
+	}
+}
+
 type NVMEOF_AUTH_TYPE int32
 
 const (
 	NvmeofAuthTypeCommonMessages NVMEOF_AUTH_TYPE = 0
 	NvmeofAuthTypeDHCHAPMessages NVMEOF_AUTH_TYPE = 1
 )
+
+// String returns the NVMEOF_AUTH_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_AUTH_TYPE) String() string {
+	switch e {
+	case NvmeofAuthTypeCommonMessages:
+		return "NvmeofAuthTypeCommonMessages"
+	case NvmeofAuthTypeDHCHAPMessages:
+		return "NvmeofAuthTypeDHCHAPMessages"
+	default:
+		return fmt.Sprintf("NVMEOF_AUTH_TYPE(%d)", int32(e))
+	}
+}
 
 type NVMEOF_SECURE_CHANNEL int32
 
@@ -99,6 +266,23 @@ const (
 	NvmeofSCReserved    NVMEOF_SECURE_CHANNEL = 3
 )
 
+// String returns the NVMEOF_SECURE_CHANNEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_SECURE_CHANNEL) String() string {
+	switch e {
+	case NvmeofSCUnspecified:
+		return "NvmeofSCUnspecified"
+	case NvmeofSCRequired:
+		return "NvmeofSCRequired"
+	case NvmeofSCNotRequired:
+		return "NvmeofSCNotRequired"
+	case NvmeofSCReserved:
+		return "NvmeofSCReserved"
+	default:
+		return fmt.Sprintf("NVMEOF_SECURE_CHANNEL(%d)", int32(e))
+	}
+}
+
 type NVMEOF_SECURE_CHANNEL_PROTOCOL int32
 
 const (
@@ -107,6 +291,21 @@ const (
 	NvmeofSecureChannelNewTLSPSK     NVMEOF_SECURE_CHANNEL_PROTOCOL = 2
 	NvmeofSecureChannelReplaceTLSPSK NVMEOF_SECURE_CHANNEL_PROTOCOL = 2
 )
+
+// String returns the NVMEOF_SECURE_CHANNEL_PROTOCOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_SECURE_CHANNEL_PROTOCOL) String() string {
+	switch e {
+	case NvmeofSecureChannelConcatNone:
+		return "NvmeofSecureChannelConcatNone"
+	case NvmeofSecureChannelConcatWithTLS:
+		return "NvmeofSecureChannelConcatWithTLS"
+	case NvmeofSecureChannelNewTLSPSK:
+		return "NvmeofSecureChannelNewTLSPSK"
+	default:
+		return fmt.Sprintf("NVMEOF_SECURE_CHANNEL_PROTOCOL(%d)", int32(e))
+	}
+}
 
 type NVMEOF_SUBSYSTEM_TYPE int32
 
@@ -118,6 +317,25 @@ const (
 	NvmeofSubsysTypeMax          NVMEOF_SUBSYSTEM_TYPE = 255
 )
 
+// String returns the NVMEOF_SUBSYSTEM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_SUBSYSTEM_TYPE) String() string {
+	switch e {
+	case NvmeofSubsysTypeUnknown:
+		return "NvmeofSubsysTypeUnknown"
+	case NvmeofSubsysTypeDiscReferral:
+		return "NvmeofSubsysTypeDiscReferral"
+	case NvmeofSubsysTypeIo:
+		return "NvmeofSubsysTypeIo"
+	case NvmeofSubsysTypeDiscCurrent:
+		return "NvmeofSubsysTypeDiscCurrent"
+	case NvmeofSubsysTypeMax:
+		return "NvmeofSubsysTypeMax"
+	default:
+		return fmt.Sprintf("NVMEOF_SUBSYSTEM_TYPE(%d)", int32(e))
+	}
+}
+
 type NVMEOF_TRANSPORT_TYPE int32
 
 const (
@@ -128,6 +346,27 @@ const (
 	NvmeofTransportLoopback NVMEOF_TRANSPORT_TYPE = 254
 	NvmeofTransportMax      NVMEOF_TRANSPORT_TYPE = 255
 )
+
+// String returns the NVMEOF_TRANSPORT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVMEOF_TRANSPORT_TYPE) String() string {
+	switch e {
+	case NvmeofTransportUnknown:
+		return "NvmeofTransportUnknown"
+	case NvmeofTransportRdma:
+		return "NvmeofTransportRdma"
+	case NvmeofTransportFC:
+		return "NvmeofTransportFC"
+	case NvmeofTransportTcp:
+		return "NvmeofTransportTcp"
+	case NvmeofTransportLoopback:
+		return "NvmeofTransportLoopback"
+	case NvmeofTransportMax:
+		return "NvmeofTransportMax"
+	default:
+		return fmt.Sprintf("NVMEOF_TRANSPORT_TYPE(%d)", int32(e))
+	}
+}
 
 // NVME_ACCESS_FREQUENCIES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_access_frequencies
 type NVME_ACCESS_FREQUENCIES int32
@@ -144,6 +383,33 @@ const (
 	NVME_ACCESS_FREQUENCY_WILL_BE_OVERWRITTEN  NVME_ACCESS_FREQUENCIES = 8
 )
 
+// String returns the NVME_ACCESS_FREQUENCIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ACCESS_FREQUENCIES) String() string {
+	switch e {
+	case NVME_ACCESS_FREQUENCY_NONE:
+		return "NVME_ACCESS_FREQUENCY_NONE"
+	case NVME_ACCESS_FREQUENCY_TYPICAL:
+		return "NVME_ACCESS_FREQUENCY_TYPICAL"
+	case NVME_ACCESS_FREQUENCY_INFR_WRITE_INFR_READ:
+		return "NVME_ACCESS_FREQUENCY_INFR_WRITE_INFR_READ"
+	case NVME_ACCESS_FREQUENCY_INFR_WRITE_FR_READ:
+		return "NVME_ACCESS_FREQUENCY_INFR_WRITE_FR_READ"
+	case NVME_ACCESS_FREQUENCY_FR_WRITE_INFR_READ:
+		return "NVME_ACCESS_FREQUENCY_FR_WRITE_INFR_READ"
+	case NVME_ACCESS_FREQUENCY_FR_WRITE_FR_READ:
+		return "NVME_ACCESS_FREQUENCY_FR_WRITE_FR_READ"
+	case NVME_ACCESS_FREQUENCY_ONE_TIME_READ:
+		return "NVME_ACCESS_FREQUENCY_ONE_TIME_READ"
+	case NVME_ACCESS_FREQUENCY_SPECULATIVE_READ:
+		return "NVME_ACCESS_FREQUENCY_SPECULATIVE_READ"
+	case NVME_ACCESS_FREQUENCY_WILL_BE_OVERWRITTEN:
+		return "NVME_ACCESS_FREQUENCY_WILL_BE_OVERWRITTEN"
+	default:
+		return fmt.Sprintf("NVME_ACCESS_FREQUENCIES(%d)", int32(e))
+	}
+}
+
 // NVME_ACCESS_LATENCIES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_access_latencies
 type NVME_ACCESS_LATENCIES int32
 
@@ -153,6 +419,23 @@ const (
 	NVME_ACCESS_LATENCY_NORMAL NVME_ACCESS_LATENCIES = 2
 	NVME_ACCESS_LATENCY_LOW    NVME_ACCESS_LATENCIES = 3
 )
+
+// String returns the NVME_ACCESS_LATENCIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ACCESS_LATENCIES) String() string {
+	switch e {
+	case NVME_ACCESS_LATENCY_NONE:
+		return "NVME_ACCESS_LATENCY_NONE"
+	case NVME_ACCESS_LATENCY_IDLE:
+		return "NVME_ACCESS_LATENCY_IDLE"
+	case NVME_ACCESS_LATENCY_NORMAL:
+		return "NVME_ACCESS_LATENCY_NORMAL"
+	case NVME_ACCESS_LATENCY_LOW:
+		return "NVME_ACCESS_LATENCY_LOW"
+	default:
+		return fmt.Sprintf("NVME_ACCESS_LATENCIES(%d)", int32(e))
+	}
+}
 
 // NVME_ADMIN_COMMANDS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_admin_commands
 type NVME_ADMIN_COMMANDS int32
@@ -190,12 +473,92 @@ const (
 	NVME_ADMIN_COMMAND_GET_LBA_STATUS            NVME_ADMIN_COMMANDS = 134
 )
 
+// String returns the NVME_ADMIN_COMMANDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ADMIN_COMMANDS) String() string {
+	switch e {
+	case NVME_ADMIN_COMMAND_DELETE_IO_SQ:
+		return "NVME_ADMIN_COMMAND_DELETE_IO_SQ"
+	case NVME_ADMIN_COMMAND_CREATE_IO_SQ:
+		return "NVME_ADMIN_COMMAND_CREATE_IO_SQ"
+	case NVME_ADMIN_COMMAND_GET_LOG_PAGE:
+		return "NVME_ADMIN_COMMAND_GET_LOG_PAGE"
+	case NVME_ADMIN_COMMAND_DELETE_IO_CQ:
+		return "NVME_ADMIN_COMMAND_DELETE_IO_CQ"
+	case NVME_ADMIN_COMMAND_CREATE_IO_CQ:
+		return "NVME_ADMIN_COMMAND_CREATE_IO_CQ"
+	case NVME_ADMIN_COMMAND_IDENTIFY:
+		return "NVME_ADMIN_COMMAND_IDENTIFY"
+	case NVME_ADMIN_COMMAND_ABORT:
+		return "NVME_ADMIN_COMMAND_ABORT"
+	case NVME_ADMIN_COMMAND_SET_FEATURES:
+		return "NVME_ADMIN_COMMAND_SET_FEATURES"
+	case NVME_ADMIN_COMMAND_GET_FEATURES:
+		return "NVME_ADMIN_COMMAND_GET_FEATURES"
+	case NVME_ADMIN_COMMAND_ASYNC_EVENT_REQUEST:
+		return "NVME_ADMIN_COMMAND_ASYNC_EVENT_REQUEST"
+	case NVME_ADMIN_COMMAND_NAMESPACE_MANAGEMENT:
+		return "NVME_ADMIN_COMMAND_NAMESPACE_MANAGEMENT"
+	case NVME_ADMIN_COMMAND_FIRMWARE_ACTIVATE:
+		return "NVME_ADMIN_COMMAND_FIRMWARE_ACTIVATE"
+	case NVME_ADMIN_COMMAND_FIRMWARE_IMAGE_DOWNLOAD:
+		return "NVME_ADMIN_COMMAND_FIRMWARE_IMAGE_DOWNLOAD"
+	case NVME_ADMIN_COMMAND_DEVICE_SELF_TEST:
+		return "NVME_ADMIN_COMMAND_DEVICE_SELF_TEST"
+	case NVME_ADMIN_COMMAND_NAMESPACE_ATTACHMENT:
+		return "NVME_ADMIN_COMMAND_NAMESPACE_ATTACHMENT"
+	case NVME_ADMIN_COMMAND_KEEP_ALIVE:
+		return "NVME_ADMIN_COMMAND_KEEP_ALIVE"
+	case NVME_ADMIN_COMMAND_DIRECTIVE_SEND:
+		return "NVME_ADMIN_COMMAND_DIRECTIVE_SEND"
+	case NVME_ADMIN_COMMAND_DIRECTIVE_RECEIVE:
+		return "NVME_ADMIN_COMMAND_DIRECTIVE_RECEIVE"
+	case NVME_ADMIN_COMMAND_VIRTUALIZATION_MANAGEMENT:
+		return "NVME_ADMIN_COMMAND_VIRTUALIZATION_MANAGEMENT"
+	case NVME_ADMIN_COMMAND_NVME_MI_SEND:
+		return "NVME_ADMIN_COMMAND_NVME_MI_SEND"
+	case NVME_ADMIN_COMMAND_NVME_MI_RECEIVE:
+		return "NVME_ADMIN_COMMAND_NVME_MI_RECEIVE"
+	case NVME_ADMIN_COMMAND_DISCOVERY_INFO_MGMT:
+		return "NVME_ADMIN_COMMAND_DISCOVERY_INFO_MGMT"
+	case NVME_ADMIN_COMMAND_DOORBELL_BUFFER_CONFIG:
+		return "NVME_ADMIN_COMMAND_DOORBELL_BUFFER_CONFIG"
+	case NVME_ADMIN_COMMAND_FABRICS:
+		return "NVME_ADMIN_COMMAND_FABRICS"
+	case NVME_ADMIN_COMMAND_FORMAT_NVM:
+		return "NVME_ADMIN_COMMAND_FORMAT_NVM"
+	case NVME_ADMIN_COMMAND_SECURITY_SEND:
+		return "NVME_ADMIN_COMMAND_SECURITY_SEND"
+	case NVME_ADMIN_COMMAND_SECURITY_RECEIVE:
+		return "NVME_ADMIN_COMMAND_SECURITY_RECEIVE"
+	case NVME_ADMIN_COMMAND_SANITIZE:
+		return "NVME_ADMIN_COMMAND_SANITIZE"
+	case NVME_ADMIN_COMMAND_GET_LBA_STATUS:
+		return "NVME_ADMIN_COMMAND_GET_LBA_STATUS"
+	default:
+		return fmt.Sprintf("NVME_ADMIN_COMMANDS(%d)", int32(e))
+	}
+}
+
 type NVME_AMS_OPTION int32
 
 const (
 	NVME_AMS_ROUND_ROBIN                 NVME_AMS_OPTION = 0
 	NVME_AMS_WEIGHTED_ROUND_ROBIN_URGENT NVME_AMS_OPTION = 1
 )
+
+// String returns the NVME_AMS_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_AMS_OPTION) String() string {
+	switch e {
+	case NVME_AMS_ROUND_ROBIN:
+		return "NVME_AMS_ROUND_ROBIN"
+	case NVME_AMS_WEIGHTED_ROUND_ROBIN_URGENT:
+		return "NVME_AMS_WEIGHTED_ROUND_ROBIN_URGENT"
+	default:
+		return fmt.Sprintf("NVME_AMS_OPTION(%d)", int32(e))
+	}
+}
 
 // NVME_ASYNC_EVENT_ERROR_STATUS_CODES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_async_event_error_status_codes
 type NVME_ASYNC_EVENT_ERROR_STATUS_CODES int32
@@ -209,6 +572,27 @@ const (
 	NVME_ASYNC_ERROR_FIRMWARE_IMAGE_LOAD_ERROR          NVME_ASYNC_EVENT_ERROR_STATUS_CODES = 5
 )
 
+// String returns the NVME_ASYNC_EVENT_ERROR_STATUS_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ASYNC_EVENT_ERROR_STATUS_CODES) String() string {
+	switch e {
+	case NVME_ASYNC_ERROR_WRITE_TO_INVALID_DOORBELL_REGISTER:
+		return "NVME_ASYNC_ERROR_WRITE_TO_INVALID_DOORBELL_REGISTER"
+	case NVME_ASYNC_ERROR_INVALID_DOORBELL_WRITE_VALUE:
+		return "NVME_ASYNC_ERROR_INVALID_DOORBELL_WRITE_VALUE"
+	case NVME_ASYNC_ERROR_DIAG_FAILURE:
+		return "NVME_ASYNC_ERROR_DIAG_FAILURE"
+	case NVME_ASYNC_ERROR_PERSISTENT_INTERNAL_DEVICE_ERROR:
+		return "NVME_ASYNC_ERROR_PERSISTENT_INTERNAL_DEVICE_ERROR"
+	case NVME_ASYNC_ERROR_TRANSIENT_INTERNAL_DEVICE_ERROR:
+		return "NVME_ASYNC_ERROR_TRANSIENT_INTERNAL_DEVICE_ERROR"
+	case NVME_ASYNC_ERROR_FIRMWARE_IMAGE_LOAD_ERROR:
+		return "NVME_ASYNC_ERROR_FIRMWARE_IMAGE_LOAD_ERROR"
+	default:
+		return fmt.Sprintf("NVME_ASYNC_EVENT_ERROR_STATUS_CODES(%d)", int32(e))
+	}
+}
+
 // NVME_ASYNC_EVENT_HEALTH_STATUS_CODES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_async_event_health_status_codes
 type NVME_ASYNC_EVENT_HEALTH_STATUS_CODES int32
 
@@ -218,11 +602,37 @@ const (
 	NVME_ASYNC_HEALTH_SPARE_BELOW_THRESHOLD     NVME_ASYNC_EVENT_HEALTH_STATUS_CODES = 2
 )
 
+// String returns the NVME_ASYNC_EVENT_HEALTH_STATUS_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ASYNC_EVENT_HEALTH_STATUS_CODES) String() string {
+	switch e {
+	case NVME_ASYNC_HEALTH_NVM_SUBSYSTEM_RELIABILITY:
+		return "NVME_ASYNC_HEALTH_NVM_SUBSYSTEM_RELIABILITY"
+	case NVME_ASYNC_HEALTH_TEMPERATURE_THRESHOLD:
+		return "NVME_ASYNC_HEALTH_TEMPERATURE_THRESHOLD"
+	case NVME_ASYNC_HEALTH_SPARE_BELOW_THRESHOLD:
+		return "NVME_ASYNC_HEALTH_SPARE_BELOW_THRESHOLD"
+	default:
+		return fmt.Sprintf("NVME_ASYNC_EVENT_HEALTH_STATUS_CODES(%d)", int32(e))
+	}
+}
+
 type NVME_ASYNC_EVENT_IMMEDIATE_STATUS_CODES int32
 
 const (
 	NVME_ASYNC_IMMEDIATE_NVM_SUBSYSTEM_NORMAL_SHUTDOWN NVME_ASYNC_EVENT_IMMEDIATE_STATUS_CODES = 0
 )
+
+// String returns the NVME_ASYNC_EVENT_IMMEDIATE_STATUS_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ASYNC_EVENT_IMMEDIATE_STATUS_CODES) String() string {
+	switch e {
+	case NVME_ASYNC_IMMEDIATE_NVM_SUBSYSTEM_NORMAL_SHUTDOWN:
+		return "NVME_ASYNC_IMMEDIATE_NVM_SUBSYSTEM_NORMAL_SHUTDOWN"
+	default:
+		return fmt.Sprintf("NVME_ASYNC_EVENT_IMMEDIATE_STATUS_CODES(%d)", int32(e))
+	}
+}
 
 // NVME_ASYNC_EVENT_IO_COMMAND_SET_STATUS_CODES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_async_event_io_command_set_status_codes
 type NVME_ASYNC_EVENT_IO_COMMAND_SET_STATUS_CODES int32
@@ -232,6 +642,21 @@ const (
 	NVME_ASYNC_IO_CMD_SANITIZE_OPERATION_COMPLETED                              NVME_ASYNC_EVENT_IO_COMMAND_SET_STATUS_CODES = 1
 	NVME_ASYNC_IO_CMD_SANITIZE_OPERATION_COMPLETED_WITH_UNEXPECTED_DEALLOCATION NVME_ASYNC_EVENT_IO_COMMAND_SET_STATUS_CODES = 2
 )
+
+// String returns the NVME_ASYNC_EVENT_IO_COMMAND_SET_STATUS_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ASYNC_EVENT_IO_COMMAND_SET_STATUS_CODES) String() string {
+	switch e {
+	case NVME_ASYNC_IO_CMD_SET_RESERVATION_LOG_PAGE_AVAILABLE:
+		return "NVME_ASYNC_IO_CMD_SET_RESERVATION_LOG_PAGE_AVAILABLE"
+	case NVME_ASYNC_IO_CMD_SANITIZE_OPERATION_COMPLETED:
+		return "NVME_ASYNC_IO_CMD_SANITIZE_OPERATION_COMPLETED"
+	case NVME_ASYNC_IO_CMD_SANITIZE_OPERATION_COMPLETED_WITH_UNEXPECTED_DEALLOCATION:
+		return "NVME_ASYNC_IO_CMD_SANITIZE_OPERATION_COMPLETED_WITH_UNEXPECTED_DEALLOCATION"
+	default:
+		return fmt.Sprintf("NVME_ASYNC_EVENT_IO_COMMAND_SET_STATUS_CODES(%d)", int32(e))
+	}
+}
 
 // NVME_ASYNC_EVENT_NOTICE_CODES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_async_event_notice_codes
 type NVME_ASYNC_EVENT_NOTICE_CODES int32
@@ -248,6 +673,33 @@ const (
 	NVME_ASYNC_NOTICE_DISCOVERY_LOG_PAGE_CHANGED                     NVME_ASYNC_EVENT_NOTICE_CODES = 240
 )
 
+// String returns the NVME_ASYNC_EVENT_NOTICE_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ASYNC_EVENT_NOTICE_CODES) String() string {
+	switch e {
+	case NVME_ASYNC_NOTICE_NAMESPACE_ATTRIBUTE_CHANGED:
+		return "NVME_ASYNC_NOTICE_NAMESPACE_ATTRIBUTE_CHANGED"
+	case NVME_ASYNC_NOTICE_FIRMWARE_ACTIVATION_STARTING:
+		return "NVME_ASYNC_NOTICE_FIRMWARE_ACTIVATION_STARTING"
+	case NVME_ASYNC_NOTICE_TELEMETRY_LOG_CHANGED:
+		return "NVME_ASYNC_NOTICE_TELEMETRY_LOG_CHANGED"
+	case NVME_ASYNC_NOTICE_ASYMMETRIC_ACCESS_CHANGE:
+		return "NVME_ASYNC_NOTICE_ASYMMETRIC_ACCESS_CHANGE"
+	case NVME_ASYNC_NOTICE_PREDICTABLE_LATENCY_EVENT_AGGREGATE_LOG_CHANGE:
+		return "NVME_ASYNC_NOTICE_PREDICTABLE_LATENCY_EVENT_AGGREGATE_LOG_CHANGE"
+	case NVME_ASYNC_NOTICE_LBA_STATUS_INFORMATION_ALERT:
+		return "NVME_ASYNC_NOTICE_LBA_STATUS_INFORMATION_ALERT"
+	case NVME_ASYNC_NOTICE_ENDURANCE_GROUP_EVENT_AGGREGATE_LOG_CHANGE:
+		return "NVME_ASYNC_NOTICE_ENDURANCE_GROUP_EVENT_AGGREGATE_LOG_CHANGE"
+	case NVME_ASYNC_NOTICE_ZONE_DESCRIPTOR_CHANGED:
+		return "NVME_ASYNC_NOTICE_ZONE_DESCRIPTOR_CHANGED"
+	case NVME_ASYNC_NOTICE_DISCOVERY_LOG_PAGE_CHANGED:
+		return "NVME_ASYNC_NOTICE_DISCOVERY_LOG_PAGE_CHANGED"
+	default:
+		return fmt.Sprintf("NVME_ASYNC_EVENT_NOTICE_CODES(%d)", int32(e))
+	}
+}
+
 // NVME_ASYNC_EVENT_TYPES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_async_event_types
 type NVME_ASYNC_EVENT_TYPES int32
 
@@ -260,12 +712,46 @@ const (
 	NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC       NVME_ASYNC_EVENT_TYPES = 7
 )
 
+// String returns the NVME_ASYNC_EVENT_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ASYNC_EVENT_TYPES) String() string {
+	switch e {
+	case NVME_ASYNC_EVENT_TYPE_ERROR_STATUS:
+		return "NVME_ASYNC_EVENT_TYPE_ERROR_STATUS"
+	case NVME_ASYNC_EVENT_TYPE_HEALTH_STATUS:
+		return "NVME_ASYNC_EVENT_TYPE_HEALTH_STATUS"
+	case NVME_ASYNC_EVENT_TYPE_NOTICE:
+		return "NVME_ASYNC_EVENT_TYPE_NOTICE"
+	case NVME_ASYNC_EVENT_TYPE_IMMEDIATE:
+		return "NVME_ASYNC_EVENT_TYPE_IMMEDIATE"
+	case NVME_ASYNC_EVENT_TYPE_IO_COMMAND_SET_STATUS:
+		return "NVME_ASYNC_EVENT_TYPE_IO_COMMAND_SET_STATUS"
+	case NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC:
+		return "NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC"
+	default:
+		return fmt.Sprintf("NVME_ASYNC_EVENT_TYPES(%d)", int32(e))
+	}
+}
+
 type NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_CODES int32
 
 const (
 	NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_RESERVED     NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_CODES = 0
 	NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_DEVICE_PANIC NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_CODES = 1
 )
+
+// String returns the NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_CODES) String() string {
+	switch e {
+	case NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_RESERVED:
+		return "NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_RESERVED"
+	case NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_DEVICE_PANIC:
+		return "NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_DEVICE_PANIC"
+	default:
+		return fmt.Sprintf("NVME_ASYNC_EVENT_TYPE_VENDOR_SPECIFIC_CODES(%d)", int32(e))
+	}
+}
 
 // NVME_CC_SHN_SHUTDOWN_NOTIFICATIONS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_cc_shn_shutdown_notifications
 type NVME_CC_SHN_SHUTDOWN_NOTIFICATIONS int32
@@ -275,6 +761,21 @@ const (
 	NVME_CC_SHN_NORMAL_SHUTDOWN NVME_CC_SHN_SHUTDOWN_NOTIFICATIONS = 1
 	NVME_CC_SHN_ABRUPT_SHUTDOWN NVME_CC_SHN_SHUTDOWN_NOTIFICATIONS = 2
 )
+
+// String returns the NVME_CC_SHN_SHUTDOWN_NOTIFICATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_CC_SHN_SHUTDOWN_NOTIFICATIONS) String() string {
+	switch e {
+	case NVME_CC_SHN_NO_NOTIFICATION:
+		return "NVME_CC_SHN_NO_NOTIFICATION"
+	case NVME_CC_SHN_NORMAL_SHUTDOWN:
+		return "NVME_CC_SHN_NORMAL_SHUTDOWN"
+	case NVME_CC_SHN_ABRUPT_SHUTDOWN:
+		return "NVME_CC_SHN_ABRUPT_SHUTDOWN"
+	default:
+		return fmt.Sprintf("NVME_CC_SHN_SHUTDOWN_NOTIFICATIONS(%d)", int32(e))
+	}
+}
 
 // NVME_CMBSZ_SIZE_UNITS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_cmbsz_size_units
 type NVME_CMBSZ_SIZE_UNITS int32
@@ -289,6 +790,29 @@ const (
 	NVME_CMBSZ_SIZE_UNITS_64GB  NVME_CMBSZ_SIZE_UNITS = 6
 )
 
+// String returns the NVME_CMBSZ_SIZE_UNITS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_CMBSZ_SIZE_UNITS) String() string {
+	switch e {
+	case NVME_CMBSZ_SIZE_UNITS_4KB:
+		return "NVME_CMBSZ_SIZE_UNITS_4KB"
+	case NVME_CMBSZ_SIZE_UNITS_64KB:
+		return "NVME_CMBSZ_SIZE_UNITS_64KB"
+	case NVME_CMBSZ_SIZE_UNITS_1MB:
+		return "NVME_CMBSZ_SIZE_UNITS_1MB"
+	case NVME_CMBSZ_SIZE_UNITS_16MB:
+		return "NVME_CMBSZ_SIZE_UNITS_16MB"
+	case NVME_CMBSZ_SIZE_UNITS_256MB:
+		return "NVME_CMBSZ_SIZE_UNITS_256MB"
+	case NVME_CMBSZ_SIZE_UNITS_4GB:
+		return "NVME_CMBSZ_SIZE_UNITS_4GB"
+	case NVME_CMBSZ_SIZE_UNITS_64GB:
+		return "NVME_CMBSZ_SIZE_UNITS_64GB"
+	default:
+		return fmt.Sprintf("NVME_CMBSZ_SIZE_UNITS(%d)", int32(e))
+	}
+}
+
 // NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMITS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_command_effect_sbumission_execution_limits
 type NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMITS int32
 
@@ -298,6 +822,21 @@ const (
 	NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMIT_SINGLE_PER_CONTROLLER NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMITS = 2
 )
 
+// String returns the NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMITS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMITS) String() string {
+	switch e {
+	case NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMIT_NONE:
+		return "NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMIT_NONE"
+	case NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMIT_SINGLE_PER_NAMESPACE:
+		return "NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMIT_SINGLE_PER_NAMESPACE"
+	case NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMIT_SINGLE_PER_CONTROLLER:
+		return "NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMIT_SINGLE_PER_CONTROLLER"
+	default:
+		return fmt.Sprintf("NVME_COMMAND_EFFECT_SBUMISSION_EXECUTION_LIMITS(%d)", int32(e))
+	}
+}
+
 type NVME_COMMAND_SET_IDENTIFIERS int32
 
 const (
@@ -305,6 +844,21 @@ const (
 	NVME_COMMAND_SET_KEY_VALUE       NVME_COMMAND_SET_IDENTIFIERS = 1
 	NVME_COMMAND_SET_ZONED_NAMESPACE NVME_COMMAND_SET_IDENTIFIERS = 2
 )
+
+// String returns the NVME_COMMAND_SET_IDENTIFIERS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_COMMAND_SET_IDENTIFIERS) String() string {
+	switch e {
+	case NVME_COMMAND_SET_NVM:
+		return "NVME_COMMAND_SET_NVM"
+	case NVME_COMMAND_SET_KEY_VALUE:
+		return "NVME_COMMAND_SET_KEY_VALUE"
+	case NVME_COMMAND_SET_ZONED_NAMESPACE:
+		return "NVME_COMMAND_SET_ZONED_NAMESPACE"
+	default:
+		return fmt.Sprintf("NVME_COMMAND_SET_IDENTIFIERS(%d)", int32(e))
+	}
+}
 
 type NVME_CONTROLLER_METADATA_ELEMENT_TYPES int32
 
@@ -327,6 +881,47 @@ const (
 	NVME_CONTROLLER_METADATA_HOST_DETERMINED_FAILURE_RECORD   NVME_CONTROLLER_METADATA_ELEMENT_TYPES = 16
 )
 
+// String returns the NVME_CONTROLLER_METADATA_ELEMENT_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_CONTROLLER_METADATA_ELEMENT_TYPES) String() string {
+	switch e {
+	case NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_CONTROLLER_NAME:
+		return "NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_CONTROLLER_NAME"
+	case NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_DRIVER_NAME:
+		return "NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_DRIVER_NAME"
+	case NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_DRIVER_VERSION:
+		return "NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_DRIVER_VERSION"
+	case NVME_CONTROLLER_METADATA_PREBOOT_CONTROLLER_NAME:
+		return "NVME_CONTROLLER_METADATA_PREBOOT_CONTROLLER_NAME"
+	case NVME_CONTROLLER_METADATA_PREBOOT_DRIVER_NAME:
+		return "NVME_CONTROLLER_METADATA_PREBOOT_DRIVER_NAME"
+	case NVME_CONTROLLER_METADATA_PREBOOT_DRIVER_VERSION:
+		return "NVME_CONTROLLER_METADATA_PREBOOT_DRIVER_VERSION"
+	case NVME_CONTROLLER_METADATA_SYSTEM_PROCESSOR_MODEL:
+		return "NVME_CONTROLLER_METADATA_SYSTEM_PROCESSOR_MODEL"
+	case NVME_CONTROLLER_METADATA_CHIPSET_DRIVER_NAME:
+		return "NVME_CONTROLLER_METADATA_CHIPSET_DRIVER_NAME"
+	case NVME_CONTROLLER_METADATA_CHIPSET_DRIVER_VERSION:
+		return "NVME_CONTROLLER_METADATA_CHIPSET_DRIVER_VERSION"
+	case NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_NAME_AND_BUILD:
+		return "NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_NAME_AND_BUILD"
+	case NVME_CONTROLLER_METADATA_SYSTEM_PRODUCT_NAME:
+		return "NVME_CONTROLLER_METADATA_SYSTEM_PRODUCT_NAME"
+	case NVME_CONTROLLER_METADATA_FIRMWARE_VERSION:
+		return "NVME_CONTROLLER_METADATA_FIRMWARE_VERSION"
+	case NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_DRIVER_FILENAME:
+		return "NVME_CONTROLLER_METADATA_OPERATING_SYSTEM_DRIVER_FILENAME"
+	case NVME_CONTROLLER_METADATA_DISPLAY_DRIVER_NAME:
+		return "NVME_CONTROLLER_METADATA_DISPLAY_DRIVER_NAME"
+	case NVME_CONTROLLER_METADATA_DISPLAY_DRIVER_VERSION:
+		return "NVME_CONTROLLER_METADATA_DISPLAY_DRIVER_VERSION"
+	case NVME_CONTROLLER_METADATA_HOST_DETERMINED_FAILURE_RECORD:
+		return "NVME_CONTROLLER_METADATA_HOST_DETERMINED_FAILURE_RECORD"
+	default:
+		return fmt.Sprintf("NVME_CONTROLLER_METADATA_ELEMENT_TYPES(%d)", int32(e))
+	}
+}
+
 type NVME_CONTROLLER_TYPE int32
 
 const (
@@ -338,6 +933,27 @@ const (
 	NvmeCtrlReservedMax NVME_CONTROLLER_TYPE = 255
 )
 
+// String returns the NVME_CONTROLLER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_CONTROLLER_TYPE) String() string {
+	switch e {
+	case NvmeCtrlNotReported:
+		return "NvmeCtrlNotReported"
+	case NvmeCtrlIO:
+		return "NvmeCtrlIO"
+	case NvmeCtrlDiscovery:
+		return "NvmeCtrlDiscovery"
+	case NvmeCtrlAdmin:
+		return "NvmeCtrlAdmin"
+	case NvmeCtrlReservedMin:
+		return "NvmeCtrlReservedMin"
+	case NvmeCtrlReservedMax:
+		return "NvmeCtrlReservedMax"
+	default:
+		return fmt.Sprintf("NVME_CONTROLLER_TYPE(%d)", int32(e))
+	}
+}
+
 type NVME_CPS_VALUE int32
 
 const (
@@ -347,6 +963,23 @@ const (
 	NVME_CPS_SUBSYSTEM_SCOPE  NVME_CPS_VALUE = 3
 )
 
+// String returns the NVME_CPS_VALUE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_CPS_VALUE) String() string {
+	switch e {
+	case NVME_CPS_NOT_REPORTED:
+		return "NVME_CPS_NOT_REPORTED"
+	case NVME_CPS_CONTROLLER_SCOPE:
+		return "NVME_CPS_CONTROLLER_SCOPE"
+	case NVME_CPS_DOMAIN_SCOPE:
+		return "NVME_CPS_DOMAIN_SCOPE"
+	case NVME_CPS_SUBSYSTEM_SCOPE:
+		return "NVME_CPS_SUBSYSTEM_SCOPE"
+	default:
+		return fmt.Sprintf("NVME_CPS_VALUE(%d)", int32(e))
+	}
+}
+
 type NVME_CSS_COMMAND_SETS int32
 
 const (
@@ -354,6 +987,21 @@ const (
 	NVME_CSS_ALL_SUPPORTED_IO_COMMAND_SET NVME_CSS_COMMAND_SETS = 6
 	NVME_CSS_ADMIN_COMMAND_SET_ONLY       NVME_CSS_COMMAND_SETS = 7
 )
+
+// String returns the NVME_CSS_COMMAND_SETS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_CSS_COMMAND_SETS) String() string {
+	switch e {
+	case NVME_CSS_NVM_COMMAND_SET:
+		return "NVME_CSS_NVM_COMMAND_SET"
+	case NVME_CSS_ALL_SUPPORTED_IO_COMMAND_SET:
+		return "NVME_CSS_ALL_SUPPORTED_IO_COMMAND_SET"
+	case NVME_CSS_ADMIN_COMMAND_SET_ONLY:
+		return "NVME_CSS_ADMIN_COMMAND_SET_ONLY"
+	default:
+		return fmt.Sprintf("NVME_CSS_COMMAND_SETS(%d)", int32(e))
+	}
+}
 
 // NVME_CSTS_SHST_SHUTDOWN_STATUS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_csts_shst_shutdown_status
 type NVME_CSTS_SHST_SHUTDOWN_STATUS int32
@@ -364,6 +1012,21 @@ const (
 	NVME_CSTS_SHST_SHUTDOWN_COMPLETED  NVME_CSTS_SHST_SHUTDOWN_STATUS = 2
 )
 
+// String returns the NVME_CSTS_SHST_SHUTDOWN_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_CSTS_SHST_SHUTDOWN_STATUS) String() string {
+	switch e {
+	case NVME_CSTS_SHST_NO_SHUTDOWN:
+		return "NVME_CSTS_SHST_NO_SHUTDOWN"
+	case NVME_CSTS_SHST_SHUTDOWN_IN_PROCESS:
+		return "NVME_CSTS_SHST_SHUTDOWN_IN_PROCESS"
+	case NVME_CSTS_SHST_SHUTDOWN_COMPLETED:
+		return "NVME_CSTS_SHST_SHUTDOWN_COMPLETED"
+	default:
+		return fmt.Sprintf("NVME_CSTS_SHST_SHUTDOWN_STATUS(%d)", int32(e))
+	}
+}
+
 type NVME_DEALLOCATE_READ_BEHAVIOR int32
 
 const (
@@ -372,12 +1035,38 @@ const (
 	NVME_READ_BEHAVIOR_RETURN_ONES  NVME_DEALLOCATE_READ_BEHAVIOR = 2
 )
 
+// String returns the NVME_DEALLOCATE_READ_BEHAVIOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_DEALLOCATE_READ_BEHAVIOR) String() string {
+	switch e {
+	case NVME_READ_BEHAVIOR_NOT_REPORTED:
+		return "NVME_READ_BEHAVIOR_NOT_REPORTED"
+	case NVME_READ_BEHAVIOR_RETURN_ZERO:
+		return "NVME_READ_BEHAVIOR_RETURN_ZERO"
+	case NVME_READ_BEHAVIOR_RETURN_ONES:
+		return "NVME_READ_BEHAVIOR_RETURN_ONES"
+	default:
+		return fmt.Sprintf("NVME_DEALLOCATE_READ_BEHAVIOR(%d)", int32(e))
+	}
+}
+
 // NVME_DIRECTIVE_RECEIVE_IDENTIFY_OPERATIONS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_directive_receive_identify_operations
 type NVME_DIRECTIVE_RECEIVE_IDENTIFY_OPERATIONS int32
 
 const (
 	NVME_DIRECTIVE_RECEIVE_IDENTIFY_OPERATION_RETURN_PARAMETERS NVME_DIRECTIVE_RECEIVE_IDENTIFY_OPERATIONS = 1
 )
+
+// String returns the NVME_DIRECTIVE_RECEIVE_IDENTIFY_OPERATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_DIRECTIVE_RECEIVE_IDENTIFY_OPERATIONS) String() string {
+	switch e {
+	case NVME_DIRECTIVE_RECEIVE_IDENTIFY_OPERATION_RETURN_PARAMETERS:
+		return "NVME_DIRECTIVE_RECEIVE_IDENTIFY_OPERATION_RETURN_PARAMETERS"
+	default:
+		return fmt.Sprintf("NVME_DIRECTIVE_RECEIVE_IDENTIFY_OPERATIONS(%d)", int32(e))
+	}
+}
 
 // NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATIONS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_directive_receive_streams_operations
 type NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATIONS int32
@@ -388,12 +1077,38 @@ const (
 	NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATION_ALLOCATE_RESOURCES NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATIONS = 3
 )
 
+// String returns the NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATIONS) String() string {
+	switch e {
+	case NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATION_RETURN_PARAMETERS:
+		return "NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATION_RETURN_PARAMETERS"
+	case NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATION_GET_STATUS:
+		return "NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATION_GET_STATUS"
+	case NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATION_ALLOCATE_RESOURCES:
+		return "NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATION_ALLOCATE_RESOURCES"
+	default:
+		return fmt.Sprintf("NVME_DIRECTIVE_RECEIVE_STREAMS_OPERATIONS(%d)", int32(e))
+	}
+}
+
 // NVME_DIRECTIVE_SEND_IDENTIFY_OPERATIONS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_directive_send_identify_operations
 type NVME_DIRECTIVE_SEND_IDENTIFY_OPERATIONS int32
 
 const (
 	NVME_DIRECTIVE_SEND_IDENTIFY_OPERATION_ENABLE_DIRECTIVE NVME_DIRECTIVE_SEND_IDENTIFY_OPERATIONS = 1
 )
+
+// String returns the NVME_DIRECTIVE_SEND_IDENTIFY_OPERATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_DIRECTIVE_SEND_IDENTIFY_OPERATIONS) String() string {
+	switch e {
+	case NVME_DIRECTIVE_SEND_IDENTIFY_OPERATION_ENABLE_DIRECTIVE:
+		return "NVME_DIRECTIVE_SEND_IDENTIFY_OPERATION_ENABLE_DIRECTIVE"
+	default:
+		return fmt.Sprintf("NVME_DIRECTIVE_SEND_IDENTIFY_OPERATIONS(%d)", int32(e))
+	}
+}
 
 // NVME_DIRECTIVE_SEND_STREAMS_OPERATIONS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_directive_send_streams_operations
 type NVME_DIRECTIVE_SEND_STREAMS_OPERATIONS int32
@@ -403,6 +1118,19 @@ const (
 	NVME_DIRECTIVE_SEND_STREAMS_OPERATION_RELEASE_RESOURCES  NVME_DIRECTIVE_SEND_STREAMS_OPERATIONS = 2
 )
 
+// String returns the NVME_DIRECTIVE_SEND_STREAMS_OPERATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_DIRECTIVE_SEND_STREAMS_OPERATIONS) String() string {
+	switch e {
+	case NVME_DIRECTIVE_SEND_STREAMS_OPERATION_RELEASE_IDENTIFIER:
+		return "NVME_DIRECTIVE_SEND_STREAMS_OPERATION_RELEASE_IDENTIFIER"
+	case NVME_DIRECTIVE_SEND_STREAMS_OPERATION_RELEASE_RESOURCES:
+		return "NVME_DIRECTIVE_SEND_STREAMS_OPERATION_RELEASE_RESOURCES"
+	default:
+		return fmt.Sprintf("NVME_DIRECTIVE_SEND_STREAMS_OPERATIONS(%d)", int32(e))
+	}
+}
+
 // NVME_DIRECTIVE_TYPES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_directive_types
 type NVME_DIRECTIVE_TYPES int32
 
@@ -410,6 +1138,19 @@ const (
 	NVME_DIRECTIVE_TYPE_IDENTIFY NVME_DIRECTIVE_TYPES = 0
 	NVME_DIRECTIVE_TYPE_STREAMS  NVME_DIRECTIVE_TYPES = 1
 )
+
+// String returns the NVME_DIRECTIVE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_DIRECTIVE_TYPES) String() string {
+	switch e {
+	case NVME_DIRECTIVE_TYPE_IDENTIFY:
+		return "NVME_DIRECTIVE_TYPE_IDENTIFY"
+	case NVME_DIRECTIVE_TYPE_STREAMS:
+		return "NVME_DIRECTIVE_TYPE_STREAMS"
+	default:
+		return fmt.Sprintf("NVME_DIRECTIVE_TYPES(%d)", int32(e))
+	}
+}
 
 type NVME_DISCOVERY_INFO_ENTITY_TYPES int32
 
@@ -420,6 +1161,23 @@ const (
 	NVME_DISCOVERY_INFO_ENTITY_TYPE_CDC      NVME_DISCOVERY_INFO_ENTITY_TYPES = 3
 )
 
+// String returns the NVME_DISCOVERY_INFO_ENTITY_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_DISCOVERY_INFO_ENTITY_TYPES) String() string {
+	switch e {
+	case NVME_DISCOVERY_INFO_ENTITY_TYPE_RESERVED:
+		return "NVME_DISCOVERY_INFO_ENTITY_TYPE_RESERVED"
+	case NVME_DISCOVERY_INFO_ENTITY_TYPE_HOST:
+		return "NVME_DISCOVERY_INFO_ENTITY_TYPE_HOST"
+	case NVME_DISCOVERY_INFO_ENTITY_TYPE_DDC:
+		return "NVME_DISCOVERY_INFO_ENTITY_TYPE_DDC"
+	case NVME_DISCOVERY_INFO_ENTITY_TYPE_CDC:
+		return "NVME_DISCOVERY_INFO_ENTITY_TYPE_CDC"
+	default:
+		return fmt.Sprintf("NVME_DISCOVERY_INFO_ENTITY_TYPES(%d)", int32(e))
+	}
+}
+
 type NVME_DISCOVERY_INFO_ENTRY_FORMATS int32
 
 const (
@@ -428,6 +1186,21 @@ const (
 	NVME_DISCOVERY_INFO_ENTRY_FORMAT_EXTENDED NVME_DISCOVERY_INFO_ENTRY_FORMATS = 2
 )
 
+// String returns the NVME_DISCOVERY_INFO_ENTRY_FORMATS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_DISCOVERY_INFO_ENTRY_FORMATS) String() string {
+	switch e {
+	case NVME_DISCOVERY_INFO_ENTRY_FORMAT_RESERVED:
+		return "NVME_DISCOVERY_INFO_ENTRY_FORMAT_RESERVED"
+	case NVME_DISCOVERY_INFO_ENTRY_FORMAT_BASIC:
+		return "NVME_DISCOVERY_INFO_ENTRY_FORMAT_BASIC"
+	case NVME_DISCOVERY_INFO_ENTRY_FORMAT_EXTENDED:
+		return "NVME_DISCOVERY_INFO_ENTRY_FORMAT_EXTENDED"
+	default:
+		return fmt.Sprintf("NVME_DISCOVERY_INFO_ENTRY_FORMATS(%d)", int32(e))
+	}
+}
+
 type NVME_DISCOVERY_INFO_MGMT_TASK int32
 
 const (
@@ -435,6 +1208,21 @@ const (
 	NVME_DISCOVERY_INFO_MGMT_TASK_DEREGISTER NVME_DISCOVERY_INFO_MGMT_TASK = 1
 	NVME_DISCOVERY_INFO_MGMT_TASK_UPDATE     NVME_DISCOVERY_INFO_MGMT_TASK = 2
 )
+
+// String returns the NVME_DISCOVERY_INFO_MGMT_TASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_DISCOVERY_INFO_MGMT_TASK) String() string {
+	switch e {
+	case NVME_DISCOVERY_INFO_MGMT_TASK_REGISTER:
+		return "NVME_DISCOVERY_INFO_MGMT_TASK_REGISTER"
+	case NVME_DISCOVERY_INFO_MGMT_TASK_DEREGISTER:
+		return "NVME_DISCOVERY_INFO_MGMT_TASK_DEREGISTER"
+	case NVME_DISCOVERY_INFO_MGMT_TASK_UPDATE:
+		return "NVME_DISCOVERY_INFO_MGMT_TASK_UPDATE"
+	default:
+		return fmt.Sprintf("NVME_DISCOVERY_INFO_MGMT_TASK(%d)", int32(e))
+	}
+}
 
 type NVME_DISC_CTRL_TYPE int32
 
@@ -445,6 +1233,25 @@ const (
 	NvmeDiscCtrlTypeReserved1   NVME_DISC_CTRL_TYPE = 3
 	NvmeDiscCtrlTypeReservedMax NVME_DISC_CTRL_TYPE = 255
 )
+
+// String returns the NVME_DISC_CTRL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_DISC_CTRL_TYPE) String() string {
+	switch e {
+	case NvmeDiscCtrlTypeUnspecified:
+		return "NvmeDiscCtrlTypeUnspecified"
+	case NvmeDiscCtrlTypeDDC:
+		return "NvmeDiscCtrlTypeDDC"
+	case NvmeDiscCtrlTypeCDC:
+		return "NvmeDiscCtrlTypeCDC"
+	case NvmeDiscCtrlTypeReserved1:
+		return "NvmeDiscCtrlTypeReserved1"
+	case NvmeDiscCtrlTypeReservedMax:
+		return "NvmeDiscCtrlTypeReservedMax"
+	default:
+		return fmt.Sprintf("NVME_DISC_CTRL_TYPE(%d)", int32(e))
+	}
+}
 
 type NVME_ERROR_INJECTION_TYPES int32
 
@@ -463,6 +1270,39 @@ const (
 	NVME_ERROR_INJECTION_TYPE_MAX                                      NVME_ERROR_INJECTION_TYPES = 65535
 )
 
+// String returns the NVME_ERROR_INJECTION_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ERROR_INJECTION_TYPES) String() string {
+	switch e {
+	case NVME_ERROR_INJECTION_TYPE_RESERVED0:
+		return "NVME_ERROR_INJECTION_TYPE_RESERVED0"
+	case NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_CPU_CONTROLLER_HANG:
+		return "NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_CPU_CONTROLLER_HANG"
+	case NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_NAND_HANG:
+		return "NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_NAND_HANG"
+	case NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_PLP_DEFECT:
+		return "NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_PLP_DEFECT"
+	case NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_LOGICAL_FW_ERROR:
+		return "NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_LOGICAL_FW_ERROR"
+	case NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_DRAM_CORRUPTION_CRITICAL:
+		return "NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_DRAM_CORRUPTION_CRITICAL"
+	case NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_DRAM_CORRUPTION_NONCRITICAL:
+		return "NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_DRAM_CORRUPTION_NONCRITICAL"
+	case NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_NAND_CORRUPTION:
+		return "NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_NAND_CORRUPTION"
+	case NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_SRAM_CORRUPTION:
+		return "NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_SRAM_CORRUPTION"
+	case NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_HW_MALFUNCTION:
+		return "NVME_ERROR_INJECTION_TYPE_DEVICE_PANIC_HW_MALFUNCTION"
+	case NVME_ERROR_INJECTION_TYPE_RESERVED1:
+		return "NVME_ERROR_INJECTION_TYPE_RESERVED1"
+	case NVME_ERROR_INJECTION_TYPE_MAX:
+		return "NVME_ERROR_INJECTION_TYPE_MAX"
+	default:
+		return fmt.Sprintf("NVME_ERROR_INJECTION_TYPES(%d)", int32(e))
+	}
+}
+
 type NVME_EXTENDED_ATTR_TYPE int32
 
 const (
@@ -476,6 +1316,31 @@ const (
 	NvmeExtAttrVendorEnd       NVME_EXTENDED_ATTR_TYPE = 65535
 )
 
+// String returns the NVME_EXTENDED_ATTR_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_EXTENDED_ATTR_TYPE) String() string {
+	switch e {
+	case NvmeExtAttrReserved0:
+		return "NvmeExtAttrReserved0"
+	case NvmeExtAttrHostId:
+		return "NvmeExtAttrHostId"
+	case NvmeExtAttrAdminLabelAscii:
+		return "NvmeExtAttrAdminLabelAscii"
+	case NvmeExtAttrAdminLabelUtf8:
+		return "NvmeExtAttrAdminLabelUtf8"
+	case NvmeExtAttrReservedStart:
+		return "NvmeExtAttrReservedStart"
+	case NvmeExtAttrReservedEnd:
+		return "NvmeExtAttrReservedEnd"
+	case NvmeExtAttrVendorStart:
+		return "NvmeExtAttrVendorStart"
+	case NvmeExtAttrVendorEnd:
+		return "NvmeExtAttrVendorEnd"
+	default:
+		return fmt.Sprintf("NVME_EXTENDED_ATTR_TYPE(%d)", int32(e))
+	}
+}
+
 type NVME_FABRICS_COMMAND_TYPE int32
 
 const (
@@ -486,6 +1351,27 @@ const (
 	NVME_FABRICS_COMMAND_AUTH_RECV    NVME_FABRICS_COMMAND_TYPE = 6
 	NVME_FABRICS_COMMAND_DISCONNECT   NVME_FABRICS_COMMAND_TYPE = 8
 )
+
+// String returns the NVME_FABRICS_COMMAND_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_FABRICS_COMMAND_TYPE) String() string {
+	switch e {
+	case NVME_FABRICS_COMMAND_PROPERTY_SET:
+		return "NVME_FABRICS_COMMAND_PROPERTY_SET"
+	case NVME_FABRICS_COMMAND_CONNECT:
+		return "NVME_FABRICS_COMMAND_CONNECT"
+	case NVME_FABRICS_COMMAND_PROPERTY_GET:
+		return "NVME_FABRICS_COMMAND_PROPERTY_GET"
+	case NVME_FABRICS_COMMAND_AUTH_SEND:
+		return "NVME_FABRICS_COMMAND_AUTH_SEND"
+	case NVME_FABRICS_COMMAND_AUTH_RECV:
+		return "NVME_FABRICS_COMMAND_AUTH_RECV"
+	case NVME_FABRICS_COMMAND_DISCONNECT:
+		return "NVME_FABRICS_COMMAND_DISCONNECT"
+	default:
+		return fmt.Sprintf("NVME_FABRICS_COMMAND_TYPE(%d)", int32(e))
+	}
+}
 
 // NVME_FEATURES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_features
 type NVME_FEATURES int32
@@ -534,6 +1420,97 @@ const (
 	NVME_FEATURE_DSSD_POWER_STATE                       NVME_FEATURES = 199
 )
 
+// String returns the NVME_FEATURES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_FEATURES) String() string {
+	switch e {
+	case NVME_FEATURE_ARBITRATION:
+		return "NVME_FEATURE_ARBITRATION"
+	case NVME_FEATURE_POWER_MANAGEMENT:
+		return "NVME_FEATURE_POWER_MANAGEMENT"
+	case NVME_FEATURE_LBA_RANGE_TYPE:
+		return "NVME_FEATURE_LBA_RANGE_TYPE"
+	case NVME_FEATURE_TEMPERATURE_THRESHOLD:
+		return "NVME_FEATURE_TEMPERATURE_THRESHOLD"
+	case NVME_FEATURE_ERROR_RECOVERY:
+		return "NVME_FEATURE_ERROR_RECOVERY"
+	case NVME_FEATURE_VOLATILE_WRITE_CACHE:
+		return "NVME_FEATURE_VOLATILE_WRITE_CACHE"
+	case NVME_FEATURE_NUMBER_OF_QUEUES:
+		return "NVME_FEATURE_NUMBER_OF_QUEUES"
+	case NVME_FEATURE_INTERRUPT_COALESCING:
+		return "NVME_FEATURE_INTERRUPT_COALESCING"
+	case NVME_FEATURE_INTERRUPT_VECTOR_CONFIG:
+		return "NVME_FEATURE_INTERRUPT_VECTOR_CONFIG"
+	case NVME_FEATURE_WRITE_ATOMICITY:
+		return "NVME_FEATURE_WRITE_ATOMICITY"
+	case NVME_FEATURE_ASYNC_EVENT_CONFIG:
+		return "NVME_FEATURE_ASYNC_EVENT_CONFIG"
+	case NVME_FEATURE_AUTONOMOUS_POWER_STATE_TRANSITION:
+		return "NVME_FEATURE_AUTONOMOUS_POWER_STATE_TRANSITION"
+	case NVME_FEATURE_HOST_MEMORY_BUFFER:
+		return "NVME_FEATURE_HOST_MEMORY_BUFFER"
+	case NVME_FEATURE_TIMESTAMP:
+		return "NVME_FEATURE_TIMESTAMP"
+	case NVME_FEATURE_KEEP_ALIVE:
+		return "NVME_FEATURE_KEEP_ALIVE"
+	case NVME_FEATURE_HOST_CONTROLLED_THERMAL_MANAGEMENT:
+		return "NVME_FEATURE_HOST_CONTROLLED_THERMAL_MANAGEMENT"
+	case NVME_FEATURE_NONOPERATIONAL_POWER_STATE:
+		return "NVME_FEATURE_NONOPERATIONAL_POWER_STATE"
+	case NVME_FEATURE_READ_RECOVERY_LEVEL_CONFIG:
+		return "NVME_FEATURE_READ_RECOVERY_LEVEL_CONFIG"
+	case NVME_FEATURE_PREDICTABLE_LATENCY_MODE_CONFIG:
+		return "NVME_FEATURE_PREDICTABLE_LATENCY_MODE_CONFIG"
+	case NVME_FEATURE_PREDICTABLE_LATENCY_MODE_WINDOW:
+		return "NVME_FEATURE_PREDICTABLE_LATENCY_MODE_WINDOW"
+	case NVME_FEATURE_LBA_STATUS_INFORMATION_REPORT_INTERVAL:
+		return "NVME_FEATURE_LBA_STATUS_INFORMATION_REPORT_INTERVAL"
+	case NVME_FEATURE_HOST_BEHAVIOR_SUPPORT:
+		return "NVME_FEATURE_HOST_BEHAVIOR_SUPPORT"
+	case NVME_FEATURE_SANITIZE_CONFIG:
+		return "NVME_FEATURE_SANITIZE_CONFIG"
+	case NVME_FEATURE_ENDURANCE_GROUP_EVENT_CONFIG:
+		return "NVME_FEATURE_ENDURANCE_GROUP_EVENT_CONFIG"
+	case NVME_FEATURE_IO_COMMAND_SET_PROFILE:
+		return "NVME_FEATURE_IO_COMMAND_SET_PROFILE"
+	case NVME_FEATURE_ENHANCED_CONTROLLER_METADATA:
+		return "NVME_FEATURE_ENHANCED_CONTROLLER_METADATA"
+	case NVME_FEATURE_CONTROLLER_METADATA:
+		return "NVME_FEATURE_CONTROLLER_METADATA"
+	case NVME_FEATURE_NAMESPACE_METADATA:
+		return "NVME_FEATURE_NAMESPACE_METADATA"
+	case NVME_FEATURE_NVM_SOFTWARE_PROGRESS_MARKER:
+		return "NVME_FEATURE_NVM_SOFTWARE_PROGRESS_MARKER"
+	case NVME_FEATURE_NVM_HOST_IDENTIFIER:
+		return "NVME_FEATURE_NVM_HOST_IDENTIFIER"
+	case NVME_FEATURE_NVM_RESERVATION_NOTIFICATION_MASK:
+		return "NVME_FEATURE_NVM_RESERVATION_NOTIFICATION_MASK"
+	case NVME_FEATURE_NVM_RESERVATION_PERSISTANCE:
+		return "NVME_FEATURE_NVM_RESERVATION_PERSISTANCE"
+	case NVME_FEATURE_NVM_NAMESPACE_WRITE_PROTECTION_CONFIG:
+		return "NVME_FEATURE_NVM_NAMESPACE_WRITE_PROTECTION_CONFIG"
+	case NVME_FEATURE_ERROR_INJECTION:
+		return "NVME_FEATURE_ERROR_INJECTION"
+	case NVME_FEATURE_CLEAR_FW_UPDATE_HISTORY:
+		return "NVME_FEATURE_CLEAR_FW_UPDATE_HISTORY"
+	case NVME_FEATURE_READONLY_WRITETHROUGH_MODE:
+		return "NVME_FEATURE_READONLY_WRITETHROUGH_MODE"
+	case NVME_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS:
+		return "NVME_FEATURE_CLEAR_PCIE_CORRECTABLE_ERROR_COUNTERS"
+	case NVME_FEATURE_ENABLE_IEEE1667_SILO:
+		return "NVME_FEATURE_ENABLE_IEEE1667_SILO"
+	case NVME_FEATURE_LATENCY_MONITOR:
+		return "NVME_FEATURE_LATENCY_MONITOR"
+	case NVME_FEATURE_PLP_HEALTH_CHECK_INTERVAL:
+		return "NVME_FEATURE_PLP_HEALTH_CHECK_INTERVAL"
+	case NVME_FEATURE_DSSD_POWER_STATE:
+		return "NVME_FEATURE_DSSD_POWER_STATE"
+	default:
+		return fmt.Sprintf("NVME_FEATURES(%d)", int32(e))
+	}
+}
+
 // NVME_FEATURE_VALUE_CODES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_feature_value_codes
 type NVME_FEATURE_VALUE_CODES int32
 
@@ -543,6 +1520,23 @@ const (
 	NVME_FEATURE_VALUE_SAVED                  NVME_FEATURE_VALUE_CODES = 2
 	NVME_FEATURE_VALUE_SUPPORTED_CAPABILITIES NVME_FEATURE_VALUE_CODES = 3
 )
+
+// String returns the NVME_FEATURE_VALUE_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_FEATURE_VALUE_CODES) String() string {
+	switch e {
+	case NVME_FEATURE_VALUE_CURRENT:
+		return "NVME_FEATURE_VALUE_CURRENT"
+	case NVME_FEATURE_VALUE_DEFAULT:
+		return "NVME_FEATURE_VALUE_DEFAULT"
+	case NVME_FEATURE_VALUE_SAVED:
+		return "NVME_FEATURE_VALUE_SAVED"
+	case NVME_FEATURE_VALUE_SUPPORTED_CAPABILITIES:
+		return "NVME_FEATURE_VALUE_SUPPORTED_CAPABILITIES"
+	default:
+		return fmt.Sprintf("NVME_FEATURE_VALUE_CODES(%d)", int32(e))
+	}
+}
 
 // NVME_FIRMWARE_ACTIVATE_ACTIONS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_firmware_activate_actions
 type NVME_FIRMWARE_ACTIVATE_ACTIONS int32
@@ -554,6 +1548,23 @@ const (
 	NVME_FIRMWARE_ACTIVATE_ACTION_DOWNLOAD_TO_SLOT_AND_ACTIVATE_IMMEDIATE NVME_FIRMWARE_ACTIVATE_ACTIONS = 3
 )
 
+// String returns the NVME_FIRMWARE_ACTIVATE_ACTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_FIRMWARE_ACTIVATE_ACTIONS) String() string {
+	switch e {
+	case NVME_FIRMWARE_ACTIVATE_ACTION_DOWNLOAD_TO_SLOT:
+		return "NVME_FIRMWARE_ACTIVATE_ACTION_DOWNLOAD_TO_SLOT"
+	case NVME_FIRMWARE_ACTIVATE_ACTION_DOWNLOAD_TO_SLOT_AND_ACTIVATE:
+		return "NVME_FIRMWARE_ACTIVATE_ACTION_DOWNLOAD_TO_SLOT_AND_ACTIVATE"
+	case NVME_FIRMWARE_ACTIVATE_ACTION_ACTIVATE:
+		return "NVME_FIRMWARE_ACTIVATE_ACTION_ACTIVATE"
+	case NVME_FIRMWARE_ACTIVATE_ACTION_DOWNLOAD_TO_SLOT_AND_ACTIVATE_IMMEDIATE:
+		return "NVME_FIRMWARE_ACTIVATE_ACTION_DOWNLOAD_TO_SLOT_AND_ACTIVATE_IMMEDIATE"
+	default:
+		return fmt.Sprintf("NVME_FIRMWARE_ACTIVATE_ACTIONS(%d)", int32(e))
+	}
+}
+
 // NVME_FUSED_OPERATION_CODES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_fused_operation_codes
 type NVME_FUSED_OPERATION_CODES int32
 
@@ -563,6 +1574,21 @@ const (
 	NVME_FUSED_OPERATION_SECOND_CMD NVME_FUSED_OPERATION_CODES = 2
 )
 
+// String returns the NVME_FUSED_OPERATION_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_FUSED_OPERATION_CODES) String() string {
+	switch e {
+	case NVME_FUSED_OPERATION_NORMAL:
+		return "NVME_FUSED_OPERATION_NORMAL"
+	case NVME_FUSED_OPERATION_FIRST_CMD:
+		return "NVME_FUSED_OPERATION_FIRST_CMD"
+	case NVME_FUSED_OPERATION_SECOND_CMD:
+		return "NVME_FUSED_OPERATION_SECOND_CMD"
+	default:
+		return fmt.Sprintf("NVME_FUSED_OPERATION_CODES(%d)", int32(e))
+	}
+}
+
 type NVME_HOST_METADATA_ELEMENT_ACTIONS int32
 
 const (
@@ -570,6 +1596,21 @@ const (
 	NVME_HOST_METADATA_DELETE_ENTRY_MULTIPLE NVME_HOST_METADATA_ELEMENT_ACTIONS = 1
 	NVME_HOST_METADATA_ADD_ENTRY_MULTIPLE    NVME_HOST_METADATA_ELEMENT_ACTIONS = 2
 )
+
+// String returns the NVME_HOST_METADATA_ELEMENT_ACTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_HOST_METADATA_ELEMENT_ACTIONS) String() string {
+	switch e {
+	case NVME_HOST_METADATA_ADD_REPLACE_ENTRY:
+		return "NVME_HOST_METADATA_ADD_REPLACE_ENTRY"
+	case NVME_HOST_METADATA_DELETE_ENTRY_MULTIPLE:
+		return "NVME_HOST_METADATA_DELETE_ENTRY_MULTIPLE"
+	case NVME_HOST_METADATA_ADD_ENTRY_MULTIPLE:
+		return "NVME_HOST_METADATA_ADD_ENTRY_MULTIPLE"
+	default:
+		return fmt.Sprintf("NVME_HOST_METADATA_ELEMENT_ACTIONS(%d)", int32(e))
+	}
+}
 
 type NVME_IDENTIFIER_TYPE int32
 
@@ -580,6 +1621,23 @@ const (
 	NVME_IDENTIFIER_TYPE_CSI   NVME_IDENTIFIER_TYPE = 4
 )
 
+// String returns the NVME_IDENTIFIER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_IDENTIFIER_TYPE) String() string {
+	switch e {
+	case NVME_IDENTIFIER_TYPE_EUI64:
+		return "NVME_IDENTIFIER_TYPE_EUI64"
+	case NVME_IDENTIFIER_TYPE_NGUID:
+		return "NVME_IDENTIFIER_TYPE_NGUID"
+	case NVME_IDENTIFIER_TYPE_UUID:
+		return "NVME_IDENTIFIER_TYPE_UUID"
+	case NVME_IDENTIFIER_TYPE_CSI:
+		return "NVME_IDENTIFIER_TYPE_CSI"
+	default:
+		return fmt.Sprintf("NVME_IDENTIFIER_TYPE(%d)", int32(e))
+	}
+}
+
 type NVME_IDENTIFIER_TYPE_LENGTH int32
 
 const (
@@ -588,6 +1646,21 @@ const (
 	NVME_IDENTIFIER_TYPE_UUID_LENGTH  NVME_IDENTIFIER_TYPE_LENGTH = 16
 	NVME_IDENTIFIER_TYPE_CSI_LENGTH   NVME_IDENTIFIER_TYPE_LENGTH = 1
 )
+
+// String returns the NVME_IDENTIFIER_TYPE_LENGTH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_IDENTIFIER_TYPE_LENGTH) String() string {
+	switch e {
+	case NVME_IDENTIFIER_TYPE_EUI64_LENGTH:
+		return "NVME_IDENTIFIER_TYPE_EUI64_LENGTH"
+	case NVME_IDENTIFIER_TYPE_NGUID_LENGTH:
+		return "NVME_IDENTIFIER_TYPE_NGUID_LENGTH"
+	case NVME_IDENTIFIER_TYPE_CSI_LENGTH:
+		return "NVME_IDENTIFIER_TYPE_CSI_LENGTH"
+	default:
+		return fmt.Sprintf("NVME_IDENTIFIER_TYPE_LENGTH(%d)", int32(e))
+	}
+}
 
 // NVME_IDENTIFY_CNS_CODES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_identify_cns_codes
 type NVME_IDENTIFY_CNS_CODES int32
@@ -616,6 +1689,57 @@ const (
 	NVME_IDENTIFY_CNS_IO_COMMAND_SET                         NVME_IDENTIFY_CNS_CODES = 28
 )
 
+// String returns the NVME_IDENTIFY_CNS_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_IDENTIFY_CNS_CODES) String() string {
+	switch e {
+	case NVME_IDENTIFY_CNS_SPECIFIC_NAMESPACE:
+		return "NVME_IDENTIFY_CNS_SPECIFIC_NAMESPACE"
+	case NVME_IDENTIFY_CNS_CONTROLLER:
+		return "NVME_IDENTIFY_CNS_CONTROLLER"
+	case NVME_IDENTIFY_CNS_ACTIVE_NAMESPACES:
+		return "NVME_IDENTIFY_CNS_ACTIVE_NAMESPACES"
+	case NVME_IDENTIFY_CNS_DESCRIPTOR_NAMESPACE:
+		return "NVME_IDENTIFY_CNS_DESCRIPTOR_NAMESPACE"
+	case NVME_IDENTIFY_CNS_NVM_SET:
+		return "NVME_IDENTIFY_CNS_NVM_SET"
+	case NVME_IDENTIFY_CNS_SPECIFIC_NAMESPACE_IO_COMMAND_SET:
+		return "NVME_IDENTIFY_CNS_SPECIFIC_NAMESPACE_IO_COMMAND_SET"
+	case NVME_IDENTIFY_CNS_SPECIFIC_CONTROLLER_IO_COMMAND_SET:
+		return "NVME_IDENTIFY_CNS_SPECIFIC_CONTROLLER_IO_COMMAND_SET"
+	case NVME_IDENTIFY_CNS_ACTIVE_NAMESPACE_LIST_IO_COMMAND_SET:
+		return "NVME_IDENTIFY_CNS_ACTIVE_NAMESPACE_LIST_IO_COMMAND_SET"
+	case NVME_IDENTIFY_CNS_ALLOCATED_NAMESPACE_LIST:
+		return "NVME_IDENTIFY_CNS_ALLOCATED_NAMESPACE_LIST"
+	case NVME_IDENTIFY_CNS_ALLOCATED_NAMESPACE:
+		return "NVME_IDENTIFY_CNS_ALLOCATED_NAMESPACE"
+	case NVME_IDENTIFY_CNS_CONTROLLER_LIST_OF_NSID:
+		return "NVME_IDENTIFY_CNS_CONTROLLER_LIST_OF_NSID"
+	case NVME_IDENTIFY_CNS_CONTROLLER_LIST_OF_NVM_SUBSYSTEM:
+		return "NVME_IDENTIFY_CNS_CONTROLLER_LIST_OF_NVM_SUBSYSTEM"
+	case NVME_IDENTIFY_CNS_PRIMARY_CONTROLLER_CAPABILITIES:
+		return "NVME_IDENTIFY_CNS_PRIMARY_CONTROLLER_CAPABILITIES"
+	case NVME_IDENTIFY_CNS_SECONDARY_CONTROLLER_LIST:
+		return "NVME_IDENTIFY_CNS_SECONDARY_CONTROLLER_LIST"
+	case NVME_IDENTIFY_CNS_NAMESPACE_GRANULARITY_LIST:
+		return "NVME_IDENTIFY_CNS_NAMESPACE_GRANULARITY_LIST"
+	case NVME_IDENTIFY_CNS_UUID_LIST:
+		return "NVME_IDENTIFY_CNS_UUID_LIST"
+	case NVME_IDENTIFY_CNS_DOMAIN_LIST:
+		return "NVME_IDENTIFY_CNS_DOMAIN_LIST"
+	case NVME_IDENTIFY_CNS_ENDURANCE_GROUP_LIST:
+		return "NVME_IDENTIFY_CNS_ENDURANCE_GROUP_LIST"
+	case NVME_IDENTIFY_CNS_ALLOCATED_NAMSPACE_LIST_IO_COMMAND_SET:
+		return "NVME_IDENTIFY_CNS_ALLOCATED_NAMSPACE_LIST_IO_COMMAND_SET"
+	case NVME_IDENTIFY_CNS_ALLOCATED_NAMESPACE_IO_COMMAND_SET:
+		return "NVME_IDENTIFY_CNS_ALLOCATED_NAMESPACE_IO_COMMAND_SET"
+	case NVME_IDENTIFY_CNS_IO_COMMAND_SET:
+		return "NVME_IDENTIFY_CNS_IO_COMMAND_SET"
+	default:
+		return fmt.Sprintf("NVME_IDENTIFY_CNS_CODES(%d)", int32(e))
+	}
+}
+
 // NVME_LBA_RANGE_TYPES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_lba_range_types
 type NVME_LBA_RANGE_TYPES int32
 
@@ -626,6 +1750,25 @@ const (
 	NVME_LBA_RANGE_TYPE_CACHE          NVME_LBA_RANGE_TYPES = 3
 	NVME_LBA_RANGE_TYPE_PAGE_SWAP_FILE NVME_LBA_RANGE_TYPES = 4
 )
+
+// String returns the NVME_LBA_RANGE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_LBA_RANGE_TYPES) String() string {
+	switch e {
+	case NVME_LBA_RANGE_TYPE_RESERVED:
+		return "NVME_LBA_RANGE_TYPE_RESERVED"
+	case NVME_LBA_RANGE_TYPE_FILESYSTEM:
+		return "NVME_LBA_RANGE_TYPE_FILESYSTEM"
+	case NVME_LBA_RANGE_TYPE_RAID:
+		return "NVME_LBA_RANGE_TYPE_RAID"
+	case NVME_LBA_RANGE_TYPE_CACHE:
+		return "NVME_LBA_RANGE_TYPE_CACHE"
+	case NVME_LBA_RANGE_TYPE_PAGE_SWAP_FILE:
+		return "NVME_LBA_RANGE_TYPE_PAGE_SWAP_FILE"
+	default:
+		return fmt.Sprintf("NVME_LBA_RANGE_TYPES(%d)", int32(e))
+	}
+}
 
 // NVME_LOG_PAGES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_log_pages
 type NVME_LOG_PAGES int32
@@ -660,6 +1803,69 @@ const (
 	NVME_LOG_PAGE_CHANGED_ZONE_LIST                         NVME_LOG_PAGES = 191
 )
 
+// String returns the NVME_LOG_PAGES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_LOG_PAGES) String() string {
+	switch e {
+	case NVME_LOG_PAGE_SUPPORTED_LOG_PAGES:
+		return "NVME_LOG_PAGE_SUPPORTED_LOG_PAGES"
+	case NVME_LOG_PAGE_ERROR_INFO:
+		return "NVME_LOG_PAGE_ERROR_INFO"
+	case NVME_LOG_PAGE_HEALTH_INFO:
+		return "NVME_LOG_PAGE_HEALTH_INFO"
+	case NVME_LOG_PAGE_FIRMWARE_SLOT_INFO:
+		return "NVME_LOG_PAGE_FIRMWARE_SLOT_INFO"
+	case NVME_LOG_PAGE_CHANGED_NAMESPACE_LIST:
+		return "NVME_LOG_PAGE_CHANGED_NAMESPACE_LIST"
+	case NVME_LOG_PAGE_COMMAND_EFFECTS:
+		return "NVME_LOG_PAGE_COMMAND_EFFECTS"
+	case NVME_LOG_PAGE_DEVICE_SELF_TEST:
+		return "NVME_LOG_PAGE_DEVICE_SELF_TEST"
+	case NVME_LOG_PAGE_TELEMETRY_HOST_INITIATED:
+		return "NVME_LOG_PAGE_TELEMETRY_HOST_INITIATED"
+	case NVME_LOG_PAGE_TELEMETRY_CTLR_INITIATED:
+		return "NVME_LOG_PAGE_TELEMETRY_CTLR_INITIATED"
+	case NVME_LOG_PAGE_ENDURANCE_GROUP_INFORMATION:
+		return "NVME_LOG_PAGE_ENDURANCE_GROUP_INFORMATION"
+	case NVME_LOG_PAGE_PREDICTABLE_LATENCY_NVM_SET:
+		return "NVME_LOG_PAGE_PREDICTABLE_LATENCY_NVM_SET"
+	case NVME_LOG_PAGE_PREDICTABLE_LATENCY_EVENT_AGGREGATE:
+		return "NVME_LOG_PAGE_PREDICTABLE_LATENCY_EVENT_AGGREGATE"
+	case NVME_LOG_PAGE_ASYMMETRIC_NAMESPACE_ACCESS:
+		return "NVME_LOG_PAGE_ASYMMETRIC_NAMESPACE_ACCESS"
+	case NVME_LOG_PAGE_PERSISTENT_EVENT_LOG:
+		return "NVME_LOG_PAGE_PERSISTENT_EVENT_LOG"
+	case NVME_LOG_PAGE_LBA_STATUS_INFORMATION:
+		return "NVME_LOG_PAGE_LBA_STATUS_INFORMATION"
+	case NVME_LOG_PAGE_ENDURANCE_GROUP_EVENT_AGGREGATE:
+		return "NVME_LOG_PAGE_ENDURANCE_GROUP_EVENT_AGGREGATE"
+	case NVME_LOG_PAGE_MEDIA_UNIT_STATUS:
+		return "NVME_LOG_PAGE_MEDIA_UNIT_STATUS"
+	case NVME_LOG_PAGE_SUPPORTED_CAPACITY_CONFIGURATION_LIST:
+		return "NVME_LOG_PAGE_SUPPORTED_CAPACITY_CONFIGURATION_LIST"
+	case NVME_LOG_PAGE_FEATURE_IDENTIFIERS_SUPPORTED_AND_EFFECTS:
+		return "NVME_LOG_PAGE_FEATURE_IDENTIFIERS_SUPPORTED_AND_EFFECTS"
+	case NVME_LOG_PAGE_NVME_MI_COMMANDS_SUPPORTED_AND_EFFECTS:
+		return "NVME_LOG_PAGE_NVME_MI_COMMANDS_SUPPORTED_AND_EFFECTS"
+	case NVME_LOG_PAGE_COMMAND_AND_FEATURE_LOCKDOWN:
+		return "NVME_LOG_PAGE_COMMAND_AND_FEATURE_LOCKDOWN"
+	case NVME_LOG_PAGE_BOOT_PARTITON:
+		return "NVME_LOG_PAGE_BOOT_PARTITON"
+	case NVME_LOG_PAGE_ROTATIONAL_MEDIA_INFORMATION:
+		return "NVME_LOG_PAGE_ROTATIONAL_MEDIA_INFORMATION"
+	case NVME_LOG_PAGE_DISCOVERY:
+		return "NVME_LOG_PAGE_DISCOVERY"
+	case NVME_LOG_PAGE_RESERVATION_NOTIFICATION:
+		return "NVME_LOG_PAGE_RESERVATION_NOTIFICATION"
+	case NVME_LOG_PAGE_SANITIZE_STATUS:
+		return "NVME_LOG_PAGE_SANITIZE_STATUS"
+	case NVME_LOG_PAGE_CHANGED_ZONE_LIST:
+		return "NVME_LOG_PAGE_CHANGED_ZONE_LIST"
+	default:
+		return fmt.Sprintf("NVME_LOG_PAGES(%d)", int32(e))
+	}
+}
+
 type NVME_NAMESPACE_METADATA_ELEMENT_TYPES int32
 
 const (
@@ -669,6 +1875,23 @@ const (
 	NVME_NAMESPACE_METADATA_OPERATING_SYSTEM_NAMESPACE_NAME_QUALIFIER_2 NVME_NAMESPACE_METADATA_ELEMENT_TYPES = 4
 )
 
+// String returns the NVME_NAMESPACE_METADATA_ELEMENT_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_NAMESPACE_METADATA_ELEMENT_TYPES) String() string {
+	switch e {
+	case NVME_NAMESPACE_METADATA_OPERATING_SYSTEM_NAMESPACE_NAME:
+		return "NVME_NAMESPACE_METADATA_OPERATING_SYSTEM_NAMESPACE_NAME"
+	case NVME_NAMESPACE_METADATA_PREBOOT_NAMESPACE_NAME:
+		return "NVME_NAMESPACE_METADATA_PREBOOT_NAMESPACE_NAME"
+	case NVME_NAMESPACE_METADATA_OPERATING_SYSTEM_NAMESPACE_NAME_QUALIFIER_1:
+		return "NVME_NAMESPACE_METADATA_OPERATING_SYSTEM_NAMESPACE_NAME_QUALIFIER_1"
+	case NVME_NAMESPACE_METADATA_OPERATING_SYSTEM_NAMESPACE_NAME_QUALIFIER_2:
+		return "NVME_NAMESPACE_METADATA_OPERATING_SYSTEM_NAMESPACE_NAME_QUALIFIER_2"
+	default:
+		return fmt.Sprintf("NVME_NAMESPACE_METADATA_ELEMENT_TYPES(%d)", int32(e))
+	}
+}
+
 type NVME_NO_DEALLOCATE_MODIFIES_MEDIA_AFTER_SANITIZE int32
 
 const (
@@ -676,6 +1899,21 @@ const (
 	NVME_MEDIA_NOT_ADDITIONALLY_MODIFIED_AFTER_SANITIZE         NVME_NO_DEALLOCATE_MODIFIES_MEDIA_AFTER_SANITIZE = 1
 	NVME_MEDIA_ADDITIONALLY_MOFIDIED_AFTER_SANITIZE             NVME_NO_DEALLOCATE_MODIFIES_MEDIA_AFTER_SANITIZE = 2
 )
+
+// String returns the NVME_NO_DEALLOCATE_MODIFIES_MEDIA_AFTER_SANITIZE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_NO_DEALLOCATE_MODIFIES_MEDIA_AFTER_SANITIZE) String() string {
+	switch e {
+	case NVME_MEDIA_ADDITIONALLY_MODIFIED_AFTER_SANITIZE_NOT_DEFINED:
+		return "NVME_MEDIA_ADDITIONALLY_MODIFIED_AFTER_SANITIZE_NOT_DEFINED"
+	case NVME_MEDIA_NOT_ADDITIONALLY_MODIFIED_AFTER_SANITIZE:
+		return "NVME_MEDIA_NOT_ADDITIONALLY_MODIFIED_AFTER_SANITIZE"
+	case NVME_MEDIA_ADDITIONALLY_MOFIDIED_AFTER_SANITIZE:
+		return "NVME_MEDIA_ADDITIONALLY_MOFIDIED_AFTER_SANITIZE"
+	default:
+		return fmt.Sprintf("NVME_NO_DEALLOCATE_MODIFIES_MEDIA_AFTER_SANITIZE(%d)", int32(e))
+	}
+}
 
 // NVME_NVM_COMMANDS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_nvm_commands
 type NVME_NVM_COMMANDS int32
@@ -699,6 +1937,47 @@ const (
 	NVME_NVM_COMMAND_ZONE_APPEND             NVME_NVM_COMMANDS = 125
 )
 
+// String returns the NVME_NVM_COMMANDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_NVM_COMMANDS) String() string {
+	switch e {
+	case NVME_NVM_COMMAND_FLUSH:
+		return "NVME_NVM_COMMAND_FLUSH"
+	case NVME_NVM_COMMAND_WRITE:
+		return "NVME_NVM_COMMAND_WRITE"
+	case NVME_NVM_COMMAND_READ:
+		return "NVME_NVM_COMMAND_READ"
+	case NVME_NVM_COMMAND_WRITE_UNCORRECTABLE:
+		return "NVME_NVM_COMMAND_WRITE_UNCORRECTABLE"
+	case NVME_NVM_COMMAND_COMPARE:
+		return "NVME_NVM_COMMAND_COMPARE"
+	case NVME_NVM_COMMAND_WRITE_ZEROES:
+		return "NVME_NVM_COMMAND_WRITE_ZEROES"
+	case NVME_NVM_COMMAND_DATASET_MANAGEMENT:
+		return "NVME_NVM_COMMAND_DATASET_MANAGEMENT"
+	case NVME_NVM_COMMAND_VERIFY:
+		return "NVME_NVM_COMMAND_VERIFY"
+	case NVME_NVM_COMMAND_RESERVATION_REGISTER:
+		return "NVME_NVM_COMMAND_RESERVATION_REGISTER"
+	case NVME_NVM_COMMAND_RESERVATION_REPORT:
+		return "NVME_NVM_COMMAND_RESERVATION_REPORT"
+	case NVME_NVM_COMMAND_RESERVATION_ACQUIRE:
+		return "NVME_NVM_COMMAND_RESERVATION_ACQUIRE"
+	case NVME_NVM_COMMAND_RESERVATION_RELEASE:
+		return "NVME_NVM_COMMAND_RESERVATION_RELEASE"
+	case NVME_NVM_COMMAND_COPY:
+		return "NVME_NVM_COMMAND_COPY"
+	case NVME_NVM_COMMAND_ZONE_MANAGEMENT_SEND:
+		return "NVME_NVM_COMMAND_ZONE_MANAGEMENT_SEND"
+	case NVME_NVM_COMMAND_ZONE_MANAGEMENT_RECEIVE:
+		return "NVME_NVM_COMMAND_ZONE_MANAGEMENT_RECEIVE"
+	case NVME_NVM_COMMAND_ZONE_APPEND:
+		return "NVME_NVM_COMMAND_ZONE_APPEND"
+	default:
+		return fmt.Sprintf("NVME_NVM_COMMANDS(%d)", int32(e))
+	}
+}
+
 // NVME_NVM_QUEUE_PRIORITIES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_nvm_queue_priorities
 type NVME_NVM_QUEUE_PRIORITIES int32
 
@@ -708,6 +1987,23 @@ const (
 	NVME_NVM_QUEUE_PRIORITY_MEDIUM NVME_NVM_QUEUE_PRIORITIES = 2
 	NVME_NVM_QUEUE_PRIORITY_LOW    NVME_NVM_QUEUE_PRIORITIES = 3
 )
+
+// String returns the NVME_NVM_QUEUE_PRIORITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_NVM_QUEUE_PRIORITIES) String() string {
+	switch e {
+	case NVME_NVM_QUEUE_PRIORITY_URGENT:
+		return "NVME_NVM_QUEUE_PRIORITY_URGENT"
+	case NVME_NVM_QUEUE_PRIORITY_HIGH:
+		return "NVME_NVM_QUEUE_PRIORITY_HIGH"
+	case NVME_NVM_QUEUE_PRIORITY_MEDIUM:
+		return "NVME_NVM_QUEUE_PRIORITY_MEDIUM"
+	case NVME_NVM_QUEUE_PRIORITY_LOW:
+		return "NVME_NVM_QUEUE_PRIORITY_LOW"
+	default:
+		return fmt.Sprintf("NVME_NVM_QUEUE_PRIORITIES(%d)", int32(e))
+	}
+}
 
 type NVME_PERSISTENT_EVENT_LOG_EVENT_TYPES int32
 
@@ -734,6 +2030,55 @@ const (
 	NVME_PERSISTENT_EVENT_TYPE_RESERVED2_END                NVME_PERSISTENT_EVENT_LOG_EVENT_TYPES = 255
 	NVME_PERSISTENT_EVENT_TYPE_MAX                          NVME_PERSISTENT_EVENT_LOG_EVENT_TYPES = 255
 )
+
+// String returns the NVME_PERSISTENT_EVENT_LOG_EVENT_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_PERSISTENT_EVENT_LOG_EVENT_TYPES) String() string {
+	switch e {
+	case NVME_PERSISTENT_EVENT_TYPE_RESERVED0:
+		return "NVME_PERSISTENT_EVENT_TYPE_RESERVED0"
+	case NVME_PERSISTENT_EVENT_TYPE_SMART_HEALTH_LOG_SNAPSHOT:
+		return "NVME_PERSISTENT_EVENT_TYPE_SMART_HEALTH_LOG_SNAPSHOT"
+	case NVME_PERSISTENT_EVENT_TYPE_FIRMWARE_COMMIT:
+		return "NVME_PERSISTENT_EVENT_TYPE_FIRMWARE_COMMIT"
+	case NVME_PERSISTENT_EVENT_TYPE_TIMESTAMP_CHANGE:
+		return "NVME_PERSISTENT_EVENT_TYPE_TIMESTAMP_CHANGE"
+	case NVME_PERSISTENT_EVENT_TYPE_POWER_ON_OR_RESET:
+		return "NVME_PERSISTENT_EVENT_TYPE_POWER_ON_OR_RESET"
+	case NVME_PERSISTENT_EVENT_TYPE_NVM_SUBSYSTEM_HARDWARE_ERROR:
+		return "NVME_PERSISTENT_EVENT_TYPE_NVM_SUBSYSTEM_HARDWARE_ERROR"
+	case NVME_PERSISTENT_EVENT_TYPE_CHANGE_NAMESPACE:
+		return "NVME_PERSISTENT_EVENT_TYPE_CHANGE_NAMESPACE"
+	case NVME_PERSISTENT_EVENT_TYPE_FORMAT_NVM_START:
+		return "NVME_PERSISTENT_EVENT_TYPE_FORMAT_NVM_START"
+	case NVME_PERSISTENT_EVENT_TYPE_FORMAT_NVM_COMPLETION:
+		return "NVME_PERSISTENT_EVENT_TYPE_FORMAT_NVM_COMPLETION"
+	case NVME_PERSISTENT_EVENT_TYPE_SANITIZE_START:
+		return "NVME_PERSISTENT_EVENT_TYPE_SANITIZE_START"
+	case NVME_PERSISTENT_EVENT_TYPE_SANITIZE_COMPLETION:
+		return "NVME_PERSISTENT_EVENT_TYPE_SANITIZE_COMPLETION"
+	case NVME_PERSISTENT_EVENT_TYPE_SET_FEATURE:
+		return "NVME_PERSISTENT_EVENT_TYPE_SET_FEATURE"
+	case NVME_PERSISTENT_EVENT_TYPE_TELEMETRY_LOG_CREATED:
+		return "NVME_PERSISTENT_EVENT_TYPE_TELEMETRY_LOG_CREATED"
+	case NVME_PERSISTENT_EVENT_TYPE_THERMAL_EXCURSION:
+		return "NVME_PERSISTENT_EVENT_TYPE_THERMAL_EXCURSION"
+	case NVME_PERSISTENT_EVENT_TYPE_RESERVED1_BEGIN:
+		return "NVME_PERSISTENT_EVENT_TYPE_RESERVED1_BEGIN"
+	case NVME_PERSISTENT_EVENT_TYPE_RESERVED1_END:
+		return "NVME_PERSISTENT_EVENT_TYPE_RESERVED1_END"
+	case NVME_PERSISTENT_EVENT_TYPE_VENDOR_SPECIFIC_EVENT:
+		return "NVME_PERSISTENT_EVENT_TYPE_VENDOR_SPECIFIC_EVENT"
+	case NVME_PERSISTENT_EVENT_TYPE_TCG_DEFINED:
+		return "NVME_PERSISTENT_EVENT_TYPE_TCG_DEFINED"
+	case NVME_PERSISTENT_EVENT_TYPE_RESERVED2_BEGIN:
+		return "NVME_PERSISTENT_EVENT_TYPE_RESERVED2_BEGIN"
+	case NVME_PERSISTENT_EVENT_TYPE_RESERVED2_END:
+		return "NVME_PERSISTENT_EVENT_TYPE_RESERVED2_END"
+	default:
+		return fmt.Sprintf("NVME_PERSISTENT_EVENT_LOG_EVENT_TYPES(%d)", int32(e))
+	}
+}
 
 type NVME_PROPERTY_OFFSET int32
 
@@ -768,6 +2113,71 @@ const (
 	NvmePropPMRMSCU NVME_PROPERTY_OFFSET = 3608
 )
 
+// String returns the NVME_PROPERTY_OFFSET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_PROPERTY_OFFSET) String() string {
+	switch e {
+	case NvmePropCAP:
+		return "NvmePropCAP"
+	case NvmePropVS:
+		return "NvmePropVS"
+	case NvmePropINTMS:
+		return "NvmePropINTMS"
+	case NvmePropINTMC:
+		return "NvmePropINTMC"
+	case NvmePropCC:
+		return "NvmePropCC"
+	case NvmePropCSTS:
+		return "NvmePropCSTS"
+	case NvmePropNSSR:
+		return "NvmePropNSSR"
+	case NvmePropAQA:
+		return "NvmePropAQA"
+	case NvmePropASQ:
+		return "NvmePropASQ"
+	case NvmePropACQ:
+		return "NvmePropACQ"
+	case NvmePropCMBLOC:
+		return "NvmePropCMBLOC"
+	case NvmePropCMBSZ:
+		return "NvmePropCMBSZ"
+	case NvmePropBPINFO:
+		return "NvmePropBPINFO"
+	case NvmePropBPRSEL:
+		return "NvmePropBPRSEL"
+	case NvmePropBPMBL:
+		return "NvmePropBPMBL"
+	case NvmePropCMBMSC:
+		return "NvmePropCMBMSC"
+	case NvmePropCMBSTS:
+		return "NvmePropCMBSTS"
+	case NvmePropCMBEBS:
+		return "NvmePropCMBEBS"
+	case NvmePropCMBSWTP:
+		return "NvmePropCMBSWTP"
+	case NvmePropNSSD:
+		return "NvmePropNSSD"
+	case NvmePropCRTO:
+		return "NvmePropCRTO"
+	case NvmePropPMRCAP:
+		return "NvmePropPMRCAP"
+	case NvmePropPMRCTL:
+		return "NvmePropPMRCTL"
+	case NvmePropPMRSTS:
+		return "NvmePropPMRSTS"
+	case NvmePropPMREBS:
+		return "NvmePropPMREBS"
+	case NvmePropPMRSWTP:
+		return "NvmePropPMRSWTP"
+	case NvmePropPMRMSCL:
+		return "NvmePropPMRMSCL"
+	case NvmePropPMRMSCU:
+		return "NvmePropPMRMSCU"
+	default:
+		return fmt.Sprintf("NVME_PROPERTY_OFFSET(%d)", int32(e))
+	}
+}
+
 // NVME_PROTECTION_INFORMATION_TYPES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_protection_information_types
 type NVME_PROTECTION_INFORMATION_TYPES int32
 
@@ -778,11 +2188,39 @@ const (
 	NVME_PROTECTION_INFORMATION_TYPE3       NVME_PROTECTION_INFORMATION_TYPES = 3
 )
 
+// String returns the NVME_PROTECTION_INFORMATION_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_PROTECTION_INFORMATION_TYPES) String() string {
+	switch e {
+	case NVME_PROTECTION_INFORMATION_NOT_ENABLED:
+		return "NVME_PROTECTION_INFORMATION_NOT_ENABLED"
+	case NVME_PROTECTION_INFORMATION_TYPE1:
+		return "NVME_PROTECTION_INFORMATION_TYPE1"
+	case NVME_PROTECTION_INFORMATION_TYPE2:
+		return "NVME_PROTECTION_INFORMATION_TYPE2"
+	case NVME_PROTECTION_INFORMATION_TYPE3:
+		return "NVME_PROTECTION_INFORMATION_TYPE3"
+	default:
+		return fmt.Sprintf("NVME_PROTECTION_INFORMATION_TYPES(%d)", int32(e))
+	}
+}
+
 type NVME_RDMA_KEYED_SGL_DESC_SUBTYPE int32
 
 const (
 	NvmeRdmaKeyedSglDescSubtypeInvalidate NVME_RDMA_KEYED_SGL_DESC_SUBTYPE = 15
 )
+
+// String returns the NVME_RDMA_KEYED_SGL_DESC_SUBTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_RDMA_KEYED_SGL_DESC_SUBTYPE) String() string {
+	switch e {
+	case NvmeRdmaKeyedSglDescSubtypeInvalidate:
+		return "NvmeRdmaKeyedSglDescSubtypeInvalidate"
+	default:
+		return fmt.Sprintf("NVME_RDMA_KEYED_SGL_DESC_SUBTYPE(%d)", int32(e))
+	}
+}
 
 type NVME_RESERVATION_ACQUIRE_ACTIONS int32
 
@@ -791,6 +2229,21 @@ const (
 	NVME_RESERVATION_ACQUIRE_ACTION_PREEMPT           NVME_RESERVATION_ACQUIRE_ACTIONS = 1
 	NVME_RESERVATION_ACQUIRE_ACTION_PREEMPT_AND_ABORT NVME_RESERVATION_ACQUIRE_ACTIONS = 2
 )
+
+// String returns the NVME_RESERVATION_ACQUIRE_ACTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_RESERVATION_ACQUIRE_ACTIONS) String() string {
+	switch e {
+	case NVME_RESERVATION_ACQUIRE_ACTION_ACQUIRE:
+		return "NVME_RESERVATION_ACQUIRE_ACTION_ACQUIRE"
+	case NVME_RESERVATION_ACQUIRE_ACTION_PREEMPT:
+		return "NVME_RESERVATION_ACQUIRE_ACTION_PREEMPT"
+	case NVME_RESERVATION_ACQUIRE_ACTION_PREEMPT_AND_ABORT:
+		return "NVME_RESERVATION_ACQUIRE_ACTION_PREEMPT_AND_ABORT"
+	default:
+		return fmt.Sprintf("NVME_RESERVATION_ACQUIRE_ACTIONS(%d)", int32(e))
+	}
+}
 
 // NVME_RESERVATION_NOTIFICATION_TYPES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_reservation_notification_types
 type NVME_RESERVATION_NOTIFICATION_TYPES int32
@@ -802,6 +2255,23 @@ const (
 	NVME_RESERVATION_NOTIFICATION_TYPE_RESERVATION_PREEPMPTED NVME_RESERVATION_NOTIFICATION_TYPES = 3
 )
 
+// String returns the NVME_RESERVATION_NOTIFICATION_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_RESERVATION_NOTIFICATION_TYPES) String() string {
+	switch e {
+	case NVME_RESERVATION_NOTIFICATION_TYPE_EMPTY_LOG_PAGE:
+		return "NVME_RESERVATION_NOTIFICATION_TYPE_EMPTY_LOG_PAGE"
+	case NVME_RESERVATION_NOTIFICATION_TYPE_REGISTRATION_PREEMPTED:
+		return "NVME_RESERVATION_NOTIFICATION_TYPE_REGISTRATION_PREEMPTED"
+	case NVME_RESERVATION_NOTIFICATION_TYPE_REGISTRATION_RELEASED:
+		return "NVME_RESERVATION_NOTIFICATION_TYPE_REGISTRATION_RELEASED"
+	case NVME_RESERVATION_NOTIFICATION_TYPE_RESERVATION_PREEPMPTED:
+		return "NVME_RESERVATION_NOTIFICATION_TYPE_RESERVATION_PREEPMPTED"
+	default:
+		return fmt.Sprintf("NVME_RESERVATION_NOTIFICATION_TYPES(%d)", int32(e))
+	}
+}
+
 type NVME_RESERVATION_REGISTER_ACTIONS int32
 
 const (
@@ -809,6 +2279,21 @@ const (
 	NVME_RESERVATION_REGISTER_ACTION_UNREGISTER NVME_RESERVATION_REGISTER_ACTIONS = 1
 	NVME_RESERVATION_REGISTER_ACTION_REPLACE    NVME_RESERVATION_REGISTER_ACTIONS = 2
 )
+
+// String returns the NVME_RESERVATION_REGISTER_ACTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_RESERVATION_REGISTER_ACTIONS) String() string {
+	switch e {
+	case NVME_RESERVATION_REGISTER_ACTION_REGISTER:
+		return "NVME_RESERVATION_REGISTER_ACTION_REGISTER"
+	case NVME_RESERVATION_REGISTER_ACTION_UNREGISTER:
+		return "NVME_RESERVATION_REGISTER_ACTION_UNREGISTER"
+	case NVME_RESERVATION_REGISTER_ACTION_REPLACE:
+		return "NVME_RESERVATION_REGISTER_ACTION_REPLACE"
+	default:
+		return fmt.Sprintf("NVME_RESERVATION_REGISTER_ACTIONS(%d)", int32(e))
+	}
+}
 
 type NVME_RESERVATION_REGISTER_PTPL_STATE_CHANGES int32
 
@@ -819,12 +2304,42 @@ const (
 	NVME_RESERVATION_REGISTER_PTPL_STATE_SET_TO_1  NVME_RESERVATION_REGISTER_PTPL_STATE_CHANGES = 3
 )
 
+// String returns the NVME_RESERVATION_REGISTER_PTPL_STATE_CHANGES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_RESERVATION_REGISTER_PTPL_STATE_CHANGES) String() string {
+	switch e {
+	case NVME_RESERVATION_REGISTER_PTPL_STATE_NO_CHANGE:
+		return "NVME_RESERVATION_REGISTER_PTPL_STATE_NO_CHANGE"
+	case NVME_RESERVATION_REGISTER_PTPL_STATE_RESERVED:
+		return "NVME_RESERVATION_REGISTER_PTPL_STATE_RESERVED"
+	case NVME_RESERVATION_REGISTER_PTPL_STATE_SET_TO_0:
+		return "NVME_RESERVATION_REGISTER_PTPL_STATE_SET_TO_0"
+	case NVME_RESERVATION_REGISTER_PTPL_STATE_SET_TO_1:
+		return "NVME_RESERVATION_REGISTER_PTPL_STATE_SET_TO_1"
+	default:
+		return fmt.Sprintf("NVME_RESERVATION_REGISTER_PTPL_STATE_CHANGES(%d)", int32(e))
+	}
+}
+
 type NVME_RESERVATION_RELEASE_ACTIONS int32
 
 const (
 	NVME_RESERVATION_RELEASE_ACTION_RELEASE NVME_RESERVATION_RELEASE_ACTIONS = 0
 	NVME_RESERVATION_RELEASE_ACTION_CLEAR   NVME_RESERVATION_RELEASE_ACTIONS = 1
 )
+
+// String returns the NVME_RESERVATION_RELEASE_ACTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_RESERVATION_RELEASE_ACTIONS) String() string {
+	switch e {
+	case NVME_RESERVATION_RELEASE_ACTION_RELEASE:
+		return "NVME_RESERVATION_RELEASE_ACTION_RELEASE"
+	case NVME_RESERVATION_RELEASE_ACTION_CLEAR:
+		return "NVME_RESERVATION_RELEASE_ACTION_CLEAR"
+	default:
+		return fmt.Sprintf("NVME_RESERVATION_RELEASE_ACTIONS(%d)", int32(e))
+	}
+}
 
 type NVME_RESERVATION_TYPES int32
 
@@ -838,6 +2353,29 @@ const (
 	NVME_RESERVATION_TYPE_EXCLUSIVE_ACCESS_ALL_REGISTRANTS  NVME_RESERVATION_TYPES = 6
 )
 
+// String returns the NVME_RESERVATION_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_RESERVATION_TYPES) String() string {
+	switch e {
+	case NVME_RESERVATION_TYPE_RESERVED:
+		return "NVME_RESERVATION_TYPE_RESERVED"
+	case NVME_RESERVATION_TYPE_WRITE_EXCLUSIVE:
+		return "NVME_RESERVATION_TYPE_WRITE_EXCLUSIVE"
+	case NVME_RESERVATION_TYPE_EXCLUSIVE_ACCESS:
+		return "NVME_RESERVATION_TYPE_EXCLUSIVE_ACCESS"
+	case NVME_RESERVATION_TYPE_WRITE_EXCLUSIVE_REGISTRANTS_ONLY:
+		return "NVME_RESERVATION_TYPE_WRITE_EXCLUSIVE_REGISTRANTS_ONLY"
+	case NVME_RESERVATION_TYPE_EXCLUSIVE_ACCESS_REGISTRANTS_ONLY:
+		return "NVME_RESERVATION_TYPE_EXCLUSIVE_ACCESS_REGISTRANTS_ONLY"
+	case NVME_RESERVATION_TYPE_WRITE_EXCLUSIVE_ALL_REGISTRANTS:
+		return "NVME_RESERVATION_TYPE_WRITE_EXCLUSIVE_ALL_REGISTRANTS"
+	case NVME_RESERVATION_TYPE_EXCLUSIVE_ACCESS_ALL_REGISTRANTS:
+		return "NVME_RESERVATION_TYPE_EXCLUSIVE_ACCESS_ALL_REGISTRANTS"
+	default:
+		return fmt.Sprintf("NVME_RESERVATION_TYPES(%d)", int32(e))
+	}
+}
+
 type NVME_SANITIZE_ACTION int32
 
 const (
@@ -847,6 +2385,25 @@ const (
 	NVME_SANITIZE_ACTION_START_OVERWRITE_SANITIZE    NVME_SANITIZE_ACTION = 3
 	NVME_SANITIZE_ACTION_START_CRYPTO_ERASE_SANITIZE NVME_SANITIZE_ACTION = 4
 )
+
+// String returns the NVME_SANITIZE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_SANITIZE_ACTION) String() string {
+	switch e {
+	case NVME_SANITIZE_ACTION_RESERVED:
+		return "NVME_SANITIZE_ACTION_RESERVED"
+	case NVME_SANITIZE_ACTION_EXIT_FAILURE_MODE:
+		return "NVME_SANITIZE_ACTION_EXIT_FAILURE_MODE"
+	case NVME_SANITIZE_ACTION_START_BLOCK_ERASE_SANITIZE:
+		return "NVME_SANITIZE_ACTION_START_BLOCK_ERASE_SANITIZE"
+	case NVME_SANITIZE_ACTION_START_OVERWRITE_SANITIZE:
+		return "NVME_SANITIZE_ACTION_START_OVERWRITE_SANITIZE"
+	case NVME_SANITIZE_ACTION_START_CRYPTO_ERASE_SANITIZE:
+		return "NVME_SANITIZE_ACTION_START_CRYPTO_ERASE_SANITIZE"
+	default:
+		return fmt.Sprintf("NVME_SANITIZE_ACTION(%d)", int32(e))
+	}
+}
 
 type NVME_SANITIZE_OPERATION_STATUS int32
 
@@ -858,6 +2415,25 @@ const (
 	NVME_SANITIZE_OPERATION_SUCCEEDED_WITH_FORCED_DEALLOCATION NVME_SANITIZE_OPERATION_STATUS = 4
 )
 
+// String returns the NVME_SANITIZE_OPERATION_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_SANITIZE_OPERATION_STATUS) String() string {
+	switch e {
+	case NVME_SANITIZE_OPERATION_NONE:
+		return "NVME_SANITIZE_OPERATION_NONE"
+	case NVME_SANITIZE_OPERATION_SUCCEEDED:
+		return "NVME_SANITIZE_OPERATION_SUCCEEDED"
+	case NVME_SANITIZE_OPERATION_IN_PROGRESS:
+		return "NVME_SANITIZE_OPERATION_IN_PROGRESS"
+	case NVME_SANITIZE_OPERATION_FAILED:
+		return "NVME_SANITIZE_OPERATION_FAILED"
+	case NVME_SANITIZE_OPERATION_SUCCEEDED_WITH_FORCED_DEALLOCATION:
+		return "NVME_SANITIZE_OPERATION_SUCCEEDED_WITH_FORCED_DEALLOCATION"
+	default:
+		return fmt.Sprintf("NVME_SANITIZE_OPERATION_STATUS(%d)", int32(e))
+	}
+}
+
 // NVME_SECURE_ERASE_SETTINGS: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_secure_erase_settings
 type NVME_SECURE_ERASE_SETTINGS int32
 
@@ -866,6 +2442,21 @@ const (
 	NVME_SECURE_ERASE_USER_DATA     NVME_SECURE_ERASE_SETTINGS = 1
 	NVME_SECURE_ERASE_CRYPTOGRAPHIC NVME_SECURE_ERASE_SETTINGS = 2
 )
+
+// String returns the NVME_SECURE_ERASE_SETTINGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_SECURE_ERASE_SETTINGS) String() string {
+	switch e {
+	case NVME_SECURE_ERASE_NONE:
+		return "NVME_SECURE_ERASE_NONE"
+	case NVME_SECURE_ERASE_USER_DATA:
+		return "NVME_SECURE_ERASE_USER_DATA"
+	case NVME_SECURE_ERASE_CRYPTOGRAPHIC:
+		return "NVME_SECURE_ERASE_CRYPTOGRAPHIC"
+	default:
+		return fmt.Sprintf("NVME_SECURE_ERASE_SETTINGS(%d)", int32(e))
+	}
+}
 
 type NVME_SGL_DESC_SUBTYPE int32
 
@@ -880,6 +2471,31 @@ const (
 	NvmeSglDescSubtypeTransportF NVME_SGL_DESC_SUBTYPE = 15
 )
 
+// String returns the NVME_SGL_DESC_SUBTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_SGL_DESC_SUBTYPE) String() string {
+	switch e {
+	case NvmeSglDescSubtypeAddress:
+		return "NvmeSglDescSubtypeAddress"
+	case NvmeSglDescSubtypeOffset:
+		return "NvmeSglDescSubtypeOffset"
+	case NvmeSglDescSubtypeTransportA:
+		return "NvmeSglDescSubtypeTransportA"
+	case NvmeSglDescSubtypeTransportB:
+		return "NvmeSglDescSubtypeTransportB"
+	case NvmeSglDescSubtypeTransportC:
+		return "NvmeSglDescSubtypeTransportC"
+	case NvmeSglDescSubtypeTransportD:
+		return "NvmeSglDescSubtypeTransportD"
+	case NvmeSglDescSubtypeTransportE:
+		return "NvmeSglDescSubtypeTransportE"
+	case NvmeSglDescSubtypeTransportF:
+		return "NvmeSglDescSubtypeTransportF"
+	default:
+		return fmt.Sprintf("NVME_SGL_DESC_SUBTYPE(%d)", int32(e))
+	}
+}
+
 type NVME_SGL_DESC_TYPE int32
 
 const (
@@ -891,6 +2507,29 @@ const (
 	NvmeSglDescTypeTransportDataBlock NVME_SGL_DESC_TYPE = 5
 	NvmeSglDescTypeMax                NVME_SGL_DESC_TYPE = 15
 )
+
+// String returns the NVME_SGL_DESC_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_SGL_DESC_TYPE) String() string {
+	switch e {
+	case NvmeSglDescTypeDataBlock:
+		return "NvmeSglDescTypeDataBlock"
+	case NvmeSglDescTypeBitBucket:
+		return "NvmeSglDescTypeBitBucket"
+	case NvmeSglDescTypeSegment:
+		return "NvmeSglDescTypeSegment"
+	case NvmeSglDescTypeLastSegment:
+		return "NvmeSglDescTypeLastSegment"
+	case NvmeSglDescTypeKeyedDataBlock:
+		return "NvmeSglDescTypeKeyedDataBlock"
+	case NvmeSglDescTypeTransportDataBlock:
+		return "NvmeSglDescTypeTransportDataBlock"
+	case NvmeSglDescTypeMax:
+		return "NvmeSglDescTypeMax"
+	default:
+		return fmt.Sprintf("NVME_SGL_DESC_TYPE(%d)", int32(e))
+	}
+}
 
 // NVME_STATUS_COMMAND_SPECIFIC_CODES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_status_command_specific_codes
 type NVME_STATUS_COMMAND_SPECIFIC_CODES int32
@@ -957,6 +2596,131 @@ const (
 	NVME_STATUS_ZONE_INVALID_STATE_TRANSITION                    NVME_STATUS_COMMAND_SPECIFIC_CODES = 191
 )
 
+// String returns the NVME_STATUS_COMMAND_SPECIFIC_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_STATUS_COMMAND_SPECIFIC_CODES) String() string {
+	switch e {
+	case NVME_STATUS_COMPLETION_QUEUE_INVALID:
+		return "NVME_STATUS_COMPLETION_QUEUE_INVALID"
+	case NVME_STATUS_INVALID_QUEUE_IDENTIFIER:
+		return "NVME_STATUS_INVALID_QUEUE_IDENTIFIER"
+	case NVME_STATUS_MAX_QUEUE_SIZE_EXCEEDED:
+		return "NVME_STATUS_MAX_QUEUE_SIZE_EXCEEDED"
+	case NVME_STATUS_ABORT_COMMAND_LIMIT_EXCEEDED:
+		return "NVME_STATUS_ABORT_COMMAND_LIMIT_EXCEEDED"
+	case NVME_STATUS_ASYNC_EVENT_REQUEST_LIMIT_EXCEEDED:
+		return "NVME_STATUS_ASYNC_EVENT_REQUEST_LIMIT_EXCEEDED"
+	case NVME_STATUS_INVALID_FIRMWARE_SLOT:
+		return "NVME_STATUS_INVALID_FIRMWARE_SLOT"
+	case NVME_STATUS_INVALID_FIRMWARE_IMAGE:
+		return "NVME_STATUS_INVALID_FIRMWARE_IMAGE"
+	case NVME_STATUS_INVALID_INTERRUPT_VECTOR:
+		return "NVME_STATUS_INVALID_INTERRUPT_VECTOR"
+	case NVME_STATUS_INVALID_LOG_PAGE:
+		return "NVME_STATUS_INVALID_LOG_PAGE"
+	case NVME_STATUS_INVALID_FORMAT:
+		return "NVME_STATUS_INVALID_FORMAT"
+	case NVME_STATUS_FIRMWARE_ACTIVATION_REQUIRES_CONVENTIONAL_RESET:
+		return "NVME_STATUS_FIRMWARE_ACTIVATION_REQUIRES_CONVENTIONAL_RESET"
+	case NVME_STATUS_INVALID_QUEUE_DELETION:
+		return "NVME_STATUS_INVALID_QUEUE_DELETION"
+	case NVME_STATUS_FEATURE_ID_NOT_SAVEABLE:
+		return "NVME_STATUS_FEATURE_ID_NOT_SAVEABLE"
+	case NVME_STATUS_FEATURE_NOT_CHANGEABLE:
+		return "NVME_STATUS_FEATURE_NOT_CHANGEABLE"
+	case NVME_STATUS_FEATURE_NOT_NAMESPACE_SPECIFIC:
+		return "NVME_STATUS_FEATURE_NOT_NAMESPACE_SPECIFIC"
+	case NVME_STATUS_FIRMWARE_ACTIVATION_REQUIRES_NVM_SUBSYSTEM_RESET:
+		return "NVME_STATUS_FIRMWARE_ACTIVATION_REQUIRES_NVM_SUBSYSTEM_RESET"
+	case NVME_STATUS_FIRMWARE_ACTIVATION_REQUIRES_RESET:
+		return "NVME_STATUS_FIRMWARE_ACTIVATION_REQUIRES_RESET"
+	case NVME_STATUS_FIRMWARE_ACTIVATION_REQUIRES_MAX_TIME_VIOLATION:
+		return "NVME_STATUS_FIRMWARE_ACTIVATION_REQUIRES_MAX_TIME_VIOLATION"
+	case NVME_STATUS_FIRMWARE_ACTIVATION_PROHIBITED:
+		return "NVME_STATUS_FIRMWARE_ACTIVATION_PROHIBITED"
+	case NVME_STATUS_OVERLAPPING_RANGE:
+		return "NVME_STATUS_OVERLAPPING_RANGE"
+	case NVME_STATUS_NAMESPACE_INSUFFICIENT_CAPACITY:
+		return "NVME_STATUS_NAMESPACE_INSUFFICIENT_CAPACITY"
+	case NVME_STATUS_NAMESPACE_IDENTIFIER_UNAVAILABLE:
+		return "NVME_STATUS_NAMESPACE_IDENTIFIER_UNAVAILABLE"
+	case NVME_STATUS_NAMESPACE_ALREADY_ATTACHED:
+		return "NVME_STATUS_NAMESPACE_ALREADY_ATTACHED"
+	case NVME_STATUS_NAMESPACE_IS_PRIVATE:
+		return "NVME_STATUS_NAMESPACE_IS_PRIVATE"
+	case NVME_STATUS_NAMESPACE_NOT_ATTACHED:
+		return "NVME_STATUS_NAMESPACE_NOT_ATTACHED"
+	case NVME_STATUS_NAMESPACE_THIN_PROVISIONING_NOT_SUPPORTED:
+		return "NVME_STATUS_NAMESPACE_THIN_PROVISIONING_NOT_SUPPORTED"
+	case NVME_STATUS_CONTROLLER_LIST_INVALID:
+		return "NVME_STATUS_CONTROLLER_LIST_INVALID"
+	case NVME_STATUS_DEVICE_SELF_TEST_IN_PROGRESS:
+		return "NVME_STATUS_DEVICE_SELF_TEST_IN_PROGRESS"
+	case NVME_STATUS_BOOT_PARTITION_WRITE_PROHIBITED:
+		return "NVME_STATUS_BOOT_PARTITION_WRITE_PROHIBITED"
+	case NVME_STATUS_INVALID_CONTROLLER_IDENTIFIER:
+		return "NVME_STATUS_INVALID_CONTROLLER_IDENTIFIER"
+	case NVME_STATUS_INVALID_SECONDARY_CONTROLLER_STATE:
+		return "NVME_STATUS_INVALID_SECONDARY_CONTROLLER_STATE"
+	case NVME_STATUS_INVALID_NUMBER_OF_CONTROLLER_RESOURCES:
+		return "NVME_STATUS_INVALID_NUMBER_OF_CONTROLLER_RESOURCES"
+	case NVME_STATUS_INVALID_RESOURCE_IDENTIFIER:
+		return "NVME_STATUS_INVALID_RESOURCE_IDENTIFIER"
+	case NVME_STATUS_SANITIZE_PROHIBITED_ON_PERSISTENT_MEMORY:
+		return "NVME_STATUS_SANITIZE_PROHIBITED_ON_PERSISTENT_MEMORY"
+	case NVME_STATUS_INVALID_ANA_GROUP_IDENTIFIER:
+		return "NVME_STATUS_INVALID_ANA_GROUP_IDENTIFIER"
+	case NVME_STATUS_ANA_ATTACH_FAILED:
+		return "NVME_STATUS_ANA_ATTACH_FAILED"
+	case NVME_STATUS_INSUFFICIENT_CAPACITY:
+		return "NVME_STATUS_INSUFFICIENT_CAPACITY"
+	case NVME_STATUS_NAMESPACE_ATTACHMENT_LIMIT_EXCEEDED:
+		return "NVME_STATUS_NAMESPACE_ATTACHMENT_LIMIT_EXCEEDED"
+	case NVME_STATUS_PROHIBITION_NOT_SUPPORTED:
+		return "NVME_STATUS_PROHIBITION_NOT_SUPPORTED"
+	case NVME_IO_COMMAND_SET_NOT_SUPPORTED:
+		return "NVME_IO_COMMAND_SET_NOT_SUPPORTED"
+	case NVME_IO_COMMAND_SET_NOT_ENABLED:
+		return "NVME_IO_COMMAND_SET_NOT_ENABLED"
+	case NVME_IO_COMMAND_SET_COMBINATION_REJECTED:
+		return "NVME_IO_COMMAND_SET_COMBINATION_REJECTED"
+	case NVME_IO_COMMAND_SET_INVALID:
+		return "NVME_IO_COMMAND_SET_INVALID"
+	case NVME_STATUS_INVALID_DISCOVERY_INFORMATION:
+		return "NVME_STATUS_INVALID_DISCOVERY_INFORMATION"
+	case NVME_STATUS_INSUFFICIENT_DISCOVERY_RESOURCES:
+		return "NVME_STATUS_INSUFFICIENT_DISCOVERY_RESOURCES"
+	case NVME_STATUS_STREAM_RESOURCE_ALLOCATION_FAILED:
+		return "NVME_STATUS_STREAM_RESOURCE_ALLOCATION_FAILED"
+	case NVME_STATUS_NVM_CONFLICTING_ATTRIBUTES:
+		return "NVME_STATUS_NVM_CONFLICTING_ATTRIBUTES"
+	case NVME_STATUS_NVM_INVALID_PROTECTION_INFORMATION:
+		return "NVME_STATUS_NVM_INVALID_PROTECTION_INFORMATION"
+	case NVME_STATUS_NVM_ATTEMPTED_WRITE_TO_READ_ONLY_RANGE:
+		return "NVME_STATUS_NVM_ATTEMPTED_WRITE_TO_READ_ONLY_RANGE"
+	case NVME_STATUS_NVM_COMMAND_SIZE_LIMIT_EXCEEDED:
+		return "NVME_STATUS_NVM_COMMAND_SIZE_LIMIT_EXCEEDED"
+	case NVME_STATUS_ZONE_BOUNDARY_ERROR:
+		return "NVME_STATUS_ZONE_BOUNDARY_ERROR"
+	case NVME_STATUS_ZONE_FULL:
+		return "NVME_STATUS_ZONE_FULL"
+	case NVME_STATUS_ZONE_READ_ONLY:
+		return "NVME_STATUS_ZONE_READ_ONLY"
+	case NVME_STATUS_ZONE_OFFLINE:
+		return "NVME_STATUS_ZONE_OFFLINE"
+	case NVME_STATUS_ZONE_INVALID_WRITE:
+		return "NVME_STATUS_ZONE_INVALID_WRITE"
+	case NVME_STATUS_ZONE_TOO_MANY_ACTIVE:
+		return "NVME_STATUS_ZONE_TOO_MANY_ACTIVE"
+	case NVME_STATUS_ZONE_TOO_MANY_OPEN:
+		return "NVME_STATUS_ZONE_TOO_MANY_OPEN"
+	case NVME_STATUS_ZONE_INVALID_STATE_TRANSITION:
+		return "NVME_STATUS_ZONE_INVALID_STATE_TRANSITION"
+	default:
+		return fmt.Sprintf("NVME_STATUS_COMMAND_SPECIFIC_CODES(%d)", int32(e))
+	}
+}
+
 type NVME_STATUS_FABRIC_COMMAND_CODES int32
 
 const (
@@ -969,6 +2733,31 @@ const (
 	NVME_STATUS_DISCOVER_RESTART           NVME_STATUS_FABRIC_COMMAND_CODES = 144
 	NVME_STATUS_AUTHENTICATION_REQUIRED    NVME_STATUS_FABRIC_COMMAND_CODES = 145
 )
+
+// String returns the NVME_STATUS_FABRIC_COMMAND_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_STATUS_FABRIC_COMMAND_CODES) String() string {
+	switch e {
+	case NVME_STATUS_INCOMPATIBLE_FORMAT:
+		return "NVME_STATUS_INCOMPATIBLE_FORMAT"
+	case NVME_STATUS_CONTROLLER_BUSY:
+		return "NVME_STATUS_CONTROLLER_BUSY"
+	case NVME_STATUS_CONNECT_INVALID_PARAMETERS:
+		return "NVME_STATUS_CONNECT_INVALID_PARAMETERS"
+	case NVME_STATUS_CONNECT_RESTART_DISCOVERY:
+		return "NVME_STATUS_CONNECT_RESTART_DISCOVERY"
+	case NVME_STATUS_CONNECT_INVALID_HOST:
+		return "NVME_STATUS_CONNECT_INVALID_HOST"
+	case NVME_STATUS_INVALID_QUEUE_TYPE:
+		return "NVME_STATUS_INVALID_QUEUE_TYPE"
+	case NVME_STATUS_DISCOVER_RESTART:
+		return "NVME_STATUS_DISCOVER_RESTART"
+	case NVME_STATUS_AUTHENTICATION_REQUIRED:
+		return "NVME_STATUS_AUTHENTICATION_REQUIRED"
+	default:
+		return fmt.Sprintf("NVME_STATUS_FABRIC_COMMAND_CODES(%d)", int32(e))
+	}
+}
 
 // NVME_STATUS_GENERIC_COMMAND_CODES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_status_generic_command_codes
 type NVME_STATUS_GENERIC_COMMAND_CODES int32
@@ -1020,6 +2809,103 @@ const (
 	NVME_STATUS_FORMAT_IN_PROGRESS                             NVME_STATUS_GENERIC_COMMAND_CODES = 132
 )
 
+// String returns the NVME_STATUS_GENERIC_COMMAND_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_STATUS_GENERIC_COMMAND_CODES) String() string {
+	switch e {
+	case NVME_STATUS_SUCCESS_COMPLETION:
+		return "NVME_STATUS_SUCCESS_COMPLETION"
+	case NVME_STATUS_INVALID_COMMAND_OPCODE:
+		return "NVME_STATUS_INVALID_COMMAND_OPCODE"
+	case NVME_STATUS_INVALID_FIELD_IN_COMMAND:
+		return "NVME_STATUS_INVALID_FIELD_IN_COMMAND"
+	case NVME_STATUS_COMMAND_ID_CONFLICT:
+		return "NVME_STATUS_COMMAND_ID_CONFLICT"
+	case NVME_STATUS_DATA_TRANSFER_ERROR:
+		return "NVME_STATUS_DATA_TRANSFER_ERROR"
+	case NVME_STATUS_COMMAND_ABORTED_DUE_TO_POWER_LOSS_NOTIFICATION:
+		return "NVME_STATUS_COMMAND_ABORTED_DUE_TO_POWER_LOSS_NOTIFICATION"
+	case NVME_STATUS_INTERNAL_DEVICE_ERROR:
+		return "NVME_STATUS_INTERNAL_DEVICE_ERROR"
+	case NVME_STATUS_COMMAND_ABORT_REQUESTED:
+		return "NVME_STATUS_COMMAND_ABORT_REQUESTED"
+	case NVME_STATUS_COMMAND_ABORTED_DUE_TO_SQ_DELETION:
+		return "NVME_STATUS_COMMAND_ABORTED_DUE_TO_SQ_DELETION"
+	case NVME_STATUS_COMMAND_ABORTED_DUE_TO_FAILED_FUSED_COMMAND:
+		return "NVME_STATUS_COMMAND_ABORTED_DUE_TO_FAILED_FUSED_COMMAND"
+	case NVME_STATUS_COMMAND_ABORTED_DUE_TO_FAILED_MISSING_COMMAND:
+		return "NVME_STATUS_COMMAND_ABORTED_DUE_TO_FAILED_MISSING_COMMAND"
+	case NVME_STATUS_INVALID_NAMESPACE_OR_FORMAT:
+		return "NVME_STATUS_INVALID_NAMESPACE_OR_FORMAT"
+	case NVME_STATUS_COMMAND_SEQUENCE_ERROR:
+		return "NVME_STATUS_COMMAND_SEQUENCE_ERROR"
+	case NVME_STATUS_INVALID_SGL_LAST_SEGMENT_DESCR:
+		return "NVME_STATUS_INVALID_SGL_LAST_SEGMENT_DESCR"
+	case NVME_STATUS_INVALID_NUMBER_OF_SGL_DESCR:
+		return "NVME_STATUS_INVALID_NUMBER_OF_SGL_DESCR"
+	case NVME_STATUS_DATA_SGL_LENGTH_INVALID:
+		return "NVME_STATUS_DATA_SGL_LENGTH_INVALID"
+	case NVME_STATUS_METADATA_SGL_LENGTH_INVALID:
+		return "NVME_STATUS_METADATA_SGL_LENGTH_INVALID"
+	case NVME_STATUS_SGL_DESCR_TYPE_INVALID:
+		return "NVME_STATUS_SGL_DESCR_TYPE_INVALID"
+	case NVME_STATUS_INVALID_USE_OF_CONTROLLER_MEMORY_BUFFER:
+		return "NVME_STATUS_INVALID_USE_OF_CONTROLLER_MEMORY_BUFFER"
+	case NVME_STATUS_PRP_OFFSET_INVALID:
+		return "NVME_STATUS_PRP_OFFSET_INVALID"
+	case NVME_STATUS_ATOMIC_WRITE_UNIT_EXCEEDED:
+		return "NVME_STATUS_ATOMIC_WRITE_UNIT_EXCEEDED"
+	case NVME_STATUS_OPERATION_DENIED:
+		return "NVME_STATUS_OPERATION_DENIED"
+	case NVME_STATUS_SGL_OFFSET_INVALID:
+		return "NVME_STATUS_SGL_OFFSET_INVALID"
+	case NVME_STATUS_RESERVED:
+		return "NVME_STATUS_RESERVED"
+	case NVME_STATUS_HOST_IDENTIFIER_INCONSISTENT_FORMAT:
+		return "NVME_STATUS_HOST_IDENTIFIER_INCONSISTENT_FORMAT"
+	case NVME_STATUS_KEEP_ALIVE_TIMEOUT_EXPIRED:
+		return "NVME_STATUS_KEEP_ALIVE_TIMEOUT_EXPIRED"
+	case NVME_STATUS_KEEP_ALIVE_TIMEOUT_INVALID:
+		return "NVME_STATUS_KEEP_ALIVE_TIMEOUT_INVALID"
+	case NVME_STATUS_COMMAND_ABORTED_DUE_TO_PREEMPT_ABORT:
+		return "NVME_STATUS_COMMAND_ABORTED_DUE_TO_PREEMPT_ABORT"
+	case NVME_STATUS_SANITIZE_FAILED:
+		return "NVME_STATUS_SANITIZE_FAILED"
+	case NVME_STATUS_SANITIZE_IN_PROGRESS:
+		return "NVME_STATUS_SANITIZE_IN_PROGRESS"
+	case NVME_STATUS_SGL_DATA_BLOCK_GRANULARITY_INVALID:
+		return "NVME_STATUS_SGL_DATA_BLOCK_GRANULARITY_INVALID"
+	case NVME_STATUS_COMMAND_NOT_SUPPORTED_FOR_QUEUE_IN_CMB:
+		return "NVME_STATUS_COMMAND_NOT_SUPPORTED_FOR_QUEUE_IN_CMB"
+	case NVME_STATUS_NAMESPACE_IS_WRITE_PROTECTED:
+		return "NVME_STATUS_NAMESPACE_IS_WRITE_PROTECTED"
+	case NVME_STATUS_COMMAND_INTERRUPTED:
+		return "NVME_STATUS_COMMAND_INTERRUPTED"
+	case NVME_STATUS_TRANSIENT_TRANSPORT_ERROR:
+		return "NVME_STATUS_TRANSIENT_TRANSPORT_ERROR"
+	case NVME_STATUS_COMMAND_PROHIBITED_BY_LOCKDOWN:
+		return "NVME_STATUS_COMMAND_PROHIBITED_BY_LOCKDOWN"
+	case NVME_STATUS_ADMIN_COMMAND_MEDIA_NOT_READY:
+		return "NVME_STATUS_ADMIN_COMMAND_MEDIA_NOT_READY"
+	case NVME_STATUS_DIRECTIVE_TYPE_INVALID:
+		return "NVME_STATUS_DIRECTIVE_TYPE_INVALID"
+	case NVME_STATUS_DIRECTIVE_ID_INVALID:
+		return "NVME_STATUS_DIRECTIVE_ID_INVALID"
+	case NVME_STATUS_NVM_LBA_OUT_OF_RANGE:
+		return "NVME_STATUS_NVM_LBA_OUT_OF_RANGE"
+	case NVME_STATUS_NVM_CAPACITY_EXCEEDED:
+		return "NVME_STATUS_NVM_CAPACITY_EXCEEDED"
+	case NVME_STATUS_NVM_NAMESPACE_NOT_READY:
+		return "NVME_STATUS_NVM_NAMESPACE_NOT_READY"
+	case NVME_STATUS_NVM_RESERVATION_CONFLICT:
+		return "NVME_STATUS_NVM_RESERVATION_CONFLICT"
+	case NVME_STATUS_FORMAT_IN_PROGRESS:
+		return "NVME_STATUS_FORMAT_IN_PROGRESS"
+	default:
+		return fmt.Sprintf("NVME_STATUS_GENERIC_COMMAND_CODES(%d)", int32(e))
+	}
+}
+
 // NVME_STATUS_MEDIA_ERROR_CODES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_status_media_error_codes
 type NVME_STATUS_MEDIA_ERROR_CODES int32
 
@@ -1034,6 +2920,31 @@ const (
 	NVME_STATUS_NVM_DEALLOCATED_OR_UNWRITTEN_LOGICAL_BLOCK NVME_STATUS_MEDIA_ERROR_CODES = 135
 )
 
+// String returns the NVME_STATUS_MEDIA_ERROR_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_STATUS_MEDIA_ERROR_CODES) String() string {
+	switch e {
+	case NVME_STATUS_NVM_WRITE_FAULT:
+		return "NVME_STATUS_NVM_WRITE_FAULT"
+	case NVME_STATUS_NVM_UNRECOVERED_READ_ERROR:
+		return "NVME_STATUS_NVM_UNRECOVERED_READ_ERROR"
+	case NVME_STATUS_NVM_END_TO_END_GUARD_CHECK_ERROR:
+		return "NVME_STATUS_NVM_END_TO_END_GUARD_CHECK_ERROR"
+	case NVME_STATUS_NVM_END_TO_END_APPLICATION_TAG_CHECK_ERROR:
+		return "NVME_STATUS_NVM_END_TO_END_APPLICATION_TAG_CHECK_ERROR"
+	case NVME_STATUS_NVM_END_TO_END_REFERENCE_TAG_CHECK_ERROR:
+		return "NVME_STATUS_NVM_END_TO_END_REFERENCE_TAG_CHECK_ERROR"
+	case NVME_STATUS_NVM_COMPARE_FAILURE:
+		return "NVME_STATUS_NVM_COMPARE_FAILURE"
+	case NVME_STATUS_NVM_ACCESS_DENIED:
+		return "NVME_STATUS_NVM_ACCESS_DENIED"
+	case NVME_STATUS_NVM_DEALLOCATED_OR_UNWRITTEN_LOGICAL_BLOCK:
+		return "NVME_STATUS_NVM_DEALLOCATED_OR_UNWRITTEN_LOGICAL_BLOCK"
+	default:
+		return fmt.Sprintf("NVME_STATUS_MEDIA_ERROR_CODES(%d)", int32(e))
+	}
+}
+
 type NVME_STATUS_PATH_ERROR_CODES int32
 
 const (
@@ -1046,6 +2957,29 @@ const (
 	NVME_STATUS_COMMAND_ABORTED_BY_HOST           NVME_STATUS_PATH_ERROR_CODES = 113
 )
 
+// String returns the NVME_STATUS_PATH_ERROR_CODES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_STATUS_PATH_ERROR_CODES) String() string {
+	switch e {
+	case NVME_STATUS_INTERNAL_PATH_ERROR:
+		return "NVME_STATUS_INTERNAL_PATH_ERROR"
+	case NVME_STATUS_ASYMMETRIC_ACCESS_PERSISTENT_LOSS:
+		return "NVME_STATUS_ASYMMETRIC_ACCESS_PERSISTENT_LOSS"
+	case NVME_STATUS_ASYMMETRIC_ACCESS_INACCESSIBLE:
+		return "NVME_STATUS_ASYMMETRIC_ACCESS_INACCESSIBLE"
+	case NVME_STATUS_ASYMMETRIC_ACCESS_TRANSITION:
+		return "NVME_STATUS_ASYMMETRIC_ACCESS_TRANSITION"
+	case NVME_STATUS_CONTROLLER_PATHING_ERROR:
+		return "NVME_STATUS_CONTROLLER_PATHING_ERROR"
+	case NVME_STATUS_HOST_PATHING_ERROR:
+		return "NVME_STATUS_HOST_PATHING_ERROR"
+	case NVME_STATUS_COMMAND_ABORTED_BY_HOST:
+		return "NVME_STATUS_COMMAND_ABORTED_BY_HOST"
+	default:
+		return fmt.Sprintf("NVME_STATUS_PATH_ERROR_CODES(%d)", int32(e))
+	}
+}
+
 // NVME_STATUS_TYPES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_status_types
 type NVME_STATUS_TYPES int32
 
@@ -1057,6 +2991,25 @@ const (
 	NVME_STATUS_TYPE_VENDOR_SPECIFIC  NVME_STATUS_TYPES = 7
 )
 
+// String returns the NVME_STATUS_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_STATUS_TYPES) String() string {
+	switch e {
+	case NVME_STATUS_TYPE_GENERIC_COMMAND:
+		return "NVME_STATUS_TYPE_GENERIC_COMMAND"
+	case NVME_STATUS_TYPE_COMMAND_SPECIFIC:
+		return "NVME_STATUS_TYPE_COMMAND_SPECIFIC"
+	case NVME_STATUS_TYPE_MEDIA_ERROR:
+		return "NVME_STATUS_TYPE_MEDIA_ERROR"
+	case NVME_STATUS_TYPE_PATH_RELATED:
+		return "NVME_STATUS_TYPE_PATH_RELATED"
+	case NVME_STATUS_TYPE_VENDOR_SPECIFIC:
+		return "NVME_STATUS_TYPE_VENDOR_SPECIFIC"
+	default:
+		return fmt.Sprintf("NVME_STATUS_TYPES(%d)", int32(e))
+	}
+}
+
 // NVME_TEMPERATURE_THRESHOLD_TYPES: https://learn.microsoft.com/windows/win32/api/nvme/ne-nvme-nvme_temperature_threshold_types
 type NVME_TEMPERATURE_THRESHOLD_TYPES int32
 
@@ -1064,6 +3017,19 @@ const (
 	NVME_TEMPERATURE_OVER_THRESHOLD  NVME_TEMPERATURE_THRESHOLD_TYPES = 0
 	NVME_TEMPERATURE_UNDER_THRESHOLD NVME_TEMPERATURE_THRESHOLD_TYPES = 1
 )
+
+// String returns the NVME_TEMPERATURE_THRESHOLD_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_TEMPERATURE_THRESHOLD_TYPES) String() string {
+	switch e {
+	case NVME_TEMPERATURE_OVER_THRESHOLD:
+		return "NVME_TEMPERATURE_OVER_THRESHOLD"
+	case NVME_TEMPERATURE_UNDER_THRESHOLD:
+		return "NVME_TEMPERATURE_UNDER_THRESHOLD"
+	default:
+		return fmt.Sprintf("NVME_TEMPERATURE_THRESHOLD_TYPES(%d)", int32(e))
+	}
+}
 
 type NVME_VENDOR_LOG_PAGES int32
 
@@ -1078,6 +3044,31 @@ const (
 	NVME_LOG_PAGE_OCP_TCG_HISTORY                 NVME_VENDOR_LOG_PAGES = 201
 )
 
+// String returns the NVME_VENDOR_LOG_PAGES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_VENDOR_LOG_PAGES) String() string {
+	switch e {
+	case NVME_LOG_PAGE_OCP_DEVICE_SMART_INFORMATION:
+		return "NVME_LOG_PAGE_OCP_DEVICE_SMART_INFORMATION"
+	case NVME_LOG_PAGE_OCP_DEVICE_ERROR_RECOVERY:
+		return "NVME_LOG_PAGE_OCP_DEVICE_ERROR_RECOVERY"
+	case NVME_LOG_PAGE_OCP_FIRMWARE_ACTIVATION_HISTORY:
+		return "NVME_LOG_PAGE_OCP_FIRMWARE_ACTIVATION_HISTORY"
+	case NVME_LOG_PAGE_OCP_LATENCY_MONITOR:
+		return "NVME_LOG_PAGE_OCP_LATENCY_MONITOR"
+	case NVME_LOG_PAGE_OCP_DEVICE_CAPABILITIES:
+		return "NVME_LOG_PAGE_OCP_DEVICE_CAPABILITIES"
+	case NVME_LOG_PAGE_OCP_UNSUPPORTED_REQUIREMENTS:
+		return "NVME_LOG_PAGE_OCP_UNSUPPORTED_REQUIREMENTS"
+	case NVME_LOG_PAGE_OCP_TCG_CONFIGURATION:
+		return "NVME_LOG_PAGE_OCP_TCG_CONFIGURATION"
+	case NVME_LOG_PAGE_OCP_TCG_HISTORY:
+		return "NVME_LOG_PAGE_OCP_TCG_HISTORY"
+	default:
+		return fmt.Sprintf("NVME_VENDOR_LOG_PAGES(%d)", int32(e))
+	}
+}
+
 type NVME_WCS_DEVICE_RECOVERY_ACTION1 int32
 
 const (
@@ -1089,6 +3080,29 @@ const (
 	NVMeDeviceRecoverySanitize              NVME_WCS_DEVICE_RECOVERY_ACTION1 = 5
 	NVMeDeviceRecovery1Max                  NVME_WCS_DEVICE_RECOVERY_ACTION1 = 15
 )
+
+// String returns the NVME_WCS_DEVICE_RECOVERY_ACTION1 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_WCS_DEVICE_RECOVERY_ACTION1) String() string {
+	switch e {
+	case NVMeDeviceRecoveryNoAction:
+		return "NVMeDeviceRecoveryNoAction"
+	case NVMeDeviceRecoveryFormatNVM:
+		return "NVMeDeviceRecoveryFormatNVM"
+	case NVMeDeviceRecoveryVendorSpecificCommand:
+		return "NVMeDeviceRecoveryVendorSpecificCommand"
+	case NVMeDeviceRecoveryVendorAnalysis:
+		return "NVMeDeviceRecoveryVendorAnalysis"
+	case NVMeDeviceRecoveryDeviceReplacement:
+		return "NVMeDeviceRecoveryDeviceReplacement"
+	case NVMeDeviceRecoverySanitize:
+		return "NVMeDeviceRecoverySanitize"
+	case NVMeDeviceRecovery1Max:
+		return "NVMeDeviceRecovery1Max"
+	default:
+		return fmt.Sprintf("NVME_WCS_DEVICE_RECOVERY_ACTION1(%d)", int32(e))
+	}
+}
 
 type NVME_WCS_DEVICE_RECOVERY_ACTION2 int32
 
@@ -1102,12 +3116,48 @@ const (
 	NVMeDeviceRecovery2Max              NVME_WCS_DEVICE_RECOVERY_ACTION2 = 15
 )
 
+// String returns the NVME_WCS_DEVICE_RECOVERY_ACTION2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_WCS_DEVICE_RECOVERY_ACTION2) String() string {
+	switch e {
+	case NVMeDeviceRecoveryControllerReset:
+		return "NVMeDeviceRecoveryControllerReset"
+	case NVMeDeviceRecoverySubsystemReset:
+		return "NVMeDeviceRecoverySubsystemReset"
+	case NVMeDeviceRecoveryPcieFunctionReset:
+		return "NVMeDeviceRecoveryPcieFunctionReset"
+	case NVMeDeviceRecoveryPERST:
+		return "NVMeDeviceRecoveryPERST"
+	case NVMeDeviceRecoveryPowerCycle:
+		return "NVMeDeviceRecoveryPowerCycle"
+	case NVMeDeviceRecoveryPcieHotReset:
+		return "NVMeDeviceRecoveryPcieHotReset"
+	case NVMeDeviceRecovery2Max:
+		return "NVMeDeviceRecovery2Max"
+	default:
+		return fmt.Sprintf("NVME_WCS_DEVICE_RECOVERY_ACTION2(%d)", int32(e))
+	}
+}
+
 type NVME_ZONE_RECEIVE_ACTION int32
 
 const (
 	NVME_ZONE_RECEIVE_REPORT_ZONES          NVME_ZONE_RECEIVE_ACTION = 0
 	NVME_ZONE_RECEIVE_EXTENDED_REPORT_ZONES NVME_ZONE_RECEIVE_ACTION = 1
 )
+
+// String returns the NVME_ZONE_RECEIVE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ZONE_RECEIVE_ACTION) String() string {
+	switch e {
+	case NVME_ZONE_RECEIVE_REPORT_ZONES:
+		return "NVME_ZONE_RECEIVE_REPORT_ZONES"
+	case NVME_ZONE_RECEIVE_EXTENDED_REPORT_ZONES:
+		return "NVME_ZONE_RECEIVE_EXTENDED_REPORT_ZONES"
+	default:
+		return fmt.Sprintf("NVME_ZONE_RECEIVE_ACTION(%d)", int32(e))
+	}
+}
 
 type NVME_ZONE_RECEIVE_ACTION_SPECIFIC int32
 
@@ -1122,6 +3172,31 @@ const (
 	NVME_ZRA_OFFLINE_STATE_ZONES NVME_ZONE_RECEIVE_ACTION_SPECIFIC = 7
 )
 
+// String returns the NVME_ZONE_RECEIVE_ACTION_SPECIFIC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ZONE_RECEIVE_ACTION_SPECIFIC) String() string {
+	switch e {
+	case NVME_ZRA_ALL_ZONES:
+		return "NVME_ZRA_ALL_ZONES"
+	case NVME_ZRA_EMPTY_STATE_ZONES:
+		return "NVME_ZRA_EMPTY_STATE_ZONES"
+	case NVME_ZRA_IO_STATE_ZONES:
+		return "NVME_ZRA_IO_STATE_ZONES"
+	case NVME_ZRA_EO_STATE_ZONES:
+		return "NVME_ZRA_EO_STATE_ZONES"
+	case NVME_ZRA_CLOSED_STATE_ZONES:
+		return "NVME_ZRA_CLOSED_STATE_ZONES"
+	case NVME_ZRA_FULL_STATE_ZONES:
+		return "NVME_ZRA_FULL_STATE_ZONES"
+	case NVME_ZRA_RO_STATE_ZONES:
+		return "NVME_ZRA_RO_STATE_ZONES"
+	case NVME_ZRA_OFFLINE_STATE_ZONES:
+		return "NVME_ZRA_OFFLINE_STATE_ZONES"
+	default:
+		return fmt.Sprintf("NVME_ZONE_RECEIVE_ACTION_SPECIFIC(%d)", int32(e))
+	}
+}
+
 type NVME_ZONE_SEND_ACTION int32
 
 const (
@@ -1132,6 +3207,27 @@ const (
 	NVME_ZONE_SEND_OFFLINE             NVME_ZONE_SEND_ACTION = 5
 	NVME_ZONE_SEND_SET_ZONE_DESCRIPTOR NVME_ZONE_SEND_ACTION = 16
 )
+
+// String returns the NVME_ZONE_SEND_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NVME_ZONE_SEND_ACTION) String() string {
+	switch e {
+	case NVME_ZONE_SEND_CLOSE:
+		return "NVME_ZONE_SEND_CLOSE"
+	case NVME_ZONE_SEND_FINISH:
+		return "NVME_ZONE_SEND_FINISH"
+	case NVME_ZONE_SEND_OPEN:
+		return "NVME_ZONE_SEND_OPEN"
+	case NVME_ZONE_SEND_RESET:
+		return "NVME_ZONE_SEND_RESET"
+	case NVME_ZONE_SEND_OFFLINE:
+		return "NVME_ZONE_SEND_OFFLINE"
+	case NVME_ZONE_SEND_SET_ZONE_DESCRIPTOR:
+		return "NVME_ZONE_SEND_SET_ZONE_DESCRIPTOR"
+	default:
+		return fmt.Sprintf("NVME_ZONE_SEND_ACTION(%d)", int32(e))
+	}
+}
 
 type ZONE_STATE int32
 
@@ -1144,3 +3240,26 @@ const (
 	NVME_STATE_ZSF  ZONE_STATE = 14
 	NVME_STATE_ZSO  ZONE_STATE = 15
 )
+
+// String returns the ZONE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ZONE_STATE) String() string {
+	switch e {
+	case NVME_STATE_ZSE:
+		return "NVME_STATE_ZSE"
+	case NVME_STATE_ZSIO:
+		return "NVME_STATE_ZSIO"
+	case NVME_STATE_ZSEO:
+		return "NVME_STATE_ZSEO"
+	case NVME_STATE_ZSC:
+		return "NVME_STATE_ZSC"
+	case NVME_STATE_ZSRO:
+		return "NVME_STATE_ZSRO"
+	case NVME_STATE_ZSF:
+		return "NVME_STATE_ZSF"
+	case NVME_STATE_ZSO:
+		return "NVME_STATE_ZSO"
+	default:
+		return fmt.Sprintf("ZONE_STATE(%d)", int32(e))
+	}
+}

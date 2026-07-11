@@ -4,6 +4,11 @@
 
 package shutdown
 
+import (
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type EXIT_WINDOWS_FLAGS uint32
 
 const (
@@ -22,6 +27,53 @@ const (
 	EWX_SYSTEM_INITIATED      EXIT_WINDOWS_FLAGS = 268435456
 )
 
+// String returns the EXIT_WINDOWS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXIT_WINDOWS_FLAGS) String() string {
+	var parts []string
+	if e&EWX_SHUTDOWN != 0 {
+		parts = append(parts, "EWX_SHUTDOWN")
+	}
+	if e&EWX_REBOOT != 0 {
+		parts = append(parts, "EWX_REBOOT")
+	}
+	if e&EWX_FORCE != 0 {
+		parts = append(parts, "EWX_FORCE")
+	}
+	if e&EWX_POWEROFF != 0 {
+		parts = append(parts, "EWX_POWEROFF")
+	}
+	if e&EWX_FORCEIFHUNG != 0 {
+		parts = append(parts, "EWX_FORCEIFHUNG")
+	}
+	if e&EWX_QUICKRESOLVE != 0 {
+		parts = append(parts, "EWX_QUICKRESOLVE")
+	}
+	if e&EWX_RESTARTAPPS != 0 {
+		parts = append(parts, "EWX_RESTARTAPPS")
+	}
+	if e&EWX_HYBRID_SHUTDOWN != 0 {
+		parts = append(parts, "EWX_HYBRID_SHUTDOWN")
+	}
+	if e&EWX_BOOTOPTIONS != 0 {
+		parts = append(parts, "EWX_BOOTOPTIONS")
+	}
+	if e&EWX_ARSO != 0 {
+		parts = append(parts, "EWX_ARSO")
+	}
+	if e&EWX_CHECK_SAFE_FOR_SERVER != 0 {
+		parts = append(parts, "EWX_CHECK_SAFE_FOR_SERVER")
+	}
+	if e&EWX_SYSTEM_INITIATED != 0 {
+		parts = append(parts, "EWX_SYSTEM_INITIATED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SHUTDOWN_FLAGS uint32
 
 const (
@@ -45,6 +97,71 @@ const (
 	SHUTDOWN_UPDATE_POWEROFF       SHUTDOWN_FLAGS = 131072
 )
 
+// String returns the SHUTDOWN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHUTDOWN_FLAGS) String() string {
+	var parts []string
+	if e&SHUTDOWN_FORCE_OTHERS != 0 {
+		parts = append(parts, "SHUTDOWN_FORCE_OTHERS")
+	}
+	if e&SHUTDOWN_FORCE_SELF != 0 {
+		parts = append(parts, "SHUTDOWN_FORCE_SELF")
+	}
+	if e&SHUTDOWN_RESTART != 0 {
+		parts = append(parts, "SHUTDOWN_RESTART")
+	}
+	if e&SHUTDOWN_POWEROFF != 0 {
+		parts = append(parts, "SHUTDOWN_POWEROFF")
+	}
+	if e&SHUTDOWN_NOREBOOT != 0 {
+		parts = append(parts, "SHUTDOWN_NOREBOOT")
+	}
+	if e&SHUTDOWN_GRACE_OVERRIDE != 0 {
+		parts = append(parts, "SHUTDOWN_GRACE_OVERRIDE")
+	}
+	if e&SHUTDOWN_INSTALL_UPDATES != 0 {
+		parts = append(parts, "SHUTDOWN_INSTALL_UPDATES")
+	}
+	if e&SHUTDOWN_RESTARTAPPS != 0 {
+		parts = append(parts, "SHUTDOWN_RESTARTAPPS")
+	}
+	if e&SHUTDOWN_SKIP_SVC_PRESHUTDOWN != 0 {
+		parts = append(parts, "SHUTDOWN_SKIP_SVC_PRESHUTDOWN")
+	}
+	if e&SHUTDOWN_HYBRID != 0 {
+		parts = append(parts, "SHUTDOWN_HYBRID")
+	}
+	if e&SHUTDOWN_RESTART_BOOTOPTIONS != 0 {
+		parts = append(parts, "SHUTDOWN_RESTART_BOOTOPTIONS")
+	}
+	if e&SHUTDOWN_SOFT_REBOOT != 0 {
+		parts = append(parts, "SHUTDOWN_SOFT_REBOOT")
+	}
+	if e&SHUTDOWN_MOBILE_UI != 0 {
+		parts = append(parts, "SHUTDOWN_MOBILE_UI")
+	}
+	if e&SHUTDOWN_ARSO != 0 {
+		parts = append(parts, "SHUTDOWN_ARSO")
+	}
+	if e&SHUTDOWN_CHECK_SAFE_FOR_SERVER != 0 {
+		parts = append(parts, "SHUTDOWN_CHECK_SAFE_FOR_SERVER")
+	}
+	if e&SHUTDOWN_VAIL_CONTAINER != 0 {
+		parts = append(parts, "SHUTDOWN_VAIL_CONTAINER")
+	}
+	if e&SHUTDOWN_SYSTEM_INITIATED != 0 {
+		parts = append(parts, "SHUTDOWN_SYSTEM_INITIATED")
+	}
+	if e&SHUTDOWN_UPDATE_POWEROFF != 0 {
+		parts = append(parts, "SHUTDOWN_UPDATE_POWEROFF")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SHUTDOWN_REASON uint32
 
 const (
@@ -100,3 +217,154 @@ const (
 	SHTDN_REASON_LEGACY_API                     SHUTDOWN_REASON = 2147942400
 	SHTDN_REASON_VALID_BIT_MASK                 SHUTDOWN_REASON = 3238002687
 )
+
+// String returns the SHUTDOWN_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHUTDOWN_REASON) String() string {
+	var parts []string
+	if e&SHTDN_REASON_FLAG_COMMENT_REQUIRED != 0 {
+		parts = append(parts, "SHTDN_REASON_FLAG_COMMENT_REQUIRED")
+	}
+	if e&SHTDN_REASON_FLAG_DIRTY_PROBLEM_ID_REQUIRED != 0 {
+		parts = append(parts, "SHTDN_REASON_FLAG_DIRTY_PROBLEM_ID_REQUIRED")
+	}
+	if e&SHTDN_REASON_FLAG_CLEAN_UI != 0 {
+		parts = append(parts, "SHTDN_REASON_FLAG_CLEAN_UI")
+	}
+	if e&SHTDN_REASON_FLAG_DIRTY_UI != 0 {
+		parts = append(parts, "SHTDN_REASON_FLAG_DIRTY_UI")
+	}
+	if e&SHTDN_REASON_FLAG_MOBILE_UI_RESERVED != 0 {
+		parts = append(parts, "SHTDN_REASON_FLAG_MOBILE_UI_RESERVED")
+	}
+	if e&SHTDN_REASON_FLAG_USER_DEFINED != 0 {
+		parts = append(parts, "SHTDN_REASON_FLAG_USER_DEFINED")
+	}
+	if e&SHTDN_REASON_FLAG_PLANNED != 0 {
+		parts = append(parts, "SHTDN_REASON_FLAG_PLANNED")
+	}
+	if e&SHTDN_REASON_MAJOR_HARDWARE != 0 {
+		parts = append(parts, "SHTDN_REASON_MAJOR_HARDWARE")
+	}
+	if e&SHTDN_REASON_MAJOR_OPERATINGSYSTEM != 0 {
+		parts = append(parts, "SHTDN_REASON_MAJOR_OPERATINGSYSTEM")
+	}
+	if e&SHTDN_REASON_MAJOR_SOFTWARE != 0 {
+		parts = append(parts, "SHTDN_REASON_MAJOR_SOFTWARE")
+	}
+	if e&SHTDN_REASON_MAJOR_APPLICATION != 0 {
+		parts = append(parts, "SHTDN_REASON_MAJOR_APPLICATION")
+	}
+	if e&SHTDN_REASON_MAJOR_SYSTEM != 0 {
+		parts = append(parts, "SHTDN_REASON_MAJOR_SYSTEM")
+	}
+	if e&SHTDN_REASON_MAJOR_POWER != 0 {
+		parts = append(parts, "SHTDN_REASON_MAJOR_POWER")
+	}
+	if e&SHTDN_REASON_MAJOR_LEGACY_API != 0 {
+		parts = append(parts, "SHTDN_REASON_MAJOR_LEGACY_API")
+	}
+	if e&SHTDN_REASON_MINOR_NONE != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_NONE")
+	}
+	if e&SHTDN_REASON_MINOR_MAINTENANCE != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_MAINTENANCE")
+	}
+	if e&SHTDN_REASON_MINOR_INSTALLATION != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_INSTALLATION")
+	}
+	if e&SHTDN_REASON_MINOR_UPGRADE != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_UPGRADE")
+	}
+	if e&SHTDN_REASON_MINOR_RECONFIG != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_RECONFIG")
+	}
+	if e&SHTDN_REASON_MINOR_HUNG != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_HUNG")
+	}
+	if e&SHTDN_REASON_MINOR_UNSTABLE != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_UNSTABLE")
+	}
+	if e&SHTDN_REASON_MINOR_DISK != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_DISK")
+	}
+	if e&SHTDN_REASON_MINOR_PROCESSOR != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_PROCESSOR")
+	}
+	if e&SHTDN_REASON_MINOR_NETWORKCARD != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_NETWORKCARD")
+	}
+	if e&SHTDN_REASON_MINOR_POWER_SUPPLY != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_POWER_SUPPLY")
+	}
+	if e&SHTDN_REASON_MINOR_CORDUNPLUGGED != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_CORDUNPLUGGED")
+	}
+	if e&SHTDN_REASON_MINOR_ENVIRONMENT != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_ENVIRONMENT")
+	}
+	if e&SHTDN_REASON_MINOR_HARDWARE_DRIVER != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_HARDWARE_DRIVER")
+	}
+	if e&SHTDN_REASON_MINOR_OTHERDRIVER != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_OTHERDRIVER")
+	}
+	if e&SHTDN_REASON_MINOR_BLUESCREEN != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_BLUESCREEN")
+	}
+	if e&SHTDN_REASON_MINOR_SERVICEPACK != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_SERVICEPACK")
+	}
+	if e&SHTDN_REASON_MINOR_HOTFIX != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_HOTFIX")
+	}
+	if e&SHTDN_REASON_MINOR_SECURITYFIX != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_SECURITYFIX")
+	}
+	if e&SHTDN_REASON_MINOR_SECURITY != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_SECURITY")
+	}
+	if e&SHTDN_REASON_MINOR_NETWORK_CONNECTIVITY != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_NETWORK_CONNECTIVITY")
+	}
+	if e&SHTDN_REASON_MINOR_WMI != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_WMI")
+	}
+	if e&SHTDN_REASON_MINOR_SERVICEPACK_UNINSTALL != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_SERVICEPACK_UNINSTALL")
+	}
+	if e&SHTDN_REASON_MINOR_HOTFIX_UNINSTALL != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_HOTFIX_UNINSTALL")
+	}
+	if e&SHTDN_REASON_MINOR_SECURITYFIX_UNINSTALL != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_SECURITYFIX_UNINSTALL")
+	}
+	if e&SHTDN_REASON_MINOR_MMC != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_MMC")
+	}
+	if e&SHTDN_REASON_MINOR_SYSTEMRESTORE != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_SYSTEMRESTORE")
+	}
+	if e&SHTDN_REASON_MINOR_TERMSRV != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_TERMSRV")
+	}
+	if e&SHTDN_REASON_MINOR_DC_PROMOTION != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_DC_PROMOTION")
+	}
+	if e&SHTDN_REASON_MINOR_DC_DEMOTION != 0 {
+		parts = append(parts, "SHTDN_REASON_MINOR_DC_DEMOTION")
+	}
+	if e&SHTDN_REASON_UNKNOWN != 0 {
+		parts = append(parts, "SHTDN_REASON_UNKNOWN")
+	}
+	if e&SHTDN_REASON_LEGACY_API != 0 {
+		parts = append(parts, "SHTDN_REASON_LEGACY_API")
+	}
+	if e&SHTDN_REASON_VALID_BIT_MASK != 0 {
+		parts = append(parts, "SHTDN_REASON_VALID_BIT_MASK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

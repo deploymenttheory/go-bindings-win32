@@ -4,12 +4,27 @@
 
 package dxmediaobjects
 
+import (
+	"fmt"
+)
+
 // DMO_ENUM_FLAGS: https://learn.microsoft.com/windows/win32/api/dmoreg/ne-dmoreg-dmo_enum_flags
 type DMO_ENUM_FLAGS int32
 
 const (
 	DMO_ENUMF_INCLUDE_KEYED DMO_ENUM_FLAGS = 1
 )
+
+// String returns the DMO_ENUM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_ENUM_FLAGS) String() string {
+	switch e {
+	case DMO_ENUMF_INCLUDE_KEYED:
+		return "DMO_ENUMF_INCLUDE_KEYED"
+	default:
+		return fmt.Sprintf("DMO_ENUM_FLAGS(%d)", int32(e))
+	}
+}
 
 // DMO_REGISTER_FLAGS: https://learn.microsoft.com/windows/win32/api/dmoreg/ne-dmoreg-dmo_register_flags
 type DMO_REGISTER_FLAGS int32
@@ -18,12 +33,36 @@ const (
 	DMO_REGISTERF_IS_KEYED DMO_REGISTER_FLAGS = 1
 )
 
+// String returns the DMO_REGISTER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_REGISTER_FLAGS) String() string {
+	switch e {
+	case DMO_REGISTERF_IS_KEYED:
+		return "DMO_REGISTERF_IS_KEYED"
+	default:
+		return fmt.Sprintf("DMO_REGISTER_FLAGS(%d)", int32(e))
+	}
+}
+
 type DMO_INPLACE_PROCESS_FLAGS int32
 
 const (
 	DMO_INPLACE_NORMAL DMO_INPLACE_PROCESS_FLAGS = 0
 	DMO_INPLACE_ZERO   DMO_INPLACE_PROCESS_FLAGS = 1
 )
+
+// String returns the DMO_INPLACE_PROCESS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_INPLACE_PROCESS_FLAGS) String() string {
+	switch e {
+	case DMO_INPLACE_NORMAL:
+		return "DMO_INPLACE_NORMAL"
+	case DMO_INPLACE_ZERO:
+		return "DMO_INPLACE_ZERO"
+	default:
+		return fmt.Sprintf("DMO_INPLACE_PROCESS_FLAGS(%d)", int32(e))
+	}
+}
 
 // DMO_INPUT_DATA_BUFFER_FLAGS: https://learn.microsoft.com/windows/win32/api/mediaobj/ne-mediaobj-_dmo_input_data_buffer_flags
 type DMO_INPUT_DATA_BUFFER_FLAGS int32
@@ -35,11 +74,39 @@ const (
 	DMO_INPUT_DATA_BUFFERF_DISCONTINUITY DMO_INPUT_DATA_BUFFER_FLAGS = 8
 )
 
+// String returns the DMO_INPUT_DATA_BUFFER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_INPUT_DATA_BUFFER_FLAGS) String() string {
+	switch e {
+	case DMO_INPUT_DATA_BUFFERF_SYNCPOINT:
+		return "DMO_INPUT_DATA_BUFFERF_SYNCPOINT"
+	case DMO_INPUT_DATA_BUFFERF_TIME:
+		return "DMO_INPUT_DATA_BUFFERF_TIME"
+	case DMO_INPUT_DATA_BUFFERF_TIMELENGTH:
+		return "DMO_INPUT_DATA_BUFFERF_TIMELENGTH"
+	case DMO_INPUT_DATA_BUFFERF_DISCONTINUITY:
+		return "DMO_INPUT_DATA_BUFFERF_DISCONTINUITY"
+	default:
+		return fmt.Sprintf("DMO_INPUT_DATA_BUFFER_FLAGS(%d)", int32(e))
+	}
+}
+
 type DMO_INPUT_STATUS_FLAGS int32
 
 const (
 	DMO_INPUT_STATUSF_ACCEPT_DATA DMO_INPUT_STATUS_FLAGS = 1
 )
+
+// String returns the DMO_INPUT_STATUS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_INPUT_STATUS_FLAGS) String() string {
+	switch e {
+	case DMO_INPUT_STATUSF_ACCEPT_DATA:
+		return "DMO_INPUT_STATUSF_ACCEPT_DATA"
+	default:
+		return fmt.Sprintf("DMO_INPUT_STATUS_FLAGS(%d)", int32(e))
+	}
+}
 
 // DMO_INPUT_STREAM_INFO_FLAGS: https://learn.microsoft.com/windows/win32/api/mediaobj/ne-mediaobj-_dmo_input_stream_info_flags
 type DMO_INPUT_STREAM_INFO_FLAGS int32
@@ -50,6 +117,23 @@ const (
 	DMO_INPUT_STREAMF_FIXED_SAMPLE_SIZE        DMO_INPUT_STREAM_INFO_FLAGS = 4
 	DMO_INPUT_STREAMF_HOLDS_BUFFERS            DMO_INPUT_STREAM_INFO_FLAGS = 8
 )
+
+// String returns the DMO_INPUT_STREAM_INFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_INPUT_STREAM_INFO_FLAGS) String() string {
+	switch e {
+	case DMO_INPUT_STREAMF_WHOLE_SAMPLES:
+		return "DMO_INPUT_STREAMF_WHOLE_SAMPLES"
+	case DMO_INPUT_STREAMF_SINGLE_SAMPLE_PER_BUFFER:
+		return "DMO_INPUT_STREAMF_SINGLE_SAMPLE_PER_BUFFER"
+	case DMO_INPUT_STREAMF_FIXED_SAMPLE_SIZE:
+		return "DMO_INPUT_STREAMF_FIXED_SAMPLE_SIZE"
+	case DMO_INPUT_STREAMF_HOLDS_BUFFERS:
+		return "DMO_INPUT_STREAMF_HOLDS_BUFFERS"
+	default:
+		return fmt.Sprintf("DMO_INPUT_STREAM_INFO_FLAGS(%d)", int32(e))
+	}
+}
 
 // DMO_OUTPUT_DATA_BUFFER_FLAGS: https://learn.microsoft.com/windows/win32/api/mediaobj/ne-mediaobj-_dmo_output_data_buffer_flags
 type DMO_OUTPUT_DATA_BUFFER_FLAGS int32
@@ -62,6 +146,25 @@ const (
 	DMO_OUTPUT_DATA_BUFFERF_INCOMPLETE    DMO_OUTPUT_DATA_BUFFER_FLAGS = 16777216
 )
 
+// String returns the DMO_OUTPUT_DATA_BUFFER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_OUTPUT_DATA_BUFFER_FLAGS) String() string {
+	switch e {
+	case DMO_OUTPUT_DATA_BUFFERF_SYNCPOINT:
+		return "DMO_OUTPUT_DATA_BUFFERF_SYNCPOINT"
+	case DMO_OUTPUT_DATA_BUFFERF_TIME:
+		return "DMO_OUTPUT_DATA_BUFFERF_TIME"
+	case DMO_OUTPUT_DATA_BUFFERF_TIMELENGTH:
+		return "DMO_OUTPUT_DATA_BUFFERF_TIMELENGTH"
+	case DMO_OUTPUT_DATA_BUFFERF_DISCONTINUITY:
+		return "DMO_OUTPUT_DATA_BUFFERF_DISCONTINUITY"
+	case DMO_OUTPUT_DATA_BUFFERF_INCOMPLETE:
+		return "DMO_OUTPUT_DATA_BUFFERF_INCOMPLETE"
+	default:
+		return fmt.Sprintf("DMO_OUTPUT_DATA_BUFFER_FLAGS(%d)", int32(e))
+	}
+}
+
 // DMO_OUTPUT_STREAM_INFO_FLAGS: https://learn.microsoft.com/windows/win32/api/mediaobj/ne-mediaobj-_dmo_output_stream_info_flags
 type DMO_OUTPUT_STREAM_INFO_FLAGS int32
 
@@ -73,6 +176,25 @@ const (
 	DMO_OUTPUT_STREAMF_OPTIONAL                 DMO_OUTPUT_STREAM_INFO_FLAGS = 16
 )
 
+// String returns the DMO_OUTPUT_STREAM_INFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_OUTPUT_STREAM_INFO_FLAGS) String() string {
+	switch e {
+	case DMO_OUTPUT_STREAMF_WHOLE_SAMPLES:
+		return "DMO_OUTPUT_STREAMF_WHOLE_SAMPLES"
+	case DMO_OUTPUT_STREAMF_SINGLE_SAMPLE_PER_BUFFER:
+		return "DMO_OUTPUT_STREAMF_SINGLE_SAMPLE_PER_BUFFER"
+	case DMO_OUTPUT_STREAMF_FIXED_SAMPLE_SIZE:
+		return "DMO_OUTPUT_STREAMF_FIXED_SAMPLE_SIZE"
+	case DMO_OUTPUT_STREAMF_DISCARDABLE:
+		return "DMO_OUTPUT_STREAMF_DISCARDABLE"
+	case DMO_OUTPUT_STREAMF_OPTIONAL:
+		return "DMO_OUTPUT_STREAMF_OPTIONAL"
+	default:
+		return fmt.Sprintf("DMO_OUTPUT_STREAM_INFO_FLAGS(%d)", int32(e))
+	}
+}
+
 // DMO_PROCESS_OUTPUT_FLAGS: https://learn.microsoft.com/windows/win32/api/mediaobj/ne-mediaobj-_dmo_process_output_flags
 type DMO_PROCESS_OUTPUT_FLAGS int32
 
@@ -80,11 +202,33 @@ const (
 	DMO_PROCESS_OUTPUT_DISCARD_WHEN_NO_BUFFER DMO_PROCESS_OUTPUT_FLAGS = 1
 )
 
+// String returns the DMO_PROCESS_OUTPUT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_PROCESS_OUTPUT_FLAGS) String() string {
+	switch e {
+	case DMO_PROCESS_OUTPUT_DISCARD_WHEN_NO_BUFFER:
+		return "DMO_PROCESS_OUTPUT_DISCARD_WHEN_NO_BUFFER"
+	default:
+		return fmt.Sprintf("DMO_PROCESS_OUTPUT_FLAGS(%d)", int32(e))
+	}
+}
+
 type DMO_QUALITY_STATUS_FLAGS int32
 
 const (
 	DMO_QUALITY_STATUS_ENABLED DMO_QUALITY_STATUS_FLAGS = 1
 )
+
+// String returns the DMO_QUALITY_STATUS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_QUALITY_STATUS_FLAGS) String() string {
+	switch e {
+	case DMO_QUALITY_STATUS_ENABLED:
+		return "DMO_QUALITY_STATUS_ENABLED"
+	default:
+		return fmt.Sprintf("DMO_QUALITY_STATUS_FLAGS(%d)", int32(e))
+	}
+}
 
 // DMO_SET_TYPE_FLAGS: https://learn.microsoft.com/windows/win32/api/mediaobj/ne-mediaobj-_dmo_set_type_flags
 type DMO_SET_TYPE_FLAGS int32
@@ -94,9 +238,33 @@ const (
 	DMO_SET_TYPEF_CLEAR     DMO_SET_TYPE_FLAGS = 2
 )
 
+// String returns the DMO_SET_TYPE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_SET_TYPE_FLAGS) String() string {
+	switch e {
+	case DMO_SET_TYPEF_TEST_ONLY:
+		return "DMO_SET_TYPEF_TEST_ONLY"
+	case DMO_SET_TYPEF_CLEAR:
+		return "DMO_SET_TYPEF_CLEAR"
+	default:
+		return fmt.Sprintf("DMO_SET_TYPE_FLAGS(%d)", int32(e))
+	}
+}
+
 // DMO_VIDEO_OUTPUT_STREAM_FLAGS: https://learn.microsoft.com/windows/win32/api/mediaobj/ne-mediaobj-_dmo_video_output_stream_flags
 type DMO_VIDEO_OUTPUT_STREAM_FLAGS int32
 
 const (
 	DMO_VOSF_NEEDS_PREVIOUS_SAMPLE DMO_VIDEO_OUTPUT_STREAM_FLAGS = 1
 )
+
+// String returns the DMO_VIDEO_OUTPUT_STREAM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DMO_VIDEO_OUTPUT_STREAM_FLAGS) String() string {
+	switch e {
+	case DMO_VOSF_NEEDS_PREVIOUS_SAMPLE:
+		return "DMO_VOSF_NEEDS_PREVIOUS_SAMPLE"
+	default:
+		return fmt.Sprintf("DMO_VIDEO_OUTPUT_STREAM_FLAGS(%d)", int32(e))
+	}
+}

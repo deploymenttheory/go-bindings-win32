@@ -4,6 +4,10 @@
 
 package biometricframework
 
+import (
+	"fmt"
+)
+
 // WINBIO_ANTI_SPOOF_POLICY_ACTION: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-anti-spoof-policy-action
 type WINBIO_ANTI_SPOOF_POLICY_ACTION int32
 
@@ -12,6 +16,21 @@ const (
 	WINBIO_ANTI_SPOOF_ENABLE  WINBIO_ANTI_SPOOF_POLICY_ACTION = 1
 	WINBIO_ANTI_SPOOF_REMOVE  WINBIO_ANTI_SPOOF_POLICY_ACTION = 2
 )
+
+// String returns the WINBIO_ANTI_SPOOF_POLICY_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINBIO_ANTI_SPOOF_POLICY_ACTION) String() string {
+	switch e {
+	case WINBIO_ANTI_SPOOF_DISABLE:
+		return "WINBIO_ANTI_SPOOF_DISABLE"
+	case WINBIO_ANTI_SPOOF_ENABLE:
+		return "WINBIO_ANTI_SPOOF_ENABLE"
+	case WINBIO_ANTI_SPOOF_REMOVE:
+		return "WINBIO_ANTI_SPOOF_REMOVE"
+	default:
+		return fmt.Sprintf("WINBIO_ANTI_SPOOF_POLICY_ACTION(%d)", int32(e))
+	}
+}
 
 // WINBIO_ASYNC_NOTIFICATION_METHOD: https://learn.microsoft.com/windows/win32/api/winbio/ne-winbio-winbio_async_notification_method
 type WINBIO_ASYNC_NOTIFICATION_METHOD int32
@@ -23,6 +42,23 @@ const (
 	WINBIO_ASYNC_NOTIFY_MAXIMUM_VALUE WINBIO_ASYNC_NOTIFICATION_METHOD = 3
 )
 
+// String returns the WINBIO_ASYNC_NOTIFICATION_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINBIO_ASYNC_NOTIFICATION_METHOD) String() string {
+	switch e {
+	case WINBIO_ASYNC_NOTIFY_NONE:
+		return "WINBIO_ASYNC_NOTIFY_NONE"
+	case WINBIO_ASYNC_NOTIFY_CALLBACK:
+		return "WINBIO_ASYNC_NOTIFY_CALLBACK"
+	case WINBIO_ASYNC_NOTIFY_MESSAGE:
+		return "WINBIO_ASYNC_NOTIFY_MESSAGE"
+	case WINBIO_ASYNC_NOTIFY_MAXIMUM_VALUE:
+		return "WINBIO_ASYNC_NOTIFY_MAXIMUM_VALUE"
+	default:
+		return fmt.Sprintf("WINBIO_ASYNC_NOTIFICATION_METHOD(%d)", int32(e))
+	}
+}
+
 // WINBIO_COMPONENT: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-component-constants
 type WINBIO_COMPONENT uint32
 
@@ -31,6 +67,21 @@ const (
 	WINBIO_COMPONENT_ENGINE  WINBIO_COMPONENT = 2
 	WINBIO_COMPONENT_STORAGE WINBIO_COMPONENT = 3
 )
+
+// String returns the WINBIO_COMPONENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINBIO_COMPONENT) String() string {
+	switch e {
+	case WINBIO_COMPONENT_SENSOR:
+		return "WINBIO_COMPONENT_SENSOR"
+	case WINBIO_COMPONENT_ENGINE:
+		return "WINBIO_COMPONENT_ENGINE"
+	case WINBIO_COMPONENT_STORAGE:
+		return "WINBIO_COMPONENT_STORAGE"
+	default:
+		return fmt.Sprintf("WINBIO_COMPONENT(%d)", uint32(e))
+	}
+}
 
 // WINBIO_CREDENTIAL_FORMAT: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-credential-format
 type WINBIO_CREDENTIAL_FORMAT int32
@@ -41,6 +92,21 @@ const (
 	WINBIO_PASSWORD_PROTECTED WINBIO_CREDENTIAL_FORMAT = 3
 )
 
+// String returns the WINBIO_CREDENTIAL_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINBIO_CREDENTIAL_FORMAT) String() string {
+	switch e {
+	case WINBIO_PASSWORD_GENERIC:
+		return "WINBIO_PASSWORD_GENERIC"
+	case WINBIO_PASSWORD_PACKED:
+		return "WINBIO_PASSWORD_PACKED"
+	case WINBIO_PASSWORD_PROTECTED:
+		return "WINBIO_PASSWORD_PROTECTED"
+	default:
+		return fmt.Sprintf("WINBIO_CREDENTIAL_FORMAT(%d)", int32(e))
+	}
+}
+
 // WINBIO_CREDENTIAL_STATE: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-credential-state
 type WINBIO_CREDENTIAL_STATE int32
 
@@ -49,6 +115,19 @@ const (
 	WINBIO_CREDENTIAL_SET     WINBIO_CREDENTIAL_STATE = 2
 )
 
+// String returns the WINBIO_CREDENTIAL_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINBIO_CREDENTIAL_STATE) String() string {
+	switch e {
+	case WINBIO_CREDENTIAL_NOT_SET:
+		return "WINBIO_CREDENTIAL_NOT_SET"
+	case WINBIO_CREDENTIAL_SET:
+		return "WINBIO_CREDENTIAL_SET"
+	default:
+		return fmt.Sprintf("WINBIO_CREDENTIAL_STATE(%d)", int32(e))
+	}
+}
+
 // WINBIO_CREDENTIAL_TYPE: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-credential-type
 type WINBIO_CREDENTIAL_TYPE int32
 
@@ -56,6 +135,19 @@ const (
 	WINBIO_CREDENTIAL_PASSWORD WINBIO_CREDENTIAL_TYPE = 1
 	WINBIO_CREDENTIAL_ALL      WINBIO_CREDENTIAL_TYPE = -1
 )
+
+// String returns the WINBIO_CREDENTIAL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINBIO_CREDENTIAL_TYPE) String() string {
+	switch e {
+	case WINBIO_CREDENTIAL_PASSWORD:
+		return "WINBIO_CREDENTIAL_PASSWORD"
+	case WINBIO_CREDENTIAL_ALL:
+		return "WINBIO_CREDENTIAL_ALL"
+	default:
+		return fmt.Sprintf("WINBIO_CREDENTIAL_TYPE(%d)", int32(e))
+	}
+}
 
 type WINBIO_ESS_STATE_FLAGS int32
 
@@ -78,6 +170,47 @@ const (
 	WINBIO_ESS_SOURCE_DEFAULT                                WINBIO_ESS_STATE_FLAGS = 32768
 )
 
+// String returns the WINBIO_ESS_STATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINBIO_ESS_STATE_FLAGS) String() string {
+	switch e {
+	case WINBIO_ESS_REQUIRES_TPM2:
+		return "WINBIO_ESS_REQUIRES_TPM2"
+	case WINBIO_ESS_REQUIRES_VBS_CAPABLE:
+		return "WINBIO_ESS_REQUIRES_VBS_CAPABLE"
+	case WINBIO_ESS_REQUIRES_NON_VBS_WINDOWS_HELLO_ABSENCE:
+		return "WINBIO_ESS_REQUIRES_NON_VBS_WINDOWS_HELLO_ABSENCE"
+	case WINBIO_ESS_REQUIRES_VBS_WINDOWS_HELLO:
+		return "WINBIO_ESS_REQUIRES_VBS_WINDOWS_HELLO"
+	case WINBIO_ESS_REQUIRES_VBS_RUNNING:
+		return "WINBIO_ESS_REQUIRES_VBS_RUNNING"
+	case WINBIO_ESS_REQUIRES_VBS_ENCRYPTION_KEY:
+		return "WINBIO_ESS_REQUIRES_VBS_ENCRYPTION_KEY"
+	case WINBIO_ESS_REQUIRES_ENABLEMENT:
+		return "WINBIO_ESS_REQUIRES_ENABLEMENT"
+	case WINBIO_ESS_MANAGED_BY_POLICY:
+		return "WINBIO_ESS_MANAGED_BY_POLICY"
+	case WINBIO_ESS_REQUIRES_NON_VBS_BIOMETRIC_ENROLLMENT_ABSENCE:
+		return "WINBIO_ESS_REQUIRES_NON_VBS_BIOMETRIC_ENROLLMENT_ABSENCE"
+	case WINBIO_ESS_REQUIRES_VBS_BIOMETRIC_ENROLLMENT:
+		return "WINBIO_ESS_REQUIRES_VBS_BIOMETRIC_ENROLLMENT"
+	case WINBIO_ESS_REQUIRES_FACE_SENSOR:
+		return "WINBIO_ESS_REQUIRES_FACE_SENSOR"
+	case WINBIO_ESS_REQUIRES_FPR_SENSOR:
+		return "WINBIO_ESS_REQUIRES_FPR_SENSOR"
+	case WINBIO_ESS_REQUIRES_ISOLATED_PROCESS:
+		return "WINBIO_ESS_REQUIRES_ISOLATED_PROCESS"
+	case WINBIO_ESS_BLOCKED_NON_ESS_FPR:
+		return "WINBIO_ESS_BLOCKED_NON_ESS_FPR"
+	case WINBIO_ESS_BLOCKED_NON_ESS_CAMERA:
+		return "WINBIO_ESS_BLOCKED_NON_ESS_CAMERA"
+	case WINBIO_ESS_SOURCE_DEFAULT:
+		return "WINBIO_ESS_SOURCE_DEFAULT"
+	default:
+		return fmt.Sprintf("WINBIO_ESS_STATE_FLAGS(%d)", int32(e))
+	}
+}
+
 // WINBIO_POLICY_SOURCE: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-policy-source
 type WINBIO_POLICY_SOURCE int32
 
@@ -88,6 +221,23 @@ const (
 	WINBIO_POLICY_ADMIN   WINBIO_POLICY_SOURCE = 3
 )
 
+// String returns the WINBIO_POLICY_SOURCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINBIO_POLICY_SOURCE) String() string {
+	switch e {
+	case WINBIO_POLICY_UNKNOWN:
+		return "WINBIO_POLICY_UNKNOWN"
+	case WINBIO_POLICY_DEFAULT:
+		return "WINBIO_POLICY_DEFAULT"
+	case WINBIO_POLICY_LOCAL:
+		return "WINBIO_POLICY_LOCAL"
+	case WINBIO_POLICY_ADMIN:
+		return "WINBIO_POLICY_ADMIN"
+	default:
+		return fmt.Sprintf("WINBIO_POLICY_SOURCE(%d)", int32(e))
+	}
+}
+
 // WINBIO_POOL: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-pool-constants
 type WINBIO_POOL uint32
 
@@ -95,6 +245,19 @@ const (
 	WINBIO_POOL_SYSTEM  WINBIO_POOL = 1
 	WINBIO_POOL_PRIVATE WINBIO_POOL = 2
 )
+
+// String returns the WINBIO_POOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINBIO_POOL) String() string {
+	switch e {
+	case WINBIO_POOL_SYSTEM:
+		return "WINBIO_POOL_SYSTEM"
+	case WINBIO_POOL_PRIVATE:
+		return "WINBIO_POOL_PRIVATE"
+	default:
+		return fmt.Sprintf("WINBIO_POOL(%d)", uint32(e))
+	}
+}
 
 // WINBIO_SETTING_SOURCE: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-setting-source-constants
 type WINBIO_SETTING_SOURCE uint32
@@ -105,3 +268,20 @@ const (
 	WINBIO_SETTING_SOURCE_LOCAL   WINBIO_SETTING_SOURCE = 3
 	WINBIO_SETTING_SOURCE_POLICY  WINBIO_SETTING_SOURCE = 2
 )
+
+// String returns the WINBIO_SETTING_SOURCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINBIO_SETTING_SOURCE) String() string {
+	switch e {
+	case WINBIO_SETTING_SOURCE_INVALID:
+		return "WINBIO_SETTING_SOURCE_INVALID"
+	case WINBIO_SETTING_SOURCE_DEFAULT:
+		return "WINBIO_SETTING_SOURCE_DEFAULT"
+	case WINBIO_SETTING_SOURCE_LOCAL:
+		return "WINBIO_SETTING_SOURCE_LOCAL"
+	case WINBIO_SETTING_SOURCE_POLICY:
+		return "WINBIO_SETTING_SOURCE_POLICY"
+	default:
+		return fmt.Sprintf("WINBIO_SETTING_SOURCE(%d)", uint32(e))
+	}
+}

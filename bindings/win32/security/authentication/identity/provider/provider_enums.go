@@ -4,6 +4,11 @@
 
 package provider
 
+import (
+	"fmt"
+	"strings"
+)
+
 type ACCOUNT_STATE int32
 
 const (
@@ -12,6 +17,21 @@ const (
 	CONNECT_COMPLETED ACCOUNT_STATE = 2
 )
 
+// String returns the ACCOUNT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACCOUNT_STATE) String() string {
+	switch e {
+	case NOT_CONNECTED:
+		return "NOT_CONNECTED"
+	case CONNECTING:
+		return "CONNECTING"
+	case CONNECT_COMPLETED:
+		return "CONNECT_COMPLETED"
+	default:
+		return fmt.Sprintf("ACCOUNT_STATE(%d)", int32(e))
+	}
+}
+
 // IDENTITY_TYPE: https://learn.microsoft.com/windows/win32/api/sdoias/ne-sdoias-identity_type
 type IDENTITY_TYPE int32
 
@@ -19,6 +39,19 @@ const (
 	IDENTITIES_ALL     IDENTITY_TYPE = 0
 	IDENTITIES_ME_ONLY IDENTITY_TYPE = 1
 )
+
+// String returns the IDENTITY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IDENTITY_TYPE) String() string {
+	switch e {
+	case IDENTITIES_ALL:
+		return "IDENTITIES_ALL"
+	case IDENTITIES_ME_ONLY:
+		return "IDENTITIES_ME_ONLY"
+	default:
+		return fmt.Sprintf("IDENTITY_TYPE(%d)", int32(e))
+	}
+}
 
 type IDENTITY_URL int32
 
@@ -32,6 +65,30 @@ const (
 	IDENTITY_URL_CONNECT_WIZARD         IDENTITY_URL = 6
 )
 
+// String returns the IDENTITY_URL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IDENTITY_URL) String() string {
+	switch e {
+	case IDENTITY_URL_CREATE_ACCOUNT_WIZARD:
+		return "IDENTITY_URL_CREATE_ACCOUNT_WIZARD"
+	case IDENTITY_URL_SIGN_IN_WIZARD:
+		return "IDENTITY_URL_SIGN_IN_WIZARD"
+	case IDENTITY_URL_CHANGE_PASSWORD_WIZARD:
+		return "IDENTITY_URL_CHANGE_PASSWORD_WIZARD"
+	case IDENTITY_URL_IFEXISTS_WIZARD:
+		return "IDENTITY_URL_IFEXISTS_WIZARD"
+	case IDENTITY_URL_ACCOUNT_SETTINGS:
+		return "IDENTITY_URL_ACCOUNT_SETTINGS"
+	case IDENTITY_URL_RESTORE_WIZARD:
+		return "IDENTITY_URL_RESTORE_WIZARD"
+	case IDENTITY_URL_CONNECT_WIZARD:
+		return "IDENTITY_URL_CONNECT_WIZARD"
+	default:
+		return fmt.Sprintf("IDENTITY_URL(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IdentityUpdateEvent int32
 
 const (
@@ -44,3 +101,37 @@ const (
 	IDENTITY_CONNECTED     IdentityUpdateEvent = 64
 	IDENTITY_DISCONNECTED  IdentityUpdateEvent = 128
 )
+
+// String returns the IdentityUpdateEvent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IdentityUpdateEvent) String() string {
+	var parts []string
+	if e&IDENTITY_ASSOCIATED != 0 {
+		parts = append(parts, "IDENTITY_ASSOCIATED")
+	}
+	if e&IDENTITY_DISASSOCIATED != 0 {
+		parts = append(parts, "IDENTITY_DISASSOCIATED")
+	}
+	if e&IDENTITY_CREATED != 0 {
+		parts = append(parts, "IDENTITY_CREATED")
+	}
+	if e&IDENTITY_IMPORTED != 0 {
+		parts = append(parts, "IDENTITY_IMPORTED")
+	}
+	if e&IDENTITY_DELETED != 0 {
+		parts = append(parts, "IDENTITY_DELETED")
+	}
+	if e&IDENTITY_PROPCHANGED != 0 {
+		parts = append(parts, "IDENTITY_PROPCHANGED")
+	}
+	if e&IDENTITY_CONNECTED != 0 {
+		parts = append(parts, "IDENTITY_CONNECTED")
+	}
+	if e&IDENTITY_DISCONNECTED != 0 {
+		parts = append(parts, "IDENTITY_DISCONNECTED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

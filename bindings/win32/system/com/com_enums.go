@@ -4,6 +4,12 @@
 
 package com
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type ADVANCED_FEATURE_FLAGS uint16
 
 const (
@@ -21,6 +27,52 @@ const (
 	FADF_RESERVED    ADVANCED_FEATURE_FLAGS = 61448
 )
 
+// String returns the ADVANCED_FEATURE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADVANCED_FEATURE_FLAGS) String() string {
+	var parts []string
+	if e&FADF_AUTO != 0 {
+		parts = append(parts, "FADF_AUTO")
+	}
+	if e&FADF_STATIC != 0 {
+		parts = append(parts, "FADF_STATIC")
+	}
+	if e&FADF_EMBEDDED != 0 {
+		parts = append(parts, "FADF_EMBEDDED")
+	}
+	if e&FADF_FIXEDSIZE != 0 {
+		parts = append(parts, "FADF_FIXEDSIZE")
+	}
+	if e&FADF_RECORD != 0 {
+		parts = append(parts, "FADF_RECORD")
+	}
+	if e&FADF_HAVEIID != 0 {
+		parts = append(parts, "FADF_HAVEIID")
+	}
+	if e&FADF_HAVEVARTYPE != 0 {
+		parts = append(parts, "FADF_HAVEVARTYPE")
+	}
+	if e&FADF_BSTR != 0 {
+		parts = append(parts, "FADF_BSTR")
+	}
+	if e&FADF_UNKNOWN != 0 {
+		parts = append(parts, "FADF_UNKNOWN")
+	}
+	if e&FADF_DISPATCH != 0 {
+		parts = append(parts, "FADF_DISPATCH")
+	}
+	if e&FADF_VARIANT != 0 {
+		parts = append(parts, "FADF_VARIANT")
+	}
+	if e&FADF_RESERVED != 0 {
+		parts = append(parts, "FADF_RESERVED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // ADVF: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-advf
 type ADVF int32
 
@@ -34,6 +86,29 @@ const (
 	ADVFCACHE_ONSAVE       ADVF = 32
 )
 
+// String returns the ADVF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADVF) String() string {
+	switch e {
+	case ADVF_NODATA:
+		return "ADVF_NODATA"
+	case ADVF_PRIMEFIRST:
+		return "ADVF_PRIMEFIRST"
+	case ADVF_ONLYONCE:
+		return "ADVF_ONLYONCE"
+	case ADVF_DATAONSTOP:
+		return "ADVF_DATAONSTOP"
+	case ADVFCACHE_NOHANDLER:
+		return "ADVFCACHE_NOHANDLER"
+	case ADVFCACHE_FORCEBUILTIN:
+		return "ADVFCACHE_FORCEBUILTIN"
+	case ADVFCACHE_ONSAVE:
+		return "ADVFCACHE_ONSAVE"
+	default:
+		return fmt.Sprintf("ADVF(%d)", int32(e))
+	}
+}
+
 // APTTYPE: https://learn.microsoft.com/windows/win32/api/objidlbase/ne-objidlbase-apttype
 type APTTYPE int32
 
@@ -44,6 +119,25 @@ const (
 	APTTYPE_NA      APTTYPE = 2
 	APTTYPE_MAINSTA APTTYPE = 3
 )
+
+// String returns the APTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APTTYPE) String() string {
+	switch e {
+	case APTTYPE_CURRENT:
+		return "APTTYPE_CURRENT"
+	case APTTYPE_STA:
+		return "APTTYPE_STA"
+	case APTTYPE_MTA:
+		return "APTTYPE_MTA"
+	case APTTYPE_NA:
+		return "APTTYPE_NA"
+	case APTTYPE_MAINSTA:
+		return "APTTYPE_MAINSTA"
+	default:
+		return fmt.Sprintf("APTTYPE(%d)", int32(e))
+	}
+}
 
 // APTTYPEQUALIFIER: https://learn.microsoft.com/windows/win32/api/objidlbase/ne-objidlbase-apttypequalifier
 type APTTYPEQUALIFIER int32
@@ -59,12 +153,50 @@ const (
 	APTTYPEQUALIFIER_RESERVED_1         APTTYPEQUALIFIER = 7
 )
 
+// String returns the APTTYPEQUALIFIER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APTTYPEQUALIFIER) String() string {
+	switch e {
+	case APTTYPEQUALIFIER_NONE:
+		return "APTTYPEQUALIFIER_NONE"
+	case APTTYPEQUALIFIER_IMPLICIT_MTA:
+		return "APTTYPEQUALIFIER_IMPLICIT_MTA"
+	case APTTYPEQUALIFIER_NA_ON_MTA:
+		return "APTTYPEQUALIFIER_NA_ON_MTA"
+	case APTTYPEQUALIFIER_NA_ON_STA:
+		return "APTTYPEQUALIFIER_NA_ON_STA"
+	case APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA:
+		return "APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA"
+	case APTTYPEQUALIFIER_NA_ON_MAINSTA:
+		return "APTTYPEQUALIFIER_NA_ON_MAINSTA"
+	case APTTYPEQUALIFIER_APPLICATION_STA:
+		return "APTTYPEQUALIFIER_APPLICATION_STA"
+	case APTTYPEQUALIFIER_RESERVED_1:
+		return "APTTYPEQUALIFIER_RESERVED_1"
+	default:
+		return fmt.Sprintf("APTTYPEQUALIFIER(%d)", int32(e))
+	}
+}
+
 type ApplicationType int32
 
 const (
 	ServerApplication  ApplicationType = 0
 	LibraryApplication ApplicationType = 1
 )
+
+// String returns the ApplicationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ApplicationType) String() string {
+	switch e {
+	case ServerApplication:
+		return "ServerApplication"
+	case LibraryApplication:
+		return "LibraryApplication"
+	default:
+		return fmt.Sprintf("ApplicationType(%d)", int32(e))
+	}
+}
 
 type BINDINFOF int32
 
@@ -73,6 +205,19 @@ const (
 	BINDINFOF_URLENCODEDEXTRAINFO BINDINFOF = 2
 )
 
+// String returns the BINDINFOF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BINDINFOF) String() string {
+	switch e {
+	case BINDINFOF_URLENCODESTGMEDDATA:
+		return "BINDINFOF_URLENCODESTGMEDDATA"
+	case BINDINFOF_URLENCODEDEXTRAINFO:
+		return "BINDINFOF_URLENCODEDEXTRAINFO"
+	default:
+		return fmt.Sprintf("BINDINFOF(%d)", int32(e))
+	}
+}
+
 // BIND_FLAGS: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-bind_flags
 type BIND_FLAGS int32
 
@@ -80,6 +225,19 @@ const (
 	BIND_MAYBOTHERUSER     BIND_FLAGS = 1
 	BIND_JUSTTESTEXISTENCE BIND_FLAGS = 2
 )
+
+// String returns the BIND_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BIND_FLAGS) String() string {
+	switch e {
+	case BIND_MAYBOTHERUSER:
+		return "BIND_MAYBOTHERUSER"
+	case BIND_JUSTTESTEXISTENCE:
+		return "BIND_JUSTTESTEXISTENCE"
+	default:
+		return fmt.Sprintf("BIND_FLAGS(%d)", int32(e))
+	}
+}
 
 // CALLCONV: https://learn.microsoft.com/windows/win32/api/oaidl/ne-oaidl-callconv
 type CALLCONV int32
@@ -98,6 +256,35 @@ const (
 	CC_MAX        CALLCONV = 9
 )
 
+// String returns the CALLCONV constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLCONV) String() string {
+	switch e {
+	case CC_FASTCALL:
+		return "CC_FASTCALL"
+	case CC_CDECL:
+		return "CC_CDECL"
+	case CC_MSCPASCAL:
+		return "CC_MSCPASCAL"
+	case CC_MACPASCAL:
+		return "CC_MACPASCAL"
+	case CC_STDCALL:
+		return "CC_STDCALL"
+	case CC_FPFASTCALL:
+		return "CC_FPFASTCALL"
+	case CC_SYSCALL:
+		return "CC_SYSCALL"
+	case CC_MPWCDECL:
+		return "CC_MPWCDECL"
+	case CC_MPWPASCAL:
+		return "CC_MPWPASCAL"
+	case CC_MAX:
+		return "CC_MAX"
+	default:
+		return fmt.Sprintf("CALLCONV(%d)", int32(e))
+	}
+}
+
 // CALLTYPE: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-calltype
 type CALLTYPE int32
 
@@ -109,7 +296,27 @@ const (
 	CALLTYPE_ASYNC_CALLPENDING    CALLTYPE = 5
 )
 
+// String returns the CALLTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLTYPE) String() string {
+	switch e {
+	case CALLTYPE_TOPLEVEL:
+		return "CALLTYPE_TOPLEVEL"
+	case CALLTYPE_NESTED:
+		return "CALLTYPE_NESTED"
+	case CALLTYPE_ASYNC:
+		return "CALLTYPE_ASYNC"
+	case CALLTYPE_TOPLEVEL_CALLPENDING:
+		return "CALLTYPE_TOPLEVEL_CALLPENDING"
+	case CALLTYPE_ASYNC_CALLPENDING:
+		return "CALLTYPE_ASYNC_CALLPENDING"
+	default:
+		return fmt.Sprintf("CALLTYPE(%d)", int32(e))
+	}
+}
+
 // CLSCTX: https://learn.microsoft.com/windows/win32/api/wtypesbase/ne-wtypesbase-clsctx
+// Bitmask — values may be combined with |.
 type CLSCTX uint32
 
 const (
@@ -147,7 +354,114 @@ const (
 	CLSCTX_SERVER                                    CLSCTX = 21
 )
 
+// String returns the CLSCTX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLSCTX) String() string {
+	var parts []string
+	if e&CLSCTX_INPROC_SERVER != 0 {
+		parts = append(parts, "CLSCTX_INPROC_SERVER")
+	}
+	if e&CLSCTX_INPROC_HANDLER != 0 {
+		parts = append(parts, "CLSCTX_INPROC_HANDLER")
+	}
+	if e&CLSCTX_LOCAL_SERVER != 0 {
+		parts = append(parts, "CLSCTX_LOCAL_SERVER")
+	}
+	if e&CLSCTX_INPROC_SERVER16 != 0 {
+		parts = append(parts, "CLSCTX_INPROC_SERVER16")
+	}
+	if e&CLSCTX_REMOTE_SERVER != 0 {
+		parts = append(parts, "CLSCTX_REMOTE_SERVER")
+	}
+	if e&CLSCTX_INPROC_HANDLER16 != 0 {
+		parts = append(parts, "CLSCTX_INPROC_HANDLER16")
+	}
+	if e&CLSCTX_RESERVED1 != 0 {
+		parts = append(parts, "CLSCTX_RESERVED1")
+	}
+	if e&CLSCTX_RESERVED2 != 0 {
+		parts = append(parts, "CLSCTX_RESERVED2")
+	}
+	if e&CLSCTX_RESERVED3 != 0 {
+		parts = append(parts, "CLSCTX_RESERVED3")
+	}
+	if e&CLSCTX_RESERVED4 != 0 {
+		parts = append(parts, "CLSCTX_RESERVED4")
+	}
+	if e&CLSCTX_NO_CODE_DOWNLOAD != 0 {
+		parts = append(parts, "CLSCTX_NO_CODE_DOWNLOAD")
+	}
+	if e&CLSCTX_RESERVED5 != 0 {
+		parts = append(parts, "CLSCTX_RESERVED5")
+	}
+	if e&CLSCTX_NO_CUSTOM_MARSHAL != 0 {
+		parts = append(parts, "CLSCTX_NO_CUSTOM_MARSHAL")
+	}
+	if e&CLSCTX_ENABLE_CODE_DOWNLOAD != 0 {
+		parts = append(parts, "CLSCTX_ENABLE_CODE_DOWNLOAD")
+	}
+	if e&CLSCTX_NO_FAILURE_LOG != 0 {
+		parts = append(parts, "CLSCTX_NO_FAILURE_LOG")
+	}
+	if e&CLSCTX_DISABLE_AAA != 0 {
+		parts = append(parts, "CLSCTX_DISABLE_AAA")
+	}
+	if e&CLSCTX_ENABLE_AAA != 0 {
+		parts = append(parts, "CLSCTX_ENABLE_AAA")
+	}
+	if e&CLSCTX_FROM_DEFAULT_CONTEXT != 0 {
+		parts = append(parts, "CLSCTX_FROM_DEFAULT_CONTEXT")
+	}
+	if e&CLSCTX_ACTIVATE_X86_SERVER != 0 {
+		parts = append(parts, "CLSCTX_ACTIVATE_X86_SERVER")
+	}
+	if e&CLSCTX_ACTIVATE_32_BIT_SERVER != 0 {
+		parts = append(parts, "CLSCTX_ACTIVATE_32_BIT_SERVER")
+	}
+	if e&CLSCTX_ACTIVATE_64_BIT_SERVER != 0 {
+		parts = append(parts, "CLSCTX_ACTIVATE_64_BIT_SERVER")
+	}
+	if e&CLSCTX_ENABLE_CLOAKING != 0 {
+		parts = append(parts, "CLSCTX_ENABLE_CLOAKING")
+	}
+	if e&CLSCTX_APPCONTAINER != 0 {
+		parts = append(parts, "CLSCTX_APPCONTAINER")
+	}
+	if e&CLSCTX_ACTIVATE_AAA_AS_IU != 0 {
+		parts = append(parts, "CLSCTX_ACTIVATE_AAA_AS_IU")
+	}
+	if e&CLSCTX_RESERVED6 != 0 {
+		parts = append(parts, "CLSCTX_RESERVED6")
+	}
+	if e&CLSCTX_ACTIVATE_ARM32_SERVER != 0 {
+		parts = append(parts, "CLSCTX_ACTIVATE_ARM32_SERVER")
+	}
+	if e&CLSCTX_ALLOW_LOWER_TRUST_REGISTRATION != 0 {
+		parts = append(parts, "CLSCTX_ALLOW_LOWER_TRUST_REGISTRATION")
+	}
+	if e&CLSCTX_SERVER_MUST_BE_EQUAL_OR_GREATER_PRIVILEGE != 0 {
+		parts = append(parts, "CLSCTX_SERVER_MUST_BE_EQUAL_OR_GREATER_PRIVILEGE")
+	}
+	if e&CLSCTX_DO_NOT_ELEVATE_SERVER != 0 {
+		parts = append(parts, "CLSCTX_DO_NOT_ELEVATE_SERVER")
+	}
+	if e&CLSCTX_PS_DLL != 0 {
+		parts = append(parts, "CLSCTX_PS_DLL")
+	}
+	if e&CLSCTX_ALL != 0 {
+		parts = append(parts, "CLSCTX_ALL")
+	}
+	if e&CLSCTX_SERVER != 0 {
+		parts = append(parts, "CLSCTX_SERVER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // COINIT: https://learn.microsoft.com/windows/win32/api/objbase/ne-objbase-coinit
+// Bitmask — values may be combined with |.
 type COINIT int32
 
 const (
@@ -157,11 +471,41 @@ const (
 	COINIT_SPEED_OVER_MEMORY COINIT = 8
 )
 
+// String returns the COINIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COINIT) String() string {
+	var parts []string
+	if e&COINIT_APARTMENTTHREADED != 0 {
+		parts = append(parts, "COINIT_APARTMENTTHREADED")
+	}
+	if e&COINIT_DISABLE_OLE1DDE != 0 {
+		parts = append(parts, "COINIT_DISABLE_OLE1DDE")
+	}
+	if e&COINIT_SPEED_OVER_MEMORY != 0 {
+		parts = append(parts, "COINIT_SPEED_OVER_MEMORY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type COINITBASE int32
 
 const (
 	COINITBASE_MULTITHREADED COINITBASE = 0
 )
+
+// String returns the COINITBASE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COINITBASE) String() string {
+	switch e {
+	case COINITBASE_MULTITHREADED:
+		return "COINITBASE_MULTITHREADED"
+	default:
+		return fmt.Sprintf("COINITBASE(%d)", int32(e))
+	}
+}
 
 // COMSD: https://learn.microsoft.com/windows/win32/api/objbase/ne-objbase-comsd
 type COMSD int32
@@ -173,7 +517,25 @@ const (
 	SD_ACCESSRESTRICTIONS COMSD = 3
 )
 
+// String returns the COMSD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMSD) String() string {
+	switch e {
+	case SD_LAUNCHPERMISSIONS:
+		return "SD_LAUNCHPERMISSIONS"
+	case SD_ACCESSPERMISSIONS:
+		return "SD_ACCESSPERMISSIONS"
+	case SD_LAUNCHRESTRICTIONS:
+		return "SD_LAUNCHRESTRICTIONS"
+	case SD_ACCESSRESTRICTIONS:
+		return "SD_ACCESSRESTRICTIONS"
+	default:
+		return fmt.Sprintf("COMSD(%d)", int32(e))
+	}
+}
+
 // COWAIT_FLAGS: https://learn.microsoft.com/windows/win32/api/combaseapi/ne-combaseapi-cowait_flags
+// Bitmask — values may be combined with |.
 type COWAIT_FLAGS int32
 
 const (
@@ -184,6 +546,31 @@ const (
 	COWAIT_DISPATCH_CALLS           COWAIT_FLAGS = 8
 	COWAIT_DISPATCH_WINDOW_MESSAGES COWAIT_FLAGS = 16
 )
+
+// String returns the COWAIT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COWAIT_FLAGS) String() string {
+	var parts []string
+	if e&COWAIT_WAITALL != 0 {
+		parts = append(parts, "COWAIT_WAITALL")
+	}
+	if e&COWAIT_ALERTABLE != 0 {
+		parts = append(parts, "COWAIT_ALERTABLE")
+	}
+	if e&COWAIT_INPUTAVAILABLE != 0 {
+		parts = append(parts, "COWAIT_INPUTAVAILABLE")
+	}
+	if e&COWAIT_DISPATCH_CALLS != 0 {
+		parts = append(parts, "COWAIT_DISPATCH_CALLS")
+	}
+	if e&COWAIT_DISPATCH_WINDOW_MESSAGES != 0 {
+		parts = append(parts, "COWAIT_DISPATCH_WINDOW_MESSAGES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // CO_MARSHALING_CONTEXT_ATTRIBUTES: https://learn.microsoft.com/windows/win32/api/objidlbase/ne-objidlbase-co_marshaling_context_attributes
 type CO_MARSHALING_CONTEXT_ATTRIBUTES int32
@@ -210,7 +597,55 @@ const (
 	CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_18 CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483631
 )
 
+// String returns the CO_MARSHALING_CONTEXT_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CO_MARSHALING_CONTEXT_ATTRIBUTES) String() string {
+	switch e {
+	case CO_MARSHALING_SOURCE_IS_APP_CONTAINER:
+		return "CO_MARSHALING_SOURCE_IS_APP_CONTAINER"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_1:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_1"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_2:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_2"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_3:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_3"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_4:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_4"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_5:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_5"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_6:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_6"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_7:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_7"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_8:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_8"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_9:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_9"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_10:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_10"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_11:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_11"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_12:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_12"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_13:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_13"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_14:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_14"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_15:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_15"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_16:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_16"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_17:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_17"
+	case CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_18:
+		return "CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_18"
+	default:
+		return fmt.Sprintf("CO_MARSHALING_CONTEXT_ATTRIBUTES(%d)", int32(e))
+	}
+}
+
 // CWMO_FLAGS: https://learn.microsoft.com/windows/win32/api/combaseapi/ne-combaseapi-cwmo_flags
+// Bitmask — values may be combined with |.
 type CWMO_FLAGS int32
 
 const (
@@ -218,6 +653,22 @@ const (
 	CWMO_DISPATCH_CALLS           CWMO_FLAGS = 1
 	CWMO_DISPATCH_WINDOW_MESSAGES CWMO_FLAGS = 2
 )
+
+// String returns the CWMO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CWMO_FLAGS) String() string {
+	var parts []string
+	if e&CWMO_DISPATCH_CALLS != 0 {
+		parts = append(parts, "CWMO_DISPATCH_CALLS")
+	}
+	if e&CWMO_DISPATCH_WINDOW_MESSAGES != 0 {
+		parts = append(parts, "CWMO_DISPATCH_WINDOW_MESSAGES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DATADIR: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-datadir
 type DATADIR int32
@@ -227,6 +678,19 @@ const (
 	DATADIR_SET DATADIR = 2
 )
 
+// String returns the DATADIR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DATADIR) String() string {
+	switch e {
+	case DATADIR_GET:
+		return "DATADIR_GET"
+	case DATADIR_SET:
+		return "DATADIR_SET"
+	default:
+		return fmt.Sprintf("DATADIR(%d)", int32(e))
+	}
+}
+
 type DCOM_CALL_STATE int32
 
 const (
@@ -234,6 +698,21 @@ const (
 	DCOM_CALL_COMPLETE DCOM_CALL_STATE = 1
 	DCOM_CALL_CANCELED DCOM_CALL_STATE = 2
 )
+
+// String returns the DCOM_CALL_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DCOM_CALL_STATE) String() string {
+	switch e {
+	case DCOM_NONE:
+		return "DCOM_NONE"
+	case DCOM_CALL_COMPLETE:
+		return "DCOM_CALL_COMPLETE"
+	case DCOM_CALL_CANCELED:
+		return "DCOM_CALL_CANCELED"
+	default:
+		return fmt.Sprintf("DCOM_CALL_STATE(%d)", int32(e))
+	}
+}
 
 // DESCKIND: https://learn.microsoft.com/windows/win32/api/oaidl/ne-oaidl-desckind
 type DESCKIND int32
@@ -247,6 +726,28 @@ const (
 	DESCKIND_MAX            DESCKIND = 5
 )
 
+// String returns the DESCKIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DESCKIND) String() string {
+	switch e {
+	case DESCKIND_NONE:
+		return "DESCKIND_NONE"
+	case DESCKIND_FUNCDESC:
+		return "DESCKIND_FUNCDESC"
+	case DESCKIND_VARDESC:
+		return "DESCKIND_VARDESC"
+	case DESCKIND_TYPECOMP:
+		return "DESCKIND_TYPECOMP"
+	case DESCKIND_IMPLICITAPPOBJ:
+		return "DESCKIND_IMPLICITAPPOBJ"
+	case DESCKIND_MAX:
+		return "DESCKIND_MAX"
+	default:
+		return fmt.Sprintf("DESCKIND(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DISPATCH_FLAGS uint16
 
 const (
@@ -255,6 +756,28 @@ const (
 	DISPATCH_PROPERTYPUT    DISPATCH_FLAGS = 4
 	DISPATCH_PROPERTYPUTREF DISPATCH_FLAGS = 8
 )
+
+// String returns the DISPATCH_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPATCH_FLAGS) String() string {
+	var parts []string
+	if e&DISPATCH_METHOD != 0 {
+		parts = append(parts, "DISPATCH_METHOD")
+	}
+	if e&DISPATCH_PROPERTYGET != 0 {
+		parts = append(parts, "DISPATCH_PROPERTYGET")
+	}
+	if e&DISPATCH_PROPERTYPUT != 0 {
+		parts = append(parts, "DISPATCH_PROPERTYPUT")
+	}
+	if e&DISPATCH_PROPERTYPUTREF != 0 {
+		parts = append(parts, "DISPATCH_PROPERTYPUTREF")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DVASPECT: https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-dvaspect
 type DVASPECT uint32
@@ -267,6 +790,27 @@ const (
 	DVASPECT_OPAQUE      DVASPECT = 16
 	DVASPECT_TRANSPARENT DVASPECT = 32
 )
+
+// String returns the DVASPECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVASPECT) String() string {
+	switch e {
+	case DVASPECT_CONTENT:
+		return "DVASPECT_CONTENT"
+	case DVASPECT_THUMBNAIL:
+		return "DVASPECT_THUMBNAIL"
+	case DVASPECT_ICON:
+		return "DVASPECT_ICON"
+	case DVASPECT_DOCPRINT:
+		return "DVASPECT_DOCPRINT"
+	case DVASPECT_OPAQUE:
+		return "DVASPECT_OPAQUE"
+	case DVASPECT_TRANSPARENT:
+		return "DVASPECT_TRANSPARENT"
+	default:
+		return fmt.Sprintf("DVASPECT(%d)", uint32(e))
+	}
+}
 
 // EOLE_AUTHENTICATION_CAPABILITIES: https://learn.microsoft.com/windows/win32/api/objidlbase/ne-objidlbase-eole_authentication_capabilities
 type EOLE_AUTHENTICATION_CAPABILITIES int32
@@ -290,6 +834,47 @@ const (
 	EOAC_RESERVED1         EOLE_AUTHENTICATION_CAPABILITIES = 16384
 )
 
+// String returns the EOLE_AUTHENTICATION_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EOLE_AUTHENTICATION_CAPABILITIES) String() string {
+	switch e {
+	case EOAC_NONE:
+		return "EOAC_NONE"
+	case EOAC_MUTUAL_AUTH:
+		return "EOAC_MUTUAL_AUTH"
+	case EOAC_STATIC_CLOAKING:
+		return "EOAC_STATIC_CLOAKING"
+	case EOAC_DYNAMIC_CLOAKING:
+		return "EOAC_DYNAMIC_CLOAKING"
+	case EOAC_ANY_AUTHORITY:
+		return "EOAC_ANY_AUTHORITY"
+	case EOAC_MAKE_FULLSIC:
+		return "EOAC_MAKE_FULLSIC"
+	case EOAC_DEFAULT:
+		return "EOAC_DEFAULT"
+	case EOAC_SECURE_REFS:
+		return "EOAC_SECURE_REFS"
+	case EOAC_ACCESS_CONTROL:
+		return "EOAC_ACCESS_CONTROL"
+	case EOAC_APPID:
+		return "EOAC_APPID"
+	case EOAC_DYNAMIC:
+		return "EOAC_DYNAMIC"
+	case EOAC_REQUIRE_FULLSIC:
+		return "EOAC_REQUIRE_FULLSIC"
+	case EOAC_AUTO_IMPERSONATE:
+		return "EOAC_AUTO_IMPERSONATE"
+	case EOAC_DISABLE_AAA:
+		return "EOAC_DISABLE_AAA"
+	case EOAC_NO_CUSTOM_MARSHAL:
+		return "EOAC_NO_CUSTOM_MARSHAL"
+	case EOAC_RESERVED1:
+		return "EOAC_RESERVED1"
+	default:
+		return fmt.Sprintf("EOLE_AUTHENTICATION_CAPABILITIES(%d)", int32(e))
+	}
+}
+
 // EXTCONN: https://learn.microsoft.com/windows/win32/api/objidlbase/ne-objidlbase-extconn
 type EXTCONN int32
 
@@ -298,6 +883,21 @@ const (
 	EXTCONN_WEAK     EXTCONN = 2
 	EXTCONN_CALLABLE EXTCONN = 4
 )
+
+// String returns the EXTCONN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXTCONN) String() string {
+	switch e {
+	case EXTCONN_STRONG:
+		return "EXTCONN_STRONG"
+	case EXTCONN_WEAK:
+		return "EXTCONN_WEAK"
+	case EXTCONN_CALLABLE:
+		return "EXTCONN_CALLABLE"
+	default:
+		return fmt.Sprintf("EXTCONN(%d)", int32(e))
+	}
+}
 
 // FUNCFLAGS: https://learn.microsoft.com/windows/win32/api/oaidl/ne-oaidl-funcflags
 type FUNCFLAGS uint16
@@ -318,6 +918,41 @@ const (
 	FUNCFLAG_FIMMEDIATEBIND    FUNCFLAGS = 4096
 )
 
+// String returns the FUNCFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FUNCFLAGS) String() string {
+	switch e {
+	case FUNCFLAG_FRESTRICTED:
+		return "FUNCFLAG_FRESTRICTED"
+	case FUNCFLAG_FSOURCE:
+		return "FUNCFLAG_FSOURCE"
+	case FUNCFLAG_FBINDABLE:
+		return "FUNCFLAG_FBINDABLE"
+	case FUNCFLAG_FREQUESTEDIT:
+		return "FUNCFLAG_FREQUESTEDIT"
+	case FUNCFLAG_FDISPLAYBIND:
+		return "FUNCFLAG_FDISPLAYBIND"
+	case FUNCFLAG_FDEFAULTBIND:
+		return "FUNCFLAG_FDEFAULTBIND"
+	case FUNCFLAG_FHIDDEN:
+		return "FUNCFLAG_FHIDDEN"
+	case FUNCFLAG_FUSESGETLASTERROR:
+		return "FUNCFLAG_FUSESGETLASTERROR"
+	case FUNCFLAG_FDEFAULTCOLLELEM:
+		return "FUNCFLAG_FDEFAULTCOLLELEM"
+	case FUNCFLAG_FUIDEFAULT:
+		return "FUNCFLAG_FUIDEFAULT"
+	case FUNCFLAG_FNONBROWSABLE:
+		return "FUNCFLAG_FNONBROWSABLE"
+	case FUNCFLAG_FREPLACEABLE:
+		return "FUNCFLAG_FREPLACEABLE"
+	case FUNCFLAG_FIMMEDIATEBIND:
+		return "FUNCFLAG_FIMMEDIATEBIND"
+	default:
+		return fmt.Sprintf("FUNCFLAGS(%d)", uint16(e))
+	}
+}
+
 // FUNCKIND: https://learn.microsoft.com/windows/win32/api/oaidl/ne-oaidl-funckind
 type FUNCKIND int32
 
@@ -329,6 +964,25 @@ const (
 	FUNC_DISPATCH    FUNCKIND = 4
 )
 
+// String returns the FUNCKIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FUNCKIND) String() string {
+	switch e {
+	case FUNC_VIRTUAL:
+		return "FUNC_VIRTUAL"
+	case FUNC_PUREVIRTUAL:
+		return "FUNC_PUREVIRTUAL"
+	case FUNC_NONVIRTUAL:
+		return "FUNC_NONVIRTUAL"
+	case FUNC_STATIC:
+		return "FUNC_STATIC"
+	case FUNC_DISPATCH:
+		return "FUNC_DISPATCH"
+	default:
+		return fmt.Sprintf("FUNCKIND(%d)", int32(e))
+	}
+}
+
 type GLOBALOPT_EH_VALUES int32
 
 const (
@@ -337,6 +991,21 @@ const (
 	COMGLB_EXCEPTION_DONOT_HANDLE       GLOBALOPT_EH_VALUES = 1
 	COMGLB_EXCEPTION_DONOT_HANDLE_ANY   GLOBALOPT_EH_VALUES = 2
 )
+
+// String returns the GLOBALOPT_EH_VALUES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GLOBALOPT_EH_VALUES) String() string {
+	switch e {
+	case COMGLB_EXCEPTION_HANDLE:
+		return "COMGLB_EXCEPTION_HANDLE"
+	case COMGLB_EXCEPTION_DONOT_HANDLE_FATAL:
+		return "COMGLB_EXCEPTION_DONOT_HANDLE_FATAL"
+	case COMGLB_EXCEPTION_DONOT_HANDLE_ANY:
+		return "COMGLB_EXCEPTION_DONOT_HANDLE_ANY"
+	default:
+		return fmt.Sprintf("GLOBALOPT_EH_VALUES(%d)", int32(e))
+	}
+}
 
 // GLOBALOPT_PROPERTIES: https://learn.microsoft.com/windows/win32/api/objidlbase/ne-objidlbase-globalopt_properties
 type GLOBALOPT_PROPERTIES int32
@@ -351,6 +1020,31 @@ const (
 	COMGLB_PROPERTIES_RESERVED2   GLOBALOPT_PROPERTIES = 7
 	COMGLB_PROPERTIES_RESERVED3   GLOBALOPT_PROPERTIES = 8
 )
+
+// String returns the GLOBALOPT_PROPERTIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GLOBALOPT_PROPERTIES) String() string {
+	switch e {
+	case COMGLB_EXCEPTION_HANDLING:
+		return "COMGLB_EXCEPTION_HANDLING"
+	case COMGLB_APPID:
+		return "COMGLB_APPID"
+	case COMGLB_RPC_THREADPOOL_SETTING:
+		return "COMGLB_RPC_THREADPOOL_SETTING"
+	case COMGLB_RO_SETTINGS:
+		return "COMGLB_RO_SETTINGS"
+	case COMGLB_UNMARSHALING_POLICY:
+		return "COMGLB_UNMARSHALING_POLICY"
+	case COMGLB_PROPERTIES_RESERVED1:
+		return "COMGLB_PROPERTIES_RESERVED1"
+	case COMGLB_PROPERTIES_RESERVED2:
+		return "COMGLB_PROPERTIES_RESERVED2"
+	case COMGLB_PROPERTIES_RESERVED3:
+		return "COMGLB_PROPERTIES_RESERVED3"
+	default:
+		return fmt.Sprintf("GLOBALOPT_PROPERTIES(%d)", int32(e))
+	}
+}
 
 type GLOBALOPT_RO_FLAGS int32
 
@@ -368,12 +1062,56 @@ const (
 	COMGLB_RESERVED6                                              GLOBALOPT_RO_FLAGS = 1024
 )
 
+// String returns the GLOBALOPT_RO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GLOBALOPT_RO_FLAGS) String() string {
+	switch e {
+	case COMGLB_STA_MODALLOOP_REMOVE_TOUCH_MESSAGES:
+		return "COMGLB_STA_MODALLOOP_REMOVE_TOUCH_MESSAGES"
+	case COMGLB_STA_MODALLOOP_SHARED_QUEUE_REMOVE_INPUT_MESSAGES:
+		return "COMGLB_STA_MODALLOOP_SHARED_QUEUE_REMOVE_INPUT_MESSAGES"
+	case COMGLB_STA_MODALLOOP_SHARED_QUEUE_DONOT_REMOVE_INPUT_MESSAGES:
+		return "COMGLB_STA_MODALLOOP_SHARED_QUEUE_DONOT_REMOVE_INPUT_MESSAGES"
+	case COMGLB_FAST_RUNDOWN:
+		return "COMGLB_FAST_RUNDOWN"
+	case COMGLB_RESERVED1:
+		return "COMGLB_RESERVED1"
+	case COMGLB_RESERVED2:
+		return "COMGLB_RESERVED2"
+	case COMGLB_RESERVED3:
+		return "COMGLB_RESERVED3"
+	case COMGLB_STA_MODALLOOP_SHARED_QUEUE_REORDER_POINTER_MESSAGES:
+		return "COMGLB_STA_MODALLOOP_SHARED_QUEUE_REORDER_POINTER_MESSAGES"
+	case COMGLB_RESERVED4:
+		return "COMGLB_RESERVED4"
+	case COMGLB_RESERVED5:
+		return "COMGLB_RESERVED5"
+	case COMGLB_RESERVED6:
+		return "COMGLB_RESERVED6"
+	default:
+		return fmt.Sprintf("GLOBALOPT_RO_FLAGS(%d)", int32(e))
+	}
+}
+
 type GLOBALOPT_RPCTP_VALUES int32
 
 const (
 	COMGLB_RPC_THREADPOOL_SETTING_DEFAULT_POOL GLOBALOPT_RPCTP_VALUES = 0
 	COMGLB_RPC_THREADPOOL_SETTING_PRIVATE_POOL GLOBALOPT_RPCTP_VALUES = 1
 )
+
+// String returns the GLOBALOPT_RPCTP_VALUES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GLOBALOPT_RPCTP_VALUES) String() string {
+	switch e {
+	case COMGLB_RPC_THREADPOOL_SETTING_DEFAULT_POOL:
+		return "COMGLB_RPC_THREADPOOL_SETTING_DEFAULT_POOL"
+	case COMGLB_RPC_THREADPOOL_SETTING_PRIVATE_POOL:
+		return "COMGLB_RPC_THREADPOOL_SETTING_PRIVATE_POOL"
+	default:
+		return fmt.Sprintf("GLOBALOPT_RPCTP_VALUES(%d)", int32(e))
+	}
+}
 
 // GLOBALOPT_UNMARSHALING_POLICY_VALUES: https://learn.microsoft.com/windows/win32/api/objidlbase/ne-objidlbase-globalopt_unmarshaling_policy_values
 type GLOBALOPT_UNMARSHALING_POLICY_VALUES int32
@@ -384,6 +1122,22 @@ const (
 	COMGLB_UNMARSHALING_POLICY_HYBRID GLOBALOPT_UNMARSHALING_POLICY_VALUES = 2
 )
 
+// String returns the GLOBALOPT_UNMARSHALING_POLICY_VALUES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GLOBALOPT_UNMARSHALING_POLICY_VALUES) String() string {
+	switch e {
+	case COMGLB_UNMARSHALING_POLICY_NORMAL:
+		return "COMGLB_UNMARSHALING_POLICY_NORMAL"
+	case COMGLB_UNMARSHALING_POLICY_STRONG:
+		return "COMGLB_UNMARSHALING_POLICY_STRONG"
+	case COMGLB_UNMARSHALING_POLICY_HYBRID:
+		return "COMGLB_UNMARSHALING_POLICY_HYBRID"
+	default:
+		return fmt.Sprintf("GLOBALOPT_UNMARSHALING_POLICY_VALUES(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IDLFLAGS uint16
 
 const (
@@ -394,6 +1148,29 @@ const (
 	IDLFLAG_FRETVAL IDLFLAGS = 8
 )
 
+// String returns the IDLFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IDLFLAGS) String() string {
+	var parts []string
+	if e&IDLFLAG_FIN != 0 {
+		parts = append(parts, "IDLFLAG_FIN")
+	}
+	if e&IDLFLAG_FOUT != 0 {
+		parts = append(parts, "IDLFLAG_FOUT")
+	}
+	if e&IDLFLAG_FLCID != 0 {
+		parts = append(parts, "IDLFLAG_FLCID")
+	}
+	if e&IDLFLAG_FRETVAL != 0 {
+		parts = append(parts, "IDLFLAG_FRETVAL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type IMPLTYPEFLAGS int32
 
 const (
@@ -402,6 +1179,28 @@ const (
 	IMPLTYPEFLAG_FRESTRICTED    IMPLTYPEFLAGS = 4
 	IMPLTYPEFLAG_FDEFAULTVTABLE IMPLTYPEFLAGS = 8
 )
+
+// String returns the IMPLTYPEFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMPLTYPEFLAGS) String() string {
+	var parts []string
+	if e&IMPLTYPEFLAG_FDEFAULT != 0 {
+		parts = append(parts, "IMPLTYPEFLAG_FDEFAULT")
+	}
+	if e&IMPLTYPEFLAG_FSOURCE != 0 {
+		parts = append(parts, "IMPLTYPEFLAG_FSOURCE")
+	}
+	if e&IMPLTYPEFLAG_FRESTRICTED != 0 {
+		parts = append(parts, "IMPLTYPEFLAG_FRESTRICTED")
+	}
+	if e&IMPLTYPEFLAG_FDEFAULTVTABLE != 0 {
+		parts = append(parts, "IMPLTYPEFLAG_FDEFAULTVTABLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // INVOKEKIND: https://learn.microsoft.com/windows/win32/api/oaidl/ne-oaidl-invokekind
 type INVOKEKIND int32
@@ -413,6 +1212,23 @@ const (
 	INVOKE_PROPERTYPUTREF INVOKEKIND = 8
 )
 
+// String returns the INVOKEKIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INVOKEKIND) String() string {
+	switch e {
+	case INVOKE_FUNC:
+		return "INVOKE_FUNC"
+	case INVOKE_PROPERTYGET:
+		return "INVOKE_PROPERTYGET"
+	case INVOKE_PROPERTYPUT:
+		return "INVOKE_PROPERTYPUT"
+	case INVOKE_PROPERTYPUTREF:
+		return "INVOKE_PROPERTYPUTREF"
+	default:
+		return fmt.Sprintf("INVOKEKIND(%d)", int32(e))
+	}
+}
+
 // LOCKTYPE: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-locktype
 type LOCKTYPE int32
 
@@ -421,6 +1237,21 @@ const (
 	LOCK_EXCLUSIVE LOCKTYPE = 2
 	LOCK_ONLYONCE  LOCKTYPE = 4
 )
+
+// String returns the LOCKTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOCKTYPE) String() string {
+	switch e {
+	case LOCK_WRITE:
+		return "LOCK_WRITE"
+	case LOCK_EXCLUSIVE:
+		return "LOCK_EXCLUSIVE"
+	case LOCK_ONLYONCE:
+		return "LOCK_ONLYONCE"
+	default:
+		return fmt.Sprintf("LOCKTYPE(%d)", int32(e))
+	}
+}
 
 type MEMCTX int32
 
@@ -432,6 +1263,25 @@ const (
 	MEMCTX_SAME      MEMCTX = -2
 )
 
+// String returns the MEMCTX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MEMCTX) String() string {
+	switch e {
+	case MEMCTX_TASK:
+		return "MEMCTX_TASK"
+	case MEMCTX_SHARED:
+		return "MEMCTX_SHARED"
+	case MEMCTX_MACSYSTEM:
+		return "MEMCTX_MACSYSTEM"
+	case MEMCTX_UNKNOWN:
+		return "MEMCTX_UNKNOWN"
+	case MEMCTX_SAME:
+		return "MEMCTX_SAME"
+	default:
+		return fmt.Sprintf("MEMCTX(%d)", int32(e))
+	}
+}
+
 // MKRREDUCE: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-mkrreduce
 type MKRREDUCE int32
 
@@ -441,6 +1291,23 @@ const (
 	MKRREDUCE_THROUGHUSER MKRREDUCE = 65536
 	MKRREDUCE_ALL         MKRREDUCE = 0
 )
+
+// String returns the MKRREDUCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MKRREDUCE) String() string {
+	switch e {
+	case MKRREDUCE_ONE:
+		return "MKRREDUCE_ONE"
+	case MKRREDUCE_TOUSER:
+		return "MKRREDUCE_TOUSER"
+	case MKRREDUCE_THROUGHUSER:
+		return "MKRREDUCE_THROUGHUSER"
+	case MKRREDUCE_ALL:
+		return "MKRREDUCE_ALL"
+	default:
+		return fmt.Sprintf("MKRREDUCE(%d)", int32(e))
+	}
+}
 
 // MKSYS: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-mksys
 type MKSYS int32
@@ -458,6 +1325,35 @@ const (
 	MKSYS_LUAMONIKER       MKSYS = 10
 )
 
+// String returns the MKSYS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MKSYS) String() string {
+	switch e {
+	case MKSYS_NONE:
+		return "MKSYS_NONE"
+	case MKSYS_GENERICCOMPOSITE:
+		return "MKSYS_GENERICCOMPOSITE"
+	case MKSYS_FILEMONIKER:
+		return "MKSYS_FILEMONIKER"
+	case MKSYS_ANTIMONIKER:
+		return "MKSYS_ANTIMONIKER"
+	case MKSYS_ITEMMONIKER:
+		return "MKSYS_ITEMMONIKER"
+	case MKSYS_POINTERMONIKER:
+		return "MKSYS_POINTERMONIKER"
+	case MKSYS_CLASSMONIKER:
+		return "MKSYS_CLASSMONIKER"
+	case MKSYS_OBJREFMONIKER:
+		return "MKSYS_OBJREFMONIKER"
+	case MKSYS_SESSIONMONIKER:
+		return "MKSYS_SESSIONMONIKER"
+	case MKSYS_LUAMONIKER:
+		return "MKSYS_LUAMONIKER"
+	default:
+		return fmt.Sprintf("MKSYS(%d)", int32(e))
+	}
+}
+
 // MSHCTX: https://learn.microsoft.com/windows/win32/api/wtypesbase/ne-wtypesbase-mshctx
 type MSHCTX int32
 
@@ -469,6 +1365,27 @@ const (
 	MSHCTX_CROSSCTX         MSHCTX = 4
 	MSHCTX_CONTAINER        MSHCTX = 5
 )
+
+// String returns the MSHCTX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSHCTX) String() string {
+	switch e {
+	case MSHCTX_LOCAL:
+		return "MSHCTX_LOCAL"
+	case MSHCTX_NOSHAREDMEM:
+		return "MSHCTX_NOSHAREDMEM"
+	case MSHCTX_DIFFERENTMACHINE:
+		return "MSHCTX_DIFFERENTMACHINE"
+	case MSHCTX_INPROC:
+		return "MSHCTX_INPROC"
+	case MSHCTX_CROSSCTX:
+		return "MSHCTX_CROSSCTX"
+	case MSHCTX_CONTAINER:
+		return "MSHCTX_CONTAINER"
+	default:
+		return fmt.Sprintf("MSHCTX(%d)", int32(e))
+	}
+}
 
 // MSHLFLAGS: https://learn.microsoft.com/windows/win32/api/wtypesbase/ne-wtypesbase-mshlflags
 type MSHLFLAGS int32
@@ -484,6 +1401,31 @@ const (
 	MSHLFLAGS_RESERVED4   MSHLFLAGS = 64
 )
 
+// String returns the MSHLFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSHLFLAGS) String() string {
+	switch e {
+	case MSHLFLAGS_NORMAL:
+		return "MSHLFLAGS_NORMAL"
+	case MSHLFLAGS_TABLESTRONG:
+		return "MSHLFLAGS_TABLESTRONG"
+	case MSHLFLAGS_TABLEWEAK:
+		return "MSHLFLAGS_TABLEWEAK"
+	case MSHLFLAGS_NOPING:
+		return "MSHLFLAGS_NOPING"
+	case MSHLFLAGS_RESERVED1:
+		return "MSHLFLAGS_RESERVED1"
+	case MSHLFLAGS_RESERVED2:
+		return "MSHLFLAGS_RESERVED2"
+	case MSHLFLAGS_RESERVED3:
+		return "MSHLFLAGS_RESERVED3"
+	case MSHLFLAGS_RESERVED4:
+		return "MSHLFLAGS_RESERVED4"
+	default:
+		return fmt.Sprintf("MSHLFLAGS(%d)", int32(e))
+	}
+}
+
 // PENDINGMSG: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-pendingmsg
 type PENDINGMSG int32
 
@@ -493,6 +1435,21 @@ const (
 	PENDINGMSG_WAITDEFPROCESS PENDINGMSG = 2
 )
 
+// String returns the PENDINGMSG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PENDINGMSG) String() string {
+	switch e {
+	case PENDINGMSG_CANCELCALL:
+		return "PENDINGMSG_CANCELCALL"
+	case PENDINGMSG_WAITNOPROCESS:
+		return "PENDINGMSG_WAITNOPROCESS"
+	case PENDINGMSG_WAITDEFPROCESS:
+		return "PENDINGMSG_WAITDEFPROCESS"
+	default:
+		return fmt.Sprintf("PENDINGMSG(%d)", int32(e))
+	}
+}
+
 // PENDINGTYPE: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-pendingtype
 type PENDINGTYPE int32
 
@@ -501,7 +1458,21 @@ const (
 	PENDINGTYPE_NESTED   PENDINGTYPE = 2
 )
 
+// String returns the PENDINGTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PENDINGTYPE) String() string {
+	switch e {
+	case PENDINGTYPE_TOPLEVEL:
+		return "PENDINGTYPE_TOPLEVEL"
+	case PENDINGTYPE_NESTED:
+		return "PENDINGTYPE_NESTED"
+	default:
+		return fmt.Sprintf("PENDINGTYPE(%d)", int32(e))
+	}
+}
+
 // REGCLS: https://learn.microsoft.com/windows/win32/api/combaseapi/ne-combaseapi-regcls
+// Bitmask — values may be combined with |.
 type REGCLS int32
 
 const (
@@ -513,12 +1484,54 @@ const (
 	REGCLS_AGILE          REGCLS = 16
 )
 
+// String returns the REGCLS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REGCLS) String() string {
+	var parts []string
+	if e&REGCLS_MULTIPLEUSE != 0 {
+		parts = append(parts, "REGCLS_MULTIPLEUSE")
+	}
+	if e&REGCLS_MULTI_SEPARATE != 0 {
+		parts = append(parts, "REGCLS_MULTI_SEPARATE")
+	}
+	if e&REGCLS_SUSPENDED != 0 {
+		parts = append(parts, "REGCLS_SUSPENDED")
+	}
+	if e&REGCLS_SURROGATE != 0 {
+		parts = append(parts, "REGCLS_SURROGATE")
+	}
+	if e&REGCLS_AGILE != 0 {
+		parts = append(parts, "REGCLS_AGILE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type ROT_FLAGS uint32
 
 const (
 	ROTFLAGS_REGISTRATIONKEEPSALIVE ROT_FLAGS = 1
 	ROTFLAGS_ALLOWANYCLIENT         ROT_FLAGS = 2
 )
+
+// String returns the ROT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ROT_FLAGS) String() string {
+	var parts []string
+	if e&ROTFLAGS_REGISTRATIONKEEPSALIVE != 0 {
+		parts = append(parts, "ROTFLAGS_REGISTRATIONKEEPSALIVE")
+	}
+	if e&ROTFLAGS_ALLOWANYCLIENT != 0 {
+		parts = append(parts, "ROTFLAGS_ALLOWANYCLIENT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type RPCOPT_PROPERTIES int32
 
@@ -531,6 +1544,27 @@ const (
 	COMBND_RESERVED4       RPCOPT_PROPERTIES = 16
 )
 
+// String returns the RPCOPT_PROPERTIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPCOPT_PROPERTIES) String() string {
+	switch e {
+	case COMBND_RPCTIMEOUT:
+		return "COMBND_RPCTIMEOUT"
+	case COMBND_SERVER_LOCALITY:
+		return "COMBND_SERVER_LOCALITY"
+	case COMBND_RESERVED1:
+		return "COMBND_RESERVED1"
+	case COMBND_RESERVED2:
+		return "COMBND_RESERVED2"
+	case COMBND_RESERVED3:
+		return "COMBND_RESERVED3"
+	case COMBND_RESERVED4:
+		return "COMBND_RESERVED4"
+	default:
+		return fmt.Sprintf("RPCOPT_PROPERTIES(%d)", int32(e))
+	}
+}
+
 type RPCOPT_SERVER_LOCALITY_VALUES int32
 
 const (
@@ -538,6 +1572,21 @@ const (
 	SERVER_LOCALITY_MACHINE_LOCAL RPCOPT_SERVER_LOCALITY_VALUES = 1
 	SERVER_LOCALITY_REMOTE        RPCOPT_SERVER_LOCALITY_VALUES = 2
 )
+
+// String returns the RPCOPT_SERVER_LOCALITY_VALUES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPCOPT_SERVER_LOCALITY_VALUES) String() string {
+	switch e {
+	case SERVER_LOCALITY_PROCESS_LOCAL:
+		return "SERVER_LOCALITY_PROCESS_LOCAL"
+	case SERVER_LOCALITY_MACHINE_LOCAL:
+		return "SERVER_LOCALITY_MACHINE_LOCAL"
+	case SERVER_LOCALITY_REMOTE:
+		return "SERVER_LOCALITY_REMOTE"
+	default:
+		return fmt.Sprintf("RPCOPT_SERVER_LOCALITY_VALUES(%d)", int32(e))
+	}
+}
 
 type RPC_C_AUTHN_LEVEL uint32
 
@@ -551,6 +1600,29 @@ const (
 	RPC_C_AUTHN_LEVEL_PKT_PRIVACY   RPC_C_AUTHN_LEVEL = 6
 )
 
+// String returns the RPC_C_AUTHN_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_C_AUTHN_LEVEL) String() string {
+	switch e {
+	case RPC_C_AUTHN_LEVEL_DEFAULT:
+		return "RPC_C_AUTHN_LEVEL_DEFAULT"
+	case RPC_C_AUTHN_LEVEL_NONE:
+		return "RPC_C_AUTHN_LEVEL_NONE"
+	case RPC_C_AUTHN_LEVEL_CONNECT:
+		return "RPC_C_AUTHN_LEVEL_CONNECT"
+	case RPC_C_AUTHN_LEVEL_CALL:
+		return "RPC_C_AUTHN_LEVEL_CALL"
+	case RPC_C_AUTHN_LEVEL_PKT:
+		return "RPC_C_AUTHN_LEVEL_PKT"
+	case RPC_C_AUTHN_LEVEL_PKT_INTEGRITY:
+		return "RPC_C_AUTHN_LEVEL_PKT_INTEGRITY"
+	case RPC_C_AUTHN_LEVEL_PKT_PRIVACY:
+		return "RPC_C_AUTHN_LEVEL_PKT_PRIVACY"
+	default:
+		return fmt.Sprintf("RPC_C_AUTHN_LEVEL(%d)", uint32(e))
+	}
+}
+
 type RPC_C_IMP_LEVEL uint32
 
 const (
@@ -561,6 +1633,25 @@ const (
 	RPC_C_IMP_LEVEL_DELEGATE    RPC_C_IMP_LEVEL = 4
 )
 
+// String returns the RPC_C_IMP_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RPC_C_IMP_LEVEL) String() string {
+	switch e {
+	case RPC_C_IMP_LEVEL_DEFAULT:
+		return "RPC_C_IMP_LEVEL_DEFAULT"
+	case RPC_C_IMP_LEVEL_ANONYMOUS:
+		return "RPC_C_IMP_LEVEL_ANONYMOUS"
+	case RPC_C_IMP_LEVEL_IDENTIFY:
+		return "RPC_C_IMP_LEVEL_IDENTIFY"
+	case RPC_C_IMP_LEVEL_IMPERSONATE:
+		return "RPC_C_IMP_LEVEL_IMPERSONATE"
+	case RPC_C_IMP_LEVEL_DELEGATE:
+		return "RPC_C_IMP_LEVEL_DELEGATE"
+	default:
+		return fmt.Sprintf("RPC_C_IMP_LEVEL(%d)", uint32(e))
+	}
+}
+
 // SERVERCALL: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-servercall
 type SERVERCALL int32
 
@@ -569,6 +1660,21 @@ const (
 	SERVERCALL_REJECTED   SERVERCALL = 1
 	SERVERCALL_RETRYLATER SERVERCALL = 2
 )
+
+// String returns the SERVERCALL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVERCALL) String() string {
+	switch e {
+	case SERVERCALL_ISHANDLED:
+		return "SERVERCALL_ISHANDLED"
+	case SERVERCALL_REJECTED:
+		return "SERVERCALL_REJECTED"
+	case SERVERCALL_RETRYLATER:
+		return "SERVERCALL_RETRYLATER"
+	default:
+		return fmt.Sprintf("SERVERCALL(%d)", int32(e))
+	}
+}
 
 // STATFLAG: https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-statflag
 type STATFLAG int32
@@ -579,7 +1685,23 @@ const (
 	STATFLAG_NOOPEN  STATFLAG = 2
 )
 
+// String returns the STATFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STATFLAG) String() string {
+	switch e {
+	case STATFLAG_DEFAULT:
+		return "STATFLAG_DEFAULT"
+	case STATFLAG_NONAME:
+		return "STATFLAG_NONAME"
+	case STATFLAG_NOOPEN:
+		return "STATFLAG_NOOPEN"
+	default:
+		return fmt.Sprintf("STATFLAG(%d)", int32(e))
+	}
+}
+
 // STGC: https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-stgc
+// Bitmask — values may be combined with |.
 type STGC int32
 
 const (
@@ -590,7 +1712,30 @@ const (
 	STGC_CONSOLIDATE                        STGC = 8
 )
 
+// String returns the STGC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STGC) String() string {
+	var parts []string
+	if e&STGC_OVERWRITE != 0 {
+		parts = append(parts, "STGC_OVERWRITE")
+	}
+	if e&STGC_ONLYIFCURRENT != 0 {
+		parts = append(parts, "STGC_ONLYIFCURRENT")
+	}
+	if e&STGC_DANGEROUSLYCOMMITMERELYTODISKCACHE != 0 {
+		parts = append(parts, "STGC_DANGEROUSLYCOMMITMERELYTODISKCACHE")
+	}
+	if e&STGC_CONSOLIDATE != 0 {
+		parts = append(parts, "STGC_CONSOLIDATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // STGM: https://learn.microsoft.com/windows/win32/Stg/stgm-constants
+// Bitmask — values may be combined with |.
 type STGM uint32
 
 const (
@@ -614,6 +1759,61 @@ const (
 	STGM_DIRECT_SWMR      STGM = 4194304
 )
 
+// String returns the STGM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STGM) String() string {
+	var parts []string
+	if e&STGM_TRANSACTED != 0 {
+		parts = append(parts, "STGM_TRANSACTED")
+	}
+	if e&STGM_SIMPLE != 0 {
+		parts = append(parts, "STGM_SIMPLE")
+	}
+	if e&STGM_WRITE != 0 {
+		parts = append(parts, "STGM_WRITE")
+	}
+	if e&STGM_READWRITE != 0 {
+		parts = append(parts, "STGM_READWRITE")
+	}
+	if e&STGM_SHARE_DENY_NONE != 0 {
+		parts = append(parts, "STGM_SHARE_DENY_NONE")
+	}
+	if e&STGM_SHARE_DENY_READ != 0 {
+		parts = append(parts, "STGM_SHARE_DENY_READ")
+	}
+	if e&STGM_SHARE_DENY_WRITE != 0 {
+		parts = append(parts, "STGM_SHARE_DENY_WRITE")
+	}
+	if e&STGM_SHARE_EXCLUSIVE != 0 {
+		parts = append(parts, "STGM_SHARE_EXCLUSIVE")
+	}
+	if e&STGM_PRIORITY != 0 {
+		parts = append(parts, "STGM_PRIORITY")
+	}
+	if e&STGM_DELETEONRELEASE != 0 {
+		parts = append(parts, "STGM_DELETEONRELEASE")
+	}
+	if e&STGM_NOSCRATCH != 0 {
+		parts = append(parts, "STGM_NOSCRATCH")
+	}
+	if e&STGM_CREATE != 0 {
+		parts = append(parts, "STGM_CREATE")
+	}
+	if e&STGM_CONVERT != 0 {
+		parts = append(parts, "STGM_CONVERT")
+	}
+	if e&STGM_NOSNAPSHOT != 0 {
+		parts = append(parts, "STGM_NOSNAPSHOT")
+	}
+	if e&STGM_DIRECT_SWMR != 0 {
+		parts = append(parts, "STGM_DIRECT_SWMR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // STGTY: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-stgty
 type STGTY int32
 
@@ -624,6 +1824,23 @@ const (
 	STGTY_PROPERTY  STGTY = 4
 )
 
+// String returns the STGTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STGTY) String() string {
+	switch e {
+	case STGTY_STORAGE:
+		return "STGTY_STORAGE"
+	case STGTY_STREAM:
+		return "STGTY_STREAM"
+	case STGTY_LOCKBYTES:
+		return "STGTY_LOCKBYTES"
+	case STGTY_PROPERTY:
+		return "STGTY_PROPERTY"
+	default:
+		return fmt.Sprintf("STGTY(%d)", int32(e))
+	}
+}
+
 // STREAM_SEEK: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-stream_seek
 type STREAM_SEEK uint32
 
@@ -632,6 +1849,21 @@ const (
 	STREAM_SEEK_CUR STREAM_SEEK = 1
 	STREAM_SEEK_END STREAM_SEEK = 2
 )
+
+// String returns the STREAM_SEEK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STREAM_SEEK) String() string {
+	switch e {
+	case STREAM_SEEK_SET:
+		return "STREAM_SEEK_SET"
+	case STREAM_SEEK_CUR:
+		return "STREAM_SEEK_CUR"
+	case STREAM_SEEK_END:
+		return "STREAM_SEEK_END"
+	default:
+		return fmt.Sprintf("STREAM_SEEK(%d)", uint32(e))
+	}
+}
 
 // SYSKIND: https://learn.microsoft.com/windows/win32/api/oaidl/ne-oaidl-syskind
 type SYSKIND int32
@@ -643,12 +1875,42 @@ const (
 	SYS_WIN64 SYSKIND = 3
 )
 
+// String returns the SYSKIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSKIND) String() string {
+	switch e {
+	case SYS_WIN16:
+		return "SYS_WIN16"
+	case SYS_WIN32:
+		return "SYS_WIN32"
+	case SYS_MAC:
+		return "SYS_MAC"
+	case SYS_WIN64:
+		return "SYS_WIN64"
+	default:
+		return fmt.Sprintf("SYSKIND(%d)", int32(e))
+	}
+}
+
 type ShutdownType int32
 
 const (
 	IdleShutdown   ShutdownType = 0
 	ForcedShutdown ShutdownType = 1
 )
+
+// String returns the ShutdownType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ShutdownType) String() string {
+	switch e {
+	case IdleShutdown:
+		return "IdleShutdown"
+	case ForcedShutdown:
+		return "ForcedShutdown"
+	default:
+		return fmt.Sprintf("ShutdownType(%d)", int32(e))
+	}
+}
 
 // THDTYPE: https://learn.microsoft.com/windows/win32/api/objidlbase/ne-objidlbase-thdtype
 type THDTYPE int32
@@ -657,6 +1919,19 @@ const (
 	THDTYPE_BLOCKMESSAGES   THDTYPE = 0
 	THDTYPE_PROCESSMESSAGES THDTYPE = 1
 )
+
+// String returns the THDTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THDTYPE) String() string {
+	switch e {
+	case THDTYPE_BLOCKMESSAGES:
+		return "THDTYPE_BLOCKMESSAGES"
+	case THDTYPE_PROCESSMESSAGES:
+		return "THDTYPE_PROCESSMESSAGES"
+	default:
+		return fmt.Sprintf("THDTYPE(%d)", int32(e))
+	}
+}
 
 // TYMED: https://learn.microsoft.com/windows/win32/api/objidl/ne-objidl-tymed
 type TYMED int32
@@ -671,6 +1946,31 @@ const (
 	TYMED_ENHMF    TYMED = 64
 	TYMED_NULL     TYMED = 0
 )
+
+// String returns the TYMED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TYMED) String() string {
+	switch e {
+	case TYMED_HGLOBAL:
+		return "TYMED_HGLOBAL"
+	case TYMED_FILE:
+		return "TYMED_FILE"
+	case TYMED_ISTREAM:
+		return "TYMED_ISTREAM"
+	case TYMED_ISTORAGE:
+		return "TYMED_ISTORAGE"
+	case TYMED_GDI:
+		return "TYMED_GDI"
+	case TYMED_MFPICT:
+		return "TYMED_MFPICT"
+	case TYMED_ENHMF:
+		return "TYMED_ENHMF"
+	case TYMED_NULL:
+		return "TYMED_NULL"
+	default:
+		return fmt.Sprintf("TYMED(%d)", int32(e))
+	}
+}
 
 // TYPEKIND: https://learn.microsoft.com/windows/win32/api/oaidl/ne-oaidl-typekind
 type TYPEKIND int32
@@ -687,6 +1987,33 @@ const (
 	TKIND_MAX       TYPEKIND = 8
 )
 
+// String returns the TYPEKIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TYPEKIND) String() string {
+	switch e {
+	case TKIND_ENUM:
+		return "TKIND_ENUM"
+	case TKIND_RECORD:
+		return "TKIND_RECORD"
+	case TKIND_MODULE:
+		return "TKIND_MODULE"
+	case TKIND_INTERFACE:
+		return "TKIND_INTERFACE"
+	case TKIND_DISPATCH:
+		return "TKIND_DISPATCH"
+	case TKIND_COCLASS:
+		return "TKIND_COCLASS"
+	case TKIND_ALIAS:
+		return "TKIND_ALIAS"
+	case TKIND_UNION:
+		return "TKIND_UNION"
+	case TKIND_MAX:
+		return "TKIND_MAX"
+	default:
+		return fmt.Sprintf("TYPEKIND(%d)", int32(e))
+	}
+}
+
 // TYSPEC: https://learn.microsoft.com/windows/win32/api/wtypes/ne-wtypes-tyspec
 type TYSPEC int32
 
@@ -700,6 +2027,30 @@ const (
 	TYSPEC_OBJECTID    TYSPEC = 6
 )
 
+// String returns the TYSPEC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TYSPEC) String() string {
+	switch e {
+	case TYSPEC_CLSID:
+		return "TYSPEC_CLSID"
+	case TYSPEC_FILEEXT:
+		return "TYSPEC_FILEEXT"
+	case TYSPEC_MIMETYPE:
+		return "TYSPEC_MIMETYPE"
+	case TYSPEC_FILENAME:
+		return "TYSPEC_FILENAME"
+	case TYSPEC_PROGID:
+		return "TYSPEC_PROGID"
+	case TYSPEC_PACKAGENAME:
+		return "TYSPEC_PACKAGENAME"
+	case TYSPEC_OBJECTID:
+		return "TYSPEC_OBJECTID"
+	default:
+		return fmt.Sprintf("TYSPEC(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type URI_CREATE_FLAGS uint32
 
 const (
@@ -722,6 +2073,70 @@ const (
 	Uri_CREATE_NORMALIZE_INTL_CHARACTERS      URI_CREATE_FLAGS = 65536
 	Uri_CREATE_CANONICALIZE_ABSOLUTE          URI_CREATE_FLAGS = 131072
 )
+
+// String returns the URI_CREATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e URI_CREATE_FLAGS) String() string {
+	var parts []string
+	if e&Uri_CREATE_ALLOW_RELATIVE != 0 {
+		parts = append(parts, "Uri_CREATE_ALLOW_RELATIVE")
+	}
+	if e&Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME != 0 {
+		parts = append(parts, "Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME")
+	}
+	if e&Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME != 0 {
+		parts = append(parts, "Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME")
+	}
+	if e&Uri_CREATE_NOFRAG != 0 {
+		parts = append(parts, "Uri_CREATE_NOFRAG")
+	}
+	if e&Uri_CREATE_NO_CANONICALIZE != 0 {
+		parts = append(parts, "Uri_CREATE_NO_CANONICALIZE")
+	}
+	if e&Uri_CREATE_CANONICALIZE != 0 {
+		parts = append(parts, "Uri_CREATE_CANONICALIZE")
+	}
+	if e&Uri_CREATE_FILE_USE_DOS_PATH != 0 {
+		parts = append(parts, "Uri_CREATE_FILE_USE_DOS_PATH")
+	}
+	if e&Uri_CREATE_DECODE_EXTRA_INFO != 0 {
+		parts = append(parts, "Uri_CREATE_DECODE_EXTRA_INFO")
+	}
+	if e&Uri_CREATE_NO_DECODE_EXTRA_INFO != 0 {
+		parts = append(parts, "Uri_CREATE_NO_DECODE_EXTRA_INFO")
+	}
+	if e&Uri_CREATE_CRACK_UNKNOWN_SCHEMES != 0 {
+		parts = append(parts, "Uri_CREATE_CRACK_UNKNOWN_SCHEMES")
+	}
+	if e&Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES != 0 {
+		parts = append(parts, "Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES")
+	}
+	if e&Uri_CREATE_PRE_PROCESS_HTML_URI != 0 {
+		parts = append(parts, "Uri_CREATE_PRE_PROCESS_HTML_URI")
+	}
+	if e&Uri_CREATE_NO_PRE_PROCESS_HTML_URI != 0 {
+		parts = append(parts, "Uri_CREATE_NO_PRE_PROCESS_HTML_URI")
+	}
+	if e&Uri_CREATE_IE_SETTINGS != 0 {
+		parts = append(parts, "Uri_CREATE_IE_SETTINGS")
+	}
+	if e&Uri_CREATE_NO_IE_SETTINGS != 0 {
+		parts = append(parts, "Uri_CREATE_NO_IE_SETTINGS")
+	}
+	if e&Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS != 0 {
+		parts = append(parts, "Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS")
+	}
+	if e&Uri_CREATE_NORMALIZE_INTL_CHARACTERS != 0 {
+		parts = append(parts, "Uri_CREATE_NORMALIZE_INTL_CHARACTERS")
+	}
+	if e&Uri_CREATE_CANONICALIZE_ABSOLUTE != 0 {
+		parts = append(parts, "Uri_CREATE_CANONICALIZE_ABSOLUTE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type Uri_PROPERTY int32
 
@@ -751,6 +2166,53 @@ const (
 	Uri_PROPERTY_DWORD_LAST     Uri_PROPERTY = 18
 )
 
+// String returns the Uri_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e Uri_PROPERTY) String() string {
+	switch e {
+	case Uri_PROPERTY_ABSOLUTE_URI:
+		return "Uri_PROPERTY_ABSOLUTE_URI"
+	case Uri_PROPERTY_AUTHORITY:
+		return "Uri_PROPERTY_AUTHORITY"
+	case Uri_PROPERTY_DISPLAY_URI:
+		return "Uri_PROPERTY_DISPLAY_URI"
+	case Uri_PROPERTY_DOMAIN:
+		return "Uri_PROPERTY_DOMAIN"
+	case Uri_PROPERTY_EXTENSION:
+		return "Uri_PROPERTY_EXTENSION"
+	case Uri_PROPERTY_FRAGMENT:
+		return "Uri_PROPERTY_FRAGMENT"
+	case Uri_PROPERTY_HOST:
+		return "Uri_PROPERTY_HOST"
+	case Uri_PROPERTY_PASSWORD:
+		return "Uri_PROPERTY_PASSWORD"
+	case Uri_PROPERTY_PATH:
+		return "Uri_PROPERTY_PATH"
+	case Uri_PROPERTY_PATH_AND_QUERY:
+		return "Uri_PROPERTY_PATH_AND_QUERY"
+	case Uri_PROPERTY_QUERY:
+		return "Uri_PROPERTY_QUERY"
+	case Uri_PROPERTY_RAW_URI:
+		return "Uri_PROPERTY_RAW_URI"
+	case Uri_PROPERTY_SCHEME_NAME:
+		return "Uri_PROPERTY_SCHEME_NAME"
+	case Uri_PROPERTY_USER_INFO:
+		return "Uri_PROPERTY_USER_INFO"
+	case Uri_PROPERTY_USER_NAME:
+		return "Uri_PROPERTY_USER_NAME"
+	case Uri_PROPERTY_HOST_TYPE:
+		return "Uri_PROPERTY_HOST_TYPE"
+	case Uri_PROPERTY_PORT:
+		return "Uri_PROPERTY_PORT"
+	case Uri_PROPERTY_SCHEME:
+		return "Uri_PROPERTY_SCHEME"
+	case Uri_PROPERTY_ZONE:
+		return "Uri_PROPERTY_ZONE"
+	default:
+		return fmt.Sprintf("Uri_PROPERTY(%d)", int32(e))
+	}
+}
+
 // VARFLAGS: https://learn.microsoft.com/windows/win32/api/oaidl/ne-oaidl-varflags
 type VARFLAGS uint16
 
@@ -770,6 +2232,41 @@ const (
 	VARFLAG_FIMMEDIATEBIND   VARFLAGS = 4096
 )
 
+// String returns the VARFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VARFLAGS) String() string {
+	switch e {
+	case VARFLAG_FREADONLY:
+		return "VARFLAG_FREADONLY"
+	case VARFLAG_FSOURCE:
+		return "VARFLAG_FSOURCE"
+	case VARFLAG_FBINDABLE:
+		return "VARFLAG_FBINDABLE"
+	case VARFLAG_FREQUESTEDIT:
+		return "VARFLAG_FREQUESTEDIT"
+	case VARFLAG_FDISPLAYBIND:
+		return "VARFLAG_FDISPLAYBIND"
+	case VARFLAG_FDEFAULTBIND:
+		return "VARFLAG_FDEFAULTBIND"
+	case VARFLAG_FHIDDEN:
+		return "VARFLAG_FHIDDEN"
+	case VARFLAG_FRESTRICTED:
+		return "VARFLAG_FRESTRICTED"
+	case VARFLAG_FDEFAULTCOLLELEM:
+		return "VARFLAG_FDEFAULTCOLLELEM"
+	case VARFLAG_FUIDEFAULT:
+		return "VARFLAG_FUIDEFAULT"
+	case VARFLAG_FNONBROWSABLE:
+		return "VARFLAG_FNONBROWSABLE"
+	case VARFLAG_FREPLACEABLE:
+		return "VARFLAG_FREPLACEABLE"
+	case VARFLAG_FIMMEDIATEBIND:
+		return "VARFLAG_FIMMEDIATEBIND"
+	default:
+		return fmt.Sprintf("VARFLAGS(%d)", uint16(e))
+	}
+}
+
 // VARKIND: https://learn.microsoft.com/windows/win32/api/oaidl/ne-oaidl-varkind
 type VARKIND int32
 
@@ -779,3 +2276,20 @@ const (
 	VAR_CONST       VARKIND = 2
 	VAR_DISPATCH    VARKIND = 3
 )
+
+// String returns the VARKIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VARKIND) String() string {
+	switch e {
+	case VAR_PERINSTANCE:
+		return "VAR_PERINSTANCE"
+	case VAR_STATIC:
+		return "VAR_STATIC"
+	case VAR_CONST:
+		return "VAR_CONST"
+	case VAR_DISPATCH:
+		return "VAR_DISPATCH"
+	default:
+		return fmt.Sprintf("VARKIND(%d)", int32(e))
+	}
+}

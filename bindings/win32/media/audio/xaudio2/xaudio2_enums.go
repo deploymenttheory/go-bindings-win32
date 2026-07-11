@@ -4,6 +4,10 @@
 
 package xaudio2
 
+import (
+	"fmt"
+)
+
 // HrtfDirectivityType: https://learn.microsoft.com/windows/win32/api/hrtfapoapi/ne-hrtfapoapi-hrtfdirectivitytype
 type HrtfDirectivityType int32
 
@@ -13,6 +17,21 @@ const (
 	Cone            HrtfDirectivityType = 2
 )
 
+// String returns the HrtfDirectivityType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HrtfDirectivityType) String() string {
+	switch e {
+	case OmniDirectional:
+		return "OmniDirectional"
+	case Cardioid:
+		return "Cardioid"
+	case Cone:
+		return "Cone"
+	default:
+		return fmt.Sprintf("HrtfDirectivityType(%d)", int32(e))
+	}
+}
+
 // HrtfDistanceDecayType: https://learn.microsoft.com/windows/win32/api/hrtfapoapi/ne-hrtfapoapi-hrtfdistancedecaytype
 type HrtfDistanceDecayType int32
 
@@ -20,6 +39,19 @@ const (
 	NaturalDecay HrtfDistanceDecayType = 0
 	CustomDecay  HrtfDistanceDecayType = 1
 )
+
+// String returns the HrtfDistanceDecayType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HrtfDistanceDecayType) String() string {
+	switch e {
+	case NaturalDecay:
+		return "NaturalDecay"
+	case CustomDecay:
+		return "CustomDecay"
+	default:
+		return fmt.Sprintf("HrtfDistanceDecayType(%d)", int32(e))
+	}
+}
 
 // HrtfEnvironment: https://learn.microsoft.com/windows/win32/api/hrtfapoapi/ne-hrtfapoapi-hrtfenvironment
 type HrtfEnvironment int32
@@ -31,6 +63,23 @@ const (
 	Outdoors HrtfEnvironment = 3
 )
 
+// String returns the HrtfEnvironment constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HrtfEnvironment) String() string {
+	switch e {
+	case Small:
+		return "Small"
+	case Medium:
+		return "Medium"
+	case Large:
+		return "Large"
+	case Outdoors:
+		return "Outdoors"
+	default:
+		return fmt.Sprintf("HrtfEnvironment(%d)", int32(e))
+	}
+}
+
 // XAPO_BUFFER_FLAGS: https://learn.microsoft.com/windows/win32/api/xapo/ne-xapo-xapo_buffer_flags
 type XAPO_BUFFER_FLAGS int32
 
@@ -38,6 +87,19 @@ const (
 	XAPO_BUFFER_SILENT XAPO_BUFFER_FLAGS = 0
 	XAPO_BUFFER_VALID  XAPO_BUFFER_FLAGS = 1
 )
+
+// String returns the XAPO_BUFFER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XAPO_BUFFER_FLAGS) String() string {
+	switch e {
+	case XAPO_BUFFER_SILENT:
+		return "XAPO_BUFFER_SILENT"
+	case XAPO_BUFFER_VALID:
+		return "XAPO_BUFFER_VALID"
+	default:
+		return fmt.Sprintf("XAPO_BUFFER_FLAGS(%d)", int32(e))
+	}
+}
 
 // XAUDIO2_FILTER_TYPE: https://learn.microsoft.com/windows/win32/api/xaudio2/ne-xaudio2-xaudio2_filter_type
 type XAUDIO2_FILTER_TYPE int32
@@ -50,3 +112,24 @@ const (
 	LowPassOnePoleFilter  XAUDIO2_FILTER_TYPE = 4
 	HighPassOnePoleFilter XAUDIO2_FILTER_TYPE = 5
 )
+
+// String returns the XAUDIO2_FILTER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XAUDIO2_FILTER_TYPE) String() string {
+	switch e {
+	case LowPassFilter:
+		return "LowPassFilter"
+	case BandPassFilter:
+		return "BandPassFilter"
+	case HighPassFilter:
+		return "HighPassFilter"
+	case NotchFilter:
+		return "NotchFilter"
+	case LowPassOnePoleFilter:
+		return "LowPassOnePoleFilter"
+	case HighPassOnePoleFilter:
+		return "HighPassOnePoleFilter"
+	default:
+		return fmt.Sprintf("XAUDIO2_FILTER_TYPE(%d)", int32(e))
+	}
+}

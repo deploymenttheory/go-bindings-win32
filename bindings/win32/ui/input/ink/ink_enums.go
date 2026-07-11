@@ -4,6 +4,10 @@
 
 package ink
 
+import (
+	"fmt"
+)
+
 // INK_HIGH_CONTRAST_ADJUSTMENT: https://learn.microsoft.com/windows/win32/api/inkrenderer/ne-inkrenderer-ink_high_contrast_adjustment
 type INK_HIGH_CONTRAST_ADJUSTMENT int32
 
@@ -12,3 +16,18 @@ const (
 	USE_SYSTEM_COLORS                INK_HIGH_CONTRAST_ADJUSTMENT = 1
 	USE_ORIGINAL_COLORS              INK_HIGH_CONTRAST_ADJUSTMENT = 2
 )
+
+// String returns the INK_HIGH_CONTRAST_ADJUSTMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INK_HIGH_CONTRAST_ADJUSTMENT) String() string {
+	switch e {
+	case USE_SYSTEM_COLORS_WHEN_NECESSARY:
+		return "USE_SYSTEM_COLORS_WHEN_NECESSARY"
+	case USE_SYSTEM_COLORS:
+		return "USE_SYSTEM_COLORS"
+	case USE_ORIGINAL_COLORS:
+		return "USE_ORIGINAL_COLORS"
+	default:
+		return fmt.Sprintf("INK_HIGH_CONTRAST_ADJUSTMENT(%d)", int32(e))
+	}
+}

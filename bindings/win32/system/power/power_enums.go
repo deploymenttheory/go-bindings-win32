@@ -4,6 +4,11 @@
 
 package power
 
+import (
+	"fmt"
+	"strings"
+)
+
 type ACPI_TIME_RESOLUTION int32
 
 const (
@@ -11,6 +16,21 @@ const (
 	AcpiTimeResolutionSeconds      ACPI_TIME_RESOLUTION = 1
 	AcpiTimeResolutionMax          ACPI_TIME_RESOLUTION = 2
 )
+
+// String returns the ACPI_TIME_RESOLUTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACPI_TIME_RESOLUTION) String() string {
+	switch e {
+	case AcpiTimeResolutionMilliseconds:
+		return "AcpiTimeResolutionMilliseconds"
+	case AcpiTimeResolutionSeconds:
+		return "AcpiTimeResolutionSeconds"
+	case AcpiTimeResolutionMax:
+		return "AcpiTimeResolutionMax"
+	default:
+		return fmt.Sprintf("ACPI_TIME_RESOLUTION(%d)", int32(e))
+	}
+}
 
 type BATTERY_CHARGING_SOURCE_TYPE int32
 
@@ -20,6 +40,23 @@ const (
 	BatteryChargingSourceType_Wireless BATTERY_CHARGING_SOURCE_TYPE = 3
 	BatteryChargingSourceType_Max      BATTERY_CHARGING_SOURCE_TYPE = 4
 )
+
+// String returns the BATTERY_CHARGING_SOURCE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BATTERY_CHARGING_SOURCE_TYPE) String() string {
+	switch e {
+	case BatteryChargingSourceType_AC:
+		return "BatteryChargingSourceType_AC"
+	case BatteryChargingSourceType_USB:
+		return "BatteryChargingSourceType_USB"
+	case BatteryChargingSourceType_Wireless:
+		return "BatteryChargingSourceType_Wireless"
+	case BatteryChargingSourceType_Max:
+		return "BatteryChargingSourceType_Max"
+	default:
+		return fmt.Sprintf("BATTERY_CHARGING_SOURCE_TYPE(%d)", int32(e))
+	}
+}
 
 type BATTERY_QUERY_INFORMATION_LEVEL int32
 
@@ -35,6 +72,33 @@ const (
 	BatterySerialNumber           BATTERY_QUERY_INFORMATION_LEVEL = 8
 )
 
+// String returns the BATTERY_QUERY_INFORMATION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BATTERY_QUERY_INFORMATION_LEVEL) String() string {
+	switch e {
+	case BatteryInformation:
+		return "BatteryInformation"
+	case BatteryGranularityInformation:
+		return "BatteryGranularityInformation"
+	case BatteryTemperature:
+		return "BatteryTemperature"
+	case BatteryEstimatedTime:
+		return "BatteryEstimatedTime"
+	case BatteryDeviceName:
+		return "BatteryDeviceName"
+	case BatteryManufactureDate:
+		return "BatteryManufactureDate"
+	case BatteryManufactureName:
+		return "BatteryManufactureName"
+	case BatteryUniqueID:
+		return "BatteryUniqueID"
+	case BatterySerialNumber:
+		return "BatterySerialNumber"
+	default:
+		return fmt.Sprintf("BATTERY_QUERY_INFORMATION_LEVEL(%d)", int32(e))
+	}
+}
+
 type BATTERY_SET_INFORMATION_LEVEL int32
 
 const (
@@ -46,6 +110,28 @@ const (
 	BatteryChargerStatus  BATTERY_SET_INFORMATION_LEVEL = 5
 )
 
+// String returns the BATTERY_SET_INFORMATION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BATTERY_SET_INFORMATION_LEVEL) String() string {
+	switch e {
+	case BatteryCriticalBias:
+		return "BatteryCriticalBias"
+	case BatteryCharge:
+		return "BatteryCharge"
+	case BatteryDischarge:
+		return "BatteryDischarge"
+	case BatteryChargingSource:
+		return "BatteryChargingSource"
+	case BatteryChargerId:
+		return "BatteryChargerId"
+	case BatteryChargerStatus:
+		return "BatteryChargerStatus"
+	default:
+		return fmt.Sprintf("BATTERY_SET_INFORMATION_LEVEL(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DEVICE_POWER_CAPABILITIES uint32
 
 const (
@@ -70,6 +156,73 @@ const (
 	PDCAP_S5_SUPPORTED           DEVICE_POWER_CAPABILITIES = 33554432
 )
 
+// String returns the DEVICE_POWER_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVICE_POWER_CAPABILITIES) String() string {
+	var parts []string
+	if e&PDCAP_D0_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_D0_SUPPORTED")
+	}
+	if e&PDCAP_D1_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_D1_SUPPORTED")
+	}
+	if e&PDCAP_D2_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_D2_SUPPORTED")
+	}
+	if e&PDCAP_D3_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_D3_SUPPORTED")
+	}
+	if e&PDCAP_WAKE_FROM_D0_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_WAKE_FROM_D0_SUPPORTED")
+	}
+	if e&PDCAP_WAKE_FROM_D1_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_WAKE_FROM_D1_SUPPORTED")
+	}
+	if e&PDCAP_WAKE_FROM_D2_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_WAKE_FROM_D2_SUPPORTED")
+	}
+	if e&PDCAP_WAKE_FROM_D3_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_WAKE_FROM_D3_SUPPORTED")
+	}
+	if e&PDCAP_WARM_EJECT_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_WARM_EJECT_SUPPORTED")
+	}
+	if e&PDCAP_S0_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_S0_SUPPORTED")
+	}
+	if e&PDCAP_S1_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_S1_SUPPORTED")
+	}
+	if e&PDCAP_S2_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_S2_SUPPORTED")
+	}
+	if e&PDCAP_S3_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_S3_SUPPORTED")
+	}
+	if e&PDCAP_WAKE_FROM_S0_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_WAKE_FROM_S0_SUPPORTED")
+	}
+	if e&PDCAP_WAKE_FROM_S1_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_WAKE_FROM_S1_SUPPORTED")
+	}
+	if e&PDCAP_WAKE_FROM_S2_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_WAKE_FROM_S2_SUPPORTED")
+	}
+	if e&PDCAP_WAKE_FROM_S3_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_WAKE_FROM_S3_SUPPORTED")
+	}
+	if e&PDCAP_S4_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_S4_SUPPORTED")
+	}
+	if e&PDCAP_S5_SUPPORTED != 0 {
+		parts = append(parts, "PDCAP_S5_SUPPORTED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type DEVICE_POWER_STATE int32
 
 const (
@@ -80,6 +233,27 @@ const (
 	PowerDeviceD3          DEVICE_POWER_STATE = 4
 	PowerDeviceMaximum     DEVICE_POWER_STATE = 5
 )
+
+// String returns the DEVICE_POWER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVICE_POWER_STATE) String() string {
+	switch e {
+	case PowerDeviceUnspecified:
+		return "PowerDeviceUnspecified"
+	case PowerDeviceD0:
+		return "PowerDeviceD0"
+	case PowerDeviceD1:
+		return "PowerDeviceD1"
+	case PowerDeviceD2:
+		return "PowerDeviceD2"
+	case PowerDeviceD3:
+		return "PowerDeviceD3"
+	case PowerDeviceMaximum:
+		return "PowerDeviceMaximum"
+	default:
+		return fmt.Sprintf("DEVICE_POWER_STATE(%d)", int32(e))
+	}
+}
 
 // EFFECTIVE_POWER_MODE: https://learn.microsoft.com/windows/win32/api/powersetting/ne-powersetting-effective_power_mode
 type EFFECTIVE_POWER_MODE int32
@@ -96,6 +270,29 @@ const (
 	EffectivePowerModeMixedReality           EFFECTIVE_POWER_MODE = 6
 )
 
+// String returns the EFFECTIVE_POWER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EFFECTIVE_POWER_MODE) String() string {
+	switch e {
+	case EffectivePowerModeBatterySaver:
+		return "EffectivePowerModeBatterySaver"
+	case EffectivePowerModeBetterBattery:
+		return "EffectivePowerModeBetterBattery"
+	case EffectivePowerModeBalanced:
+		return "EffectivePowerModeBalanced"
+	case EffectivePowerModeHighPerformance:
+		return "EffectivePowerModeHighPerformance"
+	case EffectivePowerModeMaxPerformance:
+		return "EffectivePowerModeMaxPerformance"
+	case EffectivePowerModeGameMode:
+		return "EffectivePowerModeGameMode"
+	case EffectivePowerModeMixedReality:
+		return "EffectivePowerModeMixedReality"
+	default:
+		return fmt.Sprintf("EFFECTIVE_POWER_MODE(%d)", int32(e))
+	}
+}
+
 // EMI_MEASUREMENT_UNIT: https://learn.microsoft.com/windows/win32/api/emi/ne-emi-emi_measurement_unit
 type EMI_MEASUREMENT_UNIT int32
 
@@ -103,6 +300,18 @@ const (
 	EmiMeasurementUnitPicowattHours EMI_MEASUREMENT_UNIT = 0
 )
 
+// String returns the EMI_MEASUREMENT_UNIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EMI_MEASUREMENT_UNIT) String() string {
+	switch e {
+	case EmiMeasurementUnitPicowattHours:
+		return "EmiMeasurementUnitPicowattHours"
+	default:
+		return fmt.Sprintf("EMI_MEASUREMENT_UNIT(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type EXECUTION_STATE uint32
 
 const (
@@ -113,12 +322,50 @@ const (
 	ES_USER_PRESENT      EXECUTION_STATE = 4
 )
 
+// String returns the EXECUTION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXECUTION_STATE) String() string {
+	var parts []string
+	if e&ES_AWAYMODE_REQUIRED != 0 {
+		parts = append(parts, "ES_AWAYMODE_REQUIRED")
+	}
+	if e&ES_CONTINUOUS != 0 {
+		parts = append(parts, "ES_CONTINUOUS")
+	}
+	if e&ES_DISPLAY_REQUIRED != 0 {
+		parts = append(parts, "ES_DISPLAY_REQUIRED")
+	}
+	if e&ES_SYSTEM_REQUIRED != 0 {
+		parts = append(parts, "ES_SYSTEM_REQUIRED")
+	}
+	if e&ES_USER_PRESENT != 0 {
+		parts = append(parts, "ES_USER_PRESENT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type LATENCY_TIME int32
 
 const (
 	LT_DONT_CARE      LATENCY_TIME = 0
 	LT_LOWEST_LATENCY LATENCY_TIME = 1
 )
+
+// String returns the LATENCY_TIME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LATENCY_TIME) String() string {
+	switch e {
+	case LT_DONT_CARE:
+		return "LT_DONT_CARE"
+	case LT_LOWEST_LATENCY:
+		return "LT_LOWEST_LATENCY"
+	default:
+		return fmt.Sprintf("LATENCY_TIME(%d)", int32(e))
+	}
+}
 
 // POWER_ACTION: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-power_action
 type POWER_ACTION int32
@@ -135,6 +382,34 @@ const (
 	PowerActionDisplayOff    POWER_ACTION = 8
 )
 
+// String returns the POWER_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_ACTION) String() string {
+	switch e {
+	case PowerActionNone:
+		return "PowerActionNone"
+	case PowerActionReserved:
+		return "PowerActionReserved"
+	case PowerActionSleep:
+		return "PowerActionSleep"
+	case PowerActionHibernate:
+		return "PowerActionHibernate"
+	case PowerActionShutdown:
+		return "PowerActionShutdown"
+	case PowerActionShutdownReset:
+		return "PowerActionShutdownReset"
+	case PowerActionShutdownOff:
+		return "PowerActionShutdownOff"
+	case PowerActionWarmEject:
+		return "PowerActionWarmEject"
+	case PowerActionDisplayOff:
+		return "PowerActionDisplayOff"
+	default:
+		return fmt.Sprintf("POWER_ACTION(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type POWER_ACTION_POLICY_EVENT_CODE uint32
 
 const (
@@ -146,6 +421,34 @@ const (
 	POWER_USER_NOTIFY_SHUTDOWN    POWER_ACTION_POLICY_EVENT_CODE = 16
 )
 
+// String returns the POWER_ACTION_POLICY_EVENT_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_ACTION_POLICY_EVENT_CODE) String() string {
+	var parts []string
+	if e&POWER_FORCE_TRIGGER_RESET != 0 {
+		parts = append(parts, "POWER_FORCE_TRIGGER_RESET")
+	}
+	if e&POWER_LEVEL_USER_NOTIFY_EXEC != 0 {
+		parts = append(parts, "POWER_LEVEL_USER_NOTIFY_EXEC")
+	}
+	if e&POWER_LEVEL_USER_NOTIFY_SOUND != 0 {
+		parts = append(parts, "POWER_LEVEL_USER_NOTIFY_SOUND")
+	}
+	if e&POWER_LEVEL_USER_NOTIFY_TEXT != 0 {
+		parts = append(parts, "POWER_LEVEL_USER_NOTIFY_TEXT")
+	}
+	if e&POWER_USER_NOTIFY_BUTTON != 0 {
+		parts = append(parts, "POWER_USER_NOTIFY_BUTTON")
+	}
+	if e&POWER_USER_NOTIFY_SHUTDOWN != 0 {
+		parts = append(parts, "POWER_USER_NOTIFY_SHUTDOWN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type POWER_COOLING_MODE uint16
 
 const (
@@ -153,6 +456,21 @@ const (
 	PO_TZ_PASSIVE      POWER_COOLING_MODE = 1
 	PO_TZ_INVALID_MODE POWER_COOLING_MODE = 2
 )
+
+// String returns the POWER_COOLING_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_COOLING_MODE) String() string {
+	switch e {
+	case PO_TZ_ACTIVE:
+		return "PO_TZ_ACTIVE"
+	case PO_TZ_PASSIVE:
+		return "PO_TZ_PASSIVE"
+	case PO_TZ_INVALID_MODE:
+		return "PO_TZ_INVALID_MODE"
+	default:
+		return fmt.Sprintf("POWER_COOLING_MODE(%d)", uint16(e))
+	}
+}
 
 // POWER_DATA_ACCESSOR: https://learn.microsoft.com/windows/win32/api/powrprof/ne-powrprof-power_data_accessor
 type POWER_DATA_ACCESSOR int32
@@ -188,6 +506,71 @@ const (
 	ACCESS_POWER_MODE                           POWER_DATA_ACCESSOR = 26
 	ACCESS_ACTIVE_OVERLAY_SCHEME                POWER_DATA_ACCESSOR = 27
 )
+
+// String returns the POWER_DATA_ACCESSOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_DATA_ACCESSOR) String() string {
+	switch e {
+	case ACCESS_AC_POWER_SETTING_INDEX:
+		return "ACCESS_AC_POWER_SETTING_INDEX"
+	case ACCESS_DC_POWER_SETTING_INDEX:
+		return "ACCESS_DC_POWER_SETTING_INDEX"
+	case ACCESS_FRIENDLY_NAME:
+		return "ACCESS_FRIENDLY_NAME"
+	case ACCESS_DESCRIPTION:
+		return "ACCESS_DESCRIPTION"
+	case ACCESS_POSSIBLE_POWER_SETTING:
+		return "ACCESS_POSSIBLE_POWER_SETTING"
+	case ACCESS_POSSIBLE_POWER_SETTING_FRIENDLY_NAME:
+		return "ACCESS_POSSIBLE_POWER_SETTING_FRIENDLY_NAME"
+	case ACCESS_POSSIBLE_POWER_SETTING_DESCRIPTION:
+		return "ACCESS_POSSIBLE_POWER_SETTING_DESCRIPTION"
+	case ACCESS_DEFAULT_AC_POWER_SETTING:
+		return "ACCESS_DEFAULT_AC_POWER_SETTING"
+	case ACCESS_DEFAULT_DC_POWER_SETTING:
+		return "ACCESS_DEFAULT_DC_POWER_SETTING"
+	case ACCESS_POSSIBLE_VALUE_MIN:
+		return "ACCESS_POSSIBLE_VALUE_MIN"
+	case ACCESS_POSSIBLE_VALUE_MAX:
+		return "ACCESS_POSSIBLE_VALUE_MAX"
+	case ACCESS_POSSIBLE_VALUE_INCREMENT:
+		return "ACCESS_POSSIBLE_VALUE_INCREMENT"
+	case ACCESS_POSSIBLE_VALUE_UNITS:
+		return "ACCESS_POSSIBLE_VALUE_UNITS"
+	case ACCESS_ICON_RESOURCE:
+		return "ACCESS_ICON_RESOURCE"
+	case ACCESS_DEFAULT_SECURITY_DESCRIPTOR:
+		return "ACCESS_DEFAULT_SECURITY_DESCRIPTOR"
+	case ACCESS_ATTRIBUTES:
+		return "ACCESS_ATTRIBUTES"
+	case ACCESS_SCHEME:
+		return "ACCESS_SCHEME"
+	case ACCESS_SUBGROUP:
+		return "ACCESS_SUBGROUP"
+	case ACCESS_INDIVIDUAL_SETTING:
+		return "ACCESS_INDIVIDUAL_SETTING"
+	case ACCESS_ACTIVE_SCHEME:
+		return "ACCESS_ACTIVE_SCHEME"
+	case ACCESS_CREATE_SCHEME:
+		return "ACCESS_CREATE_SCHEME"
+	case ACCESS_AC_POWER_SETTING_MAX:
+		return "ACCESS_AC_POWER_SETTING_MAX"
+	case ACCESS_DC_POWER_SETTING_MAX:
+		return "ACCESS_DC_POWER_SETTING_MAX"
+	case ACCESS_AC_POWER_SETTING_MIN:
+		return "ACCESS_AC_POWER_SETTING_MIN"
+	case ACCESS_DC_POWER_SETTING_MIN:
+		return "ACCESS_DC_POWER_SETTING_MIN"
+	case ACCESS_PROFILE:
+		return "ACCESS_PROFILE"
+	case ACCESS_OVERLAY_SCHEME:
+		return "ACCESS_OVERLAY_SCHEME"
+	case ACCESS_ACTIVE_OVERLAY_SCHEME:
+		return "ACCESS_ACTIVE_OVERLAY_SCHEME"
+	default:
+		return fmt.Sprintf("POWER_DATA_ACCESSOR(%d)", int32(e))
+	}
+}
 
 type POWER_INFORMATION_LEVEL int32
 
@@ -294,6 +677,215 @@ const (
 	PowerInformationLevelMaximum       POWER_INFORMATION_LEVEL = 99
 )
 
+// String returns the POWER_INFORMATION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_INFORMATION_LEVEL) String() string {
+	switch e {
+	case SystemPowerPolicyAc:
+		return "SystemPowerPolicyAc"
+	case SystemPowerPolicyDc:
+		return "SystemPowerPolicyDc"
+	case VerifySystemPolicyAc:
+		return "VerifySystemPolicyAc"
+	case VerifySystemPolicyDc:
+		return "VerifySystemPolicyDc"
+	case SystemPowerCapabilities:
+		return "SystemPowerCapabilities"
+	case SystemBatteryState:
+		return "SystemBatteryState"
+	case SystemPowerStateHandler:
+		return "SystemPowerStateHandler"
+	case ProcessorStateHandler:
+		return "ProcessorStateHandler"
+	case SystemPowerPolicyCurrent:
+		return "SystemPowerPolicyCurrent"
+	case AdministratorPowerPolicy:
+		return "AdministratorPowerPolicy"
+	case SystemReserveHiberFile:
+		return "SystemReserveHiberFile"
+	case ProcessorInformation:
+		return "ProcessorInformation"
+	case SystemPowerInformation:
+		return "SystemPowerInformation"
+	case ProcessorStateHandler2:
+		return "ProcessorStateHandler2"
+	case LastWakeTime:
+		return "LastWakeTime"
+	case LastSleepTime:
+		return "LastSleepTime"
+	case SystemExecutionState:
+		return "SystemExecutionState"
+	case SystemPowerStateNotifyHandler:
+		return "SystemPowerStateNotifyHandler"
+	case ProcessorPowerPolicyAc:
+		return "ProcessorPowerPolicyAc"
+	case ProcessorPowerPolicyDc:
+		return "ProcessorPowerPolicyDc"
+	case VerifyProcessorPowerPolicyAc:
+		return "VerifyProcessorPowerPolicyAc"
+	case VerifyProcessorPowerPolicyDc:
+		return "VerifyProcessorPowerPolicyDc"
+	case ProcessorPowerPolicyCurrent:
+		return "ProcessorPowerPolicyCurrent"
+	case SystemPowerStateLogging:
+		return "SystemPowerStateLogging"
+	case SystemPowerLoggingEntry:
+		return "SystemPowerLoggingEntry"
+	case SetPowerSettingValue:
+		return "SetPowerSettingValue"
+	case NotifyUserPowerSetting:
+		return "NotifyUserPowerSetting"
+	case PowerInformationLevelUnused0:
+		return "PowerInformationLevelUnused0"
+	case SystemMonitorHiberBootPowerOff:
+		return "SystemMonitorHiberBootPowerOff"
+	case SystemVideoState:
+		return "SystemVideoState"
+	case TraceApplicationPowerMessage:
+		return "TraceApplicationPowerMessage"
+	case TraceApplicationPowerMessageEnd:
+		return "TraceApplicationPowerMessageEnd"
+	case ProcessorPerfStates:
+		return "ProcessorPerfStates"
+	case ProcessorIdleStates:
+		return "ProcessorIdleStates"
+	case ProcessorCap:
+		return "ProcessorCap"
+	case SystemWakeSource:
+		return "SystemWakeSource"
+	case SystemHiberFileInformation:
+		return "SystemHiberFileInformation"
+	case TraceServicePowerMessage:
+		return "TraceServicePowerMessage"
+	case ProcessorLoad:
+		return "ProcessorLoad"
+	case PowerShutdownNotification:
+		return "PowerShutdownNotification"
+	case MonitorCapabilities:
+		return "MonitorCapabilities"
+	case SessionPowerInit:
+		return "SessionPowerInit"
+	case SessionDisplayState:
+		return "SessionDisplayState"
+	case PowerRequestCreate:
+		return "PowerRequestCreate"
+	case PowerRequestAction:
+		return "PowerRequestAction"
+	case GetPowerRequestList:
+		return "GetPowerRequestList"
+	case ProcessorInformationEx:
+		return "ProcessorInformationEx"
+	case NotifyUserModeLegacyPowerEvent:
+		return "NotifyUserModeLegacyPowerEvent"
+	case GroupPark:
+		return "GroupPark"
+	case ProcessorIdleDomains:
+		return "ProcessorIdleDomains"
+	case WakeTimerList:
+		return "WakeTimerList"
+	case SystemHiberFileSize:
+		return "SystemHiberFileSize"
+	case ProcessorIdleStatesHv:
+		return "ProcessorIdleStatesHv"
+	case ProcessorPerfStatesHv:
+		return "ProcessorPerfStatesHv"
+	case ProcessorPerfCapHv:
+		return "ProcessorPerfCapHv"
+	case ProcessorSetIdle:
+		return "ProcessorSetIdle"
+	case LogicalProcessorIdling:
+		return "LogicalProcessorIdling"
+	case UserPresence:
+		return "UserPresence"
+	case PowerSettingNotificationName:
+		return "PowerSettingNotificationName"
+	case GetPowerSettingValue:
+		return "GetPowerSettingValue"
+	case IdleResiliency:
+		return "IdleResiliency"
+	case SessionRITState:
+		return "SessionRITState"
+	case SessionConnectNotification:
+		return "SessionConnectNotification"
+	case SessionPowerCleanup:
+		return "SessionPowerCleanup"
+	case SessionLockState:
+		return "SessionLockState"
+	case SystemHiberbootState:
+		return "SystemHiberbootState"
+	case PlatformInformation:
+		return "PlatformInformation"
+	case PdcInvocation:
+		return "PdcInvocation"
+	case MonitorInvocation:
+		return "MonitorInvocation"
+	case FirmwareTableInformationRegistered:
+		return "FirmwareTableInformationRegistered"
+	case SetShutdownSelectedTime:
+		return "SetShutdownSelectedTime"
+	case SuspendResumeInvocation:
+		return "SuspendResumeInvocation"
+	case PlmPowerRequestCreate:
+		return "PlmPowerRequestCreate"
+	case ScreenOff:
+		return "ScreenOff"
+	case CsDeviceNotification:
+		return "CsDeviceNotification"
+	case PlatformRole:
+		return "PlatformRole"
+	case LastResumePerformance:
+		return "LastResumePerformance"
+	case DisplayBurst:
+		return "DisplayBurst"
+	case ExitLatencySamplingPercentage:
+		return "ExitLatencySamplingPercentage"
+	case RegisterSpmPowerSettings:
+		return "RegisterSpmPowerSettings"
+	case PlatformIdleStates:
+		return "PlatformIdleStates"
+	case ProcessorIdleVeto:
+		return "ProcessorIdleVeto"
+	case PlatformIdleVeto:
+		return "PlatformIdleVeto"
+	case SystemBatteryStatePrecise:
+		return "SystemBatteryStatePrecise"
+	case ThermalEvent:
+		return "ThermalEvent"
+	case PowerRequestActionInternal:
+		return "PowerRequestActionInternal"
+	case BatteryDeviceState:
+		return "BatteryDeviceState"
+	case PowerInformationInternal:
+		return "PowerInformationInternal"
+	case ThermalStandby:
+		return "ThermalStandby"
+	case SystemHiberFileType:
+		return "SystemHiberFileType"
+	case PhysicalPowerButtonPress:
+		return "PhysicalPowerButtonPress"
+	case QueryPotentialDripsConstraint:
+		return "QueryPotentialDripsConstraint"
+	case EnergyTrackerCreate:
+		return "EnergyTrackerCreate"
+	case EnergyTrackerQuery:
+		return "EnergyTrackerQuery"
+	case UpdateBlackBoxRecorder:
+		return "UpdateBlackBoxRecorder"
+	case SessionAllowExternalDmaDevices:
+		return "SessionAllowExternalDmaDevices"
+	case SendSuspendResumeNotification:
+		return "SendSuspendResumeNotification"
+	case BlackBoxRecorderDirectAccessBuffer:
+		return "BlackBoxRecorderDirectAccessBuffer"
+	case SystemPowerSourceState:
+		return "SystemPowerSourceState"
+	case PowerInformationLevelMaximum:
+		return "PowerInformationLevelMaximum"
+	default:
+		return fmt.Sprintf("POWER_INFORMATION_LEVEL(%d)", int32(e))
+	}
+}
+
 type POWER_MONITOR_REQUEST_REASON int32
 
 const (
@@ -358,6 +950,133 @@ const (
 	MonitorRequestReasonMax                            POWER_MONITOR_REQUEST_REASON = 58
 )
 
+// String returns the POWER_MONITOR_REQUEST_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_MONITOR_REQUEST_REASON) String() string {
+	switch e {
+	case MonitorRequestReasonUnknown:
+		return "MonitorRequestReasonUnknown"
+	case MonitorRequestReasonPowerButton:
+		return "MonitorRequestReasonPowerButton"
+	case MonitorRequestReasonRemoteConnection:
+		return "MonitorRequestReasonRemoteConnection"
+	case MonitorRequestReasonScMonitorpower:
+		return "MonitorRequestReasonScMonitorpower"
+	case MonitorRequestReasonUserInput:
+		return "MonitorRequestReasonUserInput"
+	case MonitorRequestReasonAcDcDisplayBurst:
+		return "MonitorRequestReasonAcDcDisplayBurst"
+	case MonitorRequestReasonUserDisplayBurst:
+		return "MonitorRequestReasonUserDisplayBurst"
+	case MonitorRequestReasonPoSetSystemState:
+		return "MonitorRequestReasonPoSetSystemState"
+	case MonitorRequestReasonSetThreadExecutionState:
+		return "MonitorRequestReasonSetThreadExecutionState"
+	case MonitorRequestReasonFullWake:
+		return "MonitorRequestReasonFullWake"
+	case MonitorRequestReasonSessionUnlock:
+		return "MonitorRequestReasonSessionUnlock"
+	case MonitorRequestReasonScreenOffRequest:
+		return "MonitorRequestReasonScreenOffRequest"
+	case MonitorRequestReasonIdleTimeout:
+		return "MonitorRequestReasonIdleTimeout"
+	case MonitorRequestReasonPolicyChange:
+		return "MonitorRequestReasonPolicyChange"
+	case MonitorRequestReasonSleepButton:
+		return "MonitorRequestReasonSleepButton"
+	case MonitorRequestReasonLid:
+		return "MonitorRequestReasonLid"
+	case MonitorRequestReasonBatteryCountChange:
+		return "MonitorRequestReasonBatteryCountChange"
+	case MonitorRequestReasonGracePeriod:
+		return "MonitorRequestReasonGracePeriod"
+	case MonitorRequestReasonPnP:
+		return "MonitorRequestReasonPnP"
+	case MonitorRequestReasonDP:
+		return "MonitorRequestReasonDP"
+	case MonitorRequestReasonSxTransition:
+		return "MonitorRequestReasonSxTransition"
+	case MonitorRequestReasonSystemIdle:
+		return "MonitorRequestReasonSystemIdle"
+	case MonitorRequestReasonNearProximity:
+		return "MonitorRequestReasonNearProximity"
+	case MonitorRequestReasonThermalStandby:
+		return "MonitorRequestReasonThermalStandby"
+	case MonitorRequestReasonResumePdc:
+		return "MonitorRequestReasonResumePdc"
+	case MonitorRequestReasonResumeS4:
+		return "MonitorRequestReasonResumeS4"
+	case MonitorRequestReasonTerminal:
+		return "MonitorRequestReasonTerminal"
+	case MonitorRequestReasonPdcSignal:
+		return "MonitorRequestReasonPdcSignal"
+	case MonitorRequestReasonAcDcDisplayBurstSuppressed:
+		return "MonitorRequestReasonAcDcDisplayBurstSuppressed"
+	case MonitorRequestReasonSystemStateEntered:
+		return "MonitorRequestReasonSystemStateEntered"
+	case MonitorRequestReasonWinrt:
+		return "MonitorRequestReasonWinrt"
+	case MonitorRequestReasonUserInputKeyboard:
+		return "MonitorRequestReasonUserInputKeyboard"
+	case MonitorRequestReasonUserInputMouse:
+		return "MonitorRequestReasonUserInputMouse"
+	case MonitorRequestReasonUserInputTouchpad:
+		return "MonitorRequestReasonUserInputTouchpad"
+	case MonitorRequestReasonUserInputPen:
+		return "MonitorRequestReasonUserInputPen"
+	case MonitorRequestReasonUserInputAccelerometer:
+		return "MonitorRequestReasonUserInputAccelerometer"
+	case MonitorRequestReasonUserInputHid:
+		return "MonitorRequestReasonUserInputHid"
+	case MonitorRequestReasonUserInputPoUserPresent:
+		return "MonitorRequestReasonUserInputPoUserPresent"
+	case MonitorRequestReasonUserInputSessionSwitch:
+		return "MonitorRequestReasonUserInputSessionSwitch"
+	case MonitorRequestReasonUserInputInitialization:
+		return "MonitorRequestReasonUserInputInitialization"
+	case MonitorRequestReasonPdcSignalWindowsMobilePwrNotif:
+		return "MonitorRequestReasonPdcSignalWindowsMobilePwrNotif"
+	case MonitorRequestReasonPdcSignalWindowsMobileShell:
+		return "MonitorRequestReasonPdcSignalWindowsMobileShell"
+	case MonitorRequestReasonPdcSignalHeyCortana:
+		return "MonitorRequestReasonPdcSignalHeyCortana"
+	case MonitorRequestReasonPdcSignalHolographicShell:
+		return "MonitorRequestReasonPdcSignalHolographicShell"
+	case MonitorRequestReasonPdcSignalFingerprint:
+		return "MonitorRequestReasonPdcSignalFingerprint"
+	case MonitorRequestReasonDirectedDrips:
+		return "MonitorRequestReasonDirectedDrips"
+	case MonitorRequestReasonDim:
+		return "MonitorRequestReasonDim"
+	case MonitorRequestReasonBuiltinPanel:
+		return "MonitorRequestReasonBuiltinPanel"
+	case MonitorRequestReasonDisplayRequiredUnDim:
+		return "MonitorRequestReasonDisplayRequiredUnDim"
+	case MonitorRequestReasonBatteryCountChangeSuppressed:
+		return "MonitorRequestReasonBatteryCountChangeSuppressed"
+	case MonitorRequestReasonResumeModernStandby:
+		return "MonitorRequestReasonResumeModernStandby"
+	case MonitorRequestReasonTerminalInit:
+		return "MonitorRequestReasonTerminalInit"
+	case MonitorRequestReasonPdcSignalSensorsHumanPresence:
+		return "MonitorRequestReasonPdcSignalSensorsHumanPresence"
+	case MonitorRequestReasonBatteryPreCritical:
+		return "MonitorRequestReasonBatteryPreCritical"
+	case MonitorRequestReasonUserInputTouch:
+		return "MonitorRequestReasonUserInputTouch"
+	case MonitorRequestReasonAusterityBatteryDrain:
+		return "MonitorRequestReasonAusterityBatteryDrain"
+	case MonitorRequestReasonDozeRestrictedStandby:
+		return "MonitorRequestReasonDozeRestrictedStandby"
+	case MonitorRequestReasonSmartRestrictedStandby:
+		return "MonitorRequestReasonSmartRestrictedStandby"
+	case MonitorRequestReasonMax:
+		return "MonitorRequestReasonMax"
+	default:
+		return fmt.Sprintf("POWER_MONITOR_REQUEST_REASON(%d)", int32(e))
+	}
+}
+
 type POWER_MONITOR_REQUEST_TYPE int32
 
 const (
@@ -365,6 +1084,21 @@ const (
 	MonitorRequestTypeOnAndPresent POWER_MONITOR_REQUEST_TYPE = 1
 	MonitorRequestTypeToggleOn     POWER_MONITOR_REQUEST_TYPE = 2
 )
+
+// String returns the POWER_MONITOR_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_MONITOR_REQUEST_TYPE) String() string {
+	switch e {
+	case MonitorRequestTypeOff:
+		return "MonitorRequestTypeOff"
+	case MonitorRequestTypeOnAndPresent:
+		return "MonitorRequestTypeOnAndPresent"
+	case MonitorRequestTypeToggleOn:
+		return "MonitorRequestTypeToggleOn"
+	default:
+		return fmt.Sprintf("POWER_MONITOR_REQUEST_TYPE(%d)", int32(e))
+	}
+}
 
 // POWER_PLATFORM_ROLE: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-power_platform_role
 type POWER_PLATFORM_ROLE int32
@@ -382,12 +1116,54 @@ const (
 	PlatformRoleMaximum           POWER_PLATFORM_ROLE = 9
 )
 
+// String returns the POWER_PLATFORM_ROLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_PLATFORM_ROLE) String() string {
+	switch e {
+	case PlatformRoleUnspecified:
+		return "PlatformRoleUnspecified"
+	case PlatformRoleDesktop:
+		return "PlatformRoleDesktop"
+	case PlatformRoleMobile:
+		return "PlatformRoleMobile"
+	case PlatformRoleWorkstation:
+		return "PlatformRoleWorkstation"
+	case PlatformRoleEnterpriseServer:
+		return "PlatformRoleEnterpriseServer"
+	case PlatformRoleSOHOServer:
+		return "PlatformRoleSOHOServer"
+	case PlatformRoleAppliancePC:
+		return "PlatformRoleAppliancePC"
+	case PlatformRolePerformanceServer:
+		return "PlatformRolePerformanceServer"
+	case PlatformRoleSlate:
+		return "PlatformRoleSlate"
+	case PlatformRoleMaximum:
+		return "PlatformRoleMaximum"
+	default:
+		return fmt.Sprintf("POWER_PLATFORM_ROLE(%d)", int32(e))
+	}
+}
+
 type POWER_PLATFORM_ROLE_VERSION uint32
 
 const (
 	POWER_PLATFORM_ROLE_V1 POWER_PLATFORM_ROLE_VERSION = 1
 	POWER_PLATFORM_ROLE_V2 POWER_PLATFORM_ROLE_VERSION = 2
 )
+
+// String returns the POWER_PLATFORM_ROLE_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_PLATFORM_ROLE_VERSION) String() string {
+	switch e {
+	case POWER_PLATFORM_ROLE_V1:
+		return "POWER_PLATFORM_ROLE_V1"
+	case POWER_PLATFORM_ROLE_V2:
+		return "POWER_PLATFORM_ROLE_V2"
+	default:
+		return fmt.Sprintf("POWER_PLATFORM_ROLE_VERSION(%d)", uint32(e))
+	}
+}
 
 type POWER_REQUEST_TYPE int32
 
@@ -397,6 +1173,23 @@ const (
 	PowerRequestAwayModeRequired  POWER_REQUEST_TYPE = 2
 	PowerRequestExecutionRequired POWER_REQUEST_TYPE = 3
 )
+
+// String returns the POWER_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_REQUEST_TYPE) String() string {
+	switch e {
+	case PowerRequestDisplayRequired:
+		return "PowerRequestDisplayRequired"
+	case PowerRequestSystemRequired:
+		return "PowerRequestSystemRequired"
+	case PowerRequestAwayModeRequired:
+		return "PowerRequestAwayModeRequired"
+	case PowerRequestExecutionRequired:
+		return "PowerRequestExecutionRequired"
+	default:
+		return fmt.Sprintf("POWER_REQUEST_TYPE(%d)", int32(e))
+	}
+}
 
 type POWER_SETTING_ALTITUDE int32
 
@@ -410,6 +1203,29 @@ const (
 	ALTITUDE_OS_DEFAULT        POWER_SETTING_ALTITUDE = 6
 )
 
+// String returns the POWER_SETTING_ALTITUDE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_SETTING_ALTITUDE) String() string {
+	switch e {
+	case ALTITUDE_GROUP_POLICY:
+		return "ALTITUDE_GROUP_POLICY"
+	case ALTITUDE_USER:
+		return "ALTITUDE_USER"
+	case ALTITUDE_RUNTIME_OVERRIDE:
+		return "ALTITUDE_RUNTIME_OVERRIDE"
+	case ALTITUDE_PROVISIONING:
+		return "ALTITUDE_PROVISIONING"
+	case ALTITUDE_OEM_CUSTOMIZATION:
+		return "ALTITUDE_OEM_CUSTOMIZATION"
+	case ALTITUDE_INTERNAL_OVERRIDE:
+		return "ALTITUDE_INTERNAL_OVERRIDE"
+	case ALTITUDE_OS_DEFAULT:
+		return "ALTITUDE_OS_DEFAULT"
+	default:
+		return fmt.Sprintf("POWER_SETTING_ALTITUDE(%d)", int32(e))
+	}
+}
+
 type POWER_USER_PRESENCE_TYPE int32
 
 const (
@@ -417,6 +1233,21 @@ const (
 	UserPresent    POWER_USER_PRESENCE_TYPE = 1
 	UserUnknown    POWER_USER_PRESENCE_TYPE = 255
 )
+
+// String returns the POWER_USER_PRESENCE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POWER_USER_PRESENCE_TYPE) String() string {
+	switch e {
+	case UserNotPresent:
+		return "UserNotPresent"
+	case UserPresent:
+		return "UserPresent"
+	case UserUnknown:
+		return "UserUnknown"
+	default:
+		return fmt.Sprintf("POWER_USER_PRESENCE_TYPE(%d)", int32(e))
+	}
+}
 
 // SYSTEM_POWER_CONDITION: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-system_power_condition
 type SYSTEM_POWER_CONDITION int32
@@ -427,6 +1258,23 @@ const (
 	PoHot              SYSTEM_POWER_CONDITION = 2
 	PoConditionMaximum SYSTEM_POWER_CONDITION = 3
 )
+
+// String returns the SYSTEM_POWER_CONDITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEM_POWER_CONDITION) String() string {
+	switch e {
+	case PoAc:
+		return "PoAc"
+	case PoDc:
+		return "PoDc"
+	case PoHot:
+		return "PoHot"
+	case PoConditionMaximum:
+		return "PoConditionMaximum"
+	default:
+		return fmt.Sprintf("SYSTEM_POWER_CONDITION(%d)", int32(e))
+	}
+}
 
 // SYSTEM_POWER_STATE: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-system_power_state
 type SYSTEM_POWER_STATE int32
@@ -442,6 +1290,31 @@ const (
 	PowerSystemMaximum     SYSTEM_POWER_STATE = 7
 )
 
+// String returns the SYSTEM_POWER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEM_POWER_STATE) String() string {
+	switch e {
+	case PowerSystemUnspecified:
+		return "PowerSystemUnspecified"
+	case PowerSystemWorking:
+		return "PowerSystemWorking"
+	case PowerSystemSleeping1:
+		return "PowerSystemSleeping1"
+	case PowerSystemSleeping2:
+		return "PowerSystemSleeping2"
+	case PowerSystemSleeping3:
+		return "PowerSystemSleeping3"
+	case PowerSystemHibernate:
+		return "PowerSystemHibernate"
+	case PowerSystemShutdown:
+		return "PowerSystemShutdown"
+	case PowerSystemMaximum:
+		return "PowerSystemMaximum"
+	default:
+		return fmt.Sprintf("SYSTEM_POWER_STATE(%d)", int32(e))
+	}
+}
+
 type USB_CHARGER_PORT int32
 
 const (
@@ -449,6 +1322,21 @@ const (
 	UsbChargerPort_TypeC  USB_CHARGER_PORT = 1
 	UsbChargerPort_Max    USB_CHARGER_PORT = 2
 )
+
+// String returns the USB_CHARGER_PORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USB_CHARGER_PORT) String() string {
+	switch e {
+	case UsbChargerPort_Legacy:
+		return "UsbChargerPort_Legacy"
+	case UsbChargerPort_TypeC:
+		return "UsbChargerPort_TypeC"
+	case UsbChargerPort_Max:
+		return "UsbChargerPort_Max"
+	default:
+		return fmt.Sprintf("USB_CHARGER_PORT(%d)", int32(e))
+	}
+}
 
 type USER_ACTIVITY_PRESENCE int32
 
@@ -459,3 +1347,20 @@ const (
 	PowerUserMaximum    USER_ACTIVITY_PRESENCE = 3
 	PowerUserInvalid    USER_ACTIVITY_PRESENCE = 3
 )
+
+// String returns the USER_ACTIVITY_PRESENCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USER_ACTIVITY_PRESENCE) String() string {
+	switch e {
+	case PowerUserPresent:
+		return "PowerUserPresent"
+	case PowerUserNotPresent:
+		return "PowerUserNotPresent"
+	case PowerUserInactive:
+		return "PowerUserInactive"
+	case PowerUserMaximum:
+		return "PowerUserMaximum"
+	default:
+		return fmt.Sprintf("USER_ACTIVITY_PRESENCE(%d)", int32(e))
+	}
+}

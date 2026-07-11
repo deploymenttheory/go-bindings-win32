@@ -4,6 +4,10 @@
 
 package extensibleauthenticationprotocol
 
+import (
+	"fmt"
+)
+
 // EAPHOST_AUTH_STATUS: https://learn.microsoft.com/windows/win32/api/eaphostpeertypes/ne-eaphostpeertypes-eaphost_auth_status
 type EAPHOST_AUTH_STATUS int32
 
@@ -16,6 +20,29 @@ const (
 	EapHostAuthSucceeded        EAPHOST_AUTH_STATUS = 5
 	EapHostAuthFailed           EAPHOST_AUTH_STATUS = 6
 )
+
+// String returns the EAPHOST_AUTH_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAPHOST_AUTH_STATUS) String() string {
+	switch e {
+	case EapHostInvalidSession:
+		return "EapHostInvalidSession"
+	case EapHostAuthNotStarted:
+		return "EapHostAuthNotStarted"
+	case EapHostAuthIdentityExchange:
+		return "EapHostAuthIdentityExchange"
+	case EapHostAuthNegotiatingType:
+		return "EapHostAuthNegotiatingType"
+	case EapHostAuthInProgress:
+		return "EapHostAuthInProgress"
+	case EapHostAuthSucceeded:
+		return "EapHostAuthSucceeded"
+	case EapHostAuthFailed:
+		return "EapHostAuthFailed"
+	default:
+		return fmt.Sprintf("EAPHOST_AUTH_STATUS(%d)", int32(e))
+	}
+}
 
 // EAP_ATTRIBUTE_TYPE: https://learn.microsoft.com/windows/win32/api/eaptypes/ne-eaptypes-eap_attribute_type
 type EAP_ATTRIBUTE_TYPE int32
@@ -121,6 +148,209 @@ const (
 	EatReserved               EAP_ATTRIBUTE_TYPE = -1
 )
 
+// String returns the EAP_ATTRIBUTE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAP_ATTRIBUTE_TYPE) String() string {
+	switch e {
+	case EatMinimum:
+		return "EatMinimum"
+	case EatUserName:
+		return "EatUserName"
+	case EatUserPassword:
+		return "EatUserPassword"
+	case EatMD5CHAPPassword:
+		return "EatMD5CHAPPassword"
+	case EatNASIPAddress:
+		return "EatNASIPAddress"
+	case EatNASPort:
+		return "EatNASPort"
+	case EatServiceType:
+		return "EatServiceType"
+	case EatFramedProtocol:
+		return "EatFramedProtocol"
+	case EatFramedIPAddress:
+		return "EatFramedIPAddress"
+	case EatFramedIPNetmask:
+		return "EatFramedIPNetmask"
+	case EatFramedRouting:
+		return "EatFramedRouting"
+	case EatFilterId:
+		return "EatFilterId"
+	case EatFramedMTU:
+		return "EatFramedMTU"
+	case EatFramedCompression:
+		return "EatFramedCompression"
+	case EatLoginIPHost:
+		return "EatLoginIPHost"
+	case EatLoginService:
+		return "EatLoginService"
+	case EatLoginTCPPort:
+		return "EatLoginTCPPort"
+	case EatUnassigned17:
+		return "EatUnassigned17"
+	case EatReplyMessage:
+		return "EatReplyMessage"
+	case EatCallbackNumber:
+		return "EatCallbackNumber"
+	case EatCallbackId:
+		return "EatCallbackId"
+	case EatUnassigned21:
+		return "EatUnassigned21"
+	case EatFramedRoute:
+		return "EatFramedRoute"
+	case EatFramedIPXNetwork:
+		return "EatFramedIPXNetwork"
+	case EatState:
+		return "EatState"
+	case EatClass:
+		return "EatClass"
+	case EatVendorSpecific:
+		return "EatVendorSpecific"
+	case EatSessionTimeout:
+		return "EatSessionTimeout"
+	case EatIdleTimeout:
+		return "EatIdleTimeout"
+	case EatTerminationAction:
+		return "EatTerminationAction"
+	case EatCalledStationId:
+		return "EatCalledStationId"
+	case EatCallingStationId:
+		return "EatCallingStationId"
+	case EatNASIdentifier:
+		return "EatNASIdentifier"
+	case EatProxyState:
+		return "EatProxyState"
+	case EatLoginLATService:
+		return "EatLoginLATService"
+	case EatLoginLATNode:
+		return "EatLoginLATNode"
+	case EatLoginLATGroup:
+		return "EatLoginLATGroup"
+	case EatFramedAppleTalkLink:
+		return "EatFramedAppleTalkLink"
+	case EatFramedAppleTalkNetwork:
+		return "EatFramedAppleTalkNetwork"
+	case EatFramedAppleTalkZone:
+		return "EatFramedAppleTalkZone"
+	case EatAcctStatusType:
+		return "EatAcctStatusType"
+	case EatAcctDelayTime:
+		return "EatAcctDelayTime"
+	case EatAcctInputOctets:
+		return "EatAcctInputOctets"
+	case EatAcctOutputOctets:
+		return "EatAcctOutputOctets"
+	case EatAcctSessionId:
+		return "EatAcctSessionId"
+	case EatAcctAuthentic:
+		return "EatAcctAuthentic"
+	case EatAcctSessionTime:
+		return "EatAcctSessionTime"
+	case EatAcctInputPackets:
+		return "EatAcctInputPackets"
+	case EatAcctOutputPackets:
+		return "EatAcctOutputPackets"
+	case EatAcctTerminateCause:
+		return "EatAcctTerminateCause"
+	case EatAcctMultiSessionId:
+		return "EatAcctMultiSessionId"
+	case EatAcctLinkCount:
+		return "EatAcctLinkCount"
+	case EatAcctEventTimeStamp:
+		return "EatAcctEventTimeStamp"
+	case EatMD5CHAPChallenge:
+		return "EatMD5CHAPChallenge"
+	case EatNASPortType:
+		return "EatNASPortType"
+	case EatPortLimit:
+		return "EatPortLimit"
+	case EatLoginLATPort:
+		return "EatLoginLATPort"
+	case EatTunnelType:
+		return "EatTunnelType"
+	case EatTunnelMediumType:
+		return "EatTunnelMediumType"
+	case EatTunnelClientEndpoint:
+		return "EatTunnelClientEndpoint"
+	case EatTunnelServerEndpoint:
+		return "EatTunnelServerEndpoint"
+	case EatARAPPassword:
+		return "EatARAPPassword"
+	case EatARAPFeatures:
+		return "EatARAPFeatures"
+	case EatARAPZoneAccess:
+		return "EatARAPZoneAccess"
+	case EatARAPSecurity:
+		return "EatARAPSecurity"
+	case EatARAPSecurityData:
+		return "EatARAPSecurityData"
+	case EatPasswordRetry:
+		return "EatPasswordRetry"
+	case EatPrompt:
+		return "EatPrompt"
+	case EatConnectInfo:
+		return "EatConnectInfo"
+	case EatConfigurationToken:
+		return "EatConfigurationToken"
+	case EatEAPMessage:
+		return "EatEAPMessage"
+	case EatSignature:
+		return "EatSignature"
+	case EatARAPChallengeResponse:
+		return "EatARAPChallengeResponse"
+	case EatAcctInterimInterval:
+		return "EatAcctInterimInterval"
+	case EatNASIPv6Address:
+		return "EatNASIPv6Address"
+	case EatFramedInterfaceId:
+		return "EatFramedInterfaceId"
+	case EatFramedIPv6Prefix:
+		return "EatFramedIPv6Prefix"
+	case EatLoginIPv6Host:
+		return "EatLoginIPv6Host"
+	case EatFramedIPv6Route:
+		return "EatFramedIPv6Route"
+	case EatFramedIPv6Pool:
+		return "EatFramedIPv6Pool"
+	case EatARAPGuestLogon:
+		return "EatARAPGuestLogon"
+	case EatCertificateOID:
+		return "EatCertificateOID"
+	case EatEAPConfiguration:
+		return "EatEAPConfiguration"
+	case EatPEAPEmbeddedEAPTypeId:
+		return "EatPEAPEmbeddedEAPTypeId"
+	case EatPEAPFastRoamedSession:
+		return "EatPEAPFastRoamedSession"
+	case EatEAPTLV:
+		return "EatEAPTLV"
+	case EatCredentialsChanged:
+		return "EatCredentialsChanged"
+	case EatInnerEapMethodType:
+		return "EatInnerEapMethodType"
+	case EatClearTextPassword:
+		return "EatClearTextPassword"
+	case EatQuarantineSoH:
+		return "EatQuarantineSoH"
+	case EatCertificateThumbprint:
+		return "EatCertificateThumbprint"
+	case EatPeerId:
+		return "EatPeerId"
+	case EatServerId:
+		return "EatServerId"
+	case EatMethodId:
+		return "EatMethodId"
+	case EatEMSK:
+		return "EatEMSK"
+	case EatSessionId:
+		return "EatSessionId"
+	case EatReserved:
+		return "EatReserved"
+	default:
+		return fmt.Sprintf("EAP_ATTRIBUTE_TYPE(%d)", int32(e))
+	}
+}
+
 // EAP_AUTHENTICATOR_SEND_TIMEOUT: https://learn.microsoft.com/windows/win32/api/eapauthenticatortypes/ne-eapauthenticatortypes-eap_authenticator_send_timeout
 type EAP_AUTHENTICATOR_SEND_TIMEOUT int32
 
@@ -129,6 +359,21 @@ const (
 	EAP_AUTHENTICATOR_SEND_TIMEOUT_BASIC       EAP_AUTHENTICATOR_SEND_TIMEOUT = 1
 	EAP_AUTHENTICATOR_SEND_TIMEOUT_INTERACTIVE EAP_AUTHENTICATOR_SEND_TIMEOUT = 2
 )
+
+// String returns the EAP_AUTHENTICATOR_SEND_TIMEOUT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAP_AUTHENTICATOR_SEND_TIMEOUT) String() string {
+	switch e {
+	case EAP_AUTHENTICATOR_SEND_TIMEOUT_NONE:
+		return "EAP_AUTHENTICATOR_SEND_TIMEOUT_NONE"
+	case EAP_AUTHENTICATOR_SEND_TIMEOUT_BASIC:
+		return "EAP_AUTHENTICATOR_SEND_TIMEOUT_BASIC"
+	case EAP_AUTHENTICATOR_SEND_TIMEOUT_INTERACTIVE:
+		return "EAP_AUTHENTICATOR_SEND_TIMEOUT_INTERACTIVE"
+	default:
+		return fmt.Sprintf("EAP_AUTHENTICATOR_SEND_TIMEOUT(%d)", int32(e))
+	}
+}
 
 // EAP_CONFIG_INPUT_FIELD_TYPE: https://learn.microsoft.com/windows/win32/api/eaptypes/ne-eaptypes-eap_config_input_field_type
 type EAP_CONFIG_INPUT_FIELD_TYPE int32
@@ -145,6 +390,33 @@ const (
 	EapConfigSmartCardError       EAP_CONFIG_INPUT_FIELD_TYPE = 8
 )
 
+// String returns the EAP_CONFIG_INPUT_FIELD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAP_CONFIG_INPUT_FIELD_TYPE) String() string {
+	switch e {
+	case EapConfigInputUsername:
+		return "EapConfigInputUsername"
+	case EapConfigInputPassword:
+		return "EapConfigInputPassword"
+	case EapConfigInputNetworkUsername:
+		return "EapConfigInputNetworkUsername"
+	case EapConfigInputNetworkPassword:
+		return "EapConfigInputNetworkPassword"
+	case EapConfigInputPin:
+		return "EapConfigInputPin"
+	case EapConfigInputPSK:
+		return "EapConfigInputPSK"
+	case EapConfigInputEdit:
+		return "EapConfigInputEdit"
+	case EapConfigSmartCardUsername:
+		return "EapConfigSmartCardUsername"
+	case EapConfigSmartCardError:
+		return "EapConfigSmartCardError"
+	default:
+		return fmt.Sprintf("EAP_CONFIG_INPUT_FIELD_TYPE(%d)", int32(e))
+	}
+}
+
 // EAP_INTERACTIVE_UI_DATA_TYPE: https://learn.microsoft.com/windows/win32/api/eaptypes/ne-eaptypes-eap_interactive_ui_data_type
 type EAP_INTERACTIVE_UI_DATA_TYPE int32
 
@@ -157,6 +429,27 @@ const (
 	EapCredLogonResp  EAP_INTERACTIVE_UI_DATA_TYPE = 5
 )
 
+// String returns the EAP_INTERACTIVE_UI_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAP_INTERACTIVE_UI_DATA_TYPE) String() string {
+	switch e {
+	case EapCredReq:
+		return "EapCredReq"
+	case EapCredResp:
+		return "EapCredResp"
+	case EapCredExpiryReq:
+		return "EapCredExpiryReq"
+	case EapCredExpiryResp:
+		return "EapCredExpiryResp"
+	case EapCredLogonReq:
+		return "EapCredLogonReq"
+	case EapCredLogonResp:
+		return "EapCredLogonResp"
+	default:
+		return fmt.Sprintf("EAP_INTERACTIVE_UI_DATA_TYPE(%d)", int32(e))
+	}
+}
+
 // EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION: https://learn.microsoft.com/windows/win32/api/eapauthenticatoractiondefine/ne-eapauthenticatoractiondefine-eap_method_authenticator_response_action
 type EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION int32
 
@@ -168,6 +461,27 @@ const (
 	EAP_METHOD_AUTHENTICATOR_RESPONSE_AUTHENTICATE    EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION = 4
 	EAP_METHOD_AUTHENTICATOR_RESPONSE_HANDLE_IDENTITY EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION = 5
 )
+
+// String returns the EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION) String() string {
+	switch e {
+	case EAP_METHOD_AUTHENTICATOR_RESPONSE_DISCARD:
+		return "EAP_METHOD_AUTHENTICATOR_RESPONSE_DISCARD"
+	case EAP_METHOD_AUTHENTICATOR_RESPONSE_SEND:
+		return "EAP_METHOD_AUTHENTICATOR_RESPONSE_SEND"
+	case EAP_METHOD_AUTHENTICATOR_RESPONSE_RESULT:
+		return "EAP_METHOD_AUTHENTICATOR_RESPONSE_RESULT"
+	case EAP_METHOD_AUTHENTICATOR_RESPONSE_RESPOND:
+		return "EAP_METHOD_AUTHENTICATOR_RESPONSE_RESPOND"
+	case EAP_METHOD_AUTHENTICATOR_RESPONSE_AUTHENTICATE:
+		return "EAP_METHOD_AUTHENTICATOR_RESPONSE_AUTHENTICATE"
+	case EAP_METHOD_AUTHENTICATOR_RESPONSE_HANDLE_IDENTITY:
+		return "EAP_METHOD_AUTHENTICATOR_RESPONSE_HANDLE_IDENTITY"
+	default:
+		return fmt.Sprintf("EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION(%d)", int32(e))
+	}
+}
 
 // EAP_METHOD_PROPERTY_TYPE: https://learn.microsoft.com/windows/win32/api/eaptypes/ne-eaptypes-eap_method_property_type
 type EAP_METHOD_PROPERTY_TYPE int32
@@ -206,6 +520,77 @@ const (
 	EmptPropVendorSpecific             EAP_METHOD_PROPERTY_TYPE = 255
 )
 
+// String returns the EAP_METHOD_PROPERTY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAP_METHOD_PROPERTY_TYPE) String() string {
+	switch e {
+	case EmptPropCipherSuiteNegotiation:
+		return "EmptPropCipherSuiteNegotiation"
+	case EmptPropMutualAuth:
+		return "EmptPropMutualAuth"
+	case EmptPropIntegrity:
+		return "EmptPropIntegrity"
+	case EmptPropReplayProtection:
+		return "EmptPropReplayProtection"
+	case EmptPropConfidentiality:
+		return "EmptPropConfidentiality"
+	case EmptPropKeyDerivation:
+		return "EmptPropKeyDerivation"
+	case EmptPropKeyStrength64:
+		return "EmptPropKeyStrength64"
+	case EmptPropKeyStrength128:
+		return "EmptPropKeyStrength128"
+	case EmptPropKeyStrength256:
+		return "EmptPropKeyStrength256"
+	case EmptPropKeyStrength512:
+		return "EmptPropKeyStrength512"
+	case EmptPropKeyStrength1024:
+		return "EmptPropKeyStrength1024"
+	case EmptPropDictionaryAttackResistance:
+		return "EmptPropDictionaryAttackResistance"
+	case EmptPropFastReconnect:
+		return "EmptPropFastReconnect"
+	case EmptPropCryptoBinding:
+		return "EmptPropCryptoBinding"
+	case EmptPropSessionIndependence:
+		return "EmptPropSessionIndependence"
+	case EmptPropFragmentation:
+		return "EmptPropFragmentation"
+	case EmptPropChannelBinding:
+		return "EmptPropChannelBinding"
+	case EmptPropNap:
+		return "EmptPropNap"
+	case EmptPropStandalone:
+		return "EmptPropStandalone"
+	case EmptPropMppeEncryption:
+		return "EmptPropMppeEncryption"
+	case EmptPropTunnelMethod:
+		return "EmptPropTunnelMethod"
+	case EmptPropSupportsConfig:
+		return "EmptPropSupportsConfig"
+	case EmptPropCertifiedMethod:
+		return "EmptPropCertifiedMethod"
+	case EmptPropHiddenMethod:
+		return "EmptPropHiddenMethod"
+	case EmptPropMachineAuth:
+		return "EmptPropMachineAuth"
+	case EmptPropUserAuth:
+		return "EmptPropUserAuth"
+	case EmptPropIdentityPrivacy:
+		return "EmptPropIdentityPrivacy"
+	case EmptPropMethodChaining:
+		return "EmptPropMethodChaining"
+	case EmptPropSharedStateEquivalence:
+		return "EmptPropSharedStateEquivalence"
+	case EmptLegacyMethodPropertyFlag:
+		return "EmptLegacyMethodPropertyFlag"
+	case EmptPropVendorSpecific:
+		return "EmptPropVendorSpecific"
+	default:
+		return fmt.Sprintf("EAP_METHOD_PROPERTY_TYPE(%d)", int32(e))
+	}
+}
+
 // EAP_METHOD_PROPERTY_VALUE_TYPE: https://learn.microsoft.com/windows/win32/api/eaptypes/ne-eaptypes-eap_method_property_value_type
 type EAP_METHOD_PROPERTY_VALUE_TYPE int32
 
@@ -214,6 +599,21 @@ const (
 	EmpvtDword  EAP_METHOD_PROPERTY_VALUE_TYPE = 1
 	EmpvtString EAP_METHOD_PROPERTY_VALUE_TYPE = 2
 )
+
+// String returns the EAP_METHOD_PROPERTY_VALUE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAP_METHOD_PROPERTY_VALUE_TYPE) String() string {
+	switch e {
+	case EmpvtBool:
+		return "EmpvtBool"
+	case EmpvtDword:
+		return "EmpvtDword"
+	case EmpvtString:
+		return "EmpvtString"
+	default:
+		return fmt.Sprintf("EAP_METHOD_PROPERTY_VALUE_TYPE(%d)", int32(e))
+	}
+}
 
 // EapCode: https://learn.microsoft.com/windows/win32/api/eapmethodtypes/ne-eapmethodtypes-eapcode
 type EapCode int32
@@ -227,6 +627,23 @@ const (
 	EapCodeMaximum  EapCode = 4
 )
 
+// String returns the EapCode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EapCode) String() string {
+	switch e {
+	case EapCodeMinimum:
+		return "EapCodeMinimum"
+	case EapCodeResponse:
+		return "EapCodeResponse"
+	case EapCodeSuccess:
+		return "EapCodeSuccess"
+	case EapCodeFailure:
+		return "EapCodeFailure"
+	default:
+		return fmt.Sprintf("EapCode(%d)", int32(e))
+	}
+}
+
 // EapCredentialType: https://learn.microsoft.com/windows/win32/api/eaptypes/ne-eaptypes-eapcredentialtype
 type EapCredentialType int32
 
@@ -238,6 +655,25 @@ const (
 	EAP_SIM_CREDENTIAL               EapCredentialType = 4
 )
 
+// String returns the EapCredentialType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EapCredentialType) String() string {
+	switch e {
+	case EAP_EMPTY_CREDENTIAL:
+		return "EAP_EMPTY_CREDENTIAL"
+	case EAP_USERNAME_PASSWORD_CREDENTIAL:
+		return "EAP_USERNAME_PASSWORD_CREDENTIAL"
+	case EAP_WINLOGON_CREDENTIAL:
+		return "EAP_WINLOGON_CREDENTIAL"
+	case EAP_CERTIFICATE_CREDENTIAL:
+		return "EAP_CERTIFICATE_CREDENTIAL"
+	case EAP_SIM_CREDENTIAL:
+		return "EAP_SIM_CREDENTIAL"
+	default:
+		return fmt.Sprintf("EapCredentialType(%d)", int32(e))
+	}
+}
+
 // EapHostPeerAuthParams: https://learn.microsoft.com/windows/win32/api/eaphostpeertypes/ne-eaphostpeertypes-eaphostpeerauthparams
 type EapHostPeerAuthParams int32
 
@@ -248,6 +684,23 @@ const (
 	EapHostNapInfo                  EapHostPeerAuthParams = 4
 )
 
+// String returns the EapHostPeerAuthParams constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EapHostPeerAuthParams) String() string {
+	switch e {
+	case EapHostPeerAuthStatus:
+		return "EapHostPeerAuthStatus"
+	case EapHostPeerIdentity:
+		return "EapHostPeerIdentity"
+	case EapHostPeerIdentityExtendedInfo:
+		return "EapHostPeerIdentityExtendedInfo"
+	case EapHostNapInfo:
+		return "EapHostNapInfo"
+	default:
+		return fmt.Sprintf("EapHostPeerAuthParams(%d)", int32(e))
+	}
+}
+
 // EapHostPeerMethodResultReason: https://learn.microsoft.com/windows/win32/api/eaphostpeertypes/ne-eaphostpeertypes-eaphostpeermethodresultreason
 type EapHostPeerMethodResultReason int32
 
@@ -256,6 +709,21 @@ const (
 	EapHostPeerMethodResultTimeout            EapHostPeerMethodResultReason = 2
 	EapHostPeerMethodResultFromMethod         EapHostPeerMethodResultReason = 3
 )
+
+// String returns the EapHostPeerMethodResultReason constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EapHostPeerMethodResultReason) String() string {
+	switch e {
+	case EapHostPeerMethodResultAltSuccessReceived:
+		return "EapHostPeerMethodResultAltSuccessReceived"
+	case EapHostPeerMethodResultTimeout:
+		return "EapHostPeerMethodResultTimeout"
+	case EapHostPeerMethodResultFromMethod:
+		return "EapHostPeerMethodResultFromMethod"
+	default:
+		return fmt.Sprintf("EapHostPeerMethodResultReason(%d)", int32(e))
+	}
+}
 
 // EapHostPeerResponseAction: https://learn.microsoft.com/windows/win32/api/eaphostpeertypes/ne-eaphostpeertypes-eaphostpeerresponseaction
 type EapHostPeerResponseAction int32
@@ -270,6 +738,29 @@ const (
 	EapHostPeerResponseNone                EapHostPeerResponseAction = 6
 )
 
+// String returns the EapHostPeerResponseAction constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EapHostPeerResponseAction) String() string {
+	switch e {
+	case EapHostPeerResponseDiscard:
+		return "EapHostPeerResponseDiscard"
+	case EapHostPeerResponseSend:
+		return "EapHostPeerResponseSend"
+	case EapHostPeerResponseResult:
+		return "EapHostPeerResponseResult"
+	case EapHostPeerResponseInvokeUi:
+		return "EapHostPeerResponseInvokeUi"
+	case EapHostPeerResponseRespond:
+		return "EapHostPeerResponseRespond"
+	case EapHostPeerResponseStartAuthentication:
+		return "EapHostPeerResponseStartAuthentication"
+	case EapHostPeerResponseNone:
+		return "EapHostPeerResponseNone"
+	default:
+		return fmt.Sprintf("EapHostPeerResponseAction(%d)", int32(e))
+	}
+}
+
 // EapPeerMethodResponseAction: https://learn.microsoft.com/windows/win32/api/eapauthenticatoractiondefine/ne-eapauthenticatoractiondefine-eappeermethodresponseaction
 type EapPeerMethodResponseAction int32
 
@@ -282,6 +773,27 @@ const (
 	EapPeerMethodResponseActionNone     EapPeerMethodResponseAction = 5
 )
 
+// String returns the EapPeerMethodResponseAction constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EapPeerMethodResponseAction) String() string {
+	switch e {
+	case EapPeerMethodResponseActionDiscard:
+		return "EapPeerMethodResponseActionDiscard"
+	case EapPeerMethodResponseActionSend:
+		return "EapPeerMethodResponseActionSend"
+	case EapPeerMethodResponseActionResult:
+		return "EapPeerMethodResponseActionResult"
+	case EapPeerMethodResponseActionInvokeUI:
+		return "EapPeerMethodResponseActionInvokeUI"
+	case EapPeerMethodResponseActionRespond:
+		return "EapPeerMethodResponseActionRespond"
+	case EapPeerMethodResponseActionNone:
+		return "EapPeerMethodResponseActionNone"
+	default:
+		return fmt.Sprintf("EapPeerMethodResponseAction(%d)", int32(e))
+	}
+}
+
 // EapPeerMethodResultReason: https://learn.microsoft.com/windows/win32/api/eapauthenticatoractiondefine/ne-eapauthenticatoractiondefine-eappeermethodresultreason
 type EapPeerMethodResultReason int32
 
@@ -290,6 +802,21 @@ const (
 	EapPeerMethodResultSuccess EapPeerMethodResultReason = 2
 	EapPeerMethodResultFailure EapPeerMethodResultReason = 3
 )
+
+// String returns the EapPeerMethodResultReason constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EapPeerMethodResultReason) String() string {
+	switch e {
+	case EapPeerMethodResultUnknown:
+		return "EapPeerMethodResultUnknown"
+	case EapPeerMethodResultSuccess:
+		return "EapPeerMethodResultSuccess"
+	case EapPeerMethodResultFailure:
+		return "EapPeerMethodResultFailure"
+	default:
+		return fmt.Sprintf("EapPeerMethodResultReason(%d)", int32(e))
+	}
+}
 
 // ISOLATION_STATE: https://learn.microsoft.com/windows/win32/api/eaphostpeertypes/ne-eaphostpeertypes-isolation_state
 type ISOLATION_STATE int32
@@ -300,6 +827,23 @@ const (
 	ISOLATION_STATE_IN_PROBATION      ISOLATION_STATE = 2
 	ISOLATION_STATE_RESTRICTED_ACCESS ISOLATION_STATE = 3
 )
+
+// String returns the ISOLATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ISOLATION_STATE) String() string {
+	switch e {
+	case ISOLATION_STATE_UNKNOWN:
+		return "ISOLATION_STATE_UNKNOWN"
+	case ISOLATION_STATE_NOT_RESTRICTED:
+		return "ISOLATION_STATE_NOT_RESTRICTED"
+	case ISOLATION_STATE_IN_PROBATION:
+		return "ISOLATION_STATE_IN_PROBATION"
+	case ISOLATION_STATE_RESTRICTED_ACCESS:
+		return "ISOLATION_STATE_RESTRICTED_ACCESS"
+	default:
+		return fmt.Sprintf("ISOLATION_STATE(%d)", int32(e))
+	}
+}
 
 // PPP_EAP_ACTION: https://learn.microsoft.com/windows/win32/api/raseapif/ne-raseapif-ppp_eap_action
 type PPP_EAP_ACTION int32
@@ -315,6 +859,33 @@ const (
 	EAPACTION_IndicateTLV                PPP_EAP_ACTION = 7
 	EAPACTION_IndicateIdentity           PPP_EAP_ACTION = 8
 )
+
+// String returns the PPP_EAP_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PPP_EAP_ACTION) String() string {
+	switch e {
+	case EAPACTION_NoAction:
+		return "EAPACTION_NoAction"
+	case EAPACTION_Authenticate:
+		return "EAPACTION_Authenticate"
+	case EAPACTION_Done:
+		return "EAPACTION_Done"
+	case EAPACTION_SendAndDone:
+		return "EAPACTION_SendAndDone"
+	case EAPACTION_Send:
+		return "EAPACTION_Send"
+	case EAPACTION_SendWithTimeout:
+		return "EAPACTION_SendWithTimeout"
+	case EAPACTION_SendWithTimeoutInteractive:
+		return "EAPACTION_SendWithTimeoutInteractive"
+	case EAPACTION_IndicateTLV:
+		return "EAPACTION_IndicateTLV"
+	case EAPACTION_IndicateIdentity:
+		return "EAPACTION_IndicateIdentity"
+	default:
+		return fmt.Sprintf("PPP_EAP_ACTION(%d)", int32(e))
+	}
+}
 
 // RAS_AUTH_ATTRIBUTE_TYPE: https://learn.microsoft.com/windows/win32/api/raseapif/ne-raseapif-ras_auth_attribute_type
 type RAS_AUTH_ATTRIBUTE_TYPE int32
@@ -417,3 +988,200 @@ const (
 	RaatSessionId              RAS_AUTH_ATTRIBUTE_TYPE = 9004
 	RaatReserved               RAS_AUTH_ATTRIBUTE_TYPE = -1
 )
+
+// String returns the RAS_AUTH_ATTRIBUTE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RAS_AUTH_ATTRIBUTE_TYPE) String() string {
+	switch e {
+	case RaatMinimum:
+		return "RaatMinimum"
+	case RaatUserName:
+		return "RaatUserName"
+	case RaatUserPassword:
+		return "RaatUserPassword"
+	case RaatMD5CHAPPassword:
+		return "RaatMD5CHAPPassword"
+	case RaatNASIPAddress:
+		return "RaatNASIPAddress"
+	case RaatNASPort:
+		return "RaatNASPort"
+	case RaatServiceType:
+		return "RaatServiceType"
+	case RaatFramedProtocol:
+		return "RaatFramedProtocol"
+	case RaatFramedIPAddress:
+		return "RaatFramedIPAddress"
+	case RaatFramedIPNetmask:
+		return "RaatFramedIPNetmask"
+	case RaatFramedRouting:
+		return "RaatFramedRouting"
+	case RaatFilterId:
+		return "RaatFilterId"
+	case RaatFramedMTU:
+		return "RaatFramedMTU"
+	case RaatFramedCompression:
+		return "RaatFramedCompression"
+	case RaatLoginIPHost:
+		return "RaatLoginIPHost"
+	case RaatLoginService:
+		return "RaatLoginService"
+	case RaatLoginTCPPort:
+		return "RaatLoginTCPPort"
+	case RaatUnassigned17:
+		return "RaatUnassigned17"
+	case RaatReplyMessage:
+		return "RaatReplyMessage"
+	case RaatCallbackNumber:
+		return "RaatCallbackNumber"
+	case RaatCallbackId:
+		return "RaatCallbackId"
+	case RaatUnassigned21:
+		return "RaatUnassigned21"
+	case RaatFramedRoute:
+		return "RaatFramedRoute"
+	case RaatFramedIPXNetwork:
+		return "RaatFramedIPXNetwork"
+	case RaatState:
+		return "RaatState"
+	case RaatClass:
+		return "RaatClass"
+	case RaatVendorSpecific:
+		return "RaatVendorSpecific"
+	case RaatSessionTimeout:
+		return "RaatSessionTimeout"
+	case RaatIdleTimeout:
+		return "RaatIdleTimeout"
+	case RaatTerminationAction:
+		return "RaatTerminationAction"
+	case RaatCalledStationId:
+		return "RaatCalledStationId"
+	case RaatCallingStationId:
+		return "RaatCallingStationId"
+	case RaatNASIdentifier:
+		return "RaatNASIdentifier"
+	case RaatProxyState:
+		return "RaatProxyState"
+	case RaatLoginLATService:
+		return "RaatLoginLATService"
+	case RaatLoginLATNode:
+		return "RaatLoginLATNode"
+	case RaatLoginLATGroup:
+		return "RaatLoginLATGroup"
+	case RaatFramedAppleTalkLink:
+		return "RaatFramedAppleTalkLink"
+	case RaatFramedAppleTalkNetwork:
+		return "RaatFramedAppleTalkNetwork"
+	case RaatFramedAppleTalkZone:
+		return "RaatFramedAppleTalkZone"
+	case RaatAcctStatusType:
+		return "RaatAcctStatusType"
+	case RaatAcctDelayTime:
+		return "RaatAcctDelayTime"
+	case RaatAcctInputOctets:
+		return "RaatAcctInputOctets"
+	case RaatAcctOutputOctets:
+		return "RaatAcctOutputOctets"
+	case RaatAcctSessionId:
+		return "RaatAcctSessionId"
+	case RaatAcctAuthentic:
+		return "RaatAcctAuthentic"
+	case RaatAcctSessionTime:
+		return "RaatAcctSessionTime"
+	case RaatAcctInputPackets:
+		return "RaatAcctInputPackets"
+	case RaatAcctOutputPackets:
+		return "RaatAcctOutputPackets"
+	case RaatAcctTerminateCause:
+		return "RaatAcctTerminateCause"
+	case RaatAcctMultiSessionId:
+		return "RaatAcctMultiSessionId"
+	case RaatAcctLinkCount:
+		return "RaatAcctLinkCount"
+	case RaatAcctEventTimeStamp:
+		return "RaatAcctEventTimeStamp"
+	case RaatMD5CHAPChallenge:
+		return "RaatMD5CHAPChallenge"
+	case RaatNASPortType:
+		return "RaatNASPortType"
+	case RaatPortLimit:
+		return "RaatPortLimit"
+	case RaatLoginLATPort:
+		return "RaatLoginLATPort"
+	case RaatTunnelType:
+		return "RaatTunnelType"
+	case RaatTunnelMediumType:
+		return "RaatTunnelMediumType"
+	case RaatTunnelClientEndpoint:
+		return "RaatTunnelClientEndpoint"
+	case RaatTunnelServerEndpoint:
+		return "RaatTunnelServerEndpoint"
+	case RaatARAPPassword:
+		return "RaatARAPPassword"
+	case RaatARAPFeatures:
+		return "RaatARAPFeatures"
+	case RaatARAPZoneAccess:
+		return "RaatARAPZoneAccess"
+	case RaatARAPSecurity:
+		return "RaatARAPSecurity"
+	case RaatARAPSecurityData:
+		return "RaatARAPSecurityData"
+	case RaatPasswordRetry:
+		return "RaatPasswordRetry"
+	case RaatPrompt:
+		return "RaatPrompt"
+	case RaatConnectInfo:
+		return "RaatConnectInfo"
+	case RaatConfigurationToken:
+		return "RaatConfigurationToken"
+	case RaatEAPMessage:
+		return "RaatEAPMessage"
+	case RaatSignature:
+		return "RaatSignature"
+	case RaatARAPChallengeResponse:
+		return "RaatARAPChallengeResponse"
+	case RaatAcctInterimInterval:
+		return "RaatAcctInterimInterval"
+	case RaatNASIPv6Address:
+		return "RaatNASIPv6Address"
+	case RaatFramedInterfaceId:
+		return "RaatFramedInterfaceId"
+	case RaatFramedIPv6Prefix:
+		return "RaatFramedIPv6Prefix"
+	case RaatLoginIPv6Host:
+		return "RaatLoginIPv6Host"
+	case RaatFramedIPv6Route:
+		return "RaatFramedIPv6Route"
+	case RaatFramedIPv6Pool:
+		return "RaatFramedIPv6Pool"
+	case RaatARAPGuestLogon:
+		return "RaatARAPGuestLogon"
+	case RaatCertificateOID:
+		return "RaatCertificateOID"
+	case RaatEAPConfiguration:
+		return "RaatEAPConfiguration"
+	case RaatPEAPEmbeddedEAPTypeId:
+		return "RaatPEAPEmbeddedEAPTypeId"
+	case RaatPEAPFastRoamedSession:
+		return "RaatPEAPFastRoamedSession"
+	case RaatEAPTLV:
+		return "RaatEAPTLV"
+	case RaatCredentialsChanged:
+		return "RaatCredentialsChanged"
+	case RaatCertificateThumbprint:
+		return "RaatCertificateThumbprint"
+	case RaatPeerId:
+		return "RaatPeerId"
+	case RaatServerId:
+		return "RaatServerId"
+	case RaatMethodId:
+		return "RaatMethodId"
+	case RaatEMSK:
+		return "RaatEMSK"
+	case RaatSessionId:
+		return "RaatSessionId"
+	case RaatReserved:
+		return "RaatReserved"
+	default:
+		return fmt.Sprintf("RAS_AUTH_ATTRIBUTE_TYPE(%d)", int32(e))
+	}
+}

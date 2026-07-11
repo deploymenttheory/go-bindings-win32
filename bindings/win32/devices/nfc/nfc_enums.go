@@ -4,6 +4,10 @@
 
 package nfc
 
+import (
+	"fmt"
+)
+
 type NFC_DEVICE_TYPE int32
 
 const (
@@ -16,6 +20,29 @@ const (
 	NfcReader       NFC_DEVICE_TYPE = 6
 )
 
+// String returns the NFC_DEVICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NFC_DEVICE_TYPE) String() string {
+	switch e {
+	case NfcType1Tag:
+		return "NfcType1Tag"
+	case NfcType2Tag:
+		return "NfcType2Tag"
+	case NfcType3Tag:
+		return "NfcType3Tag"
+	case NfcType4Tag:
+		return "NfcType4Tag"
+	case NfcIP1Target:
+		return "NfcIP1Target"
+	case NfcIP1Initiator:
+		return "NfcIP1Initiator"
+	case NfcReader:
+		return "NfcReader"
+	default:
+		return fmt.Sprintf("NFC_DEVICE_TYPE(%d)", int32(e))
+	}
+}
+
 type NFC_LLCP_LINK_STATUS int32
 
 const (
@@ -23,12 +50,38 @@ const (
 	LinkDeactivated NFC_LLCP_LINK_STATUS = 1
 )
 
+// String returns the NFC_LLCP_LINK_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NFC_LLCP_LINK_STATUS) String() string {
+	switch e {
+	case LinkActivated:
+		return "LinkActivated"
+	case LinkDeactivated:
+		return "LinkDeactivated"
+	default:
+		return fmt.Sprintf("NFC_LLCP_LINK_STATUS(%d)", int32(e))
+	}
+}
+
 type NFC_LLCP_SOCKET_CONNECT_TYPE int32
 
 const (
 	NfcConnectBySap NFC_LLCP_SOCKET_CONNECT_TYPE = 0
 	NfcConnectByUri NFC_LLCP_SOCKET_CONNECT_TYPE = 1
 )
+
+// String returns the NFC_LLCP_SOCKET_CONNECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NFC_LLCP_SOCKET_CONNECT_TYPE) String() string {
+	switch e {
+	case NfcConnectBySap:
+		return "NfcConnectBySap"
+	case NfcConnectByUri:
+		return "NfcConnectByUri"
+	default:
+		return fmt.Sprintf("NFC_LLCP_SOCKET_CONNECT_TYPE(%d)", int32(e))
+	}
+}
 
 type NFC_LLCP_SOCKET_ERROR int32
 
@@ -39,12 +92,42 @@ const (
 	NfcLlcpErrorNotBusyCondition NFC_LLCP_SOCKET_ERROR = 3
 )
 
+// String returns the NFC_LLCP_SOCKET_ERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NFC_LLCP_SOCKET_ERROR) String() string {
+	switch e {
+	case NfcLlcpErrorDisconnected:
+		return "NfcLlcpErrorDisconnected"
+	case NfcLlcpErrorFrameRejected:
+		return "NfcLlcpErrorFrameRejected"
+	case NfcLlcpErrorBusyCondition:
+		return "NfcLlcpErrorBusyCondition"
+	case NfcLlcpErrorNotBusyCondition:
+		return "NfcLlcpErrorNotBusyCondition"
+	default:
+		return fmt.Sprintf("NFC_LLCP_SOCKET_ERROR(%d)", int32(e))
+	}
+}
+
 type NFC_LLCP_SOCKET_TYPE int32
 
 const (
 	ConnectionOriented NFC_LLCP_SOCKET_TYPE = 0
 	Connectionless     NFC_LLCP_SOCKET_TYPE = 1
 )
+
+// String returns the NFC_LLCP_SOCKET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NFC_LLCP_SOCKET_TYPE) String() string {
+	switch e {
+	case ConnectionOriented:
+		return "ConnectionOriented"
+	case Connectionless:
+		return "Connectionless"
+	default:
+		return fmt.Sprintf("NFC_LLCP_SOCKET_TYPE(%d)", int32(e))
+	}
+}
 
 type NFC_P2P_MODE int32
 
@@ -54,6 +137,21 @@ const (
 	NfcDepListen  NFC_P2P_MODE = 2
 )
 
+// String returns the NFC_P2P_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NFC_P2P_MODE) String() string {
+	switch e {
+	case NfcDepDefault:
+		return "NfcDepDefault"
+	case NfcDepPoll:
+		return "NfcDepPoll"
+	case NfcDepListen:
+		return "NfcDepListen"
+	default:
+		return fmt.Sprintf("NFC_P2P_MODE(%d)", int32(e))
+	}
+}
+
 type NFC_RELEASE_TYPE int32
 
 const (
@@ -61,6 +159,21 @@ const (
 	SleepMode NFC_RELEASE_TYPE = 1
 	Discovery NFC_RELEASE_TYPE = 2
 )
+
+// String returns the NFC_RELEASE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NFC_RELEASE_TYPE) String() string {
+	switch e {
+	case IdleMode:
+		return "IdleMode"
+	case SleepMode:
+		return "SleepMode"
+	case Discovery:
+		return "Discovery"
+	default:
+		return fmt.Sprintf("NFC_RELEASE_TYPE(%d)", int32(e))
+	}
+}
 
 type NFC_RF_DISCOVERY_MODE int32
 
@@ -70,12 +183,40 @@ const (
 	RFDiscoveryResume NFC_RF_DISCOVERY_MODE = 2
 )
 
+// String returns the NFC_RF_DISCOVERY_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NFC_RF_DISCOVERY_MODE) String() string {
+	switch e {
+	case RfDiscoveryConfig:
+		return "RfDiscoveryConfig"
+	case RfDiscoveryStart:
+		return "RfDiscoveryStart"
+	case RFDiscoveryResume:
+		return "RFDiscoveryResume"
+	default:
+		return fmt.Sprintf("NFC_RF_DISCOVERY_MODE(%d)", int32(e))
+	}
+}
+
 type NFC_SE_EMULATION_MODE int32
 
 const (
 	EmulationDisabled NFC_SE_EMULATION_MODE = 0
 	EmulationEnabled  NFC_SE_EMULATION_MODE = 1
 )
+
+// String returns the NFC_SE_EMULATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NFC_SE_EMULATION_MODE) String() string {
+	switch e {
+	case EmulationDisabled:
+		return "EmulationDisabled"
+	case EmulationEnabled:
+		return "EmulationEnabled"
+	default:
+		return fmt.Sprintf("NFC_SE_EMULATION_MODE(%d)", int32(e))
+	}
+}
 
 type NFC_SNEP_REQUEST_TYPE int32
 
@@ -84,12 +225,38 @@ const (
 	SnepRequestPut NFC_SNEP_REQUEST_TYPE = 1
 )
 
+// String returns the NFC_SNEP_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NFC_SNEP_REQUEST_TYPE) String() string {
+	switch e {
+	case SnepRequestGet:
+		return "SnepRequestGet"
+	case SnepRequestPut:
+		return "SnepRequestPut"
+	default:
+		return fmt.Sprintf("NFC_SNEP_REQUEST_TYPE(%d)", int32(e))
+	}
+}
+
 type NFC_SNEP_SERVER_TYPE int32
 
 const (
 	DefaultSnepServer  NFC_SNEP_SERVER_TYPE = 0
 	ExtendedSnepServer NFC_SNEP_SERVER_TYPE = 1
 )
+
+// String returns the NFC_SNEP_SERVER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NFC_SNEP_SERVER_TYPE) String() string {
+	switch e {
+	case DefaultSnepServer:
+		return "DefaultSnepServer"
+	case ExtendedSnepServer:
+		return "ExtendedSnepServer"
+	default:
+		return fmt.Sprintf("NFC_SNEP_SERVER_TYPE(%d)", int32(e))
+	}
+}
 
 type SECURE_ELEMENT_CARD_EMULATION_MODE int32
 
@@ -99,6 +266,23 @@ const (
 	EmulationOnPowerDependent   SECURE_ELEMENT_CARD_EMULATION_MODE = 2
 	EmulationStealthListen      SECURE_ELEMENT_CARD_EMULATION_MODE = 3
 )
+
+// String returns the SECURE_ELEMENT_CARD_EMULATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURE_ELEMENT_CARD_EMULATION_MODE) String() string {
+	switch e {
+	case EmulationOff:
+		return "EmulationOff"
+	case EmulationOnPowerIndependent:
+		return "EmulationOnPowerIndependent"
+	case EmulationOnPowerDependent:
+		return "EmulationOnPowerDependent"
+	case EmulationStealthListen:
+		return "EmulationStealthListen"
+	default:
+		return fmt.Sprintf("SECURE_ELEMENT_CARD_EMULATION_MODE(%d)", int32(e))
+	}
+}
 
 type SECURE_ELEMENT_EVENT_TYPE int32
 
@@ -113,12 +297,50 @@ const (
 	ExternalFieldExit       SECURE_ELEMENT_EVENT_TYPE = 7
 )
 
+// String returns the SECURE_ELEMENT_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURE_ELEMENT_EVENT_TYPE) String() string {
+	switch e {
+	case ExternalReaderArrival:
+		return "ExternalReaderArrival"
+	case ExternalReaderDeparture:
+		return "ExternalReaderDeparture"
+	case ApplicationSelected:
+		return "ApplicationSelected"
+	case Transaction:
+		return "Transaction"
+	case HceActivated:
+		return "HceActivated"
+	case HceDeactivated:
+		return "HceDeactivated"
+	case ExternalFieldEnter:
+		return "ExternalFieldEnter"
+	case ExternalFieldExit:
+		return "ExternalFieldExit"
+	default:
+		return fmt.Sprintf("SECURE_ELEMENT_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 type SECURE_ELEMENT_POWER_MODE int32
 
 const (
 	SEPowerMode_ForceOn  SECURE_ELEMENT_POWER_MODE = 0
 	SEPowerMode_AllowOff SECURE_ELEMENT_POWER_MODE = 1
 )
+
+// String returns the SECURE_ELEMENT_POWER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURE_ELEMENT_POWER_MODE) String() string {
+	switch e {
+	case SEPowerMode_ForceOn:
+		return "SEPowerMode_ForceOn"
+	case SEPowerMode_AllowOff:
+		return "SEPowerMode_AllowOff"
+	default:
+		return fmt.Sprintf("SECURE_ELEMENT_POWER_MODE(%d)", int32(e))
+	}
+}
 
 type SECURE_ELEMENT_ROUTING_TYPE int32
 
@@ -128,6 +350,21 @@ const (
 	RoutingTypeAid      SECURE_ELEMENT_ROUTING_TYPE = 2
 )
 
+// String returns the SECURE_ELEMENT_ROUTING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURE_ELEMENT_ROUTING_TYPE) String() string {
+	switch e {
+	case RoutingTypeTech:
+		return "RoutingTypeTech"
+	case RoutingTypeProtocol:
+		return "RoutingTypeProtocol"
+	case RoutingTypeAid:
+		return "RoutingTypeAid"
+	default:
+		return fmt.Sprintf("SECURE_ELEMENT_ROUTING_TYPE(%d)", int32(e))
+	}
+}
+
 type SECURE_ELEMENT_TYPE int32
 
 const (
@@ -135,3 +372,18 @@ const (
 	External   SECURE_ELEMENT_TYPE = 1
 	DeviceHost SECURE_ELEMENT_TYPE = 2
 )
+
+// String returns the SECURE_ELEMENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURE_ELEMENT_TYPE) String() string {
+	switch e {
+	case Integrated:
+		return "Integrated"
+	case External:
+		return "External"
+	case DeviceHost:
+		return "DeviceHost"
+	default:
+		return fmt.Sprintf("SECURE_ELEMENT_TYPE(%d)", int32(e))
+	}
+}

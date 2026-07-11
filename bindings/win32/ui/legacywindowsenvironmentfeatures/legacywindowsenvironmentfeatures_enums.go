@@ -4,6 +4,10 @@
 
 package legacywindowsenvironmentfeatures
 
+import (
+	"fmt"
+)
+
 type EMPTY_VOLUME_CACHE_FLAGS uint32
 
 const (
@@ -18,6 +22,33 @@ const (
 	EVCF_SYSTEMAUTORUN        EMPTY_VOLUME_CACHE_FLAGS = 256
 )
 
+// String returns the EMPTY_VOLUME_CACHE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EMPTY_VOLUME_CACHE_FLAGS) String() string {
+	switch e {
+	case EVCF_HASSETTINGS:
+		return "EVCF_HASSETTINGS"
+	case EVCF_ENABLEBYDEFAULT:
+		return "EVCF_ENABLEBYDEFAULT"
+	case EVCF_REMOVEFROMLIST:
+		return "EVCF_REMOVEFROMLIST"
+	case EVCF_ENABLEBYDEFAULT_AUTO:
+		return "EVCF_ENABLEBYDEFAULT_AUTO"
+	case EVCF_DONTSHOWIFZERO:
+		return "EVCF_DONTSHOWIFZERO"
+	case EVCF_SETTINGSMODE:
+		return "EVCF_SETTINGSMODE"
+	case EVCF_OUTOFDISKSPACE:
+		return "EVCF_OUTOFDISKSPACE"
+	case EVCF_USERCONSENTOBTAINED:
+		return "EVCF_USERCONSENTOBTAINED"
+	case EVCF_SYSTEMAUTORUN:
+		return "EVCF_SYSTEMAUTORUN"
+	default:
+		return fmt.Sprintf("EMPTY_VOLUME_CACHE_FLAGS(%d)", uint32(e))
+	}
+}
+
 type RECONCILEF int32
 
 const (
@@ -30,3 +61,28 @@ const (
 	RECONCILEF_ONLYYOUWERECHANGED   RECONCILEF = 64
 	ALL_RECONCILE_FLAGS             RECONCILEF = 127
 )
+
+// String returns the RECONCILEF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RECONCILEF) String() string {
+	switch e {
+	case RECONCILEF_MAYBOTHERUSER:
+		return "RECONCILEF_MAYBOTHERUSER"
+	case RECONCILEF_FEEDBACKWINDOWVALID:
+		return "RECONCILEF_FEEDBACKWINDOWVALID"
+	case RECONCILEF_NORESIDUESOK:
+		return "RECONCILEF_NORESIDUESOK"
+	case RECONCILEF_OMITSELFRESIDUE:
+		return "RECONCILEF_OMITSELFRESIDUE"
+	case RECONCILEF_RESUMERECONCILIATION:
+		return "RECONCILEF_RESUMERECONCILIATION"
+	case RECONCILEF_YOUMAYDOTHEUPDATES:
+		return "RECONCILEF_YOUMAYDOTHEUPDATES"
+	case RECONCILEF_ONLYYOUWERECHANGED:
+		return "RECONCILEF_ONLYYOUWERECHANGED"
+	case ALL_RECONCILE_FLAGS:
+		return "ALL_RECONCILE_FLAGS"
+	default:
+		return fmt.Sprintf("RECONCILEF(%d)", int32(e))
+	}
+}

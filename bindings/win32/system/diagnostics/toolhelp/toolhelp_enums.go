@@ -4,6 +4,12 @@
 
 package toolhelp
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type CREATE_TOOLHELP_SNAPSHOT_FLAGS uint32
 
 const (
@@ -16,6 +22,37 @@ const (
 	TH32CS_SNAPTHREAD   CREATE_TOOLHELP_SNAPSHOT_FLAGS = 4
 )
 
+// String returns the CREATE_TOOLHELP_SNAPSHOT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATE_TOOLHELP_SNAPSHOT_FLAGS) String() string {
+	var parts []string
+	if e&TH32CS_INHERIT != 0 {
+		parts = append(parts, "TH32CS_INHERIT")
+	}
+	if e&TH32CS_SNAPALL != 0 {
+		parts = append(parts, "TH32CS_SNAPALL")
+	}
+	if e&TH32CS_SNAPHEAPLIST != 0 {
+		parts = append(parts, "TH32CS_SNAPHEAPLIST")
+	}
+	if e&TH32CS_SNAPMODULE != 0 {
+		parts = append(parts, "TH32CS_SNAPMODULE")
+	}
+	if e&TH32CS_SNAPMODULE32 != 0 {
+		parts = append(parts, "TH32CS_SNAPMODULE32")
+	}
+	if e&TH32CS_SNAPPROCESS != 0 {
+		parts = append(parts, "TH32CS_SNAPPROCESS")
+	}
+	if e&TH32CS_SNAPTHREAD != 0 {
+		parts = append(parts, "TH32CS_SNAPTHREAD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type HEAPENTRY32_FLAGS uint32
 
 const (
@@ -23,3 +60,18 @@ const (
 	LF32_FREE     HEAPENTRY32_FLAGS = 2
 	LF32_MOVEABLE HEAPENTRY32_FLAGS = 4
 )
+
+// String returns the HEAPENTRY32_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEAPENTRY32_FLAGS) String() string {
+	switch e {
+	case LF32_FIXED:
+		return "LF32_FIXED"
+	case LF32_FREE:
+		return "LF32_FREE"
+	case LF32_MOVEABLE:
+		return "LF32_MOVEABLE"
+	default:
+		return fmt.Sprintf("HEAPENTRY32_FLAGS(%d)", uint32(e))
+	}
+}

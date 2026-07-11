@@ -4,6 +4,10 @@
 
 package restartmanager
 
+import (
+	"fmt"
+)
+
 // RM_APP_STATUS: https://learn.microsoft.com/windows/win32/api/restartmanager/ne-restartmanager-rm_app_status
 type RM_APP_STATUS int32
 
@@ -19,6 +23,33 @@ const (
 	RmStatusRestartMasked  RM_APP_STATUS = 128
 )
 
+// String returns the RM_APP_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RM_APP_STATUS) String() string {
+	switch e {
+	case RmStatusUnknown:
+		return "RmStatusUnknown"
+	case RmStatusRunning:
+		return "RmStatusRunning"
+	case RmStatusStopped:
+		return "RmStatusStopped"
+	case RmStatusStoppedOther:
+		return "RmStatusStoppedOther"
+	case RmStatusRestarted:
+		return "RmStatusRestarted"
+	case RmStatusErrorOnStop:
+		return "RmStatusErrorOnStop"
+	case RmStatusErrorOnRestart:
+		return "RmStatusErrorOnRestart"
+	case RmStatusShutdownMasked:
+		return "RmStatusShutdownMasked"
+	case RmStatusRestartMasked:
+		return "RmStatusRestartMasked"
+	default:
+		return fmt.Sprintf("RM_APP_STATUS(%d)", int32(e))
+	}
+}
+
 // RM_APP_TYPE: https://learn.microsoft.com/windows/win32/api/restartmanager/ne-restartmanager-rm_app_type
 type RM_APP_TYPE int32
 
@@ -32,6 +63,29 @@ const (
 	RmCritical    RM_APP_TYPE = 1000
 )
 
+// String returns the RM_APP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RM_APP_TYPE) String() string {
+	switch e {
+	case RmUnknownApp:
+		return "RmUnknownApp"
+	case RmMainWindow:
+		return "RmMainWindow"
+	case RmOtherWindow:
+		return "RmOtherWindow"
+	case RmService:
+		return "RmService"
+	case RmExplorer:
+		return "RmExplorer"
+	case RmConsole:
+		return "RmConsole"
+	case RmCritical:
+		return "RmCritical"
+	default:
+		return fmt.Sprintf("RM_APP_TYPE(%d)", int32(e))
+	}
+}
+
 // RM_FILTER_ACTION: https://learn.microsoft.com/windows/win32/api/restartmanager/ne-restartmanager-rm_filter_action
 type RM_FILTER_ACTION int32
 
@@ -40,6 +94,21 @@ const (
 	RmNoRestart           RM_FILTER_ACTION = 1
 	RmNoShutdown          RM_FILTER_ACTION = 2
 )
+
+// String returns the RM_FILTER_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RM_FILTER_ACTION) String() string {
+	switch e {
+	case RmInvalidFilterAction:
+		return "RmInvalidFilterAction"
+	case RmNoRestart:
+		return "RmNoRestart"
+	case RmNoShutdown:
+		return "RmNoShutdown"
+	default:
+		return fmt.Sprintf("RM_FILTER_ACTION(%d)", int32(e))
+	}
+}
 
 // RM_FILTER_TRIGGER: https://learn.microsoft.com/windows/win32/api/restartmanager/ne-restartmanager-rm_filter_trigger
 type RM_FILTER_TRIGGER int32
@@ -50,6 +119,23 @@ const (
 	RmFilterTriggerProcess RM_FILTER_TRIGGER = 2
 	RmFilterTriggerService RM_FILTER_TRIGGER = 3
 )
+
+// String returns the RM_FILTER_TRIGGER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RM_FILTER_TRIGGER) String() string {
+	switch e {
+	case RmFilterTriggerInvalid:
+		return "RmFilterTriggerInvalid"
+	case RmFilterTriggerFile:
+		return "RmFilterTriggerFile"
+	case RmFilterTriggerProcess:
+		return "RmFilterTriggerProcess"
+	case RmFilterTriggerService:
+		return "RmFilterTriggerService"
+	default:
+		return fmt.Sprintf("RM_FILTER_TRIGGER(%d)", int32(e))
+	}
+}
 
 // RM_REBOOT_REASON: https://learn.microsoft.com/windows/win32/api/restartmanager/ne-restartmanager-rm_reboot_reason
 type RM_REBOOT_REASON int32
@@ -63,6 +149,27 @@ const (
 	RmRebootReasonDetectedSelf     RM_REBOOT_REASON = 16
 )
 
+// String returns the RM_REBOOT_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RM_REBOOT_REASON) String() string {
+	switch e {
+	case RmRebootReasonNone:
+		return "RmRebootReasonNone"
+	case RmRebootReasonPermissionDenied:
+		return "RmRebootReasonPermissionDenied"
+	case RmRebootReasonSessionMismatch:
+		return "RmRebootReasonSessionMismatch"
+	case RmRebootReasonCriticalProcess:
+		return "RmRebootReasonCriticalProcess"
+	case RmRebootReasonCriticalService:
+		return "RmRebootReasonCriticalService"
+	case RmRebootReasonDetectedSelf:
+		return "RmRebootReasonDetectedSelf"
+	default:
+		return fmt.Sprintf("RM_REBOOT_REASON(%d)", int32(e))
+	}
+}
+
 // RM_SHUTDOWN_TYPE: https://learn.microsoft.com/windows/win32/api/restartmanager/ne-restartmanager-rm_shutdown_type
 type RM_SHUTDOWN_TYPE int32
 
@@ -70,3 +177,16 @@ const (
 	RmForceShutdown          RM_SHUTDOWN_TYPE = 1
 	RmShutdownOnlyRegistered RM_SHUTDOWN_TYPE = 16
 )
+
+// String returns the RM_SHUTDOWN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RM_SHUTDOWN_TYPE) String() string {
+	switch e {
+	case RmForceShutdown:
+		return "RmForceShutdown"
+	case RmShutdownOnlyRegistered:
+		return "RmShutdownOnlyRegistered"
+	default:
+		return fmt.Sprintf("RM_SHUTDOWN_TYPE(%d)", int32(e))
+	}
+}

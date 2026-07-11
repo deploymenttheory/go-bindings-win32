@@ -4,6 +4,10 @@
 
 package windowssync
 
+import (
+	"fmt"
+)
+
 // CONFLICT_RESOLUTION_POLICY: https://learn.microsoft.com/windows/win32/api/winsync/ne-winsync-conflict_resolution_policy
 type CONFLICT_RESOLUTION_POLICY int32
 
@@ -14,6 +18,23 @@ const (
 	CRP_LAST                      CONFLICT_RESOLUTION_POLICY = 3
 )
 
+// String returns the CONFLICT_RESOLUTION_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONFLICT_RESOLUTION_POLICY) String() string {
+	switch e {
+	case CRP_NONE:
+		return "CRP_NONE"
+	case CRP_DESTINATION_PROVIDER_WINS:
+		return "CRP_DESTINATION_PROVIDER_WINS"
+	case CRP_SOURCE_PROVIDER_WINS:
+		return "CRP_SOURCE_PROVIDER_WINS"
+	case CRP_LAST:
+		return "CRP_LAST"
+	default:
+		return fmt.Sprintf("CONFLICT_RESOLUTION_POLICY(%d)", int32(e))
+	}
+}
+
 type CONSTRAINT_CONFLICT_REASON int32
 
 const (
@@ -23,6 +44,23 @@ const (
 	CCR_IDENTITY  CONSTRAINT_CONFLICT_REASON = 3
 )
 
+// String returns the CONSTRAINT_CONFLICT_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONSTRAINT_CONFLICT_REASON) String() string {
+	switch e {
+	case CCR_OTHER:
+		return "CCR_OTHER"
+	case CCR_COLLISION:
+		return "CCR_COLLISION"
+	case CCR_NOPARENT:
+		return "CCR_NOPARENT"
+	case CCR_IDENTITY:
+		return "CCR_IDENTITY"
+	default:
+		return fmt.Sprintf("CONSTRAINT_CONFLICT_REASON(%d)", int32(e))
+	}
+}
+
 // FILTERING_TYPE: https://learn.microsoft.com/windows/win32/api/winsync/ne-winsync-filtering_type
 type FILTERING_TYPE int32
 
@@ -31,11 +69,35 @@ const (
 	FT_CURRENT_ITEMS_AND_VERSIONS_FOR_MOVED_OUT_ITEMS FILTERING_TYPE = 1
 )
 
+// String returns the FILTERING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILTERING_TYPE) String() string {
+	switch e {
+	case FT_CURRENT_ITEMS_ONLY:
+		return "FT_CURRENT_ITEMS_ONLY"
+	case FT_CURRENT_ITEMS_AND_VERSIONS_FOR_MOVED_OUT_ITEMS:
+		return "FT_CURRENT_ITEMS_AND_VERSIONS_FOR_MOVED_OUT_ITEMS"
+	default:
+		return fmt.Sprintf("FILTERING_TYPE(%d)", int32(e))
+	}
+}
+
 type FILTER_COMBINATION_TYPE int32
 
 const (
 	FCT_INTERSECTION FILTER_COMBINATION_TYPE = 0
 )
+
+// String returns the FILTER_COMBINATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILTER_COMBINATION_TYPE) String() string {
+	switch e {
+	case FCT_INTERSECTION:
+		return "FCT_INTERSECTION"
+	default:
+		return fmt.Sprintf("FILTER_COMBINATION_TYPE(%d)", int32(e))
+	}
+}
 
 // KNOWLEDGE_COOKIE_COMPARISON_RESULT: https://learn.microsoft.com/windows/win32/api/winsync/ne-winsync-knowledge_cookie_comparison_result
 type KNOWLEDGE_COOKIE_COMPARISON_RESULT int32
@@ -46,6 +108,23 @@ const (
 	KCCR_COOKIE_KNOWLEDGE_CONTAINS       KNOWLEDGE_COOKIE_COMPARISON_RESULT = 2
 	KCCR_COOKIE_KNOWLEDGE_NOT_COMPARABLE KNOWLEDGE_COOKIE_COMPARISON_RESULT = 3
 )
+
+// String returns the KNOWLEDGE_COOKIE_COMPARISON_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KNOWLEDGE_COOKIE_COMPARISON_RESULT) String() string {
+	switch e {
+	case KCCR_COOKIE_KNOWLEDGE_EQUAL:
+		return "KCCR_COOKIE_KNOWLEDGE_EQUAL"
+	case KCCR_COOKIE_KNOWLEDGE_CONTAINED:
+		return "KCCR_COOKIE_KNOWLEDGE_CONTAINED"
+	case KCCR_COOKIE_KNOWLEDGE_CONTAINS:
+		return "KCCR_COOKIE_KNOWLEDGE_CONTAINS"
+	case KCCR_COOKIE_KNOWLEDGE_NOT_COMPARABLE:
+		return "KCCR_COOKIE_KNOWLEDGE_NOT_COMPARABLE"
+	default:
+		return fmt.Sprintf("KNOWLEDGE_COOKIE_COMPARISON_RESULT(%d)", int32(e))
+	}
+}
 
 type SYNC_CONSTRAINT_RESOLVE_ACTION int32
 
@@ -59,6 +138,29 @@ const (
 	SCRA_RENAME_DESTINATION          SYNC_CONSTRAINT_RESOLVE_ACTION = 6
 )
 
+// String returns the SYNC_CONSTRAINT_RESOLVE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNC_CONSTRAINT_RESOLVE_ACTION) String() string {
+	switch e {
+	case SCRA_DEFER:
+		return "SCRA_DEFER"
+	case SCRA_ACCEPT_DESTINATION_PROVIDER:
+		return "SCRA_ACCEPT_DESTINATION_PROVIDER"
+	case SCRA_ACCEPT_SOURCE_PROVIDER:
+		return "SCRA_ACCEPT_SOURCE_PROVIDER"
+	case SCRA_TRANSFER_AND_DEFER:
+		return "SCRA_TRANSFER_AND_DEFER"
+	case SCRA_MERGE:
+		return "SCRA_MERGE"
+	case SCRA_RENAME_SOURCE:
+		return "SCRA_RENAME_SOURCE"
+	case SCRA_RENAME_DESTINATION:
+		return "SCRA_RENAME_DESTINATION"
+	default:
+		return fmt.Sprintf("SYNC_CONSTRAINT_RESOLVE_ACTION(%d)", int32(e))
+	}
+}
+
 // SYNC_FULL_ENUMERATION_ACTION: https://learn.microsoft.com/windows/win32/api/winsync/ne-winsync-sync_full_enumeration_action
 type SYNC_FULL_ENUMERATION_ACTION int32
 
@@ -67,6 +169,21 @@ const (
 	SFEA_PARTIAL_SYNC     SYNC_FULL_ENUMERATION_ACTION = 1
 	SFEA_ABORT            SYNC_FULL_ENUMERATION_ACTION = 2
 )
+
+// String returns the SYNC_FULL_ENUMERATION_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNC_FULL_ENUMERATION_ACTION) String() string {
+	switch e {
+	case SFEA_FULL_ENUMERATION:
+		return "SFEA_FULL_ENUMERATION"
+	case SFEA_PARTIAL_SYNC:
+		return "SFEA_PARTIAL_SYNC"
+	case SFEA_ABORT:
+		return "SFEA_ABORT"
+	default:
+		return fmt.Sprintf("SYNC_FULL_ENUMERATION_ACTION(%d)", int32(e))
+	}
+}
 
 // SYNC_PROGRESS_STAGE: https://learn.microsoft.com/windows/win32/api/winsync/ne-winsync-sync_progress_stage
 type SYNC_PROGRESS_STAGE int32
@@ -77,6 +194,21 @@ const (
 	SPS_CHANGE_APPLICATION SYNC_PROGRESS_STAGE = 2
 )
 
+// String returns the SYNC_PROGRESS_STAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNC_PROGRESS_STAGE) String() string {
+	switch e {
+	case SPS_CHANGE_DETECTION:
+		return "SPS_CHANGE_DETECTION"
+	case SPS_CHANGE_ENUMERATION:
+		return "SPS_CHANGE_ENUMERATION"
+	case SPS_CHANGE_APPLICATION:
+		return "SPS_CHANGE_APPLICATION"
+	default:
+		return fmt.Sprintf("SYNC_PROGRESS_STAGE(%d)", int32(e))
+	}
+}
+
 // SYNC_PROVIDER_ROLE: https://learn.microsoft.com/windows/win32/api/winsync/ne-winsync-sync_provider_role
 type SYNC_PROVIDER_ROLE int32
 
@@ -84,6 +216,19 @@ const (
 	SPR_SOURCE      SYNC_PROVIDER_ROLE = 0
 	SPR_DESTINATION SYNC_PROVIDER_ROLE = 1
 )
+
+// String returns the SYNC_PROVIDER_ROLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNC_PROVIDER_ROLE) String() string {
+	switch e {
+	case SPR_SOURCE:
+		return "SPR_SOURCE"
+	case SPR_DESTINATION:
+		return "SPR_DESTINATION"
+	default:
+		return fmt.Sprintf("SYNC_PROVIDER_ROLE(%d)", int32(e))
+	}
+}
 
 // SYNC_REGISTRATION_EVENT: https://learn.microsoft.com/windows/win32/api/syncregistration/ne-syncregistration-sync_registration_event
 type SYNC_REGISTRATION_EVENT int32
@@ -98,6 +243,29 @@ const (
 	SRE_CONFIGUI_UPDATED       SYNC_REGISTRATION_EVENT = 6
 )
 
+// String returns the SYNC_REGISTRATION_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNC_REGISTRATION_EVENT) String() string {
+	switch e {
+	case SRE_PROVIDER_ADDED:
+		return "SRE_PROVIDER_ADDED"
+	case SRE_PROVIDER_REMOVED:
+		return "SRE_PROVIDER_REMOVED"
+	case SRE_PROVIDER_UPDATED:
+		return "SRE_PROVIDER_UPDATED"
+	case SRE_PROVIDER_STATE_CHANGED:
+		return "SRE_PROVIDER_STATE_CHANGED"
+	case SRE_CONFIGUI_ADDED:
+		return "SRE_CONFIGUI_ADDED"
+	case SRE_CONFIGUI_REMOVED:
+		return "SRE_CONFIGUI_REMOVED"
+	case SRE_CONFIGUI_UPDATED:
+		return "SRE_CONFIGUI_UPDATED"
+	default:
+		return fmt.Sprintf("SYNC_REGISTRATION_EVENT(%d)", int32(e))
+	}
+}
+
 // SYNC_RESOLVE_ACTION: https://learn.microsoft.com/windows/win32/api/winsync/ne-winsync-sync_resolve_action
 type SYNC_RESOLVE_ACTION int32
 
@@ -110,6 +278,27 @@ const (
 	SRA_LAST                        SYNC_RESOLVE_ACTION = 5
 )
 
+// String returns the SYNC_RESOLVE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNC_RESOLVE_ACTION) String() string {
+	switch e {
+	case SRA_DEFER:
+		return "SRA_DEFER"
+	case SRA_ACCEPT_DESTINATION_PROVIDER:
+		return "SRA_ACCEPT_DESTINATION_PROVIDER"
+	case SRA_ACCEPT_SOURCE_PROVIDER:
+		return "SRA_ACCEPT_SOURCE_PROVIDER"
+	case SRA_MERGE:
+		return "SRA_MERGE"
+	case SRA_TRANSFER_AND_DEFER:
+		return "SRA_TRANSFER_AND_DEFER"
+	case SRA_LAST:
+		return "SRA_LAST"
+	default:
+		return fmt.Sprintf("SYNC_RESOLVE_ACTION(%d)", int32(e))
+	}
+}
+
 // SYNC_SERIALIZATION_VERSION: https://learn.microsoft.com/windows/win32/api/winsync/ne-winsync-sync_serialization_version
 type SYNC_SERIALIZATION_VERSION int32
 
@@ -119,9 +308,35 @@ const (
 	SYNC_SERIALIZATION_VERSION_V3 SYNC_SERIALIZATION_VERSION = 5
 )
 
+// String returns the SYNC_SERIALIZATION_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNC_SERIALIZATION_VERSION) String() string {
+	switch e {
+	case SYNC_SERIALIZATION_VERSION_V1:
+		return "SYNC_SERIALIZATION_VERSION_V1"
+	case SYNC_SERIALIZATION_VERSION_V2:
+		return "SYNC_SERIALIZATION_VERSION_V2"
+	case SYNC_SERIALIZATION_VERSION_V3:
+		return "SYNC_SERIALIZATION_VERSION_V3"
+	default:
+		return fmt.Sprintf("SYNC_SERIALIZATION_VERSION(%d)", int32(e))
+	}
+}
+
 // SYNC_STATISTICS: https://learn.microsoft.com/windows/win32/api/winsync/ne-winsync-sync_statistics
 type SYNC_STATISTICS int32
 
 const (
 	SYNC_STATISTICS_RANGE_COUNT SYNC_STATISTICS = 0
 )
+
+// String returns the SYNC_STATISTICS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNC_STATISTICS) String() string {
+	switch e {
+	case SYNC_STATISTICS_RANGE_COUNT:
+		return "SYNC_STATISTICS_RANGE_COUNT"
+	default:
+		return fmt.Sprintf("SYNC_STATISTICS(%d)", int32(e))
+	}
+}

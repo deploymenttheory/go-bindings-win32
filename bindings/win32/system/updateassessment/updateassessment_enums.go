@@ -4,6 +4,10 @@
 
 package updateassessment
 
+import (
+	"fmt"
+)
+
 // UpdateAssessmentStatus: https://learn.microsoft.com/windows/win32/SysInfo/updateassessmentstatus
 type UpdateAssessmentStatus int32
 
@@ -22,6 +26,39 @@ const (
 	UpdateAssessmentStatus_NotLatestTargetedVersion UpdateAssessmentStatus = 11
 )
 
+// String returns the UpdateAssessmentStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UpdateAssessmentStatus) String() string {
+	switch e {
+	case UpdateAssessmentStatus_Latest:
+		return "UpdateAssessmentStatus_Latest"
+	case UpdateAssessmentStatus_NotLatestSoftRestriction:
+		return "UpdateAssessmentStatus_NotLatestSoftRestriction"
+	case UpdateAssessmentStatus_NotLatestHardRestriction:
+		return "UpdateAssessmentStatus_NotLatestHardRestriction"
+	case UpdateAssessmentStatus_NotLatestEndOfSupport:
+		return "UpdateAssessmentStatus_NotLatestEndOfSupport"
+	case UpdateAssessmentStatus_NotLatestServicingTrain:
+		return "UpdateAssessmentStatus_NotLatestServicingTrain"
+	case UpdateAssessmentStatus_NotLatestDeferredFeature:
+		return "UpdateAssessmentStatus_NotLatestDeferredFeature"
+	case UpdateAssessmentStatus_NotLatestDeferredQuality:
+		return "UpdateAssessmentStatus_NotLatestDeferredQuality"
+	case UpdateAssessmentStatus_NotLatestPausedFeature:
+		return "UpdateAssessmentStatus_NotLatestPausedFeature"
+	case UpdateAssessmentStatus_NotLatestPausedQuality:
+		return "UpdateAssessmentStatus_NotLatestPausedQuality"
+	case UpdateAssessmentStatus_NotLatestManaged:
+		return "UpdateAssessmentStatus_NotLatestManaged"
+	case UpdateAssessmentStatus_NotLatestUnknown:
+		return "UpdateAssessmentStatus_NotLatestUnknown"
+	case UpdateAssessmentStatus_NotLatestTargetedVersion:
+		return "UpdateAssessmentStatus_NotLatestTargetedVersion"
+	default:
+		return fmt.Sprintf("UpdateAssessmentStatus(%d)", int32(e))
+	}
+}
+
 // UpdateImpactLevel: https://learn.microsoft.com/windows/win32/SysInfo/updateimpactlevel
 type UpdateImpactLevel int32
 
@@ -31,3 +68,20 @@ const (
 	UpdateImpactLevel_Medium UpdateImpactLevel = 2
 	UpdateImpactLevel_High   UpdateImpactLevel = 3
 )
+
+// String returns the UpdateImpactLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UpdateImpactLevel) String() string {
+	switch e {
+	case UpdateImpactLevel_None:
+		return "UpdateImpactLevel_None"
+	case UpdateImpactLevel_Low:
+		return "UpdateImpactLevel_Low"
+	case UpdateImpactLevel_Medium:
+		return "UpdateImpactLevel_Medium"
+	case UpdateImpactLevel_High:
+		return "UpdateImpactLevel_High"
+	default:
+		return fmt.Sprintf("UpdateImpactLevel(%d)", int32(e))
+	}
+}

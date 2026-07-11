@@ -4,6 +4,10 @@
 
 package netshell
 
+import (
+	"fmt"
+)
+
 // NS_CMD_FLAGS: https://learn.microsoft.com/windows/win32/api/netsh/ne-netsh-ns_cmd_flags
 type NS_CMD_FLAGS int32
 
@@ -17,6 +21,29 @@ const (
 	CMD_FLAG_PRIORITY    NS_CMD_FLAGS = -2147483648
 )
 
+// String returns the NS_CMD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NS_CMD_FLAGS) String() string {
+	switch e {
+	case CMD_FLAG_PRIVATE:
+		return "CMD_FLAG_PRIVATE"
+	case CMD_FLAG_INTERACTIVE:
+		return "CMD_FLAG_INTERACTIVE"
+	case CMD_FLAG_LOCAL:
+		return "CMD_FLAG_LOCAL"
+	case CMD_FLAG_ONLINE:
+		return "CMD_FLAG_ONLINE"
+	case CMD_FLAG_HIDDEN:
+		return "CMD_FLAG_HIDDEN"
+	case CMD_FLAG_LIMIT_MASK:
+		return "CMD_FLAG_LIMIT_MASK"
+	case CMD_FLAG_PRIORITY:
+		return "CMD_FLAG_PRIORITY"
+	default:
+		return fmt.Sprintf("NS_CMD_FLAGS(%d)", int32(e))
+	}
+}
+
 type NS_EVENTS int32
 
 const (
@@ -26,6 +53,25 @@ const (
 	NS_EVENT_FROM_N     NS_EVENTS = 4
 	NS_EVENT_FROM_START NS_EVENTS = 8
 )
+
+// String returns the NS_EVENTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NS_EVENTS) String() string {
+	switch e {
+	case NS_EVENT_LOOP:
+		return "NS_EVENT_LOOP"
+	case NS_EVENT_LAST_N:
+		return "NS_EVENT_LAST_N"
+	case NS_EVENT_LAST_SECS:
+		return "NS_EVENT_LAST_SECS"
+	case NS_EVENT_FROM_N:
+		return "NS_EVENT_FROM_N"
+	case NS_EVENT_FROM_START:
+		return "NS_EVENT_FROM_START"
+	default:
+		return fmt.Sprintf("NS_EVENTS(%d)", int32(e))
+	}
+}
 
 type NS_MODE_CHANGE int32
 
@@ -37,6 +83,25 @@ const (
 	NETSH_SAVE         NS_MODE_CHANGE = 4
 )
 
+// String returns the NS_MODE_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NS_MODE_CHANGE) String() string {
+	switch e {
+	case NETSH_COMMIT:
+		return "NETSH_COMMIT"
+	case NETSH_UNCOMMIT:
+		return "NETSH_UNCOMMIT"
+	case NETSH_FLUSH:
+		return "NETSH_FLUSH"
+	case NETSH_COMMIT_STATE:
+		return "NETSH_COMMIT_STATE"
+	case NETSH_SAVE:
+		return "NETSH_SAVE"
+	default:
+		return fmt.Sprintf("NS_MODE_CHANGE(%d)", int32(e))
+	}
+}
+
 // NS_REQS: https://learn.microsoft.com/windows/win32/api/netsh/ne-netsh-ns_reqs
 type NS_REQS int32
 
@@ -46,3 +111,20 @@ const (
 	NS_REQ_ALLOW_MULTIPLE NS_REQS = 2
 	NS_REQ_ONE_OR_MORE    NS_REQS = 3
 )
+
+// String returns the NS_REQS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NS_REQS) String() string {
+	switch e {
+	case NS_REQ_ZERO:
+		return "NS_REQ_ZERO"
+	case NS_REQ_PRESENT:
+		return "NS_REQ_PRESENT"
+	case NS_REQ_ALLOW_MULTIPLE:
+		return "NS_REQ_ALLOW_MULTIPLE"
+	case NS_REQ_ONE_OR_MORE:
+		return "NS_REQ_ONE_OR_MORE"
+	default:
+		return fmt.Sprintf("NS_REQS(%d)", int32(e))
+	}
+}

@@ -4,6 +4,11 @@
 
 package pointer
 
+import (
+	"fmt"
+	"strings"
+)
+
 // POINTER_BUTTON_CHANGE_TYPE: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-pointer_button_change_type
 type POINTER_BUTTON_CHANGE_TYPE int32
 
@@ -21,6 +26,37 @@ const (
 	POINTER_CHANGE_FIFTHBUTTON_UP    POINTER_BUTTON_CHANGE_TYPE = 10
 )
 
+// String returns the POINTER_BUTTON_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POINTER_BUTTON_CHANGE_TYPE) String() string {
+	switch e {
+	case POINTER_CHANGE_NONE:
+		return "POINTER_CHANGE_NONE"
+	case POINTER_CHANGE_FIRSTBUTTON_DOWN:
+		return "POINTER_CHANGE_FIRSTBUTTON_DOWN"
+	case POINTER_CHANGE_FIRSTBUTTON_UP:
+		return "POINTER_CHANGE_FIRSTBUTTON_UP"
+	case POINTER_CHANGE_SECONDBUTTON_DOWN:
+		return "POINTER_CHANGE_SECONDBUTTON_DOWN"
+	case POINTER_CHANGE_SECONDBUTTON_UP:
+		return "POINTER_CHANGE_SECONDBUTTON_UP"
+	case POINTER_CHANGE_THIRDBUTTON_DOWN:
+		return "POINTER_CHANGE_THIRDBUTTON_DOWN"
+	case POINTER_CHANGE_THIRDBUTTON_UP:
+		return "POINTER_CHANGE_THIRDBUTTON_UP"
+	case POINTER_CHANGE_FOURTHBUTTON_DOWN:
+		return "POINTER_CHANGE_FOURTHBUTTON_DOWN"
+	case POINTER_CHANGE_FOURTHBUTTON_UP:
+		return "POINTER_CHANGE_FOURTHBUTTON_UP"
+	case POINTER_CHANGE_FIFTHBUTTON_DOWN:
+		return "POINTER_CHANGE_FIFTHBUTTON_DOWN"
+	case POINTER_CHANGE_FIFTHBUTTON_UP:
+		return "POINTER_CHANGE_FIFTHBUTTON_UP"
+	default:
+		return fmt.Sprintf("POINTER_BUTTON_CHANGE_TYPE(%d)", int32(e))
+	}
+}
+
 // POINTER_DEVICE_CURSOR_TYPE: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-pointer_device_cursor_type
 type POINTER_DEVICE_CURSOR_TYPE int32
 
@@ -30,6 +66,23 @@ const (
 	POINTER_DEVICE_CURSOR_TYPE_ERASER  POINTER_DEVICE_CURSOR_TYPE = 2
 	POINTER_DEVICE_CURSOR_TYPE_MAX     POINTER_DEVICE_CURSOR_TYPE = -1
 )
+
+// String returns the POINTER_DEVICE_CURSOR_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POINTER_DEVICE_CURSOR_TYPE) String() string {
+	switch e {
+	case POINTER_DEVICE_CURSOR_TYPE_UNKNOWN:
+		return "POINTER_DEVICE_CURSOR_TYPE_UNKNOWN"
+	case POINTER_DEVICE_CURSOR_TYPE_TIP:
+		return "POINTER_DEVICE_CURSOR_TYPE_TIP"
+	case POINTER_DEVICE_CURSOR_TYPE_ERASER:
+		return "POINTER_DEVICE_CURSOR_TYPE_ERASER"
+	case POINTER_DEVICE_CURSOR_TYPE_MAX:
+		return "POINTER_DEVICE_CURSOR_TYPE_MAX"
+	default:
+		return fmt.Sprintf("POINTER_DEVICE_CURSOR_TYPE(%d)", int32(e))
+	}
+}
 
 // POINTER_DEVICE_TYPE: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-pointer_device_type
 type POINTER_DEVICE_TYPE int32
@@ -42,6 +95,25 @@ const (
 	POINTER_DEVICE_TYPE_MAX            POINTER_DEVICE_TYPE = -1
 )
 
+// String returns the POINTER_DEVICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POINTER_DEVICE_TYPE) String() string {
+	switch e {
+	case POINTER_DEVICE_TYPE_INTEGRATED_PEN:
+		return "POINTER_DEVICE_TYPE_INTEGRATED_PEN"
+	case POINTER_DEVICE_TYPE_EXTERNAL_PEN:
+		return "POINTER_DEVICE_TYPE_EXTERNAL_PEN"
+	case POINTER_DEVICE_TYPE_TOUCH:
+		return "POINTER_DEVICE_TYPE_TOUCH"
+	case POINTER_DEVICE_TYPE_TOUCH_PAD:
+		return "POINTER_DEVICE_TYPE_TOUCH_PAD"
+	case POINTER_DEVICE_TYPE_MAX:
+		return "POINTER_DEVICE_TYPE_MAX"
+	default:
+		return fmt.Sprintf("POINTER_DEVICE_TYPE(%d)", int32(e))
+	}
+}
+
 // POINTER_FEEDBACK_MODE: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-pointer_feedback_mode
 type POINTER_FEEDBACK_MODE int32
 
@@ -51,6 +123,22 @@ const (
 	POINTER_FEEDBACK_NONE     POINTER_FEEDBACK_MODE = 3
 )
 
+// String returns the POINTER_FEEDBACK_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POINTER_FEEDBACK_MODE) String() string {
+	switch e {
+	case POINTER_FEEDBACK_DEFAULT:
+		return "POINTER_FEEDBACK_DEFAULT"
+	case POINTER_FEEDBACK_INDIRECT:
+		return "POINTER_FEEDBACK_INDIRECT"
+	case POINTER_FEEDBACK_NONE:
+		return "POINTER_FEEDBACK_NONE"
+	default:
+		return fmt.Sprintf("POINTER_FEEDBACK_MODE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type POINTER_FLAGS uint32
 
 const (
@@ -75,6 +163,70 @@ const (
 	POINTER_FLAG_HASTRANSFORM   POINTER_FLAGS = 4194304
 )
 
+// String returns the POINTER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POINTER_FLAGS) String() string {
+	var parts []string
+	if e&POINTER_FLAG_NEW != 0 {
+		parts = append(parts, "POINTER_FLAG_NEW")
+	}
+	if e&POINTER_FLAG_INRANGE != 0 {
+		parts = append(parts, "POINTER_FLAG_INRANGE")
+	}
+	if e&POINTER_FLAG_INCONTACT != 0 {
+		parts = append(parts, "POINTER_FLAG_INCONTACT")
+	}
+	if e&POINTER_FLAG_FIRSTBUTTON != 0 {
+		parts = append(parts, "POINTER_FLAG_FIRSTBUTTON")
+	}
+	if e&POINTER_FLAG_SECONDBUTTON != 0 {
+		parts = append(parts, "POINTER_FLAG_SECONDBUTTON")
+	}
+	if e&POINTER_FLAG_THIRDBUTTON != 0 {
+		parts = append(parts, "POINTER_FLAG_THIRDBUTTON")
+	}
+	if e&POINTER_FLAG_FOURTHBUTTON != 0 {
+		parts = append(parts, "POINTER_FLAG_FOURTHBUTTON")
+	}
+	if e&POINTER_FLAG_FIFTHBUTTON != 0 {
+		parts = append(parts, "POINTER_FLAG_FIFTHBUTTON")
+	}
+	if e&POINTER_FLAG_PRIMARY != 0 {
+		parts = append(parts, "POINTER_FLAG_PRIMARY")
+	}
+	if e&POINTER_FLAG_CONFIDENCE != 0 {
+		parts = append(parts, "POINTER_FLAG_CONFIDENCE")
+	}
+	if e&POINTER_FLAG_CANCELED != 0 {
+		parts = append(parts, "POINTER_FLAG_CANCELED")
+	}
+	if e&POINTER_FLAG_DOWN != 0 {
+		parts = append(parts, "POINTER_FLAG_DOWN")
+	}
+	if e&POINTER_FLAG_UPDATE != 0 {
+		parts = append(parts, "POINTER_FLAG_UPDATE")
+	}
+	if e&POINTER_FLAG_UP != 0 {
+		parts = append(parts, "POINTER_FLAG_UP")
+	}
+	if e&POINTER_FLAG_WHEEL != 0 {
+		parts = append(parts, "POINTER_FLAG_WHEEL")
+	}
+	if e&POINTER_FLAG_HWHEEL != 0 {
+		parts = append(parts, "POINTER_FLAG_HWHEEL")
+	}
+	if e&POINTER_FLAG_CAPTURECHANGED != 0 {
+		parts = append(parts, "POINTER_FLAG_CAPTURECHANGED")
+	}
+	if e&POINTER_FLAG_HASTRANSFORM != 0 {
+		parts = append(parts, "POINTER_FLAG_HASTRANSFORM")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type TOUCH_FEEDBACK_MODE uint32
 
 const (
@@ -82,3 +234,18 @@ const (
 	TOUCH_FEEDBACK_INDIRECT TOUCH_FEEDBACK_MODE = 2
 	TOUCH_FEEDBACK_NONE     TOUCH_FEEDBACK_MODE = 3
 )
+
+// String returns the TOUCH_FEEDBACK_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOUCH_FEEDBACK_MODE) String() string {
+	switch e {
+	case TOUCH_FEEDBACK_DEFAULT:
+		return "TOUCH_FEEDBACK_DEFAULT"
+	case TOUCH_FEEDBACK_INDIRECT:
+		return "TOUCH_FEEDBACK_INDIRECT"
+	case TOUCH_FEEDBACK_NONE:
+		return "TOUCH_FEEDBACK_NONE"
+	default:
+		return fmt.Sprintf("TOUCH_FEEDBACK_MODE(%d)", uint32(e))
+	}
+}

@@ -4,12 +4,29 @@
 
 package distributedtransactioncoordinator
 
+import (
+	"fmt"
+)
+
 type APPLICATIONTYPE int32
 
 const (
 	LOCAL_APPLICATIONTYPE           APPLICATIONTYPE = 0
 	CLUSTERRESOURCE_APPLICATIONTYPE APPLICATIONTYPE = 1
 )
+
+// String returns the APPLICATIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPLICATIONTYPE) String() string {
+	switch e {
+	case LOCAL_APPLICATIONTYPE:
+		return "LOCAL_APPLICATIONTYPE"
+	case CLUSTERRESOURCE_APPLICATIONTYPE:
+		return "CLUSTERRESOURCE_APPLICATIONTYPE"
+	default:
+		return fmt.Sprintf("APPLICATIONTYPE(%d)", int32(e))
+	}
+}
 
 type AUTHENTICATION_LEVEL int32
 
@@ -19,6 +36,21 @@ const (
 	MUTUAL_AUTHENTICATION_REQUIRED   AUTHENTICATION_LEVEL = 2
 )
 
+// String returns the AUTHENTICATION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTHENTICATION_LEVEL) String() string {
+	switch e {
+	case NO_AUTHENTICATION_REQUIRED:
+		return "NO_AUTHENTICATION_REQUIRED"
+	case INCOMING_AUTHENTICATION_REQUIRED:
+		return "INCOMING_AUTHENTICATION_REQUIRED"
+	case MUTUAL_AUTHENTICATION_REQUIRED:
+		return "MUTUAL_AUTHENTICATION_REQUIRED"
+	default:
+		return fmt.Sprintf("AUTHENTICATION_LEVEL(%d)", int32(e))
+	}
+}
+
 type DTCINITIATEDRECOVERYWORK int32
 
 const (
@@ -26,6 +58,21 @@ const (
 	DTCINITIATEDRECOVERYWORK_TRANS         DTCINITIATEDRECOVERYWORK = 2
 	DTCINITIATEDRECOVERYWORK_TMDOWN        DTCINITIATEDRECOVERYWORK = 3
 )
+
+// String returns the DTCINITIATEDRECOVERYWORK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DTCINITIATEDRECOVERYWORK) String() string {
+	switch e {
+	case DTCINITIATEDRECOVERYWORK_CHECKLUSTATUS:
+		return "DTCINITIATEDRECOVERYWORK_CHECKLUSTATUS"
+	case DTCINITIATEDRECOVERYWORK_TRANS:
+		return "DTCINITIATEDRECOVERYWORK_TRANS"
+	case DTCINITIATEDRECOVERYWORK_TMDOWN:
+		return "DTCINITIATEDRECOVERYWORK_TMDOWN"
+	default:
+		return fmt.Sprintf("DTCINITIATEDRECOVERYWORK(%d)", int32(e))
+	}
+}
 
 type DTCLUCOMPARESTATE int32
 
@@ -38,6 +85,27 @@ const (
 	DTCLUCOMPARESTATE_RESET              DTCLUCOMPARESTATE = 6
 )
 
+// String returns the DTCLUCOMPARESTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DTCLUCOMPARESTATE) String() string {
+	switch e {
+	case DTCLUCOMPARESTATE_COMMITTED:
+		return "DTCLUCOMPARESTATE_COMMITTED"
+	case DTCLUCOMPARESTATE_HEURISTICCOMMITTED:
+		return "DTCLUCOMPARESTATE_HEURISTICCOMMITTED"
+	case DTCLUCOMPARESTATE_HEURISTICMIXED:
+		return "DTCLUCOMPARESTATE_HEURISTICMIXED"
+	case DTCLUCOMPARESTATE_HEURISTICRESET:
+		return "DTCLUCOMPARESTATE_HEURISTICRESET"
+	case DTCLUCOMPARESTATE_INDOUBT:
+		return "DTCLUCOMPARESTATE_INDOUBT"
+	case DTCLUCOMPARESTATE_RESET:
+		return "DTCLUCOMPARESTATE_RESET"
+	default:
+		return fmt.Sprintf("DTCLUCOMPARESTATE(%d)", int32(e))
+	}
+}
+
 type DTCLUCOMPARESTATESCONFIRMATION int32
 
 const (
@@ -45,11 +113,35 @@ const (
 	DTCLUCOMPARESTATESCONFIRMATION_PROTOCOL DTCLUCOMPARESTATESCONFIRMATION = 2
 )
 
+// String returns the DTCLUCOMPARESTATESCONFIRMATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DTCLUCOMPARESTATESCONFIRMATION) String() string {
+	switch e {
+	case DTCLUCOMPARESTATESCONFIRMATION_CONFIRM:
+		return "DTCLUCOMPARESTATESCONFIRMATION_CONFIRM"
+	case DTCLUCOMPARESTATESCONFIRMATION_PROTOCOL:
+		return "DTCLUCOMPARESTATESCONFIRMATION_PROTOCOL"
+	default:
+		return fmt.Sprintf("DTCLUCOMPARESTATESCONFIRMATION(%d)", int32(e))
+	}
+}
+
 type DTCLUCOMPARESTATESERROR int32
 
 const (
 	DTCLUCOMPARESTATESERROR_PROTOCOL DTCLUCOMPARESTATESERROR = 1
 )
+
+// String returns the DTCLUCOMPARESTATESERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DTCLUCOMPARESTATESERROR) String() string {
+	switch e {
+	case DTCLUCOMPARESTATESERROR_PROTOCOL:
+		return "DTCLUCOMPARESTATESERROR_PROTOCOL"
+	default:
+		return fmt.Sprintf("DTCLUCOMPARESTATESERROR(%d)", int32(e))
+	}
+}
 
 type DTCLUCOMPARESTATESRESPONSE int32
 
@@ -58,12 +150,38 @@ const (
 	DTCLUCOMPARESTATESRESPONSE_PROTOCOL DTCLUCOMPARESTATESRESPONSE = 2
 )
 
+// String returns the DTCLUCOMPARESTATESRESPONSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DTCLUCOMPARESTATESRESPONSE) String() string {
+	switch e {
+	case DTCLUCOMPARESTATESRESPONSE_OK:
+		return "DTCLUCOMPARESTATESRESPONSE_OK"
+	case DTCLUCOMPARESTATESRESPONSE_PROTOCOL:
+		return "DTCLUCOMPARESTATESRESPONSE_PROTOCOL"
+	default:
+		return fmt.Sprintf("DTCLUCOMPARESTATESRESPONSE(%d)", int32(e))
+	}
+}
+
 type DTCLUXLN int32
 
 const (
 	DTCLUXLN_COLD DTCLUXLN = 1
 	DTCLUXLN_WARM DTCLUXLN = 2
 )
+
+// String returns the DTCLUXLN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DTCLUXLN) String() string {
+	switch e {
+	case DTCLUXLN_COLD:
+		return "DTCLUXLN_COLD"
+	case DTCLUXLN_WARM:
+		return "DTCLUXLN_WARM"
+	default:
+		return fmt.Sprintf("DTCLUXLN(%d)", int32(e))
+	}
+}
 
 type DTCLUXLNCONFIRMATION int32
 
@@ -74,6 +192,23 @@ const (
 	DTCLUXLNCONFIRMATION_OBSOLETE         DTCLUXLNCONFIRMATION = 4
 )
 
+// String returns the DTCLUXLNCONFIRMATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DTCLUXLNCONFIRMATION) String() string {
+	switch e {
+	case DTCLUXLNCONFIRMATION_CONFIRM:
+		return "DTCLUXLNCONFIRMATION_CONFIRM"
+	case DTCLUXLNCONFIRMATION_LOGNAMEMISMATCH:
+		return "DTCLUXLNCONFIRMATION_LOGNAMEMISMATCH"
+	case DTCLUXLNCONFIRMATION_COLDWARMMISMATCH:
+		return "DTCLUXLNCONFIRMATION_COLDWARMMISMATCH"
+	case DTCLUXLNCONFIRMATION_OBSOLETE:
+		return "DTCLUXLNCONFIRMATION_OBSOLETE"
+	default:
+		return fmt.Sprintf("DTCLUXLNCONFIRMATION(%d)", int32(e))
+	}
+}
+
 type DTCLUXLNERROR int32
 
 const (
@@ -81,6 +216,21 @@ const (
 	DTCLUXLNERROR_LOGNAMEMISMATCH  DTCLUXLNERROR = 2
 	DTCLUXLNERROR_COLDWARMMISMATCH DTCLUXLNERROR = 3
 )
+
+// String returns the DTCLUXLNERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DTCLUXLNERROR) String() string {
+	switch e {
+	case DTCLUXLNERROR_PROTOCOL:
+		return "DTCLUXLNERROR_PROTOCOL"
+	case DTCLUXLNERROR_LOGNAMEMISMATCH:
+		return "DTCLUXLNERROR_LOGNAMEMISMATCH"
+	case DTCLUXLNERROR_COLDWARMMISMATCH:
+		return "DTCLUXLNERROR_COLDWARMMISMATCH"
+	default:
+		return fmt.Sprintf("DTCLUXLNERROR(%d)", int32(e))
+	}
+}
 
 type DTCLUXLNRESPONSE int32
 
@@ -90,6 +240,23 @@ const (
 	DTCLUXLNRESPONSE_LOGNAMEMISMATCH     DTCLUXLNRESPONSE = 3
 	DTCLUXLNRESPONSE_COLDWARMMISMATCH    DTCLUXLNRESPONSE = 4
 )
+
+// String returns the DTCLUXLNRESPONSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DTCLUXLNRESPONSE) String() string {
+	switch e {
+	case DTCLUXLNRESPONSE_OK_SENDOURXLNBACK:
+		return "DTCLUXLNRESPONSE_OK_SENDOURXLNBACK"
+	case DTCLUXLNRESPONSE_OK_SENDCONFIRMATION:
+		return "DTCLUXLNRESPONSE_OK_SENDCONFIRMATION"
+	case DTCLUXLNRESPONSE_LOGNAMEMISMATCH:
+		return "DTCLUXLNRESPONSE_LOGNAMEMISMATCH"
+	case DTCLUXLNRESPONSE_COLDWARMMISMATCH:
+		return "DTCLUXLNRESPONSE_COLDWARMMISMATCH"
+	default:
+		return fmt.Sprintf("DTCLUXLNRESPONSE(%d)", int32(e))
+	}
+}
 
 type DTC_STATUS_ int32
 
@@ -105,6 +272,35 @@ const (
 	DTC_STATUS_E_CANTCONTROL DTC_STATUS_ = 8
 	DTC_STATUS_FAILED        DTC_STATUS_ = 9
 )
+
+// String returns the DTC_STATUS_ constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DTC_STATUS_) String() string {
+	switch e {
+	case DTC_STATUS_UNKNOWN:
+		return "DTC_STATUS_UNKNOWN"
+	case DTC_STATUS_STARTING:
+		return "DTC_STATUS_STARTING"
+	case DTC_STATUS_STARTED:
+		return "DTC_STATUS_STARTED"
+	case DTC_STATUS_PAUSING:
+		return "DTC_STATUS_PAUSING"
+	case DTC_STATUS_PAUSED:
+		return "DTC_STATUS_PAUSED"
+	case DTC_STATUS_CONTINUING:
+		return "DTC_STATUS_CONTINUING"
+	case DTC_STATUS_STOPPING:
+		return "DTC_STATUS_STOPPING"
+	case DTC_STATUS_STOPPED:
+		return "DTC_STATUS_STOPPED"
+	case DTC_STATUS_E_CANTCONTROL:
+		return "DTC_STATUS_E_CANTCONTROL"
+	case DTC_STATUS_FAILED:
+		return "DTC_STATUS_FAILED"
+	default:
+		return fmt.Sprintf("DTC_STATUS_(%d)", int32(e))
+	}
+}
 
 type ISOFLAG int32
 
@@ -122,6 +318,37 @@ const (
 	ISOFLAG_READONLY         ISOFLAG = 32
 )
 
+// String returns the ISOFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ISOFLAG) String() string {
+	switch e {
+	case ISOFLAG_RETAIN_COMMIT_DC:
+		return "ISOFLAG_RETAIN_COMMIT_DC"
+	case ISOFLAG_RETAIN_COMMIT:
+		return "ISOFLAG_RETAIN_COMMIT"
+	case ISOFLAG_RETAIN_COMMIT_NO:
+		return "ISOFLAG_RETAIN_COMMIT_NO"
+	case ISOFLAG_RETAIN_ABORT_DC:
+		return "ISOFLAG_RETAIN_ABORT_DC"
+	case ISOFLAG_RETAIN_ABORT:
+		return "ISOFLAG_RETAIN_ABORT"
+	case ISOFLAG_RETAIN_ABORT_NO:
+		return "ISOFLAG_RETAIN_ABORT_NO"
+	case ISOFLAG_RETAIN_DONTCARE:
+		return "ISOFLAG_RETAIN_DONTCARE"
+	case ISOFLAG_RETAIN_BOTH:
+		return "ISOFLAG_RETAIN_BOTH"
+	case ISOFLAG_RETAIN_NONE:
+		return "ISOFLAG_RETAIN_NONE"
+	case ISOFLAG_OPTIMISTIC:
+		return "ISOFLAG_OPTIMISTIC"
+	case ISOFLAG_READONLY:
+		return "ISOFLAG_READONLY"
+	default:
+		return fmt.Sprintf("ISOFLAG(%d)", int32(e))
+	}
+}
+
 type ISOLATIONLEVEL int32
 
 const (
@@ -136,17 +363,60 @@ const (
 	ISOLATIONLEVEL_ISOLATED        ISOLATIONLEVEL = 1048576
 )
 
+// String returns the ISOLATIONLEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ISOLATIONLEVEL) String() string {
+	switch e {
+	case ISOLATIONLEVEL_UNSPECIFIED:
+		return "ISOLATIONLEVEL_UNSPECIFIED"
+	case ISOLATIONLEVEL_CHAOS:
+		return "ISOLATIONLEVEL_CHAOS"
+	case ISOLATIONLEVEL_READUNCOMMITTED:
+		return "ISOLATIONLEVEL_READUNCOMMITTED"
+	case ISOLATIONLEVEL_CURSORSTABILITY:
+		return "ISOLATIONLEVEL_CURSORSTABILITY"
+	case ISOLATIONLEVEL_REPEATABLEREAD:
+		return "ISOLATIONLEVEL_REPEATABLEREAD"
+	case ISOLATIONLEVEL_SERIALIZABLE:
+		return "ISOLATIONLEVEL_SERIALIZABLE"
+	default:
+		return fmt.Sprintf("ISOLATIONLEVEL(%d)", int32(e))
+	}
+}
+
 type TX_MISC_CONSTANTS int32
 
 const (
 	MAX_TRAN_DESC TX_MISC_CONSTANTS = 40
 )
 
+// String returns the TX_MISC_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TX_MISC_CONSTANTS) String() string {
+	switch e {
+	case MAX_TRAN_DESC:
+		return "MAX_TRAN_DESC"
+	default:
+		return fmt.Sprintf("TX_MISC_CONSTANTS(%d)", int32(e))
+	}
+}
+
 type XACTCONST int32
 
 const (
 	XACTCONST_TIMEOUTINFINITE XACTCONST = 0
 )
+
+// String returns the XACTCONST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XACTCONST) String() string {
+	switch e {
+	case XACTCONST_TIMEOUTINFINITE:
+		return "XACTCONST_TIMEOUTINFINITE"
+	default:
+		return fmt.Sprintf("XACTCONST(%d)", int32(e))
+	}
+}
 
 type XACTHEURISTIC int32
 
@@ -157,12 +427,42 @@ const (
 	XACTHEURISTIC_DANGER XACTHEURISTIC = 4
 )
 
+// String returns the XACTHEURISTIC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XACTHEURISTIC) String() string {
+	switch e {
+	case XACTHEURISTIC_ABORT:
+		return "XACTHEURISTIC_ABORT"
+	case XACTHEURISTIC_COMMIT:
+		return "XACTHEURISTIC_COMMIT"
+	case XACTHEURISTIC_DAMAGE:
+		return "XACTHEURISTIC_DAMAGE"
+	case XACTHEURISTIC_DANGER:
+		return "XACTHEURISTIC_DANGER"
+	default:
+		return fmt.Sprintf("XACTHEURISTIC(%d)", int32(e))
+	}
+}
+
 type XACTRM int32
 
 const (
 	XACTRM_OPTIMISTICLASTWINS XACTRM = 1
 	XACTRM_NOREADONLYPREPARES XACTRM = 2
 )
+
+// String returns the XACTRM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XACTRM) String() string {
+	switch e {
+	case XACTRM_OPTIMISTICLASTWINS:
+		return "XACTRM_OPTIMISTICLASTWINS"
+	case XACTRM_NOREADONLYPREPARES:
+		return "XACTRM_NOREADONLYPREPARES"
+	default:
+		return fmt.Sprintf("XACTRM(%d)", int32(e))
+	}
+}
 
 type XACTSTAT int32
 
@@ -192,6 +492,61 @@ const (
 	XACTSTAT_ALL              XACTSTAT = 524287
 )
 
+// String returns the XACTSTAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XACTSTAT) String() string {
+	switch e {
+	case XACTSTAT_NONE:
+		return "XACTSTAT_NONE"
+	case XACTSTAT_OPENNORMAL:
+		return "XACTSTAT_OPENNORMAL"
+	case XACTSTAT_OPENREFUSED:
+		return "XACTSTAT_OPENREFUSED"
+	case XACTSTAT_PREPARING:
+		return "XACTSTAT_PREPARING"
+	case XACTSTAT_PREPARED:
+		return "XACTSTAT_PREPARED"
+	case XACTSTAT_PREPARERETAINING:
+		return "XACTSTAT_PREPARERETAINING"
+	case XACTSTAT_PREPARERETAINED:
+		return "XACTSTAT_PREPARERETAINED"
+	case XACTSTAT_COMMITTING:
+		return "XACTSTAT_COMMITTING"
+	case XACTSTAT_COMMITRETAINING:
+		return "XACTSTAT_COMMITRETAINING"
+	case XACTSTAT_ABORTING:
+		return "XACTSTAT_ABORTING"
+	case XACTSTAT_ABORTED:
+		return "XACTSTAT_ABORTED"
+	case XACTSTAT_COMMITTED:
+		return "XACTSTAT_COMMITTED"
+	case XACTSTAT_HEURISTIC_ABORT:
+		return "XACTSTAT_HEURISTIC_ABORT"
+	case XACTSTAT_HEURISTIC_COMMIT:
+		return "XACTSTAT_HEURISTIC_COMMIT"
+	case XACTSTAT_HEURISTIC_DAMAGE:
+		return "XACTSTAT_HEURISTIC_DAMAGE"
+	case XACTSTAT_HEURISTIC_DANGER:
+		return "XACTSTAT_HEURISTIC_DANGER"
+	case XACTSTAT_FORCED_ABORT:
+		return "XACTSTAT_FORCED_ABORT"
+	case XACTSTAT_FORCED_COMMIT:
+		return "XACTSTAT_FORCED_COMMIT"
+	case XACTSTAT_INDOUBT:
+		return "XACTSTAT_INDOUBT"
+	case XACTSTAT_CLOSED:
+		return "XACTSTAT_CLOSED"
+	case XACTSTAT_OPEN:
+		return "XACTSTAT_OPEN"
+	case XACTSTAT_NOTPREPARED:
+		return "XACTSTAT_NOTPREPARED"
+	case XACTSTAT_ALL:
+		return "XACTSTAT_ALL"
+	default:
+		return fmt.Sprintf("XACTSTAT(%d)", int32(e))
+	}
+}
+
 type XACTTC int32
 
 const (
@@ -202,6 +557,23 @@ const (
 	XACTTC_ASYNC_PHASEONE XACTTC = 4
 	XACTTC_ASYNC          XACTTC = 4
 )
+
+// String returns the XACTTC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XACTTC) String() string {
+	switch e {
+	case XACTTC_NONE:
+		return "XACTTC_NONE"
+	case XACTTC_SYNC_PHASEONE:
+		return "XACTTC_SYNC_PHASEONE"
+	case XACTTC_SYNC_PHASETWO:
+		return "XACTTC_SYNC_PHASETWO"
+	case XACTTC_ASYNC_PHASEONE:
+		return "XACTTC_ASYNC_PHASEONE"
+	default:
+		return fmt.Sprintf("XACTTC(%d)", int32(e))
+	}
+}
 
 type XACT_DTC_CONSTANTS int32
 
@@ -230,3 +602,58 @@ const (
 	XACT_OK_NONOTIFY                 XACT_DTC_CONSTANTS = 315649
 	DwUSER_MS_SQLSERVER              XACT_DTC_CONSTANTS = 65535
 )
+
+// String returns the XACT_DTC_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XACT_DTC_CONSTANTS) String() string {
+	switch e {
+	case XACT_E_CONNECTION_REQUEST_DENIED:
+		return "XACT_E_CONNECTION_REQUEST_DENIED"
+	case XACT_E_TOOMANY_ENLISTMENTS:
+		return "XACT_E_TOOMANY_ENLISTMENTS"
+	case XACT_E_DUPLICATE_GUID:
+		return "XACT_E_DUPLICATE_GUID"
+	case XACT_E_NOTSINGLEPHASE:
+		return "XACT_E_NOTSINGLEPHASE"
+	case XACT_E_RECOVERYALREADYDONE:
+		return "XACT_E_RECOVERYALREADYDONE"
+	case XACT_E_PROTOCOL:
+		return "XACT_E_PROTOCOL"
+	case XACT_E_RM_FAILURE:
+		return "XACT_E_RM_FAILURE"
+	case XACT_E_RECOVERY_FAILED:
+		return "XACT_E_RECOVERY_FAILED"
+	case XACT_E_LU_NOT_FOUND:
+		return "XACT_E_LU_NOT_FOUND"
+	case XACT_E_DUPLICATE_LU:
+		return "XACT_E_DUPLICATE_LU"
+	case XACT_E_LU_NOT_CONNECTED:
+		return "XACT_E_LU_NOT_CONNECTED"
+	case XACT_E_DUPLICATE_TRANSID:
+		return "XACT_E_DUPLICATE_TRANSID"
+	case XACT_E_LU_BUSY:
+		return "XACT_E_LU_BUSY"
+	case XACT_E_LU_NO_RECOVERY_PROCESS:
+		return "XACT_E_LU_NO_RECOVERY_PROCESS"
+	case XACT_E_LU_DOWN:
+		return "XACT_E_LU_DOWN"
+	case XACT_E_LU_RECOVERING:
+		return "XACT_E_LU_RECOVERING"
+	case XACT_E_LU_RECOVERY_MISMATCH:
+		return "XACT_E_LU_RECOVERY_MISMATCH"
+	case XACT_E_RM_UNAVAILABLE:
+		return "XACT_E_RM_UNAVAILABLE"
+	case XACT_E_LRMRECOVERYALREADYDONE:
+		return "XACT_E_LRMRECOVERYALREADYDONE"
+	case XACT_E_NOLASTRESOURCEINTERFACE:
+		return "XACT_E_NOLASTRESOURCEINTERFACE"
+	case XACT_S_NONOTIFY:
+		return "XACT_S_NONOTIFY"
+	case XACT_OK_NONOTIFY:
+		return "XACT_OK_NONOTIFY"
+	case DwUSER_MS_SQLSERVER:
+		return "DwUSER_MS_SQLSERVER"
+	default:
+		return fmt.Sprintf("XACT_DTC_CONSTANTS(%d)", int32(e))
+	}
+}

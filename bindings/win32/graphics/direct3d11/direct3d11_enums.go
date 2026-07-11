@@ -4,6 +4,11 @@
 
 package direct3d11
 
+import (
+	"fmt"
+	"strings"
+)
+
 // D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_1_create_device_context_state_flag
 type D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG int32
 
@@ -11,12 +16,34 @@ const (
 	D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG = 1
 )
 
+// String returns the D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG) String() string {
+	switch e {
+	case D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED:
+		return "D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED"
+	default:
+		return fmt.Sprintf("D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG(%d)", int32(e))
+	}
+}
+
 // D3D11_ASYNC_GETDATA_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_async_getdata_flag
 type D3D11_ASYNC_GETDATA_FLAG int32
 
 const (
 	D3D11_ASYNC_GETDATA_DONOTFLUSH D3D11_ASYNC_GETDATA_FLAG = 1
 )
+
+// String returns the D3D11_ASYNC_GETDATA_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_ASYNC_GETDATA_FLAG) String() string {
+	switch e {
+	case D3D11_ASYNC_GETDATA_DONOTFLUSH:
+		return "D3D11_ASYNC_GETDATA_DONOTFLUSH"
+	default:
+		return fmt.Sprintf("D3D11_ASYNC_GETDATA_FLAG(%d)", int32(e))
+	}
+}
 
 // D3D11_AUTHENTICATED_CHANNEL_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_authenticated_channel_type
 type D3D11_AUTHENTICATED_CHANNEL_TYPE int32
@@ -27,6 +54,21 @@ const (
 	D3D11_AUTHENTICATED_CHANNEL_DRIVER_HARDWARE D3D11_AUTHENTICATED_CHANNEL_TYPE = 3
 )
 
+// String returns the D3D11_AUTHENTICATED_CHANNEL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_AUTHENTICATED_CHANNEL_TYPE) String() string {
+	switch e {
+	case D3D11_AUTHENTICATED_CHANNEL_D3D11:
+		return "D3D11_AUTHENTICATED_CHANNEL_D3D11"
+	case D3D11_AUTHENTICATED_CHANNEL_DRIVER_SOFTWARE:
+		return "D3D11_AUTHENTICATED_CHANNEL_DRIVER_SOFTWARE"
+	case D3D11_AUTHENTICATED_CHANNEL_DRIVER_HARDWARE:
+		return "D3D11_AUTHENTICATED_CHANNEL_DRIVER_HARDWARE"
+	default:
+		return fmt.Sprintf("D3D11_AUTHENTICATED_CHANNEL_TYPE(%d)", int32(e))
+	}
+}
+
 // D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_authenticated_process_identifier_type
 type D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE int32
 
@@ -36,7 +78,23 @@ const (
 	D3D11_PROCESSIDTYPE_HANDLE  D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE = 2
 )
 
+// String returns the D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE) String() string {
+	switch e {
+	case D3D11_PROCESSIDTYPE_UNKNOWN:
+		return "D3D11_PROCESSIDTYPE_UNKNOWN"
+	case D3D11_PROCESSIDTYPE_DWM:
+		return "D3D11_PROCESSIDTYPE_DWM"
+	case D3D11_PROCESSIDTYPE_HANDLE:
+		return "D3D11_PROCESSIDTYPE_HANDLE"
+	default:
+		return fmt.Sprintf("D3D11_AUTHENTICATED_PROCESS_IDENTIFIER_TYPE(%d)", int32(e))
+	}
+}
+
 // D3D11_BIND_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_bind_flag
+// Bitmask — values may be combined with |.
 type D3D11_BIND_FLAG int32
 
 const (
@@ -51,6 +109,46 @@ const (
 	D3D11_BIND_DECODER          D3D11_BIND_FLAG = 512
 	D3D11_BIND_VIDEO_ENCODER    D3D11_BIND_FLAG = 1024
 )
+
+// String returns the D3D11_BIND_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_BIND_FLAG) String() string {
+	var parts []string
+	if e&D3D11_BIND_VERTEX_BUFFER != 0 {
+		parts = append(parts, "D3D11_BIND_VERTEX_BUFFER")
+	}
+	if e&D3D11_BIND_INDEX_BUFFER != 0 {
+		parts = append(parts, "D3D11_BIND_INDEX_BUFFER")
+	}
+	if e&D3D11_BIND_CONSTANT_BUFFER != 0 {
+		parts = append(parts, "D3D11_BIND_CONSTANT_BUFFER")
+	}
+	if e&D3D11_BIND_SHADER_RESOURCE != 0 {
+		parts = append(parts, "D3D11_BIND_SHADER_RESOURCE")
+	}
+	if e&D3D11_BIND_STREAM_OUTPUT != 0 {
+		parts = append(parts, "D3D11_BIND_STREAM_OUTPUT")
+	}
+	if e&D3D11_BIND_RENDER_TARGET != 0 {
+		parts = append(parts, "D3D11_BIND_RENDER_TARGET")
+	}
+	if e&D3D11_BIND_DEPTH_STENCIL != 0 {
+		parts = append(parts, "D3D11_BIND_DEPTH_STENCIL")
+	}
+	if e&D3D11_BIND_UNORDERED_ACCESS != 0 {
+		parts = append(parts, "D3D11_BIND_UNORDERED_ACCESS")
+	}
+	if e&D3D11_BIND_DECODER != 0 {
+		parts = append(parts, "D3D11_BIND_DECODER")
+	}
+	if e&D3D11_BIND_VIDEO_ENCODER != 0 {
+		parts = append(parts, "D3D11_BIND_VIDEO_ENCODER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // D3D11_BLEND: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_blend
 type D3D11_BLEND int32
@@ -75,6 +173,49 @@ const (
 	D3D11_BLEND_INV_SRC1_ALPHA   D3D11_BLEND = 19
 )
 
+// String returns the D3D11_BLEND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_BLEND) String() string {
+	switch e {
+	case D3D11_BLEND_ZERO:
+		return "D3D11_BLEND_ZERO"
+	case D3D11_BLEND_ONE:
+		return "D3D11_BLEND_ONE"
+	case D3D11_BLEND_SRC_COLOR:
+		return "D3D11_BLEND_SRC_COLOR"
+	case D3D11_BLEND_INV_SRC_COLOR:
+		return "D3D11_BLEND_INV_SRC_COLOR"
+	case D3D11_BLEND_SRC_ALPHA:
+		return "D3D11_BLEND_SRC_ALPHA"
+	case D3D11_BLEND_INV_SRC_ALPHA:
+		return "D3D11_BLEND_INV_SRC_ALPHA"
+	case D3D11_BLEND_DEST_ALPHA:
+		return "D3D11_BLEND_DEST_ALPHA"
+	case D3D11_BLEND_INV_DEST_ALPHA:
+		return "D3D11_BLEND_INV_DEST_ALPHA"
+	case D3D11_BLEND_DEST_COLOR:
+		return "D3D11_BLEND_DEST_COLOR"
+	case D3D11_BLEND_INV_DEST_COLOR:
+		return "D3D11_BLEND_INV_DEST_COLOR"
+	case D3D11_BLEND_SRC_ALPHA_SAT:
+		return "D3D11_BLEND_SRC_ALPHA_SAT"
+	case D3D11_BLEND_BLEND_FACTOR:
+		return "D3D11_BLEND_BLEND_FACTOR"
+	case D3D11_BLEND_INV_BLEND_FACTOR:
+		return "D3D11_BLEND_INV_BLEND_FACTOR"
+	case D3D11_BLEND_SRC1_COLOR:
+		return "D3D11_BLEND_SRC1_COLOR"
+	case D3D11_BLEND_INV_SRC1_COLOR:
+		return "D3D11_BLEND_INV_SRC1_COLOR"
+	case D3D11_BLEND_SRC1_ALPHA:
+		return "D3D11_BLEND_SRC1_ALPHA"
+	case D3D11_BLEND_INV_SRC1_ALPHA:
+		return "D3D11_BLEND_INV_SRC1_ALPHA"
+	default:
+		return fmt.Sprintf("D3D11_BLEND(%d)", int32(e))
+	}
+}
+
 // D3D11_BLEND_OP: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_blend_op
 type D3D11_BLEND_OP int32
 
@@ -86,12 +227,42 @@ const (
 	D3D11_BLEND_OP_MAX          D3D11_BLEND_OP = 5
 )
 
+// String returns the D3D11_BLEND_OP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_BLEND_OP) String() string {
+	switch e {
+	case D3D11_BLEND_OP_ADD:
+		return "D3D11_BLEND_OP_ADD"
+	case D3D11_BLEND_OP_SUBTRACT:
+		return "D3D11_BLEND_OP_SUBTRACT"
+	case D3D11_BLEND_OP_REV_SUBTRACT:
+		return "D3D11_BLEND_OP_REV_SUBTRACT"
+	case D3D11_BLEND_OP_MIN:
+		return "D3D11_BLEND_OP_MIN"
+	case D3D11_BLEND_OP_MAX:
+		return "D3D11_BLEND_OP_MAX"
+	default:
+		return fmt.Sprintf("D3D11_BLEND_OP(%d)", int32(e))
+	}
+}
+
 // D3D11_BUFFEREX_SRV_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_bufferex_srv_flag
 type D3D11_BUFFEREX_SRV_FLAG int32
 
 const (
 	D3D11_BUFFEREX_SRV_FLAG_RAW D3D11_BUFFEREX_SRV_FLAG = 1
 )
+
+// String returns the D3D11_BUFFEREX_SRV_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_BUFFEREX_SRV_FLAG) String() string {
+	switch e {
+	case D3D11_BUFFEREX_SRV_FLAG_RAW:
+		return "D3D11_BUFFEREX_SRV_FLAG_RAW"
+	default:
+		return fmt.Sprintf("D3D11_BUFFEREX_SRV_FLAG(%d)", int32(e))
+	}
+}
 
 // D3D11_BUFFER_UAV_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_buffer_uav_flag
 type D3D11_BUFFER_UAV_FLAG int32
@@ -101,6 +272,21 @@ const (
 	D3D11_BUFFER_UAV_FLAG_APPEND  D3D11_BUFFER_UAV_FLAG = 2
 	D3D11_BUFFER_UAV_FLAG_COUNTER D3D11_BUFFER_UAV_FLAG = 4
 )
+
+// String returns the D3D11_BUFFER_UAV_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_BUFFER_UAV_FLAG) String() string {
+	switch e {
+	case D3D11_BUFFER_UAV_FLAG_RAW:
+		return "D3D11_BUFFER_UAV_FLAG_RAW"
+	case D3D11_BUFFER_UAV_FLAG_APPEND:
+		return "D3D11_BUFFER_UAV_FLAG_APPEND"
+	case D3D11_BUFFER_UAV_FLAG_COUNTER:
+		return "D3D11_BUFFER_UAV_FLAG_COUNTER"
+	default:
+		return fmt.Sprintf("D3D11_BUFFER_UAV_FLAG(%d)", int32(e))
+	}
+}
 
 // D3D11_BUS_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_bus_type
 type D3D11_BUS_TYPE int32
@@ -119,6 +305,37 @@ const (
 	D3D11_BUS_IMPL_MODIFIER_NON_STANDARD                            D3D11_BUS_TYPE = -2147483648
 )
 
+// String returns the D3D11_BUS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_BUS_TYPE) String() string {
+	switch e {
+	case D3D11_BUS_TYPE_OTHER:
+		return "D3D11_BUS_TYPE_OTHER"
+	case D3D11_BUS_TYPE_PCI:
+		return "D3D11_BUS_TYPE_PCI"
+	case D3D11_BUS_TYPE_PCIX:
+		return "D3D11_BUS_TYPE_PCIX"
+	case D3D11_BUS_TYPE_PCIEXPRESS:
+		return "D3D11_BUS_TYPE_PCIEXPRESS"
+	case D3D11_BUS_TYPE_AGP:
+		return "D3D11_BUS_TYPE_AGP"
+	case D3D11_BUS_IMPL_MODIFIER_INSIDE_OF_CHIPSET:
+		return "D3D11_BUS_IMPL_MODIFIER_INSIDE_OF_CHIPSET"
+	case D3D11_BUS_IMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_CHIP:
+		return "D3D11_BUS_IMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_CHIP"
+	case D3D11_BUS_IMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_SOCKET:
+		return "D3D11_BUS_IMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_SOCKET"
+	case D3D11_BUS_IMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR:
+		return "D3D11_BUS_IMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR"
+	case D3D11_BUS_IMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR_INSIDE_OF_NUAE:
+		return "D3D11_BUS_IMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR_INSIDE_OF_NUAE"
+	case D3D11_BUS_IMPL_MODIFIER_NON_STANDARD:
+		return "D3D11_BUS_IMPL_MODIFIER_NON_STANDARD"
+	default:
+		return fmt.Sprintf("D3D11_BUS_TYPE(%d)", int32(e))
+	}
+}
+
 // D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11_2/ne-d3d11_2-d3d11_check_multisample_quality_levels_flag
 type D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_FLAG int32
 
@@ -126,13 +343,41 @@ const (
 	D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_TILED_RESOURCE D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_FLAG = 1
 )
 
+// String returns the D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_FLAG) String() string {
+	switch e {
+	case D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_TILED_RESOURCE:
+		return "D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_TILED_RESOURCE"
+	default:
+		return fmt.Sprintf("D3D11_CHECK_MULTISAMPLE_QUALITY_LEVELS_FLAG(%d)", int32(e))
+	}
+}
+
 // D3D11_CLEAR_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_clear_flag
+// Bitmask — values may be combined with |.
 type D3D11_CLEAR_FLAG uint32
 
 const (
 	D3D11_CLEAR_DEPTH   D3D11_CLEAR_FLAG = 1
 	D3D11_CLEAR_STENCIL D3D11_CLEAR_FLAG = 2
 )
+
+// String returns the D3D11_CLEAR_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_CLEAR_FLAG) String() string {
+	var parts []string
+	if e&D3D11_CLEAR_DEPTH != 0 {
+		parts = append(parts, "D3D11_CLEAR_DEPTH")
+	}
+	if e&D3D11_CLEAR_STENCIL != 0 {
+		parts = append(parts, "D3D11_CLEAR_STENCIL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // D3D11_COLOR_WRITE_ENABLE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_color_write_enable
 type D3D11_COLOR_WRITE_ENABLE int32
@@ -144,6 +389,25 @@ const (
 	D3D11_COLOR_WRITE_ENABLE_ALPHA D3D11_COLOR_WRITE_ENABLE = 8
 	D3D11_COLOR_WRITE_ENABLE_ALL   D3D11_COLOR_WRITE_ENABLE = 15
 )
+
+// String returns the D3D11_COLOR_WRITE_ENABLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_COLOR_WRITE_ENABLE) String() string {
+	switch e {
+	case D3D11_COLOR_WRITE_ENABLE_RED:
+		return "D3D11_COLOR_WRITE_ENABLE_RED"
+	case D3D11_COLOR_WRITE_ENABLE_GREEN:
+		return "D3D11_COLOR_WRITE_ENABLE_GREEN"
+	case D3D11_COLOR_WRITE_ENABLE_BLUE:
+		return "D3D11_COLOR_WRITE_ENABLE_BLUE"
+	case D3D11_COLOR_WRITE_ENABLE_ALPHA:
+		return "D3D11_COLOR_WRITE_ENABLE_ALPHA"
+	case D3D11_COLOR_WRITE_ENABLE_ALL:
+		return "D3D11_COLOR_WRITE_ENABLE_ALL"
+	default:
+		return fmt.Sprintf("D3D11_COLOR_WRITE_ENABLE(%d)", int32(e))
+	}
+}
 
 // D3D11_COMPARISON_FUNC: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_comparison_func
 type D3D11_COMPARISON_FUNC int32
@@ -159,6 +423,31 @@ const (
 	D3D11_COMPARISON_ALWAYS        D3D11_COMPARISON_FUNC = 8
 )
 
+// String returns the D3D11_COMPARISON_FUNC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_COMPARISON_FUNC) String() string {
+	switch e {
+	case D3D11_COMPARISON_NEVER:
+		return "D3D11_COMPARISON_NEVER"
+	case D3D11_COMPARISON_LESS:
+		return "D3D11_COMPARISON_LESS"
+	case D3D11_COMPARISON_EQUAL:
+		return "D3D11_COMPARISON_EQUAL"
+	case D3D11_COMPARISON_LESS_EQUAL:
+		return "D3D11_COMPARISON_LESS_EQUAL"
+	case D3D11_COMPARISON_GREATER:
+		return "D3D11_COMPARISON_GREATER"
+	case D3D11_COMPARISON_NOT_EQUAL:
+		return "D3D11_COMPARISON_NOT_EQUAL"
+	case D3D11_COMPARISON_GREATER_EQUAL:
+		return "D3D11_COMPARISON_GREATER_EQUAL"
+	case D3D11_COMPARISON_ALWAYS:
+		return "D3D11_COMPARISON_ALWAYS"
+	default:
+		return fmt.Sprintf("D3D11_COMPARISON_FUNC(%d)", int32(e))
+	}
+}
+
 // D3D11_CONSERVATIVE_RASTERIZATION_MODE: https://learn.microsoft.com/windows/win32/api/d3d11_3/ne-d3d11_3-d3d11_conservative_rasterization_mode
 type D3D11_CONSERVATIVE_RASTERIZATION_MODE int32
 
@@ -166,6 +455,19 @@ const (
 	D3D11_CONSERVATIVE_RASTERIZATION_MODE_OFF D3D11_CONSERVATIVE_RASTERIZATION_MODE = 0
 	D3D11_CONSERVATIVE_RASTERIZATION_MODE_ON  D3D11_CONSERVATIVE_RASTERIZATION_MODE = 1
 )
+
+// String returns the D3D11_CONSERVATIVE_RASTERIZATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_CONSERVATIVE_RASTERIZATION_MODE) String() string {
+	switch e {
+	case D3D11_CONSERVATIVE_RASTERIZATION_MODE_OFF:
+		return "D3D11_CONSERVATIVE_RASTERIZATION_MODE_OFF"
+	case D3D11_CONSERVATIVE_RASTERIZATION_MODE_ON:
+		return "D3D11_CONSERVATIVE_RASTERIZATION_MODE_ON"
+	default:
+		return fmt.Sprintf("D3D11_CONSERVATIVE_RASTERIZATION_MODE(%d)", int32(e))
+	}
+}
 
 // D3D11_CONSERVATIVE_RASTERIZATION_TIER: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_conservative_rasterization_tier
 type D3D11_CONSERVATIVE_RASTERIZATION_TIER int32
@@ -176,6 +478,23 @@ const (
 	D3D11_CONSERVATIVE_RASTERIZATION_TIER_2        D3D11_CONSERVATIVE_RASTERIZATION_TIER = 2
 	D3D11_CONSERVATIVE_RASTERIZATION_TIER_3        D3D11_CONSERVATIVE_RASTERIZATION_TIER = 3
 )
+
+// String returns the D3D11_CONSERVATIVE_RASTERIZATION_TIER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_CONSERVATIVE_RASTERIZATION_TIER) String() string {
+	switch e {
+	case D3D11_CONSERVATIVE_RASTERIZATION_NOT_SUPPORTED:
+		return "D3D11_CONSERVATIVE_RASTERIZATION_NOT_SUPPORTED"
+	case D3D11_CONSERVATIVE_RASTERIZATION_TIER_1:
+		return "D3D11_CONSERVATIVE_RASTERIZATION_TIER_1"
+	case D3D11_CONSERVATIVE_RASTERIZATION_TIER_2:
+		return "D3D11_CONSERVATIVE_RASTERIZATION_TIER_2"
+	case D3D11_CONSERVATIVE_RASTERIZATION_TIER_3:
+		return "D3D11_CONSERVATIVE_RASTERIZATION_TIER_3"
+	default:
+		return fmt.Sprintf("D3D11_CONSERVATIVE_RASTERIZATION_TIER(%d)", int32(e))
+	}
+}
 
 // D3D11_CONTENT_PROTECTION_CAPS: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_content_protection_caps
 type D3D11_CONTENT_PROTECTION_CAPS int32
@@ -199,6 +518,47 @@ const (
 	D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_DRM_COMMUNICATION_MULTI_THREADED D3D11_CONTENT_PROTECTION_CAPS = 32768
 )
 
+// String returns the D3D11_CONTENT_PROTECTION_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_CONTENT_PROTECTION_CAPS) String() string {
+	switch e {
+	case D3D11_CONTENT_PROTECTION_CAPS_SOFTWARE:
+		return "D3D11_CONTENT_PROTECTION_CAPS_SOFTWARE"
+	case D3D11_CONTENT_PROTECTION_CAPS_HARDWARE:
+		return "D3D11_CONTENT_PROTECTION_CAPS_HARDWARE"
+	case D3D11_CONTENT_PROTECTION_CAPS_PROTECTION_ALWAYS_ON:
+		return "D3D11_CONTENT_PROTECTION_CAPS_PROTECTION_ALWAYS_ON"
+	case D3D11_CONTENT_PROTECTION_CAPS_PARTIAL_DECRYPTION:
+		return "D3D11_CONTENT_PROTECTION_CAPS_PARTIAL_DECRYPTION"
+	case D3D11_CONTENT_PROTECTION_CAPS_CONTENT_KEY:
+		return "D3D11_CONTENT_PROTECTION_CAPS_CONTENT_KEY"
+	case D3D11_CONTENT_PROTECTION_CAPS_FRESHEN_SESSION_KEY:
+		return "D3D11_CONTENT_PROTECTION_CAPS_FRESHEN_SESSION_KEY"
+	case D3D11_CONTENT_PROTECTION_CAPS_ENCRYPTED_READ_BACK:
+		return "D3D11_CONTENT_PROTECTION_CAPS_ENCRYPTED_READ_BACK"
+	case D3D11_CONTENT_PROTECTION_CAPS_ENCRYPTED_READ_BACK_KEY:
+		return "D3D11_CONTENT_PROTECTION_CAPS_ENCRYPTED_READ_BACK_KEY"
+	case D3D11_CONTENT_PROTECTION_CAPS_SEQUENTIAL_CTR_IV:
+		return "D3D11_CONTENT_PROTECTION_CAPS_SEQUENTIAL_CTR_IV"
+	case D3D11_CONTENT_PROTECTION_CAPS_ENCRYPT_SLICEDATA_ONLY:
+		return "D3D11_CONTENT_PROTECTION_CAPS_ENCRYPT_SLICEDATA_ONLY"
+	case D3D11_CONTENT_PROTECTION_CAPS_DECRYPTION_BLT:
+		return "D3D11_CONTENT_PROTECTION_CAPS_DECRYPTION_BLT"
+	case D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_PROTECT_UNCOMPRESSED:
+		return "D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_PROTECT_UNCOMPRESSED"
+	case D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_PROTECTED_MEMORY_PAGEABLE:
+		return "D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_PROTECTED_MEMORY_PAGEABLE"
+	case D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_TEARDOWN:
+		return "D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_TEARDOWN"
+	case D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_DRM_COMMUNICATION:
+		return "D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_DRM_COMMUNICATION"
+	case D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_DRM_COMMUNICATION_MULTI_THREADED:
+		return "D3D11_CONTENT_PROTECTION_CAPS_HARDWARE_DRM_COMMUNICATION_MULTI_THREADED"
+	default:
+		return fmt.Sprintf("D3D11_CONTENT_PROTECTION_CAPS(%d)", int32(e))
+	}
+}
+
 // D3D11_CONTEXT_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11_3/ne-d3d11_3-d3d11_context_type
 type D3D11_CONTEXT_TYPE int32
 
@@ -210,6 +570,25 @@ const (
 	D3D11_CONTEXT_TYPE_VIDEO   D3D11_CONTEXT_TYPE = 4
 )
 
+// String returns the D3D11_CONTEXT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_CONTEXT_TYPE) String() string {
+	switch e {
+	case D3D11_CONTEXT_TYPE_ALL:
+		return "D3D11_CONTEXT_TYPE_ALL"
+	case D3D11_CONTEXT_TYPE_3D:
+		return "D3D11_CONTEXT_TYPE_3D"
+	case D3D11_CONTEXT_TYPE_COMPUTE:
+		return "D3D11_CONTEXT_TYPE_COMPUTE"
+	case D3D11_CONTEXT_TYPE_COPY:
+		return "D3D11_CONTEXT_TYPE_COPY"
+	case D3D11_CONTEXT_TYPE_VIDEO:
+		return "D3D11_CONTEXT_TYPE_VIDEO"
+	default:
+		return fmt.Sprintf("D3D11_CONTEXT_TYPE(%d)", int32(e))
+	}
+}
+
 // D3D11_COPY_FLAGS: https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_copy_flags
 type D3D11_COPY_FLAGS int32
 
@@ -218,12 +597,36 @@ const (
 	D3D11_COPY_DISCARD      D3D11_COPY_FLAGS = 2
 )
 
+// String returns the D3D11_COPY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_COPY_FLAGS) String() string {
+	switch e {
+	case D3D11_COPY_NO_OVERWRITE:
+		return "D3D11_COPY_NO_OVERWRITE"
+	case D3D11_COPY_DISCARD:
+		return "D3D11_COPY_DISCARD"
+	default:
+		return fmt.Sprintf("D3D11_COPY_FLAGS(%d)", int32(e))
+	}
+}
+
 // D3D11_COUNTER: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_counter
 type D3D11_COUNTER int32
 
 const (
 	D3D11_COUNTER_DEVICE_DEPENDENT_0 D3D11_COUNTER = 1073741824
 )
+
+// String returns the D3D11_COUNTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_COUNTER) String() string {
+	switch e {
+	case D3D11_COUNTER_DEVICE_DEPENDENT_0:
+		return "D3D11_COUNTER_DEVICE_DEPENDENT_0"
+	default:
+		return fmt.Sprintf("D3D11_COUNTER(%d)", int32(e))
+	}
+}
 
 // D3D11_COUNTER_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_counter_type
 type D3D11_COUNTER_TYPE int32
@@ -235,7 +638,25 @@ const (
 	D3D11_COUNTER_TYPE_UINT64  D3D11_COUNTER_TYPE = 3
 )
 
+// String returns the D3D11_COUNTER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_COUNTER_TYPE) String() string {
+	switch e {
+	case D3D11_COUNTER_TYPE_FLOAT32:
+		return "D3D11_COUNTER_TYPE_FLOAT32"
+	case D3D11_COUNTER_TYPE_UINT16:
+		return "D3D11_COUNTER_TYPE_UINT16"
+	case D3D11_COUNTER_TYPE_UINT32:
+		return "D3D11_COUNTER_TYPE_UINT32"
+	case D3D11_COUNTER_TYPE_UINT64:
+		return "D3D11_COUNTER_TYPE_UINT64"
+	default:
+		return fmt.Sprintf("D3D11_COUNTER_TYPE(%d)", int32(e))
+	}
+}
+
 // D3D11_CPU_ACCESS_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_cpu_access_flag
+// Bitmask — values may be combined with |.
 type D3D11_CPU_ACCESS_FLAG int32
 
 const (
@@ -243,7 +664,24 @@ const (
 	D3D11_CPU_ACCESS_READ  D3D11_CPU_ACCESS_FLAG = 131072
 )
 
+// String returns the D3D11_CPU_ACCESS_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_CPU_ACCESS_FLAG) String() string {
+	var parts []string
+	if e&D3D11_CPU_ACCESS_WRITE != 0 {
+		parts = append(parts, "D3D11_CPU_ACCESS_WRITE")
+	}
+	if e&D3D11_CPU_ACCESS_READ != 0 {
+		parts = append(parts, "D3D11_CPU_ACCESS_READ")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // D3D11_CREATE_DEVICE_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_create_device_flag
+// Bitmask — values may be combined with |.
 type D3D11_CREATE_DEVICE_FLAG uint32
 
 const (
@@ -258,11 +696,59 @@ const (
 	D3D11_CREATE_DEVICE_VIDEO_SUPPORT                                 D3D11_CREATE_DEVICE_FLAG = 2048
 )
 
+// String returns the D3D11_CREATE_DEVICE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_CREATE_DEVICE_FLAG) String() string {
+	var parts []string
+	if e&D3D11_CREATE_DEVICE_SINGLETHREADED != 0 {
+		parts = append(parts, "D3D11_CREATE_DEVICE_SINGLETHREADED")
+	}
+	if e&D3D11_CREATE_DEVICE_DEBUG != 0 {
+		parts = append(parts, "D3D11_CREATE_DEVICE_DEBUG")
+	}
+	if e&D3D11_CREATE_DEVICE_SWITCH_TO_REF != 0 {
+		parts = append(parts, "D3D11_CREATE_DEVICE_SWITCH_TO_REF")
+	}
+	if e&D3D11_CREATE_DEVICE_PREVENT_INTERNAL_THREADING_OPTIMIZATIONS != 0 {
+		parts = append(parts, "D3D11_CREATE_DEVICE_PREVENT_INTERNAL_THREADING_OPTIMIZATIONS")
+	}
+	if e&D3D11_CREATE_DEVICE_BGRA_SUPPORT != 0 {
+		parts = append(parts, "D3D11_CREATE_DEVICE_BGRA_SUPPORT")
+	}
+	if e&D3D11_CREATE_DEVICE_DEBUGGABLE != 0 {
+		parts = append(parts, "D3D11_CREATE_DEVICE_DEBUGGABLE")
+	}
+	if e&D3D11_CREATE_DEVICE_PREVENT_ALTERING_LAYER_SETTINGS_FROM_REGISTRY != 0 {
+		parts = append(parts, "D3D11_CREATE_DEVICE_PREVENT_ALTERING_LAYER_SETTINGS_FROM_REGISTRY")
+	}
+	if e&D3D11_CREATE_DEVICE_DISABLE_GPU_TIMEOUT != 0 {
+		parts = append(parts, "D3D11_CREATE_DEVICE_DISABLE_GPU_TIMEOUT")
+	}
+	if e&D3D11_CREATE_DEVICE_VIDEO_SUPPORT != 0 {
+		parts = append(parts, "D3D11_CREATE_DEVICE_VIDEO_SUPPORT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS int32
 
 const (
 	D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAG_NONE D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS = 0
 )
+
+// String returns the D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // D3D11_CRYPTO_SESSION_STATUS: https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_crypto_session_status
 type D3D11_CRYPTO_SESSION_STATUS int32
@@ -273,6 +759,21 @@ const (
 	D3D11_CRYPTO_SESSION_STATUS_KEY_AND_CONTENT_LOST D3D11_CRYPTO_SESSION_STATUS = 2
 )
 
+// String returns the D3D11_CRYPTO_SESSION_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_CRYPTO_SESSION_STATUS) String() string {
+	switch e {
+	case D3D11_CRYPTO_SESSION_STATUS_OK:
+		return "D3D11_CRYPTO_SESSION_STATUS_OK"
+	case D3D11_CRYPTO_SESSION_STATUS_KEY_LOST:
+		return "D3D11_CRYPTO_SESSION_STATUS_KEY_LOST"
+	case D3D11_CRYPTO_SESSION_STATUS_KEY_AND_CONTENT_LOST:
+		return "D3D11_CRYPTO_SESSION_STATUS_KEY_AND_CONTENT_LOST"
+	default:
+		return fmt.Sprintf("D3D11_CRYPTO_SESSION_STATUS(%d)", int32(e))
+	}
+}
+
 // D3D11_CULL_MODE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_cull_mode
 type D3D11_CULL_MODE int32
 
@@ -282,6 +783,21 @@ const (
 	D3D11_CULL_BACK  D3D11_CULL_MODE = 3
 )
 
+// String returns the D3D11_CULL_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_CULL_MODE) String() string {
+	switch e {
+	case D3D11_CULL_NONE:
+		return "D3D11_CULL_NONE"
+	case D3D11_CULL_FRONT:
+		return "D3D11_CULL_FRONT"
+	case D3D11_CULL_BACK:
+		return "D3D11_CULL_BACK"
+	default:
+		return fmt.Sprintf("D3D11_CULL_MODE(%d)", int32(e))
+	}
+}
+
 // D3D11_DEPTH_WRITE_MASK: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_depth_write_mask
 type D3D11_DEPTH_WRITE_MASK int32
 
@@ -290,6 +806,19 @@ const (
 	D3D11_DEPTH_WRITE_MASK_ALL  D3D11_DEPTH_WRITE_MASK = 1
 )
 
+// String returns the D3D11_DEPTH_WRITE_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_DEPTH_WRITE_MASK) String() string {
+	switch e {
+	case D3D11_DEPTH_WRITE_MASK_ZERO:
+		return "D3D11_DEPTH_WRITE_MASK_ZERO"
+	case D3D11_DEPTH_WRITE_MASK_ALL:
+		return "D3D11_DEPTH_WRITE_MASK_ALL"
+	default:
+		return fmt.Sprintf("D3D11_DEPTH_WRITE_MASK(%d)", int32(e))
+	}
+}
+
 // D3D11_DEVICE_CONTEXT_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_device_context_type
 type D3D11_DEVICE_CONTEXT_TYPE int32
 
@@ -297,6 +826,19 @@ const (
 	D3D11_DEVICE_CONTEXT_IMMEDIATE D3D11_DEVICE_CONTEXT_TYPE = 0
 	D3D11_DEVICE_CONTEXT_DEFERRED  D3D11_DEVICE_CONTEXT_TYPE = 1
 )
+
+// String returns the D3D11_DEVICE_CONTEXT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_DEVICE_CONTEXT_TYPE) String() string {
+	switch e {
+	case D3D11_DEVICE_CONTEXT_IMMEDIATE:
+		return "D3D11_DEVICE_CONTEXT_IMMEDIATE"
+	case D3D11_DEVICE_CONTEXT_DEFERRED:
+		return "D3D11_DEVICE_CONTEXT_DEFERRED"
+	default:
+		return fmt.Sprintf("D3D11_DEVICE_CONTEXT_TYPE(%d)", int32(e))
+	}
+}
 
 // D3D11_DSV_DIMENSION: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_dsv_dimension
 type D3D11_DSV_DIMENSION int32
@@ -311,6 +853,29 @@ const (
 	D3D11_DSV_DIMENSION_TEXTURE2DMSARRAY D3D11_DSV_DIMENSION = 6
 )
 
+// String returns the D3D11_DSV_DIMENSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_DSV_DIMENSION) String() string {
+	switch e {
+	case D3D11_DSV_DIMENSION_UNKNOWN:
+		return "D3D11_DSV_DIMENSION_UNKNOWN"
+	case D3D11_DSV_DIMENSION_TEXTURE1D:
+		return "D3D11_DSV_DIMENSION_TEXTURE1D"
+	case D3D11_DSV_DIMENSION_TEXTURE1DARRAY:
+		return "D3D11_DSV_DIMENSION_TEXTURE1DARRAY"
+	case D3D11_DSV_DIMENSION_TEXTURE2D:
+		return "D3D11_DSV_DIMENSION_TEXTURE2D"
+	case D3D11_DSV_DIMENSION_TEXTURE2DARRAY:
+		return "D3D11_DSV_DIMENSION_TEXTURE2DARRAY"
+	case D3D11_DSV_DIMENSION_TEXTURE2DMS:
+		return "D3D11_DSV_DIMENSION_TEXTURE2DMS"
+	case D3D11_DSV_DIMENSION_TEXTURE2DMSARRAY:
+		return "D3D11_DSV_DIMENSION_TEXTURE2DMSARRAY"
+	default:
+		return fmt.Sprintf("D3D11_DSV_DIMENSION(%d)", int32(e))
+	}
+}
+
 // D3D11_DSV_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_dsv_flag
 type D3D11_DSV_FLAG int32
 
@@ -318,6 +883,19 @@ const (
 	D3D11_DSV_READ_ONLY_DEPTH   D3D11_DSV_FLAG = 1
 	D3D11_DSV_READ_ONLY_STENCIL D3D11_DSV_FLAG = 2
 )
+
+// String returns the D3D11_DSV_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_DSV_FLAG) String() string {
+	switch e {
+	case D3D11_DSV_READ_ONLY_DEPTH:
+		return "D3D11_DSV_READ_ONLY_DEPTH"
+	case D3D11_DSV_READ_ONLY_STENCIL:
+		return "D3D11_DSV_READ_ONLY_STENCIL"
+	default:
+		return fmt.Sprintf("D3D11_DSV_FLAG(%d)", int32(e))
+	}
+}
 
 // D3D11_FEATURE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_feature
 type D3D11_FEATURE int32
@@ -347,6 +925,59 @@ const (
 	D3D11_FEATURE_D3D11_OPTIONS6                 D3D11_FEATURE = 21
 )
 
+// String returns the D3D11_FEATURE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_FEATURE) String() string {
+	switch e {
+	case D3D11_FEATURE_THREADING:
+		return "D3D11_FEATURE_THREADING"
+	case D3D11_FEATURE_DOUBLES:
+		return "D3D11_FEATURE_DOUBLES"
+	case D3D11_FEATURE_FORMAT_SUPPORT:
+		return "D3D11_FEATURE_FORMAT_SUPPORT"
+	case D3D11_FEATURE_FORMAT_SUPPORT2:
+		return "D3D11_FEATURE_FORMAT_SUPPORT2"
+	case D3D11_FEATURE_D3D10_X_HARDWARE_OPTIONS:
+		return "D3D11_FEATURE_D3D10_X_HARDWARE_OPTIONS"
+	case D3D11_FEATURE_D3D11_OPTIONS:
+		return "D3D11_FEATURE_D3D11_OPTIONS"
+	case D3D11_FEATURE_ARCHITECTURE_INFO:
+		return "D3D11_FEATURE_ARCHITECTURE_INFO"
+	case D3D11_FEATURE_D3D9_OPTIONS:
+		return "D3D11_FEATURE_D3D9_OPTIONS"
+	case D3D11_FEATURE_SHADER_MIN_PRECISION_SUPPORT:
+		return "D3D11_FEATURE_SHADER_MIN_PRECISION_SUPPORT"
+	case D3D11_FEATURE_D3D9_SHADOW_SUPPORT:
+		return "D3D11_FEATURE_D3D9_SHADOW_SUPPORT"
+	case D3D11_FEATURE_D3D11_OPTIONS1:
+		return "D3D11_FEATURE_D3D11_OPTIONS1"
+	case D3D11_FEATURE_D3D9_SIMPLE_INSTANCING_SUPPORT:
+		return "D3D11_FEATURE_D3D9_SIMPLE_INSTANCING_SUPPORT"
+	case D3D11_FEATURE_MARKER_SUPPORT:
+		return "D3D11_FEATURE_MARKER_SUPPORT"
+	case D3D11_FEATURE_D3D9_OPTIONS1:
+		return "D3D11_FEATURE_D3D9_OPTIONS1"
+	case D3D11_FEATURE_D3D11_OPTIONS2:
+		return "D3D11_FEATURE_D3D11_OPTIONS2"
+	case D3D11_FEATURE_D3D11_OPTIONS3:
+		return "D3D11_FEATURE_D3D11_OPTIONS3"
+	case D3D11_FEATURE_GPU_VIRTUAL_ADDRESS_SUPPORT:
+		return "D3D11_FEATURE_GPU_VIRTUAL_ADDRESS_SUPPORT"
+	case D3D11_FEATURE_D3D11_OPTIONS4:
+		return "D3D11_FEATURE_D3D11_OPTIONS4"
+	case D3D11_FEATURE_SHADER_CACHE:
+		return "D3D11_FEATURE_SHADER_CACHE"
+	case D3D11_FEATURE_D3D11_OPTIONS5:
+		return "D3D11_FEATURE_D3D11_OPTIONS5"
+	case D3D11_FEATURE_DISPLAYABLE:
+		return "D3D11_FEATURE_DISPLAYABLE"
+	case D3D11_FEATURE_D3D11_OPTIONS6:
+		return "D3D11_FEATURE_D3D11_OPTIONS6"
+	default:
+		return fmt.Sprintf("D3D11_FEATURE(%d)", int32(e))
+	}
+}
+
 // D3D11_FEATURE_VIDEO: https://learn.microsoft.com/windows/win32/api/d3d11_4/ne-d3d11_4-d3d11_feature_video
 type D3D11_FEATURE_VIDEO int32
 
@@ -354,7 +985,19 @@ const (
 	D3D11_FEATURE_VIDEO_DECODER_HISTOGRAM D3D11_FEATURE_VIDEO = 0
 )
 
+// String returns the D3D11_FEATURE_VIDEO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_FEATURE_VIDEO) String() string {
+	switch e {
+	case D3D11_FEATURE_VIDEO_DECODER_HISTOGRAM:
+		return "D3D11_FEATURE_VIDEO_DECODER_HISTOGRAM"
+	default:
+		return fmt.Sprintf("D3D11_FEATURE_VIDEO(%d)", int32(e))
+	}
+}
+
 // D3D11_FENCE_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11_3/ne-d3d11_3-d3d11_fence_flag
+// Bitmask — values may be combined with |.
 type D3D11_FENCE_FLAG int32
 
 const (
@@ -364,6 +1007,25 @@ const (
 	D3D11_FENCE_FLAG_NON_MONITORED        D3D11_FENCE_FLAG = 8
 )
 
+// String returns the D3D11_FENCE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_FENCE_FLAG) String() string {
+	var parts []string
+	if e&D3D11_FENCE_FLAG_SHARED != 0 {
+		parts = append(parts, "D3D11_FENCE_FLAG_SHARED")
+	}
+	if e&D3D11_FENCE_FLAG_SHARED_CROSS_ADAPTER != 0 {
+		parts = append(parts, "D3D11_FENCE_FLAG_SHARED_CROSS_ADAPTER")
+	}
+	if e&D3D11_FENCE_FLAG_NON_MONITORED != 0 {
+		parts = append(parts, "D3D11_FENCE_FLAG_NON_MONITORED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // D3D11_FILL_MODE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_fill_mode
 type D3D11_FILL_MODE int32
 
@@ -371,6 +1033,19 @@ const (
 	D3D11_FILL_WIREFRAME D3D11_FILL_MODE = 2
 	D3D11_FILL_SOLID     D3D11_FILL_MODE = 3
 )
+
+// String returns the D3D11_FILL_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_FILL_MODE) String() string {
+	switch e {
+	case D3D11_FILL_WIREFRAME:
+		return "D3D11_FILL_WIREFRAME"
+	case D3D11_FILL_SOLID:
+		return "D3D11_FILL_SOLID"
+	default:
+		return fmt.Sprintf("D3D11_FILL_MODE(%d)", int32(e))
+	}
+}
 
 // D3D11_FILTER: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_filter
 type D3D11_FILTER int32
@@ -414,6 +1089,87 @@ const (
 	D3D11_FILTER_MAXIMUM_ANISOTROPIC                        D3D11_FILTER = 469
 )
 
+// String returns the D3D11_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_FILTER) String() string {
+	switch e {
+	case D3D11_FILTER_MIN_MAG_MIP_POINT:
+		return "D3D11_FILTER_MIN_MAG_MIP_POINT"
+	case D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR:
+		return "D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR"
+	case D3D11_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT:
+		return "D3D11_FILTER_MIN_POINT_MAG_LINEAR_MIP_POINT"
+	case D3D11_FILTER_MIN_POINT_MAG_MIP_LINEAR:
+		return "D3D11_FILTER_MIN_POINT_MAG_MIP_LINEAR"
+	case D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT:
+		return "D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT"
+	case D3D11_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR:
+		return "D3D11_FILTER_MIN_LINEAR_MAG_POINT_MIP_LINEAR"
+	case D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT:
+		return "D3D11_FILTER_MIN_MAG_LINEAR_MIP_POINT"
+	case D3D11_FILTER_MIN_MAG_MIP_LINEAR:
+		return "D3D11_FILTER_MIN_MAG_MIP_LINEAR"
+	case D3D11_FILTER_ANISOTROPIC:
+		return "D3D11_FILTER_ANISOTROPIC"
+	case D3D11_FILTER_COMPARISON_MIN_MAG_MIP_POINT:
+		return "D3D11_FILTER_COMPARISON_MIN_MAG_MIP_POINT"
+	case D3D11_FILTER_COMPARISON_MIN_MAG_POINT_MIP_LINEAR:
+		return "D3D11_FILTER_COMPARISON_MIN_MAG_POINT_MIP_LINEAR"
+	case D3D11_FILTER_COMPARISON_MIN_POINT_MAG_LINEAR_MIP_POINT:
+		return "D3D11_FILTER_COMPARISON_MIN_POINT_MAG_LINEAR_MIP_POINT"
+	case D3D11_FILTER_COMPARISON_MIN_POINT_MAG_MIP_LINEAR:
+		return "D3D11_FILTER_COMPARISON_MIN_POINT_MAG_MIP_LINEAR"
+	case D3D11_FILTER_COMPARISON_MIN_LINEAR_MAG_MIP_POINT:
+		return "D3D11_FILTER_COMPARISON_MIN_LINEAR_MAG_MIP_POINT"
+	case D3D11_FILTER_COMPARISON_MIN_LINEAR_MAG_POINT_MIP_LINEAR:
+		return "D3D11_FILTER_COMPARISON_MIN_LINEAR_MAG_POINT_MIP_LINEAR"
+	case D3D11_FILTER_COMPARISON_MIN_MAG_LINEAR_MIP_POINT:
+		return "D3D11_FILTER_COMPARISON_MIN_MAG_LINEAR_MIP_POINT"
+	case D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR:
+		return "D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR"
+	case D3D11_FILTER_COMPARISON_ANISOTROPIC:
+		return "D3D11_FILTER_COMPARISON_ANISOTROPIC"
+	case D3D11_FILTER_MINIMUM_MIN_MAG_MIP_POINT:
+		return "D3D11_FILTER_MINIMUM_MIN_MAG_MIP_POINT"
+	case D3D11_FILTER_MINIMUM_MIN_MAG_POINT_MIP_LINEAR:
+		return "D3D11_FILTER_MINIMUM_MIN_MAG_POINT_MIP_LINEAR"
+	case D3D11_FILTER_MINIMUM_MIN_POINT_MAG_LINEAR_MIP_POINT:
+		return "D3D11_FILTER_MINIMUM_MIN_POINT_MAG_LINEAR_MIP_POINT"
+	case D3D11_FILTER_MINIMUM_MIN_POINT_MAG_MIP_LINEAR:
+		return "D3D11_FILTER_MINIMUM_MIN_POINT_MAG_MIP_LINEAR"
+	case D3D11_FILTER_MINIMUM_MIN_LINEAR_MAG_MIP_POINT:
+		return "D3D11_FILTER_MINIMUM_MIN_LINEAR_MAG_MIP_POINT"
+	case D3D11_FILTER_MINIMUM_MIN_LINEAR_MAG_POINT_MIP_LINEAR:
+		return "D3D11_FILTER_MINIMUM_MIN_LINEAR_MAG_POINT_MIP_LINEAR"
+	case D3D11_FILTER_MINIMUM_MIN_MAG_LINEAR_MIP_POINT:
+		return "D3D11_FILTER_MINIMUM_MIN_MAG_LINEAR_MIP_POINT"
+	case D3D11_FILTER_MINIMUM_MIN_MAG_MIP_LINEAR:
+		return "D3D11_FILTER_MINIMUM_MIN_MAG_MIP_LINEAR"
+	case D3D11_FILTER_MINIMUM_ANISOTROPIC:
+		return "D3D11_FILTER_MINIMUM_ANISOTROPIC"
+	case D3D11_FILTER_MAXIMUM_MIN_MAG_MIP_POINT:
+		return "D3D11_FILTER_MAXIMUM_MIN_MAG_MIP_POINT"
+	case D3D11_FILTER_MAXIMUM_MIN_MAG_POINT_MIP_LINEAR:
+		return "D3D11_FILTER_MAXIMUM_MIN_MAG_POINT_MIP_LINEAR"
+	case D3D11_FILTER_MAXIMUM_MIN_POINT_MAG_LINEAR_MIP_POINT:
+		return "D3D11_FILTER_MAXIMUM_MIN_POINT_MAG_LINEAR_MIP_POINT"
+	case D3D11_FILTER_MAXIMUM_MIN_POINT_MAG_MIP_LINEAR:
+		return "D3D11_FILTER_MAXIMUM_MIN_POINT_MAG_MIP_LINEAR"
+	case D3D11_FILTER_MAXIMUM_MIN_LINEAR_MAG_MIP_POINT:
+		return "D3D11_FILTER_MAXIMUM_MIN_LINEAR_MAG_MIP_POINT"
+	case D3D11_FILTER_MAXIMUM_MIN_LINEAR_MAG_POINT_MIP_LINEAR:
+		return "D3D11_FILTER_MAXIMUM_MIN_LINEAR_MAG_POINT_MIP_LINEAR"
+	case D3D11_FILTER_MAXIMUM_MIN_MAG_LINEAR_MIP_POINT:
+		return "D3D11_FILTER_MAXIMUM_MIN_MAG_LINEAR_MIP_POINT"
+	case D3D11_FILTER_MAXIMUM_MIN_MAG_MIP_LINEAR:
+		return "D3D11_FILTER_MAXIMUM_MIN_MAG_MIP_LINEAR"
+	case D3D11_FILTER_MAXIMUM_ANISOTROPIC:
+		return "D3D11_FILTER_MAXIMUM_ANISOTROPIC"
+	default:
+		return fmt.Sprintf("D3D11_FILTER(%d)", int32(e))
+	}
+}
+
 // D3D11_FILTER_REDUCTION_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_filter_reduction_type
 type D3D11_FILTER_REDUCTION_TYPE int32
 
@@ -424,6 +1180,23 @@ const (
 	D3D11_FILTER_REDUCTION_TYPE_MAXIMUM    D3D11_FILTER_REDUCTION_TYPE = 3
 )
 
+// String returns the D3D11_FILTER_REDUCTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_FILTER_REDUCTION_TYPE) String() string {
+	switch e {
+	case D3D11_FILTER_REDUCTION_TYPE_STANDARD:
+		return "D3D11_FILTER_REDUCTION_TYPE_STANDARD"
+	case D3D11_FILTER_REDUCTION_TYPE_COMPARISON:
+		return "D3D11_FILTER_REDUCTION_TYPE_COMPARISON"
+	case D3D11_FILTER_REDUCTION_TYPE_MINIMUM:
+		return "D3D11_FILTER_REDUCTION_TYPE_MINIMUM"
+	case D3D11_FILTER_REDUCTION_TYPE_MAXIMUM:
+		return "D3D11_FILTER_REDUCTION_TYPE_MAXIMUM"
+	default:
+		return fmt.Sprintf("D3D11_FILTER_REDUCTION_TYPE(%d)", int32(e))
+	}
+}
+
 // D3D11_FILTER_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_filter_type
 type D3D11_FILTER_TYPE int32
 
@@ -431,6 +1204,19 @@ const (
 	D3D11_FILTER_TYPE_POINT  D3D11_FILTER_TYPE = 0
 	D3D11_FILTER_TYPE_LINEAR D3D11_FILTER_TYPE = 1
 )
+
+// String returns the D3D11_FILTER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_FILTER_TYPE) String() string {
+	switch e {
+	case D3D11_FILTER_TYPE_POINT:
+		return "D3D11_FILTER_TYPE_POINT"
+	case D3D11_FILTER_TYPE_LINEAR:
+		return "D3D11_FILTER_TYPE_LINEAR"
+	default:
+		return fmt.Sprintf("D3D11_FILTER_TYPE(%d)", int32(e))
+	}
+}
 
 // D3D11_FORMAT_SUPPORT: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_format_support
 type D3D11_FORMAT_SUPPORT int32
@@ -469,6 +1255,77 @@ const (
 	D3D11_FORMAT_SUPPORT_VIDEO_ENCODER               D3D11_FORMAT_SUPPORT = 1073741824
 )
 
+// String returns the D3D11_FORMAT_SUPPORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_FORMAT_SUPPORT) String() string {
+	switch e {
+	case D3D11_FORMAT_SUPPORT_BUFFER:
+		return "D3D11_FORMAT_SUPPORT_BUFFER"
+	case D3D11_FORMAT_SUPPORT_IA_VERTEX_BUFFER:
+		return "D3D11_FORMAT_SUPPORT_IA_VERTEX_BUFFER"
+	case D3D11_FORMAT_SUPPORT_IA_INDEX_BUFFER:
+		return "D3D11_FORMAT_SUPPORT_IA_INDEX_BUFFER"
+	case D3D11_FORMAT_SUPPORT_SO_BUFFER:
+		return "D3D11_FORMAT_SUPPORT_SO_BUFFER"
+	case D3D11_FORMAT_SUPPORT_TEXTURE1D:
+		return "D3D11_FORMAT_SUPPORT_TEXTURE1D"
+	case D3D11_FORMAT_SUPPORT_TEXTURE2D:
+		return "D3D11_FORMAT_SUPPORT_TEXTURE2D"
+	case D3D11_FORMAT_SUPPORT_TEXTURE3D:
+		return "D3D11_FORMAT_SUPPORT_TEXTURE3D"
+	case D3D11_FORMAT_SUPPORT_TEXTURECUBE:
+		return "D3D11_FORMAT_SUPPORT_TEXTURECUBE"
+	case D3D11_FORMAT_SUPPORT_SHADER_LOAD:
+		return "D3D11_FORMAT_SUPPORT_SHADER_LOAD"
+	case D3D11_FORMAT_SUPPORT_SHADER_SAMPLE:
+		return "D3D11_FORMAT_SUPPORT_SHADER_SAMPLE"
+	case D3D11_FORMAT_SUPPORT_SHADER_SAMPLE_COMPARISON:
+		return "D3D11_FORMAT_SUPPORT_SHADER_SAMPLE_COMPARISON"
+	case D3D11_FORMAT_SUPPORT_SHADER_SAMPLE_MONO_TEXT:
+		return "D3D11_FORMAT_SUPPORT_SHADER_SAMPLE_MONO_TEXT"
+	case D3D11_FORMAT_SUPPORT_MIP:
+		return "D3D11_FORMAT_SUPPORT_MIP"
+	case D3D11_FORMAT_SUPPORT_MIP_AUTOGEN:
+		return "D3D11_FORMAT_SUPPORT_MIP_AUTOGEN"
+	case D3D11_FORMAT_SUPPORT_RENDER_TARGET:
+		return "D3D11_FORMAT_SUPPORT_RENDER_TARGET"
+	case D3D11_FORMAT_SUPPORT_BLENDABLE:
+		return "D3D11_FORMAT_SUPPORT_BLENDABLE"
+	case D3D11_FORMAT_SUPPORT_DEPTH_STENCIL:
+		return "D3D11_FORMAT_SUPPORT_DEPTH_STENCIL"
+	case D3D11_FORMAT_SUPPORT_CPU_LOCKABLE:
+		return "D3D11_FORMAT_SUPPORT_CPU_LOCKABLE"
+	case D3D11_FORMAT_SUPPORT_MULTISAMPLE_RESOLVE:
+		return "D3D11_FORMAT_SUPPORT_MULTISAMPLE_RESOLVE"
+	case D3D11_FORMAT_SUPPORT_DISPLAY:
+		return "D3D11_FORMAT_SUPPORT_DISPLAY"
+	case D3D11_FORMAT_SUPPORT_CAST_WITHIN_BIT_LAYOUT:
+		return "D3D11_FORMAT_SUPPORT_CAST_WITHIN_BIT_LAYOUT"
+	case D3D11_FORMAT_SUPPORT_MULTISAMPLE_RENDERTARGET:
+		return "D3D11_FORMAT_SUPPORT_MULTISAMPLE_RENDERTARGET"
+	case D3D11_FORMAT_SUPPORT_MULTISAMPLE_LOAD:
+		return "D3D11_FORMAT_SUPPORT_MULTISAMPLE_LOAD"
+	case D3D11_FORMAT_SUPPORT_SHADER_GATHER:
+		return "D3D11_FORMAT_SUPPORT_SHADER_GATHER"
+	case D3D11_FORMAT_SUPPORT_BACK_BUFFER_CAST:
+		return "D3D11_FORMAT_SUPPORT_BACK_BUFFER_CAST"
+	case D3D11_FORMAT_SUPPORT_TYPED_UNORDERED_ACCESS_VIEW:
+		return "D3D11_FORMAT_SUPPORT_TYPED_UNORDERED_ACCESS_VIEW"
+	case D3D11_FORMAT_SUPPORT_SHADER_GATHER_COMPARISON:
+		return "D3D11_FORMAT_SUPPORT_SHADER_GATHER_COMPARISON"
+	case D3D11_FORMAT_SUPPORT_DECODER_OUTPUT:
+		return "D3D11_FORMAT_SUPPORT_DECODER_OUTPUT"
+	case D3D11_FORMAT_SUPPORT_VIDEO_PROCESSOR_OUTPUT:
+		return "D3D11_FORMAT_SUPPORT_VIDEO_PROCESSOR_OUTPUT"
+	case D3D11_FORMAT_SUPPORT_VIDEO_PROCESSOR_INPUT:
+		return "D3D11_FORMAT_SUPPORT_VIDEO_PROCESSOR_INPUT"
+	case D3D11_FORMAT_SUPPORT_VIDEO_ENCODER:
+		return "D3D11_FORMAT_SUPPORT_VIDEO_ENCODER"
+	default:
+		return fmt.Sprintf("D3D11_FORMAT_SUPPORT(%d)", int32(e))
+	}
+}
+
 // D3D11_FORMAT_SUPPORT2: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_format_support2
 type D3D11_FORMAT_SUPPORT2 int32
 
@@ -488,6 +1345,41 @@ const (
 	D3D11_FORMAT_SUPPORT2_DISPLAYABLE                                  D3D11_FORMAT_SUPPORT2 = 65536
 )
 
+// String returns the D3D11_FORMAT_SUPPORT2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_FORMAT_SUPPORT2) String() string {
+	switch e {
+	case D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_ADD:
+		return "D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_ADD"
+	case D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_BITWISE_OPS:
+		return "D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_BITWISE_OPS"
+	case D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_COMPARE_STORE_OR_COMPARE_EXCHANGE:
+		return "D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_COMPARE_STORE_OR_COMPARE_EXCHANGE"
+	case D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_EXCHANGE:
+		return "D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_EXCHANGE"
+	case D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_SIGNED_MIN_OR_MAX:
+		return "D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_SIGNED_MIN_OR_MAX"
+	case D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_UNSIGNED_MIN_OR_MAX:
+		return "D3D11_FORMAT_SUPPORT2_UAV_ATOMIC_UNSIGNED_MIN_OR_MAX"
+	case D3D11_FORMAT_SUPPORT2_UAV_TYPED_LOAD:
+		return "D3D11_FORMAT_SUPPORT2_UAV_TYPED_LOAD"
+	case D3D11_FORMAT_SUPPORT2_UAV_TYPED_STORE:
+		return "D3D11_FORMAT_SUPPORT2_UAV_TYPED_STORE"
+	case D3D11_FORMAT_SUPPORT2_OUTPUT_MERGER_LOGIC_OP:
+		return "D3D11_FORMAT_SUPPORT2_OUTPUT_MERGER_LOGIC_OP"
+	case D3D11_FORMAT_SUPPORT2_TILED:
+		return "D3D11_FORMAT_SUPPORT2_TILED"
+	case D3D11_FORMAT_SUPPORT2_SHAREABLE:
+		return "D3D11_FORMAT_SUPPORT2_SHAREABLE"
+	case D3D11_FORMAT_SUPPORT2_MULTIPLANE_OVERLAY:
+		return "D3D11_FORMAT_SUPPORT2_MULTIPLANE_OVERLAY"
+	case D3D11_FORMAT_SUPPORT2_DISPLAYABLE:
+		return "D3D11_FORMAT_SUPPORT2_DISPLAYABLE"
+	default:
+		return fmt.Sprintf("D3D11_FORMAT_SUPPORT2(%d)", int32(e))
+	}
+}
+
 // D3D11_INPUT_CLASSIFICATION: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_input_classification
 type D3D11_INPUT_CLASSIFICATION int32
 
@@ -495,6 +1387,19 @@ const (
 	D3D11_INPUT_PER_VERTEX_DATA   D3D11_INPUT_CLASSIFICATION = 0
 	D3D11_INPUT_PER_INSTANCE_DATA D3D11_INPUT_CLASSIFICATION = 1
 )
+
+// String returns the D3D11_INPUT_CLASSIFICATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_INPUT_CLASSIFICATION) String() string {
+	switch e {
+	case D3D11_INPUT_PER_VERTEX_DATA:
+		return "D3D11_INPUT_PER_VERTEX_DATA"
+	case D3D11_INPUT_PER_INSTANCE_DATA:
+		return "D3D11_INPUT_PER_INSTANCE_DATA"
+	default:
+		return fmt.Sprintf("D3D11_INPUT_CLASSIFICATION(%d)", int32(e))
+	}
+}
 
 // D3D11_LOGIC_OP: https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_logic_op
 type D3D11_LOGIC_OP int32
@@ -518,6 +1423,47 @@ const (
 	D3D11_LOGIC_OP_OR_INVERTED   D3D11_LOGIC_OP = 15
 )
 
+// String returns the D3D11_LOGIC_OP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_LOGIC_OP) String() string {
+	switch e {
+	case D3D11_LOGIC_OP_CLEAR:
+		return "D3D11_LOGIC_OP_CLEAR"
+	case D3D11_LOGIC_OP_SET:
+		return "D3D11_LOGIC_OP_SET"
+	case D3D11_LOGIC_OP_COPY:
+		return "D3D11_LOGIC_OP_COPY"
+	case D3D11_LOGIC_OP_COPY_INVERTED:
+		return "D3D11_LOGIC_OP_COPY_INVERTED"
+	case D3D11_LOGIC_OP_NOOP:
+		return "D3D11_LOGIC_OP_NOOP"
+	case D3D11_LOGIC_OP_INVERT:
+		return "D3D11_LOGIC_OP_INVERT"
+	case D3D11_LOGIC_OP_AND:
+		return "D3D11_LOGIC_OP_AND"
+	case D3D11_LOGIC_OP_NAND:
+		return "D3D11_LOGIC_OP_NAND"
+	case D3D11_LOGIC_OP_OR:
+		return "D3D11_LOGIC_OP_OR"
+	case D3D11_LOGIC_OP_NOR:
+		return "D3D11_LOGIC_OP_NOR"
+	case D3D11_LOGIC_OP_XOR:
+		return "D3D11_LOGIC_OP_XOR"
+	case D3D11_LOGIC_OP_EQUIV:
+		return "D3D11_LOGIC_OP_EQUIV"
+	case D3D11_LOGIC_OP_AND_REVERSE:
+		return "D3D11_LOGIC_OP_AND_REVERSE"
+	case D3D11_LOGIC_OP_AND_INVERTED:
+		return "D3D11_LOGIC_OP_AND_INVERTED"
+	case D3D11_LOGIC_OP_OR_REVERSE:
+		return "D3D11_LOGIC_OP_OR_REVERSE"
+	case D3D11_LOGIC_OP_OR_INVERTED:
+		return "D3D11_LOGIC_OP_OR_INVERTED"
+	default:
+		return fmt.Sprintf("D3D11_LOGIC_OP(%d)", int32(e))
+	}
+}
+
 // D3D11_MAP: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_map
 type D3D11_MAP int32
 
@@ -529,12 +1475,42 @@ const (
 	D3D11_MAP_WRITE_NO_OVERWRITE D3D11_MAP = 5
 )
 
+// String returns the D3D11_MAP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_MAP) String() string {
+	switch e {
+	case D3D11_MAP_READ:
+		return "D3D11_MAP_READ"
+	case D3D11_MAP_WRITE:
+		return "D3D11_MAP_WRITE"
+	case D3D11_MAP_READ_WRITE:
+		return "D3D11_MAP_READ_WRITE"
+	case D3D11_MAP_WRITE_DISCARD:
+		return "D3D11_MAP_WRITE_DISCARD"
+	case D3D11_MAP_WRITE_NO_OVERWRITE:
+		return "D3D11_MAP_WRITE_NO_OVERWRITE"
+	default:
+		return fmt.Sprintf("D3D11_MAP(%d)", int32(e))
+	}
+}
+
 // D3D11_MAP_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_map_flag
 type D3D11_MAP_FLAG int32
 
 const (
 	D3D11_MAP_FLAG_DO_NOT_WAIT D3D11_MAP_FLAG = 1048576
 )
+
+// String returns the D3D11_MAP_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_MAP_FLAG) String() string {
+	switch e {
+	case D3D11_MAP_FLAG_DO_NOT_WAIT:
+		return "D3D11_MAP_FLAG_DO_NOT_WAIT"
+	default:
+		return fmt.Sprintf("D3D11_MAP_FLAG(%d)", int32(e))
+	}
+}
 
 // D3D11_MESSAGE_CATEGORY: https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_message_category
 type D3D11_MESSAGE_CATEGORY int32
@@ -552,6 +1528,37 @@ const (
 	D3D11_MESSAGE_CATEGORY_EXECUTION             D3D11_MESSAGE_CATEGORY = 9
 	D3D11_MESSAGE_CATEGORY_SHADER                D3D11_MESSAGE_CATEGORY = 10
 )
+
+// String returns the D3D11_MESSAGE_CATEGORY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_MESSAGE_CATEGORY) String() string {
+	switch e {
+	case D3D11_MESSAGE_CATEGORY_APPLICATION_DEFINED:
+		return "D3D11_MESSAGE_CATEGORY_APPLICATION_DEFINED"
+	case D3D11_MESSAGE_CATEGORY_MISCELLANEOUS:
+		return "D3D11_MESSAGE_CATEGORY_MISCELLANEOUS"
+	case D3D11_MESSAGE_CATEGORY_INITIALIZATION:
+		return "D3D11_MESSAGE_CATEGORY_INITIALIZATION"
+	case D3D11_MESSAGE_CATEGORY_CLEANUP:
+		return "D3D11_MESSAGE_CATEGORY_CLEANUP"
+	case D3D11_MESSAGE_CATEGORY_COMPILATION:
+		return "D3D11_MESSAGE_CATEGORY_COMPILATION"
+	case D3D11_MESSAGE_CATEGORY_STATE_CREATION:
+		return "D3D11_MESSAGE_CATEGORY_STATE_CREATION"
+	case D3D11_MESSAGE_CATEGORY_STATE_SETTING:
+		return "D3D11_MESSAGE_CATEGORY_STATE_SETTING"
+	case D3D11_MESSAGE_CATEGORY_STATE_GETTING:
+		return "D3D11_MESSAGE_CATEGORY_STATE_GETTING"
+	case D3D11_MESSAGE_CATEGORY_RESOURCE_MANIPULATION:
+		return "D3D11_MESSAGE_CATEGORY_RESOURCE_MANIPULATION"
+	case D3D11_MESSAGE_CATEGORY_EXECUTION:
+		return "D3D11_MESSAGE_CATEGORY_EXECUTION"
+	case D3D11_MESSAGE_CATEGORY_SHADER:
+		return "D3D11_MESSAGE_CATEGORY_SHADER"
+	default:
+		return fmt.Sprintf("D3D11_MESSAGE_CATEGORY(%d)", int32(e))
+	}
+}
 
 // D3D11_MESSAGE_ID: https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_message_id
 type D3D11_MESSAGE_ID int32
@@ -1897,6 +2904,2691 @@ const (
 	D3D11_MESSAGE_ID_D3D11_5_MESSAGES_END                                                        D3D11_MESSAGE_ID = 3146285
 )
 
+// String returns the D3D11_MESSAGE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_MESSAGE_ID) String() string {
+	switch e {
+	case D3D11_MESSAGE_ID_UNKNOWN:
+		return "D3D11_MESSAGE_ID_UNKNOWN"
+	case D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_VSSETSHADERRESOURCES_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_VSSETSHADERRESOURCES_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_VSSETCONSTANTBUFFERS_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_VSSETCONSTANTBUFFERS_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_GSSETSHADERRESOURCES_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_GSSETSHADERRESOURCES_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_GSSETCONSTANTBUFFERS_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_GSSETCONSTANTBUFFERS_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_PSSETSHADERRESOURCES_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_PSSETSHADERRESOURCES_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_PSSETCONSTANTBUFFERS_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_PSSETCONSTANTBUFFERS_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETS_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETS_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_SOSETTARGETS_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_SOSETTARGETS_HAZARD"
+	case D3D11_MESSAGE_ID_STRING_FROM_APPLICATION:
+		return "D3D11_MESSAGE_ID_STRING_FROM_APPLICATION"
+	case D3D11_MESSAGE_ID_CORRUPTED_THIS:
+		return "D3D11_MESSAGE_ID_CORRUPTED_THIS"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER1:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER1"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER2:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER2"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER3:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER3"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER4:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER4"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER5:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER5"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER6:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER6"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER7:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER7"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER8:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER8"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER9:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER9"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER10:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER10"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER11:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER11"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER12:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER12"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER13:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER13"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER14:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER14"
+	case D3D11_MESSAGE_ID_CORRUPTED_PARAMETER15:
+		return "D3D11_MESSAGE_ID_CORRUPTED_PARAMETER15"
+	case D3D11_MESSAGE_ID_CORRUPTED_MULTITHREADING:
+		return "D3D11_MESSAGE_ID_CORRUPTED_MULTITHREADING"
+	case D3D11_MESSAGE_ID_MESSAGE_REPORTING_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_MESSAGE_REPORTING_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_IASETINPUTLAYOUT_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_IASETINPUTLAYOUT_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_IASETVERTEXBUFFERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_IASETVERTEXBUFFERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_IASETINDEXBUFFER_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_IASETINDEXBUFFER_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_VSSETSHADER_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_VSSETSHADER_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_VSSETSHADERRESOURCES_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_VSSETSHADERRESOURCES_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_VSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_VSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_VSSETSAMPLERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_VSSETSAMPLERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_GSSETSHADER_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_GSSETSHADER_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_GSSETSHADERRESOURCES_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_GSSETSHADERRESOURCES_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_GSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_GSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_GSSETSAMPLERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_GSSETSAMPLERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_SOSETTARGETS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_SOSETTARGETS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_PSSETSHADER_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_PSSETSHADER_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_PSSETSHADERRESOURCES_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_PSSETSHADERRESOURCES_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_PSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_PSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_PSSETSAMPLERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_PSSETSAMPLERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_RSSETSTATE_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_RSSETSTATE_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_OMSETBLENDSTATE_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_OMSETBLENDSTATE_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_OMSETDEPTHSTENCILSTATE_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_OMSETDEPTHSTENCILSTATE_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_OMSETRENDERTARGETS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_OMSETRENDERTARGETS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_SETPREDICATION_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_SETPREDICATION_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_GETPRIVATEDATA_MOREDATA:
+		return "D3D11_MESSAGE_ID_GETPRIVATEDATA_MOREDATA"
+	case D3D11_MESSAGE_ID_SETPRIVATEDATA_INVALIDFREEDATA:
+		return "D3D11_MESSAGE_ID_SETPRIVATEDATA_INVALIDFREEDATA"
+	case D3D11_MESSAGE_ID_SETPRIVATEDATA_INVALIDIUNKNOWN:
+		return "D3D11_MESSAGE_ID_SETPRIVATEDATA_INVALIDIUNKNOWN"
+	case D3D11_MESSAGE_ID_SETPRIVATEDATA_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_SETPRIVATEDATA_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_SETPRIVATEDATA_CHANGINGPARAMS:
+		return "D3D11_MESSAGE_ID_SETPRIVATEDATA_CHANGINGPARAMS"
+	case D3D11_MESSAGE_ID_SETPRIVATEDATA_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_SETPRIVATEDATA_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDSAMPLES:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDSAMPLES"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDUSAGE:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDUSAGE"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDBINDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDBINDFLAGS"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDCPUACCESSFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDCPUACCESSFLAGS"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDMISCFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_UNRECOGNIZEDMISCFLAGS"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDCPUACCESSFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDCPUACCESSFLAGS"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDBINDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDBINDFLAGS"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDINITIALDATA:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDINITIALDATA"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDDIMENSIONS:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDDIMENSIONS"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDMIPLEVELS:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDMIPLEVELS"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDMISCFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDMISCFLAGS"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_NULLDESC:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_NULLDESC"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDCONSTANTBUFFERBINDINGS:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDCONSTANTBUFFERBINDINGS"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_LARGEALLOCATION:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_LARGEALLOCATION"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_UNSUPPORTEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_UNSUPPORTEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDSAMPLES:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDSAMPLES"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDUSAGE:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDUSAGE"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDBINDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDBINDFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDCPUACCESSFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDCPUACCESSFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDMISCFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_UNRECOGNIZEDMISCFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDCPUACCESSFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDCPUACCESSFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDBINDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDBINDFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDINITIALDATA:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDINITIALDATA"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDDIMENSIONS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDDIMENSIONS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDMIPLEVELS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDMIPLEVELS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDMISCFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDMISCFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_NULLDESC:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_NULLDESC"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_LARGEALLOCATION:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_LARGEALLOCATION"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_UNSUPPORTEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_UNSUPPORTEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDSAMPLES:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDSAMPLES"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDUSAGE:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDUSAGE"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDBINDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDBINDFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDCPUACCESSFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDCPUACCESSFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDMISCFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_UNRECOGNIZEDMISCFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDCPUACCESSFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDCPUACCESSFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDBINDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDBINDFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDINITIALDATA:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDINITIALDATA"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDDIMENSIONS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDDIMENSIONS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDMIPLEVELS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDMIPLEVELS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDMISCFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDMISCFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_NULLDESC:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_NULLDESC"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_LARGEALLOCATION:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_LARGEALLOCATION"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_UNSUPPORTEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_UNSUPPORTEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDSAMPLES:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDSAMPLES"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDUSAGE:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDUSAGE"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDBINDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDBINDFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDCPUACCESSFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDCPUACCESSFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDMISCFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_UNRECOGNIZEDMISCFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDCPUACCESSFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDCPUACCESSFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDBINDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDBINDFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDINITIALDATA:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDINITIALDATA"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDDIMENSIONS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDDIMENSIONS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDMIPLEVELS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDMIPLEVELS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDMISCFLAGS:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDMISCFLAGS"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_NULLDESC:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_NULLDESC"
+	case D3D11_MESSAGE_ID_CREATETEXTURE3D_LARGEALLOCATION:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE3D_LARGEALLOCATION"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_UNRECOGNIZEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_UNRECOGNIZEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDDESC:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDDESC"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDFORMAT"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDDIMENSIONS:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDDIMENSIONS"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDRESOURCE:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDRESOURCE"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_TOOMANYOBJECTS:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_TOOMANYOBJECTS"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_UNRECOGNIZEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_UNRECOGNIZEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_UNSUPPORTEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_UNSUPPORTEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDDESC:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDDESC"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDFORMAT"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDDIMENSIONS:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDDIMENSIONS"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDRESOURCE:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDRESOURCE"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_TOOMANYOBJECTS:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_TOOMANYOBJECTS"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_UNRECOGNIZEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_UNRECOGNIZEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDDESC:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDDESC"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDFORMAT"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDDIMENSIONS:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDDIMENSIONS"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDRESOURCE:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDRESOURCE"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_TOOMANYOBJECTS:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_TOOMANYOBJECTS"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_TOOMANYELEMENTS:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_TOOMANYELEMENTS"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDFORMAT"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INCOMPATIBLEFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INCOMPATIBLEFORMAT"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDSLOT:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDSLOT"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDINPUTSLOTCLASS:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDINPUTSLOTCLASS"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_STEPRATESLOTCLASSMISMATCH:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_STEPRATESLOTCLASSMISMATCH"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDSLOTCLASSCHANGE:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDSLOTCLASSCHANGE"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDSTEPRATECHANGE:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDSTEPRATECHANGE"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDALIGNMENT:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_INVALIDALIGNMENT"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_DUPLICATESEMANTIC:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_DUPLICATESEMANTIC"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_UNPARSEABLEINPUTSIGNATURE:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_UNPARSEABLEINPUTSIGNATURE"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_NULLSEMANTIC:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_NULLSEMANTIC"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_MISSINGELEMENT:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_MISSINGELEMENT"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_NULLDESC:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_NULLDESC"
+	case D3D11_MESSAGE_ID_CREATEVERTEXSHADER_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_CREATEVERTEXSHADER_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_CREATEVERTEXSHADER_INVALIDSHADERBYTECODE:
+		return "D3D11_MESSAGE_ID_CREATEVERTEXSHADER_INVALIDSHADERBYTECODE"
+	case D3D11_MESSAGE_ID_CREATEVERTEXSHADER_INVALIDSHADERTYPE:
+		return "D3D11_MESSAGE_ID_CREATEVERTEXSHADER_INVALIDSHADERTYPE"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_INVALIDSHADERBYTECODE:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_INVALIDSHADERBYTECODE"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_INVALIDSHADERTYPE:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_INVALIDSHADERTYPE"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSHADERBYTECODE:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSHADERBYTECODE"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSHADERTYPE:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSHADERTYPE"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDNUMENTRIES:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDNUMENTRIES"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_OUTPUTSTREAMSTRIDEUNUSED:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_OUTPUTSTREAMSTRIDEUNUSED"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDDECL:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDDECL"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_EXPECTEDDECL:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_EXPECTEDDECL"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_OUTPUTSLOT0EXPECTED:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_OUTPUTSLOT0EXPECTED"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDOUTPUTSLOT:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDOUTPUTSLOT"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_ONLYONEELEMENTPERSLOT:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_ONLYONEELEMENTPERSLOT"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDCOMPONENTCOUNT:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDCOMPONENTCOUNT"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSTARTCOMPONENTANDCOMPONENTCOUNT:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSTARTCOMPONENTANDCOMPONENTCOUNT"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDGAPDEFINITION:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDGAPDEFINITION"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_REPEATEDOUTPUT:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_REPEATEDOUTPUT"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDOUTPUTSTREAMSTRIDE:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDOUTPUTSTREAMSTRIDE"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_MISSINGSEMANTIC:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_MISSINGSEMANTIC"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_MASKMISMATCH:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_MASKMISMATCH"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_CANTHAVEONLYGAPS:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_CANTHAVEONLYGAPS"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_DECLTOOCOMPLEX:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_DECLTOOCOMPLEX"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_MISSINGOUTPUTSIGNATURE:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_MISSINGOUTPUTSIGNATURE"
+	case D3D11_MESSAGE_ID_CREATEPIXELSHADER_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_CREATEPIXELSHADER_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_CREATEPIXELSHADER_INVALIDSHADERBYTECODE:
+		return "D3D11_MESSAGE_ID_CREATEPIXELSHADER_INVALIDSHADERBYTECODE"
+	case D3D11_MESSAGE_ID_CREATEPIXELSHADER_INVALIDSHADERTYPE:
+		return "D3D11_MESSAGE_ID_CREATEPIXELSHADER_INVALIDSHADERTYPE"
+	case D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDFILLMODE:
+		return "D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDFILLMODE"
+	case D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDCULLMODE:
+		return "D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDCULLMODE"
+	case D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDDEPTHBIASCLAMP:
+		return "D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDDEPTHBIASCLAMP"
+	case D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDSLOPESCALEDDEPTHBIAS:
+		return "D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDSLOPESCALEDDEPTHBIAS"
+	case D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_TOOMANYOBJECTS:
+		return "D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_TOOMANYOBJECTS"
+	case D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_NULLDESC:
+		return "D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_NULLDESC"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDDEPTHWRITEMASK:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDDEPTHWRITEMASK"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDDEPTHFUNC:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDDEPTHFUNC"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILFAILOP:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILFAILOP"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILZFAILOP:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILZFAILOP"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILPASSOP:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILPASSOP"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILFUNC:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDFRONTFACESTENCILFUNC"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILFAILOP:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILFAILOP"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILZFAILOP:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILZFAILOP"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILPASSOP:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILPASSOP"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILFUNC:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_INVALIDBACKFACESTENCILFUNC"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_TOOMANYOBJECTS:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_TOOMANYOBJECTS"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_NULLDESC:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_NULLDESC"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDSRCBLEND:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDSRCBLEND"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDDESTBLEND:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDDESTBLEND"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDBLENDOP:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDBLENDOP"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDSRCBLENDALPHA:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDSRCBLENDALPHA"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDDESTBLENDALPHA:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDDESTBLENDALPHA"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDBLENDOPALPHA:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDBLENDOPALPHA"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDRENDERTARGETWRITEMASK:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDRENDERTARGETWRITEMASK"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_TOOMANYOBJECTS:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_TOOMANYOBJECTS"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_NULLDESC:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_NULLDESC"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDFILTER:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDFILTER"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDADDRESSU:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDADDRESSU"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDADDRESSV:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDADDRESSV"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDADDRESSW:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDADDRESSW"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMIPLODBIAS:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMIPLODBIAS"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMAXANISOTROPY:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMAXANISOTROPY"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDCOMPARISONFUNC:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDCOMPARISONFUNC"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMINLOD:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMINLOD"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMAXLOD:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_INVALIDMAXLOD"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_TOOMANYOBJECTS:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_TOOMANYOBJECTS"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_NULLDESC:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_NULLDESC"
+	case D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_INVALIDQUERY:
+		return "D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_INVALIDQUERY"
+	case D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_INVALIDMISCFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_INVALIDMISCFLAGS"
+	case D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_UNEXPECTEDMISCFLAG:
+		return "D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_UNEXPECTEDMISCFLAG"
+	case D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_NULLDESC:
+		return "D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_NULLDESC"
+	case D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_TOPOLOGY_UNRECOGNIZED:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_TOPOLOGY_UNRECOGNIZED"
+	case D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_TOPOLOGY_UNDEFINED:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_TOPOLOGY_UNDEFINED"
+	case D3D11_MESSAGE_ID_IASETVERTEXBUFFERS_INVALIDBUFFER:
+		return "D3D11_MESSAGE_ID_IASETVERTEXBUFFERS_INVALIDBUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_OFFSET_TOO_LARGE:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_OFFSET_TOO_LARGE"
+	case D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_IASETINDEXBUFFER_INVALIDBUFFER:
+		return "D3D11_MESSAGE_ID_IASETINDEXBUFFER_INVALIDBUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_FORMAT_INVALID:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_FORMAT_INVALID"
+	case D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_OFFSET_TOO_LARGE:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_OFFSET_TOO_LARGE"
+	case D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_OFFSET_UNALIGNED:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETINDEXBUFFER_OFFSET_UNALIGNED"
+	case D3D11_MESSAGE_ID_DEVICE_VSSETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_VSSETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_VSSETCONSTANTBUFFERS_INVALIDBUFFER:
+		return "D3D11_MESSAGE_ID_VSSETCONSTANTBUFFERS_INVALIDBUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_VSSETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_VSSETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_VSSETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_VSSETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_GSSETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_GSSETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_GSSETCONSTANTBUFFERS_INVALIDBUFFER:
+		return "D3D11_MESSAGE_ID_GSSETCONSTANTBUFFERS_INVALIDBUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_GSSETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_GSSETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_GSSETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_GSSETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_SOSETTARGETS_INVALIDBUFFER:
+		return "D3D11_MESSAGE_ID_SOSETTARGETS_INVALIDBUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_SOSETTARGETS_OFFSET_UNALIGNED:
+		return "D3D11_MESSAGE_ID_DEVICE_SOSETTARGETS_OFFSET_UNALIGNED"
+	case D3D11_MESSAGE_ID_DEVICE_PSSETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_PSSETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_PSSETCONSTANTBUFFERS_INVALIDBUFFER:
+		return "D3D11_MESSAGE_ID_PSSETCONSTANTBUFFERS_INVALIDBUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_PSSETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_PSSETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_PSSETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_PSSETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_RSSETVIEWPORTS_INVALIDVIEWPORT:
+		return "D3D11_MESSAGE_ID_DEVICE_RSSETVIEWPORTS_INVALIDVIEWPORT"
+	case D3D11_MESSAGE_ID_DEVICE_RSSETSCISSORRECTS_INVALIDSCISSOR:
+		return "D3D11_MESSAGE_ID_DEVICE_RSSETSCISSORRECTS_INVALIDSCISSOR"
+	case D3D11_MESSAGE_ID_CLEARRENDERTARGETVIEW_DENORMFLUSH:
+		return "D3D11_MESSAGE_ID_CLEARRENDERTARGETVIEW_DENORMFLUSH"
+	case D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_DENORMFLUSH:
+		return "D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_DENORMFLUSH"
+	case D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_INVALID:
+		return "D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_INVALID"
+	case D3D11_MESSAGE_ID_DEVICE_IAGETVERTEXBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_IAGETVERTEXBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_VSGETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_VSGETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_VSGETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_VSGETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_VSGETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_VSGETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_GSGETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_GSGETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_GSGETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_GSGETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_GSGETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_GSGETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_SOGETTARGETS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_SOGETTARGETS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_PSGETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_PSGETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_PSGETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_PSGETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_PSGETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_PSGETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_RSGETVIEWPORTS_VIEWPORTS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_RSGETVIEWPORTS_VIEWPORTS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_RSGETSCISSORRECTS_RECTS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_RSGETSCISSORRECTS_RECTS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_GENERATEMIPS_RESOURCE_INVALID:
+		return "D3D11_MESSAGE_ID_DEVICE_GENERATEMIPS_RESOURCE_INVALID"
+	case D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDDESTINATIONSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDDESTINATIONSUBRESOURCE"
+	case D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCESUBRESOURCE:
+		return "D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCESUBRESOURCE"
+	case D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCEBOX:
+		return "D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCEBOX"
+	case D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCE:
+		return "D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCE"
+	case D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDDESTINATIONSTATE:
+		return "D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDDESTINATIONSTATE"
+	case D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCESTATE:
+		return "D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_INVALIDSOURCESTATE"
+	case D3D11_MESSAGE_ID_COPYRESOURCE_INVALIDSOURCE:
+		return "D3D11_MESSAGE_ID_COPYRESOURCE_INVALIDSOURCE"
+	case D3D11_MESSAGE_ID_COPYRESOURCE_INVALIDDESTINATIONSTATE:
+		return "D3D11_MESSAGE_ID_COPYRESOURCE_INVALIDDESTINATIONSTATE"
+	case D3D11_MESSAGE_ID_COPYRESOURCE_INVALIDSOURCESTATE:
+		return "D3D11_MESSAGE_ID_COPYRESOURCE_INVALIDSOURCESTATE"
+	case D3D11_MESSAGE_ID_UPDATESUBRESOURCE_INVALIDDESTINATIONSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_UPDATESUBRESOURCE_INVALIDDESTINATIONSUBRESOURCE"
+	case D3D11_MESSAGE_ID_UPDATESUBRESOURCE_INVALIDDESTINATIONBOX:
+		return "D3D11_MESSAGE_ID_UPDATESUBRESOURCE_INVALIDDESTINATIONBOX"
+	case D3D11_MESSAGE_ID_UPDATESUBRESOURCE_INVALIDDESTINATIONSTATE:
+		return "D3D11_MESSAGE_ID_UPDATESUBRESOURCE_INVALIDDESTINATIONSTATE"
+	case D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_DESTINATION_INVALID:
+		return "D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_DESTINATION_INVALID"
+	case D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_DESTINATION_SUBRESOURCE_INVALID:
+		return "D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_DESTINATION_SUBRESOURCE_INVALID"
+	case D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_SOURCE_INVALID:
+		return "D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_SOURCE_INVALID"
+	case D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_SOURCE_SUBRESOURCE_INVALID:
+		return "D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_SOURCE_SUBRESOURCE_INVALID"
+	case D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_FORMAT_INVALID:
+		return "D3D11_MESSAGE_ID_DEVICE_RESOLVESUBRESOURCE_FORMAT_INVALID"
+	case D3D11_MESSAGE_ID_BUFFER_MAP_INVALIDMAPTYPE:
+		return "D3D11_MESSAGE_ID_BUFFER_MAP_INVALIDMAPTYPE"
+	case D3D11_MESSAGE_ID_BUFFER_MAP_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_BUFFER_MAP_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_BUFFER_MAP_ALREADYMAPPED:
+		return "D3D11_MESSAGE_ID_BUFFER_MAP_ALREADYMAPPED"
+	case D3D11_MESSAGE_ID_BUFFER_MAP_DEVICEREMOVED_RETURN:
+		return "D3D11_MESSAGE_ID_BUFFER_MAP_DEVICEREMOVED_RETURN"
+	case D3D11_MESSAGE_ID_BUFFER_UNMAP_NOTMAPPED:
+		return "D3D11_MESSAGE_ID_BUFFER_UNMAP_NOTMAPPED"
+	case D3D11_MESSAGE_ID_TEXTURE1D_MAP_INVALIDMAPTYPE:
+		return "D3D11_MESSAGE_ID_TEXTURE1D_MAP_INVALIDMAPTYPE"
+	case D3D11_MESSAGE_ID_TEXTURE1D_MAP_INVALIDSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_TEXTURE1D_MAP_INVALIDSUBRESOURCE"
+	case D3D11_MESSAGE_ID_TEXTURE1D_MAP_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_TEXTURE1D_MAP_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_TEXTURE1D_MAP_ALREADYMAPPED:
+		return "D3D11_MESSAGE_ID_TEXTURE1D_MAP_ALREADYMAPPED"
+	case D3D11_MESSAGE_ID_TEXTURE1D_MAP_DEVICEREMOVED_RETURN:
+		return "D3D11_MESSAGE_ID_TEXTURE1D_MAP_DEVICEREMOVED_RETURN"
+	case D3D11_MESSAGE_ID_TEXTURE1D_UNMAP_INVALIDSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_TEXTURE1D_UNMAP_INVALIDSUBRESOURCE"
+	case D3D11_MESSAGE_ID_TEXTURE1D_UNMAP_NOTMAPPED:
+		return "D3D11_MESSAGE_ID_TEXTURE1D_UNMAP_NOTMAPPED"
+	case D3D11_MESSAGE_ID_TEXTURE2D_MAP_INVALIDMAPTYPE:
+		return "D3D11_MESSAGE_ID_TEXTURE2D_MAP_INVALIDMAPTYPE"
+	case D3D11_MESSAGE_ID_TEXTURE2D_MAP_INVALIDSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_TEXTURE2D_MAP_INVALIDSUBRESOURCE"
+	case D3D11_MESSAGE_ID_TEXTURE2D_MAP_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_TEXTURE2D_MAP_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_TEXTURE2D_MAP_ALREADYMAPPED:
+		return "D3D11_MESSAGE_ID_TEXTURE2D_MAP_ALREADYMAPPED"
+	case D3D11_MESSAGE_ID_TEXTURE2D_MAP_DEVICEREMOVED_RETURN:
+		return "D3D11_MESSAGE_ID_TEXTURE2D_MAP_DEVICEREMOVED_RETURN"
+	case D3D11_MESSAGE_ID_TEXTURE2D_UNMAP_INVALIDSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_TEXTURE2D_UNMAP_INVALIDSUBRESOURCE"
+	case D3D11_MESSAGE_ID_TEXTURE2D_UNMAP_NOTMAPPED:
+		return "D3D11_MESSAGE_ID_TEXTURE2D_UNMAP_NOTMAPPED"
+	case D3D11_MESSAGE_ID_TEXTURE3D_MAP_INVALIDMAPTYPE:
+		return "D3D11_MESSAGE_ID_TEXTURE3D_MAP_INVALIDMAPTYPE"
+	case D3D11_MESSAGE_ID_TEXTURE3D_MAP_INVALIDSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_TEXTURE3D_MAP_INVALIDSUBRESOURCE"
+	case D3D11_MESSAGE_ID_TEXTURE3D_MAP_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_TEXTURE3D_MAP_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_TEXTURE3D_MAP_ALREADYMAPPED:
+		return "D3D11_MESSAGE_ID_TEXTURE3D_MAP_ALREADYMAPPED"
+	case D3D11_MESSAGE_ID_TEXTURE3D_MAP_DEVICEREMOVED_RETURN:
+		return "D3D11_MESSAGE_ID_TEXTURE3D_MAP_DEVICEREMOVED_RETURN"
+	case D3D11_MESSAGE_ID_TEXTURE3D_UNMAP_INVALIDSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_TEXTURE3D_UNMAP_INVALIDSUBRESOURCE"
+	case D3D11_MESSAGE_ID_TEXTURE3D_UNMAP_NOTMAPPED:
+		return "D3D11_MESSAGE_ID_TEXTURE3D_UNMAP_NOTMAPPED"
+	case D3D11_MESSAGE_ID_CHECKFORMATSUPPORT_FORMAT_DEPRECATED:
+		return "D3D11_MESSAGE_ID_CHECKFORMATSUPPORT_FORMAT_DEPRECATED"
+	case D3D11_MESSAGE_ID_CHECKMULTISAMPLEQUALITYLEVELS_FORMAT_DEPRECATED:
+		return "D3D11_MESSAGE_ID_CHECKMULTISAMPLEQUALITYLEVELS_FORMAT_DEPRECATED"
+	case D3D11_MESSAGE_ID_SETEXCEPTIONMODE_UNRECOGNIZEDFLAGS:
+		return "D3D11_MESSAGE_ID_SETEXCEPTIONMODE_UNRECOGNIZEDFLAGS"
+	case D3D11_MESSAGE_ID_SETEXCEPTIONMODE_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_SETEXCEPTIONMODE_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_SETEXCEPTIONMODE_DEVICEREMOVED_RETURN:
+		return "D3D11_MESSAGE_ID_SETEXCEPTIONMODE_DEVICEREMOVED_RETURN"
+	case D3D11_MESSAGE_ID_REF_SIMULATING_INFINITELY_FAST_HARDWARE:
+		return "D3D11_MESSAGE_ID_REF_SIMULATING_INFINITELY_FAST_HARDWARE"
+	case D3D11_MESSAGE_ID_REF_THREADING_MODE:
+		return "D3D11_MESSAGE_ID_REF_THREADING_MODE"
+	case D3D11_MESSAGE_ID_REF_UMDRIVER_EXCEPTION:
+		return "D3D11_MESSAGE_ID_REF_UMDRIVER_EXCEPTION"
+	case D3D11_MESSAGE_ID_REF_KMDRIVER_EXCEPTION:
+		return "D3D11_MESSAGE_ID_REF_KMDRIVER_EXCEPTION"
+	case D3D11_MESSAGE_ID_REF_HARDWARE_EXCEPTION:
+		return "D3D11_MESSAGE_ID_REF_HARDWARE_EXCEPTION"
+	case D3D11_MESSAGE_ID_REF_ACCESSING_INDEXABLE_TEMP_OUT_OF_RANGE:
+		return "D3D11_MESSAGE_ID_REF_ACCESSING_INDEXABLE_TEMP_OUT_OF_RANGE"
+	case D3D11_MESSAGE_ID_REF_PROBLEM_PARSING_SHADER:
+		return "D3D11_MESSAGE_ID_REF_PROBLEM_PARSING_SHADER"
+	case D3D11_MESSAGE_ID_REF_OUT_OF_MEMORY:
+		return "D3D11_MESSAGE_ID_REF_OUT_OF_MEMORY"
+	case D3D11_MESSAGE_ID_REF_INFO:
+		return "D3D11_MESSAGE_ID_REF_INFO"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEXPOS_OVERFLOW:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEXPOS_OVERFLOW"
+	case D3D11_MESSAGE_ID_DEVICE_DRAWINDEXED_INDEXPOS_OVERFLOW:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAWINDEXED_INDEXPOS_OVERFLOW"
+	case D3D11_MESSAGE_ID_DEVICE_DRAWINSTANCED_VERTEXPOS_OVERFLOW:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAWINSTANCED_VERTEXPOS_OVERFLOW"
+	case D3D11_MESSAGE_ID_DEVICE_DRAWINSTANCED_INSTANCEPOS_OVERFLOW:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAWINSTANCED_INSTANCEPOS_OVERFLOW"
+	case D3D11_MESSAGE_ID_DEVICE_DRAWINDEXEDINSTANCED_INSTANCEPOS_OVERFLOW:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAWINDEXEDINSTANCED_INSTANCEPOS_OVERFLOW"
+	case D3D11_MESSAGE_ID_DEVICE_DRAWINDEXEDINSTANCED_INDEXPOS_OVERFLOW:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAWINDEXEDINSTANCED_INDEXPOS_OVERFLOW"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_SHADER_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_SHADER_NOT_SET"
+	case D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_SEMANTICNAME_NOT_FOUND:
+		return "D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_SEMANTICNAME_NOT_FOUND"
+	case D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_REGISTERINDEX:
+		return "D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_REGISTERINDEX"
+	case D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_COMPONENTTYPE:
+		return "D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_COMPONENTTYPE"
+	case D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_REGISTERMASK:
+		return "D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_REGISTERMASK"
+	case D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_SYSTEMVALUE:
+		return "D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_SYSTEMVALUE"
+	case D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_NEVERWRITTEN_ALWAYSREADS:
+		return "D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_NEVERWRITTEN_ALWAYSREADS"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_BUFFER_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_BUFFER_NOT_SET"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_INPUTLAYOUT_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_INPUTLAYOUT_NOT_SET"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_CONSTANT_BUFFER_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_CONSTANT_BUFFER_NOT_SET"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_CONSTANT_BUFFER_TOO_SMALL:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_CONSTANT_BUFFER_TOO_SMALL"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_SAMPLER_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_SAMPLER_NOT_SET"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_SHADERRESOURCEVIEW_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_SHADERRESOURCEVIEW_NOT_SET"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_VIEW_DIMENSION_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_VIEW_DIMENSION_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_BUFFER_STRIDE_TOO_SMALL:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_BUFFER_STRIDE_TOO_SMALL"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_BUFFER_TOO_SMALL:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_BUFFER_TOO_SMALL"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_BUFFER_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_BUFFER_NOT_SET"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_BUFFER_FORMAT_INVALID:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_BUFFER_FORMAT_INVALID"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_BUFFER_TOO_SMALL:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_BUFFER_TOO_SMALL"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_GS_INPUT_PRIMITIVE_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_GS_INPUT_PRIMITIVE_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_RETURN_TYPE_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_RETURN_TYPE_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_POSITION_NOT_PRESENT:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_POSITION_NOT_PRESENT"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_OUTPUT_STREAM_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_OUTPUT_STREAM_NOT_SET"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_BOUND_RESOURCE_MAPPED:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_BOUND_RESOURCE_MAPPED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_PRIMITIVETOPOLOGY:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_PRIMITIVETOPOLOGY"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_OFFSET_UNALIGNED:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_OFFSET_UNALIGNED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_STRIDE_UNALIGNED:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_VERTEX_STRIDE_UNALIGNED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_OFFSET_UNALIGNED:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_INDEX_OFFSET_UNALIGNED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_OUTPUT_STREAM_OFFSET_UNALIGNED:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_OUTPUT_STREAM_OFFSET_UNALIGNED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_LD_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_LD_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_SAMPLE_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_SAMPLE_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_SAMPLE_C_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_SAMPLE_C_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_MULTISAMPLE_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_MULTISAMPLE_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_SO_TARGETS_BOUND_WITHOUT_SOURCE:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_SO_TARGETS_BOUND_WITHOUT_SOURCE"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_SO_STRIDE_LARGER_THAN_BUFFER:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_SO_STRIDE_LARGER_THAN_BUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_OM_RENDER_TARGET_DOES_NOT_SUPPORT_BLENDING:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_OM_RENDER_TARGET_DOES_NOT_SUPPORT_BLENDING"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_OM_DUAL_SOURCE_BLENDING_CAN_ONLY_HAVE_RENDER_TARGET_0:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_OM_DUAL_SOURCE_BLENDING_CAN_ONLY_HAVE_RENDER_TARGET_0"
+	case D3D11_MESSAGE_ID_DEVICE_REMOVAL_PROCESS_AT_FAULT:
+		return "D3D11_MESSAGE_ID_DEVICE_REMOVAL_PROCESS_AT_FAULT"
+	case D3D11_MESSAGE_ID_DEVICE_REMOVAL_PROCESS_POSSIBLY_AT_FAULT:
+		return "D3D11_MESSAGE_ID_DEVICE_REMOVAL_PROCESS_POSSIBLY_AT_FAULT"
+	case D3D11_MESSAGE_ID_DEVICE_REMOVAL_PROCESS_NOT_AT_FAULT:
+		return "D3D11_MESSAGE_ID_DEVICE_REMOVAL_PROCESS_NOT_AT_FAULT"
+	case D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_BADINTERFACE_RETURN:
+		return "D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_BADINTERFACE_RETURN"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_VIEWPORT_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_VIEWPORT_NOT_SET"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_TRAILING_DIGIT_IN_SEMANTIC:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_TRAILING_DIGIT_IN_SEMANTIC"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_TRAILING_DIGIT_IN_SEMANTIC:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_TRAILING_DIGIT_IN_SEMANTIC"
+	case D3D11_MESSAGE_ID_DEVICE_RSSETVIEWPORTS_DENORMFLUSH:
+		return "D3D11_MESSAGE_ID_DEVICE_RSSETVIEWPORTS_DENORMFLUSH"
+	case D3D11_MESSAGE_ID_OMSETRENDERTARGETS_INVALIDVIEW:
+		return "D3D11_MESSAGE_ID_OMSETRENDERTARGETS_INVALIDVIEW"
+	case D3D11_MESSAGE_ID_DEVICE_SETTEXTFILTERSIZE_INVALIDDIMENSIONS:
+		return "D3D11_MESSAGE_ID_DEVICE_SETTEXTFILTERSIZE_INVALIDDIMENSIONS"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_SAMPLER_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_SAMPLER_MISMATCH"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_TYPE_MISMATCH:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_TYPE_MISMATCH"
+	case D3D11_MESSAGE_ID_BLENDSTATE_GETDESC_LEGACY:
+		return "D3D11_MESSAGE_ID_BLENDSTATE_GETDESC_LEGACY"
+	case D3D11_MESSAGE_ID_SHADERRESOURCEVIEW_GETDESC_LEGACY:
+		return "D3D11_MESSAGE_ID_SHADERRESOURCEVIEW_GETDESC_LEGACY"
+	case D3D11_MESSAGE_ID_CREATEQUERY_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEQUERY_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATEPREDICATE_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEPREDICATE_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATECOUNTER_OUTOFRANGE_COUNTER:
+		return "D3D11_MESSAGE_ID_CREATECOUNTER_OUTOFRANGE_COUNTER"
+	case D3D11_MESSAGE_ID_CREATECOUNTER_SIMULTANEOUS_ACTIVE_COUNTERS_EXHAUSTED:
+		return "D3D11_MESSAGE_ID_CREATECOUNTER_SIMULTANEOUS_ACTIVE_COUNTERS_EXHAUSTED"
+	case D3D11_MESSAGE_ID_CREATECOUNTER_UNSUPPORTED_WELLKNOWN_COUNTER:
+		return "D3D11_MESSAGE_ID_CREATECOUNTER_UNSUPPORTED_WELLKNOWN_COUNTER"
+	case D3D11_MESSAGE_ID_CREATECOUNTER_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATECOUNTER_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATECOUNTER_NONEXCLUSIVE_RETURN:
+		return "D3D11_MESSAGE_ID_CREATECOUNTER_NONEXCLUSIVE_RETURN"
+	case D3D11_MESSAGE_ID_CREATECOUNTER_NULLDESC:
+		return "D3D11_MESSAGE_ID_CREATECOUNTER_NULLDESC"
+	case D3D11_MESSAGE_ID_CHECKCOUNTER_OUTOFRANGE_COUNTER:
+		return "D3D11_MESSAGE_ID_CHECKCOUNTER_OUTOFRANGE_COUNTER"
+	case D3D11_MESSAGE_ID_CHECKCOUNTER_UNSUPPORTED_WELLKNOWN_COUNTER:
+		return "D3D11_MESSAGE_ID_CHECKCOUNTER_UNSUPPORTED_WELLKNOWN_COUNTER"
+	case D3D11_MESSAGE_ID_SETPREDICATION_INVALID_PREDICATE_STATE:
+		return "D3D11_MESSAGE_ID_SETPREDICATION_INVALID_PREDICATE_STATE"
+	case D3D11_MESSAGE_ID_QUERY_BEGIN_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_QUERY_BEGIN_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_PREDICATE_BEGIN_DURING_PREDICATION:
+		return "D3D11_MESSAGE_ID_PREDICATE_BEGIN_DURING_PREDICATION"
+	case D3D11_MESSAGE_ID_QUERY_BEGIN_DUPLICATE:
+		return "D3D11_MESSAGE_ID_QUERY_BEGIN_DUPLICATE"
+	case D3D11_MESSAGE_ID_QUERY_BEGIN_ABANDONING_PREVIOUS_RESULTS:
+		return "D3D11_MESSAGE_ID_QUERY_BEGIN_ABANDONING_PREVIOUS_RESULTS"
+	case D3D11_MESSAGE_ID_PREDICATE_END_DURING_PREDICATION:
+		return "D3D11_MESSAGE_ID_PREDICATE_END_DURING_PREDICATION"
+	case D3D11_MESSAGE_ID_QUERY_END_ABANDONING_PREVIOUS_RESULTS:
+		return "D3D11_MESSAGE_ID_QUERY_END_ABANDONING_PREVIOUS_RESULTS"
+	case D3D11_MESSAGE_ID_QUERY_END_WITHOUT_BEGIN:
+		return "D3D11_MESSAGE_ID_QUERY_END_WITHOUT_BEGIN"
+	case D3D11_MESSAGE_ID_QUERY_GETDATA_INVALID_DATASIZE:
+		return "D3D11_MESSAGE_ID_QUERY_GETDATA_INVALID_DATASIZE"
+	case D3D11_MESSAGE_ID_QUERY_GETDATA_INVALID_FLAGS:
+		return "D3D11_MESSAGE_ID_QUERY_GETDATA_INVALID_FLAGS"
+	case D3D11_MESSAGE_ID_QUERY_GETDATA_INVALID_CALL:
+		return "D3D11_MESSAGE_ID_QUERY_GETDATA_INVALID_CALL"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_PS_OUTPUT_TYPE_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_PS_OUTPUT_TYPE_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_GATHER_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_GATHER_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_USE_OF_CENTER_MULTISAMPLE_PATTERN:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_USE_OF_CENTER_MULTISAMPLE_PATTERN"
+	case D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_STRIDE_TOO_LARGE:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_STRIDE_TOO_LARGE"
+	case D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_INVALIDRANGE:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETVERTEXBUFFERS_INVALIDRANGE"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_EMPTY_LAYOUT:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_EMPTY_LAYOUT"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_SAMPLE_COUNT_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_SAMPLE_COUNT_MISMATCH"
+	case D3D11_MESSAGE_ID_LIVE_OBJECT_SUMMARY:
+		return "D3D11_MESSAGE_ID_LIVE_OBJECT_SUMMARY"
+	case D3D11_MESSAGE_ID_LIVE_BUFFER:
+		return "D3D11_MESSAGE_ID_LIVE_BUFFER"
+	case D3D11_MESSAGE_ID_LIVE_TEXTURE1D:
+		return "D3D11_MESSAGE_ID_LIVE_TEXTURE1D"
+	case D3D11_MESSAGE_ID_LIVE_TEXTURE2D:
+		return "D3D11_MESSAGE_ID_LIVE_TEXTURE2D"
+	case D3D11_MESSAGE_ID_LIVE_TEXTURE3D:
+		return "D3D11_MESSAGE_ID_LIVE_TEXTURE3D"
+	case D3D11_MESSAGE_ID_LIVE_SHADERRESOURCEVIEW:
+		return "D3D11_MESSAGE_ID_LIVE_SHADERRESOURCEVIEW"
+	case D3D11_MESSAGE_ID_LIVE_RENDERTARGETVIEW:
+		return "D3D11_MESSAGE_ID_LIVE_RENDERTARGETVIEW"
+	case D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILVIEW:
+		return "D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILVIEW"
+	case D3D11_MESSAGE_ID_LIVE_VERTEXSHADER:
+		return "D3D11_MESSAGE_ID_LIVE_VERTEXSHADER"
+	case D3D11_MESSAGE_ID_LIVE_GEOMETRYSHADER:
+		return "D3D11_MESSAGE_ID_LIVE_GEOMETRYSHADER"
+	case D3D11_MESSAGE_ID_LIVE_PIXELSHADER:
+		return "D3D11_MESSAGE_ID_LIVE_PIXELSHADER"
+	case D3D11_MESSAGE_ID_LIVE_INPUTLAYOUT:
+		return "D3D11_MESSAGE_ID_LIVE_INPUTLAYOUT"
+	case D3D11_MESSAGE_ID_LIVE_SAMPLER:
+		return "D3D11_MESSAGE_ID_LIVE_SAMPLER"
+	case D3D11_MESSAGE_ID_LIVE_BLENDSTATE:
+		return "D3D11_MESSAGE_ID_LIVE_BLENDSTATE"
+	case D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILSTATE:
+		return "D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILSTATE"
+	case D3D11_MESSAGE_ID_LIVE_RASTERIZERSTATE:
+		return "D3D11_MESSAGE_ID_LIVE_RASTERIZERSTATE"
+	case D3D11_MESSAGE_ID_LIVE_QUERY:
+		return "D3D11_MESSAGE_ID_LIVE_QUERY"
+	case D3D11_MESSAGE_ID_LIVE_PREDICATE:
+		return "D3D11_MESSAGE_ID_LIVE_PREDICATE"
+	case D3D11_MESSAGE_ID_LIVE_COUNTER:
+		return "D3D11_MESSAGE_ID_LIVE_COUNTER"
+	case D3D11_MESSAGE_ID_LIVE_DEVICE:
+		return "D3D11_MESSAGE_ID_LIVE_DEVICE"
+	case D3D11_MESSAGE_ID_LIVE_SWAPCHAIN:
+		return "D3D11_MESSAGE_ID_LIVE_SWAPCHAIN"
+	case D3D11_MESSAGE_ID_D3D10_MESSAGES_END:
+		return "D3D11_MESSAGE_ID_D3D10_MESSAGES_END"
+	case D3D11_MESSAGE_ID_D3D10L9_MESSAGES_START:
+		return "D3D11_MESSAGE_ID_D3D10L9_MESSAGES_START"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_STENCIL_NO_TWO_SIDED:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILSTATE_STENCIL_NO_TWO_SIDED"
+	case D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_DepthBiasClamp_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_DepthBiasClamp_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_NO_COMPARISON_SUPPORT:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_NO_COMPARISON_SUPPORT"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_EXCESSIVE_ANISOTROPY:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_EXCESSIVE_ANISOTROPY"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_BORDER_OUT_OF_RANGE:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_BORDER_OUT_OF_RANGE"
+	case D3D11_MESSAGE_ID_VSSETSAMPLERS_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_VSSETSAMPLERS_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_VSSETSAMPLERS_TOO_MANY_SAMPLERS:
+		return "D3D11_MESSAGE_ID_VSSETSAMPLERS_TOO_MANY_SAMPLERS"
+	case D3D11_MESSAGE_ID_PSSETSAMPLERS_TOO_MANY_SAMPLERS:
+		return "D3D11_MESSAGE_ID_PSSETSAMPLERS_TOO_MANY_SAMPLERS"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_NO_ARRAYS:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_NO_ARRAYS"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_NO_VB_AND_IB_BIND:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_NO_VB_AND_IB_BIND"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_NO_TEXTURE_1D:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_NO_TEXTURE_1D"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_DIMENSION_OUT_OF_RANGE:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_DIMENSION_OUT_OF_RANGE"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_NOT_BINDABLE_AS_SHADER_RESOURCE:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_NOT_BINDABLE_AS_SHADER_RESOURCE"
+	case D3D11_MESSAGE_ID_OMSETRENDERTARGETS_TOO_MANY_RENDER_TARGETS:
+		return "D3D11_MESSAGE_ID_OMSETRENDERTARGETS_TOO_MANY_RENDER_TARGETS"
+	case D3D11_MESSAGE_ID_OMSETRENDERTARGETS_NO_DIFFERING_BIT_DEPTHS:
+		return "D3D11_MESSAGE_ID_OMSETRENDERTARGETS_NO_DIFFERING_BIT_DEPTHS"
+	case D3D11_MESSAGE_ID_IASETVERTEXBUFFERS_BAD_BUFFER_INDEX:
+		return "D3D11_MESSAGE_ID_IASETVERTEXBUFFERS_BAD_BUFFER_INDEX"
+	case D3D11_MESSAGE_ID_DEVICE_RSSETVIEWPORTS_TOO_MANY_VIEWPORTS:
+		return "D3D11_MESSAGE_ID_DEVICE_RSSETVIEWPORTS_TOO_MANY_VIEWPORTS"
+	case D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_ADJACENCY_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_ADJACENCY_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_RSSETSCISSORRECTS_TOO_MANY_SCISSORS:
+		return "D3D11_MESSAGE_ID_DEVICE_RSSETSCISSORRECTS_TOO_MANY_SCISSORS"
+	case D3D11_MESSAGE_ID_COPYRESOURCE_ONLY_TEXTURE_2D_WITHIN_GPU_MEMORY:
+		return "D3D11_MESSAGE_ID_COPYRESOURCE_ONLY_TEXTURE_2D_WITHIN_GPU_MEMORY"
+	case D3D11_MESSAGE_ID_COPYRESOURCE_NO_TEXTURE_3D_READBACK:
+		return "D3D11_MESSAGE_ID_COPYRESOURCE_NO_TEXTURE_3D_READBACK"
+	case D3D11_MESSAGE_ID_COPYRESOURCE_NO_TEXTURE_ONLY_READBACK:
+		return "D3D11_MESSAGE_ID_COPYRESOURCE_NO_TEXTURE_ONLY_READBACK"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_UNSUPPORTED_FORMAT:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_UNSUPPORTED_FORMAT"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_ALPHA_TO_COVERAGE:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_ALPHA_TO_COVERAGE"
+	case D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_DepthClipEnable_MUST_BE_TRUE:
+		return "D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_DepthClipEnable_MUST_BE_TRUE"
+	case D3D11_MESSAGE_ID_DRAWINDEXED_STARTINDEXLOCATION_MUST_BE_POSITIVE:
+		return "D3D11_MESSAGE_ID_DRAWINDEXED_STARTINDEXLOCATION_MUST_BE_POSITIVE"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_MUST_USE_LOWEST_LOD:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_MUST_USE_LOWEST_LOD"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_MINLOD_MUST_NOT_BE_FRACTIONAL:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_MINLOD_MUST_NOT_BE_FRACTIONAL"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_MAXLOD_MUST_BE_FLT_MAX:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_MAXLOD_MUST_BE_FLT_MAX"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_FIRSTARRAYSLICE_MUST_BE_ZERO:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_FIRSTARRAYSLICE_MUST_BE_ZERO"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_CUBES_MUST_HAVE_6_SIDES:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_CUBES_MUST_HAVE_6_SIDES"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_NOT_BINDABLE_AS_RENDER_TARGET:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_NOT_BINDABLE_AS_RENDER_TARGET"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_NO_DWORD_INDEX_BUFFER:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_NO_DWORD_INDEX_BUFFER"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_MSAA_PRECLUDES_SHADER_RESOURCE:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_MSAA_PRECLUDES_SHADER_RESOURCE"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_PRESENTATION_PRECLUDES_SHADER_RESOURCE:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_PRESENTATION_PRECLUDES_SHADER_RESOURCE"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_INDEPENDENT_BLEND_ENABLE:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_INDEPENDENT_BLEND_ENABLE"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_INDEPENDENT_WRITE_MASKS:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_INDEPENDENT_WRITE_MASKS"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_NO_STREAM_OUT:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_NO_STREAM_OUT"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_ONLY_VB_IB_FOR_BUFFERS:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_ONLY_VB_IB_FOR_BUFFERS"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_NO_AUTOGEN_FOR_VOLUMES:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_NO_AUTOGEN_FOR_VOLUMES"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_DXGI_FORMAT_R8G8B8A8_CANNOT_BE_SHARED:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_DXGI_FORMAT_R8G8B8A8_CANNOT_BE_SHARED"
+	case D3D11_MESSAGE_ID_VSSHADERRESOURCES_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_VSSHADERRESOURCES_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_GEOMETRY_SHADER_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_GEOMETRY_SHADER_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_STREAM_OUT_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_STREAM_OUT_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_TEXT_FILTER_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_TEXT_FILTER_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_SEPARATE_ALPHA_BLEND:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_SEPARATE_ALPHA_BLEND"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_MRT_BLEND:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_NO_MRT_BLEND"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_OPERATION_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_OPERATION_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_NO_MIRRORONCE:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_NO_MIRRORONCE"
+	case D3D11_MESSAGE_ID_DRAWINSTANCED_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_DRAWINSTANCED_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_DRAWINDEXEDINSTANCED_NOT_SUPPORTED_BELOW_9_3:
+		return "D3D11_MESSAGE_ID_DRAWINDEXEDINSTANCED_NOT_SUPPORTED_BELOW_9_3"
+	case D3D11_MESSAGE_ID_DRAWINDEXED_POINTLIST_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DRAWINDEXED_POINTLIST_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_SETBLENDSTATE_SAMPLE_MASK_CANNOT_BE_ZERO:
+		return "D3D11_MESSAGE_ID_SETBLENDSTATE_SAMPLE_MASK_CANNOT_BE_ZERO"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_DIMENSION_EXCEEDS_FEATURE_LEVEL_DEFINITION:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_DIMENSION_EXCEEDS_FEATURE_LEVEL_DEFINITION"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_ONLY_SINGLE_MIP_LEVEL_DEPTH_STENCIL_SUPPORTED:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_ONLY_SINGLE_MIP_LEVEL_DEPTH_STENCIL_SUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_RSSETSCISSORRECTS_NEGATIVESCISSOR:
+		return "D3D11_MESSAGE_ID_DEVICE_RSSETSCISSORRECTS_NEGATIVESCISSOR"
+	case D3D11_MESSAGE_ID_SLOT_ZERO_MUST_BE_D3D10_INPUT_PER_VERTEX_DATA:
+		return "D3D11_MESSAGE_ID_SLOT_ZERO_MUST_BE_D3D10_INPUT_PER_VERTEX_DATA"
+	case D3D11_MESSAGE_ID_CREATERESOURCE_NON_POW_2_MIPMAP:
+		return "D3D11_MESSAGE_ID_CREATERESOURCE_NON_POW_2_MIPMAP"
+	case D3D11_MESSAGE_ID_CREATESAMPLERSTATE_BORDER_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_CREATESAMPLERSTATE_BORDER_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_OMSETRENDERTARGETS_NO_SRGB_MRT:
+		return "D3D11_MESSAGE_ID_OMSETRENDERTARGETS_NO_SRGB_MRT"
+	case D3D11_MESSAGE_ID_COPYRESOURCE_NO_3D_MISMATCHED_UPDATES:
+		return "D3D11_MESSAGE_ID_COPYRESOURCE_NO_3D_MISMATCHED_UPDATES"
+	case D3D11_MESSAGE_ID_D3D10L9_MESSAGES_END:
+		return "D3D11_MESSAGE_ID_D3D10L9_MESSAGES_END"
+	case D3D11_MESSAGE_ID_D3D11_MESSAGES_START:
+		return "D3D11_MESSAGE_ID_D3D11_MESSAGES_START"
+	case D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEDEPTHSTENCILVIEW_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_CREATEVERTEXSHADER_INVALIDCLASSLINKAGE:
+		return "D3D11_MESSAGE_ID_CREATEVERTEXSHADER_INVALIDCLASSLINKAGE"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_INVALIDCLASSLINKAGE:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADER_INVALIDCLASSLINKAGE"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDNUMSTREAMS:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDNUMSTREAMS"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSTREAMTORASTERIZER:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSTREAMTORASTERIZER"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDSTREAMS:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDSTREAMS"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDCLASSLINKAGE:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDCLASSLINKAGE"
+	case D3D11_MESSAGE_ID_CREATEPIXELSHADER_INVALIDCLASSLINKAGE:
+		return "D3D11_MESSAGE_ID_CREATEPIXELSHADER_INVALIDCLASSLINKAGE"
+	case D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_INVALID_COMMANDLISTFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_INVALID_COMMANDLISTFLAGS"
+	case D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_SINGLETHREADED:
+		return "D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_SINGLETHREADED"
+	case D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_INVALID_CALL_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_INVALID_CALL_RETURN"
+	case D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEDEFERREDCONTEXT_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_FINISHDISPLAYLIST_ONIMMEDIATECONTEXT:
+		return "D3D11_MESSAGE_ID_FINISHDISPLAYLIST_ONIMMEDIATECONTEXT"
+	case D3D11_MESSAGE_ID_FINISHDISPLAYLIST_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_FINISHDISPLAYLIST_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_FINISHDISPLAYLIST_INVALID_CALL_RETURN:
+		return "D3D11_MESSAGE_ID_FINISHDISPLAYLIST_INVALID_CALL_RETURN"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDENTRIES:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDENTRIES"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDSTRIDES:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UNEXPECTEDSTRIDES"
+	case D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDNUMSTRIDES:
+		return "D3D11_MESSAGE_ID_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_INVALIDNUMSTRIDES"
+	case D3D11_MESSAGE_ID_DEVICE_HSSETSHADERRESOURCES_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_HSSETSHADERRESOURCES_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_HSSETCONSTANTBUFFERS_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_HSSETCONSTANTBUFFERS_HAZARD"
+	case D3D11_MESSAGE_ID_HSSETSHADERRESOURCES_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_HSSETSHADERRESOURCES_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_HSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_HSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDCALL:
+		return "D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDCALL"
+	case D3D11_MESSAGE_ID_CREATEHULLSHADER_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_CREATEHULLSHADER_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDSHADERBYTECODE:
+		return "D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDSHADERBYTECODE"
+	case D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDSHADERTYPE:
+		return "D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDSHADERTYPE"
+	case D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDCLASSLINKAGE:
+		return "D3D11_MESSAGE_ID_CREATEHULLSHADER_INVALIDCLASSLINKAGE"
+	case D3D11_MESSAGE_ID_DEVICE_HSSETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_HSSETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_HSSETCONSTANTBUFFERS_INVALIDBUFFER:
+		return "D3D11_MESSAGE_ID_HSSETCONSTANTBUFFERS_INVALIDBUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_HSSETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_HSSETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_HSSETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_HSSETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_HSGETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_HSGETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_HSGETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_HSGETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_HSGETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_HSGETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_DSSETSHADERRESOURCES_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_DSSETSHADERRESOURCES_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_DSSETCONSTANTBUFFERS_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_DSSETCONSTANTBUFFERS_HAZARD"
+	case D3D11_MESSAGE_ID_DSSETSHADERRESOURCES_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_DSSETSHADERRESOURCES_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_DSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_DSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDCALL:
+		return "D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDCALL"
+	case D3D11_MESSAGE_ID_CREATEDOMAINSHADER_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_CREATEDOMAINSHADER_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDSHADERBYTECODE:
+		return "D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDSHADERBYTECODE"
+	case D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDSHADERTYPE:
+		return "D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDSHADERTYPE"
+	case D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDCLASSLINKAGE:
+		return "D3D11_MESSAGE_ID_CREATEDOMAINSHADER_INVALIDCLASSLINKAGE"
+	case D3D11_MESSAGE_ID_DEVICE_DSSETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_DSSETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_DSSETCONSTANTBUFFERS_INVALIDBUFFER:
+		return "D3D11_MESSAGE_ID_DSSETCONSTANTBUFFERS_INVALIDBUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_DSSETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_DSSETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_DSSETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_DSSETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_DSGETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_DSGETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_DSGETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_DSGETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_DSGETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_DSGETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_HS_XOR_DS_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_HS_XOR_DS_MISMATCH"
+	case D3D11_MESSAGE_ID_DEFERRED_CONTEXT_REMOVAL_PROCESS_AT_FAULT:
+		return "D3D11_MESSAGE_ID_DEFERRED_CONTEXT_REMOVAL_PROCESS_AT_FAULT"
+	case D3D11_MESSAGE_ID_DEVICE_DRAWINDIRECT_INVALID_ARG_BUFFER:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAWINDIRECT_INVALID_ARG_BUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_DRAWINDIRECT_OFFSET_UNALIGNED:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAWINDIRECT_OFFSET_UNALIGNED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAWINDIRECT_OFFSET_OVERFLOW:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAWINDIRECT_OFFSET_OVERFLOW"
+	case D3D11_MESSAGE_ID_RESOURCE_MAP_INVALIDMAPTYPE:
+		return "D3D11_MESSAGE_ID_RESOURCE_MAP_INVALIDMAPTYPE"
+	case D3D11_MESSAGE_ID_RESOURCE_MAP_INVALIDSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_RESOURCE_MAP_INVALIDSUBRESOURCE"
+	case D3D11_MESSAGE_ID_RESOURCE_MAP_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_RESOURCE_MAP_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_RESOURCE_MAP_ALREADYMAPPED:
+		return "D3D11_MESSAGE_ID_RESOURCE_MAP_ALREADYMAPPED"
+	case D3D11_MESSAGE_ID_RESOURCE_MAP_DEVICEREMOVED_RETURN:
+		return "D3D11_MESSAGE_ID_RESOURCE_MAP_DEVICEREMOVED_RETURN"
+	case D3D11_MESSAGE_ID_RESOURCE_MAP_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_RESOURCE_MAP_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_RESOURCE_MAP_WITHOUT_INITIAL_DISCARD:
+		return "D3D11_MESSAGE_ID_RESOURCE_MAP_WITHOUT_INITIAL_DISCARD"
+	case D3D11_MESSAGE_ID_RESOURCE_UNMAP_INVALIDSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_RESOURCE_UNMAP_INVALIDSUBRESOURCE"
+	case D3D11_MESSAGE_ID_RESOURCE_UNMAP_NOTMAPPED:
+		return "D3D11_MESSAGE_ID_RESOURCE_UNMAP_NOTMAPPED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_RASTERIZING_CONTROL_POINTS:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_RASTERIZING_CONTROL_POINTS"
+	case D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_TOPOLOGY_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_IASETPRIMITIVETOPOLOGY_TOPOLOGY_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_HS_DS_SIGNATURE_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_HS_DS_SIGNATURE_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_HULL_SHADER_INPUT_TOPOLOGY_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_HULL_SHADER_INPUT_TOPOLOGY_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_HS_DS_CONTROL_POINT_COUNT_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_HS_DS_CONTROL_POINT_COUNT_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_HS_DS_TESSELLATOR_DOMAIN_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_HS_DS_TESSELLATOR_DOMAIN_MISMATCH"
+	case D3D11_MESSAGE_ID_CREATE_CONTEXT:
+		return "D3D11_MESSAGE_ID_CREATE_CONTEXT"
+	case D3D11_MESSAGE_ID_LIVE_CONTEXT:
+		return "D3D11_MESSAGE_ID_LIVE_CONTEXT"
+	case D3D11_MESSAGE_ID_DESTROY_CONTEXT:
+		return "D3D11_MESSAGE_ID_DESTROY_CONTEXT"
+	case D3D11_MESSAGE_ID_CREATE_BUFFER:
+		return "D3D11_MESSAGE_ID_CREATE_BUFFER"
+	case D3D11_MESSAGE_ID_LIVE_BUFFER_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_BUFFER_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_BUFFER:
+		return "D3D11_MESSAGE_ID_DESTROY_BUFFER"
+	case D3D11_MESSAGE_ID_CREATE_TEXTURE1D:
+		return "D3D11_MESSAGE_ID_CREATE_TEXTURE1D"
+	case D3D11_MESSAGE_ID_LIVE_TEXTURE1D_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_TEXTURE1D_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_TEXTURE1D:
+		return "D3D11_MESSAGE_ID_DESTROY_TEXTURE1D"
+	case D3D11_MESSAGE_ID_CREATE_TEXTURE2D:
+		return "D3D11_MESSAGE_ID_CREATE_TEXTURE2D"
+	case D3D11_MESSAGE_ID_LIVE_TEXTURE2D_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_TEXTURE2D_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_TEXTURE2D:
+		return "D3D11_MESSAGE_ID_DESTROY_TEXTURE2D"
+	case D3D11_MESSAGE_ID_CREATE_TEXTURE3D:
+		return "D3D11_MESSAGE_ID_CREATE_TEXTURE3D"
+	case D3D11_MESSAGE_ID_LIVE_TEXTURE3D_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_TEXTURE3D_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_TEXTURE3D:
+		return "D3D11_MESSAGE_ID_DESTROY_TEXTURE3D"
+	case D3D11_MESSAGE_ID_CREATE_SHADERRESOURCEVIEW:
+		return "D3D11_MESSAGE_ID_CREATE_SHADERRESOURCEVIEW"
+	case D3D11_MESSAGE_ID_LIVE_SHADERRESOURCEVIEW_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_SHADERRESOURCEVIEW_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_SHADERRESOURCEVIEW:
+		return "D3D11_MESSAGE_ID_DESTROY_SHADERRESOURCEVIEW"
+	case D3D11_MESSAGE_ID_CREATE_RENDERTARGETVIEW:
+		return "D3D11_MESSAGE_ID_CREATE_RENDERTARGETVIEW"
+	case D3D11_MESSAGE_ID_LIVE_RENDERTARGETVIEW_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_RENDERTARGETVIEW_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_RENDERTARGETVIEW:
+		return "D3D11_MESSAGE_ID_DESTROY_RENDERTARGETVIEW"
+	case D3D11_MESSAGE_ID_CREATE_DEPTHSTENCILVIEW:
+		return "D3D11_MESSAGE_ID_CREATE_DEPTHSTENCILVIEW"
+	case D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILVIEW_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILVIEW_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_DEPTHSTENCILVIEW:
+		return "D3D11_MESSAGE_ID_DESTROY_DEPTHSTENCILVIEW"
+	case D3D11_MESSAGE_ID_CREATE_VERTEXSHADER:
+		return "D3D11_MESSAGE_ID_CREATE_VERTEXSHADER"
+	case D3D11_MESSAGE_ID_LIVE_VERTEXSHADER_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_VERTEXSHADER_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_VERTEXSHADER:
+		return "D3D11_MESSAGE_ID_DESTROY_VERTEXSHADER"
+	case D3D11_MESSAGE_ID_CREATE_HULLSHADER:
+		return "D3D11_MESSAGE_ID_CREATE_HULLSHADER"
+	case D3D11_MESSAGE_ID_LIVE_HULLSHADER:
+		return "D3D11_MESSAGE_ID_LIVE_HULLSHADER"
+	case D3D11_MESSAGE_ID_DESTROY_HULLSHADER:
+		return "D3D11_MESSAGE_ID_DESTROY_HULLSHADER"
+	case D3D11_MESSAGE_ID_CREATE_DOMAINSHADER:
+		return "D3D11_MESSAGE_ID_CREATE_DOMAINSHADER"
+	case D3D11_MESSAGE_ID_LIVE_DOMAINSHADER:
+		return "D3D11_MESSAGE_ID_LIVE_DOMAINSHADER"
+	case D3D11_MESSAGE_ID_DESTROY_DOMAINSHADER:
+		return "D3D11_MESSAGE_ID_DESTROY_DOMAINSHADER"
+	case D3D11_MESSAGE_ID_CREATE_GEOMETRYSHADER:
+		return "D3D11_MESSAGE_ID_CREATE_GEOMETRYSHADER"
+	case D3D11_MESSAGE_ID_LIVE_GEOMETRYSHADER_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_GEOMETRYSHADER_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_GEOMETRYSHADER:
+		return "D3D11_MESSAGE_ID_DESTROY_GEOMETRYSHADER"
+	case D3D11_MESSAGE_ID_CREATE_PIXELSHADER:
+		return "D3D11_MESSAGE_ID_CREATE_PIXELSHADER"
+	case D3D11_MESSAGE_ID_LIVE_PIXELSHADER_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_PIXELSHADER_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_PIXELSHADER:
+		return "D3D11_MESSAGE_ID_DESTROY_PIXELSHADER"
+	case D3D11_MESSAGE_ID_CREATE_INPUTLAYOUT:
+		return "D3D11_MESSAGE_ID_CREATE_INPUTLAYOUT"
+	case D3D11_MESSAGE_ID_LIVE_INPUTLAYOUT_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_INPUTLAYOUT_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_INPUTLAYOUT:
+		return "D3D11_MESSAGE_ID_DESTROY_INPUTLAYOUT"
+	case D3D11_MESSAGE_ID_CREATE_SAMPLER:
+		return "D3D11_MESSAGE_ID_CREATE_SAMPLER"
+	case D3D11_MESSAGE_ID_LIVE_SAMPLER_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_SAMPLER_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_SAMPLER:
+		return "D3D11_MESSAGE_ID_DESTROY_SAMPLER"
+	case D3D11_MESSAGE_ID_CREATE_BLENDSTATE:
+		return "D3D11_MESSAGE_ID_CREATE_BLENDSTATE"
+	case D3D11_MESSAGE_ID_LIVE_BLENDSTATE_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_BLENDSTATE_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_BLENDSTATE:
+		return "D3D11_MESSAGE_ID_DESTROY_BLENDSTATE"
+	case D3D11_MESSAGE_ID_CREATE_DEPTHSTENCILSTATE:
+		return "D3D11_MESSAGE_ID_CREATE_DEPTHSTENCILSTATE"
+	case D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILSTATE_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_DEPTHSTENCILSTATE_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_DEPTHSTENCILSTATE:
+		return "D3D11_MESSAGE_ID_DESTROY_DEPTHSTENCILSTATE"
+	case D3D11_MESSAGE_ID_CREATE_RASTERIZERSTATE:
+		return "D3D11_MESSAGE_ID_CREATE_RASTERIZERSTATE"
+	case D3D11_MESSAGE_ID_LIVE_RASTERIZERSTATE_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_RASTERIZERSTATE_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_RASTERIZERSTATE:
+		return "D3D11_MESSAGE_ID_DESTROY_RASTERIZERSTATE"
+	case D3D11_MESSAGE_ID_CREATE_QUERY:
+		return "D3D11_MESSAGE_ID_CREATE_QUERY"
+	case D3D11_MESSAGE_ID_LIVE_QUERY_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_QUERY_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_QUERY:
+		return "D3D11_MESSAGE_ID_DESTROY_QUERY"
+	case D3D11_MESSAGE_ID_CREATE_PREDICATE:
+		return "D3D11_MESSAGE_ID_CREATE_PREDICATE"
+	case D3D11_MESSAGE_ID_LIVE_PREDICATE_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_PREDICATE_WIN7"
+	case D3D11_MESSAGE_ID_DESTROY_PREDICATE:
+		return "D3D11_MESSAGE_ID_DESTROY_PREDICATE"
+	case D3D11_MESSAGE_ID_CREATE_COUNTER:
+		return "D3D11_MESSAGE_ID_CREATE_COUNTER"
+	case D3D11_MESSAGE_ID_DESTROY_COUNTER:
+		return "D3D11_MESSAGE_ID_DESTROY_COUNTER"
+	case D3D11_MESSAGE_ID_CREATE_COMMANDLIST:
+		return "D3D11_MESSAGE_ID_CREATE_COMMANDLIST"
+	case D3D11_MESSAGE_ID_LIVE_COMMANDLIST:
+		return "D3D11_MESSAGE_ID_LIVE_COMMANDLIST"
+	case D3D11_MESSAGE_ID_DESTROY_COMMANDLIST:
+		return "D3D11_MESSAGE_ID_DESTROY_COMMANDLIST"
+	case D3D11_MESSAGE_ID_CREATE_CLASSINSTANCE:
+		return "D3D11_MESSAGE_ID_CREATE_CLASSINSTANCE"
+	case D3D11_MESSAGE_ID_LIVE_CLASSINSTANCE:
+		return "D3D11_MESSAGE_ID_LIVE_CLASSINSTANCE"
+	case D3D11_MESSAGE_ID_DESTROY_CLASSINSTANCE:
+		return "D3D11_MESSAGE_ID_DESTROY_CLASSINSTANCE"
+	case D3D11_MESSAGE_ID_CREATE_CLASSLINKAGE:
+		return "D3D11_MESSAGE_ID_CREATE_CLASSLINKAGE"
+	case D3D11_MESSAGE_ID_LIVE_CLASSLINKAGE:
+		return "D3D11_MESSAGE_ID_LIVE_CLASSLINKAGE"
+	case D3D11_MESSAGE_ID_DESTROY_CLASSLINKAGE:
+		return "D3D11_MESSAGE_ID_DESTROY_CLASSLINKAGE"
+	case D3D11_MESSAGE_ID_LIVE_DEVICE_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_DEVICE_WIN7"
+	case D3D11_MESSAGE_ID_LIVE_OBJECT_SUMMARY_WIN7:
+		return "D3D11_MESSAGE_ID_LIVE_OBJECT_SUMMARY_WIN7"
+	case D3D11_MESSAGE_ID_CREATE_COMPUTESHADER:
+		return "D3D11_MESSAGE_ID_CREATE_COMPUTESHADER"
+	case D3D11_MESSAGE_ID_LIVE_COMPUTESHADER:
+		return "D3D11_MESSAGE_ID_LIVE_COMPUTESHADER"
+	case D3D11_MESSAGE_ID_DESTROY_COMPUTESHADER:
+		return "D3D11_MESSAGE_ID_DESTROY_COMPUTESHADER"
+	case D3D11_MESSAGE_ID_CREATE_UNORDEREDACCESSVIEW:
+		return "D3D11_MESSAGE_ID_CREATE_UNORDEREDACCESSVIEW"
+	case D3D11_MESSAGE_ID_LIVE_UNORDEREDACCESSVIEW:
+		return "D3D11_MESSAGE_ID_LIVE_UNORDEREDACCESSVIEW"
+	case D3D11_MESSAGE_ID_DESTROY_UNORDEREDACCESSVIEW:
+		return "D3D11_MESSAGE_ID_DESTROY_UNORDEREDACCESSVIEW"
+	case D3D11_MESSAGE_ID_DEVICE_SETSHADER_INTERFACES_FEATURELEVEL:
+		return "D3D11_MESSAGE_ID_DEVICE_SETSHADER_INTERFACES_FEATURELEVEL"
+	case D3D11_MESSAGE_ID_DEVICE_SETSHADER_INTERFACE_COUNT_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_SETSHADER_INTERFACE_COUNT_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE:
+		return "D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE"
+	case D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE_INDEX:
+		return "D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE_INDEX"
+	case D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE_TYPE:
+		return "D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE_TYPE"
+	case D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE_DATA:
+		return "D3D11_MESSAGE_ID_DEVICE_SETSHADER_INVALID_INSTANCE_DATA"
+	case D3D11_MESSAGE_ID_DEVICE_SETSHADER_UNBOUND_INSTANCE_DATA:
+		return "D3D11_MESSAGE_ID_DEVICE_SETSHADER_UNBOUND_INSTANCE_DATA"
+	case D3D11_MESSAGE_ID_DEVICE_SETSHADER_INSTANCE_DATA_BINDINGS:
+		return "D3D11_MESSAGE_ID_DEVICE_SETSHADER_INSTANCE_DATA_BINDINGS"
+	case D3D11_MESSAGE_ID_DEVICE_CREATESHADER_CLASSLINKAGE_FULL:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATESHADER_CLASSLINKAGE_FULL"
+	case D3D11_MESSAGE_ID_DEVICE_CHECKFEATURESUPPORT_UNRECOGNIZED_FEATURE:
+		return "D3D11_MESSAGE_ID_DEVICE_CHECKFEATURESUPPORT_UNRECOGNIZED_FEATURE"
+	case D3D11_MESSAGE_ID_DEVICE_CHECKFEATURESUPPORT_MISMATCHED_DATA_SIZE:
+		return "D3D11_MESSAGE_ID_DEVICE_CHECKFEATURESUPPORT_MISMATCHED_DATA_SIZE"
+	case D3D11_MESSAGE_ID_DEVICE_CHECKFEATURESUPPORT_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_DEVICE_CHECKFEATURESUPPORT_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_DEVICE_CSSETSHADERRESOURCES_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_CSSETSHADERRESOURCES_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_CSSETCONSTANTBUFFERS_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_CSSETCONSTANTBUFFERS_HAZARD"
+	case D3D11_MESSAGE_ID_CSSETSHADERRESOURCES_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_CSSETSHADERRESOURCES_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_CSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_CSSETCONSTANTBUFFERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDCALL:
+		return "D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDCALL"
+	case D3D11_MESSAGE_ID_CREATECOMPUTESHADER_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_CREATECOMPUTESHADER_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDSHADERBYTECODE:
+		return "D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDSHADERBYTECODE"
+	case D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDSHADERTYPE:
+		return "D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDSHADERTYPE"
+	case D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDCLASSLINKAGE:
+		return "D3D11_MESSAGE_ID_CREATECOMPUTESHADER_INVALIDCLASSLINKAGE"
+	case D3D11_MESSAGE_ID_DEVICE_CSSETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_CSSETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_CSSETCONSTANTBUFFERS_INVALIDBUFFER:
+		return "D3D11_MESSAGE_ID_CSSETCONSTANTBUFFERS_INVALIDBUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_CSSETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_CSSETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_CSSETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_CSSETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_CSGETSHADERRESOURCES_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_CSGETSHADERRESOURCES_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_CSGETCONSTANTBUFFERS_BUFFERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_CSGETCONSTANTBUFFERS_BUFFERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_CSGETSAMPLERS_SAMPLERS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_CSGETSAMPLERS_SAMPLERS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_DOUBLEFLOATOPSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_DOUBLEFLOATOPSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_DOUBLEFLOATOPSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_DOUBLEFLOATOPSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_DOUBLEFLOATOPSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_DOUBLEFLOATOPSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_DOUBLEFLOATOPSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_DOUBLEFLOATOPSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_DOUBLEFLOATOPSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_DOUBLEFLOATOPSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_DOUBLEFLOATOPSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_DOUBLEFLOATOPSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_DOUBLEFLOATOPSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_DOUBLEFLOATOPSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDSTRUCTURESTRIDE:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDSTRUCTURESTRIDE"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDRESOURCE:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDRESOURCE"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDDESC:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDDESC"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDFORMAT"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDDIMENSIONS:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDDIMENSIONS"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_UNRECOGNIZEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_UNRECOGNIZEDFORMAT"
+	case D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_HAZARD"
+	case D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_OVERLAPPING_OLD_SLOTS:
+		return "D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_OVERLAPPING_OLD_SLOTS"
+	case D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_NO_OP:
+		return "D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_NO_OP"
+	case D3D11_MESSAGE_ID_CSSETUNORDEREDACCESSVIEWS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_CSSETUNORDEREDACCESSVIEWS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_PSSETUNORDEREDACCESSVIEWS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_PSSETUNORDEREDACCESSVIEWS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_TOOMANYOBJECTS:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_TOOMANYOBJECTS"
+	case D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_HAZARD:
+		return "D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_HAZARD"
+	case D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEW_DENORMFLUSH:
+		return "D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEW_DENORMFLUSH"
+	case D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSS_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSS_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_DEVICE_CSGETUNORDEREDACCESSS_VIEWS_EMPTY:
+		return "D3D11_MESSAGE_ID_DEVICE_CSGETUNORDEREDACCESSS_VIEWS_EMPTY"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_CREATESHADERRESESOURCEVIEW_TOOMANYOBJECTS:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESESOURCEVIEW_TOOMANYOBJECTS"
+	case D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_INVALID_ARG_BUFFER:
+		return "D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_INVALID_ARG_BUFFER"
+	case D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_OFFSET_UNALIGNED:
+		return "D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_OFFSET_UNALIGNED"
+	case D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_OFFSET_OVERFLOW:
+		return "D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_OFFSET_OVERFLOW"
+	case D3D11_MESSAGE_ID_DEVICE_SETRESOURCEMINLOD_INVALIDCONTEXT:
+		return "D3D11_MESSAGE_ID_DEVICE_SETRESOURCEMINLOD_INVALIDCONTEXT"
+	case D3D11_MESSAGE_ID_DEVICE_SETRESOURCEMINLOD_INVALIDRESOURCE:
+		return "D3D11_MESSAGE_ID_DEVICE_SETRESOURCEMINLOD_INVALIDRESOURCE"
+	case D3D11_MESSAGE_ID_DEVICE_SETRESOURCEMINLOD_INVALIDMINLOD:
+		return "D3D11_MESSAGE_ID_DEVICE_SETRESOURCEMINLOD_INVALIDMINLOD"
+	case D3D11_MESSAGE_ID_DEVICE_GETRESOURCEMINLOD_INVALIDCONTEXT:
+		return "D3D11_MESSAGE_ID_DEVICE_GETRESOURCEMINLOD_INVALIDCONTEXT"
+	case D3D11_MESSAGE_ID_DEVICE_GETRESOURCEMINLOD_INVALIDRESOURCE:
+		return "D3D11_MESSAGE_ID_DEVICE_GETRESOURCEMINLOD_INVALIDRESOURCE"
+	case D3D11_MESSAGE_ID_OMSETDEPTHSTENCIL_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_OMSETDEPTHSTENCIL_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_DEPTH_READONLY:
+		return "D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_DEPTH_READONLY"
+	case D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_STENCIL_READONLY:
+		return "D3D11_MESSAGE_ID_CLEARDEPTHSTENCILVIEW_STENCIL_READONLY"
+	case D3D11_MESSAGE_ID_CHECKFEATURESUPPORT_FORMAT_DEPRECATED:
+		return "D3D11_MESSAGE_ID_CHECKFEATURESUPPORT_FORMAT_DEPRECATED"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_RETURN_TYPE_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_RETURN_TYPE_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_NOT_SET"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_UNORDEREDACCESSVIEW_RENDERTARGETVIEW_OVERLAP:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_UNORDEREDACCESSVIEW_RENDERTARGETVIEW_OVERLAP"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_DIMENSION_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_DIMENSION_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_APPEND_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_APPEND_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMICS_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMICS_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_STRUCTURE_STRIDE_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_STRUCTURE_STRIDE_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_BUFFER_TYPE_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_BUFFER_TYPE_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_RAW_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_RAW_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_FORMAT_LD_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_FORMAT_LD_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_FORMAT_STORE_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_FORMAT_STORE_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_ADD_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_ADD_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_BITWISE_OPS_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_BITWISE_OPS_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_CMPSTORE_CMPEXCHANGE_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_CMPSTORE_CMPEXCHANGE_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_EXCHANGE_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_EXCHANGE_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_SIGNED_MINMAX_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_SIGNED_MINMAX_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_UNSIGNED_MINMAX_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_ATOMIC_UNSIGNED_MINMAX_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_DISPATCH_BOUND_RESOURCE_MAPPED:
+		return "D3D11_MESSAGE_ID_DEVICE_DISPATCH_BOUND_RESOURCE_MAPPED"
+	case D3D11_MESSAGE_ID_DEVICE_DISPATCH_THREADGROUPCOUNT_OVERFLOW:
+		return "D3D11_MESSAGE_ID_DEVICE_DISPATCH_THREADGROUPCOUNT_OVERFLOW"
+	case D3D11_MESSAGE_ID_DEVICE_DISPATCH_THREADGROUPCOUNT_ZERO:
+		return "D3D11_MESSAGE_ID_DEVICE_DISPATCH_THREADGROUPCOUNT_ZERO"
+	case D3D11_MESSAGE_ID_DEVICE_SHADERRESOURCEVIEW_STRUCTURE_STRIDE_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_SHADERRESOURCEVIEW_STRUCTURE_STRIDE_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_SHADERRESOURCEVIEW_BUFFER_TYPE_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_SHADERRESOURCEVIEW_BUFFER_TYPE_MISMATCH"
+	case D3D11_MESSAGE_ID_DEVICE_SHADERRESOURCEVIEW_RAW_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_SHADERRESOURCEVIEW_RAW_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_DISPATCH_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_DISPATCH_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_DISPATCHINDIRECT_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_INVALIDOFFSET:
+		return "D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_INVALIDOFFSET"
+	case D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_LARGEOFFSET:
+		return "D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_LARGEOFFSET"
+	case D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_INVALIDDESTINATIONSTATE:
+		return "D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_INVALIDDESTINATIONSTATE"
+	case D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_INVALIDSOURCESTATE:
+		return "D3D11_MESSAGE_ID_COPYSTRUCTURECOUNT_INVALIDSOURCESTATE"
+	case D3D11_MESSAGE_ID_CHECKFORMATSUPPORT_FORMAT_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_CHECKFORMATSUPPORT_FORMAT_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_INVALIDVIEW:
+		return "D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_INVALIDVIEW"
+	case D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_INVALIDOFFSET:
+		return "D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_INVALIDOFFSET"
+	case D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_TOOMANYVIEWS:
+		return "D3D11_MESSAGE_ID_DEVICE_CSSETUNORDEREDACCESSVIEWS_TOOMANYVIEWS"
+	case D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEWFLOAT_INVALIDFORMAT:
+		return "D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEWFLOAT_INVALIDFORMAT"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_COUNTER_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_COUNTER_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_REF_WARNING:
+		return "D3D11_MESSAGE_ID_REF_WARNING"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_PIXEL_SHADER_WITHOUT_RTV_OR_DSV:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_PIXEL_SHADER_WITHOUT_RTV_OR_DSV"
+	case D3D11_MESSAGE_ID_SHADER_ABORT:
+		return "D3D11_MESSAGE_ID_SHADER_ABORT"
+	case D3D11_MESSAGE_ID_SHADER_MESSAGE:
+		return "D3D11_MESSAGE_ID_SHADER_MESSAGE"
+	case D3D11_MESSAGE_ID_SHADER_ERROR:
+		return "D3D11_MESSAGE_ID_SHADER_ERROR"
+	case D3D11_MESSAGE_ID_OFFERRESOURCES_INVALIDRESOURCE:
+		return "D3D11_MESSAGE_ID_OFFERRESOURCES_INVALIDRESOURCE"
+	case D3D11_MESSAGE_ID_HSSETSAMPLERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_HSSETSAMPLERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_DSSETSAMPLERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_DSSETSAMPLERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_CSSETSAMPLERS_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_CSSETSAMPLERS_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_HSSETSHADER_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_HSSETSHADER_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_DSSETSHADER_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_DSSETSHADER_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_CSSETSHADER_UNBINDDELETINGOBJECT:
+		return "D3D11_MESSAGE_ID_CSSETSHADER_UNBINDDELETINGOBJECT"
+	case D3D11_MESSAGE_ID_ENQUEUESETEVENT_INVALIDARG_RETURN:
+		return "D3D11_MESSAGE_ID_ENQUEUESETEVENT_INVALIDARG_RETURN"
+	case D3D11_MESSAGE_ID_ENQUEUESETEVENT_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_ENQUEUESETEVENT_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_ENQUEUESETEVENT_ACCESSDENIED_RETURN:
+		return "D3D11_MESSAGE_ID_ENQUEUESETEVENT_ACCESSDENIED_RETURN"
+	case D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_NUMUAVS_INVALIDRANGE:
+		return "D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_NUMUAVS_INVALIDRANGE"
+	case D3D11_MESSAGE_ID_USE_OF_ZERO_REFCOUNT_OBJECT:
+		return "D3D11_MESSAGE_ID_USE_OF_ZERO_REFCOUNT_OBJECT"
+	case D3D11_MESSAGE_ID_D3D11_MESSAGES_END:
+		return "D3D11_MESSAGE_ID_D3D11_MESSAGES_END"
+	case D3D11_MESSAGE_ID_D3D11_1_MESSAGES_START:
+		return "D3D11_MESSAGE_ID_D3D11_1_MESSAGES_START"
+	case D3D11_MESSAGE_ID_CREATE_VIDEODECODER:
+		return "D3D11_MESSAGE_ID_CREATE_VIDEODECODER"
+	case D3D11_MESSAGE_ID_CREATE_VIDEOPROCESSORENUM:
+		return "D3D11_MESSAGE_ID_CREATE_VIDEOPROCESSORENUM"
+	case D3D11_MESSAGE_ID_CREATE_VIDEOPROCESSOR:
+		return "D3D11_MESSAGE_ID_CREATE_VIDEOPROCESSOR"
+	case D3D11_MESSAGE_ID_CREATE_DECODEROUTPUTVIEW:
+		return "D3D11_MESSAGE_ID_CREATE_DECODEROUTPUTVIEW"
+	case D3D11_MESSAGE_ID_CREATE_PROCESSORINPUTVIEW:
+		return "D3D11_MESSAGE_ID_CREATE_PROCESSORINPUTVIEW"
+	case D3D11_MESSAGE_ID_CREATE_PROCESSOROUTPUTVIEW:
+		return "D3D11_MESSAGE_ID_CREATE_PROCESSOROUTPUTVIEW"
+	case D3D11_MESSAGE_ID_CREATE_DEVICECONTEXTSTATE:
+		return "D3D11_MESSAGE_ID_CREATE_DEVICECONTEXTSTATE"
+	case D3D11_MESSAGE_ID_LIVE_VIDEODECODER:
+		return "D3D11_MESSAGE_ID_LIVE_VIDEODECODER"
+	case D3D11_MESSAGE_ID_LIVE_VIDEOPROCESSORENUM:
+		return "D3D11_MESSAGE_ID_LIVE_VIDEOPROCESSORENUM"
+	case D3D11_MESSAGE_ID_LIVE_VIDEOPROCESSOR:
+		return "D3D11_MESSAGE_ID_LIVE_VIDEOPROCESSOR"
+	case D3D11_MESSAGE_ID_LIVE_DECODEROUTPUTVIEW:
+		return "D3D11_MESSAGE_ID_LIVE_DECODEROUTPUTVIEW"
+	case D3D11_MESSAGE_ID_LIVE_PROCESSORINPUTVIEW:
+		return "D3D11_MESSAGE_ID_LIVE_PROCESSORINPUTVIEW"
+	case D3D11_MESSAGE_ID_LIVE_PROCESSOROUTPUTVIEW:
+		return "D3D11_MESSAGE_ID_LIVE_PROCESSOROUTPUTVIEW"
+	case D3D11_MESSAGE_ID_LIVE_DEVICECONTEXTSTATE:
+		return "D3D11_MESSAGE_ID_LIVE_DEVICECONTEXTSTATE"
+	case D3D11_MESSAGE_ID_DESTROY_VIDEODECODER:
+		return "D3D11_MESSAGE_ID_DESTROY_VIDEODECODER"
+	case D3D11_MESSAGE_ID_DESTROY_VIDEOPROCESSORENUM:
+		return "D3D11_MESSAGE_ID_DESTROY_VIDEOPROCESSORENUM"
+	case D3D11_MESSAGE_ID_DESTROY_VIDEOPROCESSOR:
+		return "D3D11_MESSAGE_ID_DESTROY_VIDEOPROCESSOR"
+	case D3D11_MESSAGE_ID_DESTROY_DECODEROUTPUTVIEW:
+		return "D3D11_MESSAGE_ID_DESTROY_DECODEROUTPUTVIEW"
+	case D3D11_MESSAGE_ID_DESTROY_PROCESSORINPUTVIEW:
+		return "D3D11_MESSAGE_ID_DESTROY_PROCESSORINPUTVIEW"
+	case D3D11_MESSAGE_ID_DESTROY_PROCESSOROUTPUTVIEW:
+		return "D3D11_MESSAGE_ID_DESTROY_PROCESSOROUTPUTVIEW"
+	case D3D11_MESSAGE_ID_DESTROY_DEVICECONTEXTSTATE:
+		return "D3D11_MESSAGE_ID_DESTROY_DEVICECONTEXTSTATE"
+	case D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_INVALIDFEATURELEVEL:
+		return "D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_INVALIDFEATURELEVEL"
+	case D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_FEATURELEVELS_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_FEATURELEVELS_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_INVALIDREFIID:
+		return "D3D11_MESSAGE_ID_CREATEDEVICECONTEXTSTATE_INVALIDREFIID"
+	case D3D11_MESSAGE_ID_DEVICE_DISCARDVIEW_INVALIDVIEW:
+		return "D3D11_MESSAGE_ID_DEVICE_DISCARDVIEW_INVALIDVIEW"
+	case D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION1_INVALIDCOPYFLAGS:
+		return "D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION1_INVALIDCOPYFLAGS"
+	case D3D11_MESSAGE_ID_UPDATESUBRESOURCE1_INVALIDCOPYFLAGS:
+		return "D3D11_MESSAGE_ID_UPDATESUBRESOURCE1_INVALIDCOPYFLAGS"
+	case D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDFORCEDSAMPLECOUNT:
+		return "D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALIDFORCEDSAMPLECOUNT"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODER_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODER_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODER_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODER_NULLPARAM"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODER_INVALIDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODER_INVALIDFORMAT"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODER_ZEROWIDTHHEIGHT:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODER_ZEROWIDTHHEIGHT"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODER_DRIVER_INVALIDBUFFERSIZE:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODER_DRIVER_INVALIDBUFFERSIZE"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODER_DRIVER_INVALIDBUFFERUSAGE:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODER_DRIVER_INVALIDBUFFERUSAGE"
+	case D3D11_MESSAGE_ID_GETVIDEODECODERPROFILECOUNT_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_GETVIDEODECODERPROFILECOUNT_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_GETVIDEODECODERPROFILE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETVIDEODECODERPROFILE_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETVIDEODECODERPROFILE_INVALIDINDEX:
+		return "D3D11_MESSAGE_ID_GETVIDEODECODERPROFILE_INVALIDINDEX"
+	case D3D11_MESSAGE_ID_GETVIDEODECODERPROFILE_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_GETVIDEODECODERPROFILE_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CHECKVIDEODECODERFORMAT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CHECKVIDEODECODERFORMAT_NULLPARAM"
+	case D3D11_MESSAGE_ID_CHECKVIDEODECODERFORMAT_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CHECKVIDEODECODERFORMAT_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_GETVIDEODECODERCONFIGCOUNT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETVIDEODECODERCONFIGCOUNT_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETVIDEODECODERCONFIGCOUNT_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_GETVIDEODECODERCONFIGCOUNT_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_GETVIDEODECODERCONFIG_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETVIDEODECODERCONFIG_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETVIDEODECODERCONFIG_INVALIDINDEX:
+		return "D3D11_MESSAGE_ID_GETVIDEODECODERCONFIG_INVALIDINDEX"
+	case D3D11_MESSAGE_ID_GETVIDEODECODERCONFIG_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_GETVIDEODECODERCONFIG_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_GETDECODERCREATIONPARAMS_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETDECODERCREATIONPARAMS_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETDECODERDRIVERHANDLE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETDECODERDRIVERHANDLE_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETDECODERBUFFER_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETDECODERBUFFER_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETDECODERBUFFER_INVALIDBUFFER:
+		return "D3D11_MESSAGE_ID_GETDECODERBUFFER_INVALIDBUFFER"
+	case D3D11_MESSAGE_ID_GETDECODERBUFFER_INVALIDTYPE:
+		return "D3D11_MESSAGE_ID_GETDECODERBUFFER_INVALIDTYPE"
+	case D3D11_MESSAGE_ID_GETDECODERBUFFER_LOCKED:
+		return "D3D11_MESSAGE_ID_GETDECODERBUFFER_LOCKED"
+	case D3D11_MESSAGE_ID_RELEASEDECODERBUFFER_NULLPARAM:
+		return "D3D11_MESSAGE_ID_RELEASEDECODERBUFFER_NULLPARAM"
+	case D3D11_MESSAGE_ID_RELEASEDECODERBUFFER_INVALIDTYPE:
+		return "D3D11_MESSAGE_ID_RELEASEDECODERBUFFER_INVALIDTYPE"
+	case D3D11_MESSAGE_ID_RELEASEDECODERBUFFER_NOTLOCKED:
+		return "D3D11_MESSAGE_ID_RELEASEDECODERBUFFER_NOTLOCKED"
+	case D3D11_MESSAGE_ID_DECODERBEGINFRAME_NULLPARAM:
+		return "D3D11_MESSAGE_ID_DECODERBEGINFRAME_NULLPARAM"
+	case D3D11_MESSAGE_ID_DECODERBEGINFRAME_HAZARD:
+		return "D3D11_MESSAGE_ID_DECODERBEGINFRAME_HAZARD"
+	case D3D11_MESSAGE_ID_DECODERENDFRAME_NULLPARAM:
+		return "D3D11_MESSAGE_ID_DECODERENDFRAME_NULLPARAM"
+	case D3D11_MESSAGE_ID_SUBMITDECODERBUFFERS_NULLPARAM:
+		return "D3D11_MESSAGE_ID_SUBMITDECODERBUFFERS_NULLPARAM"
+	case D3D11_MESSAGE_ID_SUBMITDECODERBUFFERS_INVALIDTYPE:
+		return "D3D11_MESSAGE_ID_SUBMITDECODERBUFFERS_INVALIDTYPE"
+	case D3D11_MESSAGE_ID_DECODEREXTENSION_NULLPARAM:
+		return "D3D11_MESSAGE_ID_DECODEREXTENSION_NULLPARAM"
+	case D3D11_MESSAGE_ID_DECODEREXTENSION_INVALIDRESOURCE:
+		return "D3D11_MESSAGE_ID_DECODEREXTENSION_INVALIDRESOURCE"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_NULLPARAM"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDFRAMEFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDFRAMEFORMAT"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDUSAGE:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDUSAGE"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDINPUTFRAMERATE:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDINPUTFRAMERATE"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDOUTPUTFRAMERATE:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDOUTPUTFRAMERATE"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDWIDTHHEIGHT:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORENUMERATOR_INVALIDWIDTHHEIGHT"
+	case D3D11_MESSAGE_ID_GETVIDEOPROCESSORCONTENTDESC_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETVIDEOPROCESSORCONTENTDESC_NULLPARAM"
+	case D3D11_MESSAGE_ID_CHECKVIDEOPROCESSORFORMAT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CHECKVIDEOPROCESSORFORMAT_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETVIDEOPROCESSORCAPS_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETVIDEOPROCESSORCAPS_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETVIDEOPROCESSORRATECONVERSIONCAPS_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETVIDEOPROCESSORRATECONVERSIONCAPS_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETVIDEOPROCESSORRATECONVERSIONCAPS_INVALIDINDEX:
+		return "D3D11_MESSAGE_ID_GETVIDEOPROCESSORRATECONVERSIONCAPS_INVALIDINDEX"
+	case D3D11_MESSAGE_ID_GETVIDEOPROCESSORCUSTOMRATE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETVIDEOPROCESSORCUSTOMRATE_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETVIDEOPROCESSORCUSTOMRATE_INVALIDINDEX:
+		return "D3D11_MESSAGE_ID_GETVIDEOPROCESSORCUSTOMRATE_INVALIDINDEX"
+	case D3D11_MESSAGE_ID_GETVIDEOPROCESSORFILTERRANGE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETVIDEOPROCESSORFILTERRANGE_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETVIDEOPROCESSORFILTERRANGE_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_GETVIDEOPROCESSORFILTERRANGE_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOR_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOR_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOR_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOR_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTTARGETRECT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTTARGETRECT_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTBACKGROUNDCOLOR_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTBACKGROUNDCOLOR_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTBACKGROUNDCOLOR_INVALIDALPHA:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTBACKGROUNDCOLOR_INVALIDALPHA"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCOLORSPACE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCOLORSPACE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_INVALIDFILLMODE:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTALPHAFILLMODE_INVALIDFILLMODE"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCONSTRICTION_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCONSTRICTION_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTSTEREOMODE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTSTEREOMODE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTSTEREOMODE_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTSTEREOMODE_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTEXTENSION_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTEXTENSION_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTTARGETRECT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTTARGETRECT_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTBACKGROUNDCOLOR_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTBACKGROUNDCOLOR_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTCOLORSPACE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTCOLORSPACE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTALPHAFILLMODE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTALPHAFILLMODE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTCONSTRICTION_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTCONSTRICTION_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCONSTRICTION_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCONSTRICTION_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCONSTRICTION_INVALIDSIZE:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCONSTRICTION_INVALIDSIZE"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTSTEREOMODE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTSTEREOMODE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTEXTENSION_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTEXTENSION_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFRAMEFORMAT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFRAMEFORMAT_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFRAMEFORMAT_INVALIDFORMAT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFRAMEFORMAT_INVALIDFORMAT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFRAMEFORMAT_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFRAMEFORMAT_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_INVALIDRATE:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_INVALIDRATE"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_INVALIDFLAG:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_INVALIDFLAG"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMOUTPUTRATE_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSOURCERECT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSOURCERECT_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSOURCERECT_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSOURCERECT_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSOURCERECT_INVALIDRECT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSOURCERECT_INVALIDRECT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMDESTRECT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMDESTRECT_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMDESTRECT_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMDESTRECT_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMDESTRECT_INVALIDRECT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMDESTRECT_INVALIDRECT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_INVALIDALPHA:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_INVALIDALPHA"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_INVALIDCOUNT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_INVALIDCOUNT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_INVALIDALPHA:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPALETTE_INVALIDALPHA"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_INVALIDRATIO:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_INVALIDRATIO"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_INVALIDRANGE:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_INVALIDRANGE"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMLUMAKEY_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_FLIPUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_FLIPUNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_MONOOFFSETUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_MONOOFFSETUNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_FORMATUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_FORMATUNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_INVALIDFORMAT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMSTEREOFORMAT_INVALIDFORMAT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMAUTOPROCESSINGMODE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMAUTOPROCESSINGMODE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMAUTOPROCESSINGMODE_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMAUTOPROCESSINGMODE_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_INVALIDFILTER:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_INVALIDFILTER"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_INVALIDLEVEL:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMFILTER_INVALIDLEVEL"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMEXTENSION_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMEXTENSION_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMEXTENSION_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMEXTENSION_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFRAMEFORMAT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFRAMEFORMAT_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMOUTPUTRATE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMOUTPUTRATE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSOURCERECT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSOURCERECT_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMDESTRECT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMDESTRECT_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMALPHA_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMALPHA_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPALETTE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPALETTE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPIXELASPECTRATIO_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPIXELASPECTRATIO_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMLUMAKEY_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMLUMAKEY_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSTEREOFORMAT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSTEREOFORMAT_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMAUTOPROCESSINGMODE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMAUTOPROCESSINGMODE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFILTER_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFILTER_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMEXTENSION_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMEXTENSION_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMEXTENSION_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMEXTENSION_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDSTREAMCOUNT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDSTREAMCOUNT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_TARGETRECT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_TARGETRECT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDOUTPUT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDOUTPUT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDPASTFRAMES:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDPASTFRAMES"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDFUTUREFRAMES:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDFUTUREFRAMES"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDSOURCERECT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDSOURCERECT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDDESTRECT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDDESTRECT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDINPUTRESOURCE:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDINPUTRESOURCE"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDARRAYSIZE:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDARRAYSIZE"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDARRAY:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDARRAY"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_RIGHTEXPECTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_RIGHTEXPECTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_RIGHTNOTEXPECTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_RIGHTNOTEXPECTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_STEREONOTENABLED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_STEREONOTENABLED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDRIGHTRESOURCE:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INVALIDRIGHTRESOURCE"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_NOSTEREOSTREAMS:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_NOSTEREOSTREAMS"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INPUTHAZARD:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_INPUTHAZARD"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_OUTPUTHAZARD:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORBLT_OUTPUTHAZARD"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_NULLPARAM"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDTYPE:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDTYPE"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDBIND:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDBIND"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_UNSUPPORTEDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_UNSUPPORTEDFORMAT"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDMIP:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDMIP"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_UNSUPPORTEMIP:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_UNSUPPORTEMIP"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDARRAYSIZE:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDARRAYSIZE"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDARRAY:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDARRAY"
+	case D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDDIMENSION:
+		return "D3D11_MESSAGE_ID_CREATEVIDEODECODEROUTPUTVIEW_INVALIDDIMENSION"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_NULLPARAM"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDTYPE:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDTYPE"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDBIND:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDBIND"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDMISC:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDMISC"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDUSAGE:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDUSAGE"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDFORMAT"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDFOURCC:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDFOURCC"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDMIP:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDMIP"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_UNSUPPORTEDMIP:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_UNSUPPORTEDMIP"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDARRAYSIZE:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDARRAYSIZE"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDARRAY:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDARRAY"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDDIMENSION:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDDIMENSION"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_NULLPARAM"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDTYPE:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDTYPE"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDBIND:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDBIND"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDFORMAT:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDFORMAT"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDMIP:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDMIP"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_UNSUPPORTEDMIP:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_UNSUPPORTEDMIP"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_UNSUPPORTEDARRAY:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_UNSUPPORTEDARRAY"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDARRAY:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDARRAY"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDDIMENSION:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDDIMENSION"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_USE_OF_FORCED_SAMPLE_COUNT:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_USE_OF_FORCED_SAMPLE_COUNT"
+	case D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDLOGICOPS:
+		return "D3D11_MESSAGE_ID_CREATEBLENDSTATE_INVALIDLOGICOPS"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDDARRAYWITHDECODER:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDDARRAYWITHDECODER"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDDARRAYWITHDECODER:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDDARRAYWITHDECODER"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDDARRAYWITHDECODER:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDDARRAYWITHDECODER"
+	case D3D11_MESSAGE_ID_DEVICE_LOCKEDOUT_INTERFACE:
+		return "D3D11_MESSAGE_ID_DEVICE_LOCKEDOUT_INTERFACE"
+	case D3D11_MESSAGE_ID_REF_WARNING_ATOMIC_INCONSISTENT:
+		return "D3D11_MESSAGE_ID_REF_WARNING_ATOMIC_INCONSISTENT"
+	case D3D11_MESSAGE_ID_REF_WARNING_READING_UNINITIALIZED_RESOURCE:
+		return "D3D11_MESSAGE_ID_REF_WARNING_READING_UNINITIALIZED_RESOURCE"
+	case D3D11_MESSAGE_ID_REF_WARNING_RAW_HAZARD:
+		return "D3D11_MESSAGE_ID_REF_WARNING_RAW_HAZARD"
+	case D3D11_MESSAGE_ID_REF_WARNING_WAR_HAZARD:
+		return "D3D11_MESSAGE_ID_REF_WARNING_WAR_HAZARD"
+	case D3D11_MESSAGE_ID_REF_WARNING_WAW_HAZARD:
+		return "D3D11_MESSAGE_ID_REF_WARNING_WAW_HAZARD"
+	case D3D11_MESSAGE_ID_CREATECRYPTOSESSION_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CREATECRYPTOSESSION_NULLPARAM"
+	case D3D11_MESSAGE_ID_CREATECRYPTOSESSION_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATECRYPTOSESSION_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_GETCRYPTOTYPE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETCRYPTOTYPE_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETDECODERPROFILE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETDECODERPROFILE_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETCRYPTOSESSIONCERTIFICATESIZE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETCRYPTOSESSIONCERTIFICATESIZE_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETCRYPTOSESSIONCERTIFICATE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETCRYPTOSESSIONCERTIFICATE_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETCRYPTOSESSIONCERTIFICATE_WRONGSIZE:
+		return "D3D11_MESSAGE_ID_GETCRYPTOSESSIONCERTIFICATE_WRONGSIZE"
+	case D3D11_MESSAGE_ID_GETCRYPTOSESSIONHANDLE_WRONGSIZE:
+		return "D3D11_MESSAGE_ID_GETCRYPTOSESSIONHANDLE_WRONGSIZE"
+	case D3D11_MESSAGE_ID_NEGOTIATECRPYTOSESSIONKEYEXCHANGE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_NEGOTIATECRPYTOSESSIONKEYEXCHANGE_NULLPARAM"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_NULLPARAM"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_WRONGDEVICE:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_WRONGDEVICE"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_WRONGDEVICE:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_WRONGDEVICE"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_FORMAT_MISMATCH:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_FORMAT_MISMATCH"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_SIZE_MISMATCH:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_SIZE_MISMATCH"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_MULTISAMPLED:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_MULTISAMPLED"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_NOT_STAGING:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_NOT_STAGING"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_MAPPED:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_MAPPED"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_MAPPED:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_MAPPED"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_OFFERED:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_OFFERED"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_OFFERED:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_DST_OFFERED"
+	case D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_CONTENT_UNDEFINED:
+		return "D3D11_MESSAGE_ID_ENCRYPTIONBLT_SRC_CONTENT_UNDEFINED"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_NULLPARAM:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_NULLPARAM"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_WRONGDEVICE:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_WRONGDEVICE"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_WRONGDEVICE:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_WRONGDEVICE"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_FORMAT_MISMATCH:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_FORMAT_MISMATCH"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_SIZE_MISMATCH:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_SIZE_MISMATCH"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_MULTISAMPLED:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_MULTISAMPLED"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_NOT_STAGING:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_NOT_STAGING"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_NOT_RENDER_TARGET:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_NOT_RENDER_TARGET"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_MAPPED:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_MAPPED"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_MAPPED:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_MAPPED"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_OFFERED:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_OFFERED"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_OFFERED:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_DST_OFFERED"
+	case D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_CONTENT_UNDEFINED:
+		return "D3D11_MESSAGE_ID_DECRYPTIONBLT_SRC_CONTENT_UNDEFINED"
+	case D3D11_MESSAGE_ID_STARTSESSIONKEYREFRESH_NULLPARAM:
+		return "D3D11_MESSAGE_ID_STARTSESSIONKEYREFRESH_NULLPARAM"
+	case D3D11_MESSAGE_ID_STARTSESSIONKEYREFRESH_INVALIDSIZE:
+		return "D3D11_MESSAGE_ID_STARTSESSIONKEYREFRESH_INVALIDSIZE"
+	case D3D11_MESSAGE_ID_FINISHSESSIONKEYREFRESH_NULLPARAM:
+		return "D3D11_MESSAGE_ID_FINISHSESSIONKEYREFRESH_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETENCRYPTIONBLTKEY_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETENCRYPTIONBLTKEY_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETENCRYPTIONBLTKEY_INVALIDSIZE:
+		return "D3D11_MESSAGE_ID_GETENCRYPTIONBLTKEY_INVALIDSIZE"
+	case D3D11_MESSAGE_ID_GETCONTENTPROTECTIONCAPS_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETCONTENTPROTECTIONCAPS_NULLPARAM"
+	case D3D11_MESSAGE_ID_CHECKCRYPTOKEYEXCHANGE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CHECKCRYPTOKEYEXCHANGE_NULLPARAM"
+	case D3D11_MESSAGE_ID_CHECKCRYPTOKEYEXCHANGE_INVALIDINDEX:
+		return "D3D11_MESSAGE_ID_CHECKCRYPTOKEYEXCHANGE_INVALIDINDEX"
+	case D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_NULLPARAM"
+	case D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_INVALIDTYPE:
+		return "D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_INVALIDTYPE"
+	case D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_OUTOFMEMORY_RETURN:
+		return "D3D11_MESSAGE_ID_CREATEAUTHENTICATEDCHANNEL_OUTOFMEMORY_RETURN"
+	case D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATESIZE_INVALIDCHANNEL:
+		return "D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATESIZE_INVALIDCHANNEL"
+	case D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATESIZE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATESIZE_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATE_INVALIDCHANNEL:
+		return "D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATE_INVALIDCHANNEL"
+	case D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATE_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATE_WRONGSIZE:
+		return "D3D11_MESSAGE_ID_GETAUTHENTICATEDCHANNELCERTIFICATE_WRONGSIZE"
+	case D3D11_MESSAGE_ID_NEGOTIATEAUTHENTICATEDCHANNELKEYEXCHANGE_INVALIDCHANNEL:
+		return "D3D11_MESSAGE_ID_NEGOTIATEAUTHENTICATEDCHANNELKEYEXCHANGE_INVALIDCHANNEL"
+	case D3D11_MESSAGE_ID_NEGOTIATEAUTHENTICATEDCHANNELKEYEXCHANGE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_NEGOTIATEAUTHENTICATEDCHANNELKEYEXCHANGE_NULLPARAM"
+	case D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_NULLPARAM:
+		return "D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_NULLPARAM"
+	case D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_WRONGCHANNEL:
+		return "D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_WRONGCHANNEL"
+	case D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_UNSUPPORTEDQUERY:
+		return "D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_UNSUPPORTEDQUERY"
+	case D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_WRONGSIZE:
+		return "D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_WRONGSIZE"
+	case D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_INVALIDPROCESSINDEX:
+		return "D3D11_MESSAGE_ID_QUERYAUTHENTICATEDCHANNEL_INVALIDPROCESSINDEX"
+	case D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_NULLPARAM"
+	case D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_WRONGCHANNEL:
+		return "D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_WRONGCHANNEL"
+	case D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_UNSUPPORTEDCONFIGURE:
+		return "D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_UNSUPPORTEDCONFIGURE"
+	case D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_WRONGSIZE:
+		return "D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_WRONGSIZE"
+	case D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_INVALIDPROCESSIDTYPE:
+		return "D3D11_MESSAGE_ID_CONFIGUREAUTHENTICATEDCHANNEL_INVALIDPROCESSIDTYPE"
+	case D3D11_MESSAGE_ID_VSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT:
+		return "D3D11_MESSAGE_ID_VSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT"
+	case D3D11_MESSAGE_ID_DSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT:
+		return "D3D11_MESSAGE_ID_DSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT"
+	case D3D11_MESSAGE_ID_HSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT:
+		return "D3D11_MESSAGE_ID_HSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT"
+	case D3D11_MESSAGE_ID_GSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT:
+		return "D3D11_MESSAGE_ID_GSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT"
+	case D3D11_MESSAGE_ID_PSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT:
+		return "D3D11_MESSAGE_ID_PSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT"
+	case D3D11_MESSAGE_ID_CSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT:
+		return "D3D11_MESSAGE_ID_CSSETCONSTANTBUFFERS_INVALIDBUFFEROFFSETORCOUNT"
+	case D3D11_MESSAGE_ID_NEGOTIATECRPYTOSESSIONKEYEXCHANGE_INVALIDSIZE:
+		return "D3D11_MESSAGE_ID_NEGOTIATECRPYTOSESSIONKEYEXCHANGE_INVALIDSIZE"
+	case D3D11_MESSAGE_ID_NEGOTIATEAUTHENTICATEDCHANNELKEYEXCHANGE_INVALIDSIZE:
+		return "D3D11_MESSAGE_ID_NEGOTIATEAUTHENTICATEDCHANNELKEYEXCHANGE_INVALIDSIZE"
+	case D3D11_MESSAGE_ID_OFFERRESOURCES_INVALIDPRIORITY:
+		return "D3D11_MESSAGE_ID_OFFERRESOURCES_INVALIDPRIORITY"
+	case D3D11_MESSAGE_ID_GETCRYPTOSESSIONHANDLE_OUTOFMEMORY:
+		return "D3D11_MESSAGE_ID_GETCRYPTOSESSIONHANDLE_OUTOFMEMORY"
+	case D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_NULLPARAM"
+	case D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_INVALIDTYPE:
+		return "D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_INVALIDTYPE"
+	case D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_INVALIDBIND:
+		return "D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_INVALIDBIND"
+	case D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_INVALIDARRAY:
+		return "D3D11_MESSAGE_ID_ACQUIREHANDLEFORCAPTURE_INVALIDARRAY"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_INVALID:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_INVALID"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMROTATION_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMROTATION_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMROTATION_NULLPARAM"
+	case D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_INVALIDVIEW:
+		return "D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_INVALIDVIEW"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_DOUBLEEXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_DOUBLEEXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_SHADEREXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_SHADEREXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_DOUBLEEXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_DOUBLEEXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_SHADEREXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_SHADEREXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_DOUBLEEXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_DOUBLEEXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_SHADEREXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_SHADEREXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_DOUBLEEXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_DOUBLEEXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_SHADEREXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_SHADEREXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_DOUBLEEXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_DOUBLEEXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_SHADEREXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_SHADEREXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_DOUBLEEXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_DOUBLEEXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_SHADEREXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_SHADEREXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_DOUBLEEXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_DOUBLEEXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_SHADEREXTENSIONSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_SHADEREXTENSIONSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_MINPRECISION:
+		return "D3D11_MESSAGE_ID_DEVICE_SHADER_LINKAGE_MINPRECISION"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMALPHA_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMPIXELASPECTRATIO_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_UAVSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEVERTEXSHADER_UAVSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_UAVSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEHULLSHADER_UAVSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_UAVSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEDOMAINSHADER_UAVSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_UAVSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADER_UAVSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UAVSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEGEOMETRYSHADERWITHSTREAMOUTPUT_UAVSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_UAVSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATEPIXELSHADER_UAVSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_UAVSNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CREATECOMPUTESHADER_UAVSNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_INVALIDOFFSET:
+		return "D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_INVALIDOFFSET"
+	case D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_TOOMANYVIEWS:
+		return "D3D11_MESSAGE_ID_DEVICE_OMSETRENDERTARGETSANDUNORDEREDACCESSVIEWS_TOOMANYVIEWS"
+	case D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_NOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_NOTSUPPORTED"
+	case D3D11_MESSAGE_ID_SWAPDEVICECONTEXTSTATE_NOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_SWAPDEVICECONTEXTSTATE_NOTSUPPORTED"
+	case D3D11_MESSAGE_ID_UPDATESUBRESOURCE_PREFERUPDATESUBRESOURCE1:
+		return "D3D11_MESSAGE_ID_UPDATESUBRESOURCE_PREFERUPDATESUBRESOURCE1"
+	case D3D11_MESSAGE_ID_GETDC_INACCESSIBLE:
+		return "D3D11_MESSAGE_ID_GETDC_INACCESSIBLE"
+	case D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_INVALIDRECT:
+		return "D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_INVALIDRECT"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_SAMPLE_MASK_IGNORED_ON_FL9:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_SAMPLE_MASK_IGNORED_ON_FL9"
+	case D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE1_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE1_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_BY_NAME_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE_BY_NAME_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_ENQUEUESETEVENT_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_ENQUEUESETEVENT_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_OFFERRELEASE_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_OFFERRELEASE_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_OFFERRESOURCES_INACCESSIBLE:
+		return "D3D11_MESSAGE_ID_OFFERRESOURCES_INACCESSIBLE"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDMSAA:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSORINPUTVIEW_INVALIDMSAA"
+	case D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDMSAA:
+		return "D3D11_MESSAGE_ID_CREATEVIDEOPROCESSOROUTPUTVIEW_INVALIDMSAA"
+	case D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_INVALIDSOURCERECT:
+		return "D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_INVALIDSOURCERECT"
+	case D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_EMPTYRECT:
+		return "D3D11_MESSAGE_ID_DEVICE_CLEARVIEW_EMPTYRECT"
+	case D3D11_MESSAGE_ID_UPDATESUBRESOURCE_EMPTYDESTBOX:
+		return "D3D11_MESSAGE_ID_UPDATESUBRESOURCE_EMPTYDESTBOX"
+	case D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_EMPTYSOURCEBOX:
+		return "D3D11_MESSAGE_ID_COPYSUBRESOURCEREGION_EMPTYSOURCEBOX"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_OM_RENDER_TARGET_DOES_NOT_SUPPORT_LOGIC_OPS:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_OM_RENDER_TARGET_DOES_NOT_SUPPORT_LOGIC_OPS"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_DEPTHSTENCILVIEW_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_DEPTHSTENCILVIEW_NOT_SET"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_RENDERTARGETVIEW_NOT_SET:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_RENDERTARGETVIEW_NOT_SET"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_RENDERTARGETVIEW_NOT_SET_DUE_TO_FLIP_PRESENT:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_RENDERTARGETVIEW_NOT_SET_DUE_TO_FLIP_PRESENT"
+	case D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_NOT_SET_DUE_TO_FLIP_PRESENT:
+		return "D3D11_MESSAGE_ID_DEVICE_UNORDEREDACCESSVIEW_NOT_SET_DUE_TO_FLIP_PRESENT"
+	case D3D11_MESSAGE_ID_GETDATAFORNEWHARDWAREKEY_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETDATAFORNEWHARDWAREKEY_NULLPARAM"
+	case D3D11_MESSAGE_ID_CHECKCRYPTOSESSIONSTATUS_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CHECKCRYPTOSESSIONSTATUS_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETCRYPTOSESSIONPRIVATEDATASIZE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETCRYPTOSESSIONPRIVATEDATASIZE_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETVIDEODECODERCAPS_NULLPARAM:
+		return "D3D11_MESSAGE_ID_GETVIDEODECODERCAPS_NULLPARAM"
+	case D3D11_MESSAGE_ID_GETVIDEODECODERCAPS_ZEROWIDTHHEIGHT:
+		return "D3D11_MESSAGE_ID_GETVIDEODECODERCAPS_ZEROWIDTHHEIGHT"
+	case D3D11_MESSAGE_ID_CHECKVIDEODECODERDOWNSAMPLING_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CHECKVIDEODECODERDOWNSAMPLING_NULLPARAM"
+	case D3D11_MESSAGE_ID_CHECKVIDEODECODERDOWNSAMPLING_INVALIDCOLORSPACE:
+		return "D3D11_MESSAGE_ID_CHECKVIDEODECODERDOWNSAMPLING_INVALIDCOLORSPACE"
+	case D3D11_MESSAGE_ID_CHECKVIDEODECODERDOWNSAMPLING_ZEROWIDTHHEIGHT:
+		return "D3D11_MESSAGE_ID_CHECKVIDEODECODERDOWNSAMPLING_ZEROWIDTHHEIGHT"
+	case D3D11_MESSAGE_ID_VIDEODECODERENABLEDOWNSAMPLING_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEODECODERENABLEDOWNSAMPLING_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEODECODERENABLEDOWNSAMPLING_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEODECODERENABLEDOWNSAMPLING_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEODECODERUPDATEDOWNSAMPLING_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEODECODERUPDATEDOWNSAMPLING_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEODECODERUPDATEDOWNSAMPLING_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEODECODERUPDATEDOWNSAMPLING_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_CHECKVIDEOPROCESSORFORMATCONVERSION_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CHECKVIDEOPROCESSORFORMATCONVERSION_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCOLORSPACE1_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTCOLORSPACE1_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTCOLORSPACE1_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTCOLORSPACE1_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE1_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE1_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE1_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMCOLORSPACE1_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMMIRROR_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMMIRROR_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMMIRROR_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMMIRROR_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMMIRROR_UNSUPPORTED:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMMIRROR_UNSUPPORTED"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE1_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE1_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMMIRROR_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMMIRROR_NULLPARAM"
+	case D3D11_MESSAGE_ID_RECOMMENDVIDEODECODERDOWNSAMPLING_NULLPARAM:
+		return "D3D11_MESSAGE_ID_RECOMMENDVIDEODECODERDOWNSAMPLING_NULLPARAM"
+	case D3D11_MESSAGE_ID_RECOMMENDVIDEODECODERDOWNSAMPLING_INVALIDCOLORSPACE:
+		return "D3D11_MESSAGE_ID_RECOMMENDVIDEODECODERDOWNSAMPLING_INVALIDCOLORSPACE"
+	case D3D11_MESSAGE_ID_RECOMMENDVIDEODECODERDOWNSAMPLING_ZEROWIDTHHEIGHT:
+		return "D3D11_MESSAGE_ID_RECOMMENDVIDEODECODERDOWNSAMPLING_ZEROWIDTHHEIGHT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTSHADERUSAGE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTSHADERUSAGE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTSHADERUSAGE_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTSHADERUSAGE_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_INVALIDSTREAMCOUNT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_INVALIDSTREAMCOUNT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_TARGETRECT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_TARGETRECT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_INVALIDSOURCERECT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_INVALIDSOURCERECT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_INVALIDDESTRECT:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETBEHAVIORHINTS_INVALIDDESTRECT"
+	case D3D11_MESSAGE_ID_GETCRYPTOSESSIONPRIVATEDATASIZE_INVALID_KEY_EXCHANGE_TYPE:
+		return "D3D11_MESSAGE_ID_GETCRYPTOSESSIONPRIVATEDATASIZE_INVALID_KEY_EXCHANGE_TYPE"
+	case D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE1_ACCESS_DENIED:
+		return "D3D11_MESSAGE_ID_DEVICE_OPEN_SHARED_RESOURCE1_ACCESS_DENIED"
+	case D3D11_MESSAGE_ID_D3D11_1_MESSAGES_END:
+		return "D3D11_MESSAGE_ID_D3D11_1_MESSAGES_END"
+	case D3D11_MESSAGE_ID_D3D11_2_MESSAGES_START:
+		return "D3D11_MESSAGE_ID_D3D11_2_MESSAGES_START"
+	case D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDUSAGE:
+		return "D3D11_MESSAGE_ID_CREATEBUFFER_INVALIDUSAGE"
+	case D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDUSAGE:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE1D_INVALIDUSAGE"
+	case D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDUSAGE:
+		return "D3D11_MESSAGE_ID_CREATETEXTURE2D_INVALIDUSAGE"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_LEVEL9_STEPRATE_NOT_1:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_LEVEL9_STEPRATE_NOT_1"
+	case D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_LEVEL9_INSTANCING_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_CREATEINPUTLAYOUT_LEVEL9_INSTANCING_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_UPDATETILEMAPPINGS_INVALID_PARAMETER:
+		return "D3D11_MESSAGE_ID_UPDATETILEMAPPINGS_INVALID_PARAMETER"
+	case D3D11_MESSAGE_ID_COPYTILEMAPPINGS_INVALID_PARAMETER:
+		return "D3D11_MESSAGE_ID_COPYTILEMAPPINGS_INVALID_PARAMETER"
+	case D3D11_MESSAGE_ID_COPYTILES_INVALID_PARAMETER:
+		return "D3D11_MESSAGE_ID_COPYTILES_INVALID_PARAMETER"
+	case D3D11_MESSAGE_ID_UPDATETILES_INVALID_PARAMETER:
+		return "D3D11_MESSAGE_ID_UPDATETILES_INVALID_PARAMETER"
+	case D3D11_MESSAGE_ID_RESIZETILEPOOL_INVALID_PARAMETER:
+		return "D3D11_MESSAGE_ID_RESIZETILEPOOL_INVALID_PARAMETER"
+	case D3D11_MESSAGE_ID_TILEDRESOURCEBARRIER_INVALID_PARAMETER:
+		return "D3D11_MESSAGE_ID_TILEDRESOURCEBARRIER_INVALID_PARAMETER"
+	case D3D11_MESSAGE_ID_NULL_TILE_MAPPING_ACCESS_WARNING:
+		return "D3D11_MESSAGE_ID_NULL_TILE_MAPPING_ACCESS_WARNING"
+	case D3D11_MESSAGE_ID_NULL_TILE_MAPPING_ACCESS_ERROR:
+		return "D3D11_MESSAGE_ID_NULL_TILE_MAPPING_ACCESS_ERROR"
+	case D3D11_MESSAGE_ID_DIRTY_TILE_MAPPING_ACCESS:
+		return "D3D11_MESSAGE_ID_DIRTY_TILE_MAPPING_ACCESS"
+	case D3D11_MESSAGE_ID_DUPLICATE_TILE_MAPPINGS_IN_COVERED_AREA:
+		return "D3D11_MESSAGE_ID_DUPLICATE_TILE_MAPPINGS_IN_COVERED_AREA"
+	case D3D11_MESSAGE_ID_TILE_MAPPINGS_IN_COVERED_AREA_DUPLICATED_OUTSIDE:
+		return "D3D11_MESSAGE_ID_TILE_MAPPINGS_IN_COVERED_AREA_DUPLICATED_OUTSIDE"
+	case D3D11_MESSAGE_ID_TILE_MAPPINGS_SHARED_BETWEEN_INCOMPATIBLE_RESOURCES:
+		return "D3D11_MESSAGE_ID_TILE_MAPPINGS_SHARED_BETWEEN_INCOMPATIBLE_RESOURCES"
+	case D3D11_MESSAGE_ID_TILE_MAPPINGS_SHARED_BETWEEN_INPUT_AND_OUTPUT:
+		return "D3D11_MESSAGE_ID_TILE_MAPPINGS_SHARED_BETWEEN_INPUT_AND_OUTPUT"
+	case D3D11_MESSAGE_ID_CHECKMULTISAMPLEQUALITYLEVELS_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_CHECKMULTISAMPLEQUALITYLEVELS_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_GETRESOURCETILING_NONTILED_RESOURCE:
+		return "D3D11_MESSAGE_ID_GETRESOURCETILING_NONTILED_RESOURCE"
+	case D3D11_MESSAGE_ID_RESIZETILEPOOL_SHRINK_WITH_MAPPINGS_STILL_DEFINED_PAST_END:
+		return "D3D11_MESSAGE_ID_RESIZETILEPOOL_SHRINK_WITH_MAPPINGS_STILL_DEFINED_PAST_END"
+	case D3D11_MESSAGE_ID_NEED_TO_CALL_TILEDRESOURCEBARRIER:
+		return "D3D11_MESSAGE_ID_NEED_TO_CALL_TILEDRESOURCEBARRIER"
+	case D3D11_MESSAGE_ID_CREATEDEVICE_INVALIDARGS:
+		return "D3D11_MESSAGE_ID_CREATEDEVICE_INVALIDARGS"
+	case D3D11_MESSAGE_ID_CREATEDEVICE_WARNING:
+		return "D3D11_MESSAGE_ID_CREATEDEVICE_WARNING"
+	case D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEWUINT_HAZARD:
+		return "D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEWUINT_HAZARD"
+	case D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEWFLOAT_HAZARD:
+		return "D3D11_MESSAGE_ID_CLEARUNORDEREDACCESSVIEWFLOAT_HAZARD"
+	case D3D11_MESSAGE_ID_TILED_RESOURCE_TIER_1_BUFFER_TEXTURE_MISMATCH:
+		return "D3D11_MESSAGE_ID_TILED_RESOURCE_TIER_1_BUFFER_TEXTURE_MISMATCH"
+	case D3D11_MESSAGE_ID_CREATE_CRYPTOSESSION:
+		return "D3D11_MESSAGE_ID_CREATE_CRYPTOSESSION"
+	case D3D11_MESSAGE_ID_CREATE_AUTHENTICATEDCHANNEL:
+		return "D3D11_MESSAGE_ID_CREATE_AUTHENTICATEDCHANNEL"
+	case D3D11_MESSAGE_ID_LIVE_CRYPTOSESSION:
+		return "D3D11_MESSAGE_ID_LIVE_CRYPTOSESSION"
+	case D3D11_MESSAGE_ID_LIVE_AUTHENTICATEDCHANNEL:
+		return "D3D11_MESSAGE_ID_LIVE_AUTHENTICATEDCHANNEL"
+	case D3D11_MESSAGE_ID_DESTROY_CRYPTOSESSION:
+		return "D3D11_MESSAGE_ID_DESTROY_CRYPTOSESSION"
+	case D3D11_MESSAGE_ID_DESTROY_AUTHENTICATEDCHANNEL:
+		return "D3D11_MESSAGE_ID_DESTROY_AUTHENTICATEDCHANNEL"
+	case D3D11_MESSAGE_ID_D3D11_2_MESSAGES_END:
+		return "D3D11_MESSAGE_ID_D3D11_2_MESSAGES_END"
+	case D3D11_MESSAGE_ID_D3D11_3_MESSAGES_START:
+		return "D3D11_MESSAGE_ID_D3D11_3_MESSAGES_START"
+	case D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALID_CONSERVATIVERASTERMODE:
+		return "D3D11_MESSAGE_ID_CREATERASTERIZERSTATE_INVALID_CONSERVATIVERASTERMODE"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_SYSTEMVALUE:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_INVALID_SYSTEMVALUE"
+	case D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_INVALIDCONTEXTTYPE:
+		return "D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_INVALIDCONTEXTTYPE"
+	case D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_DECODENOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_DECODENOTSUPPORTED"
+	case D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_ENCODENOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_ENCODENOTSUPPORTED"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDPLANEINDEX:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDPLANEINDEX"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDVIDEOPLANEINDEX:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_INVALIDVIDEOPLANEINDEX"
+	case D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_AMBIGUOUSVIDEOPLANEINDEX:
+		return "D3D11_MESSAGE_ID_CREATESHADERRESOURCEVIEW_AMBIGUOUSVIDEOPLANEINDEX"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDPLANEINDEX:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDPLANEINDEX"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDVIDEOPLANEINDEX:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_INVALIDVIDEOPLANEINDEX"
+	case D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_AMBIGUOUSVIDEOPLANEINDEX:
+		return "D3D11_MESSAGE_ID_CREATERENDERTARGETVIEW_AMBIGUOUSVIDEOPLANEINDEX"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDPLANEINDEX:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDPLANEINDEX"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDVIDEOPLANEINDEX:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_INVALIDVIDEOPLANEINDEX"
+	case D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_AMBIGUOUSVIDEOPLANEINDEX:
+		return "D3D11_MESSAGE_ID_CREATEUNORDEREDACCESSVIEW_AMBIGUOUSVIDEOPLANEINDEX"
+	case D3D11_MESSAGE_ID_JPEGDECODE_INVALIDSCANDATAOFFSET:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_INVALIDSCANDATAOFFSET"
+	case D3D11_MESSAGE_ID_JPEGDECODE_NOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_NOTSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGDECODE_DIMENSIONSTOOLARGE:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_DIMENSIONSTOOLARGE"
+	case D3D11_MESSAGE_ID_JPEGDECODE_INVALIDCOMPONENTS:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_INVALIDCOMPONENTS"
+	case D3D11_MESSAGE_ID_JPEGDECODE_DESTINATIONNOT2D:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_DESTINATIONNOT2D"
+	case D3D11_MESSAGE_ID_JPEGDECODE_TILEDRESOURCESUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_TILEDRESOURCESUNSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGDECODE_GUARDRECTSUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_GUARDRECTSUNSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGDECODE_FORMATUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_FORMATUNSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGDECODE_INVALIDSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_INVALIDSUBRESOURCE"
+	case D3D11_MESSAGE_ID_JPEGDECODE_INVALIDMIPLEVEL:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_INVALIDMIPLEVEL"
+	case D3D11_MESSAGE_ID_JPEGDECODE_EMPTYDESTBOX:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_EMPTYDESTBOX"
+	case D3D11_MESSAGE_ID_JPEGDECODE_DESTBOXNOT2D:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_DESTBOXNOT2D"
+	case D3D11_MESSAGE_ID_JPEGDECODE_DESTBOXNOTSUB:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_DESTBOXNOTSUB"
+	case D3D11_MESSAGE_ID_JPEGDECODE_DESTBOXESINTERSECT:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_DESTBOXESINTERSECT"
+	case D3D11_MESSAGE_ID_JPEGDECODE_XSUBSAMPLEMISMATCH:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_XSUBSAMPLEMISMATCH"
+	case D3D11_MESSAGE_ID_JPEGDECODE_YSUBSAMPLEMISMATCH:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_YSUBSAMPLEMISMATCH"
+	case D3D11_MESSAGE_ID_JPEGDECODE_XSUBSAMPLEODD:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_XSUBSAMPLEODD"
+	case D3D11_MESSAGE_ID_JPEGDECODE_YSUBSAMPLEODD:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_YSUBSAMPLEODD"
+	case D3D11_MESSAGE_ID_JPEGDECODE_OUTPUTDIMENSIONSTOOLARGE:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_OUTPUTDIMENSIONSTOOLARGE"
+	case D3D11_MESSAGE_ID_JPEGDECODE_NONPOW2SCALEUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_NONPOW2SCALEUNSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGDECODE_FRACTIONALDOWNSCALETOLARGE:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_FRACTIONALDOWNSCALETOLARGE"
+	case D3D11_MESSAGE_ID_JPEGDECODE_CHROMASIZEMISMATCH:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_CHROMASIZEMISMATCH"
+	case D3D11_MESSAGE_ID_JPEGDECODE_LUMACHROMASIZEMISMATCH:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_LUMACHROMASIZEMISMATCH"
+	case D3D11_MESSAGE_ID_JPEGDECODE_INVALIDNUMDESTINATIONS:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_INVALIDNUMDESTINATIONS"
+	case D3D11_MESSAGE_ID_JPEGDECODE_SUBBOXUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_SUBBOXUNSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGDECODE_1DESTUNSUPPORTEDFORMAT:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_1DESTUNSUPPORTEDFORMAT"
+	case D3D11_MESSAGE_ID_JPEGDECODE_3DESTUNSUPPORTEDFORMAT:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_3DESTUNSUPPORTEDFORMAT"
+	case D3D11_MESSAGE_ID_JPEGDECODE_SCALEUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_SCALEUNSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGDECODE_INVALIDSOURCESIZE:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_INVALIDSOURCESIZE"
+	case D3D11_MESSAGE_ID_JPEGDECODE_INVALIDCOPYFLAGS:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_INVALIDCOPYFLAGS"
+	case D3D11_MESSAGE_ID_JPEGDECODE_HAZARD:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_HAZARD"
+	case D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPORTEDSRCBUFFERUSAGE:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPORTEDSRCBUFFERUSAGE"
+	case D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPORTEDSRCBUFFERMISCFLAGS:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPORTEDSRCBUFFERMISCFLAGS"
+	case D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPORTEDDSTTEXTUREUSAGE:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPORTEDDSTTEXTUREUSAGE"
+	case D3D11_MESSAGE_ID_JPEGDECODE_BACKBUFFERNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_BACKBUFFERNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPRTEDCOPYFLAGS:
+		return "D3D11_MESSAGE_ID_JPEGDECODE_UNSUPPRTEDCOPYFLAGS"
+	case D3D11_MESSAGE_ID_JPEGENCODE_NOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_NOTSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGENCODE_INVALIDSCANDATAOFFSET:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_INVALIDSCANDATAOFFSET"
+	case D3D11_MESSAGE_ID_JPEGENCODE_INVALIDCOMPONENTS:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_INVALIDCOMPONENTS"
+	case D3D11_MESSAGE_ID_JPEGENCODE_SOURCENOT2D:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_SOURCENOT2D"
+	case D3D11_MESSAGE_ID_JPEGENCODE_TILEDRESOURCESUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_TILEDRESOURCESUNSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGENCODE_GUARDRECTSUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_GUARDRECTSUNSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGENCODE_XSUBSAMPLEMISMATCH:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_XSUBSAMPLEMISMATCH"
+	case D3D11_MESSAGE_ID_JPEGENCODE_YSUBSAMPLEMISMATCH:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_YSUBSAMPLEMISMATCH"
+	case D3D11_MESSAGE_ID_JPEGENCODE_FORMATUNSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_FORMATUNSUPPORTED"
+	case D3D11_MESSAGE_ID_JPEGENCODE_INVALIDSUBRESOURCE:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_INVALIDSUBRESOURCE"
+	case D3D11_MESSAGE_ID_JPEGENCODE_INVALIDMIPLEVEL:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_INVALIDMIPLEVEL"
+	case D3D11_MESSAGE_ID_JPEGENCODE_DIMENSIONSTOOLARGE:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_DIMENSIONSTOOLARGE"
+	case D3D11_MESSAGE_ID_JPEGENCODE_HAZARD:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_HAZARD"
+	case D3D11_MESSAGE_ID_JPEGENCODE_UNSUPPORTEDDSTBUFFERUSAGE:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_UNSUPPORTEDDSTBUFFERUSAGE"
+	case D3D11_MESSAGE_ID_JPEGENCODE_UNSUPPORTEDDSTBUFFERMISCFLAGS:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_UNSUPPORTEDDSTBUFFERMISCFLAGS"
+	case D3D11_MESSAGE_ID_JPEGENCODE_UNSUPPORTEDSRCTEXTUREUSAGE:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_UNSUPPORTEDSRCTEXTUREUSAGE"
+	case D3D11_MESSAGE_ID_JPEGENCODE_BACKBUFFERNOTSUPPORTED:
+		return "D3D11_MESSAGE_ID_JPEGENCODE_BACKBUFFERNOTSUPPORTED"
+	case D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_UNSUPPORTEDCONTEXTTTYPEFORQUERY:
+		return "D3D11_MESSAGE_ID_CREATEQUERYORPREDICATE_UNSUPPORTEDCONTEXTTTYPEFORQUERY"
+	case D3D11_MESSAGE_ID_FLUSH1_INVALIDCONTEXTTYPE:
+		return "D3D11_MESSAGE_ID_FLUSH1_INVALIDCONTEXTTYPE"
+	case D3D11_MESSAGE_ID_DEVICE_SETHARDWAREPROTECTION_INVALIDCONTEXT:
+		return "D3D11_MESSAGE_ID_DEVICE_SETHARDWAREPROTECTION_INVALIDCONTEXT"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTHDRMETADATA_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTHDRMETADATA_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTHDRMETADATA_INVALIDSIZE:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETOUTPUTHDRMETADATA_INVALIDSIZE"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTHDRMETADATA_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTHDRMETADATA_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTHDRMETADATA_INVALIDSIZE:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETOUTPUTHDRMETADATA_INVALIDSIZE"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMHDRMETADATA_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMHDRMETADATA_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMHDRMETADATA_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMHDRMETADATA_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMHDRMETADATA_INVALIDSIZE:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORSETSTREAMHDRMETADATA_INVALIDSIZE"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMHDRMETADATA_NULLPARAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMHDRMETADATA_NULLPARAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMHDRMETADATA_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMHDRMETADATA_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMHDRMETADATA_INVALIDSIZE:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMHDRMETADATA_INVALIDSIZE"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFRAMEFORMAT_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFRAMEFORMAT_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMOUTPUTRATE_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMOUTPUTRATE_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSOURCERECT_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSOURCERECT_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMDESTRECT_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMDESTRECT_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMALPHA_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMALPHA_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPALETTE_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPALETTE_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPIXELASPECTRATIO_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMPIXELASPECTRATIO_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMLUMAKEY_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMLUMAKEY_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSTEREOFORMAT_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMSTEREOFORMAT_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMAUTOPROCESSINGMODE_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMAUTOPROCESSINGMODE_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFILTER_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMFILTER_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMROTATION_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMROTATION_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE1_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMCOLORSPACE1_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMMIRROR_INVALIDSTREAM:
+		return "D3D11_MESSAGE_ID_VIDEOPROCESSORGETSTREAMMIRROR_INVALIDSTREAM"
+	case D3D11_MESSAGE_ID_CREATE_FENCE:
+		return "D3D11_MESSAGE_ID_CREATE_FENCE"
+	case D3D11_MESSAGE_ID_LIVE_FENCE:
+		return "D3D11_MESSAGE_ID_LIVE_FENCE"
+	case D3D11_MESSAGE_ID_DESTROY_FENCE:
+		return "D3D11_MESSAGE_ID_DESTROY_FENCE"
+	case D3D11_MESSAGE_ID_CREATE_SYNCHRONIZEDCHANNEL:
+		return "D3D11_MESSAGE_ID_CREATE_SYNCHRONIZEDCHANNEL"
+	case D3D11_MESSAGE_ID_LIVE_SYNCHRONIZEDCHANNEL:
+		return "D3D11_MESSAGE_ID_LIVE_SYNCHRONIZEDCHANNEL"
+	case D3D11_MESSAGE_ID_DESTROY_SYNCHRONIZEDCHANNEL:
+		return "D3D11_MESSAGE_ID_DESTROY_SYNCHRONIZEDCHANNEL"
+	case D3D11_MESSAGE_ID_CREATEFENCE_INVALIDFLAGS:
+		return "D3D11_MESSAGE_ID_CREATEFENCE_INVALIDFLAGS"
+	case D3D11_MESSAGE_ID_D3D11_3_MESSAGES_END:
+		return "D3D11_MESSAGE_ID_D3D11_3_MESSAGES_END"
+	case D3D11_MESSAGE_ID_D3D11_5_MESSAGES_START:
+		return "D3D11_MESSAGE_ID_D3D11_5_MESSAGES_START"
+	case D3D11_MESSAGE_ID_NEGOTIATECRYPTOSESSIONKEYEXCHANGEMT_INVALIDKEYEXCHANGETYPE:
+		return "D3D11_MESSAGE_ID_NEGOTIATECRYPTOSESSIONKEYEXCHANGEMT_INVALIDKEYEXCHANGETYPE"
+	case D3D11_MESSAGE_ID_NEGOTIATECRYPTOSESSIONKEYEXCHANGEMT_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_NEGOTIATECRYPTOSESSIONKEYEXCHANGEMT_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_COMPONENT_COUNT:
+		return "D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_COMPONENT_COUNT"
+	case D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_COMPONENT:
+		return "D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_COMPONENT"
+	case D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_SIZE:
+		return "D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_SIZE"
+	case D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_USAGE:
+		return "D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_USAGE"
+	case D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_MISC_FLAGS:
+		return "D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_MISC_FLAGS"
+	case D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_OFFSET:
+		return "D3D11_MESSAGE_ID_DECODERBEGINFRAME_INVALID_HISTOGRAM_BUFFER_OFFSET"
+	case D3D11_MESSAGE_ID_CREATE_TRACKEDWORKLOAD:
+		return "D3D11_MESSAGE_ID_CREATE_TRACKEDWORKLOAD"
+	case D3D11_MESSAGE_ID_LIVE_TRACKEDWORKLOAD:
+		return "D3D11_MESSAGE_ID_LIVE_TRACKEDWORKLOAD"
+	case D3D11_MESSAGE_ID_DESTROY_TRACKEDWORKLOAD:
+		return "D3D11_MESSAGE_ID_DESTROY_TRACKEDWORKLOAD"
+	case D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_NULLPARAM:
+		return "D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_NULLPARAM"
+	case D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_INVALID_MAX_INSTANCES:
+		return "D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_INVALID_MAX_INSTANCES"
+	case D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_INVALID_DEADLINE_TYPE:
+		return "D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_INVALID_DEADLINE_TYPE"
+	case D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_INVALID_ENGINE_TYPE:
+		return "D3D11_MESSAGE_ID_CREATE_TRACKED_WORKLOAD_INVALID_ENGINE_TYPE"
+	case D3D11_MESSAGE_ID_MULTIPLE_TRACKED_WORKLOADS:
+		return "D3D11_MESSAGE_ID_MULTIPLE_TRACKED_WORKLOADS"
+	case D3D11_MESSAGE_ID_MULTIPLE_TRACKED_WORKLOAD_PAIRS:
+		return "D3D11_MESSAGE_ID_MULTIPLE_TRACKED_WORKLOAD_PAIRS"
+	case D3D11_MESSAGE_ID_INCOMPLETE_TRACKED_WORKLOAD_PAIR:
+		return "D3D11_MESSAGE_ID_INCOMPLETE_TRACKED_WORKLOAD_PAIR"
+	case D3D11_MESSAGE_ID_OUT_OF_ORDER_TRACKED_WORKLOAD_PAIR:
+		return "D3D11_MESSAGE_ID_OUT_OF_ORDER_TRACKED_WORKLOAD_PAIR"
+	case D3D11_MESSAGE_ID_CANNOT_ADD_TRACKED_WORKLOAD:
+		return "D3D11_MESSAGE_ID_CANNOT_ADD_TRACKED_WORKLOAD"
+	case D3D11_MESSAGE_ID_TRACKED_WORKLOAD_NOT_SUPPORTED:
+		return "D3D11_MESSAGE_ID_TRACKED_WORKLOAD_NOT_SUPPORTED"
+	case D3D11_MESSAGE_ID_TRACKED_WORKLOAD_ENGINE_TYPE_NOT_FOUND:
+		return "D3D11_MESSAGE_ID_TRACKED_WORKLOAD_ENGINE_TYPE_NOT_FOUND"
+	case D3D11_MESSAGE_ID_NO_TRACKED_WORKLOAD_SLOT_AVAILABLE:
+		return "D3D11_MESSAGE_ID_NO_TRACKED_WORKLOAD_SLOT_AVAILABLE"
+	case D3D11_MESSAGE_ID_END_TRACKED_WORKLOAD_INVALID_ARG:
+		return "D3D11_MESSAGE_ID_END_TRACKED_WORKLOAD_INVALID_ARG"
+	case D3D11_MESSAGE_ID_TRACKED_WORKLOAD_DISJOINT_FAILURE:
+		return "D3D11_MESSAGE_ID_TRACKED_WORKLOAD_DISJOINT_FAILURE"
+	case D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_AND_WRITE_MASK_MISMATCH:
+		return "D3D11_MESSAGE_ID_DEVICE_DRAW_RESOURCE_FORMAT_AND_WRITE_MASK_MISMATCH"
+	case D3D11_MESSAGE_ID_D3D11_5_MESSAGES_END:
+		return "D3D11_MESSAGE_ID_D3D11_5_MESSAGES_END"
+	default:
+		return fmt.Sprintf("D3D11_MESSAGE_ID(%d)", int32(e))
+	}
+}
+
 // D3D11_MESSAGE_SEVERITY: https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_message_severity
 type D3D11_MESSAGE_SEVERITY int32
 
@@ -1907,6 +5599,25 @@ const (
 	D3D11_MESSAGE_SEVERITY_INFO       D3D11_MESSAGE_SEVERITY = 3
 	D3D11_MESSAGE_SEVERITY_MESSAGE    D3D11_MESSAGE_SEVERITY = 4
 )
+
+// String returns the D3D11_MESSAGE_SEVERITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_MESSAGE_SEVERITY) String() string {
+	switch e {
+	case D3D11_MESSAGE_SEVERITY_CORRUPTION:
+		return "D3D11_MESSAGE_SEVERITY_CORRUPTION"
+	case D3D11_MESSAGE_SEVERITY_ERROR:
+		return "D3D11_MESSAGE_SEVERITY_ERROR"
+	case D3D11_MESSAGE_SEVERITY_WARNING:
+		return "D3D11_MESSAGE_SEVERITY_WARNING"
+	case D3D11_MESSAGE_SEVERITY_INFO:
+		return "D3D11_MESSAGE_SEVERITY_INFO"
+	case D3D11_MESSAGE_SEVERITY_MESSAGE:
+		return "D3D11_MESSAGE_SEVERITY_MESSAGE"
+	default:
+		return fmt.Sprintf("D3D11_MESSAGE_SEVERITY(%d)", int32(e))
+	}
+}
 
 // D3D11_QUERY: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_query
 type D3D11_QUERY int32
@@ -1930,6 +5641,47 @@ const (
 	D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM3 D3D11_QUERY = 15
 )
 
+// String returns the D3D11_QUERY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_QUERY) String() string {
+	switch e {
+	case D3D11_QUERY_EVENT:
+		return "D3D11_QUERY_EVENT"
+	case D3D11_QUERY_OCCLUSION:
+		return "D3D11_QUERY_OCCLUSION"
+	case D3D11_QUERY_TIMESTAMP:
+		return "D3D11_QUERY_TIMESTAMP"
+	case D3D11_QUERY_TIMESTAMP_DISJOINT:
+		return "D3D11_QUERY_TIMESTAMP_DISJOINT"
+	case D3D11_QUERY_PIPELINE_STATISTICS:
+		return "D3D11_QUERY_PIPELINE_STATISTICS"
+	case D3D11_QUERY_OCCLUSION_PREDICATE:
+		return "D3D11_QUERY_OCCLUSION_PREDICATE"
+	case D3D11_QUERY_SO_STATISTICS:
+		return "D3D11_QUERY_SO_STATISTICS"
+	case D3D11_QUERY_SO_OVERFLOW_PREDICATE:
+		return "D3D11_QUERY_SO_OVERFLOW_PREDICATE"
+	case D3D11_QUERY_SO_STATISTICS_STREAM0:
+		return "D3D11_QUERY_SO_STATISTICS_STREAM0"
+	case D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM0:
+		return "D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM0"
+	case D3D11_QUERY_SO_STATISTICS_STREAM1:
+		return "D3D11_QUERY_SO_STATISTICS_STREAM1"
+	case D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM1:
+		return "D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM1"
+	case D3D11_QUERY_SO_STATISTICS_STREAM2:
+		return "D3D11_QUERY_SO_STATISTICS_STREAM2"
+	case D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM2:
+		return "D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM2"
+	case D3D11_QUERY_SO_STATISTICS_STREAM3:
+		return "D3D11_QUERY_SO_STATISTICS_STREAM3"
+	case D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM3:
+		return "D3D11_QUERY_SO_OVERFLOW_PREDICATE_STREAM3"
+	default:
+		return fmt.Sprintf("D3D11_QUERY(%d)", int32(e))
+	}
+}
+
 // D3D11_QUERY_MISC_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_query_misc_flag
 type D3D11_QUERY_MISC_FLAG int32
 
@@ -1937,12 +5689,34 @@ const (
 	D3D11_QUERY_MISC_PREDICATEHINT D3D11_QUERY_MISC_FLAG = 1
 )
 
+// String returns the D3D11_QUERY_MISC_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_QUERY_MISC_FLAG) String() string {
+	switch e {
+	case D3D11_QUERY_MISC_PREDICATEHINT:
+		return "D3D11_QUERY_MISC_PREDICATEHINT"
+	default:
+		return fmt.Sprintf("D3D11_QUERY_MISC_FLAG(%d)", int32(e))
+	}
+}
+
 // D3D11_RAISE_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_raise_flag
 type D3D11_RAISE_FLAG int32
 
 const (
 	D3D11_RAISE_FLAG_DRIVER_INTERNAL_ERROR D3D11_RAISE_FLAG = 1
 )
+
+// String returns the D3D11_RAISE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_RAISE_FLAG) String() string {
+	switch e {
+	case D3D11_RAISE_FLAG_DRIVER_INTERNAL_ERROR:
+		return "D3D11_RAISE_FLAG_DRIVER_INTERNAL_ERROR"
+	default:
+		return fmt.Sprintf("D3D11_RAISE_FLAG(%d)", int32(e))
+	}
+}
 
 // D3D11_RESOURCE_DIMENSION: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_resource_dimension
 type D3D11_RESOURCE_DIMENSION int32
@@ -1955,7 +5729,27 @@ const (
 	D3D11_RESOURCE_DIMENSION_TEXTURE3D D3D11_RESOURCE_DIMENSION = 4
 )
 
+// String returns the D3D11_RESOURCE_DIMENSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_RESOURCE_DIMENSION) String() string {
+	switch e {
+	case D3D11_RESOURCE_DIMENSION_UNKNOWN:
+		return "D3D11_RESOURCE_DIMENSION_UNKNOWN"
+	case D3D11_RESOURCE_DIMENSION_BUFFER:
+		return "D3D11_RESOURCE_DIMENSION_BUFFER"
+	case D3D11_RESOURCE_DIMENSION_TEXTURE1D:
+		return "D3D11_RESOURCE_DIMENSION_TEXTURE1D"
+	case D3D11_RESOURCE_DIMENSION_TEXTURE2D:
+		return "D3D11_RESOURCE_DIMENSION_TEXTURE2D"
+	case D3D11_RESOURCE_DIMENSION_TEXTURE3D:
+		return "D3D11_RESOURCE_DIMENSION_TEXTURE3D"
+	default:
+		return fmt.Sprintf("D3D11_RESOURCE_DIMENSION(%d)", int32(e))
+	}
+}
+
 // D3D11_RESOURCE_MISC_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_resource_misc_flag
+// Bitmask — values may be combined with |.
 type D3D11_RESOURCE_MISC_FLAG int32
 
 const (
@@ -1981,7 +5775,78 @@ const (
 	D3D11_RESOURCE_MISC_NO_SHADER_ACCESS                D3D11_RESOURCE_MISC_FLAG = 4194304
 )
 
+// String returns the D3D11_RESOURCE_MISC_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_RESOURCE_MISC_FLAG) String() string {
+	var parts []string
+	if e&D3D11_RESOURCE_MISC_GENERATE_MIPS != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_GENERATE_MIPS")
+	}
+	if e&D3D11_RESOURCE_MISC_SHARED != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_SHARED")
+	}
+	if e&D3D11_RESOURCE_MISC_TEXTURECUBE != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_TEXTURECUBE")
+	}
+	if e&D3D11_RESOURCE_MISC_DRAWINDIRECT_ARGS != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_DRAWINDIRECT_ARGS")
+	}
+	if e&D3D11_RESOURCE_MISC_BUFFER_ALLOW_RAW_VIEWS != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_BUFFER_ALLOW_RAW_VIEWS")
+	}
+	if e&D3D11_RESOURCE_MISC_BUFFER_STRUCTURED != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_BUFFER_STRUCTURED")
+	}
+	if e&D3D11_RESOURCE_MISC_RESOURCE_CLAMP != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_RESOURCE_CLAMP")
+	}
+	if e&D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX")
+	}
+	if e&D3D11_RESOURCE_MISC_GDI_COMPATIBLE != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_GDI_COMPATIBLE")
+	}
+	if e&D3D11_RESOURCE_MISC_SHARED_NTHANDLE != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_SHARED_NTHANDLE")
+	}
+	if e&D3D11_RESOURCE_MISC_RESTRICTED_CONTENT != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_RESTRICTED_CONTENT")
+	}
+	if e&D3D11_RESOURCE_MISC_RESTRICT_SHARED_RESOURCE != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_RESTRICT_SHARED_RESOURCE")
+	}
+	if e&D3D11_RESOURCE_MISC_RESTRICT_SHARED_RESOURCE_DRIVER != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_RESTRICT_SHARED_RESOURCE_DRIVER")
+	}
+	if e&D3D11_RESOURCE_MISC_GUARDED != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_GUARDED")
+	}
+	if e&D3D11_RESOURCE_MISC_TILE_POOL != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_TILE_POOL")
+	}
+	if e&D3D11_RESOURCE_MISC_TILED != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_TILED")
+	}
+	if e&D3D11_RESOURCE_MISC_HW_PROTECTED != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_HW_PROTECTED")
+	}
+	if e&D3D11_RESOURCE_MISC_SHARED_DISPLAYABLE != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_SHARED_DISPLAYABLE")
+	}
+	if e&D3D11_RESOURCE_MISC_SHARED_EXCLUSIVE_WRITER != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_SHARED_EXCLUSIVE_WRITER")
+	}
+	if e&D3D11_RESOURCE_MISC_NO_SHADER_ACCESS != 0 {
+		parts = append(parts, "D3D11_RESOURCE_MISC_NO_SHADER_ACCESS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // D3D11_RLDO_FLAGS: https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_rldo_flags
+// Bitmask — values may be combined with |.
 type D3D11_RLDO_FLAGS int32
 
 const (
@@ -1989,6 +5854,25 @@ const (
 	D3D11_RLDO_DETAIL          D3D11_RLDO_FLAGS = 2
 	D3D11_RLDO_IGNORE_INTERNAL D3D11_RLDO_FLAGS = 4
 )
+
+// String returns the D3D11_RLDO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_RLDO_FLAGS) String() string {
+	var parts []string
+	if e&D3D11_RLDO_SUMMARY != 0 {
+		parts = append(parts, "D3D11_RLDO_SUMMARY")
+	}
+	if e&D3D11_RLDO_DETAIL != 0 {
+		parts = append(parts, "D3D11_RLDO_DETAIL")
+	}
+	if e&D3D11_RLDO_IGNORE_INTERNAL != 0 {
+		parts = append(parts, "D3D11_RLDO_IGNORE_INTERNAL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // D3D11_RTV_DIMENSION: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_rtv_dimension
 type D3D11_RTV_DIMENSION int32
@@ -2005,12 +5889,52 @@ const (
 	D3D11_RTV_DIMENSION_TEXTURE3D        D3D11_RTV_DIMENSION = 8
 )
 
+// String returns the D3D11_RTV_DIMENSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_RTV_DIMENSION) String() string {
+	switch e {
+	case D3D11_RTV_DIMENSION_UNKNOWN:
+		return "D3D11_RTV_DIMENSION_UNKNOWN"
+	case D3D11_RTV_DIMENSION_BUFFER:
+		return "D3D11_RTV_DIMENSION_BUFFER"
+	case D3D11_RTV_DIMENSION_TEXTURE1D:
+		return "D3D11_RTV_DIMENSION_TEXTURE1D"
+	case D3D11_RTV_DIMENSION_TEXTURE1DARRAY:
+		return "D3D11_RTV_DIMENSION_TEXTURE1DARRAY"
+	case D3D11_RTV_DIMENSION_TEXTURE2D:
+		return "D3D11_RTV_DIMENSION_TEXTURE2D"
+	case D3D11_RTV_DIMENSION_TEXTURE2DARRAY:
+		return "D3D11_RTV_DIMENSION_TEXTURE2DARRAY"
+	case D3D11_RTV_DIMENSION_TEXTURE2DMS:
+		return "D3D11_RTV_DIMENSION_TEXTURE2DMS"
+	case D3D11_RTV_DIMENSION_TEXTURE2DMSARRAY:
+		return "D3D11_RTV_DIMENSION_TEXTURE2DMSARRAY"
+	case D3D11_RTV_DIMENSION_TEXTURE3D:
+		return "D3D11_RTV_DIMENSION_TEXTURE3D"
+	default:
+		return fmt.Sprintf("D3D11_RTV_DIMENSION(%d)", int32(e))
+	}
+}
+
 type D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER int32
 
 const (
 	D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER_0 D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER = 0
 	D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER_1 D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER = 1
 )
+
+// String returns the D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER) String() string {
+	switch e {
+	case D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER_0:
+		return "D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER_0"
+	case D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER_1:
+		return "D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER_1"
+	default:
+		return fmt.Sprintf("D3D11_SHADER_ACCESS_RESTRICTED_RESOURCE_TIER(%d)", int32(e))
+	}
+}
 
 // D3D11_SHADER_CACHE_SUPPORT_FLAGS: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_shader_cache_support_flags
 type D3D11_SHADER_CACHE_SUPPORT_FLAGS int32
@@ -2021,6 +5945,21 @@ const (
 	D3D11_SHADER_CACHE_SUPPORT_AUTOMATIC_DISK_CACHE   D3D11_SHADER_CACHE_SUPPORT_FLAGS = 2
 )
 
+// String returns the D3D11_SHADER_CACHE_SUPPORT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_SHADER_CACHE_SUPPORT_FLAGS) String() string {
+	switch e {
+	case D3D11_SHADER_CACHE_SUPPORT_NONE:
+		return "D3D11_SHADER_CACHE_SUPPORT_NONE"
+	case D3D11_SHADER_CACHE_SUPPORT_AUTOMATIC_INPROC_CACHE:
+		return "D3D11_SHADER_CACHE_SUPPORT_AUTOMATIC_INPROC_CACHE"
+	case D3D11_SHADER_CACHE_SUPPORT_AUTOMATIC_DISK_CACHE:
+		return "D3D11_SHADER_CACHE_SUPPORT_AUTOMATIC_DISK_CACHE"
+	default:
+		return fmt.Sprintf("D3D11_SHADER_CACHE_SUPPORT_FLAGS(%d)", int32(e))
+	}
+}
+
 // D3D11_SHADER_MIN_PRECISION_SUPPORT: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_shader_min_precision_support
 type D3D11_SHADER_MIN_PRECISION_SUPPORT int32
 
@@ -2028,6 +5967,19 @@ const (
 	D3D11_SHADER_MIN_PRECISION_10_BIT D3D11_SHADER_MIN_PRECISION_SUPPORT = 1
 	D3D11_SHADER_MIN_PRECISION_16_BIT D3D11_SHADER_MIN_PRECISION_SUPPORT = 2
 )
+
+// String returns the D3D11_SHADER_MIN_PRECISION_SUPPORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_SHADER_MIN_PRECISION_SUPPORT) String() string {
+	switch e {
+	case D3D11_SHADER_MIN_PRECISION_10_BIT:
+		return "D3D11_SHADER_MIN_PRECISION_10_BIT"
+	case D3D11_SHADER_MIN_PRECISION_16_BIT:
+		return "D3D11_SHADER_MIN_PRECISION_16_BIT"
+	default:
+		return fmt.Sprintf("D3D11_SHADER_MIN_PRECISION_SUPPORT(%d)", int32(e))
+	}
+}
 
 // D3D11_SHADER_TRACKING_OPTIONS: https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_shader_tracking_options
 type D3D11_SHADER_TRACKING_OPTIONS int32
@@ -2050,6 +6002,45 @@ const (
 	D3D11_SHADER_TRACKING_OPTION_ALL_OPTIONS                                  D3D11_SHADER_TRACKING_OPTIONS = 1023
 )
 
+// String returns the D3D11_SHADER_TRACKING_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_SHADER_TRACKING_OPTIONS) String() string {
+	switch e {
+	case D3D11_SHADER_TRACKING_OPTION_IGNORE:
+		return "D3D11_SHADER_TRACKING_OPTION_IGNORE"
+	case D3D11_SHADER_TRACKING_OPTION_TRACK_UNINITIALIZED:
+		return "D3D11_SHADER_TRACKING_OPTION_TRACK_UNINITIALIZED"
+	case D3D11_SHADER_TRACKING_OPTION_TRACK_RAW:
+		return "D3D11_SHADER_TRACKING_OPTION_TRACK_RAW"
+	case D3D11_SHADER_TRACKING_OPTION_TRACK_WAR:
+		return "D3D11_SHADER_TRACKING_OPTION_TRACK_WAR"
+	case D3D11_SHADER_TRACKING_OPTION_TRACK_WAW:
+		return "D3D11_SHADER_TRACKING_OPTION_TRACK_WAW"
+	case D3D11_SHADER_TRACKING_OPTION_ALLOW_SAME:
+		return "D3D11_SHADER_TRACKING_OPTION_ALLOW_SAME"
+	case D3D11_SHADER_TRACKING_OPTION_TRACK_ATOMIC_CONSISTENCY:
+		return "D3D11_SHADER_TRACKING_OPTION_TRACK_ATOMIC_CONSISTENCY"
+	case D3D11_SHADER_TRACKING_OPTION_TRACK_RAW_ACROSS_THREADGROUPS:
+		return "D3D11_SHADER_TRACKING_OPTION_TRACK_RAW_ACROSS_THREADGROUPS"
+	case D3D11_SHADER_TRACKING_OPTION_TRACK_WAR_ACROSS_THREADGROUPS:
+		return "D3D11_SHADER_TRACKING_OPTION_TRACK_WAR_ACROSS_THREADGROUPS"
+	case D3D11_SHADER_TRACKING_OPTION_TRACK_WAW_ACROSS_THREADGROUPS:
+		return "D3D11_SHADER_TRACKING_OPTION_TRACK_WAW_ACROSS_THREADGROUPS"
+	case D3D11_SHADER_TRACKING_OPTION_TRACK_ATOMIC_CONSISTENCY_ACROSS_THREADGROUPS:
+		return "D3D11_SHADER_TRACKING_OPTION_TRACK_ATOMIC_CONSISTENCY_ACROSS_THREADGROUPS"
+	case D3D11_SHADER_TRACKING_OPTION_UAV_SPECIFIC_FLAGS:
+		return "D3D11_SHADER_TRACKING_OPTION_UAV_SPECIFIC_FLAGS"
+	case D3D11_SHADER_TRACKING_OPTION_ALL_HAZARDS:
+		return "D3D11_SHADER_TRACKING_OPTION_ALL_HAZARDS"
+	case D3D11_SHADER_TRACKING_OPTION_ALL_HAZARDS_ALLOWING_SAME:
+		return "D3D11_SHADER_TRACKING_OPTION_ALL_HAZARDS_ALLOWING_SAME"
+	case D3D11_SHADER_TRACKING_OPTION_ALL_OPTIONS:
+		return "D3D11_SHADER_TRACKING_OPTION_ALL_OPTIONS"
+	default:
+		return fmt.Sprintf("D3D11_SHADER_TRACKING_OPTIONS(%d)", int32(e))
+	}
+}
+
 // D3D11_SHADER_TRACKING_RESOURCE_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11sdklayers/ne-d3d11sdklayers-d3d11_shader_tracking_resource_type
 type D3D11_SHADER_TRACKING_RESOURCE_TYPE int32
 
@@ -2064,6 +6055,31 @@ const (
 	D3D11_SHADER_TRACKING_RESOURCE_TYPE_ALL                  D3D11_SHADER_TRACKING_RESOURCE_TYPE = 7
 )
 
+// String returns the D3D11_SHADER_TRACKING_RESOURCE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_SHADER_TRACKING_RESOURCE_TYPE) String() string {
+	switch e {
+	case D3D11_SHADER_TRACKING_RESOURCE_TYPE_NONE:
+		return "D3D11_SHADER_TRACKING_RESOURCE_TYPE_NONE"
+	case D3D11_SHADER_TRACKING_RESOURCE_TYPE_UAV_DEVICEMEMORY:
+		return "D3D11_SHADER_TRACKING_RESOURCE_TYPE_UAV_DEVICEMEMORY"
+	case D3D11_SHADER_TRACKING_RESOURCE_TYPE_NON_UAV_DEVICEMEMORY:
+		return "D3D11_SHADER_TRACKING_RESOURCE_TYPE_NON_UAV_DEVICEMEMORY"
+	case D3D11_SHADER_TRACKING_RESOURCE_TYPE_ALL_DEVICEMEMORY:
+		return "D3D11_SHADER_TRACKING_RESOURCE_TYPE_ALL_DEVICEMEMORY"
+	case D3D11_SHADER_TRACKING_RESOURCE_TYPE_GROUPSHARED_MEMORY:
+		return "D3D11_SHADER_TRACKING_RESOURCE_TYPE_GROUPSHARED_MEMORY"
+	case D3D11_SHADER_TRACKING_RESOURCE_TYPE_ALL_SHARED_MEMORY:
+		return "D3D11_SHADER_TRACKING_RESOURCE_TYPE_ALL_SHARED_MEMORY"
+	case D3D11_SHADER_TRACKING_RESOURCE_TYPE_GROUPSHARED_NON_UAV:
+		return "D3D11_SHADER_TRACKING_RESOURCE_TYPE_GROUPSHARED_NON_UAV"
+	case D3D11_SHADER_TRACKING_RESOURCE_TYPE_ALL:
+		return "D3D11_SHADER_TRACKING_RESOURCE_TYPE_ALL"
+	default:
+		return fmt.Sprintf("D3D11_SHADER_TRACKING_RESOURCE_TYPE(%d)", int32(e))
+	}
+}
+
 // D3D11_SHADER_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ne-d3d11shadertracing-d3d11_shader_type
 type D3D11_SHADER_TYPE int32
 
@@ -2075,6 +6091,27 @@ const (
 	D3D11_PIXEL_SHADER    D3D11_SHADER_TYPE = 5
 	D3D11_COMPUTE_SHADER  D3D11_SHADER_TYPE = 6
 )
+
+// String returns the D3D11_SHADER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_SHADER_TYPE) String() string {
+	switch e {
+	case D3D11_VERTEX_SHADER:
+		return "D3D11_VERTEX_SHADER"
+	case D3D11_HULL_SHADER:
+		return "D3D11_HULL_SHADER"
+	case D3D11_DOMAIN_SHADER:
+		return "D3D11_DOMAIN_SHADER"
+	case D3D11_GEOMETRY_SHADER:
+		return "D3D11_GEOMETRY_SHADER"
+	case D3D11_PIXEL_SHADER:
+		return "D3D11_PIXEL_SHADER"
+	case D3D11_COMPUTE_SHADER:
+		return "D3D11_COMPUTE_SHADER"
+	default:
+		return fmt.Sprintf("D3D11_SHADER_TYPE(%d)", int32(e))
+	}
+}
 
 // D3D11_SHADER_VERSION_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type
 type D3D11_SHADER_VERSION_TYPE int32
@@ -2089,6 +6126,29 @@ const (
 	D3D11_SHVER_RESERVED0       D3D11_SHADER_VERSION_TYPE = 65520
 )
 
+// String returns the D3D11_SHADER_VERSION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_SHADER_VERSION_TYPE) String() string {
+	switch e {
+	case D3D11_SHVER_PIXEL_SHADER:
+		return "D3D11_SHVER_PIXEL_SHADER"
+	case D3D11_SHVER_VERTEX_SHADER:
+		return "D3D11_SHVER_VERTEX_SHADER"
+	case D3D11_SHVER_GEOMETRY_SHADER:
+		return "D3D11_SHVER_GEOMETRY_SHADER"
+	case D3D11_SHVER_HULL_SHADER:
+		return "D3D11_SHVER_HULL_SHADER"
+	case D3D11_SHVER_DOMAIN_SHADER:
+		return "D3D11_SHVER_DOMAIN_SHADER"
+	case D3D11_SHVER_COMPUTE_SHADER:
+		return "D3D11_SHVER_COMPUTE_SHADER"
+	case D3D11_SHVER_RESERVED0:
+		return "D3D11_SHVER_RESERVED0"
+	default:
+		return fmt.Sprintf("D3D11_SHADER_VERSION_TYPE(%d)", int32(e))
+	}
+}
+
 // D3D11_SHARED_RESOURCE_TIER: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_shared_resource_tier
 type D3D11_SHARED_RESOURCE_TIER int32
 
@@ -2099,6 +6159,23 @@ const (
 	D3D11_SHARED_RESOURCE_TIER_3 D3D11_SHARED_RESOURCE_TIER = 3
 )
 
+// String returns the D3D11_SHARED_RESOURCE_TIER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_SHARED_RESOURCE_TIER) String() string {
+	switch e {
+	case D3D11_SHARED_RESOURCE_TIER_0:
+		return "D3D11_SHARED_RESOURCE_TIER_0"
+	case D3D11_SHARED_RESOURCE_TIER_1:
+		return "D3D11_SHARED_RESOURCE_TIER_1"
+	case D3D11_SHARED_RESOURCE_TIER_2:
+		return "D3D11_SHARED_RESOURCE_TIER_2"
+	case D3D11_SHARED_RESOURCE_TIER_3:
+		return "D3D11_SHARED_RESOURCE_TIER_3"
+	default:
+		return fmt.Sprintf("D3D11_SHARED_RESOURCE_TIER(%d)", int32(e))
+	}
+}
+
 // D3D11_STANDARD_MULTISAMPLE_QUALITY_LEVELS: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_standard_multisample_quality_levels
 type D3D11_STANDARD_MULTISAMPLE_QUALITY_LEVELS int32
 
@@ -2106,6 +6183,19 @@ const (
 	D3D11_STANDARD_MULTISAMPLE_PATTERN D3D11_STANDARD_MULTISAMPLE_QUALITY_LEVELS = -1
 	D3D11_CENTER_MULTISAMPLE_PATTERN   D3D11_STANDARD_MULTISAMPLE_QUALITY_LEVELS = -2
 )
+
+// String returns the D3D11_STANDARD_MULTISAMPLE_QUALITY_LEVELS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_STANDARD_MULTISAMPLE_QUALITY_LEVELS) String() string {
+	switch e {
+	case D3D11_STANDARD_MULTISAMPLE_PATTERN:
+		return "D3D11_STANDARD_MULTISAMPLE_PATTERN"
+	case D3D11_CENTER_MULTISAMPLE_PATTERN:
+		return "D3D11_CENTER_MULTISAMPLE_PATTERN"
+	default:
+		return fmt.Sprintf("D3D11_STANDARD_MULTISAMPLE_QUALITY_LEVELS(%d)", int32(e))
+	}
+}
 
 // D3D11_STENCIL_OP: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_stencil_op
 type D3D11_STENCIL_OP int32
@@ -2121,6 +6211,31 @@ const (
 	D3D11_STENCIL_OP_DECR     D3D11_STENCIL_OP = 8
 )
 
+// String returns the D3D11_STENCIL_OP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_STENCIL_OP) String() string {
+	switch e {
+	case D3D11_STENCIL_OP_KEEP:
+		return "D3D11_STENCIL_OP_KEEP"
+	case D3D11_STENCIL_OP_ZERO:
+		return "D3D11_STENCIL_OP_ZERO"
+	case D3D11_STENCIL_OP_REPLACE:
+		return "D3D11_STENCIL_OP_REPLACE"
+	case D3D11_STENCIL_OP_INCR_SAT:
+		return "D3D11_STENCIL_OP_INCR_SAT"
+	case D3D11_STENCIL_OP_DECR_SAT:
+		return "D3D11_STENCIL_OP_DECR_SAT"
+	case D3D11_STENCIL_OP_INVERT:
+		return "D3D11_STENCIL_OP_INVERT"
+	case D3D11_STENCIL_OP_INCR:
+		return "D3D11_STENCIL_OP_INCR"
+	case D3D11_STENCIL_OP_DECR:
+		return "D3D11_STENCIL_OP_DECR"
+	default:
+		return fmt.Sprintf("D3D11_STENCIL_OP(%d)", int32(e))
+	}
+}
+
 // D3D11_TEXTURECUBE_FACE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_texturecube_face
 type D3D11_TEXTURECUBE_FACE int32
 
@@ -2133,6 +6248,27 @@ const (
 	D3D11_TEXTURECUBE_FACE_NEGATIVE_Z D3D11_TEXTURECUBE_FACE = 5
 )
 
+// String returns the D3D11_TEXTURECUBE_FACE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_TEXTURECUBE_FACE) String() string {
+	switch e {
+	case D3D11_TEXTURECUBE_FACE_POSITIVE_X:
+		return "D3D11_TEXTURECUBE_FACE_POSITIVE_X"
+	case D3D11_TEXTURECUBE_FACE_NEGATIVE_X:
+		return "D3D11_TEXTURECUBE_FACE_NEGATIVE_X"
+	case D3D11_TEXTURECUBE_FACE_POSITIVE_Y:
+		return "D3D11_TEXTURECUBE_FACE_POSITIVE_Y"
+	case D3D11_TEXTURECUBE_FACE_NEGATIVE_Y:
+		return "D3D11_TEXTURECUBE_FACE_NEGATIVE_Y"
+	case D3D11_TEXTURECUBE_FACE_POSITIVE_Z:
+		return "D3D11_TEXTURECUBE_FACE_POSITIVE_Z"
+	case D3D11_TEXTURECUBE_FACE_NEGATIVE_Z:
+		return "D3D11_TEXTURECUBE_FACE_NEGATIVE_Z"
+	default:
+		return fmt.Sprintf("D3D11_TEXTURECUBE_FACE(%d)", int32(e))
+	}
+}
+
 // D3D11_TEXTURE_ADDRESS_MODE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_texture_address_mode
 type D3D11_TEXTURE_ADDRESS_MODE int32
 
@@ -2144,6 +6280,25 @@ const (
 	D3D11_TEXTURE_ADDRESS_MIRROR_ONCE D3D11_TEXTURE_ADDRESS_MODE = 5
 )
 
+// String returns the D3D11_TEXTURE_ADDRESS_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_TEXTURE_ADDRESS_MODE) String() string {
+	switch e {
+	case D3D11_TEXTURE_ADDRESS_WRAP:
+		return "D3D11_TEXTURE_ADDRESS_WRAP"
+	case D3D11_TEXTURE_ADDRESS_MIRROR:
+		return "D3D11_TEXTURE_ADDRESS_MIRROR"
+	case D3D11_TEXTURE_ADDRESS_CLAMP:
+		return "D3D11_TEXTURE_ADDRESS_CLAMP"
+	case D3D11_TEXTURE_ADDRESS_BORDER:
+		return "D3D11_TEXTURE_ADDRESS_BORDER"
+	case D3D11_TEXTURE_ADDRESS_MIRROR_ONCE:
+		return "D3D11_TEXTURE_ADDRESS_MIRROR_ONCE"
+	default:
+		return fmt.Sprintf("D3D11_TEXTURE_ADDRESS_MODE(%d)", int32(e))
+	}
+}
+
 // D3D11_TEXTURE_LAYOUT: https://learn.microsoft.com/windows/win32/api/d3d11_3/ne-d3d11_3-d3d11_texture_layout
 type D3D11_TEXTURE_LAYOUT int32
 
@@ -2152,6 +6307,21 @@ const (
 	D3D11_TEXTURE_LAYOUT_ROW_MAJOR            D3D11_TEXTURE_LAYOUT = 1
 	D3D11_TEXTURE_LAYOUT_64K_STANDARD_SWIZZLE D3D11_TEXTURE_LAYOUT = 2
 )
+
+// String returns the D3D11_TEXTURE_LAYOUT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_TEXTURE_LAYOUT) String() string {
+	switch e {
+	case D3D11_TEXTURE_LAYOUT_UNDEFINED:
+		return "D3D11_TEXTURE_LAYOUT_UNDEFINED"
+	case D3D11_TEXTURE_LAYOUT_ROW_MAJOR:
+		return "D3D11_TEXTURE_LAYOUT_ROW_MAJOR"
+	case D3D11_TEXTURE_LAYOUT_64K_STANDARD_SWIZZLE:
+		return "D3D11_TEXTURE_LAYOUT_64K_STANDARD_SWIZZLE"
+	default:
+		return fmt.Sprintf("D3D11_TEXTURE_LAYOUT(%d)", int32(e))
+	}
+}
 
 // D3D11_TILED_RESOURCES_TIER: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_tiled_resources_tier
 type D3D11_TILED_RESOURCES_TIER int32
@@ -2163,6 +6333,23 @@ const (
 	D3D11_TILED_RESOURCES_TIER_3        D3D11_TILED_RESOURCES_TIER = 3
 )
 
+// String returns the D3D11_TILED_RESOURCES_TIER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_TILED_RESOURCES_TIER) String() string {
+	switch e {
+	case D3D11_TILED_RESOURCES_NOT_SUPPORTED:
+		return "D3D11_TILED_RESOURCES_NOT_SUPPORTED"
+	case D3D11_TILED_RESOURCES_TIER_1:
+		return "D3D11_TILED_RESOURCES_TIER_1"
+	case D3D11_TILED_RESOURCES_TIER_2:
+		return "D3D11_TILED_RESOURCES_TIER_2"
+	case D3D11_TILED_RESOURCES_TIER_3:
+		return "D3D11_TILED_RESOURCES_TIER_3"
+	default:
+		return fmt.Sprintf("D3D11_TILED_RESOURCES_TIER(%d)", int32(e))
+	}
+}
+
 // D3D11_TILE_COPY_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11_2/ne-d3d11_2-d3d11_tile_copy_flag
 type D3D11_TILE_COPY_FLAG int32
 
@@ -2172,12 +6359,38 @@ const (
 	D3D11_TILE_COPY_SWIZZLED_TILED_RESOURCE_TO_LINEAR_BUFFER D3D11_TILE_COPY_FLAG = 4
 )
 
+// String returns the D3D11_TILE_COPY_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_TILE_COPY_FLAG) String() string {
+	switch e {
+	case D3D11_TILE_COPY_NO_OVERWRITE:
+		return "D3D11_TILE_COPY_NO_OVERWRITE"
+	case D3D11_TILE_COPY_LINEAR_BUFFER_TO_SWIZZLED_TILED_RESOURCE:
+		return "D3D11_TILE_COPY_LINEAR_BUFFER_TO_SWIZZLED_TILED_RESOURCE"
+	case D3D11_TILE_COPY_SWIZZLED_TILED_RESOURCE_TO_LINEAR_BUFFER:
+		return "D3D11_TILE_COPY_SWIZZLED_TILED_RESOURCE_TO_LINEAR_BUFFER"
+	default:
+		return fmt.Sprintf("D3D11_TILE_COPY_FLAG(%d)", int32(e))
+	}
+}
+
 // D3D11_TILE_MAPPING_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11_2/ne-d3d11_2-d3d11_tile_mapping_flag
 type D3D11_TILE_MAPPING_FLAG int32
 
 const (
 	D3D11_TILE_MAPPING_NO_OVERWRITE D3D11_TILE_MAPPING_FLAG = 1
 )
+
+// String returns the D3D11_TILE_MAPPING_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_TILE_MAPPING_FLAG) String() string {
+	switch e {
+	case D3D11_TILE_MAPPING_NO_OVERWRITE:
+		return "D3D11_TILE_MAPPING_NO_OVERWRITE"
+	default:
+		return fmt.Sprintf("D3D11_TILE_MAPPING_FLAG(%d)", int32(e))
+	}
+}
 
 // D3D11_TILE_RANGE_FLAG: https://learn.microsoft.com/windows/win32/api/d3d11_2/ne-d3d11_2-d3d11_tile_range_flag
 type D3D11_TILE_RANGE_FLAG int32
@@ -2187,6 +6400,21 @@ const (
 	D3D11_TILE_RANGE_SKIP              D3D11_TILE_RANGE_FLAG = 2
 	D3D11_TILE_RANGE_REUSE_SINGLE_TILE D3D11_TILE_RANGE_FLAG = 4
 )
+
+// String returns the D3D11_TILE_RANGE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_TILE_RANGE_FLAG) String() string {
+	switch e {
+	case D3D11_TILE_RANGE_NULL:
+		return "D3D11_TILE_RANGE_NULL"
+	case D3D11_TILE_RANGE_SKIP:
+		return "D3D11_TILE_RANGE_SKIP"
+	case D3D11_TILE_RANGE_REUSE_SINGLE_TILE:
+		return "D3D11_TILE_RANGE_REUSE_SINGLE_TILE"
+	default:
+		return fmt.Sprintf("D3D11_TILE_RANGE_FLAG(%d)", int32(e))
+	}
+}
 
 // D3D11_TRACE_GS_INPUT_PRIMITIVE: https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ne-d3d11shadertracing-d3d11_trace_gs_input_primitive
 type D3D11_TRACE_GS_INPUT_PRIMITIVE int32
@@ -2199,6 +6427,27 @@ const (
 	D3D11_TRACE_GS_INPUT_PRIMITIVE_LINE_ADJ     D3D11_TRACE_GS_INPUT_PRIMITIVE = 6
 	D3D11_TRACE_GS_INPUT_PRIMITIVE_TRIANGLE_ADJ D3D11_TRACE_GS_INPUT_PRIMITIVE = 7
 )
+
+// String returns the D3D11_TRACE_GS_INPUT_PRIMITIVE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_TRACE_GS_INPUT_PRIMITIVE) String() string {
+	switch e {
+	case D3D11_TRACE_GS_INPUT_PRIMITIVE_UNDEFINED:
+		return "D3D11_TRACE_GS_INPUT_PRIMITIVE_UNDEFINED"
+	case D3D11_TRACE_GS_INPUT_PRIMITIVE_POINT:
+		return "D3D11_TRACE_GS_INPUT_PRIMITIVE_POINT"
+	case D3D11_TRACE_GS_INPUT_PRIMITIVE_LINE:
+		return "D3D11_TRACE_GS_INPUT_PRIMITIVE_LINE"
+	case D3D11_TRACE_GS_INPUT_PRIMITIVE_TRIANGLE:
+		return "D3D11_TRACE_GS_INPUT_PRIMITIVE_TRIANGLE"
+	case D3D11_TRACE_GS_INPUT_PRIMITIVE_LINE_ADJ:
+		return "D3D11_TRACE_GS_INPUT_PRIMITIVE_LINE_ADJ"
+	case D3D11_TRACE_GS_INPUT_PRIMITIVE_TRIANGLE_ADJ:
+		return "D3D11_TRACE_GS_INPUT_PRIMITIVE_TRIANGLE_ADJ"
+	default:
+		return fmt.Sprintf("D3D11_TRACE_GS_INPUT_PRIMITIVE(%d)", int32(e))
+	}
+}
 
 // D3D11_TRACE_REGISTER_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/ne-d3d11shadertracing-d3d11_trace_register_type
 type D3D11_TRACE_REGISTER_TYPE int32
@@ -2242,6 +6491,87 @@ const (
 	D3D11_TRACE_INTERFACE_POINTER                           D3D11_TRACE_REGISTER_TYPE = 35
 )
 
+// String returns the D3D11_TRACE_REGISTER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_TRACE_REGISTER_TYPE) String() string {
+	switch e {
+	case D3D11_TRACE_OUTPUT_NULL_REGISTER:
+		return "D3D11_TRACE_OUTPUT_NULL_REGISTER"
+	case D3D11_TRACE_INPUT_REGISTER:
+		return "D3D11_TRACE_INPUT_REGISTER"
+	case D3D11_TRACE_INPUT_PRIMITIVE_ID_REGISTER:
+		return "D3D11_TRACE_INPUT_PRIMITIVE_ID_REGISTER"
+	case D3D11_TRACE_IMMEDIATE_CONSTANT_BUFFER:
+		return "D3D11_TRACE_IMMEDIATE_CONSTANT_BUFFER"
+	case D3D11_TRACE_TEMP_REGISTER:
+		return "D3D11_TRACE_TEMP_REGISTER"
+	case D3D11_TRACE_INDEXABLE_TEMP_REGISTER:
+		return "D3D11_TRACE_INDEXABLE_TEMP_REGISTER"
+	case D3D11_TRACE_OUTPUT_REGISTER:
+		return "D3D11_TRACE_OUTPUT_REGISTER"
+	case D3D11_TRACE_OUTPUT_DEPTH_REGISTER:
+		return "D3D11_TRACE_OUTPUT_DEPTH_REGISTER"
+	case D3D11_TRACE_CONSTANT_BUFFER:
+		return "D3D11_TRACE_CONSTANT_BUFFER"
+	case D3D11_TRACE_IMMEDIATE32:
+		return "D3D11_TRACE_IMMEDIATE32"
+	case D3D11_TRACE_SAMPLER:
+		return "D3D11_TRACE_SAMPLER"
+	case D3D11_TRACE_RESOURCE:
+		return "D3D11_TRACE_RESOURCE"
+	case D3D11_TRACE_RASTERIZER:
+		return "D3D11_TRACE_RASTERIZER"
+	case D3D11_TRACE_OUTPUT_COVERAGE_MASK:
+		return "D3D11_TRACE_OUTPUT_COVERAGE_MASK"
+	case D3D11_TRACE_STREAM:
+		return "D3D11_TRACE_STREAM"
+	case D3D11_TRACE_THIS_POINTER:
+		return "D3D11_TRACE_THIS_POINTER"
+	case D3D11_TRACE_OUTPUT_CONTROL_POINT_ID_REGISTER:
+		return "D3D11_TRACE_OUTPUT_CONTROL_POINT_ID_REGISTER"
+	case D3D11_TRACE_INPUT_FORK_INSTANCE_ID_REGISTER:
+		return "D3D11_TRACE_INPUT_FORK_INSTANCE_ID_REGISTER"
+	case D3D11_TRACE_INPUT_JOIN_INSTANCE_ID_REGISTER:
+		return "D3D11_TRACE_INPUT_JOIN_INSTANCE_ID_REGISTER"
+	case D3D11_TRACE_INPUT_CONTROL_POINT_REGISTER:
+		return "D3D11_TRACE_INPUT_CONTROL_POINT_REGISTER"
+	case D3D11_TRACE_OUTPUT_CONTROL_POINT_REGISTER:
+		return "D3D11_TRACE_OUTPUT_CONTROL_POINT_REGISTER"
+	case D3D11_TRACE_INPUT_PATCH_CONSTANT_REGISTER:
+		return "D3D11_TRACE_INPUT_PATCH_CONSTANT_REGISTER"
+	case D3D11_TRACE_INPUT_DOMAIN_POINT_REGISTER:
+		return "D3D11_TRACE_INPUT_DOMAIN_POINT_REGISTER"
+	case D3D11_TRACE_UNORDERED_ACCESS_VIEW:
+		return "D3D11_TRACE_UNORDERED_ACCESS_VIEW"
+	case D3D11_TRACE_THREAD_GROUP_SHARED_MEMORY:
+		return "D3D11_TRACE_THREAD_GROUP_SHARED_MEMORY"
+	case D3D11_TRACE_INPUT_THREAD_ID_REGISTER:
+		return "D3D11_TRACE_INPUT_THREAD_ID_REGISTER"
+	case D3D11_TRACE_INPUT_THREAD_GROUP_ID_REGISTER:
+		return "D3D11_TRACE_INPUT_THREAD_GROUP_ID_REGISTER"
+	case D3D11_TRACE_INPUT_THREAD_ID_IN_GROUP_REGISTER:
+		return "D3D11_TRACE_INPUT_THREAD_ID_IN_GROUP_REGISTER"
+	case D3D11_TRACE_INPUT_COVERAGE_MASK_REGISTER:
+		return "D3D11_TRACE_INPUT_COVERAGE_MASK_REGISTER"
+	case D3D11_TRACE_INPUT_THREAD_ID_IN_GROUP_FLATTENED_REGISTER:
+		return "D3D11_TRACE_INPUT_THREAD_ID_IN_GROUP_FLATTENED_REGISTER"
+	case D3D11_TRACE_INPUT_GS_INSTANCE_ID_REGISTER:
+		return "D3D11_TRACE_INPUT_GS_INSTANCE_ID_REGISTER"
+	case D3D11_TRACE_OUTPUT_DEPTH_GREATER_EQUAL_REGISTER:
+		return "D3D11_TRACE_OUTPUT_DEPTH_GREATER_EQUAL_REGISTER"
+	case D3D11_TRACE_OUTPUT_DEPTH_LESS_EQUAL_REGISTER:
+		return "D3D11_TRACE_OUTPUT_DEPTH_LESS_EQUAL_REGISTER"
+	case D3D11_TRACE_IMMEDIATE64:
+		return "D3D11_TRACE_IMMEDIATE64"
+	case D3D11_TRACE_INPUT_CYCLE_COUNTER_REGISTER:
+		return "D3D11_TRACE_INPUT_CYCLE_COUNTER_REGISTER"
+	case D3D11_TRACE_INTERFACE_POINTER:
+		return "D3D11_TRACE_INTERFACE_POINTER"
+	default:
+		return fmt.Sprintf("D3D11_TRACE_REGISTER_TYPE(%d)", int32(e))
+	}
+}
+
 // D3D11_UAV_DIMENSION: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_uav_dimension
 type D3D11_UAV_DIMENSION int32
 
@@ -2255,6 +6585,29 @@ const (
 	D3D11_UAV_DIMENSION_TEXTURE3D      D3D11_UAV_DIMENSION = 8
 )
 
+// String returns the D3D11_UAV_DIMENSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_UAV_DIMENSION) String() string {
+	switch e {
+	case D3D11_UAV_DIMENSION_UNKNOWN:
+		return "D3D11_UAV_DIMENSION_UNKNOWN"
+	case D3D11_UAV_DIMENSION_BUFFER:
+		return "D3D11_UAV_DIMENSION_BUFFER"
+	case D3D11_UAV_DIMENSION_TEXTURE1D:
+		return "D3D11_UAV_DIMENSION_TEXTURE1D"
+	case D3D11_UAV_DIMENSION_TEXTURE1DARRAY:
+		return "D3D11_UAV_DIMENSION_TEXTURE1DARRAY"
+	case D3D11_UAV_DIMENSION_TEXTURE2D:
+		return "D3D11_UAV_DIMENSION_TEXTURE2D"
+	case D3D11_UAV_DIMENSION_TEXTURE2DARRAY:
+		return "D3D11_UAV_DIMENSION_TEXTURE2DARRAY"
+	case D3D11_UAV_DIMENSION_TEXTURE3D:
+		return "D3D11_UAV_DIMENSION_TEXTURE3D"
+	default:
+		return fmt.Sprintf("D3D11_UAV_DIMENSION(%d)", int32(e))
+	}
+}
+
 // D3D11_USAGE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_usage
 type D3D11_USAGE int32
 
@@ -2265,6 +6618,23 @@ const (
 	D3D11_USAGE_STAGING   D3D11_USAGE = 3
 )
 
+// String returns the D3D11_USAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_USAGE) String() string {
+	switch e {
+	case D3D11_USAGE_DEFAULT:
+		return "D3D11_USAGE_DEFAULT"
+	case D3D11_USAGE_IMMUTABLE:
+		return "D3D11_USAGE_IMMUTABLE"
+	case D3D11_USAGE_DYNAMIC:
+		return "D3D11_USAGE_DYNAMIC"
+	case D3D11_USAGE_STAGING:
+		return "D3D11_USAGE_STAGING"
+	default:
+		return fmt.Sprintf("D3D11_USAGE(%d)", int32(e))
+	}
+}
+
 // D3D11_VDOV_DIMENSION: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_vdov_dimension
 type D3D11_VDOV_DIMENSION int32
 
@@ -2272,6 +6642,19 @@ const (
 	D3D11_VDOV_DIMENSION_UNKNOWN   D3D11_VDOV_DIMENSION = 0
 	D3D11_VDOV_DIMENSION_TEXTURE2D D3D11_VDOV_DIMENSION = 1
 )
+
+// String returns the D3D11_VDOV_DIMENSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VDOV_DIMENSION) String() string {
+	switch e {
+	case D3D11_VDOV_DIMENSION_UNKNOWN:
+		return "D3D11_VDOV_DIMENSION_UNKNOWN"
+	case D3D11_VDOV_DIMENSION_TEXTURE2D:
+		return "D3D11_VDOV_DIMENSION_TEXTURE2D"
+	default:
+		return fmt.Sprintf("D3D11_VDOV_DIMENSION(%d)", int32(e))
+	}
+}
 
 // D3D11_VIDEO_DECODER_BUFFER_TYPE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_decoder_buffer_type
 type D3D11_VIDEO_DECODER_BUFFER_TYPE int32
@@ -2289,6 +6672,35 @@ const (
 	D3D11_VIDEO_DECODER_BUFFER_HUFFMAN_TABLE               D3D11_VIDEO_DECODER_BUFFER_TYPE = 9
 )
 
+// String returns the D3D11_VIDEO_DECODER_BUFFER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_DECODER_BUFFER_TYPE) String() string {
+	switch e {
+	case D3D11_VIDEO_DECODER_BUFFER_PICTURE_PARAMETERS:
+		return "D3D11_VIDEO_DECODER_BUFFER_PICTURE_PARAMETERS"
+	case D3D11_VIDEO_DECODER_BUFFER_MACROBLOCK_CONTROL:
+		return "D3D11_VIDEO_DECODER_BUFFER_MACROBLOCK_CONTROL"
+	case D3D11_VIDEO_DECODER_BUFFER_RESIDUAL_DIFFERENCE:
+		return "D3D11_VIDEO_DECODER_BUFFER_RESIDUAL_DIFFERENCE"
+	case D3D11_VIDEO_DECODER_BUFFER_DEBLOCKING_CONTROL:
+		return "D3D11_VIDEO_DECODER_BUFFER_DEBLOCKING_CONTROL"
+	case D3D11_VIDEO_DECODER_BUFFER_INVERSE_QUANTIZATION_MATRIX:
+		return "D3D11_VIDEO_DECODER_BUFFER_INVERSE_QUANTIZATION_MATRIX"
+	case D3D11_VIDEO_DECODER_BUFFER_SLICE_CONTROL:
+		return "D3D11_VIDEO_DECODER_BUFFER_SLICE_CONTROL"
+	case D3D11_VIDEO_DECODER_BUFFER_BITSTREAM:
+		return "D3D11_VIDEO_DECODER_BUFFER_BITSTREAM"
+	case D3D11_VIDEO_DECODER_BUFFER_MOTION_VECTOR:
+		return "D3D11_VIDEO_DECODER_BUFFER_MOTION_VECTOR"
+	case D3D11_VIDEO_DECODER_BUFFER_FILM_GRAIN:
+		return "D3D11_VIDEO_DECODER_BUFFER_FILM_GRAIN"
+	case D3D11_VIDEO_DECODER_BUFFER_HUFFMAN_TABLE:
+		return "D3D11_VIDEO_DECODER_BUFFER_HUFFMAN_TABLE"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_DECODER_BUFFER_TYPE(%d)", int32(e))
+	}
+}
+
 // D3D11_VIDEO_DECODER_CAPS: https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_video_decoder_caps
 type D3D11_VIDEO_DECODER_CAPS int32
 
@@ -2299,6 +6711,25 @@ const (
 	D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE_REQUIRED D3D11_VIDEO_DECODER_CAPS = 8
 	D3D11_VIDEO_DECODER_CAPS_UNSUPPORTED         D3D11_VIDEO_DECODER_CAPS = 16
 )
+
+// String returns the D3D11_VIDEO_DECODER_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_DECODER_CAPS) String() string {
+	switch e {
+	case D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE:
+		return "D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE"
+	case D3D11_VIDEO_DECODER_CAPS_NON_REAL_TIME:
+		return "D3D11_VIDEO_DECODER_CAPS_NON_REAL_TIME"
+	case D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE_DYNAMIC:
+		return "D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE_DYNAMIC"
+	case D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE_REQUIRED:
+		return "D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE_REQUIRED"
+	case D3D11_VIDEO_DECODER_CAPS_UNSUPPORTED:
+		return "D3D11_VIDEO_DECODER_CAPS_UNSUPPORTED"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_DECODER_CAPS(%d)", int32(e))
+	}
+}
 
 // D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT: https://learn.microsoft.com/windows/win32/api/d3d11_4/ne-d3d11_4-d3d11_video_decoder_histogram_component
 type D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT int32
@@ -2313,7 +6744,25 @@ const (
 	D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_A D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT = 3
 )
 
+// String returns the D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT) String() string {
+	switch e {
+	case D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_Y:
+		return "D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_Y"
+	case D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_U:
+		return "D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_U"
+	case D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_V:
+		return "D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_V"
+	case D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_A:
+		return "D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_A"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT(%d)", int32(e))
+	}
+}
+
 // D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS: https://learn.microsoft.com/windows/win32/api/d3d11_4/ne-d3d11_4-d3d11_video_decoder_histogram_component_flags
+// Bitmask — values may be combined with |.
 type D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS int32
 
 const (
@@ -2327,6 +6776,37 @@ const (
 	D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_A    D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS = 8
 )
 
+// String returns the D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAGS) String() string {
+	var parts []string
+	if e&D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_Y != 0 {
+		parts = append(parts, "D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_Y")
+	}
+	if e&D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_U != 0 {
+		parts = append(parts, "D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_U")
+	}
+	if e&D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_V != 0 {
+		parts = append(parts, "D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_V")
+	}
+	if e&D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_R != 0 {
+		parts = append(parts, "D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_R")
+	}
+	if e&D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_G != 0 {
+		parts = append(parts, "D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_G")
+	}
+	if e&D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_B != 0 {
+		parts = append(parts, "D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_B")
+	}
+	if e&D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_A != 0 {
+		parts = append(parts, "D3D11_VIDEO_DECODER_HISTOGRAM_COMPONENT_FLAG_A")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // D3D11_VIDEO_FRAME_FORMAT: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_frame_format
 type D3D11_VIDEO_FRAME_FORMAT int32
 
@@ -2335,6 +6815,21 @@ const (
 	D3D11_VIDEO_FRAME_FORMAT_INTERLACED_TOP_FIELD_FIRST    D3D11_VIDEO_FRAME_FORMAT = 1
 	D3D11_VIDEO_FRAME_FORMAT_INTERLACED_BOTTOM_FIELD_FIRST D3D11_VIDEO_FRAME_FORMAT = 2
 )
+
+// String returns the D3D11_VIDEO_FRAME_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_FRAME_FORMAT) String() string {
+	switch e {
+	case D3D11_VIDEO_FRAME_FORMAT_PROGRESSIVE:
+		return "D3D11_VIDEO_FRAME_FORMAT_PROGRESSIVE"
+	case D3D11_VIDEO_FRAME_FORMAT_INTERLACED_TOP_FIELD_FIRST:
+		return "D3D11_VIDEO_FRAME_FORMAT_INTERLACED_TOP_FIELD_FIRST"
+	case D3D11_VIDEO_FRAME_FORMAT_INTERLACED_BOTTOM_FIELD_FIRST:
+		return "D3D11_VIDEO_FRAME_FORMAT_INTERLACED_BOTTOM_FIELD_FIRST"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_FRAME_FORMAT(%d)", int32(e))
+	}
+}
 
 // D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_alpha_fill_mode
 type D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE int32
@@ -2345,6 +6840,23 @@ const (
 	D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_DESTINATION   D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE = 2
 	D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_SOURCE_STREAM D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE = 3
 )
+
+// String returns the D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_OPAQUE:
+		return "D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_OPAQUE"
+	case D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_BACKGROUND:
+		return "D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_BACKGROUND"
+	case D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_DESTINATION:
+		return "D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_DESTINATION"
+	case D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_SOURCE_STREAM:
+		return "D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_SOURCE_STREAM"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE(%d)", int32(e))
+	}
+}
 
 // D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_auto_stream_caps
 type D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS int32
@@ -2360,6 +6872,31 @@ const (
 	D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_ANAMORPHIC_SCALING  D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS = 128
 )
 
+// String returns the D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_DENOISE:
+		return "D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_DENOISE"
+	case D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_DERINGING:
+		return "D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_DERINGING"
+	case D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_EDGE_ENHANCEMENT:
+		return "D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_EDGE_ENHANCEMENT"
+	case D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_COLOR_CORRECTION:
+		return "D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_COLOR_CORRECTION"
+	case D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_FLESH_TONE_MAPPING:
+		return "D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_FLESH_TONE_MAPPING"
+	case D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_IMAGE_STABILIZATION:
+		return "D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_IMAGE_STABILIZATION"
+	case D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_SUPER_RESOLUTION:
+		return "D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_SUPER_RESOLUTION"
+	case D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_ANAMORPHIC_SCALING:
+		return "D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS_ANAMORPHIC_SCALING"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_AUTO_STREAM_CAPS(%d)", int32(e))
+	}
+}
+
 // D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS: https://learn.microsoft.com/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_video_processor_behavior_hints
 type D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS int32
 
@@ -2369,6 +6906,23 @@ const (
 	D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_COLOR_SPACE_CONVERSION D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS = 4
 	D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_TRIPLE_BUFFER_OUTPUT                      D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS = 8
 )
+
+// String returns the D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_ROTATION:
+		return "D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_ROTATION"
+	case D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_RESIZE:
+		return "D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_RESIZE"
+	case D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_COLOR_SPACE_CONVERSION:
+		return "D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_MULTIPLANE_OVERLAY_COLOR_SPACE_CONVERSION"
+	case D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_TRIPLE_BUFFER_OUTPUT:
+		return "D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINT_TRIPLE_BUFFER_OUTPUT"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_BEHAVIOR_HINTS(%d)", int32(e))
+	}
+}
 
 // D3D11_VIDEO_PROCESSOR_DEVICE_CAPS: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_device_caps
 type D3D11_VIDEO_PROCESSOR_DEVICE_CAPS int32
@@ -2380,6 +6934,25 @@ const (
 	D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_YCbCr_MATRIX_CONVERSION D3D11_VIDEO_PROCESSOR_DEVICE_CAPS = 8
 	D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_NOMINAL_RANGE           D3D11_VIDEO_PROCESSOR_DEVICE_CAPS = 16
 )
+
+// String returns the D3D11_VIDEO_PROCESSOR_DEVICE_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_DEVICE_CAPS) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_LINEAR_SPACE:
+		return "D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_LINEAR_SPACE"
+	case D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_xvYCC:
+		return "D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_xvYCC"
+	case D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_RGB_RANGE_CONVERSION:
+		return "D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_RGB_RANGE_CONVERSION"
+	case D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_YCbCr_MATRIX_CONVERSION:
+		return "D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_YCbCr_MATRIX_CONVERSION"
+	case D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_NOMINAL_RANGE:
+		return "D3D11_VIDEO_PROCESSOR_DEVICE_CAPS_NOMINAL_RANGE"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_DEVICE_CAPS(%d)", int32(e))
+	}
+}
 
 // D3D11_VIDEO_PROCESSOR_FEATURE_CAPS: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_feature_caps
 type D3D11_VIDEO_PROCESSOR_FEATURE_CAPS int32
@@ -2399,6 +6972,39 @@ const (
 	D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_METADATA_HDR10     D3D11_VIDEO_PROCESSOR_FEATURE_CAPS = 2048
 )
 
+// String returns the D3D11_VIDEO_PROCESSOR_FEATURE_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_FEATURE_CAPS) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ALPHA_FILL:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ALPHA_FILL"
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_CONSTRICTION:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_CONSTRICTION"
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_LUMA_KEY:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_LUMA_KEY"
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ALPHA_PALETTE:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ALPHA_PALETTE"
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_LEGACY:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_LEGACY"
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_STEREO:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_STEREO"
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ROTATION:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ROTATION"
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ALPHA_STREAM:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_ALPHA_STREAM"
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_PIXEL_ASPECT_RATIO:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_PIXEL_ASPECT_RATIO"
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_MIRROR:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_MIRROR"
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_SHADER_USAGE:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_SHADER_USAGE"
+	case D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_METADATA_HDR10:
+		return "D3D11_VIDEO_PROCESSOR_FEATURE_CAPS_METADATA_HDR10"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_FEATURE_CAPS(%d)", int32(e))
+	}
+}
+
 // D3D11_VIDEO_PROCESSOR_FILTER: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_filter
 type D3D11_VIDEO_PROCESSOR_FILTER int32
 
@@ -2412,6 +7018,31 @@ const (
 	D3D11_VIDEO_PROCESSOR_FILTER_ANAMORPHIC_SCALING D3D11_VIDEO_PROCESSOR_FILTER = 6
 	D3D11_VIDEO_PROCESSOR_FILTER_STEREO_ADJUSTMENT  D3D11_VIDEO_PROCESSOR_FILTER = 7
 )
+
+// String returns the D3D11_VIDEO_PROCESSOR_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_FILTER) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_FILTER_BRIGHTNESS:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_BRIGHTNESS"
+	case D3D11_VIDEO_PROCESSOR_FILTER_CONTRAST:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_CONTRAST"
+	case D3D11_VIDEO_PROCESSOR_FILTER_HUE:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_HUE"
+	case D3D11_VIDEO_PROCESSOR_FILTER_SATURATION:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_SATURATION"
+	case D3D11_VIDEO_PROCESSOR_FILTER_NOISE_REDUCTION:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_NOISE_REDUCTION"
+	case D3D11_VIDEO_PROCESSOR_FILTER_EDGE_ENHANCEMENT:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_EDGE_ENHANCEMENT"
+	case D3D11_VIDEO_PROCESSOR_FILTER_ANAMORPHIC_SCALING:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_ANAMORPHIC_SCALING"
+	case D3D11_VIDEO_PROCESSOR_FILTER_STEREO_ADJUSTMENT:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_STEREO_ADJUSTMENT"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_FILTER(%d)", int32(e))
+	}
+}
 
 // D3D11_VIDEO_PROCESSOR_FILTER_CAPS: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_filter_caps
 type D3D11_VIDEO_PROCESSOR_FILTER_CAPS int32
@@ -2427,6 +7058,31 @@ const (
 	D3D11_VIDEO_PROCESSOR_FILTER_CAPS_STEREO_ADJUSTMENT  D3D11_VIDEO_PROCESSOR_FILTER_CAPS = 128
 )
 
+// String returns the D3D11_VIDEO_PROCESSOR_FILTER_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_FILTER_CAPS) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_FILTER_CAPS_BRIGHTNESS:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_CAPS_BRIGHTNESS"
+	case D3D11_VIDEO_PROCESSOR_FILTER_CAPS_CONTRAST:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_CAPS_CONTRAST"
+	case D3D11_VIDEO_PROCESSOR_FILTER_CAPS_HUE:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_CAPS_HUE"
+	case D3D11_VIDEO_PROCESSOR_FILTER_CAPS_SATURATION:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_CAPS_SATURATION"
+	case D3D11_VIDEO_PROCESSOR_FILTER_CAPS_NOISE_REDUCTION:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_CAPS_NOISE_REDUCTION"
+	case D3D11_VIDEO_PROCESSOR_FILTER_CAPS_EDGE_ENHANCEMENT:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_CAPS_EDGE_ENHANCEMENT"
+	case D3D11_VIDEO_PROCESSOR_FILTER_CAPS_ANAMORPHIC_SCALING:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_CAPS_ANAMORPHIC_SCALING"
+	case D3D11_VIDEO_PROCESSOR_FILTER_CAPS_STEREO_ADJUSTMENT:
+		return "D3D11_VIDEO_PROCESSOR_FILTER_CAPS_STEREO_ADJUSTMENT"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_FILTER_CAPS(%d)", int32(e))
+	}
+}
+
 // D3D11_VIDEO_PROCESSOR_FORMAT_CAPS: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_format_caps
 type D3D11_VIDEO_PROCESSOR_FORMAT_CAPS int32
 
@@ -2437,6 +7093,23 @@ const (
 	D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_PALETTE_INTERLACED D3D11_VIDEO_PROCESSOR_FORMAT_CAPS = 8
 )
 
+// String returns the D3D11_VIDEO_PROCESSOR_FORMAT_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_FORMAT_CAPS) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_INTERLACED:
+		return "D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_INTERLACED"
+	case D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_PROCAMP:
+		return "D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_PROCAMP"
+	case D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_LUMA_KEY:
+		return "D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_LUMA_KEY"
+	case D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_PALETTE_INTERLACED:
+		return "D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_PALETTE_INTERLACED"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_FORMAT_CAPS(%d)", int32(e))
+	}
+}
+
 // D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_format_support
 type D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT int32
 
@@ -2444,6 +7117,19 @@ const (
 	D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT_INPUT  D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT = 1
 	D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT_OUTPUT D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT = 2
 )
+
+// String returns the D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT_INPUT:
+		return "D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT_INPUT"
+	case D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT_OUTPUT:
+		return "D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT_OUTPUT"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_FORMAT_SUPPORT(%d)", int32(e))
+	}
+}
 
 // D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_itelecine_caps
 type D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS int32
@@ -2461,6 +7147,35 @@ const (
 	D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_OTHER        D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS = -2147483648
 )
 
+// String returns the D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_32:
+		return "D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_32"
+	case D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_22:
+		return "D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_22"
+	case D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_2224:
+		return "D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_2224"
+	case D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_2332:
+		return "D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_2332"
+	case D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_32322:
+		return "D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_32322"
+	case D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_55:
+		return "D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_55"
+	case D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_64:
+		return "D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_64"
+	case D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_87:
+		return "D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_87"
+	case D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_222222222223:
+		return "D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_222222222223"
+	case D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_OTHER:
+		return "D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS_OTHER"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_ITELECINE_CAPS(%d)", int32(e))
+	}
+}
+
 // D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_nominal_range
 type D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE int32
 
@@ -2470,6 +7185,21 @@ const (
 	D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_0_255     D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE = 2
 )
 
+// String returns the D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_UNDEFINED:
+		return "D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_UNDEFINED"
+	case D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_16_235:
+		return "D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_16_235"
+	case D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_0_255:
+		return "D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE_0_255"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_NOMINAL_RANGE(%d)", int32(e))
+	}
+}
+
 // D3D11_VIDEO_PROCESSOR_OUTPUT_RATE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_output_rate
 type D3D11_VIDEO_PROCESSOR_OUTPUT_RATE int32
 
@@ -2478,6 +7208,21 @@ const (
 	D3D11_VIDEO_PROCESSOR_OUTPUT_RATE_HALF   D3D11_VIDEO_PROCESSOR_OUTPUT_RATE = 1
 	D3D11_VIDEO_PROCESSOR_OUTPUT_RATE_CUSTOM D3D11_VIDEO_PROCESSOR_OUTPUT_RATE = 2
 )
+
+// String returns the D3D11_VIDEO_PROCESSOR_OUTPUT_RATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_OUTPUT_RATE) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_OUTPUT_RATE_NORMAL:
+		return "D3D11_VIDEO_PROCESSOR_OUTPUT_RATE_NORMAL"
+	case D3D11_VIDEO_PROCESSOR_OUTPUT_RATE_HALF:
+		return "D3D11_VIDEO_PROCESSOR_OUTPUT_RATE_HALF"
+	case D3D11_VIDEO_PROCESSOR_OUTPUT_RATE_CUSTOM:
+		return "D3D11_VIDEO_PROCESSOR_OUTPUT_RATE_CUSTOM"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_OUTPUT_RATE(%d)", int32(e))
+	}
+}
 
 // D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_processor_caps
 type D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS int32
@@ -2491,6 +7236,27 @@ const (
 	D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_FRAME_RATE_CONVERSION           D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS = 32
 )
 
+// String returns the D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_BLEND:
+		return "D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_BLEND"
+	case D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_BOB:
+		return "D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_BOB"
+	case D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_ADAPTIVE:
+		return "D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_ADAPTIVE"
+	case D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_MOTION_COMPENSATION:
+		return "D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_DEINTERLACE_MOTION_COMPENSATION"
+	case D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_INVERSE_TELECINE:
+		return "D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_INVERSE_TELECINE"
+	case D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_FRAME_RATE_CONVERSION:
+		return "D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS_FRAME_RATE_CONVERSION"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_PROCESSOR_CAPS(%d)", int32(e))
+	}
+}
+
 // D3D11_VIDEO_PROCESSOR_ROTATION: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_rotation
 type D3D11_VIDEO_PROCESSOR_ROTATION int32
 
@@ -2500,6 +7266,23 @@ const (
 	D3D11_VIDEO_PROCESSOR_ROTATION_180      D3D11_VIDEO_PROCESSOR_ROTATION = 2
 	D3D11_VIDEO_PROCESSOR_ROTATION_270      D3D11_VIDEO_PROCESSOR_ROTATION = 3
 )
+
+// String returns the D3D11_VIDEO_PROCESSOR_ROTATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_ROTATION) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_ROTATION_IDENTITY:
+		return "D3D11_VIDEO_PROCESSOR_ROTATION_IDENTITY"
+	case D3D11_VIDEO_PROCESSOR_ROTATION_90:
+		return "D3D11_VIDEO_PROCESSOR_ROTATION_90"
+	case D3D11_VIDEO_PROCESSOR_ROTATION_180:
+		return "D3D11_VIDEO_PROCESSOR_ROTATION_180"
+	case D3D11_VIDEO_PROCESSOR_ROTATION_270:
+		return "D3D11_VIDEO_PROCESSOR_ROTATION_270"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_ROTATION(%d)", int32(e))
+	}
+}
 
 // D3D11_VIDEO_PROCESSOR_STEREO_CAPS: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_stereo_caps
 type D3D11_VIDEO_PROCESSOR_STEREO_CAPS int32
@@ -2512,6 +7295,25 @@ const (
 	D3D11_VIDEO_PROCESSOR_STEREO_CAPS_FLIP_MODE          D3D11_VIDEO_PROCESSOR_STEREO_CAPS = 16
 )
 
+// String returns the D3D11_VIDEO_PROCESSOR_STEREO_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_STEREO_CAPS) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_STEREO_CAPS_MONO_OFFSET:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_CAPS_MONO_OFFSET"
+	case D3D11_VIDEO_PROCESSOR_STEREO_CAPS_ROW_INTERLEAVED:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_CAPS_ROW_INTERLEAVED"
+	case D3D11_VIDEO_PROCESSOR_STEREO_CAPS_COLUMN_INTERLEAVED:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_CAPS_COLUMN_INTERLEAVED"
+	case D3D11_VIDEO_PROCESSOR_STEREO_CAPS_CHECKERBOARD:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_CAPS_CHECKERBOARD"
+	case D3D11_VIDEO_PROCESSOR_STEREO_CAPS_FLIP_MODE:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_CAPS_FLIP_MODE"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_STEREO_CAPS(%d)", int32(e))
+	}
+}
+
 // D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_stereo_flip_mode
 type D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE int32
 
@@ -2520,6 +7322,21 @@ const (
 	D3D11_VIDEO_PROCESSOR_STEREO_FLIP_FRAME0 D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE = 1
 	D3D11_VIDEO_PROCESSOR_STEREO_FLIP_FRAME1 D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE = 2
 )
+
+// String returns the D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_STEREO_FLIP_NONE:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_FLIP_NONE"
+	case D3D11_VIDEO_PROCESSOR_STEREO_FLIP_FRAME0:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_FLIP_FRAME0"
+	case D3D11_VIDEO_PROCESSOR_STEREO_FLIP_FRAME1:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_FLIP_FRAME1"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE(%d)", int32(e))
+	}
+}
 
 // D3D11_VIDEO_PROCESSOR_STEREO_FORMAT: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_processor_stereo_format
 type D3D11_VIDEO_PROCESSOR_STEREO_FORMAT int32
@@ -2535,6 +7352,31 @@ const (
 	D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_CHECKERBOARD       D3D11_VIDEO_PROCESSOR_STEREO_FORMAT = 7
 )
 
+// String returns the D3D11_VIDEO_PROCESSOR_STEREO_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_PROCESSOR_STEREO_FORMAT) String() string {
+	switch e {
+	case D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_MONO:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_MONO"
+	case D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_HORIZONTAL:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_HORIZONTAL"
+	case D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_VERTICAL:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_VERTICAL"
+	case D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_SEPARATE:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_SEPARATE"
+	case D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_MONO_OFFSET:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_MONO_OFFSET"
+	case D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_ROW_INTERLEAVED:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_ROW_INTERLEAVED"
+	case D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_COLUMN_INTERLEAVED:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_COLUMN_INTERLEAVED"
+	case D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_CHECKERBOARD:
+		return "D3D11_VIDEO_PROCESSOR_STEREO_FORMAT_CHECKERBOARD"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_PROCESSOR_STEREO_FORMAT(%d)", int32(e))
+	}
+}
+
 // D3D11_VIDEO_USAGE: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_video_usage
 type D3D11_VIDEO_USAGE int32
 
@@ -2544,6 +7386,21 @@ const (
 	D3D11_VIDEO_USAGE_OPTIMAL_QUALITY D3D11_VIDEO_USAGE = 2
 )
 
+// String returns the D3D11_VIDEO_USAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VIDEO_USAGE) String() string {
+	switch e {
+	case D3D11_VIDEO_USAGE_PLAYBACK_NORMAL:
+		return "D3D11_VIDEO_USAGE_PLAYBACK_NORMAL"
+	case D3D11_VIDEO_USAGE_OPTIMAL_SPEED:
+		return "D3D11_VIDEO_USAGE_OPTIMAL_SPEED"
+	case D3D11_VIDEO_USAGE_OPTIMAL_QUALITY:
+		return "D3D11_VIDEO_USAGE_OPTIMAL_QUALITY"
+	default:
+		return fmt.Sprintf("D3D11_VIDEO_USAGE(%d)", int32(e))
+	}
+}
+
 // D3D11_VPIV_DIMENSION: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_vpiv_dimension
 type D3D11_VPIV_DIMENSION int32
 
@@ -2551,6 +7408,19 @@ const (
 	D3D11_VPIV_DIMENSION_UNKNOWN   D3D11_VPIV_DIMENSION = 0
 	D3D11_VPIV_DIMENSION_TEXTURE2D D3D11_VPIV_DIMENSION = 1
 )
+
+// String returns the D3D11_VPIV_DIMENSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VPIV_DIMENSION) String() string {
+	switch e {
+	case D3D11_VPIV_DIMENSION_UNKNOWN:
+		return "D3D11_VPIV_DIMENSION_UNKNOWN"
+	case D3D11_VPIV_DIMENSION_TEXTURE2D:
+		return "D3D11_VPIV_DIMENSION_TEXTURE2D"
+	default:
+		return fmt.Sprintf("D3D11_VPIV_DIMENSION(%d)", int32(e))
+	}
+}
 
 // D3D11_VPOV_DIMENSION: https://learn.microsoft.com/windows/win32/api/d3d11/ne-d3d11-d3d11_vpov_dimension
 type D3D11_VPOV_DIMENSION int32
@@ -2561,12 +7431,38 @@ const (
 	D3D11_VPOV_DIMENSION_TEXTURE2DARRAY D3D11_VPOV_DIMENSION = 2
 )
 
+// String returns the D3D11_VPOV_DIMENSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3D11_VPOV_DIMENSION) String() string {
+	switch e {
+	case D3D11_VPOV_DIMENSION_UNKNOWN:
+		return "D3D11_VPOV_DIMENSION_UNKNOWN"
+	case D3D11_VPOV_DIMENSION_TEXTURE2D:
+		return "D3D11_VPOV_DIMENSION_TEXTURE2D"
+	case D3D11_VPOV_DIMENSION_TEXTURE2DARRAY:
+		return "D3D11_VPOV_DIMENSION_TEXTURE2DARRAY"
+	default:
+		return fmt.Sprintf("D3D11_VPOV_DIMENSION(%d)", int32(e))
+	}
+}
+
 // D3DX11_FFT_CREATE_FLAG: https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_fft_create_flag
 type D3DX11_FFT_CREATE_FLAG int32
 
 const (
 	D3DX11_FFT_CREATE_FLAG_NO_PRECOMPUTE_BUFFERS D3DX11_FFT_CREATE_FLAG = 1
 )
+
+// String returns the D3DX11_FFT_CREATE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DX11_FFT_CREATE_FLAG) String() string {
+	switch e {
+	case D3DX11_FFT_CREATE_FLAG_NO_PRECOMPUTE_BUFFERS:
+		return "D3DX11_FFT_CREATE_FLAG_NO_PRECOMPUTE_BUFFERS"
+	default:
+		return fmt.Sprintf("D3DX11_FFT_CREATE_FLAG(%d)", int32(e))
+	}
+}
 
 // D3DX11_FFT_DATA_TYPE: https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_fft_data_type
 type D3DX11_FFT_DATA_TYPE int32
@@ -2575,6 +7471,19 @@ const (
 	D3DX11_FFT_DATA_TYPE_REAL    D3DX11_FFT_DATA_TYPE = 0
 	D3DX11_FFT_DATA_TYPE_COMPLEX D3DX11_FFT_DATA_TYPE = 1
 )
+
+// String returns the D3DX11_FFT_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DX11_FFT_DATA_TYPE) String() string {
+	switch e {
+	case D3DX11_FFT_DATA_TYPE_REAL:
+		return "D3DX11_FFT_DATA_TYPE_REAL"
+	case D3DX11_FFT_DATA_TYPE_COMPLEX:
+		return "D3DX11_FFT_DATA_TYPE_COMPLEX"
+	default:
+		return fmt.Sprintf("D3DX11_FFT_DATA_TYPE(%d)", int32(e))
+	}
+}
 
 // D3DX11_FFT_DIM_MASK: https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_fft_dim_mask
 type D3DX11_FFT_DIM_MASK int32
@@ -2585,6 +7494,21 @@ const (
 	D3DX11_FFT_DIM_MASK_3D D3DX11_FFT_DIM_MASK = 7
 )
 
+// String returns the D3DX11_FFT_DIM_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DX11_FFT_DIM_MASK) String() string {
+	switch e {
+	case D3DX11_FFT_DIM_MASK_1D:
+		return "D3DX11_FFT_DIM_MASK_1D"
+	case D3DX11_FFT_DIM_MASK_2D:
+		return "D3DX11_FFT_DIM_MASK_2D"
+	case D3DX11_FFT_DIM_MASK_3D:
+		return "D3DX11_FFT_DIM_MASK_3D"
+	default:
+		return fmt.Sprintf("D3DX11_FFT_DIM_MASK(%d)", int32(e))
+	}
+}
+
 // D3DX11_SCAN_DATA_TYPE: https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_scan_data_type
 type D3DX11_SCAN_DATA_TYPE int32
 
@@ -2594,6 +7518,21 @@ const (
 	D3DX11_SCAN_DATA_TYPE_UINT  D3DX11_SCAN_DATA_TYPE = 3
 )
 
+// String returns the D3DX11_SCAN_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DX11_SCAN_DATA_TYPE) String() string {
+	switch e {
+	case D3DX11_SCAN_DATA_TYPE_FLOAT:
+		return "D3DX11_SCAN_DATA_TYPE_FLOAT"
+	case D3DX11_SCAN_DATA_TYPE_INT:
+		return "D3DX11_SCAN_DATA_TYPE_INT"
+	case D3DX11_SCAN_DATA_TYPE_UINT:
+		return "D3DX11_SCAN_DATA_TYPE_UINT"
+	default:
+		return fmt.Sprintf("D3DX11_SCAN_DATA_TYPE(%d)", int32(e))
+	}
+}
+
 // D3DX11_SCAN_DIRECTION: https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_scan_direction
 type D3DX11_SCAN_DIRECTION int32
 
@@ -2601,6 +7540,19 @@ const (
 	D3DX11_SCAN_DIRECTION_FORWARD  D3DX11_SCAN_DIRECTION = 1
 	D3DX11_SCAN_DIRECTION_BACKWARD D3DX11_SCAN_DIRECTION = 2
 )
+
+// String returns the D3DX11_SCAN_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DX11_SCAN_DIRECTION) String() string {
+	switch e {
+	case D3DX11_SCAN_DIRECTION_FORWARD:
+		return "D3DX11_SCAN_DIRECTION_FORWARD"
+	case D3DX11_SCAN_DIRECTION_BACKWARD:
+		return "D3DX11_SCAN_DIRECTION_BACKWARD"
+	default:
+		return fmt.Sprintf("D3DX11_SCAN_DIRECTION(%d)", int32(e))
+	}
+}
 
 // D3DX11_SCAN_OPCODE: https://learn.microsoft.com/windows/win32/api/d3dcsx/ne-d3dcsx-d3dx11_scan_opcode
 type D3DX11_SCAN_OPCODE int32
@@ -2614,3 +7566,26 @@ const (
 	D3DX11_SCAN_OPCODE_OR  D3DX11_SCAN_OPCODE = 6
 	D3DX11_SCAN_OPCODE_XOR D3DX11_SCAN_OPCODE = 7
 )
+
+// String returns the D3DX11_SCAN_OPCODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e D3DX11_SCAN_OPCODE) String() string {
+	switch e {
+	case D3DX11_SCAN_OPCODE_ADD:
+		return "D3DX11_SCAN_OPCODE_ADD"
+	case D3DX11_SCAN_OPCODE_MIN:
+		return "D3DX11_SCAN_OPCODE_MIN"
+	case D3DX11_SCAN_OPCODE_MAX:
+		return "D3DX11_SCAN_OPCODE_MAX"
+	case D3DX11_SCAN_OPCODE_MUL:
+		return "D3DX11_SCAN_OPCODE_MUL"
+	case D3DX11_SCAN_OPCODE_AND:
+		return "D3DX11_SCAN_OPCODE_AND"
+	case D3DX11_SCAN_OPCODE_OR:
+		return "D3DX11_SCAN_OPCODE_OR"
+	case D3DX11_SCAN_OPCODE_XOR:
+		return "D3DX11_SCAN_OPCODE_XOR"
+	default:
+		return fmt.Sprintf("D3DX11_SCAN_OPCODE(%d)", int32(e))
+	}
+}

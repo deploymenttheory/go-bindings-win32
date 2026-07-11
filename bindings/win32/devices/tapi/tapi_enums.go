@@ -4,6 +4,10 @@
 
 package tapi
 
+import (
+	"fmt"
+)
+
 // ACDGROUP_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3cc/ne-tapi3cc-acdgroup_event
 type ACDGROUP_EVENT int32
 
@@ -12,6 +16,19 @@ const (
 	ACDGE_GROUP_REMOVED ACDGROUP_EVENT = 1
 )
 
+// String returns the ACDGROUP_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACDGROUP_EVENT) String() string {
+	switch e {
+	case ACDGE_NEW_GROUP:
+		return "ACDGE_NEW_GROUP"
+	case ACDGE_GROUP_REMOVED:
+		return "ACDGE_GROUP_REMOVED"
+	default:
+		return fmt.Sprintf("ACDGROUP_EVENT(%d)", int32(e))
+	}
+}
+
 // ACDQUEUE_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3cc/ne-tapi3cc-acdqueue_event
 type ACDQUEUE_EVENT int32
 
@@ -19,6 +36,19 @@ const (
 	ACDQE_NEW_QUEUE     ACDQUEUE_EVENT = 0
 	ACDQE_QUEUE_REMOVED ACDQUEUE_EVENT = 1
 )
+
+// String returns the ACDQUEUE_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACDQUEUE_EVENT) String() string {
+	switch e {
+	case ACDQE_NEW_QUEUE:
+		return "ACDQE_NEW_QUEUE"
+	case ACDQE_QUEUE_REMOVED:
+		return "ACDQE_QUEUE_REMOVED"
+	default:
+		return fmt.Sprintf("ACDQUEUE_EVENT(%d)", int32(e))
+	}
+}
 
 // ADDRESS_CAPABILITY: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-address_capability
 type ADDRESS_CAPABILITY int32
@@ -74,6 +104,111 @@ const (
 	AC_GENERATEDIGITDEFAULTDURATION ADDRESS_CAPABILITY = 47
 )
 
+// String returns the ADDRESS_CAPABILITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADDRESS_CAPABILITY) String() string {
+	switch e {
+	case AC_ADDRESSTYPES:
+		return "AC_ADDRESSTYPES"
+	case AC_BEARERMODES:
+		return "AC_BEARERMODES"
+	case AC_MAXACTIVECALLS:
+		return "AC_MAXACTIVECALLS"
+	case AC_MAXONHOLDCALLS:
+		return "AC_MAXONHOLDCALLS"
+	case AC_MAXONHOLDPENDINGCALLS:
+		return "AC_MAXONHOLDPENDINGCALLS"
+	case AC_MAXNUMCONFERENCE:
+		return "AC_MAXNUMCONFERENCE"
+	case AC_MAXNUMTRANSCONF:
+		return "AC_MAXNUMTRANSCONF"
+	case AC_MONITORDIGITSUPPORT:
+		return "AC_MONITORDIGITSUPPORT"
+	case AC_GENERATEDIGITSUPPORT:
+		return "AC_GENERATEDIGITSUPPORT"
+	case AC_GENERATETONEMODES:
+		return "AC_GENERATETONEMODES"
+	case AC_GENERATETONEMAXNUMFREQ:
+		return "AC_GENERATETONEMAXNUMFREQ"
+	case AC_MONITORTONEMAXNUMFREQ:
+		return "AC_MONITORTONEMAXNUMFREQ"
+	case AC_MONITORTONEMAXNUMENTRIES:
+		return "AC_MONITORTONEMAXNUMENTRIES"
+	case AC_DEVCAPFLAGS:
+		return "AC_DEVCAPFLAGS"
+	case AC_ANSWERMODES:
+		return "AC_ANSWERMODES"
+	case AC_LINEFEATURES:
+		return "AC_LINEFEATURES"
+	case AC_SETTABLEDEVSTATUS:
+		return "AC_SETTABLEDEVSTATUS"
+	case AC_PARKSUPPORT:
+		return "AC_PARKSUPPORT"
+	case AC_CALLERIDSUPPORT:
+		return "AC_CALLERIDSUPPORT"
+	case AC_CALLEDIDSUPPORT:
+		return "AC_CALLEDIDSUPPORT"
+	case AC_CONNECTEDIDSUPPORT:
+		return "AC_CONNECTEDIDSUPPORT"
+	case AC_REDIRECTIONIDSUPPORT:
+		return "AC_REDIRECTIONIDSUPPORT"
+	case AC_REDIRECTINGIDSUPPORT:
+		return "AC_REDIRECTINGIDSUPPORT"
+	case AC_ADDRESSCAPFLAGS:
+		return "AC_ADDRESSCAPFLAGS"
+	case AC_CALLFEATURES1:
+		return "AC_CALLFEATURES1"
+	case AC_CALLFEATURES2:
+		return "AC_CALLFEATURES2"
+	case AC_REMOVEFROMCONFCAPS:
+		return "AC_REMOVEFROMCONFCAPS"
+	case AC_REMOVEFROMCONFSTATE:
+		return "AC_REMOVEFROMCONFSTATE"
+	case AC_TRANSFERMODES:
+		return "AC_TRANSFERMODES"
+	case AC_ADDRESSFEATURES:
+		return "AC_ADDRESSFEATURES"
+	case AC_PREDICTIVEAUTOTRANSFERSTATES:
+		return "AC_PREDICTIVEAUTOTRANSFERSTATES"
+	case AC_MAXCALLDATASIZE:
+		return "AC_MAXCALLDATASIZE"
+	case AC_LINEID:
+		return "AC_LINEID"
+	case AC_ADDRESSID:
+		return "AC_ADDRESSID"
+	case AC_FORWARDMODES:
+		return "AC_FORWARDMODES"
+	case AC_MAXFORWARDENTRIES:
+		return "AC_MAXFORWARDENTRIES"
+	case AC_MAXSPECIFICENTRIES:
+		return "AC_MAXSPECIFICENTRIES"
+	case AC_MINFWDNUMRINGS:
+		return "AC_MINFWDNUMRINGS"
+	case AC_MAXFWDNUMRINGS:
+		return "AC_MAXFWDNUMRINGS"
+	case AC_MAXCALLCOMPLETIONS:
+		return "AC_MAXCALLCOMPLETIONS"
+	case AC_CALLCOMPLETIONCONDITIONS:
+		return "AC_CALLCOMPLETIONCONDITIONS"
+	case AC_CALLCOMPLETIONMODES:
+		return "AC_CALLCOMPLETIONMODES"
+	case AC_PERMANENTDEVICEID:
+		return "AC_PERMANENTDEVICEID"
+	case AC_GATHERDIGITSMINTIMEOUT:
+		return "AC_GATHERDIGITSMINTIMEOUT"
+	case AC_GATHERDIGITSMAXTIMEOUT:
+		return "AC_GATHERDIGITSMAXTIMEOUT"
+	case AC_GENERATEDIGITMINDURATION:
+		return "AC_GENERATEDIGITMINDURATION"
+	case AC_GENERATEDIGITMAXDURATION:
+		return "AC_GENERATEDIGITMAXDURATION"
+	case AC_GENERATEDIGITDEFAULTDURATION:
+		return "AC_GENERATEDIGITDEFAULTDURATION"
+	default:
+		return fmt.Sprintf("ADDRESS_CAPABILITY(%d)", int32(e))
+	}
+}
+
 // ADDRESS_CAPABILITY_STRING: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-address_capability_string
 type ADDRESS_CAPABILITY_STRING int32
 
@@ -85,6 +220,27 @@ const (
 	ACS_SWITCHSPECIFIC        ADDRESS_CAPABILITY_STRING = 4
 	ACS_PERMANENTDEVICEGUID   ADDRESS_CAPABILITY_STRING = 5
 )
+
+// String returns the ADDRESS_CAPABILITY_STRING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADDRESS_CAPABILITY_STRING) String() string {
+	switch e {
+	case ACS_PROTOCOL:
+		return "ACS_PROTOCOL"
+	case ACS_ADDRESSDEVICESPECIFIC:
+		return "ACS_ADDRESSDEVICESPECIFIC"
+	case ACS_LINEDEVICESPECIFIC:
+		return "ACS_LINEDEVICESPECIFIC"
+	case ACS_PROVIDERSPECIFIC:
+		return "ACS_PROVIDERSPECIFIC"
+	case ACS_SWITCHSPECIFIC:
+		return "ACS_SWITCHSPECIFIC"
+	case ACS_PERMANENTDEVICEGUID:
+		return "ACS_PERMANENTDEVICEGUID"
+	default:
+		return fmt.Sprintf("ADDRESS_CAPABILITY_STRING(%d)", int32(e))
+	}
+}
 
 // ADDRESS_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-address_event
 type ADDRESS_EVENT int32
@@ -102,6 +258,33 @@ const (
 	AE_LASTITEM       ADDRESS_EVENT = 8
 )
 
+// String returns the ADDRESS_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADDRESS_EVENT) String() string {
+	switch e {
+	case AE_STATE:
+		return "AE_STATE"
+	case AE_CAPSCHANGE:
+		return "AE_CAPSCHANGE"
+	case AE_RINGING:
+		return "AE_RINGING"
+	case AE_CONFIGCHANGE:
+		return "AE_CONFIGCHANGE"
+	case AE_FORWARD:
+		return "AE_FORWARD"
+	case AE_NEWTERMINAL:
+		return "AE_NEWTERMINAL"
+	case AE_REMOVETERMINAL:
+		return "AE_REMOVETERMINAL"
+	case AE_MSGWAITON:
+		return "AE_MSGWAITON"
+	case AE_MSGWAITOFF:
+		return "AE_MSGWAITOFF"
+	default:
+		return fmt.Sprintf("ADDRESS_EVENT(%d)", int32(e))
+	}
+}
+
 // ADDRESS_STATE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-address_state
 type ADDRESS_STATE int32
 
@@ -110,6 +293,19 @@ const (
 	AS_OUTOFSERVICE ADDRESS_STATE = 1
 )
 
+// String returns the ADDRESS_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADDRESS_STATE) String() string {
+	switch e {
+	case AS_INSERVICE:
+		return "AS_INSERVICE"
+	case AS_OUTOFSERVICE:
+		return "AS_OUTOFSERVICE"
+	default:
+		return fmt.Sprintf("ADDRESS_STATE(%d)", int32(e))
+	}
+}
+
 // AGENTHANDLER_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3cc/ne-tapi3cc-agenthandler_event
 type AGENTHANDLER_EVENT int32
 
@@ -117,6 +313,19 @@ const (
 	AHE_NEW_AGENTHANDLER     AGENTHANDLER_EVENT = 0
 	AHE_AGENTHANDLER_REMOVED AGENTHANDLER_EVENT = 1
 )
+
+// String returns the AGENTHANDLER_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AGENTHANDLER_EVENT) String() string {
+	switch e {
+	case AHE_NEW_AGENTHANDLER:
+		return "AHE_NEW_AGENTHANDLER"
+	case AHE_AGENTHANDLER_REMOVED:
+		return "AHE_AGENTHANDLER_REMOVED"
+	default:
+		return fmt.Sprintf("AGENTHANDLER_EVENT(%d)", int32(e))
+	}
+}
 
 // AGENT_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3cc/ne-tapi3cc-agent_event
 type AGENT_EVENT int32
@@ -130,6 +339,27 @@ const (
 	AE_UNKNOWN       AGENT_EVENT = 5
 )
 
+// String returns the AGENT_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AGENT_EVENT) String() string {
+	switch e {
+	case AE_NOT_READY:
+		return "AE_NOT_READY"
+	case AE_READY:
+		return "AE_READY"
+	case AE_BUSY_ACD:
+		return "AE_BUSY_ACD"
+	case AE_BUSY_INCOMING:
+		return "AE_BUSY_INCOMING"
+	case AE_BUSY_OUTGOING:
+		return "AE_BUSY_OUTGOING"
+	case AE_UNKNOWN:
+		return "AE_UNKNOWN"
+	default:
+		return fmt.Sprintf("AGENT_EVENT(%d)", int32(e))
+	}
+}
+
 // AGENT_SESSION_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3cc/ne-tapi3cc-agent_session_event
 type AGENT_SESSION_EVENT int32
 
@@ -142,6 +372,27 @@ const (
 	ASE_END         AGENT_SESSION_EVENT = 5
 )
 
+// String returns the AGENT_SESSION_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AGENT_SESSION_EVENT) String() string {
+	switch e {
+	case ASE_NEW_SESSION:
+		return "ASE_NEW_SESSION"
+	case ASE_NOT_READY:
+		return "ASE_NOT_READY"
+	case ASE_READY:
+		return "ASE_READY"
+	case ASE_BUSY:
+		return "ASE_BUSY"
+	case ASE_WRAPUP:
+		return "ASE_WRAPUP"
+	case ASE_END:
+		return "ASE_END"
+	default:
+		return fmt.Sprintf("AGENT_SESSION_EVENT(%d)", int32(e))
+	}
+}
+
 // AGENT_SESSION_STATE: https://learn.microsoft.com/windows/win32/api/tapi3cc/ne-tapi3cc-agent_session_state
 type AGENT_SESSION_STATE int32
 
@@ -152,6 +403,25 @@ const (
 	ASST_BUSY_WRAPUP   AGENT_SESSION_STATE = 3
 	ASST_SESSION_ENDED AGENT_SESSION_STATE = 4
 )
+
+// String returns the AGENT_SESSION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AGENT_SESSION_STATE) String() string {
+	switch e {
+	case ASST_NOT_READY:
+		return "ASST_NOT_READY"
+	case ASST_READY:
+		return "ASST_READY"
+	case ASST_BUSY_ON_CALL:
+		return "ASST_BUSY_ON_CALL"
+	case ASST_BUSY_WRAPUP:
+		return "ASST_BUSY_WRAPUP"
+	case ASST_SESSION_ENDED:
+		return "ASST_SESSION_ENDED"
+	default:
+		return fmt.Sprintf("AGENT_SESSION_STATE(%d)", int32(e))
+	}
+}
 
 // AGENT_STATE: https://learn.microsoft.com/windows/win32/api/tapi3cc/ne-tapi3cc-agent_state
 type AGENT_STATE int32
@@ -165,6 +435,27 @@ const (
 	AS_UNKNOWN       AGENT_STATE = 5
 )
 
+// String returns the AGENT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AGENT_STATE) String() string {
+	switch e {
+	case AS_NOT_READY:
+		return "AS_NOT_READY"
+	case AS_READY:
+		return "AS_READY"
+	case AS_BUSY_ACD:
+		return "AS_BUSY_ACD"
+	case AS_BUSY_INCOMING:
+		return "AS_BUSY_INCOMING"
+	case AS_BUSY_OUTGOING:
+		return "AS_BUSY_OUTGOING"
+	case AS_UNKNOWN:
+		return "AS_UNKNOWN"
+	default:
+		return fmt.Sprintf("AGENT_STATE(%d)", int32(e))
+	}
+}
+
 // CALLHUB_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-callhub_event
 type CALLHUB_EVENT int32
 
@@ -176,6 +467,23 @@ const (
 	CHE_LASTITEM    CALLHUB_EVENT = 3
 )
 
+// String returns the CALLHUB_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLHUB_EVENT) String() string {
+	switch e {
+	case CHE_CALLJOIN:
+		return "CHE_CALLJOIN"
+	case CHE_CALLLEAVE:
+		return "CHE_CALLLEAVE"
+	case CHE_CALLHUBNEW:
+		return "CHE_CALLHUBNEW"
+	case CHE_CALLHUBIDLE:
+		return "CHE_CALLHUBIDLE"
+	default:
+		return fmt.Sprintf("CALLHUB_EVENT(%d)", int32(e))
+	}
+}
+
 // CALLHUB_STATE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-callhub_state
 type CALLHUB_STATE int32
 
@@ -183,6 +491,19 @@ const (
 	CHS_ACTIVE CALLHUB_STATE = 0
 	CHS_IDLE   CALLHUB_STATE = 1
 )
+
+// String returns the CALLHUB_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLHUB_STATE) String() string {
+	switch e {
+	case CHS_ACTIVE:
+		return "CHS_ACTIVE"
+	case CHS_IDLE:
+		return "CHS_IDLE"
+	default:
+		return fmt.Sprintf("CALLHUB_STATE(%d)", int32(e))
+	}
+}
 
 // CALLINFOCHANGE_CAUSE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-callinfochange_cause
 type CALLINFOCHANGE_CAUSE int32
@@ -218,6 +539,69 @@ const (
 	CIC_LASTITEM      CALLINFOCHANGE_CAUSE = 26
 )
 
+// String returns the CALLINFOCHANGE_CAUSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLINFOCHANGE_CAUSE) String() string {
+	switch e {
+	case CIC_OTHER:
+		return "CIC_OTHER"
+	case CIC_DEVSPECIFIC:
+		return "CIC_DEVSPECIFIC"
+	case CIC_BEARERMODE:
+		return "CIC_BEARERMODE"
+	case CIC_RATE:
+		return "CIC_RATE"
+	case CIC_APPSPECIFIC:
+		return "CIC_APPSPECIFIC"
+	case CIC_CALLID:
+		return "CIC_CALLID"
+	case CIC_RELATEDCALLID:
+		return "CIC_RELATEDCALLID"
+	case CIC_ORIGIN:
+		return "CIC_ORIGIN"
+	case CIC_REASON:
+		return "CIC_REASON"
+	case CIC_COMPLETIONID:
+		return "CIC_COMPLETIONID"
+	case CIC_NUMOWNERINCR:
+		return "CIC_NUMOWNERINCR"
+	case CIC_NUMOWNERDECR:
+		return "CIC_NUMOWNERDECR"
+	case CIC_NUMMONITORS:
+		return "CIC_NUMMONITORS"
+	case CIC_TRUNK:
+		return "CIC_TRUNK"
+	case CIC_CALLERID:
+		return "CIC_CALLERID"
+	case CIC_CALLEDID:
+		return "CIC_CALLEDID"
+	case CIC_CONNECTEDID:
+		return "CIC_CONNECTEDID"
+	case CIC_REDIRECTIONID:
+		return "CIC_REDIRECTIONID"
+	case CIC_REDIRECTINGID:
+		return "CIC_REDIRECTINGID"
+	case CIC_USERUSERINFO:
+		return "CIC_USERUSERINFO"
+	case CIC_HIGHLEVELCOMP:
+		return "CIC_HIGHLEVELCOMP"
+	case CIC_LOWLEVELCOMP:
+		return "CIC_LOWLEVELCOMP"
+	case CIC_CHARGINGINFO:
+		return "CIC_CHARGINGINFO"
+	case CIC_TREATMENT:
+		return "CIC_TREATMENT"
+	case CIC_CALLDATA:
+		return "CIC_CALLDATA"
+	case CIC_PRIVILEGE:
+		return "CIC_PRIVILEGE"
+	case CIC_MEDIATYPE:
+		return "CIC_MEDIATYPE"
+	default:
+		return fmt.Sprintf("CALLINFOCHANGE_CAUSE(%d)", int32(e))
+	}
+}
+
 // CALLINFO_BUFFER: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-callinfo_buffer
 type CALLINFO_BUFFER int32
 
@@ -229,6 +613,27 @@ const (
 	CIB_HIGHLEVELCOMPATIBILITYBUFFER CALLINFO_BUFFER = 4
 	CIB_LOWLEVELCOMPATIBILITYBUFFER  CALLINFO_BUFFER = 5
 )
+
+// String returns the CALLINFO_BUFFER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLINFO_BUFFER) String() string {
+	switch e {
+	case CIB_USERUSERINFO:
+		return "CIB_USERUSERINFO"
+	case CIB_DEVSPECIFICBUFFER:
+		return "CIB_DEVSPECIFICBUFFER"
+	case CIB_CALLDATABUFFER:
+		return "CIB_CALLDATABUFFER"
+	case CIB_CHARGINGINFOBUFFER:
+		return "CIB_CHARGINGINFOBUFFER"
+	case CIB_HIGHLEVELCOMPATIBILITYBUFFER:
+		return "CIB_HIGHLEVELCOMPATIBILITYBUFFER"
+	case CIB_LOWLEVELCOMPATIBILITYBUFFER:
+		return "CIB_LOWLEVELCOMPATIBILITYBUFFER"
+	default:
+		return fmt.Sprintf("CALLINFO_BUFFER(%d)", int32(e))
+	}
+}
 
 // CALLINFO_LONG: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-callinfo_long
 type CALLINFO_LONG int32
@@ -261,6 +666,65 @@ const (
 	CIL_MONITORMEDIAMODES        CALLINFO_LONG = 24
 )
 
+// String returns the CALLINFO_LONG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLINFO_LONG) String() string {
+	switch e {
+	case CIL_MEDIATYPESAVAILABLE:
+		return "CIL_MEDIATYPESAVAILABLE"
+	case CIL_BEARERMODE:
+		return "CIL_BEARERMODE"
+	case CIL_CALLERIDADDRESSTYPE:
+		return "CIL_CALLERIDADDRESSTYPE"
+	case CIL_CALLEDIDADDRESSTYPE:
+		return "CIL_CALLEDIDADDRESSTYPE"
+	case CIL_CONNECTEDIDADDRESSTYPE:
+		return "CIL_CONNECTEDIDADDRESSTYPE"
+	case CIL_REDIRECTIONIDADDRESSTYPE:
+		return "CIL_REDIRECTIONIDADDRESSTYPE"
+	case CIL_REDIRECTINGIDADDRESSTYPE:
+		return "CIL_REDIRECTINGIDADDRESSTYPE"
+	case CIL_ORIGIN:
+		return "CIL_ORIGIN"
+	case CIL_REASON:
+		return "CIL_REASON"
+	case CIL_APPSPECIFIC:
+		return "CIL_APPSPECIFIC"
+	case CIL_CALLPARAMSFLAGS:
+		return "CIL_CALLPARAMSFLAGS"
+	case CIL_CALLTREATMENT:
+		return "CIL_CALLTREATMENT"
+	case CIL_MINRATE:
+		return "CIL_MINRATE"
+	case CIL_MAXRATE:
+		return "CIL_MAXRATE"
+	case CIL_COUNTRYCODE:
+		return "CIL_COUNTRYCODE"
+	case CIL_CALLID:
+		return "CIL_CALLID"
+	case CIL_RELATEDCALLID:
+		return "CIL_RELATEDCALLID"
+	case CIL_COMPLETIONID:
+		return "CIL_COMPLETIONID"
+	case CIL_NUMBEROFOWNERS:
+		return "CIL_NUMBEROFOWNERS"
+	case CIL_NUMBEROFMONITORS:
+		return "CIL_NUMBEROFMONITORS"
+	case CIL_TRUNK:
+		return "CIL_TRUNK"
+	case CIL_RATE:
+		return "CIL_RATE"
+	case CIL_GENERATEDIGITDURATION:
+		return "CIL_GENERATEDIGITDURATION"
+	case CIL_MONITORDIGITMODES:
+		return "CIL_MONITORDIGITMODES"
+	case CIL_MONITORMEDIAMODES:
+		return "CIL_MONITORMEDIAMODES"
+	default:
+		return fmt.Sprintf("CALLINFO_LONG(%d)", int32(e))
+	}
+}
+
 // CALLINFO_STRING: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-callinfo_string
 type CALLINFO_STRING int32
 
@@ -281,6 +745,43 @@ const (
 	CIS_CALLINGPARTYID          CALLINFO_STRING = 13
 )
 
+// String returns the CALLINFO_STRING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALLINFO_STRING) String() string {
+	switch e {
+	case CIS_CALLERIDNAME:
+		return "CIS_CALLERIDNAME"
+	case CIS_CALLERIDNUMBER:
+		return "CIS_CALLERIDNUMBER"
+	case CIS_CALLEDIDNAME:
+		return "CIS_CALLEDIDNAME"
+	case CIS_CALLEDIDNUMBER:
+		return "CIS_CALLEDIDNUMBER"
+	case CIS_CONNECTEDIDNAME:
+		return "CIS_CONNECTEDIDNAME"
+	case CIS_CONNECTEDIDNUMBER:
+		return "CIS_CONNECTEDIDNUMBER"
+	case CIS_REDIRECTIONIDNAME:
+		return "CIS_REDIRECTIONIDNAME"
+	case CIS_REDIRECTIONIDNUMBER:
+		return "CIS_REDIRECTIONIDNUMBER"
+	case CIS_REDIRECTINGIDNAME:
+		return "CIS_REDIRECTINGIDNAME"
+	case CIS_REDIRECTINGIDNUMBER:
+		return "CIS_REDIRECTINGIDNUMBER"
+	case CIS_CALLEDPARTYFRIENDLYNAME:
+		return "CIS_CALLEDPARTYFRIENDLYNAME"
+	case CIS_COMMENT:
+		return "CIS_COMMENT"
+	case CIS_DISPLAYABLEADDRESS:
+		return "CIS_DISPLAYABLEADDRESS"
+	case CIS_CALLINGPARTYID:
+		return "CIS_CALLINGPARTYID"
+	default:
+		return fmt.Sprintf("CALLINFO_STRING(%d)", int32(e))
+	}
+}
+
 // CALL_MEDIA_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-call_media_event
 type CALL_MEDIA_EVENT int32
 
@@ -293,6 +794,27 @@ const (
 	CME_STREAM_INACTIVE CALL_MEDIA_EVENT = 5
 	CME_LASTITEM        CALL_MEDIA_EVENT = 5
 )
+
+// String returns the CALL_MEDIA_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALL_MEDIA_EVENT) String() string {
+	switch e {
+	case CME_NEW_STREAM:
+		return "CME_NEW_STREAM"
+	case CME_STREAM_FAIL:
+		return "CME_STREAM_FAIL"
+	case CME_TERMINAL_FAIL:
+		return "CME_TERMINAL_FAIL"
+	case CME_STREAM_NOT_USED:
+		return "CME_STREAM_NOT_USED"
+	case CME_STREAM_ACTIVE:
+		return "CME_STREAM_ACTIVE"
+	case CME_STREAM_INACTIVE:
+		return "CME_STREAM_INACTIVE"
+	default:
+		return fmt.Sprintf("CALL_MEDIA_EVENT(%d)", int32(e))
+	}
+}
 
 // CALL_MEDIA_EVENT_CAUSE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-call_media_event_cause
 type CALL_MEDIA_EVENT_CAUSE int32
@@ -308,6 +830,31 @@ const (
 	CMC_QUALITY_OF_SERVICE CALL_MEDIA_EVENT_CAUSE = 7
 )
 
+// String returns the CALL_MEDIA_EVENT_CAUSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALL_MEDIA_EVENT_CAUSE) String() string {
+	switch e {
+	case CMC_UNKNOWN:
+		return "CMC_UNKNOWN"
+	case CMC_BAD_DEVICE:
+		return "CMC_BAD_DEVICE"
+	case CMC_CONNECT_FAIL:
+		return "CMC_CONNECT_FAIL"
+	case CMC_LOCAL_REQUEST:
+		return "CMC_LOCAL_REQUEST"
+	case CMC_REMOTE_REQUEST:
+		return "CMC_REMOTE_REQUEST"
+	case CMC_MEDIA_TIMEOUT:
+		return "CMC_MEDIA_TIMEOUT"
+	case CMC_MEDIA_RECOVERED:
+		return "CMC_MEDIA_RECOVERED"
+	case CMC_QUALITY_OF_SERVICE:
+		return "CMC_QUALITY_OF_SERVICE"
+	default:
+		return fmt.Sprintf("CALL_MEDIA_EVENT_CAUSE(%d)", int32(e))
+	}
+}
+
 // CALL_NOTIFICATION_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-call_notification_event
 type CALL_NOTIFICATION_EVENT int32
 
@@ -317,6 +864,19 @@ const (
 	CNE_LASTITEM CALL_NOTIFICATION_EVENT = 1
 )
 
+// String returns the CALL_NOTIFICATION_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALL_NOTIFICATION_EVENT) String() string {
+	switch e {
+	case CNE_OWNER:
+		return "CNE_OWNER"
+	case CNE_MONITOR:
+		return "CNE_MONITOR"
+	default:
+		return fmt.Sprintf("CALL_NOTIFICATION_EVENT(%d)", int32(e))
+	}
+}
+
 // CALL_PRIVILEGE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-call_privilege
 type CALL_PRIVILEGE int32
 
@@ -324,6 +884,19 @@ const (
 	CP_OWNER   CALL_PRIVILEGE = 0
 	CP_MONITOR CALL_PRIVILEGE = 1
 )
+
+// String returns the CALL_PRIVILEGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALL_PRIVILEGE) String() string {
+	switch e {
+	case CP_OWNER:
+		return "CP_OWNER"
+	case CP_MONITOR:
+		return "CP_MONITOR"
+	default:
+		return fmt.Sprintf("CALL_PRIVILEGE(%d)", int32(e))
+	}
+}
 
 // CALL_STATE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-call_state
 type CALL_STATE int32
@@ -338,6 +911,29 @@ const (
 	CS_QUEUED       CALL_STATE = 6
 	CS_LASTITEM     CALL_STATE = 6
 )
+
+// String returns the CALL_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALL_STATE) String() string {
+	switch e {
+	case CS_IDLE:
+		return "CS_IDLE"
+	case CS_INPROGRESS:
+		return "CS_INPROGRESS"
+	case CS_CONNECTED:
+		return "CS_CONNECTED"
+	case CS_DISCONNECTED:
+		return "CS_DISCONNECTED"
+	case CS_OFFERING:
+		return "CS_OFFERING"
+	case CS_HOLD:
+		return "CS_HOLD"
+	case CS_QUEUED:
+		return "CS_QUEUED"
+	default:
+		return fmt.Sprintf("CALL_STATE(%d)", int32(e))
+	}
+}
 
 // CALL_STATE_EVENT_CAUSE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-call_state_event_cause
 type CALL_STATE_EVENT_CAUSE int32
@@ -354,6 +950,33 @@ const (
 	CEC_DISCONNECT_BLOCKED    CALL_STATE_EVENT_CAUSE = 8
 )
 
+// String returns the CALL_STATE_EVENT_CAUSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALL_STATE_EVENT_CAUSE) String() string {
+	switch e {
+	case CEC_NONE:
+		return "CEC_NONE"
+	case CEC_DISCONNECT_NORMAL:
+		return "CEC_DISCONNECT_NORMAL"
+	case CEC_DISCONNECT_BUSY:
+		return "CEC_DISCONNECT_BUSY"
+	case CEC_DISCONNECT_BADADDRESS:
+		return "CEC_DISCONNECT_BADADDRESS"
+	case CEC_DISCONNECT_NOANSWER:
+		return "CEC_DISCONNECT_NOANSWER"
+	case CEC_DISCONNECT_CANCELLED:
+		return "CEC_DISCONNECT_CANCELLED"
+	case CEC_DISCONNECT_REJECTED:
+		return "CEC_DISCONNECT_REJECTED"
+	case CEC_DISCONNECT_FAILED:
+		return "CEC_DISCONNECT_FAILED"
+	case CEC_DISCONNECT_BLOCKED:
+		return "CEC_DISCONNECT_BLOCKED"
+	default:
+		return fmt.Sprintf("CALL_STATE_EVENT_CAUSE(%d)", int32(e))
+	}
+}
+
 // DIRECTORY_OBJECT_TYPE: https://learn.microsoft.com/windows/win32/api/rend/ne-rend-directory_object_type
 type DIRECTORY_OBJECT_TYPE int32
 
@@ -362,6 +985,19 @@ const (
 	OT_USER       DIRECTORY_OBJECT_TYPE = 2
 )
 
+// String returns the DIRECTORY_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTORY_OBJECT_TYPE) String() string {
+	switch e {
+	case OT_CONFERENCE:
+		return "OT_CONFERENCE"
+	case OT_USER:
+		return "OT_USER"
+	default:
+		return fmt.Sprintf("DIRECTORY_OBJECT_TYPE(%d)", int32(e))
+	}
+}
+
 // DIRECTORY_TYPE: https://learn.microsoft.com/windows/win32/api/rend/ne-rend-directory_type
 type DIRECTORY_TYPE int32
 
@@ -369,6 +1005,19 @@ const (
 	DT_NTDS DIRECTORY_TYPE = 1
 	DT_ILS  DIRECTORY_TYPE = 2
 )
+
+// String returns the DIRECTORY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTORY_TYPE) String() string {
+	switch e {
+	case DT_NTDS:
+		return "DT_NTDS"
+	case DT_ILS:
+		return "DT_ILS"
+	default:
+		return fmt.Sprintf("DIRECTORY_TYPE(%d)", int32(e))
+	}
+}
 
 // DISCONNECT_CODE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-disconnect_code
 type DISCONNECT_CODE int32
@@ -379,6 +1028,21 @@ const (
 	DC_REJECTED DISCONNECT_CODE = 2
 )
 
+// String returns the DISCONNECT_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISCONNECT_CODE) String() string {
+	switch e {
+	case DC_NORMAL:
+		return "DC_NORMAL"
+	case DC_NOANSWER:
+		return "DC_NOANSWER"
+	case DC_REJECTED:
+		return "DC_REJECTED"
+	default:
+		return fmt.Sprintf("DISCONNECT_CODE(%d)", int32(e))
+	}
+}
+
 // FINISH_MODE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-finish_mode
 type FINISH_MODE int32
 
@@ -386,6 +1050,19 @@ const (
 	FM_ASTRANSFER   FINISH_MODE = 0
 	FM_ASCONFERENCE FINISH_MODE = 1
 )
+
+// String returns the FINISH_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FINISH_MODE) String() string {
+	switch e {
+	case FM_ASTRANSFER:
+		return "FM_ASTRANSFER"
+	case FM_ASCONFERENCE:
+		return "FM_ASCONFERENCE"
+	default:
+		return fmt.Sprintf("FINISH_MODE(%d)", int32(e))
+	}
+}
 
 // FT_STATE_EVENT_CAUSE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-ft_state_event_cause
 type FT_STATE_EVENT_CAUSE int32
@@ -397,6 +1074,23 @@ const (
 	FTEC_WRITE_ERROR FT_STATE_EVENT_CAUSE = 3
 )
 
+// String returns the FT_STATE_EVENT_CAUSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FT_STATE_EVENT_CAUSE) String() string {
+	switch e {
+	case FTEC_NORMAL:
+		return "FTEC_NORMAL"
+	case FTEC_END_OF_FILE:
+		return "FTEC_END_OF_FILE"
+	case FTEC_READ_ERROR:
+		return "FTEC_READ_ERROR"
+	case FTEC_WRITE_ERROR:
+		return "FTEC_WRITE_ERROR"
+	default:
+		return fmt.Sprintf("FT_STATE_EVENT_CAUSE(%d)", int32(e))
+	}
+}
+
 // FULLDUPLEX_SUPPORT: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-fullduplex_support
 type FULLDUPLEX_SUPPORT int32
 
@@ -406,6 +1100,21 @@ const (
 	FDS_UNKNOWN      FULLDUPLEX_SUPPORT = 2
 )
 
+// String returns the FULLDUPLEX_SUPPORT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FULLDUPLEX_SUPPORT) String() string {
+	switch e {
+	case FDS_SUPPORTED:
+		return "FDS_SUPPORTED"
+	case FDS_NOTSUPPORTED:
+		return "FDS_NOTSUPPORTED"
+	case FDS_UNKNOWN:
+		return "FDS_UNKNOWN"
+	default:
+		return fmt.Sprintf("FULLDUPLEX_SUPPORT(%d)", int32(e))
+	}
+}
+
 // MSP_ADDRESS_EVENT: https://learn.microsoft.com/windows/win32/api/msp/ne-msp-msp_address_event
 type MSP_ADDRESS_EVENT int32
 
@@ -413,6 +1122,19 @@ const (
 	ADDRESS_TERMINAL_AVAILABLE   MSP_ADDRESS_EVENT = 0
 	ADDRESS_TERMINAL_UNAVAILABLE MSP_ADDRESS_EVENT = 1
 )
+
+// String returns the MSP_ADDRESS_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSP_ADDRESS_EVENT) String() string {
+	switch e {
+	case ADDRESS_TERMINAL_AVAILABLE:
+		return "ADDRESS_TERMINAL_AVAILABLE"
+	case ADDRESS_TERMINAL_UNAVAILABLE:
+		return "ADDRESS_TERMINAL_UNAVAILABLE"
+	default:
+		return fmt.Sprintf("MSP_ADDRESS_EVENT(%d)", int32(e))
+	}
+}
 
 // MSP_CALL_EVENT: https://learn.microsoft.com/windows/win32/api/msp/ne-msp-msp_call_event
 type MSP_CALL_EVENT int32
@@ -425,6 +1147,27 @@ const (
 	CALL_STREAM_ACTIVE   MSP_CALL_EVENT = 4
 	CALL_STREAM_INACTIVE MSP_CALL_EVENT = 5
 )
+
+// String returns the MSP_CALL_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSP_CALL_EVENT) String() string {
+	switch e {
+	case CALL_NEW_STREAM:
+		return "CALL_NEW_STREAM"
+	case CALL_STREAM_FAIL:
+		return "CALL_STREAM_FAIL"
+	case CALL_TERMINAL_FAIL:
+		return "CALL_TERMINAL_FAIL"
+	case CALL_STREAM_NOT_USED:
+		return "CALL_STREAM_NOT_USED"
+	case CALL_STREAM_ACTIVE:
+		return "CALL_STREAM_ACTIVE"
+	case CALL_STREAM_INACTIVE:
+		return "CALL_STREAM_INACTIVE"
+	default:
+		return fmt.Sprintf("MSP_CALL_EVENT(%d)", int32(e))
+	}
+}
 
 // MSP_CALL_EVENT_CAUSE: https://learn.microsoft.com/windows/win32/api/msp/ne-msp-msp_call_event_cause
 type MSP_CALL_EVENT_CAUSE int32
@@ -440,6 +1183,31 @@ const (
 	CALL_CAUSE_QUALITY_OF_SERVICE MSP_CALL_EVENT_CAUSE = 7
 )
 
+// String returns the MSP_CALL_EVENT_CAUSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSP_CALL_EVENT_CAUSE) String() string {
+	switch e {
+	case CALL_CAUSE_UNKNOWN:
+		return "CALL_CAUSE_UNKNOWN"
+	case CALL_CAUSE_BAD_DEVICE:
+		return "CALL_CAUSE_BAD_DEVICE"
+	case CALL_CAUSE_CONNECT_FAIL:
+		return "CALL_CAUSE_CONNECT_FAIL"
+	case CALL_CAUSE_LOCAL_REQUEST:
+		return "CALL_CAUSE_LOCAL_REQUEST"
+	case CALL_CAUSE_REMOTE_REQUEST:
+		return "CALL_CAUSE_REMOTE_REQUEST"
+	case CALL_CAUSE_MEDIA_TIMEOUT:
+		return "CALL_CAUSE_MEDIA_TIMEOUT"
+	case CALL_CAUSE_MEDIA_RECOVERED:
+		return "CALL_CAUSE_MEDIA_RECOVERED"
+	case CALL_CAUSE_QUALITY_OF_SERVICE:
+		return "CALL_CAUSE_QUALITY_OF_SERVICE"
+	default:
+		return fmt.Sprintf("MSP_CALL_EVENT_CAUSE(%d)", int32(e))
+	}
+}
+
 // MSP_EVENT: https://learn.microsoft.com/windows/win32/api/msp/ne-msp-msp_event
 type MSP_EVENT int32
 
@@ -454,12 +1222,48 @@ const (
 	ME_TONE_TERMINAL_EVENT MSP_EVENT = 7
 )
 
+// String returns the MSP_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSP_EVENT) String() string {
+	switch e {
+	case ME_ADDRESS_EVENT:
+		return "ME_ADDRESS_EVENT"
+	case ME_CALL_EVENT:
+		return "ME_CALL_EVENT"
+	case ME_TSP_DATA:
+		return "ME_TSP_DATA"
+	case ME_PRIVATE_EVENT:
+		return "ME_PRIVATE_EVENT"
+	case ME_ASR_TERMINAL_EVENT:
+		return "ME_ASR_TERMINAL_EVENT"
+	case ME_TTS_TERMINAL_EVENT:
+		return "ME_TTS_TERMINAL_EVENT"
+	case ME_FILE_TERMINAL_EVENT:
+		return "ME_FILE_TERMINAL_EVENT"
+	case ME_TONE_TERMINAL_EVENT:
+		return "ME_TONE_TERMINAL_EVENT"
+	default:
+		return fmt.Sprintf("MSP_EVENT(%d)", int32(e))
+	}
+}
+
 // PHONECAPS_BUFFER: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phonecaps_buffer
 type PHONECAPS_BUFFER int32
 
 const (
 	PCB_DEVSPECIFICBUFFER PHONECAPS_BUFFER = 0
 )
+
+// String returns the PHONECAPS_BUFFER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONECAPS_BUFFER) String() string {
+	switch e {
+	case PCB_DEVSPECIFICBUFFER:
+		return "PCB_DEVSPECIFICBUFFER"
+	default:
+		return fmt.Sprintf("PHONECAPS_BUFFER(%d)", int32(e))
+	}
+}
 
 // PHONECAPS_LONG: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phonecaps_long
 type PHONECAPS_LONG int32
@@ -476,6 +1280,33 @@ const (
 	PCL_GENERICPHONE                PHONECAPS_LONG = 8
 )
 
+// String returns the PHONECAPS_LONG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONECAPS_LONG) String() string {
+	switch e {
+	case PCL_HOOKSWITCHES:
+		return "PCL_HOOKSWITCHES"
+	case PCL_HANDSETHOOKSWITCHMODES:
+		return "PCL_HANDSETHOOKSWITCHMODES"
+	case PCL_HEADSETHOOKSWITCHMODES:
+		return "PCL_HEADSETHOOKSWITCHMODES"
+	case PCL_SPEAKERPHONEHOOKSWITCHMODES:
+		return "PCL_SPEAKERPHONEHOOKSWITCHMODES"
+	case PCL_DISPLAYNUMROWS:
+		return "PCL_DISPLAYNUMROWS"
+	case PCL_DISPLAYNUMCOLUMNS:
+		return "PCL_DISPLAYNUMCOLUMNS"
+	case PCL_NUMRINGMODES:
+		return "PCL_NUMRINGMODES"
+	case PCL_NUMBUTTONLAMPS:
+		return "PCL_NUMBUTTONLAMPS"
+	case PCL_GENERICPHONE:
+		return "PCL_GENERICPHONE"
+	default:
+		return fmt.Sprintf("PHONECAPS_LONG(%d)", int32(e))
+	}
+}
+
 // PHONECAPS_STRING: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phonecaps_string
 type PHONECAPS_STRING int32
 
@@ -484,6 +1315,21 @@ const (
 	PCS_PHONEINFO    PHONECAPS_STRING = 1
 	PCS_PROVIDERINFO PHONECAPS_STRING = 2
 )
+
+// String returns the PHONECAPS_STRING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONECAPS_STRING) String() string {
+	switch e {
+	case PCS_PHONENAME:
+		return "PCS_PHONENAME"
+	case PCS_PHONEINFO:
+		return "PCS_PHONEINFO"
+	case PCS_PROVIDERINFO:
+		return "PCS_PROVIDERINFO"
+	default:
+		return fmt.Sprintf("PHONECAPS_STRING(%d)", int32(e))
+	}
+}
 
 // PHONE_BUTTON_FUNCTION: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phone_button_function
 type PHONE_BUTTON_FUNCTION int32
@@ -539,6 +1385,111 @@ const (
 	PBF_SEND         PHONE_BUTTON_FUNCTION = 47
 )
 
+// String returns the PHONE_BUTTON_FUNCTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONE_BUTTON_FUNCTION) String() string {
+	switch e {
+	case PBF_UNKNOWN:
+		return "PBF_UNKNOWN"
+	case PBF_CONFERENCE:
+		return "PBF_CONFERENCE"
+	case PBF_TRANSFER:
+		return "PBF_TRANSFER"
+	case PBF_DROP:
+		return "PBF_DROP"
+	case PBF_HOLD:
+		return "PBF_HOLD"
+	case PBF_RECALL:
+		return "PBF_RECALL"
+	case PBF_DISCONNECT:
+		return "PBF_DISCONNECT"
+	case PBF_CONNECT:
+		return "PBF_CONNECT"
+	case PBF_MSGWAITON:
+		return "PBF_MSGWAITON"
+	case PBF_MSGWAITOFF:
+		return "PBF_MSGWAITOFF"
+	case PBF_SELECTRING:
+		return "PBF_SELECTRING"
+	case PBF_ABBREVDIAL:
+		return "PBF_ABBREVDIAL"
+	case PBF_FORWARD:
+		return "PBF_FORWARD"
+	case PBF_PICKUP:
+		return "PBF_PICKUP"
+	case PBF_RINGAGAIN:
+		return "PBF_RINGAGAIN"
+	case PBF_PARK:
+		return "PBF_PARK"
+	case PBF_REJECT:
+		return "PBF_REJECT"
+	case PBF_REDIRECT:
+		return "PBF_REDIRECT"
+	case PBF_MUTE:
+		return "PBF_MUTE"
+	case PBF_VOLUMEUP:
+		return "PBF_VOLUMEUP"
+	case PBF_VOLUMEDOWN:
+		return "PBF_VOLUMEDOWN"
+	case PBF_SPEAKERON:
+		return "PBF_SPEAKERON"
+	case PBF_SPEAKEROFF:
+		return "PBF_SPEAKEROFF"
+	case PBF_FLASH:
+		return "PBF_FLASH"
+	case PBF_DATAON:
+		return "PBF_DATAON"
+	case PBF_DATAOFF:
+		return "PBF_DATAOFF"
+	case PBF_DONOTDISTURB:
+		return "PBF_DONOTDISTURB"
+	case PBF_INTERCOM:
+		return "PBF_INTERCOM"
+	case PBF_BRIDGEDAPP:
+		return "PBF_BRIDGEDAPP"
+	case PBF_BUSY:
+		return "PBF_BUSY"
+	case PBF_CALLAPP:
+		return "PBF_CALLAPP"
+	case PBF_DATETIME:
+		return "PBF_DATETIME"
+	case PBF_DIRECTORY:
+		return "PBF_DIRECTORY"
+	case PBF_COVER:
+		return "PBF_COVER"
+	case PBF_CALLID:
+		return "PBF_CALLID"
+	case PBF_LASTNUM:
+		return "PBF_LASTNUM"
+	case PBF_NIGHTSRV:
+		return "PBF_NIGHTSRV"
+	case PBF_SENDCALLS:
+		return "PBF_SENDCALLS"
+	case PBF_MSGINDICATOR:
+		return "PBF_MSGINDICATOR"
+	case PBF_REPDIAL:
+		return "PBF_REPDIAL"
+	case PBF_SETREPDIAL:
+		return "PBF_SETREPDIAL"
+	case PBF_SYSTEMSPEED:
+		return "PBF_SYSTEMSPEED"
+	case PBF_STATIONSPEED:
+		return "PBF_STATIONSPEED"
+	case PBF_CAMPON:
+		return "PBF_CAMPON"
+	case PBF_SAVEREPEAT:
+		return "PBF_SAVEREPEAT"
+	case PBF_QUEUECALL:
+		return "PBF_QUEUECALL"
+	case PBF_NONE:
+		return "PBF_NONE"
+	case PBF_SEND:
+		return "PBF_SEND"
+	default:
+		return fmt.Sprintf("PHONE_BUTTON_FUNCTION(%d)", int32(e))
+	}
+}
+
 // PHONE_BUTTON_MODE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phone_button_mode
 type PHONE_BUTTON_MODE int32
 
@@ -551,6 +1502,27 @@ const (
 	PBM_DISPLAY PHONE_BUTTON_MODE = 5
 )
 
+// String returns the PHONE_BUTTON_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONE_BUTTON_MODE) String() string {
+	switch e {
+	case PBM_DUMMY:
+		return "PBM_DUMMY"
+	case PBM_CALL:
+		return "PBM_CALL"
+	case PBM_FEATURE:
+		return "PBM_FEATURE"
+	case PBM_KEYPAD:
+		return "PBM_KEYPAD"
+	case PBM_LOCAL:
+		return "PBM_LOCAL"
+	case PBM_DISPLAY:
+		return "PBM_DISPLAY"
+	default:
+		return fmt.Sprintf("PHONE_BUTTON_MODE(%d)", int32(e))
+	}
+}
+
 // PHONE_BUTTON_STATE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phone_button_state
 type PHONE_BUTTON_STATE int32
 
@@ -560,6 +1532,23 @@ const (
 	PBS_UNKNOWN PHONE_BUTTON_STATE = 4
 	PBS_UNAVAIL PHONE_BUTTON_STATE = 8
 )
+
+// String returns the PHONE_BUTTON_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONE_BUTTON_STATE) String() string {
+	switch e {
+	case PBS_UP:
+		return "PBS_UP"
+	case PBS_DOWN:
+		return "PBS_DOWN"
+	case PBS_UNKNOWN:
+		return "PBS_UNKNOWN"
+	case PBS_UNAVAIL:
+		return "PBS_UNAVAIL"
+	default:
+		return fmt.Sprintf("PHONE_BUTTON_STATE(%d)", int32(e))
+	}
+}
 
 // PHONE_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phone_event
 type PHONE_EVENT int32
@@ -580,6 +1569,39 @@ const (
 	PE_LASTITEM       PHONE_EVENT = 11
 )
 
+// String returns the PHONE_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONE_EVENT) String() string {
+	switch e {
+	case PE_DISPLAY:
+		return "PE_DISPLAY"
+	case PE_LAMPMODE:
+		return "PE_LAMPMODE"
+	case PE_RINGMODE:
+		return "PE_RINGMODE"
+	case PE_RINGVOLUME:
+		return "PE_RINGVOLUME"
+	case PE_HOOKSWITCH:
+		return "PE_HOOKSWITCH"
+	case PE_CAPSCHANGE:
+		return "PE_CAPSCHANGE"
+	case PE_BUTTON:
+		return "PE_BUTTON"
+	case PE_CLOSE:
+		return "PE_CLOSE"
+	case PE_NUMBERGATHERED:
+		return "PE_NUMBERGATHERED"
+	case PE_DIALING:
+		return "PE_DIALING"
+	case PE_ANSWER:
+		return "PE_ANSWER"
+	case PE_DISCONNECT:
+		return "PE_DISCONNECT"
+	default:
+		return fmt.Sprintf("PHONE_EVENT(%d)", int32(e))
+	}
+}
+
 // PHONE_HOOK_SWITCH_DEVICE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phone_hook_switch_device
 type PHONE_HOOK_SWITCH_DEVICE int32
 
@@ -588,6 +1610,21 @@ const (
 	PHSD_SPEAKERPHONE PHONE_HOOK_SWITCH_DEVICE = 2
 	PHSD_HEADSET      PHONE_HOOK_SWITCH_DEVICE = 4
 )
+
+// String returns the PHONE_HOOK_SWITCH_DEVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONE_HOOK_SWITCH_DEVICE) String() string {
+	switch e {
+	case PHSD_HANDSET:
+		return "PHSD_HANDSET"
+	case PHSD_SPEAKERPHONE:
+		return "PHSD_SPEAKERPHONE"
+	case PHSD_HEADSET:
+		return "PHSD_HEADSET"
+	default:
+		return fmt.Sprintf("PHONE_HOOK_SWITCH_DEVICE(%d)", int32(e))
+	}
+}
 
 // PHONE_HOOK_SWITCH_STATE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phone_hook_switch_state
 type PHONE_HOOK_SWITCH_STATE int32
@@ -598,6 +1635,23 @@ const (
 	PHSS_OFFHOOK_SPEAKER_ONLY PHONE_HOOK_SWITCH_STATE = 4
 	PHSS_OFFHOOK              PHONE_HOOK_SWITCH_STATE = 8
 )
+
+// String returns the PHONE_HOOK_SWITCH_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONE_HOOK_SWITCH_STATE) String() string {
+	switch e {
+	case PHSS_ONHOOK:
+		return "PHSS_ONHOOK"
+	case PHSS_OFFHOOK_MIC_ONLY:
+		return "PHSS_OFFHOOK_MIC_ONLY"
+	case PHSS_OFFHOOK_SPEAKER_ONLY:
+		return "PHSS_OFFHOOK_SPEAKER_ONLY"
+	case PHSS_OFFHOOK:
+		return "PHSS_OFFHOOK"
+	default:
+		return fmt.Sprintf("PHONE_HOOK_SWITCH_STATE(%d)", int32(e))
+	}
+}
 
 // PHONE_LAMP_MODE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phone_lamp_mode
 type PHONE_LAMP_MODE int32
@@ -613,6 +1667,31 @@ const (
 	LM_UNKNOWN       PHONE_LAMP_MODE = 128
 )
 
+// String returns the PHONE_LAMP_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONE_LAMP_MODE) String() string {
+	switch e {
+	case LM_DUMMY:
+		return "LM_DUMMY"
+	case LM_OFF:
+		return "LM_OFF"
+	case LM_STEADY:
+		return "LM_STEADY"
+	case LM_WINK:
+		return "LM_WINK"
+	case LM_FLASH:
+		return "LM_FLASH"
+	case LM_FLUTTER:
+		return "LM_FLUTTER"
+	case LM_BROKENFLUTTER:
+		return "LM_BROKENFLUTTER"
+	case LM_UNKNOWN:
+		return "LM_UNKNOWN"
+	default:
+		return fmt.Sprintf("PHONE_LAMP_MODE(%d)", int32(e))
+	}
+}
+
 // PHONE_PRIVILEGE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phone_privilege
 type PHONE_PRIVILEGE int32
 
@@ -620,6 +1699,19 @@ const (
 	PP_OWNER   PHONE_PRIVILEGE = 0
 	PP_MONITOR PHONE_PRIVILEGE = 1
 )
+
+// String returns the PHONE_PRIVILEGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONE_PRIVILEGE) String() string {
+	switch e {
+	case PP_OWNER:
+		return "PP_OWNER"
+	case PP_MONITOR:
+		return "PP_MONITOR"
+	default:
+		return fmt.Sprintf("PHONE_PRIVILEGE(%d)", int32(e))
+	}
+}
 
 // PHONE_TONE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-phone_tone
 type PHONE_TONE int32
@@ -649,6 +1741,59 @@ const (
 	PT_SILENCE          PHONE_TONE = 21
 )
 
+// String returns the PHONE_TONE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONE_TONE) String() string {
+	switch e {
+	case PT_KEYPADZERO:
+		return "PT_KEYPADZERO"
+	case PT_KEYPADONE:
+		return "PT_KEYPADONE"
+	case PT_KEYPADTWO:
+		return "PT_KEYPADTWO"
+	case PT_KEYPADTHREE:
+		return "PT_KEYPADTHREE"
+	case PT_KEYPADFOUR:
+		return "PT_KEYPADFOUR"
+	case PT_KEYPADFIVE:
+		return "PT_KEYPADFIVE"
+	case PT_KEYPADSIX:
+		return "PT_KEYPADSIX"
+	case PT_KEYPADSEVEN:
+		return "PT_KEYPADSEVEN"
+	case PT_KEYPADEIGHT:
+		return "PT_KEYPADEIGHT"
+	case PT_KEYPADNINE:
+		return "PT_KEYPADNINE"
+	case PT_KEYPADSTAR:
+		return "PT_KEYPADSTAR"
+	case PT_KEYPADPOUND:
+		return "PT_KEYPADPOUND"
+	case PT_KEYPADA:
+		return "PT_KEYPADA"
+	case PT_KEYPADB:
+		return "PT_KEYPADB"
+	case PT_KEYPADC:
+		return "PT_KEYPADC"
+	case PT_KEYPADD:
+		return "PT_KEYPADD"
+	case PT_NORMALDIALTONE:
+		return "PT_NORMALDIALTONE"
+	case PT_EXTERNALDIALTONE:
+		return "PT_EXTERNALDIALTONE"
+	case PT_BUSY:
+		return "PT_BUSY"
+	case PT_RINGBACK:
+		return "PT_RINGBACK"
+	case PT_ERRORTONE:
+		return "PT_ERRORTONE"
+	case PT_SILENCE:
+		return "PT_SILENCE"
+	default:
+		return fmt.Sprintf("PHONE_TONE(%d)", int32(e))
+	}
+}
+
 // QOS_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-qos_event
 type QOS_EVENT int32
 
@@ -660,6 +1805,23 @@ const (
 	QE_LASTITEM         QOS_EVENT = 4
 )
 
+// String returns the QOS_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QOS_EVENT) String() string {
+	switch e {
+	case QE_NOQOS:
+		return "QE_NOQOS"
+	case QE_ADMISSIONFAILURE:
+		return "QE_ADMISSIONFAILURE"
+	case QE_POLICYFAILURE:
+		return "QE_POLICYFAILURE"
+	case QE_GENERICERROR:
+		return "QE_GENERICERROR"
+	default:
+		return fmt.Sprintf("QOS_EVENT(%d)", int32(e))
+	}
+}
+
 // QOS_SERVICE_LEVEL: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-qos_service_level
 type QOS_SERVICE_LEVEL int32
 
@@ -668,6 +1830,21 @@ const (
 	QSL_IF_AVAILABLE QOS_SERVICE_LEVEL = 2
 	QSL_BEST_EFFORT  QOS_SERVICE_LEVEL = 3
 )
+
+// String returns the QOS_SERVICE_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QOS_SERVICE_LEVEL) String() string {
+	switch e {
+	case QSL_NEEDED:
+		return "QSL_NEEDED"
+	case QSL_IF_AVAILABLE:
+		return "QSL_IF_AVAILABLE"
+	case QSL_BEST_EFFORT:
+		return "QSL_BEST_EFFORT"
+	default:
+		return fmt.Sprintf("QOS_SERVICE_LEVEL(%d)", int32(e))
+	}
+}
 
 // RND_ADVERTISING_SCOPE: https://learn.microsoft.com/windows/win32/api/rend/ne-rend-rnd_advertising_scope
 type RND_ADVERTISING_SCOPE int32
@@ -678,6 +1855,23 @@ const (
 	RAS_REGION RND_ADVERTISING_SCOPE = 3
 	RAS_WORLD  RND_ADVERTISING_SCOPE = 4
 )
+
+// String returns the RND_ADVERTISING_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RND_ADVERTISING_SCOPE) String() string {
+	switch e {
+	case RAS_LOCAL:
+		return "RAS_LOCAL"
+	case RAS_SITE:
+		return "RAS_SITE"
+	case RAS_REGION:
+		return "RAS_REGION"
+	case RAS_WORLD:
+		return "RAS_WORLD"
+	default:
+		return fmt.Sprintf("RND_ADVERTISING_SCOPE(%d)", int32(e))
+	}
+}
 
 // TAPIOBJECT_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-tapiobject_event
 type TAPIOBJECT_EVENT int32
@@ -691,6 +1885,29 @@ const (
 	TE_PHONECREATE     TAPIOBJECT_EVENT = 5
 	TE_PHONEREMOVE     TAPIOBJECT_EVENT = 6
 )
+
+// String returns the TAPIOBJECT_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAPIOBJECT_EVENT) String() string {
+	switch e {
+	case TE_ADDRESSCREATE:
+		return "TE_ADDRESSCREATE"
+	case TE_ADDRESSREMOVE:
+		return "TE_ADDRESSREMOVE"
+	case TE_REINIT:
+		return "TE_REINIT"
+	case TE_TRANSLATECHANGE:
+		return "TE_TRANSLATECHANGE"
+	case TE_ADDRESSCLOSE:
+		return "TE_ADDRESSCLOSE"
+	case TE_PHONECREATE:
+		return "TE_PHONECREATE"
+	case TE_PHONEREMOVE:
+		return "TE_PHONEREMOVE"
+	default:
+		return fmt.Sprintf("TAPIOBJECT_EVENT(%d)", int32(e))
+	}
+}
 
 // TAPI_EVENT: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-tapi_event
 type TAPI_EVENT int32
@@ -724,6 +1941,67 @@ const (
 	TE_PHONEDEVSPECIFIC   TAPI_EVENT = 33554432
 )
 
+// String returns the TAPI_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAPI_EVENT) String() string {
+	switch e {
+	case TE_TAPIOBJECT:
+		return "TE_TAPIOBJECT"
+	case TE_ADDRESS:
+		return "TE_ADDRESS"
+	case TE_CALLNOTIFICATION:
+		return "TE_CALLNOTIFICATION"
+	case TE_CALLSTATE:
+		return "TE_CALLSTATE"
+	case TE_CALLMEDIA:
+		return "TE_CALLMEDIA"
+	case TE_CALLHUB:
+		return "TE_CALLHUB"
+	case TE_CALLINFOCHANGE:
+		return "TE_CALLINFOCHANGE"
+	case TE_PRIVATE:
+		return "TE_PRIVATE"
+	case TE_REQUEST:
+		return "TE_REQUEST"
+	case TE_AGENT:
+		return "TE_AGENT"
+	case TE_AGENTSESSION:
+		return "TE_AGENTSESSION"
+	case TE_QOSEVENT:
+		return "TE_QOSEVENT"
+	case TE_AGENTHANDLER:
+		return "TE_AGENTHANDLER"
+	case TE_ACDGROUP:
+		return "TE_ACDGROUP"
+	case TE_QUEUE:
+		return "TE_QUEUE"
+	case TE_DIGITEVENT:
+		return "TE_DIGITEVENT"
+	case TE_GENERATEEVENT:
+		return "TE_GENERATEEVENT"
+	case TE_ASRTERMINAL:
+		return "TE_ASRTERMINAL"
+	case TE_TTSTERMINAL:
+		return "TE_TTSTERMINAL"
+	case TE_FILETERMINAL:
+		return "TE_FILETERMINAL"
+	case TE_TONETERMINAL:
+		return "TE_TONETERMINAL"
+	case TE_PHONEEVENT:
+		return "TE_PHONEEVENT"
+	case TE_TONEEVENT:
+		return "TE_TONEEVENT"
+	case TE_GATHERDIGITS:
+		return "TE_GATHERDIGITS"
+	case TE_ADDRESSDEVSPECIFIC:
+		return "TE_ADDRESSDEVSPECIFIC"
+	case TE_PHONEDEVSPECIFIC:
+		return "TE_PHONEDEVSPECIFIC"
+	default:
+		return fmt.Sprintf("TAPI_EVENT(%d)", int32(e))
+	}
+}
+
 // TAPI_GATHERTERM: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-tapi_gatherterm
 type TAPI_GATHERTERM int32
 
@@ -734,6 +2012,25 @@ const (
 	TGT_INTERTIMEOUT TAPI_GATHERTERM = 8
 	TGT_CANCEL       TAPI_GATHERTERM = 16
 )
+
+// String returns the TAPI_GATHERTERM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAPI_GATHERTERM) String() string {
+	switch e {
+	case TGT_BUFFERFULL:
+		return "TGT_BUFFERFULL"
+	case TGT_TERMDIGIT:
+		return "TGT_TERMDIGIT"
+	case TGT_FIRSTTIMEOUT:
+		return "TGT_FIRSTTIMEOUT"
+	case TGT_INTERTIMEOUT:
+		return "TGT_INTERTIMEOUT"
+	case TGT_CANCEL:
+		return "TGT_CANCEL"
+	default:
+		return fmt.Sprintf("TAPI_GATHERTERM(%d)", int32(e))
+	}
+}
 
 // TAPI_OBJECT_TYPE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-tapi_object_type
 type TAPI_OBJECT_TYPE int32
@@ -748,6 +2045,29 @@ const (
 	TOT_PHONE    TAPI_OBJECT_TYPE = 6
 )
 
+// String returns the TAPI_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAPI_OBJECT_TYPE) String() string {
+	switch e {
+	case TOT_NONE:
+		return "TOT_NONE"
+	case TOT_TAPI:
+		return "TOT_TAPI"
+	case TOT_ADDRESS:
+		return "TOT_ADDRESS"
+	case TOT_TERMINAL:
+		return "TOT_TERMINAL"
+	case TOT_CALL:
+		return "TOT_CALL"
+	case TOT_CALLHUB:
+		return "TOT_CALLHUB"
+	case TOT_PHONE:
+		return "TOT_PHONE"
+	default:
+		return fmt.Sprintf("TAPI_OBJECT_TYPE(%d)", int32(e))
+	}
+}
+
 // TAPI_TONEMODE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-tapi_tonemode
 type TAPI_TONEMODE int32
 
@@ -757,6 +2077,23 @@ const (
 	TTM_BEEP     TAPI_TONEMODE = 8
 	TTM_BILLING  TAPI_TONEMODE = 16
 )
+
+// String returns the TAPI_TONEMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAPI_TONEMODE) String() string {
+	switch e {
+	case TTM_RINGBACK:
+		return "TTM_RINGBACK"
+	case TTM_BUSY:
+		return "TTM_BUSY"
+	case TTM_BEEP:
+		return "TTM_BEEP"
+	case TTM_BILLING:
+		return "TTM_BILLING"
+	default:
+		return fmt.Sprintf("TAPI_TONEMODE(%d)", int32(e))
+	}
+}
 
 // TERMINAL_DIRECTION: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-terminal_direction
 type TERMINAL_DIRECTION int32
@@ -769,6 +2106,25 @@ const (
 	TD_NONE             TERMINAL_DIRECTION = 4
 )
 
+// String returns the TERMINAL_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TERMINAL_DIRECTION) String() string {
+	switch e {
+	case TD_CAPTURE:
+		return "TD_CAPTURE"
+	case TD_RENDER:
+		return "TD_RENDER"
+	case TD_BIDIRECTIONAL:
+		return "TD_BIDIRECTIONAL"
+	case TD_MULTITRACK_MIXED:
+		return "TD_MULTITRACK_MIXED"
+	case TD_NONE:
+		return "TD_NONE"
+	default:
+		return fmt.Sprintf("TERMINAL_DIRECTION(%d)", int32(e))
+	}
+}
+
 // TERMINAL_MEDIA_STATE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-terminal_media_state
 type TERMINAL_MEDIA_STATE int32
 
@@ -779,6 +2135,21 @@ const (
 	TMS_LASTITEM TERMINAL_MEDIA_STATE = 2
 )
 
+// String returns the TERMINAL_MEDIA_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TERMINAL_MEDIA_STATE) String() string {
+	switch e {
+	case TMS_IDLE:
+		return "TMS_IDLE"
+	case TMS_ACTIVE:
+		return "TMS_ACTIVE"
+	case TMS_PAUSED:
+		return "TMS_PAUSED"
+	default:
+		return fmt.Sprintf("TERMINAL_MEDIA_STATE(%d)", int32(e))
+	}
+}
+
 // TERMINAL_STATE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-terminal_state
 type TERMINAL_STATE int32
 
@@ -787,6 +2158,19 @@ const (
 	TS_NOTINUSE TERMINAL_STATE = 1
 )
 
+// String returns the TERMINAL_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TERMINAL_STATE) String() string {
+	switch e {
+	case TS_INUSE:
+		return "TS_INUSE"
+	case TS_NOTINUSE:
+		return "TS_NOTINUSE"
+	default:
+		return fmt.Sprintf("TERMINAL_STATE(%d)", int32(e))
+	}
+}
+
 // TERMINAL_TYPE: https://learn.microsoft.com/windows/win32/api/tapi3if/ne-tapi3if-terminal_type
 type TERMINAL_TYPE int32
 
@@ -794,3 +2178,16 @@ const (
 	TT_STATIC  TERMINAL_TYPE = 0
 	TT_DYNAMIC TERMINAL_TYPE = 1
 )
+
+// String returns the TERMINAL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TERMINAL_TYPE) String() string {
+	switch e {
+	case TT_STATIC:
+		return "TT_STATIC"
+	case TT_DYNAMIC:
+		return "TT_DYNAMIC"
+	default:
+		return fmt.Sprintf("TERMINAL_TYPE(%d)", int32(e))
+	}
+}

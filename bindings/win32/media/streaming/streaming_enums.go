@@ -4,6 +4,10 @@
 
 package streaming
 
+import (
+	"fmt"
+)
+
 // MF_MEDIASOURCE_STATUS_INFO: https://learn.microsoft.com/windows/win32/api/mfidl/ne-mfidl-mf_mediasource_status_info
 type MF_MEDIASOURCE_STATUS_INFO int32
 
@@ -11,6 +15,19 @@ const (
 	MF_MEDIASOURCE_STATUS_INFO_FULLYSUPPORTED MF_MEDIASOURCE_STATUS_INFO = 0
 	MF_MEDIASOURCE_STATUS_INFO_UNKNOWN        MF_MEDIASOURCE_STATUS_INFO = 1
 )
+
+// String returns the MF_MEDIASOURCE_STATUS_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MF_MEDIASOURCE_STATUS_INFO) String() string {
+	switch e {
+	case MF_MEDIASOURCE_STATUS_INFO_FULLYSUPPORTED:
+		return "MF_MEDIASOURCE_STATUS_INFO_FULLYSUPPORTED"
+	case MF_MEDIASOURCE_STATUS_INFO_UNKNOWN:
+		return "MF_MEDIASOURCE_STATUS_INFO_UNKNOWN"
+	default:
+		return fmt.Sprintf("MF_MEDIASOURCE_STATUS_INFO(%d)", int32(e))
+	}
+}
 
 // MF_TRANSFER_VIDEO_FRAME_FLAGS: https://learn.microsoft.com/windows/win32/api/mfidl/ne-mfidl-mf_transfer_video_frame_flags
 type MF_TRANSFER_VIDEO_FRAME_FLAGS int32
@@ -20,3 +37,18 @@ const (
 	MF_TRANSFER_VIDEO_FRAME_STRETCH    MF_TRANSFER_VIDEO_FRAME_FLAGS = 1
 	MF_TRANSFER_VIDEO_FRAME_IGNORE_PAR MF_TRANSFER_VIDEO_FRAME_FLAGS = 2
 )
+
+// String returns the MF_TRANSFER_VIDEO_FRAME_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MF_TRANSFER_VIDEO_FRAME_FLAGS) String() string {
+	switch e {
+	case MF_TRANSFER_VIDEO_FRAME_DEFAULT:
+		return "MF_TRANSFER_VIDEO_FRAME_DEFAULT"
+	case MF_TRANSFER_VIDEO_FRAME_STRETCH:
+		return "MF_TRANSFER_VIDEO_FRAME_STRETCH"
+	case MF_TRANSFER_VIDEO_FRAME_IGNORE_PAR:
+		return "MF_TRANSFER_VIDEO_FRAME_IGNORE_PAR"
+	default:
+		return fmt.Sprintf("MF_TRANSFER_VIDEO_FRAME_FLAGS(%d)", int32(e))
+	}
+}

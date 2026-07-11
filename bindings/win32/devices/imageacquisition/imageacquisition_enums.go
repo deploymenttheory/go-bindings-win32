@@ -4,6 +4,10 @@
 
 package imageacquisition
 
+import (
+	"fmt"
+)
+
 // WIAVIDEO_STATE: https://learn.microsoft.com/windows/win32/api/wiavideo/ne-wiavideo-wiavideo_state
 type WIAVIDEO_STATE int32
 
@@ -15,3 +19,24 @@ const (
 	WIAVIDEO_VIDEO_PAUSED     WIAVIDEO_STATE = 5
 	WIAVIDEO_DESTROYING_VIDEO WIAVIDEO_STATE = 6
 )
+
+// String returns the WIAVIDEO_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WIAVIDEO_STATE) String() string {
+	switch e {
+	case WIAVIDEO_NO_VIDEO:
+		return "WIAVIDEO_NO_VIDEO"
+	case WIAVIDEO_CREATING_VIDEO:
+		return "WIAVIDEO_CREATING_VIDEO"
+	case WIAVIDEO_VIDEO_CREATED:
+		return "WIAVIDEO_VIDEO_CREATED"
+	case WIAVIDEO_VIDEO_PLAYING:
+		return "WIAVIDEO_VIDEO_PLAYING"
+	case WIAVIDEO_VIDEO_PAUSED:
+		return "WIAVIDEO_VIDEO_PAUSED"
+	case WIAVIDEO_DESTROYING_VIDEO:
+		return "WIAVIDEO_DESTROYING_VIDEO"
+	default:
+		return fmt.Sprintf("WIAVIDEO_STATE(%d)", int32(e))
+	}
+}

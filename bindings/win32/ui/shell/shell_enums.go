@@ -4,6 +4,11 @@
 
 package shell
 
+import (
+	"fmt"
+	"strings"
+)
+
 type ACENUMOPTION int32
 
 const (
@@ -12,6 +17,22 @@ const (
 	ACEO_FIRSTUNUSED     ACENUMOPTION = 65536
 )
 
+// String returns the ACENUMOPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACENUMOPTION) String() string {
+	switch e {
+	case ACEO_NONE:
+		return "ACEO_NONE"
+	case ACEO_MOSTRECENTFIRST:
+		return "ACEO_MOSTRECENTFIRST"
+	case ACEO_FIRSTUNUSED:
+		return "ACEO_FIRSTUNUSED"
+	default:
+		return fmt.Sprintf("ACENUMOPTION(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type ACTIVATEOPTIONS int32
 
 const (
@@ -22,6 +43,29 @@ const (
 	AO_PRELAUNCH      ACTIVATEOPTIONS = 33554432
 )
 
+// String returns the ACTIVATEOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACTIVATEOPTIONS) String() string {
+	var parts []string
+	if e&AO_DESIGNMODE != 0 {
+		parts = append(parts, "AO_DESIGNMODE")
+	}
+	if e&AO_NOERRORUI != 0 {
+		parts = append(parts, "AO_NOERRORUI")
+	}
+	if e&AO_NOSPLASHSCREEN != 0 {
+		parts = append(parts, "AO_NOSPLASHSCREEN")
+	}
+	if e&AO_PRELAUNCH != 0 {
+		parts = append(parts, "AO_PRELAUNCH")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type ADJACENT_DISPLAY_EDGES int32
 
 const (
@@ -30,6 +74,22 @@ const (
 	ADE_RIGHT ADJACENT_DISPLAY_EDGES = 2
 )
 
+// String returns the ADJACENT_DISPLAY_EDGES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADJACENT_DISPLAY_EDGES) String() string {
+	var parts []string
+	if e&ADE_LEFT != 0 {
+		parts = append(parts, "ADE_LEFT")
+	}
+	if e&ADE_RIGHT != 0 {
+		parts = append(parts, "ADE_RIGHT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type AHE_TYPE int32
 
 const (
@@ -37,6 +97,20 @@ const (
 	AHE_IMMERSIVE AHE_TYPE = 1
 )
 
+// String returns the AHE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AHE_TYPE) String() string {
+	switch e {
+	case AHE_DESKTOP:
+		return "AHE_DESKTOP"
+	case AHE_IMMERSIVE:
+		return "AHE_IMMERSIVE"
+	default:
+		return fmt.Sprintf("AHE_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type AHTYPE int32
 
 const (
@@ -49,6 +123,37 @@ const (
 	AHTYPE_CLASS_APPLICATION AHTYPE = 256
 	AHTYPE_ANY_PROGID        AHTYPE = 512
 )
+
+// String returns the AHTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AHTYPE) String() string {
+	var parts []string
+	if e&AHTYPE_USER_APPLICATION != 0 {
+		parts = append(parts, "AHTYPE_USER_APPLICATION")
+	}
+	if e&AHTYPE_ANY_APPLICATION != 0 {
+		parts = append(parts, "AHTYPE_ANY_APPLICATION")
+	}
+	if e&AHTYPE_MACHINEDEFAULT != 0 {
+		parts = append(parts, "AHTYPE_MACHINEDEFAULT")
+	}
+	if e&AHTYPE_PROGID != 0 {
+		parts = append(parts, "AHTYPE_PROGID")
+	}
+	if e&AHTYPE_APPLICATION != 0 {
+		parts = append(parts, "AHTYPE_APPLICATION")
+	}
+	if e&AHTYPE_CLASS_APPLICATION != 0 {
+		parts = append(parts, "AHTYPE_CLASS_APPLICATION")
+	}
+	if e&AHTYPE_ANY_PROGID != 0 {
+		parts = append(parts, "AHTYPE_ANY_PROGID")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // APPACTIONFLAGS: https://learn.microsoft.com/windows/win32/api/shappmgr/ne-shappmgr-appactionflags
 type APPACTIONFLAGS int32
@@ -65,12 +170,52 @@ const (
 	APPACTION_UNSCHEDULE   APPACTIONFLAGS = 512
 )
 
+// String returns the APPACTIONFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPACTIONFLAGS) String() string {
+	switch e {
+	case APPACTION_INSTALL:
+		return "APPACTION_INSTALL"
+	case APPACTION_UNINSTALL:
+		return "APPACTION_UNINSTALL"
+	case APPACTION_MODIFY:
+		return "APPACTION_MODIFY"
+	case APPACTION_REPAIR:
+		return "APPACTION_REPAIR"
+	case APPACTION_UPGRADE:
+		return "APPACTION_UPGRADE"
+	case APPACTION_CANGETSIZE:
+		return "APPACTION_CANGETSIZE"
+	case APPACTION_MODIFYREMOVE:
+		return "APPACTION_MODIFYREMOVE"
+	case APPACTION_ADDLATER:
+		return "APPACTION_ADDLATER"
+	case APPACTION_UNSCHEDULE:
+		return "APPACTION_UNSCHEDULE"
+	default:
+		return fmt.Sprintf("APPACTIONFLAGS(%d)", int32(e))
+	}
+}
+
 type APPDOCLISTTYPE int32
 
 const (
 	ADLT_RECENT   APPDOCLISTTYPE = 0
 	ADLT_FREQUENT APPDOCLISTTYPE = 1
 )
+
+// String returns the APPDOCLISTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPDOCLISTTYPE) String() string {
+	switch e {
+	case ADLT_RECENT:
+		return "ADLT_RECENT"
+	case ADLT_FREQUENT:
+		return "ADLT_FREQUENT"
+	default:
+		return fmt.Sprintf("APPDOCLISTTYPE(%d)", int32(e))
+	}
+}
 
 // APPINFODATAFLAGS: https://learn.microsoft.com/windows/win32/api/shappmgr/ne-shappmgr-appinfodataflags
 type APPINFODATAFLAGS int32
@@ -96,6 +241,51 @@ const (
 	AIM_UPDATEINFOURL     APPINFODATAFLAGS = 524288
 )
 
+// String returns the APPINFODATAFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPINFODATAFLAGS) String() string {
+	switch e {
+	case AIM_DISPLAYNAME:
+		return "AIM_DISPLAYNAME"
+	case AIM_VERSION:
+		return "AIM_VERSION"
+	case AIM_PUBLISHER:
+		return "AIM_PUBLISHER"
+	case AIM_PRODUCTID:
+		return "AIM_PRODUCTID"
+	case AIM_REGISTEREDOWNER:
+		return "AIM_REGISTEREDOWNER"
+	case AIM_REGISTEREDCOMPANY:
+		return "AIM_REGISTEREDCOMPANY"
+	case AIM_LANGUAGE:
+		return "AIM_LANGUAGE"
+	case AIM_SUPPORTURL:
+		return "AIM_SUPPORTURL"
+	case AIM_SUPPORTTELEPHONE:
+		return "AIM_SUPPORTTELEPHONE"
+	case AIM_HELPLINK:
+		return "AIM_HELPLINK"
+	case AIM_INSTALLLOCATION:
+		return "AIM_INSTALLLOCATION"
+	case AIM_INSTALLSOURCE:
+		return "AIM_INSTALLSOURCE"
+	case AIM_INSTALLDATE:
+		return "AIM_INSTALLDATE"
+	case AIM_CONTACT:
+		return "AIM_CONTACT"
+	case AIM_COMMENTS:
+		return "AIM_COMMENTS"
+	case AIM_IMAGE:
+		return "AIM_IMAGE"
+	case AIM_READMEURL:
+		return "AIM_READMEURL"
+	case AIM_UPDATEINFOURL:
+		return "AIM_UPDATEINFOURL"
+	default:
+		return fmt.Sprintf("APPINFODATAFLAGS(%d)", int32(e))
+	}
+}
+
 type APPLICATION_VIEW_MIN_WIDTH int32
 
 const (
@@ -104,6 +294,21 @@ const (
 	AVMW_500     APPLICATION_VIEW_MIN_WIDTH = 2
 )
 
+// String returns the APPLICATION_VIEW_MIN_WIDTH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPLICATION_VIEW_MIN_WIDTH) String() string {
+	switch e {
+	case AVMW_DEFAULT:
+		return "AVMW_DEFAULT"
+	case AVMW_320:
+		return "AVMW_320"
+	case AVMW_500:
+		return "AVMW_500"
+	default:
+		return fmt.Sprintf("APPLICATION_VIEW_MIN_WIDTH(%d)", int32(e))
+	}
+}
+
 // APPLICATION_VIEW_ORIENTATION: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-application_view_orientation
 type APPLICATION_VIEW_ORIENTATION int32
 
@@ -111,6 +316,19 @@ const (
 	AVO_LANDSCAPE APPLICATION_VIEW_ORIENTATION = 0
 	AVO_PORTRAIT  APPLICATION_VIEW_ORIENTATION = 1
 )
+
+// String returns the APPLICATION_VIEW_ORIENTATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPLICATION_VIEW_ORIENTATION) String() string {
+	switch e {
+	case AVO_LANDSCAPE:
+		return "AVO_LANDSCAPE"
+	case AVO_PORTRAIT:
+		return "AVO_PORTRAIT"
+	default:
+		return fmt.Sprintf("APPLICATION_VIEW_ORIENTATION(%d)", int32(e))
+	}
+}
 
 // APPLICATION_VIEW_SIZE_PREFERENCE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-application_view_size_preference
 type APPLICATION_VIEW_SIZE_PREFERENCE int32
@@ -125,6 +343,29 @@ const (
 	AVSP_CUSTOM      APPLICATION_VIEW_SIZE_PREFERENCE = 6
 )
 
+// String returns the APPLICATION_VIEW_SIZE_PREFERENCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPLICATION_VIEW_SIZE_PREFERENCE) String() string {
+	switch e {
+	case AVSP_DEFAULT:
+		return "AVSP_DEFAULT"
+	case AVSP_USE_LESS:
+		return "AVSP_USE_LESS"
+	case AVSP_USE_HALF:
+		return "AVSP_USE_HALF"
+	case AVSP_USE_MORE:
+		return "AVSP_USE_MORE"
+	case AVSP_USE_MINIMUM:
+		return "AVSP_USE_MINIMUM"
+	case AVSP_USE_NONE:
+		return "AVSP_USE_NONE"
+	case AVSP_CUSTOM:
+		return "AVSP_CUSTOM"
+	default:
+		return fmt.Sprintf("APPLICATION_VIEW_SIZE_PREFERENCE(%d)", int32(e))
+	}
+}
+
 // APPLICATION_VIEW_STATE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-application_view_state
 type APPLICATION_VIEW_STATE int32
 
@@ -134,6 +375,23 @@ const (
 	AVS_SNAPPED              APPLICATION_VIEW_STATE = 2
 	AVS_FULLSCREEN_PORTRAIT  APPLICATION_VIEW_STATE = 3
 )
+
+// String returns the APPLICATION_VIEW_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPLICATION_VIEW_STATE) String() string {
+	switch e {
+	case AVS_FULLSCREEN_LANDSCAPE:
+		return "AVS_FULLSCREEN_LANDSCAPE"
+	case AVS_FILLED:
+		return "AVS_FILLED"
+	case AVS_SNAPPED:
+		return "AVS_SNAPPED"
+	case AVS_FULLSCREEN_PORTRAIT:
+		return "AVS_FULLSCREEN_PORTRAIT"
+	default:
+		return fmt.Sprintf("APPLICATION_VIEW_STATE(%d)", int32(e))
+	}
+}
 
 type ASSOCCLASS int32
 
@@ -152,6 +410,39 @@ const (
 	ASSOCCLASS_PROTOCOL_STR     ASSOCCLASS = 11
 )
 
+// String returns the ASSOCCLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ASSOCCLASS) String() string {
+	switch e {
+	case ASSOCCLASS_SHELL_KEY:
+		return "ASSOCCLASS_SHELL_KEY"
+	case ASSOCCLASS_PROGID_KEY:
+		return "ASSOCCLASS_PROGID_KEY"
+	case ASSOCCLASS_PROGID_STR:
+		return "ASSOCCLASS_PROGID_STR"
+	case ASSOCCLASS_CLSID_KEY:
+		return "ASSOCCLASS_CLSID_KEY"
+	case ASSOCCLASS_CLSID_STR:
+		return "ASSOCCLASS_CLSID_STR"
+	case ASSOCCLASS_APP_KEY:
+		return "ASSOCCLASS_APP_KEY"
+	case ASSOCCLASS_APP_STR:
+		return "ASSOCCLASS_APP_STR"
+	case ASSOCCLASS_SYSTEM_STR:
+		return "ASSOCCLASS_SYSTEM_STR"
+	case ASSOCCLASS_FOLDER:
+		return "ASSOCCLASS_FOLDER"
+	case ASSOCCLASS_STAR:
+		return "ASSOCCLASS_STAR"
+	case ASSOCCLASS_FIXED_PROGID_STR:
+		return "ASSOCCLASS_FIXED_PROGID_STR"
+	case ASSOCCLASS_PROTOCOL_STR:
+		return "ASSOCCLASS_PROTOCOL_STR"
+	default:
+		return fmt.Sprintf("ASSOCCLASS(%d)", int32(e))
+	}
+}
+
 // ASSOCDATA: https://learn.microsoft.com/windows/win32/api/shlwapi/ne-shlwapi-assocdata
 type ASSOCDATA int32
 
@@ -165,13 +456,48 @@ const (
 	ASSOCDATA_MAX               ASSOCDATA = 7
 )
 
+// String returns the ASSOCDATA constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ASSOCDATA) String() string {
+	switch e {
+	case ASSOCDATA_MSIDESCRIPTOR:
+		return "ASSOCDATA_MSIDESCRIPTOR"
+	case ASSOCDATA_NOACTIVATEHANDLER:
+		return "ASSOCDATA_NOACTIVATEHANDLER"
+	case ASSOCDATA_UNUSED1:
+		return "ASSOCDATA_UNUSED1"
+	case ASSOCDATA_HASPERUSERASSOC:
+		return "ASSOCDATA_HASPERUSERASSOC"
+	case ASSOCDATA_EDITFLAGS:
+		return "ASSOCDATA_EDITFLAGS"
+	case ASSOCDATA_VALUE:
+		return "ASSOCDATA_VALUE"
+	case ASSOCDATA_MAX:
+		return "ASSOCDATA_MAX"
+	default:
+		return fmt.Sprintf("ASSOCDATA(%d)", int32(e))
+	}
+}
+
 type ASSOCENUM int32
 
 const (
 	ASSOCENUM_NONE ASSOCENUM = 0
 )
 
+// String returns the ASSOCENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ASSOCENUM) String() string {
+	switch e {
+	case ASSOCENUM_NONE:
+		return "ASSOCENUM_NONE"
+	default:
+		return fmt.Sprintf("ASSOCENUM(%d)", int32(e))
+	}
+}
+
 // ASSOCF: https://learn.microsoft.com/windows/win32/shell/ASSOCF_str
+// Bitmask — values may be combined with |.
 type ASSOCF uint32
 
 const (
@@ -196,6 +522,70 @@ const (
 	ASSOCF_APP_TO_APP           ASSOCF = 65536
 )
 
+// String returns the ASSOCF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ASSOCF) String() string {
+	var parts []string
+	if e&ASSOCF_INIT_NOREMAPCLSID != 0 {
+		parts = append(parts, "ASSOCF_INIT_NOREMAPCLSID")
+	}
+	if e&ASSOCF_INIT_BYEXENAME != 0 {
+		parts = append(parts, "ASSOCF_INIT_BYEXENAME")
+	}
+	if e&ASSOCF_OPEN_BYEXENAME != 0 {
+		parts = append(parts, "ASSOCF_OPEN_BYEXENAME")
+	}
+	if e&ASSOCF_INIT_DEFAULTTOSTAR != 0 {
+		parts = append(parts, "ASSOCF_INIT_DEFAULTTOSTAR")
+	}
+	if e&ASSOCF_INIT_DEFAULTTOFOLDER != 0 {
+		parts = append(parts, "ASSOCF_INIT_DEFAULTTOFOLDER")
+	}
+	if e&ASSOCF_NOUSERSETTINGS != 0 {
+		parts = append(parts, "ASSOCF_NOUSERSETTINGS")
+	}
+	if e&ASSOCF_NOTRUNCATE != 0 {
+		parts = append(parts, "ASSOCF_NOTRUNCATE")
+	}
+	if e&ASSOCF_VERIFY != 0 {
+		parts = append(parts, "ASSOCF_VERIFY")
+	}
+	if e&ASSOCF_REMAPRUNDLL != 0 {
+		parts = append(parts, "ASSOCF_REMAPRUNDLL")
+	}
+	if e&ASSOCF_NOFIXUPS != 0 {
+		parts = append(parts, "ASSOCF_NOFIXUPS")
+	}
+	if e&ASSOCF_IGNOREBASECLASS != 0 {
+		parts = append(parts, "ASSOCF_IGNOREBASECLASS")
+	}
+	if e&ASSOCF_INIT_IGNOREUNKNOWN != 0 {
+		parts = append(parts, "ASSOCF_INIT_IGNOREUNKNOWN")
+	}
+	if e&ASSOCF_INIT_FIXED_PROGID != 0 {
+		parts = append(parts, "ASSOCF_INIT_FIXED_PROGID")
+	}
+	if e&ASSOCF_IS_PROTOCOL != 0 {
+		parts = append(parts, "ASSOCF_IS_PROTOCOL")
+	}
+	if e&ASSOCF_INIT_FOR_FILE != 0 {
+		parts = append(parts, "ASSOCF_INIT_FOR_FILE")
+	}
+	if e&ASSOCF_IS_FULL_URI != 0 {
+		parts = append(parts, "ASSOCF_IS_FULL_URI")
+	}
+	if e&ASSOCF_PER_MACHINE_ONLY != 0 {
+		parts = append(parts, "ASSOCF_PER_MACHINE_ONLY")
+	}
+	if e&ASSOCF_APP_TO_APP != 0 {
+		parts = append(parts, "ASSOCF_APP_TO_APP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // ASSOCIATIONLEVEL: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-associationlevel
 type ASSOCIATIONLEVEL int32
 
@@ -204,6 +594,21 @@ const (
 	AL_EFFECTIVE ASSOCIATIONLEVEL = 1
 	AL_USER      ASSOCIATIONLEVEL = 2
 )
+
+// String returns the ASSOCIATIONLEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ASSOCIATIONLEVEL) String() string {
+	switch e {
+	case AL_MACHINE:
+		return "AL_MACHINE"
+	case AL_EFFECTIVE:
+		return "AL_EFFECTIVE"
+	case AL_USER:
+		return "AL_USER"
+	default:
+		return fmt.Sprintf("ASSOCIATIONLEVEL(%d)", int32(e))
+	}
+}
 
 // ASSOCIATIONTYPE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-associationtype
 type ASSOCIATIONTYPE int32
@@ -215,6 +620,23 @@ const (
 	AT_MIMETYPE        ASSOCIATIONTYPE = 3
 )
 
+// String returns the ASSOCIATIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ASSOCIATIONTYPE) String() string {
+	switch e {
+	case AT_FILEEXTENSION:
+		return "AT_FILEEXTENSION"
+	case AT_URLPROTOCOL:
+		return "AT_URLPROTOCOL"
+	case AT_STARTMENUCLIENT:
+		return "AT_STARTMENUCLIENT"
+	case AT_MIMETYPE:
+		return "AT_MIMETYPE"
+	default:
+		return fmt.Sprintf("ASSOCIATIONTYPE(%d)", int32(e))
+	}
+}
+
 // ASSOCKEY: https://learn.microsoft.com/windows/win32/api/shlwapi/ne-shlwapi-assockey
 type ASSOCKEY int32
 
@@ -225,6 +647,25 @@ const (
 	ASSOCKEY_BASECLASS      ASSOCKEY = 4
 	ASSOCKEY_MAX            ASSOCKEY = 5
 )
+
+// String returns the ASSOCKEY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ASSOCKEY) String() string {
+	switch e {
+	case ASSOCKEY_SHELLEXECCLASS:
+		return "ASSOCKEY_SHELLEXECCLASS"
+	case ASSOCKEY_APP:
+		return "ASSOCKEY_APP"
+	case ASSOCKEY_CLASS:
+		return "ASSOCKEY_CLASS"
+	case ASSOCKEY_BASECLASS:
+		return "ASSOCKEY_BASECLASS"
+	case ASSOCKEY_MAX:
+		return "ASSOCKEY_MAX"
+	default:
+		return fmt.Sprintf("ASSOCKEY(%d)", int32(e))
+	}
+}
 
 // ASSOCSTR: https://learn.microsoft.com/windows/win32/api/shlwapi/ne-shlwapi-assocstr
 type ASSOCSTR int32
@@ -256,12 +697,83 @@ const (
 	ASSOCSTR_MAX                     ASSOCSTR = 24
 )
 
+// String returns the ASSOCSTR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ASSOCSTR) String() string {
+	switch e {
+	case ASSOCSTR_COMMAND:
+		return "ASSOCSTR_COMMAND"
+	case ASSOCSTR_EXECUTABLE:
+		return "ASSOCSTR_EXECUTABLE"
+	case ASSOCSTR_FRIENDLYDOCNAME:
+		return "ASSOCSTR_FRIENDLYDOCNAME"
+	case ASSOCSTR_FRIENDLYAPPNAME:
+		return "ASSOCSTR_FRIENDLYAPPNAME"
+	case ASSOCSTR_NOOPEN:
+		return "ASSOCSTR_NOOPEN"
+	case ASSOCSTR_SHELLNEWVALUE:
+		return "ASSOCSTR_SHELLNEWVALUE"
+	case ASSOCSTR_DDECOMMAND:
+		return "ASSOCSTR_DDECOMMAND"
+	case ASSOCSTR_DDEIFEXEC:
+		return "ASSOCSTR_DDEIFEXEC"
+	case ASSOCSTR_DDEAPPLICATION:
+		return "ASSOCSTR_DDEAPPLICATION"
+	case ASSOCSTR_DDETOPIC:
+		return "ASSOCSTR_DDETOPIC"
+	case ASSOCSTR_INFOTIP:
+		return "ASSOCSTR_INFOTIP"
+	case ASSOCSTR_QUICKTIP:
+		return "ASSOCSTR_QUICKTIP"
+	case ASSOCSTR_TILEINFO:
+		return "ASSOCSTR_TILEINFO"
+	case ASSOCSTR_CONTENTTYPE:
+		return "ASSOCSTR_CONTENTTYPE"
+	case ASSOCSTR_DEFAULTICON:
+		return "ASSOCSTR_DEFAULTICON"
+	case ASSOCSTR_SHELLEXTENSION:
+		return "ASSOCSTR_SHELLEXTENSION"
+	case ASSOCSTR_DROPTARGET:
+		return "ASSOCSTR_DROPTARGET"
+	case ASSOCSTR_DELEGATEEXECUTE:
+		return "ASSOCSTR_DELEGATEEXECUTE"
+	case ASSOCSTR_SUPPORTED_URI_PROTOCOLS:
+		return "ASSOCSTR_SUPPORTED_URI_PROTOCOLS"
+	case ASSOCSTR_PROGID:
+		return "ASSOCSTR_PROGID"
+	case ASSOCSTR_APPID:
+		return "ASSOCSTR_APPID"
+	case ASSOCSTR_APPPUBLISHER:
+		return "ASSOCSTR_APPPUBLISHER"
+	case ASSOCSTR_APPICONREFERENCE:
+		return "ASSOCSTR_APPICONREFERENCE"
+	case ASSOCSTR_MAX:
+		return "ASSOCSTR_MAX"
+	default:
+		return fmt.Sprintf("ASSOCSTR(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type ASSOC_FILTER int32
 
 const (
 	ASSOC_FILTER_NONE        ASSOC_FILTER = 0
 	ASSOC_FILTER_RECOMMENDED ASSOC_FILTER = 1
 )
+
+// String returns the ASSOC_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ASSOC_FILTER) String() string {
+	var parts []string
+	if e&ASSOC_FILTER_RECOMMENDED != 0 {
+		parts = append(parts, "ASSOC_FILTER_RECOMMENDED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // ATTACHMENT_ACTION: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-attachment_action
 type ATTACHMENT_ACTION int32
@@ -272,6 +784,21 @@ const (
 	ATTACHMENT_ACTION_EXEC   ATTACHMENT_ACTION = 2
 )
 
+// String returns the ATTACHMENT_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ATTACHMENT_ACTION) String() string {
+	switch e {
+	case ATTACHMENT_ACTION_CANCEL:
+		return "ATTACHMENT_ACTION_CANCEL"
+	case ATTACHMENT_ACTION_SAVE:
+		return "ATTACHMENT_ACTION_SAVE"
+	case ATTACHMENT_ACTION_EXEC:
+		return "ATTACHMENT_ACTION_EXEC"
+	default:
+		return fmt.Sprintf("ATTACHMENT_ACTION(%d)", int32(e))
+	}
+}
+
 // ATTACHMENT_PROMPT: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-attachment_prompt
 type ATTACHMENT_PROMPT int32
 
@@ -281,6 +808,23 @@ const (
 	ATTACHMENT_PROMPT_EXEC         ATTACHMENT_PROMPT = 2
 	ATTACHMENT_PROMPT_EXEC_OR_SAVE ATTACHMENT_PROMPT = 3
 )
+
+// String returns the ATTACHMENT_PROMPT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ATTACHMENT_PROMPT) String() string {
+	switch e {
+	case ATTACHMENT_PROMPT_NONE:
+		return "ATTACHMENT_PROMPT_NONE"
+	case ATTACHMENT_PROMPT_SAVE:
+		return "ATTACHMENT_PROMPT_SAVE"
+	case ATTACHMENT_PROMPT_EXEC:
+		return "ATTACHMENT_PROMPT_EXEC"
+	case ATTACHMENT_PROMPT_EXEC_OR_SAVE:
+		return "ATTACHMENT_PROMPT_EXEC_OR_SAVE"
+	default:
+		return fmt.Sprintf("ATTACHMENT_PROMPT(%d)", int32(e))
+	}
+}
 
 // AUTOCOMPLETELISTOPTIONS: https://learn.microsoft.com/windows/win32/api/shlobj_core/ne-shlobj_core-autocompletelistoptions
 type AUTOCOMPLETELISTOPTIONS int32
@@ -295,6 +839,31 @@ const (
 	ACLO_FILESYSDIRS      AUTOCOMPLETELISTOPTIONS = 32
 	ACLO_VIRTUALNAMESPACE AUTOCOMPLETELISTOPTIONS = 64
 )
+
+// String returns the AUTOCOMPLETELISTOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTOCOMPLETELISTOPTIONS) String() string {
+	switch e {
+	case ACLO_NONE:
+		return "ACLO_NONE"
+	case ACLO_CURRENTDIR:
+		return "ACLO_CURRENTDIR"
+	case ACLO_MYCOMPUTER:
+		return "ACLO_MYCOMPUTER"
+	case ACLO_DESKTOP:
+		return "ACLO_DESKTOP"
+	case ACLO_FAVORITES:
+		return "ACLO_FAVORITES"
+	case ACLO_FILESYSONLY:
+		return "ACLO_FILESYSONLY"
+	case ACLO_FILESYSDIRS:
+		return "ACLO_FILESYSDIRS"
+	case ACLO_VIRTUALNAMESPACE:
+		return "ACLO_VIRTUALNAMESPACE"
+	default:
+		return fmt.Sprintf("AUTOCOMPLETELISTOPTIONS(%d)", int32(e))
+	}
+}
 
 // AUTOCOMPLETEOPTIONS: https://learn.microsoft.com/windows/win32/api/shldisp/ne-shldisp-autocompleteoptions
 type AUTOCOMPLETEOPTIONS int32
@@ -312,12 +881,54 @@ const (
 	ACO_NOPREFIXFILTERING  AUTOCOMPLETEOPTIONS = 256
 )
 
+// String returns the AUTOCOMPLETEOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUTOCOMPLETEOPTIONS) String() string {
+	switch e {
+	case ACO_NONE:
+		return "ACO_NONE"
+	case ACO_AUTOSUGGEST:
+		return "ACO_AUTOSUGGEST"
+	case ACO_AUTOAPPEND:
+		return "ACO_AUTOAPPEND"
+	case ACO_SEARCH:
+		return "ACO_SEARCH"
+	case ACO_FILTERPREFIXES:
+		return "ACO_FILTERPREFIXES"
+	case ACO_USETAB:
+		return "ACO_USETAB"
+	case ACO_UPDOWNKEYDROPSLIST:
+		return "ACO_UPDOWNKEYDROPSLIST"
+	case ACO_RTLREADING:
+		return "ACO_RTLREADING"
+	case ACO_WORD_FILTER:
+		return "ACO_WORD_FILTER"
+	case ACO_NOPREFIXFILTERING:
+		return "ACO_NOPREFIXFILTERING"
+	default:
+		return fmt.Sprintf("AUTOCOMPLETEOPTIONS(%d)", int32(e))
+	}
+}
+
 type BANDSITECID int32
 
 const (
 	BSID_BANDADDED   BANDSITECID = 0
 	BSID_BANDREMOVED BANDSITECID = 1
 )
+
+// String returns the BANDSITECID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BANDSITECID) String() string {
+	switch e {
+	case BSID_BANDADDED:
+		return "BSID_BANDADDED"
+	case BSID_BANDREMOVED:
+		return "BSID_BANDREMOVED"
+	default:
+		return fmt.Sprintf("BANDSITECID(%d)", int32(e))
+	}
+}
 
 type BANNER_NOTIFICATION_EVENT int32
 
@@ -330,6 +941,27 @@ const (
 	BNE_Button2Clicked BANNER_NOTIFICATION_EVENT = 5
 )
 
+// String returns the BANNER_NOTIFICATION_EVENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BANNER_NOTIFICATION_EVENT) String() string {
+	switch e {
+	case BNE_Rendered:
+		return "BNE_Rendered"
+	case BNE_Hovered:
+		return "BNE_Hovered"
+	case BNE_Closed:
+		return "BNE_Closed"
+	case BNE_Dismissed:
+		return "BNE_Dismissed"
+	case BNE_Button1Clicked:
+		return "BNE_Button1Clicked"
+	case BNE_Button2Clicked:
+		return "BNE_Button2Clicked"
+	default:
+		return fmt.Sprintf("BANNER_NOTIFICATION_EVENT(%d)", int32(e))
+	}
+}
+
 // BNSTATE: https://learn.microsoft.com/windows/win32/api/shdeprecated/ne-shdeprecated-bnstate
 type BNSTATE int32
 
@@ -338,6 +970,21 @@ const (
 	BNS_BEGIN_NAVIGATE BNSTATE = 1
 	BNS_NAVIGATE       BNSTATE = 2
 )
+
+// String returns the BNSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BNSTATE) String() string {
+	switch e {
+	case BNS_NORMAL:
+		return "BNS_NORMAL"
+	case BNS_BEGIN_NAVIGATE:
+		return "BNS_BEGIN_NAVIGATE"
+	case BNS_NAVIGATE:
+		return "BNS_NAVIGATE"
+	default:
+		return fmt.Sprintf("BNSTATE(%d)", int32(e))
+	}
+}
 
 type BrowserNavConstants int32
 
@@ -376,7 +1023,81 @@ const (
 	NavReserved7             BrowserNavConstants = -2147483648
 )
 
+// String returns the BrowserNavConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BrowserNavConstants) String() string {
+	switch e {
+	case NavOpenInNewWindow:
+		return "NavOpenInNewWindow"
+	case NavNoHistory:
+		return "NavNoHistory"
+	case NavNoReadFromCache:
+		return "NavNoReadFromCache"
+	case NavNoWriteToCache:
+		return "NavNoWriteToCache"
+	case NavAllowAutosearch:
+		return "NavAllowAutosearch"
+	case NavBrowserBar:
+		return "NavBrowserBar"
+	case NavHyperlink:
+		return "NavHyperlink"
+	case NavEnforceRestricted:
+		return "NavEnforceRestricted"
+	case NavNewWindowsManaged:
+		return "NavNewWindowsManaged"
+	case NavUntrustedForDownload:
+		return "NavUntrustedForDownload"
+	case NavTrustedForActiveX:
+		return "NavTrustedForActiveX"
+	case NavOpenInNewTab:
+		return "NavOpenInNewTab"
+	case NavOpenInBackgroundTab:
+		return "NavOpenInBackgroundTab"
+	case NavKeepWordWheelText:
+		return "NavKeepWordWheelText"
+	case NavVirtualTab:
+		return "NavVirtualTab"
+	case NavBlockRedirectsXDomain:
+		return "NavBlockRedirectsXDomain"
+	case NavOpenNewForegroundTab:
+		return "NavOpenNewForegroundTab"
+	case NavTravelLogScreenshot:
+		return "NavTravelLogScreenshot"
+	case NavDeferUnload:
+		return "NavDeferUnload"
+	case NavSpeculative:
+		return "NavSpeculative"
+	case NavSuggestNewWindow:
+		return "NavSuggestNewWindow"
+	case NavSuggestNewTab:
+		return "NavSuggestNewTab"
+	case NavReserved1:
+		return "NavReserved1"
+	case NavHomepageNavigate:
+		return "NavHomepageNavigate"
+	case NavRefresh:
+		return "NavRefresh"
+	case NavHostNavigation:
+		return "NavHostNavigation"
+	case NavReserved2:
+		return "NavReserved2"
+	case NavReserved3:
+		return "NavReserved3"
+	case NavReserved4:
+		return "NavReserved4"
+	case NavReserved5:
+		return "NavReserved5"
+	case NavReserved6:
+		return "NavReserved6"
+	case NavReserved7:
+		return "NavReserved7"
+	default:
+		return fmt.Sprintf("BrowserNavConstants(%d)", int32(e))
+	}
+}
+
 // CATEGORYINFO_FLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-categoryinfo_flags
+// Bitmask — values may be combined with |.
 type CATEGORYINFO_FLAGS int32
 
 const (
@@ -392,13 +1113,64 @@ const (
 	CATINFO_SHOWEMPTY       CATEGORYINFO_FLAGS = 256
 )
 
+// String returns the CATEGORYINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CATEGORYINFO_FLAGS) String() string {
+	var parts []string
+	if e&CATINFO_COLLAPSED != 0 {
+		parts = append(parts, "CATINFO_COLLAPSED")
+	}
+	if e&CATINFO_HIDDEN != 0 {
+		parts = append(parts, "CATINFO_HIDDEN")
+	}
+	if e&CATINFO_EXPANDED != 0 {
+		parts = append(parts, "CATINFO_EXPANDED")
+	}
+	if e&CATINFO_NOHEADER != 0 {
+		parts = append(parts, "CATINFO_NOHEADER")
+	}
+	if e&CATINFO_NOTCOLLAPSIBLE != 0 {
+		parts = append(parts, "CATINFO_NOTCOLLAPSIBLE")
+	}
+	if e&CATINFO_NOHEADERCOUNT != 0 {
+		parts = append(parts, "CATINFO_NOHEADERCOUNT")
+	}
+	if e&CATINFO_SUBSETTED != 0 {
+		parts = append(parts, "CATINFO_SUBSETTED")
+	}
+	if e&CATINFO_SEPARATE_IMAGES != 0 {
+		parts = append(parts, "CATINFO_SEPARATE_IMAGES")
+	}
+	if e&CATINFO_SHOWEMPTY != 0 {
+		parts = append(parts, "CATINFO_SHOWEMPTY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CATSORT_FLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-catsort_flags
+// Bitmask — values may be combined with |.
 type CATSORT_FLAGS int32
 
 const (
 	CATSORT_DEFAULT CATSORT_FLAGS = 0
 	CATSORT_NAME    CATSORT_FLAGS = 1
 )
+
+// String returns the CATSORT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CATSORT_FLAGS) String() string {
+	var parts []string
+	if e&CATSORT_NAME != 0 {
+		parts = append(parts, "CATSORT_NAME")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CDBURNINGEXTENSIONRET int32
 
@@ -408,6 +1180,22 @@ const (
 	CDBE_RET_STOPWIZARD       CDBURNINGEXTENSIONRET = 2
 )
 
+// String returns the CDBURNINGEXTENSIONRET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CDBURNINGEXTENSIONRET) String() string {
+	switch e {
+	case CDBE_RET_DEFAULT:
+		return "CDBE_RET_DEFAULT"
+	case CDBE_RET_DONTRUNOTHEREXTS:
+		return "CDBE_RET_DONTRUNOTHEREXTS"
+	case CDBE_RET_STOPWIZARD:
+		return "CDBE_RET_STOPWIZARD"
+	default:
+		return fmt.Sprintf("CDBURNINGEXTENSIONRET(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CDCONTROLSTATEF int32
 
 const (
@@ -417,7 +1205,27 @@ const (
 	CDCS_ENABLEDVISIBLE CDCONTROLSTATEF = 3
 )
 
+// String returns the CDCONTROLSTATEF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CDCONTROLSTATEF) String() string {
+	var parts []string
+	if e&CDCS_ENABLED != 0 {
+		parts = append(parts, "CDCS_ENABLED")
+	}
+	if e&CDCS_VISIBLE != 0 {
+		parts = append(parts, "CDCS_VISIBLE")
+	}
+	if e&CDCS_ENABLEDVISIBLE != 0 {
+		parts = append(parts, "CDCS_ENABLEDVISIBLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CM_ENUM_FLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-cm_enum_flags
+// Bitmask — values may be combined with |.
 type CM_ENUM_FLAGS int32
 
 const (
@@ -425,7 +1233,24 @@ const (
 	CM_ENUM_VISIBLE CM_ENUM_FLAGS = 2
 )
 
+// String returns the CM_ENUM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_ENUM_FLAGS) String() string {
+	var parts []string
+	if e&CM_ENUM_ALL != 0 {
+		parts = append(parts, "CM_ENUM_ALL")
+	}
+	if e&CM_ENUM_VISIBLE != 0 {
+		parts = append(parts, "CM_ENUM_VISIBLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CM_MASK: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-cm_mask
+// Bitmask — values may be combined with |.
 type CM_MASK int32
 
 const (
@@ -436,6 +1261,31 @@ const (
 	CM_MASK_STATE        CM_MASK = 16
 )
 
+// String returns the CM_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_MASK) String() string {
+	var parts []string
+	if e&CM_MASK_WIDTH != 0 {
+		parts = append(parts, "CM_MASK_WIDTH")
+	}
+	if e&CM_MASK_DEFAULTWIDTH != 0 {
+		parts = append(parts, "CM_MASK_DEFAULTWIDTH")
+	}
+	if e&CM_MASK_IDEALWIDTH != 0 {
+		parts = append(parts, "CM_MASK_IDEALWIDTH")
+	}
+	if e&CM_MASK_NAME != 0 {
+		parts = append(parts, "CM_MASK_NAME")
+	}
+	if e&CM_MASK_STATE != 0 {
+		parts = append(parts, "CM_MASK_STATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CM_SET_WIDTH_VALUE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-cm_set_width_value
 type CM_SET_WIDTH_VALUE int32
 
@@ -444,7 +1294,21 @@ const (
 	CM_WIDTH_AUTOSIZE   CM_SET_WIDTH_VALUE = -2
 )
 
+// String returns the CM_SET_WIDTH_VALUE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_SET_WIDTH_VALUE) String() string {
+	switch e {
+	case CM_WIDTH_USEDEFAULT:
+		return "CM_WIDTH_USEDEFAULT"
+	case CM_WIDTH_AUTOSIZE:
+		return "CM_WIDTH_AUTOSIZE"
+	default:
+		return fmt.Sprintf("CM_SET_WIDTH_VALUE(%d)", int32(e))
+	}
+}
+
 // CM_STATE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-cm_state
+// Bitmask — values may be combined with |.
 type CM_STATE int32
 
 const (
@@ -455,6 +1319,28 @@ const (
 	CM_STATE_ALWAYSVISIBLE      CM_STATE = 8
 )
 
+// String returns the CM_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_STATE) String() string {
+	var parts []string
+	if e&CM_STATE_VISIBLE != 0 {
+		parts = append(parts, "CM_STATE_VISIBLE")
+	}
+	if e&CM_STATE_FIXEDWIDTH != 0 {
+		parts = append(parts, "CM_STATE_FIXEDWIDTH")
+	}
+	if e&CM_STATE_NOSORTBYFOLDERNESS != 0 {
+		parts = append(parts, "CM_STATE_NOSORTBYFOLDERNESS")
+	}
+	if e&CM_STATE_ALWAYSVISIBLE != 0 {
+		parts = append(parts, "CM_STATE_ALWAYSVISIBLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CPVIEW int32
 
 const (
@@ -464,7 +1350,21 @@ const (
 	CPVIEW_HOME     CPVIEW = 1
 )
 
+// String returns the CPVIEW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CPVIEW) String() string {
+	switch e {
+	case CPVIEW_CLASSIC:
+		return "CPVIEW_CLASSIC"
+	case CPVIEW_CATEGORY:
+		return "CPVIEW_CATEGORY"
+	default:
+		return fmt.Sprintf("CPVIEW(%d)", int32(e))
+	}
+}
+
 // CREDENTIAL_PROVIDER_ACCOUNT_OPTIONS: https://learn.microsoft.com/windows/win32/api/credentialprovider/ne-credentialprovider-credential_provider_account_options
+// Bitmask — values may be combined with |.
 type CREDENTIAL_PROVIDER_ACCOUNT_OPTIONS int32
 
 const (
@@ -473,7 +1373,24 @@ const (
 	CPAO_EMPTY_CONNECTED CREDENTIAL_PROVIDER_ACCOUNT_OPTIONS = 2
 )
 
+// String returns the CREDENTIAL_PROVIDER_ACCOUNT_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREDENTIAL_PROVIDER_ACCOUNT_OPTIONS) String() string {
+	var parts []string
+	if e&CPAO_EMPTY_LOCAL != 0 {
+		parts = append(parts, "CPAO_EMPTY_LOCAL")
+	}
+	if e&CPAO_EMPTY_CONNECTED != 0 {
+		parts = append(parts, "CPAO_EMPTY_CONNECTED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS: https://learn.microsoft.com/windows/win32/api/credentialprovider/ne-credentialprovider-credential_provider_credential_field_options
+// Bitmask — values may be combined with |.
 type CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS int32
 
 const (
@@ -485,6 +1402,31 @@ const (
 	CPCFO_SHOW_ENGLISH_KEYBOARD             CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS = 16
 )
 
+// String returns the CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREDENTIAL_PROVIDER_CREDENTIAL_FIELD_OPTIONS) String() string {
+	var parts []string
+	if e&CPCFO_ENABLE_PASSWORD_REVEAL != 0 {
+		parts = append(parts, "CPCFO_ENABLE_PASSWORD_REVEAL")
+	}
+	if e&CPCFO_IS_EMAIL_ADDRESS != 0 {
+		parts = append(parts, "CPCFO_IS_EMAIL_ADDRESS")
+	}
+	if e&CPCFO_ENABLE_TOUCH_KEYBOARD_AUTO_INVOKE != 0 {
+		parts = append(parts, "CPCFO_ENABLE_TOUCH_KEYBOARD_AUTO_INVOKE")
+	}
+	if e&CPCFO_NUMBERS_ONLY != 0 {
+		parts = append(parts, "CPCFO_NUMBERS_ONLY")
+	}
+	if e&CPCFO_SHOW_ENGLISH_KEYBOARD != 0 {
+		parts = append(parts, "CPCFO_SHOW_ENGLISH_KEYBOARD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE: https://learn.microsoft.com/windows/win32/api/credentialprovider/ne-credentialprovider-credential_provider_field_interactive_state
 type CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE int32
 
@@ -495,6 +1437,23 @@ const (
 	CPFIS_FOCUSED  CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE = 3
 )
 
+// String returns the CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE) String() string {
+	switch e {
+	case CPFIS_NONE:
+		return "CPFIS_NONE"
+	case CPFIS_READONLY:
+		return "CPFIS_READONLY"
+	case CPFIS_DISABLED:
+		return "CPFIS_DISABLED"
+	case CPFIS_FOCUSED:
+		return "CPFIS_FOCUSED"
+	default:
+		return fmt.Sprintf("CREDENTIAL_PROVIDER_FIELD_INTERACTIVE_STATE(%d)", int32(e))
+	}
+}
+
 // CREDENTIAL_PROVIDER_FIELD_STATE: https://learn.microsoft.com/windows/win32/api/credentialprovider/ne-credentialprovider-credential_provider_field_state
 type CREDENTIAL_PROVIDER_FIELD_STATE int32
 
@@ -504,6 +1463,23 @@ const (
 	CPFS_DISPLAY_IN_DESELECTED_TILE CREDENTIAL_PROVIDER_FIELD_STATE = 2
 	CPFS_DISPLAY_IN_BOTH            CREDENTIAL_PROVIDER_FIELD_STATE = 3
 )
+
+// String returns the CREDENTIAL_PROVIDER_FIELD_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREDENTIAL_PROVIDER_FIELD_STATE) String() string {
+	switch e {
+	case CPFS_HIDDEN:
+		return "CPFS_HIDDEN"
+	case CPFS_DISPLAY_IN_SELECTED_TILE:
+		return "CPFS_DISPLAY_IN_SELECTED_TILE"
+	case CPFS_DISPLAY_IN_DESELECTED_TILE:
+		return "CPFS_DISPLAY_IN_DESELECTED_TILE"
+	case CPFS_DISPLAY_IN_BOTH:
+		return "CPFS_DISPLAY_IN_BOTH"
+	default:
+		return fmt.Sprintf("CREDENTIAL_PROVIDER_FIELD_STATE(%d)", int32(e))
+	}
+}
 
 // CREDENTIAL_PROVIDER_FIELD_TYPE: https://learn.microsoft.com/windows/win32/api/credentialprovider/ne-credentialprovider-credential_provider_field_type
 type CREDENTIAL_PROVIDER_FIELD_TYPE int32
@@ -521,6 +1497,35 @@ const (
 	CPFT_SUBMIT_BUTTON CREDENTIAL_PROVIDER_FIELD_TYPE = 9
 )
 
+// String returns the CREDENTIAL_PROVIDER_FIELD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREDENTIAL_PROVIDER_FIELD_TYPE) String() string {
+	switch e {
+	case CPFT_INVALID:
+		return "CPFT_INVALID"
+	case CPFT_LARGE_TEXT:
+		return "CPFT_LARGE_TEXT"
+	case CPFT_SMALL_TEXT:
+		return "CPFT_SMALL_TEXT"
+	case CPFT_COMMAND_LINK:
+		return "CPFT_COMMAND_LINK"
+	case CPFT_EDIT_TEXT:
+		return "CPFT_EDIT_TEXT"
+	case CPFT_PASSWORD_TEXT:
+		return "CPFT_PASSWORD_TEXT"
+	case CPFT_TILE_IMAGE:
+		return "CPFT_TILE_IMAGE"
+	case CPFT_CHECKBOX:
+		return "CPFT_CHECKBOX"
+	case CPFT_COMBOBOX:
+		return "CPFT_COMBOBOX"
+	case CPFT_SUBMIT_BUTTON:
+		return "CPFT_SUBMIT_BUTTON"
+	default:
+		return fmt.Sprintf("CREDENTIAL_PROVIDER_FIELD_TYPE(%d)", int32(e))
+	}
+}
+
 // CREDENTIAL_PROVIDER_GET_SERIALIZATION_RESPONSE: https://learn.microsoft.com/windows/win32/api/credentialprovider/ne-credentialprovider-credential_provider_get_serialization_response
 type CREDENTIAL_PROVIDER_GET_SERIALIZATION_RESPONSE int32
 
@@ -531,6 +1536,23 @@ const (
 	CPGSR_RETURN_NO_CREDENTIAL_FINISHED CREDENTIAL_PROVIDER_GET_SERIALIZATION_RESPONSE = 3
 )
 
+// String returns the CREDENTIAL_PROVIDER_GET_SERIALIZATION_RESPONSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREDENTIAL_PROVIDER_GET_SERIALIZATION_RESPONSE) String() string {
+	switch e {
+	case CPGSR_NO_CREDENTIAL_NOT_FINISHED:
+		return "CPGSR_NO_CREDENTIAL_NOT_FINISHED"
+	case CPGSR_NO_CREDENTIAL_FINISHED:
+		return "CPGSR_NO_CREDENTIAL_FINISHED"
+	case CPGSR_RETURN_CREDENTIAL_FINISHED:
+		return "CPGSR_RETURN_CREDENTIAL_FINISHED"
+	case CPGSR_RETURN_NO_CREDENTIAL_FINISHED:
+		return "CPGSR_RETURN_NO_CREDENTIAL_FINISHED"
+	default:
+		return fmt.Sprintf("CREDENTIAL_PROVIDER_GET_SERIALIZATION_RESPONSE(%d)", int32(e))
+	}
+}
+
 // CREDENTIAL_PROVIDER_STATUS_ICON: https://learn.microsoft.com/windows/win32/api/credentialprovider/ne-credentialprovider-credential_provider_status_icon
 type CREDENTIAL_PROVIDER_STATUS_ICON int32
 
@@ -540,6 +1562,23 @@ const (
 	CPSI_WARNING CREDENTIAL_PROVIDER_STATUS_ICON = 2
 	CPSI_SUCCESS CREDENTIAL_PROVIDER_STATUS_ICON = 3
 )
+
+// String returns the CREDENTIAL_PROVIDER_STATUS_ICON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREDENTIAL_PROVIDER_STATUS_ICON) String() string {
+	switch e {
+	case CPSI_NONE:
+		return "CPSI_NONE"
+	case CPSI_ERROR:
+		return "CPSI_ERROR"
+	case CPSI_WARNING:
+		return "CPSI_WARNING"
+	case CPSI_SUCCESS:
+		return "CPSI_SUCCESS"
+	default:
+		return fmt.Sprintf("CREDENTIAL_PROVIDER_STATUS_ICON(%d)", int32(e))
+	}
+}
 
 // CREDENTIAL_PROVIDER_USAGE_SCENARIO: https://learn.microsoft.com/windows/win32/api/credentialprovider/ne-credentialprovider-credential_provider_usage_scenario
 type CREDENTIAL_PROVIDER_USAGE_SCENARIO int32
@@ -553,6 +1592,27 @@ const (
 	CPUS_PLAP               CREDENTIAL_PROVIDER_USAGE_SCENARIO = 5
 )
 
+// String returns the CREDENTIAL_PROVIDER_USAGE_SCENARIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREDENTIAL_PROVIDER_USAGE_SCENARIO) String() string {
+	switch e {
+	case CPUS_INVALID:
+		return "CPUS_INVALID"
+	case CPUS_LOGON:
+		return "CPUS_LOGON"
+	case CPUS_UNLOCK_WORKSTATION:
+		return "CPUS_UNLOCK_WORKSTATION"
+	case CPUS_CHANGE_PASSWORD:
+		return "CPUS_CHANGE_PASSWORD"
+	case CPUS_CREDUI:
+		return "CPUS_CREDUI"
+	case CPUS_PLAP:
+		return "CPUS_PLAP"
+	default:
+		return fmt.Sprintf("CREDENTIAL_PROVIDER_USAGE_SCENARIO(%d)", int32(e))
+	}
+}
+
 type CommandStateChangeConstants int32
 
 const (
@@ -561,7 +1621,23 @@ const (
 	CSC_NAVIGATEBACK    CommandStateChangeConstants = 2
 )
 
+// String returns the CommandStateChangeConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CommandStateChangeConstants) String() string {
+	switch e {
+	case CSC_UPDATECOMMANDS:
+		return "CSC_UPDATECOMMANDS"
+	case CSC_NAVIGATEFORWARD:
+		return "CSC_NAVIGATEFORWARD"
+	case CSC_NAVIGATEBACK:
+		return "CSC_NAVIGATEBACK"
+	default:
+		return fmt.Sprintf("CommandStateChangeConstants(%d)", int32(e))
+	}
+}
+
 // DATAOBJ_GET_ITEM_FLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-dataobj_get_item_flags
+// Bitmask — values may be combined with |.
 type DATAOBJ_GET_ITEM_FLAGS int32
 
 const (
@@ -572,6 +1648,28 @@ const (
 	DOGIF_ONLY_IF_ONE   DATAOBJ_GET_ITEM_FLAGS = 8
 )
 
+// String returns the DATAOBJ_GET_ITEM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DATAOBJ_GET_ITEM_FLAGS) String() string {
+	var parts []string
+	if e&DOGIF_TRAVERSE_LINK != 0 {
+		parts = append(parts, "DOGIF_TRAVERSE_LINK")
+	}
+	if e&DOGIF_NO_HDROP != 0 {
+		parts = append(parts, "DOGIF_NO_HDROP")
+	}
+	if e&DOGIF_NO_URL != 0 {
+		parts = append(parts, "DOGIF_NO_URL")
+	}
+	if e&DOGIF_ONLY_IF_ONE != 0 {
+		parts = append(parts, "DOGIF_ONLY_IF_ONE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DEFAULTSAVEFOLDERTYPE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-defaultsavefoldertype
 type DEFAULTSAVEFOLDERTYPE int32
 
@@ -581,7 +1679,23 @@ const (
 	DSFT_PUBLIC  DEFAULTSAVEFOLDERTYPE = 3
 )
 
+// String returns the DEFAULTSAVEFOLDERTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEFAULTSAVEFOLDERTYPE) String() string {
+	switch e {
+	case DSFT_DETECT:
+		return "DSFT_DETECT"
+	case DSFT_PRIVATE:
+		return "DSFT_PRIVATE"
+	case DSFT_PUBLIC:
+		return "DSFT_PUBLIC"
+	default:
+		return fmt.Sprintf("DEFAULTSAVEFOLDERTYPE(%d)", int32(e))
+	}
+}
+
 // DEFAULT_FOLDER_MENU_RESTRICTIONS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-default_folder_menu_restrictions
+// Bitmask — values may be combined with |.
 type DEFAULT_FOLDER_MENU_RESTRICTIONS int32
 
 const (
@@ -598,6 +1712,46 @@ const (
 	DFMR_NO_NONWOW_VERBS                DEFAULT_FOLDER_MENU_RESTRICTIONS = 4096
 )
 
+// String returns the DEFAULT_FOLDER_MENU_RESTRICTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEFAULT_FOLDER_MENU_RESTRICTIONS) String() string {
+	var parts []string
+	if e&DFMR_NO_STATIC_VERBS != 0 {
+		parts = append(parts, "DFMR_NO_STATIC_VERBS")
+	}
+	if e&DFMR_STATIC_VERBS_ONLY != 0 {
+		parts = append(parts, "DFMR_STATIC_VERBS_ONLY")
+	}
+	if e&DFMR_NO_RESOURCE_VERBS != 0 {
+		parts = append(parts, "DFMR_NO_RESOURCE_VERBS")
+	}
+	if e&DFMR_OPTIN_HANDLERS_ONLY != 0 {
+		parts = append(parts, "DFMR_OPTIN_HANDLERS_ONLY")
+	}
+	if e&DFMR_RESOURCE_AND_FOLDER_VERBS_ONLY != 0 {
+		parts = append(parts, "DFMR_RESOURCE_AND_FOLDER_VERBS_ONLY")
+	}
+	if e&DFMR_USE_SPECIFIED_HANDLERS != 0 {
+		parts = append(parts, "DFMR_USE_SPECIFIED_HANDLERS")
+	}
+	if e&DFMR_USE_SPECIFIED_VERBS != 0 {
+		parts = append(parts, "DFMR_USE_SPECIFIED_VERBS")
+	}
+	if e&DFMR_NO_ASYNC_VERBS != 0 {
+		parts = append(parts, "DFMR_NO_ASYNC_VERBS")
+	}
+	if e&DFMR_NO_NATIVECPU_VERBS != 0 {
+		parts = append(parts, "DFMR_NO_NATIVECPU_VERBS")
+	}
+	if e&DFMR_NO_NONWOW_VERBS != 0 {
+		parts = append(parts, "DFMR_NO_NONWOW_VERBS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DEF_SHARE_ID: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-def_share_id
 type DEF_SHARE_ID int32
 
@@ -605,6 +1759,19 @@ const (
 	DEFSHAREID_USERS  DEF_SHARE_ID = 1
 	DEFSHAREID_PUBLIC DEF_SHARE_ID = 2
 )
+
+// String returns the DEF_SHARE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEF_SHARE_ID) String() string {
+	switch e {
+	case DEFSHAREID_USERS:
+		return "DEFSHAREID_USERS"
+	case DEFSHAREID_PUBLIC:
+		return "DEFSHAREID_PUBLIC"
+	default:
+		return fmt.Sprintf("DEF_SHARE_ID(%d)", int32(e))
+	}
+}
 
 type DESKBANDCID int32
 
@@ -619,6 +1786,31 @@ const (
 	DBID_PERMITAUTOHIDE  DESKBANDCID = 7
 )
 
+// String returns the DESKBANDCID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DESKBANDCID) String() string {
+	switch e {
+	case DBID_BANDINFOCHANGED:
+		return "DBID_BANDINFOCHANGED"
+	case DBID_SHOWONLY:
+		return "DBID_SHOWONLY"
+	case DBID_MAXIMIZEBAND:
+		return "DBID_MAXIMIZEBAND"
+	case DBID_PUSHCHEVRON:
+		return "DBID_PUSHCHEVRON"
+	case DBID_DELAYINIT:
+		return "DBID_DELAYINIT"
+	case DBID_FINISHINIT:
+		return "DBID_FINISHINIT"
+	case DBID_SETWINDOWTHEME:
+		return "DBID_SETWINDOWTHEME"
+	case DBID_PERMITAUTOHIDE:
+		return "DBID_PERMITAUTOHIDE"
+	default:
+		return fmt.Sprintf("DESKBANDCID(%d)", int32(e))
+	}
+}
+
 type DESKTOP_SLIDESHOW_DIRECTION int32
 
 const (
@@ -626,12 +1818,40 @@ const (
 	DSD_BACKWARD DESKTOP_SLIDESHOW_DIRECTION = 1
 )
 
+// String returns the DESKTOP_SLIDESHOW_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DESKTOP_SLIDESHOW_DIRECTION) String() string {
+	switch e {
+	case DSD_FORWARD:
+		return "DSD_FORWARD"
+	case DSD_BACKWARD:
+		return "DSD_BACKWARD"
+	default:
+		return fmt.Sprintf("DESKTOP_SLIDESHOW_DIRECTION(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DESKTOP_SLIDESHOW_OPTIONS int32
 
 const (
 	DSO_SHUFFLEIMAGES DESKTOP_SLIDESHOW_OPTIONS = 1
 )
 
+// String returns the DESKTOP_SLIDESHOW_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DESKTOP_SLIDESHOW_OPTIONS) String() string {
+	var parts []string
+	if e&DSO_SHUFFLEIMAGES != 0 {
+		parts = append(parts, "DSO_SHUFFLEIMAGES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DESKTOP_SLIDESHOW_STATE int32
 
 const (
@@ -639,6 +1859,25 @@ const (
 	DSS_SLIDESHOW                  DESKTOP_SLIDESHOW_STATE = 2
 	DSS_DISABLED_BY_REMOTE_SESSION DESKTOP_SLIDESHOW_STATE = 4
 )
+
+// String returns the DESKTOP_SLIDESHOW_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DESKTOP_SLIDESHOW_STATE) String() string {
+	var parts []string
+	if e&DSS_ENABLED != 0 {
+		parts = append(parts, "DSS_ENABLED")
+	}
+	if e&DSS_SLIDESHOW != 0 {
+		parts = append(parts, "DSS_SLIDESHOW")
+	}
+	if e&DSS_DISABLED_BY_REMOTE_SESSION != 0 {
+		parts = append(parts, "DSS_DISABLED_BY_REMOTE_SESSION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DESKTOP_WALLPAPER_POSITION: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-desktop_wallpaper_position
 type DESKTOP_WALLPAPER_POSITION int32
@@ -651,6 +1890,27 @@ const (
 	DWPOS_FILL    DESKTOP_WALLPAPER_POSITION = 4
 	DWPOS_SPAN    DESKTOP_WALLPAPER_POSITION = 5
 )
+
+// String returns the DESKTOP_WALLPAPER_POSITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DESKTOP_WALLPAPER_POSITION) String() string {
+	switch e {
+	case DWPOS_CENTER:
+		return "DWPOS_CENTER"
+	case DWPOS_TILE:
+		return "DWPOS_TILE"
+	case DWPOS_STRETCH:
+		return "DWPOS_STRETCH"
+	case DWPOS_FIT:
+		return "DWPOS_FIT"
+	case DWPOS_FILL:
+		return "DWPOS_FILL"
+	case DWPOS_SPAN:
+		return "DWPOS_SPAN"
+	default:
+		return fmt.Sprintf("DESKTOP_WALLPAPER_POSITION(%d)", int32(e))
+	}
+}
 
 type DFM_CMD int32
 
@@ -669,6 +1929,41 @@ const (
 	DFM_CMD_MODALPROP    DFM_CMD = -12
 	DFM_CMD_RENAME       DFM_CMD = -13
 )
+
+// String returns the DFM_CMD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DFM_CMD) String() string {
+	switch e {
+	case DFM_CMD_DELETE:
+		return "DFM_CMD_DELETE"
+	case DFM_CMD_MOVE:
+		return "DFM_CMD_MOVE"
+	case DFM_CMD_COPY:
+		return "DFM_CMD_COPY"
+	case DFM_CMD_LINK:
+		return "DFM_CMD_LINK"
+	case DFM_CMD_PROPERTIES:
+		return "DFM_CMD_PROPERTIES"
+	case DFM_CMD_NEWFOLDER:
+		return "DFM_CMD_NEWFOLDER"
+	case DFM_CMD_PASTE:
+		return "DFM_CMD_PASTE"
+	case DFM_CMD_VIEWLIST:
+		return "DFM_CMD_VIEWLIST"
+	case DFM_CMD_VIEWDETAILS:
+		return "DFM_CMD_VIEWDETAILS"
+	case DFM_CMD_PASTELINK:
+		return "DFM_CMD_PASTELINK"
+	case DFM_CMD_PASTESPECIAL:
+		return "DFM_CMD_PASTESPECIAL"
+	case DFM_CMD_MODALPROP:
+		return "DFM_CMD_MODALPROP"
+	case DFM_CMD_RENAME:
+		return "DFM_CMD_RENAME"
+	default:
+		return fmt.Sprintf("DFM_CMD(%d)", int32(e))
+	}
+}
 
 type DFM_MESSAGE_ID int32
 
@@ -691,6 +1986,47 @@ const (
 	DFM_MODIFYQCMFLAGS          DFM_MESSAGE_ID = 18
 )
 
+// String returns the DFM_MESSAGE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DFM_MESSAGE_ID) String() string {
+	switch e {
+	case DFM_MERGECONTEXTMENU:
+		return "DFM_MERGECONTEXTMENU"
+	case DFM_INVOKECOMMAND:
+		return "DFM_INVOKECOMMAND"
+	case DFM_GETHELPTEXT:
+		return "DFM_GETHELPTEXT"
+	case DFM_WM_MEASUREITEM:
+		return "DFM_WM_MEASUREITEM"
+	case DFM_WM_DRAWITEM:
+		return "DFM_WM_DRAWITEM"
+	case DFM_WM_INITMENUPOPUP:
+		return "DFM_WM_INITMENUPOPUP"
+	case DFM_VALIDATECMD:
+		return "DFM_VALIDATECMD"
+	case DFM_MERGECONTEXTMENU_TOP:
+		return "DFM_MERGECONTEXTMENU_TOP"
+	case DFM_GETHELPTEXTW:
+		return "DFM_GETHELPTEXTW"
+	case DFM_INVOKECOMMANDEX:
+		return "DFM_INVOKECOMMANDEX"
+	case DFM_MAPCOMMANDNAME:
+		return "DFM_MAPCOMMANDNAME"
+	case DFM_GETDEFSTATICID:
+		return "DFM_GETDEFSTATICID"
+	case DFM_GETVERBW:
+		return "DFM_GETVERBW"
+	case DFM_GETVERBA:
+		return "DFM_GETVERBA"
+	case DFM_MERGECONTEXTMENU_BOTTOM:
+		return "DFM_MERGECONTEXTMENU_BOTTOM"
+	case DFM_MODIFYQCMFLAGS:
+		return "DFM_MODIFYQCMFLAGS"
+	default:
+		return fmt.Sprintf("DFM_MESSAGE_ID(%d)", int32(e))
+	}
+}
+
 // DISPLAY_DEVICE_TYPE: https://learn.microsoft.com/windows/win32/api/shellscalingapi/ne-shellscalingapi-display_device_type
 type DISPLAY_DEVICE_TYPE int32
 
@@ -698,6 +2034,19 @@ const (
 	DEVICE_PRIMARY   DISPLAY_DEVICE_TYPE = 0
 	DEVICE_IMMERSIVE DISPLAY_DEVICE_TYPE = 1
 )
+
+// String returns the DISPLAY_DEVICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPLAY_DEVICE_TYPE) String() string {
+	switch e {
+	case DEVICE_PRIMARY:
+		return "DEVICE_PRIMARY"
+	case DEVICE_IMMERSIVE:
+		return "DEVICE_IMMERSIVE"
+	default:
+		return fmt.Sprintf("DISPLAY_DEVICE_TYPE(%d)", int32(e))
+	}
+}
 
 // DROPIMAGETYPE: https://learn.microsoft.com/windows/win32/api/shlobj_core/ne-shlobj_core-dropimagetype
 type DROPIMAGETYPE int32
@@ -713,11 +2062,50 @@ const (
 	DROPIMAGE_NOIMAGE DROPIMAGETYPE = 8
 )
 
+// String returns the DROPIMAGETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DROPIMAGETYPE) String() string {
+	switch e {
+	case DROPIMAGE_INVALID:
+		return "DROPIMAGE_INVALID"
+	case DROPIMAGE_NONE:
+		return "DROPIMAGE_NONE"
+	case DROPIMAGE_COPY:
+		return "DROPIMAGE_COPY"
+	case DROPIMAGE_MOVE:
+		return "DROPIMAGE_MOVE"
+	case DROPIMAGE_LINK:
+		return "DROPIMAGE_LINK"
+	case DROPIMAGE_LABEL:
+		return "DROPIMAGE_LABEL"
+	case DROPIMAGE_WARNING:
+		return "DROPIMAGE_WARNING"
+	case DROPIMAGE_NOIMAGE:
+		return "DROPIMAGE_NOIMAGE"
+	default:
+		return fmt.Sprintf("DROPIMAGETYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DSH_FLAGS int32
 
 const (
 	DSH_ALLOWDROPDESCRIPTIONTEXT DSH_FLAGS = 1
 )
+
+// String returns the DSH_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DSH_FLAGS) String() string {
+	var parts []string
+	if e&DSH_ALLOWDROPDESCRIPTIONTEXT != 0 {
+		parts = append(parts, "DSH_ALLOWDROPDESCRIPTIONTEXT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type EC_HOST_UI_MODE int32
 
@@ -727,6 +2115,21 @@ const (
 	ECHUIM_SYSTEM_LAUNCHER EC_HOST_UI_MODE = 2
 )
 
+// String returns the EC_HOST_UI_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_HOST_UI_MODE) String() string {
+	switch e {
+	case ECHUIM_DESKTOP:
+		return "ECHUIM_DESKTOP"
+	case ECHUIM_IMMERSIVE:
+		return "ECHUIM_IMMERSIVE"
+	case ECHUIM_SYSTEM_LAUNCHER:
+		return "ECHUIM_SYSTEM_LAUNCHER"
+	default:
+		return fmt.Sprintf("EC_HOST_UI_MODE(%d)", int32(e))
+	}
+}
+
 type EDGE_GESTURE_KIND int32
 
 const (
@@ -735,7 +2138,23 @@ const (
 	EGK_MOUSE    EDGE_GESTURE_KIND = 2
 )
 
+// String returns the EDGE_GESTURE_KIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDGE_GESTURE_KIND) String() string {
+	switch e {
+	case EGK_TOUCH:
+		return "EGK_TOUCH"
+	case EGK_KEYBOARD:
+		return "EGK_KEYBOARD"
+	case EGK_MOUSE:
+		return "EGK_MOUSE"
+	default:
+		return fmt.Sprintf("EDGE_GESTURE_KIND(%d)", int32(e))
+	}
+}
+
 // EXPLORER_BROWSER_FILL_FLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-explorer_browser_fill_flags
+// Bitmask — values may be combined with |.
 type EXPLORER_BROWSER_FILL_FLAGS int32
 
 const (
@@ -744,7 +2163,24 @@ const (
 	EBF_NODROPTARGET         EXPLORER_BROWSER_FILL_FLAGS = 512
 )
 
+// String returns the EXPLORER_BROWSER_FILL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPLORER_BROWSER_FILL_FLAGS) String() string {
+	var parts []string
+	if e&EBF_SELECTFROMDATAOBJECT != 0 {
+		parts = append(parts, "EBF_SELECTFROMDATAOBJECT")
+	}
+	if e&EBF_NODROPTARGET != 0 {
+		parts = append(parts, "EBF_NODROPTARGET")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // EXPLORER_BROWSER_OPTIONS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-explorer_browser_options
+// Bitmask — values may be combined with |.
 type EXPLORER_BROWSER_OPTIONS int32
 
 const (
@@ -759,6 +2195,40 @@ const (
 	EBO_NOPERSISTVIEWSTATE EXPLORER_BROWSER_OPTIONS = 128
 )
 
+// String returns the EXPLORER_BROWSER_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPLORER_BROWSER_OPTIONS) String() string {
+	var parts []string
+	if e&EBO_NAVIGATEONCE != 0 {
+		parts = append(parts, "EBO_NAVIGATEONCE")
+	}
+	if e&EBO_SHOWFRAMES != 0 {
+		parts = append(parts, "EBO_SHOWFRAMES")
+	}
+	if e&EBO_ALWAYSNAVIGATE != 0 {
+		parts = append(parts, "EBO_ALWAYSNAVIGATE")
+	}
+	if e&EBO_NOTRAVELLOG != 0 {
+		parts = append(parts, "EBO_NOTRAVELLOG")
+	}
+	if e&EBO_NOWRAPPERWINDOW != 0 {
+		parts = append(parts, "EBO_NOWRAPPERWINDOW")
+	}
+	if e&EBO_HTMLSHAREPOINTVIEW != 0 {
+		parts = append(parts, "EBO_HTMLSHAREPOINTVIEW")
+	}
+	if e&EBO_NOBORDER != 0 {
+		parts = append(parts, "EBO_NOBORDER")
+	}
+	if e&EBO_NOPERSISTVIEWSTATE != 0 {
+		parts = append(parts, "EBO_NOPERSISTVIEWSTATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // FDAP: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-fdap
 type FDAP int32
 
@@ -766,6 +2236,19 @@ const (
 	FDAP_BOTTOM FDAP = 0
 	FDAP_TOP    FDAP = 1
 )
+
+// String returns the FDAP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FDAP) String() string {
+	switch e {
+	case FDAP_BOTTOM:
+		return "FDAP_BOTTOM"
+	case FDAP_TOP:
+		return "FDAP_TOP"
+	default:
+		return fmt.Sprintf("FDAP(%d)", int32(e))
+	}
+}
 
 // FDE_OVERWRITE_RESPONSE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-fde_overwrite_response
 type FDE_OVERWRITE_RESPONSE int32
@@ -776,6 +2259,21 @@ const (
 	FDEOR_REFUSE  FDE_OVERWRITE_RESPONSE = 2
 )
 
+// String returns the FDE_OVERWRITE_RESPONSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FDE_OVERWRITE_RESPONSE) String() string {
+	switch e {
+	case FDEOR_DEFAULT:
+		return "FDEOR_DEFAULT"
+	case FDEOR_ACCEPT:
+		return "FDEOR_ACCEPT"
+	case FDEOR_REFUSE:
+		return "FDEOR_REFUSE"
+	default:
+		return fmt.Sprintf("FDE_OVERWRITE_RESPONSE(%d)", int32(e))
+	}
+}
+
 // FDE_SHAREVIOLATION_RESPONSE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-fde_shareviolation_response
 type FDE_SHAREVIOLATION_RESPONSE int32
 
@@ -784,6 +2282,21 @@ const (
 	FDESVR_ACCEPT  FDE_SHAREVIOLATION_RESPONSE = 1
 	FDESVR_REFUSE  FDE_SHAREVIOLATION_RESPONSE = 2
 )
+
+// String returns the FDE_SHAREVIOLATION_RESPONSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FDE_SHAREVIOLATION_RESPONSE) String() string {
+	switch e {
+	case FDESVR_DEFAULT:
+		return "FDESVR_DEFAULT"
+	case FDESVR_ACCEPT:
+		return "FDESVR_ACCEPT"
+	case FDESVR_REFUSE:
+		return "FDESVR_REFUSE"
+	default:
+		return fmt.Sprintf("FDE_SHAREVIOLATION_RESPONSE(%d)", int32(e))
+	}
+}
 
 type FD_FLAGS int32
 
@@ -800,6 +2313,35 @@ const (
 	FD_UNICODE    FD_FLAGS = -2147483648
 )
 
+// String returns the FD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FD_FLAGS) String() string {
+	switch e {
+	case FD_CLSID:
+		return "FD_CLSID"
+	case FD_SIZEPOINT:
+		return "FD_SIZEPOINT"
+	case FD_ATTRIBUTES:
+		return "FD_ATTRIBUTES"
+	case FD_CREATETIME:
+		return "FD_CREATETIME"
+	case FD_ACCESSTIME:
+		return "FD_ACCESSTIME"
+	case FD_WRITESTIME:
+		return "FD_WRITESTIME"
+	case FD_FILESIZE:
+		return "FD_FILESIZE"
+	case FD_PROGRESSUI:
+		return "FD_PROGRESSUI"
+	case FD_LINKUI:
+		return "FD_LINKUI"
+	case FD_UNICODE:
+		return "FD_UNICODE"
+	default:
+		return fmt.Sprintf("FD_FLAGS(%d)", int32(e))
+	}
+}
+
 // FFFP_MODE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-fffp_mode
 type FFFP_MODE int32
 
@@ -808,6 +2350,20 @@ const (
 	FFFP_NEARESTPARENTMATCH FFFP_MODE = 1
 )
 
+// String returns the FFFP_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FFFP_MODE) String() string {
+	switch e {
+	case FFFP_EXACTMATCH:
+		return "FFFP_EXACTMATCH"
+	case FFFP_NEARESTPARENTMATCH:
+		return "FFFP_NEARESTPARENTMATCH"
+	default:
+		return fmt.Sprintf("FFFP_MODE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FILEOPENDIALOGOPTIONS uint32
 
 const (
@@ -836,6 +2392,86 @@ const (
 	FOS_SUPPORTSTREAMABLEITEMS   FILEOPENDIALOGOPTIONS = 2147483648
 )
 
+// String returns the FILEOPENDIALOGOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILEOPENDIALOGOPTIONS) String() string {
+	var parts []string
+	if e&FOS_OVERWRITEPROMPT != 0 {
+		parts = append(parts, "FOS_OVERWRITEPROMPT")
+	}
+	if e&FOS_STRICTFILETYPES != 0 {
+		parts = append(parts, "FOS_STRICTFILETYPES")
+	}
+	if e&FOS_NOCHANGEDIR != 0 {
+		parts = append(parts, "FOS_NOCHANGEDIR")
+	}
+	if e&FOS_PICKFOLDERS != 0 {
+		parts = append(parts, "FOS_PICKFOLDERS")
+	}
+	if e&FOS_FORCEFILESYSTEM != 0 {
+		parts = append(parts, "FOS_FORCEFILESYSTEM")
+	}
+	if e&FOS_ALLNONSTORAGEITEMS != 0 {
+		parts = append(parts, "FOS_ALLNONSTORAGEITEMS")
+	}
+	if e&FOS_NOVALIDATE != 0 {
+		parts = append(parts, "FOS_NOVALIDATE")
+	}
+	if e&FOS_ALLOWMULTISELECT != 0 {
+		parts = append(parts, "FOS_ALLOWMULTISELECT")
+	}
+	if e&FOS_PATHMUSTEXIST != 0 {
+		parts = append(parts, "FOS_PATHMUSTEXIST")
+	}
+	if e&FOS_FILEMUSTEXIST != 0 {
+		parts = append(parts, "FOS_FILEMUSTEXIST")
+	}
+	if e&FOS_CREATEPROMPT != 0 {
+		parts = append(parts, "FOS_CREATEPROMPT")
+	}
+	if e&FOS_SHAREAWARE != 0 {
+		parts = append(parts, "FOS_SHAREAWARE")
+	}
+	if e&FOS_NOREADONLYRETURN != 0 {
+		parts = append(parts, "FOS_NOREADONLYRETURN")
+	}
+	if e&FOS_NOTESTFILECREATE != 0 {
+		parts = append(parts, "FOS_NOTESTFILECREATE")
+	}
+	if e&FOS_HIDEMRUPLACES != 0 {
+		parts = append(parts, "FOS_HIDEMRUPLACES")
+	}
+	if e&FOS_HIDEPINNEDPLACES != 0 {
+		parts = append(parts, "FOS_HIDEPINNEDPLACES")
+	}
+	if e&FOS_NODEREFERENCELINKS != 0 {
+		parts = append(parts, "FOS_NODEREFERENCELINKS")
+	}
+	if e&FOS_OKBUTTONNEEDSINTERACTION != 0 {
+		parts = append(parts, "FOS_OKBUTTONNEEDSINTERACTION")
+	}
+	if e&FOS_DONTADDTORECENT != 0 {
+		parts = append(parts, "FOS_DONTADDTORECENT")
+	}
+	if e&FOS_FORCESHOWHIDDEN != 0 {
+		parts = append(parts, "FOS_FORCESHOWHIDDEN")
+	}
+	if e&FOS_DEFAULTNOMINIMODE != 0 {
+		parts = append(parts, "FOS_DEFAULTNOMINIMODE")
+	}
+	if e&FOS_FORCEPREVIEWPANEON != 0 {
+		parts = append(parts, "FOS_FORCEPREVIEWPANEON")
+	}
+	if e&FOS_SUPPORTSTREAMABLEITEMS != 0 {
+		parts = append(parts, "FOS_SUPPORTSTREAMABLEITEMS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type FILEOPERATION_FLAGS uint32
 
 const (
@@ -874,7 +2510,117 @@ const (
 	FOF_NO_UI                   FILEOPERATION_FLAGS = 1556
 )
 
+// String returns the FILEOPERATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILEOPERATION_FLAGS) String() string {
+	var parts []string
+	if e&FOFX_NOSKIPJUNCTIONS != 0 {
+		parts = append(parts, "FOFX_NOSKIPJUNCTIONS")
+	}
+	if e&FOFX_PREFERHARDLINK != 0 {
+		parts = append(parts, "FOFX_PREFERHARDLINK")
+	}
+	if e&FOFX_SHOWELEVATIONPROMPT != 0 {
+		parts = append(parts, "FOFX_SHOWELEVATIONPROMPT")
+	}
+	if e&FOFX_RECYCLEONDELETE != 0 {
+		parts = append(parts, "FOFX_RECYCLEONDELETE")
+	}
+	if e&FOFX_EARLYFAILURE != 0 {
+		parts = append(parts, "FOFX_EARLYFAILURE")
+	}
+	if e&FOFX_PRESERVEFILEEXTENSIONS != 0 {
+		parts = append(parts, "FOFX_PRESERVEFILEEXTENSIONS")
+	}
+	if e&FOFX_KEEPNEWERFILE != 0 {
+		parts = append(parts, "FOFX_KEEPNEWERFILE")
+	}
+	if e&FOFX_NOCOPYHOOKS != 0 {
+		parts = append(parts, "FOFX_NOCOPYHOOKS")
+	}
+	if e&FOFX_NOMINIMIZEBOX != 0 {
+		parts = append(parts, "FOFX_NOMINIMIZEBOX")
+	}
+	if e&FOFX_MOVEACLSACROSSVOLUMES != 0 {
+		parts = append(parts, "FOFX_MOVEACLSACROSSVOLUMES")
+	}
+	if e&FOFX_DONTDISPLAYSOURCEPATH != 0 {
+		parts = append(parts, "FOFX_DONTDISPLAYSOURCEPATH")
+	}
+	if e&FOFX_DONTDISPLAYDESTPATH != 0 {
+		parts = append(parts, "FOFX_DONTDISPLAYDESTPATH")
+	}
+	if e&FOFX_REQUIREELEVATION != 0 {
+		parts = append(parts, "FOFX_REQUIREELEVATION")
+	}
+	if e&FOFX_ADDUNDORECORD != 0 {
+		parts = append(parts, "FOFX_ADDUNDORECORD")
+	}
+	if e&FOFX_COPYASDOWNLOAD != 0 {
+		parts = append(parts, "FOFX_COPYASDOWNLOAD")
+	}
+	if e&FOFX_DONTDISPLAYLOCATIONS != 0 {
+		parts = append(parts, "FOFX_DONTDISPLAYLOCATIONS")
+	}
+	if e&FOF_MULTIDESTFILES != 0 {
+		parts = append(parts, "FOF_MULTIDESTFILES")
+	}
+	if e&FOF_CONFIRMMOUSE != 0 {
+		parts = append(parts, "FOF_CONFIRMMOUSE")
+	}
+	if e&FOF_SILENT != 0 {
+		parts = append(parts, "FOF_SILENT")
+	}
+	if e&FOF_RENAMEONCOLLISION != 0 {
+		parts = append(parts, "FOF_RENAMEONCOLLISION")
+	}
+	if e&FOF_NOCONFIRMATION != 0 {
+		parts = append(parts, "FOF_NOCONFIRMATION")
+	}
+	if e&FOF_WANTMAPPINGHANDLE != 0 {
+		parts = append(parts, "FOF_WANTMAPPINGHANDLE")
+	}
+	if e&FOF_ALLOWUNDO != 0 {
+		parts = append(parts, "FOF_ALLOWUNDO")
+	}
+	if e&FOF_FILESONLY != 0 {
+		parts = append(parts, "FOF_FILESONLY")
+	}
+	if e&FOF_SIMPLEPROGRESS != 0 {
+		parts = append(parts, "FOF_SIMPLEPROGRESS")
+	}
+	if e&FOF_NOCONFIRMMKDIR != 0 {
+		parts = append(parts, "FOF_NOCONFIRMMKDIR")
+	}
+	if e&FOF_NOERRORUI != 0 {
+		parts = append(parts, "FOF_NOERRORUI")
+	}
+	if e&FOF_NOCOPYSECURITYATTRIBS != 0 {
+		parts = append(parts, "FOF_NOCOPYSECURITYATTRIBS")
+	}
+	if e&FOF_NORECURSION != 0 {
+		parts = append(parts, "FOF_NORECURSION")
+	}
+	if e&FOF_NO_CONNECTED_ELEMENTS != 0 {
+		parts = append(parts, "FOF_NO_CONNECTED_ELEMENTS")
+	}
+	if e&FOF_WANTNUKEWARNING != 0 {
+		parts = append(parts, "FOF_WANTNUKEWARNING")
+	}
+	if e&FOF_NORECURSEREPARSE != 0 {
+		parts = append(parts, "FOF_NORECURSEREPARSE")
+	}
+	if e&FOF_NO_UI != 0 {
+		parts = append(parts, "FOF_NO_UI")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // FILETYPEATTRIBUTEFLAGS: https://learn.microsoft.com/windows/win32/api/shlwapi/ne-shlwapi-filetypeattributeflags
+// Bitmask — values may be combined with |.
 type FILETYPEATTRIBUTEFLAGS int32
 
 const (
@@ -901,12 +2647,96 @@ const (
 	FTA_AlwaysUseDirectInvoke FILETYPEATTRIBUTEFLAGS = 4194304
 )
 
+// String returns the FILETYPEATTRIBUTEFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILETYPEATTRIBUTEFLAGS) String() string {
+	var parts []string
+	if e&FTA_Exclude != 0 {
+		parts = append(parts, "FTA_Exclude")
+	}
+	if e&FTA_Show != 0 {
+		parts = append(parts, "FTA_Show")
+	}
+	if e&FTA_HasExtension != 0 {
+		parts = append(parts, "FTA_HasExtension")
+	}
+	if e&FTA_NoEdit != 0 {
+		parts = append(parts, "FTA_NoEdit")
+	}
+	if e&FTA_NoRemove != 0 {
+		parts = append(parts, "FTA_NoRemove")
+	}
+	if e&FTA_NoNewVerb != 0 {
+		parts = append(parts, "FTA_NoNewVerb")
+	}
+	if e&FTA_NoEditVerb != 0 {
+		parts = append(parts, "FTA_NoEditVerb")
+	}
+	if e&FTA_NoRemoveVerb != 0 {
+		parts = append(parts, "FTA_NoRemoveVerb")
+	}
+	if e&FTA_NoEditDesc != 0 {
+		parts = append(parts, "FTA_NoEditDesc")
+	}
+	if e&FTA_NoEditIcon != 0 {
+		parts = append(parts, "FTA_NoEditIcon")
+	}
+	if e&FTA_NoEditDflt != 0 {
+		parts = append(parts, "FTA_NoEditDflt")
+	}
+	if e&FTA_NoEditVerbCmd != 0 {
+		parts = append(parts, "FTA_NoEditVerbCmd")
+	}
+	if e&FTA_NoEditVerbExe != 0 {
+		parts = append(parts, "FTA_NoEditVerbExe")
+	}
+	if e&FTA_NoDDE != 0 {
+		parts = append(parts, "FTA_NoDDE")
+	}
+	if e&FTA_NoEditMIME != 0 {
+		parts = append(parts, "FTA_NoEditMIME")
+	}
+	if e&FTA_OpenIsSafe != 0 {
+		parts = append(parts, "FTA_OpenIsSafe")
+	}
+	if e&FTA_AlwaysUnsafe != 0 {
+		parts = append(parts, "FTA_AlwaysUnsafe")
+	}
+	if e&FTA_NoRecentDocs != 0 {
+		parts = append(parts, "FTA_NoRecentDocs")
+	}
+	if e&FTA_SafeForElevation != 0 {
+		parts = append(parts, "FTA_SafeForElevation")
+	}
+	if e&FTA_AlwaysUseDirectInvoke != 0 {
+		parts = append(parts, "FTA_AlwaysUseDirectInvoke")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type FILE_OPERATION_FLAGS2 int32
 
 const (
 	FOF2_NONE                    FILE_OPERATION_FLAGS2 = 0
 	FOF2_MERGEFOLDERSONCOLLISION FILE_OPERATION_FLAGS2 = 1
 )
+
+// String returns the FILE_OPERATION_FLAGS2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_OPERATION_FLAGS2) String() string {
+	var parts []string
+	if e&FOF2_MERGEFOLDERSONCOLLISION != 0 {
+		parts = append(parts, "FOF2_MERGEFOLDERSONCOLLISION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // FILE_USAGE_TYPE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-file_usage_type
 type FILE_USAGE_TYPE int32
@@ -916,6 +2746,21 @@ const (
 	FUT_EDITING FILE_USAGE_TYPE = 1
 	FUT_GENERIC FILE_USAGE_TYPE = 2
 )
+
+// String returns the FILE_USAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_USAGE_TYPE) String() string {
+	switch e {
+	case FUT_PLAYING:
+		return "FUT_PLAYING"
+	case FUT_EDITING:
+		return "FUT_EDITING"
+	case FUT_GENERIC:
+		return "FUT_GENERIC"
+	default:
+		return fmt.Sprintf("FILE_USAGE_TYPE(%d)", int32(e))
+	}
+}
 
 type FLYOUT_PLACEMENT int32
 
@@ -927,7 +2772,27 @@ const (
 	FP_RIGHT   FLYOUT_PLACEMENT = 4
 )
 
+// String returns the FLYOUT_PLACEMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FLYOUT_PLACEMENT) String() string {
+	switch e {
+	case FP_DEFAULT:
+		return "FP_DEFAULT"
+	case FP_ABOVE:
+		return "FP_ABOVE"
+	case FP_BELOW:
+		return "FP_BELOW"
+	case FP_LEFT:
+		return "FP_LEFT"
+	case FP_RIGHT:
+		return "FP_RIGHT"
+	default:
+		return fmt.Sprintf("FLYOUT_PLACEMENT(%d)", int32(e))
+	}
+}
+
 // FOLDERFLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-folderflags
+// Bitmask — values may be combined with |.
 type FOLDERFLAGS int32
 
 const (
@@ -966,6 +2831,112 @@ const (
 	FWF_ALLOWRTLREADING     FOLDERFLAGS = -2147483648
 )
 
+// String returns the FOLDERFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FOLDERFLAGS) String() string {
+	var parts []string
+	if e&FWF_AUTOARRANGE != 0 {
+		parts = append(parts, "FWF_AUTOARRANGE")
+	}
+	if e&FWF_ABBREVIATEDNAMES != 0 {
+		parts = append(parts, "FWF_ABBREVIATEDNAMES")
+	}
+	if e&FWF_SNAPTOGRID != 0 {
+		parts = append(parts, "FWF_SNAPTOGRID")
+	}
+	if e&FWF_OWNERDATA != 0 {
+		parts = append(parts, "FWF_OWNERDATA")
+	}
+	if e&FWF_BESTFITWINDOW != 0 {
+		parts = append(parts, "FWF_BESTFITWINDOW")
+	}
+	if e&FWF_DESKTOP != 0 {
+		parts = append(parts, "FWF_DESKTOP")
+	}
+	if e&FWF_SINGLESEL != 0 {
+		parts = append(parts, "FWF_SINGLESEL")
+	}
+	if e&FWF_NOSUBFOLDERS != 0 {
+		parts = append(parts, "FWF_NOSUBFOLDERS")
+	}
+	if e&FWF_TRANSPARENT != 0 {
+		parts = append(parts, "FWF_TRANSPARENT")
+	}
+	if e&FWF_NOCLIENTEDGE != 0 {
+		parts = append(parts, "FWF_NOCLIENTEDGE")
+	}
+	if e&FWF_NOSCROLL != 0 {
+		parts = append(parts, "FWF_NOSCROLL")
+	}
+	if e&FWF_ALIGNLEFT != 0 {
+		parts = append(parts, "FWF_ALIGNLEFT")
+	}
+	if e&FWF_NOICONS != 0 {
+		parts = append(parts, "FWF_NOICONS")
+	}
+	if e&FWF_SHOWSELALWAYS != 0 {
+		parts = append(parts, "FWF_SHOWSELALWAYS")
+	}
+	if e&FWF_NOVISIBLE != 0 {
+		parts = append(parts, "FWF_NOVISIBLE")
+	}
+	if e&FWF_SINGLECLICKACTIVATE != 0 {
+		parts = append(parts, "FWF_SINGLECLICKACTIVATE")
+	}
+	if e&FWF_NOWEBVIEW != 0 {
+		parts = append(parts, "FWF_NOWEBVIEW")
+	}
+	if e&FWF_HIDEFILENAMES != 0 {
+		parts = append(parts, "FWF_HIDEFILENAMES")
+	}
+	if e&FWF_CHECKSELECT != 0 {
+		parts = append(parts, "FWF_CHECKSELECT")
+	}
+	if e&FWF_NOENUMREFRESH != 0 {
+		parts = append(parts, "FWF_NOENUMREFRESH")
+	}
+	if e&FWF_NOGROUPING != 0 {
+		parts = append(parts, "FWF_NOGROUPING")
+	}
+	if e&FWF_FULLROWSELECT != 0 {
+		parts = append(parts, "FWF_FULLROWSELECT")
+	}
+	if e&FWF_NOFILTERS != 0 {
+		parts = append(parts, "FWF_NOFILTERS")
+	}
+	if e&FWF_NOCOLUMNHEADER != 0 {
+		parts = append(parts, "FWF_NOCOLUMNHEADER")
+	}
+	if e&FWF_NOHEADERINALLVIEWS != 0 {
+		parts = append(parts, "FWF_NOHEADERINALLVIEWS")
+	}
+	if e&FWF_EXTENDEDTILES != 0 {
+		parts = append(parts, "FWF_EXTENDEDTILES")
+	}
+	if e&FWF_TRICHECKSELECT != 0 {
+		parts = append(parts, "FWF_TRICHECKSELECT")
+	}
+	if e&FWF_AUTOCHECKSELECT != 0 {
+		parts = append(parts, "FWF_AUTOCHECKSELECT")
+	}
+	if e&FWF_NOBROWSERVIEWSTATE != 0 {
+		parts = append(parts, "FWF_NOBROWSERVIEWSTATE")
+	}
+	if e&FWF_SUBSETGROUPS != 0 {
+		parts = append(parts, "FWF_SUBSETGROUPS")
+	}
+	if e&FWF_USESEARCHFOLDER != 0 {
+		parts = append(parts, "FWF_USESEARCHFOLDER")
+	}
+	if e&FWF_ALLOWRTLREADING != 0 {
+		parts = append(parts, "FWF_ALLOWRTLREADING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // FOLDERLOGICALVIEWMODE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-folderlogicalviewmode
 type FOLDERLOGICALVIEWMODE int32
 
@@ -979,6 +2950,27 @@ const (
 	FLVM_CONTENT     FOLDERLOGICALVIEWMODE = 5
 	FLVM_LAST        FOLDERLOGICALVIEWMODE = 5
 )
+
+// String returns the FOLDERLOGICALVIEWMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FOLDERLOGICALVIEWMODE) String() string {
+	switch e {
+	case FLVM_UNSPECIFIED:
+		return "FLVM_UNSPECIFIED"
+	case FLVM_FIRST:
+		return "FLVM_FIRST"
+	case FLVM_TILES:
+		return "FLVM_TILES"
+	case FLVM_ICONS:
+		return "FLVM_ICONS"
+	case FLVM_LIST:
+		return "FLVM_LIST"
+	case FLVM_CONTENT:
+		return "FLVM_CONTENT"
+	default:
+		return fmt.Sprintf("FOLDERLOGICALVIEWMODE(%d)", int32(e))
+	}
+}
 
 // FOLDERVIEWMODE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-folderviewmode
 type FOLDERVIEWMODE int32
@@ -997,7 +2989,35 @@ const (
 	FVM_LAST       FOLDERVIEWMODE = 8
 )
 
+// String returns the FOLDERVIEWMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FOLDERVIEWMODE) String() string {
+	switch e {
+	case FVM_AUTO:
+		return "FVM_AUTO"
+	case FVM_FIRST:
+		return "FVM_FIRST"
+	case FVM_SMALLICON:
+		return "FVM_SMALLICON"
+	case FVM_LIST:
+		return "FVM_LIST"
+	case FVM_DETAILS:
+		return "FVM_DETAILS"
+	case FVM_THUMBNAIL:
+		return "FVM_THUMBNAIL"
+	case FVM_TILE:
+		return "FVM_TILE"
+	case FVM_THUMBSTRIP:
+		return "FVM_THUMBSTRIP"
+	case FVM_CONTENT:
+		return "FVM_CONTENT"
+	default:
+		return fmt.Sprintf("FOLDERVIEWMODE(%d)", int32(e))
+	}
+}
+
 // FOLDERVIEWOPTIONS: https://learn.microsoft.com/windows/win32/api/shobjidl/ne-shobjidl-folderviewoptions
+// Bitmask — values may be combined with |.
 type FOLDERVIEWOPTIONS int32
 
 const (
@@ -1010,6 +3030,34 @@ const (
 	FVO_NOSCROLLTIPS      FOLDERVIEWOPTIONS = 32
 )
 
+// String returns the FOLDERVIEWOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FOLDERVIEWOPTIONS) String() string {
+	var parts []string
+	if e&FVO_VISTALAYOUT != 0 {
+		parts = append(parts, "FVO_VISTALAYOUT")
+	}
+	if e&FVO_CUSTOMPOSITION != 0 {
+		parts = append(parts, "FVO_CUSTOMPOSITION")
+	}
+	if e&FVO_CUSTOMORDERING != 0 {
+		parts = append(parts, "FVO_CUSTOMORDERING")
+	}
+	if e&FVO_SUPPORTHYPERLINKS != 0 {
+		parts = append(parts, "FVO_SUPPORTHYPERLINKS")
+	}
+	if e&FVO_NOANIMATIONS != 0 {
+		parts = append(parts, "FVO_NOANIMATIONS")
+	}
+	if e&FVO_NOSCROLLTIPS != 0 {
+		parts = append(parts, "FVO_NOSCROLLTIPS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // FOLDER_ENUM_MODE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-folder_enum_mode
 type FOLDER_ENUM_MODE int32
 
@@ -1018,11 +3066,35 @@ const (
 	FEM_NAVIGATION FOLDER_ENUM_MODE = 1
 )
 
+// String returns the FOLDER_ENUM_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FOLDER_ENUM_MODE) String() string {
+	switch e {
+	case FEM_VIEWRESULT:
+		return "FEM_VIEWRESULT"
+	case FEM_NAVIGATION:
+		return "FEM_NAVIGATION"
+	default:
+		return fmt.Sprintf("FOLDER_ENUM_MODE(%d)", int32(e))
+	}
+}
+
 type FVTEXTTYPE int32
 
 const (
 	FVST_EMPTYTEXT FVTEXTTYPE = 0
 )
+
+// String returns the FVTEXTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FVTEXTTYPE) String() string {
+	switch e {
+	case FVST_EMPTYTEXT:
+		return "FVST_EMPTYTEXT"
+	default:
+		return fmt.Sprintf("FVTEXTTYPE(%d)", int32(e))
+	}
+}
 
 type GPFIDL_FLAGS uint32
 
@@ -1032,6 +3104,21 @@ const (
 	GPFIDL_UNCPRINTER GPFIDL_FLAGS = 2
 )
 
+// String returns the GPFIDL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPFIDL_FLAGS) String() string {
+	switch e {
+	case GPFIDL_DEFAULT:
+		return "GPFIDL_DEFAULT"
+	case GPFIDL_ALTNAME:
+		return "GPFIDL_ALTNAME"
+	case GPFIDL_UNCPRINTER:
+		return "GPFIDL_UNCPRINTER"
+	default:
+		return fmt.Sprintf("GPFIDL_FLAGS(%d)", uint32(e))
+	}
+}
+
 type HELP_INFO_TYPE int32
 
 const (
@@ -1039,6 +3126,20 @@ const (
 	HELPINFO_MENUITEM HELP_INFO_TYPE = 2
 )
 
+// String returns the HELP_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HELP_INFO_TYPE) String() string {
+	switch e {
+	case HELPINFO_WINDOW:
+		return "HELPINFO_WINDOW"
+	case HELPINFO_MENUITEM:
+		return "HELPINFO_MENUITEM"
+	default:
+		return fmt.Sprintf("HELP_INFO_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HLBWIF_FLAGS int32
 
 const (
@@ -1050,6 +3151,35 @@ const (
 	HLBWIF_WEBTOOLBARHIDDEN  HLBWIF_FLAGS = 32
 )
 
+// String returns the HLBWIF_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLBWIF_FLAGS) String() string {
+	var parts []string
+	if e&HLBWIF_HASFRAMEWNDINFO != 0 {
+		parts = append(parts, "HLBWIF_HASFRAMEWNDINFO")
+	}
+	if e&HLBWIF_HASDOCWNDINFO != 0 {
+		parts = append(parts, "HLBWIF_HASDOCWNDINFO")
+	}
+	if e&HLBWIF_FRAMEWNDMAXIMIZED != 0 {
+		parts = append(parts, "HLBWIF_FRAMEWNDMAXIMIZED")
+	}
+	if e&HLBWIF_DOCWNDMAXIMIZED != 0 {
+		parts = append(parts, "HLBWIF_DOCWNDMAXIMIZED")
+	}
+	if e&HLBWIF_HASWEBTOOLBARINFO != 0 {
+		parts = append(parts, "HLBWIF_HASWEBTOOLBARINFO")
+	}
+	if e&HLBWIF_WEBTOOLBARHIDDEN != 0 {
+		parts = append(parts, "HLBWIF_WEBTOOLBARHIDDEN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type HLFNAMEF int32
 
 const (
@@ -1059,6 +3189,28 @@ const (
 	HLFNAMEF_TRYFULLTARGET    HLFNAMEF = 4
 	HLFNAMEF_TRYWIN95SHORTCUT HLFNAMEF = 8
 )
+
+// String returns the HLFNAMEF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLFNAMEF) String() string {
+	var parts []string
+	if e&HLFNAMEF_TRYCACHE != 0 {
+		parts = append(parts, "HLFNAMEF_TRYCACHE")
+	}
+	if e&HLFNAMEF_TRYPRETTYTARGET != 0 {
+		parts = append(parts, "HLFNAMEF_TRYPRETTYTARGET")
+	}
+	if e&HLFNAMEF_TRYFULLTARGET != 0 {
+		parts = append(parts, "HLFNAMEF_TRYFULLTARGET")
+	}
+	if e&HLFNAMEF_TRYWIN95SHORTCUT != 0 {
+		parts = append(parts, "HLFNAMEF_TRYWIN95SHORTCUT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type HLID_INFO uint32
 
@@ -1071,6 +3223,27 @@ const (
 	HLID_STACKTOP    HLID_INFO = 4294967291
 )
 
+// String returns the HLID_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLID_INFO) String() string {
+	switch e {
+	case HLID_INVALID:
+		return "HLID_INVALID"
+	case HLID_PREVIOUS:
+		return "HLID_PREVIOUS"
+	case HLID_NEXT:
+		return "HLID_NEXT"
+	case HLID_CURRENT:
+		return "HLID_CURRENT"
+	case HLID_STACKBOTTOM:
+		return "HLID_STACKBOTTOM"
+	case HLID_STACKTOP:
+		return "HLID_STACKTOP"
+	default:
+		return fmt.Sprintf("HLID_INFO(%d)", uint32(e))
+	}
+}
+
 type HLINKGETREF int32
 
 const (
@@ -1079,11 +3252,37 @@ const (
 	HLINKGETREF_RELATIVE HLINKGETREF = 2
 )
 
+// String returns the HLINKGETREF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLINKGETREF) String() string {
+	switch e {
+	case HLINKGETREF_DEFAULT:
+		return "HLINKGETREF_DEFAULT"
+	case HLINKGETREF_ABSOLUTE:
+		return "HLINKGETREF_ABSOLUTE"
+	case HLINKGETREF_RELATIVE:
+		return "HLINKGETREF_RELATIVE"
+	default:
+		return fmt.Sprintf("HLINKGETREF(%d)", int32(e))
+	}
+}
+
 type HLINKMISC int32
 
 const (
 	HLINKMISC_RELATIVE HLINKMISC = 1
 )
+
+// String returns the HLINKMISC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLINKMISC) String() string {
+	switch e {
+	case HLINKMISC_RELATIVE:
+		return "HLINKMISC_RELATIVE"
+	default:
+		return fmt.Sprintf("HLINKMISC(%d)", int32(e))
+	}
+}
 
 type HLINKSETF int32
 
@@ -1092,6 +3291,19 @@ const (
 	HLINKSETF_LOCATION HLINKSETF = 2
 )
 
+// String returns the HLINKSETF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLINKSETF) String() string {
+	switch e {
+	case HLINKSETF_TARGET:
+		return "HLINKSETF_TARGET"
+	case HLINKSETF_LOCATION:
+		return "HLINKSETF_LOCATION"
+	default:
+		return fmt.Sprintf("HLINKSETF(%d)", int32(e))
+	}
+}
+
 type HLINKWHICHMK int32
 
 const (
@@ -1099,6 +3311,20 @@ const (
 	HLINKWHICHMK_BASE      HLINKWHICHMK = 2
 )
 
+// String returns the HLINKWHICHMK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLINKWHICHMK) String() string {
+	switch e {
+	case HLINKWHICHMK_CONTAINER:
+		return "HLINKWHICHMK_CONTAINER"
+	case HLINKWHICHMK_BASE:
+		return "HLINKWHICHMK_BASE"
+	default:
+		return fmt.Sprintf("HLINKWHICHMK(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HLNF uint32
 
 const (
@@ -1110,12 +3336,53 @@ const (
 	HLNF_CREATENOHISTORY       HLNF = 32
 )
 
+// String returns the HLNF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLNF) String() string {
+	var parts []string
+	if e&HLNF_INTERNALJUMP != 0 {
+		parts = append(parts, "HLNF_INTERNALJUMP")
+	}
+	if e&HLNF_OPENINNEWWINDOW != 0 {
+		parts = append(parts, "HLNF_OPENINNEWWINDOW")
+	}
+	if e&HLNF_NAVIGATINGBACK != 0 {
+		parts = append(parts, "HLNF_NAVIGATINGBACK")
+	}
+	if e&HLNF_NAVIGATINGFORWARD != 0 {
+		parts = append(parts, "HLNF_NAVIGATINGFORWARD")
+	}
+	if e&HLNF_NAVIGATINGTOSTACKITEM != 0 {
+		parts = append(parts, "HLNF_NAVIGATINGTOSTACKITEM")
+	}
+	if e&HLNF_CREATENOHISTORY != 0 {
+		parts = append(parts, "HLNF_CREATENOHISTORY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type HLQF_INFO int32
 
 const (
 	HLQF_ISVALID   HLQF_INFO = 1
 	HLQF_ISCURRENT HLQF_INFO = 2
 )
+
+// String returns the HLQF_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLQF_INFO) String() string {
+	switch e {
+	case HLQF_ISVALID:
+		return "HLQF_ISVALID"
+	case HLQF_ISCURRENT:
+		return "HLQF_ISCURRENT"
+	default:
+		return fmt.Sprintf("HLQF_INFO(%d)", int32(e))
+	}
+}
 
 type HLSHORTCUTF int32
 
@@ -1127,6 +3394,25 @@ const (
 	HLSHORTCUTF_MAYUSEEXISTINGSHORTCUT      HLSHORTCUTF = 8
 )
 
+// String returns the HLSHORTCUTF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLSHORTCUTF) String() string {
+	switch e {
+	case HLSHORTCUTF_DEFAULT:
+		return "HLSHORTCUTF_DEFAULT"
+	case HLSHORTCUTF_DONTACTUALLYCREATE:
+		return "HLSHORTCUTF_DONTACTUALLYCREATE"
+	case HLSHORTCUTF_USEFILENAMEFROMFRIENDLYNAME:
+		return "HLSHORTCUTF_USEFILENAMEFROMFRIENDLYNAME"
+	case HLSHORTCUTF_USEUNIQUEFILENAME:
+		return "HLSHORTCUTF_USEUNIQUEFILENAME"
+	case HLSHORTCUTF_MAYUSEEXISTINGSHORTCUT:
+		return "HLSHORTCUTF_MAYUSEEXISTINGSHORTCUT"
+	default:
+		return fmt.Sprintf("HLSHORTCUTF(%d)", int32(e))
+	}
+}
+
 type HLSR int32
 
 const (
@@ -1134,6 +3420,21 @@ const (
 	HLSR_SEARCHPAGE    HLSR = 1
 	HLSR_HISTORYFOLDER HLSR = 2
 )
+
+// String returns the HLSR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLSR) String() string {
+	switch e {
+	case HLSR_HOME:
+		return "HLSR_HOME"
+	case HLSR_SEARCHPAGE:
+		return "HLSR_SEARCHPAGE"
+	case HLSR_HISTORYFOLDER:
+		return "HLSR_HISTORYFOLDER"
+	default:
+		return fmt.Sprintf("HLSR(%d)", int32(e))
+	}
+}
 
 type HLTB_INFO int32
 
@@ -1145,6 +3446,25 @@ const (
 	HLTB_FLOATING     HLTB_INFO = 4
 )
 
+// String returns the HLTB_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLTB_INFO) String() string {
+	switch e {
+	case HLTB_DOCKEDLEFT:
+		return "HLTB_DOCKEDLEFT"
+	case HLTB_DOCKEDTOP:
+		return "HLTB_DOCKEDTOP"
+	case HLTB_DOCKEDRIGHT:
+		return "HLTB_DOCKEDRIGHT"
+	case HLTB_DOCKEDBOTTOM:
+		return "HLTB_DOCKEDBOTTOM"
+	case HLTB_FLOATING:
+		return "HLTB_FLOATING"
+	default:
+		return fmt.Sprintf("HLTB_INFO(%d)", int32(e))
+	}
+}
+
 type HLTRANSLATEF int32
 
 const (
@@ -1152,6 +3472,20 @@ const (
 	HLTRANSLATEF_DONTAPPLYDEFAULTPREFIX HLTRANSLATEF = 1
 )
 
+// String returns the HLTRANSLATEF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HLTRANSLATEF) String() string {
+	switch e {
+	case HLTRANSLATEF_DEFAULT:
+		return "HLTRANSLATEF_DEFAULT"
+	case HLTRANSLATEF_DONTAPPLYDEFAULTPREFIX:
+		return "HLTRANSLATEF_DONTAPPLYDEFAULTPREFIX"
+	default:
+		return fmt.Sprintf("HLTRANSLATEF(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HOMEGROUPSHARINGCHOICES int32
 
 const (
@@ -1163,11 +3497,47 @@ const (
 	HGSC_PRINTERS         HOMEGROUPSHARINGCHOICES = 16
 )
 
+// String returns the HOMEGROUPSHARINGCHOICES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HOMEGROUPSHARINGCHOICES) String() string {
+	var parts []string
+	if e&HGSC_MUSICLIBRARY != 0 {
+		parts = append(parts, "HGSC_MUSICLIBRARY")
+	}
+	if e&HGSC_PICTURESLIBRARY != 0 {
+		parts = append(parts, "HGSC_PICTURESLIBRARY")
+	}
+	if e&HGSC_VIDEOSLIBRARY != 0 {
+		parts = append(parts, "HGSC_VIDEOSLIBRARY")
+	}
+	if e&HGSC_DOCUMENTSLIBRARY != 0 {
+		parts = append(parts, "HGSC_DOCUMENTSLIBRARY")
+	}
+	if e&HGSC_PRINTERS != 0 {
+		parts = append(parts, "HGSC_PRINTERS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type IEPDNFLAGS int32
 
 const (
 	IEPDN_BINDINGUI IEPDNFLAGS = 1
 )
+
+// String returns the IEPDNFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IEPDNFLAGS) String() string {
+	switch e {
+	case IEPDN_BINDINGUI:
+		return "IEPDN_BINDINGUI"
+	default:
+		return fmt.Sprintf("IEPDNFLAGS(%d)", int32(e))
+	}
+}
 
 // IESHORTCUTFLAGS: https://learn.microsoft.com/windows/win32/api/shlobj_core/ne-shlobj_core-ieshortcutflags
 type IESHORTCUTFLAGS int32
@@ -1179,6 +3549,23 @@ const (
 	IESHORTCUT_BACKGROUNDTAB IESHORTCUTFLAGS = 8
 )
 
+// String returns the IESHORTCUTFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IESHORTCUTFLAGS) String() string {
+	switch e {
+	case IESHORTCUT_NEWBROWSER:
+		return "IESHORTCUT_NEWBROWSER"
+	case IESHORTCUT_OPENNEWTAB:
+		return "IESHORTCUT_OPENNEWTAB"
+	case IESHORTCUT_FORCENAVIGATE:
+		return "IESHORTCUT_FORCENAVIGATE"
+	case IESHORTCUT_BACKGROUNDTAB:
+		return "IESHORTCUT_BACKGROUNDTAB"
+	default:
+		return fmt.Sprintf("IESHORTCUTFLAGS(%d)", int32(e))
+	}
+}
+
 type IURL_INVOKECOMMAND_FLAGS int32
 
 const (
@@ -1189,12 +3576,44 @@ const (
 	IURL_INVOKECOMMAND_FL_LOG_USAGE        IURL_INVOKECOMMAND_FLAGS = 16
 )
 
+// String returns the IURL_INVOKECOMMAND_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IURL_INVOKECOMMAND_FLAGS) String() string {
+	switch e {
+	case IURL_INVOKECOMMAND_FL_ALLOW_UI:
+		return "IURL_INVOKECOMMAND_FL_ALLOW_UI"
+	case IURL_INVOKECOMMAND_FL_USE_DEFAULT_VERB:
+		return "IURL_INVOKECOMMAND_FL_USE_DEFAULT_VERB"
+	case IURL_INVOKECOMMAND_FL_DDEWAIT:
+		return "IURL_INVOKECOMMAND_FL_DDEWAIT"
+	case IURL_INVOKECOMMAND_FL_ASYNCOK:
+		return "IURL_INVOKECOMMAND_FL_ASYNCOK"
+	case IURL_INVOKECOMMAND_FL_LOG_USAGE:
+		return "IURL_INVOKECOMMAND_FL_LOG_USAGE"
+	default:
+		return fmt.Sprintf("IURL_INVOKECOMMAND_FLAGS(%d)", int32(e))
+	}
+}
+
 type IURL_SETURL_FLAGS int32
 
 const (
 	IURL_SETURL_FL_GUESS_PROTOCOL       IURL_SETURL_FLAGS = 1
 	IURL_SETURL_FL_USE_DEFAULT_PROTOCOL IURL_SETURL_FLAGS = 2
 )
+
+// String returns the IURL_SETURL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IURL_SETURL_FLAGS) String() string {
+	switch e {
+	case IURL_SETURL_FL_GUESS_PROTOCOL:
+		return "IURL_SETURL_FL_GUESS_PROTOCOL"
+	case IURL_SETURL_FL_USE_DEFAULT_PROTOCOL:
+		return "IURL_SETURL_FL_USE_DEFAULT_PROTOCOL"
+	default:
+		return fmt.Sprintf("IURL_SETURL_FLAGS(%d)", int32(e))
+	}
+}
 
 // KF_CATEGORY: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-kf_category
 type KF_CATEGORY int32
@@ -1206,6 +3625,23 @@ const (
 	KF_CATEGORY_PERUSER KF_CATEGORY = 4
 )
 
+// String returns the KF_CATEGORY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KF_CATEGORY) String() string {
+	switch e {
+	case KF_CATEGORY_VIRTUAL:
+		return "KF_CATEGORY_VIRTUAL"
+	case KF_CATEGORY_FIXED:
+		return "KF_CATEGORY_FIXED"
+	case KF_CATEGORY_COMMON:
+		return "KF_CATEGORY_COMMON"
+	case KF_CATEGORY_PERUSER:
+		return "KF_CATEGORY_PERUSER"
+	default:
+		return fmt.Sprintf("KF_CATEGORY(%d)", int32(e))
+	}
+}
+
 type KNOWNDESTCATEGORY int32
 
 const (
@@ -1213,7 +3649,21 @@ const (
 	KDC_RECENT   KNOWNDESTCATEGORY = 2
 )
 
+// String returns the KNOWNDESTCATEGORY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KNOWNDESTCATEGORY) String() string {
+	switch e {
+	case KDC_FREQUENT:
+		return "KDC_FREQUENT"
+	case KDC_RECENT:
+		return "KDC_RECENT"
+	default:
+		return fmt.Sprintf("KNOWNDESTCATEGORY(%d)", int32(e))
+	}
+}
+
 // KNOWN_FOLDER_FLAG: https://learn.microsoft.com/windows/win32/api/shlobj_core/ne-shlobj_core-known_folder_flag
+// Bitmask — values may be combined with |.
 type KNOWN_FOLDER_FLAG int32
 
 const (
@@ -1235,6 +3685,61 @@ const (
 	KF_FLAG_ALIAS_ONLY                       KNOWN_FOLDER_FLAG = -2147483648
 )
 
+// String returns the KNOWN_FOLDER_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KNOWN_FOLDER_FLAG) String() string {
+	var parts []string
+	if e&KF_FLAG_FORCE_APP_DATA_REDIRECTION != 0 {
+		parts = append(parts, "KF_FLAG_FORCE_APP_DATA_REDIRECTION")
+	}
+	if e&KF_FLAG_RETURN_FILTER_REDIRECTION_TARGET != 0 {
+		parts = append(parts, "KF_FLAG_RETURN_FILTER_REDIRECTION_TARGET")
+	}
+	if e&KF_FLAG_FORCE_PACKAGE_REDIRECTION != 0 {
+		parts = append(parts, "KF_FLAG_FORCE_PACKAGE_REDIRECTION")
+	}
+	if e&KF_FLAG_NO_PACKAGE_REDIRECTION != 0 {
+		parts = append(parts, "KF_FLAG_NO_PACKAGE_REDIRECTION")
+	}
+	if e&KF_FLAG_FORCE_APPCONTAINER_REDIRECTION != 0 {
+		parts = append(parts, "KF_FLAG_FORCE_APPCONTAINER_REDIRECTION")
+	}
+	if e&KF_FLAG_NO_APPCONTAINER_REDIRECTION != 0 {
+		parts = append(parts, "KF_FLAG_NO_APPCONTAINER_REDIRECTION")
+	}
+	if e&KF_FLAG_CREATE != 0 {
+		parts = append(parts, "KF_FLAG_CREATE")
+	}
+	if e&KF_FLAG_DONT_VERIFY != 0 {
+		parts = append(parts, "KF_FLAG_DONT_VERIFY")
+	}
+	if e&KF_FLAG_DONT_UNEXPAND != 0 {
+		parts = append(parts, "KF_FLAG_DONT_UNEXPAND")
+	}
+	if e&KF_FLAG_NO_ALIAS != 0 {
+		parts = append(parts, "KF_FLAG_NO_ALIAS")
+	}
+	if e&KF_FLAG_INIT != 0 {
+		parts = append(parts, "KF_FLAG_INIT")
+	}
+	if e&KF_FLAG_DEFAULT_PATH != 0 {
+		parts = append(parts, "KF_FLAG_DEFAULT_PATH")
+	}
+	if e&KF_FLAG_NOT_PARENT_RELATIVE != 0 {
+		parts = append(parts, "KF_FLAG_NOT_PARENT_RELATIVE")
+	}
+	if e&KF_FLAG_SIMPLE_IDLIST != 0 {
+		parts = append(parts, "KF_FLAG_SIMPLE_IDLIST")
+	}
+	if e&KF_FLAG_ALIAS_ONLY != 0 {
+		parts = append(parts, "KF_FLAG_ALIAS_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // LIBRARYFOLDERFILTER: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-libraryfolderfilter
 type LIBRARYFOLDERFILTER int32
 
@@ -1244,7 +3749,23 @@ const (
 	LFF_ALLITEMS        LIBRARYFOLDERFILTER = 3
 )
 
+// String returns the LIBRARYFOLDERFILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIBRARYFOLDERFILTER) String() string {
+	switch e {
+	case LFF_FORCEFILESYSTEM:
+		return "LFF_FORCEFILESYSTEM"
+	case LFF_STORAGEITEMS:
+		return "LFF_STORAGEITEMS"
+	case LFF_ALLITEMS:
+		return "LFF_ALLITEMS"
+	default:
+		return fmt.Sprintf("LIBRARYFOLDERFILTER(%d)", int32(e))
+	}
+}
+
 // LIBRARYMANAGEDIALOGOPTIONS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-librarymanagedialogoptions
+// Bitmask — values may be combined with |.
 type LIBRARYMANAGEDIALOGOPTIONS int32
 
 const (
@@ -1252,7 +3773,21 @@ const (
 	LMD_ALLOWUNINDEXABLENETWORKLOCATIONS LIBRARYMANAGEDIALOGOPTIONS = 1
 )
 
+// String returns the LIBRARYMANAGEDIALOGOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIBRARYMANAGEDIALOGOPTIONS) String() string {
+	var parts []string
+	if e&LMD_ALLOWUNINDEXABLENETWORKLOCATIONS != 0 {
+		parts = append(parts, "LMD_ALLOWUNINDEXABLENETWORKLOCATIONS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // LIBRARYOPTIONFLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-libraryoptionflags
+// Bitmask — values may be combined with |.
 type LIBRARYOPTIONFLAGS int32
 
 const (
@@ -1261,7 +3796,24 @@ const (
 	LOF_MASK_ALL        LIBRARYOPTIONFLAGS = 1
 )
 
+// String returns the LIBRARYOPTIONFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIBRARYOPTIONFLAGS) String() string {
+	var parts []string
+	if e&LOF_PINNEDTONAVPANE != 0 {
+		parts = append(parts, "LOF_PINNEDTONAVPANE")
+	}
+	if e&LOF_MASK_ALL != 0 {
+		parts = append(parts, "LOF_MASK_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // LIBRARYSAVEFLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-librarysaveflags
+// Bitmask — values may be combined with |.
 type LIBRARYSAVEFLAGS int32
 
 const (
@@ -1270,11 +3822,38 @@ const (
 	LSF_MAKEUNIQUENAME   LIBRARYSAVEFLAGS = 2
 )
 
+// String returns the LIBRARYSAVEFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIBRARYSAVEFLAGS) String() string {
+	var parts []string
+	if e&LSF_OVERRIDEEXISTING != 0 {
+		parts = append(parts, "LSF_OVERRIDEEXISTING")
+	}
+	if e&LSF_MAKEUNIQUENAME != 0 {
+		parts = append(parts, "LSF_MAKEUNIQUENAME")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type MENUBANDHANDLERCID int32
 
 const (
 	MBHANDCID_PIDLSELECT MENUBANDHANDLERCID = 0
 )
+
+// String returns the MENUBANDHANDLERCID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENUBANDHANDLERCID) String() string {
+	switch e {
+	case MBHANDCID_PIDLSELECT:
+		return "MBHANDCID_PIDLSELECT"
+	default:
+		return fmt.Sprintf("MENUBANDHANDLERCID(%d)", int32(e))
+	}
+}
 
 type MENUPOPUPPOPUPFLAGS int32
 
@@ -1295,6 +3874,43 @@ const (
 	MPPF_ALIGN_RIGHT   MENUPOPUPPOPUPFLAGS = 67108864
 )
 
+// String returns the MENUPOPUPPOPUPFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENUPOPUPPOPUPFLAGS) String() string {
+	switch e {
+	case MPPF_SETFOCUS:
+		return "MPPF_SETFOCUS"
+	case MPPF_INITIALSELECT:
+		return "MPPF_INITIALSELECT"
+	case MPPF_NOANIMATE:
+		return "MPPF_NOANIMATE"
+	case MPPF_KEYBOARD:
+		return "MPPF_KEYBOARD"
+	case MPPF_REPOSITION:
+		return "MPPF_REPOSITION"
+	case MPPF_FORCEZORDER:
+		return "MPPF_FORCEZORDER"
+	case MPPF_FINALSELECT:
+		return "MPPF_FINALSELECT"
+	case MPPF_TOP:
+		return "MPPF_TOP"
+	case MPPF_LEFT:
+		return "MPPF_LEFT"
+	case MPPF_RIGHT:
+		return "MPPF_RIGHT"
+	case MPPF_BOTTOM:
+		return "MPPF_BOTTOM"
+	case MPPF_POS_MASK:
+		return "MPPF_POS_MASK"
+	case MPPF_ALIGN_LEFT:
+		return "MPPF_ALIGN_LEFT"
+	case MPPF_ALIGN_RIGHT:
+		return "MPPF_ALIGN_RIGHT"
+	default:
+		return fmt.Sprintf("MENUPOPUPPOPUPFLAGS(%d)", int32(e))
+	}
+}
+
 type MENUPOPUPSELECT int32
 
 const (
@@ -1306,6 +3922,27 @@ const (
 	MPOS_CHILDTRACKING MENUPOPUPSELECT = 5
 )
 
+// String returns the MENUPOPUPSELECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENUPOPUPSELECT) String() string {
+	switch e {
+	case MPOS_EXECUTE:
+		return "MPOS_EXECUTE"
+	case MPOS_FULLCANCEL:
+		return "MPOS_FULLCANCEL"
+	case MPOS_CANCELLEVEL:
+		return "MPOS_CANCELLEVEL"
+	case MPOS_SELECTLEFT:
+		return "MPOS_SELECTLEFT"
+	case MPOS_SELECTRIGHT:
+		return "MPOS_SELECTRIGHT"
+	case MPOS_CHILDTRACKING:
+		return "MPOS_CHILDTRACKING"
+	default:
+		return fmt.Sprintf("MENUPOPUPSELECT(%d)", int32(e))
+	}
+}
+
 type MERGE_UPDATE_STATUS int32
 
 const (
@@ -1314,6 +3951,21 @@ const (
 	MUS_FAILED          MERGE_UPDATE_STATUS = 2
 )
 
+// String returns the MERGE_UPDATE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MERGE_UPDATE_STATUS) String() string {
+	switch e {
+	case MUS_COMPLETE:
+		return "MUS_COMPLETE"
+	case MUS_USERINPUTNEEDED:
+		return "MUS_USERINPUTNEEDED"
+	case MUS_FAILED:
+		return "MUS_FAILED"
+	default:
+		return fmt.Sprintf("MERGE_UPDATE_STATUS(%d)", int32(e))
+	}
+}
+
 // MIMEASSOCIATIONDIALOG_IN_FLAGS: https://learn.microsoft.com/windows/win32/api/intshcut/ne-intshcut-mimeassociationdialog_in_flags
 type MIMEASSOCIATIONDIALOG_IN_FLAGS int32
 
@@ -1321,6 +3973,18 @@ const (
 	MIMEASSOCDLG_FL_REGISTER_ASSOC MIMEASSOCIATIONDIALOG_IN_FLAGS = 1
 )
 
+// String returns the MIMEASSOCIATIONDIALOG_IN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIMEASSOCIATIONDIALOG_IN_FLAGS) String() string {
+	switch e {
+	case MIMEASSOCDLG_FL_REGISTER_ASSOC:
+		return "MIMEASSOCDLG_FL_REGISTER_ASSOC"
+	default:
+		return fmt.Sprintf("MIMEASSOCIATIONDIALOG_IN_FLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MM_FLAGS uint32
 
 const (
@@ -1328,6 +3992,25 @@ const (
 	MM_SUBMENUSHAVEIDS MM_FLAGS = 2
 	MM_DONTREMOVESEPS  MM_FLAGS = 4
 )
+
+// String returns the MM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MM_FLAGS) String() string {
+	var parts []string
+	if e&MM_ADDSEPARATOR != 0 {
+		parts = append(parts, "MM_ADDSEPARATOR")
+	}
+	if e&MM_SUBMENUSHAVEIDS != 0 {
+		parts = append(parts, "MM_SUBMENUSHAVEIDS")
+	}
+	if e&MM_DONTREMOVESEPS != 0 {
+		parts = append(parts, "MM_DONTREMOVESEPS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // MONITOR_APP_VISIBILITY: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-monitor_app_visibility
 type MONITOR_APP_VISIBILITY int32
@@ -1338,6 +4021,22 @@ const (
 	MAV_APP_VISIBLE    MONITOR_APP_VISIBILITY = 2
 )
 
+// String returns the MONITOR_APP_VISIBILITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MONITOR_APP_VISIBILITY) String() string {
+	switch e {
+	case MAV_UNKNOWN:
+		return "MAV_UNKNOWN"
+	case MAV_NO_APP_VISIBLE:
+		return "MAV_NO_APP_VISIBLE"
+	case MAV_APP_VISIBLE:
+		return "MAV_APP_VISIBLE"
+	default:
+		return fmt.Sprintf("MONITOR_APP_VISIBILITY(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NAMESPACEWALKFLAG int32
 
 const (
@@ -1360,6 +4059,64 @@ const (
 	NSWF_ANY_IMPLIES_ALL                NAMESPACEWALKFLAG = 32768
 )
 
+// String returns the NAMESPACEWALKFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAMESPACEWALKFLAG) String() string {
+	var parts []string
+	if e&NSWF_NONE_IMPLIES_ALL != 0 {
+		parts = append(parts, "NSWF_NONE_IMPLIES_ALL")
+	}
+	if e&NSWF_ONE_IMPLIES_ALL != 0 {
+		parts = append(parts, "NSWF_ONE_IMPLIES_ALL")
+	}
+	if e&NSWF_DONT_TRAVERSE_LINKS != 0 {
+		parts = append(parts, "NSWF_DONT_TRAVERSE_LINKS")
+	}
+	if e&NSWF_DONT_ACCUMULATE_RESULT != 0 {
+		parts = append(parts, "NSWF_DONT_ACCUMULATE_RESULT")
+	}
+	if e&NSWF_TRAVERSE_STREAM_JUNCTIONS != 0 {
+		parts = append(parts, "NSWF_TRAVERSE_STREAM_JUNCTIONS")
+	}
+	if e&NSWF_FILESYSTEM_ONLY != 0 {
+		parts = append(parts, "NSWF_FILESYSTEM_ONLY")
+	}
+	if e&NSWF_SHOW_PROGRESS != 0 {
+		parts = append(parts, "NSWF_SHOW_PROGRESS")
+	}
+	if e&NSWF_FLAG_VIEWORDER != 0 {
+		parts = append(parts, "NSWF_FLAG_VIEWORDER")
+	}
+	if e&NSWF_IGNORE_AUTOPLAY_HIDA != 0 {
+		parts = append(parts, "NSWF_IGNORE_AUTOPLAY_HIDA")
+	}
+	if e&NSWF_ASYNC != 0 {
+		parts = append(parts, "NSWF_ASYNC")
+	}
+	if e&NSWF_DONT_RESOLVE_LINKS != 0 {
+		parts = append(parts, "NSWF_DONT_RESOLVE_LINKS")
+	}
+	if e&NSWF_ACCUMULATE_FOLDERS != 0 {
+		parts = append(parts, "NSWF_ACCUMULATE_FOLDERS")
+	}
+	if e&NSWF_DONT_SORT != 0 {
+		parts = append(parts, "NSWF_DONT_SORT")
+	}
+	if e&NSWF_USE_TRANSFER_MEDIUM != 0 {
+		parts = append(parts, "NSWF_USE_TRANSFER_MEDIUM")
+	}
+	if e&NSWF_DONT_TRAVERSE_STREAM_JUNCTIONS != 0 {
+		parts = append(parts, "NSWF_DONT_TRAVERSE_STREAM_JUNCTIONS")
+	}
+	if e&NSWF_ANY_IMPLIES_ALL != 0 {
+		parts = append(parts, "NSWF_ANY_IMPLIES_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type NATIVE_DISPLAY_ORIENTATION int32
 
 const (
@@ -1367,6 +4124,20 @@ const (
 	NDO_PORTRAIT  NATIVE_DISPLAY_ORIENTATION = 1
 )
 
+// String returns the NATIVE_DISPLAY_ORIENTATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NATIVE_DISPLAY_ORIENTATION) String() string {
+	switch e {
+	case NDO_LANDSCAPE:
+		return "NDO_LANDSCAPE"
+	case NDO_PORTRAIT:
+		return "NDO_PORTRAIT"
+	default:
+		return fmt.Sprintf("NATIVE_DISPLAY_ORIENTATION(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NOTIFY_ICON_DATA_FLAGS uint32
 
 const (
@@ -1380,6 +4151,41 @@ const (
 	NIF_SHOWTIP  NOTIFY_ICON_DATA_FLAGS = 128
 )
 
+// String returns the NOTIFY_ICON_DATA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NOTIFY_ICON_DATA_FLAGS) String() string {
+	var parts []string
+	if e&NIF_MESSAGE != 0 {
+		parts = append(parts, "NIF_MESSAGE")
+	}
+	if e&NIF_ICON != 0 {
+		parts = append(parts, "NIF_ICON")
+	}
+	if e&NIF_TIP != 0 {
+		parts = append(parts, "NIF_TIP")
+	}
+	if e&NIF_STATE != 0 {
+		parts = append(parts, "NIF_STATE")
+	}
+	if e&NIF_INFO != 0 {
+		parts = append(parts, "NIF_INFO")
+	}
+	if e&NIF_GUID != 0 {
+		parts = append(parts, "NIF_GUID")
+	}
+	if e&NIF_REALTIME != 0 {
+		parts = append(parts, "NIF_REALTIME")
+	}
+	if e&NIF_SHOWTIP != 0 {
+		parts = append(parts, "NIF_SHOWTIP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type NOTIFY_ICON_INFOTIP_FLAGS uint32
 
 const (
@@ -1394,6 +4200,40 @@ const (
 	NIIF_RESPECT_QUIET_TIME NOTIFY_ICON_INFOTIP_FLAGS = 128
 )
 
+// String returns the NOTIFY_ICON_INFOTIP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NOTIFY_ICON_INFOTIP_FLAGS) String() string {
+	var parts []string
+	if e&NIIF_INFO != 0 {
+		parts = append(parts, "NIIF_INFO")
+	}
+	if e&NIIF_WARNING != 0 {
+		parts = append(parts, "NIIF_WARNING")
+	}
+	if e&NIIF_ERROR != 0 {
+		parts = append(parts, "NIIF_ERROR")
+	}
+	if e&NIIF_USER != 0 {
+		parts = append(parts, "NIIF_USER")
+	}
+	if e&NIIF_ICON_MASK != 0 {
+		parts = append(parts, "NIIF_ICON_MASK")
+	}
+	if e&NIIF_NOSOUND != 0 {
+		parts = append(parts, "NIIF_NOSOUND")
+	}
+	if e&NIIF_LARGE_ICON != 0 {
+		parts = append(parts, "NIIF_LARGE_ICON")
+	}
+	if e&NIIF_RESPECT_QUIET_TIME != 0 {
+		parts = append(parts, "NIIF_RESPECT_QUIET_TIME")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type NOTIFY_ICON_MESSAGE uint32
 
 const (
@@ -1404,6 +4244,26 @@ const (
 	NIM_SETVERSION NOTIFY_ICON_MESSAGE = 4
 )
 
+// String returns the NOTIFY_ICON_MESSAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NOTIFY_ICON_MESSAGE) String() string {
+	switch e {
+	case NIM_ADD:
+		return "NIM_ADD"
+	case NIM_MODIFY:
+		return "NIM_MODIFY"
+	case NIM_DELETE:
+		return "NIM_DELETE"
+	case NIM_SETFOCUS:
+		return "NIM_SETFOCUS"
+	case NIM_SETVERSION:
+		return "NIM_SETVERSION"
+	default:
+		return fmt.Sprintf("NOTIFY_ICON_MESSAGE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NOTIFY_ICON_STATE uint32
 
 const (
@@ -1411,7 +4271,24 @@ const (
 	NIS_SHAREDICON NOTIFY_ICON_STATE = 2
 )
 
+// String returns the NOTIFY_ICON_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NOTIFY_ICON_STATE) String() string {
+	var parts []string
+	if e&NIS_HIDDEN != 0 {
+		parts = append(parts, "NIS_HIDDEN")
+	}
+	if e&NIS_SHAREDICON != 0 {
+		parts = append(parts, "NIS_SHAREDICON")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // NSTCFOLDERCAPABILITIES: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-nstcfoldercapabilities
+// Bitmask — values may be combined with |.
 type NSTCFOLDERCAPABILITIES int32
 
 const (
@@ -1419,6 +4296,22 @@ const (
 	NSTCFC_PINNEDITEMFILTERING   NSTCFOLDERCAPABILITIES = 1
 	NSTCFC_DELAY_REGISTER_NOTIFY NSTCFOLDERCAPABILITIES = 2
 )
+
+// String returns the NSTCFOLDERCAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NSTCFOLDERCAPABILITIES) String() string {
+	var parts []string
+	if e&NSTCFC_PINNEDITEMFILTERING != 0 {
+		parts = append(parts, "NSTCFC_PINNEDITEMFILTERING")
+	}
+	if e&NSTCFC_DELAY_REGISTER_NOTIFY != 0 {
+		parts = append(parts, "NSTCFC_DELAY_REGISTER_NOTIFY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type NSTCGNI int32
 
@@ -1433,7 +4326,33 @@ const (
 	NSTCGNI_LASTVISIBLE  NSTCGNI = 7
 )
 
+// String returns the NSTCGNI constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NSTCGNI) String() string {
+	switch e {
+	case NSTCGNI_NEXT:
+		return "NSTCGNI_NEXT"
+	case NSTCGNI_NEXTVISIBLE:
+		return "NSTCGNI_NEXTVISIBLE"
+	case NSTCGNI_PREV:
+		return "NSTCGNI_PREV"
+	case NSTCGNI_PREVVISIBLE:
+		return "NSTCGNI_PREVVISIBLE"
+	case NSTCGNI_PARENT:
+		return "NSTCGNI_PARENT"
+	case NSTCGNI_CHILD:
+		return "NSTCGNI_CHILD"
+	case NSTCGNI_FIRSTVISIBLE:
+		return "NSTCGNI_FIRSTVISIBLE"
+	case NSTCGNI_LASTVISIBLE:
+		return "NSTCGNI_LASTVISIBLE"
+	default:
+		return fmt.Sprintf("NSTCGNI(%d)", int32(e))
+	}
+}
+
 // NSTCSTYLE2: https://learn.microsoft.com/windows/win32/api/shobjidl/ne-shobjidl-nstcstyle2
+// Bitmask — values may be combined with |.
 type NSTCSTYLE2 int32
 
 const (
@@ -1446,7 +4365,36 @@ const (
 	NTSCS2_NEVERINSERTNONENUMERATED NSTCSTYLE2 = 32
 )
 
+// String returns the NSTCSTYLE2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NSTCSTYLE2) String() string {
+	var parts []string
+	if e&NSTCS2_INTERRUPTNOTIFICATIONS != 0 {
+		parts = append(parts, "NSTCS2_INTERRUPTNOTIFICATIONS")
+	}
+	if e&NSTCS2_SHOWNULLSPACEMENU != 0 {
+		parts = append(parts, "NSTCS2_SHOWNULLSPACEMENU")
+	}
+	if e&NSTCS2_DISPLAYPADDING != 0 {
+		parts = append(parts, "NSTCS2_DISPLAYPADDING")
+	}
+	if e&NSTCS2_DISPLAYPINNEDONLY != 0 {
+		parts = append(parts, "NSTCS2_DISPLAYPINNEDONLY")
+	}
+	if e&NTSCS2_NOSINGLETONAUTOEXPAND != 0 {
+		parts = append(parts, "NTSCS2_NOSINGLETONAUTOEXPAND")
+	}
+	if e&NTSCS2_NEVERINSERTNONENUMERATED != 0 {
+		parts = append(parts, "NTSCS2_NEVERINSERTNONENUMERATED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // NWMF: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-nwmf
+// Bitmask — values may be combined with |.
 type NWMF int32
 
 const (
@@ -1466,12 +4414,76 @@ const (
 	NWMF_INACTIVETAB     NWMF = 1048576
 )
 
+// String returns the NWMF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NWMF) String() string {
+	var parts []string
+	if e&NWMF_UNLOADING != 0 {
+		parts = append(parts, "NWMF_UNLOADING")
+	}
+	if e&NWMF_USERINITED != 0 {
+		parts = append(parts, "NWMF_USERINITED")
+	}
+	if e&NWMF_FIRST != 0 {
+		parts = append(parts, "NWMF_FIRST")
+	}
+	if e&NWMF_OVERRIDEKEY != 0 {
+		parts = append(parts, "NWMF_OVERRIDEKEY")
+	}
+	if e&NWMF_SHOWHELP != 0 {
+		parts = append(parts, "NWMF_SHOWHELP")
+	}
+	if e&NWMF_HTMLDIALOG != 0 {
+		parts = append(parts, "NWMF_HTMLDIALOG")
+	}
+	if e&NWMF_FROMDIALOGCHILD != 0 {
+		parts = append(parts, "NWMF_FROMDIALOGCHILD")
+	}
+	if e&NWMF_USERREQUESTED != 0 {
+		parts = append(parts, "NWMF_USERREQUESTED")
+	}
+	if e&NWMF_USERALLOWED != 0 {
+		parts = append(parts, "NWMF_USERALLOWED")
+	}
+	if e&NWMF_FORCEWINDOW != 0 {
+		parts = append(parts, "NWMF_FORCEWINDOW")
+	}
+	if e&NWMF_FORCETAB != 0 {
+		parts = append(parts, "NWMF_FORCETAB")
+	}
+	if e&NWMF_SUGGESTWINDOW != 0 {
+		parts = append(parts, "NWMF_SUGGESTWINDOW")
+	}
+	if e&NWMF_SUGGESTTAB != 0 {
+		parts = append(parts, "NWMF_SUGGESTTAB")
+	}
+	if e&NWMF_INACTIVETAB != 0 {
+		parts = append(parts, "NWMF_INACTIVETAB")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type NewProcessCauseConstants int32
 
 const (
 	ProtectedModeRedirect NewProcessCauseConstants = 1
 )
 
+// String returns the NewProcessCauseConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NewProcessCauseConstants) String() string {
+	switch e {
+	case ProtectedModeRedirect:
+		return "ProtectedModeRedirect"
+	default:
+		return fmt.Sprintf("NewProcessCauseConstants(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type OPEN_AS_INFO_FLAGS int32
 
 const (
@@ -1483,6 +4495,37 @@ const (
 	OAIF_URL_PROTOCOL       OPEN_AS_INFO_FLAGS = 64
 	OAIF_FILE_IS_URI        OPEN_AS_INFO_FLAGS = 128
 )
+
+// String returns the OPEN_AS_INFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPEN_AS_INFO_FLAGS) String() string {
+	var parts []string
+	if e&OAIF_ALLOW_REGISTRATION != 0 {
+		parts = append(parts, "OAIF_ALLOW_REGISTRATION")
+	}
+	if e&OAIF_REGISTER_EXT != 0 {
+		parts = append(parts, "OAIF_REGISTER_EXT")
+	}
+	if e&OAIF_EXEC != 0 {
+		parts = append(parts, "OAIF_EXEC")
+	}
+	if e&OAIF_FORCE_REGISTRATION != 0 {
+		parts = append(parts, "OAIF_FORCE_REGISTRATION")
+	}
+	if e&OAIF_HIDE_REGISTRATION != 0 {
+		parts = append(parts, "OAIF_HIDE_REGISTRATION")
+	}
+	if e&OAIF_URL_PROTOCOL != 0 {
+		parts = append(parts, "OAIF_URL_PROTOCOL")
+	}
+	if e&OAIF_FILE_IS_URI != 0 {
+		parts = append(parts, "OAIF_FILE_IS_URI")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type OS uint32
 
@@ -1525,6 +4568,87 @@ const (
 	OS_APPLIANCE              OS = 36
 )
 
+// String returns the OS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OS) String() string {
+	switch e {
+	case OS_WINDOWS:
+		return "OS_WINDOWS"
+	case OS_NT:
+		return "OS_NT"
+	case OS_WIN95ORGREATER:
+		return "OS_WIN95ORGREATER"
+	case OS_NT4ORGREATER:
+		return "OS_NT4ORGREATER"
+	case OS_WIN98ORGREATER:
+		return "OS_WIN98ORGREATER"
+	case OS_WIN98_GOLD:
+		return "OS_WIN98_GOLD"
+	case OS_WIN2000ORGREATER:
+		return "OS_WIN2000ORGREATER"
+	case OS_WIN2000PRO:
+		return "OS_WIN2000PRO"
+	case OS_WIN2000SERVER:
+		return "OS_WIN2000SERVER"
+	case OS_WIN2000ADVSERVER:
+		return "OS_WIN2000ADVSERVER"
+	case OS_WIN2000DATACENTER:
+		return "OS_WIN2000DATACENTER"
+	case OS_WIN2000TERMINAL:
+		return "OS_WIN2000TERMINAL"
+	case OS_EMBEDDED:
+		return "OS_EMBEDDED"
+	case OS_TERMINALCLIENT:
+		return "OS_TERMINALCLIENT"
+	case OS_TERMINALREMOTEADMIN:
+		return "OS_TERMINALREMOTEADMIN"
+	case OS_WIN95_GOLD:
+		return "OS_WIN95_GOLD"
+	case OS_MEORGREATER:
+		return "OS_MEORGREATER"
+	case OS_XPORGREATER:
+		return "OS_XPORGREATER"
+	case OS_HOME:
+		return "OS_HOME"
+	case OS_PROFESSIONAL:
+		return "OS_PROFESSIONAL"
+	case OS_DATACENTER:
+		return "OS_DATACENTER"
+	case OS_ADVSERVER:
+		return "OS_ADVSERVER"
+	case OS_SERVER:
+		return "OS_SERVER"
+	case OS_TERMINALSERVER:
+		return "OS_TERMINALSERVER"
+	case OS_PERSONALTERMINALSERVER:
+		return "OS_PERSONALTERMINALSERVER"
+	case OS_FASTUSERSWITCHING:
+		return "OS_FASTUSERSWITCHING"
+	case OS_WELCOMELOGONUI:
+		return "OS_WELCOMELOGONUI"
+	case OS_DOMAINMEMBER:
+		return "OS_DOMAINMEMBER"
+	case OS_ANYSERVER:
+		return "OS_ANYSERVER"
+	case OS_WOW6432:
+		return "OS_WOW6432"
+	case OS_WEBSERVER:
+		return "OS_WEBSERVER"
+	case OS_SMALLBUSINESSSERVER:
+		return "OS_SMALLBUSINESSSERVER"
+	case OS_TABLETPC:
+		return "OS_TABLETPC"
+	case OS_SERVERADMINUI:
+		return "OS_SERVERADMINUI"
+	case OS_MEDIACENTER:
+		return "OS_MEDIACENTER"
+	case OS_APPLIANCE:
+		return "OS_APPLIANCE"
+	default:
+		return fmt.Sprintf("OS(%d)", uint32(e))
+	}
+}
+
 type OfflineFolderStatus int32
 
 const (
@@ -1534,6 +4658,25 @@ const (
 	OFS_SERVERBACK OfflineFolderStatus = 2
 	OFS_DIRTYCACHE OfflineFolderStatus = 3
 )
+
+// String returns the OfflineFolderStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OfflineFolderStatus) String() string {
+	switch e {
+	case OFS_INACTIVE:
+		return "OFS_INACTIVE"
+	case OFS_ONLINE:
+		return "OFS_ONLINE"
+	case OFS_OFFLINE:
+		return "OFS_OFFLINE"
+	case OFS_SERVERBACK:
+		return "OFS_SERVERBACK"
+	case OFS_DIRTYCACHE:
+		return "OFS_DIRTYCACHE"
+	default:
+		return fmt.Sprintf("OfflineFolderStatus(%d)", int32(e))
+	}
+}
 
 // PACKAGE_EXECUTION_STATE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-package_execution_state
 type PACKAGE_EXECUTION_STATE int32
@@ -1546,6 +4689,26 @@ const (
 	PES_TERMINATED PACKAGE_EXECUTION_STATE = 4
 )
 
+// String returns the PACKAGE_EXECUTION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PACKAGE_EXECUTION_STATE) String() string {
+	switch e {
+	case PES_UNKNOWN:
+		return "PES_UNKNOWN"
+	case PES_RUNNING:
+		return "PES_RUNNING"
+	case PES_SUSPENDING:
+		return "PES_SUSPENDING"
+	case PES_SUSPENDED:
+		return "PES_SUSPENDED"
+	case PES_TERMINATED:
+		return "PES_TERMINATED"
+	default:
+		return fmt.Sprintf("PACKAGE_EXECUTION_STATE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PATHCCH_OPTIONS uint32
 
 const (
@@ -1559,6 +4722,38 @@ const (
 	PATHCCH_CANONICALIZE_SLASHES            PATHCCH_OPTIONS = 64
 )
 
+// String returns the PATHCCH_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PATHCCH_OPTIONS) String() string {
+	var parts []string
+	if e&PATHCCH_ALLOW_LONG_PATHS != 0 {
+		parts = append(parts, "PATHCCH_ALLOW_LONG_PATHS")
+	}
+	if e&PATHCCH_FORCE_ENABLE_LONG_NAME_PROCESS != 0 {
+		parts = append(parts, "PATHCCH_FORCE_ENABLE_LONG_NAME_PROCESS")
+	}
+	if e&PATHCCH_FORCE_DISABLE_LONG_NAME_PROCESS != 0 {
+		parts = append(parts, "PATHCCH_FORCE_DISABLE_LONG_NAME_PROCESS")
+	}
+	if e&PATHCCH_DO_NOT_NORMALIZE_SEGMENTS != 0 {
+		parts = append(parts, "PATHCCH_DO_NOT_NORMALIZE_SEGMENTS")
+	}
+	if e&PATHCCH_ENSURE_IS_EXTENDED_LENGTH_PATH != 0 {
+		parts = append(parts, "PATHCCH_ENSURE_IS_EXTENDED_LENGTH_PATH")
+	}
+	if e&PATHCCH_ENSURE_TRAILING_SLASH != 0 {
+		parts = append(parts, "PATHCCH_ENSURE_TRAILING_SLASH")
+	}
+	if e&PATHCCH_CANONICALIZE_SLASHES != 0 {
+		parts = append(parts, "PATHCCH_CANONICALIZE_SLASHES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PCS_RET uint32
 
 const (
@@ -1569,6 +4764,32 @@ const (
 	PCS_PATHTOOLONG  PCS_RET = 8
 )
 
+// String returns the PCS_RET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PCS_RET) String() string {
+	var parts []string
+	if e&PCS_FATAL != 0 {
+		parts = append(parts, "PCS_FATAL")
+	}
+	if e&PCS_REPLACEDCHAR != 0 {
+		parts = append(parts, "PCS_REPLACEDCHAR")
+	}
+	if e&PCS_REMOVEDCHAR != 0 {
+		parts = append(parts, "PCS_REMOVEDCHAR")
+	}
+	if e&PCS_TRUNCATED != 0 {
+		parts = append(parts, "PCS_TRUNCATED")
+	}
+	if e&PCS_PATHTOOLONG != 0 {
+		parts = append(parts, "PCS_PATHTOOLONG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PIDISF_FLAGS int32
 
 const (
@@ -1578,6 +4799,28 @@ const (
 	PIDISF_FOLLOWALLLINKS  PIDISF_FLAGS = 32
 )
 
+// String returns the PIDISF_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PIDISF_FLAGS) String() string {
+	var parts []string
+	if e&PIDISF_RECENTLYCHANGED != 0 {
+		parts = append(parts, "PIDISF_RECENTLYCHANGED")
+	}
+	if e&PIDISF_CACHEDSTICKY != 0 {
+		parts = append(parts, "PIDISF_CACHEDSTICKY")
+	}
+	if e&PIDISF_CACHEIMAGES != 0 {
+		parts = append(parts, "PIDISF_CACHEIMAGES")
+	}
+	if e&PIDISF_FOLLOWALLLINKS != 0 {
+		parts = append(parts, "PIDISF_FOLLOWALLLINKS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type PIDISM_OPTIONS int32
 
 const (
@@ -1585,6 +4828,21 @@ const (
 	PIDISM_WATCH     PIDISM_OPTIONS = 1
 	PIDISM_DONTWATCH PIDISM_OPTIONS = 2
 )
+
+// String returns the PIDISM_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PIDISM_OPTIONS) String() string {
+	switch e {
+	case PIDISM_GLOBAL:
+		return "PIDISM_GLOBAL"
+	case PIDISM_WATCH:
+		return "PIDISM_WATCH"
+	case PIDISM_DONTWATCH:
+		return "PIDISM_DONTWATCH"
+	default:
+		return fmt.Sprintf("PIDISM_OPTIONS(%d)", int32(e))
+	}
+}
 
 type PIDISR_INFO int32
 
@@ -1594,6 +4852,23 @@ const (
 	PIDISR_NEEDS_UPDATE PIDISR_INFO = 2
 	PIDISR_NEEDS_DELETE PIDISR_INFO = 3
 )
+
+// String returns the PIDISR_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PIDISR_INFO) String() string {
+	switch e {
+	case PIDISR_UP_TO_DATE:
+		return "PIDISR_UP_TO_DATE"
+	case PIDISR_NEEDS_ADD:
+		return "PIDISR_NEEDS_ADD"
+	case PIDISR_NEEDS_UPDATE:
+		return "PIDISR_NEEDS_UPDATE"
+	case PIDISR_NEEDS_DELETE:
+		return "PIDISR_NEEDS_DELETE"
+	default:
+		return fmt.Sprintf("PIDISR_INFO(%d)", int32(e))
+	}
+}
 
 type PID_INTSITE int32
 
@@ -1620,6 +4895,55 @@ const (
 	PID_INTSITE_ROAMED       PID_INTSITE = 34
 )
 
+// String returns the PID_INTSITE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PID_INTSITE) String() string {
+	switch e {
+	case PID_INTSITE_WHATSNEW:
+		return "PID_INTSITE_WHATSNEW"
+	case PID_INTSITE_AUTHOR:
+		return "PID_INTSITE_AUTHOR"
+	case PID_INTSITE_LASTVISIT:
+		return "PID_INTSITE_LASTVISIT"
+	case PID_INTSITE_LASTMOD:
+		return "PID_INTSITE_LASTMOD"
+	case PID_INTSITE_VISITCOUNT:
+		return "PID_INTSITE_VISITCOUNT"
+	case PID_INTSITE_DESCRIPTION:
+		return "PID_INTSITE_DESCRIPTION"
+	case PID_INTSITE_COMMENT:
+		return "PID_INTSITE_COMMENT"
+	case PID_INTSITE_FLAGS:
+		return "PID_INTSITE_FLAGS"
+	case PID_INTSITE_CONTENTLEN:
+		return "PID_INTSITE_CONTENTLEN"
+	case PID_INTSITE_CONTENTCODE:
+		return "PID_INTSITE_CONTENTCODE"
+	case PID_INTSITE_RECURSE:
+		return "PID_INTSITE_RECURSE"
+	case PID_INTSITE_WATCH:
+		return "PID_INTSITE_WATCH"
+	case PID_INTSITE_SUBSCRIPTION:
+		return "PID_INTSITE_SUBSCRIPTION"
+	case PID_INTSITE_URL:
+		return "PID_INTSITE_URL"
+	case PID_INTSITE_TITLE:
+		return "PID_INTSITE_TITLE"
+	case PID_INTSITE_CODEPAGE:
+		return "PID_INTSITE_CODEPAGE"
+	case PID_INTSITE_TRACKING:
+		return "PID_INTSITE_TRACKING"
+	case PID_INTSITE_ICONINDEX:
+		return "PID_INTSITE_ICONINDEX"
+	case PID_INTSITE_ICONFILE:
+		return "PID_INTSITE_ICONFILE"
+	case PID_INTSITE_ROAMED:
+		return "PID_INTSITE_ROAMED"
+	default:
+		return fmt.Sprintf("PID_INTSITE(%d)", int32(e))
+	}
+}
+
 type PID_IS int32
 
 const (
@@ -1637,6 +4961,40 @@ const (
 	PID_IS_ROAMED      PID_IS = 15
 )
 
+// String returns the PID_IS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PID_IS) String() string {
+	switch e {
+	case PID_IS_URL:
+		return "PID_IS_URL"
+	case PID_IS_NAME:
+		return "PID_IS_NAME"
+	case PID_IS_WORKINGDIR:
+		return "PID_IS_WORKINGDIR"
+	case PID_IS_HOTKEY:
+		return "PID_IS_HOTKEY"
+	case PID_IS_SHOWCMD:
+		return "PID_IS_SHOWCMD"
+	case PID_IS_ICONINDEX:
+		return "PID_IS_ICONINDEX"
+	case PID_IS_ICONFILE:
+		return "PID_IS_ICONFILE"
+	case PID_IS_WHATSNEW:
+		return "PID_IS_WHATSNEW"
+	case PID_IS_AUTHOR:
+		return "PID_IS_AUTHOR"
+	case PID_IS_DESCRIPTION:
+		return "PID_IS_DESCRIPTION"
+	case PID_IS_COMMENT:
+		return "PID_IS_COMMENT"
+	case PID_IS_ROAMED:
+		return "PID_IS_ROAMED"
+	default:
+		return fmt.Sprintf("PID_IS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PRF_FLAGS int32
 
 const (
@@ -1646,6 +5004,31 @@ const (
 	PRF_DONTFINDLNK          PRF_FLAGS = 8
 	PRF_REQUIREABSOLUTE      PRF_FLAGS = 16
 )
+
+// String returns the PRF_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRF_FLAGS) String() string {
+	var parts []string
+	if e&PRF_VERIFYEXISTS != 0 {
+		parts = append(parts, "PRF_VERIFYEXISTS")
+	}
+	if e&PRF_TRYPROGRAMEXTENSIONS != 0 {
+		parts = append(parts, "PRF_TRYPROGRAMEXTENSIONS")
+	}
+	if e&PRF_FIRSTDIRDEF != 0 {
+		parts = append(parts, "PRF_FIRSTDIRDEF")
+	}
+	if e&PRF_DONTFINDLNK != 0 {
+		parts = append(parts, "PRF_DONTFINDLNK")
+	}
+	if e&PRF_REQUIREABSOLUTE != 0 {
+		parts = append(parts, "PRF_REQUIREABSOLUTE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // PUBAPPINFOFLAGS: https://learn.microsoft.com/windows/win32/api/shappmgr/ne-shappmgr-pubappinfoflags
 type PUBAPPINFOFLAGS int32
@@ -1658,6 +5041,26 @@ const (
 	PAI_EXPIRETIME    PUBAPPINFOFLAGS = 16
 )
 
+// String returns the PUBAPPINFOFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PUBAPPINFOFLAGS) String() string {
+	switch e {
+	case PAI_SOURCE:
+		return "PAI_SOURCE"
+	case PAI_ASSIGNEDTIME:
+		return "PAI_ASSIGNEDTIME"
+	case PAI_PUBLISHEDTIME:
+		return "PAI_PUBLISHEDTIME"
+	case PAI_SCHEDULEDTIME:
+		return "PAI_SCHEDULEDTIME"
+	case PAI_EXPIRETIME:
+		return "PAI_EXPIRETIME"
+	default:
+		return fmt.Sprintf("PUBAPPINFOFLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type QITIPF_FLAGS int32
 
 const (
@@ -1671,6 +5074,37 @@ const (
 	QIF_DONTEXPANDFOLDER QITIPF_FLAGS = 2
 )
 
+// String returns the QITIPF_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QITIPF_FLAGS) String() string {
+	var parts []string
+	if e&QITIPF_USENAME != 0 {
+		parts = append(parts, "QITIPF_USENAME")
+	}
+	if e&QITIPF_LINKNOTARGET != 0 {
+		parts = append(parts, "QITIPF_LINKNOTARGET")
+	}
+	if e&QITIPF_LINKUSETARGET != 0 {
+		parts = append(parts, "QITIPF_LINKUSETARGET")
+	}
+	if e&QITIPF_USESLOWTIP != 0 {
+		parts = append(parts, "QITIPF_USESLOWTIP")
+	}
+	if e&QITIPF_SINGLELINE != 0 {
+		parts = append(parts, "QITIPF_SINGLELINE")
+	}
+	if e&QIF_CACHED != 0 {
+		parts = append(parts, "QIF_CACHED")
+	}
+	if e&QIF_DONTEXPANDFOLDER != 0 {
+		parts = append(parts, "QIF_DONTEXPANDFOLDER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // QUERY_USER_NOTIFICATION_STATE: https://learn.microsoft.com/windows/win32/api/shellapi/ne-shellapi-query_user_notification_state
 type QUERY_USER_NOTIFICATION_STATE int32
 
@@ -1683,6 +5117,29 @@ const (
 	QUNS_QUIET_TIME              QUERY_USER_NOTIFICATION_STATE = 6
 	QUNS_APP                     QUERY_USER_NOTIFICATION_STATE = 7
 )
+
+// String returns the QUERY_USER_NOTIFICATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QUERY_USER_NOTIFICATION_STATE) String() string {
+	switch e {
+	case QUNS_NOT_PRESENT:
+		return "QUNS_NOT_PRESENT"
+	case QUNS_BUSY:
+		return "QUNS_BUSY"
+	case QUNS_RUNNING_D3D_FULL_SCREEN:
+		return "QUNS_RUNNING_D3D_FULL_SCREEN"
+	case QUNS_PRESENTATION_MODE:
+		return "QUNS_PRESENTATION_MODE"
+	case QUNS_ACCEPTS_NOTIFICATIONS:
+		return "QUNS_ACCEPTS_NOTIFICATIONS"
+	case QUNS_QUIET_TIME:
+		return "QUNS_QUIET_TIME"
+	case QUNS_APP:
+		return "QUNS_APP"
+	default:
+		return fmt.Sprintf("QUERY_USER_NOTIFICATION_STATE(%d)", int32(e))
+	}
+}
 
 // RESTRICTIONS: https://learn.microsoft.com/windows/win32/api/shlobj_core/ne-shlobj_core-restrictions
 type RESTRICTIONS int32
@@ -1854,6 +5311,343 @@ const (
 	REST_ALLOWCOMMENTTOGGLE         RESTRICTIONS = 1090519044
 )
 
+// String returns the RESTRICTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RESTRICTIONS) String() string {
+	switch e {
+	case REST_NONE:
+		return "REST_NONE"
+	case REST_NORUN:
+		return "REST_NORUN"
+	case REST_NOCLOSE:
+		return "REST_NOCLOSE"
+	case REST_NOSAVESET:
+		return "REST_NOSAVESET"
+	case REST_NOFILEMENU:
+		return "REST_NOFILEMENU"
+	case REST_NOSETFOLDERS:
+		return "REST_NOSETFOLDERS"
+	case REST_NOSETTASKBAR:
+		return "REST_NOSETTASKBAR"
+	case REST_NODESKTOP:
+		return "REST_NODESKTOP"
+	case REST_NOFIND:
+		return "REST_NOFIND"
+	case REST_NODRIVES:
+		return "REST_NODRIVES"
+	case REST_NODRIVEAUTORUN:
+		return "REST_NODRIVEAUTORUN"
+	case REST_NODRIVETYPEAUTORUN:
+		return "REST_NODRIVETYPEAUTORUN"
+	case REST_NONETHOOD:
+		return "REST_NONETHOOD"
+	case REST_STARTBANNER:
+		return "REST_STARTBANNER"
+	case REST_RESTRICTRUN:
+		return "REST_RESTRICTRUN"
+	case REST_NOPRINTERTABS:
+		return "REST_NOPRINTERTABS"
+	case REST_NOPRINTERDELETE:
+		return "REST_NOPRINTERDELETE"
+	case REST_NOPRINTERADD:
+		return "REST_NOPRINTERADD"
+	case REST_NOSTARTMENUSUBFOLDERS:
+		return "REST_NOSTARTMENUSUBFOLDERS"
+	case REST_MYDOCSONNET:
+		return "REST_MYDOCSONNET"
+	case REST_NOEXITTODOS:
+		return "REST_NOEXITTODOS"
+	case REST_ENFORCESHELLEXTSECURITY:
+		return "REST_ENFORCESHELLEXTSECURITY"
+	case REST_LINKRESOLVEIGNORELINKINFO:
+		return "REST_LINKRESOLVEIGNORELINKINFO"
+	case REST_NOCOMMONGROUPS:
+		return "REST_NOCOMMONGROUPS"
+	case REST_SEPARATEDESKTOPPROCESS:
+		return "REST_SEPARATEDESKTOPPROCESS"
+	case REST_NOWEB:
+		return "REST_NOWEB"
+	case REST_NOTRAYCONTEXTMENU:
+		return "REST_NOTRAYCONTEXTMENU"
+	case REST_NOVIEWCONTEXTMENU:
+		return "REST_NOVIEWCONTEXTMENU"
+	case REST_NONETCONNECTDISCONNECT:
+		return "REST_NONETCONNECTDISCONNECT"
+	case REST_STARTMENULOGOFF:
+		return "REST_STARTMENULOGOFF"
+	case REST_NOSETTINGSASSIST:
+		return "REST_NOSETTINGSASSIST"
+	case REST_NOINTERNETICON:
+		return "REST_NOINTERNETICON"
+	case REST_NORECENTDOCSHISTORY:
+		return "REST_NORECENTDOCSHISTORY"
+	case REST_NORECENTDOCSMENU:
+		return "REST_NORECENTDOCSMENU"
+	case REST_NOACTIVEDESKTOP:
+		return "REST_NOACTIVEDESKTOP"
+	case REST_NOACTIVEDESKTOPCHANGES:
+		return "REST_NOACTIVEDESKTOPCHANGES"
+	case REST_NOFAVORITESMENU:
+		return "REST_NOFAVORITESMENU"
+	case REST_CLEARRECENTDOCSONEXIT:
+		return "REST_CLEARRECENTDOCSONEXIT"
+	case REST_CLASSICSHELL:
+		return "REST_CLASSICSHELL"
+	case REST_NOCUSTOMIZEWEBVIEW:
+		return "REST_NOCUSTOMIZEWEBVIEW"
+	case REST_NOHTMLWALLPAPER:
+		return "REST_NOHTMLWALLPAPER"
+	case REST_NOCHANGINGWALLPAPER:
+		return "REST_NOCHANGINGWALLPAPER"
+	case REST_NODESKCOMP:
+		return "REST_NODESKCOMP"
+	case REST_NOADDDESKCOMP:
+		return "REST_NOADDDESKCOMP"
+	case REST_NODELDESKCOMP:
+		return "REST_NODELDESKCOMP"
+	case REST_NOCLOSEDESKCOMP:
+		return "REST_NOCLOSEDESKCOMP"
+	case REST_NOCLOSE_DRAGDROPBAND:
+		return "REST_NOCLOSE_DRAGDROPBAND"
+	case REST_NOMOVINGBAND:
+		return "REST_NOMOVINGBAND"
+	case REST_NOEDITDESKCOMP:
+		return "REST_NOEDITDESKCOMP"
+	case REST_NORESOLVESEARCH:
+		return "REST_NORESOLVESEARCH"
+	case REST_NORESOLVETRACK:
+		return "REST_NORESOLVETRACK"
+	case REST_FORCECOPYACLWITHFILE:
+		return "REST_FORCECOPYACLWITHFILE"
+	case REST_NOFORGETSOFTWAREUPDATE:
+		return "REST_NOFORGETSOFTWAREUPDATE"
+	case REST_NOSETACTIVEDESKTOP:
+		return "REST_NOSETACTIVEDESKTOP"
+	case REST_NOUPDATEWINDOWS:
+		return "REST_NOUPDATEWINDOWS"
+	case REST_NOCHANGESTARMENU:
+		return "REST_NOCHANGESTARMENU"
+	case REST_NOFOLDEROPTIONS:
+		return "REST_NOFOLDEROPTIONS"
+	case REST_HASFINDCOMPUTERS:
+		return "REST_HASFINDCOMPUTERS"
+	case REST_INTELLIMENUS:
+		return "REST_INTELLIMENUS"
+	case REST_RUNDLGMEMCHECKBOX:
+		return "REST_RUNDLGMEMCHECKBOX"
+	case REST_ARP_ShowPostSetup:
+		return "REST_ARP_ShowPostSetup"
+	case REST_NOCSC:
+		return "REST_NOCSC"
+	case REST_NOCONTROLPANEL:
+		return "REST_NOCONTROLPANEL"
+	case REST_ENUMWORKGROUP:
+		return "REST_ENUMWORKGROUP"
+	case REST_ARP_NOARP:
+		return "REST_ARP_NOARP"
+	case REST_ARP_NOREMOVEPAGE:
+		return "REST_ARP_NOREMOVEPAGE"
+	case REST_ARP_NOADDPAGE:
+		return "REST_ARP_NOADDPAGE"
+	case REST_ARP_NOWINSETUPPAGE:
+		return "REST_ARP_NOWINSETUPPAGE"
+	case REST_GREYMSIADS:
+		return "REST_GREYMSIADS"
+	case REST_NOCHANGEMAPPEDDRIVELABEL:
+		return "REST_NOCHANGEMAPPEDDRIVELABEL"
+	case REST_NOCHANGEMAPPEDDRIVECOMMENT:
+		return "REST_NOCHANGEMAPPEDDRIVECOMMENT"
+	case REST_MaxRecentDocs:
+		return "REST_MaxRecentDocs"
+	case REST_NONETWORKCONNECTIONS:
+		return "REST_NONETWORKCONNECTIONS"
+	case REST_FORCESTARTMENULOGOFF:
+		return "REST_FORCESTARTMENULOGOFF"
+	case REST_NOWEBVIEW:
+		return "REST_NOWEBVIEW"
+	case REST_NOCUSTOMIZETHISFOLDER:
+		return "REST_NOCUSTOMIZETHISFOLDER"
+	case REST_NOENCRYPTION:
+		return "REST_NOENCRYPTION"
+	case REST_DONTSHOWSUPERHIDDEN:
+		return "REST_DONTSHOWSUPERHIDDEN"
+	case REST_NOSHELLSEARCHBUTTON:
+		return "REST_NOSHELLSEARCHBUTTON"
+	case REST_NOHARDWARETAB:
+		return "REST_NOHARDWARETAB"
+	case REST_NORUNASINSTALLPROMPT:
+		return "REST_NORUNASINSTALLPROMPT"
+	case REST_PROMPTRUNASINSTALLNETPATH:
+		return "REST_PROMPTRUNASINSTALLNETPATH"
+	case REST_NOMANAGEMYCOMPUTERVERB:
+		return "REST_NOMANAGEMYCOMPUTERVERB"
+	case REST_DISALLOWRUN:
+		return "REST_DISALLOWRUN"
+	case REST_NOWELCOMESCREEN:
+		return "REST_NOWELCOMESCREEN"
+	case REST_RESTRICTCPL:
+		return "REST_RESTRICTCPL"
+	case REST_DISALLOWCPL:
+		return "REST_DISALLOWCPL"
+	case REST_NOSMBALLOONTIP:
+		return "REST_NOSMBALLOONTIP"
+	case REST_NOSMHELP:
+		return "REST_NOSMHELP"
+	case REST_NOWINKEYS:
+		return "REST_NOWINKEYS"
+	case REST_NOENCRYPTONMOVE:
+		return "REST_NOENCRYPTONMOVE"
+	case REST_NOLOCALMACHINERUN:
+		return "REST_NOLOCALMACHINERUN"
+	case REST_NOCURRENTUSERRUN:
+		return "REST_NOCURRENTUSERRUN"
+	case REST_NOLOCALMACHINERUNONCE:
+		return "REST_NOLOCALMACHINERUNONCE"
+	case REST_NOCURRENTUSERRUNONCE:
+		return "REST_NOCURRENTUSERRUNONCE"
+	case REST_FORCEACTIVEDESKTOPON:
+		return "REST_FORCEACTIVEDESKTOPON"
+	case REST_NOVIEWONDRIVE:
+		return "REST_NOVIEWONDRIVE"
+	case REST_NONETCRAWL:
+		return "REST_NONETCRAWL"
+	case REST_NOSHAREDDOCUMENTS:
+		return "REST_NOSHAREDDOCUMENTS"
+	case REST_NOSMMYDOCS:
+		return "REST_NOSMMYDOCS"
+	case REST_NOSMMYPICS:
+		return "REST_NOSMMYPICS"
+	case REST_ALLOWBITBUCKDRIVES:
+		return "REST_ALLOWBITBUCKDRIVES"
+	case REST_NONLEGACYSHELLMODE:
+		return "REST_NONLEGACYSHELLMODE"
+	case REST_NOCONTROLPANELBARRICADE:
+		return "REST_NOCONTROLPANELBARRICADE"
+	case REST_NOSTARTPAGE:
+		return "REST_NOSTARTPAGE"
+	case REST_NOAUTOTRAYNOTIFY:
+		return "REST_NOAUTOTRAYNOTIFY"
+	case REST_NOTASKGROUPING:
+		return "REST_NOTASKGROUPING"
+	case REST_NOCDBURNING:
+		return "REST_NOCDBURNING"
+	case REST_MYCOMPNOPROP:
+		return "REST_MYCOMPNOPROP"
+	case REST_MYDOCSNOPROP:
+		return "REST_MYDOCSNOPROP"
+	case REST_NOSTARTPANEL:
+		return "REST_NOSTARTPANEL"
+	case REST_NODISPLAYAPPEARANCEPAGE:
+		return "REST_NODISPLAYAPPEARANCEPAGE"
+	case REST_NOTHEMESTAB:
+		return "REST_NOTHEMESTAB"
+	case REST_NOVISUALSTYLECHOICE:
+		return "REST_NOVISUALSTYLECHOICE"
+	case REST_NOSIZECHOICE:
+		return "REST_NOSIZECHOICE"
+	case REST_NOCOLORCHOICE:
+		return "REST_NOCOLORCHOICE"
+	case REST_SETVISUALSTYLE:
+		return "REST_SETVISUALSTYLE"
+	case REST_STARTRUNNOHOMEPATH:
+		return "REST_STARTRUNNOHOMEPATH"
+	case REST_NOUSERNAMEINSTARTPANEL:
+		return "REST_NOUSERNAMEINSTARTPANEL"
+	case REST_NOMYCOMPUTERICON:
+		return "REST_NOMYCOMPUTERICON"
+	case REST_NOSMNETWORKPLACES:
+		return "REST_NOSMNETWORKPLACES"
+	case REST_NOSMPINNEDLIST:
+		return "REST_NOSMPINNEDLIST"
+	case REST_NOSMMYMUSIC:
+		return "REST_NOSMMYMUSIC"
+	case REST_NOSMEJECTPC:
+		return "REST_NOSMEJECTPC"
+	case REST_NOSMMOREPROGRAMS:
+		return "REST_NOSMMOREPROGRAMS"
+	case REST_NOSMMFUPROGRAMS:
+		return "REST_NOSMMFUPROGRAMS"
+	case REST_NOTRAYITEMSDISPLAY:
+		return "REST_NOTRAYITEMSDISPLAY"
+	case REST_NOTOOLBARSONTASKBAR:
+		return "REST_NOTOOLBARSONTASKBAR"
+	case REST_NOSMCONFIGUREPROGRAMS:
+		return "REST_NOSMCONFIGUREPROGRAMS"
+	case REST_HIDECLOCK:
+		return "REST_HIDECLOCK"
+	case REST_NOLOWDISKSPACECHECKS:
+		return "REST_NOLOWDISKSPACECHECKS"
+	case REST_NOENTIRENETWORK:
+		return "REST_NOENTIRENETWORK"
+	case REST_NODESKTOPCLEANUP:
+		return "REST_NODESKTOPCLEANUP"
+	case REST_BITBUCKNUKEONDELETE:
+		return "REST_BITBUCKNUKEONDELETE"
+	case REST_BITBUCKCONFIRMDELETE:
+		return "REST_BITBUCKCONFIRMDELETE"
+	case REST_BITBUCKNOPROP:
+		return "REST_BITBUCKNOPROP"
+	case REST_NODISPBACKGROUND:
+		return "REST_NODISPBACKGROUND"
+	case REST_NODISPSCREENSAVEPG:
+		return "REST_NODISPSCREENSAVEPG"
+	case REST_NODISPSETTINGSPG:
+		return "REST_NODISPSETTINGSPG"
+	case REST_NODISPSCREENSAVEPREVIEW:
+		return "REST_NODISPSCREENSAVEPREVIEW"
+	case REST_NODISPLAYCPL:
+		return "REST_NODISPLAYCPL"
+	case REST_HIDERUNASVERB:
+		return "REST_HIDERUNASVERB"
+	case REST_NOTHUMBNAILCACHE:
+		return "REST_NOTHUMBNAILCACHE"
+	case REST_NOSTRCMPLOGICAL:
+		return "REST_NOSTRCMPLOGICAL"
+	case REST_NOPUBLISHWIZARD:
+		return "REST_NOPUBLISHWIZARD"
+	case REST_NOONLINEPRINTSWIZARD:
+		return "REST_NOONLINEPRINTSWIZARD"
+	case REST_NOWEBSERVICES:
+		return "REST_NOWEBSERVICES"
+	case REST_ALLOWUNHASHEDWEBVIEW:
+		return "REST_ALLOWUNHASHEDWEBVIEW"
+	case REST_ALLOWLEGACYWEBVIEW:
+		return "REST_ALLOWLEGACYWEBVIEW"
+	case REST_REVERTWEBVIEWSECURITY:
+		return "REST_REVERTWEBVIEWSECURITY"
+	case REST_INHERITCONSOLEHANDLES:
+		return "REST_INHERITCONSOLEHANDLES"
+	case REST_NOREMOTERECURSIVEEVENTS:
+		return "REST_NOREMOTERECURSIVEEVENTS"
+	case REST_NOREMOTECHANGENOTIFY:
+		return "REST_NOREMOTECHANGENOTIFY"
+	case REST_NOENUMENTIRENETWORK:
+		return "REST_NOENUMENTIRENETWORK"
+	case REST_NOINTERNETOPENWITH:
+		return "REST_NOINTERNETOPENWITH"
+	case REST_DONTRETRYBADNETNAME:
+		return "REST_DONTRETRYBADNETNAME"
+	case REST_ALLOWFILECLSIDJUNCTIONS:
+		return "REST_ALLOWFILECLSIDJUNCTIONS"
+	case REST_NOUPNPINSTALL:
+		return "REST_NOUPNPINSTALL"
+	case REST_ARP_DONTGROUPPATCHES:
+		return "REST_ARP_DONTGROUPPATCHES"
+	case REST_ARP_NOCHOOSEPROGRAMSPAGE:
+		return "REST_ARP_NOCHOOSEPROGRAMSPAGE"
+	case REST_NODISCONNECT:
+		return "REST_NODISCONNECT"
+	case REST_NOSECURITY:
+		return "REST_NOSECURITY"
+	case REST_NOFILEASSOCIATE:
+		return "REST_NOFILEASSOCIATE"
+	case REST_ALLOWCOMMENTTOGGLE:
+		return "REST_ALLOWCOMMENTTOGGLE"
+	default:
+		return fmt.Sprintf("RESTRICTIONS(%d)", int32(e))
+	}
+}
+
 type RefreshConstants int32
 
 const (
@@ -1862,7 +5656,23 @@ const (
 	REFRESH_COMPLETELY RefreshConstants = 3
 )
 
+// String returns the RefreshConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RefreshConstants) String() string {
+	switch e {
+	case REFRESH_NORMAL:
+		return "REFRESH_NORMAL"
+	case REFRESH_IFEXPIRED:
+		return "REFRESH_IFEXPIRED"
+	case REFRESH_COMPLETELY:
+		return "REFRESH_COMPLETELY"
+	default:
+		return fmt.Sprintf("RefreshConstants(%d)", int32(e))
+	}
+}
+
 // SCALE_CHANGE_FLAGS: https://learn.microsoft.com/windows/win32/api/shellscalingapi/ne-shellscalingapi-scale_change_flags
+// Bitmask — values may be combined with |.
 type SCALE_CHANGE_FLAGS int32
 
 const (
@@ -1871,6 +5681,22 @@ const (
 	SCF_PHYSICAL   SCALE_CHANGE_FLAGS = 2
 )
 
+// String returns the SCALE_CHANGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCALE_CHANGE_FLAGS) String() string {
+	var parts []string
+	if e&SCF_SCALE != 0 {
+		parts = append(parts, "SCF_SCALE")
+	}
+	if e&SCF_PHYSICAL != 0 {
+		parts = append(parts, "SCF_PHYSICAL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // SCNRT_STATUS: https://learn.microsoft.com/windows/win32/api/shlobj_core/ne-shlobj_core-scnrt_status
 type SCNRT_STATUS int32
 
@@ -1878,6 +5704,19 @@ const (
 	SCNRT_ENABLE  SCNRT_STATUS = 0
 	SCNRT_DISABLE SCNRT_STATUS = 1
 )
+
+// String returns the SCNRT_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCNRT_STATUS) String() string {
+	switch e {
+	case SCNRT_ENABLE:
+		return "SCNRT_ENABLE"
+	case SCNRT_DISABLE:
+		return "SCNRT_DISABLE"
+	default:
+		return fmt.Sprintf("SCNRT_STATUS(%d)", int32(e))
+	}
+}
 
 // SECURELOCKCODE: https://learn.microsoft.com/windows/win32/api/shdeprecated/ne-shdeprecated-securelockcode
 type SECURELOCKCODE int32
@@ -1901,12 +5740,64 @@ const (
 	SECURELOCK_SUGGEST_SECURE128BIT     SECURELOCKCODE = 13
 )
 
+// String returns the SECURELOCKCODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURELOCKCODE) String() string {
+	switch e {
+	case SECURELOCK_NOCHANGE:
+		return "SECURELOCK_NOCHANGE"
+	case SECURELOCK_SET_UNSECURE:
+		return "SECURELOCK_SET_UNSECURE"
+	case SECURELOCK_SET_MIXED:
+		return "SECURELOCK_SET_MIXED"
+	case SECURELOCK_SET_SECUREUNKNOWNBIT:
+		return "SECURELOCK_SET_SECUREUNKNOWNBIT"
+	case SECURELOCK_SET_SECURE40BIT:
+		return "SECURELOCK_SET_SECURE40BIT"
+	case SECURELOCK_SET_SECURE56BIT:
+		return "SECURELOCK_SET_SECURE56BIT"
+	case SECURELOCK_SET_FORTEZZA:
+		return "SECURELOCK_SET_FORTEZZA"
+	case SECURELOCK_SET_SECURE128BIT:
+		return "SECURELOCK_SET_SECURE128BIT"
+	case SECURELOCK_FIRSTSUGGEST:
+		return "SECURELOCK_FIRSTSUGGEST"
+	case SECURELOCK_SUGGEST_MIXED:
+		return "SECURELOCK_SUGGEST_MIXED"
+	case SECURELOCK_SUGGEST_SECUREUNKNOWNBIT:
+		return "SECURELOCK_SUGGEST_SECUREUNKNOWNBIT"
+	case SECURELOCK_SUGGEST_SECURE40BIT:
+		return "SECURELOCK_SUGGEST_SECURE40BIT"
+	case SECURELOCK_SUGGEST_SECURE56BIT:
+		return "SECURELOCK_SUGGEST_SECURE56BIT"
+	case SECURELOCK_SUGGEST_FORTEZZA:
+		return "SECURELOCK_SUGGEST_FORTEZZA"
+	case SECURELOCK_SUGGEST_SECURE128BIT:
+		return "SECURELOCK_SUGGEST_SECURE128BIT"
+	default:
+		return fmt.Sprintf("SECURELOCKCODE(%d)", int32(e))
+	}
+}
+
 type SFBS_FLAGS int32
 
 const (
 	SFBS_FLAGS_ROUND_TO_NEAREST_DISPLAYED_DIGIT    SFBS_FLAGS = 1
 	SFBS_FLAGS_TRUNCATE_UNDISPLAYED_DECIMAL_DIGITS SFBS_FLAGS = 2
 )
+
+// String returns the SFBS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SFBS_FLAGS) String() string {
+	switch e {
+	case SFBS_FLAGS_ROUND_TO_NEAREST_DISPLAYED_DIGIT:
+		return "SFBS_FLAGS_ROUND_TO_NEAREST_DISPLAYED_DIGIT"
+	case SFBS_FLAGS_TRUNCATE_UNDISPLAYED_DECIMAL_DIGITS:
+		return "SFBS_FLAGS_TRUNCATE_UNDISPLAYED_DECIMAL_DIGITS"
+	default:
+		return fmt.Sprintf("SFBS_FLAGS(%d)", int32(e))
+	}
+}
 
 type SFVM_MESSAGE_ID int32
 
@@ -1942,6 +5833,73 @@ const (
 	SFVM_GETANIMATION       SFVM_MESSAGE_ID = 68
 )
 
+// String returns the SFVM_MESSAGE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SFVM_MESSAGE_ID) String() string {
+	switch e {
+	case SFVM_MERGEMENU:
+		return "SFVM_MERGEMENU"
+	case SFVM_INVOKECOMMAND:
+		return "SFVM_INVOKECOMMAND"
+	case SFVM_GETHELPTEXT:
+		return "SFVM_GETHELPTEXT"
+	case SFVM_GETTOOLTIPTEXT:
+		return "SFVM_GETTOOLTIPTEXT"
+	case SFVM_GETBUTTONINFO:
+		return "SFVM_GETBUTTONINFO"
+	case SFVM_GETBUTTONS:
+		return "SFVM_GETBUTTONS"
+	case SFVM_INITMENUPOPUP:
+		return "SFVM_INITMENUPOPUP"
+	case SFVM_FSNOTIFY:
+		return "SFVM_FSNOTIFY"
+	case SFVM_WINDOWCREATED:
+		return "SFVM_WINDOWCREATED"
+	case SFVM_GETDETAILSOF:
+		return "SFVM_GETDETAILSOF"
+	case SFVM_COLUMNCLICK:
+		return "SFVM_COLUMNCLICK"
+	case SFVM_QUERYFSNOTIFY:
+		return "SFVM_QUERYFSNOTIFY"
+	case SFVM_DEFITEMCOUNT:
+		return "SFVM_DEFITEMCOUNT"
+	case SFVM_DEFVIEWMODE:
+		return "SFVM_DEFVIEWMODE"
+	case SFVM_UNMERGEMENU:
+		return "SFVM_UNMERGEMENU"
+	case SFVM_UPDATESTATUSBAR:
+		return "SFVM_UPDATESTATUSBAR"
+	case SFVM_BACKGROUNDENUM:
+		return "SFVM_BACKGROUNDENUM"
+	case SFVM_DIDDRAGDROP:
+		return "SFVM_DIDDRAGDROP"
+	case SFVM_SETISFV:
+		return "SFVM_SETISFV"
+	case SFVM_THISIDLIST:
+		return "SFVM_THISIDLIST"
+	case SFVM_ADDPROPERTYPAGES:
+		return "SFVM_ADDPROPERTYPAGES"
+	case SFVM_BACKGROUNDENUMDONE:
+		return "SFVM_BACKGROUNDENUMDONE"
+	case SFVM_GETNOTIFY:
+		return "SFVM_GETNOTIFY"
+	case SFVM_GETSORTDEFAULTS:
+		return "SFVM_GETSORTDEFAULTS"
+	case SFVM_SIZE:
+		return "SFVM_SIZE"
+	case SFVM_GETZONE:
+		return "SFVM_GETZONE"
+	case SFVM_GETPANE:
+		return "SFVM_GETPANE"
+	case SFVM_GETHELPTOPIC:
+		return "SFVM_GETHELPTOPIC"
+	case SFVM_GETANIMATION:
+		return "SFVM_GETANIMATION"
+	default:
+		return fmt.Sprintf("SFVM_MESSAGE_ID(%d)", int32(e))
+	}
+}
+
 type SFVS_SELECT int32
 
 const (
@@ -1949,6 +5907,21 @@ const (
 	SFVS_SELECT_ALLITEMS SFVS_SELECT = 1
 	SFVS_SELECT_INVERT   SFVS_SELECT = 2
 )
+
+// String returns the SFVS_SELECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SFVS_SELECT) String() string {
+	switch e {
+	case SFVS_SELECT_NONE:
+		return "SFVS_SELECT_NONE"
+	case SFVS_SELECT_ALLITEMS:
+		return "SFVS_SELECT_ALLITEMS"
+	case SFVS_SELECT_INVERT:
+		return "SFVS_SELECT_INVERT"
+	default:
+		return fmt.Sprintf("SFVS_SELECT(%d)", int32(e))
+	}
+}
 
 // SHARD: https://learn.microsoft.com/windows/win32/api/shlobj_core/ne-shlobj_core-shard
 type SHARD int32
@@ -1964,6 +5937,31 @@ const (
 	SHARD_SHELLITEM       SHARD = 8
 )
 
+// String returns the SHARD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHARD) String() string {
+	switch e {
+	case SHARD_PIDL:
+		return "SHARD_PIDL"
+	case SHARD_PATHA:
+		return "SHARD_PATHA"
+	case SHARD_PATHW:
+		return "SHARD_PATHW"
+	case SHARD_APPIDINFO:
+		return "SHARD_APPIDINFO"
+	case SHARD_APPIDINFOIDLIST:
+		return "SHARD_APPIDINFOIDLIST"
+	case SHARD_LINK:
+		return "SHARD_LINK"
+	case SHARD_APPIDINFOLINK:
+		return "SHARD_APPIDINFOLINK"
+	case SHARD_SHELLITEM:
+		return "SHARD_SHELLITEM"
+	default:
+		return fmt.Sprintf("SHARD(%d)", int32(e))
+	}
+}
+
 // SHARE_ROLE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-share_role
 type SHARE_ROLE int32
 
@@ -1977,6 +5975,30 @@ const (
 	SHARE_ROLE_MIXED       SHARE_ROLE = 5
 )
 
+// String returns the SHARE_ROLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHARE_ROLE) String() string {
+	switch e {
+	case SHARE_ROLE_INVALID:
+		return "SHARE_ROLE_INVALID"
+	case SHARE_ROLE_READER:
+		return "SHARE_ROLE_READER"
+	case SHARE_ROLE_CONTRIBUTOR:
+		return "SHARE_ROLE_CONTRIBUTOR"
+	case SHARE_ROLE_CO_OWNER:
+		return "SHARE_ROLE_CO_OWNER"
+	case SHARE_ROLE_OWNER:
+		return "SHARE_ROLE_OWNER"
+	case SHARE_ROLE_CUSTOM:
+		return "SHARE_ROLE_CUSTOM"
+	case SHARE_ROLE_MIXED:
+		return "SHARE_ROLE_MIXED"
+	default:
+		return fmt.Sprintf("SHARE_ROLE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SHCNE_ID uint32
 
 const (
@@ -2007,6 +6029,92 @@ const (
 	SHCNE_INTERRUPT        SHCNE_ID = 2147483648
 )
 
+// String returns the SHCNE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHCNE_ID) String() string {
+	var parts []string
+	if e&SHCNE_RENAMEITEM != 0 {
+		parts = append(parts, "SHCNE_RENAMEITEM")
+	}
+	if e&SHCNE_CREATE != 0 {
+		parts = append(parts, "SHCNE_CREATE")
+	}
+	if e&SHCNE_DELETE != 0 {
+		parts = append(parts, "SHCNE_DELETE")
+	}
+	if e&SHCNE_MKDIR != 0 {
+		parts = append(parts, "SHCNE_MKDIR")
+	}
+	if e&SHCNE_RMDIR != 0 {
+		parts = append(parts, "SHCNE_RMDIR")
+	}
+	if e&SHCNE_MEDIAINSERTED != 0 {
+		parts = append(parts, "SHCNE_MEDIAINSERTED")
+	}
+	if e&SHCNE_MEDIAREMOVED != 0 {
+		parts = append(parts, "SHCNE_MEDIAREMOVED")
+	}
+	if e&SHCNE_DRIVEREMOVED != 0 {
+		parts = append(parts, "SHCNE_DRIVEREMOVED")
+	}
+	if e&SHCNE_DRIVEADD != 0 {
+		parts = append(parts, "SHCNE_DRIVEADD")
+	}
+	if e&SHCNE_NETSHARE != 0 {
+		parts = append(parts, "SHCNE_NETSHARE")
+	}
+	if e&SHCNE_NETUNSHARE != 0 {
+		parts = append(parts, "SHCNE_NETUNSHARE")
+	}
+	if e&SHCNE_ATTRIBUTES != 0 {
+		parts = append(parts, "SHCNE_ATTRIBUTES")
+	}
+	if e&SHCNE_UPDATEDIR != 0 {
+		parts = append(parts, "SHCNE_UPDATEDIR")
+	}
+	if e&SHCNE_UPDATEITEM != 0 {
+		parts = append(parts, "SHCNE_UPDATEITEM")
+	}
+	if e&SHCNE_SERVERDISCONNECT != 0 {
+		parts = append(parts, "SHCNE_SERVERDISCONNECT")
+	}
+	if e&SHCNE_UPDATEIMAGE != 0 {
+		parts = append(parts, "SHCNE_UPDATEIMAGE")
+	}
+	if e&SHCNE_DRIVEADDGUI != 0 {
+		parts = append(parts, "SHCNE_DRIVEADDGUI")
+	}
+	if e&SHCNE_RENAMEFOLDER != 0 {
+		parts = append(parts, "SHCNE_RENAMEFOLDER")
+	}
+	if e&SHCNE_FREESPACE != 0 {
+		parts = append(parts, "SHCNE_FREESPACE")
+	}
+	if e&SHCNE_EXTENDED_EVENT != 0 {
+		parts = append(parts, "SHCNE_EXTENDED_EVENT")
+	}
+	if e&SHCNE_ASSOCCHANGED != 0 {
+		parts = append(parts, "SHCNE_ASSOCCHANGED")
+	}
+	if e&SHCNE_DISKEVENTS != 0 {
+		parts = append(parts, "SHCNE_DISKEVENTS")
+	}
+	if e&SHCNE_GLOBALEVENTS != 0 {
+		parts = append(parts, "SHCNE_GLOBALEVENTS")
+	}
+	if e&SHCNE_ALLEVENTS != 0 {
+		parts = append(parts, "SHCNE_ALLEVENTS")
+	}
+	if e&SHCNE_INTERRUPT != 0 {
+		parts = append(parts, "SHCNE_INTERRUPT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SHCNF_FLAGS uint32
 
 const (
@@ -2024,6 +6132,50 @@ const (
 	SHCNF_PRINTER         SHCNF_FLAGS = 6
 )
 
+// String returns the SHCNF_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHCNF_FLAGS) String() string {
+	var parts []string
+	if e&SHCNF_PATHA != 0 {
+		parts = append(parts, "SHCNF_PATHA")
+	}
+	if e&SHCNF_PRINTERA != 0 {
+		parts = append(parts, "SHCNF_PRINTERA")
+	}
+	if e&SHCNF_DWORD != 0 {
+		parts = append(parts, "SHCNF_DWORD")
+	}
+	if e&SHCNF_PATHW != 0 {
+		parts = append(parts, "SHCNF_PATHW")
+	}
+	if e&SHCNF_PRINTERW != 0 {
+		parts = append(parts, "SHCNF_PRINTERW")
+	}
+	if e&SHCNF_TYPE != 0 {
+		parts = append(parts, "SHCNF_TYPE")
+	}
+	if e&SHCNF_FLUSH != 0 {
+		parts = append(parts, "SHCNF_FLUSH")
+	}
+	if e&SHCNF_FLUSHNOWAIT != 0 {
+		parts = append(parts, "SHCNF_FLUSHNOWAIT")
+	}
+	if e&SHCNF_NOTIFYRECURSIVE != 0 {
+		parts = append(parts, "SHCNF_NOTIFYRECURSIVE")
+	}
+	if e&SHCNF_PATH != 0 {
+		parts = append(parts, "SHCNF_PATH")
+	}
+	if e&SHCNF_PRINTER != 0 {
+		parts = append(parts, "SHCNF_PRINTER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SHCNRF_SOURCE int32
 
 const (
@@ -2032,6 +6184,28 @@ const (
 	SHCNRF_RecursiveInterrupt SHCNRF_SOURCE = 4096
 	SHCNRF_NewDelivery        SHCNRF_SOURCE = 32768
 )
+
+// String returns the SHCNRF_SOURCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHCNRF_SOURCE) String() string {
+	var parts []string
+	if e&SHCNRF_InterruptLevel != 0 {
+		parts = append(parts, "SHCNRF_InterruptLevel")
+	}
+	if e&SHCNRF_ShellLevel != 0 {
+		parts = append(parts, "SHCNRF_ShellLevel")
+	}
+	if e&SHCNRF_RecursiveInterrupt != 0 {
+		parts = append(parts, "SHCNRF_RecursiveInterrupt")
+	}
+	if e&SHCNRF_NewDelivery != 0 {
+		parts = append(parts, "SHCNRF_NewDelivery")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type SHDID_ID int32
 
@@ -2060,6 +6234,59 @@ const (
 	SHDID_REMOTE_DESKTOP_DRIVE SHDID_ID = 22
 )
 
+// String returns the SHDID_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHDID_ID) String() string {
+	switch e {
+	case SHDID_ROOT_REGITEM:
+		return "SHDID_ROOT_REGITEM"
+	case SHDID_FS_FILE:
+		return "SHDID_FS_FILE"
+	case SHDID_FS_DIRECTORY:
+		return "SHDID_FS_DIRECTORY"
+	case SHDID_FS_OTHER:
+		return "SHDID_FS_OTHER"
+	case SHDID_COMPUTER_DRIVE35:
+		return "SHDID_COMPUTER_DRIVE35"
+	case SHDID_COMPUTER_DRIVE525:
+		return "SHDID_COMPUTER_DRIVE525"
+	case SHDID_COMPUTER_REMOVABLE:
+		return "SHDID_COMPUTER_REMOVABLE"
+	case SHDID_COMPUTER_FIXED:
+		return "SHDID_COMPUTER_FIXED"
+	case SHDID_COMPUTER_NETDRIVE:
+		return "SHDID_COMPUTER_NETDRIVE"
+	case SHDID_COMPUTER_CDROM:
+		return "SHDID_COMPUTER_CDROM"
+	case SHDID_COMPUTER_RAMDISK:
+		return "SHDID_COMPUTER_RAMDISK"
+	case SHDID_COMPUTER_OTHER:
+		return "SHDID_COMPUTER_OTHER"
+	case SHDID_NET_DOMAIN:
+		return "SHDID_NET_DOMAIN"
+	case SHDID_NET_SERVER:
+		return "SHDID_NET_SERVER"
+	case SHDID_NET_SHARE:
+		return "SHDID_NET_SHARE"
+	case SHDID_NET_RESTOFNET:
+		return "SHDID_NET_RESTOFNET"
+	case SHDID_NET_OTHER:
+		return "SHDID_NET_OTHER"
+	case SHDID_COMPUTER_IMAGING:
+		return "SHDID_COMPUTER_IMAGING"
+	case SHDID_COMPUTER_AUDIO:
+		return "SHDID_COMPUTER_AUDIO"
+	case SHDID_COMPUTER_SHAREDDOCS:
+		return "SHDID_COMPUTER_SHAREDDOCS"
+	case SHDID_MOBILE_DEVICE:
+		return "SHDID_MOBILE_DEVICE"
+	case SHDID_REMOTE_DESKTOP_DRIVE:
+		return "SHDID_REMOTE_DESKTOP_DRIVE"
+	default:
+		return fmt.Sprintf("SHDID_ID(%d)", int32(e))
+	}
+}
+
 type SHELLBROWSERSHOWCONTROL int32
 
 const (
@@ -2069,6 +6296,24 @@ const (
 	SBSC_QUERY  SHELLBROWSERSHOWCONTROL = 3
 )
 
+// String returns the SHELLBROWSERSHOWCONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHELLBROWSERSHOWCONTROL) String() string {
+	switch e {
+	case SBSC_HIDE:
+		return "SBSC_HIDE"
+	case SBSC_SHOW:
+		return "SBSC_SHOW"
+	case SBSC_TOGGLE:
+		return "SBSC_TOGGLE"
+	case SBSC_QUERY:
+		return "SBSC_QUERY"
+	default:
+		return fmt.Sprintf("SHELLBROWSERSHOWCONTROL(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SHELL_AUTOCOMPLETE_FLAGS uint32
 
 const (
@@ -2087,7 +6332,54 @@ const (
 	SHACF_AUTOAPPEND_FORCE_OFF  SHELL_AUTOCOMPLETE_FLAGS = 2147483648
 )
 
+// String returns the SHELL_AUTOCOMPLETE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHELL_AUTOCOMPLETE_FLAGS) String() string {
+	var parts []string
+	if e&SHACF_FILESYSTEM != 0 {
+		parts = append(parts, "SHACF_FILESYSTEM")
+	}
+	if e&SHACF_URLALL != 0 {
+		parts = append(parts, "SHACF_URLALL")
+	}
+	if e&SHACF_URLHISTORY != 0 {
+		parts = append(parts, "SHACF_URLHISTORY")
+	}
+	if e&SHACF_URLMRU != 0 {
+		parts = append(parts, "SHACF_URLMRU")
+	}
+	if e&SHACF_USETAB != 0 {
+		parts = append(parts, "SHACF_USETAB")
+	}
+	if e&SHACF_FILESYS_ONLY != 0 {
+		parts = append(parts, "SHACF_FILESYS_ONLY")
+	}
+	if e&SHACF_FILESYS_DIRS != 0 {
+		parts = append(parts, "SHACF_FILESYS_DIRS")
+	}
+	if e&SHACF_VIRTUAL_NAMESPACE != 0 {
+		parts = append(parts, "SHACF_VIRTUAL_NAMESPACE")
+	}
+	if e&SHACF_AUTOSUGGEST_FORCE_ON != 0 {
+		parts = append(parts, "SHACF_AUTOSUGGEST_FORCE_ON")
+	}
+	if e&SHACF_AUTOSUGGEST_FORCE_OFF != 0 {
+		parts = append(parts, "SHACF_AUTOSUGGEST_FORCE_OFF")
+	}
+	if e&SHACF_AUTOAPPEND_FORCE_ON != 0 {
+		parts = append(parts, "SHACF_AUTOAPPEND_FORCE_ON")
+	}
+	if e&SHACF_AUTOAPPEND_FORCE_OFF != 0 {
+		parts = append(parts, "SHACF_AUTOAPPEND_FORCE_OFF")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // SHELL_LINK_DATA_FLAGS: https://learn.microsoft.com/windows/win32/api/shlobj_core/ne-shlobj_core-shell_link_data_flags
+// Bitmask — values may be combined with |.
 type SHELL_LINK_DATA_FLAGS int32
 
 const (
@@ -2123,6 +6415,103 @@ const (
 	SLDF_RESERVED                              SHELL_LINK_DATA_FLAGS = -2147483648
 )
 
+// String returns the SHELL_LINK_DATA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHELL_LINK_DATA_FLAGS) String() string {
+	var parts []string
+	if e&SLDF_HAS_ID_LIST != 0 {
+		parts = append(parts, "SLDF_HAS_ID_LIST")
+	}
+	if e&SLDF_HAS_LINK_INFO != 0 {
+		parts = append(parts, "SLDF_HAS_LINK_INFO")
+	}
+	if e&SLDF_HAS_NAME != 0 {
+		parts = append(parts, "SLDF_HAS_NAME")
+	}
+	if e&SLDF_HAS_RELPATH != 0 {
+		parts = append(parts, "SLDF_HAS_RELPATH")
+	}
+	if e&SLDF_HAS_WORKINGDIR != 0 {
+		parts = append(parts, "SLDF_HAS_WORKINGDIR")
+	}
+	if e&SLDF_HAS_ARGS != 0 {
+		parts = append(parts, "SLDF_HAS_ARGS")
+	}
+	if e&SLDF_HAS_ICONLOCATION != 0 {
+		parts = append(parts, "SLDF_HAS_ICONLOCATION")
+	}
+	if e&SLDF_UNICODE != 0 {
+		parts = append(parts, "SLDF_UNICODE")
+	}
+	if e&SLDF_FORCE_NO_LINKINFO != 0 {
+		parts = append(parts, "SLDF_FORCE_NO_LINKINFO")
+	}
+	if e&SLDF_HAS_EXP_SZ != 0 {
+		parts = append(parts, "SLDF_HAS_EXP_SZ")
+	}
+	if e&SLDF_RUN_IN_SEPARATE != 0 {
+		parts = append(parts, "SLDF_RUN_IN_SEPARATE")
+	}
+	if e&SLDF_HAS_DARWINID != 0 {
+		parts = append(parts, "SLDF_HAS_DARWINID")
+	}
+	if e&SLDF_RUNAS_USER != 0 {
+		parts = append(parts, "SLDF_RUNAS_USER")
+	}
+	if e&SLDF_HAS_EXP_ICON_SZ != 0 {
+		parts = append(parts, "SLDF_HAS_EXP_ICON_SZ")
+	}
+	if e&SLDF_NO_PIDL_ALIAS != 0 {
+		parts = append(parts, "SLDF_NO_PIDL_ALIAS")
+	}
+	if e&SLDF_FORCE_UNCNAME != 0 {
+		parts = append(parts, "SLDF_FORCE_UNCNAME")
+	}
+	if e&SLDF_RUN_WITH_SHIMLAYER != 0 {
+		parts = append(parts, "SLDF_RUN_WITH_SHIMLAYER")
+	}
+	if e&SLDF_FORCE_NO_LINKTRACK != 0 {
+		parts = append(parts, "SLDF_FORCE_NO_LINKTRACK")
+	}
+	if e&SLDF_ENABLE_TARGET_METADATA != 0 {
+		parts = append(parts, "SLDF_ENABLE_TARGET_METADATA")
+	}
+	if e&SLDF_DISABLE_LINK_PATH_TRACKING != 0 {
+		parts = append(parts, "SLDF_DISABLE_LINK_PATH_TRACKING")
+	}
+	if e&SLDF_DISABLE_KNOWNFOLDER_RELATIVE_TRACKING != 0 {
+		parts = append(parts, "SLDF_DISABLE_KNOWNFOLDER_RELATIVE_TRACKING")
+	}
+	if e&SLDF_NO_KF_ALIAS != 0 {
+		parts = append(parts, "SLDF_NO_KF_ALIAS")
+	}
+	if e&SLDF_ALLOW_LINK_TO_LINK != 0 {
+		parts = append(parts, "SLDF_ALLOW_LINK_TO_LINK")
+	}
+	if e&SLDF_UNALIAS_ON_SAVE != 0 {
+		parts = append(parts, "SLDF_UNALIAS_ON_SAVE")
+	}
+	if e&SLDF_PREFER_ENVIRONMENT_PATH != 0 {
+		parts = append(parts, "SLDF_PREFER_ENVIRONMENT_PATH")
+	}
+	if e&SLDF_KEEP_LOCAL_IDLIST_FOR_UNC_TARGET != 0 {
+		parts = append(parts, "SLDF_KEEP_LOCAL_IDLIST_FOR_UNC_TARGET")
+	}
+	if e&SLDF_PERSIST_VOLUME_ID_RELATIVE != 0 {
+		parts = append(parts, "SLDF_PERSIST_VOLUME_ID_RELATIVE")
+	}
+	if e&SLDF_VALID != 0 {
+		parts = append(parts, "SLDF_VALID")
+	}
+	if e&SLDF_RESERVED != 0 {
+		parts = append(parts, "SLDF_RESERVED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // SHELL_UI_COMPONENT: https://learn.microsoft.com/windows/win32/api/shellscalingapi/ne-shellscalingapi-shell_ui_component
 type SHELL_UI_COMPONENT int32
 
@@ -2132,12 +6521,39 @@ const (
 	SHELL_UI_COMPONENT_DESKBAND         SHELL_UI_COMPONENT = 2
 )
 
+// String returns the SHELL_UI_COMPONENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHELL_UI_COMPONENT) String() string {
+	switch e {
+	case SHELL_UI_COMPONENT_TASKBARS:
+		return "SHELL_UI_COMPONENT_TASKBARS"
+	case SHELL_UI_COMPONENT_NOTIFICATIONAREA:
+		return "SHELL_UI_COMPONENT_NOTIFICATIONAREA"
+	case SHELL_UI_COMPONENT_DESKBAND:
+		return "SHELL_UI_COMPONENT_DESKBAND"
+	default:
+		return fmt.Sprintf("SHELL_UI_COMPONENT(%d)", int32(e))
+	}
+}
+
 type SHFMT_ID uint32
 
 const (
 	SHFMT_ID_DEFAULT SHFMT_ID = 65535
 )
 
+// String returns the SHFMT_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHFMT_ID) String() string {
+	switch e {
+	case SHFMT_ID_DEFAULT:
+		return "SHFMT_ID_DEFAULT"
+	default:
+		return fmt.Sprintf("SHFMT_ID(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SHFMT_OPT int32
 
 const (
@@ -2145,6 +6561,22 @@ const (
 	SHFMT_OPT_FULL    SHFMT_OPT = 1
 	SHFMT_OPT_SYSONLY SHFMT_OPT = 2
 )
+
+// String returns the SHFMT_OPT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHFMT_OPT) String() string {
+	var parts []string
+	if e&SHFMT_OPT_FULL != 0 {
+		parts = append(parts, "SHFMT_OPT_FULL")
+	}
+	if e&SHFMT_OPT_SYSONLY != 0 {
+		parts = append(parts, "SHFMT_OPT_SYSONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type SHFMT_RET uint32
 
@@ -2154,6 +6586,21 @@ const (
 	SHFMT_NOFORMAT SHFMT_RET = 4294967293
 )
 
+// String returns the SHFMT_RET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHFMT_RET) String() string {
+	switch e {
+	case SHFMT_ERROR:
+		return "SHFMT_ERROR"
+	case SHFMT_CANCEL:
+		return "SHFMT_CANCEL"
+	case SHFMT_NOFORMAT:
+		return "SHFMT_NOFORMAT"
+	default:
+		return fmt.Sprintf("SHFMT_RET(%d)", uint32(e))
+	}
+}
+
 type SHGDFIL_FORMAT int32
 
 const (
@@ -2161,6 +6608,21 @@ const (
 	SHGDFIL_NETRESOURCE   SHGDFIL_FORMAT = 2
 	SHGDFIL_DESCRIPTIONID SHGDFIL_FORMAT = 3
 )
+
+// String returns the SHGDFIL_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHGDFIL_FORMAT) String() string {
+	switch e {
+	case SHGDFIL_FINDDATA:
+		return "SHGDFIL_FINDDATA"
+	case SHGDFIL_NETRESOURCE:
+		return "SHGDFIL_NETRESOURCE"
+	case SHGDFIL_DESCRIPTIONID:
+		return "SHGDFIL_DESCRIPTIONID"
+	default:
+		return fmt.Sprintf("SHGDFIL_FORMAT(%d)", int32(e))
+	}
+}
 
 type SHGDNF uint32
 
@@ -2172,6 +6634,26 @@ const (
 	SHGDN_FORPARSING    SHGDNF = 32768
 )
 
+// String returns the SHGDNF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHGDNF) String() string {
+	switch e {
+	case SHGDN_NORMAL:
+		return "SHGDN_NORMAL"
+	case SHGDN_INFOLDER:
+		return "SHGDN_INFOLDER"
+	case SHGDN_FOREDITING:
+		return "SHGDN_FOREDITING"
+	case SHGDN_FORADDRESSBAR:
+		return "SHGDN_FORADDRESSBAR"
+	case SHGDN_FORPARSING:
+		return "SHGDN_FORPARSING"
+	default:
+		return fmt.Sprintf("SHGDNF(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SHGFI_FLAGS uint32
 
 const (
@@ -2195,12 +6677,86 @@ const (
 	SHGFI_USEFILEATTRIBUTES SHGFI_FLAGS = 16
 )
 
+// String returns the SHGFI_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHGFI_FLAGS) String() string {
+	var parts []string
+	if e&SHGFI_ADDOVERLAYS != 0 {
+		parts = append(parts, "SHGFI_ADDOVERLAYS")
+	}
+	if e&SHGFI_ATTR_SPECIFIED != 0 {
+		parts = append(parts, "SHGFI_ATTR_SPECIFIED")
+	}
+	if e&SHGFI_ATTRIBUTES != 0 {
+		parts = append(parts, "SHGFI_ATTRIBUTES")
+	}
+	if e&SHGFI_DISPLAYNAME != 0 {
+		parts = append(parts, "SHGFI_DISPLAYNAME")
+	}
+	if e&SHGFI_EXETYPE != 0 {
+		parts = append(parts, "SHGFI_EXETYPE")
+	}
+	if e&SHGFI_ICON != 0 {
+		parts = append(parts, "SHGFI_ICON")
+	}
+	if e&SHGFI_ICONLOCATION != 0 {
+		parts = append(parts, "SHGFI_ICONLOCATION")
+	}
+	if e&SHGFI_LINKOVERLAY != 0 {
+		parts = append(parts, "SHGFI_LINKOVERLAY")
+	}
+	if e&SHGFI_OPENICON != 0 {
+		parts = append(parts, "SHGFI_OPENICON")
+	}
+	if e&SHGFI_OVERLAYINDEX != 0 {
+		parts = append(parts, "SHGFI_OVERLAYINDEX")
+	}
+	if e&SHGFI_PIDL != 0 {
+		parts = append(parts, "SHGFI_PIDL")
+	}
+	if e&SHGFI_SELECTED != 0 {
+		parts = append(parts, "SHGFI_SELECTED")
+	}
+	if e&SHGFI_SHELLICONSIZE != 0 {
+		parts = append(parts, "SHGFI_SHELLICONSIZE")
+	}
+	if e&SHGFI_SMALLICON != 0 {
+		parts = append(parts, "SHGFI_SMALLICON")
+	}
+	if e&SHGFI_SYSICONINDEX != 0 {
+		parts = append(parts, "SHGFI_SYSICONINDEX")
+	}
+	if e&SHGFI_TYPENAME != 0 {
+		parts = append(parts, "SHGFI_TYPENAME")
+	}
+	if e&SHGFI_USEFILEATTRIBUTES != 0 {
+		parts = append(parts, "SHGFI_USEFILEATTRIBUTES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SHGFP_TYPE int32
 
 const (
 	SHGFP_TYPE_CURRENT SHGFP_TYPE = 0
 	SHGFP_TYPE_DEFAULT SHGFP_TYPE = 1
 )
+
+// String returns the SHGFP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHGFP_TYPE) String() string {
+	switch e {
+	case SHGFP_TYPE_CURRENT:
+		return "SHGFP_TYPE_CURRENT"
+	case SHGFP_TYPE_DEFAULT:
+		return "SHGFP_TYPE_DEFAULT"
+	default:
+		return fmt.Sprintf("SHGFP_TYPE(%d)", int32(e))
+	}
+}
 
 // SHGLOBALCOUNTER: https://learn.microsoft.com/windows/win32/api/shlwapi/ne-shlwapi-shglobalcounter
 type SHGLOBALCOUNTER int32
@@ -2268,6 +6824,136 @@ const (
 	GLOBALCOUNTER_MAXIMUMVALUE                                     SHGLOBALCOUNTER = 59
 )
 
+// String returns the SHGLOBALCOUNTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHGLOBALCOUNTER) String() string {
+	switch e {
+	case GLOBALCOUNTER_SEARCHMANAGER:
+		return "GLOBALCOUNTER_SEARCHMANAGER"
+	case GLOBALCOUNTER_SEARCHOPTIONS:
+		return "GLOBALCOUNTER_SEARCHOPTIONS"
+	case GLOBALCOUNTER_FOLDERSETTINGSCHANGE:
+		return "GLOBALCOUNTER_FOLDERSETTINGSCHANGE"
+	case GLOBALCOUNTER_RATINGS:
+		return "GLOBALCOUNTER_RATINGS"
+	case GLOBALCOUNTER_APPROVEDSITES:
+		return "GLOBALCOUNTER_APPROVEDSITES"
+	case GLOBALCOUNTER_RESTRICTIONS:
+		return "GLOBALCOUNTER_RESTRICTIONS"
+	case GLOBALCOUNTER_SHELLSETTINGSCHANGED:
+		return "GLOBALCOUNTER_SHELLSETTINGSCHANGED"
+	case GLOBALCOUNTER_SYSTEMPIDLCHANGE:
+		return "GLOBALCOUNTER_SYSTEMPIDLCHANGE"
+	case GLOBALCOUNTER_OVERLAYMANAGER:
+		return "GLOBALCOUNTER_OVERLAYMANAGER"
+	case GLOBALCOUNTER_QUERYASSOCIATIONS:
+		return "GLOBALCOUNTER_QUERYASSOCIATIONS"
+	case GLOBALCOUNTER_IESESSIONS:
+		return "GLOBALCOUNTER_IESESSIONS"
+	case GLOBALCOUNTER_IEONLY_SESSIONS:
+		return "GLOBALCOUNTER_IEONLY_SESSIONS"
+	case GLOBALCOUNTER_APPLICATION_DESTINATIONS:
+		return "GLOBALCOUNTER_APPLICATION_DESTINATIONS"
+	case UNUSED_RECYCLE_WAS_GLOBALCOUNTER_CSCSYNCINPROGRESS:
+		return "UNUSED_RECYCLE_WAS_GLOBALCOUNTER_CSCSYNCINPROGRESS"
+	case GLOBALCOUNTER_BITBUCKETNUMDELETERS:
+		return "GLOBALCOUNTER_BITBUCKETNUMDELETERS"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_SHARES:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_SHARES"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_A:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_A"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_B:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_B"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_C:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_C"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_D:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_D"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_E:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_E"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_F:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_F"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_G:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_G"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_H:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_H"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_I:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_I"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_J:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_J"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_K:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_K"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_L:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_L"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_M:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_M"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_N:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_N"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_O:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_O"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_P:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_P"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_Q:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_Q"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_R:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_R"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_S:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_S"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_T:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_T"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_U:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_U"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_V:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_V"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_W:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_W"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_X:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_X"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_Y:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_Y"
+	case GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_Z:
+		return "GLOBALCOUNTER_RECYCLEDIRTYCOUNT_DRIVE_Z"
+	case UNUSED_RECYCLE_WAS_GLOBALCOUNTER_RECYCLEDIRTYCOUNT_SERVERDRIVE:
+		return "UNUSED_RECYCLE_WAS_GLOBALCOUNTER_RECYCLEDIRTYCOUNT_SERVERDRIVE"
+	case UNUSED_RECYCLE_WAS_GLOBALCOUNTER_RECYCLEGLOBALDIRTYCOUNT:
+		return "UNUSED_RECYCLE_WAS_GLOBALCOUNTER_RECYCLEGLOBALDIRTYCOUNT"
+	case GLOBALCOUNTER_RECYCLEBINENUM:
+		return "GLOBALCOUNTER_RECYCLEBINENUM"
+	case GLOBALCOUNTER_RECYCLEBINCORRUPTED:
+		return "GLOBALCOUNTER_RECYCLEBINCORRUPTED"
+	case GLOBALCOUNTER_RATINGS_STATECOUNTER:
+		return "GLOBALCOUNTER_RATINGS_STATECOUNTER"
+	case GLOBALCOUNTER_PRIVATE_PROFILE_CACHE:
+		return "GLOBALCOUNTER_PRIVATE_PROFILE_CACHE"
+	case GLOBALCOUNTER_INTERNETTOOLBAR_LAYOUT:
+		return "GLOBALCOUNTER_INTERNETTOOLBAR_LAYOUT"
+	case GLOBALCOUNTER_FOLDERDEFINITION_CACHE:
+		return "GLOBALCOUNTER_FOLDERDEFINITION_CACHE"
+	case GLOBALCOUNTER_COMMONPLACES_LIST_CACHE:
+		return "GLOBALCOUNTER_COMMONPLACES_LIST_CACHE"
+	case GLOBALCOUNTER_PRIVATE_PROFILE_CACHE_MACHINEWIDE:
+		return "GLOBALCOUNTER_PRIVATE_PROFILE_CACHE_MACHINEWIDE"
+	case GLOBALCOUNTER_ASSOCCHANGED:
+		return "GLOBALCOUNTER_ASSOCCHANGED"
+	case GLOBALCOUNTER_APP_ITEMS_STATE_STORE_CACHE:
+		return "GLOBALCOUNTER_APP_ITEMS_STATE_STORE_CACHE"
+	case GLOBALCOUNTER_SETTINGSYNC_ENABLED:
+		return "GLOBALCOUNTER_SETTINGSYNC_ENABLED"
+	case GLOBALCOUNTER_APPSFOLDER_FILETYPEASSOCIATION_COUNTER:
+		return "GLOBALCOUNTER_APPSFOLDER_FILETYPEASSOCIATION_COUNTER"
+	case GLOBALCOUNTER_USERINFOCHANGED:
+		return "GLOBALCOUNTER_USERINFOCHANGED"
+	case GLOBALCOUNTER_SYNC_ENGINE_INFORMATION_CACHE_MACHINEWIDE:
+		return "GLOBALCOUNTER_SYNC_ENGINE_INFORMATION_CACHE_MACHINEWIDE"
+	case GLOBALCOUNTER_BANNERS_DATAMODEL_CACHE_MACHINEWIDE:
+		return "GLOBALCOUNTER_BANNERS_DATAMODEL_CACHE_MACHINEWIDE"
+	case GLOBALCOUNTER_MAXIMUMVALUE:
+		return "GLOBALCOUNTER_MAXIMUMVALUE"
+	default:
+		return fmt.Sprintf("SHGLOBALCOUNTER(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SHGSI_FLAGS uint32
 
 const (
@@ -2281,6 +6967,35 @@ const (
 	SHGSI_SHELLICONSIZE SHGSI_FLAGS = 4
 )
 
+// String returns the SHGSI_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHGSI_FLAGS) String() string {
+	var parts []string
+	if e&SHGSI_ICON != 0 {
+		parts = append(parts, "SHGSI_ICON")
+	}
+	if e&SHGSI_SYSICONINDEX != 0 {
+		parts = append(parts, "SHGSI_SYSICONINDEX")
+	}
+	if e&SHGSI_LINKOVERLAY != 0 {
+		parts = append(parts, "SHGSI_LINKOVERLAY")
+	}
+	if e&SHGSI_SELECTED != 0 {
+		parts = append(parts, "SHGSI_SELECTED")
+	}
+	if e&SHGSI_SMALLICON != 0 {
+		parts = append(parts, "SHGSI_SMALLICON")
+	}
+	if e&SHGSI_SHELLICONSIZE != 0 {
+		parts = append(parts, "SHGSI_SHELLICONSIZE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SHOP_TYPE int32
 
 const (
@@ -2288,6 +7003,25 @@ const (
 	SHOP_FILEPATH    SHOP_TYPE = 2
 	SHOP_VOLUMEGUID  SHOP_TYPE = 4
 )
+
+// String returns the SHOP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHOP_TYPE) String() string {
+	var parts []string
+	if e&SHOP_PRINTERNAME != 0 {
+		parts = append(parts, "SHOP_PRINTERNAME")
+	}
+	if e&SHOP_FILEPATH != 0 {
+		parts = append(parts, "SHOP_FILEPATH")
+	}
+	if e&SHOP_VOLUMEGUID != 0 {
+		parts = append(parts, "SHOP_VOLUMEGUID")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // SHREGDEL_FLAGS: https://learn.microsoft.com/windows/win32/api/shlwapi/ne-shlwapi-shregdel_flags
 type SHREGDEL_FLAGS int32
@@ -2299,6 +7033,23 @@ const (
 	SHREGDEL_BOTH    SHREGDEL_FLAGS = 17
 )
 
+// String returns the SHREGDEL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHREGDEL_FLAGS) String() string {
+	switch e {
+	case SHREGDEL_DEFAULT:
+		return "SHREGDEL_DEFAULT"
+	case SHREGDEL_HKCU:
+		return "SHREGDEL_HKCU"
+	case SHREGDEL_HKLM:
+		return "SHREGDEL_HKLM"
+	case SHREGDEL_BOTH:
+		return "SHREGDEL_BOTH"
+	default:
+		return fmt.Sprintf("SHREGDEL_FLAGS(%d)", int32(e))
+	}
+}
+
 // SHREGENUM_FLAGS: https://learn.microsoft.com/windows/win32/api/shlwapi/ne-shlwapi-shregenum_flags
 type SHREGENUM_FLAGS int32
 
@@ -2308,6 +7059,23 @@ const (
 	SHREGENUM_HKLM    SHREGENUM_FLAGS = 16
 	SHREGENUM_BOTH    SHREGENUM_FLAGS = 17
 )
+
+// String returns the SHREGENUM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHREGENUM_FLAGS) String() string {
+	switch e {
+	case SHREGENUM_DEFAULT:
+		return "SHREGENUM_DEFAULT"
+	case SHREGENUM_HKCU:
+		return "SHREGENUM_HKCU"
+	case SHREGENUM_HKLM:
+		return "SHREGENUM_HKLM"
+	case SHREGENUM_BOTH:
+		return "SHREGENUM_BOTH"
+	default:
+		return fmt.Sprintf("SHREGENUM_FLAGS(%d)", int32(e))
+	}
+}
 
 // SHSTOCKICONID: https://learn.microsoft.com/windows/win32/api/shellapi/ne-shellapi-shstockiconid
 type SHSTOCKICONID int32
@@ -2409,6 +7177,204 @@ const (
 	SIID_MAX_ICONS         SHSTOCKICONID = 181
 )
 
+// String returns the SHSTOCKICONID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHSTOCKICONID) String() string {
+	switch e {
+	case SIID_DOCNOASSOC:
+		return "SIID_DOCNOASSOC"
+	case SIID_DOCASSOC:
+		return "SIID_DOCASSOC"
+	case SIID_APPLICATION:
+		return "SIID_APPLICATION"
+	case SIID_FOLDER:
+		return "SIID_FOLDER"
+	case SIID_FOLDEROPEN:
+		return "SIID_FOLDEROPEN"
+	case SIID_DRIVE525:
+		return "SIID_DRIVE525"
+	case SIID_DRIVE35:
+		return "SIID_DRIVE35"
+	case SIID_DRIVEREMOVE:
+		return "SIID_DRIVEREMOVE"
+	case SIID_DRIVEFIXED:
+		return "SIID_DRIVEFIXED"
+	case SIID_DRIVENET:
+		return "SIID_DRIVENET"
+	case SIID_DRIVENETDISABLED:
+		return "SIID_DRIVENETDISABLED"
+	case SIID_DRIVECD:
+		return "SIID_DRIVECD"
+	case SIID_DRIVERAM:
+		return "SIID_DRIVERAM"
+	case SIID_WORLD:
+		return "SIID_WORLD"
+	case SIID_SERVER:
+		return "SIID_SERVER"
+	case SIID_PRINTER:
+		return "SIID_PRINTER"
+	case SIID_MYNETWORK:
+		return "SIID_MYNETWORK"
+	case SIID_FIND:
+		return "SIID_FIND"
+	case SIID_HELP:
+		return "SIID_HELP"
+	case SIID_SHARE:
+		return "SIID_SHARE"
+	case SIID_LINK:
+		return "SIID_LINK"
+	case SIID_SLOWFILE:
+		return "SIID_SLOWFILE"
+	case SIID_RECYCLER:
+		return "SIID_RECYCLER"
+	case SIID_RECYCLERFULL:
+		return "SIID_RECYCLERFULL"
+	case SIID_MEDIACDAUDIO:
+		return "SIID_MEDIACDAUDIO"
+	case SIID_LOCK:
+		return "SIID_LOCK"
+	case SIID_AUTOLIST:
+		return "SIID_AUTOLIST"
+	case SIID_PRINTERNET:
+		return "SIID_PRINTERNET"
+	case SIID_SERVERSHARE:
+		return "SIID_SERVERSHARE"
+	case SIID_PRINTERFAX:
+		return "SIID_PRINTERFAX"
+	case SIID_PRINTERFAXNET:
+		return "SIID_PRINTERFAXNET"
+	case SIID_PRINTERFILE:
+		return "SIID_PRINTERFILE"
+	case SIID_STACK:
+		return "SIID_STACK"
+	case SIID_MEDIASVCD:
+		return "SIID_MEDIASVCD"
+	case SIID_STUFFEDFOLDER:
+		return "SIID_STUFFEDFOLDER"
+	case SIID_DRIVEUNKNOWN:
+		return "SIID_DRIVEUNKNOWN"
+	case SIID_DRIVEDVD:
+		return "SIID_DRIVEDVD"
+	case SIID_MEDIADVD:
+		return "SIID_MEDIADVD"
+	case SIID_MEDIADVDRAM:
+		return "SIID_MEDIADVDRAM"
+	case SIID_MEDIADVDRW:
+		return "SIID_MEDIADVDRW"
+	case SIID_MEDIADVDR:
+		return "SIID_MEDIADVDR"
+	case SIID_MEDIADVDROM:
+		return "SIID_MEDIADVDROM"
+	case SIID_MEDIACDAUDIOPLUS:
+		return "SIID_MEDIACDAUDIOPLUS"
+	case SIID_MEDIACDRW:
+		return "SIID_MEDIACDRW"
+	case SIID_MEDIACDR:
+		return "SIID_MEDIACDR"
+	case SIID_MEDIACDBURN:
+		return "SIID_MEDIACDBURN"
+	case SIID_MEDIABLANKCD:
+		return "SIID_MEDIABLANKCD"
+	case SIID_MEDIACDROM:
+		return "SIID_MEDIACDROM"
+	case SIID_AUDIOFILES:
+		return "SIID_AUDIOFILES"
+	case SIID_IMAGEFILES:
+		return "SIID_IMAGEFILES"
+	case SIID_VIDEOFILES:
+		return "SIID_VIDEOFILES"
+	case SIID_MIXEDFILES:
+		return "SIID_MIXEDFILES"
+	case SIID_FOLDERBACK:
+		return "SIID_FOLDERBACK"
+	case SIID_FOLDERFRONT:
+		return "SIID_FOLDERFRONT"
+	case SIID_SHIELD:
+		return "SIID_SHIELD"
+	case SIID_WARNING:
+		return "SIID_WARNING"
+	case SIID_INFO:
+		return "SIID_INFO"
+	case SIID_ERROR:
+		return "SIID_ERROR"
+	case SIID_KEY:
+		return "SIID_KEY"
+	case SIID_SOFTWARE:
+		return "SIID_SOFTWARE"
+	case SIID_RENAME:
+		return "SIID_RENAME"
+	case SIID_DELETE:
+		return "SIID_DELETE"
+	case SIID_MEDIAAUDIODVD:
+		return "SIID_MEDIAAUDIODVD"
+	case SIID_MEDIAMOVIEDVD:
+		return "SIID_MEDIAMOVIEDVD"
+	case SIID_MEDIAENHANCEDCD:
+		return "SIID_MEDIAENHANCEDCD"
+	case SIID_MEDIAENHANCEDDVD:
+		return "SIID_MEDIAENHANCEDDVD"
+	case SIID_MEDIAHDDVD:
+		return "SIID_MEDIAHDDVD"
+	case SIID_MEDIABLURAY:
+		return "SIID_MEDIABLURAY"
+	case SIID_MEDIAVCD:
+		return "SIID_MEDIAVCD"
+	case SIID_MEDIADVDPLUSR:
+		return "SIID_MEDIADVDPLUSR"
+	case SIID_MEDIADVDPLUSRW:
+		return "SIID_MEDIADVDPLUSRW"
+	case SIID_DESKTOPPC:
+		return "SIID_DESKTOPPC"
+	case SIID_MOBILEPC:
+		return "SIID_MOBILEPC"
+	case SIID_USERS:
+		return "SIID_USERS"
+	case SIID_MEDIASMARTMEDIA:
+		return "SIID_MEDIASMARTMEDIA"
+	case SIID_MEDIACOMPACTFLASH:
+		return "SIID_MEDIACOMPACTFLASH"
+	case SIID_DEVICECELLPHONE:
+		return "SIID_DEVICECELLPHONE"
+	case SIID_DEVICECAMERA:
+		return "SIID_DEVICECAMERA"
+	case SIID_DEVICEVIDEOCAMERA:
+		return "SIID_DEVICEVIDEOCAMERA"
+	case SIID_DEVICEAUDIOPLAYER:
+		return "SIID_DEVICEAUDIOPLAYER"
+	case SIID_NETWORKCONNECT:
+		return "SIID_NETWORKCONNECT"
+	case SIID_INTERNET:
+		return "SIID_INTERNET"
+	case SIID_ZIPFILE:
+		return "SIID_ZIPFILE"
+	case SIID_SETTINGS:
+		return "SIID_SETTINGS"
+	case SIID_DRIVEHDDVD:
+		return "SIID_DRIVEHDDVD"
+	case SIID_DRIVEBD:
+		return "SIID_DRIVEBD"
+	case SIID_MEDIAHDDVDROM:
+		return "SIID_MEDIAHDDVDROM"
+	case SIID_MEDIAHDDVDR:
+		return "SIID_MEDIAHDDVDR"
+	case SIID_MEDIAHDDVDRAM:
+		return "SIID_MEDIAHDDVDRAM"
+	case SIID_MEDIABDROM:
+		return "SIID_MEDIABDROM"
+	case SIID_MEDIABDR:
+		return "SIID_MEDIABDR"
+	case SIID_MEDIABDRE:
+		return "SIID_MEDIABDRE"
+	case SIID_CLUSTEREDDRIVE:
+		return "SIID_CLUSTEREDDRIVE"
+	case SIID_MAX_ICONS:
+		return "SIID_MAX_ICONS"
+	default:
+		return fmt.Sprintf("SHSTOCKICONID(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SIATTRIBFLAGS int32
 
 const (
@@ -2418,6 +7384,31 @@ const (
 	SIATTRIBFLAGS_MASK      SIATTRIBFLAGS = 3
 	SIATTRIBFLAGS_ALLITEMS  SIATTRIBFLAGS = 16384
 )
+
+// String returns the SIATTRIBFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIATTRIBFLAGS) String() string {
+	var parts []string
+	if e&SIATTRIBFLAGS_AND != 0 {
+		parts = append(parts, "SIATTRIBFLAGS_AND")
+	}
+	if e&SIATTRIBFLAGS_OR != 0 {
+		parts = append(parts, "SIATTRIBFLAGS_OR")
+	}
+	if e&SIATTRIBFLAGS_APPCOMPAT != 0 {
+		parts = append(parts, "SIATTRIBFLAGS_APPCOMPAT")
+	}
+	if e&SIATTRIBFLAGS_MASK != 0 {
+		parts = append(parts, "SIATTRIBFLAGS_MASK")
+	}
+	if e&SIATTRIBFLAGS_ALLITEMS != 0 {
+		parts = append(parts, "SIATTRIBFLAGS_ALLITEMS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // SIGDN: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-sigdn
 type SIGDN int32
@@ -2435,6 +7426,36 @@ const (
 	SIGDN_PARENTRELATIVEFORUI         SIGDN = -2146877439
 )
 
+// String returns the SIGDN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIGDN) String() string {
+	switch e {
+	case SIGDN_NORMALDISPLAY:
+		return "SIGDN_NORMALDISPLAY"
+	case SIGDN_PARENTRELATIVEPARSING:
+		return "SIGDN_PARENTRELATIVEPARSING"
+	case SIGDN_DESKTOPABSOLUTEPARSING:
+		return "SIGDN_DESKTOPABSOLUTEPARSING"
+	case SIGDN_PARENTRELATIVEEDITING:
+		return "SIGDN_PARENTRELATIVEEDITING"
+	case SIGDN_DESKTOPABSOLUTEEDITING:
+		return "SIGDN_DESKTOPABSOLUTEEDITING"
+	case SIGDN_FILESYSPATH:
+		return "SIGDN_FILESYSPATH"
+	case SIGDN_URL:
+		return "SIGDN_URL"
+	case SIGDN_PARENTRELATIVEFORADDRESSBAR:
+		return "SIGDN_PARENTRELATIVEFORADDRESSBAR"
+	case SIGDN_PARENTRELATIVE:
+		return "SIGDN_PARENTRELATIVE"
+	case SIGDN_PARENTRELATIVEFORUI:
+		return "SIGDN_PARENTRELATIVEFORUI"
+	default:
+		return fmt.Sprintf("SIGDN(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SIIGBF int32
 
 const (
@@ -2450,6 +7471,44 @@ const (
 	SIIGBF_SCALEUP        SIIGBF = 256
 )
 
+// String returns the SIIGBF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIIGBF) String() string {
+	var parts []string
+	if e&SIIGBF_BIGGERSIZEOK != 0 {
+		parts = append(parts, "SIIGBF_BIGGERSIZEOK")
+	}
+	if e&SIIGBF_MEMORYONLY != 0 {
+		parts = append(parts, "SIIGBF_MEMORYONLY")
+	}
+	if e&SIIGBF_ICONONLY != 0 {
+		parts = append(parts, "SIIGBF_ICONONLY")
+	}
+	if e&SIIGBF_THUMBNAILONLY != 0 {
+		parts = append(parts, "SIIGBF_THUMBNAILONLY")
+	}
+	if e&SIIGBF_INCACHEONLY != 0 {
+		parts = append(parts, "SIIGBF_INCACHEONLY")
+	}
+	if e&SIIGBF_CROPTOSQUARE != 0 {
+		parts = append(parts, "SIIGBF_CROPTOSQUARE")
+	}
+	if e&SIIGBF_WIDETHUMBNAILS != 0 {
+		parts = append(parts, "SIIGBF_WIDETHUMBNAILS")
+	}
+	if e&SIIGBF_ICONBACKGROUND != 0 {
+		parts = append(parts, "SIIGBF_ICONBACKGROUND")
+	}
+	if e&SIIGBF_SCALEUP != 0 {
+		parts = append(parts, "SIIGBF_SCALEUP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SLGP_FLAGS int32
 
 const (
@@ -2459,6 +7518,29 @@ const (
 	SLGP_RELATIVEPRIORITY SLGP_FLAGS = 8
 )
 
+// String returns the SLGP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SLGP_FLAGS) String() string {
+	var parts []string
+	if e&SLGP_SHORTPATH != 0 {
+		parts = append(parts, "SLGP_SHORTPATH")
+	}
+	if e&SLGP_UNCPRIORITY != 0 {
+		parts = append(parts, "SLGP_UNCPRIORITY")
+	}
+	if e&SLGP_RAWPATH != 0 {
+		parts = append(parts, "SLGP_RAWPATH")
+	}
+	if e&SLGP_RELATIVEPRIORITY != 0 {
+		parts = append(parts, "SLGP_RELATIVEPRIORITY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SLR_FLAGS int32
 
 const (
@@ -2479,6 +7561,58 @@ const (
 	SLR_NO_OBJECT_ID              SLR_FLAGS = 8192
 )
 
+// String returns the SLR_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SLR_FLAGS) String() string {
+	var parts []string
+	if e&SLR_NO_UI != 0 {
+		parts = append(parts, "SLR_NO_UI")
+	}
+	if e&SLR_ANY_MATCH != 0 {
+		parts = append(parts, "SLR_ANY_MATCH")
+	}
+	if e&SLR_UPDATE != 0 {
+		parts = append(parts, "SLR_UPDATE")
+	}
+	if e&SLR_NOUPDATE != 0 {
+		parts = append(parts, "SLR_NOUPDATE")
+	}
+	if e&SLR_NOSEARCH != 0 {
+		parts = append(parts, "SLR_NOSEARCH")
+	}
+	if e&SLR_NOTRACK != 0 {
+		parts = append(parts, "SLR_NOTRACK")
+	}
+	if e&SLR_NOLINKINFO != 0 {
+		parts = append(parts, "SLR_NOLINKINFO")
+	}
+	if e&SLR_INVOKE_MSI != 0 {
+		parts = append(parts, "SLR_INVOKE_MSI")
+	}
+	if e&SLR_NO_UI_WITH_MSG_PUMP != 0 {
+		parts = append(parts, "SLR_NO_UI_WITH_MSG_PUMP")
+	}
+	if e&SLR_OFFER_DELETE_WITHOUT_FILE != 0 {
+		parts = append(parts, "SLR_OFFER_DELETE_WITHOUT_FILE")
+	}
+	if e&SLR_KNOWNFOLDER != 0 {
+		parts = append(parts, "SLR_KNOWNFOLDER")
+	}
+	if e&SLR_MACHINE_IN_LOCAL_TARGET != 0 {
+		parts = append(parts, "SLR_MACHINE_IN_LOCAL_TARGET")
+	}
+	if e&SLR_UPDATE_MACHINE_AND_SID != 0 {
+		parts = append(parts, "SLR_UPDATE_MACHINE_AND_SID")
+	}
+	if e&SLR_NO_OBJECT_ID != 0 {
+		parts = append(parts, "SLR_NO_OBJECT_ID")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SMINFOFLAGS int32
 
 const (
@@ -2497,6 +7631,41 @@ const (
 	SMIF_NEW         SMINFOFLAGS = 8192
 )
 
+// String returns the SMINFOFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SMINFOFLAGS) String() string {
+	switch e {
+	case SMIF_ICON:
+		return "SMIF_ICON"
+	case SMIF_ACCELERATOR:
+		return "SMIF_ACCELERATOR"
+	case SMIF_DROPTARGET:
+		return "SMIF_DROPTARGET"
+	case SMIF_SUBMENU:
+		return "SMIF_SUBMENU"
+	case SMIF_CHECKED:
+		return "SMIF_CHECKED"
+	case SMIF_DROPCASCADE:
+		return "SMIF_DROPCASCADE"
+	case SMIF_HIDDEN:
+		return "SMIF_HIDDEN"
+	case SMIF_DISABLED:
+		return "SMIF_DISABLED"
+	case SMIF_TRACKPOPUP:
+		return "SMIF_TRACKPOPUP"
+	case SMIF_DEMOTED:
+		return "SMIF_DEMOTED"
+	case SMIF_ALTSTATE:
+		return "SMIF_ALTSTATE"
+	case SMIF_DRAGNDROP:
+		return "SMIF_DRAGNDROP"
+	case SMIF_NEW:
+		return "SMIF_NEW"
+	default:
+		return fmt.Sprintf("SMINFOFLAGS(%d)", int32(e))
+	}
+}
+
 type SMINFOMASK int32
 
 const (
@@ -2505,12 +7674,40 @@ const (
 	SMIM_ICON  SMINFOMASK = 4
 )
 
+// String returns the SMINFOMASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SMINFOMASK) String() string {
+	switch e {
+	case SMIM_TYPE:
+		return "SMIM_TYPE"
+	case SMIM_FLAGS:
+		return "SMIM_FLAGS"
+	case SMIM_ICON:
+		return "SMIM_ICON"
+	default:
+		return fmt.Sprintf("SMINFOMASK(%d)", int32(e))
+	}
+}
+
 type SMINFOTYPE int32
 
 const (
 	SMIT_SEPARATOR SMINFOTYPE = 1
 	SMIT_STRING    SMINFOTYPE = 2
 )
+
+// String returns the SMINFOTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SMINFOTYPE) String() string {
+	switch e {
+	case SMIT_SEPARATOR:
+		return "SMIT_SEPARATOR"
+	case SMIT_STRING:
+		return "SMIT_STRING"
+	default:
+		return fmt.Sprintf("SMINFOTYPE(%d)", int32(e))
+	}
+}
 
 type SORTDIRECTION int32
 
@@ -2519,12 +7716,38 @@ const (
 	SORT_ASCENDING  SORTDIRECTION = 1
 )
 
+// String returns the SORTDIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SORTDIRECTION) String() string {
+	switch e {
+	case SORT_DESCENDING:
+		return "SORT_DESCENDING"
+	case SORT_ASCENDING:
+		return "SORT_ASCENDING"
+	default:
+		return fmt.Sprintf("SORTDIRECTION(%d)", int32(e))
+	}
+}
+
 type SORT_ORDER_TYPE int32
 
 const (
 	SOT_DEFAULT           SORT_ORDER_TYPE = 0
 	SOT_IGNORE_FOLDERNESS SORT_ORDER_TYPE = 1
 )
+
+// String returns the SORT_ORDER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SORT_ORDER_TYPE) String() string {
+	switch e {
+	case SOT_DEFAULT:
+		return "SOT_DEFAULT"
+	case SOT_IGNORE_FOLDERNESS:
+		return "SOT_IGNORE_FOLDERNESS"
+	default:
+		return fmt.Sprintf("SORT_ORDER_TYPE(%d)", int32(e))
+	}
+}
 
 // SPACTION: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-spaction
 type SPACTION int32
@@ -2546,6 +7769,43 @@ const (
 	SPACTION_COPY_MOVING        SPACTION = 13
 )
 
+// String returns the SPACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPACTION) String() string {
+	switch e {
+	case SPACTION_NONE:
+		return "SPACTION_NONE"
+	case SPACTION_MOVING:
+		return "SPACTION_MOVING"
+	case SPACTION_COPYING:
+		return "SPACTION_COPYING"
+	case SPACTION_RECYCLING:
+		return "SPACTION_RECYCLING"
+	case SPACTION_APPLYINGATTRIBS:
+		return "SPACTION_APPLYINGATTRIBS"
+	case SPACTION_DOWNLOADING:
+		return "SPACTION_DOWNLOADING"
+	case SPACTION_SEARCHING_INTERNET:
+		return "SPACTION_SEARCHING_INTERNET"
+	case SPACTION_CALCULATING:
+		return "SPACTION_CALCULATING"
+	case SPACTION_UPLOADING:
+		return "SPACTION_UPLOADING"
+	case SPACTION_SEARCHING_FILES:
+		return "SPACTION_SEARCHING_FILES"
+	case SPACTION_DELETING:
+		return "SPACTION_DELETING"
+	case SPACTION_RENAMING:
+		return "SPACTION_RENAMING"
+	case SPACTION_FORMATTING:
+		return "SPACTION_FORMATTING"
+	case SPACTION_COPY_MOVING:
+		return "SPACTION_COPY_MOVING"
+	default:
+		return fmt.Sprintf("SPACTION(%d)", int32(e))
+	}
+}
+
 // SPTEXT: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-sptext
 type SPTEXT int32
 
@@ -2554,6 +7814,20 @@ const (
 	SPTEXT_ACTIONDETAIL      SPTEXT = 2
 )
 
+// String returns the SPTEXT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPTEXT) String() string {
+	switch e {
+	case SPTEXT_ACTIONDESCRIPTION:
+		return "SPTEXT_ACTIONDESCRIPTION"
+	case SPTEXT_ACTIONDETAIL:
+		return "SPTEXT_ACTIONDETAIL"
+	default:
+		return fmt.Sprintf("SPTEXT(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SSF_MASK uint32
 
 const (
@@ -2586,6 +7860,97 @@ const (
 	SSF_SHOWSTATUSBAR        SSF_MASK = 67108864
 )
 
+// String returns the SSF_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SSF_MASK) String() string {
+	var parts []string
+	if e&SSF_SHOWALLOBJECTS != 0 {
+		parts = append(parts, "SSF_SHOWALLOBJECTS")
+	}
+	if e&SSF_SHOWEXTENSIONS != 0 {
+		parts = append(parts, "SSF_SHOWEXTENSIONS")
+	}
+	if e&SSF_HIDDENFILEEXTS != 0 {
+		parts = append(parts, "SSF_HIDDENFILEEXTS")
+	}
+	if e&SSF_SERVERADMINUI != 0 {
+		parts = append(parts, "SSF_SERVERADMINUI")
+	}
+	if e&SSF_SHOWCOMPCOLOR != 0 {
+		parts = append(parts, "SSF_SHOWCOMPCOLOR")
+	}
+	if e&SSF_SORTCOLUMNS != 0 {
+		parts = append(parts, "SSF_SORTCOLUMNS")
+	}
+	if e&SSF_SHOWSYSFILES != 0 {
+		parts = append(parts, "SSF_SHOWSYSFILES")
+	}
+	if e&SSF_DOUBLECLICKINWEBVIEW != 0 {
+		parts = append(parts, "SSF_DOUBLECLICKINWEBVIEW")
+	}
+	if e&SSF_SHOWATTRIBCOL != 0 {
+		parts = append(parts, "SSF_SHOWATTRIBCOL")
+	}
+	if e&SSF_DESKTOPHTML != 0 {
+		parts = append(parts, "SSF_DESKTOPHTML")
+	}
+	if e&SSF_WIN95CLASSIC != 0 {
+		parts = append(parts, "SSF_WIN95CLASSIC")
+	}
+	if e&SSF_DONTPRETTYPATH != 0 {
+		parts = append(parts, "SSF_DONTPRETTYPATH")
+	}
+	if e&SSF_SHOWINFOTIP != 0 {
+		parts = append(parts, "SSF_SHOWINFOTIP")
+	}
+	if e&SSF_MAPNETDRVBUTTON != 0 {
+		parts = append(parts, "SSF_MAPNETDRVBUTTON")
+	}
+	if e&SSF_NOCONFIRMRECYCLE != 0 {
+		parts = append(parts, "SSF_NOCONFIRMRECYCLE")
+	}
+	if e&SSF_HIDEICONS != 0 {
+		parts = append(parts, "SSF_HIDEICONS")
+	}
+	if e&SSF_FILTER != 0 {
+		parts = append(parts, "SSF_FILTER")
+	}
+	if e&SSF_WEBVIEW != 0 {
+		parts = append(parts, "SSF_WEBVIEW")
+	}
+	if e&SSF_SHOWSUPERHIDDEN != 0 {
+		parts = append(parts, "SSF_SHOWSUPERHIDDEN")
+	}
+	if e&SSF_SEPPROCESS != 0 {
+		parts = append(parts, "SSF_SEPPROCESS")
+	}
+	if e&SSF_NONETCRAWLING != 0 {
+		parts = append(parts, "SSF_NONETCRAWLING")
+	}
+	if e&SSF_STARTPANELON != 0 {
+		parts = append(parts, "SSF_STARTPANELON")
+	}
+	if e&SSF_SHOWSTARTPAGE != 0 {
+		parts = append(parts, "SSF_SHOWSTARTPAGE")
+	}
+	if e&SSF_AUTOCHECKSELECT != 0 {
+		parts = append(parts, "SSF_AUTOCHECKSELECT")
+	}
+	if e&SSF_ICONSONLY != 0 {
+		parts = append(parts, "SSF_ICONSONLY")
+	}
+	if e&SSF_SHOWTYPEOVERLAY != 0 {
+		parts = append(parts, "SSF_SHOWTYPEOVERLAY")
+	}
+	if e&SSF_SHOWSTATUSBAR != 0 {
+		parts = append(parts, "SSF_SHOWSTATUSBAR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type STGOP int32
 
 const (
@@ -2598,6 +7963,30 @@ const (
 	STGOP_NEW             STGOP = 10
 )
 
+// String returns the STGOP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STGOP) String() string {
+	switch e {
+	case STGOP_MOVE:
+		return "STGOP_MOVE"
+	case STGOP_COPY:
+		return "STGOP_COPY"
+	case STGOP_SYNC:
+		return "STGOP_SYNC"
+	case STGOP_REMOVE:
+		return "STGOP_REMOVE"
+	case STGOP_RENAME:
+		return "STGOP_RENAME"
+	case STGOP_APPLYPROPERTIES:
+		return "STGOP_APPLYPROPERTIES"
+	case STGOP_NEW:
+		return "STGOP_NEW"
+	default:
+		return fmt.Sprintf("STGOP(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type STORAGE_PROVIDER_FILE_FLAGS int32
 
 const (
@@ -2606,7 +7995,24 @@ const (
 	SPFF_CREATED_ON_THIS_DEVICE STORAGE_PROVIDER_FILE_FLAGS = 2
 )
 
+// String returns the STORAGE_PROVIDER_FILE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_PROVIDER_FILE_FLAGS) String() string {
+	var parts []string
+	if e&SPFF_DOWNLOAD_BY_DEFAULT != 0 {
+		parts = append(parts, "SPFF_DOWNLOAD_BY_DEFAULT")
+	}
+	if e&SPFF_CREATED_ON_THIS_DEVICE != 0 {
+		parts = append(parts, "SPFF_CREATED_ON_THIS_DEVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // STPFLAG: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-stpflag
+// Bitmask — values may be combined with |.
 type STPFLAG int32
 
 const (
@@ -2616,6 +8022,28 @@ const (
 	STPF_USEAPPPEEKALWAYS          STPFLAG = 4
 	STPF_USEAPPPEEKWHENACTIVE      STPFLAG = 8
 )
+
+// String returns the STPFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STPFLAG) String() string {
+	var parts []string
+	if e&STPF_USEAPPTHUMBNAILALWAYS != 0 {
+		parts = append(parts, "STPF_USEAPPTHUMBNAILALWAYS")
+	}
+	if e&STPF_USEAPPTHUMBNAILWHENACTIVE != 0 {
+		parts = append(parts, "STPF_USEAPPTHUMBNAILWHENACTIVE")
+	}
+	if e&STPF_USEAPPPEEKALWAYS != 0 {
+		parts = append(parts, "STPF_USEAPPPEEKALWAYS")
+	}
+	if e&STPF_USEAPPPEEKWHENACTIVE != 0 {
+		parts = append(parts, "STPF_USEAPPPEEKWHENACTIVE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // SVUIA_STATUS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-svuia_status
 type SVUIA_STATUS int32
@@ -2627,11 +8055,39 @@ const (
 	SVUIA_INPLACEACTIVATE  SVUIA_STATUS = 3
 )
 
+// String returns the SVUIA_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SVUIA_STATUS) String() string {
+	switch e {
+	case SVUIA_DEACTIVATE:
+		return "SVUIA_DEACTIVATE"
+	case SVUIA_ACTIVATE_NOFOCUS:
+		return "SVUIA_ACTIVATE_NOFOCUS"
+	case SVUIA_ACTIVATE_FOCUS:
+		return "SVUIA_ACTIVATE_FOCUS"
+	case SVUIA_INPLACEACTIVATE:
+		return "SVUIA_INPLACEACTIVATE"
+	default:
+		return fmt.Sprintf("SVUIA_STATUS(%d)", int32(e))
+	}
+}
+
 type SYNCMGRERRORFLAGS int32
 
 const (
 	SYNCMGRERRORFLAG_ENABLEJUMPTEXT SYNCMGRERRORFLAGS = 1
 )
+
+// String returns the SYNCMGRERRORFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGRERRORFLAGS) String() string {
+	switch e {
+	case SYNCMGRERRORFLAG_ENABLEJUMPTEXT:
+		return "SYNCMGRERRORFLAG_ENABLEJUMPTEXT"
+	default:
+		return fmt.Sprintf("SYNCMGRERRORFLAGS(%d)", int32(e))
+	}
+}
 
 // SYNCMGRFLAG: https://learn.microsoft.com/windows/win32/api/mobsync/ne-mobsync-syncmgrflag
 type SYNCMGRFLAG int32
@@ -2648,6 +8104,33 @@ const (
 	SYNCMGRFLAG_MAYBOTHERUSER     SYNCMGRFLAG = 512
 )
 
+// String returns the SYNCMGRFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGRFLAG) String() string {
+	switch e {
+	case SYNCMGRFLAG_CONNECT:
+		return "SYNCMGRFLAG_CONNECT"
+	case SYNCMGRFLAG_PENDINGDISCONNECT:
+		return "SYNCMGRFLAG_PENDINGDISCONNECT"
+	case SYNCMGRFLAG_MANUAL:
+		return "SYNCMGRFLAG_MANUAL"
+	case SYNCMGRFLAG_IDLE:
+		return "SYNCMGRFLAG_IDLE"
+	case SYNCMGRFLAG_INVOKE:
+		return "SYNCMGRFLAG_INVOKE"
+	case SYNCMGRFLAG_SCHEDULED:
+		return "SYNCMGRFLAG_SCHEDULED"
+	case SYNCMGRFLAG_EVENTMASK:
+		return "SYNCMGRFLAG_EVENTMASK"
+	case SYNCMGRFLAG_SETTINGS:
+		return "SYNCMGRFLAG_SETTINGS"
+	case SYNCMGRFLAG_MAYBOTHERUSER:
+		return "SYNCMGRFLAG_MAYBOTHERUSER"
+	default:
+		return fmt.Sprintf("SYNCMGRFLAG(%d)", int32(e))
+	}
+}
+
 // SYNCMGRHANDLERFLAGS: https://learn.microsoft.com/windows/win32/api/mobsync/ne-mobsync-syncmgrhandlerflags
 type SYNCMGRHANDLERFLAGS int32
 
@@ -2658,6 +8141,23 @@ const (
 	SYNCMGRHANDLER_HIDDEN                 SYNCMGRHANDLERFLAGS = 8
 )
 
+// String returns the SYNCMGRHANDLERFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGRHANDLERFLAGS) String() string {
+	switch e {
+	case SYNCMGRHANDLER_HASPROPERTIES:
+		return "SYNCMGRHANDLER_HASPROPERTIES"
+	case SYNCMGRHANDLER_MAYESTABLISHCONNECTION:
+		return "SYNCMGRHANDLER_MAYESTABLISHCONNECTION"
+	case SYNCMGRHANDLER_ALWAYSLISTHANDLER:
+		return "SYNCMGRHANDLER_ALWAYSLISTHANDLER"
+	case SYNCMGRHANDLER_HIDDEN:
+		return "SYNCMGRHANDLER_HIDDEN"
+	default:
+		return fmt.Sprintf("SYNCMGRHANDLERFLAGS(%d)", int32(e))
+	}
+}
+
 // SYNCMGRINVOKEFLAGS: https://learn.microsoft.com/windows/win32/api/mobsync/ne-mobsync-syncmgrinvokeflags
 type SYNCMGRINVOKEFLAGS int32
 
@@ -2665,6 +8165,19 @@ const (
 	SYNCMGRINVOKE_STARTSYNC SYNCMGRINVOKEFLAGS = 2
 	SYNCMGRINVOKE_MINIMIZED SYNCMGRINVOKEFLAGS = 4
 )
+
+// String returns the SYNCMGRINVOKEFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGRINVOKEFLAGS) String() string {
+	switch e {
+	case SYNCMGRINVOKE_STARTSYNC:
+		return "SYNCMGRINVOKE_STARTSYNC"
+	case SYNCMGRINVOKE_MINIMIZED:
+		return "SYNCMGRINVOKE_MINIMIZED"
+	default:
+		return fmt.Sprintf("SYNCMGRINVOKEFLAGS(%d)", int32(e))
+	}
+}
 
 // SYNCMGRITEMFLAGS: https://learn.microsoft.com/windows/win32/api/mobsync/ne-mobsync-syncmgritemflags
 type SYNCMGRITEMFLAGS int32
@@ -2678,12 +8191,46 @@ const (
 	SYNCMGRITEM_HIDDEN         SYNCMGRITEMFLAGS = 32
 )
 
+// String returns the SYNCMGRITEMFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGRITEMFLAGS) String() string {
+	switch e {
+	case SYNCMGRITEM_HASPROPERTIES:
+		return "SYNCMGRITEM_HASPROPERTIES"
+	case SYNCMGRITEM_TEMPORARY:
+		return "SYNCMGRITEM_TEMPORARY"
+	case SYNCMGRITEM_ROAMINGUSER:
+		return "SYNCMGRITEM_ROAMINGUSER"
+	case SYNCMGRITEM_LASTUPDATETIME:
+		return "SYNCMGRITEM_LASTUPDATETIME"
+	case SYNCMGRITEM_MAYDELETEITEM:
+		return "SYNCMGRITEM_MAYDELETEITEM"
+	case SYNCMGRITEM_HIDDEN:
+		return "SYNCMGRITEM_HIDDEN"
+	default:
+		return fmt.Sprintf("SYNCMGRITEMFLAGS(%d)", int32(e))
+	}
+}
+
 type SYNCMGRITEMSTATE int32
 
 const (
 	SYNCMGRITEMSTATE_UNCHECKED SYNCMGRITEMSTATE = 0
 	SYNCMGRITEMSTATE_CHECKED   SYNCMGRITEMSTATE = 1
 )
+
+// String returns the SYNCMGRITEMSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGRITEMSTATE) String() string {
+	switch e {
+	case SYNCMGRITEMSTATE_UNCHECKED:
+		return "SYNCMGRITEMSTATE_UNCHECKED"
+	case SYNCMGRITEMSTATE_CHECKED:
+		return "SYNCMGRITEMSTATE_CHECKED"
+	default:
+		return fmt.Sprintf("SYNCMGRITEMSTATE(%d)", int32(e))
+	}
+}
 
 // SYNCMGRLOGLEVEL: https://learn.microsoft.com/windows/win32/api/mobsync/ne-mobsync-syncmgrloglevel
 type SYNCMGRLOGLEVEL int32
@@ -2695,6 +8242,21 @@ const (
 	SYNCMGRLOGLEVEL_LOGLEVELMAX SYNCMGRLOGLEVEL = 3
 )
 
+// String returns the SYNCMGRLOGLEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGRLOGLEVEL) String() string {
+	switch e {
+	case SYNCMGRLOGLEVEL_INFORMATION:
+		return "SYNCMGRLOGLEVEL_INFORMATION"
+	case SYNCMGRLOGLEVEL_WARNING:
+		return "SYNCMGRLOGLEVEL_WARNING"
+	case SYNCMGRLOGLEVEL_ERROR:
+		return "SYNCMGRLOGLEVEL_ERROR"
+	default:
+		return fmt.Sprintf("SYNCMGRLOGLEVEL(%d)", int32(e))
+	}
+}
+
 // SYNCMGRREGISTERFLAGS: https://learn.microsoft.com/windows/win32/api/mobsync/ne-mobsync-syncmgrregisterflags
 type SYNCMGRREGISTERFLAGS int32
 
@@ -2703,6 +8265,21 @@ const (
 	SYNCMGRREGISTERFLAG_PENDINGDISCONNECT SYNCMGRREGISTERFLAGS = 2
 	SYNCMGRREGISTERFLAG_IDLE              SYNCMGRREGISTERFLAGS = 4
 )
+
+// String returns the SYNCMGRREGISTERFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGRREGISTERFLAGS) String() string {
+	switch e {
+	case SYNCMGRREGISTERFLAG_CONNECT:
+		return "SYNCMGRREGISTERFLAG_CONNECT"
+	case SYNCMGRREGISTERFLAG_PENDINGDISCONNECT:
+		return "SYNCMGRREGISTERFLAG_PENDINGDISCONNECT"
+	case SYNCMGRREGISTERFLAG_IDLE:
+		return "SYNCMGRREGISTERFLAG_IDLE"
+	default:
+		return fmt.Sprintf("SYNCMGRREGISTERFLAGS(%d)", int32(e))
+	}
+}
 
 // SYNCMGRSTATUS: https://learn.microsoft.com/windows/win32/api/mobsync/ne-mobsync-syncmgrstatus
 type SYNCMGRSTATUS int32
@@ -2720,6 +8297,35 @@ const (
 	SYNCMGRSTATUS_DELETED                SYNCMGRSTATUS = 256
 )
 
+// String returns the SYNCMGRSTATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGRSTATUS) String() string {
+	switch e {
+	case SYNCMGRSTATUS_STOPPED:
+		return "SYNCMGRSTATUS_STOPPED"
+	case SYNCMGRSTATUS_SKIPPED:
+		return "SYNCMGRSTATUS_SKIPPED"
+	case SYNCMGRSTATUS_PENDING:
+		return "SYNCMGRSTATUS_PENDING"
+	case SYNCMGRSTATUS_UPDATING:
+		return "SYNCMGRSTATUS_UPDATING"
+	case SYNCMGRSTATUS_SUCCEEDED:
+		return "SYNCMGRSTATUS_SUCCEEDED"
+	case SYNCMGRSTATUS_FAILED:
+		return "SYNCMGRSTATUS_FAILED"
+	case SYNCMGRSTATUS_PAUSED:
+		return "SYNCMGRSTATUS_PAUSED"
+	case SYNCMGRSTATUS_RESUMING:
+		return "SYNCMGRSTATUS_RESUMING"
+	case SYNCMGRSTATUS_UPDATING_INDETERMINATE:
+		return "SYNCMGRSTATUS_UPDATING_INDETERMINATE"
+	case SYNCMGRSTATUS_DELETED:
+		return "SYNCMGRSTATUS_DELETED"
+	default:
+		return fmt.Sprintf("SYNCMGRSTATUS(%d)", int32(e))
+	}
+}
+
 // SYNCMGR_CANCEL_REQUEST: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_cancel_request
 type SYNCMGR_CANCEL_REQUEST int32
 
@@ -2730,6 +8336,21 @@ const (
 	SYNCMGR_CR_MAX         SYNCMGR_CANCEL_REQUEST = 2
 )
 
+// String returns the SYNCMGR_CANCEL_REQUEST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_CANCEL_REQUEST) String() string {
+	switch e {
+	case SYNCMGR_CR_NONE:
+		return "SYNCMGR_CR_NONE"
+	case SYNCMGR_CR_CANCEL_ITEM:
+		return "SYNCMGR_CR_CANCEL_ITEM"
+	case SYNCMGR_CR_CANCEL_ALL:
+		return "SYNCMGR_CR_CANCEL_ALL"
+	default:
+		return fmt.Sprintf("SYNCMGR_CANCEL_REQUEST(%d)", int32(e))
+	}
+}
+
 // SYNCMGR_CONFLICT_ITEM_TYPE: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_conflict_item_type
 type SYNCMGR_CONFLICT_ITEM_TYPE int32
 
@@ -2737,6 +8358,19 @@ const (
 	SYNCMGR_CIT_UPDATED SYNCMGR_CONFLICT_ITEM_TYPE = 1
 	SYNCMGR_CIT_DELETED SYNCMGR_CONFLICT_ITEM_TYPE = 2
 )
+
+// String returns the SYNCMGR_CONFLICT_ITEM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_CONFLICT_ITEM_TYPE) String() string {
+	switch e {
+	case SYNCMGR_CIT_UPDATED:
+		return "SYNCMGR_CIT_UPDATED"
+	case SYNCMGR_CIT_DELETED:
+		return "SYNCMGR_CIT_DELETED"
+	default:
+		return fmt.Sprintf("SYNCMGR_CONFLICT_ITEM_TYPE(%d)", int32(e))
+	}
+}
 
 // SYNCMGR_CONTROL_FLAGS: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_control_flags
 type SYNCMGR_CONTROL_FLAGS int32
@@ -2749,6 +8383,23 @@ const (
 	SYNCMGR_CF_VALID  SYNCMGR_CONTROL_FLAGS = 3
 )
 
+// String returns the SYNCMGR_CONTROL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_CONTROL_FLAGS) String() string {
+	switch e {
+	case SYNCMGR_CF_NONE:
+		return "SYNCMGR_CF_NONE"
+	case SYNCMGR_CF_WAIT:
+		return "SYNCMGR_CF_WAIT"
+	case SYNCMGR_CF_NOUI:
+		return "SYNCMGR_CF_NOUI"
+	case SYNCMGR_CF_VALID:
+		return "SYNCMGR_CF_VALID"
+	default:
+		return fmt.Sprintf("SYNCMGR_CONTROL_FLAGS(%d)", int32(e))
+	}
+}
+
 // SYNCMGR_EVENT_FLAGS: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_event_flags
 type SYNCMGR_EVENT_FLAGS int32
 
@@ -2756,6 +8407,17 @@ const (
 	SYNCMGR_EF_NONE  SYNCMGR_EVENT_FLAGS = 0
 	SYNCMGR_EF_VALID SYNCMGR_EVENT_FLAGS = 0
 )
+
+// String returns the SYNCMGR_EVENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_EVENT_FLAGS) String() string {
+	switch e {
+	case SYNCMGR_EF_NONE:
+		return "SYNCMGR_EF_NONE"
+	default:
+		return fmt.Sprintf("SYNCMGR_EVENT_FLAGS(%d)", int32(e))
+	}
+}
 
 // SYNCMGR_EVENT_LEVEL: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_event_level
 type SYNCMGR_EVENT_LEVEL int32
@@ -2766,6 +8428,21 @@ const (
 	SYNCMGR_EL_ERROR       SYNCMGR_EVENT_LEVEL = 3
 	SYNCMGR_EL_MAX         SYNCMGR_EVENT_LEVEL = 3
 )
+
+// String returns the SYNCMGR_EVENT_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_EVENT_LEVEL) String() string {
+	switch e {
+	case SYNCMGR_EL_INFORMATION:
+		return "SYNCMGR_EL_INFORMATION"
+	case SYNCMGR_EL_WARNING:
+		return "SYNCMGR_EL_WARNING"
+	case SYNCMGR_EL_ERROR:
+		return "SYNCMGR_EL_ERROR"
+	default:
+		return fmt.Sprintf("SYNCMGR_EVENT_LEVEL(%d)", int32(e))
+	}
+}
 
 // SYNCMGR_HANDLER_CAPABILITIES: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_handler_capabilities
 type SYNCMGR_HANDLER_CAPABILITIES int32
@@ -2784,6 +8461,39 @@ const (
 	SYNCMGR_HCM_QUERY_BEFORE_DISABLE         SYNCMGR_HANDLER_CAPABILITIES = 8388608
 	SYNCMGR_HCM_VALID_MASK                   SYNCMGR_HANDLER_CAPABILITIES = 15925271
 )
+
+// String returns the SYNCMGR_HANDLER_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_HANDLER_CAPABILITIES) String() string {
+	switch e {
+	case SYNCMGR_HCM_NONE:
+		return "SYNCMGR_HCM_NONE"
+	case SYNCMGR_HCM_PROVIDES_ICON:
+		return "SYNCMGR_HCM_PROVIDES_ICON"
+	case SYNCMGR_HCM_EVENT_STORE:
+		return "SYNCMGR_HCM_EVENT_STORE"
+	case SYNCMGR_HCM_CONFLICT_STORE:
+		return "SYNCMGR_HCM_CONFLICT_STORE"
+	case SYNCMGR_HCM_SUPPORTS_CONCURRENT_SESSIONS:
+		return "SYNCMGR_HCM_SUPPORTS_CONCURRENT_SESSIONS"
+	case SYNCMGR_HCM_CAN_BROWSE_CONTENT:
+		return "SYNCMGR_HCM_CAN_BROWSE_CONTENT"
+	case SYNCMGR_HCM_CAN_SHOW_SCHEDULE:
+		return "SYNCMGR_HCM_CAN_SHOW_SCHEDULE"
+	case SYNCMGR_HCM_QUERY_BEFORE_ACTIVATE:
+		return "SYNCMGR_HCM_QUERY_BEFORE_ACTIVATE"
+	case SYNCMGR_HCM_QUERY_BEFORE_DEACTIVATE:
+		return "SYNCMGR_HCM_QUERY_BEFORE_DEACTIVATE"
+	case SYNCMGR_HCM_QUERY_BEFORE_ENABLE:
+		return "SYNCMGR_HCM_QUERY_BEFORE_ENABLE"
+	case SYNCMGR_HCM_QUERY_BEFORE_DISABLE:
+		return "SYNCMGR_HCM_QUERY_BEFORE_DISABLE"
+	case SYNCMGR_HCM_VALID_MASK:
+		return "SYNCMGR_HCM_VALID_MASK"
+	default:
+		return fmt.Sprintf("SYNCMGR_HANDLER_CAPABILITIES(%d)", int32(e))
+	}
+}
 
 // SYNCMGR_HANDLER_POLICIES: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_handler_policies
 type SYNCMGR_HANDLER_POLICIES int32
@@ -2807,6 +8517,47 @@ const (
 	SYNCMGR_HPM_VALID_MASK           SYNCMGR_HANDLER_POLICIES = 77631
 )
 
+// String returns the SYNCMGR_HANDLER_POLICIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_HANDLER_POLICIES) String() string {
+	switch e {
+	case SYNCMGR_HPM_NONE:
+		return "SYNCMGR_HPM_NONE"
+	case SYNCMGR_HPM_PREVENT_ACTIVATE:
+		return "SYNCMGR_HPM_PREVENT_ACTIVATE"
+	case SYNCMGR_HPM_PREVENT_DEACTIVATE:
+		return "SYNCMGR_HPM_PREVENT_DEACTIVATE"
+	case SYNCMGR_HPM_PREVENT_ENABLE:
+		return "SYNCMGR_HPM_PREVENT_ENABLE"
+	case SYNCMGR_HPM_PREVENT_DISABLE:
+		return "SYNCMGR_HPM_PREVENT_DISABLE"
+	case SYNCMGR_HPM_PREVENT_START_SYNC:
+		return "SYNCMGR_HPM_PREVENT_START_SYNC"
+	case SYNCMGR_HPM_PREVENT_STOP_SYNC:
+		return "SYNCMGR_HPM_PREVENT_STOP_SYNC"
+	case SYNCMGR_HPM_DISABLE_ENABLE:
+		return "SYNCMGR_HPM_DISABLE_ENABLE"
+	case SYNCMGR_HPM_DISABLE_DISABLE:
+		return "SYNCMGR_HPM_DISABLE_DISABLE"
+	case SYNCMGR_HPM_DISABLE_START_SYNC:
+		return "SYNCMGR_HPM_DISABLE_START_SYNC"
+	case SYNCMGR_HPM_DISABLE_STOP_SYNC:
+		return "SYNCMGR_HPM_DISABLE_STOP_SYNC"
+	case SYNCMGR_HPM_DISABLE_BROWSE:
+		return "SYNCMGR_HPM_DISABLE_BROWSE"
+	case SYNCMGR_HPM_DISABLE_SCHEDULE:
+		return "SYNCMGR_HPM_DISABLE_SCHEDULE"
+	case SYNCMGR_HPM_HIDDEN_BY_DEFAULT:
+		return "SYNCMGR_HPM_HIDDEN_BY_DEFAULT"
+	case SYNCMGR_HPM_BACKGROUND_SYNC_ONLY:
+		return "SYNCMGR_HPM_BACKGROUND_SYNC_ONLY"
+	case SYNCMGR_HPM_VALID_MASK:
+		return "SYNCMGR_HPM_VALID_MASK"
+	default:
+		return fmt.Sprintf("SYNCMGR_HANDLER_POLICIES(%d)", int32(e))
+	}
+}
+
 // SYNCMGR_HANDLER_TYPE: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_handler_type
 type SYNCMGR_HANDLER_TYPE int32
 
@@ -2820,6 +8571,27 @@ const (
 	SYNCMGR_HT_MIN         SYNCMGR_HANDLER_TYPE = 0
 	SYNCMGR_HT_MAX         SYNCMGR_HANDLER_TYPE = 5
 )
+
+// String returns the SYNCMGR_HANDLER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_HANDLER_TYPE) String() string {
+	switch e {
+	case SYNCMGR_HT_UNSPECIFIED:
+		return "SYNCMGR_HT_UNSPECIFIED"
+	case SYNCMGR_HT_APPLICATION:
+		return "SYNCMGR_HT_APPLICATION"
+	case SYNCMGR_HT_DEVICE:
+		return "SYNCMGR_HT_DEVICE"
+	case SYNCMGR_HT_FOLDER:
+		return "SYNCMGR_HT_FOLDER"
+	case SYNCMGR_HT_SERVICE:
+		return "SYNCMGR_HT_SERVICE"
+	case SYNCMGR_HT_COMPUTER:
+		return "SYNCMGR_HT_COMPUTER"
+	default:
+		return fmt.Sprintf("SYNCMGR_HANDLER_TYPE(%d)", int32(e))
+	}
+}
 
 // SYNCMGR_ITEM_CAPABILITIES: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_item_capabilities
 type SYNCMGR_ITEM_CAPABILITIES int32
@@ -2836,6 +8608,35 @@ const (
 	SYNCMGR_ICM_QUERY_BEFORE_DELETE  SYNCMGR_ITEM_CAPABILITIES = 4194304
 	SYNCMGR_ICM_VALID_MASK           SYNCMGR_ITEM_CAPABILITIES = 7405591
 )
+
+// String returns the SYNCMGR_ITEM_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_ITEM_CAPABILITIES) String() string {
+	switch e {
+	case SYNCMGR_ICM_NONE:
+		return "SYNCMGR_ICM_NONE"
+	case SYNCMGR_ICM_PROVIDES_ICON:
+		return "SYNCMGR_ICM_PROVIDES_ICON"
+	case SYNCMGR_ICM_EVENT_STORE:
+		return "SYNCMGR_ICM_EVENT_STORE"
+	case SYNCMGR_ICM_CONFLICT_STORE:
+		return "SYNCMGR_ICM_CONFLICT_STORE"
+	case SYNCMGR_ICM_CAN_DELETE:
+		return "SYNCMGR_ICM_CAN_DELETE"
+	case SYNCMGR_ICM_CAN_BROWSE_CONTENT:
+		return "SYNCMGR_ICM_CAN_BROWSE_CONTENT"
+	case SYNCMGR_ICM_QUERY_BEFORE_ENABLE:
+		return "SYNCMGR_ICM_QUERY_BEFORE_ENABLE"
+	case SYNCMGR_ICM_QUERY_BEFORE_DISABLE:
+		return "SYNCMGR_ICM_QUERY_BEFORE_DISABLE"
+	case SYNCMGR_ICM_QUERY_BEFORE_DELETE:
+		return "SYNCMGR_ICM_QUERY_BEFORE_DELETE"
+	case SYNCMGR_ICM_VALID_MASK:
+		return "SYNCMGR_ICM_VALID_MASK"
+	default:
+		return fmt.Sprintf("SYNCMGR_ITEM_CAPABILITIES(%d)", int32(e))
+	}
+}
 
 // SYNCMGR_ITEM_POLICIES: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_item_policies
 type SYNCMGR_ITEM_POLICIES int32
@@ -2856,6 +8657,41 @@ const (
 	SYNCMGR_IPM_VALID_MASK         SYNCMGR_ITEM_POLICIES = 66303
 )
 
+// String returns the SYNCMGR_ITEM_POLICIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_ITEM_POLICIES) String() string {
+	switch e {
+	case SYNCMGR_IPM_NONE:
+		return "SYNCMGR_IPM_NONE"
+	case SYNCMGR_IPM_PREVENT_ENABLE:
+		return "SYNCMGR_IPM_PREVENT_ENABLE"
+	case SYNCMGR_IPM_PREVENT_DISABLE:
+		return "SYNCMGR_IPM_PREVENT_DISABLE"
+	case SYNCMGR_IPM_PREVENT_START_SYNC:
+		return "SYNCMGR_IPM_PREVENT_START_SYNC"
+	case SYNCMGR_IPM_PREVENT_STOP_SYNC:
+		return "SYNCMGR_IPM_PREVENT_STOP_SYNC"
+	case SYNCMGR_IPM_DISABLE_ENABLE:
+		return "SYNCMGR_IPM_DISABLE_ENABLE"
+	case SYNCMGR_IPM_DISABLE_DISABLE:
+		return "SYNCMGR_IPM_DISABLE_DISABLE"
+	case SYNCMGR_IPM_DISABLE_START_SYNC:
+		return "SYNCMGR_IPM_DISABLE_START_SYNC"
+	case SYNCMGR_IPM_DISABLE_STOP_SYNC:
+		return "SYNCMGR_IPM_DISABLE_STOP_SYNC"
+	case SYNCMGR_IPM_DISABLE_BROWSE:
+		return "SYNCMGR_IPM_DISABLE_BROWSE"
+	case SYNCMGR_IPM_DISABLE_DELETE:
+		return "SYNCMGR_IPM_DISABLE_DELETE"
+	case SYNCMGR_IPM_HIDDEN_BY_DEFAULT:
+		return "SYNCMGR_IPM_HIDDEN_BY_DEFAULT"
+	case SYNCMGR_IPM_VALID_MASK:
+		return "SYNCMGR_IPM_VALID_MASK"
+	default:
+		return fmt.Sprintf("SYNCMGR_ITEM_POLICIES(%d)", int32(e))
+	}
+}
+
 // SYNCMGR_PRESENTER_CHOICE: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_presenter_choice
 type SYNCMGR_PRESENTER_CHOICE int32
 
@@ -2868,6 +8704,27 @@ const (
 	SYNCMGR_PC_SKIP                 SYNCMGR_PRESENTER_CHOICE = 5
 )
 
+// String returns the SYNCMGR_PRESENTER_CHOICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_PRESENTER_CHOICE) String() string {
+	switch e {
+	case SYNCMGR_PC_NO_CHOICE:
+		return "SYNCMGR_PC_NO_CHOICE"
+	case SYNCMGR_PC_KEEP_ONE:
+		return "SYNCMGR_PC_KEEP_ONE"
+	case SYNCMGR_PC_KEEP_MULTIPLE:
+		return "SYNCMGR_PC_KEEP_MULTIPLE"
+	case SYNCMGR_PC_KEEP_RECENT:
+		return "SYNCMGR_PC_KEEP_RECENT"
+	case SYNCMGR_PC_REMOVE_FROM_SYNC_SET:
+		return "SYNCMGR_PC_REMOVE_FROM_SYNC_SET"
+	case SYNCMGR_PC_SKIP:
+		return "SYNCMGR_PC_SKIP"
+	default:
+		return fmt.Sprintf("SYNCMGR_PRESENTER_CHOICE(%d)", int32(e))
+	}
+}
+
 // SYNCMGR_PRESENTER_NEXT_STEP: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_presenter_next_step
 type SYNCMGR_PRESENTER_NEXT_STEP int32
 
@@ -2876,6 +8733,21 @@ const (
 	SYNCMGR_PNS_DEFAULT  SYNCMGR_PRESENTER_NEXT_STEP = 1
 	SYNCMGR_PNS_CANCEL   SYNCMGR_PRESENTER_NEXT_STEP = 2
 )
+
+// String returns the SYNCMGR_PRESENTER_NEXT_STEP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_PRESENTER_NEXT_STEP) String() string {
+	switch e {
+	case SYNCMGR_PNS_CONTINUE:
+		return "SYNCMGR_PNS_CONTINUE"
+	case SYNCMGR_PNS_DEFAULT:
+		return "SYNCMGR_PNS_DEFAULT"
+	case SYNCMGR_PNS_CANCEL:
+		return "SYNCMGR_PNS_CANCEL"
+	default:
+		return fmt.Sprintf("SYNCMGR_PRESENTER_NEXT_STEP(%d)", int32(e))
+	}
+}
 
 // SYNCMGR_PROGRESS_STATUS: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_progress_status
 type SYNCMGR_PROGRESS_STATUS int32
@@ -2890,6 +8762,27 @@ const (
 	SYNCMGR_PS_MAX                    SYNCMGR_PROGRESS_STATUS = 6
 )
 
+// String returns the SYNCMGR_PROGRESS_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_PROGRESS_STATUS) String() string {
+	switch e {
+	case SYNCMGR_PS_UPDATING:
+		return "SYNCMGR_PS_UPDATING"
+	case SYNCMGR_PS_UPDATING_INDETERMINATE:
+		return "SYNCMGR_PS_UPDATING_INDETERMINATE"
+	case SYNCMGR_PS_SUCCEEDED:
+		return "SYNCMGR_PS_SUCCEEDED"
+	case SYNCMGR_PS_FAILED:
+		return "SYNCMGR_PS_FAILED"
+	case SYNCMGR_PS_CANCELED:
+		return "SYNCMGR_PS_CANCELED"
+	case SYNCMGR_PS_DISCONNECTED:
+		return "SYNCMGR_PS_DISCONNECTED"
+	default:
+		return fmt.Sprintf("SYNCMGR_PROGRESS_STATUS(%d)", int32(e))
+	}
+}
+
 // SYNCMGR_RESOLUTION_ABILITIES: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_resolution_abilities
 type SYNCMGR_RESOLUTION_ABILITIES int32
 
@@ -2902,6 +8795,27 @@ const (
 	SYNCMGR_RA_VALID             SYNCMGR_RESOLUTION_ABILITIES = 31
 )
 
+// String returns the SYNCMGR_RESOLUTION_ABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_RESOLUTION_ABILITIES) String() string {
+	switch e {
+	case SYNCMGR_RA_KEEPOTHER:
+		return "SYNCMGR_RA_KEEPOTHER"
+	case SYNCMGR_RA_KEEPRECENT:
+		return "SYNCMGR_RA_KEEPRECENT"
+	case SYNCMGR_RA_REMOVEFROMSYNCSET:
+		return "SYNCMGR_RA_REMOVEFROMSYNCSET"
+	case SYNCMGR_RA_KEEP_SINGLE:
+		return "SYNCMGR_RA_KEEP_SINGLE"
+	case SYNCMGR_RA_KEEP_MULTIPLE:
+		return "SYNCMGR_RA_KEEP_MULTIPLE"
+	case SYNCMGR_RA_VALID:
+		return "SYNCMGR_RA_VALID"
+	default:
+		return fmt.Sprintf("SYNCMGR_RESOLUTION_ABILITIES(%d)", int32(e))
+	}
+}
+
 // SYNCMGR_RESOLUTION_FEEDBACK: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_resolution_feedback
 type SYNCMGR_RESOLUTION_FEEDBACK int32
 
@@ -2910,6 +8824,21 @@ const (
 	SYNCMGR_RF_REFRESH  SYNCMGR_RESOLUTION_FEEDBACK = 1
 	SYNCMGR_RF_CANCEL   SYNCMGR_RESOLUTION_FEEDBACK = 2
 )
+
+// String returns the SYNCMGR_RESOLUTION_FEEDBACK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_RESOLUTION_FEEDBACK) String() string {
+	switch e {
+	case SYNCMGR_RF_CONTINUE:
+		return "SYNCMGR_RF_CONTINUE"
+	case SYNCMGR_RF_REFRESH:
+		return "SYNCMGR_RF_REFRESH"
+	case SYNCMGR_RF_CANCEL:
+		return "SYNCMGR_RF_CANCEL"
+	default:
+		return fmt.Sprintf("SYNCMGR_RESOLUTION_FEEDBACK(%d)", int32(e))
+	}
+}
 
 // SYNCMGR_SYNC_CONTROL_FLAGS: https://learn.microsoft.com/windows/win32/api/syncmgr/ne-syncmgr-syncmgr_sync_control_flags
 type SYNCMGR_SYNC_CONTROL_FLAGS int32
@@ -2920,6 +8849,19 @@ const (
 	SYNCMGR_SCF_VALID                     SYNCMGR_SYNC_CONTROL_FLAGS = 1
 )
 
+// String returns the SYNCMGR_SYNC_CONTROL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_SYNC_CONTROL_FLAGS) String() string {
+	switch e {
+	case SYNCMGR_SCF_NONE:
+		return "SYNCMGR_SCF_NONE"
+	case SYNCMGR_SCF_IGNORE_IF_ALREADY_SYNCING:
+		return "SYNCMGR_SCF_IGNORE_IF_ALREADY_SYNCING"
+	default:
+		return fmt.Sprintf("SYNCMGR_SYNC_CONTROL_FLAGS(%d)", int32(e))
+	}
+}
+
 type SYNCMGR_UPDATE_REASON int32
 
 const (
@@ -2928,6 +8870,21 @@ const (
 	SYNCMGR_UR_REMOVED SYNCMGR_UPDATE_REASON = 2
 	SYNCMGR_UR_MAX     SYNCMGR_UPDATE_REASON = 2
 )
+
+// String returns the SYNCMGR_UPDATE_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNCMGR_UPDATE_REASON) String() string {
+	switch e {
+	case SYNCMGR_UR_ADDED:
+		return "SYNCMGR_UR_ADDED"
+	case SYNCMGR_UR_CHANGED:
+		return "SYNCMGR_UR_CHANGED"
+	case SYNCMGR_UR_REMOVED:
+		return "SYNCMGR_UR_REMOVED"
+	default:
+		return fmt.Sprintf("SYNCMGR_UPDATE_REASON(%d)", int32(e))
+	}
+}
 
 type SecureLockIconConstants int32
 
@@ -2941,6 +8898,29 @@ const (
 	SecureLockIconSecure128Bit      SecureLockIconConstants = 6
 )
 
+// String returns the SecureLockIconConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SecureLockIconConstants) String() string {
+	switch e {
+	case SecureLockIconUnsecure:
+		return "SecureLockIconUnsecure"
+	case SecureLockIconMixed:
+		return "SecureLockIconMixed"
+	case SecureLockIconSecureUnknownBits:
+		return "SecureLockIconSecureUnknownBits"
+	case SecureLockIconSecure40Bit:
+		return "SecureLockIconSecure40Bit"
+	case SecureLockIconSecure56Bit:
+		return "SecureLockIconSecure56Bit"
+	case SecureLockIconSecureFortezza:
+		return "SecureLockIconSecureFortezza"
+	case SecureLockIconSecure128Bit:
+		return "SecureLockIconSecure128Bit"
+	default:
+		return fmt.Sprintf("SecureLockIconConstants(%d)", int32(e))
+	}
+}
+
 // ShellFolderViewOptions: https://learn.microsoft.com/windows/win32/api/shldisp/ne-shldisp-shellfolderviewoptions
 type ShellFolderViewOptions int32
 
@@ -2953,6 +8933,29 @@ const (
 	SFVVO_DOUBLECLICKINWEBVIEW ShellFolderViewOptions = 128
 	SFVVO_DESKTOPHTML          ShellFolderViewOptions = 512
 )
+
+// String returns the ShellFolderViewOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ShellFolderViewOptions) String() string {
+	switch e {
+	case SFVVO_SHOWALLOBJECTS:
+		return "SFVVO_SHOWALLOBJECTS"
+	case SFVVO_SHOWEXTENSIONS:
+		return "SFVVO_SHOWEXTENSIONS"
+	case SFVVO_SHOWCOMPCOLOR:
+		return "SFVVO_SHOWCOMPCOLOR"
+	case SFVVO_SHOWSYSFILES:
+		return "SFVVO_SHOWSYSFILES"
+	case SFVVO_WIN95CLASSIC:
+		return "SFVVO_WIN95CLASSIC"
+	case SFVVO_DOUBLECLICKINWEBVIEW:
+		return "SFVVO_DOUBLECLICKINWEBVIEW"
+	case SFVVO_DESKTOPHTML:
+		return "SFVVO_DESKTOPHTML"
+	default:
+		return fmt.Sprintf("ShellFolderViewOptions(%d)", int32(e))
+	}
+}
 
 // ShellSpecialFolderConstants: https://learn.microsoft.com/windows/win32/api/shldisp/ne-shldisp-shellspecialfolderconstants
 type ShellSpecialFolderConstants int32
@@ -2998,6 +9001,91 @@ const (
 	SsfPROGRAMFILESx86  ShellSpecialFolderConstants = 48
 )
 
+// String returns the ShellSpecialFolderConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ShellSpecialFolderConstants) String() string {
+	switch e {
+	case SsfDESKTOP:
+		return "SsfDESKTOP"
+	case SsfPROGRAMS:
+		return "SsfPROGRAMS"
+	case SsfCONTROLS:
+		return "SsfCONTROLS"
+	case SsfPRINTERS:
+		return "SsfPRINTERS"
+	case SsfPERSONAL:
+		return "SsfPERSONAL"
+	case SsfFAVORITES:
+		return "SsfFAVORITES"
+	case SsfSTARTUP:
+		return "SsfSTARTUP"
+	case SsfRECENT:
+		return "SsfRECENT"
+	case SsfSENDTO:
+		return "SsfSENDTO"
+	case SsfBITBUCKET:
+		return "SsfBITBUCKET"
+	case SsfSTARTMENU:
+		return "SsfSTARTMENU"
+	case SsfDESKTOPDIRECTORY:
+		return "SsfDESKTOPDIRECTORY"
+	case SsfDRIVES:
+		return "SsfDRIVES"
+	case SsfNETWORK:
+		return "SsfNETWORK"
+	case SsfNETHOOD:
+		return "SsfNETHOOD"
+	case SsfFONTS:
+		return "SsfFONTS"
+	case SsfTEMPLATES:
+		return "SsfTEMPLATES"
+	case SsfCOMMONSTARTMENU:
+		return "SsfCOMMONSTARTMENU"
+	case SsfCOMMONPROGRAMS:
+		return "SsfCOMMONPROGRAMS"
+	case SsfCOMMONSTARTUP:
+		return "SsfCOMMONSTARTUP"
+	case SsfCOMMONDESKTOPDIR:
+		return "SsfCOMMONDESKTOPDIR"
+	case SsfAPPDATA:
+		return "SsfAPPDATA"
+	case SsfPRINTHOOD:
+		return "SsfPRINTHOOD"
+	case SsfLOCALAPPDATA:
+		return "SsfLOCALAPPDATA"
+	case SsfALTSTARTUP:
+		return "SsfALTSTARTUP"
+	case SsfCOMMONALTSTARTUP:
+		return "SsfCOMMONALTSTARTUP"
+	case SsfCOMMONFAVORITES:
+		return "SsfCOMMONFAVORITES"
+	case SsfINTERNETCACHE:
+		return "SsfINTERNETCACHE"
+	case SsfCOOKIES:
+		return "SsfCOOKIES"
+	case SsfHISTORY:
+		return "SsfHISTORY"
+	case SsfCOMMONAPPDATA:
+		return "SsfCOMMONAPPDATA"
+	case SsfWINDOWS:
+		return "SsfWINDOWS"
+	case SsfSYSTEM:
+		return "SsfSYSTEM"
+	case SsfPROGRAMFILES:
+		return "SsfPROGRAMFILES"
+	case SsfMYPICTURES:
+		return "SsfMYPICTURES"
+	case SsfPROFILE:
+		return "SsfPROFILE"
+	case SsfSYSTEMx86:
+		return "SsfSYSTEMx86"
+	case SsfPROGRAMFILESx86:
+		return "SsfPROGRAMFILESx86"
+	default:
+		return fmt.Sprintf("ShellSpecialFolderConstants(%d)", int32(e))
+	}
+}
+
 // ShellWindowFindWindowOptions: https://learn.microsoft.com/windows/win32/api/exdisp/ne-exdisp-shellwindowfindwindowoptions
 type ShellWindowFindWindowOptions int32
 
@@ -3006,6 +9094,21 @@ const (
 	SWFO_INCLUDEPENDING ShellWindowFindWindowOptions = 2
 	SWFO_COOKIEPASSED   ShellWindowFindWindowOptions = 4
 )
+
+// String returns the ShellWindowFindWindowOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ShellWindowFindWindowOptions) String() string {
+	switch e {
+	case SWFO_NEEDDISPATCH:
+		return "SWFO_NEEDDISPATCH"
+	case SWFO_INCLUDEPENDING:
+		return "SWFO_INCLUDEPENDING"
+	case SWFO_COOKIEPASSED:
+		return "SWFO_COOKIEPASSED"
+	default:
+		return fmt.Sprintf("ShellWindowFindWindowOptions(%d)", int32(e))
+	}
+}
 
 // ShellWindowTypeConstants: https://learn.microsoft.com/windows/win32/api/exdisp/ne-exdisp-shellwindowtypeconstants
 type ShellWindowTypeConstants int32
@@ -3018,6 +9121,26 @@ const (
 	SWC_DESKTOP  ShellWindowTypeConstants = 8
 )
 
+// String returns the ShellWindowTypeConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ShellWindowTypeConstants) String() string {
+	switch e {
+	case SWC_EXPLORER:
+		return "SWC_EXPLORER"
+	case SWC_BROWSER:
+		return "SWC_BROWSER"
+	case SWC_3RDPARTY:
+		return "SWC_3RDPARTY"
+	case SWC_CALLBACK:
+		return "SWC_CALLBACK"
+	case SWC_DESKTOP:
+		return "SWC_DESKTOP"
+	default:
+		return fmt.Sprintf("ShellWindowTypeConstants(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TBPFLAG int32
 
 const (
@@ -3028,7 +9151,30 @@ const (
 	TBPF_PAUSED        TBPFLAG = 8
 )
 
+// String returns the TBPFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TBPFLAG) String() string {
+	var parts []string
+	if e&TBPF_INDETERMINATE != 0 {
+		parts = append(parts, "TBPF_INDETERMINATE")
+	}
+	if e&TBPF_NORMAL != 0 {
+		parts = append(parts, "TBPF_NORMAL")
+	}
+	if e&TBPF_ERROR != 0 {
+		parts = append(parts, "TBPF_ERROR")
+	}
+	if e&TBPF_PAUSED != 0 {
+		parts = append(parts, "TBPF_PAUSED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // THUMBBUTTONFLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-thumbbuttonflags
+// Bitmask — values may be combined with |.
 type THUMBBUTTONFLAGS int32
 
 const (
@@ -3040,7 +9186,33 @@ const (
 	THBF_NONINTERACTIVE THUMBBUTTONFLAGS = 16
 )
 
+// String returns the THUMBBUTTONFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THUMBBUTTONFLAGS) String() string {
+	var parts []string
+	if e&THBF_DISABLED != 0 {
+		parts = append(parts, "THBF_DISABLED")
+	}
+	if e&THBF_DISMISSONCLICK != 0 {
+		parts = append(parts, "THBF_DISMISSONCLICK")
+	}
+	if e&THBF_NOBACKGROUND != 0 {
+		parts = append(parts, "THBF_NOBACKGROUND")
+	}
+	if e&THBF_HIDDEN != 0 {
+		parts = append(parts, "THBF_HIDDEN")
+	}
+	if e&THBF_NONINTERACTIVE != 0 {
+		parts = append(parts, "THBF_NONINTERACTIVE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // THUMBBUTTONMASK: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-thumbbuttonmask
+// Bitmask — values may be combined with |.
 type THUMBBUTTONMASK int32
 
 const (
@@ -3050,12 +9222,47 @@ const (
 	THB_FLAGS   THUMBBUTTONMASK = 8
 )
 
+// String returns the THUMBBUTTONMASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THUMBBUTTONMASK) String() string {
+	var parts []string
+	if e&THB_BITMAP != 0 {
+		parts = append(parts, "THB_BITMAP")
+	}
+	if e&THB_ICON != 0 {
+		parts = append(parts, "THB_ICON")
+	}
+	if e&THB_TOOLTIP != 0 {
+		parts = append(parts, "THB_TOOLTIP")
+	}
+	if e&THB_FLAGS != 0 {
+		parts = append(parts, "THB_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type TI_FLAGS int32
 
 const (
 	TI_BITMAP TI_FLAGS = 1
 	TI_JPEG   TI_FLAGS = 2
 )
+
+// String returns the TI_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TI_FLAGS) String() string {
+	switch e {
+	case TI_BITMAP:
+		return "TI_BITMAP"
+	case TI_JPEG:
+		return "TI_JPEG"
+	default:
+		return fmt.Sprintf("TI_FLAGS(%d)", int32(e))
+	}
+}
 
 type TLENUMF int32
 
@@ -3069,6 +9276,29 @@ const (
 	TLEF_EXCLUDE_ABOUT_PAGES      TLENUMF = 256
 )
 
+// String returns the TLENUMF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TLENUMF) String() string {
+	switch e {
+	case TLEF_RELATIVE_INCLUDE_CURRENT:
+		return "TLEF_RELATIVE_INCLUDE_CURRENT"
+	case TLEF_RELATIVE_BACK:
+		return "TLEF_RELATIVE_BACK"
+	case TLEF_RELATIVE_FORE:
+		return "TLEF_RELATIVE_FORE"
+	case TLEF_INCLUDE_UNINVOKEABLE:
+		return "TLEF_INCLUDE_UNINVOKEABLE"
+	case TLEF_ABSOLUTE:
+		return "TLEF_ABSOLUTE"
+	case TLEF_EXCLUDE_SUBFRAME_ENTRIES:
+		return "TLEF_EXCLUDE_SUBFRAME_ENTRIES"
+	case TLEF_EXCLUDE_ABOUT_PAGES:
+		return "TLEF_EXCLUDE_ABOUT_PAGES"
+	default:
+		return fmt.Sprintf("TLENUMF(%d)", int32(e))
+	}
+}
+
 // TRANSLATEURL_IN_FLAGS: https://learn.microsoft.com/windows/win32/api/intshcut/ne-intshcut-translateurl_in_flags
 type TRANSLATEURL_IN_FLAGS int32
 
@@ -3077,7 +9307,21 @@ const (
 	TRANSLATEURL_FL_USE_DEFAULT_PROTOCOL TRANSLATEURL_IN_FLAGS = 2
 )
 
+// String returns the TRANSLATEURL_IN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSLATEURL_IN_FLAGS) String() string {
+	switch e {
+	case TRANSLATEURL_FL_GUESS_PROTOCOL:
+		return "TRANSLATEURL_FL_GUESS_PROTOCOL"
+	case TRANSLATEURL_FL_USE_DEFAULT_PROTOCOL:
+		return "TRANSLATEURL_FL_USE_DEFAULT_PROTOCOL"
+	default:
+		return fmt.Sprintf("TRANSLATEURL_IN_FLAGS(%d)", int32(e))
+	}
+}
+
 // ThumbnailStreamCacheOptions: https://learn.microsoft.com/windows/win32/api/thumbnailstreamcache/ne-thumbnailstreamcache-thumbnailstreamcacheoptions
+// Bitmask — values may be combined with |.
 type ThumbnailStreamCacheOptions int32
 
 const (
@@ -3087,6 +9331,25 @@ const (
 	AllowSmallerSize   ThumbnailStreamCacheOptions = 4
 )
 
+// String returns the ThumbnailStreamCacheOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ThumbnailStreamCacheOptions) String() string {
+	var parts []string
+	if e&ReturnOnlyIfCached != 0 {
+		parts = append(parts, "ReturnOnlyIfCached")
+	}
+	if e&ResizeThumbnail != 0 {
+		parts = append(parts, "ResizeThumbnail")
+	}
+	if e&AllowSmallerSize != 0 {
+		parts = append(parts, "AllowSmallerSize")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // UNDOCK_REASON: https://learn.microsoft.com/windows/win32/api/shobjidl/ne-shobjidl-undock_reason
 type UNDOCK_REASON int32
 
@@ -3095,6 +9358,19 @@ const (
 	UR_MONITOR_DISCONNECT UNDOCK_REASON = 1
 )
 
+// String returns the UNDOCK_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNDOCK_REASON) String() string {
+	switch e {
+	case UR_RESOLUTION_CHANGE:
+		return "UR_RESOLUTION_CHANGE"
+	case UR_MONITOR_DISCONNECT:
+		return "UR_MONITOR_DISCONNECT"
+	default:
+		return fmt.Sprintf("UNDOCK_REASON(%d)", int32(e))
+	}
+}
+
 // URLASSOCIATIONDIALOG_IN_FLAGS: https://learn.microsoft.com/windows/win32/api/intshcut/ne-intshcut-urlassociationdialog_in_flags
 type URLASSOCIATIONDIALOG_IN_FLAGS int32
 
@@ -3102,6 +9378,19 @@ const (
 	URLASSOCDLG_FL_USE_DEFAULT_NAME URLASSOCIATIONDIALOG_IN_FLAGS = 1
 	URLASSOCDLG_FL_REGISTER_ASSOC   URLASSOCIATIONDIALOG_IN_FLAGS = 2
 )
+
+// String returns the URLASSOCIATIONDIALOG_IN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e URLASSOCIATIONDIALOG_IN_FLAGS) String() string {
+	switch e {
+	case URLASSOCDLG_FL_USE_DEFAULT_NAME:
+		return "URLASSOCDLG_FL_USE_DEFAULT_NAME"
+	case URLASSOCDLG_FL_REGISTER_ASSOC:
+		return "URLASSOCDLG_FL_REGISTER_ASSOC"
+	default:
+		return fmt.Sprintf("URLASSOCIATIONDIALOG_IN_FLAGS(%d)", int32(e))
+	}
+}
 
 type URLIS int32
 
@@ -3115,6 +9404,29 @@ const (
 	URLIS_HASQUERY  URLIS = 6
 )
 
+// String returns the URLIS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e URLIS) String() string {
+	switch e {
+	case URLIS_URL:
+		return "URLIS_URL"
+	case URLIS_OPAQUE:
+		return "URLIS_OPAQUE"
+	case URLIS_NOHISTORY:
+		return "URLIS_NOHISTORY"
+	case URLIS_FILEURL:
+		return "URLIS_FILEURL"
+	case URLIS_APPLIABLE:
+		return "URLIS_APPLIABLE"
+	case URLIS_DIRECTORY:
+		return "URLIS_DIRECTORY"
+	case URLIS_HASQUERY:
+		return "URLIS_HASQUERY"
+	default:
+		return fmt.Sprintf("URLIS(%d)", int32(e))
+	}
+}
+
 type URL_PART int32
 
 const (
@@ -3126,6 +9438,29 @@ const (
 	URL_PART_PORT     URL_PART = 5
 	URL_PART_QUERY    URL_PART = 6
 )
+
+// String returns the URL_PART constant's name, or its numeric form when
+// the value is not a known constant.
+func (e URL_PART) String() string {
+	switch e {
+	case URL_PART_NONE:
+		return "URL_PART_NONE"
+	case URL_PART_SCHEME:
+		return "URL_PART_SCHEME"
+	case URL_PART_HOSTNAME:
+		return "URL_PART_HOSTNAME"
+	case URL_PART_USERNAME:
+		return "URL_PART_USERNAME"
+	case URL_PART_PASSWORD:
+		return "URL_PART_PASSWORD"
+	case URL_PART_PORT:
+		return "URL_PART_PORT"
+	case URL_PART_QUERY:
+		return "URL_PART_QUERY"
+	default:
+		return fmt.Sprintf("URL_PART(%d)", int32(e))
+	}
+}
 
 // URL_SCHEME: https://learn.microsoft.com/windows/win32/api/shlwapi/ne-shlwapi-url_scheme
 type URL_SCHEME int32
@@ -3162,6 +9497,74 @@ const (
 	URL_SCHEME_MAXVALUE      URL_SCHEME = 27
 )
 
+// String returns the URL_SCHEME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e URL_SCHEME) String() string {
+	switch e {
+	case URL_SCHEME_INVALID:
+		return "URL_SCHEME_INVALID"
+	case URL_SCHEME_UNKNOWN:
+		return "URL_SCHEME_UNKNOWN"
+	case URL_SCHEME_FTP:
+		return "URL_SCHEME_FTP"
+	case URL_SCHEME_HTTP:
+		return "URL_SCHEME_HTTP"
+	case URL_SCHEME_GOPHER:
+		return "URL_SCHEME_GOPHER"
+	case URL_SCHEME_MAILTO:
+		return "URL_SCHEME_MAILTO"
+	case URL_SCHEME_NEWS:
+		return "URL_SCHEME_NEWS"
+	case URL_SCHEME_NNTP:
+		return "URL_SCHEME_NNTP"
+	case URL_SCHEME_TELNET:
+		return "URL_SCHEME_TELNET"
+	case URL_SCHEME_WAIS:
+		return "URL_SCHEME_WAIS"
+	case URL_SCHEME_FILE:
+		return "URL_SCHEME_FILE"
+	case URL_SCHEME_MK:
+		return "URL_SCHEME_MK"
+	case URL_SCHEME_HTTPS:
+		return "URL_SCHEME_HTTPS"
+	case URL_SCHEME_SHELL:
+		return "URL_SCHEME_SHELL"
+	case URL_SCHEME_SNEWS:
+		return "URL_SCHEME_SNEWS"
+	case URL_SCHEME_LOCAL:
+		return "URL_SCHEME_LOCAL"
+	case URL_SCHEME_JAVASCRIPT:
+		return "URL_SCHEME_JAVASCRIPT"
+	case URL_SCHEME_VBSCRIPT:
+		return "URL_SCHEME_VBSCRIPT"
+	case URL_SCHEME_ABOUT:
+		return "URL_SCHEME_ABOUT"
+	case URL_SCHEME_RES:
+		return "URL_SCHEME_RES"
+	case URL_SCHEME_MSSHELLROOTED:
+		return "URL_SCHEME_MSSHELLROOTED"
+	case URL_SCHEME_MSSHELLIDLIST:
+		return "URL_SCHEME_MSSHELLIDLIST"
+	case URL_SCHEME_MSHELP:
+		return "URL_SCHEME_MSHELP"
+	case URL_SCHEME_MSSHELLDEVICE:
+		return "URL_SCHEME_MSSHELLDEVICE"
+	case URL_SCHEME_WILDCARD:
+		return "URL_SCHEME_WILDCARD"
+	case URL_SCHEME_SEARCH_MS:
+		return "URL_SCHEME_SEARCH_MS"
+	case URL_SCHEME_SEARCH:
+		return "URL_SCHEME_SEARCH"
+	case URL_SCHEME_KNOWNFOLDER:
+		return "URL_SCHEME_KNOWNFOLDER"
+	case URL_SCHEME_MAXVALUE:
+		return "URL_SCHEME_MAXVALUE"
+	default:
+		return fmt.Sprintf("URL_SCHEME(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type VALIDATEUNC_OPTION int32
 
 const (
@@ -3171,6 +9574,31 @@ const (
 	VALIDATEUNC_PERSIST VALIDATEUNC_OPTION = 8
 	VALIDATEUNC_VALID   VALIDATEUNC_OPTION = 15
 )
+
+// String returns the VALIDATEUNC_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VALIDATEUNC_OPTION) String() string {
+	var parts []string
+	if e&VALIDATEUNC_CONNECT != 0 {
+		parts = append(parts, "VALIDATEUNC_CONNECT")
+	}
+	if e&VALIDATEUNC_NOUI != 0 {
+		parts = append(parts, "VALIDATEUNC_NOUI")
+	}
+	if e&VALIDATEUNC_PRINT != 0 {
+		parts = append(parts, "VALIDATEUNC_PRINT")
+	}
+	if e&VALIDATEUNC_PERSIST != 0 {
+		parts = append(parts, "VALIDATEUNC_PERSIST")
+	}
+	if e&VALIDATEUNC_VALID != 0 {
+		parts = append(parts, "VALIDATEUNC_VALID")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // VPCOLORFLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl/ne-shobjidl-vpcolorflags
 type VPCOLORFLAGS int32
@@ -3183,13 +9611,46 @@ const (
 	VPCF_TEXTBACKGROUND VPCOLORFLAGS = 5
 )
 
+// String returns the VPCOLORFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VPCOLORFLAGS) String() string {
+	switch e {
+	case VPCF_TEXT:
+		return "VPCF_TEXT"
+	case VPCF_BACKGROUND:
+		return "VPCF_BACKGROUND"
+	case VPCF_SORTCOLUMN:
+		return "VPCF_SORTCOLUMN"
+	case VPCF_SUBTEXT:
+		return "VPCF_SUBTEXT"
+	case VPCF_TEXTBACKGROUND:
+		return "VPCF_TEXTBACKGROUND"
+	default:
+		return fmt.Sprintf("VPCOLORFLAGS(%d)", int32(e))
+	}
+}
+
 // VPWATERMARKFLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl/ne-shobjidl-vpwatermarkflags
+// Bitmask — values may be combined with |.
 type VPWATERMARKFLAGS int32
 
 const (
 	VPWF_DEFAULT    VPWATERMARKFLAGS = 0
 	VPWF_ALPHABLEND VPWATERMARKFLAGS = 1
 )
+
+// String returns the VPWATERMARKFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VPWATERMARKFLAGS) String() string {
+	var parts []string
+	if e&VPWF_ALPHABLEND != 0 {
+		parts = append(parts, "VPWF_ALPHABLEND")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type WTS_ALPHATYPE int32
 
@@ -3199,6 +9660,22 @@ const (
 	WTSAT_ARGB    WTS_ALPHATYPE = 2
 )
 
+// String returns the WTS_ALPHATYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_ALPHATYPE) String() string {
+	switch e {
+	case WTSAT_UNKNOWN:
+		return "WTSAT_UNKNOWN"
+	case WTSAT_RGB:
+		return "WTSAT_RGB"
+	case WTSAT_ARGB:
+		return "WTSAT_ARGB"
+	default:
+		return fmt.Sprintf("WTS_ALPHATYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WTS_CACHEFLAGS int32
 
 const (
@@ -3207,7 +9684,24 @@ const (
 	WTS_CACHED     WTS_CACHEFLAGS = 2
 )
 
+// String returns the WTS_CACHEFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_CACHEFLAGS) String() string {
+	var parts []string
+	if e&WTS_LOWQUALITY != 0 {
+		parts = append(parts, "WTS_LOWQUALITY")
+	}
+	if e&WTS_CACHED != 0 {
+		parts = append(parts, "WTS_CACHED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // WTS_CONTEXTFLAGS: https://learn.microsoft.com/windows/win32/api/thumbcache/ne-thumbcache-wts_contextflags
+// Bitmask — values may be combined with |.
 type WTS_CONTEXTFLAGS int32
 
 const (
@@ -3218,7 +9712,30 @@ const (
 	WTSCF_FAST     WTS_CONTEXTFLAGS = 8
 )
 
+// String returns the WTS_CONTEXTFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_CONTEXTFLAGS) String() string {
+	var parts []string
+	if e&WTSCF_APPSTYLE != 0 {
+		parts = append(parts, "WTSCF_APPSTYLE")
+	}
+	if e&WTSCF_SQUARE != 0 {
+		parts = append(parts, "WTSCF_SQUARE")
+	}
+	if e&WTSCF_WIDE != 0 {
+		parts = append(parts, "WTSCF_WIDE")
+	}
+	if e&WTSCF_FAST != 0 {
+		parts = append(parts, "WTSCF_FAST")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // WTS_FLAGS: https://learn.microsoft.com/windows/win32/api/thumbcache/ne-thumbcache-wts_flags
+// Bitmask — values may be combined with |.
 type WTS_FLAGS int32
 
 const (
@@ -3240,6 +9757,61 @@ const (
 	WTS_IDEALCACHESIZEONLY   WTS_FLAGS = 32768
 	WTS_SCALEUP              WTS_FLAGS = 65536
 )
+
+// String returns the WTS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_FLAGS) String() string {
+	var parts []string
+	if e&WTS_INCACHEONLY != 0 {
+		parts = append(parts, "WTS_INCACHEONLY")
+	}
+	if e&WTS_FASTEXTRACT != 0 {
+		parts = append(parts, "WTS_FASTEXTRACT")
+	}
+	if e&WTS_FORCEEXTRACTION != 0 {
+		parts = append(parts, "WTS_FORCEEXTRACTION")
+	}
+	if e&WTS_SLOWRECLAIM != 0 {
+		parts = append(parts, "WTS_SLOWRECLAIM")
+	}
+	if e&WTS_EXTRACTDONOTCACHE != 0 {
+		parts = append(parts, "WTS_EXTRACTDONOTCACHE")
+	}
+	if e&WTS_SCALETOREQUESTEDSIZE != 0 {
+		parts = append(parts, "WTS_SCALETOREQUESTEDSIZE")
+	}
+	if e&WTS_SKIPFASTEXTRACT != 0 {
+		parts = append(parts, "WTS_SKIPFASTEXTRACT")
+	}
+	if e&WTS_EXTRACTINPROC != 0 {
+		parts = append(parts, "WTS_EXTRACTINPROC")
+	}
+	if e&WTS_CROPTOSQUARE != 0 {
+		parts = append(parts, "WTS_CROPTOSQUARE")
+	}
+	if e&WTS_INSTANCESURROGATE != 0 {
+		parts = append(parts, "WTS_INSTANCESURROGATE")
+	}
+	if e&WTS_REQUIRESURROGATE != 0 {
+		parts = append(parts, "WTS_REQUIRESURROGATE")
+	}
+	if e&WTS_APPSTYLE != 0 {
+		parts = append(parts, "WTS_APPSTYLE")
+	}
+	if e&WTS_WIDETHUMBNAILS != 0 {
+		parts = append(parts, "WTS_WIDETHUMBNAILS")
+	}
+	if e&WTS_IDEALCACHESIZEONLY != 0 {
+		parts = append(parts, "WTS_IDEALCACHESIZEONLY")
+	}
+	if e&WTS_SCALEUP != 0 {
+		parts = append(parts, "WTS_SCALEUP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // BROWSERFRAMEOPTIONS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_browserframeoptions
 type BROWSERFRAMEOPTIONS int32
@@ -3267,6 +9839,55 @@ const (
 	BFO_QUERY_ALL                        BROWSERFRAMEOPTIONS = -1
 )
 
+// String returns the BROWSERFRAMEOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BROWSERFRAMEOPTIONS) String() string {
+	switch e {
+	case BFO_NONE:
+		return "BFO_NONE"
+	case BFO_BROWSER_PERSIST_SETTINGS:
+		return "BFO_BROWSER_PERSIST_SETTINGS"
+	case BFO_RENAME_FOLDER_OPTIONS_TOINTERNET:
+		return "BFO_RENAME_FOLDER_OPTIONS_TOINTERNET"
+	case BFO_BOTH_OPTIONS:
+		return "BFO_BOTH_OPTIONS"
+	case BIF_PREFER_INTERNET_SHORTCUT:
+		return "BIF_PREFER_INTERNET_SHORTCUT"
+	case BFO_BROWSE_NO_IN_NEW_PROCESS:
+		return "BFO_BROWSE_NO_IN_NEW_PROCESS"
+	case BFO_ENABLE_HYPERLINK_TRACKING:
+		return "BFO_ENABLE_HYPERLINK_TRACKING"
+	case BFO_USE_IE_OFFLINE_SUPPORT:
+		return "BFO_USE_IE_OFFLINE_SUPPORT"
+	case BFO_SUBSTITUE_INTERNET_START_PAGE:
+		return "BFO_SUBSTITUE_INTERNET_START_PAGE"
+	case BFO_USE_IE_LOGOBANDING:
+		return "BFO_USE_IE_LOGOBANDING"
+	case BFO_ADD_IE_TOCAPTIONBAR:
+		return "BFO_ADD_IE_TOCAPTIONBAR"
+	case BFO_USE_DIALUP_REF:
+		return "BFO_USE_DIALUP_REF"
+	case BFO_USE_IE_TOOLBAR:
+		return "BFO_USE_IE_TOOLBAR"
+	case BFO_NO_PARENT_FOLDER_SUPPORT:
+		return "BFO_NO_PARENT_FOLDER_SUPPORT"
+	case BFO_NO_REOPEN_NEXT_RESTART:
+		return "BFO_NO_REOPEN_NEXT_RESTART"
+	case BFO_GO_HOME_PAGE:
+		return "BFO_GO_HOME_PAGE"
+	case BFO_PREFER_IEPROCESS:
+		return "BFO_PREFER_IEPROCESS"
+	case BFO_SHOW_NAVIGATION_CANCELLED:
+		return "BFO_SHOW_NAVIGATION_CANCELLED"
+	case BFO_USE_IE_STATUSBAR:
+		return "BFO_USE_IE_STATUSBAR"
+	case BFO_QUERY_ALL:
+		return "BFO_QUERY_ALL"
+	default:
+		return fmt.Sprintf("BROWSERFRAMEOPTIONS(%d)", int32(e))
+	}
+}
+
 type CDBE_ACTIONS int32
 
 const (
@@ -3275,6 +9896,22 @@ const (
 	CDBE_TYPE_ALL   CDBE_ACTIONS = -1
 )
 
+// String returns the CDBE_ACTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CDBE_ACTIONS) String() string {
+	switch e {
+	case CDBE_TYPE_MUSIC:
+		return "CDBE_TYPE_MUSIC"
+	case CDBE_TYPE_DATA:
+		return "CDBE_TYPE_DATA"
+	case CDBE_TYPE_ALL:
+		return "CDBE_TYPE_ALL"
+	default:
+		return fmt.Sprintf("CDBE_ACTIONS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type EXPCMDFLAGS int32
 
 const (
@@ -3291,7 +9928,48 @@ const (
 	ECF_AUTOMENUICONS   EXPCMDFLAGS = 512
 )
 
+// String returns the EXPCMDFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPCMDFLAGS) String() string {
+	var parts []string
+	if e&ECF_HASSUBCOMMANDS != 0 {
+		parts = append(parts, "ECF_HASSUBCOMMANDS")
+	}
+	if e&ECF_HASSPLITBUTTON != 0 {
+		parts = append(parts, "ECF_HASSPLITBUTTON")
+	}
+	if e&ECF_HIDELABEL != 0 {
+		parts = append(parts, "ECF_HIDELABEL")
+	}
+	if e&ECF_ISSEPARATOR != 0 {
+		parts = append(parts, "ECF_ISSEPARATOR")
+	}
+	if e&ECF_HASLUASHIELD != 0 {
+		parts = append(parts, "ECF_HASLUASHIELD")
+	}
+	if e&ECF_SEPARATORBEFORE != 0 {
+		parts = append(parts, "ECF_SEPARATORBEFORE")
+	}
+	if e&ECF_SEPARATORAFTER != 0 {
+		parts = append(parts, "ECF_SEPARATORAFTER")
+	}
+	if e&ECF_ISDROPDOWN != 0 {
+		parts = append(parts, "ECF_ISDROPDOWN")
+	}
+	if e&ECF_TOGGLEABLE != 0 {
+		parts = append(parts, "ECF_TOGGLEABLE")
+	}
+	if e&ECF_AUTOMENUICONS != 0 {
+		parts = append(parts, "ECF_AUTOMENUICONS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // EXPCMDSTATE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_expcmdstate
+// Bitmask — values may be combined with |.
 type EXPCMDSTATE int32
 
 const (
@@ -3302,6 +9980,31 @@ const (
 	ECS_CHECKED    EXPCMDSTATE = 8
 	ECS_RADIOCHECK EXPCMDSTATE = 16
 )
+
+// String returns the EXPCMDSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPCMDSTATE) String() string {
+	var parts []string
+	if e&ECS_DISABLED != 0 {
+		parts = append(parts, "ECS_DISABLED")
+	}
+	if e&ECS_HIDDEN != 0 {
+		parts = append(parts, "ECS_HIDDEN")
+	}
+	if e&ECS_CHECKBOX != 0 {
+		parts = append(parts, "ECS_CHECKBOX")
+	}
+	if e&ECS_CHECKED != 0 {
+		parts = append(parts, "ECS_CHECKED")
+	}
+	if e&ECS_RADIOCHECK != 0 {
+		parts = append(parts, "ECS_RADIOCHECK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // EXPLORERPANESTATE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_explorerpanestate
 type EXPLORERPANESTATE int32
@@ -3315,11 +10018,43 @@ const (
 	EPS_FORCE        EXPLORERPANESTATE = 131072
 )
 
+// String returns the EXPLORERPANESTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPLORERPANESTATE) String() string {
+	switch e {
+	case EPS_DONTCARE:
+		return "EPS_DONTCARE"
+	case EPS_DEFAULT_ON:
+		return "EPS_DEFAULT_ON"
+	case EPS_DEFAULT_OFF:
+		return "EPS_DEFAULT_OFF"
+	case EPS_STATEMASK:
+		return "EPS_STATEMASK"
+	case EPS_INITIALSTATE:
+		return "EPS_INITIALSTATE"
+	case EPS_FORCE:
+		return "EPS_FORCE"
+	default:
+		return fmt.Sprintf("EXPLORERPANESTATE(%d)", int32(e))
+	}
+}
+
 type EXPPS int32
 
 const (
 	EXPPS_FILETYPES EXPPS = 1
 )
+
+// String returns the EXPPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPPS) String() string {
+	switch e {
+	case EXPPS_FILETYPES:
+		return "EXPPS_FILETYPES"
+	default:
+		return fmt.Sprintf("EXPPS(%d)", int32(e))
+	}
+}
 
 // KF_DEFINITION_FLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_kf_definition_flags
 type KF_DEFINITION_FLAGS int32
@@ -3333,6 +10068,27 @@ const (
 	KFDF_NO_REDIRECT_UI      KF_DEFINITION_FLAGS = 64
 )
 
+// String returns the KF_DEFINITION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KF_DEFINITION_FLAGS) String() string {
+	switch e {
+	case KFDF_LOCAL_REDIRECT_ONLY:
+		return "KFDF_LOCAL_REDIRECT_ONLY"
+	case KFDF_ROAMABLE:
+		return "KFDF_ROAMABLE"
+	case KFDF_PRECREATE:
+		return "KFDF_PRECREATE"
+	case KFDF_STREAM:
+		return "KFDF_STREAM"
+	case KFDF_PUBLISHEXPANDEDPATH:
+		return "KFDF_PUBLISHEXPANDEDPATH"
+	case KFDF_NO_REDIRECT_UI:
+		return "KFDF_NO_REDIRECT_UI"
+	default:
+		return fmt.Sprintf("KF_DEFINITION_FLAGS(%d)", int32(e))
+	}
+}
+
 // KF_REDIRECTION_CAPABILITIES: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_kf_redirection_capabilities
 type KF_REDIRECTION_CAPABILITIES int32
 
@@ -3344,6 +10100,27 @@ const (
 	KF_REDIRECTION_CAPABILITIES_DENY_POLICY            KF_REDIRECTION_CAPABILITIES = 512
 	KF_REDIRECTION_CAPABILITIES_DENY_PERMISSIONS       KF_REDIRECTION_CAPABILITIES = 1024
 )
+
+// String returns the KF_REDIRECTION_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KF_REDIRECTION_CAPABILITIES) String() string {
+	switch e {
+	case KF_REDIRECTION_CAPABILITIES_ALLOW_ALL:
+		return "KF_REDIRECTION_CAPABILITIES_ALLOW_ALL"
+	case KF_REDIRECTION_CAPABILITIES_REDIRECTABLE:
+		return "KF_REDIRECTION_CAPABILITIES_REDIRECTABLE"
+	case KF_REDIRECTION_CAPABILITIES_DENY_ALL:
+		return "KF_REDIRECTION_CAPABILITIES_DENY_ALL"
+	case KF_REDIRECTION_CAPABILITIES_DENY_POLICY_REDIRECTED:
+		return "KF_REDIRECTION_CAPABILITIES_DENY_POLICY_REDIRECTED"
+	case KF_REDIRECTION_CAPABILITIES_DENY_POLICY:
+		return "KF_REDIRECTION_CAPABILITIES_DENY_POLICY"
+	case KF_REDIRECTION_CAPABILITIES_DENY_PERMISSIONS:
+		return "KF_REDIRECTION_CAPABILITIES_DENY_PERMISSIONS"
+	default:
+		return fmt.Sprintf("KF_REDIRECTION_CAPABILITIES(%d)", int32(e))
+	}
+}
 
 // KF_REDIRECT_FLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_kf_redirect_flags
 type KF_REDIRECT_FLAGS int32
@@ -3362,6 +10139,37 @@ const (
 	KF_REDIRECT_EXCLUDE_ALL_KNOWN_SUBFOLDERS KF_REDIRECT_FLAGS = 2048
 )
 
+// String returns the KF_REDIRECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KF_REDIRECT_FLAGS) String() string {
+	switch e {
+	case KF_REDIRECT_USER_EXCLUSIVE:
+		return "KF_REDIRECT_USER_EXCLUSIVE"
+	case KF_REDIRECT_COPY_SOURCE_DACL:
+		return "KF_REDIRECT_COPY_SOURCE_DACL"
+	case KF_REDIRECT_OWNER_USER:
+		return "KF_REDIRECT_OWNER_USER"
+	case KF_REDIRECT_SET_OWNER_EXPLICIT:
+		return "KF_REDIRECT_SET_OWNER_EXPLICIT"
+	case KF_REDIRECT_CHECK_ONLY:
+		return "KF_REDIRECT_CHECK_ONLY"
+	case KF_REDIRECT_WITH_UI:
+		return "KF_REDIRECT_WITH_UI"
+	case KF_REDIRECT_UNPIN:
+		return "KF_REDIRECT_UNPIN"
+	case KF_REDIRECT_PIN:
+		return "KF_REDIRECT_PIN"
+	case KF_REDIRECT_COPY_CONTENTS:
+		return "KF_REDIRECT_COPY_CONTENTS"
+	case KF_REDIRECT_DEL_SOURCE_CONTENTS:
+		return "KF_REDIRECT_DEL_SOURCE_CONTENTS"
+	case KF_REDIRECT_EXCLUDE_ALL_KNOWN_SUBFOLDERS:
+		return "KF_REDIRECT_EXCLUDE_ALL_KNOWN_SUBFOLDERS"
+	default:
+		return fmt.Sprintf("KF_REDIRECT_FLAGS(%d)", int32(e))
+	}
+}
+
 type NMCII_FLAGS int32
 
 const (
@@ -3370,12 +10178,40 @@ const (
 	NMCII_FOLDERS NMCII_FLAGS = 2
 )
 
+// String returns the NMCII_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMCII_FLAGS) String() string {
+	switch e {
+	case NMCII_NONE:
+		return "NMCII_NONE"
+	case NMCII_ITEMS:
+		return "NMCII_ITEMS"
+	case NMCII_FOLDERS:
+		return "NMCII_FOLDERS"
+	default:
+		return fmt.Sprintf("NMCII_FLAGS(%d)", int32(e))
+	}
+}
+
 type NMCSAEI_FLAGS int32
 
 const (
 	NMCSAEI_SELECT NMCSAEI_FLAGS = 0
 	NMCSAEI_EDIT   NMCSAEI_FLAGS = 1
 )
+
+// String returns the NMCSAEI_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMCSAEI_FLAGS) String() string {
+	switch e {
+	case NMCSAEI_SELECT:
+		return "NMCSAEI_SELECT"
+	case NMCSAEI_EDIT:
+		return "NMCSAEI_EDIT"
+	default:
+		return fmt.Sprintf("NMCSAEI_FLAGS(%d)", int32(e))
+	}
+}
 
 type NSTCECLICKTYPE int32
 
@@ -3386,6 +10222,23 @@ const (
 	NSTCECT_BUTTON   NSTCECLICKTYPE = 3
 	NSTCECT_DBLCLICK NSTCECLICKTYPE = 4
 )
+
+// String returns the NSTCECLICKTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NSTCECLICKTYPE) String() string {
+	switch e {
+	case NSTCECT_LBUTTON:
+		return "NSTCECT_LBUTTON"
+	case NSTCECT_MBUTTON:
+		return "NSTCECT_MBUTTON"
+	case NSTCECT_RBUTTON:
+		return "NSTCECT_RBUTTON"
+	case NSTCECT_DBLCLICK:
+		return "NSTCECT_DBLCLICK"
+	default:
+		return fmt.Sprintf("NSTCECLICKTYPE(%d)", int32(e))
+	}
+}
 
 type NSTCEHITTEST int32
 
@@ -3401,6 +10254,33 @@ const (
 	NSTCEHT_ONITEMTABBUTTON NSTCEHITTEST = 4096
 )
 
+// String returns the NSTCEHITTEST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NSTCEHITTEST) String() string {
+	switch e {
+	case NSTCEHT_NOWHERE:
+		return "NSTCEHT_NOWHERE"
+	case NSTCEHT_ONITEMICON:
+		return "NSTCEHT_ONITEMICON"
+	case NSTCEHT_ONITEMLABEL:
+		return "NSTCEHT_ONITEMLABEL"
+	case NSTCEHT_ONITEMINDENT:
+		return "NSTCEHT_ONITEMINDENT"
+	case NSTCEHT_ONITEMBUTTON:
+		return "NSTCEHT_ONITEMBUTTON"
+	case NSTCEHT_ONITEMRIGHT:
+		return "NSTCEHT_ONITEMRIGHT"
+	case NSTCEHT_ONITEMSTATEICON:
+		return "NSTCEHT_ONITEMSTATEICON"
+	case NSTCEHT_ONITEM:
+		return "NSTCEHT_ONITEM"
+	case NSTCEHT_ONITEMTABBUTTON:
+		return "NSTCEHT_ONITEMTABBUTTON"
+	default:
+		return fmt.Sprintf("NSTCEHITTEST(%d)", int32(e))
+	}
+}
+
 // NSTCITEMSTATE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_nstcitemstate
 type NSTCITEMSTATE int32
 
@@ -3413,6 +10293,27 @@ const (
 	NSTCIS_SELECTEDNOEXPAND NSTCITEMSTATE = 16
 )
 
+// String returns the NSTCITEMSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NSTCITEMSTATE) String() string {
+	switch e {
+	case NSTCIS_NONE:
+		return "NSTCIS_NONE"
+	case NSTCIS_SELECTED:
+		return "NSTCIS_SELECTED"
+	case NSTCIS_EXPANDED:
+		return "NSTCIS_EXPANDED"
+	case NSTCIS_BOLD:
+		return "NSTCIS_BOLD"
+	case NSTCIS_DISABLED:
+		return "NSTCIS_DISABLED"
+	case NSTCIS_SELECTEDNOEXPAND:
+		return "NSTCIS_SELECTEDNOEXPAND"
+	default:
+		return fmt.Sprintf("NSTCITEMSTATE(%d)", int32(e))
+	}
+}
+
 type NSTCROOTSTYLE int32
 
 const (
@@ -3420,6 +10321,21 @@ const (
 	NSTCRS_HIDDEN   NSTCROOTSTYLE = 1
 	NSTCRS_EXPANDED NSTCROOTSTYLE = 2
 )
+
+// String returns the NSTCROOTSTYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NSTCROOTSTYLE) String() string {
+	switch e {
+	case NSTCRS_VISIBLE:
+		return "NSTCRS_VISIBLE"
+	case NSTCRS_HIDDEN:
+		return "NSTCRS_HIDDEN"
+	case NSTCRS_EXPANDED:
+		return "NSTCRS_EXPANDED"
+	default:
+		return fmt.Sprintf("NSTCROOTSTYLE(%d)", int32(e))
+	}
+}
 
 // NSTCSTYLE: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_nstcstyle
 type NSTCSTYLE int32
@@ -3457,6 +10373,75 @@ const (
 	NSTCS_SHOWREFRESHBUTTON   NSTCSTYLE = -2147483648
 )
 
+// String returns the NSTCSTYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NSTCSTYLE) String() string {
+	switch e {
+	case NSTCS_HASEXPANDOS:
+		return "NSTCS_HASEXPANDOS"
+	case NSTCS_HASLINES:
+		return "NSTCS_HASLINES"
+	case NSTCS_SINGLECLICKEXPAND:
+		return "NSTCS_SINGLECLICKEXPAND"
+	case NSTCS_FULLROWSELECT:
+		return "NSTCS_FULLROWSELECT"
+	case NSTCS_SPRINGEXPAND:
+		return "NSTCS_SPRINGEXPAND"
+	case NSTCS_HORIZONTALSCROLL:
+		return "NSTCS_HORIZONTALSCROLL"
+	case NSTCS_ROOTHASEXPANDO:
+		return "NSTCS_ROOTHASEXPANDO"
+	case NSTCS_SHOWSELECTIONALWAYS:
+		return "NSTCS_SHOWSELECTIONALWAYS"
+	case NSTCS_NOINFOTIP:
+		return "NSTCS_NOINFOTIP"
+	case NSTCS_EVENHEIGHT:
+		return "NSTCS_EVENHEIGHT"
+	case NSTCS_NOREPLACEOPEN:
+		return "NSTCS_NOREPLACEOPEN"
+	case NSTCS_DISABLEDRAGDROP:
+		return "NSTCS_DISABLEDRAGDROP"
+	case NSTCS_NOORDERSTREAM:
+		return "NSTCS_NOORDERSTREAM"
+	case NSTCS_RICHTOOLTIP:
+		return "NSTCS_RICHTOOLTIP"
+	case NSTCS_BORDER:
+		return "NSTCS_BORDER"
+	case NSTCS_NOEDITLABELS:
+		return "NSTCS_NOEDITLABELS"
+	case NSTCS_TABSTOP:
+		return "NSTCS_TABSTOP"
+	case NSTCS_FAVORITESMODE:
+		return "NSTCS_FAVORITESMODE"
+	case NSTCS_AUTOHSCROLL:
+		return "NSTCS_AUTOHSCROLL"
+	case NSTCS_FADEINOUTEXPANDOS:
+		return "NSTCS_FADEINOUTEXPANDOS"
+	case NSTCS_EMPTYTEXT:
+		return "NSTCS_EMPTYTEXT"
+	case NSTCS_CHECKBOXES:
+		return "NSTCS_CHECKBOXES"
+	case NSTCS_PARTIALCHECKBOXES:
+		return "NSTCS_PARTIALCHECKBOXES"
+	case NSTCS_EXCLUSIONCHECKBOXES:
+		return "NSTCS_EXCLUSIONCHECKBOXES"
+	case NSTCS_DIMMEDCHECKBOXES:
+		return "NSTCS_DIMMEDCHECKBOXES"
+	case NSTCS_NOINDENTCHECKS:
+		return "NSTCS_NOINDENTCHECKS"
+	case NSTCS_ALLOWJUNCTIONS:
+		return "NSTCS_ALLOWJUNCTIONS"
+	case NSTCS_SHOWTABSBUTTON:
+		return "NSTCS_SHOWTABSBUTTON"
+	case NSTCS_SHOWDELETEBUTTON:
+		return "NSTCS_SHOWDELETEBUTTON"
+	case NSTCS_SHOWREFRESHBUTTON:
+		return "NSTCS_SHOWREFRESHBUTTON"
+	default:
+		return fmt.Sprintf("NSTCSTYLE(%d)", int32(e))
+	}
+}
+
 type OPPROGDLGF int32
 
 const (
@@ -3469,6 +10454,29 @@ const (
 	OPPROGDLG_DONTDISPLAYLOCATIONS  OPPROGDLGF = 4096
 )
 
+// String returns the OPPROGDLGF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPPROGDLGF) String() string {
+	switch e {
+	case OPPROGDLG_DEFAULT:
+		return "OPPROGDLG_DEFAULT"
+	case OPPROGDLG_ENABLEPAUSE:
+		return "OPPROGDLG_ENABLEPAUSE"
+	case OPPROGDLG_ALLOWUNDO:
+		return "OPPROGDLG_ALLOWUNDO"
+	case OPPROGDLG_DONTDISPLAYSOURCEPATH:
+		return "OPPROGDLG_DONTDISPLAYSOURCEPATH"
+	case OPPROGDLG_DONTDISPLAYDESTPATH:
+		return "OPPROGDLG_DONTDISPLAYDESTPATH"
+	case OPPROGDLG_NOMULTIDAYESTIMATES:
+		return "OPPROGDLG_NOMULTIDAYESTIMATES"
+	case OPPROGDLG_DONTDISPLAYLOCATIONS:
+		return "OPPROGDLG_DONTDISPLAYLOCATIONS"
+	default:
+		return fmt.Sprintf("OPPROGDLGF(%d)", int32(e))
+	}
+}
+
 type PDMODE int32
 
 const (
@@ -3479,6 +10487,27 @@ const (
 	PDM_ERRORSBLOCKING PDMODE = 8
 	PDM_INDETERMINATE  PDMODE = 16
 )
+
+// String returns the PDMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PDMODE) String() string {
+	switch e {
+	case PDM_DEFAULT:
+		return "PDM_DEFAULT"
+	case PDM_RUN:
+		return "PDM_RUN"
+	case PDM_PREFLIGHT:
+		return "PDM_PREFLIGHT"
+	case PDM_UNDOING:
+		return "PDM_UNDOING"
+	case PDM_ERRORSBLOCKING:
+		return "PDM_ERRORSBLOCKING"
+	case PDM_INDETERMINATE:
+		return "PDM_INDETERMINATE"
+	default:
+		return fmt.Sprintf("PDMODE(%d)", int32(e))
+	}
+}
 
 // SHCONTF: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_shcontf
 type SHCONTF int32
@@ -3499,6 +10528,41 @@ const (
 	SHCONTF_INCLUDESUPERHIDDEN    SHCONTF = 65536
 )
 
+// String returns the SHCONTF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHCONTF) String() string {
+	switch e {
+	case SHCONTF_CHECKING_FOR_CHILDREN:
+		return "SHCONTF_CHECKING_FOR_CHILDREN"
+	case SHCONTF_FOLDERS:
+		return "SHCONTF_FOLDERS"
+	case SHCONTF_NONFOLDERS:
+		return "SHCONTF_NONFOLDERS"
+	case SHCONTF_INCLUDEHIDDEN:
+		return "SHCONTF_INCLUDEHIDDEN"
+	case SHCONTF_INIT_ON_FIRST_NEXT:
+		return "SHCONTF_INIT_ON_FIRST_NEXT"
+	case SHCONTF_NETPRINTERSRCH:
+		return "SHCONTF_NETPRINTERSRCH"
+	case SHCONTF_SHAREABLE:
+		return "SHCONTF_SHAREABLE"
+	case SHCONTF_STORAGE:
+		return "SHCONTF_STORAGE"
+	case SHCONTF_NAVIGATION_ENUM:
+		return "SHCONTF_NAVIGATION_ENUM"
+	case SHCONTF_FASTITEMS:
+		return "SHCONTF_FASTITEMS"
+	case SHCONTF_FLATLIST:
+		return "SHCONTF_FLATLIST"
+	case SHCONTF_ENABLE_ASYNC:
+		return "SHCONTF_ENABLE_ASYNC"
+	case SHCONTF_INCLUDESUPERHIDDEN:
+		return "SHCONTF_INCLUDESUPERHIDDEN"
+	default:
+		return fmt.Sprintf("SHCONTF(%d)", int32(e))
+	}
+}
+
 // SICHINTF: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_sichintf
 type SICHINTF int32
 
@@ -3508,6 +10572,23 @@ const (
 	SICHINT_CANONICAL                     SICHINTF = 268435456
 	SICHINT_TEST_FILESYSPATH_IF_NOT_EQUAL SICHINTF = 536870912
 )
+
+// String returns the SICHINTF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SICHINTF) String() string {
+	switch e {
+	case SICHINT_DISPLAY:
+		return "SICHINT_DISPLAY"
+	case SICHINT_ALLFIELDS:
+		return "SICHINT_ALLFIELDS"
+	case SICHINT_CANONICAL:
+		return "SICHINT_CANONICAL"
+	case SICHINT_TEST_FILESYSPATH_IF_NOT_EQUAL:
+		return "SICHINT_TEST_FILESYSPATH_IF_NOT_EQUAL"
+	default:
+		return fmt.Sprintf("SICHINTF(%d)", int32(e))
+	}
+}
 
 // SPBEGINF: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_spbeginf
 type SPBEGINF int32
@@ -3520,6 +10601,25 @@ const (
 	SPBEGINF_NOCANCELBUTTON  SPBEGINF = 64
 )
 
+// String returns the SPBEGINF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPBEGINF) String() string {
+	switch e {
+	case SPBEGINF_NORMAL:
+		return "SPBEGINF_NORMAL"
+	case SPBEGINF_AUTOTIME:
+		return "SPBEGINF_AUTOTIME"
+	case SPBEGINF_NOPROGRESSBAR:
+		return "SPBEGINF_NOPROGRESSBAR"
+	case SPBEGINF_MARQUEEPROGRESS:
+		return "SPBEGINF_MARQUEEPROGRESS"
+	case SPBEGINF_NOCANCELBUTTON:
+		return "SPBEGINF_NOCANCELBUTTON"
+	default:
+		return fmt.Sprintf("SPBEGINF(%d)", int32(e))
+	}
+}
+
 type SPINITF int32
 
 const (
@@ -3527,6 +10627,21 @@ const (
 	SPINITF_MODAL      SPINITF = 1
 	SPINITF_NOMINIMIZE SPINITF = 8
 )
+
+// String returns the SPINITF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPINITF) String() string {
+	switch e {
+	case SPINITF_NORMAL:
+		return "SPINITF_NORMAL"
+	case SPINITF_MODAL:
+		return "SPINITF_MODAL"
+	case SPINITF_NOMINIMIZE:
+		return "SPINITF_NOMINIMIZE"
+	default:
+		return fmt.Sprintf("SPINITF(%d)", int32(e))
+	}
+}
 
 type SV3CVW3_FLAGS int32
 
@@ -3537,7 +10652,25 @@ const (
 	SV3CVW3_FORCEFOLDERFLAGS SV3CVW3_FLAGS = 4
 )
 
+// String returns the SV3CVW3_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SV3CVW3_FLAGS) String() string {
+	switch e {
+	case SV3CVW3_DEFAULT:
+		return "SV3CVW3_DEFAULT"
+	case SV3CVW3_NONINTERACTIVE:
+		return "SV3CVW3_NONINTERACTIVE"
+	case SV3CVW3_FORCEVIEWMODE:
+		return "SV3CVW3_FORCEVIEWMODE"
+	case SV3CVW3_FORCEFOLDERFLAGS:
+		return "SV3CVW3_FORCEFOLDERFLAGS"
+	default:
+		return fmt.Sprintf("SV3CVW3_FLAGS(%d)", int32(e))
+	}
+}
+
 // SVGIO: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_svgio
+// Bitmask — values may be combined with |.
 type SVGIO int32
 
 const (
@@ -3548,6 +10681,31 @@ const (
 	SVGIO_TYPE_MASK      SVGIO = 15
 	SVGIO_FLAG_VIEWORDER SVGIO = -2147483648
 )
+
+// String returns the SVGIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SVGIO) String() string {
+	var parts []string
+	if e&SVGIO_SELECTION != 0 {
+		parts = append(parts, "SVGIO_SELECTION")
+	}
+	if e&SVGIO_ALLVIEW != 0 {
+		parts = append(parts, "SVGIO_ALLVIEW")
+	}
+	if e&SVGIO_CHECKED != 0 {
+		parts = append(parts, "SVGIO_CHECKED")
+	}
+	if e&SVGIO_TYPE_MASK != 0 {
+		parts = append(parts, "SVGIO_TYPE_MASK")
+	}
+	if e&SVGIO_FLAG_VIEWORDER != 0 {
+		parts = append(parts, "SVGIO_FLAG_VIEWORDER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // SVSIF: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_svsif
 type SVSIF int32
@@ -3568,6 +10726,41 @@ const (
 	SVSI_NOTAKEFOCUS    SVSIF = 1073741824
 )
 
+// String returns the SVSIF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SVSIF) String() string {
+	switch e {
+	case SVSI_DESELECT:
+		return "SVSI_DESELECT"
+	case SVSI_SELECT:
+		return "SVSI_SELECT"
+	case SVSI_EDIT:
+		return "SVSI_EDIT"
+	case SVSI_DESELECTOTHERS:
+		return "SVSI_DESELECTOTHERS"
+	case SVSI_ENSUREVISIBLE:
+		return "SVSI_ENSUREVISIBLE"
+	case SVSI_FOCUSED:
+		return "SVSI_FOCUSED"
+	case SVSI_TRANSLATEPT:
+		return "SVSI_TRANSLATEPT"
+	case SVSI_SELECTIONMARK:
+		return "SVSI_SELECTIONMARK"
+	case SVSI_POSITIONITEM:
+		return "SVSI_POSITIONITEM"
+	case SVSI_CHECK:
+		return "SVSI_CHECK"
+	case SVSI_CHECK2:
+		return "SVSI_CHECK2"
+	case SVSI_KEYBOARDSELECT:
+		return "SVSI_KEYBOARDSELECT"
+	case SVSI_NOTAKEFOCUS:
+		return "SVSI_NOTAKEFOCUS"
+	default:
+		return fmt.Sprintf("SVSIF(%d)", int32(e))
+	}
+}
+
 type TRANSFER_ADVISE_STATE int32
 
 const (
@@ -3576,6 +10769,23 @@ const (
 	TS_PREPARING     TRANSFER_ADVISE_STATE = 2
 	TS_INDETERMINATE TRANSFER_ADVISE_STATE = 4
 )
+
+// String returns the TRANSFER_ADVISE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSFER_ADVISE_STATE) String() string {
+	switch e {
+	case TS_NONE:
+		return "TS_NONE"
+	case TS_PERFORMING:
+		return "TS_PERFORMING"
+	case TS_PREPARING:
+		return "TS_PREPARING"
+	case TS_INDETERMINATE:
+		return "TS_INDETERMINATE"
+	default:
+		return fmt.Sprintf("TRANSFER_ADVISE_STATE(%d)", int32(e))
+	}
+}
 
 // TRANSFER_SOURCE_FLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-_transfer_source_flags
 type TRANSFER_SOURCE_FLAGS int32
@@ -3596,3 +10806,38 @@ const (
 	TSF_MOVE_AS_COPY_DELETE        TRANSFER_SOURCE_FLAGS = 1024
 	TSF_SUSPEND_SHELLEVENTS        TRANSFER_SOURCE_FLAGS = 2048
 )
+
+// String returns the TRANSFER_SOURCE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSFER_SOURCE_FLAGS) String() string {
+	switch e {
+	case TSF_NORMAL:
+		return "TSF_NORMAL"
+	case TSF_RENAME_EXIST:
+		return "TSF_RENAME_EXIST"
+	case TSF_OVERWRITE_EXIST:
+		return "TSF_OVERWRITE_EXIST"
+	case TSF_ALLOW_DECRYPTION:
+		return "TSF_ALLOW_DECRYPTION"
+	case TSF_NO_SECURITY:
+		return "TSF_NO_SECURITY"
+	case TSF_COPY_CREATION_TIME:
+		return "TSF_COPY_CREATION_TIME"
+	case TSF_COPY_WRITE_TIME:
+		return "TSF_COPY_WRITE_TIME"
+	case TSF_USE_FULL_ACCESS:
+		return "TSF_USE_FULL_ACCESS"
+	case TSF_DELETE_RECYCLE_IF_POSSIBLE:
+		return "TSF_DELETE_RECYCLE_IF_POSSIBLE"
+	case TSF_COPY_HARD_LINK:
+		return "TSF_COPY_HARD_LINK"
+	case TSF_COPY_LOCALIZED_NAME:
+		return "TSF_COPY_LOCALIZED_NAME"
+	case TSF_MOVE_AS_COPY_DELETE:
+		return "TSF_MOVE_AS_COPY_DELETE"
+	case TSF_SUSPEND_SHELLEVENTS:
+		return "TSF_SUSPEND_SHELLEVENTS"
+	default:
+		return fmt.Sprintf("TRANSFER_SOURCE_FLAGS(%d)", int32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package directcomposition
 
+import (
+	"fmt"
+)
+
 // COMPOSITION_FRAME_ID_TYPE: https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-composition_frame_id_type
 type COMPOSITION_FRAME_ID_TYPE int32
 
@@ -12,6 +16,21 @@ const (
 	COMPOSITION_FRAME_ID_CONFIRMED COMPOSITION_FRAME_ID_TYPE = 1
 	COMPOSITION_FRAME_ID_COMPLETED COMPOSITION_FRAME_ID_TYPE = 2
 )
+
+// String returns the COMPOSITION_FRAME_ID_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPOSITION_FRAME_ID_TYPE) String() string {
+	switch e {
+	case COMPOSITION_FRAME_ID_CREATED:
+		return "COMPOSITION_FRAME_ID_CREATED"
+	case COMPOSITION_FRAME_ID_CONFIRMED:
+		return "COMPOSITION_FRAME_ID_CONFIRMED"
+	case COMPOSITION_FRAME_ID_COMPLETED:
+		return "COMPOSITION_FRAME_ID_COMPLETED"
+	default:
+		return fmt.Sprintf("COMPOSITION_FRAME_ID_TYPE(%d)", int32(e))
+	}
+}
 
 // DCOMPOSITION_BACKFACE_VISIBILITY: https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-dcomposition_backface_visibility
 type DCOMPOSITION_BACKFACE_VISIBILITY int32
@@ -22,6 +41,21 @@ const (
 	DCOMPOSITION_BACKFACE_VISIBILITY_INHERIT DCOMPOSITION_BACKFACE_VISIBILITY = -1
 )
 
+// String returns the DCOMPOSITION_BACKFACE_VISIBILITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DCOMPOSITION_BACKFACE_VISIBILITY) String() string {
+	switch e {
+	case DCOMPOSITION_BACKFACE_VISIBILITY_VISIBLE:
+		return "DCOMPOSITION_BACKFACE_VISIBILITY_VISIBLE"
+	case DCOMPOSITION_BACKFACE_VISIBILITY_HIDDEN:
+		return "DCOMPOSITION_BACKFACE_VISIBILITY_HIDDEN"
+	case DCOMPOSITION_BACKFACE_VISIBILITY_INHERIT:
+		return "DCOMPOSITION_BACKFACE_VISIBILITY_INHERIT"
+	default:
+		return fmt.Sprintf("DCOMPOSITION_BACKFACE_VISIBILITY(%d)", int32(e))
+	}
+}
+
 // DCOMPOSITION_BITMAP_INTERPOLATION_MODE: https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-dcomposition_bitmap_interpolation_mode
 type DCOMPOSITION_BITMAP_INTERPOLATION_MODE int32
 
@@ -31,6 +65,21 @@ const (
 	DCOMPOSITION_BITMAP_INTERPOLATION_MODE_INHERIT          DCOMPOSITION_BITMAP_INTERPOLATION_MODE = -1
 )
 
+// String returns the DCOMPOSITION_BITMAP_INTERPOLATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DCOMPOSITION_BITMAP_INTERPOLATION_MODE) String() string {
+	switch e {
+	case DCOMPOSITION_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR:
+		return "DCOMPOSITION_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR"
+	case DCOMPOSITION_BITMAP_INTERPOLATION_MODE_LINEAR:
+		return "DCOMPOSITION_BITMAP_INTERPOLATION_MODE_LINEAR"
+	case DCOMPOSITION_BITMAP_INTERPOLATION_MODE_INHERIT:
+		return "DCOMPOSITION_BITMAP_INTERPOLATION_MODE_INHERIT"
+	default:
+		return fmt.Sprintf("DCOMPOSITION_BITMAP_INTERPOLATION_MODE(%d)", int32(e))
+	}
+}
+
 // DCOMPOSITION_BORDER_MODE: https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-dcomposition_border_mode
 type DCOMPOSITION_BORDER_MODE int32
 
@@ -39,6 +88,21 @@ const (
 	DCOMPOSITION_BORDER_MODE_HARD    DCOMPOSITION_BORDER_MODE = 1
 	DCOMPOSITION_BORDER_MODE_INHERIT DCOMPOSITION_BORDER_MODE = -1
 )
+
+// String returns the DCOMPOSITION_BORDER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DCOMPOSITION_BORDER_MODE) String() string {
+	switch e {
+	case DCOMPOSITION_BORDER_MODE_SOFT:
+		return "DCOMPOSITION_BORDER_MODE_SOFT"
+	case DCOMPOSITION_BORDER_MODE_HARD:
+		return "DCOMPOSITION_BORDER_MODE_HARD"
+	case DCOMPOSITION_BORDER_MODE_INHERIT:
+		return "DCOMPOSITION_BORDER_MODE_INHERIT"
+	default:
+		return fmt.Sprintf("DCOMPOSITION_BORDER_MODE(%d)", int32(e))
+	}
+}
 
 // DCOMPOSITION_COMPOSITE_MODE: https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-dcomposition_composite_mode
 type DCOMPOSITION_COMPOSITE_MODE int32
@@ -50,6 +114,23 @@ const (
 	DCOMPOSITION_COMPOSITE_MODE_INHERIT            DCOMPOSITION_COMPOSITE_MODE = -1
 )
 
+// String returns the DCOMPOSITION_COMPOSITE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DCOMPOSITION_COMPOSITE_MODE) String() string {
+	switch e {
+	case DCOMPOSITION_COMPOSITE_MODE_SOURCE_OVER:
+		return "DCOMPOSITION_COMPOSITE_MODE_SOURCE_OVER"
+	case DCOMPOSITION_COMPOSITE_MODE_DESTINATION_INVERT:
+		return "DCOMPOSITION_COMPOSITE_MODE_DESTINATION_INVERT"
+	case DCOMPOSITION_COMPOSITE_MODE_MIN_BLEND:
+		return "DCOMPOSITION_COMPOSITE_MODE_MIN_BLEND"
+	case DCOMPOSITION_COMPOSITE_MODE_INHERIT:
+		return "DCOMPOSITION_COMPOSITE_MODE_INHERIT"
+	default:
+		return fmt.Sprintf("DCOMPOSITION_COMPOSITE_MODE(%d)", int32(e))
+	}
+}
+
 type DCOMPOSITION_DEPTH_MODE int32
 
 const (
@@ -59,6 +140,23 @@ const (
 	DCOMPOSITION_DEPTH_MODE_INHERIT DCOMPOSITION_DEPTH_MODE = -1
 )
 
+// String returns the DCOMPOSITION_DEPTH_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DCOMPOSITION_DEPTH_MODE) String() string {
+	switch e {
+	case DCOMPOSITION_DEPTH_MODE_TREE:
+		return "DCOMPOSITION_DEPTH_MODE_TREE"
+	case DCOMPOSITION_DEPTH_MODE_SPATIAL:
+		return "DCOMPOSITION_DEPTH_MODE_SPATIAL"
+	case DCOMPOSITION_DEPTH_MODE_SORTED:
+		return "DCOMPOSITION_DEPTH_MODE_SORTED"
+	case DCOMPOSITION_DEPTH_MODE_INHERIT:
+		return "DCOMPOSITION_DEPTH_MODE_INHERIT"
+	default:
+		return fmt.Sprintf("DCOMPOSITION_DEPTH_MODE(%d)", int32(e))
+	}
+}
+
 // DCOMPOSITION_OPACITY_MODE: https://learn.microsoft.com/windows/win32/api/dcomptypes/ne-dcomptypes-dcomposition_opacity_mode
 type DCOMPOSITION_OPACITY_MODE int32
 
@@ -67,3 +165,18 @@ const (
 	DCOMPOSITION_OPACITY_MODE_MULTIPLY DCOMPOSITION_OPACITY_MODE = 1
 	DCOMPOSITION_OPACITY_MODE_INHERIT  DCOMPOSITION_OPACITY_MODE = -1
 )
+
+// String returns the DCOMPOSITION_OPACITY_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DCOMPOSITION_OPACITY_MODE) String() string {
+	switch e {
+	case DCOMPOSITION_OPACITY_MODE_LAYER:
+		return "DCOMPOSITION_OPACITY_MODE_LAYER"
+	case DCOMPOSITION_OPACITY_MODE_MULTIPLY:
+		return "DCOMPOSITION_OPACITY_MODE_MULTIPLY"
+	case DCOMPOSITION_OPACITY_MODE_INHERIT:
+		return "DCOMPOSITION_OPACITY_MODE_INHERIT"
+	default:
+		return fmt.Sprintf("DCOMPOSITION_OPACITY_MODE(%d)", int32(e))
+	}
+}

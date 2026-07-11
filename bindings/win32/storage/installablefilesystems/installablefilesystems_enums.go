@@ -4,6 +4,10 @@
 
 package installablefilesystems
 
+import (
+	"fmt"
+)
+
 type FILTER_INFORMATION_CLASS int32
 
 const (
@@ -12,12 +16,40 @@ const (
 	FilterAggregateStandardInformation FILTER_INFORMATION_CLASS = 2
 )
 
+// String returns the FILTER_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILTER_INFORMATION_CLASS) String() string {
+	switch e {
+	case FilterFullInformation:
+		return "FilterFullInformation"
+	case FilterAggregateBasicInformation:
+		return "FilterAggregateBasicInformation"
+	case FilterAggregateStandardInformation:
+		return "FilterAggregateStandardInformation"
+	default:
+		return fmt.Sprintf("FILTER_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
+
 type FILTER_VOLUME_INFORMATION_CLASS int32
 
 const (
 	FilterVolumeBasicInformation    FILTER_VOLUME_INFORMATION_CLASS = 0
 	FilterVolumeStandardInformation FILTER_VOLUME_INFORMATION_CLASS = 1
 )
+
+// String returns the FILTER_VOLUME_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILTER_VOLUME_INFORMATION_CLASS) String() string {
+	switch e {
+	case FilterVolumeBasicInformation:
+		return "FilterVolumeBasicInformation"
+	case FilterVolumeStandardInformation:
+		return "FilterVolumeStandardInformation"
+	default:
+		return fmt.Sprintf("FILTER_VOLUME_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
 
 type FLT_FILESYSTEM_TYPE int32
 
@@ -55,6 +87,77 @@ const (
 	FLT_FSTYPE_CIMFS      FLT_FILESYSTEM_TYPE = 30
 )
 
+// String returns the FLT_FILESYSTEM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FLT_FILESYSTEM_TYPE) String() string {
+	switch e {
+	case FLT_FSTYPE_UNKNOWN:
+		return "FLT_FSTYPE_UNKNOWN"
+	case FLT_FSTYPE_RAW:
+		return "FLT_FSTYPE_RAW"
+	case FLT_FSTYPE_NTFS:
+		return "FLT_FSTYPE_NTFS"
+	case FLT_FSTYPE_FAT:
+		return "FLT_FSTYPE_FAT"
+	case FLT_FSTYPE_CDFS:
+		return "FLT_FSTYPE_CDFS"
+	case FLT_FSTYPE_UDFS:
+		return "FLT_FSTYPE_UDFS"
+	case FLT_FSTYPE_LANMAN:
+		return "FLT_FSTYPE_LANMAN"
+	case FLT_FSTYPE_WEBDAV:
+		return "FLT_FSTYPE_WEBDAV"
+	case FLT_FSTYPE_RDPDR:
+		return "FLT_FSTYPE_RDPDR"
+	case FLT_FSTYPE_NFS:
+		return "FLT_FSTYPE_NFS"
+	case FLT_FSTYPE_MS_NETWARE:
+		return "FLT_FSTYPE_MS_NETWARE"
+	case FLT_FSTYPE_NETWARE:
+		return "FLT_FSTYPE_NETWARE"
+	case FLT_FSTYPE_BSUDF:
+		return "FLT_FSTYPE_BSUDF"
+	case FLT_FSTYPE_MUP:
+		return "FLT_FSTYPE_MUP"
+	case FLT_FSTYPE_RSFX:
+		return "FLT_FSTYPE_RSFX"
+	case FLT_FSTYPE_ROXIO_UDF1:
+		return "FLT_FSTYPE_ROXIO_UDF1"
+	case FLT_FSTYPE_ROXIO_UDF2:
+		return "FLT_FSTYPE_ROXIO_UDF2"
+	case FLT_FSTYPE_ROXIO_UDF3:
+		return "FLT_FSTYPE_ROXIO_UDF3"
+	case FLT_FSTYPE_TACIT:
+		return "FLT_FSTYPE_TACIT"
+	case FLT_FSTYPE_FS_REC:
+		return "FLT_FSTYPE_FS_REC"
+	case FLT_FSTYPE_INCD:
+		return "FLT_FSTYPE_INCD"
+	case FLT_FSTYPE_INCD_FAT:
+		return "FLT_FSTYPE_INCD_FAT"
+	case FLT_FSTYPE_EXFAT:
+		return "FLT_FSTYPE_EXFAT"
+	case FLT_FSTYPE_PSFS:
+		return "FLT_FSTYPE_PSFS"
+	case FLT_FSTYPE_GPFS:
+		return "FLT_FSTYPE_GPFS"
+	case FLT_FSTYPE_NPFS:
+		return "FLT_FSTYPE_NPFS"
+	case FLT_FSTYPE_MSFS:
+		return "FLT_FSTYPE_MSFS"
+	case FLT_FSTYPE_CSVFS:
+		return "FLT_FSTYPE_CSVFS"
+	case FLT_FSTYPE_REFS:
+		return "FLT_FSTYPE_REFS"
+	case FLT_FSTYPE_OPENAFS:
+		return "FLT_FSTYPE_OPENAFS"
+	case FLT_FSTYPE_CIMFS:
+		return "FLT_FSTYPE_CIMFS"
+	default:
+		return fmt.Sprintf("FLT_FILESYSTEM_TYPE(%d)", int32(e))
+	}
+}
+
 type INSTANCE_INFORMATION_CLASS int32
 
 const (
@@ -63,3 +166,20 @@ const (
 	InstanceFullInformation              INSTANCE_INFORMATION_CLASS = 2
 	InstanceAggregateStandardInformation INSTANCE_INFORMATION_CLASS = 3
 )
+
+// String returns the INSTANCE_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INSTANCE_INFORMATION_CLASS) String() string {
+	switch e {
+	case InstanceBasicInformation:
+		return "InstanceBasicInformation"
+	case InstancePartialInformation:
+		return "InstancePartialInformation"
+	case InstanceFullInformation:
+		return "InstanceFullInformation"
+	case InstanceAggregateStandardInformation:
+		return "InstanceAggregateStandardInformation"
+	default:
+		return fmt.Sprintf("INSTANCE_INFORMATION_CLASS(%d)", int32(e))
+	}
+}

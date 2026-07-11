@@ -4,6 +4,10 @@
 
 package addressbook
 
+import (
+	"fmt"
+)
+
 // Gender: https://learn.microsoft.com/office/client-developer/outlook/mapi/gender
 type Gender int32
 
@@ -12,3 +16,18 @@ const (
 	GenderFemale      Gender = 1
 	GenderMale        Gender = 2
 )
+
+// String returns the Gender constant's name, or its numeric form when
+// the value is not a known constant.
+func (e Gender) String() string {
+	switch e {
+	case GenderUnspecified:
+		return "GenderUnspecified"
+	case GenderFemale:
+		return "GenderFemale"
+	case GenderMale:
+		return "GenderMale"
+	default:
+		return fmt.Sprintf("Gender(%d)", int32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package windowsconnectionmanager
 
+import (
+	"fmt"
+)
+
 // WCM_CONNECTION_COST: https://learn.microsoft.com/windows/win32/api/wcmapi/ne-wcmapi-wcm_connection_cost
 type WCM_CONNECTION_COST int32
 
@@ -18,6 +22,31 @@ const (
 	WCM_CONNECTION_COST_APPROACHINGDATALIMIT WCM_CONNECTION_COST = 524288
 )
 
+// String returns the WCM_CONNECTION_COST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCM_CONNECTION_COST) String() string {
+	switch e {
+	case WCM_CONNECTION_COST_UNKNOWN:
+		return "WCM_CONNECTION_COST_UNKNOWN"
+	case WCM_CONNECTION_COST_UNRESTRICTED:
+		return "WCM_CONNECTION_COST_UNRESTRICTED"
+	case WCM_CONNECTION_COST_FIXED:
+		return "WCM_CONNECTION_COST_FIXED"
+	case WCM_CONNECTION_COST_VARIABLE:
+		return "WCM_CONNECTION_COST_VARIABLE"
+	case WCM_CONNECTION_COST_OVERDATALIMIT:
+		return "WCM_CONNECTION_COST_OVERDATALIMIT"
+	case WCM_CONNECTION_COST_CONGESTED:
+		return "WCM_CONNECTION_COST_CONGESTED"
+	case WCM_CONNECTION_COST_ROAMING:
+		return "WCM_CONNECTION_COST_ROAMING"
+	case WCM_CONNECTION_COST_APPROACHINGDATALIMIT:
+		return "WCM_CONNECTION_COST_APPROACHINGDATALIMIT"
+	default:
+		return fmt.Sprintf("WCM_CONNECTION_COST(%d)", int32(e))
+	}
+}
+
 // WCM_CONNECTION_COST_SOURCE: https://learn.microsoft.com/windows/win32/api/wcmapi/ne-wcmapi-wcm_connection_cost_source
 type WCM_CONNECTION_COST_SOURCE int32
 
@@ -27,6 +56,23 @@ const (
 	WCM_CONNECTION_COST_SOURCE_USER     WCM_CONNECTION_COST_SOURCE = 2
 	WCM_CONNECTION_COST_SOURCE_OPERATOR WCM_CONNECTION_COST_SOURCE = 3
 )
+
+// String returns the WCM_CONNECTION_COST_SOURCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCM_CONNECTION_COST_SOURCE) String() string {
+	switch e {
+	case WCM_CONNECTION_COST_SOURCE_DEFAULT:
+		return "WCM_CONNECTION_COST_SOURCE_DEFAULT"
+	case WCM_CONNECTION_COST_SOURCE_GP:
+		return "WCM_CONNECTION_COST_SOURCE_GP"
+	case WCM_CONNECTION_COST_SOURCE_USER:
+		return "WCM_CONNECTION_COST_SOURCE_USER"
+	case WCM_CONNECTION_COST_SOURCE_OPERATOR:
+		return "WCM_CONNECTION_COST_SOURCE_OPERATOR"
+	default:
+		return fmt.Sprintf("WCM_CONNECTION_COST_SOURCE(%d)", int32(e))
+	}
+}
 
 // WCM_MEDIA_TYPE: https://learn.microsoft.com/windows/win32/api/wcmapi/ne-wcmapi-wcm_media_type
 type WCM_MEDIA_TYPE int32
@@ -40,6 +86,27 @@ const (
 	Wcm_media_max      WCM_MEDIA_TYPE = 5
 )
 
+// String returns the WCM_MEDIA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCM_MEDIA_TYPE) String() string {
+	switch e {
+	case Wcm_media_unknown:
+		return "Wcm_media_unknown"
+	case Wcm_media_ethernet:
+		return "Wcm_media_ethernet"
+	case Wcm_media_wlan:
+		return "Wcm_media_wlan"
+	case Wcm_media_mbn:
+		return "Wcm_media_mbn"
+	case Wcm_media_invalid:
+		return "Wcm_media_invalid"
+	case Wcm_media_max:
+		return "Wcm_media_max"
+	default:
+		return fmt.Sprintf("WCM_MEDIA_TYPE(%d)", int32(e))
+	}
+}
+
 // WCM_PROPERTY: https://learn.microsoft.com/windows/win32/api/wcmapi/ne-wcmapi-wcm_property
 type WCM_PROPERTY int32
 
@@ -52,3 +119,26 @@ const (
 	Wcm_intf_property_dataplan_status          WCM_PROPERTY = 5
 	Wcm_intf_property_hotspot_profile          WCM_PROPERTY = 6
 )
+
+// String returns the WCM_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCM_PROPERTY) String() string {
+	switch e {
+	case Wcm_global_property_domain_policy:
+		return "Wcm_global_property_domain_policy"
+	case Wcm_global_property_minimize_policy:
+		return "Wcm_global_property_minimize_policy"
+	case Wcm_global_property_roaming_policy:
+		return "Wcm_global_property_roaming_policy"
+	case Wcm_global_property_powermanagement_policy:
+		return "Wcm_global_property_powermanagement_policy"
+	case Wcm_intf_property_connection_cost:
+		return "Wcm_intf_property_connection_cost"
+	case Wcm_intf_property_dataplan_status:
+		return "Wcm_intf_property_dataplan_status"
+	case Wcm_intf_property_hotspot_profile:
+		return "Wcm_intf_property_hotspot_profile"
+	default:
+		return fmt.Sprintf("WCM_PROPERTY(%d)", int32(e))
+	}
+}

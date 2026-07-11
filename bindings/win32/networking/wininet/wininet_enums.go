@@ -4,6 +4,11 @@
 
 package wininet
 
+import (
+	"fmt"
+	"strings"
+)
+
 type APP_CACHE_FINALIZE_STATE int32
 
 const (
@@ -11,6 +16,21 @@ const (
 	AppCacheFinalizeStateManifestChange APP_CACHE_FINALIZE_STATE = 1
 	AppCacheFinalizeStateComplete       APP_CACHE_FINALIZE_STATE = 2
 )
+
+// String returns the APP_CACHE_FINALIZE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APP_CACHE_FINALIZE_STATE) String() string {
+	switch e {
+	case AppCacheFinalizeStateIncomplete:
+		return "AppCacheFinalizeStateIncomplete"
+	case AppCacheFinalizeStateManifestChange:
+		return "AppCacheFinalizeStateManifestChange"
+	case AppCacheFinalizeStateComplete:
+		return "AppCacheFinalizeStateComplete"
+	default:
+		return fmt.Sprintf("APP_CACHE_FINALIZE_STATE(%d)", int32(e))
+	}
+}
 
 type APP_CACHE_STATE int32
 
@@ -20,6 +40,23 @@ const (
 	AppCacheStateUpdateNeededNew        APP_CACHE_STATE = 2
 	AppCacheStateUpdateNeededMasterOnly APP_CACHE_STATE = 3
 )
+
+// String returns the APP_CACHE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APP_CACHE_STATE) String() string {
+	switch e {
+	case AppCacheStateNoUpdateNeeded:
+		return "AppCacheStateNoUpdateNeeded"
+	case AppCacheStateUpdateNeeded:
+		return "AppCacheStateUpdateNeeded"
+	case AppCacheStateUpdateNeededNew:
+		return "AppCacheStateUpdateNeededNew"
+	case AppCacheStateUpdateNeededMasterOnly:
+		return "AppCacheStateUpdateNeededMasterOnly"
+	default:
+		return fmt.Sprintf("APP_CACHE_STATE(%d)", int32(e))
+	}
+}
 
 type CACHE_CONFIG uint32
 
@@ -36,6 +73,35 @@ const (
 	CACHE_CONFIG_STICKY_CONTENT_USAGE_FC CACHE_CONFIG = 16384
 )
 
+// String returns the CACHE_CONFIG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CACHE_CONFIG) String() string {
+	switch e {
+	case CACHE_CONFIG_FORCE_CLEANUP_FC:
+		return "CACHE_CONFIG_FORCE_CLEANUP_FC"
+	case CACHE_CONFIG_DISK_CACHE_PATHS_FC:
+		return "CACHE_CONFIG_DISK_CACHE_PATHS_FC"
+	case CACHE_CONFIG_SYNC_MODE_FC:
+		return "CACHE_CONFIG_SYNC_MODE_FC"
+	case CACHE_CONFIG_CONTENT_PATHS_FC:
+		return "CACHE_CONFIG_CONTENT_PATHS_FC"
+	case CACHE_CONFIG_HISTORY_PATHS_FC:
+		return "CACHE_CONFIG_HISTORY_PATHS_FC"
+	case CACHE_CONFIG_COOKIES_PATHS_FC:
+		return "CACHE_CONFIG_COOKIES_PATHS_FC"
+	case CACHE_CONFIG_QUOTA_FC:
+		return "CACHE_CONFIG_QUOTA_FC"
+	case CACHE_CONFIG_USER_MODE_FC:
+		return "CACHE_CONFIG_USER_MODE_FC"
+	case CACHE_CONFIG_CONTENT_USAGE_FC:
+		return "CACHE_CONFIG_CONTENT_USAGE_FC"
+	case CACHE_CONFIG_STICKY_CONTENT_USAGE_FC:
+		return "CACHE_CONFIG_STICKY_CONTENT_USAGE_FC"
+	default:
+		return fmt.Sprintf("CACHE_CONFIG(%d)", uint32(e))
+	}
+}
+
 type FORTCMD int32
 
 const (
@@ -44,12 +110,40 @@ const (
 	FORTCMD_CHG_PERSONALITY FORTCMD = 3
 )
 
+// String returns the FORTCMD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FORTCMD) String() string {
+	switch e {
+	case FORTCMD_LOGON:
+		return "FORTCMD_LOGON"
+	case FORTCMD_LOGOFF:
+		return "FORTCMD_LOGOFF"
+	case FORTCMD_CHG_PERSONALITY:
+		return "FORTCMD_CHG_PERSONALITY"
+	default:
+		return fmt.Sprintf("FORTCMD(%d)", int32(e))
+	}
+}
+
 type FORTSTAT int32
 
 const (
 	FORTSTAT_INSTALLED FORTSTAT = 1
 	FORTSTAT_LOGGEDON  FORTSTAT = 2
 )
+
+// String returns the FORTSTAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FORTSTAT) String() string {
+	switch e {
+	case FORTSTAT_INSTALLED:
+		return "FORTSTAT_INSTALLED"
+	case FORTSTAT_LOGGEDON:
+		return "FORTSTAT_LOGGEDON"
+	default:
+		return fmt.Sprintf("FORTSTAT(%d)", int32(e))
+	}
+}
 
 type FTP_FLAGS uint32
 
@@ -60,6 +154,21 @@ const (
 	INTERNET_FLAG_TRANSFER_ASCII  FTP_FLAGS = 1
 	INTERNET_FLAG_TRANSFER_BINARY FTP_FLAGS = 2
 )
+
+// String returns the FTP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FTP_FLAGS) String() string {
+	switch e {
+	case FTP_TRANSFER_TYPE_ASCII:
+		return "FTP_TRANSFER_TYPE_ASCII"
+	case FTP_TRANSFER_TYPE_BINARY:
+		return "FTP_TRANSFER_TYPE_BINARY"
+	case FTP_TRANSFER_TYPE_UNKNOWN:
+		return "FTP_TRANSFER_TYPE_UNKNOWN"
+	default:
+		return fmt.Sprintf("FTP_FLAGS(%d)", uint32(e))
+	}
+}
 
 type GOPHER_TYPE uint32
 
@@ -90,6 +199,64 @@ const (
 	GOPHER_TYPE_UNKNOWN        GOPHER_TYPE = 536870912
 )
 
+// String returns the GOPHER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GOPHER_TYPE) String() string {
+	switch e {
+	case GOPHER_TYPE_ASK:
+		return "GOPHER_TYPE_ASK"
+	case GOPHER_TYPE_BINARY:
+		return "GOPHER_TYPE_BINARY"
+	case GOPHER_TYPE_BITMAP:
+		return "GOPHER_TYPE_BITMAP"
+	case GOPHER_TYPE_CALENDAR:
+		return "GOPHER_TYPE_CALENDAR"
+	case GOPHER_TYPE_CSO:
+		return "GOPHER_TYPE_CSO"
+	case GOPHER_TYPE_DIRECTORY:
+		return "GOPHER_TYPE_DIRECTORY"
+	case GOPHER_TYPE_DOS_ARCHIVE:
+		return "GOPHER_TYPE_DOS_ARCHIVE"
+	case GOPHER_TYPE_ERROR:
+		return "GOPHER_TYPE_ERROR"
+	case GOPHER_TYPE_GIF:
+		return "GOPHER_TYPE_GIF"
+	case GOPHER_TYPE_GOPHER_PLUS:
+		return "GOPHER_TYPE_GOPHER_PLUS"
+	case GOPHER_TYPE_HTML:
+		return "GOPHER_TYPE_HTML"
+	case GOPHER_TYPE_IMAGE:
+		return "GOPHER_TYPE_IMAGE"
+	case GOPHER_TYPE_INDEX_SERVER:
+		return "GOPHER_TYPE_INDEX_SERVER"
+	case GOPHER_TYPE_INLINE:
+		return "GOPHER_TYPE_INLINE"
+	case GOPHER_TYPE_MAC_BINHEX:
+		return "GOPHER_TYPE_MAC_BINHEX"
+	case GOPHER_TYPE_MOVIE:
+		return "GOPHER_TYPE_MOVIE"
+	case GOPHER_TYPE_PDF:
+		return "GOPHER_TYPE_PDF"
+	case GOPHER_TYPE_REDUNDANT:
+		return "GOPHER_TYPE_REDUNDANT"
+	case GOPHER_TYPE_SOUND:
+		return "GOPHER_TYPE_SOUND"
+	case GOPHER_TYPE_TELNET:
+		return "GOPHER_TYPE_TELNET"
+	case GOPHER_TYPE_TEXT_FILE:
+		return "GOPHER_TYPE_TEXT_FILE"
+	case GOPHER_TYPE_TN3270:
+		return "GOPHER_TYPE_TN3270"
+	case GOPHER_TYPE_UNIX_UUENCODED:
+		return "GOPHER_TYPE_UNIX_UUENCODED"
+	case GOPHER_TYPE_UNKNOWN:
+		return "GOPHER_TYPE_UNKNOWN"
+	default:
+		return fmt.Sprintf("GOPHER_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HTTP_ADDREQ_FLAG uint32
 
 const (
@@ -101,6 +268,34 @@ const (
 	HTTP_ADDREQ_FLAG_REPLACE                 HTTP_ADDREQ_FLAG = 2147483648
 )
 
+// String returns the HTTP_ADDREQ_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_ADDREQ_FLAG) String() string {
+	var parts []string
+	if e&HTTP_ADDREQ_FLAG_ADD != 0 {
+		parts = append(parts, "HTTP_ADDREQ_FLAG_ADD")
+	}
+	if e&HTTP_ADDREQ_FLAG_ADD_IF_NEW != 0 {
+		parts = append(parts, "HTTP_ADDREQ_FLAG_ADD_IF_NEW")
+	}
+	if e&HTTP_ADDREQ_FLAG_COALESCE != 0 {
+		parts = append(parts, "HTTP_ADDREQ_FLAG_COALESCE")
+	}
+	if e&HTTP_ADDREQ_FLAG_COALESCE_WITH_COMMA != 0 {
+		parts = append(parts, "HTTP_ADDREQ_FLAG_COALESCE_WITH_COMMA")
+	}
+	if e&HTTP_ADDREQ_FLAG_COALESCE_WITH_SEMICOLON != 0 {
+		parts = append(parts, "HTTP_ADDREQ_FLAG_COALESCE_WITH_SEMICOLON")
+	}
+	if e&HTTP_ADDREQ_FLAG_REPLACE != 0 {
+		parts = append(parts, "HTTP_ADDREQ_FLAG_REPLACE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type HTTP_POLICY_EXTENSION_TYPE int32
 
 const (
@@ -109,11 +304,37 @@ const (
 	POLICY_EXTENSION_TYPE_WININET HTTP_POLICY_EXTENSION_TYPE = 2
 )
 
+// String returns the HTTP_POLICY_EXTENSION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_POLICY_EXTENSION_TYPE) String() string {
+	switch e {
+	case POLICY_EXTENSION_TYPE_NONE:
+		return "POLICY_EXTENSION_TYPE_NONE"
+	case POLICY_EXTENSION_TYPE_WINHTTP:
+		return "POLICY_EXTENSION_TYPE_WINHTTP"
+	case POLICY_EXTENSION_TYPE_WININET:
+		return "POLICY_EXTENSION_TYPE_WININET"
+	default:
+		return fmt.Sprintf("HTTP_POLICY_EXTENSION_TYPE(%d)", int32(e))
+	}
+}
+
 type HTTP_POLICY_EXTENSION_VERSION int32
 
 const (
 	POLICY_EXTENSION_VERSION1 HTTP_POLICY_EXTENSION_VERSION = 1
 )
+
+// String returns the HTTP_POLICY_EXTENSION_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_POLICY_EXTENSION_VERSION) String() string {
+	switch e {
+	case POLICY_EXTENSION_VERSION1:
+		return "POLICY_EXTENSION_VERSION1"
+	default:
+		return fmt.Sprintf("HTTP_POLICY_EXTENSION_VERSION(%d)", int32(e))
+	}
+}
 
 type HTTP_PUSH_WAIT_TYPE int32
 
@@ -122,6 +343,21 @@ const (
 	HttpPushWaitReceiveComplete HTTP_PUSH_WAIT_TYPE = 1
 	HttpPushWaitSendComplete    HTTP_PUSH_WAIT_TYPE = 2
 )
+
+// String returns the HTTP_PUSH_WAIT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_PUSH_WAIT_TYPE) String() string {
+	switch e {
+	case HttpPushWaitEnableComplete:
+		return "HttpPushWaitEnableComplete"
+	case HttpPushWaitReceiveComplete:
+		return "HttpPushWaitReceiveComplete"
+	case HttpPushWaitSendComplete:
+		return "HttpPushWaitSendComplete"
+	default:
+		return fmt.Sprintf("HTTP_PUSH_WAIT_TYPE(%d)", int32(e))
+	}
+}
 
 type HTTP_WEB_SOCKET_BUFFER_TYPE int32
 
@@ -133,6 +369,27 @@ const (
 	HTTP_WEB_SOCKET_CLOSE_TYPE           HTTP_WEB_SOCKET_BUFFER_TYPE = 4
 	HTTP_WEB_SOCKET_PING_TYPE            HTTP_WEB_SOCKET_BUFFER_TYPE = 5
 )
+
+// String returns the HTTP_WEB_SOCKET_BUFFER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_WEB_SOCKET_BUFFER_TYPE) String() string {
+	switch e {
+	case HTTP_WEB_SOCKET_BINARY_MESSAGE_TYPE:
+		return "HTTP_WEB_SOCKET_BINARY_MESSAGE_TYPE"
+	case HTTP_WEB_SOCKET_BINARY_FRAGMENT_TYPE:
+		return "HTTP_WEB_SOCKET_BINARY_FRAGMENT_TYPE"
+	case HTTP_WEB_SOCKET_UTF8_MESSAGE_TYPE:
+		return "HTTP_WEB_SOCKET_UTF8_MESSAGE_TYPE"
+	case HTTP_WEB_SOCKET_UTF8_FRAGMENT_TYPE:
+		return "HTTP_WEB_SOCKET_UTF8_FRAGMENT_TYPE"
+	case HTTP_WEB_SOCKET_CLOSE_TYPE:
+		return "HTTP_WEB_SOCKET_CLOSE_TYPE"
+	case HTTP_WEB_SOCKET_PING_TYPE:
+		return "HTTP_WEB_SOCKET_PING_TYPE"
+	default:
+		return fmt.Sprintf("HTTP_WEB_SOCKET_BUFFER_TYPE(%d)", int32(e))
+	}
+}
 
 type HTTP_WEB_SOCKET_CLOSE_STATUS int32
 
@@ -151,6 +408,39 @@ const (
 	HTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS HTTP_WEB_SOCKET_CLOSE_STATUS = 1015
 )
 
+// String returns the HTTP_WEB_SOCKET_CLOSE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_WEB_SOCKET_CLOSE_STATUS) String() string {
+	switch e {
+	case HTTP_WEB_SOCKET_SUCCESS_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_SUCCESS_CLOSE_STATUS"
+	case HTTP_WEB_SOCKET_ENDPOINT_TERMINATED_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_ENDPOINT_TERMINATED_CLOSE_STATUS"
+	case HTTP_WEB_SOCKET_PROTOCOL_ERROR_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_PROTOCOL_ERROR_CLOSE_STATUS"
+	case HTTP_WEB_SOCKET_INVALID_DATA_TYPE_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_INVALID_DATA_TYPE_CLOSE_STATUS"
+	case HTTP_WEB_SOCKET_EMPTY_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_EMPTY_CLOSE_STATUS"
+	case HTTP_WEB_SOCKET_ABORTED_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_ABORTED_CLOSE_STATUS"
+	case HTTP_WEB_SOCKET_INVALID_PAYLOAD_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_INVALID_PAYLOAD_CLOSE_STATUS"
+	case HTTP_WEB_SOCKET_POLICY_VIOLATION_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_POLICY_VIOLATION_CLOSE_STATUS"
+	case HTTP_WEB_SOCKET_MESSAGE_TOO_BIG_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_MESSAGE_TOO_BIG_CLOSE_STATUS"
+	case HTTP_WEB_SOCKET_UNSUPPORTED_EXTENSIONS_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_UNSUPPORTED_EXTENSIONS_CLOSE_STATUS"
+	case HTTP_WEB_SOCKET_SERVER_ERROR_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_SERVER_ERROR_CLOSE_STATUS"
+	case HTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS:
+		return "HTTP_WEB_SOCKET_SECURE_HANDSHAKE_ERROR_CLOSE_STATUS"
+	default:
+		return fmt.Sprintf("HTTP_WEB_SOCKET_CLOSE_STATUS(%d)", int32(e))
+	}
+}
+
 type HTTP_WEB_SOCKET_OPERATION int32
 
 const (
@@ -160,6 +450,23 @@ const (
 	HTTP_WEB_SOCKET_SHUTDOWN_OPERATION HTTP_WEB_SOCKET_OPERATION = 3
 )
 
+// String returns the HTTP_WEB_SOCKET_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_WEB_SOCKET_OPERATION) String() string {
+	switch e {
+	case HTTP_WEB_SOCKET_SEND_OPERATION:
+		return "HTTP_WEB_SOCKET_SEND_OPERATION"
+	case HTTP_WEB_SOCKET_RECEIVE_OPERATION:
+		return "HTTP_WEB_SOCKET_RECEIVE_OPERATION"
+	case HTTP_WEB_SOCKET_CLOSE_OPERATION:
+		return "HTTP_WEB_SOCKET_CLOSE_OPERATION"
+	case HTTP_WEB_SOCKET_SHUTDOWN_OPERATION:
+		return "HTTP_WEB_SOCKET_SHUTDOWN_OPERATION"
+	default:
+		return fmt.Sprintf("HTTP_WEB_SOCKET_OPERATION(%d)", int32(e))
+	}
+}
+
 type INTERNET_ACCESS_TYPE uint32
 
 const (
@@ -167,6 +474,21 @@ const (
 	INTERNET_OPEN_TYPE_PRECONFIG INTERNET_ACCESS_TYPE = 0
 	INTERNET_OPEN_TYPE_PROXY     INTERNET_ACCESS_TYPE = 3
 )
+
+// String returns the INTERNET_ACCESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERNET_ACCESS_TYPE) String() string {
+	switch e {
+	case INTERNET_OPEN_TYPE_DIRECT:
+		return "INTERNET_OPEN_TYPE_DIRECT"
+	case INTERNET_OPEN_TYPE_PRECONFIG:
+		return "INTERNET_OPEN_TYPE_PRECONFIG"
+	case INTERNET_OPEN_TYPE_PROXY:
+		return "INTERNET_OPEN_TYPE_PROXY"
+	default:
+		return fmt.Sprintf("INTERNET_ACCESS_TYPE(%d)", uint32(e))
+	}
+}
 
 type INTERNET_AUTODIAL uint32
 
@@ -177,6 +499,24 @@ const (
 	INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT INTERNET_AUTODIAL = 8
 )
 
+// String returns the INTERNET_AUTODIAL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERNET_AUTODIAL) String() string {
+	switch e {
+	case INTERNET_AUTODIAL_FAILIFSECURITYCHECK:
+		return "INTERNET_AUTODIAL_FAILIFSECURITYCHECK"
+	case INTERNET_AUTODIAL_FORCE_ONLINE:
+		return "INTERNET_AUTODIAL_FORCE_ONLINE"
+	case INTERNET_AUTODIAL_FORCE_UNATTENDED:
+		return "INTERNET_AUTODIAL_FORCE_UNATTENDED"
+	case INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT:
+		return "INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT"
+	default:
+		return fmt.Sprintf("INTERNET_AUTODIAL(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type INTERNET_CONNECTION uint32
 
 const (
@@ -189,6 +529,37 @@ const (
 	INTERNET_RAS_INSTALLED         INTERNET_CONNECTION = 16
 )
 
+// String returns the INTERNET_CONNECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERNET_CONNECTION) String() string {
+	var parts []string
+	if e&INTERNET_CONNECTION_CONFIGURED != 0 {
+		parts = append(parts, "INTERNET_CONNECTION_CONFIGURED")
+	}
+	if e&INTERNET_CONNECTION_LAN != 0 {
+		parts = append(parts, "INTERNET_CONNECTION_LAN")
+	}
+	if e&INTERNET_CONNECTION_MODEM != 0 {
+		parts = append(parts, "INTERNET_CONNECTION_MODEM")
+	}
+	if e&INTERNET_CONNECTION_MODEM_BUSY != 0 {
+		parts = append(parts, "INTERNET_CONNECTION_MODEM_BUSY")
+	}
+	if e&INTERNET_CONNECTION_OFFLINE != 0 {
+		parts = append(parts, "INTERNET_CONNECTION_OFFLINE")
+	}
+	if e&INTERNET_CONNECTION_PROXY != 0 {
+		parts = append(parts, "INTERNET_CONNECTION_PROXY")
+	}
+	if e&INTERNET_RAS_INSTALLED != 0 {
+		parts = append(parts, "INTERNET_RAS_INSTALLED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type INTERNET_COOKIE_FLAGS uint32
 
 const (
@@ -196,6 +567,21 @@ const (
 	INTERNET_COOKIE_THIRD_PARTY   INTERNET_COOKIE_FLAGS = 16
 	INTERNET_FLAG_RESTRICTED_ZONE INTERNET_COOKIE_FLAGS = 131072
 )
+
+// String returns the INTERNET_COOKIE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERNET_COOKIE_FLAGS) String() string {
+	switch e {
+	case INTERNET_COOKIE_HTTPONLY:
+		return "INTERNET_COOKIE_HTTPONLY"
+	case INTERNET_COOKIE_THIRD_PARTY:
+		return "INTERNET_COOKIE_THIRD_PARTY"
+	case INTERNET_FLAG_RESTRICTED_ZONE:
+		return "INTERNET_FLAG_RESTRICTED_ZONE"
+	default:
+		return fmt.Sprintf("INTERNET_COOKIE_FLAGS(%d)", uint32(e))
+	}
+}
 
 type INTERNET_PER_CONN uint32
 
@@ -210,6 +596,33 @@ const (
 	INTERNET_PER_CONN_AUTOCONFIG_LAST_DETECT_TIME  INTERNET_PER_CONN = 8
 	INTERNET_PER_CONN_AUTOCONFIG_LAST_DETECT_URL   INTERNET_PER_CONN = 9
 )
+
+// String returns the INTERNET_PER_CONN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERNET_PER_CONN) String() string {
+	switch e {
+	case INTERNET_PER_CONN_AUTOCONFIG_URL:
+		return "INTERNET_PER_CONN_AUTOCONFIG_URL"
+	case INTERNET_PER_CONN_AUTODISCOVERY_FLAGS:
+		return "INTERNET_PER_CONN_AUTODISCOVERY_FLAGS"
+	case INTERNET_PER_CONN_FLAGS:
+		return "INTERNET_PER_CONN_FLAGS"
+	case INTERNET_PER_CONN_PROXY_BYPASS:
+		return "INTERNET_PER_CONN_PROXY_BYPASS"
+	case INTERNET_PER_CONN_PROXY_SERVER:
+		return "INTERNET_PER_CONN_PROXY_SERVER"
+	case INTERNET_PER_CONN_AUTOCONFIG_SECONDARY_URL:
+		return "INTERNET_PER_CONN_AUTOCONFIG_SECONDARY_URL"
+	case INTERNET_PER_CONN_AUTOCONFIG_RELOAD_DELAY_MINS:
+		return "INTERNET_PER_CONN_AUTOCONFIG_RELOAD_DELAY_MINS"
+	case INTERNET_PER_CONN_AUTOCONFIG_LAST_DETECT_TIME:
+		return "INTERNET_PER_CONN_AUTOCONFIG_LAST_DETECT_TIME"
+	case INTERNET_PER_CONN_AUTOCONFIG_LAST_DETECT_URL:
+		return "INTERNET_PER_CONN_AUTOCONFIG_LAST_DETECT_URL"
+	default:
+		return fmt.Sprintf("INTERNET_PER_CONN(%d)", uint32(e))
+	}
+}
 
 // INTERNET_SCHEME: https://learn.microsoft.com/windows/win32/api/wininet/ne-wininet-internet_scheme
 type INTERNET_SCHEME int32
@@ -233,6 +646,43 @@ const (
 	INTERNET_SCHEME_LAST       INTERNET_SCHEME = 11
 )
 
+// String returns the INTERNET_SCHEME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERNET_SCHEME) String() string {
+	switch e {
+	case INTERNET_SCHEME_PARTIAL:
+		return "INTERNET_SCHEME_PARTIAL"
+	case INTERNET_SCHEME_UNKNOWN:
+		return "INTERNET_SCHEME_UNKNOWN"
+	case INTERNET_SCHEME_DEFAULT:
+		return "INTERNET_SCHEME_DEFAULT"
+	case INTERNET_SCHEME_FTP:
+		return "INTERNET_SCHEME_FTP"
+	case INTERNET_SCHEME_GOPHER:
+		return "INTERNET_SCHEME_GOPHER"
+	case INTERNET_SCHEME_HTTP:
+		return "INTERNET_SCHEME_HTTP"
+	case INTERNET_SCHEME_HTTPS:
+		return "INTERNET_SCHEME_HTTPS"
+	case INTERNET_SCHEME_FILE:
+		return "INTERNET_SCHEME_FILE"
+	case INTERNET_SCHEME_NEWS:
+		return "INTERNET_SCHEME_NEWS"
+	case INTERNET_SCHEME_MAILTO:
+		return "INTERNET_SCHEME_MAILTO"
+	case INTERNET_SCHEME_SOCKS:
+		return "INTERNET_SCHEME_SOCKS"
+	case INTERNET_SCHEME_JAVASCRIPT:
+		return "INTERNET_SCHEME_JAVASCRIPT"
+	case INTERNET_SCHEME_VBSCRIPT:
+		return "INTERNET_SCHEME_VBSCRIPT"
+	case INTERNET_SCHEME_RES:
+		return "INTERNET_SCHEME_RES"
+	default:
+		return fmt.Sprintf("INTERNET_SCHEME(%d)", int32(e))
+	}
+}
+
 type INTERNET_STATE uint32
 
 const (
@@ -242,6 +692,25 @@ const (
 	INTERNET_STATE_IDLE                 INTERNET_STATE = 256
 	INTERNET_STATE_BUSY                 INTERNET_STATE = 512
 )
+
+// String returns the INTERNET_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERNET_STATE) String() string {
+	switch e {
+	case INTERNET_STATE_CONNECTED:
+		return "INTERNET_STATE_CONNECTED"
+	case INTERNET_STATE_DISCONNECTED:
+		return "INTERNET_STATE_DISCONNECTED"
+	case INTERNET_STATE_DISCONNECTED_BY_USER:
+		return "INTERNET_STATE_DISCONNECTED_BY_USER"
+	case INTERNET_STATE_IDLE:
+		return "INTERNET_STATE_IDLE"
+	case INTERNET_STATE_BUSY:
+		return "INTERNET_STATE_BUSY"
+	default:
+		return fmt.Sprintf("INTERNET_STATE(%d)", uint32(e))
+	}
+}
 
 // InternetCookieState: https://learn.microsoft.com/windows/win32/api/wininet/ne-wininet-internetcookiestate
 type InternetCookieState int32
@@ -256,6 +725,27 @@ const (
 	COOKIE_STATE_MAX       InternetCookieState = 5
 )
 
+// String returns the InternetCookieState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InternetCookieState) String() string {
+	switch e {
+	case COOKIE_STATE_UNKNOWN:
+		return "COOKIE_STATE_UNKNOWN"
+	case COOKIE_STATE_ACCEPT:
+		return "COOKIE_STATE_ACCEPT"
+	case COOKIE_STATE_PROMPT:
+		return "COOKIE_STATE_PROMPT"
+	case COOKIE_STATE_LEASH:
+		return "COOKIE_STATE_LEASH"
+	case COOKIE_STATE_DOWNGRADE:
+		return "COOKIE_STATE_DOWNGRADE"
+	case COOKIE_STATE_REJECT:
+		return "COOKIE_STATE_REJECT"
+	default:
+		return fmt.Sprintf("InternetCookieState(%d)", int32(e))
+	}
+}
+
 type PROOF_OF_POSSESSION_FLAGS uint32
 
 const (
@@ -263,12 +753,42 @@ const (
 	PROOF_OF_POSSESSION_ALLOW_SILENT_REQUESTS PROOF_OF_POSSESSION_FLAGS = 1
 )
 
+// String returns the PROOF_OF_POSSESSION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROOF_OF_POSSESSION_FLAGS) String() string {
+	switch e {
+	case PROOF_OF_POSSESSION_DEFAULT:
+		return "PROOF_OF_POSSESSION_DEFAULT"
+	case PROOF_OF_POSSESSION_ALLOW_SILENT_REQUESTS:
+		return "PROOF_OF_POSSESSION_ALLOW_SILENT_REQUESTS"
+	default:
+		return fmt.Sprintf("PROOF_OF_POSSESSION_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PROXY_AUTO_DETECT_TYPE uint32
 
 const (
 	PROXY_AUTO_DETECT_TYPE_DHCP  PROXY_AUTO_DETECT_TYPE = 1
 	PROXY_AUTO_DETECT_TYPE_DNS_A PROXY_AUTO_DETECT_TYPE = 2
 )
+
+// String returns the PROXY_AUTO_DETECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROXY_AUTO_DETECT_TYPE) String() string {
+	var parts []string
+	if e&PROXY_AUTO_DETECT_TYPE_DHCP != 0 {
+		parts = append(parts, "PROXY_AUTO_DETECT_TYPE_DHCP")
+	}
+	if e&PROXY_AUTO_DETECT_TYPE_DNS_A != 0 {
+		parts = append(parts, "PROXY_AUTO_DETECT_TYPE_DNS_A")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type REQUEST_TIMES int32
 
@@ -282,6 +802,29 @@ const (
 	HttpRequestTimeMax           REQUEST_TIMES = 32
 )
 
+// String returns the REQUEST_TIMES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REQUEST_TIMES) String() string {
+	switch e {
+	case NameResolutionStart:
+		return "NameResolutionStart"
+	case NameResolutionEnd:
+		return "NameResolutionEnd"
+	case ConnectionEstablishmentStart:
+		return "ConnectionEstablishmentStart"
+	case ConnectionEstablishmentEnd:
+		return "ConnectionEstablishmentEnd"
+	case TLSHandshakeStart:
+		return "TLSHandshakeStart"
+	case TLSHandshakeEnd:
+		return "TLSHandshakeEnd"
+	case HttpRequestTimeMax:
+		return "HttpRequestTimeMax"
+	default:
+		return fmt.Sprintf("REQUEST_TIMES(%d)", int32(e))
+	}
+}
+
 type URL_CACHE_LIMIT_TYPE int32
 
 const (
@@ -291,6 +834,25 @@ const (
 	UrlCacheLimitTypeAppContainerTotal URL_CACHE_LIMIT_TYPE = 3
 	UrlCacheLimitTypeNum               URL_CACHE_LIMIT_TYPE = 4
 )
+
+// String returns the URL_CACHE_LIMIT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e URL_CACHE_LIMIT_TYPE) String() string {
+	switch e {
+	case UrlCacheLimitTypeIE:
+		return "UrlCacheLimitTypeIE"
+	case UrlCacheLimitTypeIETotal:
+		return "UrlCacheLimitTypeIETotal"
+	case UrlCacheLimitTypeAppContainer:
+		return "UrlCacheLimitTypeAppContainer"
+	case UrlCacheLimitTypeAppContainerTotal:
+		return "UrlCacheLimitTypeAppContainerTotal"
+	case UrlCacheLimitTypeNum:
+		return "UrlCacheLimitTypeNum"
+	default:
+		return fmt.Sprintf("URL_CACHE_LIMIT_TYPE(%d)", int32(e))
+	}
+}
 
 type WININET_SYNC_MODE int32
 
@@ -303,9 +865,41 @@ const (
 	WININET_SYNC_MODE_DEFAULT          WININET_SYNC_MODE = 4
 )
 
+// String returns the WININET_SYNC_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WININET_SYNC_MODE) String() string {
+	switch e {
+	case WININET_SYNC_MODE_NEVER:
+		return "WININET_SYNC_MODE_NEVER"
+	case WININET_SYNC_MODE_ON_EXPIRY:
+		return "WININET_SYNC_MODE_ON_EXPIRY"
+	case WININET_SYNC_MODE_ONCE_PER_SESSION:
+		return "WININET_SYNC_MODE_ONCE_PER_SESSION"
+	case WININET_SYNC_MODE_ALWAYS:
+		return "WININET_SYNC_MODE_ALWAYS"
+	case WININET_SYNC_MODE_AUTOMATIC:
+		return "WININET_SYNC_MODE_AUTOMATIC"
+	default:
+		return fmt.Sprintf("WININET_SYNC_MODE(%d)", int32(e))
+	}
+}
+
 type WPAD_CACHE_DELETE int32
 
 const (
 	WPAD_CACHE_DELETE_CURRENT WPAD_CACHE_DELETE = 0
 	WPAD_CACHE_DELETE_ALL     WPAD_CACHE_DELETE = 1
 )
+
+// String returns the WPAD_CACHE_DELETE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPAD_CACHE_DELETE) String() string {
+	switch e {
+	case WPAD_CACHE_DELETE_CURRENT:
+		return "WPAD_CACHE_DELETE_CURRENT"
+	case WPAD_CACHE_DELETE_ALL:
+		return "WPAD_CACHE_DELETE_ALL"
+	default:
+		return fmt.Sprintf("WPAD_CACHE_DELETE(%d)", int32(e))
+	}
+}

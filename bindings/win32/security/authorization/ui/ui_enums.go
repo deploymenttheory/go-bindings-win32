@@ -4,6 +4,12 @@
 
 package ui
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type SECURITY_INFO_PAGE_FLAGS uint32
 
 const (
@@ -12,6 +18,26 @@ const (
 	SI_EDIT_PROPERTIES SECURITY_INFO_PAGE_FLAGS = 128
 )
 
+// String returns the SECURITY_INFO_PAGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURITY_INFO_PAGE_FLAGS) String() string {
+	var parts []string
+	if e&SI_ADVANCED != 0 {
+		parts = append(parts, "SI_ADVANCED")
+	}
+	if e&SI_EDIT_AUDITS != 0 {
+		parts = append(parts, "SI_EDIT_AUDITS")
+	}
+	if e&SI_EDIT_PROPERTIES != 0 {
+		parts = append(parts, "SI_EDIT_PROPERTIES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SI_OBJECT_INFO_FLAGS uint32
 
 const (
@@ -31,6 +57,58 @@ const (
 	SI_VIEW_ONLY                       SI_OBJECT_INFO_FLAGS = 4194304
 )
 
+// String returns the SI_OBJECT_INFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SI_OBJECT_INFO_FLAGS) String() string {
+	var parts []string
+	if e&SI_AUDITS_ELEVATION_REQUIRED != 0 {
+		parts = append(parts, "SI_AUDITS_ELEVATION_REQUIRED")
+	}
+	if e&SI_DISABLE_DENY_ACE != 0 {
+		parts = append(parts, "SI_DISABLE_DENY_ACE")
+	}
+	if e&SI_EDIT_EFFECTIVE != 0 {
+		parts = append(parts, "SI_EDIT_EFFECTIVE")
+	}
+	if e&SI_ENABLE_CENTRAL_POLICY != 0 {
+		parts = append(parts, "SI_ENABLE_CENTRAL_POLICY")
+	}
+	if e&SI_ENABLE_EDIT_ATTRIBUTE_CONDITION != 0 {
+		parts = append(parts, "SI_ENABLE_EDIT_ATTRIBUTE_CONDITION")
+	}
+	if e&SI_MAY_WRITE != 0 {
+		parts = append(parts, "SI_MAY_WRITE")
+	}
+	if e&SI_NO_ADDITIONAL_PERMISSION != 0 {
+		parts = append(parts, "SI_NO_ADDITIONAL_PERMISSION")
+	}
+	if e&SI_OWNER_ELEVATION_REQUIRED != 0 {
+		parts = append(parts, "SI_OWNER_ELEVATION_REQUIRED")
+	}
+	if e&SI_PERMS_ELEVATION_REQUIRED != 0 {
+		parts = append(parts, "SI_PERMS_ELEVATION_REQUIRED")
+	}
+	if e&SI_RESET_DACL != 0 {
+		parts = append(parts, "SI_RESET_DACL")
+	}
+	if e&SI_RESET_OWNER != 0 {
+		parts = append(parts, "SI_RESET_OWNER")
+	}
+	if e&SI_RESET_SACL != 0 {
+		parts = append(parts, "SI_RESET_SACL")
+	}
+	if e&SI_SCOPE_ELEVATION_REQUIRED != 0 {
+		parts = append(parts, "SI_SCOPE_ELEVATION_REQUIRED")
+	}
+	if e&SI_VIEW_ONLY != 0 {
+		parts = append(parts, "SI_VIEW_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SI_PAGE_ACTIVATED int32
 
 const (
@@ -42,6 +120,29 @@ const (
 	SI_SHOW_SHARE_ACTIVATED          SI_PAGE_ACTIVATED = 5
 	SI_SHOW_CENTRAL_POLICY_ACTIVATED SI_PAGE_ACTIVATED = 6
 )
+
+// String returns the SI_PAGE_ACTIVATED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SI_PAGE_ACTIVATED) String() string {
+	switch e {
+	case SI_SHOW_DEFAULT:
+		return "SI_SHOW_DEFAULT"
+	case SI_SHOW_PERM_ACTIVATED:
+		return "SI_SHOW_PERM_ACTIVATED"
+	case SI_SHOW_AUDIT_ACTIVATED:
+		return "SI_SHOW_AUDIT_ACTIVATED"
+	case SI_SHOW_OWNER_ACTIVATED:
+		return "SI_SHOW_OWNER_ACTIVATED"
+	case SI_SHOW_EFFECTIVE_ACTIVATED:
+		return "SI_SHOW_EFFECTIVE_ACTIVATED"
+	case SI_SHOW_SHARE_ACTIVATED:
+		return "SI_SHOW_SHARE_ACTIVATED"
+	case SI_SHOW_CENTRAL_POLICY_ACTIVATED:
+		return "SI_SHOW_CENTRAL_POLICY_ACTIVATED"
+	default:
+		return fmt.Sprintf("SI_PAGE_ACTIVATED(%d)", int32(e))
+	}
+}
 
 // SI_PAGE_TYPE: https://learn.microsoft.com/windows/win32/api/aclui/ne-aclui-si_page_type
 type SI_PAGE_TYPE int32
@@ -55,3 +156,26 @@ const (
 	SI_PAGE_TAKEOWNERSHIP SI_PAGE_TYPE = 5
 	SI_PAGE_SHARE         SI_PAGE_TYPE = 6
 )
+
+// String returns the SI_PAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SI_PAGE_TYPE) String() string {
+	switch e {
+	case SI_PAGE_PERM:
+		return "SI_PAGE_PERM"
+	case SI_PAGE_ADVPERM:
+		return "SI_PAGE_ADVPERM"
+	case SI_PAGE_AUDIT:
+		return "SI_PAGE_AUDIT"
+	case SI_PAGE_OWNER:
+		return "SI_PAGE_OWNER"
+	case SI_PAGE_EFFECTIVE:
+		return "SI_PAGE_EFFECTIVE"
+	case SI_PAGE_TAKEOWNERSHIP:
+		return "SI_PAGE_TAKEOWNERSHIP"
+	case SI_PAGE_SHARE:
+		return "SI_PAGE_SHARE"
+	default:
+		return fmt.Sprintf("SI_PAGE_TYPE(%d)", int32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package p2p
 
+import (
+	"fmt"
+)
+
 // DRT_ADDRESS_FLAGS: https://learn.microsoft.com/windows/win32/api/drt/ne-drt-drt_address_flags
 type DRT_ADDRESS_FLAGS int32
 
@@ -18,6 +22,31 @@ const (
 	DRT_ADDRESS_FLAG_INQUIRE                 DRT_ADDRESS_FLAGS = 128
 )
 
+// String returns the DRT_ADDRESS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRT_ADDRESS_FLAGS) String() string {
+	switch e {
+	case DRT_ADDRESS_FLAG_ACCEPTED:
+		return "DRT_ADDRESS_FLAG_ACCEPTED"
+	case DRT_ADDRESS_FLAG_REJECTED:
+		return "DRT_ADDRESS_FLAG_REJECTED"
+	case DRT_ADDRESS_FLAG_UNREACHABLE:
+		return "DRT_ADDRESS_FLAG_UNREACHABLE"
+	case DRT_ADDRESS_FLAG_LOOP:
+		return "DRT_ADDRESS_FLAG_LOOP"
+	case DRT_ADDRESS_FLAG_TOO_BUSY:
+		return "DRT_ADDRESS_FLAG_TOO_BUSY"
+	case DRT_ADDRESS_FLAG_BAD_VALIDATE_ID:
+		return "DRT_ADDRESS_FLAG_BAD_VALIDATE_ID"
+	case DRT_ADDRESS_FLAG_SUSPECT_UNREGISTERED_ID:
+		return "DRT_ADDRESS_FLAG_SUSPECT_UNREGISTERED_ID"
+	case DRT_ADDRESS_FLAG_INQUIRE:
+		return "DRT_ADDRESS_FLAG_INQUIRE"
+	default:
+		return fmt.Sprintf("DRT_ADDRESS_FLAGS(%d)", int32(e))
+	}
+}
+
 // DRT_EVENT_TYPE: https://learn.microsoft.com/windows/win32/api/drt/ne-drt-drt_event_type
 type DRT_EVENT_TYPE int32
 
@@ -27,6 +56,21 @@ const (
 	DRT_EVENT_REGISTRATION_STATE_CHANGED DRT_EVENT_TYPE = 2
 )
 
+// String returns the DRT_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRT_EVENT_TYPE) String() string {
+	switch e {
+	case DRT_EVENT_STATUS_CHANGED:
+		return "DRT_EVENT_STATUS_CHANGED"
+	case DRT_EVENT_LEAFSET_KEY_CHANGED:
+		return "DRT_EVENT_LEAFSET_KEY_CHANGED"
+	case DRT_EVENT_REGISTRATION_STATE_CHANGED:
+		return "DRT_EVENT_REGISTRATION_STATE_CHANGED"
+	default:
+		return fmt.Sprintf("DRT_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 // DRT_LEAFSET_KEY_CHANGE_TYPE: https://learn.microsoft.com/windows/win32/api/drt/ne-drt-drt_leafset_key_change_type
 type DRT_LEAFSET_KEY_CHANGE_TYPE int32
 
@@ -34,6 +78,19 @@ const (
 	DRT_LEAFSET_KEY_ADDED   DRT_LEAFSET_KEY_CHANGE_TYPE = 0
 	DRT_LEAFSET_KEY_DELETED DRT_LEAFSET_KEY_CHANGE_TYPE = 1
 )
+
+// String returns the DRT_LEAFSET_KEY_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRT_LEAFSET_KEY_CHANGE_TYPE) String() string {
+	switch e {
+	case DRT_LEAFSET_KEY_ADDED:
+		return "DRT_LEAFSET_KEY_ADDED"
+	case DRT_LEAFSET_KEY_DELETED:
+		return "DRT_LEAFSET_KEY_DELETED"
+	default:
+		return fmt.Sprintf("DRT_LEAFSET_KEY_CHANGE_TYPE(%d)", int32(e))
+	}
+}
 
 // DRT_MATCH_TYPE: https://learn.microsoft.com/windows/win32/api/drt/ne-drt-drt_match_type
 type DRT_MATCH_TYPE int32
@@ -44,12 +101,38 @@ const (
 	DRT_MATCH_INTERMEDIATE DRT_MATCH_TYPE = 2
 )
 
+// String returns the DRT_MATCH_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRT_MATCH_TYPE) String() string {
+	switch e {
+	case DRT_MATCH_EXACT:
+		return "DRT_MATCH_EXACT"
+	case DRT_MATCH_NEAR:
+		return "DRT_MATCH_NEAR"
+	case DRT_MATCH_INTERMEDIATE:
+		return "DRT_MATCH_INTERMEDIATE"
+	default:
+		return fmt.Sprintf("DRT_MATCH_TYPE(%d)", int32(e))
+	}
+}
+
 // DRT_REGISTRATION_STATE: https://learn.microsoft.com/windows/win32/api/drt/ne-drt-drt_registration_state
 type DRT_REGISTRATION_STATE int32
 
 const (
 	DRT_REGISTRATION_STATE_UNRESOLVEABLE DRT_REGISTRATION_STATE = 1
 )
+
+// String returns the DRT_REGISTRATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRT_REGISTRATION_STATE) String() string {
+	switch e {
+	case DRT_REGISTRATION_STATE_UNRESOLVEABLE:
+		return "DRT_REGISTRATION_STATE_UNRESOLVEABLE"
+	default:
+		return fmt.Sprintf("DRT_REGISTRATION_STATE(%d)", int32(e))
+	}
+}
 
 // DRT_SCOPE: https://learn.microsoft.com/windows/win32/api/drt/ne-drt-drt_scope
 type DRT_SCOPE int32
@@ -60,6 +143,21 @@ const (
 	DRT_LINK_LOCAL_SCOPE DRT_SCOPE = 3
 )
 
+// String returns the DRT_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRT_SCOPE) String() string {
+	switch e {
+	case DRT_GLOBAL_SCOPE:
+		return "DRT_GLOBAL_SCOPE"
+	case DRT_SITE_LOCAL_SCOPE:
+		return "DRT_SITE_LOCAL_SCOPE"
+	case DRT_LINK_LOCAL_SCOPE:
+		return "DRT_LINK_LOCAL_SCOPE"
+	default:
+		return fmt.Sprintf("DRT_SCOPE(%d)", int32(e))
+	}
+}
+
 // DRT_SECURITY_MODE: https://learn.microsoft.com/windows/win32/api/drt/ne-drt-drt_security_mode
 type DRT_SECURITY_MODE int32
 
@@ -68,6 +166,21 @@ const (
 	DRT_SECURE_MEMBERSHIP          DRT_SECURITY_MODE = 1
 	DRT_SECURE_CONFIDENTIALPAYLOAD DRT_SECURITY_MODE = 2
 )
+
+// String returns the DRT_SECURITY_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRT_SECURITY_MODE) String() string {
+	switch e {
+	case DRT_SECURE_RESOLVE:
+		return "DRT_SECURE_RESOLVE"
+	case DRT_SECURE_MEMBERSHIP:
+		return "DRT_SECURE_MEMBERSHIP"
+	case DRT_SECURE_CONFIDENTIALPAYLOAD:
+		return "DRT_SECURE_CONFIDENTIALPAYLOAD"
+	default:
+		return fmt.Sprintf("DRT_SECURITY_MODE(%d)", int32(e))
+	}
+}
 
 // DRT_STATUS: https://learn.microsoft.com/windows/win32/api/drt/ne-drt-drt_status
 type DRT_STATUS int32
@@ -79,6 +192,23 @@ const (
 	DRT_FAULTED    DRT_STATUS = 20
 )
 
+// String returns the DRT_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRT_STATUS) String() string {
+	switch e {
+	case DRT_ACTIVE:
+		return "DRT_ACTIVE"
+	case DRT_ALONE:
+		return "DRT_ALONE"
+	case DRT_NO_NETWORK:
+		return "DRT_NO_NETWORK"
+	case DRT_FAULTED:
+		return "DRT_FAULTED"
+	default:
+		return fmt.Sprintf("DRT_STATUS(%d)", int32(e))
+	}
+}
+
 // PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS: https://learn.microsoft.com/windows/win32/api/peerdist/ne-peerdist-peerdist_client_info_by_handle_class
 type PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS int32
 
@@ -87,6 +217,19 @@ const (
 	MaximumPeerDistClientInfoByHandlesClass PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS = 1
 )
 
+// String returns the PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS) String() string {
+	switch e {
+	case PeerDistClientBasicInfo:
+		return "PeerDistClientBasicInfo"
+	case MaximumPeerDistClientInfoByHandlesClass:
+		return "MaximumPeerDistClientInfoByHandlesClass"
+	default:
+		return fmt.Sprintf("PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS(%d)", int32(e))
+	}
+}
+
 type PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE uint32
 
 const (
@@ -94,6 +237,19 @@ const (
 	PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2 PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE = 2
 	PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION   PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE = 2
 )
+
+// String returns the PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE) String() string {
+	switch e {
+	case PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_1:
+		return "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_1"
+	case PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2:
+		return "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2"
+	default:
+		return fmt.Sprintf("PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE(%d)", uint32(e))
+	}
+}
 
 // PEERDIST_STATUS: https://learn.microsoft.com/windows/win32/api/peerdist/ne-peerdist-peerdist_status
 type PEERDIST_STATUS int32
@@ -104,6 +260,21 @@ const (
 	PEERDIST_STATUS_AVAILABLE   PEERDIST_STATUS = 2
 )
 
+// String returns the PEERDIST_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEERDIST_STATUS) String() string {
+	switch e {
+	case PEERDIST_STATUS_DISABLED:
+		return "PEERDIST_STATUS_DISABLED"
+	case PEERDIST_STATUS_UNAVAILABLE:
+		return "PEERDIST_STATUS_UNAVAILABLE"
+	case PEERDIST_STATUS_AVAILABLE:
+		return "PEERDIST_STATUS_AVAILABLE"
+	default:
+		return fmt.Sprintf("PEERDIST_STATUS(%d)", int32(e))
+	}
+}
+
 // PEER_APPLICATION_REGISTRATION_TYPE: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_application_registration_type
 type PEER_APPLICATION_REGISTRATION_TYPE int32
 
@@ -111,6 +282,19 @@ const (
 	PEER_APPLICATION_CURRENT_USER PEER_APPLICATION_REGISTRATION_TYPE = 0
 	PEER_APPLICATION_ALL_USERS    PEER_APPLICATION_REGISTRATION_TYPE = 1
 )
+
+// String returns the PEER_APPLICATION_REGISTRATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_APPLICATION_REGISTRATION_TYPE) String() string {
+	switch e {
+	case PEER_APPLICATION_CURRENT_USER:
+		return "PEER_APPLICATION_CURRENT_USER"
+	case PEER_APPLICATION_ALL_USERS:
+		return "PEER_APPLICATION_ALL_USERS"
+	default:
+		return fmt.Sprintf("PEER_APPLICATION_REGISTRATION_TYPE(%d)", int32(e))
+	}
+}
 
 // PEER_CHANGE_TYPE: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_change_type
 type PEER_CHANGE_TYPE int32
@@ -120,6 +304,21 @@ const (
 	PEER_CHANGE_DELETED PEER_CHANGE_TYPE = 1
 	PEER_CHANGE_UPDATED PEER_CHANGE_TYPE = 2
 )
+
+// String returns the PEER_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_CHANGE_TYPE) String() string {
+	switch e {
+	case PEER_CHANGE_ADDED:
+		return "PEER_CHANGE_ADDED"
+	case PEER_CHANGE_DELETED:
+		return "PEER_CHANGE_DELETED"
+	case PEER_CHANGE_UPDATED:
+		return "PEER_CHANGE_UPDATED"
+	default:
+		return fmt.Sprintf("PEER_CHANGE_TYPE(%d)", int32(e))
+	}
+}
 
 // PEER_COLLAB_EVENT_TYPE: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_collab_event_type
 type PEER_COLLAB_EVENT_TYPE int32
@@ -138,6 +337,37 @@ const (
 	PEER_EVENT_REQUEST_STATUS_CHANGED       PEER_COLLAB_EVENT_TYPE = 11
 )
 
+// String returns the PEER_COLLAB_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_COLLAB_EVENT_TYPE) String() string {
+	switch e {
+	case PEER_EVENT_WATCHLIST_CHANGED:
+		return "PEER_EVENT_WATCHLIST_CHANGED"
+	case PEER_EVENT_ENDPOINT_CHANGED:
+		return "PEER_EVENT_ENDPOINT_CHANGED"
+	case PEER_EVENT_ENDPOINT_PRESENCE_CHANGED:
+		return "PEER_EVENT_ENDPOINT_PRESENCE_CHANGED"
+	case PEER_EVENT_ENDPOINT_APPLICATION_CHANGED:
+		return "PEER_EVENT_ENDPOINT_APPLICATION_CHANGED"
+	case PEER_EVENT_ENDPOINT_OBJECT_CHANGED:
+		return "PEER_EVENT_ENDPOINT_OBJECT_CHANGED"
+	case PEER_EVENT_MY_ENDPOINT_CHANGED:
+		return "PEER_EVENT_MY_ENDPOINT_CHANGED"
+	case PEER_EVENT_MY_PRESENCE_CHANGED:
+		return "PEER_EVENT_MY_PRESENCE_CHANGED"
+	case PEER_EVENT_MY_APPLICATION_CHANGED:
+		return "PEER_EVENT_MY_APPLICATION_CHANGED"
+	case PEER_EVENT_MY_OBJECT_CHANGED:
+		return "PEER_EVENT_MY_OBJECT_CHANGED"
+	case PEER_EVENT_PEOPLE_NEAR_ME_CHANGED:
+		return "PEER_EVENT_PEOPLE_NEAR_ME_CHANGED"
+	case PEER_EVENT_REQUEST_STATUS_CHANGED:
+		return "PEER_EVENT_REQUEST_STATUS_CHANGED"
+	default:
+		return fmt.Sprintf("PEER_COLLAB_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 // PEER_CONNECTION_FLAGS: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_connection_flags
 type PEER_CONNECTION_FLAGS int32
 
@@ -145,6 +375,19 @@ const (
 	PEER_CONNECTION_NEIGHBOR PEER_CONNECTION_FLAGS = 1
 	PEER_CONNECTION_DIRECT   PEER_CONNECTION_FLAGS = 2
 )
+
+// String returns the PEER_CONNECTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_CONNECTION_FLAGS) String() string {
+	switch e {
+	case PEER_CONNECTION_NEIGHBOR:
+		return "PEER_CONNECTION_NEIGHBOR"
+	case PEER_CONNECTION_DIRECT:
+		return "PEER_CONNECTION_DIRECT"
+	default:
+		return fmt.Sprintf("PEER_CONNECTION_FLAGS(%d)", int32(e))
+	}
+}
 
 // PEER_CONNECTION_STATUS: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_connection_status
 type PEER_CONNECTION_STATUS int32
@@ -154,6 +397,21 @@ const (
 	PEER_DISCONNECTED      PEER_CONNECTION_STATUS = 2
 	PEER_CONNECTION_FAILED PEER_CONNECTION_STATUS = 3
 )
+
+// String returns the PEER_CONNECTION_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_CONNECTION_STATUS) String() string {
+	switch e {
+	case PEER_CONNECTED:
+		return "PEER_CONNECTED"
+	case PEER_DISCONNECTED:
+		return "PEER_DISCONNECTED"
+	case PEER_CONNECTION_FAILED:
+		return "PEER_CONNECTION_FAILED"
+	default:
+		return fmt.Sprintf("PEER_CONNECTION_STATUS(%d)", int32(e))
+	}
+}
 
 // PEER_GRAPH_EVENT_TYPE: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_graph_event_type
 type PEER_GRAPH_EVENT_TYPE int32
@@ -170,6 +428,33 @@ const (
 	PEER_GRAPH_EVENT_SYNCHRONIZED        PEER_GRAPH_EVENT_TYPE = 9
 )
 
+// String returns the PEER_GRAPH_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_GRAPH_EVENT_TYPE) String() string {
+	switch e {
+	case PEER_GRAPH_EVENT_STATUS_CHANGED:
+		return "PEER_GRAPH_EVENT_STATUS_CHANGED"
+	case PEER_GRAPH_EVENT_PROPERTY_CHANGED:
+		return "PEER_GRAPH_EVENT_PROPERTY_CHANGED"
+	case PEER_GRAPH_EVENT_RECORD_CHANGED:
+		return "PEER_GRAPH_EVENT_RECORD_CHANGED"
+	case PEER_GRAPH_EVENT_DIRECT_CONNECTION:
+		return "PEER_GRAPH_EVENT_DIRECT_CONNECTION"
+	case PEER_GRAPH_EVENT_NEIGHBOR_CONNECTION:
+		return "PEER_GRAPH_EVENT_NEIGHBOR_CONNECTION"
+	case PEER_GRAPH_EVENT_INCOMING_DATA:
+		return "PEER_GRAPH_EVENT_INCOMING_DATA"
+	case PEER_GRAPH_EVENT_CONNECTION_REQUIRED:
+		return "PEER_GRAPH_EVENT_CONNECTION_REQUIRED"
+	case PEER_GRAPH_EVENT_NODE_CHANGED:
+		return "PEER_GRAPH_EVENT_NODE_CHANGED"
+	case PEER_GRAPH_EVENT_SYNCHRONIZED:
+		return "PEER_GRAPH_EVENT_SYNCHRONIZED"
+	default:
+		return fmt.Sprintf("PEER_GRAPH_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 // PEER_GRAPH_PROPERTY_FLAGS: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_graph_property_flags
 type PEER_GRAPH_PROPERTY_FLAGS int32
 
@@ -177,6 +462,19 @@ const (
 	PEER_GRAPH_PROPERTY_HEARTBEATS       PEER_GRAPH_PROPERTY_FLAGS = 1
 	PEER_GRAPH_PROPERTY_DEFER_EXPIRATION PEER_GRAPH_PROPERTY_FLAGS = 2
 )
+
+// String returns the PEER_GRAPH_PROPERTY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_GRAPH_PROPERTY_FLAGS) String() string {
+	switch e {
+	case PEER_GRAPH_PROPERTY_HEARTBEATS:
+		return "PEER_GRAPH_PROPERTY_HEARTBEATS"
+	case PEER_GRAPH_PROPERTY_DEFER_EXPIRATION:
+		return "PEER_GRAPH_PROPERTY_DEFER_EXPIRATION"
+	default:
+		return fmt.Sprintf("PEER_GRAPH_PROPERTY_FLAGS(%d)", int32(e))
+	}
+}
 
 // PEER_GRAPH_SCOPE: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_graph_scope
 type PEER_GRAPH_SCOPE int32
@@ -189,6 +487,25 @@ const (
 	PEER_GRAPH_SCOPE_LOOPBACK  PEER_GRAPH_SCOPE = 4
 )
 
+// String returns the PEER_GRAPH_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_GRAPH_SCOPE) String() string {
+	switch e {
+	case PEER_GRAPH_SCOPE_ANY:
+		return "PEER_GRAPH_SCOPE_ANY"
+	case PEER_GRAPH_SCOPE_GLOBAL:
+		return "PEER_GRAPH_SCOPE_GLOBAL"
+	case PEER_GRAPH_SCOPE_SITELOCAL:
+		return "PEER_GRAPH_SCOPE_SITELOCAL"
+	case PEER_GRAPH_SCOPE_LINKLOCAL:
+		return "PEER_GRAPH_SCOPE_LINKLOCAL"
+	case PEER_GRAPH_SCOPE_LOOPBACK:
+		return "PEER_GRAPH_SCOPE_LOOPBACK"
+	default:
+		return fmt.Sprintf("PEER_GRAPH_SCOPE(%d)", int32(e))
+	}
+}
+
 // PEER_GRAPH_STATUS_FLAGS: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_graph_status_flags
 type PEER_GRAPH_STATUS_FLAGS int32
 
@@ -198,6 +515,21 @@ const (
 	PEER_GRAPH_STATUS_SYNCHRONIZED    PEER_GRAPH_STATUS_FLAGS = 4
 )
 
+// String returns the PEER_GRAPH_STATUS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_GRAPH_STATUS_FLAGS) String() string {
+	switch e {
+	case PEER_GRAPH_STATUS_LISTENING:
+		return "PEER_GRAPH_STATUS_LISTENING"
+	case PEER_GRAPH_STATUS_HAS_CONNECTIONS:
+		return "PEER_GRAPH_STATUS_HAS_CONNECTIONS"
+	case PEER_GRAPH_STATUS_SYNCHRONIZED:
+		return "PEER_GRAPH_STATUS_SYNCHRONIZED"
+	default:
+		return fmt.Sprintf("PEER_GRAPH_STATUS_FLAGS(%d)", int32(e))
+	}
+}
+
 // PEER_GROUP_AUTHENTICATION_SCHEME: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_group_authentication_scheme
 type PEER_GROUP_AUTHENTICATION_SCHEME int32
 
@@ -205,6 +537,19 @@ const (
 	PEER_GROUP_GMC_AUTHENTICATION      PEER_GROUP_AUTHENTICATION_SCHEME = 1
 	PEER_GROUP_PASSWORD_AUTHENTICATION PEER_GROUP_AUTHENTICATION_SCHEME = 2
 )
+
+// String returns the PEER_GROUP_AUTHENTICATION_SCHEME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_GROUP_AUTHENTICATION_SCHEME) String() string {
+	switch e {
+	case PEER_GROUP_GMC_AUTHENTICATION:
+		return "PEER_GROUP_GMC_AUTHENTICATION"
+	case PEER_GROUP_PASSWORD_AUTHENTICATION:
+		return "PEER_GROUP_PASSWORD_AUTHENTICATION"
+	default:
+		return fmt.Sprintf("PEER_GROUP_AUTHENTICATION_SCHEME(%d)", int32(e))
+	}
+}
 
 // PEER_GROUP_EVENT_TYPE: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_group_event_type
 type PEER_GROUP_EVENT_TYPE int32
@@ -221,12 +566,50 @@ const (
 	PEER_GROUP_EVENT_AUTHENTICATION_FAILED PEER_GROUP_EVENT_TYPE = 11
 )
 
+// String returns the PEER_GROUP_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_GROUP_EVENT_TYPE) String() string {
+	switch e {
+	case PEER_GROUP_EVENT_STATUS_CHANGED:
+		return "PEER_GROUP_EVENT_STATUS_CHANGED"
+	case PEER_GROUP_EVENT_PROPERTY_CHANGED:
+		return "PEER_GROUP_EVENT_PROPERTY_CHANGED"
+	case PEER_GROUP_EVENT_RECORD_CHANGED:
+		return "PEER_GROUP_EVENT_RECORD_CHANGED"
+	case PEER_GROUP_EVENT_DIRECT_CONNECTION:
+		return "PEER_GROUP_EVENT_DIRECT_CONNECTION"
+	case PEER_GROUP_EVENT_NEIGHBOR_CONNECTION:
+		return "PEER_GROUP_EVENT_NEIGHBOR_CONNECTION"
+	case PEER_GROUP_EVENT_INCOMING_DATA:
+		return "PEER_GROUP_EVENT_INCOMING_DATA"
+	case PEER_GROUP_EVENT_MEMBER_CHANGED:
+		return "PEER_GROUP_EVENT_MEMBER_CHANGED"
+	case PEER_GROUP_EVENT_CONNECTION_FAILED:
+		return "PEER_GROUP_EVENT_CONNECTION_FAILED"
+	case PEER_GROUP_EVENT_AUTHENTICATION_FAILED:
+		return "PEER_GROUP_EVENT_AUTHENTICATION_FAILED"
+	default:
+		return fmt.Sprintf("PEER_GROUP_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 // PEER_GROUP_ISSUE_CREDENTIAL_FLAGS: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_group_issue_credential_flags
 type PEER_GROUP_ISSUE_CREDENTIAL_FLAGS int32
 
 const (
 	PEER_GROUP_STORE_CREDENTIALS PEER_GROUP_ISSUE_CREDENTIAL_FLAGS = 1
 )
+
+// String returns the PEER_GROUP_ISSUE_CREDENTIAL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_GROUP_ISSUE_CREDENTIAL_FLAGS) String() string {
+	switch e {
+	case PEER_GROUP_STORE_CREDENTIALS:
+		return "PEER_GROUP_STORE_CREDENTIALS"
+	default:
+		return fmt.Sprintf("PEER_GROUP_ISSUE_CREDENTIAL_FLAGS(%d)", int32(e))
+	}
+}
 
 // PEER_GROUP_PROPERTY_FLAGS: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_group_property_flags
 type PEER_GROUP_PROPERTY_FLAGS int32
@@ -237,6 +620,21 @@ const (
 	PEER_DEFER_EXPIRATION     PEER_GROUP_PROPERTY_FLAGS = 4
 )
 
+// String returns the PEER_GROUP_PROPERTY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_GROUP_PROPERTY_FLAGS) String() string {
+	switch e {
+	case PEER_MEMBER_DATA_OPTIONAL:
+		return "PEER_MEMBER_DATA_OPTIONAL"
+	case PEER_DISABLE_PRESENCE:
+		return "PEER_DISABLE_PRESENCE"
+	case PEER_DEFER_EXPIRATION:
+		return "PEER_DEFER_EXPIRATION"
+	default:
+		return fmt.Sprintf("PEER_GROUP_PROPERTY_FLAGS(%d)", int32(e))
+	}
+}
+
 // PEER_GROUP_STATUS: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_group_status
 type PEER_GROUP_STATUS int32
 
@@ -244,6 +642,19 @@ const (
 	PEER_GROUP_STATUS_LISTENING       PEER_GROUP_STATUS = 1
 	PEER_GROUP_STATUS_HAS_CONNECTIONS PEER_GROUP_STATUS = 2
 )
+
+// String returns the PEER_GROUP_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_GROUP_STATUS) String() string {
+	switch e {
+	case PEER_GROUP_STATUS_LISTENING:
+		return "PEER_GROUP_STATUS_LISTENING"
+	case PEER_GROUP_STATUS_HAS_CONNECTIONS:
+		return "PEER_GROUP_STATUS_HAS_CONNECTIONS"
+	default:
+		return fmt.Sprintf("PEER_GROUP_STATUS(%d)", int32(e))
+	}
+}
 
 // PEER_INVITATION_RESPONSE_TYPE: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_invitation_response_type
 type PEER_INVITATION_RESPONSE_TYPE int32
@@ -254,6 +665,23 @@ const (
 	PEER_INVITATION_RESPONSE_EXPIRED  PEER_INVITATION_RESPONSE_TYPE = 2
 	PEER_INVITATION_RESPONSE_ERROR    PEER_INVITATION_RESPONSE_TYPE = 3
 )
+
+// String returns the PEER_INVITATION_RESPONSE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_INVITATION_RESPONSE_TYPE) String() string {
+	switch e {
+	case PEER_INVITATION_RESPONSE_DECLINED:
+		return "PEER_INVITATION_RESPONSE_DECLINED"
+	case PEER_INVITATION_RESPONSE_ACCEPTED:
+		return "PEER_INVITATION_RESPONSE_ACCEPTED"
+	case PEER_INVITATION_RESPONSE_EXPIRED:
+		return "PEER_INVITATION_RESPONSE_EXPIRED"
+	case PEER_INVITATION_RESPONSE_ERROR:
+		return "PEER_INVITATION_RESPONSE_ERROR"
+	default:
+		return fmt.Sprintf("PEER_INVITATION_RESPONSE_TYPE(%d)", int32(e))
+	}
+}
 
 // PEER_MEMBER_CHANGE_TYPE: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_member_change_type
 type PEER_MEMBER_CHANGE_TYPE int32
@@ -266,12 +694,42 @@ const (
 	PEER_MEMBER_LEFT         PEER_MEMBER_CHANGE_TYPE = 5
 )
 
+// String returns the PEER_MEMBER_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_MEMBER_CHANGE_TYPE) String() string {
+	switch e {
+	case PEER_MEMBER_CONNECTED:
+		return "PEER_MEMBER_CONNECTED"
+	case PEER_MEMBER_DISCONNECTED:
+		return "PEER_MEMBER_DISCONNECTED"
+	case PEER_MEMBER_UPDATED:
+		return "PEER_MEMBER_UPDATED"
+	case PEER_MEMBER_JOINED:
+		return "PEER_MEMBER_JOINED"
+	case PEER_MEMBER_LEFT:
+		return "PEER_MEMBER_LEFT"
+	default:
+		return fmt.Sprintf("PEER_MEMBER_CHANGE_TYPE(%d)", int32(e))
+	}
+}
+
 // PEER_MEMBER_FLAGS: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_member_flags
 type PEER_MEMBER_FLAGS int32
 
 const (
 	PEER_MEMBER_PRESENT PEER_MEMBER_FLAGS = 1
 )
+
+// String returns the PEER_MEMBER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_MEMBER_FLAGS) String() string {
+	switch e {
+	case PEER_MEMBER_PRESENT:
+		return "PEER_MEMBER_PRESENT"
+	default:
+		return fmt.Sprintf("PEER_MEMBER_FLAGS(%d)", int32(e))
+	}
+}
 
 // PEER_NODE_CHANGE_TYPE: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_node_change_type
 type PEER_NODE_CHANGE_TYPE int32
@@ -281,6 +739,21 @@ const (
 	PEER_NODE_CHANGE_DISCONNECTED PEER_NODE_CHANGE_TYPE = 2
 	PEER_NODE_CHANGE_UPDATED      PEER_NODE_CHANGE_TYPE = 3
 )
+
+// String returns the PEER_NODE_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_NODE_CHANGE_TYPE) String() string {
+	switch e {
+	case PEER_NODE_CHANGE_CONNECTED:
+		return "PEER_NODE_CHANGE_CONNECTED"
+	case PEER_NODE_CHANGE_DISCONNECTED:
+		return "PEER_NODE_CHANGE_DISCONNECTED"
+	case PEER_NODE_CHANGE_UPDATED:
+		return "PEER_NODE_CHANGE_UPDATED"
+	default:
+		return fmt.Sprintf("PEER_NODE_CHANGE_TYPE(%d)", int32(e))
+	}
+}
 
 // PEER_PRESENCE_STATUS: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_presence_status
 type PEER_PRESENCE_STATUS int32
@@ -296,6 +769,31 @@ const (
 	PEER_PRESENCE_ONLINE        PEER_PRESENCE_STATUS = 7
 )
 
+// String returns the PEER_PRESENCE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_PRESENCE_STATUS) String() string {
+	switch e {
+	case PEER_PRESENCE_OFFLINE:
+		return "PEER_PRESENCE_OFFLINE"
+	case PEER_PRESENCE_OUT_TO_LUNCH:
+		return "PEER_PRESENCE_OUT_TO_LUNCH"
+	case PEER_PRESENCE_AWAY:
+		return "PEER_PRESENCE_AWAY"
+	case PEER_PRESENCE_BE_RIGHT_BACK:
+		return "PEER_PRESENCE_BE_RIGHT_BACK"
+	case PEER_PRESENCE_IDLE:
+		return "PEER_PRESENCE_IDLE"
+	case PEER_PRESENCE_BUSY:
+		return "PEER_PRESENCE_BUSY"
+	case PEER_PRESENCE_ON_THE_PHONE:
+		return "PEER_PRESENCE_ON_THE_PHONE"
+	case PEER_PRESENCE_ONLINE:
+		return "PEER_PRESENCE_ONLINE"
+	default:
+		return fmt.Sprintf("PEER_PRESENCE_STATUS(%d)", int32(e))
+	}
+}
+
 // PEER_PUBLICATION_SCOPE: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_publication_scope
 type PEER_PUBLICATION_SCOPE int32
 
@@ -305,6 +803,23 @@ const (
 	PEER_PUBLICATION_SCOPE_INTERNET PEER_PUBLICATION_SCOPE = 2
 	PEER_PUBLICATION_SCOPE_ALL      PEER_PUBLICATION_SCOPE = 3
 )
+
+// String returns the PEER_PUBLICATION_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_PUBLICATION_SCOPE) String() string {
+	switch e {
+	case PEER_PUBLICATION_SCOPE_NONE:
+		return "PEER_PUBLICATION_SCOPE_NONE"
+	case PEER_PUBLICATION_SCOPE_NEAR_ME:
+		return "PEER_PUBLICATION_SCOPE_NEAR_ME"
+	case PEER_PUBLICATION_SCOPE_INTERNET:
+		return "PEER_PUBLICATION_SCOPE_INTERNET"
+	case PEER_PUBLICATION_SCOPE_ALL:
+		return "PEER_PUBLICATION_SCOPE_ALL"
+	default:
+		return fmt.Sprintf("PEER_PUBLICATION_SCOPE(%d)", int32(e))
+	}
+}
 
 // PEER_RECORD_CHANGE_TYPE: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_record_change_type
 type PEER_RECORD_CHANGE_TYPE int32
@@ -316,6 +831,23 @@ const (
 	PEER_RECORD_EXPIRED PEER_RECORD_CHANGE_TYPE = 4
 )
 
+// String returns the PEER_RECORD_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_RECORD_CHANGE_TYPE) String() string {
+	switch e {
+	case PEER_RECORD_ADDED:
+		return "PEER_RECORD_ADDED"
+	case PEER_RECORD_UPDATED:
+		return "PEER_RECORD_UPDATED"
+	case PEER_RECORD_DELETED:
+		return "PEER_RECORD_DELETED"
+	case PEER_RECORD_EXPIRED:
+		return "PEER_RECORD_EXPIRED"
+	default:
+		return fmt.Sprintf("PEER_RECORD_CHANGE_TYPE(%d)", int32(e))
+	}
+}
+
 // PEER_RECORD_FLAGS: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_record_flags
 type PEER_RECORD_FLAGS int32
 
@@ -323,6 +855,19 @@ const (
 	PEER_RECORD_FLAG_AUTOREFRESH PEER_RECORD_FLAGS = 1
 	PEER_RECORD_FLAG_DELETED     PEER_RECORD_FLAGS = 2
 )
+
+// String returns the PEER_RECORD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_RECORD_FLAGS) String() string {
+	switch e {
+	case PEER_RECORD_FLAG_AUTOREFRESH:
+		return "PEER_RECORD_FLAG_AUTOREFRESH"
+	case PEER_RECORD_FLAG_DELETED:
+		return "PEER_RECORD_FLAG_DELETED"
+	default:
+		return fmt.Sprintf("PEER_RECORD_FLAGS(%d)", int32(e))
+	}
+}
 
 // PEER_SIGNIN_FLAGS: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_signin_flags
 type PEER_SIGNIN_FLAGS int32
@@ -334,6 +879,23 @@ const (
 	PEER_SIGNIN_ALL      PEER_SIGNIN_FLAGS = 3
 )
 
+// String returns the PEER_SIGNIN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_SIGNIN_FLAGS) String() string {
+	switch e {
+	case PEER_SIGNIN_NONE:
+		return "PEER_SIGNIN_NONE"
+	case PEER_SIGNIN_NEAR_ME:
+		return "PEER_SIGNIN_NEAR_ME"
+	case PEER_SIGNIN_INTERNET:
+		return "PEER_SIGNIN_INTERNET"
+	case PEER_SIGNIN_ALL:
+		return "PEER_SIGNIN_ALL"
+	default:
+		return fmt.Sprintf("PEER_SIGNIN_FLAGS(%d)", int32(e))
+	}
+}
+
 // PEER_WATCH_PERMISSION: https://learn.microsoft.com/windows/win32/api/p2p/ne-p2p-peer_watch_permission
 type PEER_WATCH_PERMISSION int32
 
@@ -341,6 +903,19 @@ const (
 	PEER_WATCH_BLOCKED PEER_WATCH_PERMISSION = 0
 	PEER_WATCH_ALLOWED PEER_WATCH_PERMISSION = 1
 )
+
+// String returns the PEER_WATCH_PERMISSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PEER_WATCH_PERMISSION) String() string {
+	switch e {
+	case PEER_WATCH_BLOCKED:
+		return "PEER_WATCH_BLOCKED"
+	case PEER_WATCH_ALLOWED:
+		return "PEER_WATCH_ALLOWED"
+	default:
+		return fmt.Sprintf("PEER_WATCH_PERMISSION(%d)", int32(e))
+	}
+}
 
 // PNRP_CLOUD_FLAGS: https://learn.microsoft.com/windows/win32/api/pnrpdef/ne-pnrpdef-pnrp_cloud_flags
 type PNRP_CLOUD_FLAGS int32
@@ -351,6 +926,23 @@ const (
 	PNRP_CLOUD_RESOLVE_ONLY     PNRP_CLOUD_FLAGS = 2
 	PNRP_CLOUD_FULL_PARTICIPANT PNRP_CLOUD_FLAGS = 4
 )
+
+// String returns the PNRP_CLOUD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PNRP_CLOUD_FLAGS) String() string {
+	switch e {
+	case PNRP_CLOUD_NO_FLAGS:
+		return "PNRP_CLOUD_NO_FLAGS"
+	case PNRP_CLOUD_NAME_LOCAL:
+		return "PNRP_CLOUD_NAME_LOCAL"
+	case PNRP_CLOUD_RESOLVE_ONLY:
+		return "PNRP_CLOUD_RESOLVE_ONLY"
+	case PNRP_CLOUD_FULL_PARTICIPANT:
+		return "PNRP_CLOUD_FULL_PARTICIPANT"
+	default:
+		return fmt.Sprintf("PNRP_CLOUD_FLAGS(%d)", int32(e))
+	}
+}
 
 // PNRP_CLOUD_STATE: https://learn.microsoft.com/windows/win32/api/pnrpdef/ne-pnrpdef-pnrp_cloud_state
 type PNRP_CLOUD_STATE int32
@@ -365,6 +957,29 @@ const (
 	PNRP_CLOUD_STATE_ALONE         PNRP_CLOUD_STATE = 6
 )
 
+// String returns the PNRP_CLOUD_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PNRP_CLOUD_STATE) String() string {
+	switch e {
+	case PNRP_CLOUD_STATE_VIRTUAL:
+		return "PNRP_CLOUD_STATE_VIRTUAL"
+	case PNRP_CLOUD_STATE_SYNCHRONISING:
+		return "PNRP_CLOUD_STATE_SYNCHRONISING"
+	case PNRP_CLOUD_STATE_ACTIVE:
+		return "PNRP_CLOUD_STATE_ACTIVE"
+	case PNRP_CLOUD_STATE_DEAD:
+		return "PNRP_CLOUD_STATE_DEAD"
+	case PNRP_CLOUD_STATE_DISABLED:
+		return "PNRP_CLOUD_STATE_DISABLED"
+	case PNRP_CLOUD_STATE_NO_NET:
+		return "PNRP_CLOUD_STATE_NO_NET"
+	case PNRP_CLOUD_STATE_ALONE:
+		return "PNRP_CLOUD_STATE_ALONE"
+	default:
+		return fmt.Sprintf("PNRP_CLOUD_STATE(%d)", int32(e))
+	}
+}
+
 type PNRP_EXTENDED_PAYLOAD_TYPE int32
 
 const (
@@ -373,12 +988,40 @@ const (
 	PNRP_EXTENDED_PAYLOAD_TYPE_STRING PNRP_EXTENDED_PAYLOAD_TYPE = 2
 )
 
+// String returns the PNRP_EXTENDED_PAYLOAD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PNRP_EXTENDED_PAYLOAD_TYPE) String() string {
+	switch e {
+	case PNRP_EXTENDED_PAYLOAD_TYPE_NONE:
+		return "PNRP_EXTENDED_PAYLOAD_TYPE_NONE"
+	case PNRP_EXTENDED_PAYLOAD_TYPE_BINARY:
+		return "PNRP_EXTENDED_PAYLOAD_TYPE_BINARY"
+	case PNRP_EXTENDED_PAYLOAD_TYPE_STRING:
+		return "PNRP_EXTENDED_PAYLOAD_TYPE_STRING"
+	default:
+		return fmt.Sprintf("PNRP_EXTENDED_PAYLOAD_TYPE(%d)", int32(e))
+	}
+}
+
 type PNRP_REGISTERED_ID_STATE int32
 
 const (
 	PNRP_REGISTERED_ID_STATE_OK      PNRP_REGISTERED_ID_STATE = 1
 	PNRP_REGISTERED_ID_STATE_PROBLEM PNRP_REGISTERED_ID_STATE = 2
 )
+
+// String returns the PNRP_REGISTERED_ID_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PNRP_REGISTERED_ID_STATE) String() string {
+	switch e {
+	case PNRP_REGISTERED_ID_STATE_OK:
+		return "PNRP_REGISTERED_ID_STATE_OK"
+	case PNRP_REGISTERED_ID_STATE_PROBLEM:
+		return "PNRP_REGISTERED_ID_STATE_PROBLEM"
+	default:
+		return fmt.Sprintf("PNRP_REGISTERED_ID_STATE(%d)", int32(e))
+	}
+}
 
 // PNRP_RESOLVE_CRITERIA: https://learn.microsoft.com/windows/win32/api/pnrpdef/ne-pnrpdef-pnrp_resolve_criteria
 type PNRP_RESOLVE_CRITERIA int32
@@ -393,6 +1036,29 @@ const (
 	PNRP_RESOLVE_CRITERIA_NEAREST_PEER_NAME                     PNRP_RESOLVE_CRITERIA = 6
 )
 
+// String returns the PNRP_RESOLVE_CRITERIA constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PNRP_RESOLVE_CRITERIA) String() string {
+	switch e {
+	case PNRP_RESOLVE_CRITERIA_DEFAULT:
+		return "PNRP_RESOLVE_CRITERIA_DEFAULT"
+	case PNRP_RESOLVE_CRITERIA_REMOTE_PEER_NAME:
+		return "PNRP_RESOLVE_CRITERIA_REMOTE_PEER_NAME"
+	case PNRP_RESOLVE_CRITERIA_NEAREST_REMOTE_PEER_NAME:
+		return "PNRP_RESOLVE_CRITERIA_NEAREST_REMOTE_PEER_NAME"
+	case PNRP_RESOLVE_CRITERIA_NON_CURRENT_PROCESS_PEER_NAME:
+		return "PNRP_RESOLVE_CRITERIA_NON_CURRENT_PROCESS_PEER_NAME"
+	case PNRP_RESOLVE_CRITERIA_NEAREST_NON_CURRENT_PROCESS_PEER_NAME:
+		return "PNRP_RESOLVE_CRITERIA_NEAREST_NON_CURRENT_PROCESS_PEER_NAME"
+	case PNRP_RESOLVE_CRITERIA_ANY_PEER_NAME:
+		return "PNRP_RESOLVE_CRITERIA_ANY_PEER_NAME"
+	case PNRP_RESOLVE_CRITERIA_NEAREST_PEER_NAME:
+		return "PNRP_RESOLVE_CRITERIA_NEAREST_PEER_NAME"
+	default:
+		return fmt.Sprintf("PNRP_RESOLVE_CRITERIA(%d)", int32(e))
+	}
+}
+
 type PNRP_SCOPE int32
 
 const (
@@ -401,3 +1067,20 @@ const (
 	PNRP_SITE_LOCAL_SCOPE PNRP_SCOPE = 2
 	PNRP_LINK_LOCAL_SCOPE PNRP_SCOPE = 3
 )
+
+// String returns the PNRP_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PNRP_SCOPE) String() string {
+	switch e {
+	case PNRP_SCOPE_ANY:
+		return "PNRP_SCOPE_ANY"
+	case PNRP_GLOBAL_SCOPE:
+		return "PNRP_GLOBAL_SCOPE"
+	case PNRP_SITE_LOCAL_SCOPE:
+		return "PNRP_SITE_LOCAL_SCOPE"
+	case PNRP_LINK_LOCAL_SCOPE:
+		return "PNRP_LINK_LOCAL_SCOPE"
+	default:
+		return fmt.Sprintf("PNRP_SCOPE(%d)", int32(e))
+	}
+}

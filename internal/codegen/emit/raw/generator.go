@@ -225,7 +225,10 @@ func (g *Generator) emitNamespace(meta *win32meta.NamespaceMeta) error {
 			return err
 		}
 	}
-	if err := g.writeFile(packageDir, packageName+"_enums.go", packageName, nil, enumBody.String()); err != nil {
+	// String() methods use fmt (switch form) and strings (bitmask form);
+	// writeFile prunes whichever the package's enums don't use.
+	enumImports := typemap.ImportSet{"fmt": "fmt", "strings": "strings"}
+	if err := g.writeFile(packageDir, packageName+"_enums.go", packageName, enumImports, enumBody.String()); err != nil {
 		return err
 	}
 

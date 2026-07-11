@@ -4,6 +4,11 @@
 
 package dns
 
+import (
+	"fmt"
+	"strings"
+)
+
 // DNS_CHARSET: https://learn.microsoft.com/windows/win32/api/windns/ne-windns-dns_charset
 type DNS_CHARSET int32
 
@@ -13,6 +18,23 @@ const (
 	DnsCharSetUtf8    DNS_CHARSET = 2
 	DnsCharSetAnsi    DNS_CHARSET = 3
 )
+
+// String returns the DNS_CHARSET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_CHARSET) String() string {
+	switch e {
+	case DnsCharSetUnknown:
+		return "DnsCharSetUnknown"
+	case DnsCharSetUnicode:
+		return "DnsCharSetUnicode"
+	case DnsCharSetUtf8:
+		return "DnsCharSetUtf8"
+	case DnsCharSetAnsi:
+		return "DnsCharSetAnsi"
+	default:
+		return fmt.Sprintf("DNS_CHARSET(%d)", int32(e))
+	}
+}
 
 // DNS_CONFIG_TYPE: https://learn.microsoft.com/windows/win32/api/windns/ne-windns-dns_config_type
 type DNS_CONFIG_TYPE int32
@@ -39,6 +61,53 @@ const (
 	DnsConfigNameServer                         DNS_CONFIG_TYPE = 18
 )
 
+// String returns the DNS_CONFIG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_CONFIG_TYPE) String() string {
+	switch e {
+	case DnsConfigPrimaryDomainName_W:
+		return "DnsConfigPrimaryDomainName_W"
+	case DnsConfigPrimaryDomainName_A:
+		return "DnsConfigPrimaryDomainName_A"
+	case DnsConfigPrimaryDomainName_UTF8:
+		return "DnsConfigPrimaryDomainName_UTF8"
+	case DnsConfigAdapterDomainName_W:
+		return "DnsConfigAdapterDomainName_W"
+	case DnsConfigAdapterDomainName_A:
+		return "DnsConfigAdapterDomainName_A"
+	case DnsConfigAdapterDomainName_UTF8:
+		return "DnsConfigAdapterDomainName_UTF8"
+	case DnsConfigDnsServerList:
+		return "DnsConfigDnsServerList"
+	case DnsConfigSearchList:
+		return "DnsConfigSearchList"
+	case DnsConfigAdapterInfo:
+		return "DnsConfigAdapterInfo"
+	case DnsConfigPrimaryHostNameRegistrationEnabled:
+		return "DnsConfigPrimaryHostNameRegistrationEnabled"
+	case DnsConfigAdapterHostNameRegistrationEnabled:
+		return "DnsConfigAdapterHostNameRegistrationEnabled"
+	case DnsConfigAddressRegistrationMaxCount:
+		return "DnsConfigAddressRegistrationMaxCount"
+	case DnsConfigHostName_W:
+		return "DnsConfigHostName_W"
+	case DnsConfigHostName_A:
+		return "DnsConfigHostName_A"
+	case DnsConfigHostName_UTF8:
+		return "DnsConfigHostName_UTF8"
+	case DnsConfigFullHostName_W:
+		return "DnsConfigFullHostName_W"
+	case DnsConfigFullHostName_A:
+		return "DnsConfigFullHostName_A"
+	case DnsConfigFullHostName_UTF8:
+		return "DnsConfigFullHostName_UTF8"
+	case DnsConfigNameServer:
+		return "DnsConfigNameServer"
+	default:
+		return fmt.Sprintf("DNS_CONFIG_TYPE(%d)", int32(e))
+	}
+}
+
 type DNS_CONNECTION_POLICY_TAG int32
 
 const (
@@ -47,6 +116,21 @@ const (
 	TAG_DNS_CONNECTION_POLICY_TAG_WWWPT              DNS_CONNECTION_POLICY_TAG = 2
 )
 
+// String returns the DNS_CONNECTION_POLICY_TAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_CONNECTION_POLICY_TAG) String() string {
+	switch e {
+	case TAG_DNS_CONNECTION_POLICY_TAG_DEFAULT:
+		return "TAG_DNS_CONNECTION_POLICY_TAG_DEFAULT"
+	case TAG_DNS_CONNECTION_POLICY_TAG_CONNECTION_MANAGER:
+		return "TAG_DNS_CONNECTION_POLICY_TAG_CONNECTION_MANAGER"
+	case TAG_DNS_CONNECTION_POLICY_TAG_WWWPT:
+		return "TAG_DNS_CONNECTION_POLICY_TAG_WWWPT"
+	default:
+		return fmt.Sprintf("DNS_CONNECTION_POLICY_TAG(%d)", int32(e))
+	}
+}
+
 type DNS_CONNECTION_PROXY_INFO_SWITCH int32
 
 const (
@@ -54,6 +138,21 @@ const (
 	DNS_CONNECTION_PROXY_INFO_SWITCH_SCRIPT DNS_CONNECTION_PROXY_INFO_SWITCH = 1
 	DNS_CONNECTION_PROXY_INFO_SWITCH_WPAD   DNS_CONNECTION_PROXY_INFO_SWITCH = 2
 )
+
+// String returns the DNS_CONNECTION_PROXY_INFO_SWITCH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_CONNECTION_PROXY_INFO_SWITCH) String() string {
+	switch e {
+	case DNS_CONNECTION_PROXY_INFO_SWITCH_CONFIG:
+		return "DNS_CONNECTION_PROXY_INFO_SWITCH_CONFIG"
+	case DNS_CONNECTION_PROXY_INFO_SWITCH_SCRIPT:
+		return "DNS_CONNECTION_PROXY_INFO_SWITCH_SCRIPT"
+	case DNS_CONNECTION_PROXY_INFO_SWITCH_WPAD:
+		return "DNS_CONNECTION_PROXY_INFO_SWITCH_WPAD"
+	default:
+		return fmt.Sprintf("DNS_CONNECTION_PROXY_INFO_SWITCH(%d)", int32(e))
+	}
+}
 
 type DNS_CONNECTION_PROXY_TYPE int32
 
@@ -65,6 +164,25 @@ const (
 	DNS_CONNECTION_PROXY_TYPE_SOCKS5 DNS_CONNECTION_PROXY_TYPE = 5
 )
 
+// String returns the DNS_CONNECTION_PROXY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_CONNECTION_PROXY_TYPE) String() string {
+	switch e {
+	case DNS_CONNECTION_PROXY_TYPE_NULL:
+		return "DNS_CONNECTION_PROXY_TYPE_NULL"
+	case DNS_CONNECTION_PROXY_TYPE_HTTP:
+		return "DNS_CONNECTION_PROXY_TYPE_HTTP"
+	case DNS_CONNECTION_PROXY_TYPE_WAP:
+		return "DNS_CONNECTION_PROXY_TYPE_WAP"
+	case DNS_CONNECTION_PROXY_TYPE_SOCKS4:
+		return "DNS_CONNECTION_PROXY_TYPE_SOCKS4"
+	case DNS_CONNECTION_PROXY_TYPE_SOCKS5:
+		return "DNS_CONNECTION_PROXY_TYPE_SOCKS5"
+	default:
+		return fmt.Sprintf("DNS_CONNECTION_PROXY_TYPE(%d)", int32(e))
+	}
+}
+
 // DNS_FREE_TYPE: https://learn.microsoft.com/windows/win32/api/windns/ne-windns-dns_free_type
 type DNS_FREE_TYPE int32
 
@@ -73,6 +191,21 @@ const (
 	DnsFreeRecordList          DNS_FREE_TYPE = 1
 	DnsFreeParsedMessageFields DNS_FREE_TYPE = 2
 )
+
+// String returns the DNS_FREE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_FREE_TYPE) String() string {
+	switch e {
+	case DnsFreeFlat:
+		return "DnsFreeFlat"
+	case DnsFreeRecordList:
+		return "DnsFreeRecordList"
+	case DnsFreeParsedMessageFields:
+		return "DnsFreeParsedMessageFields"
+	default:
+		return fmt.Sprintf("DNS_FREE_TYPE(%d)", int32(e))
+	}
+}
 
 // DNS_NAME_FORMAT: https://learn.microsoft.com/windows/win32/api/windns/ne-windns-dns_name_format
 type DNS_NAME_FORMAT int32
@@ -87,6 +220,29 @@ const (
 	DnsNameValidateTld   DNS_NAME_FORMAT = 6
 )
 
+// String returns the DNS_NAME_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_NAME_FORMAT) String() string {
+	switch e {
+	case DnsNameDomain:
+		return "DnsNameDomain"
+	case DnsNameDomainLabel:
+		return "DnsNameDomainLabel"
+	case DnsNameHostnameFull:
+		return "DnsNameHostnameFull"
+	case DnsNameHostnameLabel:
+		return "DnsNameHostnameLabel"
+	case DnsNameWildcard:
+		return "DnsNameWildcard"
+	case DnsNameSrvRecord:
+		return "DnsNameSrvRecord"
+	case DnsNameValidateTld:
+		return "DnsNameValidateTld"
+	default:
+		return fmt.Sprintf("DNS_NAME_FORMAT(%d)", int32(e))
+	}
+}
+
 // DNS_PROXY_INFORMATION_TYPE: https://learn.microsoft.com/windows/win32/api/windns/ne-windns-dns_proxy_information_type
 type DNS_PROXY_INFORMATION_TYPE int32
 
@@ -97,6 +253,24 @@ const (
 	DNS_PROXY_INFORMATION_DOES_NOT_EXIST   DNS_PROXY_INFORMATION_TYPE = 3
 )
 
+// String returns the DNS_PROXY_INFORMATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_PROXY_INFORMATION_TYPE) String() string {
+	switch e {
+	case DNS_PROXY_INFORMATION_DIRECT:
+		return "DNS_PROXY_INFORMATION_DIRECT"
+	case DNS_PROXY_INFORMATION_DEFAULT_SETTINGS:
+		return "DNS_PROXY_INFORMATION_DEFAULT_SETTINGS"
+	case DNS_PROXY_INFORMATION_PROXY_NAME:
+		return "DNS_PROXY_INFORMATION_PROXY_NAME"
+	case DNS_PROXY_INFORMATION_DOES_NOT_EXIST:
+		return "DNS_PROXY_INFORMATION_DOES_NOT_EXIST"
+	default:
+		return fmt.Sprintf("DNS_PROXY_INFORMATION_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DNS_QUERY_OPTIONS uint32
 
 const (
@@ -134,6 +308,106 @@ const (
 	DNS_QUERY_RAW_OPTION_BEST_EFFORT_PARSE DNS_QUERY_OPTIONS = 1
 )
 
+// String returns the DNS_QUERY_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_QUERY_OPTIONS) String() string {
+	var parts []string
+	if e&DNS_QUERY_ACCEPT_TRUNCATED_RESPONSE != 0 {
+		parts = append(parts, "DNS_QUERY_ACCEPT_TRUNCATED_RESPONSE")
+	}
+	if e&DNS_QUERY_USE_TCP_ONLY != 0 {
+		parts = append(parts, "DNS_QUERY_USE_TCP_ONLY")
+	}
+	if e&DNS_QUERY_NO_RECURSION != 0 {
+		parts = append(parts, "DNS_QUERY_NO_RECURSION")
+	}
+	if e&DNS_QUERY_BYPASS_CACHE != 0 {
+		parts = append(parts, "DNS_QUERY_BYPASS_CACHE")
+	}
+	if e&DNS_QUERY_NO_WIRE_QUERY != 0 {
+		parts = append(parts, "DNS_QUERY_NO_WIRE_QUERY")
+	}
+	if e&DNS_QUERY_NO_LOCAL_NAME != 0 {
+		parts = append(parts, "DNS_QUERY_NO_LOCAL_NAME")
+	}
+	if e&DNS_QUERY_NO_HOSTS_FILE != 0 {
+		parts = append(parts, "DNS_QUERY_NO_HOSTS_FILE")
+	}
+	if e&DNS_QUERY_NO_NETBT != 0 {
+		parts = append(parts, "DNS_QUERY_NO_NETBT")
+	}
+	if e&DNS_QUERY_WIRE_ONLY != 0 {
+		parts = append(parts, "DNS_QUERY_WIRE_ONLY")
+	}
+	if e&DNS_QUERY_RETURN_MESSAGE != 0 {
+		parts = append(parts, "DNS_QUERY_RETURN_MESSAGE")
+	}
+	if e&DNS_QUERY_MULTICAST_ONLY != 0 {
+		parts = append(parts, "DNS_QUERY_MULTICAST_ONLY")
+	}
+	if e&DNS_QUERY_NO_MULTICAST != 0 {
+		parts = append(parts, "DNS_QUERY_NO_MULTICAST")
+	}
+	if e&DNS_QUERY_TREAT_AS_FQDN != 0 {
+		parts = append(parts, "DNS_QUERY_TREAT_AS_FQDN")
+	}
+	if e&DNS_QUERY_ADDRCONFIG != 0 {
+		parts = append(parts, "DNS_QUERY_ADDRCONFIG")
+	}
+	if e&DNS_QUERY_DUAL_ADDR != 0 {
+		parts = append(parts, "DNS_QUERY_DUAL_ADDR")
+	}
+	if e&DNS_QUERY_DONT_RESET_TTL_VALUES != 0 {
+		parts = append(parts, "DNS_QUERY_DONT_RESET_TTL_VALUES")
+	}
+	if e&DNS_QUERY_DISABLE_IDN_ENCODING != 0 {
+		parts = append(parts, "DNS_QUERY_DISABLE_IDN_ENCODING")
+	}
+	if e&DNS_QUERY_APPEND_MULTILABEL != 0 {
+		parts = append(parts, "DNS_QUERY_APPEND_MULTILABEL")
+	}
+	if e&DNS_QUERY_DNSSEC_OK != 0 {
+		parts = append(parts, "DNS_QUERY_DNSSEC_OK")
+	}
+	if e&DNS_QUERY_DNSSEC_CHECKING_DISABLED != 0 {
+		parts = append(parts, "DNS_QUERY_DNSSEC_CHECKING_DISABLED")
+	}
+	if e&DNS_QUERY_DNSSEC_REQUIRED != 0 {
+		parts = append(parts, "DNS_QUERY_DNSSEC_REQUIRED")
+	}
+	if e&DNS_QUERY_RESERVED != 0 {
+		parts = append(parts, "DNS_QUERY_RESERVED")
+	}
+	if e&DNS_QUERY_CACHE_ONLY != 0 {
+		parts = append(parts, "DNS_QUERY_CACHE_ONLY")
+	}
+	if e&DNS_QUERY_REQUEST_VERSION1 != 0 {
+		parts = append(parts, "DNS_QUERY_REQUEST_VERSION1")
+	}
+	if e&DNS_QUERY_REQUEST_VERSION2 != 0 {
+		parts = append(parts, "DNS_QUERY_REQUEST_VERSION2")
+	}
+	if e&DNS_QUERY_RESULTS_VERSION1 != 0 {
+		parts = append(parts, "DNS_QUERY_RESULTS_VERSION1")
+	}
+	if e&DNS_QUERY_REQUEST_VERSION3 != 0 {
+		parts = append(parts, "DNS_QUERY_REQUEST_VERSION3")
+	}
+	if e&DNS_QUERY_RAW_RESULTS_VERSION1 != 0 {
+		parts = append(parts, "DNS_QUERY_RAW_RESULTS_VERSION1")
+	}
+	if e&DNS_QUERY_RAW_REQUEST_VERSION1 != 0 {
+		parts = append(parts, "DNS_QUERY_RAW_REQUEST_VERSION1")
+	}
+	if e&DNS_QUERY_RAW_OPTION_BEST_EFFORT_PARSE != 0 {
+		parts = append(parts, "DNS_QUERY_RAW_OPTION_BEST_EFFORT_PARSE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DNS_SECTION: https://learn.microsoft.com/windows/win32/api/windns/ne-windns-dns_section
 type DNS_SECTION int32
 
@@ -143,6 +417,23 @@ const (
 	DnsSectionAuthority DNS_SECTION = 2
 	DnsSectionAddtional DNS_SECTION = 3
 )
+
+// String returns the DNS_SECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_SECTION) String() string {
+	switch e {
+	case DnsSectionQuestion:
+		return "DnsSectionQuestion"
+	case DnsSectionAnswer:
+		return "DnsSectionAnswer"
+	case DnsSectionAuthority:
+		return "DnsSectionAuthority"
+	case DnsSectionAddtional:
+		return "DnsSectionAddtional"
+	default:
+		return fmt.Sprintf("DNS_SECTION(%d)", int32(e))
+	}
+}
 
 type DNS_SVCB_PARAM_TYPE int32
 
@@ -157,3 +448,30 @@ const (
 	DnsSvcbParamDohPath        DNS_SVCB_PARAM_TYPE = 7
 	DnsSvcbParamDohPathOpenDns DNS_SVCB_PARAM_TYPE = 65432
 )
+
+// String returns the DNS_SVCB_PARAM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DNS_SVCB_PARAM_TYPE) String() string {
+	switch e {
+	case DnsSvcbParamMandatory:
+		return "DnsSvcbParamMandatory"
+	case DnsSvcbParamAlpn:
+		return "DnsSvcbParamAlpn"
+	case DnsSvcbParamNoDefaultAlpn:
+		return "DnsSvcbParamNoDefaultAlpn"
+	case DnsSvcbParamPort:
+		return "DnsSvcbParamPort"
+	case DnsSvcbParamIpv4Hint:
+		return "DnsSvcbParamIpv4Hint"
+	case DnsSvcbParamEch:
+		return "DnsSvcbParamEch"
+	case DnsSvcbParamIpv6Hint:
+		return "DnsSvcbParamIpv6Hint"
+	case DnsSvcbParamDohPath:
+		return "DnsSvcbParamDohPath"
+	case DnsSvcbParamDohPathOpenDns:
+		return "DnsSvcbParamDohPathOpenDns"
+	default:
+		return fmt.Sprintf("DNS_SVCB_PARAM_TYPE(%d)", int32(e))
+	}
+}

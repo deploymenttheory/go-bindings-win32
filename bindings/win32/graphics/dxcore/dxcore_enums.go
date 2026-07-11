@@ -4,6 +4,11 @@
 
 package dxcore
 
+import (
+	"fmt"
+	"strings"
+)
+
 // DXCoreAdapterPreference: https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoreadapterpreference
 type DXCoreAdapterPreference uint32
 
@@ -12,6 +17,21 @@ const (
 	MinimumPower    DXCoreAdapterPreference = 1
 	HighPerformance DXCoreAdapterPreference = 2
 )
+
+// String returns the DXCoreAdapterPreference constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXCoreAdapterPreference) String() string {
+	switch e {
+	case Hardware:
+		return "Hardware"
+	case MinimumPower:
+		return "MinimumPower"
+	case HighPerformance:
+		return "HighPerformance"
+	default:
+		return fmt.Sprintf("DXCoreAdapterPreference(%d)", uint32(e))
+	}
+}
 
 // DXCoreAdapterProperty: https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoreadapterproperty
 type DXCoreAdapterProperty uint32
@@ -37,6 +57,51 @@ const (
 	AdapterEngineName             DXCoreAdapterProperty = 17
 )
 
+// String returns the DXCoreAdapterProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXCoreAdapterProperty) String() string {
+	switch e {
+	case InstanceLuid:
+		return "InstanceLuid"
+	case DriverVersion:
+		return "DriverVersion"
+	case DriverDescription:
+		return "DriverDescription"
+	case HardwareID:
+		return "HardwareID"
+	case KmdModelVersion:
+		return "KmdModelVersion"
+	case ComputePreemptionGranularity:
+		return "ComputePreemptionGranularity"
+	case GraphicsPreemptionGranularity:
+		return "GraphicsPreemptionGranularity"
+	case DedicatedAdapterMemory:
+		return "DedicatedAdapterMemory"
+	case DedicatedSystemMemory:
+		return "DedicatedSystemMemory"
+	case SharedSystemMemory:
+		return "SharedSystemMemory"
+	case AcgCompatible:
+		return "AcgCompatible"
+	case IsHardware:
+		return "IsHardware"
+	case IsIntegrated:
+		return "IsIntegrated"
+	case IsDetachable:
+		return "IsDetachable"
+	case HardwareIDParts:
+		return "HardwareIDParts"
+	case PhysicalAdapterCount:
+		return "PhysicalAdapterCount"
+	case AdapterEngineCount:
+		return "AdapterEngineCount"
+	case AdapterEngineName:
+		return "AdapterEngineName"
+	default:
+		return fmt.Sprintf("DXCoreAdapterProperty(%d)", uint32(e))
+	}
+}
+
 // DXCoreAdapterState: https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoreadapterstate
 type DXCoreAdapterState uint32
 
@@ -54,6 +119,38 @@ const (
 	AdapterMemoryFrequencyHertz                   DXCoreAdapterState = 10
 )
 
+// String returns the DXCoreAdapterState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXCoreAdapterState) String() string {
+	switch e {
+	case IsDriverUpdateInProgress:
+		return "IsDriverUpdateInProgress"
+	case AdapterMemoryBudget:
+		return "AdapterMemoryBudget"
+	case AdapterMemoryUsageBytes:
+		return "AdapterMemoryUsageBytes"
+	case AdapterMemoryUsageByProcessBytes:
+		return "AdapterMemoryUsageByProcessBytes"
+	case AdapterEngineRunningTimeMicroseconds:
+		return "AdapterEngineRunningTimeMicroseconds"
+	case AdapterEngineRunningTimeByProcessMicroseconds:
+		return "AdapterEngineRunningTimeByProcessMicroseconds"
+	case AdapterTemperatureCelsius:
+		return "AdapterTemperatureCelsius"
+	case AdapterInUseProcessCount:
+		return "AdapterInUseProcessCount"
+	case AdapterInUseProcessSet:
+		return "AdapterInUseProcessSet"
+	case AdapterEngineFrequencyHertz:
+		return "AdapterEngineFrequencyHertz"
+	case AdapterMemoryFrequencyHertz:
+		return "AdapterMemoryFrequencyHertz"
+	default:
+		return fmt.Sprintf("DXCoreAdapterState(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DXCoreHardwareTypeFilterFlags uint32
 
 const (
@@ -64,12 +161,47 @@ const (
 	MediaAccelerator   DXCoreHardwareTypeFilterFlags = 8
 )
 
+// String returns the DXCoreHardwareTypeFilterFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXCoreHardwareTypeFilterFlags) String() string {
+	var parts []string
+	if e&GPU != 0 {
+		parts = append(parts, "GPU")
+	}
+	if e&ComputeAccelerator != 0 {
+		parts = append(parts, "ComputeAccelerator")
+	}
+	if e&NPU != 0 {
+		parts = append(parts, "NPU")
+	}
+	if e&MediaAccelerator != 0 {
+		parts = append(parts, "MediaAccelerator")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type DXCoreMemoryType uint32
 
 const (
 	Dedicated DXCoreMemoryType = 0
 	Shared    DXCoreMemoryType = 1
 )
+
+// String returns the DXCoreMemoryType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXCoreMemoryType) String() string {
+	switch e {
+	case Dedicated:
+		return "Dedicated"
+	case Shared:
+		return "Shared"
+	default:
+		return fmt.Sprintf("DXCoreMemoryType(%d)", uint32(e))
+	}
+}
 
 // DXCoreNotificationType: https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcorenotificationtype
 type DXCoreNotificationType uint32
@@ -81,12 +213,46 @@ const (
 	AdapterHardwareContentProtectionTeardown DXCoreNotificationType = 3
 )
 
+// String returns the DXCoreNotificationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXCoreNotificationType) String() string {
+	switch e {
+	case AdapterListStale:
+		return "AdapterListStale"
+	case AdapterNoLongerValid:
+		return "AdapterNoLongerValid"
+	case AdapterBudgetChange:
+		return "AdapterBudgetChange"
+	case AdapterHardwareContentProtectionTeardown:
+		return "AdapterHardwareContentProtectionTeardown"
+	default:
+		return fmt.Sprintf("DXCoreNotificationType(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DXCoreRuntimeFilterFlags uint32
 
 const (
 	D3D11 DXCoreRuntimeFilterFlags = 1
 	D3D12 DXCoreRuntimeFilterFlags = 2
 )
+
+// String returns the DXCoreRuntimeFilterFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXCoreRuntimeFilterFlags) String() string {
+	var parts []string
+	if e&D3D11 != 0 {
+		parts = append(parts, "D3D11")
+	}
+	if e&D3D12 != 0 {
+		parts = append(parts, "D3D12")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DXCoreSegmentGroup: https://learn.microsoft.com/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoresegmentgroup
 type DXCoreSegmentGroup uint32
@@ -96,6 +262,19 @@ const (
 	NonLocal DXCoreSegmentGroup = 1
 )
 
+// String returns the DXCoreSegmentGroup constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXCoreSegmentGroup) String() string {
+	switch e {
+	case Local:
+		return "Local"
+	case NonLocal:
+		return "NonLocal"
+	default:
+		return fmt.Sprintf("DXCoreSegmentGroup(%d)", uint32(e))
+	}
+}
+
 type DXCoreWorkload uint32
 
 const (
@@ -104,3 +283,20 @@ const (
 	Media           DXCoreWorkload = 2
 	MachineLearning DXCoreWorkload = 3
 )
+
+// String returns the DXCoreWorkload constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXCoreWorkload) String() string {
+	switch e {
+	case Graphics:
+		return "Graphics"
+	case Compute:
+		return "Compute"
+	case Media:
+		return "Media"
+	case MachineLearning:
+		return "MachineLearning"
+	default:
+		return fmt.Sprintf("DXCoreWorkload(%d)", uint32(e))
+	}
+}

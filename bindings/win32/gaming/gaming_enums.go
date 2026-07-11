@@ -4,12 +4,29 @@
 
 package gaming
 
+import (
+	"fmt"
+)
+
 type GAMESTATS_OPEN_RESULT int32
 
 const (
 	GAMESTATS_OPEN_CREATED GAMESTATS_OPEN_RESULT = 0
 	GAMESTATS_OPEN_OPENED  GAMESTATS_OPEN_RESULT = 1
 )
+
+// String returns the GAMESTATS_OPEN_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GAMESTATS_OPEN_RESULT) String() string {
+	switch e {
+	case GAMESTATS_OPEN_CREATED:
+		return "GAMESTATS_OPEN_CREATED"
+	case GAMESTATS_OPEN_OPENED:
+		return "GAMESTATS_OPEN_OPENED"
+	default:
+		return fmt.Sprintf("GAMESTATS_OPEN_RESULT(%d)", int32(e))
+	}
+}
 
 type GAMESTATS_OPEN_TYPE int32
 
@@ -18,6 +35,19 @@ const (
 	GAMESTATS_OPEN_OPENONLY     GAMESTATS_OPEN_TYPE = 1
 )
 
+// String returns the GAMESTATS_OPEN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GAMESTATS_OPEN_TYPE) String() string {
+	switch e {
+	case GAMESTATS_OPEN_OPENORCREATE:
+		return "GAMESTATS_OPEN_OPENORCREATE"
+	case GAMESTATS_OPEN_OPENONLY:
+		return "GAMESTATS_OPEN_OPENONLY"
+	default:
+		return fmt.Sprintf("GAMESTATS_OPEN_TYPE(%d)", int32(e))
+	}
+}
+
 type GAME_INSTALL_SCOPE int32
 
 const (
@@ -25,6 +55,21 @@ const (
 	GIS_CURRENT_USER  GAME_INSTALL_SCOPE = 2
 	GIS_ALL_USERS     GAME_INSTALL_SCOPE = 3
 )
+
+// String returns the GAME_INSTALL_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GAME_INSTALL_SCOPE) String() string {
+	switch e {
+	case GIS_NOT_INSTALLED:
+		return "GIS_NOT_INSTALLED"
+	case GIS_CURRENT_USER:
+		return "GIS_CURRENT_USER"
+	case GIS_ALL_USERS:
+		return "GIS_ALL_USERS"
+	default:
+		return fmt.Sprintf("GAME_INSTALL_SCOPE(%d)", int32(e))
+	}
+}
 
 // GAMING_DEVICE_DEVICE_ID: https://learn.microsoft.com/windows/win32/api/gamingdeviceinformation/ne-gamingdeviceinformation-gaming_device_device_id
 type GAMING_DEVICE_DEVICE_ID int32
@@ -40,6 +85,31 @@ const (
 	GAMING_DEVICE_DEVICE_ID_XBOX_SERIES_X_DEVKIT GAMING_DEVICE_DEVICE_ID = -561359263
 )
 
+// String returns the GAMING_DEVICE_DEVICE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GAMING_DEVICE_DEVICE_ID) String() string {
+	switch e {
+	case GAMING_DEVICE_DEVICE_ID_NONE:
+		return "GAMING_DEVICE_DEVICE_ID_NONE"
+	case GAMING_DEVICE_DEVICE_ID_XBOX_ONE:
+		return "GAMING_DEVICE_DEVICE_ID_XBOX_ONE"
+	case GAMING_DEVICE_DEVICE_ID_XBOX_ONE_S:
+		return "GAMING_DEVICE_DEVICE_ID_XBOX_ONE_S"
+	case GAMING_DEVICE_DEVICE_ID_XBOX_ONE_X:
+		return "GAMING_DEVICE_DEVICE_ID_XBOX_ONE_X"
+	case GAMING_DEVICE_DEVICE_ID_XBOX_ONE_X_DEVKIT:
+		return "GAMING_DEVICE_DEVICE_ID_XBOX_ONE_X_DEVKIT"
+	case GAMING_DEVICE_DEVICE_ID_XBOX_SERIES_S:
+		return "GAMING_DEVICE_DEVICE_ID_XBOX_SERIES_S"
+	case GAMING_DEVICE_DEVICE_ID_XBOX_SERIES_X:
+		return "GAMING_DEVICE_DEVICE_ID_XBOX_SERIES_X"
+	case GAMING_DEVICE_DEVICE_ID_XBOX_SERIES_X_DEVKIT:
+		return "GAMING_DEVICE_DEVICE_ID_XBOX_SERIES_X_DEVKIT"
+	default:
+		return fmt.Sprintf("GAMING_DEVICE_DEVICE_ID(%d)", int32(e))
+	}
+}
+
 // GAMING_DEVICE_VENDOR_ID: https://learn.microsoft.com/windows/win32/api/gamingdeviceinformation/ne-gamingdeviceinformation-gaming_device_vendor_id
 type GAMING_DEVICE_VENDOR_ID int32
 
@@ -47,6 +117,19 @@ const (
 	GAMING_DEVICE_VENDOR_ID_NONE      GAMING_DEVICE_VENDOR_ID = 0
 	GAMING_DEVICE_VENDOR_ID_MICROSOFT GAMING_DEVICE_VENDOR_ID = -1024700366
 )
+
+// String returns the GAMING_DEVICE_VENDOR_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GAMING_DEVICE_VENDOR_ID) String() string {
+	switch e {
+	case GAMING_DEVICE_VENDOR_ID_NONE:
+		return "GAMING_DEVICE_VENDOR_ID_NONE"
+	case GAMING_DEVICE_VENDOR_ID_MICROSOFT:
+		return "GAMING_DEVICE_VENDOR_ID_MICROSOFT"
+	default:
+		return fmt.Sprintf("GAMING_DEVICE_VENDOR_ID(%d)", int32(e))
+	}
+}
 
 // KnownGamingPrivileges: https://learn.microsoft.com/windows/win32/api/gamingtcui/ne-gamingtcui-knowngamingprivileges
 type KnownGamingPrivileges int32
@@ -76,6 +159,59 @@ const (
 	XPRIVILEGE_ADD_FRIEND                  KnownGamingPrivileges = 255
 )
 
+// String returns the KnownGamingPrivileges constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KnownGamingPrivileges) String() string {
+	switch e {
+	case XPRIVILEGE_BROADCAST:
+		return "XPRIVILEGE_BROADCAST"
+	case XPRIVILEGE_VIEW_FRIENDS_LIST:
+		return "XPRIVILEGE_VIEW_FRIENDS_LIST"
+	case XPRIVILEGE_GAME_DVR:
+		return "XPRIVILEGE_GAME_DVR"
+	case XPRIVILEGE_SHARE_KINECT_CONTENT:
+		return "XPRIVILEGE_SHARE_KINECT_CONTENT"
+	case XPRIVILEGE_MULTIPLAYER_PARTIES:
+		return "XPRIVILEGE_MULTIPLAYER_PARTIES"
+	case XPRIVILEGE_COMMUNICATION_VOICE_INGAME:
+		return "XPRIVILEGE_COMMUNICATION_VOICE_INGAME"
+	case XPRIVILEGE_COMMUNICATION_VOICE_SKYPE:
+		return "XPRIVILEGE_COMMUNICATION_VOICE_SKYPE"
+	case XPRIVILEGE_CLOUD_GAMING_MANAGE_SESSION:
+		return "XPRIVILEGE_CLOUD_GAMING_MANAGE_SESSION"
+	case XPRIVILEGE_CLOUD_GAMING_JOIN_SESSION:
+		return "XPRIVILEGE_CLOUD_GAMING_JOIN_SESSION"
+	case XPRIVILEGE_CLOUD_SAVED_GAMES:
+		return "XPRIVILEGE_CLOUD_SAVED_GAMES"
+	case XPRIVILEGE_SHARE_CONTENT:
+		return "XPRIVILEGE_SHARE_CONTENT"
+	case XPRIVILEGE_PREMIUM_CONTENT:
+		return "XPRIVILEGE_PREMIUM_CONTENT"
+	case XPRIVILEGE_SUBSCRIPTION_CONTENT:
+		return "XPRIVILEGE_SUBSCRIPTION_CONTENT"
+	case XPRIVILEGE_SOCIAL_NETWORK_SHARING:
+		return "XPRIVILEGE_SOCIAL_NETWORK_SHARING"
+	case XPRIVILEGE_PREMIUM_VIDEO:
+		return "XPRIVILEGE_PREMIUM_VIDEO"
+	case XPRIVILEGE_VIDEO_COMMUNICATIONS:
+		return "XPRIVILEGE_VIDEO_COMMUNICATIONS"
+	case XPRIVILEGE_PURCHASE_CONTENT:
+		return "XPRIVILEGE_PURCHASE_CONTENT"
+	case XPRIVILEGE_USER_CREATED_CONTENT:
+		return "XPRIVILEGE_USER_CREATED_CONTENT"
+	case XPRIVILEGE_PROFILE_VIEWING:
+		return "XPRIVILEGE_PROFILE_VIEWING"
+	case XPRIVILEGE_COMMUNICATIONS:
+		return "XPRIVILEGE_COMMUNICATIONS"
+	case XPRIVILEGE_MULTIPLAYER_SESSIONS:
+		return "XPRIVILEGE_MULTIPLAYER_SESSIONS"
+	case XPRIVILEGE_ADD_FRIEND:
+		return "XPRIVILEGE_ADD_FRIEND"
+	default:
+		return fmt.Sprintf("KnownGamingPrivileges(%d)", int32(e))
+	}
+}
+
 // XBL_IDP_AUTH_TOKEN_STATUS: https://learn.microsoft.com/windows/win32/api/xblidpauthmanager/ne-xblidpauthmanager-xbl_idp_auth_token_status
 type XBL_IDP_AUTH_TOKEN_STATUS int32
 
@@ -90,3 +226,30 @@ const (
 	XBL_IDP_AUTH_TOKEN_STATUS_VIEW_NOT_SET            XBL_IDP_AUTH_TOKEN_STATUS = 7
 	XBL_IDP_AUTH_TOKEN_STATUS_UNKNOWN                 XBL_IDP_AUTH_TOKEN_STATUS = -1
 )
+
+// String returns the XBL_IDP_AUTH_TOKEN_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XBL_IDP_AUTH_TOKEN_STATUS) String() string {
+	switch e {
+	case XBL_IDP_AUTH_TOKEN_STATUS_SUCCESS:
+		return "XBL_IDP_AUTH_TOKEN_STATUS_SUCCESS"
+	case XBL_IDP_AUTH_TOKEN_STATUS_OFFLINE_SUCCESS:
+		return "XBL_IDP_AUTH_TOKEN_STATUS_OFFLINE_SUCCESS"
+	case XBL_IDP_AUTH_TOKEN_STATUS_NO_ACCOUNT_SET:
+		return "XBL_IDP_AUTH_TOKEN_STATUS_NO_ACCOUNT_SET"
+	case XBL_IDP_AUTH_TOKEN_STATUS_LOAD_MSA_ACCOUNT_FAILED:
+		return "XBL_IDP_AUTH_TOKEN_STATUS_LOAD_MSA_ACCOUNT_FAILED"
+	case XBL_IDP_AUTH_TOKEN_STATUS_XBOX_VETO:
+		return "XBL_IDP_AUTH_TOKEN_STATUS_XBOX_VETO"
+	case XBL_IDP_AUTH_TOKEN_STATUS_MSA_INTERRUPT:
+		return "XBL_IDP_AUTH_TOKEN_STATUS_MSA_INTERRUPT"
+	case XBL_IDP_AUTH_TOKEN_STATUS_OFFLINE_NO_CONSENT:
+		return "XBL_IDP_AUTH_TOKEN_STATUS_OFFLINE_NO_CONSENT"
+	case XBL_IDP_AUTH_TOKEN_STATUS_VIEW_NOT_SET:
+		return "XBL_IDP_AUTH_TOKEN_STATUS_VIEW_NOT_SET"
+	case XBL_IDP_AUTH_TOKEN_STATUS_UNKNOWN:
+		return "XBL_IDP_AUTH_TOKEN_STATUS_UNKNOWN"
+	default:
+		return fmt.Sprintf("XBL_IDP_AUTH_TOKEN_STATUS(%d)", int32(e))
+	}
+}

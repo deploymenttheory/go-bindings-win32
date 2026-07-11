@@ -4,7 +4,13 @@
 
 package cloudfilters
 
+import (
+	"fmt"
+	"strings"
+)
+
 // CF_CALLBACK_CANCEL_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_cancel_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_CANCEL_FLAGS int32
 
 const (
@@ -13,7 +19,24 @@ const (
 	CF_CALLBACK_CANCEL_FLAG_IO_ABORTED CF_CALLBACK_CANCEL_FLAGS = 2
 )
 
+// String returns the CF_CALLBACK_CANCEL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_CANCEL_FLAGS) String() string {
+	var parts []string
+	if e&CF_CALLBACK_CANCEL_FLAG_IO_TIMEOUT != 0 {
+		parts = append(parts, "CF_CALLBACK_CANCEL_FLAG_IO_TIMEOUT")
+	}
+	if e&CF_CALLBACK_CANCEL_FLAG_IO_ABORTED != 0 {
+		parts = append(parts, "CF_CALLBACK_CANCEL_FLAG_IO_ABORTED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CALLBACK_CLOSE_COMPLETION_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_close_completion_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_CLOSE_COMPLETION_FLAGS int32
 
 const (
@@ -21,7 +44,21 @@ const (
 	CF_CALLBACK_CLOSE_COMPLETION_FLAG_DELETED CF_CALLBACK_CLOSE_COMPLETION_FLAGS = 1
 )
 
+// String returns the CF_CALLBACK_CLOSE_COMPLETION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_CLOSE_COMPLETION_FLAGS) String() string {
+	var parts []string
+	if e&CF_CALLBACK_CLOSE_COMPLETION_FLAG_DELETED != 0 {
+		parts = append(parts, "CF_CALLBACK_CLOSE_COMPLETION_FLAG_DELETED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_dehydrate_completion_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS int32
 
 const (
@@ -30,13 +67,43 @@ const (
 	CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_DEHYDRATED CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS = 2
 )
 
+// String returns the CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_DEHYDRATE_COMPLETION_FLAGS) String() string {
+	var parts []string
+	if e&CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_BACKGROUND != 0 {
+		parts = append(parts, "CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_BACKGROUND")
+	}
+	if e&CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_DEHYDRATED != 0 {
+		parts = append(parts, "CF_CALLBACK_DEHYDRATE_COMPLETION_FLAG_DEHYDRATED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CALLBACK_DEHYDRATE_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_dehydrate_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_DEHYDRATE_FLAGS int32
 
 const (
 	CF_CALLBACK_DEHYDRATE_FLAG_NONE       CF_CALLBACK_DEHYDRATE_FLAGS = 0
 	CF_CALLBACK_DEHYDRATE_FLAG_BACKGROUND CF_CALLBACK_DEHYDRATE_FLAGS = 1
 )
+
+// String returns the CF_CALLBACK_DEHYDRATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_DEHYDRATE_FLAGS) String() string {
+	var parts []string
+	if e&CF_CALLBACK_DEHYDRATE_FLAG_BACKGROUND != 0 {
+		parts = append(parts, "CF_CALLBACK_DEHYDRATE_FLAG_BACKGROUND")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // CF_CALLBACK_DEHYDRATION_REASON: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_dehydration_reason
 type CF_CALLBACK_DEHYDRATION_REASON int32
@@ -49,14 +116,45 @@ const (
 	CF_CALLBACK_DEHYDRATION_REASON_SYSTEM_OS_UPGRADE CF_CALLBACK_DEHYDRATION_REASON = 4
 )
 
+// String returns the CF_CALLBACK_DEHYDRATION_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_DEHYDRATION_REASON) String() string {
+	switch e {
+	case CF_CALLBACK_DEHYDRATION_REASON_NONE:
+		return "CF_CALLBACK_DEHYDRATION_REASON_NONE"
+	case CF_CALLBACK_DEHYDRATION_REASON_USER_MANUAL:
+		return "CF_CALLBACK_DEHYDRATION_REASON_USER_MANUAL"
+	case CF_CALLBACK_DEHYDRATION_REASON_SYSTEM_LOW_SPACE:
+		return "CF_CALLBACK_DEHYDRATION_REASON_SYSTEM_LOW_SPACE"
+	case CF_CALLBACK_DEHYDRATION_REASON_SYSTEM_INACTIVITY:
+		return "CF_CALLBACK_DEHYDRATION_REASON_SYSTEM_INACTIVITY"
+	case CF_CALLBACK_DEHYDRATION_REASON_SYSTEM_OS_UPGRADE:
+		return "CF_CALLBACK_DEHYDRATION_REASON_SYSTEM_OS_UPGRADE"
+	default:
+		return fmt.Sprintf("CF_CALLBACK_DEHYDRATION_REASON(%d)", int32(e))
+	}
+}
+
 // CF_CALLBACK_DELETE_COMPLETION_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_delete_completion_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_DELETE_COMPLETION_FLAGS int32
 
 const (
 	CF_CALLBACK_DELETE_COMPLETION_FLAG_NONE CF_CALLBACK_DELETE_COMPLETION_FLAGS = 0
 )
 
+// String returns the CF_CALLBACK_DELETE_COMPLETION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_DELETE_COMPLETION_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CALLBACK_DELETE_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_delete_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_DELETE_FLAGS int32
 
 const (
@@ -65,7 +163,24 @@ const (
 	CF_CALLBACK_DELETE_FLAG_IS_UNDELETE  CF_CALLBACK_DELETE_FLAGS = 2
 )
 
+// String returns the CF_CALLBACK_DELETE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_DELETE_FLAGS) String() string {
+	var parts []string
+	if e&CF_CALLBACK_DELETE_FLAG_IS_DIRECTORY != 0 {
+		parts = append(parts, "CF_CALLBACK_DELETE_FLAG_IS_DIRECTORY")
+	}
+	if e&CF_CALLBACK_DELETE_FLAG_IS_UNDELETE != 0 {
+		parts = append(parts, "CF_CALLBACK_DELETE_FLAG_IS_UNDELETE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CALLBACK_FETCH_DATA_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_fetch_data_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_FETCH_DATA_FLAGS int32
 
 const (
@@ -74,14 +189,42 @@ const (
 	CF_CALLBACK_FETCH_DATA_FLAG_EXPLICIT_HYDRATION CF_CALLBACK_FETCH_DATA_FLAGS = 2
 )
 
+// String returns the CF_CALLBACK_FETCH_DATA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_FETCH_DATA_FLAGS) String() string {
+	var parts []string
+	if e&CF_CALLBACK_FETCH_DATA_FLAG_RECOVERY != 0 {
+		parts = append(parts, "CF_CALLBACK_FETCH_DATA_FLAG_RECOVERY")
+	}
+	if e&CF_CALLBACK_FETCH_DATA_FLAG_EXPLICIT_HYDRATION != 0 {
+		parts = append(parts, "CF_CALLBACK_FETCH_DATA_FLAG_EXPLICIT_HYDRATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_fetch_placeholders_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS int32
 
 const (
 	CF_CALLBACK_FETCH_PLACEHOLDERS_FLAG_NONE CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS = 0
 )
 
+// String returns the CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_FETCH_PLACEHOLDERS_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CALLBACK_OPEN_COMPLETION_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_open_completion_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_OPEN_COMPLETION_FLAGS int32
 
 const (
@@ -90,14 +233,42 @@ const (
 	CF_CALLBACK_OPEN_COMPLETION_FLAG_PLACEHOLDER_UNSUPPORTED CF_CALLBACK_OPEN_COMPLETION_FLAGS = 2
 )
 
+// String returns the CF_CALLBACK_OPEN_COMPLETION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_OPEN_COMPLETION_FLAGS) String() string {
+	var parts []string
+	if e&CF_CALLBACK_OPEN_COMPLETION_FLAG_PLACEHOLDER_UNKNOWN != 0 {
+		parts = append(parts, "CF_CALLBACK_OPEN_COMPLETION_FLAG_PLACEHOLDER_UNKNOWN")
+	}
+	if e&CF_CALLBACK_OPEN_COMPLETION_FLAG_PLACEHOLDER_UNSUPPORTED != 0 {
+		parts = append(parts, "CF_CALLBACK_OPEN_COMPLETION_FLAG_PLACEHOLDER_UNSUPPORTED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CALLBACK_RENAME_COMPLETION_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_rename_completion_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_RENAME_COMPLETION_FLAGS int32
 
 const (
 	CF_CALLBACK_RENAME_COMPLETION_FLAG_NONE CF_CALLBACK_RENAME_COMPLETION_FLAGS = 0
 )
 
+// String returns the CF_CALLBACK_RENAME_COMPLETION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_RENAME_COMPLETION_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CALLBACK_RENAME_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_rename_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_RENAME_FLAGS int32
 
 const (
@@ -106,6 +277,25 @@ const (
 	CF_CALLBACK_RENAME_FLAG_SOURCE_IN_SCOPE CF_CALLBACK_RENAME_FLAGS = 2
 	CF_CALLBACK_RENAME_FLAG_TARGET_IN_SCOPE CF_CALLBACK_RENAME_FLAGS = 4
 )
+
+// String returns the CF_CALLBACK_RENAME_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_RENAME_FLAGS) String() string {
+	var parts []string
+	if e&CF_CALLBACK_RENAME_FLAG_IS_DIRECTORY != 0 {
+		parts = append(parts, "CF_CALLBACK_RENAME_FLAG_IS_DIRECTORY")
+	}
+	if e&CF_CALLBACK_RENAME_FLAG_SOURCE_IN_SCOPE != 0 {
+		parts = append(parts, "CF_CALLBACK_RENAME_FLAG_SOURCE_IN_SCOPE")
+	}
+	if e&CF_CALLBACK_RENAME_FLAG_TARGET_IN_SCOPE != 0 {
+		parts = append(parts, "CF_CALLBACK_RENAME_FLAG_TARGET_IN_SCOPE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // CF_CALLBACK_TYPE: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_type
 type CF_CALLBACK_TYPE int32
@@ -127,7 +317,45 @@ const (
 	CF_CALLBACK_TYPE_NONE                         CF_CALLBACK_TYPE = -1
 )
 
+// String returns the CF_CALLBACK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_TYPE) String() string {
+	switch e {
+	case CF_CALLBACK_TYPE_FETCH_DATA:
+		return "CF_CALLBACK_TYPE_FETCH_DATA"
+	case CF_CALLBACK_TYPE_VALIDATE_DATA:
+		return "CF_CALLBACK_TYPE_VALIDATE_DATA"
+	case CF_CALLBACK_TYPE_CANCEL_FETCH_DATA:
+		return "CF_CALLBACK_TYPE_CANCEL_FETCH_DATA"
+	case CF_CALLBACK_TYPE_FETCH_PLACEHOLDERS:
+		return "CF_CALLBACK_TYPE_FETCH_PLACEHOLDERS"
+	case CF_CALLBACK_TYPE_CANCEL_FETCH_PLACEHOLDERS:
+		return "CF_CALLBACK_TYPE_CANCEL_FETCH_PLACEHOLDERS"
+	case CF_CALLBACK_TYPE_NOTIFY_FILE_OPEN_COMPLETION:
+		return "CF_CALLBACK_TYPE_NOTIFY_FILE_OPEN_COMPLETION"
+	case CF_CALLBACK_TYPE_NOTIFY_FILE_CLOSE_COMPLETION:
+		return "CF_CALLBACK_TYPE_NOTIFY_FILE_CLOSE_COMPLETION"
+	case CF_CALLBACK_TYPE_NOTIFY_DEHYDRATE:
+		return "CF_CALLBACK_TYPE_NOTIFY_DEHYDRATE"
+	case CF_CALLBACK_TYPE_NOTIFY_DEHYDRATE_COMPLETION:
+		return "CF_CALLBACK_TYPE_NOTIFY_DEHYDRATE_COMPLETION"
+	case CF_CALLBACK_TYPE_NOTIFY_DELETE:
+		return "CF_CALLBACK_TYPE_NOTIFY_DELETE"
+	case CF_CALLBACK_TYPE_NOTIFY_DELETE_COMPLETION:
+		return "CF_CALLBACK_TYPE_NOTIFY_DELETE_COMPLETION"
+	case CF_CALLBACK_TYPE_NOTIFY_RENAME:
+		return "CF_CALLBACK_TYPE_NOTIFY_RENAME"
+	case CF_CALLBACK_TYPE_NOTIFY_RENAME_COMPLETION:
+		return "CF_CALLBACK_TYPE_NOTIFY_RENAME_COMPLETION"
+	case CF_CALLBACK_TYPE_NONE:
+		return "CF_CALLBACK_TYPE_NONE"
+	default:
+		return fmt.Sprintf("CF_CALLBACK_TYPE(%d)", int32(e))
+	}
+}
+
 // CF_CALLBACK_VALIDATE_DATA_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_callback_validate_data_flags
+// Bitmask — values may be combined with |.
 type CF_CALLBACK_VALIDATE_DATA_FLAGS int32
 
 const (
@@ -135,7 +363,21 @@ const (
 	CF_CALLBACK_VALIDATE_DATA_FLAG_EXPLICIT_HYDRATION CF_CALLBACK_VALIDATE_DATA_FLAGS = 2
 )
 
+// String returns the CF_CALLBACK_VALIDATE_DATA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CALLBACK_VALIDATE_DATA_FLAGS) String() string {
+	var parts []string
+	if e&CF_CALLBACK_VALIDATE_DATA_FLAG_EXPLICIT_HYDRATION != 0 {
+		parts = append(parts, "CF_CALLBACK_VALIDATE_DATA_FLAG_EXPLICIT_HYDRATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CONNECT_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_connect_flags
+// Bitmask — values may be combined with |.
 type CF_CONNECT_FLAGS int32
 
 const (
@@ -145,7 +387,27 @@ const (
 	CF_CONNECT_FLAG_BLOCK_SELF_IMPLICIT_HYDRATION CF_CONNECT_FLAGS = 8
 )
 
+// String returns the CF_CONNECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CONNECT_FLAGS) String() string {
+	var parts []string
+	if e&CF_CONNECT_FLAG_REQUIRE_PROCESS_INFO != 0 {
+		parts = append(parts, "CF_CONNECT_FLAG_REQUIRE_PROCESS_INFO")
+	}
+	if e&CF_CONNECT_FLAG_REQUIRE_FULL_FILE_PATH != 0 {
+		parts = append(parts, "CF_CONNECT_FLAG_REQUIRE_FULL_FILE_PATH")
+	}
+	if e&CF_CONNECT_FLAG_BLOCK_SELF_IMPLICIT_HYDRATION != 0 {
+		parts = append(parts, "CF_CONNECT_FLAG_BLOCK_SELF_IMPLICIT_HYDRATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CONVERT_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_convert_flags
+// Bitmask — values may be combined with |.
 type CF_CONVERT_FLAGS int32
 
 const (
@@ -157,7 +419,33 @@ const (
 	CF_CONVERT_FLAG_FORCE_CONVERT_TO_CLOUD_FILE CF_CONVERT_FLAGS = 16
 )
 
+// String returns the CF_CONVERT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CONVERT_FLAGS) String() string {
+	var parts []string
+	if e&CF_CONVERT_FLAG_MARK_IN_SYNC != 0 {
+		parts = append(parts, "CF_CONVERT_FLAG_MARK_IN_SYNC")
+	}
+	if e&CF_CONVERT_FLAG_DEHYDRATE != 0 {
+		parts = append(parts, "CF_CONVERT_FLAG_DEHYDRATE")
+	}
+	if e&CF_CONVERT_FLAG_ENABLE_ON_DEMAND_POPULATION != 0 {
+		parts = append(parts, "CF_CONVERT_FLAG_ENABLE_ON_DEMAND_POPULATION")
+	}
+	if e&CF_CONVERT_FLAG_ALWAYS_FULL != 0 {
+		parts = append(parts, "CF_CONVERT_FLAG_ALWAYS_FULL")
+	}
+	if e&CF_CONVERT_FLAG_FORCE_CONVERT_TO_CLOUD_FILE != 0 {
+		parts = append(parts, "CF_CONVERT_FLAG_FORCE_CONVERT_TO_CLOUD_FILE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_CREATE_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_create_flags
+// Bitmask — values may be combined with |.
 type CF_CREATE_FLAGS int32
 
 const (
@@ -165,7 +453,21 @@ const (
 	CF_CREATE_FLAG_STOP_ON_ERROR CF_CREATE_FLAGS = 1
 )
 
+// String returns the CF_CREATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_CREATE_FLAGS) String() string {
+	var parts []string
+	if e&CF_CREATE_FLAG_STOP_ON_ERROR != 0 {
+		parts = append(parts, "CF_CREATE_FLAG_STOP_ON_ERROR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_DEHYDRATE_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_dehydrate_flags
+// Bitmask — values may be combined with |.
 type CF_DEHYDRATE_FLAGS int32
 
 const (
@@ -173,7 +475,21 @@ const (
 	CF_DEHYDRATE_FLAG_BACKGROUND CF_DEHYDRATE_FLAGS = 1
 )
 
+// String returns the CF_DEHYDRATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_DEHYDRATE_FLAGS) String() string {
+	var parts []string
+	if e&CF_DEHYDRATE_FLAG_BACKGROUND != 0 {
+		parts = append(parts, "CF_DEHYDRATE_FLAG_BACKGROUND")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_HARDLINK_POLICY: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_hardlink_policy
+// Bitmask — values may be combined with |.
 type CF_HARDLINK_POLICY int32
 
 const (
@@ -181,14 +497,39 @@ const (
 	CF_HARDLINK_POLICY_ALLOWED CF_HARDLINK_POLICY = 1
 )
 
+// String returns the CF_HARDLINK_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_HARDLINK_POLICY) String() string {
+	var parts []string
+	if e&CF_HARDLINK_POLICY_ALLOWED != 0 {
+		parts = append(parts, "CF_HARDLINK_POLICY_ALLOWED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_HYDRATE_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_hydrate_flags
+// Bitmask — values may be combined with |.
 type CF_HYDRATE_FLAGS int32
 
 const (
 	CF_HYDRATE_FLAG_NONE CF_HYDRATE_FLAGS = 0
 )
 
+// String returns the CF_HYDRATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_HYDRATE_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_HYDRATION_POLICY_MODIFIER: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_hydration_policy_modifier
+// Bitmask — values may be combined with |.
 type CF_HYDRATION_POLICY_MODIFIER uint16
 
 const (
@@ -198,6 +539,28 @@ const (
 	CF_HYDRATION_POLICY_MODIFIER_AUTO_DEHYDRATION_ALLOWED     CF_HYDRATION_POLICY_MODIFIER = 4
 	CF_HYDRATION_POLICY_MODIFIER_ALLOW_FULL_RESTART_HYDRATION CF_HYDRATION_POLICY_MODIFIER = 8
 )
+
+// String returns the CF_HYDRATION_POLICY_MODIFIER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_HYDRATION_POLICY_MODIFIER) String() string {
+	var parts []string
+	if e&CF_HYDRATION_POLICY_MODIFIER_VALIDATION_REQUIRED != 0 {
+		parts = append(parts, "CF_HYDRATION_POLICY_MODIFIER_VALIDATION_REQUIRED")
+	}
+	if e&CF_HYDRATION_POLICY_MODIFIER_STREAMING_ALLOWED != 0 {
+		parts = append(parts, "CF_HYDRATION_POLICY_MODIFIER_STREAMING_ALLOWED")
+	}
+	if e&CF_HYDRATION_POLICY_MODIFIER_AUTO_DEHYDRATION_ALLOWED != 0 {
+		parts = append(parts, "CF_HYDRATION_POLICY_MODIFIER_AUTO_DEHYDRATION_ALLOWED")
+	}
+	if e&CF_HYDRATION_POLICY_MODIFIER_ALLOW_FULL_RESTART_HYDRATION != 0 {
+		parts = append(parts, "CF_HYDRATION_POLICY_MODIFIER_ALLOW_FULL_RESTART_HYDRATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // CF_HYDRATION_POLICY_PRIMARY: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_hydration_policy_primary
 type CF_HYDRATION_POLICY_PRIMARY uint16
@@ -209,7 +572,25 @@ const (
 	CF_HYDRATION_POLICY_ALWAYS_FULL CF_HYDRATION_POLICY_PRIMARY = 3
 )
 
+// String returns the CF_HYDRATION_POLICY_PRIMARY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_HYDRATION_POLICY_PRIMARY) String() string {
+	switch e {
+	case CF_HYDRATION_POLICY_PARTIAL:
+		return "CF_HYDRATION_POLICY_PARTIAL"
+	case CF_HYDRATION_POLICY_PROGRESSIVE:
+		return "CF_HYDRATION_POLICY_PROGRESSIVE"
+	case CF_HYDRATION_POLICY_FULL:
+		return "CF_HYDRATION_POLICY_FULL"
+	case CF_HYDRATION_POLICY_ALWAYS_FULL:
+		return "CF_HYDRATION_POLICY_ALWAYS_FULL"
+	default:
+		return fmt.Sprintf("CF_HYDRATION_POLICY_PRIMARY(%d)", uint16(e))
+	}
+}
+
 // CF_INSYNC_POLICY: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_insync_policy
+// Bitmask — values may be combined with |.
 type CF_INSYNC_POLICY uint32
 
 const (
@@ -230,6 +611,58 @@ const (
 	CF_INSYNC_POLICY_PRESERVE_INSYNC_FOR_SYNC_ENGINE    CF_INSYNC_POLICY = 2147483648
 )
 
+// String returns the CF_INSYNC_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_INSYNC_POLICY) String() string {
+	var parts []string
+	if e&CF_INSYNC_POLICY_TRACK_FILE_CREATION_TIME != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_FILE_CREATION_TIME")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_FILE_READONLY_ATTRIBUTE != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_FILE_READONLY_ATTRIBUTE")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_FILE_HIDDEN_ATTRIBUTE != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_FILE_HIDDEN_ATTRIBUTE")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_FILE_SYSTEM_ATTRIBUTE != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_FILE_SYSTEM_ATTRIBUTE")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_DIRECTORY_CREATION_TIME != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_DIRECTORY_CREATION_TIME")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_DIRECTORY_READONLY_ATTRIBUTE != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_DIRECTORY_READONLY_ATTRIBUTE")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_DIRECTORY_HIDDEN_ATTRIBUTE != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_DIRECTORY_HIDDEN_ATTRIBUTE")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_DIRECTORY_SYSTEM_ATTRIBUTE != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_DIRECTORY_SYSTEM_ATTRIBUTE")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_FILE_LAST_WRITE_TIME != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_FILE_LAST_WRITE_TIME")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_DIRECTORY_LAST_WRITE_TIME != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_DIRECTORY_LAST_WRITE_TIME")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_FILE_ALL != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_FILE_ALL")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_DIRECTORY_ALL != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_DIRECTORY_ALL")
+	}
+	if e&CF_INSYNC_POLICY_TRACK_ALL != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_TRACK_ALL")
+	}
+	if e&CF_INSYNC_POLICY_PRESERVE_INSYNC_FOR_SYNC_ENGINE != 0 {
+		parts = append(parts, "CF_INSYNC_POLICY_PRESERVE_INSYNC_FOR_SYNC_ENGINE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_IN_SYNC_STATE: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_in_sync_state
 type CF_IN_SYNC_STATE int32
 
@@ -238,7 +671,21 @@ const (
 	CF_IN_SYNC_STATE_IN_SYNC     CF_IN_SYNC_STATE = 1
 )
 
+// String returns the CF_IN_SYNC_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_IN_SYNC_STATE) String() string {
+	switch e {
+	case CF_IN_SYNC_STATE_NOT_IN_SYNC:
+		return "CF_IN_SYNC_STATE_NOT_IN_SYNC"
+	case CF_IN_SYNC_STATE_IN_SYNC:
+		return "CF_IN_SYNC_STATE_IN_SYNC"
+	default:
+		return fmt.Sprintf("CF_IN_SYNC_STATE(%d)", int32(e))
+	}
+}
+
 // CF_OPEN_FILE_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_open_file_flags
+// Bitmask — values may be combined with |.
 type CF_OPEN_FILE_FLAGS int32
 
 const (
@@ -249,35 +696,102 @@ const (
 	CF_OPEN_FILE_FLAG_FOREGROUND    CF_OPEN_FILE_FLAGS = 8
 )
 
+// String returns the CF_OPEN_FILE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_OPEN_FILE_FLAGS) String() string {
+	var parts []string
+	if e&CF_OPEN_FILE_FLAG_EXCLUSIVE != 0 {
+		parts = append(parts, "CF_OPEN_FILE_FLAG_EXCLUSIVE")
+	}
+	if e&CF_OPEN_FILE_FLAG_WRITE_ACCESS != 0 {
+		parts = append(parts, "CF_OPEN_FILE_FLAG_WRITE_ACCESS")
+	}
+	if e&CF_OPEN_FILE_FLAG_DELETE_ACCESS != 0 {
+		parts = append(parts, "CF_OPEN_FILE_FLAG_DELETE_ACCESS")
+	}
+	if e&CF_OPEN_FILE_FLAG_FOREGROUND != 0 {
+		parts = append(parts, "CF_OPEN_FILE_FLAG_FOREGROUND")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_OPERATION_ACK_DATA_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_operation_ack_data_flags
+// Bitmask — values may be combined with |.
 type CF_OPERATION_ACK_DATA_FLAGS int32
 
 const (
 	CF_OPERATION_ACK_DATA_FLAG_NONE CF_OPERATION_ACK_DATA_FLAGS = 0
 )
 
+// String returns the CF_OPERATION_ACK_DATA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_OPERATION_ACK_DATA_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_OPERATION_ACK_DEHYDRATE_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_operation_ack_dehydrate_flags
+// Bitmask — values may be combined with |.
 type CF_OPERATION_ACK_DEHYDRATE_FLAGS int32
 
 const (
 	CF_OPERATION_ACK_DEHYDRATE_FLAG_NONE CF_OPERATION_ACK_DEHYDRATE_FLAGS = 0
 )
 
+// String returns the CF_OPERATION_ACK_DEHYDRATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_OPERATION_ACK_DEHYDRATE_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_OPERATION_ACK_DELETE_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_operation_ack_delete_flags
+// Bitmask — values may be combined with |.
 type CF_OPERATION_ACK_DELETE_FLAGS int32
 
 const (
 	CF_OPERATION_ACK_DELETE_FLAG_NONE CF_OPERATION_ACK_DELETE_FLAGS = 0
 )
 
+// String returns the CF_OPERATION_ACK_DELETE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_OPERATION_ACK_DELETE_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_OPERATION_ACK_RENAME_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_operation_ack_rename_flags
+// Bitmask — values may be combined with |.
 type CF_OPERATION_ACK_RENAME_FLAGS int32
 
 const (
 	CF_OPERATION_ACK_RENAME_FLAG_NONE CF_OPERATION_ACK_RENAME_FLAGS = 0
 )
 
+// String returns the CF_OPERATION_ACK_RENAME_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_OPERATION_ACK_RENAME_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_OPERATION_RESTART_HYDRATION_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_operation_restart_hydration_flags
+// Bitmask — values may be combined with |.
 type CF_OPERATION_RESTART_HYDRATION_FLAGS int32
 
 const (
@@ -285,21 +799,57 @@ const (
 	CF_OPERATION_RESTART_HYDRATION_FLAG_MARK_IN_SYNC CF_OPERATION_RESTART_HYDRATION_FLAGS = 1
 )
 
+// String returns the CF_OPERATION_RESTART_HYDRATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_OPERATION_RESTART_HYDRATION_FLAGS) String() string {
+	var parts []string
+	if e&CF_OPERATION_RESTART_HYDRATION_FLAG_MARK_IN_SYNC != 0 {
+		parts = append(parts, "CF_OPERATION_RESTART_HYDRATION_FLAG_MARK_IN_SYNC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_OPERATION_RETRIEVE_DATA_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_operation_retrieve_data_flags
+// Bitmask — values may be combined with |.
 type CF_OPERATION_RETRIEVE_DATA_FLAGS int32
 
 const (
 	CF_OPERATION_RETRIEVE_DATA_FLAG_NONE CF_OPERATION_RETRIEVE_DATA_FLAGS = 0
 )
 
+// String returns the CF_OPERATION_RETRIEVE_DATA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_OPERATION_RETRIEVE_DATA_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_OPERATION_TRANSFER_DATA_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_operation_transfer_data_flags
+// Bitmask — values may be combined with |.
 type CF_OPERATION_TRANSFER_DATA_FLAGS int32
 
 const (
 	CF_OPERATION_TRANSFER_DATA_FLAG_NONE CF_OPERATION_TRANSFER_DATA_FLAGS = 0
 )
 
+// String returns the CF_OPERATION_TRANSFER_DATA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_OPERATION_TRANSFER_DATA_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_operation_transfer_placeholders_flags
+// Bitmask — values may be combined with |.
 type CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS int32
 
 const (
@@ -307,6 +857,22 @@ const (
 	CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_STOP_ON_ERROR                CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS = 1
 	CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_DISABLE_ON_DEMAND_POPULATION CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS = 2
 )
+
+// String returns the CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAGS) String() string {
+	var parts []string
+	if e&CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_STOP_ON_ERROR != 0 {
+		parts = append(parts, "CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_STOP_ON_ERROR")
+	}
+	if e&CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_DISABLE_ON_DEMAND_POPULATION != 0 {
+		parts = append(parts, "CF_OPERATION_TRANSFER_PLACEHOLDERS_FLAG_DISABLE_ON_DEMAND_POPULATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // CF_OPERATION_TYPE: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_operation_type
 type CF_OPERATION_TYPE int32
@@ -322,6 +888,31 @@ const (
 	CF_OPERATION_TYPE_ACK_RENAME            CF_OPERATION_TYPE = 7
 )
 
+// String returns the CF_OPERATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_OPERATION_TYPE) String() string {
+	switch e {
+	case CF_OPERATION_TYPE_TRANSFER_DATA:
+		return "CF_OPERATION_TYPE_TRANSFER_DATA"
+	case CF_OPERATION_TYPE_RETRIEVE_DATA:
+		return "CF_OPERATION_TYPE_RETRIEVE_DATA"
+	case CF_OPERATION_TYPE_ACK_DATA:
+		return "CF_OPERATION_TYPE_ACK_DATA"
+	case CF_OPERATION_TYPE_RESTART_HYDRATION:
+		return "CF_OPERATION_TYPE_RESTART_HYDRATION"
+	case CF_OPERATION_TYPE_TRANSFER_PLACEHOLDERS:
+		return "CF_OPERATION_TYPE_TRANSFER_PLACEHOLDERS"
+	case CF_OPERATION_TYPE_ACK_DEHYDRATE:
+		return "CF_OPERATION_TYPE_ACK_DEHYDRATE"
+	case CF_OPERATION_TYPE_ACK_DELETE:
+		return "CF_OPERATION_TYPE_ACK_DELETE"
+	case CF_OPERATION_TYPE_ACK_RENAME:
+		return "CF_OPERATION_TYPE_ACK_RENAME"
+	default:
+		return fmt.Sprintf("CF_OPERATION_TYPE(%d)", int32(e))
+	}
+}
+
 // CF_PIN_STATE: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_pin_state
 type CF_PIN_STATE int32
 
@@ -333,7 +924,27 @@ const (
 	CF_PIN_STATE_INHERIT     CF_PIN_STATE = 4
 )
 
+// String returns the CF_PIN_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_PIN_STATE) String() string {
+	switch e {
+	case CF_PIN_STATE_UNSPECIFIED:
+		return "CF_PIN_STATE_UNSPECIFIED"
+	case CF_PIN_STATE_PINNED:
+		return "CF_PIN_STATE_PINNED"
+	case CF_PIN_STATE_UNPINNED:
+		return "CF_PIN_STATE_UNPINNED"
+	case CF_PIN_STATE_EXCLUDED:
+		return "CF_PIN_STATE_EXCLUDED"
+	case CF_PIN_STATE_INHERIT:
+		return "CF_PIN_STATE_INHERIT"
+	default:
+		return fmt.Sprintf("CF_PIN_STATE(%d)", int32(e))
+	}
+}
+
 // CF_PLACEHOLDER_CREATE_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_placeholder_create_flags
+// Bitmask — values may be combined with |.
 type CF_PLACEHOLDER_CREATE_FLAGS int32
 
 const (
@@ -344,6 +955,28 @@ const (
 	CF_PLACEHOLDER_CREATE_FLAG_ALWAYS_FULL                  CF_PLACEHOLDER_CREATE_FLAGS = 8
 )
 
+// String returns the CF_PLACEHOLDER_CREATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_PLACEHOLDER_CREATE_FLAGS) String() string {
+	var parts []string
+	if e&CF_PLACEHOLDER_CREATE_FLAG_DISABLE_ON_DEMAND_POPULATION != 0 {
+		parts = append(parts, "CF_PLACEHOLDER_CREATE_FLAG_DISABLE_ON_DEMAND_POPULATION")
+	}
+	if e&CF_PLACEHOLDER_CREATE_FLAG_MARK_IN_SYNC != 0 {
+		parts = append(parts, "CF_PLACEHOLDER_CREATE_FLAG_MARK_IN_SYNC")
+	}
+	if e&CF_PLACEHOLDER_CREATE_FLAG_SUPERSEDE != 0 {
+		parts = append(parts, "CF_PLACEHOLDER_CREATE_FLAG_SUPERSEDE")
+	}
+	if e&CF_PLACEHOLDER_CREATE_FLAG_ALWAYS_FULL != 0 {
+		parts = append(parts, "CF_PLACEHOLDER_CREATE_FLAG_ALWAYS_FULL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_PLACEHOLDER_INFO_CLASS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_placeholder_info_class
 type CF_PLACEHOLDER_INFO_CLASS int32
 
@@ -351,6 +984,19 @@ const (
 	CF_PLACEHOLDER_INFO_BASIC    CF_PLACEHOLDER_INFO_CLASS = 0
 	CF_PLACEHOLDER_INFO_STANDARD CF_PLACEHOLDER_INFO_CLASS = 1
 )
+
+// String returns the CF_PLACEHOLDER_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_PLACEHOLDER_INFO_CLASS) String() string {
+	switch e {
+	case CF_PLACEHOLDER_INFO_BASIC:
+		return "CF_PLACEHOLDER_INFO_BASIC"
+	case CF_PLACEHOLDER_INFO_STANDARD:
+		return "CF_PLACEHOLDER_INFO_STANDARD"
+	default:
+		return fmt.Sprintf("CF_PLACEHOLDER_INFO_CLASS(%d)", int32(e))
+	}
+}
 
 // CF_PLACEHOLDER_MANAGEMENT_POLICY: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_placeholder_management_policy
 type CF_PLACEHOLDER_MANAGEMENT_POLICY int32
@@ -362,6 +1008,23 @@ const (
 	CF_PLACEHOLDER_MANAGEMENT_POLICY_UPDATE_UNRESTRICTED     CF_PLACEHOLDER_MANAGEMENT_POLICY = 4
 )
 
+// String returns the CF_PLACEHOLDER_MANAGEMENT_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_PLACEHOLDER_MANAGEMENT_POLICY) String() string {
+	switch e {
+	case CF_PLACEHOLDER_MANAGEMENT_POLICY_DEFAULT:
+		return "CF_PLACEHOLDER_MANAGEMENT_POLICY_DEFAULT"
+	case CF_PLACEHOLDER_MANAGEMENT_POLICY_CREATE_UNRESTRICTED:
+		return "CF_PLACEHOLDER_MANAGEMENT_POLICY_CREATE_UNRESTRICTED"
+	case CF_PLACEHOLDER_MANAGEMENT_POLICY_CONVERT_TO_UNRESTRICTED:
+		return "CF_PLACEHOLDER_MANAGEMENT_POLICY_CONVERT_TO_UNRESTRICTED"
+	case CF_PLACEHOLDER_MANAGEMENT_POLICY_UPDATE_UNRESTRICTED:
+		return "CF_PLACEHOLDER_MANAGEMENT_POLICY_UPDATE_UNRESTRICTED"
+	default:
+		return fmt.Sprintf("CF_PLACEHOLDER_MANAGEMENT_POLICY(%d)", int32(e))
+	}
+}
+
 // CF_PLACEHOLDER_RANGE_INFO_CLASS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_placeholder_range_info_class
 type CF_PLACEHOLDER_RANGE_INFO_CLASS int32
 
@@ -371,7 +1034,23 @@ const (
 	CF_PLACEHOLDER_RANGE_INFO_MODIFIED  CF_PLACEHOLDER_RANGE_INFO_CLASS = 3
 )
 
+// String returns the CF_PLACEHOLDER_RANGE_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_PLACEHOLDER_RANGE_INFO_CLASS) String() string {
+	switch e {
+	case CF_PLACEHOLDER_RANGE_INFO_ONDISK:
+		return "CF_PLACEHOLDER_RANGE_INFO_ONDISK"
+	case CF_PLACEHOLDER_RANGE_INFO_VALIDATED:
+		return "CF_PLACEHOLDER_RANGE_INFO_VALIDATED"
+	case CF_PLACEHOLDER_RANGE_INFO_MODIFIED:
+		return "CF_PLACEHOLDER_RANGE_INFO_MODIFIED"
+	default:
+		return fmt.Sprintf("CF_PLACEHOLDER_RANGE_INFO_CLASS(%d)", int32(e))
+	}
+}
+
 // CF_PLACEHOLDER_STATE: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_placeholder_state
+// Bitmask — values may be combined with |.
 type CF_PLACEHOLDER_STATE uint32
 
 const (
@@ -385,12 +1064,54 @@ const (
 	CF_PLACEHOLDER_STATE_INVALID                CF_PLACEHOLDER_STATE = 4294967295
 )
 
+// String returns the CF_PLACEHOLDER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_PLACEHOLDER_STATE) String() string {
+	var parts []string
+	if e&CF_PLACEHOLDER_STATE_PLACEHOLDER != 0 {
+		parts = append(parts, "CF_PLACEHOLDER_STATE_PLACEHOLDER")
+	}
+	if e&CF_PLACEHOLDER_STATE_SYNC_ROOT != 0 {
+		parts = append(parts, "CF_PLACEHOLDER_STATE_SYNC_ROOT")
+	}
+	if e&CF_PLACEHOLDER_STATE_ESSENTIAL_PROP_PRESENT != 0 {
+		parts = append(parts, "CF_PLACEHOLDER_STATE_ESSENTIAL_PROP_PRESENT")
+	}
+	if e&CF_PLACEHOLDER_STATE_IN_SYNC != 0 {
+		parts = append(parts, "CF_PLACEHOLDER_STATE_IN_SYNC")
+	}
+	if e&CF_PLACEHOLDER_STATE_PARTIAL != 0 {
+		parts = append(parts, "CF_PLACEHOLDER_STATE_PARTIAL")
+	}
+	if e&CF_PLACEHOLDER_STATE_PARTIALLY_ON_DISK != 0 {
+		parts = append(parts, "CF_PLACEHOLDER_STATE_PARTIALLY_ON_DISK")
+	}
+	if e&CF_PLACEHOLDER_STATE_INVALID != 0 {
+		parts = append(parts, "CF_PLACEHOLDER_STATE_INVALID")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_POPULATION_POLICY_MODIFIER: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_population_policy_modifier
+// Bitmask — values may be combined with |.
 type CF_POPULATION_POLICY_MODIFIER uint16
 
 const (
 	CF_POPULATION_POLICY_MODIFIER_NONE CF_POPULATION_POLICY_MODIFIER = 0
 )
+
+// String returns the CF_POPULATION_POLICY_MODIFIER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_POPULATION_POLICY_MODIFIER) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // CF_POPULATION_POLICY_PRIMARY: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_population_policy_primary
 type CF_POPULATION_POLICY_PRIMARY uint16
@@ -401,7 +1122,23 @@ const (
 	CF_POPULATION_POLICY_ALWAYS_FULL CF_POPULATION_POLICY_PRIMARY = 3
 )
 
+// String returns the CF_POPULATION_POLICY_PRIMARY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_POPULATION_POLICY_PRIMARY) String() string {
+	switch e {
+	case CF_POPULATION_POLICY_PARTIAL:
+		return "CF_POPULATION_POLICY_PARTIAL"
+	case CF_POPULATION_POLICY_FULL:
+		return "CF_POPULATION_POLICY_FULL"
+	case CF_POPULATION_POLICY_ALWAYS_FULL:
+		return "CF_POPULATION_POLICY_ALWAYS_FULL"
+	default:
+		return fmt.Sprintf("CF_POPULATION_POLICY_PRIMARY(%d)", uint16(e))
+	}
+}
+
 // CF_REGISTER_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_register_flags
+// Bitmask — values may be combined with |.
 type CF_REGISTER_FLAGS int32
 
 const (
@@ -411,21 +1148,63 @@ const (
 	CF_REGISTER_FLAG_MARK_IN_SYNC_ON_ROOT                 CF_REGISTER_FLAGS = 4
 )
 
+// String returns the CF_REGISTER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_REGISTER_FLAGS) String() string {
+	var parts []string
+	if e&CF_REGISTER_FLAG_UPDATE != 0 {
+		parts = append(parts, "CF_REGISTER_FLAG_UPDATE")
+	}
+	if e&CF_REGISTER_FLAG_DISABLE_ON_DEMAND_POPULATION_ON_ROOT != 0 {
+		parts = append(parts, "CF_REGISTER_FLAG_DISABLE_ON_DEMAND_POPULATION_ON_ROOT")
+	}
+	if e&CF_REGISTER_FLAG_MARK_IN_SYNC_ON_ROOT != 0 {
+		parts = append(parts, "CF_REGISTER_FLAG_MARK_IN_SYNC_ON_ROOT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_REVERT_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_revert_flags
+// Bitmask — values may be combined with |.
 type CF_REVERT_FLAGS int32
 
 const (
 	CF_REVERT_FLAG_NONE CF_REVERT_FLAGS = 0
 )
 
+// String returns the CF_REVERT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_REVERT_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_SET_IN_SYNC_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_set_in_sync_flags
+// Bitmask — values may be combined with |.
 type CF_SET_IN_SYNC_FLAGS int32
 
 const (
 	CF_SET_IN_SYNC_FLAG_NONE CF_SET_IN_SYNC_FLAGS = 0
 )
 
+// String returns the CF_SET_IN_SYNC_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_SET_IN_SYNC_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_SET_PIN_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_set_pin_flags
+// Bitmask — values may be combined with |.
 type CF_SET_PIN_FLAGS int32
 
 const (
@@ -435,7 +1214,27 @@ const (
 	CF_SET_PIN_FLAG_RECURSE_STOP_ON_ERROR CF_SET_PIN_FLAGS = 4
 )
 
+// String returns the CF_SET_PIN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_SET_PIN_FLAGS) String() string {
+	var parts []string
+	if e&CF_SET_PIN_FLAG_RECURSE != 0 {
+		parts = append(parts, "CF_SET_PIN_FLAG_RECURSE")
+	}
+	if e&CF_SET_PIN_FLAG_RECURSE_ONLY != 0 {
+		parts = append(parts, "CF_SET_PIN_FLAG_RECURSE_ONLY")
+	}
+	if e&CF_SET_PIN_FLAG_RECURSE_STOP_ON_ERROR != 0 {
+		parts = append(parts, "CF_SET_PIN_FLAG_RECURSE_STOP_ON_ERROR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_SYNC_PROVIDER_STATUS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_sync_provider_status
+// Bitmask — values may be combined with |.
 type CF_SYNC_PROVIDER_STATUS uint32
 
 const (
@@ -452,6 +1251,46 @@ const (
 	CF_PROVIDER_STATUS_ERROR              CF_SYNC_PROVIDER_STATUS = 3221225474
 )
 
+// String returns the CF_SYNC_PROVIDER_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_SYNC_PROVIDER_STATUS) String() string {
+	var parts []string
+	if e&CF_PROVIDER_STATUS_IDLE != 0 {
+		parts = append(parts, "CF_PROVIDER_STATUS_IDLE")
+	}
+	if e&CF_PROVIDER_STATUS_POPULATE_NAMESPACE != 0 {
+		parts = append(parts, "CF_PROVIDER_STATUS_POPULATE_NAMESPACE")
+	}
+	if e&CF_PROVIDER_STATUS_POPULATE_METADATA != 0 {
+		parts = append(parts, "CF_PROVIDER_STATUS_POPULATE_METADATA")
+	}
+	if e&CF_PROVIDER_STATUS_POPULATE_CONTENT != 0 {
+		parts = append(parts, "CF_PROVIDER_STATUS_POPULATE_CONTENT")
+	}
+	if e&CF_PROVIDER_STATUS_SYNC_INCREMENTAL != 0 {
+		parts = append(parts, "CF_PROVIDER_STATUS_SYNC_INCREMENTAL")
+	}
+	if e&CF_PROVIDER_STATUS_SYNC_FULL != 0 {
+		parts = append(parts, "CF_PROVIDER_STATUS_SYNC_FULL")
+	}
+	if e&CF_PROVIDER_STATUS_CONNECTIVITY_LOST != 0 {
+		parts = append(parts, "CF_PROVIDER_STATUS_CONNECTIVITY_LOST")
+	}
+	if e&CF_PROVIDER_STATUS_CLEAR_FLAGS != 0 {
+		parts = append(parts, "CF_PROVIDER_STATUS_CLEAR_FLAGS")
+	}
+	if e&CF_PROVIDER_STATUS_TERMINATED != 0 {
+		parts = append(parts, "CF_PROVIDER_STATUS_TERMINATED")
+	}
+	if e&CF_PROVIDER_STATUS_ERROR != 0 {
+		parts = append(parts, "CF_PROVIDER_STATUS_ERROR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CF_SYNC_ROOT_INFO_CLASS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_sync_root_info_class
 type CF_SYNC_ROOT_INFO_CLASS int32
 
@@ -461,7 +1300,23 @@ const (
 	CF_SYNC_ROOT_INFO_PROVIDER CF_SYNC_ROOT_INFO_CLASS = 2
 )
 
+// String returns the CF_SYNC_ROOT_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_SYNC_ROOT_INFO_CLASS) String() string {
+	switch e {
+	case CF_SYNC_ROOT_INFO_BASIC:
+		return "CF_SYNC_ROOT_INFO_BASIC"
+	case CF_SYNC_ROOT_INFO_STANDARD:
+		return "CF_SYNC_ROOT_INFO_STANDARD"
+	case CF_SYNC_ROOT_INFO_PROVIDER:
+		return "CF_SYNC_ROOT_INFO_PROVIDER"
+	default:
+		return fmt.Sprintf("CF_SYNC_ROOT_INFO_CLASS(%d)", int32(e))
+	}
+}
+
 // CF_UPDATE_FLAGS: https://learn.microsoft.com/windows/win32/api/cfapi/ne-cfapi-cf_update_flags
+// Bitmask — values may be combined with |.
 type CF_UPDATE_FLAGS int32
 
 const (
@@ -478,3 +1333,46 @@ const (
 	CF_UPDATE_FLAG_ALWAYS_FULL                  CF_UPDATE_FLAGS = 512
 	CF_UPDATE_FLAG_ALLOW_PARTIAL                CF_UPDATE_FLAGS = 1024
 )
+
+// String returns the CF_UPDATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CF_UPDATE_FLAGS) String() string {
+	var parts []string
+	if e&CF_UPDATE_FLAG_VERIFY_IN_SYNC != 0 {
+		parts = append(parts, "CF_UPDATE_FLAG_VERIFY_IN_SYNC")
+	}
+	if e&CF_UPDATE_FLAG_MARK_IN_SYNC != 0 {
+		parts = append(parts, "CF_UPDATE_FLAG_MARK_IN_SYNC")
+	}
+	if e&CF_UPDATE_FLAG_DEHYDRATE != 0 {
+		parts = append(parts, "CF_UPDATE_FLAG_DEHYDRATE")
+	}
+	if e&CF_UPDATE_FLAG_ENABLE_ON_DEMAND_POPULATION != 0 {
+		parts = append(parts, "CF_UPDATE_FLAG_ENABLE_ON_DEMAND_POPULATION")
+	}
+	if e&CF_UPDATE_FLAG_DISABLE_ON_DEMAND_POPULATION != 0 {
+		parts = append(parts, "CF_UPDATE_FLAG_DISABLE_ON_DEMAND_POPULATION")
+	}
+	if e&CF_UPDATE_FLAG_REMOVE_FILE_IDENTITY != 0 {
+		parts = append(parts, "CF_UPDATE_FLAG_REMOVE_FILE_IDENTITY")
+	}
+	if e&CF_UPDATE_FLAG_CLEAR_IN_SYNC != 0 {
+		parts = append(parts, "CF_UPDATE_FLAG_CLEAR_IN_SYNC")
+	}
+	if e&CF_UPDATE_FLAG_REMOVE_PROPERTY != 0 {
+		parts = append(parts, "CF_UPDATE_FLAG_REMOVE_PROPERTY")
+	}
+	if e&CF_UPDATE_FLAG_PASSTHROUGH_FS_METADATA != 0 {
+		parts = append(parts, "CF_UPDATE_FLAG_PASSTHROUGH_FS_METADATA")
+	}
+	if e&CF_UPDATE_FLAG_ALWAYS_FULL != 0 {
+		parts = append(parts, "CF_UPDATE_FLAG_ALWAYS_FULL")
+	}
+	if e&CF_UPDATE_FLAG_ALLOW_PARTIAL != 0 {
+		parts = append(parts, "CF_UPDATE_FLAG_ALLOW_PARTIAL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

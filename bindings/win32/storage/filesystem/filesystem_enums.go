@@ -4,6 +4,11 @@
 
 package filesystem
 
+import (
+	"fmt"
+	"strings"
+)
+
 // CLFS_CONTEXT_MODE: https://learn.microsoft.com/windows/win32/api/clfs/ne-clfs-clfs_context_mode
 type CLFS_CONTEXT_MODE int32
 
@@ -14,6 +19,24 @@ const (
 	ClfsContextForward  CLFS_CONTEXT_MODE = 3
 )
 
+// String returns the CLFS_CONTEXT_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLFS_CONTEXT_MODE) String() string {
+	switch e {
+	case ClfsContextNone:
+		return "ClfsContextNone"
+	case ClfsContextUndoNext:
+		return "ClfsContextUndoNext"
+	case ClfsContextPrevious:
+		return "ClfsContextPrevious"
+	case ClfsContextForward:
+		return "ClfsContextForward"
+	default:
+		return fmt.Sprintf("CLFS_CONTEXT_MODE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CLFS_FLAG uint32
 
 const (
@@ -23,6 +46,25 @@ const (
 	CLFS_FLAG_USE_RESERVATION CLFS_FLAG = 4
 )
 
+// String returns the CLFS_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLFS_FLAG) String() string {
+	var parts []string
+	if e&CLFS_FLAG_FORCE_APPEND != 0 {
+		parts = append(parts, "CLFS_FLAG_FORCE_APPEND")
+	}
+	if e&CLFS_FLAG_FORCE_FLUSH != 0 {
+		parts = append(parts, "CLFS_FLAG_FORCE_FLUSH")
+	}
+	if e&CLFS_FLAG_USE_RESERVATION != 0 {
+		parts = append(parts, "CLFS_FLAG_USE_RESERVATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CLFS_IOSTATS_CLASS: https://learn.microsoft.com/windows/win32/api/clfs/ne-clfs-clfs_iostats_class
 type CLFS_IOSTATS_CLASS int32
 
@@ -30,6 +72,19 @@ const (
 	ClfsIoStatsDefault CLFS_IOSTATS_CLASS = 0
 	ClfsIoStatsMax     CLFS_IOSTATS_CLASS = 65535
 )
+
+// String returns the CLFS_IOSTATS_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLFS_IOSTATS_CLASS) String() string {
+	switch e {
+	case ClfsIoStatsDefault:
+		return "ClfsIoStatsDefault"
+	case ClfsIoStatsMax:
+		return "ClfsIoStatsMax"
+	default:
+		return fmt.Sprintf("CLFS_IOSTATS_CLASS(%d)", int32(e))
+	}
+}
 
 // CLFS_LOG_ARCHIVE_MODE: https://learn.microsoft.com/windows/win32/api/clfs/ne-clfs-clfs_log_archive_mode
 type CLFS_LOG_ARCHIVE_MODE int32
@@ -39,6 +94,19 @@ const (
 	ClfsLogArchiveDisabled CLFS_LOG_ARCHIVE_MODE = 2
 )
 
+// String returns the CLFS_LOG_ARCHIVE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLFS_LOG_ARCHIVE_MODE) String() string {
+	switch e {
+	case ClfsLogArchiveEnabled:
+		return "ClfsLogArchiveEnabled"
+	case ClfsLogArchiveDisabled:
+		return "ClfsLogArchiveDisabled"
+	default:
+		return fmt.Sprintf("CLFS_LOG_ARCHIVE_MODE(%d)", int32(e))
+	}
+}
+
 type CLFS_MGMT_NOTIFICATION_TYPE int32
 
 const (
@@ -47,6 +115,23 @@ const (
 	ClfsMgmtLogUnpinnedNotification    CLFS_MGMT_NOTIFICATION_TYPE = 2
 	ClfsMgmtLogWriteNotification       CLFS_MGMT_NOTIFICATION_TYPE = 3
 )
+
+// String returns the CLFS_MGMT_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLFS_MGMT_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case ClfsMgmtAdvanceTailNotification:
+		return "ClfsMgmtAdvanceTailNotification"
+	case ClfsMgmtLogFullHandlerNotification:
+		return "ClfsMgmtLogFullHandlerNotification"
+	case ClfsMgmtLogUnpinnedNotification:
+		return "ClfsMgmtLogUnpinnedNotification"
+	case ClfsMgmtLogWriteNotification:
+		return "ClfsMgmtLogWriteNotification"
+	default:
+		return fmt.Sprintf("CLFS_MGMT_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
 
 // CLFS_MGMT_POLICY_TYPE: https://learn.microsoft.com/windows/win32/api/clfsmgmt/ne-clfsmgmt-clfs_mgmt_policy_type
 type CLFS_MGMT_POLICY_TYPE int32
@@ -65,6 +150,37 @@ const (
 	ClfsMgmtPolicyInvalid               CLFS_MGMT_POLICY_TYPE = 10
 )
 
+// String returns the CLFS_MGMT_POLICY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLFS_MGMT_POLICY_TYPE) String() string {
+	switch e {
+	case ClfsMgmtPolicyMaximumSize:
+		return "ClfsMgmtPolicyMaximumSize"
+	case ClfsMgmtPolicyMinimumSize:
+		return "ClfsMgmtPolicyMinimumSize"
+	case ClfsMgmtPolicyNewContainerSize:
+		return "ClfsMgmtPolicyNewContainerSize"
+	case ClfsMgmtPolicyGrowthRate:
+		return "ClfsMgmtPolicyGrowthRate"
+	case ClfsMgmtPolicyLogTail:
+		return "ClfsMgmtPolicyLogTail"
+	case ClfsMgmtPolicyAutoShrink:
+		return "ClfsMgmtPolicyAutoShrink"
+	case ClfsMgmtPolicyAutoGrow:
+		return "ClfsMgmtPolicyAutoGrow"
+	case ClfsMgmtPolicyNewContainerPrefix:
+		return "ClfsMgmtPolicyNewContainerPrefix"
+	case ClfsMgmtPolicyNewContainerSuffix:
+		return "ClfsMgmtPolicyNewContainerSuffix"
+	case ClfsMgmtPolicyNewContainerExtension:
+		return "ClfsMgmtPolicyNewContainerExtension"
+	case ClfsMgmtPolicyInvalid:
+		return "ClfsMgmtPolicyInvalid"
+	default:
+		return fmt.Sprintf("CLFS_MGMT_POLICY_TYPE(%d)", int32(e))
+	}
+}
+
 type CLS_CONTEXT_MODE int32
 
 const (
@@ -74,12 +190,42 @@ const (
 	ClsContextForward  CLS_CONTEXT_MODE = 3
 )
 
+// String returns the CLS_CONTEXT_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLS_CONTEXT_MODE) String() string {
+	switch e {
+	case ClsContextNone:
+		return "ClsContextNone"
+	case ClsContextUndoNext:
+		return "ClsContextUndoNext"
+	case ClsContextPrevious:
+		return "ClsContextPrevious"
+	case ClsContextForward:
+		return "ClsContextForward"
+	default:
+		return fmt.Sprintf("CLS_CONTEXT_MODE(%d)", int32(e))
+	}
+}
+
 type CLS_IOSTATS_CLASS int32
 
 const (
 	ClsIoStatsDefault CLS_IOSTATS_CLASS = 0
 	ClsIoStatsMax     CLS_IOSTATS_CLASS = 65535
 )
+
+// String returns the CLS_IOSTATS_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLS_IOSTATS_CLASS) String() string {
+	switch e {
+	case ClsIoStatsDefault:
+		return "ClsIoStatsDefault"
+	case ClsIoStatsMax:
+		return "ClsIoStatsMax"
+	default:
+		return fmt.Sprintf("CLS_IOSTATS_CLASS(%d)", int32(e))
+	}
+}
 
 type CLS_LOG_INFORMATION_CLASS int32
 
@@ -91,6 +237,27 @@ const (
 	ClfsLogSystemMarkingInformation    CLS_LOG_INFORMATION_CLASS = 4
 	ClfsLogPhysicalLsnInformation      CLS_LOG_INFORMATION_CLASS = 5
 )
+
+// String returns the CLS_LOG_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLS_LOG_INFORMATION_CLASS) String() string {
+	switch e {
+	case ClfsLogBasicInformation:
+		return "ClfsLogBasicInformation"
+	case ClfsLogBasicInformationPhysical:
+		return "ClfsLogBasicInformationPhysical"
+	case ClfsLogPhysicalNameInformation:
+		return "ClfsLogPhysicalNameInformation"
+	case ClfsLogStreamIdentifierInformation:
+		return "ClfsLogStreamIdentifierInformation"
+	case ClfsLogSystemMarkingInformation:
+		return "ClfsLogSystemMarkingInformation"
+	case ClfsLogPhysicalLsnInformation:
+		return "ClfsLogPhysicalLsnInformation"
+	default:
+		return fmt.Sprintf("CLS_LOG_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
 
 type COMPRESSION_FORMAT uint16
 
@@ -106,6 +273,33 @@ const (
 	COMPRESSION_FORMAT_ZLIB        COMPRESSION_FORMAT = 8
 )
 
+// String returns the COMPRESSION_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPRESSION_FORMAT) String() string {
+	switch e {
+	case COMPRESSION_FORMAT_NONE:
+		return "COMPRESSION_FORMAT_NONE"
+	case COMPRESSION_FORMAT_DEFAULT:
+		return "COMPRESSION_FORMAT_DEFAULT"
+	case COMPRESSION_FORMAT_LZNT1:
+		return "COMPRESSION_FORMAT_LZNT1"
+	case COMPRESSION_FORMAT_XPRESS:
+		return "COMPRESSION_FORMAT_XPRESS"
+	case COMPRESSION_FORMAT_XPRESS_HUFF:
+		return "COMPRESSION_FORMAT_XPRESS_HUFF"
+	case COMPRESSION_FORMAT_XP10:
+		return "COMPRESSION_FORMAT_XP10"
+	case COMPRESSION_FORMAT_LZ4:
+		return "COMPRESSION_FORMAT_LZ4"
+	case COMPRESSION_FORMAT_DEFLATE:
+		return "COMPRESSION_FORMAT_DEFLATE"
+	case COMPRESSION_FORMAT_ZLIB:
+		return "COMPRESSION_FORMAT_ZLIB"
+	default:
+		return fmt.Sprintf("COMPRESSION_FORMAT(%d)", uint16(e))
+	}
+}
+
 // COPYFILE2_COPY_PHASE: https://learn.microsoft.com/windows/win32/api/winbase/ne-winbase-copyfile2_copy_phase
 type COPYFILE2_COPY_PHASE int32
 
@@ -120,6 +314,31 @@ const (
 	COPYFILE2_PHASE_MAX               COPYFILE2_COPY_PHASE = 7
 )
 
+// String returns the COPYFILE2_COPY_PHASE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPYFILE2_COPY_PHASE) String() string {
+	switch e {
+	case COPYFILE2_PHASE_NONE:
+		return "COPYFILE2_PHASE_NONE"
+	case COPYFILE2_PHASE_PREPARE_SOURCE:
+		return "COPYFILE2_PHASE_PREPARE_SOURCE"
+	case COPYFILE2_PHASE_PREPARE_DEST:
+		return "COPYFILE2_PHASE_PREPARE_DEST"
+	case COPYFILE2_PHASE_READ_SOURCE:
+		return "COPYFILE2_PHASE_READ_SOURCE"
+	case COPYFILE2_PHASE_WRITE_DESTINATION:
+		return "COPYFILE2_PHASE_WRITE_DESTINATION"
+	case COPYFILE2_PHASE_SERVER_COPY:
+		return "COPYFILE2_PHASE_SERVER_COPY"
+	case COPYFILE2_PHASE_NAMEGRAFT_COPY:
+		return "COPYFILE2_PHASE_NAMEGRAFT_COPY"
+	case COPYFILE2_PHASE_MAX:
+		return "COPYFILE2_PHASE_MAX"
+	default:
+		return fmt.Sprintf("COPYFILE2_COPY_PHASE(%d)", int32(e))
+	}
+}
+
 // COPYFILE2_MESSAGE_ACTION: https://learn.microsoft.com/windows/win32/api/winbase/ne-winbase-copyfile2_message_action
 type COPYFILE2_MESSAGE_ACTION int32
 
@@ -130,6 +349,25 @@ const (
 	COPYFILE2_PROGRESS_QUIET    COPYFILE2_MESSAGE_ACTION = 3
 	COPYFILE2_PROGRESS_PAUSE    COPYFILE2_MESSAGE_ACTION = 4
 )
+
+// String returns the COPYFILE2_MESSAGE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPYFILE2_MESSAGE_ACTION) String() string {
+	switch e {
+	case COPYFILE2_PROGRESS_CONTINUE:
+		return "COPYFILE2_PROGRESS_CONTINUE"
+	case COPYFILE2_PROGRESS_CANCEL:
+		return "COPYFILE2_PROGRESS_CANCEL"
+	case COPYFILE2_PROGRESS_STOP:
+		return "COPYFILE2_PROGRESS_STOP"
+	case COPYFILE2_PROGRESS_QUIET:
+		return "COPYFILE2_PROGRESS_QUIET"
+	case COPYFILE2_PROGRESS_PAUSE:
+		return "COPYFILE2_PROGRESS_PAUSE"
+	default:
+		return fmt.Sprintf("COPYFILE2_MESSAGE_ACTION(%d)", int32(e))
+	}
+}
 
 // COPYFILE2_MESSAGE_TYPE: https://learn.microsoft.com/windows/win32/api/winbase/ne-winbase-copyfile2_message_type
 type COPYFILE2_MESSAGE_TYPE int32
@@ -145,6 +383,32 @@ const (
 	COPYFILE2_CALLBACK_MAX             COPYFILE2_MESSAGE_TYPE = 7
 )
 
+// String returns the COPYFILE2_MESSAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPYFILE2_MESSAGE_TYPE) String() string {
+	switch e {
+	case COPYFILE2_CALLBACK_NONE:
+		return "COPYFILE2_CALLBACK_NONE"
+	case COPYFILE2_CALLBACK_CHUNK_STARTED:
+		return "COPYFILE2_CALLBACK_CHUNK_STARTED"
+	case COPYFILE2_CALLBACK_CHUNK_FINISHED:
+		return "COPYFILE2_CALLBACK_CHUNK_FINISHED"
+	case COPYFILE2_CALLBACK_STREAM_STARTED:
+		return "COPYFILE2_CALLBACK_STREAM_STARTED"
+	case COPYFILE2_CALLBACK_STREAM_FINISHED:
+		return "COPYFILE2_CALLBACK_STREAM_FINISHED"
+	case COPYFILE2_CALLBACK_POLL_CONTINUE:
+		return "COPYFILE2_CALLBACK_POLL_CONTINUE"
+	case COPYFILE2_CALLBACK_ERROR:
+		return "COPYFILE2_CALLBACK_ERROR"
+	case COPYFILE2_CALLBACK_MAX:
+		return "COPYFILE2_CALLBACK_MAX"
+	default:
+		return fmt.Sprintf("COPYFILE2_MESSAGE_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type COPYFILE2_V2_FLAGS uint32
 
 const (
@@ -153,6 +417,26 @@ const (
 	COPY_FILE2_V2_VALID_FLAGS           COPYFILE2_V2_FLAGS = 3
 )
 
+// String returns the COPYFILE2_V2_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPYFILE2_V2_FLAGS) String() string {
+	var parts []string
+	if e&COPY_FILE2_V2_DONT_COPY_JUNCTIONS != 0 {
+		parts = append(parts, "COPY_FILE2_V2_DONT_COPY_JUNCTIONS")
+	}
+	if e&COPY_FILE2_V2_DISABLE_BLOCK_CLONING != 0 {
+		parts = append(parts, "COPY_FILE2_V2_DISABLE_BLOCK_CLONING")
+	}
+	if e&COPY_FILE2_V2_VALID_FLAGS != 0 {
+		parts = append(parts, "COPY_FILE2_V2_VALID_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type COPYFILE_FLAGS uint32
 
 const (
@@ -178,6 +462,77 @@ const (
 	COPY_FILE_DISABLE_SPARSE_COPY         COPYFILE_FLAGS = 2147483648
 )
 
+// String returns the COPYFILE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPYFILE_FLAGS) String() string {
+	var parts []string
+	if e&COPY_FILE_FAIL_IF_EXISTS != 0 {
+		parts = append(parts, "COPY_FILE_FAIL_IF_EXISTS")
+	}
+	if e&COPY_FILE_RESTARTABLE != 0 {
+		parts = append(parts, "COPY_FILE_RESTARTABLE")
+	}
+	if e&COPY_FILE_OPEN_SOURCE_FOR_WRITE != 0 {
+		parts = append(parts, "COPY_FILE_OPEN_SOURCE_FOR_WRITE")
+	}
+	if e&COPY_FILE_ALLOW_DECRYPTED_DESTINATION != 0 {
+		parts = append(parts, "COPY_FILE_ALLOW_DECRYPTED_DESTINATION")
+	}
+	if e&COPY_FILE_COPY_SYMLINK != 0 {
+		parts = append(parts, "COPY_FILE_COPY_SYMLINK")
+	}
+	if e&COPY_FILE_NO_BUFFERING != 0 {
+		parts = append(parts, "COPY_FILE_NO_BUFFERING")
+	}
+	if e&COPY_FILE_REQUEST_SECURITY_PRIVILEGES != 0 {
+		parts = append(parts, "COPY_FILE_REQUEST_SECURITY_PRIVILEGES")
+	}
+	if e&COPY_FILE_RESUME_FROM_PAUSE != 0 {
+		parts = append(parts, "COPY_FILE_RESUME_FROM_PAUSE")
+	}
+	if e&COPY_FILE_NO_OFFLOAD != 0 {
+		parts = append(parts, "COPY_FILE_NO_OFFLOAD")
+	}
+	if e&COPY_FILE_IGNORE_EDP_BLOCK != 0 {
+		parts = append(parts, "COPY_FILE_IGNORE_EDP_BLOCK")
+	}
+	if e&COPY_FILE_IGNORE_SOURCE_ENCRYPTION != 0 {
+		parts = append(parts, "COPY_FILE_IGNORE_SOURCE_ENCRYPTION")
+	}
+	if e&COPY_FILE_DONT_REQUEST_DEST_WRITE_DAC != 0 {
+		parts = append(parts, "COPY_FILE_DONT_REQUEST_DEST_WRITE_DAC")
+	}
+	if e&COPY_FILE_REQUEST_COMPRESSED_TRAFFIC != 0 {
+		parts = append(parts, "COPY_FILE_REQUEST_COMPRESSED_TRAFFIC")
+	}
+	if e&COPY_FILE_OPEN_AND_COPY_REPARSE_POINT != 0 {
+		parts = append(parts, "COPY_FILE_OPEN_AND_COPY_REPARSE_POINT")
+	}
+	if e&COPY_FILE_DIRECTORY != 0 {
+		parts = append(parts, "COPY_FILE_DIRECTORY")
+	}
+	if e&COPY_FILE_SKIP_ALTERNATE_STREAMS != 0 {
+		parts = append(parts, "COPY_FILE_SKIP_ALTERNATE_STREAMS")
+	}
+	if e&COPY_FILE_DISABLE_PRE_ALLOCATION != 0 {
+		parts = append(parts, "COPY_FILE_DISABLE_PRE_ALLOCATION")
+	}
+	if e&COPY_FILE_ENABLE_LOW_FREE_SPACE_MODE != 0 {
+		parts = append(parts, "COPY_FILE_ENABLE_LOW_FREE_SPACE_MODE")
+	}
+	if e&COPY_FILE_ENABLE_SPARSE_COPY != 0 {
+		parts = append(parts, "COPY_FILE_ENABLE_SPARSE_COPY")
+	}
+	if e&COPY_FILE_DISABLE_SPARSE_COPY != 0 {
+		parts = append(parts, "COPY_FILE_DISABLE_SPARSE_COPY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type COPYPROGRESSROUTINE_PROGRESS uint32
 
 const (
@@ -187,6 +542,26 @@ const (
 	PROGRESS_QUIET    COPYPROGRESSROUTINE_PROGRESS = 3
 )
 
+// String returns the COPYPROGRESSROUTINE_PROGRESS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPYPROGRESSROUTINE_PROGRESS) String() string {
+	var parts []string
+	if e&PROGRESS_CANCEL != 0 {
+		parts = append(parts, "PROGRESS_CANCEL")
+	}
+	if e&PROGRESS_STOP != 0 {
+		parts = append(parts, "PROGRESS_STOP")
+	}
+	if e&PROGRESS_QUIET != 0 {
+		parts = append(parts, "PROGRESS_QUIET")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CREATE_BIND_LINK_FLAGS int32
 
 const (
@@ -194,6 +569,22 @@ const (
 	CREATE_BIND_LINK_FLAG_READ_ONLY CREATE_BIND_LINK_FLAGS = 1
 	CREATE_BIND_LINK_FLAG_MERGED    CREATE_BIND_LINK_FLAGS = 2
 )
+
+// String returns the CREATE_BIND_LINK_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATE_BIND_LINK_FLAGS) String() string {
+	var parts []string
+	if e&CREATE_BIND_LINK_FLAG_READ_ONLY != 0 {
+		parts = append(parts, "CREATE_BIND_LINK_FLAG_READ_ONLY")
+	}
+	if e&CREATE_BIND_LINK_FLAG_MERGED != 0 {
+		parts = append(parts, "CREATE_BIND_LINK_FLAG_MERGED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CREATE_TAPE_PARTITION_METHOD uint32
 
@@ -203,6 +594,22 @@ const (
 	TAPE_SELECT_PARTITIONS    CREATE_TAPE_PARTITION_METHOD = 1
 )
 
+// String returns the CREATE_TAPE_PARTITION_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATE_TAPE_PARTITION_METHOD) String() string {
+	switch e {
+	case TAPE_FIXED_PARTITIONS:
+		return "TAPE_FIXED_PARTITIONS"
+	case TAPE_INITIATOR_PARTITIONS:
+		return "TAPE_INITIATOR_PARTITIONS"
+	case TAPE_SELECT_PARTITIONS:
+		return "TAPE_SELECT_PARTITIONS"
+	default:
+		return fmt.Sprintf("CREATE_TAPE_PARTITION_METHOD(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DEFINE_DOS_DEVICE_FLAGS uint32
 
 const (
@@ -213,12 +620,51 @@ const (
 	DDD_LUID_BROADCAST_DRIVE  DEFINE_DOS_DEVICE_FLAGS = 16
 )
 
+// String returns the DEFINE_DOS_DEVICE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEFINE_DOS_DEVICE_FLAGS) String() string {
+	var parts []string
+	if e&DDD_RAW_TARGET_PATH != 0 {
+		parts = append(parts, "DDD_RAW_TARGET_PATH")
+	}
+	if e&DDD_REMOVE_DEFINITION != 0 {
+		parts = append(parts, "DDD_REMOVE_DEFINITION")
+	}
+	if e&DDD_EXACT_MATCH_ON_REMOVE != 0 {
+		parts = append(parts, "DDD_EXACT_MATCH_ON_REMOVE")
+	}
+	if e&DDD_NO_BROADCAST_SYSTEM != 0 {
+		parts = append(parts, "DDD_NO_BROADCAST_SYSTEM")
+	}
+	if e&DDD_LUID_BROADCAST_DRIVE != 0 {
+		parts = append(parts, "DDD_LUID_BROADCAST_DRIVE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DIRECTORY_FLAGS int32
 
 const (
 	DIRECTORY_FLAGS_NONE                    DIRECTORY_FLAGS = 0
 	DIRECTORY_FLAGS_DISALLOW_PATH_REDIRECTS DIRECTORY_FLAGS = 1
 )
+
+// String returns the DIRECTORY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIRECTORY_FLAGS) String() string {
+	var parts []string
+	if e&DIRECTORY_FLAGS_DISALLOW_PATH_REDIRECTS != 0 {
+		parts = append(parts, "DIRECTORY_FLAGS_DISALLOW_PATH_REDIRECTS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type DISKQUOTA_USERNAME_RESOLVE uint32
 
@@ -228,6 +674,21 @@ const (
 	DISKQUOTA_USERNAME_RESOLVE_SYNC  DISKQUOTA_USERNAME_RESOLVE = 1
 )
 
+// String returns the DISKQUOTA_USERNAME_RESOLVE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISKQUOTA_USERNAME_RESOLVE) String() string {
+	switch e {
+	case DISKQUOTA_USERNAME_RESOLVE_ASYNC:
+		return "DISKQUOTA_USERNAME_RESOLVE_ASYNC"
+	case DISKQUOTA_USERNAME_RESOLVE_NONE:
+		return "DISKQUOTA_USERNAME_RESOLVE_NONE"
+	case DISKQUOTA_USERNAME_RESOLVE_SYNC:
+		return "DISKQUOTA_USERNAME_RESOLVE_SYNC"
+	default:
+		return fmt.Sprintf("DISKQUOTA_USERNAME_RESOLVE(%d)", uint32(e))
+	}
+}
+
 type ERASE_TAPE_TYPE uint32
 
 const (
@@ -235,6 +696,20 @@ const (
 	TAPE_ERASE_SHORT ERASE_TAPE_TYPE = 0
 )
 
+// String returns the ERASE_TAPE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ERASE_TAPE_TYPE) String() string {
+	switch e {
+	case TAPE_ERASE_LONG:
+		return "TAPE_ERASE_LONG"
+	case TAPE_ERASE_SHORT:
+		return "TAPE_ERASE_SHORT"
+	default:
+		return fmt.Sprintf("ERASE_TAPE_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FILE_ACCESS_RIGHTS uint32
 
 const (
@@ -269,6 +744,103 @@ const (
 	FILE_GENERIC_EXECUTE      FILE_ACCESS_RIGHTS = 1179808
 )
 
+// String returns the FILE_ACCESS_RIGHTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_ACCESS_RIGHTS) String() string {
+	var parts []string
+	if e&FILE_READ_DATA != 0 {
+		parts = append(parts, "FILE_READ_DATA")
+	}
+	if e&FILE_LIST_DIRECTORY != 0 {
+		parts = append(parts, "FILE_LIST_DIRECTORY")
+	}
+	if e&FILE_WRITE_DATA != 0 {
+		parts = append(parts, "FILE_WRITE_DATA")
+	}
+	if e&FILE_ADD_FILE != 0 {
+		parts = append(parts, "FILE_ADD_FILE")
+	}
+	if e&FILE_APPEND_DATA != 0 {
+		parts = append(parts, "FILE_APPEND_DATA")
+	}
+	if e&FILE_ADD_SUBDIRECTORY != 0 {
+		parts = append(parts, "FILE_ADD_SUBDIRECTORY")
+	}
+	if e&FILE_CREATE_PIPE_INSTANCE != 0 {
+		parts = append(parts, "FILE_CREATE_PIPE_INSTANCE")
+	}
+	if e&FILE_READ_EA != 0 {
+		parts = append(parts, "FILE_READ_EA")
+	}
+	if e&FILE_WRITE_EA != 0 {
+		parts = append(parts, "FILE_WRITE_EA")
+	}
+	if e&FILE_EXECUTE != 0 {
+		parts = append(parts, "FILE_EXECUTE")
+	}
+	if e&FILE_TRAVERSE != 0 {
+		parts = append(parts, "FILE_TRAVERSE")
+	}
+	if e&FILE_DELETE_CHILD != 0 {
+		parts = append(parts, "FILE_DELETE_CHILD")
+	}
+	if e&FILE_READ_ATTRIBUTES != 0 {
+		parts = append(parts, "FILE_READ_ATTRIBUTES")
+	}
+	if e&FILE_WRITE_ATTRIBUTES != 0 {
+		parts = append(parts, "FILE_WRITE_ATTRIBUTES")
+	}
+	if e&DELETE != 0 {
+		parts = append(parts, "DELETE")
+	}
+	if e&READ_CONTROL != 0 {
+		parts = append(parts, "READ_CONTROL")
+	}
+	if e&WRITE_DAC != 0 {
+		parts = append(parts, "WRITE_DAC")
+	}
+	if e&WRITE_OWNER != 0 {
+		parts = append(parts, "WRITE_OWNER")
+	}
+	if e&SYNCHRONIZE != 0 {
+		parts = append(parts, "SYNCHRONIZE")
+	}
+	if e&STANDARD_RIGHTS_REQUIRED != 0 {
+		parts = append(parts, "STANDARD_RIGHTS_REQUIRED")
+	}
+	if e&STANDARD_RIGHTS_READ != 0 {
+		parts = append(parts, "STANDARD_RIGHTS_READ")
+	}
+	if e&STANDARD_RIGHTS_WRITE != 0 {
+		parts = append(parts, "STANDARD_RIGHTS_WRITE")
+	}
+	if e&STANDARD_RIGHTS_EXECUTE != 0 {
+		parts = append(parts, "STANDARD_RIGHTS_EXECUTE")
+	}
+	if e&STANDARD_RIGHTS_ALL != 0 {
+		parts = append(parts, "STANDARD_RIGHTS_ALL")
+	}
+	if e&SPECIFIC_RIGHTS_ALL != 0 {
+		parts = append(parts, "SPECIFIC_RIGHTS_ALL")
+	}
+	if e&FILE_ALL_ACCESS != 0 {
+		parts = append(parts, "FILE_ALL_ACCESS")
+	}
+	if e&FILE_GENERIC_READ != 0 {
+		parts = append(parts, "FILE_GENERIC_READ")
+	}
+	if e&FILE_GENERIC_WRITE != 0 {
+		parts = append(parts, "FILE_GENERIC_WRITE")
+	}
+	if e&FILE_GENERIC_EXECUTE != 0 {
+		parts = append(parts, "FILE_GENERIC_EXECUTE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type FILE_ACTION uint32
 
 const (
@@ -278,6 +850,25 @@ const (
 	FILE_ACTION_RENAMED_OLD_NAME FILE_ACTION = 4
 	FILE_ACTION_RENAMED_NEW_NAME FILE_ACTION = 5
 )
+
+// String returns the FILE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_ACTION) String() string {
+	switch e {
+	case FILE_ACTION_ADDED:
+		return "FILE_ACTION_ADDED"
+	case FILE_ACTION_REMOVED:
+		return "FILE_ACTION_REMOVED"
+	case FILE_ACTION_MODIFIED:
+		return "FILE_ACTION_MODIFIED"
+	case FILE_ACTION_RENAMED_OLD_NAME:
+		return "FILE_ACTION_RENAMED_OLD_NAME"
+	case FILE_ACTION_RENAMED_NEW_NAME:
+		return "FILE_ACTION_RENAMED_NEW_NAME"
+	default:
+		return fmt.Sprintf("FILE_ACTION(%d)", uint32(e))
+	}
+}
 
 type FILE_CREATION_DISPOSITION uint32
 
@@ -289,6 +880,25 @@ const (
 	TRUNCATE_EXISTING FILE_CREATION_DISPOSITION = 5
 )
 
+// String returns the FILE_CREATION_DISPOSITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_CREATION_DISPOSITION) String() string {
+	switch e {
+	case CREATE_NEW:
+		return "CREATE_NEW"
+	case CREATE_ALWAYS:
+		return "CREATE_ALWAYS"
+	case OPEN_EXISTING:
+		return "OPEN_EXISTING"
+	case OPEN_ALWAYS:
+		return "OPEN_ALWAYS"
+	case TRUNCATE_EXISTING:
+		return "TRUNCATE_EXISTING"
+	default:
+		return fmt.Sprintf("FILE_CREATION_DISPOSITION(%d)", uint32(e))
+	}
+}
+
 type FILE_DEVICE_TYPE uint32
 
 const (
@@ -297,6 +907,23 @@ const (
 	FILE_DEVICE_TAPE   FILE_DEVICE_TYPE = 31
 	FILE_DEVICE_DVD    FILE_DEVICE_TYPE = 51
 )
+
+// String returns the FILE_DEVICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_DEVICE_TYPE) String() string {
+	switch e {
+	case FILE_DEVICE_CD_ROM:
+		return "FILE_DEVICE_CD_ROM"
+	case FILE_DEVICE_DISK:
+		return "FILE_DEVICE_DISK"
+	case FILE_DEVICE_TAPE:
+		return "FILE_DEVICE_TAPE"
+	case FILE_DEVICE_DVD:
+		return "FILE_DEVICE_DVD"
+	default:
+		return fmt.Sprintf("FILE_DEVICE_TYPE(%d)", uint32(e))
+	}
+}
 
 type FILE_DISPOSITION_INFO_EX_FLAGS uint32
 
@@ -309,6 +936,28 @@ const (
 	FILE_DISPOSITION_FLAG_IGNORE_READONLY_ATTRIBUTE FILE_DISPOSITION_INFO_EX_FLAGS = 16
 )
 
+// String returns the FILE_DISPOSITION_INFO_EX_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_DISPOSITION_INFO_EX_FLAGS) String() string {
+	switch e {
+	case FILE_DISPOSITION_FLAG_DO_NOT_DELETE:
+		return "FILE_DISPOSITION_FLAG_DO_NOT_DELETE"
+	case FILE_DISPOSITION_FLAG_DELETE:
+		return "FILE_DISPOSITION_FLAG_DELETE"
+	case FILE_DISPOSITION_FLAG_POSIX_SEMANTICS:
+		return "FILE_DISPOSITION_FLAG_POSIX_SEMANTICS"
+	case FILE_DISPOSITION_FLAG_FORCE_IMAGE_SECTION_CHECK:
+		return "FILE_DISPOSITION_FLAG_FORCE_IMAGE_SECTION_CHECK"
+	case FILE_DISPOSITION_FLAG_ON_CLOSE:
+		return "FILE_DISPOSITION_FLAG_ON_CLOSE"
+	case FILE_DISPOSITION_FLAG_IGNORE_READONLY_ATTRIBUTE:
+		return "FILE_DISPOSITION_FLAG_IGNORE_READONLY_ATTRIBUTE"
+	default:
+		return fmt.Sprintf("FILE_DISPOSITION_INFO_EX_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FILE_FLAGS_AND_ATTRIBUTES uint32
 
 const (
@@ -359,6 +1008,148 @@ const (
 	SECURITY_VALID_SQOS_FLAGS            FILE_FLAGS_AND_ATTRIBUTES = 2031616
 )
 
+// String returns the FILE_FLAGS_AND_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_FLAGS_AND_ATTRIBUTES) String() string {
+	var parts []string
+	if e&FILE_ATTRIBUTE_READONLY != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_READONLY")
+	}
+	if e&FILE_ATTRIBUTE_HIDDEN != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_HIDDEN")
+	}
+	if e&FILE_ATTRIBUTE_SYSTEM != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_SYSTEM")
+	}
+	if e&FILE_ATTRIBUTE_DIRECTORY != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_DIRECTORY")
+	}
+	if e&FILE_ATTRIBUTE_ARCHIVE != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_ARCHIVE")
+	}
+	if e&FILE_ATTRIBUTE_DEVICE != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_DEVICE")
+	}
+	if e&FILE_ATTRIBUTE_NORMAL != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_NORMAL")
+	}
+	if e&FILE_ATTRIBUTE_TEMPORARY != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_TEMPORARY")
+	}
+	if e&FILE_ATTRIBUTE_SPARSE_FILE != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_SPARSE_FILE")
+	}
+	if e&FILE_ATTRIBUTE_REPARSE_POINT != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_REPARSE_POINT")
+	}
+	if e&FILE_ATTRIBUTE_COMPRESSED != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_COMPRESSED")
+	}
+	if e&FILE_ATTRIBUTE_OFFLINE != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_OFFLINE")
+	}
+	if e&FILE_ATTRIBUTE_NOT_CONTENT_INDEXED != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_NOT_CONTENT_INDEXED")
+	}
+	if e&FILE_ATTRIBUTE_ENCRYPTED != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_ENCRYPTED")
+	}
+	if e&FILE_ATTRIBUTE_INTEGRITY_STREAM != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_INTEGRITY_STREAM")
+	}
+	if e&FILE_ATTRIBUTE_VIRTUAL != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_VIRTUAL")
+	}
+	if e&FILE_ATTRIBUTE_NO_SCRUB_DATA != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_NO_SCRUB_DATA")
+	}
+	if e&FILE_ATTRIBUTE_EA != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_EA")
+	}
+	if e&FILE_ATTRIBUTE_PINNED != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_PINNED")
+	}
+	if e&FILE_ATTRIBUTE_UNPINNED != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_UNPINNED")
+	}
+	if e&FILE_ATTRIBUTE_RECALL_ON_OPEN != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_RECALL_ON_OPEN")
+	}
+	if e&FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS != 0 {
+		parts = append(parts, "FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS")
+	}
+	if e&FILE_FLAG_WRITE_THROUGH != 0 {
+		parts = append(parts, "FILE_FLAG_WRITE_THROUGH")
+	}
+	if e&FILE_FLAG_OVERLAPPED != 0 {
+		parts = append(parts, "FILE_FLAG_OVERLAPPED")
+	}
+	if e&FILE_FLAG_NO_BUFFERING != 0 {
+		parts = append(parts, "FILE_FLAG_NO_BUFFERING")
+	}
+	if e&FILE_FLAG_RANDOM_ACCESS != 0 {
+		parts = append(parts, "FILE_FLAG_RANDOM_ACCESS")
+	}
+	if e&FILE_FLAG_SEQUENTIAL_SCAN != 0 {
+		parts = append(parts, "FILE_FLAG_SEQUENTIAL_SCAN")
+	}
+	if e&FILE_FLAG_DELETE_ON_CLOSE != 0 {
+		parts = append(parts, "FILE_FLAG_DELETE_ON_CLOSE")
+	}
+	if e&FILE_FLAG_BACKUP_SEMANTICS != 0 {
+		parts = append(parts, "FILE_FLAG_BACKUP_SEMANTICS")
+	}
+	if e&FILE_FLAG_POSIX_SEMANTICS != 0 {
+		parts = append(parts, "FILE_FLAG_POSIX_SEMANTICS")
+	}
+	if e&FILE_FLAG_SESSION_AWARE != 0 {
+		parts = append(parts, "FILE_FLAG_SESSION_AWARE")
+	}
+	if e&FILE_FLAG_OPEN_REPARSE_POINT != 0 {
+		parts = append(parts, "FILE_FLAG_OPEN_REPARSE_POINT")
+	}
+	if e&FILE_FLAG_OPEN_NO_RECALL != 0 {
+		parts = append(parts, "FILE_FLAG_OPEN_NO_RECALL")
+	}
+	if e&FILE_FLAG_FIRST_PIPE_INSTANCE != 0 {
+		parts = append(parts, "FILE_FLAG_FIRST_PIPE_INSTANCE")
+	}
+	if e&PIPE_ACCESS_DUPLEX != 0 {
+		parts = append(parts, "PIPE_ACCESS_DUPLEX")
+	}
+	if e&PIPE_ACCESS_INBOUND != 0 {
+		parts = append(parts, "PIPE_ACCESS_INBOUND")
+	}
+	if e&PIPE_ACCESS_OUTBOUND != 0 {
+		parts = append(parts, "PIPE_ACCESS_OUTBOUND")
+	}
+	if e&SECURITY_IDENTIFICATION != 0 {
+		parts = append(parts, "SECURITY_IDENTIFICATION")
+	}
+	if e&SECURITY_IMPERSONATION != 0 {
+		parts = append(parts, "SECURITY_IMPERSONATION")
+	}
+	if e&SECURITY_DELEGATION != 0 {
+		parts = append(parts, "SECURITY_DELEGATION")
+	}
+	if e&SECURITY_CONTEXT_TRACKING != 0 {
+		parts = append(parts, "SECURITY_CONTEXT_TRACKING")
+	}
+	if e&SECURITY_EFFECTIVE_ONLY != 0 {
+		parts = append(parts, "SECURITY_EFFECTIVE_ONLY")
+	}
+	if e&SECURITY_SQOS_PRESENT != 0 {
+		parts = append(parts, "SECURITY_SQOS_PRESENT")
+	}
+	if e&SECURITY_VALID_SQOS_FLAGS != 0 {
+		parts = append(parts, "SECURITY_VALID_SQOS_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type FILE_FLUSH_MODE int32
 
 const (
@@ -367,6 +1158,23 @@ const (
 	FILE_FLUSH_MIN_METADATA FILE_FLUSH_MODE = 2
 	FILE_FLUSH_NO_SYNC      FILE_FLUSH_MODE = 3
 )
+
+// String returns the FILE_FLUSH_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_FLUSH_MODE) String() string {
+	switch e {
+	case FILE_FLUSH_DEFAULT:
+		return "FILE_FLUSH_DEFAULT"
+	case FILE_FLUSH_DATA:
+		return "FILE_FLUSH_DATA"
+	case FILE_FLUSH_MIN_METADATA:
+		return "FILE_FLUSH_MIN_METADATA"
+	case FILE_FLUSH_NO_SYNC:
+		return "FILE_FLUSH_NO_SYNC"
+	default:
+		return fmt.Sprintf("FILE_FLUSH_MODE(%d)", int32(e))
+	}
+}
 
 // FILE_ID_TYPE: https://learn.microsoft.com/windows/win32/api/winbase/ne-winbase-file_id_type
 type FILE_ID_TYPE int32
@@ -377,6 +1185,23 @@ const (
 	ExtendedFileIdType FILE_ID_TYPE = 2
 	MaximumFileIdType  FILE_ID_TYPE = 3
 )
+
+// String returns the FILE_ID_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_ID_TYPE) String() string {
+	switch e {
+	case FileIdType:
+		return "FileIdType"
+	case ObjectIdType:
+		return "ObjectIdType"
+	case ExtendedFileIdType:
+		return "ExtendedFileIdType"
+	case MaximumFileIdType:
+		return "MaximumFileIdType"
+	default:
+		return fmt.Sprintf("FILE_ID_TYPE(%d)", int32(e))
+	}
+}
 
 // FILE_INFO_BY_HANDLE_CLASS: https://learn.microsoft.com/windows/win32/api/minwinbase/ne-minwinbase-file_info_by_handle_class
 type FILE_INFO_BY_HANDLE_CLASS int32
@@ -410,6 +1235,67 @@ const (
 	MaximumFileInfoByHandleClass   FILE_INFO_BY_HANDLE_CLASS = 25
 )
 
+// String returns the FILE_INFO_BY_HANDLE_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_INFO_BY_HANDLE_CLASS) String() string {
+	switch e {
+	case FileBasicInfo:
+		return "FileBasicInfo"
+	case FileStandardInfo:
+		return "FileStandardInfo"
+	case FileNameInfo:
+		return "FileNameInfo"
+	case FileRenameInfo:
+		return "FileRenameInfo"
+	case FileDispositionInfo:
+		return "FileDispositionInfo"
+	case FileAllocationInfo:
+		return "FileAllocationInfo"
+	case FileEndOfFileInfo:
+		return "FileEndOfFileInfo"
+	case FileStreamInfo:
+		return "FileStreamInfo"
+	case FileCompressionInfo:
+		return "FileCompressionInfo"
+	case FileAttributeTagInfo:
+		return "FileAttributeTagInfo"
+	case FileIdBothDirectoryInfo:
+		return "FileIdBothDirectoryInfo"
+	case FileIdBothDirectoryRestartInfo:
+		return "FileIdBothDirectoryRestartInfo"
+	case FileIoPriorityHintInfo:
+		return "FileIoPriorityHintInfo"
+	case FileRemoteProtocolInfo:
+		return "FileRemoteProtocolInfo"
+	case FileFullDirectoryInfo:
+		return "FileFullDirectoryInfo"
+	case FileFullDirectoryRestartInfo:
+		return "FileFullDirectoryRestartInfo"
+	case FileStorageInfo:
+		return "FileStorageInfo"
+	case FileAlignmentInfo:
+		return "FileAlignmentInfo"
+	case FileIdInfo:
+		return "FileIdInfo"
+	case FileIdExtdDirectoryInfo:
+		return "FileIdExtdDirectoryInfo"
+	case FileIdExtdDirectoryRestartInfo:
+		return "FileIdExtdDirectoryRestartInfo"
+	case FileDispositionInfoEx:
+		return "FileDispositionInfoEx"
+	case FileRenameInfoEx:
+		return "FileRenameInfoEx"
+	case FileCaseSensitiveInfo:
+		return "FileCaseSensitiveInfo"
+	case FileNormalizedNameInfo:
+		return "FileNormalizedNameInfo"
+	case MaximumFileInfoByHandleClass:
+		return "MaximumFileInfoByHandleClass"
+	default:
+		return fmt.Sprintf("FILE_INFO_BY_HANDLE_CLASS(%d)", int32(e))
+	}
+}
+
 type FILE_INFO_BY_NAME_CLASS int32
 
 const (
@@ -420,6 +1306,26 @@ const (
 	MaximumFileInfoByNameClass  FILE_INFO_BY_NAME_CLASS = 4
 )
 
+// String returns the FILE_INFO_BY_NAME_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_INFO_BY_NAME_CLASS) String() string {
+	switch e {
+	case FileStatByNameInfo:
+		return "FileStatByNameInfo"
+	case FileStatLxByNameInfo:
+		return "FileStatLxByNameInfo"
+	case FileCaseSensitiveByNameInfo:
+		return "FileCaseSensitiveByNameInfo"
+	case FileStatBasicByNameInfo:
+		return "FileStatBasicByNameInfo"
+	case MaximumFileInfoByNameClass:
+		return "MaximumFileInfoByNameClass"
+	default:
+		return fmt.Sprintf("FILE_INFO_BY_NAME_CLASS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FILE_INFO_FLAGS_PERMISSIONS uint32
 
 const (
@@ -428,6 +1334,26 @@ const (
 	PERM_FILE_CREATE FILE_INFO_FLAGS_PERMISSIONS = 4
 )
 
+// String returns the FILE_INFO_FLAGS_PERMISSIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_INFO_FLAGS_PERMISSIONS) String() string {
+	var parts []string
+	if e&PERM_FILE_READ != 0 {
+		parts = append(parts, "PERM_FILE_READ")
+	}
+	if e&PERM_FILE_WRITE != 0 {
+		parts = append(parts, "PERM_FILE_WRITE")
+	}
+	if e&PERM_FILE_CREATE != 0 {
+		parts = append(parts, "PERM_FILE_CREATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type FILE_NOTIFY_CHANGE uint32
 
 const (
@@ -441,6 +1367,41 @@ const (
 	FILE_NOTIFY_CHANGE_SECURITY    FILE_NOTIFY_CHANGE = 256
 )
 
+// String returns the FILE_NOTIFY_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_NOTIFY_CHANGE) String() string {
+	var parts []string
+	if e&FILE_NOTIFY_CHANGE_FILE_NAME != 0 {
+		parts = append(parts, "FILE_NOTIFY_CHANGE_FILE_NAME")
+	}
+	if e&FILE_NOTIFY_CHANGE_DIR_NAME != 0 {
+		parts = append(parts, "FILE_NOTIFY_CHANGE_DIR_NAME")
+	}
+	if e&FILE_NOTIFY_CHANGE_ATTRIBUTES != 0 {
+		parts = append(parts, "FILE_NOTIFY_CHANGE_ATTRIBUTES")
+	}
+	if e&FILE_NOTIFY_CHANGE_SIZE != 0 {
+		parts = append(parts, "FILE_NOTIFY_CHANGE_SIZE")
+	}
+	if e&FILE_NOTIFY_CHANGE_LAST_WRITE != 0 {
+		parts = append(parts, "FILE_NOTIFY_CHANGE_LAST_WRITE")
+	}
+	if e&FILE_NOTIFY_CHANGE_LAST_ACCESS != 0 {
+		parts = append(parts, "FILE_NOTIFY_CHANGE_LAST_ACCESS")
+	}
+	if e&FILE_NOTIFY_CHANGE_CREATION != 0 {
+		parts = append(parts, "FILE_NOTIFY_CHANGE_CREATION")
+	}
+	if e&FILE_NOTIFY_CHANGE_SECURITY != 0 {
+		parts = append(parts, "FILE_NOTIFY_CHANGE_SECURITY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type FILE_SHARE_MODE uint32
 
 const (
@@ -449,6 +1410,25 @@ const (
 	FILE_SHARE_READ   FILE_SHARE_MODE = 1
 	FILE_SHARE_WRITE  FILE_SHARE_MODE = 2
 )
+
+// String returns the FILE_SHARE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_SHARE_MODE) String() string {
+	var parts []string
+	if e&FILE_SHARE_DELETE != 0 {
+		parts = append(parts, "FILE_SHARE_DELETE")
+	}
+	if e&FILE_SHARE_READ != 0 {
+		parts = append(parts, "FILE_SHARE_READ")
+	}
+	if e&FILE_SHARE_WRITE != 0 {
+		parts = append(parts, "FILE_SHARE_WRITE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type FILE_TYPE uint32
 
@@ -460,12 +1440,45 @@ const (
 	FILE_TYPE_REMOTE  FILE_TYPE = 32768
 )
 
+// String returns the FILE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_TYPE) String() string {
+	switch e {
+	case FILE_TYPE_UNKNOWN:
+		return "FILE_TYPE_UNKNOWN"
+	case FILE_TYPE_DISK:
+		return "FILE_TYPE_DISK"
+	case FILE_TYPE_CHAR:
+		return "FILE_TYPE_CHAR"
+	case FILE_TYPE_PIPE:
+		return "FILE_TYPE_PIPE"
+	case FILE_TYPE_REMOTE:
+		return "FILE_TYPE_REMOTE"
+	default:
+		return fmt.Sprintf("FILE_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FILE_WRITE_FLAGS int32
 
 const (
 	FILE_WRITE_FLAGS_NONE          FILE_WRITE_FLAGS = 0
 	FILE_WRITE_FLAGS_WRITE_THROUGH FILE_WRITE_FLAGS = 1
 )
+
+// String returns the FILE_WRITE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_WRITE_FLAGS) String() string {
+	var parts []string
+	if e&FILE_WRITE_FLAGS_WRITE_THROUGH != 0 {
+		parts = append(parts, "FILE_WRITE_FLAGS_WRITE_THROUGH")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // FINDEX_INFO_LEVELS: https://learn.microsoft.com/windows/win32/api/minwinbase/ne-minwinbase-findex_info_levels
 type FINDEX_INFO_LEVELS int32
@@ -475,6 +1488,21 @@ const (
 	FindExInfoBasic        FINDEX_INFO_LEVELS = 1
 	FindExInfoMaxInfoLevel FINDEX_INFO_LEVELS = 2
 )
+
+// String returns the FINDEX_INFO_LEVELS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FINDEX_INFO_LEVELS) String() string {
+	switch e {
+	case FindExInfoStandard:
+		return "FindExInfoStandard"
+	case FindExInfoBasic:
+		return "FindExInfoBasic"
+	case FindExInfoMaxInfoLevel:
+		return "FindExInfoMaxInfoLevel"
+	default:
+		return fmt.Sprintf("FINDEX_INFO_LEVELS(%d)", int32(e))
+	}
+}
 
 // FINDEX_SEARCH_OPS: https://learn.microsoft.com/windows/win32/api/minwinbase/ne-minwinbase-findex_search_ops
 type FINDEX_SEARCH_OPS int32
@@ -486,6 +1514,24 @@ const (
 	FindExSearchMaxSearchOp        FINDEX_SEARCH_OPS = 3
 )
 
+// String returns the FINDEX_SEARCH_OPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FINDEX_SEARCH_OPS) String() string {
+	switch e {
+	case FindExSearchNameMatch:
+		return "FindExSearchNameMatch"
+	case FindExSearchLimitToDirectories:
+		return "FindExSearchLimitToDirectories"
+	case FindExSearchLimitToDevices:
+		return "FindExSearchLimitToDevices"
+	case FindExSearchMaxSearchOp:
+		return "FindExSearchMaxSearchOp"
+	default:
+		return fmt.Sprintf("FINDEX_SEARCH_OPS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FIND_FIRST_EX_FLAGS uint32
 
 const (
@@ -493,6 +1539,25 @@ const (
 	FIND_FIRST_EX_LARGE_FETCH          FIND_FIRST_EX_FLAGS = 2
 	FIND_FIRST_EX_ON_DISK_ENTRIES_ONLY FIND_FIRST_EX_FLAGS = 4
 )
+
+// String returns the FIND_FIRST_EX_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FIND_FIRST_EX_FLAGS) String() string {
+	var parts []string
+	if e&FIND_FIRST_EX_CASE_SENSITIVE != 0 {
+		parts = append(parts, "FIND_FIRST_EX_CASE_SENSITIVE")
+	}
+	if e&FIND_FIRST_EX_LARGE_FETCH != 0 {
+		parts = append(parts, "FIND_FIRST_EX_LARGE_FETCH")
+	}
+	if e&FIND_FIRST_EX_ON_DISK_ENTRIES_ONLY != 0 {
+		parts = append(parts, "FIND_FIRST_EX_ON_DISK_ENTRIES_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type GETFINALPATHNAMEBYHANDLE_FLAGS uint32
 
@@ -505,6 +1570,25 @@ const (
 	FILE_NAME_OPENED     GETFINALPATHNAMEBYHANDLE_FLAGS = 8
 )
 
+// String returns the GETFINALPATHNAMEBYHANDLE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GETFINALPATHNAMEBYHANDLE_FLAGS) String() string {
+	switch e {
+	case VOLUME_NAME_DOS:
+		return "VOLUME_NAME_DOS"
+	case VOLUME_NAME_GUID:
+		return "VOLUME_NAME_GUID"
+	case VOLUME_NAME_NT:
+		return "VOLUME_NAME_NT"
+	case VOLUME_NAME_NONE:
+		return "VOLUME_NAME_NONE"
+	case FILE_NAME_OPENED:
+		return "FILE_NAME_OPENED"
+	default:
+		return fmt.Sprintf("GETFINALPATHNAMEBYHANDLE_FLAGS(%d)", uint32(e))
+	}
+}
+
 // GET_FILEEX_INFO_LEVELS: https://learn.microsoft.com/windows/win32/api/minwinbase/ne-minwinbase-get_fileex_info_levels
 type GET_FILEEX_INFO_LEVELS int32
 
@@ -513,6 +1597,20 @@ const (
 	GetFileExMaxInfoLevel GET_FILEEX_INFO_LEVELS = 1
 )
 
+// String returns the GET_FILEEX_INFO_LEVELS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_FILEEX_INFO_LEVELS) String() string {
+	switch e {
+	case GetFileExInfoStandard:
+		return "GetFileExInfoStandard"
+	case GetFileExMaxInfoLevel:
+		return "GetFileExMaxInfoLevel"
+	default:
+		return fmt.Sprintf("GET_FILEEX_INFO_LEVELS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GET_FILE_VERSION_INFO_FLAGS uint32
 
 const (
@@ -521,6 +1619,25 @@ const (
 	FILE_VER_GET_PREFETCHED GET_FILE_VERSION_INFO_FLAGS = 4
 )
 
+// String returns the GET_FILE_VERSION_INFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_FILE_VERSION_INFO_FLAGS) String() string {
+	var parts []string
+	if e&FILE_VER_GET_LOCALISED != 0 {
+		parts = append(parts, "FILE_VER_GET_LOCALISED")
+	}
+	if e&FILE_VER_GET_NEUTRAL != 0 {
+		parts = append(parts, "FILE_VER_GET_NEUTRAL")
+	}
+	if e&FILE_VER_GET_PREFETCHED != 0 {
+		parts = append(parts, "FILE_VER_GET_PREFETCHED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type GET_TAPE_DRIVE_PARAMETERS_OPERATION uint32
 
 const (
@@ -528,7 +1645,21 @@ const (
 	GET_TAPE_MEDIA_INFORMATION GET_TAPE_DRIVE_PARAMETERS_OPERATION = 0
 )
 
+// String returns the GET_TAPE_DRIVE_PARAMETERS_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_TAPE_DRIVE_PARAMETERS_OPERATION) String() string {
+	switch e {
+	case GET_TAPE_DRIVE_INFORMATION:
+		return "GET_TAPE_DRIVE_INFORMATION"
+	case GET_TAPE_MEDIA_INFORMATION:
+		return "GET_TAPE_MEDIA_INFORMATION"
+	default:
+		return fmt.Sprintf("GET_TAPE_DRIVE_PARAMETERS_OPERATION(%d)", uint32(e))
+	}
+}
+
 // IORING_CREATE_ADVISORY_FLAGS: https://learn.microsoft.com/windows/win32/api/ioringapi/ne-ioringapi-ioring_create_advisory_flags
+// Bitmask — values may be combined with |.
 type IORING_CREATE_ADVISORY_FLAGS int32
 
 const (
@@ -536,14 +1667,39 @@ const (
 	IORING_CREATE_SKIP_BUILDER_PARAM_CHECKS IORING_CREATE_ADVISORY_FLAGS = 1
 )
 
+// String returns the IORING_CREATE_ADVISORY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IORING_CREATE_ADVISORY_FLAGS) String() string {
+	var parts []string
+	if e&IORING_CREATE_SKIP_BUILDER_PARAM_CHECKS != 0 {
+		parts = append(parts, "IORING_CREATE_SKIP_BUILDER_PARAM_CHECKS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // IORING_CREATE_REQUIRED_FLAGS: https://learn.microsoft.com/windows/win32/api/ioringapi/ne-ioringapi-ioring_create_required_flags
+// Bitmask — values may be combined with |.
 type IORING_CREATE_REQUIRED_FLAGS int32
 
 const (
 	IORING_CREATE_REQUIRED_FLAGS_NONE IORING_CREATE_REQUIRED_FLAGS = 0
 )
 
+// String returns the IORING_CREATE_REQUIRED_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IORING_CREATE_REQUIRED_FLAGS) String() string {
+	var parts []string
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // IORING_FEATURE_FLAGS: https://learn.microsoft.com/windows/win32/api/ntioring_x/ne-ntioring_x-ioring_feature_flags
+// Bitmask — values may be combined with |.
 type IORING_FEATURE_FLAGS int32
 
 const (
@@ -551,6 +1707,22 @@ const (
 	IORING_FEATURE_UM_EMULATION         IORING_FEATURE_FLAGS = 1
 	IORING_FEATURE_SET_COMPLETION_EVENT IORING_FEATURE_FLAGS = 2
 )
+
+// String returns the IORING_FEATURE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IORING_FEATURE_FLAGS) String() string {
+	var parts []string
+	if e&IORING_FEATURE_UM_EMULATION != 0 {
+		parts = append(parts, "IORING_FEATURE_UM_EMULATION")
+	}
+	if e&IORING_FEATURE_SET_COMPLETION_EVENT != 0 {
+		parts = append(parts, "IORING_FEATURE_SET_COMPLETION_EVENT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // IORING_OP_CODE: https://learn.microsoft.com/windows/win32/api/ntioring_x/ne-ntioring_x-ioring_op_code
 type IORING_OP_CODE int32
@@ -567,6 +1739,33 @@ const (
 	IORING_OP_WRITE_GATHER     IORING_OP_CODE = 8
 )
 
+// String returns the IORING_OP_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IORING_OP_CODE) String() string {
+	switch e {
+	case IORING_OP_NOP:
+		return "IORING_OP_NOP"
+	case IORING_OP_READ:
+		return "IORING_OP_READ"
+	case IORING_OP_REGISTER_FILES:
+		return "IORING_OP_REGISTER_FILES"
+	case IORING_OP_REGISTER_BUFFERS:
+		return "IORING_OP_REGISTER_BUFFERS"
+	case IORING_OP_CANCEL:
+		return "IORING_OP_CANCEL"
+	case IORING_OP_WRITE:
+		return "IORING_OP_WRITE"
+	case IORING_OP_FLUSH:
+		return "IORING_OP_FLUSH"
+	case IORING_OP_READ_SCATTER:
+		return "IORING_OP_READ_SCATTER"
+	case IORING_OP_WRITE_GATHER:
+		return "IORING_OP_WRITE_GATHER"
+	default:
+		return fmt.Sprintf("IORING_OP_CODE(%d)", int32(e))
+	}
+}
+
 // IORING_REF_KIND: https://learn.microsoft.com/windows/win32/api/ioringapi/ne-ioringapi-ioring_ref_kind
 type IORING_REF_KIND int32
 
@@ -575,13 +1774,40 @@ const (
 	IORING_REF_REGISTERED IORING_REF_KIND = 1
 )
 
+// String returns the IORING_REF_KIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IORING_REF_KIND) String() string {
+	switch e {
+	case IORING_REF_RAW:
+		return "IORING_REF_RAW"
+	case IORING_REF_REGISTERED:
+		return "IORING_REF_REGISTERED"
+	default:
+		return fmt.Sprintf("IORING_REF_KIND(%d)", int32(e))
+	}
+}
+
 // IORING_SQE_FLAGS: https://learn.microsoft.com/windows/win32/api/ioringapi/ne-ioringapi-ioring_sqe_flags
+// Bitmask — values may be combined with |.
 type IORING_SQE_FLAGS int32
 
 const (
 	IOSQE_FLAGS_NONE                IORING_SQE_FLAGS = 0
 	IOSQE_FLAGS_DRAIN_PRECEDING_OPS IORING_SQE_FLAGS = 1
 )
+
+// String returns the IORING_SQE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IORING_SQE_FLAGS) String() string {
+	var parts []string
+	if e&IOSQE_FLAGS_DRAIN_PRECEDING_OPS != 0 {
+		parts = append(parts, "IOSQE_FLAGS_DRAIN_PRECEDING_OPS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // IORING_VERSION: https://learn.microsoft.com/windows/win32/api/ntioring_x/ne-ntioring_x-ioring_version
 type IORING_VERSION int32
@@ -594,12 +1820,48 @@ const (
 	IORING_VERSION_4       IORING_VERSION = 400
 )
 
+// String returns the IORING_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IORING_VERSION) String() string {
+	switch e {
+	case IORING_VERSION_INVALID:
+		return "IORING_VERSION_INVALID"
+	case IORING_VERSION_1:
+		return "IORING_VERSION_1"
+	case IORING_VERSION_2:
+		return "IORING_VERSION_2"
+	case IORING_VERSION_3:
+		return "IORING_VERSION_3"
+	case IORING_VERSION_4:
+		return "IORING_VERSION_4"
+	default:
+		return fmt.Sprintf("IORING_VERSION(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type LOCK_FILE_FLAGS uint32
 
 const (
 	LOCKFILE_EXCLUSIVE_LOCK   LOCK_FILE_FLAGS = 2
 	LOCKFILE_FAIL_IMMEDIATELY LOCK_FILE_FLAGS = 1
 )
+
+// String returns the LOCK_FILE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOCK_FILE_FLAGS) String() string {
+	var parts []string
+	if e&LOCKFILE_EXCLUSIVE_LOCK != 0 {
+		parts = append(parts, "LOCKFILE_EXCLUSIVE_LOCK")
+	}
+	if e&LOCKFILE_FAIL_IMMEDIATELY != 0 {
+		parts = append(parts, "LOCKFILE_FAIL_IMMEDIATELY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type LPPROGRESS_ROUTINE_CALLBACK_REASON uint32
 
@@ -608,6 +1870,20 @@ const (
 	CALLBACK_STREAM_SWITCH  LPPROGRESS_ROUTINE_CALLBACK_REASON = 1
 )
 
+// String returns the LPPROGRESS_ROUTINE_CALLBACK_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LPPROGRESS_ROUTINE_CALLBACK_REASON) String() string {
+	switch e {
+	case CALLBACK_CHUNK_FINISHED:
+		return "CALLBACK_CHUNK_FINISHED"
+	case CALLBACK_STREAM_SWITCH:
+		return "CALLBACK_STREAM_SWITCH"
+	default:
+		return fmt.Sprintf("LPPROGRESS_ROUTINE_CALLBACK_REASON(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type LZOPENFILE_STYLE uint16
 
 const (
@@ -629,6 +1905,59 @@ const (
 	OF_VERIFY           LZOPENFILE_STYLE = 1024
 )
 
+// String returns the LZOPENFILE_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LZOPENFILE_STYLE) String() string {
+	var parts []string
+	if e&OF_CANCEL != 0 {
+		parts = append(parts, "OF_CANCEL")
+	}
+	if e&OF_CREATE != 0 {
+		parts = append(parts, "OF_CREATE")
+	}
+	if e&OF_DELETE != 0 {
+		parts = append(parts, "OF_DELETE")
+	}
+	if e&OF_EXIST != 0 {
+		parts = append(parts, "OF_EXIST")
+	}
+	if e&OF_PARSE != 0 {
+		parts = append(parts, "OF_PARSE")
+	}
+	if e&OF_PROMPT != 0 {
+		parts = append(parts, "OF_PROMPT")
+	}
+	if e&OF_READWRITE != 0 {
+		parts = append(parts, "OF_READWRITE")
+	}
+	if e&OF_REOPEN != 0 {
+		parts = append(parts, "OF_REOPEN")
+	}
+	if e&OF_SHARE_DENY_NONE != 0 {
+		parts = append(parts, "OF_SHARE_DENY_NONE")
+	}
+	if e&OF_SHARE_DENY_READ != 0 {
+		parts = append(parts, "OF_SHARE_DENY_READ")
+	}
+	if e&OF_SHARE_DENY_WRITE != 0 {
+		parts = append(parts, "OF_SHARE_DENY_WRITE")
+	}
+	if e&OF_SHARE_EXCLUSIVE != 0 {
+		parts = append(parts, "OF_SHARE_EXCLUSIVE")
+	}
+	if e&OF_WRITE != 0 {
+		parts = append(parts, "OF_WRITE")
+	}
+	if e&OF_VERIFY != 0 {
+		parts = append(parts, "OF_VERIFY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type MOVE_FILE_FLAGS uint32
 
 const (
@@ -640,12 +1969,53 @@ const (
 	MOVEFILE_FAIL_IF_NOT_TRACKABLE MOVE_FILE_FLAGS = 32
 )
 
+// String returns the MOVE_FILE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MOVE_FILE_FLAGS) String() string {
+	var parts []string
+	if e&MOVEFILE_COPY_ALLOWED != 0 {
+		parts = append(parts, "MOVEFILE_COPY_ALLOWED")
+	}
+	if e&MOVEFILE_CREATE_HARDLINK != 0 {
+		parts = append(parts, "MOVEFILE_CREATE_HARDLINK")
+	}
+	if e&MOVEFILE_DELAY_UNTIL_REBOOT != 0 {
+		parts = append(parts, "MOVEFILE_DELAY_UNTIL_REBOOT")
+	}
+	if e&MOVEFILE_REPLACE_EXISTING != 0 {
+		parts = append(parts, "MOVEFILE_REPLACE_EXISTING")
+	}
+	if e&MOVEFILE_WRITE_THROUGH != 0 {
+		parts = append(parts, "MOVEFILE_WRITE_THROUGH")
+	}
+	if e&MOVEFILE_FAIL_IF_NOT_TRACKABLE != 0 {
+		parts = append(parts, "MOVEFILE_FAIL_IF_NOT_TRACKABLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type NTMS_OMID_TYPE uint32
 
 const (
 	NTMS_OMID_TYPE_FILESYSTEM_INFO NTMS_OMID_TYPE = 2
 	NTMS_OMID_TYPE_RAW_LABEL       NTMS_OMID_TYPE = 1
 )
+
+// String returns the NTMS_OMID_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NTMS_OMID_TYPE) String() string {
+	switch e {
+	case NTMS_OMID_TYPE_FILESYSTEM_INFO:
+		return "NTMS_OMID_TYPE_FILESYSTEM_INFO"
+	case NTMS_OMID_TYPE_RAW_LABEL:
+		return "NTMS_OMID_TYPE_RAW_LABEL"
+	default:
+		return fmt.Sprintf("NTMS_OMID_TYPE(%d)", uint32(e))
+	}
+}
 
 type NtmsAccessMask int32
 
@@ -655,6 +2025,21 @@ const (
 	NTMS_CONTROL_ACCESS NtmsAccessMask = 4
 )
 
+// String returns the NtmsAccessMask constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsAccessMask) String() string {
+	switch e {
+	case NTMS_USE_ACCESS:
+		return "NTMS_USE_ACCESS"
+	case NTMS_MODIFY_ACCESS:
+		return "NTMS_MODIFY_ACCESS"
+	case NTMS_CONTROL_ACCESS:
+		return "NTMS_CONTROL_ACCESS"
+	default:
+		return fmt.Sprintf("NtmsAccessMask(%d)", int32(e))
+	}
+}
+
 type NtmsAllocateOptions int32
 
 const (
@@ -663,17 +2048,54 @@ const (
 	NTMS_ALLOCATE_ERROR_IF_UNAVAILABLE NtmsAllocateOptions = 4
 )
 
+// String returns the NtmsAllocateOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsAllocateOptions) String() string {
+	switch e {
+	case NTMS_ALLOCATE_NEW:
+		return "NTMS_ALLOCATE_NEW"
+	case NTMS_ALLOCATE_NEXT:
+		return "NTMS_ALLOCATE_NEXT"
+	case NTMS_ALLOCATE_ERROR_IF_UNAVAILABLE:
+		return "NTMS_ALLOCATE_ERROR_IF_UNAVAILABLE"
+	default:
+		return fmt.Sprintf("NtmsAllocateOptions(%d)", int32(e))
+	}
+}
+
 type NtmsAllocationPolicy int32
 
 const (
 	NTMS_ALLOCATE_FROMSCRATCH NtmsAllocationPolicy = 1
 )
 
+// String returns the NtmsAllocationPolicy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsAllocationPolicy) String() string {
+	switch e {
+	case NTMS_ALLOCATE_FROMSCRATCH:
+		return "NTMS_ALLOCATE_FROMSCRATCH"
+	default:
+		return fmt.Sprintf("NtmsAllocationPolicy(%d)", int32(e))
+	}
+}
+
 type NtmsAsyncOperations int32
 
 const (
 	NTMS_ASYNCOP_MOUNT NtmsAsyncOperations = 1
 )
+
+// String returns the NtmsAsyncOperations constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsAsyncOperations) String() string {
+	switch e {
+	case NTMS_ASYNCOP_MOUNT:
+		return "NTMS_ASYNCOP_MOUNT"
+	default:
+		return fmt.Sprintf("NtmsAsyncOperations(%d)", int32(e))
+	}
+}
 
 type NtmsAsyncStatus int32
 
@@ -685,6 +2107,25 @@ const (
 	NTMS_ASYNCSTATE_COMPLETE      NtmsAsyncStatus = 4
 )
 
+// String returns the NtmsAsyncStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsAsyncStatus) String() string {
+	switch e {
+	case NTMS_ASYNCSTATE_QUEUED:
+		return "NTMS_ASYNCSTATE_QUEUED"
+	case NTMS_ASYNCSTATE_WAIT_RESOURCE:
+		return "NTMS_ASYNCSTATE_WAIT_RESOURCE"
+	case NTMS_ASYNCSTATE_WAIT_OPERATOR:
+		return "NTMS_ASYNCSTATE_WAIT_OPERATOR"
+	case NTMS_ASYNCSTATE_INPROCESS:
+		return "NTMS_ASYNCSTATE_INPROCESS"
+	case NTMS_ASYNCSTATE_COMPLETE:
+		return "NTMS_ASYNCSTATE_COMPLETE"
+	default:
+		return fmt.Sprintf("NtmsAsyncStatus(%d)", int32(e))
+	}
+}
+
 type NtmsBarCodeState int32
 
 const (
@@ -692,11 +2133,35 @@ const (
 	NTMS_BARCODESTATE_UNREADABLE NtmsBarCodeState = 2
 )
 
+// String returns the NtmsBarCodeState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsBarCodeState) String() string {
+	switch e {
+	case NTMS_BARCODESTATE_OK:
+		return "NTMS_BARCODESTATE_OK"
+	case NTMS_BARCODESTATE_UNREADABLE:
+		return "NTMS_BARCODESTATE_UNREADABLE"
+	default:
+		return fmt.Sprintf("NtmsBarCodeState(%d)", int32(e))
+	}
+}
+
 type NtmsCreateNtmsMediaOptions int32
 
 const (
 	NTMS_ERROR_ON_DUPLICATE NtmsCreateNtmsMediaOptions = 1
 )
+
+// String returns the NtmsCreateNtmsMediaOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsCreateNtmsMediaOptions) String() string {
+	switch e {
+	case NTMS_ERROR_ON_DUPLICATE:
+		return "NTMS_ERROR_ON_DUPLICATE"
+	default:
+		return fmt.Sprintf("NtmsCreateNtmsMediaOptions(%d)", int32(e))
+	}
+}
 
 type NtmsCreateOptions int32
 
@@ -706,11 +2171,37 @@ const (
 	NTMS_OPEN_ALWAYS   NtmsCreateOptions = 3
 )
 
+// String returns the NtmsCreateOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsCreateOptions) String() string {
+	switch e {
+	case NTMS_OPEN_EXISTING:
+		return "NTMS_OPEN_EXISTING"
+	case NTMS_CREATE_NEW:
+		return "NTMS_CREATE_NEW"
+	case NTMS_OPEN_ALWAYS:
+		return "NTMS_OPEN_ALWAYS"
+	default:
+		return fmt.Sprintf("NtmsCreateOptions(%d)", int32(e))
+	}
+}
+
 type NtmsDeallocationPolicy int32
 
 const (
 	NTMS_DEALLOCATE_TOSCRATCH NtmsDeallocationPolicy = 1
 )
+
+// String returns the NtmsDeallocationPolicy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsDeallocationPolicy) String() string {
+	switch e {
+	case NTMS_DEALLOCATE_TOSCRATCH:
+		return "NTMS_DEALLOCATE_TOSCRATCH"
+	default:
+		return fmt.Sprintf("NtmsDeallocationPolicy(%d)", int32(e))
+	}
+}
 
 type NtmsDismountOptions int32
 
@@ -719,6 +2210,19 @@ const (
 	NTMS_DISMOUNT_IMMEDIATE NtmsDismountOptions = 2
 )
 
+// String returns the NtmsDismountOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsDismountOptions) String() string {
+	switch e {
+	case NTMS_DISMOUNT_DEFERRED:
+		return "NTMS_DISMOUNT_DEFERRED"
+	case NTMS_DISMOUNT_IMMEDIATE:
+		return "NTMS_DISMOUNT_IMMEDIATE"
+	default:
+		return fmt.Sprintf("NtmsDismountOptions(%d)", int32(e))
+	}
+}
+
 type NtmsDoorState int32
 
 const (
@@ -726,6 +2230,21 @@ const (
 	NTMS_DOORSTATE_CLOSED  NtmsDoorState = 1
 	NTMS_DOORSTATE_OPEN    NtmsDoorState = 2
 )
+
+// String returns the NtmsDoorState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsDoorState) String() string {
+	switch e {
+	case NTMS_DOORSTATE_UNKNOWN:
+		return "NTMS_DOORSTATE_UNKNOWN"
+	case NTMS_DOORSTATE_CLOSED:
+		return "NTMS_DOORSTATE_CLOSED"
+	case NTMS_DOORSTATE_OPEN:
+		return "NTMS_DOORSTATE_OPEN"
+	default:
+		return fmt.Sprintf("NtmsDoorState(%d)", int32(e))
+	}
+}
 
 type NtmsDriveState int32
 
@@ -738,11 +2257,43 @@ const (
 	NTMS_DRIVESTATE_DISMOUNTABLE  NtmsDriveState = 7
 )
 
+// String returns the NtmsDriveState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsDriveState) String() string {
+	switch e {
+	case NTMS_DRIVESTATE_DISMOUNTED:
+		return "NTMS_DRIVESTATE_DISMOUNTED"
+	case NTMS_DRIVESTATE_MOUNTED:
+		return "NTMS_DRIVESTATE_MOUNTED"
+	case NTMS_DRIVESTATE_LOADED:
+		return "NTMS_DRIVESTATE_LOADED"
+	case NTMS_DRIVESTATE_UNLOADED:
+		return "NTMS_DRIVESTATE_UNLOADED"
+	case NTMS_DRIVESTATE_BEING_CLEANED:
+		return "NTMS_DRIVESTATE_BEING_CLEANED"
+	case NTMS_DRIVESTATE_DISMOUNTABLE:
+		return "NTMS_DRIVESTATE_DISMOUNTABLE"
+	default:
+		return fmt.Sprintf("NtmsDriveState(%d)", int32(e))
+	}
+}
+
 type NtmsDriveType int32
 
 const (
 	NTMS_UNKNOWN_DRIVE NtmsDriveType = 0
 )
+
+// String returns the NtmsDriveType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsDriveType) String() string {
+	switch e {
+	case NTMS_UNKNOWN_DRIVE:
+		return "NTMS_UNKNOWN_DRIVE"
+	default:
+		return fmt.Sprintf("NtmsDriveType(%d)", int32(e))
+	}
+}
 
 type NtmsEjectOperation int32
 
@@ -755,12 +2306,46 @@ const (
 	NTMS_EJECT_ASK_USER  NtmsEjectOperation = 5
 )
 
+// String returns the NtmsEjectOperation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsEjectOperation) String() string {
+	switch e {
+	case NTMS_EJECT_START:
+		return "NTMS_EJECT_START"
+	case NTMS_EJECT_STOP:
+		return "NTMS_EJECT_STOP"
+	case NTMS_EJECT_QUEUE:
+		return "NTMS_EJECT_QUEUE"
+	case NTMS_EJECT_FORCE:
+		return "NTMS_EJECT_FORCE"
+	case NTMS_EJECT_IMMEDIATE:
+		return "NTMS_EJECT_IMMEDIATE"
+	case NTMS_EJECT_ASK_USER:
+		return "NTMS_EJECT_ASK_USER"
+	default:
+		return fmt.Sprintf("NtmsEjectOperation(%d)", int32(e))
+	}
+}
+
 type NtmsEnumerateOption int32
 
 const (
 	NTMS_ENUM_DEFAULT  NtmsEnumerateOption = 0
 	NTMS_ENUM_ROOTPOOL NtmsEnumerateOption = 1
 )
+
+// String returns the NtmsEnumerateOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsEnumerateOption) String() string {
+	switch e {
+	case NTMS_ENUM_DEFAULT:
+		return "NTMS_ENUM_DEFAULT"
+	case NTMS_ENUM_ROOTPOOL:
+		return "NTMS_ENUM_ROOTPOOL"
+	default:
+		return fmt.Sprintf("NtmsEnumerateOption(%d)", int32(e))
+	}
+}
 
 type NtmsInjectOperation int32
 
@@ -770,6 +2355,23 @@ const (
 	NTMS_INJECT_RETRACT   NtmsInjectOperation = 2
 	NTMS_INJECT_STARTMANY NtmsInjectOperation = 3
 )
+
+// String returns the NtmsInjectOperation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsInjectOperation) String() string {
+	switch e {
+	case NTMS_INJECT_START:
+		return "NTMS_INJECT_START"
+	case NTMS_INJECT_STOP:
+		return "NTMS_INJECT_STOP"
+	case NTMS_INJECT_RETRACT:
+		return "NTMS_INJECT_RETRACT"
+	case NTMS_INJECT_STARTMANY:
+		return "NTMS_INJECT_STARTMANY"
+	default:
+		return fmt.Sprintf("NtmsInjectOperation(%d)", int32(e))
+	}
+}
 
 type NtmsInventoryMethod int32
 
@@ -783,12 +2385,48 @@ const (
 	NTMS_INVENTORY_MAX     NtmsInventoryMethod = 6
 )
 
+// String returns the NtmsInventoryMethod constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsInventoryMethod) String() string {
+	switch e {
+	case NTMS_INVENTORY_NONE:
+		return "NTMS_INVENTORY_NONE"
+	case NTMS_INVENTORY_FAST:
+		return "NTMS_INVENTORY_FAST"
+	case NTMS_INVENTORY_OMID:
+		return "NTMS_INVENTORY_OMID"
+	case NTMS_INVENTORY_DEFAULT:
+		return "NTMS_INVENTORY_DEFAULT"
+	case NTMS_INVENTORY_SLOT:
+		return "NTMS_INVENTORY_SLOT"
+	case NTMS_INVENTORY_STOP:
+		return "NTMS_INVENTORY_STOP"
+	case NTMS_INVENTORY_MAX:
+		return "NTMS_INVENTORY_MAX"
+	default:
+		return fmt.Sprintf("NtmsInventoryMethod(%d)", int32(e))
+	}
+}
+
 type NtmsLibRequestFlags int32
 
 const (
 	NTMS_LIBREQFLAGS_NOAUTOPURGE   NtmsLibRequestFlags = 1
 	NTMS_LIBREQFLAGS_NOFAILEDPURGE NtmsLibRequestFlags = 2
 )
+
+// String returns the NtmsLibRequestFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsLibRequestFlags) String() string {
+	switch e {
+	case NTMS_LIBREQFLAGS_NOAUTOPURGE:
+		return "NTMS_LIBREQFLAGS_NOAUTOPURGE"
+	case NTMS_LIBREQFLAGS_NOFAILEDPURGE:
+		return "NTMS_LIBREQFLAGS_NOFAILEDPURGE"
+	default:
+		return fmt.Sprintf("NtmsLibRequestFlags(%d)", int32(e))
+	}
+}
 
 type NtmsLibraryFlags int32
 
@@ -800,6 +2438,25 @@ const (
 	NTMS_LIBRARYFLAG_RECOGNIZECLEANERBARCODE    NtmsLibraryFlags = 16
 )
 
+// String returns the NtmsLibraryFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsLibraryFlags) String() string {
+	switch e {
+	case NTMS_LIBRARYFLAG_FIXEDOFFLINE:
+		return "NTMS_LIBRARYFLAG_FIXEDOFFLINE"
+	case NTMS_LIBRARYFLAG_CLEANERPRESENT:
+		return "NTMS_LIBRARYFLAG_CLEANERPRESENT"
+	case NTMS_LIBRARYFLAG_AUTODETECTCHANGE:
+		return "NTMS_LIBRARYFLAG_AUTODETECTCHANGE"
+	case NTMS_LIBRARYFLAG_IGNORECLEANERUSESREMAINING:
+		return "NTMS_LIBRARYFLAG_IGNORECLEANERUSESREMAINING"
+	case NTMS_LIBRARYFLAG_RECOGNIZECLEANERBARCODE:
+		return "NTMS_LIBRARYFLAG_RECOGNIZECLEANERBARCODE"
+	default:
+		return fmt.Sprintf("NtmsLibraryFlags(%d)", int32(e))
+	}
+}
+
 type NtmsLibraryType int32
 
 const (
@@ -808,6 +2465,23 @@ const (
 	NTMS_LIBRARYTYPE_ONLINE     NtmsLibraryType = 2
 	NTMS_LIBRARYTYPE_STANDALONE NtmsLibraryType = 3
 )
+
+// String returns the NtmsLibraryType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsLibraryType) String() string {
+	switch e {
+	case NTMS_LIBRARYTYPE_UNKNOWN:
+		return "NTMS_LIBRARYTYPE_UNKNOWN"
+	case NTMS_LIBRARYTYPE_OFFLINE:
+		return "NTMS_LIBRARYTYPE_OFFLINE"
+	case NTMS_LIBRARYTYPE_ONLINE:
+		return "NTMS_LIBRARYTYPE_ONLINE"
+	case NTMS_LIBRARYTYPE_STANDALONE:
+		return "NTMS_LIBRARYTYPE_STANDALONE"
+	default:
+		return fmt.Sprintf("NtmsLibraryType(%d)", int32(e))
+	}
+}
 
 type NtmsLmOperation int32
 
@@ -839,6 +2513,61 @@ const (
 	NTMS_LM_MAXWORKITEM    NtmsLmOperation = 22
 )
 
+// String returns the NtmsLmOperation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsLmOperation) String() string {
+	switch e {
+	case NTMS_LM_REMOVE:
+		return "NTMS_LM_REMOVE"
+	case NTMS_LM_DISABLECHANGER:
+		return "NTMS_LM_DISABLECHANGER"
+	case NTMS_LM_ENABLECHANGER:
+		return "NTMS_LM_ENABLECHANGER"
+	case NTMS_LM_DISABLEDRIVE:
+		return "NTMS_LM_DISABLEDRIVE"
+	case NTMS_LM_ENABLEDRIVE:
+		return "NTMS_LM_ENABLEDRIVE"
+	case NTMS_LM_DISABLEMEDIA:
+		return "NTMS_LM_DISABLEMEDIA"
+	case NTMS_LM_ENABLEMEDIA:
+		return "NTMS_LM_ENABLEMEDIA"
+	case NTMS_LM_UPDATEOMID:
+		return "NTMS_LM_UPDATEOMID"
+	case NTMS_LM_INVENTORY:
+		return "NTMS_LM_INVENTORY"
+	case NTMS_LM_DOORACCESS:
+		return "NTMS_LM_DOORACCESS"
+	case NTMS_LM_EJECT:
+		return "NTMS_LM_EJECT"
+	case NTMS_LM_EJECTCLEANER:
+		return "NTMS_LM_EJECTCLEANER"
+	case NTMS_LM_INJECT:
+		return "NTMS_LM_INJECT"
+	case NTMS_LM_INJECTCLEANER:
+		return "NTMS_LM_INJECTCLEANER"
+	case NTMS_LM_PROCESSOMID:
+		return "NTMS_LM_PROCESSOMID"
+	case NTMS_LM_CLEANDRIVE:
+		return "NTMS_LM_CLEANDRIVE"
+	case NTMS_LM_DISMOUNT:
+		return "NTMS_LM_DISMOUNT"
+	case NTMS_LM_MOUNT:
+		return "NTMS_LM_MOUNT"
+	case NTMS_LM_WRITESCRATCH:
+		return "NTMS_LM_WRITESCRATCH"
+	case NTMS_LM_CLASSIFY:
+		return "NTMS_LM_CLASSIFY"
+	case NTMS_LM_RESERVECLEANER:
+		return "NTMS_LM_RESERVECLEANER"
+	case NTMS_LM_RELEASECLEANER:
+		return "NTMS_LM_RELEASECLEANER"
+	case NTMS_LM_MAXWORKITEM:
+		return "NTMS_LM_MAXWORKITEM"
+	default:
+		return fmt.Sprintf("NtmsLmOperation(%d)", int32(e))
+	}
+}
+
 type NtmsLmState int32
 
 const (
@@ -854,12 +2583,52 @@ const (
 	NTMS_LM_STOPPED   NtmsLmState = 8
 )
 
+// String returns the NtmsLmState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsLmState) String() string {
+	switch e {
+	case NTMS_LM_QUEUED:
+		return "NTMS_LM_QUEUED"
+	case NTMS_LM_INPROCESS:
+		return "NTMS_LM_INPROCESS"
+	case NTMS_LM_PASSED:
+		return "NTMS_LM_PASSED"
+	case NTMS_LM_FAILED:
+		return "NTMS_LM_FAILED"
+	case NTMS_LM_INVALID:
+		return "NTMS_LM_INVALID"
+	case NTMS_LM_WAITING:
+		return "NTMS_LM_WAITING"
+	case NTMS_LM_DEFERRED:
+		return "NTMS_LM_DEFERRED"
+	case NTMS_LM_CANCELLED:
+		return "NTMS_LM_CANCELLED"
+	case NTMS_LM_STOPPED:
+		return "NTMS_LM_STOPPED"
+	default:
+		return fmt.Sprintf("NtmsLmState(%d)", int32(e))
+	}
+}
+
 type NtmsMediaPoolPolicy int32
 
 const (
 	NTMS_POOLPOLICY_PURGEOFFLINESCRATCH NtmsMediaPoolPolicy = 1
 	NTMS_POOLPOLICY_KEEPOFFLINEIMPORT   NtmsMediaPoolPolicy = 2
 )
+
+// String returns the NtmsMediaPoolPolicy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsMediaPoolPolicy) String() string {
+	switch e {
+	case NTMS_POOLPOLICY_PURGEOFFLINESCRATCH:
+		return "NTMS_POOLPOLICY_PURGEOFFLINESCRATCH"
+	case NTMS_POOLPOLICY_KEEPOFFLINEIMPORT:
+		return "NTMS_POOLPOLICY_KEEPOFFLINEIMPORT"
+	default:
+		return fmt.Sprintf("NtmsMediaPoolPolicy(%d)", int32(e))
+	}
+}
 
 type NtmsMediaState int32
 
@@ -872,6 +2641,29 @@ const (
 	NTMS_MEDIASTATE_OPERROR  NtmsMediaState = 5
 	NTMS_MEDIASTATE_OPREQ    NtmsMediaState = 6
 )
+
+// String returns the NtmsMediaState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsMediaState) String() string {
+	switch e {
+	case NTMS_MEDIASTATE_IDLE:
+		return "NTMS_MEDIASTATE_IDLE"
+	case NTMS_MEDIASTATE_INUSE:
+		return "NTMS_MEDIASTATE_INUSE"
+	case NTMS_MEDIASTATE_MOUNTED:
+		return "NTMS_MEDIASTATE_MOUNTED"
+	case NTMS_MEDIASTATE_LOADED:
+		return "NTMS_MEDIASTATE_LOADED"
+	case NTMS_MEDIASTATE_UNLOADED:
+		return "NTMS_MEDIASTATE_UNLOADED"
+	case NTMS_MEDIASTATE_OPERROR:
+		return "NTMS_MEDIASTATE_OPERROR"
+	case NTMS_MEDIASTATE_OPREQ:
+		return "NTMS_MEDIASTATE_OPREQ"
+	default:
+		return fmt.Sprintf("NtmsMediaState(%d)", int32(e))
+	}
+}
 
 type NtmsMountOptions int32
 
@@ -886,6 +2678,27 @@ const (
 	NTMS_MOUNT_NOWAIT               NtmsMountOptions = 32
 )
 
+// String returns the NtmsMountOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsMountOptions) String() string {
+	switch e {
+	case NTMS_MOUNT_READ:
+		return "NTMS_MOUNT_READ"
+	case NTMS_MOUNT_WRITE:
+		return "NTMS_MOUNT_WRITE"
+	case NTMS_MOUNT_ERROR_NOT_AVAILABLE:
+		return "NTMS_MOUNT_ERROR_NOT_AVAILABLE"
+	case NTMS_MOUNT_ERROR_OFFLINE:
+		return "NTMS_MOUNT_ERROR_OFFLINE"
+	case NTMS_MOUNT_SPECIFIC_DRIVE:
+		return "NTMS_MOUNT_SPECIFIC_DRIVE"
+	case NTMS_MOUNT_NOWAIT:
+		return "NTMS_MOUNT_NOWAIT"
+	default:
+		return fmt.Sprintf("NtmsMountOptions(%d)", int32(e))
+	}
+}
+
 type NtmsMountPriority int32
 
 const (
@@ -897,6 +2710,25 @@ const (
 	NTMS_PRIORITY_LOWEST  NtmsMountPriority = -15
 )
 
+// String returns the NtmsMountPriority constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsMountPriority) String() string {
+	switch e {
+	case NTMS_PRIORITY_DEFAULT:
+		return "NTMS_PRIORITY_DEFAULT"
+	case NTMS_PRIORITY_HIGHEST:
+		return "NTMS_PRIORITY_HIGHEST"
+	case NTMS_PRIORITY_HIGH:
+		return "NTMS_PRIORITY_HIGH"
+	case NTMS_PRIORITY_LOW:
+		return "NTMS_PRIORITY_LOW"
+	case NTMS_PRIORITY_LOWEST:
+		return "NTMS_PRIORITY_LOWEST"
+	default:
+		return fmt.Sprintf("NtmsMountPriority(%d)", int32(e))
+	}
+}
+
 type NtmsNotificationOperations int32
 
 const (
@@ -906,6 +2738,25 @@ const (
 	NTMS_EVENT_SIGNAL   NtmsNotificationOperations = 4
 	NTMS_EVENT_COMPLETE NtmsNotificationOperations = 5
 )
+
+// String returns the NtmsNotificationOperations constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsNotificationOperations) String() string {
+	switch e {
+	case NTMS_OBJ_UPDATE:
+		return "NTMS_OBJ_UPDATE"
+	case NTMS_OBJ_INSERT:
+		return "NTMS_OBJ_INSERT"
+	case NTMS_OBJ_DELETE:
+		return "NTMS_OBJ_DELETE"
+	case NTMS_EVENT_SIGNAL:
+		return "NTMS_EVENT_SIGNAL"
+	case NTMS_EVENT_COMPLETE:
+		return "NTMS_EVENT_COMPLETE"
+	default:
+		return fmt.Sprintf("NtmsNotificationOperations(%d)", int32(e))
+	}
+}
 
 // NtmsObjectsTypes: https://learn.microsoft.com/windows/win32/api/ntmsapi/ne-ntmsapi-ntmsobjectstypes
 type NtmsObjectsTypes int32
@@ -933,6 +2784,55 @@ const (
 	NTMS_NUMBER_OF_OBJECT_TYPES NtmsObjectsTypes = 19
 )
 
+// String returns the NtmsObjectsTypes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsObjectsTypes) String() string {
+	switch e {
+	case NTMS_UNKNOWN:
+		return "NTMS_UNKNOWN"
+	case NTMS_OBJECT:
+		return "NTMS_OBJECT"
+	case NTMS_CHANGER:
+		return "NTMS_CHANGER"
+	case NTMS_CHANGER_TYPE:
+		return "NTMS_CHANGER_TYPE"
+	case NTMS_COMPUTER:
+		return "NTMS_COMPUTER"
+	case NTMS_DRIVE:
+		return "NTMS_DRIVE"
+	case NTMS_DRIVE_TYPE:
+		return "NTMS_DRIVE_TYPE"
+	case NTMS_IEDOOR:
+		return "NTMS_IEDOOR"
+	case NTMS_IEPORT:
+		return "NTMS_IEPORT"
+	case NTMS_LIBRARY:
+		return "NTMS_LIBRARY"
+	case NTMS_LIBREQUEST:
+		return "NTMS_LIBREQUEST"
+	case NTMS_LOGICAL_MEDIA:
+		return "NTMS_LOGICAL_MEDIA"
+	case NTMS_MEDIA_POOL:
+		return "NTMS_MEDIA_POOL"
+	case NTMS_MEDIA_TYPE:
+		return "NTMS_MEDIA_TYPE"
+	case NTMS_PARTITION:
+		return "NTMS_PARTITION"
+	case NTMS_PHYSICAL_MEDIA:
+		return "NTMS_PHYSICAL_MEDIA"
+	case NTMS_STORAGESLOT:
+		return "NTMS_STORAGESLOT"
+	case NTMS_OPREQUEST:
+		return "NTMS_OPREQUEST"
+	case NTMS_UI_DESTINATION:
+		return "NTMS_UI_DESTINATION"
+	case NTMS_NUMBER_OF_OBJECT_TYPES:
+		return "NTMS_NUMBER_OF_OBJECT_TYPES"
+	default:
+		return fmt.Sprintf("NtmsObjectsTypes(%d)", int32(e))
+	}
+}
+
 type NtmsOpRequestFlags int32
 
 const (
@@ -942,6 +2842,23 @@ const (
 	NTMS_OPREQFLAGS_NOTRAYICON    NtmsOpRequestFlags = 32
 )
 
+// String returns the NtmsOpRequestFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsOpRequestFlags) String() string {
+	switch e {
+	case NTMS_OPREQFLAGS_NOAUTOPURGE:
+		return "NTMS_OPREQFLAGS_NOAUTOPURGE"
+	case NTMS_OPREQFLAGS_NOFAILEDPURGE:
+		return "NTMS_OPREQFLAGS_NOFAILEDPURGE"
+	case NTMS_OPREQFLAGS_NOALERTS:
+		return "NTMS_OPREQFLAGS_NOALERTS"
+	case NTMS_OPREQFLAGS_NOTRAYICON:
+		return "NTMS_OPREQFLAGS_NOTRAYICON"
+	default:
+		return fmt.Sprintf("NtmsOpRequestFlags(%d)", int32(e))
+	}
+}
+
 type NtmsOperationalState int32
 
 const (
@@ -950,6 +2867,23 @@ const (
 	NTMS_NEEDS_SERVICE NtmsOperationalState = 20
 	NTMS_NOT_PRESENT   NtmsOperationalState = 21
 )
+
+// String returns the NtmsOperationalState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsOperationalState) String() string {
+	switch e {
+	case NTMS_READY:
+		return "NTMS_READY"
+	case NTMS_INITIALIZING:
+		return "NTMS_INITIALIZING"
+	case NTMS_NEEDS_SERVICE:
+		return "NTMS_NEEDS_SERVICE"
+	case NTMS_NOT_PRESENT:
+		return "NTMS_NOT_PRESENT"
+	default:
+		return fmt.Sprintf("NtmsOperationalState(%d)", int32(e))
+	}
+}
 
 type NtmsOpreqCommand int32
 
@@ -962,6 +2896,27 @@ const (
 	NTMS_OPREQ_MESSAGE       NtmsOpreqCommand = 5
 )
 
+// String returns the NtmsOpreqCommand constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsOpreqCommand) String() string {
+	switch e {
+	case NTMS_OPREQ_UNKNOWN:
+		return "NTMS_OPREQ_UNKNOWN"
+	case NTMS_OPREQ_NEWMEDIA:
+		return "NTMS_OPREQ_NEWMEDIA"
+	case NTMS_OPREQ_CLEANER:
+		return "NTMS_OPREQ_CLEANER"
+	case NTMS_OPREQ_DEVICESERVICE:
+		return "NTMS_OPREQ_DEVICESERVICE"
+	case NTMS_OPREQ_MOVEMEDIA:
+		return "NTMS_OPREQ_MOVEMEDIA"
+	case NTMS_OPREQ_MESSAGE:
+		return "NTMS_OPREQ_MESSAGE"
+	default:
+		return fmt.Sprintf("NtmsOpreqCommand(%d)", int32(e))
+	}
+}
+
 type NtmsOpreqState int32
 
 const (
@@ -972,6 +2927,27 @@ const (
 	NTMS_OPSTATE_REFUSED    NtmsOpreqState = 4
 	NTMS_OPSTATE_COMPLETE   NtmsOpreqState = 5
 )
+
+// String returns the NtmsOpreqState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsOpreqState) String() string {
+	switch e {
+	case NTMS_OPSTATE_UNKNOWN:
+		return "NTMS_OPSTATE_UNKNOWN"
+	case NTMS_OPSTATE_SUBMITTED:
+		return "NTMS_OPSTATE_SUBMITTED"
+	case NTMS_OPSTATE_ACTIVE:
+		return "NTMS_OPSTATE_ACTIVE"
+	case NTMS_OPSTATE_INPROGRESS:
+		return "NTMS_OPSTATE_INPROGRESS"
+	case NTMS_OPSTATE_REFUSED:
+		return "NTMS_OPSTATE_REFUSED"
+	case NTMS_OPSTATE_COMPLETE:
+		return "NTMS_OPSTATE_COMPLETE"
+	default:
+		return fmt.Sprintf("NtmsOpreqState(%d)", int32(e))
+	}
+}
 
 type NtmsPartitionState int32
 
@@ -988,6 +2964,35 @@ const (
 	NTMS_PARTSTATE_RESERVED       NtmsPartitionState = 9
 )
 
+// String returns the NtmsPartitionState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsPartitionState) String() string {
+	switch e {
+	case NTMS_PARTSTATE_UNKNOWN:
+		return "NTMS_PARTSTATE_UNKNOWN"
+	case NTMS_PARTSTATE_UNPREPARED:
+		return "NTMS_PARTSTATE_UNPREPARED"
+	case NTMS_PARTSTATE_INCOMPATIBLE:
+		return "NTMS_PARTSTATE_INCOMPATIBLE"
+	case NTMS_PARTSTATE_DECOMMISSIONED:
+		return "NTMS_PARTSTATE_DECOMMISSIONED"
+	case NTMS_PARTSTATE_AVAILABLE:
+		return "NTMS_PARTSTATE_AVAILABLE"
+	case NTMS_PARTSTATE_ALLOCATED:
+		return "NTMS_PARTSTATE_ALLOCATED"
+	case NTMS_PARTSTATE_COMPLETE:
+		return "NTMS_PARTSTATE_COMPLETE"
+	case NTMS_PARTSTATE_FOREIGN:
+		return "NTMS_PARTSTATE_FOREIGN"
+	case NTMS_PARTSTATE_IMPORT:
+		return "NTMS_PARTSTATE_IMPORT"
+	case NTMS_PARTSTATE_RESERVED:
+		return "NTMS_PARTSTATE_RESERVED"
+	default:
+		return fmt.Sprintf("NtmsPartitionState(%d)", int32(e))
+	}
+}
+
 type NtmsPoolType int32
 
 const (
@@ -998,6 +3003,25 @@ const (
 	NTMS_POOLTYPE_APPLICATION NtmsPoolType = 1000
 )
 
+// String returns the NtmsPoolType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsPoolType) String() string {
+	switch e {
+	case NTMS_POOLTYPE_UNKNOWN:
+		return "NTMS_POOLTYPE_UNKNOWN"
+	case NTMS_POOLTYPE_SCRATCH:
+		return "NTMS_POOLTYPE_SCRATCH"
+	case NTMS_POOLTYPE_FOREIGN:
+		return "NTMS_POOLTYPE_FOREIGN"
+	case NTMS_POOLTYPE_IMPORT:
+		return "NTMS_POOLTYPE_IMPORT"
+	case NTMS_POOLTYPE_APPLICATION:
+		return "NTMS_POOLTYPE_APPLICATION"
+	default:
+		return fmt.Sprintf("NtmsPoolType(%d)", int32(e))
+	}
+}
+
 type NtmsPortContent int32
 
 const (
@@ -1006,6 +3030,21 @@ const (
 	NTMS_PORTCONTENT_EMPTY   NtmsPortContent = 2
 )
 
+// String returns the NtmsPortContent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsPortContent) String() string {
+	switch e {
+	case NTMS_PORTCONTENT_UNKNOWN:
+		return "NTMS_PORTCONTENT_UNKNOWN"
+	case NTMS_PORTCONTENT_FULL:
+		return "NTMS_PORTCONTENT_FULL"
+	case NTMS_PORTCONTENT_EMPTY:
+		return "NTMS_PORTCONTENT_EMPTY"
+	default:
+		return fmt.Sprintf("NtmsPortContent(%d)", int32(e))
+	}
+}
+
 type NtmsPortPosition int32
 
 const (
@@ -1013,6 +3052,21 @@ const (
 	NTMS_PORTPOSITION_EXTENDED  NtmsPortPosition = 1
 	NTMS_PORTPOSITION_RETRACTED NtmsPortPosition = 2
 )
+
+// String returns the NtmsPortPosition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsPortPosition) String() string {
+	switch e {
+	case NTMS_PORTPOSITION_UNKNOWN:
+		return "NTMS_PORTPOSITION_UNKNOWN"
+	case NTMS_PORTPOSITION_EXTENDED:
+		return "NTMS_PORTPOSITION_EXTENDED"
+	case NTMS_PORTPOSITION_RETRACTED:
+		return "NTMS_PORTPOSITION_RETRACTED"
+	default:
+		return fmt.Sprintf("NtmsPortPosition(%d)", int32(e))
+	}
+}
 
 type NtmsReadWriteCharacteristics int32
 
@@ -1023,11 +3077,39 @@ const (
 	NTMS_MEDIARW_READONLY   NtmsReadWriteCharacteristics = 3
 )
 
+// String returns the NtmsReadWriteCharacteristics constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsReadWriteCharacteristics) String() string {
+	switch e {
+	case NTMS_MEDIARW_UNKNOWN:
+		return "NTMS_MEDIARW_UNKNOWN"
+	case NTMS_MEDIARW_REWRITABLE:
+		return "NTMS_MEDIARW_REWRITABLE"
+	case NTMS_MEDIARW_WRITEONCE:
+		return "NTMS_MEDIARW_WRITEONCE"
+	case NTMS_MEDIARW_READONLY:
+		return "NTMS_MEDIARW_READONLY"
+	default:
+		return fmt.Sprintf("NtmsReadWriteCharacteristics(%d)", int32(e))
+	}
+}
+
 type NtmsSessionOptions int32
 
 const (
 	NTMS_SESSION_QUERYEXPEDITE NtmsSessionOptions = 1
 )
+
+// String returns the NtmsSessionOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsSessionOptions) String() string {
+	switch e {
+	case NTMS_SESSION_QUERYEXPEDITE:
+		return "NTMS_SESSION_QUERYEXPEDITE"
+	default:
+		return fmt.Sprintf("NtmsSessionOptions(%d)", int32(e))
+	}
+}
 
 type NtmsSlotState int32
 
@@ -1039,6 +3121,25 @@ const (
 	NTMS_SLOTSTATE_NEEDSINVENTORY NtmsSlotState = 4
 )
 
+// String returns the NtmsSlotState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsSlotState) String() string {
+	switch e {
+	case NTMS_SLOTSTATE_UNKNOWN:
+		return "NTMS_SLOTSTATE_UNKNOWN"
+	case NTMS_SLOTSTATE_FULL:
+		return "NTMS_SLOTSTATE_FULL"
+	case NTMS_SLOTSTATE_EMPTY:
+		return "NTMS_SLOTSTATE_EMPTY"
+	case NTMS_SLOTSTATE_NOTPRESENT:
+		return "NTMS_SLOTSTATE_NOTPRESENT"
+	case NTMS_SLOTSTATE_NEEDSINVENTORY:
+		return "NTMS_SLOTSTATE_NEEDSINVENTORY"
+	default:
+		return fmt.Sprintf("NtmsSlotState(%d)", int32(e))
+	}
+}
+
 type NtmsUIOperations int32
 
 const (
@@ -1047,6 +3148,23 @@ const (
 	NTMS_UIDEST_DELETEALL NtmsUIOperations = 3
 	NTMS_UIOPERATION_MAX  NtmsUIOperations = 4
 )
+
+// String returns the NtmsUIOperations constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsUIOperations) String() string {
+	switch e {
+	case NTMS_UIDEST_ADD:
+		return "NTMS_UIDEST_ADD"
+	case NTMS_UIDEST_DELETE:
+		return "NTMS_UIDEST_DELETE"
+	case NTMS_UIDEST_DELETEALL:
+		return "NTMS_UIDEST_DELETEALL"
+	case NTMS_UIOPERATION_MAX:
+		return "NTMS_UIOPERATION_MAX"
+	default:
+		return fmt.Sprintf("NtmsUIOperations(%d)", int32(e))
+	}
+}
 
 type NtmsUITypes int32
 
@@ -1057,6 +3175,25 @@ const (
 	NTMS_UITYPE_ERR     NtmsUITypes = 3
 	NTMS_UITYPE_MAX     NtmsUITypes = 4
 )
+
+// String returns the NtmsUITypes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NtmsUITypes) String() string {
+	switch e {
+	case NTMS_UITYPE_INVALID:
+		return "NTMS_UITYPE_INVALID"
+	case NTMS_UITYPE_INFO:
+		return "NTMS_UITYPE_INFO"
+	case NTMS_UITYPE_REQ:
+		return "NTMS_UITYPE_REQ"
+	case NTMS_UITYPE_ERR:
+		return "NTMS_UITYPE_ERR"
+	case NTMS_UITYPE_MAX:
+		return "NTMS_UITYPE_MAX"
+	default:
+		return fmt.Sprintf("NtmsUITypes(%d)", int32(e))
+	}
+}
 
 type PREPARE_TAPE_OPERATION uint32
 
@@ -1069,6 +3206,27 @@ const (
 	TAPE_UNLOCK  PREPARE_TAPE_OPERATION = 4
 )
 
+// String returns the PREPARE_TAPE_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PREPARE_TAPE_OPERATION) String() string {
+	switch e {
+	case TAPE_FORMAT:
+		return "TAPE_FORMAT"
+	case TAPE_LOAD:
+		return "TAPE_LOAD"
+	case TAPE_LOCK:
+		return "TAPE_LOCK"
+	case TAPE_TENSION:
+		return "TAPE_TENSION"
+	case TAPE_UNLOAD:
+		return "TAPE_UNLOAD"
+	case TAPE_UNLOCK:
+		return "TAPE_UNLOCK"
+	default:
+		return fmt.Sprintf("PREPARE_TAPE_OPERATION(%d)", uint32(e))
+	}
+}
+
 // PRIORITY_HINT: https://learn.microsoft.com/windows/win32/api/winbase/ne-winbase-priority_hint
 type PRIORITY_HINT int32
 
@@ -1078,6 +3236,23 @@ const (
 	IoPriorityHintNormal      PRIORITY_HINT = 2
 	MaximumIoPriorityHintType PRIORITY_HINT = 3
 )
+
+// String returns the PRIORITY_HINT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRIORITY_HINT) String() string {
+	switch e {
+	case IoPriorityHintVeryLow:
+		return "IoPriorityHintVeryLow"
+	case IoPriorityHintLow:
+		return "IoPriorityHintLow"
+	case IoPriorityHintNormal:
+		return "IoPriorityHintNormal"
+	case MaximumIoPriorityHintType:
+		return "MaximumIoPriorityHintType"
+	default:
+		return fmt.Sprintf("PRIORITY_HINT(%d)", int32(e))
+	}
+}
 
 // READ_DIRECTORY_NOTIFY_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/minwinbase/ne-minwinbase-read_directory_notify_information_class
 type READ_DIRECTORY_NOTIFY_INFORMATION_CLASS int32
@@ -1089,6 +3264,24 @@ const (
 	ReadDirectoryNotifyMaximumInformation  READ_DIRECTORY_NOTIFY_INFORMATION_CLASS = 4
 )
 
+// String returns the READ_DIRECTORY_NOTIFY_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e READ_DIRECTORY_NOTIFY_INFORMATION_CLASS) String() string {
+	switch e {
+	case ReadDirectoryNotifyInformation:
+		return "ReadDirectoryNotifyInformation"
+	case ReadDirectoryNotifyExtendedInformation:
+		return "ReadDirectoryNotifyExtendedInformation"
+	case ReadDirectoryNotifyFullInformation:
+		return "ReadDirectoryNotifyFullInformation"
+	case ReadDirectoryNotifyMaximumInformation:
+		return "ReadDirectoryNotifyMaximumInformation"
+	default:
+		return fmt.Sprintf("READ_DIRECTORY_NOTIFY_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type REPLACE_FILE_FLAGS uint32
 
 const (
@@ -1097,12 +3290,44 @@ const (
 	REPLACEFILE_IGNORE_ACL_ERRORS   REPLACE_FILE_FLAGS = 4
 )
 
+// String returns the REPLACE_FILE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REPLACE_FILE_FLAGS) String() string {
+	var parts []string
+	if e&REPLACEFILE_WRITE_THROUGH != 0 {
+		parts = append(parts, "REPLACEFILE_WRITE_THROUGH")
+	}
+	if e&REPLACEFILE_IGNORE_MERGE_ERRORS != 0 {
+		parts = append(parts, "REPLACEFILE_IGNORE_MERGE_ERRORS")
+	}
+	if e&REPLACEFILE_IGNORE_ACL_ERRORS != 0 {
+		parts = append(parts, "REPLACEFILE_IGNORE_ACL_ERRORS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SESSION_INFO_USER_FLAGS uint32
 
 const (
 	SESS_GUEST        SESSION_INFO_USER_FLAGS = 1
 	SESS_NOENCRYPTION SESSION_INFO_USER_FLAGS = 2
 )
+
+// String returns the SESSION_INFO_USER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SESSION_INFO_USER_FLAGS) String() string {
+	switch e {
+	case SESS_GUEST:
+		return "SESS_GUEST"
+	case SESS_NOENCRYPTION:
+		return "SESS_NOENCRYPTION"
+	default:
+		return fmt.Sprintf("SESSION_INFO_USER_FLAGS(%d)", uint32(e))
+	}
+}
 
 type SET_FILE_POINTER_MOVE_METHOD uint32
 
@@ -1111,6 +3336,21 @@ const (
 	FILE_CURRENT SET_FILE_POINTER_MOVE_METHOD = 1
 	FILE_END     SET_FILE_POINTER_MOVE_METHOD = 2
 )
+
+// String returns the SET_FILE_POINTER_MOVE_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SET_FILE_POINTER_MOVE_METHOD) String() string {
+	switch e {
+	case FILE_BEGIN:
+		return "FILE_BEGIN"
+	case FILE_CURRENT:
+		return "FILE_CURRENT"
+	case FILE_END:
+		return "FILE_END"
+	default:
+		return fmt.Sprintf("SET_FILE_POINTER_MOVE_METHOD(%d)", uint32(e))
+	}
+}
 
 type SHARE_INFO_PERMISSIONS uint32
 
@@ -1125,6 +3365,32 @@ const (
 	ACCESS_ALL    SHARE_INFO_PERMISSIONS = 32768
 )
 
+// String returns the SHARE_INFO_PERMISSIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHARE_INFO_PERMISSIONS) String() string {
+	switch e {
+	case ACCESS_READ:
+		return "ACCESS_READ"
+	case ACCESS_WRITE:
+		return "ACCESS_WRITE"
+	case ACCESS_CREATE:
+		return "ACCESS_CREATE"
+	case ACCESS_EXEC:
+		return "ACCESS_EXEC"
+	case ACCESS_DELETE:
+		return "ACCESS_DELETE"
+	case ACCESS_ATRIB:
+		return "ACCESS_ATRIB"
+	case ACCESS_PERM:
+		return "ACCESS_PERM"
+	case ACCESS_ALL:
+		return "ACCESS_ALL"
+	default:
+		return fmt.Sprintf("SHARE_INFO_PERMISSIONS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SHARE_TYPE uint32
 
 const (
@@ -1136,6 +3402,34 @@ const (
 	STYPE_TEMPORARY SHARE_TYPE = 1073741824
 	STYPE_MASK      SHARE_TYPE = 255
 )
+
+// String returns the SHARE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHARE_TYPE) String() string {
+	var parts []string
+	if e&STYPE_PRINTQ != 0 {
+		parts = append(parts, "STYPE_PRINTQ")
+	}
+	if e&STYPE_DEVICE != 0 {
+		parts = append(parts, "STYPE_DEVICE")
+	}
+	if e&STYPE_IPC != 0 {
+		parts = append(parts, "STYPE_IPC")
+	}
+	if e&STYPE_SPECIAL != 0 {
+		parts = append(parts, "STYPE_SPECIAL")
+	}
+	if e&STYPE_TEMPORARY != 0 {
+		parts = append(parts, "STYPE_TEMPORARY")
+	}
+	if e&STYPE_MASK != 0 {
+		parts = append(parts, "STYPE_MASK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // STORAGE_BUS_TYPE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-storage_bus_type
 type STORAGE_BUS_TYPE int32
@@ -1166,6 +3460,61 @@ const (
 	BusTypeMaxReserved       STORAGE_BUS_TYPE = 127
 )
 
+// String returns the STORAGE_BUS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_BUS_TYPE) String() string {
+	switch e {
+	case BusTypeUnknown:
+		return "BusTypeUnknown"
+	case BusTypeScsi:
+		return "BusTypeScsi"
+	case BusTypeAtapi:
+		return "BusTypeAtapi"
+	case BusTypeAta:
+		return "BusTypeAta"
+	case BusType1394:
+		return "BusType1394"
+	case BusTypeSsa:
+		return "BusTypeSsa"
+	case BusTypeFibre:
+		return "BusTypeFibre"
+	case BusTypeUsb:
+		return "BusTypeUsb"
+	case BusTypeRAID:
+		return "BusTypeRAID"
+	case BusTypeiScsi:
+		return "BusTypeiScsi"
+	case BusTypeSas:
+		return "BusTypeSas"
+	case BusTypeSata:
+		return "BusTypeSata"
+	case BusTypeSd:
+		return "BusTypeSd"
+	case BusTypeMmc:
+		return "BusTypeMmc"
+	case BusTypeVirtual:
+		return "BusTypeVirtual"
+	case BusTypeFileBackedVirtual:
+		return "BusTypeFileBackedVirtual"
+	case BusTypeSpaces:
+		return "BusTypeSpaces"
+	case BusTypeNvme:
+		return "BusTypeNvme"
+	case BusTypeSCM:
+		return "BusTypeSCM"
+	case BusTypeUfs:
+		return "BusTypeUfs"
+	case BusTypeNvmeof:
+		return "BusTypeNvmeof"
+	case BusTypeMax:
+		return "BusTypeMax"
+	case BusTypeMaxReserved:
+		return "BusTypeMaxReserved"
+	default:
+		return fmt.Sprintf("STORAGE_BUS_TYPE(%d)", int32(e))
+	}
+}
+
 // STREAM_INFO_LEVELS: https://learn.microsoft.com/windows/win32/api/fileapi/ne-fileapi-stream_info_levels
 type STREAM_INFO_LEVELS int32
 
@@ -1174,12 +3523,42 @@ const (
 	FindStreamInfoMaxInfoLevel STREAM_INFO_LEVELS = 1
 )
 
+// String returns the STREAM_INFO_LEVELS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STREAM_INFO_LEVELS) String() string {
+	switch e {
+	case FindStreamInfoStandard:
+		return "FindStreamInfoStandard"
+	case FindStreamInfoMaxInfoLevel:
+		return "FindStreamInfoMaxInfoLevel"
+	default:
+		return fmt.Sprintf("STREAM_INFO_LEVELS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SYMBOLIC_LINK_FLAGS uint32
 
 const (
 	SYMBOLIC_LINK_FLAG_DIRECTORY                 SYMBOLIC_LINK_FLAGS = 1
 	SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE SYMBOLIC_LINK_FLAGS = 2
 )
+
+// String returns the SYMBOLIC_LINK_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYMBOLIC_LINK_FLAGS) String() string {
+	var parts []string
+	if e&SYMBOLIC_LINK_FLAG_DIRECTORY != 0 {
+		parts = append(parts, "SYMBOLIC_LINK_FLAG_DIRECTORY")
+	}
+	if e&SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE != 0 {
+		parts = append(parts, "SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type TAPEMARK_TYPE uint32
 
@@ -1190,12 +3569,42 @@ const (
 	TAPE_SHORT_FILEMARKS TAPEMARK_TYPE = 2
 )
 
+// String returns the TAPEMARK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAPEMARK_TYPE) String() string {
+	switch e {
+	case TAPE_FILEMARKS:
+		return "TAPE_FILEMARKS"
+	case TAPE_LONG_FILEMARKS:
+		return "TAPE_LONG_FILEMARKS"
+	case TAPE_SETMARKS:
+		return "TAPE_SETMARKS"
+	case TAPE_SHORT_FILEMARKS:
+		return "TAPE_SHORT_FILEMARKS"
+	default:
+		return fmt.Sprintf("TAPEMARK_TYPE(%d)", uint32(e))
+	}
+}
+
 type TAPE_INFORMATION_TYPE uint32
 
 const (
 	SET_TAPE_DRIVE_INFORMATION TAPE_INFORMATION_TYPE = 1
 	SET_TAPE_MEDIA_INFORMATION TAPE_INFORMATION_TYPE = 0
 )
+
+// String returns the TAPE_INFORMATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAPE_INFORMATION_TYPE) String() string {
+	switch e {
+	case SET_TAPE_DRIVE_INFORMATION:
+		return "SET_TAPE_DRIVE_INFORMATION"
+	case SET_TAPE_MEDIA_INFORMATION:
+		return "SET_TAPE_MEDIA_INFORMATION"
+	default:
+		return fmt.Sprintf("TAPE_INFORMATION_TYPE(%d)", uint32(e))
+	}
+}
 
 type TAPE_POSITION_METHOD uint32
 
@@ -1211,12 +3620,52 @@ const (
 	TAPE_SPACE_SETMARKS        TAPE_POSITION_METHOD = 8
 )
 
+// String returns the TAPE_POSITION_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAPE_POSITION_METHOD) String() string {
+	switch e {
+	case TAPE_ABSOLUTE_BLOCK:
+		return "TAPE_ABSOLUTE_BLOCK"
+	case TAPE_LOGICAL_BLOCK:
+		return "TAPE_LOGICAL_BLOCK"
+	case TAPE_REWIND:
+		return "TAPE_REWIND"
+	case TAPE_SPACE_END_OF_DATA:
+		return "TAPE_SPACE_END_OF_DATA"
+	case TAPE_SPACE_FILEMARKS:
+		return "TAPE_SPACE_FILEMARKS"
+	case TAPE_SPACE_RELATIVE_BLOCKS:
+		return "TAPE_SPACE_RELATIVE_BLOCKS"
+	case TAPE_SPACE_SEQUENTIAL_FMKS:
+		return "TAPE_SPACE_SEQUENTIAL_FMKS"
+	case TAPE_SPACE_SEQUENTIAL_SMKS:
+		return "TAPE_SPACE_SEQUENTIAL_SMKS"
+	case TAPE_SPACE_SETMARKS:
+		return "TAPE_SPACE_SETMARKS"
+	default:
+		return fmt.Sprintf("TAPE_POSITION_METHOD(%d)", uint32(e))
+	}
+}
+
 type TAPE_POSITION_TYPE uint32
 
 const (
 	TAPE_ABSOLUTE_POSITION TAPE_POSITION_TYPE = 0
 	TAPE_LOGICAL_POSITION  TAPE_POSITION_TYPE = 1
 )
+
+// String returns the TAPE_POSITION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAPE_POSITION_TYPE) String() string {
+	switch e {
+	case TAPE_ABSOLUTE_POSITION:
+		return "TAPE_ABSOLUTE_POSITION"
+	case TAPE_LOGICAL_POSITION:
+		return "TAPE_LOGICAL_POSITION"
+	default:
+		return fmt.Sprintf("TAPE_POSITION_TYPE(%d)", uint32(e))
+	}
+}
 
 // TRANSACTION_OUTCOME: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-transaction_outcome
 type TRANSACTION_OUTCOME int32
@@ -1227,6 +3676,21 @@ const (
 	TransactionOutcomeAborted      TRANSACTION_OUTCOME = 3
 )
 
+// String returns the TRANSACTION_OUTCOME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSACTION_OUTCOME) String() string {
+	switch e {
+	case TransactionOutcomeUndetermined:
+		return "TransactionOutcomeUndetermined"
+	case TransactionOutcomeCommitted:
+		return "TransactionOutcomeCommitted"
+	case TransactionOutcomeAborted:
+		return "TransactionOutcomeAborted"
+	default:
+		return fmt.Sprintf("TRANSACTION_OUTCOME(%d)", int32(e))
+	}
+}
+
 type TXFS_MINIVERSION uint32
 
 const (
@@ -1234,6 +3698,21 @@ const (
 	TXFS_MINIVERSION_DIRTY_VIEW     TXFS_MINIVERSION = 65535
 	TXFS_MINIVERSION_DEFAULT_VIEW   TXFS_MINIVERSION = 65534
 )
+
+// String returns the TXFS_MINIVERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TXFS_MINIVERSION) String() string {
+	switch e {
+	case TXFS_MINIVERSION_COMMITTED_VIEW:
+		return "TXFS_MINIVERSION_COMMITTED_VIEW"
+	case TXFS_MINIVERSION_DIRTY_VIEW:
+		return "TXFS_MINIVERSION_DIRTY_VIEW"
+	case TXFS_MINIVERSION_DEFAULT_VIEW:
+		return "TXFS_MINIVERSION_DEFAULT_VIEW"
+	default:
+		return fmt.Sprintf("TXFS_MINIVERSION(%d)", uint32(e))
+	}
+}
 
 type TXF_LOG_RECORD_TYPE uint16
 
@@ -1243,12 +3722,39 @@ const (
 	TXF_LOG_RECORD_TYPE_WRITE         TXF_LOG_RECORD_TYPE = 1
 )
 
+// String returns the TXF_LOG_RECORD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TXF_LOG_RECORD_TYPE) String() string {
+	switch e {
+	case TXF_LOG_RECORD_TYPE_AFFECTED_FILE:
+		return "TXF_LOG_RECORD_TYPE_AFFECTED_FILE"
+	case TXF_LOG_RECORD_TYPE_TRUNCATE:
+		return "TXF_LOG_RECORD_TYPE_TRUNCATE"
+	case TXF_LOG_RECORD_TYPE_WRITE:
+		return "TXF_LOG_RECORD_TYPE_WRITE"
+	default:
+		return fmt.Sprintf("TXF_LOG_RECORD_TYPE(%d)", uint16(e))
+	}
+}
+
 type VER_FIND_FILE_FLAGS uint32
 
 const (
 	VFFF_ISSHAREDFILE VER_FIND_FILE_FLAGS = 1
 )
 
+// String returns the VER_FIND_FILE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VER_FIND_FILE_FLAGS) String() string {
+	switch e {
+	case VFFF_ISSHAREDFILE:
+		return "VFFF_ISSHAREDFILE"
+	default:
+		return fmt.Sprintf("VER_FIND_FILE_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type VER_FIND_FILE_STATUS uint32
 
 const (
@@ -1257,6 +3763,25 @@ const (
 	VFF_BUFFTOOSMALL VER_FIND_FILE_STATUS = 4
 )
 
+// String returns the VER_FIND_FILE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VER_FIND_FILE_STATUS) String() string {
+	var parts []string
+	if e&VFF_CURNEDEST != 0 {
+		parts = append(parts, "VFF_CURNEDEST")
+	}
+	if e&VFF_FILEINUSE != 0 {
+		parts = append(parts, "VFF_FILEINUSE")
+	}
+	if e&VFF_BUFFTOOSMALL != 0 {
+		parts = append(parts, "VFF_BUFFTOOSMALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type VER_INSTALL_FILE_FLAGS uint32
 
 const (
@@ -1264,6 +3789,20 @@ const (
 	VIFF_DONTDELETEOLD VER_INSTALL_FILE_FLAGS = 2
 )
 
+// String returns the VER_INSTALL_FILE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VER_INSTALL_FILE_FLAGS) String() string {
+	switch e {
+	case VIFF_FORCEINSTALL:
+		return "VIFF_FORCEINSTALL"
+	case VIFF_DONTDELETEOLD:
+		return "VIFF_DONTDELETEOLD"
+	default:
+		return fmt.Sprintf("VER_INSTALL_FILE_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type VER_INSTALL_FILE_STATUS uint32
 
 const (
@@ -1290,6 +3829,80 @@ const (
 	VIF_CANNOTLOADCABINET VER_INSTALL_FILE_STATUS = 1048576
 )
 
+// String returns the VER_INSTALL_FILE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VER_INSTALL_FILE_STATUS) String() string {
+	var parts []string
+	if e&VIF_TEMPFILE != 0 {
+		parts = append(parts, "VIF_TEMPFILE")
+	}
+	if e&VIF_MISMATCH != 0 {
+		parts = append(parts, "VIF_MISMATCH")
+	}
+	if e&VIF_SRCOLD != 0 {
+		parts = append(parts, "VIF_SRCOLD")
+	}
+	if e&VIF_DIFFLANG != 0 {
+		parts = append(parts, "VIF_DIFFLANG")
+	}
+	if e&VIF_DIFFCODEPG != 0 {
+		parts = append(parts, "VIF_DIFFCODEPG")
+	}
+	if e&VIF_DIFFTYPE != 0 {
+		parts = append(parts, "VIF_DIFFTYPE")
+	}
+	if e&VIF_WRITEPROT != 0 {
+		parts = append(parts, "VIF_WRITEPROT")
+	}
+	if e&VIF_FILEINUSE != 0 {
+		parts = append(parts, "VIF_FILEINUSE")
+	}
+	if e&VIF_OUTOFSPACE != 0 {
+		parts = append(parts, "VIF_OUTOFSPACE")
+	}
+	if e&VIF_ACCESSVIOLATION != 0 {
+		parts = append(parts, "VIF_ACCESSVIOLATION")
+	}
+	if e&VIF_SHARINGVIOLATION != 0 {
+		parts = append(parts, "VIF_SHARINGVIOLATION")
+	}
+	if e&VIF_CANNOTCREATE != 0 {
+		parts = append(parts, "VIF_CANNOTCREATE")
+	}
+	if e&VIF_CANNOTDELETE != 0 {
+		parts = append(parts, "VIF_CANNOTDELETE")
+	}
+	if e&VIF_CANNOTRENAME != 0 {
+		parts = append(parts, "VIF_CANNOTRENAME")
+	}
+	if e&VIF_CANNOTDELETECUR != 0 {
+		parts = append(parts, "VIF_CANNOTDELETECUR")
+	}
+	if e&VIF_OUTOFMEMORY != 0 {
+		parts = append(parts, "VIF_OUTOFMEMORY")
+	}
+	if e&VIF_CANNOTREADSRC != 0 {
+		parts = append(parts, "VIF_CANNOTREADSRC")
+	}
+	if e&VIF_CANNOTREADDST != 0 {
+		parts = append(parts, "VIF_CANNOTREADDST")
+	}
+	if e&VIF_BUFFTOOSMALL != 0 {
+		parts = append(parts, "VIF_BUFFTOOSMALL")
+	}
+	if e&VIF_CANNOTLOADLZ32 != 0 {
+		parts = append(parts, "VIF_CANNOTLOADLZ32")
+	}
+	if e&VIF_CANNOTLOADCABINET != 0 {
+		parts = append(parts, "VIF_CANNOTLOADCABINET")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type VS_FIXEDFILEINFO_FILE_FLAGS uint32
 
 const (
@@ -1300,6 +3913,34 @@ const (
 	VS_FF_INFOINFERRED VS_FIXEDFILEINFO_FILE_FLAGS = 16
 	VS_FF_SPECIALBUILD VS_FIXEDFILEINFO_FILE_FLAGS = 32
 )
+
+// String returns the VS_FIXEDFILEINFO_FILE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VS_FIXEDFILEINFO_FILE_FLAGS) String() string {
+	var parts []string
+	if e&VS_FF_DEBUG != 0 {
+		parts = append(parts, "VS_FF_DEBUG")
+	}
+	if e&VS_FF_PRERELEASE != 0 {
+		parts = append(parts, "VS_FF_PRERELEASE")
+	}
+	if e&VS_FF_PATCHED != 0 {
+		parts = append(parts, "VS_FF_PATCHED")
+	}
+	if e&VS_FF_PRIVATEBUILD != 0 {
+		parts = append(parts, "VS_FF_PRIVATEBUILD")
+	}
+	if e&VS_FF_INFOINFERRED != 0 {
+		parts = append(parts, "VS_FF_INFOINFERRED")
+	}
+	if e&VS_FF_SPECIALBUILD != 0 {
+		parts = append(parts, "VS_FF_SPECIALBUILD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type VS_FIXEDFILEINFO_FILE_OS uint32
 
@@ -1322,6 +3963,45 @@ const (
 	VOS_NT_WINDOWS32  VS_FIXEDFILEINFO_FILE_OS = 262148
 )
 
+// String returns the VS_FIXEDFILEINFO_FILE_OS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VS_FIXEDFILEINFO_FILE_OS) String() string {
+	switch e {
+	case VOS_UNKNOWN:
+		return "VOS_UNKNOWN"
+	case VOS_DOS:
+		return "VOS_DOS"
+	case VOS_OS216:
+		return "VOS_OS216"
+	case VOS_OS232:
+		return "VOS_OS232"
+	case VOS_NT:
+		return "VOS_NT"
+	case VOS_WINCE:
+		return "VOS_WINCE"
+	case VOS__WINDOWS16:
+		return "VOS__WINDOWS16"
+	case VOS__PM16:
+		return "VOS__PM16"
+	case VOS__PM32:
+		return "VOS__PM32"
+	case VOS__WINDOWS32:
+		return "VOS__WINDOWS32"
+	case VOS_DOS_WINDOWS16:
+		return "VOS_DOS_WINDOWS16"
+	case VOS_DOS_WINDOWS32:
+		return "VOS_DOS_WINDOWS32"
+	case VOS_OS216_PM16:
+		return "VOS_OS216_PM16"
+	case VOS_OS232_PM32:
+		return "VOS_OS232_PM32"
+	case VOS_NT_WINDOWS32:
+		return "VOS_NT_WINDOWS32"
+	default:
+		return fmt.Sprintf("VS_FIXEDFILEINFO_FILE_OS(%d)", uint32(e))
+	}
+}
+
 type VS_FIXEDFILEINFO_FILE_SUBTYPE int32
 
 const (
@@ -1343,6 +4023,41 @@ const (
 	VFT2_FONT_TRUETYPE         VS_FIXEDFILEINFO_FILE_SUBTYPE = 3
 )
 
+// String returns the VS_FIXEDFILEINFO_FILE_SUBTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VS_FIXEDFILEINFO_FILE_SUBTYPE) String() string {
+	switch e {
+	case VFT2_UNKNOWN:
+		return "VFT2_UNKNOWN"
+	case VFT2_DRV_PRINTER:
+		return "VFT2_DRV_PRINTER"
+	case VFT2_DRV_KEYBOARD:
+		return "VFT2_DRV_KEYBOARD"
+	case VFT2_DRV_LANGUAGE:
+		return "VFT2_DRV_LANGUAGE"
+	case VFT2_DRV_DISPLAY:
+		return "VFT2_DRV_DISPLAY"
+	case VFT2_DRV_MOUSE:
+		return "VFT2_DRV_MOUSE"
+	case VFT2_DRV_NETWORK:
+		return "VFT2_DRV_NETWORK"
+	case VFT2_DRV_SYSTEM:
+		return "VFT2_DRV_SYSTEM"
+	case VFT2_DRV_INSTALLABLE:
+		return "VFT2_DRV_INSTALLABLE"
+	case VFT2_DRV_SOUND:
+		return "VFT2_DRV_SOUND"
+	case VFT2_DRV_COMM:
+		return "VFT2_DRV_COMM"
+	case VFT2_DRV_INPUTMETHOD:
+		return "VFT2_DRV_INPUTMETHOD"
+	case VFT2_DRV_VERSIONED_PRINTER:
+		return "VFT2_DRV_VERSIONED_PRINTER"
+	default:
+		return fmt.Sprintf("VS_FIXEDFILEINFO_FILE_SUBTYPE(%d)", int32(e))
+	}
+}
+
 type VS_FIXEDFILEINFO_FILE_TYPE int32
 
 const (
@@ -1354,6 +4069,29 @@ const (
 	VFT_VXD        VS_FIXEDFILEINFO_FILE_TYPE = 5
 	VFT_STATIC_LIB VS_FIXEDFILEINFO_FILE_TYPE = 7
 )
+
+// String returns the VS_FIXEDFILEINFO_FILE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VS_FIXEDFILEINFO_FILE_TYPE) String() string {
+	switch e {
+	case VFT_UNKNOWN:
+		return "VFT_UNKNOWN"
+	case VFT_APP:
+		return "VFT_APP"
+	case VFT_DLL:
+		return "VFT_DLL"
+	case VFT_DRV:
+		return "VFT_DRV"
+	case VFT_FONT:
+		return "VFT_FONT"
+	case VFT_VXD:
+		return "VFT_VXD"
+	case VFT_STATIC_LIB:
+		return "VFT_STATIC_LIB"
+	default:
+		return fmt.Sprintf("VS_FIXEDFILEINFO_FILE_TYPE(%d)", int32(e))
+	}
+}
 
 type WIN_STREAM_ID uint32
 
@@ -1369,3 +4107,32 @@ const (
 	BACKUP_SPARSE_BLOCK   WIN_STREAM_ID = 9
 	BACKUP_TXFS_DATA      WIN_STREAM_ID = 10
 )
+
+// String returns the WIN_STREAM_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WIN_STREAM_ID) String() string {
+	switch e {
+	case BACKUP_ALTERNATE_DATA:
+		return "BACKUP_ALTERNATE_DATA"
+	case BACKUP_DATA:
+		return "BACKUP_DATA"
+	case BACKUP_EA_DATA:
+		return "BACKUP_EA_DATA"
+	case BACKUP_LINK:
+		return "BACKUP_LINK"
+	case BACKUP_OBJECT_ID:
+		return "BACKUP_OBJECT_ID"
+	case BACKUP_PROPERTY_DATA:
+		return "BACKUP_PROPERTY_DATA"
+	case BACKUP_REPARSE_DATA:
+		return "BACKUP_REPARSE_DATA"
+	case BACKUP_SECURITY_DATA:
+		return "BACKUP_SECURITY_DATA"
+	case BACKUP_SPARSE_BLOCK:
+		return "BACKUP_SPARSE_BLOCK"
+	case BACKUP_TXFS_DATA:
+		return "BACKUP_TXFS_DATA"
+	default:
+		return fmt.Sprintf("WIN_STREAM_ID(%d)", uint32(e))
+	}
+}

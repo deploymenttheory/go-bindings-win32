@@ -4,6 +4,10 @@
 
 package clrprofiling
 
+import (
+	"fmt"
+)
+
 type COR_PRF_CLAUSE_TYPE int32
 
 const (
@@ -13,12 +17,42 @@ const (
 	COR_PRF_CLAUSE_FINALLY COR_PRF_CLAUSE_TYPE = 3
 )
 
+// String returns the COR_PRF_CLAUSE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_CLAUSE_TYPE) String() string {
+	switch e {
+	case COR_PRF_CLAUSE_NONE:
+		return "COR_PRF_CLAUSE_NONE"
+	case COR_PRF_CLAUSE_FILTER:
+		return "COR_PRF_CLAUSE_FILTER"
+	case COR_PRF_CLAUSE_CATCH:
+		return "COR_PRF_CLAUSE_CATCH"
+	case COR_PRF_CLAUSE_FINALLY:
+		return "COR_PRF_CLAUSE_FINALLY"
+	default:
+		return fmt.Sprintf("COR_PRF_CLAUSE_TYPE(%d)", int32(e))
+	}
+}
+
 type COR_PRF_CODEGEN_FLAGS int32
 
 const (
 	COR_PRF_CODEGEN_DISABLE_INLINING          COR_PRF_CODEGEN_FLAGS = 1
 	COR_PRF_CODEGEN_DISABLE_ALL_OPTIMIZATIONS COR_PRF_CODEGEN_FLAGS = 2
 )
+
+// String returns the COR_PRF_CODEGEN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_CODEGEN_FLAGS) String() string {
+	switch e {
+	case COR_PRF_CODEGEN_DISABLE_INLINING:
+		return "COR_PRF_CODEGEN_DISABLE_INLINING"
+	case COR_PRF_CODEGEN_DISABLE_ALL_OPTIMIZATIONS:
+		return "COR_PRF_CODEGEN_DISABLE_ALL_OPTIMIZATIONS"
+	default:
+		return fmt.Sprintf("COR_PRF_CODEGEN_FLAGS(%d)", int32(e))
+	}
+}
 
 type COR_PRF_EVENTPIPE_LEVEL int32
 
@@ -30,6 +64,27 @@ const (
 	COR_PRF_EVENTPIPE_INFORMATIONAL COR_PRF_EVENTPIPE_LEVEL = 4
 	COR_PRF_EVENTPIPE_VERBOSE       COR_PRF_EVENTPIPE_LEVEL = 5
 )
+
+// String returns the COR_PRF_EVENTPIPE_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_EVENTPIPE_LEVEL) String() string {
+	switch e {
+	case COR_PRF_EVENTPIPE_LOGALWAYS:
+		return "COR_PRF_EVENTPIPE_LOGALWAYS"
+	case COR_PRF_EVENTPIPE_CRITICAL:
+		return "COR_PRF_EVENTPIPE_CRITICAL"
+	case COR_PRF_EVENTPIPE_ERROR:
+		return "COR_PRF_EVENTPIPE_ERROR"
+	case COR_PRF_EVENTPIPE_WARNING:
+		return "COR_PRF_EVENTPIPE_WARNING"
+	case COR_PRF_EVENTPIPE_INFORMATIONAL:
+		return "COR_PRF_EVENTPIPE_INFORMATIONAL"
+	case COR_PRF_EVENTPIPE_VERBOSE:
+		return "COR_PRF_EVENTPIPE_VERBOSE"
+	default:
+		return fmt.Sprintf("COR_PRF_EVENTPIPE_LEVEL(%d)", int32(e))
+	}
+}
 
 type COR_PRF_EVENTPIPE_PARAM_TYPE int32
 
@@ -54,11 +109,67 @@ const (
 	COR_PRF_EVENTPIPE_ARRAY    COR_PRF_EVENTPIPE_PARAM_TYPE = 19
 )
 
+// String returns the COR_PRF_EVENTPIPE_PARAM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_EVENTPIPE_PARAM_TYPE) String() string {
+	switch e {
+	case COR_PRF_EVENTPIPE_OBJECT:
+		return "COR_PRF_EVENTPIPE_OBJECT"
+	case COR_PRF_EVENTPIPE_BOOLEAN:
+		return "COR_PRF_EVENTPIPE_BOOLEAN"
+	case COR_PRF_EVENTPIPE_CHAR:
+		return "COR_PRF_EVENTPIPE_CHAR"
+	case COR_PRF_EVENTPIPE_SBYTE:
+		return "COR_PRF_EVENTPIPE_SBYTE"
+	case COR_PRF_EVENTPIPE_BYTE:
+		return "COR_PRF_EVENTPIPE_BYTE"
+	case COR_PRF_EVENTPIPE_INT16:
+		return "COR_PRF_EVENTPIPE_INT16"
+	case COR_PRF_EVENTPIPE_UINT16:
+		return "COR_PRF_EVENTPIPE_UINT16"
+	case COR_PRF_EVENTPIPE_INT32:
+		return "COR_PRF_EVENTPIPE_INT32"
+	case COR_PRF_EVENTPIPE_UINT32:
+		return "COR_PRF_EVENTPIPE_UINT32"
+	case COR_PRF_EVENTPIPE_INT64:
+		return "COR_PRF_EVENTPIPE_INT64"
+	case COR_PRF_EVENTPIPE_UINT64:
+		return "COR_PRF_EVENTPIPE_UINT64"
+	case COR_PRF_EVENTPIPE_SINGLE:
+		return "COR_PRF_EVENTPIPE_SINGLE"
+	case COR_PRF_EVENTPIPE_DOUBLE:
+		return "COR_PRF_EVENTPIPE_DOUBLE"
+	case COR_PRF_EVENTPIPE_DECIMAL:
+		return "COR_PRF_EVENTPIPE_DECIMAL"
+	case COR_PRF_EVENTPIPE_DATETIME:
+		return "COR_PRF_EVENTPIPE_DATETIME"
+	case COR_PRF_EVENTPIPE_GUID:
+		return "COR_PRF_EVENTPIPE_GUID"
+	case COR_PRF_EVENTPIPE_STRING:
+		return "COR_PRF_EVENTPIPE_STRING"
+	case COR_PRF_EVENTPIPE_ARRAY:
+		return "COR_PRF_EVENTPIPE_ARRAY"
+	default:
+		return fmt.Sprintf("COR_PRF_EVENTPIPE_PARAM_TYPE(%d)", int32(e))
+	}
+}
+
 type COR_PRF_FINALIZER_FLAGS int32
 
 const (
 	COR_PRF_FINALIZER_CRITICAL COR_PRF_FINALIZER_FLAGS = 1
 )
+
+// String returns the COR_PRF_FINALIZER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_FINALIZER_FLAGS) String() string {
+	switch e {
+	case COR_PRF_FINALIZER_CRITICAL:
+		return "COR_PRF_FINALIZER_CRITICAL"
+	default:
+		return fmt.Sprintf("COR_PRF_FINALIZER_FLAGS(%d)", int32(e))
+	}
+}
 
 type COR_PRF_GC_GENERATION int32
 
@@ -70,12 +181,44 @@ const (
 	COR_PRF_GC_PINNED_OBJECT_HEAP COR_PRF_GC_GENERATION = 4
 )
 
+// String returns the COR_PRF_GC_GENERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_GC_GENERATION) String() string {
+	switch e {
+	case COR_PRF_GC_GEN_0:
+		return "COR_PRF_GC_GEN_0"
+	case COR_PRF_GC_GEN_1:
+		return "COR_PRF_GC_GEN_1"
+	case COR_PRF_GC_GEN_2:
+		return "COR_PRF_GC_GEN_2"
+	case COR_PRF_GC_LARGE_OBJECT_HEAP:
+		return "COR_PRF_GC_LARGE_OBJECT_HEAP"
+	case COR_PRF_GC_PINNED_OBJECT_HEAP:
+		return "COR_PRF_GC_PINNED_OBJECT_HEAP"
+	default:
+		return fmt.Sprintf("COR_PRF_GC_GENERATION(%d)", int32(e))
+	}
+}
+
 type COR_PRF_GC_REASON int32
 
 const (
 	COR_PRF_GC_INDUCED COR_PRF_GC_REASON = 1
 	COR_PRF_GC_OTHER   COR_PRF_GC_REASON = 0
 )
+
+// String returns the COR_PRF_GC_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_GC_REASON) String() string {
+	switch e {
+	case COR_PRF_GC_INDUCED:
+		return "COR_PRF_GC_INDUCED"
+	case COR_PRF_GC_OTHER:
+		return "COR_PRF_GC_OTHER"
+	default:
+		return fmt.Sprintf("COR_PRF_GC_REASON(%d)", int32(e))
+	}
+}
 
 type COR_PRF_GC_ROOT_FLAGS int32
 
@@ -86,6 +229,23 @@ const (
 	COR_PRF_GC_ROOT_REFCOUNTED COR_PRF_GC_ROOT_FLAGS = 8
 )
 
+// String returns the COR_PRF_GC_ROOT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_GC_ROOT_FLAGS) String() string {
+	switch e {
+	case COR_PRF_GC_ROOT_PINNING:
+		return "COR_PRF_GC_ROOT_PINNING"
+	case COR_PRF_GC_ROOT_WEAKREF:
+		return "COR_PRF_GC_ROOT_WEAKREF"
+	case COR_PRF_GC_ROOT_INTERIOR:
+		return "COR_PRF_GC_ROOT_INTERIOR"
+	case COR_PRF_GC_ROOT_REFCOUNTED:
+		return "COR_PRF_GC_ROOT_REFCOUNTED"
+	default:
+		return fmt.Sprintf("COR_PRF_GC_ROOT_FLAGS(%d)", int32(e))
+	}
+}
+
 type COR_PRF_GC_ROOT_KIND int32
 
 const (
@@ -95,6 +255,23 @@ const (
 	COR_PRF_GC_ROOT_OTHER     COR_PRF_GC_ROOT_KIND = 0
 )
 
+// String returns the COR_PRF_GC_ROOT_KIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_GC_ROOT_KIND) String() string {
+	switch e {
+	case COR_PRF_GC_ROOT_STACK:
+		return "COR_PRF_GC_ROOT_STACK"
+	case COR_PRF_GC_ROOT_FINALIZER:
+		return "COR_PRF_GC_ROOT_FINALIZER"
+	case COR_PRF_GC_ROOT_HANDLE:
+		return "COR_PRF_GC_ROOT_HANDLE"
+	case COR_PRF_GC_ROOT_OTHER:
+		return "COR_PRF_GC_ROOT_OTHER"
+	default:
+		return fmt.Sprintf("COR_PRF_GC_ROOT_KIND(%d)", int32(e))
+	}
+}
+
 type COR_PRF_HANDLE_TYPE int32
 
 const (
@@ -102,6 +279,21 @@ const (
 	COR_PRF_HANDLE_TYPE_STRONG COR_PRF_HANDLE_TYPE = 2
 	COR_PRF_HANDLE_TYPE_PINNED COR_PRF_HANDLE_TYPE = 3
 )
+
+// String returns the COR_PRF_HANDLE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_HANDLE_TYPE) String() string {
+	switch e {
+	case COR_PRF_HANDLE_TYPE_WEAK:
+		return "COR_PRF_HANDLE_TYPE_WEAK"
+	case COR_PRF_HANDLE_TYPE_STRONG:
+		return "COR_PRF_HANDLE_TYPE_STRONG"
+	case COR_PRF_HANDLE_TYPE_PINNED:
+		return "COR_PRF_HANDLE_TYPE_PINNED"
+	default:
+		return fmt.Sprintf("COR_PRF_HANDLE_TYPE(%d)", int32(e))
+	}
+}
 
 type COR_PRF_HIGH_MONITOR int32
 
@@ -122,12 +314,58 @@ const (
 	COR_PRF_HIGH_MONITOR_IMMUTABLE                COR_PRF_HIGH_MONITOR = 8
 )
 
+// String returns the COR_PRF_HIGH_MONITOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_HIGH_MONITOR) String() string {
+	switch e {
+	case COR_PRF_HIGH_MONITOR_NONE:
+		return "COR_PRF_HIGH_MONITOR_NONE"
+	case COR_PRF_HIGH_ADD_ASSEMBLY_REFERENCES:
+		return "COR_PRF_HIGH_ADD_ASSEMBLY_REFERENCES"
+	case COR_PRF_HIGH_IN_MEMORY_SYMBOLS_UPDATED:
+		return "COR_PRF_HIGH_IN_MEMORY_SYMBOLS_UPDATED"
+	case COR_PRF_HIGH_MONITOR_DYNAMIC_FUNCTION_UNLOADS:
+		return "COR_PRF_HIGH_MONITOR_DYNAMIC_FUNCTION_UNLOADS"
+	case COR_PRF_HIGH_DISABLE_TIERED_COMPILATION:
+		return "COR_PRF_HIGH_DISABLE_TIERED_COMPILATION"
+	case COR_PRF_HIGH_BASIC_GC:
+		return "COR_PRF_HIGH_BASIC_GC"
+	case COR_PRF_HIGH_MONITOR_GC_MOVED_OBJECTS:
+		return "COR_PRF_HIGH_MONITOR_GC_MOVED_OBJECTS"
+	case COR_PRF_HIGH_MONITOR_LARGEOBJECT_ALLOCATED:
+		return "COR_PRF_HIGH_MONITOR_LARGEOBJECT_ALLOCATED"
+	case COR_PRF_HIGH_MONITOR_EVENT_PIPE:
+		return "COR_PRF_HIGH_MONITOR_EVENT_PIPE"
+	case COR_PRF_HIGH_MONITOR_PINNEDOBJECT_ALLOCATED:
+		return "COR_PRF_HIGH_MONITOR_PINNEDOBJECT_ALLOCATED"
+	case COR_PRF_HIGH_ALLOWABLE_AFTER_ATTACH:
+		return "COR_PRF_HIGH_ALLOWABLE_AFTER_ATTACH"
+	case COR_PRF_HIGH_ALLOWABLE_NOTIFICATION_PROFILER:
+		return "COR_PRF_HIGH_ALLOWABLE_NOTIFICATION_PROFILER"
+	default:
+		return fmt.Sprintf("COR_PRF_HIGH_MONITOR(%d)", int32(e))
+	}
+}
+
 type COR_PRF_JIT_CACHE int32
 
 const (
 	COR_PRF_CACHED_FUNCTION_FOUND     COR_PRF_JIT_CACHE = 0
 	COR_PRF_CACHED_FUNCTION_NOT_FOUND COR_PRF_JIT_CACHE = 1
 )
+
+// String returns the COR_PRF_JIT_CACHE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_JIT_CACHE) String() string {
+	switch e {
+	case COR_PRF_CACHED_FUNCTION_FOUND:
+		return "COR_PRF_CACHED_FUNCTION_FOUND"
+	case COR_PRF_CACHED_FUNCTION_NOT_FOUND:
+		return "COR_PRF_CACHED_FUNCTION_NOT_FOUND"
+	default:
+		return fmt.Sprintf("COR_PRF_JIT_CACHE(%d)", int32(e))
+	}
+}
 
 type COR_PRF_MISC int32
 
@@ -136,6 +374,21 @@ const (
 	PROFILER_GLOBAL_CLASS   COR_PRF_MISC = -2
 	PROFILER_GLOBAL_MODULE  COR_PRF_MISC = -1
 )
+
+// String returns the COR_PRF_MISC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_MISC) String() string {
+	switch e {
+	case PROFILER_PARENT_UNKNOWN:
+		return "PROFILER_PARENT_UNKNOWN"
+	case PROFILER_GLOBAL_CLASS:
+		return "PROFILER_GLOBAL_CLASS"
+	case PROFILER_GLOBAL_MODULE:
+		return "PROFILER_GLOBAL_MODULE"
+	default:
+		return fmt.Sprintf("COR_PRF_MISC(%d)", int32(e))
+	}
+}
 
 type COR_PRF_MODULE_FLAGS int32
 
@@ -148,6 +401,29 @@ const (
 	COR_PRF_MODULE_FLAT_LAYOUT     COR_PRF_MODULE_FLAGS = 32
 	COR_PRF_MODULE_WINDOWS_RUNTIME COR_PRF_MODULE_FLAGS = 64
 )
+
+// String returns the COR_PRF_MODULE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_MODULE_FLAGS) String() string {
+	switch e {
+	case COR_PRF_MODULE_DISK:
+		return "COR_PRF_MODULE_DISK"
+	case COR_PRF_MODULE_NGEN:
+		return "COR_PRF_MODULE_NGEN"
+	case COR_PRF_MODULE_DYNAMIC:
+		return "COR_PRF_MODULE_DYNAMIC"
+	case COR_PRF_MODULE_COLLECTIBLE:
+		return "COR_PRF_MODULE_COLLECTIBLE"
+	case COR_PRF_MODULE_RESOURCE:
+		return "COR_PRF_MODULE_RESOURCE"
+	case COR_PRF_MODULE_FLAT_LAYOUT:
+		return "COR_PRF_MODULE_FLAT_LAYOUT"
+	case COR_PRF_MODULE_WINDOWS_RUNTIME:
+		return "COR_PRF_MODULE_WINDOWS_RUNTIME"
+	default:
+		return fmt.Sprintf("COR_PRF_MODULE_FLAGS(%d)", int32(e))
+	}
+}
 
 type COR_PRF_MONITOR int32
 
@@ -193,12 +469,112 @@ const (
 	COR_PRF_MONITOR_IMMUTABLE                            COR_PRF_MONITOR = -285684736
 )
 
+// String returns the COR_PRF_MONITOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_MONITOR) String() string {
+	switch e {
+	case COR_PRF_MONITOR_NONE:
+		return "COR_PRF_MONITOR_NONE"
+	case COR_PRF_MONITOR_FUNCTION_UNLOADS:
+		return "COR_PRF_MONITOR_FUNCTION_UNLOADS"
+	case COR_PRF_MONITOR_CLASS_LOADS:
+		return "COR_PRF_MONITOR_CLASS_LOADS"
+	case COR_PRF_MONITOR_MODULE_LOADS:
+		return "COR_PRF_MONITOR_MODULE_LOADS"
+	case COR_PRF_MONITOR_ASSEMBLY_LOADS:
+		return "COR_PRF_MONITOR_ASSEMBLY_LOADS"
+	case COR_PRF_MONITOR_APPDOMAIN_LOADS:
+		return "COR_PRF_MONITOR_APPDOMAIN_LOADS"
+	case COR_PRF_MONITOR_JIT_COMPILATION:
+		return "COR_PRF_MONITOR_JIT_COMPILATION"
+	case COR_PRF_MONITOR_EXCEPTIONS:
+		return "COR_PRF_MONITOR_EXCEPTIONS"
+	case COR_PRF_MONITOR_GC:
+		return "COR_PRF_MONITOR_GC"
+	case COR_PRF_MONITOR_OBJECT_ALLOCATED:
+		return "COR_PRF_MONITOR_OBJECT_ALLOCATED"
+	case COR_PRF_MONITOR_THREADS:
+		return "COR_PRF_MONITOR_THREADS"
+	case COR_PRF_MONITOR_REMOTING:
+		return "COR_PRF_MONITOR_REMOTING"
+	case COR_PRF_MONITOR_CODE_TRANSITIONS:
+		return "COR_PRF_MONITOR_CODE_TRANSITIONS"
+	case COR_PRF_MONITOR_ENTERLEAVE:
+		return "COR_PRF_MONITOR_ENTERLEAVE"
+	case COR_PRF_MONITOR_CCW:
+		return "COR_PRF_MONITOR_CCW"
+	case COR_PRF_MONITOR_REMOTING_COOKIE:
+		return "COR_PRF_MONITOR_REMOTING_COOKIE"
+	case COR_PRF_MONITOR_REMOTING_ASYNC:
+		return "COR_PRF_MONITOR_REMOTING_ASYNC"
+	case COR_PRF_MONITOR_SUSPENDS:
+		return "COR_PRF_MONITOR_SUSPENDS"
+	case COR_PRF_MONITOR_CACHE_SEARCHES:
+		return "COR_PRF_MONITOR_CACHE_SEARCHES"
+	case COR_PRF_ENABLE_REJIT:
+		return "COR_PRF_ENABLE_REJIT"
+	case COR_PRF_ENABLE_INPROC_DEBUGGING:
+		return "COR_PRF_ENABLE_INPROC_DEBUGGING"
+	case COR_PRF_ENABLE_JIT_MAPS:
+		return "COR_PRF_ENABLE_JIT_MAPS"
+	case COR_PRF_DISABLE_INLINING:
+		return "COR_PRF_DISABLE_INLINING"
+	case COR_PRF_DISABLE_OPTIMIZATIONS:
+		return "COR_PRF_DISABLE_OPTIMIZATIONS"
+	case COR_PRF_ENABLE_OBJECT_ALLOCATED:
+		return "COR_PRF_ENABLE_OBJECT_ALLOCATED"
+	case COR_PRF_MONITOR_CLR_EXCEPTIONS:
+		return "COR_PRF_MONITOR_CLR_EXCEPTIONS"
+	case COR_PRF_MONITOR_ALL:
+		return "COR_PRF_MONITOR_ALL"
+	case COR_PRF_ENABLE_FUNCTION_ARGS:
+		return "COR_PRF_ENABLE_FUNCTION_ARGS"
+	case COR_PRF_ENABLE_FUNCTION_RETVAL:
+		return "COR_PRF_ENABLE_FUNCTION_RETVAL"
+	case COR_PRF_ENABLE_FRAME_INFO:
+		return "COR_PRF_ENABLE_FRAME_INFO"
+	case COR_PRF_ENABLE_STACK_SNAPSHOT:
+		return "COR_PRF_ENABLE_STACK_SNAPSHOT"
+	case COR_PRF_USE_PROFILE_IMAGES:
+		return "COR_PRF_USE_PROFILE_IMAGES"
+	case COR_PRF_DISABLE_TRANSPARENCY_CHECKS_UNDER_FULL_TRUST:
+		return "COR_PRF_DISABLE_TRANSPARENCY_CHECKS_UNDER_FULL_TRUST"
+	case COR_PRF_DISABLE_ALL_NGEN_IMAGES:
+		return "COR_PRF_DISABLE_ALL_NGEN_IMAGES"
+	case COR_PRF_ALL:
+		return "COR_PRF_ALL"
+	case COR_PRF_REQUIRE_PROFILE_IMAGE:
+		return "COR_PRF_REQUIRE_PROFILE_IMAGE"
+	case COR_PRF_ALLOWABLE_AFTER_ATTACH:
+		return "COR_PRF_ALLOWABLE_AFTER_ATTACH"
+	case COR_PRF_ALLOWABLE_NOTIFICATION_PROFILER:
+		return "COR_PRF_ALLOWABLE_NOTIFICATION_PROFILER"
+	case COR_PRF_MONITOR_IMMUTABLE:
+		return "COR_PRF_MONITOR_IMMUTABLE"
+	default:
+		return fmt.Sprintf("COR_PRF_MONITOR(%d)", int32(e))
+	}
+}
+
 type COR_PRF_REJIT_FLAGS int32
 
 const (
 	COR_PRF_REJIT_BLOCK_INLINING     COR_PRF_REJIT_FLAGS = 1
 	COR_PRF_REJIT_INLINING_CALLBACKS COR_PRF_REJIT_FLAGS = 2
 )
+
+// String returns the COR_PRF_REJIT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_REJIT_FLAGS) String() string {
+	switch e {
+	case COR_PRF_REJIT_BLOCK_INLINING:
+		return "COR_PRF_REJIT_BLOCK_INLINING"
+	case COR_PRF_REJIT_INLINING_CALLBACKS:
+		return "COR_PRF_REJIT_INLINING_CALLBACKS"
+	default:
+		return fmt.Sprintf("COR_PRF_REJIT_FLAGS(%d)", int32(e))
+	}
+}
 
 type COR_PRF_RUNTIME_TYPE int32
 
@@ -207,6 +583,19 @@ const (
 	COR_PRF_CORE_CLR    COR_PRF_RUNTIME_TYPE = 2
 )
 
+// String returns the COR_PRF_RUNTIME_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_RUNTIME_TYPE) String() string {
+	switch e {
+	case COR_PRF_DESKTOP_CLR:
+		return "COR_PRF_DESKTOP_CLR"
+	case COR_PRF_CORE_CLR:
+		return "COR_PRF_CORE_CLR"
+	default:
+		return fmt.Sprintf("COR_PRF_RUNTIME_TYPE(%d)", int32(e))
+	}
+}
+
 type COR_PRF_SNAPSHOT_INFO int32
 
 const (
@@ -214,6 +603,21 @@ const (
 	COR_PRF_SNAPSHOT_REGISTER_CONTEXT COR_PRF_SNAPSHOT_INFO = 1
 	COR_PRF_SNAPSHOT_X86_OPTIMIZED    COR_PRF_SNAPSHOT_INFO = 2
 )
+
+// String returns the COR_PRF_SNAPSHOT_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_SNAPSHOT_INFO) String() string {
+	switch e {
+	case COR_PRF_SNAPSHOT_DEFAULT:
+		return "COR_PRF_SNAPSHOT_DEFAULT"
+	case COR_PRF_SNAPSHOT_REGISTER_CONTEXT:
+		return "COR_PRF_SNAPSHOT_REGISTER_CONTEXT"
+	case COR_PRF_SNAPSHOT_X86_OPTIMIZED:
+		return "COR_PRF_SNAPSHOT_X86_OPTIMIZED"
+	default:
+		return fmt.Sprintf("COR_PRF_SNAPSHOT_INFO(%d)", int32(e))
+	}
+}
 
 type COR_PRF_STATIC_TYPE int32
 
@@ -224,6 +628,25 @@ const (
 	COR_PRF_FIELD_CONTEXT_STATIC    COR_PRF_STATIC_TYPE = 4
 	COR_PRF_FIELD_RVA_STATIC        COR_PRF_STATIC_TYPE = 8
 )
+
+// String returns the COR_PRF_STATIC_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_STATIC_TYPE) String() string {
+	switch e {
+	case COR_PRF_FIELD_NOT_A_STATIC:
+		return "COR_PRF_FIELD_NOT_A_STATIC"
+	case COR_PRF_FIELD_APP_DOMAIN_STATIC:
+		return "COR_PRF_FIELD_APP_DOMAIN_STATIC"
+	case COR_PRF_FIELD_THREAD_STATIC:
+		return "COR_PRF_FIELD_THREAD_STATIC"
+	case COR_PRF_FIELD_CONTEXT_STATIC:
+		return "COR_PRF_FIELD_CONTEXT_STATIC"
+	case COR_PRF_FIELD_RVA_STATIC:
+		return "COR_PRF_FIELD_RVA_STATIC"
+	default:
+		return fmt.Sprintf("COR_PRF_STATIC_TYPE(%d)", int32(e))
+	}
+}
 
 type COR_PRF_SUSPEND_REASON int32
 
@@ -239,12 +662,52 @@ const (
 	COR_PRF_SUSPEND_FOR_PROFILER           COR_PRF_SUSPEND_REASON = 9
 )
 
+// String returns the COR_PRF_SUSPEND_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_SUSPEND_REASON) String() string {
+	switch e {
+	case COR_PRF_SUSPEND_OTHER:
+		return "COR_PRF_SUSPEND_OTHER"
+	case COR_PRF_SUSPEND_FOR_GC:
+		return "COR_PRF_SUSPEND_FOR_GC"
+	case COR_PRF_SUSPEND_FOR_APPDOMAIN_SHUTDOWN:
+		return "COR_PRF_SUSPEND_FOR_APPDOMAIN_SHUTDOWN"
+	case COR_PRF_SUSPEND_FOR_CODE_PITCHING:
+		return "COR_PRF_SUSPEND_FOR_CODE_PITCHING"
+	case COR_PRF_SUSPEND_FOR_SHUTDOWN:
+		return "COR_PRF_SUSPEND_FOR_SHUTDOWN"
+	case COR_PRF_SUSPEND_FOR_INPROC_DEBUGGER:
+		return "COR_PRF_SUSPEND_FOR_INPROC_DEBUGGER"
+	case COR_PRF_SUSPEND_FOR_GC_PREP:
+		return "COR_PRF_SUSPEND_FOR_GC_PREP"
+	case COR_PRF_SUSPEND_FOR_REJIT:
+		return "COR_PRF_SUSPEND_FOR_REJIT"
+	case COR_PRF_SUSPEND_FOR_PROFILER:
+		return "COR_PRF_SUSPEND_FOR_PROFILER"
+	default:
+		return fmt.Sprintf("COR_PRF_SUSPEND_REASON(%d)", int32(e))
+	}
+}
+
 type COR_PRF_TRANSITION_REASON int32
 
 const (
 	COR_PRF_TRANSITION_CALL   COR_PRF_TRANSITION_REASON = 0
 	COR_PRF_TRANSITION_RETURN COR_PRF_TRANSITION_REASON = 1
 )
+
+// String returns the COR_PRF_TRANSITION_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COR_PRF_TRANSITION_REASON) String() string {
+	switch e {
+	case COR_PRF_TRANSITION_CALL:
+		return "COR_PRF_TRANSITION_CALL"
+	case COR_PRF_TRANSITION_RETURN:
+		return "COR_PRF_TRANSITION_RETURN"
+	default:
+		return fmt.Sprintf("COR_PRF_TRANSITION_REASON(%d)", int32(e))
+	}
+}
 
 type CorDebugIlToNativeMappingTypes int32
 
@@ -253,3 +716,18 @@ const (
 	PROLOG     CorDebugIlToNativeMappingTypes = -2
 	EPILOG     CorDebugIlToNativeMappingTypes = -3
 )
+
+// String returns the CorDebugIlToNativeMappingTypes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorDebugIlToNativeMappingTypes) String() string {
+	switch e {
+	case NO_MAPPING:
+		return "NO_MAPPING"
+	case PROLOG:
+		return "PROLOG"
+	case EPILOG:
+		return "EPILOG"
+	default:
+		return fmt.Sprintf("CorDebugIlToNativeMappingTypes(%d)", int32(e))
+	}
+}

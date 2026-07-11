@@ -4,6 +4,10 @@
 
 package filehistory
 
+import (
+	"fmt"
+)
+
 // FH_BACKUP_STATUS: https://learn.microsoft.com/windows/win32/api/fhcfg/ne-fhcfg-fh_backup_status
 type FH_BACKUP_STATUS int32
 
@@ -14,6 +18,25 @@ const (
 	FH_STATUS_REHYDRATING    FH_BACKUP_STATUS = 3
 	MAX_BACKUP_STATUS        FH_BACKUP_STATUS = 4
 )
+
+// String returns the FH_BACKUP_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FH_BACKUP_STATUS) String() string {
+	switch e {
+	case FH_STATUS_DISABLED:
+		return "FH_STATUS_DISABLED"
+	case FH_STATUS_DISABLED_BY_GP:
+		return "FH_STATUS_DISABLED_BY_GP"
+	case FH_STATUS_ENABLED:
+		return "FH_STATUS_ENABLED"
+	case FH_STATUS_REHYDRATING:
+		return "FH_STATUS_REHYDRATING"
+	case MAX_BACKUP_STATUS:
+		return "MAX_BACKUP_STATUS"
+	default:
+		return fmt.Sprintf("FH_BACKUP_STATUS(%d)", int32(e))
+	}
+}
 
 // FH_DEVICE_VALIDATION_RESULT: https://learn.microsoft.com/windows/win32/api/fhcfg/ne-fhcfg-fh_device_validation_result
 type FH_DEVICE_VALIDATION_RESULT int32
@@ -29,6 +52,31 @@ const (
 	MAX_VALIDATION_RESULT     FH_DEVICE_VALIDATION_RESULT = 7
 )
 
+// String returns the FH_DEVICE_VALIDATION_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FH_DEVICE_VALIDATION_RESULT) String() string {
+	switch e {
+	case FH_ACCESS_DENIED:
+		return "FH_ACCESS_DENIED"
+	case FH_INVALID_DRIVE_TYPE:
+		return "FH_INVALID_DRIVE_TYPE"
+	case FH_READ_ONLY_PERMISSION:
+		return "FH_READ_ONLY_PERMISSION"
+	case FH_CURRENT_DEFAULT:
+		return "FH_CURRENT_DEFAULT"
+	case FH_NAMESPACE_EXISTS:
+		return "FH_NAMESPACE_EXISTS"
+	case FH_TARGET_PART_OF_LIBRARY:
+		return "FH_TARGET_PART_OF_LIBRARY"
+	case FH_VALID_TARGET:
+		return "FH_VALID_TARGET"
+	case MAX_VALIDATION_RESULT:
+		return "MAX_VALIDATION_RESULT"
+	default:
+		return fmt.Sprintf("FH_DEVICE_VALIDATION_RESULT(%d)", int32(e))
+	}
+}
+
 // FH_LOCAL_POLICY_TYPE: https://learn.microsoft.com/windows/win32/api/fhcfg/ne-fhcfg-fh_local_policy_type
 type FH_LOCAL_POLICY_TYPE int32
 
@@ -39,6 +87,23 @@ const (
 	MAX_LOCAL_POLICY  FH_LOCAL_POLICY_TYPE = 3
 )
 
+// String returns the FH_LOCAL_POLICY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FH_LOCAL_POLICY_TYPE) String() string {
+	switch e {
+	case FH_FREQUENCY:
+		return "FH_FREQUENCY"
+	case FH_RETENTION_TYPE:
+		return "FH_RETENTION_TYPE"
+	case FH_RETENTION_AGE:
+		return "FH_RETENTION_AGE"
+	case MAX_LOCAL_POLICY:
+		return "MAX_LOCAL_POLICY"
+	default:
+		return fmt.Sprintf("FH_LOCAL_POLICY_TYPE(%d)", int32(e))
+	}
+}
+
 // FH_PROTECTED_ITEM_CATEGORY: https://learn.microsoft.com/windows/win32/api/fhcfg/ne-fhcfg-fh_protected_item_category
 type FH_PROTECTED_ITEM_CATEGORY int32
 
@@ -47,6 +112,21 @@ const (
 	FH_LIBRARY                  FH_PROTECTED_ITEM_CATEGORY = 1
 	MAX_PROTECTED_ITEM_CATEGORY FH_PROTECTED_ITEM_CATEGORY = 2
 )
+
+// String returns the FH_PROTECTED_ITEM_CATEGORY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FH_PROTECTED_ITEM_CATEGORY) String() string {
+	switch e {
+	case FH_FOLDER:
+		return "FH_FOLDER"
+	case FH_LIBRARY:
+		return "FH_LIBRARY"
+	case MAX_PROTECTED_ITEM_CATEGORY:
+		return "MAX_PROTECTED_ITEM_CATEGORY"
+	default:
+		return fmt.Sprintf("FH_PROTECTED_ITEM_CATEGORY(%d)", int32(e))
+	}
+}
 
 // FH_RETENTION_TYPES: https://learn.microsoft.com/windows/win32/api/fhcfg/ne-fhcfg-fh_retention_types
 type FH_RETENTION_TYPES int32
@@ -58,6 +138,23 @@ const (
 	MAX_RETENTION_TYPE     FH_RETENTION_TYPES = 3
 )
 
+// String returns the FH_RETENTION_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FH_RETENTION_TYPES) String() string {
+	switch e {
+	case FH_RETENTION_DISABLED:
+		return "FH_RETENTION_DISABLED"
+	case FH_RETENTION_UNLIMITED:
+		return "FH_RETENTION_UNLIMITED"
+	case FH_RETENTION_AGE_BASED:
+		return "FH_RETENTION_AGE_BASED"
+	case MAX_RETENTION_TYPE:
+		return "MAX_RETENTION_TYPE"
+	default:
+		return fmt.Sprintf("FH_RETENTION_TYPES(%d)", int32(e))
+	}
+}
+
 // FH_TARGET_DRIVE_TYPES: https://learn.microsoft.com/windows/win32/api/fhcfg/ne-fhcfg-fh_target_drive_types
 type FH_TARGET_DRIVE_TYPES int32
 
@@ -67,6 +164,23 @@ const (
 	FH_DRIVE_FIXED     FH_TARGET_DRIVE_TYPES = 3
 	FH_DRIVE_REMOTE    FH_TARGET_DRIVE_TYPES = 4
 )
+
+// String returns the FH_TARGET_DRIVE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FH_TARGET_DRIVE_TYPES) String() string {
+	switch e {
+	case FH_DRIVE_UNKNOWN:
+		return "FH_DRIVE_UNKNOWN"
+	case FH_DRIVE_REMOVABLE:
+		return "FH_DRIVE_REMOVABLE"
+	case FH_DRIVE_FIXED:
+		return "FH_DRIVE_FIXED"
+	case FH_DRIVE_REMOTE:
+		return "FH_DRIVE_REMOTE"
+	default:
+		return fmt.Sprintf("FH_TARGET_DRIVE_TYPES(%d)", int32(e))
+	}
+}
 
 // FH_TARGET_PROPERTY_TYPE: https://learn.microsoft.com/windows/win32/api/fhcfg/ne-fhcfg-fh_target_property_type
 type FH_TARGET_PROPERTY_TYPE int32
@@ -78,6 +192,23 @@ const (
 	MAX_TARGET_PROPERTY  FH_TARGET_PROPERTY_TYPE = 3
 )
 
+// String returns the FH_TARGET_PROPERTY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FH_TARGET_PROPERTY_TYPE) String() string {
+	switch e {
+	case FH_TARGET_NAME:
+		return "FH_TARGET_NAME"
+	case FH_TARGET_URL:
+		return "FH_TARGET_URL"
+	case FH_TARGET_DRIVE_TYPE:
+		return "FH_TARGET_DRIVE_TYPE"
+	case MAX_TARGET_PROPERTY:
+		return "MAX_TARGET_PROPERTY"
+	default:
+		return fmt.Sprintf("FH_TARGET_PROPERTY_TYPE(%d)", int32(e))
+	}
+}
+
 type FhBackupStopReason int32
 
 const (
@@ -87,3 +218,22 @@ const (
 	BackupLimitUserBusyMachineOnDC FhBackupStopReason = 3
 	BackupCancelled                FhBackupStopReason = 4
 )
+
+// String returns the FhBackupStopReason constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FhBackupStopReason) String() string {
+	switch e {
+	case BackupInvalidStopReason:
+		return "BackupInvalidStopReason"
+	case BackupLimitUserBusyMachineOnAC:
+		return "BackupLimitUserBusyMachineOnAC"
+	case BackupLimitUserIdleMachineOnDC:
+		return "BackupLimitUserIdleMachineOnDC"
+	case BackupLimitUserBusyMachineOnDC:
+		return "BackupLimitUserBusyMachineOnDC"
+	case BackupCancelled:
+		return "BackupCancelled"
+	default:
+		return fmt.Sprintf("FhBackupStopReason(%d)", int32(e))
+	}
+}

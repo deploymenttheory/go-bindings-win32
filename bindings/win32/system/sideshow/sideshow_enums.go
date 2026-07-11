@@ -4,6 +4,10 @@
 
 package sideshow
 
+import (
+	"fmt"
+)
+
 type SCF_BUTTON_IDS int32
 
 const (
@@ -21,6 +25,39 @@ const (
 	SCF_BUTTON_BACK        SCF_BUTTON_IDS = 65280
 )
 
+// String returns the SCF_BUTTON_IDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCF_BUTTON_IDS) String() string {
+	switch e {
+	case SCF_BUTTON_MENU:
+		return "SCF_BUTTON_MENU"
+	case SCF_BUTTON_SELECT:
+		return "SCF_BUTTON_SELECT"
+	case SCF_BUTTON_UP:
+		return "SCF_BUTTON_UP"
+	case SCF_BUTTON_DOWN:
+		return "SCF_BUTTON_DOWN"
+	case SCF_BUTTON_LEFT:
+		return "SCF_BUTTON_LEFT"
+	case SCF_BUTTON_RIGHT:
+		return "SCF_BUTTON_RIGHT"
+	case SCF_BUTTON_PLAY:
+		return "SCF_BUTTON_PLAY"
+	case SCF_BUTTON_PAUSE:
+		return "SCF_BUTTON_PAUSE"
+	case SCF_BUTTON_FASTFORWARD:
+		return "SCF_BUTTON_FASTFORWARD"
+	case SCF_BUTTON_REWIND:
+		return "SCF_BUTTON_REWIND"
+	case SCF_BUTTON_STOP:
+		return "SCF_BUTTON_STOP"
+	case SCF_BUTTON_BACK:
+		return "SCF_BUTTON_BACK"
+	default:
+		return fmt.Sprintf("SCF_BUTTON_IDS(%d)", int32(e))
+	}
+}
+
 type SCF_EVENT_IDS int32
 
 const (
@@ -28,6 +65,21 @@ const (
 	SCF_EVENT_MENUACTION  SCF_EVENT_IDS = 2
 	SCF_EVENT_CONTEXTMENU SCF_EVENT_IDS = 3
 )
+
+// String returns the SCF_EVENT_IDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCF_EVENT_IDS) String() string {
+	switch e {
+	case SCF_EVENT_NAVIGATION:
+		return "SCF_EVENT_NAVIGATION"
+	case SCF_EVENT_MENUACTION:
+		return "SCF_EVENT_MENUACTION"
+	case SCF_EVENT_CONTEXTMENU:
+		return "SCF_EVENT_CONTEXTMENU"
+	default:
+		return fmt.Sprintf("SCF_EVENT_IDS(%d)", int32(e))
+	}
+}
 
 type SIDESHOW_COLOR_TYPE int32
 
@@ -37,9 +89,37 @@ const (
 	SIDESHOW_COLOR_TYPE_BLACK_AND_WHITE SIDESHOW_COLOR_TYPE = 2
 )
 
+// String returns the SIDESHOW_COLOR_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIDESHOW_COLOR_TYPE) String() string {
+	switch e {
+	case SIDESHOW_COLOR_TYPE_COLOR:
+		return "SIDESHOW_COLOR_TYPE_COLOR"
+	case SIDESHOW_COLOR_TYPE_GREYSCALE:
+		return "SIDESHOW_COLOR_TYPE_GREYSCALE"
+	case SIDESHOW_COLOR_TYPE_BLACK_AND_WHITE:
+		return "SIDESHOW_COLOR_TYPE_BLACK_AND_WHITE"
+	default:
+		return fmt.Sprintf("SIDESHOW_COLOR_TYPE(%d)", int32(e))
+	}
+}
+
 type SIDESHOW_SCREEN_TYPE int32
 
 const (
 	SIDESHOW_SCREEN_TYPE_BITMAP SIDESHOW_SCREEN_TYPE = 0
 	SIDESHOW_SCREEN_TYPE_TEXT   SIDESHOW_SCREEN_TYPE = 1
 )
+
+// String returns the SIDESHOW_SCREEN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIDESHOW_SCREEN_TYPE) String() string {
+	switch e {
+	case SIDESHOW_SCREEN_TYPE_BITMAP:
+		return "SIDESHOW_SCREEN_TYPE_BITMAP"
+	case SIDESHOW_SCREEN_TYPE_TEXT:
+		return "SIDESHOW_SCREEN_TYPE_TEXT"
+	default:
+		return fmt.Sprintf("SIDESHOW_SCREEN_TYPE(%d)", int32(e))
+	}
+}

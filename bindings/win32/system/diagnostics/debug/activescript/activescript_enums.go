@@ -4,6 +4,11 @@
 
 package activescript
 
+import (
+	"fmt"
+	"strings"
+)
+
 type APPLICATION_NODE_EVENT_FILTER int32
 
 const (
@@ -12,6 +17,21 @@ const (
 	FILTER_EXCLUDE_EVAL_CODE      APPLICATION_NODE_EVENT_FILTER = 2
 )
 
+// String returns the APPLICATION_NODE_EVENT_FILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPLICATION_NODE_EVENT_FILTER) String() string {
+	switch e {
+	case FILTER_EXCLUDE_NOTHING:
+		return "FILTER_EXCLUDE_NOTHING"
+	case FILTER_EXCLUDE_ANONYMOUS_CODE:
+		return "FILTER_EXCLUDE_ANONYMOUS_CODE"
+	case FILTER_EXCLUDE_EVAL_CODE:
+		return "FILTER_EXCLUDE_EVAL_CODE"
+	default:
+		return fmt.Sprintf("APPLICATION_NODE_EVENT_FILTER(%d)", int32(e))
+	}
+}
+
 type BREAKPOINT_STATE int32
 
 const (
@@ -19,6 +39,21 @@ const (
 	BREAKPOINT_DISABLED BREAKPOINT_STATE = 1
 	BREAKPOINT_ENABLED  BREAKPOINT_STATE = 2
 )
+
+// String returns the BREAKPOINT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BREAKPOINT_STATE) String() string {
+	switch e {
+	case BREAKPOINT_DELETED:
+		return "BREAKPOINT_DELETED"
+	case BREAKPOINT_DISABLED:
+		return "BREAKPOINT_DISABLED"
+	case BREAKPOINT_ENABLED:
+		return "BREAKPOINT_ENABLED"
+	default:
+		return fmt.Sprintf("BREAKPOINT_STATE(%d)", int32(e))
+	}
+}
 
 type BREAKREASON int32
 
@@ -34,6 +69,33 @@ const (
 	BREAKREASON_MUTATION_BREAKPOINT BREAKREASON = 8
 )
 
+// String returns the BREAKREASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BREAKREASON) String() string {
+	switch e {
+	case BREAKREASON_STEP:
+		return "BREAKREASON_STEP"
+	case BREAKREASON_BREAKPOINT:
+		return "BREAKREASON_BREAKPOINT"
+	case BREAKREASON_DEBUGGER_BLOCK:
+		return "BREAKREASON_DEBUGGER_BLOCK"
+	case BREAKREASON_HOST_INITIATED:
+		return "BREAKREASON_HOST_INITIATED"
+	case BREAKREASON_LANGUAGE_INITIATED:
+		return "BREAKREASON_LANGUAGE_INITIATED"
+	case BREAKREASON_DEBUGGER_HALT:
+		return "BREAKREASON_DEBUGGER_HALT"
+	case BREAKREASON_ERROR:
+		return "BREAKREASON_ERROR"
+	case BREAKREASON_JIT:
+		return "BREAKREASON_JIT"
+	case BREAKREASON_MUTATION_BREAKPOINT:
+		return "BREAKREASON_MUTATION_BREAKPOINT"
+	default:
+		return fmt.Sprintf("BREAKREASON(%d)", int32(e))
+	}
+}
+
 type BREAKRESUMEACTION int32
 
 const (
@@ -46,6 +108,29 @@ const (
 	BREAKRESUMEACTION_STEP_DOCUMENT BREAKRESUMEACTION = 6
 )
 
+// String returns the BREAKRESUMEACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BREAKRESUMEACTION) String() string {
+	switch e {
+	case BREAKRESUMEACTION_ABORT:
+		return "BREAKRESUMEACTION_ABORT"
+	case BREAKRESUMEACTION_CONTINUE:
+		return "BREAKRESUMEACTION_CONTINUE"
+	case BREAKRESUMEACTION_STEP_INTO:
+		return "BREAKRESUMEACTION_STEP_INTO"
+	case BREAKRESUMEACTION_STEP_OVER:
+		return "BREAKRESUMEACTION_STEP_OVER"
+	case BREAKRESUMEACTION_STEP_OUT:
+		return "BREAKRESUMEACTION_STEP_OUT"
+	case BREAKRESUMEACTION_IGNORE:
+		return "BREAKRESUMEACTION_IGNORE"
+	case BREAKRESUMEACTION_STEP_DOCUMENT:
+		return "BREAKRESUMEACTION_STEP_DOCUMENT"
+	default:
+		return fmt.Sprintf("BREAKRESUMEACTION(%d)", int32(e))
+	}
+}
+
 type DEBUG_EVENT_INFO_TYPE int32
 
 const (
@@ -55,6 +140,23 @@ const (
 	DEIT_ASMJS_FAILED       DEBUG_EVENT_INFO_TYPE = 3
 )
 
+// String returns the DEBUG_EVENT_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEBUG_EVENT_INFO_TYPE) String() string {
+	switch e {
+	case DEIT_GENERAL:
+		return "DEIT_GENERAL"
+	case DEIT_ASMJS_IN_DEBUGGING:
+		return "DEIT_ASMJS_IN_DEBUGGING"
+	case DEIT_ASMJS_SUCCEEDED:
+		return "DEIT_ASMJS_SUCCEEDED"
+	case DEIT_ASMJS_FAILED:
+		return "DEIT_ASMJS_FAILED"
+	default:
+		return fmt.Sprintf("DEBUG_EVENT_INFO_TYPE(%d)", int32(e))
+	}
+}
+
 type DEBUG_STACKFRAME_TYPE int32
 
 const (
@@ -62,6 +164,21 @@ const (
 	DST_INTERNAL_FRAME   DEBUG_STACKFRAME_TYPE = 1
 	DST_INVOCATION_FRAME DEBUG_STACKFRAME_TYPE = 2
 )
+
+// String returns the DEBUG_STACKFRAME_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEBUG_STACKFRAME_TYPE) String() string {
+	switch e {
+	case DST_SCRIPT_FRAME:
+		return "DST_SCRIPT_FRAME"
+	case DST_INTERNAL_FRAME:
+		return "DST_INTERNAL_FRAME"
+	case DST_INVOCATION_FRAME:
+		return "DST_INVOCATION_FRAME"
+	default:
+		return fmt.Sprintf("DEBUG_STACKFRAME_TYPE(%d)", int32(e))
+	}
+}
 
 type DOCUMENTNAMETYPE int32
 
@@ -74,6 +191,27 @@ const (
 	DOCUMENTNAMETYPE_SOURCE_MAP_URL DOCUMENTNAMETYPE = 5
 )
 
+// String returns the DOCUMENTNAMETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOCUMENTNAMETYPE) String() string {
+	switch e {
+	case DOCUMENTNAMETYPE_APPNODE:
+		return "DOCUMENTNAMETYPE_APPNODE"
+	case DOCUMENTNAMETYPE_TITLE:
+		return "DOCUMENTNAMETYPE_TITLE"
+	case DOCUMENTNAMETYPE_FILE_TAIL:
+		return "DOCUMENTNAMETYPE_FILE_TAIL"
+	case DOCUMENTNAMETYPE_URL:
+		return "DOCUMENTNAMETYPE_URL"
+	case DOCUMENTNAMETYPE_UNIQUE_TITLE:
+		return "DOCUMENTNAMETYPE_UNIQUE_TITLE"
+	case DOCUMENTNAMETYPE_SOURCE_MAP_URL:
+		return "DOCUMENTNAMETYPE_SOURCE_MAP_URL"
+	default:
+		return fmt.Sprintf("DOCUMENTNAMETYPE(%d)", int32(e))
+	}
+}
+
 type ERRORRESUMEACTION int32
 
 const (
@@ -81,6 +219,21 @@ const (
 	ERRORRESUMEACTION_AbortCallAndReturnErrorToCaller ERRORRESUMEACTION = 1
 	ERRORRESUMEACTION_SkipErrorStatement              ERRORRESUMEACTION = 2
 )
+
+// String returns the ERRORRESUMEACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ERRORRESUMEACTION) String() string {
+	switch e {
+	case ERRORRESUMEACTION_ReexecuteErrorStatement:
+		return "ERRORRESUMEACTION_ReexecuteErrorStatement"
+	case ERRORRESUMEACTION_AbortCallAndReturnErrorToCaller:
+		return "ERRORRESUMEACTION_AbortCallAndReturnErrorToCaller"
+	case ERRORRESUMEACTION_SkipErrorStatement:
+		return "ERRORRESUMEACTION_SkipErrorStatement"
+	default:
+		return fmt.Sprintf("ERRORRESUMEACTION(%d)", int32(e))
+	}
+}
 
 type JS_PROPERTY_ATTRIBUTES int32
 
@@ -96,12 +249,52 @@ const (
 	JS_PROPERTY_FRAME_INFINALLYBLOCK JS_PROPERTY_ATTRIBUTES = 128
 )
 
+// String returns the JS_PROPERTY_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JS_PROPERTY_ATTRIBUTES) String() string {
+	switch e {
+	case JS_PROPERTY_ATTRIBUTE_NONE:
+		return "JS_PROPERTY_ATTRIBUTE_NONE"
+	case JS_PROPERTY_HAS_CHILDREN:
+		return "JS_PROPERTY_HAS_CHILDREN"
+	case JS_PROPERTY_FAKE:
+		return "JS_PROPERTY_FAKE"
+	case JS_PROPERTY_METHOD:
+		return "JS_PROPERTY_METHOD"
+	case JS_PROPERTY_READONLY:
+		return "JS_PROPERTY_READONLY"
+	case JS_PROPERTY_NATIVE_WINRT_POINTER:
+		return "JS_PROPERTY_NATIVE_WINRT_POINTER"
+	case JS_PROPERTY_FRAME_INTRYBLOCK:
+		return "JS_PROPERTY_FRAME_INTRYBLOCK"
+	case JS_PROPERTY_FRAME_INCATCHBLOCK:
+		return "JS_PROPERTY_FRAME_INCATCHBLOCK"
+	case JS_PROPERTY_FRAME_INFINALLYBLOCK:
+		return "JS_PROPERTY_FRAME_INFINALLYBLOCK"
+	default:
+		return fmt.Sprintf("JS_PROPERTY_ATTRIBUTES(%d)", int32(e))
+	}
+}
+
 type JS_PROPERTY_MEMBERS int32
 
 const (
 	JS_PROPERTY_MEMBERS_ALL       JS_PROPERTY_MEMBERS = 0
 	JS_PROPERTY_MEMBERS_ARGUMENTS JS_PROPERTY_MEMBERS = 1
 )
+
+// String returns the JS_PROPERTY_MEMBERS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JS_PROPERTY_MEMBERS) String() string {
+	switch e {
+	case JS_PROPERTY_MEMBERS_ALL:
+		return "JS_PROPERTY_MEMBERS_ALL"
+	case JS_PROPERTY_MEMBERS_ARGUMENTS:
+		return "JS_PROPERTY_MEMBERS_ARGUMENTS"
+	default:
+		return fmt.Sprintf("JS_PROPERTY_MEMBERS(%d)", int32(e))
+	}
+}
 
 type JsDebugReadMemoryFlags int32
 
@@ -110,6 +303,20 @@ const (
 	JsDebugAllowPartialRead JsDebugReadMemoryFlags = 1
 )
 
+// String returns the JsDebugReadMemoryFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e JsDebugReadMemoryFlags) String() string {
+	switch e {
+	case None:
+		return "None"
+	case JsDebugAllowPartialRead:
+		return "JsDebugAllowPartialRead"
+	default:
+		return fmt.Sprintf("JsDebugReadMemoryFlags(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PROFILER_EVENT_MASK int32
 
 const (
@@ -120,6 +327,32 @@ const (
 	PROFILER_EVENT_MASK_TRACE_ALL_WITH_DOM         PROFILER_EVENT_MASK = 7
 )
 
+// String returns the PROFILER_EVENT_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROFILER_EVENT_MASK) String() string {
+	var parts []string
+	if e&PROFILER_EVENT_MASK_TRACE_SCRIPT_FUNCTION_CALL != 0 {
+		parts = append(parts, "PROFILER_EVENT_MASK_TRACE_SCRIPT_FUNCTION_CALL")
+	}
+	if e&PROFILER_EVENT_MASK_TRACE_NATIVE_FUNCTION_CALL != 0 {
+		parts = append(parts, "PROFILER_EVENT_MASK_TRACE_NATIVE_FUNCTION_CALL")
+	}
+	if e&PROFILER_EVENT_MASK_TRACE_DOM_FUNCTION_CALL != 0 {
+		parts = append(parts, "PROFILER_EVENT_MASK_TRACE_DOM_FUNCTION_CALL")
+	}
+	if e&PROFILER_EVENT_MASK_TRACE_ALL != 0 {
+		parts = append(parts, "PROFILER_EVENT_MASK_TRACE_ALL")
+	}
+	if e&PROFILER_EVENT_MASK_TRACE_ALL_WITH_DOM != 0 {
+		parts = append(parts, "PROFILER_EVENT_MASK_TRACE_ALL_WITH_DOM")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PROFILER_HEAP_ENUM_FLAGS int32
 
 const (
@@ -129,6 +362,26 @@ const (
 	PROFILER_HEAP_ENUM_FLAGS_RELATIONSHIP_SUBSTRINGS  PROFILER_HEAP_ENUM_FLAGS = 3
 )
 
+// String returns the PROFILER_HEAP_ENUM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROFILER_HEAP_ENUM_FLAGS) String() string {
+	var parts []string
+	if e&PROFILER_HEAP_ENUM_FLAGS_STORE_RELATIONSHIP_FLAGS != 0 {
+		parts = append(parts, "PROFILER_HEAP_ENUM_FLAGS_STORE_RELATIONSHIP_FLAGS")
+	}
+	if e&PROFILER_HEAP_ENUM_FLAGS_SUBSTRINGS != 0 {
+		parts = append(parts, "PROFILER_HEAP_ENUM_FLAGS_SUBSTRINGS")
+	}
+	if e&PROFILER_HEAP_ENUM_FLAGS_RELATIONSHIP_SUBSTRINGS != 0 {
+		parts = append(parts, "PROFILER_HEAP_ENUM_FLAGS_RELATIONSHIP_SUBSTRINGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PROFILER_HEAP_OBJECT_FLAGS int32
 
 const (
@@ -146,6 +399,55 @@ const (
 	PROFILER_HEAP_OBJECT_FLAGS_WINRT_DELEGATE        PROFILER_HEAP_OBJECT_FLAGS = 2048
 	PROFILER_HEAP_OBJECT_FLAGS_WINRT_NAMESPACE       PROFILER_HEAP_OBJECT_FLAGS = 4096
 )
+
+// String returns the PROFILER_HEAP_OBJECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROFILER_HEAP_OBJECT_FLAGS) String() string {
+	var parts []string
+	if e&PROFILER_HEAP_OBJECT_FLAGS_NEW_OBJECT != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_NEW_OBJECT")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_IS_ROOT != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_IS_ROOT")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_SITE_CLOSED != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_SITE_CLOSED")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_EXTERNAL != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_EXTERNAL")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_EXTERNAL_UNKNOWN != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_EXTERNAL_UNKNOWN")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_EXTERNAL_DISPATCH != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_EXTERNAL_DISPATCH")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_SIZE_APPROXIMATE != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_SIZE_APPROXIMATE")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_SIZE_UNAVAILABLE != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_SIZE_UNAVAILABLE")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_NEW_STATE_UNAVAILABLE != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_NEW_STATE_UNAVAILABLE")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_WINRT_INSTANCE != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_WINRT_INSTANCE")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_WINRT_RUNTIMECLASS != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_WINRT_RUNTIMECLASS")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_WINRT_DELEGATE != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_WINRT_DELEGATE")
+	}
+	if e&PROFILER_HEAP_OBJECT_FLAGS_WINRT_NAMESPACE != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_FLAGS_WINRT_NAMESPACE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type PROFILER_HEAP_OBJECT_OPTIONAL_INFO_TYPE int32
 
@@ -166,6 +468,42 @@ const (
 	PROFILER_HEAP_OBJECT_OPTIONAL_INFO_MAX_VALUE                  PROFILER_HEAP_OBJECT_OPTIONAL_INFO_TYPE = 13
 )
 
+// String returns the PROFILER_HEAP_OBJECT_OPTIONAL_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROFILER_HEAP_OBJECT_OPTIONAL_INFO_TYPE) String() string {
+	switch e {
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_PROTOTYPE:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_PROTOTYPE"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_FUNCTION_NAME:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_FUNCTION_NAME"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_SCOPE_LIST:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_SCOPE_LIST"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_INTERNAL_PROPERTY:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_INTERNAL_PROPERTY"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_NAME_PROPERTIES:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_NAME_PROPERTIES"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_INDEX_PROPERTIES:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_INDEX_PROPERTIES"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_ELEMENT_ATTRIBUTES_SIZE:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_ELEMENT_ATTRIBUTES_SIZE"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_ELEMENT_TEXT_CHILDREN_SIZE:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_ELEMENT_TEXT_CHILDREN_SIZE"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_RELATIONSHIPS:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_RELATIONSHIPS"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_WINRTEVENTS:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_WINRTEVENTS"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_WEAKMAP_COLLECTION_LIST:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_WEAKMAP_COLLECTION_LIST"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_MAP_COLLECTION_LIST:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_MAP_COLLECTION_LIST"
+	case PROFILER_HEAP_OBJECT_OPTIONAL_INFO_SET_COLLECTION_LIST:
+		return "PROFILER_HEAP_OBJECT_OPTIONAL_INFO_SET_COLLECTION_LIST"
+	default:
+		return fmt.Sprintf("PROFILER_HEAP_OBJECT_OPTIONAL_INFO_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS int32
 
 const (
@@ -176,11 +514,44 @@ const (
 	PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_CONST_VARIABLE  PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS = 524288
 )
 
+// String returns the PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS) String() string {
+	var parts []string
+	if e&PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_IS_GET_ACCESSOR != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_IS_GET_ACCESSOR")
+	}
+	if e&PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_IS_SET_ACCESSOR != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_IS_SET_ACCESSOR")
+	}
+	if e&PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_LET_VARIABLE != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_LET_VARIABLE")
+	}
+	if e&PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_CONST_VARIABLE != 0 {
+		parts = append(parts, "PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_CONST_VARIABLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type PROFILER_HEAP_SUMMARY_VERSION int32
 
 const (
 	PROFILER_HEAP_SUMMARY_VERSION_1 PROFILER_HEAP_SUMMARY_VERSION = 1
 )
+
+// String returns the PROFILER_HEAP_SUMMARY_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROFILER_HEAP_SUMMARY_VERSION) String() string {
+	switch e {
+	case PROFILER_HEAP_SUMMARY_VERSION_1:
+		return "PROFILER_HEAP_SUMMARY_VERSION_1"
+	default:
+		return fmt.Sprintf("PROFILER_HEAP_SUMMARY_VERSION(%d)", int32(e))
+	}
+}
 
 type PROFILER_RELATIONSHIP_INFO int32
 
@@ -193,6 +564,27 @@ const (
 	PROFILER_PROPERTY_TYPE_SUBSTRING       PROFILER_RELATIONSHIP_INFO = 6
 )
 
+// String returns the PROFILER_RELATIONSHIP_INFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROFILER_RELATIONSHIP_INFO) String() string {
+	switch e {
+	case PROFILER_PROPERTY_TYPE_NUMBER:
+		return "PROFILER_PROPERTY_TYPE_NUMBER"
+	case PROFILER_PROPERTY_TYPE_STRING:
+		return "PROFILER_PROPERTY_TYPE_STRING"
+	case PROFILER_PROPERTY_TYPE_HEAP_OBJECT:
+		return "PROFILER_PROPERTY_TYPE_HEAP_OBJECT"
+	case PROFILER_PROPERTY_TYPE_EXTERNAL_OBJECT:
+		return "PROFILER_PROPERTY_TYPE_EXTERNAL_OBJECT"
+	case PROFILER_PROPERTY_TYPE_BSTR:
+		return "PROFILER_PROPERTY_TYPE_BSTR"
+	case PROFILER_PROPERTY_TYPE_SUBSTRING:
+		return "PROFILER_PROPERTY_TYPE_SUBSTRING"
+	default:
+		return fmt.Sprintf("PROFILER_RELATIONSHIP_INFO(%d)", int32(e))
+	}
+}
+
 type PROFILER_SCRIPT_TYPE int32
 
 const (
@@ -202,12 +594,42 @@ const (
 	PROFILER_SCRIPT_TYPE_DOM     PROFILER_SCRIPT_TYPE = 3
 )
 
+// String returns the PROFILER_SCRIPT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROFILER_SCRIPT_TYPE) String() string {
+	switch e {
+	case PROFILER_SCRIPT_TYPE_USER:
+		return "PROFILER_SCRIPT_TYPE_USER"
+	case PROFILER_SCRIPT_TYPE_DYNAMIC:
+		return "PROFILER_SCRIPT_TYPE_DYNAMIC"
+	case PROFILER_SCRIPT_TYPE_NATIVE:
+		return "PROFILER_SCRIPT_TYPE_NATIVE"
+	case PROFILER_SCRIPT_TYPE_DOM:
+		return "PROFILER_SCRIPT_TYPE_DOM"
+	default:
+		return fmt.Sprintf("PROFILER_SCRIPT_TYPE(%d)", int32(e))
+	}
+}
+
 type SCRIPTGCTYPE int32
 
 const (
 	SCRIPTGCTYPE_NORMAL     SCRIPTGCTYPE = 0
 	SCRIPTGCTYPE_EXHAUSTIVE SCRIPTGCTYPE = 1
 )
+
+// String returns the SCRIPTGCTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPTGCTYPE) String() string {
+	switch e {
+	case SCRIPTGCTYPE_NORMAL:
+		return "SCRIPTGCTYPE_NORMAL"
+	case SCRIPTGCTYPE_EXHAUSTIVE:
+		return "SCRIPTGCTYPE_EXHAUSTIVE"
+	default:
+		return fmt.Sprintf("SCRIPTGCTYPE(%d)", int32(e))
+	}
+}
 
 type SCRIPTLANGUAGEVERSION int32
 
@@ -217,6 +639,23 @@ const (
 	SCRIPTLANGUAGEVERSION_5_8     SCRIPTLANGUAGEVERSION = 2
 	SCRIPTLANGUAGEVERSION_MAX     SCRIPTLANGUAGEVERSION = 255
 )
+
+// String returns the SCRIPTLANGUAGEVERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPTLANGUAGEVERSION) String() string {
+	switch e {
+	case SCRIPTLANGUAGEVERSION_DEFAULT:
+		return "SCRIPTLANGUAGEVERSION_DEFAULT"
+	case SCRIPTLANGUAGEVERSION_5_7:
+		return "SCRIPTLANGUAGEVERSION_5_7"
+	case SCRIPTLANGUAGEVERSION_5_8:
+		return "SCRIPTLANGUAGEVERSION_5_8"
+	case SCRIPTLANGUAGEVERSION_MAX:
+		return "SCRIPTLANGUAGEVERSION_MAX"
+	default:
+		return fmt.Sprintf("SCRIPTLANGUAGEVERSION(%d)", int32(e))
+	}
+}
 
 type SCRIPTSTATE int32
 
@@ -229,12 +668,46 @@ const (
 	SCRIPTSTATE_CLOSED        SCRIPTSTATE = 4
 )
 
+// String returns the SCRIPTSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPTSTATE) String() string {
+	switch e {
+	case SCRIPTSTATE_UNINITIALIZED:
+		return "SCRIPTSTATE_UNINITIALIZED"
+	case SCRIPTSTATE_INITIALIZED:
+		return "SCRIPTSTATE_INITIALIZED"
+	case SCRIPTSTATE_STARTED:
+		return "SCRIPTSTATE_STARTED"
+	case SCRIPTSTATE_CONNECTED:
+		return "SCRIPTSTATE_CONNECTED"
+	case SCRIPTSTATE_DISCONNECTED:
+		return "SCRIPTSTATE_DISCONNECTED"
+	case SCRIPTSTATE_CLOSED:
+		return "SCRIPTSTATE_CLOSED"
+	default:
+		return fmt.Sprintf("SCRIPTSTATE(%d)", int32(e))
+	}
+}
+
 type SCRIPTTHREADSTATE int32
 
 const (
 	SCRIPTTHREADSTATE_NOTINSCRIPT SCRIPTTHREADSTATE = 0
 	SCRIPTTHREADSTATE_RUNNING     SCRIPTTHREADSTATE = 1
 )
+
+// String returns the SCRIPTTHREADSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPTTHREADSTATE) String() string {
+	switch e {
+	case SCRIPTTHREADSTATE_NOTINSCRIPT:
+		return "SCRIPTTHREADSTATE_NOTINSCRIPT"
+	case SCRIPTTHREADSTATE_RUNNING:
+		return "SCRIPTTHREADSTATE_RUNNING"
+	default:
+		return fmt.Sprintf("SCRIPTTHREADSTATE(%d)", int32(e))
+	}
+}
 
 type SCRIPTTRACEINFO int32
 
@@ -249,6 +722,31 @@ const (
 	SCRIPTTRACEINFO_GETOBJEND      SCRIPTTRACEINFO = 7
 )
 
+// String returns the SCRIPTTRACEINFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPTTRACEINFO) String() string {
+	switch e {
+	case SCRIPTTRACEINFO_SCRIPTSTART:
+		return "SCRIPTTRACEINFO_SCRIPTSTART"
+	case SCRIPTTRACEINFO_SCRIPTEND:
+		return "SCRIPTTRACEINFO_SCRIPTEND"
+	case SCRIPTTRACEINFO_COMCALLSTART:
+		return "SCRIPTTRACEINFO_COMCALLSTART"
+	case SCRIPTTRACEINFO_COMCALLEND:
+		return "SCRIPTTRACEINFO_COMCALLEND"
+	case SCRIPTTRACEINFO_CREATEOBJSTART:
+		return "SCRIPTTRACEINFO_CREATEOBJSTART"
+	case SCRIPTTRACEINFO_CREATEOBJEND:
+		return "SCRIPTTRACEINFO_CREATEOBJEND"
+	case SCRIPTTRACEINFO_GETOBJSTART:
+		return "SCRIPTTRACEINFO_GETOBJSTART"
+	case SCRIPTTRACEINFO_GETOBJEND:
+		return "SCRIPTTRACEINFO_GETOBJEND"
+	default:
+		return fmt.Sprintf("SCRIPTTRACEINFO(%d)", int32(e))
+	}
+}
+
 type SCRIPTUICHANDLING int32
 
 const (
@@ -257,6 +755,21 @@ const (
 	SCRIPTUICHANDLING_NOUIDEFAULT SCRIPTUICHANDLING = 2
 )
 
+// String returns the SCRIPTUICHANDLING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPTUICHANDLING) String() string {
+	switch e {
+	case SCRIPTUICHANDLING_ALLOW:
+		return "SCRIPTUICHANDLING_ALLOW"
+	case SCRIPTUICHANDLING_NOUIERROR:
+		return "SCRIPTUICHANDLING_NOUIERROR"
+	case SCRIPTUICHANDLING_NOUIDEFAULT:
+		return "SCRIPTUICHANDLING_NOUIDEFAULT"
+	default:
+		return fmt.Sprintf("SCRIPTUICHANDLING(%d)", int32(e))
+	}
+}
+
 type SCRIPTUICITEM int32
 
 const (
@@ -264,6 +777,20 @@ const (
 	SCRIPTUICITEM_MSGBOX   SCRIPTUICITEM = 2
 )
 
+// String returns the SCRIPTUICITEM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPTUICITEM) String() string {
+	switch e {
+	case SCRIPTUICITEM_INPUTBOX:
+		return "SCRIPTUICITEM_INPUTBOX"
+	case SCRIPTUICITEM_MSGBOX:
+		return "SCRIPTUICITEM_MSGBOX"
+	default:
+		return fmt.Sprintf("SCRIPTUICITEM(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SCRIPT_DEBUGGER_OPTIONS int32
 
 const (
@@ -274,6 +801,28 @@ const (
 	SDO_ENABLE_LIBRARY_STACK_FRAME     SCRIPT_DEBUGGER_OPTIONS = 8
 )
 
+// String returns the SCRIPT_DEBUGGER_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPT_DEBUGGER_OPTIONS) String() string {
+	var parts []string
+	if e&SDO_ENABLE_FIRST_CHANCE_EXCEPTIONS != 0 {
+		parts = append(parts, "SDO_ENABLE_FIRST_CHANCE_EXCEPTIONS")
+	}
+	if e&SDO_ENABLE_WEB_WORKER_SUPPORT != 0 {
+		parts = append(parts, "SDO_ENABLE_WEB_WORKER_SUPPORT")
+	}
+	if e&SDO_ENABLE_NONUSER_CODE_SUPPORT != 0 {
+		parts = append(parts, "SDO_ENABLE_NONUSER_CODE_SUPPORT")
+	}
+	if e&SDO_ENABLE_LIBRARY_STACK_FRAME != 0 {
+		parts = append(parts, "SDO_ENABLE_LIBRARY_STACK_FRAME")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SCRIPT_ERROR_DEBUG_EXCEPTION_THROWN_KIND int32
 
 const (
@@ -281,6 +830,21 @@ const (
 	ETK_USER_UNHANDLED SCRIPT_ERROR_DEBUG_EXCEPTION_THROWN_KIND = 1
 	ETK_UNHANDLED      SCRIPT_ERROR_DEBUG_EXCEPTION_THROWN_KIND = 2
 )
+
+// String returns the SCRIPT_ERROR_DEBUG_EXCEPTION_THROWN_KIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPT_ERROR_DEBUG_EXCEPTION_THROWN_KIND) String() string {
+	switch e {
+	case ETK_FIRST_CHANCE:
+		return "ETK_FIRST_CHANCE"
+	case ETK_USER_UNHANDLED:
+		return "ETK_USER_UNHANDLED"
+	case ETK_UNHANDLED:
+		return "ETK_UNHANDLED"
+	default:
+		return fmt.Sprintf("SCRIPT_ERROR_DEBUG_EXCEPTION_THROWN_KIND(%d)", int32(e))
+	}
+}
 
 type SCRIPT_INVOCATION_CONTEXT_TYPE int32
 
@@ -295,3 +859,30 @@ const (
 	SICT_WWAExecUnsafeLocalFunction SCRIPT_INVOCATION_CONTEXT_TYPE = 7
 	SICT_WWAExecAtPriority          SCRIPT_INVOCATION_CONTEXT_TYPE = 8
 )
+
+// String returns the SCRIPT_INVOCATION_CONTEXT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPT_INVOCATION_CONTEXT_TYPE) String() string {
+	switch e {
+	case SICT_Event:
+		return "SICT_Event"
+	case SICT_SetTimeout:
+		return "SICT_SetTimeout"
+	case SICT_SetInterval:
+		return "SICT_SetInterval"
+	case SICT_SetImmediate:
+		return "SICT_SetImmediate"
+	case SICT_RequestAnimationFrame:
+		return "SICT_RequestAnimationFrame"
+	case SICT_ToString:
+		return "SICT_ToString"
+	case SICT_MutationObserverCheckpoint:
+		return "SICT_MutationObserverCheckpoint"
+	case SICT_WWAExecUnsafeLocalFunction:
+		return "SICT_WWAExecUnsafeLocalFunction"
+	case SICT_WWAExecAtPriority:
+		return "SICT_WWAExecAtPriority"
+	default:
+		return fmt.Sprintf("SCRIPT_INVOCATION_CONTEXT_TYPE(%d)", int32(e))
+	}
+}

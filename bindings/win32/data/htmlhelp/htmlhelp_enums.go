@@ -4,6 +4,10 @@
 
 package htmlhelp
 
+import (
+	"fmt"
+)
+
 type HH_GPROPID int32
 
 const (
@@ -13,6 +17,25 @@ const (
 	HH_GPROPID_CURRENT_SUBSET   HH_GPROPID = 4
 	HH_GPROPID_CONTENT_LANGUAGE HH_GPROPID = 5
 )
+
+// String returns the HH_GPROPID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HH_GPROPID) String() string {
+	switch e {
+	case HH_GPROPID_SINGLETHREAD:
+		return "HH_GPROPID_SINGLETHREAD"
+	case HH_GPROPID_TOOLBAR_MARGIN:
+		return "HH_GPROPID_TOOLBAR_MARGIN"
+	case HH_GPROPID_UI_LANGUAGE:
+		return "HH_GPROPID_UI_LANGUAGE"
+	case HH_GPROPID_CURRENT_SUBSET:
+		return "HH_GPROPID_CURRENT_SUBSET"
+	case HH_GPROPID_CONTENT_LANGUAGE:
+		return "HH_GPROPID_CONTENT_LANGUAGE"
+	default:
+		return fmt.Sprintf("HH_GPROPID(%d)", int32(e))
+	}
+}
 
 type HTML_HELP_COMMAND int32
 
@@ -55,6 +78,81 @@ const (
 	HH_FTS_DEFAULT_PROXIMITY HTML_HELP_COMMAND = -1
 )
 
+// String returns the HTML_HELP_COMMAND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTML_HELP_COMMAND) String() string {
+	switch e {
+	case HH_DISPLAY_TOPIC:
+		return "HH_DISPLAY_TOPIC"
+	case HH_DISPLAY_TOC:
+		return "HH_DISPLAY_TOC"
+	case HH_DISPLAY_INDEX:
+		return "HH_DISPLAY_INDEX"
+	case HH_DISPLAY_SEARCH:
+		return "HH_DISPLAY_SEARCH"
+	case HH_SET_WIN_TYPE:
+		return "HH_SET_WIN_TYPE"
+	case HH_GET_WIN_TYPE:
+		return "HH_GET_WIN_TYPE"
+	case HH_GET_WIN_HANDLE:
+		return "HH_GET_WIN_HANDLE"
+	case HH_ENUM_INFO_TYPE:
+		return "HH_ENUM_INFO_TYPE"
+	case HH_SET_INFO_TYPE:
+		return "HH_SET_INFO_TYPE"
+	case HH_SYNC:
+		return "HH_SYNC"
+	case HH_RESERVED1:
+		return "HH_RESERVED1"
+	case HH_RESERVED2:
+		return "HH_RESERVED2"
+	case HH_RESERVED3:
+		return "HH_RESERVED3"
+	case HH_KEYWORD_LOOKUP:
+		return "HH_KEYWORD_LOOKUP"
+	case HH_DISPLAY_TEXT_POPUP:
+		return "HH_DISPLAY_TEXT_POPUP"
+	case HH_HELP_CONTEXT:
+		return "HH_HELP_CONTEXT"
+	case HH_TP_HELP_CONTEXTMENU:
+		return "HH_TP_HELP_CONTEXTMENU"
+	case HH_TP_HELP_WM_HELP:
+		return "HH_TP_HELP_WM_HELP"
+	case HH_CLOSE_ALL:
+		return "HH_CLOSE_ALL"
+	case HH_ALINK_LOOKUP:
+		return "HH_ALINK_LOOKUP"
+	case HH_GET_LAST_ERROR:
+		return "HH_GET_LAST_ERROR"
+	case HH_ENUM_CATEGORY:
+		return "HH_ENUM_CATEGORY"
+	case HH_ENUM_CATEGORY_IT:
+		return "HH_ENUM_CATEGORY_IT"
+	case HH_RESET_IT_FILTER:
+		return "HH_RESET_IT_FILTER"
+	case HH_SET_INCLUSIVE_FILTER:
+		return "HH_SET_INCLUSIVE_FILTER"
+	case HH_SET_EXCLUSIVE_FILTER:
+		return "HH_SET_EXCLUSIVE_FILTER"
+	case HH_INITIALIZE:
+		return "HH_INITIALIZE"
+	case HH_UNINITIALIZE:
+		return "HH_UNINITIALIZE"
+	case HH_SET_QUERYSERVICE:
+		return "HH_SET_QUERYSERVICE"
+	case HH_PRETRANSLATEMESSAGE:
+		return "HH_PRETRANSLATEMESSAGE"
+	case HH_SET_GLOBAL_PROPERTY:
+		return "HH_SET_GLOBAL_PROPERTY"
+	case HH_SAFE_DISPLAY_TOPIC:
+		return "HH_SAFE_DISPLAY_TOPIC"
+	case HH_FTS_DEFAULT_PROXIMITY:
+		return "HH_FTS_DEFAULT_PROXIMITY"
+	default:
+		return fmt.Sprintf("HTML_HELP_COMMAND(%d)", int32(e))
+	}
+}
+
 type PRIORITY int32
 
 const (
@@ -62,3 +160,18 @@ const (
 	PRIORITY_NORMAL PRIORITY = 1
 	PRIORITY_HIGH   PRIORITY = 2
 )
+
+// String returns the PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRIORITY) String() string {
+	switch e {
+	case PRIORITY_LOW:
+		return "PRIORITY_LOW"
+	case PRIORITY_NORMAL:
+		return "PRIORITY_NORMAL"
+	case PRIORITY_HIGH:
+		return "PRIORITY_HIGH"
+	default:
+		return fmt.Sprintf("PRIORITY(%d)", int32(e))
+	}
+}

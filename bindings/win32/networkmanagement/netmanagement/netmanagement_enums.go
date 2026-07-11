@@ -4,6 +4,12 @@
 
 package netmanagement
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type AF_OP uint32
 
 const (
@@ -12,6 +18,28 @@ const (
 	AF_OP_SERVER   AF_OP = 4
 	AF_OP_ACCOUNTS AF_OP = 8
 )
+
+// String returns the AF_OP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AF_OP) String() string {
+	var parts []string
+	if e&AF_OP_PRINT != 0 {
+		parts = append(parts, "AF_OP_PRINT")
+	}
+	if e&AF_OP_COMM != 0 {
+		parts = append(parts, "AF_OP_COMM")
+	}
+	if e&AF_OP_SERVER != 0 {
+		parts = append(parts, "AF_OP_SERVER")
+	}
+	if e&AF_OP_ACCOUNTS != 0 {
+		parts = append(parts, "AF_OP_ACCOUNTS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type BIND_FLAGS1 int32
 
@@ -28,6 +56,37 @@ const (
 	NCN_NETCLIENT      BIND_FLAGS1 = 262144
 	NCN_NETSERVICE     BIND_FLAGS1 = 524288
 )
+
+// String returns the BIND_FLAGS1 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BIND_FLAGS1) String() string {
+	switch e {
+	case NCN_ADD:
+		return "NCN_ADD"
+	case NCN_REMOVE:
+		return "NCN_REMOVE"
+	case NCN_UPDATE:
+		return "NCN_UPDATE"
+	case NCN_ENABLE:
+		return "NCN_ENABLE"
+	case NCN_DISABLE:
+		return "NCN_DISABLE"
+	case NCN_BINDING_PATH:
+		return "NCN_BINDING_PATH"
+	case NCN_PROPERTYCHANGE:
+		return "NCN_PROPERTYCHANGE"
+	case NCN_NET:
+		return "NCN_NET"
+	case NCN_NETTRANS:
+		return "NCN_NETTRANS"
+	case NCN_NETCLIENT:
+		return "NCN_NETCLIENT"
+	case NCN_NETSERVICE:
+		return "NCN_NETSERVICE"
+	default:
+		return fmt.Sprintf("BIND_FLAGS1(%d)", int32(e))
+	}
+}
 
 type COMPONENT_CHARACTERISTICS int32
 
@@ -49,11 +108,61 @@ const (
 	NCF_LW_FILTER                   COMPONENT_CHARACTERISTICS = 262144
 )
 
+// String returns the COMPONENT_CHARACTERISTICS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPONENT_CHARACTERISTICS) String() string {
+	switch e {
+	case NCF_VIRTUAL:
+		return "NCF_VIRTUAL"
+	case NCF_SOFTWARE_ENUMERATED:
+		return "NCF_SOFTWARE_ENUMERATED"
+	case NCF_PHYSICAL:
+		return "NCF_PHYSICAL"
+	case NCF_HIDDEN:
+		return "NCF_HIDDEN"
+	case NCF_NO_SERVICE:
+		return "NCF_NO_SERVICE"
+	case NCF_NOT_USER_REMOVABLE:
+		return "NCF_NOT_USER_REMOVABLE"
+	case NCF_MULTIPORT_INSTANCED_ADAPTER:
+		return "NCF_MULTIPORT_INSTANCED_ADAPTER"
+	case NCF_HAS_UI:
+		return "NCF_HAS_UI"
+	case NCF_SINGLE_INSTANCE:
+		return "NCF_SINGLE_INSTANCE"
+	case NCF_FILTER:
+		return "NCF_FILTER"
+	case NCF_DONTEXPOSELOWER:
+		return "NCF_DONTEXPOSELOWER"
+	case NCF_HIDE_BINDING:
+		return "NCF_HIDE_BINDING"
+	case NCF_NDIS_PROTOCOL:
+		return "NCF_NDIS_PROTOCOL"
+	case NCF_FIXED_BINDING:
+		return "NCF_FIXED_BINDING"
+	case NCF_LW_FILTER:
+		return "NCF_LW_FILTER"
+	default:
+		return fmt.Sprintf("COMPONENT_CHARACTERISTICS(%d)", int32(e))
+	}
+}
+
 type DEFAULT_PAGES int32
 
 const (
 	DPP_ADVANCED DEFAULT_PAGES = 1
 )
+
+// String returns the DEFAULT_PAGES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEFAULT_PAGES) String() string {
+	switch e {
+	case DPP_ADVANCED:
+		return "DPP_ADVANCED"
+	default:
+		return fmt.Sprintf("DEFAULT_PAGES(%d)", int32(e))
+	}
+}
 
 // DSREG_JOIN_TYPE: https://learn.microsoft.com/windows/win32/api/lmjoin/ne-lmjoin-dsreg_join_type
 type DSREG_JOIN_TYPE int32
@@ -64,12 +173,40 @@ const (
 	DSREG_WORKPLACE_JOIN DSREG_JOIN_TYPE = 2
 )
 
+// String returns the DSREG_JOIN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DSREG_JOIN_TYPE) String() string {
+	switch e {
+	case DSREG_UNKNOWN_JOIN:
+		return "DSREG_UNKNOWN_JOIN"
+	case DSREG_DEVICE_JOIN:
+		return "DSREG_DEVICE_JOIN"
+	case DSREG_WORKPLACE_JOIN:
+		return "DSREG_WORKPLACE_JOIN"
+	default:
+		return fmt.Sprintf("DSREG_JOIN_TYPE(%d)", int32(e))
+	}
+}
+
 type ENUM_BINDING_PATHS_FLAGS int32
 
 const (
 	EBP_ABOVE ENUM_BINDING_PATHS_FLAGS = 1
 	EBP_BELOW ENUM_BINDING_PATHS_FLAGS = 2
 )
+
+// String returns the ENUM_BINDING_PATHS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENUM_BINDING_PATHS_FLAGS) String() string {
+	switch e {
+	case EBP_ABOVE:
+		return "EBP_ABOVE"
+	case EBP_BELOW:
+		return "EBP_BELOW"
+	default:
+		return fmt.Sprintf("ENUM_BINDING_PATHS_FLAGS(%d)", int32(e))
+	}
+}
 
 type FORCE_LEVEL_FLAGS uint32
 
@@ -78,6 +215,21 @@ const (
 	USE_FORCE         FORCE_LEVEL_FLAGS = 1
 	USE_LOTS_OF_FORCE FORCE_LEVEL_FLAGS = 2
 )
+
+// String returns the FORCE_LEVEL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FORCE_LEVEL_FLAGS) String() string {
+	switch e {
+	case USE_NOFORCE:
+		return "USE_NOFORCE"
+	case USE_FORCE:
+		return "USE_FORCE"
+	case USE_LOTS_OF_FORCE:
+		return "USE_LOTS_OF_FORCE"
+	default:
+		return fmt.Sprintf("FORCE_LEVEL_FLAGS(%d)", uint32(e))
+	}
+}
 
 type MSA_INFO_ACCOUNT_TYPE int32
 
@@ -88,6 +240,23 @@ const (
 	DelegatedManagedServiceAccount  MSA_INFO_ACCOUNT_TYPE = 3
 )
 
+// String returns the MSA_INFO_ACCOUNT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSA_INFO_ACCOUNT_TYPE) String() string {
+	switch e {
+	case MsaAccountFalse:
+		return "MsaAccountFalse"
+	case StandAloneManagedServiceAccount:
+		return "StandAloneManagedServiceAccount"
+	case GroupManagedServiceAccount:
+		return "GroupManagedServiceAccount"
+	case DelegatedManagedServiceAccount:
+		return "DelegatedManagedServiceAccount"
+	default:
+		return fmt.Sprintf("MSA_INFO_ACCOUNT_TYPE(%d)", int32(e))
+	}
+}
+
 // MSA_INFO_LEVEL: https://learn.microsoft.com/windows/win32/api/lmaccess/ne-lmaccess-msa_info_level
 type MSA_INFO_LEVEL int32
 
@@ -96,6 +265,21 @@ const (
 	MsaInfoLevel1   MSA_INFO_LEVEL = 1
 	MsaInfoLevelMax MSA_INFO_LEVEL = 2
 )
+
+// String returns the MSA_INFO_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSA_INFO_LEVEL) String() string {
+	switch e {
+	case MsaInfoLevel0:
+		return "MsaInfoLevel0"
+	case MsaInfoLevel1:
+		return "MsaInfoLevel1"
+	case MsaInfoLevelMax:
+		return "MsaInfoLevelMax"
+	default:
+		return fmt.Sprintf("MSA_INFO_LEVEL(%d)", int32(e))
+	}
+}
 
 // MSA_INFO_STATE: https://learn.microsoft.com/windows/win32/api/lmaccess/ne-lmaccess-msa_info_state
 type MSA_INFO_STATE int32
@@ -108,6 +292,25 @@ const (
 	MsaInfoInstalled     MSA_INFO_STATE = 5
 )
 
+// String returns the MSA_INFO_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSA_INFO_STATE) String() string {
+	switch e {
+	case MsaInfoNotExist:
+		return "MsaInfoNotExist"
+	case MsaInfoNotService:
+		return "MsaInfoNotService"
+	case MsaInfoCannotInstall:
+		return "MsaInfoCannotInstall"
+	case MsaInfoCanInstall:
+		return "MsaInfoCanInstall"
+	case MsaInfoInstalled:
+		return "MsaInfoInstalled"
+	default:
+		return fmt.Sprintf("MSA_INFO_STATE(%d)", int32(e))
+	}
+}
+
 type NCPNP_RECONFIG_LAYER int32
 
 const (
@@ -115,12 +318,38 @@ const (
 	NCRL_TDI  NCPNP_RECONFIG_LAYER = 2
 )
 
+// String returns the NCPNP_RECONFIG_LAYER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NCPNP_RECONFIG_LAYER) String() string {
+	switch e {
+	case NCRL_NDIS:
+		return "NCRL_NDIS"
+	case NCRL_TDI:
+		return "NCRL_TDI"
+	default:
+		return fmt.Sprintf("NCPNP_RECONFIG_LAYER(%d)", int32(e))
+	}
+}
+
 type NCRP_FLAGS int32
 
 const (
 	NCRP_QUERY_PROPERTY_UI NCRP_FLAGS = 1
 	NCRP_SHOW_PROPERTY_UI  NCRP_FLAGS = 2
 )
+
+// String returns the NCRP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NCRP_FLAGS) String() string {
+	switch e {
+	case NCRP_QUERY_PROPERTY_UI:
+		return "NCRP_QUERY_PROPERTY_UI"
+	case NCRP_SHOW_PROPERTY_UI:
+		return "NCRP_SHOW_PROPERTY_UI"
+	default:
+		return fmt.Sprintf("NCRP_FLAGS(%d)", int32(e))
+	}
+}
 
 type NETSETUP_JOIN_STATUS int32
 
@@ -130,6 +359,23 @@ const (
 	NetSetupWorkgroupName NETSETUP_JOIN_STATUS = 2
 	NetSetupDomainName    NETSETUP_JOIN_STATUS = 3
 )
+
+// String returns the NETSETUP_JOIN_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETSETUP_JOIN_STATUS) String() string {
+	switch e {
+	case NetSetupUnknownStatus:
+		return "NetSetupUnknownStatus"
+	case NetSetupUnjoined:
+		return "NetSetupUnjoined"
+	case NetSetupWorkgroupName:
+		return "NetSetupWorkgroupName"
+	case NetSetupDomainName:
+		return "NetSetupDomainName"
+	default:
+		return fmt.Sprintf("NETSETUP_JOIN_STATUS(%d)", int32(e))
+	}
+}
 
 type NETSETUP_NAME_TYPE int32
 
@@ -142,6 +388,28 @@ const (
 	NetSetupDnsMachine        NETSETUP_NAME_TYPE = 5
 )
 
+// String returns the NETSETUP_NAME_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETSETUP_NAME_TYPE) String() string {
+	switch e {
+	case NetSetupUnknown:
+		return "NetSetupUnknown"
+	case NetSetupMachine:
+		return "NetSetupMachine"
+	case NetSetupWorkgroup:
+		return "NetSetupWorkgroup"
+	case NetSetupDomain:
+		return "NetSetupDomain"
+	case NetSetupNonExistentDomain:
+		return "NetSetupNonExistentDomain"
+	case NetSetupDnsMachine:
+		return "NetSetupDnsMachine"
+	default:
+		return fmt.Sprintf("NETSETUP_NAME_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NETSETUP_PROVISION uint32
 
 const (
@@ -152,12 +420,50 @@ const (
 	NETSETUP_PROVISION_ROOT_CA_CERTS          NETSETUP_PROVISION = 16
 )
 
+// String returns the NETSETUP_PROVISION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETSETUP_PROVISION) String() string {
+	var parts []string
+	if e&NETSETUP_PROVISION_DOWNLEVEL_PRIV_SUPPORT != 0 {
+		parts = append(parts, "NETSETUP_PROVISION_DOWNLEVEL_PRIV_SUPPORT")
+	}
+	if e&NETSETUP_PROVISION_REUSE_ACCOUNT != 0 {
+		parts = append(parts, "NETSETUP_PROVISION_REUSE_ACCOUNT")
+	}
+	if e&NETSETUP_PROVISION_USE_DEFAULT_PASSWORD != 0 {
+		parts = append(parts, "NETSETUP_PROVISION_USE_DEFAULT_PASSWORD")
+	}
+	if e&NETSETUP_PROVISION_SKIP_ACCOUNT_SEARCH != 0 {
+		parts = append(parts, "NETSETUP_PROVISION_SKIP_ACCOUNT_SEARCH")
+	}
+	if e&NETSETUP_PROVISION_ROOT_CA_CERTS != 0 {
+		parts = append(parts, "NETSETUP_PROVISION_ROOT_CA_CERTS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type NETWORK_INSTALL_TIME int32
 
 const (
 	NSF_PRIMARYINSTALL NETWORK_INSTALL_TIME = 1
 	NSF_POSTSYSINSTALL NETWORK_INSTALL_TIME = 2
 )
+
+// String returns the NETWORK_INSTALL_TIME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETWORK_INSTALL_TIME) String() string {
+	switch e {
+	case NSF_PRIMARYINSTALL:
+		return "NSF_PRIMARYINSTALL"
+	case NSF_POSTSYSINSTALL:
+		return "NSF_POSTSYSINSTALL"
+	default:
+		return fmt.Sprintf("NETWORK_INSTALL_TIME(%d)", int32(e))
+	}
+}
 
 type NETWORK_UPGRADE_TYPE int32
 
@@ -170,6 +476,27 @@ const (
 	NSF_COMPONENT_UPDATE  NETWORK_UPGRADE_TYPE = 512
 )
 
+// String returns the NETWORK_UPGRADE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETWORK_UPGRADE_TYPE) String() string {
+	switch e {
+	case NSF_WIN16_UPGRADE:
+		return "NSF_WIN16_UPGRADE"
+	case NSF_WIN95_UPGRADE:
+		return "NSF_WIN95_UPGRADE"
+	case NSF_WINNT_WKS_UPGRADE:
+		return "NSF_WINNT_WKS_UPGRADE"
+	case NSF_WINNT_SVR_UPGRADE:
+		return "NSF_WINNT_SVR_UPGRADE"
+	case NSF_WINNT_SBS_UPGRADE:
+		return "NSF_WINNT_SBS_UPGRADE"
+	case NSF_COMPONENT_UPDATE:
+		return "NSF_COMPONENT_UPDATE"
+	default:
+		return fmt.Sprintf("NETWORK_UPGRADE_TYPE(%d)", int32(e))
+	}
+}
+
 type NET_COMPUTER_NAME_TYPE int32
 
 const (
@@ -179,6 +506,24 @@ const (
 	NetComputerNameTypeMax    NET_COMPUTER_NAME_TYPE = 3
 )
 
+// String returns the NET_COMPUTER_NAME_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_COMPUTER_NAME_TYPE) String() string {
+	switch e {
+	case NetPrimaryComputerName:
+		return "NetPrimaryComputerName"
+	case NetAlternateComputerNames:
+		return "NetAlternateComputerNames"
+	case NetAllComputerNames:
+		return "NetAllComputerNames"
+	case NetComputerNameTypeMax:
+		return "NetComputerNameTypeMax"
+	default:
+		return fmt.Sprintf("NET_COMPUTER_NAME_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NET_JOIN_DOMAIN_JOIN_OPTIONS uint32
 
 const (
@@ -201,6 +546,67 @@ const (
 	NETSETUP_IGNORE_UNSUPPORTED_FLAGS NET_JOIN_DOMAIN_JOIN_OPTIONS = 268435456
 )
 
+// String returns the NET_JOIN_DOMAIN_JOIN_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_JOIN_DOMAIN_JOIN_OPTIONS) String() string {
+	var parts []string
+	if e&NETSETUP_JOIN_DOMAIN != 0 {
+		parts = append(parts, "NETSETUP_JOIN_DOMAIN")
+	}
+	if e&NETSETUP_ACCT_CREATE != 0 {
+		parts = append(parts, "NETSETUP_ACCT_CREATE")
+	}
+	if e&NETSETUP_WIN9X_UPGRADE != 0 {
+		parts = append(parts, "NETSETUP_WIN9X_UPGRADE")
+	}
+	if e&NETSETUP_DOMAIN_JOIN_IF_JOINED != 0 {
+		parts = append(parts, "NETSETUP_DOMAIN_JOIN_IF_JOINED")
+	}
+	if e&NETSETUP_JOIN_UNSECURE != 0 {
+		parts = append(parts, "NETSETUP_JOIN_UNSECURE")
+	}
+	if e&NETSETUP_MACHINE_PWD_PASSED != 0 {
+		parts = append(parts, "NETSETUP_MACHINE_PWD_PASSED")
+	}
+	if e&NETSETUP_DEFER_SPN_SET != 0 {
+		parts = append(parts, "NETSETUP_DEFER_SPN_SET")
+	}
+	if e&NETSETUP_JOIN_DC_ACCOUNT != 0 {
+		parts = append(parts, "NETSETUP_JOIN_DC_ACCOUNT")
+	}
+	if e&NETSETUP_JOIN_WITH_NEW_NAME != 0 {
+		parts = append(parts, "NETSETUP_JOIN_WITH_NEW_NAME")
+	}
+	if e&NETSETUP_JOIN_READONLY != 0 {
+		parts = append(parts, "NETSETUP_JOIN_READONLY")
+	}
+	if e&NETSETUP_AMBIGUOUS_DC != 0 {
+		parts = append(parts, "NETSETUP_AMBIGUOUS_DC")
+	}
+	if e&NETSETUP_NO_NETLOGON_CACHE != 0 {
+		parts = append(parts, "NETSETUP_NO_NETLOGON_CACHE")
+	}
+	if e&NETSETUP_DONT_CONTROL_SERVICES != 0 {
+		parts = append(parts, "NETSETUP_DONT_CONTROL_SERVICES")
+	}
+	if e&NETSETUP_SET_MACHINE_NAME != 0 {
+		parts = append(parts, "NETSETUP_SET_MACHINE_NAME")
+	}
+	if e&NETSETUP_FORCE_SPN_SET != 0 {
+		parts = append(parts, "NETSETUP_FORCE_SPN_SET")
+	}
+	if e&NETSETUP_NO_ACCT_REUSE != 0 {
+		parts = append(parts, "NETSETUP_NO_ACCT_REUSE")
+	}
+	if e&NETSETUP_IGNORE_UNSUPPORTED_FLAGS != 0 {
+		parts = append(parts, "NETSETUP_IGNORE_UNSUPPORTED_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS uint32
 
 const (
@@ -211,12 +617,46 @@ const (
 	SUPPORTS_LOCAL                 NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS = 32
 )
 
+// String returns the NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS) String() string {
+	switch e {
+	case SUPPORTS_REMOTE_ADMIN_PROTOCOL:
+		return "SUPPORTS_REMOTE_ADMIN_PROTOCOL"
+	case SUPPORTS_RPC:
+		return "SUPPORTS_RPC"
+	case SUPPORTS_SAM_PROTOCOL:
+		return "SUPPORTS_SAM_PROTOCOL"
+	case SUPPORTS_UNICODE:
+		return "SUPPORTS_UNICODE"
+	case SUPPORTS_LOCAL:
+		return "SUPPORTS_LOCAL"
+	default:
+		return fmt.Sprintf("NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NET_REQUEST_PROVISION_OPTIONS uint32
 
 const (
 	NETSETUP_PROVISION_ONLINE_CALLER NET_REQUEST_PROVISION_OPTIONS = 1073741824
 )
 
+// String returns the NET_REQUEST_PROVISION_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_REQUEST_PROVISION_OPTIONS) String() string {
+	var parts []string
+	if e&NETSETUP_PROVISION_ONLINE_CALLER != 0 {
+		parts = append(parts, "NETSETUP_PROVISION_ONLINE_CALLER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type NET_SERVER_TYPE uint32
 
 const (
@@ -255,6 +695,116 @@ const (
 	SV_TYPE_ALL               NET_SERVER_TYPE = 4294967295
 )
 
+// String returns the NET_SERVER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_SERVER_TYPE) String() string {
+	var parts []string
+	if e&SV_TYPE_WORKSTATION != 0 {
+		parts = append(parts, "SV_TYPE_WORKSTATION")
+	}
+	if e&SV_TYPE_SERVER != 0 {
+		parts = append(parts, "SV_TYPE_SERVER")
+	}
+	if e&SV_TYPE_SQLSERVER != 0 {
+		parts = append(parts, "SV_TYPE_SQLSERVER")
+	}
+	if e&SV_TYPE_DOMAIN_CTRL != 0 {
+		parts = append(parts, "SV_TYPE_DOMAIN_CTRL")
+	}
+	if e&SV_TYPE_DOMAIN_BAKCTRL != 0 {
+		parts = append(parts, "SV_TYPE_DOMAIN_BAKCTRL")
+	}
+	if e&SV_TYPE_TIME_SOURCE != 0 {
+		parts = append(parts, "SV_TYPE_TIME_SOURCE")
+	}
+	if e&SV_TYPE_AFP != 0 {
+		parts = append(parts, "SV_TYPE_AFP")
+	}
+	if e&SV_TYPE_NOVELL != 0 {
+		parts = append(parts, "SV_TYPE_NOVELL")
+	}
+	if e&SV_TYPE_DOMAIN_MEMBER != 0 {
+		parts = append(parts, "SV_TYPE_DOMAIN_MEMBER")
+	}
+	if e&SV_TYPE_PRINTQ_SERVER != 0 {
+		parts = append(parts, "SV_TYPE_PRINTQ_SERVER")
+	}
+	if e&SV_TYPE_DIALIN_SERVER != 0 {
+		parts = append(parts, "SV_TYPE_DIALIN_SERVER")
+	}
+	if e&SV_TYPE_XENIX_SERVER != 0 {
+		parts = append(parts, "SV_TYPE_XENIX_SERVER")
+	}
+	if e&SV_TYPE_SERVER_UNIX != 0 {
+		parts = append(parts, "SV_TYPE_SERVER_UNIX")
+	}
+	if e&SV_TYPE_NT != 0 {
+		parts = append(parts, "SV_TYPE_NT")
+	}
+	if e&SV_TYPE_WFW != 0 {
+		parts = append(parts, "SV_TYPE_WFW")
+	}
+	if e&SV_TYPE_SERVER_MFPN != 0 {
+		parts = append(parts, "SV_TYPE_SERVER_MFPN")
+	}
+	if e&SV_TYPE_SERVER_NT != 0 {
+		parts = append(parts, "SV_TYPE_SERVER_NT")
+	}
+	if e&SV_TYPE_POTENTIAL_BROWSER != 0 {
+		parts = append(parts, "SV_TYPE_POTENTIAL_BROWSER")
+	}
+	if e&SV_TYPE_BACKUP_BROWSER != 0 {
+		parts = append(parts, "SV_TYPE_BACKUP_BROWSER")
+	}
+	if e&SV_TYPE_MASTER_BROWSER != 0 {
+		parts = append(parts, "SV_TYPE_MASTER_BROWSER")
+	}
+	if e&SV_TYPE_DOMAIN_MASTER != 0 {
+		parts = append(parts, "SV_TYPE_DOMAIN_MASTER")
+	}
+	if e&SV_TYPE_SERVER_OSF != 0 {
+		parts = append(parts, "SV_TYPE_SERVER_OSF")
+	}
+	if e&SV_TYPE_SERVER_VMS != 0 {
+		parts = append(parts, "SV_TYPE_SERVER_VMS")
+	}
+	if e&SV_TYPE_WINDOWS != 0 {
+		parts = append(parts, "SV_TYPE_WINDOWS")
+	}
+	if e&SV_TYPE_DFS != 0 {
+		parts = append(parts, "SV_TYPE_DFS")
+	}
+	if e&SV_TYPE_CLUSTER_NT != 0 {
+		parts = append(parts, "SV_TYPE_CLUSTER_NT")
+	}
+	if e&SV_TYPE_TERMINALSERVER != 0 {
+		parts = append(parts, "SV_TYPE_TERMINALSERVER")
+	}
+	if e&SV_TYPE_CLUSTER_VS_NT != 0 {
+		parts = append(parts, "SV_TYPE_CLUSTER_VS_NT")
+	}
+	if e&SV_TYPE_DCE != 0 {
+		parts = append(parts, "SV_TYPE_DCE")
+	}
+	if e&SV_TYPE_ALTERNATE_XPORT != 0 {
+		parts = append(parts, "SV_TYPE_ALTERNATE_XPORT")
+	}
+	if e&SV_TYPE_LOCAL_LIST_ONLY != 0 {
+		parts = append(parts, "SV_TYPE_LOCAL_LIST_ONLY")
+	}
+	if e&SV_TYPE_DOMAIN_ENUM != 0 {
+		parts = append(parts, "SV_TYPE_DOMAIN_ENUM")
+	}
+	if e&SV_TYPE_ALL != 0 {
+		parts = append(parts, "SV_TYPE_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type NET_USER_ENUM_FILTER_FLAGS uint32
 
 const (
@@ -265,6 +815,31 @@ const (
 	FILTER_SERVER_TRUST_ACCOUNT      NET_USER_ENUM_FILTER_FLAGS = 32
 )
 
+// String returns the NET_USER_ENUM_FILTER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_USER_ENUM_FILTER_FLAGS) String() string {
+	var parts []string
+	if e&FILTER_TEMP_DUPLICATE_ACCOUNT != 0 {
+		parts = append(parts, "FILTER_TEMP_DUPLICATE_ACCOUNT")
+	}
+	if e&FILTER_NORMAL_ACCOUNT != 0 {
+		parts = append(parts, "FILTER_NORMAL_ACCOUNT")
+	}
+	if e&FILTER_INTERDOMAIN_TRUST_ACCOUNT != 0 {
+		parts = append(parts, "FILTER_INTERDOMAIN_TRUST_ACCOUNT")
+	}
+	if e&FILTER_WORKSTATION_TRUST_ACCOUNT != 0 {
+		parts = append(parts, "FILTER_WORKSTATION_TRUST_ACCOUNT")
+	}
+	if e&FILTER_SERVER_TRUST_ACCOUNT != 0 {
+		parts = append(parts, "FILTER_SERVER_TRUST_ACCOUNT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type NET_VALIDATE_PASSWORD_TYPE int32
 
 const (
@@ -273,6 +848,21 @@ const (
 	NetValidatePasswordReset  NET_VALIDATE_PASSWORD_TYPE = 3
 )
 
+// String returns the NET_VALIDATE_PASSWORD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_VALIDATE_PASSWORD_TYPE) String() string {
+	switch e {
+	case NetValidateAuthentication:
+		return "NetValidateAuthentication"
+	case NetValidatePasswordChange:
+		return "NetValidatePasswordChange"
+	case NetValidatePasswordReset:
+		return "NetValidatePasswordReset"
+	default:
+		return fmt.Sprintf("NET_VALIDATE_PASSWORD_TYPE(%d)", int32(e))
+	}
+}
+
 type OBO_TOKEN_TYPE int32
 
 const (
@@ -280,6 +870,21 @@ const (
 	OBO_COMPONENT OBO_TOKEN_TYPE = 2
 	OBO_SOFTWARE  OBO_TOKEN_TYPE = 3
 )
+
+// String returns the OBO_TOKEN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OBO_TOKEN_TYPE) String() string {
+	switch e {
+	case OBO_USER:
+		return "OBO_USER"
+	case OBO_COMPONENT:
+		return "OBO_COMPONENT"
+	case OBO_SOFTWARE:
+		return "OBO_SOFTWARE"
+	default:
+		return fmt.Sprintf("OBO_TOKEN_TYPE(%d)", int32(e))
+	}
+}
 
 type RASCON_UIINFO_FLAGS int32
 
@@ -302,12 +907,66 @@ const (
 	RCUIF_DISABLE_CLASS_BASED_ROUTE RASCON_UIINFO_FLAGS = 32768
 )
 
+// String returns the RASCON_UIINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RASCON_UIINFO_FLAGS) String() string {
+	switch e {
+	case RCUIF_VPN:
+		return "RCUIF_VPN"
+	case RCUIF_DEMAND_DIAL:
+		return "RCUIF_DEMAND_DIAL"
+	case RCUIF_NOT_ADMIN:
+		return "RCUIF_NOT_ADMIN"
+	case RCUIF_USE_IPv4_STATICADDRESS:
+		return "RCUIF_USE_IPv4_STATICADDRESS"
+	case RCUIF_USE_IPv4_NAME_SERVERS:
+		return "RCUIF_USE_IPv4_NAME_SERVERS"
+	case RCUIF_USE_IPv4_REMOTE_GATEWAY:
+		return "RCUIF_USE_IPv4_REMOTE_GATEWAY"
+	case RCUIF_USE_IPv4_EXPLICIT_METRIC:
+		return "RCUIF_USE_IPv4_EXPLICIT_METRIC"
+	case RCUIF_USE_HEADER_COMPRESSION:
+		return "RCUIF_USE_HEADER_COMPRESSION"
+	case RCUIF_USE_DISABLE_REGISTER_DNS:
+		return "RCUIF_USE_DISABLE_REGISTER_DNS"
+	case RCUIF_USE_PRIVATE_DNS_SUFFIX:
+		return "RCUIF_USE_PRIVATE_DNS_SUFFIX"
+	case RCUIF_ENABLE_NBT:
+		return "RCUIF_ENABLE_NBT"
+	case RCUIF_USE_IPv6_STATICADDRESS:
+		return "RCUIF_USE_IPv6_STATICADDRESS"
+	case RCUIF_USE_IPv6_NAME_SERVERS:
+		return "RCUIF_USE_IPv6_NAME_SERVERS"
+	case RCUIF_USE_IPv6_REMOTE_GATEWAY:
+		return "RCUIF_USE_IPv6_REMOTE_GATEWAY"
+	case RCUIF_USE_IPv6_EXPLICIT_METRIC:
+		return "RCUIF_USE_IPv6_EXPLICIT_METRIC"
+	case RCUIF_DISABLE_CLASS_BASED_ROUTE:
+		return "RCUIF_DISABLE_CLASS_BASED_ROUTE"
+	default:
+		return fmt.Sprintf("RASCON_UIINFO_FLAGS(%d)", int32(e))
+	}
+}
+
 type SERVER_INFO_HIDDEN int32
 
 const (
 	SV_VISIBLE SERVER_INFO_HIDDEN = 0
 	SV_HIDDEN  SERVER_INFO_HIDDEN = 1
 )
+
+// String returns the SERVER_INFO_HIDDEN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVER_INFO_HIDDEN) String() string {
+	switch e {
+	case SV_VISIBLE:
+		return "SV_VISIBLE"
+	case SV_HIDDEN:
+		return "SV_HIDDEN"
+	default:
+		return fmt.Sprintf("SERVER_INFO_HIDDEN(%d)", int32(e))
+	}
+}
 
 type SERVER_INFO_SECURITY uint32
 
@@ -316,12 +975,38 @@ const (
 	SV_USERSECURITY  SERVER_INFO_SECURITY = 1
 )
 
+// String returns the SERVER_INFO_SECURITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SERVER_INFO_SECURITY) String() string {
+	switch e {
+	case SV_SHARESECURITY:
+		return "SV_SHARESECURITY"
+	case SV_USERSECURITY:
+		return "SV_USERSECURITY"
+	default:
+		return fmt.Sprintf("SERVER_INFO_SECURITY(%d)", uint32(e))
+	}
+}
+
 type SUPPORTS_BINDING_INTERFACE_FLAGS int32
 
 const (
 	NCF_LOWER SUPPORTS_BINDING_INTERFACE_FLAGS = 1
 	NCF_UPPER SUPPORTS_BINDING_INTERFACE_FLAGS = 2
 )
+
+// String returns the SUPPORTS_BINDING_INTERFACE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SUPPORTS_BINDING_INTERFACE_FLAGS) String() string {
+	switch e {
+	case NCF_LOWER:
+		return "NCF_LOWER"
+	case NCF_UPPER:
+		return "NCF_UPPER"
+	default:
+		return fmt.Sprintf("SUPPORTS_BINDING_INTERFACE_FLAGS(%d)", int32(e))
+	}
+}
 
 type TRANSPORT_INFO_FLAG int32
 
@@ -332,6 +1017,23 @@ const (
 	RdmaPortSetFlag TRANSPORT_INFO_FLAG = 4
 )
 
+// String returns the TRANSPORT_INFO_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSPORT_INFO_FLAG) String() string {
+	switch e {
+	case NoneFlag:
+		return "NoneFlag"
+	case TcpPortSetFlag:
+		return "TcpPortSetFlag"
+	case QuicPortSetFlag:
+		return "QuicPortSetFlag"
+	case RdmaPortSetFlag:
+		return "RdmaPortSetFlag"
+	default:
+		return fmt.Sprintf("TRANSPORT_INFO_FLAG(%d)", int32(e))
+	}
+}
+
 type TRANSPORT_TYPE int32
 
 const (
@@ -340,6 +1042,22 @@ const (
 	UseTransportType_Quic TRANSPORT_TYPE = 2
 )
 
+// String returns the TRANSPORT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSPORT_TYPE) String() string {
+	switch e {
+	case UseTransportType_None:
+		return "UseTransportType_None"
+	case UseTransportType_Wsk:
+		return "UseTransportType_Wsk"
+	case UseTransportType_Quic:
+		return "UseTransportType_Quic"
+	default:
+		return fmt.Sprintf("TRANSPORT_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type USER_ACCOUNT_FLAGS uint32
 
 const (
@@ -360,6 +1078,61 @@ const (
 	UF_TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION USER_ACCOUNT_FLAGS = 16777216
 )
 
+// String returns the USER_ACCOUNT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USER_ACCOUNT_FLAGS) String() string {
+	var parts []string
+	if e&UF_SCRIPT != 0 {
+		parts = append(parts, "UF_SCRIPT")
+	}
+	if e&UF_ACCOUNTDISABLE != 0 {
+		parts = append(parts, "UF_ACCOUNTDISABLE")
+	}
+	if e&UF_HOMEDIR_REQUIRED != 0 {
+		parts = append(parts, "UF_HOMEDIR_REQUIRED")
+	}
+	if e&UF_PASSWD_NOTREQD != 0 {
+		parts = append(parts, "UF_PASSWD_NOTREQD")
+	}
+	if e&UF_PASSWD_CANT_CHANGE != 0 {
+		parts = append(parts, "UF_PASSWD_CANT_CHANGE")
+	}
+	if e&UF_LOCKOUT != 0 {
+		parts = append(parts, "UF_LOCKOUT")
+	}
+	if e&UF_DONT_EXPIRE_PASSWD != 0 {
+		parts = append(parts, "UF_DONT_EXPIRE_PASSWD")
+	}
+	if e&UF_ENCRYPTED_TEXT_PASSWORD_ALLOWED != 0 {
+		parts = append(parts, "UF_ENCRYPTED_TEXT_PASSWORD_ALLOWED")
+	}
+	if e&UF_NOT_DELEGATED != 0 {
+		parts = append(parts, "UF_NOT_DELEGATED")
+	}
+	if e&UF_SMARTCARD_REQUIRED != 0 {
+		parts = append(parts, "UF_SMARTCARD_REQUIRED")
+	}
+	if e&UF_USE_DES_KEY_ONLY != 0 {
+		parts = append(parts, "UF_USE_DES_KEY_ONLY")
+	}
+	if e&UF_DONT_REQUIRE_PREAUTH != 0 {
+		parts = append(parts, "UF_DONT_REQUIRE_PREAUTH")
+	}
+	if e&UF_TRUSTED_FOR_DELEGATION != 0 {
+		parts = append(parts, "UF_TRUSTED_FOR_DELEGATION")
+	}
+	if e&UF_PASSWORD_EXPIRED != 0 {
+		parts = append(parts, "UF_PASSWORD_EXPIRED")
+	}
+	if e&UF_TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION != 0 {
+		parts = append(parts, "UF_TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type USER_MODALS_ROLES uint32
 
 const (
@@ -369,6 +1142,23 @@ const (
 	UAS_ROLE_PRIMARY    USER_MODALS_ROLES = 3
 )
 
+// String returns the USER_MODALS_ROLES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USER_MODALS_ROLES) String() string {
+	switch e {
+	case UAS_ROLE_STANDALONE:
+		return "UAS_ROLE_STANDALONE"
+	case UAS_ROLE_MEMBER:
+		return "UAS_ROLE_MEMBER"
+	case UAS_ROLE_BACKUP:
+		return "UAS_ROLE_BACKUP"
+	case UAS_ROLE_PRIMARY:
+		return "UAS_ROLE_PRIMARY"
+	default:
+		return fmt.Sprintf("USER_MODALS_ROLES(%d)", uint32(e))
+	}
+}
+
 type USER_PRIV uint32
 
 const (
@@ -376,6 +1166,21 @@ const (
 	USER_PRIV_USER  USER_PRIV = 1
 	USER_PRIV_ADMIN USER_PRIV = 2
 )
+
+// String returns the USER_PRIV constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USER_PRIV) String() string {
+	switch e {
+	case USER_PRIV_GUEST:
+		return "USER_PRIV_GUEST"
+	case USER_PRIV_USER:
+		return "USER_PRIV_USER"
+	case USER_PRIV_ADMIN:
+		return "USER_PRIV_ADMIN"
+	default:
+		return fmt.Sprintf("USER_PRIV(%d)", uint32(e))
+	}
+}
 
 type USE_INFO_ASG_TYPE uint32
 
@@ -385,3 +1190,20 @@ const (
 	USE_SPOOLDEV USE_INFO_ASG_TYPE = 1
 	USE_IPC      USE_INFO_ASG_TYPE = 3
 )
+
+// String returns the USE_INFO_ASG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USE_INFO_ASG_TYPE) String() string {
+	switch e {
+	case USE_WILDCARD:
+		return "USE_WILDCARD"
+	case USE_DISKDEV:
+		return "USE_DISKDEV"
+	case USE_SPOOLDEV:
+		return "USE_SPOOLDEV"
+	case USE_IPC:
+		return "USE_IPC"
+	default:
+		return fmt.Sprintf("USE_INFO_ASG_TYPE(%d)", uint32(e))
+	}
+}

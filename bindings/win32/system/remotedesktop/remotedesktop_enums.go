@@ -4,6 +4,11 @@
 
 package remotedesktop
 
+import (
+	"fmt"
+	"strings"
+)
+
 // AAAccountingDataType: https://learn.microsoft.com/windows/win32/api/tsgpolicyengine/ne-tsgpolicyengine-aaaccountingdatatype
 type AAAccountingDataType int32
 
@@ -13,6 +18,23 @@ const (
 	AA_SUB_SESSION_CLOSED    AAAccountingDataType = 2
 	AA_MAIN_SESSION_CLOSED   AAAccountingDataType = 3
 )
+
+// String returns the AAAccountingDataType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AAAccountingDataType) String() string {
+	switch e {
+	case AA_MAIN_SESSION_CREATION:
+		return "AA_MAIN_SESSION_CREATION"
+	case AA_SUB_SESSION_CREATION:
+		return "AA_SUB_SESSION_CREATION"
+	case AA_SUB_SESSION_CLOSED:
+		return "AA_SUB_SESSION_CLOSED"
+	case AA_MAIN_SESSION_CLOSED:
+		return "AA_MAIN_SESSION_CLOSED"
+	default:
+		return fmt.Sprintf("AAAccountingDataType(%d)", int32(e))
+	}
+}
 
 // AAAuthSchemes: https://learn.microsoft.com/windows/win32/api/tsgpolicyengine/ne-tsgpolicyengine-aaauthschemes
 type AAAuthSchemes int32
@@ -33,6 +55,41 @@ const (
 	AA_AUTH_MAX                 AAAuthSchemes = 12
 )
 
+// String returns the AAAuthSchemes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AAAuthSchemes) String() string {
+	switch e {
+	case AA_AUTH_MIN:
+		return "AA_AUTH_MIN"
+	case AA_AUTH_BASIC:
+		return "AA_AUTH_BASIC"
+	case AA_AUTH_NTLM:
+		return "AA_AUTH_NTLM"
+	case AA_AUTH_SC:
+		return "AA_AUTH_SC"
+	case AA_AUTH_LOGGEDONCREDENTIALS:
+		return "AA_AUTH_LOGGEDONCREDENTIALS"
+	case AA_AUTH_NEGOTIATE:
+		return "AA_AUTH_NEGOTIATE"
+	case AA_AUTH_ANY:
+		return "AA_AUTH_ANY"
+	case AA_AUTH_COOKIE:
+		return "AA_AUTH_COOKIE"
+	case AA_AUTH_DIGEST:
+		return "AA_AUTH_DIGEST"
+	case AA_AUTH_ORGID:
+		return "AA_AUTH_ORGID"
+	case AA_AUTH_CONID:
+		return "AA_AUTH_CONID"
+	case AA_AUTH_SSPI_NTLM:
+		return "AA_AUTH_SSPI_NTLM"
+	case AA_AUTH_MAX:
+		return "AA_AUTH_MAX"
+	default:
+		return fmt.Sprintf("AAAuthSchemes(%d)", int32(e))
+	}
+}
+
 type AATrustClassID int32
 
 const (
@@ -40,6 +97,21 @@ const (
 	AA_TRUSTEDUSER_UNTRUSTEDCLIENT AATrustClassID = 1
 	AA_TRUSTEDUSER_TRUSTEDCLIENT   AATrustClassID = 2
 )
+
+// String returns the AATrustClassID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AATrustClassID) String() string {
+	switch e {
+	case AA_UNTRUSTED:
+		return "AA_UNTRUSTED"
+	case AA_TRUSTEDUSER_UNTRUSTEDCLIENT:
+		return "AA_TRUSTEDUSER_UNTRUSTEDCLIENT"
+	case AA_TRUSTEDUSER_TRUSTEDCLIENT:
+		return "AA_TRUSTEDUSER_TRUSTEDCLIENT"
+	default:
+		return fmt.Sprintf("AATrustClassID(%d)", int32(e))
+	}
+}
 
 // AE_POSITION_FLAGS: https://learn.microsoft.com/windows/win32/api/audioengineendpoint/ne-audioengineendpoint-ae_position_flags
 type AE_POSITION_FLAGS int32
@@ -51,6 +123,23 @@ const (
 	POSITION_QPC_ERROR     AE_POSITION_FLAGS = 4
 )
 
+// String returns the AE_POSITION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AE_POSITION_FLAGS) String() string {
+	switch e {
+	case POSITION_INVALID:
+		return "POSITION_INVALID"
+	case POSITION_DISCONTINUOUS:
+		return "POSITION_DISCONTINUOUS"
+	case POSITION_CONTINUOUS:
+		return "POSITION_CONTINUOUS"
+	case POSITION_QPC_ERROR:
+		return "POSITION_QPC_ERROR"
+	default:
+		return fmt.Sprintf("AE_POSITION_FLAGS(%d)", int32(e))
+	}
+}
+
 type CLIENT_MESSAGE_TYPE int32
 
 const (
@@ -58,6 +147,21 @@ const (
 	CLIENT_MESSAGE_CONNECTION_STATUS  CLIENT_MESSAGE_TYPE = 1
 	CLIENT_MESSAGE_CONNECTION_ERROR   CLIENT_MESSAGE_TYPE = 2
 )
+
+// String returns the CLIENT_MESSAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLIENT_MESSAGE_TYPE) String() string {
+	switch e {
+	case CLIENT_MESSAGE_CONNECTION_INVALID:
+		return "CLIENT_MESSAGE_CONNECTION_INVALID"
+	case CLIENT_MESSAGE_CONNECTION_STATUS:
+		return "CLIENT_MESSAGE_CONNECTION_STATUS"
+	case CLIENT_MESSAGE_CONNECTION_ERROR:
+		return "CLIENT_MESSAGE_CONNECTION_ERROR"
+	default:
+		return fmt.Sprintf("CLIENT_MESSAGE_TYPE(%d)", int32(e))
+	}
+}
 
 type CONNECTION_CHANGE_NOTIFICATION int32
 
@@ -73,6 +177,33 @@ const (
 	CONNECTION_REQUEST_ORCH_COMPLETED     CONNECTION_CHANGE_NOTIFICATION = 8
 )
 
+// String returns the CONNECTION_CHANGE_NOTIFICATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONNECTION_CHANGE_NOTIFICATION) String() string {
+	switch e {
+	case CONNECTION_REQUEST_INVALID:
+		return "CONNECTION_REQUEST_INVALID"
+	case CONNECTION_REQUEST_PENDING:
+		return "CONNECTION_REQUEST_PENDING"
+	case CONNECTION_REQUEST_FAILED:
+		return "CONNECTION_REQUEST_FAILED"
+	case CONNECTION_REQUEST_TIMEDOUT:
+		return "CONNECTION_REQUEST_TIMEDOUT"
+	case CONNECTION_REQUEST_SUCCEEDED:
+		return "CONNECTION_REQUEST_SUCCEEDED"
+	case CONNECTION_REQUEST_CANCELLED:
+		return "CONNECTION_REQUEST_CANCELLED"
+	case CONNECTION_REQUEST_LB_COMPLETED:
+		return "CONNECTION_REQUEST_LB_COMPLETED"
+	case CONNECTION_REQUEST_QUERY_PL_COMPLETED:
+		return "CONNECTION_REQUEST_QUERY_PL_COMPLETED"
+	case CONNECTION_REQUEST_ORCH_COMPLETED:
+		return "CONNECTION_REQUEST_ORCH_COMPLETED"
+	default:
+		return fmt.Sprintf("CONNECTION_CHANGE_NOTIFICATION(%d)", int32(e))
+	}
+}
+
 type KeyCombinationType int32
 
 const (
@@ -83,6 +214,27 @@ const (
 	KeyCombinationDown   KeyCombinationType = 4
 	KeyCombinationScroll KeyCombinationType = 5
 )
+
+// String returns the KeyCombinationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KeyCombinationType) String() string {
+	switch e {
+	case KeyCombinationHome:
+		return "KeyCombinationHome"
+	case KeyCombinationLeft:
+		return "KeyCombinationLeft"
+	case KeyCombinationUp:
+		return "KeyCombinationUp"
+	case KeyCombinationRight:
+		return "KeyCombinationRight"
+	case KeyCombinationDown:
+		return "KeyCombinationDown"
+	case KeyCombinationScroll:
+		return "KeyCombinationScroll"
+	default:
+		return fmt.Sprintf("KeyCombinationType(%d)", int32(e))
+	}
+}
 
 type PLUGIN_TYPE int32
 
@@ -97,6 +249,31 @@ const (
 	TASK_PLUGIN           PLUGIN_TYPE = 64
 )
 
+// String returns the PLUGIN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PLUGIN_TYPE) String() string {
+	switch e {
+	case UNKNOWN_PLUGIN:
+		return "UNKNOWN_PLUGIN"
+	case POLICY_PLUGIN:
+		return "POLICY_PLUGIN"
+	case RESOURCE_PLUGIN:
+		return "RESOURCE_PLUGIN"
+	case LOAD_BALANCING_PLUGIN:
+		return "LOAD_BALANCING_PLUGIN"
+	case PLACEMENT_PLUGIN:
+		return "PLACEMENT_PLUGIN"
+	case ORCHESTRATION_PLUGIN:
+		return "ORCHESTRATION_PLUGIN"
+	case PROVISIONING_PLUGIN:
+		return "PROVISIONING_PLUGIN"
+	case TASK_PLUGIN:
+		return "TASK_PLUGIN"
+	default:
+		return fmt.Sprintf("PLUGIN_TYPE(%d)", int32(e))
+	}
+}
+
 type PasswordEncodingType int32
 
 const (
@@ -104,6 +281,21 @@ const (
 	PasswordEncodingUTF16LE PasswordEncodingType = 1
 	PasswordEncodingUTF16BE PasswordEncodingType = 2
 )
+
+// String returns the PasswordEncodingType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PasswordEncodingType) String() string {
+	switch e {
+	case PasswordEncodingUTF8:
+		return "PasswordEncodingUTF8"
+	case PasswordEncodingUTF16LE:
+		return "PasswordEncodingUTF16LE"
+	case PasswordEncodingUTF16BE:
+		return "PasswordEncodingUTF16BE"
+	default:
+		return fmt.Sprintf("PasswordEncodingType(%d)", int32(e))
+	}
+}
 
 // PolicyAttributeType: https://learn.microsoft.com/windows/win32/api/tsgpolicyengine/ne-tsgpolicyengine-policyattributetype
 type PolicyAttributeType int32
@@ -118,6 +310,31 @@ const (
 	PnpRedirectionDisabled       PolicyAttributeType = 6
 	AllowOnlySDRServers          PolicyAttributeType = 7
 )
+
+// String returns the PolicyAttributeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PolicyAttributeType) String() string {
+	switch e {
+	case EnableAllRedirections:
+		return "EnableAllRedirections"
+	case DisableAllRedirections:
+		return "DisableAllRedirections"
+	case DriveRedirectionDisabled:
+		return "DriveRedirectionDisabled"
+	case PrinterRedirectionDisabled:
+		return "PrinterRedirectionDisabled"
+	case PortRedirectionDisabled:
+		return "PortRedirectionDisabled"
+	case ClipboardRedirectionDisabled:
+		return "ClipboardRedirectionDisabled"
+	case PnpRedirectionDisabled:
+		return "PnpRedirectionDisabled"
+	case AllowOnlySDRServers:
+		return "AllowOnlySDRServers"
+	default:
+		return fmt.Sprintf("PolicyAttributeType(%d)", int32(e))
+	}
+}
 
 // RDV_TASK_STATUS: https://learn.microsoft.com/windows/win32/api/sessdirpublictypes/ne-sessdirpublictypes-rdv_task_status
 type RDV_TASK_STATUS int32
@@ -134,6 +351,33 @@ const (
 	RDV_TASK_STATUS_TIMEOUT     RDV_TASK_STATUS = 8
 )
 
+// String returns the RDV_TASK_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RDV_TASK_STATUS) String() string {
+	switch e {
+	case RDV_TASK_STATUS_UNKNOWN:
+		return "RDV_TASK_STATUS_UNKNOWN"
+	case RDV_TASK_STATUS_SEARCHING:
+		return "RDV_TASK_STATUS_SEARCHING"
+	case RDV_TASK_STATUS_DOWNLOADING:
+		return "RDV_TASK_STATUS_DOWNLOADING"
+	case RDV_TASK_STATUS_APPLYING:
+		return "RDV_TASK_STATUS_APPLYING"
+	case RDV_TASK_STATUS_REBOOTING:
+		return "RDV_TASK_STATUS_REBOOTING"
+	case RDV_TASK_STATUS_REBOOTED:
+		return "RDV_TASK_STATUS_REBOOTED"
+	case RDV_TASK_STATUS_SUCCESS:
+		return "RDV_TASK_STATUS_SUCCESS"
+	case RDV_TASK_STATUS_FAILED:
+		return "RDV_TASK_STATUS_FAILED"
+	case RDV_TASK_STATUS_TIMEOUT:
+		return "RDV_TASK_STATUS_TIMEOUT"
+	default:
+		return fmt.Sprintf("RDV_TASK_STATUS(%d)", int32(e))
+	}
+}
+
 type RD_FARM_TYPE int32
 
 const (
@@ -146,6 +390,29 @@ const (
 	RD_FARM_TYPE_UNKNOWN         RD_FARM_TYPE = -1
 )
 
+// String returns the RD_FARM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RD_FARM_TYPE) String() string {
+	switch e {
+	case RD_FARM_RDSH:
+		return "RD_FARM_RDSH"
+	case RD_FARM_TEMP_VM:
+		return "RD_FARM_TEMP_VM"
+	case RD_FARM_MANUAL_PERSONAL_VM:
+		return "RD_FARM_MANUAL_PERSONAL_VM"
+	case RD_FARM_AUTO_PERSONAL_VM:
+		return "RD_FARM_AUTO_PERSONAL_VM"
+	case RD_FARM_MANUAL_PERSONAL_RDSH:
+		return "RD_FARM_MANUAL_PERSONAL_RDSH"
+	case RD_FARM_AUTO_PERSONAL_RDSH:
+		return "RD_FARM_AUTO_PERSONAL_RDSH"
+	case RD_FARM_TYPE_UNKNOWN:
+		return "RD_FARM_TYPE_UNKNOWN"
+	default:
+		return fmt.Sprintf("RD_FARM_TYPE(%d)", int32(e))
+	}
+}
+
 // RemoteActionType: https://learn.microsoft.com/windows/win32/api/rdpappcontainerclient/ne-rdpappcontainerclient-remoteactiontype
 type RemoteActionType int32
 
@@ -157,6 +424,25 @@ const (
 	RemoteActionAppSwitch   RemoteActionType = 4
 )
 
+// String returns the RemoteActionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RemoteActionType) String() string {
+	switch e {
+	case RemoteActionCharms:
+		return "RemoteActionCharms"
+	case RemoteActionAppbar:
+		return "RemoteActionAppbar"
+	case RemoteActionSnap:
+		return "RemoteActionSnap"
+	case RemoteActionStartScreen:
+		return "RemoteActionStartScreen"
+	case RemoteActionAppSwitch:
+		return "RemoteActionAppSwitch"
+	default:
+		return fmt.Sprintf("RemoteActionType(%d)", int32(e))
+	}
+}
+
 type SESSION_TIMEOUT_ACTION_TYPE int32
 
 const (
@@ -164,12 +450,36 @@ const (
 	SESSION_TIMEOUT_ACTION_SILENT_REAUTH SESSION_TIMEOUT_ACTION_TYPE = 1
 )
 
+// String returns the SESSION_TIMEOUT_ACTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SESSION_TIMEOUT_ACTION_TYPE) String() string {
+	switch e {
+	case SESSION_TIMEOUT_ACTION_DISCONNECT:
+		return "SESSION_TIMEOUT_ACTION_DISCONNECT"
+	case SESSION_TIMEOUT_ACTION_SILENT_REAUTH:
+		return "SESSION_TIMEOUT_ACTION_SILENT_REAUTH"
+	default:
+		return fmt.Sprintf("SESSION_TIMEOUT_ACTION_TYPE(%d)", int32(e))
+	}
+}
+
 // SnapshotEncodingType: https://learn.microsoft.com/windows/win32/api/rdpappcontainerclient/ne-rdpappcontainerclient-snapshotencodingtype
 type SnapshotEncodingType int32
 
 const (
 	SnapshotEncodingDataUri SnapshotEncodingType = 0
 )
+
+// String returns the SnapshotEncodingType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SnapshotEncodingType) String() string {
+	switch e {
+	case SnapshotEncodingDataUri:
+		return "SnapshotEncodingDataUri"
+	default:
+		return fmt.Sprintf("SnapshotEncodingType(%d)", int32(e))
+	}
+}
 
 // SnapshotFormatType: https://learn.microsoft.com/windows/win32/api/rdpappcontainerclient/ne-rdpappcontainerclient-snapshotformattype
 type SnapshotFormatType int32
@@ -179,6 +489,21 @@ const (
 	SnapshotFormatJpeg SnapshotFormatType = 1
 	SnapshotFormatBmp  SnapshotFormatType = 2
 )
+
+// String returns the SnapshotFormatType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SnapshotFormatType) String() string {
+	switch e {
+	case SnapshotFormatPng:
+		return "SnapshotFormatPng"
+	case SnapshotFormatJpeg:
+		return "SnapshotFormatJpeg"
+	case SnapshotFormatBmp:
+		return "SnapshotFormatBmp"
+	default:
+		return fmt.Sprintf("SnapshotFormatType(%d)", int32(e))
+	}
+}
 
 // TARGET_CHANGE_TYPE: https://learn.microsoft.com/windows/win32/api/sessdirpublictypes/ne-sessdirpublictypes-target_change_type
 type TARGET_CHANGE_TYPE int32
@@ -197,6 +522,37 @@ const (
 	TARGET_FARM_MEMBERSHIP_CHANGED TARGET_CHANGE_TYPE = 1024
 )
 
+// String returns the TARGET_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TARGET_CHANGE_TYPE) String() string {
+	switch e {
+	case TARGET_CHANGE_UNSPEC:
+		return "TARGET_CHANGE_UNSPEC"
+	case TARGET_EXTERNALIP_CHANGED:
+		return "TARGET_EXTERNALIP_CHANGED"
+	case TARGET_INTERNALIP_CHANGED:
+		return "TARGET_INTERNALIP_CHANGED"
+	case TARGET_JOINED:
+		return "TARGET_JOINED"
+	case TARGET_REMOVED:
+		return "TARGET_REMOVED"
+	case TARGET_STATE_CHANGED:
+		return "TARGET_STATE_CHANGED"
+	case TARGET_IDLE:
+		return "TARGET_IDLE"
+	case TARGET_PENDING:
+		return "TARGET_PENDING"
+	case TARGET_INUSE:
+		return "TARGET_INUSE"
+	case TARGET_PATCH_STATE_CHANGED:
+		return "TARGET_PATCH_STATE_CHANGED"
+	case TARGET_FARM_MEMBERSHIP_CHANGED:
+		return "TARGET_FARM_MEMBERSHIP_CHANGED"
+	default:
+		return fmt.Sprintf("TARGET_CHANGE_TYPE(%d)", int32(e))
+	}
+}
+
 type TARGET_OWNER int32
 
 const (
@@ -204,6 +560,21 @@ const (
 	OWNER_MS_TS_PLUGIN TARGET_OWNER = 1
 	OWNER_MS_VM_PLUGIN TARGET_OWNER = 2
 )
+
+// String returns the TARGET_OWNER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TARGET_OWNER) String() string {
+	switch e {
+	case OWNER_UNKNOWN:
+		return "OWNER_UNKNOWN"
+	case OWNER_MS_TS_PLUGIN:
+		return "OWNER_MS_TS_PLUGIN"
+	case OWNER_MS_VM_PLUGIN:
+		return "OWNER_MS_VM_PLUGIN"
+	default:
+		return fmt.Sprintf("TARGET_OWNER(%d)", int32(e))
+	}
+}
 
 type TARGET_PATCH_STATE int32
 
@@ -214,6 +585,25 @@ const (
 	TARGET_PATCH_COMPLETED   TARGET_PATCH_STATE = 3
 	TARGET_PATCH_FAILED      TARGET_PATCH_STATE = 4
 )
+
+// String returns the TARGET_PATCH_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TARGET_PATCH_STATE) String() string {
+	switch e {
+	case TARGET_PATCH_UNKNOWN:
+		return "TARGET_PATCH_UNKNOWN"
+	case TARGET_PATCH_NOT_STARTED:
+		return "TARGET_PATCH_NOT_STARTED"
+	case TARGET_PATCH_IN_PROGRESS:
+		return "TARGET_PATCH_IN_PROGRESS"
+	case TARGET_PATCH_COMPLETED:
+		return "TARGET_PATCH_COMPLETED"
+	case TARGET_PATCH_FAILED:
+		return "TARGET_PATCH_FAILED"
+	default:
+		return fmt.Sprintf("TARGET_PATCH_STATE(%d)", int32(e))
+	}
+}
 
 // TARGET_STATE: https://learn.microsoft.com/windows/win32/api/sessdirpublictypes/ne-sessdirpublictypes-target_state
 type TARGET_STATE int32
@@ -232,6 +622,37 @@ const (
 	TARGET_MAXSTATE     TARGET_STATE = 11
 )
 
+// String returns the TARGET_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TARGET_STATE) String() string {
+	switch e {
+	case TARGET_UNKNOWN:
+		return "TARGET_UNKNOWN"
+	case TARGET_INITIALIZING:
+		return "TARGET_INITIALIZING"
+	case TARGET_RUNNING:
+		return "TARGET_RUNNING"
+	case TARGET_DOWN:
+		return "TARGET_DOWN"
+	case TARGET_HIBERNATED:
+		return "TARGET_HIBERNATED"
+	case TARGET_CHECKED_OUT:
+		return "TARGET_CHECKED_OUT"
+	case TARGET_STOPPED:
+		return "TARGET_STOPPED"
+	case TARGET_INVALID:
+		return "TARGET_INVALID"
+	case TARGET_STARTING:
+		return "TARGET_STARTING"
+	case TARGET_STOPPING:
+		return "TARGET_STOPPING"
+	case TARGET_MAXSTATE:
+		return "TARGET_MAXSTATE"
+	default:
+		return fmt.Sprintf("TARGET_STATE(%d)", int32(e))
+	}
+}
+
 // TARGET_TYPE: https://learn.microsoft.com/windows/win32/api/sessdirpublictypes/ne-sessdirpublictypes-target_type
 type TARGET_TYPE int32
 
@@ -241,6 +662,21 @@ const (
 	NONFARM TARGET_TYPE = 2
 )
 
+// String returns the TARGET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TARGET_TYPE) String() string {
+	switch e {
+	case UNKNOWN:
+		return "UNKNOWN"
+	case FARM:
+		return "FARM"
+	case NONFARM:
+		return "NONFARM"
+	default:
+		return fmt.Sprintf("TARGET_TYPE(%d)", int32(e))
+	}
+}
+
 // TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE: https://learn.microsoft.com/windows/win32/api/tspubplugin2com/ne-tspubplugin2com-tspub_plugin_pd_assignment_type
 type TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE int32
 
@@ -249,6 +685,19 @@ const (
 	TSPUB_PLUGIN_PD_ASSIGNMENT_EXISTING TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE = 1
 )
 
+// String returns the TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE) String() string {
+	switch e {
+	case TSPUB_PLUGIN_PD_ASSIGNMENT_NEW:
+		return "TSPUB_PLUGIN_PD_ASSIGNMENT_NEW"
+	case TSPUB_PLUGIN_PD_ASSIGNMENT_EXISTING:
+		return "TSPUB_PLUGIN_PD_ASSIGNMENT_EXISTING"
+	default:
+		return fmt.Sprintf("TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE(%d)", int32(e))
+	}
+}
+
 // TSPUB_PLUGIN_PD_RESOLUTION_TYPE: https://learn.microsoft.com/windows/win32/api/tspubplugin2com/ne-tspubplugin2com-tspub_plugin_pd_resolution_type
 type TSPUB_PLUGIN_PD_RESOLUTION_TYPE int32
 
@@ -256,6 +705,19 @@ const (
 	TSPUB_PLUGIN_PD_QUERY_OR_CREATE TSPUB_PLUGIN_PD_RESOLUTION_TYPE = 0
 	TSPUB_PLUGIN_PD_QUERY_EXISTING  TSPUB_PLUGIN_PD_RESOLUTION_TYPE = 1
 )
+
+// String returns the TSPUB_PLUGIN_PD_RESOLUTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TSPUB_PLUGIN_PD_RESOLUTION_TYPE) String() string {
+	switch e {
+	case TSPUB_PLUGIN_PD_QUERY_OR_CREATE:
+		return "TSPUB_PLUGIN_PD_QUERY_OR_CREATE"
+	case TSPUB_PLUGIN_PD_QUERY_EXISTING:
+		return "TSPUB_PLUGIN_PD_QUERY_EXISTING"
+	default:
+		return fmt.Sprintf("TSPUB_PLUGIN_PD_RESOLUTION_TYPE(%d)", int32(e))
+	}
+}
 
 type TSSB_NOTIFICATION_TYPE int32
 
@@ -266,6 +728,23 @@ const (
 	TSSB_NOTIFY_CONNECTION_REQUEST_CHANGE TSSB_NOTIFICATION_TYPE = 4
 )
 
+// String returns the TSSB_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TSSB_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case TSSB_NOTIFY_INVALID:
+		return "TSSB_NOTIFY_INVALID"
+	case TSSB_NOTIFY_TARGET_CHANGE:
+		return "TSSB_NOTIFY_TARGET_CHANGE"
+	case TSSB_NOTIFY_SESSION_CHANGE:
+		return "TSSB_NOTIFY_SESSION_CHANGE"
+	case TSSB_NOTIFY_CONNECTION_REQUEST_CHANGE:
+		return "TSSB_NOTIFY_CONNECTION_REQUEST_CHANGE"
+	default:
+		return fmt.Sprintf("TSSB_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
+
 // TSSD_AddrV46Type: https://learn.microsoft.com/windows/win32/api/sessdirpublictypes/ne-sessdirpublictypes-tssd_addrv46type
 type TSSD_AddrV46Type int32
 
@@ -274,6 +753,21 @@ const (
 	TSSD_ADDR_IPv4      TSSD_AddrV46Type = 4
 	TSSD_ADDR_IPv6      TSSD_AddrV46Type = 6
 )
+
+// String returns the TSSD_AddrV46Type constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TSSD_AddrV46Type) String() string {
+	switch e {
+	case TSSD_ADDR_UNDEFINED:
+		return "TSSD_ADDR_UNDEFINED"
+	case TSSD_ADDR_IPv4:
+		return "TSSD_ADDR_IPv4"
+	case TSSD_ADDR_IPv6:
+		return "TSSD_ADDR_IPv6"
+	default:
+		return fmt.Sprintf("TSSD_AddrV46Type(%d)", int32(e))
+	}
+}
 
 // TSSESSION_STATE: https://learn.microsoft.com/windows/win32/api/sessdirpublictypes/ne-sessdirpublictypes-tssession_state
 type TSSESSION_STATE int32
@@ -293,6 +787,39 @@ const (
 	STATE_MAX          TSSESSION_STATE = 10
 )
 
+// String returns the TSSESSION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TSSESSION_STATE) String() string {
+	switch e {
+	case STATE_INVALID:
+		return "STATE_INVALID"
+	case STATE_ACTIVE:
+		return "STATE_ACTIVE"
+	case STATE_CONNECTED:
+		return "STATE_CONNECTED"
+	case STATE_CONNECTQUERY:
+		return "STATE_CONNECTQUERY"
+	case STATE_SHADOW:
+		return "STATE_SHADOW"
+	case STATE_DISCONNECTED:
+		return "STATE_DISCONNECTED"
+	case STATE_IDLE:
+		return "STATE_IDLE"
+	case STATE_LISTEN:
+		return "STATE_LISTEN"
+	case STATE_RESET:
+		return "STATE_RESET"
+	case STATE_DOWN:
+		return "STATE_DOWN"
+	case STATE_INIT:
+		return "STATE_INIT"
+	case STATE_MAX:
+		return "STATE_MAX"
+	default:
+		return fmt.Sprintf("TSSESSION_STATE(%d)", int32(e))
+	}
+}
+
 // TS_SB_SORT_BY: https://learn.microsoft.com/windows/win32/api/sbtsv/ne-sbtsv-ts_sb_sort_by
 type TS_SB_SORT_BY int32
 
@@ -302,6 +829,21 @@ const (
 	TS_SB_SORT_BY_PROP TS_SB_SORT_BY = 2
 )
 
+// String returns the TS_SB_SORT_BY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TS_SB_SORT_BY) String() string {
+	switch e {
+	case TS_SB_SORT_BY_NONE:
+		return "TS_SB_SORT_BY_NONE"
+	case TS_SB_SORT_BY_NAME:
+		return "TS_SB_SORT_BY_NAME"
+	case TS_SB_SORT_BY_PROP:
+		return "TS_SB_SORT_BY_PROP"
+	default:
+		return fmt.Sprintf("TS_SB_SORT_BY(%d)", int32(e))
+	}
+}
+
 type VM_HOST_NOTIFY_STATUS int32
 
 const (
@@ -310,6 +852,23 @@ const (
 	VM_HOST_STATUS_INIT_COMPLETE    VM_HOST_NOTIFY_STATUS = 2
 	VM_HOST_STATUS_INIT_FAILED      VM_HOST_NOTIFY_STATUS = 3
 )
+
+// String returns the VM_HOST_NOTIFY_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VM_HOST_NOTIFY_STATUS) String() string {
+	switch e {
+	case VM_HOST_STATUS_INIT_PENDING:
+		return "VM_HOST_STATUS_INIT_PENDING"
+	case VM_HOST_STATUS_INIT_IN_PROGRESS:
+		return "VM_HOST_STATUS_INIT_IN_PROGRESS"
+	case VM_HOST_STATUS_INIT_COMPLETE:
+		return "VM_HOST_STATUS_INIT_COMPLETE"
+	case VM_HOST_STATUS_INIT_FAILED:
+		return "VM_HOST_STATUS_INIT_FAILED"
+	default:
+		return fmt.Sprintf("VM_HOST_NOTIFY_STATUS(%d)", int32(e))
+	}
+}
 
 type VM_NOTIFY_STATUS int32
 
@@ -321,6 +880,25 @@ const (
 	VM_NOTIFY_STATUS_CANCELED    VM_NOTIFY_STATUS = 4
 )
 
+// String returns the VM_NOTIFY_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VM_NOTIFY_STATUS) String() string {
+	switch e {
+	case VM_NOTIFY_STATUS_PENDING:
+		return "VM_NOTIFY_STATUS_PENDING"
+	case VM_NOTIFY_STATUS_IN_PROGRESS:
+		return "VM_NOTIFY_STATUS_IN_PROGRESS"
+	case VM_NOTIFY_STATUS_COMPLETE:
+		return "VM_NOTIFY_STATUS_COMPLETE"
+	case VM_NOTIFY_STATUS_FAILED:
+		return "VM_NOTIFY_STATUS_FAILED"
+	case VM_NOTIFY_STATUS_CANCELED:
+		return "VM_NOTIFY_STATUS_CANCELED"
+	default:
+		return fmt.Sprintf("VM_NOTIFY_STATUS(%d)", int32(e))
+	}
+}
+
 // WRDS_CONNECTION_SETTING_LEVEL: https://learn.microsoft.com/windows/win32/api/wtsdefs/ne-wtsdefs-wrds_connection_setting_level
 type WRDS_CONNECTION_SETTING_LEVEL int32
 
@@ -328,6 +906,19 @@ const (
 	WRDS_CONNECTION_SETTING_LEVEL_INVALID WRDS_CONNECTION_SETTING_LEVEL = 0
 	WRDS_CONNECTION_SETTING_LEVEL_1       WRDS_CONNECTION_SETTING_LEVEL = 1
 )
+
+// String returns the WRDS_CONNECTION_SETTING_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRDS_CONNECTION_SETTING_LEVEL) String() string {
+	switch e {
+	case WRDS_CONNECTION_SETTING_LEVEL_INVALID:
+		return "WRDS_CONNECTION_SETTING_LEVEL_INVALID"
+	case WRDS_CONNECTION_SETTING_LEVEL_1:
+		return "WRDS_CONNECTION_SETTING_LEVEL_1"
+	default:
+		return fmt.Sprintf("WRDS_CONNECTION_SETTING_LEVEL(%d)", int32(e))
+	}
+}
 
 // WRDS_LISTENER_SETTING_LEVEL: https://learn.microsoft.com/windows/win32/api/wtsdefs/ne-wtsdefs-wrds_listener_setting_level
 type WRDS_LISTENER_SETTING_LEVEL int32
@@ -337,6 +928,19 @@ const (
 	WRDS_LISTENER_SETTING_LEVEL_1       WRDS_LISTENER_SETTING_LEVEL = 1
 )
 
+// String returns the WRDS_LISTENER_SETTING_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRDS_LISTENER_SETTING_LEVEL) String() string {
+	switch e {
+	case WRDS_LISTENER_SETTING_LEVEL_INVALID:
+		return "WRDS_LISTENER_SETTING_LEVEL_INVALID"
+	case WRDS_LISTENER_SETTING_LEVEL_1:
+		return "WRDS_LISTENER_SETTING_LEVEL_1"
+	default:
+		return fmt.Sprintf("WRDS_LISTENER_SETTING_LEVEL(%d)", int32(e))
+	}
+}
+
 // WRDS_SETTING_LEVEL: https://learn.microsoft.com/windows/win32/api/wtsdefs/ne-wtsdefs-wrds_setting_level
 type WRDS_SETTING_LEVEL int32
 
@@ -344,6 +948,19 @@ const (
 	WRDS_SETTING_LEVEL_INVALID WRDS_SETTING_LEVEL = 0
 	WRDS_SETTING_LEVEL_1       WRDS_SETTING_LEVEL = 1
 )
+
+// String returns the WRDS_SETTING_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRDS_SETTING_LEVEL) String() string {
+	switch e {
+	case WRDS_SETTING_LEVEL_INVALID:
+		return "WRDS_SETTING_LEVEL_INVALID"
+	case WRDS_SETTING_LEVEL_1:
+		return "WRDS_SETTING_LEVEL_1"
+	default:
+		return fmt.Sprintf("WRDS_SETTING_LEVEL(%d)", int32(e))
+	}
+}
 
 // WRDS_SETTING_STATUS: https://learn.microsoft.com/windows/win32/api/wtsdefs/ne-wtsdefs-wrds_setting_status
 type WRDS_SETTING_STATUS int32
@@ -355,6 +972,23 @@ const (
 	WRDS_SETTING_STATUS_NOTCONFIGURED WRDS_SETTING_STATUS = 2
 )
 
+// String returns the WRDS_SETTING_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRDS_SETTING_STATUS) String() string {
+	switch e {
+	case WRDS_SETTING_STATUS_NOTAPPLICABLE:
+		return "WRDS_SETTING_STATUS_NOTAPPLICABLE"
+	case WRDS_SETTING_STATUS_DISABLED:
+		return "WRDS_SETTING_STATUS_DISABLED"
+	case WRDS_SETTING_STATUS_ENABLED:
+		return "WRDS_SETTING_STATUS_ENABLED"
+	case WRDS_SETTING_STATUS_NOTCONFIGURED:
+		return "WRDS_SETTING_STATUS_NOTCONFIGURED"
+	default:
+		return fmt.Sprintf("WRDS_SETTING_STATUS(%d)", int32(e))
+	}
+}
+
 // WRDS_SETTING_TYPE: https://learn.microsoft.com/windows/win32/api/wtsdefs/ne-wtsdefs-wrds_setting_type
 type WRDS_SETTING_TYPE int32
 
@@ -365,6 +999,23 @@ const (
 	WRDS_SETTING_TYPE_SAM     WRDS_SETTING_TYPE = 3
 )
 
+// String returns the WRDS_SETTING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRDS_SETTING_TYPE) String() string {
+	switch e {
+	case WRDS_SETTING_TYPE_INVALID:
+		return "WRDS_SETTING_TYPE_INVALID"
+	case WRDS_SETTING_TYPE_MACHINE:
+		return "WRDS_SETTING_TYPE_MACHINE"
+	case WRDS_SETTING_TYPE_USER:
+		return "WRDS_SETTING_TYPE_USER"
+	case WRDS_SETTING_TYPE_SAM:
+		return "WRDS_SETTING_TYPE_SAM"
+	default:
+		return fmt.Sprintf("WRDS_SETTING_TYPE(%d)", int32(e))
+	}
+}
+
 // WRdsGraphicsChannelType: https://learn.microsoft.com/windows/win32/api/wrdsgraphicschannels/ne-wrdsgraphicschannels-wrdsgraphicschanneltype
 type WRdsGraphicsChannelType int32
 
@@ -372,6 +1023,19 @@ const (
 	WRdsGraphicsChannelType_GuaranteedDelivery WRdsGraphicsChannelType = 0
 	WRdsGraphicsChannelType_BestEffortDelivery WRdsGraphicsChannelType = 1
 )
+
+// String returns the WRdsGraphicsChannelType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRdsGraphicsChannelType) String() string {
+	switch e {
+	case WRdsGraphicsChannelType_GuaranteedDelivery:
+		return "WRdsGraphicsChannelType_GuaranteedDelivery"
+	case WRdsGraphicsChannelType_BestEffortDelivery:
+		return "WRdsGraphicsChannelType_BestEffortDelivery"
+	default:
+		return fmt.Sprintf("WRdsGraphicsChannelType(%d)", int32(e))
+	}
+}
 
 // WTSSBX_ADDRESS_FAMILY: https://learn.microsoft.com/windows/win32/api/tssbx/ne-tssbx-wtssbx_address_family
 type WTSSBX_ADDRESS_FAMILY int32
@@ -384,6 +1048,25 @@ const (
 	WTSSBX_ADDRESS_FAMILY_AF_NETBIOS WTSSBX_ADDRESS_FAMILY = 4
 )
 
+// String returns the WTSSBX_ADDRESS_FAMILY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTSSBX_ADDRESS_FAMILY) String() string {
+	switch e {
+	case WTSSBX_ADDRESS_FAMILY_AF_UNSPEC:
+		return "WTSSBX_ADDRESS_FAMILY_AF_UNSPEC"
+	case WTSSBX_ADDRESS_FAMILY_AF_INET:
+		return "WTSSBX_ADDRESS_FAMILY_AF_INET"
+	case WTSSBX_ADDRESS_FAMILY_AF_INET6:
+		return "WTSSBX_ADDRESS_FAMILY_AF_INET6"
+	case WTSSBX_ADDRESS_FAMILY_AF_IPX:
+		return "WTSSBX_ADDRESS_FAMILY_AF_IPX"
+	case WTSSBX_ADDRESS_FAMILY_AF_NETBIOS:
+		return "WTSSBX_ADDRESS_FAMILY_AF_NETBIOS"
+	default:
+		return fmt.Sprintf("WTSSBX_ADDRESS_FAMILY(%d)", int32(e))
+	}
+}
+
 // WTSSBX_MACHINE_DRAIN: https://learn.microsoft.com/windows/win32/api/tssbx/ne-tssbx-wtssbx_machine_drain
 type WTSSBX_MACHINE_DRAIN int32
 
@@ -392,6 +1075,21 @@ const (
 	WTSSBX_MACHINE_DRAIN_OFF    WTSSBX_MACHINE_DRAIN = 1
 	WTSSBX_MACHINE_DRAIN_ON     WTSSBX_MACHINE_DRAIN = 2
 )
+
+// String returns the WTSSBX_MACHINE_DRAIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTSSBX_MACHINE_DRAIN) String() string {
+	switch e {
+	case WTSSBX_MACHINE_DRAIN_UNSPEC:
+		return "WTSSBX_MACHINE_DRAIN_UNSPEC"
+	case WTSSBX_MACHINE_DRAIN_OFF:
+		return "WTSSBX_MACHINE_DRAIN_OFF"
+	case WTSSBX_MACHINE_DRAIN_ON:
+		return "WTSSBX_MACHINE_DRAIN_ON"
+	default:
+		return fmt.Sprintf("WTSSBX_MACHINE_DRAIN(%d)", int32(e))
+	}
+}
 
 // WTSSBX_MACHINE_SESSION_MODE: https://learn.microsoft.com/windows/win32/api/tssbx/ne-tssbx-wtssbx_machine_session_mode
 type WTSSBX_MACHINE_SESSION_MODE int32
@@ -402,6 +1100,21 @@ const (
 	WTSSBX_MACHINE_SESSION_MODE_MULTIPLE WTSSBX_MACHINE_SESSION_MODE = 2
 )
 
+// String returns the WTSSBX_MACHINE_SESSION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTSSBX_MACHINE_SESSION_MODE) String() string {
+	switch e {
+	case WTSSBX_MACHINE_SESSION_MODE_UNSPEC:
+		return "WTSSBX_MACHINE_SESSION_MODE_UNSPEC"
+	case WTSSBX_MACHINE_SESSION_MODE_SINGLE:
+		return "WTSSBX_MACHINE_SESSION_MODE_SINGLE"
+	case WTSSBX_MACHINE_SESSION_MODE_MULTIPLE:
+		return "WTSSBX_MACHINE_SESSION_MODE_MULTIPLE"
+	default:
+		return fmt.Sprintf("WTSSBX_MACHINE_SESSION_MODE(%d)", int32(e))
+	}
+}
+
 // WTSSBX_MACHINE_STATE: https://learn.microsoft.com/windows/win32/api/tssbx/ne-tssbx-wtssbx_machine_state
 type WTSSBX_MACHINE_STATE int32
 
@@ -410,6 +1123,21 @@ const (
 	WTSSBX_MACHINE_STATE_READY         WTSSBX_MACHINE_STATE = 1
 	WTSSBX_MACHINE_STATE_SYNCHRONIZING WTSSBX_MACHINE_STATE = 2
 )
+
+// String returns the WTSSBX_MACHINE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTSSBX_MACHINE_STATE) String() string {
+	switch e {
+	case WTSSBX_MACHINE_STATE_UNSPEC:
+		return "WTSSBX_MACHINE_STATE_UNSPEC"
+	case WTSSBX_MACHINE_STATE_READY:
+		return "WTSSBX_MACHINE_STATE_READY"
+	case WTSSBX_MACHINE_STATE_SYNCHRONIZING:
+		return "WTSSBX_MACHINE_STATE_SYNCHRONIZING"
+	default:
+		return fmt.Sprintf("WTSSBX_MACHINE_STATE(%d)", int32(e))
+	}
+}
 
 // WTSSBX_NOTIFICATION_TYPE: https://learn.microsoft.com/windows/win32/api/tssbx/ne-tssbx-wtssbx_notification_type
 type WTSSBX_NOTIFICATION_TYPE int32
@@ -421,6 +1149,23 @@ const (
 	WTSSBX_NOTIFICATION_RESYNC  WTSSBX_NOTIFICATION_TYPE = 8
 )
 
+// String returns the WTSSBX_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTSSBX_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case WTSSBX_NOTIFICATION_REMOVED:
+		return "WTSSBX_NOTIFICATION_REMOVED"
+	case WTSSBX_NOTIFICATION_CHANGED:
+		return "WTSSBX_NOTIFICATION_CHANGED"
+	case WTSSBX_NOTIFICATION_ADDED:
+		return "WTSSBX_NOTIFICATION_ADDED"
+	case WTSSBX_NOTIFICATION_RESYNC:
+		return "WTSSBX_NOTIFICATION_RESYNC"
+	default:
+		return fmt.Sprintf("WTSSBX_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
+
 // WTSSBX_SESSION_STATE: https://learn.microsoft.com/windows/win32/api/tssbx/ne-tssbx-wtssbx_session_state
 type WTSSBX_SESSION_STATE int32
 
@@ -430,6 +1175,21 @@ const (
 	WTSSBX_SESSION_STATE_DISCONNECTED WTSSBX_SESSION_STATE = 2
 )
 
+// String returns the WTSSBX_SESSION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTSSBX_SESSION_STATE) String() string {
+	switch e {
+	case WTSSBX_SESSION_STATE_UNSPEC:
+		return "WTSSBX_SESSION_STATE_UNSPEC"
+	case WTSSBX_SESSION_STATE_ACTIVE:
+		return "WTSSBX_SESSION_STATE_ACTIVE"
+	case WTSSBX_SESSION_STATE_DISCONNECTED:
+		return "WTSSBX_SESSION_STATE_DISCONNECTED"
+	default:
+		return fmt.Sprintf("WTSSBX_SESSION_STATE(%d)", int32(e))
+	}
+}
+
 // WTS_CERT_TYPE: https://learn.microsoft.com/windows/win32/api/wtsdefs/ne-wtsdefs-wts_cert_type
 type WTS_CERT_TYPE int32
 
@@ -438,6 +1198,21 @@ const (
 	WTS_CERT_TYPE_PROPRIETORY WTS_CERT_TYPE = 1
 	WTS_CERT_TYPE_X509        WTS_CERT_TYPE = 2
 )
+
+// String returns the WTS_CERT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_CERT_TYPE) String() string {
+	switch e {
+	case WTS_CERT_TYPE_INVALID:
+		return "WTS_CERT_TYPE_INVALID"
+	case WTS_CERT_TYPE_PROPRIETORY:
+		return "WTS_CERT_TYPE_PROPRIETORY"
+	case WTS_CERT_TYPE_X509:
+		return "WTS_CERT_TYPE_X509"
+	default:
+		return fmt.Sprintf("WTS_CERT_TYPE(%d)", int32(e))
+	}
+}
 
 // WTS_CONFIG_CLASS: https://learn.microsoft.com/windows/win32/api/wtsapi32/ne-wtsapi32-wts_config_class
 type WTS_CONFIG_CLASS int32
@@ -465,12 +1240,72 @@ const (
 	WTSUserConfigUser                          WTS_CONFIG_CLASS = 19
 )
 
+// String returns the WTS_CONFIG_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_CONFIG_CLASS) String() string {
+	switch e {
+	case WTSUserConfigInitialProgram:
+		return "WTSUserConfigInitialProgram"
+	case WTSUserConfigWorkingDirectory:
+		return "WTSUserConfigWorkingDirectory"
+	case WTSUserConfigfInheritInitialProgram:
+		return "WTSUserConfigfInheritInitialProgram"
+	case WTSUserConfigfAllowLogonTerminalServer:
+		return "WTSUserConfigfAllowLogonTerminalServer"
+	case WTSUserConfigTimeoutSettingsConnections:
+		return "WTSUserConfigTimeoutSettingsConnections"
+	case WTSUserConfigTimeoutSettingsDisconnections:
+		return "WTSUserConfigTimeoutSettingsDisconnections"
+	case WTSUserConfigTimeoutSettingsIdle:
+		return "WTSUserConfigTimeoutSettingsIdle"
+	case WTSUserConfigfDeviceClientDrives:
+		return "WTSUserConfigfDeviceClientDrives"
+	case WTSUserConfigfDeviceClientPrinters:
+		return "WTSUserConfigfDeviceClientPrinters"
+	case WTSUserConfigfDeviceClientDefaultPrinter:
+		return "WTSUserConfigfDeviceClientDefaultPrinter"
+	case WTSUserConfigBrokenTimeoutSettings:
+		return "WTSUserConfigBrokenTimeoutSettings"
+	case WTSUserConfigReconnectSettings:
+		return "WTSUserConfigReconnectSettings"
+	case WTSUserConfigModemCallbackSettings:
+		return "WTSUserConfigModemCallbackSettings"
+	case WTSUserConfigModemCallbackPhoneNumber:
+		return "WTSUserConfigModemCallbackPhoneNumber"
+	case WTSUserConfigShadowingSettings:
+		return "WTSUserConfigShadowingSettings"
+	case WTSUserConfigTerminalServerProfilePath:
+		return "WTSUserConfigTerminalServerProfilePath"
+	case WTSUserConfigTerminalServerHomeDir:
+		return "WTSUserConfigTerminalServerHomeDir"
+	case WTSUserConfigTerminalServerHomeDirDrive:
+		return "WTSUserConfigTerminalServerHomeDirDrive"
+	case WTSUserConfigfTerminalServerRemoteHomeDir:
+		return "WTSUserConfigfTerminalServerRemoteHomeDir"
+	case WTSUserConfigUser:
+		return "WTSUserConfigUser"
+	default:
+		return fmt.Sprintf("WTS_CONFIG_CLASS(%d)", int32(e))
+	}
+}
+
 // WTS_CONFIG_SOURCE: https://learn.microsoft.com/windows/win32/api/wtsapi32/ne-wtsapi32-wts_config_source
 type WTS_CONFIG_SOURCE int32
 
 const (
 	WTSUserConfigSourceSAM WTS_CONFIG_SOURCE = 0
 )
+
+// String returns the WTS_CONFIG_SOURCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_CONFIG_SOURCE) String() string {
+	switch e {
+	case WTSUserConfigSourceSAM:
+		return "WTSUserConfigSourceSAM"
+	default:
+		return fmt.Sprintf("WTS_CONFIG_SOURCE(%d)", int32(e))
+	}
+}
 
 // WTS_CONNECTSTATE_CLASS: https://learn.microsoft.com/windows/win32/api/wtsapi32/ne-wtsapi32-wts_connectstate_class
 type WTS_CONNECTSTATE_CLASS int32
@@ -487,6 +1322,35 @@ const (
 	WTSDown         WTS_CONNECTSTATE_CLASS = 8
 	WTSInit         WTS_CONNECTSTATE_CLASS = 9
 )
+
+// String returns the WTS_CONNECTSTATE_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_CONNECTSTATE_CLASS) String() string {
+	switch e {
+	case WTSActive:
+		return "WTSActive"
+	case WTSConnected:
+		return "WTSConnected"
+	case WTSConnectQuery:
+		return "WTSConnectQuery"
+	case WTSShadow:
+		return "WTSShadow"
+	case WTSDisconnected:
+		return "WTSDisconnected"
+	case WTSIdle:
+		return "WTSIdle"
+	case WTSListen:
+		return "WTSListen"
+	case WTSReset:
+		return "WTSReset"
+	case WTSDown:
+		return "WTSDown"
+	case WTSInit:
+		return "WTSInit"
+	default:
+		return fmt.Sprintf("WTS_CONNECTSTATE_CLASS(%d)", int32(e))
+	}
+}
 
 // WTS_INFO_CLASS: https://learn.microsoft.com/windows/win32/api/wtsapi32/ne-wtsapi32-wts_info_class
 type WTS_INFO_CLASS int32
@@ -526,6 +1390,79 @@ const (
 	WTSCapabilityCheck    WTS_INFO_CLASS = 31
 )
 
+// String returns the WTS_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_INFO_CLASS) String() string {
+	switch e {
+	case WTSInitialProgram:
+		return "WTSInitialProgram"
+	case WTSApplicationName:
+		return "WTSApplicationName"
+	case WTSWorkingDirectory:
+		return "WTSWorkingDirectory"
+	case WTSOEMId:
+		return "WTSOEMId"
+	case WTSSessionId:
+		return "WTSSessionId"
+	case WTSUserName:
+		return "WTSUserName"
+	case WTSWinStationName:
+		return "WTSWinStationName"
+	case WTSDomainName:
+		return "WTSDomainName"
+	case WTSConnectState:
+		return "WTSConnectState"
+	case WTSClientBuildNumber:
+		return "WTSClientBuildNumber"
+	case WTSClientName:
+		return "WTSClientName"
+	case WTSClientDirectory:
+		return "WTSClientDirectory"
+	case WTSClientProductId:
+		return "WTSClientProductId"
+	case WTSClientHardwareId:
+		return "WTSClientHardwareId"
+	case WTSClientAddress:
+		return "WTSClientAddress"
+	case WTSClientDisplay:
+		return "WTSClientDisplay"
+	case WTSClientProtocolType:
+		return "WTSClientProtocolType"
+	case WTSIdleTime:
+		return "WTSIdleTime"
+	case WTSLogonTime:
+		return "WTSLogonTime"
+	case WTSIncomingBytes:
+		return "WTSIncomingBytes"
+	case WTSOutgoingBytes:
+		return "WTSOutgoingBytes"
+	case WTSIncomingFrames:
+		return "WTSIncomingFrames"
+	case WTSOutgoingFrames:
+		return "WTSOutgoingFrames"
+	case WTSClientInfo:
+		return "WTSClientInfo"
+	case WTSSessionInfo:
+		return "WTSSessionInfo"
+	case WTSSessionInfoEx:
+		return "WTSSessionInfoEx"
+	case WTSConfigInfo:
+		return "WTSConfigInfo"
+	case WTSValidationInfo:
+		return "WTSValidationInfo"
+	case WTSSessionAddressV4:
+		return "WTSSessionAddressV4"
+	case WTSIsRemoteSession:
+		return "WTSIsRemoteSession"
+	case WTSSessionActivityId:
+		return "WTSSessionActivityId"
+	case WTSCapabilityCheck:
+		return "WTSCapabilityCheck"
+	default:
+		return fmt.Sprintf("WTS_INFO_CLASS(%d)", int32(e))
+	}
+}
+
 // WTS_LOGON_ERROR_REDIRECTOR_RESPONSE: https://learn.microsoft.com/windows/win32/api/wtsdefs/ne-wtsdefs-wts_logon_error_redirector_response
 type WTS_LOGON_ERROR_REDIRECTOR_RESPONSE int32
 
@@ -537,6 +1474,25 @@ const (
 	WTS_LOGON_ERR_HANDLED_DONT_SHOW_START_OVER WTS_LOGON_ERROR_REDIRECTOR_RESPONSE = 4
 )
 
+// String returns the WTS_LOGON_ERROR_REDIRECTOR_RESPONSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_LOGON_ERROR_REDIRECTOR_RESPONSE) String() string {
+	switch e {
+	case WTS_LOGON_ERR_INVALID:
+		return "WTS_LOGON_ERR_INVALID"
+	case WTS_LOGON_ERR_NOT_HANDLED:
+		return "WTS_LOGON_ERR_NOT_HANDLED"
+	case WTS_LOGON_ERR_HANDLED_SHOW:
+		return "WTS_LOGON_ERR_HANDLED_SHOW"
+	case WTS_LOGON_ERR_HANDLED_DONT_SHOW:
+		return "WTS_LOGON_ERR_HANDLED_DONT_SHOW"
+	case WTS_LOGON_ERR_HANDLED_DONT_SHOW_START_OVER:
+		return "WTS_LOGON_ERR_HANDLED_DONT_SHOW_START_OVER"
+	default:
+		return fmt.Sprintf("WTS_LOGON_ERROR_REDIRECTOR_RESPONSE(%d)", int32(e))
+	}
+}
+
 // WTS_RCM_DRAIN_STATE: https://learn.microsoft.com/windows/win32/api/wtsdefs/ne-wtsdefs-wts_rcm_drain_state
 type WTS_RCM_DRAIN_STATE int32
 
@@ -545,6 +1501,21 @@ const (
 	WTS_DRAIN_IN_DRAIN     WTS_RCM_DRAIN_STATE = 1
 	WTS_DRAIN_NOT_IN_DRAIN WTS_RCM_DRAIN_STATE = 2
 )
+
+// String returns the WTS_RCM_DRAIN_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_RCM_DRAIN_STATE) String() string {
+	switch e {
+	case WTS_DRAIN_STATE_NONE:
+		return "WTS_DRAIN_STATE_NONE"
+	case WTS_DRAIN_IN_DRAIN:
+		return "WTS_DRAIN_IN_DRAIN"
+	case WTS_DRAIN_NOT_IN_DRAIN:
+		return "WTS_DRAIN_NOT_IN_DRAIN"
+	default:
+		return fmt.Sprintf("WTS_RCM_DRAIN_STATE(%d)", int32(e))
+	}
+}
 
 // WTS_RCM_SERVICE_STATE: https://learn.microsoft.com/windows/win32/api/wtsdefs/ne-wtsdefs-wts_rcm_service_state
 type WTS_RCM_SERVICE_STATE int32
@@ -555,6 +1526,22 @@ const (
 	WTS_SERVICE_STOP  WTS_RCM_SERVICE_STATE = 2
 )
 
+// String returns the WTS_RCM_SERVICE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_RCM_SERVICE_STATE) String() string {
+	switch e {
+	case WTS_SERVICE_NONE:
+		return "WTS_SERVICE_NONE"
+	case WTS_SERVICE_START:
+		return "WTS_SERVICE_START"
+	case WTS_SERVICE_STOP:
+		return "WTS_SERVICE_STOP"
+	default:
+		return fmt.Sprintf("WTS_RCM_SERVICE_STATE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WTS_SECURITY_FLAGS uint32
 
 const (
@@ -575,6 +1562,61 @@ const (
 	WTS_SECURITY_GUEST_ACCESS         WTS_SECURITY_FLAGS = 32
 )
 
+// String returns the WTS_SECURITY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_SECURITY_FLAGS) String() string {
+	var parts []string
+	if e&WTS_SECURITY_CURRENT_GUEST_ACCESS != 0 {
+		parts = append(parts, "WTS_SECURITY_CURRENT_GUEST_ACCESS")
+	}
+	if e&WTS_SECURITY_USER_ACCESS != 0 {
+		parts = append(parts, "WTS_SECURITY_USER_ACCESS")
+	}
+	if e&WTS_SECURITY_CURRENT_USER_ACCESS != 0 {
+		parts = append(parts, "WTS_SECURITY_CURRENT_USER_ACCESS")
+	}
+	if e&WTS_SECURITY_ALL_ACCESS != 0 {
+		parts = append(parts, "WTS_SECURITY_ALL_ACCESS")
+	}
+	if e&WTS_SECURITY_QUERY_INFORMATION != 0 {
+		parts = append(parts, "WTS_SECURITY_QUERY_INFORMATION")
+	}
+	if e&WTS_SECURITY_SET_INFORMATION != 0 {
+		parts = append(parts, "WTS_SECURITY_SET_INFORMATION")
+	}
+	if e&WTS_SECURITY_RESET != 0 {
+		parts = append(parts, "WTS_SECURITY_RESET")
+	}
+	if e&WTS_SECURITY_VIRTUAL_CHANNELS != 0 {
+		parts = append(parts, "WTS_SECURITY_VIRTUAL_CHANNELS")
+	}
+	if e&WTS_SECURITY_REMOTE_CONTROL != 0 {
+		parts = append(parts, "WTS_SECURITY_REMOTE_CONTROL")
+	}
+	if e&WTS_SECURITY_LOGON != 0 {
+		parts = append(parts, "WTS_SECURITY_LOGON")
+	}
+	if e&WTS_SECURITY_LOGOFF != 0 {
+		parts = append(parts, "WTS_SECURITY_LOGOFF")
+	}
+	if e&WTS_SECURITY_MESSAGE != 0 {
+		parts = append(parts, "WTS_SECURITY_MESSAGE")
+	}
+	if e&WTS_SECURITY_CONNECT != 0 {
+		parts = append(parts, "WTS_SECURITY_CONNECT")
+	}
+	if e&WTS_SECURITY_DISCONNECT != 0 {
+		parts = append(parts, "WTS_SECURITY_DISCONNECT")
+	}
+	if e&WTS_SECURITY_GUEST_ACCESS != 0 {
+		parts = append(parts, "WTS_SECURITY_GUEST_ACCESS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // WTS_TYPE_CLASS: https://learn.microsoft.com/windows/win32/api/wtsapi32/ne-wtsapi32-wts_type_class
 type WTS_TYPE_CLASS int32
 
@@ -586,6 +1628,25 @@ const (
 	WTSTypeSerializedUserCredential WTS_TYPE_CLASS = 4
 )
 
+// String returns the WTS_TYPE_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_TYPE_CLASS) String() string {
+	switch e {
+	case WTSTypeProcessInfoLevel0:
+		return "WTSTypeProcessInfoLevel0"
+	case WTSTypeProcessInfoLevel1:
+		return "WTSTypeProcessInfoLevel1"
+	case WTSTypeSessionInfoLevel1:
+		return "WTSTypeSessionInfoLevel1"
+	case WTSTypeCloudAuthServerNonce:
+		return "WTSTypeCloudAuthServerNonce"
+	case WTSTypeSerializedUserCredential:
+		return "WTSTypeSerializedUserCredential"
+	default:
+		return fmt.Sprintf("WTS_TYPE_CLASS(%d)", int32(e))
+	}
+}
+
 // WTS_VIRTUAL_CLASS: https://learn.microsoft.com/windows/win32/api/wtsapi32/ne-wtsapi32-wts_virtual_class
 type WTS_VIRTUAL_CLASS int32
 
@@ -593,3 +1654,16 @@ const (
 	WTSVirtualClientData WTS_VIRTUAL_CLASS = 0
 	WTSVirtualFileHandle WTS_VIRTUAL_CLASS = 1
 )
+
+// String returns the WTS_VIRTUAL_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WTS_VIRTUAL_CLASS) String() string {
+	switch e {
+	case WTSVirtualClientData:
+		return "WTSVirtualClientData"
+	case WTSVirtualFileHandle:
+		return "WTSVirtualFileHandle"
+	default:
+		return fmt.Sprintf("WTS_VIRTUAL_CLASS(%d)", int32(e))
+	}
+}

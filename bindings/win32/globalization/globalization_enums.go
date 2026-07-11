@@ -4,6 +4,11 @@
 
 package globalization
 
+import (
+	"fmt"
+	"strings"
+)
+
 // CALDATETIME_DATEUNIT: https://learn.microsoft.com/windows/win32/Intl/caldatetime-dateunit
 type CALDATETIME_DATEUNIT int32
 
@@ -19,6 +24,33 @@ const (
 	TickUnit   CALDATETIME_DATEUNIT = 8
 )
 
+// String returns the CALDATETIME_DATEUNIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CALDATETIME_DATEUNIT) String() string {
+	switch e {
+	case EraUnit:
+		return "EraUnit"
+	case YearUnit:
+		return "YearUnit"
+	case MonthUnit:
+		return "MonthUnit"
+	case WeekUnit:
+		return "WeekUnit"
+	case DayUnit:
+		return "DayUnit"
+	case HourUnit:
+		return "HourUnit"
+	case MinuteUnit:
+		return "MinuteUnit"
+	case SecondUnit:
+		return "SecondUnit"
+	case TickUnit:
+		return "TickUnit"
+	default:
+		return fmt.Sprintf("CALDATETIME_DATEUNIT(%d)", int32(e))
+	}
+}
+
 type COMPARESTRING_RESULT int32
 
 const (
@@ -27,6 +59,22 @@ const (
 	CSTR_GREATER_THAN COMPARESTRING_RESULT = 3
 )
 
+// String returns the COMPARESTRING_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPARESTRING_RESULT) String() string {
+	switch e {
+	case CSTR_LESS_THAN:
+		return "CSTR_LESS_THAN"
+	case CSTR_EQUAL:
+		return "CSTR_EQUAL"
+	case CSTR_GREATER_THAN:
+		return "CSTR_GREATER_THAN"
+	default:
+		return fmt.Sprintf("COMPARESTRING_RESULT(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type COMPARE_STRING_FLAGS uint32
 
 const (
@@ -42,6 +90,46 @@ const (
 	SORT_STRINGSORT            COMPARE_STRING_FLAGS = 4096
 )
 
+// String returns the COMPARE_STRING_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPARE_STRING_FLAGS) String() string {
+	var parts []string
+	if e&LINGUISTIC_IGNORECASE != 0 {
+		parts = append(parts, "LINGUISTIC_IGNORECASE")
+	}
+	if e&LINGUISTIC_IGNOREDIACRITIC != 0 {
+		parts = append(parts, "LINGUISTIC_IGNOREDIACRITIC")
+	}
+	if e&NORM_IGNORECASE != 0 {
+		parts = append(parts, "NORM_IGNORECASE")
+	}
+	if e&NORM_IGNOREKANATYPE != 0 {
+		parts = append(parts, "NORM_IGNOREKANATYPE")
+	}
+	if e&NORM_IGNORENONSPACE != 0 {
+		parts = append(parts, "NORM_IGNORENONSPACE")
+	}
+	if e&NORM_IGNORESYMBOLS != 0 {
+		parts = append(parts, "NORM_IGNORESYMBOLS")
+	}
+	if e&NORM_IGNOREWIDTH != 0 {
+		parts = append(parts, "NORM_IGNOREWIDTH")
+	}
+	if e&NORM_LINGUISTIC_CASING != 0 {
+		parts = append(parts, "NORM_LINGUISTIC_CASING")
+	}
+	if e&SORT_DIGITSASNUMBERS != 0 {
+		parts = append(parts, "SORT_DIGITSASNUMBERS")
+	}
+	if e&SORT_STRINGSORT != 0 {
+		parts = append(parts, "SORT_STRINGSORT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // CORRECTIVE_ACTION: https://learn.microsoft.com/windows/win32/api/spellcheck/ne-spellcheck-corrective_action
 type CORRECTIVE_ACTION int32
 
@@ -51,6 +139,23 @@ const (
 	CORRECTIVE_ACTION_REPLACE         CORRECTIVE_ACTION = 2
 	CORRECTIVE_ACTION_DELETE          CORRECTIVE_ACTION = 3
 )
+
+// String returns the CORRECTIVE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CORRECTIVE_ACTION) String() string {
+	switch e {
+	case CORRECTIVE_ACTION_NONE:
+		return "CORRECTIVE_ACTION_NONE"
+	case CORRECTIVE_ACTION_GET_SUGGESTIONS:
+		return "CORRECTIVE_ACTION_GET_SUGGESTIONS"
+	case CORRECTIVE_ACTION_REPLACE:
+		return "CORRECTIVE_ACTION_REPLACE"
+	case CORRECTIVE_ACTION_DELETE:
+		return "CORRECTIVE_ACTION_DELETE"
+	default:
+		return fmt.Sprintf("CORRECTIVE_ACTION(%d)", int32(e))
+	}
+}
 
 type ENUM_DATE_FORMATS_FLAGS uint32
 
@@ -65,12 +170,50 @@ const (
 	DATE_USE_ALT_CALENDAR ENUM_DATE_FORMATS_FLAGS = 4
 )
 
+// String returns the ENUM_DATE_FORMATS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENUM_DATE_FORMATS_FLAGS) String() string {
+	switch e {
+	case DATE_SHORTDATE:
+		return "DATE_SHORTDATE"
+	case DATE_LONGDATE:
+		return "DATE_LONGDATE"
+	case DATE_YEARMONTH:
+		return "DATE_YEARMONTH"
+	case DATE_MONTHDAY:
+		return "DATE_MONTHDAY"
+	case DATE_AUTOLAYOUT:
+		return "DATE_AUTOLAYOUT"
+	case DATE_LTRREADING:
+		return "DATE_LTRREADING"
+	case DATE_RTLREADING:
+		return "DATE_RTLREADING"
+	case DATE_USE_ALT_CALENDAR:
+		return "DATE_USE_ALT_CALENDAR"
+	default:
+		return fmt.Sprintf("ENUM_DATE_FORMATS_FLAGS(%d)", uint32(e))
+	}
+}
+
 type ENUM_SYSTEM_CODE_PAGES_FLAGS uint32
 
 const (
 	CP_INSTALLED ENUM_SYSTEM_CODE_PAGES_FLAGS = 1
 	CP_SUPPORTED ENUM_SYSTEM_CODE_PAGES_FLAGS = 2
 )
+
+// String returns the ENUM_SYSTEM_CODE_PAGES_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENUM_SYSTEM_CODE_PAGES_FLAGS) String() string {
+	switch e {
+	case CP_INSTALLED:
+		return "CP_INSTALLED"
+	case CP_SUPPORTED:
+		return "CP_SUPPORTED"
+	default:
+		return fmt.Sprintf("ENUM_SYSTEM_CODE_PAGES_FLAGS(%d)", uint32(e))
+	}
+}
 
 type ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS uint32
 
@@ -79,6 +222,20 @@ const (
 	LGRPID_SUPPORTED ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS = 2
 )
 
+// String returns the ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS) String() string {
+	switch e {
+	case LGRPID_INSTALLED:
+		return "LGRPID_INSTALLED"
+	case LGRPID_SUPPORTED:
+		return "LGRPID_SUPPORTED"
+	default:
+		return fmt.Sprintf("ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FOLD_STRING_MAP_FLAGS uint32
 
 const (
@@ -89,6 +246,32 @@ const (
 	MAP_PRECOMPOSED      FOLD_STRING_MAP_FLAGS = 32
 )
 
+// String returns the FOLD_STRING_MAP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FOLD_STRING_MAP_FLAGS) String() string {
+	var parts []string
+	if e&MAP_COMPOSITE != 0 {
+		parts = append(parts, "MAP_COMPOSITE")
+	}
+	if e&MAP_EXPAND_LIGATURES != 0 {
+		parts = append(parts, "MAP_EXPAND_LIGATURES")
+	}
+	if e&MAP_FOLDCZONE != 0 {
+		parts = append(parts, "MAP_FOLDCZONE")
+	}
+	if e&MAP_FOLDDIGITS != 0 {
+		parts = append(parts, "MAP_FOLDDIGITS")
+	}
+	if e&MAP_PRECOMPOSED != 0 {
+		parts = append(parts, "MAP_PRECOMPOSED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type IS_TEXT_UNICODE_RESULT uint32
 
 const (
@@ -109,12 +292,80 @@ const (
 	IS_TEXT_UNICODE_NOT_ASCII_MASK     IS_TEXT_UNICODE_RESULT = 61440
 )
 
+// String returns the IS_TEXT_UNICODE_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IS_TEXT_UNICODE_RESULT) String() string {
+	var parts []string
+	if e&IS_TEXT_UNICODE_ASCII16 != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_ASCII16")
+	}
+	if e&IS_TEXT_UNICODE_REVERSE_ASCII16 != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_REVERSE_ASCII16")
+	}
+	if e&IS_TEXT_UNICODE_STATISTICS != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_STATISTICS")
+	}
+	if e&IS_TEXT_UNICODE_REVERSE_STATISTICS != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_REVERSE_STATISTICS")
+	}
+	if e&IS_TEXT_UNICODE_CONTROLS != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_CONTROLS")
+	}
+	if e&IS_TEXT_UNICODE_REVERSE_CONTROLS != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_REVERSE_CONTROLS")
+	}
+	if e&IS_TEXT_UNICODE_SIGNATURE != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_SIGNATURE")
+	}
+	if e&IS_TEXT_UNICODE_REVERSE_SIGNATURE != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_REVERSE_SIGNATURE")
+	}
+	if e&IS_TEXT_UNICODE_ILLEGAL_CHARS != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_ILLEGAL_CHARS")
+	}
+	if e&IS_TEXT_UNICODE_ODD_LENGTH != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_ODD_LENGTH")
+	}
+	if e&IS_TEXT_UNICODE_NULL_BYTES != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_NULL_BYTES")
+	}
+	if e&IS_TEXT_UNICODE_UNICODE_MASK != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_UNICODE_MASK")
+	}
+	if e&IS_TEXT_UNICODE_REVERSE_MASK != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_REVERSE_MASK")
+	}
+	if e&IS_TEXT_UNICODE_NOT_UNICODE_MASK != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_NOT_UNICODE_MASK")
+	}
+	if e&IS_TEXT_UNICODE_NOT_ASCII_MASK != 0 {
+		parts = append(parts, "IS_TEXT_UNICODE_NOT_ASCII_MASK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type IS_VALID_LOCALE_FLAGS uint32
 
 const (
 	LCID_INSTALLED IS_VALID_LOCALE_FLAGS = 1
 	LCID_SUPPORTED IS_VALID_LOCALE_FLAGS = 2
 )
+
+// String returns the IS_VALID_LOCALE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IS_VALID_LOCALE_FLAGS) String() string {
+	switch e {
+	case LCID_INSTALLED:
+		return "LCID_INSTALLED"
+	case LCID_SUPPORTED:
+		return "LCID_SUPPORTED"
+	default:
+		return fmt.Sprintf("IS_VALID_LOCALE_FLAGS(%d)", uint32(e))
+	}
+}
 
 type MIMECONTF int32
 
@@ -134,6 +385,41 @@ const (
 	MIMECONTF_MIME_REGISTRY    MIMECONTF = 1073741824
 )
 
+// String returns the MIMECONTF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIMECONTF) String() string {
+	switch e {
+	case MIMECONTF_MAILNEWS:
+		return "MIMECONTF_MAILNEWS"
+	case MIMECONTF_BROWSER:
+		return "MIMECONTF_BROWSER"
+	case MIMECONTF_MINIMAL:
+		return "MIMECONTF_MINIMAL"
+	case MIMECONTF_IMPORT:
+		return "MIMECONTF_IMPORT"
+	case MIMECONTF_SAVABLE_MAILNEWS:
+		return "MIMECONTF_SAVABLE_MAILNEWS"
+	case MIMECONTF_SAVABLE_BROWSER:
+		return "MIMECONTF_SAVABLE_BROWSER"
+	case MIMECONTF_EXPORT:
+		return "MIMECONTF_EXPORT"
+	case MIMECONTF_PRIVCONVERTER:
+		return "MIMECONTF_PRIVCONVERTER"
+	case MIMECONTF_VALID:
+		return "MIMECONTF_VALID"
+	case MIMECONTF_VALID_NLS:
+		return "MIMECONTF_VALID_NLS"
+	case MIMECONTF_MIME_IE4:
+		return "MIMECONTF_MIME_IE4"
+	case MIMECONTF_MIME_LATEST:
+		return "MIMECONTF_MIME_LATEST"
+	case MIMECONTF_MIME_REGISTRY:
+		return "MIMECONTF_MIME_REGISTRY"
+	default:
+		return fmt.Sprintf("MIMECONTF(%d)", int32(e))
+	}
+}
+
 type MLCONVCHAR int32
 
 const (
@@ -145,6 +431,27 @@ const (
 	MLCONVCHARF_NOBESTFITCHARS MLCONVCHAR = 16
 	MLCONVCHARF_DETECTJPN      MLCONVCHAR = 32
 )
+
+// String returns the MLCONVCHAR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLCONVCHAR) String() string {
+	switch e {
+	case MLCONVCHARF_AUTODETECT:
+		return "MLCONVCHARF_AUTODETECT"
+	case MLCONVCHARF_ENTITIZE:
+		return "MLCONVCHARF_ENTITIZE"
+	case MLCONVCHARF_NAME_ENTITIZE:
+		return "MLCONVCHARF_NAME_ENTITIZE"
+	case MLCONVCHARF_USEDEFCHAR:
+		return "MLCONVCHARF_USEDEFCHAR"
+	case MLCONVCHARF_NOBESTFITCHARS:
+		return "MLCONVCHARF_NOBESTFITCHARS"
+	case MLCONVCHARF_DETECTJPN:
+		return "MLCONVCHARF_DETECTJPN"
+	default:
+		return fmt.Sprintf("MLCONVCHAR(%d)", int32(e))
+	}
+}
 
 type MLCP int32
 
@@ -159,6 +466,31 @@ const (
 	MLDETECTF_EURO_UTF8          MLCP = 128
 )
 
+// String returns the MLCP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLCP) String() string {
+	switch e {
+	case MLDETECTF_MAILNEWS:
+		return "MLDETECTF_MAILNEWS"
+	case MLDETECTF_BROWSER:
+		return "MLDETECTF_BROWSER"
+	case MLDETECTF_VALID:
+		return "MLDETECTF_VALID"
+	case MLDETECTF_VALID_NLS:
+		return "MLDETECTF_VALID_NLS"
+	case MLDETECTF_PRESERVE_ORDER:
+		return "MLDETECTF_PRESERVE_ORDER"
+	case MLDETECTF_PREFERRED_ONLY:
+		return "MLDETECTF_PREFERRED_ONLY"
+	case MLDETECTF_FILTER_SPECIALCHAR:
+		return "MLDETECTF_FILTER_SPECIALCHAR"
+	case MLDETECTF_EURO_UTF8:
+		return "MLDETECTF_EURO_UTF8"
+	default:
+		return fmt.Sprintf("MLCP(%d)", int32(e))
+	}
+}
+
 type MLDETECTCP int32
 
 const (
@@ -170,6 +502,27 @@ const (
 	MLDETECTCP_NUMBER MLDETECTCP = 16
 )
 
+// String returns the MLDETECTCP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLDETECTCP) String() string {
+	switch e {
+	case MLDETECTCP_NONE:
+		return "MLDETECTCP_NONE"
+	case MLDETECTCP_7BIT:
+		return "MLDETECTCP_7BIT"
+	case MLDETECTCP_8BIT:
+		return "MLDETECTCP_8BIT"
+	case MLDETECTCP_DBCS:
+		return "MLDETECTCP_DBCS"
+	case MLDETECTCP_HTML:
+		return "MLDETECTCP_HTML"
+	case MLDETECTCP_NUMBER:
+		return "MLDETECTCP_NUMBER"
+	default:
+		return fmt.Sprintf("MLDETECTCP(%d)", int32(e))
+	}
+}
+
 type MLSTR_FLAGS int32
 
 const (
@@ -177,6 +530,20 @@ const (
 	MLSTR_WRITE MLSTR_FLAGS = 2
 )
 
+// String returns the MLSTR_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MLSTR_FLAGS) String() string {
+	switch e {
+	case MLSTR_READ:
+		return "MLSTR_READ"
+	case MLSTR_WRITE:
+		return "MLSTR_WRITE"
+	default:
+		return fmt.Sprintf("MLSTR_FLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MULTI_BYTE_TO_WIDE_CHAR_FLAGS uint32
 
 const (
@@ -185,6 +552,28 @@ const (
 	MB_PRECOMPOSED       MULTI_BYTE_TO_WIDE_CHAR_FLAGS = 1
 	MB_USEGLYPHCHARS     MULTI_BYTE_TO_WIDE_CHAR_FLAGS = 4
 )
+
+// String returns the MULTI_BYTE_TO_WIDE_CHAR_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MULTI_BYTE_TO_WIDE_CHAR_FLAGS) String() string {
+	var parts []string
+	if e&MB_COMPOSITE != 0 {
+		parts = append(parts, "MB_COMPOSITE")
+	}
+	if e&MB_ERR_INVALID_CHARS != 0 {
+		parts = append(parts, "MB_ERR_INVALID_CHARS")
+	}
+	if e&MB_PRECOMPOSED != 0 {
+		parts = append(parts, "MB_PRECOMPOSED")
+	}
+	if e&MB_USEGLYPHCHARS != 0 {
+		parts = append(parts, "MB_USEGLYPHCHARS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // NORM_FORM: https://learn.microsoft.com/windows/win32/api/winnls/ne-winnls-norm_form
 type NORM_FORM int32
@@ -196,6 +585,25 @@ const (
 	NormalizationKC    NORM_FORM = 5
 	NormalizationKD    NORM_FORM = 6
 )
+
+// String returns the NORM_FORM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NORM_FORM) String() string {
+	switch e {
+	case NormalizationOther:
+		return "NormalizationOther"
+	case NormalizationC:
+		return "NormalizationC"
+	case NormalizationD:
+		return "NormalizationD"
+	case NormalizationKC:
+		return "NormalizationKC"
+	case NormalizationKD:
+		return "NormalizationKD"
+	default:
+		return fmt.Sprintf("NORM_FORM(%d)", int32(e))
+	}
+}
 
 type SCRIPTCONTF int32
 
@@ -246,6 +654,99 @@ const (
 	SidFELast      SCRIPTCONTF = 26
 )
 
+// String returns the SCRIPTCONTF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPTCONTF) String() string {
+	switch e {
+	case SidDefault:
+		return "SidDefault"
+	case SidMerge:
+		return "SidMerge"
+	case SidAsciiSym:
+		return "SidAsciiSym"
+	case SidAsciiLatin:
+		return "SidAsciiLatin"
+	case SidLatin:
+		return "SidLatin"
+	case SidGreek:
+		return "SidGreek"
+	case SidCyrillic:
+		return "SidCyrillic"
+	case SidArmenian:
+		return "SidArmenian"
+	case SidHebrew:
+		return "SidHebrew"
+	case SidArabic:
+		return "SidArabic"
+	case SidDevanagari:
+		return "SidDevanagari"
+	case SidBengali:
+		return "SidBengali"
+	case SidGurmukhi:
+		return "SidGurmukhi"
+	case SidGujarati:
+		return "SidGujarati"
+	case SidOriya:
+		return "SidOriya"
+	case SidTamil:
+		return "SidTamil"
+	case SidTelugu:
+		return "SidTelugu"
+	case SidKannada:
+		return "SidKannada"
+	case SidMalayalam:
+		return "SidMalayalam"
+	case SidThai:
+		return "SidThai"
+	case SidLao:
+		return "SidLao"
+	case SidTibetan:
+		return "SidTibetan"
+	case SidGeorgian:
+		return "SidGeorgian"
+	case SidHangul:
+		return "SidHangul"
+	case SidKana:
+		return "SidKana"
+	case SidBopomofo:
+		return "SidBopomofo"
+	case SidHan:
+		return "SidHan"
+	case SidEthiopic:
+		return "SidEthiopic"
+	case SidCanSyllabic:
+		return "SidCanSyllabic"
+	case SidCherokee:
+		return "SidCherokee"
+	case SidYi:
+		return "SidYi"
+	case SidBraille:
+		return "SidBraille"
+	case SidRunic:
+		return "SidRunic"
+	case SidOgham:
+		return "SidOgham"
+	case SidSinhala:
+		return "SidSinhala"
+	case SidSyriac:
+		return "SidSyriac"
+	case SidBurmese:
+		return "SidBurmese"
+	case SidKhmer:
+		return "SidKhmer"
+	case SidThaana:
+		return "SidThaana"
+	case SidMongolian:
+		return "SidMongolian"
+	case SidUserDefined:
+		return "SidUserDefined"
+	case SidLim:
+		return "SidLim"
+	default:
+		return fmt.Sprintf("SCRIPTCONTF(%d)", int32(e))
+	}
+}
+
 type SCRIPTFONTCONTF int32
 
 const (
@@ -256,6 +757,25 @@ const (
 	SCRIPTCONTF_SCRIPT_SYSTEM     SCRIPTFONTCONTF = 262144
 )
 
+// String returns the SCRIPTFONTCONTF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPTFONTCONTF) String() string {
+	switch e {
+	case SCRIPTCONTF_FIXED_FONT:
+		return "SCRIPTCONTF_FIXED_FONT"
+	case SCRIPTCONTF_PROPORTIONAL_FONT:
+		return "SCRIPTCONTF_PROPORTIONAL_FONT"
+	case SCRIPTCONTF_SCRIPT_USER:
+		return "SCRIPTCONTF_SCRIPT_USER"
+	case SCRIPTCONTF_SCRIPT_HIDE:
+		return "SCRIPTCONTF_SCRIPT_HIDE"
+	case SCRIPTCONTF_SCRIPT_SYSTEM:
+		return "SCRIPTCONTF_SCRIPT_SYSTEM"
+	default:
+		return fmt.Sprintf("SCRIPTFONTCONTF(%d)", int32(e))
+	}
+}
+
 type SCRIPT_IS_COMPLEX_FLAGS uint32
 
 const (
@@ -263,6 +783,21 @@ const (
 	SIC_COMPLEX    SCRIPT_IS_COMPLEX_FLAGS = 1
 	SIC_NEUTRAL    SCRIPT_IS_COMPLEX_FLAGS = 4
 )
+
+// String returns the SCRIPT_IS_COMPLEX_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPT_IS_COMPLEX_FLAGS) String() string {
+	switch e {
+	case SIC_ASCIIDIGIT:
+		return "SIC_ASCIIDIGIT"
+	case SIC_COMPLEX:
+		return "SIC_COMPLEX"
+	case SIC_NEUTRAL:
+		return "SIC_NEUTRAL"
+	default:
+		return fmt.Sprintf("SCRIPT_IS_COMPLEX_FLAGS(%d)", uint32(e))
+	}
+}
 
 // SCRIPT_JUSTIFY: https://learn.microsoft.com/windows/win32/api/usp10/ne-usp10-script_justify
 type SCRIPT_JUSTIFY int32
@@ -286,6 +821,47 @@ const (
 	SCRIPT_JUSTIFY_ARABIC_SEEN_M  SCRIPT_JUSTIFY = 15
 )
 
+// String returns the SCRIPT_JUSTIFY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCRIPT_JUSTIFY) String() string {
+	switch e {
+	case SCRIPT_JUSTIFY_NONE:
+		return "SCRIPT_JUSTIFY_NONE"
+	case SCRIPT_JUSTIFY_ARABIC_BLANK:
+		return "SCRIPT_JUSTIFY_ARABIC_BLANK"
+	case SCRIPT_JUSTIFY_CHARACTER:
+		return "SCRIPT_JUSTIFY_CHARACTER"
+	case SCRIPT_JUSTIFY_RESERVED1:
+		return "SCRIPT_JUSTIFY_RESERVED1"
+	case SCRIPT_JUSTIFY_BLANK:
+		return "SCRIPT_JUSTIFY_BLANK"
+	case SCRIPT_JUSTIFY_RESERVED2:
+		return "SCRIPT_JUSTIFY_RESERVED2"
+	case SCRIPT_JUSTIFY_RESERVED3:
+		return "SCRIPT_JUSTIFY_RESERVED3"
+	case SCRIPT_JUSTIFY_ARABIC_NORMAL:
+		return "SCRIPT_JUSTIFY_ARABIC_NORMAL"
+	case SCRIPT_JUSTIFY_ARABIC_KASHIDA:
+		return "SCRIPT_JUSTIFY_ARABIC_KASHIDA"
+	case SCRIPT_JUSTIFY_ARABIC_ALEF:
+		return "SCRIPT_JUSTIFY_ARABIC_ALEF"
+	case SCRIPT_JUSTIFY_ARABIC_HA:
+		return "SCRIPT_JUSTIFY_ARABIC_HA"
+	case SCRIPT_JUSTIFY_ARABIC_RA:
+		return "SCRIPT_JUSTIFY_ARABIC_RA"
+	case SCRIPT_JUSTIFY_ARABIC_BA:
+		return "SCRIPT_JUSTIFY_ARABIC_BA"
+	case SCRIPT_JUSTIFY_ARABIC_BARA:
+		return "SCRIPT_JUSTIFY_ARABIC_BARA"
+	case SCRIPT_JUSTIFY_ARABIC_SEEN:
+		return "SCRIPT_JUSTIFY_ARABIC_SEEN"
+	case SCRIPT_JUSTIFY_ARABIC_SEEN_M:
+		return "SCRIPT_JUSTIFY_ARABIC_SEEN_M"
+	default:
+		return fmt.Sprintf("SCRIPT_JUSTIFY(%d)", int32(e))
+	}
+}
+
 // SYSGEOCLASS: https://learn.microsoft.com/windows/win32/api/winnls/ne-winnls-sysgeoclass
 type SYSGEOCLASS int32
 
@@ -294,6 +870,21 @@ const (
 	GEOCLASS_REGION SYSGEOCLASS = 14
 	GEOCLASS_ALL    SYSGEOCLASS = 0
 )
+
+// String returns the SYSGEOCLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSGEOCLASS) String() string {
+	switch e {
+	case GEOCLASS_NATION:
+		return "GEOCLASS_NATION"
+	case GEOCLASS_REGION:
+		return "GEOCLASS_REGION"
+	case GEOCLASS_ALL:
+		return "GEOCLASS_ALL"
+	default:
+		return fmt.Sprintf("SYSGEOCLASS(%d)", int32(e))
+	}
+}
 
 // SYSGEOTYPE: https://learn.microsoft.com/windows/win32/api/winnls/ne-winnls-sysgeotype
 type SYSGEOTYPE int32
@@ -319,6 +910,51 @@ const (
 	GEO_ID                SYSGEOTYPE = 18
 )
 
+// String returns the SYSGEOTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSGEOTYPE) String() string {
+	switch e {
+	case GEO_NATION:
+		return "GEO_NATION"
+	case GEO_LATITUDE:
+		return "GEO_LATITUDE"
+	case GEO_LONGITUDE:
+		return "GEO_LONGITUDE"
+	case GEO_ISO2:
+		return "GEO_ISO2"
+	case GEO_ISO3:
+		return "GEO_ISO3"
+	case GEO_RFC1766:
+		return "GEO_RFC1766"
+	case GEO_LCID:
+		return "GEO_LCID"
+	case GEO_FRIENDLYNAME:
+		return "GEO_FRIENDLYNAME"
+	case GEO_OFFICIALNAME:
+		return "GEO_OFFICIALNAME"
+	case GEO_TIMEZONES:
+		return "GEO_TIMEZONES"
+	case GEO_OFFICIALLANGUAGES:
+		return "GEO_OFFICIALLANGUAGES"
+	case GEO_ISO_UN_NUMBER:
+		return "GEO_ISO_UN_NUMBER"
+	case GEO_PARENT:
+		return "GEO_PARENT"
+	case GEO_DIALINGCODE:
+		return "GEO_DIALINGCODE"
+	case GEO_CURRENCYCODE:
+		return "GEO_CURRENCYCODE"
+	case GEO_CURRENCYSYMBOL:
+		return "GEO_CURRENCYSYMBOL"
+	case GEO_NAME:
+		return "GEO_NAME"
+	case GEO_ID:
+		return "GEO_ID"
+	default:
+		return fmt.Sprintf("SYSGEOTYPE(%d)", int32(e))
+	}
+}
+
 // SYSNLS_FUNCTION: https://learn.microsoft.com/windows/win32/api/winnls/ne-winnls-sysnls_function
 type SYSNLS_FUNCTION int32
 
@@ -326,6 +962,18 @@ const (
 	COMPARE_STRING SYSNLS_FUNCTION = 1
 )
 
+// String returns the SYSNLS_FUNCTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSNLS_FUNCTION) String() string {
+	switch e {
+	case COMPARE_STRING:
+		return "COMPARE_STRING"
+	default:
+		return fmt.Sprintf("SYSNLS_FUNCTION(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TIME_FORMAT_FLAGS uint32
 
 const (
@@ -334,6 +982,28 @@ const (
 	TIME_NOTIMEMARKER       TIME_FORMAT_FLAGS = 4
 	TIME_FORCE24HOURFORMAT  TIME_FORMAT_FLAGS = 8
 )
+
+// String returns the TIME_FORMAT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TIME_FORMAT_FLAGS) String() string {
+	var parts []string
+	if e&TIME_NOMINUTESORSECONDS != 0 {
+		parts = append(parts, "TIME_NOMINUTESORSECONDS")
+	}
+	if e&TIME_NOSECONDS != 0 {
+		parts = append(parts, "TIME_NOSECONDS")
+	}
+	if e&TIME_NOTIMEMARKER != 0 {
+		parts = append(parts, "TIME_NOTIMEMARKER")
+	}
+	if e&TIME_FORCE24HOURFORMAT != 0 {
+		parts = append(parts, "TIME_FORCE24HOURFORMAT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type TRANSLATE_CHARSET_INFO_FLAGS uint32
 
@@ -344,6 +1014,23 @@ const (
 	TCI_SRCLOCALE   TRANSLATE_CHARSET_INFO_FLAGS = 4096
 )
 
+// String returns the TRANSLATE_CHARSET_INFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSLATE_CHARSET_INFO_FLAGS) String() string {
+	switch e {
+	case TCI_SRCCHARSET:
+		return "TCI_SRCCHARSET"
+	case TCI_SRCCODEPAGE:
+		return "TCI_SRCCODEPAGE"
+	case TCI_SRCFONTSIG:
+		return "TCI_SRCFONTSIG"
+	case TCI_SRCLOCALE:
+		return "TCI_SRCLOCALE"
+	default:
+		return fmt.Sprintf("TRANSLATE_CHARSET_INFO_FLAGS(%d)", uint32(e))
+	}
+}
+
 type UAcceptResult int32
 
 const (
@@ -351,6 +1038,21 @@ const (
 	ULOC_ACCEPT_VALID    UAcceptResult = 1
 	ULOC_ACCEPT_FALLBACK UAcceptResult = 2
 )
+
+// String returns the UAcceptResult constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UAcceptResult) String() string {
+	switch e {
+	case ULOC_ACCEPT_FAILED:
+		return "ULOC_ACCEPT_FAILED"
+	case ULOC_ACCEPT_VALID:
+		return "ULOC_ACCEPT_VALID"
+	case ULOC_ACCEPT_FALLBACK:
+		return "ULOC_ACCEPT_FALLBACK"
+	default:
+		return fmt.Sprintf("UAcceptResult(%d)", int32(e))
+	}
+}
 
 type UAlphabeticIndexLabelType int32
 
@@ -361,6 +1063,23 @@ const (
 	U_ALPHAINDEX_OVERFLOW  UAlphabeticIndexLabelType = 3
 )
 
+// String returns the UAlphabeticIndexLabelType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UAlphabeticIndexLabelType) String() string {
+	switch e {
+	case U_ALPHAINDEX_NORMAL:
+		return "U_ALPHAINDEX_NORMAL"
+	case U_ALPHAINDEX_UNDERFLOW:
+		return "U_ALPHAINDEX_UNDERFLOW"
+	case U_ALPHAINDEX_INFLOW:
+		return "U_ALPHAINDEX_INFLOW"
+	case U_ALPHAINDEX_OVERFLOW:
+		return "U_ALPHAINDEX_OVERFLOW"
+	default:
+		return fmt.Sprintf("UAlphabeticIndexLabelType(%d)", int32(e))
+	}
+}
+
 type UBiDiDirection int32
 
 const (
@@ -370,6 +1089,23 @@ const (
 	UBIDI_NEUTRAL UBiDiDirection = 3
 )
 
+// String returns the UBiDiDirection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UBiDiDirection) String() string {
+	switch e {
+	case UBIDI_LTR:
+		return "UBIDI_LTR"
+	case UBIDI_RTL:
+		return "UBIDI_RTL"
+	case UBIDI_MIXED:
+		return "UBIDI_MIXED"
+	case UBIDI_NEUTRAL:
+		return "UBIDI_NEUTRAL"
+	default:
+		return fmt.Sprintf("UBiDiDirection(%d)", int32(e))
+	}
+}
+
 type UBiDiMirroring int32
 
 const (
@@ -377,12 +1113,38 @@ const (
 	UBIDI_MIRRORING_ON  UBiDiMirroring = 1
 )
 
+// String returns the UBiDiMirroring constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UBiDiMirroring) String() string {
+	switch e {
+	case UBIDI_MIRRORING_OFF:
+		return "UBIDI_MIRRORING_OFF"
+	case UBIDI_MIRRORING_ON:
+		return "UBIDI_MIRRORING_ON"
+	default:
+		return fmt.Sprintf("UBiDiMirroring(%d)", int32(e))
+	}
+}
+
 type UBiDiOrder int32
 
 const (
 	UBIDI_LOGICAL UBiDiOrder = 0
 	UBIDI_VISUAL  UBiDiOrder = 1
 )
+
+// String returns the UBiDiOrder constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UBiDiOrder) String() string {
+	switch e {
+	case UBIDI_LOGICAL:
+		return "UBIDI_LOGICAL"
+	case UBIDI_VISUAL:
+		return "UBIDI_VISUAL"
+	default:
+		return fmt.Sprintf("UBiDiOrder(%d)", int32(e))
+	}
+}
 
 type UBiDiReorderingMode int32
 
@@ -396,6 +1158,29 @@ const (
 	UBIDI_REORDER_INVERSE_FOR_NUMBERS_SPECIAL UBiDiReorderingMode = 6
 )
 
+// String returns the UBiDiReorderingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UBiDiReorderingMode) String() string {
+	switch e {
+	case UBIDI_REORDER_DEFAULT:
+		return "UBIDI_REORDER_DEFAULT"
+	case UBIDI_REORDER_NUMBERS_SPECIAL:
+		return "UBIDI_REORDER_NUMBERS_SPECIAL"
+	case UBIDI_REORDER_GROUP_NUMBERS_WITH_R:
+		return "UBIDI_REORDER_GROUP_NUMBERS_WITH_R"
+	case UBIDI_REORDER_RUNS_ONLY:
+		return "UBIDI_REORDER_RUNS_ONLY"
+	case UBIDI_REORDER_INVERSE_NUMBERS_AS_L:
+		return "UBIDI_REORDER_INVERSE_NUMBERS_AS_L"
+	case UBIDI_REORDER_INVERSE_LIKE_DIRECT:
+		return "UBIDI_REORDER_INVERSE_LIKE_DIRECT"
+	case UBIDI_REORDER_INVERSE_FOR_NUMBERS_SPECIAL:
+		return "UBIDI_REORDER_INVERSE_FOR_NUMBERS_SPECIAL"
+	default:
+		return fmt.Sprintf("UBiDiReorderingMode(%d)", int32(e))
+	}
+}
+
 type UBiDiReorderingOption int32
 
 const (
@@ -405,6 +1190,23 @@ const (
 	UBIDI_OPTION_STREAMING       UBiDiReorderingOption = 4
 )
 
+// String returns the UBiDiReorderingOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UBiDiReorderingOption) String() string {
+	switch e {
+	case UBIDI_OPTION_DEFAULT:
+		return "UBIDI_OPTION_DEFAULT"
+	case UBIDI_OPTION_INSERT_MARKS:
+		return "UBIDI_OPTION_INSERT_MARKS"
+	case UBIDI_OPTION_REMOVE_CONTROLS:
+		return "UBIDI_OPTION_REMOVE_CONTROLS"
+	case UBIDI_OPTION_STREAMING:
+		return "UBIDI_OPTION_STREAMING"
+	default:
+		return fmt.Sprintf("UBiDiReorderingOption(%d)", int32(e))
+	}
+}
+
 type UBidiPairedBracketType int32
 
 const (
@@ -412,6 +1214,21 @@ const (
 	U_BPT_OPEN  UBidiPairedBracketType = 1
 	U_BPT_CLOSE UBidiPairedBracketType = 2
 )
+
+// String returns the UBidiPairedBracketType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UBidiPairedBracketType) String() string {
+	switch e {
+	case U_BPT_NONE:
+		return "U_BPT_NONE"
+	case U_BPT_OPEN:
+		return "U_BPT_OPEN"
+	case U_BPT_CLOSE:
+		return "U_BPT_CLOSE"
+	default:
+		return fmt.Sprintf("UBidiPairedBracketType(%d)", int32(e))
+	}
+}
 
 type UBlockCode int32
 
@@ -730,6 +1547,635 @@ const (
 	UBLOCK_INVALID_CODE                                   UBlockCode = -1
 )
 
+// String returns the UBlockCode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UBlockCode) String() string {
+	switch e {
+	case UBLOCK_NO_BLOCK:
+		return "UBLOCK_NO_BLOCK"
+	case UBLOCK_BASIC_LATIN:
+		return "UBLOCK_BASIC_LATIN"
+	case UBLOCK_LATIN_1_SUPPLEMENT:
+		return "UBLOCK_LATIN_1_SUPPLEMENT"
+	case UBLOCK_LATIN_EXTENDED_A:
+		return "UBLOCK_LATIN_EXTENDED_A"
+	case UBLOCK_LATIN_EXTENDED_B:
+		return "UBLOCK_LATIN_EXTENDED_B"
+	case UBLOCK_IPA_EXTENSIONS:
+		return "UBLOCK_IPA_EXTENSIONS"
+	case UBLOCK_SPACING_MODIFIER_LETTERS:
+		return "UBLOCK_SPACING_MODIFIER_LETTERS"
+	case UBLOCK_COMBINING_DIACRITICAL_MARKS:
+		return "UBLOCK_COMBINING_DIACRITICAL_MARKS"
+	case UBLOCK_GREEK:
+		return "UBLOCK_GREEK"
+	case UBLOCK_CYRILLIC:
+		return "UBLOCK_CYRILLIC"
+	case UBLOCK_ARMENIAN:
+		return "UBLOCK_ARMENIAN"
+	case UBLOCK_HEBREW:
+		return "UBLOCK_HEBREW"
+	case UBLOCK_ARABIC:
+		return "UBLOCK_ARABIC"
+	case UBLOCK_SYRIAC:
+		return "UBLOCK_SYRIAC"
+	case UBLOCK_THAANA:
+		return "UBLOCK_THAANA"
+	case UBLOCK_DEVANAGARI:
+		return "UBLOCK_DEVANAGARI"
+	case UBLOCK_BENGALI:
+		return "UBLOCK_BENGALI"
+	case UBLOCK_GURMUKHI:
+		return "UBLOCK_GURMUKHI"
+	case UBLOCK_GUJARATI:
+		return "UBLOCK_GUJARATI"
+	case UBLOCK_ORIYA:
+		return "UBLOCK_ORIYA"
+	case UBLOCK_TAMIL:
+		return "UBLOCK_TAMIL"
+	case UBLOCK_TELUGU:
+		return "UBLOCK_TELUGU"
+	case UBLOCK_KANNADA:
+		return "UBLOCK_KANNADA"
+	case UBLOCK_MALAYALAM:
+		return "UBLOCK_MALAYALAM"
+	case UBLOCK_SINHALA:
+		return "UBLOCK_SINHALA"
+	case UBLOCK_THAI:
+		return "UBLOCK_THAI"
+	case UBLOCK_LAO:
+		return "UBLOCK_LAO"
+	case UBLOCK_TIBETAN:
+		return "UBLOCK_TIBETAN"
+	case UBLOCK_MYANMAR:
+		return "UBLOCK_MYANMAR"
+	case UBLOCK_GEORGIAN:
+		return "UBLOCK_GEORGIAN"
+	case UBLOCK_HANGUL_JAMO:
+		return "UBLOCK_HANGUL_JAMO"
+	case UBLOCK_ETHIOPIC:
+		return "UBLOCK_ETHIOPIC"
+	case UBLOCK_CHEROKEE:
+		return "UBLOCK_CHEROKEE"
+	case UBLOCK_UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS:
+		return "UBLOCK_UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS"
+	case UBLOCK_OGHAM:
+		return "UBLOCK_OGHAM"
+	case UBLOCK_RUNIC:
+		return "UBLOCK_RUNIC"
+	case UBLOCK_KHMER:
+		return "UBLOCK_KHMER"
+	case UBLOCK_MONGOLIAN:
+		return "UBLOCK_MONGOLIAN"
+	case UBLOCK_LATIN_EXTENDED_ADDITIONAL:
+		return "UBLOCK_LATIN_EXTENDED_ADDITIONAL"
+	case UBLOCK_GREEK_EXTENDED:
+		return "UBLOCK_GREEK_EXTENDED"
+	case UBLOCK_GENERAL_PUNCTUATION:
+		return "UBLOCK_GENERAL_PUNCTUATION"
+	case UBLOCK_SUPERSCRIPTS_AND_SUBSCRIPTS:
+		return "UBLOCK_SUPERSCRIPTS_AND_SUBSCRIPTS"
+	case UBLOCK_CURRENCY_SYMBOLS:
+		return "UBLOCK_CURRENCY_SYMBOLS"
+	case UBLOCK_COMBINING_MARKS_FOR_SYMBOLS:
+		return "UBLOCK_COMBINING_MARKS_FOR_SYMBOLS"
+	case UBLOCK_LETTERLIKE_SYMBOLS:
+		return "UBLOCK_LETTERLIKE_SYMBOLS"
+	case UBLOCK_NUMBER_FORMS:
+		return "UBLOCK_NUMBER_FORMS"
+	case UBLOCK_ARROWS:
+		return "UBLOCK_ARROWS"
+	case UBLOCK_MATHEMATICAL_OPERATORS:
+		return "UBLOCK_MATHEMATICAL_OPERATORS"
+	case UBLOCK_MISCELLANEOUS_TECHNICAL:
+		return "UBLOCK_MISCELLANEOUS_TECHNICAL"
+	case UBLOCK_CONTROL_PICTURES:
+		return "UBLOCK_CONTROL_PICTURES"
+	case UBLOCK_OPTICAL_CHARACTER_RECOGNITION:
+		return "UBLOCK_OPTICAL_CHARACTER_RECOGNITION"
+	case UBLOCK_ENCLOSED_ALPHANUMERICS:
+		return "UBLOCK_ENCLOSED_ALPHANUMERICS"
+	case UBLOCK_BOX_DRAWING:
+		return "UBLOCK_BOX_DRAWING"
+	case UBLOCK_BLOCK_ELEMENTS:
+		return "UBLOCK_BLOCK_ELEMENTS"
+	case UBLOCK_GEOMETRIC_SHAPES:
+		return "UBLOCK_GEOMETRIC_SHAPES"
+	case UBLOCK_MISCELLANEOUS_SYMBOLS:
+		return "UBLOCK_MISCELLANEOUS_SYMBOLS"
+	case UBLOCK_DINGBATS:
+		return "UBLOCK_DINGBATS"
+	case UBLOCK_BRAILLE_PATTERNS:
+		return "UBLOCK_BRAILLE_PATTERNS"
+	case UBLOCK_CJK_RADICALS_SUPPLEMENT:
+		return "UBLOCK_CJK_RADICALS_SUPPLEMENT"
+	case UBLOCK_KANGXI_RADICALS:
+		return "UBLOCK_KANGXI_RADICALS"
+	case UBLOCK_IDEOGRAPHIC_DESCRIPTION_CHARACTERS:
+		return "UBLOCK_IDEOGRAPHIC_DESCRIPTION_CHARACTERS"
+	case UBLOCK_CJK_SYMBOLS_AND_PUNCTUATION:
+		return "UBLOCK_CJK_SYMBOLS_AND_PUNCTUATION"
+	case UBLOCK_HIRAGANA:
+		return "UBLOCK_HIRAGANA"
+	case UBLOCK_KATAKANA:
+		return "UBLOCK_KATAKANA"
+	case UBLOCK_BOPOMOFO:
+		return "UBLOCK_BOPOMOFO"
+	case UBLOCK_HANGUL_COMPATIBILITY_JAMO:
+		return "UBLOCK_HANGUL_COMPATIBILITY_JAMO"
+	case UBLOCK_KANBUN:
+		return "UBLOCK_KANBUN"
+	case UBLOCK_BOPOMOFO_EXTENDED:
+		return "UBLOCK_BOPOMOFO_EXTENDED"
+	case UBLOCK_ENCLOSED_CJK_LETTERS_AND_MONTHS:
+		return "UBLOCK_ENCLOSED_CJK_LETTERS_AND_MONTHS"
+	case UBLOCK_CJK_COMPATIBILITY:
+		return "UBLOCK_CJK_COMPATIBILITY"
+	case UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A:
+		return "UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A"
+	case UBLOCK_CJK_UNIFIED_IDEOGRAPHS:
+		return "UBLOCK_CJK_UNIFIED_IDEOGRAPHS"
+	case UBLOCK_YI_SYLLABLES:
+		return "UBLOCK_YI_SYLLABLES"
+	case UBLOCK_YI_RADICALS:
+		return "UBLOCK_YI_RADICALS"
+	case UBLOCK_HANGUL_SYLLABLES:
+		return "UBLOCK_HANGUL_SYLLABLES"
+	case UBLOCK_HIGH_SURROGATES:
+		return "UBLOCK_HIGH_SURROGATES"
+	case UBLOCK_HIGH_PRIVATE_USE_SURROGATES:
+		return "UBLOCK_HIGH_PRIVATE_USE_SURROGATES"
+	case UBLOCK_LOW_SURROGATES:
+		return "UBLOCK_LOW_SURROGATES"
+	case UBLOCK_PRIVATE_USE_AREA:
+		return "UBLOCK_PRIVATE_USE_AREA"
+	case UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS:
+		return "UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS"
+	case UBLOCK_ALPHABETIC_PRESENTATION_FORMS:
+		return "UBLOCK_ALPHABETIC_PRESENTATION_FORMS"
+	case UBLOCK_ARABIC_PRESENTATION_FORMS_A:
+		return "UBLOCK_ARABIC_PRESENTATION_FORMS_A"
+	case UBLOCK_COMBINING_HALF_MARKS:
+		return "UBLOCK_COMBINING_HALF_MARKS"
+	case UBLOCK_CJK_COMPATIBILITY_FORMS:
+		return "UBLOCK_CJK_COMPATIBILITY_FORMS"
+	case UBLOCK_SMALL_FORM_VARIANTS:
+		return "UBLOCK_SMALL_FORM_VARIANTS"
+	case UBLOCK_ARABIC_PRESENTATION_FORMS_B:
+		return "UBLOCK_ARABIC_PRESENTATION_FORMS_B"
+	case UBLOCK_SPECIALS:
+		return "UBLOCK_SPECIALS"
+	case UBLOCK_HALFWIDTH_AND_FULLWIDTH_FORMS:
+		return "UBLOCK_HALFWIDTH_AND_FULLWIDTH_FORMS"
+	case UBLOCK_OLD_ITALIC:
+		return "UBLOCK_OLD_ITALIC"
+	case UBLOCK_GOTHIC:
+		return "UBLOCK_GOTHIC"
+	case UBLOCK_DESERET:
+		return "UBLOCK_DESERET"
+	case UBLOCK_BYZANTINE_MUSICAL_SYMBOLS:
+		return "UBLOCK_BYZANTINE_MUSICAL_SYMBOLS"
+	case UBLOCK_MUSICAL_SYMBOLS:
+		return "UBLOCK_MUSICAL_SYMBOLS"
+	case UBLOCK_MATHEMATICAL_ALPHANUMERIC_SYMBOLS:
+		return "UBLOCK_MATHEMATICAL_ALPHANUMERIC_SYMBOLS"
+	case UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B:
+		return "UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B"
+	case UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT:
+		return "UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT"
+	case UBLOCK_TAGS:
+		return "UBLOCK_TAGS"
+	case UBLOCK_CYRILLIC_SUPPLEMENT:
+		return "UBLOCK_CYRILLIC_SUPPLEMENT"
+	case UBLOCK_TAGALOG:
+		return "UBLOCK_TAGALOG"
+	case UBLOCK_HANUNOO:
+		return "UBLOCK_HANUNOO"
+	case UBLOCK_BUHID:
+		return "UBLOCK_BUHID"
+	case UBLOCK_TAGBANWA:
+		return "UBLOCK_TAGBANWA"
+	case UBLOCK_MISCELLANEOUS_MATHEMATICAL_SYMBOLS_A:
+		return "UBLOCK_MISCELLANEOUS_MATHEMATICAL_SYMBOLS_A"
+	case UBLOCK_SUPPLEMENTAL_ARROWS_A:
+		return "UBLOCK_SUPPLEMENTAL_ARROWS_A"
+	case UBLOCK_SUPPLEMENTAL_ARROWS_B:
+		return "UBLOCK_SUPPLEMENTAL_ARROWS_B"
+	case UBLOCK_MISCELLANEOUS_MATHEMATICAL_SYMBOLS_B:
+		return "UBLOCK_MISCELLANEOUS_MATHEMATICAL_SYMBOLS_B"
+	case UBLOCK_SUPPLEMENTAL_MATHEMATICAL_OPERATORS:
+		return "UBLOCK_SUPPLEMENTAL_MATHEMATICAL_OPERATORS"
+	case UBLOCK_KATAKANA_PHONETIC_EXTENSIONS:
+		return "UBLOCK_KATAKANA_PHONETIC_EXTENSIONS"
+	case UBLOCK_VARIATION_SELECTORS:
+		return "UBLOCK_VARIATION_SELECTORS"
+	case UBLOCK_SUPPLEMENTARY_PRIVATE_USE_AREA_A:
+		return "UBLOCK_SUPPLEMENTARY_PRIVATE_USE_AREA_A"
+	case UBLOCK_SUPPLEMENTARY_PRIVATE_USE_AREA_B:
+		return "UBLOCK_SUPPLEMENTARY_PRIVATE_USE_AREA_B"
+	case UBLOCK_LIMBU:
+		return "UBLOCK_LIMBU"
+	case UBLOCK_TAI_LE:
+		return "UBLOCK_TAI_LE"
+	case UBLOCK_KHMER_SYMBOLS:
+		return "UBLOCK_KHMER_SYMBOLS"
+	case UBLOCK_PHONETIC_EXTENSIONS:
+		return "UBLOCK_PHONETIC_EXTENSIONS"
+	case UBLOCK_MISCELLANEOUS_SYMBOLS_AND_ARROWS:
+		return "UBLOCK_MISCELLANEOUS_SYMBOLS_AND_ARROWS"
+	case UBLOCK_YIJING_HEXAGRAM_SYMBOLS:
+		return "UBLOCK_YIJING_HEXAGRAM_SYMBOLS"
+	case UBLOCK_LINEAR_B_SYLLABARY:
+		return "UBLOCK_LINEAR_B_SYLLABARY"
+	case UBLOCK_LINEAR_B_IDEOGRAMS:
+		return "UBLOCK_LINEAR_B_IDEOGRAMS"
+	case UBLOCK_AEGEAN_NUMBERS:
+		return "UBLOCK_AEGEAN_NUMBERS"
+	case UBLOCK_UGARITIC:
+		return "UBLOCK_UGARITIC"
+	case UBLOCK_SHAVIAN:
+		return "UBLOCK_SHAVIAN"
+	case UBLOCK_OSMANYA:
+		return "UBLOCK_OSMANYA"
+	case UBLOCK_CYPRIOT_SYLLABARY:
+		return "UBLOCK_CYPRIOT_SYLLABARY"
+	case UBLOCK_TAI_XUAN_JING_SYMBOLS:
+		return "UBLOCK_TAI_XUAN_JING_SYMBOLS"
+	case UBLOCK_VARIATION_SELECTORS_SUPPLEMENT:
+		return "UBLOCK_VARIATION_SELECTORS_SUPPLEMENT"
+	case UBLOCK_ANCIENT_GREEK_MUSICAL_NOTATION:
+		return "UBLOCK_ANCIENT_GREEK_MUSICAL_NOTATION"
+	case UBLOCK_ANCIENT_GREEK_NUMBERS:
+		return "UBLOCK_ANCIENT_GREEK_NUMBERS"
+	case UBLOCK_ARABIC_SUPPLEMENT:
+		return "UBLOCK_ARABIC_SUPPLEMENT"
+	case UBLOCK_BUGINESE:
+		return "UBLOCK_BUGINESE"
+	case UBLOCK_CJK_STROKES:
+		return "UBLOCK_CJK_STROKES"
+	case UBLOCK_COMBINING_DIACRITICAL_MARKS_SUPPLEMENT:
+		return "UBLOCK_COMBINING_DIACRITICAL_MARKS_SUPPLEMENT"
+	case UBLOCK_COPTIC:
+		return "UBLOCK_COPTIC"
+	case UBLOCK_ETHIOPIC_EXTENDED:
+		return "UBLOCK_ETHIOPIC_EXTENDED"
+	case UBLOCK_ETHIOPIC_SUPPLEMENT:
+		return "UBLOCK_ETHIOPIC_SUPPLEMENT"
+	case UBLOCK_GEORGIAN_SUPPLEMENT:
+		return "UBLOCK_GEORGIAN_SUPPLEMENT"
+	case UBLOCK_GLAGOLITIC:
+		return "UBLOCK_GLAGOLITIC"
+	case UBLOCK_KHAROSHTHI:
+		return "UBLOCK_KHAROSHTHI"
+	case UBLOCK_MODIFIER_TONE_LETTERS:
+		return "UBLOCK_MODIFIER_TONE_LETTERS"
+	case UBLOCK_NEW_TAI_LUE:
+		return "UBLOCK_NEW_TAI_LUE"
+	case UBLOCK_OLD_PERSIAN:
+		return "UBLOCK_OLD_PERSIAN"
+	case UBLOCK_PHONETIC_EXTENSIONS_SUPPLEMENT:
+		return "UBLOCK_PHONETIC_EXTENSIONS_SUPPLEMENT"
+	case UBLOCK_SUPPLEMENTAL_PUNCTUATION:
+		return "UBLOCK_SUPPLEMENTAL_PUNCTUATION"
+	case UBLOCK_SYLOTI_NAGRI:
+		return "UBLOCK_SYLOTI_NAGRI"
+	case UBLOCK_TIFINAGH:
+		return "UBLOCK_TIFINAGH"
+	case UBLOCK_VERTICAL_FORMS:
+		return "UBLOCK_VERTICAL_FORMS"
+	case UBLOCK_NKO:
+		return "UBLOCK_NKO"
+	case UBLOCK_BALINESE:
+		return "UBLOCK_BALINESE"
+	case UBLOCK_LATIN_EXTENDED_C:
+		return "UBLOCK_LATIN_EXTENDED_C"
+	case UBLOCK_LATIN_EXTENDED_D:
+		return "UBLOCK_LATIN_EXTENDED_D"
+	case UBLOCK_PHAGS_PA:
+		return "UBLOCK_PHAGS_PA"
+	case UBLOCK_PHOENICIAN:
+		return "UBLOCK_PHOENICIAN"
+	case UBLOCK_CUNEIFORM:
+		return "UBLOCK_CUNEIFORM"
+	case UBLOCK_CUNEIFORM_NUMBERS_AND_PUNCTUATION:
+		return "UBLOCK_CUNEIFORM_NUMBERS_AND_PUNCTUATION"
+	case UBLOCK_COUNTING_ROD_NUMERALS:
+		return "UBLOCK_COUNTING_ROD_NUMERALS"
+	case UBLOCK_SUNDANESE:
+		return "UBLOCK_SUNDANESE"
+	case UBLOCK_LEPCHA:
+		return "UBLOCK_LEPCHA"
+	case UBLOCK_OL_CHIKI:
+		return "UBLOCK_OL_CHIKI"
+	case UBLOCK_CYRILLIC_EXTENDED_A:
+		return "UBLOCK_CYRILLIC_EXTENDED_A"
+	case UBLOCK_VAI:
+		return "UBLOCK_VAI"
+	case UBLOCK_CYRILLIC_EXTENDED_B:
+		return "UBLOCK_CYRILLIC_EXTENDED_B"
+	case UBLOCK_SAURASHTRA:
+		return "UBLOCK_SAURASHTRA"
+	case UBLOCK_KAYAH_LI:
+		return "UBLOCK_KAYAH_LI"
+	case UBLOCK_REJANG:
+		return "UBLOCK_REJANG"
+	case UBLOCK_CHAM:
+		return "UBLOCK_CHAM"
+	case UBLOCK_ANCIENT_SYMBOLS:
+		return "UBLOCK_ANCIENT_SYMBOLS"
+	case UBLOCK_PHAISTOS_DISC:
+		return "UBLOCK_PHAISTOS_DISC"
+	case UBLOCK_LYCIAN:
+		return "UBLOCK_LYCIAN"
+	case UBLOCK_CARIAN:
+		return "UBLOCK_CARIAN"
+	case UBLOCK_LYDIAN:
+		return "UBLOCK_LYDIAN"
+	case UBLOCK_MAHJONG_TILES:
+		return "UBLOCK_MAHJONG_TILES"
+	case UBLOCK_DOMINO_TILES:
+		return "UBLOCK_DOMINO_TILES"
+	case UBLOCK_SAMARITAN:
+		return "UBLOCK_SAMARITAN"
+	case UBLOCK_UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS_EXTENDED:
+		return "UBLOCK_UNIFIED_CANADIAN_ABORIGINAL_SYLLABICS_EXTENDED"
+	case UBLOCK_TAI_THAM:
+		return "UBLOCK_TAI_THAM"
+	case UBLOCK_VEDIC_EXTENSIONS:
+		return "UBLOCK_VEDIC_EXTENSIONS"
+	case UBLOCK_LISU:
+		return "UBLOCK_LISU"
+	case UBLOCK_BAMUM:
+		return "UBLOCK_BAMUM"
+	case UBLOCK_COMMON_INDIC_NUMBER_FORMS:
+		return "UBLOCK_COMMON_INDIC_NUMBER_FORMS"
+	case UBLOCK_DEVANAGARI_EXTENDED:
+		return "UBLOCK_DEVANAGARI_EXTENDED"
+	case UBLOCK_HANGUL_JAMO_EXTENDED_A:
+		return "UBLOCK_HANGUL_JAMO_EXTENDED_A"
+	case UBLOCK_JAVANESE:
+		return "UBLOCK_JAVANESE"
+	case UBLOCK_MYANMAR_EXTENDED_A:
+		return "UBLOCK_MYANMAR_EXTENDED_A"
+	case UBLOCK_TAI_VIET:
+		return "UBLOCK_TAI_VIET"
+	case UBLOCK_MEETEI_MAYEK:
+		return "UBLOCK_MEETEI_MAYEK"
+	case UBLOCK_HANGUL_JAMO_EXTENDED_B:
+		return "UBLOCK_HANGUL_JAMO_EXTENDED_B"
+	case UBLOCK_IMPERIAL_ARAMAIC:
+		return "UBLOCK_IMPERIAL_ARAMAIC"
+	case UBLOCK_OLD_SOUTH_ARABIAN:
+		return "UBLOCK_OLD_SOUTH_ARABIAN"
+	case UBLOCK_AVESTAN:
+		return "UBLOCK_AVESTAN"
+	case UBLOCK_INSCRIPTIONAL_PARTHIAN:
+		return "UBLOCK_INSCRIPTIONAL_PARTHIAN"
+	case UBLOCK_INSCRIPTIONAL_PAHLAVI:
+		return "UBLOCK_INSCRIPTIONAL_PAHLAVI"
+	case UBLOCK_OLD_TURKIC:
+		return "UBLOCK_OLD_TURKIC"
+	case UBLOCK_RUMI_NUMERAL_SYMBOLS:
+		return "UBLOCK_RUMI_NUMERAL_SYMBOLS"
+	case UBLOCK_KAITHI:
+		return "UBLOCK_KAITHI"
+	case UBLOCK_EGYPTIAN_HIEROGLYPHS:
+		return "UBLOCK_EGYPTIAN_HIEROGLYPHS"
+	case UBLOCK_ENCLOSED_ALPHANUMERIC_SUPPLEMENT:
+		return "UBLOCK_ENCLOSED_ALPHANUMERIC_SUPPLEMENT"
+	case UBLOCK_ENCLOSED_IDEOGRAPHIC_SUPPLEMENT:
+		return "UBLOCK_ENCLOSED_IDEOGRAPHIC_SUPPLEMENT"
+	case UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C:
+		return "UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C"
+	case UBLOCK_MANDAIC:
+		return "UBLOCK_MANDAIC"
+	case UBLOCK_BATAK:
+		return "UBLOCK_BATAK"
+	case UBLOCK_ETHIOPIC_EXTENDED_A:
+		return "UBLOCK_ETHIOPIC_EXTENDED_A"
+	case UBLOCK_BRAHMI:
+		return "UBLOCK_BRAHMI"
+	case UBLOCK_BAMUM_SUPPLEMENT:
+		return "UBLOCK_BAMUM_SUPPLEMENT"
+	case UBLOCK_KANA_SUPPLEMENT:
+		return "UBLOCK_KANA_SUPPLEMENT"
+	case UBLOCK_PLAYING_CARDS:
+		return "UBLOCK_PLAYING_CARDS"
+	case UBLOCK_MISCELLANEOUS_SYMBOLS_AND_PICTOGRAPHS:
+		return "UBLOCK_MISCELLANEOUS_SYMBOLS_AND_PICTOGRAPHS"
+	case UBLOCK_EMOTICONS:
+		return "UBLOCK_EMOTICONS"
+	case UBLOCK_TRANSPORT_AND_MAP_SYMBOLS:
+		return "UBLOCK_TRANSPORT_AND_MAP_SYMBOLS"
+	case UBLOCK_ALCHEMICAL_SYMBOLS:
+		return "UBLOCK_ALCHEMICAL_SYMBOLS"
+	case UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D:
+		return "UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D"
+	case UBLOCK_ARABIC_EXTENDED_A:
+		return "UBLOCK_ARABIC_EXTENDED_A"
+	case UBLOCK_ARABIC_MATHEMATICAL_ALPHABETIC_SYMBOLS:
+		return "UBLOCK_ARABIC_MATHEMATICAL_ALPHABETIC_SYMBOLS"
+	case UBLOCK_CHAKMA:
+		return "UBLOCK_CHAKMA"
+	case UBLOCK_MEETEI_MAYEK_EXTENSIONS:
+		return "UBLOCK_MEETEI_MAYEK_EXTENSIONS"
+	case UBLOCK_MEROITIC_CURSIVE:
+		return "UBLOCK_MEROITIC_CURSIVE"
+	case UBLOCK_MEROITIC_HIEROGLYPHS:
+		return "UBLOCK_MEROITIC_HIEROGLYPHS"
+	case UBLOCK_MIAO:
+		return "UBLOCK_MIAO"
+	case UBLOCK_SHARADA:
+		return "UBLOCK_SHARADA"
+	case UBLOCK_SORA_SOMPENG:
+		return "UBLOCK_SORA_SOMPENG"
+	case UBLOCK_SUNDANESE_SUPPLEMENT:
+		return "UBLOCK_SUNDANESE_SUPPLEMENT"
+	case UBLOCK_TAKRI:
+		return "UBLOCK_TAKRI"
+	case UBLOCK_BASSA_VAH:
+		return "UBLOCK_BASSA_VAH"
+	case UBLOCK_CAUCASIAN_ALBANIAN:
+		return "UBLOCK_CAUCASIAN_ALBANIAN"
+	case UBLOCK_COPTIC_EPACT_NUMBERS:
+		return "UBLOCK_COPTIC_EPACT_NUMBERS"
+	case UBLOCK_COMBINING_DIACRITICAL_MARKS_EXTENDED:
+		return "UBLOCK_COMBINING_DIACRITICAL_MARKS_EXTENDED"
+	case UBLOCK_DUPLOYAN:
+		return "UBLOCK_DUPLOYAN"
+	case UBLOCK_ELBASAN:
+		return "UBLOCK_ELBASAN"
+	case UBLOCK_GEOMETRIC_SHAPES_EXTENDED:
+		return "UBLOCK_GEOMETRIC_SHAPES_EXTENDED"
+	case UBLOCK_GRANTHA:
+		return "UBLOCK_GRANTHA"
+	case UBLOCK_KHOJKI:
+		return "UBLOCK_KHOJKI"
+	case UBLOCK_KHUDAWADI:
+		return "UBLOCK_KHUDAWADI"
+	case UBLOCK_LATIN_EXTENDED_E:
+		return "UBLOCK_LATIN_EXTENDED_E"
+	case UBLOCK_LINEAR_A:
+		return "UBLOCK_LINEAR_A"
+	case UBLOCK_MAHAJANI:
+		return "UBLOCK_MAHAJANI"
+	case UBLOCK_MANICHAEAN:
+		return "UBLOCK_MANICHAEAN"
+	case UBLOCK_MENDE_KIKAKUI:
+		return "UBLOCK_MENDE_KIKAKUI"
+	case UBLOCK_MODI:
+		return "UBLOCK_MODI"
+	case UBLOCK_MRO:
+		return "UBLOCK_MRO"
+	case UBLOCK_MYANMAR_EXTENDED_B:
+		return "UBLOCK_MYANMAR_EXTENDED_B"
+	case UBLOCK_NABATAEAN:
+		return "UBLOCK_NABATAEAN"
+	case UBLOCK_OLD_NORTH_ARABIAN:
+		return "UBLOCK_OLD_NORTH_ARABIAN"
+	case UBLOCK_OLD_PERMIC:
+		return "UBLOCK_OLD_PERMIC"
+	case UBLOCK_ORNAMENTAL_DINGBATS:
+		return "UBLOCK_ORNAMENTAL_DINGBATS"
+	case UBLOCK_PAHAWH_HMONG:
+		return "UBLOCK_PAHAWH_HMONG"
+	case UBLOCK_PALMYRENE:
+		return "UBLOCK_PALMYRENE"
+	case UBLOCK_PAU_CIN_HAU:
+		return "UBLOCK_PAU_CIN_HAU"
+	case UBLOCK_PSALTER_PAHLAVI:
+		return "UBLOCK_PSALTER_PAHLAVI"
+	case UBLOCK_SHORTHAND_FORMAT_CONTROLS:
+		return "UBLOCK_SHORTHAND_FORMAT_CONTROLS"
+	case UBLOCK_SIDDHAM:
+		return "UBLOCK_SIDDHAM"
+	case UBLOCK_SINHALA_ARCHAIC_NUMBERS:
+		return "UBLOCK_SINHALA_ARCHAIC_NUMBERS"
+	case UBLOCK_SUPPLEMENTAL_ARROWS_C:
+		return "UBLOCK_SUPPLEMENTAL_ARROWS_C"
+	case UBLOCK_TIRHUTA:
+		return "UBLOCK_TIRHUTA"
+	case UBLOCK_WARANG_CITI:
+		return "UBLOCK_WARANG_CITI"
+	case UBLOCK_AHOM:
+		return "UBLOCK_AHOM"
+	case UBLOCK_ANATOLIAN_HIEROGLYPHS:
+		return "UBLOCK_ANATOLIAN_HIEROGLYPHS"
+	case UBLOCK_CHEROKEE_SUPPLEMENT:
+		return "UBLOCK_CHEROKEE_SUPPLEMENT"
+	case UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_E:
+		return "UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_E"
+	case UBLOCK_EARLY_DYNASTIC_CUNEIFORM:
+		return "UBLOCK_EARLY_DYNASTIC_CUNEIFORM"
+	case UBLOCK_HATRAN:
+		return "UBLOCK_HATRAN"
+	case UBLOCK_MULTANI:
+		return "UBLOCK_MULTANI"
+	case UBLOCK_OLD_HUNGARIAN:
+		return "UBLOCK_OLD_HUNGARIAN"
+	case UBLOCK_SUPPLEMENTAL_SYMBOLS_AND_PICTOGRAPHS:
+		return "UBLOCK_SUPPLEMENTAL_SYMBOLS_AND_PICTOGRAPHS"
+	case UBLOCK_SUTTON_SIGNWRITING:
+		return "UBLOCK_SUTTON_SIGNWRITING"
+	case UBLOCK_ADLAM:
+		return "UBLOCK_ADLAM"
+	case UBLOCK_BHAIKSUKI:
+		return "UBLOCK_BHAIKSUKI"
+	case UBLOCK_CYRILLIC_EXTENDED_C:
+		return "UBLOCK_CYRILLIC_EXTENDED_C"
+	case UBLOCK_GLAGOLITIC_SUPPLEMENT:
+		return "UBLOCK_GLAGOLITIC_SUPPLEMENT"
+	case UBLOCK_IDEOGRAPHIC_SYMBOLS_AND_PUNCTUATION:
+		return "UBLOCK_IDEOGRAPHIC_SYMBOLS_AND_PUNCTUATION"
+	case UBLOCK_MARCHEN:
+		return "UBLOCK_MARCHEN"
+	case UBLOCK_MONGOLIAN_SUPPLEMENT:
+		return "UBLOCK_MONGOLIAN_SUPPLEMENT"
+	case UBLOCK_NEWA:
+		return "UBLOCK_NEWA"
+	case UBLOCK_OSAGE:
+		return "UBLOCK_OSAGE"
+	case UBLOCK_TANGUT:
+		return "UBLOCK_TANGUT"
+	case UBLOCK_TANGUT_COMPONENTS:
+		return "UBLOCK_TANGUT_COMPONENTS"
+	case UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_F:
+		return "UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_F"
+	case UBLOCK_KANA_EXTENDED_A:
+		return "UBLOCK_KANA_EXTENDED_A"
+	case UBLOCK_MASARAM_GONDI:
+		return "UBLOCK_MASARAM_GONDI"
+	case UBLOCK_NUSHU:
+		return "UBLOCK_NUSHU"
+	case UBLOCK_SOYOMBO:
+		return "UBLOCK_SOYOMBO"
+	case UBLOCK_SYRIAC_SUPPLEMENT:
+		return "UBLOCK_SYRIAC_SUPPLEMENT"
+	case UBLOCK_ZANABAZAR_SQUARE:
+		return "UBLOCK_ZANABAZAR_SQUARE"
+	case UBLOCK_CHESS_SYMBOLS:
+		return "UBLOCK_CHESS_SYMBOLS"
+	case UBLOCK_DOGRA:
+		return "UBLOCK_DOGRA"
+	case UBLOCK_GEORGIAN_EXTENDED:
+		return "UBLOCK_GEORGIAN_EXTENDED"
+	case UBLOCK_GUNJALA_GONDI:
+		return "UBLOCK_GUNJALA_GONDI"
+	case UBLOCK_HANIFI_ROHINGYA:
+		return "UBLOCK_HANIFI_ROHINGYA"
+	case UBLOCK_INDIC_SIYAQ_NUMBERS:
+		return "UBLOCK_INDIC_SIYAQ_NUMBERS"
+	case UBLOCK_MAKASAR:
+		return "UBLOCK_MAKASAR"
+	case UBLOCK_MAYAN_NUMERALS:
+		return "UBLOCK_MAYAN_NUMERALS"
+	case UBLOCK_MEDEFAIDRIN:
+		return "UBLOCK_MEDEFAIDRIN"
+	case UBLOCK_OLD_SOGDIAN:
+		return "UBLOCK_OLD_SOGDIAN"
+	case UBLOCK_SOGDIAN:
+		return "UBLOCK_SOGDIAN"
+	case UBLOCK_EGYPTIAN_HIEROGLYPH_FORMAT_CONTROLS:
+		return "UBLOCK_EGYPTIAN_HIEROGLYPH_FORMAT_CONTROLS"
+	case UBLOCK_ELYMAIC:
+		return "UBLOCK_ELYMAIC"
+	case UBLOCK_NANDINAGARI:
+		return "UBLOCK_NANDINAGARI"
+	case UBLOCK_NYIAKENG_PUACHUE_HMONG:
+		return "UBLOCK_NYIAKENG_PUACHUE_HMONG"
+	case UBLOCK_OTTOMAN_SIYAQ_NUMBERS:
+		return "UBLOCK_OTTOMAN_SIYAQ_NUMBERS"
+	case UBLOCK_SMALL_KANA_EXTENSION:
+		return "UBLOCK_SMALL_KANA_EXTENSION"
+	case UBLOCK_SYMBOLS_AND_PICTOGRAPHS_EXTENDED_A:
+		return "UBLOCK_SYMBOLS_AND_PICTOGRAPHS_EXTENDED_A"
+	case UBLOCK_TAMIL_SUPPLEMENT:
+		return "UBLOCK_TAMIL_SUPPLEMENT"
+	case UBLOCK_WANCHO:
+		return "UBLOCK_WANCHO"
+	case UBLOCK_CHORASMIAN:
+		return "UBLOCK_CHORASMIAN"
+	case UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_G:
+		return "UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_G"
+	case UBLOCK_DIVES_AKURU:
+		return "UBLOCK_DIVES_AKURU"
+	case UBLOCK_KHITAN_SMALL_SCRIPT:
+		return "UBLOCK_KHITAN_SMALL_SCRIPT"
+	case UBLOCK_LISU_SUPPLEMENT:
+		return "UBLOCK_LISU_SUPPLEMENT"
+	case UBLOCK_SYMBOLS_FOR_LEGACY_COMPUTING:
+		return "UBLOCK_SYMBOLS_FOR_LEGACY_COMPUTING"
+	case UBLOCK_TANGUT_SUPPLEMENT:
+		return "UBLOCK_TANGUT_SUPPLEMENT"
+	case UBLOCK_YEZIDI:
+		return "UBLOCK_YEZIDI"
+	case UBLOCK_INVALID_CODE:
+		return "UBLOCK_INVALID_CODE"
+	default:
+		return fmt.Sprintf("UBlockCode(%d)", int32(e))
+	}
+}
+
 type UBreakIteratorType int32
 
 const (
@@ -739,6 +2185,23 @@ const (
 	UBRK_SENTENCE  UBreakIteratorType = 3
 )
 
+// String returns the UBreakIteratorType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UBreakIteratorType) String() string {
+	switch e {
+	case UBRK_CHARACTER:
+		return "UBRK_CHARACTER"
+	case UBRK_WORD:
+		return "UBRK_WORD"
+	case UBRK_LINE:
+		return "UBRK_LINE"
+	case UBRK_SENTENCE:
+		return "UBRK_SENTENCE"
+	default:
+		return fmt.Sprintf("UBreakIteratorType(%d)", int32(e))
+	}
+}
+
 type UCPMapRangeOption int32
 
 const (
@@ -747,6 +2210,21 @@ const (
 	UCPMAP_RANGE_FIXED_ALL_SURROGATES  UCPMapRangeOption = 2
 )
 
+// String returns the UCPMapRangeOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCPMapRangeOption) String() string {
+	switch e {
+	case UCPMAP_RANGE_NORMAL:
+		return "UCPMAP_RANGE_NORMAL"
+	case UCPMAP_RANGE_FIXED_LEAD_SURROGATES:
+		return "UCPMAP_RANGE_FIXED_LEAD_SURROGATES"
+	case UCPMAP_RANGE_FIXED_ALL_SURROGATES:
+		return "UCPMAP_RANGE_FIXED_ALL_SURROGATES"
+	default:
+		return fmt.Sprintf("UCPMapRangeOption(%d)", int32(e))
+	}
+}
+
 type UCPTrieType int32
 
 const (
@@ -754,6 +2232,21 @@ const (
 	UCPTRIE_TYPE_FAST  UCPTrieType = 0
 	UCPTRIE_TYPE_SMALL UCPTrieType = 1
 )
+
+// String returns the UCPTrieType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCPTrieType) String() string {
+	switch e {
+	case UCPTRIE_TYPE_ANY:
+		return "UCPTRIE_TYPE_ANY"
+	case UCPTRIE_TYPE_FAST:
+		return "UCPTRIE_TYPE_FAST"
+	case UCPTRIE_TYPE_SMALL:
+		return "UCPTRIE_TYPE_SMALL"
+	default:
+		return fmt.Sprintf("UCPTrieType(%d)", int32(e))
+	}
+}
 
 type UCPTrieValueWidth int32
 
@@ -764,12 +2257,42 @@ const (
 	UCPTRIE_VALUE_BITS_8   UCPTrieValueWidth = 2
 )
 
+// String returns the UCPTrieValueWidth constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCPTrieValueWidth) String() string {
+	switch e {
+	case UCPTRIE_VALUE_BITS_ANY:
+		return "UCPTRIE_VALUE_BITS_ANY"
+	case UCPTRIE_VALUE_BITS_16:
+		return "UCPTRIE_VALUE_BITS_16"
+	case UCPTRIE_VALUE_BITS_32:
+		return "UCPTRIE_VALUE_BITS_32"
+	case UCPTRIE_VALUE_BITS_8:
+		return "UCPTRIE_VALUE_BITS_8"
+	default:
+		return fmt.Sprintf("UCPTrieValueWidth(%d)", int32(e))
+	}
+}
+
 type UCalendarAMPMs int32
 
 const (
 	UCAL_AM UCalendarAMPMs = 0
 	UCAL_PM UCalendarAMPMs = 1
 )
+
+// String returns the UCalendarAMPMs constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCalendarAMPMs) String() string {
+	switch e {
+	case UCAL_AM:
+		return "UCAL_AM"
+	case UCAL_PM:
+		return "UCAL_PM"
+	default:
+		return fmt.Sprintf("UCalendarAMPMs(%d)", int32(e))
+	}
+}
 
 type UCalendarAttribute int32
 
@@ -780,6 +2303,25 @@ const (
 	UCAL_REPEATED_WALL_TIME         UCalendarAttribute = 3
 	UCAL_SKIPPED_WALL_TIME          UCalendarAttribute = 4
 )
+
+// String returns the UCalendarAttribute constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCalendarAttribute) String() string {
+	switch e {
+	case UCAL_LENIENT:
+		return "UCAL_LENIENT"
+	case UCAL_FIRST_DAY_OF_WEEK:
+		return "UCAL_FIRST_DAY_OF_WEEK"
+	case UCAL_MINIMAL_DAYS_IN_FIRST_WEEK:
+		return "UCAL_MINIMAL_DAYS_IN_FIRST_WEEK"
+	case UCAL_REPEATED_WALL_TIME:
+		return "UCAL_REPEATED_WALL_TIME"
+	case UCAL_SKIPPED_WALL_TIME:
+		return "UCAL_SKIPPED_WALL_TIME"
+	default:
+		return fmt.Sprintf("UCalendarAttribute(%d)", int32(e))
+	}
+}
 
 type UCalendarDateFields int32
 
@@ -811,6 +2353,63 @@ const (
 	UCAL_DAY_OF_MONTH         UCalendarDateFields = 5
 )
 
+// String returns the UCalendarDateFields constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCalendarDateFields) String() string {
+	switch e {
+	case UCAL_ERA:
+		return "UCAL_ERA"
+	case UCAL_YEAR:
+		return "UCAL_YEAR"
+	case UCAL_MONTH:
+		return "UCAL_MONTH"
+	case UCAL_WEEK_OF_YEAR:
+		return "UCAL_WEEK_OF_YEAR"
+	case UCAL_WEEK_OF_MONTH:
+		return "UCAL_WEEK_OF_MONTH"
+	case UCAL_DATE:
+		return "UCAL_DATE"
+	case UCAL_DAY_OF_YEAR:
+		return "UCAL_DAY_OF_YEAR"
+	case UCAL_DAY_OF_WEEK:
+		return "UCAL_DAY_OF_WEEK"
+	case UCAL_DAY_OF_WEEK_IN_MONTH:
+		return "UCAL_DAY_OF_WEEK_IN_MONTH"
+	case UCAL_AM_PM:
+		return "UCAL_AM_PM"
+	case UCAL_HOUR:
+		return "UCAL_HOUR"
+	case UCAL_HOUR_OF_DAY:
+		return "UCAL_HOUR_OF_DAY"
+	case UCAL_MINUTE:
+		return "UCAL_MINUTE"
+	case UCAL_SECOND:
+		return "UCAL_SECOND"
+	case UCAL_MILLISECOND:
+		return "UCAL_MILLISECOND"
+	case UCAL_ZONE_OFFSET:
+		return "UCAL_ZONE_OFFSET"
+	case UCAL_DST_OFFSET:
+		return "UCAL_DST_OFFSET"
+	case UCAL_YEAR_WOY:
+		return "UCAL_YEAR_WOY"
+	case UCAL_DOW_LOCAL:
+		return "UCAL_DOW_LOCAL"
+	case UCAL_EXTENDED_YEAR:
+		return "UCAL_EXTENDED_YEAR"
+	case UCAL_JULIAN_DAY:
+		return "UCAL_JULIAN_DAY"
+	case UCAL_MILLISECONDS_IN_DAY:
+		return "UCAL_MILLISECONDS_IN_DAY"
+	case UCAL_IS_LEAP_MONTH:
+		return "UCAL_IS_LEAP_MONTH"
+	case UCAL_FIELD_COUNT:
+		return "UCAL_FIELD_COUNT"
+	default:
+		return fmt.Sprintf("UCalendarDateFields(%d)", int32(e))
+	}
+}
+
 type UCalendarDaysOfWeek int32
 
 const (
@@ -823,6 +2422,29 @@ const (
 	UCAL_SATURDAY  UCalendarDaysOfWeek = 7
 )
 
+// String returns the UCalendarDaysOfWeek constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCalendarDaysOfWeek) String() string {
+	switch e {
+	case UCAL_SUNDAY:
+		return "UCAL_SUNDAY"
+	case UCAL_MONDAY:
+		return "UCAL_MONDAY"
+	case UCAL_TUESDAY:
+		return "UCAL_TUESDAY"
+	case UCAL_WEDNESDAY:
+		return "UCAL_WEDNESDAY"
+	case UCAL_THURSDAY:
+		return "UCAL_THURSDAY"
+	case UCAL_FRIDAY:
+		return "UCAL_FRIDAY"
+	case UCAL_SATURDAY:
+		return "UCAL_SATURDAY"
+	default:
+		return fmt.Sprintf("UCalendarDaysOfWeek(%d)", int32(e))
+	}
+}
+
 type UCalendarDisplayNameType int32
 
 const (
@@ -831,6 +2453,23 @@ const (
 	UCAL_DST            UCalendarDisplayNameType = 2
 	UCAL_SHORT_DST      UCalendarDisplayNameType = 3
 )
+
+// String returns the UCalendarDisplayNameType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCalendarDisplayNameType) String() string {
+	switch e {
+	case UCAL_STANDARD:
+		return "UCAL_STANDARD"
+	case UCAL_SHORT_STANDARD:
+		return "UCAL_SHORT_STANDARD"
+	case UCAL_DST:
+		return "UCAL_DST"
+	case UCAL_SHORT_DST:
+		return "UCAL_SHORT_DST"
+	default:
+		return fmt.Sprintf("UCalendarDisplayNameType(%d)", int32(e))
+	}
+}
 
 type UCalendarLimitType int32
 
@@ -842,6 +2481,27 @@ const (
 	UCAL_ACTUAL_MINIMUM   UCalendarLimitType = 4
 	UCAL_ACTUAL_MAXIMUM   UCalendarLimitType = 5
 )
+
+// String returns the UCalendarLimitType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCalendarLimitType) String() string {
+	switch e {
+	case UCAL_MINIMUM:
+		return "UCAL_MINIMUM"
+	case UCAL_MAXIMUM:
+		return "UCAL_MAXIMUM"
+	case UCAL_GREATEST_MINIMUM:
+		return "UCAL_GREATEST_MINIMUM"
+	case UCAL_LEAST_MAXIMUM:
+		return "UCAL_LEAST_MAXIMUM"
+	case UCAL_ACTUAL_MINIMUM:
+		return "UCAL_ACTUAL_MINIMUM"
+	case UCAL_ACTUAL_MAXIMUM:
+		return "UCAL_ACTUAL_MAXIMUM"
+	default:
+		return fmt.Sprintf("UCalendarLimitType(%d)", int32(e))
+	}
+}
 
 type UCalendarMonths int32
 
@@ -861,6 +2521,41 @@ const (
 	UCAL_UNDECIMBER UCalendarMonths = 12
 )
 
+// String returns the UCalendarMonths constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCalendarMonths) String() string {
+	switch e {
+	case UCAL_JANUARY:
+		return "UCAL_JANUARY"
+	case UCAL_FEBRUARY:
+		return "UCAL_FEBRUARY"
+	case UCAL_MARCH:
+		return "UCAL_MARCH"
+	case UCAL_APRIL:
+		return "UCAL_APRIL"
+	case UCAL_MAY:
+		return "UCAL_MAY"
+	case UCAL_JUNE:
+		return "UCAL_JUNE"
+	case UCAL_JULY:
+		return "UCAL_JULY"
+	case UCAL_AUGUST:
+		return "UCAL_AUGUST"
+	case UCAL_SEPTEMBER:
+		return "UCAL_SEPTEMBER"
+	case UCAL_OCTOBER:
+		return "UCAL_OCTOBER"
+	case UCAL_NOVEMBER:
+		return "UCAL_NOVEMBER"
+	case UCAL_DECEMBER:
+		return "UCAL_DECEMBER"
+	case UCAL_UNDECIMBER:
+		return "UCAL_UNDECIMBER"
+	default:
+		return fmt.Sprintf("UCalendarMonths(%d)", int32(e))
+	}
+}
+
 type UCalendarType int32
 
 const (
@@ -868,6 +2563,19 @@ const (
 	UCAL_DEFAULT     UCalendarType = 0
 	UCAL_GREGORIAN   UCalendarType = 1
 )
+
+// String returns the UCalendarType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCalendarType) String() string {
+	switch e {
+	case UCAL_TRADITIONAL:
+		return "UCAL_TRADITIONAL"
+	case UCAL_GREGORIAN:
+		return "UCAL_GREGORIAN"
+	default:
+		return fmt.Sprintf("UCalendarType(%d)", int32(e))
+	}
+}
 
 type UCalendarWallTimeOption int32
 
@@ -877,6 +2585,21 @@ const (
 	UCAL_WALLTIME_NEXT_VALID UCalendarWallTimeOption = 2
 )
 
+// String returns the UCalendarWallTimeOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCalendarWallTimeOption) String() string {
+	switch e {
+	case UCAL_WALLTIME_LAST:
+		return "UCAL_WALLTIME_LAST"
+	case UCAL_WALLTIME_FIRST:
+		return "UCAL_WALLTIME_FIRST"
+	case UCAL_WALLTIME_NEXT_VALID:
+		return "UCAL_WALLTIME_NEXT_VALID"
+	default:
+		return fmt.Sprintf("UCalendarWallTimeOption(%d)", int32(e))
+	}
+}
+
 type UCalendarWeekdayType int32
 
 const (
@@ -885,6 +2608,23 @@ const (
 	UCAL_WEEKEND_ONSET UCalendarWeekdayType = 2
 	UCAL_WEEKEND_CEASE UCalendarWeekdayType = 3
 )
+
+// String returns the UCalendarWeekdayType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCalendarWeekdayType) String() string {
+	switch e {
+	case UCAL_WEEKDAY:
+		return "UCAL_WEEKDAY"
+	case UCAL_WEEKEND:
+		return "UCAL_WEEKEND"
+	case UCAL_WEEKEND_ONSET:
+		return "UCAL_WEEKEND_ONSET"
+	case UCAL_WEEKEND_CEASE:
+		return "UCAL_WEEKEND_CEASE"
+	default:
+		return fmt.Sprintf("UCalendarWeekdayType(%d)", int32(e))
+	}
+}
 
 type UCharCategory int32
 
@@ -923,6 +2663,77 @@ const (
 	U_CHAR_CATEGORY_COUNT    UCharCategory = 30
 )
 
+// String returns the UCharCategory constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCharCategory) String() string {
+	switch e {
+	case U_UNASSIGNED:
+		return "U_UNASSIGNED"
+	case U_UPPERCASE_LETTER:
+		return "U_UPPERCASE_LETTER"
+	case U_LOWERCASE_LETTER:
+		return "U_LOWERCASE_LETTER"
+	case U_TITLECASE_LETTER:
+		return "U_TITLECASE_LETTER"
+	case U_MODIFIER_LETTER:
+		return "U_MODIFIER_LETTER"
+	case U_OTHER_LETTER:
+		return "U_OTHER_LETTER"
+	case U_NON_SPACING_MARK:
+		return "U_NON_SPACING_MARK"
+	case U_ENCLOSING_MARK:
+		return "U_ENCLOSING_MARK"
+	case U_COMBINING_SPACING_MARK:
+		return "U_COMBINING_SPACING_MARK"
+	case U_DECIMAL_DIGIT_NUMBER:
+		return "U_DECIMAL_DIGIT_NUMBER"
+	case U_LETTER_NUMBER:
+		return "U_LETTER_NUMBER"
+	case U_OTHER_NUMBER:
+		return "U_OTHER_NUMBER"
+	case U_SPACE_SEPARATOR:
+		return "U_SPACE_SEPARATOR"
+	case U_LINE_SEPARATOR:
+		return "U_LINE_SEPARATOR"
+	case U_PARAGRAPH_SEPARATOR:
+		return "U_PARAGRAPH_SEPARATOR"
+	case U_CONTROL_CHAR:
+		return "U_CONTROL_CHAR"
+	case U_FORMAT_CHAR:
+		return "U_FORMAT_CHAR"
+	case U_PRIVATE_USE_CHAR:
+		return "U_PRIVATE_USE_CHAR"
+	case U_SURROGATE:
+		return "U_SURROGATE"
+	case U_DASH_PUNCTUATION:
+		return "U_DASH_PUNCTUATION"
+	case U_START_PUNCTUATION:
+		return "U_START_PUNCTUATION"
+	case U_END_PUNCTUATION:
+		return "U_END_PUNCTUATION"
+	case U_CONNECTOR_PUNCTUATION:
+		return "U_CONNECTOR_PUNCTUATION"
+	case U_OTHER_PUNCTUATION:
+		return "U_OTHER_PUNCTUATION"
+	case U_MATH_SYMBOL:
+		return "U_MATH_SYMBOL"
+	case U_CURRENCY_SYMBOL:
+		return "U_CURRENCY_SYMBOL"
+	case U_MODIFIER_SYMBOL:
+		return "U_MODIFIER_SYMBOL"
+	case U_OTHER_SYMBOL:
+		return "U_OTHER_SYMBOL"
+	case U_INITIAL_PUNCTUATION:
+		return "U_INITIAL_PUNCTUATION"
+	case U_FINAL_PUNCTUATION:
+		return "U_FINAL_PUNCTUATION"
+	case U_CHAR_CATEGORY_COUNT:
+		return "U_CHAR_CATEGORY_COUNT"
+	default:
+		return fmt.Sprintf("UCharCategory(%d)", int32(e))
+	}
+}
+
 type UCharDirection int32
 
 const (
@@ -951,6 +2762,61 @@ const (
 	U_POP_DIRECTIONAL_ISOLATE    UCharDirection = 22
 )
 
+// String returns the UCharDirection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCharDirection) String() string {
+	switch e {
+	case U_LEFT_TO_RIGHT:
+		return "U_LEFT_TO_RIGHT"
+	case U_RIGHT_TO_LEFT:
+		return "U_RIGHT_TO_LEFT"
+	case U_EUROPEAN_NUMBER:
+		return "U_EUROPEAN_NUMBER"
+	case U_EUROPEAN_NUMBER_SEPARATOR:
+		return "U_EUROPEAN_NUMBER_SEPARATOR"
+	case U_EUROPEAN_NUMBER_TERMINATOR:
+		return "U_EUROPEAN_NUMBER_TERMINATOR"
+	case U_ARABIC_NUMBER:
+		return "U_ARABIC_NUMBER"
+	case U_COMMON_NUMBER_SEPARATOR:
+		return "U_COMMON_NUMBER_SEPARATOR"
+	case U_BLOCK_SEPARATOR:
+		return "U_BLOCK_SEPARATOR"
+	case U_SEGMENT_SEPARATOR:
+		return "U_SEGMENT_SEPARATOR"
+	case U_WHITE_SPACE_NEUTRAL:
+		return "U_WHITE_SPACE_NEUTRAL"
+	case U_OTHER_NEUTRAL:
+		return "U_OTHER_NEUTRAL"
+	case U_LEFT_TO_RIGHT_EMBEDDING:
+		return "U_LEFT_TO_RIGHT_EMBEDDING"
+	case U_LEFT_TO_RIGHT_OVERRIDE:
+		return "U_LEFT_TO_RIGHT_OVERRIDE"
+	case U_RIGHT_TO_LEFT_ARABIC:
+		return "U_RIGHT_TO_LEFT_ARABIC"
+	case U_RIGHT_TO_LEFT_EMBEDDING:
+		return "U_RIGHT_TO_LEFT_EMBEDDING"
+	case U_RIGHT_TO_LEFT_OVERRIDE:
+		return "U_RIGHT_TO_LEFT_OVERRIDE"
+	case U_POP_DIRECTIONAL_FORMAT:
+		return "U_POP_DIRECTIONAL_FORMAT"
+	case U_DIR_NON_SPACING_MARK:
+		return "U_DIR_NON_SPACING_MARK"
+	case U_BOUNDARY_NEUTRAL:
+		return "U_BOUNDARY_NEUTRAL"
+	case U_FIRST_STRONG_ISOLATE:
+		return "U_FIRST_STRONG_ISOLATE"
+	case U_LEFT_TO_RIGHT_ISOLATE:
+		return "U_LEFT_TO_RIGHT_ISOLATE"
+	case U_RIGHT_TO_LEFT_ISOLATE:
+		return "U_RIGHT_TO_LEFT_ISOLATE"
+	case U_POP_DIRECTIONAL_ISOLATE:
+		return "U_POP_DIRECTIONAL_ISOLATE"
+	default:
+		return fmt.Sprintf("UCharDirection(%d)", int32(e))
+	}
+}
+
 type UCharIteratorOrigin int32
 
 const (
@@ -961,6 +2827,25 @@ const (
 	UITER_LENGTH  UCharIteratorOrigin = 4
 )
 
+// String returns the UCharIteratorOrigin constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCharIteratorOrigin) String() string {
+	switch e {
+	case UITER_START:
+		return "UITER_START"
+	case UITER_CURRENT:
+		return "UITER_CURRENT"
+	case UITER_LIMIT:
+		return "UITER_LIMIT"
+	case UITER_ZERO:
+		return "UITER_ZERO"
+	case UITER_LENGTH:
+		return "UITER_LENGTH"
+	default:
+		return fmt.Sprintf("UCharIteratorOrigin(%d)", int32(e))
+	}
+}
+
 type UCharNameChoice int32
 
 const (
@@ -968,6 +2853,21 @@ const (
 	U_EXTENDED_CHAR_NAME UCharNameChoice = 2
 	U_CHAR_NAME_ALIAS    UCharNameChoice = 3
 )
+
+// String returns the UCharNameChoice constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCharNameChoice) String() string {
+	switch e {
+	case U_UNICODE_CHAR_NAME:
+		return "U_UNICODE_CHAR_NAME"
+	case U_EXTENDED_CHAR_NAME:
+		return "U_EXTENDED_CHAR_NAME"
+	case U_CHAR_NAME_ALIAS:
+		return "U_CHAR_NAME_ALIAS"
+	default:
+		return fmt.Sprintf("UCharNameChoice(%d)", int32(e))
+	}
+}
 
 type UColAttribute int32
 
@@ -982,6 +2882,31 @@ const (
 	UCOL_NUMERIC_COLLATION  UColAttribute = 7
 	UCOL_ATTRIBUTE_COUNT    UColAttribute = 8
 )
+
+// String returns the UColAttribute constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UColAttribute) String() string {
+	switch e {
+	case UCOL_FRENCH_COLLATION:
+		return "UCOL_FRENCH_COLLATION"
+	case UCOL_ALTERNATE_HANDLING:
+		return "UCOL_ALTERNATE_HANDLING"
+	case UCOL_CASE_FIRST:
+		return "UCOL_CASE_FIRST"
+	case UCOL_CASE_LEVEL:
+		return "UCOL_CASE_LEVEL"
+	case UCOL_NORMALIZATION_MODE:
+		return "UCOL_NORMALIZATION_MODE"
+	case UCOL_STRENGTH:
+		return "UCOL_STRENGTH"
+	case UCOL_NUMERIC_COLLATION:
+		return "UCOL_NUMERIC_COLLATION"
+	case UCOL_ATTRIBUTE_COUNT:
+		return "UCOL_ATTRIBUTE_COUNT"
+	default:
+		return fmt.Sprintf("UColAttribute(%d)", int32(e))
+	}
+}
 
 type UColAttributeValue int32
 
@@ -1003,6 +2928,39 @@ const (
 	UCOL_UPPER_FIRST       UColAttributeValue = 25
 )
 
+// String returns the UColAttributeValue constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UColAttributeValue) String() string {
+	switch e {
+	case UCOL_DEFAULT:
+		return "UCOL_DEFAULT"
+	case UCOL_PRIMARY:
+		return "UCOL_PRIMARY"
+	case UCOL_SECONDARY:
+		return "UCOL_SECONDARY"
+	case UCOL_TERTIARY:
+		return "UCOL_TERTIARY"
+	case UCOL_CE_STRENGTH_LIMIT:
+		return "UCOL_CE_STRENGTH_LIMIT"
+	case UCOL_IDENTICAL:
+		return "UCOL_IDENTICAL"
+	case UCOL_STRENGTH_LIMIT:
+		return "UCOL_STRENGTH_LIMIT"
+	case UCOL_ON:
+		return "UCOL_ON"
+	case UCOL_SHIFTED:
+		return "UCOL_SHIFTED"
+	case UCOL_NON_IGNORABLE:
+		return "UCOL_NON_IGNORABLE"
+	case UCOL_LOWER_FIRST:
+		return "UCOL_LOWER_FIRST"
+	case UCOL_UPPER_FIRST:
+		return "UCOL_UPPER_FIRST"
+	default:
+		return fmt.Sprintf("UColAttributeValue(%d)", int32(e))
+	}
+}
+
 type UColBoundMode int32
 
 const (
@@ -1010,6 +2968,21 @@ const (
 	UCOL_BOUND_UPPER      UColBoundMode = 1
 	UCOL_BOUND_UPPER_LONG UColBoundMode = 2
 )
+
+// String returns the UColBoundMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UColBoundMode) String() string {
+	switch e {
+	case UCOL_BOUND_LOWER:
+		return "UCOL_BOUND_LOWER"
+	case UCOL_BOUND_UPPER:
+		return "UCOL_BOUND_UPPER"
+	case UCOL_BOUND_UPPER_LONG:
+		return "UCOL_BOUND_UPPER_LONG"
+	default:
+		return fmt.Sprintf("UColBoundMode(%d)", int32(e))
+	}
+}
 
 type UColReorderCode int32
 
@@ -1025,12 +2998,48 @@ const (
 	UCOL_REORDER_CODE_DIGIT       UColReorderCode = 4100
 )
 
+// String returns the UColReorderCode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UColReorderCode) String() string {
+	switch e {
+	case UCOL_REORDER_CODE_DEFAULT:
+		return "UCOL_REORDER_CODE_DEFAULT"
+	case UCOL_REORDER_CODE_NONE:
+		return "UCOL_REORDER_CODE_NONE"
+	case UCOL_REORDER_CODE_SPACE:
+		return "UCOL_REORDER_CODE_SPACE"
+	case UCOL_REORDER_CODE_PUNCTUATION:
+		return "UCOL_REORDER_CODE_PUNCTUATION"
+	case UCOL_REORDER_CODE_SYMBOL:
+		return "UCOL_REORDER_CODE_SYMBOL"
+	case UCOL_REORDER_CODE_CURRENCY:
+		return "UCOL_REORDER_CODE_CURRENCY"
+	case UCOL_REORDER_CODE_DIGIT:
+		return "UCOL_REORDER_CODE_DIGIT"
+	default:
+		return fmt.Sprintf("UColReorderCode(%d)", int32(e))
+	}
+}
+
 type UColRuleOption int32
 
 const (
 	UCOL_TAILORING_ONLY UColRuleOption = 0
 	UCOL_FULL_RULES     UColRuleOption = 1
 )
+
+// String returns the UColRuleOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UColRuleOption) String() string {
+	switch e {
+	case UCOL_TAILORING_ONLY:
+		return "UCOL_TAILORING_ONLY"
+	case UCOL_FULL_RULES:
+		return "UCOL_FULL_RULES"
+	default:
+		return fmt.Sprintf("UColRuleOption(%d)", int32(e))
+	}
+}
 
 type UCollationResult int32
 
@@ -1039,6 +3048,21 @@ const (
 	UCOL_GREATER UCollationResult = 1
 	UCOL_LESS    UCollationResult = -1
 )
+
+// String returns the UCollationResult constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCollationResult) String() string {
+	switch e {
+	case UCOL_EQUAL:
+		return "UCOL_EQUAL"
+	case UCOL_GREATER:
+		return "UCOL_GREATER"
+	case UCOL_LESS:
+		return "UCOL_LESS"
+	default:
+		return fmt.Sprintf("UCollationResult(%d)", int32(e))
+	}
+}
 
 type UConverterCallbackReason int32
 
@@ -1051,12 +3075,46 @@ const (
 	UCNV_CLONE      UConverterCallbackReason = 5
 )
 
+// String returns the UConverterCallbackReason constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UConverterCallbackReason) String() string {
+	switch e {
+	case UCNV_UNASSIGNED:
+		return "UCNV_UNASSIGNED"
+	case UCNV_ILLEGAL:
+		return "UCNV_ILLEGAL"
+	case UCNV_IRREGULAR:
+		return "UCNV_IRREGULAR"
+	case UCNV_RESET:
+		return "UCNV_RESET"
+	case UCNV_CLOSE:
+		return "UCNV_CLOSE"
+	case UCNV_CLONE:
+		return "UCNV_CLONE"
+	default:
+		return fmt.Sprintf("UConverterCallbackReason(%d)", int32(e))
+	}
+}
+
 type UConverterPlatform int32
 
 const (
 	UCNV_UNKNOWN UConverterPlatform = -1
 	UCNV_IBM     UConverterPlatform = 0
 )
+
+// String returns the UConverterPlatform constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UConverterPlatform) String() string {
+	switch e {
+	case UCNV_UNKNOWN:
+		return "UCNV_UNKNOWN"
+	case UCNV_IBM:
+		return "UCNV_IBM"
+	default:
+		return fmt.Sprintf("UConverterPlatform(%d)", int32(e))
+	}
+}
 
 type UConverterType int32
 
@@ -1100,12 +3158,106 @@ const (
 	UCNV_NUMBER_OF_SUPPORTED_CONVERTER_TYPES UConverterType = 34
 )
 
+// String returns the UConverterType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UConverterType) String() string {
+	switch e {
+	case UCNV_UNSUPPORTED_CONVERTER:
+		return "UCNV_UNSUPPORTED_CONVERTER"
+	case UCNV_SBCS:
+		return "UCNV_SBCS"
+	case UCNV_DBCS:
+		return "UCNV_DBCS"
+	case UCNV_MBCS:
+		return "UCNV_MBCS"
+	case UCNV_LATIN_1:
+		return "UCNV_LATIN_1"
+	case UCNV_UTF8:
+		return "UCNV_UTF8"
+	case UCNV_UTF16_BigEndian:
+		return "UCNV_UTF16_BigEndian"
+	case UCNV_UTF16_LittleEndian:
+		return "UCNV_UTF16_LittleEndian"
+	case UCNV_UTF32_BigEndian:
+		return "UCNV_UTF32_BigEndian"
+	case UCNV_UTF32_LittleEndian:
+		return "UCNV_UTF32_LittleEndian"
+	case UCNV_EBCDIC_STATEFUL:
+		return "UCNV_EBCDIC_STATEFUL"
+	case UCNV_ISO_2022:
+		return "UCNV_ISO_2022"
+	case UCNV_LMBCS_1:
+		return "UCNV_LMBCS_1"
+	case UCNV_LMBCS_2:
+		return "UCNV_LMBCS_2"
+	case UCNV_LMBCS_3:
+		return "UCNV_LMBCS_3"
+	case UCNV_LMBCS_4:
+		return "UCNV_LMBCS_4"
+	case UCNV_LMBCS_5:
+		return "UCNV_LMBCS_5"
+	case UCNV_LMBCS_6:
+		return "UCNV_LMBCS_6"
+	case UCNV_LMBCS_8:
+		return "UCNV_LMBCS_8"
+	case UCNV_LMBCS_11:
+		return "UCNV_LMBCS_11"
+	case UCNV_LMBCS_16:
+		return "UCNV_LMBCS_16"
+	case UCNV_LMBCS_17:
+		return "UCNV_LMBCS_17"
+	case UCNV_LMBCS_18:
+		return "UCNV_LMBCS_18"
+	case UCNV_LMBCS_19:
+		return "UCNV_LMBCS_19"
+	case UCNV_HZ:
+		return "UCNV_HZ"
+	case UCNV_SCSU:
+		return "UCNV_SCSU"
+	case UCNV_ISCII:
+		return "UCNV_ISCII"
+	case UCNV_US_ASCII:
+		return "UCNV_US_ASCII"
+	case UCNV_UTF7:
+		return "UCNV_UTF7"
+	case UCNV_BOCU1:
+		return "UCNV_BOCU1"
+	case UCNV_UTF16:
+		return "UCNV_UTF16"
+	case UCNV_UTF32:
+		return "UCNV_UTF32"
+	case UCNV_CESU8:
+		return "UCNV_CESU8"
+	case UCNV_IMAP_MAILBOX:
+		return "UCNV_IMAP_MAILBOX"
+	case UCNV_COMPOUND_TEXT:
+		return "UCNV_COMPOUND_TEXT"
+	case UCNV_NUMBER_OF_SUPPORTED_CONVERTER_TYPES:
+		return "UCNV_NUMBER_OF_SUPPORTED_CONVERTER_TYPES"
+	default:
+		return fmt.Sprintf("UConverterType(%d)", int32(e))
+	}
+}
+
 type UConverterUnicodeSet int32
 
 const (
 	UCNV_ROUNDTRIP_SET              UConverterUnicodeSet = 0
 	UCNV_ROUNDTRIP_AND_FALLBACK_SET UConverterUnicodeSet = 1
 )
+
+// String returns the UConverterUnicodeSet constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UConverterUnicodeSet) String() string {
+	switch e {
+	case UCNV_ROUNDTRIP_SET:
+		return "UCNV_ROUNDTRIP_SET"
+	case UCNV_ROUNDTRIP_AND_FALLBACK_SET:
+		return "UCNV_ROUNDTRIP_AND_FALLBACK_SET"
+	default:
+		return fmt.Sprintf("UConverterUnicodeSet(%d)", int32(e))
+	}
+}
 
 type UCurrCurrencyType int32
 
@@ -1117,6 +3269,25 @@ const (
 	UCURR_NON_DEPRECATED UCurrCurrencyType = 8
 )
 
+// String returns the UCurrCurrencyType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCurrCurrencyType) String() string {
+	switch e {
+	case UCURR_ALL:
+		return "UCURR_ALL"
+	case UCURR_COMMON:
+		return "UCURR_COMMON"
+	case UCURR_UNCOMMON:
+		return "UCURR_UNCOMMON"
+	case UCURR_DEPRECATED:
+		return "UCURR_DEPRECATED"
+	case UCURR_NON_DEPRECATED:
+		return "UCURR_NON_DEPRECATED"
+	default:
+		return fmt.Sprintf("UCurrCurrencyType(%d)", int32(e))
+	}
+}
+
 type UCurrNameStyle int32
 
 const (
@@ -1125,6 +3296,23 @@ const (
 	UCURR_NARROW_SYMBOL_NAME  UCurrNameStyle = 2
 	UCURR_VARIANT_SYMBOL_NAME UCurrNameStyle = 3
 )
+
+// String returns the UCurrNameStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCurrNameStyle) String() string {
+	switch e {
+	case UCURR_SYMBOL_NAME:
+		return "UCURR_SYMBOL_NAME"
+	case UCURR_LONG_NAME:
+		return "UCURR_LONG_NAME"
+	case UCURR_NARROW_SYMBOL_NAME:
+		return "UCURR_NARROW_SYMBOL_NAME"
+	case UCURR_VARIANT_SYMBOL_NAME:
+		return "UCURR_VARIANT_SYMBOL_NAME"
+	default:
+		return fmt.Sprintf("UCurrNameStyle(%d)", int32(e))
+	}
+}
 
 type UCurrencySpacing int32
 
@@ -1135,12 +3323,42 @@ const (
 	UNUM_CURRENCY_SPACING_COUNT     UCurrencySpacing = 3
 )
 
+// String returns the UCurrencySpacing constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCurrencySpacing) String() string {
+	switch e {
+	case UNUM_CURRENCY_MATCH:
+		return "UNUM_CURRENCY_MATCH"
+	case UNUM_CURRENCY_SURROUNDING_MATCH:
+		return "UNUM_CURRENCY_SURROUNDING_MATCH"
+	case UNUM_CURRENCY_INSERT:
+		return "UNUM_CURRENCY_INSERT"
+	case UNUM_CURRENCY_SPACING_COUNT:
+		return "UNUM_CURRENCY_SPACING_COUNT"
+	default:
+		return fmt.Sprintf("UCurrencySpacing(%d)", int32(e))
+	}
+}
+
 type UCurrencyUsage int32
 
 const (
 	UCURR_USAGE_STANDARD UCurrencyUsage = 0
 	UCURR_USAGE_CASH     UCurrencyUsage = 1
 )
+
+// String returns the UCurrencyUsage constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UCurrencyUsage) String() string {
+	switch e {
+	case UCURR_USAGE_STANDARD:
+		return "UCURR_USAGE_STANDARD"
+	case UCURR_USAGE_CASH:
+		return "UCURR_USAGE_CASH"
+	default:
+		return fmt.Sprintf("UCurrencyUsage(%d)", int32(e))
+	}
+}
 
 type UDateAbsoluteUnit int32
 
@@ -1160,6 +3378,41 @@ const (
 	UDAT_ABSOLUTE_UNIT_COUNT UDateAbsoluteUnit = 12
 )
 
+// String returns the UDateAbsoluteUnit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateAbsoluteUnit) String() string {
+	switch e {
+	case UDAT_ABSOLUTE_SUNDAY:
+		return "UDAT_ABSOLUTE_SUNDAY"
+	case UDAT_ABSOLUTE_MONDAY:
+		return "UDAT_ABSOLUTE_MONDAY"
+	case UDAT_ABSOLUTE_TUESDAY:
+		return "UDAT_ABSOLUTE_TUESDAY"
+	case UDAT_ABSOLUTE_WEDNESDAY:
+		return "UDAT_ABSOLUTE_WEDNESDAY"
+	case UDAT_ABSOLUTE_THURSDAY:
+		return "UDAT_ABSOLUTE_THURSDAY"
+	case UDAT_ABSOLUTE_FRIDAY:
+		return "UDAT_ABSOLUTE_FRIDAY"
+	case UDAT_ABSOLUTE_SATURDAY:
+		return "UDAT_ABSOLUTE_SATURDAY"
+	case UDAT_ABSOLUTE_DAY:
+		return "UDAT_ABSOLUTE_DAY"
+	case UDAT_ABSOLUTE_WEEK:
+		return "UDAT_ABSOLUTE_WEEK"
+	case UDAT_ABSOLUTE_MONTH:
+		return "UDAT_ABSOLUTE_MONTH"
+	case UDAT_ABSOLUTE_YEAR:
+		return "UDAT_ABSOLUTE_YEAR"
+	case UDAT_ABSOLUTE_NOW:
+		return "UDAT_ABSOLUTE_NOW"
+	case UDAT_ABSOLUTE_UNIT_COUNT:
+		return "UDAT_ABSOLUTE_UNIT_COUNT"
+	default:
+		return fmt.Sprintf("UDateAbsoluteUnit(%d)", int32(e))
+	}
+}
+
 type UDateDirection int32
 
 const (
@@ -1172,6 +3425,29 @@ const (
 	UDAT_DIRECTION_COUNT  UDateDirection = 6
 )
 
+// String returns the UDateDirection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateDirection) String() string {
+	switch e {
+	case UDAT_DIRECTION_LAST_2:
+		return "UDAT_DIRECTION_LAST_2"
+	case UDAT_DIRECTION_LAST:
+		return "UDAT_DIRECTION_LAST"
+	case UDAT_DIRECTION_THIS:
+		return "UDAT_DIRECTION_THIS"
+	case UDAT_DIRECTION_NEXT:
+		return "UDAT_DIRECTION_NEXT"
+	case UDAT_DIRECTION_NEXT_2:
+		return "UDAT_DIRECTION_NEXT_2"
+	case UDAT_DIRECTION_PLAIN:
+		return "UDAT_DIRECTION_PLAIN"
+	case UDAT_DIRECTION_COUNT:
+		return "UDAT_DIRECTION_COUNT"
+	default:
+		return fmt.Sprintf("UDateDirection(%d)", int32(e))
+	}
+}
+
 type UDateFormatBooleanAttribute int32
 
 const (
@@ -1181,6 +3457,25 @@ const (
 	UDAT_PARSE_MULTIPLE_PATTERNS_FOR_MATCH UDateFormatBooleanAttribute = 3
 	UDAT_BOOLEAN_ATTRIBUTE_COUNT           UDateFormatBooleanAttribute = 4
 )
+
+// String returns the UDateFormatBooleanAttribute constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateFormatBooleanAttribute) String() string {
+	switch e {
+	case UDAT_PARSE_ALLOW_WHITESPACE:
+		return "UDAT_PARSE_ALLOW_WHITESPACE"
+	case UDAT_PARSE_ALLOW_NUMERIC:
+		return "UDAT_PARSE_ALLOW_NUMERIC"
+	case UDAT_PARSE_PARTIAL_LITERAL_MATCH:
+		return "UDAT_PARSE_PARTIAL_LITERAL_MATCH"
+	case UDAT_PARSE_MULTIPLE_PATTERNS_FOR_MATCH:
+		return "UDAT_PARSE_MULTIPLE_PATTERNS_FOR_MATCH"
+	case UDAT_BOOLEAN_ATTRIBUTE_COUNT:
+		return "UDAT_BOOLEAN_ATTRIBUTE_COUNT"
+	default:
+		return fmt.Sprintf("UDateFormatBooleanAttribute(%d)", int32(e))
+	}
+}
 
 type UDateFormatField int32
 
@@ -1223,6 +3518,87 @@ const (
 	UDAT_FLEXIBLE_DAY_PERIOD_FIELD           UDateFormatField = 36
 )
 
+// String returns the UDateFormatField constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateFormatField) String() string {
+	switch e {
+	case UDAT_ERA_FIELD:
+		return "UDAT_ERA_FIELD"
+	case UDAT_YEAR_FIELD:
+		return "UDAT_YEAR_FIELD"
+	case UDAT_MONTH_FIELD:
+		return "UDAT_MONTH_FIELD"
+	case UDAT_DATE_FIELD:
+		return "UDAT_DATE_FIELD"
+	case UDAT_HOUR_OF_DAY1_FIELD:
+		return "UDAT_HOUR_OF_DAY1_FIELD"
+	case UDAT_HOUR_OF_DAY0_FIELD:
+		return "UDAT_HOUR_OF_DAY0_FIELD"
+	case UDAT_MINUTE_FIELD:
+		return "UDAT_MINUTE_FIELD"
+	case UDAT_SECOND_FIELD:
+		return "UDAT_SECOND_FIELD"
+	case UDAT_FRACTIONAL_SECOND_FIELD:
+		return "UDAT_FRACTIONAL_SECOND_FIELD"
+	case UDAT_DAY_OF_WEEK_FIELD:
+		return "UDAT_DAY_OF_WEEK_FIELD"
+	case UDAT_DAY_OF_YEAR_FIELD:
+		return "UDAT_DAY_OF_YEAR_FIELD"
+	case UDAT_DAY_OF_WEEK_IN_MONTH_FIELD:
+		return "UDAT_DAY_OF_WEEK_IN_MONTH_FIELD"
+	case UDAT_WEEK_OF_YEAR_FIELD:
+		return "UDAT_WEEK_OF_YEAR_FIELD"
+	case UDAT_WEEK_OF_MONTH_FIELD:
+		return "UDAT_WEEK_OF_MONTH_FIELD"
+	case UDAT_AM_PM_FIELD:
+		return "UDAT_AM_PM_FIELD"
+	case UDAT_HOUR1_FIELD:
+		return "UDAT_HOUR1_FIELD"
+	case UDAT_HOUR0_FIELD:
+		return "UDAT_HOUR0_FIELD"
+	case UDAT_TIMEZONE_FIELD:
+		return "UDAT_TIMEZONE_FIELD"
+	case UDAT_YEAR_WOY_FIELD:
+		return "UDAT_YEAR_WOY_FIELD"
+	case UDAT_DOW_LOCAL_FIELD:
+		return "UDAT_DOW_LOCAL_FIELD"
+	case UDAT_EXTENDED_YEAR_FIELD:
+		return "UDAT_EXTENDED_YEAR_FIELD"
+	case UDAT_JULIAN_DAY_FIELD:
+		return "UDAT_JULIAN_DAY_FIELD"
+	case UDAT_MILLISECONDS_IN_DAY_FIELD:
+		return "UDAT_MILLISECONDS_IN_DAY_FIELD"
+	case UDAT_TIMEZONE_RFC_FIELD:
+		return "UDAT_TIMEZONE_RFC_FIELD"
+	case UDAT_TIMEZONE_GENERIC_FIELD:
+		return "UDAT_TIMEZONE_GENERIC_FIELD"
+	case UDAT_STANDALONE_DAY_FIELD:
+		return "UDAT_STANDALONE_DAY_FIELD"
+	case UDAT_STANDALONE_MONTH_FIELD:
+		return "UDAT_STANDALONE_MONTH_FIELD"
+	case UDAT_QUARTER_FIELD:
+		return "UDAT_QUARTER_FIELD"
+	case UDAT_STANDALONE_QUARTER_FIELD:
+		return "UDAT_STANDALONE_QUARTER_FIELD"
+	case UDAT_TIMEZONE_SPECIAL_FIELD:
+		return "UDAT_TIMEZONE_SPECIAL_FIELD"
+	case UDAT_YEAR_NAME_FIELD:
+		return "UDAT_YEAR_NAME_FIELD"
+	case UDAT_TIMEZONE_LOCALIZED_GMT_OFFSET_FIELD:
+		return "UDAT_TIMEZONE_LOCALIZED_GMT_OFFSET_FIELD"
+	case UDAT_TIMEZONE_ISO_FIELD:
+		return "UDAT_TIMEZONE_ISO_FIELD"
+	case UDAT_TIMEZONE_ISO_LOCAL_FIELD:
+		return "UDAT_TIMEZONE_ISO_LOCAL_FIELD"
+	case UDAT_AM_PM_MIDNIGHT_NOON_FIELD:
+		return "UDAT_AM_PM_MIDNIGHT_NOON_FIELD"
+	case UDAT_FLEXIBLE_DAY_PERIOD_FIELD:
+		return "UDAT_FLEXIBLE_DAY_PERIOD_FIELD"
+	default:
+		return fmt.Sprintf("UDateFormatField(%d)", int32(e))
+	}
+}
+
 type UDateFormatHourCycle int32
 
 const (
@@ -1231,6 +3607,23 @@ const (
 	UDAT_HOUR_CYCLE_23 UDateFormatHourCycle = 2
 	UDAT_HOUR_CYCLE_24 UDateFormatHourCycle = 3
 )
+
+// String returns the UDateFormatHourCycle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateFormatHourCycle) String() string {
+	switch e {
+	case UDAT_HOUR_CYCLE_11:
+		return "UDAT_HOUR_CYCLE_11"
+	case UDAT_HOUR_CYCLE_12:
+		return "UDAT_HOUR_CYCLE_12"
+	case UDAT_HOUR_CYCLE_23:
+		return "UDAT_HOUR_CYCLE_23"
+	case UDAT_HOUR_CYCLE_24:
+		return "UDAT_HOUR_CYCLE_24"
+	default:
+		return fmt.Sprintf("UDateFormatHourCycle(%d)", int32(e))
+	}
+}
 
 type UDateFormatStyle int32
 
@@ -1248,6 +3641,35 @@ const (
 	UDAT_NONE            UDateFormatStyle = -1
 	UDAT_PATTERN         UDateFormatStyle = -2
 )
+
+// String returns the UDateFormatStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateFormatStyle) String() string {
+	switch e {
+	case UDAT_FULL:
+		return "UDAT_FULL"
+	case UDAT_LONG:
+		return "UDAT_LONG"
+	case UDAT_MEDIUM:
+		return "UDAT_MEDIUM"
+	case UDAT_SHORT:
+		return "UDAT_SHORT"
+	case UDAT_RELATIVE:
+		return "UDAT_RELATIVE"
+	case UDAT_LONG_RELATIVE:
+		return "UDAT_LONG_RELATIVE"
+	case UDAT_MEDIUM_RELATIVE:
+		return "UDAT_MEDIUM_RELATIVE"
+	case UDAT_SHORT_RELATIVE:
+		return "UDAT_SHORT_RELATIVE"
+	case UDAT_NONE:
+		return "UDAT_NONE"
+	case UDAT_PATTERN:
+		return "UDAT_PATTERN"
+	default:
+		return fmt.Sprintf("UDateFormatStyle(%d)", int32(e))
+	}
+}
 
 type UDateFormatSymbolType int32
 
@@ -1284,6 +3706,75 @@ const (
 	UDAT_STANDALONE_NARROW_QUARTERS  UDateFormatSymbolType = 29
 )
 
+// String returns the UDateFormatSymbolType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateFormatSymbolType) String() string {
+	switch e {
+	case UDAT_ERAS:
+		return "UDAT_ERAS"
+	case UDAT_MONTHS:
+		return "UDAT_MONTHS"
+	case UDAT_SHORT_MONTHS:
+		return "UDAT_SHORT_MONTHS"
+	case UDAT_WEEKDAYS:
+		return "UDAT_WEEKDAYS"
+	case UDAT_SHORT_WEEKDAYS:
+		return "UDAT_SHORT_WEEKDAYS"
+	case UDAT_AM_PMS:
+		return "UDAT_AM_PMS"
+	case UDAT_LOCALIZED_CHARS:
+		return "UDAT_LOCALIZED_CHARS"
+	case UDAT_ERA_NAMES:
+		return "UDAT_ERA_NAMES"
+	case UDAT_NARROW_MONTHS:
+		return "UDAT_NARROW_MONTHS"
+	case UDAT_NARROW_WEEKDAYS:
+		return "UDAT_NARROW_WEEKDAYS"
+	case UDAT_STANDALONE_MONTHS:
+		return "UDAT_STANDALONE_MONTHS"
+	case UDAT_STANDALONE_SHORT_MONTHS:
+		return "UDAT_STANDALONE_SHORT_MONTHS"
+	case UDAT_STANDALONE_NARROW_MONTHS:
+		return "UDAT_STANDALONE_NARROW_MONTHS"
+	case UDAT_STANDALONE_WEEKDAYS:
+		return "UDAT_STANDALONE_WEEKDAYS"
+	case UDAT_STANDALONE_SHORT_WEEKDAYS:
+		return "UDAT_STANDALONE_SHORT_WEEKDAYS"
+	case UDAT_STANDALONE_NARROW_WEEKDAYS:
+		return "UDAT_STANDALONE_NARROW_WEEKDAYS"
+	case UDAT_QUARTERS:
+		return "UDAT_QUARTERS"
+	case UDAT_SHORT_QUARTERS:
+		return "UDAT_SHORT_QUARTERS"
+	case UDAT_STANDALONE_QUARTERS:
+		return "UDAT_STANDALONE_QUARTERS"
+	case UDAT_STANDALONE_SHORT_QUARTERS:
+		return "UDAT_STANDALONE_SHORT_QUARTERS"
+	case UDAT_SHORTER_WEEKDAYS:
+		return "UDAT_SHORTER_WEEKDAYS"
+	case UDAT_STANDALONE_SHORTER_WEEKDAYS:
+		return "UDAT_STANDALONE_SHORTER_WEEKDAYS"
+	case UDAT_CYCLIC_YEARS_WIDE:
+		return "UDAT_CYCLIC_YEARS_WIDE"
+	case UDAT_CYCLIC_YEARS_ABBREVIATED:
+		return "UDAT_CYCLIC_YEARS_ABBREVIATED"
+	case UDAT_CYCLIC_YEARS_NARROW:
+		return "UDAT_CYCLIC_YEARS_NARROW"
+	case UDAT_ZODIAC_NAMES_WIDE:
+		return "UDAT_ZODIAC_NAMES_WIDE"
+	case UDAT_ZODIAC_NAMES_ABBREVIATED:
+		return "UDAT_ZODIAC_NAMES_ABBREVIATED"
+	case UDAT_ZODIAC_NAMES_NARROW:
+		return "UDAT_ZODIAC_NAMES_NARROW"
+	case UDAT_NARROW_QUARTERS:
+		return "UDAT_NARROW_QUARTERS"
+	case UDAT_STANDALONE_NARROW_QUARTERS:
+		return "UDAT_STANDALONE_NARROW_QUARTERS"
+	default:
+		return fmt.Sprintf("UDateFormatSymbolType(%d)", int32(e))
+	}
+}
+
 type UDateRelativeDateTimeFormatterStyle int32
 
 const (
@@ -1291,6 +3782,21 @@ const (
 	UDAT_STYLE_SHORT  UDateRelativeDateTimeFormatterStyle = 1
 	UDAT_STYLE_NARROW UDateRelativeDateTimeFormatterStyle = 2
 )
+
+// String returns the UDateRelativeDateTimeFormatterStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateRelativeDateTimeFormatterStyle) String() string {
+	switch e {
+	case UDAT_STYLE_LONG:
+		return "UDAT_STYLE_LONG"
+	case UDAT_STYLE_SHORT:
+		return "UDAT_STYLE_SHORT"
+	case UDAT_STYLE_NARROW:
+		return "UDAT_STYLE_NARROW"
+	default:
+		return fmt.Sprintf("UDateRelativeDateTimeFormatterStyle(%d)", int32(e))
+	}
+}
 
 type UDateRelativeUnit int32
 
@@ -1305,6 +3811,31 @@ const (
 	UDAT_RELATIVE_UNIT_COUNT UDateRelativeUnit = 7
 )
 
+// String returns the UDateRelativeUnit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateRelativeUnit) String() string {
+	switch e {
+	case UDAT_RELATIVE_SECONDS:
+		return "UDAT_RELATIVE_SECONDS"
+	case UDAT_RELATIVE_MINUTES:
+		return "UDAT_RELATIVE_MINUTES"
+	case UDAT_RELATIVE_HOURS:
+		return "UDAT_RELATIVE_HOURS"
+	case UDAT_RELATIVE_DAYS:
+		return "UDAT_RELATIVE_DAYS"
+	case UDAT_RELATIVE_WEEKS:
+		return "UDAT_RELATIVE_WEEKS"
+	case UDAT_RELATIVE_MONTHS:
+		return "UDAT_RELATIVE_MONTHS"
+	case UDAT_RELATIVE_YEARS:
+		return "UDAT_RELATIVE_YEARS"
+	case UDAT_RELATIVE_UNIT_COUNT:
+		return "UDAT_RELATIVE_UNIT_COUNT"
+	default:
+		return fmt.Sprintf("UDateRelativeUnit(%d)", int32(e))
+	}
+}
+
 type UDateTimePGDisplayWidth int32
 
 const (
@@ -1313,6 +3844,21 @@ const (
 	UDATPG_NARROW      UDateTimePGDisplayWidth = 2
 )
 
+// String returns the UDateTimePGDisplayWidth constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateTimePGDisplayWidth) String() string {
+	switch e {
+	case UDATPG_WIDE:
+		return "UDATPG_WIDE"
+	case UDATPG_ABBREVIATED:
+		return "UDATPG_ABBREVIATED"
+	case UDATPG_NARROW:
+		return "UDATPG_NARROW"
+	default:
+		return fmt.Sprintf("UDateTimePGDisplayWidth(%d)", int32(e))
+	}
+}
+
 type UDateTimePatternConflict int32
 
 const (
@@ -1320,6 +3866,21 @@ const (
 	UDATPG_BASE_CONFLICT UDateTimePatternConflict = 1
 	UDATPG_CONFLICT      UDateTimePatternConflict = 2
 )
+
+// String returns the UDateTimePatternConflict constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateTimePatternConflict) String() string {
+	switch e {
+	case UDATPG_NO_CONFLICT:
+		return "UDATPG_NO_CONFLICT"
+	case UDATPG_BASE_CONFLICT:
+		return "UDATPG_BASE_CONFLICT"
+	case UDATPG_CONFLICT:
+		return "UDATPG_CONFLICT"
+	default:
+		return fmt.Sprintf("UDateTimePatternConflict(%d)", int32(e))
+	}
+}
 
 type UDateTimePatternField int32
 
@@ -1343,6 +3904,49 @@ const (
 	UDATPG_FIELD_COUNT                UDateTimePatternField = 16
 )
 
+// String returns the UDateTimePatternField constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateTimePatternField) String() string {
+	switch e {
+	case UDATPG_ERA_FIELD:
+		return "UDATPG_ERA_FIELD"
+	case UDATPG_YEAR_FIELD:
+		return "UDATPG_YEAR_FIELD"
+	case UDATPG_QUARTER_FIELD:
+		return "UDATPG_QUARTER_FIELD"
+	case UDATPG_MONTH_FIELD:
+		return "UDATPG_MONTH_FIELD"
+	case UDATPG_WEEK_OF_YEAR_FIELD:
+		return "UDATPG_WEEK_OF_YEAR_FIELD"
+	case UDATPG_WEEK_OF_MONTH_FIELD:
+		return "UDATPG_WEEK_OF_MONTH_FIELD"
+	case UDATPG_WEEKDAY_FIELD:
+		return "UDATPG_WEEKDAY_FIELD"
+	case UDATPG_DAY_OF_YEAR_FIELD:
+		return "UDATPG_DAY_OF_YEAR_FIELD"
+	case UDATPG_DAY_OF_WEEK_IN_MONTH_FIELD:
+		return "UDATPG_DAY_OF_WEEK_IN_MONTH_FIELD"
+	case UDATPG_DAY_FIELD:
+		return "UDATPG_DAY_FIELD"
+	case UDATPG_DAYPERIOD_FIELD:
+		return "UDATPG_DAYPERIOD_FIELD"
+	case UDATPG_HOUR_FIELD:
+		return "UDATPG_HOUR_FIELD"
+	case UDATPG_MINUTE_FIELD:
+		return "UDATPG_MINUTE_FIELD"
+	case UDATPG_SECOND_FIELD:
+		return "UDATPG_SECOND_FIELD"
+	case UDATPG_FRACTIONAL_SECOND_FIELD:
+		return "UDATPG_FRACTIONAL_SECOND_FIELD"
+	case UDATPG_ZONE_FIELD:
+		return "UDATPG_ZONE_FIELD"
+	case UDATPG_FIELD_COUNT:
+		return "UDATPG_FIELD_COUNT"
+	default:
+		return fmt.Sprintf("UDateTimePatternField(%d)", int32(e))
+	}
+}
+
 type UDateTimePatternMatchOptions int32
 
 const (
@@ -1350,6 +3954,21 @@ const (
 	UDATPG_MATCH_HOUR_FIELD_LENGTH UDateTimePatternMatchOptions = 2048
 	UDATPG_MATCH_ALL_FIELDS_LENGTH UDateTimePatternMatchOptions = 65535
 )
+
+// String returns the UDateTimePatternMatchOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateTimePatternMatchOptions) String() string {
+	switch e {
+	case UDATPG_MATCH_NO_OPTIONS:
+		return "UDATPG_MATCH_NO_OPTIONS"
+	case UDATPG_MATCH_HOUR_FIELD_LENGTH:
+		return "UDATPG_MATCH_HOUR_FIELD_LENGTH"
+	case UDATPG_MATCH_ALL_FIELDS_LENGTH:
+		return "UDATPG_MATCH_ALL_FIELDS_LENGTH"
+	default:
+		return fmt.Sprintf("UDateTimePatternMatchOptions(%d)", int32(e))
+	}
+}
 
 type UDateTimeScale int32
 
@@ -1365,6 +3984,35 @@ const (
 	UDTS_DB2_TIME               UDateTimeScale = 8
 	UDTS_UNIX_MICROSECONDS_TIME UDateTimeScale = 9
 )
+
+// String returns the UDateTimeScale constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDateTimeScale) String() string {
+	switch e {
+	case UDTS_JAVA_TIME:
+		return "UDTS_JAVA_TIME"
+	case UDTS_UNIX_TIME:
+		return "UDTS_UNIX_TIME"
+	case UDTS_ICU4C_TIME:
+		return "UDTS_ICU4C_TIME"
+	case UDTS_WINDOWS_FILE_TIME:
+		return "UDTS_WINDOWS_FILE_TIME"
+	case UDTS_DOTNET_DATE_TIME:
+		return "UDTS_DOTNET_DATE_TIME"
+	case UDTS_MAC_OLD_TIME:
+		return "UDTS_MAC_OLD_TIME"
+	case UDTS_MAC_TIME:
+		return "UDTS_MAC_TIME"
+	case UDTS_EXCEL_TIME:
+		return "UDTS_EXCEL_TIME"
+	case UDTS_DB2_TIME:
+		return "UDTS_DB2_TIME"
+	case UDTS_UNIX_MICROSECONDS_TIME:
+		return "UDTS_UNIX_MICROSECONDS_TIME"
+	default:
+		return fmt.Sprintf("UDateTimeScale(%d)", int32(e))
+	}
+}
 
 type UDecompositionType int32
 
@@ -1389,12 +4037,70 @@ const (
 	U_DT_WIDE      UDecompositionType = 17
 )
 
+// String returns the UDecompositionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDecompositionType) String() string {
+	switch e {
+	case U_DT_NONE:
+		return "U_DT_NONE"
+	case U_DT_CANONICAL:
+		return "U_DT_CANONICAL"
+	case U_DT_COMPAT:
+		return "U_DT_COMPAT"
+	case U_DT_CIRCLE:
+		return "U_DT_CIRCLE"
+	case U_DT_FINAL:
+		return "U_DT_FINAL"
+	case U_DT_FONT:
+		return "U_DT_FONT"
+	case U_DT_FRACTION:
+		return "U_DT_FRACTION"
+	case U_DT_INITIAL:
+		return "U_DT_INITIAL"
+	case U_DT_ISOLATED:
+		return "U_DT_ISOLATED"
+	case U_DT_MEDIAL:
+		return "U_DT_MEDIAL"
+	case U_DT_NARROW:
+		return "U_DT_NARROW"
+	case U_DT_NOBREAK:
+		return "U_DT_NOBREAK"
+	case U_DT_SMALL:
+		return "U_DT_SMALL"
+	case U_DT_SQUARE:
+		return "U_DT_SQUARE"
+	case U_DT_SUB:
+		return "U_DT_SUB"
+	case U_DT_SUPER:
+		return "U_DT_SUPER"
+	case U_DT_VERTICAL:
+		return "U_DT_VERTICAL"
+	case U_DT_WIDE:
+		return "U_DT_WIDE"
+	default:
+		return fmt.Sprintf("UDecompositionType(%d)", int32(e))
+	}
+}
+
 type UDialectHandling int32
 
 const (
 	ULDN_STANDARD_NAMES UDialectHandling = 0
 	ULDN_DIALECT_NAMES  UDialectHandling = 1
 )
+
+// String returns the UDialectHandling constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDialectHandling) String() string {
+	switch e {
+	case ULDN_STANDARD_NAMES:
+		return "ULDN_STANDARD_NAMES"
+	case ULDN_DIALECT_NAMES:
+		return "ULDN_DIALECT_NAMES"
+	default:
+		return fmt.Sprintf("UDialectHandling(%d)", int32(e))
+	}
+}
 
 type UDisplayContext int32
 
@@ -1412,6 +4118,37 @@ const (
 	UDISPCTX_NO_SUBSTITUTE                            UDisplayContext = 769
 )
 
+// String returns the UDisplayContext constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDisplayContext) String() string {
+	switch e {
+	case UDISPCTX_STANDARD_NAMES:
+		return "UDISPCTX_STANDARD_NAMES"
+	case UDISPCTX_DIALECT_NAMES:
+		return "UDISPCTX_DIALECT_NAMES"
+	case UDISPCTX_CAPITALIZATION_NONE:
+		return "UDISPCTX_CAPITALIZATION_NONE"
+	case UDISPCTX_CAPITALIZATION_FOR_MIDDLE_OF_SENTENCE:
+		return "UDISPCTX_CAPITALIZATION_FOR_MIDDLE_OF_SENTENCE"
+	case UDISPCTX_CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE:
+		return "UDISPCTX_CAPITALIZATION_FOR_BEGINNING_OF_SENTENCE"
+	case UDISPCTX_CAPITALIZATION_FOR_UI_LIST_OR_MENU:
+		return "UDISPCTX_CAPITALIZATION_FOR_UI_LIST_OR_MENU"
+	case UDISPCTX_CAPITALIZATION_FOR_STANDALONE:
+		return "UDISPCTX_CAPITALIZATION_FOR_STANDALONE"
+	case UDISPCTX_LENGTH_FULL:
+		return "UDISPCTX_LENGTH_FULL"
+	case UDISPCTX_LENGTH_SHORT:
+		return "UDISPCTX_LENGTH_SHORT"
+	case UDISPCTX_SUBSTITUTE:
+		return "UDISPCTX_SUBSTITUTE"
+	case UDISPCTX_NO_SUBSTITUTE:
+		return "UDISPCTX_NO_SUBSTITUTE"
+	default:
+		return fmt.Sprintf("UDisplayContext(%d)", int32(e))
+	}
+}
+
 type UDisplayContextType int32
 
 const (
@@ -1420,6 +4157,23 @@ const (
 	UDISPCTX_TYPE_DISPLAY_LENGTH      UDisplayContextType = 2
 	UDISPCTX_TYPE_SUBSTITUTE_HANDLING UDisplayContextType = 3
 )
+
+// String returns the UDisplayContextType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UDisplayContextType) String() string {
+	switch e {
+	case UDISPCTX_TYPE_DIALECT_HANDLING:
+		return "UDISPCTX_TYPE_DIALECT_HANDLING"
+	case UDISPCTX_TYPE_CAPITALIZATION:
+		return "UDISPCTX_TYPE_CAPITALIZATION"
+	case UDISPCTX_TYPE_DISPLAY_LENGTH:
+		return "UDISPCTX_TYPE_DISPLAY_LENGTH"
+	case UDISPCTX_TYPE_SUBSTITUTE_HANDLING:
+		return "UDISPCTX_TYPE_SUBSTITUTE_HANDLING"
+	default:
+		return fmt.Sprintf("UDisplayContextType(%d)", int32(e))
+	}
+}
 
 type UEastAsianWidth int32
 
@@ -1431,6 +4185,27 @@ const (
 	U_EA_NARROW    UEastAsianWidth = 4
 	U_EA_WIDE      UEastAsianWidth = 5
 )
+
+// String returns the UEastAsianWidth constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UEastAsianWidth) String() string {
+	switch e {
+	case U_EA_NEUTRAL:
+		return "U_EA_NEUTRAL"
+	case U_EA_AMBIGUOUS:
+		return "U_EA_AMBIGUOUS"
+	case U_EA_HALFWIDTH:
+		return "U_EA_HALFWIDTH"
+	case U_EA_FULLWIDTH:
+		return "U_EA_FULLWIDTH"
+	case U_EA_NARROW:
+		return "U_EA_NARROW"
+	case U_EA_WIDE:
+		return "U_EA_WIDE"
+	default:
+		return fmt.Sprintf("UEastAsianWidth(%d)", int32(e))
+	}
+}
 
 type UErrorCode int32
 
@@ -1590,6 +4365,299 @@ const (
 	U_PLUGIN_DIDNT_SET_LEVEL           UErrorCode = 66817
 )
 
+// String returns the UErrorCode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UErrorCode) String() string {
+	switch e {
+	case U_USING_FALLBACK_WARNING:
+		return "U_USING_FALLBACK_WARNING"
+	case U_USING_DEFAULT_WARNING:
+		return "U_USING_DEFAULT_WARNING"
+	case U_SAFECLONE_ALLOCATED_WARNING:
+		return "U_SAFECLONE_ALLOCATED_WARNING"
+	case U_STATE_OLD_WARNING:
+		return "U_STATE_OLD_WARNING"
+	case U_STRING_NOT_TERMINATED_WARNING:
+		return "U_STRING_NOT_TERMINATED_WARNING"
+	case U_SORT_KEY_TOO_SHORT_WARNING:
+		return "U_SORT_KEY_TOO_SHORT_WARNING"
+	case U_AMBIGUOUS_ALIAS_WARNING:
+		return "U_AMBIGUOUS_ALIAS_WARNING"
+	case U_DIFFERENT_UCA_VERSION:
+		return "U_DIFFERENT_UCA_VERSION"
+	case U_PLUGIN_CHANGED_LEVEL_WARNING:
+		return "U_PLUGIN_CHANGED_LEVEL_WARNING"
+	case U_ZERO_ERROR:
+		return "U_ZERO_ERROR"
+	case U_ILLEGAL_ARGUMENT_ERROR:
+		return "U_ILLEGAL_ARGUMENT_ERROR"
+	case U_MISSING_RESOURCE_ERROR:
+		return "U_MISSING_RESOURCE_ERROR"
+	case U_INVALID_FORMAT_ERROR:
+		return "U_INVALID_FORMAT_ERROR"
+	case U_FILE_ACCESS_ERROR:
+		return "U_FILE_ACCESS_ERROR"
+	case U_INTERNAL_PROGRAM_ERROR:
+		return "U_INTERNAL_PROGRAM_ERROR"
+	case U_MESSAGE_PARSE_ERROR:
+		return "U_MESSAGE_PARSE_ERROR"
+	case U_MEMORY_ALLOCATION_ERROR:
+		return "U_MEMORY_ALLOCATION_ERROR"
+	case U_INDEX_OUTOFBOUNDS_ERROR:
+		return "U_INDEX_OUTOFBOUNDS_ERROR"
+	case U_PARSE_ERROR:
+		return "U_PARSE_ERROR"
+	case U_INVALID_CHAR_FOUND:
+		return "U_INVALID_CHAR_FOUND"
+	case U_TRUNCATED_CHAR_FOUND:
+		return "U_TRUNCATED_CHAR_FOUND"
+	case U_ILLEGAL_CHAR_FOUND:
+		return "U_ILLEGAL_CHAR_FOUND"
+	case U_INVALID_TABLE_FORMAT:
+		return "U_INVALID_TABLE_FORMAT"
+	case U_INVALID_TABLE_FILE:
+		return "U_INVALID_TABLE_FILE"
+	case U_BUFFER_OVERFLOW_ERROR:
+		return "U_BUFFER_OVERFLOW_ERROR"
+	case U_UNSUPPORTED_ERROR:
+		return "U_UNSUPPORTED_ERROR"
+	case U_RESOURCE_TYPE_MISMATCH:
+		return "U_RESOURCE_TYPE_MISMATCH"
+	case U_ILLEGAL_ESCAPE_SEQUENCE:
+		return "U_ILLEGAL_ESCAPE_SEQUENCE"
+	case U_UNSUPPORTED_ESCAPE_SEQUENCE:
+		return "U_UNSUPPORTED_ESCAPE_SEQUENCE"
+	case U_NO_SPACE_AVAILABLE:
+		return "U_NO_SPACE_AVAILABLE"
+	case U_CE_NOT_FOUND_ERROR:
+		return "U_CE_NOT_FOUND_ERROR"
+	case U_PRIMARY_TOO_LONG_ERROR:
+		return "U_PRIMARY_TOO_LONG_ERROR"
+	case U_STATE_TOO_OLD_ERROR:
+		return "U_STATE_TOO_OLD_ERROR"
+	case U_TOO_MANY_ALIASES_ERROR:
+		return "U_TOO_MANY_ALIASES_ERROR"
+	case U_ENUM_OUT_OF_SYNC_ERROR:
+		return "U_ENUM_OUT_OF_SYNC_ERROR"
+	case U_INVARIANT_CONVERSION_ERROR:
+		return "U_INVARIANT_CONVERSION_ERROR"
+	case U_INVALID_STATE_ERROR:
+		return "U_INVALID_STATE_ERROR"
+	case U_COLLATOR_VERSION_MISMATCH:
+		return "U_COLLATOR_VERSION_MISMATCH"
+	case U_USELESS_COLLATOR_ERROR:
+		return "U_USELESS_COLLATOR_ERROR"
+	case U_NO_WRITE_PERMISSION:
+		return "U_NO_WRITE_PERMISSION"
+	case U_INPUT_TOO_LONG_ERROR:
+		return "U_INPUT_TOO_LONG_ERROR"
+	case U_BAD_VARIABLE_DEFINITION:
+		return "U_BAD_VARIABLE_DEFINITION"
+	case U_MALFORMED_RULE:
+		return "U_MALFORMED_RULE"
+	case U_MALFORMED_SET:
+		return "U_MALFORMED_SET"
+	case U_MALFORMED_SYMBOL_REFERENCE:
+		return "U_MALFORMED_SYMBOL_REFERENCE"
+	case U_MALFORMED_UNICODE_ESCAPE:
+		return "U_MALFORMED_UNICODE_ESCAPE"
+	case U_MALFORMED_VARIABLE_DEFINITION:
+		return "U_MALFORMED_VARIABLE_DEFINITION"
+	case U_MALFORMED_VARIABLE_REFERENCE:
+		return "U_MALFORMED_VARIABLE_REFERENCE"
+	case U_MISMATCHED_SEGMENT_DELIMITERS:
+		return "U_MISMATCHED_SEGMENT_DELIMITERS"
+	case U_MISPLACED_ANCHOR_START:
+		return "U_MISPLACED_ANCHOR_START"
+	case U_MISPLACED_CURSOR_OFFSET:
+		return "U_MISPLACED_CURSOR_OFFSET"
+	case U_MISPLACED_QUANTIFIER:
+		return "U_MISPLACED_QUANTIFIER"
+	case U_MISSING_OPERATOR:
+		return "U_MISSING_OPERATOR"
+	case U_MISSING_SEGMENT_CLOSE:
+		return "U_MISSING_SEGMENT_CLOSE"
+	case U_MULTIPLE_ANTE_CONTEXTS:
+		return "U_MULTIPLE_ANTE_CONTEXTS"
+	case U_MULTIPLE_CURSORS:
+		return "U_MULTIPLE_CURSORS"
+	case U_MULTIPLE_POST_CONTEXTS:
+		return "U_MULTIPLE_POST_CONTEXTS"
+	case U_TRAILING_BACKSLASH:
+		return "U_TRAILING_BACKSLASH"
+	case U_UNDEFINED_SEGMENT_REFERENCE:
+		return "U_UNDEFINED_SEGMENT_REFERENCE"
+	case U_UNDEFINED_VARIABLE:
+		return "U_UNDEFINED_VARIABLE"
+	case U_UNQUOTED_SPECIAL:
+		return "U_UNQUOTED_SPECIAL"
+	case U_UNTERMINATED_QUOTE:
+		return "U_UNTERMINATED_QUOTE"
+	case U_RULE_MASK_ERROR:
+		return "U_RULE_MASK_ERROR"
+	case U_MISPLACED_COMPOUND_FILTER:
+		return "U_MISPLACED_COMPOUND_FILTER"
+	case U_MULTIPLE_COMPOUND_FILTERS:
+		return "U_MULTIPLE_COMPOUND_FILTERS"
+	case U_INVALID_RBT_SYNTAX:
+		return "U_INVALID_RBT_SYNTAX"
+	case U_INVALID_PROPERTY_PATTERN:
+		return "U_INVALID_PROPERTY_PATTERN"
+	case U_MALFORMED_PRAGMA:
+		return "U_MALFORMED_PRAGMA"
+	case U_UNCLOSED_SEGMENT:
+		return "U_UNCLOSED_SEGMENT"
+	case U_ILLEGAL_CHAR_IN_SEGMENT:
+		return "U_ILLEGAL_CHAR_IN_SEGMENT"
+	case U_VARIABLE_RANGE_EXHAUSTED:
+		return "U_VARIABLE_RANGE_EXHAUSTED"
+	case U_VARIABLE_RANGE_OVERLAP:
+		return "U_VARIABLE_RANGE_OVERLAP"
+	case U_ILLEGAL_CHARACTER:
+		return "U_ILLEGAL_CHARACTER"
+	case U_INTERNAL_TRANSLITERATOR_ERROR:
+		return "U_INTERNAL_TRANSLITERATOR_ERROR"
+	case U_INVALID_ID:
+		return "U_INVALID_ID"
+	case U_INVALID_FUNCTION:
+		return "U_INVALID_FUNCTION"
+	case U_UNEXPECTED_TOKEN:
+		return "U_UNEXPECTED_TOKEN"
+	case U_MULTIPLE_DECIMAL_SEPARATORS:
+		return "U_MULTIPLE_DECIMAL_SEPARATORS"
+	case U_MULTIPLE_EXPONENTIAL_SYMBOLS:
+		return "U_MULTIPLE_EXPONENTIAL_SYMBOLS"
+	case U_MALFORMED_EXPONENTIAL_PATTERN:
+		return "U_MALFORMED_EXPONENTIAL_PATTERN"
+	case U_MULTIPLE_PERCENT_SYMBOLS:
+		return "U_MULTIPLE_PERCENT_SYMBOLS"
+	case U_MULTIPLE_PERMILL_SYMBOLS:
+		return "U_MULTIPLE_PERMILL_SYMBOLS"
+	case U_MULTIPLE_PAD_SPECIFIERS:
+		return "U_MULTIPLE_PAD_SPECIFIERS"
+	case U_PATTERN_SYNTAX_ERROR:
+		return "U_PATTERN_SYNTAX_ERROR"
+	case U_ILLEGAL_PAD_POSITION:
+		return "U_ILLEGAL_PAD_POSITION"
+	case U_UNMATCHED_BRACES:
+		return "U_UNMATCHED_BRACES"
+	case U_UNSUPPORTED_PROPERTY:
+		return "U_UNSUPPORTED_PROPERTY"
+	case U_UNSUPPORTED_ATTRIBUTE:
+		return "U_UNSUPPORTED_ATTRIBUTE"
+	case U_ARGUMENT_TYPE_MISMATCH:
+		return "U_ARGUMENT_TYPE_MISMATCH"
+	case U_DUPLICATE_KEYWORD:
+		return "U_DUPLICATE_KEYWORD"
+	case U_UNDEFINED_KEYWORD:
+		return "U_UNDEFINED_KEYWORD"
+	case U_DEFAULT_KEYWORD_MISSING:
+		return "U_DEFAULT_KEYWORD_MISSING"
+	case U_DECIMAL_NUMBER_SYNTAX_ERROR:
+		return "U_DECIMAL_NUMBER_SYNTAX_ERROR"
+	case U_FORMAT_INEXACT_ERROR:
+		return "U_FORMAT_INEXACT_ERROR"
+	case U_NUMBER_ARG_OUTOFBOUNDS_ERROR:
+		return "U_NUMBER_ARG_OUTOFBOUNDS_ERROR"
+	case U_NUMBER_SKELETON_SYNTAX_ERROR:
+		return "U_NUMBER_SKELETON_SYNTAX_ERROR"
+	case U_BRK_INTERNAL_ERROR:
+		return "U_BRK_INTERNAL_ERROR"
+	case U_BRK_HEX_DIGITS_EXPECTED:
+		return "U_BRK_HEX_DIGITS_EXPECTED"
+	case U_BRK_SEMICOLON_EXPECTED:
+		return "U_BRK_SEMICOLON_EXPECTED"
+	case U_BRK_RULE_SYNTAX:
+		return "U_BRK_RULE_SYNTAX"
+	case U_BRK_UNCLOSED_SET:
+		return "U_BRK_UNCLOSED_SET"
+	case U_BRK_ASSIGN_ERROR:
+		return "U_BRK_ASSIGN_ERROR"
+	case U_BRK_VARIABLE_REDFINITION:
+		return "U_BRK_VARIABLE_REDFINITION"
+	case U_BRK_MISMATCHED_PAREN:
+		return "U_BRK_MISMATCHED_PAREN"
+	case U_BRK_NEW_LINE_IN_QUOTED_STRING:
+		return "U_BRK_NEW_LINE_IN_QUOTED_STRING"
+	case U_BRK_UNDEFINED_VARIABLE:
+		return "U_BRK_UNDEFINED_VARIABLE"
+	case U_BRK_INIT_ERROR:
+		return "U_BRK_INIT_ERROR"
+	case U_BRK_RULE_EMPTY_SET:
+		return "U_BRK_RULE_EMPTY_SET"
+	case U_BRK_UNRECOGNIZED_OPTION:
+		return "U_BRK_UNRECOGNIZED_OPTION"
+	case U_BRK_MALFORMED_RULE_TAG:
+		return "U_BRK_MALFORMED_RULE_TAG"
+	case U_REGEX_INTERNAL_ERROR:
+		return "U_REGEX_INTERNAL_ERROR"
+	case U_REGEX_RULE_SYNTAX:
+		return "U_REGEX_RULE_SYNTAX"
+	case U_REGEX_INVALID_STATE:
+		return "U_REGEX_INVALID_STATE"
+	case U_REGEX_BAD_ESCAPE_SEQUENCE:
+		return "U_REGEX_BAD_ESCAPE_SEQUENCE"
+	case U_REGEX_PROPERTY_SYNTAX:
+		return "U_REGEX_PROPERTY_SYNTAX"
+	case U_REGEX_UNIMPLEMENTED:
+		return "U_REGEX_UNIMPLEMENTED"
+	case U_REGEX_MISMATCHED_PAREN:
+		return "U_REGEX_MISMATCHED_PAREN"
+	case U_REGEX_NUMBER_TOO_BIG:
+		return "U_REGEX_NUMBER_TOO_BIG"
+	case U_REGEX_BAD_INTERVAL:
+		return "U_REGEX_BAD_INTERVAL"
+	case U_REGEX_MAX_LT_MIN:
+		return "U_REGEX_MAX_LT_MIN"
+	case U_REGEX_INVALID_BACK_REF:
+		return "U_REGEX_INVALID_BACK_REF"
+	case U_REGEX_INVALID_FLAG:
+		return "U_REGEX_INVALID_FLAG"
+	case U_REGEX_LOOK_BEHIND_LIMIT:
+		return "U_REGEX_LOOK_BEHIND_LIMIT"
+	case U_REGEX_SET_CONTAINS_STRING:
+		return "U_REGEX_SET_CONTAINS_STRING"
+	case U_REGEX_MISSING_CLOSE_BRACKET:
+		return "U_REGEX_MISSING_CLOSE_BRACKET"
+	case U_REGEX_INVALID_RANGE:
+		return "U_REGEX_INVALID_RANGE"
+	case U_REGEX_STACK_OVERFLOW:
+		return "U_REGEX_STACK_OVERFLOW"
+	case U_REGEX_TIME_OUT:
+		return "U_REGEX_TIME_OUT"
+	case U_REGEX_STOPPED_BY_CALLER:
+		return "U_REGEX_STOPPED_BY_CALLER"
+	case U_REGEX_PATTERN_TOO_BIG:
+		return "U_REGEX_PATTERN_TOO_BIG"
+	case U_REGEX_INVALID_CAPTURE_GROUP_NAME:
+		return "U_REGEX_INVALID_CAPTURE_GROUP_NAME"
+	case U_IDNA_PROHIBITED_ERROR:
+		return "U_IDNA_PROHIBITED_ERROR"
+	case U_IDNA_UNASSIGNED_ERROR:
+		return "U_IDNA_UNASSIGNED_ERROR"
+	case U_IDNA_CHECK_BIDI_ERROR:
+		return "U_IDNA_CHECK_BIDI_ERROR"
+	case U_IDNA_STD3_ASCII_RULES_ERROR:
+		return "U_IDNA_STD3_ASCII_RULES_ERROR"
+	case U_IDNA_ACE_PREFIX_ERROR:
+		return "U_IDNA_ACE_PREFIX_ERROR"
+	case U_IDNA_VERIFICATION_ERROR:
+		return "U_IDNA_VERIFICATION_ERROR"
+	case U_IDNA_LABEL_TOO_LONG_ERROR:
+		return "U_IDNA_LABEL_TOO_LONG_ERROR"
+	case U_IDNA_ZERO_LENGTH_LABEL_ERROR:
+		return "U_IDNA_ZERO_LENGTH_LABEL_ERROR"
+	case U_IDNA_DOMAIN_NAME_TOO_LONG_ERROR:
+		return "U_IDNA_DOMAIN_NAME_TOO_LONG_ERROR"
+	case U_PLUGIN_ERROR_START:
+		return "U_PLUGIN_ERROR_START"
+	case U_PLUGIN_DIDNT_SET_LEVEL:
+		return "U_PLUGIN_DIDNT_SET_LEVEL"
+	default:
+		return fmt.Sprintf("UErrorCode(%d)", int32(e))
+	}
+}
+
 type UFieldCategory int32
 
 const (
@@ -1604,6 +4672,33 @@ const (
 	UFIELD_CATEGORY_NUMBER_RANGE_SPAN  UFieldCategory = 4098
 )
 
+// String returns the UFieldCategory constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UFieldCategory) String() string {
+	switch e {
+	case UFIELD_CATEGORY_UNDEFINED:
+		return "UFIELD_CATEGORY_UNDEFINED"
+	case UFIELD_CATEGORY_DATE:
+		return "UFIELD_CATEGORY_DATE"
+	case UFIELD_CATEGORY_NUMBER:
+		return "UFIELD_CATEGORY_NUMBER"
+	case UFIELD_CATEGORY_LIST:
+		return "UFIELD_CATEGORY_LIST"
+	case UFIELD_CATEGORY_RELATIVE_DATETIME:
+		return "UFIELD_CATEGORY_RELATIVE_DATETIME"
+	case UFIELD_CATEGORY_DATE_INTERVAL:
+		return "UFIELD_CATEGORY_DATE_INTERVAL"
+	case UFIELD_CATEGORY_LIST_SPAN:
+		return "UFIELD_CATEGORY_LIST_SPAN"
+	case UFIELD_CATEGORY_DATE_INTERVAL_SPAN:
+		return "UFIELD_CATEGORY_DATE_INTERVAL_SPAN"
+	case UFIELD_CATEGORY_NUMBER_RANGE_SPAN:
+		return "UFIELD_CATEGORY_NUMBER_RANGE_SPAN"
+	default:
+		return fmt.Sprintf("UFieldCategory(%d)", int32(e))
+	}
+}
+
 type UFormattableType int32
 
 const (
@@ -1616,6 +4711,29 @@ const (
 	UFMT_OBJECT UFormattableType = 6
 )
 
+// String returns the UFormattableType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UFormattableType) String() string {
+	switch e {
+	case UFMT_DATE:
+		return "UFMT_DATE"
+	case UFMT_DOUBLE:
+		return "UFMT_DOUBLE"
+	case UFMT_LONG:
+		return "UFMT_LONG"
+	case UFMT_STRING:
+		return "UFMT_STRING"
+	case UFMT_ARRAY:
+		return "UFMT_ARRAY"
+	case UFMT_INT64:
+		return "UFMT_INT64"
+	case UFMT_OBJECT:
+		return "UFMT_OBJECT"
+	default:
+		return fmt.Sprintf("UFormattableType(%d)", int32(e))
+	}
+}
+
 type UGender int32
 
 const (
@@ -1623,6 +4741,21 @@ const (
 	UGENDER_FEMALE UGender = 1
 	UGENDER_OTHER  UGender = 2
 )
+
+// String returns the UGender constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UGender) String() string {
+	switch e {
+	case UGENDER_MALE:
+		return "UGENDER_MALE"
+	case UGENDER_FEMALE:
+		return "UGENDER_FEMALE"
+	case UGENDER_OTHER:
+		return "UGENDER_OTHER"
+	default:
+		return fmt.Sprintf("UGender(%d)", int32(e))
+	}
+}
 
 type UGraphemeClusterBreak int32
 
@@ -1647,6 +4780,51 @@ const (
 	U_GCB_ZWJ                UGraphemeClusterBreak = 17
 )
 
+// String returns the UGraphemeClusterBreak constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UGraphemeClusterBreak) String() string {
+	switch e {
+	case U_GCB_OTHER:
+		return "U_GCB_OTHER"
+	case U_GCB_CONTROL:
+		return "U_GCB_CONTROL"
+	case U_GCB_CR:
+		return "U_GCB_CR"
+	case U_GCB_EXTEND:
+		return "U_GCB_EXTEND"
+	case U_GCB_L:
+		return "U_GCB_L"
+	case U_GCB_LF:
+		return "U_GCB_LF"
+	case U_GCB_LV:
+		return "U_GCB_LV"
+	case U_GCB_LVT:
+		return "U_GCB_LVT"
+	case U_GCB_T:
+		return "U_GCB_T"
+	case U_GCB_V:
+		return "U_GCB_V"
+	case U_GCB_SPACING_MARK:
+		return "U_GCB_SPACING_MARK"
+	case U_GCB_PREPEND:
+		return "U_GCB_PREPEND"
+	case U_GCB_REGIONAL_INDICATOR:
+		return "U_GCB_REGIONAL_INDICATOR"
+	case U_GCB_E_BASE:
+		return "U_GCB_E_BASE"
+	case U_GCB_E_BASE_GAZ:
+		return "U_GCB_E_BASE_GAZ"
+	case U_GCB_E_MODIFIER:
+		return "U_GCB_E_MODIFIER"
+	case U_GCB_GLUE_AFTER_ZWJ:
+		return "U_GCB_GLUE_AFTER_ZWJ"
+	case U_GCB_ZWJ:
+		return "U_GCB_ZWJ"
+	default:
+		return fmt.Sprintf("UGraphemeClusterBreak(%d)", int32(e))
+	}
+}
+
 type UHangulSyllableType int32
 
 const (
@@ -1657,6 +4835,27 @@ const (
 	U_HST_LV_SYLLABLE    UHangulSyllableType = 4
 	U_HST_LVT_SYLLABLE   UHangulSyllableType = 5
 )
+
+// String returns the UHangulSyllableType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UHangulSyllableType) String() string {
+	switch e {
+	case U_HST_NOT_APPLICABLE:
+		return "U_HST_NOT_APPLICABLE"
+	case U_HST_LEADING_JAMO:
+		return "U_HST_LEADING_JAMO"
+	case U_HST_VOWEL_JAMO:
+		return "U_HST_VOWEL_JAMO"
+	case U_HST_TRAILING_JAMO:
+		return "U_HST_TRAILING_JAMO"
+	case U_HST_LV_SYLLABLE:
+		return "U_HST_LV_SYLLABLE"
+	case U_HST_LVT_SYLLABLE:
+		return "U_HST_LVT_SYLLABLE"
+	default:
+		return fmt.Sprintf("UHangulSyllableType(%d)", int32(e))
+	}
+}
 
 type UIndicPositionalCategory int32
 
@@ -1678,6 +4877,47 @@ const (
 	U_INPC_VISUAL_ORDER_LEFT        UIndicPositionalCategory = 14
 	U_INPC_TOP_AND_BOTTOM_AND_LEFT  UIndicPositionalCategory = 15
 )
+
+// String returns the UIndicPositionalCategory constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIndicPositionalCategory) String() string {
+	switch e {
+	case U_INPC_NA:
+		return "U_INPC_NA"
+	case U_INPC_BOTTOM:
+		return "U_INPC_BOTTOM"
+	case U_INPC_BOTTOM_AND_LEFT:
+		return "U_INPC_BOTTOM_AND_LEFT"
+	case U_INPC_BOTTOM_AND_RIGHT:
+		return "U_INPC_BOTTOM_AND_RIGHT"
+	case U_INPC_LEFT:
+		return "U_INPC_LEFT"
+	case U_INPC_LEFT_AND_RIGHT:
+		return "U_INPC_LEFT_AND_RIGHT"
+	case U_INPC_OVERSTRUCK:
+		return "U_INPC_OVERSTRUCK"
+	case U_INPC_RIGHT:
+		return "U_INPC_RIGHT"
+	case U_INPC_TOP:
+		return "U_INPC_TOP"
+	case U_INPC_TOP_AND_BOTTOM:
+		return "U_INPC_TOP_AND_BOTTOM"
+	case U_INPC_TOP_AND_BOTTOM_AND_RIGHT:
+		return "U_INPC_TOP_AND_BOTTOM_AND_RIGHT"
+	case U_INPC_TOP_AND_LEFT:
+		return "U_INPC_TOP_AND_LEFT"
+	case U_INPC_TOP_AND_LEFT_AND_RIGHT:
+		return "U_INPC_TOP_AND_LEFT_AND_RIGHT"
+	case U_INPC_TOP_AND_RIGHT:
+		return "U_INPC_TOP_AND_RIGHT"
+	case U_INPC_VISUAL_ORDER_LEFT:
+		return "U_INPC_VISUAL_ORDER_LEFT"
+	case U_INPC_TOP_AND_BOTTOM_AND_LEFT:
+		return "U_INPC_TOP_AND_BOTTOM_AND_LEFT"
+	default:
+		return fmt.Sprintf("UIndicPositionalCategory(%d)", int32(e))
+	}
+}
 
 type UIndicSyllabicCategory int32
 
@@ -1719,6 +4959,87 @@ const (
 	U_INSC_VOWEL_DEPENDENT             UIndicSyllabicCategory = 34
 	U_INSC_VOWEL_INDEPENDENT           UIndicSyllabicCategory = 35
 )
+
+// String returns the UIndicSyllabicCategory constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UIndicSyllabicCategory) String() string {
+	switch e {
+	case U_INSC_OTHER:
+		return "U_INSC_OTHER"
+	case U_INSC_AVAGRAHA:
+		return "U_INSC_AVAGRAHA"
+	case U_INSC_BINDU:
+		return "U_INSC_BINDU"
+	case U_INSC_BRAHMI_JOINING_NUMBER:
+		return "U_INSC_BRAHMI_JOINING_NUMBER"
+	case U_INSC_CANTILLATION_MARK:
+		return "U_INSC_CANTILLATION_MARK"
+	case U_INSC_CONSONANT:
+		return "U_INSC_CONSONANT"
+	case U_INSC_CONSONANT_DEAD:
+		return "U_INSC_CONSONANT_DEAD"
+	case U_INSC_CONSONANT_FINAL:
+		return "U_INSC_CONSONANT_FINAL"
+	case U_INSC_CONSONANT_HEAD_LETTER:
+		return "U_INSC_CONSONANT_HEAD_LETTER"
+	case U_INSC_CONSONANT_INITIAL_POSTFIXED:
+		return "U_INSC_CONSONANT_INITIAL_POSTFIXED"
+	case U_INSC_CONSONANT_KILLER:
+		return "U_INSC_CONSONANT_KILLER"
+	case U_INSC_CONSONANT_MEDIAL:
+		return "U_INSC_CONSONANT_MEDIAL"
+	case U_INSC_CONSONANT_PLACEHOLDER:
+		return "U_INSC_CONSONANT_PLACEHOLDER"
+	case U_INSC_CONSONANT_PRECEDING_REPHA:
+		return "U_INSC_CONSONANT_PRECEDING_REPHA"
+	case U_INSC_CONSONANT_PREFIXED:
+		return "U_INSC_CONSONANT_PREFIXED"
+	case U_INSC_CONSONANT_SUBJOINED:
+		return "U_INSC_CONSONANT_SUBJOINED"
+	case U_INSC_CONSONANT_SUCCEEDING_REPHA:
+		return "U_INSC_CONSONANT_SUCCEEDING_REPHA"
+	case U_INSC_CONSONANT_WITH_STACKER:
+		return "U_INSC_CONSONANT_WITH_STACKER"
+	case U_INSC_GEMINATION_MARK:
+		return "U_INSC_GEMINATION_MARK"
+	case U_INSC_INVISIBLE_STACKER:
+		return "U_INSC_INVISIBLE_STACKER"
+	case U_INSC_JOINER:
+		return "U_INSC_JOINER"
+	case U_INSC_MODIFYING_LETTER:
+		return "U_INSC_MODIFYING_LETTER"
+	case U_INSC_NON_JOINER:
+		return "U_INSC_NON_JOINER"
+	case U_INSC_NUKTA:
+		return "U_INSC_NUKTA"
+	case U_INSC_NUMBER:
+		return "U_INSC_NUMBER"
+	case U_INSC_NUMBER_JOINER:
+		return "U_INSC_NUMBER_JOINER"
+	case U_INSC_PURE_KILLER:
+		return "U_INSC_PURE_KILLER"
+	case U_INSC_REGISTER_SHIFTER:
+		return "U_INSC_REGISTER_SHIFTER"
+	case U_INSC_SYLLABLE_MODIFIER:
+		return "U_INSC_SYLLABLE_MODIFIER"
+	case U_INSC_TONE_LETTER:
+		return "U_INSC_TONE_LETTER"
+	case U_INSC_TONE_MARK:
+		return "U_INSC_TONE_MARK"
+	case U_INSC_VIRAMA:
+		return "U_INSC_VIRAMA"
+	case U_INSC_VISARGA:
+		return "U_INSC_VISARGA"
+	case U_INSC_VOWEL:
+		return "U_INSC_VOWEL"
+	case U_INSC_VOWEL_DEPENDENT:
+		return "U_INSC_VOWEL_DEPENDENT"
+	case U_INSC_VOWEL_INDEPENDENT:
+		return "U_INSC_VOWEL_INDEPENDENT"
+	default:
+		return fmt.Sprintf("UIndicSyllabicCategory(%d)", int32(e))
+	}
+}
 
 type UJoiningGroup int32
 
@@ -1830,6 +5151,223 @@ const (
 	U_JG_VERTICAL_TAIL            UJoiningGroup = 103
 )
 
+// String returns the UJoiningGroup constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UJoiningGroup) String() string {
+	switch e {
+	case U_JG_NO_JOINING_GROUP:
+		return "U_JG_NO_JOINING_GROUP"
+	case U_JG_AIN:
+		return "U_JG_AIN"
+	case U_JG_ALAPH:
+		return "U_JG_ALAPH"
+	case U_JG_ALEF:
+		return "U_JG_ALEF"
+	case U_JG_BEH:
+		return "U_JG_BEH"
+	case U_JG_BETH:
+		return "U_JG_BETH"
+	case U_JG_DAL:
+		return "U_JG_DAL"
+	case U_JG_DALATH_RISH:
+		return "U_JG_DALATH_RISH"
+	case U_JG_E:
+		return "U_JG_E"
+	case U_JG_FEH:
+		return "U_JG_FEH"
+	case U_JG_FINAL_SEMKATH:
+		return "U_JG_FINAL_SEMKATH"
+	case U_JG_GAF:
+		return "U_JG_GAF"
+	case U_JG_GAMAL:
+		return "U_JG_GAMAL"
+	case U_JG_HAH:
+		return "U_JG_HAH"
+	case U_JG_TEH_MARBUTA_GOAL:
+		return "U_JG_TEH_MARBUTA_GOAL"
+	case U_JG_HE:
+		return "U_JG_HE"
+	case U_JG_HEH:
+		return "U_JG_HEH"
+	case U_JG_HEH_GOAL:
+		return "U_JG_HEH_GOAL"
+	case U_JG_HETH:
+		return "U_JG_HETH"
+	case U_JG_KAF:
+		return "U_JG_KAF"
+	case U_JG_KAPH:
+		return "U_JG_KAPH"
+	case U_JG_KNOTTED_HEH:
+		return "U_JG_KNOTTED_HEH"
+	case U_JG_LAM:
+		return "U_JG_LAM"
+	case U_JG_LAMADH:
+		return "U_JG_LAMADH"
+	case U_JG_MEEM:
+		return "U_JG_MEEM"
+	case U_JG_MIM:
+		return "U_JG_MIM"
+	case U_JG_NOON:
+		return "U_JG_NOON"
+	case U_JG_NUN:
+		return "U_JG_NUN"
+	case U_JG_PE:
+		return "U_JG_PE"
+	case U_JG_QAF:
+		return "U_JG_QAF"
+	case U_JG_QAPH:
+		return "U_JG_QAPH"
+	case U_JG_REH:
+		return "U_JG_REH"
+	case U_JG_REVERSED_PE:
+		return "U_JG_REVERSED_PE"
+	case U_JG_SAD:
+		return "U_JG_SAD"
+	case U_JG_SADHE:
+		return "U_JG_SADHE"
+	case U_JG_SEEN:
+		return "U_JG_SEEN"
+	case U_JG_SEMKATH:
+		return "U_JG_SEMKATH"
+	case U_JG_SHIN:
+		return "U_JG_SHIN"
+	case U_JG_SWASH_KAF:
+		return "U_JG_SWASH_KAF"
+	case U_JG_SYRIAC_WAW:
+		return "U_JG_SYRIAC_WAW"
+	case U_JG_TAH:
+		return "U_JG_TAH"
+	case U_JG_TAW:
+		return "U_JG_TAW"
+	case U_JG_TEH_MARBUTA:
+		return "U_JG_TEH_MARBUTA"
+	case U_JG_TETH:
+		return "U_JG_TETH"
+	case U_JG_WAW:
+		return "U_JG_WAW"
+	case U_JG_YEH:
+		return "U_JG_YEH"
+	case U_JG_YEH_BARREE:
+		return "U_JG_YEH_BARREE"
+	case U_JG_YEH_WITH_TAIL:
+		return "U_JG_YEH_WITH_TAIL"
+	case U_JG_YUDH:
+		return "U_JG_YUDH"
+	case U_JG_YUDH_HE:
+		return "U_JG_YUDH_HE"
+	case U_JG_ZAIN:
+		return "U_JG_ZAIN"
+	case U_JG_FE:
+		return "U_JG_FE"
+	case U_JG_KHAPH:
+		return "U_JG_KHAPH"
+	case U_JG_ZHAIN:
+		return "U_JG_ZHAIN"
+	case U_JG_BURUSHASKI_YEH_BARREE:
+		return "U_JG_BURUSHASKI_YEH_BARREE"
+	case U_JG_FARSI_YEH:
+		return "U_JG_FARSI_YEH"
+	case U_JG_NYA:
+		return "U_JG_NYA"
+	case U_JG_ROHINGYA_YEH:
+		return "U_JG_ROHINGYA_YEH"
+	case U_JG_MANICHAEAN_ALEPH:
+		return "U_JG_MANICHAEAN_ALEPH"
+	case U_JG_MANICHAEAN_AYIN:
+		return "U_JG_MANICHAEAN_AYIN"
+	case U_JG_MANICHAEAN_BETH:
+		return "U_JG_MANICHAEAN_BETH"
+	case U_JG_MANICHAEAN_DALETH:
+		return "U_JG_MANICHAEAN_DALETH"
+	case U_JG_MANICHAEAN_DHAMEDH:
+		return "U_JG_MANICHAEAN_DHAMEDH"
+	case U_JG_MANICHAEAN_FIVE:
+		return "U_JG_MANICHAEAN_FIVE"
+	case U_JG_MANICHAEAN_GIMEL:
+		return "U_JG_MANICHAEAN_GIMEL"
+	case U_JG_MANICHAEAN_HETH:
+		return "U_JG_MANICHAEAN_HETH"
+	case U_JG_MANICHAEAN_HUNDRED:
+		return "U_JG_MANICHAEAN_HUNDRED"
+	case U_JG_MANICHAEAN_KAPH:
+		return "U_JG_MANICHAEAN_KAPH"
+	case U_JG_MANICHAEAN_LAMEDH:
+		return "U_JG_MANICHAEAN_LAMEDH"
+	case U_JG_MANICHAEAN_MEM:
+		return "U_JG_MANICHAEAN_MEM"
+	case U_JG_MANICHAEAN_NUN:
+		return "U_JG_MANICHAEAN_NUN"
+	case U_JG_MANICHAEAN_ONE:
+		return "U_JG_MANICHAEAN_ONE"
+	case U_JG_MANICHAEAN_PE:
+		return "U_JG_MANICHAEAN_PE"
+	case U_JG_MANICHAEAN_QOPH:
+		return "U_JG_MANICHAEAN_QOPH"
+	case U_JG_MANICHAEAN_RESH:
+		return "U_JG_MANICHAEAN_RESH"
+	case U_JG_MANICHAEAN_SADHE:
+		return "U_JG_MANICHAEAN_SADHE"
+	case U_JG_MANICHAEAN_SAMEKH:
+		return "U_JG_MANICHAEAN_SAMEKH"
+	case U_JG_MANICHAEAN_TAW:
+		return "U_JG_MANICHAEAN_TAW"
+	case U_JG_MANICHAEAN_TEN:
+		return "U_JG_MANICHAEAN_TEN"
+	case U_JG_MANICHAEAN_TETH:
+		return "U_JG_MANICHAEAN_TETH"
+	case U_JG_MANICHAEAN_THAMEDH:
+		return "U_JG_MANICHAEAN_THAMEDH"
+	case U_JG_MANICHAEAN_TWENTY:
+		return "U_JG_MANICHAEAN_TWENTY"
+	case U_JG_MANICHAEAN_WAW:
+		return "U_JG_MANICHAEAN_WAW"
+	case U_JG_MANICHAEAN_YODH:
+		return "U_JG_MANICHAEAN_YODH"
+	case U_JG_MANICHAEAN_ZAYIN:
+		return "U_JG_MANICHAEAN_ZAYIN"
+	case U_JG_STRAIGHT_WAW:
+		return "U_JG_STRAIGHT_WAW"
+	case U_JG_AFRICAN_FEH:
+		return "U_JG_AFRICAN_FEH"
+	case U_JG_AFRICAN_NOON:
+		return "U_JG_AFRICAN_NOON"
+	case U_JG_AFRICAN_QAF:
+		return "U_JG_AFRICAN_QAF"
+	case U_JG_MALAYALAM_BHA:
+		return "U_JG_MALAYALAM_BHA"
+	case U_JG_MALAYALAM_JA:
+		return "U_JG_MALAYALAM_JA"
+	case U_JG_MALAYALAM_LLA:
+		return "U_JG_MALAYALAM_LLA"
+	case U_JG_MALAYALAM_LLLA:
+		return "U_JG_MALAYALAM_LLLA"
+	case U_JG_MALAYALAM_NGA:
+		return "U_JG_MALAYALAM_NGA"
+	case U_JG_MALAYALAM_NNA:
+		return "U_JG_MALAYALAM_NNA"
+	case U_JG_MALAYALAM_NNNA:
+		return "U_JG_MALAYALAM_NNNA"
+	case U_JG_MALAYALAM_NYA:
+		return "U_JG_MALAYALAM_NYA"
+	case U_JG_MALAYALAM_RA:
+		return "U_JG_MALAYALAM_RA"
+	case U_JG_MALAYALAM_SSA:
+		return "U_JG_MALAYALAM_SSA"
+	case U_JG_MALAYALAM_TTA:
+		return "U_JG_MALAYALAM_TTA"
+	case U_JG_HANIFI_ROHINGYA_KINNA_YA:
+		return "U_JG_HANIFI_ROHINGYA_KINNA_YA"
+	case U_JG_HANIFI_ROHINGYA_PA:
+		return "U_JG_HANIFI_ROHINGYA_PA"
+	case U_JG_THIN_YEH:
+		return "U_JG_THIN_YEH"
+	case U_JG_VERTICAL_TAIL:
+		return "U_JG_VERTICAL_TAIL"
+	default:
+		return fmt.Sprintf("UJoiningGroup(%d)", int32(e))
+	}
+}
+
 type UJoiningType int32
 
 const (
@@ -1841,6 +5379,27 @@ const (
 	U_JT_TRANSPARENT   UJoiningType = 5
 )
 
+// String returns the UJoiningType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UJoiningType) String() string {
+	switch e {
+	case U_JT_NON_JOINING:
+		return "U_JT_NON_JOINING"
+	case U_JT_JOIN_CAUSING:
+		return "U_JT_JOIN_CAUSING"
+	case U_JT_DUAL_JOINING:
+		return "U_JT_DUAL_JOINING"
+	case U_JT_LEFT_JOINING:
+		return "U_JT_LEFT_JOINING"
+	case U_JT_RIGHT_JOINING:
+		return "U_JT_RIGHT_JOINING"
+	case U_JT_TRANSPARENT:
+		return "U_JT_TRANSPARENT"
+	default:
+		return fmt.Sprintf("UJoiningType(%d)", int32(e))
+	}
+}
+
 type ULayoutType int32
 
 const (
@@ -1850,6 +5409,25 @@ const (
 	ULOC_LAYOUT_BTT     ULayoutType = 3
 	ULOC_LAYOUT_UNKNOWN ULayoutType = 4
 )
+
+// String returns the ULayoutType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ULayoutType) String() string {
+	switch e {
+	case ULOC_LAYOUT_LTR:
+		return "ULOC_LAYOUT_LTR"
+	case ULOC_LAYOUT_RTL:
+		return "ULOC_LAYOUT_RTL"
+	case ULOC_LAYOUT_TTB:
+		return "ULOC_LAYOUT_TTB"
+	case ULOC_LAYOUT_BTT:
+		return "ULOC_LAYOUT_BTT"
+	case ULOC_LAYOUT_UNKNOWN:
+		return "ULOC_LAYOUT_UNKNOWN"
+	default:
+		return fmt.Sprintf("ULayoutType(%d)", int32(e))
+	}
+}
 
 type ULineBreak int32
 
@@ -1900,6 +5478,101 @@ const (
 	U_LB_ZWJ                          ULineBreak = 42
 )
 
+// String returns the ULineBreak constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ULineBreak) String() string {
+	switch e {
+	case U_LB_UNKNOWN:
+		return "U_LB_UNKNOWN"
+	case U_LB_AMBIGUOUS:
+		return "U_LB_AMBIGUOUS"
+	case U_LB_ALPHABETIC:
+		return "U_LB_ALPHABETIC"
+	case U_LB_BREAK_BOTH:
+		return "U_LB_BREAK_BOTH"
+	case U_LB_BREAK_AFTER:
+		return "U_LB_BREAK_AFTER"
+	case U_LB_BREAK_BEFORE:
+		return "U_LB_BREAK_BEFORE"
+	case U_LB_MANDATORY_BREAK:
+		return "U_LB_MANDATORY_BREAK"
+	case U_LB_CONTINGENT_BREAK:
+		return "U_LB_CONTINGENT_BREAK"
+	case U_LB_CLOSE_PUNCTUATION:
+		return "U_LB_CLOSE_PUNCTUATION"
+	case U_LB_COMBINING_MARK:
+		return "U_LB_COMBINING_MARK"
+	case U_LB_CARRIAGE_RETURN:
+		return "U_LB_CARRIAGE_RETURN"
+	case U_LB_EXCLAMATION:
+		return "U_LB_EXCLAMATION"
+	case U_LB_GLUE:
+		return "U_LB_GLUE"
+	case U_LB_HYPHEN:
+		return "U_LB_HYPHEN"
+	case U_LB_IDEOGRAPHIC:
+		return "U_LB_IDEOGRAPHIC"
+	case U_LB_INSEPARABLE:
+		return "U_LB_INSEPARABLE"
+	case U_LB_INFIX_NUMERIC:
+		return "U_LB_INFIX_NUMERIC"
+	case U_LB_LINE_FEED:
+		return "U_LB_LINE_FEED"
+	case U_LB_NONSTARTER:
+		return "U_LB_NONSTARTER"
+	case U_LB_NUMERIC:
+		return "U_LB_NUMERIC"
+	case U_LB_OPEN_PUNCTUATION:
+		return "U_LB_OPEN_PUNCTUATION"
+	case U_LB_POSTFIX_NUMERIC:
+		return "U_LB_POSTFIX_NUMERIC"
+	case U_LB_PREFIX_NUMERIC:
+		return "U_LB_PREFIX_NUMERIC"
+	case U_LB_QUOTATION:
+		return "U_LB_QUOTATION"
+	case U_LB_COMPLEX_CONTEXT:
+		return "U_LB_COMPLEX_CONTEXT"
+	case U_LB_SURROGATE:
+		return "U_LB_SURROGATE"
+	case U_LB_SPACE:
+		return "U_LB_SPACE"
+	case U_LB_BREAK_SYMBOLS:
+		return "U_LB_BREAK_SYMBOLS"
+	case U_LB_ZWSPACE:
+		return "U_LB_ZWSPACE"
+	case U_LB_NEXT_LINE:
+		return "U_LB_NEXT_LINE"
+	case U_LB_WORD_JOINER:
+		return "U_LB_WORD_JOINER"
+	case U_LB_H2:
+		return "U_LB_H2"
+	case U_LB_H3:
+		return "U_LB_H3"
+	case U_LB_JL:
+		return "U_LB_JL"
+	case U_LB_JT:
+		return "U_LB_JT"
+	case U_LB_JV:
+		return "U_LB_JV"
+	case U_LB_CLOSE_PARENTHESIS:
+		return "U_LB_CLOSE_PARENTHESIS"
+	case U_LB_CONDITIONAL_JAPANESE_STARTER:
+		return "U_LB_CONDITIONAL_JAPANESE_STARTER"
+	case U_LB_HEBREW_LETTER:
+		return "U_LB_HEBREW_LETTER"
+	case U_LB_REGIONAL_INDICATOR:
+		return "U_LB_REGIONAL_INDICATOR"
+	case U_LB_E_BASE:
+		return "U_LB_E_BASE"
+	case U_LB_E_MODIFIER:
+		return "U_LB_E_MODIFIER"
+	case U_LB_ZWJ:
+		return "U_LB_ZWJ"
+	default:
+		return fmt.Sprintf("ULineBreak(%d)", int32(e))
+	}
+}
+
 type ULineBreakTag int32
 
 const (
@@ -1909,12 +5582,40 @@ const (
 	UBRK_LINE_HARD_LIMIT ULineBreakTag = 200
 )
 
+// String returns the ULineBreakTag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ULineBreakTag) String() string {
+	switch e {
+	case UBRK_LINE_SOFT:
+		return "UBRK_LINE_SOFT"
+	case UBRK_LINE_SOFT_LIMIT:
+		return "UBRK_LINE_SOFT_LIMIT"
+	case UBRK_LINE_HARD_LIMIT:
+		return "UBRK_LINE_HARD_LIMIT"
+	default:
+		return fmt.Sprintf("ULineBreakTag(%d)", int32(e))
+	}
+}
+
 type UListFormatterField int32
 
 const (
 	ULISTFMT_LITERAL_FIELD UListFormatterField = 0
 	ULISTFMT_ELEMENT_FIELD UListFormatterField = 1
 )
+
+// String returns the UListFormatterField constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UListFormatterField) String() string {
+	switch e {
+	case ULISTFMT_LITERAL_FIELD:
+		return "ULISTFMT_LITERAL_FIELD"
+	case ULISTFMT_ELEMENT_FIELD:
+		return "ULISTFMT_ELEMENT_FIELD"
+	default:
+		return fmt.Sprintf("UListFormatterField(%d)", int32(e))
+	}
+}
 
 type UListFormatterType int32
 
@@ -1924,6 +5625,21 @@ const (
 	ULISTFMT_TYPE_UNITS UListFormatterType = 2
 )
 
+// String returns the UListFormatterType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UListFormatterType) String() string {
+	switch e {
+	case ULISTFMT_TYPE_AND:
+		return "ULISTFMT_TYPE_AND"
+	case ULISTFMT_TYPE_OR:
+		return "ULISTFMT_TYPE_OR"
+	case ULISTFMT_TYPE_UNITS:
+		return "ULISTFMT_TYPE_UNITS"
+	default:
+		return fmt.Sprintf("UListFormatterType(%d)", int32(e))
+	}
+}
+
 type UListFormatterWidth int32
 
 const (
@@ -1931,6 +5647,21 @@ const (
 	ULISTFMT_WIDTH_SHORT  UListFormatterWidth = 1
 	ULISTFMT_WIDTH_NARROW UListFormatterWidth = 2
 )
+
+// String returns the UListFormatterWidth constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UListFormatterWidth) String() string {
+	switch e {
+	case ULISTFMT_WIDTH_WIDE:
+		return "ULISTFMT_WIDTH_WIDE"
+	case ULISTFMT_WIDTH_SHORT:
+		return "ULISTFMT_WIDTH_SHORT"
+	case ULISTFMT_WIDTH_NARROW:
+		return "ULISTFMT_WIDTH_NARROW"
+	default:
+		return fmt.Sprintf("UListFormatterWidth(%d)", int32(e))
+	}
+}
 
 type ULocAvailableType int32
 
@@ -1940,12 +5671,40 @@ const (
 	ULOC_AVAILABLE_WITH_LEGACY_ALIASES ULocAvailableType = 2
 )
 
+// String returns the ULocAvailableType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ULocAvailableType) String() string {
+	switch e {
+	case ULOC_AVAILABLE_DEFAULT:
+		return "ULOC_AVAILABLE_DEFAULT"
+	case ULOC_AVAILABLE_ONLY_LEGACY_ALIASES:
+		return "ULOC_AVAILABLE_ONLY_LEGACY_ALIASES"
+	case ULOC_AVAILABLE_WITH_LEGACY_ALIASES:
+		return "ULOC_AVAILABLE_WITH_LEGACY_ALIASES"
+	default:
+		return fmt.Sprintf("ULocAvailableType(%d)", int32(e))
+	}
+}
+
 type ULocDataLocaleType int32
 
 const (
 	ULOC_ACTUAL_LOCALE ULocDataLocaleType = 0
 	ULOC_VALID_LOCALE  ULocDataLocaleType = 1
 )
+
+// String returns the ULocDataLocaleType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ULocDataLocaleType) String() string {
+	switch e {
+	case ULOC_ACTUAL_LOCALE:
+		return "ULOC_ACTUAL_LOCALE"
+	case ULOC_VALID_LOCALE:
+		return "ULOC_VALID_LOCALE"
+	default:
+		return fmt.Sprintf("ULocDataLocaleType(%d)", int32(e))
+	}
+}
 
 type ULocaleDataDelimiterType int32
 
@@ -1956,6 +5715,23 @@ const (
 	ULOCDATA_ALT_QUOTATION_END   ULocaleDataDelimiterType = 3
 )
 
+// String returns the ULocaleDataDelimiterType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ULocaleDataDelimiterType) String() string {
+	switch e {
+	case ULOCDATA_QUOTATION_START:
+		return "ULOCDATA_QUOTATION_START"
+	case ULOCDATA_QUOTATION_END:
+		return "ULOCDATA_QUOTATION_END"
+	case ULOCDATA_ALT_QUOTATION_START:
+		return "ULOCDATA_ALT_QUOTATION_START"
+	case ULOCDATA_ALT_QUOTATION_END:
+		return "ULOCDATA_ALT_QUOTATION_END"
+	default:
+		return fmt.Sprintf("ULocaleDataDelimiterType(%d)", int32(e))
+	}
+}
+
 type ULocaleDataExemplarSetType int32
 
 const (
@@ -1964,6 +5740,23 @@ const (
 	ULOCDATA_ES_INDEX       ULocaleDataExemplarSetType = 2
 	ULOCDATA_ES_PUNCTUATION ULocaleDataExemplarSetType = 3
 )
+
+// String returns the ULocaleDataExemplarSetType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ULocaleDataExemplarSetType) String() string {
+	switch e {
+	case ULOCDATA_ES_STANDARD:
+		return "ULOCDATA_ES_STANDARD"
+	case ULOCDATA_ES_AUXILIARY:
+		return "ULOCDATA_ES_AUXILIARY"
+	case ULOCDATA_ES_INDEX:
+		return "ULOCDATA_ES_INDEX"
+	case ULOCDATA_ES_PUNCTUATION:
+		return "ULOCDATA_ES_PUNCTUATION"
+	default:
+		return fmt.Sprintf("ULocaleDataExemplarSetType(%d)", int32(e))
+	}
+}
 
 type UMeasureFormatWidth int32
 
@@ -1975,6 +5768,25 @@ const (
 	UMEASFMT_WIDTH_COUNT   UMeasureFormatWidth = 4
 )
 
+// String returns the UMeasureFormatWidth constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UMeasureFormatWidth) String() string {
+	switch e {
+	case UMEASFMT_WIDTH_WIDE:
+		return "UMEASFMT_WIDTH_WIDE"
+	case UMEASFMT_WIDTH_SHORT:
+		return "UMEASFMT_WIDTH_SHORT"
+	case UMEASFMT_WIDTH_NARROW:
+		return "UMEASFMT_WIDTH_NARROW"
+	case UMEASFMT_WIDTH_NUMERIC:
+		return "UMEASFMT_WIDTH_NUMERIC"
+	case UMEASFMT_WIDTH_COUNT:
+		return "UMEASFMT_WIDTH_COUNT"
+	default:
+		return fmt.Sprintf("UMeasureFormatWidth(%d)", int32(e))
+	}
+}
+
 type UMeasurementSystem int32
 
 const (
@@ -1983,12 +5795,40 @@ const (
 	UMS_UK UMeasurementSystem = 2
 )
 
+// String returns the UMeasurementSystem constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UMeasurementSystem) String() string {
+	switch e {
+	case UMS_SI:
+		return "UMS_SI"
+	case UMS_US:
+		return "UMS_US"
+	case UMS_UK:
+		return "UMS_UK"
+	default:
+		return fmt.Sprintf("UMeasurementSystem(%d)", int32(e))
+	}
+}
+
 type UMessagePatternApostropheMode int32
 
 const (
 	UMSGPAT_APOS_DOUBLE_OPTIONAL UMessagePatternApostropheMode = 0
 	UMSGPAT_APOS_DOUBLE_REQUIRED UMessagePatternApostropheMode = 1
 )
+
+// String returns the UMessagePatternApostropheMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UMessagePatternApostropheMode) String() string {
+	switch e {
+	case UMSGPAT_APOS_DOUBLE_OPTIONAL:
+		return "UMSGPAT_APOS_DOUBLE_OPTIONAL"
+	case UMSGPAT_APOS_DOUBLE_REQUIRED:
+		return "UMSGPAT_APOS_DOUBLE_REQUIRED"
+	default:
+		return fmt.Sprintf("UMessagePatternApostropheMode(%d)", int32(e))
+	}
+}
 
 type UMessagePatternArgType int32
 
@@ -2000,6 +5840,27 @@ const (
 	UMSGPAT_ARG_TYPE_SELECT        UMessagePatternArgType = 4
 	UMSGPAT_ARG_TYPE_SELECTORDINAL UMessagePatternArgType = 5
 )
+
+// String returns the UMessagePatternArgType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UMessagePatternArgType) String() string {
+	switch e {
+	case UMSGPAT_ARG_TYPE_NONE:
+		return "UMSGPAT_ARG_TYPE_NONE"
+	case UMSGPAT_ARG_TYPE_SIMPLE:
+		return "UMSGPAT_ARG_TYPE_SIMPLE"
+	case UMSGPAT_ARG_TYPE_CHOICE:
+		return "UMSGPAT_ARG_TYPE_CHOICE"
+	case UMSGPAT_ARG_TYPE_PLURAL:
+		return "UMSGPAT_ARG_TYPE_PLURAL"
+	case UMSGPAT_ARG_TYPE_SELECT:
+		return "UMSGPAT_ARG_TYPE_SELECT"
+	case UMSGPAT_ARG_TYPE_SELECTORDINAL:
+		return "UMSGPAT_ARG_TYPE_SELECTORDINAL"
+	default:
+		return fmt.Sprintf("UMessagePatternArgType(%d)", int32(e))
+	}
+}
 
 type UMessagePatternPartType int32
 
@@ -2020,6 +5881,43 @@ const (
 	UMSGPAT_PART_TYPE_ARG_DOUBLE     UMessagePatternPartType = 13
 )
 
+// String returns the UMessagePatternPartType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UMessagePatternPartType) String() string {
+	switch e {
+	case UMSGPAT_PART_TYPE_MSG_START:
+		return "UMSGPAT_PART_TYPE_MSG_START"
+	case UMSGPAT_PART_TYPE_MSG_LIMIT:
+		return "UMSGPAT_PART_TYPE_MSG_LIMIT"
+	case UMSGPAT_PART_TYPE_SKIP_SYNTAX:
+		return "UMSGPAT_PART_TYPE_SKIP_SYNTAX"
+	case UMSGPAT_PART_TYPE_INSERT_CHAR:
+		return "UMSGPAT_PART_TYPE_INSERT_CHAR"
+	case UMSGPAT_PART_TYPE_REPLACE_NUMBER:
+		return "UMSGPAT_PART_TYPE_REPLACE_NUMBER"
+	case UMSGPAT_PART_TYPE_ARG_START:
+		return "UMSGPAT_PART_TYPE_ARG_START"
+	case UMSGPAT_PART_TYPE_ARG_LIMIT:
+		return "UMSGPAT_PART_TYPE_ARG_LIMIT"
+	case UMSGPAT_PART_TYPE_ARG_NUMBER:
+		return "UMSGPAT_PART_TYPE_ARG_NUMBER"
+	case UMSGPAT_PART_TYPE_ARG_NAME:
+		return "UMSGPAT_PART_TYPE_ARG_NAME"
+	case UMSGPAT_PART_TYPE_ARG_TYPE:
+		return "UMSGPAT_PART_TYPE_ARG_TYPE"
+	case UMSGPAT_PART_TYPE_ARG_STYLE:
+		return "UMSGPAT_PART_TYPE_ARG_STYLE"
+	case UMSGPAT_PART_TYPE_ARG_SELECTOR:
+		return "UMSGPAT_PART_TYPE_ARG_SELECTOR"
+	case UMSGPAT_PART_TYPE_ARG_INT:
+		return "UMSGPAT_PART_TYPE_ARG_INT"
+	case UMSGPAT_PART_TYPE_ARG_DOUBLE:
+		return "UMSGPAT_PART_TYPE_ARG_DOUBLE"
+	default:
+		return fmt.Sprintf("UMessagePatternPartType(%d)", int32(e))
+	}
+}
+
 type UNormalization2Mode int32
 
 const (
@@ -2029,6 +5927,23 @@ const (
 	UNORM2_COMPOSE_CONTIGUOUS UNormalization2Mode = 3
 )
 
+// String returns the UNormalization2Mode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNormalization2Mode) String() string {
+	switch e {
+	case UNORM2_COMPOSE:
+		return "UNORM2_COMPOSE"
+	case UNORM2_DECOMPOSE:
+		return "UNORM2_DECOMPOSE"
+	case UNORM2_FCD:
+		return "UNORM2_FCD"
+	case UNORM2_COMPOSE_CONTIGUOUS:
+		return "UNORM2_COMPOSE_CONTIGUOUS"
+	default:
+		return fmt.Sprintf("UNormalization2Mode(%d)", int32(e))
+	}
+}
+
 type UNormalizationCheckResult int32
 
 const (
@@ -2036,6 +5951,21 @@ const (
 	UNORM_YES   UNormalizationCheckResult = 1
 	UNORM_MAYBE UNormalizationCheckResult = 2
 )
+
+// String returns the UNormalizationCheckResult constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNormalizationCheckResult) String() string {
+	switch e {
+	case UNORM_NO:
+		return "UNORM_NO"
+	case UNORM_YES:
+		return "UNORM_YES"
+	case UNORM_MAYBE:
+		return "UNORM_MAYBE"
+	default:
+		return fmt.Sprintf("UNormalizationCheckResult(%d)", int32(e))
+	}
+}
 
 type UNormalizationMode int32
 
@@ -2050,12 +5980,48 @@ const (
 	UNORM_MODE_COUNT UNormalizationMode = 7
 )
 
+// String returns the UNormalizationMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNormalizationMode) String() string {
+	switch e {
+	case UNORM_NONE:
+		return "UNORM_NONE"
+	case UNORM_NFD:
+		return "UNORM_NFD"
+	case UNORM_NFKD:
+		return "UNORM_NFKD"
+	case UNORM_NFC:
+		return "UNORM_NFC"
+	case UNORM_NFKC:
+		return "UNORM_NFKC"
+	case UNORM_FCD:
+		return "UNORM_FCD"
+	case UNORM_MODE_COUNT:
+		return "UNORM_MODE_COUNT"
+	default:
+		return fmt.Sprintf("UNormalizationMode(%d)", int32(e))
+	}
+}
+
 type UNumberCompactStyle int32
 
 const (
 	UNUM_SHORT UNumberCompactStyle = 0
 	UNUM_LONG  UNumberCompactStyle = 1
 )
+
+// String returns the UNumberCompactStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberCompactStyle) String() string {
+	switch e {
+	case UNUM_SHORT:
+		return "UNUM_SHORT"
+	case UNUM_LONG:
+		return "UNUM_LONG"
+	default:
+		return fmt.Sprintf("UNumberCompactStyle(%d)", int32(e))
+	}
+}
 
 type UNumberDecimalSeparatorDisplay int32
 
@@ -2064,6 +6030,21 @@ const (
 	UNUM_DECIMAL_SEPARATOR_ALWAYS UNumberDecimalSeparatorDisplay = 1
 	UNUM_DECIMAL_SEPARATOR_COUNT  UNumberDecimalSeparatorDisplay = 2
 )
+
+// String returns the UNumberDecimalSeparatorDisplay constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberDecimalSeparatorDisplay) String() string {
+	switch e {
+	case UNUM_DECIMAL_SEPARATOR_AUTO:
+		return "UNUM_DECIMAL_SEPARATOR_AUTO"
+	case UNUM_DECIMAL_SEPARATOR_ALWAYS:
+		return "UNUM_DECIMAL_SEPARATOR_ALWAYS"
+	case UNUM_DECIMAL_SEPARATOR_COUNT:
+		return "UNUM_DECIMAL_SEPARATOR_COUNT"
+	default:
+		return fmt.Sprintf("UNumberDecimalSeparatorDisplay(%d)", int32(e))
+	}
+}
 
 type UNumberFormatAttribute int32
 
@@ -2099,11 +6080,89 @@ const (
 	UNUM_SIGN_ALWAYS_SHOWN                   UNumberFormatAttribute = 4100
 )
 
+// String returns the UNumberFormatAttribute constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberFormatAttribute) String() string {
+	switch e {
+	case UNUM_PARSE_INT_ONLY:
+		return "UNUM_PARSE_INT_ONLY"
+	case UNUM_GROUPING_USED:
+		return "UNUM_GROUPING_USED"
+	case UNUM_DECIMAL_ALWAYS_SHOWN:
+		return "UNUM_DECIMAL_ALWAYS_SHOWN"
+	case UNUM_MAX_INTEGER_DIGITS:
+		return "UNUM_MAX_INTEGER_DIGITS"
+	case UNUM_MIN_INTEGER_DIGITS:
+		return "UNUM_MIN_INTEGER_DIGITS"
+	case UNUM_INTEGER_DIGITS:
+		return "UNUM_INTEGER_DIGITS"
+	case UNUM_MAX_FRACTION_DIGITS:
+		return "UNUM_MAX_FRACTION_DIGITS"
+	case UNUM_MIN_FRACTION_DIGITS:
+		return "UNUM_MIN_FRACTION_DIGITS"
+	case UNUM_FRACTION_DIGITS:
+		return "UNUM_FRACTION_DIGITS"
+	case UNUM_MULTIPLIER:
+		return "UNUM_MULTIPLIER"
+	case UNUM_GROUPING_SIZE:
+		return "UNUM_GROUPING_SIZE"
+	case UNUM_ROUNDING_MODE:
+		return "UNUM_ROUNDING_MODE"
+	case UNUM_ROUNDING_INCREMENT:
+		return "UNUM_ROUNDING_INCREMENT"
+	case UNUM_FORMAT_WIDTH:
+		return "UNUM_FORMAT_WIDTH"
+	case UNUM_PADDING_POSITION:
+		return "UNUM_PADDING_POSITION"
+	case UNUM_SECONDARY_GROUPING_SIZE:
+		return "UNUM_SECONDARY_GROUPING_SIZE"
+	case UNUM_SIGNIFICANT_DIGITS_USED:
+		return "UNUM_SIGNIFICANT_DIGITS_USED"
+	case UNUM_MIN_SIGNIFICANT_DIGITS:
+		return "UNUM_MIN_SIGNIFICANT_DIGITS"
+	case UNUM_MAX_SIGNIFICANT_DIGITS:
+		return "UNUM_MAX_SIGNIFICANT_DIGITS"
+	case UNUM_LENIENT_PARSE:
+		return "UNUM_LENIENT_PARSE"
+	case UNUM_PARSE_ALL_INPUT:
+		return "UNUM_PARSE_ALL_INPUT"
+	case UNUM_SCALE:
+		return "UNUM_SCALE"
+	case UNUM_MINIMUM_GROUPING_DIGITS:
+		return "UNUM_MINIMUM_GROUPING_DIGITS"
+	case UNUM_CURRENCY_USAGE:
+		return "UNUM_CURRENCY_USAGE"
+	case UNUM_FORMAT_FAIL_IF_MORE_THAN_MAX_DIGITS:
+		return "UNUM_FORMAT_FAIL_IF_MORE_THAN_MAX_DIGITS"
+	case UNUM_PARSE_NO_EXPONENT:
+		return "UNUM_PARSE_NO_EXPONENT"
+	case UNUM_PARSE_DECIMAL_MARK_REQUIRED:
+		return "UNUM_PARSE_DECIMAL_MARK_REQUIRED"
+	case UNUM_PARSE_CASE_SENSITIVE:
+		return "UNUM_PARSE_CASE_SENSITIVE"
+	case UNUM_SIGN_ALWAYS_SHOWN:
+		return "UNUM_SIGN_ALWAYS_SHOWN"
+	default:
+		return fmt.Sprintf("UNumberFormatAttribute(%d)", int32(e))
+	}
+}
+
 type UNumberFormatAttributeValue int32
 
 const (
 	UNUM_FORMAT_ATTRIBUTE_VALUE_HIDDEN UNumberFormatAttributeValue = 0
 )
+
+// String returns the UNumberFormatAttributeValue constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberFormatAttributeValue) String() string {
+	switch e {
+	case UNUM_FORMAT_ATTRIBUTE_VALUE_HIDDEN:
+		return "UNUM_FORMAT_ATTRIBUTE_VALUE_HIDDEN"
+	default:
+		return fmt.Sprintf("UNumberFormatAttributeValue(%d)", int32(e))
+	}
+}
 
 type UNumberFormatFields int32
 
@@ -2123,12 +6182,60 @@ const (
 	UNUM_COMPACT_FIELD            UNumberFormatFields = 12
 )
 
+// String returns the UNumberFormatFields constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberFormatFields) String() string {
+	switch e {
+	case UNUM_INTEGER_FIELD:
+		return "UNUM_INTEGER_FIELD"
+	case UNUM_FRACTION_FIELD:
+		return "UNUM_FRACTION_FIELD"
+	case UNUM_DECIMAL_SEPARATOR_FIELD:
+		return "UNUM_DECIMAL_SEPARATOR_FIELD"
+	case UNUM_EXPONENT_SYMBOL_FIELD:
+		return "UNUM_EXPONENT_SYMBOL_FIELD"
+	case UNUM_EXPONENT_SIGN_FIELD:
+		return "UNUM_EXPONENT_SIGN_FIELD"
+	case UNUM_EXPONENT_FIELD:
+		return "UNUM_EXPONENT_FIELD"
+	case UNUM_GROUPING_SEPARATOR_FIELD:
+		return "UNUM_GROUPING_SEPARATOR_FIELD"
+	case UNUM_CURRENCY_FIELD:
+		return "UNUM_CURRENCY_FIELD"
+	case UNUM_PERCENT_FIELD:
+		return "UNUM_PERCENT_FIELD"
+	case UNUM_PERMILL_FIELD:
+		return "UNUM_PERMILL_FIELD"
+	case UNUM_SIGN_FIELD:
+		return "UNUM_SIGN_FIELD"
+	case UNUM_MEASURE_UNIT_FIELD:
+		return "UNUM_MEASURE_UNIT_FIELD"
+	case UNUM_COMPACT_FIELD:
+		return "UNUM_COMPACT_FIELD"
+	default:
+		return fmt.Sprintf("UNumberFormatFields(%d)", int32(e))
+	}
+}
+
 type UNumberFormatMinimumGroupingDigits int32
 
 const (
 	UNUM_MINIMUM_GROUPING_DIGITS_AUTO UNumberFormatMinimumGroupingDigits = -2
 	UNUM_MINIMUM_GROUPING_DIGITS_MIN2 UNumberFormatMinimumGroupingDigits = -3
 )
+
+// String returns the UNumberFormatMinimumGroupingDigits constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberFormatMinimumGroupingDigits) String() string {
+	switch e {
+	case UNUM_MINIMUM_GROUPING_DIGITS_AUTO:
+		return "UNUM_MINIMUM_GROUPING_DIGITS_AUTO"
+	case UNUM_MINIMUM_GROUPING_DIGITS_MIN2:
+		return "UNUM_MINIMUM_GROUPING_DIGITS_MIN2"
+	default:
+		return fmt.Sprintf("UNumberFormatMinimumGroupingDigits(%d)", int32(e))
+	}
+}
 
 type UNumberFormatPadPosition int32
 
@@ -2138,6 +6245,23 @@ const (
 	UNUM_PAD_BEFORE_SUFFIX UNumberFormatPadPosition = 2
 	UNUM_PAD_AFTER_SUFFIX  UNumberFormatPadPosition = 3
 )
+
+// String returns the UNumberFormatPadPosition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberFormatPadPosition) String() string {
+	switch e {
+	case UNUM_PAD_BEFORE_PREFIX:
+		return "UNUM_PAD_BEFORE_PREFIX"
+	case UNUM_PAD_AFTER_PREFIX:
+		return "UNUM_PAD_AFTER_PREFIX"
+	case UNUM_PAD_BEFORE_SUFFIX:
+		return "UNUM_PAD_BEFORE_SUFFIX"
+	case UNUM_PAD_AFTER_SUFFIX:
+		return "UNUM_PAD_AFTER_SUFFIX"
+	default:
+		return fmt.Sprintf("UNumberFormatPadPosition(%d)", int32(e))
+	}
+}
 
 type UNumberFormatRoundingMode int32
 
@@ -2154,6 +6278,37 @@ const (
 	UNUM_ROUND_HALF_CEILING UNumberFormatRoundingMode = 9
 	UNUM_ROUND_HALF_FLOOR   UNumberFormatRoundingMode = 10
 )
+
+// String returns the UNumberFormatRoundingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberFormatRoundingMode) String() string {
+	switch e {
+	case UNUM_ROUND_CEILING:
+		return "UNUM_ROUND_CEILING"
+	case UNUM_ROUND_FLOOR:
+		return "UNUM_ROUND_FLOOR"
+	case UNUM_ROUND_DOWN:
+		return "UNUM_ROUND_DOWN"
+	case UNUM_ROUND_UP:
+		return "UNUM_ROUND_UP"
+	case UNUM_ROUND_HALFEVEN:
+		return "UNUM_ROUND_HALFEVEN"
+	case UNUM_ROUND_HALFDOWN:
+		return "UNUM_ROUND_HALFDOWN"
+	case UNUM_ROUND_HALFUP:
+		return "UNUM_ROUND_HALFUP"
+	case UNUM_ROUND_UNNECESSARY:
+		return "UNUM_ROUND_UNNECESSARY"
+	case UNUM_ROUND_HALF_ODD:
+		return "UNUM_ROUND_HALF_ODD"
+	case UNUM_ROUND_HALF_CEILING:
+		return "UNUM_ROUND_HALF_CEILING"
+	case UNUM_ROUND_HALF_FLOOR:
+		return "UNUM_ROUND_HALF_FLOOR"
+	default:
+		return fmt.Sprintf("UNumberFormatRoundingMode(%d)", int32(e))
+	}
+}
 
 type UNumberFormatStyle int32
 
@@ -2178,6 +6333,49 @@ const (
 	UNUM_DEFAULT               UNumberFormatStyle = 1
 	UNUM_IGNORE                UNumberFormatStyle = 0
 )
+
+// String returns the UNumberFormatStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberFormatStyle) String() string {
+	switch e {
+	case UNUM_PATTERN_DECIMAL:
+		return "UNUM_PATTERN_DECIMAL"
+	case UNUM_DECIMAL:
+		return "UNUM_DECIMAL"
+	case UNUM_CURRENCY:
+		return "UNUM_CURRENCY"
+	case UNUM_PERCENT:
+		return "UNUM_PERCENT"
+	case UNUM_SCIENTIFIC:
+		return "UNUM_SCIENTIFIC"
+	case UNUM_SPELLOUT:
+		return "UNUM_SPELLOUT"
+	case UNUM_ORDINAL:
+		return "UNUM_ORDINAL"
+	case UNUM_DURATION:
+		return "UNUM_DURATION"
+	case UNUM_NUMBERING_SYSTEM:
+		return "UNUM_NUMBERING_SYSTEM"
+	case UNUM_PATTERN_RULEBASED:
+		return "UNUM_PATTERN_RULEBASED"
+	case UNUM_CURRENCY_ISO:
+		return "UNUM_CURRENCY_ISO"
+	case UNUM_CURRENCY_PLURAL:
+		return "UNUM_CURRENCY_PLURAL"
+	case UNUM_CURRENCY_ACCOUNTING:
+		return "UNUM_CURRENCY_ACCOUNTING"
+	case UNUM_CASH_CURRENCY:
+		return "UNUM_CASH_CURRENCY"
+	case UNUM_DECIMAL_COMPACT_SHORT:
+		return "UNUM_DECIMAL_COMPACT_SHORT"
+	case UNUM_DECIMAL_COMPACT_LONG:
+		return "UNUM_DECIMAL_COMPACT_LONG"
+	case UNUM_CURRENCY_STANDARD:
+		return "UNUM_CURRENCY_STANDARD"
+	default:
+		return fmt.Sprintf("UNumberFormatStyle(%d)", int32(e))
+	}
+}
 
 type UNumberFormatSymbol int32
 
@@ -2212,6 +6410,71 @@ const (
 	UNUM_EXPONENT_MULTIPLICATION_SYMBOL     UNumberFormatSymbol = 27
 )
 
+// String returns the UNumberFormatSymbol constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberFormatSymbol) String() string {
+	switch e {
+	case UNUM_DECIMAL_SEPARATOR_SYMBOL:
+		return "UNUM_DECIMAL_SEPARATOR_SYMBOL"
+	case UNUM_GROUPING_SEPARATOR_SYMBOL:
+		return "UNUM_GROUPING_SEPARATOR_SYMBOL"
+	case UNUM_PATTERN_SEPARATOR_SYMBOL:
+		return "UNUM_PATTERN_SEPARATOR_SYMBOL"
+	case UNUM_PERCENT_SYMBOL:
+		return "UNUM_PERCENT_SYMBOL"
+	case UNUM_ZERO_DIGIT_SYMBOL:
+		return "UNUM_ZERO_DIGIT_SYMBOL"
+	case UNUM_DIGIT_SYMBOL:
+		return "UNUM_DIGIT_SYMBOL"
+	case UNUM_MINUS_SIGN_SYMBOL:
+		return "UNUM_MINUS_SIGN_SYMBOL"
+	case UNUM_PLUS_SIGN_SYMBOL:
+		return "UNUM_PLUS_SIGN_SYMBOL"
+	case UNUM_CURRENCY_SYMBOL:
+		return "UNUM_CURRENCY_SYMBOL"
+	case UNUM_INTL_CURRENCY_SYMBOL:
+		return "UNUM_INTL_CURRENCY_SYMBOL"
+	case UNUM_MONETARY_SEPARATOR_SYMBOL:
+		return "UNUM_MONETARY_SEPARATOR_SYMBOL"
+	case UNUM_EXPONENTIAL_SYMBOL:
+		return "UNUM_EXPONENTIAL_SYMBOL"
+	case UNUM_PERMILL_SYMBOL:
+		return "UNUM_PERMILL_SYMBOL"
+	case UNUM_PAD_ESCAPE_SYMBOL:
+		return "UNUM_PAD_ESCAPE_SYMBOL"
+	case UNUM_INFINITY_SYMBOL:
+		return "UNUM_INFINITY_SYMBOL"
+	case UNUM_NAN_SYMBOL:
+		return "UNUM_NAN_SYMBOL"
+	case UNUM_SIGNIFICANT_DIGIT_SYMBOL:
+		return "UNUM_SIGNIFICANT_DIGIT_SYMBOL"
+	case UNUM_MONETARY_GROUPING_SEPARATOR_SYMBOL:
+		return "UNUM_MONETARY_GROUPING_SEPARATOR_SYMBOL"
+	case UNUM_ONE_DIGIT_SYMBOL:
+		return "UNUM_ONE_DIGIT_SYMBOL"
+	case UNUM_TWO_DIGIT_SYMBOL:
+		return "UNUM_TWO_DIGIT_SYMBOL"
+	case UNUM_THREE_DIGIT_SYMBOL:
+		return "UNUM_THREE_DIGIT_SYMBOL"
+	case UNUM_FOUR_DIGIT_SYMBOL:
+		return "UNUM_FOUR_DIGIT_SYMBOL"
+	case UNUM_FIVE_DIGIT_SYMBOL:
+		return "UNUM_FIVE_DIGIT_SYMBOL"
+	case UNUM_SIX_DIGIT_SYMBOL:
+		return "UNUM_SIX_DIGIT_SYMBOL"
+	case UNUM_SEVEN_DIGIT_SYMBOL:
+		return "UNUM_SEVEN_DIGIT_SYMBOL"
+	case UNUM_EIGHT_DIGIT_SYMBOL:
+		return "UNUM_EIGHT_DIGIT_SYMBOL"
+	case UNUM_NINE_DIGIT_SYMBOL:
+		return "UNUM_NINE_DIGIT_SYMBOL"
+	case UNUM_EXPONENT_MULTIPLICATION_SYMBOL:
+		return "UNUM_EXPONENT_MULTIPLICATION_SYMBOL"
+	default:
+		return fmt.Sprintf("UNumberFormatSymbol(%d)", int32(e))
+	}
+}
+
 type UNumberFormatTextAttribute int32
 
 const (
@@ -2225,6 +6488,31 @@ const (
 	UNUM_PUBLIC_RULESETS   UNumberFormatTextAttribute = 7
 )
 
+// String returns the UNumberFormatTextAttribute constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberFormatTextAttribute) String() string {
+	switch e {
+	case UNUM_POSITIVE_PREFIX:
+		return "UNUM_POSITIVE_PREFIX"
+	case UNUM_POSITIVE_SUFFIX:
+		return "UNUM_POSITIVE_SUFFIX"
+	case UNUM_NEGATIVE_PREFIX:
+		return "UNUM_NEGATIVE_PREFIX"
+	case UNUM_NEGATIVE_SUFFIX:
+		return "UNUM_NEGATIVE_SUFFIX"
+	case UNUM_PADDING_CHARACTER:
+		return "UNUM_PADDING_CHARACTER"
+	case UNUM_CURRENCY_CODE:
+		return "UNUM_CURRENCY_CODE"
+	case UNUM_DEFAULT_RULESET:
+		return "UNUM_DEFAULT_RULESET"
+	case UNUM_PUBLIC_RULESETS:
+		return "UNUM_PUBLIC_RULESETS"
+	default:
+		return fmt.Sprintf("UNumberFormatTextAttribute(%d)", int32(e))
+	}
+}
+
 type UNumberGroupingStrategy int32
 
 const (
@@ -2235,6 +6523,25 @@ const (
 	UNUM_GROUPING_THOUSANDS  UNumberGroupingStrategy = 4
 )
 
+// String returns the UNumberGroupingStrategy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberGroupingStrategy) String() string {
+	switch e {
+	case UNUM_GROUPING_OFF:
+		return "UNUM_GROUPING_OFF"
+	case UNUM_GROUPING_MIN2:
+		return "UNUM_GROUPING_MIN2"
+	case UNUM_GROUPING_AUTO:
+		return "UNUM_GROUPING_AUTO"
+	case UNUM_GROUPING_ON_ALIGNED:
+		return "UNUM_GROUPING_ON_ALIGNED"
+	case UNUM_GROUPING_THOUSANDS:
+		return "UNUM_GROUPING_THOUSANDS"
+	default:
+		return fmt.Sprintf("UNumberGroupingStrategy(%d)", int32(e))
+	}
+}
+
 type UNumberRangeCollapse int32
 
 const (
@@ -2243,6 +6550,23 @@ const (
 	UNUM_RANGE_COLLAPSE_UNIT UNumberRangeCollapse = 2
 	UNUM_RANGE_COLLAPSE_ALL  UNumberRangeCollapse = 3
 )
+
+// String returns the UNumberRangeCollapse constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberRangeCollapse) String() string {
+	switch e {
+	case UNUM_RANGE_COLLAPSE_AUTO:
+		return "UNUM_RANGE_COLLAPSE_AUTO"
+	case UNUM_RANGE_COLLAPSE_NONE:
+		return "UNUM_RANGE_COLLAPSE_NONE"
+	case UNUM_RANGE_COLLAPSE_UNIT:
+		return "UNUM_RANGE_COLLAPSE_UNIT"
+	case UNUM_RANGE_COLLAPSE_ALL:
+		return "UNUM_RANGE_COLLAPSE_ALL"
+	default:
+		return fmt.Sprintf("UNumberRangeCollapse(%d)", int32(e))
+	}
+}
 
 type UNumberRangeIdentityFallback int32
 
@@ -2253,6 +6577,23 @@ const (
 	UNUM_IDENTITY_FALLBACK_RANGE                         UNumberRangeIdentityFallback = 3
 )
 
+// String returns the UNumberRangeIdentityFallback constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberRangeIdentityFallback) String() string {
+	switch e {
+	case UNUM_IDENTITY_FALLBACK_SINGLE_VALUE:
+		return "UNUM_IDENTITY_FALLBACK_SINGLE_VALUE"
+	case UNUM_IDENTITY_FALLBACK_APPROXIMATELY_OR_SINGLE_VALUE:
+		return "UNUM_IDENTITY_FALLBACK_APPROXIMATELY_OR_SINGLE_VALUE"
+	case UNUM_IDENTITY_FALLBACK_APPROXIMATELY:
+		return "UNUM_IDENTITY_FALLBACK_APPROXIMATELY"
+	case UNUM_IDENTITY_FALLBACK_RANGE:
+		return "UNUM_IDENTITY_FALLBACK_RANGE"
+	default:
+		return fmt.Sprintf("UNumberRangeIdentityFallback(%d)", int32(e))
+	}
+}
+
 type UNumberRangeIdentityResult int32
 
 const (
@@ -2260,6 +6601,21 @@ const (
 	UNUM_IDENTITY_RESULT_EQUAL_AFTER_ROUNDING  UNumberRangeIdentityResult = 1
 	UNUM_IDENTITY_RESULT_NOT_EQUAL             UNumberRangeIdentityResult = 2
 )
+
+// String returns the UNumberRangeIdentityResult constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberRangeIdentityResult) String() string {
+	switch e {
+	case UNUM_IDENTITY_RESULT_EQUAL_BEFORE_ROUNDING:
+		return "UNUM_IDENTITY_RESULT_EQUAL_BEFORE_ROUNDING"
+	case UNUM_IDENTITY_RESULT_EQUAL_AFTER_ROUNDING:
+		return "UNUM_IDENTITY_RESULT_EQUAL_AFTER_ROUNDING"
+	case UNUM_IDENTITY_RESULT_NOT_EQUAL:
+		return "UNUM_IDENTITY_RESULT_NOT_EQUAL"
+	default:
+		return fmt.Sprintf("UNumberRangeIdentityResult(%d)", int32(e))
+	}
+}
 
 type UNumberSignDisplay int32
 
@@ -2276,12 +6632,54 @@ const (
 	UNUM_SIGN_COUNT                  UNumberSignDisplay = 9
 )
 
+// String returns the UNumberSignDisplay constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberSignDisplay) String() string {
+	switch e {
+	case UNUM_SIGN_AUTO:
+		return "UNUM_SIGN_AUTO"
+	case UNUM_SIGN_ALWAYS:
+		return "UNUM_SIGN_ALWAYS"
+	case UNUM_SIGN_NEVER:
+		return "UNUM_SIGN_NEVER"
+	case UNUM_SIGN_ACCOUNTING:
+		return "UNUM_SIGN_ACCOUNTING"
+	case UNUM_SIGN_ACCOUNTING_ALWAYS:
+		return "UNUM_SIGN_ACCOUNTING_ALWAYS"
+	case UNUM_SIGN_EXCEPT_ZERO:
+		return "UNUM_SIGN_EXCEPT_ZERO"
+	case UNUM_SIGN_ACCOUNTING_EXCEPT_ZERO:
+		return "UNUM_SIGN_ACCOUNTING_EXCEPT_ZERO"
+	case UNUM_SIGN_NEGATIVE:
+		return "UNUM_SIGN_NEGATIVE"
+	case UNUM_SIGN_ACCOUNTING_NEGATIVE:
+		return "UNUM_SIGN_ACCOUNTING_NEGATIVE"
+	case UNUM_SIGN_COUNT:
+		return "UNUM_SIGN_COUNT"
+	default:
+		return fmt.Sprintf("UNumberSignDisplay(%d)", int32(e))
+	}
+}
+
 type UNumberTrailingZeroDisplay int32
 
 const (
 	UNUM_TRAILING_ZERO_AUTO          UNumberTrailingZeroDisplay = 0
 	UNUM_TRAILING_ZERO_HIDE_IF_WHOLE UNumberTrailingZeroDisplay = 1
 )
+
+// String returns the UNumberTrailingZeroDisplay constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberTrailingZeroDisplay) String() string {
+	switch e {
+	case UNUM_TRAILING_ZERO_AUTO:
+		return "UNUM_TRAILING_ZERO_AUTO"
+	case UNUM_TRAILING_ZERO_HIDE_IF_WHOLE:
+		return "UNUM_TRAILING_ZERO_HIDE_IF_WHOLE"
+	default:
+		return fmt.Sprintf("UNumberTrailingZeroDisplay(%d)", int32(e))
+	}
+}
 
 type UNumberUnitWidth int32
 
@@ -2296,6 +6694,31 @@ const (
 	UNUM_UNIT_WIDTH_COUNT     UNumberUnitWidth = 7
 )
 
+// String returns the UNumberUnitWidth constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumberUnitWidth) String() string {
+	switch e {
+	case UNUM_UNIT_WIDTH_NARROW:
+		return "UNUM_UNIT_WIDTH_NARROW"
+	case UNUM_UNIT_WIDTH_SHORT:
+		return "UNUM_UNIT_WIDTH_SHORT"
+	case UNUM_UNIT_WIDTH_FULL_NAME:
+		return "UNUM_UNIT_WIDTH_FULL_NAME"
+	case UNUM_UNIT_WIDTH_ISO_CODE:
+		return "UNUM_UNIT_WIDTH_ISO_CODE"
+	case UNUM_UNIT_WIDTH_FORMAL:
+		return "UNUM_UNIT_WIDTH_FORMAL"
+	case UNUM_UNIT_WIDTH_VARIANT:
+		return "UNUM_UNIT_WIDTH_VARIANT"
+	case UNUM_UNIT_WIDTH_HIDDEN:
+		return "UNUM_UNIT_WIDTH_HIDDEN"
+	case UNUM_UNIT_WIDTH_COUNT:
+		return "UNUM_UNIT_WIDTH_COUNT"
+	default:
+		return fmt.Sprintf("UNumberUnitWidth(%d)", int32(e))
+	}
+}
+
 type UNumericType int32
 
 const (
@@ -2305,12 +6728,42 @@ const (
 	U_NT_NUMERIC UNumericType = 3
 )
 
+// String returns the UNumericType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNumericType) String() string {
+	switch e {
+	case U_NT_NONE:
+		return "U_NT_NONE"
+	case U_NT_DECIMAL:
+		return "U_NT_DECIMAL"
+	case U_NT_DIGIT:
+		return "U_NT_DIGIT"
+	case U_NT_NUMERIC:
+		return "U_NT_NUMERIC"
+	default:
+		return fmt.Sprintf("UNumericType(%d)", int32(e))
+	}
+}
+
 type UPluralType int32
 
 const (
 	UPLURAL_TYPE_CARDINAL UPluralType = 0
 	UPLURAL_TYPE_ORDINAL  UPluralType = 1
 )
+
+// String returns the UPluralType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UPluralType) String() string {
+	switch e {
+	case UPLURAL_TYPE_CARDINAL:
+		return "UPLURAL_TYPE_CARDINAL"
+	case UPLURAL_TYPE_ORDINAL:
+		return "UPLURAL_TYPE_ORDINAL"
+	default:
+		return fmt.Sprintf("UPluralType(%d)", int32(e))
+	}
+}
 
 type UProperty int32
 
@@ -2429,12 +6882,246 @@ const (
 	UCHAR_INVALID_CODE                    UProperty = -1
 )
 
+// String returns the UProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UProperty) String() string {
+	switch e {
+	case UCHAR_ALPHABETIC:
+		return "UCHAR_ALPHABETIC"
+	case UCHAR_ASCII_HEX_DIGIT:
+		return "UCHAR_ASCII_HEX_DIGIT"
+	case UCHAR_BIDI_CONTROL:
+		return "UCHAR_BIDI_CONTROL"
+	case UCHAR_BIDI_MIRRORED:
+		return "UCHAR_BIDI_MIRRORED"
+	case UCHAR_DASH:
+		return "UCHAR_DASH"
+	case UCHAR_DEFAULT_IGNORABLE_CODE_POINT:
+		return "UCHAR_DEFAULT_IGNORABLE_CODE_POINT"
+	case UCHAR_DEPRECATED:
+		return "UCHAR_DEPRECATED"
+	case UCHAR_DIACRITIC:
+		return "UCHAR_DIACRITIC"
+	case UCHAR_EXTENDER:
+		return "UCHAR_EXTENDER"
+	case UCHAR_FULL_COMPOSITION_EXCLUSION:
+		return "UCHAR_FULL_COMPOSITION_EXCLUSION"
+	case UCHAR_GRAPHEME_BASE:
+		return "UCHAR_GRAPHEME_BASE"
+	case UCHAR_GRAPHEME_EXTEND:
+		return "UCHAR_GRAPHEME_EXTEND"
+	case UCHAR_GRAPHEME_LINK:
+		return "UCHAR_GRAPHEME_LINK"
+	case UCHAR_HEX_DIGIT:
+		return "UCHAR_HEX_DIGIT"
+	case UCHAR_HYPHEN:
+		return "UCHAR_HYPHEN"
+	case UCHAR_ID_CONTINUE:
+		return "UCHAR_ID_CONTINUE"
+	case UCHAR_ID_START:
+		return "UCHAR_ID_START"
+	case UCHAR_IDEOGRAPHIC:
+		return "UCHAR_IDEOGRAPHIC"
+	case UCHAR_IDS_BINARY_OPERATOR:
+		return "UCHAR_IDS_BINARY_OPERATOR"
+	case UCHAR_IDS_TRINARY_OPERATOR:
+		return "UCHAR_IDS_TRINARY_OPERATOR"
+	case UCHAR_JOIN_CONTROL:
+		return "UCHAR_JOIN_CONTROL"
+	case UCHAR_LOGICAL_ORDER_EXCEPTION:
+		return "UCHAR_LOGICAL_ORDER_EXCEPTION"
+	case UCHAR_LOWERCASE:
+		return "UCHAR_LOWERCASE"
+	case UCHAR_MATH:
+		return "UCHAR_MATH"
+	case UCHAR_NONCHARACTER_CODE_POINT:
+		return "UCHAR_NONCHARACTER_CODE_POINT"
+	case UCHAR_QUOTATION_MARK:
+		return "UCHAR_QUOTATION_MARK"
+	case UCHAR_RADICAL:
+		return "UCHAR_RADICAL"
+	case UCHAR_SOFT_DOTTED:
+		return "UCHAR_SOFT_DOTTED"
+	case UCHAR_TERMINAL_PUNCTUATION:
+		return "UCHAR_TERMINAL_PUNCTUATION"
+	case UCHAR_UNIFIED_IDEOGRAPH:
+		return "UCHAR_UNIFIED_IDEOGRAPH"
+	case UCHAR_UPPERCASE:
+		return "UCHAR_UPPERCASE"
+	case UCHAR_WHITE_SPACE:
+		return "UCHAR_WHITE_SPACE"
+	case UCHAR_XID_CONTINUE:
+		return "UCHAR_XID_CONTINUE"
+	case UCHAR_XID_START:
+		return "UCHAR_XID_START"
+	case UCHAR_CASE_SENSITIVE:
+		return "UCHAR_CASE_SENSITIVE"
+	case UCHAR_S_TERM:
+		return "UCHAR_S_TERM"
+	case UCHAR_VARIATION_SELECTOR:
+		return "UCHAR_VARIATION_SELECTOR"
+	case UCHAR_NFD_INERT:
+		return "UCHAR_NFD_INERT"
+	case UCHAR_NFKD_INERT:
+		return "UCHAR_NFKD_INERT"
+	case UCHAR_NFC_INERT:
+		return "UCHAR_NFC_INERT"
+	case UCHAR_NFKC_INERT:
+		return "UCHAR_NFKC_INERT"
+	case UCHAR_SEGMENT_STARTER:
+		return "UCHAR_SEGMENT_STARTER"
+	case UCHAR_PATTERN_SYNTAX:
+		return "UCHAR_PATTERN_SYNTAX"
+	case UCHAR_PATTERN_WHITE_SPACE:
+		return "UCHAR_PATTERN_WHITE_SPACE"
+	case UCHAR_POSIX_ALNUM:
+		return "UCHAR_POSIX_ALNUM"
+	case UCHAR_POSIX_BLANK:
+		return "UCHAR_POSIX_BLANK"
+	case UCHAR_POSIX_GRAPH:
+		return "UCHAR_POSIX_GRAPH"
+	case UCHAR_POSIX_PRINT:
+		return "UCHAR_POSIX_PRINT"
+	case UCHAR_POSIX_XDIGIT:
+		return "UCHAR_POSIX_XDIGIT"
+	case UCHAR_CASED:
+		return "UCHAR_CASED"
+	case UCHAR_CASE_IGNORABLE:
+		return "UCHAR_CASE_IGNORABLE"
+	case UCHAR_CHANGES_WHEN_LOWERCASED:
+		return "UCHAR_CHANGES_WHEN_LOWERCASED"
+	case UCHAR_CHANGES_WHEN_UPPERCASED:
+		return "UCHAR_CHANGES_WHEN_UPPERCASED"
+	case UCHAR_CHANGES_WHEN_TITLECASED:
+		return "UCHAR_CHANGES_WHEN_TITLECASED"
+	case UCHAR_CHANGES_WHEN_CASEFOLDED:
+		return "UCHAR_CHANGES_WHEN_CASEFOLDED"
+	case UCHAR_CHANGES_WHEN_CASEMAPPED:
+		return "UCHAR_CHANGES_WHEN_CASEMAPPED"
+	case UCHAR_CHANGES_WHEN_NFKC_CASEFOLDED:
+		return "UCHAR_CHANGES_WHEN_NFKC_CASEFOLDED"
+	case UCHAR_EMOJI:
+		return "UCHAR_EMOJI"
+	case UCHAR_EMOJI_PRESENTATION:
+		return "UCHAR_EMOJI_PRESENTATION"
+	case UCHAR_EMOJI_MODIFIER:
+		return "UCHAR_EMOJI_MODIFIER"
+	case UCHAR_EMOJI_MODIFIER_BASE:
+		return "UCHAR_EMOJI_MODIFIER_BASE"
+	case UCHAR_EMOJI_COMPONENT:
+		return "UCHAR_EMOJI_COMPONENT"
+	case UCHAR_REGIONAL_INDICATOR:
+		return "UCHAR_REGIONAL_INDICATOR"
+	case UCHAR_PREPENDED_CONCATENATION_MARK:
+		return "UCHAR_PREPENDED_CONCATENATION_MARK"
+	case UCHAR_EXTENDED_PICTOGRAPHIC:
+		return "UCHAR_EXTENDED_PICTOGRAPHIC"
+	case UCHAR_BIDI_CLASS:
+		return "UCHAR_BIDI_CLASS"
+	case UCHAR_BLOCK:
+		return "UCHAR_BLOCK"
+	case UCHAR_CANONICAL_COMBINING_CLASS:
+		return "UCHAR_CANONICAL_COMBINING_CLASS"
+	case UCHAR_DECOMPOSITION_TYPE:
+		return "UCHAR_DECOMPOSITION_TYPE"
+	case UCHAR_EAST_ASIAN_WIDTH:
+		return "UCHAR_EAST_ASIAN_WIDTH"
+	case UCHAR_GENERAL_CATEGORY:
+		return "UCHAR_GENERAL_CATEGORY"
+	case UCHAR_JOINING_GROUP:
+		return "UCHAR_JOINING_GROUP"
+	case UCHAR_JOINING_TYPE:
+		return "UCHAR_JOINING_TYPE"
+	case UCHAR_LINE_BREAK:
+		return "UCHAR_LINE_BREAK"
+	case UCHAR_NUMERIC_TYPE:
+		return "UCHAR_NUMERIC_TYPE"
+	case UCHAR_SCRIPT:
+		return "UCHAR_SCRIPT"
+	case UCHAR_HANGUL_SYLLABLE_TYPE:
+		return "UCHAR_HANGUL_SYLLABLE_TYPE"
+	case UCHAR_NFD_QUICK_CHECK:
+		return "UCHAR_NFD_QUICK_CHECK"
+	case UCHAR_NFKD_QUICK_CHECK:
+		return "UCHAR_NFKD_QUICK_CHECK"
+	case UCHAR_NFC_QUICK_CHECK:
+		return "UCHAR_NFC_QUICK_CHECK"
+	case UCHAR_NFKC_QUICK_CHECK:
+		return "UCHAR_NFKC_QUICK_CHECK"
+	case UCHAR_LEAD_CANONICAL_COMBINING_CLASS:
+		return "UCHAR_LEAD_CANONICAL_COMBINING_CLASS"
+	case UCHAR_TRAIL_CANONICAL_COMBINING_CLASS:
+		return "UCHAR_TRAIL_CANONICAL_COMBINING_CLASS"
+	case UCHAR_GRAPHEME_CLUSTER_BREAK:
+		return "UCHAR_GRAPHEME_CLUSTER_BREAK"
+	case UCHAR_SENTENCE_BREAK:
+		return "UCHAR_SENTENCE_BREAK"
+	case UCHAR_WORD_BREAK:
+		return "UCHAR_WORD_BREAK"
+	case UCHAR_BIDI_PAIRED_BRACKET_TYPE:
+		return "UCHAR_BIDI_PAIRED_BRACKET_TYPE"
+	case UCHAR_INDIC_POSITIONAL_CATEGORY:
+		return "UCHAR_INDIC_POSITIONAL_CATEGORY"
+	case UCHAR_INDIC_SYLLABIC_CATEGORY:
+		return "UCHAR_INDIC_SYLLABIC_CATEGORY"
+	case UCHAR_VERTICAL_ORIENTATION:
+		return "UCHAR_VERTICAL_ORIENTATION"
+	case UCHAR_GENERAL_CATEGORY_MASK:
+		return "UCHAR_GENERAL_CATEGORY_MASK"
+	case UCHAR_NUMERIC_VALUE:
+		return "UCHAR_NUMERIC_VALUE"
+	case UCHAR_AGE:
+		return "UCHAR_AGE"
+	case UCHAR_BIDI_MIRRORING_GLYPH:
+		return "UCHAR_BIDI_MIRRORING_GLYPH"
+	case UCHAR_CASE_FOLDING:
+		return "UCHAR_CASE_FOLDING"
+	case UCHAR_LOWERCASE_MAPPING:
+		return "UCHAR_LOWERCASE_MAPPING"
+	case UCHAR_NAME:
+		return "UCHAR_NAME"
+	case UCHAR_SIMPLE_CASE_FOLDING:
+		return "UCHAR_SIMPLE_CASE_FOLDING"
+	case UCHAR_SIMPLE_LOWERCASE_MAPPING:
+		return "UCHAR_SIMPLE_LOWERCASE_MAPPING"
+	case UCHAR_SIMPLE_TITLECASE_MAPPING:
+		return "UCHAR_SIMPLE_TITLECASE_MAPPING"
+	case UCHAR_SIMPLE_UPPERCASE_MAPPING:
+		return "UCHAR_SIMPLE_UPPERCASE_MAPPING"
+	case UCHAR_TITLECASE_MAPPING:
+		return "UCHAR_TITLECASE_MAPPING"
+	case UCHAR_UPPERCASE_MAPPING:
+		return "UCHAR_UPPERCASE_MAPPING"
+	case UCHAR_BIDI_PAIRED_BRACKET:
+		return "UCHAR_BIDI_PAIRED_BRACKET"
+	case UCHAR_SCRIPT_EXTENSIONS:
+		return "UCHAR_SCRIPT_EXTENSIONS"
+	case UCHAR_INVALID_CODE:
+		return "UCHAR_INVALID_CODE"
+	default:
+		return fmt.Sprintf("UProperty(%d)", int32(e))
+	}
+}
+
 type UPropertyNameChoice int32
 
 const (
 	U_SHORT_PROPERTY_NAME UPropertyNameChoice = 0
 	U_LONG_PROPERTY_NAME  UPropertyNameChoice = 1
 )
+
+// String returns the UPropertyNameChoice constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UPropertyNameChoice) String() string {
+	switch e {
+	case U_SHORT_PROPERTY_NAME:
+		return "U_SHORT_PROPERTY_NAME"
+	case U_LONG_PROPERTY_NAME:
+		return "U_LONG_PROPERTY_NAME"
+	default:
+		return fmt.Sprintf("UPropertyNameChoice(%d)", int32(e))
+	}
+}
 
 type URegexpFlag int32
 
@@ -2449,6 +7136,31 @@ const (
 	UREGEX_ERROR_ON_UNKNOWN_ESCAPES URegexpFlag = 512
 )
 
+// String returns the URegexpFlag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e URegexpFlag) String() string {
+	switch e {
+	case UREGEX_CASE_INSENSITIVE:
+		return "UREGEX_CASE_INSENSITIVE"
+	case UREGEX_COMMENTS:
+		return "UREGEX_COMMENTS"
+	case UREGEX_DOTALL:
+		return "UREGEX_DOTALL"
+	case UREGEX_LITERAL:
+		return "UREGEX_LITERAL"
+	case UREGEX_MULTILINE:
+		return "UREGEX_MULTILINE"
+	case UREGEX_UNIX_LINES:
+		return "UREGEX_UNIX_LINES"
+	case UREGEX_UWORD:
+		return "UREGEX_UWORD"
+	case UREGEX_ERROR_ON_UNKNOWN_ESCAPES:
+		return "UREGEX_ERROR_ON_UNKNOWN_ESCAPES"
+	default:
+		return fmt.Sprintf("URegexpFlag(%d)", int32(e))
+	}
+}
+
 type URegionType int32
 
 const (
@@ -2461,12 +7173,48 @@ const (
 	URGN_DEPRECATED   URegionType = 6
 )
 
+// String returns the URegionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e URegionType) String() string {
+	switch e {
+	case URGN_UNKNOWN:
+		return "URGN_UNKNOWN"
+	case URGN_TERRITORY:
+		return "URGN_TERRITORY"
+	case URGN_WORLD:
+		return "URGN_WORLD"
+	case URGN_CONTINENT:
+		return "URGN_CONTINENT"
+	case URGN_SUBCONTINENT:
+		return "URGN_SUBCONTINENT"
+	case URGN_GROUPING:
+		return "URGN_GROUPING"
+	case URGN_DEPRECATED:
+		return "URGN_DEPRECATED"
+	default:
+		return fmt.Sprintf("URegionType(%d)", int32(e))
+	}
+}
+
 type URelativeDateTimeFormatterField int32
 
 const (
 	UDAT_REL_LITERAL_FIELD URelativeDateTimeFormatterField = 0
 	UDAT_REL_NUMERIC_FIELD URelativeDateTimeFormatterField = 1
 )
+
+// String returns the URelativeDateTimeFormatterField constant's name, or its numeric form when
+// the value is not a known constant.
+func (e URelativeDateTimeFormatterField) String() string {
+	switch e {
+	case UDAT_REL_LITERAL_FIELD:
+		return "UDAT_REL_LITERAL_FIELD"
+	case UDAT_REL_NUMERIC_FIELD:
+		return "UDAT_REL_NUMERIC_FIELD"
+	default:
+		return fmt.Sprintf("URelativeDateTimeFormatterField(%d)", int32(e))
+	}
+}
 
 type URelativeDateTimeUnit int32
 
@@ -2488,6 +7236,45 @@ const (
 	UDAT_REL_UNIT_SATURDAY  URelativeDateTimeUnit = 14
 )
 
+// String returns the URelativeDateTimeUnit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e URelativeDateTimeUnit) String() string {
+	switch e {
+	case UDAT_REL_UNIT_YEAR:
+		return "UDAT_REL_UNIT_YEAR"
+	case UDAT_REL_UNIT_QUARTER:
+		return "UDAT_REL_UNIT_QUARTER"
+	case UDAT_REL_UNIT_MONTH:
+		return "UDAT_REL_UNIT_MONTH"
+	case UDAT_REL_UNIT_WEEK:
+		return "UDAT_REL_UNIT_WEEK"
+	case UDAT_REL_UNIT_DAY:
+		return "UDAT_REL_UNIT_DAY"
+	case UDAT_REL_UNIT_HOUR:
+		return "UDAT_REL_UNIT_HOUR"
+	case UDAT_REL_UNIT_MINUTE:
+		return "UDAT_REL_UNIT_MINUTE"
+	case UDAT_REL_UNIT_SECOND:
+		return "UDAT_REL_UNIT_SECOND"
+	case UDAT_REL_UNIT_SUNDAY:
+		return "UDAT_REL_UNIT_SUNDAY"
+	case UDAT_REL_UNIT_MONDAY:
+		return "UDAT_REL_UNIT_MONDAY"
+	case UDAT_REL_UNIT_TUESDAY:
+		return "UDAT_REL_UNIT_TUESDAY"
+	case UDAT_REL_UNIT_WEDNESDAY:
+		return "UDAT_REL_UNIT_WEDNESDAY"
+	case UDAT_REL_UNIT_THURSDAY:
+		return "UDAT_REL_UNIT_THURSDAY"
+	case UDAT_REL_UNIT_FRIDAY:
+		return "UDAT_REL_UNIT_FRIDAY"
+	case UDAT_REL_UNIT_SATURDAY:
+		return "UDAT_REL_UNIT_SATURDAY"
+	default:
+		return fmt.Sprintf("URelativeDateTimeUnit(%d)", int32(e))
+	}
+}
+
 type UResType int32
 
 const (
@@ -2501,6 +7288,31 @@ const (
 	URES_INT_VECTOR UResType = 14
 )
 
+// String returns the UResType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UResType) String() string {
+	switch e {
+	case URES_NONE:
+		return "URES_NONE"
+	case URES_STRING:
+		return "URES_STRING"
+	case URES_BINARY:
+		return "URES_BINARY"
+	case URES_TABLE:
+		return "URES_TABLE"
+	case URES_ALIAS:
+		return "URES_ALIAS"
+	case URES_INT:
+		return "URES_INT"
+	case URES_ARRAY:
+		return "URES_ARRAY"
+	case URES_INT_VECTOR:
+		return "URES_INT_VECTOR"
+	default:
+		return fmt.Sprintf("UResType(%d)", int32(e))
+	}
+}
+
 type URestrictionLevel int32
 
 const (
@@ -2512,6 +7324,29 @@ const (
 	USPOOF_UNRESTRICTIVE             URestrictionLevel = 1610612736
 	USPOOF_RESTRICTION_LEVEL_MASK    URestrictionLevel = 2130706432
 )
+
+// String returns the URestrictionLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e URestrictionLevel) String() string {
+	switch e {
+	case USPOOF_ASCII:
+		return "USPOOF_ASCII"
+	case USPOOF_SINGLE_SCRIPT_RESTRICTIVE:
+		return "USPOOF_SINGLE_SCRIPT_RESTRICTIVE"
+	case USPOOF_HIGHLY_RESTRICTIVE:
+		return "USPOOF_HIGHLY_RESTRICTIVE"
+	case USPOOF_MODERATELY_RESTRICTIVE:
+		return "USPOOF_MODERATELY_RESTRICTIVE"
+	case USPOOF_MINIMALLY_RESTRICTIVE:
+		return "USPOOF_MINIMALLY_RESTRICTIVE"
+	case USPOOF_UNRESTRICTIVE:
+		return "USPOOF_UNRESTRICTIVE"
+	case USPOOF_RESTRICTION_LEVEL_MASK:
+		return "USPOOF_RESTRICTION_LEVEL_MASK"
+	default:
+		return fmt.Sprintf("URestrictionLevel(%d)", int32(e))
+	}
+}
 
 type UScriptCode int32
 
@@ -2717,6 +7552,403 @@ const (
 	USCRIPT_YEZIDI                       UScriptCode = 192
 )
 
+// String returns the UScriptCode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UScriptCode) String() string {
+	switch e {
+	case USCRIPT_INVALID_CODE:
+		return "USCRIPT_INVALID_CODE"
+	case USCRIPT_COMMON:
+		return "USCRIPT_COMMON"
+	case USCRIPT_INHERITED:
+		return "USCRIPT_INHERITED"
+	case USCRIPT_ARABIC:
+		return "USCRIPT_ARABIC"
+	case USCRIPT_ARMENIAN:
+		return "USCRIPT_ARMENIAN"
+	case USCRIPT_BENGALI:
+		return "USCRIPT_BENGALI"
+	case USCRIPT_BOPOMOFO:
+		return "USCRIPT_BOPOMOFO"
+	case USCRIPT_CHEROKEE:
+		return "USCRIPT_CHEROKEE"
+	case USCRIPT_COPTIC:
+		return "USCRIPT_COPTIC"
+	case USCRIPT_CYRILLIC:
+		return "USCRIPT_CYRILLIC"
+	case USCRIPT_DESERET:
+		return "USCRIPT_DESERET"
+	case USCRIPT_DEVANAGARI:
+		return "USCRIPT_DEVANAGARI"
+	case USCRIPT_ETHIOPIC:
+		return "USCRIPT_ETHIOPIC"
+	case USCRIPT_GEORGIAN:
+		return "USCRIPT_GEORGIAN"
+	case USCRIPT_GOTHIC:
+		return "USCRIPT_GOTHIC"
+	case USCRIPT_GREEK:
+		return "USCRIPT_GREEK"
+	case USCRIPT_GUJARATI:
+		return "USCRIPT_GUJARATI"
+	case USCRIPT_GURMUKHI:
+		return "USCRIPT_GURMUKHI"
+	case USCRIPT_HAN:
+		return "USCRIPT_HAN"
+	case USCRIPT_HANGUL:
+		return "USCRIPT_HANGUL"
+	case USCRIPT_HEBREW:
+		return "USCRIPT_HEBREW"
+	case USCRIPT_HIRAGANA:
+		return "USCRIPT_HIRAGANA"
+	case USCRIPT_KANNADA:
+		return "USCRIPT_KANNADA"
+	case USCRIPT_KATAKANA:
+		return "USCRIPT_KATAKANA"
+	case USCRIPT_KHMER:
+		return "USCRIPT_KHMER"
+	case USCRIPT_LAO:
+		return "USCRIPT_LAO"
+	case USCRIPT_LATIN:
+		return "USCRIPT_LATIN"
+	case USCRIPT_MALAYALAM:
+		return "USCRIPT_MALAYALAM"
+	case USCRIPT_MONGOLIAN:
+		return "USCRIPT_MONGOLIAN"
+	case USCRIPT_MYANMAR:
+		return "USCRIPT_MYANMAR"
+	case USCRIPT_OGHAM:
+		return "USCRIPT_OGHAM"
+	case USCRIPT_OLD_ITALIC:
+		return "USCRIPT_OLD_ITALIC"
+	case USCRIPT_ORIYA:
+		return "USCRIPT_ORIYA"
+	case USCRIPT_RUNIC:
+		return "USCRIPT_RUNIC"
+	case USCRIPT_SINHALA:
+		return "USCRIPT_SINHALA"
+	case USCRIPT_SYRIAC:
+		return "USCRIPT_SYRIAC"
+	case USCRIPT_TAMIL:
+		return "USCRIPT_TAMIL"
+	case USCRIPT_TELUGU:
+		return "USCRIPT_TELUGU"
+	case USCRIPT_THAANA:
+		return "USCRIPT_THAANA"
+	case USCRIPT_THAI:
+		return "USCRIPT_THAI"
+	case USCRIPT_TIBETAN:
+		return "USCRIPT_TIBETAN"
+	case USCRIPT_CANADIAN_ABORIGINAL:
+		return "USCRIPT_CANADIAN_ABORIGINAL"
+	case USCRIPT_YI:
+		return "USCRIPT_YI"
+	case USCRIPT_TAGALOG:
+		return "USCRIPT_TAGALOG"
+	case USCRIPT_HANUNOO:
+		return "USCRIPT_HANUNOO"
+	case USCRIPT_BUHID:
+		return "USCRIPT_BUHID"
+	case USCRIPT_TAGBANWA:
+		return "USCRIPT_TAGBANWA"
+	case USCRIPT_BRAILLE:
+		return "USCRIPT_BRAILLE"
+	case USCRIPT_CYPRIOT:
+		return "USCRIPT_CYPRIOT"
+	case USCRIPT_LIMBU:
+		return "USCRIPT_LIMBU"
+	case USCRIPT_LINEAR_B:
+		return "USCRIPT_LINEAR_B"
+	case USCRIPT_OSMANYA:
+		return "USCRIPT_OSMANYA"
+	case USCRIPT_SHAVIAN:
+		return "USCRIPT_SHAVIAN"
+	case USCRIPT_TAI_LE:
+		return "USCRIPT_TAI_LE"
+	case USCRIPT_UGARITIC:
+		return "USCRIPT_UGARITIC"
+	case USCRIPT_KATAKANA_OR_HIRAGANA:
+		return "USCRIPT_KATAKANA_OR_HIRAGANA"
+	case USCRIPT_BUGINESE:
+		return "USCRIPT_BUGINESE"
+	case USCRIPT_GLAGOLITIC:
+		return "USCRIPT_GLAGOLITIC"
+	case USCRIPT_KHAROSHTHI:
+		return "USCRIPT_KHAROSHTHI"
+	case USCRIPT_SYLOTI_NAGRI:
+		return "USCRIPT_SYLOTI_NAGRI"
+	case USCRIPT_NEW_TAI_LUE:
+		return "USCRIPT_NEW_TAI_LUE"
+	case USCRIPT_TIFINAGH:
+		return "USCRIPT_TIFINAGH"
+	case USCRIPT_OLD_PERSIAN:
+		return "USCRIPT_OLD_PERSIAN"
+	case USCRIPT_BALINESE:
+		return "USCRIPT_BALINESE"
+	case USCRIPT_BATAK:
+		return "USCRIPT_BATAK"
+	case USCRIPT_BLISSYMBOLS:
+		return "USCRIPT_BLISSYMBOLS"
+	case USCRIPT_BRAHMI:
+		return "USCRIPT_BRAHMI"
+	case USCRIPT_CHAM:
+		return "USCRIPT_CHAM"
+	case USCRIPT_CIRTH:
+		return "USCRIPT_CIRTH"
+	case USCRIPT_OLD_CHURCH_SLAVONIC_CYRILLIC:
+		return "USCRIPT_OLD_CHURCH_SLAVONIC_CYRILLIC"
+	case USCRIPT_DEMOTIC_EGYPTIAN:
+		return "USCRIPT_DEMOTIC_EGYPTIAN"
+	case USCRIPT_HIERATIC_EGYPTIAN:
+		return "USCRIPT_HIERATIC_EGYPTIAN"
+	case USCRIPT_EGYPTIAN_HIEROGLYPHS:
+		return "USCRIPT_EGYPTIAN_HIEROGLYPHS"
+	case USCRIPT_KHUTSURI:
+		return "USCRIPT_KHUTSURI"
+	case USCRIPT_SIMPLIFIED_HAN:
+		return "USCRIPT_SIMPLIFIED_HAN"
+	case USCRIPT_TRADITIONAL_HAN:
+		return "USCRIPT_TRADITIONAL_HAN"
+	case USCRIPT_PAHAWH_HMONG:
+		return "USCRIPT_PAHAWH_HMONG"
+	case USCRIPT_OLD_HUNGARIAN:
+		return "USCRIPT_OLD_HUNGARIAN"
+	case USCRIPT_HARAPPAN_INDUS:
+		return "USCRIPT_HARAPPAN_INDUS"
+	case USCRIPT_JAVANESE:
+		return "USCRIPT_JAVANESE"
+	case USCRIPT_KAYAH_LI:
+		return "USCRIPT_KAYAH_LI"
+	case USCRIPT_LATIN_FRAKTUR:
+		return "USCRIPT_LATIN_FRAKTUR"
+	case USCRIPT_LATIN_GAELIC:
+		return "USCRIPT_LATIN_GAELIC"
+	case USCRIPT_LEPCHA:
+		return "USCRIPT_LEPCHA"
+	case USCRIPT_LINEAR_A:
+		return "USCRIPT_LINEAR_A"
+	case USCRIPT_MANDAIC:
+		return "USCRIPT_MANDAIC"
+	case USCRIPT_MAYAN_HIEROGLYPHS:
+		return "USCRIPT_MAYAN_HIEROGLYPHS"
+	case USCRIPT_MEROITIC_HIEROGLYPHS:
+		return "USCRIPT_MEROITIC_HIEROGLYPHS"
+	case USCRIPT_NKO:
+		return "USCRIPT_NKO"
+	case USCRIPT_ORKHON:
+		return "USCRIPT_ORKHON"
+	case USCRIPT_OLD_PERMIC:
+		return "USCRIPT_OLD_PERMIC"
+	case USCRIPT_PHAGS_PA:
+		return "USCRIPT_PHAGS_PA"
+	case USCRIPT_PHOENICIAN:
+		return "USCRIPT_PHOENICIAN"
+	case USCRIPT_MIAO:
+		return "USCRIPT_MIAO"
+	case USCRIPT_RONGORONGO:
+		return "USCRIPT_RONGORONGO"
+	case USCRIPT_SARATI:
+		return "USCRIPT_SARATI"
+	case USCRIPT_ESTRANGELO_SYRIAC:
+		return "USCRIPT_ESTRANGELO_SYRIAC"
+	case USCRIPT_WESTERN_SYRIAC:
+		return "USCRIPT_WESTERN_SYRIAC"
+	case USCRIPT_EASTERN_SYRIAC:
+		return "USCRIPT_EASTERN_SYRIAC"
+	case USCRIPT_TENGWAR:
+		return "USCRIPT_TENGWAR"
+	case USCRIPT_VAI:
+		return "USCRIPT_VAI"
+	case USCRIPT_VISIBLE_SPEECH:
+		return "USCRIPT_VISIBLE_SPEECH"
+	case USCRIPT_CUNEIFORM:
+		return "USCRIPT_CUNEIFORM"
+	case USCRIPT_UNWRITTEN_LANGUAGES:
+		return "USCRIPT_UNWRITTEN_LANGUAGES"
+	case USCRIPT_UNKNOWN:
+		return "USCRIPT_UNKNOWN"
+	case USCRIPT_CARIAN:
+		return "USCRIPT_CARIAN"
+	case USCRIPT_JAPANESE:
+		return "USCRIPT_JAPANESE"
+	case USCRIPT_LANNA:
+		return "USCRIPT_LANNA"
+	case USCRIPT_LYCIAN:
+		return "USCRIPT_LYCIAN"
+	case USCRIPT_LYDIAN:
+		return "USCRIPT_LYDIAN"
+	case USCRIPT_OL_CHIKI:
+		return "USCRIPT_OL_CHIKI"
+	case USCRIPT_REJANG:
+		return "USCRIPT_REJANG"
+	case USCRIPT_SAURASHTRA:
+		return "USCRIPT_SAURASHTRA"
+	case USCRIPT_SIGN_WRITING:
+		return "USCRIPT_SIGN_WRITING"
+	case USCRIPT_SUNDANESE:
+		return "USCRIPT_SUNDANESE"
+	case USCRIPT_MOON:
+		return "USCRIPT_MOON"
+	case USCRIPT_MEITEI_MAYEK:
+		return "USCRIPT_MEITEI_MAYEK"
+	case USCRIPT_IMPERIAL_ARAMAIC:
+		return "USCRIPT_IMPERIAL_ARAMAIC"
+	case USCRIPT_AVESTAN:
+		return "USCRIPT_AVESTAN"
+	case USCRIPT_CHAKMA:
+		return "USCRIPT_CHAKMA"
+	case USCRIPT_KOREAN:
+		return "USCRIPT_KOREAN"
+	case USCRIPT_KAITHI:
+		return "USCRIPT_KAITHI"
+	case USCRIPT_MANICHAEAN:
+		return "USCRIPT_MANICHAEAN"
+	case USCRIPT_INSCRIPTIONAL_PAHLAVI:
+		return "USCRIPT_INSCRIPTIONAL_PAHLAVI"
+	case USCRIPT_PSALTER_PAHLAVI:
+		return "USCRIPT_PSALTER_PAHLAVI"
+	case USCRIPT_BOOK_PAHLAVI:
+		return "USCRIPT_BOOK_PAHLAVI"
+	case USCRIPT_INSCRIPTIONAL_PARTHIAN:
+		return "USCRIPT_INSCRIPTIONAL_PARTHIAN"
+	case USCRIPT_SAMARITAN:
+		return "USCRIPT_SAMARITAN"
+	case USCRIPT_TAI_VIET:
+		return "USCRIPT_TAI_VIET"
+	case USCRIPT_MATHEMATICAL_NOTATION:
+		return "USCRIPT_MATHEMATICAL_NOTATION"
+	case USCRIPT_SYMBOLS:
+		return "USCRIPT_SYMBOLS"
+	case USCRIPT_BAMUM:
+		return "USCRIPT_BAMUM"
+	case USCRIPT_LISU:
+		return "USCRIPT_LISU"
+	case USCRIPT_NAKHI_GEBA:
+		return "USCRIPT_NAKHI_GEBA"
+	case USCRIPT_OLD_SOUTH_ARABIAN:
+		return "USCRIPT_OLD_SOUTH_ARABIAN"
+	case USCRIPT_BASSA_VAH:
+		return "USCRIPT_BASSA_VAH"
+	case USCRIPT_DUPLOYAN:
+		return "USCRIPT_DUPLOYAN"
+	case USCRIPT_ELBASAN:
+		return "USCRIPT_ELBASAN"
+	case USCRIPT_GRANTHA:
+		return "USCRIPT_GRANTHA"
+	case USCRIPT_KPELLE:
+		return "USCRIPT_KPELLE"
+	case USCRIPT_LOMA:
+		return "USCRIPT_LOMA"
+	case USCRIPT_MENDE:
+		return "USCRIPT_MENDE"
+	case USCRIPT_MEROITIC_CURSIVE:
+		return "USCRIPT_MEROITIC_CURSIVE"
+	case USCRIPT_OLD_NORTH_ARABIAN:
+		return "USCRIPT_OLD_NORTH_ARABIAN"
+	case USCRIPT_NABATAEAN:
+		return "USCRIPT_NABATAEAN"
+	case USCRIPT_PALMYRENE:
+		return "USCRIPT_PALMYRENE"
+	case USCRIPT_KHUDAWADI:
+		return "USCRIPT_KHUDAWADI"
+	case USCRIPT_WARANG_CITI:
+		return "USCRIPT_WARANG_CITI"
+	case USCRIPT_AFAKA:
+		return "USCRIPT_AFAKA"
+	case USCRIPT_JURCHEN:
+		return "USCRIPT_JURCHEN"
+	case USCRIPT_MRO:
+		return "USCRIPT_MRO"
+	case USCRIPT_NUSHU:
+		return "USCRIPT_NUSHU"
+	case USCRIPT_SHARADA:
+		return "USCRIPT_SHARADA"
+	case USCRIPT_SORA_SOMPENG:
+		return "USCRIPT_SORA_SOMPENG"
+	case USCRIPT_TAKRI:
+		return "USCRIPT_TAKRI"
+	case USCRIPT_TANGUT:
+		return "USCRIPT_TANGUT"
+	case USCRIPT_WOLEAI:
+		return "USCRIPT_WOLEAI"
+	case USCRIPT_ANATOLIAN_HIEROGLYPHS:
+		return "USCRIPT_ANATOLIAN_HIEROGLYPHS"
+	case USCRIPT_KHOJKI:
+		return "USCRIPT_KHOJKI"
+	case USCRIPT_TIRHUTA:
+		return "USCRIPT_TIRHUTA"
+	case USCRIPT_CAUCASIAN_ALBANIAN:
+		return "USCRIPT_CAUCASIAN_ALBANIAN"
+	case USCRIPT_MAHAJANI:
+		return "USCRIPT_MAHAJANI"
+	case USCRIPT_AHOM:
+		return "USCRIPT_AHOM"
+	case USCRIPT_HATRAN:
+		return "USCRIPT_HATRAN"
+	case USCRIPT_MODI:
+		return "USCRIPT_MODI"
+	case USCRIPT_MULTANI:
+		return "USCRIPT_MULTANI"
+	case USCRIPT_PAU_CIN_HAU:
+		return "USCRIPT_PAU_CIN_HAU"
+	case USCRIPT_SIDDHAM:
+		return "USCRIPT_SIDDHAM"
+	case USCRIPT_ADLAM:
+		return "USCRIPT_ADLAM"
+	case USCRIPT_BHAIKSUKI:
+		return "USCRIPT_BHAIKSUKI"
+	case USCRIPT_MARCHEN:
+		return "USCRIPT_MARCHEN"
+	case USCRIPT_NEWA:
+		return "USCRIPT_NEWA"
+	case USCRIPT_OSAGE:
+		return "USCRIPT_OSAGE"
+	case USCRIPT_HAN_WITH_BOPOMOFO:
+		return "USCRIPT_HAN_WITH_BOPOMOFO"
+	case USCRIPT_JAMO:
+		return "USCRIPT_JAMO"
+	case USCRIPT_SYMBOLS_EMOJI:
+		return "USCRIPT_SYMBOLS_EMOJI"
+	case USCRIPT_MASARAM_GONDI:
+		return "USCRIPT_MASARAM_GONDI"
+	case USCRIPT_SOYOMBO:
+		return "USCRIPT_SOYOMBO"
+	case USCRIPT_ZANABAZAR_SQUARE:
+		return "USCRIPT_ZANABAZAR_SQUARE"
+	case USCRIPT_DOGRA:
+		return "USCRIPT_DOGRA"
+	case USCRIPT_GUNJALA_GONDI:
+		return "USCRIPT_GUNJALA_GONDI"
+	case USCRIPT_MAKASAR:
+		return "USCRIPT_MAKASAR"
+	case USCRIPT_MEDEFAIDRIN:
+		return "USCRIPT_MEDEFAIDRIN"
+	case USCRIPT_HANIFI_ROHINGYA:
+		return "USCRIPT_HANIFI_ROHINGYA"
+	case USCRIPT_SOGDIAN:
+		return "USCRIPT_SOGDIAN"
+	case USCRIPT_OLD_SOGDIAN:
+		return "USCRIPT_OLD_SOGDIAN"
+	case USCRIPT_ELYMAIC:
+		return "USCRIPT_ELYMAIC"
+	case USCRIPT_NYIAKENG_PUACHUE_HMONG:
+		return "USCRIPT_NYIAKENG_PUACHUE_HMONG"
+	case USCRIPT_NANDINAGARI:
+		return "USCRIPT_NANDINAGARI"
+	case USCRIPT_WANCHO:
+		return "USCRIPT_WANCHO"
+	case USCRIPT_CHORASMIAN:
+		return "USCRIPT_CHORASMIAN"
+	case USCRIPT_DIVES_AKURU:
+		return "USCRIPT_DIVES_AKURU"
+	case USCRIPT_KHITAN_SMALL_SCRIPT:
+		return "USCRIPT_KHITAN_SMALL_SCRIPT"
+	case USCRIPT_YEZIDI:
+		return "USCRIPT_YEZIDI"
+	default:
+		return fmt.Sprintf("UScriptCode(%d)", int32(e))
+	}
+}
+
 type UScriptUsage int32
 
 const (
@@ -2728,12 +7960,46 @@ const (
 	USCRIPT_USAGE_RECOMMENDED  UScriptUsage = 5
 )
 
+// String returns the UScriptUsage constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UScriptUsage) String() string {
+	switch e {
+	case USCRIPT_USAGE_NOT_ENCODED:
+		return "USCRIPT_USAGE_NOT_ENCODED"
+	case USCRIPT_USAGE_UNKNOWN:
+		return "USCRIPT_USAGE_UNKNOWN"
+	case USCRIPT_USAGE_EXCLUDED:
+		return "USCRIPT_USAGE_EXCLUDED"
+	case USCRIPT_USAGE_LIMITED_USE:
+		return "USCRIPT_USAGE_LIMITED_USE"
+	case USCRIPT_USAGE_ASPIRATIONAL:
+		return "USCRIPT_USAGE_ASPIRATIONAL"
+	case USCRIPT_USAGE_RECOMMENDED:
+		return "USCRIPT_USAGE_RECOMMENDED"
+	default:
+		return fmt.Sprintf("UScriptUsage(%d)", int32(e))
+	}
+}
+
 type USearchAttribute int32
 
 const (
 	USEARCH_OVERLAP            USearchAttribute = 0
 	USEARCH_ELEMENT_COMPARISON USearchAttribute = 2
 )
+
+// String returns the USearchAttribute constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USearchAttribute) String() string {
+	switch e {
+	case USEARCH_OVERLAP:
+		return "USEARCH_OVERLAP"
+	case USEARCH_ELEMENT_COMPARISON:
+		return "USEARCH_ELEMENT_COMPARISON"
+	default:
+		return fmt.Sprintf("USearchAttribute(%d)", int32(e))
+	}
+}
 
 type USearchAttributeValue int32
 
@@ -2745,6 +8011,27 @@ const (
 	USEARCH_PATTERN_BASE_WEIGHT_IS_WILDCARD USearchAttributeValue = 3
 	USEARCH_ANY_BASE_WEIGHT_IS_WILDCARD     USearchAttributeValue = 4
 )
+
+// String returns the USearchAttributeValue constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USearchAttributeValue) String() string {
+	switch e {
+	case USEARCH_DEFAULT:
+		return "USEARCH_DEFAULT"
+	case USEARCH_OFF:
+		return "USEARCH_OFF"
+	case USEARCH_ON:
+		return "USEARCH_ON"
+	case USEARCH_STANDARD_ELEMENT_COMPARISON:
+		return "USEARCH_STANDARD_ELEMENT_COMPARISON"
+	case USEARCH_PATTERN_BASE_WEIGHT_IS_WILDCARD:
+		return "USEARCH_PATTERN_BASE_WEIGHT_IS_WILDCARD"
+	case USEARCH_ANY_BASE_WEIGHT_IS_WILDCARD:
+		return "USEARCH_ANY_BASE_WEIGHT_IS_WILDCARD"
+	default:
+		return fmt.Sprintf("USearchAttributeValue(%d)", int32(e))
+	}
+}
 
 type USentenceBreak int32
 
@@ -2766,6 +8053,45 @@ const (
 	U_SB_SCONTINUE USentenceBreak = 14
 )
 
+// String returns the USentenceBreak constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USentenceBreak) String() string {
+	switch e {
+	case U_SB_OTHER:
+		return "U_SB_OTHER"
+	case U_SB_ATERM:
+		return "U_SB_ATERM"
+	case U_SB_CLOSE:
+		return "U_SB_CLOSE"
+	case U_SB_FORMAT:
+		return "U_SB_FORMAT"
+	case U_SB_LOWER:
+		return "U_SB_LOWER"
+	case U_SB_NUMERIC:
+		return "U_SB_NUMERIC"
+	case U_SB_OLETTER:
+		return "U_SB_OLETTER"
+	case U_SB_SEP:
+		return "U_SB_SEP"
+	case U_SB_SP:
+		return "U_SB_SP"
+	case U_SB_STERM:
+		return "U_SB_STERM"
+	case U_SB_UPPER:
+		return "U_SB_UPPER"
+	case U_SB_CR:
+		return "U_SB_CR"
+	case U_SB_EXTEND:
+		return "U_SB_EXTEND"
+	case U_SB_LF:
+		return "U_SB_LF"
+	case U_SB_SCONTINUE:
+		return "U_SB_SCONTINUE"
+	default:
+		return fmt.Sprintf("USentenceBreak(%d)", int32(e))
+	}
+}
+
 type USentenceBreakTag int32
 
 const (
@@ -2775,6 +8101,21 @@ const (
 	UBRK_SENTENCE_SEP_LIMIT  USentenceBreakTag = 200
 )
 
+// String returns the USentenceBreakTag constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USentenceBreakTag) String() string {
+	switch e {
+	case UBRK_SENTENCE_TERM:
+		return "UBRK_SENTENCE_TERM"
+	case UBRK_SENTENCE_TERM_LIMIT:
+		return "UBRK_SENTENCE_TERM_LIMIT"
+	case UBRK_SENTENCE_SEP_LIMIT:
+		return "UBRK_SENTENCE_SEP_LIMIT"
+	default:
+		return fmt.Sprintf("USentenceBreakTag(%d)", int32(e))
+	}
+}
+
 type USetSpanCondition int32
 
 const (
@@ -2782,6 +8123,21 @@ const (
 	USET_SPAN_CONTAINED     USetSpanCondition = 1
 	USET_SPAN_SIMPLE        USetSpanCondition = 2
 )
+
+// String returns the USetSpanCondition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USetSpanCondition) String() string {
+	switch e {
+	case USET_SPAN_NOT_CONTAINED:
+		return "USET_SPAN_NOT_CONTAINED"
+	case USET_SPAN_CONTAINED:
+		return "USET_SPAN_CONTAINED"
+	case USET_SPAN_SIMPLE:
+		return "USET_SPAN_SIMPLE"
+	default:
+		return fmt.Sprintf("USetSpanCondition(%d)", int32(e))
+	}
+}
 
 type USpoofChecks int32
 
@@ -2798,6 +8154,37 @@ const (
 	USPOOF_ALL_CHECKS               USpoofChecks = 65535
 	USPOOF_AUX_INFO                 USpoofChecks = 1073741824
 )
+
+// String returns the USpoofChecks constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USpoofChecks) String() string {
+	switch e {
+	case USPOOF_SINGLE_SCRIPT_CONFUSABLE:
+		return "USPOOF_SINGLE_SCRIPT_CONFUSABLE"
+	case USPOOF_MIXED_SCRIPT_CONFUSABLE:
+		return "USPOOF_MIXED_SCRIPT_CONFUSABLE"
+	case USPOOF_WHOLE_SCRIPT_CONFUSABLE:
+		return "USPOOF_WHOLE_SCRIPT_CONFUSABLE"
+	case USPOOF_CONFUSABLE:
+		return "USPOOF_CONFUSABLE"
+	case USPOOF_RESTRICTION_LEVEL:
+		return "USPOOF_RESTRICTION_LEVEL"
+	case USPOOF_INVISIBLE:
+		return "USPOOF_INVISIBLE"
+	case USPOOF_CHAR_LIMIT:
+		return "USPOOF_CHAR_LIMIT"
+	case USPOOF_MIXED_NUMBERS:
+		return "USPOOF_MIXED_NUMBERS"
+	case USPOOF_HIDDEN_OVERLAY:
+		return "USPOOF_HIDDEN_OVERLAY"
+	case USPOOF_ALL_CHECKS:
+		return "USPOOF_ALL_CHECKS"
+	case USPOOF_AUX_INFO:
+		return "USPOOF_AUX_INFO"
+	default:
+		return fmt.Sprintf("USpoofChecks(%d)", int32(e))
+	}
+}
 
 type UStringPrepProfileType int32
 
@@ -2818,12 +8205,62 @@ const (
 	USPREP_RFC4518_LDAP_CI                UStringPrepProfileType = 13
 )
 
+// String returns the UStringPrepProfileType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UStringPrepProfileType) String() string {
+	switch e {
+	case USPREP_RFC3491_NAMEPREP:
+		return "USPREP_RFC3491_NAMEPREP"
+	case USPREP_RFC3530_NFS4_CS_PREP:
+		return "USPREP_RFC3530_NFS4_CS_PREP"
+	case USPREP_RFC3530_NFS4_CS_PREP_CI:
+		return "USPREP_RFC3530_NFS4_CS_PREP_CI"
+	case USPREP_RFC3530_NFS4_CIS_PREP:
+		return "USPREP_RFC3530_NFS4_CIS_PREP"
+	case USPREP_RFC3530_NFS4_MIXED_PREP_PREFIX:
+		return "USPREP_RFC3530_NFS4_MIXED_PREP_PREFIX"
+	case USPREP_RFC3530_NFS4_MIXED_PREP_SUFFIX:
+		return "USPREP_RFC3530_NFS4_MIXED_PREP_SUFFIX"
+	case USPREP_RFC3722_ISCSI:
+		return "USPREP_RFC3722_ISCSI"
+	case USPREP_RFC3920_NODEPREP:
+		return "USPREP_RFC3920_NODEPREP"
+	case USPREP_RFC3920_RESOURCEPREP:
+		return "USPREP_RFC3920_RESOURCEPREP"
+	case USPREP_RFC4011_MIB:
+		return "USPREP_RFC4011_MIB"
+	case USPREP_RFC4013_SASLPREP:
+		return "USPREP_RFC4013_SASLPREP"
+	case USPREP_RFC4505_TRACE:
+		return "USPREP_RFC4505_TRACE"
+	case USPREP_RFC4518_LDAP:
+		return "USPREP_RFC4518_LDAP"
+	case USPREP_RFC4518_LDAP_CI:
+		return "USPREP_RFC4518_LDAP_CI"
+	default:
+		return fmt.Sprintf("UStringPrepProfileType(%d)", int32(e))
+	}
+}
+
 type UStringTrieBuildOption int32
 
 const (
 	USTRINGTRIE_BUILD_FAST  UStringTrieBuildOption = 0
 	USTRINGTRIE_BUILD_SMALL UStringTrieBuildOption = 1
 )
+
+// String returns the UStringTrieBuildOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UStringTrieBuildOption) String() string {
+	switch e {
+	case USTRINGTRIE_BUILD_FAST:
+		return "USTRINGTRIE_BUILD_FAST"
+	case USTRINGTRIE_BUILD_SMALL:
+		return "USTRINGTRIE_BUILD_SMALL"
+	default:
+		return fmt.Sprintf("UStringTrieBuildOption(%d)", int32(e))
+	}
+}
 
 type UStringTrieResult int32
 
@@ -2834,6 +8271,23 @@ const (
 	USTRINGTRIE_INTERMEDIATE_VALUE UStringTrieResult = 3
 )
 
+// String returns the UStringTrieResult constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UStringTrieResult) String() string {
+	switch e {
+	case USTRINGTRIE_NO_MATCH:
+		return "USTRINGTRIE_NO_MATCH"
+	case USTRINGTRIE_NO_VALUE:
+		return "USTRINGTRIE_NO_VALUE"
+	case USTRINGTRIE_FINAL_VALUE:
+		return "USTRINGTRIE_FINAL_VALUE"
+	case USTRINGTRIE_INTERMEDIATE_VALUE:
+		return "USTRINGTRIE_INTERMEDIATE_VALUE"
+	default:
+		return fmt.Sprintf("UStringTrieResult(%d)", int32(e))
+	}
+}
+
 type USystemTimeZoneType int32
 
 const (
@@ -2841,6 +8295,21 @@ const (
 	UCAL_ZONE_TYPE_CANONICAL          USystemTimeZoneType = 1
 	UCAL_ZONE_TYPE_CANONICAL_LOCATION USystemTimeZoneType = 2
 )
+
+// String returns the USystemTimeZoneType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USystemTimeZoneType) String() string {
+	switch e {
+	case UCAL_ZONE_TYPE_ANY:
+		return "UCAL_ZONE_TYPE_ANY"
+	case UCAL_ZONE_TYPE_CANONICAL:
+		return "UCAL_ZONE_TYPE_CANONICAL"
+	case UCAL_ZONE_TYPE_CANONICAL_LOCATION:
+		return "UCAL_ZONE_TYPE_CANONICAL_LOCATION"
+	default:
+		return fmt.Sprintf("USystemTimeZoneType(%d)", int32(e))
+	}
+}
 
 type UTimeScaleValue int32
 
@@ -2852,6 +8321,27 @@ const (
 	UTSV_TO_MIN_VALUE       UTimeScaleValue = 4
 	UTSV_TO_MAX_VALUE       UTimeScaleValue = 5
 )
+
+// String returns the UTimeScaleValue constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UTimeScaleValue) String() string {
+	switch e {
+	case UTSV_UNITS_VALUE:
+		return "UTSV_UNITS_VALUE"
+	case UTSV_EPOCH_OFFSET_VALUE:
+		return "UTSV_EPOCH_OFFSET_VALUE"
+	case UTSV_FROM_MIN_VALUE:
+		return "UTSV_FROM_MIN_VALUE"
+	case UTSV_FROM_MAX_VALUE:
+		return "UTSV_FROM_MAX_VALUE"
+	case UTSV_TO_MIN_VALUE:
+		return "UTSV_TO_MIN_VALUE"
+	case UTSV_TO_MAX_VALUE:
+		return "UTSV_TO_MAX_VALUE"
+	default:
+		return fmt.Sprintf("UTimeScaleValue(%d)", int32(e))
+	}
+}
 
 type UTimeZoneFormatGMTOffsetPatternType int32
 
@@ -2865,6 +8355,29 @@ const (
 	UTZFMT_PAT_COUNT        UTimeZoneFormatGMTOffsetPatternType = 6
 )
 
+// String returns the UTimeZoneFormatGMTOffsetPatternType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UTimeZoneFormatGMTOffsetPatternType) String() string {
+	switch e {
+	case UTZFMT_PAT_POSITIVE_HM:
+		return "UTZFMT_PAT_POSITIVE_HM"
+	case UTZFMT_PAT_POSITIVE_HMS:
+		return "UTZFMT_PAT_POSITIVE_HMS"
+	case UTZFMT_PAT_NEGATIVE_HM:
+		return "UTZFMT_PAT_NEGATIVE_HM"
+	case UTZFMT_PAT_NEGATIVE_HMS:
+		return "UTZFMT_PAT_NEGATIVE_HMS"
+	case UTZFMT_PAT_POSITIVE_H:
+		return "UTZFMT_PAT_POSITIVE_H"
+	case UTZFMT_PAT_NEGATIVE_H:
+		return "UTZFMT_PAT_NEGATIVE_H"
+	case UTZFMT_PAT_COUNT:
+		return "UTZFMT_PAT_COUNT"
+	default:
+		return fmt.Sprintf("UTimeZoneFormatGMTOffsetPatternType(%d)", int32(e))
+	}
+}
+
 type UTimeZoneFormatParseOption int32
 
 const (
@@ -2872,6 +8385,21 @@ const (
 	UTZFMT_PARSE_OPTION_ALL_STYLES                UTimeZoneFormatParseOption = 1
 	UTZFMT_PARSE_OPTION_TZ_DATABASE_ABBREVIATIONS UTimeZoneFormatParseOption = 2
 )
+
+// String returns the UTimeZoneFormatParseOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UTimeZoneFormatParseOption) String() string {
+	switch e {
+	case UTZFMT_PARSE_OPTION_NONE:
+		return "UTZFMT_PARSE_OPTION_NONE"
+	case UTZFMT_PARSE_OPTION_ALL_STYLES:
+		return "UTZFMT_PARSE_OPTION_ALL_STYLES"
+	case UTZFMT_PARSE_OPTION_TZ_DATABASE_ABBREVIATIONS:
+		return "UTZFMT_PARSE_OPTION_TZ_DATABASE_ABBREVIATIONS"
+	default:
+		return fmt.Sprintf("UTimeZoneFormatParseOption(%d)", int32(e))
+	}
+}
 
 type UTimeZoneFormatStyle int32
 
@@ -2898,6 +8426,55 @@ const (
 	UTZFMT_STYLE_EXEMPLAR_LOCATION        UTimeZoneFormatStyle = 19
 )
 
+// String returns the UTimeZoneFormatStyle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UTimeZoneFormatStyle) String() string {
+	switch e {
+	case UTZFMT_STYLE_GENERIC_LOCATION:
+		return "UTZFMT_STYLE_GENERIC_LOCATION"
+	case UTZFMT_STYLE_GENERIC_LONG:
+		return "UTZFMT_STYLE_GENERIC_LONG"
+	case UTZFMT_STYLE_GENERIC_SHORT:
+		return "UTZFMT_STYLE_GENERIC_SHORT"
+	case UTZFMT_STYLE_SPECIFIC_LONG:
+		return "UTZFMT_STYLE_SPECIFIC_LONG"
+	case UTZFMT_STYLE_SPECIFIC_SHORT:
+		return "UTZFMT_STYLE_SPECIFIC_SHORT"
+	case UTZFMT_STYLE_LOCALIZED_GMT:
+		return "UTZFMT_STYLE_LOCALIZED_GMT"
+	case UTZFMT_STYLE_LOCALIZED_GMT_SHORT:
+		return "UTZFMT_STYLE_LOCALIZED_GMT_SHORT"
+	case UTZFMT_STYLE_ISO_BASIC_SHORT:
+		return "UTZFMT_STYLE_ISO_BASIC_SHORT"
+	case UTZFMT_STYLE_ISO_BASIC_LOCAL_SHORT:
+		return "UTZFMT_STYLE_ISO_BASIC_LOCAL_SHORT"
+	case UTZFMT_STYLE_ISO_BASIC_FIXED:
+		return "UTZFMT_STYLE_ISO_BASIC_FIXED"
+	case UTZFMT_STYLE_ISO_BASIC_LOCAL_FIXED:
+		return "UTZFMT_STYLE_ISO_BASIC_LOCAL_FIXED"
+	case UTZFMT_STYLE_ISO_BASIC_FULL:
+		return "UTZFMT_STYLE_ISO_BASIC_FULL"
+	case UTZFMT_STYLE_ISO_BASIC_LOCAL_FULL:
+		return "UTZFMT_STYLE_ISO_BASIC_LOCAL_FULL"
+	case UTZFMT_STYLE_ISO_EXTENDED_FIXED:
+		return "UTZFMT_STYLE_ISO_EXTENDED_FIXED"
+	case UTZFMT_STYLE_ISO_EXTENDED_LOCAL_FIXED:
+		return "UTZFMT_STYLE_ISO_EXTENDED_LOCAL_FIXED"
+	case UTZFMT_STYLE_ISO_EXTENDED_FULL:
+		return "UTZFMT_STYLE_ISO_EXTENDED_FULL"
+	case UTZFMT_STYLE_ISO_EXTENDED_LOCAL_FULL:
+		return "UTZFMT_STYLE_ISO_EXTENDED_LOCAL_FULL"
+	case UTZFMT_STYLE_ZONE_ID:
+		return "UTZFMT_STYLE_ZONE_ID"
+	case UTZFMT_STYLE_ZONE_ID_SHORT:
+		return "UTZFMT_STYLE_ZONE_ID_SHORT"
+	case UTZFMT_STYLE_EXEMPLAR_LOCATION:
+		return "UTZFMT_STYLE_EXEMPLAR_LOCATION"
+	default:
+		return fmt.Sprintf("UTimeZoneFormatStyle(%d)", int32(e))
+	}
+}
+
 type UTimeZoneFormatTimeType int32
 
 const (
@@ -2905,6 +8482,21 @@ const (
 	UTZFMT_TIME_TYPE_STANDARD UTimeZoneFormatTimeType = 1
 	UTZFMT_TIME_TYPE_DAYLIGHT UTimeZoneFormatTimeType = 2
 )
+
+// String returns the UTimeZoneFormatTimeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UTimeZoneFormatTimeType) String() string {
+	switch e {
+	case UTZFMT_TIME_TYPE_UNKNOWN:
+		return "UTZFMT_TIME_TYPE_UNKNOWN"
+	case UTZFMT_TIME_TYPE_STANDARD:
+		return "UTZFMT_TIME_TYPE_STANDARD"
+	case UTZFMT_TIME_TYPE_DAYLIGHT:
+		return "UTZFMT_TIME_TYPE_DAYLIGHT"
+	default:
+		return fmt.Sprintf("UTimeZoneFormatTimeType(%d)", int32(e))
+	}
+}
 
 type UTimeZoneLocalOption int32
 
@@ -2916,6 +8508,27 @@ const (
 	UCAL_TZ_LOCAL_DAYLIGHT_FORMER UTimeZoneLocalOption = 7
 	UCAL_TZ_LOCAL_DAYLIGHT_LATTER UTimeZoneLocalOption = 15
 )
+
+// String returns the UTimeZoneLocalOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UTimeZoneLocalOption) String() string {
+	switch e {
+	case UCAL_TZ_LOCAL_FORMER:
+		return "UCAL_TZ_LOCAL_FORMER"
+	case UCAL_TZ_LOCAL_LATTER:
+		return "UCAL_TZ_LOCAL_LATTER"
+	case UCAL_TZ_LOCAL_STANDARD_FORMER:
+		return "UCAL_TZ_LOCAL_STANDARD_FORMER"
+	case UCAL_TZ_LOCAL_STANDARD_LATTER:
+		return "UCAL_TZ_LOCAL_STANDARD_LATTER"
+	case UCAL_TZ_LOCAL_DAYLIGHT_FORMER:
+		return "UCAL_TZ_LOCAL_DAYLIGHT_FORMER"
+	case UCAL_TZ_LOCAL_DAYLIGHT_LATTER:
+		return "UCAL_TZ_LOCAL_DAYLIGHT_LATTER"
+	default:
+		return fmt.Sprintf("UTimeZoneLocalOption(%d)", int32(e))
+	}
+}
 
 type UTimeZoneNameType int32
 
@@ -2930,6 +8543,31 @@ const (
 	UTZNM_EXEMPLAR_LOCATION UTimeZoneNameType = 64
 )
 
+// String returns the UTimeZoneNameType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UTimeZoneNameType) String() string {
+	switch e {
+	case UTZNM_UNKNOWN:
+		return "UTZNM_UNKNOWN"
+	case UTZNM_LONG_GENERIC:
+		return "UTZNM_LONG_GENERIC"
+	case UTZNM_LONG_STANDARD:
+		return "UTZNM_LONG_STANDARD"
+	case UTZNM_LONG_DAYLIGHT:
+		return "UTZNM_LONG_DAYLIGHT"
+	case UTZNM_SHORT_GENERIC:
+		return "UTZNM_SHORT_GENERIC"
+	case UTZNM_SHORT_STANDARD:
+		return "UTZNM_SHORT_STANDARD"
+	case UTZNM_SHORT_DAYLIGHT:
+		return "UTZNM_SHORT_DAYLIGHT"
+	case UTZNM_EXEMPLAR_LOCATION:
+		return "UTZNM_EXEMPLAR_LOCATION"
+	default:
+		return fmt.Sprintf("UTimeZoneNameType(%d)", int32(e))
+	}
+}
+
 type UTimeZoneTransitionType int32
 
 const (
@@ -2938,6 +8576,23 @@ const (
 	UCAL_TZ_TRANSITION_PREVIOUS           UTimeZoneTransitionType = 2
 	UCAL_TZ_TRANSITION_PREVIOUS_INCLUSIVE UTimeZoneTransitionType = 3
 )
+
+// String returns the UTimeZoneTransitionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UTimeZoneTransitionType) String() string {
+	switch e {
+	case UCAL_TZ_TRANSITION_NEXT:
+		return "UCAL_TZ_TRANSITION_NEXT"
+	case UCAL_TZ_TRANSITION_NEXT_INCLUSIVE:
+		return "UCAL_TZ_TRANSITION_NEXT_INCLUSIVE"
+	case UCAL_TZ_TRANSITION_PREVIOUS:
+		return "UCAL_TZ_TRANSITION_PREVIOUS"
+	case UCAL_TZ_TRANSITION_PREVIOUS_INCLUSIVE:
+		return "UCAL_TZ_TRANSITION_PREVIOUS_INCLUSIVE"
+	default:
+		return fmt.Sprintf("UTimeZoneTransitionType(%d)", int32(e))
+	}
+}
 
 type UTraceFunctionNumber int32
 
@@ -2971,6 +8626,61 @@ const (
 	UTRACE_UDATA_RES_FILE              UTraceFunctionNumber = 12291
 )
 
+// String returns the UTraceFunctionNumber constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UTraceFunctionNumber) String() string {
+	switch e {
+	case UTRACE_FUNCTION_START:
+		return "UTRACE_FUNCTION_START"
+	case UTRACE_U_CLEANUP:
+		return "UTRACE_U_CLEANUP"
+	case UTRACE_CONVERSION_START:
+		return "UTRACE_CONVERSION_START"
+	case UTRACE_UCNV_OPEN_PACKAGE:
+		return "UTRACE_UCNV_OPEN_PACKAGE"
+	case UTRACE_UCNV_OPEN_ALGORITHMIC:
+		return "UTRACE_UCNV_OPEN_ALGORITHMIC"
+	case UTRACE_UCNV_CLONE:
+		return "UTRACE_UCNV_CLONE"
+	case UTRACE_UCNV_CLOSE:
+		return "UTRACE_UCNV_CLOSE"
+	case UTRACE_UCNV_FLUSH_CACHE:
+		return "UTRACE_UCNV_FLUSH_CACHE"
+	case UTRACE_UCNV_LOAD:
+		return "UTRACE_UCNV_LOAD"
+	case UTRACE_UCNV_UNLOAD:
+		return "UTRACE_UCNV_UNLOAD"
+	case UTRACE_COLLATION_START:
+		return "UTRACE_COLLATION_START"
+	case UTRACE_UCOL_CLOSE:
+		return "UTRACE_UCOL_CLOSE"
+	case UTRACE_UCOL_STRCOLL:
+		return "UTRACE_UCOL_STRCOLL"
+	case UTRACE_UCOL_GET_SORTKEY:
+		return "UTRACE_UCOL_GET_SORTKEY"
+	case UTRACE_UCOL_GETLOCALE:
+		return "UTRACE_UCOL_GETLOCALE"
+	case UTRACE_UCOL_NEXTSORTKEYPART:
+		return "UTRACE_UCOL_NEXTSORTKEYPART"
+	case UTRACE_UCOL_STRCOLLITER:
+		return "UTRACE_UCOL_STRCOLLITER"
+	case UTRACE_UCOL_OPEN_FROM_SHORT_STRING:
+		return "UTRACE_UCOL_OPEN_FROM_SHORT_STRING"
+	case UTRACE_UCOL_STRCOLLUTF8:
+		return "UTRACE_UCOL_STRCOLLUTF8"
+	case UTRACE_UDATA_START:
+		return "UTRACE_UDATA_START"
+	case UTRACE_UDATA_BUNDLE:
+		return "UTRACE_UDATA_BUNDLE"
+	case UTRACE_UDATA_DATA_FILE:
+		return "UTRACE_UDATA_DATA_FILE"
+	case UTRACE_UDATA_RES_FILE:
+		return "UTRACE_UDATA_RES_FILE"
+	default:
+		return fmt.Sprintf("UTraceFunctionNumber(%d)", int32(e))
+	}
+}
+
 type UTraceLevel int32
 
 const (
@@ -2982,12 +8692,46 @@ const (
 	UTRACE_VERBOSE    UTraceLevel = 9
 )
 
+// String returns the UTraceLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UTraceLevel) String() string {
+	switch e {
+	case UTRACE_OFF:
+		return "UTRACE_OFF"
+	case UTRACE_ERROR:
+		return "UTRACE_ERROR"
+	case UTRACE_WARNING:
+		return "UTRACE_WARNING"
+	case UTRACE_OPEN_CLOSE:
+		return "UTRACE_OPEN_CLOSE"
+	case UTRACE_INFO:
+		return "UTRACE_INFO"
+	case UTRACE_VERBOSE:
+		return "UTRACE_VERBOSE"
+	default:
+		return fmt.Sprintf("UTraceLevel(%d)", int32(e))
+	}
+}
+
 type UTransDirection int32
 
 const (
 	UTRANS_FORWARD UTransDirection = 0
 	UTRANS_REVERSE UTransDirection = 1
 )
+
+// String returns the UTransDirection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UTransDirection) String() string {
+	switch e {
+	case UTRANS_FORWARD:
+		return "UTRANS_FORWARD"
+	case UTRANS_REVERSE:
+		return "UTRANS_REVERSE"
+	default:
+		return fmt.Sprintf("UTransDirection(%d)", int32(e))
+	}
+}
 
 type UVerticalOrientation int32
 
@@ -2997,6 +8741,23 @@ const (
 	U_VO_TRANSFORMED_UPRIGHT UVerticalOrientation = 2
 	U_VO_UPRIGHT             UVerticalOrientation = 3
 )
+
+// String returns the UVerticalOrientation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UVerticalOrientation) String() string {
+	switch e {
+	case U_VO_ROTATED:
+		return "U_VO_ROTATED"
+	case U_VO_TRANSFORMED_ROTATED:
+		return "U_VO_TRANSFORMED_ROTATED"
+	case U_VO_TRANSFORMED_UPRIGHT:
+		return "U_VO_TRANSFORMED_UPRIGHT"
+	case U_VO_UPRIGHT:
+		return "U_VO_UPRIGHT"
+	default:
+		return fmt.Sprintf("UVerticalOrientation(%d)", int32(e))
+	}
+}
 
 type UWordBreak int32
 
@@ -3012,6 +8773,27 @@ const (
 	UBRK_WORD_IDEO         UWordBreak = 400
 	UBRK_WORD_IDEO_LIMIT   UWordBreak = 500
 )
+
+// String returns the UWordBreak constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UWordBreak) String() string {
+	switch e {
+	case UBRK_WORD_NONE:
+		return "UBRK_WORD_NONE"
+	case UBRK_WORD_NONE_LIMIT:
+		return "UBRK_WORD_NONE_LIMIT"
+	case UBRK_WORD_NUMBER_LIMIT:
+		return "UBRK_WORD_NUMBER_LIMIT"
+	case UBRK_WORD_LETTER_LIMIT:
+		return "UBRK_WORD_LETTER_LIMIT"
+	case UBRK_WORD_KANA_LIMIT:
+		return "UBRK_WORD_KANA_LIMIT"
+	case UBRK_WORD_IDEO_LIMIT:
+		return "UBRK_WORD_IDEO_LIMIT"
+	default:
+		return fmt.Sprintf("UWordBreak(%d)", int32(e))
+	}
+}
 
 type UWordBreakValues int32
 
@@ -3041,6 +8823,61 @@ const (
 	U_WB_WSEGSPACE          UWordBreakValues = 22
 )
 
+// String returns the UWordBreakValues constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UWordBreakValues) String() string {
+	switch e {
+	case U_WB_OTHER:
+		return "U_WB_OTHER"
+	case U_WB_ALETTER:
+		return "U_WB_ALETTER"
+	case U_WB_FORMAT:
+		return "U_WB_FORMAT"
+	case U_WB_KATAKANA:
+		return "U_WB_KATAKANA"
+	case U_WB_MIDLETTER:
+		return "U_WB_MIDLETTER"
+	case U_WB_MIDNUM:
+		return "U_WB_MIDNUM"
+	case U_WB_NUMERIC:
+		return "U_WB_NUMERIC"
+	case U_WB_EXTENDNUMLET:
+		return "U_WB_EXTENDNUMLET"
+	case U_WB_CR:
+		return "U_WB_CR"
+	case U_WB_EXTEND:
+		return "U_WB_EXTEND"
+	case U_WB_LF:
+		return "U_WB_LF"
+	case U_WB_MIDNUMLET:
+		return "U_WB_MIDNUMLET"
+	case U_WB_NEWLINE:
+		return "U_WB_NEWLINE"
+	case U_WB_REGIONAL_INDICATOR:
+		return "U_WB_REGIONAL_INDICATOR"
+	case U_WB_HEBREW_LETTER:
+		return "U_WB_HEBREW_LETTER"
+	case U_WB_SINGLE_QUOTE:
+		return "U_WB_SINGLE_QUOTE"
+	case U_WB_DOUBLE_QUOTE:
+		return "U_WB_DOUBLE_QUOTE"
+	case U_WB_E_BASE:
+		return "U_WB_E_BASE"
+	case U_WB_E_BASE_GAZ:
+		return "U_WB_E_BASE_GAZ"
+	case U_WB_E_MODIFIER:
+		return "U_WB_E_MODIFIER"
+	case U_WB_GLUE_AFTER_ZWJ:
+		return "U_WB_GLUE_AFTER_ZWJ"
+	case U_WB_ZWJ:
+		return "U_WB_ZWJ"
+	case U_WB_WSEGSPACE:
+		return "U_WB_WSEGSPACE"
+	default:
+		return fmt.Sprintf("UWordBreakValues(%d)", int32(e))
+	}
+}
+
 // WORDLIST_TYPE: https://learn.microsoft.com/windows/win32/api/spellcheck/ne-spellcheck-wordlist_type
 type WORDLIST_TYPE int32
 
@@ -3050,3 +8887,20 @@ const (
 	WORDLIST_TYPE_EXCLUDE     WORDLIST_TYPE = 2
 	WORDLIST_TYPE_AUTOCORRECT WORDLIST_TYPE = 3
 )
+
+// String returns the WORDLIST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WORDLIST_TYPE) String() string {
+	switch e {
+	case WORDLIST_TYPE_IGNORE:
+		return "WORDLIST_TYPE_IGNORE"
+	case WORDLIST_TYPE_ADD:
+		return "WORDLIST_TYPE_ADD"
+	case WORDLIST_TYPE_EXCLUDE:
+		return "WORDLIST_TYPE_EXCLUDE"
+	case WORDLIST_TYPE_AUTOCORRECT:
+		return "WORDLIST_TYPE_AUTOCORRECT"
+	default:
+		return fmt.Sprintf("WORDLIST_TYPE(%d)", int32(e))
+	}
+}

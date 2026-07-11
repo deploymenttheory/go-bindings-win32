@@ -4,6 +4,10 @@
 
 package fax
 
+import (
+	"fmt"
+)
+
 type FAXROUTE_ENABLE int32
 
 const (
@@ -11,6 +15,21 @@ const (
 	STATUS_DISABLE FAXROUTE_ENABLE = 0
 	STATUS_ENABLE  FAXROUTE_ENABLE = 1
 )
+
+// String returns the FAXROUTE_ENABLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAXROUTE_ENABLE) String() string {
+	switch e {
+	case QUERY_STATUS:
+		return "QUERY_STATUS"
+	case STATUS_DISABLE:
+		return "STATUS_DISABLE"
+	case STATUS_ENABLE:
+		return "STATUS_ENABLE"
+	default:
+		return fmt.Sprintf("FAXROUTE_ENABLE(%d)", int32(e))
+	}
+}
 
 // FAX_ACCESS_RIGHTS_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_access_rights_enum
 type FAX_ACCESS_RIGHTS_ENUM int32
@@ -29,6 +48,37 @@ const (
 	FarMANAGE_OUT_ARCHIVE FAX_ACCESS_RIGHTS_ENUM = 1024
 )
 
+// String returns the FAX_ACCESS_RIGHTS_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_ACCESS_RIGHTS_ENUM) String() string {
+	switch e {
+	case FarSUBMIT_LOW:
+		return "FarSUBMIT_LOW"
+	case FarSUBMIT_NORMAL:
+		return "FarSUBMIT_NORMAL"
+	case FarSUBMIT_HIGH:
+		return "FarSUBMIT_HIGH"
+	case FarQUERY_JOBS:
+		return "FarQUERY_JOBS"
+	case FarMANAGE_JOBS:
+		return "FarMANAGE_JOBS"
+	case FarQUERY_CONFIG:
+		return "FarQUERY_CONFIG"
+	case FarMANAGE_CONFIG:
+		return "FarMANAGE_CONFIG"
+	case FarQUERY_IN_ARCHIVE:
+		return "FarQUERY_IN_ARCHIVE"
+	case FarMANAGE_IN_ARCHIVE:
+		return "FarMANAGE_IN_ARCHIVE"
+	case FarQUERY_OUT_ARCHIVE:
+		return "FarQUERY_OUT_ARCHIVE"
+	case FarMANAGE_OUT_ARCHIVE:
+		return "FarMANAGE_OUT_ARCHIVE"
+	default:
+		return fmt.Sprintf("FAX_ACCESS_RIGHTS_ENUM(%d)", int32(e))
+	}
+}
+
 // FAX_ACCESS_RIGHTS_ENUM_2: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_access_rights_enum_2
 type FAX_ACCESS_RIGHTS_ENUM_2 int32
 
@@ -45,6 +95,35 @@ const (
 	Far2MANAGE_RECEIVE_FOLDER FAX_ACCESS_RIGHTS_ENUM_2 = 512
 )
 
+// String returns the FAX_ACCESS_RIGHTS_ENUM_2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_ACCESS_RIGHTS_ENUM_2) String() string {
+	switch e {
+	case Far2SUBMIT_LOW:
+		return "Far2SUBMIT_LOW"
+	case Far2SUBMIT_NORMAL:
+		return "Far2SUBMIT_NORMAL"
+	case Far2SUBMIT_HIGH:
+		return "Far2SUBMIT_HIGH"
+	case Far2QUERY_OUT_JOBS:
+		return "Far2QUERY_OUT_JOBS"
+	case Far2MANAGE_OUT_JOBS:
+		return "Far2MANAGE_OUT_JOBS"
+	case Far2QUERY_CONFIG:
+		return "Far2QUERY_CONFIG"
+	case Far2MANAGE_CONFIG:
+		return "Far2MANAGE_CONFIG"
+	case Far2QUERY_ARCHIVES:
+		return "Far2QUERY_ARCHIVES"
+	case Far2MANAGE_ARCHIVES:
+		return "Far2MANAGE_ARCHIVES"
+	case Far2MANAGE_RECEIVE_FOLDER:
+		return "Far2MANAGE_RECEIVE_FOLDER"
+	default:
+		return fmt.Sprintf("FAX_ACCESS_RIGHTS_ENUM_2(%d)", int32(e))
+	}
+}
+
 // FAX_ACCOUNT_EVENTS_TYPE_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_account_events_type_enum
 type FAX_ACCOUNT_EVENTS_TYPE_ENUM int32
 
@@ -57,6 +136,27 @@ const (
 	FaetFXSSVC_ENDED FAX_ACCOUNT_EVENTS_TYPE_ENUM = 16
 )
 
+// String returns the FAX_ACCOUNT_EVENTS_TYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_ACCOUNT_EVENTS_TYPE_ENUM) String() string {
+	switch e {
+	case FaetNONE:
+		return "FaetNONE"
+	case FaetIN_QUEUE:
+		return "FaetIN_QUEUE"
+	case FaetOUT_QUEUE:
+		return "FaetOUT_QUEUE"
+	case FaetIN_ARCHIVE:
+		return "FaetIN_ARCHIVE"
+	case FaetOUT_ARCHIVE:
+		return "FaetOUT_ARCHIVE"
+	case FaetFXSSVC_ENDED:
+		return "FaetFXSSVC_ENDED"
+	default:
+		return fmt.Sprintf("FAX_ACCOUNT_EVENTS_TYPE_ENUM(%d)", int32(e))
+	}
+}
+
 // FAX_COVERPAGE_TYPE_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_coverpage_type_enum
 type FAX_COVERPAGE_TYPE_ENUM int32
 
@@ -65,6 +165,21 @@ const (
 	FcptLOCAL  FAX_COVERPAGE_TYPE_ENUM = 1
 	FcptSERVER FAX_COVERPAGE_TYPE_ENUM = 2
 )
+
+// String returns the FAX_COVERPAGE_TYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_COVERPAGE_TYPE_ENUM) String() string {
+	switch e {
+	case FcptNONE:
+		return "FcptNONE"
+	case FcptLOCAL:
+		return "FcptLOCAL"
+	case FcptSERVER:
+		return "FcptSERVER"
+	default:
+		return fmt.Sprintf("FAX_COVERPAGE_TYPE_ENUM(%d)", int32(e))
+	}
+}
 
 // FAX_DEVICE_RECEIVE_MODE_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_device_receive_mode_enum
 type FAX_DEVICE_RECEIVE_MODE_ENUM int32
@@ -75,6 +190,21 @@ const (
 	FdrmMANUAL_ANSWER FAX_DEVICE_RECEIVE_MODE_ENUM = 2
 )
 
+// String returns the FAX_DEVICE_RECEIVE_MODE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_DEVICE_RECEIVE_MODE_ENUM) String() string {
+	switch e {
+	case FdrmNO_ANSWER:
+		return "FdrmNO_ANSWER"
+	case FdrmAUTO_ANSWER:
+		return "FdrmAUTO_ANSWER"
+	case FdrmMANUAL_ANSWER:
+		return "FdrmMANUAL_ANSWER"
+	default:
+		return fmt.Sprintf("FAX_DEVICE_RECEIVE_MODE_ENUM(%d)", int32(e))
+	}
+}
+
 type FAX_ENUM_DELIVERY_REPORT_TYPES int32
 
 const (
@@ -83,12 +213,40 @@ const (
 	DRT_INBOX FAX_ENUM_DELIVERY_REPORT_TYPES = 2
 )
 
+// String returns the FAX_ENUM_DELIVERY_REPORT_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_ENUM_DELIVERY_REPORT_TYPES) String() string {
+	switch e {
+	case DRT_NONE:
+		return "DRT_NONE"
+	case DRT_EMAIL:
+		return "DRT_EMAIL"
+	case DRT_INBOX:
+		return "DRT_INBOX"
+	default:
+		return fmt.Sprintf("FAX_ENUM_DELIVERY_REPORT_TYPES(%d)", int32(e))
+	}
+}
+
 type FAX_ENUM_DEVICE_ID_SOURCE int32
 
 const (
 	DEV_ID_SRC_FAX  FAX_ENUM_DEVICE_ID_SOURCE = 0
 	DEV_ID_SRC_TAPI FAX_ENUM_DEVICE_ID_SOURCE = 1
 )
+
+// String returns the FAX_ENUM_DEVICE_ID_SOURCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_ENUM_DEVICE_ID_SOURCE) String() string {
+	switch e {
+	case DEV_ID_SRC_FAX:
+		return "DEV_ID_SRC_FAX"
+	case DEV_ID_SRC_TAPI:
+		return "DEV_ID_SRC_TAPI"
+	default:
+		return fmt.Sprintf("FAX_ENUM_DEVICE_ID_SOURCE(%d)", int32(e))
+	}
+}
 
 type FAX_ENUM_JOB_COMMANDS int32
 
@@ -99,6 +257,23 @@ const (
 	JC_RESUME  FAX_ENUM_JOB_COMMANDS = 3
 )
 
+// String returns the FAX_ENUM_JOB_COMMANDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_ENUM_JOB_COMMANDS) String() string {
+	switch e {
+	case JC_UNKNOWN:
+		return "JC_UNKNOWN"
+	case JC_DELETE:
+		return "JC_DELETE"
+	case JC_PAUSE:
+		return "JC_PAUSE"
+	case JC_RESUME:
+		return "JC_RESUME"
+	default:
+		return fmt.Sprintf("FAX_ENUM_JOB_COMMANDS(%d)", int32(e))
+	}
+}
+
 type FAX_ENUM_JOB_SEND_ATTRIBUTES int32
 
 const (
@@ -106,6 +281,21 @@ const (
 	JSA_SPECIFIC_TIME   FAX_ENUM_JOB_SEND_ATTRIBUTES = 1
 	JSA_DISCOUNT_PERIOD FAX_ENUM_JOB_SEND_ATTRIBUTES = 2
 )
+
+// String returns the FAX_ENUM_JOB_SEND_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_ENUM_JOB_SEND_ATTRIBUTES) String() string {
+	switch e {
+	case JSA_NOW:
+		return "JSA_NOW"
+	case JSA_SPECIFIC_TIME:
+		return "JSA_SPECIFIC_TIME"
+	case JSA_DISCOUNT_PERIOD:
+		return "JSA_DISCOUNT_PERIOD"
+	default:
+		return fmt.Sprintf("FAX_ENUM_JOB_SEND_ATTRIBUTES(%d)", int32(e))
+	}
+}
 
 type FAX_ENUM_LOG_CATEGORIES int32
 
@@ -116,6 +306,23 @@ const (
 	FAXLOG_CATEGORY_UNKNOWN  FAX_ENUM_LOG_CATEGORIES = 4
 )
 
+// String returns the FAX_ENUM_LOG_CATEGORIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_ENUM_LOG_CATEGORIES) String() string {
+	switch e {
+	case FAXLOG_CATEGORY_INIT:
+		return "FAXLOG_CATEGORY_INIT"
+	case FAXLOG_CATEGORY_OUTBOUND:
+		return "FAXLOG_CATEGORY_OUTBOUND"
+	case FAXLOG_CATEGORY_INBOUND:
+		return "FAXLOG_CATEGORY_INBOUND"
+	case FAXLOG_CATEGORY_UNKNOWN:
+		return "FAXLOG_CATEGORY_UNKNOWN"
+	default:
+		return fmt.Sprintf("FAX_ENUM_LOG_CATEGORIES(%d)", int32(e))
+	}
+}
+
 type FAX_ENUM_LOG_LEVELS int32
 
 const (
@@ -125,12 +332,42 @@ const (
 	FAXLOG_LEVEL_MAX  FAX_ENUM_LOG_LEVELS = 3
 )
 
+// String returns the FAX_ENUM_LOG_LEVELS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_ENUM_LOG_LEVELS) String() string {
+	switch e {
+	case FAXLOG_LEVEL_NONE:
+		return "FAXLOG_LEVEL_NONE"
+	case FAXLOG_LEVEL_MIN:
+		return "FAXLOG_LEVEL_MIN"
+	case FAXLOG_LEVEL_MED:
+		return "FAXLOG_LEVEL_MED"
+	case FAXLOG_LEVEL_MAX:
+		return "FAXLOG_LEVEL_MAX"
+	default:
+		return fmt.Sprintf("FAX_ENUM_LOG_LEVELS(%d)", int32(e))
+	}
+}
+
 type FAX_ENUM_PORT_OPEN_TYPE int32
 
 const (
 	PORT_OPEN_QUERY  FAX_ENUM_PORT_OPEN_TYPE = 1
 	PORT_OPEN_MODIFY FAX_ENUM_PORT_OPEN_TYPE = 2
 )
+
+// String returns the FAX_ENUM_PORT_OPEN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_ENUM_PORT_OPEN_TYPE) String() string {
+	switch e {
+	case PORT_OPEN_QUERY:
+		return "PORT_OPEN_QUERY"
+	case PORT_OPEN_MODIFY:
+		return "PORT_OPEN_MODIFY"
+	default:
+		return fmt.Sprintf("FAX_ENUM_PORT_OPEN_TYPE(%d)", int32(e))
+	}
+}
 
 // FAX_GROUP_STATUS_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_group_status_enum
 type FAX_GROUP_STATUS_ENUM int32
@@ -141,6 +378,23 @@ const (
 	FgsALL_DEV_NOT_VALID  FAX_GROUP_STATUS_ENUM = 2
 	FgsSOME_DEV_NOT_VALID FAX_GROUP_STATUS_ENUM = 3
 )
+
+// String returns the FAX_GROUP_STATUS_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_GROUP_STATUS_ENUM) String() string {
+	switch e {
+	case FgsALL_DEV_VALID:
+		return "FgsALL_DEV_VALID"
+	case FgsEMPTY:
+		return "FgsEMPTY"
+	case FgsALL_DEV_NOT_VALID:
+		return "FgsALL_DEV_NOT_VALID"
+	case FgsSOME_DEV_NOT_VALID:
+		return "FgsSOME_DEV_NOT_VALID"
+	default:
+		return fmt.Sprintf("FAX_GROUP_STATUS_ENUM(%d)", int32(e))
+	}
+}
 
 // FAX_JOB_EXTENDED_STATUS_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_job_extended_status_enum
 type FAX_JOB_EXTENDED_STATUS_ENUM int32
@@ -169,6 +423,57 @@ const (
 	FjesPROPRIETARY        FAX_JOB_EXTENDED_STATUS_ENUM = 16777216
 )
 
+// String returns the FAX_JOB_EXTENDED_STATUS_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_JOB_EXTENDED_STATUS_ENUM) String() string {
+	switch e {
+	case FjesNONE:
+		return "FjesNONE"
+	case FjesDISCONNECTED:
+		return "FjesDISCONNECTED"
+	case FjesINITIALIZING:
+		return "FjesINITIALIZING"
+	case FjesDIALING:
+		return "FjesDIALING"
+	case FjesTRANSMITTING:
+		return "FjesTRANSMITTING"
+	case FjesANSWERED:
+		return "FjesANSWERED"
+	case FjesRECEIVING:
+		return "FjesRECEIVING"
+	case FjesLINE_UNAVAILABLE:
+		return "FjesLINE_UNAVAILABLE"
+	case FjesBUSY:
+		return "FjesBUSY"
+	case FjesNO_ANSWER:
+		return "FjesNO_ANSWER"
+	case FjesBAD_ADDRESS:
+		return "FjesBAD_ADDRESS"
+	case FjesNO_DIAL_TONE:
+		return "FjesNO_DIAL_TONE"
+	case FjesFATAL_ERROR:
+		return "FjesFATAL_ERROR"
+	case FjesCALL_DELAYED:
+		return "FjesCALL_DELAYED"
+	case FjesCALL_BLACKLISTED:
+		return "FjesCALL_BLACKLISTED"
+	case FjesNOT_FAX_CALL:
+		return "FjesNOT_FAX_CALL"
+	case FjesPARTIALLY_RECEIVED:
+		return "FjesPARTIALLY_RECEIVED"
+	case FjesHANDLED:
+		return "FjesHANDLED"
+	case FjesCALL_COMPLETED:
+		return "FjesCALL_COMPLETED"
+	case FjesCALL_ABORTED:
+		return "FjesCALL_ABORTED"
+	case FjesPROPRIETARY:
+		return "FjesPROPRIETARY"
+	default:
+		return fmt.Sprintf("FAX_JOB_EXTENDED_STATUS_ENUM(%d)", int32(e))
+	}
+}
+
 // FAX_JOB_OPERATIONS_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_job_operations_enum
 type FAX_JOB_OPERATIONS_ENUM int32
 
@@ -181,6 +486,29 @@ const (
 	FjoRECIPIENT_INFO FAX_JOB_OPERATIONS_ENUM = 32
 	FjoSENDER_INFO    FAX_JOB_OPERATIONS_ENUM = 64
 )
+
+// String returns the FAX_JOB_OPERATIONS_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_JOB_OPERATIONS_ENUM) String() string {
+	switch e {
+	case FjoVIEW:
+		return "FjoVIEW"
+	case FjoPAUSE:
+		return "FjoPAUSE"
+	case FjoRESUME:
+		return "FjoRESUME"
+	case FjoRESTART:
+		return "FjoRESTART"
+	case FjoDELETE:
+		return "FjoDELETE"
+	case FjoRECIPIENT_INFO:
+		return "FjoRECIPIENT_INFO"
+	case FjoSENDER_INFO:
+		return "FjoSENDER_INFO"
+	default:
+		return fmt.Sprintf("FAX_JOB_OPERATIONS_ENUM(%d)", int32(e))
+	}
+}
 
 // FAX_JOB_STATUS_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_job_status_enum
 type FAX_JOB_STATUS_ENUM int32
@@ -199,6 +527,37 @@ const (
 	FjsROUTING          FAX_JOB_STATUS_ENUM = 2048
 )
 
+// String returns the FAX_JOB_STATUS_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_JOB_STATUS_ENUM) String() string {
+	switch e {
+	case FjsPENDING:
+		return "FjsPENDING"
+	case FjsINPROGRESS:
+		return "FjsINPROGRESS"
+	case FjsFAILED:
+		return "FjsFAILED"
+	case FjsPAUSED:
+		return "FjsPAUSED"
+	case FjsNOLINE:
+		return "FjsNOLINE"
+	case FjsRETRYING:
+		return "FjsRETRYING"
+	case FjsRETRIES_EXCEEDED:
+		return "FjsRETRIES_EXCEEDED"
+	case FjsCOMPLETED:
+		return "FjsCOMPLETED"
+	case FjsCANCELED:
+		return "FjsCANCELED"
+	case FjsCANCELING:
+		return "FjsCANCELING"
+	case FjsROUTING:
+		return "FjsROUTING"
+	default:
+		return fmt.Sprintf("FAX_JOB_STATUS_ENUM(%d)", int32(e))
+	}
+}
+
 // FAX_JOB_TYPE_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_job_type_enum
 type FAX_JOB_TYPE_ENUM int32
 
@@ -207,6 +566,21 @@ const (
 	FjtRECEIVE FAX_JOB_TYPE_ENUM = 1
 	FjtROUTING FAX_JOB_TYPE_ENUM = 2
 )
+
+// String returns the FAX_JOB_TYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_JOB_TYPE_ENUM) String() string {
+	switch e {
+	case FjtSEND:
+		return "FjtSEND"
+	case FjtRECEIVE:
+		return "FjtRECEIVE"
+	case FjtROUTING:
+		return "FjtROUTING"
+	default:
+		return fmt.Sprintf("FAX_JOB_TYPE_ENUM(%d)", int32(e))
+	}
+}
 
 // FAX_LOG_LEVEL_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_log_level_enum
 type FAX_LOG_LEVEL_ENUM int32
@@ -218,6 +592,23 @@ const (
 	FllMAX  FAX_LOG_LEVEL_ENUM = 3
 )
 
+// String returns the FAX_LOG_LEVEL_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_LOG_LEVEL_ENUM) String() string {
+	switch e {
+	case FllNONE:
+		return "FllNONE"
+	case FllMIN:
+		return "FllMIN"
+	case FllMED:
+		return "FllMED"
+	case FllMAX:
+		return "FllMAX"
+	default:
+		return fmt.Sprintf("FAX_LOG_LEVEL_ENUM(%d)", int32(e))
+	}
+}
+
 // FAX_PRIORITY_TYPE_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_priority_type_enum
 type FAX_PRIORITY_TYPE_ENUM int32
 
@@ -226,6 +617,21 @@ const (
 	FptNORMAL FAX_PRIORITY_TYPE_ENUM = 1
 	FptHIGH   FAX_PRIORITY_TYPE_ENUM = 2
 )
+
+// String returns the FAX_PRIORITY_TYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_PRIORITY_TYPE_ENUM) String() string {
+	switch e {
+	case FptLOW:
+		return "FptLOW"
+	case FptNORMAL:
+		return "FptNORMAL"
+	case FptHIGH:
+		return "FptHIGH"
+	default:
+		return fmt.Sprintf("FAX_PRIORITY_TYPE_ENUM(%d)", int32(e))
+	}
+}
 
 // FAX_PROVIDER_STATUS_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_provider_status_enum
 type FAX_PROVIDER_STATUS_ENUM int32
@@ -240,6 +646,29 @@ const (
 	FpsCANT_INIT    FAX_PROVIDER_STATUS_ENUM = 6
 )
 
+// String returns the FAX_PROVIDER_STATUS_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_PROVIDER_STATUS_ENUM) String() string {
+	switch e {
+	case FpsSUCCESS:
+		return "FpsSUCCESS"
+	case FpsSERVER_ERROR:
+		return "FpsSERVER_ERROR"
+	case FpsBAD_GUID:
+		return "FpsBAD_GUID"
+	case FpsBAD_VERSION:
+		return "FpsBAD_VERSION"
+	case FpsCANT_LOAD:
+		return "FpsCANT_LOAD"
+	case FpsCANT_LINK:
+		return "FpsCANT_LINK"
+	case FpsCANT_INIT:
+		return "FpsCANT_INIT"
+	default:
+		return fmt.Sprintf("FAX_PROVIDER_STATUS_ENUM(%d)", int32(e))
+	}
+}
+
 // FAX_RECEIPT_TYPE_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_receipt_type_enum
 type FAX_RECEIPT_TYPE_ENUM int32
 
@@ -249,12 +678,38 @@ const (
 	FrtMSGBOX FAX_RECEIPT_TYPE_ENUM = 4
 )
 
+// String returns the FAX_RECEIPT_TYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_RECEIPT_TYPE_ENUM) String() string {
+	switch e {
+	case FrtNONE:
+		return "FrtNONE"
+	case FrtMAIL:
+		return "FrtMAIL"
+	case FrtMSGBOX:
+		return "FrtMSGBOX"
+	default:
+		return fmt.Sprintf("FAX_RECEIPT_TYPE_ENUM(%d)", int32(e))
+	}
+}
+
 // FAX_ROUTING_RULE_CODE_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_routing_rule_code_enum
 type FAX_ROUTING_RULE_CODE_ENUM int32
 
 const (
 	FrrcANY_CODE FAX_ROUTING_RULE_CODE_ENUM = 0
 )
+
+// String returns the FAX_ROUTING_RULE_CODE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_ROUTING_RULE_CODE_ENUM) String() string {
+	switch e {
+	case FrrcANY_CODE:
+		return "FrrcANY_CODE"
+	default:
+		return fmt.Sprintf("FAX_ROUTING_RULE_CODE_ENUM(%d)", int32(e))
+	}
+}
 
 // FAX_RULE_STATUS_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_rule_status_enum
 type FAX_RULE_STATUS_ENUM int32
@@ -267,6 +722,25 @@ const (
 	FrsBAD_DEVICE               FAX_RULE_STATUS_ENUM = 4
 )
 
+// String returns the FAX_RULE_STATUS_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_RULE_STATUS_ENUM) String() string {
+	switch e {
+	case FrsVALID:
+		return "FrsVALID"
+	case FrsEMPTY_GROUP:
+		return "FrsEMPTY_GROUP"
+	case FrsALL_GROUP_DEV_NOT_VALID:
+		return "FrsALL_GROUP_DEV_NOT_VALID"
+	case FrsSOME_GROUP_DEV_NOT_VALID:
+		return "FrsSOME_GROUP_DEV_NOT_VALID"
+	case FrsBAD_DEVICE:
+		return "FrsBAD_DEVICE"
+	default:
+		return fmt.Sprintf("FAX_RULE_STATUS_ENUM(%d)", int32(e))
+	}
+}
+
 // FAX_SCHEDULE_TYPE_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_schedule_type_enum
 type FAX_SCHEDULE_TYPE_ENUM int32
 
@@ -275,6 +749,21 @@ const (
 	FstSPECIFIC_TIME   FAX_SCHEDULE_TYPE_ENUM = 1
 	FstDISCOUNT_PERIOD FAX_SCHEDULE_TYPE_ENUM = 2
 )
+
+// String returns the FAX_SCHEDULE_TYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_SCHEDULE_TYPE_ENUM) String() string {
+	switch e {
+	case FstNOW:
+		return "FstNOW"
+	case FstSPECIFIC_TIME:
+		return "FstSPECIFIC_TIME"
+	case FstDISCOUNT_PERIOD:
+		return "FstDISCOUNT_PERIOD"
+	default:
+		return fmt.Sprintf("FAX_SCHEDULE_TYPE_ENUM(%d)", int32(e))
+	}
+}
 
 // FAX_SERVER_APIVERSION_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_server_apiversion_enum
 type FAX_SERVER_APIVERSION_ENUM int32
@@ -285,6 +774,23 @@ const (
 	FsAPI_VERSION_2 FAX_SERVER_APIVERSION_ENUM = 131072
 	FsAPI_VERSION_3 FAX_SERVER_APIVERSION_ENUM = 196608
 )
+
+// String returns the FAX_SERVER_APIVERSION_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_SERVER_APIVERSION_ENUM) String() string {
+	switch e {
+	case FsAPI_VERSION_0:
+		return "FsAPI_VERSION_0"
+	case FsAPI_VERSION_1:
+		return "FsAPI_VERSION_1"
+	case FsAPI_VERSION_2:
+		return "FsAPI_VERSION_2"
+	case FsAPI_VERSION_3:
+		return "FsAPI_VERSION_3"
+	default:
+		return fmt.Sprintf("FAX_SERVER_APIVERSION_ENUM(%d)", int32(e))
+	}
+}
 
 // FAX_SERVER_EVENTS_TYPE_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_server_events_type_enum
 type FAX_SERVER_EVENTS_TYPE_ENUM int32
@@ -303,6 +809,37 @@ const (
 	FsetINCOMING_CALL FAX_SERVER_EVENTS_TYPE_ENUM = 512
 )
 
+// String returns the FAX_SERVER_EVENTS_TYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_SERVER_EVENTS_TYPE_ENUM) String() string {
+	switch e {
+	case FsetNONE:
+		return "FsetNONE"
+	case FsetIN_QUEUE:
+		return "FsetIN_QUEUE"
+	case FsetOUT_QUEUE:
+		return "FsetOUT_QUEUE"
+	case FsetCONFIG:
+		return "FsetCONFIG"
+	case FsetACTIVITY:
+		return "FsetACTIVITY"
+	case FsetQUEUE_STATE:
+		return "FsetQUEUE_STATE"
+	case FsetIN_ARCHIVE:
+		return "FsetIN_ARCHIVE"
+	case FsetOUT_ARCHIVE:
+		return "FsetOUT_ARCHIVE"
+	case FsetFXSSVC_ENDED:
+		return "FsetFXSSVC_ENDED"
+	case FsetDEVICE_STATUS:
+		return "FsetDEVICE_STATUS"
+	case FsetINCOMING_CALL:
+		return "FsetINCOMING_CALL"
+	default:
+		return fmt.Sprintf("FAX_SERVER_EVENTS_TYPE_ENUM(%d)", int32(e))
+	}
+}
+
 // FAX_SMTP_AUTHENTICATION_TYPE_ENUM: https://learn.microsoft.com/windows/win32/api/faxcomex/ne-faxcomex-fax_smtp_authentication_type_enum
 type FAX_SMTP_AUTHENTICATION_TYPE_ENUM int32
 
@@ -311,6 +848,21 @@ const (
 	FsatBASIC     FAX_SMTP_AUTHENTICATION_TYPE_ENUM = 1
 	FsatNTLM      FAX_SMTP_AUTHENTICATION_TYPE_ENUM = 2
 )
+
+// String returns the FAX_SMTP_AUTHENTICATION_TYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FAX_SMTP_AUTHENTICATION_TYPE_ENUM) String() string {
+	switch e {
+	case FsatANONYMOUS:
+		return "FsatANONYMOUS"
+	case FsatBASIC:
+		return "FsatBASIC"
+	case FsatNTLM:
+		return "FsatNTLM"
+	default:
+		return fmt.Sprintf("FAX_SMTP_AUTHENTICATION_TYPE_ENUM(%d)", int32(e))
+	}
+}
 
 type STI_DEVICE_MJ_TYPE int32
 
@@ -321,9 +873,37 @@ const (
 	StiDeviceTypeStreamingVideo STI_DEVICE_MJ_TYPE = 3
 )
 
+// String returns the STI_DEVICE_MJ_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STI_DEVICE_MJ_TYPE) String() string {
+	switch e {
+	case StiDeviceTypeDefault:
+		return "StiDeviceTypeDefault"
+	case StiDeviceTypeScanner:
+		return "StiDeviceTypeScanner"
+	case StiDeviceTypeDigitalCamera:
+		return "StiDeviceTypeDigitalCamera"
+	case StiDeviceTypeStreamingVideo:
+		return "StiDeviceTypeStreamingVideo"
+	default:
+		return fmt.Sprintf("STI_DEVICE_MJ_TYPE(%d)", int32(e))
+	}
+}
+
 // SendToMode: https://learn.microsoft.com/windows/win32/api/fxsutility/ne-fxsutility-sendtomode
 type SendToMode int32
 
 const (
 	SEND_TO_FAX_RECIPIENT_ATTACHMENT SendToMode = 0
 )
+
+// String returns the SendToMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SendToMode) String() string {
+	switch e {
+	case SEND_TO_FAX_RECIPIENT_ATTACHMENT:
+		return "SEND_TO_FAX_RECIPIENT_ATTACHMENT"
+	default:
+		return fmt.Sprintf("SendToMode(%d)", int32(e))
+	}
+}

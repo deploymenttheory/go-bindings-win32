@@ -4,7 +4,13 @@
 
 package windowsfirewall
 
+import (
+	"fmt"
+	"strings"
+)
+
 // FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS: https://learn.microsoft.com/windows/win32/api/netfw/ne-netfw-fw_dynamic_keyword_address_enum_flags
+// Bitmask — values may be combined with |.
 type FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS int32
 
 const (
@@ -13,12 +19,45 @@ const (
 	FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS_ALL              FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS = 3
 )
 
+// String returns the FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS) String() string {
+	var parts []string
+	if e&FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS_AUTO_RESOLVE != 0 {
+		parts = append(parts, "FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS_AUTO_RESOLVE")
+	}
+	if e&FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS_NON_AUTO_RESOLVE != 0 {
+		parts = append(parts, "FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS_NON_AUTO_RESOLVE")
+	}
+	if e&FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS_ALL != 0 {
+		parts = append(parts, "FW_DYNAMIC_KEYWORD_ADDRESS_ENUM_FLAGS_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // FW_DYNAMIC_KEYWORD_ADDRESS_FLAGS: https://learn.microsoft.com/windows/win32/api/netfw/ne-netfw-fw_dynamic_keyword_address_flags
+// Bitmask — values may be combined with |.
 type FW_DYNAMIC_KEYWORD_ADDRESS_FLAGS int32
 
 const (
 	FW_DYNAMIC_KEYWORD_ADDRESS_FLAGS_AUTO_RESOLVE FW_DYNAMIC_KEYWORD_ADDRESS_FLAGS = 1
 )
+
+// String returns the FW_DYNAMIC_KEYWORD_ADDRESS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FW_DYNAMIC_KEYWORD_ADDRESS_FLAGS) String() string {
+	var parts []string
+	if e&FW_DYNAMIC_KEYWORD_ADDRESS_FLAGS_AUTO_RESOLVE != 0 {
+		parts = append(parts, "FW_DYNAMIC_KEYWORD_ADDRESS_FLAGS_AUTO_RESOLVE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // FW_DYNAMIC_KEYWORD_ORIGIN_TYPE: https://learn.microsoft.com/windows/win32/api/netfw/ne-netfw-fw_dynamic_keyword_origin_type
 type FW_DYNAMIC_KEYWORD_ORIGIN_TYPE int32
@@ -29,12 +68,40 @@ const (
 	FW_DYNAMIC_KEYWORD_ORIGIN_MDM     FW_DYNAMIC_KEYWORD_ORIGIN_TYPE = 2
 )
 
+// String returns the FW_DYNAMIC_KEYWORD_ORIGIN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FW_DYNAMIC_KEYWORD_ORIGIN_TYPE) String() string {
+	switch e {
+	case FW_DYNAMIC_KEYWORD_ORIGIN_INVALID:
+		return "FW_DYNAMIC_KEYWORD_ORIGIN_INVALID"
+	case FW_DYNAMIC_KEYWORD_ORIGIN_LOCAL:
+		return "FW_DYNAMIC_KEYWORD_ORIGIN_LOCAL"
+	case FW_DYNAMIC_KEYWORD_ORIGIN_MDM:
+		return "FW_DYNAMIC_KEYWORD_ORIGIN_MDM"
+	default:
+		return fmt.Sprintf("FW_DYNAMIC_KEYWORD_ORIGIN_TYPE(%d)", int32(e))
+	}
+}
+
 type ICS_TARGETTYPE int32
 
 const (
 	ICSTT_NAME      ICS_TARGETTYPE = 0
 	ICSTT_IPADDRESS ICS_TARGETTYPE = 1
 )
+
+// String returns the ICS_TARGETTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ICS_TARGETTYPE) String() string {
+	switch e {
+	case ICSTT_NAME:
+		return "ICSTT_NAME"
+	case ICSTT_IPADDRESS:
+		return "ICSTT_IPADDRESS"
+	default:
+		return fmt.Sprintf("ICS_TARGETTYPE(%d)", int32(e))
+	}
+}
 
 // INET_FIREWALL_AC_CHANGE_TYPE: https://learn.microsoft.com/windows/win32/api/netfw/ne-netfw-inet_firewall_ac_change_type
 type INET_FIREWALL_AC_CHANGE_TYPE int32
@@ -46,6 +113,23 @@ const (
 	INET_FIREWALL_AC_CHANGE_MAX     INET_FIREWALL_AC_CHANGE_TYPE = 3
 )
 
+// String returns the INET_FIREWALL_AC_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INET_FIREWALL_AC_CHANGE_TYPE) String() string {
+	switch e {
+	case INET_FIREWALL_AC_CHANGE_INVALID:
+		return "INET_FIREWALL_AC_CHANGE_INVALID"
+	case INET_FIREWALL_AC_CHANGE_CREATE:
+		return "INET_FIREWALL_AC_CHANGE_CREATE"
+	case INET_FIREWALL_AC_CHANGE_DELETE:
+		return "INET_FIREWALL_AC_CHANGE_DELETE"
+	case INET_FIREWALL_AC_CHANGE_MAX:
+		return "INET_FIREWALL_AC_CHANGE_MAX"
+	default:
+		return fmt.Sprintf("INET_FIREWALL_AC_CHANGE_TYPE(%d)", int32(e))
+	}
+}
+
 // INET_FIREWALL_AC_CREATION_TYPE: https://learn.microsoft.com/windows/win32/api/netfw/ne-netfw-inet_firewall_ac_creation_type
 type INET_FIREWALL_AC_CREATION_TYPE int32
 
@@ -56,12 +140,42 @@ const (
 	INET_FIREWALL_AC_MAX             INET_FIREWALL_AC_CREATION_TYPE = 4
 )
 
+// String returns the INET_FIREWALL_AC_CREATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INET_FIREWALL_AC_CREATION_TYPE) String() string {
+	switch e {
+	case INET_FIREWALL_AC_NONE:
+		return "INET_FIREWALL_AC_NONE"
+	case INET_FIREWALL_AC_PACKAGE_ID_ONLY:
+		return "INET_FIREWALL_AC_PACKAGE_ID_ONLY"
+	case INET_FIREWALL_AC_BINARY:
+		return "INET_FIREWALL_AC_BINARY"
+	case INET_FIREWALL_AC_MAX:
+		return "INET_FIREWALL_AC_MAX"
+	default:
+		return fmt.Sprintf("INET_FIREWALL_AC_CREATION_TYPE(%d)", int32(e))
+	}
+}
+
 type NETCONMGR_ENUM_FLAGS int32
 
 const (
 	NCME_DEFAULT NETCONMGR_ENUM_FLAGS = 0
 	NCME_HIDDEN  NETCONMGR_ENUM_FLAGS = 1
 )
+
+// String returns the NETCONMGR_ENUM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETCONMGR_ENUM_FLAGS) String() string {
+	switch e {
+	case NCME_DEFAULT:
+		return "NCME_DEFAULT"
+	case NCME_HIDDEN:
+		return "NCME_HIDDEN"
+	default:
+		return fmt.Sprintf("NETCONMGR_ENUM_FLAGS(%d)", int32(e))
+	}
+}
 
 type NETCONUI_CONNECT_FLAGS int32
 
@@ -70,6 +184,21 @@ const (
 	NCUC_NO_UI          NETCONUI_CONNECT_FLAGS = 1
 	NCUC_ENABLE_DISABLE NETCONUI_CONNECT_FLAGS = 2
 )
+
+// String returns the NETCONUI_CONNECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETCONUI_CONNECT_FLAGS) String() string {
+	switch e {
+	case NCUC_DEFAULT:
+		return "NCUC_DEFAULT"
+	case NCUC_NO_UI:
+		return "NCUC_NO_UI"
+	case NCUC_ENABLE_DISABLE:
+		return "NCUC_ENABLE_DISABLE"
+	default:
+		return fmt.Sprintf("NETCONUI_CONNECT_FLAGS(%d)", int32(e))
+	}
+}
 
 // NETCON_CHARACTERISTIC_FLAGS: https://learn.microsoft.com/windows/win32/api/netcon/ne-netcon-netcon_characteristic_flags
 type NETCON_CHARACTERISTIC_FLAGS int32
@@ -98,6 +227,57 @@ const (
 	NCCF_LAN_MASK          NETCON_CHARACTERISTIC_FLAGS = 15728640
 )
 
+// String returns the NETCON_CHARACTERISTIC_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETCON_CHARACTERISTIC_FLAGS) String() string {
+	switch e {
+	case NCCF_NONE:
+		return "NCCF_NONE"
+	case NCCF_ALL_USERS:
+		return "NCCF_ALL_USERS"
+	case NCCF_ALLOW_DUPLICATION:
+		return "NCCF_ALLOW_DUPLICATION"
+	case NCCF_ALLOW_REMOVAL:
+		return "NCCF_ALLOW_REMOVAL"
+	case NCCF_ALLOW_RENAME:
+		return "NCCF_ALLOW_RENAME"
+	case NCCF_INCOMING_ONLY:
+		return "NCCF_INCOMING_ONLY"
+	case NCCF_OUTGOING_ONLY:
+		return "NCCF_OUTGOING_ONLY"
+	case NCCF_BRANDED:
+		return "NCCF_BRANDED"
+	case NCCF_SHARED:
+		return "NCCF_SHARED"
+	case NCCF_BRIDGED:
+		return "NCCF_BRIDGED"
+	case NCCF_FIREWALLED:
+		return "NCCF_FIREWALLED"
+	case NCCF_DEFAULT:
+		return "NCCF_DEFAULT"
+	case NCCF_HOMENET_CAPABLE:
+		return "NCCF_HOMENET_CAPABLE"
+	case NCCF_SHARED_PRIVATE:
+		return "NCCF_SHARED_PRIVATE"
+	case NCCF_QUARANTINED:
+		return "NCCF_QUARANTINED"
+	case NCCF_RESERVED:
+		return "NCCF_RESERVED"
+	case NCCF_HOSTED_NETWORK:
+		return "NCCF_HOSTED_NETWORK"
+	case NCCF_VIRTUAL_STATION:
+		return "NCCF_VIRTUAL_STATION"
+	case NCCF_WIFI_DIRECT:
+		return "NCCF_WIFI_DIRECT"
+	case NCCF_BLUETOOTH_MASK:
+		return "NCCF_BLUETOOTH_MASK"
+	case NCCF_LAN_MASK:
+		return "NCCF_LAN_MASK"
+	default:
+		return fmt.Sprintf("NETCON_CHARACTERISTIC_FLAGS(%d)", int32(e))
+	}
+}
+
 // NETCON_MEDIATYPE: https://learn.microsoft.com/windows/win32/api/netcon/ne-netcon-netcon_mediatype
 type NETCON_MEDIATYPE int32
 
@@ -113,6 +293,35 @@ const (
 	NCM_SHAREDACCESSHOST_LAN NETCON_MEDIATYPE = 8
 	NCM_SHAREDACCESSHOST_RAS NETCON_MEDIATYPE = 9
 )
+
+// String returns the NETCON_MEDIATYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETCON_MEDIATYPE) String() string {
+	switch e {
+	case NCM_NONE:
+		return "NCM_NONE"
+	case NCM_DIRECT:
+		return "NCM_DIRECT"
+	case NCM_ISDN:
+		return "NCM_ISDN"
+	case NCM_LAN:
+		return "NCM_LAN"
+	case NCM_PHONE:
+		return "NCM_PHONE"
+	case NCM_TUNNEL:
+		return "NCM_TUNNEL"
+	case NCM_PPPOE:
+		return "NCM_PPPOE"
+	case NCM_BRIDGE:
+		return "NCM_BRIDGE"
+	case NCM_SHAREDACCESSHOST_LAN:
+		return "NCM_SHAREDACCESSHOST_LAN"
+	case NCM_SHAREDACCESSHOST_RAS:
+		return "NCM_SHAREDACCESSHOST_RAS"
+	default:
+		return fmt.Sprintf("NETCON_MEDIATYPE(%d)", int32(e))
+	}
+}
 
 // NETCON_STATUS: https://learn.microsoft.com/windows/win32/api/netcon/ne-netcon-netcon_status
 type NETCON_STATUS int32
@@ -136,6 +345,47 @@ const (
 	NCS_CONNECT_FAILED           NETCON_STATUS = 15
 )
 
+// String returns the NETCON_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETCON_STATUS) String() string {
+	switch e {
+	case NCS_DISCONNECTED:
+		return "NCS_DISCONNECTED"
+	case NCS_CONNECTING:
+		return "NCS_CONNECTING"
+	case NCS_CONNECTED:
+		return "NCS_CONNECTED"
+	case NCS_DISCONNECTING:
+		return "NCS_DISCONNECTING"
+	case NCS_HARDWARE_NOT_PRESENT:
+		return "NCS_HARDWARE_NOT_PRESENT"
+	case NCS_HARDWARE_DISABLED:
+		return "NCS_HARDWARE_DISABLED"
+	case NCS_HARDWARE_MALFUNCTION:
+		return "NCS_HARDWARE_MALFUNCTION"
+	case NCS_MEDIA_DISCONNECTED:
+		return "NCS_MEDIA_DISCONNECTED"
+	case NCS_AUTHENTICATING:
+		return "NCS_AUTHENTICATING"
+	case NCS_AUTHENTICATION_SUCCEEDED:
+		return "NCS_AUTHENTICATION_SUCCEEDED"
+	case NCS_AUTHENTICATION_FAILED:
+		return "NCS_AUTHENTICATION_FAILED"
+	case NCS_INVALID_ADDRESS:
+		return "NCS_INVALID_ADDRESS"
+	case NCS_CREDENTIALS_REQUIRED:
+		return "NCS_CREDENTIALS_REQUIRED"
+	case NCS_ACTION_REQUIRED:
+		return "NCS_ACTION_REQUIRED"
+	case NCS_ACTION_REQUIRED_RETRY:
+		return "NCS_ACTION_REQUIRED_RETRY"
+	case NCS_CONNECT_FAILED:
+		return "NCS_CONNECT_FAILED"
+	default:
+		return fmt.Sprintf("NETCON_STATUS(%d)", int32(e))
+	}
+}
+
 // NETCON_TYPE: https://learn.microsoft.com/windows/win32/api/netcon/ne-netcon-netcon_type
 type NETCON_TYPE int32
 
@@ -149,6 +399,29 @@ const (
 	NCT_BRIDGE         NETCON_TYPE = 6
 )
 
+// String returns the NETCON_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETCON_TYPE) String() string {
+	switch e {
+	case NCT_DIRECT_CONNECT:
+		return "NCT_DIRECT_CONNECT"
+	case NCT_INBOUND:
+		return "NCT_INBOUND"
+	case NCT_INTERNET:
+		return "NCT_INTERNET"
+	case NCT_LAN:
+		return "NCT_LAN"
+	case NCT_PHONE:
+		return "NCT_PHONE"
+	case NCT_TUNNEL:
+		return "NCT_TUNNEL"
+	case NCT_BRIDGE:
+		return "NCT_BRIDGE"
+	default:
+		return fmt.Sprintf("NETCON_TYPE(%d)", int32(e))
+	}
+}
+
 // NETISO_ERROR_TYPE: https://learn.microsoft.com/windows/win32/api/netfw/ne-netfw-netiso_error_type
 type NETISO_ERROR_TYPE int32
 
@@ -160,6 +433,25 @@ const (
 	NETISO_ERROR_TYPE_MAX                    NETISO_ERROR_TYPE = 4
 )
 
+// String returns the NETISO_ERROR_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETISO_ERROR_TYPE) String() string {
+	switch e {
+	case NETISO_ERROR_TYPE_NONE:
+		return "NETISO_ERROR_TYPE_NONE"
+	case NETISO_ERROR_TYPE_PRIVATE_NETWORK:
+		return "NETISO_ERROR_TYPE_PRIVATE_NETWORK"
+	case NETISO_ERROR_TYPE_INTERNET_CLIENT:
+		return "NETISO_ERROR_TYPE_INTERNET_CLIENT"
+	case NETISO_ERROR_TYPE_INTERNET_CLIENT_SERVER:
+		return "NETISO_ERROR_TYPE_INTERNET_CLIENT_SERVER"
+	case NETISO_ERROR_TYPE_MAX:
+		return "NETISO_ERROR_TYPE_MAX"
+	default:
+		return fmt.Sprintf("NETISO_ERROR_TYPE(%d)", int32(e))
+	}
+}
+
 // NETISO_FLAG: https://learn.microsoft.com/windows/win32/api/netfw/ne-netfw-netiso_flag
 type NETISO_FLAG int32
 
@@ -167,6 +459,19 @@ const (
 	NETISO_FLAG_FORCE_COMPUTE_BINARIES NETISO_FLAG = 1
 	NETISO_FLAG_MAX                    NETISO_FLAG = 2
 )
+
+// String returns the NETISO_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETISO_FLAG) String() string {
+	switch e {
+	case NETISO_FLAG_FORCE_COMPUTE_BINARIES:
+		return "NETISO_FLAG_FORCE_COMPUTE_BINARIES"
+	case NETISO_FLAG_MAX:
+		return "NETISO_FLAG_MAX"
+	default:
+		return fmt.Sprintf("NETISO_FLAG(%d)", int32(e))
+	}
+}
 
 // NET_FW_ACTION: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_action
 type NET_FW_ACTION int32
@@ -176,6 +481,21 @@ const (
 	NET_FW_ACTION_ALLOW NET_FW_ACTION = 1
 	NET_FW_ACTION_MAX   NET_FW_ACTION = 2
 )
+
+// String returns the NET_FW_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_ACTION) String() string {
+	switch e {
+	case NET_FW_ACTION_BLOCK:
+		return "NET_FW_ACTION_BLOCK"
+	case NET_FW_ACTION_ALLOW:
+		return "NET_FW_ACTION_ALLOW"
+	case NET_FW_ACTION_MAX:
+		return "NET_FW_ACTION_MAX"
+	default:
+		return fmt.Sprintf("NET_FW_ACTION(%d)", int32(e))
+	}
+}
 
 // NET_FW_AUTHENTICATE_TYPE: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_authenticate_type
 type NET_FW_AUTHENTICATE_TYPE int32
@@ -188,6 +508,25 @@ const (
 	NET_FW_AUTHENTICATE_AND_ENCRYPT              NET_FW_AUTHENTICATE_TYPE = 4
 )
 
+// String returns the NET_FW_AUTHENTICATE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_AUTHENTICATE_TYPE) String() string {
+	switch e {
+	case NET_FW_AUTHENTICATE_NONE:
+		return "NET_FW_AUTHENTICATE_NONE"
+	case NET_FW_AUTHENTICATE_NO_ENCAPSULATION:
+		return "NET_FW_AUTHENTICATE_NO_ENCAPSULATION"
+	case NET_FW_AUTHENTICATE_WITH_INTEGRITY:
+		return "NET_FW_AUTHENTICATE_WITH_INTEGRITY"
+	case NET_FW_AUTHENTICATE_AND_NEGOTIATE_ENCRYPTION:
+		return "NET_FW_AUTHENTICATE_AND_NEGOTIATE_ENCRYPTION"
+	case NET_FW_AUTHENTICATE_AND_ENCRYPT:
+		return "NET_FW_AUTHENTICATE_AND_ENCRYPT"
+	default:
+		return fmt.Sprintf("NET_FW_AUTHENTICATE_TYPE(%d)", int32(e))
+	}
+}
+
 // NET_FW_EDGE_TRAVERSAL_TYPE: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_edge_traversal_type
 type NET_FW_EDGE_TRAVERSAL_TYPE int32
 
@@ -198,6 +537,23 @@ const (
 	NET_FW_EDGE_TRAVERSAL_TYPE_DEFER_TO_USER NET_FW_EDGE_TRAVERSAL_TYPE = 3
 )
 
+// String returns the NET_FW_EDGE_TRAVERSAL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_EDGE_TRAVERSAL_TYPE) String() string {
+	switch e {
+	case NET_FW_EDGE_TRAVERSAL_TYPE_DENY:
+		return "NET_FW_EDGE_TRAVERSAL_TYPE_DENY"
+	case NET_FW_EDGE_TRAVERSAL_TYPE_ALLOW:
+		return "NET_FW_EDGE_TRAVERSAL_TYPE_ALLOW"
+	case NET_FW_EDGE_TRAVERSAL_TYPE_DEFER_TO_APP:
+		return "NET_FW_EDGE_TRAVERSAL_TYPE_DEFER_TO_APP"
+	case NET_FW_EDGE_TRAVERSAL_TYPE_DEFER_TO_USER:
+		return "NET_FW_EDGE_TRAVERSAL_TYPE_DEFER_TO_USER"
+	default:
+		return fmt.Sprintf("NET_FW_EDGE_TRAVERSAL_TYPE(%d)", int32(e))
+	}
+}
+
 // NET_FW_IP_PROTOCOL: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_ip_protocol
 type NET_FW_IP_PROTOCOL int32
 
@@ -206,6 +562,21 @@ const (
 	NET_FW_IP_PROTOCOL_UDP NET_FW_IP_PROTOCOL = 17
 	NET_FW_IP_PROTOCOL_ANY NET_FW_IP_PROTOCOL = 256
 )
+
+// String returns the NET_FW_IP_PROTOCOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_IP_PROTOCOL) String() string {
+	switch e {
+	case NET_FW_IP_PROTOCOL_TCP:
+		return "NET_FW_IP_PROTOCOL_TCP"
+	case NET_FW_IP_PROTOCOL_UDP:
+		return "NET_FW_IP_PROTOCOL_UDP"
+	case NET_FW_IP_PROTOCOL_ANY:
+		return "NET_FW_IP_PROTOCOL_ANY"
+	default:
+		return fmt.Sprintf("NET_FW_IP_PROTOCOL(%d)", int32(e))
+	}
+}
 
 // NET_FW_IP_VERSION: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_ip_version
 type NET_FW_IP_VERSION int32
@@ -217,6 +588,23 @@ const (
 	NET_FW_IP_VERSION_MAX NET_FW_IP_VERSION = 3
 )
 
+// String returns the NET_FW_IP_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_IP_VERSION) String() string {
+	switch e {
+	case NET_FW_IP_VERSION_V4:
+		return "NET_FW_IP_VERSION_V4"
+	case NET_FW_IP_VERSION_V6:
+		return "NET_FW_IP_VERSION_V6"
+	case NET_FW_IP_VERSION_ANY:
+		return "NET_FW_IP_VERSION_ANY"
+	case NET_FW_IP_VERSION_MAX:
+		return "NET_FW_IP_VERSION_MAX"
+	default:
+		return fmt.Sprintf("NET_FW_IP_VERSION(%d)", int32(e))
+	}
+}
+
 // NET_FW_MODIFY_STATE: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_modify_state
 type NET_FW_MODIFY_STATE int32
 
@@ -225,6 +613,21 @@ const (
 	NET_FW_MODIFY_STATE_GP_OVERRIDE     NET_FW_MODIFY_STATE = 1
 	NET_FW_MODIFY_STATE_INBOUND_BLOCKED NET_FW_MODIFY_STATE = 2
 )
+
+// String returns the NET_FW_MODIFY_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_MODIFY_STATE) String() string {
+	switch e {
+	case NET_FW_MODIFY_STATE_OK:
+		return "NET_FW_MODIFY_STATE_OK"
+	case NET_FW_MODIFY_STATE_GP_OVERRIDE:
+		return "NET_FW_MODIFY_STATE_GP_OVERRIDE"
+	case NET_FW_MODIFY_STATE_INBOUND_BLOCKED:
+		return "NET_FW_MODIFY_STATE_INBOUND_BLOCKED"
+	default:
+		return fmt.Sprintf("NET_FW_MODIFY_STATE(%d)", int32(e))
+	}
+}
 
 // NET_FW_POLICY_TYPE: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_policy_type
 type NET_FW_POLICY_TYPE int32
@@ -236,6 +639,23 @@ const (
 	NET_FW_POLICY_TYPE_MAX  NET_FW_POLICY_TYPE = 3
 )
 
+// String returns the NET_FW_POLICY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_POLICY_TYPE) String() string {
+	switch e {
+	case NET_FW_POLICY_GROUP:
+		return "NET_FW_POLICY_GROUP"
+	case NET_FW_POLICY_LOCAL:
+		return "NET_FW_POLICY_LOCAL"
+	case NET_FW_POLICY_EFFECTIVE:
+		return "NET_FW_POLICY_EFFECTIVE"
+	case NET_FW_POLICY_TYPE_MAX:
+		return "NET_FW_POLICY_TYPE_MAX"
+	default:
+		return fmt.Sprintf("NET_FW_POLICY_TYPE(%d)", int32(e))
+	}
+}
+
 // NET_FW_PROFILE_TYPE: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_profile_type
 type NET_FW_PROFILE_TYPE int32
 
@@ -246,6 +666,23 @@ const (
 	NET_FW_PROFILE_TYPE_MAX NET_FW_PROFILE_TYPE = 3
 )
 
+// String returns the NET_FW_PROFILE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_PROFILE_TYPE) String() string {
+	switch e {
+	case NET_FW_PROFILE_DOMAIN:
+		return "NET_FW_PROFILE_DOMAIN"
+	case NET_FW_PROFILE_STANDARD:
+		return "NET_FW_PROFILE_STANDARD"
+	case NET_FW_PROFILE_CURRENT:
+		return "NET_FW_PROFILE_CURRENT"
+	case NET_FW_PROFILE_TYPE_MAX:
+		return "NET_FW_PROFILE_TYPE_MAX"
+	default:
+		return fmt.Sprintf("NET_FW_PROFILE_TYPE(%d)", int32(e))
+	}
+}
+
 // NET_FW_PROFILE_TYPE2: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_profile_type2
 type NET_FW_PROFILE_TYPE2 int32
 
@@ -255,6 +692,23 @@ const (
 	NET_FW_PROFILE2_PUBLIC  NET_FW_PROFILE_TYPE2 = 4
 	NET_FW_PROFILE2_ALL     NET_FW_PROFILE_TYPE2 = 2147483647
 )
+
+// String returns the NET_FW_PROFILE_TYPE2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_PROFILE_TYPE2) String() string {
+	switch e {
+	case NET_FW_PROFILE2_DOMAIN:
+		return "NET_FW_PROFILE2_DOMAIN"
+	case NET_FW_PROFILE2_PRIVATE:
+		return "NET_FW_PROFILE2_PRIVATE"
+	case NET_FW_PROFILE2_PUBLIC:
+		return "NET_FW_PROFILE2_PUBLIC"
+	case NET_FW_PROFILE2_ALL:
+		return "NET_FW_PROFILE2_ALL"
+	default:
+		return fmt.Sprintf("NET_FW_PROFILE_TYPE2(%d)", int32(e))
+	}
+}
 
 // NET_FW_RULE_CATEGORY: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_rule_category
 type NET_FW_RULE_CATEGORY int32
@@ -267,6 +721,25 @@ const (
 	NET_FW_RULE_CATEGORY_MAX      NET_FW_RULE_CATEGORY = 4
 )
 
+// String returns the NET_FW_RULE_CATEGORY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_RULE_CATEGORY) String() string {
+	switch e {
+	case NET_FW_RULE_CATEGORY_BOOT:
+		return "NET_FW_RULE_CATEGORY_BOOT"
+	case NET_FW_RULE_CATEGORY_STEALTH:
+		return "NET_FW_RULE_CATEGORY_STEALTH"
+	case NET_FW_RULE_CATEGORY_FIREWALL:
+		return "NET_FW_RULE_CATEGORY_FIREWALL"
+	case NET_FW_RULE_CATEGORY_CONSEC:
+		return "NET_FW_RULE_CATEGORY_CONSEC"
+	case NET_FW_RULE_CATEGORY_MAX:
+		return "NET_FW_RULE_CATEGORY_MAX"
+	default:
+		return fmt.Sprintf("NET_FW_RULE_CATEGORY(%d)", int32(e))
+	}
+}
+
 // NET_FW_RULE_DIRECTION: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_rule_direction
 type NET_FW_RULE_DIRECTION int32
 
@@ -275,6 +748,21 @@ const (
 	NET_FW_RULE_DIR_OUT NET_FW_RULE_DIRECTION = 2
 	NET_FW_RULE_DIR_MAX NET_FW_RULE_DIRECTION = 3
 )
+
+// String returns the NET_FW_RULE_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_RULE_DIRECTION) String() string {
+	switch e {
+	case NET_FW_RULE_DIR_IN:
+		return "NET_FW_RULE_DIR_IN"
+	case NET_FW_RULE_DIR_OUT:
+		return "NET_FW_RULE_DIR_OUT"
+	case NET_FW_RULE_DIR_MAX:
+		return "NET_FW_RULE_DIR_MAX"
+	default:
+		return fmt.Sprintf("NET_FW_RULE_DIRECTION(%d)", int32(e))
+	}
+}
 
 // NET_FW_SCOPE: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_scope
 type NET_FW_SCOPE int32
@@ -285,6 +773,23 @@ const (
 	NET_FW_SCOPE_CUSTOM       NET_FW_SCOPE = 2
 	NET_FW_SCOPE_MAX          NET_FW_SCOPE = 3
 )
+
+// String returns the NET_FW_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_SCOPE) String() string {
+	switch e {
+	case NET_FW_SCOPE_ALL:
+		return "NET_FW_SCOPE_ALL"
+	case NET_FW_SCOPE_LOCAL_SUBNET:
+		return "NET_FW_SCOPE_LOCAL_SUBNET"
+	case NET_FW_SCOPE_CUSTOM:
+		return "NET_FW_SCOPE_CUSTOM"
+	case NET_FW_SCOPE_MAX:
+		return "NET_FW_SCOPE_MAX"
+	default:
+		return fmt.Sprintf("NET_FW_SCOPE(%d)", int32(e))
+	}
+}
 
 // NET_FW_SERVICE_TYPE: https://learn.microsoft.com/windows/win32/api/icftypes/ne-icftypes-net_fw_service_type
 type NET_FW_SERVICE_TYPE int32
@@ -297,6 +802,25 @@ const (
 	NET_FW_SERVICE_TYPE_MAX       NET_FW_SERVICE_TYPE = 4
 )
 
+// String returns the NET_FW_SERVICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NET_FW_SERVICE_TYPE) String() string {
+	switch e {
+	case NET_FW_SERVICE_FILE_AND_PRINT:
+		return "NET_FW_SERVICE_FILE_AND_PRINT"
+	case NET_FW_SERVICE_UPNP:
+		return "NET_FW_SERVICE_UPNP"
+	case NET_FW_SERVICE_REMOTE_DESKTOP:
+		return "NET_FW_SERVICE_REMOTE_DESKTOP"
+	case NET_FW_SERVICE_NONE:
+		return "NET_FW_SERVICE_NONE"
+	case NET_FW_SERVICE_TYPE_MAX:
+		return "NET_FW_SERVICE_TYPE_MAX"
+	default:
+		return fmt.Sprintf("NET_FW_SERVICE_TYPE(%d)", int32(e))
+	}
+}
+
 // SHARINGCONNECTIONTYPE: https://learn.microsoft.com/windows/win32/api/netcon/ne-netcon-sharingconnectiontype
 type SHARINGCONNECTIONTYPE int32
 
@@ -305,9 +829,35 @@ const (
 	ICSSHARINGTYPE_PRIVATE SHARINGCONNECTIONTYPE = 1
 )
 
+// String returns the SHARINGCONNECTIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHARINGCONNECTIONTYPE) String() string {
+	switch e {
+	case ICSSHARINGTYPE_PUBLIC:
+		return "ICSSHARINGTYPE_PUBLIC"
+	case ICSSHARINGTYPE_PRIVATE:
+		return "ICSSHARINGTYPE_PRIVATE"
+	default:
+		return fmt.Sprintf("SHARINGCONNECTIONTYPE(%d)", int32(e))
+	}
+}
+
 type SHARINGCONNECTION_ENUM_FLAGS int32
 
 const (
 	ICSSC_DEFAULT SHARINGCONNECTION_ENUM_FLAGS = 0
 	ICSSC_ENABLED SHARINGCONNECTION_ENUM_FLAGS = 1
 )
+
+// String returns the SHARINGCONNECTION_ENUM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHARINGCONNECTION_ENUM_FLAGS) String() string {
+	switch e {
+	case ICSSC_DEFAULT:
+		return "ICSSC_DEFAULT"
+	case ICSSC_ENABLED:
+		return "ICSSC_ENABLED"
+	default:
+		return fmt.Sprintf("SHARINGCONNECTION_ENUM_FLAGS(%d)", int32(e))
+	}
+}

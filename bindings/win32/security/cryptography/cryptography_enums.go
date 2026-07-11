@@ -4,6 +4,11 @@
 
 package cryptography
 
+import (
+	"fmt"
+	"strings"
+)
+
 // ALG_ID: https://learn.microsoft.com/windows/win32/SecCrypto/alg-id
 type ALG_ID uint32
 
@@ -63,12 +68,138 @@ const (
 	CALG_THIRDPARTY_HASH         ALG_ID = 36864
 )
 
+// String returns the ALG_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ALG_ID) String() string {
+	switch e {
+	case CALG_MD2:
+		return "CALG_MD2"
+	case CALG_MD4:
+		return "CALG_MD4"
+	case CALG_MD5:
+		return "CALG_MD5"
+	case CALG_SHA:
+		return "CALG_SHA"
+	case CALG_MAC:
+		return "CALG_MAC"
+	case CALG_RSA_SIGN:
+		return "CALG_RSA_SIGN"
+	case CALG_DSS_SIGN:
+		return "CALG_DSS_SIGN"
+	case CALG_NO_SIGN:
+		return "CALG_NO_SIGN"
+	case CALG_RSA_KEYX:
+		return "CALG_RSA_KEYX"
+	case CALG_DES:
+		return "CALG_DES"
+	case CALG_3DES_112:
+		return "CALG_3DES_112"
+	case CALG_3DES:
+		return "CALG_3DES"
+	case CALG_DESX:
+		return "CALG_DESX"
+	case CALG_RC2:
+		return "CALG_RC2"
+	case CALG_RC4:
+		return "CALG_RC4"
+	case CALG_SEAL:
+		return "CALG_SEAL"
+	case CALG_DH_SF:
+		return "CALG_DH_SF"
+	case CALG_DH_EPHEM:
+		return "CALG_DH_EPHEM"
+	case CALG_AGREEDKEY_ANY:
+		return "CALG_AGREEDKEY_ANY"
+	case CALG_KEA_KEYX:
+		return "CALG_KEA_KEYX"
+	case CALG_HUGHES_MD5:
+		return "CALG_HUGHES_MD5"
+	case CALG_SKIPJACK:
+		return "CALG_SKIPJACK"
+	case CALG_TEK:
+		return "CALG_TEK"
+	case CALG_CYLINK_MEK:
+		return "CALG_CYLINK_MEK"
+	case CALG_SSL3_SHAMD5:
+		return "CALG_SSL3_SHAMD5"
+	case CALG_SSL3_MASTER:
+		return "CALG_SSL3_MASTER"
+	case CALG_SCHANNEL_MASTER_HASH:
+		return "CALG_SCHANNEL_MASTER_HASH"
+	case CALG_SCHANNEL_MAC_KEY:
+		return "CALG_SCHANNEL_MAC_KEY"
+	case CALG_SCHANNEL_ENC_KEY:
+		return "CALG_SCHANNEL_ENC_KEY"
+	case CALG_PCT1_MASTER:
+		return "CALG_PCT1_MASTER"
+	case CALG_SSL2_MASTER:
+		return "CALG_SSL2_MASTER"
+	case CALG_TLS1_MASTER:
+		return "CALG_TLS1_MASTER"
+	case CALG_RC5:
+		return "CALG_RC5"
+	case CALG_HMAC:
+		return "CALG_HMAC"
+	case CALG_TLS1PRF:
+		return "CALG_TLS1PRF"
+	case CALG_HASH_REPLACE_OWF:
+		return "CALG_HASH_REPLACE_OWF"
+	case CALG_AES_128:
+		return "CALG_AES_128"
+	case CALG_AES_192:
+		return "CALG_AES_192"
+	case CALG_AES_256:
+		return "CALG_AES_256"
+	case CALG_AES:
+		return "CALG_AES"
+	case CALG_SHA_256:
+		return "CALG_SHA_256"
+	case CALG_SHA_384:
+		return "CALG_SHA_384"
+	case CALG_SHA_512:
+		return "CALG_SHA_512"
+	case CALG_ECDH:
+		return "CALG_ECDH"
+	case CALG_ECDH_EPHEM:
+		return "CALG_ECDH_EPHEM"
+	case CALG_ECMQV:
+		return "CALG_ECMQV"
+	case CALG_ECDSA:
+		return "CALG_ECDSA"
+	case CALG_NULLCIPHER:
+		return "CALG_NULLCIPHER"
+	case CALG_THIRDPARTY_KEY_EXCHANGE:
+		return "CALG_THIRDPARTY_KEY_EXCHANGE"
+	case CALG_THIRDPARTY_SIGNATURE:
+		return "CALG_THIRDPARTY_SIGNATURE"
+	case CALG_THIRDPARTY_CIPHER:
+		return "CALG_THIRDPARTY_CIPHER"
+	case CALG_THIRDPARTY_HASH:
+		return "CALG_THIRDPARTY_HASH"
+	default:
+		return fmt.Sprintf("ALG_ID(%d)", uint32(e))
+	}
+}
+
 type BCRYPTGENRANDOM_FLAGS uint32
 
 const (
 	BCRYPT_RNG_USE_ENTROPY_IN_BUFFER BCRYPTGENRANDOM_FLAGS = 1
 	BCRYPT_USE_SYSTEM_PREFERRED_RNG  BCRYPTGENRANDOM_FLAGS = 2
 )
+
+// String returns the BCRYPTGENRANDOM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPTGENRANDOM_FLAGS) String() string {
+	switch e {
+	case BCRYPT_RNG_USE_ENTROPY_IN_BUFFER:
+		return "BCRYPT_RNG_USE_ENTROPY_IN_BUFFER"
+	case BCRYPT_USE_SYSTEM_PREFERRED_RNG:
+		return "BCRYPT_USE_SYSTEM_PREFERRED_RNG"
+	default:
+		return fmt.Sprintf("BCRYPTGENRANDOM_FLAGS(%d)", uint32(e))
+	}
+}
 
 type BCRYPT_DH_KEY_BLOB_MAGIC uint32
 
@@ -77,6 +208,19 @@ const (
 	BCRYPT_DH_PRIVATE_MAGIC BCRYPT_DH_KEY_BLOB_MAGIC = 1448101956
 )
 
+// String returns the BCRYPT_DH_KEY_BLOB_MAGIC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_DH_KEY_BLOB_MAGIC) String() string {
+	switch e {
+	case BCRYPT_DH_PUBLIC_MAGIC:
+		return "BCRYPT_DH_PUBLIC_MAGIC"
+	case BCRYPT_DH_PRIVATE_MAGIC:
+		return "BCRYPT_DH_PRIVATE_MAGIC"
+	default:
+		return fmt.Sprintf("BCRYPT_DH_KEY_BLOB_MAGIC(%d)", uint32(e))
+	}
+}
+
 type BCRYPT_DSA_MAGIC uint32
 
 const (
@@ -84,6 +228,20 @@ const (
 	BCRYPT_DSA_PRIVATE_MAGIC BCRYPT_DSA_MAGIC = 1448104772
 )
 
+// String returns the BCRYPT_DSA_MAGIC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_DSA_MAGIC) String() string {
+	switch e {
+	case BCRYPT_DSA_PUBLIC_MAGIC:
+		return "BCRYPT_DSA_PUBLIC_MAGIC"
+	case BCRYPT_DSA_PRIVATE_MAGIC:
+		return "BCRYPT_DSA_PRIVATE_MAGIC"
+	default:
+		return fmt.Sprintf("BCRYPT_DSA_MAGIC(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type BCRYPT_FLAGS uint32
 
 const (
@@ -94,6 +252,31 @@ const (
 	BCRYPT_PAD_PSS       BCRYPT_FLAGS = 8
 )
 
+// String returns the BCRYPT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_FLAGS) String() string {
+	var parts []string
+	if e&BCRYPT_BLOCK_PADDING != 0 {
+		parts = append(parts, "BCRYPT_BLOCK_PADDING")
+	}
+	if e&BCRYPT_PAD_NONE != 0 {
+		parts = append(parts, "BCRYPT_PAD_NONE")
+	}
+	if e&BCRYPT_PAD_OAEP != 0 {
+		parts = append(parts, "BCRYPT_PAD_OAEP")
+	}
+	if e&BCRYPT_PAD_PKCS1 != 0 {
+		parts = append(parts, "BCRYPT_PAD_PKCS1")
+	}
+	if e&BCRYPT_PAD_PSS != 0 {
+		parts = append(parts, "BCRYPT_PAD_PSS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // BCRYPT_HASH_OPERATION_TYPE: https://learn.microsoft.com/windows/win32/api/bcrypt/ne-bcrypt-bcrypt_hash_operation_type
 type BCRYPT_HASH_OPERATION_TYPE int32
 
@@ -101,6 +284,19 @@ const (
 	BCRYPT_HASH_OPERATION_HASH_DATA   BCRYPT_HASH_OPERATION_TYPE = 1
 	BCRYPT_HASH_OPERATION_FINISH_HASH BCRYPT_HASH_OPERATION_TYPE = 2
 )
+
+// String returns the BCRYPT_HASH_OPERATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_HASH_OPERATION_TYPE) String() string {
+	switch e {
+	case BCRYPT_HASH_OPERATION_HASH_DATA:
+		return "BCRYPT_HASH_OPERATION_HASH_DATA"
+	case BCRYPT_HASH_OPERATION_FINISH_HASH:
+		return "BCRYPT_HASH_OPERATION_FINISH_HASH"
+	default:
+		return fmt.Sprintf("BCRYPT_HASH_OPERATION_TYPE(%d)", int32(e))
+	}
+}
 
 type BCRYPT_INTERFACE uint32
 
@@ -116,6 +312,33 @@ const (
 	NCRYPT_SCHANNEL_SIGNATURE_INTERFACE    BCRYPT_INTERFACE = 65539
 )
 
+// String returns the BCRYPT_INTERFACE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_INTERFACE) String() string {
+	switch e {
+	case BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE:
+		return "BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE"
+	case BCRYPT_CIPHER_INTERFACE:
+		return "BCRYPT_CIPHER_INTERFACE"
+	case BCRYPT_HASH_INTERFACE:
+		return "BCRYPT_HASH_INTERFACE"
+	case BCRYPT_RNG_INTERFACE:
+		return "BCRYPT_RNG_INTERFACE"
+	case BCRYPT_SECRET_AGREEMENT_INTERFACE:
+		return "BCRYPT_SECRET_AGREEMENT_INTERFACE"
+	case BCRYPT_SIGNATURE_INTERFACE:
+		return "BCRYPT_SIGNATURE_INTERFACE"
+	case NCRYPT_KEY_STORAGE_INTERFACE:
+		return "NCRYPT_KEY_STORAGE_INTERFACE"
+	case NCRYPT_SCHANNEL_INTERFACE:
+		return "NCRYPT_SCHANNEL_INTERFACE"
+	case NCRYPT_SCHANNEL_SIGNATURE_INTERFACE:
+		return "NCRYPT_SCHANNEL_SIGNATURE_INTERFACE"
+	default:
+		return fmt.Sprintf("BCRYPT_INTERFACE(%d)", uint32(e))
+	}
+}
+
 // BCRYPT_MULTI_OPERATION_TYPE: https://learn.microsoft.com/windows/win32/api/bcrypt/ne-bcrypt-bcrypt_multi_operation_type
 type BCRYPT_MULTI_OPERATION_TYPE int32
 
@@ -123,6 +346,18 @@ const (
 	BCRYPT_OPERATION_TYPE_HASH BCRYPT_MULTI_OPERATION_TYPE = 1
 )
 
+// String returns the BCRYPT_MULTI_OPERATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_MULTI_OPERATION_TYPE) String() string {
+	switch e {
+	case BCRYPT_OPERATION_TYPE_HASH:
+		return "BCRYPT_OPERATION_TYPE_HASH"
+	default:
+		return fmt.Sprintf("BCRYPT_MULTI_OPERATION_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS uint32
 
 const (
@@ -131,6 +366,26 @@ const (
 	BCRYPT_HASH_REUSABLE_FLAG   BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS = 32
 )
 
+// String returns the BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS) String() string {
+	var parts []string
+	if e&BCRYPT_ALG_HANDLE_HMAC_FLAG != 0 {
+		parts = append(parts, "BCRYPT_ALG_HANDLE_HMAC_FLAG")
+	}
+	if e&BCRYPT_PROV_DISPATCH != 0 {
+		parts = append(parts, "BCRYPT_PROV_DISPATCH")
+	}
+	if e&BCRYPT_HASH_REUSABLE_FLAG != 0 {
+		parts = append(parts, "BCRYPT_HASH_REUSABLE_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type BCRYPT_OPERATION uint32
 
 const (
@@ -142,6 +397,34 @@ const (
 	BCRYPT_RNG_OPERATION                   BCRYPT_OPERATION = 32
 )
 
+// String returns the BCRYPT_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_OPERATION) String() string {
+	var parts []string
+	if e&BCRYPT_CIPHER_OPERATION != 0 {
+		parts = append(parts, "BCRYPT_CIPHER_OPERATION")
+	}
+	if e&BCRYPT_HASH_OPERATION != 0 {
+		parts = append(parts, "BCRYPT_HASH_OPERATION")
+	}
+	if e&BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION != 0 {
+		parts = append(parts, "BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION")
+	}
+	if e&BCRYPT_SECRET_AGREEMENT_OPERATION != 0 {
+		parts = append(parts, "BCRYPT_SECRET_AGREEMENT_OPERATION")
+	}
+	if e&BCRYPT_SIGNATURE_OPERATION != 0 {
+		parts = append(parts, "BCRYPT_SIGNATURE_OPERATION")
+	}
+	if e&BCRYPT_RNG_OPERATION != 0 {
+		parts = append(parts, "BCRYPT_RNG_OPERATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type BCRYPT_QUERY_PROVIDER_MODE uint32
 
 const (
@@ -151,12 +434,46 @@ const (
 	CRYPT_MM  BCRYPT_QUERY_PROVIDER_MODE = 3
 )
 
+// String returns the BCRYPT_QUERY_PROVIDER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_QUERY_PROVIDER_MODE) String() string {
+	switch e {
+	case CRYPT_ANY:
+		return "CRYPT_ANY"
+	case CRYPT_UM:
+		return "CRYPT_UM"
+	case CRYPT_KM:
+		return "CRYPT_KM"
+	case CRYPT_MM:
+		return "CRYPT_MM"
+	default:
+		return fmt.Sprintf("BCRYPT_QUERY_PROVIDER_MODE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type BCRYPT_RESOLVE_PROVIDERS_FLAGS uint32
 
 const (
 	CRYPT_ALL_FUNCTIONS BCRYPT_RESOLVE_PROVIDERS_FLAGS = 1
 	CRYPT_ALL_PROVIDERS BCRYPT_RESOLVE_PROVIDERS_FLAGS = 2
 )
+
+// String returns the BCRYPT_RESOLVE_PROVIDERS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_RESOLVE_PROVIDERS_FLAGS) String() string {
+	var parts []string
+	if e&CRYPT_ALL_FUNCTIONS != 0 {
+		parts = append(parts, "CRYPT_ALL_FUNCTIONS")
+	}
+	if e&CRYPT_ALL_PROVIDERS != 0 {
+		parts = append(parts, "CRYPT_ALL_PROVIDERS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type BCRYPT_RSAKEY_BLOB_MAGIC uint32
 
@@ -166,12 +483,40 @@ const (
 	BCRYPT_RSAFULLPRIVATE_MAGIC BCRYPT_RSAKEY_BLOB_MAGIC = 859919186
 )
 
+// String returns the BCRYPT_RSAKEY_BLOB_MAGIC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_RSAKEY_BLOB_MAGIC) String() string {
+	switch e {
+	case BCRYPT_RSAPUBLIC_MAGIC:
+		return "BCRYPT_RSAPUBLIC_MAGIC"
+	case BCRYPT_RSAPRIVATE_MAGIC:
+		return "BCRYPT_RSAPRIVATE_MAGIC"
+	case BCRYPT_RSAFULLPRIVATE_MAGIC:
+		return "BCRYPT_RSAFULLPRIVATE_MAGIC"
+	default:
+		return fmt.Sprintf("BCRYPT_RSAKEY_BLOB_MAGIC(%d)", uint32(e))
+	}
+}
+
 type BCRYPT_TABLE uint32
 
 const (
 	CRYPT_LOCAL  BCRYPT_TABLE = 1
 	CRYPT_DOMAIN BCRYPT_TABLE = 2
 )
+
+// String returns the BCRYPT_TABLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BCRYPT_TABLE) String() string {
+	switch e {
+	case CRYPT_LOCAL:
+		return "CRYPT_LOCAL"
+	case CRYPT_DOMAIN:
+		return "CRYPT_DOMAIN"
+	default:
+		return fmt.Sprintf("BCRYPT_TABLE(%d)", uint32(e))
+	}
+}
 
 // CARD_DIRECTORY_ACCESS_CONDITION: https://learn.microsoft.com/windows/win32/SecCrypto/card-directory-access-condition
 type CARD_DIRECTORY_ACCESS_CONDITION int32
@@ -181,6 +526,21 @@ const (
 	UserCreateDeleteDirAc  CARD_DIRECTORY_ACCESS_CONDITION = 1
 	AdminCreateDeleteDirAc CARD_DIRECTORY_ACCESS_CONDITION = 2
 )
+
+// String returns the CARD_DIRECTORY_ACCESS_CONDITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CARD_DIRECTORY_ACCESS_CONDITION) String() string {
+	switch e {
+	case InvalidDirAc:
+		return "InvalidDirAc"
+	case UserCreateDeleteDirAc:
+		return "UserCreateDeleteDirAc"
+	case AdminCreateDeleteDirAc:
+		return "AdminCreateDeleteDirAc"
+	default:
+		return fmt.Sprintf("CARD_DIRECTORY_ACCESS_CONDITION(%d)", int32(e))
+	}
+}
 
 // CARD_FILE_ACCESS_CONDITION: https://learn.microsoft.com/windows/win32/SecCrypto/card-file-access-condition
 type CARD_FILE_ACCESS_CONDITION int32
@@ -194,6 +554,29 @@ const (
 	UserReadWriteAc          CARD_FILE_ACCESS_CONDITION = 5
 	AdminReadWriteAc         CARD_FILE_ACCESS_CONDITION = 6
 )
+
+// String returns the CARD_FILE_ACCESS_CONDITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CARD_FILE_ACCESS_CONDITION) String() string {
+	switch e {
+	case InvalidAc:
+		return "InvalidAc"
+	case EveryoneReadUserWriteAc:
+		return "EveryoneReadUserWriteAc"
+	case UserWriteExecuteAc:
+		return "UserWriteExecuteAc"
+	case EveryoneReadAdminWriteAc:
+		return "EveryoneReadAdminWriteAc"
+	case UnknownAc:
+		return "UnknownAc"
+	case UserReadWriteAc:
+		return "UserReadWriteAc"
+	case AdminReadWriteAc:
+		return "AdminReadWriteAc"
+	default:
+		return fmt.Sprintf("CARD_FILE_ACCESS_CONDITION(%d)", int32(e))
+	}
+}
 
 // CASetupProperty: https://learn.microsoft.com/windows/win32/api/casetup/ne-casetup-casetupproperty
 type CASetupProperty int32
@@ -219,6 +602,51 @@ const (
 	ENUM_SETUPPROP_WEBCANAME          CASetupProperty = 16
 )
 
+// String returns the CASetupProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CASetupProperty) String() string {
+	switch e {
+	case ENUM_SETUPPROP_INVALID:
+		return "ENUM_SETUPPROP_INVALID"
+	case ENUM_SETUPPROP_CATYPE:
+		return "ENUM_SETUPPROP_CATYPE"
+	case ENUM_SETUPPROP_CAKEYINFORMATION:
+		return "ENUM_SETUPPROP_CAKEYINFORMATION"
+	case ENUM_SETUPPROP_INTERACTIVE:
+		return "ENUM_SETUPPROP_INTERACTIVE"
+	case ENUM_SETUPPROP_CANAME:
+		return "ENUM_SETUPPROP_CANAME"
+	case ENUM_SETUPPROP_CADSSUFFIX:
+		return "ENUM_SETUPPROP_CADSSUFFIX"
+	case ENUM_SETUPPROP_VALIDITYPERIOD:
+		return "ENUM_SETUPPROP_VALIDITYPERIOD"
+	case ENUM_SETUPPROP_VALIDITYPERIODUNIT:
+		return "ENUM_SETUPPROP_VALIDITYPERIODUNIT"
+	case ENUM_SETUPPROP_EXPIRATIONDATE:
+		return "ENUM_SETUPPROP_EXPIRATIONDATE"
+	case ENUM_SETUPPROP_PRESERVEDATABASE:
+		return "ENUM_SETUPPROP_PRESERVEDATABASE"
+	case ENUM_SETUPPROP_DATABASEDIRECTORY:
+		return "ENUM_SETUPPROP_DATABASEDIRECTORY"
+	case ENUM_SETUPPROP_LOGDIRECTORY:
+		return "ENUM_SETUPPROP_LOGDIRECTORY"
+	case ENUM_SETUPPROP_SHAREDFOLDER:
+		return "ENUM_SETUPPROP_SHAREDFOLDER"
+	case ENUM_SETUPPROP_PARENTCAMACHINE:
+		return "ENUM_SETUPPROP_PARENTCAMACHINE"
+	case ENUM_SETUPPROP_PARENTCANAME:
+		return "ENUM_SETUPPROP_PARENTCANAME"
+	case ENUM_SETUPPROP_REQUESTFILE:
+		return "ENUM_SETUPPROP_REQUESTFILE"
+	case ENUM_SETUPPROP_WEBCAMACHINE:
+		return "ENUM_SETUPPROP_WEBCAMACHINE"
+	case ENUM_SETUPPROP_WEBCANAME:
+		return "ENUM_SETUPPROP_WEBCANAME"
+	default:
+		return fmt.Sprintf("CASetupProperty(%d)", int32(e))
+	}
+}
+
 // CEPSetupProperty: https://learn.microsoft.com/windows/win32/api/casetup/ne-casetup-cepsetupproperty
 type CEPSetupProperty int32
 
@@ -229,6 +657,23 @@ const (
 	ENUM_CEPSETUPPROP_KEYBASED_RENEWAL CEPSetupProperty = 3
 )
 
+// String returns the CEPSetupProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CEPSetupProperty) String() string {
+	switch e {
+	case ENUM_CEPSETUPPROP_AUTHENTICATION:
+		return "ENUM_CEPSETUPPROP_AUTHENTICATION"
+	case ENUM_CEPSETUPPROP_SSLCERTHASH:
+		return "ENUM_CEPSETUPPROP_SSLCERTHASH"
+	case ENUM_CEPSETUPPROP_URL:
+		return "ENUM_CEPSETUPPROP_URL"
+	case ENUM_CEPSETUPPROP_KEYBASED_RENEWAL:
+		return "ENUM_CEPSETUPPROP_KEYBASED_RENEWAL"
+	default:
+		return fmt.Sprintf("CEPSetupProperty(%d)", int32(e))
+	}
+}
+
 type CERT_BIOMETRIC_DATA_TYPE uint32
 
 const (
@@ -236,6 +681,20 @@ const (
 	CERT_BIOMETRIC_OID_DATA_CHOICE        CERT_BIOMETRIC_DATA_TYPE = 2
 )
 
+// String returns the CERT_BIOMETRIC_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_BIOMETRIC_DATA_TYPE) String() string {
+	switch e {
+	case CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE:
+		return "CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE"
+	case CERT_BIOMETRIC_OID_DATA_CHOICE:
+		return "CERT_BIOMETRIC_OID_DATA_CHOICE"
+	default:
+		return fmt.Sprintf("CERT_BIOMETRIC_DATA_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CERT_CHAIN_POLICY_FLAGS uint32
 
 const (
@@ -265,6 +724,88 @@ const (
 	MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG    CERT_CHAIN_POLICY_FLAGS = 262144
 )
 
+// String returns the CERT_CHAIN_POLICY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_CHAIN_POLICY_FLAGS) String() string {
+	var parts []string
+	if e&CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS")
+	}
+	if e&CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_INVALID_POLICY_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_INVALID_POLICY_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_END_REV_UNKNOWN_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_END_REV_UNKNOWN_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_CA_REV_UNKNOWN_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_CA_REV_UNKNOWN_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_ALL_REV_UNKNOWN_FLAGS != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_ALL_REV_UNKNOWN_FLAGS")
+	}
+	if e&CERT_CHAIN_POLICY_ALLOW_TESTROOT_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_ALLOW_TESTROOT_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG")
+	}
+	if e&CERT_CHAIN_POLICY_IGNORE_WEAK_SIGNATURE_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_POLICY_IGNORE_WEAK_SIGNATURE_FLAG")
+	}
+	if e&BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_CA_FLAG != 0 {
+		parts = append(parts, "BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_CA_FLAG")
+	}
+	if e&BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG != 0 {
+		parts = append(parts, "BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG")
+	}
+	if e&MICROSOFT_ROOT_CERT_CHAIN_POLICY_ENABLE_TEST_ROOT_FLAG != 0 {
+		parts = append(parts, "MICROSOFT_ROOT_CERT_CHAIN_POLICY_ENABLE_TEST_ROOT_FLAG")
+	}
+	if e&MICROSOFT_ROOT_CERT_CHAIN_POLICY_CHECK_APPLICATION_ROOT_FLAG != 0 {
+		parts = append(parts, "MICROSOFT_ROOT_CERT_CHAIN_POLICY_CHECK_APPLICATION_ROOT_FLAG")
+	}
+	if e&MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG != 0 {
+		parts = append(parts, "MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CERT_CONTROL_STORE_FLAGS uint32
 
 const (
@@ -273,6 +814,20 @@ const (
 	CERT_STORE_CTRL_INHIBIT_DUPLICATE_HANDLE_FLAG CERT_CONTROL_STORE_FLAGS = 1
 )
 
+// String returns the CERT_CONTROL_STORE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_CONTROL_STORE_FLAGS) String() string {
+	switch e {
+	case CERT_STORE_CTRL_COMMIT_FORCE_FLAG:
+		return "CERT_STORE_CTRL_COMMIT_FORCE_FLAG"
+	case CERT_STORE_CTRL_COMMIT_CLEAR_FLAG:
+		return "CERT_STORE_CTRL_COMMIT_CLEAR_FLAG"
+	default:
+		return fmt.Sprintf("CERT_CONTROL_STORE_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CERT_CREATE_SELFSIGN_FLAGS uint32
 
 const (
@@ -280,6 +835,23 @@ const (
 	CERT_CREATE_SELFSIGN_NO_SIGN     CERT_CREATE_SELFSIGN_FLAGS = 1
 )
 
+// String returns the CERT_CREATE_SELFSIGN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_CREATE_SELFSIGN_FLAGS) String() string {
+	var parts []string
+	if e&CERT_CREATE_SELFSIGN_NO_KEY_INFO != 0 {
+		parts = append(parts, "CERT_CREATE_SELFSIGN_NO_KEY_INFO")
+	}
+	if e&CERT_CREATE_SELFSIGN_NO_SIGN != 0 {
+		parts = append(parts, "CERT_CREATE_SELFSIGN_NO_SIGN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CERT_FIND_CHAIN_IN_STORE_FLAGS uint32
 
 const (
@@ -291,6 +863,35 @@ const (
 	CERT_CHAIN_FIND_BY_ISSUER_NO_KEY_FLAG         CERT_FIND_CHAIN_IN_STORE_FLAGS = 16384
 )
 
+// String returns the CERT_FIND_CHAIN_IN_STORE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_FIND_CHAIN_IN_STORE_FLAGS) String() string {
+	var parts []string
+	if e&CERT_CHAIN_FIND_BY_ISSUER_COMPARE_KEY_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_FIND_BY_ISSUER_COMPARE_KEY_FLAG")
+	}
+	if e&CERT_CHAIN_FIND_BY_ISSUER_COMPLEX_CHAIN_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_FIND_BY_ISSUER_COMPLEX_CHAIN_FLAG")
+	}
+	if e&CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_FLAG")
+	}
+	if e&CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_URL_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_URL_FLAG")
+	}
+	if e&CERT_CHAIN_FIND_BY_ISSUER_LOCAL_MACHINE_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_FIND_BY_ISSUER_LOCAL_MACHINE_FLAG")
+	}
+	if e&CERT_CHAIN_FIND_BY_ISSUER_NO_KEY_FLAG != 0 {
+		parts = append(parts, "CERT_CHAIN_FIND_BY_ISSUER_NO_KEY_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CERT_FIND_FLAGS uint32
 
 const (
@@ -340,6 +941,145 @@ const (
 	CERT_FIND_VALID_CTL_USAGE_FLAG        CERT_FIND_FLAGS = 32
 )
 
+// String returns the CERT_FIND_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_FIND_FLAGS) String() string {
+	var parts []string
+	if e&CERT_FIND_CERT_ID != 0 {
+		parts = append(parts, "CERT_FIND_CERT_ID")
+	}
+	if e&CERT_FIND_CTL_USAGE != 0 {
+		parts = append(parts, "CERT_FIND_CTL_USAGE")
+	}
+	if e&CERT_FIND_ENHKEY_USAGE != 0 {
+		parts = append(parts, "CERT_FIND_ENHKEY_USAGE")
+	}
+	if e&CERT_FIND_EXISTING != 0 {
+		parts = append(parts, "CERT_FIND_EXISTING")
+	}
+	if e&CERT_FIND_HASH != 0 {
+		parts = append(parts, "CERT_FIND_HASH")
+	}
+	if e&CERT_FIND_HAS_PRIVATE_KEY != 0 {
+		parts = append(parts, "CERT_FIND_HAS_PRIVATE_KEY")
+	}
+	if e&CERT_FIND_ISSUER_ATTR != 0 {
+		parts = append(parts, "CERT_FIND_ISSUER_ATTR")
+	}
+	if e&CERT_FIND_ISSUER_NAME != 0 {
+		parts = append(parts, "CERT_FIND_ISSUER_NAME")
+	}
+	if e&CERT_FIND_ISSUER_OF != 0 {
+		parts = append(parts, "CERT_FIND_ISSUER_OF")
+	}
+	if e&CERT_FIND_ISSUER_STR != 0 {
+		parts = append(parts, "CERT_FIND_ISSUER_STR")
+	}
+	if e&CERT_FIND_KEY_IDENTIFIER != 0 {
+		parts = append(parts, "CERT_FIND_KEY_IDENTIFIER")
+	}
+	if e&CERT_FIND_KEY_SPEC != 0 {
+		parts = append(parts, "CERT_FIND_KEY_SPEC")
+	}
+	if e&CERT_FIND_MD5_HASH != 0 {
+		parts = append(parts, "CERT_FIND_MD5_HASH")
+	}
+	if e&CERT_FIND_PROPERTY != 0 {
+		parts = append(parts, "CERT_FIND_PROPERTY")
+	}
+	if e&CERT_FIND_PUBLIC_KEY != 0 {
+		parts = append(parts, "CERT_FIND_PUBLIC_KEY")
+	}
+	if e&CERT_FIND_SHA1_HASH != 0 {
+		parts = append(parts, "CERT_FIND_SHA1_HASH")
+	}
+	if e&CERT_FIND_SIGNATURE_HASH != 0 {
+		parts = append(parts, "CERT_FIND_SIGNATURE_HASH")
+	}
+	if e&CERT_FIND_SUBJECT_ATTR != 0 {
+		parts = append(parts, "CERT_FIND_SUBJECT_ATTR")
+	}
+	if e&CERT_FIND_SUBJECT_CERT != 0 {
+		parts = append(parts, "CERT_FIND_SUBJECT_CERT")
+	}
+	if e&CERT_FIND_SUBJECT_NAME != 0 {
+		parts = append(parts, "CERT_FIND_SUBJECT_NAME")
+	}
+	if e&CERT_FIND_SUBJECT_STR != 0 {
+		parts = append(parts, "CERT_FIND_SUBJECT_STR")
+	}
+	if e&CERT_FIND_CROSS_CERT_DIST_POINTS != 0 {
+		parts = append(parts, "CERT_FIND_CROSS_CERT_DIST_POINTS")
+	}
+	if e&CERT_FIND_PUBKEY_MD5_HASH != 0 {
+		parts = append(parts, "CERT_FIND_PUBKEY_MD5_HASH")
+	}
+	if e&CERT_FIND_SHA256_HASH != 0 {
+		parts = append(parts, "CERT_FIND_SHA256_HASH")
+	}
+	if e&CERT_FIND_SHA1_SHA256_HASH != 0 {
+		parts = append(parts, "CERT_FIND_SHA1_SHA256_HASH")
+	}
+	if e&CERT_FIND_SUBJECT_STR_A != 0 {
+		parts = append(parts, "CERT_FIND_SUBJECT_STR_A")
+	}
+	if e&CERT_FIND_SUBJECT_STR_W != 0 {
+		parts = append(parts, "CERT_FIND_SUBJECT_STR_W")
+	}
+	if e&CERT_FIND_ISSUER_STR_A != 0 {
+		parts = append(parts, "CERT_FIND_ISSUER_STR_A")
+	}
+	if e&CERT_FIND_ISSUER_STR_W != 0 {
+		parts = append(parts, "CERT_FIND_ISSUER_STR_W")
+	}
+	if e&CERT_FIND_SUBJECT_INFO_ACCESS != 0 {
+		parts = append(parts, "CERT_FIND_SUBJECT_INFO_ACCESS")
+	}
+	if e&CERT_FIND_HASH_STR != 0 {
+		parts = append(parts, "CERT_FIND_HASH_STR")
+	}
+	if e&CERT_FIND_OPTIONAL_ENHKEY_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_OPTIONAL_ENHKEY_USAGE_FLAG")
+	}
+	if e&CERT_FIND_EXT_ONLY_ENHKEY_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_EXT_ONLY_ENHKEY_USAGE_FLAG")
+	}
+	if e&CERT_FIND_PROP_ONLY_ENHKEY_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_PROP_ONLY_ENHKEY_USAGE_FLAG")
+	}
+	if e&CERT_FIND_NO_ENHKEY_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_NO_ENHKEY_USAGE_FLAG")
+	}
+	if e&CERT_FIND_OR_ENHKEY_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_OR_ENHKEY_USAGE_FLAG")
+	}
+	if e&CERT_FIND_VALID_ENHKEY_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_VALID_ENHKEY_USAGE_FLAG")
+	}
+	if e&CERT_FIND_OPTIONAL_CTL_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_OPTIONAL_CTL_USAGE_FLAG")
+	}
+	if e&CERT_FIND_EXT_ONLY_CTL_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_EXT_ONLY_CTL_USAGE_FLAG")
+	}
+	if e&CERT_FIND_PROP_ONLY_CTL_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_PROP_ONLY_CTL_USAGE_FLAG")
+	}
+	if e&CERT_FIND_NO_CTL_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_NO_CTL_USAGE_FLAG")
+	}
+	if e&CERT_FIND_OR_CTL_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_OR_CTL_USAGE_FLAG")
+	}
+	if e&CERT_FIND_VALID_CTL_USAGE_FLAG != 0 {
+		parts = append(parts, "CERT_FIND_VALID_CTL_USAGE_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CERT_FIND_TYPE uint32
 
 const (
@@ -352,6 +1092,27 @@ const (
 	CTL_FIND_SUBJECT         CERT_FIND_TYPE = 4
 )
 
+// String returns the CERT_FIND_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_FIND_TYPE) String() string {
+	switch e {
+	case CTL_FIND_ANY:
+		return "CTL_FIND_ANY"
+	case CTL_FIND_SHA1_HASH:
+		return "CTL_FIND_SHA1_HASH"
+	case CTL_FIND_MD5_HASH:
+		return "CTL_FIND_MD5_HASH"
+	case CTL_FIND_USAGE:
+		return "CTL_FIND_USAGE"
+	case CTL_FIND_EXISTING:
+		return "CTL_FIND_EXISTING"
+	case CTL_FIND_SUBJECT:
+		return "CTL_FIND_SUBJECT"
+	default:
+		return fmt.Sprintf("CERT_FIND_TYPE(%d)", uint32(e))
+	}
+}
+
 type CERT_ID_OPTION uint32
 
 const (
@@ -359,6 +1120,21 @@ const (
 	CERT_ID_KEY_IDENTIFIER       CERT_ID_OPTION = 2
 	CERT_ID_SHA1_HASH            CERT_ID_OPTION = 3
 )
+
+// String returns the CERT_ID_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_ID_OPTION) String() string {
+	switch e {
+	case CERT_ID_ISSUER_SERIAL_NUMBER:
+		return "CERT_ID_ISSUER_SERIAL_NUMBER"
+	case CERT_ID_KEY_IDENTIFIER:
+		return "CERT_ID_KEY_IDENTIFIER"
+	case CERT_ID_SHA1_HASH:
+		return "CERT_ID_SHA1_HASH"
+	default:
+		return fmt.Sprintf("CERT_ID_OPTION(%d)", uint32(e))
+	}
+}
 
 type CERT_KEY_SPEC uint32
 
@@ -368,6 +1144,21 @@ const (
 	CERT_NCRYPT_KEY_SPEC CERT_KEY_SPEC = 4294967295
 )
 
+// String returns the CERT_KEY_SPEC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_KEY_SPEC) String() string {
+	switch e {
+	case AT_KEYEXCHANGE:
+		return "AT_KEYEXCHANGE"
+	case AT_SIGNATURE:
+		return "AT_SIGNATURE"
+	case CERT_NCRYPT_KEY_SPEC:
+		return "CERT_NCRYPT_KEY_SPEC"
+	default:
+		return fmt.Sprintf("CERT_KEY_SPEC(%d)", uint32(e))
+	}
+}
+
 type CERT_LOGOTYPE_CHOICE uint32
 
 const (
@@ -376,12 +1167,40 @@ const (
 	CERT_LOGOTYPE_TABLE_SIZE_IMAGE_RESOLUTION_CHOICE CERT_LOGOTYPE_CHOICE = 2
 )
 
+// String returns the CERT_LOGOTYPE_CHOICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_LOGOTYPE_CHOICE) String() string {
+	switch e {
+	case CERT_LOGOTYPE_NO_IMAGE_RESOLUTION_CHOICE:
+		return "CERT_LOGOTYPE_NO_IMAGE_RESOLUTION_CHOICE"
+	case CERT_LOGOTYPE_BITS_IMAGE_RESOLUTION_CHOICE:
+		return "CERT_LOGOTYPE_BITS_IMAGE_RESOLUTION_CHOICE"
+	case CERT_LOGOTYPE_TABLE_SIZE_IMAGE_RESOLUTION_CHOICE:
+		return "CERT_LOGOTYPE_TABLE_SIZE_IMAGE_RESOLUTION_CHOICE"
+	default:
+		return fmt.Sprintf("CERT_LOGOTYPE_CHOICE(%d)", uint32(e))
+	}
+}
+
 type CERT_LOGOTYPE_IMAGE_INFO_TYPE uint32
 
 const (
 	CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE CERT_LOGOTYPE_IMAGE_INFO_TYPE = 1
 	CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE      CERT_LOGOTYPE_IMAGE_INFO_TYPE = 2
 )
+
+// String returns the CERT_LOGOTYPE_IMAGE_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_LOGOTYPE_IMAGE_INFO_TYPE) String() string {
+	switch e {
+	case CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE:
+		return "CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE"
+	case CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE:
+		return "CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE"
+	default:
+		return fmt.Sprintf("CERT_LOGOTYPE_IMAGE_INFO_TYPE(%d)", uint32(e))
+	}
+}
 
 type CERT_LOGOTYPE_OPTION uint32
 
@@ -390,6 +1209,20 @@ const (
 	CERT_LOGOTYPE_INDIRECT_INFO_CHOICE CERT_LOGOTYPE_OPTION = 2
 )
 
+// String returns the CERT_LOGOTYPE_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_LOGOTYPE_OPTION) String() string {
+	switch e {
+	case CERT_LOGOTYPE_DIRECT_INFO_CHOICE:
+		return "CERT_LOGOTYPE_DIRECT_INFO_CHOICE"
+	case CERT_LOGOTYPE_INDIRECT_INFO_CHOICE:
+		return "CERT_LOGOTYPE_INDIRECT_INFO_CHOICE"
+	default:
+		return fmt.Sprintf("CERT_LOGOTYPE_OPTION(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CERT_OPEN_STORE_FLAGS uint32
 
 const (
@@ -406,6 +1239,52 @@ const (
 	CERT_STORE_SHARE_CONTEXT_FLAG               CERT_OPEN_STORE_FLAGS = 128
 	CERT_STORE_UPDATE_KEYID_FLAG                CERT_OPEN_STORE_FLAGS = 1024
 )
+
+// String returns the CERT_OPEN_STORE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_OPEN_STORE_FLAGS) String() string {
+	var parts []string
+	if e&CERT_STORE_BACKUP_RESTORE_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_BACKUP_RESTORE_FLAG")
+	}
+	if e&CERT_STORE_CREATE_NEW_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_CREATE_NEW_FLAG")
+	}
+	if e&CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG")
+	}
+	if e&CERT_STORE_DELETE_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_DELETE_FLAG")
+	}
+	if e&CERT_STORE_ENUM_ARCHIVED_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_ENUM_ARCHIVED_FLAG")
+	}
+	if e&CERT_STORE_MAXIMUM_ALLOWED_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_MAXIMUM_ALLOWED_FLAG")
+	}
+	if e&CERT_STORE_NO_CRYPT_RELEASE_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_NO_CRYPT_RELEASE_FLAG")
+	}
+	if e&CERT_STORE_OPEN_EXISTING_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_OPEN_EXISTING_FLAG")
+	}
+	if e&CERT_STORE_READONLY_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_READONLY_FLAG")
+	}
+	if e&CERT_STORE_SET_LOCALIZED_NAME_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_SET_LOCALIZED_NAME_FLAG")
+	}
+	if e&CERT_STORE_SHARE_CONTEXT_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_SHARE_CONTEXT_FLAG")
+	}
+	if e&CERT_STORE_UPDATE_KEYID_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_UPDATE_KEYID_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CERT_QUERY_CONTENT_TYPE uint32
 
@@ -425,6 +1304,43 @@ const (
 	CERT_QUERY_CONTENT_CERT_PAIR          CERT_QUERY_CONTENT_TYPE = 13
 	CERT_QUERY_CONTENT_PFX_AND_LOAD       CERT_QUERY_CONTENT_TYPE = 14
 )
+
+// String returns the CERT_QUERY_CONTENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_QUERY_CONTENT_TYPE) String() string {
+	switch e {
+	case CERT_QUERY_CONTENT_CERT:
+		return "CERT_QUERY_CONTENT_CERT"
+	case CERT_QUERY_CONTENT_CTL:
+		return "CERT_QUERY_CONTENT_CTL"
+	case CERT_QUERY_CONTENT_CRL:
+		return "CERT_QUERY_CONTENT_CRL"
+	case CERT_QUERY_CONTENT_SERIALIZED_STORE:
+		return "CERT_QUERY_CONTENT_SERIALIZED_STORE"
+	case CERT_QUERY_CONTENT_SERIALIZED_CERT:
+		return "CERT_QUERY_CONTENT_SERIALIZED_CERT"
+	case CERT_QUERY_CONTENT_SERIALIZED_CTL:
+		return "CERT_QUERY_CONTENT_SERIALIZED_CTL"
+	case CERT_QUERY_CONTENT_SERIALIZED_CRL:
+		return "CERT_QUERY_CONTENT_SERIALIZED_CRL"
+	case CERT_QUERY_CONTENT_PKCS7_SIGNED:
+		return "CERT_QUERY_CONTENT_PKCS7_SIGNED"
+	case CERT_QUERY_CONTENT_PKCS7_UNSIGNED:
+		return "CERT_QUERY_CONTENT_PKCS7_UNSIGNED"
+	case CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED:
+		return "CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED"
+	case CERT_QUERY_CONTENT_PKCS10:
+		return "CERT_QUERY_CONTENT_PKCS10"
+	case CERT_QUERY_CONTENT_PFX:
+		return "CERT_QUERY_CONTENT_PFX"
+	case CERT_QUERY_CONTENT_CERT_PAIR:
+		return "CERT_QUERY_CONTENT_CERT_PAIR"
+	case CERT_QUERY_CONTENT_PFX_AND_LOAD:
+		return "CERT_QUERY_CONTENT_PFX_AND_LOAD"
+	default:
+		return fmt.Sprintf("CERT_QUERY_CONTENT_TYPE(%d)", uint32(e))
+	}
+}
 
 type CERT_QUERY_CONTENT_TYPE_FLAGS uint32
 
@@ -447,12 +1363,70 @@ const (
 	CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT    CERT_QUERY_CONTENT_TYPE_FLAGS = 818
 )
 
+// String returns the CERT_QUERY_CONTENT_TYPE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_QUERY_CONTENT_TYPE_FLAGS) String() string {
+	switch e {
+	case CERT_QUERY_CONTENT_FLAG_CERT:
+		return "CERT_QUERY_CONTENT_FLAG_CERT"
+	case CERT_QUERY_CONTENT_FLAG_CTL:
+		return "CERT_QUERY_CONTENT_FLAG_CTL"
+	case CERT_QUERY_CONTENT_FLAG_CRL:
+		return "CERT_QUERY_CONTENT_FLAG_CRL"
+	case CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE:
+		return "CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE"
+	case CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT:
+		return "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT"
+	case CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL:
+		return "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL"
+	case CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL:
+		return "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL"
+	case CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED:
+		return "CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED"
+	case CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED:
+		return "CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED"
+	case CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED:
+		return "CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED"
+	case CERT_QUERY_CONTENT_FLAG_PKCS10:
+		return "CERT_QUERY_CONTENT_FLAG_PKCS10"
+	case CERT_QUERY_CONTENT_FLAG_PFX:
+		return "CERT_QUERY_CONTENT_FLAG_PFX"
+	case CERT_QUERY_CONTENT_FLAG_CERT_PAIR:
+		return "CERT_QUERY_CONTENT_FLAG_CERT_PAIR"
+	case CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD:
+		return "CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD"
+	case CERT_QUERY_CONTENT_FLAG_ALL:
+		return "CERT_QUERY_CONTENT_FLAG_ALL"
+	case CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT:
+		return "CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT"
+	default:
+		return fmt.Sprintf("CERT_QUERY_CONTENT_TYPE_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CERT_QUERY_ENCODING_TYPE uint32
 
 const (
 	X509_ASN_ENCODING   CERT_QUERY_ENCODING_TYPE = 1
 	PKCS_7_ASN_ENCODING CERT_QUERY_ENCODING_TYPE = 65536
 )
+
+// String returns the CERT_QUERY_ENCODING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_QUERY_ENCODING_TYPE) String() string {
+	var parts []string
+	if e&X509_ASN_ENCODING != 0 {
+		parts = append(parts, "X509_ASN_ENCODING")
+	}
+	if e&PKCS_7_ASN_ENCODING != 0 {
+		parts = append(parts, "PKCS_7_ASN_ENCODING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CERT_QUERY_FORMAT_TYPE uint32
 
@@ -461,6 +1435,21 @@ const (
 	CERT_QUERY_FORMAT_BASE64_ENCODED        CERT_QUERY_FORMAT_TYPE = 2
 	CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED CERT_QUERY_FORMAT_TYPE = 3
 )
+
+// String returns the CERT_QUERY_FORMAT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_QUERY_FORMAT_TYPE) String() string {
+	switch e {
+	case CERT_QUERY_FORMAT_BINARY:
+		return "CERT_QUERY_FORMAT_BINARY"
+	case CERT_QUERY_FORMAT_BASE64_ENCODED:
+		return "CERT_QUERY_FORMAT_BASE64_ENCODED"
+	case CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED:
+		return "CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED"
+	default:
+		return fmt.Sprintf("CERT_QUERY_FORMAT_TYPE(%d)", uint32(e))
+	}
+}
 
 type CERT_QUERY_FORMAT_TYPE_FLAGS uint32
 
@@ -471,12 +1460,42 @@ const (
 	CERT_QUERY_FORMAT_FLAG_ALL                   CERT_QUERY_FORMAT_TYPE_FLAGS = 14
 )
 
+// String returns the CERT_QUERY_FORMAT_TYPE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_QUERY_FORMAT_TYPE_FLAGS) String() string {
+	switch e {
+	case CERT_QUERY_FORMAT_FLAG_BINARY:
+		return "CERT_QUERY_FORMAT_FLAG_BINARY"
+	case CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED:
+		return "CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED"
+	case CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED:
+		return "CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED"
+	case CERT_QUERY_FORMAT_FLAG_ALL:
+		return "CERT_QUERY_FORMAT_FLAG_ALL"
+	default:
+		return fmt.Sprintf("CERT_QUERY_FORMAT_TYPE_FLAGS(%d)", uint32(e))
+	}
+}
+
 type CERT_QUERY_OBJECT_TYPE uint32
 
 const (
 	CERT_QUERY_OBJECT_FILE CERT_QUERY_OBJECT_TYPE = 1
 	CERT_QUERY_OBJECT_BLOB CERT_QUERY_OBJECT_TYPE = 2
 )
+
+// String returns the CERT_QUERY_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_QUERY_OBJECT_TYPE) String() string {
+	switch e {
+	case CERT_QUERY_OBJECT_FILE:
+		return "CERT_QUERY_OBJECT_FILE"
+	case CERT_QUERY_OBJECT_BLOB:
+		return "CERT_QUERY_OBJECT_BLOB"
+	default:
+		return fmt.Sprintf("CERT_QUERY_OBJECT_TYPE(%d)", uint32(e))
+	}
+}
 
 type CERT_RDN_ATTR_VALUE_TYPE int32
 
@@ -501,6 +1520,43 @@ const (
 	CERT_RDN_VISIBLE_STRING   CERT_RDN_ATTR_VALUE_TYPE = 9
 )
 
+// String returns the CERT_RDN_ATTR_VALUE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_RDN_ATTR_VALUE_TYPE) String() string {
+	switch e {
+	case CERT_RDN_ANY_TYPE:
+		return "CERT_RDN_ANY_TYPE"
+	case CERT_RDN_NUMERIC_STRING:
+		return "CERT_RDN_NUMERIC_STRING"
+	case CERT_RDN_PRINTABLE_STRING:
+		return "CERT_RDN_PRINTABLE_STRING"
+	case CERT_RDN_T61_STRING:
+		return "CERT_RDN_T61_STRING"
+	case CERT_RDN_VIDEOTEX_STRING:
+		return "CERT_RDN_VIDEOTEX_STRING"
+	case CERT_RDN_IA5_STRING:
+		return "CERT_RDN_IA5_STRING"
+	case CERT_RDN_GRAPHIC_STRING:
+		return "CERT_RDN_GRAPHIC_STRING"
+	case CERT_RDN_ISO646_STRING:
+		return "CERT_RDN_ISO646_STRING"
+	case CERT_RDN_GENERAL_STRING:
+		return "CERT_RDN_GENERAL_STRING"
+	case CERT_RDN_INT4_STRING:
+		return "CERT_RDN_INT4_STRING"
+	case CERT_RDN_UNICODE_STRING:
+		return "CERT_RDN_UNICODE_STRING"
+	case CERT_RDN_ENCODED_BLOB:
+		return "CERT_RDN_ENCODED_BLOB"
+	case CERT_RDN_OCTET_STRING:
+		return "CERT_RDN_OCTET_STRING"
+	case CERT_RDN_UTF8_STRING:
+		return "CERT_RDN_UTF8_STRING"
+	default:
+		return fmt.Sprintf("CERT_RDN_ATTR_VALUE_TYPE(%d)", int32(e))
+	}
+}
+
 type CERT_REVOCATION_STATUS_REASON uint32
 
 const (
@@ -514,6 +1570,32 @@ const (
 	CRL_REASON_REMOVE_FROM_CRL        CERT_REVOCATION_STATUS_REASON = 8
 )
 
+// String returns the CERT_REVOCATION_STATUS_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_REVOCATION_STATUS_REASON) String() string {
+	switch e {
+	case CRL_REASON_UNSPECIFIED:
+		return "CRL_REASON_UNSPECIFIED"
+	case CRL_REASON_KEY_COMPROMISE:
+		return "CRL_REASON_KEY_COMPROMISE"
+	case CRL_REASON_CA_COMPROMISE:
+		return "CRL_REASON_CA_COMPROMISE"
+	case CRL_REASON_AFFILIATION_CHANGED:
+		return "CRL_REASON_AFFILIATION_CHANGED"
+	case CRL_REASON_SUPERSEDED:
+		return "CRL_REASON_SUPERSEDED"
+	case CRL_REASON_CESSATION_OF_OPERATION:
+		return "CRL_REASON_CESSATION_OF_OPERATION"
+	case CRL_REASON_CERTIFICATE_HOLD:
+		return "CRL_REASON_CERTIFICATE_HOLD"
+	case CRL_REASON_REMOVE_FROM_CRL:
+		return "CRL_REASON_REMOVE_FROM_CRL"
+	default:
+		return fmt.Sprintf("CERT_REVOCATION_STATUS_REASON(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CERT_ROOT_PROGRAM_FLAGS uint32
 
 const (
@@ -521,6 +1603,25 @@ const (
 	CERT_ROOT_PROGRAM_FLAG_ORG          CERT_ROOT_PROGRAM_FLAGS = 128
 	CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO CERT_ROOT_PROGRAM_FLAGS = 32
 )
+
+// String returns the CERT_ROOT_PROGRAM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_ROOT_PROGRAM_FLAGS) String() string {
+	var parts []string
+	if e&CERT_ROOT_PROGRAM_FLAG_LSC != 0 {
+		parts = append(parts, "CERT_ROOT_PROGRAM_FLAG_LSC")
+	}
+	if e&CERT_ROOT_PROGRAM_FLAG_ORG != 0 {
+		parts = append(parts, "CERT_ROOT_PROGRAM_FLAG_ORG")
+	}
+	if e&CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO != 0 {
+		parts = append(parts, "CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CERT_SELECT_CRITERIA_TYPE uint32
 
@@ -538,6 +1639,38 @@ const (
 	CERT_SELECT_BY_TLS_SIGNATURES    CERT_SELECT_CRITERIA_TYPE = 11
 )
 
+// String returns the CERT_SELECT_CRITERIA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_SELECT_CRITERIA_TYPE) String() string {
+	switch e {
+	case CERT_SELECT_BY_ENHKEY_USAGE:
+		return "CERT_SELECT_BY_ENHKEY_USAGE"
+	case CERT_SELECT_BY_KEY_USAGE:
+		return "CERT_SELECT_BY_KEY_USAGE"
+	case CERT_SELECT_BY_POLICY_OID:
+		return "CERT_SELECT_BY_POLICY_OID"
+	case CERT_SELECT_BY_PROV_NAME:
+		return "CERT_SELECT_BY_PROV_NAME"
+	case CERT_SELECT_BY_EXTENSION:
+		return "CERT_SELECT_BY_EXTENSION"
+	case CERT_SELECT_BY_SUBJECT_HOST_NAME:
+		return "CERT_SELECT_BY_SUBJECT_HOST_NAME"
+	case CERT_SELECT_BY_ISSUER_ATTR:
+		return "CERT_SELECT_BY_ISSUER_ATTR"
+	case CERT_SELECT_BY_SUBJECT_ATTR:
+		return "CERT_SELECT_BY_SUBJECT_ATTR"
+	case CERT_SELECT_BY_ISSUER_NAME:
+		return "CERT_SELECT_BY_ISSUER_NAME"
+	case CERT_SELECT_BY_PUBLIC_KEY:
+		return "CERT_SELECT_BY_PUBLIC_KEY"
+	case CERT_SELECT_BY_TLS_SIGNATURES:
+		return "CERT_SELECT_BY_TLS_SIGNATURES"
+	default:
+		return fmt.Sprintf("CERT_SELECT_CRITERIA_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CERT_STORE_PROV_FLAGS uint32
 
 const (
@@ -548,12 +1681,50 @@ const (
 	CERT_STORE_PROV_LM_SYSTEM_STORE_FLAG CERT_STORE_PROV_FLAGS = 16
 )
 
+// String returns the CERT_STORE_PROV_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_STORE_PROV_FLAGS) String() string {
+	var parts []string
+	if e&CERT_STORE_PROV_EXTERNAL_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_PROV_EXTERNAL_FLAG")
+	}
+	if e&CERT_STORE_PROV_DELETED_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_PROV_DELETED_FLAG")
+	}
+	if e&CERT_STORE_PROV_NO_PERSIST_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_PROV_NO_PERSIST_FLAG")
+	}
+	if e&CERT_STORE_PROV_SYSTEM_STORE_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_PROV_SYSTEM_STORE_FLAG")
+	}
+	if e&CERT_STORE_PROV_LM_SYSTEM_STORE_FLAG != 0 {
+		parts = append(parts, "CERT_STORE_PROV_LM_SYSTEM_STORE_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CERT_STORE_SAVE_AS uint32
 
 const (
 	CERT_STORE_SAVE_AS_PKCS7 CERT_STORE_SAVE_AS = 2
 	CERT_STORE_SAVE_AS_STORE CERT_STORE_SAVE_AS = 1
 )
+
+// String returns the CERT_STORE_SAVE_AS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_STORE_SAVE_AS) String() string {
+	switch e {
+	case CERT_STORE_SAVE_AS_PKCS7:
+		return "CERT_STORE_SAVE_AS_PKCS7"
+	case CERT_STORE_SAVE_AS_STORE:
+		return "CERT_STORE_SAVE_AS_STORE"
+	default:
+		return fmt.Sprintf("CERT_STORE_SAVE_AS(%d)", uint32(e))
+	}
+}
 
 type CERT_STORE_SAVE_TO uint32
 
@@ -565,6 +1736,23 @@ const (
 	CERT_STORE_SAVE_TO_MEMORY     CERT_STORE_SAVE_TO = 2
 )
 
+// String returns the CERT_STORE_SAVE_TO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_STORE_SAVE_TO) String() string {
+	switch e {
+	case CERT_STORE_SAVE_TO_FILE:
+		return "CERT_STORE_SAVE_TO_FILE"
+	case CERT_STORE_SAVE_TO_FILENAME:
+		return "CERT_STORE_SAVE_TO_FILENAME"
+	case CERT_STORE_SAVE_TO_FILENAME_A:
+		return "CERT_STORE_SAVE_TO_FILENAME_A"
+	case CERT_STORE_SAVE_TO_MEMORY:
+		return "CERT_STORE_SAVE_TO_MEMORY"
+	default:
+		return fmt.Sprintf("CERT_STORE_SAVE_TO(%d)", uint32(e))
+	}
+}
+
 type CERT_STRING_TYPE uint32
 
 const (
@@ -573,6 +1761,22 @@ const (
 	CERT_X500_NAME_STR   CERT_STRING_TYPE = 3
 )
 
+// String returns the CERT_STRING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_STRING_TYPE) String() string {
+	switch e {
+	case CERT_SIMPLE_NAME_STR:
+		return "CERT_SIMPLE_NAME_STR"
+	case CERT_OID_NAME_STR:
+		return "CERT_OID_NAME_STR"
+	case CERT_X500_NAME_STR:
+		return "CERT_X500_NAME_STR"
+	default:
+		return fmt.Sprintf("CERT_STRING_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CERT_STRONG_SIGN_FLAGS uint32
 
 const (
@@ -580,12 +1784,41 @@ const (
 	CERT_STRONG_SIGN_ENABLE_OCSP_CHECK CERT_STRONG_SIGN_FLAGS = 2
 )
 
+// String returns the CERT_STRONG_SIGN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_STRONG_SIGN_FLAGS) String() string {
+	var parts []string
+	if e&CERT_STRONG_SIGN_ENABLE_CRL_CHECK != 0 {
+		parts = append(parts, "CERT_STRONG_SIGN_ENABLE_CRL_CHECK")
+	}
+	if e&CERT_STRONG_SIGN_ENABLE_OCSP_CHECK != 0 {
+		parts = append(parts, "CERT_STRONG_SIGN_ENABLE_OCSP_CHECK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CERT_SYSTEM_STORE_FLAGS uint32
 
 const (
 	CERT_SYSTEM_STORE_LOCATION_MASK CERT_SYSTEM_STORE_FLAGS = 16711680
 	CERT_SYSTEM_STORE_RELOCATE_FLAG CERT_SYSTEM_STORE_FLAGS = 2147483648
 )
+
+// String returns the CERT_SYSTEM_STORE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CERT_SYSTEM_STORE_FLAGS) String() string {
+	switch e {
+	case CERT_SYSTEM_STORE_LOCATION_MASK:
+		return "CERT_SYSTEM_STORE_LOCATION_MASK"
+	case CERT_SYSTEM_STORE_RELOCATE_FLAG:
+		return "CERT_SYSTEM_STORE_RELOCATE_FLAG"
+	default:
+		return fmt.Sprintf("CERT_SYSTEM_STORE_FLAGS(%d)", uint32(e))
+	}
+}
 
 // CESSetupProperty: https://learn.microsoft.com/windows/win32/api/casetup/ne-casetup-cessetupproperty
 type CESSetupProperty int32
@@ -600,12 +1833,48 @@ const (
 	ENUM_CESSETUPPROP_ALLOW_KEYBASED_RENEWAL CESSetupProperty = 6
 )
 
+// String returns the CESSetupProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CESSetupProperty) String() string {
+	switch e {
+	case ENUM_CESSETUPPROP_USE_IISAPPPOOLIDENTITY:
+		return "ENUM_CESSETUPPROP_USE_IISAPPPOOLIDENTITY"
+	case ENUM_CESSETUPPROP_CACONFIG:
+		return "ENUM_CESSETUPPROP_CACONFIG"
+	case ENUM_CESSETUPPROP_AUTHENTICATION:
+		return "ENUM_CESSETUPPROP_AUTHENTICATION"
+	case ENUM_CESSETUPPROP_SSLCERTHASH:
+		return "ENUM_CESSETUPPROP_SSLCERTHASH"
+	case ENUM_CESSETUPPROP_URL:
+		return "ENUM_CESSETUPPROP_URL"
+	case ENUM_CESSETUPPROP_RENEWALONLY:
+		return "ENUM_CESSETUPPROP_RENEWALONLY"
+	case ENUM_CESSETUPPROP_ALLOW_KEYBASED_RENEWAL:
+		return "ENUM_CESSETUPPROP_ALLOW_KEYBASED_RENEWAL"
+	default:
+		return fmt.Sprintf("CESSetupProperty(%d)", int32(e))
+	}
+}
+
 type CMSG_KEY_AGREE_OPTION uint32
 
 const (
 	CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE CMSG_KEY_AGREE_OPTION = 1
 	CMSG_KEY_AGREE_STATIC_KEY_CHOICE    CMSG_KEY_AGREE_OPTION = 2
 )
+
+// String returns the CMSG_KEY_AGREE_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CMSG_KEY_AGREE_OPTION) String() string {
+	switch e {
+	case CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE:
+		return "CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE"
+	case CMSG_KEY_AGREE_STATIC_KEY_CHOICE:
+		return "CMSG_KEY_AGREE_STATIC_KEY_CHOICE"
+	default:
+		return fmt.Sprintf("CMSG_KEY_AGREE_OPTION(%d)", uint32(e))
+	}
+}
 
 type CMSG_KEY_AGREE_ORIGINATOR uint32
 
@@ -614,6 +1883,20 @@ const (
 	CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY CMSG_KEY_AGREE_ORIGINATOR = 2
 )
 
+// String returns the CMSG_KEY_AGREE_ORIGINATOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CMSG_KEY_AGREE_ORIGINATOR) String() string {
+	switch e {
+	case CMSG_KEY_AGREE_ORIGINATOR_CERT:
+		return "CMSG_KEY_AGREE_ORIGINATOR_CERT"
+	case CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY:
+		return "CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY"
+	default:
+		return fmt.Sprintf("CMSG_KEY_AGREE_ORIGINATOR(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CRYPT_ACQUIRE_FLAGS uint32
 
 const (
@@ -629,6 +1912,47 @@ const (
 	CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG   CRYPT_ACQUIRE_FLAGS = 262144
 )
 
+// String returns the CRYPT_ACQUIRE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_ACQUIRE_FLAGS) String() string {
+	var parts []string
+	if e&CRYPT_ACQUIRE_CACHE_FLAG != 0 {
+		parts = append(parts, "CRYPT_ACQUIRE_CACHE_FLAG")
+	}
+	if e&CRYPT_ACQUIRE_USE_PROV_INFO_FLAG != 0 {
+		parts = append(parts, "CRYPT_ACQUIRE_USE_PROV_INFO_FLAG")
+	}
+	if e&CRYPT_ACQUIRE_COMPARE_KEY_FLAG != 0 {
+		parts = append(parts, "CRYPT_ACQUIRE_COMPARE_KEY_FLAG")
+	}
+	if e&CRYPT_ACQUIRE_NO_HEALING != 0 {
+		parts = append(parts, "CRYPT_ACQUIRE_NO_HEALING")
+	}
+	if e&CRYPT_ACQUIRE_SILENT_FLAG != 0 {
+		parts = append(parts, "CRYPT_ACQUIRE_SILENT_FLAG")
+	}
+	if e&CRYPT_ACQUIRE_WINDOW_HANDLE_FLAG != 0 {
+		parts = append(parts, "CRYPT_ACQUIRE_WINDOW_HANDLE_FLAG")
+	}
+	if e&CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS_MASK != 0 {
+		parts = append(parts, "CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS_MASK")
+	}
+	if e&CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG != 0 {
+		parts = append(parts, "CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG")
+	}
+	if e&CRYPT_ACQUIRE_PREFER_NCRYPT_KEY_FLAG != 0 {
+		parts = append(parts, "CRYPT_ACQUIRE_PREFER_NCRYPT_KEY_FLAG")
+	}
+	if e&CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG != 0 {
+		parts = append(parts, "CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CRYPT_CONTEXT_CONFIG_FLAGS uint32
 
 const (
@@ -636,12 +1960,45 @@ const (
 	CRYPT_OVERRIDE  CRYPT_CONTEXT_CONFIG_FLAGS = 65536
 )
 
+// String returns the CRYPT_CONTEXT_CONFIG_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_CONTEXT_CONFIG_FLAGS) String() string {
+	var parts []string
+	if e&CRYPT_EXCLUSIVE != 0 {
+		parts = append(parts, "CRYPT_EXCLUSIVE")
+	}
+	if e&CRYPT_OVERRIDE != 0 {
+		parts = append(parts, "CRYPT_OVERRIDE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CRYPT_DEFAULT_CONTEXT_FLAGS uint32
 
 const (
 	CRYPT_DEFAULT_CONTEXT_AUTO_RELEASE_FLAG CRYPT_DEFAULT_CONTEXT_FLAGS = 1
 	CRYPT_DEFAULT_CONTEXT_PROCESS_FLAG      CRYPT_DEFAULT_CONTEXT_FLAGS = 2
 )
+
+// String returns the CRYPT_DEFAULT_CONTEXT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_DEFAULT_CONTEXT_FLAGS) String() string {
+	var parts []string
+	if e&CRYPT_DEFAULT_CONTEXT_AUTO_RELEASE_FLAG != 0 {
+		parts = append(parts, "CRYPT_DEFAULT_CONTEXT_AUTO_RELEASE_FLAG")
+	}
+	if e&CRYPT_DEFAULT_CONTEXT_PROCESS_FLAG != 0 {
+		parts = append(parts, "CRYPT_DEFAULT_CONTEXT_PROCESS_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CRYPT_DEFAULT_CONTEXT_TYPE uint32
 
@@ -650,6 +2007,20 @@ const (
 	CRYPT_DEFAULT_CONTEXT_MULTI_CERT_SIGN_OID CRYPT_DEFAULT_CONTEXT_TYPE = 2
 )
 
+// String returns the CRYPT_DEFAULT_CONTEXT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_DEFAULT_CONTEXT_TYPE) String() string {
+	switch e {
+	case CRYPT_DEFAULT_CONTEXT_CERT_SIGN_OID:
+		return "CRYPT_DEFAULT_CONTEXT_CERT_SIGN_OID"
+	case CRYPT_DEFAULT_CONTEXT_MULTI_CERT_SIGN_OID:
+		return "CRYPT_DEFAULT_CONTEXT_MULTI_CERT_SIGN_OID"
+	default:
+		return fmt.Sprintf("CRYPT_DEFAULT_CONTEXT_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CRYPT_ENCODE_OBJECT_FLAGS uint32
 
 const (
@@ -660,6 +2031,31 @@ const (
 	CRYPT_UNICODE_NAME_ENCODE_ENABLE_UTF8_UNICODE_FLAG CRYPT_ENCODE_OBJECT_FLAGS = 536870912
 )
 
+// String returns the CRYPT_ENCODE_OBJECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_ENCODE_OBJECT_FLAGS) String() string {
+	var parts []string
+	if e&CRYPT_ENCODE_ALLOC_FLAG != 0 {
+		parts = append(parts, "CRYPT_ENCODE_ALLOC_FLAG")
+	}
+	if e&CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG != 0 {
+		parts = append(parts, "CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG")
+	}
+	if e&CRYPT_UNICODE_NAME_ENCODE_DISABLE_CHECK_TYPE_FLAG != 0 {
+		parts = append(parts, "CRYPT_UNICODE_NAME_ENCODE_DISABLE_CHECK_TYPE_FLAG")
+	}
+	if e&CRYPT_UNICODE_NAME_ENCODE_ENABLE_T61_UNICODE_FLAG != 0 {
+		parts = append(parts, "CRYPT_UNICODE_NAME_ENCODE_ENABLE_T61_UNICODE_FLAG")
+	}
+	if e&CRYPT_UNICODE_NAME_ENCODE_ENABLE_UTF8_UNICODE_FLAG != 0 {
+		parts = append(parts, "CRYPT_UNICODE_NAME_ENCODE_ENABLE_UTF8_UNICODE_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CRYPT_FIND_FLAGS uint32
 
 const (
@@ -668,6 +2064,22 @@ const (
 	CRYPT_FIND_SILENT_KEYSET_FLAG  CRYPT_FIND_FLAGS = 64
 )
 
+// String returns the CRYPT_FIND_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_FIND_FLAGS) String() string {
+	switch e {
+	case CRYPT_FIND_USER_KEYSET_FLAG:
+		return "CRYPT_FIND_USER_KEYSET_FLAG"
+	case CRYPT_FIND_MACHINE_KEYSET_FLAG:
+		return "CRYPT_FIND_MACHINE_KEYSET_FLAG"
+	case CRYPT_FIND_SILENT_KEYSET_FLAG:
+		return "CRYPT_FIND_SILENT_KEYSET_FLAG"
+	default:
+		return fmt.Sprintf("CRYPT_FIND_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CRYPT_GET_URL_FLAGS uint32
 
 const (
@@ -677,6 +2089,29 @@ const (
 	CRYPT_GET_URL_FROM_AUTH_ATTRIBUTE   CRYPT_GET_URL_FLAGS = 8
 )
 
+// String returns the CRYPT_GET_URL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_GET_URL_FLAGS) String() string {
+	var parts []string
+	if e&CRYPT_GET_URL_FROM_PROPERTY != 0 {
+		parts = append(parts, "CRYPT_GET_URL_FROM_PROPERTY")
+	}
+	if e&CRYPT_GET_URL_FROM_EXTENSION != 0 {
+		parts = append(parts, "CRYPT_GET_URL_FROM_EXTENSION")
+	}
+	if e&CRYPT_GET_URL_FROM_UNAUTH_ATTRIBUTE != 0 {
+		parts = append(parts, "CRYPT_GET_URL_FROM_UNAUTH_ATTRIBUTE")
+	}
+	if e&CRYPT_GET_URL_FROM_AUTH_ATTRIBUTE != 0 {
+		parts = append(parts, "CRYPT_GET_URL_FROM_AUTH_ATTRIBUTE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CRYPT_IMAGE_REF_FLAGS uint32
 
 const (
@@ -684,6 +2119,23 @@ const (
 	CRYPT_PROCESS_ISOLATE  CRYPT_IMAGE_REF_FLAGS = 65536
 )
 
+// String returns the CRYPT_IMAGE_REF_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_IMAGE_REF_FLAGS) String() string {
+	var parts []string
+	if e&CRYPT_MIN_DEPENDENCIES != 0 {
+		parts = append(parts, "CRYPT_MIN_DEPENDENCIES")
+	}
+	if e&CRYPT_PROCESS_ISOLATE != 0 {
+		parts = append(parts, "CRYPT_PROCESS_ISOLATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CRYPT_IMPORT_PUBLIC_KEY_FLAGS uint32
 
 const (
@@ -691,6 +2143,23 @@ const (
 	CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG CRYPT_IMPORT_PUBLIC_KEY_FLAGS = 1073741824
 )
 
+// String returns the CRYPT_IMPORT_PUBLIC_KEY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_IMPORT_PUBLIC_KEY_FLAGS) String() string {
+	var parts []string
+	if e&CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG != 0 {
+		parts = append(parts, "CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG")
+	}
+	if e&CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG != 0 {
+		parts = append(parts, "CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CRYPT_KEY_FLAGS uint32
 
 const (
@@ -727,6 +2196,109 @@ const (
 	CERT_SET_KEY_CONTEXT_PROP_ID       CRYPT_KEY_FLAGS = 1
 )
 
+// String returns the CRYPT_KEY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_KEY_FLAGS) String() string {
+	var parts []string
+	if e&CRYPT_EXPORTABLE != 0 {
+		parts = append(parts, "CRYPT_EXPORTABLE")
+	}
+	if e&CRYPT_USER_PROTECTED != 0 {
+		parts = append(parts, "CRYPT_USER_PROTECTED")
+	}
+	if e&CRYPT_ARCHIVABLE != 0 {
+		parts = append(parts, "CRYPT_ARCHIVABLE")
+	}
+	if e&CRYPT_CREATE_IV != 0 {
+		parts = append(parts, "CRYPT_CREATE_IV")
+	}
+	if e&CRYPT_CREATE_SALT != 0 {
+		parts = append(parts, "CRYPT_CREATE_SALT")
+	}
+	if e&CRYPT_DATA_KEY != 0 {
+		parts = append(parts, "CRYPT_DATA_KEY")
+	}
+	if e&CRYPT_FORCE_KEY_PROTECTION_HIGH != 0 {
+		parts = append(parts, "CRYPT_FORCE_KEY_PROTECTION_HIGH")
+	}
+	if e&CRYPT_KEK != 0 {
+		parts = append(parts, "CRYPT_KEK")
+	}
+	if e&CRYPT_INITIATOR != 0 {
+		parts = append(parts, "CRYPT_INITIATOR")
+	}
+	if e&CRYPT_NO_SALT != 0 {
+		parts = append(parts, "CRYPT_NO_SALT")
+	}
+	if e&CRYPT_ONLINE != 0 {
+		parts = append(parts, "CRYPT_ONLINE")
+	}
+	if e&CRYPT_PREGEN != 0 {
+		parts = append(parts, "CRYPT_PREGEN")
+	}
+	if e&CRYPT_RECIPIENT != 0 {
+		parts = append(parts, "CRYPT_RECIPIENT")
+	}
+	if e&CRYPT_SF != 0 {
+		parts = append(parts, "CRYPT_SF")
+	}
+	if e&CRYPT_SGCKEY != 0 {
+		parts = append(parts, "CRYPT_SGCKEY")
+	}
+	if e&CRYPT_VOLATILE != 0 {
+		parts = append(parts, "CRYPT_VOLATILE")
+	}
+	if e&CRYPT_MACHINE_KEYSET != 0 {
+		parts = append(parts, "CRYPT_MACHINE_KEYSET")
+	}
+	if e&CRYPT_USER_KEYSET != 0 {
+		parts = append(parts, "CRYPT_USER_KEYSET")
+	}
+	if e&PKCS12_PREFER_CNG_KSP != 0 {
+		parts = append(parts, "PKCS12_PREFER_CNG_KSP")
+	}
+	if e&PKCS12_ALWAYS_CNG_KSP != 0 {
+		parts = append(parts, "PKCS12_ALWAYS_CNG_KSP")
+	}
+	if e&PKCS12_ALLOW_OVERWRITE_KEY != 0 {
+		parts = append(parts, "PKCS12_ALLOW_OVERWRITE_KEY")
+	}
+	if e&PKCS12_NO_PERSIST_KEY != 0 {
+		parts = append(parts, "PKCS12_NO_PERSIST_KEY")
+	}
+	if e&PKCS12_INCLUDE_EXTENDED_PROPERTIES != 0 {
+		parts = append(parts, "PKCS12_INCLUDE_EXTENDED_PROPERTIES")
+	}
+	if e&CRYPT_OAEP != 0 {
+		parts = append(parts, "CRYPT_OAEP")
+	}
+	if e&CRYPT_BLOB_VER3 != 0 {
+		parts = append(parts, "CRYPT_BLOB_VER3")
+	}
+	if e&CRYPT_DESTROYKEY != 0 {
+		parts = append(parts, "CRYPT_DESTROYKEY")
+	}
+	if e&CRYPT_SSL2_FALLBACK != 0 {
+		parts = append(parts, "CRYPT_SSL2_FALLBACK")
+	}
+	if e&CRYPT_Y_ONLY != 0 {
+		parts = append(parts, "CRYPT_Y_ONLY")
+	}
+	if e&CRYPT_IPSEC_HMAC_KEY != 0 {
+		parts = append(parts, "CRYPT_IPSEC_HMAC_KEY")
+	}
+	if e&CERT_SET_KEY_PROV_HANDLE_PROP_ID != 0 {
+		parts = append(parts, "CERT_SET_KEY_PROV_HANDLE_PROP_ID")
+	}
+	if e&CERT_SET_KEY_CONTEXT_PROP_ID != 0 {
+		parts = append(parts, "CERT_SET_KEY_CONTEXT_PROP_ID")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CRYPT_KEY_PARAM_ID uint32
 
 const (
@@ -740,6 +2312,31 @@ const (
 	KP_KEYLEN        CRYPT_KEY_PARAM_ID = 9
 )
 
+// String returns the CRYPT_KEY_PARAM_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_KEY_PARAM_ID) String() string {
+	switch e {
+	case KP_ALGID:
+		return "KP_ALGID"
+	case KP_CERTIFICATE:
+		return "KP_CERTIFICATE"
+	case KP_PERMISSIONS:
+		return "KP_PERMISSIONS"
+	case KP_SALT:
+		return "KP_SALT"
+	case KP_SALT_EX:
+		return "KP_SALT_EX"
+	case KP_BLOCKLEN:
+		return "KP_BLOCKLEN"
+	case KP_GET_USE_COUNT:
+		return "KP_GET_USE_COUNT"
+	case KP_KEYLEN:
+		return "KP_KEYLEN"
+	default:
+		return fmt.Sprintf("CRYPT_KEY_PARAM_ID(%d)", uint32(e))
+	}
+}
+
 type CRYPT_MSG_TYPE uint32
 
 const (
@@ -750,6 +2347,25 @@ const (
 	CMSG_HASHED               CRYPT_MSG_TYPE = 5
 )
 
+// String returns the CRYPT_MSG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_MSG_TYPE) String() string {
+	switch e {
+	case CMSG_DATA:
+		return "CMSG_DATA"
+	case CMSG_SIGNED:
+		return "CMSG_SIGNED"
+	case CMSG_ENVELOPED:
+		return "CMSG_ENVELOPED"
+	case CMSG_SIGNED_AND_ENVELOPED:
+		return "CMSG_SIGNED_AND_ENVELOPED"
+	case CMSG_HASHED:
+		return "CMSG_HASHED"
+	default:
+		return fmt.Sprintf("CRYPT_MSG_TYPE(%d)", uint32(e))
+	}
+}
+
 type CRYPT_OBJECT_LOCATOR_RELEASE_REASON uint32
 
 const (
@@ -759,12 +2375,42 @@ const (
 	CRYPT_OBJECT_LOCATOR_RELEASE_DLL_UNLOAD      CRYPT_OBJECT_LOCATOR_RELEASE_REASON = 4
 )
 
+// String returns the CRYPT_OBJECT_LOCATOR_RELEASE_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_OBJECT_LOCATOR_RELEASE_REASON) String() string {
+	switch e {
+	case CRYPT_OBJECT_LOCATOR_RELEASE_SYSTEM_SHUTDOWN:
+		return "CRYPT_OBJECT_LOCATOR_RELEASE_SYSTEM_SHUTDOWN"
+	case CRYPT_OBJECT_LOCATOR_RELEASE_SERVICE_STOP:
+		return "CRYPT_OBJECT_LOCATOR_RELEASE_SERVICE_STOP"
+	case CRYPT_OBJECT_LOCATOR_RELEASE_PROCESS_EXIT:
+		return "CRYPT_OBJECT_LOCATOR_RELEASE_PROCESS_EXIT"
+	case CRYPT_OBJECT_LOCATOR_RELEASE_DLL_UNLOAD:
+		return "CRYPT_OBJECT_LOCATOR_RELEASE_DLL_UNLOAD"
+	default:
+		return fmt.Sprintf("CRYPT_OBJECT_LOCATOR_RELEASE_REASON(%d)", uint32(e))
+	}
+}
+
 type CRYPT_SET_HASH_PARAM uint32
 
 const (
 	HP_HMAC_INFO CRYPT_SET_HASH_PARAM = 5
 	HP_HASHVAL   CRYPT_SET_HASH_PARAM = 2
 )
+
+// String returns the CRYPT_SET_HASH_PARAM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_SET_HASH_PARAM) String() string {
+	switch e {
+	case HP_HMAC_INFO:
+		return "HP_HMAC_INFO"
+	case HP_HASHVAL:
+		return "HP_HASHVAL"
+	default:
+		return fmt.Sprintf("CRYPT_SET_HASH_PARAM(%d)", uint32(e))
+	}
+}
 
 type CRYPT_SET_PROV_PARAM_ID uint32
 
@@ -788,6 +2434,49 @@ const (
 	PP_SMARTCARD_READER       CRYPT_SET_PROV_PARAM_ID = 43
 )
 
+// String returns the CRYPT_SET_PROV_PARAM_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_SET_PROV_PARAM_ID) String() string {
+	switch e {
+	case PP_CLIENT_HWND:
+		return "PP_CLIENT_HWND"
+	case PP_DELETEKEY:
+		return "PP_DELETEKEY"
+	case PP_KEYEXCHANGE_ALG:
+		return "PP_KEYEXCHANGE_ALG"
+	case PP_KEYEXCHANGE_PIN:
+		return "PP_KEYEXCHANGE_PIN"
+	case PP_KEYEXCHANGE_KEYSIZE:
+		return "PP_KEYEXCHANGE_KEYSIZE"
+	case PP_KEYSET_SEC_DESCR:
+		return "PP_KEYSET_SEC_DESCR"
+	case PP_PIN_PROMPT_STRING:
+		return "PP_PIN_PROMPT_STRING"
+	case PP_ROOT_CERTSTORE:
+		return "PP_ROOT_CERTSTORE"
+	case PP_SIGNATURE_ALG:
+		return "PP_SIGNATURE_ALG"
+	case PP_SIGNATURE_PIN:
+		return "PP_SIGNATURE_PIN"
+	case PP_SIGNATURE_KEYSIZE:
+		return "PP_SIGNATURE_KEYSIZE"
+	case PP_UI_PROMPT:
+		return "PP_UI_PROMPT"
+	case PP_USE_HARDWARE_RNG:
+		return "PP_USE_HARDWARE_RNG"
+	case PP_USER_CERTSTORE:
+		return "PP_USER_CERTSTORE"
+	case PP_SECURE_KEYEXCHANGE_PIN:
+		return "PP_SECURE_KEYEXCHANGE_PIN"
+	case PP_SECURE_SIGNATURE_PIN:
+		return "PP_SECURE_SIGNATURE_PIN"
+	case PP_SMARTCARD_READER:
+		return "PP_SMARTCARD_READER"
+	default:
+		return fmt.Sprintf("CRYPT_SET_PROV_PARAM_ID(%d)", uint32(e))
+	}
+}
+
 type CRYPT_STRING uint32
 
 const (
@@ -807,6 +2496,43 @@ const (
 	CRYPT_STRING_HEX_ANY             CRYPT_STRING = 8
 )
 
+// String returns the CRYPT_STRING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_STRING) String() string {
+	switch e {
+	case CRYPT_STRING_BASE64HEADER:
+		return "CRYPT_STRING_BASE64HEADER"
+	case CRYPT_STRING_BASE64:
+		return "CRYPT_STRING_BASE64"
+	case CRYPT_STRING_BINARY:
+		return "CRYPT_STRING_BINARY"
+	case CRYPT_STRING_BASE64REQUESTHEADER:
+		return "CRYPT_STRING_BASE64REQUESTHEADER"
+	case CRYPT_STRING_HEX:
+		return "CRYPT_STRING_HEX"
+	case CRYPT_STRING_HEXASCII:
+		return "CRYPT_STRING_HEXASCII"
+	case CRYPT_STRING_BASE64X509CRLHEADER:
+		return "CRYPT_STRING_BASE64X509CRLHEADER"
+	case CRYPT_STRING_HEXADDR:
+		return "CRYPT_STRING_HEXADDR"
+	case CRYPT_STRING_HEXASCIIADDR:
+		return "CRYPT_STRING_HEXASCIIADDR"
+	case CRYPT_STRING_HEXRAW:
+		return "CRYPT_STRING_HEXRAW"
+	case CRYPT_STRING_STRICT:
+		return "CRYPT_STRING_STRICT"
+	case CRYPT_STRING_BASE64_ANY:
+		return "CRYPT_STRING_BASE64_ANY"
+	case CRYPT_STRING_ANY:
+		return "CRYPT_STRING_ANY"
+	case CRYPT_STRING_HEX_ANY:
+		return "CRYPT_STRING_HEX_ANY"
+	default:
+		return fmt.Sprintf("CRYPT_STRING(%d)", uint32(e))
+	}
+}
+
 type CRYPT_TIMESTAMP_RESPONSE_STATUS uint32
 
 const (
@@ -818,11 +2544,43 @@ const (
 	TIMESTAMP_STATUS_REVOKED            CRYPT_TIMESTAMP_RESPONSE_STATUS = 5
 )
 
+// String returns the CRYPT_TIMESTAMP_RESPONSE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_TIMESTAMP_RESPONSE_STATUS) String() string {
+	switch e {
+	case TIMESTAMP_STATUS_GRANTED:
+		return "TIMESTAMP_STATUS_GRANTED"
+	case TIMESTAMP_STATUS_GRANTED_WITH_MODS:
+		return "TIMESTAMP_STATUS_GRANTED_WITH_MODS"
+	case TIMESTAMP_STATUS_REJECTED:
+		return "TIMESTAMP_STATUS_REJECTED"
+	case TIMESTAMP_STATUS_WAITING:
+		return "TIMESTAMP_STATUS_WAITING"
+	case TIMESTAMP_STATUS_REVOCATION_WARNING:
+		return "TIMESTAMP_STATUS_REVOCATION_WARNING"
+	case TIMESTAMP_STATUS_REVOKED:
+		return "TIMESTAMP_STATUS_REVOKED"
+	default:
+		return fmt.Sprintf("CRYPT_TIMESTAMP_RESPONSE_STATUS(%d)", uint32(e))
+	}
+}
+
 type CRYPT_TIMESTAMP_VERSION uint32
 
 const (
 	TIMESTAMP_VERSION CRYPT_TIMESTAMP_VERSION = 1
 )
+
+// String returns the CRYPT_TIMESTAMP_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_TIMESTAMP_VERSION) String() string {
+	switch e {
+	case TIMESTAMP_VERSION:
+		return "TIMESTAMP_VERSION"
+	default:
+		return fmt.Sprintf("CRYPT_TIMESTAMP_VERSION(%d)", uint32(e))
+	}
+}
 
 type CRYPT_VERIFY_CERT_FLAGS uint32
 
@@ -831,6 +2589,21 @@ const (
 	CRYPT_VERIFY_CERT_SIGN_SET_STRONG_PROPERTIES_FLAG    CRYPT_VERIFY_CERT_FLAGS = 2
 	CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG CRYPT_VERIFY_CERT_FLAGS = 4
 )
+
+// String returns the CRYPT_VERIFY_CERT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_VERIFY_CERT_FLAGS) String() string {
+	switch e {
+	case CRYPT_VERIFY_CERT_SIGN_DISABLE_MD2_MD4_FLAG:
+		return "CRYPT_VERIFY_CERT_SIGN_DISABLE_MD2_MD4_FLAG"
+	case CRYPT_VERIFY_CERT_SIGN_SET_STRONG_PROPERTIES_FLAG:
+		return "CRYPT_VERIFY_CERT_SIGN_SET_STRONG_PROPERTIES_FLAG"
+	case CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG:
+		return "CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG"
+	default:
+		return fmt.Sprintf("CRYPT_VERIFY_CERT_FLAGS(%d)", uint32(e))
+	}
+}
 
 // CRYPT_XML_CHARSET: https://learn.microsoft.com/windows/win32/api/cryptxml/ne-cryptxml-crypt_xml_charset
 type CRYPT_XML_CHARSET int32
@@ -842,6 +2615,23 @@ const (
 	CRYPT_XML_CHARSET_UTF16BE CRYPT_XML_CHARSET = 3
 )
 
+// String returns the CRYPT_XML_CHARSET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_XML_CHARSET) String() string {
+	switch e {
+	case CRYPT_XML_CHARSET_AUTO:
+		return "CRYPT_XML_CHARSET_AUTO"
+	case CRYPT_XML_CHARSET_UTF8:
+		return "CRYPT_XML_CHARSET_UTF8"
+	case CRYPT_XML_CHARSET_UTF16LE:
+		return "CRYPT_XML_CHARSET_UTF16LE"
+	case CRYPT_XML_CHARSET_UTF16BE:
+		return "CRYPT_XML_CHARSET_UTF16BE"
+	default:
+		return fmt.Sprintf("CRYPT_XML_CHARSET(%d)", int32(e))
+	}
+}
+
 type CRYPT_XML_FLAGS uint32
 
 const (
@@ -850,12 +2640,40 @@ const (
 	CRYPT_XML_SIGN_ADD_KEYVALUE       CRYPT_XML_FLAGS = 1
 )
 
+// String returns the CRYPT_XML_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_XML_FLAGS) String() string {
+	switch e {
+	case CRYPT_XML_FLAG_DISABLE_EXTENSIONS:
+		return "CRYPT_XML_FLAG_DISABLE_EXTENSIONS"
+	case CRYPT_XML_FLAG_NO_SERIALIZE:
+		return "CRYPT_XML_FLAG_NO_SERIALIZE"
+	case CRYPT_XML_SIGN_ADD_KEYVALUE:
+		return "CRYPT_XML_SIGN_ADD_KEYVALUE"
+	default:
+		return fmt.Sprintf("CRYPT_XML_FLAGS(%d)", uint32(e))
+	}
+}
+
 type CRYPT_XML_GROUP_ID uint32
 
 const (
 	CRYPT_XML_GROUP_ID_HASH CRYPT_XML_GROUP_ID = 1
 	CRYPT_XML_GROUP_ID_SIGN CRYPT_XML_GROUP_ID = 2
 )
+
+// String returns the CRYPT_XML_GROUP_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_XML_GROUP_ID) String() string {
+	switch e {
+	case CRYPT_XML_GROUP_ID_HASH:
+		return "CRYPT_XML_GROUP_ID_HASH"
+	case CRYPT_XML_GROUP_ID_SIGN:
+		return "CRYPT_XML_GROUP_ID_SIGN"
+	default:
+		return fmt.Sprintf("CRYPT_XML_GROUP_ID(%d)", uint32(e))
+	}
+}
 
 // CRYPT_XML_KEYINFO_SPEC: https://learn.microsoft.com/windows/win32/api/cryptxml/ne-cryptxml-crypt_xml_keyinfo_spec
 type CRYPT_XML_KEYINFO_SPEC int32
@@ -865,6 +2683,21 @@ const (
 	CRYPT_XML_KEYINFO_SPEC_ENCODED CRYPT_XML_KEYINFO_SPEC = 1
 	CRYPT_XML_KEYINFO_SPEC_PARAM   CRYPT_XML_KEYINFO_SPEC = 2
 )
+
+// String returns the CRYPT_XML_KEYINFO_SPEC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_XML_KEYINFO_SPEC) String() string {
+	switch e {
+	case CRYPT_XML_KEYINFO_SPEC_NONE:
+		return "CRYPT_XML_KEYINFO_SPEC_NONE"
+	case CRYPT_XML_KEYINFO_SPEC_ENCODED:
+		return "CRYPT_XML_KEYINFO_SPEC_ENCODED"
+	case CRYPT_XML_KEYINFO_SPEC_PARAM:
+		return "CRYPT_XML_KEYINFO_SPEC_PARAM"
+	default:
+		return fmt.Sprintf("CRYPT_XML_KEYINFO_SPEC(%d)", int32(e))
+	}
+}
 
 type CRYPT_XML_KEYINFO_TYPE uint32
 
@@ -876,6 +2709,25 @@ const (
 	CRYPT_XML_KEYINFO_TYPE_CUSTOM    CRYPT_XML_KEYINFO_TYPE = 5
 )
 
+// String returns the CRYPT_XML_KEYINFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_XML_KEYINFO_TYPE) String() string {
+	switch e {
+	case CRYPT_XML_KEYINFO_TYPE_KEYNAME:
+		return "CRYPT_XML_KEYINFO_TYPE_KEYNAME"
+	case CRYPT_XML_KEYINFO_TYPE_KEYVALUE:
+		return "CRYPT_XML_KEYINFO_TYPE_KEYVALUE"
+	case CRYPT_XML_KEYINFO_TYPE_RETRIEVAL:
+		return "CRYPT_XML_KEYINFO_TYPE_RETRIEVAL"
+	case CRYPT_XML_KEYINFO_TYPE_X509DATA:
+		return "CRYPT_XML_KEYINFO_TYPE_X509DATA"
+	case CRYPT_XML_KEYINFO_TYPE_CUSTOM:
+		return "CRYPT_XML_KEYINFO_TYPE_CUSTOM"
+	default:
+		return fmt.Sprintf("CRYPT_XML_KEYINFO_TYPE(%d)", uint32(e))
+	}
+}
+
 type CRYPT_XML_KEY_VALUE_TYPE uint32
 
 const (
@@ -884,6 +2736,23 @@ const (
 	CRYPT_XML_KEY_VALUE_TYPE_ECDSA  CRYPT_XML_KEY_VALUE_TYPE = 3
 	CRYPT_XML_KEY_VALUE_TYPE_CUSTOM CRYPT_XML_KEY_VALUE_TYPE = 4
 )
+
+// String returns the CRYPT_XML_KEY_VALUE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_XML_KEY_VALUE_TYPE) String() string {
+	switch e {
+	case CRYPT_XML_KEY_VALUE_TYPE_DSA:
+		return "CRYPT_XML_KEY_VALUE_TYPE_DSA"
+	case CRYPT_XML_KEY_VALUE_TYPE_RSA:
+		return "CRYPT_XML_KEY_VALUE_TYPE_RSA"
+	case CRYPT_XML_KEY_VALUE_TYPE_ECDSA:
+		return "CRYPT_XML_KEY_VALUE_TYPE_ECDSA"
+	case CRYPT_XML_KEY_VALUE_TYPE_CUSTOM:
+		return "CRYPT_XML_KEY_VALUE_TYPE_CUSTOM"
+	default:
+		return fmt.Sprintf("CRYPT_XML_KEY_VALUE_TYPE(%d)", uint32(e))
+	}
+}
 
 // CRYPT_XML_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/cryptxml/ne-cryptxml-crypt_xml_property_id
 type CRYPT_XML_PROPERTY_ID int32
@@ -896,6 +2765,25 @@ const (
 	CRYPT_XML_PROPERTY_XML_OUTPUT_CHARSET CRYPT_XML_PROPERTY_ID = 5
 )
 
+// String returns the CRYPT_XML_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_XML_PROPERTY_ID) String() string {
+	switch e {
+	case CRYPT_XML_PROPERTY_MAX_HEAP_SIZE:
+		return "CRYPT_XML_PROPERTY_MAX_HEAP_SIZE"
+	case CRYPT_XML_PROPERTY_SIGNATURE_LOCATION:
+		return "CRYPT_XML_PROPERTY_SIGNATURE_LOCATION"
+	case CRYPT_XML_PROPERTY_MAX_SIGNATURES:
+		return "CRYPT_XML_PROPERTY_MAX_SIGNATURES"
+	case CRYPT_XML_PROPERTY_DOC_DECLARATION:
+		return "CRYPT_XML_PROPERTY_DOC_DECLARATION"
+	case CRYPT_XML_PROPERTY_XML_OUTPUT_CHARSET:
+		return "CRYPT_XML_PROPERTY_XML_OUTPUT_CHARSET"
+	default:
+		return fmt.Sprintf("CRYPT_XML_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 type CRYPT_XML_STATUS_ERROR_STATUS uint32
 
 const (
@@ -906,6 +2794,27 @@ const (
 	CRYPT_XML_STATUS_ERROR_SIGNATURE_INVALID       CRYPT_XML_STATUS_ERROR_STATUS = 65536
 	CRYPT_XML_STATUS_ERROR_KEYINFO_NOT_PARSED      CRYPT_XML_STATUS_ERROR_STATUS = 131072
 )
+
+// String returns the CRYPT_XML_STATUS_ERROR_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_XML_STATUS_ERROR_STATUS) String() string {
+	switch e {
+	case CRYPT_XML_STATUS_ERROR_NOT_RESOLVED:
+		return "CRYPT_XML_STATUS_ERROR_NOT_RESOLVED"
+	case CRYPT_XML_STATUS_ERROR_DIGEST_INVALID:
+		return "CRYPT_XML_STATUS_ERROR_DIGEST_INVALID"
+	case CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_ALGORITHM:
+		return "CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_ALGORITHM"
+	case CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_TRANSFORM:
+		return "CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_TRANSFORM"
+	case CRYPT_XML_STATUS_ERROR_SIGNATURE_INVALID:
+		return "CRYPT_XML_STATUS_ERROR_SIGNATURE_INVALID"
+	case CRYPT_XML_STATUS_ERROR_KEYINFO_NOT_PARSED:
+		return "CRYPT_XML_STATUS_ERROR_KEYINFO_NOT_PARSED"
+	default:
+		return fmt.Sprintf("CRYPT_XML_STATUS_ERROR_STATUS(%d)", uint32(e))
+	}
+}
 
 type CRYPT_XML_STATUS_INFO_STATUS uint32
 
@@ -918,6 +2827,28 @@ const (
 	CRYPT_XML_STATUS_OPENED_TO_ENCODE   CRYPT_XML_STATUS_INFO_STATUS = 2147483648
 )
 
+// String returns the CRYPT_XML_STATUS_INFO_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_XML_STATUS_INFO_STATUS) String() string {
+	switch e {
+	case CRYPT_XML_STATUS_INTERNAL_REFERENCE:
+		return "CRYPT_XML_STATUS_INTERNAL_REFERENCE"
+	case CRYPT_XML_STATUS_KEY_AVAILABLE:
+		return "CRYPT_XML_STATUS_KEY_AVAILABLE"
+	case CRYPT_XML_STATUS_DIGESTING:
+		return "CRYPT_XML_STATUS_DIGESTING"
+	case CRYPT_XML_STATUS_DIGEST_VALID:
+		return "CRYPT_XML_STATUS_DIGEST_VALID"
+	case CRYPT_XML_STATUS_SIGNATURE_VALID:
+		return "CRYPT_XML_STATUS_SIGNATURE_VALID"
+	case CRYPT_XML_STATUS_OPENED_TO_ENCODE:
+		return "CRYPT_XML_STATUS_OPENED_TO_ENCODE"
+	default:
+		return fmt.Sprintf("CRYPT_XML_STATUS_INFO_STATUS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CRYPT_XML_TRANSFORM_FLAGS uint32
 
 const (
@@ -925,6 +2856,25 @@ const (
 	CRYPT_XML_TRANSFORM_ON_NODESET       CRYPT_XML_TRANSFORM_FLAGS = 2
 	CRYPT_XML_TRANSFORM_URI_QUERY_STRING CRYPT_XML_TRANSFORM_FLAGS = 3
 )
+
+// String returns the CRYPT_XML_TRANSFORM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_XML_TRANSFORM_FLAGS) String() string {
+	var parts []string
+	if e&CRYPT_XML_TRANSFORM_ON_STREAM != 0 {
+		parts = append(parts, "CRYPT_XML_TRANSFORM_ON_STREAM")
+	}
+	if e&CRYPT_XML_TRANSFORM_ON_NODESET != 0 {
+		parts = append(parts, "CRYPT_XML_TRANSFORM_ON_NODESET")
+	}
+	if e&CRYPT_XML_TRANSFORM_URI_QUERY_STRING != 0 {
+		parts = append(parts, "CRYPT_XML_TRANSFORM_URI_QUERY_STRING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CRYPT_XML_X509DATA_TYPE uint32
 
@@ -936,6 +2886,27 @@ const (
 	CRYPT_XML_X509DATA_TYPE_CRL           CRYPT_XML_X509DATA_TYPE = 5
 	CRYPT_XML_X509DATA_TYPE_CUSTOM        CRYPT_XML_X509DATA_TYPE = 6
 )
+
+// String returns the CRYPT_XML_X509DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CRYPT_XML_X509DATA_TYPE) String() string {
+	switch e {
+	case CRYPT_XML_X509DATA_TYPE_ISSUER_SERIAL:
+		return "CRYPT_XML_X509DATA_TYPE_ISSUER_SERIAL"
+	case CRYPT_XML_X509DATA_TYPE_SKI:
+		return "CRYPT_XML_X509DATA_TYPE_SKI"
+	case CRYPT_XML_X509DATA_TYPE_SUBJECT_NAME:
+		return "CRYPT_XML_X509DATA_TYPE_SUBJECT_NAME"
+	case CRYPT_XML_X509DATA_TYPE_CERTIFICATE:
+		return "CRYPT_XML_X509DATA_TYPE_CERTIFICATE"
+	case CRYPT_XML_X509DATA_TYPE_CRL:
+		return "CRYPT_XML_X509DATA_TYPE_CRL"
+	case CRYPT_XML_X509DATA_TYPE_CUSTOM:
+		return "CRYPT_XML_X509DATA_TYPE_CUSTOM"
+	default:
+		return fmt.Sprintf("CRYPT_XML_X509DATA_TYPE(%d)", uint32(e))
+	}
+}
 
 type CertKeyType uint32
 
@@ -951,6 +2922,33 @@ const (
 	KeyTypeSelfSigned        CertKeyType = 8
 )
 
+// String returns the CertKeyType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CertKeyType) String() string {
+	switch e {
+	case KeyTypeOther:
+		return "KeyTypeOther"
+	case KeyTypeVirtualSmartCard:
+		return "KeyTypeVirtualSmartCard"
+	case KeyTypePhysicalSmartCard:
+		return "KeyTypePhysicalSmartCard"
+	case KeyTypePassport:
+		return "KeyTypePassport"
+	case KeyTypePassportRemote:
+		return "KeyTypePassportRemote"
+	case KeyTypePassportSmartCard:
+		return "KeyTypePassportSmartCard"
+	case KeyTypeHardware:
+		return "KeyTypeHardware"
+	case KeyTypeSoftware:
+		return "KeyTypeSoftware"
+	case KeyTypeSelfSigned:
+		return "KeyTypeSelfSigned"
+	default:
+		return fmt.Sprintf("CertKeyType(%d)", uint32(e))
+	}
+}
+
 // DSAFIPSVERSION_ENUM: https://learn.microsoft.com/windows/win32/api/bcrypt/ne-bcrypt-dsafipsversion_enum
 type DSAFIPSVERSION_ENUM int32
 
@@ -959,6 +2957,19 @@ const (
 	DSA_FIPS186_3 DSAFIPSVERSION_ENUM = 1
 )
 
+// String returns the DSAFIPSVERSION_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DSAFIPSVERSION_ENUM) String() string {
+	switch e {
+	case DSA_FIPS186_2:
+		return "DSA_FIPS186_2"
+	case DSA_FIPS186_3:
+		return "DSA_FIPS186_3"
+	default:
+		return fmt.Sprintf("DSAFIPSVERSION_ENUM(%d)", int32(e))
+	}
+}
+
 type Direction int32
 
 const (
@@ -966,11 +2977,35 @@ const (
 	DirectionDecrypt Direction = 2
 )
 
+// String returns the Direction constant's name, or its numeric form when
+// the value is not a known constant.
+func (e Direction) String() string {
+	switch e {
+	case DirectionEncrypt:
+		return "DirectionEncrypt"
+	case DirectionDecrypt:
+		return "DirectionDecrypt"
+	default:
+		return fmt.Sprintf("Direction(%d)", int32(e))
+	}
+}
+
 type ECC_CURVE_ALG_ID_ENUM int32
 
 const (
 	BCRYPT_NO_CURVE_GENERATION_ALG_ID ECC_CURVE_ALG_ID_ENUM = 0
 )
+
+// String returns the ECC_CURVE_ALG_ID_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ECC_CURVE_ALG_ID_ENUM) String() string {
+	switch e {
+	case BCRYPT_NO_CURVE_GENERATION_ALG_ID:
+		return "BCRYPT_NO_CURVE_GENERATION_ALG_ID"
+	default:
+		return fmt.Sprintf("ECC_CURVE_ALG_ID_ENUM(%d)", int32(e))
+	}
+}
 
 type ECC_CURVE_TYPE_ENUM int32
 
@@ -979,6 +3014,21 @@ const (
 	BCRYPT_ECC_PRIME_TWISTED_EDWARDS_CURVE   ECC_CURVE_TYPE_ENUM = 2
 	BCRYPT_ECC_PRIME_MONTGOMERY_CURVE        ECC_CURVE_TYPE_ENUM = 3
 )
+
+// String returns the ECC_CURVE_TYPE_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ECC_CURVE_TYPE_ENUM) String() string {
+	switch e {
+	case BCRYPT_ECC_PRIME_SHORT_WEIERSTRASS_CURVE:
+		return "BCRYPT_ECC_PRIME_SHORT_WEIERSTRASS_CURVE"
+	case BCRYPT_ECC_PRIME_TWISTED_EDWARDS_CURVE:
+		return "BCRYPT_ECC_PRIME_TWISTED_EDWARDS_CURVE"
+	case BCRYPT_ECC_PRIME_MONTGOMERY_CURVE:
+		return "BCRYPT_ECC_PRIME_MONTGOMERY_CURVE"
+	default:
+		return fmt.Sprintf("ECC_CURVE_TYPE_ENUM(%d)", int32(e))
+	}
+}
 
 // HASHALGORITHM_ENUM: https://learn.microsoft.com/windows/win32/api/bcrypt/ne-bcrypt-hashalgorithm_enum
 type HASHALGORITHM_ENUM int32
@@ -989,12 +3039,40 @@ const (
 	DSA_HASH_ALGORITHM_SHA512 HASHALGORITHM_ENUM = 2
 )
 
+// String returns the HASHALGORITHM_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HASHALGORITHM_ENUM) String() string {
+	switch e {
+	case DSA_HASH_ALGORITHM_SHA1:
+		return "DSA_HASH_ALGORITHM_SHA1"
+	case DSA_HASH_ALGORITHM_SHA256:
+		return "DSA_HASH_ALGORITHM_SHA256"
+	case DSA_HASH_ALGORITHM_SHA512:
+		return "DSA_HASH_ALGORITHM_SHA512"
+	default:
+		return fmt.Sprintf("HASHALGORITHM_ENUM(%d)", int32(e))
+	}
+}
+
 type HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE uint32
 
 const (
 	AUTHTYPE_CLIENT HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE = 1
 	AUTHTYPE_SERVER HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE = 2
 )
+
+// String returns the HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE) String() string {
+	switch e {
+	case AUTHTYPE_CLIENT:
+		return "AUTHTYPE_CLIENT"
+	case AUTHTYPE_SERVER:
+		return "AUTHTYPE_SERVER"
+	default:
+		return fmt.Sprintf("HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE(%d)", uint32(e))
+	}
+}
 
 type HandleType int32
 
@@ -1004,6 +3082,23 @@ const (
 	Transform  HandleType = 3
 	Hash       HandleType = 4
 )
+
+// String returns the HandleType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HandleType) String() string {
+	switch e {
+	case Asymmetric:
+		return "Asymmetric"
+	case Symmetric:
+		return "Symmetric"
+	case Transform:
+		return "Transform"
+	case Hash:
+		return "Hash"
+	default:
+		return fmt.Sprintf("HandleType(%d)", int32(e))
+	}
+}
 
 // MSCEPSetupProperty: https://learn.microsoft.com/windows/win32/api/casetup/ne-casetup-mscepsetupproperty
 type MSCEPSetupProperty int32
@@ -1025,6 +3120,43 @@ const (
 	ENUM_CEPSETUPPROP_CHALLENGEURL           MSCEPSetupProperty = 13
 )
 
+// String returns the MSCEPSetupProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MSCEPSetupProperty) String() string {
+	switch e {
+	case ENUM_CEPSETUPPROP_USELOCALSYSTEM:
+		return "ENUM_CEPSETUPPROP_USELOCALSYSTEM"
+	case ENUM_CEPSETUPPROP_USECHALLENGE:
+		return "ENUM_CEPSETUPPROP_USECHALLENGE"
+	case ENUM_CEPSETUPPROP_RANAME_CN:
+		return "ENUM_CEPSETUPPROP_RANAME_CN"
+	case ENUM_CEPSETUPPROP_RANAME_EMAIL:
+		return "ENUM_CEPSETUPPROP_RANAME_EMAIL"
+	case ENUM_CEPSETUPPROP_RANAME_COMPANY:
+		return "ENUM_CEPSETUPPROP_RANAME_COMPANY"
+	case ENUM_CEPSETUPPROP_RANAME_DEPT:
+		return "ENUM_CEPSETUPPROP_RANAME_DEPT"
+	case ENUM_CEPSETUPPROP_RANAME_CITY:
+		return "ENUM_CEPSETUPPROP_RANAME_CITY"
+	case ENUM_CEPSETUPPROP_RANAME_STATE:
+		return "ENUM_CEPSETUPPROP_RANAME_STATE"
+	case ENUM_CEPSETUPPROP_RANAME_COUNTRY:
+		return "ENUM_CEPSETUPPROP_RANAME_COUNTRY"
+	case ENUM_CEPSETUPPROP_SIGNINGKEYINFORMATION:
+		return "ENUM_CEPSETUPPROP_SIGNINGKEYINFORMATION"
+	case ENUM_CEPSETUPPROP_EXCHANGEKEYINFORMATION:
+		return "ENUM_CEPSETUPPROP_EXCHANGEKEYINFORMATION"
+	case ENUM_CEPSETUPPROP_CAINFORMATION:
+		return "ENUM_CEPSETUPPROP_CAINFORMATION"
+	case ENUM_CEPSETUPPROP_MSCEPURL:
+		return "ENUM_CEPSETUPPROP_MSCEPURL"
+	case ENUM_CEPSETUPPROP_CHALLENGEURL:
+		return "ENUM_CEPSETUPPROP_CHALLENGEURL"
+	default:
+		return fmt.Sprintf("MSCEPSetupProperty(%d)", int32(e))
+	}
+}
+
 type NCRYPT_ALGORITHM_NAME_CLASS uint32
 
 const (
@@ -1033,6 +3165,22 @@ const (
 	NCRYPT_SIGNATURE_INTERFACE             NCRYPT_ALGORITHM_NAME_CLASS = 5
 )
 
+// String returns the NCRYPT_ALGORITHM_NAME_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NCRYPT_ALGORITHM_NAME_CLASS) String() string {
+	switch e {
+	case NCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE:
+		return "NCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE"
+	case NCRYPT_SECRET_AGREEMENT_INTERFACE:
+		return "NCRYPT_SECRET_AGREEMENT_INTERFACE"
+	case NCRYPT_SIGNATURE_INTERFACE:
+		return "NCRYPT_SIGNATURE_INTERFACE"
+	default:
+		return fmt.Sprintf("NCRYPT_ALGORITHM_NAME_CLASS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NCRYPT_FLAGS uint32
 
 const (
@@ -1052,6 +3200,59 @@ const (
 	NCRYPT_PERSIST_ONLY_FLAG              NCRYPT_FLAGS = 1073741824
 )
 
+// String returns the NCRYPT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NCRYPT_FLAGS) String() string {
+	var parts []string
+	if e&NCRYPT_SILENT_FLAG != 0 {
+		parts = append(parts, "NCRYPT_SILENT_FLAG")
+	}
+	if e&NCRYPT_NO_PADDING_FLAG != 0 {
+		parts = append(parts, "NCRYPT_NO_PADDING_FLAG")
+	}
+	if e&NCRYPT_PAD_OAEP_FLAG != 0 {
+		parts = append(parts, "NCRYPT_PAD_OAEP_FLAG")
+	}
+	if e&NCRYPT_PAD_PKCS1_FLAG != 0 {
+		parts = append(parts, "NCRYPT_PAD_PKCS1_FLAG")
+	}
+	if e&NCRYPT_REGISTER_NOTIFY_FLAG != 0 {
+		parts = append(parts, "NCRYPT_REGISTER_NOTIFY_FLAG")
+	}
+	if e&NCRYPT_UNREGISTER_NOTIFY_FLAG != 0 {
+		parts = append(parts, "NCRYPT_UNREGISTER_NOTIFY_FLAG")
+	}
+	if e&NCRYPT_MACHINE_KEY_FLAG != 0 {
+		parts = append(parts, "NCRYPT_MACHINE_KEY_FLAG")
+	}
+	if e&NCRYPT_UNPROTECT_NO_DECRYPT != 0 {
+		parts = append(parts, "NCRYPT_UNPROTECT_NO_DECRYPT")
+	}
+	if e&NCRYPT_OVERWRITE_KEY_FLAG != 0 {
+		parts = append(parts, "NCRYPT_OVERWRITE_KEY_FLAG")
+	}
+	if e&NCRYPT_NO_KEY_VALIDATION != 0 {
+		parts = append(parts, "NCRYPT_NO_KEY_VALIDATION")
+	}
+	if e&NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG != 0 {
+		parts = append(parts, "NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG")
+	}
+	if e&NCRYPT_PAD_PSS_FLAG != 0 {
+		parts = append(parts, "NCRYPT_PAD_PSS_FLAG")
+	}
+	if e&NCRYPT_PERSIST_FLAG != 0 {
+		parts = append(parts, "NCRYPT_PERSIST_FLAG")
+	}
+	if e&NCRYPT_PERSIST_ONLY_FLAG != 0 {
+		parts = append(parts, "NCRYPT_PERSIST_ONLY_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type NCRYPT_OPERATION uint32
 
 const (
@@ -1062,6 +3263,31 @@ const (
 	NCRYPT_SIGNATURE_OPERATION             NCRYPT_OPERATION = 16
 )
 
+// String returns the NCRYPT_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NCRYPT_OPERATION) String() string {
+	var parts []string
+	if e&NCRYPT_CIPHER_OPERATION != 0 {
+		parts = append(parts, "NCRYPT_CIPHER_OPERATION")
+	}
+	if e&NCRYPT_HASH_OPERATION != 0 {
+		parts = append(parts, "NCRYPT_HASH_OPERATION")
+	}
+	if e&NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION != 0 {
+		parts = append(parts, "NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION")
+	}
+	if e&NCRYPT_SECRET_AGREEMENT_OPERATION != 0 {
+		parts = append(parts, "NCRYPT_SECRET_AGREEMENT_OPERATION")
+	}
+	if e&NCRYPT_SIGNATURE_OPERATION != 0 {
+		parts = append(parts, "NCRYPT_SIGNATURE_OPERATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type PIN_CACHE_POLICY_TYPE int32
 
 const (
@@ -1070,6 +3296,23 @@ const (
 	PinCacheNone         PIN_CACHE_POLICY_TYPE = 2
 	PinCacheAlwaysPrompt PIN_CACHE_POLICY_TYPE = 3
 )
+
+// String returns the PIN_CACHE_POLICY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PIN_CACHE_POLICY_TYPE) String() string {
+	switch e {
+	case PinCacheNormal:
+		return "PinCacheNormal"
+	case PinCacheTimed:
+		return "PinCacheTimed"
+	case PinCacheNone:
+		return "PinCacheNone"
+	case PinCacheAlwaysPrompt:
+		return "PinCacheAlwaysPrompt"
+	default:
+		return fmt.Sprintf("PIN_CACHE_POLICY_TYPE(%d)", int32(e))
+	}
+}
 
 type PaddingMode int32
 
@@ -1080,6 +3323,25 @@ const (
 	ANSIX923 PaddingMode = 4
 	ISO10126 PaddingMode = 5
 )
+
+// String returns the PaddingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PaddingMode) String() string {
+	switch e {
+	case None:
+		return "None"
+	case PKCS7:
+		return "PKCS7"
+	case Zeros:
+		return "Zeros"
+	case ANSIX923:
+		return "ANSIX923"
+	case ISO10126:
+		return "ISO10126"
+	default:
+		return fmt.Sprintf("PaddingMode(%d)", int32(e))
+	}
+}
 
 type SECRET_PURPOSE int32
 
@@ -1093,6 +3355,29 @@ const (
 	UnblockOnlyPin      SECRET_PURPOSE = 6
 )
 
+// String returns the SECRET_PURPOSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECRET_PURPOSE) String() string {
+	switch e {
+	case AuthenticationPin:
+		return "AuthenticationPin"
+	case DigitalSignaturePin:
+		return "DigitalSignaturePin"
+	case EncryptionPin:
+		return "EncryptionPin"
+	case NonRepudiationPin:
+		return "NonRepudiationPin"
+	case AdministratorPin:
+		return "AdministratorPin"
+	case PrimaryCardPin:
+		return "PrimaryCardPin"
+	case UnblockOnlyPin:
+		return "UnblockOnlyPin"
+	default:
+		return fmt.Sprintf("SECRET_PURPOSE(%d)", int32(e))
+	}
+}
+
 type SECRET_TYPE int32
 
 const (
@@ -1102,6 +3387,23 @@ const (
 	EmptyPinType             SECRET_TYPE = 3
 )
 
+// String returns the SECRET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECRET_TYPE) String() string {
+	switch e {
+	case AlphaNumericPinType:
+		return "AlphaNumericPinType"
+	case ExternalPinType:
+		return "ExternalPinType"
+	case ChallengeResponsePinType:
+		return "ChallengeResponsePinType"
+	case EmptyPinType:
+		return "EmptyPinType"
+	default:
+		return fmt.Sprintf("SECRET_TYPE(%d)", int32(e))
+	}
+}
+
 type SIGNER_CERT_CHOICE uint32
 
 const (
@@ -1110,6 +3412,22 @@ const (
 	SIGNER_CERT_SPC_CHAIN SIGNER_CERT_CHOICE = 3
 )
 
+// String returns the SIGNER_CERT_CHOICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIGNER_CERT_CHOICE) String() string {
+	switch e {
+	case SIGNER_CERT_SPC_FILE:
+		return "SIGNER_CERT_SPC_FILE"
+	case SIGNER_CERT_STORE:
+		return "SIGNER_CERT_STORE"
+	case SIGNER_CERT_SPC_CHAIN:
+		return "SIGNER_CERT_SPC_CHAIN"
+	default:
+		return fmt.Sprintf("SIGNER_CERT_CHOICE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SIGNER_CERT_POLICY uint32
 
 const (
@@ -1119,12 +3437,47 @@ const (
 	SIGNER_CERT_POLICY_CHAIN_NO_ROOT SIGNER_CERT_POLICY = 8
 )
 
+// String returns the SIGNER_CERT_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIGNER_CERT_POLICY) String() string {
+	var parts []string
+	if e&SIGNER_CERT_POLICY_STORE != 0 {
+		parts = append(parts, "SIGNER_CERT_POLICY_STORE")
+	}
+	if e&SIGNER_CERT_POLICY_CHAIN != 0 {
+		parts = append(parts, "SIGNER_CERT_POLICY_CHAIN")
+	}
+	if e&SIGNER_CERT_POLICY_SPC != 0 {
+		parts = append(parts, "SIGNER_CERT_POLICY_SPC")
+	}
+	if e&SIGNER_CERT_POLICY_CHAIN_NO_ROOT != 0 {
+		parts = append(parts, "SIGNER_CERT_POLICY_CHAIN_NO_ROOT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SIGNER_PRIVATE_KEY_CHOICE uint32
 
 const (
 	PVK_TYPE_FILE_NAME    SIGNER_PRIVATE_KEY_CHOICE = 1
 	PVK_TYPE_KEYCONTAINER SIGNER_PRIVATE_KEY_CHOICE = 2
 )
+
+// String returns the SIGNER_PRIVATE_KEY_CHOICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIGNER_PRIVATE_KEY_CHOICE) String() string {
+	switch e {
+	case PVK_TYPE_FILE_NAME:
+		return "PVK_TYPE_FILE_NAME"
+	case PVK_TYPE_KEYCONTAINER:
+		return "PVK_TYPE_KEYCONTAINER"
+	default:
+		return fmt.Sprintf("SIGNER_PRIVATE_KEY_CHOICE(%d)", uint32(e))
+	}
+}
 
 type SIGNER_SIGNATURE_ATTRIBUTE_CHOICE uint32
 
@@ -1133,6 +3486,20 @@ const (
 	SIGNER_AUTHCODE_ATTR SIGNER_SIGNATURE_ATTRIBUTE_CHOICE = 1
 )
 
+// String returns the SIGNER_SIGNATURE_ATTRIBUTE_CHOICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIGNER_SIGNATURE_ATTRIBUTE_CHOICE) String() string {
+	switch e {
+	case SIGNER_NO_ATTR:
+		return "SIGNER_NO_ATTR"
+	case SIGNER_AUTHCODE_ATTR:
+		return "SIGNER_AUTHCODE_ATTR"
+	default:
+		return fmt.Sprintf("SIGNER_SIGNATURE_ATTRIBUTE_CHOICE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SIGNER_SIGN_FLAGS uint32
 
 const (
@@ -1147,6 +3514,43 @@ const (
 	SPC_DIGEST_SIGN_EX_FLAG           SIGNER_SIGN_FLAGS = 16384
 )
 
+// String returns the SIGNER_SIGN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIGNER_SIGN_FLAGS) String() string {
+	var parts []string
+	if e&SIG_APPEND != 0 {
+		parts = append(parts, "SIG_APPEND")
+	}
+	if e&SPC_INC_PE_RESOURCES_FLAG != 0 {
+		parts = append(parts, "SPC_INC_PE_RESOURCES_FLAG")
+	}
+	if e&SPC_INC_PE_DEBUG_INFO_FLAG != 0 {
+		parts = append(parts, "SPC_INC_PE_DEBUG_INFO_FLAG")
+	}
+	if e&SPC_INC_PE_IMPORT_ADDR_TABLE_FLAG != 0 {
+		parts = append(parts, "SPC_INC_PE_IMPORT_ADDR_TABLE_FLAG")
+	}
+	if e&SPC_EXC_PE_PAGE_HASHES_FLAG != 0 {
+		parts = append(parts, "SPC_EXC_PE_PAGE_HASHES_FLAG")
+	}
+	if e&SPC_INC_PE_PAGE_HASHES_FLAG != 0 {
+		parts = append(parts, "SPC_INC_PE_PAGE_HASHES_FLAG")
+	}
+	if e&SPC_DIGEST_GENERATE_FLAG != 0 {
+		parts = append(parts, "SPC_DIGEST_GENERATE_FLAG")
+	}
+	if e&SPC_DIGEST_SIGN_FLAG != 0 {
+		parts = append(parts, "SPC_DIGEST_SIGN_FLAG")
+	}
+	if e&SPC_DIGEST_SIGN_EX_FLAG != 0 {
+		parts = append(parts, "SPC_DIGEST_SIGN_EX_FLAG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SIGNER_SUBJECT_CHOICE uint32
 
 const (
@@ -1154,9 +3558,35 @@ const (
 	SIGNER_SUBJECT_BLOB SIGNER_SUBJECT_CHOICE = 2
 )
 
+// String returns the SIGNER_SUBJECT_CHOICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIGNER_SUBJECT_CHOICE) String() string {
+	switch e {
+	case SIGNER_SUBJECT_FILE:
+		return "SIGNER_SUBJECT_FILE"
+	case SIGNER_SUBJECT_BLOB:
+		return "SIGNER_SUBJECT_BLOB"
+	default:
+		return fmt.Sprintf("SIGNER_SUBJECT_CHOICE(%d)", uint32(e))
+	}
+}
+
 type SIGNER_TIMESTAMP_FLAGS uint32
 
 const (
 	SIGNER_TIMESTAMP_AUTHENTICODE SIGNER_TIMESTAMP_FLAGS = 1
 	SIGNER_TIMESTAMP_RFC3161      SIGNER_TIMESTAMP_FLAGS = 2
 )
+
+// String returns the SIGNER_TIMESTAMP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIGNER_TIMESTAMP_FLAGS) String() string {
+	switch e {
+	case SIGNER_TIMESTAMP_AUTHENTICODE:
+		return "SIGNER_TIMESTAMP_AUTHENTICODE"
+	case SIGNER_TIMESTAMP_RFC3161:
+		return "SIGNER_TIMESTAMP_RFC3161"
+	default:
+		return fmt.Sprintf("SIGNER_TIMESTAMP_FLAGS(%d)", uint32(e))
+	}
+}

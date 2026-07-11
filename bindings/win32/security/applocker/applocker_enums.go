@@ -4,6 +4,12 @@
 
 package applocker
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS uint32
 
 const (
@@ -12,6 +18,28 @@ const (
 	SAFER_TOKEN_MAKE_INERT    SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS = 4
 	SAFER_TOKEN_WANT_FLAGS    SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS = 8
 )
+
+// String returns the SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS) String() string {
+	var parts []string
+	if e&SAFER_TOKEN_NULL_IF_EQUAL != 0 {
+		parts = append(parts, "SAFER_TOKEN_NULL_IF_EQUAL")
+	}
+	if e&SAFER_TOKEN_COMPARE_ONLY != 0 {
+		parts = append(parts, "SAFER_TOKEN_COMPARE_ONLY")
+	}
+	if e&SAFER_TOKEN_MAKE_INERT != 0 {
+		parts = append(parts, "SAFER_TOKEN_MAKE_INERT")
+	}
+	if e&SAFER_TOKEN_WANT_FLAGS != 0 {
+		parts = append(parts, "SAFER_TOKEN_WANT_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // SAFER_IDENTIFICATION_TYPES: https://learn.microsoft.com/windows/win32/api/winsafer/ne-winsafer-safer_identification_types
 type SAFER_IDENTIFICATION_TYPES int32
@@ -23,6 +51,25 @@ const (
 	SaferIdentityTypeUrlZone     SAFER_IDENTIFICATION_TYPES = 3
 	SaferIdentityTypeCertificate SAFER_IDENTIFICATION_TYPES = 4
 )
+
+// String returns the SAFER_IDENTIFICATION_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SAFER_IDENTIFICATION_TYPES) String() string {
+	switch e {
+	case SaferIdentityDefault:
+		return "SaferIdentityDefault"
+	case SaferIdentityTypeImageName:
+		return "SaferIdentityTypeImageName"
+	case SaferIdentityTypeImageHash:
+		return "SaferIdentityTypeImageHash"
+	case SaferIdentityTypeUrlZone:
+		return "SaferIdentityTypeUrlZone"
+	case SaferIdentityTypeCertificate:
+		return "SaferIdentityTypeCertificate"
+	default:
+		return fmt.Sprintf("SAFER_IDENTIFICATION_TYPES(%d)", int32(e))
+	}
+}
 
 // SAFER_OBJECT_INFO_CLASS: https://learn.microsoft.com/windows/win32/api/winsafer/ne-winsafer-safer_object_info_class
 type SAFER_OBJECT_INFO_CLASS int32
@@ -46,6 +93,47 @@ const (
 	SaferObjectExtendedError           SAFER_OBJECT_INFO_CLASS = 16
 )
 
+// String returns the SAFER_OBJECT_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SAFER_OBJECT_INFO_CLASS) String() string {
+	switch e {
+	case SaferObjectLevelId:
+		return "SaferObjectLevelId"
+	case SaferObjectScopeId:
+		return "SaferObjectScopeId"
+	case SaferObjectFriendlyName:
+		return "SaferObjectFriendlyName"
+	case SaferObjectDescription:
+		return "SaferObjectDescription"
+	case SaferObjectBuiltin:
+		return "SaferObjectBuiltin"
+	case SaferObjectDisallowed:
+		return "SaferObjectDisallowed"
+	case SaferObjectDisableMaxPrivilege:
+		return "SaferObjectDisableMaxPrivilege"
+	case SaferObjectInvertDeletedPrivileges:
+		return "SaferObjectInvertDeletedPrivileges"
+	case SaferObjectDeletedPrivileges:
+		return "SaferObjectDeletedPrivileges"
+	case SaferObjectDefaultOwner:
+		return "SaferObjectDefaultOwner"
+	case SaferObjectSidsToDisable:
+		return "SaferObjectSidsToDisable"
+	case SaferObjectRestrictedSidsInverted:
+		return "SaferObjectRestrictedSidsInverted"
+	case SaferObjectRestrictedSidsAdded:
+		return "SaferObjectRestrictedSidsAdded"
+	case SaferObjectAllIdentificationGuids:
+		return "SaferObjectAllIdentificationGuids"
+	case SaferObjectSingleIdentification:
+		return "SaferObjectSingleIdentification"
+	case SaferObjectExtendedError:
+		return "SaferObjectExtendedError"
+	default:
+		return fmt.Sprintf("SAFER_OBJECT_INFO_CLASS(%d)", int32(e))
+	}
+}
+
 // SAFER_POLICY_INFO_CLASS: https://learn.microsoft.com/windows/win32/api/winsafer/ne-winsafer-safer_policy_info_class
 type SAFER_POLICY_INFO_CLASS int32
 
@@ -58,3 +146,26 @@ const (
 	SaferPolicyDefaultLevelFlags            SAFER_POLICY_INFO_CLASS = 6
 	SaferPolicyAuthenticodeEnabled          SAFER_POLICY_INFO_CLASS = 7
 )
+
+// String returns the SAFER_POLICY_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SAFER_POLICY_INFO_CLASS) String() string {
+	switch e {
+	case SaferPolicyLevelList:
+		return "SaferPolicyLevelList"
+	case SaferPolicyEnableTransparentEnforcement:
+		return "SaferPolicyEnableTransparentEnforcement"
+	case SaferPolicyDefaultLevel:
+		return "SaferPolicyDefaultLevel"
+	case SaferPolicyEvaluateUserScope:
+		return "SaferPolicyEvaluateUserScope"
+	case SaferPolicyScopeFlags:
+		return "SaferPolicyScopeFlags"
+	case SaferPolicyDefaultLevelFlags:
+		return "SaferPolicyDefaultLevelFlags"
+	case SaferPolicyAuthenticodeEnabled:
+		return "SaferPolicyAuthenticodeEnabled"
+	default:
+		return fmt.Sprintf("SAFER_POLICY_INFO_CLASS(%d)", int32(e))
+	}
+}

@@ -4,12 +4,30 @@
 
 package ioctl
 
+import (
+	"fmt"
+	"strings"
+)
+
 type BIN_TYPES int32
 
 const (
 	RequestSize     BIN_TYPES = 0
 	RequestLocation BIN_TYPES = 1
 )
+
+// String returns the BIN_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BIN_TYPES) String() string {
+	switch e {
+	case RequestSize:
+		return "RequestSize"
+	case RequestLocation:
+		return "RequestLocation"
+	default:
+		return fmt.Sprintf("BIN_TYPES(%d)", int32(e))
+	}
+}
 
 type CHANGER_DEVICE_PROBLEM_TYPE int32
 
@@ -30,6 +48,44 @@ const (
 	DeviceProblemDriveError           CHANGER_DEVICE_PROBLEM_TYPE = 13
 )
 
+// String returns the CHANGER_DEVICE_PROBLEM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANGER_DEVICE_PROBLEM_TYPE) String() string {
+	switch e {
+	case DeviceProblemNone:
+		return "DeviceProblemNone"
+	case DeviceProblemHardware:
+		return "DeviceProblemHardware"
+	case DeviceProblemCHMError:
+		return "DeviceProblemCHMError"
+	case DeviceProblemDoorOpen:
+		return "DeviceProblemDoorOpen"
+	case DeviceProblemCalibrationError:
+		return "DeviceProblemCalibrationError"
+	case DeviceProblemTargetFailure:
+		return "DeviceProblemTargetFailure"
+	case DeviceProblemCHMMoveError:
+		return "DeviceProblemCHMMoveError"
+	case DeviceProblemCHMZeroError:
+		return "DeviceProblemCHMZeroError"
+	case DeviceProblemCartridgeInsertError:
+		return "DeviceProblemCartridgeInsertError"
+	case DeviceProblemPositionError:
+		return "DeviceProblemPositionError"
+	case DeviceProblemSensorError:
+		return "DeviceProblemSensorError"
+	case DeviceProblemCartridgeEjectError:
+		return "DeviceProblemCartridgeEjectError"
+	case DeviceProblemGripperError:
+		return "DeviceProblemGripperError"
+	case DeviceProblemDriveError:
+		return "DeviceProblemDriveError"
+	default:
+		return fmt.Sprintf("CHANGER_DEVICE_PROBLEM_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CHANGER_ELEMENT_STATUS_FLAGS uint32
 
 const (
@@ -49,6 +105,59 @@ const (
 	ELEMENT_STATUS_PRODUCT_DATA CHANGER_ELEMENT_STATUS_FLAGS = 64
 )
 
+// String returns the CHANGER_ELEMENT_STATUS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANGER_ELEMENT_STATUS_FLAGS) String() string {
+	var parts []string
+	if e&ELEMENT_STATUS_ACCESS != 0 {
+		parts = append(parts, "ELEMENT_STATUS_ACCESS")
+	}
+	if e&ELEMENT_STATUS_AVOLTAG != 0 {
+		parts = append(parts, "ELEMENT_STATUS_AVOLTAG")
+	}
+	if e&ELEMENT_STATUS_EXCEPT != 0 {
+		parts = append(parts, "ELEMENT_STATUS_EXCEPT")
+	}
+	if e&ELEMENT_STATUS_EXENAB != 0 {
+		parts = append(parts, "ELEMENT_STATUS_EXENAB")
+	}
+	if e&ELEMENT_STATUS_FULL != 0 {
+		parts = append(parts, "ELEMENT_STATUS_FULL")
+	}
+	if e&ELEMENT_STATUS_ID_VALID != 0 {
+		parts = append(parts, "ELEMENT_STATUS_ID_VALID")
+	}
+	if e&ELEMENT_STATUS_IMPEXP != 0 {
+		parts = append(parts, "ELEMENT_STATUS_IMPEXP")
+	}
+	if e&ELEMENT_STATUS_INENAB != 0 {
+		parts = append(parts, "ELEMENT_STATUS_INENAB")
+	}
+	if e&ELEMENT_STATUS_INVERT != 0 {
+		parts = append(parts, "ELEMENT_STATUS_INVERT")
+	}
+	if e&ELEMENT_STATUS_LUN_VALID != 0 {
+		parts = append(parts, "ELEMENT_STATUS_LUN_VALID")
+	}
+	if e&ELEMENT_STATUS_NOT_BUS != 0 {
+		parts = append(parts, "ELEMENT_STATUS_NOT_BUS")
+	}
+	if e&ELEMENT_STATUS_PVOLTAG != 0 {
+		parts = append(parts, "ELEMENT_STATUS_PVOLTAG")
+	}
+	if e&ELEMENT_STATUS_SVALID != 0 {
+		parts = append(parts, "ELEMENT_STATUS_SVALID")
+	}
+	if e&ELEMENT_STATUS_PRODUCT_DATA != 0 {
+		parts = append(parts, "ELEMENT_STATUS_PRODUCT_DATA")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CHANGER_FEATURES uint32
 
 const (
@@ -83,6 +192,103 @@ const (
 	CHANGER_VOLUME_UNDEFINE             CHANGER_FEATURES = 16777216
 )
 
+// String returns the CHANGER_FEATURES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANGER_FEATURES) String() string {
+	var parts []string
+	if e&CHANGER_BAR_CODE_SCANNER_INSTALLED != 0 {
+		parts = append(parts, "CHANGER_BAR_CODE_SCANNER_INSTALLED")
+	}
+	if e&CHANGER_CARTRIDGE_MAGAZINE != 0 {
+		parts = append(parts, "CHANGER_CARTRIDGE_MAGAZINE")
+	}
+	if e&CHANGER_CLEANER_ACCESS_NOT_VALID != 0 {
+		parts = append(parts, "CHANGER_CLEANER_ACCESS_NOT_VALID")
+	}
+	if e&CHANGER_CLEANER_SLOT != 0 {
+		parts = append(parts, "CHANGER_CLEANER_SLOT")
+	}
+	if e&CHANGER_CLOSE_IEPORT != 0 {
+		parts = append(parts, "CHANGER_CLOSE_IEPORT")
+	}
+	if e&CHANGER_DEVICE_REINITIALIZE_CAPABLE != 0 {
+		parts = append(parts, "CHANGER_DEVICE_REINITIALIZE_CAPABLE")
+	}
+	if e&CHANGER_DRIVE_CLEANING_REQUIRED != 0 {
+		parts = append(parts, "CHANGER_DRIVE_CLEANING_REQUIRED")
+	}
+	if e&CHANGER_DRIVE_EMPTY_ON_DOOR_ACCESS != 0 {
+		parts = append(parts, "CHANGER_DRIVE_EMPTY_ON_DOOR_ACCESS")
+	}
+	if e&CHANGER_EXCHANGE_MEDIA != 0 {
+		parts = append(parts, "CHANGER_EXCHANGE_MEDIA")
+	}
+	if e&CHANGER_INIT_ELEM_STAT_WITH_RANGE != 0 {
+		parts = append(parts, "CHANGER_INIT_ELEM_STAT_WITH_RANGE")
+	}
+	if e&CHANGER_KEYPAD_ENABLE_DISABLE != 0 {
+		parts = append(parts, "CHANGER_KEYPAD_ENABLE_DISABLE")
+	}
+	if e&CHANGER_LOCK_UNLOCK != 0 {
+		parts = append(parts, "CHANGER_LOCK_UNLOCK")
+	}
+	if e&CHANGER_MEDIUM_FLIP != 0 {
+		parts = append(parts, "CHANGER_MEDIUM_FLIP")
+	}
+	if e&CHANGER_OPEN_IEPORT != 0 {
+		parts = append(parts, "CHANGER_OPEN_IEPORT")
+	}
+	if e&CHANGER_POSITION_TO_ELEMENT != 0 {
+		parts = append(parts, "CHANGER_POSITION_TO_ELEMENT")
+	}
+	if e&CHANGER_PREDISMOUNT_EJECT_REQUIRED != 0 {
+		parts = append(parts, "CHANGER_PREDISMOUNT_EJECT_REQUIRED")
+	}
+	if e&CHANGER_PREMOUNT_EJECT_REQUIRED != 0 {
+		parts = append(parts, "CHANGER_PREMOUNT_EJECT_REQUIRED")
+	}
+	if e&CHANGER_REPORT_IEPORT_STATE != 0 {
+		parts = append(parts, "CHANGER_REPORT_IEPORT_STATE")
+	}
+	if e&CHANGER_SERIAL_NUMBER_VALID != 0 {
+		parts = append(parts, "CHANGER_SERIAL_NUMBER_VALID")
+	}
+	if e&CHANGER_STATUS_NON_VOLATILE != 0 {
+		parts = append(parts, "CHANGER_STATUS_NON_VOLATILE")
+	}
+	if e&CHANGER_STORAGE_DRIVE != 0 {
+		parts = append(parts, "CHANGER_STORAGE_DRIVE")
+	}
+	if e&CHANGER_STORAGE_IEPORT != 0 {
+		parts = append(parts, "CHANGER_STORAGE_IEPORT")
+	}
+	if e&CHANGER_STORAGE_SLOT != 0 {
+		parts = append(parts, "CHANGER_STORAGE_SLOT")
+	}
+	if e&CHANGER_STORAGE_TRANSPORT != 0 {
+		parts = append(parts, "CHANGER_STORAGE_TRANSPORT")
+	}
+	if e&CHANGER_VOLUME_ASSERT != 0 {
+		parts = append(parts, "CHANGER_VOLUME_ASSERT")
+	}
+	if e&CHANGER_VOLUME_IDENTIFICATION != 0 {
+		parts = append(parts, "CHANGER_VOLUME_IDENTIFICATION")
+	}
+	if e&CHANGER_VOLUME_REPLACE != 0 {
+		parts = append(parts, "CHANGER_VOLUME_REPLACE")
+	}
+	if e&CHANGER_VOLUME_SEARCH != 0 {
+		parts = append(parts, "CHANGER_VOLUME_SEARCH")
+	}
+	if e&CHANGER_VOLUME_UNDEFINE != 0 {
+		parts = append(parts, "CHANGER_VOLUME_UNDEFINE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CSVFS_DISK_CONNECTIVITY int32
 
 const (
@@ -91,6 +297,23 @@ const (
 	CsvFsDiskConnectivitySubsetOfNodes CSVFS_DISK_CONNECTIVITY = 2
 	CsvFsDiskConnectivityAllNodes      CSVFS_DISK_CONNECTIVITY = 3
 )
+
+// String returns the CSVFS_DISK_CONNECTIVITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSVFS_DISK_CONNECTIVITY) String() string {
+	switch e {
+	case CsvFsDiskConnectivityNone:
+		return "CsvFsDiskConnectivityNone"
+	case CsvFsDiskConnectivityMdsNodeOnly:
+		return "CsvFsDiskConnectivityMdsNodeOnly"
+	case CsvFsDiskConnectivitySubsetOfNodes:
+		return "CsvFsDiskConnectivitySubsetOfNodes"
+	case CsvFsDiskConnectivityAllNodes:
+		return "CsvFsDiskConnectivityAllNodes"
+	default:
+		return fmt.Sprintf("CSVFS_DISK_CONNECTIVITY(%d)", int32(e))
+	}
+}
 
 // CSV_CONTROL_OP: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-csv_control_op
 type CSV_CONTROL_OP int32
@@ -116,6 +339,51 @@ const (
 	CsvControlQueryVolumeId                      CSV_CONTROL_OP = 25
 )
 
+// String returns the CSV_CONTROL_OP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CSV_CONTROL_OP) String() string {
+	switch e {
+	case CsvControlStartRedirectFile:
+		return "CsvControlStartRedirectFile"
+	case CsvControlStopRedirectFile:
+		return "CsvControlStopRedirectFile"
+	case CsvControlQueryRedirectState:
+		return "CsvControlQueryRedirectState"
+	case CsvControlQueryFileRevision:
+		return "CsvControlQueryFileRevision"
+	case CsvControlQueryMdsPath:
+		return "CsvControlQueryMdsPath"
+	case CsvControlQueryFileRevisionFileId128:
+		return "CsvControlQueryFileRevisionFileId128"
+	case CsvControlQueryVolumeRedirectState:
+		return "CsvControlQueryVolumeRedirectState"
+	case CsvControlEnableUSNRangeModificationTracking:
+		return "CsvControlEnableUSNRangeModificationTracking"
+	case CsvControlMarkHandleLocalVolumeMount:
+		return "CsvControlMarkHandleLocalVolumeMount"
+	case CsvControlUnmarkHandleLocalVolumeMount:
+		return "CsvControlUnmarkHandleLocalVolumeMount"
+	case CsvControlGetCsvFsMdsPathV2:
+		return "CsvControlGetCsvFsMdsPathV2"
+	case CsvControlDisableCaching:
+		return "CsvControlDisableCaching"
+	case CsvControlEnableCaching:
+		return "CsvControlEnableCaching"
+	case CsvControlStartForceDFO:
+		return "CsvControlStartForceDFO"
+	case CsvControlStopForceDFO:
+		return "CsvControlStopForceDFO"
+	case CsvControlQueryMdsPathNoPause:
+		return "CsvControlQueryMdsPathNoPause"
+	case CsvControlSetVolumeId:
+		return "CsvControlSetVolumeId"
+	case CsvControlQueryVolumeId:
+		return "CsvControlQueryVolumeId"
+	default:
+		return fmt.Sprintf("CSV_CONTROL_OP(%d)", int32(e))
+	}
+}
+
 type DETECTION_TYPE int32
 
 const (
@@ -124,6 +392,21 @@ const (
 	DetectExInt13 DETECTION_TYPE = 2
 )
 
+// String returns the DETECTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DETECTION_TYPE) String() string {
+	switch e {
+	case DetectNone:
+		return "DetectNone"
+	case DetectInt13:
+		return "DetectInt13"
+	case DetectExInt13:
+		return "DetectExInt13"
+	default:
+		return fmt.Sprintf("DETECTION_TYPE(%d)", int32(e))
+	}
+}
+
 type DEVICEDUMP_COLLECTION_TYPEIDE_NOTIFICATION_TYPE int32
 
 const (
@@ -131,6 +414,21 @@ const (
 	TCCollectionApplicationRequested DEVICEDUMP_COLLECTION_TYPEIDE_NOTIFICATION_TYPE = 2
 	TCCollectionDeviceRequested      DEVICEDUMP_COLLECTION_TYPEIDE_NOTIFICATION_TYPE = 3
 )
+
+// String returns the DEVICEDUMP_COLLECTION_TYPEIDE_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVICEDUMP_COLLECTION_TYPEIDE_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case TCCollectionBugCheck:
+		return "TCCollectionBugCheck"
+	case TCCollectionApplicationRequested:
+		return "TCCollectionApplicationRequested"
+	case TCCollectionDeviceRequested:
+		return "TCCollectionDeviceRequested"
+	default:
+		return fmt.Sprintf("DEVICEDUMP_COLLECTION_TYPEIDE_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
 
 type DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE int32
 
@@ -141,6 +439,25 @@ const (
 	DeviceSavedInternalStatusDataHeader          DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE = 3
 	DeviceSavedInternalStatusData                DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE = 4
 )
+
+// String returns the DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE) String() string {
+	switch e {
+	case DeviceInternalStatusDataRequestTypeUndefined:
+		return "DeviceInternalStatusDataRequestTypeUndefined"
+	case DeviceCurrentInternalStatusDataHeader:
+		return "DeviceCurrentInternalStatusDataHeader"
+	case DeviceCurrentInternalStatusData:
+		return "DeviceCurrentInternalStatusData"
+	case DeviceSavedInternalStatusDataHeader:
+		return "DeviceSavedInternalStatusDataHeader"
+	case DeviceSavedInternalStatusData:
+		return "DeviceSavedInternalStatusData"
+	default:
+		return fmt.Sprintf("DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE(%d)", int32(e))
+	}
+}
 
 type DEVICE_INTERNAL_STATUS_DATA_SET int32
 
@@ -153,6 +470,27 @@ const (
 	DeviceStatusDataSetMax       DEVICE_INTERNAL_STATUS_DATA_SET = 5
 )
 
+// String returns the DEVICE_INTERNAL_STATUS_DATA_SET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVICE_INTERNAL_STATUS_DATA_SET) String() string {
+	switch e {
+	case DeviceStatusDataSetUndefined:
+		return "DeviceStatusDataSetUndefined"
+	case DeviceStatusDataSet1:
+		return "DeviceStatusDataSet1"
+	case DeviceStatusDataSet2:
+		return "DeviceStatusDataSet2"
+	case DeviceStatusDataSet3:
+		return "DeviceStatusDataSet3"
+	case DeviceStatusDataSet4:
+		return "DeviceStatusDataSet4"
+	case DeviceStatusDataSetMax:
+		return "DeviceStatusDataSetMax"
+	default:
+		return fmt.Sprintf("DEVICE_INTERNAL_STATUS_DATA_SET(%d)", int32(e))
+	}
+}
+
 type DISK_CACHE_RETENTION_PRIORITY int32
 
 const (
@@ -161,6 +499,21 @@ const (
 	KeepReadData       DISK_CACHE_RETENTION_PRIORITY = 2
 )
 
+// String returns the DISK_CACHE_RETENTION_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISK_CACHE_RETENTION_PRIORITY) String() string {
+	switch e {
+	case EqualPriority:
+		return "EqualPriority"
+	case KeepPrefetchedData:
+		return "KeepPrefetchedData"
+	case KeepReadData:
+		return "KeepReadData"
+	default:
+		return fmt.Sprintf("DISK_CACHE_RETENTION_PRIORITY(%d)", int32(e))
+	}
+}
+
 type DUPLICATE_EXTENTS_STATE int32
 
 const (
@@ -168,6 +521,21 @@ const (
 	FileSnapStateSource   DUPLICATE_EXTENTS_STATE = 1
 	FileSnapStateTarget   DUPLICATE_EXTENTS_STATE = 2
 )
+
+// String returns the DUPLICATE_EXTENTS_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DUPLICATE_EXTENTS_STATE) String() string {
+	switch e {
+	case FileSnapStateInactive:
+		return "FileSnapStateInactive"
+	case FileSnapStateSource:
+		return "FileSnapStateSource"
+	case FileSnapStateTarget:
+		return "FileSnapStateTarget"
+	default:
+		return fmt.Sprintf("DUPLICATE_EXTENTS_STATE(%d)", int32(e))
+	}
+}
 
 // ELEMENT_TYPE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-element_type
 type ELEMENT_TYPE int32
@@ -183,6 +551,31 @@ const (
 	ChangerMaxElement ELEMENT_TYPE = 7
 )
 
+// String returns the ELEMENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ELEMENT_TYPE) String() string {
+	switch e {
+	case AllElements:
+		return "AllElements"
+	case ChangerTransport:
+		return "ChangerTransport"
+	case ChangerSlot:
+		return "ChangerSlot"
+	case ChangerIEPort:
+		return "ChangerIEPort"
+	case ChangerDrive:
+		return "ChangerDrive"
+	case ChangerDoor:
+		return "ChangerDoor"
+	case ChangerKeypad:
+		return "ChangerKeypad"
+	case ChangerMaxElement:
+		return "ChangerMaxElement"
+	default:
+		return fmt.Sprintf("ELEMENT_TYPE(%d)", int32(e))
+	}
+}
+
 type FILESYSTEM_STATISTICS_TYPE uint16
 
 const (
@@ -190,6 +583,21 @@ const (
 	FILESYSTEM_STATISTICS_TYPE_FAT   FILESYSTEM_STATISTICS_TYPE = 2
 	FILESYSTEM_STATISTICS_TYPE_NTFS  FILESYSTEM_STATISTICS_TYPE = 1
 )
+
+// String returns the FILESYSTEM_STATISTICS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILESYSTEM_STATISTICS_TYPE) String() string {
+	switch e {
+	case FILESYSTEM_STATISTICS_TYPE_EXFAT:
+		return "FILESYSTEM_STATISTICS_TYPE_EXFAT"
+	case FILESYSTEM_STATISTICS_TYPE_FAT:
+		return "FILESYSTEM_STATISTICS_TYPE_FAT"
+	case FILESYSTEM_STATISTICS_TYPE_NTFS:
+		return "FILESYSTEM_STATISTICS_TYPE_NTFS"
+	default:
+		return fmt.Sprintf("FILESYSTEM_STATISTICS_TYPE(%d)", uint16(e))
+	}
+}
 
 type FILE_STORAGE_TIER_CLASS int32
 
@@ -200,11 +608,42 @@ const (
 	FileStorageTierClassMax         FILE_STORAGE_TIER_CLASS = 3
 )
 
+// String returns the FILE_STORAGE_TIER_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_STORAGE_TIER_CLASS) String() string {
+	switch e {
+	case FileStorageTierClassUnspecified:
+		return "FileStorageTierClassUnspecified"
+	case FileStorageTierClassCapacity:
+		return "FileStorageTierClassCapacity"
+	case FileStorageTierClassPerformance:
+		return "FileStorageTierClassPerformance"
+	case FileStorageTierClassMax:
+		return "FileStorageTierClassMax"
+	default:
+		return fmt.Sprintf("FILE_STORAGE_TIER_CLASS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FILE_STORAGE_TIER_FLAGS uint32
 
 const (
 	FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY FILE_STORAGE_TIER_FLAGS = 131072
 )
+
+// String returns the FILE_STORAGE_TIER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_STORAGE_TIER_FLAGS) String() string {
+	var parts []string
+	if e&FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY != 0 {
+		parts = append(parts, "FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // FILE_STORAGE_TIER_MEDIA_TYPE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-file_storage_tier_media_type
 type FILE_STORAGE_TIER_MEDIA_TYPE int32
@@ -217,12 +656,45 @@ const (
 	FileStorageTierMediaTypeMax         FILE_STORAGE_TIER_MEDIA_TYPE = 5
 )
 
+// String returns the FILE_STORAGE_TIER_MEDIA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_STORAGE_TIER_MEDIA_TYPE) String() string {
+	switch e {
+	case FileStorageTierMediaTypeUnspecified:
+		return "FileStorageTierMediaTypeUnspecified"
+	case FileStorageTierMediaTypeDisk:
+		return "FileStorageTierMediaTypeDisk"
+	case FileStorageTierMediaTypeSsd:
+		return "FileStorageTierMediaTypeSsd"
+	case FileStorageTierMediaTypeScm:
+		return "FileStorageTierMediaTypeScm"
+	case FileStorageTierMediaTypeMax:
+		return "FileStorageTierMediaTypeMax"
+	default:
+		return fmt.Sprintf("FILE_STORAGE_TIER_MEDIA_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FS_BPIO_INFLAGS int32
 
 const (
 	FSBPIO_INFL_None                     FS_BPIO_INFLAGS = 0
 	FSBPIO_INFL_SKIP_STORAGE_STACK_QUERY FS_BPIO_INFLAGS = 1
 )
+
+// String returns the FS_BPIO_INFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FS_BPIO_INFLAGS) String() string {
+	var parts []string
+	if e&FSBPIO_INFL_SKIP_STORAGE_STACK_QUERY != 0 {
+		parts = append(parts, "FSBPIO_INFL_SKIP_STORAGE_STACK_QUERY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type FS_BPIO_OPERATIONS int32
 
@@ -238,6 +710,34 @@ const (
 	FS_BPIO_OP_MAX_OPERATION       FS_BPIO_OPERATIONS = 9
 )
 
+// String returns the FS_BPIO_OPERATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FS_BPIO_OPERATIONS) String() string {
+	switch e {
+	case FS_BPIO_OP_ENABLE:
+		return "FS_BPIO_OP_ENABLE"
+	case FS_BPIO_OP_DISABLE:
+		return "FS_BPIO_OP_DISABLE"
+	case FS_BPIO_OP_QUERY:
+		return "FS_BPIO_OP_QUERY"
+	case FS_BPIO_OP_VOLUME_STACK_PAUSE:
+		return "FS_BPIO_OP_VOLUME_STACK_PAUSE"
+	case FS_BPIO_OP_VOLUME_STACK_RESUME:
+		return "FS_BPIO_OP_VOLUME_STACK_RESUME"
+	case FS_BPIO_OP_STREAM_PAUSE:
+		return "FS_BPIO_OP_STREAM_PAUSE"
+	case FS_BPIO_OP_STREAM_RESUME:
+		return "FS_BPIO_OP_STREAM_RESUME"
+	case FS_BPIO_OP_GET_INFO:
+		return "FS_BPIO_OP_GET_INFO"
+	case FS_BPIO_OP_MAX_OPERATION:
+		return "FS_BPIO_OP_MAX_OPERATION"
+	default:
+		return fmt.Sprintf("FS_BPIO_OPERATIONS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FS_BPIO_OUTFLAGS int32
 
 const (
@@ -248,6 +748,29 @@ const (
 	FSBPIO_OUTFL_COMPATIBLE_STORAGE_DRIVER  FS_BPIO_OUTFLAGS = 8
 )
 
+// String returns the FS_BPIO_OUTFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FS_BPIO_OUTFLAGS) String() string {
+	var parts []string
+	if e&FSBPIO_OUTFL_VOLUME_STACK_BYPASS_PAUSED != 0 {
+		parts = append(parts, "FSBPIO_OUTFL_VOLUME_STACK_BYPASS_PAUSED")
+	}
+	if e&FSBPIO_OUTFL_STREAM_BYPASS_PAUSED != 0 {
+		parts = append(parts, "FSBPIO_OUTFL_STREAM_BYPASS_PAUSED")
+	}
+	if e&FSBPIO_OUTFL_FILTER_ATTACH_BLOCKED != 0 {
+		parts = append(parts, "FSBPIO_OUTFL_FILTER_ATTACH_BLOCKED")
+	}
+	if e&FSBPIO_OUTFL_COMPATIBLE_STORAGE_DRIVER != 0 {
+		parts = append(parts, "FSBPIO_OUTFL_COMPATIBLE_STORAGE_DRIVER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type GET_CHANGER_PARAMETERS_FEATURES1 uint32
 
 const (
@@ -264,6 +787,50 @@ const (
 	CHANGER_TRUE_EXCHANGE_CAPABLE      GET_CHANGER_PARAMETERS_FEATURES1 = 2147483656
 )
 
+// String returns the GET_CHANGER_PARAMETERS_FEATURES1 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_CHANGER_PARAMETERS_FEATURES1) String() string {
+	var parts []string
+	if e&CHANGER_CLEANER_AUTODISMOUNT != 0 {
+		parts = append(parts, "CHANGER_CLEANER_AUTODISMOUNT")
+	}
+	if e&CHANGER_CLEANER_OPS_NOT_SUPPORTED != 0 {
+		parts = append(parts, "CHANGER_CLEANER_OPS_NOT_SUPPORTED")
+	}
+	if e&CHANGER_IEPORT_USER_CONTROL_CLOSE != 0 {
+		parts = append(parts, "CHANGER_IEPORT_USER_CONTROL_CLOSE")
+	}
+	if e&CHANGER_IEPORT_USER_CONTROL_OPEN != 0 {
+		parts = append(parts, "CHANGER_IEPORT_USER_CONTROL_OPEN")
+	}
+	if e&CHANGER_MOVE_EXTENDS_IEPORT != 0 {
+		parts = append(parts, "CHANGER_MOVE_EXTENDS_IEPORT")
+	}
+	if e&CHANGER_MOVE_RETRACTS_IEPORT != 0 {
+		parts = append(parts, "CHANGER_MOVE_RETRACTS_IEPORT")
+	}
+	if e&CHANGER_PREDISMOUNT_ALIGN_TO_DRIVE != 0 {
+		parts = append(parts, "CHANGER_PREDISMOUNT_ALIGN_TO_DRIVE")
+	}
+	if e&CHANGER_PREDISMOUNT_ALIGN_TO_SLOT != 0 {
+		parts = append(parts, "CHANGER_PREDISMOUNT_ALIGN_TO_SLOT")
+	}
+	if e&CHANGER_RTN_MEDIA_TO_ORIGINAL_ADDR != 0 {
+		parts = append(parts, "CHANGER_RTN_MEDIA_TO_ORIGINAL_ADDR")
+	}
+	if e&CHANGER_SLOTS_USE_TRAYS != 0 {
+		parts = append(parts, "CHANGER_SLOTS_USE_TRAYS")
+	}
+	if e&CHANGER_TRUE_EXCHANGE_CAPABLE != 0 {
+		parts = append(parts, "CHANGER_TRUE_EXCHANGE_CAPABLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type GPT_ATTRIBUTES uint64
 
 const (
@@ -274,11 +841,47 @@ const (
 	GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY       GPT_ATTRIBUTES = 1152921504606846976
 )
 
+// String returns the GPT_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPT_ATTRIBUTES) String() string {
+	var parts []string
+	if e&GPT_ATTRIBUTE_PLATFORM_REQUIRED != 0 {
+		parts = append(parts, "GPT_ATTRIBUTE_PLATFORM_REQUIRED")
+	}
+	if e&GPT_BASIC_DATA_ATTRIBUTE_NO_DRIVE_LETTER != 0 {
+		parts = append(parts, "GPT_BASIC_DATA_ATTRIBUTE_NO_DRIVE_LETTER")
+	}
+	if e&GPT_BASIC_DATA_ATTRIBUTE_HIDDEN != 0 {
+		parts = append(parts, "GPT_BASIC_DATA_ATTRIBUTE_HIDDEN")
+	}
+	if e&GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY != 0 {
+		parts = append(parts, "GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY")
+	}
+	if e&GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY != 0 {
+		parts = append(parts, "GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type LMR_QUERY_INFO_CLASS int32
 
 const (
 	LMRQuerySessionInfo LMR_QUERY_INFO_CLASS = 1
 )
+
+// String returns the LMR_QUERY_INFO_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LMR_QUERY_INFO_CLASS) String() string {
+	switch e {
+	case LMRQuerySessionInfo:
+		return "LMRQuerySessionInfo"
+	default:
+		return fmt.Sprintf("LMR_QUERY_INFO_CLASS(%d)", int32(e))
+	}
+}
 
 // MEDIA_TYPE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-media_type
 type MEDIA_TYPE int32
@@ -312,6 +915,67 @@ const (
 	F3_32M_512     MEDIA_TYPE = 25
 )
 
+// String returns the MEDIA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MEDIA_TYPE) String() string {
+	switch e {
+	case Unknown:
+		return "Unknown"
+	case F5_1Pt2_512:
+		return "F5_1Pt2_512"
+	case F3_1Pt44_512:
+		return "F3_1Pt44_512"
+	case F3_2Pt88_512:
+		return "F3_2Pt88_512"
+	case F3_20Pt8_512:
+		return "F3_20Pt8_512"
+	case F3_720_512:
+		return "F3_720_512"
+	case F5_360_512:
+		return "F5_360_512"
+	case F5_320_512:
+		return "F5_320_512"
+	case F5_320_1024:
+		return "F5_320_1024"
+	case F5_180_512:
+		return "F5_180_512"
+	case F5_160_512:
+		return "F5_160_512"
+	case RemovableMedia:
+		return "RemovableMedia"
+	case FixedMedia:
+		return "FixedMedia"
+	case F3_120M_512:
+		return "F3_120M_512"
+	case F3_640_512:
+		return "F3_640_512"
+	case F5_640_512:
+		return "F5_640_512"
+	case F5_720_512:
+		return "F5_720_512"
+	case F3_1Pt2_512:
+		return "F3_1Pt2_512"
+	case F3_1Pt23_1024:
+		return "F3_1Pt23_1024"
+	case F5_1Pt23_1024:
+		return "F5_1Pt23_1024"
+	case F3_128Mb_512:
+		return "F3_128Mb_512"
+	case F3_230Mb_512:
+		return "F3_230Mb_512"
+	case F8_256_128:
+		return "F8_256_128"
+	case F3_200Mb_512:
+		return "F3_200Mb_512"
+	case F3_240M_512:
+		return "F3_240M_512"
+	case F3_32M_512:
+		return "F3_32M_512"
+	default:
+		return fmt.Sprintf("MEDIA_TYPE(%d)", int32(e))
+	}
+}
+
 // PARTITION_STYLE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-partition_style
 type PARTITION_STYLE int32
 
@@ -320,6 +984,21 @@ const (
 	PARTITION_STYLE_GPT PARTITION_STYLE = 1
 	PARTITION_STYLE_RAW PARTITION_STYLE = 2
 )
+
+// String returns the PARTITION_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PARTITION_STYLE) String() string {
+	switch e {
+	case PARTITION_STYLE_MBR:
+		return "PARTITION_STYLE_MBR"
+	case PARTITION_STYLE_GPT:
+		return "PARTITION_STYLE_GPT"
+	case PARTITION_STYLE_RAW:
+		return "PARTITION_STYLE_RAW"
+	default:
+		return fmt.Sprintf("PARTITION_STYLE(%d)", int32(e))
+	}
+}
 
 type QUERY_FILE_LAYOUT_FILTER_TYPE int32
 
@@ -331,6 +1010,25 @@ const (
 	QUERY_FILE_LAYOUT_NUM_FILTER_TYPES               QUERY_FILE_LAYOUT_FILTER_TYPE = 4
 )
 
+// String returns the QUERY_FILE_LAYOUT_FILTER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QUERY_FILE_LAYOUT_FILTER_TYPE) String() string {
+	switch e {
+	case QUERY_FILE_LAYOUT_FILTER_TYPE_NONE:
+		return "QUERY_FILE_LAYOUT_FILTER_TYPE_NONE"
+	case QUERY_FILE_LAYOUT_FILTER_TYPE_CLUSTERS:
+		return "QUERY_FILE_LAYOUT_FILTER_TYPE_CLUSTERS"
+	case QUERY_FILE_LAYOUT_FILTER_TYPE_FILEID:
+		return "QUERY_FILE_LAYOUT_FILTER_TYPE_FILEID"
+	case QUERY_FILE_LAYOUT_FILTER_TYPE_STORAGE_RESERVE_ID:
+		return "QUERY_FILE_LAYOUT_FILTER_TYPE_STORAGE_RESERVE_ID"
+	case QUERY_FILE_LAYOUT_NUM_FILTER_TYPES:
+		return "QUERY_FILE_LAYOUT_NUM_FILTER_TYPES"
+	default:
+		return fmt.Sprintf("QUERY_FILE_LAYOUT_FILTER_TYPE(%d)", int32(e))
+	}
+}
+
 type REFS_SMR_VOLUME_GC_ACTION int32
 
 const (
@@ -340,6 +1038,23 @@ const (
 	SmrGcActionStop           REFS_SMR_VOLUME_GC_ACTION = 4
 )
 
+// String returns the REFS_SMR_VOLUME_GC_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REFS_SMR_VOLUME_GC_ACTION) String() string {
+	switch e {
+	case SmrGcActionStart:
+		return "SmrGcActionStart"
+	case SmrGcActionStartFullSpeed:
+		return "SmrGcActionStartFullSpeed"
+	case SmrGcActionPause:
+		return "SmrGcActionPause"
+	case SmrGcActionStop:
+		return "SmrGcActionStop"
+	default:
+		return fmt.Sprintf("REFS_SMR_VOLUME_GC_ACTION(%d)", int32(e))
+	}
+}
+
 type REFS_SMR_VOLUME_GC_METHOD int32
 
 const (
@@ -347,6 +1062,21 @@ const (
 	SmrGcMethodCompression REFS_SMR_VOLUME_GC_METHOD = 2
 	SmrGcMethodRotation    REFS_SMR_VOLUME_GC_METHOD = 3
 )
+
+// String returns the REFS_SMR_VOLUME_GC_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REFS_SMR_VOLUME_GC_METHOD) String() string {
+	switch e {
+	case SmrGcMethodCompaction:
+		return "SmrGcMethodCompaction"
+	case SmrGcMethodCompression:
+		return "SmrGcMethodCompression"
+	case SmrGcMethodRotation:
+		return "SmrGcMethodRotation"
+	default:
+		return fmt.Sprintf("REFS_SMR_VOLUME_GC_METHOD(%d)", int32(e))
+	}
+}
 
 type REFS_SMR_VOLUME_GC_STATE int32
 
@@ -357,6 +1087,23 @@ const (
 	SmrGcStateActiveFullSpeed REFS_SMR_VOLUME_GC_STATE = 3
 )
 
+// String returns the REFS_SMR_VOLUME_GC_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REFS_SMR_VOLUME_GC_STATE) String() string {
+	switch e {
+	case SmrGcStateInactive:
+		return "SmrGcStateInactive"
+	case SmrGcStatePaused:
+		return "SmrGcStatePaused"
+	case SmrGcStateActive:
+		return "SmrGcStateActive"
+	case SmrGcStateActiveFullSpeed:
+		return "SmrGcStateActiveFullSpeed"
+	default:
+		return fmt.Sprintf("REFS_SMR_VOLUME_GC_STATE(%d)", int32(e))
+	}
+}
+
 type SCM_BUS_FIRMWARE_ACTIVATION_STATE int32
 
 const (
@@ -364,6 +1111,21 @@ const (
 	ScmBusFirmwareActivationState_Armed SCM_BUS_FIRMWARE_ACTIVATION_STATE = 1
 	ScmBusFirmwareActivationState_Busy  SCM_BUS_FIRMWARE_ACTIVATION_STATE = 2
 )
+
+// String returns the SCM_BUS_FIRMWARE_ACTIVATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_BUS_FIRMWARE_ACTIVATION_STATE) String() string {
+	switch e {
+	case ScmBusFirmwareActivationState_Idle:
+		return "ScmBusFirmwareActivationState_Idle"
+	case ScmBusFirmwareActivationState_Armed:
+		return "ScmBusFirmwareActivationState_Armed"
+	case ScmBusFirmwareActivationState_Busy:
+		return "ScmBusFirmwareActivationState_Busy"
+	default:
+		return fmt.Sprintf("SCM_BUS_FIRMWARE_ACTIVATION_STATE(%d)", int32(e))
+	}
+}
 
 type SCM_BUS_PROPERTY_ID int32
 
@@ -374,6 +1136,23 @@ const (
 	ScmBusProperty_Max                     SCM_BUS_PROPERTY_ID = 3
 )
 
+// String returns the SCM_BUS_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_BUS_PROPERTY_ID) String() string {
+	switch e {
+	case ScmBusProperty_RuntimeFwActivationInfo:
+		return "ScmBusProperty_RuntimeFwActivationInfo"
+	case ScmBusProperty_DedicatedMemoryInfo:
+		return "ScmBusProperty_DedicatedMemoryInfo"
+	case ScmBusProperty_DedicatedMemoryState:
+		return "ScmBusProperty_DedicatedMemoryState"
+	case ScmBusProperty_Max:
+		return "ScmBusProperty_Max"
+	default:
+		return fmt.Sprintf("SCM_BUS_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 type SCM_BUS_QUERY_TYPE int32
 
 const (
@@ -381,6 +1160,21 @@ const (
 	ScmBusQuery_IsSupported SCM_BUS_QUERY_TYPE = 1
 	ScmBusQuery_Max         SCM_BUS_QUERY_TYPE = 2
 )
+
+// String returns the SCM_BUS_QUERY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_BUS_QUERY_TYPE) String() string {
+	switch e {
+	case ScmBusQuery_Descriptor:
+		return "ScmBusQuery_Descriptor"
+	case ScmBusQuery_IsSupported:
+		return "ScmBusQuery_IsSupported"
+	case ScmBusQuery_Max:
+		return "ScmBusQuery_Max"
+	default:
+		return fmt.Sprintf("SCM_BUS_QUERY_TYPE(%d)", int32(e))
+	}
+}
 
 type SCM_BUS_SET_TYPE int32
 
@@ -390,6 +1184,21 @@ const (
 	ScmBusSet_Max         SCM_BUS_SET_TYPE = 2
 )
 
+// String returns the SCM_BUS_SET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_BUS_SET_TYPE) String() string {
+	switch e {
+	case ScmBusSet_Descriptor:
+		return "ScmBusSet_Descriptor"
+	case ScmBusSet_IsSupported:
+		return "ScmBusSet_IsSupported"
+	case ScmBusSet_Max:
+		return "ScmBusSet_Max"
+	default:
+		return fmt.Sprintf("SCM_BUS_SET_TYPE(%d)", int32(e))
+	}
+}
+
 type SCM_PD_FIRMWARE_ACTIVATION_STATE int32
 
 const (
@@ -397,6 +1206,21 @@ const (
 	ScmPdFirmwareActivationState_Armed SCM_PD_FIRMWARE_ACTIVATION_STATE = 1
 	ScmPdFirmwareActivationState_Busy  SCM_PD_FIRMWARE_ACTIVATION_STATE = 2
 )
+
+// String returns the SCM_PD_FIRMWARE_ACTIVATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_PD_FIRMWARE_ACTIVATION_STATE) String() string {
+	switch e {
+	case ScmPdFirmwareActivationState_Idle:
+		return "ScmPdFirmwareActivationState_Idle"
+	case ScmPdFirmwareActivationState_Armed:
+		return "ScmPdFirmwareActivationState_Armed"
+	case ScmPdFirmwareActivationState_Busy:
+		return "ScmPdFirmwareActivationState_Busy"
+	default:
+		return fmt.Sprintf("SCM_PD_FIRMWARE_ACTIVATION_STATE(%d)", int32(e))
+	}
+}
 
 type SCM_PD_HEALTH_STATUS int32
 
@@ -407,6 +1231,25 @@ const (
 	ScmPhysicalDeviceHealth_Healthy   SCM_PD_HEALTH_STATUS = 3
 	ScmPhysicalDeviceHealth_Max       SCM_PD_HEALTH_STATUS = 4
 )
+
+// String returns the SCM_PD_HEALTH_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_PD_HEALTH_STATUS) String() string {
+	switch e {
+	case ScmPhysicalDeviceHealth_Unknown:
+		return "ScmPhysicalDeviceHealth_Unknown"
+	case ScmPhysicalDeviceHealth_Unhealthy:
+		return "ScmPhysicalDeviceHealth_Unhealthy"
+	case ScmPhysicalDeviceHealth_Warning:
+		return "ScmPhysicalDeviceHealth_Warning"
+	case ScmPhysicalDeviceHealth_Healthy:
+		return "ScmPhysicalDeviceHealth_Healthy"
+	case ScmPhysicalDeviceHealth_Max:
+		return "ScmPhysicalDeviceHealth_Max"
+	default:
+		return fmt.Sprintf("SCM_PD_HEALTH_STATUS(%d)", int32(e))
+	}
+}
 
 type SCM_PD_LAST_FW_ACTIVATION_STATUS int32
 
@@ -421,6 +1264,31 @@ const (
 	ScmPdLastFwActivaitonStatus_UnknownError         SCM_PD_LAST_FW_ACTIVATION_STATUS = 7
 )
 
+// String returns the SCM_PD_LAST_FW_ACTIVATION_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_PD_LAST_FW_ACTIVATION_STATUS) String() string {
+	switch e {
+	case ScmPdLastFwActivationStatus_None:
+		return "ScmPdLastFwActivationStatus_None"
+	case ScmPdLastFwActivationStatus_Success:
+		return "ScmPdLastFwActivationStatus_Success"
+	case ScmPdLastFwActivationStatus_FwNotFound:
+		return "ScmPdLastFwActivationStatus_FwNotFound"
+	case ScmPdLastFwActivationStatus_ColdRebootRequired:
+		return "ScmPdLastFwActivationStatus_ColdRebootRequired"
+	case ScmPdLastFwActivaitonStatus_ActivationInProgress:
+		return "ScmPdLastFwActivaitonStatus_ActivationInProgress"
+	case ScmPdLastFwActivaitonStatus_Retry:
+		return "ScmPdLastFwActivaitonStatus_Retry"
+	case ScmPdLastFwActivaitonStatus_FwUnsupported:
+		return "ScmPdLastFwActivaitonStatus_FwUnsupported"
+	case ScmPdLastFwActivaitonStatus_UnknownError:
+		return "ScmPdLastFwActivaitonStatus_UnknownError"
+	default:
+		return fmt.Sprintf("SCM_PD_LAST_FW_ACTIVATION_STATUS(%d)", int32(e))
+	}
+}
+
 type SCM_PD_MEDIA_REINITIALIZATION_STATUS int32
 
 const (
@@ -429,6 +1297,23 @@ const (
 	ScmPhysicalDeviceReinit_ColdBootNeeded SCM_PD_MEDIA_REINITIALIZATION_STATUS = 2
 	ScmPhysicalDeviceReinit_Max            SCM_PD_MEDIA_REINITIALIZATION_STATUS = 3
 )
+
+// String returns the SCM_PD_MEDIA_REINITIALIZATION_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_PD_MEDIA_REINITIALIZATION_STATUS) String() string {
+	switch e {
+	case ScmPhysicalDeviceReinit_Success:
+		return "ScmPhysicalDeviceReinit_Success"
+	case ScmPhysicalDeviceReinit_RebootNeeded:
+		return "ScmPhysicalDeviceReinit_RebootNeeded"
+	case ScmPhysicalDeviceReinit_ColdBootNeeded:
+		return "ScmPhysicalDeviceReinit_ColdBootNeeded"
+	case ScmPhysicalDeviceReinit_Max:
+		return "ScmPhysicalDeviceReinit_Max"
+	default:
+		return fmt.Sprintf("SCM_PD_MEDIA_REINITIALIZATION_STATUS(%d)", int32(e))
+	}
+}
 
 type SCM_PD_OPERATIONAL_STATUS int32
 
@@ -443,6 +1328,33 @@ const (
 	ScmPhysicalDeviceOpStatus_Missing           SCM_PD_OPERATIONAL_STATUS = 7
 	ScmPhysicalDeviceOpStatus_Max               SCM_PD_OPERATIONAL_STATUS = 8
 )
+
+// String returns the SCM_PD_OPERATIONAL_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_PD_OPERATIONAL_STATUS) String() string {
+	switch e {
+	case ScmPhysicalDeviceOpStatus_Unknown:
+		return "ScmPhysicalDeviceOpStatus_Unknown"
+	case ScmPhysicalDeviceOpStatus_Ok:
+		return "ScmPhysicalDeviceOpStatus_Ok"
+	case ScmPhysicalDeviceOpStatus_PredictingFailure:
+		return "ScmPhysicalDeviceOpStatus_PredictingFailure"
+	case ScmPhysicalDeviceOpStatus_InService:
+		return "ScmPhysicalDeviceOpStatus_InService"
+	case ScmPhysicalDeviceOpStatus_HardwareError:
+		return "ScmPhysicalDeviceOpStatus_HardwareError"
+	case ScmPhysicalDeviceOpStatus_NotUsable:
+		return "ScmPhysicalDeviceOpStatus_NotUsable"
+	case ScmPhysicalDeviceOpStatus_TransientError:
+		return "ScmPhysicalDeviceOpStatus_TransientError"
+	case ScmPhysicalDeviceOpStatus_Missing:
+		return "ScmPhysicalDeviceOpStatus_Missing"
+	case ScmPhysicalDeviceOpStatus_Max:
+		return "ScmPhysicalDeviceOpStatus_Max"
+	default:
+		return fmt.Sprintf("SCM_PD_OPERATIONAL_STATUS(%d)", int32(e))
+	}
+}
 
 type SCM_PD_OPERATIONAL_STATUS_REASON int32
 
@@ -473,6 +1385,63 @@ const (
 	ScmPhysicalDeviceOpReason_Max                          SCM_PD_OPERATIONAL_STATUS_REASON = 23
 )
 
+// String returns the SCM_PD_OPERATIONAL_STATUS_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_PD_OPERATIONAL_STATUS_REASON) String() string {
+	switch e {
+	case ScmPhysicalDeviceOpReason_Unknown:
+		return "ScmPhysicalDeviceOpReason_Unknown"
+	case ScmPhysicalDeviceOpReason_Media:
+		return "ScmPhysicalDeviceOpReason_Media"
+	case ScmPhysicalDeviceOpReason_ThresholdExceeded:
+		return "ScmPhysicalDeviceOpReason_ThresholdExceeded"
+	case ScmPhysicalDeviceOpReason_LostData:
+		return "ScmPhysicalDeviceOpReason_LostData"
+	case ScmPhysicalDeviceOpReason_EnergySource:
+		return "ScmPhysicalDeviceOpReason_EnergySource"
+	case ScmPhysicalDeviceOpReason_Configuration:
+		return "ScmPhysicalDeviceOpReason_Configuration"
+	case ScmPhysicalDeviceOpReason_DeviceController:
+		return "ScmPhysicalDeviceOpReason_DeviceController"
+	case ScmPhysicalDeviceOpReason_MediaController:
+		return "ScmPhysicalDeviceOpReason_MediaController"
+	case ScmPhysicalDeviceOpReason_Component:
+		return "ScmPhysicalDeviceOpReason_Component"
+	case ScmPhysicalDeviceOpReason_BackgroundOperation:
+		return "ScmPhysicalDeviceOpReason_BackgroundOperation"
+	case ScmPhysicalDeviceOpReason_InvalidFirmware:
+		return "ScmPhysicalDeviceOpReason_InvalidFirmware"
+	case ScmPhysicalDeviceOpReason_HealthCheck:
+		return "ScmPhysicalDeviceOpReason_HealthCheck"
+	case ScmPhysicalDeviceOpReason_LostDataPersistence:
+		return "ScmPhysicalDeviceOpReason_LostDataPersistence"
+	case ScmPhysicalDeviceOpReason_DisabledByPlatform:
+		return "ScmPhysicalDeviceOpReason_DisabledByPlatform"
+	case ScmPhysicalDeviceOpReason_PermanentError:
+		return "ScmPhysicalDeviceOpReason_PermanentError"
+	case ScmPhysicalDeviceOpReason_LostWritePersistence:
+		return "ScmPhysicalDeviceOpReason_LostWritePersistence"
+	case ScmPhysicalDeviceOpReason_FatalError:
+		return "ScmPhysicalDeviceOpReason_FatalError"
+	case ScmPhysicalDeviceOpReason_DataPersistenceLossImminent:
+		return "ScmPhysicalDeviceOpReason_DataPersistenceLossImminent"
+	case ScmPhysicalDeviceOpReason_WritePersistenceLossImminent:
+		return "ScmPhysicalDeviceOpReason_WritePersistenceLossImminent"
+	case ScmPhysicalDeviceOpReason_MediaRemainingSpareBlock:
+		return "ScmPhysicalDeviceOpReason_MediaRemainingSpareBlock"
+	case ScmPhysicalDeviceOpReason_PerformanceDegradation:
+		return "ScmPhysicalDeviceOpReason_PerformanceDegradation"
+	case ScmPhysicalDeviceOpReason_ExcessiveTemperature:
+		return "ScmPhysicalDeviceOpReason_ExcessiveTemperature"
+	case ScmPhysicalDeviceOpReason_InternalFailure:
+		return "ScmPhysicalDeviceOpReason_InternalFailure"
+	case ScmPhysicalDeviceOpReason_Max:
+		return "ScmPhysicalDeviceOpReason_Max"
+	default:
+		return fmt.Sprintf("SCM_PD_OPERATIONAL_STATUS_REASON(%d)", int32(e))
+	}
+}
+
 type SCM_PD_PROPERTY_ID int32
 
 const (
@@ -488,6 +1457,35 @@ const (
 	ScmPhysicalDeviceProperty_Max                         SCM_PD_PROPERTY_ID = 9
 )
 
+// String returns the SCM_PD_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_PD_PROPERTY_ID) String() string {
+	switch e {
+	case ScmPhysicalDeviceProperty_DeviceInfo:
+		return "ScmPhysicalDeviceProperty_DeviceInfo"
+	case ScmPhysicalDeviceProperty_ManagementStatus:
+		return "ScmPhysicalDeviceProperty_ManagementStatus"
+	case ScmPhysicalDeviceProperty_FirmwareInfo:
+		return "ScmPhysicalDeviceProperty_FirmwareInfo"
+	case ScmPhysicalDeviceProperty_LocationString:
+		return "ScmPhysicalDeviceProperty_LocationString"
+	case ScmPhysicalDeviceProperty_DeviceSpecificInfo:
+		return "ScmPhysicalDeviceProperty_DeviceSpecificInfo"
+	case ScmPhysicalDeviceProperty_DeviceHandle:
+		return "ScmPhysicalDeviceProperty_DeviceHandle"
+	case ScmPhysicalDeviceProperty_FruIdString:
+		return "ScmPhysicalDeviceProperty_FruIdString"
+	case ScmPhysicalDeviceProperty_RuntimeFwActivationInfo:
+		return "ScmPhysicalDeviceProperty_RuntimeFwActivationInfo"
+	case ScmPhysicalDeviceProperty_RuntimeFwActivationArmState:
+		return "ScmPhysicalDeviceProperty_RuntimeFwActivationArmState"
+	case ScmPhysicalDeviceProperty_Max:
+		return "ScmPhysicalDeviceProperty_Max"
+	default:
+		return fmt.Sprintf("SCM_PD_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 type SCM_PD_QUERY_TYPE int32
 
 const (
@@ -495,6 +1493,21 @@ const (
 	ScmPhysicalDeviceQuery_IsSupported SCM_PD_QUERY_TYPE = 1
 	ScmPhysicalDeviceQuery_Max         SCM_PD_QUERY_TYPE = 2
 )
+
+// String returns the SCM_PD_QUERY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_PD_QUERY_TYPE) String() string {
+	switch e {
+	case ScmPhysicalDeviceQuery_Descriptor:
+		return "ScmPhysicalDeviceQuery_Descriptor"
+	case ScmPhysicalDeviceQuery_IsSupported:
+		return "ScmPhysicalDeviceQuery_IsSupported"
+	case ScmPhysicalDeviceQuery_Max:
+		return "ScmPhysicalDeviceQuery_Max"
+	default:
+		return fmt.Sprintf("SCM_PD_QUERY_TYPE(%d)", int32(e))
+	}
+}
 
 type SCM_PD_SET_TYPE int32
 
@@ -504,12 +1517,40 @@ const (
 	ScmPhysicalDeviceSet_Max         SCM_PD_SET_TYPE = 2
 )
 
+// String returns the SCM_PD_SET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_PD_SET_TYPE) String() string {
+	switch e {
+	case ScmPhysicalDeviceSet_Descriptor:
+		return "ScmPhysicalDeviceSet_Descriptor"
+	case ScmPhysicalDeviceSet_IsSupported:
+		return "ScmPhysicalDeviceSet_IsSupported"
+	case ScmPhysicalDeviceSet_Max:
+		return "ScmPhysicalDeviceSet_Max"
+	default:
+		return fmt.Sprintf("SCM_PD_SET_TYPE(%d)", int32(e))
+	}
+}
+
 type SCM_REGION_FLAG int32
 
 const (
 	ScmRegionFlagNone  SCM_REGION_FLAG = 0
 	ScmRegionFlagLabel SCM_REGION_FLAG = 1
 )
+
+// String returns the SCM_REGION_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCM_REGION_FLAG) String() string {
+	switch e {
+	case ScmRegionFlagNone:
+		return "ScmRegionFlagNone"
+	case ScmRegionFlagLabel:
+		return "ScmRegionFlagLabel"
+	default:
+		return fmt.Sprintf("SCM_REGION_FLAG(%d)", int32(e))
+	}
+}
 
 type SHRINK_VOLUME_REQUEST_TYPES int32
 
@@ -519,6 +1560,21 @@ const (
 	ShrinkAbort   SHRINK_VOLUME_REQUEST_TYPES = 3
 )
 
+// String returns the SHRINK_VOLUME_REQUEST_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHRINK_VOLUME_REQUEST_TYPES) String() string {
+	switch e {
+	case ShrinkPrepare:
+		return "ShrinkPrepare"
+	case ShrinkCommit:
+		return "ShrinkCommit"
+	case ShrinkAbort:
+		return "ShrinkAbort"
+	default:
+		return fmt.Sprintf("SHRINK_VOLUME_REQUEST_TYPES(%d)", int32(e))
+	}
+}
+
 type STORAGE_ASSOCIATION_TYPE int32
 
 const (
@@ -527,6 +1583,21 @@ const (
 	StorageIdAssocTarget STORAGE_ASSOCIATION_TYPE = 2
 )
 
+// String returns the STORAGE_ASSOCIATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_ASSOCIATION_TYPE) String() string {
+	switch e {
+	case StorageIdAssocDevice:
+		return "StorageIdAssocDevice"
+	case StorageIdAssocPort:
+		return "StorageIdAssocPort"
+	case StorageIdAssocTarget:
+		return "StorageIdAssocTarget"
+	default:
+		return fmt.Sprintf("STORAGE_ASSOCIATION_TYPE(%d)", int32(e))
+	}
+}
+
 type STORAGE_ATTRIBUTE_MGMT_ACTION int32
 
 const (
@@ -534,6 +1605,21 @@ const (
 	StorAttributeMgmt_SetAttribute   STORAGE_ATTRIBUTE_MGMT_ACTION = 1
 	StorAttributeMgmt_ResetAttribute STORAGE_ATTRIBUTE_MGMT_ACTION = 2
 )
+
+// String returns the STORAGE_ATTRIBUTE_MGMT_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_ATTRIBUTE_MGMT_ACTION) String() string {
+	switch e {
+	case StorAttributeMgmt_ClearAttribute:
+		return "StorAttributeMgmt_ClearAttribute"
+	case StorAttributeMgmt_SetAttribute:
+		return "StorAttributeMgmt_SetAttribute"
+	case StorAttributeMgmt_ResetAttribute:
+		return "StorAttributeMgmt_ResetAttribute"
+	default:
+		return fmt.Sprintf("STORAGE_ATTRIBUTE_MGMT_ACTION(%d)", int32(e))
+	}
+}
 
 // STORAGE_COMPONENT_HEALTH_STATUS: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-storage_component_health_status
 type STORAGE_COMPONENT_HEALTH_STATUS int32
@@ -546,6 +1632,27 @@ const (
 	HealthStatusDisabled  STORAGE_COMPONENT_HEALTH_STATUS = 4
 	HealthStatusFailed    STORAGE_COMPONENT_HEALTH_STATUS = 5
 )
+
+// String returns the STORAGE_COMPONENT_HEALTH_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_COMPONENT_HEALTH_STATUS) String() string {
+	switch e {
+	case HealthStatusUnknown:
+		return "HealthStatusUnknown"
+	case HealthStatusNormal:
+		return "HealthStatusNormal"
+	case HealthStatusThrottled:
+		return "HealthStatusThrottled"
+	case HealthStatusWarning:
+		return "HealthStatusWarning"
+	case HealthStatusDisabled:
+		return "HealthStatusDisabled"
+	case HealthStatusFailed:
+		return "HealthStatusFailed"
+	default:
+		return fmt.Sprintf("STORAGE_COMPONENT_HEALTH_STATUS(%d)", int32(e))
+	}
+}
 
 type STORAGE_COUNTER_TYPE int32
 
@@ -574,6 +1681,59 @@ const (
 	StorageCounterTypeMax                     STORAGE_COUNTER_TYPE = 21
 )
 
+// String returns the STORAGE_COUNTER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_COUNTER_TYPE) String() string {
+	switch e {
+	case StorageCounterTypeUnknown:
+		return "StorageCounterTypeUnknown"
+	case StorageCounterTypeTemperatureCelsius:
+		return "StorageCounterTypeTemperatureCelsius"
+	case StorageCounterTypeTemperatureCelsiusMax:
+		return "StorageCounterTypeTemperatureCelsiusMax"
+	case StorageCounterTypeReadErrorsTotal:
+		return "StorageCounterTypeReadErrorsTotal"
+	case StorageCounterTypeReadErrorsCorrected:
+		return "StorageCounterTypeReadErrorsCorrected"
+	case StorageCounterTypeReadErrorsUncorrected:
+		return "StorageCounterTypeReadErrorsUncorrected"
+	case StorageCounterTypeWriteErrorsTotal:
+		return "StorageCounterTypeWriteErrorsTotal"
+	case StorageCounterTypeWriteErrorsCorrected:
+		return "StorageCounterTypeWriteErrorsCorrected"
+	case StorageCounterTypeWriteErrorsUncorrected:
+		return "StorageCounterTypeWriteErrorsUncorrected"
+	case StorageCounterTypeManufactureDate:
+		return "StorageCounterTypeManufactureDate"
+	case StorageCounterTypeStartStopCycleCount:
+		return "StorageCounterTypeStartStopCycleCount"
+	case StorageCounterTypeStartStopCycleCountMax:
+		return "StorageCounterTypeStartStopCycleCountMax"
+	case StorageCounterTypeLoadUnloadCycleCount:
+		return "StorageCounterTypeLoadUnloadCycleCount"
+	case StorageCounterTypeLoadUnloadCycleCountMax:
+		return "StorageCounterTypeLoadUnloadCycleCountMax"
+	case StorageCounterTypeWearPercentage:
+		return "StorageCounterTypeWearPercentage"
+	case StorageCounterTypeWearPercentageWarning:
+		return "StorageCounterTypeWearPercentageWarning"
+	case StorageCounterTypeWearPercentageMax:
+		return "StorageCounterTypeWearPercentageMax"
+	case StorageCounterTypePowerOnHours:
+		return "StorageCounterTypePowerOnHours"
+	case StorageCounterTypeReadLatency100NSMax:
+		return "StorageCounterTypeReadLatency100NSMax"
+	case StorageCounterTypeWriteLatency100NSMax:
+		return "StorageCounterTypeWriteLatency100NSMax"
+	case StorageCounterTypeFlushLatency100NSMax:
+		return "StorageCounterTypeFlushLatency100NSMax"
+	case StorageCounterTypeMax:
+		return "StorageCounterTypeMax"
+	default:
+		return fmt.Sprintf("STORAGE_COUNTER_TYPE(%d)", int32(e))
+	}
+}
+
 type STORAGE_CRYPTO_ALGORITHM_ID int32
 
 const (
@@ -590,6 +1750,27 @@ const (
 	StorCryptoAlgorithmESSIVAESCBC        STORAGE_CRYPTO_ALGORITHM_ID = 4
 )
 
+// String returns the STORAGE_CRYPTO_ALGORITHM_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_CRYPTO_ALGORITHM_ID) String() string {
+	switch e {
+	case StorageCryptoAlgorithmUnknown:
+		return "StorageCryptoAlgorithmUnknown"
+	case StorageCryptoAlgorithmXTSAES:
+		return "StorageCryptoAlgorithmXTSAES"
+	case StorageCryptoAlgorithmBitlockerAESCBC:
+		return "StorageCryptoAlgorithmBitlockerAESCBC"
+	case StorageCryptoAlgorithmAESECB:
+		return "StorageCryptoAlgorithmAESECB"
+	case StorageCryptoAlgorithmESSIVAESCBC:
+		return "StorageCryptoAlgorithmESSIVAESCBC"
+	case StorageCryptoAlgorithmMax:
+		return "StorageCryptoAlgorithmMax"
+	default:
+		return fmt.Sprintf("STORAGE_CRYPTO_ALGORITHM_ID(%d)", int32(e))
+	}
+}
+
 type STORAGE_CRYPTO_KEY_SIZE int32
 
 const (
@@ -605,6 +1786,27 @@ const (
 	StorCryptoKeySize256Bits    STORAGE_CRYPTO_KEY_SIZE = 3
 	StorCryptoKeySize512Bits    STORAGE_CRYPTO_KEY_SIZE = 4
 )
+
+// String returns the STORAGE_CRYPTO_KEY_SIZE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_CRYPTO_KEY_SIZE) String() string {
+	switch e {
+	case StorageCryptoKeySizeUnknown:
+		return "StorageCryptoKeySizeUnknown"
+	case StorageCryptoKeySize128Bits:
+		return "StorageCryptoKeySize128Bits"
+	case StorageCryptoKeySize192Bits:
+		return "StorageCryptoKeySize192Bits"
+	case StorageCryptoKeySize256Bits:
+		return "StorageCryptoKeySize256Bits"
+	case StorageCryptoKeySize512Bits:
+		return "StorageCryptoKeySize512Bits"
+	case StorageCryptoKeySizeMax:
+		return "StorageCryptoKeySizeMax"
+	default:
+		return fmt.Sprintf("STORAGE_CRYPTO_KEY_SIZE(%d)", int32(e))
+	}
+}
 
 // STORAGE_DEVICE_FORM_FACTOR: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-storage_device_form_factor
 type STORAGE_DEVICE_FORM_FACTOR int32
@@ -623,6 +1825,37 @@ const (
 	FormFactorDimm       STORAGE_DEVICE_FORM_FACTOR = 10
 )
 
+// String returns the STORAGE_DEVICE_FORM_FACTOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_DEVICE_FORM_FACTOR) String() string {
+	switch e {
+	case FormFactorUnknown:
+		return "FormFactorUnknown"
+	case FormFactor3_5:
+		return "FormFactor3_5"
+	case FormFactor2_5:
+		return "FormFactor2_5"
+	case FormFactor1_8:
+		return "FormFactor1_8"
+	case FormFactor1_8Less:
+		return "FormFactor1_8Less"
+	case FormFactorEmbedded:
+		return "FormFactorEmbedded"
+	case FormFactorMemoryCard:
+		return "FormFactorMemoryCard"
+	case FormFactormSata:
+		return "FormFactormSata"
+	case FormFactorM_2:
+		return "FormFactorM_2"
+	case FormFactorPCIeBoard:
+		return "FormFactorPCIeBoard"
+	case FormFactorDimm:
+		return "FormFactorDimm"
+	default:
+		return fmt.Sprintf("STORAGE_DEVICE_FORM_FACTOR(%d)", int32(e))
+	}
+}
+
 // STORAGE_DEVICE_POWER_CAP_UNITS: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-storage_device_power_cap_units
 type STORAGE_DEVICE_POWER_CAP_UNITS int32
 
@@ -631,12 +1864,38 @@ const (
 	StorageDevicePowerCapUnitsMilliwatts STORAGE_DEVICE_POWER_CAP_UNITS = 1
 )
 
+// String returns the STORAGE_DEVICE_POWER_CAP_UNITS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_DEVICE_POWER_CAP_UNITS) String() string {
+	switch e {
+	case StorageDevicePowerCapUnitsPercent:
+		return "StorageDevicePowerCapUnitsPercent"
+	case StorageDevicePowerCapUnitsMilliwatts:
+		return "StorageDevicePowerCapUnitsMilliwatts"
+	default:
+		return fmt.Sprintf("STORAGE_DEVICE_POWER_CAP_UNITS(%d)", int32(e))
+	}
+}
+
 type STORAGE_DIAGNOSTIC_LEVEL int32
 
 const (
 	StorageDiagnosticLevelDefault STORAGE_DIAGNOSTIC_LEVEL = 0
 	StorageDiagnosticLevelMax     STORAGE_DIAGNOSTIC_LEVEL = 1
 )
+
+// String returns the STORAGE_DIAGNOSTIC_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_DIAGNOSTIC_LEVEL) String() string {
+	switch e {
+	case StorageDiagnosticLevelDefault:
+		return "StorageDiagnosticLevelDefault"
+	case StorageDiagnosticLevelMax:
+		return "StorageDiagnosticLevelMax"
+	default:
+		return fmt.Sprintf("STORAGE_DIAGNOSTIC_LEVEL(%d)", int32(e))
+	}
+}
 
 type STORAGE_DIAGNOSTIC_TARGET_TYPE int32
 
@@ -648,6 +1907,25 @@ const (
 	StorageDiagnosticTargetTypeMax         STORAGE_DIAGNOSTIC_TARGET_TYPE = 4
 )
 
+// String returns the STORAGE_DIAGNOSTIC_TARGET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_DIAGNOSTIC_TARGET_TYPE) String() string {
+	switch e {
+	case StorageDiagnosticTargetTypeUndefined:
+		return "StorageDiagnosticTargetTypeUndefined"
+	case StorageDiagnosticTargetTypePort:
+		return "StorageDiagnosticTargetTypePort"
+	case StorageDiagnosticTargetTypeMiniport:
+		return "StorageDiagnosticTargetTypeMiniport"
+	case StorageDiagnosticTargetTypeHbaFirmware:
+		return "StorageDiagnosticTargetTypeHbaFirmware"
+	case StorageDiagnosticTargetTypeMax:
+		return "StorageDiagnosticTargetTypeMax"
+	default:
+		return fmt.Sprintf("STORAGE_DIAGNOSTIC_TARGET_TYPE(%d)", int32(e))
+	}
+}
+
 type STORAGE_DISK_HEALTH_STATUS int32
 
 const (
@@ -657,6 +1935,25 @@ const (
 	DiskHealthHealthy   STORAGE_DISK_HEALTH_STATUS = 3
 	DiskHealthMax       STORAGE_DISK_HEALTH_STATUS = 4
 )
+
+// String returns the STORAGE_DISK_HEALTH_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_DISK_HEALTH_STATUS) String() string {
+	switch e {
+	case DiskHealthUnknown:
+		return "DiskHealthUnknown"
+	case DiskHealthUnhealthy:
+		return "DiskHealthUnhealthy"
+	case DiskHealthWarning:
+		return "DiskHealthWarning"
+	case DiskHealthHealthy:
+		return "DiskHealthHealthy"
+	case DiskHealthMax:
+		return "DiskHealthMax"
+	default:
+		return fmt.Sprintf("STORAGE_DISK_HEALTH_STATUS(%d)", int32(e))
+	}
+}
 
 type STORAGE_DISK_OPERATIONAL_STATUS int32
 
@@ -672,6 +1969,33 @@ const (
 	DiskOpStatusMissing           STORAGE_DISK_OPERATIONAL_STATUS = 8
 )
 
+// String returns the STORAGE_DISK_OPERATIONAL_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_DISK_OPERATIONAL_STATUS) String() string {
+	switch e {
+	case DiskOpStatusNone:
+		return "DiskOpStatusNone"
+	case DiskOpStatusUnknown:
+		return "DiskOpStatusUnknown"
+	case DiskOpStatusOk:
+		return "DiskOpStatusOk"
+	case DiskOpStatusPredictingFailure:
+		return "DiskOpStatusPredictingFailure"
+	case DiskOpStatusInService:
+		return "DiskOpStatusInService"
+	case DiskOpStatusHardwareError:
+		return "DiskOpStatusHardwareError"
+	case DiskOpStatusNotUsable:
+		return "DiskOpStatusNotUsable"
+	case DiskOpStatusTransientError:
+		return "DiskOpStatusTransientError"
+	case DiskOpStatusMissing:
+		return "DiskOpStatusMissing"
+	default:
+		return fmt.Sprintf("STORAGE_DISK_OPERATIONAL_STATUS(%d)", int32(e))
+	}
+}
+
 type STORAGE_ENCRYPTION_TYPE int32
 
 const (
@@ -679,6 +2003,21 @@ const (
 	StorageEncryptionTypeEDrive  STORAGE_ENCRYPTION_TYPE = 1
 	StorageEncryptionTypeTcgOpal STORAGE_ENCRYPTION_TYPE = 2
 )
+
+// String returns the STORAGE_ENCRYPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_ENCRYPTION_TYPE) String() string {
+	switch e {
+	case StorageEncryptionTypeUnknown:
+		return "StorageEncryptionTypeUnknown"
+	case StorageEncryptionTypeEDrive:
+		return "StorageEncryptionTypeEDrive"
+	case StorageEncryptionTypeTcgOpal:
+		return "StorageEncryptionTypeTcgOpal"
+	default:
+		return fmt.Sprintf("STORAGE_ENCRYPTION_TYPE(%d)", int32(e))
+	}
+}
 
 type STORAGE_ICE_TYPE int32
 
@@ -688,6 +2027,21 @@ const (
 	StorageIceTypeNvme    STORAGE_ICE_TYPE = 2
 )
 
+// String returns the STORAGE_ICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_ICE_TYPE) String() string {
+	switch e {
+	case StorageIceTypeUnknown:
+		return "StorageIceTypeUnknown"
+	case StorageIceTypeUfs:
+		return "StorageIceTypeUfs"
+	case StorageIceTypeNvme:
+		return "StorageIceTypeNvme"
+	default:
+		return fmt.Sprintf("STORAGE_ICE_TYPE(%d)", int32(e))
+	}
+}
+
 type STORAGE_IDENTIFIER_CODE_SET int32
 
 const (
@@ -696,6 +2050,23 @@ const (
 	StorageIdCodeSetAscii    STORAGE_IDENTIFIER_CODE_SET = 2
 	StorageIdCodeSetUtf8     STORAGE_IDENTIFIER_CODE_SET = 3
 )
+
+// String returns the STORAGE_IDENTIFIER_CODE_SET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_IDENTIFIER_CODE_SET) String() string {
+	switch e {
+	case StorageIdCodeSetReserved:
+		return "StorageIdCodeSetReserved"
+	case StorageIdCodeSetBinary:
+		return "StorageIdCodeSetBinary"
+	case StorageIdCodeSetAscii:
+		return "StorageIdCodeSetAscii"
+	case StorageIdCodeSetUtf8:
+		return "StorageIdCodeSetUtf8"
+	default:
+		return fmt.Sprintf("STORAGE_IDENTIFIER_CODE_SET(%d)", int32(e))
+	}
+}
 
 type STORAGE_IDENTIFIER_TYPE int32
 
@@ -711,6 +2082,33 @@ const (
 	StorageIdTypeScsiNameString           STORAGE_IDENTIFIER_TYPE = 8
 )
 
+// String returns the STORAGE_IDENTIFIER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_IDENTIFIER_TYPE) String() string {
+	switch e {
+	case StorageIdTypeVendorSpecific:
+		return "StorageIdTypeVendorSpecific"
+	case StorageIdTypeVendorId:
+		return "StorageIdTypeVendorId"
+	case StorageIdTypeEUI64:
+		return "StorageIdTypeEUI64"
+	case StorageIdTypeFCPHName:
+		return "StorageIdTypeFCPHName"
+	case StorageIdTypePortRelative:
+		return "StorageIdTypePortRelative"
+	case StorageIdTypeTargetPortGroup:
+		return "StorageIdTypeTargetPortGroup"
+	case StorageIdTypeLogicalUnitGroup:
+		return "StorageIdTypeLogicalUnitGroup"
+	case StorageIdTypeMD5LogicalUnitIdentifier:
+		return "StorageIdTypeMD5LogicalUnitIdentifier"
+	case StorageIdTypeScsiNameString:
+		return "StorageIdTypeScsiNameString"
+	default:
+		return fmt.Sprintf("STORAGE_IDENTIFIER_TYPE(%d)", int32(e))
+	}
+}
+
 type STORAGE_ID_NAA_FORMAT int32
 
 const (
@@ -718,6 +2116,21 @@ const (
 	StorageIdNAAFormatIEEERegistered          STORAGE_ID_NAA_FORMAT = 3
 	StorageIdNAAFormatIEEEERegisteredExtended STORAGE_ID_NAA_FORMAT = 5
 )
+
+// String returns the STORAGE_ID_NAA_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_ID_NAA_FORMAT) String() string {
+	switch e {
+	case StorageIdNAAFormatIEEEExtended:
+		return "StorageIdNAAFormatIEEEExtended"
+	case StorageIdNAAFormatIEEERegistered:
+		return "StorageIdNAAFormatIEEERegistered"
+	case StorageIdNAAFormatIEEEERegisteredExtended:
+		return "StorageIdNAAFormatIEEEERegisteredExtended"
+	default:
+		return fmt.Sprintf("STORAGE_ID_NAA_FORMAT(%d)", int32(e))
+	}
+}
 
 // STORAGE_MEDIA_TYPE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-storage_media_type
 type STORAGE_MEDIA_TYPE int32
@@ -788,6 +2201,141 @@ const (
 	VXATape            STORAGE_MEDIA_TYPE = 94
 )
 
+// String returns the STORAGE_MEDIA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_MEDIA_TYPE) String() string {
+	switch e {
+	case DDS_4mm:
+		return "DDS_4mm"
+	case MiniQic:
+		return "MiniQic"
+	case Travan:
+		return "Travan"
+	case QIC:
+		return "QIC"
+	case MP_8mm:
+		return "MP_8mm"
+	case AME_8mm:
+		return "AME_8mm"
+	case AIT1_8mm:
+		return "AIT1_8mm"
+	case DLT:
+		return "DLT"
+	case NCTP:
+		return "NCTP"
+	case IBM_3480:
+		return "IBM_3480"
+	case IBM_3490E:
+		return "IBM_3490E"
+	case IBM_Magstar_3590:
+		return "IBM_Magstar_3590"
+	case IBM_Magstar_MP:
+		return "IBM_Magstar_MP"
+	case STK_DATA_D3:
+		return "STK_DATA_D3"
+	case SONY_DTF:
+		return "SONY_DTF"
+	case DV_6mm:
+		return "DV_6mm"
+	case DMI:
+		return "DMI"
+	case SONY_D2:
+		return "SONY_D2"
+	case CLEANER_CARTRIDGE:
+		return "CLEANER_CARTRIDGE"
+	case CD_ROM:
+		return "CD_ROM"
+	case CD_R:
+		return "CD_R"
+	case CD_RW:
+		return "CD_RW"
+	case DVD_ROM:
+		return "DVD_ROM"
+	case DVD_R:
+		return "DVD_R"
+	case DVD_RW:
+		return "DVD_RW"
+	case MO_3_RW:
+		return "MO_3_RW"
+	case MO_5_WO:
+		return "MO_5_WO"
+	case MO_5_RW:
+		return "MO_5_RW"
+	case MO_5_LIMDOW:
+		return "MO_5_LIMDOW"
+	case PC_5_WO:
+		return "PC_5_WO"
+	case PC_5_RW:
+		return "PC_5_RW"
+	case PD_5_RW:
+		return "PD_5_RW"
+	case ABL_5_WO:
+		return "ABL_5_WO"
+	case PINNACLE_APEX_5_RW:
+		return "PINNACLE_APEX_5_RW"
+	case SONY_12_WO:
+		return "SONY_12_WO"
+	case PHILIPS_12_WO:
+		return "PHILIPS_12_WO"
+	case HITACHI_12_WO:
+		return "HITACHI_12_WO"
+	case CYGNET_12_WO:
+		return "CYGNET_12_WO"
+	case KODAK_14_WO:
+		return "KODAK_14_WO"
+	case MO_NFR_525:
+		return "MO_NFR_525"
+	case NIKON_12_RW:
+		return "NIKON_12_RW"
+	case IOMEGA_ZIP:
+		return "IOMEGA_ZIP"
+	case IOMEGA_JAZ:
+		return "IOMEGA_JAZ"
+	case SYQUEST_EZ135:
+		return "SYQUEST_EZ135"
+	case SYQUEST_EZFLYER:
+		return "SYQUEST_EZFLYER"
+	case SYQUEST_SYJET:
+		return "SYQUEST_SYJET"
+	case AVATAR_F2:
+		return "AVATAR_F2"
+	case MP2_8mm:
+		return "MP2_8mm"
+	case DST_S:
+		return "DST_S"
+	case DST_M:
+		return "DST_M"
+	case DST_L:
+		return "DST_L"
+	case VXATape_1:
+		return "VXATape_1"
+	case VXATape_2:
+		return "VXATape_2"
+	case STK_9840:
+		return "STK_9840"
+	case LTO_Ultrium:
+		return "LTO_Ultrium"
+	case LTO_Accelis:
+		return "LTO_Accelis"
+	case DVD_RAM:
+		return "DVD_RAM"
+	case AIT_8mm:
+		return "AIT_8mm"
+	case ADR_1:
+		return "ADR_1"
+	case ADR_2:
+		return "ADR_2"
+	case STK_9940:
+		return "STK_9940"
+	case SAIT:
+		return "SAIT"
+	case VXATape:
+		return "VXATape"
+	default:
+		return fmt.Sprintf("STORAGE_MEDIA_TYPE(%d)", int32(e))
+	}
+}
+
 type STORAGE_OPERATIONAL_STATUS_REASON int32
 
 const (
@@ -814,6 +2362,57 @@ const (
 	DiskOpReasonMax                          STORAGE_OPERATIONAL_STATUS_REASON = 20
 )
 
+// String returns the STORAGE_OPERATIONAL_STATUS_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_OPERATIONAL_STATUS_REASON) String() string {
+	switch e {
+	case DiskOpReasonUnknown:
+		return "DiskOpReasonUnknown"
+	case DiskOpReasonScsiSenseCode:
+		return "DiskOpReasonScsiSenseCode"
+	case DiskOpReasonMedia:
+		return "DiskOpReasonMedia"
+	case DiskOpReasonIo:
+		return "DiskOpReasonIo"
+	case DiskOpReasonThresholdExceeded:
+		return "DiskOpReasonThresholdExceeded"
+	case DiskOpReasonLostData:
+		return "DiskOpReasonLostData"
+	case DiskOpReasonEnergySource:
+		return "DiskOpReasonEnergySource"
+	case DiskOpReasonConfiguration:
+		return "DiskOpReasonConfiguration"
+	case DiskOpReasonDeviceController:
+		return "DiskOpReasonDeviceController"
+	case DiskOpReasonMediaController:
+		return "DiskOpReasonMediaController"
+	case DiskOpReasonComponent:
+		return "DiskOpReasonComponent"
+	case DiskOpReasonNVDIMM_N:
+		return "DiskOpReasonNVDIMM_N"
+	case DiskOpReasonBackgroundOperation:
+		return "DiskOpReasonBackgroundOperation"
+	case DiskOpReasonInvalidFirmware:
+		return "DiskOpReasonInvalidFirmware"
+	case DiskOpReasonHealthCheck:
+		return "DiskOpReasonHealthCheck"
+	case DiskOpReasonLostDataPersistence:
+		return "DiskOpReasonLostDataPersistence"
+	case DiskOpReasonDisabledByPlatform:
+		return "DiskOpReasonDisabledByPlatform"
+	case DiskOpReasonLostWritePersistence:
+		return "DiskOpReasonLostWritePersistence"
+	case DiskOpReasonDataPersistenceLossImminent:
+		return "DiskOpReasonDataPersistenceLossImminent"
+	case DiskOpReasonWritePersistenceLossImminent:
+		return "DiskOpReasonWritePersistenceLossImminent"
+	case DiskOpReasonMax:
+		return "DiskOpReasonMax"
+	default:
+		return fmt.Sprintf("STORAGE_OPERATIONAL_STATUS_REASON(%d)", int32(e))
+	}
+}
+
 // STORAGE_PORT_CODE_SET: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-storage_port_code_set
 type STORAGE_PORT_CODE_SET int32
 
@@ -828,6 +2427,31 @@ const (
 	StoragePortCodeSetSDport    STORAGE_PORT_CODE_SET = 7
 )
 
+// String returns the STORAGE_PORT_CODE_SET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_PORT_CODE_SET) String() string {
+	switch e {
+	case StoragePortCodeSetReserved:
+		return "StoragePortCodeSetReserved"
+	case StoragePortCodeSetStorport:
+		return "StoragePortCodeSetStorport"
+	case StoragePortCodeSetSCSIport:
+		return "StoragePortCodeSetSCSIport"
+	case StoragePortCodeSetSpaceport:
+		return "StoragePortCodeSetSpaceport"
+	case StoragePortCodeSetATAport:
+		return "StoragePortCodeSetATAport"
+	case StoragePortCodeSetUSBport:
+		return "StoragePortCodeSetUSBport"
+	case StoragePortCodeSetSBP2port:
+		return "StoragePortCodeSetSBP2port"
+	case StoragePortCodeSetSDport:
+		return "StoragePortCodeSetSDport"
+	default:
+		return fmt.Sprintf("STORAGE_PORT_CODE_SET(%d)", int32(e))
+	}
+}
+
 type STORAGE_POWERUP_REASON_TYPE int32
 
 const (
@@ -835,6 +2459,21 @@ const (
 	StoragePowerupIO              STORAGE_POWERUP_REASON_TYPE = 1
 	StoragePowerupDeviceAttention STORAGE_POWERUP_REASON_TYPE = 2
 )
+
+// String returns the STORAGE_POWERUP_REASON_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_POWERUP_REASON_TYPE) String() string {
+	switch e {
+	case StoragePowerupUnknown:
+		return "StoragePowerupUnknown"
+	case StoragePowerupIO:
+		return "StoragePowerupIO"
+	case StoragePowerupDeviceAttention:
+		return "StoragePowerupDeviceAttention"
+	default:
+		return fmt.Sprintf("STORAGE_POWERUP_REASON_TYPE(%d)", int32(e))
+	}
+}
 
 // STORAGE_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-storage_property_id
 type STORAGE_PROPERTY_ID int32
@@ -882,6 +2521,95 @@ const (
 	StorageHwCryptoProperty                  STORAGE_PROPERTY_ID = 69
 )
 
+// String returns the STORAGE_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_PROPERTY_ID) String() string {
+	switch e {
+	case StorageDeviceProperty:
+		return "StorageDeviceProperty"
+	case StorageAdapterProperty:
+		return "StorageAdapterProperty"
+	case StorageDeviceIdProperty:
+		return "StorageDeviceIdProperty"
+	case StorageDeviceUniqueIdProperty:
+		return "StorageDeviceUniqueIdProperty"
+	case StorageDeviceWriteCacheProperty:
+		return "StorageDeviceWriteCacheProperty"
+	case StorageMiniportProperty:
+		return "StorageMiniportProperty"
+	case StorageAccessAlignmentProperty:
+		return "StorageAccessAlignmentProperty"
+	case StorageDeviceSeekPenaltyProperty:
+		return "StorageDeviceSeekPenaltyProperty"
+	case StorageDeviceTrimProperty:
+		return "StorageDeviceTrimProperty"
+	case StorageDeviceWriteAggregationProperty:
+		return "StorageDeviceWriteAggregationProperty"
+	case StorageDeviceDeviceTelemetryProperty:
+		return "StorageDeviceDeviceTelemetryProperty"
+	case StorageDeviceLBProvisioningProperty:
+		return "StorageDeviceLBProvisioningProperty"
+	case StorageDevicePowerProperty:
+		return "StorageDevicePowerProperty"
+	case StorageDeviceCopyOffloadProperty:
+		return "StorageDeviceCopyOffloadProperty"
+	case StorageDeviceResiliencyProperty:
+		return "StorageDeviceResiliencyProperty"
+	case StorageDeviceMediumProductType:
+		return "StorageDeviceMediumProductType"
+	case StorageAdapterRpmbProperty:
+		return "StorageAdapterRpmbProperty"
+	case StorageAdapterCryptoProperty:
+		return "StorageAdapterCryptoProperty"
+	case StorageDeviceIoCapabilityProperty:
+		return "StorageDeviceIoCapabilityProperty"
+	case StorageAdapterProtocolSpecificProperty:
+		return "StorageAdapterProtocolSpecificProperty"
+	case StorageDeviceProtocolSpecificProperty:
+		return "StorageDeviceProtocolSpecificProperty"
+	case StorageAdapterTemperatureProperty:
+		return "StorageAdapterTemperatureProperty"
+	case StorageDeviceTemperatureProperty:
+		return "StorageDeviceTemperatureProperty"
+	case StorageAdapterPhysicalTopologyProperty:
+		return "StorageAdapterPhysicalTopologyProperty"
+	case StorageDevicePhysicalTopologyProperty:
+		return "StorageDevicePhysicalTopologyProperty"
+	case StorageDeviceAttributesProperty:
+		return "StorageDeviceAttributesProperty"
+	case StorageDeviceManagementStatus:
+		return "StorageDeviceManagementStatus"
+	case StorageAdapterSerialNumberProperty:
+		return "StorageAdapterSerialNumberProperty"
+	case StorageDeviceLocationProperty:
+		return "StorageDeviceLocationProperty"
+	case StorageDeviceNumaProperty:
+		return "StorageDeviceNumaProperty"
+	case StorageDeviceZonedDeviceProperty:
+		return "StorageDeviceZonedDeviceProperty"
+	case StorageDeviceUnsafeShutdownCount:
+		return "StorageDeviceUnsafeShutdownCount"
+	case StorageDeviceEnduranceProperty:
+		return "StorageDeviceEnduranceProperty"
+	case StorageDeviceLedStateProperty:
+		return "StorageDeviceLedStateProperty"
+	case StorageDeviceSelfEncryptionProperty:
+		return "StorageDeviceSelfEncryptionProperty"
+	case StorageFruIdProperty:
+		return "StorageFruIdProperty"
+	case StorageStackProperty:
+		return "StorageStackProperty"
+	case StorageAdapterProtocolSpecificPropertyEx:
+		return "StorageAdapterProtocolSpecificPropertyEx"
+	case StorageDeviceProtocolSpecificPropertyEx:
+		return "StorageDeviceProtocolSpecificPropertyEx"
+	case StorageHwCryptoProperty:
+		return "StorageHwCryptoProperty"
+	default:
+		return fmt.Sprintf("STORAGE_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // STORAGE_PROTOCOL_ATA_DATA_TYPE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-storage_protocol_ata_data_type
 type STORAGE_PROTOCOL_ATA_DATA_TYPE int32
 
@@ -890,6 +2618,21 @@ const (
 	AtaDataTypeIdentify STORAGE_PROTOCOL_ATA_DATA_TYPE = 1
 	AtaDataTypeLogPage  STORAGE_PROTOCOL_ATA_DATA_TYPE = 2
 )
+
+// String returns the STORAGE_PROTOCOL_ATA_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_PROTOCOL_ATA_DATA_TYPE) String() string {
+	switch e {
+	case AtaDataTypeUnknown:
+		return "AtaDataTypeUnknown"
+	case AtaDataTypeIdentify:
+		return "AtaDataTypeIdentify"
+	case AtaDataTypeLogPage:
+		return "AtaDataTypeLogPage"
+	default:
+		return fmt.Sprintf("STORAGE_PROTOCOL_ATA_DATA_TYPE(%d)", int32(e))
+	}
+}
 
 // STORAGE_PROTOCOL_NVME_DATA_TYPE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-storage_protocol_nvme_data_type
 type STORAGE_PROTOCOL_NVME_DATA_TYPE int32
@@ -902,6 +2645,27 @@ const (
 	NVMeDataTypeLogPageEx STORAGE_PROTOCOL_NVME_DATA_TYPE = 4
 	NVMeDataTypeFeatureEx STORAGE_PROTOCOL_NVME_DATA_TYPE = 5
 )
+
+// String returns the STORAGE_PROTOCOL_NVME_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_PROTOCOL_NVME_DATA_TYPE) String() string {
+	switch e {
+	case NVMeDataTypeUnknown:
+		return "NVMeDataTypeUnknown"
+	case NVMeDataTypeIdentify:
+		return "NVMeDataTypeIdentify"
+	case NVMeDataTypeLogPage:
+		return "NVMeDataTypeLogPage"
+	case NVMeDataTypeFeature:
+		return "NVMeDataTypeFeature"
+	case NVMeDataTypeLogPageEx:
+		return "NVMeDataTypeLogPageEx"
+	case NVMeDataTypeFeatureEx:
+		return "NVMeDataTypeFeatureEx"
+	default:
+		return fmt.Sprintf("STORAGE_PROTOCOL_NVME_DATA_TYPE(%d)", int32(e))
+	}
+}
 
 // STORAGE_PROTOCOL_TYPE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-storage_protocol_type
 type STORAGE_PROTOCOL_TYPE int32
@@ -917,6 +2681,31 @@ const (
 	ProtocolTypeMaxReserved STORAGE_PROTOCOL_TYPE = 127
 )
 
+// String returns the STORAGE_PROTOCOL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_PROTOCOL_TYPE) String() string {
+	switch e {
+	case ProtocolTypeUnknown:
+		return "ProtocolTypeUnknown"
+	case ProtocolTypeScsi:
+		return "ProtocolTypeScsi"
+	case ProtocolTypeAta:
+		return "ProtocolTypeAta"
+	case ProtocolTypeNvme:
+		return "ProtocolTypeNvme"
+	case ProtocolTypeSd:
+		return "ProtocolTypeSd"
+	case ProtocolTypeUfs:
+		return "ProtocolTypeUfs"
+	case ProtocolTypeProprietary:
+		return "ProtocolTypeProprietary"
+	case ProtocolTypeMaxReserved:
+		return "ProtocolTypeMaxReserved"
+	default:
+		return fmt.Sprintf("STORAGE_PROTOCOL_TYPE(%d)", int32(e))
+	}
+}
+
 type STORAGE_PROTOCOL_UFS_DATA_TYPE int32
 
 const (
@@ -929,6 +2718,29 @@ const (
 	UfsDataTypeMax                   STORAGE_PROTOCOL_UFS_DATA_TYPE = 6
 )
 
+// String returns the STORAGE_PROTOCOL_UFS_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_PROTOCOL_UFS_DATA_TYPE) String() string {
+	switch e {
+	case UfsDataTypeUnknown:
+		return "UfsDataTypeUnknown"
+	case UfsDataTypeQueryDescriptor:
+		return "UfsDataTypeQueryDescriptor"
+	case UfsDataTypeQueryAttribute:
+		return "UfsDataTypeQueryAttribute"
+	case UfsDataTypeQueryFlag:
+		return "UfsDataTypeQueryFlag"
+	case UfsDataTypeQueryDmeAttribute:
+		return "UfsDataTypeQueryDmeAttribute"
+	case UfsDataTypeQueryDmePeerAttribute:
+		return "UfsDataTypeQueryDmePeerAttribute"
+	case UfsDataTypeMax:
+		return "UfsDataTypeMax"
+	default:
+		return fmt.Sprintf("STORAGE_PROTOCOL_UFS_DATA_TYPE(%d)", int32(e))
+	}
+}
+
 // STORAGE_QUERY_TYPE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-storage_query_type
 type STORAGE_QUERY_TYPE int32
 
@@ -939,6 +2751,23 @@ const (
 	PropertyQueryMaxDefined STORAGE_QUERY_TYPE = 3
 )
 
+// String returns the STORAGE_QUERY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_QUERY_TYPE) String() string {
+	switch e {
+	case PropertyStandardQuery:
+		return "PropertyStandardQuery"
+	case PropertyExistsQuery:
+		return "PropertyExistsQuery"
+	case PropertyMaskQuery:
+		return "PropertyMaskQuery"
+	case PropertyQueryMaxDefined:
+		return "PropertyQueryMaxDefined"
+	default:
+		return fmt.Sprintf("STORAGE_QUERY_TYPE(%d)", int32(e))
+	}
+}
+
 type STORAGE_RESERVE_ID int32
 
 const (
@@ -948,6 +2777,25 @@ const (
 	StorageReserveIdUpdateScratch STORAGE_RESERVE_ID = 3
 	StorageReserveIdMax           STORAGE_RESERVE_ID = 4
 )
+
+// String returns the STORAGE_RESERVE_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_RESERVE_ID) String() string {
+	switch e {
+	case StorageReserveIdNone:
+		return "StorageReserveIdNone"
+	case StorageReserveIdHard:
+		return "StorageReserveIdHard"
+	case StorageReserveIdSoft:
+		return "StorageReserveIdSoft"
+	case StorageReserveIdUpdateScratch:
+		return "StorageReserveIdUpdateScratch"
+	case StorageReserveIdMax:
+		return "StorageReserveIdMax"
+	default:
+		return fmt.Sprintf("STORAGE_RESERVE_ID(%d)", int32(e))
+	}
+}
 
 type STORAGE_RPMB_COMMAND_TYPE int32
 
@@ -961,6 +2809,29 @@ const (
 	StorRpmbAuthenticatedDeviceConfigRead  STORAGE_RPMB_COMMAND_TYPE = 7
 )
 
+// String returns the STORAGE_RPMB_COMMAND_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_RPMB_COMMAND_TYPE) String() string {
+	switch e {
+	case StorRpmbProgramAuthKey:
+		return "StorRpmbProgramAuthKey"
+	case StorRpmbQueryWriteCounter:
+		return "StorRpmbQueryWriteCounter"
+	case StorRpmbAuthenticatedWrite:
+		return "StorRpmbAuthenticatedWrite"
+	case StorRpmbAuthenticatedRead:
+		return "StorRpmbAuthenticatedRead"
+	case StorRpmbReadResultRequest:
+		return "StorRpmbReadResultRequest"
+	case StorRpmbAuthenticatedDeviceConfigWrite:
+		return "StorRpmbAuthenticatedDeviceConfigWrite"
+	case StorRpmbAuthenticatedDeviceConfigRead:
+		return "StorRpmbAuthenticatedDeviceConfigRead"
+	default:
+		return fmt.Sprintf("STORAGE_RPMB_COMMAND_TYPE(%d)", int32(e))
+	}
+}
+
 type STORAGE_RPMB_FRAME_TYPE int32
 
 const (
@@ -968,6 +2839,21 @@ const (
 	StorageRpmbFrameTypeStandard STORAGE_RPMB_FRAME_TYPE = 1
 	StorageRpmbFrameTypeMax      STORAGE_RPMB_FRAME_TYPE = 2
 )
+
+// String returns the STORAGE_RPMB_FRAME_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_RPMB_FRAME_TYPE) String() string {
+	switch e {
+	case StorageRpmbFrameTypeUnknown:
+		return "StorageRpmbFrameTypeUnknown"
+	case StorageRpmbFrameTypeStandard:
+		return "StorageRpmbFrameTypeStandard"
+	case StorageRpmbFrameTypeMax:
+		return "StorageRpmbFrameTypeMax"
+	default:
+		return fmt.Sprintf("STORAGE_RPMB_FRAME_TYPE(%d)", int32(e))
+	}
+}
 
 type STORAGE_SANITIZE_METHOD int32
 
@@ -977,6 +2863,21 @@ const (
 	StorageSanitizeMethodCryptoErase STORAGE_SANITIZE_METHOD = 2
 )
 
+// String returns the STORAGE_SANITIZE_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_SANITIZE_METHOD) String() string {
+	switch e {
+	case StorageSanitizeMethodDefault:
+		return "StorageSanitizeMethodDefault"
+	case StorageSanitizeMethodBlockErase:
+		return "StorageSanitizeMethodBlockErase"
+	case StorageSanitizeMethodCryptoErase:
+		return "StorageSanitizeMethodCryptoErase"
+	default:
+		return fmt.Sprintf("STORAGE_SANITIZE_METHOD(%d)", int32(e))
+	}
+}
+
 type STORAGE_SET_TYPE int32
 
 const (
@@ -984,6 +2885,21 @@ const (
 	PropertyExistsSet     STORAGE_SET_TYPE = 1
 	PropertySetMaxDefined STORAGE_SET_TYPE = 2
 )
+
+// String returns the STORAGE_SET_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_SET_TYPE) String() string {
+	switch e {
+	case PropertyStandardSet:
+		return "PropertyStandardSet"
+	case PropertyExistsSet:
+		return "PropertyExistsSet"
+	case PropertySetMaxDefined:
+		return "PropertySetMaxDefined"
+	default:
+		return fmt.Sprintf("STORAGE_SET_TYPE(%d)", int32(e))
+	}
+}
 
 type STORAGE_STACK_TYPE int32
 
@@ -993,6 +2909,21 @@ const (
 	StorageStackTypeNVMe    STORAGE_STACK_TYPE = 2
 )
 
+// String returns the STORAGE_STACK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_STACK_TYPE) String() string {
+	switch e {
+	case StorageStackTypeUnknown:
+		return "StorageStackTypeUnknown"
+	case StorageStackTypeScsi:
+		return "StorageStackTypeScsi"
+	case StorageStackTypeNVMe:
+		return "StorageStackTypeNVMe"
+	default:
+		return fmt.Sprintf("STORAGE_STACK_TYPE(%d)", int32(e))
+	}
+}
+
 type STORAGE_TIER_CLASS int32
 
 const (
@@ -1001,6 +2932,23 @@ const (
 	StorageTierClassPerformance STORAGE_TIER_CLASS = 2
 	StorageTierClassMax         STORAGE_TIER_CLASS = 3
 )
+
+// String returns the STORAGE_TIER_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_TIER_CLASS) String() string {
+	switch e {
+	case StorageTierClassUnspecified:
+		return "StorageTierClassUnspecified"
+	case StorageTierClassCapacity:
+		return "StorageTierClassCapacity"
+	case StorageTierClassPerformance:
+		return "StorageTierClassPerformance"
+	case StorageTierClassMax:
+		return "StorageTierClassMax"
+	default:
+		return fmt.Sprintf("STORAGE_TIER_CLASS(%d)", int32(e))
+	}
+}
 
 type STORAGE_TIER_MEDIA_TYPE int32
 
@@ -1012,6 +2960,25 @@ const (
 	StorageTierMediaTypeMax         STORAGE_TIER_MEDIA_TYPE = 5
 )
 
+// String returns the STORAGE_TIER_MEDIA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_TIER_MEDIA_TYPE) String() string {
+	switch e {
+	case StorageTierMediaTypeUnspecified:
+		return "StorageTierMediaTypeUnspecified"
+	case StorageTierMediaTypeDisk:
+		return "StorageTierMediaTypeDisk"
+	case StorageTierMediaTypeSsd:
+		return "StorageTierMediaTypeSsd"
+	case StorageTierMediaTypeScm:
+		return "StorageTierMediaTypeScm"
+	case StorageTierMediaTypeMax:
+		return "StorageTierMediaTypeMax"
+	default:
+		return fmt.Sprintf("STORAGE_TIER_MEDIA_TYPE(%d)", int32(e))
+	}
+}
+
 type STORAGE_ZONED_DEVICE_TYPES int32
 
 const (
@@ -1021,6 +2988,23 @@ const (
 	ZonedDeviceTypeDeviceManaged STORAGE_ZONED_DEVICE_TYPES = 3
 )
 
+// String returns the STORAGE_ZONED_DEVICE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_ZONED_DEVICE_TYPES) String() string {
+	switch e {
+	case ZonedDeviceTypeUnknown:
+		return "ZonedDeviceTypeUnknown"
+	case ZonedDeviceTypeHostManaged:
+		return "ZonedDeviceTypeHostManaged"
+	case ZonedDeviceTypeHostAware:
+		return "ZonedDeviceTypeHostAware"
+	case ZonedDeviceTypeDeviceManaged:
+		return "ZonedDeviceTypeDeviceManaged"
+	default:
+		return fmt.Sprintf("STORAGE_ZONED_DEVICE_TYPES(%d)", int32(e))
+	}
+}
+
 type STORAGE_ZONES_ATTRIBUTES int32
 
 const (
@@ -1029,6 +3013,23 @@ const (
 	ZonesAttributeTypeSameLastZoneLengthDifferent STORAGE_ZONES_ATTRIBUTES = 2
 	ZonesAttributeTypeMayDifferentLengthSame      STORAGE_ZONES_ATTRIBUTES = 3
 )
+
+// String returns the STORAGE_ZONES_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_ZONES_ATTRIBUTES) String() string {
+	switch e {
+	case ZonesAttributeTypeAndLengthMayDifferent:
+		return "ZonesAttributeTypeAndLengthMayDifferent"
+	case ZonesAttributeTypeSameLengthSame:
+		return "ZonesAttributeTypeSameLengthSame"
+	case ZonesAttributeTypeSameLastZoneLengthDifferent:
+		return "ZonesAttributeTypeSameLastZoneLengthDifferent"
+	case ZonesAttributeTypeMayDifferentLengthSame:
+		return "ZonesAttributeTypeMayDifferentLengthSame"
+	default:
+		return fmt.Sprintf("STORAGE_ZONES_ATTRIBUTES(%d)", int32(e))
+	}
+}
 
 type STORAGE_ZONE_CONDITION int32
 
@@ -1043,6 +3044,31 @@ const (
 	ZoneConditionOffline          STORAGE_ZONE_CONDITION = 15
 )
 
+// String returns the STORAGE_ZONE_CONDITION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_ZONE_CONDITION) String() string {
+	switch e {
+	case ZoneConditionConventional:
+		return "ZoneConditionConventional"
+	case ZoneConditionEmpty:
+		return "ZoneConditionEmpty"
+	case ZoneConditionImplicitlyOpened:
+		return "ZoneConditionImplicitlyOpened"
+	case ZoneConditionExplicitlyOpened:
+		return "ZoneConditionExplicitlyOpened"
+	case ZoneConditionClosed:
+		return "ZoneConditionClosed"
+	case ZoneConditionReadOnly:
+		return "ZoneConditionReadOnly"
+	case ZoneConditionFull:
+		return "ZoneConditionFull"
+	case ZoneConditionOffline:
+		return "ZoneConditionOffline"
+	default:
+		return fmt.Sprintf("STORAGE_ZONE_CONDITION(%d)", int32(e))
+	}
+}
+
 type STORAGE_ZONE_TYPES int32
 
 const (
@@ -1053,6 +3079,26 @@ const (
 	ZoneTypeMax                      STORAGE_ZONE_TYPES = 4
 )
 
+// String returns the STORAGE_ZONE_TYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STORAGE_ZONE_TYPES) String() string {
+	switch e {
+	case ZoneTypeUnknown:
+		return "ZoneTypeUnknown"
+	case ZoneTypeConventional:
+		return "ZoneTypeConventional"
+	case ZoneTypeSequentialWriteRequired:
+		return "ZoneTypeSequentialWriteRequired"
+	case ZoneTypeSequentialWritePreferred:
+		return "ZoneTypeSequentialWritePreferred"
+	case ZoneTypeMax:
+		return "ZoneTypeMax"
+	default:
+		return fmt.Sprintf("STORAGE_ZONE_TYPES(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TXFS_RMF_LAGS uint32
 
 const (
@@ -1075,12 +3121,90 @@ const (
 	TXFS_RM_FLAG_PREFER_AVAILABILITY                 TXFS_RMF_LAGS = 131072
 )
 
+// String returns the TXFS_RMF_LAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TXFS_RMF_LAGS) String() string {
+	var parts []string
+	if e&TXFS_RM_FLAG_LOGGING_MODE != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_LOGGING_MODE")
+	}
+	if e&TXFS_RM_FLAG_RENAME_RM != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_RENAME_RM")
+	}
+	if e&TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MAX != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MAX")
+	}
+	if e&TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MIN != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MIN")
+	}
+	if e&TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_NUM_CONTAINERS != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_NUM_CONTAINERS")
+	}
+	if e&TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_PERCENT != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_PERCENT")
+	}
+	if e&TXFS_RM_FLAG_LOG_AUTO_SHRINK_PERCENTAGE != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_LOG_AUTO_SHRINK_PERCENTAGE")
+	}
+	if e&TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MAX != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MAX")
+	}
+	if e&TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MIN != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MIN")
+	}
+	if e&TXFS_RM_FLAG_GROW_LOG != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_GROW_LOG")
+	}
+	if e&TXFS_RM_FLAG_SHRINK_LOG != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_SHRINK_LOG")
+	}
+	if e&TXFS_RM_FLAG_ENFORCE_MINIMUM_SIZE != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_ENFORCE_MINIMUM_SIZE")
+	}
+	if e&TXFS_RM_FLAG_PRESERVE_CHANGES != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_PRESERVE_CHANGES")
+	}
+	if e&TXFS_RM_FLAG_RESET_RM_AT_NEXT_START != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_RESET_RM_AT_NEXT_START")
+	}
+	if e&TXFS_RM_FLAG_DO_NOT_RESET_RM_AT_NEXT_START != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_DO_NOT_RESET_RM_AT_NEXT_START")
+	}
+	if e&TXFS_RM_FLAG_PREFER_CONSISTENCY != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_PREFER_CONSISTENCY")
+	}
+	if e&TXFS_RM_FLAG_PREFER_AVAILABILITY != 0 {
+		parts = append(parts, "TXFS_RM_FLAG_PREFER_AVAILABILITY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type USN_DELETE_FLAGS uint32
 
 const (
 	USN_DELETE_FLAG_DELETE USN_DELETE_FLAGS = 1
 	USN_DELETE_FLAG_NOTIFY USN_DELETE_FLAGS = 2
 )
+
+// String returns the USN_DELETE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USN_DELETE_FLAGS) String() string {
+	var parts []string
+	if e&USN_DELETE_FLAG_DELETE != 0 {
+		parts = append(parts, "USN_DELETE_FLAG_DELETE")
+	}
+	if e&USN_DELETE_FLAG_NOTIFY != 0 {
+		parts = append(parts, "USN_DELETE_FLAG_NOTIFY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type USN_SOURCE_INFO_ID uint32
 
@@ -1090,6 +3214,23 @@ const (
 	USN_SOURCE_REPLICATION_MANAGEMENT        USN_SOURCE_INFO_ID = 4
 	USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT USN_SOURCE_INFO_ID = 8
 )
+
+// String returns the USN_SOURCE_INFO_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USN_SOURCE_INFO_ID) String() string {
+	switch e {
+	case USN_SOURCE_AUXILIARY_DATA:
+		return "USN_SOURCE_AUXILIARY_DATA"
+	case USN_SOURCE_DATA_MANAGEMENT:
+		return "USN_SOURCE_DATA_MANAGEMENT"
+	case USN_SOURCE_REPLICATION_MANAGEMENT:
+		return "USN_SOURCE_REPLICATION_MANAGEMENT"
+	case USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT:
+		return "USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT"
+	default:
+		return fmt.Sprintf("USN_SOURCE_INFO_ID(%d)", uint32(e))
+	}
+}
 
 type VIRTUAL_STORAGE_BEHAVIOR_CODE int32
 
@@ -1101,6 +3242,25 @@ const (
 	VirtualStorageBehaviorRestartIoProcessing VIRTUAL_STORAGE_BEHAVIOR_CODE = 4
 )
 
+// String returns the VIRTUAL_STORAGE_BEHAVIOR_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIRTUAL_STORAGE_BEHAVIOR_CODE) String() string {
+	switch e {
+	case VirtualStorageBehaviorUndefined:
+		return "VirtualStorageBehaviorUndefined"
+	case VirtualStorageBehaviorCacheWriteThrough:
+		return "VirtualStorageBehaviorCacheWriteThrough"
+	case VirtualStorageBehaviorCacheWriteBack:
+		return "VirtualStorageBehaviorCacheWriteBack"
+	case VirtualStorageBehaviorStopIoProcessing:
+		return "VirtualStorageBehaviorStopIoProcessing"
+	case VirtualStorageBehaviorRestartIoProcessing:
+		return "VirtualStorageBehaviorRestartIoProcessing"
+	default:
+		return fmt.Sprintf("VIRTUAL_STORAGE_BEHAVIOR_CODE(%d)", int32(e))
+	}
+}
+
 // WRITE_CACHE_CHANGE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-write_cache_change
 type WRITE_CACHE_CHANGE int32
 
@@ -1110,6 +3270,21 @@ const (
 	WriteCacheChangeable    WRITE_CACHE_CHANGE = 2
 )
 
+// String returns the WRITE_CACHE_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRITE_CACHE_CHANGE) String() string {
+	switch e {
+	case WriteCacheChangeUnknown:
+		return "WriteCacheChangeUnknown"
+	case WriteCacheNotChangeable:
+		return "WriteCacheNotChangeable"
+	case WriteCacheChangeable:
+		return "WriteCacheChangeable"
+	default:
+		return fmt.Sprintf("WRITE_CACHE_CHANGE(%d)", int32(e))
+	}
+}
+
 // WRITE_CACHE_ENABLE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-write_cache_enable
 type WRITE_CACHE_ENABLE int32
 
@@ -1118,6 +3293,21 @@ const (
 	WriteCacheDisabled      WRITE_CACHE_ENABLE = 1
 	WriteCacheEnabled       WRITE_CACHE_ENABLE = 2
 )
+
+// String returns the WRITE_CACHE_ENABLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRITE_CACHE_ENABLE) String() string {
+	switch e {
+	case WriteCacheEnableUnknown:
+		return "WriteCacheEnableUnknown"
+	case WriteCacheDisabled:
+		return "WriteCacheDisabled"
+	case WriteCacheEnabled:
+		return "WriteCacheEnabled"
+	default:
+		return fmt.Sprintf("WRITE_CACHE_ENABLE(%d)", int32(e))
+	}
+}
 
 // WRITE_CACHE_TYPE: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-write_cache_type
 type WRITE_CACHE_TYPE int32
@@ -1129,6 +3319,23 @@ const (
 	WriteCacheTypeWriteThrough WRITE_CACHE_TYPE = 3
 )
 
+// String returns the WRITE_CACHE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRITE_CACHE_TYPE) String() string {
+	switch e {
+	case WriteCacheTypeUnknown:
+		return "WriteCacheTypeUnknown"
+	case WriteCacheTypeNone:
+		return "WriteCacheTypeNone"
+	case WriteCacheTypeWriteBack:
+		return "WriteCacheTypeWriteBack"
+	case WriteCacheTypeWriteThrough:
+		return "WriteCacheTypeWriteThrough"
+	default:
+		return fmt.Sprintf("WRITE_CACHE_TYPE(%d)", int32(e))
+	}
+}
+
 // WRITE_THROUGH: https://learn.microsoft.com/windows/win32/api/winioctl/ne-winioctl-write_through
 type WRITE_THROUGH int32
 
@@ -1137,3 +3344,18 @@ const (
 	WriteThroughNotSupported WRITE_THROUGH = 1
 	WriteThroughSupported    WRITE_THROUGH = 2
 )
+
+// String returns the WRITE_THROUGH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRITE_THROUGH) String() string {
+	switch e {
+	case WriteThroughUnknown:
+		return "WriteThroughUnknown"
+	case WriteThroughNotSupported:
+		return "WriteThroughNotSupported"
+	case WriteThroughSupported:
+		return "WriteThroughSupported"
+	default:
+		return fmt.Sprintf("WRITE_THROUGH(%d)", int32(e))
+	}
+}

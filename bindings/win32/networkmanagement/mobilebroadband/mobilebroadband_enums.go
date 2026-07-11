@@ -4,6 +4,10 @@
 
 package mobilebroadband
 
+import (
+	"fmt"
+)
+
 // MBN_ACTIVATION_STATE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_activation_state
 type MBN_ACTIVATION_STATE int32
 
@@ -15,6 +19,25 @@ const (
 	MBN_ACTIVATION_STATE_DEACTIVATING MBN_ACTIVATION_STATE = 4
 )
 
+// String returns the MBN_ACTIVATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_ACTIVATION_STATE) String() string {
+	switch e {
+	case MBN_ACTIVATION_STATE_NONE:
+		return "MBN_ACTIVATION_STATE_NONE"
+	case MBN_ACTIVATION_STATE_ACTIVATED:
+		return "MBN_ACTIVATION_STATE_ACTIVATED"
+	case MBN_ACTIVATION_STATE_ACTIVATING:
+		return "MBN_ACTIVATION_STATE_ACTIVATING"
+	case MBN_ACTIVATION_STATE_DEACTIVATED:
+		return "MBN_ACTIVATION_STATE_DEACTIVATED"
+	case MBN_ACTIVATION_STATE_DEACTIVATING:
+		return "MBN_ACTIVATION_STATE_DEACTIVATING"
+	default:
+		return fmt.Sprintf("MBN_ACTIVATION_STATE(%d)", int32(e))
+	}
+}
+
 // MBN_AUTH_PROTOCOL: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_auth_protocol
 type MBN_AUTH_PROTOCOL int32
 
@@ -24,6 +47,23 @@ const (
 	MBN_AUTH_PROTOCOL_CHAP     MBN_AUTH_PROTOCOL = 2
 	MBN_AUTH_PROTOCOL_MSCHAPV2 MBN_AUTH_PROTOCOL = 3
 )
+
+// String returns the MBN_AUTH_PROTOCOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_AUTH_PROTOCOL) String() string {
+	switch e {
+	case MBN_AUTH_PROTOCOL_NONE:
+		return "MBN_AUTH_PROTOCOL_NONE"
+	case MBN_AUTH_PROTOCOL_PAP:
+		return "MBN_AUTH_PROTOCOL_PAP"
+	case MBN_AUTH_PROTOCOL_CHAP:
+		return "MBN_AUTH_PROTOCOL_CHAP"
+	case MBN_AUTH_PROTOCOL_MSCHAPV2:
+		return "MBN_AUTH_PROTOCOL_MSCHAPV2"
+	default:
+		return fmt.Sprintf("MBN_AUTH_PROTOCOL(%d)", int32(e))
+	}
+}
 
 // MBN_BAND_CLASS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_band_class
 type MBN_BAND_CLASS int32
@@ -51,6 +91,55 @@ const (
 	MBN_BAND_CLASS_CUSTOM MBN_BAND_CLASS = -2147483648
 )
 
+// String returns the MBN_BAND_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_BAND_CLASS) String() string {
+	switch e {
+	case MBN_BAND_CLASS_NONE:
+		return "MBN_BAND_CLASS_NONE"
+	case MBN_BAND_CLASS_0:
+		return "MBN_BAND_CLASS_0"
+	case MBN_BAND_CLASS_I:
+		return "MBN_BAND_CLASS_I"
+	case MBN_BAND_CLASS_II:
+		return "MBN_BAND_CLASS_II"
+	case MBN_BAND_CLASS_III:
+		return "MBN_BAND_CLASS_III"
+	case MBN_BAND_CLASS_IV:
+		return "MBN_BAND_CLASS_IV"
+	case MBN_BAND_CLASS_V:
+		return "MBN_BAND_CLASS_V"
+	case MBN_BAND_CLASS_VI:
+		return "MBN_BAND_CLASS_VI"
+	case MBN_BAND_CLASS_VII:
+		return "MBN_BAND_CLASS_VII"
+	case MBN_BAND_CLASS_VIII:
+		return "MBN_BAND_CLASS_VIII"
+	case MBN_BAND_CLASS_IX:
+		return "MBN_BAND_CLASS_IX"
+	case MBN_BAND_CLASS_X:
+		return "MBN_BAND_CLASS_X"
+	case MBN_BAND_CLASS_XI:
+		return "MBN_BAND_CLASS_XI"
+	case MBN_BAND_CLASS_XII:
+		return "MBN_BAND_CLASS_XII"
+	case MBN_BAND_CLASS_XIII:
+		return "MBN_BAND_CLASS_XIII"
+	case MBN_BAND_CLASS_XIV:
+		return "MBN_BAND_CLASS_XIV"
+	case MBN_BAND_CLASS_XV:
+		return "MBN_BAND_CLASS_XV"
+	case MBN_BAND_CLASS_XVI:
+		return "MBN_BAND_CLASS_XVI"
+	case MBN_BAND_CLASS_XVII:
+		return "MBN_BAND_CLASS_XVII"
+	case MBN_BAND_CLASS_CUSTOM:
+		return "MBN_BAND_CLASS_CUSTOM"
+	default:
+		return fmt.Sprintf("MBN_BAND_CLASS(%d)", int32(e))
+	}
+}
+
 // MBN_CELLULAR_CLASS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_cellular_class
 type MBN_CELLULAR_CLASS int32
 
@@ -60,6 +149,21 @@ const (
 	MBN_CELLULAR_CLASS_CDMA MBN_CELLULAR_CLASS = 2
 )
 
+// String returns the MBN_CELLULAR_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_CELLULAR_CLASS) String() string {
+	switch e {
+	case MBN_CELLULAR_CLASS_NONE:
+		return "MBN_CELLULAR_CLASS_NONE"
+	case MBN_CELLULAR_CLASS_GSM:
+		return "MBN_CELLULAR_CLASS_GSM"
+	case MBN_CELLULAR_CLASS_CDMA:
+		return "MBN_CELLULAR_CLASS_CDMA"
+	default:
+		return fmt.Sprintf("MBN_CELLULAR_CLASS(%d)", int32(e))
+	}
+}
+
 // MBN_COMPRESSION: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_compression
 type MBN_COMPRESSION int32
 
@@ -68,6 +172,19 @@ const (
 	MBN_COMPRESSION_ENABLE MBN_COMPRESSION = 1
 )
 
+// String returns the MBN_COMPRESSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_COMPRESSION) String() string {
+	switch e {
+	case MBN_COMPRESSION_NONE:
+		return "MBN_COMPRESSION_NONE"
+	case MBN_COMPRESSION_ENABLE:
+		return "MBN_COMPRESSION_ENABLE"
+	default:
+		return fmt.Sprintf("MBN_COMPRESSION(%d)", int32(e))
+	}
+}
+
 // MBN_CONNECTION_MODE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_connection_mode
 type MBN_CONNECTION_MODE int32
 
@@ -75,6 +192,19 @@ const (
 	MBN_CONNECTION_MODE_PROFILE     MBN_CONNECTION_MODE = 0
 	MBN_CONNECTION_MODE_TMP_PROFILE MBN_CONNECTION_MODE = 1
 )
+
+// String returns the MBN_CONNECTION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_CONNECTION_MODE) String() string {
+	switch e {
+	case MBN_CONNECTION_MODE_PROFILE:
+		return "MBN_CONNECTION_MODE_PROFILE"
+	case MBN_CONNECTION_MODE_TMP_PROFILE:
+		return "MBN_CONNECTION_MODE_TMP_PROFILE"
+	default:
+		return fmt.Sprintf("MBN_CONNECTION_MODE(%d)", int32(e))
+	}
+}
 
 // MBN_CONTEXT_CONSTANTS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_context_constants
 type MBN_CONTEXT_CONSTANTS int32
@@ -85,6 +215,21 @@ const (
 	MBN_PASSWORD_LEN      MBN_CONTEXT_CONSTANTS = 255
 	MBN_CONTEXT_ID_APPEND MBN_CONTEXT_CONSTANTS = -1
 )
+
+// String returns the MBN_CONTEXT_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_CONTEXT_CONSTANTS) String() string {
+	switch e {
+	case MBN_ACCESSSTRING_LEN:
+		return "MBN_ACCESSSTRING_LEN"
+	case MBN_USERNAME_LEN:
+		return "MBN_USERNAME_LEN"
+	case MBN_CONTEXT_ID_APPEND:
+		return "MBN_CONTEXT_ID_APPEND"
+	default:
+		return fmt.Sprintf("MBN_CONTEXT_CONSTANTS(%d)", int32(e))
+	}
+}
 
 // MBN_CONTEXT_TYPE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_context_type
 type MBN_CONTEXT_TYPE int32
@@ -98,6 +243,29 @@ const (
 	MBN_CONTEXT_TYPE_CUSTOM      MBN_CONTEXT_TYPE = 5
 	MBN_CONTEXT_TYPE_PURCHASE    MBN_CONTEXT_TYPE = 6
 )
+
+// String returns the MBN_CONTEXT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_CONTEXT_TYPE) String() string {
+	switch e {
+	case MBN_CONTEXT_TYPE_NONE:
+		return "MBN_CONTEXT_TYPE_NONE"
+	case MBN_CONTEXT_TYPE_INTERNET:
+		return "MBN_CONTEXT_TYPE_INTERNET"
+	case MBN_CONTEXT_TYPE_VPN:
+		return "MBN_CONTEXT_TYPE_VPN"
+	case MBN_CONTEXT_TYPE_VOICE:
+		return "MBN_CONTEXT_TYPE_VOICE"
+	case MBN_CONTEXT_TYPE_VIDEO_SHARE:
+		return "MBN_CONTEXT_TYPE_VIDEO_SHARE"
+	case MBN_CONTEXT_TYPE_CUSTOM:
+		return "MBN_CONTEXT_TYPE_CUSTOM"
+	case MBN_CONTEXT_TYPE_PURCHASE:
+		return "MBN_CONTEXT_TYPE_PURCHASE"
+	default:
+		return fmt.Sprintf("MBN_CONTEXT_TYPE(%d)", int32(e))
+	}
+}
 
 // MBN_CTRL_CAPS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_ctrl_caps
 type MBN_CTRL_CAPS int32
@@ -113,6 +281,33 @@ const (
 	MBN_CTRL_CAPS_USSD                MBN_CTRL_CAPS = 64
 	MBN_CTRL_CAPS_MULTI_MODE          MBN_CTRL_CAPS = 128
 )
+
+// String returns the MBN_CTRL_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_CTRL_CAPS) String() string {
+	switch e {
+	case MBN_CTRL_CAPS_NONE:
+		return "MBN_CTRL_CAPS_NONE"
+	case MBN_CTRL_CAPS_REG_MANUAL:
+		return "MBN_CTRL_CAPS_REG_MANUAL"
+	case MBN_CTRL_CAPS_HW_RADIO_SWITCH:
+		return "MBN_CTRL_CAPS_HW_RADIO_SWITCH"
+	case MBN_CTRL_CAPS_CDMA_MOBILE_IP:
+		return "MBN_CTRL_CAPS_CDMA_MOBILE_IP"
+	case MBN_CTRL_CAPS_CDMA_SIMPLE_IP:
+		return "MBN_CTRL_CAPS_CDMA_SIMPLE_IP"
+	case MBN_CTRL_CAPS_PROTECT_UNIQUEID:
+		return "MBN_CTRL_CAPS_PROTECT_UNIQUEID"
+	case MBN_CTRL_CAPS_MODEL_MULTI_CARRIER:
+		return "MBN_CTRL_CAPS_MODEL_MULTI_CARRIER"
+	case MBN_CTRL_CAPS_USSD:
+		return "MBN_CTRL_CAPS_USSD"
+	case MBN_CTRL_CAPS_MULTI_MODE:
+		return "MBN_CTRL_CAPS_MULTI_MODE"
+	default:
+		return fmt.Sprintf("MBN_CTRL_CAPS(%d)", int32(e))
+	}
+}
 
 // MBN_DATA_CLASS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_data_class
 type MBN_DATA_CLASS int32
@@ -137,6 +332,49 @@ const (
 	MBN_DATA_CLASS_CUSTOM      MBN_DATA_CLASS = -2147483648
 )
 
+// String returns the MBN_DATA_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_DATA_CLASS) String() string {
+	switch e {
+	case MBN_DATA_CLASS_NONE:
+		return "MBN_DATA_CLASS_NONE"
+	case MBN_DATA_CLASS_GPRS:
+		return "MBN_DATA_CLASS_GPRS"
+	case MBN_DATA_CLASS_EDGE:
+		return "MBN_DATA_CLASS_EDGE"
+	case MBN_DATA_CLASS_UMTS:
+		return "MBN_DATA_CLASS_UMTS"
+	case MBN_DATA_CLASS_HSDPA:
+		return "MBN_DATA_CLASS_HSDPA"
+	case MBN_DATA_CLASS_HSUPA:
+		return "MBN_DATA_CLASS_HSUPA"
+	case MBN_DATA_CLASS_LTE:
+		return "MBN_DATA_CLASS_LTE"
+	case MBN_DATA_CLASS_5G_NSA:
+		return "MBN_DATA_CLASS_5G_NSA"
+	case MBN_DATA_CLASS_5G_SA:
+		return "MBN_DATA_CLASS_5G_SA"
+	case MBN_DATA_CLASS_1XRTT:
+		return "MBN_DATA_CLASS_1XRTT"
+	case MBN_DATA_CLASS_1XEVDO:
+		return "MBN_DATA_CLASS_1XEVDO"
+	case MBN_DATA_CLASS_1XEVDO_REVA:
+		return "MBN_DATA_CLASS_1XEVDO_REVA"
+	case MBN_DATA_CLASS_1XEVDV:
+		return "MBN_DATA_CLASS_1XEVDV"
+	case MBN_DATA_CLASS_3XRTT:
+		return "MBN_DATA_CLASS_3XRTT"
+	case MBN_DATA_CLASS_1XEVDO_REVB:
+		return "MBN_DATA_CLASS_1XEVDO_REVB"
+	case MBN_DATA_CLASS_UMB:
+		return "MBN_DATA_CLASS_UMB"
+	case MBN_DATA_CLASS_CUSTOM:
+		return "MBN_DATA_CLASS_CUSTOM"
+	default:
+		return fmt.Sprintf("MBN_DATA_CLASS(%d)", int32(e))
+	}
+}
+
 // MBN_DEVICE_SERVICES_INTERFACE_STATE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_device_services_interface_state
 type MBN_DEVICE_SERVICES_INTERFACE_STATE int32
 
@@ -145,11 +383,35 @@ const (
 	MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_REMOVAL MBN_DEVICE_SERVICES_INTERFACE_STATE = 1
 )
 
+// String returns the MBN_DEVICE_SERVICES_INTERFACE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_DEVICE_SERVICES_INTERFACE_STATE) String() string {
+	switch e {
+	case MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_ARRIVAL:
+		return "MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_ARRIVAL"
+	case MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_REMOVAL:
+		return "MBN_DEVICE_SERVICES_CAPABLE_INTERFACE_REMOVAL"
+	default:
+		return fmt.Sprintf("MBN_DEVICE_SERVICES_INTERFACE_STATE(%d)", int32(e))
+	}
+}
+
 type MBN_DEVICE_SERVICE_SESSIONS_STATE int32
 
 const (
 	MBN_DEVICE_SERVICE_SESSIONS_RESTORED MBN_DEVICE_SERVICE_SESSIONS_STATE = 0
 )
+
+// String returns the MBN_DEVICE_SERVICE_SESSIONS_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_DEVICE_SERVICE_SESSIONS_STATE) String() string {
+	switch e {
+	case MBN_DEVICE_SERVICE_SESSIONS_RESTORED:
+		return "MBN_DEVICE_SERVICE_SESSIONS_RESTORED"
+	default:
+		return fmt.Sprintf("MBN_DEVICE_SERVICE_SESSIONS_STATE(%d)", int32(e))
+	}
+}
 
 // MBN_INTERFACE_CAPS_CONSTANTS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_interface_caps_constants
 type MBN_INTERFACE_CAPS_CONSTANTS int32
@@ -161,6 +423,19 @@ const (
 	MBN_FIRMWARE_LEN     MBN_INTERFACE_CAPS_CONSTANTS = 32
 )
 
+// String returns the MBN_INTERFACE_CAPS_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_INTERFACE_CAPS_CONSTANTS) String() string {
+	switch e {
+	case MBN_DEVICEID_LEN:
+		return "MBN_DEVICEID_LEN"
+	case MBN_MANUFACTURER_LEN:
+		return "MBN_MANUFACTURER_LEN"
+	default:
+		return fmt.Sprintf("MBN_INTERFACE_CAPS_CONSTANTS(%d)", int32(e))
+	}
+}
+
 // MBN_MSG_STATUS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_msg_status
 type MBN_MSG_STATUS int32
 
@@ -171,6 +446,23 @@ const (
 	MBN_MSG_STATUS_SENT  MBN_MSG_STATUS = 3
 )
 
+// String returns the MBN_MSG_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_MSG_STATUS) String() string {
+	switch e {
+	case MBN_MSG_STATUS_NEW:
+		return "MBN_MSG_STATUS_NEW"
+	case MBN_MSG_STATUS_OLD:
+		return "MBN_MSG_STATUS_OLD"
+	case MBN_MSG_STATUS_DRAFT:
+		return "MBN_MSG_STATUS_DRAFT"
+	case MBN_MSG_STATUS_SENT:
+		return "MBN_MSG_STATUS_SENT"
+	default:
+		return fmt.Sprintf("MBN_MSG_STATUS(%d)", int32(e))
+	}
+}
+
 // MBN_PIN_CONSTANTS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_pin_constants
 type MBN_PIN_CONSTANTS int32
 
@@ -178,6 +470,17 @@ const (
 	MBN_ATTEMPTS_REMAINING_UNKNOWN MBN_PIN_CONSTANTS = -1
 	MBN_PIN_LENGTH_UNKNOWN         MBN_PIN_CONSTANTS = -1
 )
+
+// String returns the MBN_PIN_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_PIN_CONSTANTS) String() string {
+	switch e {
+	case MBN_ATTEMPTS_REMAINING_UNKNOWN:
+		return "MBN_ATTEMPTS_REMAINING_UNKNOWN"
+	default:
+		return fmt.Sprintf("MBN_PIN_CONSTANTS(%d)", int32(e))
+	}
+}
 
 // MBN_PIN_FORMAT: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_pin_format
 type MBN_PIN_FORMAT int32
@@ -188,6 +491,21 @@ const (
 	MBN_PIN_FORMAT_ALPHANUMERIC MBN_PIN_FORMAT = 2
 )
 
+// String returns the MBN_PIN_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_PIN_FORMAT) String() string {
+	switch e {
+	case MBN_PIN_FORMAT_NONE:
+		return "MBN_PIN_FORMAT_NONE"
+	case MBN_PIN_FORMAT_NUMERIC:
+		return "MBN_PIN_FORMAT_NUMERIC"
+	case MBN_PIN_FORMAT_ALPHANUMERIC:
+		return "MBN_PIN_FORMAT_ALPHANUMERIC"
+	default:
+		return fmt.Sprintf("MBN_PIN_FORMAT(%d)", int32(e))
+	}
+}
+
 // MBN_PIN_MODE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_pin_mode
 type MBN_PIN_MODE int32
 
@@ -195,6 +513,19 @@ const (
 	MBN_PIN_MODE_ENABLED  MBN_PIN_MODE = 1
 	MBN_PIN_MODE_DISABLED MBN_PIN_MODE = 2
 )
+
+// String returns the MBN_PIN_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_PIN_MODE) String() string {
+	switch e {
+	case MBN_PIN_MODE_ENABLED:
+		return "MBN_PIN_MODE_ENABLED"
+	case MBN_PIN_MODE_DISABLED:
+		return "MBN_PIN_MODE_DISABLED"
+	default:
+		return fmt.Sprintf("MBN_PIN_MODE(%d)", int32(e))
+	}
+}
 
 // MBN_PIN_STATE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_pin_state
 type MBN_PIN_STATE int32
@@ -204,6 +535,21 @@ const (
 	MBN_PIN_STATE_ENTER   MBN_PIN_STATE = 1
 	MBN_PIN_STATE_UNBLOCK MBN_PIN_STATE = 2
 )
+
+// String returns the MBN_PIN_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_PIN_STATE) String() string {
+	switch e {
+	case MBN_PIN_STATE_NONE:
+		return "MBN_PIN_STATE_NONE"
+	case MBN_PIN_STATE_ENTER:
+		return "MBN_PIN_STATE_ENTER"
+	case MBN_PIN_STATE_UNBLOCK:
+		return "MBN_PIN_STATE_UNBLOCK"
+	default:
+		return fmt.Sprintf("MBN_PIN_STATE(%d)", int32(e))
+	}
+}
 
 // MBN_PIN_TYPE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_pin_type
 type MBN_PIN_TYPE int32
@@ -222,6 +568,37 @@ const (
 	MBN_PIN_TYPE_SUBSIDY_LOCK         MBN_PIN_TYPE = 10
 )
 
+// String returns the MBN_PIN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_PIN_TYPE) String() string {
+	switch e {
+	case MBN_PIN_TYPE_NONE:
+		return "MBN_PIN_TYPE_NONE"
+	case MBN_PIN_TYPE_CUSTOM:
+		return "MBN_PIN_TYPE_CUSTOM"
+	case MBN_PIN_TYPE_PIN1:
+		return "MBN_PIN_TYPE_PIN1"
+	case MBN_PIN_TYPE_PIN2:
+		return "MBN_PIN_TYPE_PIN2"
+	case MBN_PIN_TYPE_DEVICE_SIM_PIN:
+		return "MBN_PIN_TYPE_DEVICE_SIM_PIN"
+	case MBN_PIN_TYPE_DEVICE_FIRST_SIM_PIN:
+		return "MBN_PIN_TYPE_DEVICE_FIRST_SIM_PIN"
+	case MBN_PIN_TYPE_NETWORK_PIN:
+		return "MBN_PIN_TYPE_NETWORK_PIN"
+	case MBN_PIN_TYPE_NETWORK_SUBSET_PIN:
+		return "MBN_PIN_TYPE_NETWORK_SUBSET_PIN"
+	case MBN_PIN_TYPE_SVC_PROVIDER_PIN:
+		return "MBN_PIN_TYPE_SVC_PROVIDER_PIN"
+	case MBN_PIN_TYPE_CORPORATE_PIN:
+		return "MBN_PIN_TYPE_CORPORATE_PIN"
+	case MBN_PIN_TYPE_SUBSIDY_LOCK:
+		return "MBN_PIN_TYPE_SUBSIDY_LOCK"
+	default:
+		return fmt.Sprintf("MBN_PIN_TYPE(%d)", int32(e))
+	}
+}
+
 // MBN_PROVIDER_CONSTANTS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_provider_constants
 type MBN_PROVIDER_CONSTANTS int32
 
@@ -229,6 +606,19 @@ const (
 	MBN_PROVIDERNAME_LEN MBN_PROVIDER_CONSTANTS = 20
 	MBN_PROVIDERID_LEN   MBN_PROVIDER_CONSTANTS = 6
 )
+
+// String returns the MBN_PROVIDER_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_PROVIDER_CONSTANTS) String() string {
+	switch e {
+	case MBN_PROVIDERNAME_LEN:
+		return "MBN_PROVIDERNAME_LEN"
+	case MBN_PROVIDERID_LEN:
+		return "MBN_PROVIDERID_LEN"
+	default:
+		return fmt.Sprintf("MBN_PROVIDER_CONSTANTS(%d)", int32(e))
+	}
+}
 
 // MBN_PROVIDER_STATE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_provider_state
 type MBN_PROVIDER_STATE int32
@@ -243,6 +633,29 @@ const (
 	MBN_PROVIDER_STATE_PREFERRED_MULTICARRIER MBN_PROVIDER_STATE = 32
 )
 
+// String returns the MBN_PROVIDER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_PROVIDER_STATE) String() string {
+	switch e {
+	case MBN_PROVIDER_STATE_NONE:
+		return "MBN_PROVIDER_STATE_NONE"
+	case MBN_PROVIDER_STATE_HOME:
+		return "MBN_PROVIDER_STATE_HOME"
+	case MBN_PROVIDER_STATE_FORBIDDEN:
+		return "MBN_PROVIDER_STATE_FORBIDDEN"
+	case MBN_PROVIDER_STATE_PREFERRED:
+		return "MBN_PROVIDER_STATE_PREFERRED"
+	case MBN_PROVIDER_STATE_VISIBLE:
+		return "MBN_PROVIDER_STATE_VISIBLE"
+	case MBN_PROVIDER_STATE_REGISTERED:
+		return "MBN_PROVIDER_STATE_REGISTERED"
+	case MBN_PROVIDER_STATE_PREFERRED_MULTICARRIER:
+		return "MBN_PROVIDER_STATE_PREFERRED_MULTICARRIER"
+	default:
+		return fmt.Sprintf("MBN_PROVIDER_STATE(%d)", int32(e))
+	}
+}
+
 // MBN_RADIO: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_radio
 type MBN_RADIO int32
 
@@ -250,6 +663,19 @@ const (
 	MBN_RADIO_OFF MBN_RADIO = 0
 	MBN_RADIO_ON  MBN_RADIO = 1
 )
+
+// String returns the MBN_RADIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_RADIO) String() string {
+	switch e {
+	case MBN_RADIO_OFF:
+		return "MBN_RADIO_OFF"
+	case MBN_RADIO_ON:
+		return "MBN_RADIO_ON"
+	default:
+		return fmt.Sprintf("MBN_RADIO(%d)", int32(e))
+	}
+}
 
 // MBN_READY_STATE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_ready_state
 type MBN_READY_STATE int32
@@ -266,6 +692,33 @@ const (
 	MBN_READY_STATE_NO_ESIM_PROFILE  MBN_READY_STATE = 8
 )
 
+// String returns the MBN_READY_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_READY_STATE) String() string {
+	switch e {
+	case MBN_READY_STATE_OFF:
+		return "MBN_READY_STATE_OFF"
+	case MBN_READY_STATE_INITIALIZED:
+		return "MBN_READY_STATE_INITIALIZED"
+	case MBN_READY_STATE_SIM_NOT_INSERTED:
+		return "MBN_READY_STATE_SIM_NOT_INSERTED"
+	case MBN_READY_STATE_BAD_SIM:
+		return "MBN_READY_STATE_BAD_SIM"
+	case MBN_READY_STATE_FAILURE:
+		return "MBN_READY_STATE_FAILURE"
+	case MBN_READY_STATE_NOT_ACTIVATED:
+		return "MBN_READY_STATE_NOT_ACTIVATED"
+	case MBN_READY_STATE_DEVICE_LOCKED:
+		return "MBN_READY_STATE_DEVICE_LOCKED"
+	case MBN_READY_STATE_DEVICE_BLOCKED:
+		return "MBN_READY_STATE_DEVICE_BLOCKED"
+	case MBN_READY_STATE_NO_ESIM_PROFILE:
+		return "MBN_READY_STATE_NO_ESIM_PROFILE"
+	default:
+		return fmt.Sprintf("MBN_READY_STATE(%d)", int32(e))
+	}
+}
+
 // MBN_REGISTER_MODE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_register_mode
 type MBN_REGISTER_MODE int32
 
@@ -274,6 +727,21 @@ const (
 	MBN_REGISTER_MODE_AUTOMATIC MBN_REGISTER_MODE = 1
 	MBN_REGISTER_MODE_MANUAL    MBN_REGISTER_MODE = 2
 )
+
+// String returns the MBN_REGISTER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_REGISTER_MODE) String() string {
+	switch e {
+	case MBN_REGISTER_MODE_NONE:
+		return "MBN_REGISTER_MODE_NONE"
+	case MBN_REGISTER_MODE_AUTOMATIC:
+		return "MBN_REGISTER_MODE_AUTOMATIC"
+	case MBN_REGISTER_MODE_MANUAL:
+		return "MBN_REGISTER_MODE_MANUAL"
+	default:
+		return fmt.Sprintf("MBN_REGISTER_MODE(%d)", int32(e))
+	}
+}
 
 // MBN_REGISTER_STATE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_register_state
 type MBN_REGISTER_STATE int32
@@ -288,6 +756,29 @@ const (
 	MBN_REGISTER_STATE_DENIED       MBN_REGISTER_STATE = 6
 )
 
+// String returns the MBN_REGISTER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_REGISTER_STATE) String() string {
+	switch e {
+	case MBN_REGISTER_STATE_NONE:
+		return "MBN_REGISTER_STATE_NONE"
+	case MBN_REGISTER_STATE_DEREGISTERED:
+		return "MBN_REGISTER_STATE_DEREGISTERED"
+	case MBN_REGISTER_STATE_SEARCHING:
+		return "MBN_REGISTER_STATE_SEARCHING"
+	case MBN_REGISTER_STATE_HOME:
+		return "MBN_REGISTER_STATE_HOME"
+	case MBN_REGISTER_STATE_ROAMING:
+		return "MBN_REGISTER_STATE_ROAMING"
+	case MBN_REGISTER_STATE_PARTNER:
+		return "MBN_REGISTER_STATE_PARTNER"
+	case MBN_REGISTER_STATE_DENIED:
+		return "MBN_REGISTER_STATE_DENIED"
+	default:
+		return fmt.Sprintf("MBN_REGISTER_STATE(%d)", int32(e))
+	}
+}
+
 // MBN_REGISTRATION_CONSTANTS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_registration_constants
 type MBN_REGISTRATION_CONSTANTS int32
 
@@ -295,6 +786,19 @@ const (
 	MBN_ROAMTEXT_LEN             MBN_REGISTRATION_CONSTANTS = 64
 	MBN_CDMA_DEFAULT_PROVIDER_ID MBN_REGISTRATION_CONSTANTS = 0
 )
+
+// String returns the MBN_REGISTRATION_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_REGISTRATION_CONSTANTS) String() string {
+	switch e {
+	case MBN_ROAMTEXT_LEN:
+		return "MBN_ROAMTEXT_LEN"
+	case MBN_CDMA_DEFAULT_PROVIDER_ID:
+		return "MBN_CDMA_DEFAULT_PROVIDER_ID"
+	default:
+		return fmt.Sprintf("MBN_REGISTRATION_CONSTANTS(%d)", int32(e))
+	}
+}
 
 // MBN_SIGNAL_CONSTANTS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_signal_constants
 type MBN_SIGNAL_CONSTANTS int32
@@ -306,6 +810,21 @@ const (
 	MBN_ERROR_RATE_UNKNOWN MBN_SIGNAL_CONSTANTS = 99
 )
 
+// String returns the MBN_SIGNAL_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_SIGNAL_CONSTANTS) String() string {
+	switch e {
+	case MBN_RSSI_DEFAULT:
+		return "MBN_RSSI_DEFAULT"
+	case MBN_RSSI_DISABLE:
+		return "MBN_RSSI_DISABLE"
+	case MBN_RSSI_UNKNOWN:
+		return "MBN_RSSI_UNKNOWN"
+	default:
+		return fmt.Sprintf("MBN_SIGNAL_CONSTANTS(%d)", int32(e))
+	}
+}
+
 // MBN_SMS_CAPS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_sms_caps
 type MBN_SMS_CAPS int32
 
@@ -316,6 +835,25 @@ const (
 	MBN_SMS_CAPS_TEXT_RECEIVE MBN_SMS_CAPS = 4
 	MBN_SMS_CAPS_TEXT_SEND    MBN_SMS_CAPS = 8
 )
+
+// String returns the MBN_SMS_CAPS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_SMS_CAPS) String() string {
+	switch e {
+	case MBN_SMS_CAPS_NONE:
+		return "MBN_SMS_CAPS_NONE"
+	case MBN_SMS_CAPS_PDU_RECEIVE:
+		return "MBN_SMS_CAPS_PDU_RECEIVE"
+	case MBN_SMS_CAPS_PDU_SEND:
+		return "MBN_SMS_CAPS_PDU_SEND"
+	case MBN_SMS_CAPS_TEXT_RECEIVE:
+		return "MBN_SMS_CAPS_TEXT_RECEIVE"
+	case MBN_SMS_CAPS_TEXT_SEND:
+		return "MBN_SMS_CAPS_TEXT_SEND"
+	default:
+		return fmt.Sprintf("MBN_SMS_CAPS(%d)", int32(e))
+	}
+}
 
 // MBN_SMS_CDMA_ENCODING: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_sms_cdma_encoding
 type MBN_SMS_CDMA_ENCODING int32
@@ -333,6 +871,35 @@ const (
 	MBN_SMS_CDMA_ENCODING_GSM_7BIT     MBN_SMS_CDMA_ENCODING = 9
 )
 
+// String returns the MBN_SMS_CDMA_ENCODING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_SMS_CDMA_ENCODING) String() string {
+	switch e {
+	case MBN_SMS_CDMA_ENCODING_OCTET:
+		return "MBN_SMS_CDMA_ENCODING_OCTET"
+	case MBN_SMS_CDMA_ENCODING_EPM:
+		return "MBN_SMS_CDMA_ENCODING_EPM"
+	case MBN_SMS_CDMA_ENCODING_7BIT_ASCII:
+		return "MBN_SMS_CDMA_ENCODING_7BIT_ASCII"
+	case MBN_SMS_CDMA_ENCODING_IA5:
+		return "MBN_SMS_CDMA_ENCODING_IA5"
+	case MBN_SMS_CDMA_ENCODING_UNICODE:
+		return "MBN_SMS_CDMA_ENCODING_UNICODE"
+	case MBN_SMS_CDMA_ENCODING_SHIFT_JIS:
+		return "MBN_SMS_CDMA_ENCODING_SHIFT_JIS"
+	case MBN_SMS_CDMA_ENCODING_KOREAN:
+		return "MBN_SMS_CDMA_ENCODING_KOREAN"
+	case MBN_SMS_CDMA_ENCODING_LATIN_HEBREW:
+		return "MBN_SMS_CDMA_ENCODING_LATIN_HEBREW"
+	case MBN_SMS_CDMA_ENCODING_LATIN:
+		return "MBN_SMS_CDMA_ENCODING_LATIN"
+	case MBN_SMS_CDMA_ENCODING_GSM_7BIT:
+		return "MBN_SMS_CDMA_ENCODING_GSM_7BIT"
+	default:
+		return fmt.Sprintf("MBN_SMS_CDMA_ENCODING(%d)", int32(e))
+	}
+}
+
 // MBN_SMS_CDMA_LANG: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_sms_cdma_lang
 type MBN_SMS_CDMA_LANG int32
 
@@ -347,6 +914,31 @@ const (
 	MBN_SMS_CDMA_LANG_HEBREW   MBN_SMS_CDMA_LANG = 7
 )
 
+// String returns the MBN_SMS_CDMA_LANG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_SMS_CDMA_LANG) String() string {
+	switch e {
+	case MBN_SMS_CDMA_LANG_NONE:
+		return "MBN_SMS_CDMA_LANG_NONE"
+	case MBN_SMS_CDMA_LANG_ENGLISH:
+		return "MBN_SMS_CDMA_LANG_ENGLISH"
+	case MBN_SMS_CDMA_LANG_FRENCH:
+		return "MBN_SMS_CDMA_LANG_FRENCH"
+	case MBN_SMS_CDMA_LANG_SPANISH:
+		return "MBN_SMS_CDMA_LANG_SPANISH"
+	case MBN_SMS_CDMA_LANG_JAPANESE:
+		return "MBN_SMS_CDMA_LANG_JAPANESE"
+	case MBN_SMS_CDMA_LANG_KOREAN:
+		return "MBN_SMS_CDMA_LANG_KOREAN"
+	case MBN_SMS_CDMA_LANG_CHINESE:
+		return "MBN_SMS_CDMA_LANG_CHINESE"
+	case MBN_SMS_CDMA_LANG_HEBREW:
+		return "MBN_SMS_CDMA_LANG_HEBREW"
+	default:
+		return fmt.Sprintf("MBN_SMS_CDMA_LANG(%d)", int32(e))
+	}
+}
+
 // MBN_SMS_FLAG: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_sms_flag
 type MBN_SMS_FLAG int32
 
@@ -359,6 +951,27 @@ const (
 	MBN_SMS_FLAG_DRAFT MBN_SMS_FLAG = 5
 )
 
+// String returns the MBN_SMS_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_SMS_FLAG) String() string {
+	switch e {
+	case MBN_SMS_FLAG_ALL:
+		return "MBN_SMS_FLAG_ALL"
+	case MBN_SMS_FLAG_INDEX:
+		return "MBN_SMS_FLAG_INDEX"
+	case MBN_SMS_FLAG_NEW:
+		return "MBN_SMS_FLAG_NEW"
+	case MBN_SMS_FLAG_OLD:
+		return "MBN_SMS_FLAG_OLD"
+	case MBN_SMS_FLAG_SENT:
+		return "MBN_SMS_FLAG_SENT"
+	case MBN_SMS_FLAG_DRAFT:
+		return "MBN_SMS_FLAG_DRAFT"
+	default:
+		return fmt.Sprintf("MBN_SMS_FLAG(%d)", int32(e))
+	}
+}
+
 // MBN_SMS_FORMAT: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_sms_format
 type MBN_SMS_FORMAT int32
 
@@ -367,6 +980,21 @@ const (
 	MBN_SMS_FORMAT_PDU  MBN_SMS_FORMAT = 1
 	MBN_SMS_FORMAT_TEXT MBN_SMS_FORMAT = 2
 )
+
+// String returns the MBN_SMS_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_SMS_FORMAT) String() string {
+	switch e {
+	case MBN_SMS_FORMAT_NONE:
+		return "MBN_SMS_FORMAT_NONE"
+	case MBN_SMS_FORMAT_PDU:
+		return "MBN_SMS_FORMAT_PDU"
+	case MBN_SMS_FORMAT_TEXT:
+		return "MBN_SMS_FORMAT_TEXT"
+	default:
+		return fmt.Sprintf("MBN_SMS_FORMAT(%d)", int32(e))
+	}
+}
 
 // MBN_SMS_STATUS_FLAG: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_sms_status_flag
 type MBN_SMS_STATUS_FLAG int32
@@ -377,6 +1005,21 @@ const (
 	MBN_SMS_FLAG_NEW_MESSAGE        MBN_SMS_STATUS_FLAG = 2
 )
 
+// String returns the MBN_SMS_STATUS_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_SMS_STATUS_FLAG) String() string {
+	switch e {
+	case MBN_SMS_FLAG_NONE:
+		return "MBN_SMS_FLAG_NONE"
+	case MBN_SMS_FLAG_MESSAGE_STORE_FULL:
+		return "MBN_SMS_FLAG_MESSAGE_STORE_FULL"
+	case MBN_SMS_FLAG_NEW_MESSAGE:
+		return "MBN_SMS_FLAG_NEW_MESSAGE"
+	default:
+		return fmt.Sprintf("MBN_SMS_STATUS_FLAG(%d)", int32(e))
+	}
+}
+
 // MBN_VOICE_CALL_STATE: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_voice_call_state
 type MBN_VOICE_CALL_STATE int32
 
@@ -385,6 +1028,21 @@ const (
 	MBN_VOICE_CALL_STATE_IN_PROGRESS MBN_VOICE_CALL_STATE = 1
 	MBN_VOICE_CALL_STATE_HANGUP      MBN_VOICE_CALL_STATE = 2
 )
+
+// String returns the MBN_VOICE_CALL_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_VOICE_CALL_STATE) String() string {
+	switch e {
+	case MBN_VOICE_CALL_STATE_NONE:
+		return "MBN_VOICE_CALL_STATE_NONE"
+	case MBN_VOICE_CALL_STATE_IN_PROGRESS:
+		return "MBN_VOICE_CALL_STATE_IN_PROGRESS"
+	case MBN_VOICE_CALL_STATE_HANGUP:
+		return "MBN_VOICE_CALL_STATE_HANGUP"
+	default:
+		return fmt.Sprintf("MBN_VOICE_CALL_STATE(%d)", int32(e))
+	}
+}
 
 // MBN_VOICE_CLASS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-mbn_voice_class
 type MBN_VOICE_CLASS int32
@@ -396,6 +1054,23 @@ const (
 	MBN_VOICE_CLASS_SIMULTANEOUS_VOICE_DATA MBN_VOICE_CLASS = 3
 )
 
+// String returns the MBN_VOICE_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MBN_VOICE_CLASS) String() string {
+	switch e {
+	case MBN_VOICE_CLASS_NONE:
+		return "MBN_VOICE_CLASS_NONE"
+	case MBN_VOICE_CLASS_NO_VOICE:
+		return "MBN_VOICE_CLASS_NO_VOICE"
+	case MBN_VOICE_CLASS_SEPARATE_VOICE_DATA:
+		return "MBN_VOICE_CLASS_SEPARATE_VOICE_DATA"
+	case MBN_VOICE_CLASS_SIMULTANEOUS_VOICE_DATA:
+		return "MBN_VOICE_CLASS_SIMULTANEOUS_VOICE_DATA"
+	default:
+		return fmt.Sprintf("MBN_VOICE_CLASS(%d)", int32(e))
+	}
+}
+
 // WWAEXT_SMS_CONSTANTS: https://learn.microsoft.com/windows/win32/api/mbnapi/ne-mbnapi-wwaext_sms_constants
 type WWAEXT_SMS_CONSTANTS int32
 
@@ -404,3 +1079,16 @@ const (
 	MBN_CDMA_SHORT_MSG_SIZE_UNKNOWN WWAEXT_SMS_CONSTANTS = 0
 	MBN_CDMA_SHORT_MSG_SIZE_MAX     WWAEXT_SMS_CONSTANTS = 160
 )
+
+// String returns the WWAEXT_SMS_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WWAEXT_SMS_CONSTANTS) String() string {
+	switch e {
+	case MBN_MESSAGE_INDEX_NONE:
+		return "MBN_MESSAGE_INDEX_NONE"
+	case MBN_CDMA_SHORT_MSG_SIZE_MAX:
+		return "MBN_CDMA_SHORT_MSG_SIZE_MAX"
+	default:
+		return fmt.Sprintf("WWAEXT_SMS_CONSTANTS(%d)", int32(e))
+	}
+}

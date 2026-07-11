@@ -4,6 +4,11 @@
 
 package apo
 
+import (
+	"fmt"
+	"strings"
+)
+
 // APO_BUFFER_FLAGS: https://learn.microsoft.com/windows/win32/api/audioapotypes/ne-audioapotypes-apo_buffer_flags
 type APO_BUFFER_FLAGS int32
 
@@ -13,6 +18,21 @@ const (
 	BUFFER_SILENT  APO_BUFFER_FLAGS = 2
 )
 
+// String returns the APO_BUFFER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APO_BUFFER_FLAGS) String() string {
+	switch e {
+	case BUFFER_INVALID:
+		return "BUFFER_INVALID"
+	case BUFFER_VALID:
+		return "BUFFER_VALID"
+	case BUFFER_SILENT:
+		return "BUFFER_SILENT"
+	default:
+		return fmt.Sprintf("APO_BUFFER_FLAGS(%d)", int32(e))
+	}
+}
+
 type APO_CONNECTION_BUFFER_TYPE int32
 
 const (
@@ -20,6 +40,21 @@ const (
 	APO_CONNECTION_BUFFER_TYPE_EXTERNAL  APO_CONNECTION_BUFFER_TYPE = 1
 	APO_CONNECTION_BUFFER_TYPE_DEPENDANT APO_CONNECTION_BUFFER_TYPE = 2
 )
+
+// String returns the APO_CONNECTION_BUFFER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APO_CONNECTION_BUFFER_TYPE) String() string {
+	switch e {
+	case APO_CONNECTION_BUFFER_TYPE_ALLOCATED:
+		return "APO_CONNECTION_BUFFER_TYPE_ALLOCATED"
+	case APO_CONNECTION_BUFFER_TYPE_EXTERNAL:
+		return "APO_CONNECTION_BUFFER_TYPE_EXTERNAL"
+	case APO_CONNECTION_BUFFER_TYPE_DEPENDANT:
+		return "APO_CONNECTION_BUFFER_TYPE_DEPENDANT"
+	default:
+		return fmt.Sprintf("APO_CONNECTION_BUFFER_TYPE(%d)", int32(e))
+	}
+}
 
 // APO_FLAG: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/ne-audioenginebaseapo-apo_flag
 type APO_FLAG int32
@@ -34,6 +69,29 @@ const (
 	APO_FLAG_DEFAULT                    APO_FLAG = 14
 )
 
+// String returns the APO_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APO_FLAG) String() string {
+	switch e {
+	case APO_FLAG_NONE:
+		return "APO_FLAG_NONE"
+	case APO_FLAG_INPLACE:
+		return "APO_FLAG_INPLACE"
+	case APO_FLAG_SAMPLESPERFRAME_MUST_MATCH:
+		return "APO_FLAG_SAMPLESPERFRAME_MUST_MATCH"
+	case APO_FLAG_FRAMESPERSECOND_MUST_MATCH:
+		return "APO_FLAG_FRAMESPERSECOND_MUST_MATCH"
+	case APO_FLAG_BITSPERSAMPLE_MUST_MATCH:
+		return "APO_FLAG_BITSPERSAMPLE_MUST_MATCH"
+	case APO_FLAG_MIXER:
+		return "APO_FLAG_MIXER"
+	case APO_FLAG_DEFAULT:
+		return "APO_FLAG_DEFAULT"
+	default:
+		return fmt.Sprintf("APO_FLAG(%d)", int32(e))
+	}
+}
+
 // APO_LOG_LEVEL: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ne-audioengineextensionapo-apo_log_level
 type APO_LOG_LEVEL int32
 
@@ -45,6 +103,27 @@ const (
 	APO_LOG_LEVEL_INFO     APO_LOG_LEVEL = 4
 	APO_LOG_LEVEL_VERBOSE  APO_LOG_LEVEL = 5
 )
+
+// String returns the APO_LOG_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APO_LOG_LEVEL) String() string {
+	switch e {
+	case APO_LOG_LEVEL_ALWAYS:
+		return "APO_LOG_LEVEL_ALWAYS"
+	case APO_LOG_LEVEL_CRITICAL:
+		return "APO_LOG_LEVEL_CRITICAL"
+	case APO_LOG_LEVEL_ERROR:
+		return "APO_LOG_LEVEL_ERROR"
+	case APO_LOG_LEVEL_WARNING:
+		return "APO_LOG_LEVEL_WARNING"
+	case APO_LOG_LEVEL_INFO:
+		return "APO_LOG_LEVEL_INFO"
+	case APO_LOG_LEVEL_VERBOSE:
+		return "APO_LOG_LEVEL_VERBOSE"
+	default:
+		return fmt.Sprintf("APO_LOG_LEVEL(%d)", int32(e))
+	}
+}
 
 // APO_NOTIFICATION_TYPE: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ne-audioengineextensionapo-apo_notification_type
 type APO_NOTIFICATION_TYPE int32
@@ -60,12 +139,51 @@ const (
 	APO_NOTIFICATION_TYPE_AUDIO_ENVIRONMENT_STATE_CHANGE APO_NOTIFICATION_TYPE = 7
 )
 
+// String returns the APO_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APO_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case APO_NOTIFICATION_TYPE_NONE:
+		return "APO_NOTIFICATION_TYPE_NONE"
+	case APO_NOTIFICATION_TYPE_ENDPOINT_VOLUME:
+		return "APO_NOTIFICATION_TYPE_ENDPOINT_VOLUME"
+	case APO_NOTIFICATION_TYPE_ENDPOINT_PROPERTY_CHANGE:
+		return "APO_NOTIFICATION_TYPE_ENDPOINT_PROPERTY_CHANGE"
+	case APO_NOTIFICATION_TYPE_SYSTEM_EFFECTS_PROPERTY_CHANGE:
+		return "APO_NOTIFICATION_TYPE_SYSTEM_EFFECTS_PROPERTY_CHANGE"
+	case APO_NOTIFICATION_TYPE_ENDPOINT_VOLUME2:
+		return "APO_NOTIFICATION_TYPE_ENDPOINT_VOLUME2"
+	case APO_NOTIFICATION_TYPE_DEVICE_ORIENTATION:
+		return "APO_NOTIFICATION_TYPE_DEVICE_ORIENTATION"
+	case APO_NOTIFICATION_TYPE_MICROPHONE_BOOST:
+		return "APO_NOTIFICATION_TYPE_MICROPHONE_BOOST"
+	case APO_NOTIFICATION_TYPE_AUDIO_ENVIRONMENT_STATE_CHANGE:
+		return "APO_NOTIFICATION_TYPE_AUDIO_ENVIRONMENT_STATE_CHANGE"
+	default:
+		return fmt.Sprintf("APO_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type APO_REFERENCE_STREAM_PROPERTIES int32
 
 const (
 	APO_REFERENCE_STREAM_PROPERTIES_NONE                 APO_REFERENCE_STREAM_PROPERTIES = 0
 	APO_REFERENCE_STREAM_PROPERTIES_POST_VOLUME_LOOPBACK APO_REFERENCE_STREAM_PROPERTIES = 1
 )
+
+// String returns the APO_REFERENCE_STREAM_PROPERTIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APO_REFERENCE_STREAM_PROPERTIES) String() string {
+	var parts []string
+	if e&APO_REFERENCE_STREAM_PROPERTIES_POST_VOLUME_LOOPBACK != 0 {
+		parts = append(parts, "APO_REFERENCE_STREAM_PROPERTIES_POST_VOLUME_LOOPBACK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type AUDIO_FLOW_TYPE int32
 
@@ -74,6 +192,19 @@ const (
 	AUDIO_FLOW_PUSH AUDIO_FLOW_TYPE = 1
 )
 
+// String returns the AUDIO_FLOW_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIO_FLOW_TYPE) String() string {
+	switch e {
+	case AUDIO_FLOW_PULL:
+		return "AUDIO_FLOW_PULL"
+	case AUDIO_FLOW_PUSH:
+		return "AUDIO_FLOW_PUSH"
+	default:
+		return fmt.Sprintf("AUDIO_FLOW_TYPE(%d)", int32(e))
+	}
+}
+
 // AUDIO_SYSTEMEFFECT_STATE: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ne-audioengineextensionapo-audio_systemeffect_state
 type AUDIO_SYSTEMEFFECT_STATE int32
 
@@ -81,6 +212,19 @@ const (
 	AUDIO_SYSTEMEFFECT_STATE_OFF AUDIO_SYSTEMEFFECT_STATE = 0
 	AUDIO_SYSTEMEFFECT_STATE_ON  AUDIO_SYSTEMEFFECT_STATE = 1
 )
+
+// String returns the AUDIO_SYSTEMEFFECT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIO_SYSTEMEFFECT_STATE) String() string {
+	switch e {
+	case AUDIO_SYSTEMEFFECT_STATE_OFF:
+		return "AUDIO_SYSTEMEFFECT_STATE_OFF"
+	case AUDIO_SYSTEMEFFECT_STATE_ON:
+		return "AUDIO_SYSTEMEFFECT_STATE_ON"
+	default:
+		return fmt.Sprintf("AUDIO_SYSTEMEFFECT_STATE(%d)", int32(e))
+	}
+}
 
 // DEVICE_ORIENTATION_TYPE: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/ne-audioengineextensionapo-device_orientation_type
 type DEVICE_ORIENTATION_TYPE int32
@@ -92,6 +236,23 @@ const (
 	DEVICE_ROTATED_270_DEGREES_CLOCKWISE DEVICE_ORIENTATION_TYPE = 3
 )
 
+// String returns the DEVICE_ORIENTATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVICE_ORIENTATION_TYPE) String() string {
+	switch e {
+	case DEVICE_NOT_ROTATED:
+		return "DEVICE_NOT_ROTATED"
+	case DEVICE_ROTATED_90_DEGREES_CLOCKWISE:
+		return "DEVICE_ROTATED_90_DEGREES_CLOCKWISE"
+	case DEVICE_ROTATED_180_DEGREES_CLOCKWISE:
+		return "DEVICE_ROTATED_180_DEGREES_CLOCKWISE"
+	case DEVICE_ROTATED_270_DEGREES_CLOCKWISE:
+		return "DEVICE_ROTATED_270_DEGREES_CLOCKWISE"
+	default:
+		return fmt.Sprintf("DEVICE_ORIENTATION_TYPE(%d)", int32(e))
+	}
+}
+
 type EAudioConstriction int32
 
 const (
@@ -101,3 +262,22 @@ const (
 	EAudioConstriction14_14 EAudioConstriction = 3
 	EAudioConstrictionMute  EAudioConstriction = 4
 )
+
+// String returns the EAudioConstriction constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EAudioConstriction) String() string {
+	switch e {
+	case EAudioConstrictionOff:
+		return "EAudioConstrictionOff"
+	case EAudioConstriction48_16:
+		return "EAudioConstriction48_16"
+	case EAudioConstriction44_16:
+		return "EAudioConstriction44_16"
+	case EAudioConstriction14_14:
+		return "EAudioConstriction14_14"
+	case EAudioConstrictionMute:
+		return "EAudioConstrictionMute"
+	default:
+		return fmt.Sprintf("EAudioConstriction(%d)", int32(e))
+	}
+}

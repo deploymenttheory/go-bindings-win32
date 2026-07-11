@@ -4,6 +4,10 @@
 
 package humaninterfacedevice
 
+import (
+	"fmt"
+)
+
 type GPIOBUTTONS_BUTTON_TYPE int32
 
 const (
@@ -27,12 +31,68 @@ const (
 	GPIO_BUTTON_COUNT          GPIOBUTTONS_BUTTON_TYPE = 16
 )
 
+// String returns the GPIOBUTTONS_BUTTON_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GPIOBUTTONS_BUTTON_TYPE) String() string {
+	switch e {
+	case GPIO_BUTTON_POWER:
+		return "GPIO_BUTTON_POWER"
+	case GPIO_BUTTON_WINDOWS:
+		return "GPIO_BUTTON_WINDOWS"
+	case GPIO_BUTTON_VOLUME_UP:
+		return "GPIO_BUTTON_VOLUME_UP"
+	case GPIO_BUTTON_VOLUME_DOWN:
+		return "GPIO_BUTTON_VOLUME_DOWN"
+	case GPIO_BUTTON_ROTATION_LOCK:
+		return "GPIO_BUTTON_ROTATION_LOCK"
+	case GPIO_BUTTON_BACK:
+		return "GPIO_BUTTON_BACK"
+	case GPIO_BUTTON_SEARCH:
+		return "GPIO_BUTTON_SEARCH"
+	case GPIO_BUTTON_CAMERA_FOCUS:
+		return "GPIO_BUTTON_CAMERA_FOCUS"
+	case GPIO_BUTTON_CAMERA_SHUTTER:
+		return "GPIO_BUTTON_CAMERA_SHUTTER"
+	case GPIO_BUTTON_RINGER_TOGGLE:
+		return "GPIO_BUTTON_RINGER_TOGGLE"
+	case GPIO_BUTTON_HEADSET:
+		return "GPIO_BUTTON_HEADSET"
+	case GPIO_BUTTON_HWKB_DEPLOY:
+		return "GPIO_BUTTON_HWKB_DEPLOY"
+	case GPIO_BUTTON_CAMERA_LENS:
+		return "GPIO_BUTTON_CAMERA_LENS"
+	case GPIO_BUTTON_OEM_CUSTOM:
+		return "GPIO_BUTTON_OEM_CUSTOM"
+	case GPIO_BUTTON_OEM_CUSTOM2:
+		return "GPIO_BUTTON_OEM_CUSTOM2"
+	case GPIO_BUTTON_OEM_CUSTOM3:
+		return "GPIO_BUTTON_OEM_CUSTOM3"
+	case GPIO_BUTTON_COUNT:
+		return "GPIO_BUTTON_COUNT"
+	default:
+		return fmt.Sprintf("GPIOBUTTONS_BUTTON_TYPE(%d)", int32(e))
+	}
+}
+
 type HIDP_KEYBOARD_DIRECTION int32
 
 const (
 	HidP_Keyboard_Break HIDP_KEYBOARD_DIRECTION = 0
 	HidP_Keyboard_Make  HIDP_KEYBOARD_DIRECTION = 1
 )
+
+// String returns the HIDP_KEYBOARD_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HIDP_KEYBOARD_DIRECTION) String() string {
+	switch e {
+	case HidP_Keyboard_Break:
+		return "HidP_Keyboard_Break"
+	case HidP_Keyboard_Make:
+		return "HidP_Keyboard_Make"
+	default:
+		return fmt.Sprintf("HIDP_KEYBOARD_DIRECTION(%d)", int32(e))
+	}
+}
 
 type HIDP_REPORT_TYPE int32
 
@@ -41,3 +101,18 @@ const (
 	HidP_Output  HIDP_REPORT_TYPE = 1
 	HidP_Feature HIDP_REPORT_TYPE = 2
 )
+
+// String returns the HIDP_REPORT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HIDP_REPORT_TYPE) String() string {
+	switch e {
+	case HidP_Input:
+		return "HidP_Input"
+	case HidP_Output:
+		return "HidP_Output"
+	case HidP_Feature:
+		return "HidP_Feature"
+	default:
+		return fmt.Sprintf("HIDP_REPORT_TYPE(%d)", int32(e))
+	}
+}

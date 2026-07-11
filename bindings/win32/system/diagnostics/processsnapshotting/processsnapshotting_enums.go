@@ -4,7 +4,13 @@
 
 package processsnapshotting
 
+import (
+	"fmt"
+	"strings"
+)
+
 // PSS_CAPTURE_FLAGS: https://learn.microsoft.com/windows/win32/api/processsnapshot/ne-processsnapshot-pss_capture_flags
+// Bitmask — values may be combined with |.
 type PSS_CAPTURE_FLAGS uint32
 
 const (
@@ -32,7 +38,81 @@ const (
 	PSS_CREATE_RELEASE_SECTION                   PSS_CAPTURE_FLAGS = 2147483648
 )
 
+// String returns the PSS_CAPTURE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSS_CAPTURE_FLAGS) String() string {
+	var parts []string
+	if e&PSS_CAPTURE_VA_CLONE != 0 {
+		parts = append(parts, "PSS_CAPTURE_VA_CLONE")
+	}
+	if e&PSS_CAPTURE_RESERVED_00000002 != 0 {
+		parts = append(parts, "PSS_CAPTURE_RESERVED_00000002")
+	}
+	if e&PSS_CAPTURE_HANDLES != 0 {
+		parts = append(parts, "PSS_CAPTURE_HANDLES")
+	}
+	if e&PSS_CAPTURE_HANDLE_NAME_INFORMATION != 0 {
+		parts = append(parts, "PSS_CAPTURE_HANDLE_NAME_INFORMATION")
+	}
+	if e&PSS_CAPTURE_HANDLE_BASIC_INFORMATION != 0 {
+		parts = append(parts, "PSS_CAPTURE_HANDLE_BASIC_INFORMATION")
+	}
+	if e&PSS_CAPTURE_HANDLE_TYPE_SPECIFIC_INFORMATION != 0 {
+		parts = append(parts, "PSS_CAPTURE_HANDLE_TYPE_SPECIFIC_INFORMATION")
+	}
+	if e&PSS_CAPTURE_HANDLE_TRACE != 0 {
+		parts = append(parts, "PSS_CAPTURE_HANDLE_TRACE")
+	}
+	if e&PSS_CAPTURE_THREADS != 0 {
+		parts = append(parts, "PSS_CAPTURE_THREADS")
+	}
+	if e&PSS_CAPTURE_THREAD_CONTEXT != 0 {
+		parts = append(parts, "PSS_CAPTURE_THREAD_CONTEXT")
+	}
+	if e&PSS_CAPTURE_THREAD_CONTEXT_EXTENDED != 0 {
+		parts = append(parts, "PSS_CAPTURE_THREAD_CONTEXT_EXTENDED")
+	}
+	if e&PSS_CAPTURE_RESERVED_00000400 != 0 {
+		parts = append(parts, "PSS_CAPTURE_RESERVED_00000400")
+	}
+	if e&PSS_CAPTURE_VA_SPACE != 0 {
+		parts = append(parts, "PSS_CAPTURE_VA_SPACE")
+	}
+	if e&PSS_CAPTURE_VA_SPACE_SECTION_INFORMATION != 0 {
+		parts = append(parts, "PSS_CAPTURE_VA_SPACE_SECTION_INFORMATION")
+	}
+	if e&PSS_CAPTURE_IPT_TRACE != 0 {
+		parts = append(parts, "PSS_CAPTURE_IPT_TRACE")
+	}
+	if e&PSS_CAPTURE_RESERVED_00004000 != 0 {
+		parts = append(parts, "PSS_CAPTURE_RESERVED_00004000")
+	}
+	if e&PSS_CREATE_BREAKAWAY_OPTIONAL != 0 {
+		parts = append(parts, "PSS_CREATE_BREAKAWAY_OPTIONAL")
+	}
+	if e&PSS_CREATE_BREAKAWAY != 0 {
+		parts = append(parts, "PSS_CREATE_BREAKAWAY")
+	}
+	if e&PSS_CREATE_FORCE_BREAKAWAY != 0 {
+		parts = append(parts, "PSS_CREATE_FORCE_BREAKAWAY")
+	}
+	if e&PSS_CREATE_USE_VM_ALLOCATIONS != 0 {
+		parts = append(parts, "PSS_CREATE_USE_VM_ALLOCATIONS")
+	}
+	if e&PSS_CREATE_MEASURE_PERFORMANCE != 0 {
+		parts = append(parts, "PSS_CREATE_MEASURE_PERFORMANCE")
+	}
+	if e&PSS_CREATE_RELEASE_SECTION != 0 {
+		parts = append(parts, "PSS_CREATE_RELEASE_SECTION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // PSS_DUPLICATE_FLAGS: https://learn.microsoft.com/windows/win32/api/processsnapshot/ne-processsnapshot-pss_duplicate_flags
+// Bitmask — values may be combined with |.
 type PSS_DUPLICATE_FLAGS int32
 
 const (
@@ -40,7 +120,21 @@ const (
 	PSS_DUPLICATE_CLOSE_SOURCE PSS_DUPLICATE_FLAGS = 1
 )
 
+// String returns the PSS_DUPLICATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSS_DUPLICATE_FLAGS) String() string {
+	var parts []string
+	if e&PSS_DUPLICATE_CLOSE_SOURCE != 0 {
+		parts = append(parts, "PSS_DUPLICATE_CLOSE_SOURCE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // PSS_HANDLE_FLAGS: https://learn.microsoft.com/windows/win32/api/processsnapshot/ne-processsnapshot-pss_handle_flags
+// Bitmask — values may be combined with |.
 type PSS_HANDLE_FLAGS int32
 
 const (
@@ -50,6 +144,28 @@ const (
 	PSS_HANDLE_HAVE_BASIC_INFORMATION         PSS_HANDLE_FLAGS = 4
 	PSS_HANDLE_HAVE_TYPE_SPECIFIC_INFORMATION PSS_HANDLE_FLAGS = 8
 )
+
+// String returns the PSS_HANDLE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSS_HANDLE_FLAGS) String() string {
+	var parts []string
+	if e&PSS_HANDLE_HAVE_TYPE != 0 {
+		parts = append(parts, "PSS_HANDLE_HAVE_TYPE")
+	}
+	if e&PSS_HANDLE_HAVE_NAME != 0 {
+		parts = append(parts, "PSS_HANDLE_HAVE_NAME")
+	}
+	if e&PSS_HANDLE_HAVE_BASIC_INFORMATION != 0 {
+		parts = append(parts, "PSS_HANDLE_HAVE_BASIC_INFORMATION")
+	}
+	if e&PSS_HANDLE_HAVE_TYPE_SPECIFIC_INFORMATION != 0 {
+		parts = append(parts, "PSS_HANDLE_HAVE_TYPE_SPECIFIC_INFORMATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // PSS_OBJECT_TYPE: https://learn.microsoft.com/windows/win32/api/processsnapshot/ne-processsnapshot-pss_object_type
 type PSS_OBJECT_TYPE int32
@@ -64,7 +180,31 @@ const (
 	PSS_OBJECT_TYPE_SEMAPHORE PSS_OBJECT_TYPE = 6
 )
 
+// String returns the PSS_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSS_OBJECT_TYPE) String() string {
+	switch e {
+	case PSS_OBJECT_TYPE_UNKNOWN:
+		return "PSS_OBJECT_TYPE_UNKNOWN"
+	case PSS_OBJECT_TYPE_PROCESS:
+		return "PSS_OBJECT_TYPE_PROCESS"
+	case PSS_OBJECT_TYPE_THREAD:
+		return "PSS_OBJECT_TYPE_THREAD"
+	case PSS_OBJECT_TYPE_MUTANT:
+		return "PSS_OBJECT_TYPE_MUTANT"
+	case PSS_OBJECT_TYPE_EVENT:
+		return "PSS_OBJECT_TYPE_EVENT"
+	case PSS_OBJECT_TYPE_SECTION:
+		return "PSS_OBJECT_TYPE_SECTION"
+	case PSS_OBJECT_TYPE_SEMAPHORE:
+		return "PSS_OBJECT_TYPE_SEMAPHORE"
+	default:
+		return fmt.Sprintf("PSS_OBJECT_TYPE(%d)", int32(e))
+	}
+}
+
 // PSS_PROCESS_FLAGS: https://learn.microsoft.com/windows/win32/api/processsnapshot/ne-processsnapshot-pss_process_flags
+// Bitmask — values may be combined with |.
 type PSS_PROCESS_FLAGS int32
 
 const (
@@ -75,6 +215,31 @@ const (
 	PSS_PROCESS_FLAGS_RESERVED_04 PSS_PROCESS_FLAGS = 8
 	PSS_PROCESS_FLAGS_FROZEN      PSS_PROCESS_FLAGS = 16
 )
+
+// String returns the PSS_PROCESS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSS_PROCESS_FLAGS) String() string {
+	var parts []string
+	if e&PSS_PROCESS_FLAGS_PROTECTED != 0 {
+		parts = append(parts, "PSS_PROCESS_FLAGS_PROTECTED")
+	}
+	if e&PSS_PROCESS_FLAGS_WOW64 != 0 {
+		parts = append(parts, "PSS_PROCESS_FLAGS_WOW64")
+	}
+	if e&PSS_PROCESS_FLAGS_RESERVED_03 != 0 {
+		parts = append(parts, "PSS_PROCESS_FLAGS_RESERVED_03")
+	}
+	if e&PSS_PROCESS_FLAGS_RESERVED_04 != 0 {
+		parts = append(parts, "PSS_PROCESS_FLAGS_RESERVED_04")
+	}
+	if e&PSS_PROCESS_FLAGS_FROZEN != 0 {
+		parts = append(parts, "PSS_PROCESS_FLAGS_FROZEN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // PSS_QUERY_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/processsnapshot/ne-processsnapshot-pss_query_information_class
 type PSS_QUERY_INFORMATION_CLASS int32
@@ -90,13 +255,52 @@ const (
 	PSS_QUERY_PERFORMANCE_COUNTERS        PSS_QUERY_INFORMATION_CLASS = 7
 )
 
+// String returns the PSS_QUERY_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSS_QUERY_INFORMATION_CLASS) String() string {
+	switch e {
+	case PSS_QUERY_PROCESS_INFORMATION:
+		return "PSS_QUERY_PROCESS_INFORMATION"
+	case PSS_QUERY_VA_CLONE_INFORMATION:
+		return "PSS_QUERY_VA_CLONE_INFORMATION"
+	case PSS_QUERY_AUXILIARY_PAGES_INFORMATION:
+		return "PSS_QUERY_AUXILIARY_PAGES_INFORMATION"
+	case PSS_QUERY_VA_SPACE_INFORMATION:
+		return "PSS_QUERY_VA_SPACE_INFORMATION"
+	case PSS_QUERY_HANDLE_INFORMATION:
+		return "PSS_QUERY_HANDLE_INFORMATION"
+	case PSS_QUERY_THREAD_INFORMATION:
+		return "PSS_QUERY_THREAD_INFORMATION"
+	case PSS_QUERY_HANDLE_TRACE_INFORMATION:
+		return "PSS_QUERY_HANDLE_TRACE_INFORMATION"
+	case PSS_QUERY_PERFORMANCE_COUNTERS:
+		return "PSS_QUERY_PERFORMANCE_COUNTERS"
+	default:
+		return fmt.Sprintf("PSS_QUERY_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
+
 // PSS_THREAD_FLAGS: https://learn.microsoft.com/windows/win32/api/processsnapshot/ne-processsnapshot-pss_thread_flags
+// Bitmask — values may be combined with |.
 type PSS_THREAD_FLAGS int32
 
 const (
 	PSS_THREAD_FLAGS_NONE       PSS_THREAD_FLAGS = 0
 	PSS_THREAD_FLAGS_TERMINATED PSS_THREAD_FLAGS = 1
 )
+
+// String returns the PSS_THREAD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSS_THREAD_FLAGS) String() string {
+	var parts []string
+	if e&PSS_THREAD_FLAGS_TERMINATED != 0 {
+		parts = append(parts, "PSS_THREAD_FLAGS_TERMINATED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // PSS_WALK_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/processsnapshot/ne-processsnapshot-pss_walk_information_class
 type PSS_WALK_INFORMATION_CLASS int32
@@ -108,3 +312,22 @@ const (
 	PSS_WALK_THREADS         PSS_WALK_INFORMATION_CLASS = 3
 	PSS_WALK_THREAD_NAME     PSS_WALK_INFORMATION_CLASS = 4
 )
+
+// String returns the PSS_WALK_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSS_WALK_INFORMATION_CLASS) String() string {
+	switch e {
+	case PSS_WALK_AUXILIARY_PAGES:
+		return "PSS_WALK_AUXILIARY_PAGES"
+	case PSS_WALK_VA_SPACE:
+		return "PSS_WALK_VA_SPACE"
+	case PSS_WALK_HANDLES:
+		return "PSS_WALK_HANDLES"
+	case PSS_WALK_THREADS:
+		return "PSS_WALK_THREADS"
+	case PSS_WALK_THREAD_NAME:
+		return "PSS_WALK_THREAD_NAME"
+	default:
+		return fmt.Sprintf("PSS_WALK_INFORMATION_CLASS(%d)", int32(e))
+	}
+}

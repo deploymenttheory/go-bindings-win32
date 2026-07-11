@@ -4,6 +4,11 @@
 
 package controls
 
+import (
+	"fmt"
+	"strings"
+)
+
 type AEROWIZARDPARTS int32
 
 const (
@@ -13,6 +18,25 @@ const (
 	AW_COMMANDAREA AEROWIZARDPARTS = 4
 	AW_BUTTON      AEROWIZARDPARTS = 5
 )
+
+// String returns the AEROWIZARDPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AEROWIZARDPARTS) String() string {
+	switch e {
+	case AW_TITLEBAR:
+		return "AW_TITLEBAR"
+	case AW_HEADERAREA:
+		return "AW_HEADERAREA"
+	case AW_CONTENTAREA:
+		return "AW_CONTENTAREA"
+	case AW_COMMANDAREA:
+		return "AW_COMMANDAREA"
+	case AW_BUTTON:
+		return "AW_BUTTON"
+	default:
+		return fmt.Sprintf("AEROWIZARDPARTS(%d)", int32(e))
+	}
+}
 
 type ARROWBTNSTATES int32
 
@@ -39,6 +63,55 @@ const (
 	ABS_RIGHTHOVER    ARROWBTNSTATES = 20
 )
 
+// String returns the ARROWBTNSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ARROWBTNSTATES) String() string {
+	switch e {
+	case ABS_UPNORMAL:
+		return "ABS_UPNORMAL"
+	case ABS_UPHOT:
+		return "ABS_UPHOT"
+	case ABS_UPPRESSED:
+		return "ABS_UPPRESSED"
+	case ABS_UPDISABLED:
+		return "ABS_UPDISABLED"
+	case ABS_DOWNNORMAL:
+		return "ABS_DOWNNORMAL"
+	case ABS_DOWNHOT:
+		return "ABS_DOWNHOT"
+	case ABS_DOWNPRESSED:
+		return "ABS_DOWNPRESSED"
+	case ABS_DOWNDISABLED:
+		return "ABS_DOWNDISABLED"
+	case ABS_LEFTNORMAL:
+		return "ABS_LEFTNORMAL"
+	case ABS_LEFTHOT:
+		return "ABS_LEFTHOT"
+	case ABS_LEFTPRESSED:
+		return "ABS_LEFTPRESSED"
+	case ABS_LEFTDISABLED:
+		return "ABS_LEFTDISABLED"
+	case ABS_RIGHTNORMAL:
+		return "ABS_RIGHTNORMAL"
+	case ABS_RIGHTHOT:
+		return "ABS_RIGHTHOT"
+	case ABS_RIGHTPRESSED:
+		return "ABS_RIGHTPRESSED"
+	case ABS_RIGHTDISABLED:
+		return "ABS_RIGHTDISABLED"
+	case ABS_UPHOVER:
+		return "ABS_UPHOVER"
+	case ABS_DOWNHOVER:
+		return "ABS_DOWNHOVER"
+	case ABS_LEFTHOVER:
+		return "ABS_LEFTHOVER"
+	case ABS_RIGHTHOVER:
+		return "ABS_RIGHTHOVER"
+	default:
+		return fmt.Sprintf("ARROWBTNSTATES(%d)", int32(e))
+	}
+}
+
 type BACKGROUNDSTATES int32
 
 const (
@@ -50,6 +123,27 @@ const (
 	EBS_ASSIST   BACKGROUNDSTATES = 6
 )
 
+// String returns the BACKGROUNDSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BACKGROUNDSTATES) String() string {
+	switch e {
+	case EBS_NORMAL:
+		return "EBS_NORMAL"
+	case EBS_HOT:
+		return "EBS_HOT"
+	case EBS_DISABLED:
+		return "EBS_DISABLED"
+	case EBS_FOCUSED:
+		return "EBS_FOCUSED"
+	case EBS_READONLY:
+		return "EBS_READONLY"
+	case EBS_ASSIST:
+		return "EBS_ASSIST"
+	default:
+		return fmt.Sprintf("BACKGROUNDSTATES(%d)", int32(e))
+	}
+}
+
 type BACKGROUNDWITHBORDERSTATES int32
 
 const (
@@ -59,12 +153,42 @@ const (
 	EBWBS_FOCUSED  BACKGROUNDWITHBORDERSTATES = 4
 )
 
+// String returns the BACKGROUNDWITHBORDERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BACKGROUNDWITHBORDERSTATES) String() string {
+	switch e {
+	case EBWBS_NORMAL:
+		return "EBWBS_NORMAL"
+	case EBWBS_HOT:
+		return "EBWBS_HOT"
+	case EBWBS_DISABLED:
+		return "EBWBS_DISABLED"
+	case EBWBS_FOCUSED:
+		return "EBWBS_FOCUSED"
+	default:
+		return fmt.Sprintf("BACKGROUNDWITHBORDERSTATES(%d)", int32(e))
+	}
+}
+
 type BALLOONSTATES int32
 
 const (
 	TTBS_NORMAL BALLOONSTATES = 1
 	TTBS_LINK   BALLOONSTATES = 2
 )
+
+// String returns the BALLOONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BALLOONSTATES) String() string {
+	switch e {
+	case TTBS_NORMAL:
+		return "TTBS_NORMAL"
+	case TTBS_LINK:
+		return "TTBS_LINK"
+	default:
+		return fmt.Sprintf("BALLOONSTATES(%d)", int32(e))
+	}
+}
 
 type BALLOONSTEMSTATES int32
 
@@ -77,12 +201,46 @@ const (
 	TTBSS_POINTINGDOWNLEFTWALL  BALLOONSTEMSTATES = 6
 )
 
+// String returns the BALLOONSTEMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BALLOONSTEMSTATES) String() string {
+	switch e {
+	case TTBSS_POINTINGUPLEFTWALL:
+		return "TTBSS_POINTINGUPLEFTWALL"
+	case TTBSS_POINTINGUPCENTERED:
+		return "TTBSS_POINTINGUPCENTERED"
+	case TTBSS_POINTINGUPRIGHTWALL:
+		return "TTBSS_POINTINGUPRIGHTWALL"
+	case TTBSS_POINTINGDOWNRIGHTWALL:
+		return "TTBSS_POINTINGDOWNRIGHTWALL"
+	case TTBSS_POINTINGDOWNCENTERED:
+		return "TTBSS_POINTINGDOWNCENTERED"
+	case TTBSS_POINTINGDOWNLEFTWALL:
+		return "TTBSS_POINTINGDOWNLEFTWALL"
+	default:
+		return fmt.Sprintf("BALLOONSTEMSTATES(%d)", int32(e))
+	}
+}
+
 type BARBACKGROUNDSTATES int32
 
 const (
 	MB_ACTIVE   BARBACKGROUNDSTATES = 1
 	MB_INACTIVE BARBACKGROUNDSTATES = 2
 )
+
+// String returns the BARBACKGROUNDSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BARBACKGROUNDSTATES) String() string {
+	switch e {
+	case MB_ACTIVE:
+		return "MB_ACTIVE"
+	case MB_INACTIVE:
+		return "MB_INACTIVE"
+	default:
+		return fmt.Sprintf("BARBACKGROUNDSTATES(%d)", int32(e))
+	}
+}
 
 type BARITEMSTATES int32
 
@@ -95,6 +253,27 @@ const (
 	MBI_DISABLEDPUSHED BARITEMSTATES = 6
 )
 
+// String returns the BARITEMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BARITEMSTATES) String() string {
+	switch e {
+	case MBI_NORMAL:
+		return "MBI_NORMAL"
+	case MBI_HOT:
+		return "MBI_HOT"
+	case MBI_PUSHED:
+		return "MBI_PUSHED"
+	case MBI_DISABLED:
+		return "MBI_DISABLED"
+	case MBI_DISABLEDHOT:
+		return "MBI_DISABLEDHOT"
+	case MBI_DISABLEDPUSHED:
+		return "MBI_DISABLEDPUSHED"
+	default:
+		return fmt.Sprintf("BARITEMSTATES(%d)", int32(e))
+	}
+}
+
 type BGTYPE int32
 
 const (
@@ -103,12 +282,40 @@ const (
 	BT_NONE       BGTYPE = 2
 )
 
+// String returns the BGTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BGTYPE) String() string {
+	switch e {
+	case BT_IMAGEFILE:
+		return "BT_IMAGEFILE"
+	case BT_BORDERFILL:
+		return "BT_BORDERFILL"
+	case BT_NONE:
+		return "BT_NONE"
+	default:
+		return fmt.Sprintf("BGTYPE(%d)", int32(e))
+	}
+}
+
 type BODYSTATES int32
 
 const (
 	FBS_NORMAL     BODYSTATES = 1
 	FBS_EMPHASIZED BODYSTATES = 2
 )
+
+// String returns the BODYSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BODYSTATES) String() string {
+	switch e {
+	case FBS_NORMAL:
+		return "FBS_NORMAL"
+	case FBS_EMPHASIZED:
+		return "FBS_EMPHASIZED"
+	default:
+		return fmt.Sprintf("BODYSTATES(%d)", int32(e))
+	}
+}
 
 type BORDERSTATES int32
 
@@ -119,6 +326,23 @@ const (
 	CBB_DISABLED BORDERSTATES = 4
 )
 
+// String returns the BORDERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BORDERSTATES) String() string {
+	switch e {
+	case CBB_NORMAL:
+		return "CBB_NORMAL"
+	case CBB_HOT:
+		return "CBB_HOT"
+	case CBB_FOCUSED:
+		return "CBB_FOCUSED"
+	case CBB_DISABLED:
+		return "CBB_DISABLED"
+	default:
+		return fmt.Sprintf("BORDERSTATES(%d)", int32(e))
+	}
+}
+
 type BORDERTYPE int32
 
 const (
@@ -126,6 +350,21 @@ const (
 	BT_ROUNDRECT BORDERTYPE = 1
 	BT_ELLIPSE   BORDERTYPE = 2
 )
+
+// String returns the BORDERTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BORDERTYPE) String() string {
+	switch e {
+	case BT_RECT:
+		return "BT_RECT"
+	case BT_ROUNDRECT:
+		return "BT_ROUNDRECT"
+	case BT_ELLIPSE:
+		return "BT_ELLIPSE"
+	default:
+		return fmt.Sprintf("BORDERTYPE(%d)", int32(e))
+	}
+}
 
 type BORDER_HSCROLLSTATES int32
 
@@ -136,6 +375,23 @@ const (
 	LBPSH_DISABLED BORDER_HSCROLLSTATES = 4
 )
 
+// String returns the BORDER_HSCROLLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BORDER_HSCROLLSTATES) String() string {
+	switch e {
+	case LBPSH_NORMAL:
+		return "LBPSH_NORMAL"
+	case LBPSH_FOCUSED:
+		return "LBPSH_FOCUSED"
+	case LBPSH_HOT:
+		return "LBPSH_HOT"
+	case LBPSH_DISABLED:
+		return "LBPSH_DISABLED"
+	default:
+		return fmt.Sprintf("BORDER_HSCROLLSTATES(%d)", int32(e))
+	}
+}
+
 type BORDER_HVSCROLLSTATES int32
 
 const (
@@ -144,6 +400,23 @@ const (
 	LBPSHV_HOT      BORDER_HVSCROLLSTATES = 3
 	LBPSHV_DISABLED BORDER_HVSCROLLSTATES = 4
 )
+
+// String returns the BORDER_HVSCROLLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BORDER_HVSCROLLSTATES) String() string {
+	switch e {
+	case LBPSHV_NORMAL:
+		return "LBPSHV_NORMAL"
+	case LBPSHV_FOCUSED:
+		return "LBPSHV_FOCUSED"
+	case LBPSHV_HOT:
+		return "LBPSHV_HOT"
+	case LBPSHV_DISABLED:
+		return "LBPSHV_DISABLED"
+	default:
+		return fmt.Sprintf("BORDER_HVSCROLLSTATES(%d)", int32(e))
+	}
+}
 
 type BORDER_NOSCROLLSTATES int32
 
@@ -154,6 +427,23 @@ const (
 	LBPSN_DISABLED BORDER_NOSCROLLSTATES = 4
 )
 
+// String returns the BORDER_NOSCROLLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BORDER_NOSCROLLSTATES) String() string {
+	switch e {
+	case LBPSN_NORMAL:
+		return "LBPSN_NORMAL"
+	case LBPSN_FOCUSED:
+		return "LBPSN_FOCUSED"
+	case LBPSN_HOT:
+		return "LBPSN_HOT"
+	case LBPSN_DISABLED:
+		return "LBPSN_DISABLED"
+	default:
+		return fmt.Sprintf("BORDER_NOSCROLLSTATES(%d)", int32(e))
+	}
+}
+
 type BORDER_VSCROLLSTATES int32
 
 const (
@@ -162,6 +452,23 @@ const (
 	LBPSV_HOT      BORDER_VSCROLLSTATES = 3
 	LBPSV_DISABLED BORDER_VSCROLLSTATES = 4
 )
+
+// String returns the BORDER_VSCROLLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BORDER_VSCROLLSTATES) String() string {
+	switch e {
+	case LBPSV_NORMAL:
+		return "LBPSV_NORMAL"
+	case LBPSV_FOCUSED:
+		return "LBPSV_FOCUSED"
+	case LBPSV_HOT:
+		return "LBPSV_HOT"
+	case LBPSV_DISABLED:
+		return "LBPSV_DISABLED"
+	default:
+		return fmt.Sprintf("BORDER_VSCROLLSTATES(%d)", int32(e))
+	}
+}
 
 // BP_ANIMATIONSTYLE: https://learn.microsoft.com/windows/win32/api/uxtheme/ne-uxtheme-bp_animationstyle
 type BP_ANIMATIONSTYLE int32
@@ -173,6 +480,23 @@ const (
 	BPAS_SINE   BP_ANIMATIONSTYLE = 3
 )
 
+// String returns the BP_ANIMATIONSTYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BP_ANIMATIONSTYLE) String() string {
+	switch e {
+	case BPAS_NONE:
+		return "BPAS_NONE"
+	case BPAS_LINEAR:
+		return "BPAS_LINEAR"
+	case BPAS_CUBIC:
+		return "BPAS_CUBIC"
+	case BPAS_SINE:
+		return "BPAS_SINE"
+	default:
+		return fmt.Sprintf("BP_ANIMATIONSTYLE(%d)", int32(e))
+	}
+}
+
 // BP_BUFFERFORMAT: https://learn.microsoft.com/windows/win32/api/uxtheme/ne-uxtheme-bp_bufferformat
 type BP_BUFFERFORMAT int32
 
@@ -183,6 +507,24 @@ const (
 	BPBF_TOPDOWNMONODIB   BP_BUFFERFORMAT = 3
 )
 
+// String returns the BP_BUFFERFORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BP_BUFFERFORMAT) String() string {
+	switch e {
+	case BPBF_COMPATIBLEBITMAP:
+		return "BPBF_COMPATIBLEBITMAP"
+	case BPBF_DIB:
+		return "BPBF_DIB"
+	case BPBF_TOPDOWNDIB:
+		return "BPBF_TOPDOWNDIB"
+	case BPBF_TOPDOWNMONODIB:
+		return "BPBF_TOPDOWNMONODIB"
+	default:
+		return fmt.Sprintf("BP_BUFFERFORMAT(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type BP_PAINTPARAMS_FLAGS uint32
 
 const (
@@ -190,6 +532,25 @@ const (
 	BPPF_NOCLIP    BP_PAINTPARAMS_FLAGS = 2
 	BPPF_NONCLIENT BP_PAINTPARAMS_FLAGS = 4
 )
+
+// String returns the BP_PAINTPARAMS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BP_PAINTPARAMS_FLAGS) String() string {
+	var parts []string
+	if e&BPPF_ERASE != 0 {
+		parts = append(parts, "BPPF_ERASE")
+	}
+	if e&BPPF_NOCLIP != 0 {
+		parts = append(parts, "BPPF_NOCLIP")
+	}
+	if e&BPPF_NONCLIENT != 0 {
+		parts = append(parts, "BPPF_NONCLIENT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type BUTTONPARTS int32
 
@@ -207,6 +568,37 @@ const (
 	BP_PUSHBUTTONDROPDOWN     BUTTONPARTS = 11
 )
 
+// String returns the BUTTONPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BUTTONPARTS) String() string {
+	switch e {
+	case BP_PUSHBUTTON:
+		return "BP_PUSHBUTTON"
+	case BP_RADIOBUTTON:
+		return "BP_RADIOBUTTON"
+	case BP_CHECKBOX:
+		return "BP_CHECKBOX"
+	case BP_GROUPBOX:
+		return "BP_GROUPBOX"
+	case BP_USERBUTTON:
+		return "BP_USERBUTTON"
+	case BP_COMMANDLINK:
+		return "BP_COMMANDLINK"
+	case BP_COMMANDLINKGLYPH:
+		return "BP_COMMANDLINKGLYPH"
+	case BP_RADIOBUTTON_HCDISABLED:
+		return "BP_RADIOBUTTON_HCDISABLED"
+	case BP_CHECKBOX_HCDISABLED:
+		return "BP_CHECKBOX_HCDISABLED"
+	case BP_GROUPBOX_HCDISABLED:
+		return "BP_GROUPBOX_HCDISABLED"
+	case BP_PUSHBUTTONDROPDOWN:
+		return "BP_PUSHBUTTONDROPDOWN"
+	default:
+		return fmt.Sprintf("BUTTONPARTS(%d)", int32(e))
+	}
+}
+
 type BUTTON_IMAGELIST_ALIGN uint32
 
 const (
@@ -217,6 +609,25 @@ const (
 	BUTTON_IMAGELIST_ALIGN_CENTER BUTTON_IMAGELIST_ALIGN = 4
 )
 
+// String returns the BUTTON_IMAGELIST_ALIGN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BUTTON_IMAGELIST_ALIGN) String() string {
+	switch e {
+	case BUTTON_IMAGELIST_ALIGN_LEFT:
+		return "BUTTON_IMAGELIST_ALIGN_LEFT"
+	case BUTTON_IMAGELIST_ALIGN_RIGHT:
+		return "BUTTON_IMAGELIST_ALIGN_RIGHT"
+	case BUTTON_IMAGELIST_ALIGN_TOP:
+		return "BUTTON_IMAGELIST_ALIGN_TOP"
+	case BUTTON_IMAGELIST_ALIGN_BOTTOM:
+		return "BUTTON_IMAGELIST_ALIGN_BOTTOM"
+	case BUTTON_IMAGELIST_ALIGN_CENTER:
+		return "BUTTON_IMAGELIST_ALIGN_CENTER"
+	default:
+		return fmt.Sprintf("BUTTON_IMAGELIST_ALIGN(%d)", uint32(e))
+	}
+}
+
 type CAPTIONSTATES int32
 
 const (
@@ -224,6 +635,21 @@ const (
 	CS_INACTIVE CAPTIONSTATES = 2
 	CS_DISABLED CAPTIONSTATES = 3
 )
+
+// String returns the CAPTIONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CAPTIONSTATES) String() string {
+	switch e {
+	case CS_ACTIVE:
+		return "CS_ACTIVE"
+	case CS_INACTIVE:
+		return "CS_INACTIVE"
+	case CS_DISABLED:
+		return "CS_DISABLED"
+	default:
+		return fmt.Sprintf("CAPTIONSTATES(%d)", int32(e))
+	}
+}
 
 type CHECKBOXSTATES int32
 
@@ -250,6 +676,55 @@ const (
 	CBS_EXCLUDEDDISABLED  CHECKBOXSTATES = 20
 )
 
+// String returns the CHECKBOXSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHECKBOXSTATES) String() string {
+	switch e {
+	case CBS_UNCHECKEDNORMAL:
+		return "CBS_UNCHECKEDNORMAL"
+	case CBS_UNCHECKEDHOT:
+		return "CBS_UNCHECKEDHOT"
+	case CBS_UNCHECKEDPRESSED:
+		return "CBS_UNCHECKEDPRESSED"
+	case CBS_UNCHECKEDDISABLED:
+		return "CBS_UNCHECKEDDISABLED"
+	case CBS_CHECKEDNORMAL:
+		return "CBS_CHECKEDNORMAL"
+	case CBS_CHECKEDHOT:
+		return "CBS_CHECKEDHOT"
+	case CBS_CHECKEDPRESSED:
+		return "CBS_CHECKEDPRESSED"
+	case CBS_CHECKEDDISABLED:
+		return "CBS_CHECKEDDISABLED"
+	case CBS_MIXEDNORMAL:
+		return "CBS_MIXEDNORMAL"
+	case CBS_MIXEDHOT:
+		return "CBS_MIXEDHOT"
+	case CBS_MIXEDPRESSED:
+		return "CBS_MIXEDPRESSED"
+	case CBS_MIXEDDISABLED:
+		return "CBS_MIXEDDISABLED"
+	case CBS_IMPLICITNORMAL:
+		return "CBS_IMPLICITNORMAL"
+	case CBS_IMPLICITHOT:
+		return "CBS_IMPLICITHOT"
+	case CBS_IMPLICITPRESSED:
+		return "CBS_IMPLICITPRESSED"
+	case CBS_IMPLICITDISABLED:
+		return "CBS_IMPLICITDISABLED"
+	case CBS_EXCLUDEDNORMAL:
+		return "CBS_EXCLUDEDNORMAL"
+	case CBS_EXCLUDEDHOT:
+		return "CBS_EXCLUDEDHOT"
+	case CBS_EXCLUDEDPRESSED:
+		return "CBS_EXCLUDEDPRESSED"
+	case CBS_EXCLUDEDDISABLED:
+		return "CBS_EXCLUDEDDISABLED"
+	default:
+		return fmt.Sprintf("CHECKBOXSTATES(%d)", int32(e))
+	}
+}
+
 type CHEVRONSTATES int32
 
 const (
@@ -257,6 +732,21 @@ const (
 	CHEVS_HOT     CHEVRONSTATES = 2
 	CHEVS_PRESSED CHEVRONSTATES = 3
 )
+
+// String returns the CHEVRONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHEVRONSTATES) String() string {
+	switch e {
+	case CHEVS_NORMAL:
+		return "CHEVS_NORMAL"
+	case CHEVS_HOT:
+		return "CHEVS_HOT"
+	case CHEVS_PRESSED:
+		return "CHEVS_PRESSED"
+	default:
+		return fmt.Sprintf("CHEVRONSTATES(%d)", int32(e))
+	}
+}
 
 type CHEVRONVERTSTATES int32
 
@@ -266,11 +756,37 @@ const (
 	CHEVSV_PRESSED CHEVRONVERTSTATES = 3
 )
 
+// String returns the CHEVRONVERTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHEVRONVERTSTATES) String() string {
+	switch e {
+	case CHEVSV_NORMAL:
+		return "CHEVSV_NORMAL"
+	case CHEVSV_HOT:
+		return "CHEVSV_HOT"
+	case CHEVSV_PRESSED:
+		return "CHEVSV_PRESSED"
+	default:
+		return fmt.Sprintf("CHEVRONVERTSTATES(%d)", int32(e))
+	}
+}
+
 type CLOCKPARTS int32
 
 const (
 	CLP_TIME CLOCKPARTS = 1
 )
+
+// String returns the CLOCKPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLOCKPARTS) String() string {
+	switch e {
+	case CLP_TIME:
+		return "CLP_TIME"
+	default:
+		return fmt.Sprintf("CLOCKPARTS(%d)", int32(e))
+	}
+}
 
 type CLOCKSTATES int32
 
@@ -279,6 +795,21 @@ const (
 	CLS_HOT     CLOCKSTATES = 2
 	CLS_PRESSED CLOCKSTATES = 3
 )
+
+// String returns the CLOCKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLOCKSTATES) String() string {
+	switch e {
+	case CLS_NORMAL:
+		return "CLS_NORMAL"
+	case CLS_HOT:
+		return "CLS_HOT"
+	case CLS_PRESSED:
+		return "CLS_PRESSED"
+	default:
+		return fmt.Sprintf("CLOCKSTATES(%d)", int32(e))
+	}
+}
 
 type CLOSEBUTTONSTATES int32
 
@@ -289,6 +820,23 @@ const (
 	CBS_DISABLED CLOSEBUTTONSTATES = 4
 )
 
+// String returns the CLOSEBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLOSEBUTTONSTATES) String() string {
+	switch e {
+	case CBS_NORMAL:
+		return "CBS_NORMAL"
+	case CBS_HOT:
+		return "CBS_HOT"
+	case CBS_PUSHED:
+		return "CBS_PUSHED"
+	case CBS_DISABLED:
+		return "CBS_DISABLED"
+	default:
+		return fmt.Sprintf("CLOSEBUTTONSTATES(%d)", int32(e))
+	}
+}
+
 type CLOSESTATES int32
 
 const (
@@ -297,6 +845,21 @@ const (
 	TTCS_PRESSED CLOSESTATES = 3
 )
 
+// String returns the CLOSESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLOSESTATES) String() string {
+	switch e {
+	case TTCS_NORMAL:
+		return "TTCS_NORMAL"
+	case TTCS_HOT:
+		return "TTCS_HOT"
+	case TTCS_PRESSED:
+		return "TTCS_PRESSED"
+	default:
+		return fmt.Sprintf("CLOSESTATES(%d)", int32(e))
+	}
+}
+
 type COLLAPSEBUTTONSTATES int32
 
 const (
@@ -304,6 +867,21 @@ const (
 	LVCB_HOVER  COLLAPSEBUTTONSTATES = 2
 	LVCB_PUSHED COLLAPSEBUTTONSTATES = 3
 )
+
+// String returns the COLLAPSEBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COLLAPSEBUTTONSTATES) String() string {
+	switch e {
+	case LVCB_NORMAL:
+		return "LVCB_NORMAL"
+	case LVCB_HOVER:
+		return "LVCB_HOVER"
+	case LVCB_PUSHED:
+		return "LVCB_PUSHED"
+	default:
+		return fmt.Sprintf("COLLAPSEBUTTONSTATES(%d)", int32(e))
+	}
+}
 
 type COMBOBOXINFO_BUTTON_STATE uint32
 
@@ -314,6 +892,25 @@ const (
 	STATE_SYSTEM_OFFSCREEN   COMBOBOXINFO_BUTTON_STATE = 65536
 	STATE_SYSTEM_UNAVAILABLE COMBOBOXINFO_BUTTON_STATE = 1
 )
+
+// String returns the COMBOBOXINFO_BUTTON_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMBOBOXINFO_BUTTON_STATE) String() string {
+	switch e {
+	case STATE_SYSTEM_INVISIBLE:
+		return "STATE_SYSTEM_INVISIBLE"
+	case STATE_SYSTEM_PRESSED:
+		return "STATE_SYSTEM_PRESSED"
+	case STATE_SYSTEM_FOCUSABLE:
+		return "STATE_SYSTEM_FOCUSABLE"
+	case STATE_SYSTEM_OFFSCREEN:
+		return "STATE_SYSTEM_OFFSCREEN"
+	case STATE_SYSTEM_UNAVAILABLE:
+		return "STATE_SYSTEM_UNAVAILABLE"
+	default:
+		return fmt.Sprintf("COMBOBOXINFO_BUTTON_STATE(%d)", uint32(e))
+	}
+}
 
 type COMBOBOXPARTS int32
 
@@ -329,6 +926,33 @@ const (
 	CP_DROPDOWNITEM          COMBOBOXPARTS = 9
 )
 
+// String returns the COMBOBOXPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMBOBOXPARTS) String() string {
+	switch e {
+	case CP_DROPDOWNBUTTON:
+		return "CP_DROPDOWNBUTTON"
+	case CP_BACKGROUND:
+		return "CP_BACKGROUND"
+	case CP_TRANSPARENTBACKGROUND:
+		return "CP_TRANSPARENTBACKGROUND"
+	case CP_BORDER:
+		return "CP_BORDER"
+	case CP_READONLY:
+		return "CP_READONLY"
+	case CP_DROPDOWNBUTTONRIGHT:
+		return "CP_DROPDOWNBUTTONRIGHT"
+	case CP_DROPDOWNBUTTONLEFT:
+		return "CP_DROPDOWNBUTTONLEFT"
+	case CP_CUEBANNER:
+		return "CP_CUEBANNER"
+	case CP_DROPDOWNITEM:
+		return "CP_DROPDOWNITEM"
+	default:
+		return fmt.Sprintf("COMBOBOXPARTS(%d)", int32(e))
+	}
+}
+
 type COMBOBOXSTYLESTATES int32
 
 const (
@@ -338,6 +962,24 @@ const (
 	CBXS_DISABLED COMBOBOXSTYLESTATES = 4
 )
 
+// String returns the COMBOBOXSTYLESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMBOBOXSTYLESTATES) String() string {
+	switch e {
+	case CBXS_NORMAL:
+		return "CBXS_NORMAL"
+	case CBXS_HOT:
+		return "CBXS_HOT"
+	case CBXS_PRESSED:
+		return "CBXS_PRESSED"
+	case CBXS_DISABLED:
+		return "CBXS_DISABLED"
+	default:
+		return fmt.Sprintf("COMBOBOXSTYLESTATES(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type COMBOBOX_EX_ITEM_FLAGS uint32
 
 const (
@@ -350,6 +992,37 @@ const (
 	CBEIF_TEXT          COMBOBOX_EX_ITEM_FLAGS = 1
 )
 
+// String returns the COMBOBOX_EX_ITEM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMBOBOX_EX_ITEM_FLAGS) String() string {
+	var parts []string
+	if e&CBEIF_DI_SETITEM != 0 {
+		parts = append(parts, "CBEIF_DI_SETITEM")
+	}
+	if e&CBEIF_IMAGE != 0 {
+		parts = append(parts, "CBEIF_IMAGE")
+	}
+	if e&CBEIF_INDENT != 0 {
+		parts = append(parts, "CBEIF_INDENT")
+	}
+	if e&CBEIF_LPARAM != 0 {
+		parts = append(parts, "CBEIF_LPARAM")
+	}
+	if e&CBEIF_OVERLAY != 0 {
+		parts = append(parts, "CBEIF_OVERLAY")
+	}
+	if e&CBEIF_SELECTEDIMAGE != 0 {
+		parts = append(parts, "CBEIF_SELECTEDIMAGE")
+	}
+	if e&CBEIF_TEXT != 0 {
+		parts = append(parts, "CBEIF_TEXT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type COMMANDLINKGLYPHSTATES int32
 
 const (
@@ -359,6 +1032,25 @@ const (
 	CMDLGS_DISABLED  COMMANDLINKGLYPHSTATES = 4
 	CMDLGS_DEFAULTED COMMANDLINKGLYPHSTATES = 5
 )
+
+// String returns the COMMANDLINKGLYPHSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMMANDLINKGLYPHSTATES) String() string {
+	switch e {
+	case CMDLGS_NORMAL:
+		return "CMDLGS_NORMAL"
+	case CMDLGS_HOT:
+		return "CMDLGS_HOT"
+	case CMDLGS_PRESSED:
+		return "CMDLGS_PRESSED"
+	case CMDLGS_DISABLED:
+		return "CMDLGS_DISABLED"
+	case CMDLGS_DEFAULTED:
+		return "CMDLGS_DEFAULTED"
+	default:
+		return fmt.Sprintf("COMMANDLINKGLYPHSTATES(%d)", int32(e))
+	}
+}
 
 type COMMANDLINKSTATES int32
 
@@ -371,11 +1063,43 @@ const (
 	CMDLS_DEFAULTED_ANIMATING COMMANDLINKSTATES = 6
 )
 
+// String returns the COMMANDLINKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMMANDLINKSTATES) String() string {
+	switch e {
+	case CMDLS_NORMAL:
+		return "CMDLS_NORMAL"
+	case CMDLS_HOT:
+		return "CMDLS_HOT"
+	case CMDLS_PRESSED:
+		return "CMDLS_PRESSED"
+	case CMDLS_DISABLED:
+		return "CMDLS_DISABLED"
+	case CMDLS_DEFAULTED:
+		return "CMDLS_DEFAULTED"
+	case CMDLS_DEFAULTED_ANIMATING:
+		return "CMDLS_DEFAULTED_ANIMATING"
+	default:
+		return fmt.Sprintf("COMMANDLINKSTATES(%d)", int32(e))
+	}
+}
+
 type COMMUNICATIONSPARTS int32
 
 const (
 	CSST_TAB COMMUNICATIONSPARTS = 1
 )
+
+// String returns the COMMUNICATIONSPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMMUNICATIONSPARTS) String() string {
+	switch e {
+	case CSST_TAB:
+		return "CSST_TAB"
+	default:
+		return fmt.Sprintf("COMMUNICATIONSPARTS(%d)", int32(e))
+	}
+}
 
 type CONTENTALIGNMENT int32
 
@@ -385,11 +1109,37 @@ const (
 	CA_RIGHT  CONTENTALIGNMENT = 2
 )
 
+// String returns the CONTENTALIGNMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONTENTALIGNMENT) String() string {
+	switch e {
+	case CA_LEFT:
+		return "CA_LEFT"
+	case CA_CENTER:
+		return "CA_CENTER"
+	case CA_RIGHT:
+		return "CA_RIGHT"
+	default:
+		return fmt.Sprintf("CONTENTALIGNMENT(%d)", int32(e))
+	}
+}
+
 type CONTENTAREASTATES int32
 
 const (
 	AW_S_CONTENTAREA_NOMARGIN CONTENTAREASTATES = 1
 )
+
+// String returns the CONTENTAREASTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONTENTAREASTATES) String() string {
+	switch e {
+	case AW_S_CONTENTAREA_NOMARGIN:
+		return "AW_S_CONTENTAREA_NOMARGIN"
+	default:
+		return fmt.Sprintf("CONTENTAREASTATES(%d)", int32(e))
+	}
+}
 
 type CONTENTLINKSTATES int32
 
@@ -400,11 +1150,39 @@ const (
 	CPCL_DISABLED CONTENTLINKSTATES = 4
 )
 
+// String returns the CONTENTLINKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONTENTLINKSTATES) String() string {
+	switch e {
+	case CPCL_NORMAL:
+		return "CPCL_NORMAL"
+	case CPCL_HOT:
+		return "CPCL_HOT"
+	case CPCL_PRESSED:
+		return "CPCL_PRESSED"
+	case CPCL_DISABLED:
+		return "CPCL_DISABLED"
+	default:
+		return fmt.Sprintf("CONTENTLINKSTATES(%d)", int32(e))
+	}
+}
+
 type CONTENTPANESTATES int32
 
 const (
 	TDLGCPS_STANDALONE CONTENTPANESTATES = 1
 )
+
+// String returns the CONTENTPANESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONTENTPANESTATES) String() string {
+	switch e {
+	case TDLGCPS_STANDALONE:
+		return "TDLGCPS_STANDALONE"
+	default:
+		return fmt.Sprintf("CONTENTPANESTATES(%d)", int32(e))
+	}
+}
 
 type CONTROLLABELSTATES int32
 
@@ -412,6 +1190,19 @@ const (
 	TS_CONTROLLABEL_NORMAL   CONTROLLABELSTATES = 1
 	TS_CONTROLLABEL_DISABLED CONTROLLABELSTATES = 2
 )
+
+// String returns the CONTROLLABELSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONTROLLABELSTATES) String() string {
+	switch e {
+	case TS_CONTROLLABEL_NORMAL:
+		return "TS_CONTROLLABEL_NORMAL"
+	case TS_CONTROLLABEL_DISABLED:
+		return "TS_CONTROLLABEL_DISABLED"
+	default:
+		return fmt.Sprintf("CONTROLLABELSTATES(%d)", int32(e))
+	}
+}
 
 type CONTROLPANELPARTS int32
 
@@ -437,6 +1228,53 @@ const (
 	CPANEL_BODYTITLE           CONTROLPANELPARTS = 19
 )
 
+// String returns the CONTROLPANELPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONTROLPANELPARTS) String() string {
+	switch e {
+	case CPANEL_NAVIGATIONPANE:
+		return "CPANEL_NAVIGATIONPANE"
+	case CPANEL_CONTENTPANE:
+		return "CPANEL_CONTENTPANE"
+	case CPANEL_NAVIGATIONPANELABEL:
+		return "CPANEL_NAVIGATIONPANELABEL"
+	case CPANEL_CONTENTPANELABEL:
+		return "CPANEL_CONTENTPANELABEL"
+	case CPANEL_TITLE:
+		return "CPANEL_TITLE"
+	case CPANEL_BODYTEXT:
+		return "CPANEL_BODYTEXT"
+	case CPANEL_HELPLINK:
+		return "CPANEL_HELPLINK"
+	case CPANEL_TASKLINK:
+		return "CPANEL_TASKLINK"
+	case CPANEL_GROUPTEXT:
+		return "CPANEL_GROUPTEXT"
+	case CPANEL_CONTENTLINK:
+		return "CPANEL_CONTENTLINK"
+	case CPANEL_SECTIONTITLELINK:
+		return "CPANEL_SECTIONTITLELINK"
+	case CPANEL_LARGECOMMANDAREA:
+		return "CPANEL_LARGECOMMANDAREA"
+	case CPANEL_SMALLCOMMANDAREA:
+		return "CPANEL_SMALLCOMMANDAREA"
+	case CPANEL_BUTTON:
+		return "CPANEL_BUTTON"
+	case CPANEL_MESSAGETEXT:
+		return "CPANEL_MESSAGETEXT"
+	case CPANEL_NAVIGATIONPANELINE:
+		return "CPANEL_NAVIGATIONPANELINE"
+	case CPANEL_CONTENTPANELINE:
+		return "CPANEL_CONTENTPANELINE"
+	case CPANEL_BANNERAREA:
+		return "CPANEL_BANNERAREA"
+	case CPANEL_BODYTITLE:
+		return "CPANEL_BODYTITLE"
+	default:
+		return fmt.Sprintf("CONTROLPANELPARTS(%d)", int32(e))
+	}
+}
+
 type COPYSTATES int32
 
 const (
@@ -444,12 +1282,38 @@ const (
 	DDCOPY_NOHIGHLIGHT COPYSTATES = 2
 )
 
+// String returns the COPYSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPYSTATES) String() string {
+	switch e {
+	case DDCOPY_HIGHLIGHT:
+		return "DDCOPY_HIGHLIGHT"
+	case DDCOPY_NOHIGHLIGHT:
+		return "DDCOPY_NOHIGHLIGHT"
+	default:
+		return fmt.Sprintf("COPYSTATES(%d)", int32(e))
+	}
+}
+
 type CREATELINKSTATES int32
 
 const (
 	DDCREATELINK_HIGHLIGHT   CREATELINKSTATES = 1
 	DDCREATELINK_NOHIGHLIGHT CREATELINKSTATES = 2
 )
+
+// String returns the CREATELINKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATELINKSTATES) String() string {
+	switch e {
+	case DDCREATELINK_HIGHLIGHT:
+		return "DDCREATELINK_HIGHLIGHT"
+	case DDCREATELINK_NOHIGHLIGHT:
+		return "DDCREATELINK_NOHIGHLIGHT"
+	default:
+		return fmt.Sprintf("CREATELINKSTATES(%d)", int32(e))
+	}
+}
 
 type CUEBANNERSTATES int32
 
@@ -460,6 +1324,23 @@ const (
 	CBCB_DISABLED CUEBANNERSTATES = 4
 )
 
+// String returns the CUEBANNERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CUEBANNERSTATES) String() string {
+	switch e {
+	case CBCB_NORMAL:
+		return "CBCB_NORMAL"
+	case CBCB_HOT:
+		return "CBCB_HOT"
+	case CBCB_PRESSED:
+		return "CBCB_PRESSED"
+	case CBCB_DISABLED:
+		return "CBCB_DISABLED"
+	default:
+		return fmt.Sprintf("CUEBANNERSTATES(%d)", int32(e))
+	}
+}
+
 type DATEBORDERSTATES int32
 
 const (
@@ -469,6 +1350,23 @@ const (
 	DPDB_DISABLED DATEBORDERSTATES = 4
 )
 
+// String returns the DATEBORDERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DATEBORDERSTATES) String() string {
+	switch e {
+	case DPDB_NORMAL:
+		return "DPDB_NORMAL"
+	case DPDB_HOT:
+		return "DPDB_HOT"
+	case DPDB_FOCUSED:
+		return "DPDB_FOCUSED"
+	case DPDB_DISABLED:
+		return "DPDB_DISABLED"
+	default:
+		return fmt.Sprintf("DATEBORDERSTATES(%d)", int32(e))
+	}
+}
+
 type DATEPICKERPARTS int32
 
 const (
@@ -476,6 +1374,21 @@ const (
 	DP_DATEBORDER              DATEPICKERPARTS = 2
 	DP_SHOWCALENDARBUTTONRIGHT DATEPICKERPARTS = 3
 )
+
+// String returns the DATEPICKERPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DATEPICKERPARTS) String() string {
+	switch e {
+	case DP_DATETEXT:
+		return "DP_DATETEXT"
+	case DP_DATEBORDER:
+		return "DP_DATEBORDER"
+	case DP_SHOWCALENDARBUTTONRIGHT:
+		return "DP_SHOWCALENDARBUTTONRIGHT"
+	default:
+		return fmt.Sprintf("DATEPICKERPARTS(%d)", int32(e))
+	}
+}
 
 type DATETEXTSTATES int32
 
@@ -485,6 +1398,21 @@ const (
 	DPDT_SELECTED DATETEXTSTATES = 3
 )
 
+// String returns the DATETEXTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DATETEXTSTATES) String() string {
+	switch e {
+	case DPDT_NORMAL:
+		return "DPDT_NORMAL"
+	case DPDT_DISABLED:
+		return "DPDT_DISABLED"
+	case DPDT_SELECTED:
+		return "DPDT_SELECTED"
+	default:
+		return fmt.Sprintf("DATETEXTSTATES(%d)", int32(e))
+	}
+}
+
 type DLG_BUTTON_CHECK_STATE uint32
 
 const (
@@ -493,6 +1421,22 @@ const (
 	BST_UNCHECKED     DLG_BUTTON_CHECK_STATE = 0
 )
 
+// String returns the DLG_BUTTON_CHECK_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DLG_BUTTON_CHECK_STATE) String() string {
+	switch e {
+	case BST_CHECKED:
+		return "BST_CHECKED"
+	case BST_INDETERMINATE:
+		return "BST_INDETERMINATE"
+	case BST_UNCHECKED:
+		return "BST_UNCHECKED"
+	default:
+		return fmt.Sprintf("DLG_BUTTON_CHECK_STATE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DLG_DIR_LIST_FILE_TYPE uint32
 
 const (
@@ -507,6 +1451,40 @@ const (
 	DDL_POSTMSGS  DLG_DIR_LIST_FILE_TYPE = 8192
 )
 
+// String returns the DLG_DIR_LIST_FILE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DLG_DIR_LIST_FILE_TYPE) String() string {
+	var parts []string
+	if e&DDL_ARCHIVE != 0 {
+		parts = append(parts, "DDL_ARCHIVE")
+	}
+	if e&DDL_DIRECTORY != 0 {
+		parts = append(parts, "DDL_DIRECTORY")
+	}
+	if e&DDL_DRIVES != 0 {
+		parts = append(parts, "DDL_DRIVES")
+	}
+	if e&DDL_EXCLUSIVE != 0 {
+		parts = append(parts, "DDL_EXCLUSIVE")
+	}
+	if e&DDL_HIDDEN != 0 {
+		parts = append(parts, "DDL_HIDDEN")
+	}
+	if e&DDL_READONLY != 0 {
+		parts = append(parts, "DDL_READONLY")
+	}
+	if e&DDL_SYSTEM != 0 {
+		parts = append(parts, "DDL_SYSTEM")
+	}
+	if e&DDL_POSTMSGS != 0 {
+		parts = append(parts, "DDL_POSTMSGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type DOWNHORZSTATES int32
 
 const (
@@ -515,6 +1493,23 @@ const (
 	DNHZS_PRESSED  DOWNHORZSTATES = 3
 	DNHZS_DISABLED DOWNHORZSTATES = 4
 )
+
+// String returns the DOWNHORZSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOWNHORZSTATES) String() string {
+	switch e {
+	case DNHZS_NORMAL:
+		return "DNHZS_NORMAL"
+	case DNHZS_HOT:
+		return "DNHZS_HOT"
+	case DNHZS_PRESSED:
+		return "DNHZS_PRESSED"
+	case DNHZS_DISABLED:
+		return "DNHZS_DISABLED"
+	default:
+		return fmt.Sprintf("DOWNHORZSTATES(%d)", int32(e))
+	}
+}
 
 type DOWNSTATES int32
 
@@ -525,6 +1520,23 @@ const (
 	DNS_DISABLED DOWNSTATES = 4
 )
 
+// String returns the DOWNSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOWNSTATES) String() string {
+	switch e {
+	case DNS_NORMAL:
+		return "DNS_NORMAL"
+	case DNS_HOT:
+		return "DNS_HOT"
+	case DNS_PRESSED:
+		return "DNS_PRESSED"
+	case DNS_DISABLED:
+		return "DNS_DISABLED"
+	default:
+		return fmt.Sprintf("DOWNSTATES(%d)", int32(e))
+	}
+}
+
 type DPAMM_MESSAGE uint32
 
 const (
@@ -532,6 +1544,21 @@ const (
 	DPAMM_DELETE DPAMM_MESSAGE = 2
 	DPAMM_INSERT DPAMM_MESSAGE = 3
 )
+
+// String returns the DPAMM_MESSAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DPAMM_MESSAGE) String() string {
+	switch e {
+	case DPAMM_MERGE:
+		return "DPAMM_MERGE"
+	case DPAMM_DELETE:
+		return "DPAMM_DELETE"
+	case DPAMM_INSERT:
+		return "DPAMM_INSERT"
+	default:
+		return fmt.Sprintf("DPAMM_MESSAGE(%d)", uint32(e))
+	}
+}
 
 type DRAGDROPPARTS int32
 
@@ -546,6 +1573,31 @@ const (
 	DD_TEXTBG         DRAGDROPPARTS = 8
 )
 
+// String returns the DRAGDROPPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRAGDROPPARTS) String() string {
+	switch e {
+	case DD_COPY:
+		return "DD_COPY"
+	case DD_MOVE:
+		return "DD_MOVE"
+	case DD_UPDATEMETADATA:
+		return "DD_UPDATEMETADATA"
+	case DD_CREATELINK:
+		return "DD_CREATELINK"
+	case DD_WARNING:
+		return "DD_WARNING"
+	case DD_NONE:
+		return "DD_NONE"
+	case DD_IMAGEBG:
+		return "DD_IMAGEBG"
+	case DD_TEXTBG:
+		return "DD_TEXTBG"
+	default:
+		return fmt.Sprintf("DRAGDROPPARTS(%d)", int32(e))
+	}
+}
+
 type DRAGLISTINFO_NOTIFICATION_FLAGS uint32
 
 const (
@@ -554,6 +1606,23 @@ const (
 	DL_DRAGGING   DRAGLISTINFO_NOTIFICATION_FLAGS = 1158
 	DL_DROPPED    DRAGLISTINFO_NOTIFICATION_FLAGS = 1159
 )
+
+// String returns the DRAGLISTINFO_NOTIFICATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRAGLISTINFO_NOTIFICATION_FLAGS) String() string {
+	switch e {
+	case DL_BEGINDRAG:
+		return "DL_BEGINDRAG"
+	case DL_CANCELDRAG:
+		return "DL_CANCELDRAG"
+	case DL_DRAGGING:
+		return "DL_DRAGGING"
+	case DL_DROPPED:
+		return "DL_DROPPED"
+	default:
+		return fmt.Sprintf("DRAGLISTINFO_NOTIFICATION_FLAGS(%d)", uint32(e))
+	}
+}
 
 type DRAWITEMSTRUCT_CTL_TYPE uint32
 
@@ -567,6 +1636,30 @@ const (
 	ODT_TAB      DRAWITEMSTRUCT_CTL_TYPE = 101
 )
 
+// String returns the DRAWITEMSTRUCT_CTL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRAWITEMSTRUCT_CTL_TYPE) String() string {
+	switch e {
+	case ODT_BUTTON:
+		return "ODT_BUTTON"
+	case ODT_COMBOBOX:
+		return "ODT_COMBOBOX"
+	case ODT_LISTBOX:
+		return "ODT_LISTBOX"
+	case ODT_LISTVIEW:
+		return "ODT_LISTVIEW"
+	case ODT_MENU:
+		return "ODT_MENU"
+	case ODT_STATIC:
+		return "ODT_STATIC"
+	case ODT_TAB:
+		return "ODT_TAB"
+	default:
+		return fmt.Sprintf("DRAWITEMSTRUCT_CTL_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DRAW_THEME_PARENT_BACKGROUND_FLAGS uint32
 
 const (
@@ -574,6 +1667,25 @@ const (
 	DTPB_USECTLCOLORSTATIC DRAW_THEME_PARENT_BACKGROUND_FLAGS = 2
 	DTPB_USEERASEBKGND     DRAW_THEME_PARENT_BACKGROUND_FLAGS = 4
 )
+
+// String returns the DRAW_THEME_PARENT_BACKGROUND_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DRAW_THEME_PARENT_BACKGROUND_FLAGS) String() string {
+	var parts []string
+	if e&DTPB_WINDOWDC != 0 {
+		parts = append(parts, "DTPB_WINDOWDC")
+	}
+	if e&DTPB_USECTLCOLORSTATIC != 0 {
+		parts = append(parts, "DTPB_USECTLCOLORSTATIC")
+	}
+	if e&DTPB_USEERASEBKGND != 0 {
+		parts = append(parts, "DTPB_USEERASEBKGND")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type DROPDOWNBUTTONLEFTSTATES int32
 
@@ -584,6 +1696,23 @@ const (
 	CBXSL_DISABLED DROPDOWNBUTTONLEFTSTATES = 4
 )
 
+// String returns the DROPDOWNBUTTONLEFTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DROPDOWNBUTTONLEFTSTATES) String() string {
+	switch e {
+	case CBXSL_NORMAL:
+		return "CBXSL_NORMAL"
+	case CBXSL_HOT:
+		return "CBXSL_HOT"
+	case CBXSL_PRESSED:
+		return "CBXSL_PRESSED"
+	case CBXSL_DISABLED:
+		return "CBXSL_DISABLED"
+	default:
+		return fmt.Sprintf("DROPDOWNBUTTONLEFTSTATES(%d)", int32(e))
+	}
+}
+
 type DROPDOWNBUTTONRIGHTSTATES int32
 
 const (
@@ -593,6 +1722,23 @@ const (
 	CBXSR_DISABLED DROPDOWNBUTTONRIGHTSTATES = 4
 )
 
+// String returns the DROPDOWNBUTTONRIGHTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DROPDOWNBUTTONRIGHTSTATES) String() string {
+	switch e {
+	case CBXSR_NORMAL:
+		return "CBXSR_NORMAL"
+	case CBXSR_HOT:
+		return "CBXSR_HOT"
+	case CBXSR_PRESSED:
+		return "CBXSR_PRESSED"
+	case CBXSR_DISABLED:
+		return "CBXSR_DISABLED"
+	default:
+		return fmt.Sprintf("DROPDOWNBUTTONRIGHTSTATES(%d)", int32(e))
+	}
+}
+
 type DROPDOWNITEMSTATES int32
 
 const (
@@ -600,6 +1746,20 @@ const (
 	CBDI_HIGHLIGHTED DROPDOWNITEMSTATES = 2
 )
 
+// String returns the DROPDOWNITEMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DROPDOWNITEMSTATES) String() string {
+	switch e {
+	case CBDI_NORMAL:
+		return "CBDI_NORMAL"
+	case CBDI_HIGHLIGHTED:
+		return "CBDI_HIGHLIGHTED"
+	default:
+		return fmt.Sprintf("DROPDOWNITEMSTATES(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DTTOPTS_FLAGS uint32
 
 const (
@@ -620,6 +1780,61 @@ const (
 	DTT_VALIDBITS    DTTOPTS_FLAGS = 12287
 )
 
+// String returns the DTTOPTS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DTTOPTS_FLAGS) String() string {
+	var parts []string
+	if e&DTT_TEXTCOLOR != 0 {
+		parts = append(parts, "DTT_TEXTCOLOR")
+	}
+	if e&DTT_BORDERCOLOR != 0 {
+		parts = append(parts, "DTT_BORDERCOLOR")
+	}
+	if e&DTT_SHADOWCOLOR != 0 {
+		parts = append(parts, "DTT_SHADOWCOLOR")
+	}
+	if e&DTT_SHADOWTYPE != 0 {
+		parts = append(parts, "DTT_SHADOWTYPE")
+	}
+	if e&DTT_SHADOWOFFSET != 0 {
+		parts = append(parts, "DTT_SHADOWOFFSET")
+	}
+	if e&DTT_BORDERSIZE != 0 {
+		parts = append(parts, "DTT_BORDERSIZE")
+	}
+	if e&DTT_FONTPROP != 0 {
+		parts = append(parts, "DTT_FONTPROP")
+	}
+	if e&DTT_COLORPROP != 0 {
+		parts = append(parts, "DTT_COLORPROP")
+	}
+	if e&DTT_STATEID != 0 {
+		parts = append(parts, "DTT_STATEID")
+	}
+	if e&DTT_CALCRECT != 0 {
+		parts = append(parts, "DTT_CALCRECT")
+	}
+	if e&DTT_APPLYOVERLAY != 0 {
+		parts = append(parts, "DTT_APPLYOVERLAY")
+	}
+	if e&DTT_GLOWSIZE != 0 {
+		parts = append(parts, "DTT_GLOWSIZE")
+	}
+	if e&DTT_CALLBACK != 0 {
+		parts = append(parts, "DTT_CALLBACK")
+	}
+	if e&DTT_COMPOSITED != 0 {
+		parts = append(parts, "DTT_COMPOSITED")
+	}
+	if e&DTT_VALIDBITS != 0 {
+		parts = append(parts, "DTT_VALIDBITS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // EC_ENDOFLINE: https://learn.microsoft.com/windows/win32/api/commctrl/ne-commctrl-ec_endofline
 type EC_ENDOFLINE int32
 
@@ -630,6 +1845,23 @@ const (
 	EC_ENDOFLINE_LF                EC_ENDOFLINE = 3
 )
 
+// String returns the EC_ENDOFLINE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_ENDOFLINE) String() string {
+	switch e {
+	case EC_ENDOFLINE_DETECTFROMCONTENT:
+		return "EC_ENDOFLINE_DETECTFROMCONTENT"
+	case EC_ENDOFLINE_CRLF:
+		return "EC_ENDOFLINE_CRLF"
+	case EC_ENDOFLINE_CR:
+		return "EC_ENDOFLINE_CR"
+	case EC_ENDOFLINE_LF:
+		return "EC_ENDOFLINE_LF"
+	default:
+		return fmt.Sprintf("EC_ENDOFLINE(%d)", int32(e))
+	}
+}
+
 // EC_SEARCHWEB_ENTRYPOINT: https://learn.microsoft.com/windows/win32/api/commctrl/ne-commctrl-ec_searchweb_entrypoint
 type EC_SEARCHWEB_ENTRYPOINT int32
 
@@ -637,6 +1869,19 @@ const (
 	EC_SEARCHWEB_ENTRYPOINT_EXTERNAL    EC_SEARCHWEB_ENTRYPOINT = 0
 	EC_SEARCHWEB_ENTRYPOINT_CONTEXTMENU EC_SEARCHWEB_ENTRYPOINT = 1
 )
+
+// String returns the EC_SEARCHWEB_ENTRYPOINT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EC_SEARCHWEB_ENTRYPOINT) String() string {
+	switch e {
+	case EC_SEARCHWEB_ENTRYPOINT_EXTERNAL:
+		return "EC_SEARCHWEB_ENTRYPOINT_EXTERNAL"
+	case EC_SEARCHWEB_ENTRYPOINT_CONTEXTMENU:
+		return "EC_SEARCHWEB_ENTRYPOINT_CONTEXTMENU"
+	default:
+		return fmt.Sprintf("EC_SEARCHWEB_ENTRYPOINT(%d)", int32(e))
+	}
+}
 
 type EDITBALLOONTIP_ICON int32
 
@@ -650,6 +1895,29 @@ const (
 	TTI_ERROR_LARGE   EDITBALLOONTIP_ICON = 6
 )
 
+// String returns the EDITBALLOONTIP_ICON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDITBALLOONTIP_ICON) String() string {
+	switch e {
+	case TTI_ERROR:
+		return "TTI_ERROR"
+	case TTI_INFO:
+		return "TTI_INFO"
+	case TTI_NONE:
+		return "TTI_NONE"
+	case TTI_WARNING:
+		return "TTI_WARNING"
+	case TTI_INFO_LARGE:
+		return "TTI_INFO_LARGE"
+	case TTI_WARNING_LARGE:
+		return "TTI_WARNING_LARGE"
+	case TTI_ERROR_LARGE:
+		return "TTI_ERROR_LARGE"
+	default:
+		return fmt.Sprintf("EDITBALLOONTIP_ICON(%d)", int32(e))
+	}
+}
+
 type EDITBORDER_HSCROLLSTATES int32
 
 const (
@@ -658,6 +1926,23 @@ const (
 	EPSH_FOCUSED  EDITBORDER_HSCROLLSTATES = 3
 	EPSH_DISABLED EDITBORDER_HSCROLLSTATES = 4
 )
+
+// String returns the EDITBORDER_HSCROLLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDITBORDER_HSCROLLSTATES) String() string {
+	switch e {
+	case EPSH_NORMAL:
+		return "EPSH_NORMAL"
+	case EPSH_HOT:
+		return "EPSH_HOT"
+	case EPSH_FOCUSED:
+		return "EPSH_FOCUSED"
+	case EPSH_DISABLED:
+		return "EPSH_DISABLED"
+	default:
+		return fmt.Sprintf("EDITBORDER_HSCROLLSTATES(%d)", int32(e))
+	}
+}
 
 type EDITBORDER_HVSCROLLSTATES int32
 
@@ -668,6 +1953,23 @@ const (
 	EPSHV_DISABLED EDITBORDER_HVSCROLLSTATES = 4
 )
 
+// String returns the EDITBORDER_HVSCROLLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDITBORDER_HVSCROLLSTATES) String() string {
+	switch e {
+	case EPSHV_NORMAL:
+		return "EPSHV_NORMAL"
+	case EPSHV_HOT:
+		return "EPSHV_HOT"
+	case EPSHV_FOCUSED:
+		return "EPSHV_FOCUSED"
+	case EPSHV_DISABLED:
+		return "EPSHV_DISABLED"
+	default:
+		return fmt.Sprintf("EDITBORDER_HVSCROLLSTATES(%d)", int32(e))
+	}
+}
+
 type EDITBORDER_NOSCROLLSTATES int32
 
 const (
@@ -677,6 +1979,23 @@ const (
 	EPSN_DISABLED EDITBORDER_NOSCROLLSTATES = 4
 )
 
+// String returns the EDITBORDER_NOSCROLLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDITBORDER_NOSCROLLSTATES) String() string {
+	switch e {
+	case EPSN_NORMAL:
+		return "EPSN_NORMAL"
+	case EPSN_HOT:
+		return "EPSN_HOT"
+	case EPSN_FOCUSED:
+		return "EPSN_FOCUSED"
+	case EPSN_DISABLED:
+		return "EPSN_DISABLED"
+	default:
+		return fmt.Sprintf("EDITBORDER_NOSCROLLSTATES(%d)", int32(e))
+	}
+}
+
 type EDITBORDER_VSCROLLSTATES int32
 
 const (
@@ -685,6 +2004,23 @@ const (
 	EPSV_FOCUSED  EDITBORDER_VSCROLLSTATES = 3
 	EPSV_DISABLED EDITBORDER_VSCROLLSTATES = 4
 )
+
+// String returns the EDITBORDER_VSCROLLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDITBORDER_VSCROLLSTATES) String() string {
+	switch e {
+	case EPSV_NORMAL:
+		return "EPSV_NORMAL"
+	case EPSV_HOT:
+		return "EPSV_HOT"
+	case EPSV_FOCUSED:
+		return "EPSV_FOCUSED"
+	case EPSV_DISABLED:
+		return "EPSV_DISABLED"
+	default:
+		return fmt.Sprintf("EDITBORDER_VSCROLLSTATES(%d)", int32(e))
+	}
+}
 
 type EDITPARTS int32
 
@@ -700,6 +2036,33 @@ const (
 	EP_EDITBORDER_HVSCROLL  EDITPARTS = 9
 )
 
+// String returns the EDITPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDITPARTS) String() string {
+	switch e {
+	case EP_EDITTEXT:
+		return "EP_EDITTEXT"
+	case EP_CARET:
+		return "EP_CARET"
+	case EP_BACKGROUND:
+		return "EP_BACKGROUND"
+	case EP_PASSWORD:
+		return "EP_PASSWORD"
+	case EP_BACKGROUNDWITHBORDER:
+		return "EP_BACKGROUNDWITHBORDER"
+	case EP_EDITBORDER_NOSCROLL:
+		return "EP_EDITBORDER_NOSCROLL"
+	case EP_EDITBORDER_HSCROLL:
+		return "EP_EDITBORDER_HSCROLL"
+	case EP_EDITBORDER_VSCROLL:
+		return "EP_EDITBORDER_VSCROLL"
+	case EP_EDITBORDER_HVSCROLL:
+		return "EP_EDITBORDER_HVSCROLL"
+	default:
+		return fmt.Sprintf("EDITPARTS(%d)", int32(e))
+	}
+}
+
 type EDITTEXTSTATES int32
 
 const (
@@ -713,11 +2076,47 @@ const (
 	ETS_CUEBANNER EDITTEXTSTATES = 8
 )
 
+// String returns the EDITTEXTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDITTEXTSTATES) String() string {
+	switch e {
+	case ETS_NORMAL:
+		return "ETS_NORMAL"
+	case ETS_HOT:
+		return "ETS_HOT"
+	case ETS_SELECTED:
+		return "ETS_SELECTED"
+	case ETS_DISABLED:
+		return "ETS_DISABLED"
+	case ETS_FOCUSED:
+		return "ETS_FOCUSED"
+	case ETS_READONLY:
+		return "ETS_READONLY"
+	case ETS_ASSIST:
+		return "ETS_ASSIST"
+	case ETS_CUEBANNER:
+		return "ETS_CUEBANNER"
+	default:
+		return fmt.Sprintf("EDITTEXTSTATES(%d)", int32(e))
+	}
+}
+
 type EMPTYMARKUPPARTS int32
 
 const (
 	EMP_MARKUPTEXT EMPTYMARKUPPARTS = 1
 )
+
+// String returns the EMPTYMARKUPPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EMPTYMARKUPPARTS) String() string {
+	switch e {
+	case EMP_MARKUPTEXT:
+		return "EMP_MARKUPTEXT"
+	default:
+		return fmt.Sprintf("EMPTYMARKUPPARTS(%d)", int32(e))
+	}
+}
 
 type ENABLE_SCROLL_BAR_ARROWS uint32
 
@@ -732,6 +2131,23 @@ const (
 	ESB_ENABLE_BOTH   ENABLE_SCROLL_BAR_ARROWS = 0
 )
 
+// String returns the ENABLE_SCROLL_BAR_ARROWS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENABLE_SCROLL_BAR_ARROWS) String() string {
+	switch e {
+	case ESB_DISABLE_BOTH:
+		return "ESB_DISABLE_BOTH"
+	case ESB_DISABLE_DOWN:
+		return "ESB_DISABLE_DOWN"
+	case ESB_DISABLE_LEFT:
+		return "ESB_DISABLE_LEFT"
+	case ESB_ENABLE_BOTH:
+		return "ESB_ENABLE_BOTH"
+	default:
+		return fmt.Sprintf("ENABLE_SCROLL_BAR_ARROWS(%d)", uint32(e))
+	}
+}
+
 type EXPANDBUTTONSTATES int32
 
 const (
@@ -739,6 +2155,21 @@ const (
 	LVEB_HOVER  EXPANDBUTTONSTATES = 2
 	LVEB_PUSHED EXPANDBUTTONSTATES = 3
 )
+
+// String returns the EXPANDBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPANDBUTTONSTATES) String() string {
+	switch e {
+	case LVEB_NORMAL:
+		return "LVEB_NORMAL"
+	case LVEB_HOVER:
+		return "LVEB_HOVER"
+	case LVEB_PUSHED:
+		return "LVEB_PUSHED"
+	default:
+		return fmt.Sprintf("EXPANDBUTTONSTATES(%d)", int32(e))
+	}
+}
 
 type EXPANDOBUTTONSTATES int32
 
@@ -752,6 +2183,31 @@ const (
 	TDLGEBS_NORMALDISABLED   EXPANDOBUTTONSTATES = 7
 	TDLGEBS_EXPANDEDDISABLED EXPANDOBUTTONSTATES = 8
 )
+
+// String returns the EXPANDOBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPANDOBUTTONSTATES) String() string {
+	switch e {
+	case TDLGEBS_NORMAL:
+		return "TDLGEBS_NORMAL"
+	case TDLGEBS_HOVER:
+		return "TDLGEBS_HOVER"
+	case TDLGEBS_PRESSED:
+		return "TDLGEBS_PRESSED"
+	case TDLGEBS_EXPANDEDNORMAL:
+		return "TDLGEBS_EXPANDEDNORMAL"
+	case TDLGEBS_EXPANDEDHOVER:
+		return "TDLGEBS_EXPANDEDHOVER"
+	case TDLGEBS_EXPANDEDPRESSED:
+		return "TDLGEBS_EXPANDEDPRESSED"
+	case TDLGEBS_NORMALDISABLED:
+		return "TDLGEBS_NORMALDISABLED"
+	case TDLGEBS_EXPANDEDDISABLED:
+		return "TDLGEBS_EXPANDEDDISABLED"
+	default:
+		return fmt.Sprintf("EXPANDOBUTTONSTATES(%d)", int32(e))
+	}
+}
 
 type EXPLORERBARPARTS int32
 
@@ -769,6 +2225,39 @@ const (
 	EBP_SPECIALGROUPEXPAND     EXPLORERBARPARTS = 11
 	EBP_SPECIALGROUPHEAD       EXPLORERBARPARTS = 12
 )
+
+// String returns the EXPLORERBARPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EXPLORERBARPARTS) String() string {
+	switch e {
+	case EBP_HEADERBACKGROUND:
+		return "EBP_HEADERBACKGROUND"
+	case EBP_HEADERCLOSE:
+		return "EBP_HEADERCLOSE"
+	case EBP_HEADERPIN:
+		return "EBP_HEADERPIN"
+	case EBP_IEBARMENU:
+		return "EBP_IEBARMENU"
+	case EBP_NORMALGROUPBACKGROUND:
+		return "EBP_NORMALGROUPBACKGROUND"
+	case EBP_NORMALGROUPCOLLAPSE:
+		return "EBP_NORMALGROUPCOLLAPSE"
+	case EBP_NORMALGROUPEXPAND:
+		return "EBP_NORMALGROUPEXPAND"
+	case EBP_NORMALGROUPHEAD:
+		return "EBP_NORMALGROUPHEAD"
+	case EBP_SPECIALGROUPBACKGROUND:
+		return "EBP_SPECIALGROUPBACKGROUND"
+	case EBP_SPECIALGROUPCOLLAPSE:
+		return "EBP_SPECIALGROUPCOLLAPSE"
+	case EBP_SPECIALGROUPEXPAND:
+		return "EBP_SPECIALGROUPEXPAND"
+	case EBP_SPECIALGROUPHEAD:
+		return "EBP_SPECIALGROUPHEAD"
+	default:
+		return fmt.Sprintf("EXPLORERBARPARTS(%d)", int32(e))
+	}
+}
 
 // FEEDBACK_TYPE: https://learn.microsoft.com/windows/win32/api/winuser/ne-winuser-feedback_type
 type FEEDBACK_TYPE int32
@@ -788,6 +2277,39 @@ const (
 	FEEDBACK_MAX                        FEEDBACK_TYPE = -1
 )
 
+// String returns the FEEDBACK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FEEDBACK_TYPE) String() string {
+	switch e {
+	case FEEDBACK_TOUCH_CONTACTVISUALIZATION:
+		return "FEEDBACK_TOUCH_CONTACTVISUALIZATION"
+	case FEEDBACK_PEN_BARRELVISUALIZATION:
+		return "FEEDBACK_PEN_BARRELVISUALIZATION"
+	case FEEDBACK_PEN_TAP:
+		return "FEEDBACK_PEN_TAP"
+	case FEEDBACK_PEN_DOUBLETAP:
+		return "FEEDBACK_PEN_DOUBLETAP"
+	case FEEDBACK_PEN_PRESSANDHOLD:
+		return "FEEDBACK_PEN_PRESSANDHOLD"
+	case FEEDBACK_PEN_RIGHTTAP:
+		return "FEEDBACK_PEN_RIGHTTAP"
+	case FEEDBACK_TOUCH_TAP:
+		return "FEEDBACK_TOUCH_TAP"
+	case FEEDBACK_TOUCH_DOUBLETAP:
+		return "FEEDBACK_TOUCH_DOUBLETAP"
+	case FEEDBACK_TOUCH_PRESSANDHOLD:
+		return "FEEDBACK_TOUCH_PRESSANDHOLD"
+	case FEEDBACK_TOUCH_RIGHTTAP:
+		return "FEEDBACK_TOUCH_RIGHTTAP"
+	case FEEDBACK_GESTURE_PRESSANDTAP:
+		return "FEEDBACK_GESTURE_PRESSANDTAP"
+	case FEEDBACK_MAX:
+		return "FEEDBACK_MAX"
+	default:
+		return fmt.Sprintf("FEEDBACK_TYPE(%d)", int32(e))
+	}
+}
+
 type FILLSTATES int32
 
 const (
@@ -796,6 +2318,23 @@ const (
 	PBFS_PAUSED  FILLSTATES = 3
 	PBFS_PARTIAL FILLSTATES = 4
 )
+
+// String returns the FILLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILLSTATES) String() string {
+	switch e {
+	case PBFS_NORMAL:
+		return "PBFS_NORMAL"
+	case PBFS_ERROR:
+		return "PBFS_ERROR"
+	case PBFS_PAUSED:
+		return "PBFS_PAUSED"
+	case PBFS_PARTIAL:
+		return "PBFS_PARTIAL"
+	default:
+		return fmt.Sprintf("FILLSTATES(%d)", int32(e))
+	}
+}
 
 type FILLTYPE int32
 
@@ -807,6 +2346,25 @@ const (
 	FT_TILEIMAGE      FILLTYPE = 4
 )
 
+// String returns the FILLTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILLTYPE) String() string {
+	switch e {
+	case FT_SOLID:
+		return "FT_SOLID"
+	case FT_VERTGRADIENT:
+		return "FT_VERTGRADIENT"
+	case FT_HORZGRADIENT:
+		return "FT_HORZGRADIENT"
+	case FT_RADIALGRADIENT:
+		return "FT_RADIALGRADIENT"
+	case FT_TILEIMAGE:
+		return "FT_TILEIMAGE"
+	default:
+		return fmt.Sprintf("FILLTYPE(%d)", int32(e))
+	}
+}
+
 type FILLVERTSTATES int32
 
 const (
@@ -815,6 +2373,23 @@ const (
 	PBFVS_PAUSED  FILLVERTSTATES = 3
 	PBFVS_PARTIAL FILLVERTSTATES = 4
 )
+
+// String returns the FILLVERTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILLVERTSTATES) String() string {
+	switch e {
+	case PBFVS_NORMAL:
+		return "PBFVS_NORMAL"
+	case PBFVS_ERROR:
+		return "PBFVS_ERROR"
+	case PBFVS_PAUSED:
+		return "PBFVS_PAUSED"
+	case PBFVS_PARTIAL:
+		return "PBFVS_PARTIAL"
+	default:
+		return fmt.Sprintf("FILLVERTSTATES(%d)", int32(e))
+	}
+}
 
 type FLYOUTPARTS int32
 
@@ -829,12 +2404,50 @@ const (
 	FLYOUT_LINKHEADER FLYOUTPARTS = 8
 )
 
+// String returns the FLYOUTPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FLYOUTPARTS) String() string {
+	switch e {
+	case FLYOUT_HEADER:
+		return "FLYOUT_HEADER"
+	case FLYOUT_BODY:
+		return "FLYOUT_BODY"
+	case FLYOUT_LABEL:
+		return "FLYOUT_LABEL"
+	case FLYOUT_LINK:
+		return "FLYOUT_LINK"
+	case FLYOUT_DIVIDER:
+		return "FLYOUT_DIVIDER"
+	case FLYOUT_WINDOW:
+		return "FLYOUT_WINDOW"
+	case FLYOUT_LINKAREA:
+		return "FLYOUT_LINKAREA"
+	case FLYOUT_LINKHEADER:
+		return "FLYOUT_LINKHEADER"
+	default:
+		return fmt.Sprintf("FLYOUTPARTS(%d)", int32(e))
+	}
+}
+
 type FRAMEBOTTOMSTATES int32
 
 const (
 	FRB_ACTIVE   FRAMEBOTTOMSTATES = 1
 	FRB_INACTIVE FRAMEBOTTOMSTATES = 2
 )
+
+// String returns the FRAMEBOTTOMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FRAMEBOTTOMSTATES) String() string {
+	switch e {
+	case FRB_ACTIVE:
+		return "FRB_ACTIVE"
+	case FRB_INACTIVE:
+		return "FRB_INACTIVE"
+	default:
+		return fmt.Sprintf("FRAMEBOTTOMSTATES(%d)", int32(e))
+	}
+}
 
 type FRAMELEFTSTATES int32
 
@@ -843,6 +2456,19 @@ const (
 	FRL_INACTIVE FRAMELEFTSTATES = 2
 )
 
+// String returns the FRAMELEFTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FRAMELEFTSTATES) String() string {
+	switch e {
+	case FRL_ACTIVE:
+		return "FRL_ACTIVE"
+	case FRL_INACTIVE:
+		return "FRL_INACTIVE"
+	default:
+		return fmt.Sprintf("FRAMELEFTSTATES(%d)", int32(e))
+	}
+}
+
 type FRAMERIGHTSTATES int32
 
 const (
@@ -850,12 +2476,38 @@ const (
 	FRR_INACTIVE FRAMERIGHTSTATES = 2
 )
 
+// String returns the FRAMERIGHTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FRAMERIGHTSTATES) String() string {
+	switch e {
+	case FRR_ACTIVE:
+		return "FRR_ACTIVE"
+	case FRR_INACTIVE:
+		return "FRR_INACTIVE"
+	default:
+		return fmt.Sprintf("FRAMERIGHTSTATES(%d)", int32(e))
+	}
+}
+
 type FRAMESTATES int32
 
 const (
 	FS_ACTIVE   FRAMESTATES = 1
 	FS_INACTIVE FRAMESTATES = 2
 )
+
+// String returns the FRAMESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FRAMESTATES) String() string {
+	switch e {
+	case FS_ACTIVE:
+		return "FS_ACTIVE"
+	case FS_INACTIVE:
+		return "FS_INACTIVE"
+	default:
+		return fmt.Sprintf("FRAMESTATES(%d)", int32(e))
+	}
+}
 
 type GET_THEME_BITMAP_FLAGS uint32
 
@@ -865,6 +2517,21 @@ const (
 	GBF_VALIDBITS GET_THEME_BITMAP_FLAGS = 3
 )
 
+// String returns the GET_THEME_BITMAP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_THEME_BITMAP_FLAGS) String() string {
+	switch e {
+	case GBF_DIRECT:
+		return "GBF_DIRECT"
+	case GBF_COPY:
+		return "GBF_COPY"
+	case GBF_VALIDBITS:
+		return "GBF_VALIDBITS"
+	default:
+		return fmt.Sprintf("GET_THEME_BITMAP_FLAGS(%d)", uint32(e))
+	}
+}
+
 type GLYPHFONTSIZINGTYPE int32
 
 const (
@@ -873,12 +2540,40 @@ const (
 	GFST_DPI  GLYPHFONTSIZINGTYPE = 2
 )
 
+// String returns the GLYPHFONTSIZINGTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GLYPHFONTSIZINGTYPE) String() string {
+	switch e {
+	case GFST_NONE:
+		return "GFST_NONE"
+	case GFST_SIZE:
+		return "GFST_SIZE"
+	case GFST_DPI:
+		return "GFST_DPI"
+	default:
+		return fmt.Sprintf("GLYPHFONTSIZINGTYPE(%d)", int32(e))
+	}
+}
+
 type GLYPHSTATES int32
 
 const (
 	GLPS_CLOSED GLYPHSTATES = 1
 	GLPS_OPENED GLYPHSTATES = 2
 )
+
+// String returns the GLYPHSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GLYPHSTATES) String() string {
+	switch e {
+	case GLPS_CLOSED:
+		return "GLPS_CLOSED"
+	case GLPS_OPENED:
+		return "GLPS_OPENED"
+	default:
+		return fmt.Sprintf("GLYPHSTATES(%d)", int32(e))
+	}
+}
 
 type GLYPHTYPE int32
 
@@ -887,6 +2582,21 @@ const (
 	GT_IMAGEGLYPH GLYPHTYPE = 1
 	GT_FONTGLYPH  GLYPHTYPE = 2
 )
+
+// String returns the GLYPHTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GLYPHTYPE) String() string {
+	switch e {
+	case GT_NONE:
+		return "GT_NONE"
+	case GT_IMAGEGLYPH:
+		return "GT_IMAGEGLYPH"
+	case GT_FONTGLYPH:
+		return "GT_FONTGLYPH"
+	default:
+		return fmt.Sprintf("GLYPHTYPE(%d)", int32(e))
+	}
+}
 
 type GRIDCELLBACKGROUNDSTATES int32
 
@@ -898,6 +2608,27 @@ const (
 	MCGCB_TODAY              GRIDCELLBACKGROUNDSTATES = 5
 	MCGCB_TODAYSELECTED      GRIDCELLBACKGROUNDSTATES = 6
 )
+
+// String returns the GRIDCELLBACKGROUNDSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GRIDCELLBACKGROUNDSTATES) String() string {
+	switch e {
+	case MCGCB_SELECTED:
+		return "MCGCB_SELECTED"
+	case MCGCB_HOT:
+		return "MCGCB_HOT"
+	case MCGCB_SELECTEDHOT:
+		return "MCGCB_SELECTEDHOT"
+	case MCGCB_SELECTEDNOTFOCUSED:
+		return "MCGCB_SELECTEDNOTFOCUSED"
+	case MCGCB_TODAY:
+		return "MCGCB_TODAY"
+	case MCGCB_TODAYSELECTED:
+		return "MCGCB_TODAYSELECTED"
+	default:
+		return fmt.Sprintf("GRIDCELLBACKGROUNDSTATES(%d)", int32(e))
+	}
+}
 
 type GRIDCELLSTATES int32
 
@@ -911,6 +2642,29 @@ const (
 	MCGC_SELECTEDHOT   GRIDCELLSTATES = 7
 )
 
+// String returns the GRIDCELLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GRIDCELLSTATES) String() string {
+	switch e {
+	case MCGC_HOT:
+		return "MCGC_HOT"
+	case MCGC_HASSTATE:
+		return "MCGC_HASSTATE"
+	case MCGC_HASSTATEHOT:
+		return "MCGC_HASSTATEHOT"
+	case MCGC_TODAY:
+		return "MCGC_TODAY"
+	case MCGC_TODAYSELECTED:
+		return "MCGC_TODAYSELECTED"
+	case MCGC_SELECTED:
+		return "MCGC_SELECTED"
+	case MCGC_SELECTEDHOT:
+		return "MCGC_SELECTEDHOT"
+	default:
+		return fmt.Sprintf("GRIDCELLSTATES(%d)", int32(e))
+	}
+}
+
 type GRIDCELLUPPERSTATES int32
 
 const (
@@ -921,6 +2675,25 @@ const (
 	MCGCU_SELECTEDHOT GRIDCELLUPPERSTATES = 5
 )
 
+// String returns the GRIDCELLUPPERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GRIDCELLUPPERSTATES) String() string {
+	switch e {
+	case MCGCU_HOT:
+		return "MCGCU_HOT"
+	case MCGCU_HASSTATE:
+		return "MCGCU_HASSTATE"
+	case MCGCU_HASSTATEHOT:
+		return "MCGCU_HASSTATEHOT"
+	case MCGCU_SELECTED:
+		return "MCGCU_SELECTED"
+	case MCGCU_SELECTEDHOT:
+		return "MCGCU_SELECTEDHOT"
+	default:
+		return fmt.Sprintf("GRIDCELLUPPERSTATES(%d)", int32(e))
+	}
+}
+
 type GRIPPERSTATES int32
 
 const (
@@ -928,12 +2701,38 @@ const (
 	TSGS_CENTERED GRIPPERSTATES = 2
 )
 
+// String returns the GRIPPERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GRIPPERSTATES) String() string {
+	switch e {
+	case TSGS_NORMAL:
+		return "TSGS_NORMAL"
+	case TSGS_CENTERED:
+		return "TSGS_CENTERED"
+	default:
+		return fmt.Sprintf("GRIPPERSTATES(%d)", int32(e))
+	}
+}
+
 type GROUPBOXSTATES int32
 
 const (
 	GBS_NORMAL   GROUPBOXSTATES = 1
 	GBS_DISABLED GROUPBOXSTATES = 2
 )
+
+// String returns the GROUPBOXSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GROUPBOXSTATES) String() string {
+	switch e {
+	case GBS_NORMAL:
+		return "GBS_NORMAL"
+	case GBS_DISABLED:
+		return "GBS_DISABLED"
+	default:
+		return fmt.Sprintf("GROUPBOXSTATES(%d)", int32(e))
+	}
+}
 
 type GROUPHEADERLINESTATES int32
 
@@ -956,6 +2755,47 @@ const (
 	LVGHL_CLOSEMIXEDSELECTIONHOT     GROUPHEADERLINESTATES = 16
 )
 
+// String returns the GROUPHEADERLINESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GROUPHEADERLINESTATES) String() string {
+	switch e {
+	case LVGHL_OPEN:
+		return "LVGHL_OPEN"
+	case LVGHL_OPENHOT:
+		return "LVGHL_OPENHOT"
+	case LVGHL_OPENSELECTED:
+		return "LVGHL_OPENSELECTED"
+	case LVGHL_OPENSELECTEDHOT:
+		return "LVGHL_OPENSELECTEDHOT"
+	case LVGHL_OPENSELECTEDNOTFOCUSED:
+		return "LVGHL_OPENSELECTEDNOTFOCUSED"
+	case LVGHL_OPENSELECTEDNOTFOCUSEDHOT:
+		return "LVGHL_OPENSELECTEDNOTFOCUSEDHOT"
+	case LVGHL_OPENMIXEDSELECTION:
+		return "LVGHL_OPENMIXEDSELECTION"
+	case LVGHL_OPENMIXEDSELECTIONHOT:
+		return "LVGHL_OPENMIXEDSELECTIONHOT"
+	case LVGHL_CLOSE:
+		return "LVGHL_CLOSE"
+	case LVGHL_CLOSEHOT:
+		return "LVGHL_CLOSEHOT"
+	case LVGHL_CLOSESELECTED:
+		return "LVGHL_CLOSESELECTED"
+	case LVGHL_CLOSESELECTEDHOT:
+		return "LVGHL_CLOSESELECTEDHOT"
+	case LVGHL_CLOSESELECTEDNOTFOCUSED:
+		return "LVGHL_CLOSESELECTEDNOTFOCUSED"
+	case LVGHL_CLOSESELECTEDNOTFOCUSEDHOT:
+		return "LVGHL_CLOSESELECTEDNOTFOCUSEDHOT"
+	case LVGHL_CLOSEMIXEDSELECTION:
+		return "LVGHL_CLOSEMIXEDSELECTION"
+	case LVGHL_CLOSEMIXEDSELECTIONHOT:
+		return "LVGHL_CLOSEMIXEDSELECTIONHOT"
+	default:
+		return fmt.Sprintf("GROUPHEADERLINESTATES(%d)", int32(e))
+	}
+}
+
 type GROUPHEADERSTATES int32
 
 const (
@@ -977,6 +2817,47 @@ const (
 	LVGH_CLOSEMIXEDSELECTIONHOT     GROUPHEADERSTATES = 16
 )
 
+// String returns the GROUPHEADERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GROUPHEADERSTATES) String() string {
+	switch e {
+	case LVGH_OPEN:
+		return "LVGH_OPEN"
+	case LVGH_OPENHOT:
+		return "LVGH_OPENHOT"
+	case LVGH_OPENSELECTED:
+		return "LVGH_OPENSELECTED"
+	case LVGH_OPENSELECTEDHOT:
+		return "LVGH_OPENSELECTEDHOT"
+	case LVGH_OPENSELECTEDNOTFOCUSED:
+		return "LVGH_OPENSELECTEDNOTFOCUSED"
+	case LVGH_OPENSELECTEDNOTFOCUSEDHOT:
+		return "LVGH_OPENSELECTEDNOTFOCUSEDHOT"
+	case LVGH_OPENMIXEDSELECTION:
+		return "LVGH_OPENMIXEDSELECTION"
+	case LVGH_OPENMIXEDSELECTIONHOT:
+		return "LVGH_OPENMIXEDSELECTIONHOT"
+	case LVGH_CLOSE:
+		return "LVGH_CLOSE"
+	case LVGH_CLOSEHOT:
+		return "LVGH_CLOSEHOT"
+	case LVGH_CLOSESELECTED:
+		return "LVGH_CLOSESELECTED"
+	case LVGH_CLOSESELECTEDHOT:
+		return "LVGH_CLOSESELECTEDHOT"
+	case LVGH_CLOSESELECTEDNOTFOCUSED:
+		return "LVGH_CLOSESELECTEDNOTFOCUSED"
+	case LVGH_CLOSESELECTEDNOTFOCUSEDHOT:
+		return "LVGH_CLOSESELECTEDNOTFOCUSEDHOT"
+	case LVGH_CLOSEMIXEDSELECTION:
+		return "LVGH_CLOSEMIXEDSELECTION"
+	case LVGH_CLOSEMIXEDSELECTIONHOT:
+		return "LVGH_CLOSEMIXEDSELECTIONHOT"
+	default:
+		return fmt.Sprintf("GROUPHEADERSTATES(%d)", int32(e))
+	}
+}
+
 type HALIGN int32
 
 const (
@@ -985,6 +2866,22 @@ const (
 	HA_RIGHT  HALIGN = 2
 )
 
+// String returns the HALIGN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HALIGN) String() string {
+	switch e {
+	case HA_LEFT:
+		return "HA_LEFT"
+	case HA_CENTER:
+		return "HA_CENTER"
+	case HA_RIGHT:
+		return "HA_RIGHT"
+	default:
+		return fmt.Sprintf("HALIGN(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HDI_MASK uint32
 
 const (
@@ -1001,11 +2898,65 @@ const (
 	HDI_STATE      HDI_MASK = 512
 )
 
+// String returns the HDI_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HDI_MASK) String() string {
+	var parts []string
+	if e&HDI_WIDTH != 0 {
+		parts = append(parts, "HDI_WIDTH")
+	}
+	if e&HDI_HEIGHT != 0 {
+		parts = append(parts, "HDI_HEIGHT")
+	}
+	if e&HDI_TEXT != 0 {
+		parts = append(parts, "HDI_TEXT")
+	}
+	if e&HDI_FORMAT != 0 {
+		parts = append(parts, "HDI_FORMAT")
+	}
+	if e&HDI_LPARAM != 0 {
+		parts = append(parts, "HDI_LPARAM")
+	}
+	if e&HDI_BITMAP != 0 {
+		parts = append(parts, "HDI_BITMAP")
+	}
+	if e&HDI_IMAGE != 0 {
+		parts = append(parts, "HDI_IMAGE")
+	}
+	if e&HDI_DI_SETITEM != 0 {
+		parts = append(parts, "HDI_DI_SETITEM")
+	}
+	if e&HDI_ORDER != 0 {
+		parts = append(parts, "HDI_ORDER")
+	}
+	if e&HDI_FILTER != 0 {
+		parts = append(parts, "HDI_FILTER")
+	}
+	if e&HDI_STATE != 0 {
+		parts = append(parts, "HDI_STATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type HEADERAREASTATES int32
 
 const (
 	AW_S_HEADERAREA_NOMARGIN HEADERAREASTATES = 1
 )
+
+// String returns the HEADERAREASTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADERAREASTATES) String() string {
+	switch e {
+	case AW_S_HEADERAREA_NOMARGIN:
+		return "AW_S_HEADERAREA_NOMARGIN"
+	default:
+		return fmt.Sprintf("HEADERAREASTATES(%d)", int32(e))
+	}
+}
 
 type HEADERCLOSESTATES int32
 
@@ -1015,6 +2966,21 @@ const (
 	EBHC_PRESSED HEADERCLOSESTATES = 3
 )
 
+// String returns the HEADERCLOSESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADERCLOSESTATES) String() string {
+	switch e {
+	case EBHC_NORMAL:
+		return "EBHC_NORMAL"
+	case EBHC_HOT:
+		return "EBHC_HOT"
+	case EBHC_PRESSED:
+		return "EBHC_PRESSED"
+	default:
+		return fmt.Sprintf("HEADERCLOSESTATES(%d)", int32(e))
+	}
+}
+
 type HEADERDROPDOWNFILTERSTATES int32
 
 const (
@@ -1022,6 +2988,21 @@ const (
 	HDDFS_SOFTHOT HEADERDROPDOWNFILTERSTATES = 2
 	HDDFS_HOT     HEADERDROPDOWNFILTERSTATES = 3
 )
+
+// String returns the HEADERDROPDOWNFILTERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADERDROPDOWNFILTERSTATES) String() string {
+	switch e {
+	case HDDFS_NORMAL:
+		return "HDDFS_NORMAL"
+	case HDDFS_SOFTHOT:
+		return "HDDFS_SOFTHOT"
+	case HDDFS_HOT:
+		return "HDDFS_HOT"
+	default:
+		return fmt.Sprintf("HEADERDROPDOWNFILTERSTATES(%d)", int32(e))
+	}
+}
 
 type HEADERDROPDOWNSTATES int32
 
@@ -1031,6 +3012,21 @@ const (
 	HDDS_HOT     HEADERDROPDOWNSTATES = 3
 )
 
+// String returns the HEADERDROPDOWNSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADERDROPDOWNSTATES) String() string {
+	switch e {
+	case HDDS_NORMAL:
+		return "HDDS_NORMAL"
+	case HDDS_SOFTHOT:
+		return "HDDS_SOFTHOT"
+	case HDDS_HOT:
+		return "HDDS_HOT"
+	default:
+		return fmt.Sprintf("HEADERDROPDOWNSTATES(%d)", int32(e))
+	}
+}
+
 type HEADERITEMLEFTSTATES int32
 
 const (
@@ -1039,6 +3035,21 @@ const (
 	HILS_PRESSED HEADERITEMLEFTSTATES = 3
 )
 
+// String returns the HEADERITEMLEFTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADERITEMLEFTSTATES) String() string {
+	switch e {
+	case HILS_NORMAL:
+		return "HILS_NORMAL"
+	case HILS_HOT:
+		return "HILS_HOT"
+	case HILS_PRESSED:
+		return "HILS_PRESSED"
+	default:
+		return fmt.Sprintf("HEADERITEMLEFTSTATES(%d)", int32(e))
+	}
+}
+
 type HEADERITEMRIGHTSTATES int32
 
 const (
@@ -1046,6 +3057,21 @@ const (
 	HIRS_HOT     HEADERITEMRIGHTSTATES = 2
 	HIRS_PRESSED HEADERITEMRIGHTSTATES = 3
 )
+
+// String returns the HEADERITEMRIGHTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADERITEMRIGHTSTATES) String() string {
+	switch e {
+	case HIRS_NORMAL:
+		return "HIRS_NORMAL"
+	case HIRS_HOT:
+		return "HIRS_HOT"
+	case HIRS_PRESSED:
+		return "HIRS_PRESSED"
+	default:
+		return fmt.Sprintf("HEADERITEMRIGHTSTATES(%d)", int32(e))
+	}
+}
 
 type HEADERITEMSTATES int32
 
@@ -1064,12 +3090,58 @@ const (
 	HIS_ICONSORTEDPRESSED HEADERITEMSTATES = 12
 )
 
+// String returns the HEADERITEMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADERITEMSTATES) String() string {
+	switch e {
+	case HIS_NORMAL:
+		return "HIS_NORMAL"
+	case HIS_HOT:
+		return "HIS_HOT"
+	case HIS_PRESSED:
+		return "HIS_PRESSED"
+	case HIS_SORTEDNORMAL:
+		return "HIS_SORTEDNORMAL"
+	case HIS_SORTEDHOT:
+		return "HIS_SORTEDHOT"
+	case HIS_SORTEDPRESSED:
+		return "HIS_SORTEDPRESSED"
+	case HIS_ICONNORMAL:
+		return "HIS_ICONNORMAL"
+	case HIS_ICONHOT:
+		return "HIS_ICONHOT"
+	case HIS_ICONPRESSED:
+		return "HIS_ICONPRESSED"
+	case HIS_ICONSORTEDNORMAL:
+		return "HIS_ICONSORTEDNORMAL"
+	case HIS_ICONSORTEDHOT:
+		return "HIS_ICONSORTEDHOT"
+	case HIS_ICONSORTEDPRESSED:
+		return "HIS_ICONSORTEDPRESSED"
+	default:
+		return fmt.Sprintf("HEADERITEMSTATES(%d)", int32(e))
+	}
+}
+
 type HEADEROVERFLOWSTATES int32
 
 const (
 	HOFS_NORMAL HEADEROVERFLOWSTATES = 1
 	HOFS_HOT    HEADEROVERFLOWSTATES = 2
 )
+
+// String returns the HEADEROVERFLOWSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADEROVERFLOWSTATES) String() string {
+	switch e {
+	case HOFS_NORMAL:
+		return "HOFS_NORMAL"
+	case HOFS_HOT:
+		return "HOFS_HOT"
+	default:
+		return fmt.Sprintf("HEADEROVERFLOWSTATES(%d)", int32(e))
+	}
+}
 
 type HEADERPARTS int32
 
@@ -1083,6 +3155,29 @@ const (
 	HP_HEADEROVERFLOW       HEADERPARTS = 7
 )
 
+// String returns the HEADERPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADERPARTS) String() string {
+	switch e {
+	case HP_HEADERITEM:
+		return "HP_HEADERITEM"
+	case HP_HEADERITEMLEFT:
+		return "HP_HEADERITEMLEFT"
+	case HP_HEADERITEMRIGHT:
+		return "HP_HEADERITEMRIGHT"
+	case HP_HEADERSORTARROW:
+		return "HP_HEADERSORTARROW"
+	case HP_HEADERDROPDOWN:
+		return "HP_HEADERDROPDOWN"
+	case HP_HEADERDROPDOWNFILTER:
+		return "HP_HEADERDROPDOWNFILTER"
+	case HP_HEADEROVERFLOW:
+		return "HP_HEADEROVERFLOW"
+	default:
+		return fmt.Sprintf("HEADERPARTS(%d)", int32(e))
+	}
+}
+
 type HEADERPINSTATES int32
 
 const (
@@ -1094,6 +3189,27 @@ const (
 	EBHP_SELECTEDPRESSED HEADERPINSTATES = 6
 )
 
+// String returns the HEADERPINSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADERPINSTATES) String() string {
+	switch e {
+	case EBHP_NORMAL:
+		return "EBHP_NORMAL"
+	case EBHP_HOT:
+		return "EBHP_HOT"
+	case EBHP_PRESSED:
+		return "EBHP_PRESSED"
+	case EBHP_SELECTEDNORMAL:
+		return "EBHP_SELECTEDNORMAL"
+	case EBHP_SELECTEDHOT:
+		return "EBHP_SELECTEDHOT"
+	case EBHP_SELECTEDPRESSED:
+		return "EBHP_SELECTEDPRESSED"
+	default:
+		return fmt.Sprintf("HEADERPINSTATES(%d)", int32(e))
+	}
+}
+
 type HEADERSORTARROWSTATES int32
 
 const (
@@ -1101,12 +3217,38 @@ const (
 	HSAS_SORTEDDOWN HEADERSORTARROWSTATES = 2
 )
 
+// String returns the HEADERSORTARROWSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADERSORTARROWSTATES) String() string {
+	switch e {
+	case HSAS_SORTEDUP:
+		return "HSAS_SORTEDUP"
+	case HSAS_SORTEDDOWN:
+		return "HSAS_SORTEDDOWN"
+	default:
+		return fmt.Sprintf("HEADERSORTARROWSTATES(%d)", int32(e))
+	}
+}
+
 type HEADERSTYLESTATES int32
 
 const (
 	HBG_DETAILS HEADERSTYLESTATES = 1
 	HBG_ICON    HEADERSTYLESTATES = 2
 )
+
+// String returns the HEADERSTYLESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADERSTYLESTATES) String() string {
+	switch e {
+	case HBG_DETAILS:
+		return "HBG_DETAILS"
+	case HBG_ICON:
+		return "HBG_ICON"
+	default:
+		return fmt.Sprintf("HEADERSTYLESTATES(%d)", int32(e))
+	}
+}
 
 type HEADER_CONTROL_FORMAT_FLAGS int32
 
@@ -1129,11 +3271,63 @@ const (
 	HDF_SPLITBUTTON     HEADER_CONTROL_FORMAT_FLAGS = 16777216
 )
 
+// String returns the HEADER_CONTROL_FORMAT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADER_CONTROL_FORMAT_FLAGS) String() string {
+	switch e {
+	case HDF_LEFT:
+		return "HDF_LEFT"
+	case HDF_RIGHT:
+		return "HDF_RIGHT"
+	case HDF_CENTER:
+		return "HDF_CENTER"
+	case HDF_JUSTIFYMASK:
+		return "HDF_JUSTIFYMASK"
+	case HDF_RTLREADING:
+		return "HDF_RTLREADING"
+	case HDF_BITMAP:
+		return "HDF_BITMAP"
+	case HDF_STRING:
+		return "HDF_STRING"
+	case HDF_OWNERDRAW:
+		return "HDF_OWNERDRAW"
+	case HDF_IMAGE:
+		return "HDF_IMAGE"
+	case HDF_BITMAP_ON_RIGHT:
+		return "HDF_BITMAP_ON_RIGHT"
+	case HDF_SORTUP:
+		return "HDF_SORTUP"
+	case HDF_SORTDOWN:
+		return "HDF_SORTDOWN"
+	case HDF_CHECKBOX:
+		return "HDF_CHECKBOX"
+	case HDF_CHECKED:
+		return "HDF_CHECKED"
+	case HDF_FIXEDWIDTH:
+		return "HDF_FIXEDWIDTH"
+	case HDF_SPLITBUTTON:
+		return "HDF_SPLITBUTTON"
+	default:
+		return fmt.Sprintf("HEADER_CONTROL_FORMAT_FLAGS(%d)", int32(e))
+	}
+}
+
 type HEADER_CONTROL_FORMAT_STATE uint32
 
 const (
 	HDIS_FOCUSED HEADER_CONTROL_FORMAT_STATE = 1
 )
+
+// String returns the HEADER_CONTROL_FORMAT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADER_CONTROL_FORMAT_STATE) String() string {
+	switch e {
+	case HDIS_FOCUSED:
+		return "HDIS_FOCUSED"
+	default:
+		return fmt.Sprintf("HEADER_CONTROL_FORMAT_STATE(%d)", uint32(e))
+	}
+}
 
 type HEADER_CONTROL_FORMAT_TYPE uint32
 
@@ -1144,6 +3338,23 @@ const (
 	HDFT_HASNOVALUE HEADER_CONTROL_FORMAT_TYPE = 32768
 )
 
+// String returns the HEADER_CONTROL_FORMAT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADER_CONTROL_FORMAT_TYPE) String() string {
+	switch e {
+	case HDFT_ISSTRING:
+		return "HDFT_ISSTRING"
+	case HDFT_ISNUMBER:
+		return "HDFT_ISNUMBER"
+	case HDFT_ISDATE:
+		return "HDFT_ISDATE"
+	case HDFT_HASNOVALUE:
+		return "HDFT_HASNOVALUE"
+	default:
+		return fmt.Sprintf("HEADER_CONTROL_FORMAT_TYPE(%d)", uint32(e))
+	}
+}
+
 type HEADER_CONTROL_NOTIFICATION_BUTTON int32
 
 const (
@@ -1152,6 +3363,22 @@ const (
 	HEADER_CONTROL_NOTIFICATION_BUTTON_MIDDLE HEADER_CONTROL_NOTIFICATION_BUTTON = 2
 )
 
+// String returns the HEADER_CONTROL_NOTIFICATION_BUTTON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADER_CONTROL_NOTIFICATION_BUTTON) String() string {
+	switch e {
+	case HEADER_CONTROL_NOTIFICATION_BUTTON_LEFT:
+		return "HEADER_CONTROL_NOTIFICATION_BUTTON_LEFT"
+	case HEADER_CONTROL_NOTIFICATION_BUTTON_RIGHT:
+		return "HEADER_CONTROL_NOTIFICATION_BUTTON_RIGHT"
+	case HEADER_CONTROL_NOTIFICATION_BUTTON_MIDDLE:
+		return "HEADER_CONTROL_NOTIFICATION_BUTTON_MIDDLE"
+	default:
+		return fmt.Sprintf("HEADER_CONTROL_NOTIFICATION_BUTTON(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HEADER_HITTEST_INFO_FLAGS uint32
 
 const (
@@ -1170,6 +3397,55 @@ const (
 	HHT_ONOVERFLOW      HEADER_HITTEST_INFO_FLAGS = 16384
 )
 
+// String returns the HEADER_HITTEST_INFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEADER_HITTEST_INFO_FLAGS) String() string {
+	var parts []string
+	if e&HHT_NOWHERE != 0 {
+		parts = append(parts, "HHT_NOWHERE")
+	}
+	if e&HHT_ONHEADER != 0 {
+		parts = append(parts, "HHT_ONHEADER")
+	}
+	if e&HHT_ONDIVIDER != 0 {
+		parts = append(parts, "HHT_ONDIVIDER")
+	}
+	if e&HHT_ONDIVOPEN != 0 {
+		parts = append(parts, "HHT_ONDIVOPEN")
+	}
+	if e&HHT_ONFILTER != 0 {
+		parts = append(parts, "HHT_ONFILTER")
+	}
+	if e&HHT_ONFILTERBUTTON != 0 {
+		parts = append(parts, "HHT_ONFILTERBUTTON")
+	}
+	if e&HHT_ABOVE != 0 {
+		parts = append(parts, "HHT_ABOVE")
+	}
+	if e&HHT_BELOW != 0 {
+		parts = append(parts, "HHT_BELOW")
+	}
+	if e&HHT_TORIGHT != 0 {
+		parts = append(parts, "HHT_TORIGHT")
+	}
+	if e&HHT_TOLEFT != 0 {
+		parts = append(parts, "HHT_TOLEFT")
+	}
+	if e&HHT_ONITEMSTATEICON != 0 {
+		parts = append(parts, "HHT_ONITEMSTATEICON")
+	}
+	if e&HHT_ONDROPDOWN != 0 {
+		parts = append(parts, "HHT_ONDROPDOWN")
+	}
+	if e&HHT_ONOVERFLOW != 0 {
+		parts = append(parts, "HHT_ONOVERFLOW")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type HELPBUTTONSTATES int32
 
 const (
@@ -1179,6 +3455,23 @@ const (
 	HBS_DISABLED HELPBUTTONSTATES = 4
 )
 
+// String returns the HELPBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HELPBUTTONSTATES) String() string {
+	switch e {
+	case HBS_NORMAL:
+		return "HBS_NORMAL"
+	case HBS_HOT:
+		return "HBS_HOT"
+	case HBS_PUSHED:
+		return "HBS_PUSHED"
+	case HBS_DISABLED:
+		return "HBS_DISABLED"
+	default:
+		return fmt.Sprintf("HELPBUTTONSTATES(%d)", int32(e))
+	}
+}
+
 type HELPLINKSTATES int32
 
 const (
@@ -1187,6 +3480,23 @@ const (
 	CPHL_PRESSED  HELPLINKSTATES = 3
 	CPHL_DISABLED HELPLINKSTATES = 4
 )
+
+// String returns the HELPLINKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HELPLINKSTATES) String() string {
+	switch e {
+	case CPHL_NORMAL:
+		return "CPHL_NORMAL"
+	case CPHL_HOT:
+		return "CPHL_HOT"
+	case CPHL_PRESSED:
+		return "CPHL_PRESSED"
+	case CPHL_DISABLED:
+		return "CPHL_DISABLED"
+	default:
+		return fmt.Sprintf("HELPLINKSTATES(%d)", int32(e))
+	}
+}
 
 type HIT_TEST_BACKGROUND_OPTIONS uint32
 
@@ -1203,6 +3513,35 @@ const (
 	HTTB_SYSTEMSIZINGMARGINS   HIT_TEST_BACKGROUND_OPTIONS = 512
 )
 
+// String returns the HIT_TEST_BACKGROUND_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HIT_TEST_BACKGROUND_OPTIONS) String() string {
+	switch e {
+	case HTTB_BACKGROUNDSEG:
+		return "HTTB_BACKGROUNDSEG"
+	case HTTB_FIXEDBORDER:
+		return "HTTB_FIXEDBORDER"
+	case HTTB_CAPTION:
+		return "HTTB_CAPTION"
+	case HTTB_RESIZINGBORDER_LEFT:
+		return "HTTB_RESIZINGBORDER_LEFT"
+	case HTTB_RESIZINGBORDER_TOP:
+		return "HTTB_RESIZINGBORDER_TOP"
+	case HTTB_RESIZINGBORDER_RIGHT:
+		return "HTTB_RESIZINGBORDER_RIGHT"
+	case HTTB_RESIZINGBORDER_BOTTOM:
+		return "HTTB_RESIZINGBORDER_BOTTOM"
+	case HTTB_RESIZINGBORDER:
+		return "HTTB_RESIZINGBORDER"
+	case HTTB_SIZINGTEMPLATE:
+		return "HTTB_SIZINGTEMPLATE"
+	case HTTB_SYSTEMSIZINGMARGINS:
+		return "HTTB_SYSTEMSIZINGMARGINS"
+	default:
+		return fmt.Sprintf("HIT_TEST_BACKGROUND_OPTIONS(%d)", uint32(e))
+	}
+}
+
 type HORZSCROLLSTATES int32
 
 const (
@@ -1211,6 +3550,23 @@ const (
 	HSS_PUSHED   HORZSCROLLSTATES = 3
 	HSS_DISABLED HORZSCROLLSTATES = 4
 )
+
+// String returns the HORZSCROLLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HORZSCROLLSTATES) String() string {
+	switch e {
+	case HSS_NORMAL:
+		return "HSS_NORMAL"
+	case HSS_HOT:
+		return "HSS_HOT"
+	case HSS_PUSHED:
+		return "HSS_PUSHED"
+	case HSS_DISABLED:
+		return "HSS_DISABLED"
+	default:
+		return fmt.Sprintf("HORZSCROLLSTATES(%d)", int32(e))
+	}
+}
 
 type HORZTHUMBSTATES int32
 
@@ -1221,12 +3577,42 @@ const (
 	HTS_DISABLED HORZTHUMBSTATES = 4
 )
 
+// String returns the HORZTHUMBSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HORZTHUMBSTATES) String() string {
+	switch e {
+	case HTS_NORMAL:
+		return "HTS_NORMAL"
+	case HTS_HOT:
+		return "HTS_HOT"
+	case HTS_PUSHED:
+		return "HTS_PUSHED"
+	case HTS_DISABLED:
+		return "HTS_DISABLED"
+	default:
+		return fmt.Sprintf("HORZTHUMBSTATES(%d)", int32(e))
+	}
+}
+
 type HOTGLYPHSTATES int32
 
 const (
 	HGLPS_CLOSED HOTGLYPHSTATES = 1
 	HGLPS_OPENED HOTGLYPHSTATES = 2
 )
+
+// String returns the HOTGLYPHSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HOTGLYPHSTATES) String() string {
+	switch e {
+	case HGLPS_CLOSED:
+		return "HGLPS_CLOSED"
+	case HGLPS_OPENED:
+		return "HGLPS_OPENED"
+	default:
+		return fmt.Sprintf("HOTGLYPHSTATES(%d)", int32(e))
+	}
+}
 
 type HOVERBACKGROUNDSTATES int32
 
@@ -1236,12 +3622,40 @@ const (
 	UTS_PRESSED HOVERBACKGROUNDSTATES = 3
 )
 
+// String returns the HOVERBACKGROUNDSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HOVERBACKGROUNDSTATES) String() string {
+	switch e {
+	case UTS_NORMAL:
+		return "UTS_NORMAL"
+	case UTS_HOT:
+		return "UTS_HOT"
+	case UTS_PRESSED:
+		return "UTS_PRESSED"
+	default:
+		return fmt.Sprintf("HOVERBACKGROUNDSTATES(%d)", int32(e))
+	}
+}
+
 type HYPERLINKSTATES int32
 
 const (
 	HLS_NORMALTEXT HYPERLINKSTATES = 1
 	HLS_LINKTEXT   HYPERLINKSTATES = 2
 )
+
+// String returns the HYPERLINKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HYPERLINKSTATES) String() string {
+	switch e {
+	case HLS_NORMALTEXT:
+		return "HLS_NORMALTEXT"
+	case HLS_LINKTEXT:
+		return "HLS_LINKTEXT"
+	default:
+		return fmt.Sprintf("HYPERLINKSTATES(%d)", int32(e))
+	}
+}
 
 type HYPERLINKTEXTSTATES int32
 
@@ -1251,6 +3665,23 @@ const (
 	TS_HYPERLINK_PRESSED  HYPERLINKTEXTSTATES = 3
 	TS_HYPERLINK_DISABLED HYPERLINKTEXTSTATES = 4
 )
+
+// String returns the HYPERLINKTEXTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HYPERLINKTEXTSTATES) String() string {
+	switch e {
+	case TS_HYPERLINK_NORMAL:
+		return "TS_HYPERLINK_NORMAL"
+	case TS_HYPERLINK_HOT:
+		return "TS_HYPERLINK_HOT"
+	case TS_HYPERLINK_PRESSED:
+		return "TS_HYPERLINK_PRESSED"
+	case TS_HYPERLINK_DISABLED:
+		return "TS_HYPERLINK_DISABLED"
+	default:
+		return fmt.Sprintf("HYPERLINKTEXTSTATES(%d)", int32(e))
+	}
+}
 
 type ICONEFFECT int32
 
@@ -1262,6 +3693,25 @@ const (
 	ICE_ALPHA  ICONEFFECT = 4
 )
 
+// String returns the ICONEFFECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ICONEFFECT) String() string {
+	switch e {
+	case ICE_NONE:
+		return "ICE_NONE"
+	case ICE_GLOW:
+		return "ICE_GLOW"
+	case ICE_SHADOW:
+		return "ICE_SHADOW"
+	case ICE_PULSE:
+		return "ICE_PULSE"
+	case ICE_ALPHA:
+		return "ICE_ALPHA"
+	default:
+		return fmt.Sprintf("ICONEFFECT(%d)", int32(e))
+	}
+}
+
 type IEBARMENUSTATES int32
 
 const (
@@ -1270,6 +3720,21 @@ const (
 	EBM_PRESSED IEBARMENUSTATES = 3
 )
 
+// String returns the IEBARMENUSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IEBARMENUSTATES) String() string {
+	switch e {
+	case EBM_NORMAL:
+		return "EBM_NORMAL"
+	case EBM_HOT:
+		return "EBM_HOT"
+	case EBM_PRESSED:
+		return "EBM_PRESSED"
+	default:
+		return fmt.Sprintf("IEBARMENUSTATES(%d)", int32(e))
+	}
+}
+
 type IMAGELAYOUT int32
 
 const (
@@ -1277,6 +3742,20 @@ const (
 	IL_HORIZONTAL IMAGELAYOUT = 1
 )
 
+// String returns the IMAGELAYOUT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMAGELAYOUT) String() string {
+	switch e {
+	case IL_VERTICAL:
+		return "IL_VERTICAL"
+	case IL_HORIZONTAL:
+		return "IL_HORIZONTAL"
+	default:
+		return fmt.Sprintf("IMAGELAYOUT(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IMAGELIST_CREATION_FLAGS uint32
 
 const (
@@ -1295,6 +3774,52 @@ const (
 	ILC_HIGHQUALITYSCALE IMAGELIST_CREATION_FLAGS = 131072
 )
 
+// String returns the IMAGELIST_CREATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMAGELIST_CREATION_FLAGS) String() string {
+	var parts []string
+	if e&ILC_MASK != 0 {
+		parts = append(parts, "ILC_MASK")
+	}
+	if e&ILC_COLORDDB != 0 {
+		parts = append(parts, "ILC_COLORDDB")
+	}
+	if e&ILC_COLOR4 != 0 {
+		parts = append(parts, "ILC_COLOR4")
+	}
+	if e&ILC_COLOR8 != 0 {
+		parts = append(parts, "ILC_COLOR8")
+	}
+	if e&ILC_COLOR16 != 0 {
+		parts = append(parts, "ILC_COLOR16")
+	}
+	if e&ILC_COLOR24 != 0 {
+		parts = append(parts, "ILC_COLOR24")
+	}
+	if e&ILC_COLOR32 != 0 {
+		parts = append(parts, "ILC_COLOR32")
+	}
+	if e&ILC_PALETTE != 0 {
+		parts = append(parts, "ILC_PALETTE")
+	}
+	if e&ILC_MIRROR != 0 {
+		parts = append(parts, "ILC_MIRROR")
+	}
+	if e&ILC_PERITEMMIRROR != 0 {
+		parts = append(parts, "ILC_PERITEMMIRROR")
+	}
+	if e&ILC_ORIGINALSIZE != 0 {
+		parts = append(parts, "ILC_ORIGINALSIZE")
+	}
+	if e&ILC_HIGHQUALITYSCALE != 0 {
+		parts = append(parts, "ILC_HIGHQUALITYSCALE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type IMAGESELECTTYPE int32
 
 const (
@@ -1303,6 +3828,21 @@ const (
 	IST_DPI  IMAGESELECTTYPE = 2
 )
 
+// String returns the IMAGESELECTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMAGESELECTTYPE) String() string {
+	switch e {
+	case IST_NONE:
+		return "IST_NONE"
+	case IST_SIZE:
+		return "IST_SIZE"
+	case IST_DPI:
+		return "IST_DPI"
+	default:
+		return fmt.Sprintf("IMAGESELECTTYPE(%d)", int32(e))
+	}
+}
+
 type IMAGE_LIST_COPY_FLAGS uint32
 
 const (
@@ -1310,6 +3850,20 @@ const (
 	ILCF_SWAP IMAGE_LIST_COPY_FLAGS = 1
 )
 
+// String returns the IMAGE_LIST_COPY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMAGE_LIST_COPY_FLAGS) String() string {
+	switch e {
+	case ILCF_MOVE:
+		return "ILCF_MOVE"
+	case ILCF_SWAP:
+		return "ILCF_SWAP"
+	default:
+		return fmt.Sprintf("IMAGE_LIST_COPY_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IMAGE_LIST_DRAW_STYLE uint32
 
 const (
@@ -1330,6 +3884,58 @@ const (
 	ILD_ASYNC         IMAGE_LIST_DRAW_STYLE = 32768
 )
 
+// String returns the IMAGE_LIST_DRAW_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMAGE_LIST_DRAW_STYLE) String() string {
+	var parts []string
+	if e&ILD_TRANSPARENT != 0 {
+		parts = append(parts, "ILD_TRANSPARENT")
+	}
+	if e&ILD_BLEND25 != 0 {
+		parts = append(parts, "ILD_BLEND25")
+	}
+	if e&ILD_FOCUS != 0 {
+		parts = append(parts, "ILD_FOCUS")
+	}
+	if e&ILD_BLEND50 != 0 {
+		parts = append(parts, "ILD_BLEND50")
+	}
+	if e&ILD_SELECTED != 0 {
+		parts = append(parts, "ILD_SELECTED")
+	}
+	if e&ILD_BLEND != 0 {
+		parts = append(parts, "ILD_BLEND")
+	}
+	if e&ILD_MASK != 0 {
+		parts = append(parts, "ILD_MASK")
+	}
+	if e&ILD_IMAGE != 0 {
+		parts = append(parts, "ILD_IMAGE")
+	}
+	if e&ILD_ROP != 0 {
+		parts = append(parts, "ILD_ROP")
+	}
+	if e&ILD_OVERLAYMASK != 0 {
+		parts = append(parts, "ILD_OVERLAYMASK")
+	}
+	if e&ILD_PRESERVEALPHA != 0 {
+		parts = append(parts, "ILD_PRESERVEALPHA")
+	}
+	if e&ILD_SCALE != 0 {
+		parts = append(parts, "ILD_SCALE")
+	}
+	if e&ILD_DPISCALE != 0 {
+		parts = append(parts, "ILD_DPISCALE")
+	}
+	if e&ILD_ASYNC != 0 {
+		parts = append(parts, "ILD_ASYNC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type IMAGE_LIST_ITEM_FLAGS uint32
 
 const (
@@ -1337,6 +3943,20 @@ const (
 	ILIF_LOWQUALITY IMAGE_LIST_ITEM_FLAGS = 2
 )
 
+// String returns the IMAGE_LIST_ITEM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMAGE_LIST_ITEM_FLAGS) String() string {
+	switch e {
+	case ILIF_ALPHA:
+		return "ILIF_ALPHA"
+	case ILIF_LOWQUALITY:
+		return "ILIF_LOWQUALITY"
+	default:
+		return fmt.Sprintf("IMAGE_LIST_ITEM_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IMAGE_LIST_WRITE_STREAM_FLAGS uint32
 
 const (
@@ -1344,6 +3964,20 @@ const (
 	ILP_DOWNLEVEL IMAGE_LIST_WRITE_STREAM_FLAGS = 1
 )
 
+// String returns the IMAGE_LIST_WRITE_STREAM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMAGE_LIST_WRITE_STREAM_FLAGS) String() string {
+	var parts []string
+	if e&ILP_DOWNLEVEL != 0 {
+		parts = append(parts, "ILP_DOWNLEVEL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type INITCOMMONCONTROLSEX_ICC uint32
 
 const (
@@ -1366,6 +4000,67 @@ const (
 	ICC_WIN95_CLASSES      INITCOMMONCONTROLSEX_ICC = 255
 )
 
+// String returns the INITCOMMONCONTROLSEX_ICC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INITCOMMONCONTROLSEX_ICC) String() string {
+	var parts []string
+	if e&ICC_ANIMATE_CLASS != 0 {
+		parts = append(parts, "ICC_ANIMATE_CLASS")
+	}
+	if e&ICC_BAR_CLASSES != 0 {
+		parts = append(parts, "ICC_BAR_CLASSES")
+	}
+	if e&ICC_COOL_CLASSES != 0 {
+		parts = append(parts, "ICC_COOL_CLASSES")
+	}
+	if e&ICC_DATE_CLASSES != 0 {
+		parts = append(parts, "ICC_DATE_CLASSES")
+	}
+	if e&ICC_HOTKEY_CLASS != 0 {
+		parts = append(parts, "ICC_HOTKEY_CLASS")
+	}
+	if e&ICC_INTERNET_CLASSES != 0 {
+		parts = append(parts, "ICC_INTERNET_CLASSES")
+	}
+	if e&ICC_LINK_CLASS != 0 {
+		parts = append(parts, "ICC_LINK_CLASS")
+	}
+	if e&ICC_LISTVIEW_CLASSES != 0 {
+		parts = append(parts, "ICC_LISTVIEW_CLASSES")
+	}
+	if e&ICC_NATIVEFNTCTL_CLASS != 0 {
+		parts = append(parts, "ICC_NATIVEFNTCTL_CLASS")
+	}
+	if e&ICC_PAGESCROLLER_CLASS != 0 {
+		parts = append(parts, "ICC_PAGESCROLLER_CLASS")
+	}
+	if e&ICC_PROGRESS_CLASS != 0 {
+		parts = append(parts, "ICC_PROGRESS_CLASS")
+	}
+	if e&ICC_STANDARD_CLASSES != 0 {
+		parts = append(parts, "ICC_STANDARD_CLASSES")
+	}
+	if e&ICC_TAB_CLASSES != 0 {
+		parts = append(parts, "ICC_TAB_CLASSES")
+	}
+	if e&ICC_TREEVIEW_CLASSES != 0 {
+		parts = append(parts, "ICC_TREEVIEW_CLASSES")
+	}
+	if e&ICC_UPDOWN_CLASS != 0 {
+		parts = append(parts, "ICC_UPDOWN_CLASS")
+	}
+	if e&ICC_USEREX_CLASSES != 0 {
+		parts = append(parts, "ICC_USEREX_CLASSES")
+	}
+	if e&ICC_WIN95_CLASSES != 0 {
+		parts = append(parts, "ICC_WIN95_CLASSES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type ITEMSTATES int32
 
 const (
@@ -1374,6 +4069,23 @@ const (
 	LBPSI_SELECTED         ITEMSTATES = 3
 	LBPSI_SELECTEDNOTFOCUS ITEMSTATES = 4
 )
+
+// String returns the ITEMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ITEMSTATES) String() string {
+	switch e {
+	case LBPSI_HOT:
+		return "LBPSI_HOT"
+	case LBPSI_HOTSELECTED:
+		return "LBPSI_HOTSELECTED"
+	case LBPSI_SELECTED:
+		return "LBPSI_SELECTED"
+	case LBPSI_SELECTEDNOTFOCUS:
+		return "LBPSI_SELECTEDNOTFOCUS"
+	default:
+		return fmt.Sprintf("ITEMSTATES(%d)", int32(e))
+	}
+}
 
 type LABELSTATES int32
 
@@ -1384,6 +4096,23 @@ const (
 	FLS_DISABLED   LABELSTATES = 4
 )
 
+// String returns the LABELSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LABELSTATES) String() string {
+	switch e {
+	case FLS_NORMAL:
+		return "FLS_NORMAL"
+	case FLS_SELECTED:
+		return "FLS_SELECTED"
+	case FLS_EMPHASIZED:
+		return "FLS_EMPHASIZED"
+	case FLS_DISABLED:
+		return "FLS_DISABLED"
+	default:
+		return fmt.Sprintf("LABELSTATES(%d)", int32(e))
+	}
+}
+
 type LINKHEADERSTATES int32
 
 const (
@@ -1391,11 +4120,35 @@ const (
 	FLH_HOVER  LINKHEADERSTATES = 2
 )
 
+// String returns the LINKHEADERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LINKHEADERSTATES) String() string {
+	switch e {
+	case FLH_NORMAL:
+		return "FLH_NORMAL"
+	case FLH_HOVER:
+		return "FLH_HOVER"
+	default:
+		return fmt.Sprintf("LINKHEADERSTATES(%d)", int32(e))
+	}
+}
+
 type LINKPARTS int32
 
 const (
 	LP_HYPERLINK LINKPARTS = 1
 )
+
+// String returns the LINKPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LINKPARTS) String() string {
+	switch e {
+	case LP_HYPERLINK:
+		return "LP_HYPERLINK"
+	default:
+		return fmt.Sprintf("LINKPARTS(%d)", int32(e))
+	}
+}
 
 type LINKSTATES int32
 
@@ -1403,6 +4156,19 @@ const (
 	FLYOUTLINK_NORMAL LINKSTATES = 1
 	FLYOUTLINK_HOVER  LINKSTATES = 2
 )
+
+// String returns the LINKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LINKSTATES) String() string {
+	switch e {
+	case FLYOUTLINK_NORMAL:
+		return "FLYOUTLINK_NORMAL"
+	case FLYOUTLINK_HOVER:
+		return "FLYOUTLINK_HOVER"
+	default:
+		return fmt.Sprintf("LINKSTATES(%d)", int32(e))
+	}
+}
 
 type LISTBOXPARTS int32
 
@@ -1414,6 +4180,25 @@ const (
 	LBCP_ITEM            LISTBOXPARTS = 5
 )
 
+// String returns the LISTBOXPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LISTBOXPARTS) String() string {
+	switch e {
+	case LBCP_BORDER_HSCROLL:
+		return "LBCP_BORDER_HSCROLL"
+	case LBCP_BORDER_HVSCROLL:
+		return "LBCP_BORDER_HVSCROLL"
+	case LBCP_BORDER_NOSCROLL:
+		return "LBCP_BORDER_NOSCROLL"
+	case LBCP_BORDER_VSCROLL:
+		return "LBCP_BORDER_VSCROLL"
+	case LBCP_ITEM:
+		return "LBCP_ITEM"
+	default:
+		return fmt.Sprintf("LISTBOXPARTS(%d)", int32(e))
+	}
+}
+
 type LISTITEMSTATES int32
 
 const (
@@ -1424,6 +4209,27 @@ const (
 	LISS_SELECTEDNOTFOCUS LISTITEMSTATES = 5
 	LISS_HOTSELECTED      LISTITEMSTATES = 6
 )
+
+// String returns the LISTITEMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LISTITEMSTATES) String() string {
+	switch e {
+	case LISS_NORMAL:
+		return "LISS_NORMAL"
+	case LISS_HOT:
+		return "LISS_HOT"
+	case LISS_SELECTED:
+		return "LISS_SELECTED"
+	case LISS_DISABLED:
+		return "LISS_DISABLED"
+	case LISS_SELECTEDNOTFOCUS:
+		return "LISS_SELECTEDNOTFOCUS"
+	case LISS_HOTSELECTED:
+		return "LISS_HOTSELECTED"
+	default:
+		return fmt.Sprintf("LISTITEMSTATES(%d)", int32(e))
+	}
+}
 
 type LISTVIEWPARTS int32
 
@@ -1440,6 +4246,36 @@ const (
 	LVP_COLUMNDETAIL     LISTVIEWPARTS = 10
 )
 
+// String returns the LISTVIEWPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LISTVIEWPARTS) String() string {
+	switch e {
+	case LVP_LISTITEM:
+		return "LVP_LISTITEM"
+	case LVP_LISTGROUP:
+		return "LVP_LISTGROUP"
+	case LVP_LISTDETAIL:
+		return "LVP_LISTDETAIL"
+	case LVP_LISTSORTEDDETAIL:
+		return "LVP_LISTSORTEDDETAIL"
+	case LVP_EMPTYTEXT:
+		return "LVP_EMPTYTEXT"
+	case LVP_GROUPHEADER:
+		return "LVP_GROUPHEADER"
+	case LVP_GROUPHEADERLINE:
+		return "LVP_GROUPHEADERLINE"
+	case LVP_EXPANDBUTTON:
+		return "LVP_EXPANDBUTTON"
+	case LVP_COLLAPSEBUTTON:
+		return "LVP_COLLAPSEBUTTON"
+	case LVP_COLUMNDETAIL:
+		return "LVP_COLUMNDETAIL"
+	default:
+		return fmt.Sprintf("LISTVIEWPARTS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type LIST_ITEM_FLAGS uint32
 
 const (
@@ -1449,6 +4285,29 @@ const (
 	LIF_URL       LIST_ITEM_FLAGS = 8
 )
 
+// String returns the LIST_ITEM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIST_ITEM_FLAGS) String() string {
+	var parts []string
+	if e&LIF_ITEMINDEX != 0 {
+		parts = append(parts, "LIF_ITEMINDEX")
+	}
+	if e&LIF_STATE != 0 {
+		parts = append(parts, "LIF_STATE")
+	}
+	if e&LIF_ITEMID != 0 {
+		parts = append(parts, "LIF_ITEMID")
+	}
+	if e&LIF_URL != 0 {
+		parts = append(parts, "LIF_URL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LIST_ITEM_STATE_FLAGS uint32
 
 const (
@@ -1459,6 +4318,32 @@ const (
 	LIS_DEFAULTCOLORS LIST_ITEM_STATE_FLAGS = 16
 )
 
+// String returns the LIST_ITEM_STATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIST_ITEM_STATE_FLAGS) String() string {
+	var parts []string
+	if e&LIS_FOCUSED != 0 {
+		parts = append(parts, "LIS_FOCUSED")
+	}
+	if e&LIS_ENABLED != 0 {
+		parts = append(parts, "LIS_ENABLED")
+	}
+	if e&LIS_VISITED != 0 {
+		parts = append(parts, "LIS_VISITED")
+	}
+	if e&LIS_HOTTRACK != 0 {
+		parts = append(parts, "LIS_HOTTRACK")
+	}
+	if e&LIS_DEFAULTCOLORS != 0 {
+		parts = append(parts, "LIS_DEFAULTCOLORS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LIST_VIEW_BACKGROUND_IMAGE_FLAGS uint32
 
 const (
@@ -1474,6 +4359,41 @@ const (
 	LVBKIF_FLAG_ALPHABLEND LIST_VIEW_BACKGROUND_IMAGE_FLAGS = 536870912
 )
 
+// String returns the LIST_VIEW_BACKGROUND_IMAGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIST_VIEW_BACKGROUND_IMAGE_FLAGS) String() string {
+	var parts []string
+	if e&LVBKIF_SOURCE_HBITMAP != 0 {
+		parts = append(parts, "LVBKIF_SOURCE_HBITMAP")
+	}
+	if e&LVBKIF_SOURCE_URL != 0 {
+		parts = append(parts, "LVBKIF_SOURCE_URL")
+	}
+	if e&LVBKIF_SOURCE_MASK != 0 {
+		parts = append(parts, "LVBKIF_SOURCE_MASK")
+	}
+	if e&LVBKIF_STYLE_TILE != 0 {
+		parts = append(parts, "LVBKIF_STYLE_TILE")
+	}
+	if e&LVBKIF_STYLE_MASK != 0 {
+		parts = append(parts, "LVBKIF_STYLE_MASK")
+	}
+	if e&LVBKIF_FLAG_TILEOFFSET != 0 {
+		parts = append(parts, "LVBKIF_FLAG_TILEOFFSET")
+	}
+	if e&LVBKIF_TYPE_WATERMARK != 0 {
+		parts = append(parts, "LVBKIF_TYPE_WATERMARK")
+	}
+	if e&LVBKIF_FLAG_ALPHABLEND != 0 {
+		parts = append(parts, "LVBKIF_FLAG_ALPHABLEND")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LIST_VIEW_GROUP_ALIGN_FLAGS uint32
 
 const (
@@ -1485,6 +4405,35 @@ const (
 	LVGA_FOOTER_RIGHT  LIST_VIEW_GROUP_ALIGN_FLAGS = 32
 )
 
+// String returns the LIST_VIEW_GROUP_ALIGN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIST_VIEW_GROUP_ALIGN_FLAGS) String() string {
+	var parts []string
+	if e&LVGA_HEADER_LEFT != 0 {
+		parts = append(parts, "LVGA_HEADER_LEFT")
+	}
+	if e&LVGA_HEADER_CENTER != 0 {
+		parts = append(parts, "LVGA_HEADER_CENTER")
+	}
+	if e&LVGA_HEADER_RIGHT != 0 {
+		parts = append(parts, "LVGA_HEADER_RIGHT")
+	}
+	if e&LVGA_FOOTER_LEFT != 0 {
+		parts = append(parts, "LVGA_FOOTER_LEFT")
+	}
+	if e&LVGA_FOOTER_CENTER != 0 {
+		parts = append(parts, "LVGA_FOOTER_CENTER")
+	}
+	if e&LVGA_FOOTER_RIGHT != 0 {
+		parts = append(parts, "LVGA_FOOTER_RIGHT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LIST_VIEW_GROUP_STATE_FLAGS uint32
 
 const (
@@ -1499,6 +4448,41 @@ const (
 	LVGS_SUBSETLINKFOCUSED LIST_VIEW_GROUP_STATE_FLAGS = 128
 )
 
+// String returns the LIST_VIEW_GROUP_STATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIST_VIEW_GROUP_STATE_FLAGS) String() string {
+	var parts []string
+	if e&LVGS_COLLAPSED != 0 {
+		parts = append(parts, "LVGS_COLLAPSED")
+	}
+	if e&LVGS_HIDDEN != 0 {
+		parts = append(parts, "LVGS_HIDDEN")
+	}
+	if e&LVGS_NOHEADER != 0 {
+		parts = append(parts, "LVGS_NOHEADER")
+	}
+	if e&LVGS_COLLAPSIBLE != 0 {
+		parts = append(parts, "LVGS_COLLAPSIBLE")
+	}
+	if e&LVGS_FOCUSED != 0 {
+		parts = append(parts, "LVGS_FOCUSED")
+	}
+	if e&LVGS_SELECTED != 0 {
+		parts = append(parts, "LVGS_SELECTED")
+	}
+	if e&LVGS_SUBSETED != 0 {
+		parts = append(parts, "LVGS_SUBSETED")
+	}
+	if e&LVGS_SUBSETLINKFOCUSED != 0 {
+		parts = append(parts, "LVGS_SUBSETLINKFOCUSED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS int32
 
 const (
@@ -1509,6 +4493,32 @@ const (
 	LVCFMT_TILE_PLACEMENTMASK LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS = 3145728
 )
 
+// String returns the LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS) String() string {
+	var parts []string
+	if e&LVCFMT_LINE_BREAK != 0 {
+		parts = append(parts, "LVCFMT_LINE_BREAK")
+	}
+	if e&LVCFMT_FILL != 0 {
+		parts = append(parts, "LVCFMT_FILL")
+	}
+	if e&LVCFMT_WRAP != 0 {
+		parts = append(parts, "LVCFMT_WRAP")
+	}
+	if e&LVCFMT_NO_TITLE != 0 {
+		parts = append(parts, "LVCFMT_NO_TITLE")
+	}
+	if e&LVCFMT_TILE_PLACEMENTMASK != 0 {
+		parts = append(parts, "LVCFMT_TILE_PLACEMENTMASK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LIST_VIEW_ITEM_FLAGS uint32
 
 const (
@@ -1524,6 +4534,46 @@ const (
 	LVIF_DI_SETITEM  LIST_VIEW_ITEM_FLAGS = 4096
 )
 
+// String returns the LIST_VIEW_ITEM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIST_VIEW_ITEM_FLAGS) String() string {
+	var parts []string
+	if e&LVIF_TEXT != 0 {
+		parts = append(parts, "LVIF_TEXT")
+	}
+	if e&LVIF_IMAGE != 0 {
+		parts = append(parts, "LVIF_IMAGE")
+	}
+	if e&LVIF_PARAM != 0 {
+		parts = append(parts, "LVIF_PARAM")
+	}
+	if e&LVIF_STATE != 0 {
+		parts = append(parts, "LVIF_STATE")
+	}
+	if e&LVIF_INDENT != 0 {
+		parts = append(parts, "LVIF_INDENT")
+	}
+	if e&LVIF_NORECOMPUTE != 0 {
+		parts = append(parts, "LVIF_NORECOMPUTE")
+	}
+	if e&LVIF_GROUPID != 0 {
+		parts = append(parts, "LVIF_GROUPID")
+	}
+	if e&LVIF_COLUMNS != 0 {
+		parts = append(parts, "LVIF_COLUMNS")
+	}
+	if e&LVIF_COLFMT != 0 {
+		parts = append(parts, "LVIF_COLFMT")
+	}
+	if e&LVIF_DI_SETITEM != 0 {
+		parts = append(parts, "LVIF_DI_SETITEM")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type LIST_VIEW_ITEM_STATE_FLAGS uint32
 
 const (
@@ -1537,6 +4587,31 @@ const (
 	LVIS_STATEIMAGEMASK LIST_VIEW_ITEM_STATE_FLAGS = 61440
 )
 
+// String returns the LIST_VIEW_ITEM_STATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIST_VIEW_ITEM_STATE_FLAGS) String() string {
+	switch e {
+	case LVIS_FOCUSED:
+		return "LVIS_FOCUSED"
+	case LVIS_SELECTED:
+		return "LVIS_SELECTED"
+	case LVIS_CUT:
+		return "LVIS_CUT"
+	case LVIS_DROPHILITED:
+		return "LVIS_DROPHILITED"
+	case LVIS_GLOW:
+		return "LVIS_GLOW"
+	case LVIS_ACTIVATING:
+		return "LVIS_ACTIVATING"
+	case LVIS_OVERLAYMASK:
+		return "LVIS_OVERLAYMASK"
+	case LVIS_STATEIMAGEMASK:
+		return "LVIS_STATEIMAGEMASK"
+	default:
+		return fmt.Sprintf("LIST_VIEW_ITEM_STATE_FLAGS(%d)", uint32(e))
+	}
+}
+
 type LOGOFFBUTTONSSTATES int32
 
 const (
@@ -1545,6 +4620,22 @@ const (
 	SPLS_PRESSED LOGOFFBUTTONSSTATES = 3
 )
 
+// String returns the LOGOFFBUTTONSSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOGOFFBUTTONSSTATES) String() string {
+	switch e {
+	case SPLS_NORMAL:
+		return "SPLS_NORMAL"
+	case SPLS_HOT:
+		return "SPLS_HOT"
+	case SPLS_PRESSED:
+		return "SPLS_PRESSED"
+	default:
+		return fmt.Sprintf("LOGOFFBUTTONSSTATES(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type LVCOLUMNW_FORMAT int32
 
 const (
@@ -1561,6 +4652,47 @@ const (
 	LVCFMT_SPLITBUTTON     LVCOLUMNW_FORMAT = 16777216
 )
 
+// String returns the LVCOLUMNW_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LVCOLUMNW_FORMAT) String() string {
+	var parts []string
+	if e&LVCFMT_RIGHT != 0 {
+		parts = append(parts, "LVCFMT_RIGHT")
+	}
+	if e&LVCFMT_CENTER != 0 {
+		parts = append(parts, "LVCFMT_CENTER")
+	}
+	if e&LVCFMT_JUSTIFYMASK != 0 {
+		parts = append(parts, "LVCFMT_JUSTIFYMASK")
+	}
+	if e&LVCFMT_IMAGE != 0 {
+		parts = append(parts, "LVCFMT_IMAGE")
+	}
+	if e&LVCFMT_BITMAP_ON_RIGHT != 0 {
+		parts = append(parts, "LVCFMT_BITMAP_ON_RIGHT")
+	}
+	if e&LVCFMT_COL_HAS_IMAGES != 0 {
+		parts = append(parts, "LVCFMT_COL_HAS_IMAGES")
+	}
+	if e&LVCFMT_FIXED_WIDTH != 0 {
+		parts = append(parts, "LVCFMT_FIXED_WIDTH")
+	}
+	if e&LVCFMT_NO_DPI_SCALE != 0 {
+		parts = append(parts, "LVCFMT_NO_DPI_SCALE")
+	}
+	if e&LVCFMT_FIXED_RATIO != 0 {
+		parts = append(parts, "LVCFMT_FIXED_RATIO")
+	}
+	if e&LVCFMT_SPLITBUTTON != 0 {
+		parts = append(parts, "LVCFMT_SPLITBUTTON")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LVCOLUMNW_MASK uint32
 
 const (
@@ -1575,6 +4707,44 @@ const (
 	LVCF_IDEALWIDTH   LVCOLUMNW_MASK = 256
 )
 
+// String returns the LVCOLUMNW_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LVCOLUMNW_MASK) String() string {
+	var parts []string
+	if e&LVCF_FMT != 0 {
+		parts = append(parts, "LVCF_FMT")
+	}
+	if e&LVCF_WIDTH != 0 {
+		parts = append(parts, "LVCF_WIDTH")
+	}
+	if e&LVCF_TEXT != 0 {
+		parts = append(parts, "LVCF_TEXT")
+	}
+	if e&LVCF_SUBITEM != 0 {
+		parts = append(parts, "LVCF_SUBITEM")
+	}
+	if e&LVCF_IMAGE != 0 {
+		parts = append(parts, "LVCF_IMAGE")
+	}
+	if e&LVCF_ORDER != 0 {
+		parts = append(parts, "LVCF_ORDER")
+	}
+	if e&LVCF_MINWIDTH != 0 {
+		parts = append(parts, "LVCF_MINWIDTH")
+	}
+	if e&LVCF_DEFAULTWIDTH != 0 {
+		parts = append(parts, "LVCF_DEFAULTWIDTH")
+	}
+	if e&LVCF_IDEALWIDTH != 0 {
+		parts = append(parts, "LVCF_IDEALWIDTH")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LVFINDINFOW_FLAGS uint32
 
 const (
@@ -1586,6 +4756,34 @@ const (
 	LVFI_NEARESTXY LVFINDINFOW_FLAGS = 64
 )
 
+// String returns the LVFINDINFOW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LVFINDINFOW_FLAGS) String() string {
+	var parts []string
+	if e&LVFI_PARAM != 0 {
+		parts = append(parts, "LVFI_PARAM")
+	}
+	if e&LVFI_PARTIAL != 0 {
+		parts = append(parts, "LVFI_PARTIAL")
+	}
+	if e&LVFI_STRING != 0 {
+		parts = append(parts, "LVFI_STRING")
+	}
+	if e&LVFI_SUBSTRING != 0 {
+		parts = append(parts, "LVFI_SUBSTRING")
+	}
+	if e&LVFI_WRAP != 0 {
+		parts = append(parts, "LVFI_WRAP")
+	}
+	if e&LVFI_NEARESTXY != 0 {
+		parts = append(parts, "LVFI_NEARESTXY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type LVFOOTERITEM_MASK uint32
 
 const (
@@ -1593,6 +4791,20 @@ const (
 	LVFIF_STATE LVFOOTERITEM_MASK = 2
 )
 
+// String returns the LVFOOTERITEM_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LVFOOTERITEM_MASK) String() string {
+	switch e {
+	case LVFIF_TEXT:
+		return "LVFIF_TEXT"
+	case LVFIF_STATE:
+		return "LVFIF_STATE"
+	default:
+		return fmt.Sprintf("LVFOOTERITEM_MASK(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type LVGROUP_MASK uint32
 
 const (
@@ -1613,6 +4825,59 @@ const (
 	LVGF_SUBSETITEMS       LVGROUP_MASK = 65536
 )
 
+// String returns the LVGROUP_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LVGROUP_MASK) String() string {
+	var parts []string
+	if e&LVGF_HEADER != 0 {
+		parts = append(parts, "LVGF_HEADER")
+	}
+	if e&LVGF_FOOTER != 0 {
+		parts = append(parts, "LVGF_FOOTER")
+	}
+	if e&LVGF_STATE != 0 {
+		parts = append(parts, "LVGF_STATE")
+	}
+	if e&LVGF_ALIGN != 0 {
+		parts = append(parts, "LVGF_ALIGN")
+	}
+	if e&LVGF_GROUPID != 0 {
+		parts = append(parts, "LVGF_GROUPID")
+	}
+	if e&LVGF_SUBTITLE != 0 {
+		parts = append(parts, "LVGF_SUBTITLE")
+	}
+	if e&LVGF_TASK != 0 {
+		parts = append(parts, "LVGF_TASK")
+	}
+	if e&LVGF_DESCRIPTIONTOP != 0 {
+		parts = append(parts, "LVGF_DESCRIPTIONTOP")
+	}
+	if e&LVGF_DESCRIPTIONBOTTOM != 0 {
+		parts = append(parts, "LVGF_DESCRIPTIONBOTTOM")
+	}
+	if e&LVGF_TITLEIMAGE != 0 {
+		parts = append(parts, "LVGF_TITLEIMAGE")
+	}
+	if e&LVGF_EXTENDEDIMAGE != 0 {
+		parts = append(parts, "LVGF_EXTENDEDIMAGE")
+	}
+	if e&LVGF_ITEMS != 0 {
+		parts = append(parts, "LVGF_ITEMS")
+	}
+	if e&LVGF_SUBSET != 0 {
+		parts = append(parts, "LVGF_SUBSET")
+	}
+	if e&LVGF_SUBSETITEMS != 0 {
+		parts = append(parts, "LVGF_SUBSETITEMS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LVHITTESTINFO_FLAGS uint32
 
 const (
@@ -1635,6 +4900,67 @@ const (
 	LVHT_EX_FOOTER           LVHITTESTINFO_FLAGS = 134217728
 )
 
+// String returns the LVHITTESTINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LVHITTESTINFO_FLAGS) String() string {
+	var parts []string
+	if e&LVHT_ABOVE != 0 {
+		parts = append(parts, "LVHT_ABOVE")
+	}
+	if e&LVHT_BELOW != 0 {
+		parts = append(parts, "LVHT_BELOW")
+	}
+	if e&LVHT_NOWHERE != 0 {
+		parts = append(parts, "LVHT_NOWHERE")
+	}
+	if e&LVHT_ONITEMICON != 0 {
+		parts = append(parts, "LVHT_ONITEMICON")
+	}
+	if e&LVHT_ONITEMLABEL != 0 {
+		parts = append(parts, "LVHT_ONITEMLABEL")
+	}
+	if e&LVHT_ONITEMSTATEICON != 0 {
+		parts = append(parts, "LVHT_ONITEMSTATEICON")
+	}
+	if e&LVHT_TOLEFT != 0 {
+		parts = append(parts, "LVHT_TOLEFT")
+	}
+	if e&LVHT_TORIGHT != 0 {
+		parts = append(parts, "LVHT_TORIGHT")
+	}
+	if e&LVHT_EX_GROUP_HEADER != 0 {
+		parts = append(parts, "LVHT_EX_GROUP_HEADER")
+	}
+	if e&LVHT_EX_GROUP_FOOTER != 0 {
+		parts = append(parts, "LVHT_EX_GROUP_FOOTER")
+	}
+	if e&LVHT_EX_GROUP_COLLAPSE != 0 {
+		parts = append(parts, "LVHT_EX_GROUP_COLLAPSE")
+	}
+	if e&LVHT_EX_GROUP_BACKGROUND != 0 {
+		parts = append(parts, "LVHT_EX_GROUP_BACKGROUND")
+	}
+	if e&LVHT_EX_GROUP_STATEICON != 0 {
+		parts = append(parts, "LVHT_EX_GROUP_STATEICON")
+	}
+	if e&LVHT_EX_GROUP_SUBSETLINK != 0 {
+		parts = append(parts, "LVHT_EX_GROUP_SUBSETLINK")
+	}
+	if e&LVHT_EX_GROUP != 0 {
+		parts = append(parts, "LVHT_EX_GROUP")
+	}
+	if e&LVHT_EX_ONCONTENTS != 0 {
+		parts = append(parts, "LVHT_EX_ONCONTENTS")
+	}
+	if e&LVHT_EX_FOOTER != 0 {
+		parts = append(parts, "LVHT_EX_FOOTER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type LVITEMA_GROUP_ID int32
 
 const (
@@ -1642,6 +4968,20 @@ const (
 	I_GROUPIDNONE     LVITEMA_GROUP_ID = -2
 )
 
+// String returns the LVITEMA_GROUP_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LVITEMA_GROUP_ID) String() string {
+	switch e {
+	case I_GROUPIDCALLBACK:
+		return "I_GROUPIDCALLBACK"
+	case I_GROUPIDNONE:
+		return "I_GROUPIDNONE"
+	default:
+		return fmt.Sprintf("LVITEMA_GROUP_ID(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type LVTILEVIEWINFO_FLAGS uint32
 
 const (
@@ -1651,6 +4991,26 @@ const (
 	LVTVIF_FIXEDSIZE   LVTILEVIEWINFO_FLAGS = 3
 )
 
+// String returns the LVTILEVIEWINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LVTILEVIEWINFO_FLAGS) String() string {
+	var parts []string
+	if e&LVTVIF_FIXEDWIDTH != 0 {
+		parts = append(parts, "LVTVIF_FIXEDWIDTH")
+	}
+	if e&LVTVIF_FIXEDHEIGHT != 0 {
+		parts = append(parts, "LVTVIF_FIXEDHEIGHT")
+	}
+	if e&LVTVIF_FIXEDSIZE != 0 {
+		parts = append(parts, "LVTVIF_FIXEDSIZE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type LVTILEVIEWINFO_MASK uint32
 
 const (
@@ -1659,12 +5019,44 @@ const (
 	LVTVIM_LABELMARGIN LVTILEVIEWINFO_MASK = 4
 )
 
+// String returns the LVTILEVIEWINFO_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LVTILEVIEWINFO_MASK) String() string {
+	var parts []string
+	if e&LVTVIM_TILESIZE != 0 {
+		parts = append(parts, "LVTVIM_TILESIZE")
+	}
+	if e&LVTVIM_COLUMNS != 0 {
+		parts = append(parts, "LVTVIM_COLUMNS")
+	}
+	if e&LVTVIM_LABELMARGIN != 0 {
+		parts = append(parts, "LVTVIM_LABELMARGIN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type MARKUPTEXTSTATES int32
 
 const (
 	EMT_NORMALTEXT MARKUPTEXTSTATES = 1
 	EMT_LINKTEXT   MARKUPTEXTSTATES = 2
 )
+
+// String returns the MARKUPTEXTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MARKUPTEXTSTATES) String() string {
+	switch e {
+	case EMT_NORMALTEXT:
+		return "EMT_NORMALTEXT"
+	case EMT_LINKTEXT:
+		return "EMT_LINKTEXT"
+	default:
+		return fmt.Sprintf("MARKUPTEXTSTATES(%d)", int32(e))
+	}
+}
 
 type MAXBUTTONSTATES int32
 
@@ -1675,6 +5067,23 @@ const (
 	MAXBS_DISABLED MAXBUTTONSTATES = 4
 )
 
+// String returns the MAXBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MAXBUTTONSTATES) String() string {
+	switch e {
+	case MAXBS_NORMAL:
+		return "MAXBS_NORMAL"
+	case MAXBS_HOT:
+		return "MAXBS_HOT"
+	case MAXBS_PUSHED:
+		return "MAXBS_PUSHED"
+	case MAXBS_DISABLED:
+		return "MAXBS_DISABLED"
+	default:
+		return fmt.Sprintf("MAXBUTTONSTATES(%d)", int32(e))
+	}
+}
+
 type MAXCAPTIONSTATES int32
 
 const (
@@ -1683,6 +5092,22 @@ const (
 	MXCS_DISABLED MAXCAPTIONSTATES = 3
 )
 
+// String returns the MAXCAPTIONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MAXCAPTIONSTATES) String() string {
+	switch e {
+	case MXCS_ACTIVE:
+		return "MXCS_ACTIVE"
+	case MXCS_INACTIVE:
+		return "MXCS_INACTIVE"
+	case MXCS_DISABLED:
+		return "MXCS_DISABLED"
+	default:
+		return fmt.Sprintf("MAXCAPTIONSTATES(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MCGRIDINFO_FLAGS uint32
 
 const (
@@ -1690,6 +5115,25 @@ const (
 	MCGIF_RECT MCGRIDINFO_FLAGS = 2
 	MCGIF_NAME MCGRIDINFO_FLAGS = 4
 )
+
+// String returns the MCGRIDINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MCGRIDINFO_FLAGS) String() string {
+	var parts []string
+	if e&MCGIF_DATE != 0 {
+		parts = append(parts, "MCGIF_DATE")
+	}
+	if e&MCGIF_RECT != 0 {
+		parts = append(parts, "MCGIF_RECT")
+	}
+	if e&MCGIF_NAME != 0 {
+		parts = append(parts, "MCGIF_NAME")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type MCGRIDINFO_PART uint32
 
@@ -1705,6 +5149,34 @@ const (
 	MCGIP_CALENDARCELL    MCGRIDINFO_PART = 8
 )
 
+// String returns the MCGRIDINFO_PART constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MCGRIDINFO_PART) String() string {
+	switch e {
+	case MCGIP_CALENDARCONTROL:
+		return "MCGIP_CALENDARCONTROL"
+	case MCGIP_NEXT:
+		return "MCGIP_NEXT"
+	case MCGIP_PREV:
+		return "MCGIP_PREV"
+	case MCGIP_FOOTER:
+		return "MCGIP_FOOTER"
+	case MCGIP_CALENDAR:
+		return "MCGIP_CALENDAR"
+	case MCGIP_CALENDARHEADER:
+		return "MCGIP_CALENDARHEADER"
+	case MCGIP_CALENDARBODY:
+		return "MCGIP_CALENDARBODY"
+	case MCGIP_CALENDARROW:
+		return "MCGIP_CALENDARROW"
+	case MCGIP_CALENDARCELL:
+		return "MCGIP_CALENDARCELL"
+	default:
+		return fmt.Sprintf("MCGRIDINFO_PART(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MCHITTESTINFO_HIT_FLAGS uint32
 
 const (
@@ -1730,6 +5202,73 @@ const (
 	MCHT_CALENDARDATEMAX  MCHITTESTINFO_HIT_FLAGS = 131077
 )
 
+// String returns the MCHITTESTINFO_HIT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MCHITTESTINFO_HIT_FLAGS) String() string {
+	var parts []string
+	if e&MCHT_TITLE != 0 {
+		parts = append(parts, "MCHT_TITLE")
+	}
+	if e&MCHT_CALENDAR != 0 {
+		parts = append(parts, "MCHT_CALENDAR")
+	}
+	if e&MCHT_TODAYLINK != 0 {
+		parts = append(parts, "MCHT_TODAYLINK")
+	}
+	if e&MCHT_CALENDARCONTROL != 0 {
+		parts = append(parts, "MCHT_CALENDARCONTROL")
+	}
+	if e&MCHT_NEXT != 0 {
+		parts = append(parts, "MCHT_NEXT")
+	}
+	if e&MCHT_PREV != 0 {
+		parts = append(parts, "MCHT_PREV")
+	}
+	if e&MCHT_TITLEBK != 0 {
+		parts = append(parts, "MCHT_TITLEBK")
+	}
+	if e&MCHT_TITLEMONTH != 0 {
+		parts = append(parts, "MCHT_TITLEMONTH")
+	}
+	if e&MCHT_TITLEYEAR != 0 {
+		parts = append(parts, "MCHT_TITLEYEAR")
+	}
+	if e&MCHT_TITLEBTNNEXT != 0 {
+		parts = append(parts, "MCHT_TITLEBTNNEXT")
+	}
+	if e&MCHT_TITLEBTNPREV != 0 {
+		parts = append(parts, "MCHT_TITLEBTNPREV")
+	}
+	if e&MCHT_CALENDARBK != 0 {
+		parts = append(parts, "MCHT_CALENDARBK")
+	}
+	if e&MCHT_CALENDARDATE != 0 {
+		parts = append(parts, "MCHT_CALENDARDATE")
+	}
+	if e&MCHT_CALENDARDATENEXT != 0 {
+		parts = append(parts, "MCHT_CALENDARDATENEXT")
+	}
+	if e&MCHT_CALENDARDATEPREV != 0 {
+		parts = append(parts, "MCHT_CALENDARDATEPREV")
+	}
+	if e&MCHT_CALENDARDAY != 0 {
+		parts = append(parts, "MCHT_CALENDARDAY")
+	}
+	if e&MCHT_CALENDARWEEKNUM != 0 {
+		parts = append(parts, "MCHT_CALENDARWEEKNUM")
+	}
+	if e&MCHT_CALENDARDATEMIN != 0 {
+		parts = append(parts, "MCHT_CALENDARDATEMIN")
+	}
+	if e&MCHT_CALENDARDATEMAX != 0 {
+		parts = append(parts, "MCHT_CALENDARDATEMAX")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type MDICLOSEBUTTONSTATES int32
 
 const (
@@ -1738,6 +5277,23 @@ const (
 	MDCL_PUSHED   MDICLOSEBUTTONSTATES = 3
 	MDCL_DISABLED MDICLOSEBUTTONSTATES = 4
 )
+
+// String returns the MDICLOSEBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MDICLOSEBUTTONSTATES) String() string {
+	switch e {
+	case MDCL_NORMAL:
+		return "MDCL_NORMAL"
+	case MDCL_HOT:
+		return "MDCL_HOT"
+	case MDCL_PUSHED:
+		return "MDCL_PUSHED"
+	case MDCL_DISABLED:
+		return "MDCL_DISABLED"
+	default:
+		return fmt.Sprintf("MDICLOSEBUTTONSTATES(%d)", int32(e))
+	}
+}
 
 type MDIMINBUTTONSTATES int32
 
@@ -1748,6 +5304,23 @@ const (
 	MDMI_DISABLED MDIMINBUTTONSTATES = 4
 )
 
+// String returns the MDIMINBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MDIMINBUTTONSTATES) String() string {
+	switch e {
+	case MDMI_NORMAL:
+		return "MDMI_NORMAL"
+	case MDMI_HOT:
+		return "MDMI_HOT"
+	case MDMI_PUSHED:
+		return "MDMI_PUSHED"
+	case MDMI_DISABLED:
+		return "MDMI_DISABLED"
+	default:
+		return fmt.Sprintf("MDIMINBUTTONSTATES(%d)", int32(e))
+	}
+}
+
 type MDIRESTOREBUTTONSTATES int32
 
 const (
@@ -1757,12 +5330,42 @@ const (
 	MDRE_DISABLED MDIRESTOREBUTTONSTATES = 4
 )
 
+// String returns the MDIRESTOREBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MDIRESTOREBUTTONSTATES) String() string {
+	switch e {
+	case MDRE_NORMAL:
+		return "MDRE_NORMAL"
+	case MDRE_HOT:
+		return "MDRE_HOT"
+	case MDRE_PUSHED:
+		return "MDRE_PUSHED"
+	case MDRE_DISABLED:
+		return "MDRE_DISABLED"
+	default:
+		return fmt.Sprintf("MDIRESTOREBUTTONSTATES(%d)", int32(e))
+	}
+}
+
 type MENUBANDPARTS int32
 
 const (
 	MDP_NEWAPPBUTTON MENUBANDPARTS = 1
 	MDP_SEPERATOR    MENUBANDPARTS = 2
 )
+
+// String returns the MENUBANDPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENUBANDPARTS) String() string {
+	switch e {
+	case MDP_NEWAPPBUTTON:
+		return "MDP_NEWAPPBUTTON"
+	case MDP_SEPERATOR:
+		return "MDP_SEPERATOR"
+	default:
+		return fmt.Sprintf("MENUBANDPARTS(%d)", int32(e))
+	}
+}
 
 type MENUBANDSTATES int32
 
@@ -1774,6 +5377,27 @@ const (
 	MDS_CHECKED    MENUBANDSTATES = 5
 	MDS_HOTCHECKED MENUBANDSTATES = 6
 )
+
+// String returns the MENUBANDSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENUBANDSTATES) String() string {
+	switch e {
+	case MDS_NORMAL:
+		return "MDS_NORMAL"
+	case MDS_HOT:
+		return "MDS_HOT"
+	case MDS_PRESSED:
+		return "MDS_PRESSED"
+	case MDS_DISABLED:
+		return "MDS_DISABLED"
+	case MDS_CHECKED:
+		return "MDS_CHECKED"
+	case MDS_HOTCHECKED:
+		return "MDS_HOTCHECKED"
+	default:
+		return fmt.Sprintf("MENUBANDSTATES(%d)", int32(e))
+	}
+}
 
 type MENUPARTS int32
 
@@ -1808,6 +5432,69 @@ const (
 	MENU_POPUPSUBMENU_HCHOT       MENUPARTS = 21
 )
 
+// String returns the MENUPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MENUPARTS) String() string {
+	switch e {
+	case MENU_MENUITEM_TMSCHEMA:
+		return "MENU_MENUITEM_TMSCHEMA"
+	case MENU_MENUDROPDOWN_TMSCHEMA:
+		return "MENU_MENUDROPDOWN_TMSCHEMA"
+	case MENU_MENUBARITEM_TMSCHEMA:
+		return "MENU_MENUBARITEM_TMSCHEMA"
+	case MENU_MENUBARDROPDOWN_TMSCHEMA:
+		return "MENU_MENUBARDROPDOWN_TMSCHEMA"
+	case MENU_CHEVRON_TMSCHEMA:
+		return "MENU_CHEVRON_TMSCHEMA"
+	case MENU_SEPARATOR_TMSCHEMA:
+		return "MENU_SEPARATOR_TMSCHEMA"
+	case MENU_BARBACKGROUND:
+		return "MENU_BARBACKGROUND"
+	case MENU_BARITEM:
+		return "MENU_BARITEM"
+	case MENU_POPUPBACKGROUND:
+		return "MENU_POPUPBACKGROUND"
+	case MENU_POPUPBORDERS:
+		return "MENU_POPUPBORDERS"
+	case MENU_POPUPCHECK:
+		return "MENU_POPUPCHECK"
+	case MENU_POPUPCHECKBACKGROUND:
+		return "MENU_POPUPCHECKBACKGROUND"
+	case MENU_POPUPGUTTER:
+		return "MENU_POPUPGUTTER"
+	case MENU_POPUPITEM:
+		return "MENU_POPUPITEM"
+	case MENU_POPUPSEPARATOR:
+		return "MENU_POPUPSEPARATOR"
+	case MENU_POPUPSUBMENU:
+		return "MENU_POPUPSUBMENU"
+	case MENU_SYSTEMCLOSE:
+		return "MENU_SYSTEMCLOSE"
+	case MENU_SYSTEMMAXIMIZE:
+		return "MENU_SYSTEMMAXIMIZE"
+	case MENU_SYSTEMMINIMIZE:
+		return "MENU_SYSTEMMINIMIZE"
+	case MENU_SYSTEMRESTORE:
+		return "MENU_SYSTEMRESTORE"
+	case MENU_POPUPSUBMENUHCHOT:
+		return "MENU_POPUPSUBMENUHCHOT"
+	case MENU_SYSTEMCLOSEHCHOT:
+		return "MENU_SYSTEMCLOSEHCHOT"
+	case MENU_SYSTEMMAXIMIZEHCHOT:
+		return "MENU_SYSTEMMAXIMIZEHCHOT"
+	case MENU_SYSTEMMINIMIZEHCHOT:
+		return "MENU_SYSTEMMINIMIZEHCHOT"
+	case MENU_SYSTEMRESTOREHCHOT:
+		return "MENU_SYSTEMRESTOREHCHOT"
+	case MENU_POPUPITEMKBFOCUS:
+		return "MENU_POPUPITEMKBFOCUS"
+	case MENU_POPUPITEMFOCUSABLE:
+		return "MENU_POPUPITEMFOCUSABLE"
+	default:
+		return fmt.Sprintf("MENUPARTS(%d)", int32(e))
+	}
+}
+
 type MINBUTTONSTATES int32
 
 const (
@@ -1817,6 +5504,23 @@ const (
 	MINBS_DISABLED MINBUTTONSTATES = 4
 )
 
+// String returns the MINBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MINBUTTONSTATES) String() string {
+	switch e {
+	case MINBS_NORMAL:
+		return "MINBS_NORMAL"
+	case MINBS_HOT:
+		return "MINBS_HOT"
+	case MINBS_PUSHED:
+		return "MINBS_PUSHED"
+	case MINBS_DISABLED:
+		return "MINBS_DISABLED"
+	default:
+		return fmt.Sprintf("MINBUTTONSTATES(%d)", int32(e))
+	}
+}
+
 type MINCAPTIONSTATES int32
 
 const (
@@ -1824,6 +5528,21 @@ const (
 	MNCS_INACTIVE MINCAPTIONSTATES = 2
 	MNCS_DISABLED MINCAPTIONSTATES = 3
 )
+
+// String returns the MINCAPTIONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MINCAPTIONSTATES) String() string {
+	switch e {
+	case MNCS_ACTIVE:
+		return "MNCS_ACTIVE"
+	case MNCS_INACTIVE:
+		return "MNCS_INACTIVE"
+	case MNCS_DISABLED:
+		return "MNCS_DISABLED"
+	default:
+		return fmt.Sprintf("MINCAPTIONSTATES(%d)", int32(e))
+	}
+}
 
 type MONTHCALPARTS int32
 
@@ -1841,6 +5560,37 @@ const (
 	MC_NAVPREV               MONTHCALPARTS = 11
 )
 
+// String returns the MONTHCALPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MONTHCALPARTS) String() string {
+	switch e {
+	case MC_BACKGROUND:
+		return "MC_BACKGROUND"
+	case MC_BORDERS:
+		return "MC_BORDERS"
+	case MC_GRIDBACKGROUND:
+		return "MC_GRIDBACKGROUND"
+	case MC_COLHEADERSPLITTER:
+		return "MC_COLHEADERSPLITTER"
+	case MC_GRIDCELLBACKGROUND:
+		return "MC_GRIDCELLBACKGROUND"
+	case MC_GRIDCELL:
+		return "MC_GRIDCELL"
+	case MC_GRIDCELLUPPER:
+		return "MC_GRIDCELLUPPER"
+	case MC_TRAILINGGRIDCELL:
+		return "MC_TRAILINGGRIDCELL"
+	case MC_TRAILINGGRIDCELLUPPER:
+		return "MC_TRAILINGGRIDCELLUPPER"
+	case MC_NAVNEXT:
+		return "MC_NAVNEXT"
+	case MC_NAVPREV:
+		return "MC_NAVPREV"
+	default:
+		return fmt.Sprintf("MONTHCALPARTS(%d)", int32(e))
+	}
+}
+
 type MONTH_CALDENDAR_MESSAGES_VIEW uint32
 
 const (
@@ -1851,6 +5601,23 @@ const (
 	MCMV_MAX     MONTH_CALDENDAR_MESSAGES_VIEW = 3
 )
 
+// String returns the MONTH_CALDENDAR_MESSAGES_VIEW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MONTH_CALDENDAR_MESSAGES_VIEW) String() string {
+	switch e {
+	case MCMV_MONTH:
+		return "MCMV_MONTH"
+	case MCMV_YEAR:
+		return "MCMV_YEAR"
+	case MCMV_DECADE:
+		return "MCMV_DECADE"
+	case MCMV_CENTURY:
+		return "MCMV_CENTURY"
+	default:
+		return fmt.Sprintf("MONTH_CALDENDAR_MESSAGES_VIEW(%d)", uint32(e))
+	}
+}
+
 type MOREPROGRAMSARROWBACKSTATES int32
 
 const (
@@ -1859,6 +5626,21 @@ const (
 	SPSB_PRESSED MOREPROGRAMSARROWBACKSTATES = 3
 )
 
+// String returns the MOREPROGRAMSARROWBACKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MOREPROGRAMSARROWBACKSTATES) String() string {
+	switch e {
+	case SPSB_NORMAL:
+		return "SPSB_NORMAL"
+	case SPSB_HOT:
+		return "SPSB_HOT"
+	case SPSB_PRESSED:
+		return "SPSB_PRESSED"
+	default:
+		return fmt.Sprintf("MOREPROGRAMSARROWBACKSTATES(%d)", int32(e))
+	}
+}
+
 type MOREPROGRAMSARROWSTATES int32
 
 const (
@@ -1866,6 +5648,21 @@ const (
 	SPS_HOT     MOREPROGRAMSARROWSTATES = 2
 	SPS_PRESSED MOREPROGRAMSARROWSTATES = 3
 )
+
+// String returns the MOREPROGRAMSARROWSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MOREPROGRAMSARROWSTATES) String() string {
+	switch e {
+	case SPS_NORMAL:
+		return "SPS_NORMAL"
+	case SPS_HOT:
+		return "SPS_HOT"
+	case SPS_PRESSED:
+		return "SPS_PRESSED"
+	default:
+		return fmt.Sprintf("MOREPROGRAMSARROWSTATES(%d)", int32(e))
+	}
+}
 
 type MOREPROGRAMSTABSTATES int32
 
@@ -1877,12 +5674,44 @@ const (
 	SPMPT_FOCUSED  MOREPROGRAMSTABSTATES = 5
 )
 
+// String returns the MOREPROGRAMSTABSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MOREPROGRAMSTABSTATES) String() string {
+	switch e {
+	case SPMPT_NORMAL:
+		return "SPMPT_NORMAL"
+	case SPMPT_HOT:
+		return "SPMPT_HOT"
+	case SPMPT_SELECTED:
+		return "SPMPT_SELECTED"
+	case SPMPT_DISABLED:
+		return "SPMPT_DISABLED"
+	case SPMPT_FOCUSED:
+		return "SPMPT_FOCUSED"
+	default:
+		return fmt.Sprintf("MOREPROGRAMSTABSTATES(%d)", int32(e))
+	}
+}
+
 type MOVESTATES int32
 
 const (
 	DDMOVE_HIGHLIGHT   MOVESTATES = 1
 	DDMOVE_NOHIGHLIGHT MOVESTATES = 2
 )
+
+// String returns the MOVESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MOVESTATES) String() string {
+	switch e {
+	case DDMOVE_HIGHLIGHT:
+		return "DDMOVE_HIGHLIGHT"
+	case DDMOVE_NOHIGHLIGHT:
+		return "DDMOVE_NOHIGHLIGHT"
+	default:
+		return fmt.Sprintf("MOVESTATES(%d)", int32(e))
+	}
+}
 
 type NAVIGATIONPARTS int32
 
@@ -1891,6 +5720,21 @@ const (
 	NAV_FORWARDBUTTON NAVIGATIONPARTS = 2
 	NAV_MENUBUTTON    NAVIGATIONPARTS = 3
 )
+
+// String returns the NAVIGATIONPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAVIGATIONPARTS) String() string {
+	switch e {
+	case NAV_BACKBUTTON:
+		return "NAV_BACKBUTTON"
+	case NAV_FORWARDBUTTON:
+		return "NAV_FORWARDBUTTON"
+	case NAV_MENUBUTTON:
+		return "NAV_MENUBUTTON"
+	default:
+		return fmt.Sprintf("NAVIGATIONPARTS(%d)", int32(e))
+	}
+}
 
 type NAVNEXTSTATES int32
 
@@ -1901,6 +5745,23 @@ const (
 	MCNN_DISABLED NAVNEXTSTATES = 4
 )
 
+// String returns the NAVNEXTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAVNEXTSTATES) String() string {
+	switch e {
+	case MCNN_NORMAL:
+		return "MCNN_NORMAL"
+	case MCNN_HOT:
+		return "MCNN_HOT"
+	case MCNN_PRESSED:
+		return "MCNN_PRESSED"
+	case MCNN_DISABLED:
+		return "MCNN_DISABLED"
+	default:
+		return fmt.Sprintf("NAVNEXTSTATES(%d)", int32(e))
+	}
+}
+
 type NAVPREVSTATES int32
 
 const (
@@ -1909,6 +5770,23 @@ const (
 	MCNP_PRESSED  NAVPREVSTATES = 3
 	MCNP_DISABLED NAVPREVSTATES = 4
 )
+
+// String returns the NAVPREVSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAVPREVSTATES) String() string {
+	switch e {
+	case MCNP_NORMAL:
+		return "MCNP_NORMAL"
+	case MCNP_HOT:
+		return "MCNP_HOT"
+	case MCNP_PRESSED:
+		return "MCNP_PRESSED"
+	case MCNP_DISABLED:
+		return "MCNP_DISABLED"
+	default:
+		return fmt.Sprintf("NAVPREVSTATES(%d)", int32(e))
+	}
+}
 
 type NAV_BACKBUTTONSTATES int32
 
@@ -1919,6 +5797,23 @@ const (
 	NAV_BB_DISABLED NAV_BACKBUTTONSTATES = 4
 )
 
+// String returns the NAV_BACKBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAV_BACKBUTTONSTATES) String() string {
+	switch e {
+	case NAV_BB_NORMAL:
+		return "NAV_BB_NORMAL"
+	case NAV_BB_HOT:
+		return "NAV_BB_HOT"
+	case NAV_BB_PRESSED:
+		return "NAV_BB_PRESSED"
+	case NAV_BB_DISABLED:
+		return "NAV_BB_DISABLED"
+	default:
+		return fmt.Sprintf("NAV_BACKBUTTONSTATES(%d)", int32(e))
+	}
+}
+
 type NAV_FORWARDBUTTONSTATES int32
 
 const (
@@ -1928,6 +5823,23 @@ const (
 	NAV_FB_DISABLED NAV_FORWARDBUTTONSTATES = 4
 )
 
+// String returns the NAV_FORWARDBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAV_FORWARDBUTTONSTATES) String() string {
+	switch e {
+	case NAV_FB_NORMAL:
+		return "NAV_FB_NORMAL"
+	case NAV_FB_HOT:
+		return "NAV_FB_HOT"
+	case NAV_FB_PRESSED:
+		return "NAV_FB_PRESSED"
+	case NAV_FB_DISABLED:
+		return "NAV_FB_DISABLED"
+	default:
+		return fmt.Sprintf("NAV_FORWARDBUTTONSTATES(%d)", int32(e))
+	}
+}
+
 type NAV_MENUBUTTONSTATES int32
 
 const (
@@ -1936,6 +5848,23 @@ const (
 	NAV_MB_PRESSED  NAV_MENUBUTTONSTATES = 3
 	NAV_MB_DISABLED NAV_MENUBUTTONSTATES = 4
 )
+
+// String returns the NAV_MENUBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAV_MENUBUTTONSTATES) String() string {
+	switch e {
+	case NAV_MB_NORMAL:
+		return "NAV_MB_NORMAL"
+	case NAV_MB_HOT:
+		return "NAV_MB_HOT"
+	case NAV_MB_PRESSED:
+		return "NAV_MB_PRESSED"
+	case NAV_MB_DISABLED:
+		return "NAV_MB_DISABLED"
+	default:
+		return fmt.Sprintf("NAV_MENUBUTTONSTATES(%d)", int32(e))
+	}
+}
 
 type NMCUSTOMDRAW_DRAW_STAGE uint32
 
@@ -1950,6 +5879,32 @@ const (
 	CDDS_SUBITEM       NMCUSTOMDRAW_DRAW_STAGE = 131072
 )
 
+// String returns the NMCUSTOMDRAW_DRAW_STAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMCUSTOMDRAW_DRAW_STAGE) String() string {
+	switch e {
+	case CDDS_POSTPAINT:
+		return "CDDS_POSTPAINT"
+	case CDDS_PREERASE:
+		return "CDDS_PREERASE"
+	case CDDS_PREPAINT:
+		return "CDDS_PREPAINT"
+	case CDDS_ITEMPOSTERASE:
+		return "CDDS_ITEMPOSTERASE"
+	case CDDS_ITEMPOSTPAINT:
+		return "CDDS_ITEMPOSTPAINT"
+	case CDDS_ITEMPREERASE:
+		return "CDDS_ITEMPREERASE"
+	case CDDS_ITEMPREPAINT:
+		return "CDDS_ITEMPREPAINT"
+	case CDDS_SUBITEM:
+		return "CDDS_SUBITEM"
+	default:
+		return fmt.Sprintf("NMCUSTOMDRAW_DRAW_STAGE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NMCUSTOMDRAW_DRAW_STATE_FLAGS uint32
 
 const (
@@ -1968,12 +5923,74 @@ const (
 	CDIS_DROPHILITED      NMCUSTOMDRAW_DRAW_STATE_FLAGS = 4096
 )
 
+// String returns the NMCUSTOMDRAW_DRAW_STATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMCUSTOMDRAW_DRAW_STATE_FLAGS) String() string {
+	var parts []string
+	if e&CDIS_SELECTED != 0 {
+		parts = append(parts, "CDIS_SELECTED")
+	}
+	if e&CDIS_GRAYED != 0 {
+		parts = append(parts, "CDIS_GRAYED")
+	}
+	if e&CDIS_DISABLED != 0 {
+		parts = append(parts, "CDIS_DISABLED")
+	}
+	if e&CDIS_CHECKED != 0 {
+		parts = append(parts, "CDIS_CHECKED")
+	}
+	if e&CDIS_FOCUS != 0 {
+		parts = append(parts, "CDIS_FOCUS")
+	}
+	if e&CDIS_DEFAULT != 0 {
+		parts = append(parts, "CDIS_DEFAULT")
+	}
+	if e&CDIS_HOT != 0 {
+		parts = append(parts, "CDIS_HOT")
+	}
+	if e&CDIS_MARKED != 0 {
+		parts = append(parts, "CDIS_MARKED")
+	}
+	if e&CDIS_INDETERMINATE != 0 {
+		parts = append(parts, "CDIS_INDETERMINATE")
+	}
+	if e&CDIS_SHOWKEYBOARDCUES != 0 {
+		parts = append(parts, "CDIS_SHOWKEYBOARDCUES")
+	}
+	if e&CDIS_NEARHOT != 0 {
+		parts = append(parts, "CDIS_NEARHOT")
+	}
+	if e&CDIS_OTHERSIDEHOT != 0 {
+		parts = append(parts, "CDIS_OTHERSIDEHOT")
+	}
+	if e&CDIS_DROPHILITED != 0 {
+		parts = append(parts, "CDIS_DROPHILITED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type NMDATETIMECHANGE_FLAGS uint32
 
 const (
 	GDT_NONE  NMDATETIMECHANGE_FLAGS = 1
 	GDT_VALID NMDATETIMECHANGE_FLAGS = 0
 )
+
+// String returns the NMDATETIMECHANGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMDATETIMECHANGE_FLAGS) String() string {
+	switch e {
+	case GDT_NONE:
+		return "GDT_NONE"
+	case GDT_VALID:
+		return "GDT_VALID"
+	default:
+		return fmt.Sprintf("NMDATETIMECHANGE_FLAGS(%d)", uint32(e))
+	}
+}
 
 type NMLVCUSTOMDRAW_ITEM_TYPE uint32
 
@@ -1983,11 +6000,37 @@ const (
 	LVCDI_ITEMSLIST NMLVCUSTOMDRAW_ITEM_TYPE = 2
 )
 
+// String returns the NMLVCUSTOMDRAW_ITEM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMLVCUSTOMDRAW_ITEM_TYPE) String() string {
+	switch e {
+	case LVCDI_ITEM:
+		return "LVCDI_ITEM"
+	case LVCDI_GROUP:
+		return "LVCDI_GROUP"
+	case LVCDI_ITEMSLIST:
+		return "LVCDI_ITEMSLIST"
+	default:
+		return fmt.Sprintf("NMLVCUSTOMDRAW_ITEM_TYPE(%d)", uint32(e))
+	}
+}
+
 type NMLVEMPTYMARKUP_FLAGS uint32
 
 const (
 	EMF_CENTERED NMLVEMPTYMARKUP_FLAGS = 1
 )
+
+// String returns the NMLVEMPTYMARKUP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMLVEMPTYMARKUP_FLAGS) String() string {
+	switch e {
+	case EMF_CENTERED:
+		return "EMF_CENTERED"
+	default:
+		return fmt.Sprintf("NMLVEMPTYMARKUP_FLAGS(%d)", uint32(e))
+	}
+}
 
 type NMLVGETINFOTIP_FLAGS uint32
 
@@ -1996,12 +6039,38 @@ const (
 	LVGIT_ZERO     NMLVGETINFOTIP_FLAGS = 0
 )
 
+// String returns the NMLVGETINFOTIP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMLVGETINFOTIP_FLAGS) String() string {
+	switch e {
+	case LVGIT_UNFOLDED:
+		return "LVGIT_UNFOLDED"
+	case LVGIT_ZERO:
+		return "LVGIT_ZERO"
+	default:
+		return fmt.Sprintf("NMLVGETINFOTIP_FLAGS(%d)", uint32(e))
+	}
+}
+
 type NMPGCALCSIZE_FLAGS uint32
 
 const (
 	PGF_CALCHEIGHT NMPGCALCSIZE_FLAGS = 2
 	PGF_CALCWIDTH  NMPGCALCSIZE_FLAGS = 1
 )
+
+// String returns the NMPGCALCSIZE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMPGCALCSIZE_FLAGS) String() string {
+	switch e {
+	case PGF_CALCHEIGHT:
+		return "PGF_CALCHEIGHT"
+	case PGF_CALCWIDTH:
+		return "PGF_CALCWIDTH"
+	default:
+		return fmt.Sprintf("NMPGCALCSIZE_FLAGS(%d)", uint32(e))
+	}
+}
 
 type NMPGSCROLL_DIR int32
 
@@ -2012,6 +6081,24 @@ const (
 	PGF_SCROLLUP    NMPGSCROLL_DIR = 1
 )
 
+// String returns the NMPGSCROLL_DIR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMPGSCROLL_DIR) String() string {
+	switch e {
+	case PGF_SCROLLDOWN:
+		return "PGF_SCROLLDOWN"
+	case PGF_SCROLLLEFT:
+		return "PGF_SCROLLLEFT"
+	case PGF_SCROLLRIGHT:
+		return "PGF_SCROLLRIGHT"
+	case PGF_SCROLLUP:
+		return "PGF_SCROLLUP"
+	default:
+		return fmt.Sprintf("NMPGSCROLL_DIR(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NMPGSCROLL_KEYS uint16
 
 const (
@@ -2021,6 +6108,26 @@ const (
 	PGK_MENU    NMPGSCROLL_KEYS = 4
 )
 
+// String returns the NMPGSCROLL_KEYS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMPGSCROLL_KEYS) String() string {
+	var parts []string
+	if e&PGK_SHIFT != 0 {
+		parts = append(parts, "PGK_SHIFT")
+	}
+	if e&PGK_CONTROL != 0 {
+		parts = append(parts, "PGK_CONTROL")
+	}
+	if e&PGK_MENU != 0 {
+		parts = append(parts, "PGK_MENU")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type NMREBAR_MASK_FLAGS uint32
 
 const (
@@ -2029,6 +6136,26 @@ const (
 	RBNM_STYLE  NMREBAR_MASK_FLAGS = 2
 )
 
+// String returns the NMREBAR_MASK_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMREBAR_MASK_FLAGS) String() string {
+	var parts []string
+	if e&RBNM_ID != 0 {
+		parts = append(parts, "RBNM_ID")
+	}
+	if e&RBNM_LPARAM != 0 {
+		parts = append(parts, "RBNM_LPARAM")
+	}
+	if e&RBNM_STYLE != 0 {
+		parts = append(parts, "RBNM_STYLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type NMTBDISPINFOW_MASK uint32
 
 const (
@@ -2037,6 +6164,26 @@ const (
 	TBNF_DI_SETITEM NMTBDISPINFOW_MASK = 268435456
 )
 
+// String returns the NMTBDISPINFOW_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMTBDISPINFOW_MASK) String() string {
+	var parts []string
+	if e&TBNF_IMAGE != 0 {
+		parts = append(parts, "TBNF_IMAGE")
+	}
+	if e&TBNF_TEXT != 0 {
+		parts = append(parts, "TBNF_TEXT")
+	}
+	if e&TBNF_DI_SETITEM != 0 {
+		parts = append(parts, "TBNF_DI_SETITEM")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type NMTBHOTITEM_FLAGS uint32
 
 const (
@@ -2052,6 +6199,44 @@ const (
 	HICF_TOGGLEDROPDOWN NMTBHOTITEM_FLAGS = 256
 )
 
+// String returns the NMTBHOTITEM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NMTBHOTITEM_FLAGS) String() string {
+	var parts []string
+	if e&HICF_ACCELERATOR != 0 {
+		parts = append(parts, "HICF_ACCELERATOR")
+	}
+	if e&HICF_ARROWKEYS != 0 {
+		parts = append(parts, "HICF_ARROWKEYS")
+	}
+	if e&HICF_DUPACCEL != 0 {
+		parts = append(parts, "HICF_DUPACCEL")
+	}
+	if e&HICF_ENTERING != 0 {
+		parts = append(parts, "HICF_ENTERING")
+	}
+	if e&HICF_LEAVING != 0 {
+		parts = append(parts, "HICF_LEAVING")
+	}
+	if e&HICF_LMOUSE != 0 {
+		parts = append(parts, "HICF_LMOUSE")
+	}
+	if e&HICF_MOUSE != 0 {
+		parts = append(parts, "HICF_MOUSE")
+	}
+	if e&HICF_RESELECT != 0 {
+		parts = append(parts, "HICF_RESELECT")
+	}
+	if e&HICF_TOGGLEDROPDOWN != 0 {
+		parts = append(parts, "HICF_TOGGLEDROPDOWN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type NM_TREEVIEW_ACTION uint32
 
 const (
@@ -2065,12 +6250,56 @@ const (
 	TVC_BYKEYBOARD    NM_TREEVIEW_ACTION = 2
 )
 
+// String returns the NM_TREEVIEW_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NM_TREEVIEW_ACTION) String() string {
+	var parts []string
+	if e&TVE_COLLAPSE != 0 {
+		parts = append(parts, "TVE_COLLAPSE")
+	}
+	if e&TVE_EXPAND != 0 {
+		parts = append(parts, "TVE_EXPAND")
+	}
+	if e&TVE_TOGGLE != 0 {
+		parts = append(parts, "TVE_TOGGLE")
+	}
+	if e&TVE_EXPANDPARTIAL != 0 {
+		parts = append(parts, "TVE_EXPANDPARTIAL")
+	}
+	if e&TVE_COLLAPSERESET != 0 {
+		parts = append(parts, "TVE_COLLAPSERESET")
+	}
+	if e&TVC_BYMOUSE != 0 {
+		parts = append(parts, "TVC_BYMOUSE")
+	}
+	if e&TVC_BYKEYBOARD != 0 {
+		parts = append(parts, "TVC_BYKEYBOARD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type NONESTATES int32
 
 const (
 	DDNONE_HIGHLIGHT   NONESTATES = 1
 	DDNONE_NOHIGHLIGHT NONESTATES = 2
 )
+
+// String returns the NONESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NONESTATES) String() string {
+	switch e {
+	case DDNONE_HIGHLIGHT:
+		return "DDNONE_HIGHLIGHT"
+	case DDNONE_NOHIGHLIGHT:
+		return "DDNONE_NOHIGHLIGHT"
+	default:
+		return fmt.Sprintf("NONESTATES(%d)", int32(e))
+	}
+}
 
 type NORMALGROUPCOLLAPSESTATES int32
 
@@ -2080,6 +6309,21 @@ const (
 	EBNGC_PRESSED NORMALGROUPCOLLAPSESTATES = 3
 )
 
+// String returns the NORMALGROUPCOLLAPSESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NORMALGROUPCOLLAPSESTATES) String() string {
+	switch e {
+	case EBNGC_NORMAL:
+		return "EBNGC_NORMAL"
+	case EBNGC_HOT:
+		return "EBNGC_HOT"
+	case EBNGC_PRESSED:
+		return "EBNGC_PRESSED"
+	default:
+		return fmt.Sprintf("NORMALGROUPCOLLAPSESTATES(%d)", int32(e))
+	}
+}
+
 type NORMALGROUPEXPANDSTATES int32
 
 const (
@@ -2088,6 +6332,21 @@ const (
 	EBNGE_PRESSED NORMALGROUPEXPANDSTATES = 3
 )
 
+// String returns the NORMALGROUPEXPANDSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NORMALGROUPEXPANDSTATES) String() string {
+	switch e {
+	case EBNGE_NORMAL:
+		return "EBNGE_NORMAL"
+	case EBNGE_HOT:
+		return "EBNGE_HOT"
+	case EBNGE_PRESSED:
+		return "EBNGE_PRESSED"
+	default:
+		return fmt.Sprintf("NORMALGROUPEXPANDSTATES(%d)", int32(e))
+	}
+}
+
 type ODA_FLAGS uint32
 
 const (
@@ -2095,6 +6354,21 @@ const (
 	ODA_SELECT     ODA_FLAGS = 2
 	ODA_FOCUS      ODA_FLAGS = 4
 )
+
+// String returns the ODA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ODA_FLAGS) String() string {
+	switch e {
+	case ODA_DRAWENTIRE:
+		return "ODA_DRAWENTIRE"
+	case ODA_SELECT:
+		return "ODA_SELECT"
+	case ODA_FOCUS:
+		return "ODA_FOCUS"
+	default:
+		return fmt.Sprintf("ODA_FLAGS(%d)", uint32(e))
+	}
+}
 
 type ODS_FLAGS uint32
 
@@ -2111,6 +6385,37 @@ const (
 	ODS_NOACCEL      ODS_FLAGS = 256
 	ODS_NOFOCUSRECT  ODS_FLAGS = 512
 )
+
+// String returns the ODS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ODS_FLAGS) String() string {
+	switch e {
+	case ODS_SELECTED:
+		return "ODS_SELECTED"
+	case ODS_GRAYED:
+		return "ODS_GRAYED"
+	case ODS_DISABLED:
+		return "ODS_DISABLED"
+	case ODS_CHECKED:
+		return "ODS_CHECKED"
+	case ODS_FOCUS:
+		return "ODS_FOCUS"
+	case ODS_DEFAULT:
+		return "ODS_DEFAULT"
+	case ODS_COMBOBOXEDIT:
+		return "ODS_COMBOBOXEDIT"
+	case ODS_HOTLIGHT:
+		return "ODS_HOTLIGHT"
+	case ODS_INACTIVE:
+		return "ODS_INACTIVE"
+	case ODS_NOACCEL:
+		return "ODS_NOACCEL"
+	case ODS_NOFOCUSRECT:
+		return "ODS_NOFOCUSRECT"
+	default:
+		return fmt.Sprintf("ODS_FLAGS(%d)", uint32(e))
+	}
+}
 
 type OFFSETTYPE int32
 
@@ -2131,6 +6436,43 @@ const (
 	OT_BELOWLASTBUTTON   OFFSETTYPE = 13
 )
 
+// String returns the OFFSETTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OFFSETTYPE) String() string {
+	switch e {
+	case OT_TOPLEFT:
+		return "OT_TOPLEFT"
+	case OT_TOPRIGHT:
+		return "OT_TOPRIGHT"
+	case OT_TOPMIDDLE:
+		return "OT_TOPMIDDLE"
+	case OT_BOTTOMLEFT:
+		return "OT_BOTTOMLEFT"
+	case OT_BOTTOMRIGHT:
+		return "OT_BOTTOMRIGHT"
+	case OT_BOTTOMMIDDLE:
+		return "OT_BOTTOMMIDDLE"
+	case OT_MIDDLELEFT:
+		return "OT_MIDDLELEFT"
+	case OT_MIDDLERIGHT:
+		return "OT_MIDDLERIGHT"
+	case OT_LEFTOFCAPTION:
+		return "OT_LEFTOFCAPTION"
+	case OT_RIGHTOFCAPTION:
+		return "OT_RIGHTOFCAPTION"
+	case OT_LEFTOFLASTBUTTON:
+		return "OT_LEFTOFLASTBUTTON"
+	case OT_RIGHTOFLASTBUTTON:
+		return "OT_RIGHTOFLASTBUTTON"
+	case OT_ABOVELASTBUTTON:
+		return "OT_ABOVELASTBUTTON"
+	case OT_BELOWLASTBUTTON:
+		return "OT_BELOWLASTBUTTON"
+	default:
+		return fmt.Sprintf("OFFSETTYPE(%d)", int32(e))
+	}
+}
+
 type OPENBOXSTATES int32
 
 const (
@@ -2141,12 +6483,48 @@ const (
 	SPOB_FOCUSED  OPENBOXSTATES = 5
 )
 
+// String returns the OPENBOXSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPENBOXSTATES) String() string {
+	switch e {
+	case SPOB_NORMAL:
+		return "SPOB_NORMAL"
+	case SPOB_HOT:
+		return "SPOB_HOT"
+	case SPOB_SELECTED:
+		return "SPOB_SELECTED"
+	case SPOB_DISABLED:
+		return "SPOB_DISABLED"
+	case SPOB_FOCUSED:
+		return "SPOB_FOCUSED"
+	default:
+		return fmt.Sprintf("OPENBOXSTATES(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type OPEN_THEME_DATA_FLAGS uint32
 
 const (
 	OTD_FORCE_RECT_SIZING OPEN_THEME_DATA_FLAGS = 1
 	OTD_NONCLIENT         OPEN_THEME_DATA_FLAGS = 2
 )
+
+// String returns the OPEN_THEME_DATA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OPEN_THEME_DATA_FLAGS) String() string {
+	var parts []string
+	if e&OTD_FORCE_RECT_SIZING != 0 {
+		parts = append(parts, "OTD_FORCE_RECT_SIZING")
+	}
+	if e&OTD_NONCLIENT != 0 {
+		parts = append(parts, "OTD_NONCLIENT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type PAGEPARTS int32
 
@@ -2157,6 +6535,23 @@ const (
 	PGRP_DOWNHORZ PAGEPARTS = 4
 )
 
+// String returns the PAGEPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAGEPARTS) String() string {
+	switch e {
+	case PGRP_UP:
+		return "PGRP_UP"
+	case PGRP_DOWN:
+		return "PGRP_DOWN"
+	case PGRP_UPHORZ:
+		return "PGRP_UPHORZ"
+	case PGRP_DOWNHORZ:
+		return "PGRP_DOWNHORZ"
+	default:
+		return fmt.Sprintf("PAGEPARTS(%d)", int32(e))
+	}
+}
+
 type POPUPCHECKBACKGROUNDSTATES int32
 
 const (
@@ -2164,6 +6559,21 @@ const (
 	MCB_NORMAL   POPUPCHECKBACKGROUNDSTATES = 2
 	MCB_BITMAP   POPUPCHECKBACKGROUNDSTATES = 3
 )
+
+// String returns the POPUPCHECKBACKGROUNDSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POPUPCHECKBACKGROUNDSTATES) String() string {
+	switch e {
+	case MCB_DISABLED:
+		return "MCB_DISABLED"
+	case MCB_NORMAL:
+		return "MCB_NORMAL"
+	case MCB_BITMAP:
+		return "MCB_BITMAP"
+	default:
+		return fmt.Sprintf("POPUPCHECKBACKGROUNDSTATES(%d)", int32(e))
+	}
+}
 
 type POPUPCHECKSTATES int32
 
@@ -2174,6 +6584,23 @@ const (
 	MC_BULLETDISABLED    POPUPCHECKSTATES = 4
 )
 
+// String returns the POPUPCHECKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POPUPCHECKSTATES) String() string {
+	switch e {
+	case MC_CHECKMARKNORMAL:
+		return "MC_CHECKMARKNORMAL"
+	case MC_CHECKMARKDISABLED:
+		return "MC_CHECKMARKDISABLED"
+	case MC_BULLETNORMAL:
+		return "MC_BULLETNORMAL"
+	case MC_BULLETDISABLED:
+		return "MC_BULLETDISABLED"
+	default:
+		return fmt.Sprintf("POPUPCHECKSTATES(%d)", int32(e))
+	}
+}
+
 type POPUPITEMFOCUSABLESTATES int32
 
 const (
@@ -2183,11 +6610,39 @@ const (
 	MPIF_DISABLEDHOT POPUPITEMFOCUSABLESTATES = 4
 )
 
+// String returns the POPUPITEMFOCUSABLESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POPUPITEMFOCUSABLESTATES) String() string {
+	switch e {
+	case MPIF_NORMAL:
+		return "MPIF_NORMAL"
+	case MPIF_HOT:
+		return "MPIF_HOT"
+	case MPIF_DISABLED:
+		return "MPIF_DISABLED"
+	case MPIF_DISABLEDHOT:
+		return "MPIF_DISABLEDHOT"
+	default:
+		return fmt.Sprintf("POPUPITEMFOCUSABLESTATES(%d)", int32(e))
+	}
+}
+
 type POPUPITEMKBFOCUSSTATES int32
 
 const (
 	MPIKBFOCUS_NORMAL POPUPITEMKBFOCUSSTATES = 1
 )
+
+// String returns the POPUPITEMKBFOCUSSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POPUPITEMKBFOCUSSTATES) String() string {
+	switch e {
+	case MPIKBFOCUS_NORMAL:
+		return "MPIKBFOCUS_NORMAL"
+	default:
+		return fmt.Sprintf("POPUPITEMKBFOCUSSTATES(%d)", int32(e))
+	}
+}
 
 type POPUPITEMSTATES int32
 
@@ -2198,11 +6653,39 @@ const (
 	MPI_DISABLEDHOT POPUPITEMSTATES = 4
 )
 
+// String returns the POPUPITEMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POPUPITEMSTATES) String() string {
+	switch e {
+	case MPI_NORMAL:
+		return "MPI_NORMAL"
+	case MPI_HOT:
+		return "MPI_HOT"
+	case MPI_DISABLED:
+		return "MPI_DISABLED"
+	case MPI_DISABLEDHOT:
+		return "MPI_DISABLEDHOT"
+	default:
+		return fmt.Sprintf("POPUPITEMSTATES(%d)", int32(e))
+	}
+}
+
 type POPUPSUBMENUHCHOTSTATES int32
 
 const (
 	MSMHC_HOT POPUPSUBMENUHCHOTSTATES = 1
 )
+
+// String returns the POPUPSUBMENUHCHOTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POPUPSUBMENUHCHOTSTATES) String() string {
+	switch e {
+	case MSMHC_HOT:
+		return "MSMHC_HOT"
+	default:
+		return fmt.Sprintf("POPUPSUBMENUHCHOTSTATES(%d)", int32(e))
+	}
+}
 
 type POPUPSUBMENUSTATES int32
 
@@ -2210,6 +6693,19 @@ const (
 	MSM_NORMAL   POPUPSUBMENUSTATES = 1
 	MSM_DISABLED POPUPSUBMENUSTATES = 2
 )
+
+// String returns the POPUPSUBMENUSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POPUPSUBMENUSTATES) String() string {
+	switch e {
+	case MSM_NORMAL:
+		return "MSM_NORMAL"
+	case MSM_DISABLED:
+		return "MSM_DISABLED"
+	default:
+		return fmt.Sprintf("POPUPSUBMENUSTATES(%d)", int32(e))
+	}
+}
 
 type PROGRESSPARTS int32
 
@@ -2228,6 +6724,39 @@ const (
 	PP_TRANSPARENTBARVERT PROGRESSPARTS = 12
 )
 
+// String returns the PROGRESSPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROGRESSPARTS) String() string {
+	switch e {
+	case PP_BAR:
+		return "PP_BAR"
+	case PP_BARVERT:
+		return "PP_BARVERT"
+	case PP_CHUNK:
+		return "PP_CHUNK"
+	case PP_CHUNKVERT:
+		return "PP_CHUNKVERT"
+	case PP_FILL:
+		return "PP_FILL"
+	case PP_FILLVERT:
+		return "PP_FILLVERT"
+	case PP_PULSEOVERLAY:
+		return "PP_PULSEOVERLAY"
+	case PP_MOVEOVERLAY:
+		return "PP_MOVEOVERLAY"
+	case PP_PULSEOVERLAYVERT:
+		return "PP_PULSEOVERLAYVERT"
+	case PP_MOVEOVERLAYVERT:
+		return "PP_MOVEOVERLAYVERT"
+	case PP_TRANSPARENTBAR:
+		return "PP_TRANSPARENTBAR"
+	case PP_TRANSPARENTBARVERT:
+		return "PP_TRANSPARENTBARVERT"
+	default:
+		return fmt.Sprintf("PROGRESSPARTS(%d)", int32(e))
+	}
+}
+
 // PROPERTYORIGIN: https://learn.microsoft.com/windows/win32/api/uxtheme/ne-uxtheme-propertyorigin
 type PROPERTYORIGIN int32
 
@@ -2239,6 +6768,25 @@ const (
 	PO_NOTFOUND PROPERTYORIGIN = 4
 )
 
+// String returns the PROPERTYORIGIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPERTYORIGIN) String() string {
+	switch e {
+	case PO_STATE:
+		return "PO_STATE"
+	case PO_PART:
+		return "PO_PART"
+	case PO_CLASS:
+		return "PO_CLASS"
+	case PO_GLOBAL:
+		return "PO_GLOBAL"
+	case PO_NOTFOUND:
+		return "PO_NOTFOUND"
+	default:
+		return fmt.Sprintf("PROPERTYORIGIN(%d)", int32(e))
+	}
+}
+
 type PSPCB_MESSAGE uint32
 
 const (
@@ -2248,12 +6796,42 @@ const (
 	PSPCB_SI_INITDIALOG PSPCB_MESSAGE = 1025
 )
 
+// String returns the PSPCB_MESSAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSPCB_MESSAGE) String() string {
+	switch e {
+	case PSPCB_ADDREF:
+		return "PSPCB_ADDREF"
+	case PSPCB_CREATE:
+		return "PSPCB_CREATE"
+	case PSPCB_RELEASE:
+		return "PSPCB_RELEASE"
+	case PSPCB_SI_INITDIALOG:
+		return "PSPCB_SI_INITDIALOG"
+	default:
+		return fmt.Sprintf("PSPCB_MESSAGE(%d)", uint32(e))
+	}
+}
+
 type PUSHBUTTONDROPDOWNSTATES int32
 
 const (
 	PBDDS_NORMAL   PUSHBUTTONDROPDOWNSTATES = 1
 	PBDDS_DISABLED PUSHBUTTONDROPDOWNSTATES = 2
 )
+
+// String returns the PUSHBUTTONDROPDOWNSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PUSHBUTTONDROPDOWNSTATES) String() string {
+	switch e {
+	case PBDDS_NORMAL:
+		return "PBDDS_NORMAL"
+	case PBDDS_DISABLED:
+		return "PBDDS_DISABLED"
+	default:
+		return fmt.Sprintf("PUSHBUTTONDROPDOWNSTATES(%d)", int32(e))
+	}
+}
 
 type PUSHBUTTONSTATES int32
 
@@ -2265,6 +6843,27 @@ const (
 	PBS_DEFAULTED           PUSHBUTTONSTATES = 5
 	PBS_DEFAULTED_ANIMATING PUSHBUTTONSTATES = 6
 )
+
+// String returns the PUSHBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PUSHBUTTONSTATES) String() string {
+	switch e {
+	case PBS_NORMAL:
+		return "PBS_NORMAL"
+	case PBS_HOT:
+		return "PBS_HOT"
+	case PBS_PRESSED:
+		return "PBS_PRESSED"
+	case PBS_DISABLED:
+		return "PBS_DISABLED"
+	case PBS_DEFAULTED:
+		return "PBS_DEFAULTED"
+	case PBS_DEFAULTED_ANIMATING:
+		return "PBS_DEFAULTED_ANIMATING"
+	default:
+		return fmt.Sprintf("PUSHBUTTONSTATES(%d)", int32(e))
+	}
+}
 
 type RADIOBUTTONSTATES int32
 
@@ -2279,6 +6878,31 @@ const (
 	RBS_CHECKEDDISABLED   RADIOBUTTONSTATES = 8
 )
 
+// String returns the RADIOBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RADIOBUTTONSTATES) String() string {
+	switch e {
+	case RBS_UNCHECKEDNORMAL:
+		return "RBS_UNCHECKEDNORMAL"
+	case RBS_UNCHECKEDHOT:
+		return "RBS_UNCHECKEDHOT"
+	case RBS_UNCHECKEDPRESSED:
+		return "RBS_UNCHECKEDPRESSED"
+	case RBS_UNCHECKEDDISABLED:
+		return "RBS_UNCHECKEDDISABLED"
+	case RBS_CHECKEDNORMAL:
+		return "RBS_CHECKEDNORMAL"
+	case RBS_CHECKEDHOT:
+		return "RBS_CHECKEDHOT"
+	case RBS_CHECKEDPRESSED:
+		return "RBS_CHECKEDPRESSED"
+	case RBS_CHECKEDDISABLED:
+		return "RBS_CHECKEDDISABLED"
+	default:
+		return fmt.Sprintf("RADIOBUTTONSTATES(%d)", int32(e))
+	}
+}
+
 type READONLYSTATES int32
 
 const (
@@ -2287,6 +6911,23 @@ const (
 	CBRO_PRESSED  READONLYSTATES = 3
 	CBRO_DISABLED READONLYSTATES = 4
 )
+
+// String returns the READONLYSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e READONLYSTATES) String() string {
+	switch e {
+	case CBRO_NORMAL:
+		return "CBRO_NORMAL"
+	case CBRO_HOT:
+		return "CBRO_HOT"
+	case CBRO_PRESSED:
+		return "CBRO_PRESSED"
+	case CBRO_DISABLED:
+		return "CBRO_DISABLED"
+	default:
+		return fmt.Sprintf("READONLYSTATES(%d)", int32(e))
+	}
+}
 
 type REBARPARTS int32
 
@@ -2301,6 +6942,31 @@ const (
 	RP_SPLITTERVERT REBARPARTS = 8
 )
 
+// String returns the REBARPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REBARPARTS) String() string {
+	switch e {
+	case RP_GRIPPER:
+		return "RP_GRIPPER"
+	case RP_GRIPPERVERT:
+		return "RP_GRIPPERVERT"
+	case RP_BAND:
+		return "RP_BAND"
+	case RP_CHEVRON:
+		return "RP_CHEVRON"
+	case RP_CHEVRONVERT:
+		return "RP_CHEVRONVERT"
+	case RP_BACKGROUND:
+		return "RP_BACKGROUND"
+	case RP_SPLITTER:
+		return "RP_SPLITTER"
+	case RP_SPLITTERVERT:
+		return "RP_SPLITTERVERT"
+	default:
+		return fmt.Sprintf("REBARPARTS(%d)", int32(e))
+	}
+}
+
 type RESTOREBUTTONSTATES int32
 
 const (
@@ -2309,6 +6975,23 @@ const (
 	RBS_PUSHED   RESTOREBUTTONSTATES = 3
 	RBS_DISABLED RESTOREBUTTONSTATES = 4
 )
+
+// String returns the RESTOREBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RESTOREBUTTONSTATES) String() string {
+	switch e {
+	case RBS_NORMAL:
+		return "RBS_NORMAL"
+	case RBS_HOT:
+		return "RBS_HOT"
+	case RBS_PUSHED:
+		return "RBS_PUSHED"
+	case RBS_DISABLED:
+		return "RBS_DISABLED"
+	default:
+		return fmt.Sprintf("RESTOREBUTTONSTATES(%d)", int32(e))
+	}
+}
 
 type SCROLLBARPARTS int32
 
@@ -2326,6 +7009,37 @@ const (
 	SBP_SIZEBOXBKGND   SCROLLBARPARTS = 11
 )
 
+// String returns the SCROLLBARPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCROLLBARPARTS) String() string {
+	switch e {
+	case SBP_ARROWBTN:
+		return "SBP_ARROWBTN"
+	case SBP_THUMBBTNHORZ:
+		return "SBP_THUMBBTNHORZ"
+	case SBP_THUMBBTNVERT:
+		return "SBP_THUMBBTNVERT"
+	case SBP_LOWERTRACKHORZ:
+		return "SBP_LOWERTRACKHORZ"
+	case SBP_UPPERTRACKHORZ:
+		return "SBP_UPPERTRACKHORZ"
+	case SBP_LOWERTRACKVERT:
+		return "SBP_LOWERTRACKVERT"
+	case SBP_UPPERTRACKVERT:
+		return "SBP_UPPERTRACKVERT"
+	case SBP_GRIPPERHORZ:
+		return "SBP_GRIPPERHORZ"
+	case SBP_GRIPPERVERT:
+		return "SBP_GRIPPERVERT"
+	case SBP_SIZEBOX:
+		return "SBP_SIZEBOX"
+	case SBP_SIZEBOXBKGND:
+		return "SBP_SIZEBOXBKGND"
+	default:
+		return fmt.Sprintf("SCROLLBARPARTS(%d)", int32(e))
+	}
+}
+
 type SCROLLBARSTYLESTATES int32
 
 const (
@@ -2336,6 +7050,25 @@ const (
 	SCRBS_HOVER    SCROLLBARSTYLESTATES = 5
 )
 
+// String returns the SCROLLBARSTYLESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCROLLBARSTYLESTATES) String() string {
+	switch e {
+	case SCRBS_NORMAL:
+		return "SCRBS_NORMAL"
+	case SCRBS_HOT:
+		return "SCRBS_HOT"
+	case SCRBS_PRESSED:
+		return "SCRBS_PRESSED"
+	case SCRBS_DISABLED:
+		return "SCRBS_DISABLED"
+	case SCRBS_HOVER:
+		return "SCRBS_HOVER"
+	default:
+		return fmt.Sprintf("SCROLLBARSTYLESTATES(%d)", int32(e))
+	}
+}
+
 type SECTIONTITLELINKSTATES int32
 
 const (
@@ -2343,6 +7076,20 @@ const (
 	CPSTL_HOT    SECTIONTITLELINKSTATES = 2
 )
 
+// String returns the SECTIONTITLELINKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECTIONTITLELINKSTATES) String() string {
+	switch e {
+	case CPSTL_NORMAL:
+		return "CPSTL_NORMAL"
+	case CPSTL_HOT:
+		return "CPSTL_HOT"
+	default:
+		return fmt.Sprintf("SECTIONTITLELINKSTATES(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SET_THEME_APP_PROPERTIES_FLAGS uint32
 
 const (
@@ -2352,6 +7099,28 @@ const (
 	VALIDBITS        SET_THEME_APP_PROPERTIES_FLAGS = 7
 )
 
+// String returns the SET_THEME_APP_PROPERTIES_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SET_THEME_APP_PROPERTIES_FLAGS) String() string {
+	var parts []string
+	if e&ALLOW_NONCLIENT != 0 {
+		parts = append(parts, "ALLOW_NONCLIENT")
+	}
+	if e&ALLOW_CONTROLS != 0 {
+		parts = append(parts, "ALLOW_CONTROLS")
+	}
+	if e&ALLOW_WEBCONTENT != 0 {
+		parts = append(parts, "ALLOW_WEBCONTENT")
+	}
+	if e&VALIDBITS != 0 {
+		parts = append(parts, "VALIDBITS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SHOWCALENDARBUTTONRIGHTSTATES int32
 
 const (
@@ -2360,6 +7129,23 @@ const (
 	DPSCBR_PRESSED  SHOWCALENDARBUTTONRIGHTSTATES = 3
 	DPSCBR_DISABLED SHOWCALENDARBUTTONRIGHTSTATES = 4
 )
+
+// String returns the SHOWCALENDARBUTTONRIGHTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SHOWCALENDARBUTTONRIGHTSTATES) String() string {
+	switch e {
+	case DPSCBR_NORMAL:
+		return "DPSCBR_NORMAL"
+	case DPSCBR_HOT:
+		return "DPSCBR_HOT"
+	case DPSCBR_PRESSED:
+		return "DPSCBR_PRESSED"
+	case DPSCBR_DISABLED:
+		return "DPSCBR_DISABLED"
+	default:
+		return fmt.Sprintf("SHOWCALENDARBUTTONRIGHTSTATES(%d)", int32(e))
+	}
+}
 
 type SIZEBOXSTATES int32
 
@@ -2374,6 +7160,31 @@ const (
 	SZB_HALFTOPLEFTALIGN     SIZEBOXSTATES = 8
 )
 
+// String returns the SIZEBOXSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIZEBOXSTATES) String() string {
+	switch e {
+	case SZB_RIGHTALIGN:
+		return "SZB_RIGHTALIGN"
+	case SZB_LEFTALIGN:
+		return "SZB_LEFTALIGN"
+	case SZB_TOPRIGHTALIGN:
+		return "SZB_TOPRIGHTALIGN"
+	case SZB_TOPLEFTALIGN:
+		return "SZB_TOPLEFTALIGN"
+	case SZB_HALFBOTTOMRIGHTALIGN:
+		return "SZB_HALFBOTTOMRIGHTALIGN"
+	case SZB_HALFBOTTOMLEFTALIGN:
+		return "SZB_HALFBOTTOMLEFTALIGN"
+	case SZB_HALFTOPRIGHTALIGN:
+		return "SZB_HALFTOPRIGHTALIGN"
+	case SZB_HALFTOPLEFTALIGN:
+		return "SZB_HALFTOPLEFTALIGN"
+	default:
+		return fmt.Sprintf("SIZEBOXSTATES(%d)", int32(e))
+	}
+}
+
 type SIZINGTYPE int32
 
 const (
@@ -2382,6 +7193,21 @@ const (
 	ST_TILE     SIZINGTYPE = 2
 )
 
+// String returns the SIZINGTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SIZINGTYPE) String() string {
+	switch e {
+	case ST_TRUESIZE:
+		return "ST_TRUESIZE"
+	case ST_STRETCH:
+		return "ST_STRETCH"
+	case ST_TILE:
+		return "ST_TILE"
+	default:
+		return fmt.Sprintf("SIZINGTYPE(%d)", int32(e))
+	}
+}
+
 type SMALLCAPTIONSTATES int32
 
 const (
@@ -2389,6 +7215,21 @@ const (
 	SCS_INACTIVE SMALLCAPTIONSTATES = 2
 	SCS_DISABLED SMALLCAPTIONSTATES = 3
 )
+
+// String returns the SMALLCAPTIONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SMALLCAPTIONSTATES) String() string {
+	switch e {
+	case SCS_ACTIVE:
+		return "SCS_ACTIVE"
+	case SCS_INACTIVE:
+		return "SCS_INACTIVE"
+	case SCS_DISABLED:
+		return "SCS_DISABLED"
+	default:
+		return fmt.Sprintf("SMALLCAPTIONSTATES(%d)", int32(e))
+	}
+}
 
 type SMALLCLOSEBUTTONSTATES int32
 
@@ -2399,12 +7240,42 @@ const (
 	SCBS_DISABLED SMALLCLOSEBUTTONSTATES = 4
 )
 
+// String returns the SMALLCLOSEBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SMALLCLOSEBUTTONSTATES) String() string {
+	switch e {
+	case SCBS_NORMAL:
+		return "SCBS_NORMAL"
+	case SCBS_HOT:
+		return "SCBS_HOT"
+	case SCBS_PUSHED:
+		return "SCBS_PUSHED"
+	case SCBS_DISABLED:
+		return "SCBS_DISABLED"
+	default:
+		return fmt.Sprintf("SMALLCLOSEBUTTONSTATES(%d)", int32(e))
+	}
+}
+
 type SMALLFRAMEBOTTOMSTATES int32
 
 const (
 	SFRB_ACTIVE   SMALLFRAMEBOTTOMSTATES = 1
 	SFRB_INACTIVE SMALLFRAMEBOTTOMSTATES = 2
 )
+
+// String returns the SMALLFRAMEBOTTOMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SMALLFRAMEBOTTOMSTATES) String() string {
+	switch e {
+	case SFRB_ACTIVE:
+		return "SFRB_ACTIVE"
+	case SFRB_INACTIVE:
+		return "SFRB_INACTIVE"
+	default:
+		return fmt.Sprintf("SMALLFRAMEBOTTOMSTATES(%d)", int32(e))
+	}
+}
 
 type SMALLFRAMELEFTSTATES int32
 
@@ -2413,12 +7284,38 @@ const (
 	SFRL_INACTIVE SMALLFRAMELEFTSTATES = 2
 )
 
+// String returns the SMALLFRAMELEFTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SMALLFRAMELEFTSTATES) String() string {
+	switch e {
+	case SFRL_ACTIVE:
+		return "SFRL_ACTIVE"
+	case SFRL_INACTIVE:
+		return "SFRL_INACTIVE"
+	default:
+		return fmt.Sprintf("SMALLFRAMELEFTSTATES(%d)", int32(e))
+	}
+}
+
 type SMALLFRAMERIGHTSTATES int32
 
 const (
 	SFRR_ACTIVE   SMALLFRAMERIGHTSTATES = 1
 	SFRR_INACTIVE SMALLFRAMERIGHTSTATES = 2
 )
+
+// String returns the SMALLFRAMERIGHTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SMALLFRAMERIGHTSTATES) String() string {
+	switch e {
+	case SFRR_ACTIVE:
+		return "SFRR_ACTIVE"
+	case SFRR_INACTIVE:
+		return "SFRR_INACTIVE"
+	default:
+		return fmt.Sprintf("SMALLFRAMERIGHTSTATES(%d)", int32(e))
+	}
+}
 
 type SOFTWAREEXPLORERSTATES int32
 
@@ -2430,6 +7327,25 @@ const (
 	SPSE_FOCUSED  SOFTWAREEXPLORERSTATES = 5
 )
 
+// String returns the SOFTWAREEXPLORERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SOFTWAREEXPLORERSTATES) String() string {
+	switch e {
+	case SPSE_NORMAL:
+		return "SPSE_NORMAL"
+	case SPSE_HOT:
+		return "SPSE_HOT"
+	case SPSE_SELECTED:
+		return "SPSE_SELECTED"
+	case SPSE_DISABLED:
+		return "SPSE_DISABLED"
+	case SPSE_FOCUSED:
+		return "SPSE_FOCUSED"
+	default:
+		return fmt.Sprintf("SOFTWAREEXPLORERSTATES(%d)", int32(e))
+	}
+}
+
 type SPECIALGROUPCOLLAPSESTATES int32
 
 const (
@@ -2438,6 +7354,21 @@ const (
 	EBSGC_PRESSED SPECIALGROUPCOLLAPSESTATES = 3
 )
 
+// String returns the SPECIALGROUPCOLLAPSESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPECIALGROUPCOLLAPSESTATES) String() string {
+	switch e {
+	case EBSGC_NORMAL:
+		return "EBSGC_NORMAL"
+	case EBSGC_HOT:
+		return "EBSGC_HOT"
+	case EBSGC_PRESSED:
+		return "EBSGC_PRESSED"
+	default:
+		return fmt.Sprintf("SPECIALGROUPCOLLAPSESTATES(%d)", int32(e))
+	}
+}
+
 type SPECIALGROUPEXPANDSTATES int32
 
 const (
@@ -2445,6 +7376,21 @@ const (
 	EBSGE_HOT     SPECIALGROUPEXPANDSTATES = 2
 	EBSGE_PRESSED SPECIALGROUPEXPANDSTATES = 3
 )
+
+// String returns the SPECIALGROUPEXPANDSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPECIALGROUPEXPANDSTATES) String() string {
+	switch e {
+	case EBSGE_NORMAL:
+		return "EBSGE_NORMAL"
+	case EBSGE_HOT:
+		return "EBSGE_HOT"
+	case EBSGE_PRESSED:
+		return "EBSGE_PRESSED"
+	default:
+		return fmt.Sprintf("SPECIALGROUPEXPANDSTATES(%d)", int32(e))
+	}
+}
 
 type SPINPARTS int32
 
@@ -2455,6 +7401,23 @@ const (
 	SPNP_DOWNHORZ SPINPARTS = 4
 )
 
+// String returns the SPINPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPINPARTS) String() string {
+	switch e {
+	case SPNP_UP:
+		return "SPNP_UP"
+	case SPNP_DOWN:
+		return "SPNP_DOWN"
+	case SPNP_UPHORZ:
+		return "SPNP_UPHORZ"
+	case SPNP_DOWNHORZ:
+		return "SPNP_DOWNHORZ"
+	default:
+		return fmt.Sprintf("SPINPARTS(%d)", int32(e))
+	}
+}
+
 type SPLITTERSTATES int32
 
 const (
@@ -2462,6 +7425,21 @@ const (
 	SPLITS_HOT     SPLITTERSTATES = 2
 	SPLITS_PRESSED SPLITTERSTATES = 3
 )
+
+// String returns the SPLITTERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPLITTERSTATES) String() string {
+	switch e {
+	case SPLITS_NORMAL:
+		return "SPLITS_NORMAL"
+	case SPLITS_HOT:
+		return "SPLITS_HOT"
+	case SPLITS_PRESSED:
+		return "SPLITS_PRESSED"
+	default:
+		return fmt.Sprintf("SPLITTERSTATES(%d)", int32(e))
+	}
+}
 
 type SPLITTERVERTSTATES int32
 
@@ -2471,12 +7449,40 @@ const (
 	SPLITSV_PRESSED SPLITTERVERTSTATES = 3
 )
 
+// String returns the SPLITTERVERTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPLITTERVERTSTATES) String() string {
+	switch e {
+	case SPLITSV_NORMAL:
+		return "SPLITSV_NORMAL"
+	case SPLITSV_HOT:
+		return "SPLITSV_HOT"
+	case SPLITSV_PRESSED:
+		return "SPLITSV_PRESSED"
+	default:
+		return fmt.Sprintf("SPLITTERVERTSTATES(%d)", int32(e))
+	}
+}
+
 type STANDARDSTATES int32
 
 const (
 	TTSS_NORMAL STANDARDSTATES = 1
 	TTSS_LINK   STANDARDSTATES = 2
 )
+
+// String returns the STANDARDSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STANDARDSTATES) String() string {
+	switch e {
+	case TTSS_NORMAL:
+		return "TTSS_NORMAL"
+	case TTSS_LINK:
+		return "TTSS_LINK"
+	default:
+		return fmt.Sprintf("STANDARDSTATES(%d)", int32(e))
+	}
+}
 
 type STARTPANELPARTS int32
 
@@ -2502,11 +7508,69 @@ const (
 	SPP_LOGOFFSPLITBUTTONDROPDOWN STARTPANELPARTS = 19
 )
 
+// String returns the STARTPANELPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STARTPANELPARTS) String() string {
+	switch e {
+	case SPP_USERPANE:
+		return "SPP_USERPANE"
+	case SPP_MOREPROGRAMS:
+		return "SPP_MOREPROGRAMS"
+	case SPP_MOREPROGRAMSARROW:
+		return "SPP_MOREPROGRAMSARROW"
+	case SPP_PROGLIST:
+		return "SPP_PROGLIST"
+	case SPP_PROGLISTSEPARATOR:
+		return "SPP_PROGLISTSEPARATOR"
+	case SPP_PLACESLIST:
+		return "SPP_PLACESLIST"
+	case SPP_PLACESLISTSEPARATOR:
+		return "SPP_PLACESLISTSEPARATOR"
+	case SPP_LOGOFF:
+		return "SPP_LOGOFF"
+	case SPP_LOGOFFBUTTONS:
+		return "SPP_LOGOFFBUTTONS"
+	case SPP_USERPICTURE:
+		return "SPP_USERPICTURE"
+	case SPP_PREVIEW:
+		return "SPP_PREVIEW"
+	case SPP_MOREPROGRAMSTAB:
+		return "SPP_MOREPROGRAMSTAB"
+	case SPP_NSCHOST:
+		return "SPP_NSCHOST"
+	case SPP_SOFTWAREEXPLORER:
+		return "SPP_SOFTWAREEXPLORER"
+	case SPP_OPENBOX:
+		return "SPP_OPENBOX"
+	case SPP_SEARCHVIEW:
+		return "SPP_SEARCHVIEW"
+	case SPP_MOREPROGRAMSARROWBACK:
+		return "SPP_MOREPROGRAMSARROWBACK"
+	case SPP_TOPMATCH:
+		return "SPP_TOPMATCH"
+	case SPP_LOGOFFSPLITBUTTONDROPDOWN:
+		return "SPP_LOGOFFSPLITBUTTONDROPDOWN"
+	default:
+		return fmt.Sprintf("STARTPANELPARTS(%d)", int32(e))
+	}
+}
+
 type STATICPARTS int32
 
 const (
 	STAT_TEXT STATICPARTS = 1
 )
+
+// String returns the STATICPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STATICPARTS) String() string {
+	switch e {
+	case STAT_TEXT:
+		return "STAT_TEXT"
+	default:
+		return fmt.Sprintf("STATICPARTS(%d)", int32(e))
+	}
+}
 
 type STATUSPARTS int32
 
@@ -2515,6 +7579,21 @@ const (
 	SP_GRIPPERPANE STATUSPARTS = 2
 	SP_GRIPPER     STATUSPARTS = 3
 )
+
+// String returns the STATUSPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STATUSPARTS) String() string {
+	switch e {
+	case SP_PANE:
+		return "SP_PANE"
+	case SP_GRIPPERPANE:
+		return "SP_GRIPPERPANE"
+	case SP_GRIPPER:
+		return "SP_GRIPPER"
+	default:
+		return fmt.Sprintf("STATUSPARTS(%d)", int32(e))
+	}
+}
 
 type SYSBUTTONSTATES int32
 
@@ -2525,11 +7604,39 @@ const (
 	SBS_DISABLED SYSBUTTONSTATES = 4
 )
 
+// String returns the SYSBUTTONSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSBUTTONSTATES) String() string {
+	switch e {
+	case SBS_NORMAL:
+		return "SBS_NORMAL"
+	case SBS_HOT:
+		return "SBS_HOT"
+	case SBS_PUSHED:
+		return "SBS_PUSHED"
+	case SBS_DISABLED:
+		return "SBS_DISABLED"
+	default:
+		return fmt.Sprintf("SYSBUTTONSTATES(%d)", int32(e))
+	}
+}
+
 type SYSTEMCLOSEHCHOTSTATES int32
 
 const (
 	MSYSCHC_HOT SYSTEMCLOSEHCHOTSTATES = 1
 )
+
+// String returns the SYSTEMCLOSEHCHOTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEMCLOSEHCHOTSTATES) String() string {
+	switch e {
+	case MSYSCHC_HOT:
+		return "MSYSCHC_HOT"
+	default:
+		return fmt.Sprintf("SYSTEMCLOSEHCHOTSTATES(%d)", int32(e))
+	}
+}
 
 type SYSTEMCLOSESTATES int32
 
@@ -2538,11 +7645,35 @@ const (
 	MSYSC_DISABLED SYSTEMCLOSESTATES = 2
 )
 
+// String returns the SYSTEMCLOSESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEMCLOSESTATES) String() string {
+	switch e {
+	case MSYSC_NORMAL:
+		return "MSYSC_NORMAL"
+	case MSYSC_DISABLED:
+		return "MSYSC_DISABLED"
+	default:
+		return fmt.Sprintf("SYSTEMCLOSESTATES(%d)", int32(e))
+	}
+}
+
 type SYSTEMMAXIMIZEHCHOTSTATES int32
 
 const (
 	MSYSMXHC_HOT SYSTEMMAXIMIZEHCHOTSTATES = 1
 )
+
+// String returns the SYSTEMMAXIMIZEHCHOTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEMMAXIMIZEHCHOTSTATES) String() string {
+	switch e {
+	case MSYSMXHC_HOT:
+		return "MSYSMXHC_HOT"
+	default:
+		return fmt.Sprintf("SYSTEMMAXIMIZEHCHOTSTATES(%d)", int32(e))
+	}
+}
 
 type SYSTEMMAXIMIZESTATES int32
 
@@ -2551,11 +7682,35 @@ const (
 	MSYSMX_DISABLED SYSTEMMAXIMIZESTATES = 2
 )
 
+// String returns the SYSTEMMAXIMIZESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEMMAXIMIZESTATES) String() string {
+	switch e {
+	case MSYSMX_NORMAL:
+		return "MSYSMX_NORMAL"
+	case MSYSMX_DISABLED:
+		return "MSYSMX_DISABLED"
+	default:
+		return fmt.Sprintf("SYSTEMMAXIMIZESTATES(%d)", int32(e))
+	}
+}
+
 type SYSTEMMINIMIZEHCHOTSTATES int32
 
 const (
 	MSYSMNHC_HOT SYSTEMMINIMIZEHCHOTSTATES = 1
 )
+
+// String returns the SYSTEMMINIMIZEHCHOTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEMMINIMIZEHCHOTSTATES) String() string {
+	switch e {
+	case MSYSMNHC_HOT:
+		return "MSYSMNHC_HOT"
+	default:
+		return fmt.Sprintf("SYSTEMMINIMIZEHCHOTSTATES(%d)", int32(e))
+	}
+}
 
 type SYSTEMMINIMIZESTATES int32
 
@@ -2564,11 +7719,35 @@ const (
 	MSYSMN_DISABLED SYSTEMMINIMIZESTATES = 2
 )
 
+// String returns the SYSTEMMINIMIZESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEMMINIMIZESTATES) String() string {
+	switch e {
+	case MSYSMN_NORMAL:
+		return "MSYSMN_NORMAL"
+	case MSYSMN_DISABLED:
+		return "MSYSMN_DISABLED"
+	default:
+		return fmt.Sprintf("SYSTEMMINIMIZESTATES(%d)", int32(e))
+	}
+}
+
 type SYSTEMRESTOREHCHOTSTATES int32
 
 const (
 	MSYSRHC_HOT SYSTEMRESTOREHCHOTSTATES = 1
 )
+
+// String returns the SYSTEMRESTOREHCHOTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEMRESTOREHCHOTSTATES) String() string {
+	switch e {
+	case MSYSRHC_HOT:
+		return "MSYSRHC_HOT"
+	default:
+		return fmt.Sprintf("SYSTEMRESTOREHCHOTSTATES(%d)", int32(e))
+	}
+}
 
 type SYSTEMRESTORESTATES int32
 
@@ -2576,6 +7755,19 @@ const (
 	MSYSR_NORMAL   SYSTEMRESTORESTATES = 1
 	MSYSR_DISABLED SYSTEMRESTORESTATES = 2
 )
+
+// String returns the SYSTEMRESTORESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEMRESTORESTATES) String() string {
+	switch e {
+	case MSYSR_NORMAL:
+		return "MSYSR_NORMAL"
+	case MSYSR_DISABLED:
+		return "MSYSR_DISABLED"
+	default:
+		return fmt.Sprintf("SYSTEMRESTORESTATES(%d)", int32(e))
+	}
+}
 
 type TABITEMBOTHEDGESTATES int32
 
@@ -2587,6 +7779,25 @@ const (
 	TIBES_FOCUSED  TABITEMBOTHEDGESTATES = 5
 )
 
+// String returns the TABITEMBOTHEDGESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TABITEMBOTHEDGESTATES) String() string {
+	switch e {
+	case TIBES_NORMAL:
+		return "TIBES_NORMAL"
+	case TIBES_HOT:
+		return "TIBES_HOT"
+	case TIBES_SELECTED:
+		return "TIBES_SELECTED"
+	case TIBES_DISABLED:
+		return "TIBES_DISABLED"
+	case TIBES_FOCUSED:
+		return "TIBES_FOCUSED"
+	default:
+		return fmt.Sprintf("TABITEMBOTHEDGESTATES(%d)", int32(e))
+	}
+}
+
 type TABITEMLEFTEDGESTATES int32
 
 const (
@@ -2596,6 +7807,25 @@ const (
 	TILES_DISABLED TABITEMLEFTEDGESTATES = 4
 	TILES_FOCUSED  TABITEMLEFTEDGESTATES = 5
 )
+
+// String returns the TABITEMLEFTEDGESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TABITEMLEFTEDGESTATES) String() string {
+	switch e {
+	case TILES_NORMAL:
+		return "TILES_NORMAL"
+	case TILES_HOT:
+		return "TILES_HOT"
+	case TILES_SELECTED:
+		return "TILES_SELECTED"
+	case TILES_DISABLED:
+		return "TILES_DISABLED"
+	case TILES_FOCUSED:
+		return "TILES_FOCUSED"
+	default:
+		return fmt.Sprintf("TABITEMLEFTEDGESTATES(%d)", int32(e))
+	}
+}
 
 type TABITEMRIGHTEDGESTATES int32
 
@@ -2607,6 +7837,25 @@ const (
 	TIRES_FOCUSED  TABITEMRIGHTEDGESTATES = 5
 )
 
+// String returns the TABITEMRIGHTEDGESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TABITEMRIGHTEDGESTATES) String() string {
+	switch e {
+	case TIRES_NORMAL:
+		return "TIRES_NORMAL"
+	case TIRES_HOT:
+		return "TIRES_HOT"
+	case TIRES_SELECTED:
+		return "TIRES_SELECTED"
+	case TIRES_DISABLED:
+		return "TIRES_DISABLED"
+	case TIRES_FOCUSED:
+		return "TIRES_FOCUSED"
+	default:
+		return fmt.Sprintf("TABITEMRIGHTEDGESTATES(%d)", int32(e))
+	}
+}
+
 type TABITEMSTATES int32
 
 const (
@@ -2616,6 +7865,25 @@ const (
 	TIS_DISABLED TABITEMSTATES = 4
 	TIS_FOCUSED  TABITEMSTATES = 5
 )
+
+// String returns the TABITEMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TABITEMSTATES) String() string {
+	switch e {
+	case TIS_NORMAL:
+		return "TIS_NORMAL"
+	case TIS_HOT:
+		return "TIS_HOT"
+	case TIS_SELECTED:
+		return "TIS_SELECTED"
+	case TIS_DISABLED:
+		return "TIS_DISABLED"
+	case TIS_FOCUSED:
+		return "TIS_FOCUSED"
+	default:
+		return fmt.Sprintf("TABITEMSTATES(%d)", int32(e))
+	}
+}
 
 type TABPARTS int32
 
@@ -2633,6 +7901,37 @@ const (
 	TABP_AEROWIZARDBODY      TABPARTS = 11
 )
 
+// String returns the TABPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TABPARTS) String() string {
+	switch e {
+	case TABP_TABITEM:
+		return "TABP_TABITEM"
+	case TABP_TABITEMLEFTEDGE:
+		return "TABP_TABITEMLEFTEDGE"
+	case TABP_TABITEMRIGHTEDGE:
+		return "TABP_TABITEMRIGHTEDGE"
+	case TABP_TABITEMBOTHEDGE:
+		return "TABP_TABITEMBOTHEDGE"
+	case TABP_TOPTABITEM:
+		return "TABP_TOPTABITEM"
+	case TABP_TOPTABITEMLEFTEDGE:
+		return "TABP_TOPTABITEMLEFTEDGE"
+	case TABP_TOPTABITEMRIGHTEDGE:
+		return "TABP_TOPTABITEMRIGHTEDGE"
+	case TABP_TOPTABITEMBOTHEDGE:
+		return "TABP_TOPTABITEMBOTHEDGE"
+	case TABP_PANE:
+		return "TABP_PANE"
+	case TABP_BODY:
+		return "TABP_BODY"
+	case TABP_AEROWIZARDBODY:
+		return "TABP_AEROWIZARDBODY"
+	default:
+		return fmt.Sprintf("TABPARTS(%d)", int32(e))
+	}
+}
+
 type TABSTATES int32
 
 const (
@@ -2641,12 +7940,40 @@ const (
 	CSTB_SELECTED TABSTATES = 3
 )
 
+// String returns the TABSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TABSTATES) String() string {
+	switch e {
+	case CSTB_NORMAL:
+		return "CSTB_NORMAL"
+	case CSTB_HOT:
+		return "CSTB_HOT"
+	case CSTB_SELECTED:
+		return "CSTB_SELECTED"
+	default:
+		return fmt.Sprintf("TABSTATES(%d)", int32(e))
+	}
+}
+
 type TAB_CONTROL_ITEM_STATE uint32
 
 const (
 	TCIS_BUTTONPRESSED TAB_CONTROL_ITEM_STATE = 1
 	TCIS_HIGHLIGHTED   TAB_CONTROL_ITEM_STATE = 2
 )
+
+// String returns the TAB_CONTROL_ITEM_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TAB_CONTROL_ITEM_STATE) String() string {
+	switch e {
+	case TCIS_BUTTONPRESSED:
+		return "TCIS_BUTTONPRESSED"
+	case TCIS_HIGHLIGHTED:
+		return "TCIS_HIGHLIGHTED"
+	default:
+		return fmt.Sprintf("TAB_CONTROL_ITEM_STATE(%d)", uint32(e))
+	}
+}
 
 type TASKBANDPARTS int32
 
@@ -2655,6 +7982,21 @@ const (
 	TDP_FLASHBUTTON          TASKBANDPARTS = 2
 	TDP_FLASHBUTTONGROUPMENU TASKBANDPARTS = 3
 )
+
+// String returns the TASKBANDPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASKBANDPARTS) String() string {
+	switch e {
+	case TDP_GROUPCOUNT:
+		return "TDP_GROUPCOUNT"
+	case TDP_FLASHBUTTON:
+		return "TDP_FLASHBUTTON"
+	case TDP_FLASHBUTTONGROUPMENU:
+		return "TDP_FLASHBUTTONGROUPMENU"
+	default:
+		return fmt.Sprintf("TASKBANDPARTS(%d)", int32(e))
+	}
+}
 
 type TASKBARPARTS int32
 
@@ -2668,6 +8010,31 @@ const (
 	TBP_SIZINGBARTOP     TASKBARPARTS = 7
 	TBP_SIZINGBARLEFT    TASKBARPARTS = 8
 )
+
+// String returns the TASKBARPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASKBARPARTS) String() string {
+	switch e {
+	case TBP_BACKGROUNDBOTTOM:
+		return "TBP_BACKGROUNDBOTTOM"
+	case TBP_BACKGROUNDRIGHT:
+		return "TBP_BACKGROUNDRIGHT"
+	case TBP_BACKGROUNDTOP:
+		return "TBP_BACKGROUNDTOP"
+	case TBP_BACKGROUNDLEFT:
+		return "TBP_BACKGROUNDLEFT"
+	case TBP_SIZINGBARBOTTOM:
+		return "TBP_SIZINGBARBOTTOM"
+	case TBP_SIZINGBARRIGHT:
+		return "TBP_SIZINGBARRIGHT"
+	case TBP_SIZINGBARTOP:
+		return "TBP_SIZINGBARTOP"
+	case TBP_SIZINGBARLEFT:
+		return "TBP_SIZINGBARLEFT"
+	default:
+		return fmt.Sprintf("TASKBARPARTS(%d)", int32(e))
+	}
+}
 
 type TASKDIALOGPARTS int32
 
@@ -2695,6 +8062,58 @@ const (
 	TDLG_RADIOBUTTONPANE     TASKDIALOGPARTS = 21
 )
 
+// String returns the TASKDIALOGPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASKDIALOGPARTS) String() string {
+	switch e {
+	case TDLG_PRIMARYPANEL:
+		return "TDLG_PRIMARYPANEL"
+	case TDLG_MAININSTRUCTIONPANE:
+		return "TDLG_MAININSTRUCTIONPANE"
+	case TDLG_MAINICON:
+		return "TDLG_MAINICON"
+	case TDLG_CONTENTPANE:
+		return "TDLG_CONTENTPANE"
+	case TDLG_CONTENTICON:
+		return "TDLG_CONTENTICON"
+	case TDLG_EXPANDEDCONTENT:
+		return "TDLG_EXPANDEDCONTENT"
+	case TDLG_COMMANDLINKPANE:
+		return "TDLG_COMMANDLINKPANE"
+	case TDLG_SECONDARYPANEL:
+		return "TDLG_SECONDARYPANEL"
+	case TDLG_CONTROLPANE:
+		return "TDLG_CONTROLPANE"
+	case TDLG_BUTTONSECTION:
+		return "TDLG_BUTTONSECTION"
+	case TDLG_BUTTONWRAPPER:
+		return "TDLG_BUTTONWRAPPER"
+	case TDLG_EXPANDOTEXT:
+		return "TDLG_EXPANDOTEXT"
+	case TDLG_EXPANDOBUTTON:
+		return "TDLG_EXPANDOBUTTON"
+	case TDLG_VERIFICATIONTEXT:
+		return "TDLG_VERIFICATIONTEXT"
+	case TDLG_FOOTNOTEPANE:
+		return "TDLG_FOOTNOTEPANE"
+	case TDLG_FOOTNOTEAREA:
+		return "TDLG_FOOTNOTEAREA"
+	case TDLG_FOOTNOTESEPARATOR:
+		return "TDLG_FOOTNOTESEPARATOR"
+	case TDLG_EXPANDEDFOOTERAREA:
+		return "TDLG_EXPANDEDFOOTERAREA"
+	case TDLG_PROGRESSBAR:
+		return "TDLG_PROGRESSBAR"
+	case TDLG_IMAGEALIGNMENT:
+		return "TDLG_IMAGEALIGNMENT"
+	case TDLG_RADIOBUTTONPANE:
+		return "TDLG_RADIOBUTTONPANE"
+	default:
+		return fmt.Sprintf("TASKDIALOGPARTS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TASKDIALOG_COMMON_BUTTON_FLAGS int32
 
 const (
@@ -2711,6 +8130,49 @@ const (
 	TDCBF_HELP_BUTTON     TASKDIALOG_COMMON_BUTTON_FLAGS = 1048576
 )
 
+// String returns the TASKDIALOG_COMMON_BUTTON_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASKDIALOG_COMMON_BUTTON_FLAGS) String() string {
+	var parts []string
+	if e&TDCBF_OK_BUTTON != 0 {
+		parts = append(parts, "TDCBF_OK_BUTTON")
+	}
+	if e&TDCBF_YES_BUTTON != 0 {
+		parts = append(parts, "TDCBF_YES_BUTTON")
+	}
+	if e&TDCBF_NO_BUTTON != 0 {
+		parts = append(parts, "TDCBF_NO_BUTTON")
+	}
+	if e&TDCBF_CANCEL_BUTTON != 0 {
+		parts = append(parts, "TDCBF_CANCEL_BUTTON")
+	}
+	if e&TDCBF_RETRY_BUTTON != 0 {
+		parts = append(parts, "TDCBF_RETRY_BUTTON")
+	}
+	if e&TDCBF_CLOSE_BUTTON != 0 {
+		parts = append(parts, "TDCBF_CLOSE_BUTTON")
+	}
+	if e&TDCBF_ABORT_BUTTON != 0 {
+		parts = append(parts, "TDCBF_ABORT_BUTTON")
+	}
+	if e&TDCBF_IGNORE_BUTTON != 0 {
+		parts = append(parts, "TDCBF_IGNORE_BUTTON")
+	}
+	if e&TDCBF_TRYAGAIN_BUTTON != 0 {
+		parts = append(parts, "TDCBF_TRYAGAIN_BUTTON")
+	}
+	if e&TDCBF_CONTINUE_BUTTON != 0 {
+		parts = append(parts, "TDCBF_CONTINUE_BUTTON")
+	}
+	if e&TDCBF_HELP_BUTTON != 0 {
+		parts = append(parts, "TDCBF_HELP_BUTTON")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type TASKDIALOG_ELEMENTS int32
 
 const (
@@ -2720,6 +8182,24 @@ const (
 	TDE_MAIN_INSTRUCTION     TASKDIALOG_ELEMENTS = 3
 )
 
+// String returns the TASKDIALOG_ELEMENTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASKDIALOG_ELEMENTS) String() string {
+	switch e {
+	case TDE_CONTENT:
+		return "TDE_CONTENT"
+	case TDE_EXPANDED_INFORMATION:
+		return "TDE_EXPANDED_INFORMATION"
+	case TDE_FOOTER:
+		return "TDE_FOOTER"
+	case TDE_MAIN_INSTRUCTION:
+		return "TDE_MAIN_INSTRUCTION"
+	default:
+		return fmt.Sprintf("TASKDIALOG_ELEMENTS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TASKDIALOG_FLAGS int32
 
 const (
@@ -2743,12 +8223,89 @@ const (
 	TDF_SIZE_TO_CONTENT             TASKDIALOG_FLAGS = 16777216
 )
 
+// String returns the TASKDIALOG_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASKDIALOG_FLAGS) String() string {
+	var parts []string
+	if e&TDF_ENABLE_HYPERLINKS != 0 {
+		parts = append(parts, "TDF_ENABLE_HYPERLINKS")
+	}
+	if e&TDF_USE_HICON_MAIN != 0 {
+		parts = append(parts, "TDF_USE_HICON_MAIN")
+	}
+	if e&TDF_USE_HICON_FOOTER != 0 {
+		parts = append(parts, "TDF_USE_HICON_FOOTER")
+	}
+	if e&TDF_ALLOW_DIALOG_CANCELLATION != 0 {
+		parts = append(parts, "TDF_ALLOW_DIALOG_CANCELLATION")
+	}
+	if e&TDF_USE_COMMAND_LINKS != 0 {
+		parts = append(parts, "TDF_USE_COMMAND_LINKS")
+	}
+	if e&TDF_USE_COMMAND_LINKS_NO_ICON != 0 {
+		parts = append(parts, "TDF_USE_COMMAND_LINKS_NO_ICON")
+	}
+	if e&TDF_EXPAND_FOOTER_AREA != 0 {
+		parts = append(parts, "TDF_EXPAND_FOOTER_AREA")
+	}
+	if e&TDF_EXPANDED_BY_DEFAULT != 0 {
+		parts = append(parts, "TDF_EXPANDED_BY_DEFAULT")
+	}
+	if e&TDF_VERIFICATION_FLAG_CHECKED != 0 {
+		parts = append(parts, "TDF_VERIFICATION_FLAG_CHECKED")
+	}
+	if e&TDF_SHOW_PROGRESS_BAR != 0 {
+		parts = append(parts, "TDF_SHOW_PROGRESS_BAR")
+	}
+	if e&TDF_SHOW_MARQUEE_PROGRESS_BAR != 0 {
+		parts = append(parts, "TDF_SHOW_MARQUEE_PROGRESS_BAR")
+	}
+	if e&TDF_CALLBACK_TIMER != 0 {
+		parts = append(parts, "TDF_CALLBACK_TIMER")
+	}
+	if e&TDF_POSITION_RELATIVE_TO_WINDOW != 0 {
+		parts = append(parts, "TDF_POSITION_RELATIVE_TO_WINDOW")
+	}
+	if e&TDF_RTL_LAYOUT != 0 {
+		parts = append(parts, "TDF_RTL_LAYOUT")
+	}
+	if e&TDF_NO_DEFAULT_RADIO_BUTTON != 0 {
+		parts = append(parts, "TDF_NO_DEFAULT_RADIO_BUTTON")
+	}
+	if e&TDF_CAN_BE_MINIMIZED != 0 {
+		parts = append(parts, "TDF_CAN_BE_MINIMIZED")
+	}
+	if e&TDF_NO_SET_FOREGROUND != 0 {
+		parts = append(parts, "TDF_NO_SET_FOREGROUND")
+	}
+	if e&TDF_SIZE_TO_CONTENT != 0 {
+		parts = append(parts, "TDF_SIZE_TO_CONTENT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type TASKDIALOG_ICON_ELEMENTS int32
 
 const (
 	TDIE_ICON_MAIN   TASKDIALOG_ICON_ELEMENTS = 0
 	TDIE_ICON_FOOTER TASKDIALOG_ICON_ELEMENTS = 1
 )
+
+// String returns the TASKDIALOG_ICON_ELEMENTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASKDIALOG_ICON_ELEMENTS) String() string {
+	switch e {
+	case TDIE_ICON_MAIN:
+		return "TDIE_ICON_MAIN"
+	case TDIE_ICON_FOOTER:
+		return "TDIE_ICON_FOOTER"
+	default:
+		return fmt.Sprintf("TASKDIALOG_ICON_ELEMENTS(%d)", int32(e))
+	}
+}
 
 type TASKDIALOG_MESSAGES int32
 
@@ -2770,6 +8327,45 @@ const (
 	TDM_UPDATE_ICON                         TASKDIALOG_MESSAGES = 1140
 )
 
+// String returns the TASKDIALOG_MESSAGES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASKDIALOG_MESSAGES) String() string {
+	switch e {
+	case TDM_NAVIGATE_PAGE:
+		return "TDM_NAVIGATE_PAGE"
+	case TDM_CLICK_BUTTON:
+		return "TDM_CLICK_BUTTON"
+	case TDM_SET_MARQUEE_PROGRESS_BAR:
+		return "TDM_SET_MARQUEE_PROGRESS_BAR"
+	case TDM_SET_PROGRESS_BAR_STATE:
+		return "TDM_SET_PROGRESS_BAR_STATE"
+	case TDM_SET_PROGRESS_BAR_RANGE:
+		return "TDM_SET_PROGRESS_BAR_RANGE"
+	case TDM_SET_PROGRESS_BAR_POS:
+		return "TDM_SET_PROGRESS_BAR_POS"
+	case TDM_SET_PROGRESS_BAR_MARQUEE:
+		return "TDM_SET_PROGRESS_BAR_MARQUEE"
+	case TDM_SET_ELEMENT_TEXT:
+		return "TDM_SET_ELEMENT_TEXT"
+	case TDM_CLICK_RADIO_BUTTON:
+		return "TDM_CLICK_RADIO_BUTTON"
+	case TDM_ENABLE_BUTTON:
+		return "TDM_ENABLE_BUTTON"
+	case TDM_ENABLE_RADIO_BUTTON:
+		return "TDM_ENABLE_RADIO_BUTTON"
+	case TDM_CLICK_VERIFICATION:
+		return "TDM_CLICK_VERIFICATION"
+	case TDM_UPDATE_ELEMENT_TEXT:
+		return "TDM_UPDATE_ELEMENT_TEXT"
+	case TDM_SET_BUTTON_ELEVATION_REQUIRED_STATE:
+		return "TDM_SET_BUTTON_ELEVATION_REQUIRED_STATE"
+	case TDM_UPDATE_ICON:
+		return "TDM_UPDATE_ICON"
+	default:
+		return fmt.Sprintf("TASKDIALOG_MESSAGES(%d)", int32(e))
+	}
+}
+
 type TASKDIALOG_NOTIFICATIONS int32
 
 const (
@@ -2786,6 +8382,37 @@ const (
 	TDN_EXPANDO_BUTTON_CLICKED TASKDIALOG_NOTIFICATIONS = 10
 )
 
+// String returns the TASKDIALOG_NOTIFICATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASKDIALOG_NOTIFICATIONS) String() string {
+	switch e {
+	case TDN_CREATED:
+		return "TDN_CREATED"
+	case TDN_NAVIGATED:
+		return "TDN_NAVIGATED"
+	case TDN_BUTTON_CLICKED:
+		return "TDN_BUTTON_CLICKED"
+	case TDN_HYPERLINK_CLICKED:
+		return "TDN_HYPERLINK_CLICKED"
+	case TDN_TIMER:
+		return "TDN_TIMER"
+	case TDN_DESTROYED:
+		return "TDN_DESTROYED"
+	case TDN_RADIO_BUTTON_CLICKED:
+		return "TDN_RADIO_BUTTON_CLICKED"
+	case TDN_DIALOG_CONSTRUCTED:
+		return "TDN_DIALOG_CONSTRUCTED"
+	case TDN_VERIFICATION_CLICKED:
+		return "TDN_VERIFICATION_CLICKED"
+	case TDN_HELP:
+		return "TDN_HELP"
+	case TDN_EXPANDO_BUTTON_CLICKED:
+		return "TDN_EXPANDO_BUTTON_CLICKED"
+	default:
+		return fmt.Sprintf("TASKDIALOG_NOTIFICATIONS(%d)", int32(e))
+	}
+}
+
 type TASKLINKSTATES int32
 
 const (
@@ -2795,6 +8422,25 @@ const (
 	CPTL_DISABLED TASKLINKSTATES = 4
 	CPTL_PAGE     TASKLINKSTATES = 5
 )
+
+// String returns the TASKLINKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TASKLINKSTATES) String() string {
+	switch e {
+	case CPTL_NORMAL:
+		return "CPTL_NORMAL"
+	case CPTL_HOT:
+		return "CPTL_HOT"
+	case CPTL_PRESSED:
+		return "CPTL_PRESSED"
+	case CPTL_DISABLED:
+		return "CPTL_DISABLED"
+	case CPTL_PAGE:
+		return "CPTL_PAGE"
+	default:
+		return fmt.Sprintf("TASKLINKSTATES(%d)", int32(e))
+	}
+}
 
 type TA_PROPERTY int32
 
@@ -2807,6 +8453,28 @@ const (
 	TAP_ZORDER             TA_PROPERTY = 5
 )
 
+// String returns the TA_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TA_PROPERTY) String() string {
+	switch e {
+	case TAP_FLAGS:
+		return "TAP_FLAGS"
+	case TAP_TRANSFORMCOUNT:
+		return "TAP_TRANSFORMCOUNT"
+	case TAP_STAGGERDELAY:
+		return "TAP_STAGGERDELAY"
+	case TAP_STAGGERDELAYCAP:
+		return "TAP_STAGGERDELAYCAP"
+	case TAP_STAGGERDELAYFACTOR:
+		return "TAP_STAGGERDELAYFACTOR"
+	case TAP_ZORDER:
+		return "TAP_ZORDER"
+	default:
+		return fmt.Sprintf("TA_PROPERTY(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TA_PROPERTY_FLAG int32
 
 const (
@@ -2818,6 +8486,31 @@ const (
 	TAPF_HASPERSPECTIVE  TA_PROPERTY_FLAG = 16
 )
 
+// String returns the TA_PROPERTY_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TA_PROPERTY_FLAG) String() string {
+	var parts []string
+	if e&TAPF_HASSTAGGER != 0 {
+		parts = append(parts, "TAPF_HASSTAGGER")
+	}
+	if e&TAPF_ISRTLAWARE != 0 {
+		parts = append(parts, "TAPF_ISRTLAWARE")
+	}
+	if e&TAPF_ALLOWCOLLECTION != 0 {
+		parts = append(parts, "TAPF_ALLOWCOLLECTION")
+	}
+	if e&TAPF_HASBACKGROUND != 0 {
+		parts = append(parts, "TAPF_HASBACKGROUND")
+	}
+	if e&TAPF_HASPERSPECTIVE != 0 {
+		parts = append(parts, "TAPF_HASPERSPECTIVE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type TA_TIMINGFUNCTION_TYPE int32
 
 const (
@@ -2825,6 +8518,20 @@ const (
 	TTFT_CUBIC_BEZIER TA_TIMINGFUNCTION_TYPE = 1
 )
 
+// String returns the TA_TIMINGFUNCTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TA_TIMINGFUNCTION_TYPE) String() string {
+	switch e {
+	case TTFT_UNDEFINED:
+		return "TTFT_UNDEFINED"
+	case TTFT_CUBIC_BEZIER:
+		return "TTFT_CUBIC_BEZIER"
+	default:
+		return fmt.Sprintf("TA_TIMINGFUNCTION_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TA_TRANSFORM_FLAG int32
 
 const (
@@ -2833,6 +8540,25 @@ const (
 	TATF_HASINITIALVALUES  TA_TRANSFORM_FLAG = 2
 	TATF_HASORIGINVALUES   TA_TRANSFORM_FLAG = 4
 )
+
+// String returns the TA_TRANSFORM_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TA_TRANSFORM_FLAG) String() string {
+	var parts []string
+	if e&TATF_TARGETVALUES_USER != 0 {
+		parts = append(parts, "TATF_TARGETVALUES_USER")
+	}
+	if e&TATF_HASINITIALVALUES != 0 {
+		parts = append(parts, "TATF_HASINITIALVALUES")
+	}
+	if e&TATF_HASORIGINVALUES != 0 {
+		parts = append(parts, "TATF_HASORIGINVALUES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type TA_TRANSFORM_TYPE int32
 
@@ -2843,6 +8569,24 @@ const (
 	TATT_CLIP         TA_TRANSFORM_TYPE = 3
 )
 
+// String returns the TA_TRANSFORM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TA_TRANSFORM_TYPE) String() string {
+	switch e {
+	case TATT_TRANSLATE_2D:
+		return "TATT_TRANSLATE_2D"
+	case TATT_SCALE_2D:
+		return "TATT_SCALE_2D"
+	case TATT_OPACITY:
+		return "TATT_OPACITY"
+	case TATT_CLIP:
+		return "TATT_CLIP"
+	default:
+		return fmt.Sprintf("TA_TRANSFORM_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TBBUTTONINFOW_MASK uint32
 
 const (
@@ -2856,6 +8600,40 @@ const (
 	TBIF_TEXT    TBBUTTONINFOW_MASK = 2
 )
 
+// String returns the TBBUTTONINFOW_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TBBUTTONINFOW_MASK) String() string {
+	var parts []string
+	if e&TBIF_BYINDEX != 0 {
+		parts = append(parts, "TBIF_BYINDEX")
+	}
+	if e&TBIF_COMMAND != 0 {
+		parts = append(parts, "TBIF_COMMAND")
+	}
+	if e&TBIF_IMAGE != 0 {
+		parts = append(parts, "TBIF_IMAGE")
+	}
+	if e&TBIF_LPARAM != 0 {
+		parts = append(parts, "TBIF_LPARAM")
+	}
+	if e&TBIF_SIZE != 0 {
+		parts = append(parts, "TBIF_SIZE")
+	}
+	if e&TBIF_STATE != 0 {
+		parts = append(parts, "TBIF_STATE")
+	}
+	if e&TBIF_STYLE != 0 {
+		parts = append(parts, "TBIF_STYLE")
+	}
+	if e&TBIF_TEXT != 0 {
+		parts = append(parts, "TBIF_TEXT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type TBINSERTMARK_FLAGS uint32
 
 const (
@@ -2863,6 +8641,21 @@ const (
 	TBIMHT_AFTER      TBINSERTMARK_FLAGS = 1
 	TBIMHT_BACKGROUND TBINSERTMARK_FLAGS = 2
 )
+
+// String returns the TBINSERTMARK_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TBINSERTMARK_FLAGS) String() string {
+	switch e {
+	case TBIMHT_NONE:
+		return "TBIMHT_NONE"
+	case TBIMHT_AFTER:
+		return "TBIMHT_AFTER"
+	case TBIMHT_BACKGROUND:
+		return "TBIMHT_BACKGROUND"
+	default:
+		return fmt.Sprintf("TBINSERTMARK_FLAGS(%d)", uint32(e))
+	}
+}
 
 type TCHITTESTINFO_FLAGS uint32
 
@@ -2873,6 +8666,24 @@ const (
 	TCHT_ONITEMLABEL TCHITTESTINFO_FLAGS = 4
 )
 
+// String returns the TCHITTESTINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TCHITTESTINFO_FLAGS) String() string {
+	switch e {
+	case TCHT_NOWHERE:
+		return "TCHT_NOWHERE"
+	case TCHT_ONITEM:
+		return "TCHT_ONITEM"
+	case TCHT_ONITEMICON:
+		return "TCHT_ONITEMICON"
+	case TCHT_ONITEMLABEL:
+		return "TCHT_ONITEMLABEL"
+	default:
+		return fmt.Sprintf("TCHITTESTINFO_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TCITEMHEADERA_MASK uint32
 
 const (
@@ -2883,11 +8694,47 @@ const (
 	TCIF_STATE      TCITEMHEADERA_MASK = 16
 )
 
+// String returns the TCITEMHEADERA_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TCITEMHEADERA_MASK) String() string {
+	var parts []string
+	if e&TCIF_IMAGE != 0 {
+		parts = append(parts, "TCIF_IMAGE")
+	}
+	if e&TCIF_RTLREADING != 0 {
+		parts = append(parts, "TCIF_RTLREADING")
+	}
+	if e&TCIF_TEXT != 0 {
+		parts = append(parts, "TCIF_TEXT")
+	}
+	if e&TCIF_PARAM != 0 {
+		parts = append(parts, "TCIF_PARAM")
+	}
+	if e&TCIF_STATE != 0 {
+		parts = append(parts, "TCIF_STATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type TEXTSELECTIONGRIPPERPARTS int32
 
 const (
 	TSGP_GRIPPER TEXTSELECTIONGRIPPERPARTS = 1
 )
+
+// String returns the TEXTSELECTIONGRIPPERPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TEXTSELECTIONGRIPPERPARTS) String() string {
+	switch e {
+	case TSGP_GRIPPER:
+		return "TSGP_GRIPPER"
+	default:
+		return fmt.Sprintf("TEXTSELECTIONGRIPPERPARTS(%d)", int32(e))
+	}
+}
 
 type TEXTSHADOWTYPE int32
 
@@ -2896,6 +8743,21 @@ const (
 	TST_SINGLE     TEXTSHADOWTYPE = 1
 	TST_CONTINUOUS TEXTSHADOWTYPE = 2
 )
+
+// String returns the TEXTSHADOWTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TEXTSHADOWTYPE) String() string {
+	switch e {
+	case TST_NONE:
+		return "TST_NONE"
+	case TST_SINGLE:
+		return "TST_SINGLE"
+	case TST_CONTINUOUS:
+		return "TST_CONTINUOUS"
+	default:
+		return fmt.Sprintf("TEXTSHADOWTYPE(%d)", int32(e))
+	}
+}
 
 type TEXTSTYLEPARTS int32
 
@@ -2911,6 +8773,33 @@ const (
 	TEXT_CONTROLLABEL    TEXTSTYLEPARTS = 9
 )
 
+// String returns the TEXTSTYLEPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TEXTSTYLEPARTS) String() string {
+	switch e {
+	case TEXT_MAININSTRUCTION:
+		return "TEXT_MAININSTRUCTION"
+	case TEXT_INSTRUCTION:
+		return "TEXT_INSTRUCTION"
+	case TEXT_BODYTITLE:
+		return "TEXT_BODYTITLE"
+	case TEXT_BODYTEXT:
+		return "TEXT_BODYTEXT"
+	case TEXT_SECONDARYTEXT:
+		return "TEXT_SECONDARYTEXT"
+	case TEXT_HYPERLINKTEXT:
+		return "TEXT_HYPERLINKTEXT"
+	case TEXT_EXPANDED:
+		return "TEXT_EXPANDED"
+	case TEXT_LABEL:
+		return "TEXT_LABEL"
+	case TEXT_CONTROLLABEL:
+		return "TEXT_CONTROLLABEL"
+	default:
+		return fmt.Sprintf("TEXTSTYLEPARTS(%d)", int32(e))
+	}
+}
+
 // THEMESIZE: https://learn.microsoft.com/windows/win32/api/uxtheme/ne-uxtheme-themesize
 type THEMESIZE int32
 
@@ -2919,6 +8808,21 @@ const (
 	TS_TRUE THEMESIZE = 1
 	TS_DRAW THEMESIZE = 2
 )
+
+// String returns the THEMESIZE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THEMESIZE) String() string {
+	switch e {
+	case TS_MIN:
+		return "TS_MIN"
+	case TS_TRUE:
+		return "TS_TRUE"
+	case TS_DRAW:
+		return "TS_DRAW"
+	default:
+		return fmt.Sprintf("THEMESIZE(%d)", int32(e))
+	}
+}
 
 type THEME_PROPERTY_SYMBOL_ID uint32
 
@@ -3182,6 +9086,501 @@ const (
 	TMT_ATLASRECT               THEME_PROPERTY_SYMBOL_ID = 8002
 )
 
+// String returns the THEME_PROPERTY_SYMBOL_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THEME_PROPERTY_SYMBOL_ID) String() string {
+	switch e {
+	case TMT_RESERVEDLOW:
+		return "TMT_RESERVEDLOW"
+	case TMT_RESERVEDHIGH:
+		return "TMT_RESERVEDHIGH"
+	case TMT_DIBDATA:
+		return "TMT_DIBDATA"
+	case TMT_GLYPHDIBDATA:
+		return "TMT_GLYPHDIBDATA"
+	case TMT_ENUM:
+		return "TMT_ENUM"
+	case TMT_STRING:
+		return "TMT_STRING"
+	case TMT_INT:
+		return "TMT_INT"
+	case TMT_BOOL:
+		return "TMT_BOOL"
+	case TMT_COLOR:
+		return "TMT_COLOR"
+	case TMT_MARGINS:
+		return "TMT_MARGINS"
+	case TMT_FILENAME:
+		return "TMT_FILENAME"
+	case TMT_SIZE:
+		return "TMT_SIZE"
+	case TMT_POSITION:
+		return "TMT_POSITION"
+	case TMT_RECT:
+		return "TMT_RECT"
+	case TMT_FONT:
+		return "TMT_FONT"
+	case TMT_INTLIST:
+		return "TMT_INTLIST"
+	case TMT_HBITMAP:
+		return "TMT_HBITMAP"
+	case TMT_DISKSTREAM:
+		return "TMT_DISKSTREAM"
+	case TMT_STREAM:
+		return "TMT_STREAM"
+	case TMT_BITMAPREF:
+		return "TMT_BITMAPREF"
+	case TMT_FLOAT:
+		return "TMT_FLOAT"
+	case TMT_FLOATLIST:
+		return "TMT_FLOATLIST"
+	case TMT_COLORSCHEMES:
+		return "TMT_COLORSCHEMES"
+	case TMT_SIZES:
+		return "TMT_SIZES"
+	case TMT_CHARSET:
+		return "TMT_CHARSET"
+	case TMT_NAME:
+		return "TMT_NAME"
+	case TMT_DISPLAYNAME:
+		return "TMT_DISPLAYNAME"
+	case TMT_TOOLTIP:
+		return "TMT_TOOLTIP"
+	case TMT_COMPANY:
+		return "TMT_COMPANY"
+	case TMT_AUTHOR:
+		return "TMT_AUTHOR"
+	case TMT_COPYRIGHT:
+		return "TMT_COPYRIGHT"
+	case TMT_URL:
+		return "TMT_URL"
+	case TMT_VERSION:
+		return "TMT_VERSION"
+	case TMT_DESCRIPTION:
+		return "TMT_DESCRIPTION"
+	case TMT_CAPTIONFONT:
+		return "TMT_CAPTIONFONT"
+	case TMT_SMALLCAPTIONFONT:
+		return "TMT_SMALLCAPTIONFONT"
+	case TMT_MENUFONT:
+		return "TMT_MENUFONT"
+	case TMT_STATUSFONT:
+		return "TMT_STATUSFONT"
+	case TMT_MSGBOXFONT:
+		return "TMT_MSGBOXFONT"
+	case TMT_ICONTITLEFONT:
+		return "TMT_ICONTITLEFONT"
+	case TMT_HEADING1FONT:
+		return "TMT_HEADING1FONT"
+	case TMT_HEADING2FONT:
+		return "TMT_HEADING2FONT"
+	case TMT_BODYFONT:
+		return "TMT_BODYFONT"
+	case TMT_FLATMENUS:
+		return "TMT_FLATMENUS"
+	case TMT_SIZINGBORDERWIDTH:
+		return "TMT_SIZINGBORDERWIDTH"
+	case TMT_SCROLLBARWIDTH:
+		return "TMT_SCROLLBARWIDTH"
+	case TMT_SCROLLBARHEIGHT:
+		return "TMT_SCROLLBARHEIGHT"
+	case TMT_CAPTIONBARWIDTH:
+		return "TMT_CAPTIONBARWIDTH"
+	case TMT_CAPTIONBARHEIGHT:
+		return "TMT_CAPTIONBARHEIGHT"
+	case TMT_SMCAPTIONBARWIDTH:
+		return "TMT_SMCAPTIONBARWIDTH"
+	case TMT_SMCAPTIONBARHEIGHT:
+		return "TMT_SMCAPTIONBARHEIGHT"
+	case TMT_MENUBARWIDTH:
+		return "TMT_MENUBARWIDTH"
+	case TMT_MENUBARHEIGHT:
+		return "TMT_MENUBARHEIGHT"
+	case TMT_PADDEDBORDERWIDTH:
+		return "TMT_PADDEDBORDERWIDTH"
+	case TMT_MINCOLORDEPTH:
+		return "TMT_MINCOLORDEPTH"
+	case TMT_CSSNAME:
+		return "TMT_CSSNAME"
+	case TMT_XMLNAME:
+		return "TMT_XMLNAME"
+	case TMT_LASTUPDATED:
+		return "TMT_LASTUPDATED"
+	case TMT_ALIAS:
+		return "TMT_ALIAS"
+	case TMT_SCROLLBAR:
+		return "TMT_SCROLLBAR"
+	case TMT_BACKGROUND:
+		return "TMT_BACKGROUND"
+	case TMT_ACTIVECAPTION:
+		return "TMT_ACTIVECAPTION"
+	case TMT_INACTIVECAPTION:
+		return "TMT_INACTIVECAPTION"
+	case TMT_MENU:
+		return "TMT_MENU"
+	case TMT_WINDOW:
+		return "TMT_WINDOW"
+	case TMT_WINDOWFRAME:
+		return "TMT_WINDOWFRAME"
+	case TMT_MENUTEXT:
+		return "TMT_MENUTEXT"
+	case TMT_WINDOWTEXT:
+		return "TMT_WINDOWTEXT"
+	case TMT_CAPTIONTEXT:
+		return "TMT_CAPTIONTEXT"
+	case TMT_ACTIVEBORDER:
+		return "TMT_ACTIVEBORDER"
+	case TMT_INACTIVEBORDER:
+		return "TMT_INACTIVEBORDER"
+	case TMT_APPWORKSPACE:
+		return "TMT_APPWORKSPACE"
+	case TMT_HIGHLIGHT:
+		return "TMT_HIGHLIGHT"
+	case TMT_HIGHLIGHTTEXT:
+		return "TMT_HIGHLIGHTTEXT"
+	case TMT_BTNFACE:
+		return "TMT_BTNFACE"
+	case TMT_BTNSHADOW:
+		return "TMT_BTNSHADOW"
+	case TMT_GRAYTEXT:
+		return "TMT_GRAYTEXT"
+	case TMT_BTNTEXT:
+		return "TMT_BTNTEXT"
+	case TMT_INACTIVECAPTIONTEXT:
+		return "TMT_INACTIVECAPTIONTEXT"
+	case TMT_BTNHIGHLIGHT:
+		return "TMT_BTNHIGHLIGHT"
+	case TMT_DKSHADOW3D:
+		return "TMT_DKSHADOW3D"
+	case TMT_LIGHT3D:
+		return "TMT_LIGHT3D"
+	case TMT_INFOTEXT:
+		return "TMT_INFOTEXT"
+	case TMT_INFOBK:
+		return "TMT_INFOBK"
+	case TMT_BUTTONALTERNATEFACE:
+		return "TMT_BUTTONALTERNATEFACE"
+	case TMT_HOTTRACKING:
+		return "TMT_HOTTRACKING"
+	case TMT_GRADIENTACTIVECAPTION:
+		return "TMT_GRADIENTACTIVECAPTION"
+	case TMT_GRADIENTINACTIVECAPTION:
+		return "TMT_GRADIENTINACTIVECAPTION"
+	case TMT_MENUHILIGHT:
+		return "TMT_MENUHILIGHT"
+	case TMT_MENUBAR:
+		return "TMT_MENUBAR"
+	case TMT_FROMHUE1:
+		return "TMT_FROMHUE1"
+	case TMT_FROMHUE2:
+		return "TMT_FROMHUE2"
+	case TMT_FROMHUE3:
+		return "TMT_FROMHUE3"
+	case TMT_FROMHUE4:
+		return "TMT_FROMHUE4"
+	case TMT_FROMHUE5:
+		return "TMT_FROMHUE5"
+	case TMT_TOHUE1:
+		return "TMT_TOHUE1"
+	case TMT_TOHUE2:
+		return "TMT_TOHUE2"
+	case TMT_TOHUE3:
+		return "TMT_TOHUE3"
+	case TMT_TOHUE4:
+		return "TMT_TOHUE4"
+	case TMT_TOHUE5:
+		return "TMT_TOHUE5"
+	case TMT_FROMCOLOR1:
+		return "TMT_FROMCOLOR1"
+	case TMT_FROMCOLOR2:
+		return "TMT_FROMCOLOR2"
+	case TMT_FROMCOLOR3:
+		return "TMT_FROMCOLOR3"
+	case TMT_FROMCOLOR4:
+		return "TMT_FROMCOLOR4"
+	case TMT_FROMCOLOR5:
+		return "TMT_FROMCOLOR5"
+	case TMT_TOCOLOR1:
+		return "TMT_TOCOLOR1"
+	case TMT_TOCOLOR2:
+		return "TMT_TOCOLOR2"
+	case TMT_TOCOLOR3:
+		return "TMT_TOCOLOR3"
+	case TMT_TOCOLOR4:
+		return "TMT_TOCOLOR4"
+	case TMT_TOCOLOR5:
+		return "TMT_TOCOLOR5"
+	case TMT_TRANSPARENT:
+		return "TMT_TRANSPARENT"
+	case TMT_AUTOSIZE:
+		return "TMT_AUTOSIZE"
+	case TMT_BORDERONLY:
+		return "TMT_BORDERONLY"
+	case TMT_COMPOSITED:
+		return "TMT_COMPOSITED"
+	case TMT_BGFILL:
+		return "TMT_BGFILL"
+	case TMT_GLYPHTRANSPARENT:
+		return "TMT_GLYPHTRANSPARENT"
+	case TMT_GLYPHONLY:
+		return "TMT_GLYPHONLY"
+	case TMT_ALWAYSSHOWSIZINGBAR:
+		return "TMT_ALWAYSSHOWSIZINGBAR"
+	case TMT_MIRRORIMAGE:
+		return "TMT_MIRRORIMAGE"
+	case TMT_UNIFORMSIZING:
+		return "TMT_UNIFORMSIZING"
+	case TMT_INTEGRALSIZING:
+		return "TMT_INTEGRALSIZING"
+	case TMT_SOURCEGROW:
+		return "TMT_SOURCEGROW"
+	case TMT_SOURCESHRINK:
+		return "TMT_SOURCESHRINK"
+	case TMT_DRAWBORDERS:
+		return "TMT_DRAWBORDERS"
+	case TMT_NOETCHEDEFFECT:
+		return "TMT_NOETCHEDEFFECT"
+	case TMT_TEXTAPPLYOVERLAY:
+		return "TMT_TEXTAPPLYOVERLAY"
+	case TMT_TEXTGLOW:
+		return "TMT_TEXTGLOW"
+	case TMT_TEXTITALIC:
+		return "TMT_TEXTITALIC"
+	case TMT_COMPOSITEDOPAQUE:
+		return "TMT_COMPOSITEDOPAQUE"
+	case TMT_LOCALIZEDMIRRORIMAGE:
+		return "TMT_LOCALIZEDMIRRORIMAGE"
+	case TMT_IMAGECOUNT:
+		return "TMT_IMAGECOUNT"
+	case TMT_ALPHALEVEL:
+		return "TMT_ALPHALEVEL"
+	case TMT_BORDERSIZE:
+		return "TMT_BORDERSIZE"
+	case TMT_ROUNDCORNERWIDTH:
+		return "TMT_ROUNDCORNERWIDTH"
+	case TMT_ROUNDCORNERHEIGHT:
+		return "TMT_ROUNDCORNERHEIGHT"
+	case TMT_GRADIENTRATIO1:
+		return "TMT_GRADIENTRATIO1"
+	case TMT_GRADIENTRATIO2:
+		return "TMT_GRADIENTRATIO2"
+	case TMT_GRADIENTRATIO3:
+		return "TMT_GRADIENTRATIO3"
+	case TMT_GRADIENTRATIO4:
+		return "TMT_GRADIENTRATIO4"
+	case TMT_GRADIENTRATIO5:
+		return "TMT_GRADIENTRATIO5"
+	case TMT_PROGRESSCHUNKSIZE:
+		return "TMT_PROGRESSCHUNKSIZE"
+	case TMT_PROGRESSSPACESIZE:
+		return "TMT_PROGRESSSPACESIZE"
+	case TMT_SATURATION:
+		return "TMT_SATURATION"
+	case TMT_TEXTBORDERSIZE:
+		return "TMT_TEXTBORDERSIZE"
+	case TMT_ALPHATHRESHOLD:
+		return "TMT_ALPHATHRESHOLD"
+	case TMT_WIDTH:
+		return "TMT_WIDTH"
+	case TMT_HEIGHT:
+		return "TMT_HEIGHT"
+	case TMT_GLYPHINDEX:
+		return "TMT_GLYPHINDEX"
+	case TMT_TRUESIZESTRETCHMARK:
+		return "TMT_TRUESIZESTRETCHMARK"
+	case TMT_MINDPI1:
+		return "TMT_MINDPI1"
+	case TMT_MINDPI2:
+		return "TMT_MINDPI2"
+	case TMT_MINDPI3:
+		return "TMT_MINDPI3"
+	case TMT_MINDPI4:
+		return "TMT_MINDPI4"
+	case TMT_MINDPI5:
+		return "TMT_MINDPI5"
+	case TMT_TEXTGLOWSIZE:
+		return "TMT_TEXTGLOWSIZE"
+	case TMT_FRAMESPERSECOND:
+		return "TMT_FRAMESPERSECOND"
+	case TMT_PIXELSPERFRAME:
+		return "TMT_PIXELSPERFRAME"
+	case TMT_ANIMATIONDELAY:
+		return "TMT_ANIMATIONDELAY"
+	case TMT_GLOWINTENSITY:
+		return "TMT_GLOWINTENSITY"
+	case TMT_OPACITY:
+		return "TMT_OPACITY"
+	case TMT_COLORIZATIONCOLOR:
+		return "TMT_COLORIZATIONCOLOR"
+	case TMT_COLORIZATIONOPACITY:
+		return "TMT_COLORIZATIONOPACITY"
+	case TMT_MINDPI6:
+		return "TMT_MINDPI6"
+	case TMT_MINDPI7:
+		return "TMT_MINDPI7"
+	case TMT_GLYPHFONT:
+		return "TMT_GLYPHFONT"
+	case TMT_IMAGEFILE:
+		return "TMT_IMAGEFILE"
+	case TMT_IMAGEFILE1:
+		return "TMT_IMAGEFILE1"
+	case TMT_IMAGEFILE2:
+		return "TMT_IMAGEFILE2"
+	case TMT_IMAGEFILE3:
+		return "TMT_IMAGEFILE3"
+	case TMT_IMAGEFILE4:
+		return "TMT_IMAGEFILE4"
+	case TMT_IMAGEFILE5:
+		return "TMT_IMAGEFILE5"
+	case TMT_GLYPHIMAGEFILE:
+		return "TMT_GLYPHIMAGEFILE"
+	case TMT_IMAGEFILE6:
+		return "TMT_IMAGEFILE6"
+	case TMT_IMAGEFILE7:
+		return "TMT_IMAGEFILE7"
+	case TMT_TEXT:
+		return "TMT_TEXT"
+	case TMT_CLASSICVALUE:
+		return "TMT_CLASSICVALUE"
+	case TMT_OFFSET:
+		return "TMT_OFFSET"
+	case TMT_TEXTSHADOWOFFSET:
+		return "TMT_TEXTSHADOWOFFSET"
+	case TMT_MINSIZE:
+		return "TMT_MINSIZE"
+	case TMT_MINSIZE1:
+		return "TMT_MINSIZE1"
+	case TMT_MINSIZE2:
+		return "TMT_MINSIZE2"
+	case TMT_MINSIZE3:
+		return "TMT_MINSIZE3"
+	case TMT_MINSIZE4:
+		return "TMT_MINSIZE4"
+	case TMT_MINSIZE5:
+		return "TMT_MINSIZE5"
+	case TMT_NORMALSIZE:
+		return "TMT_NORMALSIZE"
+	case TMT_MINSIZE6:
+		return "TMT_MINSIZE6"
+	case TMT_MINSIZE7:
+		return "TMT_MINSIZE7"
+	case TMT_SIZINGMARGINS:
+		return "TMT_SIZINGMARGINS"
+	case TMT_CONTENTMARGINS:
+		return "TMT_CONTENTMARGINS"
+	case TMT_CAPTIONMARGINS:
+		return "TMT_CAPTIONMARGINS"
+	case TMT_BORDERCOLOR:
+		return "TMT_BORDERCOLOR"
+	case TMT_FILLCOLOR:
+		return "TMT_FILLCOLOR"
+	case TMT_TEXTCOLOR:
+		return "TMT_TEXTCOLOR"
+	case TMT_EDGELIGHTCOLOR:
+		return "TMT_EDGELIGHTCOLOR"
+	case TMT_EDGEHIGHLIGHTCOLOR:
+		return "TMT_EDGEHIGHLIGHTCOLOR"
+	case TMT_EDGESHADOWCOLOR:
+		return "TMT_EDGESHADOWCOLOR"
+	case TMT_EDGEDKSHADOWCOLOR:
+		return "TMT_EDGEDKSHADOWCOLOR"
+	case TMT_EDGEFILLCOLOR:
+		return "TMT_EDGEFILLCOLOR"
+	case TMT_TRANSPARENTCOLOR:
+		return "TMT_TRANSPARENTCOLOR"
+	case TMT_GRADIENTCOLOR1:
+		return "TMT_GRADIENTCOLOR1"
+	case TMT_GRADIENTCOLOR2:
+		return "TMT_GRADIENTCOLOR2"
+	case TMT_GRADIENTCOLOR3:
+		return "TMT_GRADIENTCOLOR3"
+	case TMT_GRADIENTCOLOR4:
+		return "TMT_GRADIENTCOLOR4"
+	case TMT_GRADIENTCOLOR5:
+		return "TMT_GRADIENTCOLOR5"
+	case TMT_SHADOWCOLOR:
+		return "TMT_SHADOWCOLOR"
+	case TMT_GLOWCOLOR:
+		return "TMT_GLOWCOLOR"
+	case TMT_TEXTBORDERCOLOR:
+		return "TMT_TEXTBORDERCOLOR"
+	case TMT_TEXTSHADOWCOLOR:
+		return "TMT_TEXTSHADOWCOLOR"
+	case TMT_GLYPHTEXTCOLOR:
+		return "TMT_GLYPHTEXTCOLOR"
+	case TMT_GLYPHTRANSPARENTCOLOR:
+		return "TMT_GLYPHTRANSPARENTCOLOR"
+	case TMT_FILLCOLORHINT:
+		return "TMT_FILLCOLORHINT"
+	case TMT_BORDERCOLORHINT:
+		return "TMT_BORDERCOLORHINT"
+	case TMT_ACCENTCOLORHINT:
+		return "TMT_ACCENTCOLORHINT"
+	case TMT_TEXTCOLORHINT:
+		return "TMT_TEXTCOLORHINT"
+	case TMT_HEADING1TEXTCOLOR:
+		return "TMT_HEADING1TEXTCOLOR"
+	case TMT_HEADING2TEXTCOLOR:
+		return "TMT_HEADING2TEXTCOLOR"
+	case TMT_BODYTEXTCOLOR:
+		return "TMT_BODYTEXTCOLOR"
+	case TMT_BGTYPE:
+		return "TMT_BGTYPE"
+	case TMT_BORDERTYPE:
+		return "TMT_BORDERTYPE"
+	case TMT_FILLTYPE:
+		return "TMT_FILLTYPE"
+	case TMT_SIZINGTYPE:
+		return "TMT_SIZINGTYPE"
+	case TMT_HALIGN:
+		return "TMT_HALIGN"
+	case TMT_CONTENTALIGNMENT:
+		return "TMT_CONTENTALIGNMENT"
+	case TMT_VALIGN:
+		return "TMT_VALIGN"
+	case TMT_OFFSETTYPE:
+		return "TMT_OFFSETTYPE"
+	case TMT_ICONEFFECT:
+		return "TMT_ICONEFFECT"
+	case TMT_TEXTSHADOWTYPE:
+		return "TMT_TEXTSHADOWTYPE"
+	case TMT_IMAGELAYOUT:
+		return "TMT_IMAGELAYOUT"
+	case TMT_GLYPHTYPE:
+		return "TMT_GLYPHTYPE"
+	case TMT_IMAGESELECTTYPE:
+		return "TMT_IMAGESELECTTYPE"
+	case TMT_GLYPHFONTSIZINGTYPE:
+		return "TMT_GLYPHFONTSIZINGTYPE"
+	case TMT_TRUESIZESCALINGTYPE:
+		return "TMT_TRUESIZESCALINGTYPE"
+	case TMT_USERPICTURE:
+		return "TMT_USERPICTURE"
+	case TMT_DEFAULTPANESIZE:
+		return "TMT_DEFAULTPANESIZE"
+	case TMT_BLENDCOLOR:
+		return "TMT_BLENDCOLOR"
+	case TMT_CUSTOMSPLITRECT:
+		return "TMT_CUSTOMSPLITRECT"
+	case TMT_ANIMATIONBUTTONRECT:
+		return "TMT_ANIMATIONBUTTONRECT"
+	case TMT_ANIMATIONDURATION:
+		return "TMT_ANIMATIONDURATION"
+	case TMT_TRANSITIONDURATIONS:
+		return "TMT_TRANSITIONDURATIONS"
+	case TMT_SCALEDBACKGROUND:
+		return "TMT_SCALEDBACKGROUND"
+	case TMT_ATLASIMAGE:
+		return "TMT_ATLASIMAGE"
+	case TMT_ATLASINPUTIMAGE:
+		return "TMT_ATLASINPUTIMAGE"
+	case TMT_ATLASRECT:
+		return "TMT_ATLASRECT"
+	default:
+		return fmt.Sprintf("THEME_PROPERTY_SYMBOL_ID(%d)", uint32(e))
+	}
+}
+
 type THUMBBOTTOMSTATES int32
 
 const (
@@ -3191,6 +9590,25 @@ const (
 	TUBS_FOCUSED  THUMBBOTTOMSTATES = 4
 	TUBS_DISABLED THUMBBOTTOMSTATES = 5
 )
+
+// String returns the THUMBBOTTOMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THUMBBOTTOMSTATES) String() string {
+	switch e {
+	case TUBS_NORMAL:
+		return "TUBS_NORMAL"
+	case TUBS_HOT:
+		return "TUBS_HOT"
+	case TUBS_PRESSED:
+		return "TUBS_PRESSED"
+	case TUBS_FOCUSED:
+		return "TUBS_FOCUSED"
+	case TUBS_DISABLED:
+		return "TUBS_DISABLED"
+	default:
+		return fmt.Sprintf("THUMBBOTTOMSTATES(%d)", int32(e))
+	}
+}
 
 type THUMBLEFTSTATES int32
 
@@ -3202,6 +9620,25 @@ const (
 	TUVLS_DISABLED THUMBLEFTSTATES = 5
 )
 
+// String returns the THUMBLEFTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THUMBLEFTSTATES) String() string {
+	switch e {
+	case TUVLS_NORMAL:
+		return "TUVLS_NORMAL"
+	case TUVLS_HOT:
+		return "TUVLS_HOT"
+	case TUVLS_PRESSED:
+		return "TUVLS_PRESSED"
+	case TUVLS_FOCUSED:
+		return "TUVLS_FOCUSED"
+	case TUVLS_DISABLED:
+		return "TUVLS_DISABLED"
+	default:
+		return fmt.Sprintf("THUMBLEFTSTATES(%d)", int32(e))
+	}
+}
+
 type THUMBRIGHTSTATES int32
 
 const (
@@ -3211,6 +9648,25 @@ const (
 	TUVRS_FOCUSED  THUMBRIGHTSTATES = 4
 	TUVRS_DISABLED THUMBRIGHTSTATES = 5
 )
+
+// String returns the THUMBRIGHTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THUMBRIGHTSTATES) String() string {
+	switch e {
+	case TUVRS_NORMAL:
+		return "TUVRS_NORMAL"
+	case TUVRS_HOT:
+		return "TUVRS_HOT"
+	case TUVRS_PRESSED:
+		return "TUVRS_PRESSED"
+	case TUVRS_FOCUSED:
+		return "TUVRS_FOCUSED"
+	case TUVRS_DISABLED:
+		return "TUVRS_DISABLED"
+	default:
+		return fmt.Sprintf("THUMBRIGHTSTATES(%d)", int32(e))
+	}
+}
 
 type THUMBSTATES int32
 
@@ -3222,6 +9678,25 @@ const (
 	TUS_DISABLED THUMBSTATES = 5
 )
 
+// String returns the THUMBSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THUMBSTATES) String() string {
+	switch e {
+	case TUS_NORMAL:
+		return "TUS_NORMAL"
+	case TUS_HOT:
+		return "TUS_HOT"
+	case TUS_PRESSED:
+		return "TUS_PRESSED"
+	case TUS_FOCUSED:
+		return "TUS_FOCUSED"
+	case TUS_DISABLED:
+		return "TUS_DISABLED"
+	default:
+		return fmt.Sprintf("THUMBSTATES(%d)", int32(e))
+	}
+}
+
 type THUMBTOPSTATES int32
 
 const (
@@ -3231,6 +9706,25 @@ const (
 	TUTS_FOCUSED  THUMBTOPSTATES = 4
 	TUTS_DISABLED THUMBTOPSTATES = 5
 )
+
+// String returns the THUMBTOPSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THUMBTOPSTATES) String() string {
+	switch e {
+	case TUTS_NORMAL:
+		return "TUTS_NORMAL"
+	case TUTS_HOT:
+		return "TUTS_HOT"
+	case TUTS_PRESSED:
+		return "TUTS_PRESSED"
+	case TUTS_FOCUSED:
+		return "TUTS_FOCUSED"
+	case TUTS_DISABLED:
+		return "TUTS_DISABLED"
+	default:
+		return fmt.Sprintf("THUMBTOPSTATES(%d)", int32(e))
+	}
+}
 
 type THUMBVERTSTATES int32
 
@@ -3242,11 +9736,41 @@ const (
 	TUVS_DISABLED THUMBVERTSTATES = 5
 )
 
+// String returns the THUMBVERTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e THUMBVERTSTATES) String() string {
+	switch e {
+	case TUVS_NORMAL:
+		return "TUVS_NORMAL"
+	case TUVS_HOT:
+		return "TUVS_HOT"
+	case TUVS_PRESSED:
+		return "TUVS_PRESSED"
+	case TUVS_FOCUSED:
+		return "TUVS_FOCUSED"
+	case TUVS_DISABLED:
+		return "TUVS_DISABLED"
+	default:
+		return fmt.Sprintf("THUMBVERTSTATES(%d)", int32(e))
+	}
+}
+
 type TICSSTATES int32
 
 const (
 	TSS_NORMAL TICSSTATES = 1
 )
+
+// String returns the TICSSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TICSSTATES) String() string {
+	switch e {
+	case TSS_NORMAL:
+		return "TSS_NORMAL"
+	default:
+		return fmt.Sprintf("TICSSTATES(%d)", int32(e))
+	}
+}
 
 type TICSVERTSTATES int32
 
@@ -3254,12 +9778,36 @@ const (
 	TSVS_NORMAL TICSVERTSTATES = 1
 )
 
+// String returns the TICSVERTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TICSVERTSTATES) String() string {
+	switch e {
+	case TSVS_NORMAL:
+		return "TSVS_NORMAL"
+	default:
+		return fmt.Sprintf("TICSVERTSTATES(%d)", int32(e))
+	}
+}
+
 type TITLEBARSTATES int32
 
 const (
 	AW_S_TITLEBAR_ACTIVE   TITLEBARSTATES = 1
 	AW_S_TITLEBAR_INACTIVE TITLEBARSTATES = 2
 )
+
+// String returns the TITLEBARSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TITLEBARSTATES) String() string {
+	switch e {
+	case AW_S_TITLEBAR_ACTIVE:
+		return "AW_S_TITLEBAR_ACTIVE"
+	case AW_S_TITLEBAR_INACTIVE:
+		return "AW_S_TITLEBAR_INACTIVE"
+	default:
+		return fmt.Sprintf("TITLEBARSTATES(%d)", int32(e))
+	}
+}
 
 type TOOLBARPARTS int32
 
@@ -3272,6 +9820,29 @@ const (
 	TP_SEPARATORVERT       TOOLBARPARTS = 6
 	TP_DROPDOWNBUTTONGLYPH TOOLBARPARTS = 7
 )
+
+// String returns the TOOLBARPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOOLBARPARTS) String() string {
+	switch e {
+	case TP_BUTTON:
+		return "TP_BUTTON"
+	case TP_DROPDOWNBUTTON:
+		return "TP_DROPDOWNBUTTON"
+	case TP_SPLITBUTTON:
+		return "TP_SPLITBUTTON"
+	case TP_SPLITBUTTONDROPDOWN:
+		return "TP_SPLITBUTTONDROPDOWN"
+	case TP_SEPARATOR:
+		return "TP_SEPARATOR"
+	case TP_SEPARATORVERT:
+		return "TP_SEPARATORVERT"
+	case TP_DROPDOWNBUTTONGLYPH:
+		return "TP_DROPDOWNBUTTONGLYPH"
+	default:
+		return fmt.Sprintf("TOOLBARPARTS(%d)", int32(e))
+	}
+}
 
 type TOOLBARSTYLESTATES int32
 
@@ -3286,6 +9857,31 @@ const (
 	TS_OTHERSIDEHOT TOOLBARSTYLESTATES = 8
 )
 
+// String returns the TOOLBARSTYLESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOOLBARSTYLESTATES) String() string {
+	switch e {
+	case TS_NORMAL:
+		return "TS_NORMAL"
+	case TS_HOT:
+		return "TS_HOT"
+	case TS_PRESSED:
+		return "TS_PRESSED"
+	case TS_DISABLED:
+		return "TS_DISABLED"
+	case TS_CHECKED:
+		return "TS_CHECKED"
+	case TS_HOTCHECKED:
+		return "TS_HOTCHECKED"
+	case TS_NEARHOT:
+		return "TS_NEARHOT"
+	case TS_OTHERSIDEHOT:
+		return "TS_OTHERSIDEHOT"
+	default:
+		return fmt.Sprintf("TOOLBARSTYLESTATES(%d)", int32(e))
+	}
+}
+
 type TOOLTIPPARTS int32
 
 const (
@@ -3298,6 +9894,30 @@ const (
 	TTP_WRENCH        TOOLTIPPARTS = 7
 )
 
+// String returns the TOOLTIPPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOOLTIPPARTS) String() string {
+	switch e {
+	case TTP_STANDARD:
+		return "TTP_STANDARD"
+	case TTP_STANDARDTITLE:
+		return "TTP_STANDARDTITLE"
+	case TTP_BALLOON:
+		return "TTP_BALLOON"
+	case TTP_BALLOONTITLE:
+		return "TTP_BALLOONTITLE"
+	case TTP_CLOSE:
+		return "TTP_CLOSE"
+	case TTP_BALLOONSTEM:
+		return "TTP_BALLOONSTEM"
+	case TTP_WRENCH:
+		return "TTP_WRENCH"
+	default:
+		return fmt.Sprintf("TOOLTIPPARTS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TOOLTIP_FLAGS uint32
 
 const (
@@ -3312,6 +9932,43 @@ const (
 	TTF_DI_SETITEM  TOOLTIP_FLAGS = 32768
 )
 
+// String returns the TOOLTIP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOOLTIP_FLAGS) String() string {
+	var parts []string
+	if e&TTF_IDISHWND != 0 {
+		parts = append(parts, "TTF_IDISHWND")
+	}
+	if e&TTF_CENTERTIP != 0 {
+		parts = append(parts, "TTF_CENTERTIP")
+	}
+	if e&TTF_RTLREADING != 0 {
+		parts = append(parts, "TTF_RTLREADING")
+	}
+	if e&TTF_SUBCLASS != 0 {
+		parts = append(parts, "TTF_SUBCLASS")
+	}
+	if e&TTF_TRACK != 0 {
+		parts = append(parts, "TTF_TRACK")
+	}
+	if e&TTF_ABSOLUTE != 0 {
+		parts = append(parts, "TTF_ABSOLUTE")
+	}
+	if e&TTF_TRANSPARENT != 0 {
+		parts = append(parts, "TTF_TRANSPARENT")
+	}
+	if e&TTF_PARSELINKS != 0 {
+		parts = append(parts, "TTF_PARSELINKS")
+	}
+	if e&TTF_DI_SETITEM != 0 {
+		parts = append(parts, "TTF_DI_SETITEM")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type TOPTABITEMBOTHEDGESTATES int32
 
 const (
@@ -3321,6 +9978,25 @@ const (
 	TTIBES_DISABLED TOPTABITEMBOTHEDGESTATES = 4
 	TTIBES_FOCUSED  TOPTABITEMBOTHEDGESTATES = 5
 )
+
+// String returns the TOPTABITEMBOTHEDGESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOPTABITEMBOTHEDGESTATES) String() string {
+	switch e {
+	case TTIBES_NORMAL:
+		return "TTIBES_NORMAL"
+	case TTIBES_HOT:
+		return "TTIBES_HOT"
+	case TTIBES_SELECTED:
+		return "TTIBES_SELECTED"
+	case TTIBES_DISABLED:
+		return "TTIBES_DISABLED"
+	case TTIBES_FOCUSED:
+		return "TTIBES_FOCUSED"
+	default:
+		return fmt.Sprintf("TOPTABITEMBOTHEDGESTATES(%d)", int32(e))
+	}
+}
 
 type TOPTABITEMLEFTEDGESTATES int32
 
@@ -3332,6 +10008,25 @@ const (
 	TTILES_FOCUSED  TOPTABITEMLEFTEDGESTATES = 5
 )
 
+// String returns the TOPTABITEMLEFTEDGESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOPTABITEMLEFTEDGESTATES) String() string {
+	switch e {
+	case TTILES_NORMAL:
+		return "TTILES_NORMAL"
+	case TTILES_HOT:
+		return "TTILES_HOT"
+	case TTILES_SELECTED:
+		return "TTILES_SELECTED"
+	case TTILES_DISABLED:
+		return "TTILES_DISABLED"
+	case TTILES_FOCUSED:
+		return "TTILES_FOCUSED"
+	default:
+		return fmt.Sprintf("TOPTABITEMLEFTEDGESTATES(%d)", int32(e))
+	}
+}
+
 type TOPTABITEMRIGHTEDGESTATES int32
 
 const (
@@ -3342,6 +10037,25 @@ const (
 	TTIRES_FOCUSED  TOPTABITEMRIGHTEDGESTATES = 5
 )
 
+// String returns the TOPTABITEMRIGHTEDGESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOPTABITEMRIGHTEDGESTATES) String() string {
+	switch e {
+	case TTIRES_NORMAL:
+		return "TTIRES_NORMAL"
+	case TTIRES_HOT:
+		return "TTIRES_HOT"
+	case TTIRES_SELECTED:
+		return "TTIRES_SELECTED"
+	case TTIRES_DISABLED:
+		return "TTIRES_DISABLED"
+	case TTIRES_FOCUSED:
+		return "TTIRES_FOCUSED"
+	default:
+		return fmt.Sprintf("TOPTABITEMRIGHTEDGESTATES(%d)", int32(e))
+	}
+}
+
 type TOPTABITEMSTATES int32
 
 const (
@@ -3351,6 +10065,25 @@ const (
 	TTIS_DISABLED TOPTABITEMSTATES = 4
 	TTIS_FOCUSED  TOPTABITEMSTATES = 5
 )
+
+// String returns the TOPTABITEMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOPTABITEMSTATES) String() string {
+	switch e {
+	case TTIS_NORMAL:
+		return "TTIS_NORMAL"
+	case TTIS_HOT:
+		return "TTIS_HOT"
+	case TTIS_SELECTED:
+		return "TTIS_SELECTED"
+	case TTIS_DISABLED:
+		return "TTIS_DISABLED"
+	case TTIS_FOCUSED:
+		return "TTIS_FOCUSED"
+	default:
+		return fmt.Sprintf("TOPTABITEMSTATES(%d)", int32(e))
+	}
+}
 
 type TRACKBARPARTS int32
 
@@ -3367,11 +10100,51 @@ const (
 	TKP_TICSVERT    TRACKBARPARTS = 10
 )
 
+// String returns the TRACKBARPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRACKBARPARTS) String() string {
+	switch e {
+	case TKP_TRACK:
+		return "TKP_TRACK"
+	case TKP_TRACKVERT:
+		return "TKP_TRACKVERT"
+	case TKP_THUMB:
+		return "TKP_THUMB"
+	case TKP_THUMBBOTTOM:
+		return "TKP_THUMBBOTTOM"
+	case TKP_THUMBTOP:
+		return "TKP_THUMBTOP"
+	case TKP_THUMBVERT:
+		return "TKP_THUMBVERT"
+	case TKP_THUMBLEFT:
+		return "TKP_THUMBLEFT"
+	case TKP_THUMBRIGHT:
+		return "TKP_THUMBRIGHT"
+	case TKP_TICS:
+		return "TKP_TICS"
+	case TKP_TICSVERT:
+		return "TKP_TICSVERT"
+	default:
+		return fmt.Sprintf("TRACKBARPARTS(%d)", int32(e))
+	}
+}
+
 type TRACKBARSTYLESTATES int32
 
 const (
 	TKS_NORMAL TRACKBARSTYLESTATES = 1
 )
+
+// String returns the TRACKBARSTYLESTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRACKBARSTYLESTATES) String() string {
+	switch e {
+	case TKS_NORMAL:
+		return "TKS_NORMAL"
+	default:
+		return fmt.Sprintf("TRACKBARSTYLESTATES(%d)", int32(e))
+	}
+}
 
 type TRACKSTATES int32
 
@@ -3379,11 +10152,33 @@ const (
 	TRS_NORMAL TRACKSTATES = 1
 )
 
+// String returns the TRACKSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRACKSTATES) String() string {
+	switch e {
+	case TRS_NORMAL:
+		return "TRS_NORMAL"
+	default:
+		return fmt.Sprintf("TRACKSTATES(%d)", int32(e))
+	}
+}
+
 type TRACKVERTSTATES int32
 
 const (
 	TRVS_NORMAL TRACKVERTSTATES = 1
 )
+
+// String returns the TRACKVERTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRACKVERTSTATES) String() string {
+	switch e {
+	case TRVS_NORMAL:
+		return "TRVS_NORMAL"
+	default:
+		return fmt.Sprintf("TRACKVERTSTATES(%d)", int32(e))
+	}
+}
 
 type TRAILINGGRIDCELLSTATES int32
 
@@ -3397,6 +10192,29 @@ const (
 	MCTGC_SELECTEDHOT   TRAILINGGRIDCELLSTATES = 7
 )
 
+// String returns the TRAILINGGRIDCELLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRAILINGGRIDCELLSTATES) String() string {
+	switch e {
+	case MCTGC_HOT:
+		return "MCTGC_HOT"
+	case MCTGC_HASSTATE:
+		return "MCTGC_HASSTATE"
+	case MCTGC_HASSTATEHOT:
+		return "MCTGC_HASSTATEHOT"
+	case MCTGC_TODAY:
+		return "MCTGC_TODAY"
+	case MCTGC_TODAYSELECTED:
+		return "MCTGC_TODAYSELECTED"
+	case MCTGC_SELECTED:
+		return "MCTGC_SELECTED"
+	case MCTGC_SELECTEDHOT:
+		return "MCTGC_SELECTEDHOT"
+	default:
+		return fmt.Sprintf("TRAILINGGRIDCELLSTATES(%d)", int32(e))
+	}
+}
+
 type TRAILINGGRIDCELLUPPERSTATES int32
 
 const (
@@ -3407,6 +10225,25 @@ const (
 	MCTGCU_SELECTEDHOT TRAILINGGRIDCELLUPPERSTATES = 5
 )
 
+// String returns the TRAILINGGRIDCELLUPPERSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRAILINGGRIDCELLUPPERSTATES) String() string {
+	switch e {
+	case MCTGCU_HOT:
+		return "MCTGCU_HOT"
+	case MCTGCU_HASSTATE:
+		return "MCTGCU_HASSTATE"
+	case MCTGCU_HASSTATEHOT:
+		return "MCTGCU_HASSTATEHOT"
+	case MCTGCU_SELECTED:
+		return "MCTGCU_SELECTED"
+	case MCTGCU_SELECTEDHOT:
+		return "MCTGCU_SELECTEDHOT"
+	default:
+		return fmt.Sprintf("TRAILINGGRIDCELLUPPERSTATES(%d)", int32(e))
+	}
+}
+
 type TRANSPARENTBACKGROUNDSTATES int32
 
 const (
@@ -3416,12 +10253,42 @@ const (
 	CBTBS_FOCUSED  TRANSPARENTBACKGROUNDSTATES = 4
 )
 
+// String returns the TRANSPARENTBACKGROUNDSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSPARENTBACKGROUNDSTATES) String() string {
+	switch e {
+	case CBTBS_NORMAL:
+		return "CBTBS_NORMAL"
+	case CBTBS_HOT:
+		return "CBTBS_HOT"
+	case CBTBS_DISABLED:
+		return "CBTBS_DISABLED"
+	case CBTBS_FOCUSED:
+		return "CBTBS_FOCUSED"
+	default:
+		return fmt.Sprintf("TRANSPARENTBACKGROUNDSTATES(%d)", int32(e))
+	}
+}
+
 type TRANSPARENTBARSTATES int32
 
 const (
 	PBBS_NORMAL  TRANSPARENTBARSTATES = 1
 	PBBS_PARTIAL TRANSPARENTBARSTATES = 2
 )
+
+// String returns the TRANSPARENTBARSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSPARENTBARSTATES) String() string {
+	switch e {
+	case PBBS_NORMAL:
+		return "PBBS_NORMAL"
+	case PBBS_PARTIAL:
+		return "PBBS_PARTIAL"
+	default:
+		return fmt.Sprintf("TRANSPARENTBARSTATES(%d)", int32(e))
+	}
+}
 
 type TRANSPARENTBARVERTSTATES int32
 
@@ -3430,12 +10297,38 @@ const (
 	PBBVS_PARTIAL TRANSPARENTBARVERTSTATES = 2
 )
 
+// String returns the TRANSPARENTBARVERTSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRANSPARENTBARVERTSTATES) String() string {
+	switch e {
+	case PBBVS_NORMAL:
+		return "PBBVS_NORMAL"
+	case PBBVS_PARTIAL:
+		return "PBBVS_PARTIAL"
+	default:
+		return fmt.Sprintf("TRANSPARENTBARVERTSTATES(%d)", int32(e))
+	}
+}
+
 type TRAYNOTIFYPARTS int32
 
 const (
 	TNP_BACKGROUND     TRAYNOTIFYPARTS = 1
 	TNP_ANIMBACKGROUND TRAYNOTIFYPARTS = 2
 )
+
+// String returns the TRAYNOTIFYPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRAYNOTIFYPARTS) String() string {
+	switch e {
+	case TNP_BACKGROUND:
+		return "TNP_BACKGROUND"
+	case TNP_ANIMBACKGROUND:
+		return "TNP_ANIMBACKGROUND"
+	default:
+		return fmt.Sprintf("TRAYNOTIFYPARTS(%d)", int32(e))
+	}
+}
 
 type TREEITEMSTATES int32
 
@@ -3448,6 +10341,27 @@ const (
 	TREIS_HOTSELECTED      TREEITEMSTATES = 6
 )
 
+// String returns the TREEITEMSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TREEITEMSTATES) String() string {
+	switch e {
+	case TREIS_NORMAL:
+		return "TREIS_NORMAL"
+	case TREIS_HOT:
+		return "TREIS_HOT"
+	case TREIS_SELECTED:
+		return "TREIS_SELECTED"
+	case TREIS_DISABLED:
+		return "TREIS_DISABLED"
+	case TREIS_SELECTEDNOTFOCUS:
+		return "TREIS_SELECTEDNOTFOCUS"
+	case TREIS_HOTSELECTED:
+		return "TREIS_HOTSELECTED"
+	default:
+		return fmt.Sprintf("TREEITEMSTATES(%d)", int32(e))
+	}
+}
+
 type TREEVIEWPARTS int32
 
 const (
@@ -3456,6 +10370,23 @@ const (
 	TVP_BRANCH   TREEVIEWPARTS = 3
 	TVP_HOTGLYPH TREEVIEWPARTS = 4
 )
+
+// String returns the TREEVIEWPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TREEVIEWPARTS) String() string {
+	switch e {
+	case TVP_TREEITEM:
+		return "TVP_TREEITEM"
+	case TVP_GLYPH:
+		return "TVP_GLYPH"
+	case TVP_BRANCH:
+		return "TVP_BRANCH"
+	case TVP_HOTGLYPH:
+		return "TVP_HOTGLYPH"
+	default:
+		return fmt.Sprintf("TREEVIEWPARTS(%d)", int32(e))
+	}
+}
 
 type TREE_VIEW_ITEM_STATE_FLAGS uint32
 
@@ -3475,6 +10406,35 @@ const (
 	TVIS_EX_ALL         TREE_VIEW_ITEM_STATE_FLAGS = 2
 )
 
+// String returns the TREE_VIEW_ITEM_STATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TREE_VIEW_ITEM_STATE_FLAGS) String() string {
+	switch e {
+	case TVIS_SELECTED:
+		return "TVIS_SELECTED"
+	case TVIS_CUT:
+		return "TVIS_CUT"
+	case TVIS_DROPHILITED:
+		return "TVIS_DROPHILITED"
+	case TVIS_BOLD:
+		return "TVIS_BOLD"
+	case TVIS_EXPANDED:
+		return "TVIS_EXPANDED"
+	case TVIS_EXPANDEDONCE:
+		return "TVIS_EXPANDEDONCE"
+	case TVIS_EXPANDPARTIAL:
+		return "TVIS_EXPANDPARTIAL"
+	case TVIS_OVERLAYMASK:
+		return "TVIS_OVERLAYMASK"
+	case TVIS_STATEIMAGEMASK:
+		return "TVIS_STATEIMAGEMASK"
+	case TVIS_EX_FLAT:
+		return "TVIS_EX_FLAT"
+	default:
+		return fmt.Sprintf("TREE_VIEW_ITEM_STATE_FLAGS(%d)", uint32(e))
+	}
+}
+
 type TRUESIZESCALINGTYPE int32
 
 const (
@@ -3483,6 +10443,22 @@ const (
 	TSST_DPI  TRUESIZESCALINGTYPE = 2
 )
 
+// String returns the TRUESIZESCALINGTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TRUESIZESCALINGTYPE) String() string {
+	switch e {
+	case TSST_NONE:
+		return "TSST_NONE"
+	case TSST_SIZE:
+		return "TSST_SIZE"
+	case TSST_DPI:
+		return "TSST_DPI"
+	default:
+		return fmt.Sprintf("TRUESIZESCALINGTYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TVHITTESTINFO_FLAGS uint32
 
 const (
@@ -3500,6 +10476,52 @@ const (
 	TVHT_TORIGHT         TVHITTESTINFO_FLAGS = 1024
 )
 
+// String returns the TVHITTESTINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TVHITTESTINFO_FLAGS) String() string {
+	var parts []string
+	if e&TVHT_ABOVE != 0 {
+		parts = append(parts, "TVHT_ABOVE")
+	}
+	if e&TVHT_BELOW != 0 {
+		parts = append(parts, "TVHT_BELOW")
+	}
+	if e&TVHT_NOWHERE != 0 {
+		parts = append(parts, "TVHT_NOWHERE")
+	}
+	if e&TVHT_ONITEM != 0 {
+		parts = append(parts, "TVHT_ONITEM")
+	}
+	if e&TVHT_ONITEMBUTTON != 0 {
+		parts = append(parts, "TVHT_ONITEMBUTTON")
+	}
+	if e&TVHT_ONITEMICON != 0 {
+		parts = append(parts, "TVHT_ONITEMICON")
+	}
+	if e&TVHT_ONITEMINDENT != 0 {
+		parts = append(parts, "TVHT_ONITEMINDENT")
+	}
+	if e&TVHT_ONITEMLABEL != 0 {
+		parts = append(parts, "TVHT_ONITEMLABEL")
+	}
+	if e&TVHT_ONITEMRIGHT != 0 {
+		parts = append(parts, "TVHT_ONITEMRIGHT")
+	}
+	if e&TVHT_ONITEMSTATEICON != 0 {
+		parts = append(parts, "TVHT_ONITEMSTATEICON")
+	}
+	if e&TVHT_TOLEFT != 0 {
+		parts = append(parts, "TVHT_TOLEFT")
+	}
+	if e&TVHT_TORIGHT != 0 {
+		parts = append(parts, "TVHT_TORIGHT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type TVITEMEXW_CHILDREN int32
 
 const (
@@ -3509,12 +10531,41 @@ const (
 	I_CHILDRENAUTO     TVITEMEXW_CHILDREN = -2
 )
 
+// String returns the TVITEMEXW_CHILDREN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TVITEMEXW_CHILDREN) String() string {
+	switch e {
+	case I_ZERO:
+		return "I_ZERO"
+	case I_ONE_OR_MORE:
+		return "I_ONE_OR_MORE"
+	case I_CHILDRENCALLBACK:
+		return "I_CHILDRENCALLBACK"
+	case I_CHILDRENAUTO:
+		return "I_CHILDRENAUTO"
+	default:
+		return fmt.Sprintf("TVITEMEXW_CHILDREN(%d)", int32(e))
+	}
+}
+
 type TVITEMPART int32
 
 const (
 	TVGIPR_BUTTON TVITEMPART = 1
 )
 
+// String returns the TVITEMPART constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TVITEMPART) String() string {
+	switch e {
+	case TVGIPR_BUTTON:
+		return "TVGIPR_BUTTON"
+	default:
+		return fmt.Sprintf("TVITEMPART(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TVITEM_MASK uint32
 
 const (
@@ -3531,12 +10582,68 @@ const (
 	TVIF_STATEEX       TVITEM_MASK = 256
 )
 
+// String returns the TVITEM_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TVITEM_MASK) String() string {
+	var parts []string
+	if e&TVIF_CHILDREN != 0 {
+		parts = append(parts, "TVIF_CHILDREN")
+	}
+	if e&TVIF_DI_SETITEM != 0 {
+		parts = append(parts, "TVIF_DI_SETITEM")
+	}
+	if e&TVIF_HANDLE != 0 {
+		parts = append(parts, "TVIF_HANDLE")
+	}
+	if e&TVIF_IMAGE != 0 {
+		parts = append(parts, "TVIF_IMAGE")
+	}
+	if e&TVIF_PARAM != 0 {
+		parts = append(parts, "TVIF_PARAM")
+	}
+	if e&TVIF_SELECTEDIMAGE != 0 {
+		parts = append(parts, "TVIF_SELECTEDIMAGE")
+	}
+	if e&TVIF_STATE != 0 {
+		parts = append(parts, "TVIF_STATE")
+	}
+	if e&TVIF_TEXT != 0 {
+		parts = append(parts, "TVIF_TEXT")
+	}
+	if e&TVIF_EXPANDEDIMAGE != 0 {
+		parts = append(parts, "TVIF_EXPANDEDIMAGE")
+	}
+	if e&TVIF_INTEGRAL != 0 {
+		parts = append(parts, "TVIF_INTEGRAL")
+	}
+	if e&TVIF_STATEEX != 0 {
+		parts = append(parts, "TVIF_STATEEX")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type UPDATEMETADATASTATES int32
 
 const (
 	DDUPDATEMETADATA_HIGHLIGHT   UPDATEMETADATASTATES = 1
 	DDUPDATEMETADATA_NOHIGHLIGHT UPDATEMETADATASTATES = 2
 )
+
+// String returns the UPDATEMETADATASTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UPDATEMETADATASTATES) String() string {
+	switch e {
+	case DDUPDATEMETADATA_HIGHLIGHT:
+		return "DDUPDATEMETADATA_HIGHLIGHT"
+	case DDUPDATEMETADATA_NOHIGHLIGHT:
+		return "DDUPDATEMETADATA_NOHIGHLIGHT"
+	default:
+		return fmt.Sprintf("UPDATEMETADATASTATES(%d)", int32(e))
+	}
+}
 
 type UPHORZSTATES int32
 
@@ -3547,6 +10654,23 @@ const (
 	UPHZS_DISABLED UPHORZSTATES = 4
 )
 
+// String returns the UPHORZSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UPHORZSTATES) String() string {
+	switch e {
+	case UPHZS_NORMAL:
+		return "UPHZS_NORMAL"
+	case UPHZS_HOT:
+		return "UPHZS_HOT"
+	case UPHZS_PRESSED:
+		return "UPHZS_PRESSED"
+	case UPHZS_DISABLED:
+		return "UPHZS_DISABLED"
+	default:
+		return fmt.Sprintf("UPHORZSTATES(%d)", int32(e))
+	}
+}
+
 type UPSTATES int32
 
 const (
@@ -3556,12 +10680,42 @@ const (
 	UPS_DISABLED UPSTATES = 4
 )
 
+// String returns the UPSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UPSTATES) String() string {
+	switch e {
+	case UPS_NORMAL:
+		return "UPS_NORMAL"
+	case UPS_HOT:
+		return "UPS_HOT"
+	case UPS_PRESSED:
+		return "UPS_PRESSED"
+	case UPS_DISABLED:
+		return "UPS_DISABLED"
+	default:
+		return fmt.Sprintf("UPSTATES(%d)", int32(e))
+	}
+}
+
 type USERTILEPARTS int32
 
 const (
 	UTP_STROKEBACKGROUND USERTILEPARTS = 1
 	UTP_HOVERBACKGROUND  USERTILEPARTS = 2
 )
+
+// String returns the USERTILEPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USERTILEPARTS) String() string {
+	switch e {
+	case UTP_STROKEBACKGROUND:
+		return "UTP_STROKEBACKGROUND"
+	case UTP_HOVERBACKGROUND:
+		return "UTP_HOVERBACKGROUND"
+	default:
+		return fmt.Sprintf("USERTILEPARTS(%d)", int32(e))
+	}
+}
 
 type VALIGN int32
 
@@ -3570,6 +10724,21 @@ const (
 	VA_CENTER VALIGN = 1
 	VA_BOTTOM VALIGN = 2
 )
+
+// String returns the VALIGN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VALIGN) String() string {
+	switch e {
+	case VA_TOP:
+		return "VA_TOP"
+	case VA_CENTER:
+		return "VA_CENTER"
+	case VA_BOTTOM:
+		return "VA_BOTTOM"
+	default:
+		return fmt.Sprintf("VALIGN(%d)", int32(e))
+	}
+}
 
 type VERTSCROLLSTATES int32
 
@@ -3580,6 +10749,23 @@ const (
 	VSS_DISABLED VERTSCROLLSTATES = 4
 )
 
+// String returns the VERTSCROLLSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VERTSCROLLSTATES) String() string {
+	switch e {
+	case VSS_NORMAL:
+		return "VSS_NORMAL"
+	case VSS_HOT:
+		return "VSS_HOT"
+	case VSS_PUSHED:
+		return "VSS_PUSHED"
+	case VSS_DISABLED:
+		return "VSS_DISABLED"
+	default:
+		return fmt.Sprintf("VERTSCROLLSTATES(%d)", int32(e))
+	}
+}
+
 type VERTTHUMBSTATES int32
 
 const (
@@ -3589,12 +10775,42 @@ const (
 	VTS_DISABLED VERTTHUMBSTATES = 4
 )
 
+// String returns the VERTTHUMBSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VERTTHUMBSTATES) String() string {
+	switch e {
+	case VTS_NORMAL:
+		return "VTS_NORMAL"
+	case VTS_HOT:
+		return "VTS_HOT"
+	case VTS_PUSHED:
+		return "VTS_PUSHED"
+	case VTS_DISABLED:
+		return "VTS_DISABLED"
+	default:
+		return fmt.Sprintf("VERTTHUMBSTATES(%d)", int32(e))
+	}
+}
+
 type WARNINGSTATES int32
 
 const (
 	DDWARNING_HIGHLIGHT   WARNINGSTATES = 1
 	DDWARNING_NOHIGHLIGHT WARNINGSTATES = 2
 )
+
+// String returns the WARNINGSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WARNINGSTATES) String() string {
+	switch e {
+	case DDWARNING_HIGHLIGHT:
+		return "DDWARNING_HIGHLIGHT"
+	case DDWARNING_NOHIGHLIGHT:
+		return "DDWARNING_NOHIGHLIGHT"
+	default:
+		return fmt.Sprintf("WARNINGSTATES(%d)", int32(e))
+	}
+}
 
 type WINDOWPARTS int32
 
@@ -3640,12 +10856,110 @@ const (
 	WP_BORDER                         WINDOWPARTS = 39
 )
 
+// String returns the WINDOWPARTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOWPARTS) String() string {
+	switch e {
+	case WP_CAPTION:
+		return "WP_CAPTION"
+	case WP_SMALLCAPTION:
+		return "WP_SMALLCAPTION"
+	case WP_MINCAPTION:
+		return "WP_MINCAPTION"
+	case WP_SMALLMINCAPTION:
+		return "WP_SMALLMINCAPTION"
+	case WP_MAXCAPTION:
+		return "WP_MAXCAPTION"
+	case WP_SMALLMAXCAPTION:
+		return "WP_SMALLMAXCAPTION"
+	case WP_FRAMELEFT:
+		return "WP_FRAMELEFT"
+	case WP_FRAMERIGHT:
+		return "WP_FRAMERIGHT"
+	case WP_FRAMEBOTTOM:
+		return "WP_FRAMEBOTTOM"
+	case WP_SMALLFRAMELEFT:
+		return "WP_SMALLFRAMELEFT"
+	case WP_SMALLFRAMERIGHT:
+		return "WP_SMALLFRAMERIGHT"
+	case WP_SMALLFRAMEBOTTOM:
+		return "WP_SMALLFRAMEBOTTOM"
+	case WP_SYSBUTTON:
+		return "WP_SYSBUTTON"
+	case WP_MDISYSBUTTON:
+		return "WP_MDISYSBUTTON"
+	case WP_MINBUTTON:
+		return "WP_MINBUTTON"
+	case WP_MDIMINBUTTON:
+		return "WP_MDIMINBUTTON"
+	case WP_MAXBUTTON:
+		return "WP_MAXBUTTON"
+	case WP_CLOSEBUTTON:
+		return "WP_CLOSEBUTTON"
+	case WP_SMALLCLOSEBUTTON:
+		return "WP_SMALLCLOSEBUTTON"
+	case WP_MDICLOSEBUTTON:
+		return "WP_MDICLOSEBUTTON"
+	case WP_RESTOREBUTTON:
+		return "WP_RESTOREBUTTON"
+	case WP_MDIRESTOREBUTTON:
+		return "WP_MDIRESTOREBUTTON"
+	case WP_HELPBUTTON:
+		return "WP_HELPBUTTON"
+	case WP_MDIHELPBUTTON:
+		return "WP_MDIHELPBUTTON"
+	case WP_HORZSCROLL:
+		return "WP_HORZSCROLL"
+	case WP_HORZTHUMB:
+		return "WP_HORZTHUMB"
+	case WP_VERTSCROLL:
+		return "WP_VERTSCROLL"
+	case WP_VERTTHUMB:
+		return "WP_VERTTHUMB"
+	case WP_DIALOG:
+		return "WP_DIALOG"
+	case WP_CAPTIONSIZINGTEMPLATE:
+		return "WP_CAPTIONSIZINGTEMPLATE"
+	case WP_SMALLCAPTIONSIZINGTEMPLATE:
+		return "WP_SMALLCAPTIONSIZINGTEMPLATE"
+	case WP_FRAMELEFTSIZINGTEMPLATE:
+		return "WP_FRAMELEFTSIZINGTEMPLATE"
+	case WP_SMALLFRAMELEFTSIZINGTEMPLATE:
+		return "WP_SMALLFRAMELEFTSIZINGTEMPLATE"
+	case WP_FRAMERIGHTSIZINGTEMPLATE:
+		return "WP_FRAMERIGHTSIZINGTEMPLATE"
+	case WP_SMALLFRAMERIGHTSIZINGTEMPLATE:
+		return "WP_SMALLFRAMERIGHTSIZINGTEMPLATE"
+	case WP_FRAMEBOTTOMSIZINGTEMPLATE:
+		return "WP_FRAMEBOTTOMSIZINGTEMPLATE"
+	case WP_SMALLFRAMEBOTTOMSIZINGTEMPLATE:
+		return "WP_SMALLFRAMEBOTTOMSIZINGTEMPLATE"
+	case WP_FRAME:
+		return "WP_FRAME"
+	case WP_BORDER:
+		return "WP_BORDER"
+	default:
+		return fmt.Sprintf("WINDOWPARTS(%d)", int32(e))
+	}
+}
+
 // WINDOWTHEMEATTRIBUTETYPE: https://learn.microsoft.com/windows/win32/api/uxtheme/ne-uxtheme-windowthemeattributetype
 type WINDOWTHEMEATTRIBUTETYPE int32
 
 const (
 	WTA_NONCLIENT WINDOWTHEMEATTRIBUTETYPE = 1
 )
+
+// String returns the WINDOWTHEMEATTRIBUTETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINDOWTHEMEATTRIBUTETYPE) String() string {
+	switch e {
+	case WTA_NONCLIENT:
+		return "WTA_NONCLIENT"
+	default:
+		return fmt.Sprintf("WINDOWTHEMEATTRIBUTETYPE(%d)", int32(e))
+	}
+}
 
 type WORD_BREAK_ACTION int32
 
@@ -3660,6 +10974,31 @@ const (
 	WB_RIGHTBREAK    WORD_BREAK_ACTION = 7
 )
 
+// String returns the WORD_BREAK_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WORD_BREAK_ACTION) String() string {
+	switch e {
+	case WB_CLASSIFY:
+		return "WB_CLASSIFY"
+	case WB_ISDELIMITER:
+		return "WB_ISDELIMITER"
+	case WB_LEFT:
+		return "WB_LEFT"
+	case WB_LEFTBREAK:
+		return "WB_LEFTBREAK"
+	case WB_MOVEWORDLEFT:
+		return "WB_MOVEWORDLEFT"
+	case WB_MOVEWORDRIGHT:
+		return "WB_MOVEWORDRIGHT"
+	case WB_RIGHT:
+		return "WB_RIGHT"
+	case WB_RIGHTBREAK:
+		return "WB_RIGHTBREAK"
+	default:
+		return fmt.Sprintf("WORD_BREAK_ACTION(%d)", int32(e))
+	}
+}
+
 type WRENCHSTATES int32
 
 const (
@@ -3667,6 +11006,21 @@ const (
 	TTWS_HOT     WRENCHSTATES = 2
 	TTWS_PRESSED WRENCHSTATES = 3
 )
+
+// String returns the WRENCHSTATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WRENCHSTATES) String() string {
+	switch e {
+	case TTWS_NORMAL:
+		return "TTWS_NORMAL"
+	case TTWS_HOT:
+		return "TTWS_HOT"
+	case TTWS_PRESSED:
+		return "TTWS_PRESSED"
+	default:
+		return fmt.Sprintf("WRENCHSTATES(%d)", int32(e))
+	}
+}
 
 type WSB_PROP int32
 
@@ -3685,9 +11039,55 @@ const (
 	WSB_PROP_WINSTYLE  WSB_PROP = 1024
 )
 
+// String returns the WSB_PROP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WSB_PROP) String() string {
+	switch e {
+	case WSB_PROP_CXHSCROLL:
+		return "WSB_PROP_CXHSCROLL"
+	case WSB_PROP_CXHTHUMB:
+		return "WSB_PROP_CXHTHUMB"
+	case WSB_PROP_CXVSCROLL:
+		return "WSB_PROP_CXVSCROLL"
+	case WSB_PROP_CYHSCROLL:
+		return "WSB_PROP_CYHSCROLL"
+	case WSB_PROP_CYVSCROLL:
+		return "WSB_PROP_CYVSCROLL"
+	case WSB_PROP_CYVTHUMB:
+		return "WSB_PROP_CYVTHUMB"
+	case WSB_PROP_HBKGCOLOR:
+		return "WSB_PROP_HBKGCOLOR"
+	case WSB_PROP_HSTYLE:
+		return "WSB_PROP_HSTYLE"
+	case WSB_PROP_PALETTE:
+		return "WSB_PROP_PALETTE"
+	case WSB_PROP_VBKGCOLOR:
+		return "WSB_PROP_VBKGCOLOR"
+	case WSB_PROP_VSTYLE:
+		return "WSB_PROP_VSTYLE"
+	case WSB_PROP_WINSTYLE:
+		return "WSB_PROP_WINSTYLE"
+	default:
+		return fmt.Sprintf("WSB_PROP(%d)", int32(e))
+	}
+}
+
 type LI_METRIC int32
 
 const (
 	LIM_SMALL LI_METRIC = 0
 	LIM_LARGE LI_METRIC = 1
 )
+
+// String returns the LI_METRIC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LI_METRIC) String() string {
+	switch e {
+	case LIM_SMALL:
+		return "LIM_SMALL"
+	case LIM_LARGE:
+		return "LIM_LARGE"
+	default:
+		return fmt.Sprintf("LI_METRIC(%d)", int32(e))
+	}
+}

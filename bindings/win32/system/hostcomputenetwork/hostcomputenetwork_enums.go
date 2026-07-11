@@ -4,6 +4,10 @@
 
 package hostcomputenetwork
 
+import (
+	"fmt"
+)
+
 // HCN_NOTIFICATIONS: https://learn.microsoft.com/virtualization/api/hcn/Reference/HCN_NOTIFICATIONS
 type HCN_NOTIFICATIONS int32
 
@@ -25,6 +29,45 @@ const (
 	HcnNotificationFlagsReserved                            HCN_NOTIFICATIONS = -268435456
 )
 
+// String returns the HCN_NOTIFICATIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HCN_NOTIFICATIONS) String() string {
+	switch e {
+	case HcnNotificationInvalid:
+		return "HcnNotificationInvalid"
+	case HcnNotificationNetworkPreCreate:
+		return "HcnNotificationNetworkPreCreate"
+	case HcnNotificationNetworkCreate:
+		return "HcnNotificationNetworkCreate"
+	case HcnNotificationNetworkPreDelete:
+		return "HcnNotificationNetworkPreDelete"
+	case HcnNotificationNetworkDelete:
+		return "HcnNotificationNetworkDelete"
+	case HcnNotificationNamespaceCreate:
+		return "HcnNotificationNamespaceCreate"
+	case HcnNotificationNamespaceDelete:
+		return "HcnNotificationNamespaceDelete"
+	case HcnNotificationGuestNetworkServiceCreate:
+		return "HcnNotificationGuestNetworkServiceCreate"
+	case HcnNotificationGuestNetworkServiceDelete:
+		return "HcnNotificationGuestNetworkServiceDelete"
+	case HcnNotificationNetworkEndpointAttached:
+		return "HcnNotificationNetworkEndpointAttached"
+	case HcnNotificationNetworkEndpointDetached:
+		return "HcnNotificationNetworkEndpointDetached"
+	case HcnNotificationGuestNetworkServiceStateChanged:
+		return "HcnNotificationGuestNetworkServiceStateChanged"
+	case HcnNotificationGuestNetworkServiceInterfaceStateChanged:
+		return "HcnNotificationGuestNetworkServiceInterfaceStateChanged"
+	case HcnNotificationServiceDisconnect:
+		return "HcnNotificationServiceDisconnect"
+	case HcnNotificationFlagsReserved:
+		return "HcnNotificationFlagsReserved"
+	default:
+		return fmt.Sprintf("HCN_NOTIFICATIONS(%d)", int32(e))
+	}
+}
+
 // HCN_PORT_ACCESS: https://learn.microsoft.com/virtualization/api/hcn/Reference/HCN_PORT_ACCESS
 type HCN_PORT_ACCESS int32
 
@@ -32,6 +75,19 @@ const (
 	HCN_PORT_ACCESS_EXCLUSIVE HCN_PORT_ACCESS = 1
 	HCN_PORT_ACCESS_SHARED    HCN_PORT_ACCESS = 2
 )
+
+// String returns the HCN_PORT_ACCESS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HCN_PORT_ACCESS) String() string {
+	switch e {
+	case HCN_PORT_ACCESS_EXCLUSIVE:
+		return "HCN_PORT_ACCESS_EXCLUSIVE"
+	case HCN_PORT_ACCESS_SHARED:
+		return "HCN_PORT_ACCESS_SHARED"
+	default:
+		return fmt.Sprintf("HCN_PORT_ACCESS(%d)", int32(e))
+	}
+}
 
 // HCN_PORT_PROTOCOL: https://learn.microsoft.com/virtualization/api/hcn/Reference/HCN_PORT_PROTOCOL
 type HCN_PORT_PROTOCOL int32
@@ -41,3 +97,18 @@ const (
 	HCN_PORT_PROTOCOL_UDP  HCN_PORT_PROTOCOL = 2
 	HCN_PORT_PROTOCOL_BOTH HCN_PORT_PROTOCOL = 3
 )
+
+// String returns the HCN_PORT_PROTOCOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HCN_PORT_PROTOCOL) String() string {
+	switch e {
+	case HCN_PORT_PROTOCOL_TCP:
+		return "HCN_PORT_PROTOCOL_TCP"
+	case HCN_PORT_PROTOCOL_UDP:
+		return "HCN_PORT_PROTOCOL_UDP"
+	case HCN_PORT_PROTOCOL_BOTH:
+		return "HCN_PORT_PROTOCOL_BOTH"
+	default:
+		return fmt.Sprintf("HCN_PORT_PROTOCOL(%d)", int32(e))
+	}
+}

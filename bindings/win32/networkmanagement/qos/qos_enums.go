@@ -4,6 +4,10 @@
 
 package qos
 
+import (
+	"fmt"
+)
+
 // FilterType: https://learn.microsoft.com/windows/win32/api/qossp/ne-qossp-filtertype
 type FilterType int32
 
@@ -16,6 +20,27 @@ const (
 	FILTERSPEC_END    FilterType = 6
 )
 
+// String returns the FilterType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FilterType) String() string {
+	switch e {
+	case FILTERSPECV4:
+		return "FILTERSPECV4"
+	case FILTERSPECV6:
+		return "FILTERSPECV6"
+	case FILTERSPECV6_FLOW:
+		return "FILTERSPECV6_FLOW"
+	case FILTERSPECV4_GPI:
+		return "FILTERSPECV4_GPI"
+	case FILTERSPECV6_GPI:
+		return "FILTERSPECV6_GPI"
+	case FILTERSPEC_END:
+		return "FILTERSPEC_END"
+	default:
+		return fmt.Sprintf("FilterType(%d)", int32(e))
+	}
+}
+
 // QOS_FLOWRATE_REASON: https://learn.microsoft.com/windows/win32/api/qos2/ne-qos2-qos_flowrate_reason
 type QOS_FLOWRATE_REASON int32
 
@@ -27,6 +52,25 @@ const (
 	QOSFlowRateUserCaused            QOS_FLOWRATE_REASON = 4
 )
 
+// String returns the QOS_FLOWRATE_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QOS_FLOWRATE_REASON) String() string {
+	switch e {
+	case QOSFlowRateNotApplicable:
+		return "QOSFlowRateNotApplicable"
+	case QOSFlowRateContentChange:
+		return "QOSFlowRateContentChange"
+	case QOSFlowRateCongestion:
+		return "QOSFlowRateCongestion"
+	case QOSFlowRateHigherContentEncoding:
+		return "QOSFlowRateHigherContentEncoding"
+	case QOSFlowRateUserCaused:
+		return "QOSFlowRateUserCaused"
+	default:
+		return fmt.Sprintf("QOS_FLOWRATE_REASON(%d)", int32(e))
+	}
+}
+
 // QOS_NOTIFY_FLOW: https://learn.microsoft.com/windows/win32/api/qos2/ne-qos2-qos_notify_flow
 type QOS_NOTIFY_FLOW int32
 
@@ -35,6 +79,21 @@ const (
 	QOSNotifyUncongested QOS_NOTIFY_FLOW = 1
 	QOSNotifyAvailable   QOS_NOTIFY_FLOW = 2
 )
+
+// String returns the QOS_NOTIFY_FLOW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QOS_NOTIFY_FLOW) String() string {
+	switch e {
+	case QOSNotifyCongested:
+		return "QOSNotifyCongested"
+	case QOSNotifyUncongested:
+		return "QOSNotifyUncongested"
+	case QOSNotifyAvailable:
+		return "QOSNotifyAvailable"
+	default:
+		return fmt.Sprintf("QOS_NOTIFY_FLOW(%d)", int32(e))
+	}
+}
 
 // QOS_QUERY_FLOW: https://learn.microsoft.com/windows/win32/api/qos2/ne-qos2-qos_query_flow
 type QOS_QUERY_FLOW int32
@@ -45,6 +104,21 @@ const (
 	QOSQueryOutgoingRate     QOS_QUERY_FLOW = 2
 )
 
+// String returns the QOS_QUERY_FLOW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QOS_QUERY_FLOW) String() string {
+	switch e {
+	case QOSQueryFlowFundamentals:
+		return "QOSQueryFlowFundamentals"
+	case QOSQueryPacketPriority:
+		return "QOSQueryPacketPriority"
+	case QOSQueryOutgoingRate:
+		return "QOSQueryOutgoingRate"
+	default:
+		return fmt.Sprintf("QOS_QUERY_FLOW(%d)", int32(e))
+	}
+}
+
 // QOS_SET_FLOW: https://learn.microsoft.com/windows/win32/api/qos2/ne-qos2-qos_set_flow
 type QOS_SET_FLOW int32
 
@@ -54,6 +128,21 @@ const (
 	QOSSetOutgoingDSCPValue QOS_SET_FLOW = 2
 )
 
+// String returns the QOS_SET_FLOW constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QOS_SET_FLOW) String() string {
+	switch e {
+	case QOSSetTrafficType:
+		return "QOSSetTrafficType"
+	case QOSSetOutgoingRate:
+		return "QOSSetOutgoingRate"
+	case QOSSetOutgoingDSCPValue:
+		return "QOSSetOutgoingDSCPValue"
+	default:
+		return fmt.Sprintf("QOS_SET_FLOW(%d)", int32(e))
+	}
+}
+
 // QOS_SHAPING: https://learn.microsoft.com/windows/win32/api/qos2/ne-qos2-qos_shaping
 type QOS_SHAPING int32
 
@@ -62,6 +151,21 @@ const (
 	QOSShapeAndMark             QOS_SHAPING = 1
 	QOSUseNonConformantMarkings QOS_SHAPING = 2
 )
+
+// String returns the QOS_SHAPING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QOS_SHAPING) String() string {
+	switch e {
+	case QOSShapeOnly:
+		return "QOSShapeOnly"
+	case QOSShapeAndMark:
+		return "QOSShapeAndMark"
+	case QOSUseNonConformantMarkings:
+		return "QOSUseNonConformantMarkings"
+	default:
+		return fmt.Sprintf("QOS_SHAPING(%d)", int32(e))
+	}
+}
 
 // QOS_TRAFFIC_TYPE: https://learn.microsoft.com/windows/win32/api/qos2/ne-qos2-qos_traffic_type
 type QOS_TRAFFIC_TYPE int32
@@ -74,3 +178,24 @@ const (
 	QOSTrafficTypeVoice           QOS_TRAFFIC_TYPE = 4
 	QOSTrafficTypeControl         QOS_TRAFFIC_TYPE = 5
 )
+
+// String returns the QOS_TRAFFIC_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QOS_TRAFFIC_TYPE) String() string {
+	switch e {
+	case QOSTrafficTypeBestEffort:
+		return "QOSTrafficTypeBestEffort"
+	case QOSTrafficTypeBackground:
+		return "QOSTrafficTypeBackground"
+	case QOSTrafficTypeExcellentEffort:
+		return "QOSTrafficTypeExcellentEffort"
+	case QOSTrafficTypeAudioVideo:
+		return "QOSTrafficTypeAudioVideo"
+	case QOSTrafficTypeVoice:
+		return "QOSTrafficTypeVoice"
+	case QOSTrafficTypeControl:
+		return "QOSTrafficTypeControl"
+	default:
+		return fmt.Sprintf("QOS_TRAFFIC_TYPE(%d)", int32(e))
+	}
+}

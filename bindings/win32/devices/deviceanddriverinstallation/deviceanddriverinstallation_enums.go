@@ -4,6 +4,12 @@
 
 package deviceanddriverinstallation
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type CM_CDFLAGS uint32
 
 const (
@@ -12,6 +18,26 @@ const (
 	CM_CDFLAGS_RESERVED   CM_CDFLAGS = 4
 )
 
+// String returns the CM_CDFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_CDFLAGS) String() string {
+	var parts []string
+	if e&CM_CDFLAGS_DRIVER != 0 {
+		parts = append(parts, "CM_CDFLAGS_DRIVER")
+	}
+	if e&CM_CDFLAGS_ROOT_OWNED != 0 {
+		parts = append(parts, "CM_CDFLAGS_ROOT_OWNED")
+	}
+	if e&CM_CDFLAGS_RESERVED != 0 {
+		parts = append(parts, "CM_CDFLAGS_RESERVED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CM_CDMASK uint32
 
 const (
@@ -22,6 +48,32 @@ const (
 	CM_CDMASK_VALID       CM_CDMASK = 15
 )
 
+// String returns the CM_CDMASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_CDMASK) String() string {
+	var parts []string
+	if e&CM_CDMASK_DEVINST != 0 {
+		parts = append(parts, "CM_CDMASK_DEVINST")
+	}
+	if e&CM_CDMASK_RESDES != 0 {
+		parts = append(parts, "CM_CDMASK_RESDES")
+	}
+	if e&CM_CDMASK_FLAGS != 0 {
+		parts = append(parts, "CM_CDMASK_FLAGS")
+	}
+	if e&CM_CDMASK_DESCRIPTION != 0 {
+		parts = append(parts, "CM_CDMASK_DESCRIPTION")
+	}
+	if e&CM_CDMASK_VALID != 0 {
+		parts = append(parts, "CM_CDMASK_VALID")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CM_DEVCAP uint32
 
 const (
@@ -38,6 +90,50 @@ const (
 	CM_DEVCAP_SECUREDEVICE      CM_DEVCAP = 1024
 )
 
+// String returns the CM_DEVCAP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_DEVCAP) String() string {
+	var parts []string
+	if e&CM_DEVCAP_LOCKSUPPORTED != 0 {
+		parts = append(parts, "CM_DEVCAP_LOCKSUPPORTED")
+	}
+	if e&CM_DEVCAP_EJECTSUPPORTED != 0 {
+		parts = append(parts, "CM_DEVCAP_EJECTSUPPORTED")
+	}
+	if e&CM_DEVCAP_REMOVABLE != 0 {
+		parts = append(parts, "CM_DEVCAP_REMOVABLE")
+	}
+	if e&CM_DEVCAP_DOCKDEVICE != 0 {
+		parts = append(parts, "CM_DEVCAP_DOCKDEVICE")
+	}
+	if e&CM_DEVCAP_UNIQUEID != 0 {
+		parts = append(parts, "CM_DEVCAP_UNIQUEID")
+	}
+	if e&CM_DEVCAP_SILENTINSTALL != 0 {
+		parts = append(parts, "CM_DEVCAP_SILENTINSTALL")
+	}
+	if e&CM_DEVCAP_RAWDEVICEOK != 0 {
+		parts = append(parts, "CM_DEVCAP_RAWDEVICEOK")
+	}
+	if e&CM_DEVCAP_SURPRISEREMOVALOK != 0 {
+		parts = append(parts, "CM_DEVCAP_SURPRISEREMOVALOK")
+	}
+	if e&CM_DEVCAP_HARDWAREDISABLED != 0 {
+		parts = append(parts, "CM_DEVCAP_HARDWAREDISABLED")
+	}
+	if e&CM_DEVCAP_NONDYNAMIC != 0 {
+		parts = append(parts, "CM_DEVCAP_NONDYNAMIC")
+	}
+	if e&CM_DEVCAP_SECUREDEVICE != 0 {
+		parts = append(parts, "CM_DEVCAP_SECUREDEVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CM_DEVNODE_STATUS_FLAGS uint32
 
 const (
@@ -83,6 +179,137 @@ const (
 	DN_QUERY_REMOVE_ACTIVE   CM_DEVNODE_STATUS_FLAGS = 131072
 )
 
+// String returns the CM_DEVNODE_STATUS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_DEVNODE_STATUS_FLAGS) String() string {
+	var parts []string
+	if e&DN_CHANGEABLE_FLAGS != 0 {
+		parts = append(parts, "DN_CHANGEABLE_FLAGS")
+	}
+	if e&DN_ROOT_ENUMERATED != 0 {
+		parts = append(parts, "DN_ROOT_ENUMERATED")
+	}
+	if e&DN_DRIVER_LOADED != 0 {
+		parts = append(parts, "DN_DRIVER_LOADED")
+	}
+	if e&DN_ENUM_LOADED != 0 {
+		parts = append(parts, "DN_ENUM_LOADED")
+	}
+	if e&DN_STARTED != 0 {
+		parts = append(parts, "DN_STARTED")
+	}
+	if e&DN_MANUAL != 0 {
+		parts = append(parts, "DN_MANUAL")
+	}
+	if e&DN_NEED_TO_ENUM != 0 {
+		parts = append(parts, "DN_NEED_TO_ENUM")
+	}
+	if e&DN_NOT_FIRST_TIME != 0 {
+		parts = append(parts, "DN_NOT_FIRST_TIME")
+	}
+	if e&DN_HARDWARE_ENUM != 0 {
+		parts = append(parts, "DN_HARDWARE_ENUM")
+	}
+	if e&DN_LIAR != 0 {
+		parts = append(parts, "DN_LIAR")
+	}
+	if e&DN_HAS_MARK != 0 {
+		parts = append(parts, "DN_HAS_MARK")
+	}
+	if e&DN_HAS_PROBLEM != 0 {
+		parts = append(parts, "DN_HAS_PROBLEM")
+	}
+	if e&DN_FILTERED != 0 {
+		parts = append(parts, "DN_FILTERED")
+	}
+	if e&DN_MOVED != 0 {
+		parts = append(parts, "DN_MOVED")
+	}
+	if e&DN_DISABLEABLE != 0 {
+		parts = append(parts, "DN_DISABLEABLE")
+	}
+	if e&DN_REMOVABLE != 0 {
+		parts = append(parts, "DN_REMOVABLE")
+	}
+	if e&DN_PRIVATE_PROBLEM != 0 {
+		parts = append(parts, "DN_PRIVATE_PROBLEM")
+	}
+	if e&DN_MF_PARENT != 0 {
+		parts = append(parts, "DN_MF_PARENT")
+	}
+	if e&DN_MF_CHILD != 0 {
+		parts = append(parts, "DN_MF_CHILD")
+	}
+	if e&DN_WILL_BE_REMOVED != 0 {
+		parts = append(parts, "DN_WILL_BE_REMOVED")
+	}
+	if e&DN_NOT_FIRST_TIMEE != 0 {
+		parts = append(parts, "DN_NOT_FIRST_TIMEE")
+	}
+	if e&DN_STOP_FREE_RES != 0 {
+		parts = append(parts, "DN_STOP_FREE_RES")
+	}
+	if e&DN_REBAL_CANDIDATE != 0 {
+		parts = append(parts, "DN_REBAL_CANDIDATE")
+	}
+	if e&DN_BAD_PARTIAL != 0 {
+		parts = append(parts, "DN_BAD_PARTIAL")
+	}
+	if e&DN_NT_ENUMERATOR != 0 {
+		parts = append(parts, "DN_NT_ENUMERATOR")
+	}
+	if e&DN_NT_DRIVER != 0 {
+		parts = append(parts, "DN_NT_DRIVER")
+	}
+	if e&DN_NEEDS_LOCKING != 0 {
+		parts = append(parts, "DN_NEEDS_LOCKING")
+	}
+	if e&DN_ARM_WAKEUP != 0 {
+		parts = append(parts, "DN_ARM_WAKEUP")
+	}
+	if e&DN_APM_ENUMERATOR != 0 {
+		parts = append(parts, "DN_APM_ENUMERATOR")
+	}
+	if e&DN_APM_DRIVER != 0 {
+		parts = append(parts, "DN_APM_DRIVER")
+	}
+	if e&DN_SILENT_INSTALL != 0 {
+		parts = append(parts, "DN_SILENT_INSTALL")
+	}
+	if e&DN_NO_SHOW_IN_DM != 0 {
+		parts = append(parts, "DN_NO_SHOW_IN_DM")
+	}
+	if e&DN_BOOT_LOG_PROB != 0 {
+		parts = append(parts, "DN_BOOT_LOG_PROB")
+	}
+	if e&DN_NEED_RESTART != 0 {
+		parts = append(parts, "DN_NEED_RESTART")
+	}
+	if e&DN_DRIVER_BLOCKED != 0 {
+		parts = append(parts, "DN_DRIVER_BLOCKED")
+	}
+	if e&DN_LEGACY_DRIVER != 0 {
+		parts = append(parts, "DN_LEGACY_DRIVER")
+	}
+	if e&DN_CHILD_WITH_INVALID_ID != 0 {
+		parts = append(parts, "DN_CHILD_WITH_INVALID_ID")
+	}
+	if e&DN_DEVICE_DISCONNECTED != 0 {
+		parts = append(parts, "DN_DEVICE_DISCONNECTED")
+	}
+	if e&DN_QUERY_REMOVE_PENDING != 0 {
+		parts = append(parts, "DN_QUERY_REMOVE_PENDING")
+	}
+	if e&DN_QUERY_REMOVE_ACTIVE != 0 {
+		parts = append(parts, "DN_QUERY_REMOVE_ACTIVE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CM_ENUMERATE_FLAGS uint32
 
 const (
@@ -91,6 +318,22 @@ const (
 	CM_ENUMERATE_CLASSES_BITS      CM_ENUMERATE_FLAGS = 1
 )
 
+// String returns the CM_ENUMERATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_ENUMERATE_FLAGS) String() string {
+	var parts []string
+	if e&CM_ENUMERATE_CLASSES_INTERFACE != 0 {
+		parts = append(parts, "CM_ENUMERATE_CLASSES_INTERFACE")
+	}
+	if e&CM_ENUMERATE_CLASSES_BITS != 0 {
+		parts = append(parts, "CM_ENUMERATE_CLASSES_BITS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CM_GET_DEVICE_INTERFACE_LIST_FLAGS uint32
 
 const (
@@ -98,6 +341,19 @@ const (
 	CM_GET_DEVICE_INTERFACE_LIST_ALL_DEVICES CM_GET_DEVICE_INTERFACE_LIST_FLAGS = 1
 	CM_GET_DEVICE_INTERFACE_LIST_BITS        CM_GET_DEVICE_INTERFACE_LIST_FLAGS = 1
 )
+
+// String returns the CM_GET_DEVICE_INTERFACE_LIST_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_GET_DEVICE_INTERFACE_LIST_FLAGS) String() string {
+	switch e {
+	case CM_GET_DEVICE_INTERFACE_LIST_PRESENT:
+		return "CM_GET_DEVICE_INTERFACE_LIST_PRESENT"
+	case CM_GET_DEVICE_INTERFACE_LIST_ALL_DEVICES:
+		return "CM_GET_DEVICE_INTERFACE_LIST_ALL_DEVICES"
+	default:
+		return fmt.Sprintf("CM_GET_DEVICE_INTERFACE_LIST_FLAGS(%d)", uint32(e))
+	}
+}
 
 type CM_INSTALL_STATE uint32
 
@@ -108,6 +364,23 @@ const (
 	CM_INSTALL_STATE_FINISH_INSTALL  CM_INSTALL_STATE = 3
 )
 
+// String returns the CM_INSTALL_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_INSTALL_STATE) String() string {
+	switch e {
+	case CM_INSTALL_STATE_INSTALLED:
+		return "CM_INSTALL_STATE_INSTALLED"
+	case CM_INSTALL_STATE_NEEDS_REINSTALL:
+		return "CM_INSTALL_STATE_NEEDS_REINSTALL"
+	case CM_INSTALL_STATE_FAILED_INSTALL:
+		return "CM_INSTALL_STATE_FAILED_INSTALL"
+	case CM_INSTALL_STATE_FINISH_INSTALL:
+		return "CM_INSTALL_STATE_FINISH_INSTALL"
+	default:
+		return fmt.Sprintf("CM_INSTALL_STATE(%d)", uint32(e))
+	}
+}
+
 type CM_LOCATE_DEVNODE_FLAGS uint32
 
 const (
@@ -117,6 +390,25 @@ const (
 	CM_LOCATE_DEVNODE_NOVALIDATION CM_LOCATE_DEVNODE_FLAGS = 4
 	CM_LOCATE_DEVNODE_BITS         CM_LOCATE_DEVNODE_FLAGS = 7
 )
+
+// String returns the CM_LOCATE_DEVNODE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_LOCATE_DEVNODE_FLAGS) String() string {
+	switch e {
+	case CM_LOCATE_DEVNODE_NORMAL:
+		return "CM_LOCATE_DEVNODE_NORMAL"
+	case CM_LOCATE_DEVNODE_PHANTOM:
+		return "CM_LOCATE_DEVNODE_PHANTOM"
+	case CM_LOCATE_DEVNODE_CANCELREMOVE:
+		return "CM_LOCATE_DEVNODE_CANCELREMOVE"
+	case CM_LOCATE_DEVNODE_NOVALIDATION:
+		return "CM_LOCATE_DEVNODE_NOVALIDATION"
+	case CM_LOCATE_DEVNODE_BITS:
+		return "CM_LOCATE_DEVNODE_BITS"
+	default:
+		return fmt.Sprintf("CM_LOCATE_DEVNODE_FLAGS(%d)", uint32(e))
+	}
+}
 
 type CM_LOG_CONF uint32
 
@@ -129,6 +421,29 @@ const (
 	OVERRIDE_LOG_CONF CM_LOG_CONF = 5
 	NUM_LOG_CONF      CM_LOG_CONF = 6
 )
+
+// String returns the CM_LOG_CONF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_LOG_CONF) String() string {
+	switch e {
+	case BASIC_LOG_CONF:
+		return "BASIC_LOG_CONF"
+	case FILTERED_LOG_CONF:
+		return "FILTERED_LOG_CONF"
+	case ALLOC_LOG_CONF:
+		return "ALLOC_LOG_CONF"
+	case BOOT_LOG_CONF:
+		return "BOOT_LOG_CONF"
+	case FORCED_LOG_CONF:
+		return "FORCED_LOG_CONF"
+	case OVERRIDE_LOG_CONF:
+		return "OVERRIDE_LOG_CONF"
+	case NUM_LOG_CONF:
+		return "NUM_LOG_CONF"
+	default:
+		return fmt.Sprintf("CM_LOG_CONF(%d)", uint32(e))
+	}
+}
 
 // CM_NOTIFY_ACTION: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ne-cfgmgr32-cm_notify_action
 type CM_NOTIFY_ACTION int32
@@ -147,6 +462,37 @@ const (
 	CM_NOTIFY_ACTION_MAX                      CM_NOTIFY_ACTION = 10
 )
 
+// String returns the CM_NOTIFY_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_NOTIFY_ACTION) String() string {
+	switch e {
+	case CM_NOTIFY_ACTION_DEVICEINTERFACEARRIVAL:
+		return "CM_NOTIFY_ACTION_DEVICEINTERFACEARRIVAL"
+	case CM_NOTIFY_ACTION_DEVICEINTERFACEREMOVAL:
+		return "CM_NOTIFY_ACTION_DEVICEINTERFACEREMOVAL"
+	case CM_NOTIFY_ACTION_DEVICEQUERYREMOVE:
+		return "CM_NOTIFY_ACTION_DEVICEQUERYREMOVE"
+	case CM_NOTIFY_ACTION_DEVICEQUERYREMOVEFAILED:
+		return "CM_NOTIFY_ACTION_DEVICEQUERYREMOVEFAILED"
+	case CM_NOTIFY_ACTION_DEVICEREMOVEPENDING:
+		return "CM_NOTIFY_ACTION_DEVICEREMOVEPENDING"
+	case CM_NOTIFY_ACTION_DEVICEREMOVECOMPLETE:
+		return "CM_NOTIFY_ACTION_DEVICEREMOVECOMPLETE"
+	case CM_NOTIFY_ACTION_DEVICECUSTOMEVENT:
+		return "CM_NOTIFY_ACTION_DEVICECUSTOMEVENT"
+	case CM_NOTIFY_ACTION_DEVICEINSTANCEENUMERATED:
+		return "CM_NOTIFY_ACTION_DEVICEINSTANCEENUMERATED"
+	case CM_NOTIFY_ACTION_DEVICEINSTANCESTARTED:
+		return "CM_NOTIFY_ACTION_DEVICEINSTANCESTARTED"
+	case CM_NOTIFY_ACTION_DEVICEINSTANCEREMOVED:
+		return "CM_NOTIFY_ACTION_DEVICEINSTANCEREMOVED"
+	case CM_NOTIFY_ACTION_MAX:
+		return "CM_NOTIFY_ACTION_MAX"
+	default:
+		return fmt.Sprintf("CM_NOTIFY_ACTION(%d)", int32(e))
+	}
+}
+
 type CM_NOTIFY_FILTER_TYPE int32
 
 const (
@@ -155,6 +501,23 @@ const (
 	CM_NOTIFY_FILTER_TYPE_DEVICEINSTANCE  CM_NOTIFY_FILTER_TYPE = 2
 	CM_NOTIFY_FILTER_TYPE_MAX             CM_NOTIFY_FILTER_TYPE = 3
 )
+
+// String returns the CM_NOTIFY_FILTER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_NOTIFY_FILTER_TYPE) String() string {
+	switch e {
+	case CM_NOTIFY_FILTER_TYPE_DEVICEINTERFACE:
+		return "CM_NOTIFY_FILTER_TYPE_DEVICEINTERFACE"
+	case CM_NOTIFY_FILTER_TYPE_DEVICEHANDLE:
+		return "CM_NOTIFY_FILTER_TYPE_DEVICEHANDLE"
+	case CM_NOTIFY_FILTER_TYPE_DEVICEINSTANCE:
+		return "CM_NOTIFY_FILTER_TYPE_DEVICEINSTANCE"
+	case CM_NOTIFY_FILTER_TYPE_MAX:
+		return "CM_NOTIFY_FILTER_TYPE_MAX"
+	default:
+		return fmt.Sprintf("CM_NOTIFY_FILTER_TYPE(%d)", int32(e))
+	}
+}
 
 type CM_PROB uint32
 
@@ -218,6 +581,130 @@ const (
 	CM_PROB_GUEST_ASSIGNMENT_FAILED    CM_PROB = 57
 )
 
+// String returns the CM_PROB constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_PROB) String() string {
+	switch e {
+	case CM_PROB_NOT_CONFIGURED:
+		return "CM_PROB_NOT_CONFIGURED"
+	case CM_PROB_DEVLOADER_FAILED:
+		return "CM_PROB_DEVLOADER_FAILED"
+	case CM_PROB_OUT_OF_MEMORY:
+		return "CM_PROB_OUT_OF_MEMORY"
+	case CM_PROB_ENTRY_IS_WRONG_TYPE:
+		return "CM_PROB_ENTRY_IS_WRONG_TYPE"
+	case CM_PROB_LACKED_ARBITRATOR:
+		return "CM_PROB_LACKED_ARBITRATOR"
+	case CM_PROB_BOOT_CONFIG_CONFLICT:
+		return "CM_PROB_BOOT_CONFIG_CONFLICT"
+	case CM_PROB_FAILED_FILTER:
+		return "CM_PROB_FAILED_FILTER"
+	case CM_PROB_DEVLOADER_NOT_FOUND:
+		return "CM_PROB_DEVLOADER_NOT_FOUND"
+	case CM_PROB_INVALID_DATA:
+		return "CM_PROB_INVALID_DATA"
+	case CM_PROB_FAILED_START:
+		return "CM_PROB_FAILED_START"
+	case CM_PROB_LIAR:
+		return "CM_PROB_LIAR"
+	case CM_PROB_NORMAL_CONFLICT:
+		return "CM_PROB_NORMAL_CONFLICT"
+	case CM_PROB_NOT_VERIFIED:
+		return "CM_PROB_NOT_VERIFIED"
+	case CM_PROB_NEED_RESTART:
+		return "CM_PROB_NEED_RESTART"
+	case CM_PROB_REENUMERATION:
+		return "CM_PROB_REENUMERATION"
+	case CM_PROB_PARTIAL_LOG_CONF:
+		return "CM_PROB_PARTIAL_LOG_CONF"
+	case CM_PROB_UNKNOWN_RESOURCE:
+		return "CM_PROB_UNKNOWN_RESOURCE"
+	case CM_PROB_REINSTALL:
+		return "CM_PROB_REINSTALL"
+	case CM_PROB_REGISTRY:
+		return "CM_PROB_REGISTRY"
+	case CM_PROB_VXDLDR:
+		return "CM_PROB_VXDLDR"
+	case CM_PROB_WILL_BE_REMOVED:
+		return "CM_PROB_WILL_BE_REMOVED"
+	case CM_PROB_DISABLED:
+		return "CM_PROB_DISABLED"
+	case CM_PROB_DEVLOADER_NOT_READY:
+		return "CM_PROB_DEVLOADER_NOT_READY"
+	case CM_PROB_DEVICE_NOT_THERE:
+		return "CM_PROB_DEVICE_NOT_THERE"
+	case CM_PROB_MOVED:
+		return "CM_PROB_MOVED"
+	case CM_PROB_TOO_EARLY:
+		return "CM_PROB_TOO_EARLY"
+	case CM_PROB_NO_VALID_LOG_CONF:
+		return "CM_PROB_NO_VALID_LOG_CONF"
+	case CM_PROB_FAILED_INSTALL:
+		return "CM_PROB_FAILED_INSTALL"
+	case CM_PROB_HARDWARE_DISABLED:
+		return "CM_PROB_HARDWARE_DISABLED"
+	case CM_PROB_CANT_SHARE_IRQ:
+		return "CM_PROB_CANT_SHARE_IRQ"
+	case CM_PROB_FAILED_ADD:
+		return "CM_PROB_FAILED_ADD"
+	case CM_PROB_DISABLED_SERVICE:
+		return "CM_PROB_DISABLED_SERVICE"
+	case CM_PROB_TRANSLATION_FAILED:
+		return "CM_PROB_TRANSLATION_FAILED"
+	case CM_PROB_NO_SOFTCONFIG:
+		return "CM_PROB_NO_SOFTCONFIG"
+	case CM_PROB_BIOS_TABLE:
+		return "CM_PROB_BIOS_TABLE"
+	case CM_PROB_IRQ_TRANSLATION_FAILED:
+		return "CM_PROB_IRQ_TRANSLATION_FAILED"
+	case CM_PROB_FAILED_DRIVER_ENTRY:
+		return "CM_PROB_FAILED_DRIVER_ENTRY"
+	case CM_PROB_DRIVER_FAILED_PRIOR_UNLOAD:
+		return "CM_PROB_DRIVER_FAILED_PRIOR_UNLOAD"
+	case CM_PROB_DRIVER_FAILED_LOAD:
+		return "CM_PROB_DRIVER_FAILED_LOAD"
+	case CM_PROB_DRIVER_SERVICE_KEY_INVALID:
+		return "CM_PROB_DRIVER_SERVICE_KEY_INVALID"
+	case CM_PROB_LEGACY_SERVICE_NO_DEVICES:
+		return "CM_PROB_LEGACY_SERVICE_NO_DEVICES"
+	case CM_PROB_DUPLICATE_DEVICE:
+		return "CM_PROB_DUPLICATE_DEVICE"
+	case CM_PROB_FAILED_POST_START:
+		return "CM_PROB_FAILED_POST_START"
+	case CM_PROB_HALTED:
+		return "CM_PROB_HALTED"
+	case CM_PROB_PHANTOM:
+		return "CM_PROB_PHANTOM"
+	case CM_PROB_SYSTEM_SHUTDOWN:
+		return "CM_PROB_SYSTEM_SHUTDOWN"
+	case CM_PROB_HELD_FOR_EJECT:
+		return "CM_PROB_HELD_FOR_EJECT"
+	case CM_PROB_DRIVER_BLOCKED:
+		return "CM_PROB_DRIVER_BLOCKED"
+	case CM_PROB_REGISTRY_TOO_LARGE:
+		return "CM_PROB_REGISTRY_TOO_LARGE"
+	case CM_PROB_SETPROPERTIES_FAILED:
+		return "CM_PROB_SETPROPERTIES_FAILED"
+	case CM_PROB_WAITING_ON_DEPENDENCY:
+		return "CM_PROB_WAITING_ON_DEPENDENCY"
+	case CM_PROB_UNSIGNED_DRIVER:
+		return "CM_PROB_UNSIGNED_DRIVER"
+	case CM_PROB_USED_BY_DEBUGGER:
+		return "CM_PROB_USED_BY_DEBUGGER"
+	case CM_PROB_DEVICE_RESET:
+		return "CM_PROB_DEVICE_RESET"
+	case CM_PROB_CONSOLE_LOCKED:
+		return "CM_PROB_CONSOLE_LOCKED"
+	case CM_PROB_NEED_CLASS_CONFIG:
+		return "CM_PROB_NEED_CLASS_CONFIG"
+	case CM_PROB_GUEST_ASSIGNMENT_FAILED:
+		return "CM_PROB_GUEST_ASSIGNMENT_FAILED"
+	default:
+		return fmt.Sprintf("CM_PROB(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CM_REENUMERATE_FLAGS uint32
 
 const (
@@ -228,6 +715,28 @@ const (
 	CM_REENUMERATE_BITS               CM_REENUMERATE_FLAGS = 7
 )
 
+// String returns the CM_REENUMERATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_REENUMERATE_FLAGS) String() string {
+	var parts []string
+	if e&CM_REENUMERATE_SYNCHRONOUS != 0 {
+		parts = append(parts, "CM_REENUMERATE_SYNCHRONOUS")
+	}
+	if e&CM_REENUMERATE_RETRY_INSTALLATION != 0 {
+		parts = append(parts, "CM_REENUMERATE_RETRY_INSTALLATION")
+	}
+	if e&CM_REENUMERATE_ASYNCHRONOUS != 0 {
+		parts = append(parts, "CM_REENUMERATE_ASYNCHRONOUS")
+	}
+	if e&CM_REENUMERATE_BITS != 0 {
+		parts = append(parts, "CM_REENUMERATE_BITS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type CM_REMOVAL_POLICY uint32
 
 const (
@@ -235,6 +744,21 @@ const (
 	CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL  CM_REMOVAL_POLICY = 2
 	CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL CM_REMOVAL_POLICY = 3
 )
+
+// String returns the CM_REMOVAL_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_REMOVAL_POLICY) String() string {
+	switch e {
+	case CM_REMOVAL_POLICY_EXPECT_NO_REMOVAL:
+		return "CM_REMOVAL_POLICY_EXPECT_NO_REMOVAL"
+	case CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL:
+		return "CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL"
+	case CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL:
+		return "CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL"
+	default:
+		return fmt.Sprintf("CM_REMOVAL_POLICY(%d)", uint32(e))
+	}
+}
 
 type CM_RESTYPE uint32
 
@@ -257,6 +781,43 @@ const (
 	ResType_MfCardConfig  CM_RESTYPE = 32771
 	ResType_Connection    CM_RESTYPE = 32772
 )
+
+// String returns the CM_RESTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CM_RESTYPE) String() string {
+	switch e {
+	case ResType_All:
+		return "ResType_All"
+	case ResType_Mem:
+		return "ResType_Mem"
+	case ResType_IO:
+		return "ResType_IO"
+	case ResType_DMA:
+		return "ResType_DMA"
+	case ResType_IRQ:
+		return "ResType_IRQ"
+	case ResType_DoNotUse:
+		return "ResType_DoNotUse"
+	case ResType_BusNumber:
+		return "ResType_BusNumber"
+	case ResType_MemLarge:
+		return "ResType_MemLarge"
+	case ResType_Ignored_Bit:
+		return "ResType_Ignored_Bit"
+	case ResType_ClassSpecific:
+		return "ResType_ClassSpecific"
+	case ResType_DevicePrivate:
+		return "ResType_DevicePrivate"
+	case ResType_PcCardConfig:
+		return "ResType_PcCardConfig"
+	case ResType_MfCardConfig:
+		return "ResType_MfCardConfig"
+	case ResType_Connection:
+		return "ResType_Connection"
+	default:
+		return fmt.Sprintf("CM_RESTYPE(%d)", uint32(e))
+	}
+}
 
 type CONFIGRET uint32
 
@@ -328,6 +889,138 @@ const (
 	NUM_CR_RESULTS              CONFIGRET = 60
 )
 
+// String returns the CONFIGRET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONFIGRET) String() string {
+	switch e {
+	case CR_SUCCESS:
+		return "CR_SUCCESS"
+	case CR_DEFAULT:
+		return "CR_DEFAULT"
+	case CR_OUT_OF_MEMORY:
+		return "CR_OUT_OF_MEMORY"
+	case CR_INVALID_POINTER:
+		return "CR_INVALID_POINTER"
+	case CR_INVALID_FLAG:
+		return "CR_INVALID_FLAG"
+	case CR_INVALID_DEVNODE:
+		return "CR_INVALID_DEVNODE"
+	case CR_INVALID_RES_DES:
+		return "CR_INVALID_RES_DES"
+	case CR_INVALID_LOG_CONF:
+		return "CR_INVALID_LOG_CONF"
+	case CR_INVALID_ARBITRATOR:
+		return "CR_INVALID_ARBITRATOR"
+	case CR_INVALID_NODELIST:
+		return "CR_INVALID_NODELIST"
+	case CR_DEVNODE_HAS_REQS:
+		return "CR_DEVNODE_HAS_REQS"
+	case CR_INVALID_RESOURCEID:
+		return "CR_INVALID_RESOURCEID"
+	case CR_DLVXD_NOT_FOUND:
+		return "CR_DLVXD_NOT_FOUND"
+	case CR_NO_SUCH_DEVNODE:
+		return "CR_NO_SUCH_DEVNODE"
+	case CR_NO_MORE_LOG_CONF:
+		return "CR_NO_MORE_LOG_CONF"
+	case CR_NO_MORE_RES_DES:
+		return "CR_NO_MORE_RES_DES"
+	case CR_ALREADY_SUCH_DEVNODE:
+		return "CR_ALREADY_SUCH_DEVNODE"
+	case CR_INVALID_RANGE_LIST:
+		return "CR_INVALID_RANGE_LIST"
+	case CR_INVALID_RANGE:
+		return "CR_INVALID_RANGE"
+	case CR_FAILURE:
+		return "CR_FAILURE"
+	case CR_NO_SUCH_LOGICAL_DEV:
+		return "CR_NO_SUCH_LOGICAL_DEV"
+	case CR_CREATE_BLOCKED:
+		return "CR_CREATE_BLOCKED"
+	case CR_NOT_SYSTEM_VM:
+		return "CR_NOT_SYSTEM_VM"
+	case CR_REMOVE_VETOED:
+		return "CR_REMOVE_VETOED"
+	case CR_APM_VETOED:
+		return "CR_APM_VETOED"
+	case CR_INVALID_LOAD_TYPE:
+		return "CR_INVALID_LOAD_TYPE"
+	case CR_BUFFER_SMALL:
+		return "CR_BUFFER_SMALL"
+	case CR_NO_ARBITRATOR:
+		return "CR_NO_ARBITRATOR"
+	case CR_NO_REGISTRY_HANDLE:
+		return "CR_NO_REGISTRY_HANDLE"
+	case CR_REGISTRY_ERROR:
+		return "CR_REGISTRY_ERROR"
+	case CR_INVALID_DEVICE_ID:
+		return "CR_INVALID_DEVICE_ID"
+	case CR_INVALID_DATA:
+		return "CR_INVALID_DATA"
+	case CR_INVALID_API:
+		return "CR_INVALID_API"
+	case CR_DEVLOADER_NOT_READY:
+		return "CR_DEVLOADER_NOT_READY"
+	case CR_NEED_RESTART:
+		return "CR_NEED_RESTART"
+	case CR_NO_MORE_HW_PROFILES:
+		return "CR_NO_MORE_HW_PROFILES"
+	case CR_DEVICE_NOT_THERE:
+		return "CR_DEVICE_NOT_THERE"
+	case CR_NO_SUCH_VALUE:
+		return "CR_NO_SUCH_VALUE"
+	case CR_WRONG_TYPE:
+		return "CR_WRONG_TYPE"
+	case CR_INVALID_PRIORITY:
+		return "CR_INVALID_PRIORITY"
+	case CR_NOT_DISABLEABLE:
+		return "CR_NOT_DISABLEABLE"
+	case CR_FREE_RESOURCES:
+		return "CR_FREE_RESOURCES"
+	case CR_QUERY_VETOED:
+		return "CR_QUERY_VETOED"
+	case CR_CANT_SHARE_IRQ:
+		return "CR_CANT_SHARE_IRQ"
+	case CR_NO_DEPENDENT:
+		return "CR_NO_DEPENDENT"
+	case CR_SAME_RESOURCES:
+		return "CR_SAME_RESOURCES"
+	case CR_NO_SUCH_REGISTRY_KEY:
+		return "CR_NO_SUCH_REGISTRY_KEY"
+	case CR_INVALID_MACHINENAME:
+		return "CR_INVALID_MACHINENAME"
+	case CR_REMOTE_COMM_FAILURE:
+		return "CR_REMOTE_COMM_FAILURE"
+	case CR_MACHINE_UNAVAILABLE:
+		return "CR_MACHINE_UNAVAILABLE"
+	case CR_NO_CM_SERVICES:
+		return "CR_NO_CM_SERVICES"
+	case CR_ACCESS_DENIED:
+		return "CR_ACCESS_DENIED"
+	case CR_CALL_NOT_IMPLEMENTED:
+		return "CR_CALL_NOT_IMPLEMENTED"
+	case CR_INVALID_PROPERTY:
+		return "CR_INVALID_PROPERTY"
+	case CR_DEVICE_INTERFACE_ACTIVE:
+		return "CR_DEVICE_INTERFACE_ACTIVE"
+	case CR_NO_SUCH_DEVICE_INTERFACE:
+		return "CR_NO_SUCH_DEVICE_INTERFACE"
+	case CR_INVALID_REFERENCE_STRING:
+		return "CR_INVALID_REFERENCE_STRING"
+	case CR_INVALID_CONFLICT_LIST:
+		return "CR_INVALID_CONFLICT_LIST"
+	case CR_INVALID_INDEX:
+		return "CR_INVALID_INDEX"
+	case CR_INVALID_STRUCTURE_SIZE:
+		return "CR_INVALID_STRUCTURE_SIZE"
+	case NUM_CR_RESULTS:
+		return "NUM_CR_RESULTS"
+	default:
+		return fmt.Sprintf("CONFIGRET(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DD_FLAGS uint32
 
 const (
@@ -346,6 +1039,47 @@ const (
 	FDD_TypeF         DD_FLAGS = 24
 )
 
+// String returns the DD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DD_FLAGS) String() string {
+	var parts []string
+	if e&MDD_Width != 0 {
+		parts = append(parts, "MDD_Width")
+	}
+	if e&FDD_WORD != 0 {
+		parts = append(parts, "FDD_WORD")
+	}
+	if e&FDD_DWORD != 0 {
+		parts = append(parts, "FDD_DWORD")
+	}
+	if e&FDD_BYTE_AND_WORD != 0 {
+		parts = append(parts, "FDD_BYTE_AND_WORD")
+	}
+	if e&MDD_BusMaster != 0 {
+		parts = append(parts, "MDD_BusMaster")
+	}
+	if e&FDD_BusMaster != 0 {
+		parts = append(parts, "FDD_BusMaster")
+	}
+	if e&MDD_Type != 0 {
+		parts = append(parts, "MDD_Type")
+	}
+	if e&FDD_TypeA != 0 {
+		parts = append(parts, "FDD_TypeA")
+	}
+	if e&FDD_TypeB != 0 {
+		parts = append(parts, "FDD_TypeB")
+	}
+	if e&FDD_TypeF != 0 {
+		parts = append(parts, "FDD_TypeF")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DIINSTALLDEVICE_FLAGS uint32
 
 const (
@@ -356,6 +1090,32 @@ const (
 	DIIDFLAG_BITS                  DIINSTALLDEVICE_FLAGS = 15
 )
 
+// String returns the DIINSTALLDEVICE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIINSTALLDEVICE_FLAGS) String() string {
+	var parts []string
+	if e&DIIDFLAG_SHOWSEARCHUI != 0 {
+		parts = append(parts, "DIIDFLAG_SHOWSEARCHUI")
+	}
+	if e&DIIDFLAG_NOFINISHINSTALLUI != 0 {
+		parts = append(parts, "DIIDFLAG_NOFINISHINSTALLUI")
+	}
+	if e&DIIDFLAG_INSTALLNULLDRIVER != 0 {
+		parts = append(parts, "DIIDFLAG_INSTALLNULLDRIVER")
+	}
+	if e&DIIDFLAG_INSTALLCOPYINFDRIVERS != 0 {
+		parts = append(parts, "DIIDFLAG_INSTALLCOPYINFDRIVERS")
+	}
+	if e&DIIDFLAG_BITS != 0 {
+		parts = append(parts, "DIIDFLAG_BITS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DIINSTALLDRIVER_FLAGS uint32
 
 const (
@@ -370,6 +1130,44 @@ const (
 	DIIRFLAG_INSTALL_AS_SET     DIINSTALLDRIVER_FLAGS = 64
 )
 
+// String returns the DIINSTALLDRIVER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIINSTALLDRIVER_FLAGS) String() string {
+	var parts []string
+	if e&DIIRFLAG_BITS != 0 {
+		parts = append(parts, "DIIRFLAG_BITS")
+	}
+	if e&DIIRFLAG_SYSTEM_BITS != 0 {
+		parts = append(parts, "DIIRFLAG_SYSTEM_BITS")
+	}
+	if e&DIIRFLAG_INF_ALREADY_COPIED != 0 {
+		parts = append(parts, "DIIRFLAG_INF_ALREADY_COPIED")
+	}
+	if e&DIIRFLAG_FORCE_INF != 0 {
+		parts = append(parts, "DIIRFLAG_FORCE_INF")
+	}
+	if e&DIIRFLAG_HW_USING_THE_INF != 0 {
+		parts = append(parts, "DIIRFLAG_HW_USING_THE_INF")
+	}
+	if e&DIIRFLAG_HOTPATCH != 0 {
+		parts = append(parts, "DIIRFLAG_HOTPATCH")
+	}
+	if e&DIIRFLAG_NOBACKUP != 0 {
+		parts = append(parts, "DIIRFLAG_NOBACKUP")
+	}
+	if e&DIIRFLAG_PRE_CONFIGURE_INF != 0 {
+		parts = append(parts, "DIIRFLAG_PRE_CONFIGURE_INF")
+	}
+	if e&DIIRFLAG_INSTALL_AS_SET != 0 {
+		parts = append(parts, "DIIRFLAG_INSTALL_AS_SET")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DIROLLBACKDRIVER_FLAGS uint32
 
 const (
@@ -377,6 +1175,23 @@ const (
 	ROLLBACK_BITS       DIROLLBACKDRIVER_FLAGS = 1
 )
 
+// String returns the DIROLLBACKDRIVER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIROLLBACKDRIVER_FLAGS) String() string {
+	var parts []string
+	if e&ROLLBACK_FLAG_NO_UI != 0 {
+		parts = append(parts, "ROLLBACK_FLAG_NO_UI")
+	}
+	if e&ROLLBACK_BITS != 0 {
+		parts = append(parts, "ROLLBACK_BITS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type DIUNINSTALLDRIVER_FLAGS uint32
 
 const (
@@ -384,6 +1199,25 @@ const (
 	DIURFLAG_NO_REMOVE_INF DIUNINSTALLDRIVER_FLAGS = 1
 	DIURFLAG_RESERVED      DIUNINSTALLDRIVER_FLAGS = 2
 )
+
+// String returns the DIUNINSTALLDRIVER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DIUNINSTALLDRIVER_FLAGS) String() string {
+	var parts []string
+	if e&DIURFLAG_VALID != 0 {
+		parts = append(parts, "DIURFLAG_VALID")
+	}
+	if e&DIURFLAG_NO_REMOVE_INF != 0 {
+		parts = append(parts, "DIURFLAG_NO_REMOVE_INF")
+	}
+	if e&DIURFLAG_RESERVED != 0 {
+		parts = append(parts, "DIURFLAG_RESERVED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type DI_FUNCTION uint32
 
@@ -433,6 +1267,102 @@ const (
 	DIF_MOVEDEVICE                     DI_FUNCTION = 14
 )
 
+// String returns the DI_FUNCTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DI_FUNCTION) String() string {
+	switch e {
+	case DIF_SELECTDEVICE:
+		return "DIF_SELECTDEVICE"
+	case DIF_INSTALLDEVICE:
+		return "DIF_INSTALLDEVICE"
+	case DIF_ASSIGNRESOURCES:
+		return "DIF_ASSIGNRESOURCES"
+	case DIF_PROPERTIES:
+		return "DIF_PROPERTIES"
+	case DIF_REMOVE:
+		return "DIF_REMOVE"
+	case DIF_FIRSTTIMESETUP:
+		return "DIF_FIRSTTIMESETUP"
+	case DIF_FOUNDDEVICE:
+		return "DIF_FOUNDDEVICE"
+	case DIF_SELECTCLASSDRIVERS:
+		return "DIF_SELECTCLASSDRIVERS"
+	case DIF_VALIDATECLASSDRIVERS:
+		return "DIF_VALIDATECLASSDRIVERS"
+	case DIF_INSTALLCLASSDRIVERS:
+		return "DIF_INSTALLCLASSDRIVERS"
+	case DIF_CALCDISKSPACE:
+		return "DIF_CALCDISKSPACE"
+	case DIF_DESTROYPRIVATEDATA:
+		return "DIF_DESTROYPRIVATEDATA"
+	case DIF_VALIDATEDRIVER:
+		return "DIF_VALIDATEDRIVER"
+	case DIF_DETECT:
+		return "DIF_DETECT"
+	case DIF_INSTALLWIZARD:
+		return "DIF_INSTALLWIZARD"
+	case DIF_DESTROYWIZARDDATA:
+		return "DIF_DESTROYWIZARDDATA"
+	case DIF_PROPERTYCHANGE:
+		return "DIF_PROPERTYCHANGE"
+	case DIF_ENABLECLASS:
+		return "DIF_ENABLECLASS"
+	case DIF_DETECTVERIFY:
+		return "DIF_DETECTVERIFY"
+	case DIF_INSTALLDEVICEFILES:
+		return "DIF_INSTALLDEVICEFILES"
+	case DIF_UNREMOVE:
+		return "DIF_UNREMOVE"
+	case DIF_SELECTBESTCOMPATDRV:
+		return "DIF_SELECTBESTCOMPATDRV"
+	case DIF_ALLOW_INSTALL:
+		return "DIF_ALLOW_INSTALL"
+	case DIF_REGISTERDEVICE:
+		return "DIF_REGISTERDEVICE"
+	case DIF_NEWDEVICEWIZARD_PRESELECT:
+		return "DIF_NEWDEVICEWIZARD_PRESELECT"
+	case DIF_NEWDEVICEWIZARD_SELECT:
+		return "DIF_NEWDEVICEWIZARD_SELECT"
+	case DIF_NEWDEVICEWIZARD_PREANALYZE:
+		return "DIF_NEWDEVICEWIZARD_PREANALYZE"
+	case DIF_NEWDEVICEWIZARD_POSTANALYZE:
+		return "DIF_NEWDEVICEWIZARD_POSTANALYZE"
+	case DIF_NEWDEVICEWIZARD_FINISHINSTALL:
+		return "DIF_NEWDEVICEWIZARD_FINISHINSTALL"
+	case DIF_UNUSED1:
+		return "DIF_UNUSED1"
+	case DIF_INSTALLINTERFACES:
+		return "DIF_INSTALLINTERFACES"
+	case DIF_DETECTCANCEL:
+		return "DIF_DETECTCANCEL"
+	case DIF_REGISTER_COINSTALLERS:
+		return "DIF_REGISTER_COINSTALLERS"
+	case DIF_ADDPROPERTYPAGE_ADVANCED:
+		return "DIF_ADDPROPERTYPAGE_ADVANCED"
+	case DIF_ADDPROPERTYPAGE_BASIC:
+		return "DIF_ADDPROPERTYPAGE_BASIC"
+	case DIF_RESERVED1:
+		return "DIF_RESERVED1"
+	case DIF_TROUBLESHOOTER:
+		return "DIF_TROUBLESHOOTER"
+	case DIF_POWERMESSAGEWAKE:
+		return "DIF_POWERMESSAGEWAKE"
+	case DIF_ADDREMOTEPROPERTYPAGE_ADVANCED:
+		return "DIF_ADDREMOTEPROPERTYPAGE_ADVANCED"
+	case DIF_UPDATEDRIVER_UI:
+		return "DIF_UPDATEDRIVER_UI"
+	case DIF_FINISHINSTALL_ACTION:
+		return "DIF_FINISHINSTALL_ACTION"
+	case DIF_RESERVED2:
+		return "DIF_RESERVED2"
+	case DIF_MOVEDEVICE:
+		return "DIF_MOVEDEVICE"
+	default:
+		return fmt.Sprintf("DI_FUNCTION(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FILE_COMPRESSION_TYPE uint32
 
 const (
@@ -442,6 +1372,26 @@ const (
 	FILE_COMPRESSION_NTCAB  FILE_COMPRESSION_TYPE = 3
 )
 
+// String returns the FILE_COMPRESSION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_COMPRESSION_TYPE) String() string {
+	var parts []string
+	if e&FILE_COMPRESSION_WINLZA != 0 {
+		parts = append(parts, "FILE_COMPRESSION_WINLZA")
+	}
+	if e&FILE_COMPRESSION_MSZIP != 0 {
+		parts = append(parts, "FILE_COMPRESSION_MSZIP")
+	}
+	if e&FILE_COMPRESSION_NTCAB != 0 {
+		parts = append(parts, "FILE_COMPRESSION_NTCAB")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type INF_STYLE uint32
 
 const (
@@ -453,6 +1403,32 @@ const (
 	INF_STYLE_CACHE_IGNORE  INF_STYLE = 64
 )
 
+// String returns the INF_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INF_STYLE) String() string {
+	var parts []string
+	if e&INF_STYLE_OLDNT != 0 {
+		parts = append(parts, "INF_STYLE_OLDNT")
+	}
+	if e&INF_STYLE_WIN4 != 0 {
+		parts = append(parts, "INF_STYLE_WIN4")
+	}
+	if e&INF_STYLE_CACHE_ENABLE != 0 {
+		parts = append(parts, "INF_STYLE_CACHE_ENABLE")
+	}
+	if e&INF_STYLE_CACHE_DISABLE != 0 {
+		parts = append(parts, "INF_STYLE_CACHE_DISABLE")
+	}
+	if e&INF_STYLE_CACHE_IGNORE != 0 {
+		parts = append(parts, "INF_STYLE_CACHE_IGNORE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type IOD_DESFLAGS uint32
 
 const (
@@ -469,6 +1445,47 @@ const (
 	FIOD_PORT_BAR        IOD_DESFLAGS = 256
 )
 
+// String returns the IOD_DESFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IOD_DESFLAGS) String() string {
+	var parts []string
+	if e&FIOD_PortType != 0 {
+		parts = append(parts, "FIOD_PortType")
+	}
+	if e&FIOD_IO != 0 {
+		parts = append(parts, "FIOD_IO")
+	}
+	if e&FIOD_DECODE != 0 {
+		parts = append(parts, "FIOD_DECODE")
+	}
+	if e&FIOD_10_BIT_DECODE != 0 {
+		parts = append(parts, "FIOD_10_BIT_DECODE")
+	}
+	if e&FIOD_12_BIT_DECODE != 0 {
+		parts = append(parts, "FIOD_12_BIT_DECODE")
+	}
+	if e&FIOD_16_BIT_DECODE != 0 {
+		parts = append(parts, "FIOD_16_BIT_DECODE")
+	}
+	if e&FIOD_POSITIVE_DECODE != 0 {
+		parts = append(parts, "FIOD_POSITIVE_DECODE")
+	}
+	if e&FIOD_PASSIVE_DECODE != 0 {
+		parts = append(parts, "FIOD_PASSIVE_DECODE")
+	}
+	if e&FIOD_WINDOW_DECODE != 0 {
+		parts = append(parts, "FIOD_WINDOW_DECODE")
+	}
+	if e&FIOD_PORT_BAR != 0 {
+		parts = append(parts, "FIOD_PORT_BAR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type IRQD_FLAGS uint32
 
 const (
@@ -482,6 +1499,32 @@ const (
 	FIRQD_Edge       IRQD_FLAGS = 2
 )
 
+// String returns the IRQD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IRQD_FLAGS) String() string {
+	var parts []string
+	if e&MIRQD_Share != 0 {
+		parts = append(parts, "MIRQD_Share")
+	}
+	if e&FIRQD_Share != 0 {
+		parts = append(parts, "FIRQD_Share")
+	}
+	if e&FIRQD_Level_Bit != 0 {
+		parts = append(parts, "FIRQD_Level_Bit")
+	}
+	if e&MIRQD_Edge_Level != 0 {
+		parts = append(parts, "MIRQD_Edge_Level")
+	}
+	if e&FIRQD_Edge != 0 {
+		parts = append(parts, "FIRQD_Edge")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type MD_FLAGS uint32
 
 const (
@@ -513,6 +1556,76 @@ const (
 	FMD_MEMORY_BAR              MD_FLAGS = 128
 )
 
+// String returns the MD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MD_FLAGS) String() string {
+	var parts []string
+	if e&MMD_MemoryType != 0 {
+		parts = append(parts, "MMD_MemoryType")
+	}
+	if e&FMD_MemoryType != 0 {
+		parts = append(parts, "FMD_MemoryType")
+	}
+	if e&FMD_RAM != 0 {
+		parts = append(parts, "FMD_RAM")
+	}
+	if e&MMD_32_24 != 0 {
+		parts = append(parts, "MMD_32_24")
+	}
+	if e&FMD_32_24 != 0 {
+		parts = append(parts, "FMD_32_24")
+	}
+	if e&FMD_32 != 0 {
+		parts = append(parts, "FMD_32")
+	}
+	if e&MMD_Prefetchable != 0 {
+		parts = append(parts, "MMD_Prefetchable")
+	}
+	if e&FMD_Prefetchable != 0 {
+		parts = append(parts, "FMD_Prefetchable")
+	}
+	if e&FMD_Pref != 0 {
+		parts = append(parts, "FMD_Pref")
+	}
+	if e&FMD_PrefetchAllowed != 0 {
+		parts = append(parts, "FMD_PrefetchAllowed")
+	}
+	if e&MMD_Readable != 0 {
+		parts = append(parts, "MMD_Readable")
+	}
+	if e&FMD_Readable != 0 {
+		parts = append(parts, "FMD_Readable")
+	}
+	if e&FMD_ReadDisallowed != 0 {
+		parts = append(parts, "FMD_ReadDisallowed")
+	}
+	if e&MMD_CombinedWrite != 0 {
+		parts = append(parts, "MMD_CombinedWrite")
+	}
+	if e&FMD_CombinedWrite != 0 {
+		parts = append(parts, "FMD_CombinedWrite")
+	}
+	if e&FMD_CombinedWriteAllowed != 0 {
+		parts = append(parts, "FMD_CombinedWriteAllowed")
+	}
+	if e&MMD_Cacheable != 0 {
+		parts = append(parts, "MMD_Cacheable")
+	}
+	if e&FMD_Cacheable != 0 {
+		parts = append(parts, "FMD_Cacheable")
+	}
+	if e&FMD_WINDOW_DECODE != 0 {
+		parts = append(parts, "FMD_WINDOW_DECODE")
+	}
+	if e&FMD_MEMORY_BAR != 0 {
+		parts = append(parts, "FMD_MEMORY_BAR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type OEM_SOURCE_MEDIA_TYPE uint32
 
 const (
@@ -521,6 +1634,22 @@ const (
 	SPOST_URL  OEM_SOURCE_MEDIA_TYPE = 2
 )
 
+// String returns the OEM_SOURCE_MEDIA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OEM_SOURCE_MEDIA_TYPE) String() string {
+	switch e {
+	case SPOST_NONE:
+		return "SPOST_NONE"
+	case SPOST_PATH:
+		return "SPOST_PATH"
+	case SPOST_URL:
+		return "SPOST_URL"
+	default:
+		return fmt.Sprintf("OEM_SOURCE_MEDIA_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PCD_FLAGS uint32
 
 const (
@@ -562,11 +1691,137 @@ const (
 	FPCD_MEM2_16               PCD_FLAGS = 1073741824
 )
 
+// String returns the PCD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PCD_FLAGS) String() string {
+	var parts []string
+	if e&MPCD_IO_8_16 != 0 {
+		parts = append(parts, "MPCD_IO_8_16")
+	}
+	if e&FPCD_IO_16 != 0 {
+		parts = append(parts, "FPCD_IO_16")
+	}
+	if e&MPCD_MEM_8_16 != 0 {
+		parts = append(parts, "MPCD_MEM_8_16")
+	}
+	if e&FPCD_MEM_16 != 0 {
+		parts = append(parts, "FPCD_MEM_16")
+	}
+	if e&MPCD_MEM_A_C != 0 {
+		parts = append(parts, "MPCD_MEM_A_C")
+	}
+	if e&FPCD_MEM1_A != 0 {
+		parts = append(parts, "FPCD_MEM1_A")
+	}
+	if e&FPCD_MEM2_A != 0 {
+		parts = append(parts, "FPCD_MEM2_A")
+	}
+	if e&FPCD_IO_ZW_8 != 0 {
+		parts = append(parts, "FPCD_IO_ZW_8")
+	}
+	if e&FPCD_IO_SRC_16 != 0 {
+		parts = append(parts, "FPCD_IO_SRC_16")
+	}
+	if e&FPCD_IO_WS_16 != 0 {
+		parts = append(parts, "FPCD_IO_WS_16")
+	}
+	if e&MPCD_MEM_WS != 0 {
+		parts = append(parts, "MPCD_MEM_WS")
+	}
+	if e&FPCD_MEM_WS_ONE != 0 {
+		parts = append(parts, "FPCD_MEM_WS_ONE")
+	}
+	if e&FPCD_MEM_WS_TWO != 0 {
+		parts = append(parts, "FPCD_MEM_WS_TWO")
+	}
+	if e&FPCD_MEM_WS_THREE != 0 {
+		parts = append(parts, "FPCD_MEM_WS_THREE")
+	}
+	if e&FPCD_MEM_A != 0 {
+		parts = append(parts, "FPCD_MEM_A")
+	}
+	if e&FPCD_ATTRIBUTES_PER_WINDOW != 0 {
+		parts = append(parts, "FPCD_ATTRIBUTES_PER_WINDOW")
+	}
+	if e&FPCD_IO1_16 != 0 {
+		parts = append(parts, "FPCD_IO1_16")
+	}
+	if e&FPCD_IO1_ZW_8 != 0 {
+		parts = append(parts, "FPCD_IO1_ZW_8")
+	}
+	if e&FPCD_IO1_SRC_16 != 0 {
+		parts = append(parts, "FPCD_IO1_SRC_16")
+	}
+	if e&FPCD_IO1_WS_16 != 0 {
+		parts = append(parts, "FPCD_IO1_WS_16")
+	}
+	if e&FPCD_IO2_16 != 0 {
+		parts = append(parts, "FPCD_IO2_16")
+	}
+	if e&FPCD_IO2_ZW_8 != 0 {
+		parts = append(parts, "FPCD_IO2_ZW_8")
+	}
+	if e&FPCD_IO2_SRC_16 != 0 {
+		parts = append(parts, "FPCD_IO2_SRC_16")
+	}
+	if e&FPCD_IO2_WS_16 != 0 {
+		parts = append(parts, "FPCD_IO2_WS_16")
+	}
+	if e&MPCD_MEM1_WS != 0 {
+		parts = append(parts, "MPCD_MEM1_WS")
+	}
+	if e&FPCD_MEM1_WS_ONE != 0 {
+		parts = append(parts, "FPCD_MEM1_WS_ONE")
+	}
+	if e&FPCD_MEM1_WS_TWO != 0 {
+		parts = append(parts, "FPCD_MEM1_WS_TWO")
+	}
+	if e&FPCD_MEM1_WS_THREE != 0 {
+		parts = append(parts, "FPCD_MEM1_WS_THREE")
+	}
+	if e&FPCD_MEM1_16 != 0 {
+		parts = append(parts, "FPCD_MEM1_16")
+	}
+	if e&MPCD_MEM2_WS != 0 {
+		parts = append(parts, "MPCD_MEM2_WS")
+	}
+	if e&FPCD_MEM2_WS_ONE != 0 {
+		parts = append(parts, "FPCD_MEM2_WS_ONE")
+	}
+	if e&FPCD_MEM2_WS_TWO != 0 {
+		parts = append(parts, "FPCD_MEM2_WS_TWO")
+	}
+	if e&FPCD_MEM2_WS_THREE != 0 {
+		parts = append(parts, "FPCD_MEM2_WS_THREE")
+	}
+	if e&FPCD_MEM2_16 != 0 {
+		parts = append(parts, "FPCD_MEM2_16")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PMF_FLAGS uint32
 
 const (
 	FPMF_AUDIO_ENABLE PMF_FLAGS = 8
 )
+
+// String returns the PMF_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PMF_FLAGS) String() string {
+	var parts []string
+	if e&FPMF_AUDIO_ENABLE != 0 {
+		parts = append(parts, "FPMF_AUDIO_ENABLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // PNP_VETO_TYPE: https://learn.microsoft.com/windows/win32/api/cfg/ne-cfg-pnp_veto_type
 type PNP_VETO_TYPE int32
@@ -588,6 +1843,44 @@ const (
 	PNP_VetoAlreadyRemoved       PNP_VETO_TYPE = 13
 )
 
+// String returns the PNP_VETO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PNP_VETO_TYPE) String() string {
+	switch e {
+	case PNP_VetoTypeUnknown:
+		return "PNP_VetoTypeUnknown"
+	case PNP_VetoLegacyDevice:
+		return "PNP_VetoLegacyDevice"
+	case PNP_VetoPendingClose:
+		return "PNP_VetoPendingClose"
+	case PNP_VetoWindowsApp:
+		return "PNP_VetoWindowsApp"
+	case PNP_VetoWindowsService:
+		return "PNP_VetoWindowsService"
+	case PNP_VetoOutstandingOpen:
+		return "PNP_VetoOutstandingOpen"
+	case PNP_VetoDevice:
+		return "PNP_VetoDevice"
+	case PNP_VetoDriver:
+		return "PNP_VetoDriver"
+	case PNP_VetoIllegalDeviceRequest:
+		return "PNP_VetoIllegalDeviceRequest"
+	case PNP_VetoInsufficientPower:
+		return "PNP_VetoInsufficientPower"
+	case PNP_VetoNonDisableable:
+		return "PNP_VetoNonDisableable"
+	case PNP_VetoLegacyDriver:
+		return "PNP_VetoLegacyDriver"
+	case PNP_VetoInsufficientRights:
+		return "PNP_VetoInsufficientRights"
+	case PNP_VetoAlreadyRemoved:
+		return "PNP_VetoAlreadyRemoved"
+	default:
+		return fmt.Sprintf("PNP_VETO_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SETUPSCANFILEQUEUE_FLAGS uint32
 
 const (
@@ -605,6 +1898,53 @@ const (
 	SPQ_SCAN_USE_OEM_CATALOGS             SETUPSCANFILEQUEUE_FLAGS = 2048
 )
 
+// String returns the SETUPSCANFILEQUEUE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUPSCANFILEQUEUE_FLAGS) String() string {
+	var parts []string
+	if e&SPQ_SCAN_FILE_PRESENCE != 0 {
+		parts = append(parts, "SPQ_SCAN_FILE_PRESENCE")
+	}
+	if e&SPQ_SCAN_FILE_VALIDITY != 0 {
+		parts = append(parts, "SPQ_SCAN_FILE_VALIDITY")
+	}
+	if e&SPQ_SCAN_USE_CALLBACK != 0 {
+		parts = append(parts, "SPQ_SCAN_USE_CALLBACK")
+	}
+	if e&SPQ_SCAN_USE_CALLBACKEX != 0 {
+		parts = append(parts, "SPQ_SCAN_USE_CALLBACKEX")
+	}
+	if e&SPQ_SCAN_INFORM_USER != 0 {
+		parts = append(parts, "SPQ_SCAN_INFORM_USER")
+	}
+	if e&SPQ_SCAN_PRUNE_COPY_QUEUE != 0 {
+		parts = append(parts, "SPQ_SCAN_PRUNE_COPY_QUEUE")
+	}
+	if e&SPQ_SCAN_USE_CALLBACK_SIGNERINFO != 0 {
+		parts = append(parts, "SPQ_SCAN_USE_CALLBACK_SIGNERINFO")
+	}
+	if e&SPQ_SCAN_PRUNE_DELREN != 0 {
+		parts = append(parts, "SPQ_SCAN_PRUNE_DELREN")
+	}
+	if e&SPQ_SCAN_FILE_PRESENCE_WITHOUT_SOURCE != 0 {
+		parts = append(parts, "SPQ_SCAN_FILE_PRESENCE_WITHOUT_SOURCE")
+	}
+	if e&SPQ_SCAN_FILE_COMPARISON != 0 {
+		parts = append(parts, "SPQ_SCAN_FILE_COMPARISON")
+	}
+	if e&SPQ_SCAN_ACTIVATE_DRP != 0 {
+		parts = append(parts, "SPQ_SCAN_ACTIVATE_DRP")
+	}
+	if e&SPQ_SCAN_USE_OEM_CATALOGS != 0 {
+		parts = append(parts, "SPQ_SCAN_USE_OEM_CATALOGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SETUP_DI_DEVICE_CONFIGURATION_FLAGS uint32
 
 const (
@@ -630,6 +1970,77 @@ const (
 	CONFIGFLAG_NEEDS_CLASS_CONFIG   SETUP_DI_DEVICE_CONFIGURATION_FLAGS = 524288
 )
 
+// String returns the SETUP_DI_DEVICE_CONFIGURATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_DI_DEVICE_CONFIGURATION_FLAGS) String() string {
+	var parts []string
+	if e&CONFIGFLAG_DISABLED != 0 {
+		parts = append(parts, "CONFIGFLAG_DISABLED")
+	}
+	if e&CONFIGFLAG_REMOVED != 0 {
+		parts = append(parts, "CONFIGFLAG_REMOVED")
+	}
+	if e&CONFIGFLAG_MANUAL_INSTALL != 0 {
+		parts = append(parts, "CONFIGFLAG_MANUAL_INSTALL")
+	}
+	if e&CONFIGFLAG_IGNORE_BOOT_LC != 0 {
+		parts = append(parts, "CONFIGFLAG_IGNORE_BOOT_LC")
+	}
+	if e&CONFIGFLAG_NET_BOOT != 0 {
+		parts = append(parts, "CONFIGFLAG_NET_BOOT")
+	}
+	if e&CONFIGFLAG_REINSTALL != 0 {
+		parts = append(parts, "CONFIGFLAG_REINSTALL")
+	}
+	if e&CONFIGFLAG_FAILEDINSTALL != 0 {
+		parts = append(parts, "CONFIGFLAG_FAILEDINSTALL")
+	}
+	if e&CONFIGFLAG_CANTSTOPACHILD != 0 {
+		parts = append(parts, "CONFIGFLAG_CANTSTOPACHILD")
+	}
+	if e&CONFIGFLAG_OKREMOVEROM != 0 {
+		parts = append(parts, "CONFIGFLAG_OKREMOVEROM")
+	}
+	if e&CONFIGFLAG_NOREMOVEEXIT != 0 {
+		parts = append(parts, "CONFIGFLAG_NOREMOVEEXIT")
+	}
+	if e&CONFIGFLAG_FINISH_INSTALL != 0 {
+		parts = append(parts, "CONFIGFLAG_FINISH_INSTALL")
+	}
+	if e&CONFIGFLAG_NEEDS_FORCED_CONFIG != 0 {
+		parts = append(parts, "CONFIGFLAG_NEEDS_FORCED_CONFIG")
+	}
+	if e&CONFIGFLAG_NETBOOT_CARD != 0 {
+		parts = append(parts, "CONFIGFLAG_NETBOOT_CARD")
+	}
+	if e&CONFIGFLAG_PARTIAL_LOG_CONF != 0 {
+		parts = append(parts, "CONFIGFLAG_PARTIAL_LOG_CONF")
+	}
+	if e&CONFIGFLAG_SUPPRESS_SURPRISE != 0 {
+		parts = append(parts, "CONFIGFLAG_SUPPRESS_SURPRISE")
+	}
+	if e&CONFIGFLAG_VERIFY_HARDWARE != 0 {
+		parts = append(parts, "CONFIGFLAG_VERIFY_HARDWARE")
+	}
+	if e&CONFIGFLAG_FINISHINSTALL_UI != 0 {
+		parts = append(parts, "CONFIGFLAG_FINISHINSTALL_UI")
+	}
+	if e&CONFIGFLAG_FINISHINSTALL_ACTION != 0 {
+		parts = append(parts, "CONFIGFLAG_FINISHINSTALL_ACTION")
+	}
+	if e&CONFIGFLAG_BOOT_DEVICE != 0 {
+		parts = append(parts, "CONFIGFLAG_BOOT_DEVICE")
+	}
+	if e&CONFIGFLAG_NEEDS_CLASS_CONFIG != 0 {
+		parts = append(parts, "CONFIGFLAG_NEEDS_CLASS_CONFIG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SETUP_DI_DEVICE_CREATION_FLAGS uint32
 
 const (
@@ -637,6 +2048,23 @@ const (
 	DICD_INHERIT_CLASSDRVS SETUP_DI_DEVICE_CREATION_FLAGS = 2
 )
 
+// String returns the SETUP_DI_DEVICE_CREATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_DI_DEVICE_CREATION_FLAGS) String() string {
+	var parts []string
+	if e&DICD_GENERATE_ID != 0 {
+		parts = append(parts, "DICD_GENERATE_ID")
+	}
+	if e&DICD_INHERIT_CLASSDRVS != 0 {
+		parts = append(parts, "DICD_INHERIT_CLASSDRVS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SETUP_DI_DEVICE_INSTALL_FLAGS uint32
 
 const (
@@ -675,6 +2103,116 @@ const (
 	DI_UNREMOVEDEVICE_CONFIGSPECIFIC SETUP_DI_DEVICE_INSTALL_FLAGS = 2
 )
 
+// String returns the SETUP_DI_DEVICE_INSTALL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_DI_DEVICE_INSTALL_FLAGS) String() string {
+	var parts []string
+	if e&DI_SHOWOEM != 0 {
+		parts = append(parts, "DI_SHOWOEM")
+	}
+	if e&DI_SHOWCOMPAT != 0 {
+		parts = append(parts, "DI_SHOWCOMPAT")
+	}
+	if e&DI_SHOWCLASS != 0 {
+		parts = append(parts, "DI_SHOWCLASS")
+	}
+	if e&DI_SHOWALL != 0 {
+		parts = append(parts, "DI_SHOWALL")
+	}
+	if e&DI_NOVCP != 0 {
+		parts = append(parts, "DI_NOVCP")
+	}
+	if e&DI_DIDCOMPAT != 0 {
+		parts = append(parts, "DI_DIDCOMPAT")
+	}
+	if e&DI_DIDCLASS != 0 {
+		parts = append(parts, "DI_DIDCLASS")
+	}
+	if e&DI_AUTOASSIGNRES != 0 {
+		parts = append(parts, "DI_AUTOASSIGNRES")
+	}
+	if e&DI_NEEDRESTART != 0 {
+		parts = append(parts, "DI_NEEDRESTART")
+	}
+	if e&DI_NEEDREBOOT != 0 {
+		parts = append(parts, "DI_NEEDREBOOT")
+	}
+	if e&DI_NOBROWSE != 0 {
+		parts = append(parts, "DI_NOBROWSE")
+	}
+	if e&DI_MULTMFGS != 0 {
+		parts = append(parts, "DI_MULTMFGS")
+	}
+	if e&DI_DISABLED != 0 {
+		parts = append(parts, "DI_DISABLED")
+	}
+	if e&DI_GENERALPAGE_ADDED != 0 {
+		parts = append(parts, "DI_GENERALPAGE_ADDED")
+	}
+	if e&DI_RESOURCEPAGE_ADDED != 0 {
+		parts = append(parts, "DI_RESOURCEPAGE_ADDED")
+	}
+	if e&DI_PROPERTIES_CHANGE != 0 {
+		parts = append(parts, "DI_PROPERTIES_CHANGE")
+	}
+	if e&DI_INF_IS_SORTED != 0 {
+		parts = append(parts, "DI_INF_IS_SORTED")
+	}
+	if e&DI_ENUMSINGLEINF != 0 {
+		parts = append(parts, "DI_ENUMSINGLEINF")
+	}
+	if e&DI_DONOTCALLCONFIGMG != 0 {
+		parts = append(parts, "DI_DONOTCALLCONFIGMG")
+	}
+	if e&DI_INSTALLDISABLED != 0 {
+		parts = append(parts, "DI_INSTALLDISABLED")
+	}
+	if e&DI_COMPAT_FROM_CLASS != 0 {
+		parts = append(parts, "DI_COMPAT_FROM_CLASS")
+	}
+	if e&DI_CLASSINSTALLPARAMS != 0 {
+		parts = append(parts, "DI_CLASSINSTALLPARAMS")
+	}
+	if e&DI_NODI_DEFAULTACTION != 0 {
+		parts = append(parts, "DI_NODI_DEFAULTACTION")
+	}
+	if e&DI_QUIETINSTALL != 0 {
+		parts = append(parts, "DI_QUIETINSTALL")
+	}
+	if e&DI_NOFILECOPY != 0 {
+		parts = append(parts, "DI_NOFILECOPY")
+	}
+	if e&DI_FORCECOPY != 0 {
+		parts = append(parts, "DI_FORCECOPY")
+	}
+	if e&DI_DRIVERPAGE_ADDED != 0 {
+		parts = append(parts, "DI_DRIVERPAGE_ADDED")
+	}
+	if e&DI_USECI_SELECTSTRINGS != 0 {
+		parts = append(parts, "DI_USECI_SELECTSTRINGS")
+	}
+	if e&DI_OVERRIDE_INFFLAGS != 0 {
+		parts = append(parts, "DI_OVERRIDE_INFFLAGS")
+	}
+	if e&DI_PROPS_NOCHANGEUSAGE != 0 {
+		parts = append(parts, "DI_PROPS_NOCHANGEUSAGE")
+	}
+	if e&DI_NOSELECTICONS != 0 {
+		parts = append(parts, "DI_NOSELECTICONS")
+	}
+	if e&DI_NOWRITE_IDS != 0 {
+		parts = append(parts, "DI_NOWRITE_IDS")
+	}
+	if e&DI_UNREMOVEDEVICE_CONFIGSPECIFIC != 0 {
+		parts = append(parts, "DI_UNREMOVEDEVICE_CONFIGSPECIFIC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SETUP_DI_DEVICE_INSTALL_FLAGS_EX uint32
 
 const (
@@ -712,6 +2250,113 @@ const (
 	DI_FLAGSEX_SEARCH_PUBLISHED_INFS    SETUP_DI_DEVICE_INSTALL_FLAGS_EX = 2147483648
 )
 
+// String returns the SETUP_DI_DEVICE_INSTALL_FLAGS_EX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_DI_DEVICE_INSTALL_FLAGS_EX) String() string {
+	var parts []string
+	if e&DI_FLAGSEX_RESERVED2 != 0 {
+		parts = append(parts, "DI_FLAGSEX_RESERVED2")
+	}
+	if e&DI_FLAGSEX_RESERVED3 != 0 {
+		parts = append(parts, "DI_FLAGSEX_RESERVED3")
+	}
+	if e&DI_FLAGSEX_CI_FAILED != 0 {
+		parts = append(parts, "DI_FLAGSEX_CI_FAILED")
+	}
+	if e&DI_FLAGSEX_FINISHINSTALL_ACTION != 0 {
+		parts = append(parts, "DI_FLAGSEX_FINISHINSTALL_ACTION")
+	}
+	if e&DI_FLAGSEX_DIDINFOLIST != 0 {
+		parts = append(parts, "DI_FLAGSEX_DIDINFOLIST")
+	}
+	if e&DI_FLAGSEX_DIDCOMPATINFO != 0 {
+		parts = append(parts, "DI_FLAGSEX_DIDCOMPATINFO")
+	}
+	if e&DI_FLAGSEX_FILTERCLASSES != 0 {
+		parts = append(parts, "DI_FLAGSEX_FILTERCLASSES")
+	}
+	if e&DI_FLAGSEX_SETFAILEDINSTALL != 0 {
+		parts = append(parts, "DI_FLAGSEX_SETFAILEDINSTALL")
+	}
+	if e&DI_FLAGSEX_DEVICECHANGE != 0 {
+		parts = append(parts, "DI_FLAGSEX_DEVICECHANGE")
+	}
+	if e&DI_FLAGSEX_ALWAYSWRITEIDS != 0 {
+		parts = append(parts, "DI_FLAGSEX_ALWAYSWRITEIDS")
+	}
+	if e&DI_FLAGSEX_PROPCHANGE_PENDING != 0 {
+		parts = append(parts, "DI_FLAGSEX_PROPCHANGE_PENDING")
+	}
+	if e&DI_FLAGSEX_ALLOWEXCLUDEDDRVS != 0 {
+		parts = append(parts, "DI_FLAGSEX_ALLOWEXCLUDEDDRVS")
+	}
+	if e&DI_FLAGSEX_NOUIONQUERYREMOVE != 0 {
+		parts = append(parts, "DI_FLAGSEX_NOUIONQUERYREMOVE")
+	}
+	if e&DI_FLAGSEX_USECLASSFORCOMPAT != 0 {
+		parts = append(parts, "DI_FLAGSEX_USECLASSFORCOMPAT")
+	}
+	if e&DI_FLAGSEX_RESERVED4 != 0 {
+		parts = append(parts, "DI_FLAGSEX_RESERVED4")
+	}
+	if e&DI_FLAGSEX_NO_DRVREG_MODIFY != 0 {
+		parts = append(parts, "DI_FLAGSEX_NO_DRVREG_MODIFY")
+	}
+	if e&DI_FLAGSEX_IN_SYSTEM_SETUP != 0 {
+		parts = append(parts, "DI_FLAGSEX_IN_SYSTEM_SETUP")
+	}
+	if e&DI_FLAGSEX_INET_DRIVER != 0 {
+		parts = append(parts, "DI_FLAGSEX_INET_DRIVER")
+	}
+	if e&DI_FLAGSEX_APPENDDRIVERLIST != 0 {
+		parts = append(parts, "DI_FLAGSEX_APPENDDRIVERLIST")
+	}
+	if e&DI_FLAGSEX_PREINSTALLBACKUP != 0 {
+		parts = append(parts, "DI_FLAGSEX_PREINSTALLBACKUP")
+	}
+	if e&DI_FLAGSEX_BACKUPONREPLACE != 0 {
+		parts = append(parts, "DI_FLAGSEX_BACKUPONREPLACE")
+	}
+	if e&DI_FLAGSEX_DRIVERLIST_FROM_URL != 0 {
+		parts = append(parts, "DI_FLAGSEX_DRIVERLIST_FROM_URL")
+	}
+	if e&DI_FLAGSEX_RESERVED1 != 0 {
+		parts = append(parts, "DI_FLAGSEX_RESERVED1")
+	}
+	if e&DI_FLAGSEX_EXCLUDE_OLD_INET_DRIVERS != 0 {
+		parts = append(parts, "DI_FLAGSEX_EXCLUDE_OLD_INET_DRIVERS")
+	}
+	if e&DI_FLAGSEX_POWERPAGE_ADDED != 0 {
+		parts = append(parts, "DI_FLAGSEX_POWERPAGE_ADDED")
+	}
+	if e&DI_FLAGSEX_FILTERSIMILARDRIVERS != 0 {
+		parts = append(parts, "DI_FLAGSEX_FILTERSIMILARDRIVERS")
+	}
+	if e&DI_FLAGSEX_INSTALLEDDRIVER != 0 {
+		parts = append(parts, "DI_FLAGSEX_INSTALLEDDRIVER")
+	}
+	if e&DI_FLAGSEX_NO_CLASSLIST_NODE_MERGE != 0 {
+		parts = append(parts, "DI_FLAGSEX_NO_CLASSLIST_NODE_MERGE")
+	}
+	if e&DI_FLAGSEX_ALTPLATFORM_DRVSEARCH != 0 {
+		parts = append(parts, "DI_FLAGSEX_ALTPLATFORM_DRVSEARCH")
+	}
+	if e&DI_FLAGSEX_RESTART_DEVICE_ONLY != 0 {
+		parts = append(parts, "DI_FLAGSEX_RESTART_DEVICE_ONLY")
+	}
+	if e&DI_FLAGSEX_RECURSIVESEARCH != 0 {
+		parts = append(parts, "DI_FLAGSEX_RECURSIVESEARCH")
+	}
+	if e&DI_FLAGSEX_SEARCH_PUBLISHED_INFS != 0 {
+		parts = append(parts, "DI_FLAGSEX_SEARCH_PUBLISHED_INFS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SETUP_DI_DRIVER_INSTALL_FLAGS uint32
 
 const (
@@ -749,6 +2394,112 @@ const (
 	DNF_UNUSED_31                 SETUP_DI_DRIVER_INSTALL_FLAGS = 2147483648
 )
 
+// String returns the SETUP_DI_DRIVER_INSTALL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_DI_DRIVER_INSTALL_FLAGS) String() string {
+	var parts []string
+	if e&DNF_DUPDESC != 0 {
+		parts = append(parts, "DNF_DUPDESC")
+	}
+	if e&DNF_OLDDRIVER != 0 {
+		parts = append(parts, "DNF_OLDDRIVER")
+	}
+	if e&DNF_EXCLUDEFROMLIST != 0 {
+		parts = append(parts, "DNF_EXCLUDEFROMLIST")
+	}
+	if e&DNF_NODRIVER != 0 {
+		parts = append(parts, "DNF_NODRIVER")
+	}
+	if e&DNF_LEGACYINF != 0 {
+		parts = append(parts, "DNF_LEGACYINF")
+	}
+	if e&DNF_CLASS_DRIVER != 0 {
+		parts = append(parts, "DNF_CLASS_DRIVER")
+	}
+	if e&DNF_COMPATIBLE_DRIVER != 0 {
+		parts = append(parts, "DNF_COMPATIBLE_DRIVER")
+	}
+	if e&DNF_INET_DRIVER != 0 {
+		parts = append(parts, "DNF_INET_DRIVER")
+	}
+	if e&DNF_UNUSED1 != 0 {
+		parts = append(parts, "DNF_UNUSED1")
+	}
+	if e&DNF_UNUSED2 != 0 {
+		parts = append(parts, "DNF_UNUSED2")
+	}
+	if e&DNF_OLD_INET_DRIVER != 0 {
+		parts = append(parts, "DNF_OLD_INET_DRIVER")
+	}
+	if e&DNF_BAD_DRIVER != 0 {
+		parts = append(parts, "DNF_BAD_DRIVER")
+	}
+	if e&DNF_DUPPROVIDER != 0 {
+		parts = append(parts, "DNF_DUPPROVIDER")
+	}
+	if e&DNF_INF_IS_SIGNED != 0 {
+		parts = append(parts, "DNF_INF_IS_SIGNED")
+	}
+	if e&DNF_OEM_F6_INF != 0 {
+		parts = append(parts, "DNF_OEM_F6_INF")
+	}
+	if e&DNF_DUPDRIVERVER != 0 {
+		parts = append(parts, "DNF_DUPDRIVERVER")
+	}
+	if e&DNF_BASIC_DRIVER != 0 {
+		parts = append(parts, "DNF_BASIC_DRIVER")
+	}
+	if e&DNF_AUTHENTICODE_SIGNED != 0 {
+		parts = append(parts, "DNF_AUTHENTICODE_SIGNED")
+	}
+	if e&DNF_INSTALLEDDRIVER != 0 {
+		parts = append(parts, "DNF_INSTALLEDDRIVER")
+	}
+	if e&DNF_ALWAYSEXCLUDEFROMLIST != 0 {
+		parts = append(parts, "DNF_ALWAYSEXCLUDEFROMLIST")
+	}
+	if e&DNF_INBOX_DRIVER != 0 {
+		parts = append(parts, "DNF_INBOX_DRIVER")
+	}
+	if e&DNF_REQUESTADDITIONALSOFTWARE != 0 {
+		parts = append(parts, "DNF_REQUESTADDITIONALSOFTWARE")
+	}
+	if e&DNF_UNUSED_22 != 0 {
+		parts = append(parts, "DNF_UNUSED_22")
+	}
+	if e&DNF_UNUSED_23 != 0 {
+		parts = append(parts, "DNF_UNUSED_23")
+	}
+	if e&DNF_UNUSED_24 != 0 {
+		parts = append(parts, "DNF_UNUSED_24")
+	}
+	if e&DNF_UNUSED_25 != 0 {
+		parts = append(parts, "DNF_UNUSED_25")
+	}
+	if e&DNF_UNUSED_26 != 0 {
+		parts = append(parts, "DNF_UNUSED_26")
+	}
+	if e&DNF_UNUSED_27 != 0 {
+		parts = append(parts, "DNF_UNUSED_27")
+	}
+	if e&DNF_UNUSED_28 != 0 {
+		parts = append(parts, "DNF_UNUSED_28")
+	}
+	if e&DNF_UNUSED_29 != 0 {
+		parts = append(parts, "DNF_UNUSED_29")
+	}
+	if e&DNF_UNUSED_30 != 0 {
+		parts = append(parts, "DNF_UNUSED_30")
+	}
+	if e&DNF_UNUSED_31 != 0 {
+		parts = append(parts, "DNF_UNUSED_31")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SETUP_DI_DRIVER_TYPE uint32
 
 const (
@@ -756,6 +2507,20 @@ const (
 	SPDIT_COMPATDRIVER SETUP_DI_DRIVER_TYPE = 2
 )
 
+// String returns the SETUP_DI_DRIVER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_DI_DRIVER_TYPE) String() string {
+	switch e {
+	case SPDIT_CLASSDRIVER:
+		return "SPDIT_CLASSDRIVER"
+	case SPDIT_COMPATDRIVER:
+		return "SPDIT_COMPATDRIVER"
+	default:
+		return fmt.Sprintf("SETUP_DI_DRIVER_TYPE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SETUP_DI_GET_CLASS_DEVS_FLAGS uint32
 
 const (
@@ -767,6 +2532,34 @@ const (
 	DIGCF_INTERFACEDEVICE SETUP_DI_GET_CLASS_DEVS_FLAGS = 16
 )
 
+// String returns the SETUP_DI_GET_CLASS_DEVS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_DI_GET_CLASS_DEVS_FLAGS) String() string {
+	var parts []string
+	if e&DIGCF_DEFAULT != 0 {
+		parts = append(parts, "DIGCF_DEFAULT")
+	}
+	if e&DIGCF_PRESENT != 0 {
+		parts = append(parts, "DIGCF_PRESENT")
+	}
+	if e&DIGCF_ALLCLASSES != 0 {
+		parts = append(parts, "DIGCF_ALLCLASSES")
+	}
+	if e&DIGCF_PROFILE != 0 {
+		parts = append(parts, "DIGCF_PROFILE")
+	}
+	if e&DIGCF_DEVICEINTERFACE != 0 {
+		parts = append(parts, "DIGCF_DEVICEINTERFACE")
+	}
+	if e&DIGCF_INTERFACEDEVICE != 0 {
+		parts = append(parts, "DIGCF_INTERFACEDEVICE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SETUP_DI_PROPERTY_CHANGE_SCOPE uint32
 
 const (
@@ -774,6 +2567,21 @@ const (
 	DICS_FLAG_CONFIGSPECIFIC SETUP_DI_PROPERTY_CHANGE_SCOPE = 2
 	DICS_FLAG_CONFIGGENERAL  SETUP_DI_PROPERTY_CHANGE_SCOPE = 4
 )
+
+// String returns the SETUP_DI_PROPERTY_CHANGE_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_DI_PROPERTY_CHANGE_SCOPE) String() string {
+	switch e {
+	case DICS_FLAG_GLOBAL:
+		return "DICS_FLAG_GLOBAL"
+	case DICS_FLAG_CONFIGSPECIFIC:
+		return "DICS_FLAG_CONFIGSPECIFIC"
+	case DICS_FLAG_CONFIGGENERAL:
+		return "DICS_FLAG_CONFIGGENERAL"
+	default:
+		return fmt.Sprintf("SETUP_DI_PROPERTY_CHANGE_SCOPE(%d)", uint32(e))
+	}
+}
 
 type SETUP_DI_REGISTRY_PROPERTY uint32
 
@@ -818,12 +2626,110 @@ const (
 	SPDRP_MAXIMUM_PROPERTY            SETUP_DI_REGISTRY_PROPERTY = 37
 )
 
+// String returns the SETUP_DI_REGISTRY_PROPERTY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_DI_REGISTRY_PROPERTY) String() string {
+	switch e {
+	case SPDRP_DEVICEDESC:
+		return "SPDRP_DEVICEDESC"
+	case SPDRP_HARDWAREID:
+		return "SPDRP_HARDWAREID"
+	case SPDRP_COMPATIBLEIDS:
+		return "SPDRP_COMPATIBLEIDS"
+	case SPDRP_UNUSED0:
+		return "SPDRP_UNUSED0"
+	case SPDRP_SERVICE:
+		return "SPDRP_SERVICE"
+	case SPDRP_UNUSED1:
+		return "SPDRP_UNUSED1"
+	case SPDRP_UNUSED2:
+		return "SPDRP_UNUSED2"
+	case SPDRP_CLASS:
+		return "SPDRP_CLASS"
+	case SPDRP_CLASSGUID:
+		return "SPDRP_CLASSGUID"
+	case SPDRP_DRIVER:
+		return "SPDRP_DRIVER"
+	case SPDRP_CONFIGFLAGS:
+		return "SPDRP_CONFIGFLAGS"
+	case SPDRP_MFG:
+		return "SPDRP_MFG"
+	case SPDRP_FRIENDLYNAME:
+		return "SPDRP_FRIENDLYNAME"
+	case SPDRP_LOCATION_INFORMATION:
+		return "SPDRP_LOCATION_INFORMATION"
+	case SPDRP_PHYSICAL_DEVICE_OBJECT_NAME:
+		return "SPDRP_PHYSICAL_DEVICE_OBJECT_NAME"
+	case SPDRP_CAPABILITIES:
+		return "SPDRP_CAPABILITIES"
+	case SPDRP_UI_NUMBER:
+		return "SPDRP_UI_NUMBER"
+	case SPDRP_UPPERFILTERS:
+		return "SPDRP_UPPERFILTERS"
+	case SPDRP_LOWERFILTERS:
+		return "SPDRP_LOWERFILTERS"
+	case SPDRP_BUSTYPEGUID:
+		return "SPDRP_BUSTYPEGUID"
+	case SPDRP_LEGACYBUSTYPE:
+		return "SPDRP_LEGACYBUSTYPE"
+	case SPDRP_BUSNUMBER:
+		return "SPDRP_BUSNUMBER"
+	case SPDRP_ENUMERATOR_NAME:
+		return "SPDRP_ENUMERATOR_NAME"
+	case SPDRP_SECURITY:
+		return "SPDRP_SECURITY"
+	case SPDRP_SECURITY_SDS:
+		return "SPDRP_SECURITY_SDS"
+	case SPDRP_DEVTYPE:
+		return "SPDRP_DEVTYPE"
+	case SPDRP_EXCLUSIVE:
+		return "SPDRP_EXCLUSIVE"
+	case SPDRP_CHARACTERISTICS:
+		return "SPDRP_CHARACTERISTICS"
+	case SPDRP_ADDRESS:
+		return "SPDRP_ADDRESS"
+	case SPDRP_UI_NUMBER_DESC_FORMAT:
+		return "SPDRP_UI_NUMBER_DESC_FORMAT"
+	case SPDRP_DEVICE_POWER_DATA:
+		return "SPDRP_DEVICE_POWER_DATA"
+	case SPDRP_REMOVAL_POLICY:
+		return "SPDRP_REMOVAL_POLICY"
+	case SPDRP_REMOVAL_POLICY_HW_DEFAULT:
+		return "SPDRP_REMOVAL_POLICY_HW_DEFAULT"
+	case SPDRP_REMOVAL_POLICY_OVERRIDE:
+		return "SPDRP_REMOVAL_POLICY_OVERRIDE"
+	case SPDRP_INSTALL_STATE:
+		return "SPDRP_INSTALL_STATE"
+	case SPDRP_LOCATION_PATHS:
+		return "SPDRP_LOCATION_PATHS"
+	case SPDRP_BASE_CONTAINERID:
+		return "SPDRP_BASE_CONTAINERID"
+	case SPDRP_MAXIMUM_PROPERTY:
+		return "SPDRP_MAXIMUM_PROPERTY"
+	default:
+		return fmt.Sprintf("SETUP_DI_REGISTRY_PROPERTY(%d)", uint32(e))
+	}
+}
+
 type SETUP_DI_REMOVE_DEVICE_SCOPE uint32
 
 const (
 	DI_REMOVEDEVICE_GLOBAL         SETUP_DI_REMOVE_DEVICE_SCOPE = 1
 	DI_REMOVEDEVICE_CONFIGSPECIFIC SETUP_DI_REMOVE_DEVICE_SCOPE = 2
 )
+
+// String returns the SETUP_DI_REMOVE_DEVICE_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_DI_REMOVE_DEVICE_SCOPE) String() string {
+	switch e {
+	case DI_REMOVEDEVICE_GLOBAL:
+		return "DI_REMOVEDEVICE_GLOBAL"
+	case DI_REMOVEDEVICE_CONFIGSPECIFIC:
+		return "DI_REMOVEDEVICE_CONFIGSPECIFIC"
+	default:
+		return fmt.Sprintf("SETUP_DI_REMOVE_DEVICE_SCOPE(%d)", uint32(e))
+	}
+}
 
 type SETUP_DI_STATE_CHANGE uint32
 
@@ -835,6 +2741,25 @@ const (
 	DICS_STOP       SETUP_DI_STATE_CHANGE = 5
 )
 
+// String returns the SETUP_DI_STATE_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_DI_STATE_CHANGE) String() string {
+	switch e {
+	case DICS_ENABLE:
+		return "DICS_ENABLE"
+	case DICS_DISABLE:
+		return "DICS_DISABLE"
+	case DICS_PROPCHANGE:
+		return "DICS_PROPCHANGE"
+	case DICS_START:
+		return "DICS_START"
+	case DICS_STOP:
+		return "DICS_STOP"
+	default:
+		return fmt.Sprintf("SETUP_DI_STATE_CHANGE(%d)", uint32(e))
+	}
+}
+
 type SETUP_FILE_OPERATION uint32
 
 const (
@@ -842,6 +2767,20 @@ const (
 	FILEOP_COPY   SETUP_FILE_OPERATION = 0
 )
 
+// String returns the SETUP_FILE_OPERATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETUP_FILE_OPERATION) String() string {
+	switch e {
+	case FILEOP_DELETE:
+		return "FILEOP_DELETE"
+	case FILEOP_COPY:
+		return "FILEOP_COPY"
+	default:
+		return fmt.Sprintf("SETUP_FILE_OPERATION(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SPSVCINST_FLAGS uint32
 
 const (
@@ -866,6 +2805,74 @@ const (
 	SPSVCINST_NOCLOBBER_BOOTFLAGS          SPSVCINST_FLAGS = 262144
 )
 
+// String returns the SPSVCINST_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPSVCINST_FLAGS) String() string {
+	var parts []string
+	if e&SPSVCINST_TAGTOFRONT != 0 {
+		parts = append(parts, "SPSVCINST_TAGTOFRONT")
+	}
+	if e&SPSVCINST_ASSOCSERVICE != 0 {
+		parts = append(parts, "SPSVCINST_ASSOCSERVICE")
+	}
+	if e&SPSVCINST_DELETEEVENTLOGENTRY != 0 {
+		parts = append(parts, "SPSVCINST_DELETEEVENTLOGENTRY")
+	}
+	if e&SPSVCINST_NOCLOBBER_DISPLAYNAME != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_DISPLAYNAME")
+	}
+	if e&SPSVCINST_NOCLOBBER_STARTTYPE != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_STARTTYPE")
+	}
+	if e&SPSVCINST_NOCLOBBER_ERRORCONTROL != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_ERRORCONTROL")
+	}
+	if e&SPSVCINST_NOCLOBBER_LOADORDERGROUP != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_LOADORDERGROUP")
+	}
+	if e&SPSVCINST_NOCLOBBER_DEPENDENCIES != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_DEPENDENCIES")
+	}
+	if e&SPSVCINST_NOCLOBBER_DESCRIPTION != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_DESCRIPTION")
+	}
+	if e&SPSVCINST_STOPSERVICE != 0 {
+		parts = append(parts, "SPSVCINST_STOPSERVICE")
+	}
+	if e&SPSVCINST_CLOBBER_SECURITY != 0 {
+		parts = append(parts, "SPSVCINST_CLOBBER_SECURITY")
+	}
+	if e&SPSVCINST_STARTSERVICE != 0 {
+		parts = append(parts, "SPSVCINST_STARTSERVICE")
+	}
+	if e&SPSVCINST_NOCLOBBER_REQUIREDPRIVILEGES != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_REQUIREDPRIVILEGES")
+	}
+	if e&SPSVCINST_NOCLOBBER_TRIGGERS != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_TRIGGERS")
+	}
+	if e&SPSVCINST_NOCLOBBER_SERVICESIDTYPE != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_SERVICESIDTYPE")
+	}
+	if e&SPSVCINST_NOCLOBBER_DELAYEDAUTOSTART != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_DELAYEDAUTOSTART")
+	}
+	if e&SPSVCINST_UNIQUE_NAME != 0 {
+		parts = append(parts, "SPSVCINST_UNIQUE_NAME")
+	}
+	if e&SPSVCINST_NOCLOBBER_FAILUREACTIONS != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_FAILUREACTIONS")
+	}
+	if e&SPSVCINST_NOCLOBBER_BOOTFLAGS != 0 {
+		parts = append(parts, "SPSVCINST_NOCLOBBER_BOOTFLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SP_COPY_STYLE uint32
 
 const (
@@ -899,6 +2906,100 @@ const (
 	SP_COPY_HARDLINK            SP_COPY_STYLE = 268435456
 )
 
+// String returns the SP_COPY_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SP_COPY_STYLE) String() string {
+	var parts []string
+	if e&SP_COPY_DELETESOURCE != 0 {
+		parts = append(parts, "SP_COPY_DELETESOURCE")
+	}
+	if e&SP_COPY_REPLACEONLY != 0 {
+		parts = append(parts, "SP_COPY_REPLACEONLY")
+	}
+	if e&SP_COPY_NEWER != 0 {
+		parts = append(parts, "SP_COPY_NEWER")
+	}
+	if e&SP_COPY_NEWER_OR_SAME != 0 {
+		parts = append(parts, "SP_COPY_NEWER_OR_SAME")
+	}
+	if e&SP_COPY_NOOVERWRITE != 0 {
+		parts = append(parts, "SP_COPY_NOOVERWRITE")
+	}
+	if e&SP_COPY_NODECOMP != 0 {
+		parts = append(parts, "SP_COPY_NODECOMP")
+	}
+	if e&SP_COPY_LANGUAGEAWARE != 0 {
+		parts = append(parts, "SP_COPY_LANGUAGEAWARE")
+	}
+	if e&SP_COPY_SOURCE_ABSOLUTE != 0 {
+		parts = append(parts, "SP_COPY_SOURCE_ABSOLUTE")
+	}
+	if e&SP_COPY_SOURCEPATH_ABSOLUTE != 0 {
+		parts = append(parts, "SP_COPY_SOURCEPATH_ABSOLUTE")
+	}
+	if e&SP_COPY_IN_USE_NEEDS_REBOOT != 0 {
+		parts = append(parts, "SP_COPY_IN_USE_NEEDS_REBOOT")
+	}
+	if e&SP_COPY_FORCE_IN_USE != 0 {
+		parts = append(parts, "SP_COPY_FORCE_IN_USE")
+	}
+	if e&SP_COPY_NOSKIP != 0 {
+		parts = append(parts, "SP_COPY_NOSKIP")
+	}
+	if e&SP_COPY_FORCE_NOOVERWRITE != 0 {
+		parts = append(parts, "SP_COPY_FORCE_NOOVERWRITE")
+	}
+	if e&SP_COPY_FORCE_NEWER != 0 {
+		parts = append(parts, "SP_COPY_FORCE_NEWER")
+	}
+	if e&SP_COPY_WARNIFSKIP != 0 {
+		parts = append(parts, "SP_COPY_WARNIFSKIP")
+	}
+	if e&SP_COPY_NOBROWSE != 0 {
+		parts = append(parts, "SP_COPY_NOBROWSE")
+	}
+	if e&SP_COPY_NEWER_ONLY != 0 {
+		parts = append(parts, "SP_COPY_NEWER_ONLY")
+	}
+	if e&SP_COPY_RESERVED != 0 {
+		parts = append(parts, "SP_COPY_RESERVED")
+	}
+	if e&SP_COPY_OEMINF_CATALOG_ONLY != 0 {
+		parts = append(parts, "SP_COPY_OEMINF_CATALOG_ONLY")
+	}
+	if e&SP_COPY_REPLACE_BOOT_FILE != 0 {
+		parts = append(parts, "SP_COPY_REPLACE_BOOT_FILE")
+	}
+	if e&SP_COPY_NOPRUNE != 0 {
+		parts = append(parts, "SP_COPY_NOPRUNE")
+	}
+	if e&SP_COPY_OEM_F6_INF != 0 {
+		parts = append(parts, "SP_COPY_OEM_F6_INF")
+	}
+	if e&SP_COPY_ALREADYDECOMP != 0 {
+		parts = append(parts, "SP_COPY_ALREADYDECOMP")
+	}
+	if e&SP_COPY_WINDOWS_SIGNED != 0 {
+		parts = append(parts, "SP_COPY_WINDOWS_SIGNED")
+	}
+	if e&SP_COPY_PNPLOCKED != 0 {
+		parts = append(parts, "SP_COPY_PNPLOCKED")
+	}
+	if e&SP_COPY_IN_USE_TRY_RENAME != 0 {
+		parts = append(parts, "SP_COPY_IN_USE_TRY_RENAME")
+	}
+	if e&SP_COPY_INBOX_INF != 0 {
+		parts = append(parts, "SP_COPY_INBOX_INF")
+	}
+	if e&SP_COPY_HARDLINK != 0 {
+		parts = append(parts, "SP_COPY_HARDLINK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type SetupFileLogInfo int32
 
 const (
@@ -910,6 +3011,28 @@ const (
 	SetupFileLogMax             SetupFileLogInfo = 5
 )
 
+// String returns the SetupFileLogInfo constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SetupFileLogInfo) String() string {
+	switch e {
+	case SetupFileLogSourceFilename:
+		return "SetupFileLogSourceFilename"
+	case SetupFileLogChecksum:
+		return "SetupFileLogChecksum"
+	case SetupFileLogDiskTagfile:
+		return "SetupFileLogDiskTagfile"
+	case SetupFileLogDiskDescription:
+		return "SetupFileLogDiskDescription"
+	case SetupFileLogOtherInfo:
+		return "SetupFileLogOtherInfo"
+	case SetupFileLogMax:
+		return "SetupFileLogMax"
+	default:
+		return fmt.Sprintf("SetupFileLogInfo(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS uint32
 
 const (
@@ -918,3 +3041,25 @@ const (
 	INSTALLFLAG_NONINTERACTIVE UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS = 4
 	INSTALLFLAG_BITS           UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS = 7
 )
+
+// String returns the UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS) String() string {
+	var parts []string
+	if e&INSTALLFLAG_FORCE != 0 {
+		parts = append(parts, "INSTALLFLAG_FORCE")
+	}
+	if e&INSTALLFLAG_READONLY != 0 {
+		parts = append(parts, "INSTALLFLAG_READONLY")
+	}
+	if e&INSTALLFLAG_NONINTERACTIVE != 0 {
+		parts = append(parts, "INSTALLFLAG_NONINTERACTIVE")
+	}
+	if e&INSTALLFLAG_BITS != 0 {
+		parts = append(parts, "INSTALLFLAG_BITS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

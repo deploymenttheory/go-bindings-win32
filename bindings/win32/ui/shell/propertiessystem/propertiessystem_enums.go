@@ -4,7 +4,13 @@
 
 package propertiessystem
 
+import (
+	"fmt"
+	"strings"
+)
+
 // GETPROPERTYSTOREFLAGS: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-getpropertystoreflags
+// Bitmask — values may be combined with |.
 type GETPROPERTYSTOREFLAGS int32
 
 const (
@@ -25,6 +31,58 @@ const (
 	GPS_MASK_VALID              GETPROPERTYSTOREFLAGS = 8191
 )
 
+// String returns the GETPROPERTYSTOREFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GETPROPERTYSTOREFLAGS) String() string {
+	var parts []string
+	if e&GPS_HANDLERPROPERTIESONLY != 0 {
+		parts = append(parts, "GPS_HANDLERPROPERTIESONLY")
+	}
+	if e&GPS_READWRITE != 0 {
+		parts = append(parts, "GPS_READWRITE")
+	}
+	if e&GPS_TEMPORARY != 0 {
+		parts = append(parts, "GPS_TEMPORARY")
+	}
+	if e&GPS_FASTPROPERTIESONLY != 0 {
+		parts = append(parts, "GPS_FASTPROPERTIESONLY")
+	}
+	if e&GPS_OPENSLOWITEM != 0 {
+		parts = append(parts, "GPS_OPENSLOWITEM")
+	}
+	if e&GPS_DELAYCREATION != 0 {
+		parts = append(parts, "GPS_DELAYCREATION")
+	}
+	if e&GPS_BESTEFFORT != 0 {
+		parts = append(parts, "GPS_BESTEFFORT")
+	}
+	if e&GPS_NO_OPLOCK != 0 {
+		parts = append(parts, "GPS_NO_OPLOCK")
+	}
+	if e&GPS_PREFERQUERYPROPERTIES != 0 {
+		parts = append(parts, "GPS_PREFERQUERYPROPERTIES")
+	}
+	if e&GPS_EXTRINSICPROPERTIES != 0 {
+		parts = append(parts, "GPS_EXTRINSICPROPERTIES")
+	}
+	if e&GPS_EXTRINSICPROPERTIESONLY != 0 {
+		parts = append(parts, "GPS_EXTRINSICPROPERTIESONLY")
+	}
+	if e&GPS_VOLATILEPROPERTIES != 0 {
+		parts = append(parts, "GPS_VOLATILEPROPERTIES")
+	}
+	if e&GPS_VOLATILEPROPERTIESONLY != 0 {
+		parts = append(parts, "GPS_VOLATILEPROPERTIESONLY")
+	}
+	if e&GPS_MASK_VALID != 0 {
+		parts = append(parts, "GPS_MASK_VALID")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // PDOPSTATUS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-pdopstatus
 type PDOPSTATUS int32
 
@@ -36,7 +94,27 @@ const (
 	PDOPS_ERRORS    PDOPSTATUS = 5
 )
 
+// String returns the PDOPSTATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PDOPSTATUS) String() string {
+	switch e {
+	case PDOPS_RUNNING:
+		return "PDOPS_RUNNING"
+	case PDOPS_PAUSED:
+		return "PDOPS_PAUSED"
+	case PDOPS_CANCELLED:
+		return "PDOPS_CANCELLED"
+	case PDOPS_STOPPED:
+		return "PDOPS_STOPPED"
+	case PDOPS_ERRORS:
+		return "PDOPS_ERRORS"
+	default:
+		return fmt.Sprintf("PDOPSTATUS(%d)", int32(e))
+	}
+}
+
 // PKA_FLAGS: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-pka_flags
+// Bitmask — values may be combined with |.
 type PKA_FLAGS int32
 
 const (
@@ -45,7 +123,24 @@ const (
 	PKA_DELETE PKA_FLAGS = 2
 )
 
+// String returns the PKA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PKA_FLAGS) String() string {
+	var parts []string
+	if e&PKA_APPEND != 0 {
+		parts = append(parts, "PKA_APPEND")
+	}
+	if e&PKA_DELETE != 0 {
+		parts = append(parts, "PKA_DELETE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // PLACEHOLDER_STATES: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-placeholder_states
+// Bitmask — values may be combined with |.
 type PLACEHOLDER_STATES int32
 
 const (
@@ -57,6 +152,34 @@ const (
 	PS_DEFAULT                         PLACEHOLDER_STATES = 7
 	PS_ALL                             PLACEHOLDER_STATES = 15
 )
+
+// String returns the PLACEHOLDER_STATES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PLACEHOLDER_STATES) String() string {
+	var parts []string
+	if e&PS_MARKED_FOR_OFFLINE_AVAILABILITY != 0 {
+		parts = append(parts, "PS_MARKED_FOR_OFFLINE_AVAILABILITY")
+	}
+	if e&PS_FULL_PRIMARY_STREAM_AVAILABLE != 0 {
+		parts = append(parts, "PS_FULL_PRIMARY_STREAM_AVAILABLE")
+	}
+	if e&PS_CREATE_FILE_ACCESSIBLE != 0 {
+		parts = append(parts, "PS_CREATE_FILE_ACCESSIBLE")
+	}
+	if e&PS_CLOUDFILE_PLACEHOLDER != 0 {
+		parts = append(parts, "PS_CLOUDFILE_PLACEHOLDER")
+	}
+	if e&PS_DEFAULT != 0 {
+		parts = append(parts, "PS_DEFAULT")
+	}
+	if e&PS_ALL != 0 {
+		parts = append(parts, "PS_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // PROPDESC_AGGREGATION_TYPE: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-propdesc_aggregation_type
 type PROPDESC_AGGREGATION_TYPE int32
@@ -72,6 +195,31 @@ const (
 	PDAT_MIN       PROPDESC_AGGREGATION_TYPE = 7
 )
 
+// String returns the PROPDESC_AGGREGATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_AGGREGATION_TYPE) String() string {
+	switch e {
+	case PDAT_DEFAULT:
+		return "PDAT_DEFAULT"
+	case PDAT_FIRST:
+		return "PDAT_FIRST"
+	case PDAT_SUM:
+		return "PDAT_SUM"
+	case PDAT_AVERAGE:
+		return "PDAT_AVERAGE"
+	case PDAT_DATERANGE:
+		return "PDAT_DATERANGE"
+	case PDAT_UNION:
+		return "PDAT_UNION"
+	case PDAT_MAX:
+		return "PDAT_MAX"
+	case PDAT_MIN:
+		return "PDAT_MIN"
+	default:
+		return fmt.Sprintf("PROPDESC_AGGREGATION_TYPE(%d)", int32(e))
+	}
+}
+
 // PROPDESC_COLUMNINDEX_TYPE: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-propdesc_columnindex_type
 type PROPDESC_COLUMNINDEX_TYPE int32
 
@@ -83,6 +231,27 @@ const (
 	PDCIT_ONDISKALL    PROPDESC_COLUMNINDEX_TYPE = 4
 	PDCIT_ONDISKVECTOR PROPDESC_COLUMNINDEX_TYPE = 5
 )
+
+// String returns the PROPDESC_COLUMNINDEX_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_COLUMNINDEX_TYPE) String() string {
+	switch e {
+	case PDCIT_NONE:
+		return "PDCIT_NONE"
+	case PDCIT_ONDISK:
+		return "PDCIT_ONDISK"
+	case PDCIT_INMEMORY:
+		return "PDCIT_INMEMORY"
+	case PDCIT_ONDEMAND:
+		return "PDCIT_ONDEMAND"
+	case PDCIT_ONDISKALL:
+		return "PDCIT_ONDISKALL"
+	case PDCIT_ONDISKVECTOR:
+		return "PDCIT_ONDISKVECTOR"
+	default:
+		return fmt.Sprintf("PROPDESC_COLUMNINDEX_TYPE(%d)", int32(e))
+	}
+}
 
 // PROPDESC_CONDITION_TYPE: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-propdesc_condition_type
 type PROPDESC_CONDITION_TYPE int32
@@ -96,6 +265,27 @@ const (
 	PDCOT_NUMBER   PROPDESC_CONDITION_TYPE = 5
 )
 
+// String returns the PROPDESC_CONDITION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_CONDITION_TYPE) String() string {
+	switch e {
+	case PDCOT_NONE:
+		return "PDCOT_NONE"
+	case PDCOT_STRING:
+		return "PDCOT_STRING"
+	case PDCOT_SIZE:
+		return "PDCOT_SIZE"
+	case PDCOT_DATETIME:
+		return "PDCOT_DATETIME"
+	case PDCOT_BOOLEAN:
+		return "PDCOT_BOOLEAN"
+	case PDCOT_NUMBER:
+		return "PDCOT_NUMBER"
+	default:
+		return fmt.Sprintf("PROPDESC_CONDITION_TYPE(%d)", int32(e))
+	}
+}
+
 type PROPDESC_DISPLAYTYPE int32
 
 const (
@@ -105,6 +295,25 @@ const (
 	PDDT_DATETIME   PROPDESC_DISPLAYTYPE = 3
 	PDDT_ENUMERATED PROPDESC_DISPLAYTYPE = 4
 )
+
+// String returns the PROPDESC_DISPLAYTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_DISPLAYTYPE) String() string {
+	switch e {
+	case PDDT_STRING:
+		return "PDDT_STRING"
+	case PDDT_NUMBER:
+		return "PDDT_NUMBER"
+	case PDDT_BOOLEAN:
+		return "PDDT_BOOLEAN"
+	case PDDT_DATETIME:
+		return "PDDT_DATETIME"
+	case PDDT_ENUMERATED:
+		return "PDDT_ENUMERATED"
+	default:
+		return fmt.Sprintf("PROPDESC_DISPLAYTYPE(%d)", int32(e))
+	}
+}
 
 // PROPDESC_ENUMFILTER: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-propdesc_enumfilter
 type PROPDESC_ENUMFILTER int32
@@ -119,7 +328,31 @@ const (
 	PDEF_COLUMN          PROPDESC_ENUMFILTER = 6
 )
 
+// String returns the PROPDESC_ENUMFILTER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_ENUMFILTER) String() string {
+	switch e {
+	case PDEF_ALL:
+		return "PDEF_ALL"
+	case PDEF_SYSTEM:
+		return "PDEF_SYSTEM"
+	case PDEF_NONSYSTEM:
+		return "PDEF_NONSYSTEM"
+	case PDEF_VIEWABLE:
+		return "PDEF_VIEWABLE"
+	case PDEF_QUERYABLE:
+		return "PDEF_QUERYABLE"
+	case PDEF_INFULLTEXTQUERY:
+		return "PDEF_INFULLTEXTQUERY"
+	case PDEF_COLUMN:
+		return "PDEF_COLUMN"
+	default:
+		return fmt.Sprintf("PROPDESC_ENUMFILTER(%d)", int32(e))
+	}
+}
+
 // PROPDESC_FORMAT_FLAGS: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-propdesc_format_flags
+// Bitmask — values may be combined with |.
 type PROPDESC_FORMAT_FLAGS int32
 
 const (
@@ -140,6 +373,58 @@ const (
 	PDFF_NOAUTOREADINGORDER   PROPDESC_FORMAT_FLAGS = 8192
 )
 
+// String returns the PROPDESC_FORMAT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_FORMAT_FLAGS) String() string {
+	var parts []string
+	if e&PDFF_PREFIXNAME != 0 {
+		parts = append(parts, "PDFF_PREFIXNAME")
+	}
+	if e&PDFF_FILENAME != 0 {
+		parts = append(parts, "PDFF_FILENAME")
+	}
+	if e&PDFF_ALWAYSKB != 0 {
+		parts = append(parts, "PDFF_ALWAYSKB")
+	}
+	if e&PDFF_RESERVED_RIGHTTOLEFT != 0 {
+		parts = append(parts, "PDFF_RESERVED_RIGHTTOLEFT")
+	}
+	if e&PDFF_SHORTTIME != 0 {
+		parts = append(parts, "PDFF_SHORTTIME")
+	}
+	if e&PDFF_LONGTIME != 0 {
+		parts = append(parts, "PDFF_LONGTIME")
+	}
+	if e&PDFF_HIDETIME != 0 {
+		parts = append(parts, "PDFF_HIDETIME")
+	}
+	if e&PDFF_SHORTDATE != 0 {
+		parts = append(parts, "PDFF_SHORTDATE")
+	}
+	if e&PDFF_LONGDATE != 0 {
+		parts = append(parts, "PDFF_LONGDATE")
+	}
+	if e&PDFF_HIDEDATE != 0 {
+		parts = append(parts, "PDFF_HIDEDATE")
+	}
+	if e&PDFF_RELATIVEDATE != 0 {
+		parts = append(parts, "PDFF_RELATIVEDATE")
+	}
+	if e&PDFF_USEEDITINVITATION != 0 {
+		parts = append(parts, "PDFF_USEEDITINVITATION")
+	}
+	if e&PDFF_READONLY != 0 {
+		parts = append(parts, "PDFF_READONLY")
+	}
+	if e&PDFF_NOAUTOREADINGORDER != 0 {
+		parts = append(parts, "PDFF_NOAUTOREADINGORDER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type PROPDESC_GROUPING_RANGE int32
 
 const (
@@ -151,6 +436,29 @@ const (
 	PDGR_PERCENT      PROPDESC_GROUPING_RANGE = 5
 	PDGR_ENUMERATED   PROPDESC_GROUPING_RANGE = 6
 )
+
+// String returns the PROPDESC_GROUPING_RANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_GROUPING_RANGE) String() string {
+	switch e {
+	case PDGR_DISCRETE:
+		return "PDGR_DISCRETE"
+	case PDGR_ALPHANUMERIC:
+		return "PDGR_ALPHANUMERIC"
+	case PDGR_SIZE:
+		return "PDGR_SIZE"
+	case PDGR_DYNAMIC:
+		return "PDGR_DYNAMIC"
+	case PDGR_DATE:
+		return "PDGR_DATE"
+	case PDGR_PERCENT:
+		return "PDGR_PERCENT"
+	case PDGR_ENUMERATED:
+		return "PDGR_ENUMERATED"
+	default:
+		return fmt.Sprintf("PROPDESC_GROUPING_RANGE(%d)", int32(e))
+	}
+}
 
 // PROPDESC_RELATIVEDESCRIPTION_TYPE: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-propdesc_relativedescription_type
 type PROPDESC_RELATIVEDESCRIPTION_TYPE int32
@@ -169,7 +477,39 @@ const (
 	PDRDT_PRIORITY PROPDESC_RELATIVEDESCRIPTION_TYPE = 10
 )
 
+// String returns the PROPDESC_RELATIVEDESCRIPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_RELATIVEDESCRIPTION_TYPE) String() string {
+	switch e {
+	case PDRDT_GENERAL:
+		return "PDRDT_GENERAL"
+	case PDRDT_DATE:
+		return "PDRDT_DATE"
+	case PDRDT_SIZE:
+		return "PDRDT_SIZE"
+	case PDRDT_COUNT:
+		return "PDRDT_COUNT"
+	case PDRDT_REVISION:
+		return "PDRDT_REVISION"
+	case PDRDT_LENGTH:
+		return "PDRDT_LENGTH"
+	case PDRDT_DURATION:
+		return "PDRDT_DURATION"
+	case PDRDT_SPEED:
+		return "PDRDT_SPEED"
+	case PDRDT_RATE:
+		return "PDRDT_RATE"
+	case PDRDT_RATING:
+		return "PDRDT_RATING"
+	case PDRDT_PRIORITY:
+		return "PDRDT_PRIORITY"
+	default:
+		return fmt.Sprintf("PROPDESC_RELATIVEDESCRIPTION_TYPE(%d)", int32(e))
+	}
+}
+
 // PROPDESC_SEARCHINFO_FLAGS: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-propdesc_searchinfo_flags
+// Bitmask — values may be combined with |.
 type PROPDESC_SEARCHINFO_FLAGS int32
 
 const (
@@ -181,6 +521,31 @@ const (
 	PDSIF_USEFORTYPEAHEAD PROPDESC_SEARCHINFO_FLAGS = 16
 )
 
+// String returns the PROPDESC_SEARCHINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_SEARCHINFO_FLAGS) String() string {
+	var parts []string
+	if e&PDSIF_ININVERTEDINDEX != 0 {
+		parts = append(parts, "PDSIF_ININVERTEDINDEX")
+	}
+	if e&PDSIF_ISCOLUMN != 0 {
+		parts = append(parts, "PDSIF_ISCOLUMN")
+	}
+	if e&PDSIF_ISCOLUMNSPARSE != 0 {
+		parts = append(parts, "PDSIF_ISCOLUMNSPARSE")
+	}
+	if e&PDSIF_ALWAYSINCLUDE != 0 {
+		parts = append(parts, "PDSIF_ALWAYSINCLUDE")
+	}
+	if e&PDSIF_USEFORTYPEAHEAD != 0 {
+		parts = append(parts, "PDSIF_USEFORTYPEAHEAD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type PROPDESC_SORTDESCRIPTION int32
 
 const (
@@ -191,7 +556,27 @@ const (
 	PDSD_OLDEST_NEWEST    PROPDESC_SORTDESCRIPTION = 4
 )
 
+// String returns the PROPDESC_SORTDESCRIPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_SORTDESCRIPTION) String() string {
+	switch e {
+	case PDSD_GENERAL:
+		return "PDSD_GENERAL"
+	case PDSD_A_Z:
+		return "PDSD_A_Z"
+	case PDSD_LOWEST_HIGHEST:
+		return "PDSD_LOWEST_HIGHEST"
+	case PDSD_SMALLEST_BIGGEST:
+		return "PDSD_SMALLEST_BIGGEST"
+	case PDSD_OLDEST_NEWEST:
+		return "PDSD_OLDEST_NEWEST"
+	default:
+		return fmt.Sprintf("PROPDESC_SORTDESCRIPTION(%d)", int32(e))
+	}
+}
+
 // PROPDESC_TYPE_FLAGS: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-propdesc_type_flags
+// Bitmask — values may be combined with |.
 type PROPDESC_TYPE_FLAGS uint32
 
 const (
@@ -213,7 +598,63 @@ const (
 	PDTF_MASK_ALL                  PROPDESC_TYPE_FLAGS = 2147491839
 )
 
+// String returns the PROPDESC_TYPE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_TYPE_FLAGS) String() string {
+	var parts []string
+	if e&PDTF_MULTIPLEVALUES != 0 {
+		parts = append(parts, "PDTF_MULTIPLEVALUES")
+	}
+	if e&PDTF_ISINNATE != 0 {
+		parts = append(parts, "PDTF_ISINNATE")
+	}
+	if e&PDTF_ISGROUP != 0 {
+		parts = append(parts, "PDTF_ISGROUP")
+	}
+	if e&PDTF_CANGROUPBY != 0 {
+		parts = append(parts, "PDTF_CANGROUPBY")
+	}
+	if e&PDTF_CANSTACKBY != 0 {
+		parts = append(parts, "PDTF_CANSTACKBY")
+	}
+	if e&PDTF_ISTREEPROPERTY != 0 {
+		parts = append(parts, "PDTF_ISTREEPROPERTY")
+	}
+	if e&PDTF_INCLUDEINFULLTEXTQUERY != 0 {
+		parts = append(parts, "PDTF_INCLUDEINFULLTEXTQUERY")
+	}
+	if e&PDTF_ISVIEWABLE != 0 {
+		parts = append(parts, "PDTF_ISVIEWABLE")
+	}
+	if e&PDTF_ISQUERYABLE != 0 {
+		parts = append(parts, "PDTF_ISQUERYABLE")
+	}
+	if e&PDTF_CANBEPURGED != 0 {
+		parts = append(parts, "PDTF_CANBEPURGED")
+	}
+	if e&PDTF_SEARCHRAWVALUE != 0 {
+		parts = append(parts, "PDTF_SEARCHRAWVALUE")
+	}
+	if e&PDTF_DONTCOERCEEMPTYSTRINGS != 0 {
+		parts = append(parts, "PDTF_DONTCOERCEEMPTYSTRINGS")
+	}
+	if e&PDTF_ALWAYSINSUPPLEMENTALSTORE != 0 {
+		parts = append(parts, "PDTF_ALWAYSINSUPPLEMENTALSTORE")
+	}
+	if e&PDTF_ISSYSTEMPROPERTY != 0 {
+		parts = append(parts, "PDTF_ISSYSTEMPROPERTY")
+	}
+	if e&PDTF_MASK_ALL != 0 {
+		parts = append(parts, "PDTF_MASK_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // PROPDESC_VIEW_FLAGS: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-propdesc_view_flags
+// Bitmask — values may be combined with |.
 type PROPDESC_VIEW_FLAGS int32
 
 const (
@@ -233,6 +674,55 @@ const (
 	PDVF_MASK_ALL            PROPDESC_VIEW_FLAGS = 7167
 )
 
+// String returns the PROPDESC_VIEW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPDESC_VIEW_FLAGS) String() string {
+	var parts []string
+	if e&PDVF_CENTERALIGN != 0 {
+		parts = append(parts, "PDVF_CENTERALIGN")
+	}
+	if e&PDVF_RIGHTALIGN != 0 {
+		parts = append(parts, "PDVF_RIGHTALIGN")
+	}
+	if e&PDVF_BEGINNEWGROUP != 0 {
+		parts = append(parts, "PDVF_BEGINNEWGROUP")
+	}
+	if e&PDVF_FILLAREA != 0 {
+		parts = append(parts, "PDVF_FILLAREA")
+	}
+	if e&PDVF_SORTDESCENDING != 0 {
+		parts = append(parts, "PDVF_SORTDESCENDING")
+	}
+	if e&PDVF_SHOWONLYIFPRESENT != 0 {
+		parts = append(parts, "PDVF_SHOWONLYIFPRESENT")
+	}
+	if e&PDVF_SHOWBYDEFAULT != 0 {
+		parts = append(parts, "PDVF_SHOWBYDEFAULT")
+	}
+	if e&PDVF_SHOWINPRIMARYLIST != 0 {
+		parts = append(parts, "PDVF_SHOWINPRIMARYLIST")
+	}
+	if e&PDVF_SHOWINSECONDARYLIST != 0 {
+		parts = append(parts, "PDVF_SHOWINSECONDARYLIST")
+	}
+	if e&PDVF_HIDELABEL != 0 {
+		parts = append(parts, "PDVF_HIDELABEL")
+	}
+	if e&PDVF_HIDDEN != 0 {
+		parts = append(parts, "PDVF_HIDDEN")
+	}
+	if e&PDVF_CANWRAP != 0 {
+		parts = append(parts, "PDVF_CANWRAP")
+	}
+	if e&PDVF_MASK_ALL != 0 {
+		parts = append(parts, "PDVF_MASK_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type PROPENUMTYPE int32
 
 const (
@@ -242,6 +732,24 @@ const (
 	PET_ENDRANGE      PROPENUMTYPE = 3
 )
 
+// String returns the PROPENUMTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPENUMTYPE) String() string {
+	switch e {
+	case PET_DISCRETEVALUE:
+		return "PET_DISCRETEVALUE"
+	case PET_RANGEDVALUE:
+		return "PET_RANGEDVALUE"
+	case PET_DEFAULTVALUE:
+		return "PET_DEFAULTVALUE"
+	case PET_ENDRANGE:
+		return "PET_ENDRANGE"
+	default:
+		return fmt.Sprintf("PROPENUMTYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PROPERTYUI_FLAGS int32
 
 const (
@@ -250,6 +758,23 @@ const (
 	PUIF_NOLABELININFOTIP PROPERTYUI_FLAGS = 2
 )
 
+// String returns the PROPERTYUI_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPERTYUI_FLAGS) String() string {
+	var parts []string
+	if e&PUIF_RIGHTALIGN != 0 {
+		parts = append(parts, "PUIF_RIGHTALIGN")
+	}
+	if e&PUIF_NOLABELININFOTIP != 0 {
+		parts = append(parts, "PUIF_NOLABELININFOTIP")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PROPERTYUI_FORMAT_FLAGS int32
 
 const (
@@ -260,12 +785,48 @@ const (
 	PUIFFDF_FRIENDLYDATE PROPERTYUI_FORMAT_FLAGS = 8
 )
 
+// String returns the PROPERTYUI_FORMAT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPERTYUI_FORMAT_FLAGS) String() string {
+	var parts []string
+	if e&PUIFFDF_RIGHTTOLEFT != 0 {
+		parts = append(parts, "PUIFFDF_RIGHTTOLEFT")
+	}
+	if e&PUIFFDF_SHORTFORMAT != 0 {
+		parts = append(parts, "PUIFFDF_SHORTFORMAT")
+	}
+	if e&PUIFFDF_NOTIME != 0 {
+		parts = append(parts, "PUIFFDF_NOTIME")
+	}
+	if e&PUIFFDF_FRIENDLYDATE != 0 {
+		parts = append(parts, "PUIFFDF_FRIENDLYDATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PROPERTYUI_NAME_FLAGS int32
 
 const (
 	PUIFNF_DEFAULT  PROPERTYUI_NAME_FLAGS = 0
 	PUIFNF_MNEMONIC PROPERTYUI_NAME_FLAGS = 1
 )
+
+// String returns the PROPERTYUI_NAME_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPERTYUI_NAME_FLAGS) String() string {
+	var parts []string
+	if e&PUIFNF_MNEMONIC != 0 {
+		parts = append(parts, "PUIFNF_MNEMONIC")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // PSC_STATE: https://learn.microsoft.com/windows/win32/api/propsys/ne-propsys-psc_state
 type PSC_STATE int32
@@ -277,7 +838,25 @@ const (
 	PSC_READONLY    PSC_STATE = 3
 )
 
+// String returns the PSC_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSC_STATE) String() string {
+	switch e {
+	case PSC_NORMAL:
+		return "PSC_NORMAL"
+	case PSC_NOTINSOURCE:
+		return "PSC_NOTINSOURCE"
+	case PSC_DIRTY:
+		return "PSC_DIRTY"
+	case PSC_READONLY:
+		return "PSC_READONLY"
+	default:
+		return fmt.Sprintf("PSC_STATE(%d)", int32(e))
+	}
+}
+
 // SYNC_ENGINE_STATE_FLAGS: https://learn.microsoft.com/windows/win32/api/shobjidl/ne-shobjidl-sync_engine_state_flags
+// Bitmask — values may be combined with |.
 type SYNC_ENGINE_STATE_FLAGS int32
 
 const (
@@ -294,7 +873,48 @@ const (
 	SESF_ALL_FLAGS                     SYNC_ENGINE_STATE_FLAGS = 511
 )
 
+// String returns the SYNC_ENGINE_STATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNC_ENGINE_STATE_FLAGS) String() string {
+	var parts []string
+	if e&SESF_SERVICE_QUOTA_NEARING_LIMIT != 0 {
+		parts = append(parts, "SESF_SERVICE_QUOTA_NEARING_LIMIT")
+	}
+	if e&SESF_SERVICE_QUOTA_EXCEEDED_LIMIT != 0 {
+		parts = append(parts, "SESF_SERVICE_QUOTA_EXCEEDED_LIMIT")
+	}
+	if e&SESF_AUTHENTICATION_ERROR != 0 {
+		parts = append(parts, "SESF_AUTHENTICATION_ERROR")
+	}
+	if e&SESF_PAUSED_DUE_TO_METERED_NETWORK != 0 {
+		parts = append(parts, "SESF_PAUSED_DUE_TO_METERED_NETWORK")
+	}
+	if e&SESF_PAUSED_DUE_TO_DISK_SPACE_FULL != 0 {
+		parts = append(parts, "SESF_PAUSED_DUE_TO_DISK_SPACE_FULL")
+	}
+	if e&SESF_PAUSED_DUE_TO_CLIENT_POLICY != 0 {
+		parts = append(parts, "SESF_PAUSED_DUE_TO_CLIENT_POLICY")
+	}
+	if e&SESF_PAUSED_DUE_TO_SERVICE_POLICY != 0 {
+		parts = append(parts, "SESF_PAUSED_DUE_TO_SERVICE_POLICY")
+	}
+	if e&SESF_SERVICE_UNAVAILABLE != 0 {
+		parts = append(parts, "SESF_SERVICE_UNAVAILABLE")
+	}
+	if e&SESF_PAUSED_DUE_TO_USER_REQUEST != 0 {
+		parts = append(parts, "SESF_PAUSED_DUE_TO_USER_REQUEST")
+	}
+	if e&SESF_ALL_FLAGS != 0 {
+		parts = append(parts, "SESF_ALL_FLAGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // SYNC_TRANSFER_STATUS: https://learn.microsoft.com/windows/win32/api/shobjidl_core/ne-shobjidl_core-sync_transfer_status
+// Bitmask — values may be combined with |.
 type SYNC_TRANSFER_STATUS int32
 
 const (
@@ -312,6 +932,49 @@ const (
 	STS_PLACEHOLDER_IFEMPTY    SYNC_TRANSFER_STATUS = 1024
 )
 
+// String returns the SYNC_TRANSFER_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYNC_TRANSFER_STATUS) String() string {
+	var parts []string
+	if e&STS_NEEDSUPLOAD != 0 {
+		parts = append(parts, "STS_NEEDSUPLOAD")
+	}
+	if e&STS_NEEDSDOWNLOAD != 0 {
+		parts = append(parts, "STS_NEEDSDOWNLOAD")
+	}
+	if e&STS_TRANSFERRING != 0 {
+		parts = append(parts, "STS_TRANSFERRING")
+	}
+	if e&STS_PAUSED != 0 {
+		parts = append(parts, "STS_PAUSED")
+	}
+	if e&STS_HASERROR != 0 {
+		parts = append(parts, "STS_HASERROR")
+	}
+	if e&STS_FETCHING_METADATA != 0 {
+		parts = append(parts, "STS_FETCHING_METADATA")
+	}
+	if e&STS_USER_REQUESTED_REFRESH != 0 {
+		parts = append(parts, "STS_USER_REQUESTED_REFRESH")
+	}
+	if e&STS_HASWARNING != 0 {
+		parts = append(parts, "STS_HASWARNING")
+	}
+	if e&STS_EXCLUDED != 0 {
+		parts = append(parts, "STS_EXCLUDED")
+	}
+	if e&STS_INCOMPLETE != 0 {
+		parts = append(parts, "STS_INCOMPLETE")
+	}
+	if e&STS_PLACEHOLDER_IFEMPTY != 0 {
+		parts = append(parts, "STS_PLACEHOLDER_IFEMPTY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type PERSIST_SPROPSTORE_FLAGS int32
 
 const (
@@ -319,3 +982,18 @@ const (
 	FPSPS_READONLY                  PERSIST_SPROPSTORE_FLAGS = 1
 	FPSPS_TREAT_NEW_VALUES_AS_DIRTY PERSIST_SPROPSTORE_FLAGS = 2
 )
+
+// String returns the PERSIST_SPROPSTORE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PERSIST_SPROPSTORE_FLAGS) String() string {
+	switch e {
+	case FPSPS_DEFAULT:
+		return "FPSPS_DEFAULT"
+	case FPSPS_READONLY:
+		return "FPSPS_READONLY"
+	case FPSPS_TREAT_NEW_VALUES_AS_DIRTY:
+		return "FPSPS_TREAT_NEW_VALUES_AS_DIRTY"
+	default:
+		return fmt.Sprintf("PERSIST_SPROPSTORE_FLAGS(%d)", int32(e))
+	}
+}

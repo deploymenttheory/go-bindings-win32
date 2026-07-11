@@ -4,6 +4,10 @@
 
 package datadeduplication
 
+import (
+	"fmt"
+)
+
 // DEDUP_BACKUP_SUPPORT_PARAM_TYPE: https://learn.microsoft.com/windows/win32/api/ddpbackup/ne-ddpbackup-dedup_backup_support_param_type
 type DEDUP_BACKUP_SUPPORT_PARAM_TYPE int32
 
@@ -11,6 +15,19 @@ const (
 	DEDUP_RECONSTRUCT_UNOPTIMIZED DEDUP_BACKUP_SUPPORT_PARAM_TYPE = 1
 	DEDUP_RECONSTRUCT_OPTIMIZED   DEDUP_BACKUP_SUPPORT_PARAM_TYPE = 2
 )
+
+// String returns the DEDUP_BACKUP_SUPPORT_PARAM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEDUP_BACKUP_SUPPORT_PARAM_TYPE) String() string {
+	switch e {
+	case DEDUP_RECONSTRUCT_UNOPTIMIZED:
+		return "DEDUP_RECONSTRUCT_UNOPTIMIZED"
+	case DEDUP_RECONSTRUCT_OPTIMIZED:
+		return "DEDUP_RECONSTRUCT_OPTIMIZED"
+	default:
+		return fmt.Sprintf("DEDUP_BACKUP_SUPPORT_PARAM_TYPE(%d)", int32(e))
+	}
+}
 
 type DEDUP_SET_PARAM_TYPE int32
 
@@ -22,12 +39,44 @@ const (
 	DEDUP_PT_DisableStrongHashComputation DEDUP_SET_PARAM_TYPE = 5
 )
 
+// String returns the DEDUP_SET_PARAM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEDUP_SET_PARAM_TYPE) String() string {
+	switch e {
+	case DEDUP_PT_MinChunkSizeBytes:
+		return "DEDUP_PT_MinChunkSizeBytes"
+	case DEDUP_PT_MaxChunkSizeBytes:
+		return "DEDUP_PT_MaxChunkSizeBytes"
+	case DEDUP_PT_AvgChunkSizeBytes:
+		return "DEDUP_PT_AvgChunkSizeBytes"
+	case DEDUP_PT_InvariantChunking:
+		return "DEDUP_PT_InvariantChunking"
+	case DEDUP_PT_DisableStrongHashComputation:
+		return "DEDUP_PT_DisableStrongHashComputation"
+	default:
+		return fmt.Sprintf("DEDUP_SET_PARAM_TYPE(%d)", int32(e))
+	}
+}
+
 type DedupChunkFlags int32
 
 const (
 	DedupChunkFlags_None       DedupChunkFlags = 0
 	DedupChunkFlags_Compressed DedupChunkFlags = 1
 )
+
+// String returns the DedupChunkFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DedupChunkFlags) String() string {
+	switch e {
+	case DedupChunkFlags_None:
+		return "DedupChunkFlags_None"
+	case DedupChunkFlags_Compressed:
+		return "DedupChunkFlags_Compressed"
+	default:
+		return fmt.Sprintf("DedupChunkFlags(%d)", int32(e))
+	}
+}
 
 type DedupChunkingAlgorithm int32
 
@@ -36,12 +85,38 @@ const (
 	DedupChunkingAlgorithm_V1       DedupChunkingAlgorithm = 1
 )
 
+// String returns the DedupChunkingAlgorithm constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DedupChunkingAlgorithm) String() string {
+	switch e {
+	case DedupChunkingAlgorithm_Unknonwn:
+		return "DedupChunkingAlgorithm_Unknonwn"
+	case DedupChunkingAlgorithm_V1:
+		return "DedupChunkingAlgorithm_V1"
+	default:
+		return fmt.Sprintf("DedupChunkingAlgorithm(%d)", int32(e))
+	}
+}
+
 type DedupCompressionAlgorithm int32
 
 const (
 	DedupCompressionAlgorithm_Unknonwn DedupCompressionAlgorithm = 0
 	DedupCompressionAlgorithm_Xpress   DedupCompressionAlgorithm = 1
 )
+
+// String returns the DedupCompressionAlgorithm constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DedupCompressionAlgorithm) String() string {
+	switch e {
+	case DedupCompressionAlgorithm_Unknonwn:
+		return "DedupCompressionAlgorithm_Unknonwn"
+	case DedupCompressionAlgorithm_Xpress:
+		return "DedupCompressionAlgorithm_Xpress"
+	default:
+		return fmt.Sprintf("DedupCompressionAlgorithm(%d)", int32(e))
+	}
+}
 
 type DedupDataPortManagerOption int32
 
@@ -50,6 +125,21 @@ const (
 	DedupDataPortManagerOption_AutoStart          DedupDataPortManagerOption = 1
 	DedupDataPortManagerOption_SkipReconciliation DedupDataPortManagerOption = 2
 )
+
+// String returns the DedupDataPortManagerOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DedupDataPortManagerOption) String() string {
+	switch e {
+	case DedupDataPortManagerOption_None:
+		return "DedupDataPortManagerOption_None"
+	case DedupDataPortManagerOption_AutoStart:
+		return "DedupDataPortManagerOption_AutoStart"
+	case DedupDataPortManagerOption_SkipReconciliation:
+		return "DedupDataPortManagerOption_SkipReconciliation"
+	default:
+		return fmt.Sprintf("DedupDataPortManagerOption(%d)", int32(e))
+	}
+}
 
 type DedupDataPortRequestStatus int32
 
@@ -61,6 +151,27 @@ const (
 	DedupDataPortRequestStatus_Complete   DedupDataPortRequestStatus = 4
 	DedupDataPortRequestStatus_Failed     DedupDataPortRequestStatus = 5
 )
+
+// String returns the DedupDataPortRequestStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DedupDataPortRequestStatus) String() string {
+	switch e {
+	case DedupDataPortRequestStatus_Unknown:
+		return "DedupDataPortRequestStatus_Unknown"
+	case DedupDataPortRequestStatus_Queued:
+		return "DedupDataPortRequestStatus_Queued"
+	case DedupDataPortRequestStatus_Processing:
+		return "DedupDataPortRequestStatus_Processing"
+	case DedupDataPortRequestStatus_Partial:
+		return "DedupDataPortRequestStatus_Partial"
+	case DedupDataPortRequestStatus_Complete:
+		return "DedupDataPortRequestStatus_Complete"
+	case DedupDataPortRequestStatus_Failed:
+		return "DedupDataPortRequestStatus_Failed"
+	default:
+		return fmt.Sprintf("DedupDataPortRequestStatus(%d)", int32(e))
+	}
+}
 
 type DedupDataPortVolumeStatus int32
 
@@ -74,9 +185,45 @@ const (
 	DedupDataPortVolumeStatus_Shutdown     DedupDataPortVolumeStatus = 6
 )
 
+// String returns the DedupDataPortVolumeStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DedupDataPortVolumeStatus) String() string {
+	switch e {
+	case DedupDataPortVolumeStatus_Unknown:
+		return "DedupDataPortVolumeStatus_Unknown"
+	case DedupDataPortVolumeStatus_NotEnabled:
+		return "DedupDataPortVolumeStatus_NotEnabled"
+	case DedupDataPortVolumeStatus_NotAvailable:
+		return "DedupDataPortVolumeStatus_NotAvailable"
+	case DedupDataPortVolumeStatus_Initializing:
+		return "DedupDataPortVolumeStatus_Initializing"
+	case DedupDataPortVolumeStatus_Ready:
+		return "DedupDataPortVolumeStatus_Ready"
+	case DedupDataPortVolumeStatus_Maintenance:
+		return "DedupDataPortVolumeStatus_Maintenance"
+	case DedupDataPortVolumeStatus_Shutdown:
+		return "DedupDataPortVolumeStatus_Shutdown"
+	default:
+		return fmt.Sprintf("DedupDataPortVolumeStatus(%d)", int32(e))
+	}
+}
+
 type DedupHashingAlgorithm int32
 
 const (
 	DedupHashingAlgorithm_Unknonwn DedupHashingAlgorithm = 0
 	DedupHashingAlgorithm_V1       DedupHashingAlgorithm = 1
 )
+
+// String returns the DedupHashingAlgorithm constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DedupHashingAlgorithm) String() string {
+	switch e {
+	case DedupHashingAlgorithm_Unknonwn:
+		return "DedupHashingAlgorithm_Unknonwn"
+	case DedupHashingAlgorithm_V1:
+		return "DedupHashingAlgorithm_V1"
+	default:
+		return fmt.Sprintf("DedupHashingAlgorithm(%d)", int32(e))
+	}
+}

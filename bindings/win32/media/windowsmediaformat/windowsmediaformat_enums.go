@@ -4,6 +4,10 @@
 
 package windowsmediaformat
 
+import (
+	"fmt"
+)
+
 // NETSOURCE_URLCREDPOLICY_SETTINGS: https://learn.microsoft.com/windows/win32/api/wmsinternaladminnetsource/ne-wmsinternaladminnetsource-netsource_urlcredpolicy_settings
 type NETSOURCE_URLCREDPOLICY_SETTINGS int32
 
@@ -13,12 +17,40 @@ const (
 	NETSOURCE_URLCREDPOLICY_SETTING_ANONYMOUSONLY  NETSOURCE_URLCREDPOLICY_SETTINGS = 2
 )
 
+// String returns the NETSOURCE_URLCREDPOLICY_SETTINGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NETSOURCE_URLCREDPOLICY_SETTINGS) String() string {
+	switch e {
+	case NETSOURCE_URLCREDPOLICY_SETTING_SILENTLOGONOK:
+		return "NETSOURCE_URLCREDPOLICY_SETTING_SILENTLOGONOK"
+	case NETSOURCE_URLCREDPOLICY_SETTING_MUSTPROMPTUSER:
+		return "NETSOURCE_URLCREDPOLICY_SETTING_MUSTPROMPTUSER"
+	case NETSOURCE_URLCREDPOLICY_SETTING_ANONYMOUSONLY:
+		return "NETSOURCE_URLCREDPOLICY_SETTING_ANONYMOUSONLY"
+	default:
+		return fmt.Sprintf("NETSOURCE_URLCREDPOLICY_SETTINGS(%d)", int32(e))
+	}
+}
+
 type WEBSTREAM_SAMPLE_TYPE int32
 
 const (
 	WEBSTREAM_SAMPLE_TYPE_FILE   WEBSTREAM_SAMPLE_TYPE = 1
 	WEBSTREAM_SAMPLE_TYPE_RENDER WEBSTREAM_SAMPLE_TYPE = 2
 )
+
+// String returns the WEBSTREAM_SAMPLE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WEBSTREAM_SAMPLE_TYPE) String() string {
+	switch e {
+	case WEBSTREAM_SAMPLE_TYPE_FILE:
+		return "WEBSTREAM_SAMPLE_TYPE_FILE"
+	case WEBSTREAM_SAMPLE_TYPE_RENDER:
+		return "WEBSTREAM_SAMPLE_TYPE_RENDER"
+	default:
+		return fmt.Sprintf("WEBSTREAM_SAMPLE_TYPE(%d)", int32(e))
+	}
+}
 
 // WMT_ATTR_DATATYPE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_attr_datatype
 type WMT_ATTR_DATATYPE int32
@@ -33,6 +65,29 @@ const (
 	WMT_TYPE_GUID   WMT_ATTR_DATATYPE = 6
 )
 
+// String returns the WMT_ATTR_DATATYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_ATTR_DATATYPE) String() string {
+	switch e {
+	case WMT_TYPE_DWORD:
+		return "WMT_TYPE_DWORD"
+	case WMT_TYPE_STRING:
+		return "WMT_TYPE_STRING"
+	case WMT_TYPE_BINARY:
+		return "WMT_TYPE_BINARY"
+	case WMT_TYPE_BOOL:
+		return "WMT_TYPE_BOOL"
+	case WMT_TYPE_QWORD:
+		return "WMT_TYPE_QWORD"
+	case WMT_TYPE_WORD:
+		return "WMT_TYPE_WORD"
+	case WMT_TYPE_GUID:
+		return "WMT_TYPE_GUID"
+	default:
+		return fmt.Sprintf("WMT_ATTR_DATATYPE(%d)", int32(e))
+	}
+}
+
 // WMT_ATTR_IMAGETYPE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_attr_imagetype
 type WMT_ATTR_IMAGETYPE int32
 
@@ -42,6 +97,21 @@ const (
 	WMT_IMAGETYPE_GIF    WMT_ATTR_IMAGETYPE = 3
 )
 
+// String returns the WMT_ATTR_IMAGETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_ATTR_IMAGETYPE) String() string {
+	switch e {
+	case WMT_IMAGETYPE_BITMAP:
+		return "WMT_IMAGETYPE_BITMAP"
+	case WMT_IMAGETYPE_JPEG:
+		return "WMT_IMAGETYPE_JPEG"
+	case WMT_IMAGETYPE_GIF:
+		return "WMT_IMAGETYPE_GIF"
+	default:
+		return fmt.Sprintf("WMT_ATTR_IMAGETYPE(%d)", int32(e))
+	}
+}
+
 // WMT_CODEC_INFO_TYPE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_codec_info_type
 type WMT_CODEC_INFO_TYPE int32
 
@@ -50,6 +120,21 @@ const (
 	WMT_CODECINFO_VIDEO   WMT_CODEC_INFO_TYPE = 1
 	WMT_CODECINFO_UNKNOWN WMT_CODEC_INFO_TYPE = -1
 )
+
+// String returns the WMT_CODEC_INFO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_CODEC_INFO_TYPE) String() string {
+	switch e {
+	case WMT_CODECINFO_AUDIO:
+		return "WMT_CODECINFO_AUDIO"
+	case WMT_CODECINFO_VIDEO:
+		return "WMT_CODECINFO_VIDEO"
+	case WMT_CODECINFO_UNKNOWN:
+		return "WMT_CODECINFO_UNKNOWN"
+	default:
+		return fmt.Sprintf("WMT_CODEC_INFO_TYPE(%d)", int32(e))
+	}
+}
 
 // WMT_CREDENTIAL_FLAGS: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_credential_flags
 type WMT_CREDENTIAL_FLAGS int32
@@ -62,6 +147,25 @@ const (
 	WMT_CREDENTIAL_ENCRYPT    WMT_CREDENTIAL_FLAGS = 16
 )
 
+// String returns the WMT_CREDENTIAL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_CREDENTIAL_FLAGS) String() string {
+	switch e {
+	case WMT_CREDENTIAL_SAVE:
+		return "WMT_CREDENTIAL_SAVE"
+	case WMT_CREDENTIAL_DONT_CACHE:
+		return "WMT_CREDENTIAL_DONT_CACHE"
+	case WMT_CREDENTIAL_CLEAR_TEXT:
+		return "WMT_CREDENTIAL_CLEAR_TEXT"
+	case WMT_CREDENTIAL_PROXY:
+		return "WMT_CREDENTIAL_PROXY"
+	case WMT_CREDENTIAL_ENCRYPT:
+		return "WMT_CREDENTIAL_ENCRYPT"
+	default:
+		return fmt.Sprintf("WMT_CREDENTIAL_FLAGS(%d)", int32(e))
+	}
+}
+
 // WMT_DRMLA_TRUST: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_drmla_trust
 type WMT_DRMLA_TRUST int32
 
@@ -71,6 +175,21 @@ const (
 	WMT_DRMLA_TAMPERED  WMT_DRMLA_TRUST = 2
 )
 
+// String returns the WMT_DRMLA_TRUST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_DRMLA_TRUST) String() string {
+	switch e {
+	case WMT_DRMLA_UNTRUSTED:
+		return "WMT_DRMLA_UNTRUSTED"
+	case WMT_DRMLA_TRUSTED:
+		return "WMT_DRMLA_TRUSTED"
+	case WMT_DRMLA_TAMPERED:
+		return "WMT_DRMLA_TAMPERED"
+	default:
+		return fmt.Sprintf("WMT_DRMLA_TRUST(%d)", int32(e))
+	}
+}
+
 // WMT_FILESINK_MODE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_filesink_mode
 type WMT_FILESINK_MODE int32
 
@@ -79,6 +198,21 @@ const (
 	WMT_FM_FILESINK_DATA_UNITS WMT_FILESINK_MODE = 2
 	WMT_FM_FILESINK_UNBUFFERED WMT_FILESINK_MODE = 4
 )
+
+// String returns the WMT_FILESINK_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_FILESINK_MODE) String() string {
+	switch e {
+	case WMT_FM_SINGLE_BUFFERS:
+		return "WMT_FM_SINGLE_BUFFERS"
+	case WMT_FM_FILESINK_DATA_UNITS:
+		return "WMT_FM_FILESINK_DATA_UNITS"
+	case WMT_FM_FILESINK_UNBUFFERED:
+		return "WMT_FM_FILESINK_UNBUFFERED"
+	default:
+		return fmt.Sprintf("WMT_FILESINK_MODE(%d)", int32(e))
+	}
+}
 
 // WMT_IMAGE_TYPE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_image_type
 type WMT_IMAGE_TYPE int32
@@ -90,6 +224,23 @@ const (
 	WMT_IT_GIF    WMT_IMAGE_TYPE = 3
 )
 
+// String returns the WMT_IMAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_IMAGE_TYPE) String() string {
+	switch e {
+	case WMT_IT_NONE:
+		return "WMT_IT_NONE"
+	case WMT_IT_BITMAP:
+		return "WMT_IT_BITMAP"
+	case WMT_IT_JPEG:
+		return "WMT_IT_JPEG"
+	case WMT_IT_GIF:
+		return "WMT_IT_GIF"
+	default:
+		return fmt.Sprintf("WMT_IMAGE_TYPE(%d)", int32(e))
+	}
+}
+
 // WMT_INDEXER_TYPE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_indexer_type
 type WMT_INDEXER_TYPE int32
 
@@ -98,6 +249,21 @@ const (
 	WMT_IT_FRAME_NUMBERS     WMT_INDEXER_TYPE = 1
 	WMT_IT_TIMECODE          WMT_INDEXER_TYPE = 2
 )
+
+// String returns the WMT_INDEXER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_INDEXER_TYPE) String() string {
+	switch e {
+	case WMT_IT_PRESENTATION_TIME:
+		return "WMT_IT_PRESENTATION_TIME"
+	case WMT_IT_FRAME_NUMBERS:
+		return "WMT_IT_FRAME_NUMBERS"
+	case WMT_IT_TIMECODE:
+		return "WMT_IT_TIMECODE"
+	default:
+		return fmt.Sprintf("WMT_INDEXER_TYPE(%d)", int32(e))
+	}
+}
 
 // WMT_INDEX_TYPE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_index_type
 type WMT_INDEX_TYPE int32
@@ -108,6 +274,21 @@ const (
 	WMT_IT_NEAREST_CLEAN_POINT WMT_INDEX_TYPE = 3
 )
 
+// String returns the WMT_INDEX_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_INDEX_TYPE) String() string {
+	switch e {
+	case WMT_IT_NEAREST_DATA_UNIT:
+		return "WMT_IT_NEAREST_DATA_UNIT"
+	case WMT_IT_NEAREST_OBJECT:
+		return "WMT_IT_NEAREST_OBJECT"
+	case WMT_IT_NEAREST_CLEAN_POINT:
+		return "WMT_IT_NEAREST_CLEAN_POINT"
+	default:
+		return fmt.Sprintf("WMT_INDEX_TYPE(%d)", int32(e))
+	}
+}
+
 // WMT_MUSICSPEECH_CLASS_MODE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_musicspeech_class_mode
 type WMT_MUSICSPEECH_CLASS_MODE int32
 
@@ -117,12 +298,38 @@ const (
 	WMT_MS_CLASS_MIXED  WMT_MUSICSPEECH_CLASS_MODE = 2
 )
 
+// String returns the WMT_MUSICSPEECH_CLASS_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_MUSICSPEECH_CLASS_MODE) String() string {
+	switch e {
+	case WMT_MS_CLASS_MUSIC:
+		return "WMT_MS_CLASS_MUSIC"
+	case WMT_MS_CLASS_SPEECH:
+		return "WMT_MS_CLASS_SPEECH"
+	case WMT_MS_CLASS_MIXED:
+		return "WMT_MS_CLASS_MIXED"
+	default:
+		return fmt.Sprintf("WMT_MUSICSPEECH_CLASS_MODE(%d)", int32(e))
+	}
+}
+
 // WMT_NET_PROTOCOL: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_net_protocol
 type WMT_NET_PROTOCOL int32
 
 const (
 	WMT_PROTOCOL_HTTP WMT_NET_PROTOCOL = 0
 )
+
+// String returns the WMT_NET_PROTOCOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_NET_PROTOCOL) String() string {
+	switch e {
+	case WMT_PROTOCOL_HTTP:
+		return "WMT_PROTOCOL_HTTP"
+	default:
+		return fmt.Sprintf("WMT_NET_PROTOCOL(%d)", int32(e))
+	}
+}
 
 // WMT_OFFSET_FORMAT: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_offset_format
 type WMT_OFFSET_FORMAT int32
@@ -135,6 +342,25 @@ const (
 	WMT_OFFSET_FORMAT_100NS_APPROXIMATE WMT_OFFSET_FORMAT = 4
 )
 
+// String returns the WMT_OFFSET_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_OFFSET_FORMAT) String() string {
+	switch e {
+	case WMT_OFFSET_FORMAT_100NS:
+		return "WMT_OFFSET_FORMAT_100NS"
+	case WMT_OFFSET_FORMAT_FRAME_NUMBERS:
+		return "WMT_OFFSET_FORMAT_FRAME_NUMBERS"
+	case WMT_OFFSET_FORMAT_PLAYLIST_OFFSET:
+		return "WMT_OFFSET_FORMAT_PLAYLIST_OFFSET"
+	case WMT_OFFSET_FORMAT_TIMECODE:
+		return "WMT_OFFSET_FORMAT_TIMECODE"
+	case WMT_OFFSET_FORMAT_100NS_APPROXIMATE:
+		return "WMT_OFFSET_FORMAT_100NS_APPROXIMATE"
+	default:
+		return fmt.Sprintf("WMT_OFFSET_FORMAT(%d)", int32(e))
+	}
+}
+
 // WMT_PLAY_MODE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_play_mode
 type WMT_PLAY_MODE int32
 
@@ -144,6 +370,23 @@ const (
 	WMT_PLAY_MODE_DOWNLOAD   WMT_PLAY_MODE = 2
 	WMT_PLAY_MODE_STREAMING  WMT_PLAY_MODE = 3
 )
+
+// String returns the WMT_PLAY_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_PLAY_MODE) String() string {
+	switch e {
+	case WMT_PLAY_MODE_AUTOSELECT:
+		return "WMT_PLAY_MODE_AUTOSELECT"
+	case WMT_PLAY_MODE_LOCAL:
+		return "WMT_PLAY_MODE_LOCAL"
+	case WMT_PLAY_MODE_DOWNLOAD:
+		return "WMT_PLAY_MODE_DOWNLOAD"
+	case WMT_PLAY_MODE_STREAMING:
+		return "WMT_PLAY_MODE_STREAMING"
+	default:
+		return fmt.Sprintf("WMT_PLAY_MODE(%d)", int32(e))
+	}
+}
 
 // WMT_PROXY_SETTINGS: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_proxy_settings
 type WMT_PROXY_SETTINGS int32
@@ -155,6 +398,25 @@ const (
 	WMT_PROXY_SETTING_BROWSER WMT_PROXY_SETTINGS = 3
 	WMT_PROXY_SETTING_MAX     WMT_PROXY_SETTINGS = 4
 )
+
+// String returns the WMT_PROXY_SETTINGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_PROXY_SETTINGS) String() string {
+	switch e {
+	case WMT_PROXY_SETTING_NONE:
+		return "WMT_PROXY_SETTING_NONE"
+	case WMT_PROXY_SETTING_MANUAL:
+		return "WMT_PROXY_SETTING_MANUAL"
+	case WMT_PROXY_SETTING_AUTO:
+		return "WMT_PROXY_SETTING_AUTO"
+	case WMT_PROXY_SETTING_BROWSER:
+		return "WMT_PROXY_SETTING_BROWSER"
+	case WMT_PROXY_SETTING_MAX:
+		return "WMT_PROXY_SETTING_MAX"
+	default:
+		return fmt.Sprintf("WMT_PROXY_SETTINGS(%d)", int32(e))
+	}
+}
 
 // WMT_RIGHTS: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_rights
 type WMT_RIGHTS int32
@@ -171,6 +433,35 @@ const (
 	WMT_RIGHT_SDMI_TRIGGER            WMT_RIGHTS = 65536
 	WMT_RIGHT_SDMI_NOMORECOPIES       WMT_RIGHTS = 131072
 )
+
+// String returns the WMT_RIGHTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_RIGHTS) String() string {
+	switch e {
+	case WMT_RIGHT_PLAYBACK:
+		return "WMT_RIGHT_PLAYBACK"
+	case WMT_RIGHT_COPY_TO_NON_SDMI_DEVICE:
+		return "WMT_RIGHT_COPY_TO_NON_SDMI_DEVICE"
+	case WMT_RIGHT_COPY_TO_CD:
+		return "WMT_RIGHT_COPY_TO_CD"
+	case WMT_RIGHT_COPY_TO_SDMI_DEVICE:
+		return "WMT_RIGHT_COPY_TO_SDMI_DEVICE"
+	case WMT_RIGHT_ONE_TIME:
+		return "WMT_RIGHT_ONE_TIME"
+	case WMT_RIGHT_SAVE_STREAM_PROTECTED:
+		return "WMT_RIGHT_SAVE_STREAM_PROTECTED"
+	case WMT_RIGHT_COPY:
+		return "WMT_RIGHT_COPY"
+	case WMT_RIGHT_COLLABORATIVE_PLAY:
+		return "WMT_RIGHT_COLLABORATIVE_PLAY"
+	case WMT_RIGHT_SDMI_TRIGGER:
+		return "WMT_RIGHT_SDMI_TRIGGER"
+	case WMT_RIGHT_SDMI_NOMORECOPIES:
+		return "WMT_RIGHT_SDMI_NOMORECOPIES"
+	default:
+		return fmt.Sprintf("WMT_RIGHTS(%d)", int32(e))
+	}
+}
 
 // WMT_STATUS: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_status
 type WMT_STATUS int32
@@ -231,6 +522,119 @@ const (
 	WMT_CONTENT_ENABLER             WMT_STATUS = 51
 )
 
+// String returns the WMT_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_STATUS) String() string {
+	switch e {
+	case WMT_ERROR:
+		return "WMT_ERROR"
+	case WMT_OPENED:
+		return "WMT_OPENED"
+	case WMT_BUFFERING_START:
+		return "WMT_BUFFERING_START"
+	case WMT_BUFFERING_STOP:
+		return "WMT_BUFFERING_STOP"
+	case WMT_EOF:
+		return "WMT_EOF"
+	case WMT_END_OF_SEGMENT:
+		return "WMT_END_OF_SEGMENT"
+	case WMT_END_OF_STREAMING:
+		return "WMT_END_OF_STREAMING"
+	case WMT_LOCATING:
+		return "WMT_LOCATING"
+	case WMT_CONNECTING:
+		return "WMT_CONNECTING"
+	case WMT_NO_RIGHTS:
+		return "WMT_NO_RIGHTS"
+	case WMT_MISSING_CODEC:
+		return "WMT_MISSING_CODEC"
+	case WMT_STARTED:
+		return "WMT_STARTED"
+	case WMT_STOPPED:
+		return "WMT_STOPPED"
+	case WMT_CLOSED:
+		return "WMT_CLOSED"
+	case WMT_STRIDING:
+		return "WMT_STRIDING"
+	case WMT_TIMER:
+		return "WMT_TIMER"
+	case WMT_INDEX_PROGRESS:
+		return "WMT_INDEX_PROGRESS"
+	case WMT_SAVEAS_START:
+		return "WMT_SAVEAS_START"
+	case WMT_SAVEAS_STOP:
+		return "WMT_SAVEAS_STOP"
+	case WMT_NEW_SOURCEFLAGS:
+		return "WMT_NEW_SOURCEFLAGS"
+	case WMT_NEW_METADATA:
+		return "WMT_NEW_METADATA"
+	case WMT_BACKUPRESTORE_BEGIN:
+		return "WMT_BACKUPRESTORE_BEGIN"
+	case WMT_SOURCE_SWITCH:
+		return "WMT_SOURCE_SWITCH"
+	case WMT_ACQUIRE_LICENSE:
+		return "WMT_ACQUIRE_LICENSE"
+	case WMT_INDIVIDUALIZE:
+		return "WMT_INDIVIDUALIZE"
+	case WMT_NEEDS_INDIVIDUALIZATION:
+		return "WMT_NEEDS_INDIVIDUALIZATION"
+	case WMT_NO_RIGHTS_EX:
+		return "WMT_NO_RIGHTS_EX"
+	case WMT_BACKUPRESTORE_END:
+		return "WMT_BACKUPRESTORE_END"
+	case WMT_BACKUPRESTORE_CONNECTING:
+		return "WMT_BACKUPRESTORE_CONNECTING"
+	case WMT_BACKUPRESTORE_DISCONNECTING:
+		return "WMT_BACKUPRESTORE_DISCONNECTING"
+	case WMT_ERROR_WITHURL:
+		return "WMT_ERROR_WITHURL"
+	case WMT_RESTRICTED_LICENSE:
+		return "WMT_RESTRICTED_LICENSE"
+	case WMT_CLIENT_CONNECT:
+		return "WMT_CLIENT_CONNECT"
+	case WMT_CLIENT_DISCONNECT:
+		return "WMT_CLIENT_DISCONNECT"
+	case WMT_NATIVE_OUTPUT_PROPS_CHANGED:
+		return "WMT_NATIVE_OUTPUT_PROPS_CHANGED"
+	case WMT_RECONNECT_START:
+		return "WMT_RECONNECT_START"
+	case WMT_RECONNECT_END:
+		return "WMT_RECONNECT_END"
+	case WMT_CLIENT_CONNECT_EX:
+		return "WMT_CLIENT_CONNECT_EX"
+	case WMT_CLIENT_DISCONNECT_EX:
+		return "WMT_CLIENT_DISCONNECT_EX"
+	case WMT_SET_FEC_SPAN:
+		return "WMT_SET_FEC_SPAN"
+	case WMT_PREROLL_READY:
+		return "WMT_PREROLL_READY"
+	case WMT_PREROLL_COMPLETE:
+		return "WMT_PREROLL_COMPLETE"
+	case WMT_CLIENT_PROPERTIES:
+		return "WMT_CLIENT_PROPERTIES"
+	case WMT_LICENSEURL_SIGNATURE_STATE:
+		return "WMT_LICENSEURL_SIGNATURE_STATE"
+	case WMT_INIT_PLAYLIST_BURN:
+		return "WMT_INIT_PLAYLIST_BURN"
+	case WMT_TRANSCRYPTOR_INIT:
+		return "WMT_TRANSCRYPTOR_INIT"
+	case WMT_TRANSCRYPTOR_SEEKED:
+		return "WMT_TRANSCRYPTOR_SEEKED"
+	case WMT_TRANSCRYPTOR_READ:
+		return "WMT_TRANSCRYPTOR_READ"
+	case WMT_TRANSCRYPTOR_CLOSED:
+		return "WMT_TRANSCRYPTOR_CLOSED"
+	case WMT_PROXIMITY_RESULT:
+		return "WMT_PROXIMITY_RESULT"
+	case WMT_PROXIMITY_COMPLETED:
+		return "WMT_PROXIMITY_COMPLETED"
+	case WMT_CONTENT_ENABLER:
+		return "WMT_CONTENT_ENABLER"
+	default:
+		return fmt.Sprintf("WMT_STATUS(%d)", int32(e))
+	}
+}
+
 // WMT_STORAGE_FORMAT: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_storage_format
 type WMT_STORAGE_FORMAT int32
 
@@ -238,6 +642,19 @@ const (
 	WMT_Storage_Format_MP3 WMT_STORAGE_FORMAT = 0
 	WMT_Storage_Format_V1  WMT_STORAGE_FORMAT = 1
 )
+
+// String returns the WMT_STORAGE_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_STORAGE_FORMAT) String() string {
+	switch e {
+	case WMT_Storage_Format_MP3:
+		return "WMT_Storage_Format_MP3"
+	case WMT_Storage_Format_V1:
+		return "WMT_Storage_Format_V1"
+	default:
+		return fmt.Sprintf("WMT_STORAGE_FORMAT(%d)", int32(e))
+	}
+}
 
 // WMT_STREAM_SELECTION: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_stream_selection
 type WMT_STREAM_SELECTION int32
@@ -248,6 +665,21 @@ const (
 	WMT_ON              WMT_STREAM_SELECTION = 2
 )
 
+// String returns the WMT_STREAM_SELECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_STREAM_SELECTION) String() string {
+	switch e {
+	case WMT_OFF:
+		return "WMT_OFF"
+	case WMT_CLEANPOINT_ONLY:
+		return "WMT_CLEANPOINT_ONLY"
+	case WMT_ON:
+		return "WMT_ON"
+	default:
+		return fmt.Sprintf("WMT_STREAM_SELECTION(%d)", int32(e))
+	}
+}
+
 type WMT_TIMECODE_FRAMERATE int32
 
 const (
@@ -257,6 +689,23 @@ const (
 	WMT_TIMECODE_FRAMERATE_24     WMT_TIMECODE_FRAMERATE = 3
 )
 
+// String returns the WMT_TIMECODE_FRAMERATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_TIMECODE_FRAMERATE) String() string {
+	switch e {
+	case WMT_TIMECODE_FRAMERATE_30:
+		return "WMT_TIMECODE_FRAMERATE_30"
+	case WMT_TIMECODE_FRAMERATE_30DROP:
+		return "WMT_TIMECODE_FRAMERATE_30DROP"
+	case WMT_TIMECODE_FRAMERATE_25:
+		return "WMT_TIMECODE_FRAMERATE_25"
+	case WMT_TIMECODE_FRAMERATE_24:
+		return "WMT_TIMECODE_FRAMERATE_24"
+	default:
+		return fmt.Sprintf("WMT_TIMECODE_FRAMERATE(%d)", int32(e))
+	}
+}
+
 // WMT_TRANSPORT_TYPE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_transport_type
 type WMT_TRANSPORT_TYPE int32
 
@@ -264,6 +713,19 @@ const (
 	WMT_Transport_Type_Unreliable WMT_TRANSPORT_TYPE = 0
 	WMT_Transport_Type_Reliable   WMT_TRANSPORT_TYPE = 1
 )
+
+// String returns the WMT_TRANSPORT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_TRANSPORT_TYPE) String() string {
+	switch e {
+	case WMT_Transport_Type_Unreliable:
+		return "WMT_Transport_Type_Unreliable"
+	case WMT_Transport_Type_Reliable:
+		return "WMT_Transport_Type_Reliable"
+	default:
+		return fmt.Sprintf("WMT_TRANSPORT_TYPE(%d)", int32(e))
+	}
+}
 
 // WMT_VERSION: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_version
 type WMT_VERSION int32
@@ -275,6 +737,23 @@ const (
 	WMT_VER_9_0 WMT_VERSION = 589824
 )
 
+// String returns the WMT_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_VERSION) String() string {
+	switch e {
+	case WMT_VER_4_0:
+		return "WMT_VER_4_0"
+	case WMT_VER_7_0:
+		return "WMT_VER_7_0"
+	case WMT_VER_8_0:
+		return "WMT_VER_8_0"
+	case WMT_VER_9_0:
+		return "WMT_VER_9_0"
+	default:
+		return fmt.Sprintf("WMT_VERSION(%d)", int32(e))
+	}
+}
+
 // WMT_WATERMARK_ENTRY_TYPE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wmt_watermark_entry_type
 type WMT_WATERMARK_ENTRY_TYPE int32
 
@@ -283,6 +762,19 @@ const (
 	WMT_WMETYPE_VIDEO WMT_WATERMARK_ENTRY_TYPE = 2
 )
 
+// String returns the WMT_WATERMARK_ENTRY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WMT_WATERMARK_ENTRY_TYPE) String() string {
+	switch e {
+	case WMT_WMETYPE_AUDIO:
+		return "WMT_WMETYPE_AUDIO"
+	case WMT_WMETYPE_VIDEO:
+		return "WMT_WMETYPE_VIDEO"
+	default:
+		return fmt.Sprintf("WMT_WATERMARK_ENTRY_TYPE(%d)", int32(e))
+	}
+}
+
 // WM_AETYPE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ne-wmsdkidl-wm_aetype
 type WM_AETYPE int32
 
@@ -290,6 +782,19 @@ const (
 	WM_AETYPE_INCLUDE WM_AETYPE = 105
 	WM_AETYPE_EXCLUDE WM_AETYPE = 101
 )
+
+// String returns the WM_AETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WM_AETYPE) String() string {
+	switch e {
+	case WM_AETYPE_INCLUDE:
+		return "WM_AETYPE_INCLUDE"
+	case WM_AETYPE_EXCLUDE:
+		return "WM_AETYPE_EXCLUDE"
+	default:
+		return fmt.Sprintf("WM_AETYPE(%d)", int32(e))
+	}
+}
 
 type WM_DM_INTERLACED_TYPE int32
 
@@ -301,6 +806,27 @@ const (
 	WM_DM_DEINTERLACE_INVERSETELECINE            WM_DM_INTERLACED_TYPE = 4
 	WM_DM_DEINTERLACE_VERTICALHALFSIZEDOUBLERATE WM_DM_INTERLACED_TYPE = 5
 )
+
+// String returns the WM_DM_INTERLACED_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WM_DM_INTERLACED_TYPE) String() string {
+	switch e {
+	case WM_DM_NOTINTERLACED:
+		return "WM_DM_NOTINTERLACED"
+	case WM_DM_DEINTERLACE_NORMAL:
+		return "WM_DM_DEINTERLACE_NORMAL"
+	case WM_DM_DEINTERLACE_HALFSIZE:
+		return "WM_DM_DEINTERLACE_HALFSIZE"
+	case WM_DM_DEINTERLACE_HALFSIZEDOUBLERATE:
+		return "WM_DM_DEINTERLACE_HALFSIZEDOUBLERATE"
+	case WM_DM_DEINTERLACE_INVERSETELECINE:
+		return "WM_DM_DEINTERLACE_INVERSETELECINE"
+	case WM_DM_DEINTERLACE_VERTICALHALFSIZEDOUBLERATE:
+		return "WM_DM_DEINTERLACE_VERTICALHALFSIZEDOUBLERATE"
+	default:
+		return fmt.Sprintf("WM_DM_INTERLACED_TYPE(%d)", int32(e))
+	}
+}
 
 type WM_DM_IT_FIRST_FRAME_COHERENCY int32
 
@@ -318,6 +844,37 @@ const (
 	WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_DD_BOTTOM WM_DM_IT_FIRST_FRAME_COHERENCY = 10
 )
 
+// String returns the WM_DM_IT_FIRST_FRAME_COHERENCY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WM_DM_IT_FIRST_FRAME_COHERENCY) String() string {
+	switch e {
+	case WM_DM_IT_DISABLE_COHERENT_MODE:
+		return "WM_DM_IT_DISABLE_COHERENT_MODE"
+	case WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_AA_TOP:
+		return "WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_AA_TOP"
+	case WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_BB_TOP:
+		return "WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_BB_TOP"
+	case WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_BC_TOP:
+		return "WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_BC_TOP"
+	case WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_CD_TOP:
+		return "WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_CD_TOP"
+	case WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_DD_TOP:
+		return "WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_DD_TOP"
+	case WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_AA_BOTTOM:
+		return "WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_AA_BOTTOM"
+	case WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_BB_BOTTOM:
+		return "WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_BB_BOTTOM"
+	case WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_BC_BOTTOM:
+		return "WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_BC_BOTTOM"
+	case WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_CD_BOTTOM:
+		return "WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_CD_BOTTOM"
+	case WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_DD_BOTTOM:
+		return "WM_DM_IT_FIRST_FRAME_IN_CLIP_IS_DD_BOTTOM"
+	default:
+		return fmt.Sprintf("WM_DM_IT_FIRST_FRAME_COHERENCY(%d)", int32(e))
+	}
+}
+
 type WM_PLAYBACK_DRC_LEVEL int32
 
 const (
@@ -326,12 +883,40 @@ const (
 	WM_PLAYBACK_DRC_LOW    WM_PLAYBACK_DRC_LEVEL = 2
 )
 
+// String returns the WM_PLAYBACK_DRC_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WM_PLAYBACK_DRC_LEVEL) String() string {
+	switch e {
+	case WM_PLAYBACK_DRC_HIGH:
+		return "WM_PLAYBACK_DRC_HIGH"
+	case WM_PLAYBACK_DRC_MEDIUM:
+		return "WM_PLAYBACK_DRC_MEDIUM"
+	case WM_PLAYBACK_DRC_LOW:
+		return "WM_PLAYBACK_DRC_LOW"
+	default:
+		return fmt.Sprintf("WM_PLAYBACK_DRC_LEVEL(%d)", int32(e))
+	}
+}
+
 type WM_SFEX_TYPE int32
 
 const (
 	WM_SFEX_NOTASYNCPOINT WM_SFEX_TYPE = 2
 	WM_SFEX_DATALOSS      WM_SFEX_TYPE = 4
 )
+
+// String returns the WM_SFEX_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WM_SFEX_TYPE) String() string {
+	switch e {
+	case WM_SFEX_NOTASYNCPOINT:
+		return "WM_SFEX_NOTASYNCPOINT"
+	case WM_SFEX_DATALOSS:
+		return "WM_SFEX_DATALOSS"
+	default:
+		return fmt.Sprintf("WM_SFEX_TYPE(%d)", int32(e))
+	}
+}
 
 type WM_SF_TYPE int32
 
@@ -341,6 +926,21 @@ const (
 	WM_SF_DATALOSS      WM_SF_TYPE = 4
 )
 
+// String returns the WM_SF_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WM_SF_TYPE) String() string {
+	switch e {
+	case WM_SF_CLEANPOINT:
+		return "WM_SF_CLEANPOINT"
+	case WM_SF_DISCONTINUITY:
+		return "WM_SF_DISCONTINUITY"
+	case WM_SF_DATALOSS:
+		return "WM_SF_DATALOSS"
+	default:
+		return fmt.Sprintf("WM_SF_TYPE(%d)", int32(e))
+	}
+}
+
 // AM_ASFWRITERCONFIG_PARAM: https://learn.microsoft.com/windows/win32/api/dshowasf/ne-dshowasf-_am_asfwriterconfig_param
 type AM_ASFWRITERCONFIG_PARAM int32
 
@@ -349,3 +949,18 @@ const (
 	AM_CONFIGASFWRITER_PARAM_MULTIPASS    AM_ASFWRITERCONFIG_PARAM = 2
 	AM_CONFIGASFWRITER_PARAM_DONTCOMPRESS AM_ASFWRITERCONFIG_PARAM = 3
 )
+
+// String returns the AM_ASFWRITERCONFIG_PARAM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_ASFWRITERCONFIG_PARAM) String() string {
+	switch e {
+	case AM_CONFIGASFWRITER_PARAM_AUTOINDEX:
+		return "AM_CONFIGASFWRITER_PARAM_AUTOINDEX"
+	case AM_CONFIGASFWRITER_PARAM_MULTIPASS:
+		return "AM_CONFIGASFWRITER_PARAM_MULTIPASS"
+	case AM_CONFIGASFWRITER_PARAM_DONTCOMPRESS:
+		return "AM_CONFIGASFWRITER_PARAM_DONTCOMPRESS"
+	default:
+		return fmt.Sprintf("AM_ASFWRITERCONFIG_PARAM(%d)", int32(e))
+	}
+}

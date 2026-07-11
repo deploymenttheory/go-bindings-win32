@@ -4,6 +4,10 @@
 
 package colorsystem
 
+import (
+	"fmt"
+)
+
 // BMFORMAT: https://learn.microsoft.com/windows/win32/api/icm/ne-icm-bmformat
 type BMFORMAT int32
 
@@ -51,6 +55,97 @@ const (
 	BM_R16G16B16A16_FLOAT  BMFORMAT = 1795
 )
 
+// String returns the BMFORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BMFORMAT) String() string {
+	switch e {
+	case BM_x555RGB:
+		return "BM_x555RGB"
+	case BM_x555XYZ:
+		return "BM_x555XYZ"
+	case BM_x555Yxy:
+		return "BM_x555Yxy"
+	case BM_x555Lab:
+		return "BM_x555Lab"
+	case BM_x555G3CH:
+		return "BM_x555G3CH"
+	case BM_RGBTRIPLETS:
+		return "BM_RGBTRIPLETS"
+	case BM_BGRTRIPLETS:
+		return "BM_BGRTRIPLETS"
+	case BM_XYZTRIPLETS:
+		return "BM_XYZTRIPLETS"
+	case BM_YxyTRIPLETS:
+		return "BM_YxyTRIPLETS"
+	case BM_LabTRIPLETS:
+		return "BM_LabTRIPLETS"
+	case BM_G3CHTRIPLETS:
+		return "BM_G3CHTRIPLETS"
+	case BM_5CHANNEL:
+		return "BM_5CHANNEL"
+	case BM_6CHANNEL:
+		return "BM_6CHANNEL"
+	case BM_7CHANNEL:
+		return "BM_7CHANNEL"
+	case BM_8CHANNEL:
+		return "BM_8CHANNEL"
+	case BM_GRAY:
+		return "BM_GRAY"
+	case BM_xRGBQUADS:
+		return "BM_xRGBQUADS"
+	case BM_xBGRQUADS:
+		return "BM_xBGRQUADS"
+	case BM_xG3CHQUADS:
+		return "BM_xG3CHQUADS"
+	case BM_KYMCQUADS:
+		return "BM_KYMCQUADS"
+	case BM_CMYKQUADS:
+		return "BM_CMYKQUADS"
+	case BM_10b_RGB:
+		return "BM_10b_RGB"
+	case BM_10b_XYZ:
+		return "BM_10b_XYZ"
+	case BM_10b_Yxy:
+		return "BM_10b_Yxy"
+	case BM_10b_Lab:
+		return "BM_10b_Lab"
+	case BM_10b_G3CH:
+		return "BM_10b_G3CH"
+	case BM_NAMED_INDEX:
+		return "BM_NAMED_INDEX"
+	case BM_16b_RGB:
+		return "BM_16b_RGB"
+	case BM_16b_XYZ:
+		return "BM_16b_XYZ"
+	case BM_16b_Yxy:
+		return "BM_16b_Yxy"
+	case BM_16b_Lab:
+		return "BM_16b_Lab"
+	case BM_16b_G3CH:
+		return "BM_16b_G3CH"
+	case BM_16b_GRAY:
+		return "BM_16b_GRAY"
+	case BM_565RGB:
+		return "BM_565RGB"
+	case BM_32b_scRGB:
+		return "BM_32b_scRGB"
+	case BM_32b_scARGB:
+		return "BM_32b_scARGB"
+	case BM_S2DOT13FIXED_scRGB:
+		return "BM_S2DOT13FIXED_scRGB"
+	case BM_S2DOT13FIXED_scARGB:
+		return "BM_S2DOT13FIXED_scARGB"
+	case BM_R10G10B10A2:
+		return "BM_R10G10B10A2"
+	case BM_R10G10B10A2_XR:
+		return "BM_R10G10B10A2_XR"
+	case BM_R16G16B16A16_FLOAT:
+		return "BM_R16G16B16A16_FLOAT"
+	default:
+		return fmt.Sprintf("BMFORMAT(%d)", int32(e))
+	}
+}
+
 // COLORDATATYPE: https://learn.microsoft.com/windows/win32/api/icm/ne-icm-colordatatype
 type COLORDATATYPE int32
 
@@ -63,6 +158,29 @@ const (
 	COLOR_10b_R10G10B10A2_XR COLORDATATYPE = 6
 	COLOR_FLOAT16            COLORDATATYPE = 7
 )
+
+// String returns the COLORDATATYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COLORDATATYPE) String() string {
+	switch e {
+	case COLOR_BYTE:
+		return "COLOR_BYTE"
+	case COLOR_WORD:
+		return "COLOR_WORD"
+	case COLOR_FLOAT:
+		return "COLOR_FLOAT"
+	case COLOR_S2DOT13FIXED:
+		return "COLOR_S2DOT13FIXED"
+	case COLOR_10b_R10G10B10A2:
+		return "COLOR_10b_R10G10B10A2"
+	case COLOR_10b_R10G10B10A2_XR:
+		return "COLOR_10b_R10G10B10A2_XR"
+	case COLOR_FLOAT16:
+		return "COLOR_FLOAT16"
+	default:
+		return fmt.Sprintf("COLORDATATYPE(%d)", int32(e))
+	}
+}
 
 // COLORPROFILESUBTYPE: https://learn.microsoft.com/windows/win32/api/icm/ne-icm-colorprofilesubtype
 type COLORPROFILESUBTYPE int32
@@ -79,6 +197,33 @@ const (
 	CPST_EXTENDED_DISPLAY_COLOR_MODE COLORPROFILESUBTYPE = 8
 )
 
+// String returns the COLORPROFILESUBTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COLORPROFILESUBTYPE) String() string {
+	switch e {
+	case CPST_PERCEPTUAL:
+		return "CPST_PERCEPTUAL"
+	case CPST_RELATIVE_COLORIMETRIC:
+		return "CPST_RELATIVE_COLORIMETRIC"
+	case CPST_SATURATION:
+		return "CPST_SATURATION"
+	case CPST_ABSOLUTE_COLORIMETRIC:
+		return "CPST_ABSOLUTE_COLORIMETRIC"
+	case CPST_NONE:
+		return "CPST_NONE"
+	case CPST_RGB_WORKING_SPACE:
+		return "CPST_RGB_WORKING_SPACE"
+	case CPST_CUSTOM_WORKING_SPACE:
+		return "CPST_CUSTOM_WORKING_SPACE"
+	case CPST_STANDARD_DISPLAY_COLOR_MODE:
+		return "CPST_STANDARD_DISPLAY_COLOR_MODE"
+	case CPST_EXTENDED_DISPLAY_COLOR_MODE:
+		return "CPST_EXTENDED_DISPLAY_COLOR_MODE"
+	default:
+		return fmt.Sprintf("COLORPROFILESUBTYPE(%d)", int32(e))
+	}
+}
+
 // COLORPROFILETYPE: https://learn.microsoft.com/windows/win32/api/icm/ne-icm-colorprofiletype
 type COLORPROFILETYPE int32
 
@@ -88,6 +233,23 @@ const (
 	CPT_CAMP COLORPROFILETYPE = 2
 	CPT_GMMP COLORPROFILETYPE = 3
 )
+
+// String returns the COLORPROFILETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COLORPROFILETYPE) String() string {
+	switch e {
+	case CPT_ICC:
+		return "CPT_ICC"
+	case CPT_DMP:
+		return "CPT_DMP"
+	case CPT_CAMP:
+		return "CPT_CAMP"
+	case CPT_GMMP:
+		return "CPT_GMMP"
+	default:
+		return fmt.Sprintf("COLORPROFILETYPE(%d)", int32(e))
+	}
+}
 
 // COLORTYPE: https://learn.microsoft.com/windows/win32/TSF/colortype
 type COLORTYPE int32
@@ -107,6 +269,39 @@ const (
 	COLOR_NAMED     COLORTYPE = 12
 )
 
+// String returns the COLORTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COLORTYPE) String() string {
+	switch e {
+	case COLOR_GRAY:
+		return "COLOR_GRAY"
+	case COLOR_RGB:
+		return "COLOR_RGB"
+	case COLOR_XYZ:
+		return "COLOR_XYZ"
+	case COLOR_Yxy:
+		return "COLOR_Yxy"
+	case COLOR_Lab:
+		return "COLOR_Lab"
+	case COLOR_3_CHANNEL:
+		return "COLOR_3_CHANNEL"
+	case COLOR_CMYK:
+		return "COLOR_CMYK"
+	case COLOR_5_CHANNEL:
+		return "COLOR_5_CHANNEL"
+	case COLOR_6_CHANNEL:
+		return "COLOR_6_CHANNEL"
+	case COLOR_7_CHANNEL:
+		return "COLOR_7_CHANNEL"
+	case COLOR_8_CHANNEL:
+		return "COLOR_8_CHANNEL"
+	case COLOR_NAMED:
+		return "COLOR_NAMED"
+	default:
+		return fmt.Sprintf("COLORTYPE(%d)", int32(e))
+	}
+}
+
 type COLOR_MATCH_TO_TARGET_ACTION uint32
 
 const (
@@ -114,6 +309,21 @@ const (
 	CS_DISABLE          COLOR_MATCH_TO_TARGET_ACTION = 2
 	CS_DELETE_TRANSFORM COLOR_MATCH_TO_TARGET_ACTION = 3
 )
+
+// String returns the COLOR_MATCH_TO_TARGET_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COLOR_MATCH_TO_TARGET_ACTION) String() string {
+	switch e {
+	case CS_ENABLE:
+		return "CS_ENABLE"
+	case CS_DISABLE:
+		return "CS_DISABLE"
+	case CS_DELETE_TRANSFORM:
+		return "CS_DELETE_TRANSFORM"
+	default:
+		return fmt.Sprintf("COLOR_MATCH_TO_TARGET_ACTION(%d)", uint32(e))
+	}
+}
 
 type ICM_COMMAND uint32
 
@@ -127,6 +337,29 @@ const (
 	ICM_QUERYMATCH          ICM_COMMAND = 7
 )
 
+// String returns the ICM_COMMAND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ICM_COMMAND) String() string {
+	switch e {
+	case ICM_ADDPROFILE:
+		return "ICM_ADDPROFILE"
+	case ICM_DELETEPROFILE:
+		return "ICM_DELETEPROFILE"
+	case ICM_QUERYPROFILE:
+		return "ICM_QUERYPROFILE"
+	case ICM_SETDEFAULTPROFILE:
+		return "ICM_SETDEFAULTPROFILE"
+	case ICM_REGISTERICMATCHER:
+		return "ICM_REGISTERICMATCHER"
+	case ICM_UNREGISTERICMATCHER:
+		return "ICM_UNREGISTERICMATCHER"
+	case ICM_QUERYMATCH:
+		return "ICM_QUERYMATCH"
+	default:
+		return fmt.Sprintf("ICM_COMMAND(%d)", uint32(e))
+	}
+}
+
 type ICM_MODE int32
 
 const (
@@ -136,6 +369,23 @@ const (
 	ICM_DONE_OUTSIDEDC ICM_MODE = 4
 )
 
+// String returns the ICM_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ICM_MODE) String() string {
+	switch e {
+	case ICM_OFF:
+		return "ICM_OFF"
+	case ICM_ON:
+		return "ICM_ON"
+	case ICM_QUERY:
+		return "ICM_QUERY"
+	case ICM_DONE_OUTSIDEDC:
+		return "ICM_DONE_OUTSIDEDC"
+	default:
+		return fmt.Sprintf("ICM_MODE(%d)", int32(e))
+	}
+}
+
 type LCSCSTYPE int32
 
 const (
@@ -144,12 +394,40 @@ const (
 	LCS_WINDOWS_COLOR_SPACE LCSCSTYPE = 1466527264
 )
 
+// String returns the LCSCSTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LCSCSTYPE) String() string {
+	switch e {
+	case LCS_CALIBRATED_RGB:
+		return "LCS_CALIBRATED_RGB"
+	case LCS_sRGB:
+		return "LCS_sRGB"
+	case LCS_WINDOWS_COLOR_SPACE:
+		return "LCS_WINDOWS_COLOR_SPACE"
+	default:
+		return fmt.Sprintf("LCSCSTYPE(%d)", int32(e))
+	}
+}
+
 type WCS_DEVICE_CAPABILITIES_TYPE int32
 
 const (
 	VideoCardGammaTable      WCS_DEVICE_CAPABILITIES_TYPE = 1
 	MicrosoftHardwareColorV2 WCS_DEVICE_CAPABILITIES_TYPE = 2
 )
+
+// String returns the WCS_DEVICE_CAPABILITIES_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCS_DEVICE_CAPABILITIES_TYPE) String() string {
+	switch e {
+	case VideoCardGammaTable:
+		return "VideoCardGammaTable"
+	case MicrosoftHardwareColorV2:
+		return "MicrosoftHardwareColorV2"
+	default:
+		return fmt.Sprintf("WCS_DEVICE_CAPABILITIES_TYPE(%d)", int32(e))
+	}
+}
 
 // WCS_PROFILE_MANAGEMENT_SCOPE: https://learn.microsoft.com/windows/win32/api/icm/ne-icm-wcs_profile_management_scope
 type WCS_PROFILE_MANAGEMENT_SCOPE int32
@@ -158,3 +436,16 @@ const (
 	WCS_PROFILE_MANAGEMENT_SCOPE_SYSTEM_WIDE  WCS_PROFILE_MANAGEMENT_SCOPE = 0
 	WCS_PROFILE_MANAGEMENT_SCOPE_CURRENT_USER WCS_PROFILE_MANAGEMENT_SCOPE = 1
 )
+
+// String returns the WCS_PROFILE_MANAGEMENT_SCOPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WCS_PROFILE_MANAGEMENT_SCOPE) String() string {
+	switch e {
+	case WCS_PROFILE_MANAGEMENT_SCOPE_SYSTEM_WIDE:
+		return "WCS_PROFILE_MANAGEMENT_SCOPE_SYSTEM_WIDE"
+	case WCS_PROFILE_MANAGEMENT_SCOPE_CURRENT_USER:
+		return "WCS_PROFILE_MANAGEMENT_SCOPE_CURRENT_USER"
+	default:
+		return fmt.Sprintf("WCS_PROFILE_MANAGEMENT_SCOPE(%d)", int32(e))
+	}
+}

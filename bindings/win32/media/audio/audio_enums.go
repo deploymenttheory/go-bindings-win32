@@ -4,11 +4,27 @@
 
 package audio
 
+import (
+	"fmt"
+	"strings"
+)
+
 type AMBISONICS_CHANNEL_ORDERING int32
 
 const (
 	AMBISONICS_CHANNEL_ORDERING_ACN AMBISONICS_CHANNEL_ORDERING = 0
 )
+
+// String returns the AMBISONICS_CHANNEL_ORDERING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMBISONICS_CHANNEL_ORDERING) String() string {
+	switch e {
+	case AMBISONICS_CHANNEL_ORDERING_ACN:
+		return "AMBISONICS_CHANNEL_ORDERING_ACN"
+	default:
+		return fmt.Sprintf("AMBISONICS_CHANNEL_ORDERING(%d)", int32(e))
+	}
+}
 
 type AMBISONICS_NORMALIZATION int32
 
@@ -17,11 +33,35 @@ const (
 	AMBISONICS_NORMALIZATION_N3D  AMBISONICS_NORMALIZATION = 1
 )
 
+// String returns the AMBISONICS_NORMALIZATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMBISONICS_NORMALIZATION) String() string {
+	switch e {
+	case AMBISONICS_NORMALIZATION_SN3D:
+		return "AMBISONICS_NORMALIZATION_SN3D"
+	case AMBISONICS_NORMALIZATION_N3D:
+		return "AMBISONICS_NORMALIZATION_N3D"
+	default:
+		return fmt.Sprintf("AMBISONICS_NORMALIZATION(%d)", int32(e))
+	}
+}
+
 type AMBISONICS_TYPE int32
 
 const (
 	AMBISONICS_TYPE_FULL3D AMBISONICS_TYPE = 0
 )
+
+// String returns the AMBISONICS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMBISONICS_TYPE) String() string {
+	switch e {
+	case AMBISONICS_TYPE_FULL3D:
+		return "AMBISONICS_TYPE_FULL3D"
+	default:
+		return fmt.Sprintf("AMBISONICS_TYPE(%d)", int32(e))
+	}
+}
 
 // AUDCLNT_SHAREMODE: https://learn.microsoft.com/windows/win32/api/audiosessiontypes/ne-audiosessiontypes-audclnt_sharemode
 type AUDCLNT_SHAREMODE int32
@@ -31,7 +71,21 @@ const (
 	AUDCLNT_SHAREMODE_EXCLUSIVE AUDCLNT_SHAREMODE = 1
 )
 
+// String returns the AUDCLNT_SHAREMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDCLNT_SHAREMODE) String() string {
+	switch e {
+	case AUDCLNT_SHAREMODE_SHARED:
+		return "AUDCLNT_SHAREMODE_SHARED"
+	case AUDCLNT_SHAREMODE_EXCLUSIVE:
+		return "AUDCLNT_SHAREMODE_EXCLUSIVE"
+	default:
+		return fmt.Sprintf("AUDCLNT_SHAREMODE(%d)", int32(e))
+	}
+}
+
 // AUDCLNT_STREAMOPTIONS: https://learn.microsoft.com/windows/win32/api/audioclient/ne-audioclient-audclnt_streamoptions
+// Bitmask — values may be combined with |.
 type AUDCLNT_STREAMOPTIONS int32
 
 const (
@@ -42,6 +96,28 @@ const (
 	AUDCLNT_STREAMOPTIONS_POST_VOLUME_LOOPBACK AUDCLNT_STREAMOPTIONS = 8
 )
 
+// String returns the AUDCLNT_STREAMOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDCLNT_STREAMOPTIONS) String() string {
+	var parts []string
+	if e&AUDCLNT_STREAMOPTIONS_RAW != 0 {
+		parts = append(parts, "AUDCLNT_STREAMOPTIONS_RAW")
+	}
+	if e&AUDCLNT_STREAMOPTIONS_MATCH_FORMAT != 0 {
+		parts = append(parts, "AUDCLNT_STREAMOPTIONS_MATCH_FORMAT")
+	}
+	if e&AUDCLNT_STREAMOPTIONS_AMBISONICS != 0 {
+		parts = append(parts, "AUDCLNT_STREAMOPTIONS_AMBISONICS")
+	}
+	if e&AUDCLNT_STREAMOPTIONS_POST_VOLUME_LOOPBACK != 0 {
+		parts = append(parts, "AUDCLNT_STREAMOPTIONS_POST_VOLUME_LOOPBACK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // AUDIOCLIENT_ACTIVATION_TYPE: https://learn.microsoft.com/windows/win32/api/audioclientactivationparams/ne-audioclientactivationparams-audioclient_activation_type
 type AUDIOCLIENT_ACTIVATION_TYPE int32
 
@@ -50,13 +126,40 @@ const (
 	AUDIOCLIENT_ACTIVATION_TYPE_PROCESS_LOOPBACK AUDIOCLIENT_ACTIVATION_TYPE = 1
 )
 
+// String returns the AUDIOCLIENT_ACTIVATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIOCLIENT_ACTIVATION_TYPE) String() string {
+	switch e {
+	case AUDIOCLIENT_ACTIVATION_TYPE_DEFAULT:
+		return "AUDIOCLIENT_ACTIVATION_TYPE_DEFAULT"
+	case AUDIOCLIENT_ACTIVATION_TYPE_PROCESS_LOOPBACK:
+		return "AUDIOCLIENT_ACTIVATION_TYPE_PROCESS_LOOPBACK"
+	default:
+		return fmt.Sprintf("AUDIOCLIENT_ACTIVATION_TYPE(%d)", int32(e))
+	}
+}
+
 // AUDIO_DUCKING_OPTIONS: https://learn.microsoft.com/windows/win32/api/audioclient/ne-audioclient-audio_ducking_options
+// Bitmask — values may be combined with |.
 type AUDIO_DUCKING_OPTIONS int32
 
 const (
 	AUDIO_DUCKING_OPTIONS_DEFAULT                   AUDIO_DUCKING_OPTIONS = 0
 	AUDIO_DUCKING_OPTIONS_DO_NOT_DUCK_OTHER_STREAMS AUDIO_DUCKING_OPTIONS = 1
 )
+
+// String returns the AUDIO_DUCKING_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIO_DUCKING_OPTIONS) String() string {
+	var parts []string
+	if e&AUDIO_DUCKING_OPTIONS_DO_NOT_DUCK_OTHER_STREAMS != 0 {
+		parts = append(parts, "AUDIO_DUCKING_OPTIONS_DO_NOT_DUCK_OTHER_STREAMS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // AUDIO_EFFECT_STATE: https://learn.microsoft.com/windows/win32/api/audioclient/ne-audioclient-audio_effect_state
 type AUDIO_EFFECT_STATE int32
@@ -65,6 +168,19 @@ const (
 	AUDIO_EFFECT_STATE_OFF AUDIO_EFFECT_STATE = 0
 	AUDIO_EFFECT_STATE_ON  AUDIO_EFFECT_STATE = 1
 )
+
+// String returns the AUDIO_EFFECT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIO_EFFECT_STATE) String() string {
+	switch e {
+	case AUDIO_EFFECT_STATE_OFF:
+		return "AUDIO_EFFECT_STATE_OFF"
+	case AUDIO_EFFECT_STATE_ON:
+		return "AUDIO_EFFECT_STATE_ON"
+	default:
+		return fmt.Sprintf("AUDIO_EFFECT_STATE(%d)", int32(e))
+	}
+}
 
 // AUDIO_STREAM_CATEGORY: https://learn.microsoft.com/windows/win32/api/audiosessiontypes/ne-audiosessiontypes-audio_stream_category
 type AUDIO_STREAM_CATEGORY int32
@@ -86,6 +202,43 @@ const (
 	AudioCategory_VoiceTyping         AUDIO_STREAM_CATEGORY = 14
 )
 
+// String returns the AUDIO_STREAM_CATEGORY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIO_STREAM_CATEGORY) String() string {
+	switch e {
+	case AudioCategory_Other:
+		return "AudioCategory_Other"
+	case AudioCategory_ForegroundOnlyMedia:
+		return "AudioCategory_ForegroundOnlyMedia"
+	case AudioCategory_Communications:
+		return "AudioCategory_Communications"
+	case AudioCategory_Alerts:
+		return "AudioCategory_Alerts"
+	case AudioCategory_SoundEffects:
+		return "AudioCategory_SoundEffects"
+	case AudioCategory_GameEffects:
+		return "AudioCategory_GameEffects"
+	case AudioCategory_GameMedia:
+		return "AudioCategory_GameMedia"
+	case AudioCategory_GameChat:
+		return "AudioCategory_GameChat"
+	case AudioCategory_Speech:
+		return "AudioCategory_Speech"
+	case AudioCategory_Movie:
+		return "AudioCategory_Movie"
+	case AudioCategory_Media:
+		return "AudioCategory_Media"
+	case AudioCategory_FarFieldSpeech:
+		return "AudioCategory_FarFieldSpeech"
+	case AudioCategory_UniformSpeech:
+		return "AudioCategory_UniformSpeech"
+	case AudioCategory_VoiceTyping:
+		return "AudioCategory_VoiceTyping"
+	default:
+		return fmt.Sprintf("AUDIO_STREAM_CATEGORY(%d)", int32(e))
+	}
+}
+
 // AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/ne-mmdeviceapi-audio_systemeffects_propertystore_type
 type AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE int32
 
@@ -96,7 +249,25 @@ const (
 	AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_ENUM_COUNT AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE = 3
 )
 
+// String returns the AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE) String() string {
+	switch e {
+	case AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_DEFAULT:
+		return "AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_DEFAULT"
+	case AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_USER:
+		return "AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_USER"
+	case AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_VOLATILE:
+		return "AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_VOLATILE"
+	case AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_ENUM_COUNT:
+		return "AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_ENUM_COUNT"
+	default:
+		return fmt.Sprintf("AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE(%d)", int32(e))
+	}
+}
+
 // AudioObjectType: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/ne-spatialaudioclient-audioobjecttype
+// Bitmask — values may be combined with |.
 type AudioObjectType int32
 
 const (
@@ -123,6 +294,76 @@ const (
 	AudioObjectType_StereoRight      AudioObjectType = 524288
 )
 
+// String returns the AudioObjectType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AudioObjectType) String() string {
+	var parts []string
+	if e&AudioObjectType_Dynamic != 0 {
+		parts = append(parts, "AudioObjectType_Dynamic")
+	}
+	if e&AudioObjectType_FrontLeft != 0 {
+		parts = append(parts, "AudioObjectType_FrontLeft")
+	}
+	if e&AudioObjectType_FrontRight != 0 {
+		parts = append(parts, "AudioObjectType_FrontRight")
+	}
+	if e&AudioObjectType_FrontCenter != 0 {
+		parts = append(parts, "AudioObjectType_FrontCenter")
+	}
+	if e&AudioObjectType_LowFrequency != 0 {
+		parts = append(parts, "AudioObjectType_LowFrequency")
+	}
+	if e&AudioObjectType_SideLeft != 0 {
+		parts = append(parts, "AudioObjectType_SideLeft")
+	}
+	if e&AudioObjectType_SideRight != 0 {
+		parts = append(parts, "AudioObjectType_SideRight")
+	}
+	if e&AudioObjectType_BackLeft != 0 {
+		parts = append(parts, "AudioObjectType_BackLeft")
+	}
+	if e&AudioObjectType_BackRight != 0 {
+		parts = append(parts, "AudioObjectType_BackRight")
+	}
+	if e&AudioObjectType_TopFrontLeft != 0 {
+		parts = append(parts, "AudioObjectType_TopFrontLeft")
+	}
+	if e&AudioObjectType_TopFrontRight != 0 {
+		parts = append(parts, "AudioObjectType_TopFrontRight")
+	}
+	if e&AudioObjectType_TopBackLeft != 0 {
+		parts = append(parts, "AudioObjectType_TopBackLeft")
+	}
+	if e&AudioObjectType_TopBackRight != 0 {
+		parts = append(parts, "AudioObjectType_TopBackRight")
+	}
+	if e&AudioObjectType_BottomFrontLeft != 0 {
+		parts = append(parts, "AudioObjectType_BottomFrontLeft")
+	}
+	if e&AudioObjectType_BottomFrontRight != 0 {
+		parts = append(parts, "AudioObjectType_BottomFrontRight")
+	}
+	if e&AudioObjectType_BottomBackLeft != 0 {
+		parts = append(parts, "AudioObjectType_BottomBackLeft")
+	}
+	if e&AudioObjectType_BottomBackRight != 0 {
+		parts = append(parts, "AudioObjectType_BottomBackRight")
+	}
+	if e&AudioObjectType_BackCenter != 0 {
+		parts = append(parts, "AudioObjectType_BackCenter")
+	}
+	if e&AudioObjectType_StereoLeft != 0 {
+		parts = append(parts, "AudioObjectType_StereoLeft")
+	}
+	if e&AudioObjectType_StereoRight != 0 {
+		parts = append(parts, "AudioObjectType_StereoRight")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type AudioSessionDisconnectReason int32
 
 const (
@@ -134,6 +375,27 @@ const (
 	DisconnectReasonExclusiveModeOverride AudioSessionDisconnectReason = 5
 )
 
+// String returns the AudioSessionDisconnectReason constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AudioSessionDisconnectReason) String() string {
+	switch e {
+	case DisconnectReasonDeviceRemoval:
+		return "DisconnectReasonDeviceRemoval"
+	case DisconnectReasonServerShutdown:
+		return "DisconnectReasonServerShutdown"
+	case DisconnectReasonFormatChanged:
+		return "DisconnectReasonFormatChanged"
+	case DisconnectReasonSessionLogoff:
+		return "DisconnectReasonSessionLogoff"
+	case DisconnectReasonSessionDisconnected:
+		return "DisconnectReasonSessionDisconnected"
+	case DisconnectReasonExclusiveModeOverride:
+		return "DisconnectReasonExclusiveModeOverride"
+	default:
+		return fmt.Sprintf("AudioSessionDisconnectReason(%d)", int32(e))
+	}
+}
+
 // AudioSessionState: https://learn.microsoft.com/windows/win32/api/audiosessiontypes/ne-audiosessiontypes-audiosessionstate
 type AudioSessionState int32
 
@@ -143,6 +405,21 @@ const (
 	AudioSessionStateExpired  AudioSessionState = 2
 )
 
+// String returns the AudioSessionState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AudioSessionState) String() string {
+	switch e {
+	case AudioSessionStateInactive:
+		return "AudioSessionStateInactive"
+	case AudioSessionStateActive:
+		return "AudioSessionStateActive"
+	case AudioSessionStateExpired:
+		return "AudioSessionStateExpired"
+	default:
+		return fmt.Sprintf("AudioSessionState(%d)", int32(e))
+	}
+}
+
 type AudioStateMonitorSoundLevel int32
 
 const (
@@ -150,6 +427,21 @@ const (
 	Low   AudioStateMonitorSoundLevel = 1
 	Full  AudioStateMonitorSoundLevel = 2
 )
+
+// String returns the AudioStateMonitorSoundLevel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AudioStateMonitorSoundLevel) String() string {
+	switch e {
+	case Muted:
+		return "Muted"
+	case Low:
+		return "Low"
+	case Full:
+		return "Full"
+	default:
+		return fmt.Sprintf("AudioStateMonitorSoundLevel(%d)", int32(e))
+	}
+}
 
 // ConnectorType: https://learn.microsoft.com/windows/win32/api/devicetopology/ne-devicetopology-connectortype
 type ConnectorType int32
@@ -163,6 +455,27 @@ const (
 	Network           ConnectorType = 5
 )
 
+// String returns the ConnectorType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ConnectorType) String() string {
+	switch e {
+	case Unknown_Connector:
+		return "Unknown_Connector"
+	case Physical_Internal:
+		return "Physical_Internal"
+	case Physical_External:
+		return "Physical_External"
+	case Software_IO:
+		return "Software_IO"
+	case Software_Fixed:
+		return "Software_Fixed"
+	case Network:
+		return "Network"
+	default:
+		return fmt.Sprintf("ConnectorType(%d)", int32(e))
+	}
+}
+
 type DEVICE_STATE uint32
 
 const (
@@ -172,6 +485,23 @@ const (
 	DEVICE_STATE_UNPLUGGED  DEVICE_STATE = 8
 )
 
+// String returns the DEVICE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DEVICE_STATE) String() string {
+	switch e {
+	case DEVICE_STATE_ACTIVE:
+		return "DEVICE_STATE_ACTIVE"
+	case DEVICE_STATE_DISABLED:
+		return "DEVICE_STATE_DISABLED"
+	case DEVICE_STATE_NOTPRESENT:
+		return "DEVICE_STATE_NOTPRESENT"
+	case DEVICE_STATE_UNPLUGGED:
+		return "DEVICE_STATE_UNPLUGGED"
+	default:
+		return fmt.Sprintf("DEVICE_STATE(%d)", uint32(e))
+	}
+}
+
 // DataFlow: https://learn.microsoft.com/windows/win32/api/devicetopology/ne-devicetopology-dataflow
 type DataFlow int32
 
@@ -179,6 +509,19 @@ const (
 	In  DataFlow = 0
 	Out DataFlow = 1
 )
+
+// String returns the DataFlow constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DataFlow) String() string {
+	switch e {
+	case In:
+		return "In"
+	case Out:
+		return "Out"
+	default:
+		return fmt.Sprintf("DataFlow(%d)", int32(e))
+	}
+}
 
 // EDataFlow: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/ne-mmdeviceapi-edataflow
 type EDataFlow int32
@@ -190,6 +533,23 @@ const (
 	EDataFlow_enum_count EDataFlow = 3
 )
 
+// String returns the EDataFlow constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDataFlow) String() string {
+	switch e {
+	case ERender:
+		return "ERender"
+	case ECapture:
+		return "ECapture"
+	case EAll:
+		return "EAll"
+	case EDataFlow_enum_count:
+		return "EDataFlow_enum_count"
+	default:
+		return fmt.Sprintf("EDataFlow(%d)", int32(e))
+	}
+}
+
 // ERole: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/ne-mmdeviceapi-erole
 type ERole int32
 
@@ -199,6 +559,23 @@ const (
 	ECommunications  ERole = 2
 	ERole_enum_count ERole = 3
 )
+
+// String returns the ERole constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ERole) String() string {
+	switch e {
+	case EConsole:
+		return "EConsole"
+	case EMultimedia:
+		return "EMultimedia"
+	case ECommunications:
+		return "ECommunications"
+	case ERole_enum_count:
+		return "ERole_enum_count"
+	default:
+		return fmt.Sprintf("ERole(%d)", int32(e))
+	}
+}
 
 // EndpointFormFactor: https://learn.microsoft.com/windows/win32/api/mmdeviceapi/ne-mmdeviceapi-endpointformfactor
 type EndpointFormFactor int32
@@ -218,6 +595,40 @@ const (
 	EndpointFormFactor_enum_count EndpointFormFactor = 11
 )
 
+// String returns the EndpointFormFactor constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EndpointFormFactor) String() string {
+	switch e {
+	case RemoteNetworkDevice:
+		return "RemoteNetworkDevice"
+	case Speakers:
+		return "Speakers"
+	case LineLevel:
+		return "LineLevel"
+	case Headphones:
+		return "Headphones"
+	case Microphone:
+		return "Microphone"
+	case Headset:
+		return "Headset"
+	case Handset:
+		return "Handset"
+	case UnknownDigitalPassthrough:
+		return "UnknownDigitalPassthrough"
+	case SPDIF:
+		return "SPDIF"
+	case DigitalAudioDisplayDevice:
+		return "DigitalAudioDisplayDevice"
+	case UnknownFormFactor:
+		return "UnknownFormFactor"
+	case EndpointFormFactor_enum_count:
+		return "EndpointFormFactor_enum_count"
+	default:
+		return fmt.Sprintf("EndpointFormFactor(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MIDI_WAVE_OPEN_TYPE uint32
 
 const (
@@ -236,6 +647,55 @@ const (
 	WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE MIDI_WAVE_OPEN_TYPE = 16
 	MIDI_IO_STATUS                           MIDI_WAVE_OPEN_TYPE = 32
 )
+
+// String returns the MIDI_WAVE_OPEN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIDI_WAVE_OPEN_TYPE) String() string {
+	var parts []string
+	if e&CALLBACK_TYPEMASK != 0 {
+		parts = append(parts, "CALLBACK_TYPEMASK")
+	}
+	if e&CALLBACK_WINDOW != 0 {
+		parts = append(parts, "CALLBACK_WINDOW")
+	}
+	if e&CALLBACK_TASK != 0 {
+		parts = append(parts, "CALLBACK_TASK")
+	}
+	if e&CALLBACK_FUNCTION != 0 {
+		parts = append(parts, "CALLBACK_FUNCTION")
+	}
+	if e&CALLBACK_THREAD != 0 {
+		parts = append(parts, "CALLBACK_THREAD")
+	}
+	if e&CALLBACK_EVENT != 0 {
+		parts = append(parts, "CALLBACK_EVENT")
+	}
+	if e&WAVE_FORMAT_QUERY != 0 {
+		parts = append(parts, "WAVE_FORMAT_QUERY")
+	}
+	if e&WAVE_ALLOWSYNC != 0 {
+		parts = append(parts, "WAVE_ALLOWSYNC")
+	}
+	if e&WAVE_MAPPED != 0 {
+		parts = append(parts, "WAVE_MAPPED")
+	}
+	if e&WAVE_FORMAT_DIRECT != 0 {
+		parts = append(parts, "WAVE_FORMAT_DIRECT")
+	}
+	if e&WAVE_FORMAT_DIRECT_QUERY != 0 {
+		parts = append(parts, "WAVE_FORMAT_DIRECT_QUERY")
+	}
+	if e&WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE != 0 {
+		parts = append(parts, "WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE")
+	}
+	if e&MIDI_IO_STATUS != 0 {
+		parts = append(parts, "MIDI_IO_STATUS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type MIXERLINE_COMPONENTTYPE uint32
 
@@ -262,6 +722,55 @@ const (
 	MIXERLINE_COMPONENTTYPE_SRC_WAVEOUT     MIXERLINE_COMPONENTTYPE = 4104
 )
 
+// String returns the MIXERLINE_COMPONENTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MIXERLINE_COMPONENTTYPE) String() string {
+	switch e {
+	case MIXERLINE_COMPONENTTYPE_DST_DIGITAL:
+		return "MIXERLINE_COMPONENTTYPE_DST_DIGITAL"
+	case MIXERLINE_COMPONENTTYPE_DST_HEADPHONES:
+		return "MIXERLINE_COMPONENTTYPE_DST_HEADPHONES"
+	case MIXERLINE_COMPONENTTYPE_DST_LINE:
+		return "MIXERLINE_COMPONENTTYPE_DST_LINE"
+	case MIXERLINE_COMPONENTTYPE_DST_MONITOR:
+		return "MIXERLINE_COMPONENTTYPE_DST_MONITOR"
+	case MIXERLINE_COMPONENTTYPE_DST_SPEAKERS:
+		return "MIXERLINE_COMPONENTTYPE_DST_SPEAKERS"
+	case MIXERLINE_COMPONENTTYPE_DST_TELEPHONE:
+		return "MIXERLINE_COMPONENTTYPE_DST_TELEPHONE"
+	case MIXERLINE_COMPONENTTYPE_DST_UNDEFINED:
+		return "MIXERLINE_COMPONENTTYPE_DST_UNDEFINED"
+	case MIXERLINE_COMPONENTTYPE_DST_VOICEIN:
+		return "MIXERLINE_COMPONENTTYPE_DST_VOICEIN"
+	case MIXERLINE_COMPONENTTYPE_DST_WAVEIN:
+		return "MIXERLINE_COMPONENTTYPE_DST_WAVEIN"
+	case MIXERLINE_COMPONENTTYPE_SRC_ANALOG:
+		return "MIXERLINE_COMPONENTTYPE_SRC_ANALOG"
+	case MIXERLINE_COMPONENTTYPE_SRC_AUXILIARY:
+		return "MIXERLINE_COMPONENTTYPE_SRC_AUXILIARY"
+	case MIXERLINE_COMPONENTTYPE_SRC_COMPACTDISC:
+		return "MIXERLINE_COMPONENTTYPE_SRC_COMPACTDISC"
+	case MIXERLINE_COMPONENTTYPE_SRC_DIGITAL:
+		return "MIXERLINE_COMPONENTTYPE_SRC_DIGITAL"
+	case MIXERLINE_COMPONENTTYPE_SRC_LINE:
+		return "MIXERLINE_COMPONENTTYPE_SRC_LINE"
+	case MIXERLINE_COMPONENTTYPE_SRC_MICROPHONE:
+		return "MIXERLINE_COMPONENTTYPE_SRC_MICROPHONE"
+	case MIXERLINE_COMPONENTTYPE_SRC_PCSPEAKER:
+		return "MIXERLINE_COMPONENTTYPE_SRC_PCSPEAKER"
+	case MIXERLINE_COMPONENTTYPE_SRC_SYNTHESIZER:
+		return "MIXERLINE_COMPONENTTYPE_SRC_SYNTHESIZER"
+	case MIXERLINE_COMPONENTTYPE_SRC_TELEPHONE:
+		return "MIXERLINE_COMPONENTTYPE_SRC_TELEPHONE"
+	case MIXERLINE_COMPONENTTYPE_SRC_UNDEFINED:
+		return "MIXERLINE_COMPONENTTYPE_SRC_UNDEFINED"
+	case MIXERLINE_COMPONENTTYPE_SRC_WAVEOUT:
+		return "MIXERLINE_COMPONENTTYPE_SRC_WAVEOUT"
+	default:
+		return fmt.Sprintf("MIXERLINE_COMPONENTTYPE(%d)", uint32(e))
+	}
+}
+
 // PROCESS_LOOPBACK_MODE: https://learn.microsoft.com/windows/win32/api/audioclientactivationparams/ne-audioclientactivationparams-process_loopback_mode
 type PROCESS_LOOPBACK_MODE int32
 
@@ -269,6 +778,19 @@ const (
 	PROCESS_LOOPBACK_MODE_INCLUDE_TARGET_PROCESS_TREE PROCESS_LOOPBACK_MODE = 0
 	PROCESS_LOOPBACK_MODE_EXCLUDE_TARGET_PROCESS_TREE PROCESS_LOOPBACK_MODE = 1
 )
+
+// String returns the PROCESS_LOOPBACK_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROCESS_LOOPBACK_MODE) String() string {
+	switch e {
+	case PROCESS_LOOPBACK_MODE_INCLUDE_TARGET_PROCESS_TREE:
+		return "PROCESS_LOOPBACK_MODE_INCLUDE_TARGET_PROCESS_TREE"
+	case PROCESS_LOOPBACK_MODE_EXCLUDE_TARGET_PROCESS_TREE:
+		return "PROCESS_LOOPBACK_MODE_EXCLUDE_TARGET_PROCESS_TREE"
+	default:
+		return fmt.Sprintf("PROCESS_LOOPBACK_MODE(%d)", int32(e))
+	}
+}
 
 // PartType: https://learn.microsoft.com/windows/win32/api/devicetopology/ne-devicetopology-parttype
 type PartType int32
@@ -278,6 +800,20 @@ const (
 	Subunit   PartType = 1
 )
 
+// String returns the PartType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PartType) String() string {
+	switch e {
+	case Connector:
+		return "Connector"
+	case Subunit:
+		return "Subunit"
+	default:
+		return fmt.Sprintf("PartType(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SND_FLAGS uint32
 
 const (
@@ -298,13 +834,79 @@ const (
 	SND_SYSTEM      SND_FLAGS = 2097152
 )
 
+// String returns the SND_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SND_FLAGS) String() string {
+	var parts []string
+	if e&SND_APPLICATION != 0 {
+		parts = append(parts, "SND_APPLICATION")
+	}
+	if e&SND_ALIAS != 0 {
+		parts = append(parts, "SND_ALIAS")
+	}
+	if e&SND_ALIAS_ID != 0 {
+		parts = append(parts, "SND_ALIAS_ID")
+	}
+	if e&SND_FILENAME != 0 {
+		parts = append(parts, "SND_FILENAME")
+	}
+	if e&SND_RESOURCE != 0 {
+		parts = append(parts, "SND_RESOURCE")
+	}
+	if e&SND_ASYNC != 0 {
+		parts = append(parts, "SND_ASYNC")
+	}
+	if e&SND_NODEFAULT != 0 {
+		parts = append(parts, "SND_NODEFAULT")
+	}
+	if e&SND_LOOP != 0 {
+		parts = append(parts, "SND_LOOP")
+	}
+	if e&SND_MEMORY != 0 {
+		parts = append(parts, "SND_MEMORY")
+	}
+	if e&SND_NOSTOP != 0 {
+		parts = append(parts, "SND_NOSTOP")
+	}
+	if e&SND_NOWAIT != 0 {
+		parts = append(parts, "SND_NOWAIT")
+	}
+	if e&SND_PURGE != 0 {
+		parts = append(parts, "SND_PURGE")
+	}
+	if e&SND_SENTRY != 0 {
+		parts = append(parts, "SND_SENTRY")
+	}
+	if e&SND_SYSTEM != 0 {
+		parts = append(parts, "SND_SYSTEM")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // SPATIAL_AUDIO_STREAM_OPTIONS: https://learn.microsoft.com/windows/win32/api/spatialaudioclient/ne-spatialaudioclient-spatial_audio_stream_options
+// Bitmask — values may be combined with |.
 type SPATIAL_AUDIO_STREAM_OPTIONS int32
 
 const (
 	SPATIAL_AUDIO_STREAM_OPTIONS_NONE    SPATIAL_AUDIO_STREAM_OPTIONS = 0
 	SPATIAL_AUDIO_STREAM_OPTIONS_OFFLOAD SPATIAL_AUDIO_STREAM_OPTIONS = 1
 )
+
+// String returns the SPATIAL_AUDIO_STREAM_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPATIAL_AUDIO_STREAM_OPTIONS) String() string {
+	var parts []string
+	if e&SPATIAL_AUDIO_STREAM_OPTIONS_OFFLOAD != 0 {
+		parts = append(parts, "SPATIAL_AUDIO_STREAM_OPTIONS_OFFLOAD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // SpatialAudioHrtfDirectivityType: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ne-spatialaudiohrtf-spatialaudiohrtfdirectivitytype
 type SpatialAudioHrtfDirectivityType int32
@@ -315,6 +917,21 @@ const (
 	SpatialAudioHrtfDirectivity_Cone            SpatialAudioHrtfDirectivityType = 2
 )
 
+// String returns the SpatialAudioHrtfDirectivityType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpatialAudioHrtfDirectivityType) String() string {
+	switch e {
+	case SpatialAudioHrtfDirectivity_OmniDirectional:
+		return "SpatialAudioHrtfDirectivity_OmniDirectional"
+	case SpatialAudioHrtfDirectivity_Cardioid:
+		return "SpatialAudioHrtfDirectivity_Cardioid"
+	case SpatialAudioHrtfDirectivity_Cone:
+		return "SpatialAudioHrtfDirectivity_Cone"
+	default:
+		return fmt.Sprintf("SpatialAudioHrtfDirectivityType(%d)", int32(e))
+	}
+}
+
 // SpatialAudioHrtfDistanceDecayType: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ne-spatialaudiohrtf-spatialaudiohrtfdistancedecaytype
 type SpatialAudioHrtfDistanceDecayType int32
 
@@ -322,6 +939,19 @@ const (
 	SpatialAudioHrtfDistanceDecay_NaturalDecay SpatialAudioHrtfDistanceDecayType = 0
 	SpatialAudioHrtfDistanceDecay_CustomDecay  SpatialAudioHrtfDistanceDecayType = 1
 )
+
+// String returns the SpatialAudioHrtfDistanceDecayType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpatialAudioHrtfDistanceDecayType) String() string {
+	switch e {
+	case SpatialAudioHrtfDistanceDecay_NaturalDecay:
+		return "SpatialAudioHrtfDistanceDecay_NaturalDecay"
+	case SpatialAudioHrtfDistanceDecay_CustomDecay:
+		return "SpatialAudioHrtfDistanceDecay_CustomDecay"
+	default:
+		return fmt.Sprintf("SpatialAudioHrtfDistanceDecayType(%d)", int32(e))
+	}
+}
 
 // SpatialAudioHrtfEnvironmentType: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ne-spatialaudiohrtf-spatialaudiohrtfenvironmenttype
 type SpatialAudioHrtfEnvironmentType int32
@@ -334,6 +964,25 @@ const (
 	SpatialAudioHrtfEnvironment_Average  SpatialAudioHrtfEnvironmentType = 4
 )
 
+// String returns the SpatialAudioHrtfEnvironmentType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpatialAudioHrtfEnvironmentType) String() string {
+	switch e {
+	case SpatialAudioHrtfEnvironment_Small:
+		return "SpatialAudioHrtfEnvironment_Small"
+	case SpatialAudioHrtfEnvironment_Medium:
+		return "SpatialAudioHrtfEnvironment_Medium"
+	case SpatialAudioHrtfEnvironment_Large:
+		return "SpatialAudioHrtfEnvironment_Large"
+	case SpatialAudioHrtfEnvironment_Outdoors:
+		return "SpatialAudioHrtfEnvironment_Outdoors"
+	case SpatialAudioHrtfEnvironment_Average:
+		return "SpatialAudioHrtfEnvironment_Average"
+	default:
+		return fmt.Sprintf("SpatialAudioHrtfEnvironmentType(%d)", int32(e))
+	}
+}
+
 // SpatialAudioMetadataCopyMode: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/ne-spatialaudiometadata-spatialaudiometadatacopymode
 type SpatialAudioMetadataCopyMode int32
 
@@ -344,6 +993,23 @@ const (
 	SpatialAudioMetadataCopy_AppendMergeWithFirst SpatialAudioMetadataCopyMode = 3
 )
 
+// String returns the SpatialAudioMetadataCopyMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpatialAudioMetadataCopyMode) String() string {
+	switch e {
+	case SpatialAudioMetadataCopy_Overwrite:
+		return "SpatialAudioMetadataCopy_Overwrite"
+	case SpatialAudioMetadataCopy_Append:
+		return "SpatialAudioMetadataCopy_Append"
+	case SpatialAudioMetadataCopy_AppendMergeWithLast:
+		return "SpatialAudioMetadataCopy_AppendMergeWithLast"
+	case SpatialAudioMetadataCopy_AppendMergeWithFirst:
+		return "SpatialAudioMetadataCopy_AppendMergeWithFirst"
+	default:
+		return fmt.Sprintf("SpatialAudioMetadataCopyMode(%d)", int32(e))
+	}
+}
+
 // SpatialAudioMetadataWriterOverflowMode: https://learn.microsoft.com/windows/win32/api/spatialaudiometadata/ne-spatialaudiometadata-spatialaudiometadatawriteroverflowmode
 type SpatialAudioMetadataWriterOverflowMode int32
 
@@ -353,6 +1019,21 @@ const (
 	SpatialAudioMetadataWriterOverflow_MergeWithLast SpatialAudioMetadataWriterOverflowMode = 2
 )
 
+// String returns the SpatialAudioMetadataWriterOverflowMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpatialAudioMetadataWriterOverflowMode) String() string {
+	switch e {
+	case SpatialAudioMetadataWriterOverflow_Fail:
+		return "SpatialAudioMetadataWriterOverflow_Fail"
+	case SpatialAudioMetadataWriterOverflow_MergeWithNew:
+		return "SpatialAudioMetadataWriterOverflow_MergeWithNew"
+	case SpatialAudioMetadataWriterOverflow_MergeWithLast:
+		return "SpatialAudioMetadataWriterOverflow_MergeWithLast"
+	default:
+		return fmt.Sprintf("SpatialAudioMetadataWriterOverflowMode(%d)", int32(e))
+	}
+}
+
 // AUDCLNT_BUFFERFLAGS: https://learn.microsoft.com/windows/win32/api/audioclient/ne-audioclient-_audclnt_bufferflags
 type AUDCLNT_BUFFERFLAGS int32
 
@@ -361,3 +1042,18 @@ const (
 	AUDCLNT_BUFFERFLAGS_SILENT             AUDCLNT_BUFFERFLAGS = 2
 	AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR    AUDCLNT_BUFFERFLAGS = 4
 )
+
+// String returns the AUDCLNT_BUFFERFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDCLNT_BUFFERFLAGS) String() string {
+	switch e {
+	case AUDCLNT_BUFFERFLAGS_DATA_DISCONTINUITY:
+		return "AUDCLNT_BUFFERFLAGS_DATA_DISCONTINUITY"
+	case AUDCLNT_BUFFERFLAGS_SILENT:
+		return "AUDCLNT_BUFFERFLAGS_SILENT"
+	case AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR:
+		return "AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR"
+	default:
+		return fmt.Sprintf("AUDCLNT_BUFFERFLAGS(%d)", int32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package iis
 
+import (
+	"fmt"
+)
+
 type FTP_ACCESS int32
 
 const (
@@ -13,6 +17,23 @@ const (
 	FTP_ACCESS_READ_WRITE FTP_ACCESS = 3
 )
 
+// String returns the FTP_ACCESS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FTP_ACCESS) String() string {
+	switch e {
+	case FTP_ACCESS_NONE:
+		return "FTP_ACCESS_NONE"
+	case FTP_ACCESS_READ:
+		return "FTP_ACCESS_READ"
+	case FTP_ACCESS_WRITE:
+		return "FTP_ACCESS_WRITE"
+	case FTP_ACCESS_READ_WRITE:
+		return "FTP_ACCESS_READ_WRITE"
+	default:
+		return fmt.Sprintf("FTP_ACCESS(%d)", int32(e))
+	}
+}
+
 type FTP_PROCESS_STATUS int32
 
 const (
@@ -21,6 +42,23 @@ const (
 	FTP_PROCESS_TERMINATE_SESSION FTP_PROCESS_STATUS = 2
 	FTP_PROCESS_REJECT_COMMAND    FTP_PROCESS_STATUS = 3
 )
+
+// String returns the FTP_PROCESS_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FTP_PROCESS_STATUS) String() string {
+	switch e {
+	case FTP_PROCESS_CONTINUE:
+		return "FTP_PROCESS_CONTINUE"
+	case FTP_PROCESS_CLOSE_SESSION:
+		return "FTP_PROCESS_CLOSE_SESSION"
+	case FTP_PROCESS_TERMINATE_SESSION:
+		return "FTP_PROCESS_TERMINATE_SESSION"
+	case FTP_PROCESS_REJECT_COMMAND:
+		return "FTP_PROCESS_REJECT_COMMAND"
+	default:
+		return fmt.Sprintf("FTP_PROCESS_STATUS(%d)", int32(e))
+	}
+}
 
 type HTTP_TRACE_TYPE int32
 
@@ -39,6 +77,39 @@ const (
 	HTTP_TRACE_TYPE_BOOL      HTTP_TRACE_TYPE = 11
 )
 
+// String returns the HTTP_TRACE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HTTP_TRACE_TYPE) String() string {
+	switch e {
+	case HTTP_TRACE_TYPE_BYTE:
+		return "HTTP_TRACE_TYPE_BYTE"
+	case HTTP_TRACE_TYPE_USHORT:
+		return "HTTP_TRACE_TYPE_USHORT"
+	case HTTP_TRACE_TYPE_ULONG:
+		return "HTTP_TRACE_TYPE_ULONG"
+	case HTTP_TRACE_TYPE_ULONGLONG:
+		return "HTTP_TRACE_TYPE_ULONGLONG"
+	case HTTP_TRACE_TYPE_CHAR:
+		return "HTTP_TRACE_TYPE_CHAR"
+	case HTTP_TRACE_TYPE_SHORT:
+		return "HTTP_TRACE_TYPE_SHORT"
+	case HTTP_TRACE_TYPE_LONG:
+		return "HTTP_TRACE_TYPE_LONG"
+	case HTTP_TRACE_TYPE_LONGLONG:
+		return "HTTP_TRACE_TYPE_LONGLONG"
+	case HTTP_TRACE_TYPE_LPCWSTR:
+		return "HTTP_TRACE_TYPE_LPCWSTR"
+	case HTTP_TRACE_TYPE_LPCSTR:
+		return "HTTP_TRACE_TYPE_LPCSTR"
+	case HTTP_TRACE_TYPE_LPCGUID:
+		return "HTTP_TRACE_TYPE_LPCGUID"
+	case HTTP_TRACE_TYPE_BOOL:
+		return "HTTP_TRACE_TYPE_BOOL"
+	default:
+		return fmt.Sprintf("HTTP_TRACE_TYPE(%d)", int32(e))
+	}
+}
+
 type METADATATYPES int32
 
 const (
@@ -51,12 +122,48 @@ const (
 	INVALID_END_METADATA METADATATYPES = 6
 )
 
+// String returns the METADATATYPES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e METADATATYPES) String() string {
+	switch e {
+	case ALL_METADATA:
+		return "ALL_METADATA"
+	case DWORD_METADATA:
+		return "DWORD_METADATA"
+	case STRING_METADATA:
+		return "STRING_METADATA"
+	case BINARY_METADATA:
+		return "BINARY_METADATA"
+	case EXPANDSZ_METADATA:
+		return "EXPANDSZ_METADATA"
+	case MULTISZ_METADATA:
+		return "MULTISZ_METADATA"
+	case INVALID_END_METADATA:
+		return "INVALID_END_METADATA"
+	default:
+		return fmt.Sprintf("METADATATYPES(%d)", int32(e))
+	}
+}
+
 type SF_PROPERTY_IIS int32
 
 const (
 	SF_PROPERTY_SSL_CTXT        SF_PROPERTY_IIS = 0
 	SF_PROPERTY_INSTANCE_NUM_ID SF_PROPERTY_IIS = 1
 )
+
+// String returns the SF_PROPERTY_IIS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SF_PROPERTY_IIS) String() string {
+	switch e {
+	case SF_PROPERTY_SSL_CTXT:
+		return "SF_PROPERTY_SSL_CTXT"
+	case SF_PROPERTY_INSTANCE_NUM_ID:
+		return "SF_PROPERTY_INSTANCE_NUM_ID"
+	default:
+		return fmt.Sprintf("SF_PROPERTY_IIS(%d)", int32(e))
+	}
+}
 
 type SF_REQ_TYPE int32
 
@@ -72,6 +179,33 @@ const (
 	SF_REQ_DISABLE_NOTIFICATIONS SF_REQ_TYPE = 8
 )
 
+// String returns the SF_REQ_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SF_REQ_TYPE) String() string {
+	switch e {
+	case SF_REQ_SEND_RESPONSE_HEADER:
+		return "SF_REQ_SEND_RESPONSE_HEADER"
+	case SF_REQ_ADD_HEADERS_ON_DENIAL:
+		return "SF_REQ_ADD_HEADERS_ON_DENIAL"
+	case SF_REQ_SET_NEXT_READ_SIZE:
+		return "SF_REQ_SET_NEXT_READ_SIZE"
+	case SF_REQ_SET_PROXY_INFO:
+		return "SF_REQ_SET_PROXY_INFO"
+	case SF_REQ_GET_CONNID:
+		return "SF_REQ_GET_CONNID"
+	case SF_REQ_SET_CERTIFICATE_INFO:
+		return "SF_REQ_SET_CERTIFICATE_INFO"
+	case SF_REQ_GET_PROPERTY:
+		return "SF_REQ_GET_PROPERTY"
+	case SF_REQ_NORMALIZE_URL:
+		return "SF_REQ_NORMALIZE_URL"
+	case SF_REQ_DISABLE_NOTIFICATIONS:
+		return "SF_REQ_DISABLE_NOTIFICATIONS"
+	default:
+		return fmt.Sprintf("SF_REQ_TYPE(%d)", int32(e))
+	}
+}
+
 type SF_STATUS_TYPE int32
 
 const (
@@ -82,3 +216,24 @@ const (
 	SF_STATUS_REQ_ERROR                SF_STATUS_TYPE = 134217732
 	SF_STATUS_REQ_READ_NEXT            SF_STATUS_TYPE = 134217733
 )
+
+// String returns the SF_STATUS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SF_STATUS_TYPE) String() string {
+	switch e {
+	case SF_STATUS_REQ_FINISHED:
+		return "SF_STATUS_REQ_FINISHED"
+	case SF_STATUS_REQ_FINISHED_KEEP_CONN:
+		return "SF_STATUS_REQ_FINISHED_KEEP_CONN"
+	case SF_STATUS_REQ_NEXT_NOTIFICATION:
+		return "SF_STATUS_REQ_NEXT_NOTIFICATION"
+	case SF_STATUS_REQ_HANDLED_NOTIFICATION:
+		return "SF_STATUS_REQ_HANDLED_NOTIFICATION"
+	case SF_STATUS_REQ_ERROR:
+		return "SF_STATUS_REQ_ERROR"
+	case SF_STATUS_REQ_READ_NEXT:
+		return "SF_STATUS_REQ_READ_NEXT"
+	default:
+		return fmt.Sprintf("SF_STATUS_TYPE(%d)", int32(e))
+	}
+}

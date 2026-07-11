@@ -4,6 +4,11 @@
 
 package xps
 
+import (
+	"fmt"
+	"strings"
+)
+
 type PRINTER_DEVICE_CAPABILITIES uint16
 
 const (
@@ -39,12 +44,93 @@ const (
 	DC_VERSION          PRINTER_DEVICE_CAPABILITIES = 10
 )
 
+// String returns the PRINTER_DEVICE_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRINTER_DEVICE_CAPABILITIES) String() string {
+	switch e {
+	case DC_BINNAMES:
+		return "DC_BINNAMES"
+	case DC_BINS:
+		return "DC_BINS"
+	case DC_COLLATE:
+		return "DC_COLLATE"
+	case DC_COLORDEVICE:
+		return "DC_COLORDEVICE"
+	case DC_COPIES:
+		return "DC_COPIES"
+	case DC_DRIVER:
+		return "DC_DRIVER"
+	case DC_DUPLEX:
+		return "DC_DUPLEX"
+	case DC_ENUMRESOLUTIONS:
+		return "DC_ENUMRESOLUTIONS"
+	case DC_EXTRA:
+		return "DC_EXTRA"
+	case DC_FIELDS:
+		return "DC_FIELDS"
+	case DC_FILEDEPENDENCIES:
+		return "DC_FILEDEPENDENCIES"
+	case DC_MAXEXTENT:
+		return "DC_MAXEXTENT"
+	case DC_MEDIAREADY:
+		return "DC_MEDIAREADY"
+	case DC_MEDIATYPENAMES:
+		return "DC_MEDIATYPENAMES"
+	case DC_MEDIATYPES:
+		return "DC_MEDIATYPES"
+	case DC_MINEXTENT:
+		return "DC_MINEXTENT"
+	case DC_ORIENTATION:
+		return "DC_ORIENTATION"
+	case DC_NUP:
+		return "DC_NUP"
+	case DC_PAPERNAMES:
+		return "DC_PAPERNAMES"
+	case DC_PAPERS:
+		return "DC_PAPERS"
+	case DC_PAPERSIZE:
+		return "DC_PAPERSIZE"
+	case DC_PERSONALITY:
+		return "DC_PERSONALITY"
+	case DC_PRINTERMEM:
+		return "DC_PRINTERMEM"
+	case DC_PRINTRATE:
+		return "DC_PRINTRATE"
+	case DC_PRINTRATEPPM:
+		return "DC_PRINTRATEPPM"
+	case DC_PRINTRATEUNIT:
+		return "DC_PRINTRATEUNIT"
+	case DC_SIZE:
+		return "DC_SIZE"
+	case DC_STAPLE:
+		return "DC_STAPLE"
+	case DC_TRUETYPE:
+		return "DC_TRUETYPE"
+	case DC_VERSION:
+		return "DC_VERSION"
+	default:
+		return fmt.Sprintf("PRINTER_DEVICE_CAPABILITIES(%d)", uint16(e))
+	}
+}
+
 type PRINT_WINDOW_FLAGS uint32
 
 const (
 	PW_CLIENTONLY PRINT_WINDOW_FLAGS = 1
 )
 
+// String returns the PRINT_WINDOW_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRINT_WINDOW_FLAGS) String() string {
+	switch e {
+	case PW_CLIENTONLY:
+		return "PW_CLIENTONLY"
+	default:
+		return fmt.Sprintf("PRINT_WINDOW_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PSINJECT_POINT uint16
 
 const (
@@ -81,6 +167,109 @@ const (
 	PSINJECT_VMRESTORE                  PSINJECT_POINT = 201
 )
 
+// String returns the PSINJECT_POINT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PSINJECT_POINT) String() string {
+	var parts []string
+	if e&PSINJECT_BEGINSTREAM != 0 {
+		parts = append(parts, "PSINJECT_BEGINSTREAM")
+	}
+	if e&PSINJECT_PSADOBE != 0 {
+		parts = append(parts, "PSINJECT_PSADOBE")
+	}
+	if e&PSINJECT_PAGESATEND != 0 {
+		parts = append(parts, "PSINJECT_PAGESATEND")
+	}
+	if e&PSINJECT_PAGES != 0 {
+		parts = append(parts, "PSINJECT_PAGES")
+	}
+	if e&PSINJECT_DOCNEEDEDRES != 0 {
+		parts = append(parts, "PSINJECT_DOCNEEDEDRES")
+	}
+	if e&PSINJECT_DOCSUPPLIEDRES != 0 {
+		parts = append(parts, "PSINJECT_DOCSUPPLIEDRES")
+	}
+	if e&PSINJECT_PAGEORDER != 0 {
+		parts = append(parts, "PSINJECT_PAGEORDER")
+	}
+	if e&PSINJECT_ORIENTATION != 0 {
+		parts = append(parts, "PSINJECT_ORIENTATION")
+	}
+	if e&PSINJECT_BOUNDINGBOX != 0 {
+		parts = append(parts, "PSINJECT_BOUNDINGBOX")
+	}
+	if e&PSINJECT_DOCUMENTPROCESSCOLORS != 0 {
+		parts = append(parts, "PSINJECT_DOCUMENTPROCESSCOLORS")
+	}
+	if e&PSINJECT_COMMENTS != 0 {
+		parts = append(parts, "PSINJECT_COMMENTS")
+	}
+	if e&PSINJECT_BEGINDEFAULTS != 0 {
+		parts = append(parts, "PSINJECT_BEGINDEFAULTS")
+	}
+	if e&PSINJECT_ENDDEFAULTS != 0 {
+		parts = append(parts, "PSINJECT_ENDDEFAULTS")
+	}
+	if e&PSINJECT_BEGINPROLOG != 0 {
+		parts = append(parts, "PSINJECT_BEGINPROLOG")
+	}
+	if e&PSINJECT_ENDPROLOG != 0 {
+		parts = append(parts, "PSINJECT_ENDPROLOG")
+	}
+	if e&PSINJECT_BEGINSETUP != 0 {
+		parts = append(parts, "PSINJECT_BEGINSETUP")
+	}
+	if e&PSINJECT_ENDSETUP != 0 {
+		parts = append(parts, "PSINJECT_ENDSETUP")
+	}
+	if e&PSINJECT_TRAILER != 0 {
+		parts = append(parts, "PSINJECT_TRAILER")
+	}
+	if e&PSINJECT_EOF != 0 {
+		parts = append(parts, "PSINJECT_EOF")
+	}
+	if e&PSINJECT_ENDSTREAM != 0 {
+		parts = append(parts, "PSINJECT_ENDSTREAM")
+	}
+	if e&PSINJECT_DOCUMENTPROCESSCOLORSATEND != 0 {
+		parts = append(parts, "PSINJECT_DOCUMENTPROCESSCOLORSATEND")
+	}
+	if e&PSINJECT_PAGENUMBER != 0 {
+		parts = append(parts, "PSINJECT_PAGENUMBER")
+	}
+	if e&PSINJECT_BEGINPAGESETUP != 0 {
+		parts = append(parts, "PSINJECT_BEGINPAGESETUP")
+	}
+	if e&PSINJECT_ENDPAGESETUP != 0 {
+		parts = append(parts, "PSINJECT_ENDPAGESETUP")
+	}
+	if e&PSINJECT_PAGETRAILER != 0 {
+		parts = append(parts, "PSINJECT_PAGETRAILER")
+	}
+	if e&PSINJECT_PLATECOLOR != 0 {
+		parts = append(parts, "PSINJECT_PLATECOLOR")
+	}
+	if e&PSINJECT_SHOWPAGE != 0 {
+		parts = append(parts, "PSINJECT_SHOWPAGE")
+	}
+	if e&PSINJECT_PAGEBBOX != 0 {
+		parts = append(parts, "PSINJECT_PAGEBBOX")
+	}
+	if e&PSINJECT_ENDPAGECOMMENTS != 0 {
+		parts = append(parts, "PSINJECT_ENDPAGECOMMENTS")
+	}
+	if e&PSINJECT_VMSAVE != 0 {
+		parts = append(parts, "PSINJECT_VMSAVE")
+	}
+	if e&PSINJECT_VMRESTORE != 0 {
+		parts = append(parts, "PSINJECT_VMRESTORE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // XPS_COLOR_INTERPOLATION: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_color_interpolation
 type XPS_COLOR_INTERPOLATION int32
 
@@ -88,6 +277,19 @@ const (
 	XPS_COLOR_INTERPOLATION_SCRGBLINEAR XPS_COLOR_INTERPOLATION = 1
 	XPS_COLOR_INTERPOLATION_SRGBLINEAR  XPS_COLOR_INTERPOLATION = 2
 )
+
+// String returns the XPS_COLOR_INTERPOLATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_COLOR_INTERPOLATION) String() string {
+	switch e {
+	case XPS_COLOR_INTERPOLATION_SCRGBLINEAR:
+		return "XPS_COLOR_INTERPOLATION_SCRGBLINEAR"
+	case XPS_COLOR_INTERPOLATION_SRGBLINEAR:
+		return "XPS_COLOR_INTERPOLATION_SRGBLINEAR"
+	default:
+		return fmt.Sprintf("XPS_COLOR_INTERPOLATION(%d)", int32(e))
+	}
+}
 
 // XPS_COLOR_TYPE: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_color_type
 type XPS_COLOR_TYPE int32
@@ -97,6 +299,21 @@ const (
 	XPS_COLOR_TYPE_SCRGB   XPS_COLOR_TYPE = 2
 	XPS_COLOR_TYPE_CONTEXT XPS_COLOR_TYPE = 3
 )
+
+// String returns the XPS_COLOR_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_COLOR_TYPE) String() string {
+	switch e {
+	case XPS_COLOR_TYPE_SRGB:
+		return "XPS_COLOR_TYPE_SRGB"
+	case XPS_COLOR_TYPE_SCRGB:
+		return "XPS_COLOR_TYPE_SCRGB"
+	case XPS_COLOR_TYPE_CONTEXT:
+		return "XPS_COLOR_TYPE_CONTEXT"
+	default:
+		return fmt.Sprintf("XPS_COLOR_TYPE(%d)", int32(e))
+	}
+}
 
 // XPS_DASH_CAP: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_dash_cap
 type XPS_DASH_CAP int32
@@ -108,6 +325,23 @@ const (
 	XPS_DASH_CAP_TRIANGLE XPS_DASH_CAP = 4
 )
 
+// String returns the XPS_DASH_CAP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_DASH_CAP) String() string {
+	switch e {
+	case XPS_DASH_CAP_FLAT:
+		return "XPS_DASH_CAP_FLAT"
+	case XPS_DASH_CAP_ROUND:
+		return "XPS_DASH_CAP_ROUND"
+	case XPS_DASH_CAP_SQUARE:
+		return "XPS_DASH_CAP_SQUARE"
+	case XPS_DASH_CAP_TRIANGLE:
+		return "XPS_DASH_CAP_TRIANGLE"
+	default:
+		return fmt.Sprintf("XPS_DASH_CAP(%d)", int32(e))
+	}
+}
+
 // XPS_DOCUMENT_TYPE: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel_1/ne-xpsobjectmodel_1-xps_document_type
 type XPS_DOCUMENT_TYPE int32
 
@@ -117,6 +351,21 @@ const (
 	XPS_DOCUMENT_TYPE_OPENXPS     XPS_DOCUMENT_TYPE = 3
 )
 
+// String returns the XPS_DOCUMENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_DOCUMENT_TYPE) String() string {
+	switch e {
+	case XPS_DOCUMENT_TYPE_UNSPECIFIED:
+		return "XPS_DOCUMENT_TYPE_UNSPECIFIED"
+	case XPS_DOCUMENT_TYPE_XPS:
+		return "XPS_DOCUMENT_TYPE_XPS"
+	case XPS_DOCUMENT_TYPE_OPENXPS:
+		return "XPS_DOCUMENT_TYPE_OPENXPS"
+	default:
+		return fmt.Sprintf("XPS_DOCUMENT_TYPE(%d)", int32(e))
+	}
+}
+
 // XPS_FILL_RULE: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_fill_rule
 type XPS_FILL_RULE int32
 
@@ -124,6 +373,19 @@ const (
 	XPS_FILL_RULE_EVENODD XPS_FILL_RULE = 1
 	XPS_FILL_RULE_NONZERO XPS_FILL_RULE = 2
 )
+
+// String returns the XPS_FILL_RULE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_FILL_RULE) String() string {
+	switch e {
+	case XPS_FILL_RULE_EVENODD:
+		return "XPS_FILL_RULE_EVENODD"
+	case XPS_FILL_RULE_NONZERO:
+		return "XPS_FILL_RULE_NONZERO"
+	default:
+		return fmt.Sprintf("XPS_FILL_RULE(%d)", int32(e))
+	}
+}
 
 // XPS_FONT_EMBEDDING: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_font_embedding
 type XPS_FONT_EMBEDDING int32
@@ -134,6 +396,23 @@ const (
 	XPS_FONT_EMBEDDING_RESTRICTED              XPS_FONT_EMBEDDING = 3
 	XPS_FONT_EMBEDDING_RESTRICTED_UNOBFUSCATED XPS_FONT_EMBEDDING = 4
 )
+
+// String returns the XPS_FONT_EMBEDDING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_FONT_EMBEDDING) String() string {
+	switch e {
+	case XPS_FONT_EMBEDDING_NORMAL:
+		return "XPS_FONT_EMBEDDING_NORMAL"
+	case XPS_FONT_EMBEDDING_OBFUSCATED:
+		return "XPS_FONT_EMBEDDING_OBFUSCATED"
+	case XPS_FONT_EMBEDDING_RESTRICTED:
+		return "XPS_FONT_EMBEDDING_RESTRICTED"
+	case XPS_FONT_EMBEDDING_RESTRICTED_UNOBFUSCATED:
+		return "XPS_FONT_EMBEDDING_RESTRICTED_UNOBFUSCATED"
+	default:
+		return fmt.Sprintf("XPS_FONT_EMBEDDING(%d)", int32(e))
+	}
+}
 
 // XPS_IMAGE_TYPE: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_image_type
 type XPS_IMAGE_TYPE int32
@@ -146,6 +425,25 @@ const (
 	XPS_IMAGE_TYPE_JXR  XPS_IMAGE_TYPE = 5
 )
 
+// String returns the XPS_IMAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_IMAGE_TYPE) String() string {
+	switch e {
+	case XPS_IMAGE_TYPE_JPEG:
+		return "XPS_IMAGE_TYPE_JPEG"
+	case XPS_IMAGE_TYPE_PNG:
+		return "XPS_IMAGE_TYPE_PNG"
+	case XPS_IMAGE_TYPE_TIFF:
+		return "XPS_IMAGE_TYPE_TIFF"
+	case XPS_IMAGE_TYPE_WDP:
+		return "XPS_IMAGE_TYPE_WDP"
+	case XPS_IMAGE_TYPE_JXR:
+		return "XPS_IMAGE_TYPE_JXR"
+	default:
+		return fmt.Sprintf("XPS_IMAGE_TYPE(%d)", int32(e))
+	}
+}
+
 // XPS_INTERLEAVING: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_interleaving
 type XPS_INTERLEAVING int32
 
@@ -153,6 +451,19 @@ const (
 	XPS_INTERLEAVING_OFF XPS_INTERLEAVING = 1
 	XPS_INTERLEAVING_ON  XPS_INTERLEAVING = 2
 )
+
+// String returns the XPS_INTERLEAVING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_INTERLEAVING) String() string {
+	switch e {
+	case XPS_INTERLEAVING_OFF:
+		return "XPS_INTERLEAVING_OFF"
+	case XPS_INTERLEAVING_ON:
+		return "XPS_INTERLEAVING_ON"
+	default:
+		return fmt.Sprintf("XPS_INTERLEAVING(%d)", int32(e))
+	}
+}
 
 // XPS_LINE_CAP: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_line_cap
 type XPS_LINE_CAP int32
@@ -164,6 +475,23 @@ const (
 	XPS_LINE_CAP_TRIANGLE XPS_LINE_CAP = 4
 )
 
+// String returns the XPS_LINE_CAP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_LINE_CAP) String() string {
+	switch e {
+	case XPS_LINE_CAP_FLAT:
+		return "XPS_LINE_CAP_FLAT"
+	case XPS_LINE_CAP_ROUND:
+		return "XPS_LINE_CAP_ROUND"
+	case XPS_LINE_CAP_SQUARE:
+		return "XPS_LINE_CAP_SQUARE"
+	case XPS_LINE_CAP_TRIANGLE:
+		return "XPS_LINE_CAP_TRIANGLE"
+	default:
+		return fmt.Sprintf("XPS_LINE_CAP(%d)", int32(e))
+	}
+}
+
 // XPS_LINE_JOIN: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_line_join
 type XPS_LINE_JOIN int32
 
@@ -172,6 +500,21 @@ const (
 	XPS_LINE_JOIN_BEVEL XPS_LINE_JOIN = 2
 	XPS_LINE_JOIN_ROUND XPS_LINE_JOIN = 3
 )
+
+// String returns the XPS_LINE_JOIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_LINE_JOIN) String() string {
+	switch e {
+	case XPS_LINE_JOIN_MITER:
+		return "XPS_LINE_JOIN_MITER"
+	case XPS_LINE_JOIN_BEVEL:
+		return "XPS_LINE_JOIN_BEVEL"
+	case XPS_LINE_JOIN_ROUND:
+		return "XPS_LINE_JOIN_ROUND"
+	default:
+		return fmt.Sprintf("XPS_LINE_JOIN(%d)", int32(e))
+	}
+}
 
 // XPS_OBJECT_TYPE: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_object_type
 type XPS_OBJECT_TYPE int32
@@ -189,6 +532,35 @@ const (
 	XPS_OBJECT_TYPE_VISUAL_BRUSH          XPS_OBJECT_TYPE = 10
 )
 
+// String returns the XPS_OBJECT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_OBJECT_TYPE) String() string {
+	switch e {
+	case XPS_OBJECT_TYPE_CANVAS:
+		return "XPS_OBJECT_TYPE_CANVAS"
+	case XPS_OBJECT_TYPE_GLYPHS:
+		return "XPS_OBJECT_TYPE_GLYPHS"
+	case XPS_OBJECT_TYPE_PATH:
+		return "XPS_OBJECT_TYPE_PATH"
+	case XPS_OBJECT_TYPE_MATRIX_TRANSFORM:
+		return "XPS_OBJECT_TYPE_MATRIX_TRANSFORM"
+	case XPS_OBJECT_TYPE_GEOMETRY:
+		return "XPS_OBJECT_TYPE_GEOMETRY"
+	case XPS_OBJECT_TYPE_SOLID_COLOR_BRUSH:
+		return "XPS_OBJECT_TYPE_SOLID_COLOR_BRUSH"
+	case XPS_OBJECT_TYPE_IMAGE_BRUSH:
+		return "XPS_OBJECT_TYPE_IMAGE_BRUSH"
+	case XPS_OBJECT_TYPE_LINEAR_GRADIENT_BRUSH:
+		return "XPS_OBJECT_TYPE_LINEAR_GRADIENT_BRUSH"
+	case XPS_OBJECT_TYPE_RADIAL_GRADIENT_BRUSH:
+		return "XPS_OBJECT_TYPE_RADIAL_GRADIENT_BRUSH"
+	case XPS_OBJECT_TYPE_VISUAL_BRUSH:
+		return "XPS_OBJECT_TYPE_VISUAL_BRUSH"
+	default:
+		return fmt.Sprintf("XPS_OBJECT_TYPE(%d)", int32(e))
+	}
+}
+
 // XPS_SEGMENT_STROKE_PATTERN: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_segment_stroke_pattern
 type XPS_SEGMENT_STROKE_PATTERN int32
 
@@ -197,6 +569,21 @@ const (
 	XPS_SEGMENT_STROKE_PATTERN_NONE  XPS_SEGMENT_STROKE_PATTERN = 2
 	XPS_SEGMENT_STROKE_PATTERN_MIXED XPS_SEGMENT_STROKE_PATTERN = 3
 )
+
+// String returns the XPS_SEGMENT_STROKE_PATTERN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_SEGMENT_STROKE_PATTERN) String() string {
+	switch e {
+	case XPS_SEGMENT_STROKE_PATTERN_ALL:
+		return "XPS_SEGMENT_STROKE_PATTERN_ALL"
+	case XPS_SEGMENT_STROKE_PATTERN_NONE:
+		return "XPS_SEGMENT_STROKE_PATTERN_NONE"
+	case XPS_SEGMENT_STROKE_PATTERN_MIXED:
+		return "XPS_SEGMENT_STROKE_PATTERN_MIXED"
+	default:
+		return fmt.Sprintf("XPS_SEGMENT_STROKE_PATTERN(%d)", int32(e))
+	}
+}
 
 // XPS_SEGMENT_TYPE: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_segment_type
 type XPS_SEGMENT_TYPE int32
@@ -211,6 +598,29 @@ const (
 	XPS_SEGMENT_TYPE_QUADRATIC_BEZIER           XPS_SEGMENT_TYPE = 7
 )
 
+// String returns the XPS_SEGMENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_SEGMENT_TYPE) String() string {
+	switch e {
+	case XPS_SEGMENT_TYPE_ARC_LARGE_CLOCKWISE:
+		return "XPS_SEGMENT_TYPE_ARC_LARGE_CLOCKWISE"
+	case XPS_SEGMENT_TYPE_ARC_LARGE_COUNTERCLOCKWISE:
+		return "XPS_SEGMENT_TYPE_ARC_LARGE_COUNTERCLOCKWISE"
+	case XPS_SEGMENT_TYPE_ARC_SMALL_CLOCKWISE:
+		return "XPS_SEGMENT_TYPE_ARC_SMALL_CLOCKWISE"
+	case XPS_SEGMENT_TYPE_ARC_SMALL_COUNTERCLOCKWISE:
+		return "XPS_SEGMENT_TYPE_ARC_SMALL_COUNTERCLOCKWISE"
+	case XPS_SEGMENT_TYPE_BEZIER:
+		return "XPS_SEGMENT_TYPE_BEZIER"
+	case XPS_SEGMENT_TYPE_LINE:
+		return "XPS_SEGMENT_TYPE_LINE"
+	case XPS_SEGMENT_TYPE_QUADRATIC_BEZIER:
+		return "XPS_SEGMENT_TYPE_QUADRATIC_BEZIER"
+	default:
+		return fmt.Sprintf("XPS_SEGMENT_TYPE(%d)", int32(e))
+	}
+}
+
 // XPS_SIGNATURE_STATUS: https://learn.microsoft.com/windows/win32/api/xpsdigitalsignature/ne-xpsdigitalsignature-xps_signature_status
 type XPS_SIGNATURE_STATUS int32
 
@@ -222,7 +632,27 @@ const (
 	XPS_SIGNATURE_STATUS_VALID        XPS_SIGNATURE_STATUS = 5
 )
 
+// String returns the XPS_SIGNATURE_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_SIGNATURE_STATUS) String() string {
+	switch e {
+	case XPS_SIGNATURE_STATUS_INCOMPLIANT:
+		return "XPS_SIGNATURE_STATUS_INCOMPLIANT"
+	case XPS_SIGNATURE_STATUS_INCOMPLETE:
+		return "XPS_SIGNATURE_STATUS_INCOMPLETE"
+	case XPS_SIGNATURE_STATUS_BROKEN:
+		return "XPS_SIGNATURE_STATUS_BROKEN"
+	case XPS_SIGNATURE_STATUS_QUESTIONABLE:
+		return "XPS_SIGNATURE_STATUS_QUESTIONABLE"
+	case XPS_SIGNATURE_STATUS_VALID:
+		return "XPS_SIGNATURE_STATUS_VALID"
+	default:
+		return fmt.Sprintf("XPS_SIGNATURE_STATUS(%d)", int32(e))
+	}
+}
+
 // XPS_SIGN_FLAGS: https://learn.microsoft.com/windows/win32/api/xpsdigitalsignature/ne-xpsdigitalsignature-xps_sign_flags
+// Bitmask — values may be combined with |.
 type XPS_SIGN_FLAGS int32
 
 const (
@@ -230,7 +660,21 @@ const (
 	XPS_SIGN_FLAGS_IGNORE_MARKUP_COMPATIBILITY XPS_SIGN_FLAGS = 1
 )
 
+// String returns the XPS_SIGN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_SIGN_FLAGS) String() string {
+	var parts []string
+	if e&XPS_SIGN_FLAGS_IGNORE_MARKUP_COMPATIBILITY != 0 {
+		parts = append(parts, "XPS_SIGN_FLAGS_IGNORE_MARKUP_COMPATIBILITY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // XPS_SIGN_POLICY: https://learn.microsoft.com/windows/win32/api/xpsdigitalsignature/ne-xpsdigitalsignature-xps_sign_policy
+// Bitmask — values may be combined with |.
 type XPS_SIGN_POLICY int32
 
 const (
@@ -242,6 +686,31 @@ const (
 	XPS_SIGN_POLICY_ALL                     XPS_SIGN_POLICY = 15
 )
 
+// String returns the XPS_SIGN_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_SIGN_POLICY) String() string {
+	var parts []string
+	if e&XPS_SIGN_POLICY_CORE_PROPERTIES != 0 {
+		parts = append(parts, "XPS_SIGN_POLICY_CORE_PROPERTIES")
+	}
+	if e&XPS_SIGN_POLICY_SIGNATURE_RELATIONSHIPS != 0 {
+		parts = append(parts, "XPS_SIGN_POLICY_SIGNATURE_RELATIONSHIPS")
+	}
+	if e&XPS_SIGN_POLICY_PRINT_TICKET != 0 {
+		parts = append(parts, "XPS_SIGN_POLICY_PRINT_TICKET")
+	}
+	if e&XPS_SIGN_POLICY_DISCARD_CONTROL != 0 {
+		parts = append(parts, "XPS_SIGN_POLICY_DISCARD_CONTROL")
+	}
+	if e&XPS_SIGN_POLICY_ALL != 0 {
+		parts = append(parts, "XPS_SIGN_POLICY_ALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // XPS_SPREAD_METHOD: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_spread_method
 type XPS_SPREAD_METHOD int32
 
@@ -250,6 +719,21 @@ const (
 	XPS_SPREAD_METHOD_REFLECT XPS_SPREAD_METHOD = 2
 	XPS_SPREAD_METHOD_REPEAT  XPS_SPREAD_METHOD = 3
 )
+
+// String returns the XPS_SPREAD_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_SPREAD_METHOD) String() string {
+	switch e {
+	case XPS_SPREAD_METHOD_PAD:
+		return "XPS_SPREAD_METHOD_PAD"
+	case XPS_SPREAD_METHOD_REFLECT:
+		return "XPS_SPREAD_METHOD_REFLECT"
+	case XPS_SPREAD_METHOD_REPEAT:
+		return "XPS_SPREAD_METHOD_REPEAT"
+	default:
+		return fmt.Sprintf("XPS_SPREAD_METHOD(%d)", int32(e))
+	}
+}
 
 // XPS_STYLE_SIMULATION: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_style_simulation
 type XPS_STYLE_SIMULATION int32
@@ -261,6 +745,23 @@ const (
 	XPS_STYLE_SIMULATION_BOLDITALIC XPS_STYLE_SIMULATION = 4
 )
 
+// String returns the XPS_STYLE_SIMULATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_STYLE_SIMULATION) String() string {
+	switch e {
+	case XPS_STYLE_SIMULATION_NONE:
+		return "XPS_STYLE_SIMULATION_NONE"
+	case XPS_STYLE_SIMULATION_ITALIC:
+		return "XPS_STYLE_SIMULATION_ITALIC"
+	case XPS_STYLE_SIMULATION_BOLD:
+		return "XPS_STYLE_SIMULATION_BOLD"
+	case XPS_STYLE_SIMULATION_BOLDITALIC:
+		return "XPS_STYLE_SIMULATION_BOLDITALIC"
+	default:
+		return fmt.Sprintf("XPS_STYLE_SIMULATION(%d)", int32(e))
+	}
+}
+
 // XPS_THUMBNAIL_SIZE: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_thumbnail_size
 type XPS_THUMBNAIL_SIZE int32
 
@@ -270,6 +771,23 @@ const (
 	XPS_THUMBNAIL_SIZE_MEDIUM    XPS_THUMBNAIL_SIZE = 3
 	XPS_THUMBNAIL_SIZE_LARGE     XPS_THUMBNAIL_SIZE = 4
 )
+
+// String returns the XPS_THUMBNAIL_SIZE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_THUMBNAIL_SIZE) String() string {
+	switch e {
+	case XPS_THUMBNAIL_SIZE_VERYSMALL:
+		return "XPS_THUMBNAIL_SIZE_VERYSMALL"
+	case XPS_THUMBNAIL_SIZE_SMALL:
+		return "XPS_THUMBNAIL_SIZE_SMALL"
+	case XPS_THUMBNAIL_SIZE_MEDIUM:
+		return "XPS_THUMBNAIL_SIZE_MEDIUM"
+	case XPS_THUMBNAIL_SIZE_LARGE:
+		return "XPS_THUMBNAIL_SIZE_LARGE"
+	default:
+		return fmt.Sprintf("XPS_THUMBNAIL_SIZE(%d)", int32(e))
+	}
+}
 
 // XPS_TILE_MODE: https://learn.microsoft.com/windows/win32/api/xpsobjectmodel/ne-xpsobjectmodel-xps_tile_mode
 type XPS_TILE_MODE int32
@@ -281,3 +799,22 @@ const (
 	XPS_TILE_MODE_FLIPY  XPS_TILE_MODE = 4
 	XPS_TILE_MODE_FLIPXY XPS_TILE_MODE = 5
 )
+
+// String returns the XPS_TILE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XPS_TILE_MODE) String() string {
+	switch e {
+	case XPS_TILE_MODE_NONE:
+		return "XPS_TILE_MODE_NONE"
+	case XPS_TILE_MODE_TILE:
+		return "XPS_TILE_MODE_TILE"
+	case XPS_TILE_MODE_FLIPX:
+		return "XPS_TILE_MODE_FLIPX"
+	case XPS_TILE_MODE_FLIPY:
+		return "XPS_TILE_MODE_FLIPY"
+	case XPS_TILE_MODE_FLIPXY:
+		return "XPS_TILE_MODE_FLIPXY"
+	default:
+		return fmt.Sprintf("XPS_TILE_MODE(%d)", int32(e))
+	}
+}

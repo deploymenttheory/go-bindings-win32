@@ -4,6 +4,10 @@
 
 package internetexplorer
 
+import (
+	"fmt"
+)
+
 type ADDURL_FLAG int32
 
 const (
@@ -13,6 +17,21 @@ const (
 	ADDURL_Max                  ADDURL_FLAG = 2147483647
 )
 
+// String returns the ADDURL_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADDURL_FLAG) String() string {
+	switch e {
+	case ADDURL_FIRST:
+		return "ADDURL_FIRST"
+	case ADDURL_ADDTOCACHE:
+		return "ADDURL_ADDTOCACHE"
+	case ADDURL_Max:
+		return "ADDURL_Max"
+	default:
+		return fmt.Sprintf("ADDURL_FLAG(%d)", int32(e))
+	}
+}
+
 type ExtensionValidationContexts int32
 
 const (
@@ -20,6 +39,21 @@ const (
 	ExtensionValidationContextDynamic ExtensionValidationContexts = 1
 	ExtensionValidationContextParsed  ExtensionValidationContexts = 2
 )
+
+// String returns the ExtensionValidationContexts constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ExtensionValidationContexts) String() string {
+	switch e {
+	case ExtensionValidationContextNone:
+		return "ExtensionValidationContextNone"
+	case ExtensionValidationContextDynamic:
+		return "ExtensionValidationContextDynamic"
+	case ExtensionValidationContextParsed:
+		return "ExtensionValidationContextParsed"
+	default:
+		return fmt.Sprintf("ExtensionValidationContexts(%d)", int32(e))
+	}
+}
 
 type ExtensionValidationResults int32
 
@@ -29,6 +63,21 @@ const (
 	ExtensionValidationResultArrestPageLoad   ExtensionValidationResults = 2
 )
 
+// String returns the ExtensionValidationResults constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ExtensionValidationResults) String() string {
+	switch e {
+	case ExtensionValidationResultNone:
+		return "ExtensionValidationResultNone"
+	case ExtensionValidationResultDoNotInstantiate:
+		return "ExtensionValidationResultDoNotInstantiate"
+	case ExtensionValidationResultArrestPageLoad:
+		return "ExtensionValidationResultArrestPageLoad"
+	default:
+		return fmt.Sprintf("ExtensionValidationResults(%d)", int32(e))
+	}
+}
+
 type FINDFRAME_FLAGS int32
 
 const (
@@ -36,6 +85,21 @@ const (
 	FINDFRAME_JUSTTESTEXISTENCE FINDFRAME_FLAGS = 1
 	FINDFRAME_INTERNAL          FINDFRAME_FLAGS = -2147483648
 )
+
+// String returns the FINDFRAME_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FINDFRAME_FLAGS) String() string {
+	switch e {
+	case FINDFRAME_NONE:
+		return "FINDFRAME_NONE"
+	case FINDFRAME_JUSTTESTEXISTENCE:
+		return "FINDFRAME_JUSTTESTEXISTENCE"
+	case FINDFRAME_INTERNAL:
+		return "FINDFRAME_INTERNAL"
+	default:
+		return fmt.Sprintf("FINDFRAME_FLAGS(%d)", int32(e))
+	}
+}
 
 type FRAMEOPTIONS_FLAGS int32
 
@@ -49,6 +113,29 @@ const (
 	FRAMEOPTIONS_BROWSERBAND FRAMEOPTIONS_FLAGS = 64
 )
 
+// String returns the FRAMEOPTIONS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FRAMEOPTIONS_FLAGS) String() string {
+	switch e {
+	case FRAMEOPTIONS_SCROLL_YES:
+		return "FRAMEOPTIONS_SCROLL_YES"
+	case FRAMEOPTIONS_SCROLL_NO:
+		return "FRAMEOPTIONS_SCROLL_NO"
+	case FRAMEOPTIONS_SCROLL_AUTO:
+		return "FRAMEOPTIONS_SCROLL_AUTO"
+	case FRAMEOPTIONS_NORESIZE:
+		return "FRAMEOPTIONS_NORESIZE"
+	case FRAMEOPTIONS_NO3DBORDER:
+		return "FRAMEOPTIONS_NO3DBORDER"
+	case FRAMEOPTIONS_DESKTOP:
+		return "FRAMEOPTIONS_DESKTOP"
+	case FRAMEOPTIONS_BROWSERBAND:
+		return "FRAMEOPTIONS_BROWSERBAND"
+	default:
+		return fmt.Sprintf("FRAMEOPTIONS_FLAGS(%d)", int32(e))
+	}
+}
+
 type IELAUNCHOPTION_FLAGS int32
 
 const (
@@ -58,6 +145,23 @@ const (
 	IELAUNCHOPTION_LOCK_ENGINE  IELAUNCHOPTION_FLAGS = 8
 )
 
+// String returns the IELAUNCHOPTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IELAUNCHOPTION_FLAGS) String() string {
+	switch e {
+	case IELAUNCHOPTION_SCRIPTDEBUG:
+		return "IELAUNCHOPTION_SCRIPTDEBUG"
+	case IELAUNCHOPTION_FORCE_COMPAT:
+		return "IELAUNCHOPTION_FORCE_COMPAT"
+	case IELAUNCHOPTION_FORCE_EDGE:
+		return "IELAUNCHOPTION_FORCE_EDGE"
+	case IELAUNCHOPTION_LOCK_ENGINE:
+		return "IELAUNCHOPTION_LOCK_ENGINE"
+	default:
+		return fmt.Sprintf("IELAUNCHOPTION_FLAGS(%d)", int32(e))
+	}
+}
+
 type INTERNETEXPLORERCONFIGURATION int32
 
 const (
@@ -66,6 +170,21 @@ const (
 	INTERNETEXPLORERCONFIGURATION_WEB_DRIVER_EDGE INTERNETEXPLORERCONFIGURATION = 4
 )
 
+// String returns the INTERNETEXPLORERCONFIGURATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INTERNETEXPLORERCONFIGURATION) String() string {
+	switch e {
+	case INTERNETEXPLORERCONFIGURATION_HOST:
+		return "INTERNETEXPLORERCONFIGURATION_HOST"
+	case INTERNETEXPLORERCONFIGURATION_WEB_DRIVER:
+		return "INTERNETEXPLORERCONFIGURATION_WEB_DRIVER"
+	case INTERNETEXPLORERCONFIGURATION_WEB_DRIVER_EDGE:
+		return "INTERNETEXPLORERCONFIGURATION_WEB_DRIVER_EDGE"
+	default:
+		return fmt.Sprintf("INTERNETEXPLORERCONFIGURATION(%d)", int32(e))
+	}
+}
+
 type MEDIA_ACTIVITY_NOTIFY_TYPE int32
 
 const (
@@ -73,6 +192,21 @@ const (
 	MediaRecording MEDIA_ACTIVITY_NOTIFY_TYPE = 1
 	MediaCasting   MEDIA_ACTIVITY_NOTIFY_TYPE = 2
 )
+
+// String returns the MEDIA_ACTIVITY_NOTIFY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MEDIA_ACTIVITY_NOTIFY_TYPE) String() string {
+	switch e {
+	case MediaPlayback:
+		return "MediaPlayback"
+	case MediaRecording:
+		return "MediaRecording"
+	case MediaCasting:
+		return "MediaCasting"
+	default:
+		return fmt.Sprintf("MEDIA_ACTIVITY_NOTIFY_TYPE(%d)", int32(e))
+	}
+}
 
 type NAVIGATEFRAME_FLAGS int32
 
@@ -86,6 +220,29 @@ const (
 	NAVIGATEFRAME_FL_REALLY_SENDING_FROM_FORM NAVIGATEFRAME_FLAGS = 64
 )
 
+// String returns the NAVIGATEFRAME_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAVIGATEFRAME_FLAGS) String() string {
+	switch e {
+	case NAVIGATEFRAME_FL_RECORD:
+		return "NAVIGATEFRAME_FL_RECORD"
+	case NAVIGATEFRAME_FL_POST:
+		return "NAVIGATEFRAME_FL_POST"
+	case NAVIGATEFRAME_FL_NO_DOC_CACHE:
+		return "NAVIGATEFRAME_FL_NO_DOC_CACHE"
+	case NAVIGATEFRAME_FL_NO_IMAGE_CACHE:
+		return "NAVIGATEFRAME_FL_NO_IMAGE_CACHE"
+	case NAVIGATEFRAME_FL_AUTH_FAIL_CACHE_OK:
+		return "NAVIGATEFRAME_FL_AUTH_FAIL_CACHE_OK"
+	case NAVIGATEFRAME_FL_SENDING_FROM_FORM:
+		return "NAVIGATEFRAME_FL_SENDING_FROM_FORM"
+	case NAVIGATEFRAME_FL_REALLY_SENDING_FROM_FORM:
+		return "NAVIGATEFRAME_FL_REALLY_SENDING_FROM_FORM"
+	default:
+		return fmt.Sprintf("NAVIGATEFRAME_FLAGS(%d)", int32(e))
+	}
+}
+
 type OpenServiceActivityContentType int32
 
 const (
@@ -96,6 +253,25 @@ const (
 	ActivityContentCount     OpenServiceActivityContentType = 3
 )
 
+// String returns the OpenServiceActivityContentType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OpenServiceActivityContentType) String() string {
+	switch e {
+	case ActivityContentNone:
+		return "ActivityContentNone"
+	case ActivityContentDocument:
+		return "ActivityContentDocument"
+	case ActivityContentSelection:
+		return "ActivityContentSelection"
+	case ActivityContentLink:
+		return "ActivityContentLink"
+	case ActivityContentCount:
+		return "ActivityContentCount"
+	default:
+		return fmt.Sprintf("OpenServiceActivityContentType(%d)", int32(e))
+	}
+}
+
 type OpenServiceErrors int32
 
 const (
@@ -104,6 +280,23 @@ const (
 	OS_E_CANCELLED    OpenServiceErrors = -2147471631
 	OS_E_GPDISABLED   OpenServiceErrors = -1072886820
 )
+
+// String returns the OpenServiceErrors constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OpenServiceErrors) String() string {
+	switch e {
+	case OS_E_NOTFOUND:
+		return "OS_E_NOTFOUND"
+	case OS_E_NOTSUPPORTED:
+		return "OS_E_NOTSUPPORTED"
+	case OS_E_CANCELLED:
+		return "OS_E_CANCELLED"
+	case OS_E_GPDISABLED:
+		return "OS_E_GPDISABLED"
+	default:
+		return fmt.Sprintf("OpenServiceErrors(%d)", int32(e))
+	}
+}
 
 type SCROLLABLECONTEXTMENU_PLACEMENT int32
 
@@ -114,3 +307,22 @@ const (
 	SCMP_RIGHT  SCROLLABLECONTEXTMENU_PLACEMENT = 3
 	SCMP_FULL   SCROLLABLECONTEXTMENU_PLACEMENT = 4
 )
+
+// String returns the SCROLLABLECONTEXTMENU_PLACEMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCROLLABLECONTEXTMENU_PLACEMENT) String() string {
+	switch e {
+	case SCMP_TOP:
+		return "SCMP_TOP"
+	case SCMP_BOTTOM:
+		return "SCMP_BOTTOM"
+	case SCMP_LEFT:
+		return "SCMP_LEFT"
+	case SCMP_RIGHT:
+		return "SCMP_RIGHT"
+	case SCMP_FULL:
+		return "SCMP_FULL"
+	default:
+		return fmt.Sprintf("SCROLLABLECONTEXTMENU_PLACEMENT(%d)", int32(e))
+	}
+}

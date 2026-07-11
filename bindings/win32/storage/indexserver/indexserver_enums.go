@@ -4,6 +4,10 @@
 
 package indexserver
 
+import (
+	"fmt"
+)
+
 // CHUNKSTATE: https://learn.microsoft.com/windows/win32/api/filter/ne-filter-chunkstate
 type CHUNKSTATE int32
 
@@ -13,6 +17,23 @@ const (
 	CHUNK_FILTER_OWNED_VALUE CHUNKSTATE = 4
 	CHUNK_IMAGE              CHUNKSTATE = 8
 )
+
+// String returns the CHUNKSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHUNKSTATE) String() string {
+	switch e {
+	case CHUNK_TEXT:
+		return "CHUNK_TEXT"
+	case CHUNK_VALUE:
+		return "CHUNK_VALUE"
+	case CHUNK_FILTER_OWNED_VALUE:
+		return "CHUNK_FILTER_OWNED_VALUE"
+	case CHUNK_IMAGE:
+		return "CHUNK_IMAGE"
+	default:
+		return fmt.Sprintf("CHUNKSTATE(%d)", int32(e))
+	}
+}
 
 // CHUNK_BREAKTYPE: https://learn.microsoft.com/windows/win32/api/filter/ne-filter-chunk_breaktype
 type CHUNK_BREAKTYPE int32
@@ -24,6 +45,25 @@ const (
 	CHUNK_EOP      CHUNK_BREAKTYPE = 3
 	CHUNK_EOC      CHUNK_BREAKTYPE = 4
 )
+
+// String returns the CHUNK_BREAKTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHUNK_BREAKTYPE) String() string {
+	switch e {
+	case CHUNK_NO_BREAK:
+		return "CHUNK_NO_BREAK"
+	case CHUNK_EOW:
+		return "CHUNK_EOW"
+	case CHUNK_EOS:
+		return "CHUNK_EOS"
+	case CHUNK_EOP:
+		return "CHUNK_EOP"
+	case CHUNK_EOC:
+		return "CHUNK_EOC"
+	default:
+		return fmt.Sprintf("CHUNK_BREAKTYPE(%d)", int32(e))
+	}
+}
 
 // DBKINDENUM: https://learn.microsoft.com/windows/win32/api/oledbguid/ne-oledbguid-dbkindenum
 type DBKINDENUM int32
@@ -38,12 +78,46 @@ const (
 	DBKIND_GUID         DBKINDENUM = 6
 )
 
+// String returns the DBKINDENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DBKINDENUM) String() string {
+	switch e {
+	case DBKIND_GUID_NAME:
+		return "DBKIND_GUID_NAME"
+	case DBKIND_GUID_PROPID:
+		return "DBKIND_GUID_PROPID"
+	case DBKIND_NAME:
+		return "DBKIND_NAME"
+	case DBKIND_PGUID_NAME:
+		return "DBKIND_PGUID_NAME"
+	case DBKIND_PGUID_PROPID:
+		return "DBKIND_PGUID_PROPID"
+	case DBKIND_PROPID:
+		return "DBKIND_PROPID"
+	case DBKIND_GUID:
+		return "DBKIND_GUID"
+	default:
+		return fmt.Sprintf("DBKINDENUM(%d)", int32(e))
+	}
+}
+
 // IFILTER_FLAGS: https://learn.microsoft.com/windows/win32/api/filter/ne-filter-ifilter_flags
 type IFILTER_FLAGS int32
 
 const (
 	IFILTER_FLAGS_OLE_PROPERTIES IFILTER_FLAGS = 1
 )
+
+// String returns the IFILTER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IFILTER_FLAGS) String() string {
+	switch e {
+	case IFILTER_FLAGS_OLE_PROPERTIES:
+		return "IFILTER_FLAGS_OLE_PROPERTIES"
+	default:
+		return fmt.Sprintf("IFILTER_FLAGS(%d)", int32(e))
+	}
+}
 
 type IFILTER_INIT int32
 
@@ -63,6 +137,41 @@ const (
 	IFILTER_INIT_EMIT_FORMATTING         IFILTER_INIT = 4096
 )
 
+// String returns the IFILTER_INIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IFILTER_INIT) String() string {
+	switch e {
+	case IFILTER_INIT_CANON_PARAGRAPHS:
+		return "IFILTER_INIT_CANON_PARAGRAPHS"
+	case IFILTER_INIT_HARD_LINE_BREAKS:
+		return "IFILTER_INIT_HARD_LINE_BREAKS"
+	case IFILTER_INIT_CANON_HYPHENS:
+		return "IFILTER_INIT_CANON_HYPHENS"
+	case IFILTER_INIT_CANON_SPACES:
+		return "IFILTER_INIT_CANON_SPACES"
+	case IFILTER_INIT_APPLY_INDEX_ATTRIBUTES:
+		return "IFILTER_INIT_APPLY_INDEX_ATTRIBUTES"
+	case IFILTER_INIT_APPLY_OTHER_ATTRIBUTES:
+		return "IFILTER_INIT_APPLY_OTHER_ATTRIBUTES"
+	case IFILTER_INIT_APPLY_CRAWL_ATTRIBUTES:
+		return "IFILTER_INIT_APPLY_CRAWL_ATTRIBUTES"
+	case IFILTER_INIT_INDEXING_ONLY:
+		return "IFILTER_INIT_INDEXING_ONLY"
+	case IFILTER_INIT_SEARCH_LINKS:
+		return "IFILTER_INIT_SEARCH_LINKS"
+	case IFILTER_INIT_FILTER_OWNED_VALUE_OK:
+		return "IFILTER_INIT_FILTER_OWNED_VALUE_OK"
+	case IFILTER_INIT_FILTER_AGGRESSIVE_BREAK:
+		return "IFILTER_INIT_FILTER_AGGRESSIVE_BREAK"
+	case IFILTER_INIT_DISABLE_EMBEDDED:
+		return "IFILTER_INIT_DISABLE_EMBEDDED"
+	case IFILTER_INIT_EMIT_FORMATTING:
+		return "IFILTER_INIT_EMIT_FORMATTING"
+	default:
+		return fmt.Sprintf("IFILTER_INIT(%d)", int32(e))
+	}
+}
+
 type IMAGE_PIXELFORMAT int32
 
 const (
@@ -70,6 +179,21 @@ const (
 	FILTER_PIXELFORMAT_PBGRA8 IMAGE_PIXELFORMAT = 1
 	FILTER_PIXELFORMAT_BGR8   IMAGE_PIXELFORMAT = 2
 )
+
+// String returns the IMAGE_PIXELFORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IMAGE_PIXELFORMAT) String() string {
+	switch e {
+	case FILTER_PIXELFORMAT_BGRA8:
+		return "FILTER_PIXELFORMAT_BGRA8"
+	case FILTER_PIXELFORMAT_PBGRA8:
+		return "FILTER_PIXELFORMAT_PBGRA8"
+	case FILTER_PIXELFORMAT_BGR8:
+		return "FILTER_PIXELFORMAT_BGR8"
+	default:
+		return fmt.Sprintf("IMAGE_PIXELFORMAT(%d)", int32(e))
+	}
+}
 
 // WORDREP_BREAK_TYPE: https://learn.microsoft.com/windows/win32/api/indexsrv/ne-indexsrv-wordrep_break_type
 type WORDREP_BREAK_TYPE int32
@@ -80,3 +204,20 @@ const (
 	WORDREP_BREAK_EOP WORDREP_BREAK_TYPE = 2
 	WORDREP_BREAK_EOC WORDREP_BREAK_TYPE = 3
 )
+
+// String returns the WORDREP_BREAK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WORDREP_BREAK_TYPE) String() string {
+	switch e {
+	case WORDREP_BREAK_EOW:
+		return "WORDREP_BREAK_EOW"
+	case WORDREP_BREAK_EOS:
+		return "WORDREP_BREAK_EOS"
+	case WORDREP_BREAK_EOP:
+		return "WORDREP_BREAK_EOP"
+	case WORDREP_BREAK_EOC:
+		return "WORDREP_BREAK_EOC"
+	default:
+		return fmt.Sprintf("WORDREP_BREAK_TYPE(%d)", int32(e))
+	}
+}

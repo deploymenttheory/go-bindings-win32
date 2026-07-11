@@ -4,6 +4,10 @@
 
 package speech
 
+import (
+	"fmt"
+)
+
 type DISPIDSPRG int32
 
 const (
@@ -28,6 +32,53 @@ const (
 	DISPID_SRGIsPronounceable               DISPIDSPRG = 19
 )
 
+// String returns the DISPIDSPRG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPIDSPRG) String() string {
+	switch e {
+	case DISPID_SRGId:
+		return "DISPID_SRGId"
+	case DISPID_SRGRecoContext:
+		return "DISPID_SRGRecoContext"
+	case DISPID_SRGState:
+		return "DISPID_SRGState"
+	case DISPID_SRGRules:
+		return "DISPID_SRGRules"
+	case DISPID_SRGReset:
+		return "DISPID_SRGReset"
+	case DISPID_SRGCommit:
+		return "DISPID_SRGCommit"
+	case DISPID_SRGCmdLoadFromFile:
+		return "DISPID_SRGCmdLoadFromFile"
+	case DISPID_SRGCmdLoadFromObject:
+		return "DISPID_SRGCmdLoadFromObject"
+	case DISPID_SRGCmdLoadFromResource:
+		return "DISPID_SRGCmdLoadFromResource"
+	case DISPID_SRGCmdLoadFromMemory:
+		return "DISPID_SRGCmdLoadFromMemory"
+	case DISPID_SRGCmdLoadFromProprietaryGrammar:
+		return "DISPID_SRGCmdLoadFromProprietaryGrammar"
+	case DISPID_SRGCmdSetRuleState:
+		return "DISPID_SRGCmdSetRuleState"
+	case DISPID_SRGCmdSetRuleIdState:
+		return "DISPID_SRGCmdSetRuleIdState"
+	case DISPID_SRGDictationLoad:
+		return "DISPID_SRGDictationLoad"
+	case DISPID_SRGDictationUnload:
+		return "DISPID_SRGDictationUnload"
+	case DISPID_SRGDictationSetState:
+		return "DISPID_SRGDictationSetState"
+	case DISPID_SRGSetWordSequenceData:
+		return "DISPID_SRGSetWordSequenceData"
+	case DISPID_SRGSetTextSelection:
+		return "DISPID_SRGSetTextSelection"
+	case DISPID_SRGIsPronounceable:
+		return "DISPID_SRGIsPronounceable"
+	default:
+		return fmt.Sprintf("DISPIDSPRG(%d)", int32(e))
+	}
+}
+
 type DISPIDSPTSI int32
 
 const (
@@ -36,6 +87,23 @@ const (
 	DISPIDSPTSI_SelectionOffset DISPIDSPTSI = 3
 	DISPIDSPTSI_SelectionLength DISPIDSPTSI = 4
 )
+
+// String returns the DISPIDSPTSI constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPIDSPTSI) String() string {
+	switch e {
+	case DISPIDSPTSI_ActiveOffset:
+		return "DISPIDSPTSI_ActiveOffset"
+	case DISPIDSPTSI_ActiveLength:
+		return "DISPIDSPTSI_ActiveLength"
+	case DISPIDSPTSI_SelectionOffset:
+		return "DISPIDSPTSI_SelectionOffset"
+	case DISPIDSPTSI_SelectionLength:
+		return "DISPIDSPTSI_SelectionLength"
+	default:
+		return fmt.Sprintf("DISPIDSPTSI(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechAudio int32
 
@@ -49,6 +117,29 @@ const (
 	DISPID_SASetState         DISPID_SpeechAudio = 206
 )
 
+// String returns the DISPID_SpeechAudio constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechAudio) String() string {
+	switch e {
+	case DISPID_SAStatus:
+		return "DISPID_SAStatus"
+	case DISPID_SABufferInfo:
+		return "DISPID_SABufferInfo"
+	case DISPID_SADefaultFormat:
+		return "DISPID_SADefaultFormat"
+	case DISPID_SAVolume:
+		return "DISPID_SAVolume"
+	case DISPID_SABufferNotifySize:
+		return "DISPID_SABufferNotifySize"
+	case DISPID_SAEventHandle:
+		return "DISPID_SAEventHandle"
+	case DISPID_SASetState:
+		return "DISPID_SASetState"
+	default:
+		return fmt.Sprintf("DISPID_SpeechAudio(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechAudioBufferInfo int32
 
 const (
@@ -56,6 +147,21 @@ const (
 	DISPID_SABIBufferSize      DISPID_SpeechAudioBufferInfo = 2
 	DISPID_SABIEventBias       DISPID_SpeechAudioBufferInfo = 3
 )
+
+// String returns the DISPID_SpeechAudioBufferInfo constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechAudioBufferInfo) String() string {
+	switch e {
+	case DISPID_SABIMinNotification:
+		return "DISPID_SABIMinNotification"
+	case DISPID_SABIBufferSize:
+		return "DISPID_SABIBufferSize"
+	case DISPID_SABIEventBias:
+		return "DISPID_SABIEventBias"
+	default:
+		return fmt.Sprintf("DISPID_SpeechAudioBufferInfo(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechAudioFormat int32
 
@@ -65,6 +171,23 @@ const (
 	DISPID_SAFGetWaveFormatEx DISPID_SpeechAudioFormat = 3
 	DISPID_SAFSetWaveFormatEx DISPID_SpeechAudioFormat = 4
 )
+
+// String returns the DISPID_SpeechAudioFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechAudioFormat) String() string {
+	switch e {
+	case DISPID_SAFType:
+		return "DISPID_SAFType"
+	case DISPID_SAFGuid:
+		return "DISPID_SAFGuid"
+	case DISPID_SAFGetWaveFormatEx:
+		return "DISPID_SAFGetWaveFormatEx"
+	case DISPID_SAFSetWaveFormatEx:
+		return "DISPID_SAFSetWaveFormatEx"
+	default:
+		return fmt.Sprintf("DISPID_SpeechAudioFormat(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechAudioStatus int32
 
@@ -76,6 +199,25 @@ const (
 	DISPID_SASCurrentDevicePosition DISPID_SpeechAudioStatus = 5
 )
 
+// String returns the DISPID_SpeechAudioStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechAudioStatus) String() string {
+	switch e {
+	case DISPID_SASFreeBufferSpace:
+		return "DISPID_SASFreeBufferSpace"
+	case DISPID_SASNonBlockingIO:
+		return "DISPID_SASNonBlockingIO"
+	case DISPID_SASState:
+		return "DISPID_SASState"
+	case DISPID_SASCurrentSeekPosition:
+		return "DISPID_SASCurrentSeekPosition"
+	case DISPID_SASCurrentDevicePosition:
+		return "DISPID_SASCurrentDevicePosition"
+	default:
+		return fmt.Sprintf("DISPID_SpeechAudioStatus(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechBaseStream int32
 
 const (
@@ -85,11 +227,39 @@ const (
 	DISPID_SBSSeek   DISPID_SpeechBaseStream = 4
 )
 
+// String returns the DISPID_SpeechBaseStream constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechBaseStream) String() string {
+	switch e {
+	case DISPID_SBSFormat:
+		return "DISPID_SBSFormat"
+	case DISPID_SBSRead:
+		return "DISPID_SBSRead"
+	case DISPID_SBSWrite:
+		return "DISPID_SBSWrite"
+	case DISPID_SBSSeek:
+		return "DISPID_SBSSeek"
+	default:
+		return fmt.Sprintf("DISPID_SpeechBaseStream(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechCustomStream int32
 
 const (
 	DISPID_SCSBaseStream DISPID_SpeechCustomStream = 100
 )
+
+// String returns the DISPID_SpeechCustomStream constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechCustomStream) String() string {
+	switch e {
+	case DISPID_SCSBaseStream:
+		return "DISPID_SCSBaseStream"
+	default:
+		return fmt.Sprintf("DISPID_SpeechCustomStream(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechDataKey int32
 
@@ -108,12 +278,58 @@ const (
 	DISPID_SDKEnumValues     DISPID_SpeechDataKey = 12
 )
 
+// String returns the DISPID_SpeechDataKey constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechDataKey) String() string {
+	switch e {
+	case DISPID_SDKSetBinaryValue:
+		return "DISPID_SDKSetBinaryValue"
+	case DISPID_SDKGetBinaryValue:
+		return "DISPID_SDKGetBinaryValue"
+	case DISPID_SDKSetStringValue:
+		return "DISPID_SDKSetStringValue"
+	case DISPID_SDKGetStringValue:
+		return "DISPID_SDKGetStringValue"
+	case DISPID_SDKSetLongValue:
+		return "DISPID_SDKSetLongValue"
+	case DISPID_SDKGetlongValue:
+		return "DISPID_SDKGetlongValue"
+	case DISPID_SDKOpenKey:
+		return "DISPID_SDKOpenKey"
+	case DISPID_SDKCreateKey:
+		return "DISPID_SDKCreateKey"
+	case DISPID_SDKDeleteKey:
+		return "DISPID_SDKDeleteKey"
+	case DISPID_SDKDeleteValue:
+		return "DISPID_SDKDeleteValue"
+	case DISPID_SDKEnumKeys:
+		return "DISPID_SDKEnumKeys"
+	case DISPID_SDKEnumValues:
+		return "DISPID_SDKEnumValues"
+	default:
+		return fmt.Sprintf("DISPID_SpeechDataKey(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechFileStream int32
 
 const (
 	DISPID_SFSOpen  DISPID_SpeechFileStream = 100
 	DISPID_SFSClose DISPID_SpeechFileStream = 101
 )
+
+// String returns the DISPID_SpeechFileStream constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechFileStream) String() string {
+	switch e {
+	case DISPID_SFSOpen:
+		return "DISPID_SFSOpen"
+	case DISPID_SFSClose:
+		return "DISPID_SFSClose"
+	default:
+		return fmt.Sprintf("DISPID_SpeechFileStream(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechGrammarRule int32
 
@@ -127,6 +343,29 @@ const (
 	DISPID_SGRAddState     DISPID_SpeechGrammarRule = 7
 )
 
+// String returns the DISPID_SpeechGrammarRule constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechGrammarRule) String() string {
+	switch e {
+	case DISPID_SGRAttributes:
+		return "DISPID_SGRAttributes"
+	case DISPID_SGRInitialState:
+		return "DISPID_SGRInitialState"
+	case DISPID_SGRName:
+		return "DISPID_SGRName"
+	case DISPID_SGRId:
+		return "DISPID_SGRId"
+	case DISPID_SGRClear:
+		return "DISPID_SGRClear"
+	case DISPID_SGRAddResource:
+		return "DISPID_SGRAddResource"
+	case DISPID_SGRAddState:
+		return "DISPID_SGRAddState"
+	default:
+		return fmt.Sprintf("DISPID_SpeechGrammarRule(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechGrammarRuleState int32
 
 const (
@@ -136,6 +375,25 @@ const (
 	DISPID_SGRSAddRuleTransition    DISPID_SpeechGrammarRuleState = 4
 	DISPID_SGRSAddSpecialTransition DISPID_SpeechGrammarRuleState = 5
 )
+
+// String returns the DISPID_SpeechGrammarRuleState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechGrammarRuleState) String() string {
+	switch e {
+	case DISPID_SGRSRule:
+		return "DISPID_SGRSRule"
+	case DISPID_SGRSTransitions:
+		return "DISPID_SGRSTransitions"
+	case DISPID_SGRSAddWordTransition:
+		return "DISPID_SGRSAddWordTransition"
+	case DISPID_SGRSAddRuleTransition:
+		return "DISPID_SGRSAddRuleTransition"
+	case DISPID_SGRSAddSpecialTransition:
+		return "DISPID_SGRSAddSpecialTransition"
+	default:
+		return fmt.Sprintf("DISPID_SpeechGrammarRuleState(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechGrammarRuleStateTransition int32
 
@@ -150,6 +408,31 @@ const (
 	DISPID_SGRSTNextState     DISPID_SpeechGrammarRuleStateTransition = 8
 )
 
+// String returns the DISPID_SpeechGrammarRuleStateTransition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechGrammarRuleStateTransition) String() string {
+	switch e {
+	case DISPID_SGRSTType:
+		return "DISPID_SGRSTType"
+	case DISPID_SGRSTText:
+		return "DISPID_SGRSTText"
+	case DISPID_SGRSTRule:
+		return "DISPID_SGRSTRule"
+	case DISPID_SGRSTWeight:
+		return "DISPID_SGRSTWeight"
+	case DISPID_SGRSTPropertyName:
+		return "DISPID_SGRSTPropertyName"
+	case DISPID_SGRSTPropertyId:
+		return "DISPID_SGRSTPropertyId"
+	case DISPID_SGRSTPropertyValue:
+		return "DISPID_SGRSTPropertyValue"
+	case DISPID_SGRSTNextState:
+		return "DISPID_SGRSTNextState"
+	default:
+		return fmt.Sprintf("DISPID_SpeechGrammarRuleStateTransition(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechGrammarRuleStateTransitions int32
 
 const (
@@ -157,6 +440,21 @@ const (
 	DISPID_SGRSTsItem     DISPID_SpeechGrammarRuleStateTransitions = 0
 	DISPID_SGRSTs_NewEnum DISPID_SpeechGrammarRuleStateTransitions = -4
 )
+
+// String returns the DISPID_SpeechGrammarRuleStateTransitions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechGrammarRuleStateTransitions) String() string {
+	switch e {
+	case DISPID_SGRSTsCount:
+		return "DISPID_SGRSTsCount"
+	case DISPID_SGRSTsItem:
+		return "DISPID_SGRSTsItem"
+	case DISPID_SGRSTs_NewEnum:
+		return "DISPID_SGRSTs_NewEnum"
+	default:
+		return fmt.Sprintf("DISPID_SpeechGrammarRuleStateTransitions(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechGrammarRules int32
 
@@ -171,6 +469,31 @@ const (
 	DISPID_SGRs_NewEnum      DISPID_SpeechGrammarRules = -4
 )
 
+// String returns the DISPID_SpeechGrammarRules constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechGrammarRules) String() string {
+	switch e {
+	case DISPID_SGRsCount:
+		return "DISPID_SGRsCount"
+	case DISPID_SGRsDynamic:
+		return "DISPID_SGRsDynamic"
+	case DISPID_SGRsAdd:
+		return "DISPID_SGRsAdd"
+	case DISPID_SGRsCommit:
+		return "DISPID_SGRsCommit"
+	case DISPID_SGRsCommitAndSave:
+		return "DISPID_SGRsCommitAndSave"
+	case DISPID_SGRsFindRule:
+		return "DISPID_SGRsFindRule"
+	case DISPID_SGRsItem:
+		return "DISPID_SGRsItem"
+	case DISPID_SGRs_NewEnum:
+		return "DISPID_SGRs_NewEnum"
+	default:
+		return fmt.Sprintf("DISPID_SpeechGrammarRules(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechLexicon int32
 
 const (
@@ -184,6 +507,31 @@ const (
 	DISPID_SLGetGenerationChange           DISPID_SpeechLexicon = 8
 )
 
+// String returns the DISPID_SpeechLexicon constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechLexicon) String() string {
+	switch e {
+	case DISPID_SLGenerationId:
+		return "DISPID_SLGenerationId"
+	case DISPID_SLGetWords:
+		return "DISPID_SLGetWords"
+	case DISPID_SLAddPronunciation:
+		return "DISPID_SLAddPronunciation"
+	case DISPID_SLAddPronunciationByPhoneIds:
+		return "DISPID_SLAddPronunciationByPhoneIds"
+	case DISPID_SLRemovePronunciation:
+		return "DISPID_SLRemovePronunciation"
+	case DISPID_SLRemovePronunciationByPhoneIds:
+		return "DISPID_SLRemovePronunciationByPhoneIds"
+	case DISPID_SLGetPronunciations:
+		return "DISPID_SLGetPronunciations"
+	case DISPID_SLGetGenerationChange:
+		return "DISPID_SLGetGenerationChange"
+	default:
+		return fmt.Sprintf("DISPID_SpeechLexicon(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechLexiconProns int32
 
 const (
@@ -191,6 +539,21 @@ const (
 	DISPID_SLPsItem     DISPID_SpeechLexiconProns = 0
 	DISPID_SLPs_NewEnum DISPID_SpeechLexiconProns = -4
 )
+
+// String returns the DISPID_SpeechLexiconProns constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechLexiconProns) String() string {
+	switch e {
+	case DISPID_SLPsCount:
+		return "DISPID_SLPsCount"
+	case DISPID_SLPsItem:
+		return "DISPID_SLPsItem"
+	case DISPID_SLPs_NewEnum:
+		return "DISPID_SLPs_NewEnum"
+	default:
+		return fmt.Sprintf("DISPID_SpeechLexiconProns(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechLexiconPronunciation int32
 
@@ -202,6 +565,25 @@ const (
 	DISPID_SLPSymbolic     DISPID_SpeechLexiconPronunciation = 5
 )
 
+// String returns the DISPID_SpeechLexiconPronunciation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechLexiconPronunciation) String() string {
+	switch e {
+	case DISPID_SLPType:
+		return "DISPID_SLPType"
+	case DISPID_SLPLangId:
+		return "DISPID_SLPLangId"
+	case DISPID_SLPPartOfSpeech:
+		return "DISPID_SLPPartOfSpeech"
+	case DISPID_SLPPhoneIds:
+		return "DISPID_SLPPhoneIds"
+	case DISPID_SLPSymbolic:
+		return "DISPID_SLPSymbolic"
+	default:
+		return fmt.Sprintf("DISPID_SpeechLexiconPronunciation(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechLexiconWord int32
 
 const (
@@ -211,6 +593,23 @@ const (
 	DISPID_SLWPronunciations DISPID_SpeechLexiconWord = 4
 )
 
+// String returns the DISPID_SpeechLexiconWord constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechLexiconWord) String() string {
+	switch e {
+	case DISPID_SLWLangId:
+		return "DISPID_SLWLangId"
+	case DISPID_SLWType:
+		return "DISPID_SLWType"
+	case DISPID_SLWWord:
+		return "DISPID_SLWWord"
+	case DISPID_SLWPronunciations:
+		return "DISPID_SLWPronunciations"
+	default:
+		return fmt.Sprintf("DISPID_SpeechLexiconWord(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechLexiconWords int32
 
 const (
@@ -218,6 +617,21 @@ const (
 	DISPID_SLWsItem     DISPID_SpeechLexiconWords = 0
 	DISPID_SLWs_NewEnum DISPID_SpeechLexiconWords = -4
 )
+
+// String returns the DISPID_SpeechLexiconWords constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechLexiconWords) String() string {
+	switch e {
+	case DISPID_SLWsCount:
+		return "DISPID_SLWsCount"
+	case DISPID_SLWsItem:
+		return "DISPID_SLWsItem"
+	case DISPID_SLWs_NewEnum:
+		return "DISPID_SLWs_NewEnum"
+	default:
+		return fmt.Sprintf("DISPID_SpeechLexiconWords(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechMMSysAudio int32
 
@@ -227,12 +641,40 @@ const (
 	DISPID_SMSAMMHandle DISPID_SpeechMMSysAudio = 302
 )
 
+// String returns the DISPID_SpeechMMSysAudio constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechMMSysAudio) String() string {
+	switch e {
+	case DISPID_SMSADeviceId:
+		return "DISPID_SMSADeviceId"
+	case DISPID_SMSALineId:
+		return "DISPID_SMSALineId"
+	case DISPID_SMSAMMHandle:
+		return "DISPID_SMSAMMHandle"
+	default:
+		return fmt.Sprintf("DISPID_SpeechMMSysAudio(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechMemoryStream int32
 
 const (
 	DISPID_SMSSetData DISPID_SpeechMemoryStream = 100
 	DISPID_SMSGetData DISPID_SpeechMemoryStream = 101
 )
+
+// String returns the DISPID_SpeechMemoryStream constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechMemoryStream) String() string {
+	switch e {
+	case DISPID_SMSSetData:
+		return "DISPID_SMSSetData"
+	case DISPID_SMSGetData:
+		return "DISPID_SMSGetData"
+	default:
+		return fmt.Sprintf("DISPID_SpeechMemoryStream(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechObjectToken int32
 
@@ -252,6 +694,41 @@ const (
 	DISPID_SOTMatchesAttributes     DISPID_SpeechObjectToken = 13
 )
 
+// String returns the DISPID_SpeechObjectToken constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechObjectToken) String() string {
+	switch e {
+	case DISPID_SOTId:
+		return "DISPID_SOTId"
+	case DISPID_SOTDataKey:
+		return "DISPID_SOTDataKey"
+	case DISPID_SOTCategory:
+		return "DISPID_SOTCategory"
+	case DISPID_SOTGetDescription:
+		return "DISPID_SOTGetDescription"
+	case DISPID_SOTSetId:
+		return "DISPID_SOTSetId"
+	case DISPID_SOTGetAttribute:
+		return "DISPID_SOTGetAttribute"
+	case DISPID_SOTCreateInstance:
+		return "DISPID_SOTCreateInstance"
+	case DISPID_SOTRemove:
+		return "DISPID_SOTRemove"
+	case DISPID_SOTGetStorageFileName:
+		return "DISPID_SOTGetStorageFileName"
+	case DISPID_SOTRemoveStorageFileName:
+		return "DISPID_SOTRemoveStorageFileName"
+	case DISPID_SOTIsUISupported:
+		return "DISPID_SOTIsUISupported"
+	case DISPID_SOTDisplayUI:
+		return "DISPID_SOTDisplayUI"
+	case DISPID_SOTMatchesAttributes:
+		return "DISPID_SOTMatchesAttributes"
+	default:
+		return fmt.Sprintf("DISPID_SpeechObjectToken(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechObjectTokenCategory int32
 
 const (
@@ -262,6 +739,25 @@ const (
 	DISPID_SOTCEnumerateTokens DISPID_SpeechObjectTokenCategory = 5
 )
 
+// String returns the DISPID_SpeechObjectTokenCategory constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechObjectTokenCategory) String() string {
+	switch e {
+	case DISPID_SOTCId:
+		return "DISPID_SOTCId"
+	case DISPID_SOTCDefault:
+		return "DISPID_SOTCDefault"
+	case DISPID_SOTCSetId:
+		return "DISPID_SOTCSetId"
+	case DISPID_SOTCGetDataKey:
+		return "DISPID_SOTCGetDataKey"
+	case DISPID_SOTCEnumerateTokens:
+		return "DISPID_SOTCEnumerateTokens"
+	default:
+		return fmt.Sprintf("DISPID_SpeechObjectTokenCategory(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechObjectTokens int32
 
 const (
@@ -270,6 +766,21 @@ const (
 	DISPID_SOTs_NewEnum DISPID_SpeechObjectTokens = -4
 )
 
+// String returns the DISPID_SpeechObjectTokens constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechObjectTokens) String() string {
+	switch e {
+	case DISPID_SOTsCount:
+		return "DISPID_SOTsCount"
+	case DISPID_SOTsItem:
+		return "DISPID_SOTsItem"
+	case DISPID_SOTs_NewEnum:
+		return "DISPID_SOTs_NewEnum"
+	default:
+		return fmt.Sprintf("DISPID_SpeechObjectTokens(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechPhoneConverter int32
 
 const (
@@ -277,6 +788,21 @@ const (
 	DISPID_SPCPhoneToId DISPID_SpeechPhoneConverter = 2
 	DISPID_SPCIdToPhone DISPID_SpeechPhoneConverter = 3
 )
+
+// String returns the DISPID_SpeechPhoneConverter constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhoneConverter) String() string {
+	switch e {
+	case DISPID_SPCLangId:
+		return "DISPID_SPCLangId"
+	case DISPID_SPCPhoneToId:
+		return "DISPID_SPCPhoneToId"
+	case DISPID_SPCIdToPhone:
+		return "DISPID_SPCIdToPhone"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhoneConverter(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechPhraseAlternate int32
 
@@ -288,6 +814,25 @@ const (
 	DISPID_SPACommit                   DISPID_SpeechPhraseAlternate = 5
 )
 
+// String returns the DISPID_SpeechPhraseAlternate constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseAlternate) String() string {
+	switch e {
+	case DISPID_SPARecoResult:
+		return "DISPID_SPARecoResult"
+	case DISPID_SPAStartElementInResult:
+		return "DISPID_SPAStartElementInResult"
+	case DISPID_SPANumberOfElementsInResult:
+		return "DISPID_SPANumberOfElementsInResult"
+	case DISPID_SPAPhraseInfo:
+		return "DISPID_SPAPhraseInfo"
+	case DISPID_SPACommit:
+		return "DISPID_SPACommit"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseAlternate(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechPhraseAlternates int32
 
 const (
@@ -296,11 +841,37 @@ const (
 	DISPID_SPAs_NewEnum DISPID_SpeechPhraseAlternates = -4
 )
 
+// String returns the DISPID_SpeechPhraseAlternates constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseAlternates) String() string {
+	switch e {
+	case DISPID_SPAsCount:
+		return "DISPID_SPAsCount"
+	case DISPID_SPAsItem:
+		return "DISPID_SPAsItem"
+	case DISPID_SPAs_NewEnum:
+		return "DISPID_SPAs_NewEnum"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseAlternates(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechPhraseBuilder int32
 
 const (
 	DISPID_SPPBRestorePhraseFromMemory DISPID_SpeechPhraseBuilder = 1
 )
+
+// String returns the DISPID_SpeechPhraseBuilder constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseBuilder) String() string {
+	switch e {
+	case DISPID_SPPBRestorePhraseFromMemory:
+		return "DISPID_SPPBRestorePhraseFromMemory"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseBuilder(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechPhraseElement int32
 
@@ -320,6 +891,41 @@ const (
 	DISPID_SPEEngineConfidence     DISPID_SpeechPhraseElement = 13
 )
 
+// String returns the DISPID_SpeechPhraseElement constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseElement) String() string {
+	switch e {
+	case DISPID_SPEAudioTimeOffset:
+		return "DISPID_SPEAudioTimeOffset"
+	case DISPID_SPEAudioSizeTime:
+		return "DISPID_SPEAudioSizeTime"
+	case DISPID_SPEAudioStreamOffset:
+		return "DISPID_SPEAudioStreamOffset"
+	case DISPID_SPEAudioSizeBytes:
+		return "DISPID_SPEAudioSizeBytes"
+	case DISPID_SPERetainedStreamOffset:
+		return "DISPID_SPERetainedStreamOffset"
+	case DISPID_SPERetainedSizeBytes:
+		return "DISPID_SPERetainedSizeBytes"
+	case DISPID_SPEDisplayText:
+		return "DISPID_SPEDisplayText"
+	case DISPID_SPELexicalForm:
+		return "DISPID_SPELexicalForm"
+	case DISPID_SPEPronunciation:
+		return "DISPID_SPEPronunciation"
+	case DISPID_SPEDisplayAttributes:
+		return "DISPID_SPEDisplayAttributes"
+	case DISPID_SPERequiredConfidence:
+		return "DISPID_SPERequiredConfidence"
+	case DISPID_SPEActualConfidence:
+		return "DISPID_SPEActualConfidence"
+	case DISPID_SPEEngineConfidence:
+		return "DISPID_SPEEngineConfidence"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseElement(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechPhraseElements int32
 
 const (
@@ -327,6 +933,21 @@ const (
 	DISPID_SPEsItem     DISPID_SpeechPhraseElements = 0
 	DISPID_SPEs_NewEnum DISPID_SpeechPhraseElements = -4
 )
+
+// String returns the DISPID_SpeechPhraseElements constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseElements) String() string {
+	switch e {
+	case DISPID_SPEsCount:
+		return "DISPID_SPEsCount"
+	case DISPID_SPEsItem:
+		return "DISPID_SPEsItem"
+	case DISPID_SPEs_NewEnum:
+		return "DISPID_SPEs_NewEnum"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseElements(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechPhraseInfo int32
 
@@ -349,6 +970,47 @@ const (
 	DISPID_SPIGetDisplayAttributes DISPID_SpeechPhraseInfo = 16
 )
 
+// String returns the DISPID_SpeechPhraseInfo constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseInfo) String() string {
+	switch e {
+	case DISPID_SPILanguageId:
+		return "DISPID_SPILanguageId"
+	case DISPID_SPIGrammarId:
+		return "DISPID_SPIGrammarId"
+	case DISPID_SPIStartTime:
+		return "DISPID_SPIStartTime"
+	case DISPID_SPIAudioStreamPosition:
+		return "DISPID_SPIAudioStreamPosition"
+	case DISPID_SPIAudioSizeBytes:
+		return "DISPID_SPIAudioSizeBytes"
+	case DISPID_SPIRetainedSizeBytes:
+		return "DISPID_SPIRetainedSizeBytes"
+	case DISPID_SPIAudioSizeTime:
+		return "DISPID_SPIAudioSizeTime"
+	case DISPID_SPIRule:
+		return "DISPID_SPIRule"
+	case DISPID_SPIProperties:
+		return "DISPID_SPIProperties"
+	case DISPID_SPIElements:
+		return "DISPID_SPIElements"
+	case DISPID_SPIReplacements:
+		return "DISPID_SPIReplacements"
+	case DISPID_SPIEngineId:
+		return "DISPID_SPIEngineId"
+	case DISPID_SPIEnginePrivateData:
+		return "DISPID_SPIEnginePrivateData"
+	case DISPID_SPISaveToMemory:
+		return "DISPID_SPISaveToMemory"
+	case DISPID_SPIGetText:
+		return "DISPID_SPIGetText"
+	case DISPID_SPIGetDisplayAttributes:
+		return "DISPID_SPIGetDisplayAttributes"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseInfo(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechPhraseProperties int32
 
 const (
@@ -356,6 +1018,21 @@ const (
 	DISPID_SPPsItem     DISPID_SpeechPhraseProperties = 0
 	DISPID_SPPs_NewEnum DISPID_SpeechPhraseProperties = -4
 )
+
+// String returns the DISPID_SpeechPhraseProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseProperties) String() string {
+	switch e {
+	case DISPID_SPPsCount:
+		return "DISPID_SPPsCount"
+	case DISPID_SPPsItem:
+		return "DISPID_SPPsItem"
+	case DISPID_SPPs_NewEnum:
+		return "DISPID_SPPs_NewEnum"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseProperties(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechPhraseProperty int32
 
@@ -371,6 +1048,33 @@ const (
 	DISPID_SPPChildren         DISPID_SpeechPhraseProperty = 9
 )
 
+// String returns the DISPID_SpeechPhraseProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseProperty) String() string {
+	switch e {
+	case DISPID_SPPName:
+		return "DISPID_SPPName"
+	case DISPID_SPPId:
+		return "DISPID_SPPId"
+	case DISPID_SPPValue:
+		return "DISPID_SPPValue"
+	case DISPID_SPPFirstElement:
+		return "DISPID_SPPFirstElement"
+	case DISPID_SPPNumberOfElements:
+		return "DISPID_SPPNumberOfElements"
+	case DISPID_SPPEngineConfidence:
+		return "DISPID_SPPEngineConfidence"
+	case DISPID_SPPConfidence:
+		return "DISPID_SPPConfidence"
+	case DISPID_SPPParent:
+		return "DISPID_SPPParent"
+	case DISPID_SPPChildren:
+		return "DISPID_SPPChildren"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseProperty(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechPhraseReplacement int32
 
 const (
@@ -380,6 +1084,23 @@ const (
 	DISPID_SPRNumberOfElements  DISPID_SpeechPhraseReplacement = 4
 )
 
+// String returns the DISPID_SpeechPhraseReplacement constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseReplacement) String() string {
+	switch e {
+	case DISPID_SPRDisplayAttributes:
+		return "DISPID_SPRDisplayAttributes"
+	case DISPID_SPRText:
+		return "DISPID_SPRText"
+	case DISPID_SPRFirstElement:
+		return "DISPID_SPRFirstElement"
+	case DISPID_SPRNumberOfElements:
+		return "DISPID_SPRNumberOfElements"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseReplacement(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechPhraseReplacements int32
 
 const (
@@ -387,6 +1108,21 @@ const (
 	DISPID_SPRsItem     DISPID_SpeechPhraseReplacements = 0
 	DISPID_SPRs_NewEnum DISPID_SpeechPhraseReplacements = -4
 )
+
+// String returns the DISPID_SpeechPhraseReplacements constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseReplacements) String() string {
+	switch e {
+	case DISPID_SPRsCount:
+		return "DISPID_SPRsCount"
+	case DISPID_SPRsItem:
+		return "DISPID_SPRsItem"
+	case DISPID_SPRs_NewEnum:
+		return "DISPID_SPRs_NewEnum"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseReplacements(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechPhraseRule int32
 
@@ -401,6 +1137,31 @@ const (
 	DISPID_SPRuleEngineConfidence DISPID_SpeechPhraseRule = 8
 )
 
+// String returns the DISPID_SpeechPhraseRule constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseRule) String() string {
+	switch e {
+	case DISPID_SPRuleName:
+		return "DISPID_SPRuleName"
+	case DISPID_SPRuleId:
+		return "DISPID_SPRuleId"
+	case DISPID_SPRuleFirstElement:
+		return "DISPID_SPRuleFirstElement"
+	case DISPID_SPRuleNumberOfElements:
+		return "DISPID_SPRuleNumberOfElements"
+	case DISPID_SPRuleParent:
+		return "DISPID_SPRuleParent"
+	case DISPID_SPRuleChildren:
+		return "DISPID_SPRuleChildren"
+	case DISPID_SPRuleConfidence:
+		return "DISPID_SPRuleConfidence"
+	case DISPID_SPRuleEngineConfidence:
+		return "DISPID_SPRuleEngineConfidence"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseRule(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechPhraseRules int32
 
 const (
@@ -408,6 +1169,21 @@ const (
 	DISPID_SPRulesItem     DISPID_SpeechPhraseRules = 0
 	DISPID_SPRules_NewEnum DISPID_SpeechPhraseRules = -4
 )
+
+// String returns the DISPID_SpeechPhraseRules constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechPhraseRules) String() string {
+	switch e {
+	case DISPID_SPRulesCount:
+		return "DISPID_SPRulesCount"
+	case DISPID_SPRulesItem:
+		return "DISPID_SPRulesItem"
+	case DISPID_SPRules_NewEnum:
+		return "DISPID_SPRules_NewEnum"
+	default:
+		return fmt.Sprintf("DISPID_SpeechPhraseRules(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechRecoContext int32
 
@@ -430,6 +1206,49 @@ const (
 	DISPID_SRCBookmark                         DISPID_SpeechRecoContext = 16
 	DISPID_SRCSetAdaptationData                DISPID_SpeechRecoContext = 17
 )
+
+// String returns the DISPID_SpeechRecoContext constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechRecoContext) String() string {
+	switch e {
+	case DISPID_SRCRecognizer:
+		return "DISPID_SRCRecognizer"
+	case DISPID_SRCAudioInInterferenceStatus:
+		return "DISPID_SRCAudioInInterferenceStatus"
+	case DISPID_SRCRequestedUIType:
+		return "DISPID_SRCRequestedUIType"
+	case DISPID_SRCVoice:
+		return "DISPID_SRCVoice"
+	case DISPID_SRAllowVoiceFormatMatchingOnNextSet:
+		return "DISPID_SRAllowVoiceFormatMatchingOnNextSet"
+	case DISPID_SRCVoicePurgeEvent:
+		return "DISPID_SRCVoicePurgeEvent"
+	case DISPID_SRCEventInterests:
+		return "DISPID_SRCEventInterests"
+	case DISPID_SRCCmdMaxAlternates:
+		return "DISPID_SRCCmdMaxAlternates"
+	case DISPID_SRCState:
+		return "DISPID_SRCState"
+	case DISPID_SRCRetainedAudio:
+		return "DISPID_SRCRetainedAudio"
+	case DISPID_SRCRetainedAudioFormat:
+		return "DISPID_SRCRetainedAudioFormat"
+	case DISPID_SRCPause:
+		return "DISPID_SRCPause"
+	case DISPID_SRCResume:
+		return "DISPID_SRCResume"
+	case DISPID_SRCCreateGrammar:
+		return "DISPID_SRCCreateGrammar"
+	case DISPID_SRCCreateResultFromMemory:
+		return "DISPID_SRCCreateResultFromMemory"
+	case DISPID_SRCBookmark:
+		return "DISPID_SRCBookmark"
+	case DISPID_SRCSetAdaptationData:
+		return "DISPID_SRCSetAdaptationData"
+	default:
+		return fmt.Sprintf("DISPID_SpeechRecoContext(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechRecoContextEvents int32
 
@@ -454,6 +1273,51 @@ const (
 	DISPID_SRCEEnginePrivate              DISPID_SpeechRecoContextEvents = 18
 )
 
+// String returns the DISPID_SpeechRecoContextEvents constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechRecoContextEvents) String() string {
+	switch e {
+	case DISPID_SRCEStartStream:
+		return "DISPID_SRCEStartStream"
+	case DISPID_SRCEEndStream:
+		return "DISPID_SRCEEndStream"
+	case DISPID_SRCEBookmark:
+		return "DISPID_SRCEBookmark"
+	case DISPID_SRCESoundStart:
+		return "DISPID_SRCESoundStart"
+	case DISPID_SRCESoundEnd:
+		return "DISPID_SRCESoundEnd"
+	case DISPID_SRCEPhraseStart:
+		return "DISPID_SRCEPhraseStart"
+	case DISPID_SRCERecognition:
+		return "DISPID_SRCERecognition"
+	case DISPID_SRCEHypothesis:
+		return "DISPID_SRCEHypothesis"
+	case DISPID_SRCEPropertyNumberChange:
+		return "DISPID_SRCEPropertyNumberChange"
+	case DISPID_SRCEPropertyStringChange:
+		return "DISPID_SRCEPropertyStringChange"
+	case DISPID_SRCEFalseRecognition:
+		return "DISPID_SRCEFalseRecognition"
+	case DISPID_SRCEInterference:
+		return "DISPID_SRCEInterference"
+	case DISPID_SRCERequestUI:
+		return "DISPID_SRCERequestUI"
+	case DISPID_SRCERecognizerStateChange:
+		return "DISPID_SRCERecognizerStateChange"
+	case DISPID_SRCEAdaptation:
+		return "DISPID_SRCEAdaptation"
+	case DISPID_SRCERecognitionForOtherContext:
+		return "DISPID_SRCERecognitionForOtherContext"
+	case DISPID_SRCEAudioLevel:
+		return "DISPID_SRCEAudioLevel"
+	case DISPID_SRCEEnginePrivate:
+		return "DISPID_SRCEEnginePrivate"
+	default:
+		return fmt.Sprintf("DISPID_SpeechRecoContextEvents(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechRecoResult int32
 
 const (
@@ -468,11 +1332,49 @@ const (
 	DISPID_SRRDiscardResultInfo DISPID_SpeechRecoResult = 9
 )
 
+// String returns the DISPID_SpeechRecoResult constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechRecoResult) String() string {
+	switch e {
+	case DISPID_SRRRecoContext:
+		return "DISPID_SRRRecoContext"
+	case DISPID_SRRTimes:
+		return "DISPID_SRRTimes"
+	case DISPID_SRRAudioFormat:
+		return "DISPID_SRRAudioFormat"
+	case DISPID_SRRPhraseInfo:
+		return "DISPID_SRRPhraseInfo"
+	case DISPID_SRRAlternates:
+		return "DISPID_SRRAlternates"
+	case DISPID_SRRAudio:
+		return "DISPID_SRRAudio"
+	case DISPID_SRRSpeakAudio:
+		return "DISPID_SRRSpeakAudio"
+	case DISPID_SRRSaveToMemory:
+		return "DISPID_SRRSaveToMemory"
+	case DISPID_SRRDiscardResultInfo:
+		return "DISPID_SRRDiscardResultInfo"
+	default:
+		return fmt.Sprintf("DISPID_SpeechRecoResult(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechRecoResult2 int32
 
 const (
 	DISPID_SRRSetTextFeedback DISPID_SpeechRecoResult2 = 12
 )
+
+// String returns the DISPID_SpeechRecoResult2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechRecoResult2) String() string {
+	switch e {
+	case DISPID_SRRSetTextFeedback:
+		return "DISPID_SRRSetTextFeedback"
+	default:
+		return fmt.Sprintf("DISPID_SpeechRecoResult2(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechRecoResultTimes int32
 
@@ -482,6 +1384,23 @@ const (
 	DISPID_SRRTTickCount       DISPID_SpeechRecoResultTimes = 3
 	DISPID_SRRTOffsetFromStart DISPID_SpeechRecoResultTimes = 4
 )
+
+// String returns the DISPID_SpeechRecoResultTimes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechRecoResultTimes) String() string {
+	switch e {
+	case DISPID_SRRTStreamTime:
+		return "DISPID_SRRTStreamTime"
+	case DISPID_SRRTLength:
+		return "DISPID_SRRTLength"
+	case DISPID_SRRTTickCount:
+		return "DISPID_SRRTTickCount"
+	case DISPID_SRRTOffsetFromStart:
+		return "DISPID_SRRTOffsetFromStart"
+	default:
+		return fmt.Sprintf("DISPID_SpeechRecoResultTimes(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechRecognizer int32
 
@@ -508,6 +1427,55 @@ const (
 	DISPID_SVGetProfiles                           DISPID_SpeechRecognizer = 20
 )
 
+// String returns the DISPID_SpeechRecognizer constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechRecognizer) String() string {
+	switch e {
+	case DISPID_SRRecognizer:
+		return "DISPID_SRRecognizer"
+	case DISPID_SRAllowAudioInputFormatChangesOnNextSet:
+		return "DISPID_SRAllowAudioInputFormatChangesOnNextSet"
+	case DISPID_SRAudioInput:
+		return "DISPID_SRAudioInput"
+	case DISPID_SRAudioInputStream:
+		return "DISPID_SRAudioInputStream"
+	case DISPID_SRIsShared:
+		return "DISPID_SRIsShared"
+	case DISPID_SRState:
+		return "DISPID_SRState"
+	case DISPID_SRStatus:
+		return "DISPID_SRStatus"
+	case DISPID_SRProfile:
+		return "DISPID_SRProfile"
+	case DISPID_SREmulateRecognition:
+		return "DISPID_SREmulateRecognition"
+	case DISPID_SRCreateRecoContext:
+		return "DISPID_SRCreateRecoContext"
+	case DISPID_SRGetFormat:
+		return "DISPID_SRGetFormat"
+	case DISPID_SRSetPropertyNumber:
+		return "DISPID_SRSetPropertyNumber"
+	case DISPID_SRGetPropertyNumber:
+		return "DISPID_SRGetPropertyNumber"
+	case DISPID_SRSetPropertyString:
+		return "DISPID_SRSetPropertyString"
+	case DISPID_SRGetPropertyString:
+		return "DISPID_SRGetPropertyString"
+	case DISPID_SRIsUISupported:
+		return "DISPID_SRIsUISupported"
+	case DISPID_SRDisplayUI:
+		return "DISPID_SRDisplayUI"
+	case DISPID_SRGetRecognizers:
+		return "DISPID_SRGetRecognizers"
+	case DISPID_SVGetAudioInputs:
+		return "DISPID_SVGetAudioInputs"
+	case DISPID_SVGetProfiles:
+		return "DISPID_SVGetProfiles"
+	default:
+		return fmt.Sprintf("DISPID_SpeechRecognizer(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechRecognizerStatus int32
 
 const (
@@ -518,6 +1486,27 @@ const (
 	DISPID_SRSClsidEngine           DISPID_SpeechRecognizerStatus = 5
 	DISPID_SRSSupportedLanguages    DISPID_SpeechRecognizerStatus = 6
 )
+
+// String returns the DISPID_SpeechRecognizerStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechRecognizerStatus) String() string {
+	switch e {
+	case DISPID_SRSAudioStatus:
+		return "DISPID_SRSAudioStatus"
+	case DISPID_SRSCurrentStreamPosition:
+		return "DISPID_SRSCurrentStreamPosition"
+	case DISPID_SRSCurrentStreamNumber:
+		return "DISPID_SRSCurrentStreamNumber"
+	case DISPID_SRSNumberOfActiveRules:
+		return "DISPID_SRSNumberOfActiveRules"
+	case DISPID_SRSClsidEngine:
+		return "DISPID_SRSClsidEngine"
+	case DISPID_SRSSupportedLanguages:
+		return "DISPID_SRSSupportedLanguages"
+	default:
+		return fmt.Sprintf("DISPID_SpeechRecognizerStatus(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechVoice int32
 
@@ -546,6 +1535,59 @@ const (
 	DISPID_SVDisplayUI                             DISPID_SpeechVoice = 22
 )
 
+// String returns the DISPID_SpeechVoice constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechVoice) String() string {
+	switch e {
+	case DISPID_SVStatus:
+		return "DISPID_SVStatus"
+	case DISPID_SVVoice:
+		return "DISPID_SVVoice"
+	case DISPID_SVAudioOutput:
+		return "DISPID_SVAudioOutput"
+	case DISPID_SVAudioOutputStream:
+		return "DISPID_SVAudioOutputStream"
+	case DISPID_SVRate:
+		return "DISPID_SVRate"
+	case DISPID_SVVolume:
+		return "DISPID_SVVolume"
+	case DISPID_SVAllowAudioOuputFormatChangesOnNextSet:
+		return "DISPID_SVAllowAudioOuputFormatChangesOnNextSet"
+	case DISPID_SVEventInterests:
+		return "DISPID_SVEventInterests"
+	case DISPID_SVPriority:
+		return "DISPID_SVPriority"
+	case DISPID_SVAlertBoundary:
+		return "DISPID_SVAlertBoundary"
+	case DISPID_SVSyncronousSpeakTimeout:
+		return "DISPID_SVSyncronousSpeakTimeout"
+	case DISPID_SVSpeak:
+		return "DISPID_SVSpeak"
+	case DISPID_SVSpeakStream:
+		return "DISPID_SVSpeakStream"
+	case DISPID_SVPause:
+		return "DISPID_SVPause"
+	case DISPID_SVResume:
+		return "DISPID_SVResume"
+	case DISPID_SVSkip:
+		return "DISPID_SVSkip"
+	case DISPID_SVGetVoices:
+		return "DISPID_SVGetVoices"
+	case DISPID_SVGetAudioOutputs:
+		return "DISPID_SVGetAudioOutputs"
+	case DISPID_SVWaitUntilDone:
+		return "DISPID_SVWaitUntilDone"
+	case DISPID_SVSpeakCompleteEvent:
+		return "DISPID_SVSpeakCompleteEvent"
+	case DISPID_SVIsUISupported:
+		return "DISPID_SVIsUISupported"
+	case DISPID_SVDisplayUI:
+		return "DISPID_SVDisplayUI"
+	default:
+		return fmt.Sprintf("DISPID_SpeechVoice(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechVoiceEvent int32
 
 const (
@@ -560,6 +1602,35 @@ const (
 	DISPID_SVEAudioLevel       DISPID_SpeechVoiceEvent = 9
 	DISPID_SVEEnginePrivate    DISPID_SpeechVoiceEvent = 10
 )
+
+// String returns the DISPID_SpeechVoiceEvent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechVoiceEvent) String() string {
+	switch e {
+	case DISPID_SVEStreamStart:
+		return "DISPID_SVEStreamStart"
+	case DISPID_SVEStreamEnd:
+		return "DISPID_SVEStreamEnd"
+	case DISPID_SVEVoiceChange:
+		return "DISPID_SVEVoiceChange"
+	case DISPID_SVEBookmark:
+		return "DISPID_SVEBookmark"
+	case DISPID_SVEWord:
+		return "DISPID_SVEWord"
+	case DISPID_SVEPhoneme:
+		return "DISPID_SVEPhoneme"
+	case DISPID_SVESentenceBoundary:
+		return "DISPID_SVESentenceBoundary"
+	case DISPID_SVEViseme:
+		return "DISPID_SVEViseme"
+	case DISPID_SVEAudioLevel:
+		return "DISPID_SVEAudioLevel"
+	case DISPID_SVEEnginePrivate:
+		return "DISPID_SVEEnginePrivate"
+	default:
+		return fmt.Sprintf("DISPID_SpeechVoiceEvent(%d)", int32(e))
+	}
+}
 
 type DISPID_SpeechVoiceStatus int32
 
@@ -578,6 +1649,39 @@ const (
 	DISPID_SVSVisemeId               DISPID_SpeechVoiceStatus = 12
 )
 
+// String returns the DISPID_SpeechVoiceStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechVoiceStatus) String() string {
+	switch e {
+	case DISPID_SVSCurrentStreamNumber:
+		return "DISPID_SVSCurrentStreamNumber"
+	case DISPID_SVSLastStreamNumberQueued:
+		return "DISPID_SVSLastStreamNumberQueued"
+	case DISPID_SVSLastResult:
+		return "DISPID_SVSLastResult"
+	case DISPID_SVSRunningState:
+		return "DISPID_SVSRunningState"
+	case DISPID_SVSInputWordPosition:
+		return "DISPID_SVSInputWordPosition"
+	case DISPID_SVSInputWordLength:
+		return "DISPID_SVSInputWordLength"
+	case DISPID_SVSInputSentencePosition:
+		return "DISPID_SVSInputSentencePosition"
+	case DISPID_SVSInputSentenceLength:
+		return "DISPID_SVSInputSentenceLength"
+	case DISPID_SVSLastBookmark:
+		return "DISPID_SVSLastBookmark"
+	case DISPID_SVSLastBookmarkId:
+		return "DISPID_SVSLastBookmarkId"
+	case DISPID_SVSPhonemeId:
+		return "DISPID_SVSPhonemeId"
+	case DISPID_SVSVisemeId:
+		return "DISPID_SVSVisemeId"
+	default:
+		return fmt.Sprintf("DISPID_SpeechVoiceStatus(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechWaveFormatEx int32
 
 const (
@@ -590,12 +1694,48 @@ const (
 	DISPID_SWFEExtraData      DISPID_SpeechWaveFormatEx = 7
 )
 
+// String returns the DISPID_SpeechWaveFormatEx constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechWaveFormatEx) String() string {
+	switch e {
+	case DISPID_SWFEFormatTag:
+		return "DISPID_SWFEFormatTag"
+	case DISPID_SWFEChannels:
+		return "DISPID_SWFEChannels"
+	case DISPID_SWFESamplesPerSec:
+		return "DISPID_SWFESamplesPerSec"
+	case DISPID_SWFEAvgBytesPerSec:
+		return "DISPID_SWFEAvgBytesPerSec"
+	case DISPID_SWFEBlockAlign:
+		return "DISPID_SWFEBlockAlign"
+	case DISPID_SWFEBitsPerSample:
+		return "DISPID_SWFEBitsPerSample"
+	case DISPID_SWFEExtraData:
+		return "DISPID_SWFEExtraData"
+	default:
+		return fmt.Sprintf("DISPID_SpeechWaveFormatEx(%d)", int32(e))
+	}
+}
+
 type DISPID_SpeechXMLRecoResult int32
 
 const (
 	DISPID_SRRGetXMLResult    DISPID_SpeechXMLRecoResult = 10
 	DISPID_SRRGetXMLErrorInfo DISPID_SpeechXMLRecoResult = 11
 )
+
+// String returns the DISPID_SpeechXMLRecoResult constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_SpeechXMLRecoResult) String() string {
+	switch e {
+	case DISPID_SRRGetXMLResult:
+		return "DISPID_SRRGetXMLResult"
+	case DISPID_SRRGetXMLErrorInfo:
+		return "DISPID_SRRGetXMLErrorInfo"
+	default:
+		return fmt.Sprintf("DISPID_SpeechXMLRecoResult(%d)", int32(e))
+	}
+}
 
 type PHONETICALPHABET int32
 
@@ -605,6 +1745,21 @@ const (
 	PA_Sapi PHONETICALPHABET = 2
 )
 
+// String returns the PHONETICALPHABET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PHONETICALPHABET) String() string {
+	switch e {
+	case PA_Ipa:
+		return "PA_Ipa"
+	case PA_Ups:
+		return "PA_Ups"
+	case PA_Sapi:
+		return "PA_Sapi"
+	default:
+		return fmt.Sprintf("PHONETICALPHABET(%d)", int32(e))
+	}
+}
+
 type SPADAPTATIONRELEVANCE int32
 
 const (
@@ -613,6 +1768,23 @@ const (
 	SPAR_Medium  SPADAPTATIONRELEVANCE = 2
 	SPAR_High    SPADAPTATIONRELEVANCE = 3
 )
+
+// String returns the SPADAPTATIONRELEVANCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPADAPTATIONRELEVANCE) String() string {
+	switch e {
+	case SPAR_Unknown:
+		return "SPAR_Unknown"
+	case SPAR_Low:
+		return "SPAR_Low"
+	case SPAR_Medium:
+		return "SPAR_Medium"
+	case SPAR_High:
+		return "SPAR_High"
+	default:
+		return fmt.Sprintf("SPADAPTATIONRELEVANCE(%d)", int32(e))
+	}
+}
 
 type SPADAPTATIONSETTINGS int32
 
@@ -625,12 +1797,46 @@ const (
 	SPADS_HighVolumeDataSource SPADAPTATIONSETTINGS = 16
 )
 
+// String returns the SPADAPTATIONSETTINGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPADAPTATIONSETTINGS) String() string {
+	switch e {
+	case SPADS_Default:
+		return "SPADS_Default"
+	case SPADS_CurrentRecognizer:
+		return "SPADS_CurrentRecognizer"
+	case SPADS_RecoProfile:
+		return "SPADS_RecoProfile"
+	case SPADS_Immediate:
+		return "SPADS_Immediate"
+	case SPADS_Reset:
+		return "SPADS_Reset"
+	case SPADS_HighVolumeDataSource:
+		return "SPADS_HighVolumeDataSource"
+	default:
+		return fmt.Sprintf("SPADAPTATIONSETTINGS(%d)", int32(e))
+	}
+}
+
 type SPAUDIOOPTIONS int32
 
 const (
 	SPAO_NONE         SPAUDIOOPTIONS = 0
 	SPAO_RETAIN_AUDIO SPAUDIOOPTIONS = 1
 )
+
+// String returns the SPAUDIOOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPAUDIOOPTIONS) String() string {
+	switch e {
+	case SPAO_NONE:
+		return "SPAO_NONE"
+	case SPAO_RETAIN_AUDIO:
+		return "SPAO_RETAIN_AUDIO"
+	default:
+		return fmt.Sprintf("SPAUDIOOPTIONS(%d)", int32(e))
+	}
+}
 
 type SPAUDIOSTATE int32
 
@@ -641,6 +1847,23 @@ const (
 	SPAS_RUN    SPAUDIOSTATE = 3
 )
 
+// String returns the SPAUDIOSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPAUDIOSTATE) String() string {
+	switch e {
+	case SPAS_CLOSED:
+		return "SPAS_CLOSED"
+	case SPAS_STOP:
+		return "SPAS_STOP"
+	case SPAS_PAUSE:
+		return "SPAS_PAUSE"
+	case SPAS_RUN:
+		return "SPAS_RUN"
+	default:
+		return fmt.Sprintf("SPAUDIOSTATE(%d)", int32(e))
+	}
+}
+
 type SPBOOKMARKOPTIONS int32
 
 const (
@@ -649,6 +1872,23 @@ const (
 	SPBO_AHEAD      SPBOOKMARKOPTIONS = 2
 	SPBO_TIME_UNITS SPBOOKMARKOPTIONS = 4
 )
+
+// String returns the SPBOOKMARKOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPBOOKMARKOPTIONS) String() string {
+	switch e {
+	case SPBO_NONE:
+		return "SPBO_NONE"
+	case SPBO_PAUSE:
+		return "SPBO_PAUSE"
+	case SPBO_AHEAD:
+		return "SPBO_AHEAD"
+	case SPBO_TIME_UNITS:
+		return "SPBO_TIME_UNITS"
+	default:
+		return fmt.Sprintf("SPBOOKMARKOPTIONS(%d)", int32(e))
+	}
+}
 
 type SPCFGNOTIFY int32
 
@@ -659,6 +1899,25 @@ const (
 	SPCFGN_ACTIVATE   SPCFGNOTIFY = 3
 	SPCFGN_DEACTIVATE SPCFGNOTIFY = 4
 )
+
+// String returns the SPCFGNOTIFY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPCFGNOTIFY) String() string {
+	switch e {
+	case SPCFGN_ADD:
+		return "SPCFGN_ADD"
+	case SPCFGN_REMOVE:
+		return "SPCFGN_REMOVE"
+	case SPCFGN_INVALIDATE:
+		return "SPCFGN_INVALIDATE"
+	case SPCFGN_ACTIVATE:
+		return "SPCFGN_ACTIVATE"
+	case SPCFGN_DEACTIVATE:
+		return "SPCFGN_DEACTIVATE"
+	default:
+		return fmt.Sprintf("SPCFGNOTIFY(%d)", int32(e))
+	}
+}
 
 type SPCFGRULEATTRIBUTES int32
 
@@ -674,6 +1933,33 @@ const (
 	SPRAF_UserDelimited SPCFGRULEATTRIBUTES = 131072
 )
 
+// String returns the SPCFGRULEATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPCFGRULEATTRIBUTES) String() string {
+	switch e {
+	case SPRAF_TopLevel:
+		return "SPRAF_TopLevel"
+	case SPRAF_Active:
+		return "SPRAF_Active"
+	case SPRAF_Export:
+		return "SPRAF_Export"
+	case SPRAF_Import:
+		return "SPRAF_Import"
+	case SPRAF_Interpreter:
+		return "SPRAF_Interpreter"
+	case SPRAF_Dynamic:
+		return "SPRAF_Dynamic"
+	case SPRAF_Root:
+		return "SPRAF_Root"
+	case SPRAF_AutoPause:
+		return "SPRAF_AutoPause"
+	case SPRAF_UserDelimited:
+		return "SPRAF_UserDelimited"
+	default:
+		return fmt.Sprintf("SPCFGRULEATTRIBUTES(%d)", int32(e))
+	}
+}
+
 type SPCOMMITFLAGS int32
 
 const (
@@ -682,12 +1968,40 @@ const (
 	SPCF_DEFINITE_CORRECTION SPCOMMITFLAGS = 2
 )
 
+// String returns the SPCOMMITFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPCOMMITFLAGS) String() string {
+	switch e {
+	case SPCF_NONE:
+		return "SPCF_NONE"
+	case SPCF_ADD_TO_USER_LEXICON:
+		return "SPCF_ADD_TO_USER_LEXICON"
+	case SPCF_DEFINITE_CORRECTION:
+		return "SPCF_DEFINITE_CORRECTION"
+	default:
+		return fmt.Sprintf("SPCOMMITFLAGS(%d)", int32(e))
+	}
+}
+
 type SPCONTEXTSTATE int32
 
 const (
 	SPCS_DISABLED SPCONTEXTSTATE = 0
 	SPCS_ENABLED  SPCONTEXTSTATE = 1
 )
+
+// String returns the SPCONTEXTSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPCONTEXTSTATE) String() string {
+	switch e {
+	case SPCS_DISABLED:
+		return "SPCS_DISABLED"
+	case SPCS_ENABLED:
+		return "SPCS_ENABLED"
+	default:
+		return fmt.Sprintf("SPCONTEXTSTATE(%d)", int32(e))
+	}
+}
 
 type SPDATAKEYLOCATION int32
 
@@ -697,6 +2011,23 @@ const (
 	SPDKL_LocalMachine    SPDATAKEYLOCATION = 2
 	SPDKL_CurrentConfig   SPDATAKEYLOCATION = 5
 )
+
+// String returns the SPDATAKEYLOCATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPDATAKEYLOCATION) String() string {
+	switch e {
+	case SPDKL_DefaultLocation:
+		return "SPDKL_DefaultLocation"
+	case SPDKL_CurrentUser:
+		return "SPDKL_CurrentUser"
+	case SPDKL_LocalMachine:
+		return "SPDKL_LocalMachine"
+	case SPDKL_CurrentConfig:
+		return "SPDKL_CurrentConfig"
+	default:
+		return fmt.Sprintf("SPDATAKEYLOCATION(%d)", int32(e))
+	}
+}
 
 type SPDISPLAYATTRIBUTES int32
 
@@ -708,6 +2039,27 @@ const (
 	SPAF_ALL                    SPDISPLAYATTRIBUTES = 31
 	SPAF_USER_SPECIFIED         SPDISPLAYATTRIBUTES = 128
 )
+
+// String returns the SPDISPLAYATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPDISPLAYATTRIBUTES) String() string {
+	switch e {
+	case SPAF_ONE_TRAILING_SPACE:
+		return "SPAF_ONE_TRAILING_SPACE"
+	case SPAF_TWO_TRAILING_SPACES:
+		return "SPAF_TWO_TRAILING_SPACES"
+	case SPAF_CONSUME_LEADING_SPACES:
+		return "SPAF_CONSUME_LEADING_SPACES"
+	case SPAF_BUFFER_POSITION:
+		return "SPAF_BUFFER_POSITION"
+	case SPAF_ALL:
+		return "SPAF_ALL"
+	case SPAF_USER_SPECIFIED:
+		return "SPAF_USER_SPECIFIED"
+	default:
+		return fmt.Sprintf("SPDISPLAYATTRIBUTES(%d)", int32(e))
+	}
+}
 
 type SPEAKFLAGS int32
 
@@ -729,6 +2081,41 @@ const (
 	SPF_UNUSED_FLAGS     SPEAKFLAGS = -512
 )
 
+// String returns the SPEAKFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPEAKFLAGS) String() string {
+	switch e {
+	case SPF_DEFAULT:
+		return "SPF_DEFAULT"
+	case SPF_ASYNC:
+		return "SPF_ASYNC"
+	case SPF_PURGEBEFORESPEAK:
+		return "SPF_PURGEBEFORESPEAK"
+	case SPF_IS_FILENAME:
+		return "SPF_IS_FILENAME"
+	case SPF_IS_XML:
+		return "SPF_IS_XML"
+	case SPF_IS_NOT_XML:
+		return "SPF_IS_NOT_XML"
+	case SPF_PERSIST_XML:
+		return "SPF_PERSIST_XML"
+	case SPF_NLP_SPEAK_PUNC:
+		return "SPF_NLP_SPEAK_PUNC"
+	case SPF_PARSE_SAPI:
+		return "SPF_PARSE_SAPI"
+	case SPF_PARSE_SSML:
+		return "SPF_PARSE_SSML"
+	case SPF_PARSE_MASK:
+		return "SPF_PARSE_MASK"
+	case SPF_VOICE_MASK:
+		return "SPF_VOICE_MASK"
+	case SPF_UNUSED_FLAGS:
+		return "SPF_UNUSED_FLAGS"
+	default:
+		return fmt.Sprintf("SPEAKFLAGS(%d)", int32(e))
+	}
+}
+
 type SPENDSRSTREAMFLAGS int32
 
 const (
@@ -736,6 +2123,21 @@ const (
 	SPESF_STREAM_RELEASED SPENDSRSTREAMFLAGS = 1
 	SPESF_EMULATED        SPENDSRSTREAMFLAGS = 2
 )
+
+// String returns the SPENDSRSTREAMFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPENDSRSTREAMFLAGS) String() string {
+	switch e {
+	case SPESF_NONE:
+		return "SPESF_NONE"
+	case SPESF_STREAM_RELEASED:
+		return "SPESF_STREAM_RELEASED"
+	case SPESF_EMULATED:
+		return "SPESF_EMULATED"
+	default:
+		return fmt.Sprintf("SPENDSRSTREAMFLAGS(%d)", int32(e))
+	}
+}
 
 type SPEVENTENUM int32
 
@@ -782,6 +2184,87 @@ const (
 	SPEI_RESERVED3              SPEVENTENUM = 63
 )
 
+// String returns the SPEVENTENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPEVENTENUM) String() string {
+	switch e {
+	case SPEI_UNDEFINED:
+		return "SPEI_UNDEFINED"
+	case SPEI_START_INPUT_STREAM:
+		return "SPEI_START_INPUT_STREAM"
+	case SPEI_END_INPUT_STREAM:
+		return "SPEI_END_INPUT_STREAM"
+	case SPEI_VOICE_CHANGE:
+		return "SPEI_VOICE_CHANGE"
+	case SPEI_TTS_BOOKMARK:
+		return "SPEI_TTS_BOOKMARK"
+	case SPEI_WORD_BOUNDARY:
+		return "SPEI_WORD_BOUNDARY"
+	case SPEI_PHONEME:
+		return "SPEI_PHONEME"
+	case SPEI_SENTENCE_BOUNDARY:
+		return "SPEI_SENTENCE_BOUNDARY"
+	case SPEI_VISEME:
+		return "SPEI_VISEME"
+	case SPEI_TTS_AUDIO_LEVEL:
+		return "SPEI_TTS_AUDIO_LEVEL"
+	case SPEI_TTS_PRIVATE:
+		return "SPEI_TTS_PRIVATE"
+	case SPEI_END_SR_STREAM:
+		return "SPEI_END_SR_STREAM"
+	case SPEI_SOUND_START:
+		return "SPEI_SOUND_START"
+	case SPEI_SOUND_END:
+		return "SPEI_SOUND_END"
+	case SPEI_PHRASE_START:
+		return "SPEI_PHRASE_START"
+	case SPEI_RECOGNITION:
+		return "SPEI_RECOGNITION"
+	case SPEI_HYPOTHESIS:
+		return "SPEI_HYPOTHESIS"
+	case SPEI_SR_BOOKMARK:
+		return "SPEI_SR_BOOKMARK"
+	case SPEI_PROPERTY_NUM_CHANGE:
+		return "SPEI_PROPERTY_NUM_CHANGE"
+	case SPEI_PROPERTY_STRING_CHANGE:
+		return "SPEI_PROPERTY_STRING_CHANGE"
+	case SPEI_FALSE_RECOGNITION:
+		return "SPEI_FALSE_RECOGNITION"
+	case SPEI_INTERFERENCE:
+		return "SPEI_INTERFERENCE"
+	case SPEI_REQUEST_UI:
+		return "SPEI_REQUEST_UI"
+	case SPEI_RECO_STATE_CHANGE:
+		return "SPEI_RECO_STATE_CHANGE"
+	case SPEI_ADAPTATION:
+		return "SPEI_ADAPTATION"
+	case SPEI_START_SR_STREAM:
+		return "SPEI_START_SR_STREAM"
+	case SPEI_RECO_OTHER_CONTEXT:
+		return "SPEI_RECO_OTHER_CONTEXT"
+	case SPEI_SR_AUDIO_LEVEL:
+		return "SPEI_SR_AUDIO_LEVEL"
+	case SPEI_SR_RETAINEDAUDIO:
+		return "SPEI_SR_RETAINEDAUDIO"
+	case SPEI_SR_PRIVATE:
+		return "SPEI_SR_PRIVATE"
+	case SPEI_RESERVED4:
+		return "SPEI_RESERVED4"
+	case SPEI_RESERVED5:
+		return "SPEI_RESERVED5"
+	case SPEI_RESERVED6:
+		return "SPEI_RESERVED6"
+	case SPEI_RESERVED1:
+		return "SPEI_RESERVED1"
+	case SPEI_RESERVED2:
+		return "SPEI_RESERVED2"
+	case SPEI_RESERVED3:
+		return "SPEI_RESERVED3"
+	default:
+		return fmt.Sprintf("SPEVENTENUM(%d)", int32(e))
+	}
+}
+
 type SPEVENTLPARAMTYPE int32
 
 const (
@@ -792,6 +2275,25 @@ const (
 	SPET_LPARAM_IS_STRING    SPEVENTLPARAMTYPE = 4
 )
 
+// String returns the SPEVENTLPARAMTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPEVENTLPARAMTYPE) String() string {
+	switch e {
+	case SPET_LPARAM_IS_UNDEFINED:
+		return "SPET_LPARAM_IS_UNDEFINED"
+	case SPET_LPARAM_IS_TOKEN:
+		return "SPET_LPARAM_IS_TOKEN"
+	case SPET_LPARAM_IS_OBJECT:
+		return "SPET_LPARAM_IS_OBJECT"
+	case SPET_LPARAM_IS_POINTER:
+		return "SPET_LPARAM_IS_POINTER"
+	case SPET_LPARAM_IS_STRING:
+		return "SPET_LPARAM_IS_STRING"
+	default:
+		return fmt.Sprintf("SPEVENTLPARAMTYPE(%d)", int32(e))
+	}
+}
+
 type SPFILEMODE int32
 
 const (
@@ -801,6 +2303,25 @@ const (
 	SPFM_CREATE_ALWAYS  SPFILEMODE = 3
 	SPFM_NUM_MODES      SPFILEMODE = 4
 )
+
+// String returns the SPFILEMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPFILEMODE) String() string {
+	switch e {
+	case SPFM_OPEN_READONLY:
+		return "SPFM_OPEN_READONLY"
+	case SPFM_OPEN_READWRITE:
+		return "SPFM_OPEN_READWRITE"
+	case SPFM_CREATE:
+		return "SPFM_CREATE"
+	case SPFM_CREATE_ALWAYS:
+		return "SPFM_CREATE_ALWAYS"
+	case SPFM_NUM_MODES:
+		return "SPFM_NUM_MODES"
+	default:
+		return fmt.Sprintf("SPFILEMODE(%d)", int32(e))
+	}
+}
 
 type SPGRAMMAROPTIONS int32
 
@@ -820,6 +2341,41 @@ const (
 	SPGO_ALL             SPGRAMMAROPTIONS = 1023
 )
 
+// String returns the SPGRAMMAROPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPGRAMMAROPTIONS) String() string {
+	switch e {
+	case SPGO_SAPI:
+		return "SPGO_SAPI"
+	case SPGO_SRGS:
+		return "SPGO_SRGS"
+	case SPGO_UPS:
+		return "SPGO_UPS"
+	case SPGO_SRGS_MS_SCRIPT:
+		return "SPGO_SRGS_MS_SCRIPT"
+	case SPGO_SRGS_W3C_SCRIPT:
+		return "SPGO_SRGS_W3C_SCRIPT"
+	case SPGO_SRGS_STG_SCRIPT:
+		return "SPGO_SRGS_STG_SCRIPT"
+	case SPGO_SRGS_SCRIPT:
+		return "SPGO_SRGS_SCRIPT"
+	case SPGO_FILE:
+		return "SPGO_FILE"
+	case SPGO_HTTP:
+		return "SPGO_HTTP"
+	case SPGO_RES:
+		return "SPGO_RES"
+	case SPGO_OBJECT:
+		return "SPGO_OBJECT"
+	case SPGO_DEFAULT:
+		return "SPGO_DEFAULT"
+	case SPGO_ALL:
+		return "SPGO_ALL"
+	default:
+		return fmt.Sprintf("SPGRAMMAROPTIONS(%d)", int32(e))
+	}
+}
+
 type SPGRAMMARSTATE int32
 
 const (
@@ -827,6 +2383,21 @@ const (
 	SPGS_ENABLED   SPGRAMMARSTATE = 1
 	SPGS_EXCLUSIVE SPGRAMMARSTATE = 3
 )
+
+// String returns the SPGRAMMARSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPGRAMMARSTATE) String() string {
+	switch e {
+	case SPGS_DISABLED:
+		return "SPGS_DISABLED"
+	case SPGS_ENABLED:
+		return "SPGS_ENABLED"
+	case SPGS_EXCLUSIVE:
+		return "SPGS_EXCLUSIVE"
+	default:
+		return fmt.Sprintf("SPGRAMMARSTATE(%d)", int32(e))
+	}
+}
 
 type SPGRAMMARWORDTYPE int32
 
@@ -836,6 +2407,23 @@ const (
 	SPWT_PRONUNCIATION            SPGRAMMARWORDTYPE = 2
 	SPWT_LEXICAL_NO_SPECIAL_CHARS SPGRAMMARWORDTYPE = 3
 )
+
+// String returns the SPGRAMMARWORDTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPGRAMMARWORDTYPE) String() string {
+	switch e {
+	case SPWT_DISPLAY:
+		return "SPWT_DISPLAY"
+	case SPWT_LEXICAL:
+		return "SPWT_LEXICAL"
+	case SPWT_PRONUNCIATION:
+		return "SPWT_PRONUNCIATION"
+	case SPWT_LEXICAL_NO_SPECIAL_CHARS:
+		return "SPWT_LEXICAL_NO_SPECIAL_CHARS"
+	default:
+		return fmt.Sprintf("SPGRAMMARWORDTYPE(%d)", int32(e))
+	}
+}
 
 type SPINTERFERENCE int32
 
@@ -851,6 +2439,35 @@ const (
 	SPINTERFERENCE_LATENCY_TRUNCATE_BEGIN SPINTERFERENCE = 8
 	SPINTERFERENCE_LATENCY_TRUNCATE_END   SPINTERFERENCE = 9
 )
+
+// String returns the SPINTERFERENCE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPINTERFERENCE) String() string {
+	switch e {
+	case SPINTERFERENCE_NONE:
+		return "SPINTERFERENCE_NONE"
+	case SPINTERFERENCE_NOISE:
+		return "SPINTERFERENCE_NOISE"
+	case SPINTERFERENCE_NOSIGNAL:
+		return "SPINTERFERENCE_NOSIGNAL"
+	case SPINTERFERENCE_TOOLOUD:
+		return "SPINTERFERENCE_TOOLOUD"
+	case SPINTERFERENCE_TOOQUIET:
+		return "SPINTERFERENCE_TOOQUIET"
+	case SPINTERFERENCE_TOOFAST:
+		return "SPINTERFERENCE_TOOFAST"
+	case SPINTERFERENCE_TOOSLOW:
+		return "SPINTERFERENCE_TOOSLOW"
+	case SPINTERFERENCE_LATENCY_WARNING:
+		return "SPINTERFERENCE_LATENCY_WARNING"
+	case SPINTERFERENCE_LATENCY_TRUNCATE_BEGIN:
+		return "SPINTERFERENCE_LATENCY_TRUNCATE_BEGIN"
+	case SPINTERFERENCE_LATENCY_TRUNCATE_END:
+		return "SPINTERFERENCE_LATENCY_TRUNCATE_END"
+	default:
+		return fmt.Sprintf("SPINTERFERENCE(%d)", int32(e))
+	}
+}
 
 type SPLEXICONTYPE int32
 
@@ -889,12 +2506,98 @@ const (
 	ELEXTYPE_PRIVATE20     SPLEXICONTYPE = -2147483648
 )
 
+// String returns the SPLEXICONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPLEXICONTYPE) String() string {
+	switch e {
+	case ELEXTYPE_USER:
+		return "ELEXTYPE_USER"
+	case ELEXTYPE_APP:
+		return "ELEXTYPE_APP"
+	case ELEXTYPE_VENDORLEXICON:
+		return "ELEXTYPE_VENDORLEXICON"
+	case ELEXTYPE_LETTERTOSOUND:
+		return "ELEXTYPE_LETTERTOSOUND"
+	case ELEXTYPE_MORPHOLOGY:
+		return "ELEXTYPE_MORPHOLOGY"
+	case ELEXTYPE_RESERVED4:
+		return "ELEXTYPE_RESERVED4"
+	case ELEXTYPE_USER_SHORTCUT:
+		return "ELEXTYPE_USER_SHORTCUT"
+	case ELEXTYPE_RESERVED6:
+		return "ELEXTYPE_RESERVED6"
+	case ELEXTYPE_RESERVED7:
+		return "ELEXTYPE_RESERVED7"
+	case ELEXTYPE_RESERVED8:
+		return "ELEXTYPE_RESERVED8"
+	case ELEXTYPE_RESERVED9:
+		return "ELEXTYPE_RESERVED9"
+	case ELEXTYPE_RESERVED10:
+		return "ELEXTYPE_RESERVED10"
+	case ELEXTYPE_PRIVATE1:
+		return "ELEXTYPE_PRIVATE1"
+	case ELEXTYPE_PRIVATE2:
+		return "ELEXTYPE_PRIVATE2"
+	case ELEXTYPE_PRIVATE3:
+		return "ELEXTYPE_PRIVATE3"
+	case ELEXTYPE_PRIVATE4:
+		return "ELEXTYPE_PRIVATE4"
+	case ELEXTYPE_PRIVATE5:
+		return "ELEXTYPE_PRIVATE5"
+	case ELEXTYPE_PRIVATE6:
+		return "ELEXTYPE_PRIVATE6"
+	case ELEXTYPE_PRIVATE7:
+		return "ELEXTYPE_PRIVATE7"
+	case ELEXTYPE_PRIVATE8:
+		return "ELEXTYPE_PRIVATE8"
+	case ELEXTYPE_PRIVATE9:
+		return "ELEXTYPE_PRIVATE9"
+	case ELEXTYPE_PRIVATE10:
+		return "ELEXTYPE_PRIVATE10"
+	case ELEXTYPE_PRIVATE11:
+		return "ELEXTYPE_PRIVATE11"
+	case ELEXTYPE_PRIVATE12:
+		return "ELEXTYPE_PRIVATE12"
+	case ELEXTYPE_PRIVATE13:
+		return "ELEXTYPE_PRIVATE13"
+	case ELEXTYPE_PRIVATE14:
+		return "ELEXTYPE_PRIVATE14"
+	case ELEXTYPE_PRIVATE15:
+		return "ELEXTYPE_PRIVATE15"
+	case ELEXTYPE_PRIVATE16:
+		return "ELEXTYPE_PRIVATE16"
+	case ELEXTYPE_PRIVATE17:
+		return "ELEXTYPE_PRIVATE17"
+	case ELEXTYPE_PRIVATE18:
+		return "ELEXTYPE_PRIVATE18"
+	case ELEXTYPE_PRIVATE19:
+		return "ELEXTYPE_PRIVATE19"
+	case ELEXTYPE_PRIVATE20:
+		return "ELEXTYPE_PRIVATE20"
+	default:
+		return fmt.Sprintf("SPLEXICONTYPE(%d)", int32(e))
+	}
+}
+
 type SPLOADOPTIONS int32
 
 const (
 	SPLO_STATIC  SPLOADOPTIONS = 0
 	SPLO_DYNAMIC SPLOADOPTIONS = 1
 )
+
+// String returns the SPLOADOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPLOADOPTIONS) String() string {
+	switch e {
+	case SPLO_STATIC:
+		return "SPLO_STATIC"
+	case SPLO_DYNAMIC:
+		return "SPLO_DYNAMIC"
+	default:
+		return fmt.Sprintf("SPLOADOPTIONS(%d)", int32(e))
+	}
+}
 
 type SPMATCHINGMODE int32
 
@@ -905,6 +2608,25 @@ const (
 	SubsequenceContentRequired   SPMATCHINGMODE = 5
 	OrderedSubsetContentRequired SPMATCHINGMODE = 7
 )
+
+// String returns the SPMATCHINGMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPMATCHINGMODE) String() string {
+	switch e {
+	case AllWords:
+		return "AllWords"
+	case Subsequence:
+		return "Subsequence"
+	case OrderedSubset:
+		return "OrderedSubset"
+	case SubsequenceContentRequired:
+		return "SubsequenceContentRequired"
+	case OrderedSubsetContentRequired:
+		return "OrderedSubsetContentRequired"
+	default:
+		return fmt.Sprintf("SPMATCHINGMODE(%d)", int32(e))
+	}
+}
 
 type SPPARTOFSPEECH int32
 
@@ -921,6 +2643,35 @@ const (
 	SPPS_SuppressWord SPPARTOFSPEECH = 61440
 )
 
+// String returns the SPPARTOFSPEECH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPPARTOFSPEECH) String() string {
+	switch e {
+	case SPPS_NotOverriden:
+		return "SPPS_NotOverriden"
+	case SPPS_Unknown:
+		return "SPPS_Unknown"
+	case SPPS_Noun:
+		return "SPPS_Noun"
+	case SPPS_Verb:
+		return "SPPS_Verb"
+	case SPPS_Modifier:
+		return "SPPS_Modifier"
+	case SPPS_Function:
+		return "SPPS_Function"
+	case SPPS_Interjection:
+		return "SPPS_Interjection"
+	case SPPS_Noncontent:
+		return "SPPS_Noncontent"
+	case SPPS_LMA:
+		return "SPPS_LMA"
+	case SPPS_SuppressWord:
+		return "SPPS_SuppressWord"
+	default:
+		return fmt.Sprintf("SPPARTOFSPEECH(%d)", int32(e))
+	}
+}
+
 type SPPHRASEPROPERTYUNIONTYPE int32
 
 const (
@@ -928,17 +2679,52 @@ const (
 	SPPPUT_ARRAY_INDEX SPPHRASEPROPERTYUNIONTYPE = 1
 )
 
+// String returns the SPPHRASEPROPERTYUNIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPPHRASEPROPERTYUNIONTYPE) String() string {
+	switch e {
+	case SPPPUT_UNUSED:
+		return "SPPPUT_UNUSED"
+	case SPPPUT_ARRAY_INDEX:
+		return "SPPPUT_ARRAY_INDEX"
+	default:
+		return fmt.Sprintf("SPPHRASEPROPERTYUNIONTYPE(%d)", int32(e))
+	}
+}
+
 type SPPHRASERNG int32
 
 const (
 	SPPR_ALL_ELEMENTS SPPHRASERNG = -1
 )
 
+// String returns the SPPHRASERNG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPPHRASERNG) String() string {
+	switch e {
+	case SPPR_ALL_ELEMENTS:
+		return "SPPR_ALL_ELEMENTS"
+	default:
+		return fmt.Sprintf("SPPHRASERNG(%d)", int32(e))
+	}
+}
+
 type SPPRONUNCIATIONFLAGS int32
 
 const (
 	EPRONFLAG_USED SPPRONUNCIATIONFLAGS = 1
 )
+
+// String returns the SPPRONUNCIATIONFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPPRONUNCIATIONFLAGS) String() string {
+	switch e {
+	case EPRONFLAG_USED:
+		return "EPRONFLAG_USED"
+	default:
+		return fmt.Sprintf("SPPRONUNCIATIONFLAGS(%d)", int32(e))
+	}
+}
 
 type SPPROPSRC int32
 
@@ -947,6 +2733,21 @@ const (
 	SPPROPSRC_RECO_CTX     SPPROPSRC = 1
 	SPPROPSRC_RECO_GRAMMAR SPPROPSRC = 2
 )
+
+// String returns the SPPROPSRC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPPROPSRC) String() string {
+	switch e {
+	case SPPROPSRC_RECO_INST:
+		return "SPPROPSRC_RECO_INST"
+	case SPPROPSRC_RECO_CTX:
+		return "SPPROPSRC_RECO_CTX"
+	case SPPROPSRC_RECO_GRAMMAR:
+		return "SPPROPSRC_RECO_GRAMMAR"
+	default:
+		return fmt.Sprintf("SPPROPSRC(%d)", int32(e))
+	}
+}
 
 type SPRECOEVENTFLAGS int32
 
@@ -960,6 +2761,29 @@ const (
 	SPREF_FalseRecognition SPRECOEVENTFLAGS = 64
 )
 
+// String returns the SPRECOEVENTFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPRECOEVENTFLAGS) String() string {
+	switch e {
+	case SPREF_AutoPause:
+		return "SPREF_AutoPause"
+	case SPREF_Emulated:
+		return "SPREF_Emulated"
+	case SPREF_SMLTimeout:
+		return "SPREF_SMLTimeout"
+	case SPREF_ExtendableParse:
+		return "SPREF_ExtendableParse"
+	case SPREF_ReSent:
+		return "SPREF_ReSent"
+	case SPREF_Hypothesis:
+		return "SPREF_Hypothesis"
+	case SPREF_FalseRecognition:
+		return "SPREF_FalseRecognition"
+	default:
+		return fmt.Sprintf("SPRECOEVENTFLAGS(%d)", int32(e))
+	}
+}
+
 type SPRECOSTATE int32
 
 const (
@@ -969,6 +2793,25 @@ const (
 	SPRST_INACTIVE_WITH_PURGE SPRECOSTATE = 3
 	SPRST_NUM_STATES          SPRECOSTATE = 4
 )
+
+// String returns the SPRECOSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPRECOSTATE) String() string {
+	switch e {
+	case SPRST_INACTIVE:
+		return "SPRST_INACTIVE"
+	case SPRST_ACTIVE:
+		return "SPRST_ACTIVE"
+	case SPRST_ACTIVE_ALWAYS:
+		return "SPRST_ACTIVE_ALWAYS"
+	case SPRST_INACTIVE_WITH_PURGE:
+		return "SPRST_INACTIVE_WITH_PURGE"
+	case SPRST_NUM_STATES:
+		return "SPRST_NUM_STATES"
+	default:
+		return fmt.Sprintf("SPRECOSTATE(%d)", int32(e))
+	}
+}
 
 type SPRESULTTYPE int32
 
@@ -982,11 +2825,45 @@ const (
 	SPRT_EXTENDABLE_PARSE  SPRESULTTYPE = 16
 )
 
+// String returns the SPRESULTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPRESULTTYPE) String() string {
+	switch e {
+	case SPRT_CFG:
+		return "SPRT_CFG"
+	case SPRT_SLM:
+		return "SPRT_SLM"
+	case SPRT_PROPRIETARY:
+		return "SPRT_PROPRIETARY"
+	case SPRT_FALSE_RECOGNITION:
+		return "SPRT_FALSE_RECOGNITION"
+	case SPRT_TYPE_MASK:
+		return "SPRT_TYPE_MASK"
+	case SPRT_EMULATED:
+		return "SPRT_EMULATED"
+	case SPRT_EXTENDABLE_PARSE:
+		return "SPRT_EXTENDABLE_PARSE"
+	default:
+		return fmt.Sprintf("SPRESULTTYPE(%d)", int32(e))
+	}
+}
+
 type SPRULEINFOOPT int32
 
 const (
 	SPRIO_NONE SPRULEINFOOPT = 0
 )
+
+// String returns the SPRULEINFOOPT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPRULEINFOOPT) String() string {
+	switch e {
+	case SPRIO_NONE:
+		return "SPRIO_NONE"
+	default:
+		return fmt.Sprintf("SPRULEINFOOPT(%d)", int32(e))
+	}
+}
 
 type SPRULESTATE int32
 
@@ -997,12 +2874,42 @@ const (
 	SPRS_ACTIVE_USER_DELIMITED  SPRULESTATE = 4
 )
 
+// String returns the SPRULESTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPRULESTATE) String() string {
+	switch e {
+	case SPRS_INACTIVE:
+		return "SPRS_INACTIVE"
+	case SPRS_ACTIVE:
+		return "SPRS_ACTIVE"
+	case SPRS_ACTIVE_WITH_AUTO_PAUSE:
+		return "SPRS_ACTIVE_WITH_AUTO_PAUSE"
+	case SPRS_ACTIVE_USER_DELIMITED:
+		return "SPRS_ACTIVE_USER_DELIMITED"
+	default:
+		return fmt.Sprintf("SPRULESTATE(%d)", int32(e))
+	}
+}
+
 type SPRUNSTATE int32
 
 const (
 	SPRS_DONE        SPRUNSTATE = 1
 	SPRS_IS_SPEAKING SPRUNSTATE = 2
 )
+
+// String returns the SPRUNSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPRUNSTATE) String() string {
+	switch e {
+	case SPRS_DONE:
+		return "SPRS_DONE"
+	case SPRS_IS_SPEAKING:
+		return "SPRS_IS_SPEAKING"
+	default:
+		return fmt.Sprintf("SPRUNSTATE(%d)", int32(e))
+	}
+}
 
 type SPSEMANTICFORMAT int32
 
@@ -1013,6 +2920,25 @@ const (
 	SPSMF_UPS                             SPSEMANTICFORMAT = 4
 	SPSMF_SRGS_SEMANTICINTERPRETATION_W3C SPSEMANTICFORMAT = 8
 )
+
+// String returns the SPSEMANTICFORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPSEMANTICFORMAT) String() string {
+	switch e {
+	case SPSMF_SAPI_PROPERTIES:
+		return "SPSMF_SAPI_PROPERTIES"
+	case SPSMF_SRGS_SEMANTICINTERPRETATION_MS:
+		return "SPSMF_SRGS_SEMANTICINTERPRETATION_MS"
+	case SPSMF_SRGS_SAPIPROPERTIES:
+		return "SPSMF_SRGS_SAPIPROPERTIES"
+	case SPSMF_UPS:
+		return "SPSMF_UPS"
+	case SPSMF_SRGS_SEMANTICINTERPRETATION_W3C:
+		return "SPSMF_SRGS_SEMANTICINTERPRETATION_W3C"
+	default:
+		return fmt.Sprintf("SPSEMANTICFORMAT(%d)", int32(e))
+	}
+}
 
 type SPSHORTCUTTYPE int32
 
@@ -1026,6 +2952,31 @@ const (
 	SPPS_RESERVED3     SPSHORTCUTTYPE = 20480
 	SPPS_RESERVED4     SPSHORTCUTTYPE = 61440
 )
+
+// String returns the SPSHORTCUTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPSHORTCUTTYPE) String() string {
+	switch e {
+	case SPSHT_NotOverriden:
+		return "SPSHT_NotOverriden"
+	case SPSHT_Unknown:
+		return "SPSHT_Unknown"
+	case SPSHT_EMAIL:
+		return "SPSHT_EMAIL"
+	case SPSHT_OTHER:
+		return "SPSHT_OTHER"
+	case SPPS_RESERVED1:
+		return "SPPS_RESERVED1"
+	case SPPS_RESERVED2:
+		return "SPPS_RESERVED2"
+	case SPPS_RESERVED3:
+		return "SPPS_RESERVED3"
+	case SPPS_RESERVED4:
+		return "SPPS_RESERVED4"
+	default:
+		return fmt.Sprintf("SPSHORTCUTTYPE(%d)", int32(e))
+	}
+}
 
 type SPSTREAMFORMAT int32
 
@@ -1103,12 +3054,176 @@ const (
 	SPSF_NUM_FORMATS             SPSTREAMFORMAT = 69
 )
 
+// String returns the SPSTREAMFORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPSTREAMFORMAT) String() string {
+	switch e {
+	case SPSF_Default:
+		return "SPSF_Default"
+	case SPSF_NoAssignedFormat:
+		return "SPSF_NoAssignedFormat"
+	case SPSF_Text:
+		return "SPSF_Text"
+	case SPSF_NonStandardFormat:
+		return "SPSF_NonStandardFormat"
+	case SPSF_ExtendedAudioFormat:
+		return "SPSF_ExtendedAudioFormat"
+	case SPSF_8kHz8BitMono:
+		return "SPSF_8kHz8BitMono"
+	case SPSF_8kHz8BitStereo:
+		return "SPSF_8kHz8BitStereo"
+	case SPSF_8kHz16BitMono:
+		return "SPSF_8kHz16BitMono"
+	case SPSF_8kHz16BitStereo:
+		return "SPSF_8kHz16BitStereo"
+	case SPSF_11kHz8BitMono:
+		return "SPSF_11kHz8BitMono"
+	case SPSF_11kHz8BitStereo:
+		return "SPSF_11kHz8BitStereo"
+	case SPSF_11kHz16BitMono:
+		return "SPSF_11kHz16BitMono"
+	case SPSF_11kHz16BitStereo:
+		return "SPSF_11kHz16BitStereo"
+	case SPSF_12kHz8BitMono:
+		return "SPSF_12kHz8BitMono"
+	case SPSF_12kHz8BitStereo:
+		return "SPSF_12kHz8BitStereo"
+	case SPSF_12kHz16BitMono:
+		return "SPSF_12kHz16BitMono"
+	case SPSF_12kHz16BitStereo:
+		return "SPSF_12kHz16BitStereo"
+	case SPSF_16kHz8BitMono:
+		return "SPSF_16kHz8BitMono"
+	case SPSF_16kHz8BitStereo:
+		return "SPSF_16kHz8BitStereo"
+	case SPSF_16kHz16BitMono:
+		return "SPSF_16kHz16BitMono"
+	case SPSF_16kHz16BitStereo:
+		return "SPSF_16kHz16BitStereo"
+	case SPSF_22kHz8BitMono:
+		return "SPSF_22kHz8BitMono"
+	case SPSF_22kHz8BitStereo:
+		return "SPSF_22kHz8BitStereo"
+	case SPSF_22kHz16BitMono:
+		return "SPSF_22kHz16BitMono"
+	case SPSF_22kHz16BitStereo:
+		return "SPSF_22kHz16BitStereo"
+	case SPSF_24kHz8BitMono:
+		return "SPSF_24kHz8BitMono"
+	case SPSF_24kHz8BitStereo:
+		return "SPSF_24kHz8BitStereo"
+	case SPSF_24kHz16BitMono:
+		return "SPSF_24kHz16BitMono"
+	case SPSF_24kHz16BitStereo:
+		return "SPSF_24kHz16BitStereo"
+	case SPSF_32kHz8BitMono:
+		return "SPSF_32kHz8BitMono"
+	case SPSF_32kHz8BitStereo:
+		return "SPSF_32kHz8BitStereo"
+	case SPSF_32kHz16BitMono:
+		return "SPSF_32kHz16BitMono"
+	case SPSF_32kHz16BitStereo:
+		return "SPSF_32kHz16BitStereo"
+	case SPSF_44kHz8BitMono:
+		return "SPSF_44kHz8BitMono"
+	case SPSF_44kHz8BitStereo:
+		return "SPSF_44kHz8BitStereo"
+	case SPSF_44kHz16BitMono:
+		return "SPSF_44kHz16BitMono"
+	case SPSF_44kHz16BitStereo:
+		return "SPSF_44kHz16BitStereo"
+	case SPSF_48kHz8BitMono:
+		return "SPSF_48kHz8BitMono"
+	case SPSF_48kHz8BitStereo:
+		return "SPSF_48kHz8BitStereo"
+	case SPSF_48kHz16BitMono:
+		return "SPSF_48kHz16BitMono"
+	case SPSF_48kHz16BitStereo:
+		return "SPSF_48kHz16BitStereo"
+	case SPSF_TrueSpeech_8kHz1BitMono:
+		return "SPSF_TrueSpeech_8kHz1BitMono"
+	case SPSF_CCITT_ALaw_8kHzMono:
+		return "SPSF_CCITT_ALaw_8kHzMono"
+	case SPSF_CCITT_ALaw_8kHzStereo:
+		return "SPSF_CCITT_ALaw_8kHzStereo"
+	case SPSF_CCITT_ALaw_11kHzMono:
+		return "SPSF_CCITT_ALaw_11kHzMono"
+	case SPSF_CCITT_ALaw_11kHzStereo:
+		return "SPSF_CCITT_ALaw_11kHzStereo"
+	case SPSF_CCITT_ALaw_22kHzMono:
+		return "SPSF_CCITT_ALaw_22kHzMono"
+	case SPSF_CCITT_ALaw_22kHzStereo:
+		return "SPSF_CCITT_ALaw_22kHzStereo"
+	case SPSF_CCITT_ALaw_44kHzMono:
+		return "SPSF_CCITT_ALaw_44kHzMono"
+	case SPSF_CCITT_ALaw_44kHzStereo:
+		return "SPSF_CCITT_ALaw_44kHzStereo"
+	case SPSF_CCITT_uLaw_8kHzMono:
+		return "SPSF_CCITT_uLaw_8kHzMono"
+	case SPSF_CCITT_uLaw_8kHzStereo:
+		return "SPSF_CCITT_uLaw_8kHzStereo"
+	case SPSF_CCITT_uLaw_11kHzMono:
+		return "SPSF_CCITT_uLaw_11kHzMono"
+	case SPSF_CCITT_uLaw_11kHzStereo:
+		return "SPSF_CCITT_uLaw_11kHzStereo"
+	case SPSF_CCITT_uLaw_22kHzMono:
+		return "SPSF_CCITT_uLaw_22kHzMono"
+	case SPSF_CCITT_uLaw_22kHzStereo:
+		return "SPSF_CCITT_uLaw_22kHzStereo"
+	case SPSF_CCITT_uLaw_44kHzMono:
+		return "SPSF_CCITT_uLaw_44kHzMono"
+	case SPSF_CCITT_uLaw_44kHzStereo:
+		return "SPSF_CCITT_uLaw_44kHzStereo"
+	case SPSF_ADPCM_8kHzMono:
+		return "SPSF_ADPCM_8kHzMono"
+	case SPSF_ADPCM_8kHzStereo:
+		return "SPSF_ADPCM_8kHzStereo"
+	case SPSF_ADPCM_11kHzMono:
+		return "SPSF_ADPCM_11kHzMono"
+	case SPSF_ADPCM_11kHzStereo:
+		return "SPSF_ADPCM_11kHzStereo"
+	case SPSF_ADPCM_22kHzMono:
+		return "SPSF_ADPCM_22kHzMono"
+	case SPSF_ADPCM_22kHzStereo:
+		return "SPSF_ADPCM_22kHzStereo"
+	case SPSF_ADPCM_44kHzMono:
+		return "SPSF_ADPCM_44kHzMono"
+	case SPSF_ADPCM_44kHzStereo:
+		return "SPSF_ADPCM_44kHzStereo"
+	case SPSF_GSM610_8kHzMono:
+		return "SPSF_GSM610_8kHzMono"
+	case SPSF_GSM610_11kHzMono:
+		return "SPSF_GSM610_11kHzMono"
+	case SPSF_GSM610_22kHzMono:
+		return "SPSF_GSM610_22kHzMono"
+	case SPSF_GSM610_44kHzMono:
+		return "SPSF_GSM610_44kHzMono"
+	case SPSF_NUM_FORMATS:
+		return "SPSF_NUM_FORMATS"
+	default:
+		return fmt.Sprintf("SPSTREAMFORMAT(%d)", int32(e))
+	}
+}
+
 type SPSTREAMFORMATTYPE int32
 
 const (
 	SPWF_INPUT    SPSTREAMFORMATTYPE = 0
 	SPWF_SRENGINE SPSTREAMFORMATTYPE = 1
 )
+
+// String returns the SPSTREAMFORMATTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPSTREAMFORMATTYPE) String() string {
+	switch e {
+	case SPWF_INPUT:
+		return "SPWF_INPUT"
+	case SPWF_SRENGINE:
+		return "SPWF_SRENGINE"
+	default:
+		return fmt.Sprintf("SPSTREAMFORMATTYPE(%d)", int32(e))
+	}
+}
 
 type SPTRANSITIONTYPE int32
 
@@ -1121,6 +3236,27 @@ const (
 	SPTRANSDICTATION SPTRANSITIONTYPE = 5
 )
 
+// String returns the SPTRANSITIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPTRANSITIONTYPE) String() string {
+	switch e {
+	case SPTRANSEPSILON:
+		return "SPTRANSEPSILON"
+	case SPTRANSWORD:
+		return "SPTRANSWORD"
+	case SPTRANSRULE:
+		return "SPTRANSRULE"
+	case SPTRANSTEXTBUF:
+		return "SPTRANSTEXTBUF"
+	case SPTRANSWILDCARD:
+		return "SPTRANSWILDCARD"
+	case SPTRANSDICTATION:
+		return "SPTRANSDICTATION"
+	default:
+		return fmt.Sprintf("SPTRANSITIONTYPE(%d)", int32(e))
+	}
+}
+
 type SPVACTIONS int32
 
 const (
@@ -1132,6 +3268,29 @@ const (
 	SPVA_Section         SPVACTIONS = 5
 	SPVA_ParseUnknownTag SPVACTIONS = 6
 )
+
+// String returns the SPVACTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPVACTIONS) String() string {
+	switch e {
+	case SPVA_Speak:
+		return "SPVA_Speak"
+	case SPVA_Silence:
+		return "SPVA_Silence"
+	case SPVA_Pronounce:
+		return "SPVA_Pronounce"
+	case SPVA_Bookmark:
+		return "SPVA_Bookmark"
+	case SPVA_SpellOut:
+		return "SPVA_SpellOut"
+	case SPVA_Section:
+		return "SPVA_Section"
+	case SPVA_ParseUnknownTag:
+		return "SPVA_ParseUnknownTag"
+	default:
+		return fmt.Sprintf("SPVACTIONS(%d)", int32(e))
+	}
+}
 
 type SPVALUETYPE int32
 
@@ -1147,6 +3306,33 @@ const (
 	SPDF_ALL           SPVALUETYPE = 255
 )
 
+// String returns the SPVALUETYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPVALUETYPE) String() string {
+	switch e {
+	case SPDF_PROPERTY:
+		return "SPDF_PROPERTY"
+	case SPDF_REPLACEMENT:
+		return "SPDF_REPLACEMENT"
+	case SPDF_RULE:
+		return "SPDF_RULE"
+	case SPDF_DISPLAYTEXT:
+		return "SPDF_DISPLAYTEXT"
+	case SPDF_LEXICALFORM:
+		return "SPDF_LEXICALFORM"
+	case SPDF_PRONUNCIATION:
+		return "SPDF_PRONUNCIATION"
+	case SPDF_AUDIO:
+		return "SPDF_AUDIO"
+	case SPDF_ALTERNATES:
+		return "SPDF_ALTERNATES"
+	case SPDF_ALL:
+		return "SPDF_ALL"
+	default:
+		return fmt.Sprintf("SPVALUETYPE(%d)", int32(e))
+	}
+}
+
 type SPVESACTIONS int32
 
 const (
@@ -1157,12 +3343,44 @@ const (
 	SPVES_VOLUME   SPVESACTIONS = 8
 )
 
+// String returns the SPVESACTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPVESACTIONS) String() string {
+	switch e {
+	case SPVES_CONTINUE:
+		return "SPVES_CONTINUE"
+	case SPVES_ABORT:
+		return "SPVES_ABORT"
+	case SPVES_SKIP:
+		return "SPVES_SKIP"
+	case SPVES_RATE:
+		return "SPVES_RATE"
+	case SPVES_VOLUME:
+		return "SPVES_VOLUME"
+	default:
+		return fmt.Sprintf("SPVESACTIONS(%d)", int32(e))
+	}
+}
+
 type SPVFEATURE int32
 
 const (
 	SPVFEATURE_STRESSED SPVFEATURE = 1
 	SPVFEATURE_EMPHASIS SPVFEATURE = 2
 )
+
+// String returns the SPVFEATURE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPVFEATURE) String() string {
+	switch e {
+	case SPVFEATURE_STRESSED:
+		return "SPVFEATURE_STRESSED"
+	case SPVFEATURE_EMPHASIS:
+		return "SPVFEATURE_EMPHASIS"
+	default:
+		return fmt.Sprintf("SPVFEATURE(%d)", int32(e))
+	}
+}
 
 type SPVISEMES int32
 
@@ -1191,6 +3409,59 @@ const (
 	SP_VISEME_21 SPVISEMES = 21
 )
 
+// String returns the SPVISEMES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPVISEMES) String() string {
+	switch e {
+	case SP_VISEME_0:
+		return "SP_VISEME_0"
+	case SP_VISEME_1:
+		return "SP_VISEME_1"
+	case SP_VISEME_2:
+		return "SP_VISEME_2"
+	case SP_VISEME_3:
+		return "SP_VISEME_3"
+	case SP_VISEME_4:
+		return "SP_VISEME_4"
+	case SP_VISEME_5:
+		return "SP_VISEME_5"
+	case SP_VISEME_6:
+		return "SP_VISEME_6"
+	case SP_VISEME_7:
+		return "SP_VISEME_7"
+	case SP_VISEME_8:
+		return "SP_VISEME_8"
+	case SP_VISEME_9:
+		return "SP_VISEME_9"
+	case SP_VISEME_10:
+		return "SP_VISEME_10"
+	case SP_VISEME_11:
+		return "SP_VISEME_11"
+	case SP_VISEME_12:
+		return "SP_VISEME_12"
+	case SP_VISEME_13:
+		return "SP_VISEME_13"
+	case SP_VISEME_14:
+		return "SP_VISEME_14"
+	case SP_VISEME_15:
+		return "SP_VISEME_15"
+	case SP_VISEME_16:
+		return "SP_VISEME_16"
+	case SP_VISEME_17:
+		return "SP_VISEME_17"
+	case SP_VISEME_18:
+		return "SP_VISEME_18"
+	case SP_VISEME_19:
+		return "SP_VISEME_19"
+	case SP_VISEME_20:
+		return "SP_VISEME_20"
+	case SP_VISEME_21:
+		return "SP_VISEME_21"
+	default:
+		return fmt.Sprintf("SPVISEMES(%d)", int32(e))
+	}
+}
+
 type SPVLIMITS int32
 
 const (
@@ -1200,6 +3471,23 @@ const (
 	SPMAX_RATE   SPVLIMITS = 10
 )
 
+// String returns the SPVLIMITS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPVLIMITS) String() string {
+	switch e {
+	case SPMIN_VOLUME:
+		return "SPMIN_VOLUME"
+	case SPMAX_VOLUME:
+		return "SPMAX_VOLUME"
+	case SPMIN_RATE:
+		return "SPMIN_RATE"
+	case SPMAX_RATE:
+		return "SPMAX_RATE"
+	default:
+		return fmt.Sprintf("SPVLIMITS(%d)", int32(e))
+	}
+}
+
 type SPVPRIORITY int32
 
 const (
@@ -1208,11 +3496,37 @@ const (
 	SPVPRI_OVER   SPVPRIORITY = 2
 )
 
+// String returns the SPVPRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPVPRIORITY) String() string {
+	switch e {
+	case SPVPRI_NORMAL:
+		return "SPVPRI_NORMAL"
+	case SPVPRI_ALERT:
+		return "SPVPRI_ALERT"
+	case SPVPRI_OVER:
+		return "SPVPRI_OVER"
+	default:
+		return fmt.Sprintf("SPVPRIORITY(%d)", int32(e))
+	}
+}
+
 type SPVSKIPTYPE int32
 
 const (
 	SPVST_SENTENCE SPVSKIPTYPE = 1
 )
+
+// String returns the SPVSKIPTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPVSKIPTYPE) String() string {
+	switch e {
+	case SPVST_SENTENCE:
+		return "SPVST_SENTENCE"
+	default:
+		return fmt.Sprintf("SPVSKIPTYPE(%d)", int32(e))
+	}
+}
 
 type SPWORDINFOOPT int32
 
@@ -1220,6 +3534,19 @@ const (
 	SPWIO_NONE      SPWORDINFOOPT = 0
 	SPWIO_WANT_TEXT SPWORDINFOOPT = 1
 )
+
+// String returns the SPWORDINFOOPT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPWORDINFOOPT) String() string {
+	switch e {
+	case SPWIO_NONE:
+		return "SPWIO_NONE"
+	case SPWIO_WANT_TEXT:
+		return "SPWIO_WANT_TEXT"
+	default:
+		return fmt.Sprintf("SPWORDINFOOPT(%d)", int32(e))
+	}
+}
 
 type SPWORDPRONOUNCEABLE int32
 
@@ -1229,6 +3556,21 @@ const (
 	SPWP_KNOWN_WORD_PRONOUNCEABLE     SPWORDPRONOUNCEABLE = 2
 )
 
+// String returns the SPWORDPRONOUNCEABLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPWORDPRONOUNCEABLE) String() string {
+	switch e {
+	case SPWP_UNKNOWN_WORD_UNPRONOUNCEABLE:
+		return "SPWP_UNKNOWN_WORD_UNPRONOUNCEABLE"
+	case SPWP_UNKNOWN_WORD_PRONOUNCEABLE:
+		return "SPWP_UNKNOWN_WORD_PRONOUNCEABLE"
+	case SPWP_KNOWN_WORD_PRONOUNCEABLE:
+		return "SPWP_KNOWN_WORD_PRONOUNCEABLE"
+	default:
+		return fmt.Sprintf("SPWORDPRONOUNCEABLE(%d)", int32(e))
+	}
+}
+
 type SPWORDTYPE int32
 
 const (
@@ -1236,12 +3578,38 @@ const (
 	EWORDTYPE_DELETED SPWORDTYPE = 2
 )
 
+// String returns the SPWORDTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPWORDTYPE) String() string {
+	switch e {
+	case EWORDTYPE_ADDED:
+		return "EWORDTYPE_ADDED"
+	case EWORDTYPE_DELETED:
+		return "EWORDTYPE_DELETED"
+	default:
+		return fmt.Sprintf("SPWORDTYPE(%d)", int32(e))
+	}
+}
+
 type SPXMLRESULTOPTIONS int32
 
 const (
 	SPXRO_SML            SPXMLRESULTOPTIONS = 0
 	SPXRO_Alternates_SML SPXMLRESULTOPTIONS = 1
 )
+
+// String returns the SPXMLRESULTOPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SPXMLRESULTOPTIONS) String() string {
+	switch e {
+	case SPXRO_SML:
+		return "SPXRO_SML"
+	case SPXRO_Alternates_SML:
+		return "SPXRO_Alternates_SML"
+	default:
+		return fmt.Sprintf("SPXMLRESULTOPTIONS(%d)", int32(e))
+	}
+}
 
 type SpeechAudioFormatType int32
 
@@ -1318,6 +3686,155 @@ const (
 	SAFTGSM610_44kHzMono        SpeechAudioFormatType = 68
 )
 
+// String returns the SpeechAudioFormatType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechAudioFormatType) String() string {
+	switch e {
+	case SAFTDefault:
+		return "SAFTDefault"
+	case SAFTNoAssignedFormat:
+		return "SAFTNoAssignedFormat"
+	case SAFTText:
+		return "SAFTText"
+	case SAFTNonStandardFormat:
+		return "SAFTNonStandardFormat"
+	case SAFTExtendedAudioFormat:
+		return "SAFTExtendedAudioFormat"
+	case SAFT8kHz8BitMono:
+		return "SAFT8kHz8BitMono"
+	case SAFT8kHz8BitStereo:
+		return "SAFT8kHz8BitStereo"
+	case SAFT8kHz16BitMono:
+		return "SAFT8kHz16BitMono"
+	case SAFT8kHz16BitStereo:
+		return "SAFT8kHz16BitStereo"
+	case SAFT11kHz8BitMono:
+		return "SAFT11kHz8BitMono"
+	case SAFT11kHz8BitStereo:
+		return "SAFT11kHz8BitStereo"
+	case SAFT11kHz16BitMono:
+		return "SAFT11kHz16BitMono"
+	case SAFT11kHz16BitStereo:
+		return "SAFT11kHz16BitStereo"
+	case SAFT12kHz8BitMono:
+		return "SAFT12kHz8BitMono"
+	case SAFT12kHz8BitStereo:
+		return "SAFT12kHz8BitStereo"
+	case SAFT12kHz16BitMono:
+		return "SAFT12kHz16BitMono"
+	case SAFT12kHz16BitStereo:
+		return "SAFT12kHz16BitStereo"
+	case SAFT16kHz8BitMono:
+		return "SAFT16kHz8BitMono"
+	case SAFT16kHz8BitStereo:
+		return "SAFT16kHz8BitStereo"
+	case SAFT16kHz16BitMono:
+		return "SAFT16kHz16BitMono"
+	case SAFT16kHz16BitStereo:
+		return "SAFT16kHz16BitStereo"
+	case SAFT22kHz8BitMono:
+		return "SAFT22kHz8BitMono"
+	case SAFT22kHz8BitStereo:
+		return "SAFT22kHz8BitStereo"
+	case SAFT22kHz16BitMono:
+		return "SAFT22kHz16BitMono"
+	case SAFT22kHz16BitStereo:
+		return "SAFT22kHz16BitStereo"
+	case SAFT24kHz8BitMono:
+		return "SAFT24kHz8BitMono"
+	case SAFT24kHz8BitStereo:
+		return "SAFT24kHz8BitStereo"
+	case SAFT24kHz16BitMono:
+		return "SAFT24kHz16BitMono"
+	case SAFT24kHz16BitStereo:
+		return "SAFT24kHz16BitStereo"
+	case SAFT32kHz8BitMono:
+		return "SAFT32kHz8BitMono"
+	case SAFT32kHz8BitStereo:
+		return "SAFT32kHz8BitStereo"
+	case SAFT32kHz16BitMono:
+		return "SAFT32kHz16BitMono"
+	case SAFT32kHz16BitStereo:
+		return "SAFT32kHz16BitStereo"
+	case SAFT44kHz8BitMono:
+		return "SAFT44kHz8BitMono"
+	case SAFT44kHz8BitStereo:
+		return "SAFT44kHz8BitStereo"
+	case SAFT44kHz16BitMono:
+		return "SAFT44kHz16BitMono"
+	case SAFT44kHz16BitStereo:
+		return "SAFT44kHz16BitStereo"
+	case SAFT48kHz8BitMono:
+		return "SAFT48kHz8BitMono"
+	case SAFT48kHz8BitStereo:
+		return "SAFT48kHz8BitStereo"
+	case SAFT48kHz16BitMono:
+		return "SAFT48kHz16BitMono"
+	case SAFT48kHz16BitStereo:
+		return "SAFT48kHz16BitStereo"
+	case SAFTTrueSpeech_8kHz1BitMono:
+		return "SAFTTrueSpeech_8kHz1BitMono"
+	case SAFTCCITT_ALaw_8kHzMono:
+		return "SAFTCCITT_ALaw_8kHzMono"
+	case SAFTCCITT_ALaw_8kHzStereo:
+		return "SAFTCCITT_ALaw_8kHzStereo"
+	case SAFTCCITT_ALaw_11kHzMono:
+		return "SAFTCCITT_ALaw_11kHzMono"
+	case SAFTCCITT_ALaw_11kHzStereo:
+		return "SAFTCCITT_ALaw_11kHzStereo"
+	case SAFTCCITT_ALaw_22kHzMono:
+		return "SAFTCCITT_ALaw_22kHzMono"
+	case SAFTCCITT_ALaw_22kHzStereo:
+		return "SAFTCCITT_ALaw_22kHzStereo"
+	case SAFTCCITT_ALaw_44kHzMono:
+		return "SAFTCCITT_ALaw_44kHzMono"
+	case SAFTCCITT_ALaw_44kHzStereo:
+		return "SAFTCCITT_ALaw_44kHzStereo"
+	case SAFTCCITT_uLaw_8kHzMono:
+		return "SAFTCCITT_uLaw_8kHzMono"
+	case SAFTCCITT_uLaw_8kHzStereo:
+		return "SAFTCCITT_uLaw_8kHzStereo"
+	case SAFTCCITT_uLaw_11kHzMono:
+		return "SAFTCCITT_uLaw_11kHzMono"
+	case SAFTCCITT_uLaw_11kHzStereo:
+		return "SAFTCCITT_uLaw_11kHzStereo"
+	case SAFTCCITT_uLaw_22kHzMono:
+		return "SAFTCCITT_uLaw_22kHzMono"
+	case SAFTCCITT_uLaw_22kHzStereo:
+		return "SAFTCCITT_uLaw_22kHzStereo"
+	case SAFTCCITT_uLaw_44kHzMono:
+		return "SAFTCCITT_uLaw_44kHzMono"
+	case SAFTCCITT_uLaw_44kHzStereo:
+		return "SAFTCCITT_uLaw_44kHzStereo"
+	case SAFTADPCM_8kHzMono:
+		return "SAFTADPCM_8kHzMono"
+	case SAFTADPCM_8kHzStereo:
+		return "SAFTADPCM_8kHzStereo"
+	case SAFTADPCM_11kHzMono:
+		return "SAFTADPCM_11kHzMono"
+	case SAFTADPCM_11kHzStereo:
+		return "SAFTADPCM_11kHzStereo"
+	case SAFTADPCM_22kHzMono:
+		return "SAFTADPCM_22kHzMono"
+	case SAFTADPCM_22kHzStereo:
+		return "SAFTADPCM_22kHzStereo"
+	case SAFTADPCM_44kHzMono:
+		return "SAFTADPCM_44kHzMono"
+	case SAFTADPCM_44kHzStereo:
+		return "SAFTADPCM_44kHzStereo"
+	case SAFTGSM610_8kHzMono:
+		return "SAFTGSM610_8kHzMono"
+	case SAFTGSM610_11kHzMono:
+		return "SAFTGSM610_11kHzMono"
+	case SAFTGSM610_22kHzMono:
+		return "SAFTGSM610_22kHzMono"
+	case SAFTGSM610_44kHzMono:
+		return "SAFTGSM610_44kHzMono"
+	default:
+		return fmt.Sprintf("SpeechAudioFormatType(%d)", int32(e))
+	}
+}
+
 type SpeechAudioState int32
 
 const (
@@ -1327,12 +3844,42 @@ const (
 	SASRun    SpeechAudioState = 3
 )
 
+// String returns the SpeechAudioState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechAudioState) String() string {
+	switch e {
+	case SASClosed:
+		return "SASClosed"
+	case SASStop:
+		return "SASStop"
+	case SASPause:
+		return "SASPause"
+	case SASRun:
+		return "SASRun"
+	default:
+		return fmt.Sprintf("SpeechAudioState(%d)", int32(e))
+	}
+}
+
 type SpeechBookmarkOptions int32
 
 const (
 	SBONone  SpeechBookmarkOptions = 0
 	SBOPause SpeechBookmarkOptions = 1
 )
+
+// String returns the SpeechBookmarkOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechBookmarkOptions) String() string {
+	switch e {
+	case SBONone:
+		return "SBONone"
+	case SBOPause:
+		return "SBOPause"
+	default:
+		return fmt.Sprintf("SpeechBookmarkOptions(%d)", int32(e))
+	}
+}
 
 type SpeechDataKeyLocation int32
 
@@ -1342,6 +3889,23 @@ const (
 	SDKLLocalMachine    SpeechDataKeyLocation = 2
 	SDKLCurrentConfig   SpeechDataKeyLocation = 5
 )
+
+// String returns the SpeechDataKeyLocation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechDataKeyLocation) String() string {
+	switch e {
+	case SDKLDefaultLocation:
+		return "SDKLDefaultLocation"
+	case SDKLCurrentUser:
+		return "SDKLCurrentUser"
+	case SDKLLocalMachine:
+		return "SDKLLocalMachine"
+	case SDKLCurrentConfig:
+		return "SDKLCurrentConfig"
+	default:
+		return fmt.Sprintf("SpeechDataKeyLocation(%d)", int32(e))
+	}
+}
 
 type SpeechDiscardType int32
 
@@ -1357,6 +3921,33 @@ const (
 	SDTAll           SpeechDiscardType = 255
 )
 
+// String returns the SpeechDiscardType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechDiscardType) String() string {
+	switch e {
+	case SDTProperty:
+		return "SDTProperty"
+	case SDTReplacement:
+		return "SDTReplacement"
+	case SDTRule:
+		return "SDTRule"
+	case SDTDisplayText:
+		return "SDTDisplayText"
+	case SDTLexicalForm:
+		return "SDTLexicalForm"
+	case SDTPronunciation:
+		return "SDTPronunciation"
+	case SDTAudio:
+		return "SDTAudio"
+	case SDTAlternates:
+		return "SDTAlternates"
+	case SDTAll:
+		return "SDTAll"
+	default:
+		return fmt.Sprintf("SpeechDiscardType(%d)", int32(e))
+	}
+}
+
 type SpeechDisplayAttributes int32
 
 const (
@@ -1365,6 +3956,23 @@ const (
 	SDA_Two_Trailing_Spaces    SpeechDisplayAttributes = 4
 	SDA_Consume_Leading_Spaces SpeechDisplayAttributes = 8
 )
+
+// String returns the SpeechDisplayAttributes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechDisplayAttributes) String() string {
+	switch e {
+	case SDA_No_Trailing_Space:
+		return "SDA_No_Trailing_Space"
+	case SDA_One_Trailing_Space:
+		return "SDA_One_Trailing_Space"
+	case SDA_Two_Trailing_Spaces:
+		return "SDA_Two_Trailing_Spaces"
+	case SDA_Consume_Leading_Spaces:
+		return "SDA_Consume_Leading_Spaces"
+	default:
+		return fmt.Sprintf("SpeechDisplayAttributes(%d)", int32(e))
+	}
+}
 
 type SpeechEmulationCompareFlags int32
 
@@ -1377,6 +3985,27 @@ const (
 	SECFDefault        SpeechEmulationCompareFlags = 196609
 )
 
+// String returns the SpeechEmulationCompareFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechEmulationCompareFlags) String() string {
+	switch e {
+	case SECFIgnoreCase:
+		return "SECFIgnoreCase"
+	case SECFIgnoreKanaType:
+		return "SECFIgnoreKanaType"
+	case SECFIgnoreWidth:
+		return "SECFIgnoreWidth"
+	case SECFNoSpecialChars:
+		return "SECFNoSpecialChars"
+	case SECFEmulateResult:
+		return "SECFEmulateResult"
+	case SECFDefault:
+		return "SECFDefault"
+	default:
+		return fmt.Sprintf("SpeechEmulationCompareFlags(%d)", int32(e))
+	}
+}
+
 type SpeechEngineConfidence int32
 
 const (
@@ -1385,12 +4014,40 @@ const (
 	SECHighConfidence   SpeechEngineConfidence = 1
 )
 
+// String returns the SpeechEngineConfidence constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechEngineConfidence) String() string {
+	switch e {
+	case SECLowConfidence:
+		return "SECLowConfidence"
+	case SECNormalConfidence:
+		return "SECNormalConfidence"
+	case SECHighConfidence:
+		return "SECHighConfidence"
+	default:
+		return fmt.Sprintf("SpeechEngineConfidence(%d)", int32(e))
+	}
+}
+
 type SpeechFormatType int32
 
 const (
 	SFTInput    SpeechFormatType = 0
 	SFTSREngine SpeechFormatType = 1
 )
+
+// String returns the SpeechFormatType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechFormatType) String() string {
+	switch e {
+	case SFTInput:
+		return "SFTInput"
+	case SFTSREngine:
+		return "SFTSREngine"
+	default:
+		return fmt.Sprintf("SpeechFormatType(%d)", int32(e))
+	}
+}
 
 type SpeechGrammarRuleStateTransitionType int32
 
@@ -1403,6 +4060,27 @@ const (
 	SGRSTTTextBuffer SpeechGrammarRuleStateTransitionType = 5
 )
 
+// String returns the SpeechGrammarRuleStateTransitionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechGrammarRuleStateTransitionType) String() string {
+	switch e {
+	case SGRSTTEpsilon:
+		return "SGRSTTEpsilon"
+	case SGRSTTWord:
+		return "SGRSTTWord"
+	case SGRSTTRule:
+		return "SGRSTTRule"
+	case SGRSTTDictation:
+		return "SGRSTTDictation"
+	case SGRSTTWildcard:
+		return "SGRSTTWildcard"
+	case SGRSTTTextBuffer:
+		return "SGRSTTTextBuffer"
+	default:
+		return fmt.Sprintf("SpeechGrammarRuleStateTransitionType(%d)", int32(e))
+	}
+}
+
 type SpeechGrammarState int32
 
 const (
@@ -1410,6 +4088,21 @@ const (
 	SGSDisabled  SpeechGrammarState = 0
 	SGSExclusive SpeechGrammarState = 3
 )
+
+// String returns the SpeechGrammarState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechGrammarState) String() string {
+	switch e {
+	case SGSEnabled:
+		return "SGSEnabled"
+	case SGSDisabled:
+		return "SGSDisabled"
+	case SGSExclusive:
+		return "SGSExclusive"
+	default:
+		return fmt.Sprintf("SpeechGrammarState(%d)", int32(e))
+	}
+}
 
 type SpeechGrammarWordType int32
 
@@ -1419,6 +4112,23 @@ const (
 	SGPronounciation        SpeechGrammarWordType = 2
 	SGLexicalNoSpecialChars SpeechGrammarWordType = 3
 )
+
+// String returns the SpeechGrammarWordType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechGrammarWordType) String() string {
+	switch e {
+	case SGDisplay:
+		return "SGDisplay"
+	case SGLexical:
+		return "SGLexical"
+	case SGPronounciation:
+		return "SGPronounciation"
+	case SGLexicalNoSpecialChars:
+		return "SGLexicalNoSpecialChars"
+	default:
+		return fmt.Sprintf("SpeechGrammarWordType(%d)", int32(e))
+	}
+}
 
 type SpeechInterference int32
 
@@ -1432,6 +4142,29 @@ const (
 	SITooSlow  SpeechInterference = 6
 )
 
+// String returns the SpeechInterference constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechInterference) String() string {
+	switch e {
+	case SINone:
+		return "SINone"
+	case SINoise:
+		return "SINoise"
+	case SINoSignal:
+		return "SINoSignal"
+	case SITooLoud:
+		return "SITooLoud"
+	case SITooQuiet:
+		return "SITooQuiet"
+	case SITooFast:
+		return "SITooFast"
+	case SITooSlow:
+		return "SITooSlow"
+	default:
+		return fmt.Sprintf("SpeechInterference(%d)", int32(e))
+	}
+}
+
 type SpeechLexiconType int32
 
 const (
@@ -1439,12 +4172,38 @@ const (
 	SLTApp  SpeechLexiconType = 2
 )
 
+// String returns the SpeechLexiconType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechLexiconType) String() string {
+	switch e {
+	case SLTUser:
+		return "SLTUser"
+	case SLTApp:
+		return "SLTApp"
+	default:
+		return fmt.Sprintf("SpeechLexiconType(%d)", int32(e))
+	}
+}
+
 type SpeechLoadOption int32
 
 const (
 	SLOStatic  SpeechLoadOption = 0
 	SLODynamic SpeechLoadOption = 1
 )
+
+// String returns the SpeechLoadOption constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechLoadOption) String() string {
+	switch e {
+	case SLOStatic:
+		return "SLOStatic"
+	case SLODynamic:
+		return "SLODynamic"
+	default:
+		return fmt.Sprintf("SpeechLoadOption(%d)", int32(e))
+	}
+}
 
 type SpeechPartOfSpeech int32
 
@@ -1460,12 +4219,52 @@ const (
 	SPSSuppressWord SpeechPartOfSpeech = 61440
 )
 
+// String returns the SpeechPartOfSpeech constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechPartOfSpeech) String() string {
+	switch e {
+	case SPSNotOverriden:
+		return "SPSNotOverriden"
+	case SPSUnknown:
+		return "SPSUnknown"
+	case SPSNoun:
+		return "SPSNoun"
+	case SPSVerb:
+		return "SPSVerb"
+	case SPSModifier:
+		return "SPSModifier"
+	case SPSFunction:
+		return "SPSFunction"
+	case SPSInterjection:
+		return "SPSInterjection"
+	case SPSLMA:
+		return "SPSLMA"
+	case SPSSuppressWord:
+		return "SPSSuppressWord"
+	default:
+		return fmt.Sprintf("SpeechPartOfSpeech(%d)", int32(e))
+	}
+}
+
 type SpeechRecoContextState int32
 
 const (
 	SRCS_Disabled SpeechRecoContextState = 0
 	SRCS_Enabled  SpeechRecoContextState = 1
 )
+
+// String returns the SpeechRecoContextState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechRecoContextState) String() string {
+	switch e {
+	case SRCS_Disabled:
+		return "SRCS_Disabled"
+	case SRCS_Enabled:
+		return "SRCS_Enabled"
+	default:
+		return fmt.Sprintf("SpeechRecoContextState(%d)", int32(e))
+	}
+}
 
 type SpeechRecoEvents int32
 
@@ -1491,6 +4290,53 @@ const (
 	SREAllEvents            SpeechRecoEvents = 393215
 )
 
+// String returns the SpeechRecoEvents constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechRecoEvents) String() string {
+	switch e {
+	case SREStreamEnd:
+		return "SREStreamEnd"
+	case SRESoundStart:
+		return "SRESoundStart"
+	case SRESoundEnd:
+		return "SRESoundEnd"
+	case SREPhraseStart:
+		return "SREPhraseStart"
+	case SRERecognition:
+		return "SRERecognition"
+	case SREHypothesis:
+		return "SREHypothesis"
+	case SREBookmark:
+		return "SREBookmark"
+	case SREPropertyNumChange:
+		return "SREPropertyNumChange"
+	case SREPropertyStringChange:
+		return "SREPropertyStringChange"
+	case SREFalseRecognition:
+		return "SREFalseRecognition"
+	case SREInterference:
+		return "SREInterference"
+	case SRERequestUI:
+		return "SRERequestUI"
+	case SREStateChange:
+		return "SREStateChange"
+	case SREAdaptation:
+		return "SREAdaptation"
+	case SREStreamStart:
+		return "SREStreamStart"
+	case SRERecoOtherContext:
+		return "SRERecoOtherContext"
+	case SREAudioLevel:
+		return "SREAudioLevel"
+	case SREPrivate:
+		return "SREPrivate"
+	case SREAllEvents:
+		return "SREAllEvents"
+	default:
+		return fmt.Sprintf("SpeechRecoEvents(%d)", int32(e))
+	}
+}
+
 type SpeechRecognitionType int32
 
 const (
@@ -1502,6 +4348,27 @@ const (
 	SRTReSent          SpeechRecognitionType = 16
 )
 
+// String returns the SpeechRecognitionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechRecognitionType) String() string {
+	switch e {
+	case SRTStandard:
+		return "SRTStandard"
+	case SRTAutopause:
+		return "SRTAutopause"
+	case SRTEmulated:
+		return "SRTEmulated"
+	case SRTSMLTimeout:
+		return "SRTSMLTimeout"
+	case SRTExtendableParse:
+		return "SRTExtendableParse"
+	case SRTReSent:
+		return "SRTReSent"
+	default:
+		return fmt.Sprintf("SpeechRecognitionType(%d)", int32(e))
+	}
+}
+
 type SpeechRecognizerState int32
 
 const (
@@ -1511,12 +4378,42 @@ const (
 	SRSInactiveWithPurge SpeechRecognizerState = 3
 )
 
+// String returns the SpeechRecognizerState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechRecognizerState) String() string {
+	switch e {
+	case SRSInactive:
+		return "SRSInactive"
+	case SRSActive:
+		return "SRSActive"
+	case SRSActiveAlways:
+		return "SRSActiveAlways"
+	case SRSInactiveWithPurge:
+		return "SRSInactiveWithPurge"
+	default:
+		return fmt.Sprintf("SpeechRecognizerState(%d)", int32(e))
+	}
+}
+
 type SpeechRetainedAudioOptions int32
 
 const (
 	SRAONone        SpeechRetainedAudioOptions = 0
 	SRAORetainAudio SpeechRetainedAudioOptions = 1
 )
+
+// String returns the SpeechRetainedAudioOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechRetainedAudioOptions) String() string {
+	switch e {
+	case SRAONone:
+		return "SRAONone"
+	case SRAORetainAudio:
+		return "SRAORetainAudio"
+	default:
+		return fmt.Sprintf("SpeechRetainedAudioOptions(%d)", int32(e))
+	}
+}
 
 type SpeechRuleAttributes int32
 
@@ -1530,6 +4427,29 @@ const (
 	SRARoot            SpeechRuleAttributes = 64
 )
 
+// String returns the SpeechRuleAttributes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechRuleAttributes) String() string {
+	switch e {
+	case SRATopLevel:
+		return "SRATopLevel"
+	case SRADefaultToActive:
+		return "SRADefaultToActive"
+	case SRAExport:
+		return "SRAExport"
+	case SRAImport:
+		return "SRAImport"
+	case SRAInterpreter:
+		return "SRAInterpreter"
+	case SRADynamic:
+		return "SRADynamic"
+	case SRARoot:
+		return "SRARoot"
+	default:
+		return fmt.Sprintf("SpeechRuleAttributes(%d)", int32(e))
+	}
+}
+
 type SpeechRuleState int32
 
 const (
@@ -1539,12 +4459,42 @@ const (
 	SGDSActiveUserDelimited SpeechRuleState = 4
 )
 
+// String returns the SpeechRuleState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechRuleState) String() string {
+	switch e {
+	case SGDSInactive:
+		return "SGDSInactive"
+	case SGDSActive:
+		return "SGDSActive"
+	case SGDSActiveWithAutoPause:
+		return "SGDSActiveWithAutoPause"
+	case SGDSActiveUserDelimited:
+		return "SGDSActiveUserDelimited"
+	default:
+		return fmt.Sprintf("SpeechRuleState(%d)", int32(e))
+	}
+}
+
 type SpeechRunState int32
 
 const (
 	SRSEDone       SpeechRunState = 1
 	SRSEIsSpeaking SpeechRunState = 2
 )
+
+// String returns the SpeechRunState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechRunState) String() string {
+	switch e {
+	case SRSEDone:
+		return "SRSEDone"
+	case SRSEIsSpeaking:
+		return "SRSEIsSpeaking"
+	default:
+		return fmt.Sprintf("SpeechRunState(%d)", int32(e))
+	}
+}
 
 type SpeechSpecialTransitionType int32
 
@@ -1553,6 +4503,21 @@ const (
 	SSTTDictation  SpeechSpecialTransitionType = 2
 	SSTTTextBuffer SpeechSpecialTransitionType = 3
 )
+
+// String returns the SpeechSpecialTransitionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechSpecialTransitionType) String() string {
+	switch e {
+	case SSTTWildcard:
+		return "SSTTWildcard"
+	case SSTTDictation:
+		return "SSTTDictation"
+	case SSTTTextBuffer:
+		return "SSTTTextBuffer"
+	default:
+		return fmt.Sprintf("SpeechSpecialTransitionType(%d)", int32(e))
+	}
+}
 
 type SpeechStreamFileMode int32
 
@@ -1563,6 +4528,23 @@ const (
 	SSFMCreateForWrite SpeechStreamFileMode = 3
 )
 
+// String returns the SpeechStreamFileMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechStreamFileMode) String() string {
+	switch e {
+	case SSFMOpenForRead:
+		return "SSFMOpenForRead"
+	case SSFMOpenReadWrite:
+		return "SSFMOpenReadWrite"
+	case SSFMCreate:
+		return "SSFMCreate"
+	case SSFMCreateForWrite:
+		return "SSFMCreateForWrite"
+	default:
+		return fmt.Sprintf("SpeechStreamFileMode(%d)", int32(e))
+	}
+}
+
 type SpeechStreamSeekPositionType uint32
 
 const (
@@ -1570,6 +4552,21 @@ const (
 	SSSPTRelativeToCurrentPosition SpeechStreamSeekPositionType = 1
 	SSSPTRelativeToEnd             SpeechStreamSeekPositionType = 2
 )
+
+// String returns the SpeechStreamSeekPositionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechStreamSeekPositionType) String() string {
+	switch e {
+	case SSSPTRelativeToStart:
+		return "SSSPTRelativeToStart"
+	case SSSPTRelativeToCurrentPosition:
+		return "SSSPTRelativeToCurrentPosition"
+	case SSSPTRelativeToEnd:
+		return "SSSPTRelativeToEnd"
+	default:
+		return fmt.Sprintf("SpeechStreamSeekPositionType(%d)", uint32(e))
+	}
+}
 
 type SpeechTokenContext uint32
 
@@ -1581,6 +4578,25 @@ const (
 	STCAll           SpeechTokenContext = 23
 )
 
+// String returns the SpeechTokenContext constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechTokenContext) String() string {
+	switch e {
+	case STCInprocServer:
+		return "STCInprocServer"
+	case STCInprocHandler:
+		return "STCInprocHandler"
+	case STCLocalServer:
+		return "STCLocalServer"
+	case STCRemoteServer:
+		return "STCRemoteServer"
+	case STCAll:
+		return "STCAll"
+	default:
+		return fmt.Sprintf("SpeechTokenContext(%d)", uint32(e))
+	}
+}
+
 type SpeechTokenShellFolder int32
 
 const (
@@ -1590,6 +4606,23 @@ const (
 	STSF_FlagCreate    SpeechTokenShellFolder = 32768
 )
 
+// String returns the SpeechTokenShellFolder constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechTokenShellFolder) String() string {
+	switch e {
+	case STSF_AppData:
+		return "STSF_AppData"
+	case STSF_LocalAppData:
+		return "STSF_LocalAppData"
+	case STSF_CommonAppData:
+		return "STSF_CommonAppData"
+	case STSF_FlagCreate:
+		return "STSF_FlagCreate"
+	default:
+		return fmt.Sprintf("SpeechTokenShellFolder(%d)", int32(e))
+	}
+}
+
 type SpeechVisemeFeature int32
 
 const (
@@ -1597,6 +4630,21 @@ const (
 	SVF_Stressed SpeechVisemeFeature = 1
 	SVF_Emphasis SpeechVisemeFeature = 2
 )
+
+// String returns the SpeechVisemeFeature constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechVisemeFeature) String() string {
+	switch e {
+	case SVF_None:
+		return "SVF_None"
+	case SVF_Stressed:
+		return "SVF_Stressed"
+	case SVF_Emphasis:
+		return "SVF_Emphasis"
+	default:
+		return fmt.Sprintf("SpeechVisemeFeature(%d)", int32(e))
+	}
+}
 
 type SpeechVisemeType int32
 
@@ -1625,6 +4673,59 @@ const (
 	SVP_21 SpeechVisemeType = 21
 )
 
+// String returns the SpeechVisemeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechVisemeType) String() string {
+	switch e {
+	case SVP_0:
+		return "SVP_0"
+	case SVP_1:
+		return "SVP_1"
+	case SVP_2:
+		return "SVP_2"
+	case SVP_3:
+		return "SVP_3"
+	case SVP_4:
+		return "SVP_4"
+	case SVP_5:
+		return "SVP_5"
+	case SVP_6:
+		return "SVP_6"
+	case SVP_7:
+		return "SVP_7"
+	case SVP_8:
+		return "SVP_8"
+	case SVP_9:
+		return "SVP_9"
+	case SVP_10:
+		return "SVP_10"
+	case SVP_11:
+		return "SVP_11"
+	case SVP_12:
+		return "SVP_12"
+	case SVP_13:
+		return "SVP_13"
+	case SVP_14:
+		return "SVP_14"
+	case SVP_15:
+		return "SVP_15"
+	case SVP_16:
+		return "SVP_16"
+	case SVP_17:
+		return "SVP_17"
+	case SVP_18:
+		return "SVP_18"
+	case SVP_19:
+		return "SVP_19"
+	case SVP_20:
+		return "SVP_20"
+	case SVP_21:
+		return "SVP_21"
+	default:
+		return fmt.Sprintf("SpeechVisemeType(%d)", int32(e))
+	}
+}
+
 type SpeechVoiceEvents int32
 
 const (
@@ -1641,6 +4742,37 @@ const (
 	SVEAllEvents        SpeechVoiceEvents = 33790
 )
 
+// String returns the SpeechVoiceEvents constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechVoiceEvents) String() string {
+	switch e {
+	case SVEStartInputStream:
+		return "SVEStartInputStream"
+	case SVEEndInputStream:
+		return "SVEEndInputStream"
+	case SVEVoiceChange:
+		return "SVEVoiceChange"
+	case SVEBookmark:
+		return "SVEBookmark"
+	case SVEWordBoundary:
+		return "SVEWordBoundary"
+	case SVEPhoneme:
+		return "SVEPhoneme"
+	case SVESentenceBoundary:
+		return "SVESentenceBoundary"
+	case SVEViseme:
+		return "SVEViseme"
+	case SVEAudioLevel:
+		return "SVEAudioLevel"
+	case SVEPrivate:
+		return "SVEPrivate"
+	case SVEAllEvents:
+		return "SVEAllEvents"
+	default:
+		return fmt.Sprintf("SpeechVoiceEvents(%d)", int32(e))
+	}
+}
+
 type SpeechVoicePriority int32
 
 const (
@@ -1648,6 +4780,21 @@ const (
 	SVPAlert  SpeechVoicePriority = 1
 	SVPOver   SpeechVoicePriority = 2
 )
+
+// String returns the SpeechVoicePriority constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechVoicePriority) String() string {
+	switch e {
+	case SVPNormal:
+		return "SVPNormal"
+	case SVPAlert:
+		return "SVPAlert"
+	case SVPOver:
+		return "SVPOver"
+	default:
+		return fmt.Sprintf("SpeechVoicePriority(%d)", int32(e))
+	}
+}
 
 type SpeechVoiceSpeakFlags int32
 
@@ -1669,6 +4816,41 @@ const (
 	SVSFUnusedFlags      SpeechVoiceSpeakFlags = -512
 )
 
+// String returns the SpeechVoiceSpeakFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechVoiceSpeakFlags) String() string {
+	switch e {
+	case SVSFDefault:
+		return "SVSFDefault"
+	case SVSFlagsAsync:
+		return "SVSFlagsAsync"
+	case SVSFPurgeBeforeSpeak:
+		return "SVSFPurgeBeforeSpeak"
+	case SVSFIsFilename:
+		return "SVSFIsFilename"
+	case SVSFIsXML:
+		return "SVSFIsXML"
+	case SVSFIsNotXML:
+		return "SVSFIsNotXML"
+	case SVSFPersistXML:
+		return "SVSFPersistXML"
+	case SVSFNLPSpeakPunc:
+		return "SVSFNLPSpeakPunc"
+	case SVSFParseSapi:
+		return "SVSFParseSapi"
+	case SVSFParseSsml:
+		return "SVSFParseSsml"
+	case SVSFParseMask:
+		return "SVSFParseMask"
+	case SVSFVoiceMask:
+		return "SVSFVoiceMask"
+	case SVSFUnusedFlags:
+		return "SVSFUnusedFlags"
+	default:
+		return fmt.Sprintf("SpeechVoiceSpeakFlags(%d)", int32(e))
+	}
+}
+
 type SpeechWordPronounceable int32
 
 const (
@@ -1677,9 +4859,37 @@ const (
 	SWPKnownWordPronounceable     SpeechWordPronounceable = 2
 )
 
+// String returns the SpeechWordPronounceable constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechWordPronounceable) String() string {
+	switch e {
+	case SWPUnknownWordUnpronounceable:
+		return "SWPUnknownWordUnpronounceable"
+	case SWPUnknownWordPronounceable:
+		return "SWPUnknownWordPronounceable"
+	case SWPKnownWordPronounceable:
+		return "SWPKnownWordPronounceable"
+	default:
+		return fmt.Sprintf("SpeechWordPronounceable(%d)", int32(e))
+	}
+}
+
 type SpeechWordType int32
 
 const (
 	SWTAdded   SpeechWordType = 1
 	SWTDeleted SpeechWordType = 2
 )
+
+// String returns the SpeechWordType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpeechWordType) String() string {
+	switch e {
+	case SWTAdded:
+		return "SWTAdded"
+	case SWTDeleted:
+		return "SWTDeleted"
+	default:
+		return fmt.Sprintf("SpeechWordType(%d)", int32(e))
+	}
+}

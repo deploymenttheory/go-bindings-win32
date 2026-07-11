@@ -4,9 +4,26 @@
 
 package eventnotificationservice
 
+import (
+	"fmt"
+)
+
 type SENS_CONNECTION_TYPE uint32
 
 const (
 	CONNECTION_LAN SENS_CONNECTION_TYPE = 0
 	CONNECTION_WAN SENS_CONNECTION_TYPE = 1
 )
+
+// String returns the SENS_CONNECTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SENS_CONNECTION_TYPE) String() string {
+	switch e {
+	case CONNECTION_LAN:
+		return "CONNECTION_LAN"
+	case CONNECTION_WAN:
+		return "CONNECTION_WAN"
+	default:
+		return fmt.Sprintf("SENS_CONNECTION_TYPE(%d)", uint32(e))
+	}
+}

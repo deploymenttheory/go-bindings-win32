@@ -4,6 +4,11 @@
 
 package ole
 
+import (
+	"fmt"
+	"strings"
+)
+
 // ACTIVATEFLAGS: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-activateflags
 type ACTIVATEFLAGS int32
 
@@ -11,12 +16,37 @@ const (
 	ACTIVATE_WINDOWLESS ACTIVATEFLAGS = 1
 )
 
+// String returns the ACTIVATEFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACTIVATEFLAGS) String() string {
+	switch e {
+	case ACTIVATE_WINDOWLESS:
+		return "ACTIVATE_WINDOWLESS"
+	default:
+		return fmt.Sprintf("ACTIVATEFLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type ACTIVEOBJECT_FLAGS uint32
 
 const (
 	ACTIVEOBJECT_STRONG ACTIVEOBJECT_FLAGS = 0
 	ACTIVEOBJECT_WEAK   ACTIVEOBJECT_FLAGS = 1
 )
+
+// String returns the ACTIVEOBJECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACTIVEOBJECT_FLAGS) String() string {
+	var parts []string
+	if e&ACTIVEOBJECT_WEAK != 0 {
+		parts = append(parts, "ACTIVEOBJECT_WEAK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // BINDSPEED: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-bindspeed
 type BINDSPEED int32
@@ -27,6 +57,22 @@ const (
 	BINDSPEED_IMMEDIATE  BINDSPEED = 3
 )
 
+// String returns the BINDSPEED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BINDSPEED) String() string {
+	switch e {
+	case BINDSPEED_INDEFINITE:
+		return "BINDSPEED_INDEFINITE"
+	case BINDSPEED_MODERATE:
+		return "BINDSPEED_MODERATE"
+	case BINDSPEED_IMMEDIATE:
+		return "BINDSPEED_IMMEDIATE"
+	default:
+		return fmt.Sprintf("BINDSPEED(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type BUSY_DIALOG_FLAGS uint32
 
 const (
@@ -35,6 +81,28 @@ const (
 	BZ_DISABLERETRYBUTTON    BUSY_DIALOG_FLAGS = 4
 	BZ_NOTRESPONDINGDIALOG   BUSY_DIALOG_FLAGS = 8
 )
+
+// String returns the BUSY_DIALOG_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BUSY_DIALOG_FLAGS) String() string {
+	var parts []string
+	if e&BZ_DISABLECANCELBUTTON != 0 {
+		parts = append(parts, "BZ_DISABLECANCELBUTTON")
+	}
+	if e&BZ_DISABLESWITCHTOBUTTON != 0 {
+		parts = append(parts, "BZ_DISABLESWITCHTOBUTTON")
+	}
+	if e&BZ_DISABLERETRYBUTTON != 0 {
+		parts = append(parts, "BZ_DISABLERETRYBUTTON")
+	}
+	if e&BZ_NOTRESPONDINGDIALOG != 0 {
+		parts = append(parts, "BZ_NOTRESPONDINGDIALOG")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CHANGEKIND int32
 
@@ -49,6 +117,32 @@ const (
 	CHANGEKIND_MAX              CHANGEKIND = 7
 )
 
+// String returns the CHANGEKIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANGEKIND) String() string {
+	switch e {
+	case CHANGEKIND_ADDMEMBER:
+		return "CHANGEKIND_ADDMEMBER"
+	case CHANGEKIND_DELETEMEMBER:
+		return "CHANGEKIND_DELETEMEMBER"
+	case CHANGEKIND_SETNAMES:
+		return "CHANGEKIND_SETNAMES"
+	case CHANGEKIND_SETDOCUMENTATION:
+		return "CHANGEKIND_SETDOCUMENTATION"
+	case CHANGEKIND_GENERAL:
+		return "CHANGEKIND_GENERAL"
+	case CHANGEKIND_INVALIDATE:
+		return "CHANGEKIND_INVALIDATE"
+	case CHANGEKIND_CHANGEFAILED:
+		return "CHANGEKIND_CHANGEFAILED"
+	case CHANGEKIND_MAX:
+		return "CHANGEKIND_MAX"
+	default:
+		return fmt.Sprintf("CHANGEKIND(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CHANGE_ICON_FLAGS uint32
 
 const (
@@ -59,6 +153,32 @@ const (
 	CIF_USEICONEXE     CHANGE_ICON_FLAGS = 16
 )
 
+// String returns the CHANGE_ICON_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANGE_ICON_FLAGS) String() string {
+	var parts []string
+	if e&CIF_SHOWHELP != 0 {
+		parts = append(parts, "CIF_SHOWHELP")
+	}
+	if e&CIF_SELECTCURRENT != 0 {
+		parts = append(parts, "CIF_SELECTCURRENT")
+	}
+	if e&CIF_SELECTDEFAULT != 0 {
+		parts = append(parts, "CIF_SELECTDEFAULT")
+	}
+	if e&CIF_SELECTFROMFILE != 0 {
+		parts = append(parts, "CIF_SELECTFROMFILE")
+	}
+	if e&CIF_USEICONEXE != 0 {
+		parts = append(parts, "CIF_USEICONEXE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type CHANGE_SOURCE_FLAGS uint32
 
 const (
@@ -67,6 +187,28 @@ const (
 	CSF_ONLYGETSOURCE CHANGE_SOURCE_FLAGS = 4
 	CSF_EXPLORER      CHANGE_SOURCE_FLAGS = 8
 )
+
+// String returns the CHANGE_SOURCE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANGE_SOURCE_FLAGS) String() string {
+	var parts []string
+	if e&CSF_SHOWHELP != 0 {
+		parts = append(parts, "CSF_SHOWHELP")
+	}
+	if e&CSF_VALIDSOURCE != 0 {
+		parts = append(parts, "CSF_VALIDSOURCE")
+	}
+	if e&CSF_ONLYGETSOURCE != 0 {
+		parts = append(parts, "CSF_ONLYGETSOURCE")
+	}
+	if e&CSF_EXPLORER != 0 {
+		parts = append(parts, "CSF_EXPLORER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CLIPBOARD_FORMAT uint16
 
@@ -100,12 +242,88 @@ const (
 	CF_GDIOBJLAST      CLIPBOARD_FORMAT = 1023
 )
 
+// String returns the CLIPBOARD_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLIPBOARD_FORMAT) String() string {
+	switch e {
+	case CF_TEXT:
+		return "CF_TEXT"
+	case CF_BITMAP:
+		return "CF_BITMAP"
+	case CF_METAFILEPICT:
+		return "CF_METAFILEPICT"
+	case CF_SYLK:
+		return "CF_SYLK"
+	case CF_DIF:
+		return "CF_DIF"
+	case CF_TIFF:
+		return "CF_TIFF"
+	case CF_OEMTEXT:
+		return "CF_OEMTEXT"
+	case CF_DIB:
+		return "CF_DIB"
+	case CF_PALETTE:
+		return "CF_PALETTE"
+	case CF_PENDATA:
+		return "CF_PENDATA"
+	case CF_RIFF:
+		return "CF_RIFF"
+	case CF_WAVE:
+		return "CF_WAVE"
+	case CF_UNICODETEXT:
+		return "CF_UNICODETEXT"
+	case CF_ENHMETAFILE:
+		return "CF_ENHMETAFILE"
+	case CF_HDROP:
+		return "CF_HDROP"
+	case CF_LOCALE:
+		return "CF_LOCALE"
+	case CF_DIBV5:
+		return "CF_DIBV5"
+	case CF_MAX:
+		return "CF_MAX"
+	case CF_OWNERDISPLAY:
+		return "CF_OWNERDISPLAY"
+	case CF_DSPTEXT:
+		return "CF_DSPTEXT"
+	case CF_DSPBITMAP:
+		return "CF_DSPBITMAP"
+	case CF_DSPMETAFILEPICT:
+		return "CF_DSPMETAFILEPICT"
+	case CF_DSPENHMETAFILE:
+		return "CF_DSPENHMETAFILE"
+	case CF_PRIVATEFIRST:
+		return "CF_PRIVATEFIRST"
+	case CF_PRIVATELAST:
+		return "CF_PRIVATELAST"
+	case CF_GDIOBJFIRST:
+		return "CF_GDIOBJFIRST"
+	case CF_GDIOBJLAST:
+		return "CF_GDIOBJLAST"
+	default:
+		return fmt.Sprintf("CLIPBOARD_FORMAT(%d)", uint16(e))
+	}
+}
+
 type CTRLINFO int32
 
 const (
 	CTRLINFO_EATS_RETURN CTRLINFO = 1
 	CTRLINFO_EATS_ESCAPE CTRLINFO = 2
 )
+
+// String returns the CTRLINFO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CTRLINFO) String() string {
+	switch e {
+	case CTRLINFO_EATS_RETURN:
+		return "CTRLINFO_EATS_RETURN"
+	case CTRLINFO_EATS_ESCAPE:
+		return "CTRLINFO_EATS_ESCAPE"
+	default:
+		return fmt.Sprintf("CTRLINFO(%d)", int32(e))
+	}
+}
 
 // DISCARDCACHE: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-discardcache
 type DISCARDCACHE int32
@@ -114,6 +332,19 @@ const (
 	DISCARDCACHE_SAVEIFDIRTY DISCARDCACHE = 0
 	DISCARDCACHE_NOSAVE      DISCARDCACHE = 1
 )
+
+// String returns the DISCARDCACHE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISCARDCACHE) String() string {
+	switch e {
+	case DISCARDCACHE_SAVEIFDIRTY:
+		return "DISCARDCACHE_SAVEIFDIRTY"
+	case DISCARDCACHE_NOSAVE:
+		return "DISCARDCACHE_NOSAVE"
+	default:
+		return fmt.Sprintf("DISCARDCACHE(%d)", int32(e))
+	}
+}
 
 // DOCMISC: https://learn.microsoft.com/windows/win32/api/docobj/ne-docobj-docmisc
 type DOCMISC int32
@@ -125,7 +356,25 @@ const (
 	DOCMISC_NOFILESUPPORT            DOCMISC = 8
 )
 
+// String returns the DOCMISC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DOCMISC) String() string {
+	switch e {
+	case DOCMISC_CANCREATEMULTIPLEVIEWS:
+		return "DOCMISC_CANCREATEMULTIPLEVIEWS"
+	case DOCMISC_SUPPORTCOMPLEXRECTANGLES:
+		return "DOCMISC_SUPPORTCOMPLEXRECTANGLES"
+	case DOCMISC_CANTOPENEDIT:
+		return "DOCMISC_CANTOPENEDIT"
+	case DOCMISC_NOFILESUPPORT:
+		return "DOCMISC_NOFILESUPPORT"
+	default:
+		return fmt.Sprintf("DOCMISC(%d)", int32(e))
+	}
+}
+
 // DROPEFFECT: https://learn.microsoft.com/windows/win32/com/dropeffect-constants
+// Bitmask — values may be combined with |.
 type DROPEFFECT uint32
 
 const (
@@ -136,12 +385,45 @@ const (
 	DROPEFFECT_SCROLL DROPEFFECT = 2147483648
 )
 
+// String returns the DROPEFFECT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DROPEFFECT) String() string {
+	var parts []string
+	if e&DROPEFFECT_COPY != 0 {
+		parts = append(parts, "DROPEFFECT_COPY")
+	}
+	if e&DROPEFFECT_MOVE != 0 {
+		parts = append(parts, "DROPEFFECT_MOVE")
+	}
+	if e&DROPEFFECT_LINK != 0 {
+		parts = append(parts, "DROPEFFECT_LINK")
+	}
+	if e&DROPEFFECT_SCROLL != 0 {
+		parts = append(parts, "DROPEFFECT_SCROLL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // DVASPECTINFOFLAG: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-dvaspectinfoflag
 type DVASPECTINFOFLAG int32
 
 const (
 	DVASPECTINFOFLAG_CANOPTIMIZE DVASPECTINFOFLAG = 1
 )
+
+// String returns the DVASPECTINFOFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVASPECTINFOFLAG) String() string {
+	switch e {
+	case DVASPECTINFOFLAG_CANOPTIMIZE:
+		return "DVASPECTINFOFLAG_CANOPTIMIZE"
+	default:
+		return fmt.Sprintf("DVASPECTINFOFLAG(%d)", int32(e))
+	}
+}
 
 // DVEXTENTMODE: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-dvextentmode
 type DVEXTENTMODE int32
@@ -151,6 +433,20 @@ const (
 	DVEXTENT_INTEGRAL DVEXTENTMODE = 1
 )
 
+// String returns the DVEXTENTMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVEXTENTMODE) String() string {
+	switch e {
+	case DVEXTENT_CONTENT:
+		return "DVEXTENT_CONTENT"
+	case DVEXTENT_INTEGRAL:
+		return "DVEXTENT_INTEGRAL"
+	default:
+		return fmt.Sprintf("DVEXTENTMODE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type EDIT_LINKS_FLAGS uint32
 
 const (
@@ -161,6 +457,32 @@ const (
 	ELF_DISABLECANCELLINK   EDIT_LINKS_FLAGS = 16
 )
 
+// String returns the EDIT_LINKS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EDIT_LINKS_FLAGS) String() string {
+	var parts []string
+	if e&ELF_SHOWHELP != 0 {
+		parts = append(parts, "ELF_SHOWHELP")
+	}
+	if e&ELF_DISABLEUPDATENOW != 0 {
+		parts = append(parts, "ELF_DISABLEUPDATENOW")
+	}
+	if e&ELF_DISABLEOPENSOURCE != 0 {
+		parts = append(parts, "ELF_DISABLEOPENSOURCE")
+	}
+	if e&ELF_DISABLECHANGESOURCE != 0 {
+		parts = append(parts, "ELF_DISABLECHANGESOURCE")
+	}
+	if e&ELF_DISABLECANCELLINK != 0 {
+		parts = append(parts, "ELF_DISABLECANCELLINK")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type EMBDHLP_FLAGS uint32
 
 const (
@@ -169,6 +491,22 @@ const (
 	EMBDHLP_CREATENOW      EMBDHLP_FLAGS = 0
 	EMBDHLP_DELAYCREATE    EMBDHLP_FLAGS = 65536
 )
+
+// String returns the EMBDHLP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EMBDHLP_FLAGS) String() string {
+	var parts []string
+	if e&EMBDHLP_INPROC_SERVER != 0 {
+		parts = append(parts, "EMBDHLP_INPROC_SERVER")
+	}
+	if e&EMBDHLP_DELAYCREATE != 0 {
+		parts = append(parts, "EMBDHLP_DELAYCREATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type ENUM_CONTROLS_WHICH_FLAGS uint32
 
@@ -183,6 +521,32 @@ const (
 	GC_WCH_FSELECTED   ENUM_CONTROLS_WHICH_FLAGS = 1073741824
 )
 
+// String returns the ENUM_CONTROLS_WHICH_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENUM_CONTROLS_WHICH_FLAGS) String() string {
+	switch e {
+	case GCW_WCH_SIBLING:
+		return "GCW_WCH_SIBLING"
+	case GC_WCH_CONTAINER:
+		return "GC_WCH_CONTAINER"
+	case GC_WCH_CONTAINED:
+		return "GC_WCH_CONTAINED"
+	case GC_WCH_ALL:
+		return "GC_WCH_ALL"
+	case GC_WCH_FREVERSEDIR:
+		return "GC_WCH_FREVERSEDIR"
+	case GC_WCH_FONLYAFTER:
+		return "GC_WCH_FONLYAFTER"
+	case GC_WCH_FONLYBEFORE:
+		return "GC_WCH_FONLYBEFORE"
+	case GC_WCH_FSELECTED:
+		return "GC_WCH_FSELECTED"
+	default:
+		return fmt.Sprintf("ENUM_CONTROLS_WHICH_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FDEX_PROP_FLAGS uint32
 
 const (
@@ -202,12 +566,75 @@ const (
 	FdexPropCannotSourceEvents FDEX_PROP_FLAGS = 8192
 )
 
+// String returns the FDEX_PROP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FDEX_PROP_FLAGS) String() string {
+	var parts []string
+	if e&FdexPropCanGet != 0 {
+		parts = append(parts, "FdexPropCanGet")
+	}
+	if e&FdexPropCannotGet != 0 {
+		parts = append(parts, "FdexPropCannotGet")
+	}
+	if e&FdexPropCanPut != 0 {
+		parts = append(parts, "FdexPropCanPut")
+	}
+	if e&FdexPropCannotPut != 0 {
+		parts = append(parts, "FdexPropCannotPut")
+	}
+	if e&FdexPropCanPutRef != 0 {
+		parts = append(parts, "FdexPropCanPutRef")
+	}
+	if e&FdexPropCannotPutRef != 0 {
+		parts = append(parts, "FdexPropCannotPutRef")
+	}
+	if e&FdexPropNoSideEffects != 0 {
+		parts = append(parts, "FdexPropNoSideEffects")
+	}
+	if e&FdexPropDynamicType != 0 {
+		parts = append(parts, "FdexPropDynamicType")
+	}
+	if e&FdexPropCanCall != 0 {
+		parts = append(parts, "FdexPropCanCall")
+	}
+	if e&FdexPropCannotCall != 0 {
+		parts = append(parts, "FdexPropCannotCall")
+	}
+	if e&FdexPropCanConstruct != 0 {
+		parts = append(parts, "FdexPropCanConstruct")
+	}
+	if e&FdexPropCannotConstruct != 0 {
+		parts = append(parts, "FdexPropCannotConstruct")
+	}
+	if e&FdexPropCanSourceEvents != 0 {
+		parts = append(parts, "FdexPropCanSourceEvents")
+	}
+	if e&FdexPropCannotSourceEvents != 0 {
+		parts = append(parts, "FdexPropCannotSourceEvents")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // GUIDKIND: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-guidkind
 type GUIDKIND int32
 
 const (
 	GUIDKIND_DEFAULT_SOURCE_DISP_IID GUIDKIND = 1
 )
+
+// String returns the GUIDKIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GUIDKIND) String() string {
+	switch e {
+	case GUIDKIND_DEFAULT_SOURCE_DISP_IID:
+		return "GUIDKIND_DEFAULT_SOURCE_DISP_IID"
+	default:
+		return fmt.Sprintf("GUIDKIND(%d)", int32(e))
+	}
+}
 
 // HITRESULT: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-hitresult
 type HITRESULT int32
@@ -219,6 +646,23 @@ const (
 	HITRESULT_HIT         HITRESULT = 3
 )
 
+// String returns the HITRESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HITRESULT) String() string {
+	switch e {
+	case HITRESULT_OUTSIDE:
+		return "HITRESULT_OUTSIDE"
+	case HITRESULT_TRANSPARENT:
+		return "HITRESULT_TRANSPARENT"
+	case HITRESULT_CLOSE:
+		return "HITRESULT_CLOSE"
+	case HITRESULT_HIT:
+		return "HITRESULT_HIT"
+	default:
+		return fmt.Sprintf("HITRESULT(%d)", int32(e))
+	}
+}
+
 type IGNOREMIME int32
 
 const (
@@ -226,6 +670,20 @@ const (
 	IGNOREMIME_TEXT   IGNOREMIME = 2
 )
 
+// String returns the IGNOREMIME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IGNOREMIME) String() string {
+	switch e {
+	case IGNOREMIME_PROMPT:
+		return "IGNOREMIME_PROMPT"
+	case IGNOREMIME_TEXT:
+		return "IGNOREMIME_TEXT"
+	default:
+		return fmt.Sprintf("IGNOREMIME(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type INSERT_OBJECT_FLAGS uint32
 
 const (
@@ -245,6 +703,59 @@ const (
 	IOF_SELECTCREATECONTROL  INSERT_OBJECT_FLAGS = 8192
 )
 
+// String returns the INSERT_OBJECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INSERT_OBJECT_FLAGS) String() string {
+	var parts []string
+	if e&IOF_SHOWHELP != 0 {
+		parts = append(parts, "IOF_SHOWHELP")
+	}
+	if e&IOF_SELECTCREATENEW != 0 {
+		parts = append(parts, "IOF_SELECTCREATENEW")
+	}
+	if e&IOF_SELECTCREATEFROMFILE != 0 {
+		parts = append(parts, "IOF_SELECTCREATEFROMFILE")
+	}
+	if e&IOF_CHECKLINK != 0 {
+		parts = append(parts, "IOF_CHECKLINK")
+	}
+	if e&IOF_CHECKDISPLAYASICON != 0 {
+		parts = append(parts, "IOF_CHECKDISPLAYASICON")
+	}
+	if e&IOF_CREATENEWOBJECT != 0 {
+		parts = append(parts, "IOF_CREATENEWOBJECT")
+	}
+	if e&IOF_CREATEFILEOBJECT != 0 {
+		parts = append(parts, "IOF_CREATEFILEOBJECT")
+	}
+	if e&IOF_CREATELINKOBJECT != 0 {
+		parts = append(parts, "IOF_CREATELINKOBJECT")
+	}
+	if e&IOF_DISABLELINK != 0 {
+		parts = append(parts, "IOF_DISABLELINK")
+	}
+	if e&IOF_VERIFYSERVERSEXIST != 0 {
+		parts = append(parts, "IOF_VERIFYSERVERSEXIST")
+	}
+	if e&IOF_DISABLEDISPLAYASICON != 0 {
+		parts = append(parts, "IOF_DISABLEDISPLAYASICON")
+	}
+	if e&IOF_HIDECHANGEICON != 0 {
+		parts = append(parts, "IOF_HIDECHANGEICON")
+	}
+	if e&IOF_SHOWINSERTCONTROL != 0 {
+		parts = append(parts, "IOF_SHOWINSERTCONTROL")
+	}
+	if e&IOF_SELECTCREATECONTROL != 0 {
+		parts = append(parts, "IOF_SELECTCREATECONTROL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type KEYMODIFIERS uint32
 
 const (
@@ -252,6 +763,25 @@ const (
 	KEYMOD_CONTROL KEYMODIFIERS = 2
 	KEYMOD_ALT     KEYMODIFIERS = 4
 )
+
+// String returns the KEYMODIFIERS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KEYMODIFIERS) String() string {
+	var parts []string
+	if e&KEYMOD_SHIFT != 0 {
+		parts = append(parts, "KEYMOD_SHIFT")
+	}
+	if e&KEYMOD_CONTROL != 0 {
+		parts = append(parts, "KEYMOD_CONTROL")
+	}
+	if e&KEYMOD_ALT != 0 {
+		parts = append(parts, "KEYMOD_ALT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // LIBFLAGS: https://learn.microsoft.com/windows/win32/api/oaidl/ne-oaidl-libflags
 type LIBFLAGS int32
@@ -263,6 +793,24 @@ const (
 	LIBFLAG_FHASDISKIMAGE LIBFLAGS = 8
 )
 
+// String returns the LIBFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LIBFLAGS) String() string {
+	switch e {
+	case LIBFLAG_FRESTRICTED:
+		return "LIBFLAG_FRESTRICTED"
+	case LIBFLAG_FCONTROL:
+		return "LIBFLAG_FCONTROL"
+	case LIBFLAG_FHIDDEN:
+		return "LIBFLAG_FHIDDEN"
+	case LIBFLAG_FHASDISKIMAGE:
+		return "LIBFLAG_FHASDISKIMAGE"
+	default:
+		return fmt.Sprintf("LIBFLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type LOAD_PICTURE_FLAGS uint32
 
 const (
@@ -271,6 +819,25 @@ const (
 	LP_VGACOLOR   LOAD_PICTURE_FLAGS = 2
 	LP_COLOR      LOAD_PICTURE_FLAGS = 4
 )
+
+// String returns the LOAD_PICTURE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOAD_PICTURE_FLAGS) String() string {
+	var parts []string
+	if e&LP_MONOCHROME != 0 {
+		parts = append(parts, "LP_MONOCHROME")
+	}
+	if e&LP_VGACOLOR != 0 {
+		parts = append(parts, "LP_VGACOLOR")
+	}
+	if e&LP_COLOR != 0 {
+		parts = append(parts, "LP_COLOR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type MEDIAPLAYBACK_STATE int32
 
@@ -281,6 +848,23 @@ const (
 	MEDIAPLAYBACK_RESUME_FROM_SUSPEND MEDIAPLAYBACK_STATE = 3
 )
 
+// String returns the MEDIAPLAYBACK_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MEDIAPLAYBACK_STATE) String() string {
+	switch e {
+	case MEDIAPLAYBACK_RESUME:
+		return "MEDIAPLAYBACK_RESUME"
+	case MEDIAPLAYBACK_PAUSE:
+		return "MEDIAPLAYBACK_PAUSE"
+	case MEDIAPLAYBACK_PAUSE_AND_SUSPEND:
+		return "MEDIAPLAYBACK_PAUSE_AND_SUSPEND"
+	case MEDIAPLAYBACK_RESUME_FROM_SUSPEND:
+		return "MEDIAPLAYBACK_RESUME_FROM_SUSPEND"
+	default:
+		return fmt.Sprintf("MEDIAPLAYBACK_STATE(%d)", int32(e))
+	}
+}
+
 type MULTICLASSINFO_FLAGS uint32
 
 const (
@@ -290,6 +874,24 @@ const (
 	MULTICLASSINFO_GETIIDSOURCE          MULTICLASSINFO_FLAGS = 8
 )
 
+// String returns the MULTICLASSINFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MULTICLASSINFO_FLAGS) String() string {
+	switch e {
+	case MULTICLASSINFO_GETTYPEINFO:
+		return "MULTICLASSINFO_GETTYPEINFO"
+	case MULTICLASSINFO_GETNUMRESERVEDDISPIDS:
+		return "MULTICLASSINFO_GETNUMRESERVEDDISPIDS"
+	case MULTICLASSINFO_GETIIDPRIMARY:
+		return "MULTICLASSINFO_GETIIDPRIMARY"
+	case MULTICLASSINFO_GETIIDSOURCE:
+		return "MULTICLASSINFO_GETIIDSOURCE"
+	default:
+		return fmt.Sprintf("MULTICLASSINFO_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type NUMPARSE_FLAGS uint32
 
 const (
@@ -311,6 +913,65 @@ const (
 	NUMPRS_INEXACT        NUMPARSE_FLAGS = 131072
 )
 
+// String returns the NUMPARSE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NUMPARSE_FLAGS) String() string {
+	var parts []string
+	if e&NUMPRS_LEADING_WHITE != 0 {
+		parts = append(parts, "NUMPRS_LEADING_WHITE")
+	}
+	if e&NUMPRS_TRAILING_WHITE != 0 {
+		parts = append(parts, "NUMPRS_TRAILING_WHITE")
+	}
+	if e&NUMPRS_LEADING_PLUS != 0 {
+		parts = append(parts, "NUMPRS_LEADING_PLUS")
+	}
+	if e&NUMPRS_TRAILING_PLUS != 0 {
+		parts = append(parts, "NUMPRS_TRAILING_PLUS")
+	}
+	if e&NUMPRS_LEADING_MINUS != 0 {
+		parts = append(parts, "NUMPRS_LEADING_MINUS")
+	}
+	if e&NUMPRS_TRAILING_MINUS != 0 {
+		parts = append(parts, "NUMPRS_TRAILING_MINUS")
+	}
+	if e&NUMPRS_HEX_OCT != 0 {
+		parts = append(parts, "NUMPRS_HEX_OCT")
+	}
+	if e&NUMPRS_PARENS != 0 {
+		parts = append(parts, "NUMPRS_PARENS")
+	}
+	if e&NUMPRS_DECIMAL != 0 {
+		parts = append(parts, "NUMPRS_DECIMAL")
+	}
+	if e&NUMPRS_THOUSANDS != 0 {
+		parts = append(parts, "NUMPRS_THOUSANDS")
+	}
+	if e&NUMPRS_CURRENCY != 0 {
+		parts = append(parts, "NUMPRS_CURRENCY")
+	}
+	if e&NUMPRS_EXPONENT != 0 {
+		parts = append(parts, "NUMPRS_EXPONENT")
+	}
+	if e&NUMPRS_USE_ALL != 0 {
+		parts = append(parts, "NUMPRS_USE_ALL")
+	}
+	if e&NUMPRS_STD != 0 {
+		parts = append(parts, "NUMPRS_STD")
+	}
+	if e&NUMPRS_NEG != 0 {
+		parts = append(parts, "NUMPRS_NEG")
+	}
+	if e&NUMPRS_INEXACT != 0 {
+		parts = append(parts, "NUMPRS_INEXACT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type OBJECT_PROPERTIES_FLAGS uint32
 
 const (
@@ -319,6 +980,28 @@ const (
 	OPF_SHOWHELP       OBJECT_PROPERTIES_FLAGS = 4
 	OPF_DISABLECONVERT OBJECT_PROPERTIES_FLAGS = 8
 )
+
+// String returns the OBJECT_PROPERTIES_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OBJECT_PROPERTIES_FLAGS) String() string {
+	var parts []string
+	if e&OPF_OBJECTISLINK != 0 {
+		parts = append(parts, "OPF_OBJECTISLINK")
+	}
+	if e&OPF_NOFILLDEFAULT != 0 {
+		parts = append(parts, "OPF_NOFILLDEFAULT")
+	}
+	if e&OPF_SHOWHELP != 0 {
+		parts = append(parts, "OPF_SHOWHELP")
+	}
+	if e&OPF_DISABLECONVERT != 0 {
+		parts = append(parts, "OPF_DISABLECONVERT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // OLECLOSE: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-oleclose
 type OLECLOSE int32
@@ -329,6 +1012,21 @@ const (
 	OLECLOSE_PROMPTSAVE  OLECLOSE = 2
 )
 
+// String returns the OLECLOSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECLOSE) String() string {
+	switch e {
+	case OLECLOSE_SAVEIFDIRTY:
+		return "OLECLOSE_SAVEIFDIRTY"
+	case OLECLOSE_NOSAVE:
+		return "OLECLOSE_NOSAVE"
+	case OLECLOSE_PROMPTSAVE:
+		return "OLECLOSE_PROMPTSAVE"
+	default:
+		return fmt.Sprintf("OLECLOSE(%d)", int32(e))
+	}
+}
+
 // OLECMDEXECOPT: https://learn.microsoft.com/windows/win32/api/docobj/ne-docobj-olecmdexecopt
 type OLECMDEXECOPT int32
 
@@ -338,6 +1036,23 @@ const (
 	OLECMDEXECOPT_DONTPROMPTUSER OLECMDEXECOPT = 2
 	OLECMDEXECOPT_SHOWHELP       OLECMDEXECOPT = 3
 )
+
+// String returns the OLECMDEXECOPT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECMDEXECOPT) String() string {
+	switch e {
+	case OLECMDEXECOPT_DODEFAULT:
+		return "OLECMDEXECOPT_DODEFAULT"
+	case OLECMDEXECOPT_PROMPTUSER:
+		return "OLECMDEXECOPT_PROMPTUSER"
+	case OLECMDEXECOPT_DONTPROMPTUSER:
+		return "OLECMDEXECOPT_DONTPROMPTUSER"
+	case OLECMDEXECOPT_SHOWHELP:
+		return "OLECMDEXECOPT_SHOWHELP"
+	default:
+		return fmt.Sprintf("OLECMDEXECOPT(%d)", int32(e))
+	}
+}
 
 // OLECMDF: https://learn.microsoft.com/windows/win32/api/docobj/ne-docobj-olecmdf
 type OLECMDF int32
@@ -350,6 +1065,27 @@ const (
 	OLECMDF_INVISIBLE         OLECMDF = 16
 	OLECMDF_DEFHIDEONCTXTMENU OLECMDF = 32
 )
+
+// String returns the OLECMDF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECMDF) String() string {
+	switch e {
+	case OLECMDF_SUPPORTED:
+		return "OLECMDF_SUPPORTED"
+	case OLECMDF_ENABLED:
+		return "OLECMDF_ENABLED"
+	case OLECMDF_LATCHED:
+		return "OLECMDF_LATCHED"
+	case OLECMDF_NINCHED:
+		return "OLECMDF_NINCHED"
+	case OLECMDF_INVISIBLE:
+		return "OLECMDF_INVISIBLE"
+	case OLECMDF_DEFHIDEONCTXTMENU:
+		return "OLECMDF_DEFHIDEONCTXTMENU"
+	default:
+		return fmt.Sprintf("OLECMDF(%d)", int32(e))
+	}
+}
 
 // OLECMDID: https://learn.microsoft.com/windows/win32/api/docobj/ne-docobj-olecmdid
 type OLECMDID int32
@@ -440,6 +1176,181 @@ const (
 	OLECMDID_SHOWTASKDLG_BLOCKABLE          OLECMDID = 85
 )
 
+// String returns the OLECMDID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECMDID) String() string {
+	switch e {
+	case OLECMDID_OPEN:
+		return "OLECMDID_OPEN"
+	case OLECMDID_NEW:
+		return "OLECMDID_NEW"
+	case OLECMDID_SAVE:
+		return "OLECMDID_SAVE"
+	case OLECMDID_SAVEAS:
+		return "OLECMDID_SAVEAS"
+	case OLECMDID_SAVECOPYAS:
+		return "OLECMDID_SAVECOPYAS"
+	case OLECMDID_PRINT:
+		return "OLECMDID_PRINT"
+	case OLECMDID_PRINTPREVIEW:
+		return "OLECMDID_PRINTPREVIEW"
+	case OLECMDID_PAGESETUP:
+		return "OLECMDID_PAGESETUP"
+	case OLECMDID_SPELL:
+		return "OLECMDID_SPELL"
+	case OLECMDID_PROPERTIES:
+		return "OLECMDID_PROPERTIES"
+	case OLECMDID_CUT:
+		return "OLECMDID_CUT"
+	case OLECMDID_COPY:
+		return "OLECMDID_COPY"
+	case OLECMDID_PASTE:
+		return "OLECMDID_PASTE"
+	case OLECMDID_PASTESPECIAL:
+		return "OLECMDID_PASTESPECIAL"
+	case OLECMDID_UNDO:
+		return "OLECMDID_UNDO"
+	case OLECMDID_REDO:
+		return "OLECMDID_REDO"
+	case OLECMDID_SELECTALL:
+		return "OLECMDID_SELECTALL"
+	case OLECMDID_CLEARSELECTION:
+		return "OLECMDID_CLEARSELECTION"
+	case OLECMDID_ZOOM:
+		return "OLECMDID_ZOOM"
+	case OLECMDID_GETZOOMRANGE:
+		return "OLECMDID_GETZOOMRANGE"
+	case OLECMDID_UPDATECOMMANDS:
+		return "OLECMDID_UPDATECOMMANDS"
+	case OLECMDID_REFRESH:
+		return "OLECMDID_REFRESH"
+	case OLECMDID_STOP:
+		return "OLECMDID_STOP"
+	case OLECMDID_HIDETOOLBARS:
+		return "OLECMDID_HIDETOOLBARS"
+	case OLECMDID_SETPROGRESSMAX:
+		return "OLECMDID_SETPROGRESSMAX"
+	case OLECMDID_SETPROGRESSPOS:
+		return "OLECMDID_SETPROGRESSPOS"
+	case OLECMDID_SETPROGRESSTEXT:
+		return "OLECMDID_SETPROGRESSTEXT"
+	case OLECMDID_SETTITLE:
+		return "OLECMDID_SETTITLE"
+	case OLECMDID_SETDOWNLOADSTATE:
+		return "OLECMDID_SETDOWNLOADSTATE"
+	case OLECMDID_STOPDOWNLOAD:
+		return "OLECMDID_STOPDOWNLOAD"
+	case OLECMDID_ONTOOLBARACTIVATED:
+		return "OLECMDID_ONTOOLBARACTIVATED"
+	case OLECMDID_FIND:
+		return "OLECMDID_FIND"
+	case OLECMDID_DELETE:
+		return "OLECMDID_DELETE"
+	case OLECMDID_HTTPEQUIV:
+		return "OLECMDID_HTTPEQUIV"
+	case OLECMDID_HTTPEQUIV_DONE:
+		return "OLECMDID_HTTPEQUIV_DONE"
+	case OLECMDID_ENABLE_INTERACTION:
+		return "OLECMDID_ENABLE_INTERACTION"
+	case OLECMDID_ONUNLOAD:
+		return "OLECMDID_ONUNLOAD"
+	case OLECMDID_PROPERTYBAG2:
+		return "OLECMDID_PROPERTYBAG2"
+	case OLECMDID_PREREFRESH:
+		return "OLECMDID_PREREFRESH"
+	case OLECMDID_SHOWSCRIPTERROR:
+		return "OLECMDID_SHOWSCRIPTERROR"
+	case OLECMDID_SHOWMESSAGE:
+		return "OLECMDID_SHOWMESSAGE"
+	case OLECMDID_SHOWFIND:
+		return "OLECMDID_SHOWFIND"
+	case OLECMDID_SHOWPAGESETUP:
+		return "OLECMDID_SHOWPAGESETUP"
+	case OLECMDID_SHOWPRINT:
+		return "OLECMDID_SHOWPRINT"
+	case OLECMDID_CLOSE:
+		return "OLECMDID_CLOSE"
+	case OLECMDID_ALLOWUILESSSAVEAS:
+		return "OLECMDID_ALLOWUILESSSAVEAS"
+	case OLECMDID_DONTDOWNLOADCSS:
+		return "OLECMDID_DONTDOWNLOADCSS"
+	case OLECMDID_UPDATEPAGESTATUS:
+		return "OLECMDID_UPDATEPAGESTATUS"
+	case OLECMDID_PRINT2:
+		return "OLECMDID_PRINT2"
+	case OLECMDID_PRINTPREVIEW2:
+		return "OLECMDID_PRINTPREVIEW2"
+	case OLECMDID_SETPRINTTEMPLATE:
+		return "OLECMDID_SETPRINTTEMPLATE"
+	case OLECMDID_GETPRINTTEMPLATE:
+		return "OLECMDID_GETPRINTTEMPLATE"
+	case OLECMDID_PAGEACTIONBLOCKED:
+		return "OLECMDID_PAGEACTIONBLOCKED"
+	case OLECMDID_PAGEACTIONUIQUERY:
+		return "OLECMDID_PAGEACTIONUIQUERY"
+	case OLECMDID_FOCUSVIEWCONTROLS:
+		return "OLECMDID_FOCUSVIEWCONTROLS"
+	case OLECMDID_FOCUSVIEWCONTROLSQUERY:
+		return "OLECMDID_FOCUSVIEWCONTROLSQUERY"
+	case OLECMDID_SHOWPAGEACTIONMENU:
+		return "OLECMDID_SHOWPAGEACTIONMENU"
+	case OLECMDID_ADDTRAVELENTRY:
+		return "OLECMDID_ADDTRAVELENTRY"
+	case OLECMDID_UPDATETRAVELENTRY:
+		return "OLECMDID_UPDATETRAVELENTRY"
+	case OLECMDID_UPDATEBACKFORWARDSTATE:
+		return "OLECMDID_UPDATEBACKFORWARDSTATE"
+	case OLECMDID_OPTICAL_ZOOM:
+		return "OLECMDID_OPTICAL_ZOOM"
+	case OLECMDID_OPTICAL_GETZOOMRANGE:
+		return "OLECMDID_OPTICAL_GETZOOMRANGE"
+	case OLECMDID_WINDOWSTATECHANGED:
+		return "OLECMDID_WINDOWSTATECHANGED"
+	case OLECMDID_ACTIVEXINSTALLSCOPE:
+		return "OLECMDID_ACTIVEXINSTALLSCOPE"
+	case OLECMDID_UPDATETRAVELENTRY_DATARECOVERY:
+		return "OLECMDID_UPDATETRAVELENTRY_DATARECOVERY"
+	case OLECMDID_SHOWTASKDLG:
+		return "OLECMDID_SHOWTASKDLG"
+	case OLECMDID_POPSTATEEVENT:
+		return "OLECMDID_POPSTATEEVENT"
+	case OLECMDID_VIEWPORT_MODE:
+		return "OLECMDID_VIEWPORT_MODE"
+	case OLECMDID_LAYOUT_VIEWPORT_WIDTH:
+		return "OLECMDID_LAYOUT_VIEWPORT_WIDTH"
+	case OLECMDID_VISUAL_VIEWPORT_EXCLUDE_BOTTOM:
+		return "OLECMDID_VISUAL_VIEWPORT_EXCLUDE_BOTTOM"
+	case OLECMDID_USER_OPTICAL_ZOOM:
+		return "OLECMDID_USER_OPTICAL_ZOOM"
+	case OLECMDID_PAGEAVAILABLE:
+		return "OLECMDID_PAGEAVAILABLE"
+	case OLECMDID_GETUSERSCALABLE:
+		return "OLECMDID_GETUSERSCALABLE"
+	case OLECMDID_UPDATE_CARET:
+		return "OLECMDID_UPDATE_CARET"
+	case OLECMDID_ENABLE_VISIBILITY:
+		return "OLECMDID_ENABLE_VISIBILITY"
+	case OLECMDID_MEDIA_PLAYBACK:
+		return "OLECMDID_MEDIA_PLAYBACK"
+	case OLECMDID_SETFAVICON:
+		return "OLECMDID_SETFAVICON"
+	case OLECMDID_SET_HOST_FULLSCREENMODE:
+		return "OLECMDID_SET_HOST_FULLSCREENMODE"
+	case OLECMDID_EXITFULLSCREEN:
+		return "OLECMDID_EXITFULLSCREEN"
+	case OLECMDID_SCROLLCOMPLETE:
+		return "OLECMDID_SCROLLCOMPLETE"
+	case OLECMDID_ONBEFOREUNLOAD:
+		return "OLECMDID_ONBEFOREUNLOAD"
+	case OLECMDID_SHOWMESSAGE_BLOCKABLE:
+		return "OLECMDID_SHOWMESSAGE_BLOCKABLE"
+	case OLECMDID_SHOWTASKDLG_BLOCKABLE:
+		return "OLECMDID_SHOWTASKDLG_BLOCKABLE"
+	default:
+		return fmt.Sprintf("OLECMDID(%d)", int32(e))
+	}
+}
+
 type OLECMDID_BROWSERSTATEFLAG int32
 
 const (
@@ -452,6 +1363,29 @@ const (
 	OLECMDIDF_BROWSERSTATE_BLOCKEDVERSION    OLECMDID_BROWSERSTATEFLAG = 64
 )
 
+// String returns the OLECMDID_BROWSERSTATEFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECMDID_BROWSERSTATEFLAG) String() string {
+	switch e {
+	case OLECMDIDF_BROWSERSTATE_EXTENSIONSOFF:
+		return "OLECMDIDF_BROWSERSTATE_EXTENSIONSOFF"
+	case OLECMDIDF_BROWSERSTATE_IESECURITY:
+		return "OLECMDIDF_BROWSERSTATE_IESECURITY"
+	case OLECMDIDF_BROWSERSTATE_PROTECTEDMODE_OFF:
+		return "OLECMDIDF_BROWSERSTATE_PROTECTEDMODE_OFF"
+	case OLECMDIDF_BROWSERSTATE_RESET:
+		return "OLECMDIDF_BROWSERSTATE_RESET"
+	case OLECMDIDF_BROWSERSTATE_REQUIRESACTIVEX:
+		return "OLECMDIDF_BROWSERSTATE_REQUIRESACTIVEX"
+	case OLECMDIDF_BROWSERSTATE_DESKTOPHTMLDIALOG:
+		return "OLECMDIDF_BROWSERSTATE_DESKTOPHTMLDIALOG"
+	case OLECMDIDF_BROWSERSTATE_BLOCKEDVERSION:
+		return "OLECMDIDF_BROWSERSTATE_BLOCKEDVERSION"
+	default:
+		return fmt.Sprintf("OLECMDID_BROWSERSTATEFLAG(%d)", int32(e))
+	}
+}
+
 type OLECMDID_OPTICAL_ZOOMFLAG int32
 
 const (
@@ -460,6 +1394,23 @@ const (
 	OLECMDIDF_OPTICAL_ZOOM_NOTRANSIENT     OLECMDID_OPTICAL_ZOOMFLAG = 32
 	OLECMDIDF_OPTICAL_ZOOM_RELOADFORNEWTAB OLECMDID_OPTICAL_ZOOMFLAG = 64
 )
+
+// String returns the OLECMDID_OPTICAL_ZOOMFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECMDID_OPTICAL_ZOOMFLAG) String() string {
+	switch e {
+	case OLECMDIDF_OPTICAL_ZOOM_NOPERSIST:
+		return "OLECMDIDF_OPTICAL_ZOOM_NOPERSIST"
+	case OLECMDIDF_OPTICAL_ZOOM_NOLAYOUT:
+		return "OLECMDIDF_OPTICAL_ZOOM_NOLAYOUT"
+	case OLECMDIDF_OPTICAL_ZOOM_NOTRANSIENT:
+		return "OLECMDIDF_OPTICAL_ZOOM_NOTRANSIENT"
+	case OLECMDIDF_OPTICAL_ZOOM_RELOADFORNEWTAB:
+		return "OLECMDIDF_OPTICAL_ZOOM_RELOADFORNEWTAB"
+	default:
+		return fmt.Sprintf("OLECMDID_OPTICAL_ZOOMFLAG(%d)", int32(e))
+	}
+}
 
 type OLECMDID_PAGEACTIONFLAG int32
 
@@ -499,6 +1450,79 @@ const (
 	OLECMDIDF_PAGEACTION_RESET                              OLECMDID_PAGEACTIONFLAG = -2147483648
 )
 
+// String returns the OLECMDID_PAGEACTIONFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECMDID_PAGEACTIONFLAG) String() string {
+	switch e {
+	case OLECMDIDF_PAGEACTION_FILEDOWNLOAD:
+		return "OLECMDIDF_PAGEACTION_FILEDOWNLOAD"
+	case OLECMDIDF_PAGEACTION_ACTIVEXINSTALL:
+		return "OLECMDIDF_PAGEACTION_ACTIVEXINSTALL"
+	case OLECMDIDF_PAGEACTION_ACTIVEXTRUSTFAIL:
+		return "OLECMDIDF_PAGEACTION_ACTIVEXTRUSTFAIL"
+	case OLECMDIDF_PAGEACTION_ACTIVEXUSERDISABLE:
+		return "OLECMDIDF_PAGEACTION_ACTIVEXUSERDISABLE"
+	case OLECMDIDF_PAGEACTION_ACTIVEXDISALLOW:
+		return "OLECMDIDF_PAGEACTION_ACTIVEXDISALLOW"
+	case OLECMDIDF_PAGEACTION_ACTIVEXUNSAFE:
+		return "OLECMDIDF_PAGEACTION_ACTIVEXUNSAFE"
+	case OLECMDIDF_PAGEACTION_POPUPWINDOW:
+		return "OLECMDIDF_PAGEACTION_POPUPWINDOW"
+	case OLECMDIDF_PAGEACTION_LOCALMACHINE:
+		return "OLECMDIDF_PAGEACTION_LOCALMACHINE"
+	case OLECMDIDF_PAGEACTION_MIMETEXTPLAIN:
+		return "OLECMDIDF_PAGEACTION_MIMETEXTPLAIN"
+	case OLECMDIDF_PAGEACTION_SCRIPTNAVIGATE:
+		return "OLECMDIDF_PAGEACTION_SCRIPTNAVIGATE"
+	case OLECMDIDF_PAGEACTION_PROTLOCKDOWNLOCALMACHINE:
+		return "OLECMDIDF_PAGEACTION_PROTLOCKDOWNLOCALMACHINE"
+	case OLECMDIDF_PAGEACTION_PROTLOCKDOWNTRUSTED:
+		return "OLECMDIDF_PAGEACTION_PROTLOCKDOWNTRUSTED"
+	case OLECMDIDF_PAGEACTION_PROTLOCKDOWNINTRANET:
+		return "OLECMDIDF_PAGEACTION_PROTLOCKDOWNINTRANET"
+	case OLECMDIDF_PAGEACTION_PROTLOCKDOWNINTERNET:
+		return "OLECMDIDF_PAGEACTION_PROTLOCKDOWNINTERNET"
+	case OLECMDIDF_PAGEACTION_PROTLOCKDOWNRESTRICTED:
+		return "OLECMDIDF_PAGEACTION_PROTLOCKDOWNRESTRICTED"
+	case OLECMDIDF_PAGEACTION_PROTLOCKDOWNDENY:
+		return "OLECMDIDF_PAGEACTION_PROTLOCKDOWNDENY"
+	case OLECMDIDF_PAGEACTION_POPUPALLOWED:
+		return "OLECMDIDF_PAGEACTION_POPUPALLOWED"
+	case OLECMDIDF_PAGEACTION_SCRIPTPROMPT:
+		return "OLECMDIDF_PAGEACTION_SCRIPTPROMPT"
+	case OLECMDIDF_PAGEACTION_ACTIVEXUSERAPPROVAL:
+		return "OLECMDIDF_PAGEACTION_ACTIVEXUSERAPPROVAL"
+	case OLECMDIDF_PAGEACTION_MIXEDCONTENT:
+		return "OLECMDIDF_PAGEACTION_MIXEDCONTENT"
+	case OLECMDIDF_PAGEACTION_INVALID_CERT:
+		return "OLECMDIDF_PAGEACTION_INVALID_CERT"
+	case OLECMDIDF_PAGEACTION_INTRANETZONEREQUEST:
+		return "OLECMDIDF_PAGEACTION_INTRANETZONEREQUEST"
+	case OLECMDIDF_PAGEACTION_XSSFILTERED:
+		return "OLECMDIDF_PAGEACTION_XSSFILTERED"
+	case OLECMDIDF_PAGEACTION_SPOOFABLEIDNHOST:
+		return "OLECMDIDF_PAGEACTION_SPOOFABLEIDNHOST"
+	case OLECMDIDF_PAGEACTION_ACTIVEX_EPM_INCOMPATIBLE:
+		return "OLECMDIDF_PAGEACTION_ACTIVEX_EPM_INCOMPATIBLE"
+	case OLECMDIDF_PAGEACTION_SCRIPTNAVIGATE_ACTIVEXUSERAPPROVAL:
+		return "OLECMDIDF_PAGEACTION_SCRIPTNAVIGATE_ACTIVEXUSERAPPROVAL"
+	case OLECMDIDF_PAGEACTION_WPCBLOCKED:
+		return "OLECMDIDF_PAGEACTION_WPCBLOCKED"
+	case OLECMDIDF_PAGEACTION_WPCBLOCKED_ACTIVEX:
+		return "OLECMDIDF_PAGEACTION_WPCBLOCKED_ACTIVEX"
+	case OLECMDIDF_PAGEACTION_EXTENSION_COMPAT_BLOCKED:
+		return "OLECMDIDF_PAGEACTION_EXTENSION_COMPAT_BLOCKED"
+	case OLECMDIDF_PAGEACTION_NORESETACTIVEX:
+		return "OLECMDIDF_PAGEACTION_NORESETACTIVEX"
+	case OLECMDIDF_PAGEACTION_GENERIC_STATE:
+		return "OLECMDIDF_PAGEACTION_GENERIC_STATE"
+	case OLECMDIDF_PAGEACTION_RESET:
+		return "OLECMDIDF_PAGEACTION_RESET"
+	default:
+		return fmt.Sprintf("OLECMDID_PAGEACTIONFLAG(%d)", int32(e))
+	}
+}
+
 type OLECMDID_REFRESHFLAG int32
 
 const (
@@ -527,6 +1551,61 @@ const (
 	OLECMDIDF_REFRESH_PAGEACTION_ALLOW_VERSION            OLECMDID_REFRESHFLAG = 134217728
 )
 
+// String returns the OLECMDID_REFRESHFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECMDID_REFRESHFLAG) String() string {
+	switch e {
+	case OLECMDIDF_REFRESH_NORMAL:
+		return "OLECMDIDF_REFRESH_NORMAL"
+	case OLECMDIDF_REFRESH_IFEXPIRED:
+		return "OLECMDIDF_REFRESH_IFEXPIRED"
+	case OLECMDIDF_REFRESH_CONTINUE:
+		return "OLECMDIDF_REFRESH_CONTINUE"
+	case OLECMDIDF_REFRESH_COMPLETELY:
+		return "OLECMDIDF_REFRESH_COMPLETELY"
+	case OLECMDIDF_REFRESH_NO_CACHE:
+		return "OLECMDIDF_REFRESH_NO_CACHE"
+	case OLECMDIDF_REFRESH_RELOAD:
+		return "OLECMDIDF_REFRESH_RELOAD"
+	case OLECMDIDF_REFRESH_LEVELMASK:
+		return "OLECMDIDF_REFRESH_LEVELMASK"
+	case OLECMDIDF_REFRESH_CLEARUSERINPUT:
+		return "OLECMDIDF_REFRESH_CLEARUSERINPUT"
+	case OLECMDIDF_REFRESH_PROMPTIFOFFLINE:
+		return "OLECMDIDF_REFRESH_PROMPTIFOFFLINE"
+	case OLECMDIDF_REFRESH_THROUGHSCRIPT:
+		return "OLECMDIDF_REFRESH_THROUGHSCRIPT"
+	case OLECMDIDF_REFRESH_SKIPBEFOREUNLOADEVENT:
+		return "OLECMDIDF_REFRESH_SKIPBEFOREUNLOADEVENT"
+	case OLECMDIDF_REFRESH_PAGEACTION_ACTIVEXINSTALL:
+		return "OLECMDIDF_REFRESH_PAGEACTION_ACTIVEXINSTALL"
+	case OLECMDIDF_REFRESH_PAGEACTION_FILEDOWNLOAD:
+		return "OLECMDIDF_REFRESH_PAGEACTION_FILEDOWNLOAD"
+	case OLECMDIDF_REFRESH_PAGEACTION_LOCALMACHINE:
+		return "OLECMDIDF_REFRESH_PAGEACTION_LOCALMACHINE"
+	case OLECMDIDF_REFRESH_PAGEACTION_POPUPWINDOW:
+		return "OLECMDIDF_REFRESH_PAGEACTION_POPUPWINDOW"
+	case OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNLOCALMACHINE:
+		return "OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNLOCALMACHINE"
+	case OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNTRUSTED:
+		return "OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNTRUSTED"
+	case OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNINTRANET:
+		return "OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNINTRANET"
+	case OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNINTERNET:
+		return "OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNINTERNET"
+	case OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNRESTRICTED:
+		return "OLECMDIDF_REFRESH_PAGEACTION_PROTLOCKDOWNRESTRICTED"
+	case OLECMDIDF_REFRESH_PAGEACTION_MIXEDCONTENT:
+		return "OLECMDIDF_REFRESH_PAGEACTION_MIXEDCONTENT"
+	case OLECMDIDF_REFRESH_PAGEACTION_INVALID_CERT:
+		return "OLECMDIDF_REFRESH_PAGEACTION_INVALID_CERT"
+	case OLECMDIDF_REFRESH_PAGEACTION_ALLOW_VERSION:
+		return "OLECMDIDF_REFRESH_PAGEACTION_ALLOW_VERSION"
+	default:
+		return fmt.Sprintf("OLECMDID_REFRESHFLAG(%d)", int32(e))
+	}
+}
+
 type OLECMDID_VIEWPORT_MODE_FLAG int32
 
 const (
@@ -535,6 +1614,23 @@ const (
 	OLECMDIDF_VIEWPORTMODE_FIXED_LAYOUT_WIDTH_VALID    OLECMDID_VIEWPORT_MODE_FLAG = 65536
 	OLECMDIDF_VIEWPORTMODE_EXCLUDE_VISUAL_BOTTOM_VALID OLECMDID_VIEWPORT_MODE_FLAG = 131072
 )
+
+// String returns the OLECMDID_VIEWPORT_MODE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECMDID_VIEWPORT_MODE_FLAG) String() string {
+	switch e {
+	case OLECMDIDF_VIEWPORTMODE_FIXED_LAYOUT_WIDTH:
+		return "OLECMDIDF_VIEWPORTMODE_FIXED_LAYOUT_WIDTH"
+	case OLECMDIDF_VIEWPORTMODE_EXCLUDE_VISUAL_BOTTOM:
+		return "OLECMDIDF_VIEWPORTMODE_EXCLUDE_VISUAL_BOTTOM"
+	case OLECMDIDF_VIEWPORTMODE_FIXED_LAYOUT_WIDTH_VALID:
+		return "OLECMDIDF_VIEWPORTMODE_FIXED_LAYOUT_WIDTH_VALID"
+	case OLECMDIDF_VIEWPORTMODE_EXCLUDE_VISUAL_BOTTOM_VALID:
+		return "OLECMDIDF_VIEWPORTMODE_EXCLUDE_VISUAL_BOTTOM_VALID"
+	default:
+		return fmt.Sprintf("OLECMDID_VIEWPORT_MODE_FLAG(%d)", int32(e))
+	}
+}
 
 // OLECMDID_WINDOWSTATE_FLAG: https://learn.microsoft.com/windows/win32/api/docobj/ne-docobj-olecmdid_windowstate_flag
 type OLECMDID_WINDOWSTATE_FLAG int32
@@ -546,6 +1642,23 @@ const (
 	OLECMDIDF_WINDOWSTATE_ENABLED_VALID     OLECMDID_WINDOWSTATE_FLAG = 131072
 )
 
+// String returns the OLECMDID_WINDOWSTATE_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECMDID_WINDOWSTATE_FLAG) String() string {
+	switch e {
+	case OLECMDIDF_WINDOWSTATE_USERVISIBLE:
+		return "OLECMDIDF_WINDOWSTATE_USERVISIBLE"
+	case OLECMDIDF_WINDOWSTATE_ENABLED:
+		return "OLECMDIDF_WINDOWSTATE_ENABLED"
+	case OLECMDIDF_WINDOWSTATE_USERVISIBLE_VALID:
+		return "OLECMDIDF_WINDOWSTATE_USERVISIBLE_VALID"
+	case OLECMDIDF_WINDOWSTATE_ENABLED_VALID:
+		return "OLECMDIDF_WINDOWSTATE_ENABLED_VALID"
+	default:
+		return fmt.Sprintf("OLECMDID_WINDOWSTATE_FLAG(%d)", int32(e))
+	}
+}
+
 // OLECMDTEXTF: https://learn.microsoft.com/windows/win32/api/docobj/ne-docobj-olecmdtextf
 type OLECMDTEXTF int32
 
@@ -554,6 +1667,21 @@ const (
 	OLECMDTEXTF_NAME   OLECMDTEXTF = 1
 	OLECMDTEXTF_STATUS OLECMDTEXTF = 2
 )
+
+// String returns the OLECMDTEXTF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECMDTEXTF) String() string {
+	switch e {
+	case OLECMDTEXTF_NONE:
+		return "OLECMDTEXTF_NONE"
+	case OLECMDTEXTF_NAME:
+		return "OLECMDTEXTF_NAME"
+	case OLECMDTEXTF_STATUS:
+		return "OLECMDTEXTF_STATUS"
+	default:
+		return fmt.Sprintf("OLECMDTEXTF(%d)", int32(e))
+	}
+}
 
 // OLECONTF: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-olecontf
 type OLECONTF int32
@@ -566,12 +1694,44 @@ const (
 	OLECONTF_ONLYIFRUNNING OLECONTF = 16
 )
 
+// String returns the OLECONTF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECONTF) String() string {
+	switch e {
+	case OLECONTF_EMBEDDINGS:
+		return "OLECONTF_EMBEDDINGS"
+	case OLECONTF_LINKS:
+		return "OLECONTF_LINKS"
+	case OLECONTF_OTHERS:
+		return "OLECONTF_OTHERS"
+	case OLECONTF_ONLYUSER:
+		return "OLECONTF_ONLYUSER"
+	case OLECONTF_ONLYIFRUNNING:
+		return "OLECONTF_ONLYIFRUNNING"
+	default:
+		return fmt.Sprintf("OLECONTF(%d)", int32(e))
+	}
+}
+
 type OLECREATE uint32
 
 const (
 	OLECREATE_ZERO         OLECREATE = 0
 	OLECREATE_LEAVERUNNING OLECREATE = 1
 )
+
+// String returns the OLECREATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLECREATE) String() string {
+	switch e {
+	case OLECREATE_ZERO:
+		return "OLECREATE_ZERO"
+	case OLECREATE_LEAVERUNNING:
+		return "OLECREATE_LEAVERUNNING"
+	default:
+		return fmt.Sprintf("OLECREATE(%d)", uint32(e))
+	}
+}
 
 // OLEDCFLAGS: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-oledcflags
 type OLEDCFLAGS int32
@@ -582,6 +1742,21 @@ const (
 	OLEDC_OFFSCREEN  OLEDCFLAGS = 4
 )
 
+// String returns the OLEDCFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLEDCFLAGS) String() string {
+	switch e {
+	case OLEDC_NODRAW:
+		return "OLEDC_NODRAW"
+	case OLEDC_PAINTBKGND:
+		return "OLEDC_PAINTBKGND"
+	case OLEDC_OFFSCREEN:
+		return "OLEDC_OFFSCREEN"
+	default:
+		return fmt.Sprintf("OLEDCFLAGS(%d)", int32(e))
+	}
+}
+
 // OLEGETMONIKER: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-olegetmoniker
 type OLEGETMONIKER int32
 
@@ -591,6 +1766,23 @@ const (
 	OLEGETMONIKER_UNASSIGN    OLEGETMONIKER = 3
 	OLEGETMONIKER_TEMPFORUSER OLEGETMONIKER = 4
 )
+
+// String returns the OLEGETMONIKER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLEGETMONIKER) String() string {
+	switch e {
+	case OLEGETMONIKER_ONLYIFTHERE:
+		return "OLEGETMONIKER_ONLYIFTHERE"
+	case OLEGETMONIKER_FORCEASSIGN:
+		return "OLEGETMONIKER_FORCEASSIGN"
+	case OLEGETMONIKER_UNASSIGN:
+		return "OLEGETMONIKER_UNASSIGN"
+	case OLEGETMONIKER_TEMPFORUSER:
+		return "OLEGETMONIKER_TEMPFORUSER"
+	default:
+		return fmt.Sprintf("OLEGETMONIKER(%d)", int32(e))
+	}
+}
 
 type OLEIVERB int32
 
@@ -604,12 +1796,46 @@ const (
 	OLEIVERB_DISCARDUNDOSTATE OLEIVERB = -6
 )
 
+// String returns the OLEIVERB constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLEIVERB) String() string {
+	switch e {
+	case OLEIVERB_PRIMARY:
+		return "OLEIVERB_PRIMARY"
+	case OLEIVERB_SHOW:
+		return "OLEIVERB_SHOW"
+	case OLEIVERB_OPEN:
+		return "OLEIVERB_OPEN"
+	case OLEIVERB_HIDE:
+		return "OLEIVERB_HIDE"
+	case OLEIVERB_UIACTIVATE:
+		return "OLEIVERB_UIACTIVATE"
+	case OLEIVERB_INPLACEACTIVATE:
+		return "OLEIVERB_INPLACEACTIVATE"
+	case OLEIVERB_DISCARDUNDOSTATE:
+		return "OLEIVERB_DISCARDUNDOSTATE"
+	default:
+		return fmt.Sprintf("OLEIVERB(%d)", int32(e))
+	}
+}
+
 // OLELINKBIND: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-olelinkbind
 type OLELINKBIND int32
 
 const (
 	OLELINKBIND_EVENIFCLASSDIFF OLELINKBIND = 1
 )
+
+// String returns the OLELINKBIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLELINKBIND) String() string {
+	switch e {
+	case OLELINKBIND_EVENIFCLASSDIFF:
+		return "OLELINKBIND_EVENIFCLASSDIFF"
+	default:
+		return fmt.Sprintf("OLELINKBIND(%d)", int32(e))
+	}
+}
 
 // OLEMISC: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-olemisc
 type OLEMISC int32
@@ -639,6 +1865,59 @@ const (
 	OLEMISC_SUPPORTSMULTILEVELUNDO       OLEMISC = 2097152
 )
 
+// String returns the OLEMISC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLEMISC) String() string {
+	switch e {
+	case OLEMISC_RECOMPOSEONRESIZE:
+		return "OLEMISC_RECOMPOSEONRESIZE"
+	case OLEMISC_ONLYICONIC:
+		return "OLEMISC_ONLYICONIC"
+	case OLEMISC_INSERTNOTREPLACE:
+		return "OLEMISC_INSERTNOTREPLACE"
+	case OLEMISC_STATIC:
+		return "OLEMISC_STATIC"
+	case OLEMISC_CANTLINKINSIDE:
+		return "OLEMISC_CANTLINKINSIDE"
+	case OLEMISC_CANLINKBYOLE1:
+		return "OLEMISC_CANLINKBYOLE1"
+	case OLEMISC_ISLINKOBJECT:
+		return "OLEMISC_ISLINKOBJECT"
+	case OLEMISC_INSIDEOUT:
+		return "OLEMISC_INSIDEOUT"
+	case OLEMISC_ACTIVATEWHENVISIBLE:
+		return "OLEMISC_ACTIVATEWHENVISIBLE"
+	case OLEMISC_RENDERINGISDEVICEINDEPENDENT:
+		return "OLEMISC_RENDERINGISDEVICEINDEPENDENT"
+	case OLEMISC_INVISIBLEATRUNTIME:
+		return "OLEMISC_INVISIBLEATRUNTIME"
+	case OLEMISC_ALWAYSRUN:
+		return "OLEMISC_ALWAYSRUN"
+	case OLEMISC_ACTSLIKEBUTTON:
+		return "OLEMISC_ACTSLIKEBUTTON"
+	case OLEMISC_ACTSLIKELABEL:
+		return "OLEMISC_ACTSLIKELABEL"
+	case OLEMISC_NOUIACTIVATE:
+		return "OLEMISC_NOUIACTIVATE"
+	case OLEMISC_ALIGNABLE:
+		return "OLEMISC_ALIGNABLE"
+	case OLEMISC_SIMPLEFRAME:
+		return "OLEMISC_SIMPLEFRAME"
+	case OLEMISC_SETCLIENTSITEFIRST:
+		return "OLEMISC_SETCLIENTSITEFIRST"
+	case OLEMISC_IMEMODE:
+		return "OLEMISC_IMEMODE"
+	case OLEMISC_IGNOREACTIVATEWHENVISIBLE:
+		return "OLEMISC_IGNOREACTIVATEWHENVISIBLE"
+	case OLEMISC_WANTSTOMENUMERGE:
+		return "OLEMISC_WANTSTOMENUMERGE"
+	case OLEMISC_SUPPORTSMULTILEVELUNDO:
+		return "OLEMISC_SUPPORTSMULTILEVELUNDO"
+	default:
+		return fmt.Sprintf("OLEMISC(%d)", int32(e))
+	}
+}
+
 // OLERENDER: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-olerender
 type OLERENDER int32
 
@@ -648,6 +1927,23 @@ const (
 	OLERENDER_FORMAT OLERENDER = 2
 	OLERENDER_ASIS   OLERENDER = 3
 )
+
+// String returns the OLERENDER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLERENDER) String() string {
+	switch e {
+	case OLERENDER_NONE:
+		return "OLERENDER_NONE"
+	case OLERENDER_DRAW:
+		return "OLERENDER_DRAW"
+	case OLERENDER_FORMAT:
+		return "OLERENDER_FORMAT"
+	case OLERENDER_ASIS:
+		return "OLERENDER_ASIS"
+	default:
+		return fmt.Sprintf("OLERENDER(%d)", int32(e))
+	}
+}
 
 // OLEUIPASTEFLAG: https://learn.microsoft.com/windows/win32/api/oledlg/ne-oledlg-oleuipasteflag
 type OLEUIPASTEFLAG int32
@@ -667,6 +1963,39 @@ const (
 	OLEUIPASTE_LINKTYPE8   OLEUIPASTEFLAG = 128
 )
 
+// String returns the OLEUIPASTEFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLEUIPASTEFLAG) String() string {
+	switch e {
+	case OLEUIPASTE_ENABLEICON:
+		return "OLEUIPASTE_ENABLEICON"
+	case OLEUIPASTE_PASTEONLY:
+		return "OLEUIPASTE_PASTEONLY"
+	case OLEUIPASTE_PASTE:
+		return "OLEUIPASTE_PASTE"
+	case OLEUIPASTE_LINKANYTYPE:
+		return "OLEUIPASTE_LINKANYTYPE"
+	case OLEUIPASTE_LINKTYPE1:
+		return "OLEUIPASTE_LINKTYPE1"
+	case OLEUIPASTE_LINKTYPE2:
+		return "OLEUIPASTE_LINKTYPE2"
+	case OLEUIPASTE_LINKTYPE3:
+		return "OLEUIPASTE_LINKTYPE3"
+	case OLEUIPASTE_LINKTYPE4:
+		return "OLEUIPASTE_LINKTYPE4"
+	case OLEUIPASTE_LINKTYPE5:
+		return "OLEUIPASTE_LINKTYPE5"
+	case OLEUIPASTE_LINKTYPE6:
+		return "OLEUIPASTE_LINKTYPE6"
+	case OLEUIPASTE_LINKTYPE7:
+		return "OLEUIPASTE_LINKTYPE7"
+	case OLEUIPASTE_LINKTYPE8:
+		return "OLEUIPASTE_LINKTYPE8"
+	default:
+		return fmt.Sprintf("OLEUIPASTEFLAG(%d)", int32(e))
+	}
+}
+
 // OLEUPDATE: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-oleupdate
 type OLEUPDATE int32
 
@@ -675,6 +2004,19 @@ const (
 	OLEUPDATE_ONCALL OLEUPDATE = 3
 )
 
+// String returns the OLEUPDATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLEUPDATE) String() string {
+	switch e {
+	case OLEUPDATE_ALWAYS:
+		return "OLEUPDATE_ALWAYS"
+	case OLEUPDATE_ONCALL:
+		return "OLEUPDATE_ONCALL"
+	default:
+		return fmt.Sprintf("OLEUPDATE(%d)", int32(e))
+	}
+}
+
 // OLEVERBATTRIB: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-oleverbattrib
 type OLEVERBATTRIB int32
 
@@ -682,6 +2024,19 @@ const (
 	OLEVERBATTRIB_NEVERDIRTIES    OLEVERBATTRIB = 1
 	OLEVERBATTRIB_ONCONTAINERMENU OLEVERBATTRIB = 2
 )
+
+// String returns the OLEVERBATTRIB constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLEVERBATTRIB) String() string {
+	switch e {
+	case OLEVERBATTRIB_NEVERDIRTIES:
+		return "OLEVERBATTRIB_NEVERDIRTIES"
+	case OLEVERBATTRIB_ONCONTAINERMENU:
+		return "OLEVERBATTRIB_ONCONTAINERMENU"
+	default:
+		return fmt.Sprintf("OLEVERBATTRIB(%d)", int32(e))
+	}
+}
 
 // OLEWHICHMK: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-olewhichmk
 type OLEWHICHMK int32
@@ -692,6 +2047,21 @@ const (
 	OLEWHICHMK_OBJFULL   OLEWHICHMK = 3
 )
 
+// String returns the OLEWHICHMK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLEWHICHMK) String() string {
+	switch e {
+	case OLEWHICHMK_CONTAINER:
+		return "OLEWHICHMK_CONTAINER"
+	case OLEWHICHMK_OBJREL:
+		return "OLEWHICHMK_OBJREL"
+	case OLEWHICHMK_OBJFULL:
+		return "OLEWHICHMK_OBJFULL"
+	default:
+		return fmt.Sprintf("OLEWHICHMK(%d)", int32(e))
+	}
+}
+
 type OLE_TRISTATE int32
 
 const (
@@ -699,6 +2069,21 @@ const (
 	TriChecked   OLE_TRISTATE = 1
 	TriGray      OLE_TRISTATE = 2
 )
+
+// String returns the OLE_TRISTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OLE_TRISTATE) String() string {
+	switch e {
+	case TriUnchecked:
+		return "TriUnchecked"
+	case TriChecked:
+		return "TriChecked"
+	case TriGray:
+		return "TriGray"
+	default:
+		return fmt.Sprintf("OLE_TRISTATE(%d)", int32(e))
+	}
+}
 
 type PAGEACTION_UI int32
 
@@ -709,6 +2094,24 @@ const (
 	PAGEACTION_UI_SILENT   PAGEACTION_UI = 3
 )
 
+// String returns the PAGEACTION_UI constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAGEACTION_UI) String() string {
+	switch e {
+	case PAGEACTION_UI_DEFAULT:
+		return "PAGEACTION_UI_DEFAULT"
+	case PAGEACTION_UI_MODAL:
+		return "PAGEACTION_UI_MODAL"
+	case PAGEACTION_UI_MODELESS:
+		return "PAGEACTION_UI_MODELESS"
+	case PAGEACTION_UI_SILENT:
+		return "PAGEACTION_UI_SILENT"
+	default:
+		return fmt.Sprintf("PAGEACTION_UI(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PARAMFLAGS uint16
 
 const (
@@ -722,6 +2125,38 @@ const (
 	PARAMFLAG_FHASCUSTDATA PARAMFLAGS = 64
 )
 
+// String returns the PARAMFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PARAMFLAGS) String() string {
+	var parts []string
+	if e&PARAMFLAG_FIN != 0 {
+		parts = append(parts, "PARAMFLAG_FIN")
+	}
+	if e&PARAMFLAG_FOUT != 0 {
+		parts = append(parts, "PARAMFLAG_FOUT")
+	}
+	if e&PARAMFLAG_FLCID != 0 {
+		parts = append(parts, "PARAMFLAG_FLCID")
+	}
+	if e&PARAMFLAG_FRETVAL != 0 {
+		parts = append(parts, "PARAMFLAG_FRETVAL")
+	}
+	if e&PARAMFLAG_FOPT != 0 {
+		parts = append(parts, "PARAMFLAG_FOPT")
+	}
+	if e&PARAMFLAG_FHASDEFAULT != 0 {
+		parts = append(parts, "PARAMFLAG_FHASDEFAULT")
+	}
+	if e&PARAMFLAG_FHASCUSTDATA != 0 {
+		parts = append(parts, "PARAMFLAG_FHASCUSTDATA")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PASTE_SPECIAL_FLAGS uint32
 
 const (
@@ -735,6 +2170,40 @@ const (
 	PSF_NOREFRESHDATAOBJECT   PASTE_SPECIAL_FLAGS = 128
 )
 
+// String returns the PASTE_SPECIAL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PASTE_SPECIAL_FLAGS) String() string {
+	var parts []string
+	if e&PSF_SHOWHELP != 0 {
+		parts = append(parts, "PSF_SHOWHELP")
+	}
+	if e&PSF_SELECTPASTE != 0 {
+		parts = append(parts, "PSF_SELECTPASTE")
+	}
+	if e&PSF_SELECTPASTELINK != 0 {
+		parts = append(parts, "PSF_SELECTPASTELINK")
+	}
+	if e&PSF_CHECKDISPLAYASICON != 0 {
+		parts = append(parts, "PSF_CHECKDISPLAYASICON")
+	}
+	if e&PSF_DISABLEDISPLAYASICON != 0 {
+		parts = append(parts, "PSF_DISABLEDISPLAYASICON")
+	}
+	if e&PSF_HIDECHANGEICON != 0 {
+		parts = append(parts, "PSF_HIDECHANGEICON")
+	}
+	if e&PSF_STAYONCLIPBOARDCHANGE != 0 {
+		parts = append(parts, "PSF_STAYONCLIPBOARDCHANGE")
+	}
+	if e&PSF_NOREFRESHDATAOBJECT != 0 {
+		parts = append(parts, "PSF_NOREFRESHDATAOBJECT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // PICTUREATTRIBUTES: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-pictureattributes
 type PICTUREATTRIBUTES int32
 
@@ -742,6 +2211,19 @@ const (
 	PICTURE_SCALABLE    PICTUREATTRIBUTES = 1
 	PICTURE_TRANSPARENT PICTUREATTRIBUTES = 2
 )
+
+// String returns the PICTUREATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PICTUREATTRIBUTES) String() string {
+	switch e {
+	case PICTURE_SCALABLE:
+		return "PICTURE_SCALABLE"
+	case PICTURE_TRANSPARENT:
+		return "PICTURE_TRANSPARENT"
+	default:
+		return fmt.Sprintf("PICTUREATTRIBUTES(%d)", int32(e))
+	}
+}
 
 // PICTYPE: https://learn.microsoft.com/windows/win32/com/pictype-constants
 type PICTYPE int16
@@ -755,6 +2237,27 @@ const (
 	PICTYPE_ENHMETAFILE   PICTYPE = 4
 )
 
+// String returns the PICTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PICTYPE) String() string {
+	switch e {
+	case PICTYPE_UNINITIALIZED:
+		return "PICTYPE_UNINITIALIZED"
+	case PICTYPE_NONE:
+		return "PICTYPE_NONE"
+	case PICTYPE_BITMAP:
+		return "PICTYPE_BITMAP"
+	case PICTYPE_METAFILE:
+		return "PICTYPE_METAFILE"
+	case PICTYPE_ICON:
+		return "PICTYPE_ICON"
+	case PICTYPE_ENHMETAFILE:
+		return "PICTYPE_ENHMETAFILE"
+	default:
+		return fmt.Sprintf("PICTYPE(%d)", int16(e))
+	}
+}
+
 // POINTERINACTIVE: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-pointerinactive
 type POINTERINACTIVE int32
 
@@ -764,6 +2267,22 @@ const (
 	POINTERINACTIVE_ACTIVATEONDRAG    POINTERINACTIVE = 4
 )
 
+// String returns the POINTERINACTIVE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e POINTERINACTIVE) String() string {
+	switch e {
+	case POINTERINACTIVE_ACTIVATEONENTRY:
+		return "POINTERINACTIVE_ACTIVATEONENTRY"
+	case POINTERINACTIVE_DEACTIVATEONLEAVE:
+		return "POINTERINACTIVE_DEACTIVATEONLEAVE"
+	case POINTERINACTIVE_ACTIVATEONDRAG:
+		return "POINTERINACTIVE_ACTIVATEONDRAG"
+	default:
+		return fmt.Sprintf("POINTERINACTIVE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PRINTFLAG int32
 
 const (
@@ -775,6 +2294,37 @@ const (
 	PRINTFLAG_FORCEPROPERTIES      PRINTFLAG = 32
 	PRINTFLAG_PRINTTOFILE          PRINTFLAG = 64
 )
+
+// String returns the PRINTFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PRINTFLAG) String() string {
+	var parts []string
+	if e&PRINTFLAG_MAYBOTHERUSER != 0 {
+		parts = append(parts, "PRINTFLAG_MAYBOTHERUSER")
+	}
+	if e&PRINTFLAG_PROMPTUSER != 0 {
+		parts = append(parts, "PRINTFLAG_PROMPTUSER")
+	}
+	if e&PRINTFLAG_USERMAYCHANGEPRINTER != 0 {
+		parts = append(parts, "PRINTFLAG_USERMAYCHANGEPRINTER")
+	}
+	if e&PRINTFLAG_RECOMPOSETODEVICE != 0 {
+		parts = append(parts, "PRINTFLAG_RECOMPOSETODEVICE")
+	}
+	if e&PRINTFLAG_DONTACTUALLYPRINT != 0 {
+		parts = append(parts, "PRINTFLAG_DONTACTUALLYPRINT")
+	}
+	if e&PRINTFLAG_FORCEPROPERTIES != 0 {
+		parts = append(parts, "PRINTFLAG_FORCEPROPERTIES")
+	}
+	if e&PRINTFLAG_PRINTTOFILE != 0 {
+		parts = append(parts, "PRINTFLAG_PRINTTOFILE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type PROPBAG2_TYPE int32
 
@@ -788,6 +2338,29 @@ const (
 	PROPBAG2_TYPE_MONIKER   PROPBAG2_TYPE = 6
 )
 
+// String returns the PROPBAG2_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPBAG2_TYPE) String() string {
+	switch e {
+	case PROPBAG2_TYPE_UNDEFINED:
+		return "PROPBAG2_TYPE_UNDEFINED"
+	case PROPBAG2_TYPE_DATA:
+		return "PROPBAG2_TYPE_DATA"
+	case PROPBAG2_TYPE_URL:
+		return "PROPBAG2_TYPE_URL"
+	case PROPBAG2_TYPE_OBJECT:
+		return "PROPBAG2_TYPE_OBJECT"
+	case PROPBAG2_TYPE_STREAM:
+		return "PROPBAG2_TYPE_STREAM"
+	case PROPBAG2_TYPE_STORAGE:
+		return "PROPBAG2_TYPE_STORAGE"
+	case PROPBAG2_TYPE_MONIKER:
+		return "PROPBAG2_TYPE_MONIKER"
+	default:
+		return fmt.Sprintf("PROPBAG2_TYPE(%d)", int32(e))
+	}
+}
+
 type PROPPAGESTATUS int32
 
 const (
@@ -795,6 +2368,21 @@ const (
 	PROPPAGESTATUS_VALIDATE PROPPAGESTATUS = 2
 	PROPPAGESTATUS_CLEAN    PROPPAGESTATUS = 4
 )
+
+// String returns the PROPPAGESTATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPPAGESTATUS) String() string {
+	switch e {
+	case PROPPAGESTATUS_DIRTY:
+		return "PROPPAGESTATUS_DIRTY"
+	case PROPPAGESTATUS_VALIDATE:
+		return "PROPPAGESTATUS_VALIDATE"
+	case PROPPAGESTATUS_CLEAN:
+		return "PROPPAGESTATUS_CLEAN"
+	default:
+		return fmt.Sprintf("PROPPAGESTATUS(%d)", int32(e))
+	}
+}
 
 // QACONTAINERFLAGS: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-qacontainerflags
 type QACONTAINERFLAGS int32
@@ -810,6 +2398,31 @@ const (
 	QACONTAINER_SUPPORTSMNEMONICS QACONTAINERFLAGS = 128
 )
 
+// String returns the QACONTAINERFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QACONTAINERFLAGS) String() string {
+	switch e {
+	case QACONTAINER_SHOWHATCHING:
+		return "QACONTAINER_SHOWHATCHING"
+	case QACONTAINER_SHOWGRABHANDLES:
+		return "QACONTAINER_SHOWGRABHANDLES"
+	case QACONTAINER_USERMODE:
+		return "QACONTAINER_USERMODE"
+	case QACONTAINER_DISPLAYASDEFAULT:
+		return "QACONTAINER_DISPLAYASDEFAULT"
+	case QACONTAINER_UIDEAD:
+		return "QACONTAINER_UIDEAD"
+	case QACONTAINER_AUTOCLIP:
+		return "QACONTAINER_AUTOCLIP"
+	case QACONTAINER_MESSAGEREFLECT:
+		return "QACONTAINER_MESSAGEREFLECT"
+	case QACONTAINER_SUPPORTSMNEMONICS:
+		return "QACONTAINER_SUPPORTSMNEMONICS"
+	default:
+		return fmt.Sprintf("QACONTAINERFLAGS(%d)", int32(e))
+	}
+}
+
 // READYSTATE: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-readystate
 type READYSTATE int32
 
@@ -821,6 +2434,25 @@ const (
 	READYSTATE_COMPLETE      READYSTATE = 4
 )
 
+// String returns the READYSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e READYSTATE) String() string {
+	switch e {
+	case READYSTATE_UNINITIALIZED:
+		return "READYSTATE_UNINITIALIZED"
+	case READYSTATE_LOADING:
+		return "READYSTATE_LOADING"
+	case READYSTATE_LOADED:
+		return "READYSTATE_LOADED"
+	case READYSTATE_INTERACTIVE:
+		return "READYSTATE_INTERACTIVE"
+	case READYSTATE_COMPLETE:
+		return "READYSTATE_COMPLETE"
+	default:
+		return fmt.Sprintf("READYSTATE(%d)", int32(e))
+	}
+}
+
 // REGKIND: https://learn.microsoft.com/windows/win32/api/oleauto/ne-oleauto-regkind
 type REGKIND int32
 
@@ -829,6 +2461,21 @@ const (
 	REGKIND_REGISTER REGKIND = 1
 	REGKIND_NONE     REGKIND = 2
 )
+
+// String returns the REGKIND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REGKIND) String() string {
+	switch e {
+	case REGKIND_DEFAULT:
+		return "REGKIND_DEFAULT"
+	case REGKIND_REGISTER:
+		return "REGKIND_REGISTER"
+	case REGKIND_NONE:
+		return "REGKIND_NONE"
+	default:
+		return fmt.Sprintf("REGKIND(%d)", int32(e))
+	}
+}
 
 type SF_TYPE int32
 
@@ -845,6 +2492,37 @@ const (
 	SF_RECORD   SF_TYPE = 36
 	SF_HAVEIID  SF_TYPE = 32781
 )
+
+// String returns the SF_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SF_TYPE) String() string {
+	switch e {
+	case SF_ERROR:
+		return "SF_ERROR"
+	case SF_I1:
+		return "SF_I1"
+	case SF_I2:
+		return "SF_I2"
+	case SF_I4:
+		return "SF_I4"
+	case SF_I8:
+		return "SF_I8"
+	case SF_BSTR:
+		return "SF_BSTR"
+	case SF_UNKNOWN:
+		return "SF_UNKNOWN"
+	case SF_DISPATCH:
+		return "SF_DISPATCH"
+	case SF_VARIANT:
+		return "SF_VARIANT"
+	case SF_RECORD:
+		return "SF_RECORD"
+	case SF_HAVEIID:
+		return "SF_HAVEIID"
+	default:
+		return fmt.Sprintf("SF_TYPE(%d)", int32(e))
+	}
+}
 
 // TYPEFLAGS: https://learn.microsoft.com/windows/win32/api/oaidl/ne-oaidl-typeflags
 type TYPEFLAGS int32
@@ -867,6 +2545,45 @@ const (
 	TYPEFLAG_FPROXY         TYPEFLAGS = 16384
 )
 
+// String returns the TYPEFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TYPEFLAGS) String() string {
+	switch e {
+	case TYPEFLAG_FAPPOBJECT:
+		return "TYPEFLAG_FAPPOBJECT"
+	case TYPEFLAG_FCANCREATE:
+		return "TYPEFLAG_FCANCREATE"
+	case TYPEFLAG_FLICENSED:
+		return "TYPEFLAG_FLICENSED"
+	case TYPEFLAG_FPREDECLID:
+		return "TYPEFLAG_FPREDECLID"
+	case TYPEFLAG_FHIDDEN:
+		return "TYPEFLAG_FHIDDEN"
+	case TYPEFLAG_FCONTROL:
+		return "TYPEFLAG_FCONTROL"
+	case TYPEFLAG_FDUAL:
+		return "TYPEFLAG_FDUAL"
+	case TYPEFLAG_FNONEXTENSIBLE:
+		return "TYPEFLAG_FNONEXTENSIBLE"
+	case TYPEFLAG_FOLEAUTOMATION:
+		return "TYPEFLAG_FOLEAUTOMATION"
+	case TYPEFLAG_FRESTRICTED:
+		return "TYPEFLAG_FRESTRICTED"
+	case TYPEFLAG_FAGGREGATABLE:
+		return "TYPEFLAG_FAGGREGATABLE"
+	case TYPEFLAG_FREPLACEABLE:
+		return "TYPEFLAG_FREPLACEABLE"
+	case TYPEFLAG_FDISPATCHABLE:
+		return "TYPEFLAG_FDISPATCHABLE"
+	case TYPEFLAG_FREVERSEBIND:
+		return "TYPEFLAG_FREVERSEBIND"
+	case TYPEFLAG_FPROXY:
+		return "TYPEFLAG_FPROXY"
+	default:
+		return fmt.Sprintf("TYPEFLAGS(%d)", int32(e))
+	}
+}
+
 // UASFLAGS: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-uasflags
 type UASFLAGS int32
 
@@ -877,6 +2594,24 @@ const (
 	UAS_MASK           UASFLAGS = 3
 )
 
+// String returns the UASFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UASFLAGS) String() string {
+	switch e {
+	case UAS_NORMAL:
+		return "UAS_NORMAL"
+	case UAS_BLOCKED:
+		return "UAS_BLOCKED"
+	case UAS_NOPARENTENABLE:
+		return "UAS_NOPARENTENABLE"
+	case UAS_MASK:
+		return "UAS_MASK"
+	default:
+		return fmt.Sprintf("UASFLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type UI_CONVERT_FLAGS uint32
 
 const (
@@ -891,6 +2626,44 @@ const (
 	CF_CONVERTONLY          UI_CONVERT_FLAGS = 256
 )
 
+// String returns the UI_CONVERT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UI_CONVERT_FLAGS) String() string {
+	var parts []string
+	if e&CF_SHOWHELPBUTTON != 0 {
+		parts = append(parts, "CF_SHOWHELPBUTTON")
+	}
+	if e&CF_SETCONVERTDEFAULT != 0 {
+		parts = append(parts, "CF_SETCONVERTDEFAULT")
+	}
+	if e&CF_SETACTIVATEDEFAULT != 0 {
+		parts = append(parts, "CF_SETACTIVATEDEFAULT")
+	}
+	if e&CF_SELECTCONVERTTO != 0 {
+		parts = append(parts, "CF_SELECTCONVERTTO")
+	}
+	if e&CF_SELECTACTIVATEAS != 0 {
+		parts = append(parts, "CF_SELECTACTIVATEAS")
+	}
+	if e&CF_DISABLEDISPLAYASICON != 0 {
+		parts = append(parts, "CF_DISABLEDISPLAYASICON")
+	}
+	if e&CF_DISABLEACTIVATEAS != 0 {
+		parts = append(parts, "CF_DISABLEACTIVATEAS")
+	}
+	if e&CF_HIDECHANGEICON != 0 {
+		parts = append(parts, "CF_HIDECHANGEICON")
+	}
+	if e&CF_CONVERTONLY != 0 {
+		parts = append(parts, "CF_CONVERTONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type UPDFCACHE_FLAGS uint32
 
 const (
@@ -905,6 +2678,43 @@ const (
 	UPDFCACHE_IFBLANKORONSAVECACHE UPDFCACHE_FLAGS = 18
 )
 
+// String returns the UPDFCACHE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UPDFCACHE_FLAGS) String() string {
+	var parts []string
+	if e&UPDFCACHE_ALL != 0 {
+		parts = append(parts, "UPDFCACHE_ALL")
+	}
+	if e&UPDFCACHE_ALLBUTNODATACACHE != 0 {
+		parts = append(parts, "UPDFCACHE_ALLBUTNODATACACHE")
+	}
+	if e&UPDFCACHE_NORMALCACHE != 0 {
+		parts = append(parts, "UPDFCACHE_NORMALCACHE")
+	}
+	if e&UPDFCACHE_IFBLANK != 0 {
+		parts = append(parts, "UPDFCACHE_IFBLANK")
+	}
+	if e&UPDFCACHE_ONLYIFBLANK != 0 {
+		parts = append(parts, "UPDFCACHE_ONLYIFBLANK")
+	}
+	if e&UPDFCACHE_NODATACACHE != 0 {
+		parts = append(parts, "UPDFCACHE_NODATACACHE")
+	}
+	if e&UPDFCACHE_ONSAVECACHE != 0 {
+		parts = append(parts, "UPDFCACHE_ONSAVECACHE")
+	}
+	if e&UPDFCACHE_ONSTOPCACHE != 0 {
+		parts = append(parts, "UPDFCACHE_ONSTOPCACHE")
+	}
+	if e&UPDFCACHE_IFBLANKORONSAVECACHE != 0 {
+		parts = append(parts, "UPDFCACHE_IFBLANKORONSAVECACHE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // USERCLASSTYPE: https://learn.microsoft.com/windows/win32/api/oleidl/ne-oleidl-userclasstype
 type USERCLASSTYPE int32
 
@@ -914,6 +2724,21 @@ const (
 	USERCLASSTYPE_APPNAME USERCLASSTYPE = 3
 )
 
+// String returns the USERCLASSTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e USERCLASSTYPE) String() string {
+	switch e {
+	case USERCLASSTYPE_FULL:
+		return "USERCLASSTYPE_FULL"
+	case USERCLASSTYPE_SHORT:
+		return "USERCLASSTYPE_SHORT"
+	case USERCLASSTYPE_APPNAME:
+		return "USERCLASSTYPE_APPNAME"
+	default:
+		return fmt.Sprintf("USERCLASSTYPE(%d)", int32(e))
+	}
+}
+
 type VARCMP uint32
 
 const (
@@ -922,6 +2747,23 @@ const (
 	VARCMP_GT   VARCMP = 2
 	VARCMP_NULL VARCMP = 3
 )
+
+// String returns the VARCMP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VARCMP) String() string {
+	switch e {
+	case VARCMP_LT:
+		return "VARCMP_LT"
+	case VARCMP_EQ:
+		return "VARCMP_EQ"
+	case VARCMP_GT:
+		return "VARCMP_GT"
+	case VARCMP_NULL:
+		return "VARCMP_NULL"
+	default:
+		return fmt.Sprintf("VARCMP(%d)", uint32(e))
+	}
+}
 
 type VARFORMAT_FIRST_DAY int32
 
@@ -936,6 +2778,31 @@ const (
 	VARFORMAT_FIRST_DAY_SUNDAY        VARFORMAT_FIRST_DAY = 7
 )
 
+// String returns the VARFORMAT_FIRST_DAY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VARFORMAT_FIRST_DAY) String() string {
+	switch e {
+	case VARFORMAT_FIRST_DAY_SYSTEMDEFAULT:
+		return "VARFORMAT_FIRST_DAY_SYSTEMDEFAULT"
+	case VARFORMAT_FIRST_DAY_MONDAY:
+		return "VARFORMAT_FIRST_DAY_MONDAY"
+	case VARFORMAT_FIRST_DAY_TUESDAY:
+		return "VARFORMAT_FIRST_DAY_TUESDAY"
+	case VARFORMAT_FIRST_DAY_WEDNESDAY:
+		return "VARFORMAT_FIRST_DAY_WEDNESDAY"
+	case VARFORMAT_FIRST_DAY_THURSDAY:
+		return "VARFORMAT_FIRST_DAY_THURSDAY"
+	case VARFORMAT_FIRST_DAY_FRIDAY:
+		return "VARFORMAT_FIRST_DAY_FRIDAY"
+	case VARFORMAT_FIRST_DAY_SATURDAY:
+		return "VARFORMAT_FIRST_DAY_SATURDAY"
+	case VARFORMAT_FIRST_DAY_SUNDAY:
+		return "VARFORMAT_FIRST_DAY_SUNDAY"
+	default:
+		return fmt.Sprintf("VARFORMAT_FIRST_DAY(%d)", int32(e))
+	}
+}
+
 type VARFORMAT_FIRST_WEEK int32
 
 const (
@@ -945,6 +2812,23 @@ const (
 	VARFORMAT_FIRST_WEEK_HAS_SEVEN_DAYS              VARFORMAT_FIRST_WEEK = 3
 )
 
+// String returns the VARFORMAT_FIRST_WEEK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VARFORMAT_FIRST_WEEK) String() string {
+	switch e {
+	case VARFORMAT_FIRST_WEEK_SYSTEMDEFAULT:
+		return "VARFORMAT_FIRST_WEEK_SYSTEMDEFAULT"
+	case VARFORMAT_FIRST_WEEK_CONTAINS_JANUARY_FIRST:
+		return "VARFORMAT_FIRST_WEEK_CONTAINS_JANUARY_FIRST"
+	case VARFORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR:
+		return "VARFORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR"
+	case VARFORMAT_FIRST_WEEK_HAS_SEVEN_DAYS:
+		return "VARFORMAT_FIRST_WEEK_HAS_SEVEN_DAYS"
+	default:
+		return fmt.Sprintf("VARFORMAT_FIRST_WEEK(%d)", int32(e))
+	}
+}
+
 type VARFORMAT_GROUP int32
 
 const (
@@ -953,6 +2837,21 @@ const (
 	VARFORMAT_GROUP_NOTTHOUSANDS  VARFORMAT_GROUP = 0
 )
 
+// String returns the VARFORMAT_GROUP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VARFORMAT_GROUP) String() string {
+	switch e {
+	case VARFORMAT_GROUP_SYSTEMDEFAULT:
+		return "VARFORMAT_GROUP_SYSTEMDEFAULT"
+	case VARFORMAT_GROUP_THOUSANDS:
+		return "VARFORMAT_GROUP_THOUSANDS"
+	case VARFORMAT_GROUP_NOTTHOUSANDS:
+		return "VARFORMAT_GROUP_NOTTHOUSANDS"
+	default:
+		return fmt.Sprintf("VARFORMAT_GROUP(%d)", int32(e))
+	}
+}
+
 type VARFORMAT_LEADING_DIGIT int32
 
 const (
@@ -960,6 +2859,21 @@ const (
 	VARFORMAT_LEADING_DIGIT_INCLUDED      VARFORMAT_LEADING_DIGIT = -1
 	VARFORMAT_LEADING_DIGIT_NOTINCLUDED   VARFORMAT_LEADING_DIGIT = 0
 )
+
+// String returns the VARFORMAT_LEADING_DIGIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VARFORMAT_LEADING_DIGIT) String() string {
+	switch e {
+	case VARFORMAT_LEADING_DIGIT_SYSTEMDEFAULT:
+		return "VARFORMAT_LEADING_DIGIT_SYSTEMDEFAULT"
+	case VARFORMAT_LEADING_DIGIT_INCLUDED:
+		return "VARFORMAT_LEADING_DIGIT_INCLUDED"
+	case VARFORMAT_LEADING_DIGIT_NOTINCLUDED:
+		return "VARFORMAT_LEADING_DIGIT_NOTINCLUDED"
+	default:
+		return fmt.Sprintf("VARFORMAT_LEADING_DIGIT(%d)", int32(e))
+	}
+}
 
 type VARFORMAT_NAMED_FORMAT int32
 
@@ -971,6 +2885,25 @@ const (
 	VARFORMAT_NAMED_FORMAT_SHORTTIME   VARFORMAT_NAMED_FORMAT = 4
 )
 
+// String returns the VARFORMAT_NAMED_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VARFORMAT_NAMED_FORMAT) String() string {
+	switch e {
+	case VARFORMAT_NAMED_FORMAT_GENERALDATE:
+		return "VARFORMAT_NAMED_FORMAT_GENERALDATE"
+	case VARFORMAT_NAMED_FORMAT_LONGDATE:
+		return "VARFORMAT_NAMED_FORMAT_LONGDATE"
+	case VARFORMAT_NAMED_FORMAT_SHORTDATE:
+		return "VARFORMAT_NAMED_FORMAT_SHORTDATE"
+	case VARFORMAT_NAMED_FORMAT_LONGTIME:
+		return "VARFORMAT_NAMED_FORMAT_LONGTIME"
+	case VARFORMAT_NAMED_FORMAT_SHORTTIME:
+		return "VARFORMAT_NAMED_FORMAT_SHORTTIME"
+	default:
+		return fmt.Sprintf("VARFORMAT_NAMED_FORMAT(%d)", int32(e))
+	}
+}
+
 type VARFORMAT_PARENTHESES int32
 
 const (
@@ -978,6 +2911,21 @@ const (
 	VARFORMAT_PARENTHESES_USED          VARFORMAT_PARENTHESES = -1
 	VARFORMAT_PARENTHESES_NOTUSED       VARFORMAT_PARENTHESES = 0
 )
+
+// String returns the VARFORMAT_PARENTHESES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VARFORMAT_PARENTHESES) String() string {
+	switch e {
+	case VARFORMAT_PARENTHESES_SYSTEMDEFAULT:
+		return "VARFORMAT_PARENTHESES_SYSTEMDEFAULT"
+	case VARFORMAT_PARENTHESES_USED:
+		return "VARFORMAT_PARENTHESES_USED"
+	case VARFORMAT_PARENTHESES_NOTUSED:
+		return "VARFORMAT_PARENTHESES_NOTUSED"
+	default:
+		return fmt.Sprintf("VARFORMAT_PARENTHESES(%d)", int32(e))
+	}
+}
 
 // VIEWSTATUS: https://learn.microsoft.com/windows/win32/api/ocidl/ne-ocidl-viewstatus
 type VIEWSTATUS int32
@@ -991,6 +2939,28 @@ const (
 	VIEWSTATUS_3DSURFACE           VIEWSTATUS = 32
 )
 
+// String returns the VIEWSTATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIEWSTATUS) String() string {
+	switch e {
+	case VIEWSTATUS_OPAQUE:
+		return "VIEWSTATUS_OPAQUE"
+	case VIEWSTATUS_SOLIDBKGND:
+		return "VIEWSTATUS_SOLIDBKGND"
+	case VIEWSTATUS_DVASPECTOPAQUE:
+		return "VIEWSTATUS_DVASPECTOPAQUE"
+	case VIEWSTATUS_DVASPECTTRANSPARENT:
+		return "VIEWSTATUS_DVASPECTTRANSPARENT"
+	case VIEWSTATUS_SURFACE:
+		return "VIEWSTATUS_SURFACE"
+	case VIEWSTATUS_3DSURFACE:
+		return "VIEWSTATUS_3DSURFACE"
+	default:
+		return fmt.Sprintf("VIEWSTATUS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type VIEW_OBJECT_PROPERTIES_FLAGS uint32
 
 const (
@@ -999,12 +2969,44 @@ const (
 	VPF_DISABLESCALE    VIEW_OBJECT_PROPERTIES_FLAGS = 4
 )
 
+// String returns the VIEW_OBJECT_PROPERTIES_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIEW_OBJECT_PROPERTIES_FLAGS) String() string {
+	var parts []string
+	if e&VPF_SELECTRELATIVE != 0 {
+		parts = append(parts, "VPF_SELECTRELATIVE")
+	}
+	if e&VPF_DISABLERELATIVE != 0 {
+		parts = append(parts, "VPF_DISABLERELATIVE")
+	}
+	if e&VPF_DISABLESCALE != 0 {
+		parts = append(parts, "VPF_DISABLESCALE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type WPCSETTING int32
 
 const (
 	WPCSETTING_LOGGING_ENABLED      WPCSETTING = 1
 	WPCSETTING_FILEDOWNLOAD_BLOCKED WPCSETTING = 2
 )
+
+// String returns the WPCSETTING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WPCSETTING) String() string {
+	switch e {
+	case WPCSETTING_LOGGING_ENABLED:
+		return "WPCSETTING_LOGGING_ENABLED"
+	case WPCSETTING_FILEDOWNLOAD_BLOCKED:
+		return "WPCSETTING_FILEDOWNLOAD_BLOCKED"
+	default:
+		return fmt.Sprintf("WPCSETTING(%d)", int32(e))
+	}
+}
 
 type XFORMCOORDS int32
 
@@ -1015,3 +3017,22 @@ const (
 	XFORMCOORDS_CONTAINERTOHIMETRIC XFORMCOORDS = 8
 	XFORMCOORDS_EVENTCOMPAT         XFORMCOORDS = 16
 )
+
+// String returns the XFORMCOORDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e XFORMCOORDS) String() string {
+	switch e {
+	case XFORMCOORDS_POSITION:
+		return "XFORMCOORDS_POSITION"
+	case XFORMCOORDS_SIZE:
+		return "XFORMCOORDS_SIZE"
+	case XFORMCOORDS_HIMETRICTOCONTAINER:
+		return "XFORMCOORDS_HIMETRICTOCONTAINER"
+	case XFORMCOORDS_CONTAINERTOHIMETRIC:
+		return "XFORMCOORDS_CONTAINERTOHIMETRIC"
+	case XFORMCOORDS_EVENTCOMPAT:
+		return "XFORMCOORDS_EVENTCOMPAT"
+	default:
+		return fmt.Sprintf("XFORMCOORDS(%d)", int32(e))
+	}
+}

@@ -4,6 +4,12 @@
 
 package wintrust
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type WINTRUST_DATA_PROVIDER_FLAGS uint32
 
 const (
@@ -23,12 +29,77 @@ const (
 	WTD_MOTW                                WINTRUST_DATA_PROVIDER_FLAGS = 16384
 )
 
+// String returns the WINTRUST_DATA_PROVIDER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINTRUST_DATA_PROVIDER_FLAGS) String() string {
+	var parts []string
+	if e&WTD_USE_IE4_TRUST_FLAG != 0 {
+		parts = append(parts, "WTD_USE_IE4_TRUST_FLAG")
+	}
+	if e&WTD_NO_IE4_CHAIN_FLAG != 0 {
+		parts = append(parts, "WTD_NO_IE4_CHAIN_FLAG")
+	}
+	if e&WTD_NO_POLICY_USAGE_FLAG != 0 {
+		parts = append(parts, "WTD_NO_POLICY_USAGE_FLAG")
+	}
+	if e&WTD_REVOCATION_CHECK_NONE != 0 {
+		parts = append(parts, "WTD_REVOCATION_CHECK_NONE")
+	}
+	if e&WTD_REVOCATION_CHECK_END_CERT != 0 {
+		parts = append(parts, "WTD_REVOCATION_CHECK_END_CERT")
+	}
+	if e&WTD_REVOCATION_CHECK_CHAIN != 0 {
+		parts = append(parts, "WTD_REVOCATION_CHECK_CHAIN")
+	}
+	if e&WTD_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT != 0 {
+		parts = append(parts, "WTD_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT")
+	}
+	if e&WTD_SAFER_FLAG != 0 {
+		parts = append(parts, "WTD_SAFER_FLAG")
+	}
+	if e&WTD_HASH_ONLY_FLAG != 0 {
+		parts = append(parts, "WTD_HASH_ONLY_FLAG")
+	}
+	if e&WTD_USE_DEFAULT_OSVER_CHECK != 0 {
+		parts = append(parts, "WTD_USE_DEFAULT_OSVER_CHECK")
+	}
+	if e&WTD_LIFETIME_SIGNING_FLAG != 0 {
+		parts = append(parts, "WTD_LIFETIME_SIGNING_FLAG")
+	}
+	if e&WTD_CACHE_ONLY_URL_RETRIEVAL != 0 {
+		parts = append(parts, "WTD_CACHE_ONLY_URL_RETRIEVAL")
+	}
+	if e&WTD_DISABLE_MD2_MD4 != 0 {
+		parts = append(parts, "WTD_DISABLE_MD2_MD4")
+	}
+	if e&WTD_MOTW != 0 {
+		parts = append(parts, "WTD_MOTW")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type WINTRUST_DATA_REVOCATION_CHECKS uint32
 
 const (
 	WTD_REVOKE_NONE       WINTRUST_DATA_REVOCATION_CHECKS = 0
 	WTD_REVOKE_WHOLECHAIN WINTRUST_DATA_REVOCATION_CHECKS = 1
 )
+
+// String returns the WINTRUST_DATA_REVOCATION_CHECKS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINTRUST_DATA_REVOCATION_CHECKS) String() string {
+	switch e {
+	case WTD_REVOKE_NONE:
+		return "WTD_REVOKE_NONE"
+	case WTD_REVOKE_WHOLECHAIN:
+		return "WTD_REVOKE_WHOLECHAIN"
+	default:
+		return fmt.Sprintf("WINTRUST_DATA_REVOCATION_CHECKS(%d)", uint32(e))
+	}
+}
 
 type WINTRUST_DATA_STATE_ACTION uint32
 
@@ -40,6 +111,25 @@ const (
 	WTD_STATEACTION_AUTO_CACHE_FLUSH WINTRUST_DATA_STATE_ACTION = 4
 )
 
+// String returns the WINTRUST_DATA_STATE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINTRUST_DATA_STATE_ACTION) String() string {
+	switch e {
+	case WTD_STATEACTION_IGNORE:
+		return "WTD_STATEACTION_IGNORE"
+	case WTD_STATEACTION_VERIFY:
+		return "WTD_STATEACTION_VERIFY"
+	case WTD_STATEACTION_CLOSE:
+		return "WTD_STATEACTION_CLOSE"
+	case WTD_STATEACTION_AUTO_CACHE:
+		return "WTD_STATEACTION_AUTO_CACHE"
+	case WTD_STATEACTION_AUTO_CACHE_FLUSH:
+		return "WTD_STATEACTION_AUTO_CACHE_FLUSH"
+	default:
+		return fmt.Sprintf("WINTRUST_DATA_STATE_ACTION(%d)", uint32(e))
+	}
+}
+
 type WINTRUST_DATA_UICHOICE uint32
 
 const (
@@ -49,12 +139,42 @@ const (
 	WTD_UI_NOGOOD WINTRUST_DATA_UICHOICE = 4
 )
 
+// String returns the WINTRUST_DATA_UICHOICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINTRUST_DATA_UICHOICE) String() string {
+	switch e {
+	case WTD_UI_ALL:
+		return "WTD_UI_ALL"
+	case WTD_UI_NONE:
+		return "WTD_UI_NONE"
+	case WTD_UI_NOBAD:
+		return "WTD_UI_NOBAD"
+	case WTD_UI_NOGOOD:
+		return "WTD_UI_NOGOOD"
+	default:
+		return fmt.Sprintf("WINTRUST_DATA_UICHOICE(%d)", uint32(e))
+	}
+}
+
 type WINTRUST_DATA_UICONTEXT uint32
 
 const (
 	WTD_UICONTEXT_EXECUTE WINTRUST_DATA_UICONTEXT = 0
 	WTD_UICONTEXT_INSTALL WINTRUST_DATA_UICONTEXT = 1
 )
+
+// String returns the WINTRUST_DATA_UICONTEXT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINTRUST_DATA_UICONTEXT) String() string {
+	switch e {
+	case WTD_UICONTEXT_EXECUTE:
+		return "WTD_UICONTEXT_EXECUTE"
+	case WTD_UICONTEXT_INSTALL:
+		return "WTD_UICONTEXT_INSTALL"
+	default:
+		return fmt.Sprintf("WINTRUST_DATA_UICONTEXT(%d)", uint32(e))
+	}
+}
 
 type WINTRUST_DATA_UNION_CHOICE uint32
 
@@ -66,6 +186,25 @@ const (
 	WTD_CHOICE_CERT    WINTRUST_DATA_UNION_CHOICE = 5
 )
 
+// String returns the WINTRUST_DATA_UNION_CHOICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINTRUST_DATA_UNION_CHOICE) String() string {
+	switch e {
+	case WTD_CHOICE_FILE:
+		return "WTD_CHOICE_FILE"
+	case WTD_CHOICE_CATALOG:
+		return "WTD_CHOICE_CATALOG"
+	case WTD_CHOICE_BLOB:
+		return "WTD_CHOICE_BLOB"
+	case WTD_CHOICE_SIGNER:
+		return "WTD_CHOICE_SIGNER"
+	case WTD_CHOICE_CERT:
+		return "WTD_CHOICE_CERT"
+	default:
+		return fmt.Sprintf("WINTRUST_DATA_UNION_CHOICE(%d)", uint32(e))
+	}
+}
+
 type WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION uint32
 
 const (
@@ -73,6 +212,20 @@ const (
 	DWACTION_FREE         WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION = 2
 )
 
+// String returns the WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION) String() string {
+	switch e {
+	case DWACTION_ALLOCANDFILL:
+		return "DWACTION_ALLOCANDFILL"
+	case DWACTION_FREE:
+		return "DWACTION_FREE"
+	default:
+		return fmt.Sprintf("WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WINTRUST_POLICY_FLAGS uint32
 
 const (
@@ -89,9 +242,69 @@ const (
 	WTPF_ALLOWONLYPERTRUST    WINTRUST_POLICY_FLAGS = 262144
 )
 
+// String returns the WINTRUST_POLICY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINTRUST_POLICY_FLAGS) String() string {
+	var parts []string
+	if e&WTPF_TRUSTTEST != 0 {
+		parts = append(parts, "WTPF_TRUSTTEST")
+	}
+	if e&WTPF_TESTCANBEVALID != 0 {
+		parts = append(parts, "WTPF_TESTCANBEVALID")
+	}
+	if e&WTPF_IGNOREEXPIRATION != 0 {
+		parts = append(parts, "WTPF_IGNOREEXPIRATION")
+	}
+	if e&WTPF_IGNOREREVOKATION != 0 {
+		parts = append(parts, "WTPF_IGNOREREVOKATION")
+	}
+	if e&WTPF_OFFLINEOK_IND != 0 {
+		parts = append(parts, "WTPF_OFFLINEOK_IND")
+	}
+	if e&WTPF_OFFLINEOK_COM != 0 {
+		parts = append(parts, "WTPF_OFFLINEOK_COM")
+	}
+	if e&WTPF_OFFLINEOKNBU_IND != 0 {
+		parts = append(parts, "WTPF_OFFLINEOKNBU_IND")
+	}
+	if e&WTPF_OFFLINEOKNBU_COM != 0 {
+		parts = append(parts, "WTPF_OFFLINEOKNBU_COM")
+	}
+	if e&WTPF_VERIFY_V1_OFF != 0 {
+		parts = append(parts, "WTPF_VERIFY_V1_OFF")
+	}
+	if e&WTPF_IGNOREREVOCATIONONTS != 0 {
+		parts = append(parts, "WTPF_IGNOREREVOCATIONONTS")
+	}
+	if e&WTPF_ALLOWONLYPERTRUST != 0 {
+		parts = append(parts, "WTPF_ALLOWONLYPERTRUST")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type WINTRUST_SIGNATURE_SETTINGS_FLAGS uint32
 
 const (
 	WSS_VERIFY_SPECIFIC         WINTRUST_SIGNATURE_SETTINGS_FLAGS = 1
 	WSS_GET_SECONDARY_SIG_COUNT WINTRUST_SIGNATURE_SETTINGS_FLAGS = 2
 )
+
+// String returns the WINTRUST_SIGNATURE_SETTINGS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WINTRUST_SIGNATURE_SETTINGS_FLAGS) String() string {
+	var parts []string
+	if e&WSS_VERIFY_SPECIFIC != 0 {
+		parts = append(parts, "WSS_VERIFY_SPECIFIC")
+	}
+	if e&WSS_GET_SECONDARY_SIG_COUNT != 0 {
+		parts = append(parts, "WSS_GET_SECONDARY_SIG_COUNT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

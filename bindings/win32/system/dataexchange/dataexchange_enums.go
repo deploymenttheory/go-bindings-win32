@@ -4,6 +4,11 @@
 
 package dataexchange
 
+import (
+	"fmt"
+	"strings"
+)
+
 type CONVINFO_CONVERSATION_STATE uint32
 
 const (
@@ -26,6 +31,50 @@ const (
 	XST_UNADVSENT      CONVINFO_CONVERSATION_STATE = 12
 )
 
+// String returns the CONVINFO_CONVERSATION_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONVINFO_CONVERSATION_STATE) String() string {
+	switch e {
+	case XST_ADVACKRCVD:
+		return "XST_ADVACKRCVD"
+	case XST_ADVDATAACKRCVD:
+		return "XST_ADVDATAACKRCVD"
+	case XST_ADVDATASENT:
+		return "XST_ADVDATASENT"
+	case XST_ADVSENT:
+		return "XST_ADVSENT"
+	case XST_CONNECTED:
+		return "XST_CONNECTED"
+	case XST_DATARCVD:
+		return "XST_DATARCVD"
+	case XST_EXECACKRCVD:
+		return "XST_EXECACKRCVD"
+	case XST_EXECSENT:
+		return "XST_EXECSENT"
+	case XST_INCOMPLETE:
+		return "XST_INCOMPLETE"
+	case XST_INIT1:
+		return "XST_INIT1"
+	case XST_INIT2:
+		return "XST_INIT2"
+	case XST_NULL:
+		return "XST_NULL"
+	case XST_POKEACKRCVD:
+		return "XST_POKEACKRCVD"
+	case XST_POKESENT:
+		return "XST_POKESENT"
+	case XST_REQSENT:
+		return "XST_REQSENT"
+	case XST_UNADVACKRCVD:
+		return "XST_UNADVACKRCVD"
+	case XST_UNADVSENT:
+		return "XST_UNADVSENT"
+	default:
+		return fmt.Sprintf("CONVINFO_CONVERSATION_STATE(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CONVINFO_STATUS uint32
 
 const (
@@ -39,6 +88,43 @@ const (
 	ST_ISSELF     CONVINFO_STATUS = 256
 	ST_TERMINATED CONVINFO_STATUS = 32
 )
+
+// String returns the CONVINFO_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONVINFO_STATUS) String() string {
+	var parts []string
+	if e&ST_ADVISE != 0 {
+		parts = append(parts, "ST_ADVISE")
+	}
+	if e&ST_BLOCKED != 0 {
+		parts = append(parts, "ST_BLOCKED")
+	}
+	if e&ST_BLOCKNEXT != 0 {
+		parts = append(parts, "ST_BLOCKNEXT")
+	}
+	if e&ST_CLIENT != 0 {
+		parts = append(parts, "ST_CLIENT")
+	}
+	if e&ST_CONNECTED != 0 {
+		parts = append(parts, "ST_CONNECTED")
+	}
+	if e&ST_INLIST != 0 {
+		parts = append(parts, "ST_INLIST")
+	}
+	if e&ST_ISLOCAL != 0 {
+		parts = append(parts, "ST_ISLOCAL")
+	}
+	if e&ST_ISSELF != 0 {
+		parts = append(parts, "ST_ISSELF")
+	}
+	if e&ST_TERMINATED != 0 {
+		parts = append(parts, "ST_TERMINATED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type DDE_CLIENT_TRANSACTION_TYPE uint32
 
@@ -60,6 +146,45 @@ const (
 	XTYP_XACT_COMPLETE   DDE_CLIENT_TRANSACTION_TYPE = 32896
 )
 
+// String returns the DDE_CLIENT_TRANSACTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DDE_CLIENT_TRANSACTION_TYPE) String() string {
+	switch e {
+	case XTYP_ADVSTART:
+		return "XTYP_ADVSTART"
+	case XTYP_ADVSTOP:
+		return "XTYP_ADVSTOP"
+	case XTYP_EXECUTE:
+		return "XTYP_EXECUTE"
+	case XTYP_POKE:
+		return "XTYP_POKE"
+	case XTYP_REQUEST:
+		return "XTYP_REQUEST"
+	case XTYP_ADVDATA:
+		return "XTYP_ADVDATA"
+	case XTYP_ADVREQ:
+		return "XTYP_ADVREQ"
+	case XTYP_CONNECT:
+		return "XTYP_CONNECT"
+	case XTYP_CONNECT_CONFIRM:
+		return "XTYP_CONNECT_CONFIRM"
+	case XTYP_DISCONNECT:
+		return "XTYP_DISCONNECT"
+	case XTYP_MONITOR:
+		return "XTYP_MONITOR"
+	case XTYP_REGISTER:
+		return "XTYP_REGISTER"
+	case XTYP_UNREGISTER:
+		return "XTYP_UNREGISTER"
+	case XTYP_WILDCONNECT:
+		return "XTYP_WILDCONNECT"
+	case XTYP_XACT_COMPLETE:
+		return "XTYP_XACT_COMPLETE"
+	default:
+		return fmt.Sprintf("DDE_CLIENT_TRANSACTION_TYPE(%d)", uint32(e))
+	}
+}
+
 type DDE_ENABLE_CALLBACK_CMD uint32
 
 const (
@@ -69,6 +194,24 @@ const (
 	EC_QUERYWAITING DDE_ENABLE_CALLBACK_CMD = 2
 )
 
+// String returns the DDE_ENABLE_CALLBACK_CMD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DDE_ENABLE_CALLBACK_CMD) String() string {
+	switch e {
+	case EC_ENABLEALL:
+		return "EC_ENABLEALL"
+	case EC_ENABLEONE:
+		return "EC_ENABLEONE"
+	case EC_DISABLE:
+		return "EC_DISABLE"
+	case EC_QUERYWAITING:
+		return "EC_QUERYWAITING"
+	default:
+		return fmt.Sprintf("DDE_ENABLE_CALLBACK_CMD(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DDE_INITIALIZE_COMMAND uint32
 
 const (
@@ -97,6 +240,82 @@ const (
 	MF_SENDMSGS               DDE_INITIALIZE_COMMAND = 33554432
 )
 
+// String returns the DDE_INITIALIZE_COMMAND constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DDE_INITIALIZE_COMMAND) String() string {
+	var parts []string
+	if e&APPCLASS_MONITOR != 0 {
+		parts = append(parts, "APPCLASS_MONITOR")
+	}
+	if e&APPCMD_CLIENTONLY != 0 {
+		parts = append(parts, "APPCMD_CLIENTONLY")
+	}
+	if e&APPCMD_FILTERINITS != 0 {
+		parts = append(parts, "APPCMD_FILTERINITS")
+	}
+	if e&CBF_FAIL_ALLSVRXACTIONS != 0 {
+		parts = append(parts, "CBF_FAIL_ALLSVRXACTIONS")
+	}
+	if e&CBF_FAIL_ADVISES != 0 {
+		parts = append(parts, "CBF_FAIL_ADVISES")
+	}
+	if e&CBF_FAIL_CONNECTIONS != 0 {
+		parts = append(parts, "CBF_FAIL_CONNECTIONS")
+	}
+	if e&CBF_FAIL_EXECUTES != 0 {
+		parts = append(parts, "CBF_FAIL_EXECUTES")
+	}
+	if e&CBF_FAIL_POKES != 0 {
+		parts = append(parts, "CBF_FAIL_POKES")
+	}
+	if e&CBF_FAIL_REQUESTS != 0 {
+		parts = append(parts, "CBF_FAIL_REQUESTS")
+	}
+	if e&CBF_FAIL_SELFCONNECTIONS != 0 {
+		parts = append(parts, "CBF_FAIL_SELFCONNECTIONS")
+	}
+	if e&CBF_SKIP_ALLNOTIFICATIONS != 0 {
+		parts = append(parts, "CBF_SKIP_ALLNOTIFICATIONS")
+	}
+	if e&CBF_SKIP_CONNECT_CONFIRMS != 0 {
+		parts = append(parts, "CBF_SKIP_CONNECT_CONFIRMS")
+	}
+	if e&CBF_SKIP_DISCONNECTS != 0 {
+		parts = append(parts, "CBF_SKIP_DISCONNECTS")
+	}
+	if e&CBF_SKIP_REGISTRATIONS != 0 {
+		parts = append(parts, "CBF_SKIP_REGISTRATIONS")
+	}
+	if e&CBF_SKIP_UNREGISTRATIONS != 0 {
+		parts = append(parts, "CBF_SKIP_UNREGISTRATIONS")
+	}
+	if e&MF_CALLBACKS != 0 {
+		parts = append(parts, "MF_CALLBACKS")
+	}
+	if e&MF_CONV != 0 {
+		parts = append(parts, "MF_CONV")
+	}
+	if e&MF_ERRORS != 0 {
+		parts = append(parts, "MF_ERRORS")
+	}
+	if e&MF_HSZ_INFO != 0 {
+		parts = append(parts, "MF_HSZ_INFO")
+	}
+	if e&MF_LINKS != 0 {
+		parts = append(parts, "MF_LINKS")
+	}
+	if e&MF_POSTMSGS != 0 {
+		parts = append(parts, "MF_POSTMSGS")
+	}
+	if e&MF_SENDMSGS != 0 {
+		parts = append(parts, "MF_SENDMSGS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type DDE_NAME_SERVICE_CMD uint32
 
 const (
@@ -105,3 +324,20 @@ const (
 	DNS_FILTERON   DDE_NAME_SERVICE_CMD = 4
 	DNS_FILTEROFF  DDE_NAME_SERVICE_CMD = 8
 )
+
+// String returns the DDE_NAME_SERVICE_CMD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DDE_NAME_SERVICE_CMD) String() string {
+	switch e {
+	case DNS_REGISTER:
+		return "DNS_REGISTER"
+	case DNS_UNREGISTER:
+		return "DNS_UNREGISTER"
+	case DNS_FILTERON:
+		return "DNS_FILTERON"
+	case DNS_FILTEROFF:
+		return "DNS_FILTEROFF"
+	default:
+		return fmt.Sprintf("DDE_NAME_SERVICE_CMD(%d)", uint32(e))
+	}
+}

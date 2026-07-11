@@ -4,6 +4,10 @@
 
 package tabletpc
 
+import (
+	"fmt"
+)
+
 // ALT_BREAKS: https://learn.microsoft.com/windows/win32/api/rectypes/ne-rectypes-alt_breaks
 type ALT_BREAKS int32
 
@@ -13,6 +17,21 @@ const (
 	ALT_BREAKS_FULL   ALT_BREAKS = 2
 )
 
+// String returns the ALT_BREAKS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ALT_BREAKS) String() string {
+	switch e {
+	case ALT_BREAKS_SAME:
+		return "ALT_BREAKS_SAME"
+	case ALT_BREAKS_UNIQUE:
+		return "ALT_BREAKS_UNIQUE"
+	case ALT_BREAKS_FULL:
+		return "ALT_BREAKS_FULL"
+	default:
+		return fmt.Sprintf("ALT_BREAKS(%d)", int32(e))
+	}
+}
+
 // AppearanceConstants: https://learn.microsoft.com/windows/win32/api/inked/ne-inked-appearanceconstants
 type AppearanceConstants int32
 
@@ -20,6 +39,19 @@ const (
 	RtfFlat   AppearanceConstants = 0
 	RtfThreeD AppearanceConstants = 1
 )
+
+// String returns the AppearanceConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AppearanceConstants) String() string {
+	switch e {
+	case RtfFlat:
+		return "RtfFlat"
+	case RtfThreeD:
+		return "RtfThreeD"
+	default:
+		return fmt.Sprintf("AppearanceConstants(%d)", int32(e))
+	}
+}
 
 // BorderStyleConstants: https://learn.microsoft.com/windows/win32/api/inked/ne-inked-borderstyleconstants
 type BorderStyleConstants int32
@@ -29,6 +61,19 @@ const (
 	RtfFixedSingle BorderStyleConstants = 1
 )
 
+// String returns the BorderStyleConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BorderStyleConstants) String() string {
+	switch e {
+	case RtfNoBorder:
+		return "RtfNoBorder"
+	case RtfFixedSingle:
+		return "RtfFixedSingle"
+	default:
+		return fmt.Sprintf("BorderStyleConstants(%d)", int32(e))
+	}
+}
+
 // CONFIDENCE_LEVEL: https://learn.microsoft.com/windows/win32/api/rectypes/ne-rectypes-confidence_level
 type CONFIDENCE_LEVEL int32
 
@@ -37,6 +82,21 @@ const (
 	CFL_INTERMEDIATE CONFIDENCE_LEVEL = 1
 	CFL_POOR         CONFIDENCE_LEVEL = 2
 )
+
+// String returns the CONFIDENCE_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CONFIDENCE_LEVEL) String() string {
+	switch e {
+	case CFL_STRONG:
+		return "CFL_STRONG"
+	case CFL_INTERMEDIATE:
+		return "CFL_INTERMEDIATE"
+	case CFL_POOR:
+		return "CFL_POOR"
+	default:
+		return fmt.Sprintf("CONFIDENCE_LEVEL(%d)", int32(e))
+	}
+}
 
 // CorrectionMode: https://learn.microsoft.com/windows/win32/api/peninputpanel/ne-peninputpanel-correctionmode
 type CorrectionMode int32
@@ -48,6 +108,23 @@ const (
 	CorrectionMode_PostInsertionExpanded  CorrectionMode = 3
 )
 
+// String returns the CorrectionMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorrectionMode) String() string {
+	switch e {
+	case CorrectionMode_NotVisible:
+		return "CorrectionMode_NotVisible"
+	case CorrectionMode_PreInsertion:
+		return "CorrectionMode_PreInsertion"
+	case CorrectionMode_PostInsertionCollapsed:
+		return "CorrectionMode_PostInsertionCollapsed"
+	case CorrectionMode_PostInsertionExpanded:
+		return "CorrectionMode_PostInsertionExpanded"
+	default:
+		return fmt.Sprintf("CorrectionMode(%d)", int32(e))
+	}
+}
+
 // CorrectionPosition: https://learn.microsoft.com/windows/win32/api/peninputpanel/ne-peninputpanel-correctionposition
 type CorrectionPosition int32
 
@@ -56,6 +133,21 @@ const (
 	CorrectionPosition_Bottom CorrectionPosition = 1
 	CorrectionPosition_Top    CorrectionPosition = 2
 )
+
+// String returns the CorrectionPosition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CorrectionPosition) String() string {
+	switch e {
+	case CorrectionPosition_Auto:
+		return "CorrectionPosition_Auto"
+	case CorrectionPosition_Bottom:
+		return "CorrectionPosition_Bottom"
+	case CorrectionPosition_Top:
+		return "CorrectionPosition_Top"
+	default:
+		return fmt.Sprintf("CorrectionPosition(%d)", int32(e))
+	}
+}
 
 type DISPID_Ink int32
 
@@ -86,6 +178,65 @@ const (
 	DISPID_ICanPaste                   DISPID_Ink = 24
 	DISPID_IClipboardPaste             DISPID_Ink = 25
 )
+
+// String returns the DISPID_Ink constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_Ink) String() string {
+	switch e {
+	case DISPID_IStrokes:
+		return "DISPID_IStrokes"
+	case DISPID_IExtendedProperties:
+		return "DISPID_IExtendedProperties"
+	case DISPID_IGetBoundingBox:
+		return "DISPID_IGetBoundingBox"
+	case DISPID_IDeleteStrokes:
+		return "DISPID_IDeleteStrokes"
+	case DISPID_IDeleteStroke:
+		return "DISPID_IDeleteStroke"
+	case DISPID_IExtractStrokes:
+		return "DISPID_IExtractStrokes"
+	case DISPID_IExtractWithRectangle:
+		return "DISPID_IExtractWithRectangle"
+	case DISPID_IDirty:
+		return "DISPID_IDirty"
+	case DISPID_ICustomStrokes:
+		return "DISPID_ICustomStrokes"
+	case DISPID_IClone:
+		return "DISPID_IClone"
+	case DISPID_IHitTestCircle:
+		return "DISPID_IHitTestCircle"
+	case DISPID_IHitTestWithRectangle:
+		return "DISPID_IHitTestWithRectangle"
+	case DISPID_IHitTestWithLasso:
+		return "DISPID_IHitTestWithLasso"
+	case DISPID_INearestPoint:
+		return "DISPID_INearestPoint"
+	case DISPID_ICreateStrokes:
+		return "DISPID_ICreateStrokes"
+	case DISPID_ICreateStroke:
+		return "DISPID_ICreateStroke"
+	case DISPID_IAddStrokesAtRectangle:
+		return "DISPID_IAddStrokesAtRectangle"
+	case DISPID_IClip:
+		return "DISPID_IClip"
+	case DISPID_ISave:
+		return "DISPID_ISave"
+	case DISPID_ILoad:
+		return "DISPID_ILoad"
+	case DISPID_ICreateStrokeFromPoints:
+		return "DISPID_ICreateStrokeFromPoints"
+	case DISPID_IClipboardCopyWithRectangle:
+		return "DISPID_IClipboardCopyWithRectangle"
+	case DISPID_IClipboardCopy:
+		return "DISPID_IClipboardCopy"
+	case DISPID_ICanPaste:
+		return "DISPID_ICanPaste"
+	case DISPID_IClipboardPaste:
+		return "DISPID_IClipboardPaste"
+	default:
+		return fmt.Sprintf("DISPID_Ink(%d)", int32(e))
+	}
+}
 
 type DISPID_InkCollector int32
 
@@ -130,6 +281,93 @@ const (
 	DISPID_ICSupportHighContrastInk         DISPID_InkCollector = 38
 	DISPID_IOSupportHighContrastSelectionUI DISPID_InkCollector = 39
 )
+
+// String returns the DISPID_InkCollector constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkCollector) String() string {
+	switch e {
+	case DISPID_ICEnabled:
+		return "DISPID_ICEnabled"
+	case DISPID_ICHwnd:
+		return "DISPID_ICHwnd"
+	case DISPID_ICPaint:
+		return "DISPID_ICPaint"
+	case DISPID_ICText:
+		return "DISPID_ICText"
+	case DISPID_ICDefaultDrawingAttributes:
+		return "DISPID_ICDefaultDrawingAttributes"
+	case DISPID_ICRenderer:
+		return "DISPID_ICRenderer"
+	case DISPID_ICInk:
+		return "DISPID_ICInk"
+	case DISPID_ICAutoRedraw:
+		return "DISPID_ICAutoRedraw"
+	case DISPID_ICCollectingInk:
+		return "DISPID_ICCollectingInk"
+	case DISPID_ICSetEventInterest:
+		return "DISPID_ICSetEventInterest"
+	case DISPID_ICGetEventInterest:
+		return "DISPID_ICGetEventInterest"
+	case DISPID_IOEditingMode:
+		return "DISPID_IOEditingMode"
+	case DISPID_IOSelection:
+		return "DISPID_IOSelection"
+	case DISPID_IOAttachMode:
+		return "DISPID_IOAttachMode"
+	case DISPID_IOHitTestSelection:
+		return "DISPID_IOHitTestSelection"
+	case DISPID_IODraw:
+		return "DISPID_IODraw"
+	case DISPID_IPPicture:
+		return "DISPID_IPPicture"
+	case DISPID_IPSizeMode:
+		return "DISPID_IPSizeMode"
+	case DISPID_IPBackColor:
+		return "DISPID_IPBackColor"
+	case DISPID_ICCursors:
+		return "DISPID_ICCursors"
+	case DISPID_ICMarginX:
+		return "DISPID_ICMarginX"
+	case DISPID_ICMarginY:
+		return "DISPID_ICMarginY"
+	case DISPID_ICSetWindowInputRectangle:
+		return "DISPID_ICSetWindowInputRectangle"
+	case DISPID_ICGetWindowInputRectangle:
+		return "DISPID_ICGetWindowInputRectangle"
+	case DISPID_ICTablet:
+		return "DISPID_ICTablet"
+	case DISPID_ICSetAllTabletsMode:
+		return "DISPID_ICSetAllTabletsMode"
+	case DISPID_ICSetSingleTabletIntegratedMode:
+		return "DISPID_ICSetSingleTabletIntegratedMode"
+	case DISPID_ICCollectionMode:
+		return "DISPID_ICCollectionMode"
+	case DISPID_ICSetGestureStatus:
+		return "DISPID_ICSetGestureStatus"
+	case DISPID_ICGetGestureStatus:
+		return "DISPID_ICGetGestureStatus"
+	case DISPID_ICDynamicRendering:
+		return "DISPID_ICDynamicRendering"
+	case DISPID_ICDesiredPacketDescription:
+		return "DISPID_ICDesiredPacketDescription"
+	case DISPID_IOEraserMode:
+		return "DISPID_IOEraserMode"
+	case DISPID_IOEraserWidth:
+		return "DISPID_IOEraserWidth"
+	case DISPID_ICMouseIcon:
+		return "DISPID_ICMouseIcon"
+	case DISPID_ICMousePointer:
+		return "DISPID_ICMousePointer"
+	case DISPID_IPInkEnabled:
+		return "DISPID_IPInkEnabled"
+	case DISPID_ICSupportHighContrastInk:
+		return "DISPID_ICSupportHighContrastInk"
+	case DISPID_IOSupportHighContrastSelectionUI:
+		return "DISPID_IOSupportHighContrastSelectionUI"
+	default:
+		return fmt.Sprintf("DISPID_InkCollector(%d)", int32(e))
+	}
+}
 
 type DISPID_InkCollectorEvent int32
 
@@ -177,6 +415,97 @@ const (
 	DISPID_IPESizeChanged         DISPID_InkCollectorEvent = 41
 )
 
+// String returns the DISPID_InkCollectorEvent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkCollectorEvent) String() string {
+	switch e {
+	case DISPID_ICEStroke:
+		return "DISPID_ICEStroke"
+	case DISPID_ICECursorDown:
+		return "DISPID_ICECursorDown"
+	case DISPID_ICENewPackets:
+		return "DISPID_ICENewPackets"
+	case DISPID_ICENewInAirPackets:
+		return "DISPID_ICENewInAirPackets"
+	case DISPID_ICECursorButtonDown:
+		return "DISPID_ICECursorButtonDown"
+	case DISPID_ICECursorButtonUp:
+		return "DISPID_ICECursorButtonUp"
+	case DISPID_ICECursorInRange:
+		return "DISPID_ICECursorInRange"
+	case DISPID_ICECursorOutOfRange:
+		return "DISPID_ICECursorOutOfRange"
+	case DISPID_ICESystemGesture:
+		return "DISPID_ICESystemGesture"
+	case DISPID_ICEGesture:
+		return "DISPID_ICEGesture"
+	case DISPID_ICETabletAdded:
+		return "DISPID_ICETabletAdded"
+	case DISPID_ICETabletRemoved:
+		return "DISPID_ICETabletRemoved"
+	case DISPID_IOEPainting:
+		return "DISPID_IOEPainting"
+	case DISPID_IOEPainted:
+		return "DISPID_IOEPainted"
+	case DISPID_IOESelectionChanging:
+		return "DISPID_IOESelectionChanging"
+	case DISPID_IOESelectionChanged:
+		return "DISPID_IOESelectionChanged"
+	case DISPID_IOESelectionMoving:
+		return "DISPID_IOESelectionMoving"
+	case DISPID_IOESelectionMoved:
+		return "DISPID_IOESelectionMoved"
+	case DISPID_IOESelectionResizing:
+		return "DISPID_IOESelectionResizing"
+	case DISPID_IOESelectionResized:
+		return "DISPID_IOESelectionResized"
+	case DISPID_IOEStrokesDeleting:
+		return "DISPID_IOEStrokesDeleting"
+	case DISPID_IOEStrokesDeleted:
+		return "DISPID_IOEStrokesDeleted"
+	case DISPID_IPEChangeUICues:
+		return "DISPID_IPEChangeUICues"
+	case DISPID_IPEClick:
+		return "DISPID_IPEClick"
+	case DISPID_IPEDblClick:
+		return "DISPID_IPEDblClick"
+	case DISPID_IPEInvalidated:
+		return "DISPID_IPEInvalidated"
+	case DISPID_IPEMouseDown:
+		return "DISPID_IPEMouseDown"
+	case DISPID_IPEMouseEnter:
+		return "DISPID_IPEMouseEnter"
+	case DISPID_IPEMouseHover:
+		return "DISPID_IPEMouseHover"
+	case DISPID_IPEMouseLeave:
+		return "DISPID_IPEMouseLeave"
+	case DISPID_IPEMouseMove:
+		return "DISPID_IPEMouseMove"
+	case DISPID_IPEMouseUp:
+		return "DISPID_IPEMouseUp"
+	case DISPID_IPEMouseWheel:
+		return "DISPID_IPEMouseWheel"
+	case DISPID_IPESizeModeChanged:
+		return "DISPID_IPESizeModeChanged"
+	case DISPID_IPEStyleChanged:
+		return "DISPID_IPEStyleChanged"
+	case DISPID_IPESystemColorsChanged:
+		return "DISPID_IPESystemColorsChanged"
+	case DISPID_IPEKeyDown:
+		return "DISPID_IPEKeyDown"
+	case DISPID_IPEKeyPress:
+		return "DISPID_IPEKeyPress"
+	case DISPID_IPEKeyUp:
+		return "DISPID_IPEKeyUp"
+	case DISPID_IPEResize:
+		return "DISPID_IPEResize"
+	case DISPID_IPESizeChanged:
+		return "DISPID_IPESizeChanged"
+	default:
+		return fmt.Sprintf("DISPID_InkCollectorEvent(%d)", int32(e))
+	}
+}
+
 type DISPID_InkCursor int32
 
 const (
@@ -188,6 +517,27 @@ const (
 	DISPID_ICsrTablet            DISPID_InkCursor = 5
 )
 
+// String returns the DISPID_InkCursor constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkCursor) String() string {
+	switch e {
+	case DISPID_ICsrName:
+		return "DISPID_ICsrName"
+	case DISPID_ICsrId:
+		return "DISPID_ICsrId"
+	case DISPID_ICsrDrawingAttributes:
+		return "DISPID_ICsrDrawingAttributes"
+	case DISPID_ICsrButtons:
+		return "DISPID_ICsrButtons"
+	case DISPID_ICsrInverted:
+		return "DISPID_ICsrInverted"
+	case DISPID_ICsrTablet:
+		return "DISPID_ICsrTablet"
+	default:
+		return fmt.Sprintf("DISPID_InkCursor(%d)", int32(e))
+	}
+}
+
 type DISPID_InkCursorButton int32
 
 const (
@@ -195,6 +545,21 @@ const (
 	DISPID_ICBId    DISPID_InkCursorButton = 1
 	DISPID_ICBState DISPID_InkCursorButton = 2
 )
+
+// String returns the DISPID_InkCursorButton constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkCursorButton) String() string {
+	switch e {
+	case DISPID_ICBName:
+		return "DISPID_ICBName"
+	case DISPID_ICBId:
+		return "DISPID_ICBId"
+	case DISPID_ICBState:
+		return "DISPID_ICBState"
+	default:
+		return fmt.Sprintf("DISPID_InkCursorButton(%d)", int32(e))
+	}
+}
 
 type DISPID_InkCursorButtons int32
 
@@ -204,6 +569,21 @@ const (
 	DISPID_ICBsCount    DISPID_InkCursorButtons = 1
 )
 
+// String returns the DISPID_InkCursorButtons constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkCursorButtons) String() string {
+	switch e {
+	case DISPID_ICBs_NewEnum:
+		return "DISPID_ICBs_NewEnum"
+	case DISPID_ICBsItem:
+		return "DISPID_ICBsItem"
+	case DISPID_ICBsCount:
+		return "DISPID_ICBsCount"
+	default:
+		return fmt.Sprintf("DISPID_InkCursorButtons(%d)", int32(e))
+	}
+}
+
 type DISPID_InkCursors int32
 
 const (
@@ -211,6 +591,21 @@ const (
 	DISPID_ICsItem     DISPID_InkCursors = 0
 	DISPID_ICsCount    DISPID_InkCursors = 1
 )
+
+// String returns the DISPID_InkCursors constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkCursors) String() string {
+	switch e {
+	case DISPID_ICs_NewEnum:
+		return "DISPID_ICs_NewEnum"
+	case DISPID_ICsItem:
+		return "DISPID_ICsItem"
+	case DISPID_ICsCount:
+		return "DISPID_ICsCount"
+	default:
+		return fmt.Sprintf("DISPID_InkCursors(%d)", int32(e))
+	}
+}
 
 type DISPID_InkCustomStrokes int32
 
@@ -223,6 +618,27 @@ const (
 	DISPID_ICSsClear    DISPID_InkCustomStrokes = 4
 )
 
+// String returns the DISPID_InkCustomStrokes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkCustomStrokes) String() string {
+	switch e {
+	case DISPID_ICSs_NewEnum:
+		return "DISPID_ICSs_NewEnum"
+	case DISPID_ICSsItem:
+		return "DISPID_ICSsItem"
+	case DISPID_ICSsCount:
+		return "DISPID_ICSsCount"
+	case DISPID_ICSsAdd:
+		return "DISPID_ICSsAdd"
+	case DISPID_ICSsRemove:
+		return "DISPID_ICSsRemove"
+	case DISPID_ICSsClear:
+		return "DISPID_ICSsClear"
+	default:
+		return fmt.Sprintf("DISPID_InkCustomStrokes(%d)", int32(e))
+	}
+}
+
 type DISPID_InkDivider int32
 
 const (
@@ -232,12 +648,42 @@ const (
 	DISPID_IInkDivider_Divide            DISPID_InkDivider = 4
 )
 
+// String returns the DISPID_InkDivider constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkDivider) String() string {
+	switch e {
+	case DISPID_IInkDivider_Strokes:
+		return "DISPID_IInkDivider_Strokes"
+	case DISPID_IInkDivider_RecognizerContext:
+		return "DISPID_IInkDivider_RecognizerContext"
+	case DISPID_IInkDivider_LineHeight:
+		return "DISPID_IInkDivider_LineHeight"
+	case DISPID_IInkDivider_Divide:
+		return "DISPID_IInkDivider_Divide"
+	default:
+		return fmt.Sprintf("DISPID_InkDivider(%d)", int32(e))
+	}
+}
+
 type DISPID_InkDivisionResult int32
 
 const (
 	DISPID_IInkDivisionResult_Strokes      DISPID_InkDivisionResult = 1
 	DISPID_IInkDivisionResult_ResultByType DISPID_InkDivisionResult = 2
 )
+
+// String returns the DISPID_InkDivisionResult constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkDivisionResult) String() string {
+	switch e {
+	case DISPID_IInkDivisionResult_Strokes:
+		return "DISPID_IInkDivisionResult_Strokes"
+	case DISPID_IInkDivisionResult_ResultByType:
+		return "DISPID_IInkDivisionResult_ResultByType"
+	default:
+		return fmt.Sprintf("DISPID_InkDivisionResult(%d)", int32(e))
+	}
+}
 
 type DISPID_InkDivisionUnit int32
 
@@ -248,6 +694,23 @@ const (
 	DISPID_IInkDivisionUnit_RotationTransform DISPID_InkDivisionUnit = 4
 )
 
+// String returns the DISPID_InkDivisionUnit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkDivisionUnit) String() string {
+	switch e {
+	case DISPID_IInkDivisionUnit_Strokes:
+		return "DISPID_IInkDivisionUnit_Strokes"
+	case DISPID_IInkDivisionUnit_DivisionType:
+		return "DISPID_IInkDivisionUnit_DivisionType"
+	case DISPID_IInkDivisionUnit_RecognizedString:
+		return "DISPID_IInkDivisionUnit_RecognizedString"
+	case DISPID_IInkDivisionUnit_RotationTransform:
+		return "DISPID_IInkDivisionUnit_RotationTransform"
+	default:
+		return fmt.Sprintf("DISPID_InkDivisionUnit(%d)", int32(e))
+	}
+}
+
 type DISPID_InkDivisionUnits int32
 
 const (
@@ -255,6 +718,21 @@ const (
 	DISPID_IInkDivisionUnits_Item    DISPID_InkDivisionUnits = 0
 	DISPID_IInkDivisionUnits_Count   DISPID_InkDivisionUnits = 1
 )
+
+// String returns the DISPID_InkDivisionUnits constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkDivisionUnits) String() string {
+	switch e {
+	case DISPID_IInkDivisionUnits_NewEnum:
+		return "DISPID_IInkDivisionUnits_NewEnum"
+	case DISPID_IInkDivisionUnits_Item:
+		return "DISPID_IInkDivisionUnits_Item"
+	case DISPID_IInkDivisionUnits_Count:
+		return "DISPID_IInkDivisionUnits_Count"
+	default:
+		return fmt.Sprintf("DISPID_InkDivisionUnits(%d)", int32(e))
+	}
+}
 
 type DISPID_InkDrawingAttributes int32
 
@@ -271,6 +749,37 @@ const (
 	DISPID_DAClone              DISPID_InkDrawingAttributes = 10
 	DISPID_DAExtendedProperties DISPID_InkDrawingAttributes = 11
 )
+
+// String returns the DISPID_InkDrawingAttributes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkDrawingAttributes) String() string {
+	switch e {
+	case DISPID_DAHeight:
+		return "DISPID_DAHeight"
+	case DISPID_DAColor:
+		return "DISPID_DAColor"
+	case DISPID_DAWidth:
+		return "DISPID_DAWidth"
+	case DISPID_DAFitToCurve:
+		return "DISPID_DAFitToCurve"
+	case DISPID_DAIgnorePressure:
+		return "DISPID_DAIgnorePressure"
+	case DISPID_DAAntiAliased:
+		return "DISPID_DAAntiAliased"
+	case DISPID_DATransparency:
+		return "DISPID_DATransparency"
+	case DISPID_DARasterOperation:
+		return "DISPID_DARasterOperation"
+	case DISPID_DAPenTip:
+		return "DISPID_DAPenTip"
+	case DISPID_DAClone:
+		return "DISPID_DAClone"
+	case DISPID_DAExtendedProperties:
+		return "DISPID_DAExtendedProperties"
+	default:
+		return fmt.Sprintf("DISPID_InkDrawingAttributes(%d)", int32(e))
+	}
+}
 
 // DISPID_InkEdit: https://learn.microsoft.com/windows/win32/api/inked/ne-inked-dispid_inkedit
 type DISPID_InkEdit int32
@@ -314,6 +823,87 @@ const (
 	DISPID_Refresh            DISPID_InkEdit = 35
 )
 
+// String returns the DISPID_InkEdit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkEdit) String() string {
+	switch e {
+	case DISPID_Text:
+		return "DISPID_Text"
+	case DISPID_TextRTF:
+		return "DISPID_TextRTF"
+	case DISPID_Hwnd:
+		return "DISPID_Hwnd"
+	case DISPID_DisableNoScroll:
+		return "DISPID_DisableNoScroll"
+	case DISPID_Locked:
+		return "DISPID_Locked"
+	case DISPID_Enabled:
+		return "DISPID_Enabled"
+	case DISPID_MaxLength:
+		return "DISPID_MaxLength"
+	case DISPID_MultiLine:
+		return "DISPID_MultiLine"
+	case DISPID_ScrollBars:
+		return "DISPID_ScrollBars"
+	case DISPID_RTSelStart:
+		return "DISPID_RTSelStart"
+	case DISPID_RTSelLength:
+		return "DISPID_RTSelLength"
+	case DISPID_RTSelText:
+		return "DISPID_RTSelText"
+	case DISPID_SelAlignment:
+		return "DISPID_SelAlignment"
+	case DISPID_SelBold:
+		return "DISPID_SelBold"
+	case DISPID_SelCharOffset:
+		return "DISPID_SelCharOffset"
+	case DISPID_SelColor:
+		return "DISPID_SelColor"
+	case DISPID_SelFontName:
+		return "DISPID_SelFontName"
+	case DISPID_SelFontSize:
+		return "DISPID_SelFontSize"
+	case DISPID_SelItalic:
+		return "DISPID_SelItalic"
+	case DISPID_SelRTF:
+		return "DISPID_SelRTF"
+	case DISPID_SelUnderline:
+		return "DISPID_SelUnderline"
+	case DISPID_DragIcon:
+		return "DISPID_DragIcon"
+	case DISPID_Status:
+		return "DISPID_Status"
+	case DISPID_UseMouseForInput:
+		return "DISPID_UseMouseForInput"
+	case DISPID_InkMode:
+		return "DISPID_InkMode"
+	case DISPID_InkInsertMode:
+		return "DISPID_InkInsertMode"
+	case DISPID_RecoTimeout:
+		return "DISPID_RecoTimeout"
+	case DISPID_DrawAttr:
+		return "DISPID_DrawAttr"
+	case DISPID_Recognizer:
+		return "DISPID_Recognizer"
+	case DISPID_Factoid:
+		return "DISPID_Factoid"
+	case DISPID_SelInk:
+		return "DISPID_SelInk"
+	case DISPID_SelInksDisplayMode:
+		return "DISPID_SelInksDisplayMode"
+	case DISPID_Recognize:
+		return "DISPID_Recognize"
+	case DISPID_GetGestStatus:
+		return "DISPID_GetGestStatus"
+	case DISPID_SetGestStatus:
+		return "DISPID_SetGestStatus"
+	case DISPID_Refresh:
+		return "DISPID_Refresh"
+	default:
+		return fmt.Sprintf("DISPID_InkEdit(%d)", int32(e))
+	}
+}
+
 // DISPID_InkEditEvents: https://learn.microsoft.com/windows/win32/api/inked/ne-inked-dispid_inkeditevents
 type DISPID_InkEditEvents int32
 
@@ -334,12 +924,62 @@ const (
 	DISPID_IeeRecognitionResult DISPID_InkEditEvents = 24
 )
 
+// String returns the DISPID_InkEditEvents constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkEditEvents) String() string {
+	switch e {
+	case DISPID_IeeChange:
+		return "DISPID_IeeChange"
+	case DISPID_IeeSelChange:
+		return "DISPID_IeeSelChange"
+	case DISPID_IeeKeyDown:
+		return "DISPID_IeeKeyDown"
+	case DISPID_IeeKeyUp:
+		return "DISPID_IeeKeyUp"
+	case DISPID_IeeMouseUp:
+		return "DISPID_IeeMouseUp"
+	case DISPID_IeeMouseDown:
+		return "DISPID_IeeMouseDown"
+	case DISPID_IeeKeyPress:
+		return "DISPID_IeeKeyPress"
+	case DISPID_IeeDblClick:
+		return "DISPID_IeeDblClick"
+	case DISPID_IeeClick:
+		return "DISPID_IeeClick"
+	case DISPID_IeeMouseMove:
+		return "DISPID_IeeMouseMove"
+	case DISPID_IeeCursorDown:
+		return "DISPID_IeeCursorDown"
+	case DISPID_IeeStroke:
+		return "DISPID_IeeStroke"
+	case DISPID_IeeGesture:
+		return "DISPID_IeeGesture"
+	case DISPID_IeeRecognitionResult:
+		return "DISPID_IeeRecognitionResult"
+	default:
+		return fmt.Sprintf("DISPID_InkEditEvents(%d)", int32(e))
+	}
+}
+
 type DISPID_InkEvent int32
 
 const (
 	DISPID_IEInkAdded   DISPID_InkEvent = 1
 	DISPID_IEInkDeleted DISPID_InkEvent = 2
 )
+
+// String returns the DISPID_InkEvent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkEvent) String() string {
+	switch e {
+	case DISPID_IEInkAdded:
+		return "DISPID_IEInkAdded"
+	case DISPID_IEInkDeleted:
+		return "DISPID_IEInkDeleted"
+	default:
+		return fmt.Sprintf("DISPID_InkEvent(%d)", int32(e))
+	}
+}
 
 type DISPID_InkExtendedProperties int32
 
@@ -353,12 +993,48 @@ const (
 	DISPID_IEPsDoesPropertyExist DISPID_InkExtendedProperties = 5
 )
 
+// String returns the DISPID_InkExtendedProperties constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkExtendedProperties) String() string {
+	switch e {
+	case DISPID_IEPs_NewEnum:
+		return "DISPID_IEPs_NewEnum"
+	case DISPID_IEPsItem:
+		return "DISPID_IEPsItem"
+	case DISPID_IEPsCount:
+		return "DISPID_IEPsCount"
+	case DISPID_IEPsAdd:
+		return "DISPID_IEPsAdd"
+	case DISPID_IEPsRemove:
+		return "DISPID_IEPsRemove"
+	case DISPID_IEPsClear:
+		return "DISPID_IEPsClear"
+	case DISPID_IEPsDoesPropertyExist:
+		return "DISPID_IEPsDoesPropertyExist"
+	default:
+		return fmt.Sprintf("DISPID_InkExtendedProperties(%d)", int32(e))
+	}
+}
+
 type DISPID_InkExtendedProperty int32
 
 const (
 	DISPID_IEPGuid DISPID_InkExtendedProperty = 1
 	DISPID_IEPData DISPID_InkExtendedProperty = 2
 )
+
+// String returns the DISPID_InkExtendedProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkExtendedProperty) String() string {
+	switch e {
+	case DISPID_IEPGuid:
+		return "DISPID_IEPGuid"
+	case DISPID_IEPData:
+		return "DISPID_IEPData"
+	default:
+		return fmt.Sprintf("DISPID_InkExtendedProperty(%d)", int32(e))
+	}
+}
 
 type DISPID_InkGesture int32
 
@@ -367,6 +1043,21 @@ const (
 	DISPID_IGGetHotPoint DISPID_InkGesture = 1
 	DISPID_IGConfidence  DISPID_InkGesture = 2
 )
+
+// String returns the DISPID_InkGesture constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkGesture) String() string {
+	switch e {
+	case DISPID_IGId:
+		return "DISPID_IGId"
+	case DISPID_IGGetHotPoint:
+		return "DISPID_IGGetHotPoint"
+	case DISPID_IGConfidence:
+		return "DISPID_IGConfidence"
+	default:
+		return fmt.Sprintf("DISPID_InkGesture(%d)", int32(e))
+	}
+}
 
 type DISPID_InkRecoAlternate int32
 
@@ -387,6 +1078,45 @@ const (
 	DISPID_InkRecoAlternate_ConfidenceAlternates                 DISPID_InkRecoAlternate = 14
 	DISPID_InkRecoAlternate_AlternatesWithConstantPropertyValues DISPID_InkRecoAlternate = 15
 )
+
+// String returns the DISPID_InkRecoAlternate constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRecoAlternate) String() string {
+	switch e {
+	case DISPID_InkRecoAlternate_String:
+		return "DISPID_InkRecoAlternate_String"
+	case DISPID_InkRecoAlternate_LineNumber:
+		return "DISPID_InkRecoAlternate_LineNumber"
+	case DISPID_InkRecoAlternate_Baseline:
+		return "DISPID_InkRecoAlternate_Baseline"
+	case DISPID_InkRecoAlternate_Midline:
+		return "DISPID_InkRecoAlternate_Midline"
+	case DISPID_InkRecoAlternate_Ascender:
+		return "DISPID_InkRecoAlternate_Ascender"
+	case DISPID_InkRecoAlternate_Descender:
+		return "DISPID_InkRecoAlternate_Descender"
+	case DISPID_InkRecoAlternate_Confidence:
+		return "DISPID_InkRecoAlternate_Confidence"
+	case DISPID_InkRecoAlternate_Strokes:
+		return "DISPID_InkRecoAlternate_Strokes"
+	case DISPID_InkRecoAlternate_GetStrokesFromStrokeRanges:
+		return "DISPID_InkRecoAlternate_GetStrokesFromStrokeRanges"
+	case DISPID_InkRecoAlternate_GetStrokesFromTextRange:
+		return "DISPID_InkRecoAlternate_GetStrokesFromTextRange"
+	case DISPID_InkRecoAlternate_GetTextRangeFromStrokes:
+		return "DISPID_InkRecoAlternate_GetTextRangeFromStrokes"
+	case DISPID_InkRecoAlternate_GetPropertyValue:
+		return "DISPID_InkRecoAlternate_GetPropertyValue"
+	case DISPID_InkRecoAlternate_LineAlternates:
+		return "DISPID_InkRecoAlternate_LineAlternates"
+	case DISPID_InkRecoAlternate_ConfidenceAlternates:
+		return "DISPID_InkRecoAlternate_ConfidenceAlternates"
+	case DISPID_InkRecoAlternate_AlternatesWithConstantPropertyValues:
+		return "DISPID_InkRecoAlternate_AlternatesWithConstantPropertyValues"
+	default:
+		return fmt.Sprintf("DISPID_InkRecoAlternate(%d)", int32(e))
+	}
+}
 
 type DISPID_InkRecoContext int32
 
@@ -410,11 +1140,65 @@ const (
 	DISPID_IRecoCtx_IsStringSupported                 DISPID_InkRecoContext = 17
 )
 
+// String returns the DISPID_InkRecoContext constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRecoContext) String() string {
+	switch e {
+	case DISPID_IRecoCtx_Strokes:
+		return "DISPID_IRecoCtx_Strokes"
+	case DISPID_IRecoCtx_CharacterAutoCompletionMode:
+		return "DISPID_IRecoCtx_CharacterAutoCompletionMode"
+	case DISPID_IRecoCtx_Factoid:
+		return "DISPID_IRecoCtx_Factoid"
+	case DISPID_IRecoCtx_WordList:
+		return "DISPID_IRecoCtx_WordList"
+	case DISPID_IRecoCtx_Recognizer:
+		return "DISPID_IRecoCtx_Recognizer"
+	case DISPID_IRecoCtx_Guide:
+		return "DISPID_IRecoCtx_Guide"
+	case DISPID_IRecoCtx_Flags:
+		return "DISPID_IRecoCtx_Flags"
+	case DISPID_IRecoCtx_PrefixText:
+		return "DISPID_IRecoCtx_PrefixText"
+	case DISPID_IRecoCtx_SuffixText:
+		return "DISPID_IRecoCtx_SuffixText"
+	case DISPID_IRecoCtx_StopRecognition:
+		return "DISPID_IRecoCtx_StopRecognition"
+	case DISPID_IRecoCtx_Clone:
+		return "DISPID_IRecoCtx_Clone"
+	case DISPID_IRecoCtx_Recognize:
+		return "DISPID_IRecoCtx_Recognize"
+	case DISPID_IRecoCtx_StopBackgroundRecognition:
+		return "DISPID_IRecoCtx_StopBackgroundRecognition"
+	case DISPID_IRecoCtx_EndInkInput:
+		return "DISPID_IRecoCtx_EndInkInput"
+	case DISPID_IRecoCtx_BackgroundRecognize:
+		return "DISPID_IRecoCtx_BackgroundRecognize"
+	case DISPID_IRecoCtx_BackgroundRecognizeWithAlternates:
+		return "DISPID_IRecoCtx_BackgroundRecognizeWithAlternates"
+	case DISPID_IRecoCtx_IsStringSupported:
+		return "DISPID_IRecoCtx_IsStringSupported"
+	default:
+		return fmt.Sprintf("DISPID_InkRecoContext(%d)", int32(e))
+	}
+}
+
 type DISPID_InkRecoContext2 int32
 
 const (
 	DISPID_IRecoCtx2_EnabledUnicodeRanges DISPID_InkRecoContext2 = 0
 )
+
+// String returns the DISPID_InkRecoContext2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRecoContext2) String() string {
+	switch e {
+	case DISPID_IRecoCtx2_EnabledUnicodeRanges:
+		return "DISPID_IRecoCtx2_EnabledUnicodeRanges"
+	default:
+		return fmt.Sprintf("DISPID_InkRecoContext2(%d)", int32(e))
+	}
+}
 
 type DISPID_InkRecognitionAlternates int32
 
@@ -425,12 +1209,42 @@ const (
 	DISPID_InkRecognitionAlternates_Strokes DISPID_InkRecognitionAlternates = 2
 )
 
+// String returns the DISPID_InkRecognitionAlternates constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRecognitionAlternates) String() string {
+	switch e {
+	case DISPID_InkRecognitionAlternates_NewEnum:
+		return "DISPID_InkRecognitionAlternates_NewEnum"
+	case DISPID_InkRecognitionAlternates_Item:
+		return "DISPID_InkRecognitionAlternates_Item"
+	case DISPID_InkRecognitionAlternates_Count:
+		return "DISPID_InkRecognitionAlternates_Count"
+	case DISPID_InkRecognitionAlternates_Strokes:
+		return "DISPID_InkRecognitionAlternates_Strokes"
+	default:
+		return fmt.Sprintf("DISPID_InkRecognitionAlternates(%d)", int32(e))
+	}
+}
+
 type DISPID_InkRecognitionEvent int32
 
 const (
 	DISPID_IRERecognitionWithAlternates DISPID_InkRecognitionEvent = 1
 	DISPID_IRERecognition               DISPID_InkRecognitionEvent = 2
 )
+
+// String returns the DISPID_InkRecognitionEvent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRecognitionEvent) String() string {
+	switch e {
+	case DISPID_IRERecognitionWithAlternates:
+		return "DISPID_IRERecognitionWithAlternates"
+	case DISPID_IRERecognition:
+		return "DISPID_IRERecognition"
+	default:
+		return fmt.Sprintf("DISPID_InkRecognitionEvent(%d)", int32(e))
+	}
+}
 
 type DISPID_InkRecognitionResult int32
 
@@ -443,6 +1257,29 @@ const (
 	DISPID_InkRecognitionResult_ModifyTopAlternate      DISPID_InkRecognitionResult = 6
 	DISPID_InkRecognitionResult_SetResultOnStrokes      DISPID_InkRecognitionResult = 7
 )
+
+// String returns the DISPID_InkRecognitionResult constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRecognitionResult) String() string {
+	switch e {
+	case DISPID_InkRecognitionResult_TopString:
+		return "DISPID_InkRecognitionResult_TopString"
+	case DISPID_InkRecognitionResult_TopAlternate:
+		return "DISPID_InkRecognitionResult_TopAlternate"
+	case DISPID_InkRecognitionResult_Strokes:
+		return "DISPID_InkRecognitionResult_Strokes"
+	case DISPID_InkRecognitionResult_TopConfidence:
+		return "DISPID_InkRecognitionResult_TopConfidence"
+	case DISPID_InkRecognitionResult_AlternatesFromSelection:
+		return "DISPID_InkRecognitionResult_AlternatesFromSelection"
+	case DISPID_InkRecognitionResult_ModifyTopAlternate:
+		return "DISPID_InkRecognitionResult_ModifyTopAlternate"
+	case DISPID_InkRecognitionResult_SetResultOnStrokes:
+		return "DISPID_InkRecognitionResult_SetResultOnStrokes"
+	default:
+		return fmt.Sprintf("DISPID_InkRecognitionResult(%d)", int32(e))
+	}
+}
 
 type DISPID_InkRecognizer int32
 
@@ -457,12 +1294,50 @@ const (
 	DISPID_RecoSupportedProperties        DISPID_InkRecognizer = 8
 )
 
+// String returns the DISPID_InkRecognizer constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRecognizer) String() string {
+	switch e {
+	case DISPID_RecoClsid:
+		return "DISPID_RecoClsid"
+	case DISPID_RecoName:
+		return "DISPID_RecoName"
+	case DISPID_RecoVendor:
+		return "DISPID_RecoVendor"
+	case DISPID_RecoCapabilities:
+		return "DISPID_RecoCapabilities"
+	case DISPID_RecoLanguageID:
+		return "DISPID_RecoLanguageID"
+	case DISPID_RecoPreferredPacketDescription:
+		return "DISPID_RecoPreferredPacketDescription"
+	case DISPID_RecoCreateRecognizerContext:
+		return "DISPID_RecoCreateRecognizerContext"
+	case DISPID_RecoSupportedProperties:
+		return "DISPID_RecoSupportedProperties"
+	default:
+		return fmt.Sprintf("DISPID_InkRecognizer(%d)", int32(e))
+	}
+}
+
 type DISPID_InkRecognizer2 int32
 
 const (
 	DISPID_RecoId            DISPID_InkRecognizer2 = 0
 	DISPID_RecoUnicodeRanges DISPID_InkRecognizer2 = 1
 )
+
+// String returns the DISPID_InkRecognizer2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRecognizer2) String() string {
+	switch e {
+	case DISPID_RecoId:
+		return "DISPID_RecoId"
+	case DISPID_RecoUnicodeRanges:
+		return "DISPID_RecoUnicodeRanges"
+	default:
+		return fmt.Sprintf("DISPID_InkRecognizer2(%d)", int32(e))
+	}
+}
 
 type DISPID_InkRecognizerGuide int32
 
@@ -475,6 +1350,27 @@ const (
 	DISPID_IRGGuideData  DISPID_InkRecognizerGuide = 6
 )
 
+// String returns the DISPID_InkRecognizerGuide constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRecognizerGuide) String() string {
+	switch e {
+	case DISPID_IRGWritingBox:
+		return "DISPID_IRGWritingBox"
+	case DISPID_IRGDrawnBox:
+		return "DISPID_IRGDrawnBox"
+	case DISPID_IRGRows:
+		return "DISPID_IRGRows"
+	case DISPID_IRGColumns:
+		return "DISPID_IRGColumns"
+	case DISPID_IRGMidline:
+		return "DISPID_IRGMidline"
+	case DISPID_IRGGuideData:
+		return "DISPID_IRGGuideData"
+	default:
+		return fmt.Sprintf("DISPID_InkRecognizerGuide(%d)", int32(e))
+	}
+}
+
 type DISPID_InkRecognizers int32
 
 const (
@@ -483,6 +1379,23 @@ const (
 	DISPID_IRecosCount                DISPID_InkRecognizers = 1
 	DISPID_IRecosGetDefaultRecognizer DISPID_InkRecognizers = 2
 )
+
+// String returns the DISPID_InkRecognizers constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRecognizers) String() string {
+	switch e {
+	case DISPID_IRecos_NewEnum:
+		return "DISPID_IRecos_NewEnum"
+	case DISPID_IRecosItem:
+		return "DISPID_IRecosItem"
+	case DISPID_IRecosCount:
+		return "DISPID_IRecosCount"
+	case DISPID_IRecosGetDefaultRecognizer:
+		return "DISPID_IRecosGetDefaultRecognizer"
+	default:
+		return fmt.Sprintf("DISPID_InkRecognizers(%d)", int32(e))
+	}
+}
 
 type DISPID_InkRectangle int32
 
@@ -495,6 +1408,29 @@ const (
 	DISPID_IRSetRectangle DISPID_InkRectangle = 6
 	DISPID_IRData         DISPID_InkRectangle = 7
 )
+
+// String returns the DISPID_InkRectangle constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRectangle) String() string {
+	switch e {
+	case DISPID_IRTop:
+		return "DISPID_IRTop"
+	case DISPID_IRLeft:
+		return "DISPID_IRLeft"
+	case DISPID_IRBottom:
+		return "DISPID_IRBottom"
+	case DISPID_IRRight:
+		return "DISPID_IRRight"
+	case DISPID_IRGetRectangle:
+		return "DISPID_IRGetRectangle"
+	case DISPID_IRSetRectangle:
+		return "DISPID_IRSetRectangle"
+	case DISPID_IRData:
+		return "DISPID_IRData"
+	default:
+		return fmt.Sprintf("DISPID_InkRectangle(%d)", int32(e))
+	}
+}
 
 type DISPID_InkRenderer int32
 
@@ -515,6 +1451,45 @@ const (
 	DISPID_IRRotate                    DISPID_InkRenderer = 14
 	DISPID_IRScale                     DISPID_InkRenderer = 15
 )
+
+// String returns the DISPID_InkRenderer constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkRenderer) String() string {
+	switch e {
+	case DISPID_IRGetViewTransform:
+		return "DISPID_IRGetViewTransform"
+	case DISPID_IRSetViewTransform:
+		return "DISPID_IRSetViewTransform"
+	case DISPID_IRGetObjectTransform:
+		return "DISPID_IRGetObjectTransform"
+	case DISPID_IRSetObjectTransform:
+		return "DISPID_IRSetObjectTransform"
+	case DISPID_IRDraw:
+		return "DISPID_IRDraw"
+	case DISPID_IRDrawStroke:
+		return "DISPID_IRDrawStroke"
+	case DISPID_IRPixelToInkSpace:
+		return "DISPID_IRPixelToInkSpace"
+	case DISPID_IRInkSpaceToPixel:
+		return "DISPID_IRInkSpaceToPixel"
+	case DISPID_IRPixelToInkSpaceFromPoints:
+		return "DISPID_IRPixelToInkSpaceFromPoints"
+	case DISPID_IRInkSpaceToPixelFromPoints:
+		return "DISPID_IRInkSpaceToPixelFromPoints"
+	case DISPID_IRMeasure:
+		return "DISPID_IRMeasure"
+	case DISPID_IRMeasureStroke:
+		return "DISPID_IRMeasureStroke"
+	case DISPID_IRMove:
+		return "DISPID_IRMove"
+	case DISPID_IRRotate:
+		return "DISPID_IRRotate"
+	case DISPID_IRScale:
+		return "DISPID_IRScale"
+	default:
+		return fmt.Sprintf("DISPID_InkRenderer(%d)", int32(e))
+	}
+}
 
 type DISPID_InkStrokeDisp int32
 
@@ -554,6 +1529,81 @@ const (
 	DISPID_ISDScale                               DISPID_InkStrokeDisp = 33
 )
 
+// String returns the DISPID_InkStrokeDisp constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkStrokeDisp) String() string {
+	switch e {
+	case DISPID_ISDInkIndex:
+		return "DISPID_ISDInkIndex"
+	case DISPID_ISDID:
+		return "DISPID_ISDID"
+	case DISPID_ISDGetBoundingBox:
+		return "DISPID_ISDGetBoundingBox"
+	case DISPID_ISDDrawingAttributes:
+		return "DISPID_ISDDrawingAttributes"
+	case DISPID_ISDFindIntersections:
+		return "DISPID_ISDFindIntersections"
+	case DISPID_ISDGetRectangleIntersections:
+		return "DISPID_ISDGetRectangleIntersections"
+	case DISPID_ISDClip:
+		return "DISPID_ISDClip"
+	case DISPID_ISDHitTestCircle:
+		return "DISPID_ISDHitTestCircle"
+	case DISPID_ISDNearestPoint:
+		return "DISPID_ISDNearestPoint"
+	case DISPID_ISDSplit:
+		return "DISPID_ISDSplit"
+	case DISPID_ISDExtendedProperties:
+		return "DISPID_ISDExtendedProperties"
+	case DISPID_ISDInk:
+		return "DISPID_ISDInk"
+	case DISPID_ISDBezierPoints:
+		return "DISPID_ISDBezierPoints"
+	case DISPID_ISDPolylineCusps:
+		return "DISPID_ISDPolylineCusps"
+	case DISPID_ISDBezierCusps:
+		return "DISPID_ISDBezierCusps"
+	case DISPID_ISDSelfIntersections:
+		return "DISPID_ISDSelfIntersections"
+	case DISPID_ISDPacketCount:
+		return "DISPID_ISDPacketCount"
+	case DISPID_ISDPacketSize:
+		return "DISPID_ISDPacketSize"
+	case DISPID_ISDPacketDescription:
+		return "DISPID_ISDPacketDescription"
+	case DISPID_ISDDeleted:
+		return "DISPID_ISDDeleted"
+	case DISPID_ISDGetPacketDescriptionPropertyMetrics:
+		return "DISPID_ISDGetPacketDescriptionPropertyMetrics"
+	case DISPID_ISDGetPoints:
+		return "DISPID_ISDGetPoints"
+	case DISPID_ISDSetPoints:
+		return "DISPID_ISDSetPoints"
+	case DISPID_ISDGetPacketData:
+		return "DISPID_ISDGetPacketData"
+	case DISPID_ISDGetPacketValuesByProperty:
+		return "DISPID_ISDGetPacketValuesByProperty"
+	case DISPID_ISDSetPacketValuesByProperty:
+		return "DISPID_ISDSetPacketValuesByProperty"
+	case DISPID_ISDGetFlattenedBezierPoints:
+		return "DISPID_ISDGetFlattenedBezierPoints"
+	case DISPID_ISDScaleToRectangle:
+		return "DISPID_ISDScaleToRectangle"
+	case DISPID_ISDTransform:
+		return "DISPID_ISDTransform"
+	case DISPID_ISDMove:
+		return "DISPID_ISDMove"
+	case DISPID_ISDRotate:
+		return "DISPID_ISDRotate"
+	case DISPID_ISDShear:
+		return "DISPID_ISDShear"
+	case DISPID_ISDScale:
+		return "DISPID_ISDScale"
+	default:
+		return fmt.Sprintf("DISPID_InkStrokeDisp(%d)", int32(e))
+	}
+}
+
 type DISPID_InkStrokes int32
 
 const (
@@ -580,6 +1630,57 @@ const (
 	DISPID_ISsRemoveRecognitionResult DISPID_InkStrokes = 19
 )
 
+// String returns the DISPID_InkStrokes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkStrokes) String() string {
+	switch e {
+	case DISPID_ISs_NewEnum:
+		return "DISPID_ISs_NewEnum"
+	case DISPID_ISsItem:
+		return "DISPID_ISsItem"
+	case DISPID_ISsCount:
+		return "DISPID_ISsCount"
+	case DISPID_ISsValid:
+		return "DISPID_ISsValid"
+	case DISPID_ISsInk:
+		return "DISPID_ISsInk"
+	case DISPID_ISsAdd:
+		return "DISPID_ISsAdd"
+	case DISPID_ISsAddStrokes:
+		return "DISPID_ISsAddStrokes"
+	case DISPID_ISsRemove:
+		return "DISPID_ISsRemove"
+	case DISPID_ISsRemoveStrokes:
+		return "DISPID_ISsRemoveStrokes"
+	case DISPID_ISsToString:
+		return "DISPID_ISsToString"
+	case DISPID_ISsModifyDrawingAttributes:
+		return "DISPID_ISsModifyDrawingAttributes"
+	case DISPID_ISsGetBoundingBox:
+		return "DISPID_ISsGetBoundingBox"
+	case DISPID_ISsScaleToRectangle:
+		return "DISPID_ISsScaleToRectangle"
+	case DISPID_ISsTransform:
+		return "DISPID_ISsTransform"
+	case DISPID_ISsMove:
+		return "DISPID_ISsMove"
+	case DISPID_ISsRotate:
+		return "DISPID_ISsRotate"
+	case DISPID_ISsShear:
+		return "DISPID_ISsShear"
+	case DISPID_ISsScale:
+		return "DISPID_ISsScale"
+	case DISPID_ISsClip:
+		return "DISPID_ISsClip"
+	case DISPID_ISsRecognitionResult:
+		return "DISPID_ISsRecognitionResult"
+	case DISPID_ISsRemoveRecognitionResult:
+		return "DISPID_ISsRemoveRecognitionResult"
+	default:
+		return fmt.Sprintf("DISPID_InkStrokes(%d)", int32(e))
+	}
+}
+
 type DISPID_InkTablet int32
 
 const (
@@ -591,11 +1692,43 @@ const (
 	DISPID_ITHardwareCapabilities      DISPID_InkTablet = 5
 )
 
+// String returns the DISPID_InkTablet constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkTablet) String() string {
+	switch e {
+	case DISPID_ITName:
+		return "DISPID_ITName"
+	case DISPID_ITPlugAndPlayId:
+		return "DISPID_ITPlugAndPlayId"
+	case DISPID_ITPropertyMetrics:
+		return "DISPID_ITPropertyMetrics"
+	case DISPID_ITIsPacketPropertySupported:
+		return "DISPID_ITIsPacketPropertySupported"
+	case DISPID_ITMaximumInputRectangle:
+		return "DISPID_ITMaximumInputRectangle"
+	case DISPID_ITHardwareCapabilities:
+		return "DISPID_ITHardwareCapabilities"
+	default:
+		return fmt.Sprintf("DISPID_InkTablet(%d)", int32(e))
+	}
+}
+
 type DISPID_InkTablet2 int32
 
 const (
 	DISPID_IT2DeviceKind DISPID_InkTablet2 = 0
 )
+
+// String returns the DISPID_InkTablet2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkTablet2) String() string {
+	switch e {
+	case DISPID_IT2DeviceKind:
+		return "DISPID_IT2DeviceKind"
+	default:
+		return fmt.Sprintf("DISPID_InkTablet2(%d)", int32(e))
+	}
+}
 
 type DISPID_InkTablet3 int32
 
@@ -603,6 +1736,19 @@ const (
 	DISPID_IT3IsMultiTouch   DISPID_InkTablet3 = 0
 	DISPID_IT3MaximumCursors DISPID_InkTablet3 = 1
 )
+
+// String returns the DISPID_InkTablet3 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkTablet3) String() string {
+	switch e {
+	case DISPID_IT3IsMultiTouch:
+		return "DISPID_IT3IsMultiTouch"
+	case DISPID_IT3MaximumCursors:
+		return "DISPID_IT3MaximumCursors"
+	default:
+		return fmt.Sprintf("DISPID_InkTablet3(%d)", int32(e))
+	}
+}
 
 type DISPID_InkTablets int32
 
@@ -613,6 +1759,25 @@ const (
 	DISPID_ITsCount                     DISPID_InkTablets = 2
 	DISPID_ITsIsPacketPropertySupported DISPID_InkTablets = 3
 )
+
+// String returns the DISPID_InkTablets constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkTablets) String() string {
+	switch e {
+	case DISPID_ITs_NewEnum:
+		return "DISPID_ITs_NewEnum"
+	case DISPID_ITsItem:
+		return "DISPID_ITsItem"
+	case DISPID_ITsDefaultTablet:
+		return "DISPID_ITsDefaultTablet"
+	case DISPID_ITsCount:
+		return "DISPID_ITsCount"
+	case DISPID_ITsIsPacketPropertySupported:
+		return "DISPID_ITsIsPacketPropertySupported"
+	default:
+		return fmt.Sprintf("DISPID_InkTablets(%d)", int32(e))
+	}
+}
 
 type DISPID_InkTransform int32
 
@@ -634,6 +1799,45 @@ const (
 	DISPID_ITData         DISPID_InkTransform = 15
 )
 
+// String returns the DISPID_InkTransform constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkTransform) String() string {
+	switch e {
+	case DISPID_ITReset:
+		return "DISPID_ITReset"
+	case DISPID_ITTranslate:
+		return "DISPID_ITTranslate"
+	case DISPID_ITRotate:
+		return "DISPID_ITRotate"
+	case DISPID_ITReflect:
+		return "DISPID_ITReflect"
+	case DISPID_ITShear:
+		return "DISPID_ITShear"
+	case DISPID_ITScale:
+		return "DISPID_ITScale"
+	case DISPID_ITeM11:
+		return "DISPID_ITeM11"
+	case DISPID_ITeM12:
+		return "DISPID_ITeM12"
+	case DISPID_ITeM21:
+		return "DISPID_ITeM21"
+	case DISPID_ITeM22:
+		return "DISPID_ITeM22"
+	case DISPID_ITeDx:
+		return "DISPID_ITeDx"
+	case DISPID_ITeDy:
+		return "DISPID_ITeDy"
+	case DISPID_ITGetTransform:
+		return "DISPID_ITGetTransform"
+	case DISPID_ITSetTransform:
+		return "DISPID_ITSetTransform"
+	case DISPID_ITData:
+		return "DISPID_ITData"
+	default:
+		return fmt.Sprintf("DISPID_InkTransform(%d)", int32(e))
+	}
+}
+
 type DISPID_InkWordList int32
 
 const (
@@ -642,11 +1846,37 @@ const (
 	DISPID_InkWordList_Merge      DISPID_InkWordList = 2
 )
 
+// String returns the DISPID_InkWordList constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkWordList) String() string {
+	switch e {
+	case DISPID_InkWordList_AddWord:
+		return "DISPID_InkWordList_AddWord"
+	case DISPID_InkWordList_RemoveWord:
+		return "DISPID_InkWordList_RemoveWord"
+	case DISPID_InkWordList_Merge:
+		return "DISPID_InkWordList_Merge"
+	default:
+		return fmt.Sprintf("DISPID_InkWordList(%d)", int32(e))
+	}
+}
+
 type DISPID_InkWordList2 int32
 
 const (
 	DISPID_InkWordList2_AddWords DISPID_InkWordList2 = 3
 )
+
+// String returns the DISPID_InkWordList2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_InkWordList2) String() string {
+	switch e {
+	case DISPID_InkWordList2_AddWords:
+		return "DISPID_InkWordList2_AddWords"
+	default:
+		return fmt.Sprintf("DISPID_InkWordList2(%d)", int32(e))
+	}
+}
 
 type DISPID_MathInputControlEvents int32
 
@@ -656,6 +1886,23 @@ const (
 	DISPID_MICPaint  DISPID_MathInputControlEvents = 2
 	DISPID_MICClear  DISPID_MathInputControlEvents = 3
 )
+
+// String returns the DISPID_MathInputControlEvents constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_MathInputControlEvents) String() string {
+	switch e {
+	case DISPID_MICInsert:
+		return "DISPID_MICInsert"
+	case DISPID_MICClose:
+		return "DISPID_MICClose"
+	case DISPID_MICPaint:
+		return "DISPID_MICPaint"
+	case DISPID_MICClear:
+		return "DISPID_MICClear"
+	default:
+		return fmt.Sprintf("DISPID_MathInputControlEvents(%d)", int32(e))
+	}
+}
 
 type DISPID_PenInputPanel int32
 
@@ -679,6 +1926,49 @@ const (
 	DISPID_PIPAutoShow           DISPID_PenInputPanel = 16
 )
 
+// String returns the DISPID_PenInputPanel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_PenInputPanel) String() string {
+	switch e {
+	case DISPID_PIPAttachedEditWindow:
+		return "DISPID_PIPAttachedEditWindow"
+	case DISPID_PIPFactoid:
+		return "DISPID_PIPFactoid"
+	case DISPID_PIPCurrentPanel:
+		return "DISPID_PIPCurrentPanel"
+	case DISPID_PIPDefaultPanel:
+		return "DISPID_PIPDefaultPanel"
+	case DISPID_PIPVisible:
+		return "DISPID_PIPVisible"
+	case DISPID_PIPTop:
+		return "DISPID_PIPTop"
+	case DISPID_PIPLeft:
+		return "DISPID_PIPLeft"
+	case DISPID_PIPWidth:
+		return "DISPID_PIPWidth"
+	case DISPID_PIPHeight:
+		return "DISPID_PIPHeight"
+	case DISPID_PIPMoveTo:
+		return "DISPID_PIPMoveTo"
+	case DISPID_PIPCommitPendingInput:
+		return "DISPID_PIPCommitPendingInput"
+	case DISPID_PIPRefresh:
+		return "DISPID_PIPRefresh"
+	case DISPID_PIPBusy:
+		return "DISPID_PIPBusy"
+	case DISPID_PIPVerticalOffset:
+		return "DISPID_PIPVerticalOffset"
+	case DISPID_PIPHorizontalOffset:
+		return "DISPID_PIPHorizontalOffset"
+	case DISPID_PIPEnableTsf:
+		return "DISPID_PIPEnableTsf"
+	case DISPID_PIPAutoShow:
+		return "DISPID_PIPAutoShow"
+	default:
+		return fmt.Sprintf("DISPID_PenInputPanel(%d)", int32(e))
+	}
+}
+
 type DISPID_PenInputPanelEvents int32
 
 const (
@@ -688,12 +1978,42 @@ const (
 	DISPID_PIPEPanelMoving    DISPID_PenInputPanelEvents = 3
 )
 
+// String returns the DISPID_PenInputPanelEvents constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_PenInputPanelEvents) String() string {
+	switch e {
+	case DISPID_PIPEVisibleChanged:
+		return "DISPID_PIPEVisibleChanged"
+	case DISPID_PIPEPanelChanged:
+		return "DISPID_PIPEPanelChanged"
+	case DISPID_PIPEInputFailed:
+		return "DISPID_PIPEInputFailed"
+	case DISPID_PIPEPanelMoving:
+		return "DISPID_PIPEPanelMoving"
+	default:
+		return fmt.Sprintf("DISPID_PenInputPanelEvents(%d)", int32(e))
+	}
+}
+
 type DISPID_StrokeEvent int32
 
 const (
 	DISPID_SEStrokesAdded   DISPID_StrokeEvent = 1
 	DISPID_SEStrokesRemoved DISPID_StrokeEvent = 2
 )
+
+// String returns the DISPID_StrokeEvent constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DISPID_StrokeEvent) String() string {
+	switch e {
+	case DISPID_SEStrokesAdded:
+		return "DISPID_SEStrokesAdded"
+	case DISPID_SEStrokesRemoved:
+		return "DISPID_SEStrokesRemoved"
+	default:
+		return fmt.Sprintf("DISPID_StrokeEvent(%d)", int32(e))
+	}
+}
 
 // EventMask: https://learn.microsoft.com/windows/win32/api/peninputpanel/ne-peninputpanel-eventmask
 type EventMask int32
@@ -714,6 +2034,41 @@ const (
 	EventMask_All                       EventMask = 4095
 )
 
+// String returns the EventMask constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EventMask) String() string {
+	switch e {
+	case EventMask_InPlaceStateChanging:
+		return "EventMask_InPlaceStateChanging"
+	case EventMask_InPlaceStateChanged:
+		return "EventMask_InPlaceStateChanged"
+	case EventMask_InPlaceSizeChanging:
+		return "EventMask_InPlaceSizeChanging"
+	case EventMask_InPlaceSizeChanged:
+		return "EventMask_InPlaceSizeChanged"
+	case EventMask_InputAreaChanging:
+		return "EventMask_InputAreaChanging"
+	case EventMask_InputAreaChanged:
+		return "EventMask_InputAreaChanged"
+	case EventMask_CorrectionModeChanging:
+		return "EventMask_CorrectionModeChanging"
+	case EventMask_CorrectionModeChanged:
+		return "EventMask_CorrectionModeChanged"
+	case EventMask_InPlaceVisibilityChanging:
+		return "EventMask_InPlaceVisibilityChanging"
+	case EventMask_InPlaceVisibilityChanged:
+		return "EventMask_InPlaceVisibilityChanged"
+	case EventMask_TextInserting:
+		return "EventMask_TextInserting"
+	case EventMask_TextInserted:
+		return "EventMask_TextInserted"
+	case EventMask_All:
+		return "EventMask_All"
+	default:
+		return fmt.Sprintf("EventMask(%d)", int32(e))
+	}
+}
+
 // FLICKACTION_COMMANDCODE: https://learn.microsoft.com/windows/win32/api/tabflicks/ne-tabflicks-flickaction_commandcode
 type FLICKACTION_COMMANDCODE int32
 
@@ -724,6 +2079,25 @@ const (
 	FLICKACTION_COMMANDCODE_CUSTOMKEY   FLICKACTION_COMMANDCODE = 3
 	FLICKACTION_COMMANDCODE_KEYMODIFIER FLICKACTION_COMMANDCODE = 4
 )
+
+// String returns the FLICKACTION_COMMANDCODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FLICKACTION_COMMANDCODE) String() string {
+	switch e {
+	case FLICKACTION_COMMANDCODE_NULL:
+		return "FLICKACTION_COMMANDCODE_NULL"
+	case FLICKACTION_COMMANDCODE_SCROLL:
+		return "FLICKACTION_COMMANDCODE_SCROLL"
+	case FLICKACTION_COMMANDCODE_APPCOMMAND:
+		return "FLICKACTION_COMMANDCODE_APPCOMMAND"
+	case FLICKACTION_COMMANDCODE_CUSTOMKEY:
+		return "FLICKACTION_COMMANDCODE_CUSTOMKEY"
+	case FLICKACTION_COMMANDCODE_KEYMODIFIER:
+		return "FLICKACTION_COMMANDCODE_KEYMODIFIER"
+	default:
+		return fmt.Sprintf("FLICKACTION_COMMANDCODE(%d)", int32(e))
+	}
+}
 
 // FLICKDIRECTION: https://learn.microsoft.com/windows/win32/api/tabflicks/ne-tabflicks-flickdirection
 type FLICKDIRECTION int32
@@ -741,6 +2115,33 @@ const (
 	FLICKDIRECTION_INVALID   FLICKDIRECTION = 8
 )
 
+// String returns the FLICKDIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FLICKDIRECTION) String() string {
+	switch e {
+	case FLICKDIRECTION_MIN:
+		return "FLICKDIRECTION_MIN"
+	case FLICKDIRECTION_UPRIGHT:
+		return "FLICKDIRECTION_UPRIGHT"
+	case FLICKDIRECTION_UP:
+		return "FLICKDIRECTION_UP"
+	case FLICKDIRECTION_UPLEFT:
+		return "FLICKDIRECTION_UPLEFT"
+	case FLICKDIRECTION_LEFT:
+		return "FLICKDIRECTION_LEFT"
+	case FLICKDIRECTION_DOWNLEFT:
+		return "FLICKDIRECTION_DOWNLEFT"
+	case FLICKDIRECTION_DOWN:
+		return "FLICKDIRECTION_DOWN"
+	case FLICKDIRECTION_DOWNRIGHT:
+		return "FLICKDIRECTION_DOWNRIGHT"
+	case FLICKDIRECTION_INVALID:
+		return "FLICKDIRECTION_INVALID"
+	default:
+		return fmt.Sprintf("FLICKDIRECTION(%d)", int32(e))
+	}
+}
+
 // FLICKMODE: https://learn.microsoft.com/windows/win32/api/tabflicks/ne-tabflicks-flickmode
 type FLICKMODE int32
 
@@ -753,12 +2154,40 @@ const (
 	FLICKMODE_DEFAULT  FLICKMODE = 1
 )
 
+// String returns the FLICKMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FLICKMODE) String() string {
+	switch e {
+	case FLICKMODE_MIN:
+		return "FLICKMODE_MIN"
+	case FLICKMODE_ON:
+		return "FLICKMODE_ON"
+	case FLICKMODE_LEARNING:
+		return "FLICKMODE_LEARNING"
+	default:
+		return fmt.Sprintf("FLICKMODE(%d)", int32(e))
+	}
+}
+
 type GET_DANDIDATE_FLAGS int32
 
 const (
 	TCF_ALLOW_RECOGNITION GET_DANDIDATE_FLAGS = 1
 	TCF_FORCE_RECOGNITION GET_DANDIDATE_FLAGS = 2
 )
+
+// String returns the GET_DANDIDATE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GET_DANDIDATE_FLAGS) String() string {
+	switch e {
+	case TCF_ALLOW_RECOGNITION:
+		return "TCF_ALLOW_RECOGNITION"
+	case TCF_FORCE_RECOGNITION:
+		return "TCF_FORCE_RECOGNITION"
+	default:
+		return fmt.Sprintf("GET_DANDIDATE_FLAGS(%d)", int32(e))
+	}
+}
 
 type INK_METRIC_FLAGS int32
 
@@ -767,6 +2196,21 @@ const (
 	IMF_ITALIC               INK_METRIC_FLAGS = 2
 	IMF_BOLD                 INK_METRIC_FLAGS = 4
 )
+
+// String returns the INK_METRIC_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e INK_METRIC_FLAGS) String() string {
+	switch e {
+	case IMF_FONT_SELECTED_IN_HDC:
+		return "IMF_FONT_SELECTED_IN_HDC"
+	case IMF_ITALIC:
+		return "IMF_ITALIC"
+	case IMF_BOLD:
+		return "IMF_BOLD"
+	default:
+		return fmt.Sprintf("INK_METRIC_FLAGS(%d)", int32(e))
+	}
+}
 
 // InPlaceDirection: https://learn.microsoft.com/windows/win32/api/peninputpanel/ne-peninputpanel-inplacedirection
 type InPlaceDirection int32
@@ -777,6 +2221,21 @@ const (
 	InPlaceDirection_Top    InPlaceDirection = 2
 )
 
+// String returns the InPlaceDirection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InPlaceDirection) String() string {
+	switch e {
+	case InPlaceDirection_Auto:
+		return "InPlaceDirection_Auto"
+	case InPlaceDirection_Bottom:
+		return "InPlaceDirection_Bottom"
+	case InPlaceDirection_Top:
+		return "InPlaceDirection_Top"
+	default:
+		return fmt.Sprintf("InPlaceDirection(%d)", int32(e))
+	}
+}
+
 // InPlaceState: https://learn.microsoft.com/windows/win32/api/peninputpanel/ne-peninputpanel-inplacestate
 type InPlaceState int32
 
@@ -785,6 +2244,21 @@ const (
 	InPlaceState_HoverTarget InPlaceState = 1
 	InPlaceState_Expanded    InPlaceState = 2
 )
+
+// String returns the InPlaceState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InPlaceState) String() string {
+	switch e {
+	case InPlaceState_Auto:
+		return "InPlaceState_Auto"
+	case InPlaceState_HoverTarget:
+		return "InPlaceState_HoverTarget"
+	case InPlaceState_Expanded:
+		return "InPlaceState_Expanded"
+	default:
+		return fmt.Sprintf("InPlaceState(%d)", int32(e))
+	}
+}
 
 // InkApplicationGesture: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkapplicationgesture
 type InkApplicationGesture int32
@@ -836,6 +2310,103 @@ const (
 	IAG_DoubleTap       InkApplicationGesture = 61681
 )
 
+// String returns the InkApplicationGesture constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkApplicationGesture) String() string {
+	switch e {
+	case IAG_AllGestures:
+		return "IAG_AllGestures"
+	case IAG_NoGesture:
+		return "IAG_NoGesture"
+	case IAG_Scratchout:
+		return "IAG_Scratchout"
+	case IAG_Triangle:
+		return "IAG_Triangle"
+	case IAG_Square:
+		return "IAG_Square"
+	case IAG_Star:
+		return "IAG_Star"
+	case IAG_Check:
+		return "IAG_Check"
+	case IAG_Curlicue:
+		return "IAG_Curlicue"
+	case IAG_DoubleCurlicue:
+		return "IAG_DoubleCurlicue"
+	case IAG_Circle:
+		return "IAG_Circle"
+	case IAG_DoubleCircle:
+		return "IAG_DoubleCircle"
+	case IAG_SemiCircleLeft:
+		return "IAG_SemiCircleLeft"
+	case IAG_SemiCircleRight:
+		return "IAG_SemiCircleRight"
+	case IAG_ChevronUp:
+		return "IAG_ChevronUp"
+	case IAG_ChevronDown:
+		return "IAG_ChevronDown"
+	case IAG_ChevronLeft:
+		return "IAG_ChevronLeft"
+	case IAG_ChevronRight:
+		return "IAG_ChevronRight"
+	case IAG_ArrowUp:
+		return "IAG_ArrowUp"
+	case IAG_ArrowDown:
+		return "IAG_ArrowDown"
+	case IAG_ArrowLeft:
+		return "IAG_ArrowLeft"
+	case IAG_ArrowRight:
+		return "IAG_ArrowRight"
+	case IAG_Up:
+		return "IAG_Up"
+	case IAG_Down:
+		return "IAG_Down"
+	case IAG_Left:
+		return "IAG_Left"
+	case IAG_Right:
+		return "IAG_Right"
+	case IAG_UpDown:
+		return "IAG_UpDown"
+	case IAG_DownUp:
+		return "IAG_DownUp"
+	case IAG_LeftRight:
+		return "IAG_LeftRight"
+	case IAG_RightLeft:
+		return "IAG_RightLeft"
+	case IAG_UpLeftLong:
+		return "IAG_UpLeftLong"
+	case IAG_UpRightLong:
+		return "IAG_UpRightLong"
+	case IAG_DownLeftLong:
+		return "IAG_DownLeftLong"
+	case IAG_DownRightLong:
+		return "IAG_DownRightLong"
+	case IAG_UpLeft:
+		return "IAG_UpLeft"
+	case IAG_UpRight:
+		return "IAG_UpRight"
+	case IAG_DownLeft:
+		return "IAG_DownLeft"
+	case IAG_DownRight:
+		return "IAG_DownRight"
+	case IAG_LeftUp:
+		return "IAG_LeftUp"
+	case IAG_LeftDown:
+		return "IAG_LeftDown"
+	case IAG_RightUp:
+		return "IAG_RightUp"
+	case IAG_RightDown:
+		return "IAG_RightDown"
+	case IAG_Exclamation:
+		return "IAG_Exclamation"
+	case IAG_Tap:
+		return "IAG_Tap"
+	case IAG_DoubleTap:
+		return "IAG_DoubleTap"
+	default:
+		return fmt.Sprintf("InkApplicationGesture(%d)", int32(e))
+	}
+}
+
 // InkBoundingBoxMode: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkboundingboxmode
 type InkBoundingBoxMode int32
 
@@ -846,6 +2417,25 @@ const (
 	IBBM_PointsOnly InkBoundingBoxMode = 3
 	IBBM_Union      InkBoundingBoxMode = 4
 )
+
+// String returns the InkBoundingBoxMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkBoundingBoxMode) String() string {
+	switch e {
+	case IBBM_Default:
+		return "IBBM_Default"
+	case IBBM_NoCurveFit:
+		return "IBBM_NoCurveFit"
+	case IBBM_CurveFit:
+		return "IBBM_CurveFit"
+	case IBBM_PointsOnly:
+		return "IBBM_PointsOnly"
+	case IBBM_Union:
+		return "IBBM_Union"
+	default:
+		return fmt.Sprintf("InkBoundingBoxMode(%d)", int32(e))
+	}
+}
 
 // InkClipboardFormats: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkclipboardformats
 type InkClipboardFormats int32
@@ -863,6 +2453,33 @@ const (
 	ICF_Default             InkClipboardFormats = 127
 )
 
+// String returns the InkClipboardFormats constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkClipboardFormats) String() string {
+	switch e {
+	case ICF_None:
+		return "ICF_None"
+	case ICF_InkSerializedFormat:
+		return "ICF_InkSerializedFormat"
+	case ICF_SketchInk:
+		return "ICF_SketchInk"
+	case ICF_TextInk:
+		return "ICF_TextInk"
+	case ICF_EnhancedMetafile:
+		return "ICF_EnhancedMetafile"
+	case ICF_Metafile:
+		return "ICF_Metafile"
+	case ICF_Bitmap:
+		return "ICF_Bitmap"
+	case ICF_PasteMask:
+		return "ICF_PasteMask"
+	case ICF_CopyMask:
+		return "ICF_CopyMask"
+	default:
+		return fmt.Sprintf("InkClipboardFormats(%d)", int32(e))
+	}
+}
+
 // InkClipboardModes: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkclipboardmodes
 type InkClipboardModes int32
 
@@ -874,6 +2491,23 @@ const (
 	ICB_Default     InkClipboardModes = 0
 )
 
+// String returns the InkClipboardModes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkClipboardModes) String() string {
+	switch e {
+	case ICB_Copy:
+		return "ICB_Copy"
+	case ICB_Cut:
+		return "ICB_Cut"
+	case ICB_ExtractOnly:
+		return "ICB_ExtractOnly"
+	case ICB_DelayedCopy:
+		return "ICB_DelayedCopy"
+	default:
+		return fmt.Sprintf("InkClipboardModes(%d)", int32(e))
+	}
+}
+
 // InkCollectionMode: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkcollectionmode
 type InkCollectionMode int32
 
@@ -882,6 +2516,21 @@ const (
 	ICM_GestureOnly   InkCollectionMode = 1
 	ICM_InkAndGesture InkCollectionMode = 2
 )
+
+// String returns the InkCollectionMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkCollectionMode) String() string {
+	switch e {
+	case ICM_InkOnly:
+		return "ICM_InkOnly"
+	case ICM_GestureOnly:
+		return "ICM_GestureOnly"
+	case ICM_InkAndGesture:
+		return "ICM_InkAndGesture"
+	default:
+		return fmt.Sprintf("InkCollectionMode(%d)", int32(e))
+	}
+}
 
 // InkCollectorEventInterest: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkcollectoreventinterest
 type InkCollectorEventInterest int32
@@ -907,6 +2556,51 @@ const (
 	ICEI_AllEvents        InkCollectorEventInterest = 16
 )
 
+// String returns the InkCollectorEventInterest constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkCollectorEventInterest) String() string {
+	switch e {
+	case ICEI_DefaultEvents:
+		return "ICEI_DefaultEvents"
+	case ICEI_CursorDown:
+		return "ICEI_CursorDown"
+	case ICEI_Stroke:
+		return "ICEI_Stroke"
+	case ICEI_NewPackets:
+		return "ICEI_NewPackets"
+	case ICEI_NewInAirPackets:
+		return "ICEI_NewInAirPackets"
+	case ICEI_CursorButtonDown:
+		return "ICEI_CursorButtonDown"
+	case ICEI_CursorButtonUp:
+		return "ICEI_CursorButtonUp"
+	case ICEI_CursorInRange:
+		return "ICEI_CursorInRange"
+	case ICEI_CursorOutOfRange:
+		return "ICEI_CursorOutOfRange"
+	case ICEI_SystemGesture:
+		return "ICEI_SystemGesture"
+	case ICEI_TabletAdded:
+		return "ICEI_TabletAdded"
+	case ICEI_TabletRemoved:
+		return "ICEI_TabletRemoved"
+	case ICEI_MouseDown:
+		return "ICEI_MouseDown"
+	case ICEI_MouseMove:
+		return "ICEI_MouseMove"
+	case ICEI_MouseUp:
+		return "ICEI_MouseUp"
+	case ICEI_MouseWheel:
+		return "ICEI_MouseWheel"
+	case ICEI_DblClick:
+		return "ICEI_DblClick"
+	case ICEI_AllEvents:
+		return "ICEI_AllEvents"
+	default:
+		return fmt.Sprintf("InkCollectorEventInterest(%d)", int32(e))
+	}
+}
+
 // InkCursorButtonState: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkcursorbuttonstate
 type InkCursorButtonState int32
 
@@ -916,6 +2610,21 @@ const (
 	ICBS_Down        InkCursorButtonState = 2
 )
 
+// String returns the InkCursorButtonState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkCursorButtonState) String() string {
+	switch e {
+	case ICBS_Unavailable:
+		return "ICBS_Unavailable"
+	case ICBS_Up:
+		return "ICBS_Up"
+	case ICBS_Down:
+		return "ICBS_Down"
+	default:
+		return fmt.Sprintf("InkCursorButtonState(%d)", int32(e))
+	}
+}
+
 // InkDisplayMode: https://learn.microsoft.com/windows/win32/api/inked/ne-inked-inkdisplaymode
 type InkDisplayMode int32
 
@@ -923,6 +2632,19 @@ const (
 	IDM_Ink  InkDisplayMode = 0
 	IDM_Text InkDisplayMode = 1
 )
+
+// String returns the InkDisplayMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkDisplayMode) String() string {
+	switch e {
+	case IDM_Ink:
+		return "IDM_Ink"
+	case IDM_Text:
+		return "IDM_Text"
+	default:
+		return fmt.Sprintf("InkDisplayMode(%d)", int32(e))
+	}
+}
 
 // InkDivisionType: https://learn.microsoft.com/windows/win32/api/msinkaut15/ne-msinkaut15-inkdivisiontype
 type InkDivisionType int32
@@ -934,6 +2656,23 @@ const (
 	IDT_Drawing   InkDivisionType = 3
 )
 
+// String returns the InkDivisionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkDivisionType) String() string {
+	switch e {
+	case IDT_Segment:
+		return "IDT_Segment"
+	case IDT_Line:
+		return "IDT_Line"
+	case IDT_Paragraph:
+		return "IDT_Paragraph"
+	case IDT_Drawing:
+		return "IDT_Drawing"
+	default:
+		return fmt.Sprintf("InkDivisionType(%d)", int32(e))
+	}
+}
+
 // InkEditStatus: https://learn.microsoft.com/windows/win32/api/inked/ne-inked-inkeditstatus
 type InkEditStatus int32
 
@@ -942,6 +2681,21 @@ const (
 	IES_Collecting  InkEditStatus = 1
 	IES_Recognizing InkEditStatus = 2
 )
+
+// String returns the InkEditStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkEditStatus) String() string {
+	switch e {
+	case IES_Idle:
+		return "IES_Idle"
+	case IES_Collecting:
+		return "IES_Collecting"
+	case IES_Recognizing:
+		return "IES_Recognizing"
+	default:
+		return fmt.Sprintf("InkEditStatus(%d)", int32(e))
+	}
+}
 
 // InkExtractFlags: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkextractflags
 type InkExtractFlags int32
@@ -952,6 +2706,19 @@ const (
 	IEF_Default            InkExtractFlags = 1
 )
 
+// String returns the InkExtractFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkExtractFlags) String() string {
+	switch e {
+	case IEF_CopyFromOriginal:
+		return "IEF_CopyFromOriginal"
+	case IEF_RemoveFromOriginal:
+		return "IEF_RemoveFromOriginal"
+	default:
+		return fmt.Sprintf("InkExtractFlags(%d)", int32(e))
+	}
+}
+
 // InkInsertMode: https://learn.microsoft.com/windows/win32/api/inked/ne-inked-inkinsertmode
 type InkInsertMode int32
 
@@ -959,6 +2726,19 @@ const (
 	IEM_InsertText InkInsertMode = 0
 	IEM_InsertInk  InkInsertMode = 1
 )
+
+// String returns the InkInsertMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkInsertMode) String() string {
+	switch e {
+	case IEM_InsertText:
+		return "IEM_InsertText"
+	case IEM_InsertInk:
+		return "IEM_InsertInk"
+	default:
+		return fmt.Sprintf("InkInsertMode(%d)", int32(e))
+	}
+}
 
 // InkMode: https://learn.microsoft.com/windows/win32/api/inked/ne-inked-inkmode
 type InkMode int32
@@ -969,6 +2749,21 @@ const (
 	IEM_InkAndGesture InkMode = 2
 )
 
+// String returns the InkMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkMode) String() string {
+	switch e {
+	case IEM_Disabled:
+		return "IEM_Disabled"
+	case IEM_Ink:
+		return "IEM_Ink"
+	case IEM_InkAndGesture:
+		return "IEM_InkAndGesture"
+	default:
+		return fmt.Sprintf("InkMode(%d)", int32(e))
+	}
+}
+
 // InkMouseButton: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkmousebutton
 type InkMouseButton int32
 
@@ -977,6 +2772,21 @@ const (
 	IMF_Right  InkMouseButton = 2
 	IMF_Middle InkMouseButton = 4
 )
+
+// String returns the InkMouseButton constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkMouseButton) String() string {
+	switch e {
+	case IMF_Left:
+		return "IMF_Left"
+	case IMF_Right:
+		return "IMF_Right"
+	case IMF_Middle:
+		return "IMF_Middle"
+	default:
+		return fmt.Sprintf("InkMouseButton(%d)", int32(e))
+	}
+}
 
 // InkMousePointer: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkmousepointer
 type InkMousePointer int32
@@ -1000,6 +2810,47 @@ const (
 	IMP_Custom         InkMousePointer = 99
 )
 
+// String returns the InkMousePointer constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkMousePointer) String() string {
+	switch e {
+	case IMP_Default:
+		return "IMP_Default"
+	case IMP_Arrow:
+		return "IMP_Arrow"
+	case IMP_Crosshair:
+		return "IMP_Crosshair"
+	case IMP_Ibeam:
+		return "IMP_Ibeam"
+	case IMP_SizeNESW:
+		return "IMP_SizeNESW"
+	case IMP_SizeNS:
+		return "IMP_SizeNS"
+	case IMP_SizeNWSE:
+		return "IMP_SizeNWSE"
+	case IMP_SizeWE:
+		return "IMP_SizeWE"
+	case IMP_UpArrow:
+		return "IMP_UpArrow"
+	case IMP_Hourglass:
+		return "IMP_Hourglass"
+	case IMP_NoDrop:
+		return "IMP_NoDrop"
+	case IMP_ArrowHourglass:
+		return "IMP_ArrowHourglass"
+	case IMP_ArrowQuestion:
+		return "IMP_ArrowQuestion"
+	case IMP_SizeAll:
+		return "IMP_SizeAll"
+	case IMP_Hand:
+		return "IMP_Hand"
+	case IMP_Custom:
+		return "IMP_Custom"
+	default:
+		return fmt.Sprintf("InkMousePointer(%d)", int32(e))
+	}
+}
+
 // InkOverlayAttachMode: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkoverlayattachmode
 type InkOverlayAttachMode int32
 
@@ -1007,6 +2858,19 @@ const (
 	IOAM_Behind  InkOverlayAttachMode = 0
 	IOAM_InFront InkOverlayAttachMode = 1
 )
+
+// String returns the InkOverlayAttachMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkOverlayAttachMode) String() string {
+	switch e {
+	case IOAM_Behind:
+		return "IOAM_Behind"
+	case IOAM_InFront:
+		return "IOAM_InFront"
+	default:
+		return fmt.Sprintf("InkOverlayAttachMode(%d)", int32(e))
+	}
+}
 
 // InkOverlayEditingMode: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkoverlayeditingmode
 type InkOverlayEditingMode int32
@@ -1017,6 +2881,21 @@ const (
 	IOEM_Select InkOverlayEditingMode = 2
 )
 
+// String returns the InkOverlayEditingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkOverlayEditingMode) String() string {
+	switch e {
+	case IOEM_Ink:
+		return "IOEM_Ink"
+	case IOEM_Delete:
+		return "IOEM_Delete"
+	case IOEM_Select:
+		return "IOEM_Select"
+	default:
+		return fmt.Sprintf("InkOverlayEditingMode(%d)", int32(e))
+	}
+}
+
 // InkOverlayEraserMode: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkoverlayerasermode
 type InkOverlayEraserMode int32
 
@@ -1024,6 +2903,19 @@ const (
 	IOERM_StrokeErase InkOverlayEraserMode = 0
 	IOERM_PointErase  InkOverlayEraserMode = 1
 )
+
+// String returns the InkOverlayEraserMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkOverlayEraserMode) String() string {
+	switch e {
+	case IOERM_StrokeErase:
+		return "IOERM_StrokeErase"
+	case IOERM_PointErase:
+		return "IOERM_PointErase"
+	default:
+		return fmt.Sprintf("InkOverlayEraserMode(%d)", int32(e))
+	}
+}
 
 // InkPenTip: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkpentip
 type InkPenTip int32
@@ -1033,6 +2925,19 @@ const (
 	IPT_Rectangle InkPenTip = 1
 )
 
+// String returns the InkPenTip constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkPenTip) String() string {
+	switch e {
+	case IPT_Ball:
+		return "IPT_Ball"
+	case IPT_Rectangle:
+		return "IPT_Rectangle"
+	default:
+		return fmt.Sprintf("InkPenTip(%d)", int32(e))
+	}
+}
+
 // InkPersistenceCompressionMode: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkpersistencecompressionmode
 type InkPersistenceCompressionMode int32
 
@@ -1041,6 +2946,21 @@ const (
 	IPCM_MaximumCompression InkPersistenceCompressionMode = 1
 	IPCM_NoCompression      InkPersistenceCompressionMode = 2
 )
+
+// String returns the InkPersistenceCompressionMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkPersistenceCompressionMode) String() string {
+	switch e {
+	case IPCM_Default:
+		return "IPCM_Default"
+	case IPCM_MaximumCompression:
+		return "IPCM_MaximumCompression"
+	case IPCM_NoCompression:
+		return "IPCM_NoCompression"
+	default:
+		return fmt.Sprintf("InkPersistenceCompressionMode(%d)", int32(e))
+	}
+}
 
 // InkPersistenceFormat: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkpersistenceformat
 type InkPersistenceFormat int32
@@ -1052,6 +2972,23 @@ const (
 	IPF_Base64GIF                 InkPersistenceFormat = 3
 )
 
+// String returns the InkPersistenceFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkPersistenceFormat) String() string {
+	switch e {
+	case IPF_InkSerializedFormat:
+		return "IPF_InkSerializedFormat"
+	case IPF_Base64InkSerializedFormat:
+		return "IPF_Base64InkSerializedFormat"
+	case IPF_GIF:
+		return "IPF_GIF"
+	case IPF_Base64GIF:
+		return "IPF_Base64GIF"
+	default:
+		return fmt.Sprintf("InkPersistenceFormat(%d)", int32(e))
+	}
+}
+
 // InkPictureSizeMode: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkpicturesizemode
 type InkPictureSizeMode int32
 
@@ -1061,6 +2998,23 @@ const (
 	IPSM_Normal       InkPictureSizeMode = 2
 	IPSM_StretchImage InkPictureSizeMode = 3
 )
+
+// String returns the InkPictureSizeMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkPictureSizeMode) String() string {
+	switch e {
+	case IPSM_AutoSize:
+		return "IPSM_AutoSize"
+	case IPSM_CenterImage:
+		return "IPSM_CenterImage"
+	case IPSM_Normal:
+		return "IPSM_Normal"
+	case IPSM_StretchImage:
+		return "IPSM_StretchImage"
+	default:
+		return fmt.Sprintf("InkPictureSizeMode(%d)", int32(e))
+	}
+}
 
 // InkRasterOperation: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkrasteroperation
 type InkRasterOperation int32
@@ -1084,6 +3038,47 @@ const (
 	IRO_White       InkRasterOperation = 16
 )
 
+// String returns the InkRasterOperation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkRasterOperation) String() string {
+	switch e {
+	case IRO_Black:
+		return "IRO_Black"
+	case IRO_NotMergePen:
+		return "IRO_NotMergePen"
+	case IRO_MaskNotPen:
+		return "IRO_MaskNotPen"
+	case IRO_NotCopyPen:
+		return "IRO_NotCopyPen"
+	case IRO_MaskPenNot:
+		return "IRO_MaskPenNot"
+	case IRO_Not:
+		return "IRO_Not"
+	case IRO_XOrPen:
+		return "IRO_XOrPen"
+	case IRO_NotMaskPen:
+		return "IRO_NotMaskPen"
+	case IRO_MaskPen:
+		return "IRO_MaskPen"
+	case IRO_NotXOrPen:
+		return "IRO_NotXOrPen"
+	case IRO_NoOperation:
+		return "IRO_NoOperation"
+	case IRO_MergeNotPen:
+		return "IRO_MergeNotPen"
+	case IRO_CopyPen:
+		return "IRO_CopyPen"
+	case IRO_MergePenNot:
+		return "IRO_MergePenNot"
+	case IRO_MergePen:
+		return "IRO_MergePen"
+	case IRO_White:
+		return "IRO_White"
+	default:
+		return fmt.Sprintf("InkRasterOperation(%d)", int32(e))
+	}
+}
+
 // InkRecognitionAlternatesSelection: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkrecognitionalternatesselection
 type InkRecognitionAlternatesSelection int32
 
@@ -1093,6 +3088,21 @@ const (
 	IRAS_All          InkRecognitionAlternatesSelection = -1
 )
 
+// String returns the InkRecognitionAlternatesSelection constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkRecognitionAlternatesSelection) String() string {
+	switch e {
+	case IRAS_Start:
+		return "IRAS_Start"
+	case IRAS_DefaultCount:
+		return "IRAS_DefaultCount"
+	case IRAS_All:
+		return "IRAS_All"
+	default:
+		return fmt.Sprintf("InkRecognitionAlternatesSelection(%d)", int32(e))
+	}
+}
+
 // InkRecognitionConfidence: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkrecognitionconfidence
 type InkRecognitionConfidence int32
 
@@ -1101,6 +3111,21 @@ const (
 	IRC_Intermediate InkRecognitionConfidence = 1
 	IRC_Poor         InkRecognitionConfidence = 2
 )
+
+// String returns the InkRecognitionConfidence constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkRecognitionConfidence) String() string {
+	switch e {
+	case IRC_Strong:
+		return "IRC_Strong"
+	case IRC_Intermediate:
+		return "IRC_Intermediate"
+	case IRC_Poor:
+		return "IRC_Poor"
+	default:
+		return fmt.Sprintf("InkRecognitionConfidence(%d)", int32(e))
+	}
+}
 
 // InkRecognitionModes: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkrecognitionmodes
 type InkRecognitionModes int32
@@ -1116,6 +3141,33 @@ const (
 	IRM_AutoSpace              InkRecognitionModes = 64
 	IRM_Max                    InkRecognitionModes = 128
 )
+
+// String returns the InkRecognitionModes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkRecognitionModes) String() string {
+	switch e {
+	case IRM_None:
+		return "IRM_None"
+	case IRM_WordModeOnly:
+		return "IRM_WordModeOnly"
+	case IRM_Coerce:
+		return "IRM_Coerce"
+	case IRM_TopInkBreaksOnly:
+		return "IRM_TopInkBreaksOnly"
+	case IRM_PrefixOk:
+		return "IRM_PrefixOk"
+	case IRM_LineMode:
+		return "IRM_LineMode"
+	case IRM_DisablePersonalization:
+		return "IRM_DisablePersonalization"
+	case IRM_AutoSpace:
+		return "IRM_AutoSpace"
+	case IRM_Max:
+		return "IRM_Max"
+	default:
+		return fmt.Sprintf("InkRecognitionModes(%d)", int32(e))
+	}
+}
 
 // InkRecognitionStatus: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkrecognitionstatus
 type InkRecognitionStatus int32
@@ -1133,6 +3185,37 @@ const (
 	IRS_SetPrefixSuffixFailed       InkRecognitionStatus = 256
 	IRS_SetWordListFailed           InkRecognitionStatus = 512
 )
+
+// String returns the InkRecognitionStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkRecognitionStatus) String() string {
+	switch e {
+	case IRS_NoError:
+		return "IRS_NoError"
+	case IRS_Interrupted:
+		return "IRS_Interrupted"
+	case IRS_ProcessFailed:
+		return "IRS_ProcessFailed"
+	case IRS_InkAddedFailed:
+		return "IRS_InkAddedFailed"
+	case IRS_SetAutoCompletionModeFailed:
+		return "IRS_SetAutoCompletionModeFailed"
+	case IRS_SetStrokesFailed:
+		return "IRS_SetStrokesFailed"
+	case IRS_SetGuideFailed:
+		return "IRS_SetGuideFailed"
+	case IRS_SetFlagsFailed:
+		return "IRS_SetFlagsFailed"
+	case IRS_SetFactoidFailed:
+		return "IRS_SetFactoidFailed"
+	case IRS_SetPrefixSuffixFailed:
+		return "IRS_SetPrefixSuffixFailed"
+	case IRS_SetWordListFailed:
+		return "IRS_SetWordListFailed"
+	default:
+		return fmt.Sprintf("InkRecognitionStatus(%d)", int32(e))
+	}
+}
 
 // InkRecognizerCapabilities: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkrecognizercapabilities
 type InkRecognizerCapabilities int32
@@ -1162,6 +3245,59 @@ const (
 	IRC_Beta                         InkRecognizerCapabilities = 2097152
 )
 
+// String returns the InkRecognizerCapabilities constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkRecognizerCapabilities) String() string {
+	switch e {
+	case IRC_DontCare:
+		return "IRC_DontCare"
+	case IRC_Object:
+		return "IRC_Object"
+	case IRC_FreeInput:
+		return "IRC_FreeInput"
+	case IRC_LinedInput:
+		return "IRC_LinedInput"
+	case IRC_BoxedInput:
+		return "IRC_BoxedInput"
+	case IRC_CharacterAutoCompletionInput:
+		return "IRC_CharacterAutoCompletionInput"
+	case IRC_RightAndDown:
+		return "IRC_RightAndDown"
+	case IRC_LeftAndDown:
+		return "IRC_LeftAndDown"
+	case IRC_DownAndLeft:
+		return "IRC_DownAndLeft"
+	case IRC_DownAndRight:
+		return "IRC_DownAndRight"
+	case IRC_ArbitraryAngle:
+		return "IRC_ArbitraryAngle"
+	case IRC_Lattice:
+		return "IRC_Lattice"
+	case IRC_AdviseInkChange:
+		return "IRC_AdviseInkChange"
+	case IRC_StrokeReorder:
+		return "IRC_StrokeReorder"
+	case IRC_Personalizable:
+		return "IRC_Personalizable"
+	case IRC_PrefersArbitraryAngle:
+		return "IRC_PrefersArbitraryAngle"
+	case IRC_PrefersParagraphBreaking:
+		return "IRC_PrefersParagraphBreaking"
+	case IRC_PrefersSegmentation:
+		return "IRC_PrefersSegmentation"
+	case IRC_Cursive:
+		return "IRC_Cursive"
+	case IRC_TextPrediction:
+		return "IRC_TextPrediction"
+	case IRC_Alpha:
+		return "IRC_Alpha"
+	case IRC_Beta:
+		return "IRC_Beta"
+	default:
+		return fmt.Sprintf("InkRecognizerCapabilities(%d)", int32(e))
+	}
+}
+
 // InkRecognizerCharacterAutoCompletionMode: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkrecognizercharacterautocompletionmode
 type InkRecognizerCharacterAutoCompletionMode int32
 
@@ -1171,6 +3307,21 @@ const (
 	IRCACM_Random InkRecognizerCharacterAutoCompletionMode = 2
 )
 
+// String returns the InkRecognizerCharacterAutoCompletionMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkRecognizerCharacterAutoCompletionMode) String() string {
+	switch e {
+	case IRCACM_Full:
+		return "IRCACM_Full"
+	case IRCACM_Prefix:
+		return "IRCACM_Prefix"
+	case IRCACM_Random:
+		return "IRCACM_Random"
+	default:
+		return fmt.Sprintf("InkRecognizerCharacterAutoCompletionMode(%d)", int32(e))
+	}
+}
+
 // InkSelectionConstants: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkselectionconstants
 type InkSelectionConstants int32
 
@@ -1178,6 +3329,19 @@ const (
 	ISC_FirstElement InkSelectionConstants = 0
 	ISC_AllElements  InkSelectionConstants = -1
 )
+
+// String returns the InkSelectionConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkSelectionConstants) String() string {
+	switch e {
+	case ISC_FirstElement:
+		return "ISC_FirstElement"
+	case ISC_AllElements:
+		return "ISC_AllElements"
+	default:
+		return fmt.Sprintf("InkSelectionConstants(%d)", int32(e))
+	}
+}
 
 // InkShiftKeyModifierFlags: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inkshiftkeymodifierflags
 type InkShiftKeyModifierFlags int32
@@ -1187,6 +3351,21 @@ const (
 	IKM_Control InkShiftKeyModifierFlags = 2
 	IKM_Alt     InkShiftKeyModifierFlags = 4
 )
+
+// String returns the InkShiftKeyModifierFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkShiftKeyModifierFlags) String() string {
+	switch e {
+	case IKM_Shift:
+		return "IKM_Shift"
+	case IKM_Control:
+		return "IKM_Control"
+	case IKM_Alt:
+		return "IKM_Alt"
+	default:
+		return fmt.Sprintf("InkShiftKeyModifierFlags(%d)", int32(e))
+	}
+}
 
 // InkSystemGesture: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-inksystemgesture
 type InkSystemGesture int32
@@ -1204,6 +3383,35 @@ const (
 	ISG_Flick      InkSystemGesture = 31
 )
 
+// String returns the InkSystemGesture constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InkSystemGesture) String() string {
+	switch e {
+	case ISG_Tap:
+		return "ISG_Tap"
+	case ISG_DoubleTap:
+		return "ISG_DoubleTap"
+	case ISG_RightTap:
+		return "ISG_RightTap"
+	case ISG_Drag:
+		return "ISG_Drag"
+	case ISG_RightDrag:
+		return "ISG_RightDrag"
+	case ISG_HoldEnter:
+		return "ISG_HoldEnter"
+	case ISG_HoldLeave:
+		return "ISG_HoldLeave"
+	case ISG_HoverEnter:
+		return "ISG_HoverEnter"
+	case ISG_HoverLeave:
+		return "ISG_HoverLeave"
+	case ISG_Flick:
+		return "ISG_Flick"
+	default:
+		return fmt.Sprintf("InkSystemGesture(%d)", int32(e))
+	}
+}
+
 // InteractionMode: https://learn.microsoft.com/windows/win32/api/peninputpanel/ne-peninputpanel-interactionmode
 type InteractionMode int32
 
@@ -1213,6 +3421,23 @@ const (
 	InteractionMode_DockedTop    InteractionMode = 2
 	InteractionMode_DockedBottom InteractionMode = 3
 )
+
+// String returns the InteractionMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InteractionMode) String() string {
+	switch e {
+	case InteractionMode_InPlace:
+		return "InteractionMode_InPlace"
+	case InteractionMode_Floating:
+		return "InteractionMode_Floating"
+	case InteractionMode_DockedTop:
+		return "InteractionMode_DockedTop"
+	case InteractionMode_DockedBottom:
+		return "InteractionMode_DockedBottom"
+	default:
+		return fmt.Sprintf("InteractionMode(%d)", int32(e))
+	}
+}
 
 // KEYMODIFIER: https://learn.microsoft.com/windows/win32/api/tabflicks/ne-tabflicks-keymodifier
 type KEYMODIFIER int32
@@ -1226,6 +3451,27 @@ const (
 	KEYMODIFIER_EXT     KEYMODIFIER = 32
 )
 
+// String returns the KEYMODIFIER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KEYMODIFIER) String() string {
+	switch e {
+	case KEYMODIFIER_CONTROL:
+		return "KEYMODIFIER_CONTROL"
+	case KEYMODIFIER_MENU:
+		return "KEYMODIFIER_MENU"
+	case KEYMODIFIER_SHIFT:
+		return "KEYMODIFIER_SHIFT"
+	case KEYMODIFIER_WIN:
+		return "KEYMODIFIER_WIN"
+	case KEYMODIFIER_ALTGR:
+		return "KEYMODIFIER_ALTGR"
+	case KEYMODIFIER_EXT:
+		return "KEYMODIFIER_EXT"
+	default:
+		return fmt.Sprintf("KEYMODIFIER(%d)", int32(e))
+	}
+}
+
 // LINE_METRICS: https://learn.microsoft.com/windows/win32/api/rectypes/ne-rectypes-line_metrics
 type LINE_METRICS int32
 
@@ -1235,6 +3481,23 @@ const (
 	LM_ASCENDER  LINE_METRICS = 2
 	LM_DESCENDER LINE_METRICS = 3
 )
+
+// String returns the LINE_METRICS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LINE_METRICS) String() string {
+	switch e {
+	case LM_BASELINE:
+		return "LM_BASELINE"
+	case LM_MIDLINE:
+		return "LM_MIDLINE"
+	case LM_ASCENDER:
+		return "LM_ASCENDER"
+	case LM_DESCENDER:
+		return "LM_DESCENDER"
+	default:
+		return fmt.Sprintf("LINE_METRICS(%d)", int32(e))
+	}
+}
 
 // MICUIELEMENT: https://learn.microsoft.com/windows/win32/api/micaut/ne-micaut-micuielement
 type MICUIELEMENT int32
@@ -1252,6 +3515,35 @@ const (
 	MICUIELEMENT_RESULTPANEL_BACKGROUND MICUIELEMENT = 512
 )
 
+// String returns the MICUIELEMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MICUIELEMENT) String() string {
+	switch e {
+	case MICUIELEMENT_BUTTON_WRITE:
+		return "MICUIELEMENT_BUTTON_WRITE"
+	case MICUIELEMENT_BUTTON_ERASE:
+		return "MICUIELEMENT_BUTTON_ERASE"
+	case MICUIELEMENT_BUTTON_CORRECT:
+		return "MICUIELEMENT_BUTTON_CORRECT"
+	case MICUIELEMENT_BUTTON_CLEAR:
+		return "MICUIELEMENT_BUTTON_CLEAR"
+	case MICUIELEMENT_BUTTON_UNDO:
+		return "MICUIELEMENT_BUTTON_UNDO"
+	case MICUIELEMENT_BUTTON_REDO:
+		return "MICUIELEMENT_BUTTON_REDO"
+	case MICUIELEMENT_BUTTON_INSERT:
+		return "MICUIELEMENT_BUTTON_INSERT"
+	case MICUIELEMENT_BUTTON_CANCEL:
+		return "MICUIELEMENT_BUTTON_CANCEL"
+	case MICUIELEMENT_INKPANEL_BACKGROUND:
+		return "MICUIELEMENT_INKPANEL_BACKGROUND"
+	case MICUIELEMENT_RESULTPANEL_BACKGROUND:
+		return "MICUIELEMENT_RESULTPANEL_BACKGROUND"
+	default:
+		return fmt.Sprintf("MICUIELEMENT(%d)", int32(e))
+	}
+}
+
 // MICUIELEMENTSTATE: https://learn.microsoft.com/windows/win32/api/micaut/ne-micaut-micuielementstate
 type MICUIELEMENTSTATE int32
 
@@ -1262,6 +3554,23 @@ const (
 	MICUIELEMENTSTATE_DISABLED MICUIELEMENTSTATE = 4
 )
 
+// String returns the MICUIELEMENTSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MICUIELEMENTSTATE) String() string {
+	switch e {
+	case MICUIELEMENTSTATE_NORMAL:
+		return "MICUIELEMENTSTATE_NORMAL"
+	case MICUIELEMENTSTATE_HOT:
+		return "MICUIELEMENTSTATE_HOT"
+	case MICUIELEMENTSTATE_PRESSED:
+		return "MICUIELEMENTSTATE_PRESSED"
+	case MICUIELEMENTSTATE_DISABLED:
+		return "MICUIELEMENTSTATE_DISABLED"
+	default:
+		return fmt.Sprintf("MICUIELEMENTSTATE(%d)", int32(e))
+	}
+}
+
 // MouseButton: https://learn.microsoft.com/windows/win32/api/inked/ne-inked-mousebutton
 type MouseButton int32
 
@@ -1271,6 +3580,23 @@ const (
 	RIGHT_BUTTON  MouseButton = 2
 	MIDDLE_BUTTON MouseButton = 4
 )
+
+// String returns the MouseButton constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MouseButton) String() string {
+	switch e {
+	case NO_BUTTON:
+		return "NO_BUTTON"
+	case LEFT_BUTTON:
+		return "LEFT_BUTTON"
+	case RIGHT_BUTTON:
+		return "RIGHT_BUTTON"
+	case MIDDLE_BUTTON:
+		return "MIDDLE_BUTTON"
+	default:
+		return fmt.Sprintf("MouseButton(%d)", int32(e))
+	}
+}
 
 // PROPERTY_UNITS: https://learn.microsoft.com/windows/win32/api/tpcshrd/ne-tpcshrd-property_units
 type PROPERTY_UNITS int32
@@ -1295,6 +3621,49 @@ const (
 	PROPERTY_UNITS_CANDELA     PROPERTY_UNITS = 16
 )
 
+// String returns the PROPERTY_UNITS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PROPERTY_UNITS) String() string {
+	switch e {
+	case PROPERTY_UNITS_DEFAULT:
+		return "PROPERTY_UNITS_DEFAULT"
+	case PROPERTY_UNITS_INCHES:
+		return "PROPERTY_UNITS_INCHES"
+	case PROPERTY_UNITS_CENTIMETERS:
+		return "PROPERTY_UNITS_CENTIMETERS"
+	case PROPERTY_UNITS_DEGREES:
+		return "PROPERTY_UNITS_DEGREES"
+	case PROPERTY_UNITS_RADIANS:
+		return "PROPERTY_UNITS_RADIANS"
+	case PROPERTY_UNITS_SECONDS:
+		return "PROPERTY_UNITS_SECONDS"
+	case PROPERTY_UNITS_POUNDS:
+		return "PROPERTY_UNITS_POUNDS"
+	case PROPERTY_UNITS_GRAMS:
+		return "PROPERTY_UNITS_GRAMS"
+	case PROPERTY_UNITS_SILINEAR:
+		return "PROPERTY_UNITS_SILINEAR"
+	case PROPERTY_UNITS_SIROTATION:
+		return "PROPERTY_UNITS_SIROTATION"
+	case PROPERTY_UNITS_ENGLINEAR:
+		return "PROPERTY_UNITS_ENGLINEAR"
+	case PROPERTY_UNITS_ENGROTATION:
+		return "PROPERTY_UNITS_ENGROTATION"
+	case PROPERTY_UNITS_SLUGS:
+		return "PROPERTY_UNITS_SLUGS"
+	case PROPERTY_UNITS_KELVIN:
+		return "PROPERTY_UNITS_KELVIN"
+	case PROPERTY_UNITS_FAHRENHEIT:
+		return "PROPERTY_UNITS_FAHRENHEIT"
+	case PROPERTY_UNITS_AMPERE:
+		return "PROPERTY_UNITS_AMPERE"
+	case PROPERTY_UNITS_CANDELA:
+		return "PROPERTY_UNITS_CANDELA"
+	default:
+		return fmt.Sprintf("PROPERTY_UNITS(%d)", int32(e))
+	}
+}
+
 // PanelInputArea: https://learn.microsoft.com/windows/win32/api/peninputpanel/ne-peninputpanel-panelinputarea
 type PanelInputArea int32
 
@@ -1304,6 +3673,23 @@ const (
 	PanelInputArea_WritingPad   PanelInputArea = 2
 	PanelInputArea_CharacterPad PanelInputArea = 3
 )
+
+// String returns the PanelInputArea constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PanelInputArea) String() string {
+	switch e {
+	case PanelInputArea_Auto:
+		return "PanelInputArea_Auto"
+	case PanelInputArea_Keyboard:
+		return "PanelInputArea_Keyboard"
+	case PanelInputArea_WritingPad:
+		return "PanelInputArea_WritingPad"
+	case PanelInputArea_CharacterPad:
+		return "PanelInputArea_CharacterPad"
+	default:
+		return fmt.Sprintf("PanelInputArea(%d)", int32(e))
+	}
+}
 
 // PanelType: https://learn.microsoft.com/windows/win32/api/peninputpanel/ne-peninputpanel-paneltype
 type PanelType int32
@@ -1315,12 +3701,42 @@ const (
 	PT_Keyboard    PanelType = 3
 )
 
+// String returns the PanelType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PanelType) String() string {
+	switch e {
+	case PT_Default:
+		return "PT_Default"
+	case PT_Inactive:
+		return "PT_Inactive"
+	case PT_Handwriting:
+		return "PT_Handwriting"
+	case PT_Keyboard:
+		return "PT_Keyboard"
+	default:
+		return fmt.Sprintf("PanelType(%d)", int32(e))
+	}
+}
+
 type RECO_TYPE int32
 
 const (
 	RECO_TYPE_WSTRING RECO_TYPE = 0
 	RECO_TYPE_WCHAR   RECO_TYPE = 1
 )
+
+// String returns the RECO_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RECO_TYPE) String() string {
+	switch e {
+	case RECO_TYPE_WSTRING:
+		return "RECO_TYPE_WSTRING"
+	case RECO_TYPE_WCHAR:
+		return "RECO_TYPE_WCHAR"
+	default:
+		return fmt.Sprintf("RECO_TYPE(%d)", int32(e))
+	}
+}
 
 // RealTimeStylusDataInterest: https://learn.microsoft.com/windows/win32/api/rtscom/ne-rtscom-realtimestylusdatainterest
 type RealTimeStylusDataInterest int32
@@ -1348,6 +3764,55 @@ const (
 	RTSDI_DefaultEvents          RealTimeStylusDataInterest = 37766
 )
 
+// String returns the RealTimeStylusDataInterest constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RealTimeStylusDataInterest) String() string {
+	switch e {
+	case RTSDI_AllData:
+		return "RTSDI_AllData"
+	case RTSDI_None:
+		return "RTSDI_None"
+	case RTSDI_Error:
+		return "RTSDI_Error"
+	case RTSDI_RealTimeStylusEnabled:
+		return "RTSDI_RealTimeStylusEnabled"
+	case RTSDI_RealTimeStylusDisabled:
+		return "RTSDI_RealTimeStylusDisabled"
+	case RTSDI_StylusNew:
+		return "RTSDI_StylusNew"
+	case RTSDI_StylusInRange:
+		return "RTSDI_StylusInRange"
+	case RTSDI_InAirPackets:
+		return "RTSDI_InAirPackets"
+	case RTSDI_StylusOutOfRange:
+		return "RTSDI_StylusOutOfRange"
+	case RTSDI_StylusDown:
+		return "RTSDI_StylusDown"
+	case RTSDI_Packets:
+		return "RTSDI_Packets"
+	case RTSDI_StylusUp:
+		return "RTSDI_StylusUp"
+	case RTSDI_StylusButtonUp:
+		return "RTSDI_StylusButtonUp"
+	case RTSDI_StylusButtonDown:
+		return "RTSDI_StylusButtonDown"
+	case RTSDI_SystemEvents:
+		return "RTSDI_SystemEvents"
+	case RTSDI_TabletAdded:
+		return "RTSDI_TabletAdded"
+	case RTSDI_TabletRemoved:
+		return "RTSDI_TabletRemoved"
+	case RTSDI_CustomStylusDataAdded:
+		return "RTSDI_CustomStylusDataAdded"
+	case RTSDI_UpdateMapping:
+		return "RTSDI_UpdateMapping"
+	case RTSDI_DefaultEvents:
+		return "RTSDI_DefaultEvents"
+	default:
+		return fmt.Sprintf("RealTimeStylusDataInterest(%d)", int32(e))
+	}
+}
+
 // RealTimeStylusLockType: https://learn.microsoft.com/windows/win32/api/rtscom/ne-rtscom-realtimestyluslocktype
 type RealTimeStylusLockType int32
 
@@ -1360,6 +3825,27 @@ const (
 	RTSLT_AsyncObjLock    RealTimeStylusLockType = 13
 )
 
+// String returns the RealTimeStylusLockType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RealTimeStylusLockType) String() string {
+	switch e {
+	case RTSLT_ObjLock:
+		return "RTSLT_ObjLock"
+	case RTSLT_SyncEventLock:
+		return "RTSLT_SyncEventLock"
+	case RTSLT_AsyncEventLock:
+		return "RTSLT_AsyncEventLock"
+	case RTSLT_ExcludeCallback:
+		return "RTSLT_ExcludeCallback"
+	case RTSLT_SyncObjLock:
+		return "RTSLT_SyncObjLock"
+	case RTSLT_AsyncObjLock:
+		return "RTSLT_AsyncObjLock"
+	default:
+		return fmt.Sprintf("RealTimeStylusLockType(%d)", int32(e))
+	}
+}
+
 // SCROLLDIRECTION: https://learn.microsoft.com/windows/win32/api/tabflicks/ne-tabflicks-scrolldirection
 type SCROLLDIRECTION int32
 
@@ -1367,6 +3853,19 @@ const (
 	SCROLLDIRECTION_UP   SCROLLDIRECTION = 0
 	SCROLLDIRECTION_DOWN SCROLLDIRECTION = 1
 )
+
+// String returns the SCROLLDIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SCROLLDIRECTION) String() string {
+	switch e {
+	case SCROLLDIRECTION_UP:
+		return "SCROLLDIRECTION_UP"
+	case SCROLLDIRECTION_DOWN:
+		return "SCROLLDIRECTION_DOWN"
+	default:
+		return fmt.Sprintf("SCROLLDIRECTION(%d)", int32(e))
+	}
+}
 
 // ScrollBarsConstants: https://learn.microsoft.com/windows/win32/api/inked/ne-inked-scrollbarsconstants
 type ScrollBarsConstants int32
@@ -1378,6 +3877,23 @@ const (
 	RtfBoth       ScrollBarsConstants = 3
 )
 
+// String returns the ScrollBarsConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ScrollBarsConstants) String() string {
+	switch e {
+	case RtfNone:
+		return "RtfNone"
+	case RtfHorizontal:
+		return "RtfHorizontal"
+	case RtfVertical:
+		return "RtfVertical"
+	case RtfBoth:
+		return "RtfBoth"
+	default:
+		return fmt.Sprintf("ScrollBarsConstants(%d)", int32(e))
+	}
+}
+
 // SelAlignmentConstants: https://learn.microsoft.com/windows/win32/api/inked/ne-inked-selalignmentconstants
 type SelAlignmentConstants int32
 
@@ -1386,6 +3902,21 @@ const (
 	RtfRight  SelAlignmentConstants = 1
 	RtfCenter SelAlignmentConstants = 2
 )
+
+// String returns the SelAlignmentConstants constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SelAlignmentConstants) String() string {
+	switch e {
+	case RtfLeft:
+		return "RtfLeft"
+	case RtfRight:
+		return "RtfRight"
+	case RtfCenter:
+		return "RtfCenter"
+	default:
+		return fmt.Sprintf("SelAlignmentConstants(%d)", int32(e))
+	}
+}
 
 // SelectionHitResult: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-selectionhitresult
 type SelectionHitResult int32
@@ -1403,6 +3934,35 @@ const (
 	SHR_Selection SelectionHitResult = 9
 )
 
+// String returns the SelectionHitResult constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SelectionHitResult) String() string {
+	switch e {
+	case SHR_None:
+		return "SHR_None"
+	case SHR_NW:
+		return "SHR_NW"
+	case SHR_SE:
+		return "SHR_SE"
+	case SHR_NE:
+		return "SHR_NE"
+	case SHR_SW:
+		return "SHR_SW"
+	case SHR_E:
+		return "SHR_E"
+	case SHR_W:
+		return "SHR_W"
+	case SHR_N:
+		return "SHR_N"
+	case SHR_S:
+		return "SHR_S"
+	case SHR_Selection:
+		return "SHR_Selection"
+	default:
+		return fmt.Sprintf("SelectionHitResult(%d)", int32(e))
+	}
+}
+
 // StylusQueue: https://learn.microsoft.com/windows/win32/api/rtscom/ne-rtscom-stylusqueue
 type StylusQueue int32
 
@@ -1412,6 +3972,21 @@ const (
 	AsyncStylusQueue          StylusQueue = 3
 )
 
+// String returns the StylusQueue constant's name, or its numeric form when
+// the value is not a known constant.
+func (e StylusQueue) String() string {
+	switch e {
+	case SyncStylusQueue:
+		return "SyncStylusQueue"
+	case AsyncStylusQueueImmediate:
+		return "AsyncStylusQueueImmediate"
+	case AsyncStylusQueue:
+		return "AsyncStylusQueue"
+	default:
+		return fmt.Sprintf("StylusQueue(%d)", int32(e))
+	}
+}
+
 type TabletDeviceKind int32
 
 const (
@@ -1419,6 +3994,21 @@ const (
 	TDK_Pen   TabletDeviceKind = 1
 	TDK_Touch TabletDeviceKind = 2
 )
+
+// String returns the TabletDeviceKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TabletDeviceKind) String() string {
+	switch e {
+	case TDK_Mouse:
+		return "TDK_Mouse"
+	case TDK_Pen:
+		return "TDK_Pen"
+	case TDK_Touch:
+		return "TDK_Touch"
+	default:
+		return fmt.Sprintf("TabletDeviceKind(%d)", int32(e))
+	}
+}
 
 // TabletHardwareCapabilities: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-tablethardwarecapabilities
 type TabletHardwareCapabilities int32
@@ -1429,6 +4019,23 @@ const (
 	THWC_HardProximity          TabletHardwareCapabilities = 4
 	THWC_CursorsHavePhysicalIds TabletHardwareCapabilities = 8
 )
+
+// String returns the TabletHardwareCapabilities constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TabletHardwareCapabilities) String() string {
+	switch e {
+	case THWC_Integrated:
+		return "THWC_Integrated"
+	case THWC_CursorMustTouch:
+		return "THWC_CursorMustTouch"
+	case THWC_HardProximity:
+		return "THWC_HardProximity"
+	case THWC_CursorsHavePhysicalIds:
+		return "THWC_CursorsHavePhysicalIds"
+	default:
+		return fmt.Sprintf("TabletHardwareCapabilities(%d)", int32(e))
+	}
+}
 
 // TabletPropertyMetricUnit: https://learn.microsoft.com/windows/win32/api/msinkaut/ne-msinkaut-tabletpropertymetricunit
 type TabletPropertyMetricUnit int32
@@ -1444,6 +4051,31 @@ const (
 	TPMU_Grams       TabletPropertyMetricUnit = 7
 )
 
+// String returns the TabletPropertyMetricUnit constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TabletPropertyMetricUnit) String() string {
+	switch e {
+	case TPMU_Default:
+		return "TPMU_Default"
+	case TPMU_Inches:
+		return "TPMU_Inches"
+	case TPMU_Centimeters:
+		return "TPMU_Centimeters"
+	case TPMU_Degrees:
+		return "TPMU_Degrees"
+	case TPMU_Radians:
+		return "TPMU_Radians"
+	case TPMU_Seconds:
+		return "TPMU_Seconds"
+	case TPMU_Pounds:
+		return "TPMU_Pounds"
+	case TPMU_Grams:
+		return "TPMU_Grams"
+	default:
+		return fmt.Sprintf("TabletPropertyMetricUnit(%d)", int32(e))
+	}
+}
+
 type VisualState int32
 
 const (
@@ -1453,3 +4085,22 @@ const (
 	DockedBottom VisualState = 3
 	Closed       VisualState = 4
 )
+
+// String returns the VisualState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VisualState) String() string {
+	switch e {
+	case InPlace:
+		return "InPlace"
+	case Floating:
+		return "Floating"
+	case DockedTop:
+		return "DockedTop"
+	case DockedBottom:
+		return "DockedBottom"
+	case Closed:
+		return "Closed"
+	default:
+		return fmt.Sprintf("VisualState(%d)", int32(e))
+	}
+}

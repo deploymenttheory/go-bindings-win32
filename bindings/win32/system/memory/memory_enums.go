@@ -4,6 +4,12 @@
 
 package memory
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type FILE_MAP uint32
 
 const (
@@ -17,6 +23,41 @@ const (
 	FILE_MAP_LARGE_PAGES     FILE_MAP = 536870912
 )
 
+// String returns the FILE_MAP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILE_MAP) String() string {
+	var parts []string
+	if e&FILE_MAP_WRITE != 0 {
+		parts = append(parts, "FILE_MAP_WRITE")
+	}
+	if e&FILE_MAP_READ != 0 {
+		parts = append(parts, "FILE_MAP_READ")
+	}
+	if e&FILE_MAP_ALL_ACCESS != 0 {
+		parts = append(parts, "FILE_MAP_ALL_ACCESS")
+	}
+	if e&FILE_MAP_EXECUTE != 0 {
+		parts = append(parts, "FILE_MAP_EXECUTE")
+	}
+	if e&FILE_MAP_COPY != 0 {
+		parts = append(parts, "FILE_MAP_COPY")
+	}
+	if e&FILE_MAP_RESERVE != 0 {
+		parts = append(parts, "FILE_MAP_RESERVE")
+	}
+	if e&FILE_MAP_TARGETS_INVALID != 0 {
+		parts = append(parts, "FILE_MAP_TARGETS_INVALID")
+	}
+	if e&FILE_MAP_LARGE_PAGES != 0 {
+		parts = append(parts, "FILE_MAP_LARGE_PAGES")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type GLOBAL_ALLOC_FLAGS uint32
 
 const (
@@ -27,6 +68,29 @@ const (
 	GPTR          GLOBAL_ALLOC_FLAGS = 64
 )
 
+// String returns the GLOBAL_ALLOC_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GLOBAL_ALLOC_FLAGS) String() string {
+	var parts []string
+	if e&GHND != 0 {
+		parts = append(parts, "GHND")
+	}
+	if e&GMEM_MOVEABLE != 0 {
+		parts = append(parts, "GMEM_MOVEABLE")
+	}
+	if e&GMEM_ZEROINIT != 0 {
+		parts = append(parts, "GMEM_ZEROINIT")
+	}
+	if e&GPTR != 0 {
+		parts = append(parts, "GPTR")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type HEAP_FLAGS uint32
 
 const (
@@ -49,6 +113,64 @@ const (
 	HEAP_CREATE_HARDENED          HEAP_FLAGS = 512
 )
 
+// String returns the HEAP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEAP_FLAGS) String() string {
+	var parts []string
+	if e&HEAP_NO_SERIALIZE != 0 {
+		parts = append(parts, "HEAP_NO_SERIALIZE")
+	}
+	if e&HEAP_GROWABLE != 0 {
+		parts = append(parts, "HEAP_GROWABLE")
+	}
+	if e&HEAP_GENERATE_EXCEPTIONS != 0 {
+		parts = append(parts, "HEAP_GENERATE_EXCEPTIONS")
+	}
+	if e&HEAP_ZERO_MEMORY != 0 {
+		parts = append(parts, "HEAP_ZERO_MEMORY")
+	}
+	if e&HEAP_REALLOC_IN_PLACE_ONLY != 0 {
+		parts = append(parts, "HEAP_REALLOC_IN_PLACE_ONLY")
+	}
+	if e&HEAP_TAIL_CHECKING_ENABLED != 0 {
+		parts = append(parts, "HEAP_TAIL_CHECKING_ENABLED")
+	}
+	if e&HEAP_FREE_CHECKING_ENABLED != 0 {
+		parts = append(parts, "HEAP_FREE_CHECKING_ENABLED")
+	}
+	if e&HEAP_DISABLE_COALESCE_ON_FREE != 0 {
+		parts = append(parts, "HEAP_DISABLE_COALESCE_ON_FREE")
+	}
+	if e&HEAP_CREATE_ALIGN_16 != 0 {
+		parts = append(parts, "HEAP_CREATE_ALIGN_16")
+	}
+	if e&HEAP_CREATE_ENABLE_TRACING != 0 {
+		parts = append(parts, "HEAP_CREATE_ENABLE_TRACING")
+	}
+	if e&HEAP_CREATE_ENABLE_EXECUTE != 0 {
+		parts = append(parts, "HEAP_CREATE_ENABLE_EXECUTE")
+	}
+	if e&HEAP_MAXIMUM_TAG != 0 {
+		parts = append(parts, "HEAP_MAXIMUM_TAG")
+	}
+	if e&HEAP_PSEUDO_TAG_FLAG != 0 {
+		parts = append(parts, "HEAP_PSEUDO_TAG_FLAG")
+	}
+	if e&HEAP_TAG_SHIFT != 0 {
+		parts = append(parts, "HEAP_TAG_SHIFT")
+	}
+	if e&HEAP_CREATE_SEGMENT_HEAP != 0 {
+		parts = append(parts, "HEAP_CREATE_SEGMENT_HEAP")
+	}
+	if e&HEAP_CREATE_HARDENED != 0 {
+		parts = append(parts, "HEAP_CREATE_HARDENED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // HEAP_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-heap_information_class
 type HEAP_INFORMATION_CLASS int32
 
@@ -59,6 +181,24 @@ const (
 	HeapTag                           HEAP_INFORMATION_CLASS = 7
 )
 
+// String returns the HEAP_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HEAP_INFORMATION_CLASS) String() string {
+	switch e {
+	case HeapCompatibilityInformation:
+		return "HeapCompatibilityInformation"
+	case HeapEnableTerminationOnCorruption:
+		return "HeapEnableTerminationOnCorruption"
+	case HeapOptimizeResources:
+		return "HeapOptimizeResources"
+	case HeapTag:
+		return "HeapTag"
+	default:
+		return fmt.Sprintf("HEAP_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type LOCAL_ALLOC_FLAGS uint32
 
 const (
@@ -71,12 +211,50 @@ const (
 	NONZEROLPTR   LOCAL_ALLOC_FLAGS = 0
 )
 
+// String returns the LOCAL_ALLOC_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOCAL_ALLOC_FLAGS) String() string {
+	var parts []string
+	if e&LHND != 0 {
+		parts = append(parts, "LHND")
+	}
+	if e&LMEM_MOVEABLE != 0 {
+		parts = append(parts, "LMEM_MOVEABLE")
+	}
+	if e&LMEM_ZEROINIT != 0 {
+		parts = append(parts, "LMEM_ZEROINIT")
+	}
+	if e&LPTR != 0 {
+		parts = append(parts, "LPTR")
+	}
+	if e&NONZEROLHND != 0 {
+		parts = append(parts, "NONZEROLHND")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type MEMORY_RESOURCE_NOTIFICATION_TYPE int32
 
 const (
 	LowMemoryResourceNotification  MEMORY_RESOURCE_NOTIFICATION_TYPE = 0
 	HighMemoryResourceNotification MEMORY_RESOURCE_NOTIFICATION_TYPE = 1
 )
+
+// String returns the MEMORY_RESOURCE_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MEMORY_RESOURCE_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case LowMemoryResourceNotification:
+		return "LowMemoryResourceNotification"
+	case HighMemoryResourceNotification:
+		return "HighMemoryResourceNotification"
+	default:
+		return fmt.Sprintf("MEMORY_RESOURCE_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
 
 type MEM_DEDICATED_ATTRIBUTE_TYPE int32
 
@@ -87,6 +265,25 @@ const (
 	MemDedicatedAttributeWriteLatency   MEM_DEDICATED_ATTRIBUTE_TYPE = 3
 	MemDedicatedAttributeMax            MEM_DEDICATED_ATTRIBUTE_TYPE = 4
 )
+
+// String returns the MEM_DEDICATED_ATTRIBUTE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MEM_DEDICATED_ATTRIBUTE_TYPE) String() string {
+	switch e {
+	case MemDedicatedAttributeReadBandwidth:
+		return "MemDedicatedAttributeReadBandwidth"
+	case MemDedicatedAttributeReadLatency:
+		return "MemDedicatedAttributeReadLatency"
+	case MemDedicatedAttributeWriteBandwidth:
+		return "MemDedicatedAttributeWriteBandwidth"
+	case MemDedicatedAttributeWriteLatency:
+		return "MemDedicatedAttributeWriteLatency"
+	case MemDedicatedAttributeMax:
+		return "MemDedicatedAttributeMax"
+	default:
+		return fmt.Sprintf("MEM_DEDICATED_ATTRIBUTE_TYPE(%d)", int32(e))
+	}
+}
 
 // MEM_EXTENDED_PARAMETER_TYPE: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-mem_extended_parameter_type
 type MEM_EXTENDED_PARAMETER_TYPE int32
@@ -102,6 +299,31 @@ const (
 	MemExtendedParameterMax                 MEM_EXTENDED_PARAMETER_TYPE = 7
 )
 
+// String returns the MEM_EXTENDED_PARAMETER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MEM_EXTENDED_PARAMETER_TYPE) String() string {
+	switch e {
+	case MemExtendedParameterInvalidType:
+		return "MemExtendedParameterInvalidType"
+	case MemExtendedParameterAddressRequirements:
+		return "MemExtendedParameterAddressRequirements"
+	case MemExtendedParameterNumaNode:
+		return "MemExtendedParameterNumaNode"
+	case MemExtendedParameterPartitionHandle:
+		return "MemExtendedParameterPartitionHandle"
+	case MemExtendedParameterUserPhysicalHandle:
+		return "MemExtendedParameterUserPhysicalHandle"
+	case MemExtendedParameterAttributeFlags:
+		return "MemExtendedParameterAttributeFlags"
+	case MemExtendedParameterImageMachine:
+		return "MemExtendedParameterImageMachine"
+	case MemExtendedParameterMax:
+		return "MemExtendedParameterMax"
+	default:
+		return fmt.Sprintf("MEM_EXTENDED_PARAMETER_TYPE(%d)", int32(e))
+	}
+}
+
 type MEM_SECTION_EXTENDED_PARAMETER_TYPE int32
 
 const (
@@ -112,6 +334,25 @@ const (
 	MemSectionExtendedParameterMax               MEM_SECTION_EXTENDED_PARAMETER_TYPE = 4
 )
 
+// String returns the MEM_SECTION_EXTENDED_PARAMETER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MEM_SECTION_EXTENDED_PARAMETER_TYPE) String() string {
+	switch e {
+	case MemSectionExtendedParameterInvalidType:
+		return "MemSectionExtendedParameterInvalidType"
+	case MemSectionExtendedParameterUserPhysicalFlags:
+		return "MemSectionExtendedParameterUserPhysicalFlags"
+	case MemSectionExtendedParameterNumaNode:
+		return "MemSectionExtendedParameterNumaNode"
+	case MemSectionExtendedParameterSigningLevel:
+		return "MemSectionExtendedParameterSigningLevel"
+	case MemSectionExtendedParameterMax:
+		return "MemSectionExtendedParameterMax"
+	default:
+		return fmt.Sprintf("MEM_SECTION_EXTENDED_PARAMETER_TYPE(%d)", int32(e))
+	}
+}
+
 type OFFER_PRIORITY int32
 
 const (
@@ -121,6 +362,24 @@ const (
 	VmOfferPriorityNormal      OFFER_PRIORITY = 4
 )
 
+// String returns the OFFER_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OFFER_PRIORITY) String() string {
+	switch e {
+	case VmOfferPriorityVeryLow:
+		return "VmOfferPriorityVeryLow"
+	case VmOfferPriorityLow:
+		return "VmOfferPriorityLow"
+	case VmOfferPriorityBelowNormal:
+		return "VmOfferPriorityBelowNormal"
+	case VmOfferPriorityNormal:
+		return "VmOfferPriorityNormal"
+	default:
+		return fmt.Sprintf("OFFER_PRIORITY(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type PAGE_PROTECTION_FLAGS uint32
 
 const (
@@ -165,6 +424,134 @@ const (
 	SEC_IMAGE_NO_EXECUTE            PAGE_PROTECTION_FLAGS = 285212672
 )
 
+// String returns the PAGE_PROTECTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAGE_PROTECTION_FLAGS) String() string {
+	var parts []string
+	if e&PAGE_NOACCESS != 0 {
+		parts = append(parts, "PAGE_NOACCESS")
+	}
+	if e&PAGE_READONLY != 0 {
+		parts = append(parts, "PAGE_READONLY")
+	}
+	if e&PAGE_READWRITE != 0 {
+		parts = append(parts, "PAGE_READWRITE")
+	}
+	if e&PAGE_WRITECOPY != 0 {
+		parts = append(parts, "PAGE_WRITECOPY")
+	}
+	if e&PAGE_EXECUTE != 0 {
+		parts = append(parts, "PAGE_EXECUTE")
+	}
+	if e&PAGE_EXECUTE_READ != 0 {
+		parts = append(parts, "PAGE_EXECUTE_READ")
+	}
+	if e&PAGE_EXECUTE_READWRITE != 0 {
+		parts = append(parts, "PAGE_EXECUTE_READWRITE")
+	}
+	if e&PAGE_EXECUTE_WRITECOPY != 0 {
+		parts = append(parts, "PAGE_EXECUTE_WRITECOPY")
+	}
+	if e&PAGE_GUARD != 0 {
+		parts = append(parts, "PAGE_GUARD")
+	}
+	if e&PAGE_NOCACHE != 0 {
+		parts = append(parts, "PAGE_NOCACHE")
+	}
+	if e&PAGE_WRITECOMBINE != 0 {
+		parts = append(parts, "PAGE_WRITECOMBINE")
+	}
+	if e&PAGE_GRAPHICS_NOACCESS != 0 {
+		parts = append(parts, "PAGE_GRAPHICS_NOACCESS")
+	}
+	if e&PAGE_GRAPHICS_READONLY != 0 {
+		parts = append(parts, "PAGE_GRAPHICS_READONLY")
+	}
+	if e&PAGE_GRAPHICS_READWRITE != 0 {
+		parts = append(parts, "PAGE_GRAPHICS_READWRITE")
+	}
+	if e&PAGE_GRAPHICS_EXECUTE != 0 {
+		parts = append(parts, "PAGE_GRAPHICS_EXECUTE")
+	}
+	if e&PAGE_GRAPHICS_EXECUTE_READ != 0 {
+		parts = append(parts, "PAGE_GRAPHICS_EXECUTE_READ")
+	}
+	if e&PAGE_GRAPHICS_EXECUTE_READWRITE != 0 {
+		parts = append(parts, "PAGE_GRAPHICS_EXECUTE_READWRITE")
+	}
+	if e&PAGE_GRAPHICS_COHERENT != 0 {
+		parts = append(parts, "PAGE_GRAPHICS_COHERENT")
+	}
+	if e&PAGE_GRAPHICS_NOCACHE != 0 {
+		parts = append(parts, "PAGE_GRAPHICS_NOCACHE")
+	}
+	if e&PAGE_ENCLAVE_THREAD_CONTROL != 0 {
+		parts = append(parts, "PAGE_ENCLAVE_THREAD_CONTROL")
+	}
+	if e&PAGE_REVERT_TO_FILE_MAP != 0 {
+		parts = append(parts, "PAGE_REVERT_TO_FILE_MAP")
+	}
+	if e&PAGE_TARGETS_NO_UPDATE != 0 {
+		parts = append(parts, "PAGE_TARGETS_NO_UPDATE")
+	}
+	if e&PAGE_TARGETS_INVALID != 0 {
+		parts = append(parts, "PAGE_TARGETS_INVALID")
+	}
+	if e&PAGE_ENCLAVE_UNVALIDATED != 0 {
+		parts = append(parts, "PAGE_ENCLAVE_UNVALIDATED")
+	}
+	if e&PAGE_ENCLAVE_MASK != 0 {
+		parts = append(parts, "PAGE_ENCLAVE_MASK")
+	}
+	if e&PAGE_ENCLAVE_DECOMMIT != 0 {
+		parts = append(parts, "PAGE_ENCLAVE_DECOMMIT")
+	}
+	if e&PAGE_ENCLAVE_SS_FIRST != 0 {
+		parts = append(parts, "PAGE_ENCLAVE_SS_FIRST")
+	}
+	if e&PAGE_ENCLAVE_SS_REST != 0 {
+		parts = append(parts, "PAGE_ENCLAVE_SS_REST")
+	}
+	if e&SEC_PARTITION_OWNER_HANDLE != 0 {
+		parts = append(parts, "SEC_PARTITION_OWNER_HANDLE")
+	}
+	if e&SEC_64K_PAGES != 0 {
+		parts = append(parts, "SEC_64K_PAGES")
+	}
+	if e&SEC_FILE != 0 {
+		parts = append(parts, "SEC_FILE")
+	}
+	if e&SEC_IMAGE != 0 {
+		parts = append(parts, "SEC_IMAGE")
+	}
+	if e&SEC_PROTECTED_IMAGE != 0 {
+		parts = append(parts, "SEC_PROTECTED_IMAGE")
+	}
+	if e&SEC_RESERVE != 0 {
+		parts = append(parts, "SEC_RESERVE")
+	}
+	if e&SEC_COMMIT != 0 {
+		parts = append(parts, "SEC_COMMIT")
+	}
+	if e&SEC_NOCACHE != 0 {
+		parts = append(parts, "SEC_NOCACHE")
+	}
+	if e&SEC_WRITECOMBINE != 0 {
+		parts = append(parts, "SEC_WRITECOMBINE")
+	}
+	if e&SEC_LARGE_PAGES != 0 {
+		parts = append(parts, "SEC_LARGE_PAGES")
+	}
+	if e&SEC_IMAGE_NO_EXECUTE != 0 {
+		parts = append(parts, "SEC_IMAGE_NO_EXECUTE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type PAGE_TYPE uint32
 
 const (
@@ -173,6 +560,26 @@ const (
 	MEM_IMAGE   PAGE_TYPE = 16777216
 )
 
+// String returns the PAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAGE_TYPE) String() string {
+	var parts []string
+	if e&MEM_PRIVATE != 0 {
+		parts = append(parts, "MEM_PRIVATE")
+	}
+	if e&MEM_MAPPED != 0 {
+		parts = append(parts, "MEM_MAPPED")
+	}
+	if e&MEM_IMAGE != 0 {
+		parts = append(parts, "MEM_IMAGE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SECTION_FLAGS uint32
 
 const (
@@ -185,6 +592,38 @@ const (
 	SECTION_MAP_EXECUTE_EXPLICIT SECTION_FLAGS = 32
 )
 
+// String returns the SECTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECTION_FLAGS) String() string {
+	var parts []string
+	if e&SECTION_ALL_ACCESS != 0 {
+		parts = append(parts, "SECTION_ALL_ACCESS")
+	}
+	if e&SECTION_QUERY != 0 {
+		parts = append(parts, "SECTION_QUERY")
+	}
+	if e&SECTION_MAP_WRITE != 0 {
+		parts = append(parts, "SECTION_MAP_WRITE")
+	}
+	if e&SECTION_MAP_READ != 0 {
+		parts = append(parts, "SECTION_MAP_READ")
+	}
+	if e&SECTION_MAP_EXECUTE != 0 {
+		parts = append(parts, "SECTION_MAP_EXECUTE")
+	}
+	if e&SECTION_EXTEND_SIZE != 0 {
+		parts = append(parts, "SECTION_EXTEND_SIZE")
+	}
+	if e&SECTION_MAP_EXECUTE_EXPLICIT != 0 {
+		parts = append(parts, "SECTION_MAP_EXECUTE_EXPLICIT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SETPROCESSWORKINGSETSIZEEX_FLAGS uint32
 
 const (
@@ -194,6 +633,28 @@ const (
 	QUOTA_LIMITS_HARDWS_MAX_DISABLE SETPROCESSWORKINGSETSIZEEX_FLAGS = 8
 )
 
+// String returns the SETPROCESSWORKINGSETSIZEEX_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SETPROCESSWORKINGSETSIZEEX_FLAGS) String() string {
+	var parts []string
+	if e&QUOTA_LIMITS_HARDWS_MIN_ENABLE != 0 {
+		parts = append(parts, "QUOTA_LIMITS_HARDWS_MIN_ENABLE")
+	}
+	if e&QUOTA_LIMITS_HARDWS_MIN_DISABLE != 0 {
+		parts = append(parts, "QUOTA_LIMITS_HARDWS_MIN_DISABLE")
+	}
+	if e&QUOTA_LIMITS_HARDWS_MAX_ENABLE != 0 {
+		parts = append(parts, "QUOTA_LIMITS_HARDWS_MAX_ENABLE")
+	}
+	if e&QUOTA_LIMITS_HARDWS_MAX_DISABLE != 0 {
+		parts = append(parts, "QUOTA_LIMITS_HARDWS_MAX_DISABLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type UNMAP_VIEW_OF_FILE_FLAGS uint32
 
 const (
@@ -202,6 +663,22 @@ const (
 	MEM_PRESERVE_PLACEHOLDER       UNMAP_VIEW_OF_FILE_FLAGS = 2
 )
 
+// String returns the UNMAP_VIEW_OF_FILE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UNMAP_VIEW_OF_FILE_FLAGS) String() string {
+	switch e {
+	case MEM_UNMAP_NONE:
+		return "MEM_UNMAP_NONE"
+	case MEM_UNMAP_WITH_TRANSIENT_BOOST:
+		return "MEM_UNMAP_WITH_TRANSIENT_BOOST"
+	case MEM_PRESERVE_PLACEHOLDER:
+		return "MEM_PRESERVE_PLACEHOLDER"
+	default:
+		return fmt.Sprintf("UNMAP_VIEW_OF_FILE_FLAGS(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type VIRTUAL_ALLOCATION_TYPE uint32
 
 const (
@@ -215,6 +692,40 @@ const (
 	MEM_FREE                VIRTUAL_ALLOCATION_TYPE = 65536
 )
 
+// String returns the VIRTUAL_ALLOCATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIRTUAL_ALLOCATION_TYPE) String() string {
+	var parts []string
+	if e&MEM_COMMIT != 0 {
+		parts = append(parts, "MEM_COMMIT")
+	}
+	if e&MEM_RESERVE != 0 {
+		parts = append(parts, "MEM_RESERVE")
+	}
+	if e&MEM_RESET != 0 {
+		parts = append(parts, "MEM_RESET")
+	}
+	if e&MEM_RESET_UNDO != 0 {
+		parts = append(parts, "MEM_RESET_UNDO")
+	}
+	if e&MEM_REPLACE_PLACEHOLDER != 0 {
+		parts = append(parts, "MEM_REPLACE_PLACEHOLDER")
+	}
+	if e&MEM_LARGE_PAGES != 0 {
+		parts = append(parts, "MEM_LARGE_PAGES")
+	}
+	if e&MEM_RESERVE_PLACEHOLDER != 0 {
+		parts = append(parts, "MEM_RESERVE_PLACEHOLDER")
+	}
+	if e&MEM_FREE != 0 {
+		parts = append(parts, "MEM_FREE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type VIRTUAL_FREE_TYPE uint32
 
 const (
@@ -222,11 +733,35 @@ const (
 	MEM_RELEASE  VIRTUAL_FREE_TYPE = 32768
 )
 
+// String returns the VIRTUAL_FREE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIRTUAL_FREE_TYPE) String() string {
+	switch e {
+	case MEM_DECOMMIT:
+		return "MEM_DECOMMIT"
+	case MEM_RELEASE:
+		return "MEM_RELEASE"
+	default:
+		return fmt.Sprintf("VIRTUAL_FREE_TYPE(%d)", uint32(e))
+	}
+}
+
 type WIN32_MEMORY_INFORMATION_CLASS int32
 
 const (
 	MemoryRegionInfo WIN32_MEMORY_INFORMATION_CLASS = 0
 )
+
+// String returns the WIN32_MEMORY_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WIN32_MEMORY_INFORMATION_CLASS) String() string {
+	switch e {
+	case MemoryRegionInfo:
+		return "MemoryRegionInfo"
+	default:
+		return fmt.Sprintf("WIN32_MEMORY_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
 
 type WIN32_MEMORY_PARTITION_INFORMATION_CLASS int32
 
@@ -234,3 +769,16 @@ const (
 	MemoryPartitionInfo                WIN32_MEMORY_PARTITION_INFORMATION_CLASS = 0
 	MemoryPartitionDedicatedMemoryInfo WIN32_MEMORY_PARTITION_INFORMATION_CLASS = 1
 )
+
+// String returns the WIN32_MEMORY_PARTITION_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WIN32_MEMORY_PARTITION_INFORMATION_CLASS) String() string {
+	switch e {
+	case MemoryPartitionInfo:
+		return "MemoryPartitionInfo"
+	case MemoryPartitionDedicatedMemoryInfo:
+		return "MemoryPartitionDedicatedMemoryInfo"
+	default:
+		return fmt.Sprintf("WIN32_MEMORY_PARTITION_INFORMATION_CLASS(%d)", int32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package desktopsharing
 
+import (
+	"fmt"
+)
+
 // ATTENDEE_DISCONNECT_REASON: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-attendee_disconnect_reason
 type ATTENDEE_DISCONNECT_REASON int32
 
@@ -15,6 +19,21 @@ const (
 	ATTENDEE_DISCONNECT_REASON_MAX ATTENDEE_DISCONNECT_REASON = 2
 )
 
+// String returns the ATTENDEE_DISCONNECT_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ATTENDEE_DISCONNECT_REASON) String() string {
+	switch e {
+	case ATTENDEE_DISCONNECT_REASON_MIN:
+		return "ATTENDEE_DISCONNECT_REASON_MIN"
+	case ATTENDEE_DISCONNECT_REASON_ERR:
+		return "ATTENDEE_DISCONNECT_REASON_ERR"
+	case ATTENDEE_DISCONNECT_REASON_CLI:
+		return "ATTENDEE_DISCONNECT_REASON_CLI"
+	default:
+		return fmt.Sprintf("ATTENDEE_DISCONNECT_REASON(%d)", int32(e))
+	}
+}
+
 // CHANNEL_ACCESS_ENUM: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-channel_access_enum
 type CHANNEL_ACCESS_ENUM int32
 
@@ -22,6 +41,19 @@ const (
 	CHANNEL_ACCESS_ENUM_NONE        CHANNEL_ACCESS_ENUM = 0
 	CHANNEL_ACCESS_ENUM_SENDRECEIVE CHANNEL_ACCESS_ENUM = 1
 )
+
+// String returns the CHANNEL_ACCESS_ENUM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANNEL_ACCESS_ENUM) String() string {
+	switch e {
+	case CHANNEL_ACCESS_ENUM_NONE:
+		return "CHANNEL_ACCESS_ENUM_NONE"
+	case CHANNEL_ACCESS_ENUM_SENDRECEIVE:
+		return "CHANNEL_ACCESS_ENUM_SENDRECEIVE"
+	default:
+		return fmt.Sprintf("CHANNEL_ACCESS_ENUM(%d)", int32(e))
+	}
+}
 
 // CHANNEL_FLAGS: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-channel_flags
 type CHANNEL_FLAGS int32
@@ -32,6 +64,21 @@ const (
 	CHANNEL_FLAGS_DYNAMIC      CHANNEL_FLAGS = 4
 )
 
+// String returns the CHANNEL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANNEL_FLAGS) String() string {
+	switch e {
+	case CHANNEL_FLAGS_LEGACY:
+		return "CHANNEL_FLAGS_LEGACY"
+	case CHANNEL_FLAGS_UNCOMPRESSED:
+		return "CHANNEL_FLAGS_UNCOMPRESSED"
+	case CHANNEL_FLAGS_DYNAMIC:
+		return "CHANNEL_FLAGS_DYNAMIC"
+	default:
+		return fmt.Sprintf("CHANNEL_FLAGS(%d)", int32(e))
+	}
+}
+
 // CHANNEL_PRIORITY: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-channel_priority
 type CHANNEL_PRIORITY int32
 
@@ -40,6 +87,21 @@ const (
 	CHANNEL_PRIORITY_MED CHANNEL_PRIORITY = 1
 	CHANNEL_PRIORITY_HI  CHANNEL_PRIORITY = 2
 )
+
+// String returns the CHANNEL_PRIORITY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CHANNEL_PRIORITY) String() string {
+	switch e {
+	case CHANNEL_PRIORITY_LO:
+		return "CHANNEL_PRIORITY_LO"
+	case CHANNEL_PRIORITY_MED:
+		return "CHANNEL_PRIORITY_MED"
+	case CHANNEL_PRIORITY_HI:
+		return "CHANNEL_PRIORITY_HI"
+	default:
+		return fmt.Sprintf("CHANNEL_PRIORITY(%d)", int32(e))
+	}
+}
 
 // CTRL_LEVEL: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-ctrl_level
 type CTRL_LEVEL int32
@@ -55,12 +117,44 @@ const (
 	CTRL_LEVEL_MAX                 CTRL_LEVEL = 5
 )
 
+// String returns the CTRL_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CTRL_LEVEL) String() string {
+	switch e {
+	case CTRL_LEVEL_MIN:
+		return "CTRL_LEVEL_MIN"
+	case CTRL_LEVEL_NONE:
+		return "CTRL_LEVEL_NONE"
+	case CTRL_LEVEL_VIEW:
+		return "CTRL_LEVEL_VIEW"
+	case CTRL_LEVEL_INTERACTIVE:
+		return "CTRL_LEVEL_INTERACTIVE"
+	case CTRL_LEVEL_REQCTRL_VIEW:
+		return "CTRL_LEVEL_REQCTRL_VIEW"
+	case CTRL_LEVEL_REQCTRL_INTERACTIVE:
+		return "CTRL_LEVEL_REQCTRL_INTERACTIVE"
+	default:
+		return fmt.Sprintf("CTRL_LEVEL(%d)", int32(e))
+	}
+}
+
 // RDPENCOMAPI_ATTENDEE_FLAGS: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-rdpencomapi_attendee_flags
 type RDPENCOMAPI_ATTENDEE_FLAGS int32
 
 const (
 	ATTENDEE_FLAGS_LOCAL RDPENCOMAPI_ATTENDEE_FLAGS = 1
 )
+
+// String returns the RDPENCOMAPI_ATTENDEE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RDPENCOMAPI_ATTENDEE_FLAGS) String() string {
+	switch e {
+	case ATTENDEE_FLAGS_LOCAL:
+		return "ATTENDEE_FLAGS_LOCAL"
+	default:
+		return fmt.Sprintf("RDPENCOMAPI_ATTENDEE_FLAGS(%d)", int32(e))
+	}
+}
 
 // RDPENCOMAPI_CONSTANTS: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-rdpencomapi_constants
 type RDPENCOMAPI_CONSTANTS int32
@@ -75,12 +169,44 @@ const (
 	CONST_ATTENDEE_ID_DEFAULT             RDPENCOMAPI_CONSTANTS = -1
 )
 
+// String returns the RDPENCOMAPI_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RDPENCOMAPI_CONSTANTS) String() string {
+	switch e {
+	case CONST_MAX_CHANNEL_MESSAGE_SIZE:
+		return "CONST_MAX_CHANNEL_MESSAGE_SIZE"
+	case CONST_MAX_CHANNEL_NAME_LEN:
+		return "CONST_MAX_CHANNEL_NAME_LEN"
+	case CONST_MAX_LEGACY_CHANNEL_MESSAGE_SIZE:
+		return "CONST_MAX_LEGACY_CHANNEL_MESSAGE_SIZE"
+	case CONST_ATTENDEE_ID_EVERYONE:
+		return "CONST_ATTENDEE_ID_EVERYONE"
+	case CONST_ATTENDEE_ID_HOST:
+		return "CONST_ATTENDEE_ID_HOST"
+	case CONST_CONN_INTERVAL:
+		return "CONST_CONN_INTERVAL"
+	default:
+		return fmt.Sprintf("RDPENCOMAPI_CONSTANTS(%d)", int32(e))
+	}
+}
+
 // RDPSRAPI_APP_FLAGS: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-rdpsrapi_app_flags
 type RDPSRAPI_APP_FLAGS int32
 
 const (
 	APP_FLAG_PRIVILEGED RDPSRAPI_APP_FLAGS = 1
 )
+
+// String returns the RDPSRAPI_APP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RDPSRAPI_APP_FLAGS) String() string {
+	switch e {
+	case APP_FLAG_PRIVILEGED:
+		return "APP_FLAG_PRIVILEGED"
+	default:
+		return fmt.Sprintf("RDPSRAPI_APP_FLAGS(%d)", int32(e))
+	}
+}
 
 // RDPSRAPI_KBD_CODE_TYPE: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-rdpsrapi_kbd_code_type
 type RDPSRAPI_KBD_CODE_TYPE int32
@@ -89,6 +215,19 @@ const (
 	RDPSRAPI_KBD_CODE_SCANCODE RDPSRAPI_KBD_CODE_TYPE = 0
 	RDPSRAPI_KBD_CODE_UNICODE  RDPSRAPI_KBD_CODE_TYPE = 1
 )
+
+// String returns the RDPSRAPI_KBD_CODE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RDPSRAPI_KBD_CODE_TYPE) String() string {
+	switch e {
+	case RDPSRAPI_KBD_CODE_SCANCODE:
+		return "RDPSRAPI_KBD_CODE_SCANCODE"
+	case RDPSRAPI_KBD_CODE_UNICODE:
+		return "RDPSRAPI_KBD_CODE_UNICODE"
+	default:
+		return fmt.Sprintf("RDPSRAPI_KBD_CODE_TYPE(%d)", int32(e))
+	}
+}
 
 // RDPSRAPI_KBD_SYNC_FLAG: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-rdpsrapi_kbd_sync_flag
 type RDPSRAPI_KBD_SYNC_FLAG int32
@@ -99,6 +238,23 @@ const (
 	RDPSRAPI_KBD_SYNC_FLAG_CAPS_LOCK   RDPSRAPI_KBD_SYNC_FLAG = 4
 	RDPSRAPI_KBD_SYNC_FLAG_KANA_LOCK   RDPSRAPI_KBD_SYNC_FLAG = 8
 )
+
+// String returns the RDPSRAPI_KBD_SYNC_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RDPSRAPI_KBD_SYNC_FLAG) String() string {
+	switch e {
+	case RDPSRAPI_KBD_SYNC_FLAG_SCROLL_LOCK:
+		return "RDPSRAPI_KBD_SYNC_FLAG_SCROLL_LOCK"
+	case RDPSRAPI_KBD_SYNC_FLAG_NUM_LOCK:
+		return "RDPSRAPI_KBD_SYNC_FLAG_NUM_LOCK"
+	case RDPSRAPI_KBD_SYNC_FLAG_CAPS_LOCK:
+		return "RDPSRAPI_KBD_SYNC_FLAG_CAPS_LOCK"
+	case RDPSRAPI_KBD_SYNC_FLAG_KANA_LOCK:
+		return "RDPSRAPI_KBD_SYNC_FLAG_KANA_LOCK"
+	default:
+		return fmt.Sprintf("RDPSRAPI_KBD_SYNC_FLAG(%d)", int32(e))
+	}
+}
 
 // RDPSRAPI_MOUSE_BUTTON_TYPE: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-rdpsrapi_mouse_button_type
 type RDPSRAPI_MOUSE_BUTTON_TYPE int32
@@ -112,9 +268,41 @@ const (
 	RDPSRAPI_MOUSE_BUTTON_XBUTTON3 RDPSRAPI_MOUSE_BUTTON_TYPE = 5
 )
 
+// String returns the RDPSRAPI_MOUSE_BUTTON_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RDPSRAPI_MOUSE_BUTTON_TYPE) String() string {
+	switch e {
+	case RDPSRAPI_MOUSE_BUTTON_BUTTON1:
+		return "RDPSRAPI_MOUSE_BUTTON_BUTTON1"
+	case RDPSRAPI_MOUSE_BUTTON_BUTTON2:
+		return "RDPSRAPI_MOUSE_BUTTON_BUTTON2"
+	case RDPSRAPI_MOUSE_BUTTON_BUTTON3:
+		return "RDPSRAPI_MOUSE_BUTTON_BUTTON3"
+	case RDPSRAPI_MOUSE_BUTTON_XBUTTON1:
+		return "RDPSRAPI_MOUSE_BUTTON_XBUTTON1"
+	case RDPSRAPI_MOUSE_BUTTON_XBUTTON2:
+		return "RDPSRAPI_MOUSE_BUTTON_XBUTTON2"
+	case RDPSRAPI_MOUSE_BUTTON_XBUTTON3:
+		return "RDPSRAPI_MOUSE_BUTTON_XBUTTON3"
+	default:
+		return fmt.Sprintf("RDPSRAPI_MOUSE_BUTTON_TYPE(%d)", int32(e))
+	}
+}
+
 // RDPSRAPI_WND_FLAGS: https://learn.microsoft.com/windows/win32/api/rdpencomapi/ne-rdpencomapi-rdpsrapi_wnd_flags
 type RDPSRAPI_WND_FLAGS int32
 
 const (
 	WND_FLAG_PRIVILEGED RDPSRAPI_WND_FLAGS = 1
 )
+
+// String returns the RDPSRAPI_WND_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RDPSRAPI_WND_FLAGS) String() string {
+	switch e {
+	case WND_FLAG_PRIVILEGED:
+		return "WND_FLAG_PRIVILEGED"
+	default:
+		return fmt.Sprintf("RDPSRAPI_WND_FLAGS(%d)", int32(e))
+	}
+}

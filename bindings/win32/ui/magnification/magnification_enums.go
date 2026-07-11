@@ -4,9 +4,26 @@
 
 package magnification
 
+import (
+	"fmt"
+)
+
 type MW_FILTERMODE uint32
 
 const (
 	MW_FILTERMODE_EXCLUDE MW_FILTERMODE = 0
 	MW_FILTERMODE_INCLUDE MW_FILTERMODE = 1
 )
+
+// String returns the MW_FILTERMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MW_FILTERMODE) String() string {
+	switch e {
+	case MW_FILTERMODE_EXCLUDE:
+		return "MW_FILTERMODE_EXCLUDE"
+	case MW_FILTERMODE_INCLUDE:
+		return "MW_FILTERMODE_INCLUDE"
+	default:
+		return fmt.Sprintf("MW_FILTERMODE(%d)", uint32(e))
+	}
+}

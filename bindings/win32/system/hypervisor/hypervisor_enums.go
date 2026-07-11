@@ -4,6 +4,11 @@
 
 package hypervisor
 
+import (
+	"fmt"
+	"strings"
+)
+
 type GUEST_OS_MICROSOFT_IDS int32
 
 const (
@@ -15,6 +20,27 @@ const (
 	GuestOsMicrosoftWindowsCE GUEST_OS_MICROSOFT_IDS = 5
 )
 
+// String returns the GUEST_OS_MICROSOFT_IDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GUEST_OS_MICROSOFT_IDS) String() string {
+	switch e {
+	case GuestOsMicrosoftUndefined:
+		return "GuestOsMicrosoftUndefined"
+	case GuestOsMicrosoftMSDOS:
+		return "GuestOsMicrosoftMSDOS"
+	case GuestOsMicrosoftWindows3x:
+		return "GuestOsMicrosoftWindows3x"
+	case GuestOsMicrosoftWindows9x:
+		return "GuestOsMicrosoftWindows9x"
+	case GuestOsMicrosoftWindowsNT:
+		return "GuestOsMicrosoftWindowsNT"
+	case GuestOsMicrosoftWindowsCE:
+		return "GuestOsMicrosoftWindowsCE"
+	default:
+		return fmt.Sprintf("GUEST_OS_MICROSOFT_IDS(%d)", int32(e))
+	}
+}
+
 type GUEST_OS_OPENSOURCE_IDS int32
 
 const (
@@ -25,6 +51,25 @@ const (
 	GuestOsOpenSourceIllumos   GUEST_OS_OPENSOURCE_IDS = 4
 )
 
+// String returns the GUEST_OS_OPENSOURCE_IDS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GUEST_OS_OPENSOURCE_IDS) String() string {
+	switch e {
+	case GuestOsOpenSourceUndefined:
+		return "GuestOsOpenSourceUndefined"
+	case GuestOsOpenSourceLinux:
+		return "GuestOsOpenSourceLinux"
+	case GuestOsOpenSourceFreeBSD:
+		return "GuestOsOpenSourceFreeBSD"
+	case GuestOsOpenSourceXen:
+		return "GuestOsOpenSourceXen"
+	case GuestOsOpenSourceIllumos:
+		return "GuestOsOpenSourceIllumos"
+	default:
+		return fmt.Sprintf("GUEST_OS_OPENSOURCE_IDS(%d)", int32(e))
+	}
+}
+
 type GUEST_OS_VENDOR int32
 
 const (
@@ -34,12 +79,43 @@ const (
 	GuestOsVendorLANCOM    GUEST_OS_VENDOR = 512
 )
 
+// String returns the GUEST_OS_VENDOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GUEST_OS_VENDOR) String() string {
+	switch e {
+	case GuestOsVendorUndefined:
+		return "GuestOsVendorUndefined"
+	case GuestOsVendorMicrosoft:
+		return "GuestOsVendorMicrosoft"
+	case GuestOsVendorHPE:
+		return "GuestOsVendorHPE"
+	case GuestOsVendorLANCOM:
+		return "GuestOsVendorLANCOM"
+	default:
+		return fmt.Sprintf("GUEST_OS_VENDOR(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HDV_DEVICE_HOST_FLAGS int32
 
 const (
 	HdvDeviceHostFlagNone                  HDV_DEVICE_HOST_FLAGS = 0
 	HdvDeviceHostFlagInitializeComSecurity HDV_DEVICE_HOST_FLAGS = 1
 )
+
+// String returns the HDV_DEVICE_HOST_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HDV_DEVICE_HOST_FLAGS) String() string {
+	var parts []string
+	if e&HdvDeviceHostFlagInitializeComSecurity != 0 {
+		parts = append(parts, "HdvDeviceHostFlagInitializeComSecurity")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // HDV_DEVICE_TYPE: https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvDeviceType
 type HDV_DEVICE_TYPE int32
@@ -48,6 +124,19 @@ const (
 	HdvDeviceTypeUndefined HDV_DEVICE_TYPE = 0
 	HdvDeviceTypePCI       HDV_DEVICE_TYPE = 1
 )
+
+// String returns the HDV_DEVICE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HDV_DEVICE_TYPE) String() string {
+	switch e {
+	case HdvDeviceTypeUndefined:
+		return "HdvDeviceTypeUndefined"
+	case HdvDeviceTypePCI:
+		return "HdvDeviceTypePCI"
+	default:
+		return fmt.Sprintf("HDV_DEVICE_TYPE(%d)", int32(e))
+	}
+}
 
 type HDV_DOORBELL_FLAGS int32
 
@@ -60,6 +149,28 @@ const (
 	HDV_DOORBELL_FLAG_TRIGGER_ANY_VALUE  HDV_DOORBELL_FLAGS = -2147483648
 )
 
+// String returns the HDV_DOORBELL_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HDV_DOORBELL_FLAGS) String() string {
+	switch e {
+	case HDV_DOORBELL_FLAG_TRIGGER_SIZE_ANY:
+		return "HDV_DOORBELL_FLAG_TRIGGER_SIZE_ANY"
+	case HDV_DOORBELL_FLAG_TRIGGER_SIZE_BYTE:
+		return "HDV_DOORBELL_FLAG_TRIGGER_SIZE_BYTE"
+	case HDV_DOORBELL_FLAG_TRIGGER_SIZE_WORD:
+		return "HDV_DOORBELL_FLAG_TRIGGER_SIZE_WORD"
+	case HDV_DOORBELL_FLAG_TRIGGER_SIZE_DWORD:
+		return "HDV_DOORBELL_FLAG_TRIGGER_SIZE_DWORD"
+	case HDV_DOORBELL_FLAG_TRIGGER_SIZE_QWORD:
+		return "HDV_DOORBELL_FLAG_TRIGGER_SIZE_QWORD"
+	case HDV_DOORBELL_FLAG_TRIGGER_ANY_VALUE:
+		return "HDV_DOORBELL_FLAG_TRIGGER_ANY_VALUE"
+	default:
+		return fmt.Sprintf("HDV_DOORBELL_FLAGS(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type HDV_MMIO_MAPPING_FLAGS int32
 
 const (
@@ -67,6 +178,22 @@ const (
 	HdvMmioMappingFlagWriteable  HDV_MMIO_MAPPING_FLAGS = 1
 	HdvMmioMappingFlagExecutable HDV_MMIO_MAPPING_FLAGS = 2
 )
+
+// String returns the HDV_MMIO_MAPPING_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HDV_MMIO_MAPPING_FLAGS) String() string {
+	var parts []string
+	if e&HdvMmioMappingFlagWriteable != 0 {
+		parts = append(parts, "HdvMmioMappingFlagWriteable")
+	}
+	if e&HdvMmioMappingFlagExecutable != 0 {
+		parts = append(parts, "HdvMmioMappingFlagExecutable")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // HDV_PCI_BAR_SELECTOR: https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvPciBarSelector
 type HDV_PCI_BAR_SELECTOR int32
@@ -80,6 +207,27 @@ const (
 	HDV_PCI_BAR5 HDV_PCI_BAR_SELECTOR = 5
 )
 
+// String returns the HDV_PCI_BAR_SELECTOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HDV_PCI_BAR_SELECTOR) String() string {
+	switch e {
+	case HDV_PCI_BAR0:
+		return "HDV_PCI_BAR0"
+	case HDV_PCI_BAR1:
+		return "HDV_PCI_BAR1"
+	case HDV_PCI_BAR2:
+		return "HDV_PCI_BAR2"
+	case HDV_PCI_BAR3:
+		return "HDV_PCI_BAR3"
+	case HDV_PCI_BAR4:
+		return "HDV_PCI_BAR4"
+	case HDV_PCI_BAR5:
+		return "HDV_PCI_BAR5"
+	default:
+		return fmt.Sprintf("HDV_PCI_BAR_SELECTOR(%d)", int32(e))
+	}
+}
+
 // HDV_PCI_INTERFACE_VERSION: https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvPciInterfaceVersion
 type HDV_PCI_INTERFACE_VERSION int32
 
@@ -87,6 +235,19 @@ const (
 	HdvPciDeviceInterfaceVersionInvalid HDV_PCI_INTERFACE_VERSION = 0
 	HdvPciDeviceInterfaceVersion1       HDV_PCI_INTERFACE_VERSION = 1
 )
+
+// String returns the HDV_PCI_INTERFACE_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HDV_PCI_INTERFACE_VERSION) String() string {
+	switch e {
+	case HdvPciDeviceInterfaceVersionInvalid:
+		return "HdvPciDeviceInterfaceVersionInvalid"
+	case HdvPciDeviceInterfaceVersion1:
+		return "HdvPciDeviceInterfaceVersion1"
+	default:
+		return fmt.Sprintf("HDV_PCI_INTERFACE_VERSION(%d)", int32(e))
+	}
+}
 
 type PAGING_MODE int32
 
@@ -98,6 +259,27 @@ const (
 	Paging_Long     PAGING_MODE = 4
 	Paging_Armv8    PAGING_MODE = 5
 )
+
+// String returns the PAGING_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PAGING_MODE) String() string {
+	switch e {
+	case Paging_Invalid:
+		return "Paging_Invalid"
+	case Paging_NonPaged:
+		return "Paging_NonPaged"
+	case Paging_32Bit:
+		return "Paging_32Bit"
+	case Paging_Pae:
+		return "Paging_Pae"
+	case Paging_Long:
+		return "Paging_Long"
+	case Paging_Armv8:
+		return "Paging_Armv8"
+	default:
+		return fmt.Sprintf("PAGING_MODE(%d)", int32(e))
+	}
+}
 
 type REGISTER_ID int32
 
@@ -263,6 +445,333 @@ const (
 	ARM64_RegisterMax            REGISTER_ID = 158
 )
 
+// String returns the REGISTER_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REGISTER_ID) String() string {
+	switch e {
+	case X64_RegisterRax:
+		return "X64_RegisterRax"
+	case X64_RegisterRcx:
+		return "X64_RegisterRcx"
+	case X64_RegisterRdx:
+		return "X64_RegisterRdx"
+	case X64_RegisterRbx:
+		return "X64_RegisterRbx"
+	case X64_RegisterRsp:
+		return "X64_RegisterRsp"
+	case X64_RegisterRbp:
+		return "X64_RegisterRbp"
+	case X64_RegisterRsi:
+		return "X64_RegisterRsi"
+	case X64_RegisterRdi:
+		return "X64_RegisterRdi"
+	case X64_RegisterR8:
+		return "X64_RegisterR8"
+	case X64_RegisterR9:
+		return "X64_RegisterR9"
+	case X64_RegisterR10:
+		return "X64_RegisterR10"
+	case X64_RegisterR11:
+		return "X64_RegisterR11"
+	case X64_RegisterR12:
+		return "X64_RegisterR12"
+	case X64_RegisterR13:
+		return "X64_RegisterR13"
+	case X64_RegisterR14:
+		return "X64_RegisterR14"
+	case X64_RegisterR15:
+		return "X64_RegisterR15"
+	case X64_RegisterRip:
+		return "X64_RegisterRip"
+	case X64_RegisterRFlags:
+		return "X64_RegisterRFlags"
+	case X64_RegisterXmm0:
+		return "X64_RegisterXmm0"
+	case X64_RegisterXmm1:
+		return "X64_RegisterXmm1"
+	case X64_RegisterXmm2:
+		return "X64_RegisterXmm2"
+	case X64_RegisterXmm3:
+		return "X64_RegisterXmm3"
+	case X64_RegisterXmm4:
+		return "X64_RegisterXmm4"
+	case X64_RegisterXmm5:
+		return "X64_RegisterXmm5"
+	case X64_RegisterXmm6:
+		return "X64_RegisterXmm6"
+	case X64_RegisterXmm7:
+		return "X64_RegisterXmm7"
+	case X64_RegisterXmm8:
+		return "X64_RegisterXmm8"
+	case X64_RegisterXmm9:
+		return "X64_RegisterXmm9"
+	case X64_RegisterXmm10:
+		return "X64_RegisterXmm10"
+	case X64_RegisterXmm11:
+		return "X64_RegisterXmm11"
+	case X64_RegisterXmm12:
+		return "X64_RegisterXmm12"
+	case X64_RegisterXmm13:
+		return "X64_RegisterXmm13"
+	case X64_RegisterXmm14:
+		return "X64_RegisterXmm14"
+	case X64_RegisterXmm15:
+		return "X64_RegisterXmm15"
+	case X64_RegisterFpMmx0:
+		return "X64_RegisterFpMmx0"
+	case X64_RegisterFpMmx1:
+		return "X64_RegisterFpMmx1"
+	case X64_RegisterFpMmx2:
+		return "X64_RegisterFpMmx2"
+	case X64_RegisterFpMmx3:
+		return "X64_RegisterFpMmx3"
+	case X64_RegisterFpMmx4:
+		return "X64_RegisterFpMmx4"
+	case X64_RegisterFpMmx5:
+		return "X64_RegisterFpMmx5"
+	case X64_RegisterFpMmx6:
+		return "X64_RegisterFpMmx6"
+	case X64_RegisterFpMmx7:
+		return "X64_RegisterFpMmx7"
+	case X64_RegisterFpControlStatus:
+		return "X64_RegisterFpControlStatus"
+	case X64_RegisterXmmControlStatus:
+		return "X64_RegisterXmmControlStatus"
+	case X64_RegisterCr0:
+		return "X64_RegisterCr0"
+	case X64_RegisterCr2:
+		return "X64_RegisterCr2"
+	case X64_RegisterCr3:
+		return "X64_RegisterCr3"
+	case X64_RegisterCr4:
+		return "X64_RegisterCr4"
+	case X64_RegisterCr8:
+		return "X64_RegisterCr8"
+	case X64_RegisterEfer:
+		return "X64_RegisterEfer"
+	case X64_RegisterDr0:
+		return "X64_RegisterDr0"
+	case X64_RegisterDr1:
+		return "X64_RegisterDr1"
+	case X64_RegisterDr2:
+		return "X64_RegisterDr2"
+	case X64_RegisterDr3:
+		return "X64_RegisterDr3"
+	case X64_RegisterDr6:
+		return "X64_RegisterDr6"
+	case X64_RegisterDr7:
+		return "X64_RegisterDr7"
+	case X64_RegisterEs:
+		return "X64_RegisterEs"
+	case X64_RegisterCs:
+		return "X64_RegisterCs"
+	case X64_RegisterSs:
+		return "X64_RegisterSs"
+	case X64_RegisterDs:
+		return "X64_RegisterDs"
+	case X64_RegisterFs:
+		return "X64_RegisterFs"
+	case X64_RegisterGs:
+		return "X64_RegisterGs"
+	case X64_RegisterLdtr:
+		return "X64_RegisterLdtr"
+	case X64_RegisterTr:
+		return "X64_RegisterTr"
+	case X64_RegisterIdtr:
+		return "X64_RegisterIdtr"
+	case X64_RegisterGdtr:
+		return "X64_RegisterGdtr"
+	case X64_RegisterMax:
+		return "X64_RegisterMax"
+	case ARM64_RegisterX0:
+		return "ARM64_RegisterX0"
+	case ARM64_RegisterX1:
+		return "ARM64_RegisterX1"
+	case ARM64_RegisterX2:
+		return "ARM64_RegisterX2"
+	case ARM64_RegisterX3:
+		return "ARM64_RegisterX3"
+	case ARM64_RegisterX4:
+		return "ARM64_RegisterX4"
+	case ARM64_RegisterX5:
+		return "ARM64_RegisterX5"
+	case ARM64_RegisterX6:
+		return "ARM64_RegisterX6"
+	case ARM64_RegisterX7:
+		return "ARM64_RegisterX7"
+	case ARM64_RegisterX8:
+		return "ARM64_RegisterX8"
+	case ARM64_RegisterX9:
+		return "ARM64_RegisterX9"
+	case ARM64_RegisterX10:
+		return "ARM64_RegisterX10"
+	case ARM64_RegisterX11:
+		return "ARM64_RegisterX11"
+	case ARM64_RegisterX12:
+		return "ARM64_RegisterX12"
+	case ARM64_RegisterX13:
+		return "ARM64_RegisterX13"
+	case ARM64_RegisterX14:
+		return "ARM64_RegisterX14"
+	case ARM64_RegisterX15:
+		return "ARM64_RegisterX15"
+	case ARM64_RegisterX16:
+		return "ARM64_RegisterX16"
+	case ARM64_RegisterX17:
+		return "ARM64_RegisterX17"
+	case ARM64_RegisterX18:
+		return "ARM64_RegisterX18"
+	case ARM64_RegisterX19:
+		return "ARM64_RegisterX19"
+	case ARM64_RegisterX20:
+		return "ARM64_RegisterX20"
+	case ARM64_RegisterX21:
+		return "ARM64_RegisterX21"
+	case ARM64_RegisterX22:
+		return "ARM64_RegisterX22"
+	case ARM64_RegisterX23:
+		return "ARM64_RegisterX23"
+	case ARM64_RegisterX24:
+		return "ARM64_RegisterX24"
+	case ARM64_RegisterX25:
+		return "ARM64_RegisterX25"
+	case ARM64_RegisterX26:
+		return "ARM64_RegisterX26"
+	case ARM64_RegisterX27:
+		return "ARM64_RegisterX27"
+	case ARM64_RegisterX28:
+		return "ARM64_RegisterX28"
+	case ARM64_RegisterXFp:
+		return "ARM64_RegisterXFp"
+	case ARM64_RegisterXLr:
+		return "ARM64_RegisterXLr"
+	case ARM64_RegisterPc:
+		return "ARM64_RegisterPc"
+	case ARM64_RegisterSpEl0:
+		return "ARM64_RegisterSpEl0"
+	case ARM64_RegisterSpEl1:
+		return "ARM64_RegisterSpEl1"
+	case ARM64_RegisterCpsr:
+		return "ARM64_RegisterCpsr"
+	case ARM64_RegisterQ0:
+		return "ARM64_RegisterQ0"
+	case ARM64_RegisterQ1:
+		return "ARM64_RegisterQ1"
+	case ARM64_RegisterQ2:
+		return "ARM64_RegisterQ2"
+	case ARM64_RegisterQ3:
+		return "ARM64_RegisterQ3"
+	case ARM64_RegisterQ4:
+		return "ARM64_RegisterQ4"
+	case ARM64_RegisterQ5:
+		return "ARM64_RegisterQ5"
+	case ARM64_RegisterQ6:
+		return "ARM64_RegisterQ6"
+	case ARM64_RegisterQ7:
+		return "ARM64_RegisterQ7"
+	case ARM64_RegisterQ8:
+		return "ARM64_RegisterQ8"
+	case ARM64_RegisterQ9:
+		return "ARM64_RegisterQ9"
+	case ARM64_RegisterQ10:
+		return "ARM64_RegisterQ10"
+	case ARM64_RegisterQ11:
+		return "ARM64_RegisterQ11"
+	case ARM64_RegisterQ12:
+		return "ARM64_RegisterQ12"
+	case ARM64_RegisterQ13:
+		return "ARM64_RegisterQ13"
+	case ARM64_RegisterQ14:
+		return "ARM64_RegisterQ14"
+	case ARM64_RegisterQ15:
+		return "ARM64_RegisterQ15"
+	case ARM64_RegisterQ16:
+		return "ARM64_RegisterQ16"
+	case ARM64_RegisterQ17:
+		return "ARM64_RegisterQ17"
+	case ARM64_RegisterQ18:
+		return "ARM64_RegisterQ18"
+	case ARM64_RegisterQ19:
+		return "ARM64_RegisterQ19"
+	case ARM64_RegisterQ20:
+		return "ARM64_RegisterQ20"
+	case ARM64_RegisterQ21:
+		return "ARM64_RegisterQ21"
+	case ARM64_RegisterQ22:
+		return "ARM64_RegisterQ22"
+	case ARM64_RegisterQ23:
+		return "ARM64_RegisterQ23"
+	case ARM64_RegisterQ24:
+		return "ARM64_RegisterQ24"
+	case ARM64_RegisterQ25:
+		return "ARM64_RegisterQ25"
+	case ARM64_RegisterQ26:
+		return "ARM64_RegisterQ26"
+	case ARM64_RegisterQ27:
+		return "ARM64_RegisterQ27"
+	case ARM64_RegisterQ28:
+		return "ARM64_RegisterQ28"
+	case ARM64_RegisterQ29:
+		return "ARM64_RegisterQ29"
+	case ARM64_RegisterQ30:
+		return "ARM64_RegisterQ30"
+	case ARM64_RegisterQ31:
+		return "ARM64_RegisterQ31"
+	case ARM64_RegisterFpStatus:
+		return "ARM64_RegisterFpStatus"
+	case ARM64_RegisterFpControl:
+		return "ARM64_RegisterFpControl"
+	case ARM64_RegisterEsrEl1:
+		return "ARM64_RegisterEsrEl1"
+	case ARM64_RegisterSpsrEl1:
+		return "ARM64_RegisterSpsrEl1"
+	case ARM64_RegisterFarEl1:
+		return "ARM64_RegisterFarEl1"
+	case ARM64_RegisterParEl1:
+		return "ARM64_RegisterParEl1"
+	case ARM64_RegisterElrEl1:
+		return "ARM64_RegisterElrEl1"
+	case ARM64_RegisterTtbr0El1:
+		return "ARM64_RegisterTtbr0El1"
+	case ARM64_RegisterTtbr1El1:
+		return "ARM64_RegisterTtbr1El1"
+	case ARM64_RegisterVbarEl1:
+		return "ARM64_RegisterVbarEl1"
+	case ARM64_RegisterSctlrEl1:
+		return "ARM64_RegisterSctlrEl1"
+	case ARM64_RegisterActlrEl1:
+		return "ARM64_RegisterActlrEl1"
+	case ARM64_RegisterTcrEl1:
+		return "ARM64_RegisterTcrEl1"
+	case ARM64_RegisterMairEl1:
+		return "ARM64_RegisterMairEl1"
+	case ARM64_RegisterAmairEl1:
+		return "ARM64_RegisterAmairEl1"
+	case ARM64_RegisterTpidrEl0:
+		return "ARM64_RegisterTpidrEl0"
+	case ARM64_RegisterTpidrroEl0:
+		return "ARM64_RegisterTpidrroEl0"
+	case ARM64_RegisterTpidrEl1:
+		return "ARM64_RegisterTpidrEl1"
+	case ARM64_RegisterContextIdrEl1:
+		return "ARM64_RegisterContextIdrEl1"
+	case ARM64_RegisterCpacrEl1:
+		return "ARM64_RegisterCpacrEl1"
+	case ARM64_RegisterCsselrEl1:
+		return "ARM64_RegisterCsselrEl1"
+	case ARM64_RegisterCntkctlEl1:
+		return "ARM64_RegisterCntkctlEl1"
+	case ARM64_RegisterCntvCvalEl0:
+		return "ARM64_RegisterCntvCvalEl0"
+	case ARM64_RegisterCntvCtlEl0:
+		return "ARM64_RegisterCntvCtlEl0"
+	case ARM64_RegisterMax:
+		return "ARM64_RegisterMax"
+	default:
+		return fmt.Sprintf("REGISTER_ID(%d)", int32(e))
+	}
+}
+
 type VIRTUAL_PROCESSOR_ARCH int32
 
 const (
@@ -271,6 +780,23 @@ const (
 	Arch_x64     VIRTUAL_PROCESSOR_ARCH = 2
 	Arch_Armv8   VIRTUAL_PROCESSOR_ARCH = 3
 )
+
+// String returns the VIRTUAL_PROCESSOR_ARCH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIRTUAL_PROCESSOR_ARCH) String() string {
+	switch e {
+	case Arch_Unknown:
+		return "Arch_Unknown"
+	case Arch_x86:
+		return "Arch_x86"
+	case Arch_x64:
+		return "Arch_x64"
+	case Arch_Armv8:
+		return "Arch_Armv8"
+	default:
+		return fmt.Sprintf("VIRTUAL_PROCESSOR_ARCH(%d)", int32(e))
+	}
+}
 
 type VIRTUAL_PROCESSOR_VENDOR int32
 
@@ -282,6 +808,25 @@ const (
 	ProcessorVendor_Arm     VIRTUAL_PROCESSOR_VENDOR = 4
 )
 
+// String returns the VIRTUAL_PROCESSOR_VENDOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIRTUAL_PROCESSOR_VENDOR) String() string {
+	switch e {
+	case ProcessorVendor_Unknown:
+		return "ProcessorVendor_Unknown"
+	case ProcessorVendor_Amd:
+		return "ProcessorVendor_Amd"
+	case ProcessorVendor_Intel:
+		return "ProcessorVendor_Intel"
+	case ProcessorVendor_Hygon:
+		return "ProcessorVendor_Hygon"
+	case ProcessorVendor_Arm:
+		return "ProcessorVendor_Arm"
+	default:
+		return fmt.Sprintf("VIRTUAL_PROCESSOR_VENDOR(%d)", int32(e))
+	}
+}
+
 type WHV_ADVISE_GPA_RANGE_CODE int32
 
 const (
@@ -290,12 +835,41 @@ const (
 	WHvAdviseGpaRangeCodeUnpin    WHV_ADVISE_GPA_RANGE_CODE = 2
 )
 
+// String returns the WHV_ADVISE_GPA_RANGE_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_ADVISE_GPA_RANGE_CODE) String() string {
+	switch e {
+	case WHvAdviseGpaRangeCodePopulate:
+		return "WHvAdviseGpaRangeCodePopulate"
+	case WHvAdviseGpaRangeCodePin:
+		return "WHvAdviseGpaRangeCodePin"
+	case WHvAdviseGpaRangeCodeUnpin:
+		return "WHvAdviseGpaRangeCodeUnpin"
+	default:
+		return fmt.Sprintf("WHV_ADVISE_GPA_RANGE_CODE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WHV_ALLOCATE_VPCI_RESOURCE_FLAGS int32
 
 const (
 	WHvAllocateVpciResourceFlagNone           WHV_ALLOCATE_VPCI_RESOURCE_FLAGS = 0
 	WHvAllocateVpciResourceFlagAllowDirectP2P WHV_ALLOCATE_VPCI_RESOURCE_FLAGS = 1
 )
+
+// String returns the WHV_ALLOCATE_VPCI_RESOURCE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_ALLOCATE_VPCI_RESOURCE_FLAGS) String() string {
+	var parts []string
+	if e&WHvAllocateVpciResourceFlagAllowDirectP2P != 0 {
+		parts = append(parts, "WHvAllocateVpciResourceFlagAllowDirectP2P")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type WHV_CACHE_TYPE int32
 
@@ -305,6 +879,23 @@ const (
 	WHvCacheTypeWriteThrough   WHV_CACHE_TYPE = 4
 	WHvCacheTypeWriteBack      WHV_CACHE_TYPE = 6
 )
+
+// String returns the WHV_CACHE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_CACHE_TYPE) String() string {
+	switch e {
+	case WHvCacheTypeUncached:
+		return "WHvCacheTypeUncached"
+	case WHvCacheTypeWriteCombining:
+		return "WHvCacheTypeWriteCombining"
+	case WHvCacheTypeWriteThrough:
+		return "WHvCacheTypeWriteThrough"
+	case WHvCacheTypeWriteBack:
+		return "WHvCacheTypeWriteBack"
+	default:
+		return fmt.Sprintf("WHV_CACHE_TYPE(%d)", int32(e))
+	}
+}
 
 type WHV_CAPABILITY_CODE int32
 
@@ -328,6 +919,50 @@ const (
 	WHvCapabilityCodeProcessorPerfmonFeatures        WHV_CAPABILITY_CODE = 4105
 )
 
+// String returns the WHV_CAPABILITY_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_CAPABILITY_CODE) String() string {
+	switch e {
+	case WHvCapabilityCodeHypervisorPresent:
+		return "WHvCapabilityCodeHypervisorPresent"
+	case WHvCapabilityCodeFeatures:
+		return "WHvCapabilityCodeFeatures"
+	case WHvCapabilityCodeExtendedVmExits:
+		return "WHvCapabilityCodeExtendedVmExits"
+	case WHvCapabilityCodeExceptionExitBitmap:
+		return "WHvCapabilityCodeExceptionExitBitmap"
+	case WHvCapabilityCodeX64MsrExitBitmap:
+		return "WHvCapabilityCodeX64MsrExitBitmap"
+	case WHvCapabilityCodeGpaRangePopulateFlags:
+		return "WHvCapabilityCodeGpaRangePopulateFlags"
+	case WHvCapabilityCodeSchedulerFeatures:
+		return "WHvCapabilityCodeSchedulerFeatures"
+	case WHvCapabilityCodeProcessorVendor:
+		return "WHvCapabilityCodeProcessorVendor"
+	case WHvCapabilityCodeProcessorFeatures:
+		return "WHvCapabilityCodeProcessorFeatures"
+	case WHvCapabilityCodeProcessorClFlushSize:
+		return "WHvCapabilityCodeProcessorClFlushSize"
+	case WHvCapabilityCodeProcessorXsaveFeatures:
+		return "WHvCapabilityCodeProcessorXsaveFeatures"
+	case WHvCapabilityCodeProcessorClockFrequency:
+		return "WHvCapabilityCodeProcessorClockFrequency"
+	case WHvCapabilityCodeInterruptClockFrequency:
+		return "WHvCapabilityCodeInterruptClockFrequency"
+	case WHvCapabilityCodeProcessorFeaturesBanks:
+		return "WHvCapabilityCodeProcessorFeaturesBanks"
+	case WHvCapabilityCodeProcessorFrequencyCap:
+		return "WHvCapabilityCodeProcessorFrequencyCap"
+	case WHvCapabilityCodeSyntheticProcessorFeaturesBanks:
+		return "WHvCapabilityCodeSyntheticProcessorFeaturesBanks"
+	case WHvCapabilityCodeProcessorPerfmonFeatures:
+		return "WHvCapabilityCodeProcessorPerfmonFeatures"
+	default:
+		return fmt.Sprintf("WHV_CAPABILITY_CODE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WHV_CREATE_VPCI_DEVICE_FLAGS int32
 
 const (
@@ -335,6 +970,22 @@ const (
 	WHvCreateVpciDeviceFlagPhysicallyBacked     WHV_CREATE_VPCI_DEVICE_FLAGS = 1
 	WHvCreateVpciDeviceFlagUseLogicalInterrupts WHV_CREATE_VPCI_DEVICE_FLAGS = 2
 )
+
+// String returns the WHV_CREATE_VPCI_DEVICE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_CREATE_VPCI_DEVICE_FLAGS) String() string {
+	var parts []string
+	if e&WHvCreateVpciDeviceFlagPhysicallyBacked != 0 {
+		parts = append(parts, "WHvCreateVpciDeviceFlagPhysicallyBacked")
+	}
+	if e&WHvCreateVpciDeviceFlagUseLogicalInterrupts != 0 {
+		parts = append(parts, "WHvCreateVpciDeviceFlagUseLogicalInterrupts")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type WHV_EXCEPTION_TYPE int32
 
@@ -358,6 +1009,49 @@ const (
 	WHvX64ExceptionTypeSimdFloatingPointFault       WHV_EXCEPTION_TYPE = 19
 )
 
+// String returns the WHV_EXCEPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_EXCEPTION_TYPE) String() string {
+	switch e {
+	case WHvX64ExceptionTypeDivideErrorFault:
+		return "WHvX64ExceptionTypeDivideErrorFault"
+	case WHvX64ExceptionTypeDebugTrapOrFault:
+		return "WHvX64ExceptionTypeDebugTrapOrFault"
+	case WHvX64ExceptionTypeBreakpointTrap:
+		return "WHvX64ExceptionTypeBreakpointTrap"
+	case WHvX64ExceptionTypeOverflowTrap:
+		return "WHvX64ExceptionTypeOverflowTrap"
+	case WHvX64ExceptionTypeBoundRangeFault:
+		return "WHvX64ExceptionTypeBoundRangeFault"
+	case WHvX64ExceptionTypeInvalidOpcodeFault:
+		return "WHvX64ExceptionTypeInvalidOpcodeFault"
+	case WHvX64ExceptionTypeDeviceNotAvailableFault:
+		return "WHvX64ExceptionTypeDeviceNotAvailableFault"
+	case WHvX64ExceptionTypeDoubleFaultAbort:
+		return "WHvX64ExceptionTypeDoubleFaultAbort"
+	case WHvX64ExceptionTypeInvalidTaskStateSegmentFault:
+		return "WHvX64ExceptionTypeInvalidTaskStateSegmentFault"
+	case WHvX64ExceptionTypeSegmentNotPresentFault:
+		return "WHvX64ExceptionTypeSegmentNotPresentFault"
+	case WHvX64ExceptionTypeStackFault:
+		return "WHvX64ExceptionTypeStackFault"
+	case WHvX64ExceptionTypeGeneralProtectionFault:
+		return "WHvX64ExceptionTypeGeneralProtectionFault"
+	case WHvX64ExceptionTypePageFault:
+		return "WHvX64ExceptionTypePageFault"
+	case WHvX64ExceptionTypeFloatingPointErrorFault:
+		return "WHvX64ExceptionTypeFloatingPointErrorFault"
+	case WHvX64ExceptionTypeAlignmentCheckFault:
+		return "WHvX64ExceptionTypeAlignmentCheckFault"
+	case WHvX64ExceptionTypeMachineCheckAbort:
+		return "WHvX64ExceptionTypeMachineCheckAbort"
+	case WHvX64ExceptionTypeSimdFloatingPointFault:
+		return "WHvX64ExceptionTypeSimdFloatingPointFault"
+	default:
+		return fmt.Sprintf("WHV_EXCEPTION_TYPE(%d)", int32(e))
+	}
+}
+
 type WHV_INTERRUPT_DESTINATION_MODE int32
 
 const (
@@ -365,12 +1059,38 @@ const (
 	WHvX64InterruptDestinationModeLogical  WHV_INTERRUPT_DESTINATION_MODE = 1
 )
 
+// String returns the WHV_INTERRUPT_DESTINATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_INTERRUPT_DESTINATION_MODE) String() string {
+	switch e {
+	case WHvX64InterruptDestinationModePhysical:
+		return "WHvX64InterruptDestinationModePhysical"
+	case WHvX64InterruptDestinationModeLogical:
+		return "WHvX64InterruptDestinationModeLogical"
+	default:
+		return fmt.Sprintf("WHV_INTERRUPT_DESTINATION_MODE(%d)", int32(e))
+	}
+}
+
 type WHV_INTERRUPT_TRIGGER_MODE int32
 
 const (
 	WHvX64InterruptTriggerModeEdge  WHV_INTERRUPT_TRIGGER_MODE = 0
 	WHvX64InterruptTriggerModeLevel WHV_INTERRUPT_TRIGGER_MODE = 1
 )
+
+// String returns the WHV_INTERRUPT_TRIGGER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_INTERRUPT_TRIGGER_MODE) String() string {
+	switch e {
+	case WHvX64InterruptTriggerModeEdge:
+		return "WHvX64InterruptTriggerModeEdge"
+	case WHvX64InterruptTriggerModeLevel:
+		return "WHvX64InterruptTriggerModeLevel"
+	default:
+		return fmt.Sprintf("WHV_INTERRUPT_TRIGGER_MODE(%d)", int32(e))
+	}
+}
 
 type WHV_INTERRUPT_TYPE int32
 
@@ -383,6 +1103,28 @@ const (
 	WHvX64InterruptTypeLocalInt1      WHV_INTERRUPT_TYPE = 9
 )
 
+// String returns the WHV_INTERRUPT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_INTERRUPT_TYPE) String() string {
+	switch e {
+	case WHvX64InterruptTypeFixed:
+		return "WHvX64InterruptTypeFixed"
+	case WHvX64InterruptTypeLowestPriority:
+		return "WHvX64InterruptTypeLowestPriority"
+	case WHvX64InterruptTypeNmi:
+		return "WHvX64InterruptTypeNmi"
+	case WHvX64InterruptTypeInit:
+		return "WHvX64InterruptTypeInit"
+	case WHvX64InterruptTypeSipi:
+		return "WHvX64InterruptTypeSipi"
+	case WHvX64InterruptTypeLocalInt1:
+		return "WHvX64InterruptTypeLocalInt1"
+	default:
+		return fmt.Sprintf("WHV_INTERRUPT_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WHV_MAP_GPA_RANGE_FLAGS int32
 
 const (
@@ -393,6 +1135,28 @@ const (
 	WHvMapGpaRangeFlagTrackDirtyPages WHV_MAP_GPA_RANGE_FLAGS = 8
 )
 
+// String returns the WHV_MAP_GPA_RANGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_MAP_GPA_RANGE_FLAGS) String() string {
+	var parts []string
+	if e&WHvMapGpaRangeFlagRead != 0 {
+		parts = append(parts, "WHvMapGpaRangeFlagRead")
+	}
+	if e&WHvMapGpaRangeFlagWrite != 0 {
+		parts = append(parts, "WHvMapGpaRangeFlagWrite")
+	}
+	if e&WHvMapGpaRangeFlagExecute != 0 {
+		parts = append(parts, "WHvMapGpaRangeFlagExecute")
+	}
+	if e&WHvMapGpaRangeFlagTrackDirtyPages != 0 {
+		parts = append(parts, "WHvMapGpaRangeFlagTrackDirtyPages")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type WHV_MEMORY_ACCESS_TYPE int32
 
 const (
@@ -400,6 +1164,21 @@ const (
 	WHvMemoryAccessWrite   WHV_MEMORY_ACCESS_TYPE = 1
 	WHvMemoryAccessExecute WHV_MEMORY_ACCESS_TYPE = 2
 )
+
+// String returns the WHV_MEMORY_ACCESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_MEMORY_ACCESS_TYPE) String() string {
+	switch e {
+	case WHvMemoryAccessRead:
+		return "WHvMemoryAccessRead"
+	case WHvMemoryAccessWrite:
+		return "WHvMemoryAccessWrite"
+	case WHvMemoryAccessExecute:
+		return "WHvMemoryAccessExecute"
+	default:
+		return fmt.Sprintf("WHV_MEMORY_ACCESS_TYPE(%d)", int32(e))
+	}
+}
 
 type WHV_MSR_ACTION int32
 
@@ -409,12 +1188,40 @@ const (
 	WHvMsrActionExit                WHV_MSR_ACTION = 2
 )
 
+// String returns the WHV_MSR_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_MSR_ACTION) String() string {
+	switch e {
+	case WHvMsrActionArchitectureDefault:
+		return "WHvMsrActionArchitectureDefault"
+	case WHvMsrActionIgnoreWriteReadZero:
+		return "WHvMsrActionIgnoreWriteReadZero"
+	case WHvMsrActionExit:
+		return "WHvMsrActionExit"
+	default:
+		return fmt.Sprintf("WHV_MSR_ACTION(%d)", int32(e))
+	}
+}
+
 type WHV_NOTIFICATION_PORT_PROPERTY_CODE int32
 
 const (
 	WHvNotificationPortPropertyPreferredTargetVp       WHV_NOTIFICATION_PORT_PROPERTY_CODE = 1
 	WHvNotificationPortPropertyPreferredTargetDuration WHV_NOTIFICATION_PORT_PROPERTY_CODE = 5
 )
+
+// String returns the WHV_NOTIFICATION_PORT_PROPERTY_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_NOTIFICATION_PORT_PROPERTY_CODE) String() string {
+	switch e {
+	case WHvNotificationPortPropertyPreferredTargetVp:
+		return "WHvNotificationPortPropertyPreferredTargetVp"
+	case WHvNotificationPortPropertyPreferredTargetDuration:
+		return "WHvNotificationPortPropertyPreferredTargetDuration"
+	default:
+		return fmt.Sprintf("WHV_NOTIFICATION_PORT_PROPERTY_CODE(%d)", int32(e))
+	}
+}
 
 type WHV_NOTIFICATION_PORT_TYPE int32
 
@@ -423,11 +1230,35 @@ const (
 	WHvNotificationPortTypeDoorbell WHV_NOTIFICATION_PORT_TYPE = 4
 )
 
+// String returns the WHV_NOTIFICATION_PORT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_NOTIFICATION_PORT_TYPE) String() string {
+	switch e {
+	case WHvNotificationPortTypeEvent:
+		return "WHvNotificationPortTypeEvent"
+	case WHvNotificationPortTypeDoorbell:
+		return "WHvNotificationPortTypeDoorbell"
+	default:
+		return fmt.Sprintf("WHV_NOTIFICATION_PORT_TYPE(%d)", int32(e))
+	}
+}
+
 type WHV_PARTITION_COUNTER_SET int32
 
 const (
 	WHvPartitionCounterSetMemory WHV_PARTITION_COUNTER_SET = 0
 )
+
+// String returns the WHV_PARTITION_COUNTER_SET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_PARTITION_COUNTER_SET) String() string {
+	switch e {
+	case WHvPartitionCounterSetMemory:
+		return "WHvPartitionCounterSetMemory"
+	default:
+		return fmt.Sprintf("WHV_PARTITION_COUNTER_SET(%d)", int32(e))
+	}
+}
 
 type WHV_PARTITION_PROPERTY_CODE int32
 
@@ -464,6 +1295,75 @@ const (
 	WHvPartitionPropertyCodeProcessorCount                  WHV_PARTITION_PROPERTY_CODE = 8191
 )
 
+// String returns the WHV_PARTITION_PROPERTY_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_PARTITION_PROPERTY_CODE) String() string {
+	switch e {
+	case WHvPartitionPropertyCodeExtendedVmExits:
+		return "WHvPartitionPropertyCodeExtendedVmExits"
+	case WHvPartitionPropertyCodeExceptionExitBitmap:
+		return "WHvPartitionPropertyCodeExceptionExitBitmap"
+	case WHvPartitionPropertyCodeSeparateSecurityDomain:
+		return "WHvPartitionPropertyCodeSeparateSecurityDomain"
+	case WHvPartitionPropertyCodeNestedVirtualization:
+		return "WHvPartitionPropertyCodeNestedVirtualization"
+	case WHvPartitionPropertyCodeX64MsrExitBitmap:
+		return "WHvPartitionPropertyCodeX64MsrExitBitmap"
+	case WHvPartitionPropertyCodePrimaryNumaNode:
+		return "WHvPartitionPropertyCodePrimaryNumaNode"
+	case WHvPartitionPropertyCodeCpuReserve:
+		return "WHvPartitionPropertyCodeCpuReserve"
+	case WHvPartitionPropertyCodeCpuCap:
+		return "WHvPartitionPropertyCodeCpuCap"
+	case WHvPartitionPropertyCodeCpuWeight:
+		return "WHvPartitionPropertyCodeCpuWeight"
+	case WHvPartitionPropertyCodeCpuGroupId:
+		return "WHvPartitionPropertyCodeCpuGroupId"
+	case WHvPartitionPropertyCodeProcessorFrequencyCap:
+		return "WHvPartitionPropertyCodeProcessorFrequencyCap"
+	case WHvPartitionPropertyCodeAllowDeviceAssignment:
+		return "WHvPartitionPropertyCodeAllowDeviceAssignment"
+	case WHvPartitionPropertyCodeDisableSmt:
+		return "WHvPartitionPropertyCodeDisableSmt"
+	case WHvPartitionPropertyCodeProcessorFeatures:
+		return "WHvPartitionPropertyCodeProcessorFeatures"
+	case WHvPartitionPropertyCodeProcessorClFlushSize:
+		return "WHvPartitionPropertyCodeProcessorClFlushSize"
+	case WHvPartitionPropertyCodeCpuidExitList:
+		return "WHvPartitionPropertyCodeCpuidExitList"
+	case WHvPartitionPropertyCodeCpuidResultList:
+		return "WHvPartitionPropertyCodeCpuidResultList"
+	case WHvPartitionPropertyCodeLocalApicEmulationMode:
+		return "WHvPartitionPropertyCodeLocalApicEmulationMode"
+	case WHvPartitionPropertyCodeProcessorXsaveFeatures:
+		return "WHvPartitionPropertyCodeProcessorXsaveFeatures"
+	case WHvPartitionPropertyCodeProcessorClockFrequency:
+		return "WHvPartitionPropertyCodeProcessorClockFrequency"
+	case WHvPartitionPropertyCodeInterruptClockFrequency:
+		return "WHvPartitionPropertyCodeInterruptClockFrequency"
+	case WHvPartitionPropertyCodeApicRemoteReadSupport:
+		return "WHvPartitionPropertyCodeApicRemoteReadSupport"
+	case WHvPartitionPropertyCodeProcessorFeaturesBanks:
+		return "WHvPartitionPropertyCodeProcessorFeaturesBanks"
+	case WHvPartitionPropertyCodeReferenceTime:
+		return "WHvPartitionPropertyCodeReferenceTime"
+	case WHvPartitionPropertyCodeSyntheticProcessorFeaturesBanks:
+		return "WHvPartitionPropertyCodeSyntheticProcessorFeaturesBanks"
+	case WHvPartitionPropertyCodeCpuidResultList2:
+		return "WHvPartitionPropertyCodeCpuidResultList2"
+	case WHvPartitionPropertyCodeProcessorPerfmonFeatures:
+		return "WHvPartitionPropertyCodeProcessorPerfmonFeatures"
+	case WHvPartitionPropertyCodeMsrActionList:
+		return "WHvPartitionPropertyCodeMsrActionList"
+	case WHvPartitionPropertyCodeUnimplementedMsrAction:
+		return "WHvPartitionPropertyCodeUnimplementedMsrAction"
+	case WHvPartitionPropertyCodeProcessorCount:
+		return "WHvPartitionPropertyCodeProcessorCount"
+	default:
+		return fmt.Sprintf("WHV_PARTITION_PROPERTY_CODE(%d)", int32(e))
+	}
+}
+
 type WHV_PROCESSOR_COUNTER_SET int32
 
 const (
@@ -474,6 +1374,25 @@ const (
 	WHvProcessorCounterSetSyntheticFeatures WHV_PROCESSOR_COUNTER_SET = 4
 )
 
+// String returns the WHV_PROCESSOR_COUNTER_SET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_PROCESSOR_COUNTER_SET) String() string {
+	switch e {
+	case WHvProcessorCounterSetRuntime:
+		return "WHvProcessorCounterSetRuntime"
+	case WHvProcessorCounterSetIntercepts:
+		return "WHvProcessorCounterSetIntercepts"
+	case WHvProcessorCounterSetEvents:
+		return "WHvProcessorCounterSetEvents"
+	case WHvProcessorCounterSetApic:
+		return "WHvProcessorCounterSetApic"
+	case WHvProcessorCounterSetSyntheticFeatures:
+		return "WHvProcessorCounterSetSyntheticFeatures"
+	default:
+		return fmt.Sprintf("WHV_PROCESSOR_COUNTER_SET(%d)", int32(e))
+	}
+}
+
 type WHV_PROCESSOR_VENDOR int32
 
 const (
@@ -481,6 +1400,21 @@ const (
 	WHvProcessorVendorIntel WHV_PROCESSOR_VENDOR = 1
 	WHvProcessorVendorHygon WHV_PROCESSOR_VENDOR = 2
 )
+
+// String returns the WHV_PROCESSOR_VENDOR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_PROCESSOR_VENDOR) String() string {
+	switch e {
+	case WHvProcessorVendorAmd:
+		return "WHvProcessorVendorAmd"
+	case WHvProcessorVendorIntel:
+		return "WHvProcessorVendorIntel"
+	case WHvProcessorVendorHygon:
+		return "WHvProcessorVendorHygon"
+	default:
+		return fmt.Sprintf("WHV_PROCESSOR_VENDOR(%d)", int32(e))
+	}
+}
 
 type WHV_REGISTER_NAME int32
 
@@ -713,11 +1647,483 @@ const (
 	WHvX64RegisterPendingDebugException       WHV_REGISTER_NAME = -2147483642
 )
 
+// String returns the WHV_REGISTER_NAME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_REGISTER_NAME) String() string {
+	switch e {
+	case WHvX64RegisterRax:
+		return "WHvX64RegisterRax"
+	case WHvX64RegisterRcx:
+		return "WHvX64RegisterRcx"
+	case WHvX64RegisterRdx:
+		return "WHvX64RegisterRdx"
+	case WHvX64RegisterRbx:
+		return "WHvX64RegisterRbx"
+	case WHvX64RegisterRsp:
+		return "WHvX64RegisterRsp"
+	case WHvX64RegisterRbp:
+		return "WHvX64RegisterRbp"
+	case WHvX64RegisterRsi:
+		return "WHvX64RegisterRsi"
+	case WHvX64RegisterRdi:
+		return "WHvX64RegisterRdi"
+	case WHvX64RegisterR8:
+		return "WHvX64RegisterR8"
+	case WHvX64RegisterR9:
+		return "WHvX64RegisterR9"
+	case WHvX64RegisterR10:
+		return "WHvX64RegisterR10"
+	case WHvX64RegisterR11:
+		return "WHvX64RegisterR11"
+	case WHvX64RegisterR12:
+		return "WHvX64RegisterR12"
+	case WHvX64RegisterR13:
+		return "WHvX64RegisterR13"
+	case WHvX64RegisterR14:
+		return "WHvX64RegisterR14"
+	case WHvX64RegisterR15:
+		return "WHvX64RegisterR15"
+	case WHvX64RegisterRip:
+		return "WHvX64RegisterRip"
+	case WHvX64RegisterRflags:
+		return "WHvX64RegisterRflags"
+	case WHvX64RegisterEs:
+		return "WHvX64RegisterEs"
+	case WHvX64RegisterCs:
+		return "WHvX64RegisterCs"
+	case WHvX64RegisterSs:
+		return "WHvX64RegisterSs"
+	case WHvX64RegisterDs:
+		return "WHvX64RegisterDs"
+	case WHvX64RegisterFs:
+		return "WHvX64RegisterFs"
+	case WHvX64RegisterGs:
+		return "WHvX64RegisterGs"
+	case WHvX64RegisterLdtr:
+		return "WHvX64RegisterLdtr"
+	case WHvX64RegisterTr:
+		return "WHvX64RegisterTr"
+	case WHvX64RegisterIdtr:
+		return "WHvX64RegisterIdtr"
+	case WHvX64RegisterGdtr:
+		return "WHvX64RegisterGdtr"
+	case WHvX64RegisterCr0:
+		return "WHvX64RegisterCr0"
+	case WHvX64RegisterCr2:
+		return "WHvX64RegisterCr2"
+	case WHvX64RegisterCr3:
+		return "WHvX64RegisterCr3"
+	case WHvX64RegisterCr4:
+		return "WHvX64RegisterCr4"
+	case WHvX64RegisterCr8:
+		return "WHvX64RegisterCr8"
+	case WHvX64RegisterDr0:
+		return "WHvX64RegisterDr0"
+	case WHvX64RegisterDr1:
+		return "WHvX64RegisterDr1"
+	case WHvX64RegisterDr2:
+		return "WHvX64RegisterDr2"
+	case WHvX64RegisterDr3:
+		return "WHvX64RegisterDr3"
+	case WHvX64RegisterDr6:
+		return "WHvX64RegisterDr6"
+	case WHvX64RegisterDr7:
+		return "WHvX64RegisterDr7"
+	case WHvX64RegisterXCr0:
+		return "WHvX64RegisterXCr0"
+	case WHvX64RegisterVirtualCr0:
+		return "WHvX64RegisterVirtualCr0"
+	case WHvX64RegisterVirtualCr3:
+		return "WHvX64RegisterVirtualCr3"
+	case WHvX64RegisterVirtualCr4:
+		return "WHvX64RegisterVirtualCr4"
+	case WHvX64RegisterVirtualCr8:
+		return "WHvX64RegisterVirtualCr8"
+	case WHvX64RegisterXmm0:
+		return "WHvX64RegisterXmm0"
+	case WHvX64RegisterXmm1:
+		return "WHvX64RegisterXmm1"
+	case WHvX64RegisterXmm2:
+		return "WHvX64RegisterXmm2"
+	case WHvX64RegisterXmm3:
+		return "WHvX64RegisterXmm3"
+	case WHvX64RegisterXmm4:
+		return "WHvX64RegisterXmm4"
+	case WHvX64RegisterXmm5:
+		return "WHvX64RegisterXmm5"
+	case WHvX64RegisterXmm6:
+		return "WHvX64RegisterXmm6"
+	case WHvX64RegisterXmm7:
+		return "WHvX64RegisterXmm7"
+	case WHvX64RegisterXmm8:
+		return "WHvX64RegisterXmm8"
+	case WHvX64RegisterXmm9:
+		return "WHvX64RegisterXmm9"
+	case WHvX64RegisterXmm10:
+		return "WHvX64RegisterXmm10"
+	case WHvX64RegisterXmm11:
+		return "WHvX64RegisterXmm11"
+	case WHvX64RegisterXmm12:
+		return "WHvX64RegisterXmm12"
+	case WHvX64RegisterXmm13:
+		return "WHvX64RegisterXmm13"
+	case WHvX64RegisterXmm14:
+		return "WHvX64RegisterXmm14"
+	case WHvX64RegisterXmm15:
+		return "WHvX64RegisterXmm15"
+	case WHvX64RegisterFpMmx0:
+		return "WHvX64RegisterFpMmx0"
+	case WHvX64RegisterFpMmx1:
+		return "WHvX64RegisterFpMmx1"
+	case WHvX64RegisterFpMmx2:
+		return "WHvX64RegisterFpMmx2"
+	case WHvX64RegisterFpMmx3:
+		return "WHvX64RegisterFpMmx3"
+	case WHvX64RegisterFpMmx4:
+		return "WHvX64RegisterFpMmx4"
+	case WHvX64RegisterFpMmx5:
+		return "WHvX64RegisterFpMmx5"
+	case WHvX64RegisterFpMmx6:
+		return "WHvX64RegisterFpMmx6"
+	case WHvX64RegisterFpMmx7:
+		return "WHvX64RegisterFpMmx7"
+	case WHvX64RegisterFpControlStatus:
+		return "WHvX64RegisterFpControlStatus"
+	case WHvX64RegisterXmmControlStatus:
+		return "WHvX64RegisterXmmControlStatus"
+	case WHvX64RegisterTsc:
+		return "WHvX64RegisterTsc"
+	case WHvX64RegisterEfer:
+		return "WHvX64RegisterEfer"
+	case WHvX64RegisterKernelGsBase:
+		return "WHvX64RegisterKernelGsBase"
+	case WHvX64RegisterApicBase:
+		return "WHvX64RegisterApicBase"
+	case WHvX64RegisterPat:
+		return "WHvX64RegisterPat"
+	case WHvX64RegisterSysenterCs:
+		return "WHvX64RegisterSysenterCs"
+	case WHvX64RegisterSysenterEip:
+		return "WHvX64RegisterSysenterEip"
+	case WHvX64RegisterSysenterEsp:
+		return "WHvX64RegisterSysenterEsp"
+	case WHvX64RegisterStar:
+		return "WHvX64RegisterStar"
+	case WHvX64RegisterLstar:
+		return "WHvX64RegisterLstar"
+	case WHvX64RegisterCstar:
+		return "WHvX64RegisterCstar"
+	case WHvX64RegisterSfmask:
+		return "WHvX64RegisterSfmask"
+	case WHvX64RegisterInitialApicId:
+		return "WHvX64RegisterInitialApicId"
+	case WHvX64RegisterMsrMtrrCap:
+		return "WHvX64RegisterMsrMtrrCap"
+	case WHvX64RegisterMsrMtrrDefType:
+		return "WHvX64RegisterMsrMtrrDefType"
+	case WHvX64RegisterMsrMtrrPhysBase0:
+		return "WHvX64RegisterMsrMtrrPhysBase0"
+	case WHvX64RegisterMsrMtrrPhysBase1:
+		return "WHvX64RegisterMsrMtrrPhysBase1"
+	case WHvX64RegisterMsrMtrrPhysBase2:
+		return "WHvX64RegisterMsrMtrrPhysBase2"
+	case WHvX64RegisterMsrMtrrPhysBase3:
+		return "WHvX64RegisterMsrMtrrPhysBase3"
+	case WHvX64RegisterMsrMtrrPhysBase4:
+		return "WHvX64RegisterMsrMtrrPhysBase4"
+	case WHvX64RegisterMsrMtrrPhysBase5:
+		return "WHvX64RegisterMsrMtrrPhysBase5"
+	case WHvX64RegisterMsrMtrrPhysBase6:
+		return "WHvX64RegisterMsrMtrrPhysBase6"
+	case WHvX64RegisterMsrMtrrPhysBase7:
+		return "WHvX64RegisterMsrMtrrPhysBase7"
+	case WHvX64RegisterMsrMtrrPhysBase8:
+		return "WHvX64RegisterMsrMtrrPhysBase8"
+	case WHvX64RegisterMsrMtrrPhysBase9:
+		return "WHvX64RegisterMsrMtrrPhysBase9"
+	case WHvX64RegisterMsrMtrrPhysBaseA:
+		return "WHvX64RegisterMsrMtrrPhysBaseA"
+	case WHvX64RegisterMsrMtrrPhysBaseB:
+		return "WHvX64RegisterMsrMtrrPhysBaseB"
+	case WHvX64RegisterMsrMtrrPhysBaseC:
+		return "WHvX64RegisterMsrMtrrPhysBaseC"
+	case WHvX64RegisterMsrMtrrPhysBaseD:
+		return "WHvX64RegisterMsrMtrrPhysBaseD"
+	case WHvX64RegisterMsrMtrrPhysBaseE:
+		return "WHvX64RegisterMsrMtrrPhysBaseE"
+	case WHvX64RegisterMsrMtrrPhysBaseF:
+		return "WHvX64RegisterMsrMtrrPhysBaseF"
+	case WHvX64RegisterMsrMtrrPhysMask0:
+		return "WHvX64RegisterMsrMtrrPhysMask0"
+	case WHvX64RegisterMsrMtrrPhysMask1:
+		return "WHvX64RegisterMsrMtrrPhysMask1"
+	case WHvX64RegisterMsrMtrrPhysMask2:
+		return "WHvX64RegisterMsrMtrrPhysMask2"
+	case WHvX64RegisterMsrMtrrPhysMask3:
+		return "WHvX64RegisterMsrMtrrPhysMask3"
+	case WHvX64RegisterMsrMtrrPhysMask4:
+		return "WHvX64RegisterMsrMtrrPhysMask4"
+	case WHvX64RegisterMsrMtrrPhysMask5:
+		return "WHvX64RegisterMsrMtrrPhysMask5"
+	case WHvX64RegisterMsrMtrrPhysMask6:
+		return "WHvX64RegisterMsrMtrrPhysMask6"
+	case WHvX64RegisterMsrMtrrPhysMask7:
+		return "WHvX64RegisterMsrMtrrPhysMask7"
+	case WHvX64RegisterMsrMtrrPhysMask8:
+		return "WHvX64RegisterMsrMtrrPhysMask8"
+	case WHvX64RegisterMsrMtrrPhysMask9:
+		return "WHvX64RegisterMsrMtrrPhysMask9"
+	case WHvX64RegisterMsrMtrrPhysMaskA:
+		return "WHvX64RegisterMsrMtrrPhysMaskA"
+	case WHvX64RegisterMsrMtrrPhysMaskB:
+		return "WHvX64RegisterMsrMtrrPhysMaskB"
+	case WHvX64RegisterMsrMtrrPhysMaskC:
+		return "WHvX64RegisterMsrMtrrPhysMaskC"
+	case WHvX64RegisterMsrMtrrPhysMaskD:
+		return "WHvX64RegisterMsrMtrrPhysMaskD"
+	case WHvX64RegisterMsrMtrrPhysMaskE:
+		return "WHvX64RegisterMsrMtrrPhysMaskE"
+	case WHvX64RegisterMsrMtrrPhysMaskF:
+		return "WHvX64RegisterMsrMtrrPhysMaskF"
+	case WHvX64RegisterMsrMtrrFix64k00000:
+		return "WHvX64RegisterMsrMtrrFix64k00000"
+	case WHvX64RegisterMsrMtrrFix16k80000:
+		return "WHvX64RegisterMsrMtrrFix16k80000"
+	case WHvX64RegisterMsrMtrrFix16kA0000:
+		return "WHvX64RegisterMsrMtrrFix16kA0000"
+	case WHvX64RegisterMsrMtrrFix4kC0000:
+		return "WHvX64RegisterMsrMtrrFix4kC0000"
+	case WHvX64RegisterMsrMtrrFix4kC8000:
+		return "WHvX64RegisterMsrMtrrFix4kC8000"
+	case WHvX64RegisterMsrMtrrFix4kD0000:
+		return "WHvX64RegisterMsrMtrrFix4kD0000"
+	case WHvX64RegisterMsrMtrrFix4kD8000:
+		return "WHvX64RegisterMsrMtrrFix4kD8000"
+	case WHvX64RegisterMsrMtrrFix4kE0000:
+		return "WHvX64RegisterMsrMtrrFix4kE0000"
+	case WHvX64RegisterMsrMtrrFix4kE8000:
+		return "WHvX64RegisterMsrMtrrFix4kE8000"
+	case WHvX64RegisterMsrMtrrFix4kF0000:
+		return "WHvX64RegisterMsrMtrrFix4kF0000"
+	case WHvX64RegisterMsrMtrrFix4kF8000:
+		return "WHvX64RegisterMsrMtrrFix4kF8000"
+	case WHvX64RegisterTscAux:
+		return "WHvX64RegisterTscAux"
+	case WHvX64RegisterBndcfgs:
+		return "WHvX64RegisterBndcfgs"
+	case WHvX64RegisterMCount:
+		return "WHvX64RegisterMCount"
+	case WHvX64RegisterACount:
+		return "WHvX64RegisterACount"
+	case WHvX64RegisterSpecCtrl:
+		return "WHvX64RegisterSpecCtrl"
+	case WHvX64RegisterPredCmd:
+		return "WHvX64RegisterPredCmd"
+	case WHvX64RegisterTscVirtualOffset:
+		return "WHvX64RegisterTscVirtualOffset"
+	case WHvX64RegisterTsxCtrl:
+		return "WHvX64RegisterTsxCtrl"
+	case WHvX64RegisterXss:
+		return "WHvX64RegisterXss"
+	case WHvX64RegisterUCet:
+		return "WHvX64RegisterUCet"
+	case WHvX64RegisterSCet:
+		return "WHvX64RegisterSCet"
+	case WHvX64RegisterSsp:
+		return "WHvX64RegisterSsp"
+	case WHvX64RegisterPl0Ssp:
+		return "WHvX64RegisterPl0Ssp"
+	case WHvX64RegisterPl1Ssp:
+		return "WHvX64RegisterPl1Ssp"
+	case WHvX64RegisterPl2Ssp:
+		return "WHvX64RegisterPl2Ssp"
+	case WHvX64RegisterPl3Ssp:
+		return "WHvX64RegisterPl3Ssp"
+	case WHvX64RegisterInterruptSspTableAddr:
+		return "WHvX64RegisterInterruptSspTableAddr"
+	case WHvX64RegisterTscDeadline:
+		return "WHvX64RegisterTscDeadline"
+	case WHvX64RegisterTscAdjust:
+		return "WHvX64RegisterTscAdjust"
+	case WHvX64RegisterUmwaitControl:
+		return "WHvX64RegisterUmwaitControl"
+	case WHvX64RegisterXfd:
+		return "WHvX64RegisterXfd"
+	case WHvX64RegisterXfdErr:
+		return "WHvX64RegisterXfdErr"
+	case WHvX64RegisterApicId:
+		return "WHvX64RegisterApicId"
+	case WHvX64RegisterApicVersion:
+		return "WHvX64RegisterApicVersion"
+	case WHvX64RegisterApicTpr:
+		return "WHvX64RegisterApicTpr"
+	case WHvX64RegisterApicPpr:
+		return "WHvX64RegisterApicPpr"
+	case WHvX64RegisterApicEoi:
+		return "WHvX64RegisterApicEoi"
+	case WHvX64RegisterApicLdr:
+		return "WHvX64RegisterApicLdr"
+	case WHvX64RegisterApicSpurious:
+		return "WHvX64RegisterApicSpurious"
+	case WHvX64RegisterApicIsr0:
+		return "WHvX64RegisterApicIsr0"
+	case WHvX64RegisterApicIsr1:
+		return "WHvX64RegisterApicIsr1"
+	case WHvX64RegisterApicIsr2:
+		return "WHvX64RegisterApicIsr2"
+	case WHvX64RegisterApicIsr3:
+		return "WHvX64RegisterApicIsr3"
+	case WHvX64RegisterApicIsr4:
+		return "WHvX64RegisterApicIsr4"
+	case WHvX64RegisterApicIsr5:
+		return "WHvX64RegisterApicIsr5"
+	case WHvX64RegisterApicIsr6:
+		return "WHvX64RegisterApicIsr6"
+	case WHvX64RegisterApicIsr7:
+		return "WHvX64RegisterApicIsr7"
+	case WHvX64RegisterApicTmr0:
+		return "WHvX64RegisterApicTmr0"
+	case WHvX64RegisterApicTmr1:
+		return "WHvX64RegisterApicTmr1"
+	case WHvX64RegisterApicTmr2:
+		return "WHvX64RegisterApicTmr2"
+	case WHvX64RegisterApicTmr3:
+		return "WHvX64RegisterApicTmr3"
+	case WHvX64RegisterApicTmr4:
+		return "WHvX64RegisterApicTmr4"
+	case WHvX64RegisterApicTmr5:
+		return "WHvX64RegisterApicTmr5"
+	case WHvX64RegisterApicTmr6:
+		return "WHvX64RegisterApicTmr6"
+	case WHvX64RegisterApicTmr7:
+		return "WHvX64RegisterApicTmr7"
+	case WHvX64RegisterApicIrr0:
+		return "WHvX64RegisterApicIrr0"
+	case WHvX64RegisterApicIrr1:
+		return "WHvX64RegisterApicIrr1"
+	case WHvX64RegisterApicIrr2:
+		return "WHvX64RegisterApicIrr2"
+	case WHvX64RegisterApicIrr3:
+		return "WHvX64RegisterApicIrr3"
+	case WHvX64RegisterApicIrr4:
+		return "WHvX64RegisterApicIrr4"
+	case WHvX64RegisterApicIrr5:
+		return "WHvX64RegisterApicIrr5"
+	case WHvX64RegisterApicIrr6:
+		return "WHvX64RegisterApicIrr6"
+	case WHvX64RegisterApicIrr7:
+		return "WHvX64RegisterApicIrr7"
+	case WHvX64RegisterApicEse:
+		return "WHvX64RegisterApicEse"
+	case WHvX64RegisterApicIcr:
+		return "WHvX64RegisterApicIcr"
+	case WHvX64RegisterApicLvtTimer:
+		return "WHvX64RegisterApicLvtTimer"
+	case WHvX64RegisterApicLvtThermal:
+		return "WHvX64RegisterApicLvtThermal"
+	case WHvX64RegisterApicLvtPerfmon:
+		return "WHvX64RegisterApicLvtPerfmon"
+	case WHvX64RegisterApicLvtLint0:
+		return "WHvX64RegisterApicLvtLint0"
+	case WHvX64RegisterApicLvtLint1:
+		return "WHvX64RegisterApicLvtLint1"
+	case WHvX64RegisterApicLvtError:
+		return "WHvX64RegisterApicLvtError"
+	case WHvX64RegisterApicInitCount:
+		return "WHvX64RegisterApicInitCount"
+	case WHvX64RegisterApicCurrentCount:
+		return "WHvX64RegisterApicCurrentCount"
+	case WHvX64RegisterApicDivide:
+		return "WHvX64RegisterApicDivide"
+	case WHvX64RegisterApicSelfIpi:
+		return "WHvX64RegisterApicSelfIpi"
+	case WHvRegisterSint0:
+		return "WHvRegisterSint0"
+	case WHvRegisterSint1:
+		return "WHvRegisterSint1"
+	case WHvRegisterSint2:
+		return "WHvRegisterSint2"
+	case WHvRegisterSint3:
+		return "WHvRegisterSint3"
+	case WHvRegisterSint4:
+		return "WHvRegisterSint4"
+	case WHvRegisterSint5:
+		return "WHvRegisterSint5"
+	case WHvRegisterSint6:
+		return "WHvRegisterSint6"
+	case WHvRegisterSint7:
+		return "WHvRegisterSint7"
+	case WHvRegisterSint8:
+		return "WHvRegisterSint8"
+	case WHvRegisterSint9:
+		return "WHvRegisterSint9"
+	case WHvRegisterSint10:
+		return "WHvRegisterSint10"
+	case WHvRegisterSint11:
+		return "WHvRegisterSint11"
+	case WHvRegisterSint12:
+		return "WHvRegisterSint12"
+	case WHvRegisterSint13:
+		return "WHvRegisterSint13"
+	case WHvRegisterSint14:
+		return "WHvRegisterSint14"
+	case WHvRegisterSint15:
+		return "WHvRegisterSint15"
+	case WHvRegisterScontrol:
+		return "WHvRegisterScontrol"
+	case WHvRegisterSversion:
+		return "WHvRegisterSversion"
+	case WHvRegisterSiefp:
+		return "WHvRegisterSiefp"
+	case WHvRegisterSimp:
+		return "WHvRegisterSimp"
+	case WHvRegisterEom:
+		return "WHvRegisterEom"
+	case WHvRegisterVpRuntime:
+		return "WHvRegisterVpRuntime"
+	case WHvX64RegisterHypercall:
+		return "WHvX64RegisterHypercall"
+	case WHvRegisterGuestOsId:
+		return "WHvRegisterGuestOsId"
+	case WHvRegisterVpAssistPage:
+		return "WHvRegisterVpAssistPage"
+	case WHvRegisterReferenceTsc:
+		return "WHvRegisterReferenceTsc"
+	case WHvRegisterReferenceTscSequence:
+		return "WHvRegisterReferenceTscSequence"
+	case WHvRegisterPendingInterruption:
+		return "WHvRegisterPendingInterruption"
+	case WHvRegisterInterruptState:
+		return "WHvRegisterInterruptState"
+	case WHvRegisterPendingEvent:
+		return "WHvRegisterPendingEvent"
+	case WHvX64RegisterDeliverabilityNotifications:
+		return "WHvX64RegisterDeliverabilityNotifications"
+	case WHvRegisterInternalActivityState:
+		return "WHvRegisterInternalActivityState"
+	case WHvX64RegisterPendingDebugException:
+		return "WHvX64RegisterPendingDebugException"
+	default:
+		return fmt.Sprintf("WHV_REGISTER_NAME(%d)", int32(e))
+	}
+}
+
 type WHV_RUN_VP_CANCEL_REASON int32
 
 const (
 	WHvRunVpCancelReasonUser WHV_RUN_VP_CANCEL_REASON = 0
 )
+
+// String returns the WHV_RUN_VP_CANCEL_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_RUN_VP_CANCEL_REASON) String() string {
+	switch e {
+	case WHvRunVpCancelReasonUser:
+		return "WHvRunVpCancelReasonUser"
+	default:
+		return fmt.Sprintf("WHV_RUN_VP_CANCEL_REASON(%d)", int32(e))
+	}
+}
 
 type WHV_RUN_VP_EXIT_REASON int32
 
@@ -743,6 +2149,54 @@ const (
 	WHvRunVpExitReasonCanceled               WHV_RUN_VP_EXIT_REASON = 8193
 )
 
+// String returns the WHV_RUN_VP_EXIT_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_RUN_VP_EXIT_REASON) String() string {
+	switch e {
+	case WHvRunVpExitReasonNone:
+		return "WHvRunVpExitReasonNone"
+	case WHvRunVpExitReasonMemoryAccess:
+		return "WHvRunVpExitReasonMemoryAccess"
+	case WHvRunVpExitReasonX64IoPortAccess:
+		return "WHvRunVpExitReasonX64IoPortAccess"
+	case WHvRunVpExitReasonUnrecoverableException:
+		return "WHvRunVpExitReasonUnrecoverableException"
+	case WHvRunVpExitReasonInvalidVpRegisterValue:
+		return "WHvRunVpExitReasonInvalidVpRegisterValue"
+	case WHvRunVpExitReasonUnsupportedFeature:
+		return "WHvRunVpExitReasonUnsupportedFeature"
+	case WHvRunVpExitReasonX64InterruptWindow:
+		return "WHvRunVpExitReasonX64InterruptWindow"
+	case WHvRunVpExitReasonX64Halt:
+		return "WHvRunVpExitReasonX64Halt"
+	case WHvRunVpExitReasonX64ApicEoi:
+		return "WHvRunVpExitReasonX64ApicEoi"
+	case WHvRunVpExitReasonSynicSintDeliverable:
+		return "WHvRunVpExitReasonSynicSintDeliverable"
+	case WHvRunVpExitReasonX64MsrAccess:
+		return "WHvRunVpExitReasonX64MsrAccess"
+	case WHvRunVpExitReasonX64Cpuid:
+		return "WHvRunVpExitReasonX64Cpuid"
+	case WHvRunVpExitReasonException:
+		return "WHvRunVpExitReasonException"
+	case WHvRunVpExitReasonX64Rdtsc:
+		return "WHvRunVpExitReasonX64Rdtsc"
+	case WHvRunVpExitReasonX64ApicSmiTrap:
+		return "WHvRunVpExitReasonX64ApicSmiTrap"
+	case WHvRunVpExitReasonHypercall:
+		return "WHvRunVpExitReasonHypercall"
+	case WHvRunVpExitReasonX64ApicInitSipiTrap:
+		return "WHvRunVpExitReasonX64ApicInitSipiTrap"
+	case WHvRunVpExitReasonX64ApicWriteTrap:
+		return "WHvRunVpExitReasonX64ApicWriteTrap"
+	case WHvRunVpExitReasonCanceled:
+		return "WHvRunVpExitReasonCanceled"
+	default:
+		return fmt.Sprintf("WHV_RUN_VP_EXIT_REASON(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WHV_TRANSLATE_GVA_FLAGS int32
 
 const (
@@ -755,6 +2209,37 @@ const (
 	WHvTranslateGvaFlagEnforceSmap      WHV_TRANSLATE_GVA_FLAGS = 256
 	WHvTranslateGvaFlagOverrideSmap     WHV_TRANSLATE_GVA_FLAGS = 512
 )
+
+// String returns the WHV_TRANSLATE_GVA_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_TRANSLATE_GVA_FLAGS) String() string {
+	var parts []string
+	if e&WHvTranslateGvaFlagValidateRead != 0 {
+		parts = append(parts, "WHvTranslateGvaFlagValidateRead")
+	}
+	if e&WHvTranslateGvaFlagValidateWrite != 0 {
+		parts = append(parts, "WHvTranslateGvaFlagValidateWrite")
+	}
+	if e&WHvTranslateGvaFlagValidateExecute != 0 {
+		parts = append(parts, "WHvTranslateGvaFlagValidateExecute")
+	}
+	if e&WHvTranslateGvaFlagPrivilegeExempt != 0 {
+		parts = append(parts, "WHvTranslateGvaFlagPrivilegeExempt")
+	}
+	if e&WHvTranslateGvaFlagSetPageTableBits != 0 {
+		parts = append(parts, "WHvTranslateGvaFlagSetPageTableBits")
+	}
+	if e&WHvTranslateGvaFlagEnforceSmap != 0 {
+		parts = append(parts, "WHvTranslateGvaFlagEnforceSmap")
+	}
+	if e&WHvTranslateGvaFlagOverrideSmap != 0 {
+		parts = append(parts, "WHvTranslateGvaFlagOverrideSmap")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type WHV_TRANSLATE_GVA_RESULT_CODE int32
 
@@ -770,6 +2255,33 @@ const (
 	WHvTranslateGvaResultIntercept               WHV_TRANSLATE_GVA_RESULT_CODE = 8
 )
 
+// String returns the WHV_TRANSLATE_GVA_RESULT_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_TRANSLATE_GVA_RESULT_CODE) String() string {
+	switch e {
+	case WHvTranslateGvaResultSuccess:
+		return "WHvTranslateGvaResultSuccess"
+	case WHvTranslateGvaResultPageNotPresent:
+		return "WHvTranslateGvaResultPageNotPresent"
+	case WHvTranslateGvaResultPrivilegeViolation:
+		return "WHvTranslateGvaResultPrivilegeViolation"
+	case WHvTranslateGvaResultInvalidPageTableFlags:
+		return "WHvTranslateGvaResultInvalidPageTableFlags"
+	case WHvTranslateGvaResultGpaUnmapped:
+		return "WHvTranslateGvaResultGpaUnmapped"
+	case WHvTranslateGvaResultGpaNoReadAccess:
+		return "WHvTranslateGvaResultGpaNoReadAccess"
+	case WHvTranslateGvaResultGpaNoWriteAccess:
+		return "WHvTranslateGvaResultGpaNoWriteAccess"
+	case WHvTranslateGvaResultGpaIllegalOverlayAccess:
+		return "WHvTranslateGvaResultGpaIllegalOverlayAccess"
+	case WHvTranslateGvaResultIntercept:
+		return "WHvTranslateGvaResultIntercept"
+	default:
+		return fmt.Sprintf("WHV_TRANSLATE_GVA_RESULT_CODE(%d)", int32(e))
+	}
+}
+
 type WHV_TRIGGER_TYPE int32
 
 const (
@@ -778,11 +2290,37 @@ const (
 	WHvTriggerTypeDeviceInterrupt WHV_TRIGGER_TYPE = 2
 )
 
+// String returns the WHV_TRIGGER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_TRIGGER_TYPE) String() string {
+	switch e {
+	case WHvTriggerTypeInterrupt:
+		return "WHvTriggerTypeInterrupt"
+	case WHvTriggerTypeSynicEvent:
+		return "WHvTriggerTypeSynicEvent"
+	case WHvTriggerTypeDeviceInterrupt:
+		return "WHvTriggerTypeDeviceInterrupt"
+	default:
+		return fmt.Sprintf("WHV_TRIGGER_TYPE(%d)", int32(e))
+	}
+}
+
 type WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE int32
 
 const (
 	WHvVirtualProcessorPropertyCodeNumaNode WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE = 0
 )
+
+// String returns the WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE) String() string {
+	switch e {
+	case WHvVirtualProcessorPropertyCodeNumaNode:
+		return "WHvVirtualProcessorPropertyCodeNumaNode"
+	default:
+		return fmt.Sprintf("WHV_VIRTUAL_PROCESSOR_PROPERTY_CODE(%d)", int32(e))
+	}
+}
 
 type WHV_VIRTUAL_PROCESSOR_STATE_TYPE int32
 
@@ -794,6 +2332,25 @@ const (
 	WHvVirtualProcessorStateTypeXsaveState                WHV_VIRTUAL_PROCESSOR_STATE_TYPE = 4097
 )
 
+// String returns the WHV_VIRTUAL_PROCESSOR_STATE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_VIRTUAL_PROCESSOR_STATE_TYPE) String() string {
+	switch e {
+	case WHvVirtualProcessorStateTypeSynicMessagePage:
+		return "WHvVirtualProcessorStateTypeSynicMessagePage"
+	case WHvVirtualProcessorStateTypeSynicEventFlagPage:
+		return "WHvVirtualProcessorStateTypeSynicEventFlagPage"
+	case WHvVirtualProcessorStateTypeSynicTimerState:
+		return "WHvVirtualProcessorStateTypeSynicTimerState"
+	case WHvVirtualProcessorStateTypeInterruptControllerState2:
+		return "WHvVirtualProcessorStateTypeInterruptControllerState2"
+	case WHvVirtualProcessorStateTypeXsaveState:
+		return "WHvVirtualProcessorStateTypeXsaveState"
+	default:
+		return fmt.Sprintf("WHV_VIRTUAL_PROCESSOR_STATE_TYPE(%d)", int32(e))
+	}
+}
+
 type WHV_VPCI_DEVICE_NOTIFICATION_TYPE int32
 
 const (
@@ -802,6 +2359,21 @@ const (
 	WHvVpciDeviceNotificationSurpriseRemoval WHV_VPCI_DEVICE_NOTIFICATION_TYPE = 2
 )
 
+// String returns the WHV_VPCI_DEVICE_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_VPCI_DEVICE_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case WHvVpciDeviceNotificationUndefined:
+		return "WHvVpciDeviceNotificationUndefined"
+	case WHvVpciDeviceNotificationMmioRemapping:
+		return "WHvVpciDeviceNotificationMmioRemapping"
+	case WHvVpciDeviceNotificationSurpriseRemoval:
+		return "WHvVpciDeviceNotificationSurpriseRemoval"
+	default:
+		return fmt.Sprintf("WHV_VPCI_DEVICE_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
+
 type WHV_VPCI_DEVICE_PROPERTY_CODE int32
 
 const (
@@ -809,6 +2381,21 @@ const (
 	WHvVpciDevicePropertyCodeHardwareIDs WHV_VPCI_DEVICE_PROPERTY_CODE = 1
 	WHvVpciDevicePropertyCodeProbedBARs  WHV_VPCI_DEVICE_PROPERTY_CODE = 2
 )
+
+// String returns the WHV_VPCI_DEVICE_PROPERTY_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_VPCI_DEVICE_PROPERTY_CODE) String() string {
+	switch e {
+	case WHvVpciDevicePropertyCodeUndefined:
+		return "WHvVpciDevicePropertyCodeUndefined"
+	case WHvVpciDevicePropertyCodeHardwareIDs:
+		return "WHvVpciDevicePropertyCodeHardwareIDs"
+	case WHvVpciDevicePropertyCodeProbedBARs:
+		return "WHvVpciDevicePropertyCodeProbedBARs"
+	default:
+		return fmt.Sprintf("WHV_VPCI_DEVICE_PROPERTY_CODE(%d)", int32(e))
+	}
+}
 
 type WHV_VPCI_DEVICE_REGISTER_SPACE int32
 
@@ -822,6 +2409,30 @@ const (
 	WHvVpciBar5        WHV_VPCI_DEVICE_REGISTER_SPACE = 5
 )
 
+// String returns the WHV_VPCI_DEVICE_REGISTER_SPACE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_VPCI_DEVICE_REGISTER_SPACE) String() string {
+	switch e {
+	case WHvVpciConfigSpace:
+		return "WHvVpciConfigSpace"
+	case WHvVpciBar0:
+		return "WHvVpciBar0"
+	case WHvVpciBar1:
+		return "WHvVpciBar1"
+	case WHvVpciBar2:
+		return "WHvVpciBar2"
+	case WHvVpciBar3:
+		return "WHvVpciBar3"
+	case WHvVpciBar4:
+		return "WHvVpciBar4"
+	case WHvVpciBar5:
+		return "WHvVpciBar5"
+	default:
+		return fmt.Sprintf("WHV_VPCI_DEVICE_REGISTER_SPACE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WHV_VPCI_INTERRUPT_TARGET_FLAGS int32
 
 const (
@@ -829,12 +2440,42 @@ const (
 	WHvVpciInterruptTargetFlagMulticast WHV_VPCI_INTERRUPT_TARGET_FLAGS = 1
 )
 
+// String returns the WHV_VPCI_INTERRUPT_TARGET_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_VPCI_INTERRUPT_TARGET_FLAGS) String() string {
+	var parts []string
+	if e&WHvVpciInterruptTargetFlagMulticast != 0 {
+		parts = append(parts, "WHvVpciInterruptTargetFlagMulticast")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type WHV_VPCI_MMIO_RANGE_FLAGS int32
 
 const (
 	WHvVpciMmioRangeFlagReadAccess  WHV_VPCI_MMIO_RANGE_FLAGS = 1
 	WHvVpciMmioRangeFlagWriteAccess WHV_VPCI_MMIO_RANGE_FLAGS = 2
 )
+
+// String returns the WHV_VPCI_MMIO_RANGE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_VPCI_MMIO_RANGE_FLAGS) String() string {
+	var parts []string
+	if e&WHvVpciMmioRangeFlagReadAccess != 0 {
+		parts = append(parts, "WHvVpciMmioRangeFlagReadAccess")
+	}
+	if e&WHvVpciMmioRangeFlagWriteAccess != 0 {
+		parts = append(parts, "WHvVpciMmioRangeFlagWriteAccess")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type WHV_X64_APIC_WRITE_TYPE int32
 
@@ -846,12 +2487,48 @@ const (
 	WHvX64ApicWriteTypeLint1 WHV_X64_APIC_WRITE_TYPE = 864
 )
 
+// String returns the WHV_X64_APIC_WRITE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_X64_APIC_WRITE_TYPE) String() string {
+	switch e {
+	case WHvX64ApicWriteTypeLdr:
+		return "WHvX64ApicWriteTypeLdr"
+	case WHvX64ApicWriteTypeDfr:
+		return "WHvX64ApicWriteTypeDfr"
+	case WHvX64ApicWriteTypeSvr:
+		return "WHvX64ApicWriteTypeSvr"
+	case WHvX64ApicWriteTypeLint0:
+		return "WHvX64ApicWriteTypeLint0"
+	case WHvX64ApicWriteTypeLint1:
+		return "WHvX64ApicWriteTypeLint1"
+	default:
+		return fmt.Sprintf("WHV_X64_APIC_WRITE_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type WHV_X64_CPUID_RESULT2_FLAGS int32
 
 const (
 	WHvX64CpuidResult2FlagSubleafSpecific WHV_X64_CPUID_RESULT2_FLAGS = 1
 	WHvX64CpuidResult2FlagVpSpecific      WHV_X64_CPUID_RESULT2_FLAGS = 2
 )
+
+// String returns the WHV_X64_CPUID_RESULT2_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_X64_CPUID_RESULT2_FLAGS) String() string {
+	var parts []string
+	if e&WHvX64CpuidResult2FlagSubleafSpecific != 0 {
+		parts = append(parts, "WHvX64CpuidResult2FlagSubleafSpecific")
+	}
+	if e&WHvX64CpuidResult2FlagVpSpecific != 0 {
+		parts = append(parts, "WHvX64CpuidResult2FlagVpSpecific")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type WHV_X64_LOCAL_APIC_EMULATION_MODE int32
 
@@ -861,12 +2538,40 @@ const (
 	WHvX64LocalApicEmulationModeX2Apic WHV_X64_LOCAL_APIC_EMULATION_MODE = 2
 )
 
+// String returns the WHV_X64_LOCAL_APIC_EMULATION_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_X64_LOCAL_APIC_EMULATION_MODE) String() string {
+	switch e {
+	case WHvX64LocalApicEmulationModeNone:
+		return "WHvX64LocalApicEmulationModeNone"
+	case WHvX64LocalApicEmulationModeXApic:
+		return "WHvX64LocalApicEmulationModeXApic"
+	case WHvX64LocalApicEmulationModeX2Apic:
+		return "WHvX64LocalApicEmulationModeX2Apic"
+	default:
+		return fmt.Sprintf("WHV_X64_LOCAL_APIC_EMULATION_MODE(%d)", int32(e))
+	}
+}
+
 type WHV_X64_PENDING_EVENT_TYPE int32
 
 const (
 	WHvX64PendingEventException WHV_X64_PENDING_EVENT_TYPE = 0
 	WHvX64PendingEventExtInt    WHV_X64_PENDING_EVENT_TYPE = 5
 )
+
+// String returns the WHV_X64_PENDING_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_X64_PENDING_EVENT_TYPE) String() string {
+	switch e {
+	case WHvX64PendingEventException:
+		return "WHvX64PendingEventException"
+	case WHvX64PendingEventExtInt:
+		return "WHvX64PendingEventExtInt"
+	default:
+		return fmt.Sprintf("WHV_X64_PENDING_EVENT_TYPE(%d)", int32(e))
+	}
+}
 
 type WHV_X64_PENDING_INTERRUPTION_TYPE int32
 
@@ -876,9 +2581,37 @@ const (
 	WHvX64PendingException WHV_X64_PENDING_INTERRUPTION_TYPE = 3
 )
 
+// String returns the WHV_X64_PENDING_INTERRUPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_X64_PENDING_INTERRUPTION_TYPE) String() string {
+	switch e {
+	case WHvX64PendingInterrupt:
+		return "WHvX64PendingInterrupt"
+	case WHvX64PendingNmi:
+		return "WHvX64PendingNmi"
+	case WHvX64PendingException:
+		return "WHvX64PendingException"
+	default:
+		return fmt.Sprintf("WHV_X64_PENDING_INTERRUPTION_TYPE(%d)", int32(e))
+	}
+}
+
 type WHV_X64_UNSUPPORTED_FEATURE_CODE int32
 
 const (
 	WHvUnsupportedFeatureIntercept     WHV_X64_UNSUPPORTED_FEATURE_CODE = 1
 	WHvUnsupportedFeatureTaskSwitchTss WHV_X64_UNSUPPORTED_FEATURE_CODE = 2
 )
+
+// String returns the WHV_X64_UNSUPPORTED_FEATURE_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WHV_X64_UNSUPPORTED_FEATURE_CODE) String() string {
+	switch e {
+	case WHvUnsupportedFeatureIntercept:
+		return "WHvUnsupportedFeatureIntercept"
+	case WHvUnsupportedFeatureTaskSwitchTss:
+		return "WHvUnsupportedFeatureTaskSwitchTss"
+	default:
+		return fmt.Sprintf("WHV_X64_UNSUPPORTED_FEATURE_CODE(%d)", int32(e))
+	}
+}

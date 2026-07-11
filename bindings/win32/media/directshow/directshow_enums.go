@@ -4,6 +4,12 @@
 
 package directshow
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type ADVISE_TYPE int32
 
 const (
@@ -14,6 +20,31 @@ const (
 	ADVISE_POSITION       ADVISE_TYPE = 8
 	ADVISE_DISPLAY_CHANGE ADVISE_TYPE = 16
 )
+
+// String returns the ADVISE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ADVISE_TYPE) String() string {
+	var parts []string
+	if e&ADVISE_CLIPPING != 0 {
+		parts = append(parts, "ADVISE_CLIPPING")
+	}
+	if e&ADVISE_PALETTE != 0 {
+		parts = append(parts, "ADVISE_PALETTE")
+	}
+	if e&ADVISE_COLORKEY != 0 {
+		parts = append(parts, "ADVISE_COLORKEY")
+	}
+	if e&ADVISE_POSITION != 0 {
+		parts = append(parts, "ADVISE_POSITION")
+	}
+	if e&ADVISE_DISPLAY_CHANGE != 0 {
+		parts = append(parts, "ADVISE_DISPLAY_CHANGE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // AMExtendedSeekingCapabilities: https://learn.microsoft.com/windows/win32/api/qnetwork/ne-qnetwork-amextendedseekingcapabilities
 type AMExtendedSeekingCapabilities int32
@@ -28,12 +59,50 @@ const (
 	AM_EXSEEK_SENDS_VIDEOFRAMEREADY AMExtendedSeekingCapabilities = 64
 )
 
+// String returns the AMExtendedSeekingCapabilities constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMExtendedSeekingCapabilities) String() string {
+	switch e {
+	case AM_EXSEEK_CANSEEK:
+		return "AM_EXSEEK_CANSEEK"
+	case AM_EXSEEK_CANSCAN:
+		return "AM_EXSEEK_CANSCAN"
+	case AM_EXSEEK_MARKERSEEK:
+		return "AM_EXSEEK_MARKERSEEK"
+	case AM_EXSEEK_SCANWITHOUTCLOCK:
+		return "AM_EXSEEK_SCANWITHOUTCLOCK"
+	case AM_EXSEEK_NOSTANDARDREPAINT:
+		return "AM_EXSEEK_NOSTANDARDREPAINT"
+	case AM_EXSEEK_BUFFERING:
+		return "AM_EXSEEK_BUFFERING"
+	case AM_EXSEEK_SENDS_VIDEOFRAMEREADY:
+		return "AM_EXSEEK_SENDS_VIDEOFRAMEREADY"
+	default:
+		return fmt.Sprintf("AMExtendedSeekingCapabilities(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type AMMSF_MMS_INIT_FLAGS int32
 
 const (
 	AMMSF_NOGRAPHTHREAD AMMSF_MMS_INIT_FLAGS = 1
 )
 
+// String returns the AMMSF_MMS_INIT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMMSF_MMS_INIT_FLAGS) String() string {
+	var parts []string
+	if e&AMMSF_NOGRAPHTHREAD != 0 {
+		parts = append(parts, "AMMSF_NOGRAPHTHREAD")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type AMMSF_MS_FLAGS int32
 
 const (
@@ -43,6 +112,29 @@ const (
 	AMMSF_NOSTALL            AMMSF_MS_FLAGS = 8
 )
 
+// String returns the AMMSF_MS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMMSF_MS_FLAGS) String() string {
+	var parts []string
+	if e&AMMSF_ADDDEFAULTRENDERER != 0 {
+		parts = append(parts, "AMMSF_ADDDEFAULTRENDERER")
+	}
+	if e&AMMSF_CREATEPEER != 0 {
+		parts = append(parts, "AMMSF_CREATEPEER")
+	}
+	if e&AMMSF_STOPIFNOSAMPLES != 0 {
+		parts = append(parts, "AMMSF_STOPIFNOSAMPLES")
+	}
+	if e&AMMSF_NOSTALL != 0 {
+		parts = append(parts, "AMMSF_NOSTALL")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type AMMSF_RENDER_FLAGS int32
 
 const (
@@ -54,6 +146,31 @@ const (
 	AMMSF_RUN              AMMSF_RENDER_FLAGS = 8
 )
 
+// String returns the AMMSF_RENDER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMMSF_RENDER_FLAGS) String() string {
+	var parts []string
+	if e&AMMSF_RENDERTYPEMASK != 0 {
+		parts = append(parts, "AMMSF_RENDERTYPEMASK")
+	}
+	if e&AMMSF_RENDERALLSTREAMS != 0 {
+		parts = append(parts, "AMMSF_RENDERALLSTREAMS")
+	}
+	if e&AMMSF_NORENDER != 0 {
+		parts = append(parts, "AMMSF_NORENDER")
+	}
+	if e&AMMSF_NOCLOCK != 0 {
+		parts = append(parts, "AMMSF_NOCLOCK")
+	}
+	if e&AMMSF_RUN != 0 {
+		parts = append(parts, "AMMSF_RUN")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // AMOVERLAYFX: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-amoverlayfx
 type AMOVERLAYFX int32
 
@@ -64,12 +181,42 @@ const (
 	AMOVERFX_DEINTERLACE     AMOVERLAYFX = 8
 )
 
+// String returns the AMOVERLAYFX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMOVERLAYFX) String() string {
+	switch e {
+	case AMOVERFX_NOFX:
+		return "AMOVERFX_NOFX"
+	case AMOVERFX_MIRRORLEFTRIGHT:
+		return "AMOVERFX_MIRRORLEFTRIGHT"
+	case AMOVERFX_MIRRORUPDOWN:
+		return "AMOVERFX_MIRRORUPDOWN"
+	case AMOVERFX_DEINTERLACE:
+		return "AMOVERFX_DEINTERLACE"
+	default:
+		return fmt.Sprintf("AMOVERLAYFX(%d)", int32(e))
+	}
+}
+
 type AMPROPERTY_PIN int32
 
 const (
 	AMPROPERTY_PIN_CATEGORY AMPROPERTY_PIN = 0
 	AMPROPERTY_PIN_MEDIUM   AMPROPERTY_PIN = 1
 )
+
+// String returns the AMPROPERTY_PIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMPROPERTY_PIN) String() string {
+	switch e {
+	case AMPROPERTY_PIN_CATEGORY:
+		return "AMPROPERTY_PIN_CATEGORY"
+	case AMPROPERTY_PIN_MEDIUM:
+		return "AMPROPERTY_PIN_MEDIUM"
+	default:
+		return fmt.Sprintf("AMPROPERTY_PIN(%d)", int32(e))
+	}
+}
 
 type AMPlayListEventFlags int32
 
@@ -81,12 +228,44 @@ const (
 	AMPLAYLISTEVENT_REFRESH AMPlayListEventFlags = 16
 )
 
+// String returns the AMPlayListEventFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMPlayListEventFlags) String() string {
+	switch e {
+	case AMPLAYLISTEVENT_RESUME:
+		return "AMPLAYLISTEVENT_RESUME"
+	case AMPLAYLISTEVENT_BREAK:
+		return "AMPLAYLISTEVENT_BREAK"
+	case AMPLAYLISTEVENT_NEXT:
+		return "AMPLAYLISTEVENT_NEXT"
+	case AMPLAYLISTEVENT_MASK:
+		return "AMPLAYLISTEVENT_MASK"
+	case AMPLAYLISTEVENT_REFRESH:
+		return "AMPLAYLISTEVENT_REFRESH"
+	default:
+		return fmt.Sprintf("AMPlayListEventFlags(%d)", int32(e))
+	}
+}
+
 type AMPlayListFlags int32
 
 const (
 	AMPLAYLIST_STARTINSCANMODE AMPlayListFlags = 1
 	AMPLAYLIST_FORCEBANNER     AMPlayListFlags = 2
 )
+
+// String returns the AMPlayListFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMPlayListFlags) String() string {
+	switch e {
+	case AMPLAYLIST_STARTINSCANMODE:
+		return "AMPLAYLIST_STARTINSCANMODE"
+	case AMPLAYLIST_FORCEBANNER:
+		return "AMPLAYLIST_FORCEBANNER"
+	default:
+		return fmt.Sprintf("AMPlayListFlags(%d)", int32(e))
+	}
+}
 
 type AMPlayListItemFlags int32
 
@@ -95,17 +274,52 @@ const (
 	AMPLAYLISTITEM_CANBIND AMPlayListItemFlags = 2
 )
 
+// String returns the AMPlayListItemFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMPlayListItemFlags) String() string {
+	switch e {
+	case AMPLAYLISTITEM_CANSKIP:
+		return "AMPLAYLISTITEM_CANSKIP"
+	case AMPLAYLISTITEM_CANBIND:
+		return "AMPLAYLISTITEM_CANBIND"
+	default:
+		return fmt.Sprintf("AMPlayListItemFlags(%d)", int32(e))
+	}
+}
+
 type AMTVAudioEventType int32
 
 const (
 	AMTVAUDIO_EVENT_CHANGED AMTVAudioEventType = 1
 )
 
+// String returns the AMTVAudioEventType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMTVAudioEventType) String() string {
+	switch e {
+	case AMTVAUDIO_EVENT_CHANGED:
+		return "AMTVAUDIO_EVENT_CHANGED"
+	default:
+		return fmt.Sprintf("AMTVAudioEventType(%d)", int32(e))
+	}
+}
+
 type AMTunerEventType int32
 
 const (
 	AMTUNER_EVENT_CHANGED AMTunerEventType = 1
 )
+
+// String returns the AMTunerEventType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMTunerEventType) String() string {
+	switch e {
+	case AMTUNER_EVENT_CHANGED:
+		return "AMTUNER_EVENT_CHANGED"
+	default:
+		return fmt.Sprintf("AMTunerEventType(%d)", int32(e))
+	}
+}
 
 // AMTunerModeType: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-amtunermodetype
 type AMTunerModeType int32
@@ -118,6 +332,25 @@ const (
 	AMTUNER_MODE_DSS      AMTunerModeType = 8
 )
 
+// String returns the AMTunerModeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMTunerModeType) String() string {
+	switch e {
+	case AMTUNER_MODE_DEFAULT:
+		return "AMTUNER_MODE_DEFAULT"
+	case AMTUNER_MODE_TV:
+		return "AMTUNER_MODE_TV"
+	case AMTUNER_MODE_FM_RADIO:
+		return "AMTUNER_MODE_FM_RADIO"
+	case AMTUNER_MODE_AM_RADIO:
+		return "AMTUNER_MODE_AM_RADIO"
+	case AMTUNER_MODE_DSS:
+		return "AMTUNER_MODE_DSS"
+	default:
+		return fmt.Sprintf("AMTunerModeType(%d)", int32(e))
+	}
+}
+
 type AMTunerSignalStrength int32
 
 const (
@@ -126,12 +359,40 @@ const (
 	AMTUNER_SIGNALPRESENT       AMTunerSignalStrength = 1
 )
 
+// String returns the AMTunerSignalStrength constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMTunerSignalStrength) String() string {
+	switch e {
+	case AMTUNER_HASNOSIGNALSTRENGTH:
+		return "AMTUNER_HASNOSIGNALSTRENGTH"
+	case AMTUNER_NOSIGNAL:
+		return "AMTUNER_NOSIGNAL"
+	case AMTUNER_SIGNALPRESENT:
+		return "AMTUNER_SIGNALPRESENT"
+	default:
+		return fmt.Sprintf("AMTunerSignalStrength(%d)", int32(e))
+	}
+}
+
 type AMTunerSubChannel int32
 
 const (
 	AMTUNER_SUBCHAN_NO_TUNE AMTunerSubChannel = -2
 	AMTUNER_SUBCHAN_DEFAULT AMTunerSubChannel = -1
 )
+
+// String returns the AMTunerSubChannel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMTunerSubChannel) String() string {
+	switch e {
+	case AMTUNER_SUBCHAN_NO_TUNE:
+		return "AMTUNER_SUBCHAN_NO_TUNE"
+	case AMTUNER_SUBCHAN_DEFAULT:
+		return "AMTUNER_SUBCHAN_DEFAULT"
+	default:
+		return fmt.Sprintf("AMTunerSubChannel(%d)", int32(e))
+	}
+}
 
 // AMVP_MODE: https://learn.microsoft.com/windows/win32/api/vptype/ne-vptype-amvp_mode
 type AMVP_MODE int32
@@ -144,6 +405,25 @@ const (
 	AMVP_MODE_SKIPODD           AMVP_MODE = 4
 )
 
+// String returns the AMVP_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMVP_MODE) String() string {
+	switch e {
+	case AMVP_MODE_WEAVE:
+		return "AMVP_MODE_WEAVE"
+	case AMVP_MODE_BOBINTERLEAVED:
+		return "AMVP_MODE_BOBINTERLEAVED"
+	case AMVP_MODE_BOBNONINTERLEAVED:
+		return "AMVP_MODE_BOBNONINTERLEAVED"
+	case AMVP_MODE_SKIPEVEN:
+		return "AMVP_MODE_SKIPEVEN"
+	case AMVP_MODE_SKIPODD:
+		return "AMVP_MODE_SKIPODD"
+	default:
+		return fmt.Sprintf("AMVP_MODE(%d)", int32(e))
+	}
+}
+
 // AMVP_SELECT_FORMAT_BY: https://learn.microsoft.com/windows/win32/api/vptype/ne-vptype-amvp_select_format_by
 type AMVP_SELECT_FORMAT_BY int32
 
@@ -152,6 +432,21 @@ const (
 	AMVP_BEST_BANDWIDTH       AMVP_SELECT_FORMAT_BY = 1
 	AMVP_INPUT_SAME_AS_OUTPUT AMVP_SELECT_FORMAT_BY = 2
 )
+
+// String returns the AMVP_SELECT_FORMAT_BY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMVP_SELECT_FORMAT_BY) String() string {
+	switch e {
+	case AMVP_DO_NOT_CARE:
+		return "AMVP_DO_NOT_CARE"
+	case AMVP_BEST_BANDWIDTH:
+		return "AMVP_BEST_BANDWIDTH"
+	case AMVP_INPUT_SAME_AS_OUTPUT:
+		return "AMVP_INPUT_SAME_AS_OUTPUT"
+	default:
+		return fmt.Sprintf("AMVP_SELECT_FORMAT_BY(%d)", int32(e))
+	}
+}
 
 // AM_ASPECT_RATIO_MODE: https://learn.microsoft.com/windows/win32/api/mpconfig/ne-mpconfig-am_aspect_ratio_mode
 type AM_ASPECT_RATIO_MODE int32
@@ -163,6 +458,23 @@ const (
 	AM_ARMODE_STRETCHED_AS_PRIMARY AM_ASPECT_RATIO_MODE = 3
 )
 
+// String returns the AM_ASPECT_RATIO_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_ASPECT_RATIO_MODE) String() string {
+	switch e {
+	case AM_ARMODE_STRETCHED:
+		return "AM_ARMODE_STRETCHED"
+	case AM_ARMODE_LETTER_BOX:
+		return "AM_ARMODE_LETTER_BOX"
+	case AM_ARMODE_CROP:
+		return "AM_ARMODE_CROP"
+	case AM_ARMODE_STRETCHED_AS_PRIMARY:
+		return "AM_ARMODE_STRETCHED_AS_PRIMARY"
+	default:
+		return fmt.Sprintf("AM_ASPECT_RATIO_MODE(%d)", int32(e))
+	}
+}
+
 // AM_COPY_MACROVISION_LEVEL: https://learn.microsoft.com/windows/win32/api/dvdmedia/ne-dvdmedia-am_copy_macrovision_level
 type AM_COPY_MACROVISION_LEVEL int32
 
@@ -173,6 +485,23 @@ const (
 	AM_MACROVISION_LEVEL3   AM_COPY_MACROVISION_LEVEL = 3
 )
 
+// String returns the AM_COPY_MACROVISION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_COPY_MACROVISION_LEVEL) String() string {
+	switch e {
+	case AM_MACROVISION_DISABLED:
+		return "AM_MACROVISION_DISABLED"
+	case AM_MACROVISION_LEVEL1:
+		return "AM_MACROVISION_LEVEL1"
+	case AM_MACROVISION_LEVEL2:
+		return "AM_MACROVISION_LEVEL2"
+	case AM_MACROVISION_LEVEL3:
+		return "AM_MACROVISION_LEVEL3"
+	default:
+		return fmt.Sprintf("AM_COPY_MACROVISION_LEVEL(%d)", int32(e))
+	}
+}
+
 type AM_DIGITAL_CP int32
 
 const (
@@ -180,6 +509,21 @@ const (
 	AM_DIGITAL_CP_ON            AM_DIGITAL_CP = 1
 	AM_DIGITAL_CP_DVD_COMPLIANT AM_DIGITAL_CP = 2
 )
+
+// String returns the AM_DIGITAL_CP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_DIGITAL_CP) String() string {
+	switch e {
+	case AM_DIGITAL_CP_OFF:
+		return "AM_DIGITAL_CP_OFF"
+	case AM_DIGITAL_CP_ON:
+		return "AM_DIGITAL_CP_ON"
+	case AM_DIGITAL_CP_DVD_COMPLIANT:
+		return "AM_DIGITAL_CP_DVD_COMPLIANT"
+	default:
+		return fmt.Sprintf("AM_DIGITAL_CP(%d)", int32(e))
+	}
+}
 
 // AM_DVDCOPYSTATE: https://learn.microsoft.com/windows/win32/api/dvdmedia/ne-dvdmedia-am_dvdcopystate
 type AM_DVDCOPYSTATE int32
@@ -191,6 +535,25 @@ const (
 	AM_DVDCOPYSTATE_AUTHENTICATION_REQUIRED     AM_DVDCOPYSTATE = 3
 	AM_DVDCOPYSTATE_DONE                        AM_DVDCOPYSTATE = 4
 )
+
+// String returns the AM_DVDCOPYSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_DVDCOPYSTATE) String() string {
+	switch e {
+	case AM_DVDCOPYSTATE_INITIALIZE:
+		return "AM_DVDCOPYSTATE_INITIALIZE"
+	case AM_DVDCOPYSTATE_INITIALIZE_TITLE:
+		return "AM_DVDCOPYSTATE_INITIALIZE_TITLE"
+	case AM_DVDCOPYSTATE_AUTHENTICATION_NOT_REQUIRED:
+		return "AM_DVDCOPYSTATE_AUTHENTICATION_NOT_REQUIRED"
+	case AM_DVDCOPYSTATE_AUTHENTICATION_REQUIRED:
+		return "AM_DVDCOPYSTATE_AUTHENTICATION_REQUIRED"
+	case AM_DVDCOPYSTATE_DONE:
+		return "AM_DVDCOPYSTATE_DONE"
+	default:
+		return fmt.Sprintf("AM_DVDCOPYSTATE(%d)", int32(e))
+	}
+}
 
 // AM_DVD_GRAPH_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-am_dvd_graph_flags
 type AM_DVD_GRAPH_FLAGS int32
@@ -209,6 +572,37 @@ const (
 	AM_DVD_MASK         AM_DVD_GRAPH_FLAGS = 65535
 )
 
+// String returns the AM_DVD_GRAPH_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_DVD_GRAPH_FLAGS) String() string {
+	switch e {
+	case AM_DVD_HWDEC_PREFER:
+		return "AM_DVD_HWDEC_PREFER"
+	case AM_DVD_HWDEC_ONLY:
+		return "AM_DVD_HWDEC_ONLY"
+	case AM_DVD_SWDEC_PREFER:
+		return "AM_DVD_SWDEC_PREFER"
+	case AM_DVD_SWDEC_ONLY:
+		return "AM_DVD_SWDEC_ONLY"
+	case AM_DVD_NOVPE:
+		return "AM_DVD_NOVPE"
+	case AM_DVD_DO_NOT_CLEAR:
+		return "AM_DVD_DO_NOT_CLEAR"
+	case AM_DVD_VMR9_ONLY:
+		return "AM_DVD_VMR9_ONLY"
+	case AM_DVD_EVR_ONLY:
+		return "AM_DVD_EVR_ONLY"
+	case AM_DVD_EVR_QOS:
+		return "AM_DVD_EVR_QOS"
+	case AM_DVD_ADAPT_GRAPH:
+		return "AM_DVD_ADAPT_GRAPH"
+	case AM_DVD_MASK:
+		return "AM_DVD_MASK"
+	default:
+		return fmt.Sprintf("AM_DVD_GRAPH_FLAGS(%d)", int32(e))
+	}
+}
+
 // AM_DVD_STREAM_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-am_dvd_stream_flags
 type AM_DVD_STREAM_FLAGS int32
 
@@ -218,17 +612,54 @@ const (
 	AM_DVD_STREAM_SUBPIC AM_DVD_STREAM_FLAGS = 4
 )
 
+// String returns the AM_DVD_STREAM_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_DVD_STREAM_FLAGS) String() string {
+	switch e {
+	case AM_DVD_STREAM_VIDEO:
+		return "AM_DVD_STREAM_VIDEO"
+	case AM_DVD_STREAM_AUDIO:
+		return "AM_DVD_STREAM_AUDIO"
+	case AM_DVD_STREAM_SUBPIC:
+		return "AM_DVD_STREAM_SUBPIC"
+	default:
+		return fmt.Sprintf("AM_DVD_STREAM_FLAGS(%d)", int32(e))
+	}
+}
+
 type AM_FILESINK_FLAGS int32
 
 const (
 	AM_FILE_OVERWRITE AM_FILESINK_FLAGS = 1
 )
 
+// String returns the AM_FILESINK_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_FILESINK_FLAGS) String() string {
+	switch e {
+	case AM_FILE_OVERWRITE:
+		return "AM_FILE_OVERWRITE"
+	default:
+		return fmt.Sprintf("AM_FILESINK_FLAGS(%d)", int32(e))
+	}
+}
+
 type AM_FILTER_FLAGS int32
 
 const (
 	AM_FILTER_FLAGS_REMOVABLE AM_FILTER_FLAGS = 1
 )
+
+// String returns the AM_FILTER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_FILTER_FLAGS) String() string {
+	switch e {
+	case AM_FILTER_FLAGS_REMOVABLE:
+		return "AM_FILTER_FLAGS_REMOVABLE"
+	default:
+		return fmt.Sprintf("AM_FILTER_FLAGS(%d)", int32(e))
+	}
+}
 
 // AM_GRAPH_CONFIG_RECONNECT_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-am_graph_config_reconnect_flags
 type AM_GRAPH_CONFIG_RECONNECT_FLAGS int32
@@ -239,12 +670,38 @@ const (
 	AM_GRAPH_CONFIG_RECONNECT_USE_ONLY_CACHED_FILTERS AM_GRAPH_CONFIG_RECONNECT_FLAGS = 4
 )
 
+// String returns the AM_GRAPH_CONFIG_RECONNECT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_GRAPH_CONFIG_RECONNECT_FLAGS) String() string {
+	switch e {
+	case AM_GRAPH_CONFIG_RECONNECT_DIRECTCONNECT:
+		return "AM_GRAPH_CONFIG_RECONNECT_DIRECTCONNECT"
+	case AM_GRAPH_CONFIG_RECONNECT_CACHE_REMOVED_FILTERS:
+		return "AM_GRAPH_CONFIG_RECONNECT_CACHE_REMOVED_FILTERS"
+	case AM_GRAPH_CONFIG_RECONNECT_USE_ONLY_CACHED_FILTERS:
+		return "AM_GRAPH_CONFIG_RECONNECT_USE_ONLY_CACHED_FILTERS"
+	default:
+		return fmt.Sprintf("AM_GRAPH_CONFIG_RECONNECT_FLAGS(%d)", int32(e))
+	}
+}
+
 // AM_LINE21_CCLEVEL: https://learn.microsoft.com/windows/win32/api/il21dec/ne-il21dec-am_line21_cclevel
 type AM_LINE21_CCLEVEL int32
 
 const (
 	AM_L21_CCLEVEL_TC2 AM_LINE21_CCLEVEL = 0
 )
+
+// String returns the AM_LINE21_CCLEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_LINE21_CCLEVEL) String() string {
+	switch e {
+	case AM_L21_CCLEVEL_TC2:
+		return "AM_L21_CCLEVEL_TC2"
+	default:
+		return fmt.Sprintf("AM_LINE21_CCLEVEL(%d)", int32(e))
+	}
+}
 
 // AM_LINE21_CCSERVICE: https://learn.microsoft.com/windows/win32/api/il21dec/ne-il21dec-am_line21_ccservice
 type AM_LINE21_CCSERVICE int32
@@ -260,6 +717,31 @@ const (
 	AM_L21_CCSERVICE_Invalid    AM_LINE21_CCSERVICE = 11
 )
 
+// String returns the AM_LINE21_CCSERVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_LINE21_CCSERVICE) String() string {
+	switch e {
+	case AM_L21_CCSERVICE_None:
+		return "AM_L21_CCSERVICE_None"
+	case AM_L21_CCSERVICE_Caption1:
+		return "AM_L21_CCSERVICE_Caption1"
+	case AM_L21_CCSERVICE_Caption2:
+		return "AM_L21_CCSERVICE_Caption2"
+	case AM_L21_CCSERVICE_Text1:
+		return "AM_L21_CCSERVICE_Text1"
+	case AM_L21_CCSERVICE_Text2:
+		return "AM_L21_CCSERVICE_Text2"
+	case AM_L21_CCSERVICE_XDS:
+		return "AM_L21_CCSERVICE_XDS"
+	case AM_L21_CCSERVICE_DefChannel:
+		return "AM_L21_CCSERVICE_DefChannel"
+	case AM_L21_CCSERVICE_Invalid:
+		return "AM_L21_CCSERVICE_Invalid"
+	default:
+		return fmt.Sprintf("AM_LINE21_CCSERVICE(%d)", int32(e))
+	}
+}
+
 // AM_LINE21_CCSTATE: https://learn.microsoft.com/windows/win32/api/il21dec/ne-il21dec-am_line21_ccstate
 type AM_LINE21_CCSTATE int32
 
@@ -267,6 +749,19 @@ const (
 	AM_L21_CCSTATE_Off AM_LINE21_CCSTATE = 0
 	AM_L21_CCSTATE_On  AM_LINE21_CCSTATE = 1
 )
+
+// String returns the AM_LINE21_CCSTATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_LINE21_CCSTATE) String() string {
+	switch e {
+	case AM_L21_CCSTATE_Off:
+		return "AM_L21_CCSTATE_Off"
+	case AM_L21_CCSTATE_On:
+		return "AM_L21_CCSTATE_On"
+	default:
+		return fmt.Sprintf("AM_LINE21_CCSTATE(%d)", int32(e))
+	}
+}
 
 type AM_LINE21_CCSTYLE int32
 
@@ -277,6 +772,23 @@ const (
 	AM_L21_CCSTYLE_RollUp  AM_LINE21_CCSTYLE = 3
 )
 
+// String returns the AM_LINE21_CCSTYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_LINE21_CCSTYLE) String() string {
+	switch e {
+	case AM_L21_CCSTYLE_None:
+		return "AM_L21_CCSTYLE_None"
+	case AM_L21_CCSTYLE_PopOn:
+		return "AM_L21_CCSTYLE_PopOn"
+	case AM_L21_CCSTYLE_PaintOn:
+		return "AM_L21_CCSTYLE_PaintOn"
+	case AM_L21_CCSTYLE_RollUp:
+		return "AM_L21_CCSTYLE_RollUp"
+	default:
+		return fmt.Sprintf("AM_LINE21_CCSTYLE(%d)", int32(e))
+	}
+}
+
 // AM_LINE21_DRAWBGMODE: https://learn.microsoft.com/windows/win32/api/il21dec/ne-il21dec-am_line21_drawbgmode
 type AM_LINE21_DRAWBGMODE int32
 
@@ -285,11 +797,35 @@ const (
 	AM_L21_DRAWBGMODE_Transparent AM_LINE21_DRAWBGMODE = 1
 )
 
+// String returns the AM_LINE21_DRAWBGMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_LINE21_DRAWBGMODE) String() string {
+	switch e {
+	case AM_L21_DRAWBGMODE_Opaque:
+		return "AM_L21_DRAWBGMODE_Opaque"
+	case AM_L21_DRAWBGMODE_Transparent:
+		return "AM_L21_DRAWBGMODE_Transparent"
+	default:
+		return fmt.Sprintf("AM_LINE21_DRAWBGMODE(%d)", int32(e))
+	}
+}
+
 type AM_MEDIAEVENT_FLAGS int32
 
 const (
 	AM_MEDIAEVENT_NONOTIFY AM_MEDIAEVENT_FLAGS = 1
 )
+
+// String returns the AM_MEDIAEVENT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_MEDIAEVENT_FLAGS) String() string {
+	switch e {
+	case AM_MEDIAEVENT_NONOTIFY:
+		return "AM_MEDIAEVENT_NONOTIFY"
+	default:
+		return fmt.Sprintf("AM_MEDIAEVENT_FLAGS(%d)", int32(e))
+	}
+}
 
 // AM_MPEG2Level: https://learn.microsoft.com/windows/win32/api/dvdmedia/ne-dvdmedia-am_mpeg2level
 type AM_MPEG2Level int32
@@ -300,6 +836,23 @@ const (
 	AM_MPEG2Level_High1440 AM_MPEG2Level = 3
 	AM_MPEG2Level_High     AM_MPEG2Level = 4
 )
+
+// String returns the AM_MPEG2Level constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_MPEG2Level) String() string {
+	switch e {
+	case AM_MPEG2Level_Low:
+		return "AM_MPEG2Level_Low"
+	case AM_MPEG2Level_Main:
+		return "AM_MPEG2Level_Main"
+	case AM_MPEG2Level_High1440:
+		return "AM_MPEG2Level_High1440"
+	case AM_MPEG2Level_High:
+		return "AM_MPEG2Level_High"
+	default:
+		return fmt.Sprintf("AM_MPEG2Level(%d)", int32(e))
+	}
+}
 
 // AM_MPEG2Profile: https://learn.microsoft.com/windows/win32/api/dvdmedia/ne-dvdmedia-am_mpeg2profile
 type AM_MPEG2Profile int32
@@ -312,6 +865,25 @@ const (
 	AM_MPEG2Profile_High              AM_MPEG2Profile = 5
 )
 
+// String returns the AM_MPEG2Profile constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_MPEG2Profile) String() string {
+	switch e {
+	case AM_MPEG2Profile_Simple:
+		return "AM_MPEG2Profile_Simple"
+	case AM_MPEG2Profile_Main:
+		return "AM_MPEG2Profile_Main"
+	case AM_MPEG2Profile_SNRScalable:
+		return "AM_MPEG2Profile_SNRScalable"
+	case AM_MPEG2Profile_SpatiallyScalable:
+		return "AM_MPEG2Profile_SpatiallyScalable"
+	case AM_MPEG2Profile_High:
+		return "AM_MPEG2Profile_High"
+	default:
+		return fmt.Sprintf("AM_MPEG2Profile(%d)", int32(e))
+	}
+}
+
 type AM_PROPERTY_AC3 int32
 
 const (
@@ -323,6 +895,29 @@ const (
 	AM_PROPERTY_AC3_LANGUAGE_CODE     AM_PROPERTY_AC3 = 6
 	AM_PROPERTY_AC3_ROOM_TYPE         AM_PROPERTY_AC3 = 7
 )
+
+// String returns the AM_PROPERTY_AC3 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_PROPERTY_AC3) String() string {
+	switch e {
+	case AM_PROPERTY_AC3_ERROR_CONCEALMENT:
+		return "AM_PROPERTY_AC3_ERROR_CONCEALMENT"
+	case AM_PROPERTY_AC3_ALTERNATE_AUDIO:
+		return "AM_PROPERTY_AC3_ALTERNATE_AUDIO"
+	case AM_PROPERTY_AC3_DOWNMIX:
+		return "AM_PROPERTY_AC3_DOWNMIX"
+	case AM_PROPERTY_AC3_BIT_STREAM_MODE:
+		return "AM_PROPERTY_AC3_BIT_STREAM_MODE"
+	case AM_PROPERTY_AC3_DIALOGUE_LEVEL:
+		return "AM_PROPERTY_AC3_DIALOGUE_LEVEL"
+	case AM_PROPERTY_AC3_LANGUAGE_CODE:
+		return "AM_PROPERTY_AC3_LANGUAGE_CODE"
+	case AM_PROPERTY_AC3_ROOM_TYPE:
+		return "AM_PROPERTY_AC3_ROOM_TYPE"
+	default:
+		return fmt.Sprintf("AM_PROPERTY_AC3(%d)", int32(e))
+	}
+}
 
 type AM_PROPERTY_DVDCOPYPROT int32
 
@@ -341,12 +936,58 @@ const (
 	AM_PROPERTY_DVDCOPY_DISC_KEY              AM_PROPERTY_DVDCOPYPROT = 128
 )
 
+// String returns the AM_PROPERTY_DVDCOPYPROT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_PROPERTY_DVDCOPYPROT) String() string {
+	switch e {
+	case AM_PROPERTY_DVDCOPY_CHLG_KEY:
+		return "AM_PROPERTY_DVDCOPY_CHLG_KEY"
+	case AM_PROPERTY_DVDCOPY_DVD_KEY1:
+		return "AM_PROPERTY_DVDCOPY_DVD_KEY1"
+	case AM_PROPERTY_DVDCOPY_DEC_KEY2:
+		return "AM_PROPERTY_DVDCOPY_DEC_KEY2"
+	case AM_PROPERTY_DVDCOPY_TITLE_KEY:
+		return "AM_PROPERTY_DVDCOPY_TITLE_KEY"
+	case AM_PROPERTY_COPY_MACROVISION:
+		return "AM_PROPERTY_COPY_MACROVISION"
+	case AM_PROPERTY_DVDCOPY_REGION:
+		return "AM_PROPERTY_DVDCOPY_REGION"
+	case AM_PROPERTY_DVDCOPY_SET_COPY_STATE:
+		return "AM_PROPERTY_DVDCOPY_SET_COPY_STATE"
+	case AM_PROPERTY_COPY_ANALOG_COMPONENT:
+		return "AM_PROPERTY_COPY_ANALOG_COMPONENT"
+	case AM_PROPERTY_COPY_DIGITAL_CP:
+		return "AM_PROPERTY_COPY_DIGITAL_CP"
+	case AM_PROPERTY_COPY_DVD_SRM:
+		return "AM_PROPERTY_COPY_DVD_SRM"
+	case AM_PROPERTY_DVDCOPY_SUPPORTS_NEW_KEYCOUNT:
+		return "AM_PROPERTY_DVDCOPY_SUPPORTS_NEW_KEYCOUNT"
+	case AM_PROPERTY_DVDCOPY_DISC_KEY:
+		return "AM_PROPERTY_DVDCOPY_DISC_KEY"
+	default:
+		return fmt.Sprintf("AM_PROPERTY_DVDCOPYPROT(%d)", int32(e))
+	}
+}
+
 type AM_PROPERTY_DVDKARAOKE int32
 
 const (
 	AM_PROPERTY_DVDKARAOKE_ENABLE AM_PROPERTY_DVDKARAOKE = 0
 	AM_PROPERTY_DVDKARAOKE_DATA   AM_PROPERTY_DVDKARAOKE = 1
 )
+
+// String returns the AM_PROPERTY_DVDKARAOKE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_PROPERTY_DVDKARAOKE) String() string {
+	switch e {
+	case AM_PROPERTY_DVDKARAOKE_ENABLE:
+		return "AM_PROPERTY_DVDKARAOKE_ENABLE"
+	case AM_PROPERTY_DVDKARAOKE_DATA:
+		return "AM_PROPERTY_DVDKARAOKE_DATA"
+	default:
+		return fmt.Sprintf("AM_PROPERTY_DVDKARAOKE(%d)", int32(e))
+	}
+}
 
 type AM_PROPERTY_DVDSUBPIC int32
 
@@ -355,6 +996,21 @@ const (
 	AM_PROPERTY_DVDSUBPIC_HLI         AM_PROPERTY_DVDSUBPIC = 1
 	AM_PROPERTY_DVDSUBPIC_COMPOSIT_ON AM_PROPERTY_DVDSUBPIC = 2
 )
+
+// String returns the AM_PROPERTY_DVDSUBPIC constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_PROPERTY_DVDSUBPIC) String() string {
+	switch e {
+	case AM_PROPERTY_DVDSUBPIC_PALETTE:
+		return "AM_PROPERTY_DVDSUBPIC_PALETTE"
+	case AM_PROPERTY_DVDSUBPIC_HLI:
+		return "AM_PROPERTY_DVDSUBPIC_HLI"
+	case AM_PROPERTY_DVDSUBPIC_COMPOSIT_ON:
+		return "AM_PROPERTY_DVDSUBPIC_COMPOSIT_ON"
+	default:
+		return fmt.Sprintf("AM_PROPERTY_DVDSUBPIC(%d)", int32(e))
+	}
+}
 
 // AM_PROPERTY_DVD_RATE_CHANGE: https://learn.microsoft.com/windows/win32/api/dvdmedia/ne-dvdmedia-am_property_dvd_rate_change
 type AM_PROPERTY_DVD_RATE_CHANGE int32
@@ -367,6 +1023,25 @@ const (
 	AM_RATE_DecoderVersion  AM_PROPERTY_DVD_RATE_CHANGE = 5
 )
 
+// String returns the AM_PROPERTY_DVD_RATE_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_PROPERTY_DVD_RATE_CHANGE) String() string {
+	switch e {
+	case AM_RATE_ChangeRate:
+		return "AM_RATE_ChangeRate"
+	case AM_RATE_FullDataRateMax:
+		return "AM_RATE_FullDataRateMax"
+	case AM_RATE_ReverseDecode:
+		return "AM_RATE_ReverseDecode"
+	case AM_RATE_DecoderPosition:
+		return "AM_RATE_DecoderPosition"
+	case AM_RATE_DecoderVersion:
+		return "AM_RATE_DecoderVersion"
+	default:
+		return fmt.Sprintf("AM_PROPERTY_DVD_RATE_CHANGE(%d)", int32(e))
+	}
+}
+
 type AM_PROPERTY_FRAMESTEP int32
 
 const (
@@ -375,6 +1050,23 @@ const (
 	AM_PROPERTY_FRAMESTEP_CANSTEP         AM_PROPERTY_FRAMESTEP = 3
 	AM_PROPERTY_FRAMESTEP_CANSTEPMULTIPLE AM_PROPERTY_FRAMESTEP = 4
 )
+
+// String returns the AM_PROPERTY_FRAMESTEP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_PROPERTY_FRAMESTEP) String() string {
+	switch e {
+	case AM_PROPERTY_FRAMESTEP_STEP:
+		return "AM_PROPERTY_FRAMESTEP_STEP"
+	case AM_PROPERTY_FRAMESTEP_CANCEL:
+		return "AM_PROPERTY_FRAMESTEP_CANCEL"
+	case AM_PROPERTY_FRAMESTEP_CANSTEP:
+		return "AM_PROPERTY_FRAMESTEP_CANSTEP"
+	case AM_PROPERTY_FRAMESTEP_CANSTEPMULTIPLE:
+		return "AM_PROPERTY_FRAMESTEP_CANSTEPMULTIPLE"
+	default:
+		return fmt.Sprintf("AM_PROPERTY_FRAMESTEP(%d)", int32(e))
+	}
+}
 
 type AM_PROPERTY_TS_RATE_CHANGE int32
 
@@ -392,6 +1084,37 @@ const (
 	AM_RATE_QueryMapping           AM_PROPERTY_TS_RATE_CHANGE = 11
 )
 
+// String returns the AM_PROPERTY_TS_RATE_CHANGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_PROPERTY_TS_RATE_CHANGE) String() string {
+	switch e {
+	case AM_RATE_SimpleRateChange:
+		return "AM_RATE_SimpleRateChange"
+	case AM_RATE_ExactRateChange:
+		return "AM_RATE_ExactRateChange"
+	case AM_RATE_MaxFullDataRate:
+		return "AM_RATE_MaxFullDataRate"
+	case AM_RATE_Step:
+		return "AM_RATE_Step"
+	case AM_RATE_UseRateVersion:
+		return "AM_RATE_UseRateVersion"
+	case AM_RATE_QueryFullFrameRate:
+		return "AM_RATE_QueryFullFrameRate"
+	case AM_RATE_QueryLastRateSegPTS:
+		return "AM_RATE_QueryLastRateSegPTS"
+	case AM_RATE_CorrectTS:
+		return "AM_RATE_CorrectTS"
+	case AM_RATE_ReverseMaxFullDataRate:
+		return "AM_RATE_ReverseMaxFullDataRate"
+	case AM_RATE_ResetOnTimeDisc:
+		return "AM_RATE_ResetOnTimeDisc"
+	case AM_RATE_QueryMapping:
+		return "AM_RATE_QueryMapping"
+	default:
+		return fmt.Sprintf("AM_PROPERTY_TS_RATE_CHANGE(%d)", int32(e))
+	}
+}
+
 type AM_SAMPLE_PROPERTY_FLAGS int32
 
 const (
@@ -408,6 +1131,35 @@ const (
 	AM_STREAM_CONTROL           AM_SAMPLE_PROPERTY_FLAGS = 1
 )
 
+// String returns the AM_SAMPLE_PROPERTY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_SAMPLE_PROPERTY_FLAGS) String() string {
+	switch e {
+	case AM_SAMPLE_SPLICEPOINT:
+		return "AM_SAMPLE_SPLICEPOINT"
+	case AM_SAMPLE_PREROLL:
+		return "AM_SAMPLE_PREROLL"
+	case AM_SAMPLE_DATADISCONTINUITY:
+		return "AM_SAMPLE_DATADISCONTINUITY"
+	case AM_SAMPLE_TYPECHANGED:
+		return "AM_SAMPLE_TYPECHANGED"
+	case AM_SAMPLE_TIMEVALID:
+		return "AM_SAMPLE_TIMEVALID"
+	case AM_SAMPLE_TIMEDISCONTINUITY:
+		return "AM_SAMPLE_TIMEDISCONTINUITY"
+	case AM_SAMPLE_FLUSH_ON_PAUSE:
+		return "AM_SAMPLE_FLUSH_ON_PAUSE"
+	case AM_SAMPLE_STOPVALID:
+		return "AM_SAMPLE_STOPVALID"
+	case AM_SAMPLE_ENDOFSTREAM:
+		return "AM_SAMPLE_ENDOFSTREAM"
+	case AM_STREAM_MEDIA:
+		return "AM_STREAM_MEDIA"
+	default:
+		return fmt.Sprintf("AM_SAMPLE_PROPERTY_FLAGS(%d)", int32(e))
+	}
+}
+
 // AM_SEEKING_SEEKING_CAPABILITIES: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-am_seeking_seeking_capabilities
 type AM_SEEKING_SEEKING_CAPABILITIES int32
 
@@ -423,6 +1175,33 @@ const (
 	AM_SEEKING_Source           AM_SEEKING_SEEKING_CAPABILITIES = 256
 )
 
+// String returns the AM_SEEKING_SEEKING_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_SEEKING_SEEKING_CAPABILITIES) String() string {
+	switch e {
+	case AM_SEEKING_CanSeekAbsolute:
+		return "AM_SEEKING_CanSeekAbsolute"
+	case AM_SEEKING_CanSeekForwards:
+		return "AM_SEEKING_CanSeekForwards"
+	case AM_SEEKING_CanSeekBackwards:
+		return "AM_SEEKING_CanSeekBackwards"
+	case AM_SEEKING_CanGetCurrentPos:
+		return "AM_SEEKING_CanGetCurrentPos"
+	case AM_SEEKING_CanGetStopPos:
+		return "AM_SEEKING_CanGetStopPos"
+	case AM_SEEKING_CanGetDuration:
+		return "AM_SEEKING_CanGetDuration"
+	case AM_SEEKING_CanPlayBackwards:
+		return "AM_SEEKING_CanPlayBackwards"
+	case AM_SEEKING_CanDoSegments:
+		return "AM_SEEKING_CanDoSegments"
+	case AM_SEEKING_Source:
+		return "AM_SEEKING_Source"
+	default:
+		return fmt.Sprintf("AM_SEEKING_SEEKING_CAPABILITIES(%d)", int32(e))
+	}
+}
+
 type AM_SEEKING_SEEKING_FLAGS int32
 
 const (
@@ -437,6 +1216,31 @@ const (
 	AM_SEEKING_NoFlush                AM_SEEKING_SEEKING_FLAGS = 32
 )
 
+// String returns the AM_SEEKING_SEEKING_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_SEEKING_SEEKING_FLAGS) String() string {
+	switch e {
+	case AM_SEEKING_NoPositioning:
+		return "AM_SEEKING_NoPositioning"
+	case AM_SEEKING_AbsolutePositioning:
+		return "AM_SEEKING_AbsolutePositioning"
+	case AM_SEEKING_RelativePositioning:
+		return "AM_SEEKING_RelativePositioning"
+	case AM_SEEKING_IncrementalPositioning:
+		return "AM_SEEKING_IncrementalPositioning"
+	case AM_SEEKING_SeekToKeyFrame:
+		return "AM_SEEKING_SeekToKeyFrame"
+	case AM_SEEKING_ReturnTime:
+		return "AM_SEEKING_ReturnTime"
+	case AM_SEEKING_Segment:
+		return "AM_SEEKING_Segment"
+	case AM_SEEKING_NoFlush:
+		return "AM_SEEKING_NoFlush"
+	default:
+		return fmt.Sprintf("AM_SEEKING_SEEKING_FLAGS(%d)", int32(e))
+	}
+}
+
 // AM_STREAM_INFO_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-am_stream_info_flags
 type AM_STREAM_INFO_FLAGS int32
 
@@ -447,6 +1251,23 @@ const (
 	AM_STREAM_INFO_STOP_SEND_EXTRA AM_STREAM_INFO_FLAGS = 16
 )
 
+// String returns the AM_STREAM_INFO_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_STREAM_INFO_FLAGS) String() string {
+	switch e {
+	case AM_STREAM_INFO_START_DEFINED:
+		return "AM_STREAM_INFO_START_DEFINED"
+	case AM_STREAM_INFO_STOP_DEFINED:
+		return "AM_STREAM_INFO_STOP_DEFINED"
+	case AM_STREAM_INFO_DISCARDING:
+		return "AM_STREAM_INFO_DISCARDING"
+	case AM_STREAM_INFO_STOP_SEND_EXTRA:
+		return "AM_STREAM_INFO_STOP_SEND_EXTRA"
+	default:
+		return fmt.Sprintf("AM_STREAM_INFO_FLAGS(%d)", int32(e))
+	}
+}
+
 // AM_WST_DRAWBGMODE: https://learn.microsoft.com/windows/win32/api/iwstdec/ne-iwstdec-am_wst_drawbgmode
 type AM_WST_DRAWBGMODE int32
 
@@ -455,12 +1276,36 @@ const (
 	AM_WST_DRAWBGMODE_Transparent AM_WST_DRAWBGMODE = 1
 )
 
+// String returns the AM_WST_DRAWBGMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_WST_DRAWBGMODE) String() string {
+	switch e {
+	case AM_WST_DRAWBGMODE_Opaque:
+		return "AM_WST_DRAWBGMODE_Opaque"
+	case AM_WST_DRAWBGMODE_Transparent:
+		return "AM_WST_DRAWBGMODE_Transparent"
+	default:
+		return fmt.Sprintf("AM_WST_DRAWBGMODE(%d)", int32(e))
+	}
+}
+
 // AM_WST_LEVEL: https://learn.microsoft.com/windows/win32/api/iwstdec/ne-iwstdec-am_wst_level
 type AM_WST_LEVEL int32
 
 const (
 	AM_WST_LEVEL_1_5 AM_WST_LEVEL = 0
 )
+
+// String returns the AM_WST_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_WST_LEVEL) String() string {
+	switch e {
+	case AM_WST_LEVEL_1_5:
+		return "AM_WST_LEVEL_1_5"
+	default:
+		return fmt.Sprintf("AM_WST_LEVEL(%d)", int32(e))
+	}
+}
 
 // AM_WST_SERVICE: https://learn.microsoft.com/windows/win32/api/iwstdec/ne-iwstdec-am_wst_service
 type AM_WST_SERVICE int32
@@ -472,6 +1317,23 @@ const (
 	AM_WST_SERVICE_Invalid AM_WST_SERVICE = 3
 )
 
+// String returns the AM_WST_SERVICE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_WST_SERVICE) String() string {
+	switch e {
+	case AM_WST_SERVICE_None:
+		return "AM_WST_SERVICE_None"
+	case AM_WST_SERVICE_Text:
+		return "AM_WST_SERVICE_Text"
+	case AM_WST_SERVICE_IDS:
+		return "AM_WST_SERVICE_IDS"
+	case AM_WST_SERVICE_Invalid:
+		return "AM_WST_SERVICE_Invalid"
+	default:
+		return fmt.Sprintf("AM_WST_SERVICE(%d)", int32(e))
+	}
+}
+
 // AM_WST_STATE: https://learn.microsoft.com/windows/win32/api/iwstdec/ne-iwstdec-am_wst_state
 type AM_WST_STATE int32
 
@@ -479,6 +1341,19 @@ const (
 	AM_WST_STATE_Off AM_WST_STATE = 0
 	AM_WST_STATE_On  AM_WST_STATE = 1
 )
+
+// String returns the AM_WST_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_WST_STATE) String() string {
+	switch e {
+	case AM_WST_STATE_Off:
+		return "AM_WST_STATE_Off"
+	case AM_WST_STATE_On:
+		return "AM_WST_STATE_On"
+	default:
+		return fmt.Sprintf("AM_WST_STATE(%d)", int32(e))
+	}
+}
 
 // AM_WST_STYLE: https://learn.microsoft.com/windows/win32/api/iwstdec/ne-iwstdec-am_wst_style
 type AM_WST_STYLE int32
@@ -488,11 +1363,35 @@ const (
 	AM_WST_STYLE_Invers AM_WST_STYLE = 1
 )
 
+// String returns the AM_WST_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_WST_STYLE) String() string {
+	switch e {
+	case AM_WST_STYLE_None:
+		return "AM_WST_STYLE_None"
+	case AM_WST_STYLE_Invers:
+		return "AM_WST_STYLE_Invers"
+	default:
+		return fmt.Sprintf("AM_WST_STYLE(%d)", int32(e))
+	}
+}
+
 type ATSCComponentTypeFlags int32
 
 const (
 	ATSCCT_AC3 ATSCComponentTypeFlags = 1
 )
+
+// String returns the ATSCComponentTypeFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ATSCComponentTypeFlags) String() string {
+	switch e {
+	case ATSCCT_AC3:
+		return "ATSCCT_AC3"
+	default:
+		return fmt.Sprintf("ATSCComponentTypeFlags(%d)", int32(e))
+	}
+}
 
 // AnalogVideoStandard: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-analogvideostandard
 type AnalogVideoStandard int32
@@ -524,6 +1423,63 @@ const (
 	AnalogVideoMask_MCE_SECAM AnalogVideoStandard = 1044480
 )
 
+// String returns the AnalogVideoStandard constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AnalogVideoStandard) String() string {
+	switch e {
+	case AnalogVideo_None:
+		return "AnalogVideo_None"
+	case AnalogVideo_NTSC_M:
+		return "AnalogVideo_NTSC_M"
+	case AnalogVideo_NTSC_M_J:
+		return "AnalogVideo_NTSC_M_J"
+	case AnalogVideo_NTSC_433:
+		return "AnalogVideo_NTSC_433"
+	case AnalogVideo_PAL_B:
+		return "AnalogVideo_PAL_B"
+	case AnalogVideo_PAL_D:
+		return "AnalogVideo_PAL_D"
+	case AnalogVideo_PAL_G:
+		return "AnalogVideo_PAL_G"
+	case AnalogVideo_PAL_H:
+		return "AnalogVideo_PAL_H"
+	case AnalogVideo_PAL_I:
+		return "AnalogVideo_PAL_I"
+	case AnalogVideo_PAL_M:
+		return "AnalogVideo_PAL_M"
+	case AnalogVideo_PAL_N:
+		return "AnalogVideo_PAL_N"
+	case AnalogVideo_PAL_60:
+		return "AnalogVideo_PAL_60"
+	case AnalogVideo_SECAM_B:
+		return "AnalogVideo_SECAM_B"
+	case AnalogVideo_SECAM_D:
+		return "AnalogVideo_SECAM_D"
+	case AnalogVideo_SECAM_G:
+		return "AnalogVideo_SECAM_G"
+	case AnalogVideo_SECAM_H:
+		return "AnalogVideo_SECAM_H"
+	case AnalogVideo_SECAM_K:
+		return "AnalogVideo_SECAM_K"
+	case AnalogVideo_SECAM_K1:
+		return "AnalogVideo_SECAM_K1"
+	case AnalogVideo_SECAM_L:
+		return "AnalogVideo_SECAM_L"
+	case AnalogVideo_SECAM_L1:
+		return "AnalogVideo_SECAM_L1"
+	case AnalogVideo_PAL_N_COMBO:
+		return "AnalogVideo_PAL_N_COMBO"
+	case AnalogVideoMask_MCE_NTSC:
+		return "AnalogVideoMask_MCE_NTSC"
+	case AnalogVideoMask_MCE_PAL:
+		return "AnalogVideoMask_MCE_PAL"
+	case AnalogVideoMask_MCE_SECAM:
+		return "AnalogVideoMask_MCE_SECAM"
+	default:
+		return fmt.Sprintf("AnalogVideoStandard(%d)", int32(e))
+	}
+}
+
 type ApplicationTypeType int32
 
 const (
@@ -538,12 +1494,52 @@ const (
 	SCTE28_Reserved                     ApplicationTypeType = 8
 )
 
+// String returns the ApplicationTypeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ApplicationTypeType) String() string {
+	switch e {
+	case SCTE28_ConditionalAccess:
+		return "SCTE28_ConditionalAccess"
+	case SCTE28_POD_Host_Binding_Information:
+		return "SCTE28_POD_Host_Binding_Information"
+	case SCTE28_IPService:
+		return "SCTE28_IPService"
+	case SCTE28_NetworkInterface_SCTE55_2:
+		return "SCTE28_NetworkInterface_SCTE55_2"
+	case SCTE28_NetworkInterface_SCTE55_1:
+		return "SCTE28_NetworkInterface_SCTE55_1"
+	case SCTE28_CopyProtection:
+		return "SCTE28_CopyProtection"
+	case SCTE28_Diagnostic:
+		return "SCTE28_Diagnostic"
+	case SCTE28_Undesignated:
+		return "SCTE28_Undesignated"
+	case SCTE28_Reserved:
+		return "SCTE28_Reserved"
+	default:
+		return fmt.Sprintf("ApplicationTypeType(%d)", int32(e))
+	}
+}
+
 type BDA_CHANGE_STATE int32
 
 const (
 	BDA_CHANGES_COMPLETE BDA_CHANGE_STATE = 0
 	BDA_CHANGES_PENDING  BDA_CHANGE_STATE = 1
 )
+
+// String returns the BDA_CHANGE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_CHANGE_STATE) String() string {
+	switch e {
+	case BDA_CHANGES_COMPLETE:
+		return "BDA_CHANGES_COMPLETE"
+	case BDA_CHANGES_PENDING:
+		return "BDA_CHANGES_PENDING"
+	default:
+		return fmt.Sprintf("BDA_CHANGE_STATE(%d)", int32(e))
+	}
+}
 
 type BDA_CONDITIONALACCESS_MMICLOSEREASON int32
 
@@ -557,6 +1553,29 @@ const (
 	CONDITIONALACCESS_DIALOG_USER_NOT_AVAILABLE BDA_CONDITIONALACCESS_MMICLOSEREASON = 6
 )
 
+// String returns the BDA_CONDITIONALACCESS_MMICLOSEREASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_CONDITIONALACCESS_MMICLOSEREASON) String() string {
+	switch e {
+	case CONDITIONALACCESS_UNSPECIFIED:
+		return "CONDITIONALACCESS_UNSPECIFIED"
+	case CONDITIONALACCESS_CLOSED_ITSELF:
+		return "CONDITIONALACCESS_CLOSED_ITSELF"
+	case CONDITIONALACCESS_TUNER_REQUESTED_CLOSE:
+		return "CONDITIONALACCESS_TUNER_REQUESTED_CLOSE"
+	case CONDITIONALACCESS_DIALOG_TIMEOUT:
+		return "CONDITIONALACCESS_DIALOG_TIMEOUT"
+	case CONDITIONALACCESS_DIALOG_FOCUS_CHANGE:
+		return "CONDITIONALACCESS_DIALOG_FOCUS_CHANGE"
+	case CONDITIONALACCESS_DIALOG_USER_DISMISSED:
+		return "CONDITIONALACCESS_DIALOG_USER_DISMISSED"
+	case CONDITIONALACCESS_DIALOG_USER_NOT_AVAILABLE:
+		return "CONDITIONALACCESS_DIALOG_USER_NOT_AVAILABLE"
+	default:
+		return fmt.Sprintf("BDA_CONDITIONALACCESS_MMICLOSEREASON(%d)", int32(e))
+	}
+}
+
 type BDA_CONDITIONALACCESS_REQUESTTYPE int32
 
 const (
@@ -566,6 +1585,23 @@ const (
 	CONDITIONALACCESS_ACCESS_POSSIBLE_NO_STREAMING_DISRUPTION BDA_CONDITIONALACCESS_REQUESTTYPE = 3
 )
 
+// String returns the BDA_CONDITIONALACCESS_REQUESTTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_CONDITIONALACCESS_REQUESTTYPE) String() string {
+	switch e {
+	case CONDITIONALACCESS_ACCESS_UNSPECIFIED:
+		return "CONDITIONALACCESS_ACCESS_UNSPECIFIED"
+	case CONDITIONALACCESS_ACCESS_NOT_POSSIBLE:
+		return "CONDITIONALACCESS_ACCESS_NOT_POSSIBLE"
+	case CONDITIONALACCESS_ACCESS_POSSIBLE:
+		return "CONDITIONALACCESS_ACCESS_POSSIBLE"
+	case CONDITIONALACCESS_ACCESS_POSSIBLE_NO_STREAMING_DISRUPTION:
+		return "CONDITIONALACCESS_ACCESS_POSSIBLE_NO_STREAMING_DISRUPTION"
+	default:
+		return fmt.Sprintf("BDA_CONDITIONALACCESS_REQUESTTYPE(%d)", int32(e))
+	}
+}
+
 type BDA_CONDITIONALACCESS_SESSION_RESULT int32
 
 const (
@@ -574,11 +1610,37 @@ const (
 	CONDITIONALACCESS_ABORTED        BDA_CONDITIONALACCESS_SESSION_RESULT = 2
 )
 
+// String returns the BDA_CONDITIONALACCESS_SESSION_RESULT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_CONDITIONALACCESS_SESSION_RESULT) String() string {
+	switch e {
+	case CONDITIONALACCESS_SUCCESSFULL:
+		return "CONDITIONALACCESS_SUCCESSFULL"
+	case CONDITIONALACCESS_ENDED_NOCHANGE:
+		return "CONDITIONALACCESS_ENDED_NOCHANGE"
+	case CONDITIONALACCESS_ABORTED:
+		return "CONDITIONALACCESS_ABORTED"
+	default:
+		return fmt.Sprintf("BDA_CONDITIONALACCESS_SESSION_RESULT(%d)", int32(e))
+	}
+}
+
 type BDA_Channel int32
 
 const (
 	BDA_UNDEFINED_CHANNEL BDA_Channel = -1
 )
+
+// String returns the BDA_Channel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_Channel) String() string {
+	switch e {
+	case BDA_UNDEFINED_CHANNEL:
+		return "BDA_UNDEFINED_CHANNEL"
+	default:
+		return fmt.Sprintf("BDA_Channel(%d)", int32(e))
+	}
+}
 
 type BDA_Channel_Bandwidth int32
 
@@ -586,6 +1648,19 @@ const (
 	BDA_CHAN_BANDWITH_NOT_SET     BDA_Channel_Bandwidth = -1
 	BDA_CHAN_BANDWITH_NOT_DEFINED BDA_Channel_Bandwidth = 0
 )
+
+// String returns the BDA_Channel_Bandwidth constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_Channel_Bandwidth) String() string {
+	switch e {
+	case BDA_CHAN_BANDWITH_NOT_SET:
+		return "BDA_CHAN_BANDWITH_NOT_SET"
+	case BDA_CHAN_BANDWITH_NOT_DEFINED:
+		return "BDA_CHAN_BANDWITH_NOT_DEFINED"
+	default:
+		return fmt.Sprintf("BDA_Channel_Bandwidth(%d)", int32(e))
+	}
+}
 
 type BDA_Comp_Flags int32
 
@@ -596,6 +1671,23 @@ const (
 	BDACOMP_INCLUDE_COMPONENTS_IN_TR BDA_Comp_Flags = 4
 )
 
+// String returns the BDA_Comp_Flags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_Comp_Flags) String() string {
+	switch e {
+	case BDACOMP_NOT_DEFINED:
+		return "BDACOMP_NOT_DEFINED"
+	case BDACOMP_EXCLUDE_TS_FROM_TR:
+		return "BDACOMP_EXCLUDE_TS_FROM_TR"
+	case BDACOMP_INCLUDE_LOCATOR_IN_TR:
+		return "BDACOMP_INCLUDE_LOCATOR_IN_TR"
+	case BDACOMP_INCLUDE_COMPONENTS_IN_TR:
+		return "BDACOMP_INCLUDE_COMPONENTS_IN_TR"
+	default:
+		return fmt.Sprintf("BDA_Comp_Flags(%d)", int32(e))
+	}
+}
+
 type BDA_DISCOVERY_STATE int32
 
 const (
@@ -603,6 +1695,21 @@ const (
 	BDA_DISCOVERY_REQUIRED    BDA_DISCOVERY_STATE = 1
 	BDA_DISCOVERY_COMPLETE    BDA_DISCOVERY_STATE = 2
 )
+
+// String returns the BDA_DISCOVERY_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_DISCOVERY_STATE) String() string {
+	switch e {
+	case BDA_DISCOVERY_UNSPECIFIED:
+		return "BDA_DISCOVERY_UNSPECIFIED"
+	case BDA_DISCOVERY_REQUIRED:
+		return "BDA_DISCOVERY_REQUIRED"
+	case BDA_DISCOVERY_COMPLETE:
+		return "BDA_DISCOVERY_COMPLETE"
+	default:
+		return fmt.Sprintf("BDA_DISCOVERY_STATE(%d)", int32(e))
+	}
+}
 
 // BDA_DrmPairingError: https://learn.microsoft.com/windows/win32/api/bdaiface/ne-bdaiface-bda_drmpairingerror
 type BDA_DrmPairingError int32
@@ -619,6 +1726,35 @@ const (
 	BDA_DrmPairing_Aborted            BDA_DrmPairingError = 8
 	BDA_DrmPairing_NeedSDKUpdate      BDA_DrmPairingError = 9
 )
+
+// String returns the BDA_DrmPairingError constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_DrmPairingError) String() string {
+	switch e {
+	case BDA_DrmPairing_Succeeded:
+		return "BDA_DrmPairing_Succeeded"
+	case BDA_DrmPairing_HardwareFailure:
+		return "BDA_DrmPairing_HardwareFailure"
+	case BDA_DrmPairing_NeedRevocationData:
+		return "BDA_DrmPairing_NeedRevocationData"
+	case BDA_DrmPairing_NeedIndiv:
+		return "BDA_DrmPairing_NeedIndiv"
+	case BDA_DrmPairing_Other:
+		return "BDA_DrmPairing_Other"
+	case BDA_DrmPairing_DrmInitFailed:
+		return "BDA_DrmPairing_DrmInitFailed"
+	case BDA_DrmPairing_DrmNotPaired:
+		return "BDA_DrmPairing_DrmNotPaired"
+	case BDA_DrmPairing_DrmRePairSoon:
+		return "BDA_DrmPairing_DrmRePairSoon"
+	case BDA_DrmPairing_Aborted:
+		return "BDA_DrmPairing_Aborted"
+	case BDA_DrmPairing_NeedSDKUpdate:
+		return "BDA_DrmPairing_NeedSDKUpdate"
+	default:
+		return fmt.Sprintf("BDA_DrmPairingError(%d)", int32(e))
+	}
+}
 
 type BDA_EVENT_ID int32
 
@@ -645,6 +1781,55 @@ const (
 	BDA_EVENT_SMART_CARD_REMOVED        BDA_EVENT_ID = 19
 )
 
+// String returns the BDA_EVENT_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_EVENT_ID) String() string {
+	switch e {
+	case BDA_EVENT_SIGNAL_LOSS:
+		return "BDA_EVENT_SIGNAL_LOSS"
+	case BDA_EVENT_SIGNAL_LOCK:
+		return "BDA_EVENT_SIGNAL_LOCK"
+	case BDA_EVENT_DATA_START:
+		return "BDA_EVENT_DATA_START"
+	case BDA_EVENT_DATA_STOP:
+		return "BDA_EVENT_DATA_STOP"
+	case BDA_EVENT_CHANNEL_ACQUIRED:
+		return "BDA_EVENT_CHANNEL_ACQUIRED"
+	case BDA_EVENT_CHANNEL_LOST:
+		return "BDA_EVENT_CHANNEL_LOST"
+	case BDA_EVENT_CHANNEL_SOURCE_CHANGED:
+		return "BDA_EVENT_CHANNEL_SOURCE_CHANGED"
+	case BDA_EVENT_CHANNEL_ACTIVATED:
+		return "BDA_EVENT_CHANNEL_ACTIVATED"
+	case BDA_EVENT_CHANNEL_DEACTIVATED:
+		return "BDA_EVENT_CHANNEL_DEACTIVATED"
+	case BDA_EVENT_SUBCHANNEL_ACQUIRED:
+		return "BDA_EVENT_SUBCHANNEL_ACQUIRED"
+	case BDA_EVENT_SUBCHANNEL_LOST:
+		return "BDA_EVENT_SUBCHANNEL_LOST"
+	case BDA_EVENT_SUBCHANNEL_SOURCE_CHANGED:
+		return "BDA_EVENT_SUBCHANNEL_SOURCE_CHANGED"
+	case BDA_EVENT_SUBCHANNEL_ACTIVATED:
+		return "BDA_EVENT_SUBCHANNEL_ACTIVATED"
+	case BDA_EVENT_SUBCHANNEL_DEACTIVATED:
+		return "BDA_EVENT_SUBCHANNEL_DEACTIVATED"
+	case BDA_EVENT_ACCESS_GRANTED:
+		return "BDA_EVENT_ACCESS_GRANTED"
+	case BDA_EVENT_ACCESS_DENIED:
+		return "BDA_EVENT_ACCESS_DENIED"
+	case BDA_EVENT_OFFER_EXTENDED:
+		return "BDA_EVENT_OFFER_EXTENDED"
+	case BDA_EVENT_PURCHASE_COMPLETED:
+		return "BDA_EVENT_PURCHASE_COMPLETED"
+	case BDA_EVENT_SMART_CARD_INSERTED:
+		return "BDA_EVENT_SMART_CARD_INSERTED"
+	case BDA_EVENT_SMART_CARD_REMOVED:
+		return "BDA_EVENT_SMART_CARD_REMOVED"
+	default:
+		return fmt.Sprintf("BDA_EVENT_ID(%d)", int32(e))
+	}
+}
+
 type BDA_Frequency int32
 
 const (
@@ -652,12 +1837,38 @@ const (
 	BDA_FREQUENCY_NOT_DEFINED BDA_Frequency = 0
 )
 
+// String returns the BDA_Frequency constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_Frequency) String() string {
+	switch e {
+	case BDA_FREQUENCY_NOT_SET:
+		return "BDA_FREQUENCY_NOT_SET"
+	case BDA_FREQUENCY_NOT_DEFINED:
+		return "BDA_FREQUENCY_NOT_DEFINED"
+	default:
+		return fmt.Sprintf("BDA_Frequency(%d)", int32(e))
+	}
+}
+
 type BDA_Frequency_Multiplier int32
 
 const (
 	BDA_FREQUENCY_MULTIPLIER_NOT_SET     BDA_Frequency_Multiplier = -1
 	BDA_FREQUENCY_MULTIPLIER_NOT_DEFINED BDA_Frequency_Multiplier = 0
 )
+
+// String returns the BDA_Frequency_Multiplier constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_Frequency_Multiplier) String() string {
+	switch e {
+	case BDA_FREQUENCY_MULTIPLIER_NOT_SET:
+		return "BDA_FREQUENCY_MULTIPLIER_NOT_SET"
+	case BDA_FREQUENCY_MULTIPLIER_NOT_DEFINED:
+		return "BDA_FREQUENCY_MULTIPLIER_NOT_DEFINED"
+	default:
+		return fmt.Sprintf("BDA_Frequency_Multiplier(%d)", int32(e))
+	}
+}
 
 type BDA_MULTICAST_MODE int32
 
@@ -667,12 +1878,40 @@ const (
 	BDA_NO_MULTICAST          BDA_MULTICAST_MODE = 2
 )
 
+// String returns the BDA_MULTICAST_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_MULTICAST_MODE) String() string {
+	switch e {
+	case BDA_PROMISCUOUS_MULTICAST:
+		return "BDA_PROMISCUOUS_MULTICAST"
+	case BDA_FILTERED_MULTICAST:
+		return "BDA_FILTERED_MULTICAST"
+	case BDA_NO_MULTICAST:
+		return "BDA_NO_MULTICAST"
+	default:
+		return fmt.Sprintf("BDA_MULTICAST_MODE(%d)", int32(e))
+	}
+}
+
 type BDA_Range int32
 
 const (
 	BDA_RANGE_NOT_SET     BDA_Range = -1
 	BDA_RANGE_NOT_DEFINED BDA_Range = 0
 )
+
+// String returns the BDA_Range constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_Range) String() string {
+	switch e {
+	case BDA_RANGE_NOT_SET:
+		return "BDA_RANGE_NOT_SET"
+	case BDA_RANGE_NOT_DEFINED:
+		return "BDA_RANGE_NOT_DEFINED"
+	default:
+		return fmt.Sprintf("BDA_Range(%d)", int32(e))
+	}
+}
 
 type BDA_SIGNAL_STATE int32
 
@@ -681,6 +1920,21 @@ const (
 	BDA_SIGNAL_INACTIVE    BDA_SIGNAL_STATE = 1
 	BDA_SIGNAL_ACTIVE      BDA_SIGNAL_STATE = 2
 )
+
+// String returns the BDA_SIGNAL_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BDA_SIGNAL_STATE) String() string {
+	switch e {
+	case BDA_SIGNAL_UNAVAILABLE:
+		return "BDA_SIGNAL_UNAVAILABLE"
+	case BDA_SIGNAL_INACTIVE:
+		return "BDA_SIGNAL_INACTIVE"
+	case BDA_SIGNAL_ACTIVE:
+		return "BDA_SIGNAL_ACTIVE"
+	default:
+		return fmt.Sprintf("BDA_SIGNAL_STATE(%d)", int32(e))
+	}
+}
 
 type BinaryConvolutionCodeRate int32
 
@@ -704,6 +1958,49 @@ const (
 	BDA_BCC_RATE_MAX         BinaryConvolutionCodeRate = 15
 )
 
+// String returns the BinaryConvolutionCodeRate constant's name, or its numeric form when
+// the value is not a known constant.
+func (e BinaryConvolutionCodeRate) String() string {
+	switch e {
+	case BDA_BCC_RATE_NOT_SET:
+		return "BDA_BCC_RATE_NOT_SET"
+	case BDA_BCC_RATE_NOT_DEFINED:
+		return "BDA_BCC_RATE_NOT_DEFINED"
+	case BDA_BCC_RATE_1_2:
+		return "BDA_BCC_RATE_1_2"
+	case BDA_BCC_RATE_2_3:
+		return "BDA_BCC_RATE_2_3"
+	case BDA_BCC_RATE_3_4:
+		return "BDA_BCC_RATE_3_4"
+	case BDA_BCC_RATE_3_5:
+		return "BDA_BCC_RATE_3_5"
+	case BDA_BCC_RATE_4_5:
+		return "BDA_BCC_RATE_4_5"
+	case BDA_BCC_RATE_5_6:
+		return "BDA_BCC_RATE_5_6"
+	case BDA_BCC_RATE_5_11:
+		return "BDA_BCC_RATE_5_11"
+	case BDA_BCC_RATE_7_8:
+		return "BDA_BCC_RATE_7_8"
+	case BDA_BCC_RATE_1_4:
+		return "BDA_BCC_RATE_1_4"
+	case BDA_BCC_RATE_1_3:
+		return "BDA_BCC_RATE_1_3"
+	case BDA_BCC_RATE_2_5:
+		return "BDA_BCC_RATE_2_5"
+	case BDA_BCC_RATE_6_7:
+		return "BDA_BCC_RATE_6_7"
+	case BDA_BCC_RATE_8_9:
+		return "BDA_BCC_RATE_8_9"
+	case BDA_BCC_RATE_9_10:
+		return "BDA_BCC_RATE_9_10"
+	case BDA_BCC_RATE_MAX:
+		return "BDA_BCC_RATE_MAX"
+	default:
+		return fmt.Sprintf("BinaryConvolutionCodeRate(%d)", int32(e))
+	}
+}
+
 type COLORKEY_TYPE int32
 
 const (
@@ -712,6 +2009,21 @@ const (
 	CK_RGB        COLORKEY_TYPE = 2
 )
 
+// String returns the COLORKEY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COLORKEY_TYPE) String() string {
+	switch e {
+	case CK_NOCOLORKEY:
+		return "CK_NOCOLORKEY"
+	case CK_INDEX:
+		return "CK_INDEX"
+	case CK_RGB:
+		return "CK_RGB"
+	default:
+		return fmt.Sprintf("COLORKEY_TYPE(%d)", int32(e))
+	}
+}
+
 type COMPLETION_STATUS_FLAGS int32
 
 const (
@@ -719,6 +2031,21 @@ const (
 	COMPSTAT_WAIT       COMPLETION_STATUS_FLAGS = 2
 	COMPSTAT_ABORT      COMPLETION_STATUS_FLAGS = 4
 )
+
+// String returns the COMPLETION_STATUS_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COMPLETION_STATUS_FLAGS) String() string {
+	switch e {
+	case COMPSTAT_NOUPDATEOK:
+		return "COMPSTAT_NOUPDATEOK"
+	case COMPSTAT_WAIT:
+		return "COMPSTAT_WAIT"
+	case COMPSTAT_ABORT:
+		return "COMPSTAT_ABORT"
+	default:
+		return fmt.Sprintf("COMPLETION_STATUS_FLAGS(%d)", int32(e))
+	}
+}
 
 // COPP_ACP_Protection_Level: https://learn.microsoft.com/windows/win32/api/dxva9typ/ne-dxva9typ-copp_acp_protection_level
 type COPP_ACP_Protection_Level int32
@@ -733,6 +2060,25 @@ const (
 	COPP_ACP_ForceDWORD COPP_ACP_Protection_Level = 2147483647
 )
 
+// String returns the COPP_ACP_Protection_Level constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPP_ACP_Protection_Level) String() string {
+	switch e {
+	case COPP_ACP_Level0:
+		return "COPP_ACP_Level0"
+	case COPP_ACP_Level1:
+		return "COPP_ACP_Level1"
+	case COPP_ACP_Level2:
+		return "COPP_ACP_Level2"
+	case COPP_ACP_Level3:
+		return "COPP_ACP_Level3"
+	case COPP_ACP_ForceDWORD:
+		return "COPP_ACP_ForceDWORD"
+	default:
+		return fmt.Sprintf("COPP_ACP_Protection_Level(%d)", int32(e))
+	}
+}
+
 // COPP_BusType: https://learn.microsoft.com/windows/win32/api/dxva9typ/ne-dxva9typ-copp_bustype
 type COPP_BusType int32
 
@@ -745,6 +2091,29 @@ const (
 	COPP_BusType_Integrated COPP_BusType = -2147483648
 	COPP_BusType_ForceDWORD COPP_BusType = 2147483647
 )
+
+// String returns the COPP_BusType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPP_BusType) String() string {
+	switch e {
+	case COPP_BusType_Unknown:
+		return "COPP_BusType_Unknown"
+	case COPP_BusType_PCI:
+		return "COPP_BusType_PCI"
+	case COPP_BusType_PCIX:
+		return "COPP_BusType_PCIX"
+	case COPP_BusType_PCIExpress:
+		return "COPP_BusType_PCIExpress"
+	case COPP_BusType_AGP:
+		return "COPP_BusType_AGP"
+	case COPP_BusType_Integrated:
+		return "COPP_BusType_Integrated"
+	case COPP_BusType_ForceDWORD:
+		return "COPP_BusType_ForceDWORD"
+	default:
+		return fmt.Sprintf("COPP_BusType(%d)", int32(e))
+	}
+}
 
 // COPP_CGMSA_Protection_Level: https://learn.microsoft.com/windows/win32/api/dxva9typ/ne-dxva9typ-copp_cgmsa_protection_level
 type COPP_CGMSA_Protection_Level int32
@@ -760,6 +2129,31 @@ const (
 	COPP_CGMSA_LevelMax                      COPP_CGMSA_Protection_Level = 12
 	COPP_CGMSA_ForceDWORD                    COPP_CGMSA_Protection_Level = 2147483647
 )
+
+// String returns the COPP_CGMSA_Protection_Level constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPP_CGMSA_Protection_Level) String() string {
+	switch e {
+	case COPP_CGMSA_Disabled:
+		return "COPP_CGMSA_Disabled"
+	case COPP_CGMSA_CopyFreely:
+		return "COPP_CGMSA_CopyFreely"
+	case COPP_CGMSA_CopyNoMore:
+		return "COPP_CGMSA_CopyNoMore"
+	case COPP_CGMSA_CopyOneGeneration:
+		return "COPP_CGMSA_CopyOneGeneration"
+	case COPP_CGMSA_CopyNever:
+		return "COPP_CGMSA_CopyNever"
+	case COPP_CGMSA_RedistributionControlRequired:
+		return "COPP_CGMSA_RedistributionControlRequired"
+	case COPP_CGMSA_LevelMax:
+		return "COPP_CGMSA_LevelMax"
+	case COPP_CGMSA_ForceDWORD:
+		return "COPP_CGMSA_ForceDWORD"
+	default:
+		return fmt.Sprintf("COPP_CGMSA_Protection_Level(%d)", int32(e))
+	}
+}
 
 // COPP_ConnectorType: https://learn.microsoft.com/windows/win32/api/dxva9typ/ne-dxva9typ-copp_connectortype
 type COPP_ConnectorType int32
@@ -779,6 +2173,39 @@ const (
 	COPP_ConnectorType_ForceDWORD     COPP_ConnectorType = 2147483647
 )
 
+// String returns the COPP_ConnectorType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPP_ConnectorType) String() string {
+	switch e {
+	case COPP_ConnectorType_Unknown:
+		return "COPP_ConnectorType_Unknown"
+	case COPP_ConnectorType_VGA:
+		return "COPP_ConnectorType_VGA"
+	case COPP_ConnectorType_SVideo:
+		return "COPP_ConnectorType_SVideo"
+	case COPP_ConnectorType_CompositeVideo:
+		return "COPP_ConnectorType_CompositeVideo"
+	case COPP_ConnectorType_ComponentVideo:
+		return "COPP_ConnectorType_ComponentVideo"
+	case COPP_ConnectorType_DVI:
+		return "COPP_ConnectorType_DVI"
+	case COPP_ConnectorType_HDMI:
+		return "COPP_ConnectorType_HDMI"
+	case COPP_ConnectorType_LVDS:
+		return "COPP_ConnectorType_LVDS"
+	case COPP_ConnectorType_TMDS:
+		return "COPP_ConnectorType_TMDS"
+	case COPP_ConnectorType_D_JPN:
+		return "COPP_ConnectorType_D_JPN"
+	case COPP_ConnectorType_Internal:
+		return "COPP_ConnectorType_Internal"
+	case COPP_ConnectorType_ForceDWORD:
+		return "COPP_ConnectorType_ForceDWORD"
+	default:
+		return fmt.Sprintf("COPP_ConnectorType(%d)", int32(e))
+	}
+}
+
 // COPP_HDCP_Protection_Level: https://learn.microsoft.com/windows/win32/api/dxva9typ/ne-dxva9typ-copp_hdcp_protection_level
 type COPP_HDCP_Protection_Level int32
 
@@ -789,6 +2216,21 @@ const (
 	COPP_HDCP_LevelMax   COPP_HDCP_Protection_Level = 1
 	COPP_HDCP_ForceDWORD COPP_HDCP_Protection_Level = 2147483647
 )
+
+// String returns the COPP_HDCP_Protection_Level constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPP_HDCP_Protection_Level) String() string {
+	switch e {
+	case COPP_HDCP_Level0:
+		return "COPP_HDCP_Level0"
+	case COPP_HDCP_Level1:
+		return "COPP_HDCP_Level1"
+	case COPP_HDCP_ForceDWORD:
+		return "COPP_HDCP_ForceDWORD"
+	default:
+		return fmt.Sprintf("COPP_HDCP_Protection_Level(%d)", int32(e))
+	}
+}
 
 // COPP_ImageAspectRatio_EN300294: https://learn.microsoft.com/windows/win32/api/dxva9typ/ne-dxva9typ-copp_imageaspectratio_en300294
 type COPP_ImageAspectRatio_EN300294 int32
@@ -805,6 +2247,33 @@ const (
 	COPP_AspectRatio_ForceDWORD                             COPP_ImageAspectRatio_EN300294 = 2147483647
 )
 
+// String returns the COPP_ImageAspectRatio_EN300294 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPP_ImageAspectRatio_EN300294) String() string {
+	switch e {
+	case COPP_AspectRatio_EN300294_FullFormat4by3:
+		return "COPP_AspectRatio_EN300294_FullFormat4by3"
+	case COPP_AspectRatio_EN300294_Box14by9Center:
+		return "COPP_AspectRatio_EN300294_Box14by9Center"
+	case COPP_AspectRatio_EN300294_Box14by9Top:
+		return "COPP_AspectRatio_EN300294_Box14by9Top"
+	case COPP_AspectRatio_EN300294_Box16by9Center:
+		return "COPP_AspectRatio_EN300294_Box16by9Center"
+	case COPP_AspectRatio_EN300294_Box16by9Top:
+		return "COPP_AspectRatio_EN300294_Box16by9Top"
+	case COPP_AspectRatio_EN300294_BoxGT16by9Center:
+		return "COPP_AspectRatio_EN300294_BoxGT16by9Center"
+	case COPP_AspectRatio_EN300294_FullFormat4by3ProtectedCenter:
+		return "COPP_AspectRatio_EN300294_FullFormat4by3ProtectedCenter"
+	case COPP_AspectRatio_EN300294_FullFormat16by9Anamorphic:
+		return "COPP_AspectRatio_EN300294_FullFormat16by9Anamorphic"
+	case COPP_AspectRatio_ForceDWORD:
+		return "COPP_AspectRatio_ForceDWORD"
+	default:
+		return fmt.Sprintf("COPP_ImageAspectRatio_EN300294(%d)", int32(e))
+	}
+}
+
 // COPP_StatusFlags: https://learn.microsoft.com/windows/win32/api/dxva9typ/ne-dxva9typ-copp_statusflags
 type COPP_StatusFlags int32
 
@@ -815,6 +2284,23 @@ const (
 	COPP_StatusFlagsReserved   COPP_StatusFlags = -4
 )
 
+// String returns the COPP_StatusFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPP_StatusFlags) String() string {
+	switch e {
+	case COPP_StatusNormal:
+		return "COPP_StatusNormal"
+	case COPP_LinkLost:
+		return "COPP_LinkLost"
+	case COPP_RenegotiationRequired:
+		return "COPP_RenegotiationRequired"
+	case COPP_StatusFlagsReserved:
+		return "COPP_StatusFlagsReserved"
+	default:
+		return fmt.Sprintf("COPP_StatusFlags(%d)", int32(e))
+	}
+}
+
 // COPP_StatusHDCPFlags: https://learn.microsoft.com/windows/win32/api/dxva9typ/ne-dxva9typ-copp_statushdcpflags
 type COPP_StatusHDCPFlags int32
 
@@ -822,6 +2308,19 @@ const (
 	COPP_HDCPRepeater      COPP_StatusHDCPFlags = 1
 	COPP_HDCPFlagsReserved COPP_StatusHDCPFlags = -2
 )
+
+// String returns the COPP_StatusHDCPFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPP_StatusHDCPFlags) String() string {
+	switch e {
+	case COPP_HDCPRepeater:
+		return "COPP_HDCPRepeater"
+	case COPP_HDCPFlagsReserved:
+		return "COPP_HDCPFlagsReserved"
+	default:
+		return fmt.Sprintf("COPP_StatusHDCPFlags(%d)", int32(e))
+	}
+}
 
 // COPP_TVProtectionStandard: https://learn.microsoft.com/windows/win32/api/dxva9typ/ne-dxva9typ-copp_tvprotectionstandard
 type COPP_TVProtectionStandard int32
@@ -848,6 +2347,53 @@ const (
 	COPP_ProtectionStandard_Reserved            COPP_TVProtectionStandard = 2147450880
 )
 
+// String returns the COPP_TVProtectionStandard constant's name, or its numeric form when
+// the value is not a known constant.
+func (e COPP_TVProtectionStandard) String() string {
+	switch e {
+	case COPP_ProtectionStandard_Unknown:
+		return "COPP_ProtectionStandard_Unknown"
+	case COPP_ProtectionStandard_None:
+		return "COPP_ProtectionStandard_None"
+	case COPP_ProtectionStandard_IEC61880_525i:
+		return "COPP_ProtectionStandard_IEC61880_525i"
+	case COPP_ProtectionStandard_IEC61880_2_525i:
+		return "COPP_ProtectionStandard_IEC61880_2_525i"
+	case COPP_ProtectionStandard_IEC62375_625p:
+		return "COPP_ProtectionStandard_IEC62375_625p"
+	case COPP_ProtectionStandard_EIA608B_525:
+		return "COPP_ProtectionStandard_EIA608B_525"
+	case COPP_ProtectionStandard_EN300294_625i:
+		return "COPP_ProtectionStandard_EN300294_625i"
+	case COPP_ProtectionStandard_CEA805A_TypeA_525p:
+		return "COPP_ProtectionStandard_CEA805A_TypeA_525p"
+	case COPP_ProtectionStandard_CEA805A_TypeA_750p:
+		return "COPP_ProtectionStandard_CEA805A_TypeA_750p"
+	case COPP_ProtectionStandard_CEA805A_TypeA_1125i:
+		return "COPP_ProtectionStandard_CEA805A_TypeA_1125i"
+	case COPP_ProtectionStandard_CEA805A_TypeB_525p:
+		return "COPP_ProtectionStandard_CEA805A_TypeB_525p"
+	case COPP_ProtectionStandard_CEA805A_TypeB_750p:
+		return "COPP_ProtectionStandard_CEA805A_TypeB_750p"
+	case COPP_ProtectionStandard_CEA805A_TypeB_1125i:
+		return "COPP_ProtectionStandard_CEA805A_TypeB_1125i"
+	case COPP_ProtectionStandard_ARIBTRB15_525i:
+		return "COPP_ProtectionStandard_ARIBTRB15_525i"
+	case COPP_ProtectionStandard_ARIBTRB15_525p:
+		return "COPP_ProtectionStandard_ARIBTRB15_525p"
+	case COPP_ProtectionStandard_ARIBTRB15_750p:
+		return "COPP_ProtectionStandard_ARIBTRB15_750p"
+	case COPP_ProtectionStandard_ARIBTRB15_1125i:
+		return "COPP_ProtectionStandard_ARIBTRB15_1125i"
+	case COPP_ProtectionStandard_Mask:
+		return "COPP_ProtectionStandard_Mask"
+	case COPP_ProtectionStandard_Reserved:
+		return "COPP_ProtectionStandard_Reserved"
+	default:
+		return fmt.Sprintf("COPP_TVProtectionStandard(%d)", int32(e))
+	}
+}
+
 // CameraControlFlags: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-cameracontrolflags
 type CameraControlFlags int32
 
@@ -855,6 +2401,19 @@ const (
 	CameraControl_Flags_Auto   CameraControlFlags = 1
 	CameraControl_Flags_Manual CameraControlFlags = 2
 )
+
+// String returns the CameraControlFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CameraControlFlags) String() string {
+	switch e {
+	case CameraControl_Flags_Auto:
+		return "CameraControl_Flags_Auto"
+	case CameraControl_Flags_Manual:
+		return "CameraControl_Flags_Manual"
+	default:
+		return fmt.Sprintf("CameraControlFlags(%d)", int32(e))
+	}
+}
 
 // CameraControlProperty: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-cameracontrolproperty
 type CameraControlProperty int32
@@ -868,6 +2427,29 @@ const (
 	CameraControl_Iris     CameraControlProperty = 5
 	CameraControl_Focus    CameraControlProperty = 6
 )
+
+// String returns the CameraControlProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CameraControlProperty) String() string {
+	switch e {
+	case CameraControl_Pan:
+		return "CameraControl_Pan"
+	case CameraControl_Tilt:
+		return "CameraControl_Tilt"
+	case CameraControl_Roll:
+		return "CameraControl_Roll"
+	case CameraControl_Zoom:
+		return "CameraControl_Zoom"
+	case CameraControl_Exposure:
+		return "CameraControl_Exposure"
+	case CameraControl_Iris:
+		return "CameraControl_Iris"
+	case CameraControl_Focus:
+		return "CameraControl_Focus"
+	default:
+		return fmt.Sprintf("CameraControlProperty(%d)", int32(e))
+	}
+}
 
 type ComponentCategory int32
 
@@ -884,6 +2466,35 @@ const (
 	CATEGORY_COUNT      ComponentCategory = 8
 )
 
+// String returns the ComponentCategory constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ComponentCategory) String() string {
+	switch e {
+	case CategoryNotSet:
+		return "CategoryNotSet"
+	case CategoryOther:
+		return "CategoryOther"
+	case CategoryVideo:
+		return "CategoryVideo"
+	case CategoryAudio:
+		return "CategoryAudio"
+	case CategoryText:
+		return "CategoryText"
+	case CategorySubtitles:
+		return "CategorySubtitles"
+	case CategoryCaptions:
+		return "CategoryCaptions"
+	case CategorySuperimpose:
+		return "CategorySuperimpose"
+	case CategoryData:
+		return "CategoryData"
+	case CATEGORY_COUNT:
+		return "CATEGORY_COUNT"
+	default:
+		return fmt.Sprintf("ComponentCategory(%d)", int32(e))
+	}
+}
+
 type ComponentStatus int32
 
 const (
@@ -891,6 +2502,21 @@ const (
 	StatusInactive    ComponentStatus = 1
 	StatusUnavailable ComponentStatus = 2
 )
+
+// String returns the ComponentStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ComponentStatus) String() string {
+	switch e {
+	case StatusActive:
+		return "StatusActive"
+	case StatusInactive:
+		return "StatusInactive"
+	case StatusUnavailable:
+		return "StatusUnavailable"
+	default:
+		return fmt.Sprintf("ComponentStatus(%d)", int32(e))
+	}
+}
 
 // CompressionCaps: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-compressioncaps
 type CompressionCaps int32
@@ -903,11 +2529,44 @@ const (
 	CompressionCaps_CanWindow   CompressionCaps = 16
 )
 
+// String returns the CompressionCaps constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CompressionCaps) String() string {
+	switch e {
+	case CompressionCaps_CanQuality:
+		return "CompressionCaps_CanQuality"
+	case CompressionCaps_CanCrunch:
+		return "CompressionCaps_CanCrunch"
+	case CompressionCaps_CanKeyFrame:
+		return "CompressionCaps_CanKeyFrame"
+	case CompressionCaps_CanBFrame:
+		return "CompressionCaps_CanBFrame"
+	case CompressionCaps_CanWindow:
+		return "CompressionCaps_CanWindow"
+	default:
+		return fmt.Sprintf("CompressionCaps(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type DDSFF_FLAGS int32
 
 const (
 	DDSFF_PROGRESSIVERENDER DDSFF_FLAGS = 1
 )
+
+// String returns the DDSFF_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DDSFF_FLAGS) String() string {
+	var parts []string
+	if e&DDSFF_PROGRESSIVERENDER != 0 {
+		parts = append(parts, "DDSFF_PROGRESSIVERENDER")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // DECIMATION_USAGE: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-decimation_usage
 type DECIMATION_USAGE int32
@@ -920,6 +2579,25 @@ const (
 	DECIMATION_DEFAULT            DECIMATION_USAGE = 4
 )
 
+// String returns the DECIMATION_USAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DECIMATION_USAGE) String() string {
+	switch e {
+	case DECIMATION_LEGACY:
+		return "DECIMATION_LEGACY"
+	case DECIMATION_USE_DECODER_ONLY:
+		return "DECIMATION_USE_DECODER_ONLY"
+	case DECIMATION_USE_VIDEOPORT_ONLY:
+		return "DECIMATION_USE_VIDEOPORT_ONLY"
+	case DECIMATION_USE_OVERLAY_ONLY:
+		return "DECIMATION_USE_OVERLAY_ONLY"
+	case DECIMATION_DEFAULT:
+		return "DECIMATION_DEFAULT"
+	default:
+		return fmt.Sprintf("DECIMATION_USAGE(%d)", int32(e))
+	}
+}
+
 type DVBSystemType int32
 
 const (
@@ -930,6 +2608,25 @@ const (
 	ISDB_Satellite   DVBSystemType = 4
 )
 
+// String returns the DVBSystemType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVBSystemType) String() string {
+	switch e {
+	case DVB_Cable:
+		return "DVB_Cable"
+	case DVB_Terrestrial:
+		return "DVB_Terrestrial"
+	case DVB_Satellite:
+		return "DVB_Satellite"
+	case ISDB_Terrestrial:
+		return "ISDB_Terrestrial"
+	case ISDB_Satellite:
+		return "ISDB_Satellite"
+	default:
+		return fmt.Sprintf("DVBSystemType(%d)", int32(e))
+	}
+}
+
 // DVD_AUDIO_APPMODE: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_audio_appmode
 type DVD_AUDIO_APPMODE int32
 
@@ -939,6 +2636,23 @@ const (
 	DVD_AudioMode_Surround DVD_AUDIO_APPMODE = 2
 	DVD_AudioMode_Other    DVD_AUDIO_APPMODE = 3
 )
+
+// String returns the DVD_AUDIO_APPMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_AUDIO_APPMODE) String() string {
+	switch e {
+	case DVD_AudioMode_None:
+		return "DVD_AudioMode_None"
+	case DVD_AudioMode_Karaoke:
+		return "DVD_AudioMode_Karaoke"
+	case DVD_AudioMode_Surround:
+		return "DVD_AudioMode_Surround"
+	case DVD_AudioMode_Other:
+		return "DVD_AudioMode_Other"
+	default:
+		return fmt.Sprintf("DVD_AUDIO_APPMODE(%d)", int32(e))
+	}
+}
 
 // DVD_AUDIO_FORMAT: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_audio_format
 type DVD_AUDIO_FORMAT int32
@@ -955,6 +2669,33 @@ const (
 	DVD_AudioFormat_Other     DVD_AUDIO_FORMAT = 8
 )
 
+// String returns the DVD_AUDIO_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_AUDIO_FORMAT) String() string {
+	switch e {
+	case DVD_AudioFormat_AC3:
+		return "DVD_AudioFormat_AC3"
+	case DVD_AudioFormat_MPEG1:
+		return "DVD_AudioFormat_MPEG1"
+	case DVD_AudioFormat_MPEG1_DRC:
+		return "DVD_AudioFormat_MPEG1_DRC"
+	case DVD_AudioFormat_MPEG2:
+		return "DVD_AudioFormat_MPEG2"
+	case DVD_AudioFormat_MPEG2_DRC:
+		return "DVD_AudioFormat_MPEG2_DRC"
+	case DVD_AudioFormat_LPCM:
+		return "DVD_AudioFormat_LPCM"
+	case DVD_AudioFormat_DTS:
+		return "DVD_AudioFormat_DTS"
+	case DVD_AudioFormat_SDDS:
+		return "DVD_AudioFormat_SDDS"
+	case DVD_AudioFormat_Other:
+		return "DVD_AudioFormat_Other"
+	default:
+		return fmt.Sprintf("DVD_AUDIO_FORMAT(%d)", int32(e))
+	}
+}
+
 // DVD_AUDIO_LANG_EXT: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_audio_lang_ext
 type DVD_AUDIO_LANG_EXT int32
 
@@ -965,6 +2706,25 @@ const (
 	DVD_AUD_EXT_DirectorComments1 DVD_AUDIO_LANG_EXT = 3
 	DVD_AUD_EXT_DirectorComments2 DVD_AUDIO_LANG_EXT = 4
 )
+
+// String returns the DVD_AUDIO_LANG_EXT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_AUDIO_LANG_EXT) String() string {
+	switch e {
+	case DVD_AUD_EXT_NotSpecified:
+		return "DVD_AUD_EXT_NotSpecified"
+	case DVD_AUD_EXT_Captions:
+		return "DVD_AUD_EXT_Captions"
+	case DVD_AUD_EXT_VisuallyImpaired:
+		return "DVD_AUD_EXT_VisuallyImpaired"
+	case DVD_AUD_EXT_DirectorComments1:
+		return "DVD_AUD_EXT_DirectorComments1"
+	case DVD_AUD_EXT_DirectorComments2:
+		return "DVD_AUD_EXT_DirectorComments2"
+	default:
+		return fmt.Sprintf("DVD_AUDIO_LANG_EXT(%d)", int32(e))
+	}
+}
 
 // DVD_CMD_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_cmd_flags
 type DVD_CMD_FLAGS int32
@@ -978,6 +2738,27 @@ const (
 	DVD_CMD_FLAG_EndAfterRendered  DVD_CMD_FLAGS = 16
 )
 
+// String returns the DVD_CMD_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_CMD_FLAGS) String() string {
+	switch e {
+	case DVD_CMD_FLAG_None:
+		return "DVD_CMD_FLAG_None"
+	case DVD_CMD_FLAG_Flush:
+		return "DVD_CMD_FLAG_Flush"
+	case DVD_CMD_FLAG_SendEvents:
+		return "DVD_CMD_FLAG_SendEvents"
+	case DVD_CMD_FLAG_Block:
+		return "DVD_CMD_FLAG_Block"
+	case DVD_CMD_FLAG_StartWhenRendered:
+		return "DVD_CMD_FLAG_StartWhenRendered"
+	case DVD_CMD_FLAG_EndAfterRendered:
+		return "DVD_CMD_FLAG_EndAfterRendered"
+	default:
+		return fmt.Sprintf("DVD_CMD_FLAGS(%d)", int32(e))
+	}
+}
+
 // DVD_DISC_SIDE: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_disc_side
 type DVD_DISC_SIDE int32
 
@@ -985,6 +2766,19 @@ const (
 	DVD_SIDE_A DVD_DISC_SIDE = 1
 	DVD_SIDE_B DVD_DISC_SIDE = 2
 )
+
+// String returns the DVD_DISC_SIDE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_DISC_SIDE) String() string {
+	switch e {
+	case DVD_SIDE_A:
+		return "DVD_SIDE_A"
+	case DVD_SIDE_B:
+		return "DVD_SIDE_B"
+	default:
+		return fmt.Sprintf("DVD_DISC_SIDE(%d)", int32(e))
+	}
+}
 
 // DVD_DOMAIN: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_domain
 type DVD_DOMAIN int32
@@ -996,6 +2790,25 @@ const (
 	DVD_DOMAIN_Title             DVD_DOMAIN = 4
 	DVD_DOMAIN_Stop              DVD_DOMAIN = 5
 )
+
+// String returns the DVD_DOMAIN constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_DOMAIN) String() string {
+	switch e {
+	case DVD_DOMAIN_FirstPlay:
+		return "DVD_DOMAIN_FirstPlay"
+	case DVD_DOMAIN_VideoManagerMenu:
+		return "DVD_DOMAIN_VideoManagerMenu"
+	case DVD_DOMAIN_VideoTitleSetMenu:
+		return "DVD_DOMAIN_VideoTitleSetMenu"
+	case DVD_DOMAIN_Title:
+		return "DVD_DOMAIN_Title"
+	case DVD_DOMAIN_Stop:
+		return "DVD_DOMAIN_Stop"
+	default:
+		return fmt.Sprintf("DVD_DOMAIN(%d)", int32(e))
+	}
+}
 
 // DVD_ERROR: https://learn.microsoft.com/windows/win32/api/dvdevcod/ne-dvdevcod-dvd_error
 type DVD_ERROR int32
@@ -1013,6 +2826,35 @@ const (
 	DVD_ERROR_CopyProtectOutputNotSupported       DVD_ERROR = 10
 )
 
+// String returns the DVD_ERROR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_ERROR) String() string {
+	switch e {
+	case DVD_ERROR_Unexpected:
+		return "DVD_ERROR_Unexpected"
+	case DVD_ERROR_CopyProtectFail:
+		return "DVD_ERROR_CopyProtectFail"
+	case DVD_ERROR_InvalidDVD1_0Disc:
+		return "DVD_ERROR_InvalidDVD1_0Disc"
+	case DVD_ERROR_InvalidDiscRegion:
+		return "DVD_ERROR_InvalidDiscRegion"
+	case DVD_ERROR_LowParentalLevel:
+		return "DVD_ERROR_LowParentalLevel"
+	case DVD_ERROR_MacrovisionFail:
+		return "DVD_ERROR_MacrovisionFail"
+	case DVD_ERROR_IncompatibleSystemAndDecoderRegions:
+		return "DVD_ERROR_IncompatibleSystemAndDecoderRegions"
+	case DVD_ERROR_IncompatibleDiscAndDecoderRegions:
+		return "DVD_ERROR_IncompatibleDiscAndDecoderRegions"
+	case DVD_ERROR_CopyProtectOutputFail:
+		return "DVD_ERROR_CopyProtectOutputFail"
+	case DVD_ERROR_CopyProtectOutputNotSupported:
+		return "DVD_ERROR_CopyProtectOutputNotSupported"
+	default:
+		return fmt.Sprintf("DVD_ERROR(%d)", int32(e))
+	}
+}
+
 // DVD_FRAMERATE: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_framerate
 type DVD_FRAMERATE int32
 
@@ -1020,6 +2862,19 @@ const (
 	DVD_FPS_25        DVD_FRAMERATE = 1
 	DVD_FPS_30NonDrop DVD_FRAMERATE = 3
 )
+
+// String returns the DVD_FRAMERATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_FRAMERATE) String() string {
+	switch e {
+	case DVD_FPS_25:
+		return "DVD_FPS_25"
+	case DVD_FPS_30NonDrop:
+		return "DVD_FPS_30NonDrop"
+	default:
+		return fmt.Sprintf("DVD_FRAMERATE(%d)", int32(e))
+	}
+}
 
 // DVD_KARAOKE_ASSIGNMENT: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_karaoke_assignment
 type DVD_KARAOKE_ASSIGNMENT int32
@@ -1035,6 +2890,31 @@ const (
 	DVD_Assignment_LRM12     DVD_KARAOKE_ASSIGNMENT = 7
 )
 
+// String returns the DVD_KARAOKE_ASSIGNMENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_KARAOKE_ASSIGNMENT) String() string {
+	switch e {
+	case DVD_Assignment_reserved0:
+		return "DVD_Assignment_reserved0"
+	case DVD_Assignment_reserved1:
+		return "DVD_Assignment_reserved1"
+	case DVD_Assignment_LR:
+		return "DVD_Assignment_LR"
+	case DVD_Assignment_LRM:
+		return "DVD_Assignment_LRM"
+	case DVD_Assignment_LR1:
+		return "DVD_Assignment_LR1"
+	case DVD_Assignment_LRM1:
+		return "DVD_Assignment_LRM1"
+	case DVD_Assignment_LR12:
+		return "DVD_Assignment_LR12"
+	case DVD_Assignment_LRM12:
+		return "DVD_Assignment_LRM12"
+	default:
+		return fmt.Sprintf("DVD_KARAOKE_ASSIGNMENT(%d)", int32(e))
+	}
+}
+
 // DVD_KARAOKE_CONTENTS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_karaoke_contents
 type DVD_KARAOKE_CONTENTS int32
 
@@ -1048,6 +2928,31 @@ const (
 	DVD_Karaoke_SoundEffectA DVD_KARAOKE_CONTENTS = 64
 	DVD_Karaoke_SoundEffectB DVD_KARAOKE_CONTENTS = 128
 )
+
+// String returns the DVD_KARAOKE_CONTENTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_KARAOKE_CONTENTS) String() string {
+	switch e {
+	case DVD_Karaoke_GuideVocal1:
+		return "DVD_Karaoke_GuideVocal1"
+	case DVD_Karaoke_GuideVocal2:
+		return "DVD_Karaoke_GuideVocal2"
+	case DVD_Karaoke_GuideMelody1:
+		return "DVD_Karaoke_GuideMelody1"
+	case DVD_Karaoke_GuideMelody2:
+		return "DVD_Karaoke_GuideMelody2"
+	case DVD_Karaoke_GuideMelodyA:
+		return "DVD_Karaoke_GuideMelodyA"
+	case DVD_Karaoke_GuideMelodyB:
+		return "DVD_Karaoke_GuideMelodyB"
+	case DVD_Karaoke_SoundEffectA:
+		return "DVD_Karaoke_SoundEffectA"
+	case DVD_Karaoke_SoundEffectB:
+		return "DVD_Karaoke_SoundEffectB"
+	default:
+		return fmt.Sprintf("DVD_KARAOKE_CONTENTS(%d)", int32(e))
+	}
+}
 
 // DVD_KARAOKE_DOWNMIX: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_karaoke_downmix
 type DVD_KARAOKE_DOWNMIX int32
@@ -1069,6 +2974,43 @@ const (
 	DVD_Mix_Rto1 DVD_KARAOKE_DOWNMIX = 16384
 )
 
+// String returns the DVD_KARAOKE_DOWNMIX constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_KARAOKE_DOWNMIX) String() string {
+	switch e {
+	case DVD_Mix_0to0:
+		return "DVD_Mix_0to0"
+	case DVD_Mix_1to0:
+		return "DVD_Mix_1to0"
+	case DVD_Mix_2to0:
+		return "DVD_Mix_2to0"
+	case DVD_Mix_3to0:
+		return "DVD_Mix_3to0"
+	case DVD_Mix_4to0:
+		return "DVD_Mix_4to0"
+	case DVD_Mix_Lto0:
+		return "DVD_Mix_Lto0"
+	case DVD_Mix_Rto0:
+		return "DVD_Mix_Rto0"
+	case DVD_Mix_0to1:
+		return "DVD_Mix_0to1"
+	case DVD_Mix_1to1:
+		return "DVD_Mix_1to1"
+	case DVD_Mix_2to1:
+		return "DVD_Mix_2to1"
+	case DVD_Mix_3to1:
+		return "DVD_Mix_3to1"
+	case DVD_Mix_4to1:
+		return "DVD_Mix_4to1"
+	case DVD_Mix_Lto1:
+		return "DVD_Mix_Lto1"
+	case DVD_Mix_Rto1:
+		return "DVD_Mix_Rto1"
+	default:
+		return fmt.Sprintf("DVD_KARAOKE_DOWNMIX(%d)", int32(e))
+	}
+}
+
 // DVD_MENU_ID: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_menu_id
 type DVD_MENU_ID int32
 
@@ -1081,6 +3023,27 @@ const (
 	DVD_MENU_Chapter    DVD_MENU_ID = 7
 )
 
+// String returns the DVD_MENU_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_MENU_ID) String() string {
+	switch e {
+	case DVD_MENU_Title:
+		return "DVD_MENU_Title"
+	case DVD_MENU_Root:
+		return "DVD_MENU_Root"
+	case DVD_MENU_Subpicture:
+		return "DVD_MENU_Subpicture"
+	case DVD_MENU_Audio:
+		return "DVD_MENU_Audio"
+	case DVD_MENU_Angle:
+		return "DVD_MENU_Angle"
+	case DVD_MENU_Chapter:
+		return "DVD_MENU_Chapter"
+	default:
+		return fmt.Sprintf("DVD_MENU_ID(%d)", int32(e))
+	}
+}
+
 // DVD_NavCmdType: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_navcmdtype
 type DVD_NavCmdType int32
 
@@ -1090,6 +3053,23 @@ const (
 	DVD_NavCmdType_Cell   DVD_NavCmdType = 3
 	DVD_NavCmdType_Button DVD_NavCmdType = 4
 )
+
+// String returns the DVD_NavCmdType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_NavCmdType) String() string {
+	switch e {
+	case DVD_NavCmdType_Pre:
+		return "DVD_NavCmdType_Pre"
+	case DVD_NavCmdType_Post:
+		return "DVD_NavCmdType_Post"
+	case DVD_NavCmdType_Cell:
+		return "DVD_NavCmdType_Cell"
+	case DVD_NavCmdType_Button:
+		return "DVD_NavCmdType_Button"
+	default:
+		return fmt.Sprintf("DVD_NavCmdType(%d)", int32(e))
+	}
+}
 
 // DVD_OPTION_FLAG: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_option_flag
 type DVD_OPTION_FLAG int32
@@ -1116,6 +3096,53 @@ const (
 	DVD_EnableCC                        DVD_OPTION_FLAG = 19
 )
 
+// String returns the DVD_OPTION_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_OPTION_FLAG) String() string {
+	switch e {
+	case DVD_ResetOnStop:
+		return "DVD_ResetOnStop"
+	case DVD_NotifyParentalLevelChange:
+		return "DVD_NotifyParentalLevelChange"
+	case DVD_HMSF_TimeCodeEvents:
+		return "DVD_HMSF_TimeCodeEvents"
+	case DVD_AudioDuringFFwdRew:
+		return "DVD_AudioDuringFFwdRew"
+	case DVD_EnableNonblockingAPIs:
+		return "DVD_EnableNonblockingAPIs"
+	case DVD_CacheSizeInMB:
+		return "DVD_CacheSizeInMB"
+	case DVD_EnablePortableBookmarks:
+		return "DVD_EnablePortableBookmarks"
+	case DVD_EnableExtendedCopyProtectErrors:
+		return "DVD_EnableExtendedCopyProtectErrors"
+	case DVD_NotifyPositionChange:
+		return "DVD_NotifyPositionChange"
+	case DVD_IncreaseOutputControl:
+		return "DVD_IncreaseOutputControl"
+	case DVD_EnableStreaming:
+		return "DVD_EnableStreaming"
+	case DVD_EnableESOutput:
+		return "DVD_EnableESOutput"
+	case DVD_EnableTitleLength:
+		return "DVD_EnableTitleLength"
+	case DVD_DisableStillThrottle:
+		return "DVD_DisableStillThrottle"
+	case DVD_EnableLoggingEvents:
+		return "DVD_EnableLoggingEvents"
+	case DVD_MaxReadBurstInKB:
+		return "DVD_MaxReadBurstInKB"
+	case DVD_ReadBurstPeriodInMS:
+		return "DVD_ReadBurstPeriodInMS"
+	case DVD_RestartDisc:
+		return "DVD_RestartDisc"
+	case DVD_EnableCC:
+		return "DVD_EnableCC"
+	default:
+		return fmt.Sprintf("DVD_OPTION_FLAG(%d)", int32(e))
+	}
+}
+
 // DVD_PARENTAL_LEVEL: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_parental_level
 type DVD_PARENTAL_LEVEL int32
 
@@ -1129,6 +3156,31 @@ const (
 	DVD_PARENTAL_LEVEL_2 DVD_PARENTAL_LEVEL = 512
 	DVD_PARENTAL_LEVEL_1 DVD_PARENTAL_LEVEL = 256
 )
+
+// String returns the DVD_PARENTAL_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_PARENTAL_LEVEL) String() string {
+	switch e {
+	case DVD_PARENTAL_LEVEL_8:
+		return "DVD_PARENTAL_LEVEL_8"
+	case DVD_PARENTAL_LEVEL_7:
+		return "DVD_PARENTAL_LEVEL_7"
+	case DVD_PARENTAL_LEVEL_6:
+		return "DVD_PARENTAL_LEVEL_6"
+	case DVD_PARENTAL_LEVEL_5:
+		return "DVD_PARENTAL_LEVEL_5"
+	case DVD_PARENTAL_LEVEL_4:
+		return "DVD_PARENTAL_LEVEL_4"
+	case DVD_PARENTAL_LEVEL_3:
+		return "DVD_PARENTAL_LEVEL_3"
+	case DVD_PARENTAL_LEVEL_2:
+		return "DVD_PARENTAL_LEVEL_2"
+	case DVD_PARENTAL_LEVEL_1:
+		return "DVD_PARENTAL_LEVEL_1"
+	default:
+		return fmt.Sprintf("DVD_PARENTAL_LEVEL(%d)", int32(e))
+	}
+}
 
 // DVD_PB_STOPPED: https://learn.microsoft.com/windows/win32/api/dvdevcod/ne-dvdevcod-dvd_pb_stopped
 type DVD_PB_STOPPED int32
@@ -1152,12 +3204,66 @@ const (
 	DVD_PB_STOPPED_CopyProtectOutputNotSupported DVD_PB_STOPPED = 15
 )
 
+// String returns the DVD_PB_STOPPED constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_PB_STOPPED) String() string {
+	switch e {
+	case DVD_PB_STOPPED_Other:
+		return "DVD_PB_STOPPED_Other"
+	case DVD_PB_STOPPED_NoBranch:
+		return "DVD_PB_STOPPED_NoBranch"
+	case DVD_PB_STOPPED_NoFirstPlayDomain:
+		return "DVD_PB_STOPPED_NoFirstPlayDomain"
+	case DVD_PB_STOPPED_StopCommand:
+		return "DVD_PB_STOPPED_StopCommand"
+	case DVD_PB_STOPPED_Reset:
+		return "DVD_PB_STOPPED_Reset"
+	case DVD_PB_STOPPED_DiscEjected:
+		return "DVD_PB_STOPPED_DiscEjected"
+	case DVD_PB_STOPPED_IllegalNavCommand:
+		return "DVD_PB_STOPPED_IllegalNavCommand"
+	case DVD_PB_STOPPED_PlayPeriodAutoStop:
+		return "DVD_PB_STOPPED_PlayPeriodAutoStop"
+	case DVD_PB_STOPPED_PlayChapterAutoStop:
+		return "DVD_PB_STOPPED_PlayChapterAutoStop"
+	case DVD_PB_STOPPED_ParentalFailure:
+		return "DVD_PB_STOPPED_ParentalFailure"
+	case DVD_PB_STOPPED_RegionFailure:
+		return "DVD_PB_STOPPED_RegionFailure"
+	case DVD_PB_STOPPED_MacrovisionFailure:
+		return "DVD_PB_STOPPED_MacrovisionFailure"
+	case DVD_PB_STOPPED_DiscReadError:
+		return "DVD_PB_STOPPED_DiscReadError"
+	case DVD_PB_STOPPED_CopyProtectFailure:
+		return "DVD_PB_STOPPED_CopyProtectFailure"
+	case DVD_PB_STOPPED_CopyProtectOutputFailure:
+		return "DVD_PB_STOPPED_CopyProtectOutputFailure"
+	case DVD_PB_STOPPED_CopyProtectOutputNotSupported:
+		return "DVD_PB_STOPPED_CopyProtectOutputNotSupported"
+	default:
+		return fmt.Sprintf("DVD_PB_STOPPED(%d)", int32(e))
+	}
+}
+
 type DVD_PLAY_DIRECTION int32
 
 const (
 	DVD_DIR_FORWARD  DVD_PLAY_DIRECTION = 0
 	DVD_DIR_BACKWARD DVD_PLAY_DIRECTION = 1
 )
+
+// String returns the DVD_PLAY_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_PLAY_DIRECTION) String() string {
+	switch e {
+	case DVD_DIR_FORWARD:
+		return "DVD_DIR_FORWARD"
+	case DVD_DIR_BACKWARD:
+		return "DVD_DIR_BACKWARD"
+	default:
+		return fmt.Sprintf("DVD_PLAY_DIRECTION(%d)", int32(e))
+	}
+}
 
 // DVD_PREFERRED_DISPLAY_MODE: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_preferred_display_mode
 type DVD_PREFERRED_DISPLAY_MODE int32
@@ -1169,6 +3275,23 @@ const (
 	DISPLAY_4x3_LETTERBOX_PREFERRED DVD_PREFERRED_DISPLAY_MODE = 3
 )
 
+// String returns the DVD_PREFERRED_DISPLAY_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_PREFERRED_DISPLAY_MODE) String() string {
+	switch e {
+	case DISPLAY_CONTENT_DEFAULT:
+		return "DISPLAY_CONTENT_DEFAULT"
+	case DISPLAY_16x9:
+		return "DISPLAY_16x9"
+	case DISPLAY_4x3_PANSCAN_PREFERRED:
+		return "DISPLAY_4x3_PANSCAN_PREFERRED"
+	case DISPLAY_4x3_LETTERBOX_PREFERRED:
+		return "DISPLAY_4x3_LETTERBOX_PREFERRED"
+	default:
+		return fmt.Sprintf("DVD_PREFERRED_DISPLAY_MODE(%d)", int32(e))
+	}
+}
+
 // DVD_RELATIVE_BUTTON: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_relative_button
 type DVD_RELATIVE_BUTTON int32
 
@@ -1179,6 +3302,23 @@ const (
 	DVD_Relative_Right DVD_RELATIVE_BUTTON = 4
 )
 
+// String returns the DVD_RELATIVE_BUTTON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_RELATIVE_BUTTON) String() string {
+	switch e {
+	case DVD_Relative_Upper:
+		return "DVD_Relative_Upper"
+	case DVD_Relative_Lower:
+		return "DVD_Relative_Lower"
+	case DVD_Relative_Left:
+		return "DVD_Relative_Left"
+	case DVD_Relative_Right:
+		return "DVD_Relative_Right"
+	default:
+		return fmt.Sprintf("DVD_RELATIVE_BUTTON(%d)", int32(e))
+	}
+}
+
 // DVD_SUBPICTURE_CODING: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_subpicture_coding
 type DVD_SUBPICTURE_CODING int32
 
@@ -1187,6 +3327,21 @@ const (
 	DVD_SPCoding_Extended  DVD_SUBPICTURE_CODING = 1
 	DVD_SPCoding_Other     DVD_SUBPICTURE_CODING = 2
 )
+
+// String returns the DVD_SUBPICTURE_CODING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_SUBPICTURE_CODING) String() string {
+	switch e {
+	case DVD_SPCoding_RunLength:
+		return "DVD_SPCoding_RunLength"
+	case DVD_SPCoding_Extended:
+		return "DVD_SPCoding_Extended"
+	case DVD_SPCoding_Other:
+		return "DVD_SPCoding_Other"
+	default:
+		return fmt.Sprintf("DVD_SUBPICTURE_CODING(%d)", int32(e))
+	}
+}
 
 // DVD_SUBPICTURE_LANG_EXT: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_subpicture_lang_ext
 type DVD_SUBPICTURE_LANG_EXT int32
@@ -1205,6 +3360,37 @@ const (
 	DVD_SP_EXT_DirectorComments_Children DVD_SUBPICTURE_LANG_EXT = 15
 )
 
+// String returns the DVD_SUBPICTURE_LANG_EXT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_SUBPICTURE_LANG_EXT) String() string {
+	switch e {
+	case DVD_SP_EXT_NotSpecified:
+		return "DVD_SP_EXT_NotSpecified"
+	case DVD_SP_EXT_Caption_Normal:
+		return "DVD_SP_EXT_Caption_Normal"
+	case DVD_SP_EXT_Caption_Big:
+		return "DVD_SP_EXT_Caption_Big"
+	case DVD_SP_EXT_Caption_Children:
+		return "DVD_SP_EXT_Caption_Children"
+	case DVD_SP_EXT_CC_Normal:
+		return "DVD_SP_EXT_CC_Normal"
+	case DVD_SP_EXT_CC_Big:
+		return "DVD_SP_EXT_CC_Big"
+	case DVD_SP_EXT_CC_Children:
+		return "DVD_SP_EXT_CC_Children"
+	case DVD_SP_EXT_Forced:
+		return "DVD_SP_EXT_Forced"
+	case DVD_SP_EXT_DirectorComments_Normal:
+		return "DVD_SP_EXT_DirectorComments_Normal"
+	case DVD_SP_EXT_DirectorComments_Big:
+		return "DVD_SP_EXT_DirectorComments_Big"
+	case DVD_SP_EXT_DirectorComments_Children:
+		return "DVD_SP_EXT_DirectorComments_Children"
+	default:
+		return fmt.Sprintf("DVD_SUBPICTURE_LANG_EXT(%d)", int32(e))
+	}
+}
+
 // DVD_SUBPICTURE_TYPE: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_subpicture_type
 type DVD_SUBPICTURE_TYPE int32
 
@@ -1213,6 +3399,21 @@ const (
 	DVD_SPType_Language     DVD_SUBPICTURE_TYPE = 1
 	DVD_SPType_Other        DVD_SUBPICTURE_TYPE = 2
 )
+
+// String returns the DVD_SUBPICTURE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_SUBPICTURE_TYPE) String() string {
+	switch e {
+	case DVD_SPType_NotSpecified:
+		return "DVD_SPType_NotSpecified"
+	case DVD_SPType_Language:
+		return "DVD_SPType_Language"
+	case DVD_SPType_Other:
+		return "DVD_SPType_Other"
+	default:
+		return fmt.Sprintf("DVD_SUBPICTURE_TYPE(%d)", int32(e))
+	}
+}
 
 // DVD_TIMECODE_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_timecode_flags
 type DVD_TIMECODE_FLAGS int32
@@ -1224,6 +3425,23 @@ const (
 	DVD_TC_FLAG_Interpolated DVD_TIMECODE_FLAGS = 8
 )
 
+// String returns the DVD_TIMECODE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_TIMECODE_FLAGS) String() string {
+	switch e {
+	case DVD_TC_FLAG_25fps:
+		return "DVD_TC_FLAG_25fps"
+	case DVD_TC_FLAG_30fps:
+		return "DVD_TC_FLAG_30fps"
+	case DVD_TC_FLAG_DropFrame:
+		return "DVD_TC_FLAG_DropFrame"
+	case DVD_TC_FLAG_Interpolated:
+		return "DVD_TC_FLAG_Interpolated"
+	default:
+		return fmt.Sprintf("DVD_TIMECODE_FLAGS(%d)", int32(e))
+	}
+}
+
 // DVD_TITLE_APPMODE: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_title_appmode
 type DVD_TITLE_APPMODE int32
 
@@ -1232,6 +3450,21 @@ const (
 	DVD_AppMode_Karaoke       DVD_TITLE_APPMODE = 1
 	DVD_AppMode_Other         DVD_TITLE_APPMODE = 3
 )
+
+// String returns the DVD_TITLE_APPMODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_TITLE_APPMODE) String() string {
+	switch e {
+	case DVD_AppMode_Not_Specified:
+		return "DVD_AppMode_Not_Specified"
+	case DVD_AppMode_Karaoke:
+		return "DVD_AppMode_Karaoke"
+	case DVD_AppMode_Other:
+		return "DVD_AppMode_Other"
+	default:
+		return fmt.Sprintf("DVD_TITLE_APPMODE(%d)", int32(e))
+	}
+}
 
 // DVD_TextCharSet: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_textcharset
 type DVD_TextCharSet int32
@@ -1243,6 +3476,25 @@ const (
 	DVD_CharSet_ISO8859_1                     DVD_TextCharSet = 3
 	DVD_CharSet_ShiftJIS_Kanji_Roman_Katakana DVD_TextCharSet = 4
 )
+
+// String returns the DVD_TextCharSet constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_TextCharSet) String() string {
+	switch e {
+	case DVD_CharSet_Unicode:
+		return "DVD_CharSet_Unicode"
+	case DVD_CharSet_ISO646:
+		return "DVD_CharSet_ISO646"
+	case DVD_CharSet_JIS_Roman_Kanji:
+		return "DVD_CharSet_JIS_Roman_Kanji"
+	case DVD_CharSet_ISO8859_1:
+		return "DVD_CharSet_ISO8859_1"
+	case DVD_CharSet_ShiftJIS_Kanji_Roman_Katakana:
+		return "DVD_CharSet_ShiftJIS_Kanji_Roman_Katakana"
+	default:
+		return fmt.Sprintf("DVD_TextCharSet(%d)", int32(e))
+	}
+}
 
 // DVD_TextStringType: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_textstringtype
 type DVD_TextStringType int32
@@ -1282,6 +3534,79 @@ const (
 	DVD_Other_Take         DVD_TextStringType = 82
 )
 
+// String returns the DVD_TextStringType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_TextStringType) String() string {
+	switch e {
+	case DVD_Struct_Volume:
+		return "DVD_Struct_Volume"
+	case DVD_Struct_Title:
+		return "DVD_Struct_Title"
+	case DVD_Struct_ParentalID:
+		return "DVD_Struct_ParentalID"
+	case DVD_Struct_PartOfTitle:
+		return "DVD_Struct_PartOfTitle"
+	case DVD_Struct_Cell:
+		return "DVD_Struct_Cell"
+	case DVD_Stream_Audio:
+		return "DVD_Stream_Audio"
+	case DVD_Stream_Subpicture:
+		return "DVD_Stream_Subpicture"
+	case DVD_Stream_Angle:
+		return "DVD_Stream_Angle"
+	case DVD_Channel_Audio:
+		return "DVD_Channel_Audio"
+	case DVD_General_Name:
+		return "DVD_General_Name"
+	case DVD_General_Comments:
+		return "DVD_General_Comments"
+	case DVD_Title_Series:
+		return "DVD_Title_Series"
+	case DVD_Title_Movie:
+		return "DVD_Title_Movie"
+	case DVD_Title_Video:
+		return "DVD_Title_Video"
+	case DVD_Title_Album:
+		return "DVD_Title_Album"
+	case DVD_Title_Song:
+		return "DVD_Title_Song"
+	case DVD_Title_Other:
+		return "DVD_Title_Other"
+	case DVD_Title_Sub_Series:
+		return "DVD_Title_Sub_Series"
+	case DVD_Title_Sub_Movie:
+		return "DVD_Title_Sub_Movie"
+	case DVD_Title_Sub_Video:
+		return "DVD_Title_Sub_Video"
+	case DVD_Title_Sub_Album:
+		return "DVD_Title_Sub_Album"
+	case DVD_Title_Sub_Song:
+		return "DVD_Title_Sub_Song"
+	case DVD_Title_Sub_Other:
+		return "DVD_Title_Sub_Other"
+	case DVD_Title_Orig_Series:
+		return "DVD_Title_Orig_Series"
+	case DVD_Title_Orig_Movie:
+		return "DVD_Title_Orig_Movie"
+	case DVD_Title_Orig_Video:
+		return "DVD_Title_Orig_Video"
+	case DVD_Title_Orig_Album:
+		return "DVD_Title_Orig_Album"
+	case DVD_Title_Orig_Song:
+		return "DVD_Title_Orig_Song"
+	case DVD_Title_Orig_Other:
+		return "DVD_Title_Orig_Other"
+	case DVD_Other_Scene:
+		return "DVD_Other_Scene"
+	case DVD_Other_Cut:
+		return "DVD_Other_Cut"
+	case DVD_Other_Take:
+		return "DVD_Other_Take"
+	default:
+		return fmt.Sprintf("DVD_TextStringType(%d)", int32(e))
+	}
+}
+
 // DVD_VIDEO_COMPRESSION: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-dvd_video_compression
 type DVD_VIDEO_COMPRESSION int32
 
@@ -1290,6 +3615,21 @@ const (
 	DVD_VideoCompression_MPEG1 DVD_VIDEO_COMPRESSION = 1
 	DVD_VideoCompression_MPEG2 DVD_VIDEO_COMPRESSION = 2
 )
+
+// String returns the DVD_VIDEO_COMPRESSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_VIDEO_COMPRESSION) String() string {
+	switch e {
+	case DVD_VideoCompression_Other:
+		return "DVD_VideoCompression_Other"
+	case DVD_VideoCompression_MPEG1:
+		return "DVD_VideoCompression_MPEG1"
+	case DVD_VideoCompression_MPEG2:
+		return "DVD_VideoCompression_MPEG2"
+	default:
+		return fmt.Sprintf("DVD_VIDEO_COMPRESSION(%d)", int32(e))
+	}
+}
 
 // DVD_WARNING: https://learn.microsoft.com/windows/win32/api/dvdevcod/ne-dvdevcod-dvd_warning
 type DVD_WARNING int32
@@ -1303,6 +3643,27 @@ const (
 	DVD_WARNING_Read               DVD_WARNING = 6
 )
 
+// String returns the DVD_WARNING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVD_WARNING) String() string {
+	switch e {
+	case DVD_WARNING_InvalidDVD1_0Disc:
+		return "DVD_WARNING_InvalidDVD1_0Disc"
+	case DVD_WARNING_FormatNotSupported:
+		return "DVD_WARNING_FormatNotSupported"
+	case DVD_WARNING_IllegalNavCommand:
+		return "DVD_WARNING_IllegalNavCommand"
+	case DVD_WARNING_Open:
+		return "DVD_WARNING_Open"
+	case DVD_WARNING_Seek:
+		return "DVD_WARNING_Seek"
+	case DVD_WARNING_Read:
+		return "DVD_WARNING_Read"
+	default:
+		return fmt.Sprintf("DVD_WARNING(%d)", int32(e))
+	}
+}
+
 type DXVA2_DestinationFlags int32
 
 const (
@@ -1315,6 +3676,31 @@ const (
 	DXVA2_DestinationFlag_RFF_TFF_Present    DXVA2_DestinationFlags = 262144
 	DXVA2_DestinationFlagMask                DXVA2_DestinationFlags = -65521
 )
+
+// String returns the DXVA2_DestinationFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXVA2_DestinationFlags) String() string {
+	switch e {
+	case DXVA2_DestinationFlag_Background_Changed:
+		return "DXVA2_DestinationFlag_Background_Changed"
+	case DXVA2_DestinationFlag_TargetRect_Changed:
+		return "DXVA2_DestinationFlag_TargetRect_Changed"
+	case DXVA2_DestinationFlag_ColorData_Changed:
+		return "DXVA2_DestinationFlag_ColorData_Changed"
+	case DXVA2_DestinationFlag_Alpha_Changed:
+		return "DXVA2_DestinationFlag_Alpha_Changed"
+	case DXVA2_DestinationFlag_RFF:
+		return "DXVA2_DestinationFlag_RFF"
+	case DXVA2_DestinationFlag_TFF:
+		return "DXVA2_DestinationFlag_TFF"
+	case DXVA2_DestinationFlag_RFF_TFF_Present:
+		return "DXVA2_DestinationFlag_RFF_TFF_Present"
+	case DXVA2_DestinationFlagMask:
+		return "DXVA2_DestinationFlagMask"
+	default:
+		return fmt.Sprintf("DXVA2_DestinationFlags(%d)", int32(e))
+	}
+}
 
 type DXVA2_SampleFlags int32
 
@@ -1330,6 +3716,33 @@ const (
 	DXVA2_SampleFlagsMask                DXVA2_SampleFlags = -65505
 )
 
+// String returns the DXVA2_SampleFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DXVA2_SampleFlags) String() string {
+	switch e {
+	case DXVA2_SampleFlag_Palette_Changed:
+		return "DXVA2_SampleFlag_Palette_Changed"
+	case DXVA2_SampleFlag_SrcRect_Changed:
+		return "DXVA2_SampleFlag_SrcRect_Changed"
+	case DXVA2_SampleFlag_DstRect_Changed:
+		return "DXVA2_SampleFlag_DstRect_Changed"
+	case DXVA2_SampleFlag_ColorData_Changed:
+		return "DXVA2_SampleFlag_ColorData_Changed"
+	case DXVA2_SampleFlag_PlanarAlpha_Changed:
+		return "DXVA2_SampleFlag_PlanarAlpha_Changed"
+	case DXVA2_SampleFlag_RFF:
+		return "DXVA2_SampleFlag_RFF"
+	case DXVA2_SampleFlag_TFF:
+		return "DXVA2_SampleFlag_TFF"
+	case DXVA2_SampleFlag_RFF_TFF_Present:
+		return "DXVA2_SampleFlag_RFF_TFF_Present"
+	case DXVA2_SampleFlagsMask:
+		return "DXVA2_SampleFlagsMask"
+	default:
+		return fmt.Sprintf("DXVA2_SampleFlags(%d)", int32(e))
+	}
+}
+
 type EntitlementType int32
 
 const (
@@ -1337,6 +3750,21 @@ const (
 	NotEntitled      EntitlementType = 1
 	TechnicalFailure EntitlementType = 2
 )
+
+// String returns the EntitlementType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e EntitlementType) String() string {
+	switch e {
+	case Entitled:
+		return "Entitled"
+	case NotEntitled:
+		return "NotEntitled"
+	case TechnicalFailure:
+		return "TechnicalFailure"
+	default:
+		return fmt.Sprintf("EntitlementType(%d)", int32(e))
+	}
+}
 
 type FECMethod int32
 
@@ -1351,6 +3779,31 @@ const (
 	BDA_FEC_MAX                FECMethod = 6
 )
 
+// String returns the FECMethod constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FECMethod) String() string {
+	switch e {
+	case BDA_FEC_METHOD_NOT_SET:
+		return "BDA_FEC_METHOD_NOT_SET"
+	case BDA_FEC_METHOD_NOT_DEFINED:
+		return "BDA_FEC_METHOD_NOT_DEFINED"
+	case BDA_FEC_VITERBI:
+		return "BDA_FEC_VITERBI"
+	case BDA_FEC_RS_204_188:
+		return "BDA_FEC_RS_204_188"
+	case BDA_FEC_LDPC:
+		return "BDA_FEC_LDPC"
+	case BDA_FEC_BCH:
+		return "BDA_FEC_BCH"
+	case BDA_FEC_RS_147_130:
+		return "BDA_FEC_RS_147_130"
+	case BDA_FEC_MAX:
+		return "BDA_FEC_MAX"
+	default:
+		return fmt.Sprintf("FECMethod(%d)", int32(e))
+	}
+}
+
 // FILTER_STATE: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-filter_state
 type FILTER_STATE int32
 
@@ -1359,6 +3812,21 @@ const (
 	State_Paused  FILTER_STATE = 1
 	State_Running FILTER_STATE = 2
 )
+
+// String returns the FILTER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FILTER_STATE) String() string {
+	switch e {
+	case State_Stopped:
+		return "State_Stopped"
+	case State_Paused:
+		return "State_Paused"
+	case State_Running:
+		return "State_Running"
+	default:
+		return fmt.Sprintf("FILTER_STATE(%d)", int32(e))
+	}
+}
 
 type GuardInterval int32
 
@@ -1375,6 +3843,35 @@ const (
 	BDA_GUARD_MAX         GuardInterval = 8
 )
 
+// String returns the GuardInterval constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GuardInterval) String() string {
+	switch e {
+	case BDA_GUARD_NOT_SET:
+		return "BDA_GUARD_NOT_SET"
+	case BDA_GUARD_NOT_DEFINED:
+		return "BDA_GUARD_NOT_DEFINED"
+	case BDA_GUARD_1_32:
+		return "BDA_GUARD_1_32"
+	case BDA_GUARD_1_16:
+		return "BDA_GUARD_1_16"
+	case BDA_GUARD_1_8:
+		return "BDA_GUARD_1_8"
+	case BDA_GUARD_1_4:
+		return "BDA_GUARD_1_4"
+	case BDA_GUARD_1_128:
+		return "BDA_GUARD_1_128"
+	case BDA_GUARD_19_128:
+		return "BDA_GUARD_19_128"
+	case BDA_GUARD_19_256:
+		return "BDA_GUARD_19_256"
+	case BDA_GUARD_MAX:
+		return "BDA_GUARD_MAX"
+	default:
+		return fmt.Sprintf("GuardInterval(%d)", int32(e))
+	}
+}
+
 type HierarchyAlpha int32
 
 const (
@@ -1385,6 +3882,27 @@ const (
 	BDA_HALPHA_4           HierarchyAlpha = 3
 	BDA_HALPHA_MAX         HierarchyAlpha = 4
 )
+
+// String returns the HierarchyAlpha constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HierarchyAlpha) String() string {
+	switch e {
+	case BDA_HALPHA_NOT_SET:
+		return "BDA_HALPHA_NOT_SET"
+	case BDA_HALPHA_NOT_DEFINED:
+		return "BDA_HALPHA_NOT_DEFINED"
+	case BDA_HALPHA_1:
+		return "BDA_HALPHA_1"
+	case BDA_HALPHA_2:
+		return "BDA_HALPHA_2"
+	case BDA_HALPHA_4:
+		return "BDA_HALPHA_4"
+	case BDA_HALPHA_MAX:
+		return "BDA_HALPHA_MAX"
+	default:
+		return fmt.Sprintf("HierarchyAlpha(%d)", int32(e))
+	}
+}
 
 type IFILTERMAPPER_MERIT int32
 
@@ -1397,12 +3915,46 @@ const (
 	MERIT_HW_COMPRESSOR IFILTERMAPPER_MERIT = 1048656
 )
 
+// String returns the IFILTERMAPPER_MERIT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IFILTERMAPPER_MERIT) String() string {
+	switch e {
+	case MERIT_PREFERRED:
+		return "MERIT_PREFERRED"
+	case MERIT_NORMAL:
+		return "MERIT_NORMAL"
+	case MERIT_UNLIKELY:
+		return "MERIT_UNLIKELY"
+	case MERIT_DO_NOT_USE:
+		return "MERIT_DO_NOT_USE"
+	case MERIT_SW_COMPRESSOR:
+		return "MERIT_SW_COMPRESSOR"
+	case MERIT_HW_COMPRESSOR:
+		return "MERIT_HW_COMPRESSOR"
+	default:
+		return fmt.Sprintf("IFILTERMAPPER_MERIT(%d)", int32(e))
+	}
+}
+
 type ISDBCAS_REQUEST_ID int32
 
 const (
 	ISDBCAS_REQUEST_ID_EMG ISDBCAS_REQUEST_ID = 56
 	ISDBCAS_REQUEST_ID_EMD ISDBCAS_REQUEST_ID = 58
 )
+
+// String returns the ISDBCAS_REQUEST_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ISDBCAS_REQUEST_ID) String() string {
+	switch e {
+	case ISDBCAS_REQUEST_ID_EMG:
+		return "ISDBCAS_REQUEST_ID_EMG"
+	case ISDBCAS_REQUEST_ID_EMD:
+		return "ISDBCAS_REQUEST_ID_EMD"
+	default:
+		return fmt.Sprintf("ISDBCAS_REQUEST_ID(%d)", int32(e))
+	}
+}
 
 // InterleavingMode: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-interleavingmode
 type InterleavingMode int32
@@ -1414,6 +3966,24 @@ const (
 	INTERLEAVE_NONE_BUFFERED InterleavingMode = 3
 )
 
+// String returns the InterleavingMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e InterleavingMode) String() string {
+	switch e {
+	case INTERLEAVE_NONE:
+		return "INTERLEAVE_NONE"
+	case INTERLEAVE_CAPTURE:
+		return "INTERLEAVE_CAPTURE"
+	case INTERLEAVE_FULL:
+		return "INTERLEAVE_FULL"
+	case INTERLEAVE_NONE_BUFFERED:
+		return "INTERLEAVE_NONE_BUFFERED"
+	default:
+		return fmt.Sprintf("InterleavingMode(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type KSPROPERTY_IPSINK int32
 
 const (
@@ -1421,6 +3991,22 @@ const (
 	KSPROPERTY_IPSINK_ADAPTER_DESCRIPTION KSPROPERTY_IPSINK = 1
 	KSPROPERTY_IPSINK_ADAPTER_ADDRESS     KSPROPERTY_IPSINK = 2
 )
+
+// String returns the KSPROPERTY_IPSINK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e KSPROPERTY_IPSINK) String() string {
+	var parts []string
+	if e&KSPROPERTY_IPSINK_ADAPTER_DESCRIPTION != 0 {
+		parts = append(parts, "KSPROPERTY_IPSINK_ADAPTER_DESCRIPTION")
+	}
+	if e&KSPROPERTY_IPSINK_ADAPTER_ADDRESS != 0 {
+		parts = append(parts, "KSPROPERTY_IPSINK_ADAPTER_ADDRESS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type LNB_Source int32
 
@@ -1434,11 +4020,45 @@ const (
 	BDA_LNB_SOURCE_MAX         LNB_Source = 5
 )
 
+// String returns the LNB_Source constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LNB_Source) String() string {
+	switch e {
+	case BDA_LNB_SOURCE_NOT_SET:
+		return "BDA_LNB_SOURCE_NOT_SET"
+	case BDA_LNB_SOURCE_NOT_DEFINED:
+		return "BDA_LNB_SOURCE_NOT_DEFINED"
+	case BDA_LNB_SOURCE_A:
+		return "BDA_LNB_SOURCE_A"
+	case BDA_LNB_SOURCE_B:
+		return "BDA_LNB_SOURCE_B"
+	case BDA_LNB_SOURCE_C:
+		return "BDA_LNB_SOURCE_C"
+	case BDA_LNB_SOURCE_D:
+		return "BDA_LNB_SOURCE_D"
+	case BDA_LNB_SOURCE_MAX:
+		return "BDA_LNB_SOURCE_MAX"
+	default:
+		return fmt.Sprintf("LNB_Source(%d)", int32(e))
+	}
+}
+
 type LocationCodeSchemeType int32
 
 const (
 	SCTE_18 LocationCodeSchemeType = 0
 )
+
+// String returns the LocationCodeSchemeType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LocationCodeSchemeType) String() string {
+	switch e {
+	case SCTE_18:
+		return "SCTE_18"
+	default:
+		return fmt.Sprintf("LocationCodeSchemeType(%d)", int32(e))
+	}
+}
 
 // MEDIA_SAMPLE_CONTENT: https://learn.microsoft.com/windows/win32/DirectShow/media-sample-content
 type MEDIA_SAMPLE_CONTENT int32
@@ -1450,6 +4070,24 @@ const (
 	MEDIA_TRANSPORT_PAYLOAD MEDIA_SAMPLE_CONTENT = 3
 )
 
+// String returns the MEDIA_SAMPLE_CONTENT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MEDIA_SAMPLE_CONTENT) String() string {
+	switch e {
+	case MEDIA_TRANSPORT_PACKET:
+		return "MEDIA_TRANSPORT_PACKET"
+	case MEDIA_ELEMENTARY_STREAM:
+		return "MEDIA_ELEMENTARY_STREAM"
+	case MEDIA_MPEG2_PSI:
+		return "MEDIA_MPEG2_PSI"
+	case MEDIA_TRANSPORT_PAYLOAD:
+		return "MEDIA_TRANSPORT_PAYLOAD"
+	default:
+		return fmt.Sprintf("MEDIA_SAMPLE_CONTENT(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type MMSSF_GET_INFORMATION_FLAGS int32
 
 const (
@@ -1457,6 +4095,25 @@ const (
 	MMSSF_SUPPORTSEEK  MMSSF_GET_INFORMATION_FLAGS = 2
 	MMSSF_ASYNCHRONOUS MMSSF_GET_INFORMATION_FLAGS = 4
 )
+
+// String returns the MMSSF_GET_INFORMATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MMSSF_GET_INFORMATION_FLAGS) String() string {
+	var parts []string
+	if e&MMSSF_HASCLOCK != 0 {
+		parts = append(parts, "MMSSF_HASCLOCK")
+	}
+	if e&MMSSF_SUPPORTSEEK != 0 {
+		parts = append(parts, "MMSSF_SUPPORTSEEK")
+	}
+	if e&MMSSF_ASYNCHRONOUS != 0 {
+		parts = append(parts, "MMSSF_ASYNCHRONOUS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type MPEG2StreamType int32
 
@@ -1501,6 +4158,89 @@ const (
 	DOLBY_DIGITAL_PLUS_AUDIO_ATSC   MPEG2StreamType = 135
 )
 
+// String returns the MPEG2StreamType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MPEG2StreamType) String() string {
+	switch e {
+	case BDA_UNITIALIZED_MPEG2STREAMTYPE:
+		return "BDA_UNITIALIZED_MPEG2STREAMTYPE"
+	case Reserved1:
+		return "Reserved1"
+	case ISO_IEC_11172_2_VIDEO:
+		return "ISO_IEC_11172_2_VIDEO"
+	case ISO_IEC_13818_2_VIDEO:
+		return "ISO_IEC_13818_2_VIDEO"
+	case ISO_IEC_11172_3_AUDIO:
+		return "ISO_IEC_11172_3_AUDIO"
+	case ISO_IEC_13818_3_AUDIO:
+		return "ISO_IEC_13818_3_AUDIO"
+	case ISO_IEC_13818_1_PRIVATE_SECTION:
+		return "ISO_IEC_13818_1_PRIVATE_SECTION"
+	case ISO_IEC_13818_1_PES:
+		return "ISO_IEC_13818_1_PES"
+	case ISO_IEC_13522_MHEG:
+		return "ISO_IEC_13522_MHEG"
+	case ANNEX_A_DSM_CC:
+		return "ANNEX_A_DSM_CC"
+	case ITU_T_REC_H_222_1:
+		return "ITU_T_REC_H_222_1"
+	case ISO_IEC_13818_6_TYPE_A:
+		return "ISO_IEC_13818_6_TYPE_A"
+	case ISO_IEC_13818_6_TYPE_B:
+		return "ISO_IEC_13818_6_TYPE_B"
+	case ISO_IEC_13818_6_TYPE_C:
+		return "ISO_IEC_13818_6_TYPE_C"
+	case ISO_IEC_13818_6_TYPE_D:
+		return "ISO_IEC_13818_6_TYPE_D"
+	case ISO_IEC_13818_1_AUXILIARY:
+		return "ISO_IEC_13818_1_AUXILIARY"
+	case ISO_IEC_13818_7_AUDIO:
+		return "ISO_IEC_13818_7_AUDIO"
+	case ISO_IEC_14496_2_VISUAL:
+		return "ISO_IEC_14496_2_VISUAL"
+	case ISO_IEC_14496_3_AUDIO:
+		return "ISO_IEC_14496_3_AUDIO"
+	case ISO_IEC_14496_1_IN_PES:
+		return "ISO_IEC_14496_1_IN_PES"
+	case ISO_IEC_14496_1_IN_SECTION:
+		return "ISO_IEC_14496_1_IN_SECTION"
+	case ISO_IEC_13818_6_DOWNLOAD:
+		return "ISO_IEC_13818_6_DOWNLOAD"
+	case METADATA_IN_PES:
+		return "METADATA_IN_PES"
+	case METADATA_IN_SECTION:
+		return "METADATA_IN_SECTION"
+	case METADATA_IN_DATA_CAROUSEL:
+		return "METADATA_IN_DATA_CAROUSEL"
+	case METADATA_IN_OBJECT_CAROUSEL:
+		return "METADATA_IN_OBJECT_CAROUSEL"
+	case METADATA_IN_DOWNLOAD_PROTOCOL:
+		return "METADATA_IN_DOWNLOAD_PROTOCOL"
+	case IRPM_STREAMM:
+		return "IRPM_STREAMM"
+	case ITU_T_H264:
+		return "ITU_T_H264"
+	case ISO_IEC_13818_1_RESERVED:
+		return "ISO_IEC_13818_1_RESERVED"
+	case HEVC_VIDEO_OR_TEMPORAL_VIDEO:
+		return "HEVC_VIDEO_OR_TEMPORAL_VIDEO"
+	case HEVC_TEMPORAL_VIDEO_SUBSET:
+		return "HEVC_TEMPORAL_VIDEO_SUBSET"
+	case MPEG_H_AUDIO:
+		return "MPEG_H_AUDIO"
+	case MPEG_H_AUDIO_MS:
+		return "MPEG_H_AUDIO_MS"
+	case ISO_IEC_USER_PRIVATE:
+		return "ISO_IEC_USER_PRIVATE"
+	case DOLBY_AC3_AUDIO:
+		return "DOLBY_AC3_AUDIO"
+	case DOLBY_DIGITAL_PLUS_AUDIO_ATSC:
+		return "DOLBY_DIGITAL_PLUS_AUDIO_ATSC"
+	default:
+		return fmt.Sprintf("MPEG2StreamType(%d)", int32(e))
+	}
+}
+
 type MPEGLAYER3WAVEFORMAT_FLAGS uint32
 
 const (
@@ -1508,6 +4248,21 @@ const (
 	MPEGLAYER3_FLAG_PADDING_ON  MPEGLAYER3WAVEFORMAT_FLAGS = 1
 	MPEGLAYER3_FLAG_PADDING_OFF MPEGLAYER3WAVEFORMAT_FLAGS = 2
 )
+
+// String returns the MPEGLAYER3WAVEFORMAT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MPEGLAYER3WAVEFORMAT_FLAGS) String() string {
+	switch e {
+	case MPEGLAYER3_FLAG_PADDING_ISO:
+		return "MPEGLAYER3_FLAG_PADDING_ISO"
+	case MPEGLAYER3_FLAG_PADDING_ON:
+		return "MPEGLAYER3_FLAG_PADDING_ON"
+	case MPEGLAYER3_FLAG_PADDING_OFF:
+		return "MPEGLAYER3_FLAG_PADDING_OFF"
+	default:
+		return fmt.Sprintf("MPEGLAYER3WAVEFORMAT_FLAGS(%d)", uint32(e))
+	}
+}
 
 // MP_CURVE_TYPE: https://learn.microsoft.com/windows/win32/api/medparam/ne-medparam-mp_curve_type
 type MP_CURVE_TYPE int32
@@ -1520,6 +4275,25 @@ const (
 	MP_CURVE_SINE      MP_CURVE_TYPE = 16
 )
 
+// String returns the MP_CURVE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MP_CURVE_TYPE) String() string {
+	switch e {
+	case MP_CURVE_JUMP:
+		return "MP_CURVE_JUMP"
+	case MP_CURVE_LINEAR:
+		return "MP_CURVE_LINEAR"
+	case MP_CURVE_SQUARE:
+		return "MP_CURVE_SQUARE"
+	case MP_CURVE_INVSQUARE:
+		return "MP_CURVE_INVSQUARE"
+	case MP_CURVE_SINE:
+		return "MP_CURVE_SINE"
+	default:
+		return fmt.Sprintf("MP_CURVE_TYPE(%d)", int32(e))
+	}
+}
+
 // MP_TYPE: https://learn.microsoft.com/windows/win32/api/medparam/ne-medparam-mp_type
 type MP_TYPE int32
 
@@ -1531,6 +4305,25 @@ const (
 	MPT_MAX   MP_TYPE = 4
 )
 
+// String returns the MP_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MP_TYPE) String() string {
+	switch e {
+	case MPT_INT:
+		return "MPT_INT"
+	case MPT_FLOAT:
+		return "MPT_FLOAT"
+	case MPT_BOOL:
+		return "MPT_BOOL"
+	case MPT_ENUM:
+		return "MPT_ENUM"
+	case MPT_MAX:
+		return "MPT_MAX"
+	default:
+		return fmt.Sprintf("MP_TYPE(%d)", int32(e))
+	}
+}
+
 type MUX_PID_TYPE int32
 
 const (
@@ -1538,6 +4331,21 @@ const (
 	PID_ELEMENTARY_STREAM    MUX_PID_TYPE = 0
 	PID_MPEG2_SECTION_PSI_SI MUX_PID_TYPE = 1
 )
+
+// String returns the MUX_PID_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MUX_PID_TYPE) String() string {
+	switch e {
+	case PID_OTHER:
+		return "PID_OTHER"
+	case PID_ELEMENTARY_STREAM:
+		return "PID_ELEMENTARY_STREAM"
+	case PID_MPEG2_SECTION_PSI_SI:
+		return "PID_MPEG2_SECTION_PSI_SI"
+	default:
+		return fmt.Sprintf("MUX_PID_TYPE(%d)", int32(e))
+	}
+}
 
 type ModulationType int32
 
@@ -1582,6 +4390,91 @@ const (
 	BDA_MOD_MAX              ModulationType = 36
 )
 
+// String returns the ModulationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ModulationType) String() string {
+	switch e {
+	case BDA_MOD_NOT_SET:
+		return "BDA_MOD_NOT_SET"
+	case BDA_MOD_NOT_DEFINED:
+		return "BDA_MOD_NOT_DEFINED"
+	case BDA_MOD_16QAM:
+		return "BDA_MOD_16QAM"
+	case BDA_MOD_32QAM:
+		return "BDA_MOD_32QAM"
+	case BDA_MOD_64QAM:
+		return "BDA_MOD_64QAM"
+	case BDA_MOD_80QAM:
+		return "BDA_MOD_80QAM"
+	case BDA_MOD_96QAM:
+		return "BDA_MOD_96QAM"
+	case BDA_MOD_112QAM:
+		return "BDA_MOD_112QAM"
+	case BDA_MOD_128QAM:
+		return "BDA_MOD_128QAM"
+	case BDA_MOD_160QAM:
+		return "BDA_MOD_160QAM"
+	case BDA_MOD_192QAM:
+		return "BDA_MOD_192QAM"
+	case BDA_MOD_224QAM:
+		return "BDA_MOD_224QAM"
+	case BDA_MOD_256QAM:
+		return "BDA_MOD_256QAM"
+	case BDA_MOD_320QAM:
+		return "BDA_MOD_320QAM"
+	case BDA_MOD_384QAM:
+		return "BDA_MOD_384QAM"
+	case BDA_MOD_448QAM:
+		return "BDA_MOD_448QAM"
+	case BDA_MOD_512QAM:
+		return "BDA_MOD_512QAM"
+	case BDA_MOD_640QAM:
+		return "BDA_MOD_640QAM"
+	case BDA_MOD_768QAM:
+		return "BDA_MOD_768QAM"
+	case BDA_MOD_896QAM:
+		return "BDA_MOD_896QAM"
+	case BDA_MOD_1024QAM:
+		return "BDA_MOD_1024QAM"
+	case BDA_MOD_QPSK:
+		return "BDA_MOD_QPSK"
+	case BDA_MOD_BPSK:
+		return "BDA_MOD_BPSK"
+	case BDA_MOD_OQPSK:
+		return "BDA_MOD_OQPSK"
+	case BDA_MOD_8VSB:
+		return "BDA_MOD_8VSB"
+	case BDA_MOD_16VSB:
+		return "BDA_MOD_16VSB"
+	case BDA_MOD_ANALOG_AMPLITUDE:
+		return "BDA_MOD_ANALOG_AMPLITUDE"
+	case BDA_MOD_ANALOG_FREQUENCY:
+		return "BDA_MOD_ANALOG_FREQUENCY"
+	case BDA_MOD_8PSK:
+		return "BDA_MOD_8PSK"
+	case BDA_MOD_RF:
+		return "BDA_MOD_RF"
+	case BDA_MOD_16APSK:
+		return "BDA_MOD_16APSK"
+	case BDA_MOD_32APSK:
+		return "BDA_MOD_32APSK"
+	case BDA_MOD_NBC_QPSK:
+		return "BDA_MOD_NBC_QPSK"
+	case BDA_MOD_NBC_8PSK:
+		return "BDA_MOD_NBC_8PSK"
+	case BDA_MOD_DIRECTV:
+		return "BDA_MOD_DIRECTV"
+	case BDA_MOD_ISDB_T_TMCC:
+		return "BDA_MOD_ISDB_T_TMCC"
+	case BDA_MOD_ISDB_S_TMCC:
+		return "BDA_MOD_ISDB_S_TMCC"
+	case BDA_MOD_MAX:
+		return "BDA_MOD_MAX"
+	default:
+		return fmt.Sprintf("ModulationType(%d)", int32(e))
+	}
+}
+
 type OA_BOOL int32
 
 const (
@@ -1589,6 +4482,20 @@ const (
 	OAFALSE OA_BOOL = 0
 )
 
+// String returns the OA_BOOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OA_BOOL) String() string {
+	switch e {
+	case OATRUE:
+		return "OATRUE"
+	case OAFALSE:
+		return "OAFALSE"
+	default:
+		return fmt.Sprintf("OA_BOOL(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type OUTPUT_STATE int32
 
 const (
@@ -1597,6 +4504,22 @@ const (
 	RenderData OUTPUT_STATE = 2
 )
 
+// String returns the OUTPUT_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OUTPUT_STATE) String() string {
+	var parts []string
+	if e&ReadData != 0 {
+		parts = append(parts, "ReadData")
+	}
+	if e&RenderData != 0 {
+		parts = append(parts, "RenderData")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // PIN_DIRECTION: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-pin_direction
 type PIN_DIRECTION int32
 
@@ -1604,6 +4527,19 @@ const (
 	PINDIR_INPUT  PIN_DIRECTION = 0
 	PINDIR_OUTPUT PIN_DIRECTION = 1
 )
+
+// String returns the PIN_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PIN_DIRECTION) String() string {
+	switch e {
+	case PINDIR_INPUT:
+		return "PINDIR_INPUT"
+	case PINDIR_OUTPUT:
+		return "PINDIR_OUTPUT"
+	default:
+		return fmt.Sprintf("PIN_DIRECTION(%d)", int32(e))
+	}
+}
 
 // PhysicalConnectorType: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-physicalconnectortype
 type PhysicalConnectorType int32
@@ -1636,6 +4572,65 @@ const (
 	PhysConn_Audio_AudioDecoder    PhysicalConnectorType = 4105
 )
 
+// String returns the PhysicalConnectorType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PhysicalConnectorType) String() string {
+	switch e {
+	case PhysConn_Video_Tuner:
+		return "PhysConn_Video_Tuner"
+	case PhysConn_Video_Composite:
+		return "PhysConn_Video_Composite"
+	case PhysConn_Video_SVideo:
+		return "PhysConn_Video_SVideo"
+	case PhysConn_Video_RGB:
+		return "PhysConn_Video_RGB"
+	case PhysConn_Video_YRYBY:
+		return "PhysConn_Video_YRYBY"
+	case PhysConn_Video_SerialDigital:
+		return "PhysConn_Video_SerialDigital"
+	case PhysConn_Video_ParallelDigital:
+		return "PhysConn_Video_ParallelDigital"
+	case PhysConn_Video_SCSI:
+		return "PhysConn_Video_SCSI"
+	case PhysConn_Video_AUX:
+		return "PhysConn_Video_AUX"
+	case PhysConn_Video_1394:
+		return "PhysConn_Video_1394"
+	case PhysConn_Video_USB:
+		return "PhysConn_Video_USB"
+	case PhysConn_Video_VideoDecoder:
+		return "PhysConn_Video_VideoDecoder"
+	case PhysConn_Video_VideoEncoder:
+		return "PhysConn_Video_VideoEncoder"
+	case PhysConn_Video_SCART:
+		return "PhysConn_Video_SCART"
+	case PhysConn_Video_Black:
+		return "PhysConn_Video_Black"
+	case PhysConn_Audio_Tuner:
+		return "PhysConn_Audio_Tuner"
+	case PhysConn_Audio_Line:
+		return "PhysConn_Audio_Line"
+	case PhysConn_Audio_Mic:
+		return "PhysConn_Audio_Mic"
+	case PhysConn_Audio_AESDigital:
+		return "PhysConn_Audio_AESDigital"
+	case PhysConn_Audio_SPDIFDigital:
+		return "PhysConn_Audio_SPDIFDigital"
+	case PhysConn_Audio_SCSI:
+		return "PhysConn_Audio_SCSI"
+	case PhysConn_Audio_AUX:
+		return "PhysConn_Audio_AUX"
+	case PhysConn_Audio_1394:
+		return "PhysConn_Audio_1394"
+	case PhysConn_Audio_USB:
+		return "PhysConn_Audio_USB"
+	case PhysConn_Audio_AudioDecoder:
+		return "PhysConn_Audio_AudioDecoder"
+	default:
+		return fmt.Sprintf("PhysicalConnectorType(%d)", int32(e))
+	}
+}
+
 type Pilot int32
 
 const (
@@ -1645,6 +4640,25 @@ const (
 	BDA_PILOT_ON          Pilot = 2
 	BDA_PILOT_MAX         Pilot = 3
 )
+
+// String returns the Pilot constant's name, or its numeric form when
+// the value is not a known constant.
+func (e Pilot) String() string {
+	switch e {
+	case BDA_PILOT_NOT_SET:
+		return "BDA_PILOT_NOT_SET"
+	case BDA_PILOT_NOT_DEFINED:
+		return "BDA_PILOT_NOT_DEFINED"
+	case BDA_PILOT_OFF:
+		return "BDA_PILOT_OFF"
+	case BDA_PILOT_ON:
+		return "BDA_PILOT_ON"
+	case BDA_PILOT_MAX:
+		return "BDA_PILOT_MAX"
+	default:
+		return fmt.Sprintf("Pilot(%d)", int32(e))
+	}
+}
 
 type Polarisation int32
 
@@ -1658,6 +4672,29 @@ const (
 	BDA_POLARISATION_MAX         Polarisation = 5
 )
 
+// String returns the Polarisation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e Polarisation) String() string {
+	switch e {
+	case BDA_POLARISATION_NOT_SET:
+		return "BDA_POLARISATION_NOT_SET"
+	case BDA_POLARISATION_NOT_DEFINED:
+		return "BDA_POLARISATION_NOT_DEFINED"
+	case BDA_POLARISATION_LINEAR_H:
+		return "BDA_POLARISATION_LINEAR_H"
+	case BDA_POLARISATION_LINEAR_V:
+		return "BDA_POLARISATION_LINEAR_V"
+	case BDA_POLARISATION_CIRCULAR_L:
+		return "BDA_POLARISATION_CIRCULAR_L"
+	case BDA_POLARISATION_CIRCULAR_R:
+		return "BDA_POLARISATION_CIRCULAR_R"
+	case BDA_POLARISATION_MAX:
+		return "BDA_POLARISATION_MAX"
+	default:
+		return fmt.Sprintf("Polarisation(%d)", int32(e))
+	}
+}
+
 // QualityMessageType: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-qualitymessagetype
 type QualityMessageType int32
 
@@ -1666,6 +4703,20 @@ const (
 	Flood  QualityMessageType = 1
 )
 
+// String returns the QualityMessageType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QualityMessageType) String() string {
+	switch e {
+	case Famine:
+		return "Famine"
+	case Flood:
+		return "Flood"
+	default:
+		return fmt.Sprintf("QualityMessageType(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type REG_PINFLAG int32
 
 const (
@@ -1674,6 +4725,28 @@ const (
 	REG_PINFLAG_B_MANY     REG_PINFLAG = 4
 	REG_PINFLAG_B_OUTPUT   REG_PINFLAG = 8
 )
+
+// String returns the REG_PINFLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REG_PINFLAG) String() string {
+	var parts []string
+	if e&REG_PINFLAG_B_ZERO != 0 {
+		parts = append(parts, "REG_PINFLAG_B_ZERO")
+	}
+	if e&REG_PINFLAG_B_RENDERER != 0 {
+		parts = append(parts, "REG_PINFLAG_B_RENDERER")
+	}
+	if e&REG_PINFLAG_B_MANY != 0 {
+		parts = append(parts, "REG_PINFLAG_B_MANY")
+	}
+	if e&REG_PINFLAG_B_OUTPUT != 0 {
+		parts = append(parts, "REG_PINFLAG_B_OUTPUT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type RollOff int32
 
@@ -1685,6 +4758,27 @@ const (
 	BDA_ROLL_OFF_35          RollOff = 3
 	BDA_ROLL_OFF_MAX         RollOff = 4
 )
+
+// String returns the RollOff constant's name, or its numeric form when
+// the value is not a known constant.
+func (e RollOff) String() string {
+	switch e {
+	case BDA_ROLL_OFF_NOT_SET:
+		return "BDA_ROLL_OFF_NOT_SET"
+	case BDA_ROLL_OFF_NOT_DEFINED:
+		return "BDA_ROLL_OFF_NOT_DEFINED"
+	case BDA_ROLL_OFF_20:
+		return "BDA_ROLL_OFF_20"
+	case BDA_ROLL_OFF_25:
+		return "BDA_ROLL_OFF_25"
+	case BDA_ROLL_OFF_35:
+		return "BDA_ROLL_OFF_35"
+	case BDA_ROLL_OFF_MAX:
+		return "BDA_ROLL_OFF_MAX"
+	default:
+		return fmt.Sprintf("RollOff(%d)", int32(e))
+	}
+}
 
 // SNDDEV_ERR: https://learn.microsoft.com/windows/win32/api/audevcod/ne-audevcod-snddev_err
 type SNDDEV_ERR int32
@@ -1706,6 +4800,43 @@ const (
 	SNDDEV_ERROR_Query           SNDDEV_ERR = 14
 )
 
+// String returns the SNDDEV_ERR constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SNDDEV_ERR) String() string {
+	switch e {
+	case SNDDEV_ERROR_Open:
+		return "SNDDEV_ERROR_Open"
+	case SNDDEV_ERROR_Close:
+		return "SNDDEV_ERROR_Close"
+	case SNDDEV_ERROR_GetCaps:
+		return "SNDDEV_ERROR_GetCaps"
+	case SNDDEV_ERROR_PrepareHeader:
+		return "SNDDEV_ERROR_PrepareHeader"
+	case SNDDEV_ERROR_UnprepareHeader:
+		return "SNDDEV_ERROR_UnprepareHeader"
+	case SNDDEV_ERROR_Reset:
+		return "SNDDEV_ERROR_Reset"
+	case SNDDEV_ERROR_Restart:
+		return "SNDDEV_ERROR_Restart"
+	case SNDDEV_ERROR_GetPosition:
+		return "SNDDEV_ERROR_GetPosition"
+	case SNDDEV_ERROR_Write:
+		return "SNDDEV_ERROR_Write"
+	case SNDDEV_ERROR_Pause:
+		return "SNDDEV_ERROR_Pause"
+	case SNDDEV_ERROR_Stop:
+		return "SNDDEV_ERROR_Stop"
+	case SNDDEV_ERROR_Start:
+		return "SNDDEV_ERROR_Start"
+	case SNDDEV_ERROR_AddBuffer:
+		return "SNDDEV_ERROR_AddBuffer"
+	case SNDDEV_ERROR_Query:
+		return "SNDDEV_ERROR_Query"
+	default:
+		return fmt.Sprintf("SNDDEV_ERR(%d)", int32(e))
+	}
+}
+
 type SSUPDATE_TYPE int32
 
 const (
@@ -1713,11 +4844,35 @@ const (
 	SSUPDATE_CONTINUOUS SSUPDATE_TYPE = 2
 )
 
+// String returns the SSUPDATE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SSUPDATE_TYPE) String() string {
+	switch e {
+	case SSUPDATE_ASYNC:
+		return "SSUPDATE_ASYNC"
+	case SSUPDATE_CONTINUOUS:
+		return "SSUPDATE_CONTINUOUS"
+	default:
+		return fmt.Sprintf("SSUPDATE_TYPE(%d)", int32(e))
+	}
+}
+
 type STREAMIF_CONSTANTS int32
 
 const (
 	MAX_NUMBER_OF_STREAMS STREAMIF_CONSTANTS = 16
 )
+
+// String returns the STREAMIF_CONSTANTS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STREAMIF_CONSTANTS) String() string {
+	switch e {
+	case MAX_NUMBER_OF_STREAMS:
+		return "MAX_NUMBER_OF_STREAMS"
+	default:
+		return fmt.Sprintf("STREAMIF_CONSTANTS(%d)", int32(e))
+	}
+}
 
 // STREAM_STATE: https://learn.microsoft.com/windows/win32/api/mmstream/ne-mmstream-stream_state
 type STREAM_STATE int32
@@ -1727,6 +4882,19 @@ const (
 	STREAMSTATE_RUN  STREAM_STATE = 1
 )
 
+// String returns the STREAM_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STREAM_STATE) String() string {
+	switch e {
+	case STREAMSTATE_STOP:
+		return "STREAMSTATE_STOP"
+	case STREAMSTATE_RUN:
+		return "STREAMSTATE_RUN"
+	default:
+		return fmt.Sprintf("STREAM_STATE(%d)", int32(e))
+	}
+}
+
 // STREAM_TYPE: https://learn.microsoft.com/windows/win32/api/mmstream/ne-mmstream-stream_type
 type STREAM_TYPE int32
 
@@ -1735,6 +4903,21 @@ const (
 	STREAMTYPE_WRITE     STREAM_TYPE = 1
 	STREAMTYPE_TRANSFORM STREAM_TYPE = 2
 )
+
+// String returns the STREAM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e STREAM_TYPE) String() string {
+	switch e {
+	case STREAMTYPE_READ:
+		return "STREAMTYPE_READ"
+	case STREAMTYPE_WRITE:
+		return "STREAMTYPE_WRITE"
+	case STREAMTYPE_TRANSFORM:
+		return "STREAMTYPE_TRANSFORM"
+	default:
+		return fmt.Sprintf("STREAM_TYPE(%d)", int32(e))
+	}
+}
 
 type ScanModulationTypes int32
 
@@ -1776,6 +4959,85 @@ const (
 	BDA_SCAN_MOD_32APSK                         ScanModulationTypes = 536870912
 )
 
+// String returns the ScanModulationTypes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ScanModulationTypes) String() string {
+	switch e {
+	case BDA_SCAN_MOD_16QAM:
+		return "BDA_SCAN_MOD_16QAM"
+	case BDA_SCAN_MOD_32QAM:
+		return "BDA_SCAN_MOD_32QAM"
+	case BDA_SCAN_MOD_64QAM:
+		return "BDA_SCAN_MOD_64QAM"
+	case BDA_SCAN_MOD_80QAM:
+		return "BDA_SCAN_MOD_80QAM"
+	case BDA_SCAN_MOD_96QAM:
+		return "BDA_SCAN_MOD_96QAM"
+	case BDA_SCAN_MOD_112QAM:
+		return "BDA_SCAN_MOD_112QAM"
+	case BDA_SCAN_MOD_128QAM:
+		return "BDA_SCAN_MOD_128QAM"
+	case BDA_SCAN_MOD_160QAM:
+		return "BDA_SCAN_MOD_160QAM"
+	case BDA_SCAN_MOD_192QAM:
+		return "BDA_SCAN_MOD_192QAM"
+	case BDA_SCAN_MOD_224QAM:
+		return "BDA_SCAN_MOD_224QAM"
+	case BDA_SCAN_MOD_256QAM:
+		return "BDA_SCAN_MOD_256QAM"
+	case BDA_SCAN_MOD_320QAM:
+		return "BDA_SCAN_MOD_320QAM"
+	case BDA_SCAN_MOD_384QAM:
+		return "BDA_SCAN_MOD_384QAM"
+	case BDA_SCAN_MOD_448QAM:
+		return "BDA_SCAN_MOD_448QAM"
+	case BDA_SCAN_MOD_512QAM:
+		return "BDA_SCAN_MOD_512QAM"
+	case BDA_SCAN_MOD_640QAM:
+		return "BDA_SCAN_MOD_640QAM"
+	case BDA_SCAN_MOD_768QAM:
+		return "BDA_SCAN_MOD_768QAM"
+	case BDA_SCAN_MOD_896QAM:
+		return "BDA_SCAN_MOD_896QAM"
+	case BDA_SCAN_MOD_1024QAM:
+		return "BDA_SCAN_MOD_1024QAM"
+	case BDA_SCAN_MOD_QPSK:
+		return "BDA_SCAN_MOD_QPSK"
+	case BDA_SCAN_MOD_BPSK:
+		return "BDA_SCAN_MOD_BPSK"
+	case BDA_SCAN_MOD_OQPSK:
+		return "BDA_SCAN_MOD_OQPSK"
+	case BDA_SCAN_MOD_8VSB:
+		return "BDA_SCAN_MOD_8VSB"
+	case BDA_SCAN_MOD_16VSB:
+		return "BDA_SCAN_MOD_16VSB"
+	case BDA_SCAN_MOD_AM_RADIO:
+		return "BDA_SCAN_MOD_AM_RADIO"
+	case BDA_SCAN_MOD_FM_RADIO:
+		return "BDA_SCAN_MOD_FM_RADIO"
+	case BDA_SCAN_MOD_8PSK:
+		return "BDA_SCAN_MOD_8PSK"
+	case BDA_SCAN_MOD_RF:
+		return "BDA_SCAN_MOD_RF"
+	case ScanModulationTypesMask_MCE_DigitalCable:
+		return "ScanModulationTypesMask_MCE_DigitalCable"
+	case ScanModulationTypesMask_MCE_TerrestrialATSC:
+		return "ScanModulationTypesMask_MCE_TerrestrialATSC"
+	case ScanModulationTypesMask_MCE_AnalogTv:
+		return "ScanModulationTypesMask_MCE_AnalogTv"
+	case ScanModulationTypesMask_MCE_All_TV:
+		return "ScanModulationTypesMask_MCE_All_TV"
+	case ScanModulationTypesMask_DVBC:
+		return "ScanModulationTypesMask_DVBC"
+	case BDA_SCAN_MOD_16APSK:
+		return "BDA_SCAN_MOD_16APSK"
+	case BDA_SCAN_MOD_32APSK:
+		return "BDA_SCAN_MOD_32APSK"
+	default:
+		return fmt.Sprintf("ScanModulationTypes(%d)", int32(e))
+	}
+}
+
 // SmartCardAssociationType: https://learn.microsoft.com/windows/win32/api/bdaiface/ne-bdaiface-smartcardassociationtype
 type SmartCardAssociationType int32
 
@@ -1784,6 +5046,21 @@ const (
 	Associated         SmartCardAssociationType = 1
 	AssociationUnknown SmartCardAssociationType = 2
 )
+
+// String returns the SmartCardAssociationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SmartCardAssociationType) String() string {
+	switch e {
+	case NotAssociated:
+		return "NotAssociated"
+	case Associated:
+		return "Associated"
+	case AssociationUnknown:
+		return "AssociationUnknown"
+	default:
+		return fmt.Sprintf("SmartCardAssociationType(%d)", int32(e))
+	}
+}
 
 // SmartCardStatusType: https://learn.microsoft.com/windows/win32/api/bdaiface/ne-bdaiface-smartcardstatustype
 type SmartCardStatusType int32
@@ -1796,6 +5073,25 @@ const (
 	CardFirmwareUpgrade SmartCardStatusType = 4
 )
 
+// String returns the SmartCardStatusType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SmartCardStatusType) String() string {
+	switch e {
+	case CardInserted:
+		return "CardInserted"
+	case CardRemoved:
+		return "CardRemoved"
+	case CardError:
+		return "CardError"
+	case CardDataChanged:
+		return "CardDataChanged"
+	case CardFirmwareUpgrade:
+		return "CardFirmwareUpgrade"
+	default:
+		return fmt.Sprintf("SmartCardStatusType(%d)", int32(e))
+	}
+}
+
 type SpectralInversion int32
 
 const (
@@ -1806,6 +5102,27 @@ const (
 	BDA_SPECTRAL_INVERSION_INVERTED    SpectralInversion = 3
 	BDA_SPECTRAL_INVERSION_MAX         SpectralInversion = 4
 )
+
+// String returns the SpectralInversion constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SpectralInversion) String() string {
+	switch e {
+	case BDA_SPECTRAL_INVERSION_NOT_SET:
+		return "BDA_SPECTRAL_INVERSION_NOT_SET"
+	case BDA_SPECTRAL_INVERSION_NOT_DEFINED:
+		return "BDA_SPECTRAL_INVERSION_NOT_DEFINED"
+	case BDA_SPECTRAL_INVERSION_AUTOMATIC:
+		return "BDA_SPECTRAL_INVERSION_AUTOMATIC"
+	case BDA_SPECTRAL_INVERSION_NORMAL:
+		return "BDA_SPECTRAL_INVERSION_NORMAL"
+	case BDA_SPECTRAL_INVERSION_INVERTED:
+		return "BDA_SPECTRAL_INVERSION_INVERTED"
+	case BDA_SPECTRAL_INVERSION_MAX:
+		return "BDA_SPECTRAL_INVERSION_MAX"
+	default:
+		return fmt.Sprintf("SpectralInversion(%d)", int32(e))
+	}
+}
 
 // TVAudioMode: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-tvaudiomode
 type TVAudioMode int32
@@ -1821,6 +5138,33 @@ const (
 	AMTVAUDIO_PRESET_LANG_B TVAudioMode = 8192
 	AMTVAUDIO_PRESET_LANG_C TVAudioMode = 16384
 )
+
+// String returns the TVAudioMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TVAudioMode) String() string {
+	switch e {
+	case AMTVAUDIO_MODE_MONO:
+		return "AMTVAUDIO_MODE_MONO"
+	case AMTVAUDIO_MODE_STEREO:
+		return "AMTVAUDIO_MODE_STEREO"
+	case AMTVAUDIO_MODE_LANG_A:
+		return "AMTVAUDIO_MODE_LANG_A"
+	case AMTVAUDIO_MODE_LANG_B:
+		return "AMTVAUDIO_MODE_LANG_B"
+	case AMTVAUDIO_MODE_LANG_C:
+		return "AMTVAUDIO_MODE_LANG_C"
+	case AMTVAUDIO_PRESET_STEREO:
+		return "AMTVAUDIO_PRESET_STEREO"
+	case AMTVAUDIO_PRESET_LANG_A:
+		return "AMTVAUDIO_PRESET_LANG_A"
+	case AMTVAUDIO_PRESET_LANG_B:
+		return "AMTVAUDIO_PRESET_LANG_B"
+	case AMTVAUDIO_PRESET_LANG_C:
+		return "AMTVAUDIO_PRESET_LANG_C"
+	default:
+		return fmt.Sprintf("TVAudioMode(%d)", int32(e))
+	}
+}
 
 type TransmissionMode int32
 
@@ -1838,6 +5182,37 @@ const (
 	BDA_XMIT_MODE_MAX            TransmissionMode = 9
 )
 
+// String returns the TransmissionMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TransmissionMode) String() string {
+	switch e {
+	case BDA_XMIT_MODE_NOT_SET:
+		return "BDA_XMIT_MODE_NOT_SET"
+	case BDA_XMIT_MODE_NOT_DEFINED:
+		return "BDA_XMIT_MODE_NOT_DEFINED"
+	case BDA_XMIT_MODE_2K:
+		return "BDA_XMIT_MODE_2K"
+	case BDA_XMIT_MODE_8K:
+		return "BDA_XMIT_MODE_8K"
+	case BDA_XMIT_MODE_4K:
+		return "BDA_XMIT_MODE_4K"
+	case BDA_XMIT_MODE_2K_INTERLEAVED:
+		return "BDA_XMIT_MODE_2K_INTERLEAVED"
+	case BDA_XMIT_MODE_4K_INTERLEAVED:
+		return "BDA_XMIT_MODE_4K_INTERLEAVED"
+	case BDA_XMIT_MODE_1K:
+		return "BDA_XMIT_MODE_1K"
+	case BDA_XMIT_MODE_16K:
+		return "BDA_XMIT_MODE_16K"
+	case BDA_XMIT_MODE_32K:
+		return "BDA_XMIT_MODE_32K"
+	case BDA_XMIT_MODE_MAX:
+		return "BDA_XMIT_MODE_MAX"
+	default:
+		return fmt.Sprintf("TransmissionMode(%d)", int32(e))
+	}
+}
+
 // TunerInputType: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-tunerinputtype
 type TunerInputType int32
 
@@ -1845,6 +5220,19 @@ const (
 	TunerInputCable   TunerInputType = 0
 	TunerInputAntenna TunerInputType = 1
 )
+
+// String returns the TunerInputType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TunerInputType) String() string {
+	switch e {
+	case TunerInputCable:
+		return "TunerInputCable"
+	case TunerInputAntenna:
+		return "TunerInputAntenna"
+	default:
+		return fmt.Sprintf("TunerInputType(%d)", int32(e))
+	}
+}
 
 // UICloseReasonType: https://learn.microsoft.com/windows/win32/api/bdaiface/ne-bdaiface-uiclosereasontype
 type UICloseReasonType int32
@@ -1856,6 +5244,25 @@ const (
 	DeviceClosed UICloseReasonType = 3
 	ErrorClosed  UICloseReasonType = 4
 )
+
+// String returns the UICloseReasonType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e UICloseReasonType) String() string {
+	switch e {
+	case NotReady:
+		return "NotReady"
+	case UserClosed:
+		return "UserClosed"
+	case SystemClosed:
+		return "SystemClosed"
+	case DeviceClosed:
+		return "DeviceClosed"
+	case ErrorClosed:
+		return "ErrorClosed"
+	default:
+		return fmt.Sprintf("UICloseReasonType(%d)", int32(e))
+	}
+}
 
 // VALID_UOP_FLAG: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-valid_uop_flag
 type VALID_UOP_FLAG int32
@@ -1888,6 +5295,65 @@ const (
 	UOP_FLAG_Select_Video_Mode_Preference           VALID_UOP_FLAG = 16777216
 )
 
+// String returns the VALID_UOP_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VALID_UOP_FLAG) String() string {
+	switch e {
+	case UOP_FLAG_Play_Title_Or_AtTime:
+		return "UOP_FLAG_Play_Title_Or_AtTime"
+	case UOP_FLAG_Play_Chapter:
+		return "UOP_FLAG_Play_Chapter"
+	case UOP_FLAG_Play_Title:
+		return "UOP_FLAG_Play_Title"
+	case UOP_FLAG_Stop:
+		return "UOP_FLAG_Stop"
+	case UOP_FLAG_ReturnFromSubMenu:
+		return "UOP_FLAG_ReturnFromSubMenu"
+	case UOP_FLAG_Play_Chapter_Or_AtTime:
+		return "UOP_FLAG_Play_Chapter_Or_AtTime"
+	case UOP_FLAG_PlayPrev_Or_Replay_Chapter:
+		return "UOP_FLAG_PlayPrev_Or_Replay_Chapter"
+	case UOP_FLAG_PlayNext_Chapter:
+		return "UOP_FLAG_PlayNext_Chapter"
+	case UOP_FLAG_Play_Forwards:
+		return "UOP_FLAG_Play_Forwards"
+	case UOP_FLAG_Play_Backwards:
+		return "UOP_FLAG_Play_Backwards"
+	case UOP_FLAG_ShowMenu_Title:
+		return "UOP_FLAG_ShowMenu_Title"
+	case UOP_FLAG_ShowMenu_Root:
+		return "UOP_FLAG_ShowMenu_Root"
+	case UOP_FLAG_ShowMenu_SubPic:
+		return "UOP_FLAG_ShowMenu_SubPic"
+	case UOP_FLAG_ShowMenu_Audio:
+		return "UOP_FLAG_ShowMenu_Audio"
+	case UOP_FLAG_ShowMenu_Angle:
+		return "UOP_FLAG_ShowMenu_Angle"
+	case UOP_FLAG_ShowMenu_Chapter:
+		return "UOP_FLAG_ShowMenu_Chapter"
+	case UOP_FLAG_Resume:
+		return "UOP_FLAG_Resume"
+	case UOP_FLAG_Select_Or_Activate_Button:
+		return "UOP_FLAG_Select_Or_Activate_Button"
+	case UOP_FLAG_Still_Off:
+		return "UOP_FLAG_Still_Off"
+	case UOP_FLAG_Pause_On:
+		return "UOP_FLAG_Pause_On"
+	case UOP_FLAG_Select_Audio_Stream:
+		return "UOP_FLAG_Select_Audio_Stream"
+	case UOP_FLAG_Select_SubPic_Stream:
+		return "UOP_FLAG_Select_SubPic_Stream"
+	case UOP_FLAG_Select_Angle:
+		return "UOP_FLAG_Select_Angle"
+	case UOP_FLAG_Select_Karaoke_Audio_Presentation_Mode:
+		return "UOP_FLAG_Select_Karaoke_Audio_Presentation_Mode"
+	case UOP_FLAG_Select_Video_Mode_Preference:
+		return "UOP_FLAG_Select_Video_Mode_Preference"
+	default:
+		return fmt.Sprintf("VALID_UOP_FLAG(%d)", int32(e))
+	}
+}
+
 // VIDEOENCODER_BITRATE_MODE: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-videoencoder_bitrate_mode
 type VIDEOENCODER_BITRATE_MODE int32
 
@@ -1896,6 +5362,21 @@ const (
 	VariableBitRateAverage VIDEOENCODER_BITRATE_MODE = 1
 	VariableBitRatePeak    VIDEOENCODER_BITRATE_MODE = 2
 )
+
+// String returns the VIDEOENCODER_BITRATE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VIDEOENCODER_BITRATE_MODE) String() string {
+	switch e {
+	case ConstantBitRate:
+		return "ConstantBitRate"
+	case VariableBitRateAverage:
+		return "VariableBitRateAverage"
+	case VariableBitRatePeak:
+		return "VariableBitRatePeak"
+	default:
+		return fmt.Sprintf("VIDEOENCODER_BITRATE_MODE(%d)", int32(e))
+	}
+}
 
 // VMR9AlphaBitmapFlags: https://learn.microsoft.com/windows/win32/api/vmr9/ne-vmr9-vmr9alphabitmapflags
 type VMR9AlphaBitmapFlags int32
@@ -1909,6 +5390,27 @@ const (
 	VMR9AlphaBitmap_FilterMode  VMR9AlphaBitmapFlags = 32
 )
 
+// String returns the VMR9AlphaBitmapFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR9AlphaBitmapFlags) String() string {
+	switch e {
+	case VMR9AlphaBitmap_Disable:
+		return "VMR9AlphaBitmap_Disable"
+	case VMR9AlphaBitmap_hDC:
+		return "VMR9AlphaBitmap_hDC"
+	case VMR9AlphaBitmap_EntireDDS:
+		return "VMR9AlphaBitmap_EntireDDS"
+	case VMR9AlphaBitmap_SrcColorKey:
+		return "VMR9AlphaBitmap_SrcColorKey"
+	case VMR9AlphaBitmap_SrcRect:
+		return "VMR9AlphaBitmap_SrcRect"
+	case VMR9AlphaBitmap_FilterMode:
+		return "VMR9AlphaBitmap_FilterMode"
+	default:
+		return fmt.Sprintf("VMR9AlphaBitmapFlags(%d)", int32(e))
+	}
+}
+
 // VMR9AspectRatioMode: https://learn.microsoft.com/windows/win32/api/vmr9/ne-vmr9-vmr9aspectratiomode
 type VMR9AspectRatioMode int32
 
@@ -1916,6 +5418,19 @@ const (
 	VMR9ARMode_None      VMR9AspectRatioMode = 0
 	VMR9ARMode_LetterBox VMR9AspectRatioMode = 1
 )
+
+// String returns the VMR9AspectRatioMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR9AspectRatioMode) String() string {
+	switch e {
+	case VMR9ARMode_None:
+		return "VMR9ARMode_None"
+	case VMR9ARMode_LetterBox:
+		return "VMR9ARMode_LetterBox"
+	default:
+		return fmt.Sprintf("VMR9AspectRatioMode(%d)", int32(e))
+	}
+}
 
 // VMR9DeinterlacePrefs: https://learn.microsoft.com/windows/win32/api/vmr9/ne-vmr9-vmr9deinterlaceprefs
 type VMR9DeinterlacePrefs int32
@@ -1926,6 +5441,23 @@ const (
 	DeinterlacePref9_Weave    VMR9DeinterlacePrefs = 4
 	DeinterlacePref9_Mask     VMR9DeinterlacePrefs = 7
 )
+
+// String returns the VMR9DeinterlacePrefs constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR9DeinterlacePrefs) String() string {
+	switch e {
+	case DeinterlacePref9_NextBest:
+		return "DeinterlacePref9_NextBest"
+	case DeinterlacePref9_BOB:
+		return "DeinterlacePref9_BOB"
+	case DeinterlacePref9_Weave:
+		return "DeinterlacePref9_Weave"
+	case DeinterlacePref9_Mask:
+		return "DeinterlacePref9_Mask"
+	default:
+		return fmt.Sprintf("VMR9DeinterlacePrefs(%d)", int32(e))
+	}
+}
 
 // VMR9DeinterlaceTech: https://learn.microsoft.com/windows/win32/api/vmr9/ne-vmr9-vmr9deinterlacetech
 type VMR9DeinterlaceTech int32
@@ -1940,6 +5472,31 @@ const (
 	DeinterlaceTech9_PixelAdaptive       VMR9DeinterlaceTech = 64
 	DeinterlaceTech9_MotionVectorSteered VMR9DeinterlaceTech = 128
 )
+
+// String returns the VMR9DeinterlaceTech constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR9DeinterlaceTech) String() string {
+	switch e {
+	case DeinterlaceTech9_Unknown:
+		return "DeinterlaceTech9_Unknown"
+	case DeinterlaceTech9_BOBLineReplicate:
+		return "DeinterlaceTech9_BOBLineReplicate"
+	case DeinterlaceTech9_BOBVerticalStretch:
+		return "DeinterlaceTech9_BOBVerticalStretch"
+	case DeinterlaceTech9_MedianFiltering:
+		return "DeinterlaceTech9_MedianFiltering"
+	case DeinterlaceTech9_EdgeFiltering:
+		return "DeinterlaceTech9_EdgeFiltering"
+	case DeinterlaceTech9_FieldAdaptive:
+		return "DeinterlaceTech9_FieldAdaptive"
+	case DeinterlaceTech9_PixelAdaptive:
+		return "DeinterlaceTech9_PixelAdaptive"
+	case DeinterlaceTech9_MotionVectorSteered:
+		return "DeinterlaceTech9_MotionVectorSteered"
+	default:
+		return fmt.Sprintf("VMR9DeinterlaceTech(%d)", int32(e))
+	}
+}
 
 // VMR9MixerPrefs: https://learn.microsoft.com/windows/win32/api/vmr9/ne-vmr9-vmr9mixerprefs
 type VMR9MixerPrefs int32
@@ -1967,6 +5524,55 @@ const (
 	MixerPref9_DynamicMask            VMR9MixerPrefs = 15728640
 )
 
+// String returns the VMR9MixerPrefs constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR9MixerPrefs) String() string {
+	switch e {
+	case MixerPref9_NoDecimation:
+		return "MixerPref9_NoDecimation"
+	case MixerPref9_DecimateOutput:
+		return "MixerPref9_DecimateOutput"
+	case MixerPref9_ARAdjustXorY:
+		return "MixerPref9_ARAdjustXorY"
+	case MixerPref9_NonSquareMixing:
+		return "MixerPref9_NonSquareMixing"
+	case MixerPref9_DecimateMask:
+		return "MixerPref9_DecimateMask"
+	case MixerPref9_BiLinearFiltering:
+		return "MixerPref9_BiLinearFiltering"
+	case MixerPref9_PointFiltering:
+		return "MixerPref9_PointFiltering"
+	case MixerPref9_AnisotropicFiltering:
+		return "MixerPref9_AnisotropicFiltering"
+	case MixerPref9_PyramidalQuadFiltering:
+		return "MixerPref9_PyramidalQuadFiltering"
+	case MixerPref9_GaussianQuadFiltering:
+		return "MixerPref9_GaussianQuadFiltering"
+	case MixerPref9_FilteringReserved:
+		return "MixerPref9_FilteringReserved"
+	case MixerPref9_FilteringMask:
+		return "MixerPref9_FilteringMask"
+	case MixerPref9_RenderTargetRGB:
+		return "MixerPref9_RenderTargetRGB"
+	case MixerPref9_RenderTargetYUV:
+		return "MixerPref9_RenderTargetYUV"
+	case MixerPref9_RenderTargetReserved:
+		return "MixerPref9_RenderTargetReserved"
+	case MixerPref9_RenderTargetMask:
+		return "MixerPref9_RenderTargetMask"
+	case MixerPref9_DynamicSwitchToBOB:
+		return "MixerPref9_DynamicSwitchToBOB"
+	case MixerPref9_DynamicDecimateBy2:
+		return "MixerPref9_DynamicDecimateBy2"
+	case MixerPref9_DynamicReserved:
+		return "MixerPref9_DynamicReserved"
+	case MixerPref9_DynamicMask:
+		return "MixerPref9_DynamicMask"
+	default:
+		return fmt.Sprintf("VMR9MixerPrefs(%d)", int32(e))
+	}
+}
+
 // VMR9Mode: https://learn.microsoft.com/windows/win32/api/vmr9/ne-vmr9-vmr9mode
 type VMR9Mode int32
 
@@ -1976,6 +5582,23 @@ const (
 	VMR9Mode_Renderless VMR9Mode = 4
 	VMR9Mode_Mask       VMR9Mode = 7
 )
+
+// String returns the VMR9Mode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR9Mode) String() string {
+	switch e {
+	case VMR9Mode_Windowed:
+		return "VMR9Mode_Windowed"
+	case VMR9Mode_Windowless:
+		return "VMR9Mode_Windowless"
+	case VMR9Mode_Renderless:
+		return "VMR9Mode_Renderless"
+	case VMR9Mode_Mask:
+		return "VMR9Mode_Mask"
+	default:
+		return fmt.Sprintf("VMR9Mode(%d)", int32(e))
+	}
+}
 
 // VMR9PresentationFlags: https://learn.microsoft.com/windows/win32/api/vmr9/ne-vmr9-vmr9presentationflags
 type VMR9PresentationFlags int32
@@ -1988,6 +5611,25 @@ const (
 	VMR9Sample_SrcDstRectsValid VMR9PresentationFlags = 16
 )
 
+// String returns the VMR9PresentationFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR9PresentationFlags) String() string {
+	switch e {
+	case VMR9Sample_SyncPoint:
+		return "VMR9Sample_SyncPoint"
+	case VMR9Sample_Preroll:
+		return "VMR9Sample_Preroll"
+	case VMR9Sample_Discontinuity:
+		return "VMR9Sample_Discontinuity"
+	case VMR9Sample_TimeValid:
+		return "VMR9Sample_TimeValid"
+	case VMR9Sample_SrcDstRectsValid:
+		return "VMR9Sample_SrcDstRectsValid"
+	default:
+		return fmt.Sprintf("VMR9PresentationFlags(%d)", int32(e))
+	}
+}
+
 // VMR9ProcAmpControlFlags: https://learn.microsoft.com/windows/win32/api/vmr9/ne-vmr9-vmr9procampcontrolflags
 type VMR9ProcAmpControlFlags int32
 
@@ -1999,6 +5641,25 @@ const (
 	ProcAmpControl9_Mask       VMR9ProcAmpControlFlags = 15
 )
 
+// String returns the VMR9ProcAmpControlFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR9ProcAmpControlFlags) String() string {
+	switch e {
+	case ProcAmpControl9_Brightness:
+		return "ProcAmpControl9_Brightness"
+	case ProcAmpControl9_Contrast:
+		return "ProcAmpControl9_Contrast"
+	case ProcAmpControl9_Hue:
+		return "ProcAmpControl9_Hue"
+	case ProcAmpControl9_Saturation:
+		return "ProcAmpControl9_Saturation"
+	case ProcAmpControl9_Mask:
+		return "ProcAmpControl9_Mask"
+	default:
+		return fmt.Sprintf("VMR9ProcAmpControlFlags(%d)", int32(e))
+	}
+}
+
 // VMR9RenderPrefs: https://learn.microsoft.com/windows/win32/api/vmr9/ne-vmr9-vmr9renderprefs
 type VMR9RenderPrefs int32
 
@@ -2006,6 +5667,17 @@ const (
 	RenderPrefs9_DoNotRenderBorder VMR9RenderPrefs = 1
 	RenderPrefs9_Mask              VMR9RenderPrefs = 1
 )
+
+// String returns the VMR9RenderPrefs constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR9RenderPrefs) String() string {
+	switch e {
+	case RenderPrefs9_DoNotRenderBorder:
+		return "RenderPrefs9_DoNotRenderBorder"
+	default:
+		return fmt.Sprintf("VMR9RenderPrefs(%d)", int32(e))
+	}
+}
 
 // VMR9SurfaceAllocationFlags: https://learn.microsoft.com/windows/win32/api/vmr9/ne-vmr9-vmr9surfaceallocationflags
 type VMR9SurfaceAllocationFlags int32
@@ -2020,6 +5692,29 @@ const (
 	VMR9AllocFlag_UsageMask        VMR9SurfaceAllocationFlags = 255
 )
 
+// String returns the VMR9SurfaceAllocationFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR9SurfaceAllocationFlags) String() string {
+	switch e {
+	case VMR9AllocFlag_3DRenderTarget:
+		return "VMR9AllocFlag_3DRenderTarget"
+	case VMR9AllocFlag_DXVATarget:
+		return "VMR9AllocFlag_DXVATarget"
+	case VMR9AllocFlag_TextureSurface:
+		return "VMR9AllocFlag_TextureSurface"
+	case VMR9AllocFlag_OffscreenSurface:
+		return "VMR9AllocFlag_OffscreenSurface"
+	case VMR9AllocFlag_RGBDynamicSwitch:
+		return "VMR9AllocFlag_RGBDynamicSwitch"
+	case VMR9AllocFlag_UsageReserved:
+		return "VMR9AllocFlag_UsageReserved"
+	case VMR9AllocFlag_UsageMask:
+		return "VMR9AllocFlag_UsageMask"
+	default:
+		return fmt.Sprintf("VMR9SurfaceAllocationFlags(%d)", int32(e))
+	}
+}
+
 // VMR9_SampleFormat: https://learn.microsoft.com/windows/win32/api/vmr9/ne-vmr9-vmr9_sampleformat
 type VMR9_SampleFormat int32
 
@@ -2032,6 +5727,27 @@ const (
 	VMR9_SampleFieldSingleOdd            VMR9_SampleFormat = 6
 )
 
+// String returns the VMR9_SampleFormat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR9_SampleFormat) String() string {
+	switch e {
+	case VMR9_SampleReserved:
+		return "VMR9_SampleReserved"
+	case VMR9_SampleProgressiveFrame:
+		return "VMR9_SampleProgressiveFrame"
+	case VMR9_SampleFieldInterleavedEvenFirst:
+		return "VMR9_SampleFieldInterleavedEvenFirst"
+	case VMR9_SampleFieldInterleavedOddFirst:
+		return "VMR9_SampleFieldInterleavedOddFirst"
+	case VMR9_SampleFieldSingleEven:
+		return "VMR9_SampleFieldSingleEven"
+	case VMR9_SampleFieldSingleOdd:
+		return "VMR9_SampleFieldSingleOdd"
+	default:
+		return fmt.Sprintf("VMR9_SampleFormat(%d)", int32(e))
+	}
+}
+
 // VMRDeinterlacePrefs: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-vmrdeinterlaceprefs
 type VMRDeinterlacePrefs int32
 
@@ -2041,6 +5757,23 @@ const (
 	DeinterlacePref_Weave    VMRDeinterlacePrefs = 4
 	DeinterlacePref_Mask     VMRDeinterlacePrefs = 7
 )
+
+// String returns the VMRDeinterlacePrefs constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMRDeinterlacePrefs) String() string {
+	switch e {
+	case DeinterlacePref_NextBest:
+		return "DeinterlacePref_NextBest"
+	case DeinterlacePref_BOB:
+		return "DeinterlacePref_BOB"
+	case DeinterlacePref_Weave:
+		return "DeinterlacePref_Weave"
+	case DeinterlacePref_Mask:
+		return "DeinterlacePref_Mask"
+	default:
+		return fmt.Sprintf("VMRDeinterlacePrefs(%d)", int32(e))
+	}
+}
 
 // VMRDeinterlaceTech: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-vmrdeinterlacetech
 type VMRDeinterlaceTech int32
@@ -2055,6 +5788,31 @@ const (
 	DeinterlaceTech_PixelAdaptive       VMRDeinterlaceTech = 64
 	DeinterlaceTech_MotionVectorSteered VMRDeinterlaceTech = 128
 )
+
+// String returns the VMRDeinterlaceTech constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMRDeinterlaceTech) String() string {
+	switch e {
+	case DeinterlaceTech_Unknown:
+		return "DeinterlaceTech_Unknown"
+	case DeinterlaceTech_BOBLineReplicate:
+		return "DeinterlaceTech_BOBLineReplicate"
+	case DeinterlaceTech_BOBVerticalStretch:
+		return "DeinterlaceTech_BOBVerticalStretch"
+	case DeinterlaceTech_MedianFiltering:
+		return "DeinterlaceTech_MedianFiltering"
+	case DeinterlaceTech_EdgeFiltering:
+		return "DeinterlaceTech_EdgeFiltering"
+	case DeinterlaceTech_FieldAdaptive:
+		return "DeinterlaceTech_FieldAdaptive"
+	case DeinterlaceTech_PixelAdaptive:
+		return "DeinterlaceTech_PixelAdaptive"
+	case DeinterlaceTech_MotionVectorSteered:
+		return "DeinterlaceTech_MotionVectorSteered"
+	default:
+		return fmt.Sprintf("VMRDeinterlaceTech(%d)", int32(e))
+	}
+}
 
 // VMRMixerPrefs: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-vmrmixerprefs
 type VMRMixerPrefs int32
@@ -2081,6 +5839,53 @@ const (
 	MixerPref_DynamicMask          VMRMixerPrefs = 983040
 )
 
+// String returns the VMRMixerPrefs constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMRMixerPrefs) String() string {
+	switch e {
+	case MixerPref_NoDecimation:
+		return "MixerPref_NoDecimation"
+	case MixerPref_DecimateOutput:
+		return "MixerPref_DecimateOutput"
+	case MixerPref_ARAdjustXorY:
+		return "MixerPref_ARAdjustXorY"
+	case MixerPref_DecimationReserved:
+		return "MixerPref_DecimationReserved"
+	case MixerPref_DecimateMask:
+		return "MixerPref_DecimateMask"
+	case MixerPref_BiLinearFiltering:
+		return "MixerPref_BiLinearFiltering"
+	case MixerPref_PointFiltering:
+		return "MixerPref_PointFiltering"
+	case MixerPref_FilteringMask:
+		return "MixerPref_FilteringMask"
+	case MixerPref_RenderTargetRGB:
+		return "MixerPref_RenderTargetRGB"
+	case MixerPref_RenderTargetYUV:
+		return "MixerPref_RenderTargetYUV"
+	case MixerPref_RenderTargetYUV420:
+		return "MixerPref_RenderTargetYUV420"
+	case MixerPref_RenderTargetYUV422:
+		return "MixerPref_RenderTargetYUV422"
+	case MixerPref_RenderTargetYUV444:
+		return "MixerPref_RenderTargetYUV444"
+	case MixerPref_RenderTargetReserved:
+		return "MixerPref_RenderTargetReserved"
+	case MixerPref_RenderTargetMask:
+		return "MixerPref_RenderTargetMask"
+	case MixerPref_DynamicSwitchToBOB:
+		return "MixerPref_DynamicSwitchToBOB"
+	case MixerPref_DynamicDecimateBy2:
+		return "MixerPref_DynamicDecimateBy2"
+	case MixerPref_DynamicReserved:
+		return "MixerPref_DynamicReserved"
+	case MixerPref_DynamicMask:
+		return "MixerPref_DynamicMask"
+	default:
+		return fmt.Sprintf("VMRMixerPrefs(%d)", int32(e))
+	}
+}
+
 // VMRMode: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-vmrmode
 type VMRMode int32
 
@@ -2090,6 +5895,23 @@ const (
 	VMRMode_Renderless VMRMode = 4
 	VMRMode_Mask       VMRMode = 7
 )
+
+// String returns the VMRMode constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMRMode) String() string {
+	switch e {
+	case VMRMode_Windowed:
+		return "VMRMode_Windowed"
+	case VMRMode_Windowless:
+		return "VMRMode_Windowless"
+	case VMRMode_Renderless:
+		return "VMRMode_Renderless"
+	case VMRMode_Mask:
+		return "VMRMode_Mask"
+	default:
+		return fmt.Sprintf("VMRMode(%d)", int32(e))
+	}
+}
 
 // VMRPresentationFlags: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-vmrpresentationflags
 type VMRPresentationFlags int32
@@ -2101,6 +5923,25 @@ const (
 	VMRSample_TimeValid        VMRPresentationFlags = 8
 	VMRSample_SrcDstRectsValid VMRPresentationFlags = 16
 )
+
+// String returns the VMRPresentationFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMRPresentationFlags) String() string {
+	switch e {
+	case VMRSample_SyncPoint:
+		return "VMRSample_SyncPoint"
+	case VMRSample_Preroll:
+		return "VMRSample_Preroll"
+	case VMRSample_Discontinuity:
+		return "VMRSample_Discontinuity"
+	case VMRSample_TimeValid:
+		return "VMRSample_TimeValid"
+	case VMRSample_SrcDstRectsValid:
+		return "VMRSample_SrcDstRectsValid"
+	default:
+		return fmt.Sprintf("VMRPresentationFlags(%d)", int32(e))
+	}
+}
 
 // VMRRenderPrefs: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-vmrrenderprefs
 type VMRRenderPrefs int32
@@ -2117,6 +5958,29 @@ const (
 	RenderPrefs_Mask                         VMRRenderPrefs = 63
 )
 
+// String returns the VMRRenderPrefs constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMRRenderPrefs) String() string {
+	switch e {
+	case RenderPrefs_RestrictToInitialMonitor:
+		return "RenderPrefs_RestrictToInitialMonitor"
+	case RenderPrefs_ForceOffscreen:
+		return "RenderPrefs_ForceOffscreen"
+	case RenderPrefs_ForceOverlays:
+		return "RenderPrefs_ForceOverlays"
+	case RenderPrefs_DoNotRenderColorKeyAndBorder:
+		return "RenderPrefs_DoNotRenderColorKeyAndBorder"
+	case RenderPrefs_Reserved:
+		return "RenderPrefs_Reserved"
+	case RenderPrefs_PreferAGPMemWhenMixing:
+		return "RenderPrefs_PreferAGPMemWhenMixing"
+	case RenderPrefs_Mask:
+		return "RenderPrefs_Mask"
+	default:
+		return fmt.Sprintf("VMRRenderPrefs(%d)", int32(e))
+	}
+}
+
 // VMRSurfaceAllocationFlags: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-vmrsurfaceallocationflags
 type VMRSurfaceAllocationFlags int32
 
@@ -2129,6 +5993,27 @@ const (
 	AMAP_DXVA_TARGET       VMRSurfaceAllocationFlags = 32
 )
 
+// String returns the VMRSurfaceAllocationFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMRSurfaceAllocationFlags) String() string {
+	switch e {
+	case AMAP_PIXELFORMAT_VALID:
+		return "AMAP_PIXELFORMAT_VALID"
+	case AMAP_3D_TARGET:
+		return "AMAP_3D_TARGET"
+	case AMAP_ALLOW_SYSMEM:
+		return "AMAP_ALLOW_SYSMEM"
+	case AMAP_FORCE_SYSMEM:
+		return "AMAP_FORCE_SYSMEM"
+	case AMAP_DIRECTED_FLIP:
+		return "AMAP_DIRECTED_FLIP"
+	case AMAP_DXVA_TARGET:
+		return "AMAP_DXVA_TARGET"
+	default:
+		return fmt.Sprintf("VMRSurfaceAllocationFlags(%d)", int32(e))
+	}
+}
+
 // VMR_ASPECT_RATIO_MODE: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-vmr_aspect_ratio_mode
 type VMR_ASPECT_RATIO_MODE int32
 
@@ -2136,6 +6021,19 @@ const (
 	VMR_ARMODE_NONE       VMR_ASPECT_RATIO_MODE = 0
 	VMR_ARMODE_LETTER_BOX VMR_ASPECT_RATIO_MODE = 1
 )
+
+// String returns the VMR_ASPECT_RATIO_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VMR_ASPECT_RATIO_MODE) String() string {
+	switch e {
+	case VMR_ARMODE_NONE:
+		return "VMR_ARMODE_NONE"
+	case VMR_ARMODE_LETTER_BOX:
+		return "VMR_ARMODE_LETTER_BOX"
+	default:
+		return fmt.Sprintf("VMR_ASPECT_RATIO_MODE(%d)", int32(e))
+	}
+}
 
 // VfwCaptureDialogs: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-vfwcapturedialogs
 type VfwCaptureDialogs int32
@@ -2145,6 +6043,21 @@ const (
 	VfwCaptureDialog_Format  VfwCaptureDialogs = 2
 	VfwCaptureDialog_Display VfwCaptureDialogs = 4
 )
+
+// String returns the VfwCaptureDialogs constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VfwCaptureDialogs) String() string {
+	switch e {
+	case VfwCaptureDialog_Source:
+		return "VfwCaptureDialog_Source"
+	case VfwCaptureDialog_Format:
+		return "VfwCaptureDialog_Format"
+	case VfwCaptureDialog_Display:
+		return "VfwCaptureDialog_Display"
+	default:
+		return fmt.Sprintf("VfwCaptureDialogs(%d)", int32(e))
+	}
+}
 
 // VfwCompressDialogs: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-vfwcompressdialogs
 type VfwCompressDialogs int32
@@ -2156,6 +6069,23 @@ const (
 	VfwCompressDialog_QueryAbout  VfwCompressDialogs = 8
 )
 
+// String returns the VfwCompressDialogs constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VfwCompressDialogs) String() string {
+	switch e {
+	case VfwCompressDialog_Config:
+		return "VfwCompressDialog_Config"
+	case VfwCompressDialog_About:
+		return "VfwCompressDialog_About"
+	case VfwCompressDialog_QueryConfig:
+		return "VfwCompressDialog_QueryConfig"
+	case VfwCompressDialog_QueryAbout:
+		return "VfwCompressDialog_QueryAbout"
+	default:
+		return fmt.Sprintf("VfwCompressDialogs(%d)", int32(e))
+	}
+}
+
 // VideoControlFlags: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-videocontrolflags
 type VideoControlFlags int32
 
@@ -2166,12 +6096,42 @@ const (
 	VideoControlFlag_Trigger               VideoControlFlags = 8
 )
 
+// String returns the VideoControlFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VideoControlFlags) String() string {
+	switch e {
+	case VideoControlFlag_FlipHorizontal:
+		return "VideoControlFlag_FlipHorizontal"
+	case VideoControlFlag_FlipVertical:
+		return "VideoControlFlag_FlipVertical"
+	case VideoControlFlag_ExternalTriggerEnable:
+		return "VideoControlFlag_ExternalTriggerEnable"
+	case VideoControlFlag_Trigger:
+		return "VideoControlFlag_Trigger"
+	default:
+		return fmt.Sprintf("VideoControlFlags(%d)", int32(e))
+	}
+}
+
 type VideoCopyProtectionType int32
 
 const (
 	VideoCopyProtectionMacrovisionBasic VideoCopyProtectionType = 0
 	VideoCopyProtectionMacrovisionCBI   VideoCopyProtectionType = 1
 )
+
+// String returns the VideoCopyProtectionType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VideoCopyProtectionType) String() string {
+	switch e {
+	case VideoCopyProtectionMacrovisionBasic:
+		return "VideoCopyProtectionMacrovisionBasic"
+	case VideoCopyProtectionMacrovisionCBI:
+		return "VideoCopyProtectionMacrovisionCBI"
+	default:
+		return fmt.Sprintf("VideoCopyProtectionType(%d)", int32(e))
+	}
+}
 
 // VideoProcAmpFlags: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-videoprocampflags
 type VideoProcAmpFlags int32
@@ -2180,6 +6140,19 @@ const (
 	VideoProcAmp_Flags_Auto   VideoProcAmpFlags = 1
 	VideoProcAmp_Flags_Manual VideoProcAmpFlags = 2
 )
+
+// String returns the VideoProcAmpFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VideoProcAmpFlags) String() string {
+	switch e {
+	case VideoProcAmp_Flags_Auto:
+		return "VideoProcAmp_Flags_Auto"
+	case VideoProcAmp_Flags_Manual:
+		return "VideoProcAmp_Flags_Manual"
+	default:
+		return fmt.Sprintf("VideoProcAmpFlags(%d)", int32(e))
+	}
+}
 
 // VideoProcAmpProperty: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-videoprocampproperty
 type VideoProcAmpProperty int32
@@ -2197,6 +6170,35 @@ const (
 	VideoProcAmp_Gain                  VideoProcAmpProperty = 9
 )
 
+// String returns the VideoProcAmpProperty constant's name, or its numeric form when
+// the value is not a known constant.
+func (e VideoProcAmpProperty) String() string {
+	switch e {
+	case VideoProcAmp_Brightness:
+		return "VideoProcAmp_Brightness"
+	case VideoProcAmp_Contrast:
+		return "VideoProcAmp_Contrast"
+	case VideoProcAmp_Hue:
+		return "VideoProcAmp_Hue"
+	case VideoProcAmp_Saturation:
+		return "VideoProcAmp_Saturation"
+	case VideoProcAmp_Sharpness:
+		return "VideoProcAmp_Sharpness"
+	case VideoProcAmp_Gamma:
+		return "VideoProcAmp_Gamma"
+	case VideoProcAmp_ColorEnable:
+		return "VideoProcAmp_ColorEnable"
+	case VideoProcAmp_WhiteBalance:
+		return "VideoProcAmp_WhiteBalance"
+	case VideoProcAmp_BacklightCompensation:
+		return "VideoProcAmp_BacklightCompensation"
+	case VideoProcAmp_Gain:
+		return "VideoProcAmp_Gain"
+	default:
+		return fmt.Sprintf("VideoProcAmpProperty(%d)", int32(e))
+	}
+}
+
 // AMRESCTL_RESERVEFLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_amresctl_reserveflags
 type AMRESCTL_RESERVEFLAGS int32
 
@@ -2205,6 +6207,19 @@ const (
 	AMRESCTL_RESERVEFLAGS_UNRESERVE AMRESCTL_RESERVEFLAGS = 1
 )
 
+// String returns the AMRESCTL_RESERVEFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMRESCTL_RESERVEFLAGS) String() string {
+	switch e {
+	case AMRESCTL_RESERVEFLAGS_RESERVE:
+		return "AMRESCTL_RESERVEFLAGS_RESERVE"
+	case AMRESCTL_RESERVEFLAGS_UNRESERVE:
+		return "AMRESCTL_RESERVEFLAGS_UNRESERVE"
+	default:
+		return fmt.Sprintf("AMRESCTL_RESERVEFLAGS(%d)", int32(e))
+	}
+}
+
 type AMSTREAMSELECTENABLEFLAGS int32
 
 const (
@@ -2212,12 +6227,38 @@ const (
 	AMSTREAMSELECTENABLE_ENABLEALL AMSTREAMSELECTENABLEFLAGS = 2
 )
 
+// String returns the AMSTREAMSELECTENABLEFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMSTREAMSELECTENABLEFLAGS) String() string {
+	switch e {
+	case AMSTREAMSELECTENABLE_ENABLE:
+		return "AMSTREAMSELECTENABLE_ENABLE"
+	case AMSTREAMSELECTENABLE_ENABLEALL:
+		return "AMSTREAMSELECTENABLE_ENABLEALL"
+	default:
+		return fmt.Sprintf("AMSTREAMSELECTENABLEFLAGS(%d)", int32(e))
+	}
+}
+
 type AMSTREAMSELECTINFOFLAGS int32
 
 const (
 	AMSTREAMSELECTINFO_ENABLED   AMSTREAMSELECTINFOFLAGS = 1
 	AMSTREAMSELECTINFO_EXCLUSIVE AMSTREAMSELECTINFOFLAGS = 2
 )
+
+// String returns the AMSTREAMSELECTINFOFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AMSTREAMSELECTINFOFLAGS) String() string {
+	switch e {
+	case AMSTREAMSELECTINFO_ENABLED:
+		return "AMSTREAMSELECTINFO_ENABLED"
+	case AMSTREAMSELECTINFO_EXCLUSIVE:
+		return "AMSTREAMSELECTINFO_EXCLUSIVE"
+	default:
+		return fmt.Sprintf("AMSTREAMSELECTINFOFLAGS(%d)", int32(e))
+	}
+}
 
 // AM_AUDIO_RENDERER_STAT_PARAM: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_am_audio_renderer_stat_param
 type AM_AUDIO_RENDERER_STAT_PARAM int32
@@ -2237,6 +6278,39 @@ const (
 	AM_AUDREND_STAT_PARAM_JITTER                 AM_AUDIO_RENDERER_STAT_PARAM = 12
 )
 
+// String returns the AM_AUDIO_RENDERER_STAT_PARAM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_AUDIO_RENDERER_STAT_PARAM) String() string {
+	switch e {
+	case AM_AUDREND_STAT_PARAM_BREAK_COUNT:
+		return "AM_AUDREND_STAT_PARAM_BREAK_COUNT"
+	case AM_AUDREND_STAT_PARAM_SLAVE_MODE:
+		return "AM_AUDREND_STAT_PARAM_SLAVE_MODE"
+	case AM_AUDREND_STAT_PARAM_SILENCE_DUR:
+		return "AM_AUDREND_STAT_PARAM_SILENCE_DUR"
+	case AM_AUDREND_STAT_PARAM_LAST_BUFFER_DUR:
+		return "AM_AUDREND_STAT_PARAM_LAST_BUFFER_DUR"
+	case AM_AUDREND_STAT_PARAM_DISCONTINUITIES:
+		return "AM_AUDREND_STAT_PARAM_DISCONTINUITIES"
+	case AM_AUDREND_STAT_PARAM_SLAVE_RATE:
+		return "AM_AUDREND_STAT_PARAM_SLAVE_RATE"
+	case AM_AUDREND_STAT_PARAM_SLAVE_DROPWRITE_DUR:
+		return "AM_AUDREND_STAT_PARAM_SLAVE_DROPWRITE_DUR"
+	case AM_AUDREND_STAT_PARAM_SLAVE_HIGHLOWERROR:
+		return "AM_AUDREND_STAT_PARAM_SLAVE_HIGHLOWERROR"
+	case AM_AUDREND_STAT_PARAM_SLAVE_LASTHIGHLOWERROR:
+		return "AM_AUDREND_STAT_PARAM_SLAVE_LASTHIGHLOWERROR"
+	case AM_AUDREND_STAT_PARAM_SLAVE_ACCUMERROR:
+		return "AM_AUDREND_STAT_PARAM_SLAVE_ACCUMERROR"
+	case AM_AUDREND_STAT_PARAM_BUFFERFULLNESS:
+		return "AM_AUDREND_STAT_PARAM_BUFFERFULLNESS"
+	case AM_AUDREND_STAT_PARAM_JITTER:
+		return "AM_AUDREND_STAT_PARAM_JITTER"
+	default:
+		return fmt.Sprintf("AM_AUDIO_RENDERER_STAT_PARAM(%d)", int32(e))
+	}
+}
+
 // AM_FILTER_MISC_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_am_filter_misc_flags
 type AM_FILTER_MISC_FLAGS int32
 
@@ -2244,6 +6318,19 @@ const (
 	AM_FILTER_MISC_FLAGS_IS_RENDERER AM_FILTER_MISC_FLAGS = 1
 	AM_FILTER_MISC_FLAGS_IS_SOURCE   AM_FILTER_MISC_FLAGS = 2
 )
+
+// String returns the AM_FILTER_MISC_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_FILTER_MISC_FLAGS) String() string {
+	switch e {
+	case AM_FILTER_MISC_FLAGS_IS_RENDERER:
+		return "AM_FILTER_MISC_FLAGS_IS_RENDERER"
+	case AM_FILTER_MISC_FLAGS_IS_SOURCE:
+		return "AM_FILTER_MISC_FLAGS_IS_SOURCE"
+	default:
+		return fmt.Sprintf("AM_FILTER_MISC_FLAGS(%d)", int32(e))
+	}
+}
 
 // AM_INTF_SEARCH_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_am_intf_search_flags
 type AM_INTF_SEARCH_FLAGS int32
@@ -2254,6 +6341,21 @@ const (
 	AM_INTF_SEARCH_FILTER     AM_INTF_SEARCH_FLAGS = 4
 )
 
+// String returns the AM_INTF_SEARCH_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_INTF_SEARCH_FLAGS) String() string {
+	switch e {
+	case AM_INTF_SEARCH_INPUT_PIN:
+		return "AM_INTF_SEARCH_INPUT_PIN"
+	case AM_INTF_SEARCH_OUTPUT_PIN:
+		return "AM_INTF_SEARCH_OUTPUT_PIN"
+	case AM_INTF_SEARCH_FILTER:
+		return "AM_INTF_SEARCH_FILTER"
+	default:
+		return fmt.Sprintf("AM_INTF_SEARCH_FLAGS(%d)", int32(e))
+	}
+}
+
 // AM_OVERLAY_NOTIFY_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_am_overlay_notify_flags
 type AM_OVERLAY_NOTIFY_FLAGS int32
 
@@ -2263,12 +6365,38 @@ const (
 	AM_OVERLAY_NOTIFY_DEST_CHANGE    AM_OVERLAY_NOTIFY_FLAGS = 4
 )
 
+// String returns the AM_OVERLAY_NOTIFY_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_OVERLAY_NOTIFY_FLAGS) String() string {
+	switch e {
+	case AM_OVERLAY_NOTIFY_VISIBLE_CHANGE:
+		return "AM_OVERLAY_NOTIFY_VISIBLE_CHANGE"
+	case AM_OVERLAY_NOTIFY_SOURCE_CHANGE:
+		return "AM_OVERLAY_NOTIFY_SOURCE_CHANGE"
+	case AM_OVERLAY_NOTIFY_DEST_CHANGE:
+		return "AM_OVERLAY_NOTIFY_DEST_CHANGE"
+	default:
+		return fmt.Sprintf("AM_OVERLAY_NOTIFY_FLAGS(%d)", int32(e))
+	}
+}
+
 // AM_PIN_FLOW_CONTROL_BLOCK_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_am_pin_flow_control_block_flags
 type AM_PIN_FLOW_CONTROL_BLOCK_FLAGS int32
 
 const (
 	AM_PIN_FLOW_CONTROL_BLOCK AM_PIN_FLOW_CONTROL_BLOCK_FLAGS = 1
 )
+
+// String returns the AM_PIN_FLOW_CONTROL_BLOCK_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_PIN_FLOW_CONTROL_BLOCK_FLAGS) String() string {
+	switch e {
+	case AM_PIN_FLOW_CONTROL_BLOCK:
+		return "AM_PIN_FLOW_CONTROL_BLOCK"
+	default:
+		return fmt.Sprintf("AM_PIN_FLOW_CONTROL_BLOCK_FLAGS(%d)", int32(e))
+	}
+}
 
 // AM_PUSHSOURCE_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_am_pushsource_flags
 type AM_PUSHSOURCE_FLAGS int32
@@ -2281,11 +6409,41 @@ const (
 	AM_PUSHSOURCEREQS_USE_CLOCK_CHAIN  AM_PUSHSOURCE_FLAGS = 131072
 )
 
+// String returns the AM_PUSHSOURCE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_PUSHSOURCE_FLAGS) String() string {
+	switch e {
+	case AM_PUSHSOURCECAPS_INTERNAL_RM:
+		return "AM_PUSHSOURCECAPS_INTERNAL_RM"
+	case AM_PUSHSOURCECAPS_NOT_LIVE:
+		return "AM_PUSHSOURCECAPS_NOT_LIVE"
+	case AM_PUSHSOURCECAPS_PRIVATE_CLOCK:
+		return "AM_PUSHSOURCECAPS_PRIVATE_CLOCK"
+	case AM_PUSHSOURCEREQS_USE_STREAM_CLOCK:
+		return "AM_PUSHSOURCEREQS_USE_STREAM_CLOCK"
+	case AM_PUSHSOURCEREQS_USE_CLOCK_CHAIN:
+		return "AM_PUSHSOURCEREQS_USE_CLOCK_CHAIN"
+	default:
+		return fmt.Sprintf("AM_PUSHSOURCE_FLAGS(%d)", int32(e))
+	}
+}
+
 type AM_RENSDEREXFLAGS int32
 
 const (
 	AM_RENDEREX_RENDERTOEXISTINGRENDERERS AM_RENSDEREXFLAGS = 1
 )
+
+// String returns the AM_RENSDEREXFLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AM_RENSDEREXFLAGS) String() string {
+	switch e {
+	case AM_RENDEREX_RENDERTOEXISTINGRENDERERS:
+		return "AM_RENDEREX_RENDERTOEXISTINGRENDERERS"
+	default:
+		return fmt.Sprintf("AM_RENSDEREXFLAGS(%d)", int32(e))
+	}
+}
 
 type DVDECODERRESOLUTION int32
 
@@ -2296,6 +6454,23 @@ const (
 	DVDECODERRESOLUTION_88x60   DVDECODERRESOLUTION = 1003
 )
 
+// String returns the DVDECODERRESOLUTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVDECODERRESOLUTION) String() string {
+	switch e {
+	case DVDECODERRESOLUTION_720x480:
+		return "DVDECODERRESOLUTION_720x480"
+	case DVDECODERRESOLUTION_360x240:
+		return "DVDECODERRESOLUTION_360x240"
+	case DVDECODERRESOLUTION_180x120:
+		return "DVDECODERRESOLUTION_180x120"
+	case DVDECODERRESOLUTION_88x60:
+		return "DVDECODERRESOLUTION_88x60"
+	default:
+		return fmt.Sprintf("DVDECODERRESOLUTION(%d)", int32(e))
+	}
+}
+
 // DVENCODERFORMAT: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_dvencoderformat
 type DVENCODERFORMAT int32
 
@@ -2304,6 +6479,21 @@ const (
 	DVENCODERFORMAT_DVHD DVENCODERFORMAT = 2008
 	DVENCODERFORMAT_DVSL DVENCODERFORMAT = 2009
 )
+
+// String returns the DVENCODERFORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVENCODERFORMAT) String() string {
+	switch e {
+	case DVENCODERFORMAT_DVSD:
+		return "DVENCODERFORMAT_DVSD"
+	case DVENCODERFORMAT_DVHD:
+		return "DVENCODERFORMAT_DVHD"
+	case DVENCODERFORMAT_DVSL:
+		return "DVENCODERFORMAT_DVSL"
+	default:
+		return fmt.Sprintf("DVENCODERFORMAT(%d)", int32(e))
+	}
+}
 
 // DVENCODERRESOLUTION: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_dvencoderresolution
 type DVENCODERRESOLUTION int32
@@ -2315,6 +6505,23 @@ const (
 	DVENCODERRESOLUTION_88x60   DVENCODERRESOLUTION = 2015
 )
 
+// String returns the DVENCODERRESOLUTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVENCODERRESOLUTION) String() string {
+	switch e {
+	case DVENCODERRESOLUTION_720x480:
+		return "DVENCODERRESOLUTION_720x480"
+	case DVENCODERRESOLUTION_360x240:
+		return "DVENCODERRESOLUTION_360x240"
+	case DVENCODERRESOLUTION_180x120:
+		return "DVENCODERRESOLUTION_180x120"
+	case DVENCODERRESOLUTION_88x60:
+		return "DVENCODERRESOLUTION_88x60"
+	default:
+		return fmt.Sprintf("DVENCODERRESOLUTION(%d)", int32(e))
+	}
+}
+
 // DVENCODERVIDEOFORMAT: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_dvencodervideoformat
 type DVENCODERVIDEOFORMAT int32
 
@@ -2322,6 +6529,19 @@ const (
 	DVENCODERVIDEOFORMAT_NTSC DVENCODERVIDEOFORMAT = 2000
 	DVENCODERVIDEOFORMAT_PAL  DVENCODERVIDEOFORMAT = 2001
 )
+
+// String returns the DVENCODERVIDEOFORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVENCODERVIDEOFORMAT) String() string {
+	switch e {
+	case DVENCODERVIDEOFORMAT_NTSC:
+		return "DVENCODERVIDEOFORMAT_NTSC"
+	case DVENCODERVIDEOFORMAT_PAL:
+		return "DVENCODERVIDEOFORMAT_PAL"
+	default:
+		return fmt.Sprintf("DVENCODERVIDEOFORMAT(%d)", int32(e))
+	}
+}
 
 // DVRESOLUTION: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_dvresolution
 type DVRESOLUTION int32
@@ -2333,9 +6553,37 @@ const (
 	DVRESOLUTION_DC      DVRESOLUTION = 1003
 )
 
+// String returns the DVRESOLUTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DVRESOLUTION) String() string {
+	switch e {
+	case DVRESOLUTION_FULL:
+		return "DVRESOLUTION_FULL"
+	case DVRESOLUTION_HALF:
+		return "DVRESOLUTION_HALF"
+	case DVRESOLUTION_QUARTER:
+		return "DVRESOLUTION_QUARTER"
+	case DVRESOLUTION_DC:
+		return "DVRESOLUTION_DC"
+	default:
+		return fmt.Sprintf("DVRESOLUTION(%d)", int32(e))
+	}
+}
+
 // REM_FILTER_FLAGS: https://learn.microsoft.com/windows/win32/api/strmif/ne-strmif-_rem_filter_flags
 type REM_FILTER_FLAGS int32
 
 const (
 	REMFILTERF_LEAVECONNECTED REM_FILTER_FLAGS = 1
 )
+
+// String returns the REM_FILTER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e REM_FILTER_FLAGS) String() string {
+	switch e {
+	case REMFILTERF_LEAVECONNECTED:
+		return "REMFILTERF_LEAVECONNECTED"
+	default:
+		return fmt.Sprintf("REM_FILTER_FLAGS(%d)", int32(e))
+	}
+}

@@ -4,6 +4,10 @@
 
 package functiondiscovery
 
+import (
+	"fmt"
+)
+
 // PropertyConstraint: https://learn.microsoft.com/windows/win32/api/functiondiscoveryconstraints/ne-functiondiscoveryconstraints-propertyconstraint
 type PropertyConstraint int32
 
@@ -20,12 +24,54 @@ const (
 	QC_CONTAINS           PropertyConstraint = 9
 )
 
+// String returns the PropertyConstraint constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PropertyConstraint) String() string {
+	switch e {
+	case QC_EQUALS:
+		return "QC_EQUALS"
+	case QC_NOTEQUAL:
+		return "QC_NOTEQUAL"
+	case QC_LESSTHAN:
+		return "QC_LESSTHAN"
+	case QC_LESSTHANOREQUAL:
+		return "QC_LESSTHANOREQUAL"
+	case QC_GREATERTHAN:
+		return "QC_GREATERTHAN"
+	case QC_GREATERTHANOREQUAL:
+		return "QC_GREATERTHANOREQUAL"
+	case QC_STARTSWITH:
+		return "QC_STARTSWITH"
+	case QC_EXISTS:
+		return "QC_EXISTS"
+	case QC_DOESNOTEXIST:
+		return "QC_DOESNOTEXIST"
+	case QC_CONTAINS:
+		return "QC_CONTAINS"
+	default:
+		return fmt.Sprintf("PropertyConstraint(%d)", int32(e))
+	}
+}
+
 type QueryCategoryType int32
 
 const (
 	QCT_PROVIDER QueryCategoryType = 0
 	QCT_LAYERED  QueryCategoryType = 1
 )
+
+// String returns the QueryCategoryType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QueryCategoryType) String() string {
+	switch e {
+	case QCT_PROVIDER:
+		return "QCT_PROVIDER"
+	case QCT_LAYERED:
+		return "QCT_LAYERED"
+	default:
+		return fmt.Sprintf("QueryCategoryType(%d)", int32(e))
+	}
+}
 
 // QueryUpdateAction: https://learn.microsoft.com/windows/win32/api/functiondiscoveryapi/ne-functiondiscoveryapi-queryupdateaction
 type QueryUpdateAction int32
@@ -36,6 +82,21 @@ const (
 	QUA_CHANGE QueryUpdateAction = 2
 )
 
+// String returns the QueryUpdateAction constant's name, or its numeric form when
+// the value is not a known constant.
+func (e QueryUpdateAction) String() string {
+	switch e {
+	case QUA_ADD:
+		return "QUA_ADD"
+	case QUA_REMOVE:
+		return "QUA_REMOVE"
+	case QUA_CHANGE:
+		return "QUA_CHANGE"
+	default:
+		return fmt.Sprintf("QueryUpdateAction(%d)", int32(e))
+	}
+}
+
 // SystemVisibilityFlags: https://learn.microsoft.com/windows/win32/api/functiondiscoveryapi/ne-functiondiscoveryapi-systemvisibilityflags
 type SystemVisibilityFlags int32
 
@@ -43,3 +104,16 @@ const (
 	SVF_SYSTEM SystemVisibilityFlags = 0
 	SVF_USER   SystemVisibilityFlags = 1
 )
+
+// String returns the SystemVisibilityFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SystemVisibilityFlags) String() string {
+	switch e {
+	case SVF_SYSTEM:
+		return "SVF_SYSTEM"
+	case SVF_USER:
+		return "SVF_USER"
+	default:
+		return fmt.Sprintf("SystemVisibilityFlags(%d)", int32(e))
+	}
+}

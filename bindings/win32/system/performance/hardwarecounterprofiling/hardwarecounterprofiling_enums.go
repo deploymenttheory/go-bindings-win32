@@ -4,6 +4,10 @@
 
 package hardwarecounterprofiling
 
+import (
+	"fmt"
+)
+
 // HARDWARE_COUNTER_TYPE: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-hardware_counter_type
 type HARDWARE_COUNTER_TYPE int32
 
@@ -11,3 +15,16 @@ const (
 	PMCCounter             HARDWARE_COUNTER_TYPE = 0
 	MaxHardwareCounterType HARDWARE_COUNTER_TYPE = 1
 )
+
+// String returns the HARDWARE_COUNTER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e HARDWARE_COUNTER_TYPE) String() string {
+	switch e {
+	case PMCCounter:
+		return "PMCCounter"
+	case MaxHardwareCounterType:
+		return "MaxHardwareCounterType"
+	default:
+		return fmt.Sprintf("HARDWARE_COUNTER_TYPE(%d)", int32(e))
+	}
+}

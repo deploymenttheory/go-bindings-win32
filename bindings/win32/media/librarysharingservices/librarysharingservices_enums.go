@@ -4,6 +4,10 @@
 
 package librarysharingservices
 
+import (
+	"fmt"
+)
+
 // WindowsMediaLibrarySharingDeviceAuthorizationStatus: https://learn.microsoft.com/windows/win32/api/wmlss/ne-wmlss-windowsmedialibrarysharingdeviceauthorizationstatus
 type WindowsMediaLibrarySharingDeviceAuthorizationStatus int32
 
@@ -12,3 +16,18 @@ const (
 	DEVICE_AUTHORIZATION_ALLOWED WindowsMediaLibrarySharingDeviceAuthorizationStatus = 1
 	DEVICE_AUTHORIZATION_DENIED  WindowsMediaLibrarySharingDeviceAuthorizationStatus = 2
 )
+
+// String returns the WindowsMediaLibrarySharingDeviceAuthorizationStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WindowsMediaLibrarySharingDeviceAuthorizationStatus) String() string {
+	switch e {
+	case DEVICE_AUTHORIZATION_UNKNOWN:
+		return "DEVICE_AUTHORIZATION_UNKNOWN"
+	case DEVICE_AUTHORIZATION_ALLOWED:
+		return "DEVICE_AUTHORIZATION_ALLOWED"
+	case DEVICE_AUTHORIZATION_DENIED:
+		return "DEVICE_AUTHORIZATION_DENIED"
+	default:
+		return fmt.Sprintf("WindowsMediaLibrarySharingDeviceAuthorizationStatus(%d)", int32(e))
+	}
+}

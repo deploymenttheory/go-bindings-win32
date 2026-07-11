@@ -4,6 +4,12 @@
 
 package gameinput
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type GameInputArcadeStickButtons int32
 
 const (
@@ -24,6 +30,58 @@ const (
 	GameInputArcadeStickSpecial2 GameInputArcadeStickButtons = 8192
 )
 
+// String returns the GameInputArcadeStickButtons constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputArcadeStickButtons) String() string {
+	var parts []string
+	if e&GameInputArcadeStickMenu != 0 {
+		parts = append(parts, "GameInputArcadeStickMenu")
+	}
+	if e&GameInputArcadeStickView != 0 {
+		parts = append(parts, "GameInputArcadeStickView")
+	}
+	if e&GameInputArcadeStickUp != 0 {
+		parts = append(parts, "GameInputArcadeStickUp")
+	}
+	if e&GameInputArcadeStickDown != 0 {
+		parts = append(parts, "GameInputArcadeStickDown")
+	}
+	if e&GameInputArcadeStickLeft != 0 {
+		parts = append(parts, "GameInputArcadeStickLeft")
+	}
+	if e&GameInputArcadeStickRight != 0 {
+		parts = append(parts, "GameInputArcadeStickRight")
+	}
+	if e&GameInputArcadeStickAction1 != 0 {
+		parts = append(parts, "GameInputArcadeStickAction1")
+	}
+	if e&GameInputArcadeStickAction2 != 0 {
+		parts = append(parts, "GameInputArcadeStickAction2")
+	}
+	if e&GameInputArcadeStickAction3 != 0 {
+		parts = append(parts, "GameInputArcadeStickAction3")
+	}
+	if e&GameInputArcadeStickAction4 != 0 {
+		parts = append(parts, "GameInputArcadeStickAction4")
+	}
+	if e&GameInputArcadeStickAction5 != 0 {
+		parts = append(parts, "GameInputArcadeStickAction5")
+	}
+	if e&GameInputArcadeStickAction6 != 0 {
+		parts = append(parts, "GameInputArcadeStickAction6")
+	}
+	if e&GameInputArcadeStickSpecial1 != 0 {
+		parts = append(parts, "GameInputArcadeStickSpecial1")
+	}
+	if e&GameInputArcadeStickSpecial2 != 0 {
+		parts = append(parts, "GameInputArcadeStickSpecial2")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type GameInputBatteryStatus int32
 
 const (
@@ -34,6 +92,26 @@ const (
 	GameInputBatteryCharging    GameInputBatteryStatus = 3
 )
 
+// String returns the GameInputBatteryStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputBatteryStatus) String() string {
+	switch e {
+	case GameInputBatteryUnknown:
+		return "GameInputBatteryUnknown"
+	case GameInputBatteryNotPresent:
+		return "GameInputBatteryNotPresent"
+	case GameInputBatteryDischarging:
+		return "GameInputBatteryDischarging"
+	case GameInputBatteryIdle:
+		return "GameInputBatteryIdle"
+	case GameInputBatteryCharging:
+		return "GameInputBatteryCharging"
+	default:
+		return fmt.Sprintf("GameInputBatteryStatus(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GameInputDeviceCapabilities int32
 
 const (
@@ -44,6 +122,31 @@ const (
 	GameInputDeviceCapabilitySynchronization GameInputDeviceCapabilities = 8
 	GameInputDeviceCapabilityWireless        GameInputDeviceCapabilities = 16
 )
+
+// String returns the GameInputDeviceCapabilities constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputDeviceCapabilities) String() string {
+	var parts []string
+	if e&GameInputDeviceCapabilityAudio != 0 {
+		parts = append(parts, "GameInputDeviceCapabilityAudio")
+	}
+	if e&GameInputDeviceCapabilityPluginModule != 0 {
+		parts = append(parts, "GameInputDeviceCapabilityPluginModule")
+	}
+	if e&GameInputDeviceCapabilityPowerOff != 0 {
+		parts = append(parts, "GameInputDeviceCapabilityPowerOff")
+	}
+	if e&GameInputDeviceCapabilitySynchronization != 0 {
+		parts = append(parts, "GameInputDeviceCapabilitySynchronization")
+	}
+	if e&GameInputDeviceCapabilityWireless != 0 {
+		parts = append(parts, "GameInputDeviceCapabilityWireless")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type GameInputDeviceFamily int32
 
@@ -56,6 +159,28 @@ const (
 	GameInputFamilyI8042     GameInputDeviceFamily = 4
 )
 
+// String returns the GameInputDeviceFamily constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputDeviceFamily) String() string {
+	switch e {
+	case GameInputFamilyVirtual:
+		return "GameInputFamilyVirtual"
+	case GameInputFamilyAggregate:
+		return "GameInputFamilyAggregate"
+	case GameInputFamilyXboxOne:
+		return "GameInputFamilyXboxOne"
+	case GameInputFamilyXbox360:
+		return "GameInputFamilyXbox360"
+	case GameInputFamilyHid:
+		return "GameInputFamilyHid"
+	case GameInputFamilyI8042:
+		return "GameInputFamilyI8042"
+	default:
+		return fmt.Sprintf("GameInputDeviceFamily(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GameInputDeviceStatus int32
 
 const (
@@ -72,6 +197,46 @@ const (
 	GameInputDeviceAnyStatus     GameInputDeviceStatus = 16777215
 )
 
+// String returns the GameInputDeviceStatus constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputDeviceStatus) String() string {
+	var parts []string
+	if e&GameInputDeviceConnected != 0 {
+		parts = append(parts, "GameInputDeviceConnected")
+	}
+	if e&GameInputDeviceInputEnabled != 0 {
+		parts = append(parts, "GameInputDeviceInputEnabled")
+	}
+	if e&GameInputDeviceOutputEnabled != 0 {
+		parts = append(parts, "GameInputDeviceOutputEnabled")
+	}
+	if e&GameInputDeviceRawIoEnabled != 0 {
+		parts = append(parts, "GameInputDeviceRawIoEnabled")
+	}
+	if e&GameInputDeviceAudioCapture != 0 {
+		parts = append(parts, "GameInputDeviceAudioCapture")
+	}
+	if e&GameInputDeviceAudioRender != 0 {
+		parts = append(parts, "GameInputDeviceAudioRender")
+	}
+	if e&GameInputDeviceSynchronized != 0 {
+		parts = append(parts, "GameInputDeviceSynchronized")
+	}
+	if e&GameInputDeviceWireless != 0 {
+		parts = append(parts, "GameInputDeviceWireless")
+	}
+	if e&GameInputDeviceUserIdle != 0 {
+		parts = append(parts, "GameInputDeviceUserIdle")
+	}
+	if e&GameInputDeviceAnyStatus != 0 {
+		parts = append(parts, "GameInputDeviceAnyStatus")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type GameInputEnumerationKind int32
 
 const (
@@ -80,6 +245,22 @@ const (
 	GameInputBlockingEnumeration GameInputEnumerationKind = 2
 )
 
+// String returns the GameInputEnumerationKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputEnumerationKind) String() string {
+	switch e {
+	case GameInputNoEnumeration:
+		return "GameInputNoEnumeration"
+	case GameInputAsyncEnumeration:
+		return "GameInputAsyncEnumeration"
+	case GameInputBlockingEnumeration:
+		return "GameInputBlockingEnumeration"
+	default:
+		return fmt.Sprintf("GameInputEnumerationKind(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GameInputFeedbackAxes int32
 
 const (
@@ -93,6 +274,37 @@ const (
 	GameInputFeedbackAxisNormal   GameInputFeedbackAxes = 64
 )
 
+// String returns the GameInputFeedbackAxes constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputFeedbackAxes) String() string {
+	var parts []string
+	if e&GameInputFeedbackAxisLinearX != 0 {
+		parts = append(parts, "GameInputFeedbackAxisLinearX")
+	}
+	if e&GameInputFeedbackAxisLinearY != 0 {
+		parts = append(parts, "GameInputFeedbackAxisLinearY")
+	}
+	if e&GameInputFeedbackAxisLinearZ != 0 {
+		parts = append(parts, "GameInputFeedbackAxisLinearZ")
+	}
+	if e&GameInputFeedbackAxisAngularX != 0 {
+		parts = append(parts, "GameInputFeedbackAxisAngularX")
+	}
+	if e&GameInputFeedbackAxisAngularY != 0 {
+		parts = append(parts, "GameInputFeedbackAxisAngularY")
+	}
+	if e&GameInputFeedbackAxisAngularZ != 0 {
+		parts = append(parts, "GameInputFeedbackAxisAngularZ")
+	}
+	if e&GameInputFeedbackAxisNormal != 0 {
+		parts = append(parts, "GameInputFeedbackAxisNormal")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type GameInputFeedbackEffectState int32
 
 const (
@@ -101,6 +313,22 @@ const (
 	GameInputFeedbackPaused  GameInputFeedbackEffectState = 2
 )
 
+// String returns the GameInputFeedbackEffectState constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputFeedbackEffectState) String() string {
+	switch e {
+	case GameInputFeedbackStopped:
+		return "GameInputFeedbackStopped"
+	case GameInputFeedbackRunning:
+		return "GameInputFeedbackRunning"
+	case GameInputFeedbackPaused:
+		return "GameInputFeedbackPaused"
+	default:
+		return fmt.Sprintf("GameInputFeedbackEffectState(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GameInputFlightStickButtons int32
 
 const (
@@ -111,6 +339,29 @@ const (
 	GameInputFlightStickFireSecondary GameInputFlightStickButtons = 8
 )
 
+// String returns the GameInputFlightStickButtons constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputFlightStickButtons) String() string {
+	var parts []string
+	if e&GameInputFlightStickMenu != 0 {
+		parts = append(parts, "GameInputFlightStickMenu")
+	}
+	if e&GameInputFlightStickView != 0 {
+		parts = append(parts, "GameInputFlightStickView")
+	}
+	if e&GameInputFlightStickFirePrimary != 0 {
+		parts = append(parts, "GameInputFlightStickFirePrimary")
+	}
+	if e&GameInputFlightStickFireSecondary != 0 {
+		parts = append(parts, "GameInputFlightStickFireSecondary")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type GameInputFocusPolicy int32
 
 const (
@@ -122,6 +373,34 @@ const (
 	GameInputDisableBackgroundShareButton   GameInputFocusPolicy = 16
 	GameInputExclusiveForegroundShareButton GameInputFocusPolicy = 32
 )
+
+// String returns the GameInputFocusPolicy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputFocusPolicy) String() string {
+	var parts []string
+	if e&GameInputDisableBackgroundInput != 0 {
+		parts = append(parts, "GameInputDisableBackgroundInput")
+	}
+	if e&GameInputExclusiveForegroundInput != 0 {
+		parts = append(parts, "GameInputExclusiveForegroundInput")
+	}
+	if e&GameInputDisableBackgroundGuideButton != 0 {
+		parts = append(parts, "GameInputDisableBackgroundGuideButton")
+	}
+	if e&GameInputExclusiveForegroundGuideButton != 0 {
+		parts = append(parts, "GameInputExclusiveForegroundGuideButton")
+	}
+	if e&GameInputDisableBackgroundShareButton != 0 {
+		parts = append(parts, "GameInputDisableBackgroundShareButton")
+	}
+	if e&GameInputExclusiveForegroundShareButton != 0 {
+		parts = append(parts, "GameInputExclusiveForegroundShareButton")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type GameInputForceFeedbackEffectKind int32
 
@@ -139,6 +418,38 @@ const (
 	GameInputForceFeedbackInertia          GameInputForceFeedbackEffectKind = 10
 )
 
+// String returns the GameInputForceFeedbackEffectKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputForceFeedbackEffectKind) String() string {
+	switch e {
+	case GameInputForceFeedbackConstant:
+		return "GameInputForceFeedbackConstant"
+	case GameInputForceFeedbackRamp:
+		return "GameInputForceFeedbackRamp"
+	case GameInputForceFeedbackSineWave:
+		return "GameInputForceFeedbackSineWave"
+	case GameInputForceFeedbackSquareWave:
+		return "GameInputForceFeedbackSquareWave"
+	case GameInputForceFeedbackTriangleWave:
+		return "GameInputForceFeedbackTriangleWave"
+	case GameInputForceFeedbackSawtoothUpWave:
+		return "GameInputForceFeedbackSawtoothUpWave"
+	case GameInputForceFeedbackSawtoothDownWave:
+		return "GameInputForceFeedbackSawtoothDownWave"
+	case GameInputForceFeedbackSpring:
+		return "GameInputForceFeedbackSpring"
+	case GameInputForceFeedbackFriction:
+		return "GameInputForceFeedbackFriction"
+	case GameInputForceFeedbackDamper:
+		return "GameInputForceFeedbackDamper"
+	case GameInputForceFeedbackInertia:
+		return "GameInputForceFeedbackInertia"
+	default:
+		return fmt.Sprintf("GameInputForceFeedbackEffectKind(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GameInputGamepadButtons int32
 
 const (
@@ -159,6 +470,58 @@ const (
 	GameInputGamepadRightThumbstick GameInputGamepadButtons = 8192
 )
 
+// String returns the GameInputGamepadButtons constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputGamepadButtons) String() string {
+	var parts []string
+	if e&GameInputGamepadMenu != 0 {
+		parts = append(parts, "GameInputGamepadMenu")
+	}
+	if e&GameInputGamepadView != 0 {
+		parts = append(parts, "GameInputGamepadView")
+	}
+	if e&GameInputGamepadA != 0 {
+		parts = append(parts, "GameInputGamepadA")
+	}
+	if e&GameInputGamepadB != 0 {
+		parts = append(parts, "GameInputGamepadB")
+	}
+	if e&GameInputGamepadX != 0 {
+		parts = append(parts, "GameInputGamepadX")
+	}
+	if e&GameInputGamepadY != 0 {
+		parts = append(parts, "GameInputGamepadY")
+	}
+	if e&GameInputGamepadDPadUp != 0 {
+		parts = append(parts, "GameInputGamepadDPadUp")
+	}
+	if e&GameInputGamepadDPadDown != 0 {
+		parts = append(parts, "GameInputGamepadDPadDown")
+	}
+	if e&GameInputGamepadDPadLeft != 0 {
+		parts = append(parts, "GameInputGamepadDPadLeft")
+	}
+	if e&GameInputGamepadDPadRight != 0 {
+		parts = append(parts, "GameInputGamepadDPadRight")
+	}
+	if e&GameInputGamepadLeftShoulder != 0 {
+		parts = append(parts, "GameInputGamepadLeftShoulder")
+	}
+	if e&GameInputGamepadRightShoulder != 0 {
+		parts = append(parts, "GameInputGamepadRightShoulder")
+	}
+	if e&GameInputGamepadLeftThumbstick != 0 {
+		parts = append(parts, "GameInputGamepadLeftThumbstick")
+	}
+	if e&GameInputGamepadRightThumbstick != 0 {
+		parts = append(parts, "GameInputGamepadRightThumbstick")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type GameInputKeyboardKind int32
 
 const (
@@ -170,6 +533,28 @@ const (
 	GameInputJisKeyboard     GameInputKeyboardKind = 4
 )
 
+// String returns the GameInputKeyboardKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputKeyboardKind) String() string {
+	switch e {
+	case GameInputUnknownKeyboard:
+		return "GameInputUnknownKeyboard"
+	case GameInputAnsiKeyboard:
+		return "GameInputAnsiKeyboard"
+	case GameInputIsoKeyboard:
+		return "GameInputIsoKeyboard"
+	case GameInputKsKeyboard:
+		return "GameInputKsKeyboard"
+	case GameInputAbntKeyboard:
+		return "GameInputAbntKeyboard"
+	case GameInputJisKeyboard:
+		return "GameInputJisKeyboard"
+	default:
+		return fmt.Sprintf("GameInputKeyboardKind(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GameInputKind int32
 
 const (
@@ -189,6 +574,58 @@ const (
 	GameInputKindRacingWheel      GameInputKind = 524288
 	GameInputKindUiNavigation     GameInputKind = 16777216
 )
+
+// String returns the GameInputKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputKind) String() string {
+	var parts []string
+	if e&GameInputKindRawDeviceReport != 0 {
+		parts = append(parts, "GameInputKindRawDeviceReport")
+	}
+	if e&GameInputKindControllerAxis != 0 {
+		parts = append(parts, "GameInputKindControllerAxis")
+	}
+	if e&GameInputKindControllerButton != 0 {
+		parts = append(parts, "GameInputKindControllerButton")
+	}
+	if e&GameInputKindControllerSwitch != 0 {
+		parts = append(parts, "GameInputKindControllerSwitch")
+	}
+	if e&GameInputKindController != 0 {
+		parts = append(parts, "GameInputKindController")
+	}
+	if e&GameInputKindKeyboard != 0 {
+		parts = append(parts, "GameInputKindKeyboard")
+	}
+	if e&GameInputKindMouse != 0 {
+		parts = append(parts, "GameInputKindMouse")
+	}
+	if e&GameInputKindTouch != 0 {
+		parts = append(parts, "GameInputKindTouch")
+	}
+	if e&GameInputKindMotion != 0 {
+		parts = append(parts, "GameInputKindMotion")
+	}
+	if e&GameInputKindArcadeStick != 0 {
+		parts = append(parts, "GameInputKindArcadeStick")
+	}
+	if e&GameInputKindFlightStick != 0 {
+		parts = append(parts, "GameInputKindFlightStick")
+	}
+	if e&GameInputKindGamepad != 0 {
+		parts = append(parts, "GameInputKindGamepad")
+	}
+	if e&GameInputKindRacingWheel != 0 {
+		parts = append(parts, "GameInputKindRacingWheel")
+	}
+	if e&GameInputKindUiNavigation != 0 {
+		parts = append(parts, "GameInputKindUiNavigation")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type GameInputLabel int32
 
@@ -320,6 +757,265 @@ const (
 	GameInputLabelP4                       GameInputLabel = 124
 )
 
+// String returns the GameInputLabel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputLabel) String() string {
+	switch e {
+	case GameInputLabelUnknown:
+		return "GameInputLabelUnknown"
+	case GameInputLabelNone:
+		return "GameInputLabelNone"
+	case GameInputLabelXboxGuide:
+		return "GameInputLabelXboxGuide"
+	case GameInputLabelXboxBack:
+		return "GameInputLabelXboxBack"
+	case GameInputLabelXboxStart:
+		return "GameInputLabelXboxStart"
+	case GameInputLabelXboxMenu:
+		return "GameInputLabelXboxMenu"
+	case GameInputLabelXboxView:
+		return "GameInputLabelXboxView"
+	case GameInputLabelXboxA:
+		return "GameInputLabelXboxA"
+	case GameInputLabelXboxB:
+		return "GameInputLabelXboxB"
+	case GameInputLabelXboxX:
+		return "GameInputLabelXboxX"
+	case GameInputLabelXboxY:
+		return "GameInputLabelXboxY"
+	case GameInputLabelXboxDPadUp:
+		return "GameInputLabelXboxDPadUp"
+	case GameInputLabelXboxDPadDown:
+		return "GameInputLabelXboxDPadDown"
+	case GameInputLabelXboxDPadLeft:
+		return "GameInputLabelXboxDPadLeft"
+	case GameInputLabelXboxDPadRight:
+		return "GameInputLabelXboxDPadRight"
+	case GameInputLabelXboxLeftShoulder:
+		return "GameInputLabelXboxLeftShoulder"
+	case GameInputLabelXboxLeftTrigger:
+		return "GameInputLabelXboxLeftTrigger"
+	case GameInputLabelXboxLeftStickButton:
+		return "GameInputLabelXboxLeftStickButton"
+	case GameInputLabelXboxRightShoulder:
+		return "GameInputLabelXboxRightShoulder"
+	case GameInputLabelXboxRightTrigger:
+		return "GameInputLabelXboxRightTrigger"
+	case GameInputLabelXboxRightStickButton:
+		return "GameInputLabelXboxRightStickButton"
+	case GameInputLabelXboxPaddle1:
+		return "GameInputLabelXboxPaddle1"
+	case GameInputLabelXboxPaddle2:
+		return "GameInputLabelXboxPaddle2"
+	case GameInputLabelXboxPaddle3:
+		return "GameInputLabelXboxPaddle3"
+	case GameInputLabelXboxPaddle4:
+		return "GameInputLabelXboxPaddle4"
+	case GameInputLabelLetterA:
+		return "GameInputLabelLetterA"
+	case GameInputLabelLetterB:
+		return "GameInputLabelLetterB"
+	case GameInputLabelLetterC:
+		return "GameInputLabelLetterC"
+	case GameInputLabelLetterD:
+		return "GameInputLabelLetterD"
+	case GameInputLabelLetterE:
+		return "GameInputLabelLetterE"
+	case GameInputLabelLetterF:
+		return "GameInputLabelLetterF"
+	case GameInputLabelLetterG:
+		return "GameInputLabelLetterG"
+	case GameInputLabelLetterH:
+		return "GameInputLabelLetterH"
+	case GameInputLabelLetterI:
+		return "GameInputLabelLetterI"
+	case GameInputLabelLetterJ:
+		return "GameInputLabelLetterJ"
+	case GameInputLabelLetterK:
+		return "GameInputLabelLetterK"
+	case GameInputLabelLetterL:
+		return "GameInputLabelLetterL"
+	case GameInputLabelLetterM:
+		return "GameInputLabelLetterM"
+	case GameInputLabelLetterN:
+		return "GameInputLabelLetterN"
+	case GameInputLabelLetterO:
+		return "GameInputLabelLetterO"
+	case GameInputLabelLetterP:
+		return "GameInputLabelLetterP"
+	case GameInputLabelLetterQ:
+		return "GameInputLabelLetterQ"
+	case GameInputLabelLetterR:
+		return "GameInputLabelLetterR"
+	case GameInputLabelLetterS:
+		return "GameInputLabelLetterS"
+	case GameInputLabelLetterT:
+		return "GameInputLabelLetterT"
+	case GameInputLabelLetterU:
+		return "GameInputLabelLetterU"
+	case GameInputLabelLetterV:
+		return "GameInputLabelLetterV"
+	case GameInputLabelLetterW:
+		return "GameInputLabelLetterW"
+	case GameInputLabelLetterX:
+		return "GameInputLabelLetterX"
+	case GameInputLabelLetterY:
+		return "GameInputLabelLetterY"
+	case GameInputLabelLetterZ:
+		return "GameInputLabelLetterZ"
+	case GameInputLabelNumber0:
+		return "GameInputLabelNumber0"
+	case GameInputLabelNumber1:
+		return "GameInputLabelNumber1"
+	case GameInputLabelNumber2:
+		return "GameInputLabelNumber2"
+	case GameInputLabelNumber3:
+		return "GameInputLabelNumber3"
+	case GameInputLabelNumber4:
+		return "GameInputLabelNumber4"
+	case GameInputLabelNumber5:
+		return "GameInputLabelNumber5"
+	case GameInputLabelNumber6:
+		return "GameInputLabelNumber6"
+	case GameInputLabelNumber7:
+		return "GameInputLabelNumber7"
+	case GameInputLabelNumber8:
+		return "GameInputLabelNumber8"
+	case GameInputLabelNumber9:
+		return "GameInputLabelNumber9"
+	case GameInputLabelArrowUp:
+		return "GameInputLabelArrowUp"
+	case GameInputLabelArrowUpRight:
+		return "GameInputLabelArrowUpRight"
+	case GameInputLabelArrowRight:
+		return "GameInputLabelArrowRight"
+	case GameInputLabelArrowDownRight:
+		return "GameInputLabelArrowDownRight"
+	case GameInputLabelArrowDown:
+		return "GameInputLabelArrowDown"
+	case GameInputLabelArrowDownLLeft:
+		return "GameInputLabelArrowDownLLeft"
+	case GameInputLabelArrowLeft:
+		return "GameInputLabelArrowLeft"
+	case GameInputLabelArrowUpLeft:
+		return "GameInputLabelArrowUpLeft"
+	case GameInputLabelArrowUpDown:
+		return "GameInputLabelArrowUpDown"
+	case GameInputLabelArrowLeftRight:
+		return "GameInputLabelArrowLeftRight"
+	case GameInputLabelArrowUpDownLeftRight:
+		return "GameInputLabelArrowUpDownLeftRight"
+	case GameInputLabelArrowClockwise:
+		return "GameInputLabelArrowClockwise"
+	case GameInputLabelArrowCounterClockwise:
+		return "GameInputLabelArrowCounterClockwise"
+	case GameInputLabelArrowReturn:
+		return "GameInputLabelArrowReturn"
+	case GameInputLabelIconBranding:
+		return "GameInputLabelIconBranding"
+	case GameInputLabelIconHome:
+		return "GameInputLabelIconHome"
+	case GameInputLabelIconMenu:
+		return "GameInputLabelIconMenu"
+	case GameInputLabelIconCross:
+		return "GameInputLabelIconCross"
+	case GameInputLabelIconCircle:
+		return "GameInputLabelIconCircle"
+	case GameInputLabelIconSquare:
+		return "GameInputLabelIconSquare"
+	case GameInputLabelIconTriangle:
+		return "GameInputLabelIconTriangle"
+	case GameInputLabelIconStar:
+		return "GameInputLabelIconStar"
+	case GameInputLabelIconDPadUp:
+		return "GameInputLabelIconDPadUp"
+	case GameInputLabelIconDPadDown:
+		return "GameInputLabelIconDPadDown"
+	case GameInputLabelIconDPadLeft:
+		return "GameInputLabelIconDPadLeft"
+	case GameInputLabelIconDPadRight:
+		return "GameInputLabelIconDPadRight"
+	case GameInputLabelIconDialClockwise:
+		return "GameInputLabelIconDialClockwise"
+	case GameInputLabelIconDialCounterClockwise:
+		return "GameInputLabelIconDialCounterClockwise"
+	case GameInputLabelIconSliderLeftRight:
+		return "GameInputLabelIconSliderLeftRight"
+	case GameInputLabelIconSliderUpDown:
+		return "GameInputLabelIconSliderUpDown"
+	case GameInputLabelIconWheelUpDown:
+		return "GameInputLabelIconWheelUpDown"
+	case GameInputLabelIconPlus:
+		return "GameInputLabelIconPlus"
+	case GameInputLabelIconMinus:
+		return "GameInputLabelIconMinus"
+	case GameInputLabelIconSuspension:
+		return "GameInputLabelIconSuspension"
+	case GameInputLabelHome:
+		return "GameInputLabelHome"
+	case GameInputLabelGuide:
+		return "GameInputLabelGuide"
+	case GameInputLabelMode:
+		return "GameInputLabelMode"
+	case GameInputLabelSelect:
+		return "GameInputLabelSelect"
+	case GameInputLabelMenu:
+		return "GameInputLabelMenu"
+	case GameInputLabelView:
+		return "GameInputLabelView"
+	case GameInputLabelBack:
+		return "GameInputLabelBack"
+	case GameInputLabelStart:
+		return "GameInputLabelStart"
+	case GameInputLabelOptions:
+		return "GameInputLabelOptions"
+	case GameInputLabelShare:
+		return "GameInputLabelShare"
+	case GameInputLabelUp:
+		return "GameInputLabelUp"
+	case GameInputLabelDown:
+		return "GameInputLabelDown"
+	case GameInputLabelLeft:
+		return "GameInputLabelLeft"
+	case GameInputLabelRight:
+		return "GameInputLabelRight"
+	case GameInputLabelLB:
+		return "GameInputLabelLB"
+	case GameInputLabelLT:
+		return "GameInputLabelLT"
+	case GameInputLabelLSB:
+		return "GameInputLabelLSB"
+	case GameInputLabelL1:
+		return "GameInputLabelL1"
+	case GameInputLabelL2:
+		return "GameInputLabelL2"
+	case GameInputLabelL3:
+		return "GameInputLabelL3"
+	case GameInputLabelRB:
+		return "GameInputLabelRB"
+	case GameInputLabelRT:
+		return "GameInputLabelRT"
+	case GameInputLabelRSB:
+		return "GameInputLabelRSB"
+	case GameInputLabelR1:
+		return "GameInputLabelR1"
+	case GameInputLabelR2:
+		return "GameInputLabelR2"
+	case GameInputLabelR3:
+		return "GameInputLabelR3"
+	case GameInputLabelP1:
+		return "GameInputLabelP1"
+	case GameInputLabelP2:
+		return "GameInputLabelP2"
+	case GameInputLabelP3:
+		return "GameInputLabelP3"
+	case GameInputLabelP4:
+		return "GameInputLabelP4"
+	default:
+		return fmt.Sprintf("GameInputLabel(%d)", int32(e))
+	}
+}
+
 type GameInputLocation int32
 
 const (
@@ -333,6 +1029,31 @@ const (
 	GameInputLocationTouchPad GameInputLocation = 6
 )
 
+// String returns the GameInputLocation constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputLocation) String() string {
+	switch e {
+	case GameInputLocationUnknown:
+		return "GameInputLocationUnknown"
+	case GameInputLocationChassis:
+		return "GameInputLocationChassis"
+	case GameInputLocationDisplay:
+		return "GameInputLocationDisplay"
+	case GameInputLocationAxis:
+		return "GameInputLocationAxis"
+	case GameInputLocationButton:
+		return "GameInputLocationButton"
+	case GameInputLocationSwitch:
+		return "GameInputLocationSwitch"
+	case GameInputLocationKey:
+		return "GameInputLocationKey"
+	case GameInputLocationTouchPad:
+		return "GameInputLocationTouchPad"
+	default:
+		return fmt.Sprintf("GameInputLocation(%d)", int32(e))
+	}
+}
+
 type GameInputMotionAccuracy int32
 
 const (
@@ -343,6 +1064,26 @@ const (
 	GameInputMotionAccurate        GameInputMotionAccuracy = 3
 )
 
+// String returns the GameInputMotionAccuracy constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputMotionAccuracy) String() string {
+	switch e {
+	case GameInputMotionAccuracyUnknown:
+		return "GameInputMotionAccuracyUnknown"
+	case GameInputMotionUnavailable:
+		return "GameInputMotionUnavailable"
+	case GameInputMotionUnreliable:
+		return "GameInputMotionUnreliable"
+	case GameInputMotionApproximate:
+		return "GameInputMotionApproximate"
+	case GameInputMotionAccurate:
+		return "GameInputMotionAccurate"
+	default:
+		return fmt.Sprintf("GameInputMotionAccuracy(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GameInputMouseButtons int32
 
 const (
@@ -356,6 +1097,38 @@ const (
 	GameInputMouseWheelTiltRight GameInputMouseButtons = 64
 )
 
+// String returns the GameInputMouseButtons constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputMouseButtons) String() string {
+	var parts []string
+	if e&GameInputMouseLeftButton != 0 {
+		parts = append(parts, "GameInputMouseLeftButton")
+	}
+	if e&GameInputMouseRightButton != 0 {
+		parts = append(parts, "GameInputMouseRightButton")
+	}
+	if e&GameInputMouseMiddleButton != 0 {
+		parts = append(parts, "GameInputMouseMiddleButton")
+	}
+	if e&GameInputMouseButton4 != 0 {
+		parts = append(parts, "GameInputMouseButton4")
+	}
+	if e&GameInputMouseButton5 != 0 {
+		parts = append(parts, "GameInputMouseButton5")
+	}
+	if e&GameInputMouseWheelTiltLeft != 0 {
+		parts = append(parts, "GameInputMouseWheelTiltLeft")
+	}
+	if e&GameInputMouseWheelTiltRight != 0 {
+		parts = append(parts, "GameInputMouseWheelTiltRight")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type GameInputRacingWheelButtons int32
 
 const (
@@ -370,6 +1143,40 @@ const (
 	GameInputRacingWheelDpadRight    GameInputRacingWheelButtons = 128
 )
 
+// String returns the GameInputRacingWheelButtons constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputRacingWheelButtons) String() string {
+	var parts []string
+	if e&GameInputRacingWheelMenu != 0 {
+		parts = append(parts, "GameInputRacingWheelMenu")
+	}
+	if e&GameInputRacingWheelView != 0 {
+		parts = append(parts, "GameInputRacingWheelView")
+	}
+	if e&GameInputRacingWheelPreviousGear != 0 {
+		parts = append(parts, "GameInputRacingWheelPreviousGear")
+	}
+	if e&GameInputRacingWheelNextGear != 0 {
+		parts = append(parts, "GameInputRacingWheelNextGear")
+	}
+	if e&GameInputRacingWheelDpadUp != 0 {
+		parts = append(parts, "GameInputRacingWheelDpadUp")
+	}
+	if e&GameInputRacingWheelDpadDown != 0 {
+		parts = append(parts, "GameInputRacingWheelDpadDown")
+	}
+	if e&GameInputRacingWheelDpadLeft != 0 {
+		parts = append(parts, "GameInputRacingWheelDpadLeft")
+	}
+	if e&GameInputRacingWheelDpadRight != 0 {
+		parts = append(parts, "GameInputRacingWheelDpadRight")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type GameInputRawDeviceItemCollectionKind int32
 
 const (
@@ -382,6 +1189,31 @@ const (
 	GameInputUsageSwitchItemCollection   GameInputRawDeviceItemCollectionKind = 5
 	GameInputUsageModifierItemCollection GameInputRawDeviceItemCollectionKind = 6
 )
+
+// String returns the GameInputRawDeviceItemCollectionKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputRawDeviceItemCollectionKind) String() string {
+	switch e {
+	case GameInputUnknownItemCollection:
+		return "GameInputUnknownItemCollection"
+	case GameInputPhysicalItemCollection:
+		return "GameInputPhysicalItemCollection"
+	case GameInputApplicationItemCollection:
+		return "GameInputApplicationItemCollection"
+	case GameInputLogicalItemCollection:
+		return "GameInputLogicalItemCollection"
+	case GameInputReportItemCollection:
+		return "GameInputReportItemCollection"
+	case GameInputNamedArrayItemCollection:
+		return "GameInputNamedArrayItemCollection"
+	case GameInputUsageSwitchItemCollection:
+		return "GameInputUsageSwitchItemCollection"
+	case GameInputUsageModifierItemCollection:
+		return "GameInputUsageModifierItemCollection"
+	default:
+		return fmt.Sprintf("GameInputRawDeviceItemCollectionKind(%d)", int32(e))
+	}
+}
 
 type GameInputRawDevicePhysicalUnitKind int32
 
@@ -414,6 +1246,68 @@ const (
 	GameInputPhysicalUnitIlluminance         GameInputRawDevicePhysicalUnitKind = 24
 )
 
+// String returns the GameInputRawDevicePhysicalUnitKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputRawDevicePhysicalUnitKind) String() string {
+	switch e {
+	case GameInputPhysicalUnitUnknown:
+		return "GameInputPhysicalUnitUnknown"
+	case GameInputPhysicalUnitNone:
+		return "GameInputPhysicalUnitNone"
+	case GameInputPhysicalUnitTime:
+		return "GameInputPhysicalUnitTime"
+	case GameInputPhysicalUnitFrequency:
+		return "GameInputPhysicalUnitFrequency"
+	case GameInputPhysicalUnitLength:
+		return "GameInputPhysicalUnitLength"
+	case GameInputPhysicalUnitVelocity:
+		return "GameInputPhysicalUnitVelocity"
+	case GameInputPhysicalUnitAcceleration:
+		return "GameInputPhysicalUnitAcceleration"
+	case GameInputPhysicalUnitMass:
+		return "GameInputPhysicalUnitMass"
+	case GameInputPhysicalUnitMomentum:
+		return "GameInputPhysicalUnitMomentum"
+	case GameInputPhysicalUnitForce:
+		return "GameInputPhysicalUnitForce"
+	case GameInputPhysicalUnitPressure:
+		return "GameInputPhysicalUnitPressure"
+	case GameInputPhysicalUnitAngle:
+		return "GameInputPhysicalUnitAngle"
+	case GameInputPhysicalUnitAngularVelocity:
+		return "GameInputPhysicalUnitAngularVelocity"
+	case GameInputPhysicalUnitAngularAcceleration:
+		return "GameInputPhysicalUnitAngularAcceleration"
+	case GameInputPhysicalUnitAngularMass:
+		return "GameInputPhysicalUnitAngularMass"
+	case GameInputPhysicalUnitAngularMomentum:
+		return "GameInputPhysicalUnitAngularMomentum"
+	case GameInputPhysicalUnitAngularTorque:
+		return "GameInputPhysicalUnitAngularTorque"
+	case GameInputPhysicalUnitElectricCurrent:
+		return "GameInputPhysicalUnitElectricCurrent"
+	case GameInputPhysicalUnitElectricCharge:
+		return "GameInputPhysicalUnitElectricCharge"
+	case GameInputPhysicalUnitElectricPotential:
+		return "GameInputPhysicalUnitElectricPotential"
+	case GameInputPhysicalUnitEnergy:
+		return "GameInputPhysicalUnitEnergy"
+	case GameInputPhysicalUnitPower:
+		return "GameInputPhysicalUnitPower"
+	case GameInputPhysicalUnitTemperature:
+		return "GameInputPhysicalUnitTemperature"
+	case GameInputPhysicalUnitLuminousIntensity:
+		return "GameInputPhysicalUnitLuminousIntensity"
+	case GameInputPhysicalUnitLuminousFlux:
+		return "GameInputPhysicalUnitLuminousFlux"
+	case GameInputPhysicalUnitIlluminance:
+		return "GameInputPhysicalUnitIlluminance"
+	default:
+		return fmt.Sprintf("GameInputRawDevicePhysicalUnitKind(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GameInputRawDeviceReportItemFlags int32
 
 const (
@@ -429,6 +1323,43 @@ const (
 	GameInputBufferedItem   GameInputRawDeviceReportItemFlags = 256
 )
 
+// String returns the GameInputRawDeviceReportItemFlags constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputRawDeviceReportItemFlags) String() string {
+	var parts []string
+	if e&GameInputConstantItem != 0 {
+		parts = append(parts, "GameInputConstantItem")
+	}
+	if e&GameInputArrayItem != 0 {
+		parts = append(parts, "GameInputArrayItem")
+	}
+	if e&GameInputRelativeItem != 0 {
+		parts = append(parts, "GameInputRelativeItem")
+	}
+	if e&GameInputWraparoundItem != 0 {
+		parts = append(parts, "GameInputWraparoundItem")
+	}
+	if e&GameInputNonlinearItem != 0 {
+		parts = append(parts, "GameInputNonlinearItem")
+	}
+	if e&GameInputStableItem != 0 {
+		parts = append(parts, "GameInputStableItem")
+	}
+	if e&GameInputNullableItem != 0 {
+		parts = append(parts, "GameInputNullableItem")
+	}
+	if e&GameInputVolatileItem != 0 {
+		parts = append(parts, "GameInputVolatileItem")
+	}
+	if e&GameInputBufferedItem != 0 {
+		parts = append(parts, "GameInputBufferedItem")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type GameInputRawDeviceReportKind int32
 
 const (
@@ -437,6 +1368,22 @@ const (
 	GameInputRawFeatureReport GameInputRawDeviceReportKind = 2
 )
 
+// String returns the GameInputRawDeviceReportKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputRawDeviceReportKind) String() string {
+	switch e {
+	case GameInputRawInputReport:
+		return "GameInputRawInputReport"
+	case GameInputRawOutputReport:
+		return "GameInputRawOutputReport"
+	case GameInputRawFeatureReport:
+		return "GameInputRawFeatureReport"
+	default:
+		return fmt.Sprintf("GameInputRawDeviceReportKind(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GameInputRumbleMotors int32
 
 const (
@@ -447,6 +1394,28 @@ const (
 	GameInputRumbleRightTrigger  GameInputRumbleMotors = 8
 )
 
+// String returns the GameInputRumbleMotors constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputRumbleMotors) String() string {
+	var parts []string
+	if e&GameInputRumbleLowFrequency != 0 {
+		parts = append(parts, "GameInputRumbleLowFrequency")
+	}
+	if e&GameInputRumbleHighFrequency != 0 {
+		parts = append(parts, "GameInputRumbleHighFrequency")
+	}
+	if e&GameInputRumbleLeftTrigger != 0 {
+		parts = append(parts, "GameInputRumbleLeftTrigger")
+	}
+	if e&GameInputRumbleRightTrigger != 0 {
+		parts = append(parts, "GameInputRumbleRightTrigger")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type GameInputSwitchKind int32
 
 const (
@@ -455,6 +1424,23 @@ const (
 	GameInput4WaySwitch        GameInputSwitchKind = 1
 	GameInput8WaySwitch        GameInputSwitchKind = 2
 )
+
+// String returns the GameInputSwitchKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputSwitchKind) String() string {
+	switch e {
+	case GameInputUnknownSwitchKind:
+		return "GameInputUnknownSwitchKind"
+	case GameInput2WaySwitch:
+		return "GameInput2WaySwitch"
+	case GameInput4WaySwitch:
+		return "GameInput4WaySwitch"
+	case GameInput8WaySwitch:
+		return "GameInput8WaySwitch"
+	default:
+		return fmt.Sprintf("GameInputSwitchKind(%d)", int32(e))
+	}
+}
 
 type GameInputSwitchPosition int32
 
@@ -470,6 +1456,34 @@ const (
 	GameInputSwitchUpLeft    GameInputSwitchPosition = 8
 )
 
+// String returns the GameInputSwitchPosition constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputSwitchPosition) String() string {
+	switch e {
+	case GameInputSwitchCenter:
+		return "GameInputSwitchCenter"
+	case GameInputSwitchUp:
+		return "GameInputSwitchUp"
+	case GameInputSwitchUpRight:
+		return "GameInputSwitchUpRight"
+	case GameInputSwitchRight:
+		return "GameInputSwitchRight"
+	case GameInputSwitchDownRight:
+		return "GameInputSwitchDownRight"
+	case GameInputSwitchDown:
+		return "GameInputSwitchDown"
+	case GameInputSwitchDownLeft:
+		return "GameInputSwitchDownLeft"
+	case GameInputSwitchLeft:
+		return "GameInputSwitchLeft"
+	case GameInputSwitchUpLeft:
+		return "GameInputSwitchUpLeft"
+	default:
+		return fmt.Sprintf("GameInputSwitchPosition(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GameInputSystemButtons int32
 
 const (
@@ -477,6 +1491,22 @@ const (
 	GameInputSystemButtonGuide GameInputSystemButtons = 1
 	GameInputSystemButtonShare GameInputSystemButtons = 2
 )
+
+// String returns the GameInputSystemButtons constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputSystemButtons) String() string {
+	var parts []string
+	if e&GameInputSystemButtonGuide != 0 {
+		parts = append(parts, "GameInputSystemButtonGuide")
+	}
+	if e&GameInputSystemButtonShare != 0 {
+		parts = append(parts, "GameInputSystemButtonShare")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type GameInputTouchShape int32
 
@@ -491,6 +1521,32 @@ const (
 	GameInputTouchShape2DIrregular   GameInputTouchShape = 6
 )
 
+// String returns the GameInputTouchShape constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputTouchShape) String() string {
+	switch e {
+	case GameInputTouchShapeUnknown:
+		return "GameInputTouchShapeUnknown"
+	case GameInputTouchShapePoint:
+		return "GameInputTouchShapePoint"
+	case GameInputTouchShape1DLinear:
+		return "GameInputTouchShape1DLinear"
+	case GameInputTouchShape1DRadial:
+		return "GameInputTouchShape1DRadial"
+	case GameInputTouchShape1DIrregular:
+		return "GameInputTouchShape1DIrregular"
+	case GameInputTouchShape2DRectangular:
+		return "GameInputTouchShape2DRectangular"
+	case GameInputTouchShape2DElliptical:
+		return "GameInputTouchShape2DElliptical"
+	case GameInputTouchShape2DIrregular:
+		return "GameInputTouchShape2DIrregular"
+	default:
+		return fmt.Sprintf("GameInputTouchShape(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type GameInputUiNavigationButtons int32
 
 const (
@@ -516,3 +1572,73 @@ const (
 	GameInputUiNavigationScrollLeft  GameInputUiNavigationButtons = 262144
 	GameInputUiNavigationScrollRight GameInputUiNavigationButtons = 524288
 )
+
+// String returns the GameInputUiNavigationButtons constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GameInputUiNavigationButtons) String() string {
+	var parts []string
+	if e&GameInputUiNavigationMenu != 0 {
+		parts = append(parts, "GameInputUiNavigationMenu")
+	}
+	if e&GameInputUiNavigationView != 0 {
+		parts = append(parts, "GameInputUiNavigationView")
+	}
+	if e&GameInputUiNavigationAccept != 0 {
+		parts = append(parts, "GameInputUiNavigationAccept")
+	}
+	if e&GameInputUiNavigationCancel != 0 {
+		parts = append(parts, "GameInputUiNavigationCancel")
+	}
+	if e&GameInputUiNavigationUp != 0 {
+		parts = append(parts, "GameInputUiNavigationUp")
+	}
+	if e&GameInputUiNavigationDown != 0 {
+		parts = append(parts, "GameInputUiNavigationDown")
+	}
+	if e&GameInputUiNavigationLeft != 0 {
+		parts = append(parts, "GameInputUiNavigationLeft")
+	}
+	if e&GameInputUiNavigationRight != 0 {
+		parts = append(parts, "GameInputUiNavigationRight")
+	}
+	if e&GameInputUiNavigationContext1 != 0 {
+		parts = append(parts, "GameInputUiNavigationContext1")
+	}
+	if e&GameInputUiNavigationContext2 != 0 {
+		parts = append(parts, "GameInputUiNavigationContext2")
+	}
+	if e&GameInputUiNavigationContext3 != 0 {
+		parts = append(parts, "GameInputUiNavigationContext3")
+	}
+	if e&GameInputUiNavigationContext4 != 0 {
+		parts = append(parts, "GameInputUiNavigationContext4")
+	}
+	if e&GameInputUiNavigationPageUp != 0 {
+		parts = append(parts, "GameInputUiNavigationPageUp")
+	}
+	if e&GameInputUiNavigationPageDown != 0 {
+		parts = append(parts, "GameInputUiNavigationPageDown")
+	}
+	if e&GameInputUiNavigationPageLeft != 0 {
+		parts = append(parts, "GameInputUiNavigationPageLeft")
+	}
+	if e&GameInputUiNavigationPageRight != 0 {
+		parts = append(parts, "GameInputUiNavigationPageRight")
+	}
+	if e&GameInputUiNavigationScrollUp != 0 {
+		parts = append(parts, "GameInputUiNavigationScrollUp")
+	}
+	if e&GameInputUiNavigationScrollDown != 0 {
+		parts = append(parts, "GameInputUiNavigationScrollDown")
+	}
+	if e&GameInputUiNavigationScrollLeft != 0 {
+		parts = append(parts, "GameInputUiNavigationScrollLeft")
+	}
+	if e&GameInputUiNavigationScrollRight != 0 {
+		parts = append(parts, "GameInputUiNavigationScrollRight")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

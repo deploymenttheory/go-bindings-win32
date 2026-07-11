@@ -4,6 +4,11 @@
 
 package pipes
 
+import (
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type NAMED_PIPE_MODE uint32
 
 const (
@@ -18,3 +23,28 @@ const (
 	PIPE_ACCEPT_REMOTE_CLIENTS NAMED_PIPE_MODE = 0
 	PIPE_REJECT_REMOTE_CLIENTS NAMED_PIPE_MODE = 8
 )
+
+// String returns the NAMED_PIPE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e NAMED_PIPE_MODE) String() string {
+	var parts []string
+	if e&PIPE_NOWAIT != 0 {
+		parts = append(parts, "PIPE_NOWAIT")
+	}
+	if e&PIPE_READMODE_MESSAGE != 0 {
+		parts = append(parts, "PIPE_READMODE_MESSAGE")
+	}
+	if e&PIPE_SERVER_END != 0 {
+		parts = append(parts, "PIPE_SERVER_END")
+	}
+	if e&PIPE_TYPE_MESSAGE != 0 {
+		parts = append(parts, "PIPE_TYPE_MESSAGE")
+	}
+	if e&PIPE_REJECT_REMOTE_CLIENTS != 0 {
+		parts = append(parts, "PIPE_REJECT_REMOTE_CLIENTS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}

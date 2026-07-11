@@ -4,6 +4,12 @@
 
 package security
 
+import (
+	"fmt"
+	"strings"
+)
+
+// Bitmask — values may be combined with |.
 type ACE_FLAGS uint32
 
 const (
@@ -22,12 +28,71 @@ const (
 	NO_INHERITANCE                     ACE_FLAGS = 0
 )
 
+// String returns the ACE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACE_FLAGS) String() string {
+	var parts []string
+	if e&CONTAINER_INHERIT_ACE != 0 {
+		parts = append(parts, "CONTAINER_INHERIT_ACE")
+	}
+	if e&FAILED_ACCESS_ACE_FLAG != 0 {
+		parts = append(parts, "FAILED_ACCESS_ACE_FLAG")
+	}
+	if e&INHERIT_ONLY_ACE != 0 {
+		parts = append(parts, "INHERIT_ONLY_ACE")
+	}
+	if e&INHERITED_ACE != 0 {
+		parts = append(parts, "INHERITED_ACE")
+	}
+	if e&NO_PROPAGATE_INHERIT_ACE != 0 {
+		parts = append(parts, "NO_PROPAGATE_INHERIT_ACE")
+	}
+	if e&OBJECT_INHERIT_ACE != 0 {
+		parts = append(parts, "OBJECT_INHERIT_ACE")
+	}
+	if e&SUCCESSFUL_ACCESS_ACE_FLAG != 0 {
+		parts = append(parts, "SUCCESSFUL_ACCESS_ACE_FLAG")
+	}
+	if e&SUB_CONTAINERS_AND_OBJECTS_INHERIT != 0 {
+		parts = append(parts, "SUB_CONTAINERS_AND_OBJECTS_INHERIT")
+	}
+	if e&SUB_CONTAINERS_ONLY_INHERIT != 0 {
+		parts = append(parts, "SUB_CONTAINERS_ONLY_INHERIT")
+	}
+	if e&SUB_OBJECTS_ONLY_INHERIT != 0 {
+		parts = append(parts, "SUB_OBJECTS_ONLY_INHERIT")
+	}
+	if e&INHERIT_NO_PROPAGATE != 0 {
+		parts = append(parts, "INHERIT_NO_PROPAGATE")
+	}
+	if e&INHERIT_ONLY != 0 {
+		parts = append(parts, "INHERIT_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type ACE_REVISION uint32
 
 const (
 	ACL_REVISION    ACE_REVISION = 2
 	ACL_REVISION_DS ACE_REVISION = 4
 )
+
+// String returns the ACE_REVISION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACE_REVISION) String() string {
+	switch e {
+	case ACL_REVISION:
+		return "ACL_REVISION"
+	case ACL_REVISION_DS:
+		return "ACL_REVISION_DS"
+	default:
+		return fmt.Sprintf("ACE_REVISION(%d)", uint32(e))
+	}
+}
 
 // ACL_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-acl_information_class
 type ACL_INFORMATION_CLASS int32
@@ -37,6 +102,19 @@ const (
 	AclSizeInformation     ACL_INFORMATION_CLASS = 2
 )
 
+// String returns the ACL_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ACL_INFORMATION_CLASS) String() string {
+	switch e {
+	case AclRevisionInformation:
+		return "AclRevisionInformation"
+	case AclSizeInformation:
+		return "AclSizeInformation"
+	default:
+		return fmt.Sprintf("ACL_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
+
 // AUDIT_EVENT_TYPE: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-audit_event_type
 type AUDIT_EVENT_TYPE int32
 
@@ -45,6 +123,20 @@ const (
 	AuditEventDirectoryServiceAccess AUDIT_EVENT_TYPE = 1
 )
 
+// String returns the AUDIT_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AUDIT_EVENT_TYPE) String() string {
+	switch e {
+	case AuditEventObjectAccess:
+		return "AuditEventObjectAccess"
+	case AuditEventDirectoryServiceAccess:
+		return "AuditEventDirectoryServiceAccess"
+	default:
+		return fmt.Sprintf("AUDIT_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CLAIM_SECURITY_ATTRIBUTE_FLAGS uint32
 
 const (
@@ -55,6 +147,34 @@ const (
 	CLAIM_SECURITY_ATTRIBUTE_DISABLED             CLAIM_SECURITY_ATTRIBUTE_FLAGS = 16
 	CLAIM_SECURITY_ATTRIBUTE_MANDATORY            CLAIM_SECURITY_ATTRIBUTE_FLAGS = 32
 )
+
+// String returns the CLAIM_SECURITY_ATTRIBUTE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLAIM_SECURITY_ATTRIBUTE_FLAGS) String() string {
+	var parts []string
+	if e&CLAIM_SECURITY_ATTRIBUTE_NON_INHERITABLE != 0 {
+		parts = append(parts, "CLAIM_SECURITY_ATTRIBUTE_NON_INHERITABLE")
+	}
+	if e&CLAIM_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE != 0 {
+		parts = append(parts, "CLAIM_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE")
+	}
+	if e&CLAIM_SECURITY_ATTRIBUTE_USE_FOR_DENY_ONLY != 0 {
+		parts = append(parts, "CLAIM_SECURITY_ATTRIBUTE_USE_FOR_DENY_ONLY")
+	}
+	if e&CLAIM_SECURITY_ATTRIBUTE_DISABLED_BY_DEFAULT != 0 {
+		parts = append(parts, "CLAIM_SECURITY_ATTRIBUTE_DISABLED_BY_DEFAULT")
+	}
+	if e&CLAIM_SECURITY_ATTRIBUTE_DISABLED != 0 {
+		parts = append(parts, "CLAIM_SECURITY_ATTRIBUTE_DISABLED")
+	}
+	if e&CLAIM_SECURITY_ATTRIBUTE_MANDATORY != 0 {
+		parts = append(parts, "CLAIM_SECURITY_ATTRIBUTE_MANDATORY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE uint16
 
@@ -68,6 +188,30 @@ const (
 	CLAIM_SECURITY_ATTRIBUTE_TYPE_BOOLEAN      CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE = 6
 )
 
+// String returns the CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE) String() string {
+	switch e {
+	case CLAIM_SECURITY_ATTRIBUTE_TYPE_INT64:
+		return "CLAIM_SECURITY_ATTRIBUTE_TYPE_INT64"
+	case CLAIM_SECURITY_ATTRIBUTE_TYPE_UINT64:
+		return "CLAIM_SECURITY_ATTRIBUTE_TYPE_UINT64"
+	case CLAIM_SECURITY_ATTRIBUTE_TYPE_STRING:
+		return "CLAIM_SECURITY_ATTRIBUTE_TYPE_STRING"
+	case CLAIM_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING:
+		return "CLAIM_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING"
+	case CLAIM_SECURITY_ATTRIBUTE_TYPE_FQBN:
+		return "CLAIM_SECURITY_ATTRIBUTE_TYPE_FQBN"
+	case CLAIM_SECURITY_ATTRIBUTE_TYPE_SID:
+		return "CLAIM_SECURITY_ATTRIBUTE_TYPE_SID"
+	case CLAIM_SECURITY_ATTRIBUTE_TYPE_BOOLEAN:
+		return "CLAIM_SECURITY_ATTRIBUTE_TYPE_BOOLEAN"
+	default:
+		return fmt.Sprintf("CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE(%d)", uint16(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type CREATE_RESTRICTED_TOKEN_FLAGS uint32
 
 const (
@@ -76,6 +220,28 @@ const (
 	LUA_TOKEN             CREATE_RESTRICTED_TOKEN_FLAGS = 4
 	WRITE_RESTRICTED      CREATE_RESTRICTED_TOKEN_FLAGS = 8
 )
+
+// String returns the CREATE_RESTRICTED_TOKEN_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CREATE_RESTRICTED_TOKEN_FLAGS) String() string {
+	var parts []string
+	if e&DISABLE_MAX_PRIVILEGE != 0 {
+		parts = append(parts, "DISABLE_MAX_PRIVILEGE")
+	}
+	if e&SANDBOX_INERT != 0 {
+		parts = append(parts, "SANDBOX_INERT")
+	}
+	if e&LUA_TOKEN != 0 {
+		parts = append(parts, "LUA_TOKEN")
+	}
+	if e&WRITE_RESTRICTED != 0 {
+		parts = append(parts, "WRITE_RESTRICTED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // ENUM_PERIOD: https://learn.microsoft.com/windows/win32/api/celib/ne-celib-enum_period
 type ENUM_PERIOD int32
@@ -91,6 +257,31 @@ const (
 	ENUM_PERIOD_YEARS   ENUM_PERIOD = 6
 )
 
+// String returns the ENUM_PERIOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e ENUM_PERIOD) String() string {
+	switch e {
+	case ENUM_PERIOD_INVALID:
+		return "ENUM_PERIOD_INVALID"
+	case ENUM_PERIOD_SECONDS:
+		return "ENUM_PERIOD_SECONDS"
+	case ENUM_PERIOD_MINUTES:
+		return "ENUM_PERIOD_MINUTES"
+	case ENUM_PERIOD_HOURS:
+		return "ENUM_PERIOD_HOURS"
+	case ENUM_PERIOD_DAYS:
+		return "ENUM_PERIOD_DAYS"
+	case ENUM_PERIOD_WEEKS:
+		return "ENUM_PERIOD_WEEKS"
+	case ENUM_PERIOD_MONTHS:
+		return "ENUM_PERIOD_MONTHS"
+	case ENUM_PERIOD_YEARS:
+		return "ENUM_PERIOD_YEARS"
+	default:
+		return fmt.Sprintf("ENUM_PERIOD(%d)", int32(e))
+	}
+}
+
 type LOGON32_LOGON uint32
 
 const (
@@ -103,6 +294,29 @@ const (
 	LOGON32_LOGON_UNLOCK            LOGON32_LOGON = 7
 )
 
+// String returns the LOGON32_LOGON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOGON32_LOGON) String() string {
+	switch e {
+	case LOGON32_LOGON_BATCH:
+		return "LOGON32_LOGON_BATCH"
+	case LOGON32_LOGON_INTERACTIVE:
+		return "LOGON32_LOGON_INTERACTIVE"
+	case LOGON32_LOGON_NETWORK:
+		return "LOGON32_LOGON_NETWORK"
+	case LOGON32_LOGON_NETWORK_CLEARTEXT:
+		return "LOGON32_LOGON_NETWORK_CLEARTEXT"
+	case LOGON32_LOGON_NEW_CREDENTIALS:
+		return "LOGON32_LOGON_NEW_CREDENTIALS"
+	case LOGON32_LOGON_SERVICE:
+		return "LOGON32_LOGON_SERVICE"
+	case LOGON32_LOGON_UNLOCK:
+		return "LOGON32_LOGON_UNLOCK"
+	default:
+		return fmt.Sprintf("LOGON32_LOGON(%d)", uint32(e))
+	}
+}
+
 type LOGON32_PROVIDER uint32
 
 const (
@@ -110,6 +324,21 @@ const (
 	LOGON32_PROVIDER_WINNT50 LOGON32_PROVIDER = 3
 	LOGON32_PROVIDER_WINNT40 LOGON32_PROVIDER = 2
 )
+
+// String returns the LOGON32_PROVIDER constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOGON32_PROVIDER) String() string {
+	switch e {
+	case LOGON32_PROVIDER_DEFAULT:
+		return "LOGON32_PROVIDER_DEFAULT"
+	case LOGON32_PROVIDER_WINNT50:
+		return "LOGON32_PROVIDER_WINNT50"
+	case LOGON32_PROVIDER_WINNT40:
+		return "LOGON32_PROVIDER_WINNT40"
+	default:
+		return fmt.Sprintf("LOGON32_PROVIDER(%d)", uint32(e))
+	}
+}
 
 // MANDATORY_LEVEL: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-mandatory_level
 type MANDATORY_LEVEL int32
@@ -124,6 +353,30 @@ const (
 	MandatoryLevelCount         MANDATORY_LEVEL = 6
 )
 
+// String returns the MANDATORY_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e MANDATORY_LEVEL) String() string {
+	switch e {
+	case MandatoryLevelUntrusted:
+		return "MandatoryLevelUntrusted"
+	case MandatoryLevelLow:
+		return "MandatoryLevelLow"
+	case MandatoryLevelMedium:
+		return "MandatoryLevelMedium"
+	case MandatoryLevelHigh:
+		return "MandatoryLevelHigh"
+	case MandatoryLevelSystem:
+		return "MandatoryLevelSystem"
+	case MandatoryLevelSecureProcess:
+		return "MandatoryLevelSecureProcess"
+	case MandatoryLevelCount:
+		return "MandatoryLevelCount"
+	default:
+		return fmt.Sprintf("MANDATORY_LEVEL(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type OBJECT_SECURITY_INFORMATION uint32
 
 const (
@@ -141,6 +394,53 @@ const (
 	UNPROTECTED_SACL_SECURITY_INFORMATION OBJECT_SECURITY_INFORMATION = 268435456
 )
 
+// String returns the OBJECT_SECURITY_INFORMATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e OBJECT_SECURITY_INFORMATION) String() string {
+	var parts []string
+	if e&ATTRIBUTE_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "ATTRIBUTE_SECURITY_INFORMATION")
+	}
+	if e&BACKUP_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "BACKUP_SECURITY_INFORMATION")
+	}
+	if e&DACL_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "DACL_SECURITY_INFORMATION")
+	}
+	if e&GROUP_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "GROUP_SECURITY_INFORMATION")
+	}
+	if e&LABEL_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "LABEL_SECURITY_INFORMATION")
+	}
+	if e&OWNER_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "OWNER_SECURITY_INFORMATION")
+	}
+	if e&PROTECTED_DACL_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "PROTECTED_DACL_SECURITY_INFORMATION")
+	}
+	if e&PROTECTED_SACL_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "PROTECTED_SACL_SECURITY_INFORMATION")
+	}
+	if e&SACL_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "SACL_SECURITY_INFORMATION")
+	}
+	if e&SCOPE_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "SCOPE_SECURITY_INFORMATION")
+	}
+	if e&UNPROTECTED_DACL_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "UNPROTECTED_DACL_SECURITY_INFORMATION")
+	}
+	if e&UNPROTECTED_SACL_SECURITY_INFORMATION != 0 {
+		parts = append(parts, "UNPROTECTED_SACL_SECURITY_INFORMATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SECURITY_AUTO_INHERIT_FLAGS uint32
 
 const (
@@ -157,6 +457,50 @@ const (
 	SEF_SACL_AUTO_INHERIT             SECURITY_AUTO_INHERIT_FLAGS = 2
 )
 
+// String returns the SECURITY_AUTO_INHERIT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURITY_AUTO_INHERIT_FLAGS) String() string {
+	var parts []string
+	if e&SEF_AVOID_OWNER_CHECK != 0 {
+		parts = append(parts, "SEF_AVOID_OWNER_CHECK")
+	}
+	if e&SEF_AVOID_OWNER_RESTRICTION != 0 {
+		parts = append(parts, "SEF_AVOID_OWNER_RESTRICTION")
+	}
+	if e&SEF_AVOID_PRIVILEGE_CHECK != 0 {
+		parts = append(parts, "SEF_AVOID_PRIVILEGE_CHECK")
+	}
+	if e&SEF_DACL_AUTO_INHERIT != 0 {
+		parts = append(parts, "SEF_DACL_AUTO_INHERIT")
+	}
+	if e&SEF_DEFAULT_DESCRIPTOR_FOR_OBJECT != 0 {
+		parts = append(parts, "SEF_DEFAULT_DESCRIPTOR_FOR_OBJECT")
+	}
+	if e&SEF_DEFAULT_GROUP_FROM_PARENT != 0 {
+		parts = append(parts, "SEF_DEFAULT_GROUP_FROM_PARENT")
+	}
+	if e&SEF_DEFAULT_OWNER_FROM_PARENT != 0 {
+		parts = append(parts, "SEF_DEFAULT_OWNER_FROM_PARENT")
+	}
+	if e&SEF_MACL_NO_EXECUTE_UP != 0 {
+		parts = append(parts, "SEF_MACL_NO_EXECUTE_UP")
+	}
+	if e&SEF_MACL_NO_READ_UP != 0 {
+		parts = append(parts, "SEF_MACL_NO_READ_UP")
+	}
+	if e&SEF_MACL_NO_WRITE_UP != 0 {
+		parts = append(parts, "SEF_MACL_NO_WRITE_UP")
+	}
+	if e&SEF_SACL_AUTO_INHERIT != 0 {
+		parts = append(parts, "SEF_SACL_AUTO_INHERIT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type SECURITY_DESCRIPTOR_CONTROL uint16
 
 const (
@@ -176,6 +520,58 @@ const (
 	SE_SELF_RELATIVE         SECURITY_DESCRIPTOR_CONTROL = 32768
 )
 
+// String returns the SECURITY_DESCRIPTOR_CONTROL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURITY_DESCRIPTOR_CONTROL) String() string {
+	var parts []string
+	if e&SE_OWNER_DEFAULTED != 0 {
+		parts = append(parts, "SE_OWNER_DEFAULTED")
+	}
+	if e&SE_GROUP_DEFAULTED != 0 {
+		parts = append(parts, "SE_GROUP_DEFAULTED")
+	}
+	if e&SE_DACL_PRESENT != 0 {
+		parts = append(parts, "SE_DACL_PRESENT")
+	}
+	if e&SE_DACL_DEFAULTED != 0 {
+		parts = append(parts, "SE_DACL_DEFAULTED")
+	}
+	if e&SE_SACL_PRESENT != 0 {
+		parts = append(parts, "SE_SACL_PRESENT")
+	}
+	if e&SE_SACL_DEFAULTED != 0 {
+		parts = append(parts, "SE_SACL_DEFAULTED")
+	}
+	if e&SE_DACL_AUTO_INHERIT_REQ != 0 {
+		parts = append(parts, "SE_DACL_AUTO_INHERIT_REQ")
+	}
+	if e&SE_SACL_AUTO_INHERIT_REQ != 0 {
+		parts = append(parts, "SE_SACL_AUTO_INHERIT_REQ")
+	}
+	if e&SE_DACL_AUTO_INHERITED != 0 {
+		parts = append(parts, "SE_DACL_AUTO_INHERITED")
+	}
+	if e&SE_SACL_AUTO_INHERITED != 0 {
+		parts = append(parts, "SE_SACL_AUTO_INHERITED")
+	}
+	if e&SE_DACL_PROTECTED != 0 {
+		parts = append(parts, "SE_DACL_PROTECTED")
+	}
+	if e&SE_SACL_PROTECTED != 0 {
+		parts = append(parts, "SE_SACL_PROTECTED")
+	}
+	if e&SE_RM_CONTROL_VALID != 0 {
+		parts = append(parts, "SE_RM_CONTROL_VALID")
+	}
+	if e&SE_SELF_RELATIVE != 0 {
+		parts = append(parts, "SE_SELF_RELATIVE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // SECURITY_IMPERSONATION_LEVEL: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-security_impersonation_level
 type SECURITY_IMPERSONATION_LEVEL int32
 
@@ -185,6 +581,23 @@ const (
 	SecurityImpersonation  SECURITY_IMPERSONATION_LEVEL = 2
 	SecurityDelegation     SECURITY_IMPERSONATION_LEVEL = 3
 )
+
+// String returns the SECURITY_IMPERSONATION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SECURITY_IMPERSONATION_LEVEL) String() string {
+	switch e {
+	case SecurityAnonymous:
+		return "SecurityAnonymous"
+	case SecurityIdentification:
+		return "SecurityIdentification"
+	case SecurityImpersonation:
+		return "SecurityImpersonation"
+	case SecurityDelegation:
+		return "SecurityDelegation"
+	default:
+		return fmt.Sprintf("SECURITY_IMPERSONATION_LEVEL(%d)", int32(e))
+	}
+}
 
 // SID_NAME_USE: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-sid_name_use
 type SID_NAME_USE int32
@@ -203,6 +616,38 @@ const (
 	SidTypeLogonSession   SID_NAME_USE = 11
 )
 
+// String returns the SID_NAME_USE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SID_NAME_USE) String() string {
+	switch e {
+	case SidTypeUser:
+		return "SidTypeUser"
+	case SidTypeGroup:
+		return "SidTypeGroup"
+	case SidTypeDomain:
+		return "SidTypeDomain"
+	case SidTypeAlias:
+		return "SidTypeAlias"
+	case SidTypeWellKnownGroup:
+		return "SidTypeWellKnownGroup"
+	case SidTypeDeletedAccount:
+		return "SidTypeDeletedAccount"
+	case SidTypeInvalid:
+		return "SidTypeInvalid"
+	case SidTypeUnknown:
+		return "SidTypeUnknown"
+	case SidTypeComputer:
+		return "SidTypeComputer"
+	case SidTypeLabel:
+		return "SidTypeLabel"
+	case SidTypeLogonSession:
+		return "SidTypeLogonSession"
+	default:
+		return fmt.Sprintf("SID_NAME_USE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type SYSTEM_AUDIT_OBJECT_ACE_FLAGS uint32
 
 const (
@@ -210,6 +655,23 @@ const (
 	ACE_INHERITED_OBJECT_TYPE_PRESENT SYSTEM_AUDIT_OBJECT_ACE_FLAGS = 2
 )
 
+// String returns the SYSTEM_AUDIT_OBJECT_ACE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e SYSTEM_AUDIT_OBJECT_ACE_FLAGS) String() string {
+	var parts []string
+	if e&ACE_OBJECT_TYPE_PRESENT != 0 {
+		parts = append(parts, "ACE_OBJECT_TYPE_PRESENT")
+	}
+	if e&ACE_INHERITED_OBJECT_TYPE_PRESENT != 0 {
+		parts = append(parts, "ACE_INHERITED_OBJECT_TYPE_PRESENT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type TOKEN_ACCESS_MASK uint32
 
 const (
@@ -236,6 +698,79 @@ const (
 	TOKEN_ALL_ACCESS                TOKEN_ACCESS_MASK = 983551
 )
 
+// String returns the TOKEN_ACCESS_MASK constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOKEN_ACCESS_MASK) String() string {
+	var parts []string
+	if e&TOKEN_DELETE != 0 {
+		parts = append(parts, "TOKEN_DELETE")
+	}
+	if e&TOKEN_READ_CONTROL != 0 {
+		parts = append(parts, "TOKEN_READ_CONTROL")
+	}
+	if e&TOKEN_WRITE_DAC != 0 {
+		parts = append(parts, "TOKEN_WRITE_DAC")
+	}
+	if e&TOKEN_WRITE_OWNER != 0 {
+		parts = append(parts, "TOKEN_WRITE_OWNER")
+	}
+	if e&TOKEN_ACCESS_SYSTEM_SECURITY != 0 {
+		parts = append(parts, "TOKEN_ACCESS_SYSTEM_SECURITY")
+	}
+	if e&TOKEN_ASSIGN_PRIMARY != 0 {
+		parts = append(parts, "TOKEN_ASSIGN_PRIMARY")
+	}
+	if e&TOKEN_DUPLICATE != 0 {
+		parts = append(parts, "TOKEN_DUPLICATE")
+	}
+	if e&TOKEN_IMPERSONATE != 0 {
+		parts = append(parts, "TOKEN_IMPERSONATE")
+	}
+	if e&TOKEN_QUERY != 0 {
+		parts = append(parts, "TOKEN_QUERY")
+	}
+	if e&TOKEN_QUERY_SOURCE != 0 {
+		parts = append(parts, "TOKEN_QUERY_SOURCE")
+	}
+	if e&TOKEN_ADJUST_PRIVILEGES != 0 {
+		parts = append(parts, "TOKEN_ADJUST_PRIVILEGES")
+	}
+	if e&TOKEN_ADJUST_GROUPS != 0 {
+		parts = append(parts, "TOKEN_ADJUST_GROUPS")
+	}
+	if e&TOKEN_ADJUST_DEFAULT != 0 {
+		parts = append(parts, "TOKEN_ADJUST_DEFAULT")
+	}
+	if e&TOKEN_ADJUST_SESSIONID != 0 {
+		parts = append(parts, "TOKEN_ADJUST_SESSIONID")
+	}
+	if e&TOKEN_READ != 0 {
+		parts = append(parts, "TOKEN_READ")
+	}
+	if e&TOKEN_WRITE != 0 {
+		parts = append(parts, "TOKEN_WRITE")
+	}
+	if e&TOKEN_EXECUTE != 0 {
+		parts = append(parts, "TOKEN_EXECUTE")
+	}
+	if e&TOKEN_TRUST_CONSTRAINT_MASK != 0 {
+		parts = append(parts, "TOKEN_TRUST_CONSTRAINT_MASK")
+	}
+	if e&TOKEN_ACCESS_PSEUDO_HANDLE_WIN8 != 0 {
+		parts = append(parts, "TOKEN_ACCESS_PSEUDO_HANDLE_WIN8")
+	}
+	if e&TOKEN_ACCESS_PSEUDO_HANDLE != 0 {
+		parts = append(parts, "TOKEN_ACCESS_PSEUDO_HANDLE")
+	}
+	if e&TOKEN_ALL_ACCESS != 0 {
+		parts = append(parts, "TOKEN_ALL_ACCESS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // TOKEN_ELEVATION_TYPE: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-token_elevation_type
 type TOKEN_ELEVATION_TYPE int32
 
@@ -244,6 +779,21 @@ const (
 	TokenElevationTypeFull    TOKEN_ELEVATION_TYPE = 2
 	TokenElevationTypeLimited TOKEN_ELEVATION_TYPE = 3
 )
+
+// String returns the TOKEN_ELEVATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOKEN_ELEVATION_TYPE) String() string {
+	switch e {
+	case TokenElevationTypeDefault:
+		return "TokenElevationTypeDefault"
+	case TokenElevationTypeFull:
+		return "TokenElevationTypeFull"
+	case TokenElevationTypeLimited:
+		return "TokenElevationTypeLimited"
+	default:
+		return fmt.Sprintf("TOKEN_ELEVATION_TYPE(%d)", int32(e))
+	}
+}
 
 // TOKEN_INFORMATION_CLASS: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-token_information_class
 type TOKEN_INFORMATION_CLASS int32
@@ -302,6 +852,117 @@ const (
 	MaxTokenInfoClass                    TOKEN_INFORMATION_CLASS = 51
 )
 
+// String returns the TOKEN_INFORMATION_CLASS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOKEN_INFORMATION_CLASS) String() string {
+	switch e {
+	case TokenUser:
+		return "TokenUser"
+	case TokenGroups:
+		return "TokenGroups"
+	case TokenPrivileges:
+		return "TokenPrivileges"
+	case TokenOwner:
+		return "TokenOwner"
+	case TokenPrimaryGroup:
+		return "TokenPrimaryGroup"
+	case TokenDefaultDacl:
+		return "TokenDefaultDacl"
+	case TokenSource:
+		return "TokenSource"
+	case TokenType:
+		return "TokenType"
+	case TokenImpersonationLevel:
+		return "TokenImpersonationLevel"
+	case TokenStatistics:
+		return "TokenStatistics"
+	case TokenRestrictedSids:
+		return "TokenRestrictedSids"
+	case TokenSessionId:
+		return "TokenSessionId"
+	case TokenGroupsAndPrivileges:
+		return "TokenGroupsAndPrivileges"
+	case TokenSessionReference:
+		return "TokenSessionReference"
+	case TokenSandBoxInert:
+		return "TokenSandBoxInert"
+	case TokenAuditPolicy:
+		return "TokenAuditPolicy"
+	case TokenOrigin:
+		return "TokenOrigin"
+	case TokenElevationType:
+		return "TokenElevationType"
+	case TokenLinkedToken:
+		return "TokenLinkedToken"
+	case TokenElevation:
+		return "TokenElevation"
+	case TokenHasRestrictions:
+		return "TokenHasRestrictions"
+	case TokenAccessInformation:
+		return "TokenAccessInformation"
+	case TokenVirtualizationAllowed:
+		return "TokenVirtualizationAllowed"
+	case TokenVirtualizationEnabled:
+		return "TokenVirtualizationEnabled"
+	case TokenIntegrityLevel:
+		return "TokenIntegrityLevel"
+	case TokenUIAccess:
+		return "TokenUIAccess"
+	case TokenMandatoryPolicy:
+		return "TokenMandatoryPolicy"
+	case TokenLogonSid:
+		return "TokenLogonSid"
+	case TokenIsAppContainer:
+		return "TokenIsAppContainer"
+	case TokenCapabilities:
+		return "TokenCapabilities"
+	case TokenAppContainerSid:
+		return "TokenAppContainerSid"
+	case TokenAppContainerNumber:
+		return "TokenAppContainerNumber"
+	case TokenUserClaimAttributes:
+		return "TokenUserClaimAttributes"
+	case TokenDeviceClaimAttributes:
+		return "TokenDeviceClaimAttributes"
+	case TokenRestrictedUserClaimAttributes:
+		return "TokenRestrictedUserClaimAttributes"
+	case TokenRestrictedDeviceClaimAttributes:
+		return "TokenRestrictedDeviceClaimAttributes"
+	case TokenDeviceGroups:
+		return "TokenDeviceGroups"
+	case TokenRestrictedDeviceGroups:
+		return "TokenRestrictedDeviceGroups"
+	case TokenSecurityAttributes:
+		return "TokenSecurityAttributes"
+	case TokenIsRestricted:
+		return "TokenIsRestricted"
+	case TokenProcessTrustLevel:
+		return "TokenProcessTrustLevel"
+	case TokenPrivateNameSpace:
+		return "TokenPrivateNameSpace"
+	case TokenSingletonAttributes:
+		return "TokenSingletonAttributes"
+	case TokenBnoIsolation:
+		return "TokenBnoIsolation"
+	case TokenChildProcessFlags:
+		return "TokenChildProcessFlags"
+	case TokenIsLessPrivilegedAppContainer:
+		return "TokenIsLessPrivilegedAppContainer"
+	case TokenIsSandboxed:
+		return "TokenIsSandboxed"
+	case TokenIsAppSilo:
+		return "TokenIsAppSilo"
+	case TokenLoggingInformation:
+		return "TokenLoggingInformation"
+	case TokenLearningMode:
+		return "TokenLearningMode"
+	case MaxTokenInfoClass:
+		return "MaxTokenInfoClass"
+	default:
+		return fmt.Sprintf("TOKEN_INFORMATION_CLASS(%d)", int32(e))
+	}
+}
+
 type TOKEN_MANDATORY_POLICY_ID uint32
 
 const (
@@ -311,6 +972,24 @@ const (
 	TOKEN_MANDATORY_POLICY_VALID_MASK      TOKEN_MANDATORY_POLICY_ID = 3
 )
 
+// String returns the TOKEN_MANDATORY_POLICY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOKEN_MANDATORY_POLICY_ID) String() string {
+	switch e {
+	case TOKEN_MANDATORY_POLICY_OFF:
+		return "TOKEN_MANDATORY_POLICY_OFF"
+	case TOKEN_MANDATORY_POLICY_NO_WRITE_UP:
+		return "TOKEN_MANDATORY_POLICY_NO_WRITE_UP"
+	case TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN:
+		return "TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN"
+	case TOKEN_MANDATORY_POLICY_VALID_MASK:
+		return "TOKEN_MANDATORY_POLICY_VALID_MASK"
+	default:
+		return fmt.Sprintf("TOKEN_MANDATORY_POLICY_ID(%d)", uint32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type TOKEN_PRIVILEGES_ATTRIBUTES uint32
 
 const (
@@ -320,6 +999,28 @@ const (
 	SE_PRIVILEGE_USED_FOR_ACCESS    TOKEN_PRIVILEGES_ATTRIBUTES = 2147483648
 )
 
+// String returns the TOKEN_PRIVILEGES_ATTRIBUTES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOKEN_PRIVILEGES_ATTRIBUTES) String() string {
+	var parts []string
+	if e&SE_PRIVILEGE_ENABLED != 0 {
+		parts = append(parts, "SE_PRIVILEGE_ENABLED")
+	}
+	if e&SE_PRIVILEGE_ENABLED_BY_DEFAULT != 0 {
+		parts = append(parts, "SE_PRIVILEGE_ENABLED_BY_DEFAULT")
+	}
+	if e&SE_PRIVILEGE_REMOVED != 0 {
+		parts = append(parts, "SE_PRIVILEGE_REMOVED")
+	}
+	if e&SE_PRIVILEGE_USED_FOR_ACCESS != 0 {
+		parts = append(parts, "SE_PRIVILEGE_USED_FOR_ACCESS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // TOKEN_TYPE: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-token_type
 type TOKEN_TYPE int32
 
@@ -327,6 +1028,19 @@ const (
 	TokenPrimary       TOKEN_TYPE = 1
 	TokenImpersonation TOKEN_TYPE = 2
 )
+
+// String returns the TOKEN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e TOKEN_TYPE) String() string {
+	switch e {
+	case TokenPrimary:
+		return "TokenPrimary"
+	case TokenImpersonation:
+		return "TokenImpersonation"
+	default:
+		return fmt.Sprintf("TOKEN_TYPE(%d)", int32(e))
+	}
+}
 
 // WELL_KNOWN_SID_TYPE: https://learn.microsoft.com/windows/win32/api/winnt/ne-winnt-well_known_sid_type
 type WELL_KNOWN_SID_TYPE int32
@@ -455,3 +1169,256 @@ const (
 	WinBuiltinUserModeHardwareOperatorsSid        WELL_KNOWN_SID_TYPE = 120
 	WinBuiltinOpenSSHUsersSid                     WELL_KNOWN_SID_TYPE = 121
 )
+
+// String returns the WELL_KNOWN_SID_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WELL_KNOWN_SID_TYPE) String() string {
+	switch e {
+	case WinNullSid:
+		return "WinNullSid"
+	case WinWorldSid:
+		return "WinWorldSid"
+	case WinLocalSid:
+		return "WinLocalSid"
+	case WinCreatorOwnerSid:
+		return "WinCreatorOwnerSid"
+	case WinCreatorGroupSid:
+		return "WinCreatorGroupSid"
+	case WinCreatorOwnerServerSid:
+		return "WinCreatorOwnerServerSid"
+	case WinCreatorGroupServerSid:
+		return "WinCreatorGroupServerSid"
+	case WinNtAuthoritySid:
+		return "WinNtAuthoritySid"
+	case WinDialupSid:
+		return "WinDialupSid"
+	case WinNetworkSid:
+		return "WinNetworkSid"
+	case WinBatchSid:
+		return "WinBatchSid"
+	case WinInteractiveSid:
+		return "WinInteractiveSid"
+	case WinServiceSid:
+		return "WinServiceSid"
+	case WinAnonymousSid:
+		return "WinAnonymousSid"
+	case WinProxySid:
+		return "WinProxySid"
+	case WinEnterpriseControllersSid:
+		return "WinEnterpriseControllersSid"
+	case WinSelfSid:
+		return "WinSelfSid"
+	case WinAuthenticatedUserSid:
+		return "WinAuthenticatedUserSid"
+	case WinRestrictedCodeSid:
+		return "WinRestrictedCodeSid"
+	case WinTerminalServerSid:
+		return "WinTerminalServerSid"
+	case WinRemoteLogonIdSid:
+		return "WinRemoteLogonIdSid"
+	case WinLogonIdsSid:
+		return "WinLogonIdsSid"
+	case WinLocalSystemSid:
+		return "WinLocalSystemSid"
+	case WinLocalServiceSid:
+		return "WinLocalServiceSid"
+	case WinNetworkServiceSid:
+		return "WinNetworkServiceSid"
+	case WinBuiltinDomainSid:
+		return "WinBuiltinDomainSid"
+	case WinBuiltinAdministratorsSid:
+		return "WinBuiltinAdministratorsSid"
+	case WinBuiltinUsersSid:
+		return "WinBuiltinUsersSid"
+	case WinBuiltinGuestsSid:
+		return "WinBuiltinGuestsSid"
+	case WinBuiltinPowerUsersSid:
+		return "WinBuiltinPowerUsersSid"
+	case WinBuiltinAccountOperatorsSid:
+		return "WinBuiltinAccountOperatorsSid"
+	case WinBuiltinSystemOperatorsSid:
+		return "WinBuiltinSystemOperatorsSid"
+	case WinBuiltinPrintOperatorsSid:
+		return "WinBuiltinPrintOperatorsSid"
+	case WinBuiltinBackupOperatorsSid:
+		return "WinBuiltinBackupOperatorsSid"
+	case WinBuiltinReplicatorSid:
+		return "WinBuiltinReplicatorSid"
+	case WinBuiltinPreWindows2000CompatibleAccessSid:
+		return "WinBuiltinPreWindows2000CompatibleAccessSid"
+	case WinBuiltinRemoteDesktopUsersSid:
+		return "WinBuiltinRemoteDesktopUsersSid"
+	case WinBuiltinNetworkConfigurationOperatorsSid:
+		return "WinBuiltinNetworkConfigurationOperatorsSid"
+	case WinAccountAdministratorSid:
+		return "WinAccountAdministratorSid"
+	case WinAccountGuestSid:
+		return "WinAccountGuestSid"
+	case WinAccountKrbtgtSid:
+		return "WinAccountKrbtgtSid"
+	case WinAccountDomainAdminsSid:
+		return "WinAccountDomainAdminsSid"
+	case WinAccountDomainUsersSid:
+		return "WinAccountDomainUsersSid"
+	case WinAccountDomainGuestsSid:
+		return "WinAccountDomainGuestsSid"
+	case WinAccountComputersSid:
+		return "WinAccountComputersSid"
+	case WinAccountControllersSid:
+		return "WinAccountControllersSid"
+	case WinAccountCertAdminsSid:
+		return "WinAccountCertAdminsSid"
+	case WinAccountSchemaAdminsSid:
+		return "WinAccountSchemaAdminsSid"
+	case WinAccountEnterpriseAdminsSid:
+		return "WinAccountEnterpriseAdminsSid"
+	case WinAccountPolicyAdminsSid:
+		return "WinAccountPolicyAdminsSid"
+	case WinAccountRasAndIasServersSid:
+		return "WinAccountRasAndIasServersSid"
+	case WinNTLMAuthenticationSid:
+		return "WinNTLMAuthenticationSid"
+	case WinDigestAuthenticationSid:
+		return "WinDigestAuthenticationSid"
+	case WinSChannelAuthenticationSid:
+		return "WinSChannelAuthenticationSid"
+	case WinThisOrganizationSid:
+		return "WinThisOrganizationSid"
+	case WinOtherOrganizationSid:
+		return "WinOtherOrganizationSid"
+	case WinBuiltinIncomingForestTrustBuildersSid:
+		return "WinBuiltinIncomingForestTrustBuildersSid"
+	case WinBuiltinPerfMonitoringUsersSid:
+		return "WinBuiltinPerfMonitoringUsersSid"
+	case WinBuiltinPerfLoggingUsersSid:
+		return "WinBuiltinPerfLoggingUsersSid"
+	case WinBuiltinAuthorizationAccessSid:
+		return "WinBuiltinAuthorizationAccessSid"
+	case WinBuiltinTerminalServerLicenseServersSid:
+		return "WinBuiltinTerminalServerLicenseServersSid"
+	case WinBuiltinDCOMUsersSid:
+		return "WinBuiltinDCOMUsersSid"
+	case WinBuiltinIUsersSid:
+		return "WinBuiltinIUsersSid"
+	case WinIUserSid:
+		return "WinIUserSid"
+	case WinBuiltinCryptoOperatorsSid:
+		return "WinBuiltinCryptoOperatorsSid"
+	case WinUntrustedLabelSid:
+		return "WinUntrustedLabelSid"
+	case WinLowLabelSid:
+		return "WinLowLabelSid"
+	case WinMediumLabelSid:
+		return "WinMediumLabelSid"
+	case WinHighLabelSid:
+		return "WinHighLabelSid"
+	case WinSystemLabelSid:
+		return "WinSystemLabelSid"
+	case WinWriteRestrictedCodeSid:
+		return "WinWriteRestrictedCodeSid"
+	case WinCreatorOwnerRightsSid:
+		return "WinCreatorOwnerRightsSid"
+	case WinCacheablePrincipalsGroupSid:
+		return "WinCacheablePrincipalsGroupSid"
+	case WinNonCacheablePrincipalsGroupSid:
+		return "WinNonCacheablePrincipalsGroupSid"
+	case WinEnterpriseReadonlyControllersSid:
+		return "WinEnterpriseReadonlyControllersSid"
+	case WinAccountReadonlyControllersSid:
+		return "WinAccountReadonlyControllersSid"
+	case WinBuiltinEventLogReadersGroup:
+		return "WinBuiltinEventLogReadersGroup"
+	case WinNewEnterpriseReadonlyControllersSid:
+		return "WinNewEnterpriseReadonlyControllersSid"
+	case WinBuiltinCertSvcDComAccessGroup:
+		return "WinBuiltinCertSvcDComAccessGroup"
+	case WinMediumPlusLabelSid:
+		return "WinMediumPlusLabelSid"
+	case WinLocalLogonSid:
+		return "WinLocalLogonSid"
+	case WinConsoleLogonSid:
+		return "WinConsoleLogonSid"
+	case WinThisOrganizationCertificateSid:
+		return "WinThisOrganizationCertificateSid"
+	case WinApplicationPackageAuthoritySid:
+		return "WinApplicationPackageAuthoritySid"
+	case WinBuiltinAnyPackageSid:
+		return "WinBuiltinAnyPackageSid"
+	case WinCapabilityInternetClientSid:
+		return "WinCapabilityInternetClientSid"
+	case WinCapabilityInternetClientServerSid:
+		return "WinCapabilityInternetClientServerSid"
+	case WinCapabilityPrivateNetworkClientServerSid:
+		return "WinCapabilityPrivateNetworkClientServerSid"
+	case WinCapabilityPicturesLibrarySid:
+		return "WinCapabilityPicturesLibrarySid"
+	case WinCapabilityVideosLibrarySid:
+		return "WinCapabilityVideosLibrarySid"
+	case WinCapabilityMusicLibrarySid:
+		return "WinCapabilityMusicLibrarySid"
+	case WinCapabilityDocumentsLibrarySid:
+		return "WinCapabilityDocumentsLibrarySid"
+	case WinCapabilitySharedUserCertificatesSid:
+		return "WinCapabilitySharedUserCertificatesSid"
+	case WinCapabilityEnterpriseAuthenticationSid:
+		return "WinCapabilityEnterpriseAuthenticationSid"
+	case WinCapabilityRemovableStorageSid:
+		return "WinCapabilityRemovableStorageSid"
+	case WinBuiltinRDSRemoteAccessServersSid:
+		return "WinBuiltinRDSRemoteAccessServersSid"
+	case WinBuiltinRDSEndpointServersSid:
+		return "WinBuiltinRDSEndpointServersSid"
+	case WinBuiltinRDSManagementServersSid:
+		return "WinBuiltinRDSManagementServersSid"
+	case WinUserModeDriversSid:
+		return "WinUserModeDriversSid"
+	case WinBuiltinHyperVAdminsSid:
+		return "WinBuiltinHyperVAdminsSid"
+	case WinAccountCloneableControllersSid:
+		return "WinAccountCloneableControllersSid"
+	case WinBuiltinAccessControlAssistanceOperatorsSid:
+		return "WinBuiltinAccessControlAssistanceOperatorsSid"
+	case WinBuiltinRemoteManagementUsersSid:
+		return "WinBuiltinRemoteManagementUsersSid"
+	case WinAuthenticationAuthorityAssertedSid:
+		return "WinAuthenticationAuthorityAssertedSid"
+	case WinAuthenticationServiceAssertedSid:
+		return "WinAuthenticationServiceAssertedSid"
+	case WinLocalAccountSid:
+		return "WinLocalAccountSid"
+	case WinLocalAccountAndAdministratorSid:
+		return "WinLocalAccountAndAdministratorSid"
+	case WinAccountProtectedUsersSid:
+		return "WinAccountProtectedUsersSid"
+	case WinCapabilityAppointmentsSid:
+		return "WinCapabilityAppointmentsSid"
+	case WinCapabilityContactsSid:
+		return "WinCapabilityContactsSid"
+	case WinAccountDefaultSystemManagedSid:
+		return "WinAccountDefaultSystemManagedSid"
+	case WinBuiltinDefaultSystemManagedGroupSid:
+		return "WinBuiltinDefaultSystemManagedGroupSid"
+	case WinBuiltinStorageReplicaAdminsSid:
+		return "WinBuiltinStorageReplicaAdminsSid"
+	case WinAccountKeyAdminsSid:
+		return "WinAccountKeyAdminsSid"
+	case WinAccountEnterpriseKeyAdminsSid:
+		return "WinAccountEnterpriseKeyAdminsSid"
+	case WinAuthenticationKeyTrustSid:
+		return "WinAuthenticationKeyTrustSid"
+	case WinAuthenticationKeyPropertyMFASid:
+		return "WinAuthenticationKeyPropertyMFASid"
+	case WinAuthenticationKeyPropertyAttestationSid:
+		return "WinAuthenticationKeyPropertyAttestationSid"
+	case WinAuthenticationFreshKeyAuthSid:
+		return "WinAuthenticationFreshKeyAuthSid"
+	case WinBuiltinDeviceOwnersSid:
+		return "WinBuiltinDeviceOwnersSid"
+	case WinBuiltinUserModeHardwareOperatorsSid:
+		return "WinBuiltinUserModeHardwareOperatorsSid"
+	case WinBuiltinOpenSSHUsersSid:
+		return "WinBuiltinOpenSSHUsersSid"
+	default:
+		return fmt.Sprintf("WELL_KNOWN_SID_TYPE(%d)", int32(e))
+	}
+}

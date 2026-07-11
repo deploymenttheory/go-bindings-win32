@@ -4,6 +4,10 @@
 
 package geolocation
 
+import (
+	"fmt"
+)
+
 type GNSS_AGNSS_REQUEST_TYPE int32
 
 const (
@@ -11,6 +15,21 @@ const (
 	GNSS_AGNSS_PositionInjection GNSS_AGNSS_REQUEST_TYPE = 2
 	GNSS_AGNSS_BlobInjection     GNSS_AGNSS_REQUEST_TYPE = 3
 )
+
+// String returns the GNSS_AGNSS_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_AGNSS_REQUEST_TYPE) String() string {
+	switch e {
+	case GNSS_AGNSS_TimeInjection:
+		return "GNSS_AGNSS_TimeInjection"
+	case GNSS_AGNSS_PositionInjection:
+		return "GNSS_AGNSS_PositionInjection"
+	case GNSS_AGNSS_BlobInjection:
+		return "GNSS_AGNSS_BlobInjection"
+	default:
+		return fmt.Sprintf("GNSS_AGNSS_REQUEST_TYPE(%d)", int32(e))
+	}
+}
 
 type GNSS_DRIVERCOMMAND_TYPE int32
 
@@ -30,11 +49,57 @@ const (
 	GNSS_CustomCommand               GNSS_DRIVERCOMMAND_TYPE = 256
 )
 
+// String returns the GNSS_DRIVERCOMMAND_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_DRIVERCOMMAND_TYPE) String() string {
+	switch e {
+	case GNSS_SetLocationServiceEnabled:
+		return "GNSS_SetLocationServiceEnabled"
+	case GNSS_SetLocationNIRequestAllowed:
+		return "GNSS_SetLocationNIRequestAllowed"
+	case GNSS_ForceSatelliteSystem:
+		return "GNSS_ForceSatelliteSystem"
+	case GNSS_ForceOperationMode:
+		return "GNSS_ForceOperationMode"
+	case GNSS_ResetEngine:
+		return "GNSS_ResetEngine"
+	case GNSS_ClearAgnssData:
+		return "GNSS_ClearAgnssData"
+	case GNSS_SetSuplVersion:
+		return "GNSS_SetSuplVersion"
+	case GNSS_SetNMEALogging:
+		return "GNSS_SetNMEALogging"
+	case GNSS_SetUplServerAccessInterval:
+		return "GNSS_SetUplServerAccessInterval"
+	case GNSS_SetNiTimeoutInterval:
+		return "GNSS_SetNiTimeoutInterval"
+	case GNSS_ResetGeofencesTracking:
+		return "GNSS_ResetGeofencesTracking"
+	case GNSS_SetSuplVersion2:
+		return "GNSS_SetSuplVersion2"
+	case GNSS_CustomCommand:
+		return "GNSS_CustomCommand"
+	default:
+		return fmt.Sprintf("GNSS_DRIVERCOMMAND_TYPE(%d)", int32(e))
+	}
+}
+
 type GNSS_DRIVER_REQUEST int32
 
 const (
 	SUPL_CONFIG_DATA GNSS_DRIVER_REQUEST = 1
 )
+
+// String returns the GNSS_DRIVER_REQUEST constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_DRIVER_REQUEST) String() string {
+	switch e {
+	case SUPL_CONFIG_DATA:
+		return "SUPL_CONFIG_DATA"
+	default:
+		return fmt.Sprintf("GNSS_DRIVER_REQUEST(%d)", int32(e))
+	}
+}
 
 type GNSS_EVENT_TYPE int32
 
@@ -52,6 +117,37 @@ const (
 	GNSS_Event_Custom                  GNSS_EVENT_TYPE = 32768
 )
 
+// String returns the GNSS_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_EVENT_TYPE) String() string {
+	switch e {
+	case GNSS_Event_FixAvailable:
+		return "GNSS_Event_FixAvailable"
+	case GNSS_Event_RequireAgnss:
+		return "GNSS_Event_RequireAgnss"
+	case GNSS_Event_Error:
+		return "GNSS_Event_Error"
+	case GNSS_Event_NiRequest:
+		return "GNSS_Event_NiRequest"
+	case GNSS_Event_NmeaData:
+		return "GNSS_Event_NmeaData"
+	case GNSS_Event_GeofenceAlertData:
+		return "GNSS_Event_GeofenceAlertData"
+	case GNSS_Event_GeofencesTrackingStatus:
+		return "GNSS_Event_GeofencesTrackingStatus"
+	case GNSS_Event_DriverRequest:
+		return "GNSS_Event_DriverRequest"
+	case GNSS_Event_BreadcrumbAlertEvent:
+		return "GNSS_Event_BreadcrumbAlertEvent"
+	case GNSS_Event_FixAvailable_2:
+		return "GNSS_Event_FixAvailable_2"
+	case GNSS_Event_Custom:
+		return "GNSS_Event_Custom"
+	default:
+		return fmt.Sprintf("GNSS_EVENT_TYPE(%d)", int32(e))
+	}
+}
+
 type GNSS_FIXSESSIONTYPE int32
 
 const (
@@ -61,6 +157,23 @@ const (
 	GNSS_FixSession_LKG                GNSS_FIXSESSIONTYPE = 4
 )
 
+// String returns the GNSS_FIXSESSIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_FIXSESSIONTYPE) String() string {
+	switch e {
+	case GNSS_FixSession_SingleShot:
+		return "GNSS_FixSession_SingleShot"
+	case GNSS_FixSession_DistanceTracking:
+		return "GNSS_FixSession_DistanceTracking"
+	case GNSS_FixSession_ContinuousTracking:
+		return "GNSS_FixSession_ContinuousTracking"
+	case GNSS_FixSession_LKG:
+		return "GNSS_FixSession_LKG"
+	default:
+		return fmt.Sprintf("GNSS_FIXSESSIONTYPE(%d)", int32(e))
+	}
+}
+
 type GNSS_GEOFENCE_STATE int32
 
 const (
@@ -69,11 +182,37 @@ const (
 	GNSS_GeofenceState_Exited  GNSS_GEOFENCE_STATE = 2
 )
 
+// String returns the GNSS_GEOFENCE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_GEOFENCE_STATE) String() string {
+	switch e {
+	case GNSS_GeofenceState_Unknown:
+		return "GNSS_GeofenceState_Unknown"
+	case GNSS_GeofenceState_Entered:
+		return "GNSS_GeofenceState_Entered"
+	case GNSS_GeofenceState_Exited:
+		return "GNSS_GeofenceState_Exited"
+	default:
+		return fmt.Sprintf("GNSS_GEOFENCE_STATE(%d)", int32(e))
+	}
+}
+
 type GNSS_GEOREGIONTYPE int32
 
 const (
 	GNSS_GeoRegion_Circle GNSS_GEOREGIONTYPE = 1
 )
+
+// String returns the GNSS_GEOREGIONTYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_GEOREGIONTYPE) String() string {
+	switch e {
+	case GNSS_GeoRegion_Circle:
+		return "GNSS_GeoRegion_Circle"
+	default:
+		return fmt.Sprintf("GNSS_GEOREGIONTYPE(%d)", int32(e))
+	}
+}
 
 type GNSS_NI_NOTIFICATION_TYPE int32
 
@@ -85,6 +224,25 @@ const (
 	GNSS_NI_PrivacyOverride             GNSS_NI_NOTIFICATION_TYPE = 5
 )
 
+// String returns the GNSS_NI_NOTIFICATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_NI_NOTIFICATION_TYPE) String() string {
+	switch e {
+	case GNSS_NI_NoNotifyNoVerify:
+		return "GNSS_NI_NoNotifyNoVerify"
+	case GNSS_NI_NotifyOnly:
+		return "GNSS_NI_NotifyOnly"
+	case GNSS_NI_NotifyVerifyDefaultAllow:
+		return "GNSS_NI_NotifyVerifyDefaultAllow"
+	case GNSS_NI_NotifyVerifyDefaultNotAllow:
+		return "GNSS_NI_NotifyVerifyDefaultNotAllow"
+	case GNSS_NI_PrivacyOverride:
+		return "GNSS_NI_PrivacyOverride"
+	default:
+		return fmt.Sprintf("GNSS_NI_NOTIFICATION_TYPE(%d)", int32(e))
+	}
+}
+
 type GNSS_NI_PLANE_TYPE int32
 
 const (
@@ -93,12 +251,40 @@ const (
 	GNSS_NI_V2UPL GNSS_NI_PLANE_TYPE = 3
 )
 
+// String returns the GNSS_NI_PLANE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_NI_PLANE_TYPE) String() string {
+	switch e {
+	case GNSS_NI_SUPL:
+		return "GNSS_NI_SUPL"
+	case GNSS_NI_CP:
+		return "GNSS_NI_CP"
+	case GNSS_NI_V2UPL:
+		return "GNSS_NI_V2UPL"
+	default:
+		return fmt.Sprintf("GNSS_NI_PLANE_TYPE(%d)", int32(e))
+	}
+}
+
 type GNSS_NI_REQUEST_TYPE int32
 
 const (
 	GNSS_NI_Request_SingleShot  GNSS_NI_REQUEST_TYPE = 1
 	GNSS_NI_Request_AreaTrigger GNSS_NI_REQUEST_TYPE = 2
 )
+
+// String returns the GNSS_NI_REQUEST_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_NI_REQUEST_TYPE) String() string {
+	switch e {
+	case GNSS_NI_Request_SingleShot:
+		return "GNSS_NI_Request_SingleShot"
+	case GNSS_NI_Request_AreaTrigger:
+		return "GNSS_NI_Request_AreaTrigger"
+	default:
+		return fmt.Sprintf("GNSS_NI_REQUEST_TYPE(%d)", int32(e))
+	}
+}
 
 type GNSS_NI_USER_RESPONSE int32
 
@@ -108,6 +294,21 @@ const (
 	GNSS_Ni_UserResponseTimeout GNSS_NI_USER_RESPONSE = 3
 )
 
+// String returns the GNSS_NI_USER_RESPONSE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_NI_USER_RESPONSE) String() string {
+	switch e {
+	case GNSS_Ni_UserResponseAccept:
+		return "GNSS_Ni_UserResponseAccept"
+	case GNSS_Ni_UserResponseDeny:
+		return "GNSS_Ni_UserResponseDeny"
+	case GNSS_Ni_UserResponseTimeout:
+		return "GNSS_Ni_UserResponseTimeout"
+	default:
+		return fmt.Sprintf("GNSS_NI_USER_RESPONSE(%d)", int32(e))
+	}
+}
+
 type GNSS_SUPL_CERT_ACTION int32
 
 const (
@@ -115,6 +316,21 @@ const (
 	GNSS_Supl_Cert_Delete GNSS_SUPL_CERT_ACTION = 2
 	GNSS_Supl_Cert_Purge  GNSS_SUPL_CERT_ACTION = 3
 )
+
+// String returns the GNSS_SUPL_CERT_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e GNSS_SUPL_CERT_ACTION) String() string {
+	switch e {
+	case GNSS_Supl_Cert_Inject:
+		return "GNSS_Supl_Cert_Inject"
+	case GNSS_Supl_Cert_Delete:
+		return "GNSS_Supl_Cert_Delete"
+	case GNSS_Supl_Cert_Purge:
+		return "GNSS_Supl_Cert_Purge"
+	default:
+		return fmt.Sprintf("GNSS_SUPL_CERT_ACTION(%d)", int32(e))
+	}
+}
 
 // LOCATION_REPORT_STATUS: https://learn.microsoft.com/windows/win32/api/locationapi/ne-locationapi-location_report_status
 type LOCATION_REPORT_STATUS int32
@@ -126,3 +342,22 @@ const (
 	REPORT_INITIALIZING  LOCATION_REPORT_STATUS = 3
 	REPORT_RUNNING       LOCATION_REPORT_STATUS = 4
 )
+
+// String returns the LOCATION_REPORT_STATUS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e LOCATION_REPORT_STATUS) String() string {
+	switch e {
+	case REPORT_NOT_SUPPORTED:
+		return "REPORT_NOT_SUPPORTED"
+	case REPORT_ERROR:
+		return "REPORT_ERROR"
+	case REPORT_ACCESS_DENIED:
+		return "REPORT_ACCESS_DENIED"
+	case REPORT_INITIALIZING:
+		return "REPORT_INITIALIZING"
+	case REPORT_RUNNING:
+		return "REPORT_RUNNING"
+	default:
+		return fmt.Sprintf("LOCATION_REPORT_STATUS(%d)", int32(e))
+	}
+}

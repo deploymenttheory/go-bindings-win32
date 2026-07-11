@@ -4,6 +4,11 @@
 
 package windowsfilteringplatform
 
+import (
+	"fmt"
+	"strings"
+)
+
 // DL_ADDRESS_TYPE: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ne-fwpmtypes-dl_address_type
 type DL_ADDRESS_TYPE int32
 
@@ -12,6 +17,21 @@ const (
 	DlMulticast DL_ADDRESS_TYPE = 1
 	DlBroadcast DL_ADDRESS_TYPE = 2
 )
+
+// String returns the DL_ADDRESS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DL_ADDRESS_TYPE) String() string {
+	switch e {
+	case DlUnicast:
+		return "DlUnicast"
+	case DlMulticast:
+		return "DlMulticast"
+	case DlBroadcast:
+		return "DlBroadcast"
+	default:
+		return fmt.Sprintf("DL_ADDRESS_TYPE(%d)", int32(e))
+	}
+}
 
 // FWPM_APPC_NETWORK_CAPABILITY_TYPE: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ne-fwpmtypes-fwpm_appc_network_capability_type
 type FWPM_APPC_NETWORK_CAPABILITY_TYPE int32
@@ -22,6 +42,21 @@ const (
 	FWPM_APPC_NETWORK_CAPABILITY_INTERNET_PRIVATE_NETWORK FWPM_APPC_NETWORK_CAPABILITY_TYPE = 2
 )
 
+// String returns the FWPM_APPC_NETWORK_CAPABILITY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_APPC_NETWORK_CAPABILITY_TYPE) String() string {
+	switch e {
+	case FWPM_APPC_NETWORK_CAPABILITY_INTERNET_CLIENT:
+		return "FWPM_APPC_NETWORK_CAPABILITY_INTERNET_CLIENT"
+	case FWPM_APPC_NETWORK_CAPABILITY_INTERNET_CLIENT_SERVER:
+		return "FWPM_APPC_NETWORK_CAPABILITY_INTERNET_CLIENT_SERVER"
+	case FWPM_APPC_NETWORK_CAPABILITY_INTERNET_PRIVATE_NETWORK:
+		return "FWPM_APPC_NETWORK_CAPABILITY_INTERNET_PRIVATE_NETWORK"
+	default:
+		return fmt.Sprintf("FWPM_APPC_NETWORK_CAPABILITY_TYPE(%d)", int32(e))
+	}
+}
+
 // FWPM_CHANGE_TYPE: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ne-fwpmtypes-fwpm_change_type
 type FWPM_CHANGE_TYPE int32
 
@@ -31,6 +66,21 @@ const (
 	FWPM_CHANGE_TYPE_MAX FWPM_CHANGE_TYPE = 3
 )
 
+// String returns the FWPM_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_CHANGE_TYPE) String() string {
+	switch e {
+	case FWPM_CHANGE_ADD:
+		return "FWPM_CHANGE_ADD"
+	case FWPM_CHANGE_DELETE:
+		return "FWPM_CHANGE_DELETE"
+	case FWPM_CHANGE_TYPE_MAX:
+		return "FWPM_CHANGE_TYPE_MAX"
+	default:
+		return fmt.Sprintf("FWPM_CHANGE_TYPE(%d)", int32(e))
+	}
+}
+
 // FWPM_CONNECTION_EVENT_TYPE: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ne-fwpmtypes-fwpm_connection_event_type
 type FWPM_CONNECTION_EVENT_TYPE int32
 
@@ -39,6 +89,21 @@ const (
 	FWPM_CONNECTION_EVENT_DELETE FWPM_CONNECTION_EVENT_TYPE = 1
 	FWPM_CONNECTION_EVENT_MAX    FWPM_CONNECTION_EVENT_TYPE = 2
 )
+
+// String returns the FWPM_CONNECTION_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_CONNECTION_EVENT_TYPE) String() string {
+	switch e {
+	case FWPM_CONNECTION_EVENT_ADD:
+		return "FWPM_CONNECTION_EVENT_ADD"
+	case FWPM_CONNECTION_EVENT_DELETE:
+		return "FWPM_CONNECTION_EVENT_DELETE"
+	case FWPM_CONNECTION_EVENT_MAX:
+		return "FWPM_CONNECTION_EVENT_MAX"
+	default:
+		return fmt.Sprintf("FWPM_CONNECTION_EVENT_TYPE(%d)", int32(e))
+	}
+}
 
 // FWPM_ENGINE_OPTION: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ne-fwpmtypes-fwpm_engine_option
 type FWPM_ENGINE_OPTION int32
@@ -53,6 +118,29 @@ const (
 	FWPM_ENGINE_OPTION_MAX                   FWPM_ENGINE_OPTION = 6
 )
 
+// String returns the FWPM_ENGINE_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_ENGINE_OPTION) String() string {
+	switch e {
+	case FWPM_ENGINE_COLLECT_NET_EVENTS:
+		return "FWPM_ENGINE_COLLECT_NET_EVENTS"
+	case FWPM_ENGINE_NET_EVENT_MATCH_ANY_KEYWORDS:
+		return "FWPM_ENGINE_NET_EVENT_MATCH_ANY_KEYWORDS"
+	case FWPM_ENGINE_NAME_CACHE:
+		return "FWPM_ENGINE_NAME_CACHE"
+	case FWPM_ENGINE_MONITOR_IPSEC_CONNECTIONS:
+		return "FWPM_ENGINE_MONITOR_IPSEC_CONNECTIONS"
+	case FWPM_ENGINE_PACKET_QUEUING:
+		return "FWPM_ENGINE_PACKET_QUEUING"
+	case FWPM_ENGINE_TXN_WATCHDOG_TIMEOUT_IN_MSEC:
+		return "FWPM_ENGINE_TXN_WATCHDOG_TIMEOUT_IN_MSEC"
+	case FWPM_ENGINE_OPTION_MAX:
+		return "FWPM_ENGINE_OPTION_MAX"
+	default:
+		return fmt.Sprintf("FWPM_ENGINE_OPTION(%d)", int32(e))
+	}
+}
+
 // FWPM_FIELD_TYPE: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ne-fwpmtypes-fwpm_field_type
 type FWPM_FIELD_TYPE int32
 
@@ -63,6 +151,24 @@ const (
 	FWPM_FIELD_TYPE_MAX   FWPM_FIELD_TYPE = 3
 )
 
+// String returns the FWPM_FIELD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_FIELD_TYPE) String() string {
+	switch e {
+	case FWPM_FIELD_RAW_DATA:
+		return "FWPM_FIELD_RAW_DATA"
+	case FWPM_FIELD_IP_ADDRESS:
+		return "FWPM_FIELD_IP_ADDRESS"
+	case FWPM_FIELD_FLAGS:
+		return "FWPM_FIELD_FLAGS"
+	case FWPM_FIELD_TYPE_MAX:
+		return "FWPM_FIELD_TYPE_MAX"
+	default:
+		return fmt.Sprintf("FWPM_FIELD_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type FWPM_FILTER_FLAGS uint32
 
 const (
@@ -75,6 +181,37 @@ const (
 	FWPM_FILTER_FLAG_DISABLED                       FWPM_FILTER_FLAGS = 32
 	FWPM_FILTER_FLAG_INDEXED                        FWPM_FILTER_FLAGS = 64
 )
+
+// String returns the FWPM_FILTER_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_FILTER_FLAGS) String() string {
+	var parts []string
+	if e&FWPM_FILTER_FLAG_PERSISTENT != 0 {
+		parts = append(parts, "FWPM_FILTER_FLAG_PERSISTENT")
+	}
+	if e&FWPM_FILTER_FLAG_BOOTTIME != 0 {
+		parts = append(parts, "FWPM_FILTER_FLAG_BOOTTIME")
+	}
+	if e&FWPM_FILTER_FLAG_HAS_PROVIDER_CONTEXT != 0 {
+		parts = append(parts, "FWPM_FILTER_FLAG_HAS_PROVIDER_CONTEXT")
+	}
+	if e&FWPM_FILTER_FLAG_CLEAR_ACTION_RIGHT != 0 {
+		parts = append(parts, "FWPM_FILTER_FLAG_CLEAR_ACTION_RIGHT")
+	}
+	if e&FWPM_FILTER_FLAG_PERMIT_IF_CALLOUT_UNREGISTERED != 0 {
+		parts = append(parts, "FWPM_FILTER_FLAG_PERMIT_IF_CALLOUT_UNREGISTERED")
+	}
+	if e&FWPM_FILTER_FLAG_DISABLED != 0 {
+		parts = append(parts, "FWPM_FILTER_FLAG_DISABLED")
+	}
+	if e&FWPM_FILTER_FLAG_INDEXED != 0 {
+		parts = append(parts, "FWPM_FILTER_FLAG_INDEXED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // FWPM_NET_EVENT_TYPE: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ne-fwpmtypes-fwpm_net_event_type
 type FWPM_NET_EVENT_TYPE int32
@@ -93,6 +230,39 @@ const (
 	FWPM_NET_EVENT_TYPE_LPM_PACKET_ARRIVAL FWPM_NET_EVENT_TYPE = 10
 	FWPM_NET_EVENT_TYPE_MAX                FWPM_NET_EVENT_TYPE = 11
 )
+
+// String returns the FWPM_NET_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_NET_EVENT_TYPE) String() string {
+	switch e {
+	case FWPM_NET_EVENT_TYPE_IKEEXT_MM_FAILURE:
+		return "FWPM_NET_EVENT_TYPE_IKEEXT_MM_FAILURE"
+	case FWPM_NET_EVENT_TYPE_IKEEXT_QM_FAILURE:
+		return "FWPM_NET_EVENT_TYPE_IKEEXT_QM_FAILURE"
+	case FWPM_NET_EVENT_TYPE_IKEEXT_EM_FAILURE:
+		return "FWPM_NET_EVENT_TYPE_IKEEXT_EM_FAILURE"
+	case FWPM_NET_EVENT_TYPE_CLASSIFY_DROP:
+		return "FWPM_NET_EVENT_TYPE_CLASSIFY_DROP"
+	case FWPM_NET_EVENT_TYPE_IPSEC_KERNEL_DROP:
+		return "FWPM_NET_EVENT_TYPE_IPSEC_KERNEL_DROP"
+	case FWPM_NET_EVENT_TYPE_IPSEC_DOSP_DROP:
+		return "FWPM_NET_EVENT_TYPE_IPSEC_DOSP_DROP"
+	case FWPM_NET_EVENT_TYPE_CLASSIFY_ALLOW:
+		return "FWPM_NET_EVENT_TYPE_CLASSIFY_ALLOW"
+	case FWPM_NET_EVENT_TYPE_CAPABILITY_DROP:
+		return "FWPM_NET_EVENT_TYPE_CAPABILITY_DROP"
+	case FWPM_NET_EVENT_TYPE_CAPABILITY_ALLOW:
+		return "FWPM_NET_EVENT_TYPE_CAPABILITY_ALLOW"
+	case FWPM_NET_EVENT_TYPE_CLASSIFY_DROP_MAC:
+		return "FWPM_NET_EVENT_TYPE_CLASSIFY_DROP_MAC"
+	case FWPM_NET_EVENT_TYPE_LPM_PACKET_ARRIVAL:
+		return "FWPM_NET_EVENT_TYPE_LPM_PACKET_ARRIVAL"
+	case FWPM_NET_EVENT_TYPE_MAX:
+		return "FWPM_NET_EVENT_TYPE_MAX"
+	default:
+		return fmt.Sprintf("FWPM_NET_EVENT_TYPE(%d)", int32(e))
+	}
+}
 
 // FWPM_PROVIDER_CONTEXT_TYPE: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ne-fwpmtypes-fwpm_provider_context_type
 type FWPM_PROVIDER_CONTEXT_TYPE int32
@@ -115,6 +285,45 @@ const (
 	FWPM_PROVIDER_CONTEXT_TYPE_MAX         FWPM_PROVIDER_CONTEXT_TYPE = 14
 )
 
+// String returns the FWPM_PROVIDER_CONTEXT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_PROVIDER_CONTEXT_TYPE) String() string {
+	switch e {
+	case FWPM_IPSEC_KEYING_CONTEXT:
+		return "FWPM_IPSEC_KEYING_CONTEXT"
+	case FWPM_IPSEC_IKE_QM_TRANSPORT_CONTEXT:
+		return "FWPM_IPSEC_IKE_QM_TRANSPORT_CONTEXT"
+	case FWPM_IPSEC_IKE_QM_TUNNEL_CONTEXT:
+		return "FWPM_IPSEC_IKE_QM_TUNNEL_CONTEXT"
+	case FWPM_IPSEC_AUTHIP_QM_TRANSPORT_CONTEXT:
+		return "FWPM_IPSEC_AUTHIP_QM_TRANSPORT_CONTEXT"
+	case FWPM_IPSEC_AUTHIP_QM_TUNNEL_CONTEXT:
+		return "FWPM_IPSEC_AUTHIP_QM_TUNNEL_CONTEXT"
+	case FWPM_IPSEC_IKE_MM_CONTEXT:
+		return "FWPM_IPSEC_IKE_MM_CONTEXT"
+	case FWPM_IPSEC_AUTHIP_MM_CONTEXT:
+		return "FWPM_IPSEC_AUTHIP_MM_CONTEXT"
+	case FWPM_CLASSIFY_OPTIONS_CONTEXT:
+		return "FWPM_CLASSIFY_OPTIONS_CONTEXT"
+	case FWPM_GENERAL_CONTEXT:
+		return "FWPM_GENERAL_CONTEXT"
+	case FWPM_IPSEC_IKEV2_QM_TUNNEL_CONTEXT:
+		return "FWPM_IPSEC_IKEV2_QM_TUNNEL_CONTEXT"
+	case FWPM_IPSEC_IKEV2_MM_CONTEXT:
+		return "FWPM_IPSEC_IKEV2_MM_CONTEXT"
+	case FWPM_IPSEC_DOSP_CONTEXT:
+		return "FWPM_IPSEC_DOSP_CONTEXT"
+	case FWPM_IPSEC_IKEV2_QM_TRANSPORT_CONTEXT:
+		return "FWPM_IPSEC_IKEV2_QM_TRANSPORT_CONTEXT"
+	case FWPM_NETWORK_CONNECTION_POLICY_CONTEXT:
+		return "FWPM_NETWORK_CONNECTION_POLICY_CONTEXT"
+	case FWPM_PROVIDER_CONTEXT_TYPE_MAX:
+		return "FWPM_PROVIDER_CONTEXT_TYPE_MAX"
+	default:
+		return fmt.Sprintf("FWPM_PROVIDER_CONTEXT_TYPE(%d)", int32(e))
+	}
+}
+
 // FWPM_SERVICE_STATE: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ne-fwpmtypes-fwpm_service_state
 type FWPM_SERVICE_STATE int32
 
@@ -126,12 +335,44 @@ const (
 	FWPM_SERVICE_STATE_MAX     FWPM_SERVICE_STATE = 4
 )
 
+// String returns the FWPM_SERVICE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_SERVICE_STATE) String() string {
+	switch e {
+	case FWPM_SERVICE_STOPPED:
+		return "FWPM_SERVICE_STOPPED"
+	case FWPM_SERVICE_START_PENDING:
+		return "FWPM_SERVICE_START_PENDING"
+	case FWPM_SERVICE_STOP_PENDING:
+		return "FWPM_SERVICE_STOP_PENDING"
+	case FWPM_SERVICE_RUNNING:
+		return "FWPM_SERVICE_RUNNING"
+	case FWPM_SERVICE_STATE_MAX:
+		return "FWPM_SERVICE_STATE_MAX"
+	default:
+		return fmt.Sprintf("FWPM_SERVICE_STATE(%d)", int32(e))
+	}
+}
+
 type FWPM_SUBSCRIPTION_FLAGS uint32
 
 const (
 	FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_ADD    FWPM_SUBSCRIPTION_FLAGS = 1
 	FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_DELETE FWPM_SUBSCRIPTION_FLAGS = 2
 )
+
+// String returns the FWPM_SUBSCRIPTION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_SUBSCRIPTION_FLAGS) String() string {
+	switch e {
+	case FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_ADD:
+		return "FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_ADD"
+	case FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_DELETE:
+		return "FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_DELETE"
+	default:
+		return fmt.Sprintf("FWPM_SUBSCRIPTION_FLAGS(%d)", uint32(e))
+	}
+}
 
 // FWPM_SYSTEM_PORT_TYPE: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ne-fwpmtypes-fwpm_system_port_type
 type FWPM_SYSTEM_PORT_TYPE int32
@@ -144,6 +385,25 @@ const (
 	FWPM_SYSTEM_PORT_TYPE_MAX    FWPM_SYSTEM_PORT_TYPE = 4
 )
 
+// String returns the FWPM_SYSTEM_PORT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_SYSTEM_PORT_TYPE) String() string {
+	switch e {
+	case FWPM_SYSTEM_PORT_RPC_EPMAP:
+		return "FWPM_SYSTEM_PORT_RPC_EPMAP"
+	case FWPM_SYSTEM_PORT_TEREDO:
+		return "FWPM_SYSTEM_PORT_TEREDO"
+	case FWPM_SYSTEM_PORT_IPHTTPS_IN:
+		return "FWPM_SYSTEM_PORT_IPHTTPS_IN"
+	case FWPM_SYSTEM_PORT_IPHTTPS_OUT:
+		return "FWPM_SYSTEM_PORT_IPHTTPS_OUT"
+	case FWPM_SYSTEM_PORT_TYPE_MAX:
+		return "FWPM_SYSTEM_PORT_TYPE_MAX"
+	default:
+		return fmt.Sprintf("FWPM_SYSTEM_PORT_TYPE(%d)", int32(e))
+	}
+}
+
 // FWPM_VSWITCH_EVENT_TYPE: https://learn.microsoft.com/windows/win32/api/fwpmtypes/ne-fwpmtypes-fwpm_vswitch_event_type
 type FWPM_VSWITCH_EVENT_TYPE int32
 
@@ -155,6 +415,27 @@ const (
 	FWPM_VSWITCH_EVENT_FILTER_ENGINE_REORDER                  FWPM_VSWITCH_EVENT_TYPE = 4
 	FWPM_VSWITCH_EVENT_MAX                                    FWPM_VSWITCH_EVENT_TYPE = 5
 )
+
+// String returns the FWPM_VSWITCH_EVENT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWPM_VSWITCH_EVENT_TYPE) String() string {
+	switch e {
+	case FWPM_VSWITCH_EVENT_FILTER_ADD_TO_INCOMPLETE_LAYER:
+		return "FWPM_VSWITCH_EVENT_FILTER_ADD_TO_INCOMPLETE_LAYER"
+	case FWPM_VSWITCH_EVENT_FILTER_ENGINE_NOT_IN_REQUIRED_POSITION:
+		return "FWPM_VSWITCH_EVENT_FILTER_ENGINE_NOT_IN_REQUIRED_POSITION"
+	case FWPM_VSWITCH_EVENT_ENABLED_FOR_INSPECTION:
+		return "FWPM_VSWITCH_EVENT_ENABLED_FOR_INSPECTION"
+	case FWPM_VSWITCH_EVENT_DISABLED_FOR_INSPECTION:
+		return "FWPM_VSWITCH_EVENT_DISABLED_FOR_INSPECTION"
+	case FWPM_VSWITCH_EVENT_FILTER_ENGINE_REORDER:
+		return "FWPM_VSWITCH_EVENT_FILTER_ENGINE_REORDER"
+	case FWPM_VSWITCH_EVENT_MAX:
+		return "FWPM_VSWITCH_EVENT_MAX"
+	default:
+		return fmt.Sprintf("FWPM_VSWITCH_EVENT_TYPE(%d)", int32(e))
+	}
+}
 
 type FWP_ACTION_TYPE uint32
 
@@ -169,6 +450,31 @@ const (
 	FWP_ACTION_NONE_NO_MATCH       FWP_ACTION_TYPE = 8
 )
 
+// String returns the FWP_ACTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWP_ACTION_TYPE) String() string {
+	switch e {
+	case FWP_ACTION_BLOCK:
+		return "FWP_ACTION_BLOCK"
+	case FWP_ACTION_PERMIT:
+		return "FWP_ACTION_PERMIT"
+	case FWP_ACTION_CALLOUT_TERMINATING:
+		return "FWP_ACTION_CALLOUT_TERMINATING"
+	case FWP_ACTION_CALLOUT_INSPECTION:
+		return "FWP_ACTION_CALLOUT_INSPECTION"
+	case FWP_ACTION_CALLOUT_UNKNOWN:
+		return "FWP_ACTION_CALLOUT_UNKNOWN"
+	case FWP_ACTION_CONTINUE:
+		return "FWP_ACTION_CONTINUE"
+	case FWP_ACTION_NONE:
+		return "FWP_ACTION_NONE"
+	case FWP_ACTION_NONE_NO_MATCH:
+		return "FWP_ACTION_NONE_NO_MATCH"
+	default:
+		return fmt.Sprintf("FWP_ACTION_TYPE(%d)", uint32(e))
+	}
+}
+
 // FWP_AF: https://learn.microsoft.com/windows/win32/api/fwptypes/ne-fwptypes-fwp_af
 type FWP_AF int32
 
@@ -178,6 +484,23 @@ const (
 	FWP_AF_ETHER FWP_AF = 2
 	FWP_AF_NONE  FWP_AF = 3
 )
+
+// String returns the FWP_AF constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWP_AF) String() string {
+	switch e {
+	case FWP_AF_INET:
+		return "FWP_AF_INET"
+	case FWP_AF_INET6:
+		return "FWP_AF_INET6"
+	case FWP_AF_ETHER:
+		return "FWP_AF_ETHER"
+	case FWP_AF_NONE:
+		return "FWP_AF_NONE"
+	default:
+		return fmt.Sprintf("FWP_AF(%d)", int32(e))
+	}
+}
 
 // FWP_CLASSIFY_OPTION_TYPE: https://learn.microsoft.com/windows/win32/api/fwptypes/ne-fwptypes-fwp_classify_option_type
 type FWP_CLASSIFY_OPTION_TYPE int32
@@ -193,6 +516,33 @@ const (
 	FWP_CLASSIFY_OPTION_LOCAL_ONLY_MAPPING                 FWP_CLASSIFY_OPTION_TYPE = 7
 	FWP_CLASSIFY_OPTION_MAX                                FWP_CLASSIFY_OPTION_TYPE = 8
 )
+
+// String returns the FWP_CLASSIFY_OPTION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWP_CLASSIFY_OPTION_TYPE) String() string {
+	switch e {
+	case FWP_CLASSIFY_OPTION_MULTICAST_STATE:
+		return "FWP_CLASSIFY_OPTION_MULTICAST_STATE"
+	case FWP_CLASSIFY_OPTION_LOOSE_SOURCE_MAPPING:
+		return "FWP_CLASSIFY_OPTION_LOOSE_SOURCE_MAPPING"
+	case FWP_CLASSIFY_OPTION_UNICAST_LIFETIME:
+		return "FWP_CLASSIFY_OPTION_UNICAST_LIFETIME"
+	case FWP_CLASSIFY_OPTION_MCAST_BCAST_LIFETIME:
+		return "FWP_CLASSIFY_OPTION_MCAST_BCAST_LIFETIME"
+	case FWP_CLASSIFY_OPTION_SECURE_SOCKET_SECURITY_FLAGS:
+		return "FWP_CLASSIFY_OPTION_SECURE_SOCKET_SECURITY_FLAGS"
+	case FWP_CLASSIFY_OPTION_SECURE_SOCKET_AUTHIP_MM_POLICY_KEY:
+		return "FWP_CLASSIFY_OPTION_SECURE_SOCKET_AUTHIP_MM_POLICY_KEY"
+	case FWP_CLASSIFY_OPTION_SECURE_SOCKET_AUTHIP_QM_POLICY_KEY:
+		return "FWP_CLASSIFY_OPTION_SECURE_SOCKET_AUTHIP_QM_POLICY_KEY"
+	case FWP_CLASSIFY_OPTION_LOCAL_ONLY_MAPPING:
+		return "FWP_CLASSIFY_OPTION_LOCAL_ONLY_MAPPING"
+	case FWP_CLASSIFY_OPTION_MAX:
+		return "FWP_CLASSIFY_OPTION_MAX"
+	default:
+		return fmt.Sprintf("FWP_CLASSIFY_OPTION_TYPE(%d)", int32(e))
+	}
+}
 
 // FWP_DATA_TYPE: https://learn.microsoft.com/windows/win32/api/fwptypes/ne-fwptypes-fwp_data_type
 type FWP_DATA_TYPE int32
@@ -224,6 +574,63 @@ const (
 	FWP_DATA_TYPE_MAX                 FWP_DATA_TYPE = 259
 )
 
+// String returns the FWP_DATA_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWP_DATA_TYPE) String() string {
+	switch e {
+	case FWP_EMPTY:
+		return "FWP_EMPTY"
+	case FWP_UINT8:
+		return "FWP_UINT8"
+	case FWP_UINT16:
+		return "FWP_UINT16"
+	case FWP_UINT32:
+		return "FWP_UINT32"
+	case FWP_UINT64:
+		return "FWP_UINT64"
+	case FWP_INT8:
+		return "FWP_INT8"
+	case FWP_INT16:
+		return "FWP_INT16"
+	case FWP_INT32:
+		return "FWP_INT32"
+	case FWP_INT64:
+		return "FWP_INT64"
+	case FWP_FLOAT:
+		return "FWP_FLOAT"
+	case FWP_DOUBLE:
+		return "FWP_DOUBLE"
+	case FWP_BYTE_ARRAY16_TYPE:
+		return "FWP_BYTE_ARRAY16_TYPE"
+	case FWP_BYTE_BLOB_TYPE:
+		return "FWP_BYTE_BLOB_TYPE"
+	case FWP_SID:
+		return "FWP_SID"
+	case FWP_SECURITY_DESCRIPTOR_TYPE:
+		return "FWP_SECURITY_DESCRIPTOR_TYPE"
+	case FWP_TOKEN_INFORMATION_TYPE:
+		return "FWP_TOKEN_INFORMATION_TYPE"
+	case FWP_TOKEN_ACCESS_INFORMATION_TYPE:
+		return "FWP_TOKEN_ACCESS_INFORMATION_TYPE"
+	case FWP_UNICODE_STRING_TYPE:
+		return "FWP_UNICODE_STRING_TYPE"
+	case FWP_BYTE_ARRAY6_TYPE:
+		return "FWP_BYTE_ARRAY6_TYPE"
+	case FWP_SINGLE_DATA_TYPE_MAX:
+		return "FWP_SINGLE_DATA_TYPE_MAX"
+	case FWP_V4_ADDR_MASK:
+		return "FWP_V4_ADDR_MASK"
+	case FWP_V6_ADDR_MASK:
+		return "FWP_V6_ADDR_MASK"
+	case FWP_RANGE_TYPE:
+		return "FWP_RANGE_TYPE"
+	case FWP_DATA_TYPE_MAX:
+		return "FWP_DATA_TYPE_MAX"
+	default:
+		return fmt.Sprintf("FWP_DATA_TYPE(%d)", int32(e))
+	}
+}
+
 // FWP_DIRECTION: https://learn.microsoft.com/windows/win32/api/fwptypes/ne-fwptypes-fwp_direction
 type FWP_DIRECTION int32
 
@@ -232,6 +639,21 @@ const (
 	FWP_DIRECTION_INBOUND  FWP_DIRECTION = 1
 	FWP_DIRECTION_MAX      FWP_DIRECTION = 2
 )
+
+// String returns the FWP_DIRECTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWP_DIRECTION) String() string {
+	switch e {
+	case FWP_DIRECTION_OUTBOUND:
+		return "FWP_DIRECTION_OUTBOUND"
+	case FWP_DIRECTION_INBOUND:
+		return "FWP_DIRECTION_INBOUND"
+	case FWP_DIRECTION_MAX:
+		return "FWP_DIRECTION_MAX"
+	default:
+		return fmt.Sprintf("FWP_DIRECTION(%d)", int32(e))
+	}
+}
 
 // FWP_ETHER_ENCAP_METHOD: https://learn.microsoft.com/windows/win32/api/fwptypes/ne-fwptypes-fwp_ether_encap_method
 type FWP_ETHER_ENCAP_METHOD int32
@@ -242,6 +664,21 @@ const (
 	FWP_ETHER_ENCAP_METHOD_SNAP_W_OUI_ZERO FWP_ETHER_ENCAP_METHOD = 3
 )
 
+// String returns the FWP_ETHER_ENCAP_METHOD constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWP_ETHER_ENCAP_METHOD) String() string {
+	switch e {
+	case FWP_ETHER_ENCAP_METHOD_ETHER_V2:
+		return "FWP_ETHER_ENCAP_METHOD_ETHER_V2"
+	case FWP_ETHER_ENCAP_METHOD_SNAP:
+		return "FWP_ETHER_ENCAP_METHOD_SNAP"
+	case FWP_ETHER_ENCAP_METHOD_SNAP_W_OUI_ZERO:
+		return "FWP_ETHER_ENCAP_METHOD_SNAP_W_OUI_ZERO"
+	default:
+		return fmt.Sprintf("FWP_ETHER_ENCAP_METHOD(%d)", int32(e))
+	}
+}
+
 // FWP_FILTER_ENUM_TYPE: https://learn.microsoft.com/windows/win32/api/fwptypes/ne-fwptypes-fwp_filter_enum_type
 type FWP_FILTER_ENUM_TYPE int32
 
@@ -250,6 +687,21 @@ const (
 	FWP_FILTER_ENUM_OVERLAPPING     FWP_FILTER_ENUM_TYPE = 1
 	FWP_FILTER_ENUM_TYPE_MAX        FWP_FILTER_ENUM_TYPE = 2
 )
+
+// String returns the FWP_FILTER_ENUM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWP_FILTER_ENUM_TYPE) String() string {
+	switch e {
+	case FWP_FILTER_ENUM_FULLY_CONTAINED:
+		return "FWP_FILTER_ENUM_FULLY_CONTAINED"
+	case FWP_FILTER_ENUM_OVERLAPPING:
+		return "FWP_FILTER_ENUM_OVERLAPPING"
+	case FWP_FILTER_ENUM_TYPE_MAX:
+		return "FWP_FILTER_ENUM_TYPE_MAX"
+	default:
+		return fmt.Sprintf("FWP_FILTER_ENUM_TYPE(%d)", int32(e))
+	}
+}
 
 // FWP_IP_VERSION: https://learn.microsoft.com/windows/win32/api/fwptypes/ne-fwptypes-fwp_ip_version
 type FWP_IP_VERSION int32
@@ -260,6 +712,23 @@ const (
 	FWP_IP_VERSION_NONE FWP_IP_VERSION = 2
 	FWP_IP_VERSION_MAX  FWP_IP_VERSION = 3
 )
+
+// String returns the FWP_IP_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWP_IP_VERSION) String() string {
+	switch e {
+	case FWP_IP_VERSION_V4:
+		return "FWP_IP_VERSION_V4"
+	case FWP_IP_VERSION_V6:
+		return "FWP_IP_VERSION_V6"
+	case FWP_IP_VERSION_NONE:
+		return "FWP_IP_VERSION_NONE"
+	case FWP_IP_VERSION_MAX:
+		return "FWP_IP_VERSION_MAX"
+	default:
+		return fmt.Sprintf("FWP_IP_VERSION(%d)", int32(e))
+	}
+}
 
 // FWP_MATCH_TYPE: https://learn.microsoft.com/windows/win32/api/fwptypes/ne-fwptypes-fwp_match_type
 type FWP_MATCH_TYPE int32
@@ -281,6 +750,43 @@ const (
 	FWP_MATCH_TYPE_MAX               FWP_MATCH_TYPE = 13
 )
 
+// String returns the FWP_MATCH_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWP_MATCH_TYPE) String() string {
+	switch e {
+	case FWP_MATCH_EQUAL:
+		return "FWP_MATCH_EQUAL"
+	case FWP_MATCH_GREATER:
+		return "FWP_MATCH_GREATER"
+	case FWP_MATCH_LESS:
+		return "FWP_MATCH_LESS"
+	case FWP_MATCH_GREATER_OR_EQUAL:
+		return "FWP_MATCH_GREATER_OR_EQUAL"
+	case FWP_MATCH_LESS_OR_EQUAL:
+		return "FWP_MATCH_LESS_OR_EQUAL"
+	case FWP_MATCH_RANGE:
+		return "FWP_MATCH_RANGE"
+	case FWP_MATCH_FLAGS_ALL_SET:
+		return "FWP_MATCH_FLAGS_ALL_SET"
+	case FWP_MATCH_FLAGS_ANY_SET:
+		return "FWP_MATCH_FLAGS_ANY_SET"
+	case FWP_MATCH_FLAGS_NONE_SET:
+		return "FWP_MATCH_FLAGS_NONE_SET"
+	case FWP_MATCH_EQUAL_CASE_INSENSITIVE:
+		return "FWP_MATCH_EQUAL_CASE_INSENSITIVE"
+	case FWP_MATCH_NOT_EQUAL:
+		return "FWP_MATCH_NOT_EQUAL"
+	case FWP_MATCH_PREFIX:
+		return "FWP_MATCH_PREFIX"
+	case FWP_MATCH_NOT_PREFIX:
+		return "FWP_MATCH_NOT_PREFIX"
+	case FWP_MATCH_TYPE_MAX:
+		return "FWP_MATCH_TYPE_MAX"
+	default:
+		return fmt.Sprintf("FWP_MATCH_TYPE(%d)", int32(e))
+	}
+}
+
 type FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE int32
 
 const (
@@ -289,6 +795,23 @@ const (
 	FWP_NETWORK_CONNECTION_POLICY_NEXT_HOP           FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE = 2
 	FWP_NETWORK_CONNECTION_POLICY_MAX                FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE = 3
 )
+
+// String returns the FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE) String() string {
+	switch e {
+	case FWP_NETWORK_CONNECTION_POLICY_SOURCE_ADDRESS:
+		return "FWP_NETWORK_CONNECTION_POLICY_SOURCE_ADDRESS"
+	case FWP_NETWORK_CONNECTION_POLICY_NEXT_HOP_INTERFACE:
+		return "FWP_NETWORK_CONNECTION_POLICY_NEXT_HOP_INTERFACE"
+	case FWP_NETWORK_CONNECTION_POLICY_NEXT_HOP:
+		return "FWP_NETWORK_CONNECTION_POLICY_NEXT_HOP"
+	case FWP_NETWORK_CONNECTION_POLICY_MAX:
+		return "FWP_NETWORK_CONNECTION_POLICY_MAX"
+	default:
+		return fmt.Sprintf("FWP_NETWORK_CONNECTION_POLICY_SETTING_TYPE(%d)", int32(e))
+	}
+}
 
 // FWP_VSWITCH_NETWORK_TYPE: https://learn.microsoft.com/windows/win32/api/fwptypes/ne-fwptypes-fwp_vswitch_network_type
 type FWP_VSWITCH_NETWORK_TYPE int32
@@ -300,6 +823,23 @@ const (
 	FWP_VSWITCH_NETWORK_TYPE_EXTERNAL FWP_VSWITCH_NETWORK_TYPE = 3
 )
 
+// String returns the FWP_VSWITCH_NETWORK_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e FWP_VSWITCH_NETWORK_TYPE) String() string {
+	switch e {
+	case FWP_VSWITCH_NETWORK_TYPE_UNKNOWN:
+		return "FWP_VSWITCH_NETWORK_TYPE_UNKNOWN"
+	case FWP_VSWITCH_NETWORK_TYPE_PRIVATE:
+		return "FWP_VSWITCH_NETWORK_TYPE_PRIVATE"
+	case FWP_VSWITCH_NETWORK_TYPE_INTERNAL:
+		return "FWP_VSWITCH_NETWORK_TYPE_INTERNAL"
+	case FWP_VSWITCH_NETWORK_TYPE_EXTERNAL:
+		return "FWP_VSWITCH_NETWORK_TYPE_EXTERNAL"
+	default:
+		return fmt.Sprintf("FWP_VSWITCH_NETWORK_TYPE(%d)", int32(e))
+	}
+}
+
 // IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_authentication_impersonation_type
 type IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE int32
 
@@ -308,6 +848,21 @@ const (
 	IKEEXT_IMPERSONATION_SOCKET_PRINCIPAL IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = 1
 	IKEEXT_IMPERSONATION_MAX              IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE = 2
 )
+
+// String returns the IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE) String() string {
+	switch e {
+	case IKEEXT_IMPERSONATION_NONE:
+		return "IKEEXT_IMPERSONATION_NONE"
+	case IKEEXT_IMPERSONATION_SOCKET_PRINCIPAL:
+		return "IKEEXT_IMPERSONATION_SOCKET_PRINCIPAL"
+	case IKEEXT_IMPERSONATION_MAX:
+		return "IKEEXT_IMPERSONATION_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_AUTHENTICATION_IMPERSONATION_TYPE(%d)", int32(e))
+	}
+}
 
 // IKEEXT_AUTHENTICATION_METHOD_TYPE: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_authentication_method_type
 type IKEEXT_AUTHENTICATION_METHOD_TYPE int32
@@ -329,6 +884,44 @@ const (
 	IKEEXT_AUTHENTICATION_METHOD_TYPE_MAX IKEEXT_AUTHENTICATION_METHOD_TYPE = 13
 )
 
+// String returns the IKEEXT_AUTHENTICATION_METHOD_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_AUTHENTICATION_METHOD_TYPE) String() string {
+	switch e {
+	case IKEEXT_PRESHARED_KEY:
+		return "IKEEXT_PRESHARED_KEY"
+	case IKEEXT_CERTIFICATE:
+		return "IKEEXT_CERTIFICATE"
+	case IKEEXT_KERBEROS:
+		return "IKEEXT_KERBEROS"
+	case IKEEXT_ANONYMOUS:
+		return "IKEEXT_ANONYMOUS"
+	case IKEEXT_SSL:
+		return "IKEEXT_SSL"
+	case IKEEXT_NTLM_V2:
+		return "IKEEXT_NTLM_V2"
+	case IKEEXT_IPV6_CGA:
+		return "IKEEXT_IPV6_CGA"
+	case IKEEXT_CERTIFICATE_ECDSA_P256:
+		return "IKEEXT_CERTIFICATE_ECDSA_P256"
+	case IKEEXT_CERTIFICATE_ECDSA_P384:
+		return "IKEEXT_CERTIFICATE_ECDSA_P384"
+	case IKEEXT_SSL_ECDSA_P256:
+		return "IKEEXT_SSL_ECDSA_P256"
+	case IKEEXT_SSL_ECDSA_P384:
+		return "IKEEXT_SSL_ECDSA_P384"
+	case IKEEXT_EAP:
+		return "IKEEXT_EAP"
+	case IKEEXT_RESERVED:
+		return "IKEEXT_RESERVED"
+	case IKEEXT_AUTHENTICATION_METHOD_TYPE_MAX:
+		return "IKEEXT_AUTHENTICATION_METHOD_TYPE_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_AUTHENTICATION_METHOD_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IKEEXT_CERT_AUTH uint32
 
 const (
@@ -338,6 +931,31 @@ const (
 	IKEEXT_CERT_AUTH_ALLOW_HTTP_CERT_LOOKUP      IKEEXT_CERT_AUTH = 16
 	IKEEXT_CERT_AUTH_URL_CONTAINS_BUNDLE         IKEEXT_CERT_AUTH = 32
 )
+
+// String returns the IKEEXT_CERT_AUTH constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_CERT_AUTH) String() string {
+	var parts []string
+	if e&IKEEXT_CERT_AUTH_FLAG_SSL_ONE_WAY != 0 {
+		parts = append(parts, "IKEEXT_CERT_AUTH_FLAG_SSL_ONE_WAY")
+	}
+	if e&IKEEXT_CERT_AUTH_ENABLE_CRL_CHECK_STRONG != 0 {
+		parts = append(parts, "IKEEXT_CERT_AUTH_ENABLE_CRL_CHECK_STRONG")
+	}
+	if e&IKEEXT_CERT_AUTH_DISABLE_SSL_CERT_VALIDATION != 0 {
+		parts = append(parts, "IKEEXT_CERT_AUTH_DISABLE_SSL_CERT_VALIDATION")
+	}
+	if e&IKEEXT_CERT_AUTH_ALLOW_HTTP_CERT_LOOKUP != 0 {
+		parts = append(parts, "IKEEXT_CERT_AUTH_ALLOW_HTTP_CERT_LOOKUP")
+	}
+	if e&IKEEXT_CERT_AUTH_URL_CONTAINS_BUNDLE != 0 {
+		parts = append(parts, "IKEEXT_CERT_AUTH_URL_CONTAINS_BUNDLE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // IKEEXT_CERT_CONFIG_TYPE: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_cert_config_type
 type IKEEXT_CERT_CONFIG_TYPE int32
@@ -349,6 +967,25 @@ const (
 	IKEEXT_CERT_CONFIG_UNSPECIFIED         IKEEXT_CERT_CONFIG_TYPE = 3
 	IKEEXT_CERT_CONFIG_TYPE_MAX            IKEEXT_CERT_CONFIG_TYPE = 4
 )
+
+// String returns the IKEEXT_CERT_CONFIG_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_CERT_CONFIG_TYPE) String() string {
+	switch e {
+	case IKEEXT_CERT_CONFIG_EXPLICIT_TRUST_LIST:
+		return "IKEEXT_CERT_CONFIG_EXPLICIT_TRUST_LIST"
+	case IKEEXT_CERT_CONFIG_ENTERPRISE_STORE:
+		return "IKEEXT_CERT_CONFIG_ENTERPRISE_STORE"
+	case IKEEXT_CERT_CONFIG_TRUSTED_ROOT_STORE:
+		return "IKEEXT_CERT_CONFIG_TRUSTED_ROOT_STORE"
+	case IKEEXT_CERT_CONFIG_UNSPECIFIED:
+		return "IKEEXT_CERT_CONFIG_UNSPECIFIED"
+	case IKEEXT_CERT_CONFIG_TYPE_MAX:
+		return "IKEEXT_CERT_CONFIG_TYPE_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_CERT_CONFIG_TYPE(%d)", int32(e))
+	}
+}
 
 // IKEEXT_CERT_CRITERIA_NAME_TYPE: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_cert_criteria_name_type
 type IKEEXT_CERT_CRITERIA_NAME_TYPE int32
@@ -364,6 +1001,32 @@ const (
 	IKEEXT_CERT_CRITERIA_NAME_TYPE_MAX IKEEXT_CERT_CRITERIA_NAME_TYPE = 7
 )
 
+// String returns the IKEEXT_CERT_CRITERIA_NAME_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_CERT_CRITERIA_NAME_TYPE) String() string {
+	switch e {
+	case IKEEXT_CERT_CRITERIA_DNS:
+		return "IKEEXT_CERT_CRITERIA_DNS"
+	case IKEEXT_CERT_CRITERIA_UPN:
+		return "IKEEXT_CERT_CRITERIA_UPN"
+	case IKEEXT_CERT_CRITERIA_RFC822:
+		return "IKEEXT_CERT_CRITERIA_RFC822"
+	case IKEEXT_CERT_CRITERIA_CN:
+		return "IKEEXT_CERT_CRITERIA_CN"
+	case IKEEXT_CERT_CRITERIA_OU:
+		return "IKEEXT_CERT_CRITERIA_OU"
+	case IKEEXT_CERT_CRITERIA_O:
+		return "IKEEXT_CERT_CRITERIA_O"
+	case IKEEXT_CERT_CRITERIA_DC:
+		return "IKEEXT_CERT_CRITERIA_DC"
+	case IKEEXT_CERT_CRITERIA_NAME_TYPE_MAX:
+		return "IKEEXT_CERT_CRITERIA_NAME_TYPE_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_CERT_CRITERIA_NAME_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IKEEXT_CERT_FLAGS uint32
 
 const (
@@ -378,6 +1041,43 @@ const (
 	IKEEXT_CERT_FLAG_FOLLOW_RENEWAL_CERTIFICATE      IKEEXT_CERT_FLAGS = 256
 )
 
+// String returns the IKEEXT_CERT_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_CERT_FLAGS) String() string {
+	var parts []string
+	if e&IKEEXT_CERT_FLAG_ENABLE_ACCOUNT_MAPPING != 0 {
+		parts = append(parts, "IKEEXT_CERT_FLAG_ENABLE_ACCOUNT_MAPPING")
+	}
+	if e&IKEEXT_CERT_FLAG_DISABLE_REQUEST_PAYLOAD != 0 {
+		parts = append(parts, "IKEEXT_CERT_FLAG_DISABLE_REQUEST_PAYLOAD")
+	}
+	if e&IKEEXT_CERT_FLAG_USE_NAP_CERTIFICATE != 0 {
+		parts = append(parts, "IKEEXT_CERT_FLAG_USE_NAP_CERTIFICATE")
+	}
+	if e&IKEEXT_CERT_FLAG_INTERMEDIATE_CA != 0 {
+		parts = append(parts, "IKEEXT_CERT_FLAG_INTERMEDIATE_CA")
+	}
+	if e&IKEEXT_CERT_FLAG_IGNORE_INIT_CERT_MAP_FAILURE != 0 {
+		parts = append(parts, "IKEEXT_CERT_FLAG_IGNORE_INIT_CERT_MAP_FAILURE")
+	}
+	if e&IKEEXT_CERT_FLAG_PREFER_NAP_CERTIFICATE_OUTBOUND != 0 {
+		parts = append(parts, "IKEEXT_CERT_FLAG_PREFER_NAP_CERTIFICATE_OUTBOUND")
+	}
+	if e&IKEEXT_CERT_FLAG_SELECT_NAP_CERTIFICATE != 0 {
+		parts = append(parts, "IKEEXT_CERT_FLAG_SELECT_NAP_CERTIFICATE")
+	}
+	if e&IKEEXT_CERT_FLAG_VERIFY_NAP_CERTIFICATE != 0 {
+		parts = append(parts, "IKEEXT_CERT_FLAG_VERIFY_NAP_CERTIFICATE")
+	}
+	if e&IKEEXT_CERT_FLAG_FOLLOW_RENEWAL_CERTIFICATE != 0 {
+		parts = append(parts, "IKEEXT_CERT_FLAG_FOLLOW_RENEWAL_CERTIFICATE")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // IKEEXT_CIPHER_TYPE: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_cipher_type
 type IKEEXT_CIPHER_TYPE int32
 
@@ -391,6 +1091,31 @@ const (
 	IKEEXT_CIPHER_AES_GCM_256_16ICV IKEEXT_CIPHER_TYPE = 6
 	IKEEXT_CIPHER_TYPE_MAX          IKEEXT_CIPHER_TYPE = 7
 )
+
+// String returns the IKEEXT_CIPHER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_CIPHER_TYPE) String() string {
+	switch e {
+	case IKEEXT_CIPHER_DES:
+		return "IKEEXT_CIPHER_DES"
+	case IKEEXT_CIPHER_3DES:
+		return "IKEEXT_CIPHER_3DES"
+	case IKEEXT_CIPHER_AES_128:
+		return "IKEEXT_CIPHER_AES_128"
+	case IKEEXT_CIPHER_AES_192:
+		return "IKEEXT_CIPHER_AES_192"
+	case IKEEXT_CIPHER_AES_256:
+		return "IKEEXT_CIPHER_AES_256"
+	case IKEEXT_CIPHER_AES_GCM_128_16ICV:
+		return "IKEEXT_CIPHER_AES_GCM_128_16ICV"
+	case IKEEXT_CIPHER_AES_GCM_256_16ICV:
+		return "IKEEXT_CIPHER_AES_GCM_256_16ICV"
+	case IKEEXT_CIPHER_TYPE_MAX:
+		return "IKEEXT_CIPHER_TYPE_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_CIPHER_TYPE(%d)", int32(e))
+	}
+}
 
 // IKEEXT_DH_GROUP: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_dh_group
 type IKEEXT_DH_GROUP int32
@@ -407,12 +1132,54 @@ const (
 	IKEEXT_DH_GROUP_MAX  IKEEXT_DH_GROUP = 7
 )
 
+// String returns the IKEEXT_DH_GROUP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_DH_GROUP) String() string {
+	switch e {
+	case IKEEXT_DH_GROUP_NONE:
+		return "IKEEXT_DH_GROUP_NONE"
+	case IKEEXT_DH_GROUP_1:
+		return "IKEEXT_DH_GROUP_1"
+	case IKEEXT_DH_GROUP_2:
+		return "IKEEXT_DH_GROUP_2"
+	case IKEEXT_DH_GROUP_14:
+		return "IKEEXT_DH_GROUP_14"
+	case IKEEXT_DH_ECP_256:
+		return "IKEEXT_DH_ECP_256"
+	case IKEEXT_DH_ECP_384:
+		return "IKEEXT_DH_ECP_384"
+	case IKEEXT_DH_GROUP_24:
+		return "IKEEXT_DH_GROUP_24"
+	case IKEEXT_DH_GROUP_MAX:
+		return "IKEEXT_DH_GROUP_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_DH_GROUP(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IKEEXT_EAP_AUTHENTICATION_FLAGS uint32
 
 const (
 	IKEEXT_EAP_FLAG_LOCAL_AUTH_ONLY  IKEEXT_EAP_AUTHENTICATION_FLAGS = 1
 	IKEEXT_EAP_FLAG_REMOTE_AUTH_ONLY IKEEXT_EAP_AUTHENTICATION_FLAGS = 2
 )
+
+// String returns the IKEEXT_EAP_AUTHENTICATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_EAP_AUTHENTICATION_FLAGS) String() string {
+	var parts []string
+	if e&IKEEXT_EAP_FLAG_LOCAL_AUTH_ONLY != 0 {
+		parts = append(parts, "IKEEXT_EAP_FLAG_LOCAL_AUTH_ONLY")
+	}
+	if e&IKEEXT_EAP_FLAG_REMOTE_AUTH_ONLY != 0 {
+		parts = append(parts, "IKEEXT_EAP_FLAG_REMOTE_AUTH_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // IKEEXT_EM_SA_STATE: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_em_sa_state
 type IKEEXT_EM_SA_STATE int32
@@ -427,6 +1194,29 @@ const (
 	IKEEXT_EM_SA_STATE_MAX           IKEEXT_EM_SA_STATE = 6
 )
 
+// String returns the IKEEXT_EM_SA_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_EM_SA_STATE) String() string {
+	switch e {
+	case IKEEXT_EM_SA_STATE_NONE:
+		return "IKEEXT_EM_SA_STATE_NONE"
+	case IKEEXT_EM_SA_STATE_SENT_ATTS:
+		return "IKEEXT_EM_SA_STATE_SENT_ATTS"
+	case IKEEXT_EM_SA_STATE_SSPI_SENT:
+		return "IKEEXT_EM_SA_STATE_SSPI_SENT"
+	case IKEEXT_EM_SA_STATE_AUTH_COMPLETE:
+		return "IKEEXT_EM_SA_STATE_AUTH_COMPLETE"
+	case IKEEXT_EM_SA_STATE_FINAL:
+		return "IKEEXT_EM_SA_STATE_FINAL"
+	case IKEEXT_EM_SA_STATE_COMPLETE:
+		return "IKEEXT_EM_SA_STATE_COMPLETE"
+	case IKEEXT_EM_SA_STATE_MAX:
+		return "IKEEXT_EM_SA_STATE_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_EM_SA_STATE(%d)", int32(e))
+	}
+}
+
 // IKEEXT_INTEGRITY_TYPE: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_integrity_type
 type IKEEXT_INTEGRITY_TYPE int32
 
@@ -438,12 +1228,48 @@ const (
 	IKEEXT_INTEGRITY_TYPE_MAX IKEEXT_INTEGRITY_TYPE = 4
 )
 
+// String returns the IKEEXT_INTEGRITY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_INTEGRITY_TYPE) String() string {
+	switch e {
+	case IKEEXT_INTEGRITY_MD5:
+		return "IKEEXT_INTEGRITY_MD5"
+	case IKEEXT_INTEGRITY_SHA1:
+		return "IKEEXT_INTEGRITY_SHA1"
+	case IKEEXT_INTEGRITY_SHA_256:
+		return "IKEEXT_INTEGRITY_SHA_256"
+	case IKEEXT_INTEGRITY_SHA_384:
+		return "IKEEXT_INTEGRITY_SHA_384"
+	case IKEEXT_INTEGRITY_TYPE_MAX:
+		return "IKEEXT_INTEGRITY_TYPE_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_INTEGRITY_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IKEEXT_KERBEROS_AUTHENTICATION_FLAGS uint32
 
 const (
 	IKEEXT_KERB_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION IKEEXT_KERBEROS_AUTHENTICATION_FLAGS = 1
 	IKEEXT_KERB_AUTH_DONT_ACCEPT_EXPLICIT_CREDENTIALS   IKEEXT_KERBEROS_AUTHENTICATION_FLAGS = 2
 )
+
+// String returns the IKEEXT_KERBEROS_AUTHENTICATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_KERBEROS_AUTHENTICATION_FLAGS) String() string {
+	var parts []string
+	if e&IKEEXT_KERB_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION != 0 {
+		parts = append(parts, "IKEEXT_KERB_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION")
+	}
+	if e&IKEEXT_KERB_AUTH_DONT_ACCEPT_EXPLICIT_CREDENTIALS != 0 {
+		parts = append(parts, "IKEEXT_KERB_AUTH_DONT_ACCEPT_EXPLICIT_CREDENTIALS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // IKEEXT_KEY_MODULE_TYPE: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_key_module_type
 type IKEEXT_KEY_MODULE_TYPE int32
@@ -454,6 +1280,23 @@ const (
 	IKEEXT_KEY_MODULE_IKEV2  IKEEXT_KEY_MODULE_TYPE = 2
 	IKEEXT_KEY_MODULE_MAX    IKEEXT_KEY_MODULE_TYPE = 3
 )
+
+// String returns the IKEEXT_KEY_MODULE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_KEY_MODULE_TYPE) String() string {
+	switch e {
+	case IKEEXT_KEY_MODULE_IKE:
+		return "IKEEXT_KEY_MODULE_IKE"
+	case IKEEXT_KEY_MODULE_AUTHIP:
+		return "IKEEXT_KEY_MODULE_AUTHIP"
+	case IKEEXT_KEY_MODULE_IKEV2:
+		return "IKEEXT_KEY_MODULE_IKEV2"
+	case IKEEXT_KEY_MODULE_MAX:
+		return "IKEEXT_KEY_MODULE_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_KEY_MODULE_TYPE(%d)", int32(e))
+	}
+}
 
 // IKEEXT_MM_SA_STATE: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_mm_sa_state
 type IKEEXT_MM_SA_STATE int32
@@ -468,6 +1311,30 @@ const (
 	IKEEXT_MM_SA_STATE_MAX        IKEEXT_MM_SA_STATE = 6
 )
 
+// String returns the IKEEXT_MM_SA_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_MM_SA_STATE) String() string {
+	switch e {
+	case IKEEXT_MM_SA_STATE_NONE:
+		return "IKEEXT_MM_SA_STATE_NONE"
+	case IKEEXT_MM_SA_STATE_SA_SENT:
+		return "IKEEXT_MM_SA_STATE_SA_SENT"
+	case IKEEXT_MM_SA_STATE_SSPI_SENT:
+		return "IKEEXT_MM_SA_STATE_SSPI_SENT"
+	case IKEEXT_MM_SA_STATE_FINAL:
+		return "IKEEXT_MM_SA_STATE_FINAL"
+	case IKEEXT_MM_SA_STATE_FINAL_SENT:
+		return "IKEEXT_MM_SA_STATE_FINAL_SENT"
+	case IKEEXT_MM_SA_STATE_COMPLETE:
+		return "IKEEXT_MM_SA_STATE_COMPLETE"
+	case IKEEXT_MM_SA_STATE_MAX:
+		return "IKEEXT_MM_SA_STATE_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_MM_SA_STATE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IKEEXT_POLICY_FLAG uint32
 
 const (
@@ -477,12 +1344,51 @@ const (
 	IKEEXT_POLICY_FLAG_ENABLE_OPTIONAL_DH           IKEEXT_POLICY_FLAG = 8
 )
 
+// String returns the IKEEXT_POLICY_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_POLICY_FLAG) String() string {
+	var parts []string
+	if e&IKEEXT_POLICY_FLAG_DISABLE_DIAGNOSTICS != 0 {
+		parts = append(parts, "IKEEXT_POLICY_FLAG_DISABLE_DIAGNOSTICS")
+	}
+	if e&IKEEXT_POLICY_FLAG_NO_MACHINE_LUID_VERIFY != 0 {
+		parts = append(parts, "IKEEXT_POLICY_FLAG_NO_MACHINE_LUID_VERIFY")
+	}
+	if e&IKEEXT_POLICY_FLAG_NO_IMPERSONATION_LUID_VERIFY != 0 {
+		parts = append(parts, "IKEEXT_POLICY_FLAG_NO_IMPERSONATION_LUID_VERIFY")
+	}
+	if e&IKEEXT_POLICY_FLAG_ENABLE_OPTIONAL_DH != 0 {
+		parts = append(parts, "IKEEXT_POLICY_FLAG_ENABLE_OPTIONAL_DH")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS uint32
 
 const (
 	IKEEXT_PSK_FLAG_LOCAL_AUTH_ONLY  IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS = 1
 	IKEEXT_PSK_FLAG_REMOTE_AUTH_ONLY IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS = 2
 )
+
+// String returns the IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS) String() string {
+	var parts []string
+	if e&IKEEXT_PSK_FLAG_LOCAL_AUTH_ONLY != 0 {
+		parts = append(parts, "IKEEXT_PSK_FLAG_LOCAL_AUTH_ONLY")
+	}
+	if e&IKEEXT_PSK_FLAG_REMOTE_AUTH_ONLY != 0 {
+		parts = append(parts, "IKEEXT_PSK_FLAG_REMOTE_AUTH_ONLY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // IKEEXT_QM_SA_STATE: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_qm_sa_state
 type IKEEXT_QM_SA_STATE int32
@@ -495,11 +1401,44 @@ const (
 	IKEEXT_QM_SA_STATE_MAX      IKEEXT_QM_SA_STATE = 4
 )
 
+// String returns the IKEEXT_QM_SA_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_QM_SA_STATE) String() string {
+	switch e {
+	case IKEEXT_QM_SA_STATE_NONE:
+		return "IKEEXT_QM_SA_STATE_NONE"
+	case IKEEXT_QM_SA_STATE_INITIAL:
+		return "IKEEXT_QM_SA_STATE_INITIAL"
+	case IKEEXT_QM_SA_STATE_FINAL:
+		return "IKEEXT_QM_SA_STATE_FINAL"
+	case IKEEXT_QM_SA_STATE_COMPLETE:
+		return "IKEEXT_QM_SA_STATE_COMPLETE"
+	case IKEEXT_QM_SA_STATE_MAX:
+		return "IKEEXT_QM_SA_STATE_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_QM_SA_STATE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IKEEXT_RESERVED_AUTHENTICATION_FLAGS uint32
 
 const (
 	IKEEXT_RESERVED_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION IKEEXT_RESERVED_AUTHENTICATION_FLAGS = 1
 )
+
+// String returns the IKEEXT_RESERVED_AUTHENTICATION_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_RESERVED_AUTHENTICATION_FLAGS) String() string {
+	var parts []string
+	if e&IKEEXT_RESERVED_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION != 0 {
+		parts = append(parts, "IKEEXT_RESERVED_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // IKEEXT_SA_ROLE: https://learn.microsoft.com/windows/win32/api/iketypes/ne-iketypes-ikeext_sa_role
 type IKEEXT_SA_ROLE int32
@@ -509,6 +1448,21 @@ const (
 	IKEEXT_SA_ROLE_RESPONDER IKEEXT_SA_ROLE = 1
 	IKEEXT_SA_ROLE_MAX       IKEEXT_SA_ROLE = 2
 )
+
+// String returns the IKEEXT_SA_ROLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IKEEXT_SA_ROLE) String() string {
+	switch e {
+	case IKEEXT_SA_ROLE_INITIATOR:
+		return "IKEEXT_SA_ROLE_INITIATOR"
+	case IKEEXT_SA_ROLE_RESPONDER:
+		return "IKEEXT_SA_ROLE_RESPONDER"
+	case IKEEXT_SA_ROLE_MAX:
+		return "IKEEXT_SA_ROLE_MAX"
+	default:
+		return fmt.Sprintf("IKEEXT_SA_ROLE(%d)", int32(e))
+	}
+}
 
 // IPSEC_AUTH_TYPE: https://learn.microsoft.com/windows/win32/api/ipsectypes/ne-ipsectypes-ipsec_auth_type
 type IPSEC_AUTH_TYPE int32
@@ -523,6 +1477,29 @@ const (
 	IPSEC_AUTH_MAX     IPSEC_AUTH_TYPE = 6
 )
 
+// String returns the IPSEC_AUTH_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_AUTH_TYPE) String() string {
+	switch e {
+	case IPSEC_AUTH_MD5:
+		return "IPSEC_AUTH_MD5"
+	case IPSEC_AUTH_SHA_1:
+		return "IPSEC_AUTH_SHA_1"
+	case IPSEC_AUTH_SHA_256:
+		return "IPSEC_AUTH_SHA_256"
+	case IPSEC_AUTH_AES_128:
+		return "IPSEC_AUTH_AES_128"
+	case IPSEC_AUTH_AES_192:
+		return "IPSEC_AUTH_AES_192"
+	case IPSEC_AUTH_AES_256:
+		return "IPSEC_AUTH_AES_256"
+	case IPSEC_AUTH_MAX:
+		return "IPSEC_AUTH_MAX"
+	default:
+		return fmt.Sprintf("IPSEC_AUTH_TYPE(%d)", int32(e))
+	}
+}
+
 // IPSEC_CIPHER_TYPE: https://learn.microsoft.com/windows/win32/api/ipsectypes/ne-ipsectypes-ipsec_cipher_type
 type IPSEC_CIPHER_TYPE int32
 
@@ -535,6 +1512,28 @@ const (
 	IPSEC_CIPHER_TYPE_MAX     IPSEC_CIPHER_TYPE = 6
 )
 
+// String returns the IPSEC_CIPHER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_CIPHER_TYPE) String() string {
+	switch e {
+	case IPSEC_CIPHER_TYPE_DES:
+		return "IPSEC_CIPHER_TYPE_DES"
+	case IPSEC_CIPHER_TYPE_3DES:
+		return "IPSEC_CIPHER_TYPE_3DES"
+	case IPSEC_CIPHER_TYPE_AES_128:
+		return "IPSEC_CIPHER_TYPE_AES_128"
+	case IPSEC_CIPHER_TYPE_AES_192:
+		return "IPSEC_CIPHER_TYPE_AES_192"
+	case IPSEC_CIPHER_TYPE_AES_256:
+		return "IPSEC_CIPHER_TYPE_AES_256"
+	case IPSEC_CIPHER_TYPE_MAX:
+		return "IPSEC_CIPHER_TYPE_MAX"
+	default:
+		return fmt.Sprintf("IPSEC_CIPHER_TYPE(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IPSEC_DOSP_FLAGS uint32
 
 const (
@@ -546,6 +1545,34 @@ const (
 	IPSEC_DOSP_FLAG_FILTER_EXEMPT         IPSEC_DOSP_FLAGS = 32
 )
 
+// String returns the IPSEC_DOSP_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_DOSP_FLAGS) String() string {
+	var parts []string
+	if e&IPSEC_DOSP_FLAG_ENABLE_IKEV1 != 0 {
+		parts = append(parts, "IPSEC_DOSP_FLAG_ENABLE_IKEV1")
+	}
+	if e&IPSEC_DOSP_FLAG_ENABLE_IKEV2 != 0 {
+		parts = append(parts, "IPSEC_DOSP_FLAG_ENABLE_IKEV2")
+	}
+	if e&IPSEC_DOSP_FLAG_DISABLE_AUTHIP != 0 {
+		parts = append(parts, "IPSEC_DOSP_FLAG_DISABLE_AUTHIP")
+	}
+	if e&IPSEC_DOSP_FLAG_DISABLE_DEFAULT_BLOCK != 0 {
+		parts = append(parts, "IPSEC_DOSP_FLAG_DISABLE_DEFAULT_BLOCK")
+	}
+	if e&IPSEC_DOSP_FLAG_FILTER_BLOCK != 0 {
+		parts = append(parts, "IPSEC_DOSP_FLAG_FILTER_BLOCK")
+	}
+	if e&IPSEC_DOSP_FLAG_FILTER_EXEMPT != 0 {
+		parts = append(parts, "IPSEC_DOSP_FLAG_FILTER_EXEMPT")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // IPSEC_FAILURE_POINT: https://learn.microsoft.com/windows/win32/api/ipsectypes/ne-ipsectypes-ipsec_failure_point
 type IPSEC_FAILURE_POINT int32
 
@@ -555,6 +1582,23 @@ const (
 	IPSEC_FAILURE_PEER      IPSEC_FAILURE_POINT = 2
 	IPSEC_FAILURE_POINT_MAX IPSEC_FAILURE_POINT = 3
 )
+
+// String returns the IPSEC_FAILURE_POINT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_FAILURE_POINT) String() string {
+	switch e {
+	case IPSEC_FAILURE_NONE:
+		return "IPSEC_FAILURE_NONE"
+	case IPSEC_FAILURE_ME:
+		return "IPSEC_FAILURE_ME"
+	case IPSEC_FAILURE_PEER:
+		return "IPSEC_FAILURE_PEER"
+	case IPSEC_FAILURE_POINT_MAX:
+		return "IPSEC_FAILURE_POINT_MAX"
+	default:
+		return fmt.Sprintf("IPSEC_FAILURE_POINT(%d)", int32(e))
+	}
+}
 
 // IPSEC_PFS_GROUP: https://learn.microsoft.com/windows/win32/api/ipsectypes/ne-ipsectypes-ipsec_pfs_group
 type IPSEC_PFS_GROUP int32
@@ -572,6 +1616,34 @@ const (
 	IPSEC_PFS_MAX     IPSEC_PFS_GROUP = 8
 )
 
+// String returns the IPSEC_PFS_GROUP constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_PFS_GROUP) String() string {
+	switch e {
+	case IPSEC_PFS_NONE:
+		return "IPSEC_PFS_NONE"
+	case IPSEC_PFS_1:
+		return "IPSEC_PFS_1"
+	case IPSEC_PFS_2:
+		return "IPSEC_PFS_2"
+	case IPSEC_PFS_2048:
+		return "IPSEC_PFS_2048"
+	case IPSEC_PFS_ECP_256:
+		return "IPSEC_PFS_ECP_256"
+	case IPSEC_PFS_ECP_384:
+		return "IPSEC_PFS_ECP_384"
+	case IPSEC_PFS_MM:
+		return "IPSEC_PFS_MM"
+	case IPSEC_PFS_24:
+		return "IPSEC_PFS_24"
+	case IPSEC_PFS_MAX:
+		return "IPSEC_PFS_MAX"
+	default:
+		return fmt.Sprintf("IPSEC_PFS_GROUP(%d)", int32(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
 type IPSEC_POLICY_FLAG uint32
 
 const (
@@ -590,6 +1662,56 @@ const (
 	IPSEC_POLICY_FLAG_KEY_MANAGER_ALLOW_DICTATE_KEY           IPSEC_POLICY_FLAG = 8192
 )
 
+// String returns the IPSEC_POLICY_FLAG constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_POLICY_FLAG) String() string {
+	var parts []string
+	if e&IPSEC_POLICY_FLAG_ND_SECURE != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_ND_SECURE")
+	}
+	if e&IPSEC_POLICY_FLAG_ND_BOUNDARY != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_ND_BOUNDARY")
+	}
+	if e&IPSEC_POLICY_FLAG_NAT_ENCAP_ALLOW_PEER_BEHIND_NAT != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_NAT_ENCAP_ALLOW_PEER_BEHIND_NAT")
+	}
+	if e&IPSEC_POLICY_FLAG_NAT_ENCAP_ALLOW_GENERAL_NAT_TRAVERSAL != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_NAT_ENCAP_ALLOW_GENERAL_NAT_TRAVERSAL")
+	}
+	if e&IPSEC_POLICY_FLAG_DONT_NEGOTIATE_SECOND_LIFETIME != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_DONT_NEGOTIATE_SECOND_LIFETIME")
+	}
+	if e&IPSEC_POLICY_FLAG_DONT_NEGOTIATE_BYTE_LIFETIME != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_DONT_NEGOTIATE_BYTE_LIFETIME")
+	}
+	if e&IPSEC_POLICY_FLAG_CLEAR_DF_ON_TUNNEL != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_CLEAR_DF_ON_TUNNEL")
+	}
+	if e&IPSEC_POLICY_FLAG_ENABLE_V6_IN_V4_TUNNELING != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_ENABLE_V6_IN_V4_TUNNELING")
+	}
+	if e&IPSEC_POLICY_FLAG_ENABLE_SERVER_ADDR_ASSIGNMENT != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_ENABLE_SERVER_ADDR_ASSIGNMENT")
+	}
+	if e&IPSEC_POLICY_FLAG_TUNNEL_ALLOW_OUTBOUND_CLEAR_CONNECTION != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_TUNNEL_ALLOW_OUTBOUND_CLEAR_CONNECTION")
+	}
+	if e&IPSEC_POLICY_FLAG_TUNNEL_BYPASS_ALREADY_SECURE_CONNECTION != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_TUNNEL_BYPASS_ALREADY_SECURE_CONNECTION")
+	}
+	if e&IPSEC_POLICY_FLAG_TUNNEL_BYPASS_ICMPV6 != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_TUNNEL_BYPASS_ICMPV6")
+	}
+	if e&IPSEC_POLICY_FLAG_KEY_MANAGER_ALLOW_DICTATE_KEY != 0 {
+		parts = append(parts, "IPSEC_POLICY_FLAG_KEY_MANAGER_ALLOW_DICTATE_KEY")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type IPSEC_SA_BUNDLE_FLAGS uint32
 
 const (
@@ -605,6 +1727,46 @@ const (
 	IPSEC_SA_BUNDLE_FLAG_PEER_SUPPORTS_GUARANTEE_ENCRYPTION IPSEC_SA_BUNDLE_FLAGS = 16384
 )
 
+// String returns the IPSEC_SA_BUNDLE_FLAGS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_SA_BUNDLE_FLAGS) String() string {
+	var parts []string
+	if e&IPSEC_SA_BUNDLE_FLAG_ND_SECURE != 0 {
+		parts = append(parts, "IPSEC_SA_BUNDLE_FLAG_ND_SECURE")
+	}
+	if e&IPSEC_SA_BUNDLE_FLAG_ND_BOUNDARY != 0 {
+		parts = append(parts, "IPSEC_SA_BUNDLE_FLAG_ND_BOUNDARY")
+	}
+	if e&IPSEC_SA_BUNDLE_FLAG_ND_PEER_NAT_BOUNDARY != 0 {
+		parts = append(parts, "IPSEC_SA_BUNDLE_FLAG_ND_PEER_NAT_BOUNDARY")
+	}
+	if e&IPSEC_SA_BUNDLE_FLAG_GUARANTEE_ENCRYPTION != 0 {
+		parts = append(parts, "IPSEC_SA_BUNDLE_FLAG_GUARANTEE_ENCRYPTION")
+	}
+	if e&IPSEC_SA_BUNDLE_FLAG_ALLOW_NULL_TARGET_NAME_MATCH != 0 {
+		parts = append(parts, "IPSEC_SA_BUNDLE_FLAG_ALLOW_NULL_TARGET_NAME_MATCH")
+	}
+	if e&IPSEC_SA_BUNDLE_FLAG_CLEAR_DF_ON_TUNNEL != 0 {
+		parts = append(parts, "IPSEC_SA_BUNDLE_FLAG_CLEAR_DF_ON_TUNNEL")
+	}
+	if e&IPSEC_SA_BUNDLE_FLAG_ASSUME_UDP_CONTEXT_OUTBOUND != 0 {
+		parts = append(parts, "IPSEC_SA_BUNDLE_FLAG_ASSUME_UDP_CONTEXT_OUTBOUND")
+	}
+	if e&IPSEC_SA_BUNDLE_FLAG_ND_PEER_BOUNDARY != 0 {
+		parts = append(parts, "IPSEC_SA_BUNDLE_FLAG_ND_PEER_BOUNDARY")
+	}
+	if e&IPSEC_SA_BUNDLE_FLAG_SUPPRESS_DUPLICATE_DELETION != 0 {
+		parts = append(parts, "IPSEC_SA_BUNDLE_FLAG_SUPPRESS_DUPLICATE_DELETION")
+	}
+	if e&IPSEC_SA_BUNDLE_FLAG_PEER_SUPPORTS_GUARANTEE_ENCRYPTION != 0 {
+		parts = append(parts, "IPSEC_SA_BUNDLE_FLAG_PEER_SUPPORTS_GUARANTEE_ENCRYPTION")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // IPSEC_SA_CONTEXT_EVENT_TYPE0: https://learn.microsoft.com/windows/win32/api/ipsectypes/ne-ipsectypes-ipsec_sa_context_event_type0
 type IPSEC_SA_CONTEXT_EVENT_TYPE0 int32
 
@@ -613,6 +1775,21 @@ const (
 	IPSEC_SA_CONTEXT_EVENT_DELETE IPSEC_SA_CONTEXT_EVENT_TYPE0 = 2
 	IPSEC_SA_CONTEXT_EVENT_MAX    IPSEC_SA_CONTEXT_EVENT_TYPE0 = 3
 )
+
+// String returns the IPSEC_SA_CONTEXT_EVENT_TYPE0 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_SA_CONTEXT_EVENT_TYPE0) String() string {
+	switch e {
+	case IPSEC_SA_CONTEXT_EVENT_ADD:
+		return "IPSEC_SA_CONTEXT_EVENT_ADD"
+	case IPSEC_SA_CONTEXT_EVENT_DELETE:
+		return "IPSEC_SA_CONTEXT_EVENT_DELETE"
+	case IPSEC_SA_CONTEXT_EVENT_MAX:
+		return "IPSEC_SA_CONTEXT_EVENT_MAX"
+	default:
+		return fmt.Sprintf("IPSEC_SA_CONTEXT_EVENT_TYPE0(%d)", int32(e))
+	}
+}
 
 // IPSEC_TOKEN_MODE: https://learn.microsoft.com/windows/win32/api/ipsectypes/ne-ipsectypes-ipsec_token_mode
 type IPSEC_TOKEN_MODE int32
@@ -623,6 +1800,21 @@ const (
 	IPSEC_TOKEN_MODE_MAX      IPSEC_TOKEN_MODE = 2
 )
 
+// String returns the IPSEC_TOKEN_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_TOKEN_MODE) String() string {
+	switch e {
+	case IPSEC_TOKEN_MODE_MAIN:
+		return "IPSEC_TOKEN_MODE_MAIN"
+	case IPSEC_TOKEN_MODE_EXTENDED:
+		return "IPSEC_TOKEN_MODE_EXTENDED"
+	case IPSEC_TOKEN_MODE_MAX:
+		return "IPSEC_TOKEN_MODE_MAX"
+	default:
+		return fmt.Sprintf("IPSEC_TOKEN_MODE(%d)", int32(e))
+	}
+}
+
 // IPSEC_TOKEN_PRINCIPAL: https://learn.microsoft.com/windows/win32/api/ipsectypes/ne-ipsectypes-ipsec_token_principal
 type IPSEC_TOKEN_PRINCIPAL int32
 
@@ -631,6 +1823,21 @@ const (
 	IPSEC_TOKEN_PRINCIPAL_PEER  IPSEC_TOKEN_PRINCIPAL = 1
 	IPSEC_TOKEN_PRINCIPAL_MAX   IPSEC_TOKEN_PRINCIPAL = 2
 )
+
+// String returns the IPSEC_TOKEN_PRINCIPAL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_TOKEN_PRINCIPAL) String() string {
+	switch e {
+	case IPSEC_TOKEN_PRINCIPAL_LOCAL:
+		return "IPSEC_TOKEN_PRINCIPAL_LOCAL"
+	case IPSEC_TOKEN_PRINCIPAL_PEER:
+		return "IPSEC_TOKEN_PRINCIPAL_PEER"
+	case IPSEC_TOKEN_PRINCIPAL_MAX:
+		return "IPSEC_TOKEN_PRINCIPAL_MAX"
+	default:
+		return fmt.Sprintf("IPSEC_TOKEN_PRINCIPAL(%d)", int32(e))
+	}
+}
 
 // IPSEC_TOKEN_TYPE: https://learn.microsoft.com/windows/win32/api/ipsectypes/ne-ipsectypes-ipsec_token_type
 type IPSEC_TOKEN_TYPE int32
@@ -641,6 +1848,21 @@ const (
 	IPSEC_TOKEN_TYPE_MAX           IPSEC_TOKEN_TYPE = 2
 )
 
+// String returns the IPSEC_TOKEN_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_TOKEN_TYPE) String() string {
+	switch e {
+	case IPSEC_TOKEN_TYPE_MACHINE:
+		return "IPSEC_TOKEN_TYPE_MACHINE"
+	case IPSEC_TOKEN_TYPE_IMPERSONATION:
+		return "IPSEC_TOKEN_TYPE_IMPERSONATION"
+	case IPSEC_TOKEN_TYPE_MAX:
+		return "IPSEC_TOKEN_TYPE_MAX"
+	default:
+		return fmt.Sprintf("IPSEC_TOKEN_TYPE(%d)", int32(e))
+	}
+}
+
 // IPSEC_TRAFFIC_TYPE: https://learn.microsoft.com/windows/win32/api/ipsectypes/ne-ipsectypes-ipsec_traffic_type
 type IPSEC_TRAFFIC_TYPE int32
 
@@ -649,6 +1871,21 @@ const (
 	IPSEC_TRAFFIC_TYPE_TUNNEL    IPSEC_TRAFFIC_TYPE = 1
 	IPSEC_TRAFFIC_TYPE_MAX       IPSEC_TRAFFIC_TYPE = 2
 )
+
+// String returns the IPSEC_TRAFFIC_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_TRAFFIC_TYPE) String() string {
+	switch e {
+	case IPSEC_TRAFFIC_TYPE_TRANSPORT:
+		return "IPSEC_TRAFFIC_TYPE_TRANSPORT"
+	case IPSEC_TRAFFIC_TYPE_TUNNEL:
+		return "IPSEC_TRAFFIC_TYPE_TUNNEL"
+	case IPSEC_TRAFFIC_TYPE_MAX:
+		return "IPSEC_TRAFFIC_TYPE_MAX"
+	default:
+		return fmt.Sprintf("IPSEC_TRAFFIC_TYPE(%d)", int32(e))
+	}
+}
 
 // IPSEC_TRANSFORM_TYPE: https://learn.microsoft.com/windows/win32/api/ipsectypes/ne-ipsectypes-ipsec_transform_type
 type IPSEC_TRANSFORM_TYPE int32
@@ -661,3 +1898,24 @@ const (
 	IPSEC_TRANSFORM_ESP_AUTH_FW         IPSEC_TRANSFORM_TYPE = 5
 	IPSEC_TRANSFORM_TYPE_MAX            IPSEC_TRANSFORM_TYPE = 6
 )
+
+// String returns the IPSEC_TRANSFORM_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e IPSEC_TRANSFORM_TYPE) String() string {
+	switch e {
+	case IPSEC_TRANSFORM_AH:
+		return "IPSEC_TRANSFORM_AH"
+	case IPSEC_TRANSFORM_ESP_AUTH:
+		return "IPSEC_TRANSFORM_ESP_AUTH"
+	case IPSEC_TRANSFORM_ESP_CIPHER:
+		return "IPSEC_TRANSFORM_ESP_CIPHER"
+	case IPSEC_TRANSFORM_ESP_AUTH_AND_CIPHER:
+		return "IPSEC_TRANSFORM_ESP_AUTH_AND_CIPHER"
+	case IPSEC_TRANSFORM_ESP_AUTH_FW:
+		return "IPSEC_TRANSFORM_ESP_AUTH_FW"
+	case IPSEC_TRANSFORM_TYPE_MAX:
+		return "IPSEC_TRANSFORM_TYPE_MAX"
+	default:
+		return fmt.Sprintf("IPSEC_TRANSFORM_TYPE(%d)", int32(e))
+	}
+}

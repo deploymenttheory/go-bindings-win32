@@ -4,6 +4,10 @@
 
 package windowswebservices
 
+import (
+	"fmt"
+)
+
 // WS_ADDRESSING_VERSION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_addressing_version
 type WS_ADDRESSING_VERSION int32
 
@@ -12,6 +16,21 @@ const (
 	WS_ADDRESSING_VERSION_1_0       WS_ADDRESSING_VERSION = 2
 	WS_ADDRESSING_VERSION_TRANSPORT WS_ADDRESSING_VERSION = 3
 )
+
+// String returns the WS_ADDRESSING_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_ADDRESSING_VERSION) String() string {
+	switch e {
+	case WS_ADDRESSING_VERSION_0_9:
+		return "WS_ADDRESSING_VERSION_0_9"
+	case WS_ADDRESSING_VERSION_1_0:
+		return "WS_ADDRESSING_VERSION_1_0"
+	case WS_ADDRESSING_VERSION_TRANSPORT:
+		return "WS_ADDRESSING_VERSION_TRANSPORT"
+	default:
+		return fmt.Sprintf("WS_ADDRESSING_VERSION(%d)", int32(e))
+	}
+}
 
 // WS_BINDING_TEMPLATE_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_binding_template_type
 type WS_BINDING_TEMPLATE_TYPE int32
@@ -33,6 +52,43 @@ const (
 	WS_TCP_SSPI_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE_TYPE WS_BINDING_TEMPLATE_TYPE = 13
 )
 
+// String returns the WS_BINDING_TEMPLATE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_BINDING_TEMPLATE_TYPE) String() string {
+	switch e {
+	case WS_HTTP_BINDING_TEMPLATE_TYPE:
+		return "WS_HTTP_BINDING_TEMPLATE_TYPE"
+	case WS_HTTP_SSL_BINDING_TEMPLATE_TYPE:
+		return "WS_HTTP_SSL_BINDING_TEMPLATE_TYPE"
+	case WS_HTTP_HEADER_AUTH_BINDING_TEMPLATE_TYPE:
+		return "WS_HTTP_HEADER_AUTH_BINDING_TEMPLATE_TYPE"
+	case WS_HTTP_SSL_HEADER_AUTH_BINDING_TEMPLATE_TYPE:
+		return "WS_HTTP_SSL_HEADER_AUTH_BINDING_TEMPLATE_TYPE"
+	case WS_HTTP_SSL_USERNAME_BINDING_TEMPLATE_TYPE:
+		return "WS_HTTP_SSL_USERNAME_BINDING_TEMPLATE_TYPE"
+	case WS_HTTP_SSL_KERBEROS_APREQ_BINDING_TEMPLATE_TYPE:
+		return "WS_HTTP_SSL_KERBEROS_APREQ_BINDING_TEMPLATE_TYPE"
+	case WS_TCP_BINDING_TEMPLATE_TYPE:
+		return "WS_TCP_BINDING_TEMPLATE_TYPE"
+	case WS_TCP_SSPI_BINDING_TEMPLATE_TYPE:
+		return "WS_TCP_SSPI_BINDING_TEMPLATE_TYPE"
+	case WS_TCP_SSPI_USERNAME_BINDING_TEMPLATE_TYPE:
+		return "WS_TCP_SSPI_USERNAME_BINDING_TEMPLATE_TYPE"
+	case WS_TCP_SSPI_KERBEROS_APREQ_BINDING_TEMPLATE_TYPE:
+		return "WS_TCP_SSPI_KERBEROS_APREQ_BINDING_TEMPLATE_TYPE"
+	case WS_HTTP_SSL_USERNAME_SECURITY_CONTEXT_BINDING_TEMPLATE_TYPE:
+		return "WS_HTTP_SSL_USERNAME_SECURITY_CONTEXT_BINDING_TEMPLATE_TYPE"
+	case WS_HTTP_SSL_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE_TYPE:
+		return "WS_HTTP_SSL_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE_TYPE"
+	case WS_TCP_SSPI_USERNAME_SECURITY_CONTEXT_BINDING_TEMPLATE_TYPE:
+		return "WS_TCP_SSPI_USERNAME_SECURITY_CONTEXT_BINDING_TEMPLATE_TYPE"
+	case WS_TCP_SSPI_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE_TYPE:
+		return "WS_TCP_SSPI_KERBEROS_APREQ_SECURITY_CONTEXT_BINDING_TEMPLATE_TYPE"
+	default:
+		return fmt.Sprintf("WS_BINDING_TEMPLATE_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_CALLBACK_MODEL: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_callback_model
 type WS_CALLBACK_MODEL int32
 
@@ -40,6 +96,19 @@ const (
 	WS_SHORT_CALLBACK WS_CALLBACK_MODEL = 0
 	WS_LONG_CALLBACK  WS_CALLBACK_MODEL = 1
 )
+
+// String returns the WS_CALLBACK_MODEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_CALLBACK_MODEL) String() string {
+	switch e {
+	case WS_SHORT_CALLBACK:
+		return "WS_SHORT_CALLBACK"
+	case WS_LONG_CALLBACK:
+		return "WS_LONG_CALLBACK"
+	default:
+		return fmt.Sprintf("WS_CALLBACK_MODEL(%d)", int32(e))
+	}
+}
 
 // WS_CALL_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_call_property_id
 type WS_CALL_PROPERTY_ID int32
@@ -51,6 +120,23 @@ const (
 	WS_CALL_PROPERTY_CALL_ID                 WS_CALL_PROPERTY_ID = 3
 )
 
+// String returns the WS_CALL_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_CALL_PROPERTY_ID) String() string {
+	switch e {
+	case WS_CALL_PROPERTY_CHECK_MUST_UNDERSTAND:
+		return "WS_CALL_PROPERTY_CHECK_MUST_UNDERSTAND"
+	case WS_CALL_PROPERTY_SEND_MESSAGE_CONTEXT:
+		return "WS_CALL_PROPERTY_SEND_MESSAGE_CONTEXT"
+	case WS_CALL_PROPERTY_RECEIVE_MESSAGE_CONTEXT:
+		return "WS_CALL_PROPERTY_RECEIVE_MESSAGE_CONTEXT"
+	case WS_CALL_PROPERTY_CALL_ID:
+		return "WS_CALL_PROPERTY_CALL_ID"
+	default:
+		return fmt.Sprintf("WS_CALL_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_CERT_CREDENTIAL_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_cert_credential_type
 type WS_CERT_CREDENTIAL_TYPE int32
 
@@ -59,6 +145,21 @@ const (
 	WS_THUMBPRINT_CERT_CREDENTIAL_TYPE   WS_CERT_CREDENTIAL_TYPE = 2
 	WS_CUSTOM_CERT_CREDENTIAL_TYPE       WS_CERT_CREDENTIAL_TYPE = 3
 )
+
+// String returns the WS_CERT_CREDENTIAL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_CERT_CREDENTIAL_TYPE) String() string {
+	switch e {
+	case WS_SUBJECT_NAME_CERT_CREDENTIAL_TYPE:
+		return "WS_SUBJECT_NAME_CERT_CREDENTIAL_TYPE"
+	case WS_THUMBPRINT_CERT_CREDENTIAL_TYPE:
+		return "WS_THUMBPRINT_CERT_CREDENTIAL_TYPE"
+	case WS_CUSTOM_CERT_CREDENTIAL_TYPE:
+		return "WS_CUSTOM_CERT_CREDENTIAL_TYPE"
+	default:
+		return fmt.Sprintf("WS_CERT_CREDENTIAL_TYPE(%d)", int32(e))
+	}
+}
 
 // WS_CHANNEL_BINDING: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_channel_binding
 type WS_CHANNEL_BINDING int32
@@ -70,6 +171,25 @@ const (
 	WS_CUSTOM_CHANNEL_BINDING    WS_CHANNEL_BINDING = 3
 	WS_NAMEDPIPE_CHANNEL_BINDING WS_CHANNEL_BINDING = 4
 )
+
+// String returns the WS_CHANNEL_BINDING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_CHANNEL_BINDING) String() string {
+	switch e {
+	case WS_HTTP_CHANNEL_BINDING:
+		return "WS_HTTP_CHANNEL_BINDING"
+	case WS_TCP_CHANNEL_BINDING:
+		return "WS_TCP_CHANNEL_BINDING"
+	case WS_UDP_CHANNEL_BINDING:
+		return "WS_UDP_CHANNEL_BINDING"
+	case WS_CUSTOM_CHANNEL_BINDING:
+		return "WS_CUSTOM_CHANNEL_BINDING"
+	case WS_NAMEDPIPE_CHANNEL_BINDING:
+		return "WS_NAMEDPIPE_CHANNEL_BINDING"
+	default:
+		return fmt.Sprintf("WS_CHANNEL_BINDING(%d)", int32(e))
+	}
+}
 
 // WS_CHANNEL_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_channel_property_id
 type WS_CHANNEL_PROPERTY_ID int32
@@ -127,6 +247,115 @@ const (
 	WS_CHANNEL_PROPERTY_MAX_HTTP_REQUEST_HEADERS_BUFFER_SIZE WS_CHANNEL_PROPERTY_ID = 49
 )
 
+// String returns the WS_CHANNEL_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_CHANNEL_PROPERTY_ID) String() string {
+	switch e {
+	case WS_CHANNEL_PROPERTY_MAX_BUFFERED_MESSAGE_SIZE:
+		return "WS_CHANNEL_PROPERTY_MAX_BUFFERED_MESSAGE_SIZE"
+	case WS_CHANNEL_PROPERTY_MAX_STREAMED_MESSAGE_SIZE:
+		return "WS_CHANNEL_PROPERTY_MAX_STREAMED_MESSAGE_SIZE"
+	case WS_CHANNEL_PROPERTY_MAX_STREAMED_START_SIZE:
+		return "WS_CHANNEL_PROPERTY_MAX_STREAMED_START_SIZE"
+	case WS_CHANNEL_PROPERTY_MAX_STREAMED_FLUSH_SIZE:
+		return "WS_CHANNEL_PROPERTY_MAX_STREAMED_FLUSH_SIZE"
+	case WS_CHANNEL_PROPERTY_ENCODING:
+		return "WS_CHANNEL_PROPERTY_ENCODING"
+	case WS_CHANNEL_PROPERTY_ENVELOPE_VERSION:
+		return "WS_CHANNEL_PROPERTY_ENVELOPE_VERSION"
+	case WS_CHANNEL_PROPERTY_ADDRESSING_VERSION:
+		return "WS_CHANNEL_PROPERTY_ADDRESSING_VERSION"
+	case WS_CHANNEL_PROPERTY_MAX_SESSION_DICTIONARY_SIZE:
+		return "WS_CHANNEL_PROPERTY_MAX_SESSION_DICTIONARY_SIZE"
+	case WS_CHANNEL_PROPERTY_STATE:
+		return "WS_CHANNEL_PROPERTY_STATE"
+	case WS_CHANNEL_PROPERTY_ASYNC_CALLBACK_MODEL:
+		return "WS_CHANNEL_PROPERTY_ASYNC_CALLBACK_MODEL"
+	case WS_CHANNEL_PROPERTY_IP_VERSION:
+		return "WS_CHANNEL_PROPERTY_IP_VERSION"
+	case WS_CHANNEL_PROPERTY_RESOLVE_TIMEOUT:
+		return "WS_CHANNEL_PROPERTY_RESOLVE_TIMEOUT"
+	case WS_CHANNEL_PROPERTY_CONNECT_TIMEOUT:
+		return "WS_CHANNEL_PROPERTY_CONNECT_TIMEOUT"
+	case WS_CHANNEL_PROPERTY_SEND_TIMEOUT:
+		return "WS_CHANNEL_PROPERTY_SEND_TIMEOUT"
+	case WS_CHANNEL_PROPERTY_RECEIVE_RESPONSE_TIMEOUT:
+		return "WS_CHANNEL_PROPERTY_RECEIVE_RESPONSE_TIMEOUT"
+	case WS_CHANNEL_PROPERTY_RECEIVE_TIMEOUT:
+		return "WS_CHANNEL_PROPERTY_RECEIVE_TIMEOUT"
+	case WS_CHANNEL_PROPERTY_CLOSE_TIMEOUT:
+		return "WS_CHANNEL_PROPERTY_CLOSE_TIMEOUT"
+	case WS_CHANNEL_PROPERTY_ENABLE_TIMEOUTS:
+		return "WS_CHANNEL_PROPERTY_ENABLE_TIMEOUTS"
+	case WS_CHANNEL_PROPERTY_TRANSFER_MODE:
+		return "WS_CHANNEL_PROPERTY_TRANSFER_MODE"
+	case WS_CHANNEL_PROPERTY_MULTICAST_INTERFACE:
+		return "WS_CHANNEL_PROPERTY_MULTICAST_INTERFACE"
+	case WS_CHANNEL_PROPERTY_MULTICAST_HOPS:
+		return "WS_CHANNEL_PROPERTY_MULTICAST_HOPS"
+	case WS_CHANNEL_PROPERTY_REMOTE_ADDRESS:
+		return "WS_CHANNEL_PROPERTY_REMOTE_ADDRESS"
+	case WS_CHANNEL_PROPERTY_REMOTE_IP_ADDRESS:
+		return "WS_CHANNEL_PROPERTY_REMOTE_IP_ADDRESS"
+	case WS_CHANNEL_PROPERTY_HTTP_CONNECTION_ID:
+		return "WS_CHANNEL_PROPERTY_HTTP_CONNECTION_ID"
+	case WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_CALLBACKS:
+		return "WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_CALLBACKS"
+	case WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_PARAMETERS:
+		return "WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_PARAMETERS"
+	case WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_INSTANCE:
+		return "WS_CHANNEL_PROPERTY_CUSTOM_CHANNEL_INSTANCE"
+	case WS_CHANNEL_PROPERTY_TRANSPORT_URL:
+		return "WS_CHANNEL_PROPERTY_TRANSPORT_URL"
+	case WS_CHANNEL_PROPERTY_NO_DELAY:
+		return "WS_CHANNEL_PROPERTY_NO_DELAY"
+	case WS_CHANNEL_PROPERTY_SEND_KEEP_ALIVES:
+		return "WS_CHANNEL_PROPERTY_SEND_KEEP_ALIVES"
+	case WS_CHANNEL_PROPERTY_KEEP_ALIVE_TIME:
+		return "WS_CHANNEL_PROPERTY_KEEP_ALIVE_TIME"
+	case WS_CHANNEL_PROPERTY_KEEP_ALIVE_INTERVAL:
+		return "WS_CHANNEL_PROPERTY_KEEP_ALIVE_INTERVAL"
+	case WS_CHANNEL_PROPERTY_MAX_HTTP_SERVER_CONNECTIONS:
+		return "WS_CHANNEL_PROPERTY_MAX_HTTP_SERVER_CONNECTIONS"
+	case WS_CHANNEL_PROPERTY_IS_SESSION_SHUT_DOWN:
+		return "WS_CHANNEL_PROPERTY_IS_SESSION_SHUT_DOWN"
+	case WS_CHANNEL_PROPERTY_CHANNEL_TYPE:
+		return "WS_CHANNEL_PROPERTY_CHANNEL_TYPE"
+	case WS_CHANNEL_PROPERTY_TRIM_BUFFERED_MESSAGE_SIZE:
+		return "WS_CHANNEL_PROPERTY_TRIM_BUFFERED_MESSAGE_SIZE"
+	case WS_CHANNEL_PROPERTY_ENCODER:
+		return "WS_CHANNEL_PROPERTY_ENCODER"
+	case WS_CHANNEL_PROPERTY_DECODER:
+		return "WS_CHANNEL_PROPERTY_DECODER"
+	case WS_CHANNEL_PROPERTY_PROTECTION_LEVEL:
+		return "WS_CHANNEL_PROPERTY_PROTECTION_LEVEL"
+	case WS_CHANNEL_PROPERTY_COOKIE_MODE:
+		return "WS_CHANNEL_PROPERTY_COOKIE_MODE"
+	case WS_CHANNEL_PROPERTY_HTTP_PROXY_SETTING_MODE:
+		return "WS_CHANNEL_PROPERTY_HTTP_PROXY_SETTING_MODE"
+	case WS_CHANNEL_PROPERTY_CUSTOM_HTTP_PROXY:
+		return "WS_CHANNEL_PROPERTY_CUSTOM_HTTP_PROXY"
+	case WS_CHANNEL_PROPERTY_HTTP_MESSAGE_MAPPING:
+		return "WS_CHANNEL_PROPERTY_HTTP_MESSAGE_MAPPING"
+	case WS_CHANNEL_PROPERTY_ENABLE_HTTP_REDIRECT:
+		return "WS_CHANNEL_PROPERTY_ENABLE_HTTP_REDIRECT"
+	case WS_CHANNEL_PROPERTY_HTTP_REDIRECT_CALLBACK_CONTEXT:
+		return "WS_CHANNEL_PROPERTY_HTTP_REDIRECT_CALLBACK_CONTEXT"
+	case WS_CHANNEL_PROPERTY_FAULTS_AS_ERRORS:
+		return "WS_CHANNEL_PROPERTY_FAULTS_AS_ERRORS"
+	case WS_CHANNEL_PROPERTY_ALLOW_UNSECURED_FAULTS:
+		return "WS_CHANNEL_PROPERTY_ALLOW_UNSECURED_FAULTS"
+	case WS_CHANNEL_PROPERTY_HTTP_SERVER_SPN:
+		return "WS_CHANNEL_PROPERTY_HTTP_SERVER_SPN"
+	case WS_CHANNEL_PROPERTY_HTTP_PROXY_SPN:
+		return "WS_CHANNEL_PROPERTY_HTTP_PROXY_SPN"
+	case WS_CHANNEL_PROPERTY_MAX_HTTP_REQUEST_HEADERS_BUFFER_SIZE:
+		return "WS_CHANNEL_PROPERTY_MAX_HTTP_REQUEST_HEADERS_BUFFER_SIZE"
+	default:
+		return fmt.Sprintf("WS_CHANNEL_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_CHANNEL_STATE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_channel_state
 type WS_CHANNEL_STATE int32
 
@@ -139,6 +368,29 @@ const (
 	WS_CHANNEL_STATE_CLOSING   WS_CHANNEL_STATE = 5
 	WS_CHANNEL_STATE_CLOSED    WS_CHANNEL_STATE = 6
 )
+
+// String returns the WS_CHANNEL_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_CHANNEL_STATE) String() string {
+	switch e {
+	case WS_CHANNEL_STATE_CREATED:
+		return "WS_CHANNEL_STATE_CREATED"
+	case WS_CHANNEL_STATE_OPENING:
+		return "WS_CHANNEL_STATE_OPENING"
+	case WS_CHANNEL_STATE_ACCEPTING:
+		return "WS_CHANNEL_STATE_ACCEPTING"
+	case WS_CHANNEL_STATE_OPEN:
+		return "WS_CHANNEL_STATE_OPEN"
+	case WS_CHANNEL_STATE_FAULTED:
+		return "WS_CHANNEL_STATE_FAULTED"
+	case WS_CHANNEL_STATE_CLOSING:
+		return "WS_CHANNEL_STATE_CLOSING"
+	case WS_CHANNEL_STATE_CLOSED:
+		return "WS_CHANNEL_STATE_CLOSED"
+	default:
+		return fmt.Sprintf("WS_CHANNEL_STATE(%d)", int32(e))
+	}
+}
 
 // WS_CHANNEL_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_channel_type
 type WS_CHANNEL_TYPE int32
@@ -155,6 +407,33 @@ const (
 	WS_CHANNEL_TYPE_REPLY          WS_CHANNEL_TYPE = 16
 )
 
+// String returns the WS_CHANNEL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_CHANNEL_TYPE) String() string {
+	switch e {
+	case WS_CHANNEL_TYPE_INPUT:
+		return "WS_CHANNEL_TYPE_INPUT"
+	case WS_CHANNEL_TYPE_OUTPUT:
+		return "WS_CHANNEL_TYPE_OUTPUT"
+	case WS_CHANNEL_TYPE_SESSION:
+		return "WS_CHANNEL_TYPE_SESSION"
+	case WS_CHANNEL_TYPE_INPUT_SESSION:
+		return "WS_CHANNEL_TYPE_INPUT_SESSION"
+	case WS_CHANNEL_TYPE_OUTPUT_SESSION:
+		return "WS_CHANNEL_TYPE_OUTPUT_SESSION"
+	case WS_CHANNEL_TYPE_DUPLEX:
+		return "WS_CHANNEL_TYPE_DUPLEX"
+	case WS_CHANNEL_TYPE_DUPLEX_SESSION:
+		return "WS_CHANNEL_TYPE_DUPLEX_SESSION"
+	case WS_CHANNEL_TYPE_REQUEST:
+		return "WS_CHANNEL_TYPE_REQUEST"
+	case WS_CHANNEL_TYPE_REPLY:
+		return "WS_CHANNEL_TYPE_REPLY"
+	default:
+		return fmt.Sprintf("WS_CHANNEL_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_CHARSET: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_charset
 type WS_CHARSET int32
 
@@ -165,6 +444,23 @@ const (
 	WS_CHARSET_UTF16BE WS_CHARSET = 3
 )
 
+// String returns the WS_CHARSET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_CHARSET) String() string {
+	switch e {
+	case WS_CHARSET_AUTO:
+		return "WS_CHARSET_AUTO"
+	case WS_CHARSET_UTF8:
+		return "WS_CHARSET_UTF8"
+	case WS_CHARSET_UTF16LE:
+		return "WS_CHARSET_UTF16LE"
+	case WS_CHARSET_UTF16BE:
+		return "WS_CHARSET_UTF16BE"
+	default:
+		return fmt.Sprintf("WS_CHARSET(%d)", int32(e))
+	}
+}
+
 // WS_COOKIE_MODE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_cookie_mode
 type WS_COOKIE_MODE int32
 
@@ -172,6 +468,19 @@ const (
 	WS_MANUAL_COOKIE_MODE WS_COOKIE_MODE = 1
 	WS_AUTO_COOKIE_MODE   WS_COOKIE_MODE = 2
 )
+
+// String returns the WS_COOKIE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_COOKIE_MODE) String() string {
+	switch e {
+	case WS_MANUAL_COOKIE_MODE:
+		return "WS_MANUAL_COOKIE_MODE"
+	case WS_AUTO_COOKIE_MODE:
+		return "WS_AUTO_COOKIE_MODE"
+	default:
+		return fmt.Sprintf("WS_COOKIE_MODE(%d)", int32(e))
+	}
+}
 
 // WS_DATETIME_FORMAT: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_datetime_format
 type WS_DATETIME_FORMAT int32
@@ -181,6 +490,21 @@ const (
 	WS_DATETIME_FORMAT_LOCAL WS_DATETIME_FORMAT = 1
 	WS_DATETIME_FORMAT_NONE  WS_DATETIME_FORMAT = 2
 )
+
+// String returns the WS_DATETIME_FORMAT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_DATETIME_FORMAT) String() string {
+	switch e {
+	case WS_DATETIME_FORMAT_UTC:
+		return "WS_DATETIME_FORMAT_UTC"
+	case WS_DATETIME_FORMAT_LOCAL:
+		return "WS_DATETIME_FORMAT_LOCAL"
+	case WS_DATETIME_FORMAT_NONE:
+		return "WS_DATETIME_FORMAT_NONE"
+	default:
+		return fmt.Sprintf("WS_DATETIME_FORMAT(%d)", int32(e))
+	}
+}
 
 // WS_ENCODING: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_encoding
 type WS_ENCODING int32
@@ -197,12 +521,50 @@ const (
 	WS_ENCODING_RAW                  WS_ENCODING = 8
 )
 
+// String returns the WS_ENCODING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_ENCODING) String() string {
+	switch e {
+	case WS_ENCODING_XML_BINARY_1:
+		return "WS_ENCODING_XML_BINARY_1"
+	case WS_ENCODING_XML_BINARY_SESSION_1:
+		return "WS_ENCODING_XML_BINARY_SESSION_1"
+	case WS_ENCODING_XML_MTOM_UTF8:
+		return "WS_ENCODING_XML_MTOM_UTF8"
+	case WS_ENCODING_XML_MTOM_UTF16BE:
+		return "WS_ENCODING_XML_MTOM_UTF16BE"
+	case WS_ENCODING_XML_MTOM_UTF16LE:
+		return "WS_ENCODING_XML_MTOM_UTF16LE"
+	case WS_ENCODING_XML_UTF8:
+		return "WS_ENCODING_XML_UTF8"
+	case WS_ENCODING_XML_UTF16BE:
+		return "WS_ENCODING_XML_UTF16BE"
+	case WS_ENCODING_XML_UTF16LE:
+		return "WS_ENCODING_XML_UTF16LE"
+	case WS_ENCODING_RAW:
+		return "WS_ENCODING_RAW"
+	default:
+		return fmt.Sprintf("WS_ENCODING(%d)", int32(e))
+	}
+}
+
 // WS_ENDPOINT_ADDRESS_EXTENSION_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_endpoint_address_extension_type
 type WS_ENDPOINT_ADDRESS_EXTENSION_TYPE int32
 
 const (
 	WS_ENDPOINT_ADDRESS_EXTENSION_METADATA_ADDRESS WS_ENDPOINT_ADDRESS_EXTENSION_TYPE = 1
 )
+
+// String returns the WS_ENDPOINT_ADDRESS_EXTENSION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_ENDPOINT_ADDRESS_EXTENSION_TYPE) String() string {
+	switch e {
+	case WS_ENDPOINT_ADDRESS_EXTENSION_METADATA_ADDRESS:
+		return "WS_ENDPOINT_ADDRESS_EXTENSION_METADATA_ADDRESS"
+	default:
+		return fmt.Sprintf("WS_ENDPOINT_ADDRESS_EXTENSION_TYPE(%d)", int32(e))
+	}
+}
 
 // WS_ENDPOINT_IDENTITY_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_endpoint_identity_type
 type WS_ENDPOINT_IDENTITY_TYPE int32
@@ -216,6 +578,27 @@ const (
 	WS_UNKNOWN_ENDPOINT_IDENTITY_TYPE WS_ENDPOINT_IDENTITY_TYPE = 6
 )
 
+// String returns the WS_ENDPOINT_IDENTITY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_ENDPOINT_IDENTITY_TYPE) String() string {
+	switch e {
+	case WS_DNS_ENDPOINT_IDENTITY_TYPE:
+		return "WS_DNS_ENDPOINT_IDENTITY_TYPE"
+	case WS_UPN_ENDPOINT_IDENTITY_TYPE:
+		return "WS_UPN_ENDPOINT_IDENTITY_TYPE"
+	case WS_SPN_ENDPOINT_IDENTITY_TYPE:
+		return "WS_SPN_ENDPOINT_IDENTITY_TYPE"
+	case WS_RSA_ENDPOINT_IDENTITY_TYPE:
+		return "WS_RSA_ENDPOINT_IDENTITY_TYPE"
+	case WS_CERT_ENDPOINT_IDENTITY_TYPE:
+		return "WS_CERT_ENDPOINT_IDENTITY_TYPE"
+	case WS_UNKNOWN_ENDPOINT_IDENTITY_TYPE:
+		return "WS_UNKNOWN_ENDPOINT_IDENTITY_TYPE"
+	default:
+		return fmt.Sprintf("WS_ENDPOINT_IDENTITY_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_ENVELOPE_VERSION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_envelope_version
 type WS_ENVELOPE_VERSION int32
 
@@ -224,6 +607,21 @@ const (
 	WS_ENVELOPE_VERSION_SOAP_1_2 WS_ENVELOPE_VERSION = 2
 	WS_ENVELOPE_VERSION_NONE     WS_ENVELOPE_VERSION = 3
 )
+
+// String returns the WS_ENVELOPE_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_ENVELOPE_VERSION) String() string {
+	switch e {
+	case WS_ENVELOPE_VERSION_SOAP_1_1:
+		return "WS_ENVELOPE_VERSION_SOAP_1_1"
+	case WS_ENVELOPE_VERSION_SOAP_1_2:
+		return "WS_ENVELOPE_VERSION_SOAP_1_2"
+	case WS_ENVELOPE_VERSION_NONE:
+		return "WS_ENVELOPE_VERSION_NONE"
+	default:
+		return fmt.Sprintf("WS_ENVELOPE_VERSION(%d)", int32(e))
+	}
+}
 
 // WS_ERROR_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_error_property_id
 type WS_ERROR_PROPERTY_ID int32
@@ -234,6 +632,21 @@ const (
 	WS_ERROR_PROPERTY_LANGID              WS_ERROR_PROPERTY_ID = 2
 )
 
+// String returns the WS_ERROR_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_ERROR_PROPERTY_ID) String() string {
+	switch e {
+	case WS_ERROR_PROPERTY_STRING_COUNT:
+		return "WS_ERROR_PROPERTY_STRING_COUNT"
+	case WS_ERROR_PROPERTY_ORIGINAL_ERROR_CODE:
+		return "WS_ERROR_PROPERTY_ORIGINAL_ERROR_CODE"
+	case WS_ERROR_PROPERTY_LANGID:
+		return "WS_ERROR_PROPERTY_LANGID"
+	default:
+		return fmt.Sprintf("WS_ERROR_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_EXCEPTION_CODE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_exception_code
 type WS_EXCEPTION_CODE int32
 
@@ -241,6 +654,19 @@ const (
 	WS_EXCEPTION_CODE_USAGE_FAILURE    WS_EXCEPTION_CODE = -1069744128
 	WS_EXCEPTION_CODE_INTERNAL_FAILURE WS_EXCEPTION_CODE = -1069744127
 )
+
+// String returns the WS_EXCEPTION_CODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_EXCEPTION_CODE) String() string {
+	switch e {
+	case WS_EXCEPTION_CODE_USAGE_FAILURE:
+		return "WS_EXCEPTION_CODE_USAGE_FAILURE"
+	case WS_EXCEPTION_CODE_INTERNAL_FAILURE:
+		return "WS_EXCEPTION_CODE_INTERNAL_FAILURE"
+	default:
+		return fmt.Sprintf("WS_EXCEPTION_CODE(%d)", int32(e))
+	}
+}
 
 // WS_EXTENDED_PROTECTION_POLICY: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_extended_protection_policy
 type WS_EXTENDED_PROTECTION_POLICY int32
@@ -251,6 +677,21 @@ const (
 	WS_EXTENDED_PROTECTION_POLICY_ALWAYS         WS_EXTENDED_PROTECTION_POLICY = 3
 )
 
+// String returns the WS_EXTENDED_PROTECTION_POLICY constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_EXTENDED_PROTECTION_POLICY) String() string {
+	switch e {
+	case WS_EXTENDED_PROTECTION_POLICY_NEVER:
+		return "WS_EXTENDED_PROTECTION_POLICY_NEVER"
+	case WS_EXTENDED_PROTECTION_POLICY_WHEN_SUPPORTED:
+		return "WS_EXTENDED_PROTECTION_POLICY_WHEN_SUPPORTED"
+	case WS_EXTENDED_PROTECTION_POLICY_ALWAYS:
+		return "WS_EXTENDED_PROTECTION_POLICY_ALWAYS"
+	default:
+		return fmt.Sprintf("WS_EXTENDED_PROTECTION_POLICY(%d)", int32(e))
+	}
+}
+
 // WS_EXTENDED_PROTECTION_SCENARIO: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_extended_protection_scenario
 type WS_EXTENDED_PROTECTION_SCENARIO int32
 
@@ -258,6 +699,19 @@ const (
 	WS_EXTENDED_PROTECTION_SCENARIO_BOUND_SERVER   WS_EXTENDED_PROTECTION_SCENARIO = 1
 	WS_EXTENDED_PROTECTION_SCENARIO_TERMINATED_SSL WS_EXTENDED_PROTECTION_SCENARIO = 2
 )
+
+// String returns the WS_EXTENDED_PROTECTION_SCENARIO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_EXTENDED_PROTECTION_SCENARIO) String() string {
+	switch e {
+	case WS_EXTENDED_PROTECTION_SCENARIO_BOUND_SERVER:
+		return "WS_EXTENDED_PROTECTION_SCENARIO_BOUND_SERVER"
+	case WS_EXTENDED_PROTECTION_SCENARIO_TERMINATED_SSL:
+		return "WS_EXTENDED_PROTECTION_SCENARIO_TERMINATED_SSL"
+	default:
+		return fmt.Sprintf("WS_EXTENDED_PROTECTION_SCENARIO(%d)", int32(e))
+	}
+}
 
 // WS_FAULT_DISCLOSURE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_fault_disclosure
 type WS_FAULT_DISCLOSURE int32
@@ -267,6 +721,19 @@ const (
 	WS_FULL_FAULT_DISCLOSURE    WS_FAULT_DISCLOSURE = 1
 )
 
+// String returns the WS_FAULT_DISCLOSURE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_FAULT_DISCLOSURE) String() string {
+	switch e {
+	case WS_MINIMAL_FAULT_DISCLOSURE:
+		return "WS_MINIMAL_FAULT_DISCLOSURE"
+	case WS_FULL_FAULT_DISCLOSURE:
+		return "WS_FULL_FAULT_DISCLOSURE"
+	default:
+		return fmt.Sprintf("WS_FAULT_DISCLOSURE(%d)", int32(e))
+	}
+}
+
 // WS_FAULT_ERROR_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_fault_error_property_id
 type WS_FAULT_ERROR_PROPERTY_ID int32
 
@@ -275,6 +742,21 @@ const (
 	WS_FAULT_ERROR_PROPERTY_ACTION WS_FAULT_ERROR_PROPERTY_ID = 1
 	WS_FAULT_ERROR_PROPERTY_HEADER WS_FAULT_ERROR_PROPERTY_ID = 2
 )
+
+// String returns the WS_FAULT_ERROR_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_FAULT_ERROR_PROPERTY_ID) String() string {
+	switch e {
+	case WS_FAULT_ERROR_PROPERTY_FAULT:
+		return "WS_FAULT_ERROR_PROPERTY_FAULT"
+	case WS_FAULT_ERROR_PROPERTY_ACTION:
+		return "WS_FAULT_ERROR_PROPERTY_ACTION"
+	case WS_FAULT_ERROR_PROPERTY_HEADER:
+		return "WS_FAULT_ERROR_PROPERTY_HEADER"
+	default:
+		return fmt.Sprintf("WS_FAULT_ERROR_PROPERTY_ID(%d)", int32(e))
+	}
+}
 
 // WS_FIELD_MAPPING: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_field_mapping
 type WS_FIELD_MAPPING int32
@@ -295,6 +777,41 @@ const (
 	WS_ANY_ATTRIBUTES_FIELD_MAPPING           WS_FIELD_MAPPING = 12
 )
 
+// String returns the WS_FIELD_MAPPING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_FIELD_MAPPING) String() string {
+	switch e {
+	case WS_TYPE_ATTRIBUTE_FIELD_MAPPING:
+		return "WS_TYPE_ATTRIBUTE_FIELD_MAPPING"
+	case WS_ATTRIBUTE_FIELD_MAPPING:
+		return "WS_ATTRIBUTE_FIELD_MAPPING"
+	case WS_ELEMENT_FIELD_MAPPING:
+		return "WS_ELEMENT_FIELD_MAPPING"
+	case WS_REPEATING_ELEMENT_FIELD_MAPPING:
+		return "WS_REPEATING_ELEMENT_FIELD_MAPPING"
+	case WS_TEXT_FIELD_MAPPING:
+		return "WS_TEXT_FIELD_MAPPING"
+	case WS_NO_FIELD_MAPPING:
+		return "WS_NO_FIELD_MAPPING"
+	case WS_XML_ATTRIBUTE_FIELD_MAPPING:
+		return "WS_XML_ATTRIBUTE_FIELD_MAPPING"
+	case WS_ELEMENT_CHOICE_FIELD_MAPPING:
+		return "WS_ELEMENT_CHOICE_FIELD_MAPPING"
+	case WS_REPEATING_ELEMENT_CHOICE_FIELD_MAPPING:
+		return "WS_REPEATING_ELEMENT_CHOICE_FIELD_MAPPING"
+	case WS_ANY_ELEMENT_FIELD_MAPPING:
+		return "WS_ANY_ELEMENT_FIELD_MAPPING"
+	case WS_REPEATING_ANY_ELEMENT_FIELD_MAPPING:
+		return "WS_REPEATING_ANY_ELEMENT_FIELD_MAPPING"
+	case WS_ANY_CONTENT_FIELD_MAPPING:
+		return "WS_ANY_CONTENT_FIELD_MAPPING"
+	case WS_ANY_ATTRIBUTES_FIELD_MAPPING:
+		return "WS_ANY_ATTRIBUTES_FIELD_MAPPING"
+	default:
+		return fmt.Sprintf("WS_FIELD_MAPPING(%d)", int32(e))
+	}
+}
+
 // WS_HEADER_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_header_type
 type WS_HEADER_TYPE int32
 
@@ -308,6 +825,29 @@ const (
 	WS_FAULT_TO_HEADER   WS_HEADER_TYPE = 7
 )
 
+// String returns the WS_HEADER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_HEADER_TYPE) String() string {
+	switch e {
+	case WS_ACTION_HEADER:
+		return "WS_ACTION_HEADER"
+	case WS_TO_HEADER:
+		return "WS_TO_HEADER"
+	case WS_MESSAGE_ID_HEADER:
+		return "WS_MESSAGE_ID_HEADER"
+	case WS_RELATES_TO_HEADER:
+		return "WS_RELATES_TO_HEADER"
+	case WS_FROM_HEADER:
+		return "WS_FROM_HEADER"
+	case WS_REPLY_TO_HEADER:
+		return "WS_REPLY_TO_HEADER"
+	case WS_FAULT_TO_HEADER:
+		return "WS_FAULT_TO_HEADER"
+	default:
+		return fmt.Sprintf("WS_HEADER_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_HEAP_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_heap_property_id
 type WS_HEAP_PROPERTY_ID int32
 
@@ -318,6 +858,23 @@ const (
 	WS_HEAP_PROPERTY_ACTUAL_SIZE    WS_HEAP_PROPERTY_ID = 3
 )
 
+// String returns the WS_HEAP_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_HEAP_PROPERTY_ID) String() string {
+	switch e {
+	case WS_HEAP_PROPERTY_MAX_SIZE:
+		return "WS_HEAP_PROPERTY_MAX_SIZE"
+	case WS_HEAP_PROPERTY_TRIM_SIZE:
+		return "WS_HEAP_PROPERTY_TRIM_SIZE"
+	case WS_HEAP_PROPERTY_REQUESTED_SIZE:
+		return "WS_HEAP_PROPERTY_REQUESTED_SIZE"
+	case WS_HEAP_PROPERTY_ACTUAL_SIZE:
+		return "WS_HEAP_PROPERTY_ACTUAL_SIZE"
+	default:
+		return fmt.Sprintf("WS_HEAP_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_HTTP_HEADER_AUTH_TARGET: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_http_header_auth_target
 type WS_HTTP_HEADER_AUTH_TARGET int32
 
@@ -325,6 +882,19 @@ const (
 	WS_HTTP_HEADER_AUTH_TARGET_SERVICE WS_HTTP_HEADER_AUTH_TARGET = 1
 	WS_HTTP_HEADER_AUTH_TARGET_PROXY   WS_HTTP_HEADER_AUTH_TARGET = 2
 )
+
+// String returns the WS_HTTP_HEADER_AUTH_TARGET constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_HTTP_HEADER_AUTH_TARGET) String() string {
+	switch e {
+	case WS_HTTP_HEADER_AUTH_TARGET_SERVICE:
+		return "WS_HTTP_HEADER_AUTH_TARGET_SERVICE"
+	case WS_HTTP_HEADER_AUTH_TARGET_PROXY:
+		return "WS_HTTP_HEADER_AUTH_TARGET_PROXY"
+	default:
+		return fmt.Sprintf("WS_HTTP_HEADER_AUTH_TARGET(%d)", int32(e))
+	}
+}
 
 // WS_HTTP_PROXY_SETTING_MODE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_http_proxy_setting_mode
 type WS_HTTP_PROXY_SETTING_MODE int32
@@ -335,6 +905,21 @@ const (
 	WS_HTTP_PROXY_SETTING_MODE_CUSTOM WS_HTTP_PROXY_SETTING_MODE = 3
 )
 
+// String returns the WS_HTTP_PROXY_SETTING_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_HTTP_PROXY_SETTING_MODE) String() string {
+	switch e {
+	case WS_HTTP_PROXY_SETTING_MODE_AUTO:
+		return "WS_HTTP_PROXY_SETTING_MODE_AUTO"
+	case WS_HTTP_PROXY_SETTING_MODE_NONE:
+		return "WS_HTTP_PROXY_SETTING_MODE_NONE"
+	case WS_HTTP_PROXY_SETTING_MODE_CUSTOM:
+		return "WS_HTTP_PROXY_SETTING_MODE_CUSTOM"
+	default:
+		return fmt.Sprintf("WS_HTTP_PROXY_SETTING_MODE(%d)", int32(e))
+	}
+}
+
 // WS_IP_VERSION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_ip_version
 type WS_IP_VERSION int32
 
@@ -343,6 +928,21 @@ const (
 	WS_IP_VERSION_6    WS_IP_VERSION = 2
 	WS_IP_VERSION_AUTO WS_IP_VERSION = 3
 )
+
+// String returns the WS_IP_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_IP_VERSION) String() string {
+	switch e {
+	case WS_IP_VERSION_4:
+		return "WS_IP_VERSION_4"
+	case WS_IP_VERSION_6:
+		return "WS_IP_VERSION_6"
+	case WS_IP_VERSION_AUTO:
+		return "WS_IP_VERSION_AUTO"
+	default:
+		return fmt.Sprintf("WS_IP_VERSION(%d)", int32(e))
+	}
+}
 
 // WS_LISTENER_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_listener_property_id
 type WS_LISTENER_PROPERTY_ID int32
@@ -367,6 +967,49 @@ const (
 	WS_LISTENER_PROPERTY_DISALLOWED_USER_AGENT          WS_LISTENER_PROPERTY_ID = 16
 )
 
+// String returns the WS_LISTENER_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_LISTENER_PROPERTY_ID) String() string {
+	switch e {
+	case WS_LISTENER_PROPERTY_LISTEN_BACKLOG:
+		return "WS_LISTENER_PROPERTY_LISTEN_BACKLOG"
+	case WS_LISTENER_PROPERTY_IP_VERSION:
+		return "WS_LISTENER_PROPERTY_IP_VERSION"
+	case WS_LISTENER_PROPERTY_STATE:
+		return "WS_LISTENER_PROPERTY_STATE"
+	case WS_LISTENER_PROPERTY_ASYNC_CALLBACK_MODEL:
+		return "WS_LISTENER_PROPERTY_ASYNC_CALLBACK_MODEL"
+	case WS_LISTENER_PROPERTY_CHANNEL_TYPE:
+		return "WS_LISTENER_PROPERTY_CHANNEL_TYPE"
+	case WS_LISTENER_PROPERTY_CHANNEL_BINDING:
+		return "WS_LISTENER_PROPERTY_CHANNEL_BINDING"
+	case WS_LISTENER_PROPERTY_CONNECT_TIMEOUT:
+		return "WS_LISTENER_PROPERTY_CONNECT_TIMEOUT"
+	case WS_LISTENER_PROPERTY_IS_MULTICAST:
+		return "WS_LISTENER_PROPERTY_IS_MULTICAST"
+	case WS_LISTENER_PROPERTY_MULTICAST_INTERFACES:
+		return "WS_LISTENER_PROPERTY_MULTICAST_INTERFACES"
+	case WS_LISTENER_PROPERTY_MULTICAST_LOOPBACK:
+		return "WS_LISTENER_PROPERTY_MULTICAST_LOOPBACK"
+	case WS_LISTENER_PROPERTY_CLOSE_TIMEOUT:
+		return "WS_LISTENER_PROPERTY_CLOSE_TIMEOUT"
+	case WS_LISTENER_PROPERTY_TO_HEADER_MATCHING_OPTIONS:
+		return "WS_LISTENER_PROPERTY_TO_HEADER_MATCHING_OPTIONS"
+	case WS_LISTENER_PROPERTY_TRANSPORT_URL_MATCHING_OPTIONS:
+		return "WS_LISTENER_PROPERTY_TRANSPORT_URL_MATCHING_OPTIONS"
+	case WS_LISTENER_PROPERTY_CUSTOM_LISTENER_CALLBACKS:
+		return "WS_LISTENER_PROPERTY_CUSTOM_LISTENER_CALLBACKS"
+	case WS_LISTENER_PROPERTY_CUSTOM_LISTENER_PARAMETERS:
+		return "WS_LISTENER_PROPERTY_CUSTOM_LISTENER_PARAMETERS"
+	case WS_LISTENER_PROPERTY_CUSTOM_LISTENER_INSTANCE:
+		return "WS_LISTENER_PROPERTY_CUSTOM_LISTENER_INSTANCE"
+	case WS_LISTENER_PROPERTY_DISALLOWED_USER_AGENT:
+		return "WS_LISTENER_PROPERTY_DISALLOWED_USER_AGENT"
+	default:
+		return fmt.Sprintf("WS_LISTENER_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_LISTENER_STATE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_listener_state
 type WS_LISTENER_STATE int32
 
@@ -379,6 +1022,27 @@ const (
 	WS_LISTENER_STATE_CLOSED  WS_LISTENER_STATE = 5
 )
 
+// String returns the WS_LISTENER_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_LISTENER_STATE) String() string {
+	switch e {
+	case WS_LISTENER_STATE_CREATED:
+		return "WS_LISTENER_STATE_CREATED"
+	case WS_LISTENER_STATE_OPENING:
+		return "WS_LISTENER_STATE_OPENING"
+	case WS_LISTENER_STATE_OPEN:
+		return "WS_LISTENER_STATE_OPEN"
+	case WS_LISTENER_STATE_FAULTED:
+		return "WS_LISTENER_STATE_FAULTED"
+	case WS_LISTENER_STATE_CLOSING:
+		return "WS_LISTENER_STATE_CLOSING"
+	case WS_LISTENER_STATE_CLOSED:
+		return "WS_LISTENER_STATE_CLOSED"
+	default:
+		return fmt.Sprintf("WS_LISTENER_STATE(%d)", int32(e))
+	}
+}
+
 // WS_MESSAGE_INITIALIZATION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_message_initialization
 type WS_MESSAGE_INITIALIZATION int32
 
@@ -389,6 +1053,25 @@ const (
 	WS_REPLY_MESSAGE     WS_MESSAGE_INITIALIZATION = 3
 	WS_FAULT_MESSAGE     WS_MESSAGE_INITIALIZATION = 4
 )
+
+// String returns the WS_MESSAGE_INITIALIZATION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_MESSAGE_INITIALIZATION) String() string {
+	switch e {
+	case WS_BLANK_MESSAGE:
+		return "WS_BLANK_MESSAGE"
+	case WS_DUPLICATE_MESSAGE:
+		return "WS_DUPLICATE_MESSAGE"
+	case WS_REQUEST_MESSAGE:
+		return "WS_REQUEST_MESSAGE"
+	case WS_REPLY_MESSAGE:
+		return "WS_REPLY_MESSAGE"
+	case WS_FAULT_MESSAGE:
+		return "WS_FAULT_MESSAGE"
+	default:
+		return fmt.Sprintf("WS_MESSAGE_INITIALIZATION(%d)", int32(e))
+	}
+}
 
 // WS_MESSAGE_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_message_property_id
 type WS_MESSAGE_PROPERTY_ID int32
@@ -418,12 +1101,76 @@ const (
 	WS_MESSAGE_PROPERTY_PROTECTION_LEVEL                 WS_MESSAGE_PROPERTY_ID = 21
 )
 
+// String returns the WS_MESSAGE_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_MESSAGE_PROPERTY_ID) String() string {
+	switch e {
+	case WS_MESSAGE_PROPERTY_STATE:
+		return "WS_MESSAGE_PROPERTY_STATE"
+	case WS_MESSAGE_PROPERTY_HEAP:
+		return "WS_MESSAGE_PROPERTY_HEAP"
+	case WS_MESSAGE_PROPERTY_ENVELOPE_VERSION:
+		return "WS_MESSAGE_PROPERTY_ENVELOPE_VERSION"
+	case WS_MESSAGE_PROPERTY_ADDRESSING_VERSION:
+		return "WS_MESSAGE_PROPERTY_ADDRESSING_VERSION"
+	case WS_MESSAGE_PROPERTY_HEADER_BUFFER:
+		return "WS_MESSAGE_PROPERTY_HEADER_BUFFER"
+	case WS_MESSAGE_PROPERTY_HEADER_POSITION:
+		return "WS_MESSAGE_PROPERTY_HEADER_POSITION"
+	case WS_MESSAGE_PROPERTY_BODY_READER:
+		return "WS_MESSAGE_PROPERTY_BODY_READER"
+	case WS_MESSAGE_PROPERTY_BODY_WRITER:
+		return "WS_MESSAGE_PROPERTY_BODY_WRITER"
+	case WS_MESSAGE_PROPERTY_IS_ADDRESSED:
+		return "WS_MESSAGE_PROPERTY_IS_ADDRESSED"
+	case WS_MESSAGE_PROPERTY_HEAP_PROPERTIES:
+		return "WS_MESSAGE_PROPERTY_HEAP_PROPERTIES"
+	case WS_MESSAGE_PROPERTY_XML_READER_PROPERTIES:
+		return "WS_MESSAGE_PROPERTY_XML_READER_PROPERTIES"
+	case WS_MESSAGE_PROPERTY_XML_WRITER_PROPERTIES:
+		return "WS_MESSAGE_PROPERTY_XML_WRITER_PROPERTIES"
+	case WS_MESSAGE_PROPERTY_IS_FAULT:
+		return "WS_MESSAGE_PROPERTY_IS_FAULT"
+	case WS_MESSAGE_PROPERTY_MAX_PROCESSED_HEADERS:
+		return "WS_MESSAGE_PROPERTY_MAX_PROCESSED_HEADERS"
+	case WS_MESSAGE_PROPERTY_USERNAME:
+		return "WS_MESSAGE_PROPERTY_USERNAME"
+	case WS_MESSAGE_PROPERTY_ENCODED_CERT:
+		return "WS_MESSAGE_PROPERTY_ENCODED_CERT"
+	case WS_MESSAGE_PROPERTY_TRANSPORT_SECURITY_WINDOWS_TOKEN:
+		return "WS_MESSAGE_PROPERTY_TRANSPORT_SECURITY_WINDOWS_TOKEN"
+	case WS_MESSAGE_PROPERTY_HTTP_HEADER_AUTH_WINDOWS_TOKEN:
+		return "WS_MESSAGE_PROPERTY_HTTP_HEADER_AUTH_WINDOWS_TOKEN"
+	case WS_MESSAGE_PROPERTY_MESSAGE_SECURITY_WINDOWS_TOKEN:
+		return "WS_MESSAGE_PROPERTY_MESSAGE_SECURITY_WINDOWS_TOKEN"
+	case WS_MESSAGE_PROPERTY_SAML_ASSERTION:
+		return "WS_MESSAGE_PROPERTY_SAML_ASSERTION"
+	case WS_MESSAGE_PROPERTY_SECURITY_CONTEXT:
+		return "WS_MESSAGE_PROPERTY_SECURITY_CONTEXT"
+	case WS_MESSAGE_PROPERTY_PROTECTION_LEVEL:
+		return "WS_MESSAGE_PROPERTY_PROTECTION_LEVEL"
+	default:
+		return fmt.Sprintf("WS_MESSAGE_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_MESSAGE_SECURITY_USAGE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_message_security_usage
 type WS_MESSAGE_SECURITY_USAGE int32
 
 const (
 	WS_SUPPORTING_MESSAGE_SECURITY_USAGE WS_MESSAGE_SECURITY_USAGE = 1
 )
+
+// String returns the WS_MESSAGE_SECURITY_USAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_MESSAGE_SECURITY_USAGE) String() string {
+	switch e {
+	case WS_SUPPORTING_MESSAGE_SECURITY_USAGE:
+		return "WS_SUPPORTING_MESSAGE_SECURITY_USAGE"
+	default:
+		return fmt.Sprintf("WS_MESSAGE_SECURITY_USAGE(%d)", int32(e))
+	}
+}
 
 // WS_MESSAGE_STATE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_message_state
 type WS_MESSAGE_STATE int32
@@ -436,6 +1183,25 @@ const (
 	WS_MESSAGE_STATE_DONE        WS_MESSAGE_STATE = 5
 )
 
+// String returns the WS_MESSAGE_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_MESSAGE_STATE) String() string {
+	switch e {
+	case WS_MESSAGE_STATE_EMPTY:
+		return "WS_MESSAGE_STATE_EMPTY"
+	case WS_MESSAGE_STATE_INITIALIZED:
+		return "WS_MESSAGE_STATE_INITIALIZED"
+	case WS_MESSAGE_STATE_READING:
+		return "WS_MESSAGE_STATE_READING"
+	case WS_MESSAGE_STATE_WRITING:
+		return "WS_MESSAGE_STATE_WRITING"
+	case WS_MESSAGE_STATE_DONE:
+		return "WS_MESSAGE_STATE_DONE"
+	default:
+		return fmt.Sprintf("WS_MESSAGE_STATE(%d)", int32(e))
+	}
+}
+
 // WS_METADATA_EXCHANGE_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_metadata_exchange_type
 type WS_METADATA_EXCHANGE_TYPE int32
 
@@ -444,6 +1210,21 @@ const (
 	WS_METADATA_EXCHANGE_TYPE_MEX      WS_METADATA_EXCHANGE_TYPE = 1
 	WS_METADATA_EXCHANGE_TYPE_HTTP_GET WS_METADATA_EXCHANGE_TYPE = 2
 )
+
+// String returns the WS_METADATA_EXCHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_METADATA_EXCHANGE_TYPE) String() string {
+	switch e {
+	case WS_METADATA_EXCHANGE_TYPE_NONE:
+		return "WS_METADATA_EXCHANGE_TYPE_NONE"
+	case WS_METADATA_EXCHANGE_TYPE_MEX:
+		return "WS_METADATA_EXCHANGE_TYPE_MEX"
+	case WS_METADATA_EXCHANGE_TYPE_HTTP_GET:
+		return "WS_METADATA_EXCHANGE_TYPE_HTTP_GET"
+	default:
+		return fmt.Sprintf("WS_METADATA_EXCHANGE_TYPE(%d)", int32(e))
+	}
+}
 
 // WS_METADATA_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_metadata_property_id
 type WS_METADATA_PROPERTY_ID int32
@@ -458,6 +1239,29 @@ const (
 	WS_METADATA_PROPERTY_VERIFY_HOST_NAMES   WS_METADATA_PROPERTY_ID = 7
 )
 
+// String returns the WS_METADATA_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_METADATA_PROPERTY_ID) String() string {
+	switch e {
+	case WS_METADATA_PROPERTY_STATE:
+		return "WS_METADATA_PROPERTY_STATE"
+	case WS_METADATA_PROPERTY_HEAP_PROPERTIES:
+		return "WS_METADATA_PROPERTY_HEAP_PROPERTIES"
+	case WS_METADATA_PROPERTY_POLICY_PROPERTIES:
+		return "WS_METADATA_PROPERTY_POLICY_PROPERTIES"
+	case WS_METADATA_PROPERTY_HEAP_REQUESTED_SIZE:
+		return "WS_METADATA_PROPERTY_HEAP_REQUESTED_SIZE"
+	case WS_METADATA_PROPERTY_MAX_DOCUMENTS:
+		return "WS_METADATA_PROPERTY_MAX_DOCUMENTS"
+	case WS_METADATA_PROPERTY_HOST_NAMES:
+		return "WS_METADATA_PROPERTY_HOST_NAMES"
+	case WS_METADATA_PROPERTY_VERIFY_HOST_NAMES:
+		return "WS_METADATA_PROPERTY_VERIFY_HOST_NAMES"
+	default:
+		return fmt.Sprintf("WS_METADATA_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_METADATA_STATE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_metadata_state
 type WS_METADATA_STATE int32
 
@@ -466,6 +1270,21 @@ const (
 	WS_METADATA_STATE_RESOLVED WS_METADATA_STATE = 2
 	WS_METADATA_STATE_FAULTED  WS_METADATA_STATE = 3
 )
+
+// String returns the WS_METADATA_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_METADATA_STATE) String() string {
+	switch e {
+	case WS_METADATA_STATE_CREATED:
+		return "WS_METADATA_STATE_CREATED"
+	case WS_METADATA_STATE_RESOLVED:
+		return "WS_METADATA_STATE_RESOLVED"
+	case WS_METADATA_STATE_FAULTED:
+		return "WS_METADATA_STATE_FAULTED"
+	default:
+		return fmt.Sprintf("WS_METADATA_STATE(%d)", int32(e))
+	}
+}
 
 // WS_MOVE_TO: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_move_to
 type WS_MOVE_TO int32
@@ -485,6 +1304,39 @@ const (
 	WS_MOVE_TO_CHILD_NODE       WS_MOVE_TO = 11
 )
 
+// String returns the WS_MOVE_TO constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_MOVE_TO) String() string {
+	switch e {
+	case WS_MOVE_TO_ROOT_ELEMENT:
+		return "WS_MOVE_TO_ROOT_ELEMENT"
+	case WS_MOVE_TO_NEXT_ELEMENT:
+		return "WS_MOVE_TO_NEXT_ELEMENT"
+	case WS_MOVE_TO_PREVIOUS_ELEMENT:
+		return "WS_MOVE_TO_PREVIOUS_ELEMENT"
+	case WS_MOVE_TO_CHILD_ELEMENT:
+		return "WS_MOVE_TO_CHILD_ELEMENT"
+	case WS_MOVE_TO_END_ELEMENT:
+		return "WS_MOVE_TO_END_ELEMENT"
+	case WS_MOVE_TO_PARENT_ELEMENT:
+		return "WS_MOVE_TO_PARENT_ELEMENT"
+	case WS_MOVE_TO_NEXT_NODE:
+		return "WS_MOVE_TO_NEXT_NODE"
+	case WS_MOVE_TO_PREVIOUS_NODE:
+		return "WS_MOVE_TO_PREVIOUS_NODE"
+	case WS_MOVE_TO_FIRST_NODE:
+		return "WS_MOVE_TO_FIRST_NODE"
+	case WS_MOVE_TO_BOF:
+		return "WS_MOVE_TO_BOF"
+	case WS_MOVE_TO_EOF:
+		return "WS_MOVE_TO_EOF"
+	case WS_MOVE_TO_CHILD_NODE:
+		return "WS_MOVE_TO_CHILD_NODE"
+	default:
+		return fmt.Sprintf("WS_MOVE_TO(%d)", int32(e))
+	}
+}
+
 // WS_OPERATION_CONTEXT_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_operation_context_property_id
 type WS_OPERATION_CONTEXT_PROPERTY_ID int32
 
@@ -500,6 +1352,33 @@ const (
 	WS_OPERATION_CONTEXT_PROPERTY_ENDPOINT_ADDRESS     WS_OPERATION_CONTEXT_PROPERTY_ID = 8
 )
 
+// String returns the WS_OPERATION_CONTEXT_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_OPERATION_CONTEXT_PROPERTY_ID) String() string {
+	switch e {
+	case WS_OPERATION_CONTEXT_PROPERTY_CHANNEL:
+		return "WS_OPERATION_CONTEXT_PROPERTY_CHANNEL"
+	case WS_OPERATION_CONTEXT_PROPERTY_CONTRACT_DESCRIPTION:
+		return "WS_OPERATION_CONTEXT_PROPERTY_CONTRACT_DESCRIPTION"
+	case WS_OPERATION_CONTEXT_PROPERTY_HOST_USER_STATE:
+		return "WS_OPERATION_CONTEXT_PROPERTY_HOST_USER_STATE"
+	case WS_OPERATION_CONTEXT_PROPERTY_CHANNEL_USER_STATE:
+		return "WS_OPERATION_CONTEXT_PROPERTY_CHANNEL_USER_STATE"
+	case WS_OPERATION_CONTEXT_PROPERTY_INPUT_MESSAGE:
+		return "WS_OPERATION_CONTEXT_PROPERTY_INPUT_MESSAGE"
+	case WS_OPERATION_CONTEXT_PROPERTY_OUTPUT_MESSAGE:
+		return "WS_OPERATION_CONTEXT_PROPERTY_OUTPUT_MESSAGE"
+	case WS_OPERATION_CONTEXT_PROPERTY_HEAP:
+		return "WS_OPERATION_CONTEXT_PROPERTY_HEAP"
+	case WS_OPERATION_CONTEXT_PROPERTY_LISTENER:
+		return "WS_OPERATION_CONTEXT_PROPERTY_LISTENER"
+	case WS_OPERATION_CONTEXT_PROPERTY_ENDPOINT_ADDRESS:
+		return "WS_OPERATION_CONTEXT_PROPERTY_ENDPOINT_ADDRESS"
+	default:
+		return fmt.Sprintf("WS_OPERATION_CONTEXT_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_OPERATION_STYLE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_operation_style
 type WS_OPERATION_STYLE int32
 
@@ -507,6 +1386,19 @@ const (
 	WS_NON_RPC_LITERAL_OPERATION WS_OPERATION_STYLE = 0
 	WS_RPC_LITERAL_OPERATION     WS_OPERATION_STYLE = 1
 )
+
+// String returns the WS_OPERATION_STYLE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_OPERATION_STYLE) String() string {
+	switch e {
+	case WS_NON_RPC_LITERAL_OPERATION:
+		return "WS_NON_RPC_LITERAL_OPERATION"
+	case WS_RPC_LITERAL_OPERATION:
+		return "WS_RPC_LITERAL_OPERATION"
+	default:
+		return fmt.Sprintf("WS_OPERATION_STYLE(%d)", int32(e))
+	}
+}
 
 // WS_PARAMETER_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_parameter_type
 type WS_PARAMETER_TYPE int32
@@ -518,12 +1410,40 @@ const (
 	WS_PARAMETER_TYPE_MESSAGES    WS_PARAMETER_TYPE = 3
 )
 
+// String returns the WS_PARAMETER_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_PARAMETER_TYPE) String() string {
+	switch e {
+	case WS_PARAMETER_TYPE_NORMAL:
+		return "WS_PARAMETER_TYPE_NORMAL"
+	case WS_PARAMETER_TYPE_ARRAY:
+		return "WS_PARAMETER_TYPE_ARRAY"
+	case WS_PARAMETER_TYPE_ARRAY_COUNT:
+		return "WS_PARAMETER_TYPE_ARRAY_COUNT"
+	case WS_PARAMETER_TYPE_MESSAGES:
+		return "WS_PARAMETER_TYPE_MESSAGES"
+	default:
+		return fmt.Sprintf("WS_PARAMETER_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_POLICY_EXTENSION_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_policy_extension_type
 type WS_POLICY_EXTENSION_TYPE int32
 
 const (
 	WS_ENDPOINT_POLICY_EXTENSION_TYPE WS_POLICY_EXTENSION_TYPE = 1
 )
+
+// String returns the WS_POLICY_EXTENSION_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_POLICY_EXTENSION_TYPE) String() string {
+	switch e {
+	case WS_ENDPOINT_POLICY_EXTENSION_TYPE:
+		return "WS_ENDPOINT_POLICY_EXTENSION_TYPE"
+	default:
+		return fmt.Sprintf("WS_POLICY_EXTENSION_TYPE(%d)", int32(e))
+	}
+}
 
 // WS_POLICY_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_policy_property_id
 type WS_POLICY_PROPERTY_ID int32
@@ -535,6 +1455,23 @@ const (
 	WS_POLICY_PROPERTY_MAX_EXTENSIONS   WS_POLICY_PROPERTY_ID = 4
 )
 
+// String returns the WS_POLICY_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_POLICY_PROPERTY_ID) String() string {
+	switch e {
+	case WS_POLICY_PROPERTY_STATE:
+		return "WS_POLICY_PROPERTY_STATE"
+	case WS_POLICY_PROPERTY_MAX_ALTERNATIVES:
+		return "WS_POLICY_PROPERTY_MAX_ALTERNATIVES"
+	case WS_POLICY_PROPERTY_MAX_DEPTH:
+		return "WS_POLICY_PROPERTY_MAX_DEPTH"
+	case WS_POLICY_PROPERTY_MAX_EXTENSIONS:
+		return "WS_POLICY_PROPERTY_MAX_EXTENSIONS"
+	default:
+		return fmt.Sprintf("WS_POLICY_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_POLICY_STATE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_policy_state
 type WS_POLICY_STATE int32
 
@@ -542,6 +1479,19 @@ const (
 	WS_POLICY_STATE_CREATED WS_POLICY_STATE = 1
 	WS_POLICY_STATE_FAULTED WS_POLICY_STATE = 2
 )
+
+// String returns the WS_POLICY_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_POLICY_STATE) String() string {
+	switch e {
+	case WS_POLICY_STATE_CREATED:
+		return "WS_POLICY_STATE_CREATED"
+	case WS_POLICY_STATE_FAULTED:
+		return "WS_POLICY_STATE_FAULTED"
+	default:
+		return fmt.Sprintf("WS_POLICY_STATE(%d)", int32(e))
+	}
+}
 
 // WS_PROTECTION_LEVEL: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_protection_level
 type WS_PROTECTION_LEVEL int32
@@ -551,6 +1501,21 @@ const (
 	WS_PROTECTION_LEVEL_SIGN             WS_PROTECTION_LEVEL = 2
 	WS_PROTECTION_LEVEL_SIGN_AND_ENCRYPT WS_PROTECTION_LEVEL = 3
 )
+
+// String returns the WS_PROTECTION_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_PROTECTION_LEVEL) String() string {
+	switch e {
+	case WS_PROTECTION_LEVEL_NONE:
+		return "WS_PROTECTION_LEVEL_NONE"
+	case WS_PROTECTION_LEVEL_SIGN:
+		return "WS_PROTECTION_LEVEL_SIGN"
+	case WS_PROTECTION_LEVEL_SIGN_AND_ENCRYPT:
+		return "WS_PROTECTION_LEVEL_SIGN_AND_ENCRYPT"
+	default:
+		return fmt.Sprintf("WS_PROTECTION_LEVEL(%d)", int32(e))
+	}
+}
 
 // WS_PROXY_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_proxy_property_id
 type WS_PROXY_PROPERTY_ID int32
@@ -565,6 +1530,29 @@ const (
 	WS_PROXY_FAULT_LANG_ID               WS_PROXY_PROPERTY_ID = 6
 )
 
+// String returns the WS_PROXY_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_PROXY_PROPERTY_ID) String() string {
+	switch e {
+	case WS_PROXY_PROPERTY_CALL_TIMEOUT:
+		return "WS_PROXY_PROPERTY_CALL_TIMEOUT"
+	case WS_PROXY_PROPERTY_MESSAGE_PROPERTIES:
+		return "WS_PROXY_PROPERTY_MESSAGE_PROPERTIES"
+	case WS_PROXY_PROPERTY_MAX_CALL_POOL_SIZE:
+		return "WS_PROXY_PROPERTY_MAX_CALL_POOL_SIZE"
+	case WS_PROXY_PROPERTY_STATE:
+		return "WS_PROXY_PROPERTY_STATE"
+	case WS_PROXY_PROPERTY_MAX_PENDING_CALLS:
+		return "WS_PROXY_PROPERTY_MAX_PENDING_CALLS"
+	case WS_PROXY_PROPERTY_MAX_CLOSE_TIMEOUT:
+		return "WS_PROXY_PROPERTY_MAX_CLOSE_TIMEOUT"
+	case WS_PROXY_FAULT_LANG_ID:
+		return "WS_PROXY_FAULT_LANG_ID"
+	default:
+		return fmt.Sprintf("WS_PROXY_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_READ_OPTION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_read_option
 type WS_READ_OPTION int32
 
@@ -576,6 +1564,25 @@ const (
 	WS_READ_NILLABLE_VALUE   WS_READ_OPTION = 5
 )
 
+// String returns the WS_READ_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_READ_OPTION) String() string {
+	switch e {
+	case WS_READ_REQUIRED_VALUE:
+		return "WS_READ_REQUIRED_VALUE"
+	case WS_READ_REQUIRED_POINTER:
+		return "WS_READ_REQUIRED_POINTER"
+	case WS_READ_OPTIONAL_POINTER:
+		return "WS_READ_OPTIONAL_POINTER"
+	case WS_READ_NILLABLE_POINTER:
+		return "WS_READ_NILLABLE_POINTER"
+	case WS_READ_NILLABLE_VALUE:
+		return "WS_READ_NILLABLE_VALUE"
+	default:
+		return fmt.Sprintf("WS_READ_OPTION(%d)", int32(e))
+	}
+}
+
 // WS_RECEIVE_OPTION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_receive_option
 type WS_RECEIVE_OPTION int32
 
@@ -583,6 +1590,19 @@ const (
 	WS_RECEIVE_REQUIRED_MESSAGE WS_RECEIVE_OPTION = 1
 	WS_RECEIVE_OPTIONAL_MESSAGE WS_RECEIVE_OPTION = 2
 )
+
+// String returns the WS_RECEIVE_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_RECEIVE_OPTION) String() string {
+	switch e {
+	case WS_RECEIVE_REQUIRED_MESSAGE:
+		return "WS_RECEIVE_REQUIRED_MESSAGE"
+	case WS_RECEIVE_OPTIONAL_MESSAGE:
+		return "WS_RECEIVE_OPTIONAL_MESSAGE"
+	default:
+		return fmt.Sprintf("WS_RECEIVE_OPTION(%d)", int32(e))
+	}
+}
 
 // WS_REPEATING_HEADER_OPTION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_repeating_header_option
 type WS_REPEATING_HEADER_OPTION int32
@@ -592,6 +1612,19 @@ const (
 	WS_SINGLETON_HEADER WS_REPEATING_HEADER_OPTION = 2
 )
 
+// String returns the WS_REPEATING_HEADER_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_REPEATING_HEADER_OPTION) String() string {
+	switch e {
+	case WS_REPEATING_HEADER:
+		return "WS_REPEATING_HEADER"
+	case WS_SINGLETON_HEADER:
+		return "WS_SINGLETON_HEADER"
+	default:
+		return fmt.Sprintf("WS_REPEATING_HEADER_OPTION(%d)", int32(e))
+	}
+}
+
 // WS_REQUEST_SECURITY_TOKEN_ACTION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_request_security_token_action
 type WS_REQUEST_SECURITY_TOKEN_ACTION int32
 
@@ -600,6 +1633,21 @@ const (
 	WS_REQUEST_SECURITY_TOKEN_ACTION_NEW_CONTEXT   WS_REQUEST_SECURITY_TOKEN_ACTION = 2
 	WS_REQUEST_SECURITY_TOKEN_ACTION_RENEW_CONTEXT WS_REQUEST_SECURITY_TOKEN_ACTION = 3
 )
+
+// String returns the WS_REQUEST_SECURITY_TOKEN_ACTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_REQUEST_SECURITY_TOKEN_ACTION) String() string {
+	switch e {
+	case WS_REQUEST_SECURITY_TOKEN_ACTION_ISSUE:
+		return "WS_REQUEST_SECURITY_TOKEN_ACTION_ISSUE"
+	case WS_REQUEST_SECURITY_TOKEN_ACTION_NEW_CONTEXT:
+		return "WS_REQUEST_SECURITY_TOKEN_ACTION_NEW_CONTEXT"
+	case WS_REQUEST_SECURITY_TOKEN_ACTION_RENEW_CONTEXT:
+		return "WS_REQUEST_SECURITY_TOKEN_ACTION_RENEW_CONTEXT"
+	default:
+		return fmt.Sprintf("WS_REQUEST_SECURITY_TOKEN_ACTION(%d)", int32(e))
+	}
+}
 
 // WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_request_security_token_property_id
 type WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID int32
@@ -620,12 +1668,58 @@ const (
 	WS_REQUEST_SECURITY_TOKEN_PROPERTY_BEARER_KEY_TYPE_VERSION     WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID = 13
 )
 
+// String returns the WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID) String() string {
+	switch e {
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_APPLIES_TO:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_APPLIES_TO"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_TRUST_VERSION:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_TRUST_VERSION"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_SECURE_CONVERSATION_VERSION:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_SECURE_CONVERSATION_VERSION"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_ISSUED_TOKEN_TYPE:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_ISSUED_TOKEN_TYPE"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_REQUEST_ACTION:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_REQUEST_ACTION"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_EXISTING_TOKEN:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_EXISTING_TOKEN"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_ISSUED_TOKEN_KEY_TYPE:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_ISSUED_TOKEN_KEY_TYPE"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_ISSUED_TOKEN_KEY_SIZE:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_ISSUED_TOKEN_KEY_SIZE"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_ISSUED_TOKEN_KEY_ENTROPY:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_ISSUED_TOKEN_KEY_ENTROPY"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_LOCAL_REQUEST_PARAMETERS:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_LOCAL_REQUEST_PARAMETERS"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_SERVICE_REQUEST_PARAMETERS:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_SERVICE_REQUEST_PARAMETERS"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_MESSAGE_PROPERTIES:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_MESSAGE_PROPERTIES"
+	case WS_REQUEST_SECURITY_TOKEN_PROPERTY_BEARER_KEY_TYPE_VERSION:
+		return "WS_REQUEST_SECURITY_TOKEN_PROPERTY_BEARER_KEY_TYPE_VERSION"
+	default:
+		return fmt.Sprintf("WS_REQUEST_SECURITY_TOKEN_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_SAML_AUTHENTICATOR_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_saml_authenticator_type
 type WS_SAML_AUTHENTICATOR_TYPE int32
 
 const (
 	WS_CERT_SIGNED_SAML_AUTHENTICATOR_TYPE WS_SAML_AUTHENTICATOR_TYPE = 1
 )
+
+// String returns the WS_SAML_AUTHENTICATOR_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SAML_AUTHENTICATOR_TYPE) String() string {
+	switch e {
+	case WS_CERT_SIGNED_SAML_AUTHENTICATOR_TYPE:
+		return "WS_CERT_SIGNED_SAML_AUTHENTICATOR_TYPE"
+	default:
+		return fmt.Sprintf("WS_SAML_AUTHENTICATOR_TYPE(%d)", int32(e))
+	}
+}
 
 // WS_SECURE_CONVERSATION_VERSION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_secure_conversation_version
 type WS_SECURE_CONVERSATION_VERSION int32
@@ -634,6 +1728,19 @@ const (
 	WS_SECURE_CONVERSATION_VERSION_FEBRUARY_2005 WS_SECURE_CONVERSATION_VERSION = 1
 	WS_SECURE_CONVERSATION_VERSION_1_3           WS_SECURE_CONVERSATION_VERSION = 2
 )
+
+// String returns the WS_SECURE_CONVERSATION_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURE_CONVERSATION_VERSION) String() string {
+	switch e {
+	case WS_SECURE_CONVERSATION_VERSION_FEBRUARY_2005:
+		return "WS_SECURE_CONVERSATION_VERSION_FEBRUARY_2005"
+	case WS_SECURE_CONVERSATION_VERSION_1_3:
+		return "WS_SECURE_CONVERSATION_VERSION_1_3"
+	default:
+		return fmt.Sprintf("WS_SECURE_CONVERSATION_VERSION(%d)", int32(e))
+	}
+}
 
 type WS_SECURE_PROTOCOL int32
 
@@ -644,6 +1751,25 @@ const (
 	WS_SECURE_PROTOCOL_TLS1_1 WS_SECURE_PROTOCOL = 8
 	WS_SECURE_PROTOCOL_TLS1_2 WS_SECURE_PROTOCOL = 16
 )
+
+// String returns the WS_SECURE_PROTOCOL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURE_PROTOCOL) String() string {
+	switch e {
+	case WS_SECURE_PROTOCOL_SSL2:
+		return "WS_SECURE_PROTOCOL_SSL2"
+	case WS_SECURE_PROTOCOL_SSL3:
+		return "WS_SECURE_PROTOCOL_SSL3"
+	case WS_SECURE_PROTOCOL_TLS1_0:
+		return "WS_SECURE_PROTOCOL_TLS1_0"
+	case WS_SECURE_PROTOCOL_TLS1_1:
+		return "WS_SECURE_PROTOCOL_TLS1_1"
+	case WS_SECURE_PROTOCOL_TLS1_2:
+		return "WS_SECURE_PROTOCOL_TLS1_2"
+	default:
+		return fmt.Sprintf("WS_SECURE_PROTOCOL(%d)", int32(e))
+	}
+}
 
 // WS_SECURITY_ALGORITHM_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_algorithm_id
 type WS_SECURITY_ALGORITHM_ID int32
@@ -670,6 +1796,53 @@ const (
 	WS_SECURITY_ALGORITHM_KEY_DERIVATION_P_SHA1                    WS_SECURITY_ALGORITHM_ID = 18
 )
 
+// String returns the WS_SECURITY_ALGORITHM_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_ALGORITHM_ID) String() string {
+	switch e {
+	case WS_SECURITY_ALGORITHM_DEFAULT:
+		return "WS_SECURITY_ALGORITHM_DEFAULT"
+	case WS_SECURITY_ALGORITHM_CANONICALIZATION_EXCLUSIVE:
+		return "WS_SECURITY_ALGORITHM_CANONICALIZATION_EXCLUSIVE"
+	case WS_SECURITY_ALGORITHM_CANONICALIZATION_EXCLUSIVE_WITH_COMMENTS:
+		return "WS_SECURITY_ALGORITHM_CANONICALIZATION_EXCLUSIVE_WITH_COMMENTS"
+	case WS_SECURITY_ALGORITHM_DIGEST_SHA1:
+		return "WS_SECURITY_ALGORITHM_DIGEST_SHA1"
+	case WS_SECURITY_ALGORITHM_DIGEST_SHA_256:
+		return "WS_SECURITY_ALGORITHM_DIGEST_SHA_256"
+	case WS_SECURITY_ALGORITHM_DIGEST_SHA_384:
+		return "WS_SECURITY_ALGORITHM_DIGEST_SHA_384"
+	case WS_SECURITY_ALGORITHM_DIGEST_SHA_512:
+		return "WS_SECURITY_ALGORITHM_DIGEST_SHA_512"
+	case WS_SECURITY_ALGORITHM_SYMMETRIC_SIGNATURE_HMAC_SHA1:
+		return "WS_SECURITY_ALGORITHM_SYMMETRIC_SIGNATURE_HMAC_SHA1"
+	case WS_SECURITY_ALGORITHM_SYMMETRIC_SIGNATURE_HMAC_SHA_256:
+		return "WS_SECURITY_ALGORITHM_SYMMETRIC_SIGNATURE_HMAC_SHA_256"
+	case WS_SECURITY_ALGORITHM_SYMMETRIC_SIGNATURE_HMAC_SHA_384:
+		return "WS_SECURITY_ALGORITHM_SYMMETRIC_SIGNATURE_HMAC_SHA_384"
+	case WS_SECURITY_ALGORITHM_SYMMETRIC_SIGNATURE_HMAC_SHA_512:
+		return "WS_SECURITY_ALGORITHM_SYMMETRIC_SIGNATURE_HMAC_SHA_512"
+	case WS_SECURITY_ALGORITHM_ASYMMETRIC_SIGNATURE_RSA_SHA1:
+		return "WS_SECURITY_ALGORITHM_ASYMMETRIC_SIGNATURE_RSA_SHA1"
+	case WS_SECURITY_ALGORITHM_ASYMMETRIC_SIGNATURE_DSA_SHA1:
+		return "WS_SECURITY_ALGORITHM_ASYMMETRIC_SIGNATURE_DSA_SHA1"
+	case WS_SECURITY_ALGORITHM_ASYMMETRIC_SIGNATURE_RSA_SHA_256:
+		return "WS_SECURITY_ALGORITHM_ASYMMETRIC_SIGNATURE_RSA_SHA_256"
+	case WS_SECURITY_ALGORITHM_ASYMMETRIC_SIGNATURE_RSA_SHA_384:
+		return "WS_SECURITY_ALGORITHM_ASYMMETRIC_SIGNATURE_RSA_SHA_384"
+	case WS_SECURITY_ALGORITHM_ASYMMETRIC_SIGNATURE_RSA_SHA_512:
+		return "WS_SECURITY_ALGORITHM_ASYMMETRIC_SIGNATURE_RSA_SHA_512"
+	case WS_SECURITY_ALGORITHM_ASYMMETRIC_KEYWRAP_RSA_1_5:
+		return "WS_SECURITY_ALGORITHM_ASYMMETRIC_KEYWRAP_RSA_1_5"
+	case WS_SECURITY_ALGORITHM_ASYMMETRIC_KEYWRAP_RSA_OAEP:
+		return "WS_SECURITY_ALGORITHM_ASYMMETRIC_KEYWRAP_RSA_OAEP"
+	case WS_SECURITY_ALGORITHM_KEY_DERIVATION_P_SHA1:
+		return "WS_SECURITY_ALGORITHM_KEY_DERIVATION_P_SHA1"
+	default:
+		return fmt.Sprintf("WS_SECURITY_ALGORITHM_ID(%d)", int32(e))
+	}
+}
+
 // WS_SECURITY_ALGORITHM_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_algorithm_property_id
 type WS_SECURITY_ALGORITHM_PROPERTY_ID int32
 
@@ -691,6 +1864,39 @@ const (
 	WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC128_SHA256_RSA15 WS_SECURITY_ALGORITHM_SUITE_NAME = 12
 )
 
+// String returns the WS_SECURITY_ALGORITHM_SUITE_NAME constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_ALGORITHM_SUITE_NAME) String() string {
+	switch e {
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC256:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC256"
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC192:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC192"
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC128:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC128"
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC256_RSA15:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC256_RSA15"
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC192_RSA15:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC192_RSA15"
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC128_RSA15:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC128_RSA15"
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC256_SHA256:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC256_SHA256"
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC192_SHA256:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC192_SHA256"
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC128_SHA256:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC128_SHA256"
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC256_SHA256_RSA15:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC256_SHA256_RSA15"
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC192_SHA256_RSA15:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC192_SHA256_RSA15"
+	case WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC128_SHA256_RSA15:
+		return "WS_SECURITY_ALGORITHM_SUITE_NAME_BASIC128_SHA256_RSA15"
+	default:
+		return fmt.Sprintf("WS_SECURITY_ALGORITHM_SUITE_NAME(%d)", int32(e))
+	}
+}
+
 type WS_SECURITY_BEARER_KEY_TYPE_VERSION int32
 
 const (
@@ -698,6 +1904,21 @@ const (
 	WS_SECURITY_BEARER_KEY_TYPE_VERSION_1_3_ORIGINAL_SCHEMA        WS_SECURITY_BEARER_KEY_TYPE_VERSION = 2
 	WS_SECURITY_BEARER_KEY_TYPE_VERSION_1_3_ERRATA_01              WS_SECURITY_BEARER_KEY_TYPE_VERSION = 3
 )
+
+// String returns the WS_SECURITY_BEARER_KEY_TYPE_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_BEARER_KEY_TYPE_VERSION) String() string {
+	switch e {
+	case WS_SECURITY_BEARER_KEY_TYPE_VERSION_1_3_ORIGINAL_SPECIFICATION:
+		return "WS_SECURITY_BEARER_KEY_TYPE_VERSION_1_3_ORIGINAL_SPECIFICATION"
+	case WS_SECURITY_BEARER_KEY_TYPE_VERSION_1_3_ORIGINAL_SCHEMA:
+		return "WS_SECURITY_BEARER_KEY_TYPE_VERSION_1_3_ORIGINAL_SCHEMA"
+	case WS_SECURITY_BEARER_KEY_TYPE_VERSION_1_3_ERRATA_01:
+		return "WS_SECURITY_BEARER_KEY_TYPE_VERSION_1_3_ERRATA_01"
+	default:
+		return fmt.Sprintf("WS_SECURITY_BEARER_KEY_TYPE_VERSION(%d)", int32(e))
+	}
+}
 
 // WS_SECURITY_BINDING_CONSTRAINT_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_binding_constraint_type
 type WS_SECURITY_BINDING_CONSTRAINT_TYPE int32
@@ -712,6 +1933,31 @@ const (
 	WS_CERT_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE             WS_SECURITY_BINDING_CONSTRAINT_TYPE = 7
 	WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE WS_SECURITY_BINDING_CONSTRAINT_TYPE = 8
 )
+
+// String returns the WS_SECURITY_BINDING_CONSTRAINT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_BINDING_CONSTRAINT_TYPE) String() string {
+	switch e {
+	case WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT_TYPE:
+		return "WS_SSL_TRANSPORT_SECURITY_BINDING_CONSTRAINT_TYPE"
+	case WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_CONSTRAINT_TYPE:
+		return "WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_CONSTRAINT_TYPE"
+	case WS_HTTP_HEADER_AUTH_SECURITY_BINDING_CONSTRAINT_TYPE:
+		return "WS_HTTP_HEADER_AUTH_SECURITY_BINDING_CONSTRAINT_TYPE"
+	case WS_USERNAME_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE:
+		return "WS_USERNAME_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE"
+	case WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE:
+		return "WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE"
+	case WS_ISSUED_TOKEN_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE:
+		return "WS_ISSUED_TOKEN_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE"
+	case WS_CERT_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE:
+		return "WS_CERT_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE"
+	case WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE:
+		return "WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_CONSTRAINT_TYPE"
+	default:
+		return fmt.Sprintf("WS_SECURITY_BINDING_CONSTRAINT_TYPE(%d)", int32(e))
+	}
+}
 
 // WS_SECURITY_BINDING_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_binding_property_id
 type WS_SECURITY_BINDING_PROPERTY_ID int32
@@ -742,6 +1988,61 @@ const (
 	WS_SECURITY_BINDING_PROPERTY_CERTIFICATE_VALIDATION_CALLBACK_CONTEXT WS_SECURITY_BINDING_PROPERTY_ID = 23
 )
 
+// String returns the WS_SECURITY_BINDING_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_BINDING_PROPERTY_ID) String() string {
+	switch e {
+	case WS_SECURITY_BINDING_PROPERTY_REQUIRE_SSL_CLIENT_CERT:
+		return "WS_SECURITY_BINDING_PROPERTY_REQUIRE_SSL_CLIENT_CERT"
+	case WS_SECURITY_BINDING_PROPERTY_WINDOWS_INTEGRATED_AUTH_PACKAGE:
+		return "WS_SECURITY_BINDING_PROPERTY_WINDOWS_INTEGRATED_AUTH_PACKAGE"
+	case WS_SECURITY_BINDING_PROPERTY_REQUIRE_SERVER_AUTH:
+		return "WS_SECURITY_BINDING_PROPERTY_REQUIRE_SERVER_AUTH"
+	case WS_SECURITY_BINDING_PROPERTY_ALLOW_ANONYMOUS_CLIENTS:
+		return "WS_SECURITY_BINDING_PROPERTY_ALLOW_ANONYMOUS_CLIENTS"
+	case WS_SECURITY_BINDING_PROPERTY_ALLOWED_IMPERSONATION_LEVEL:
+		return "WS_SECURITY_BINDING_PROPERTY_ALLOWED_IMPERSONATION_LEVEL"
+	case WS_SECURITY_BINDING_PROPERTY_HTTP_HEADER_AUTH_SCHEME:
+		return "WS_SECURITY_BINDING_PROPERTY_HTTP_HEADER_AUTH_SCHEME"
+	case WS_SECURITY_BINDING_PROPERTY_HTTP_HEADER_AUTH_TARGET:
+		return "WS_SECURITY_BINDING_PROPERTY_HTTP_HEADER_AUTH_TARGET"
+	case WS_SECURITY_BINDING_PROPERTY_HTTP_HEADER_AUTH_BASIC_REALM:
+		return "WS_SECURITY_BINDING_PROPERTY_HTTP_HEADER_AUTH_BASIC_REALM"
+	case WS_SECURITY_BINDING_PROPERTY_HTTP_HEADER_AUTH_DIGEST_REALM:
+		return "WS_SECURITY_BINDING_PROPERTY_HTTP_HEADER_AUTH_DIGEST_REALM"
+	case WS_SECURITY_BINDING_PROPERTY_HTTP_HEADER_AUTH_DIGEST_DOMAIN:
+		return "WS_SECURITY_BINDING_PROPERTY_HTTP_HEADER_AUTH_DIGEST_DOMAIN"
+	case WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_KEY_SIZE:
+		return "WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_KEY_SIZE"
+	case WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_KEY_ENTROPY_MODE:
+		return "WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_KEY_ENTROPY_MODE"
+	case WS_SECURITY_BINDING_PROPERTY_MESSAGE_PROPERTIES:
+		return "WS_SECURITY_BINDING_PROPERTY_MESSAGE_PROPERTIES"
+	case WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_MAX_PENDING_CONTEXTS:
+		return "WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_MAX_PENDING_CONTEXTS"
+	case WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_MAX_ACTIVE_CONTEXTS:
+		return "WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_MAX_ACTIVE_CONTEXTS"
+	case WS_SECURITY_BINDING_PROPERTY_SECURE_CONVERSATION_VERSION:
+		return "WS_SECURITY_BINDING_PROPERTY_SECURE_CONVERSATION_VERSION"
+	case WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_SUPPORT_RENEW:
+		return "WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_SUPPORT_RENEW"
+	case WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_RENEWAL_INTERVAL:
+		return "WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_RENEWAL_INTERVAL"
+	case WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_ROLLOVER_INTERVAL:
+		return "WS_SECURITY_BINDING_PROPERTY_SECURITY_CONTEXT_ROLLOVER_INTERVAL"
+	case WS_SECURITY_BINDING_PROPERTY_CERT_FAILURES_TO_IGNORE:
+		return "WS_SECURITY_BINDING_PROPERTY_CERT_FAILURES_TO_IGNORE"
+	case WS_SECURITY_BINDING_PROPERTY_DISABLE_CERT_REVOCATION_CHECK:
+		return "WS_SECURITY_BINDING_PROPERTY_DISABLE_CERT_REVOCATION_CHECK"
+	case WS_SECURITY_BINDING_PROPERTY_DISALLOWED_SECURE_PROTOCOLS:
+		return "WS_SECURITY_BINDING_PROPERTY_DISALLOWED_SECURE_PROTOCOLS"
+	case WS_SECURITY_BINDING_PROPERTY_CERTIFICATE_VALIDATION_CALLBACK_CONTEXT:
+		return "WS_SECURITY_BINDING_PROPERTY_CERTIFICATE_VALIDATION_CALLBACK_CONTEXT"
+	default:
+		return fmt.Sprintf("WS_SECURITY_BINDING_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_SECURITY_BINDING_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_binding_type
 type WS_SECURITY_BINDING_TYPE int32
 
@@ -757,6 +2058,33 @@ const (
 	WS_NAMEDPIPE_SSPI_TRANSPORT_SECURITY_BINDING_TYPE WS_SECURITY_BINDING_TYPE = 9
 )
 
+// String returns the WS_SECURITY_BINDING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_BINDING_TYPE) String() string {
+	switch e {
+	case WS_SSL_TRANSPORT_SECURITY_BINDING_TYPE:
+		return "WS_SSL_TRANSPORT_SECURITY_BINDING_TYPE"
+	case WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TYPE:
+		return "WS_TCP_SSPI_TRANSPORT_SECURITY_BINDING_TYPE"
+	case WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TYPE:
+		return "WS_HTTP_HEADER_AUTH_SECURITY_BINDING_TYPE"
+	case WS_USERNAME_MESSAGE_SECURITY_BINDING_TYPE:
+		return "WS_USERNAME_MESSAGE_SECURITY_BINDING_TYPE"
+	case WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TYPE:
+		return "WS_KERBEROS_APREQ_MESSAGE_SECURITY_BINDING_TYPE"
+	case WS_XML_TOKEN_MESSAGE_SECURITY_BINDING_TYPE:
+		return "WS_XML_TOKEN_MESSAGE_SECURITY_BINDING_TYPE"
+	case WS_SAML_MESSAGE_SECURITY_BINDING_TYPE:
+		return "WS_SAML_MESSAGE_SECURITY_BINDING_TYPE"
+	case WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_TYPE:
+		return "WS_SECURITY_CONTEXT_MESSAGE_SECURITY_BINDING_TYPE"
+	case WS_NAMEDPIPE_SSPI_TRANSPORT_SECURITY_BINDING_TYPE:
+		return "WS_NAMEDPIPE_SSPI_TRANSPORT_SECURITY_BINDING_TYPE"
+	default:
+		return fmt.Sprintf("WS_SECURITY_BINDING_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_SECURITY_CONTEXT_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_context_property_id
 type WS_SECURITY_CONTEXT_PROPERTY_ID int32
 
@@ -766,6 +2094,23 @@ const (
 	WS_SECURITY_CONTEXT_PROPERTY_MESSAGE_SECURITY_WINDOWS_TOKEN WS_SECURITY_CONTEXT_PROPERTY_ID = 3
 	WS_SECURITY_CONTEXT_PROPERTY_SAML_ASSERTION                 WS_SECURITY_CONTEXT_PROPERTY_ID = 4
 )
+
+// String returns the WS_SECURITY_CONTEXT_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_CONTEXT_PROPERTY_ID) String() string {
+	switch e {
+	case WS_SECURITY_CONTEXT_PROPERTY_IDENTIFIER:
+		return "WS_SECURITY_CONTEXT_PROPERTY_IDENTIFIER"
+	case WS_SECURITY_CONTEXT_PROPERTY_USERNAME:
+		return "WS_SECURITY_CONTEXT_PROPERTY_USERNAME"
+	case WS_SECURITY_CONTEXT_PROPERTY_MESSAGE_SECURITY_WINDOWS_TOKEN:
+		return "WS_SECURITY_CONTEXT_PROPERTY_MESSAGE_SECURITY_WINDOWS_TOKEN"
+	case WS_SECURITY_CONTEXT_PROPERTY_SAML_ASSERTION:
+		return "WS_SECURITY_CONTEXT_PROPERTY_SAML_ASSERTION"
+	default:
+		return fmt.Sprintf("WS_SECURITY_CONTEXT_PROPERTY_ID(%d)", int32(e))
+	}
+}
 
 // WS_SECURITY_HEADER_LAYOUT: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_header_layout
 type WS_SECURITY_HEADER_LAYOUT int32
@@ -777,6 +2122,23 @@ const (
 	WS_SECURITY_HEADER_LAYOUT_LAX_WITH_TIMESTAMP_LAST  WS_SECURITY_HEADER_LAYOUT = 4
 )
 
+// String returns the WS_SECURITY_HEADER_LAYOUT constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_HEADER_LAYOUT) String() string {
+	switch e {
+	case WS_SECURITY_HEADER_LAYOUT_STRICT:
+		return "WS_SECURITY_HEADER_LAYOUT_STRICT"
+	case WS_SECURITY_HEADER_LAYOUT_LAX:
+		return "WS_SECURITY_HEADER_LAYOUT_LAX"
+	case WS_SECURITY_HEADER_LAYOUT_LAX_WITH_TIMESTAMP_FIRST:
+		return "WS_SECURITY_HEADER_LAYOUT_LAX_WITH_TIMESTAMP_FIRST"
+	case WS_SECURITY_HEADER_LAYOUT_LAX_WITH_TIMESTAMP_LAST:
+		return "WS_SECURITY_HEADER_LAYOUT_LAX_WITH_TIMESTAMP_LAST"
+	default:
+		return fmt.Sprintf("WS_SECURITY_HEADER_LAYOUT(%d)", int32(e))
+	}
+}
+
 // WS_SECURITY_HEADER_VERSION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_header_version
 type WS_SECURITY_HEADER_VERSION int32
 
@@ -784,6 +2146,19 @@ const (
 	WS_SECURITY_HEADER_VERSION_1_0 WS_SECURITY_HEADER_VERSION = 1
 	WS_SECURITY_HEADER_VERSION_1_1 WS_SECURITY_HEADER_VERSION = 2
 )
+
+// String returns the WS_SECURITY_HEADER_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_HEADER_VERSION) String() string {
+	switch e {
+	case WS_SECURITY_HEADER_VERSION_1_0:
+		return "WS_SECURITY_HEADER_VERSION_1_0"
+	case WS_SECURITY_HEADER_VERSION_1_1:
+		return "WS_SECURITY_HEADER_VERSION_1_1"
+	default:
+		return fmt.Sprintf("WS_SECURITY_HEADER_VERSION(%d)", int32(e))
+	}
+}
 
 // WS_SECURITY_KEY_ENTROPY_MODE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_key_entropy_mode
 type WS_SECURITY_KEY_ENTROPY_MODE int32
@@ -794,6 +2169,21 @@ const (
 	WS_SECURITY_KEY_ENTROPY_MODE_COMBINED    WS_SECURITY_KEY_ENTROPY_MODE = 3
 )
 
+// String returns the WS_SECURITY_KEY_ENTROPY_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_KEY_ENTROPY_MODE) String() string {
+	switch e {
+	case WS_SECURITY_KEY_ENTROPY_MODE_CLIENT_ONLY:
+		return "WS_SECURITY_KEY_ENTROPY_MODE_CLIENT_ONLY"
+	case WS_SECURITY_KEY_ENTROPY_MODE_SERVER_ONLY:
+		return "WS_SECURITY_KEY_ENTROPY_MODE_SERVER_ONLY"
+	case WS_SECURITY_KEY_ENTROPY_MODE_COMBINED:
+		return "WS_SECURITY_KEY_ENTROPY_MODE_COMBINED"
+	default:
+		return fmt.Sprintf("WS_SECURITY_KEY_ENTROPY_MODE(%d)", int32(e))
+	}
+}
+
 // WS_SECURITY_KEY_HANDLE_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_key_handle_type
 type WS_SECURITY_KEY_HANDLE_TYPE int32
 
@@ -803,6 +2193,21 @@ const (
 	WS_CAPI_ASYMMETRIC_SECURITY_KEY_HANDLE_TYPE   WS_SECURITY_KEY_HANDLE_TYPE = 3
 )
 
+// String returns the WS_SECURITY_KEY_HANDLE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_KEY_HANDLE_TYPE) String() string {
+	switch e {
+	case WS_RAW_SYMMETRIC_SECURITY_KEY_HANDLE_TYPE:
+		return "WS_RAW_SYMMETRIC_SECURITY_KEY_HANDLE_TYPE"
+	case WS_NCRYPT_ASYMMETRIC_SECURITY_KEY_HANDLE_TYPE:
+		return "WS_NCRYPT_ASYMMETRIC_SECURITY_KEY_HANDLE_TYPE"
+	case WS_CAPI_ASYMMETRIC_SECURITY_KEY_HANDLE_TYPE:
+		return "WS_CAPI_ASYMMETRIC_SECURITY_KEY_HANDLE_TYPE"
+	default:
+		return fmt.Sprintf("WS_SECURITY_KEY_HANDLE_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_SECURITY_KEY_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_key_type
 type WS_SECURITY_KEY_TYPE int32
 
@@ -811,6 +2216,21 @@ const (
 	WS_SECURITY_KEY_TYPE_SYMMETRIC  WS_SECURITY_KEY_TYPE = 2
 	WS_SECURITY_KEY_TYPE_ASYMMETRIC WS_SECURITY_KEY_TYPE = 3
 )
+
+// String returns the WS_SECURITY_KEY_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_KEY_TYPE) String() string {
+	switch e {
+	case WS_SECURITY_KEY_TYPE_NONE:
+		return "WS_SECURITY_KEY_TYPE_NONE"
+	case WS_SECURITY_KEY_TYPE_SYMMETRIC:
+		return "WS_SECURITY_KEY_TYPE_SYMMETRIC"
+	case WS_SECURITY_KEY_TYPE_ASYMMETRIC:
+		return "WS_SECURITY_KEY_TYPE_ASYMMETRIC"
+	default:
+		return fmt.Sprintf("WS_SECURITY_KEY_TYPE(%d)", int32(e))
+	}
+}
 
 // WS_SECURITY_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_property_id
 type WS_SECURITY_PROPERTY_ID int32
@@ -830,6 +2250,39 @@ const (
 	WS_SECURITY_PROPERTY_SERVICE_IDENTITIES           WS_SECURITY_PROPERTY_ID = 12
 )
 
+// String returns the WS_SECURITY_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_PROPERTY_ID) String() string {
+	switch e {
+	case WS_SECURITY_PROPERTY_TRANSPORT_PROTECTION_LEVEL:
+		return "WS_SECURITY_PROPERTY_TRANSPORT_PROTECTION_LEVEL"
+	case WS_SECURITY_PROPERTY_ALGORITHM_SUITE:
+		return "WS_SECURITY_PROPERTY_ALGORITHM_SUITE"
+	case WS_SECURITY_PROPERTY_ALGORITHM_SUITE_NAME:
+		return "WS_SECURITY_PROPERTY_ALGORITHM_SUITE_NAME"
+	case WS_SECURITY_PROPERTY_MAX_ALLOWED_LATENCY:
+		return "WS_SECURITY_PROPERTY_MAX_ALLOWED_LATENCY"
+	case WS_SECURITY_PROPERTY_TIMESTAMP_VALIDITY_DURATION:
+		return "WS_SECURITY_PROPERTY_TIMESTAMP_VALIDITY_DURATION"
+	case WS_SECURITY_PROPERTY_MAX_ALLOWED_CLOCK_SKEW:
+		return "WS_SECURITY_PROPERTY_MAX_ALLOWED_CLOCK_SKEW"
+	case WS_SECURITY_PROPERTY_TIMESTAMP_USAGE:
+		return "WS_SECURITY_PROPERTY_TIMESTAMP_USAGE"
+	case WS_SECURITY_PROPERTY_SECURITY_HEADER_LAYOUT:
+		return "WS_SECURITY_PROPERTY_SECURITY_HEADER_LAYOUT"
+	case WS_SECURITY_PROPERTY_SECURITY_HEADER_VERSION:
+		return "WS_SECURITY_PROPERTY_SECURITY_HEADER_VERSION"
+	case WS_SECURITY_PROPERTY_EXTENDED_PROTECTION_POLICY:
+		return "WS_SECURITY_PROPERTY_EXTENDED_PROTECTION_POLICY"
+	case WS_SECURITY_PROPERTY_EXTENDED_PROTECTION_SCENARIO:
+		return "WS_SECURITY_PROPERTY_EXTENDED_PROTECTION_SCENARIO"
+	case WS_SECURITY_PROPERTY_SERVICE_IDENTITIES:
+		return "WS_SECURITY_PROPERTY_SERVICE_IDENTITIES"
+	default:
+		return fmt.Sprintf("WS_SECURITY_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_SECURITY_TIMESTAMP_USAGE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_timestamp_usage
 type WS_SECURITY_TIMESTAMP_USAGE int32
 
@@ -838,6 +2291,21 @@ const (
 	WS_SECURITY_TIMESTAMP_USAGE_NEVER         WS_SECURITY_TIMESTAMP_USAGE = 2
 	WS_SECURITY_TIMESTAMP_USAGE_REQUESTS_ONLY WS_SECURITY_TIMESTAMP_USAGE = 3
 )
+
+// String returns the WS_SECURITY_TIMESTAMP_USAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_TIMESTAMP_USAGE) String() string {
+	switch e {
+	case WS_SECURITY_TIMESTAMP_USAGE_ALWAYS:
+		return "WS_SECURITY_TIMESTAMP_USAGE_ALWAYS"
+	case WS_SECURITY_TIMESTAMP_USAGE_NEVER:
+		return "WS_SECURITY_TIMESTAMP_USAGE_NEVER"
+	case WS_SECURITY_TIMESTAMP_USAGE_REQUESTS_ONLY:
+		return "WS_SECURITY_TIMESTAMP_USAGE_REQUESTS_ONLY"
+	default:
+		return fmt.Sprintf("WS_SECURITY_TIMESTAMP_USAGE(%d)", int32(e))
+	}
+}
 
 // WS_SECURITY_TOKEN_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_token_property_id
 type WS_SECURITY_TOKEN_PROPERTY_ID int32
@@ -852,6 +2320,29 @@ const (
 	WS_SECURITY_TOKEN_PROPERTY_SYMMETRIC_KEY            WS_SECURITY_TOKEN_PROPERTY_ID = 7
 )
 
+// String returns the WS_SECURITY_TOKEN_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_TOKEN_PROPERTY_ID) String() string {
+	switch e {
+	case WS_SECURITY_TOKEN_PROPERTY_KEY_TYPE:
+		return "WS_SECURITY_TOKEN_PROPERTY_KEY_TYPE"
+	case WS_SECURITY_TOKEN_PROPERTY_VALID_FROM_TIME:
+		return "WS_SECURITY_TOKEN_PROPERTY_VALID_FROM_TIME"
+	case WS_SECURITY_TOKEN_PROPERTY_VALID_TILL_TIME:
+		return "WS_SECURITY_TOKEN_PROPERTY_VALID_TILL_TIME"
+	case WS_SECURITY_TOKEN_PROPERTY_SERIALIZED_XML:
+		return "WS_SECURITY_TOKEN_PROPERTY_SERIALIZED_XML"
+	case WS_SECURITY_TOKEN_PROPERTY_ATTACHED_REFERENCE_XML:
+		return "WS_SECURITY_TOKEN_PROPERTY_ATTACHED_REFERENCE_XML"
+	case WS_SECURITY_TOKEN_PROPERTY_UNATTACHED_REFERENCE_XML:
+		return "WS_SECURITY_TOKEN_PROPERTY_UNATTACHED_REFERENCE_XML"
+	case WS_SECURITY_TOKEN_PROPERTY_SYMMETRIC_KEY:
+		return "WS_SECURITY_TOKEN_PROPERTY_SYMMETRIC_KEY"
+	default:
+		return fmt.Sprintf("WS_SECURITY_TOKEN_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_SECURITY_TOKEN_REFERENCE_MODE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_security_token_reference_mode
 type WS_SECURITY_TOKEN_REFERENCE_MODE int32
 
@@ -863,6 +2354,25 @@ const (
 	WS_SECURITY_TOKEN_REFERENCE_MODE_SAML_ASSERTION_ID   WS_SECURITY_TOKEN_REFERENCE_MODE = 5
 )
 
+// String returns the WS_SECURITY_TOKEN_REFERENCE_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SECURITY_TOKEN_REFERENCE_MODE) String() string {
+	switch e {
+	case WS_SECURITY_TOKEN_REFERENCE_MODE_LOCAL_ID:
+		return "WS_SECURITY_TOKEN_REFERENCE_MODE_LOCAL_ID"
+	case WS_SECURITY_TOKEN_REFERENCE_MODE_XML_BUFFER:
+		return "WS_SECURITY_TOKEN_REFERENCE_MODE_XML_BUFFER"
+	case WS_SECURITY_TOKEN_REFERENCE_MODE_CERT_THUMBPRINT:
+		return "WS_SECURITY_TOKEN_REFERENCE_MODE_CERT_THUMBPRINT"
+	case WS_SECURITY_TOKEN_REFERENCE_MODE_SECURITY_CONTEXT_ID:
+		return "WS_SECURITY_TOKEN_REFERENCE_MODE_SECURITY_CONTEXT_ID"
+	case WS_SECURITY_TOKEN_REFERENCE_MODE_SAML_ASSERTION_ID:
+		return "WS_SECURITY_TOKEN_REFERENCE_MODE_SAML_ASSERTION_ID"
+	default:
+		return fmt.Sprintf("WS_SECURITY_TOKEN_REFERENCE_MODE(%d)", int32(e))
+	}
+}
+
 // WS_SERVICE_CANCEL_REASON: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_service_cancel_reason
 type WS_SERVICE_CANCEL_REASON int32
 
@@ -870,6 +2380,19 @@ const (
 	WS_SERVICE_HOST_ABORT      WS_SERVICE_CANCEL_REASON = 0
 	WS_SERVICE_CHANNEL_FAULTED WS_SERVICE_CANCEL_REASON = 1
 )
+
+// String returns the WS_SERVICE_CANCEL_REASON constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SERVICE_CANCEL_REASON) String() string {
+	switch e {
+	case WS_SERVICE_HOST_ABORT:
+		return "WS_SERVICE_HOST_ABORT"
+	case WS_SERVICE_CHANNEL_FAULTED:
+		return "WS_SERVICE_CHANNEL_FAULTED"
+	default:
+		return fmt.Sprintf("WS_SERVICE_CANCEL_REASON(%d)", int32(e))
+	}
+}
 
 // WS_SERVICE_ENDPOINT_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_service_endpoint_property_id
 type WS_SERVICE_ENDPOINT_PROPERTY_ID int32
@@ -893,6 +2416,47 @@ const (
 	WS_SERVICE_ENDPOINT_PROPERTY_MAX_CHANNELS_PER_IP          WS_SERVICE_ENDPOINT_PROPERTY_ID = 15
 )
 
+// String returns the WS_SERVICE_ENDPOINT_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SERVICE_ENDPOINT_PROPERTY_ID) String() string {
+	switch e {
+	case WS_SERVICE_ENDPOINT_PROPERTY_ACCEPT_CHANNEL_CALLBACK:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_ACCEPT_CHANNEL_CALLBACK"
+	case WS_SERVICE_ENDPOINT_PROPERTY_CLOSE_CHANNEL_CALLBACK:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_CLOSE_CHANNEL_CALLBACK"
+	case WS_SERVICE_ENDPOINT_PROPERTY_MAX_ACCEPTING_CHANNELS:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_MAX_ACCEPTING_CHANNELS"
+	case WS_SERVICE_ENDPOINT_PROPERTY_MAX_CONCURRENCY:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_MAX_CONCURRENCY"
+	case WS_SERVICE_ENDPOINT_PROPERTY_BODY_HEAP_MAX_SIZE:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_BODY_HEAP_MAX_SIZE"
+	case WS_SERVICE_ENDPOINT_PROPERTY_BODY_HEAP_TRIM_SIZE:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_BODY_HEAP_TRIM_SIZE"
+	case WS_SERVICE_ENDPOINT_PROPERTY_MESSAGE_PROPERTIES:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_MESSAGE_PROPERTIES"
+	case WS_SERVICE_ENDPOINT_PROPERTY_MAX_CALL_POOL_SIZE:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_MAX_CALL_POOL_SIZE"
+	case WS_SERVICE_ENDPOINT_PROPERTY_MAX_CHANNEL_POOL_SIZE:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_MAX_CHANNEL_POOL_SIZE"
+	case WS_SERVICE_ENDPOINT_PROPERTY_LISTENER_PROPERTIES:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_LISTENER_PROPERTIES"
+	case WS_SERVICE_ENDPOINT_PROPERTY_CHECK_MUST_UNDERSTAND:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_CHECK_MUST_UNDERSTAND"
+	case WS_SERVICE_ENDPOINT_PROPERTY_METADATA_EXCHANGE_TYPE:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_METADATA_EXCHANGE_TYPE"
+	case WS_SERVICE_ENDPOINT_PROPERTY_METADATA:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_METADATA"
+	case WS_SERVICE_ENDPOINT_PROPERTY_METADATA_EXCHANGE_URL_SUFFIX:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_METADATA_EXCHANGE_URL_SUFFIX"
+	case WS_SERVICE_ENDPOINT_PROPERTY_MAX_CHANNELS:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_MAX_CHANNELS"
+	case WS_SERVICE_ENDPOINT_PROPERTY_MAX_CHANNELS_PER_IP:
+		return "WS_SERVICE_ENDPOINT_PROPERTY_MAX_CHANNELS_PER_IP"
+	default:
+		return fmt.Sprintf("WS_SERVICE_ENDPOINT_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_SERVICE_HOST_STATE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_service_host_state
 type WS_SERVICE_HOST_STATE int32
 
@@ -904,6 +2468,27 @@ const (
 	WS_SERVICE_HOST_STATE_CLOSED  WS_SERVICE_HOST_STATE = 4
 	WS_SERVICE_HOST_STATE_FAULTED WS_SERVICE_HOST_STATE = 5
 )
+
+// String returns the WS_SERVICE_HOST_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SERVICE_HOST_STATE) String() string {
+	switch e {
+	case WS_SERVICE_HOST_STATE_CREATED:
+		return "WS_SERVICE_HOST_STATE_CREATED"
+	case WS_SERVICE_HOST_STATE_OPENING:
+		return "WS_SERVICE_HOST_STATE_OPENING"
+	case WS_SERVICE_HOST_STATE_OPEN:
+		return "WS_SERVICE_HOST_STATE_OPEN"
+	case WS_SERVICE_HOST_STATE_CLOSING:
+		return "WS_SERVICE_HOST_STATE_CLOSING"
+	case WS_SERVICE_HOST_STATE_CLOSED:
+		return "WS_SERVICE_HOST_STATE_CLOSED"
+	case WS_SERVICE_HOST_STATE_FAULTED:
+		return "WS_SERVICE_HOST_STATE_FAULTED"
+	default:
+		return fmt.Sprintf("WS_SERVICE_HOST_STATE(%d)", int32(e))
+	}
+}
 
 // WS_SERVICE_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_service_property_id
 type WS_SERVICE_PROPERTY_ID int32
@@ -917,6 +2502,27 @@ const (
 	WS_SERVICE_PROPERTY_CLOSE_TIMEOUT    WS_SERVICE_PROPERTY_ID = 5
 )
 
+// String returns the WS_SERVICE_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SERVICE_PROPERTY_ID) String() string {
+	switch e {
+	case WS_SERVICE_PROPERTY_HOST_USER_STATE:
+		return "WS_SERVICE_PROPERTY_HOST_USER_STATE"
+	case WS_SERVICE_PROPERTY_FAULT_DISCLOSURE:
+		return "WS_SERVICE_PROPERTY_FAULT_DISCLOSURE"
+	case WS_SERVICE_PROPERTY_FAULT_LANGID:
+		return "WS_SERVICE_PROPERTY_FAULT_LANGID"
+	case WS_SERVICE_PROPERTY_HOST_STATE:
+		return "WS_SERVICE_PROPERTY_HOST_STATE"
+	case WS_SERVICE_PROPERTY_METADATA:
+		return "WS_SERVICE_PROPERTY_METADATA"
+	case WS_SERVICE_PROPERTY_CLOSE_TIMEOUT:
+		return "WS_SERVICE_PROPERTY_CLOSE_TIMEOUT"
+	default:
+		return fmt.Sprintf("WS_SERVICE_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_SERVICE_PROXY_STATE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_service_proxy_state
 type WS_SERVICE_PROXY_STATE int32
 
@@ -928,6 +2534,27 @@ const (
 	WS_SERVICE_PROXY_STATE_CLOSED  WS_SERVICE_PROXY_STATE = 4
 	WS_SERVICE_PROXY_STATE_FAULTED WS_SERVICE_PROXY_STATE = 5
 )
+
+// String returns the WS_SERVICE_PROXY_STATE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_SERVICE_PROXY_STATE) String() string {
+	switch e {
+	case WS_SERVICE_PROXY_STATE_CREATED:
+		return "WS_SERVICE_PROXY_STATE_CREATED"
+	case WS_SERVICE_PROXY_STATE_OPENING:
+		return "WS_SERVICE_PROXY_STATE_OPENING"
+	case WS_SERVICE_PROXY_STATE_OPEN:
+		return "WS_SERVICE_PROXY_STATE_OPEN"
+	case WS_SERVICE_PROXY_STATE_CLOSING:
+		return "WS_SERVICE_PROXY_STATE_CLOSING"
+	case WS_SERVICE_PROXY_STATE_CLOSED:
+		return "WS_SERVICE_PROXY_STATE_CLOSED"
+	case WS_SERVICE_PROXY_STATE_FAULTED:
+		return "WS_SERVICE_PROXY_STATE_FAULTED"
+	default:
+		return fmt.Sprintf("WS_SERVICE_PROXY_STATE(%d)", int32(e))
+	}
+}
 
 // WS_TRACE_API: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_trace_api
 type WS_TRACE_API int32
@@ -1131,6 +2758,407 @@ const (
 	WS_TRACE_API_WS_CREATE_SERVICE_HOST_FROM_TEMPLATE  WS_TRACE_API = 194
 )
 
+// String returns the WS_TRACE_API constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_TRACE_API) String() string {
+	switch e {
+	case WS_TRACE_API_NONE:
+		return "WS_TRACE_API_NONE"
+	case WS_TRACE_API_START_READER_CANONICALIZATION:
+		return "WS_TRACE_API_START_READER_CANONICALIZATION"
+	case WS_TRACE_API_END_READER_CANONICALIZATION:
+		return "WS_TRACE_API_END_READER_CANONICALIZATION"
+	case WS_TRACE_API_START_WRITER_CANONICALIZATION:
+		return "WS_TRACE_API_START_WRITER_CANONICALIZATION"
+	case WS_TRACE_API_END_WRITER_CANONICALIZATION:
+		return "WS_TRACE_API_END_WRITER_CANONICALIZATION"
+	case WS_TRACE_API_CREATE_XML_BUFFER:
+		return "WS_TRACE_API_CREATE_XML_BUFFER"
+	case WS_TRACE_API_REMOVE_NODE:
+		return "WS_TRACE_API_REMOVE_NODE"
+	case WS_TRACE_API_CREATE_READER:
+		return "WS_TRACE_API_CREATE_READER"
+	case WS_TRACE_API_SET_INPUT:
+		return "WS_TRACE_API_SET_INPUT"
+	case WS_TRACE_API_SET_INPUT_TO_BUFFER:
+		return "WS_TRACE_API_SET_INPUT_TO_BUFFER"
+	case WS_TRACE_API_FREE_XML_READER:
+		return "WS_TRACE_API_FREE_XML_READER"
+	case WS_TRACE_API_GET_READER_PROPERTY:
+		return "WS_TRACE_API_GET_READER_PROPERTY"
+	case WS_TRACE_API_GET_READER_NODE:
+		return "WS_TRACE_API_GET_READER_NODE"
+	case WS_TRACE_API_FILL_READER:
+		return "WS_TRACE_API_FILL_READER"
+	case WS_TRACE_API_READ_START_ELEMENT:
+		return "WS_TRACE_API_READ_START_ELEMENT"
+	case WS_TRACE_API_READ_TO_START_ELEMENT:
+		return "WS_TRACE_API_READ_TO_START_ELEMENT"
+	case WS_TRACE_API_READ_START_ATTRIBUTE:
+		return "WS_TRACE_API_READ_START_ATTRIBUTE"
+	case WS_TRACE_API_READ_END_ATTRIBUTE:
+		return "WS_TRACE_API_READ_END_ATTRIBUTE"
+	case WS_TRACE_API_READ_NODE:
+		return "WS_TRACE_API_READ_NODE"
+	case WS_TRACE_API_SKIP_NODE:
+		return "WS_TRACE_API_SKIP_NODE"
+	case WS_TRACE_API_READ_END_ELEMENT:
+		return "WS_TRACE_API_READ_END_ELEMENT"
+	case WS_TRACE_API_FIND_ATTRIBUTE:
+		return "WS_TRACE_API_FIND_ATTRIBUTE"
+	case WS_TRACE_API_READ_ELEMENT_VALUE:
+		return "WS_TRACE_API_READ_ELEMENT_VALUE"
+	case WS_TRACE_API_READ_CHARS:
+		return "WS_TRACE_API_READ_CHARS"
+	case WS_TRACE_API_READ_CHARS_UTF8:
+		return "WS_TRACE_API_READ_CHARS_UTF8"
+	case WS_TRACE_API_READ_BYTES:
+		return "WS_TRACE_API_READ_BYTES"
+	case WS_TRACE_API_READ_ARRAY:
+		return "WS_TRACE_API_READ_ARRAY"
+	case WS_TRACE_API_GET_READER_POSITION:
+		return "WS_TRACE_API_GET_READER_POSITION"
+	case WS_TRACE_API_SET_READER_POSITION:
+		return "WS_TRACE_API_SET_READER_POSITION"
+	case WS_TRACE_API_MOVE_READER:
+		return "WS_TRACE_API_MOVE_READER"
+	case WS_TRACE_API_CREATE_WRITER:
+		return "WS_TRACE_API_CREATE_WRITER"
+	case WS_TRACE_API_FREE_XML_WRITER:
+		return "WS_TRACE_API_FREE_XML_WRITER"
+	case WS_TRACE_API_SET_OUTPUT:
+		return "WS_TRACE_API_SET_OUTPUT"
+	case WS_TRACE_API_SET_OUTPUT_TO_BUFFER:
+		return "WS_TRACE_API_SET_OUTPUT_TO_BUFFER"
+	case WS_TRACE_API_GET_WRITER_PROPERTY:
+		return "WS_TRACE_API_GET_WRITER_PROPERTY"
+	case WS_TRACE_API_FLUSH_WRITER:
+		return "WS_TRACE_API_FLUSH_WRITER"
+	case WS_TRACE_API_WRITE_START_ELEMENT:
+		return "WS_TRACE_API_WRITE_START_ELEMENT"
+	case WS_TRACE_API_WRITE_END_START_ELEMENT:
+		return "WS_TRACE_API_WRITE_END_START_ELEMENT"
+	case WS_TRACE_API_WRITE_XMLNS_ATTRIBUTE:
+		return "WS_TRACE_API_WRITE_XMLNS_ATTRIBUTE"
+	case WS_TRACE_API_WRITE_START_ATTRIBUTE:
+		return "WS_TRACE_API_WRITE_START_ATTRIBUTE"
+	case WS_TRACE_API_WRITE_END_ATTRIBUTE:
+		return "WS_TRACE_API_WRITE_END_ATTRIBUTE"
+	case WS_TRACE_API_WRITE_VALUE:
+		return "WS_TRACE_API_WRITE_VALUE"
+	case WS_TRACE_API_WRITE_XML_BUFFER:
+		return "WS_TRACE_API_WRITE_XML_BUFFER"
+	case WS_TRACE_API_READ_XML_BUFFER:
+		return "WS_TRACE_API_READ_XML_BUFFER"
+	case WS_TRACE_API_WRITE_XML_BUFFER_TO_BYTES:
+		return "WS_TRACE_API_WRITE_XML_BUFFER_TO_BYTES"
+	case WS_TRACE_API_READ_XML_BUFFER_FROM_BYTES:
+		return "WS_TRACE_API_READ_XML_BUFFER_FROM_BYTES"
+	case WS_TRACE_API_WRITE_ARRAY:
+		return "WS_TRACE_API_WRITE_ARRAY"
+	case WS_TRACE_API_WRITE_QUALIFIED_NAME:
+		return "WS_TRACE_API_WRITE_QUALIFIED_NAME"
+	case WS_TRACE_API_WRITE_CHARS:
+		return "WS_TRACE_API_WRITE_CHARS"
+	case WS_TRACE_API_WRITE_CHARS_UTF8:
+		return "WS_TRACE_API_WRITE_CHARS_UTF8"
+	case WS_TRACE_API_WRITE_BYTES:
+		return "WS_TRACE_API_WRITE_BYTES"
+	case WS_TRACE_API_PUSH_BYTES:
+		return "WS_TRACE_API_PUSH_BYTES"
+	case WS_TRACE_API_PULL_BYTES:
+		return "WS_TRACE_API_PULL_BYTES"
+	case WS_TRACE_API_WRITE_END_ELEMENT:
+		return "WS_TRACE_API_WRITE_END_ELEMENT"
+	case WS_TRACE_API_WRITE_TEXT:
+		return "WS_TRACE_API_WRITE_TEXT"
+	case WS_TRACE_API_WRITE_START_CDATA:
+		return "WS_TRACE_API_WRITE_START_CDATA"
+	case WS_TRACE_API_WRITE_END_CDATA:
+		return "WS_TRACE_API_WRITE_END_CDATA"
+	case WS_TRACE_API_WRITE_NODE:
+		return "WS_TRACE_API_WRITE_NODE"
+	case WS_TRACE_API_PREFIX_FROM_NAMESPACE:
+		return "WS_TRACE_API_PREFIX_FROM_NAMESPACE"
+	case WS_TRACE_API_GET_WRITER_POSITION:
+		return "WS_TRACE_API_GET_WRITER_POSITION"
+	case WS_TRACE_API_SET_WRITER_POSITION:
+		return "WS_TRACE_API_SET_WRITER_POSITION"
+	case WS_TRACE_API_MOVE_WRITER:
+		return "WS_TRACE_API_MOVE_WRITER"
+	case WS_TRACE_API_TRIM_XML_WHITESPACE:
+		return "WS_TRACE_API_TRIM_XML_WHITESPACE"
+	case WS_TRACE_API_VERIFY_XML_NCNAME:
+		return "WS_TRACE_API_VERIFY_XML_NCNAME"
+	case WS_TRACE_API_XML_STRING_EQUALS:
+		return "WS_TRACE_API_XML_STRING_EQUALS"
+	case WS_TRACE_API_NAMESPACE_FROM_PREFIX:
+		return "WS_TRACE_API_NAMESPACE_FROM_PREFIX"
+	case WS_TRACE_API_READ_QUALIFIED_NAME:
+		return "WS_TRACE_API_READ_QUALIFIED_NAME"
+	case WS_TRACE_API_GET_XML_ATTRIBUTE:
+		return "WS_TRACE_API_GET_XML_ATTRIBUTE"
+	case WS_TRACE_API_COPY_NODE:
+		return "WS_TRACE_API_COPY_NODE"
+	case WS_TRACE_API_ASYNC_EXECUTE:
+		return "WS_TRACE_API_ASYNC_EXECUTE"
+	case WS_TRACE_API_CREATE_CHANNEL:
+		return "WS_TRACE_API_CREATE_CHANNEL"
+	case WS_TRACE_API_OPEN_CHANNEL:
+		return "WS_TRACE_API_OPEN_CHANNEL"
+	case WS_TRACE_API_SEND_MESSAGE:
+		return "WS_TRACE_API_SEND_MESSAGE"
+	case WS_TRACE_API_RECEIVE_MESSAGE:
+		return "WS_TRACE_API_RECEIVE_MESSAGE"
+	case WS_TRACE_API_REQUEST_REPLY:
+		return "WS_TRACE_API_REQUEST_REPLY"
+	case WS_TRACE_API_SEND_REPLY_MESSAGE:
+		return "WS_TRACE_API_SEND_REPLY_MESSAGE"
+	case WS_TRACE_API_SEND_FAULT_MESSAGE_FOR_ERROR:
+		return "WS_TRACE_API_SEND_FAULT_MESSAGE_FOR_ERROR"
+	case WS_TRACE_API_GET_CHANNEL_PROPERTY:
+		return "WS_TRACE_API_GET_CHANNEL_PROPERTY"
+	case WS_TRACE_API_SET_CHANNEL_PROPERTY:
+		return "WS_TRACE_API_SET_CHANNEL_PROPERTY"
+	case WS_TRACE_API_WRITE_MESSAGE_START:
+		return "WS_TRACE_API_WRITE_MESSAGE_START"
+	case WS_TRACE_API_WRITE_MESSAGE_END:
+		return "WS_TRACE_API_WRITE_MESSAGE_END"
+	case WS_TRACE_API_READ_MESSAGE_START:
+		return "WS_TRACE_API_READ_MESSAGE_START"
+	case WS_TRACE_API_READ_MESSAGE_END:
+		return "WS_TRACE_API_READ_MESSAGE_END"
+	case WS_TRACE_API_CLOSE_CHANNEL:
+		return "WS_TRACE_API_CLOSE_CHANNEL"
+	case WS_TRACE_API_ABORT_CHANNEL:
+		return "WS_TRACE_API_ABORT_CHANNEL"
+	case WS_TRACE_API_FREE_CHANNEL:
+		return "WS_TRACE_API_FREE_CHANNEL"
+	case WS_TRACE_API_RESET_CHANNEL:
+		return "WS_TRACE_API_RESET_CHANNEL"
+	case WS_TRACE_API_ABANDON_MESSAGE:
+		return "WS_TRACE_API_ABANDON_MESSAGE"
+	case WS_TRACE_API_SHUTDOWN_SESSION_CHANNEL:
+		return "WS_TRACE_API_SHUTDOWN_SESSION_CHANNEL"
+	case WS_TRACE_API_GET_CONTEXT_PROPERTY:
+		return "WS_TRACE_API_GET_CONTEXT_PROPERTY"
+	case WS_TRACE_API_GET_DICTIONARY:
+		return "WS_TRACE_API_GET_DICTIONARY"
+	case WS_TRACE_API_READ_ENDPOINT_ADDRESS_EXTENSION:
+		return "WS_TRACE_API_READ_ENDPOINT_ADDRESS_EXTENSION"
+	case WS_TRACE_API_CREATE_ERROR:
+		return "WS_TRACE_API_CREATE_ERROR"
+	case WS_TRACE_API_ADD_ERROR_STRING:
+		return "WS_TRACE_API_ADD_ERROR_STRING"
+	case WS_TRACE_API_GET_ERROR_STRING:
+		return "WS_TRACE_API_GET_ERROR_STRING"
+	case WS_TRACE_API_COPY_ERROR:
+		return "WS_TRACE_API_COPY_ERROR"
+	case WS_TRACE_API_GET_ERROR_PROPERTY:
+		return "WS_TRACE_API_GET_ERROR_PROPERTY"
+	case WS_TRACE_API_SET_ERROR_PROPERTY:
+		return "WS_TRACE_API_SET_ERROR_PROPERTY"
+	case WS_TRACE_API_RESET_ERROR:
+		return "WS_TRACE_API_RESET_ERROR"
+	case WS_TRACE_API_FREE_ERROR:
+		return "WS_TRACE_API_FREE_ERROR"
+	case WS_TRACE_API_GET_FAULT_ERROR_PROPERTY:
+		return "WS_TRACE_API_GET_FAULT_ERROR_PROPERTY"
+	case WS_TRACE_API_SET_FAULT_ERROR_PROPERTY:
+		return "WS_TRACE_API_SET_FAULT_ERROR_PROPERTY"
+	case WS_TRACE_API_CREATE_FAULT_FROM_ERROR:
+		return "WS_TRACE_API_CREATE_FAULT_FROM_ERROR"
+	case WS_TRACE_API_SET_FAULT_ERROR_DETAIL:
+		return "WS_TRACE_API_SET_FAULT_ERROR_DETAIL"
+	case WS_TRACE_API_GET_FAULT_ERROR_DETAIL:
+		return "WS_TRACE_API_GET_FAULT_ERROR_DETAIL"
+	case WS_TRACE_API_CREATE_HEAP:
+		return "WS_TRACE_API_CREATE_HEAP"
+	case WS_TRACE_API_ALLOC:
+		return "WS_TRACE_API_ALLOC"
+	case WS_TRACE_API_GET_HEAP_PROPERTY:
+		return "WS_TRACE_API_GET_HEAP_PROPERTY"
+	case WS_TRACE_API_RESET_HEAP:
+		return "WS_TRACE_API_RESET_HEAP"
+	case WS_TRACE_API_FREE_HEAP:
+		return "WS_TRACE_API_FREE_HEAP"
+	case WS_TRACE_API_CREATE_LISTENER:
+		return "WS_TRACE_API_CREATE_LISTENER"
+	case WS_TRACE_API_OPEN_LISTENER:
+		return "WS_TRACE_API_OPEN_LISTENER"
+	case WS_TRACE_API_ACCEPT_CHANNEL:
+		return "WS_TRACE_API_ACCEPT_CHANNEL"
+	case WS_TRACE_API_CLOSE_LISTENER:
+		return "WS_TRACE_API_CLOSE_LISTENER"
+	case WS_TRACE_API_ABORT_LISTENER:
+		return "WS_TRACE_API_ABORT_LISTENER"
+	case WS_TRACE_API_RESET_LISTENER:
+		return "WS_TRACE_API_RESET_LISTENER"
+	case WS_TRACE_API_FREE_LISTENER:
+		return "WS_TRACE_API_FREE_LISTENER"
+	case WS_TRACE_API_GET_LISTENER_PROPERTY:
+		return "WS_TRACE_API_GET_LISTENER_PROPERTY"
+	case WS_TRACE_API_SET_LISTENER_PROPERTY:
+		return "WS_TRACE_API_SET_LISTENER_PROPERTY"
+	case WS_TRACE_API_CREATE_CHANNEL_FOR_LISTENER:
+		return "WS_TRACE_API_CREATE_CHANNEL_FOR_LISTENER"
+	case WS_TRACE_API_CREATE_MESSAGE:
+		return "WS_TRACE_API_CREATE_MESSAGE"
+	case WS_TRACE_API_CREATE_MESSAGE_FOR_CHANNEL:
+		return "WS_TRACE_API_CREATE_MESSAGE_FOR_CHANNEL"
+	case WS_TRACE_API_INITIALIZE_MESSAGE:
+		return "WS_TRACE_API_INITIALIZE_MESSAGE"
+	case WS_TRACE_API_RESET_MESSAGE:
+		return "WS_TRACE_API_RESET_MESSAGE"
+	case WS_TRACE_API_FREE_MESSAGE:
+		return "WS_TRACE_API_FREE_MESSAGE"
+	case WS_TRACE_API_GET_HEADER_ATTRIBUTES:
+		return "WS_TRACE_API_GET_HEADER_ATTRIBUTES"
+	case WS_TRACE_API_GET_HEADER:
+		return "WS_TRACE_API_GET_HEADER"
+	case WS_TRACE_API_GET_CUSTOM_HEADER:
+		return "WS_TRACE_API_GET_CUSTOM_HEADER"
+	case WS_TRACE_API_REMOVE_HEADER:
+		return "WS_TRACE_API_REMOVE_HEADER"
+	case WS_TRACE_API_SET_HEADER:
+		return "WS_TRACE_API_SET_HEADER"
+	case WS_TRACE_API_REMOVE_CUSTOM_HEADER:
+		return "WS_TRACE_API_REMOVE_CUSTOM_HEADER"
+	case WS_TRACE_API_ADD_CUSTOM_HEADER:
+		return "WS_TRACE_API_ADD_CUSTOM_HEADER"
+	case WS_TRACE_API_ADD_MAPPED_HEADER:
+		return "WS_TRACE_API_ADD_MAPPED_HEADER"
+	case WS_TRACE_API_REMOVE_MAPPED_HEADER:
+		return "WS_TRACE_API_REMOVE_MAPPED_HEADER"
+	case WS_TRACE_API_GET_MAPPED_HEADER:
+		return "WS_TRACE_API_GET_MAPPED_HEADER"
+	case WS_TRACE_API_WRITE_BODY:
+		return "WS_TRACE_API_WRITE_BODY"
+	case WS_TRACE_API_READ_BODY:
+		return "WS_TRACE_API_READ_BODY"
+	case WS_TRACE_API_WRITE_ENVELOPE_START:
+		return "WS_TRACE_API_WRITE_ENVELOPE_START"
+	case WS_TRACE_API_WRITE_ENVELOPE_END:
+		return "WS_TRACE_API_WRITE_ENVELOPE_END"
+	case WS_TRACE_API_READ_ENVELOPE_START:
+		return "WS_TRACE_API_READ_ENVELOPE_START"
+	case WS_TRACE_API_READ_ENVELOPE_END:
+		return "WS_TRACE_API_READ_ENVELOPE_END"
+	case WS_TRACE_API_GET_MESSAGE_PROPERTY:
+		return "WS_TRACE_API_GET_MESSAGE_PROPERTY"
+	case WS_TRACE_API_SET_MESSAGE_PROPERTY:
+		return "WS_TRACE_API_SET_MESSAGE_PROPERTY"
+	case WS_TRACE_API_ADDRESS_MESSAGE:
+		return "WS_TRACE_API_ADDRESS_MESSAGE"
+	case WS_TRACE_API_CHECK_MUST_UNDERSTAND_HEADERS:
+		return "WS_TRACE_API_CHECK_MUST_UNDERSTAND_HEADERS"
+	case WS_TRACE_API_MARK_HEADER_AS_UNDERSTOOD:
+		return "WS_TRACE_API_MARK_HEADER_AS_UNDERSTOOD"
+	case WS_TRACE_API_FILL_BODY:
+		return "WS_TRACE_API_FILL_BODY"
+	case WS_TRACE_API_FLUSH_BODY:
+		return "WS_TRACE_API_FLUSH_BODY"
+	case WS_TRACE_API_REQUEST_SECURITY_TOKEN:
+		return "WS_TRACE_API_REQUEST_SECURITY_TOKEN"
+	case WS_TRACE_API_GET_SECURITY_TOKEN_PROPERTY:
+		return "WS_TRACE_API_GET_SECURITY_TOKEN_PROPERTY"
+	case WS_TRACE_API_CREATE_XML_SECURITY_TOKEN:
+		return "WS_TRACE_API_CREATE_XML_SECURITY_TOKEN"
+	case WS_TRACE_API_FREE_SECURITY_TOKEN:
+		return "WS_TRACE_API_FREE_SECURITY_TOKEN"
+	case WS_TRACE_API_REVOKE_SECURITY_CONTEXT:
+		return "WS_TRACE_API_REVOKE_SECURITY_CONTEXT"
+	case WS_TRACE_API_GET_SECURITY_CONTEXT_PROPERTY:
+		return "WS_TRACE_API_GET_SECURITY_CONTEXT_PROPERTY"
+	case WS_TRACE_API_READ_ELEMENT_TYPE:
+		return "WS_TRACE_API_READ_ELEMENT_TYPE"
+	case WS_TRACE_API_READ_ATTRIBUTE_TYPE:
+		return "WS_TRACE_API_READ_ATTRIBUTE_TYPE"
+	case WS_TRACE_API_READ_TYPE:
+		return "WS_TRACE_API_READ_TYPE"
+	case WS_TRACE_API_WRITE_ELEMENT_TYPE:
+		return "WS_TRACE_API_WRITE_ELEMENT_TYPE"
+	case WS_TRACE_API_WRITE_ATTRIBUTE_TYPE:
+		return "WS_TRACE_API_WRITE_ATTRIBUTE_TYPE"
+	case WS_TRACE_API_WRITE_TYPE:
+		return "WS_TRACE_API_WRITE_TYPE"
+	case WS_TRACE_API_SERVICE_REGISTER_FOR_CANCEL:
+		return "WS_TRACE_API_SERVICE_REGISTER_FOR_CANCEL"
+	case WS_TRACE_API_GET_SERVICE_HOST_PROPERTY:
+		return "WS_TRACE_API_GET_SERVICE_HOST_PROPERTY"
+	case WS_TRACE_API_CREATE_SERVICE_HOST:
+		return "WS_TRACE_API_CREATE_SERVICE_HOST"
+	case WS_TRACE_API_OPEN_SERVICE_HOST:
+		return "WS_TRACE_API_OPEN_SERVICE_HOST"
+	case WS_TRACE_API_CLOSE_SERVICE_HOST:
+		return "WS_TRACE_API_CLOSE_SERVICE_HOST"
+	case WS_TRACE_API_ABORT_SERVICE_HOST:
+		return "WS_TRACE_API_ABORT_SERVICE_HOST"
+	case WS_TRACE_API_FREE_SERVICE_HOST:
+		return "WS_TRACE_API_FREE_SERVICE_HOST"
+	case WS_TRACE_API_RESET_SERVICE_HOST:
+		return "WS_TRACE_API_RESET_SERVICE_HOST"
+	case WS_TRACE_API_GET_SERVICE_PROXY_PROPERTY:
+		return "WS_TRACE_API_GET_SERVICE_PROXY_PROPERTY"
+	case WS_TRACE_API_CREATE_SERVICE_PROXY:
+		return "WS_TRACE_API_CREATE_SERVICE_PROXY"
+	case WS_TRACE_API_OPEN_SERVICE_PROXY:
+		return "WS_TRACE_API_OPEN_SERVICE_PROXY"
+	case WS_TRACE_API_CLOSE_SERVICE_PROXY:
+		return "WS_TRACE_API_CLOSE_SERVICE_PROXY"
+	case WS_TRACE_API_ABORT_SERVICE_PROXY:
+		return "WS_TRACE_API_ABORT_SERVICE_PROXY"
+	case WS_TRACE_API_FREE_SERVICE_PROXY:
+		return "WS_TRACE_API_FREE_SERVICE_PROXY"
+	case WS_TRACE_API_RESET_SERVICE_PROXY:
+		return "WS_TRACE_API_RESET_SERVICE_PROXY"
+	case WS_TRACE_API_ABORT_CALL:
+		return "WS_TRACE_API_ABORT_CALL"
+	case WS_TRACE_API_CALL:
+		return "WS_TRACE_API_CALL"
+	case WS_TRACE_API_DECODE_URL:
+		return "WS_TRACE_API_DECODE_URL"
+	case WS_TRACE_API_ENCODE_URL:
+		return "WS_TRACE_API_ENCODE_URL"
+	case WS_TRACE_API_COMBINE_URL:
+		return "WS_TRACE_API_COMBINE_URL"
+	case WS_TRACE_API_DATETIME_TO_FILETIME:
+		return "WS_TRACE_API_DATETIME_TO_FILETIME"
+	case WS_TRACE_API_FILETIME_TO_DATETIME:
+		return "WS_TRACE_API_FILETIME_TO_DATETIME"
+	case WS_TRACE_API_DUMP_MEMORY:
+		return "WS_TRACE_API_DUMP_MEMORY"
+	case WS_TRACE_API_SET_AUTOFAIL:
+		return "WS_TRACE_API_SET_AUTOFAIL"
+	case WS_TRACE_API_CREATE_METADATA:
+		return "WS_TRACE_API_CREATE_METADATA"
+	case WS_TRACE_API_READ_METADATA:
+		return "WS_TRACE_API_READ_METADATA"
+	case WS_TRACE_API_FREE_METADATA:
+		return "WS_TRACE_API_FREE_METADATA"
+	case WS_TRACE_API_RESET_METADATA:
+		return "WS_TRACE_API_RESET_METADATA"
+	case WS_TRACE_API_GET_METADATA_PROPERTY:
+		return "WS_TRACE_API_GET_METADATA_PROPERTY"
+	case WS_TRACE_API_GET_MISSING_METADATA_DOCUMENT_ADDRESS:
+		return "WS_TRACE_API_GET_MISSING_METADATA_DOCUMENT_ADDRESS"
+	case WS_TRACE_API_GET_METADATA_ENDPOINTS:
+		return "WS_TRACE_API_GET_METADATA_ENDPOINTS"
+	case WS_TRACE_API_MATCH_POLICY_ALTERNATIVE:
+		return "WS_TRACE_API_MATCH_POLICY_ALTERNATIVE"
+	case WS_TRACE_API_GET_POLICY_PROPERTY:
+		return "WS_TRACE_API_GET_POLICY_PROPERTY"
+	case WS_TRACE_API_GET_POLICY_ALTERNATIVE_COUNT:
+		return "WS_TRACE_API_GET_POLICY_ALTERNATIVE_COUNT"
+	case WS_TRACE_API_WS_CREATE_SERVICE_PROXY_FROM_TEMPLATE:
+		return "WS_TRACE_API_WS_CREATE_SERVICE_PROXY_FROM_TEMPLATE"
+	case WS_TRACE_API_WS_CREATE_SERVICE_HOST_FROM_TEMPLATE:
+		return "WS_TRACE_API_WS_CREATE_SERVICE_HOST_FROM_TEMPLATE"
+	default:
+		return fmt.Sprintf("WS_TRACE_API(%d)", int32(e))
+	}
+}
+
 // WS_TRANSFER_MODE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_transfer_mode
 type WS_TRANSFER_MODE int32
 
@@ -1141,6 +3169,23 @@ const (
 	WS_STREAMED_TRANSFER_MODE        WS_TRANSFER_MODE = 3
 )
 
+// String returns the WS_TRANSFER_MODE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_TRANSFER_MODE) String() string {
+	switch e {
+	case WS_STREAMED_INPUT_TRANSFER_MODE:
+		return "WS_STREAMED_INPUT_TRANSFER_MODE"
+	case WS_STREAMED_OUTPUT_TRANSFER_MODE:
+		return "WS_STREAMED_OUTPUT_TRANSFER_MODE"
+	case WS_BUFFERED_TRANSFER_MODE:
+		return "WS_BUFFERED_TRANSFER_MODE"
+	case WS_STREAMED_TRANSFER_MODE:
+		return "WS_STREAMED_TRANSFER_MODE"
+	default:
+		return fmt.Sprintf("WS_TRANSFER_MODE(%d)", int32(e))
+	}
+}
+
 // WS_TRUST_VERSION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_trust_version
 type WS_TRUST_VERSION int32
 
@@ -1148,6 +3193,19 @@ const (
 	WS_TRUST_VERSION_FEBRUARY_2005 WS_TRUST_VERSION = 1
 	WS_TRUST_VERSION_1_3           WS_TRUST_VERSION = 2
 )
+
+// String returns the WS_TRUST_VERSION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_TRUST_VERSION) String() string {
+	switch e {
+	case WS_TRUST_VERSION_FEBRUARY_2005:
+		return "WS_TRUST_VERSION_FEBRUARY_2005"
+	case WS_TRUST_VERSION_1_3:
+		return "WS_TRUST_VERSION_1_3"
+	default:
+		return fmt.Sprintf("WS_TRUST_VERSION(%d)", int32(e))
+	}
+}
 
 // WS_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_type
 type WS_TYPE int32
@@ -1190,6 +3248,85 @@ const (
 	WS_ANY_ATTRIBUTES_TYPE   WS_TYPE = 34
 )
 
+// String returns the WS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_TYPE) String() string {
+	switch e {
+	case WS_BOOL_TYPE:
+		return "WS_BOOL_TYPE"
+	case WS_INT8_TYPE:
+		return "WS_INT8_TYPE"
+	case WS_INT16_TYPE:
+		return "WS_INT16_TYPE"
+	case WS_INT32_TYPE:
+		return "WS_INT32_TYPE"
+	case WS_INT64_TYPE:
+		return "WS_INT64_TYPE"
+	case WS_UINT8_TYPE:
+		return "WS_UINT8_TYPE"
+	case WS_UINT16_TYPE:
+		return "WS_UINT16_TYPE"
+	case WS_UINT32_TYPE:
+		return "WS_UINT32_TYPE"
+	case WS_UINT64_TYPE:
+		return "WS_UINT64_TYPE"
+	case WS_FLOAT_TYPE:
+		return "WS_FLOAT_TYPE"
+	case WS_DOUBLE_TYPE:
+		return "WS_DOUBLE_TYPE"
+	case WS_DECIMAL_TYPE:
+		return "WS_DECIMAL_TYPE"
+	case WS_DATETIME_TYPE:
+		return "WS_DATETIME_TYPE"
+	case WS_TIMESPAN_TYPE:
+		return "WS_TIMESPAN_TYPE"
+	case WS_GUID_TYPE:
+		return "WS_GUID_TYPE"
+	case WS_UNIQUE_ID_TYPE:
+		return "WS_UNIQUE_ID_TYPE"
+	case WS_STRING_TYPE:
+		return "WS_STRING_TYPE"
+	case WS_WSZ_TYPE:
+		return "WS_WSZ_TYPE"
+	case WS_BYTES_TYPE:
+		return "WS_BYTES_TYPE"
+	case WS_XML_STRING_TYPE:
+		return "WS_XML_STRING_TYPE"
+	case WS_XML_QNAME_TYPE:
+		return "WS_XML_QNAME_TYPE"
+	case WS_XML_BUFFER_TYPE:
+		return "WS_XML_BUFFER_TYPE"
+	case WS_CHAR_ARRAY_TYPE:
+		return "WS_CHAR_ARRAY_TYPE"
+	case WS_UTF8_ARRAY_TYPE:
+		return "WS_UTF8_ARRAY_TYPE"
+	case WS_BYTE_ARRAY_TYPE:
+		return "WS_BYTE_ARRAY_TYPE"
+	case WS_DESCRIPTION_TYPE:
+		return "WS_DESCRIPTION_TYPE"
+	case WS_STRUCT_TYPE:
+		return "WS_STRUCT_TYPE"
+	case WS_CUSTOM_TYPE:
+		return "WS_CUSTOM_TYPE"
+	case WS_ENDPOINT_ADDRESS_TYPE:
+		return "WS_ENDPOINT_ADDRESS_TYPE"
+	case WS_FAULT_TYPE:
+		return "WS_FAULT_TYPE"
+	case WS_VOID_TYPE:
+		return "WS_VOID_TYPE"
+	case WS_ENUM_TYPE:
+		return "WS_ENUM_TYPE"
+	case WS_DURATION_TYPE:
+		return "WS_DURATION_TYPE"
+	case WS_UNION_TYPE:
+		return "WS_UNION_TYPE"
+	case WS_ANY_ATTRIBUTES_TYPE:
+		return "WS_ANY_ATTRIBUTES_TYPE"
+	default:
+		return fmt.Sprintf("WS_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_TYPE_MAPPING: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_type_mapping
 type WS_TYPE_MAPPING int32
 
@@ -1199,6 +3336,23 @@ const (
 	WS_ELEMENT_CONTENT_TYPE_MAPPING WS_TYPE_MAPPING = 3
 	WS_ANY_ELEMENT_TYPE_MAPPING     WS_TYPE_MAPPING = 4
 )
+
+// String returns the WS_TYPE_MAPPING constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_TYPE_MAPPING) String() string {
+	switch e {
+	case WS_ELEMENT_TYPE_MAPPING:
+		return "WS_ELEMENT_TYPE_MAPPING"
+	case WS_ATTRIBUTE_TYPE_MAPPING:
+		return "WS_ATTRIBUTE_TYPE_MAPPING"
+	case WS_ELEMENT_CONTENT_TYPE_MAPPING:
+		return "WS_ELEMENT_CONTENT_TYPE_MAPPING"
+	case WS_ANY_ELEMENT_TYPE_MAPPING:
+		return "WS_ANY_ELEMENT_TYPE_MAPPING"
+	default:
+		return fmt.Sprintf("WS_TYPE_MAPPING(%d)", int32(e))
+	}
+}
 
 // WS_URL_SCHEME_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_url_scheme_type
 type WS_URL_SCHEME_TYPE int32
@@ -1211,12 +3365,42 @@ const (
 	WS_URL_NETPIPE_SCHEME_TYPE WS_URL_SCHEME_TYPE = 4
 )
 
+// String returns the WS_URL_SCHEME_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_URL_SCHEME_TYPE) String() string {
+	switch e {
+	case WS_URL_HTTP_SCHEME_TYPE:
+		return "WS_URL_HTTP_SCHEME_TYPE"
+	case WS_URL_HTTPS_SCHEME_TYPE:
+		return "WS_URL_HTTPS_SCHEME_TYPE"
+	case WS_URL_NETTCP_SCHEME_TYPE:
+		return "WS_URL_NETTCP_SCHEME_TYPE"
+	case WS_URL_SOAPUDP_SCHEME_TYPE:
+		return "WS_URL_SOAPUDP_SCHEME_TYPE"
+	case WS_URL_NETPIPE_SCHEME_TYPE:
+		return "WS_URL_NETPIPE_SCHEME_TYPE"
+	default:
+		return fmt.Sprintf("WS_URL_SCHEME_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_USERNAME_CREDENTIAL_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_username_credential_type
 type WS_USERNAME_CREDENTIAL_TYPE int32
 
 const (
 	WS_STRING_USERNAME_CREDENTIAL_TYPE WS_USERNAME_CREDENTIAL_TYPE = 1
 )
+
+// String returns the WS_USERNAME_CREDENTIAL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_USERNAME_CREDENTIAL_TYPE) String() string {
+	switch e {
+	case WS_STRING_USERNAME_CREDENTIAL_TYPE:
+		return "WS_STRING_USERNAME_CREDENTIAL_TYPE"
+	default:
+		return fmt.Sprintf("WS_USERNAME_CREDENTIAL_TYPE(%d)", int32(e))
+	}
+}
 
 // WS_VALUE_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_value_type
 type WS_VALUE_TYPE int32
@@ -1240,6 +3424,47 @@ const (
 	WS_DURATION_VALUE_TYPE WS_VALUE_TYPE = 15
 )
 
+// String returns the WS_VALUE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_VALUE_TYPE) String() string {
+	switch e {
+	case WS_BOOL_VALUE_TYPE:
+		return "WS_BOOL_VALUE_TYPE"
+	case WS_INT8_VALUE_TYPE:
+		return "WS_INT8_VALUE_TYPE"
+	case WS_INT16_VALUE_TYPE:
+		return "WS_INT16_VALUE_TYPE"
+	case WS_INT32_VALUE_TYPE:
+		return "WS_INT32_VALUE_TYPE"
+	case WS_INT64_VALUE_TYPE:
+		return "WS_INT64_VALUE_TYPE"
+	case WS_UINT8_VALUE_TYPE:
+		return "WS_UINT8_VALUE_TYPE"
+	case WS_UINT16_VALUE_TYPE:
+		return "WS_UINT16_VALUE_TYPE"
+	case WS_UINT32_VALUE_TYPE:
+		return "WS_UINT32_VALUE_TYPE"
+	case WS_UINT64_VALUE_TYPE:
+		return "WS_UINT64_VALUE_TYPE"
+	case WS_FLOAT_VALUE_TYPE:
+		return "WS_FLOAT_VALUE_TYPE"
+	case WS_DOUBLE_VALUE_TYPE:
+		return "WS_DOUBLE_VALUE_TYPE"
+	case WS_DECIMAL_VALUE_TYPE:
+		return "WS_DECIMAL_VALUE_TYPE"
+	case WS_DATETIME_VALUE_TYPE:
+		return "WS_DATETIME_VALUE_TYPE"
+	case WS_TIMESPAN_VALUE_TYPE:
+		return "WS_TIMESPAN_VALUE_TYPE"
+	case WS_GUID_VALUE_TYPE:
+		return "WS_GUID_VALUE_TYPE"
+	case WS_DURATION_VALUE_TYPE:
+		return "WS_DURATION_VALUE_TYPE"
+	default:
+		return fmt.Sprintf("WS_VALUE_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_windows_integrated_auth_credential_type
 type WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE int32
 
@@ -1248,6 +3473,21 @@ const (
 	WS_DEFAULT_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE = 2
 	WS_OPAQUE_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE  WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE = 3
 )
+
+// String returns the WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE) String() string {
+	switch e {
+	case WS_STRING_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE:
+		return "WS_STRING_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE"
+	case WS_DEFAULT_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE:
+		return "WS_DEFAULT_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE"
+	case WS_OPAQUE_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE:
+		return "WS_OPAQUE_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE"
+	default:
+		return fmt.Sprintf("WS_WINDOWS_INTEGRATED_AUTH_CREDENTIAL_TYPE(%d)", int32(e))
+	}
+}
 
 // WS_WINDOWS_INTEGRATED_AUTH_PACKAGE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_windows_integrated_auth_package
 type WS_WINDOWS_INTEGRATED_AUTH_PACKAGE int32
@@ -1258,6 +3498,21 @@ const (
 	WS_WINDOWS_INTEGRATED_AUTH_PACKAGE_SPNEGO   WS_WINDOWS_INTEGRATED_AUTH_PACKAGE = 3
 )
 
+// String returns the WS_WINDOWS_INTEGRATED_AUTH_PACKAGE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_WINDOWS_INTEGRATED_AUTH_PACKAGE) String() string {
+	switch e {
+	case WS_WINDOWS_INTEGRATED_AUTH_PACKAGE_KERBEROS:
+		return "WS_WINDOWS_INTEGRATED_AUTH_PACKAGE_KERBEROS"
+	case WS_WINDOWS_INTEGRATED_AUTH_PACKAGE_NTLM:
+		return "WS_WINDOWS_INTEGRATED_AUTH_PACKAGE_NTLM"
+	case WS_WINDOWS_INTEGRATED_AUTH_PACKAGE_SPNEGO:
+		return "WS_WINDOWS_INTEGRATED_AUTH_PACKAGE_SPNEGO"
+	default:
+		return fmt.Sprintf("WS_WINDOWS_INTEGRATED_AUTH_PACKAGE(%d)", int32(e))
+	}
+}
+
 // WS_WRITE_OPTION: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_write_option
 type WS_WRITE_OPTION int32
 
@@ -1267,6 +3522,23 @@ const (
 	WS_WRITE_NILLABLE_VALUE   WS_WRITE_OPTION = 3
 	WS_WRITE_NILLABLE_POINTER WS_WRITE_OPTION = 4
 )
+
+// String returns the WS_WRITE_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_WRITE_OPTION) String() string {
+	switch e {
+	case WS_WRITE_REQUIRED_VALUE:
+		return "WS_WRITE_REQUIRED_VALUE"
+	case WS_WRITE_REQUIRED_POINTER:
+		return "WS_WRITE_REQUIRED_POINTER"
+	case WS_WRITE_NILLABLE_VALUE:
+		return "WS_WRITE_NILLABLE_VALUE"
+	case WS_WRITE_NILLABLE_POINTER:
+		return "WS_WRITE_NILLABLE_POINTER"
+	default:
+		return fmt.Sprintf("WS_WRITE_OPTION(%d)", int32(e))
+	}
+}
 
 // WS_XML_BUFFER_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_xml_buffer_property_id
 type WS_XML_BUFFER_PROPERTY_ID int32
@@ -1281,6 +3553,23 @@ const (
 	WS_INCLUSIVE_WITH_COMMENTS_XML_CANONICALIZATION_ALGORITHM WS_XML_CANONICALIZATION_ALGORITHM = 3
 )
 
+// String returns the WS_XML_CANONICALIZATION_ALGORITHM constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_XML_CANONICALIZATION_ALGORITHM) String() string {
+	switch e {
+	case WS_EXCLUSIVE_XML_CANONICALIZATION_ALGORITHM:
+		return "WS_EXCLUSIVE_XML_CANONICALIZATION_ALGORITHM"
+	case WS_EXCLUSIVE_WITH_COMMENTS_XML_CANONICALIZATION_ALGORITHM:
+		return "WS_EXCLUSIVE_WITH_COMMENTS_XML_CANONICALIZATION_ALGORITHM"
+	case WS_INCLUSIVE_XML_CANONICALIZATION_ALGORITHM:
+		return "WS_INCLUSIVE_XML_CANONICALIZATION_ALGORITHM"
+	case WS_INCLUSIVE_WITH_COMMENTS_XML_CANONICALIZATION_ALGORITHM:
+		return "WS_INCLUSIVE_WITH_COMMENTS_XML_CANONICALIZATION_ALGORITHM"
+	default:
+		return fmt.Sprintf("WS_XML_CANONICALIZATION_ALGORITHM(%d)", int32(e))
+	}
+}
+
 // WS_XML_CANONICALIZATION_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_xml_canonicalization_property_id
 type WS_XML_CANONICALIZATION_PROPERTY_ID int32
 
@@ -1290,6 +3579,23 @@ const (
 	WS_XML_CANONICALIZATION_PROPERTY_OMITTED_ELEMENT    WS_XML_CANONICALIZATION_PROPERTY_ID = 2
 	WS_XML_CANONICALIZATION_PROPERTY_OUTPUT_BUFFER_SIZE WS_XML_CANONICALIZATION_PROPERTY_ID = 3
 )
+
+// String returns the WS_XML_CANONICALIZATION_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_XML_CANONICALIZATION_PROPERTY_ID) String() string {
+	switch e {
+	case WS_XML_CANONICALIZATION_PROPERTY_ALGORITHM:
+		return "WS_XML_CANONICALIZATION_PROPERTY_ALGORITHM"
+	case WS_XML_CANONICALIZATION_PROPERTY_INCLUSIVE_PREFIXES:
+		return "WS_XML_CANONICALIZATION_PROPERTY_INCLUSIVE_PREFIXES"
+	case WS_XML_CANONICALIZATION_PROPERTY_OMITTED_ELEMENT:
+		return "WS_XML_CANONICALIZATION_PROPERTY_OMITTED_ELEMENT"
+	case WS_XML_CANONICALIZATION_PROPERTY_OUTPUT_BUFFER_SIZE:
+		return "WS_XML_CANONICALIZATION_PROPERTY_OUTPUT_BUFFER_SIZE"
+	default:
+		return fmt.Sprintf("WS_XML_CANONICALIZATION_PROPERTY_ID(%d)", int32(e))
+	}
+}
 
 // WS_XML_NODE_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_xml_node_type
 type WS_XML_NODE_TYPE int32
@@ -1305,6 +3611,31 @@ const (
 	WS_XML_NODE_TYPE_BOF         WS_XML_NODE_TYPE = 9
 )
 
+// String returns the WS_XML_NODE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_XML_NODE_TYPE) String() string {
+	switch e {
+	case WS_XML_NODE_TYPE_ELEMENT:
+		return "WS_XML_NODE_TYPE_ELEMENT"
+	case WS_XML_NODE_TYPE_TEXT:
+		return "WS_XML_NODE_TYPE_TEXT"
+	case WS_XML_NODE_TYPE_END_ELEMENT:
+		return "WS_XML_NODE_TYPE_END_ELEMENT"
+	case WS_XML_NODE_TYPE_COMMENT:
+		return "WS_XML_NODE_TYPE_COMMENT"
+	case WS_XML_NODE_TYPE_CDATA:
+		return "WS_XML_NODE_TYPE_CDATA"
+	case WS_XML_NODE_TYPE_END_CDATA:
+		return "WS_XML_NODE_TYPE_END_CDATA"
+	case WS_XML_NODE_TYPE_EOF:
+		return "WS_XML_NODE_TYPE_EOF"
+	case WS_XML_NODE_TYPE_BOF:
+		return "WS_XML_NODE_TYPE_BOF"
+	default:
+		return fmt.Sprintf("WS_XML_NODE_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_XML_READER_ENCODING_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_xml_reader_encoding_type
 type WS_XML_READER_ENCODING_TYPE int32
 
@@ -1315,6 +3646,23 @@ const (
 	WS_XML_READER_ENCODING_TYPE_RAW    WS_XML_READER_ENCODING_TYPE = 4
 )
 
+// String returns the WS_XML_READER_ENCODING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_XML_READER_ENCODING_TYPE) String() string {
+	switch e {
+	case WS_XML_READER_ENCODING_TYPE_TEXT:
+		return "WS_XML_READER_ENCODING_TYPE_TEXT"
+	case WS_XML_READER_ENCODING_TYPE_BINARY:
+		return "WS_XML_READER_ENCODING_TYPE_BINARY"
+	case WS_XML_READER_ENCODING_TYPE_MTOM:
+		return "WS_XML_READER_ENCODING_TYPE_MTOM"
+	case WS_XML_READER_ENCODING_TYPE_RAW:
+		return "WS_XML_READER_ENCODING_TYPE_RAW"
+	default:
+		return fmt.Sprintf("WS_XML_READER_ENCODING_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_XML_READER_INPUT_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_xml_reader_input_type
 type WS_XML_READER_INPUT_TYPE int32
 
@@ -1322,6 +3670,19 @@ const (
 	WS_XML_READER_INPUT_TYPE_BUFFER WS_XML_READER_INPUT_TYPE = 1
 	WS_XML_READER_INPUT_TYPE_STREAM WS_XML_READER_INPUT_TYPE = 2
 )
+
+// String returns the WS_XML_READER_INPUT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_XML_READER_INPUT_TYPE) String() string {
+	switch e {
+	case WS_XML_READER_INPUT_TYPE_BUFFER:
+		return "WS_XML_READER_INPUT_TYPE_BUFFER"
+	case WS_XML_READER_INPUT_TYPE_STREAM:
+		return "WS_XML_READER_INPUT_TYPE_STREAM"
+	default:
+		return fmt.Sprintf("WS_XML_READER_INPUT_TYPE(%d)", int32(e))
+	}
+}
 
 // WS_XML_READER_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_xml_reader_property_id
 type WS_XML_READER_PROPERTY_ID int32
@@ -1344,6 +3705,45 @@ const (
 	WS_XML_READER_PROPERTY_MAX_NAMESPACES                     WS_XML_READER_PROPERTY_ID = 14
 )
 
+// String returns the WS_XML_READER_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_XML_READER_PROPERTY_ID) String() string {
+	switch e {
+	case WS_XML_READER_PROPERTY_MAX_DEPTH:
+		return "WS_XML_READER_PROPERTY_MAX_DEPTH"
+	case WS_XML_READER_PROPERTY_ALLOW_FRAGMENT:
+		return "WS_XML_READER_PROPERTY_ALLOW_FRAGMENT"
+	case WS_XML_READER_PROPERTY_MAX_ATTRIBUTES:
+		return "WS_XML_READER_PROPERTY_MAX_ATTRIBUTES"
+	case WS_XML_READER_PROPERTY_READ_DECLARATION:
+		return "WS_XML_READER_PROPERTY_READ_DECLARATION"
+	case WS_XML_READER_PROPERTY_CHARSET:
+		return "WS_XML_READER_PROPERTY_CHARSET"
+	case WS_XML_READER_PROPERTY_ROW:
+		return "WS_XML_READER_PROPERTY_ROW"
+	case WS_XML_READER_PROPERTY_COLUMN:
+		return "WS_XML_READER_PROPERTY_COLUMN"
+	case WS_XML_READER_PROPERTY_UTF8_TRIM_SIZE:
+		return "WS_XML_READER_PROPERTY_UTF8_TRIM_SIZE"
+	case WS_XML_READER_PROPERTY_STREAM_BUFFER_SIZE:
+		return "WS_XML_READER_PROPERTY_STREAM_BUFFER_SIZE"
+	case WS_XML_READER_PROPERTY_IN_ATTRIBUTE:
+		return "WS_XML_READER_PROPERTY_IN_ATTRIBUTE"
+	case WS_XML_READER_PROPERTY_STREAM_MAX_ROOT_MIME_PART_SIZE:
+		return "WS_XML_READER_PROPERTY_STREAM_MAX_ROOT_MIME_PART_SIZE"
+	case WS_XML_READER_PROPERTY_STREAM_MAX_MIME_HEADERS_SIZE:
+		return "WS_XML_READER_PROPERTY_STREAM_MAX_MIME_HEADERS_SIZE"
+	case WS_XML_READER_PROPERTY_MAX_MIME_PARTS:
+		return "WS_XML_READER_PROPERTY_MAX_MIME_PARTS"
+	case WS_XML_READER_PROPERTY_ALLOW_INVALID_CHARACTER_REFERENCES:
+		return "WS_XML_READER_PROPERTY_ALLOW_INVALID_CHARACTER_REFERENCES"
+	case WS_XML_READER_PROPERTY_MAX_NAMESPACES:
+		return "WS_XML_READER_PROPERTY_MAX_NAMESPACES"
+	default:
+		return fmt.Sprintf("WS_XML_READER_PROPERTY_ID(%d)", int32(e))
+	}
+}
+
 // WS_XML_SECURITY_TOKEN_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_xml_security_token_property_id
 type WS_XML_SECURITY_TOKEN_PROPERTY_ID int32
 
@@ -1353,6 +3753,23 @@ const (
 	WS_XML_SECURITY_TOKEN_PROPERTY_VALID_FROM_TIME      WS_XML_SECURITY_TOKEN_PROPERTY_ID = 3
 	WS_XML_SECURITY_TOKEN_PROPERTY_VALID_TILL_TIME      WS_XML_SECURITY_TOKEN_PROPERTY_ID = 4
 )
+
+// String returns the WS_XML_SECURITY_TOKEN_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_XML_SECURITY_TOKEN_PROPERTY_ID) String() string {
+	switch e {
+	case WS_XML_SECURITY_TOKEN_PROPERTY_ATTACHED_REFERENCE:
+		return "WS_XML_SECURITY_TOKEN_PROPERTY_ATTACHED_REFERENCE"
+	case WS_XML_SECURITY_TOKEN_PROPERTY_UNATTACHED_REFERENCE:
+		return "WS_XML_SECURITY_TOKEN_PROPERTY_UNATTACHED_REFERENCE"
+	case WS_XML_SECURITY_TOKEN_PROPERTY_VALID_FROM_TIME:
+		return "WS_XML_SECURITY_TOKEN_PROPERTY_VALID_FROM_TIME"
+	case WS_XML_SECURITY_TOKEN_PROPERTY_VALID_TILL_TIME:
+		return "WS_XML_SECURITY_TOKEN_PROPERTY_VALID_TILL_TIME"
+	default:
+		return fmt.Sprintf("WS_XML_SECURITY_TOKEN_PROPERTY_ID(%d)", int32(e))
+	}
+}
 
 // WS_XML_TEXT_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_xml_text_type
 type WS_XML_TEXT_TYPE int32
@@ -1376,6 +3793,47 @@ const (
 	WS_XML_TEXT_TYPE_LIST      WS_XML_TEXT_TYPE = 16
 )
 
+// String returns the WS_XML_TEXT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_XML_TEXT_TYPE) String() string {
+	switch e {
+	case WS_XML_TEXT_TYPE_UTF8:
+		return "WS_XML_TEXT_TYPE_UTF8"
+	case WS_XML_TEXT_TYPE_UTF16:
+		return "WS_XML_TEXT_TYPE_UTF16"
+	case WS_XML_TEXT_TYPE_BASE64:
+		return "WS_XML_TEXT_TYPE_BASE64"
+	case WS_XML_TEXT_TYPE_BOOL:
+		return "WS_XML_TEXT_TYPE_BOOL"
+	case WS_XML_TEXT_TYPE_INT32:
+		return "WS_XML_TEXT_TYPE_INT32"
+	case WS_XML_TEXT_TYPE_INT64:
+		return "WS_XML_TEXT_TYPE_INT64"
+	case WS_XML_TEXT_TYPE_UINT64:
+		return "WS_XML_TEXT_TYPE_UINT64"
+	case WS_XML_TEXT_TYPE_FLOAT:
+		return "WS_XML_TEXT_TYPE_FLOAT"
+	case WS_XML_TEXT_TYPE_DOUBLE:
+		return "WS_XML_TEXT_TYPE_DOUBLE"
+	case WS_XML_TEXT_TYPE_DECIMAL:
+		return "WS_XML_TEXT_TYPE_DECIMAL"
+	case WS_XML_TEXT_TYPE_GUID:
+		return "WS_XML_TEXT_TYPE_GUID"
+	case WS_XML_TEXT_TYPE_UNIQUE_ID:
+		return "WS_XML_TEXT_TYPE_UNIQUE_ID"
+	case WS_XML_TEXT_TYPE_DATETIME:
+		return "WS_XML_TEXT_TYPE_DATETIME"
+	case WS_XML_TEXT_TYPE_TIMESPAN:
+		return "WS_XML_TEXT_TYPE_TIMESPAN"
+	case WS_XML_TEXT_TYPE_QNAME:
+		return "WS_XML_TEXT_TYPE_QNAME"
+	case WS_XML_TEXT_TYPE_LIST:
+		return "WS_XML_TEXT_TYPE_LIST"
+	default:
+		return fmt.Sprintf("WS_XML_TEXT_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_XML_WRITER_ENCODING_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_xml_writer_encoding_type
 type WS_XML_WRITER_ENCODING_TYPE int32
 
@@ -1386,6 +3844,23 @@ const (
 	WS_XML_WRITER_ENCODING_TYPE_RAW    WS_XML_WRITER_ENCODING_TYPE = 4
 )
 
+// String returns the WS_XML_WRITER_ENCODING_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_XML_WRITER_ENCODING_TYPE) String() string {
+	switch e {
+	case WS_XML_WRITER_ENCODING_TYPE_TEXT:
+		return "WS_XML_WRITER_ENCODING_TYPE_TEXT"
+	case WS_XML_WRITER_ENCODING_TYPE_BINARY:
+		return "WS_XML_WRITER_ENCODING_TYPE_BINARY"
+	case WS_XML_WRITER_ENCODING_TYPE_MTOM:
+		return "WS_XML_WRITER_ENCODING_TYPE_MTOM"
+	case WS_XML_WRITER_ENCODING_TYPE_RAW:
+		return "WS_XML_WRITER_ENCODING_TYPE_RAW"
+	default:
+		return fmt.Sprintf("WS_XML_WRITER_ENCODING_TYPE(%d)", int32(e))
+	}
+}
+
 // WS_XML_WRITER_OUTPUT_TYPE: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_xml_writer_output_type
 type WS_XML_WRITER_OUTPUT_TYPE int32
 
@@ -1393,6 +3868,19 @@ const (
 	WS_XML_WRITER_OUTPUT_TYPE_BUFFER WS_XML_WRITER_OUTPUT_TYPE = 1
 	WS_XML_WRITER_OUTPUT_TYPE_STREAM WS_XML_WRITER_OUTPUT_TYPE = 2
 )
+
+// String returns the WS_XML_WRITER_OUTPUT_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_XML_WRITER_OUTPUT_TYPE) String() string {
+	switch e {
+	case WS_XML_WRITER_OUTPUT_TYPE_BUFFER:
+		return "WS_XML_WRITER_OUTPUT_TYPE_BUFFER"
+	case WS_XML_WRITER_OUTPUT_TYPE_STREAM:
+		return "WS_XML_WRITER_OUTPUT_TYPE_STREAM"
+	default:
+		return fmt.Sprintf("WS_XML_WRITER_OUTPUT_TYPE(%d)", int32(e))
+	}
+}
 
 // WS_XML_WRITER_PROPERTY_ID: https://learn.microsoft.com/windows/win32/api/webservices/ne-webservices-ws_xml_writer_property_id
 type WS_XML_WRITER_PROPERTY_ID int32
@@ -1418,3 +3906,50 @@ const (
 	WS_XML_WRITER_PROPERTY_COMPRESS_EMPTY_ELEMENTS            WS_XML_WRITER_PROPERTY_ID = 17
 	WS_XML_WRITER_PROPERTY_EMIT_UNCOMPRESSED_EMPTY_ELEMENTS   WS_XML_WRITER_PROPERTY_ID = 18
 )
+
+// String returns the WS_XML_WRITER_PROPERTY_ID constant's name, or its numeric form when
+// the value is not a known constant.
+func (e WS_XML_WRITER_PROPERTY_ID) String() string {
+	switch e {
+	case WS_XML_WRITER_PROPERTY_MAX_DEPTH:
+		return "WS_XML_WRITER_PROPERTY_MAX_DEPTH"
+	case WS_XML_WRITER_PROPERTY_ALLOW_FRAGMENT:
+		return "WS_XML_WRITER_PROPERTY_ALLOW_FRAGMENT"
+	case WS_XML_WRITER_PROPERTY_MAX_ATTRIBUTES:
+		return "WS_XML_WRITER_PROPERTY_MAX_ATTRIBUTES"
+	case WS_XML_WRITER_PROPERTY_WRITE_DECLARATION:
+		return "WS_XML_WRITER_PROPERTY_WRITE_DECLARATION"
+	case WS_XML_WRITER_PROPERTY_INDENT:
+		return "WS_XML_WRITER_PROPERTY_INDENT"
+	case WS_XML_WRITER_PROPERTY_BUFFER_TRIM_SIZE:
+		return "WS_XML_WRITER_PROPERTY_BUFFER_TRIM_SIZE"
+	case WS_XML_WRITER_PROPERTY_CHARSET:
+		return "WS_XML_WRITER_PROPERTY_CHARSET"
+	case WS_XML_WRITER_PROPERTY_BUFFERS:
+		return "WS_XML_WRITER_PROPERTY_BUFFERS"
+	case WS_XML_WRITER_PROPERTY_BUFFER_MAX_SIZE:
+		return "WS_XML_WRITER_PROPERTY_BUFFER_MAX_SIZE"
+	case WS_XML_WRITER_PROPERTY_BYTES:
+		return "WS_XML_WRITER_PROPERTY_BYTES"
+	case WS_XML_WRITER_PROPERTY_IN_ATTRIBUTE:
+		return "WS_XML_WRITER_PROPERTY_IN_ATTRIBUTE"
+	case WS_XML_WRITER_PROPERTY_MAX_MIME_PARTS_BUFFER_SIZE:
+		return "WS_XML_WRITER_PROPERTY_MAX_MIME_PARTS_BUFFER_SIZE"
+	case WS_XML_WRITER_PROPERTY_INITIAL_BUFFER:
+		return "WS_XML_WRITER_PROPERTY_INITIAL_BUFFER"
+	case WS_XML_WRITER_PROPERTY_ALLOW_INVALID_CHARACTER_REFERENCES:
+		return "WS_XML_WRITER_PROPERTY_ALLOW_INVALID_CHARACTER_REFERENCES"
+	case WS_XML_WRITER_PROPERTY_MAX_NAMESPACES:
+		return "WS_XML_WRITER_PROPERTY_MAX_NAMESPACES"
+	case WS_XML_WRITER_PROPERTY_BYTES_WRITTEN:
+		return "WS_XML_WRITER_PROPERTY_BYTES_WRITTEN"
+	case WS_XML_WRITER_PROPERTY_BYTES_TO_CLOSE:
+		return "WS_XML_WRITER_PROPERTY_BYTES_TO_CLOSE"
+	case WS_XML_WRITER_PROPERTY_COMPRESS_EMPTY_ELEMENTS:
+		return "WS_XML_WRITER_PROPERTY_COMPRESS_EMPTY_ELEMENTS"
+	case WS_XML_WRITER_PROPERTY_EMIT_UNCOMPRESSED_EMPTY_ELEMENTS:
+		return "WS_XML_WRITER_PROPERTY_EMIT_UNCOMPRESSED_EMPTY_ELEMENTS"
+	default:
+		return fmt.Sprintf("WS_XML_WRITER_PROPERTY_ID(%d)", int32(e))
+	}
+}

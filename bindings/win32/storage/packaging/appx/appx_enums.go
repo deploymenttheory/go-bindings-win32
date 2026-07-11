@@ -4,6 +4,11 @@
 
 package appx
 
+import (
+	"fmt"
+	"strings"
+)
+
 // APPX_BUNDLE_FOOTPRINT_FILE_TYPE: https://learn.microsoft.com/windows/win32/api/appxpackaging/ne-appxpackaging-appx_bundle_footprint_file_type
 type APPX_BUNDLE_FOOTPRINT_FILE_TYPE int32
 
@@ -15,6 +20,21 @@ const (
 	APPX_BUNDLE_FOOTPRINT_FILE_TYPE_LAST      APPX_BUNDLE_FOOTPRINT_FILE_TYPE = 2
 )
 
+// String returns the APPX_BUNDLE_FOOTPRINT_FILE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_BUNDLE_FOOTPRINT_FILE_TYPE) String() string {
+	switch e {
+	case APPX_BUNDLE_FOOTPRINT_FILE_TYPE_FIRST:
+		return "APPX_BUNDLE_FOOTPRINT_FILE_TYPE_FIRST"
+	case APPX_BUNDLE_FOOTPRINT_FILE_TYPE_BLOCKMAP:
+		return "APPX_BUNDLE_FOOTPRINT_FILE_TYPE_BLOCKMAP"
+	case APPX_BUNDLE_FOOTPRINT_FILE_TYPE_SIGNATURE:
+		return "APPX_BUNDLE_FOOTPRINT_FILE_TYPE_SIGNATURE"
+	default:
+		return fmt.Sprintf("APPX_BUNDLE_FOOTPRINT_FILE_TYPE(%d)", int32(e))
+	}
+}
+
 // APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE: https://learn.microsoft.com/windows/win32/api/appxpackaging/ne-appxpackaging-appx_bundle_payload_package_type
 type APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE int32
 
@@ -23,7 +43,21 @@ const (
 	APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE_RESOURCE    APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE = 1
 )
 
+// String returns the APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE) String() string {
+	switch e {
+	case APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE_APPLICATION:
+		return "APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE_APPLICATION"
+	case APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE_RESOURCE:
+		return "APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE_RESOURCE"
+	default:
+		return fmt.Sprintf("APPX_BUNDLE_PAYLOAD_PACKAGE_TYPE(%d)", int32(e))
+	}
+}
+
 // APPX_CAPABILITIES: https://learn.microsoft.com/windows/win32/api/appxpackaging/ne-appxpackaging-appx_capabilities
+// Bitmask — values may be combined with |.
 type APPX_CAPABILITIES int32
 
 const (
@@ -41,6 +75,52 @@ const (
 	APPX_CAPABILITY_CONTACTS                      APPX_CAPABILITIES = 2048
 )
 
+// String returns the APPX_CAPABILITIES constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_CAPABILITIES) String() string {
+	var parts []string
+	if e&APPX_CAPABILITY_INTERNET_CLIENT != 0 {
+		parts = append(parts, "APPX_CAPABILITY_INTERNET_CLIENT")
+	}
+	if e&APPX_CAPABILITY_INTERNET_CLIENT_SERVER != 0 {
+		parts = append(parts, "APPX_CAPABILITY_INTERNET_CLIENT_SERVER")
+	}
+	if e&APPX_CAPABILITY_PRIVATE_NETWORK_CLIENT_SERVER != 0 {
+		parts = append(parts, "APPX_CAPABILITY_PRIVATE_NETWORK_CLIENT_SERVER")
+	}
+	if e&APPX_CAPABILITY_DOCUMENTS_LIBRARY != 0 {
+		parts = append(parts, "APPX_CAPABILITY_DOCUMENTS_LIBRARY")
+	}
+	if e&APPX_CAPABILITY_PICTURES_LIBRARY != 0 {
+		parts = append(parts, "APPX_CAPABILITY_PICTURES_LIBRARY")
+	}
+	if e&APPX_CAPABILITY_VIDEOS_LIBRARY != 0 {
+		parts = append(parts, "APPX_CAPABILITY_VIDEOS_LIBRARY")
+	}
+	if e&APPX_CAPABILITY_MUSIC_LIBRARY != 0 {
+		parts = append(parts, "APPX_CAPABILITY_MUSIC_LIBRARY")
+	}
+	if e&APPX_CAPABILITY_ENTERPRISE_AUTHENTICATION != 0 {
+		parts = append(parts, "APPX_CAPABILITY_ENTERPRISE_AUTHENTICATION")
+	}
+	if e&APPX_CAPABILITY_SHARED_USER_CERTIFICATES != 0 {
+		parts = append(parts, "APPX_CAPABILITY_SHARED_USER_CERTIFICATES")
+	}
+	if e&APPX_CAPABILITY_REMOVABLE_STORAGE != 0 {
+		parts = append(parts, "APPX_CAPABILITY_REMOVABLE_STORAGE")
+	}
+	if e&APPX_CAPABILITY_APPOINTMENTS != 0 {
+		parts = append(parts, "APPX_CAPABILITY_APPOINTMENTS")
+	}
+	if e&APPX_CAPABILITY_CONTACTS != 0 {
+		parts = append(parts, "APPX_CAPABILITY_CONTACTS")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type APPX_CAPABILITY_CLASS_TYPE int32
 
 const (
@@ -51,6 +131,27 @@ const (
 	APPX_CAPABILITY_CLASS_ALL        APPX_CAPABILITY_CLASS_TYPE = 7
 	APPX_CAPABILITY_CLASS_CUSTOM     APPX_CAPABILITY_CLASS_TYPE = 8
 )
+
+// String returns the APPX_CAPABILITY_CLASS_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_CAPABILITY_CLASS_TYPE) String() string {
+	switch e {
+	case APPX_CAPABILITY_CLASS_DEFAULT:
+		return "APPX_CAPABILITY_CLASS_DEFAULT"
+	case APPX_CAPABILITY_CLASS_GENERAL:
+		return "APPX_CAPABILITY_CLASS_GENERAL"
+	case APPX_CAPABILITY_CLASS_RESTRICTED:
+		return "APPX_CAPABILITY_CLASS_RESTRICTED"
+	case APPX_CAPABILITY_CLASS_WINDOWS:
+		return "APPX_CAPABILITY_CLASS_WINDOWS"
+	case APPX_CAPABILITY_CLASS_ALL:
+		return "APPX_CAPABILITY_CLASS_ALL"
+	case APPX_CAPABILITY_CLASS_CUSTOM:
+		return "APPX_CAPABILITY_CLASS_CUSTOM"
+	default:
+		return fmt.Sprintf("APPX_CAPABILITY_CLASS_TYPE(%d)", int32(e))
+	}
+}
 
 // APPX_COMPRESSION_OPTION: https://learn.microsoft.com/windows/win32/api/appxpackaging/ne-appxpackaging-appx_compression_option
 type APPX_COMPRESSION_OPTION int32
@@ -63,7 +164,27 @@ const (
 	APPX_COMPRESSION_OPTION_SUPERFAST APPX_COMPRESSION_OPTION = 4
 )
 
+// String returns the APPX_COMPRESSION_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_COMPRESSION_OPTION) String() string {
+	switch e {
+	case APPX_COMPRESSION_OPTION_NONE:
+		return "APPX_COMPRESSION_OPTION_NONE"
+	case APPX_COMPRESSION_OPTION_NORMAL:
+		return "APPX_COMPRESSION_OPTION_NORMAL"
+	case APPX_COMPRESSION_OPTION_MAXIMUM:
+		return "APPX_COMPRESSION_OPTION_MAXIMUM"
+	case APPX_COMPRESSION_OPTION_FAST:
+		return "APPX_COMPRESSION_OPTION_FAST"
+	case APPX_COMPRESSION_OPTION_SUPERFAST:
+		return "APPX_COMPRESSION_OPTION_SUPERFAST"
+	default:
+		return fmt.Sprintf("APPX_COMPRESSION_OPTION(%d)", int32(e))
+	}
+}
+
 // APPX_ENCRYPTED_PACKAGE_OPTIONS: https://learn.microsoft.com/windows/win32/api/appxpackaging/ne-appxpackaging-appx_encrypted_package_options
+// Bitmask — values may be combined with |.
 type APPX_ENCRYPTED_PACKAGE_OPTIONS int32
 
 const (
@@ -71,6 +192,22 @@ const (
 	APPX_ENCRYPTED_PACKAGE_OPTION_DIFFUSION    APPX_ENCRYPTED_PACKAGE_OPTIONS = 1
 	APPX_ENCRYPTED_PACKAGE_OPTION_PAGE_HASHING APPX_ENCRYPTED_PACKAGE_OPTIONS = 2
 )
+
+// String returns the APPX_ENCRYPTED_PACKAGE_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_ENCRYPTED_PACKAGE_OPTIONS) String() string {
+	var parts []string
+	if e&APPX_ENCRYPTED_PACKAGE_OPTION_DIFFUSION != 0 {
+		parts = append(parts, "APPX_ENCRYPTED_PACKAGE_OPTION_DIFFUSION")
+	}
+	if e&APPX_ENCRYPTED_PACKAGE_OPTION_PAGE_HASHING != 0 {
+		parts = append(parts, "APPX_ENCRYPTED_PACKAGE_OPTION_PAGE_HASHING")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // APPX_FOOTPRINT_FILE_TYPE: https://learn.microsoft.com/windows/win32/api/appxpackaging/ne-appxpackaging-appx_footprint_file_type
 type APPX_FOOTPRINT_FILE_TYPE int32
@@ -83,6 +220,25 @@ const (
 	APPX_FOOTPRINT_FILE_TYPE_CONTENTGROUPMAP APPX_FOOTPRINT_FILE_TYPE = 4
 )
 
+// String returns the APPX_FOOTPRINT_FILE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_FOOTPRINT_FILE_TYPE) String() string {
+	switch e {
+	case APPX_FOOTPRINT_FILE_TYPE_MANIFEST:
+		return "APPX_FOOTPRINT_FILE_TYPE_MANIFEST"
+	case APPX_FOOTPRINT_FILE_TYPE_BLOCKMAP:
+		return "APPX_FOOTPRINT_FILE_TYPE_BLOCKMAP"
+	case APPX_FOOTPRINT_FILE_TYPE_SIGNATURE:
+		return "APPX_FOOTPRINT_FILE_TYPE_SIGNATURE"
+	case APPX_FOOTPRINT_FILE_TYPE_CODEINTEGRITY:
+		return "APPX_FOOTPRINT_FILE_TYPE_CODEINTEGRITY"
+	case APPX_FOOTPRINT_FILE_TYPE_CONTENTGROUPMAP:
+		return "APPX_FOOTPRINT_FILE_TYPE_CONTENTGROUPMAP"
+	default:
+		return fmt.Sprintf("APPX_FOOTPRINT_FILE_TYPE(%d)", int32(e))
+	}
+}
+
 // APPX_PACKAGE_ARCHITECTURE: https://learn.microsoft.com/windows/win32/api/appxpackaging/ne-appxpackaging-appx_package_architecture
 type APPX_PACKAGE_ARCHITECTURE int32
 
@@ -93,6 +249,25 @@ const (
 	APPX_PACKAGE_ARCHITECTURE_NEUTRAL APPX_PACKAGE_ARCHITECTURE = 11
 	APPX_PACKAGE_ARCHITECTURE_ARM64   APPX_PACKAGE_ARCHITECTURE = 12
 )
+
+// String returns the APPX_PACKAGE_ARCHITECTURE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_PACKAGE_ARCHITECTURE) String() string {
+	switch e {
+	case APPX_PACKAGE_ARCHITECTURE_X86:
+		return "APPX_PACKAGE_ARCHITECTURE_X86"
+	case APPX_PACKAGE_ARCHITECTURE_ARM:
+		return "APPX_PACKAGE_ARCHITECTURE_ARM"
+	case APPX_PACKAGE_ARCHITECTURE_X64:
+		return "APPX_PACKAGE_ARCHITECTURE_X64"
+	case APPX_PACKAGE_ARCHITECTURE_NEUTRAL:
+		return "APPX_PACKAGE_ARCHITECTURE_NEUTRAL"
+	case APPX_PACKAGE_ARCHITECTURE_ARM64:
+		return "APPX_PACKAGE_ARCHITECTURE_ARM64"
+	default:
+		return fmt.Sprintf("APPX_PACKAGE_ARCHITECTURE(%d)", int32(e))
+	}
+}
 
 // APPX_PACKAGE_ARCHITECTURE2: https://learn.microsoft.com/windows/win32/api/appxpackaging/ne-appxpackaging-appx_package_architecture2
 type APPX_PACKAGE_ARCHITECTURE2 int32
@@ -107,7 +282,31 @@ const (
 	APPX_PACKAGE_ARCHITECTURE2_UNKNOWN      APPX_PACKAGE_ARCHITECTURE2 = 65535
 )
 
+// String returns the APPX_PACKAGE_ARCHITECTURE2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_PACKAGE_ARCHITECTURE2) String() string {
+	switch e {
+	case APPX_PACKAGE_ARCHITECTURE2_X86:
+		return "APPX_PACKAGE_ARCHITECTURE2_X86"
+	case APPX_PACKAGE_ARCHITECTURE2_ARM:
+		return "APPX_PACKAGE_ARCHITECTURE2_ARM"
+	case APPX_PACKAGE_ARCHITECTURE2_X64:
+		return "APPX_PACKAGE_ARCHITECTURE2_X64"
+	case APPX_PACKAGE_ARCHITECTURE2_NEUTRAL:
+		return "APPX_PACKAGE_ARCHITECTURE2_NEUTRAL"
+	case APPX_PACKAGE_ARCHITECTURE2_ARM64:
+		return "APPX_PACKAGE_ARCHITECTURE2_ARM64"
+	case APPX_PACKAGE_ARCHITECTURE2_X86_ON_ARM64:
+		return "APPX_PACKAGE_ARCHITECTURE2_X86_ON_ARM64"
+	case APPX_PACKAGE_ARCHITECTURE2_UNKNOWN:
+		return "APPX_PACKAGE_ARCHITECTURE2_UNKNOWN"
+	default:
+		return fmt.Sprintf("APPX_PACKAGE_ARCHITECTURE2(%d)", int32(e))
+	}
+}
+
 // APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS: https://learn.microsoft.com/windows/win32/api/appxpackaging/ne-appxpackaging-appx_package_editor_update_package_manifest_options
+// Bitmask — values may be combined with |.
 type APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS int32
 
 const (
@@ -116,12 +315,39 @@ const (
 	APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_LOCALIZED       APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS = 2
 )
 
+// String returns the APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS) String() string {
+	var parts []string
+	if e&APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_SKIP_VALIDATION != 0 {
+		parts = append(parts, "APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_SKIP_VALIDATION")
+	}
+	if e&APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_LOCALIZED != 0 {
+		parts = append(parts, "APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTION_LOCALIZED")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 // APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION: https://learn.microsoft.com/windows/win32/api/appxpackaging/ne-appxpackaging-appx_package_editor_update_package_option
 type APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION int32
 
 const (
 	APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION_APPEND_DELTA APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION = 0
 )
+
+// String returns the APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION) String() string {
+	switch e {
+	case APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION_APPEND_DELTA:
+		return "APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION_APPEND_DELTA"
+	default:
+		return fmt.Sprintf("APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_OPTION(%d)", int32(e))
+	}
+}
 
 type APPX_PACKAGING_CONTEXT_CHANGE_TYPE int32
 
@@ -132,7 +358,25 @@ const (
 	APPX_PACKAGING_CONTEXT_CHANGE_TYPE_END     APPX_PACKAGING_CONTEXT_CHANGE_TYPE = 3
 )
 
+// String returns the APPX_PACKAGING_CONTEXT_CHANGE_TYPE constant's name, or its numeric form when
+// the value is not a known constant.
+func (e APPX_PACKAGING_CONTEXT_CHANGE_TYPE) String() string {
+	switch e {
+	case APPX_PACKAGING_CONTEXT_CHANGE_TYPE_START:
+		return "APPX_PACKAGING_CONTEXT_CHANGE_TYPE_START"
+	case APPX_PACKAGING_CONTEXT_CHANGE_TYPE_CHANGE:
+		return "APPX_PACKAGING_CONTEXT_CHANGE_TYPE_CHANGE"
+	case APPX_PACKAGING_CONTEXT_CHANGE_TYPE_DETAILS:
+		return "APPX_PACKAGING_CONTEXT_CHANGE_TYPE_DETAILS"
+	case APPX_PACKAGING_CONTEXT_CHANGE_TYPE_END:
+		return "APPX_PACKAGING_CONTEXT_CHANGE_TYPE_END"
+	default:
+		return fmt.Sprintf("APPX_PACKAGING_CONTEXT_CHANGE_TYPE(%d)", int32(e))
+	}
+}
+
 // AddPackageDependencyOptions: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-addpackagedependencyoptions
+// Bitmask — values may be combined with |.
 type AddPackageDependencyOptions int32
 
 const (
@@ -140,6 +384,20 @@ const (
 	AddPackageDependencyOptions_PrependIfRankCollision AddPackageDependencyOptions = 1
 )
 
+// String returns the AddPackageDependencyOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AddPackageDependencyOptions) String() string {
+	var parts []string
+	if e&AddPackageDependencyOptions_PrependIfRankCollision != 0 {
+		parts = append(parts, "AddPackageDependencyOptions_PrependIfRankCollision")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
 type AddPackageDependencyOptions2 int32
 
 const (
@@ -147,6 +405,22 @@ const (
 	AddPackageDependencyOptions2_PrependIfRankCollision     AddPackageDependencyOptions2 = 1
 	AddPackageDependencyOptions2_SpecifiedPackageFamilyOnly AddPackageDependencyOptions2 = 2
 )
+
+// String returns the AddPackageDependencyOptions2 constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AddPackageDependencyOptions2) String() string {
+	var parts []string
+	if e&AddPackageDependencyOptions2_PrependIfRankCollision != 0 {
+		parts = append(parts, "AddPackageDependencyOptions2_PrependIfRankCollision")
+	}
+	if e&AddPackageDependencyOptions2_SpecifiedPackageFamilyOnly != 0 {
+		parts = append(parts, "AddPackageDependencyOptions2_SpecifiedPackageFamilyOnly")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 // AppPolicyClrCompat: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-apppolicyclrcompat
 type AppPolicyClrCompat int32
@@ -158,6 +432,23 @@ const (
 	AppPolicyClrCompat_PackagedDesktop AppPolicyClrCompat = 3
 )
 
+// String returns the AppPolicyClrCompat constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AppPolicyClrCompat) String() string {
+	switch e {
+	case AppPolicyClrCompat_Other:
+		return "AppPolicyClrCompat_Other"
+	case AppPolicyClrCompat_ClassicDesktop:
+		return "AppPolicyClrCompat_ClassicDesktop"
+	case AppPolicyClrCompat_Universal:
+		return "AppPolicyClrCompat_Universal"
+	case AppPolicyClrCompat_PackagedDesktop:
+		return "AppPolicyClrCompat_PackagedDesktop"
+	default:
+		return fmt.Sprintf("AppPolicyClrCompat(%d)", int32(e))
+	}
+}
+
 // AppPolicyCreateFileAccess: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-apppolicycreatefileaccess
 type AppPolicyCreateFileAccess int32
 
@@ -165,6 +456,19 @@ const (
 	AppPolicyCreateFileAccess_Full    AppPolicyCreateFileAccess = 0
 	AppPolicyCreateFileAccess_Limited AppPolicyCreateFileAccess = 1
 )
+
+// String returns the AppPolicyCreateFileAccess constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AppPolicyCreateFileAccess) String() string {
+	switch e {
+	case AppPolicyCreateFileAccess_Full:
+		return "AppPolicyCreateFileAccess_Full"
+	case AppPolicyCreateFileAccess_Limited:
+		return "AppPolicyCreateFileAccess_Limited"
+	default:
+		return fmt.Sprintf("AppPolicyCreateFileAccess(%d)", int32(e))
+	}
+}
 
 // AppPolicyLifecycleManagement: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-apppolicylifecyclemanagement
 type AppPolicyLifecycleManagement int32
@@ -174,6 +478,19 @@ const (
 	AppPolicyLifecycleManagement_Managed   AppPolicyLifecycleManagement = 1
 )
 
+// String returns the AppPolicyLifecycleManagement constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AppPolicyLifecycleManagement) String() string {
+	switch e {
+	case AppPolicyLifecycleManagement_Unmanaged:
+		return "AppPolicyLifecycleManagement_Unmanaged"
+	case AppPolicyLifecycleManagement_Managed:
+		return "AppPolicyLifecycleManagement_Managed"
+	default:
+		return fmt.Sprintf("AppPolicyLifecycleManagement(%d)", int32(e))
+	}
+}
+
 // AppPolicyMediaFoundationCodecLoading: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-apppolicymediafoundationcodecloading
 type AppPolicyMediaFoundationCodecLoading int32
 
@@ -181,6 +498,19 @@ const (
 	AppPolicyMediaFoundationCodecLoading_All       AppPolicyMediaFoundationCodecLoading = 0
 	AppPolicyMediaFoundationCodecLoading_InboxOnly AppPolicyMediaFoundationCodecLoading = 1
 )
+
+// String returns the AppPolicyMediaFoundationCodecLoading constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AppPolicyMediaFoundationCodecLoading) String() string {
+	switch e {
+	case AppPolicyMediaFoundationCodecLoading_All:
+		return "AppPolicyMediaFoundationCodecLoading_All"
+	case AppPolicyMediaFoundationCodecLoading_InboxOnly:
+		return "AppPolicyMediaFoundationCodecLoading_InboxOnly"
+	default:
+		return fmt.Sprintf("AppPolicyMediaFoundationCodecLoading(%d)", int32(e))
+	}
+}
 
 // AppPolicyProcessTerminationMethod: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-apppolicyprocessterminationmethod
 type AppPolicyProcessTerminationMethod int32
@@ -190,6 +520,19 @@ const (
 	AppPolicyProcessTerminationMethod_TerminateProcess AppPolicyProcessTerminationMethod = 1
 )
 
+// String returns the AppPolicyProcessTerminationMethod constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AppPolicyProcessTerminationMethod) String() string {
+	switch e {
+	case AppPolicyProcessTerminationMethod_ExitProcess:
+		return "AppPolicyProcessTerminationMethod_ExitProcess"
+	case AppPolicyProcessTerminationMethod_TerminateProcess:
+		return "AppPolicyProcessTerminationMethod_TerminateProcess"
+	default:
+		return fmt.Sprintf("AppPolicyProcessTerminationMethod(%d)", int32(e))
+	}
+}
+
 // AppPolicyShowDeveloperDiagnostic: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-apppolicyshowdeveloperdiagnostic
 type AppPolicyShowDeveloperDiagnostic int32
 
@@ -198,6 +541,19 @@ const (
 	AppPolicyShowDeveloperDiagnostic_ShowUI AppPolicyShowDeveloperDiagnostic = 1
 )
 
+// String returns the AppPolicyShowDeveloperDiagnostic constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AppPolicyShowDeveloperDiagnostic) String() string {
+	switch e {
+	case AppPolicyShowDeveloperDiagnostic_None:
+		return "AppPolicyShowDeveloperDiagnostic_None"
+	case AppPolicyShowDeveloperDiagnostic_ShowUI:
+		return "AppPolicyShowDeveloperDiagnostic_ShowUI"
+	default:
+		return fmt.Sprintf("AppPolicyShowDeveloperDiagnostic(%d)", int32(e))
+	}
+}
+
 // AppPolicyThreadInitializationType: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-apppolicythreadinitializationtype
 type AppPolicyThreadInitializationType int32
 
@@ -205,6 +561,19 @@ const (
 	AppPolicyThreadInitializationType_None            AppPolicyThreadInitializationType = 0
 	AppPolicyThreadInitializationType_InitializeWinRT AppPolicyThreadInitializationType = 1
 )
+
+// String returns the AppPolicyThreadInitializationType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AppPolicyThreadInitializationType) String() string {
+	switch e {
+	case AppPolicyThreadInitializationType_None:
+		return "AppPolicyThreadInitializationType_None"
+	case AppPolicyThreadInitializationType_InitializeWinRT:
+		return "AppPolicyThreadInitializationType_InitializeWinRT"
+	default:
+		return fmt.Sprintf("AppPolicyThreadInitializationType(%d)", int32(e))
+	}
+}
 
 // AppPolicyWindowingModel: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-apppolicywindowingmodel
 type AppPolicyWindowingModel int32
@@ -216,7 +585,25 @@ const (
 	AppPolicyWindowingModel_ClassicPhone   AppPolicyWindowingModel = 3
 )
 
+// String returns the AppPolicyWindowingModel constant's name, or its numeric form when
+// the value is not a known constant.
+func (e AppPolicyWindowingModel) String() string {
+	switch e {
+	case AppPolicyWindowingModel_None:
+		return "AppPolicyWindowingModel_None"
+	case AppPolicyWindowingModel_Universal:
+		return "AppPolicyWindowingModel_Universal"
+	case AppPolicyWindowingModel_ClassicDesktop:
+		return "AppPolicyWindowingModel_ClassicDesktop"
+	case AppPolicyWindowingModel_ClassicPhone:
+		return "AppPolicyWindowingModel_ClassicPhone"
+	default:
+		return fmt.Sprintf("AppPolicyWindowingModel(%d)", int32(e))
+	}
+}
+
 // CreatePackageDependencyOptions: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-createpackagedependencyoptions
+// Bitmask — values may be combined with |.
 type CreatePackageDependencyOptions int32
 
 const (
@@ -224,6 +611,22 @@ const (
 	CreatePackageDependencyOptions_DoNotVerifyDependencyResolution CreatePackageDependencyOptions = 1
 	CreatePackageDependencyOptions_ScopeIsSystem                   CreatePackageDependencyOptions = 2
 )
+
+// String returns the CreatePackageDependencyOptions constant's name, or its numeric form when
+// the value is not a known constant.
+func (e CreatePackageDependencyOptions) String() string {
+	var parts []string
+	if e&CreatePackageDependencyOptions_DoNotVerifyDependencyResolution != 0 {
+		parts = append(parts, "CreatePackageDependencyOptions_DoNotVerifyDependencyResolution")
+	}
+	if e&CreatePackageDependencyOptions_ScopeIsSystem != 0 {
+		parts = append(parts, "CreatePackageDependencyOptions_ScopeIsSystem")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
 
 type DX_FEATURE_LEVEL int32
 
@@ -234,6 +637,23 @@ const (
 	DX_FEATURE_LEVEL_11          DX_FEATURE_LEVEL = 3
 )
 
+// String returns the DX_FEATURE_LEVEL constant's name, or its numeric form when
+// the value is not a known constant.
+func (e DX_FEATURE_LEVEL) String() string {
+	switch e {
+	case DX_FEATURE_LEVEL_UNSPECIFIED:
+		return "DX_FEATURE_LEVEL_UNSPECIFIED"
+	case DX_FEATURE_LEVEL_9:
+		return "DX_FEATURE_LEVEL_9"
+	case DX_FEATURE_LEVEL_10:
+		return "DX_FEATURE_LEVEL_10"
+	case DX_FEATURE_LEVEL_11:
+		return "DX_FEATURE_LEVEL_11"
+	default:
+		return fmt.Sprintf("DX_FEATURE_LEVEL(%d)", int32(e))
+	}
+}
+
 // PackageDependencyLifetimeKind: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-packagedependencylifetimekind
 type PackageDependencyLifetimeKind int32
 
@@ -243,7 +663,23 @@ const (
 	PackageDependencyLifetimeKind_RegistryKey PackageDependencyLifetimeKind = 2
 )
 
+// String returns the PackageDependencyLifetimeKind constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PackageDependencyLifetimeKind) String() string {
+	switch e {
+	case PackageDependencyLifetimeKind_Process:
+		return "PackageDependencyLifetimeKind_Process"
+	case PackageDependencyLifetimeKind_FilePath:
+		return "PackageDependencyLifetimeKind_FilePath"
+	case PackageDependencyLifetimeKind_RegistryKey:
+		return "PackageDependencyLifetimeKind_RegistryKey"
+	default:
+		return fmt.Sprintf("PackageDependencyLifetimeKind(%d)", int32(e))
+	}
+}
+
 // PackageDependencyProcessorArchitectures: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-packagedependencyprocessorarchitectures
+// Bitmask — values may be combined with |.
 type PackageDependencyProcessorArchitectures int32
 
 const (
@@ -256,11 +692,50 @@ const (
 	PackageDependencyProcessorArchitectures_X86A64  PackageDependencyProcessorArchitectures = 32
 )
 
+// String returns the PackageDependencyProcessorArchitectures constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PackageDependencyProcessorArchitectures) String() string {
+	var parts []string
+	if e&PackageDependencyProcessorArchitectures_Neutral != 0 {
+		parts = append(parts, "PackageDependencyProcessorArchitectures_Neutral")
+	}
+	if e&PackageDependencyProcessorArchitectures_X86 != 0 {
+		parts = append(parts, "PackageDependencyProcessorArchitectures_X86")
+	}
+	if e&PackageDependencyProcessorArchitectures_X64 != 0 {
+		parts = append(parts, "PackageDependencyProcessorArchitectures_X64")
+	}
+	if e&PackageDependencyProcessorArchitectures_Arm != 0 {
+		parts = append(parts, "PackageDependencyProcessorArchitectures_Arm")
+	}
+	if e&PackageDependencyProcessorArchitectures_Arm64 != 0 {
+		parts = append(parts, "PackageDependencyProcessorArchitectures_Arm64")
+	}
+	if e&PackageDependencyProcessorArchitectures_X86A64 != 0 {
+		parts = append(parts, "PackageDependencyProcessorArchitectures_X86A64")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
 type PackageInfo3Type int32
 
 const (
 	PackageInfo3Type_PackageInfoGeneration PackageInfo3Type = 16
 )
+
+// String returns the PackageInfo3Type constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PackageInfo3Type) String() string {
+	switch e {
+	case PackageInfo3Type_PackageInfoGeneration:
+		return "PackageInfo3Type_PackageInfoGeneration"
+	default:
+		return fmt.Sprintf("PackageInfo3Type(%d)", int32(e))
+	}
+}
 
 // PackageOrigin: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-packageorigin
 type PackageOrigin int32
@@ -275,6 +750,29 @@ const (
 	PackageOrigin_LineOfBusiness    PackageOrigin = 6
 )
 
+// String returns the PackageOrigin constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PackageOrigin) String() string {
+	switch e {
+	case PackageOrigin_Unknown:
+		return "PackageOrigin_Unknown"
+	case PackageOrigin_Unsigned:
+		return "PackageOrigin_Unsigned"
+	case PackageOrigin_Inbox:
+		return "PackageOrigin_Inbox"
+	case PackageOrigin_Store:
+		return "PackageOrigin_Store"
+	case PackageOrigin_DeveloperUnsigned:
+		return "PackageOrigin_DeveloperUnsigned"
+	case PackageOrigin_DeveloperSigned:
+		return "PackageOrigin_DeveloperSigned"
+	case PackageOrigin_LineOfBusiness:
+		return "PackageOrigin_LineOfBusiness"
+	default:
+		return fmt.Sprintf("PackageOrigin(%d)", int32(e))
+	}
+}
+
 // PackagePathType: https://learn.microsoft.com/windows/win32/api/appmodel/ne-appmodel-packagepathtype
 type PackagePathType int32
 
@@ -286,3 +784,24 @@ const (
 	PackagePathType_UserExternal      PackagePathType = 4
 	PackagePathType_EffectiveExternal PackagePathType = 5
 )
+
+// String returns the PackagePathType constant's name, or its numeric form when
+// the value is not a known constant.
+func (e PackagePathType) String() string {
+	switch e {
+	case PackagePathType_Install:
+		return "PackagePathType_Install"
+	case PackagePathType_Mutable:
+		return "PackagePathType_Mutable"
+	case PackagePathType_Effective:
+		return "PackagePathType_Effective"
+	case PackagePathType_MachineExternal:
+		return "PackagePathType_MachineExternal"
+	case PackagePathType_UserExternal:
+		return "PackagePathType_UserExternal"
+	case PackagePathType_EffectiveExternal:
+		return "PackagePathType_EffectiveExternal"
+	default:
+		return fmt.Sprintf("PackagePathType(%d)", int32(e))
+	}
+}

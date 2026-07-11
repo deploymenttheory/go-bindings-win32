@@ -1,4 +1,4 @@
-package idiowin
+package rawwin
 
 import (
 	"fmt"
@@ -11,13 +11,13 @@ import (
 )
 
 // buildHandleClosers emits a uniform Close<Handle>(h) error helper for each
-// [RAIIFree] handle typedef whose closer can be called cleanly. It returns
-// the rendered file body (empty if none).
+// [RAIIFree] handle typedef whose closer can be called cleanly. Returns the
+// rendered file body (empty if none).
 //
-// A closer is emitted only when the free function is unambiguous, was
-// emitted by the raw tier, takes exactly the handle, and has a normalizable
-// return (HRESULT, BOOL, or void). Everything else is skipped with a
-// diagnostic — the raw close function is always still available directly.
+// A closer is emitted only when the free function is unambiguous, takes
+// exactly the handle, and has a normalizable return (HRESULT / BOOL / void).
+// Everything else is skipped with a diagnostic — the close function is always
+// still callable directly.
 func (g *Generator) buildHandleClosers(meta *win32meta.NamespaceMeta, imports typemap.ImportSet) string {
 	names := make([]string, 0, len(meta.Typedefs))
 	for name := range meta.Typedefs {
@@ -38,7 +38,7 @@ func (g *Generator) buildHandleClosers(meta *win32meta.NamespaceMeta, imports ty
 }
 
 func (g *Generator) buildCloser(meta *win32meta.NamespaceMeta, handleName string, typedef *win32meta.Typedef, imports typemap.ImportSet) (string, bool) {
-	context := typemap.Context{Namespace: meta.Namespace, QualifyOwn: true}
+	context := typemap.Context{Namespace: meta.Namespace}
 
 	// The handle must be a uintptr-backed handle typedef we can convert.
 	handleRef := win32meta.TypeRef{Kind: "ApiRef", Name: handleName, Api: meta.Namespace, TargetKind: "Typedef"}
@@ -52,16 +52,10 @@ func (g *Generator) buildCloser(meta *win32meta.NamespaceMeta, handleName string
 		g.diag("handle %s: free func %s ambiguous or unknown, no closer", handleName, typedef.FreeFunc)
 		return "", false
 	}
-	freeGoName := naming.Export(typedef.FreeFunc)
-	if !g.emittedFunctions[owner.Namespace][freeGoName] {
-		g.diag("handle %s: free func %s not emitted, no closer", handleName, typedef.FreeFunc)
-		return "", false
-	}
 	if len(owner.Function.Params) != 1 {
 		g.diag("handle %s: free func %s takes %d params, no closer", handleName, typedef.FreeFunc, len(owner.Function.Params))
 		return "", false
 	}
-
 	// The closer parameter must be a convertible-from-handle scalar/handle.
 	paramResolved := g.mapper.GoType(&owner.Function.Params[0].Type, context, imports)
 	switch paramResolved.Kind {
@@ -71,21 +65,29 @@ func (g *Generator) buildCloser(meta *win32meta.NamespaceMeta, handleName string
 		return "", false
 	}
 
-	returnResolved := g.mapper.GoType(&owner.Function.Return, typemap.Context{Namespace: meta.Namespace, QualifyOwn: true, IsReturn: true}, imports)
-	freeAlias := naming.ImportAlias(owner.Namespace)
-	call := freeAlias + "." + freeGoName + "(" + paramResolved.GoType + "(h))"
+	// The free function is emitted with an idiomatic signature; normalize its
+	// return to error. Close functions are not Unicode -W variants, so their
+	// emitted Go name is naming.Export(FreeFunc).
+	freeReturn := g.mapper.GoType(&owner.Function.Return, typemap.Context{Namespace: owner.Namespace, IsReturn: true}, typemap.ImportSet{})
+	freeName := naming.Export(typedef.FreeFunc)
+	callee := freeName
+	if owner.Namespace != meta.Namespace {
+		alias := naming.ImportAlias(owner.Namespace)
+		callee = alias + "." + freeName
+		imports[alias] = g.mapper.ModulePath + "/bindings/win32/" + naming.PackagePath(owner.Namespace)
+	}
+	call := callee + "(" + paramResolved.GoType + "(h))"
 
 	var returnStmt string
 	switch {
-	case isHRESULT(returnResolved):
-		returnStmt = "return win32.HRESULTError(int32(" + call + "))"
-		imports["win32"] = g.modulePath + "/bindings/runtime/win32"
-	case owner.Function.SetLastError && isBOOL(returnResolved):
-		returnStmt = "return " + call // raw already returns error
-	case isBOOL(returnResolved):
-		returnStmt = "return win32.BoolErr(int32(" + call + "))"
-		imports["win32"] = g.modulePath + "/bindings/runtime/win32"
-	case returnResolved.Kind == typemap.KindVoid:
+	case isHRESULT(freeReturn) || (owner.Function.SetLastError && isBOOL(freeReturn)):
+		// Emitted as returning error.
+		returnStmt = "return " + call
+	case isBOOL(freeReturn):
+		// Emitted as returning bool.
+		returnStmt = "return win32.BoolErr(win32.Bool32(" + call + "))"
+		imports["win32"] = g.mapper.ModulePath + "/bindings/runtime/win32"
+	case freeReturn.Kind == typemap.KindVoid:
 		returnStmt = call + "\n\treturn nil"
 	default:
 		g.diag("handle %s: free func %s return not normalizable, no closer", handleName, typedef.FreeFunc)
@@ -97,7 +99,6 @@ func (g *Generator) buildCloser(meta *win32meta.NamespaceMeta, handleName string
 		g.diag("handle %s: closer name %s already used", handleName, closerName)
 		return "", false
 	}
-	imports[freeAlias] = g.rawImportPath(owner.Namespace)
 
 	return fmt.Sprintf(
 		"// %s releases a %s handle by calling %s.\nfunc %s(h %s) error {\n\t%s\n}\n\n",

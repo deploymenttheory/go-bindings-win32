@@ -5,15 +5,15 @@ package acceptance
 import (
 	"testing"
 
-	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/foundation"
-	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/threading"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 )
 
-// TestIdiomaticHandleCloser drives the generated [RAIIFree] closer: HANDLE's
-// closer CloseHANDLE forwards to CloseHandle and returns a Go error. Closing
-// a live handle succeeds; closing it again fails (invalid handle), proving
-// the error normalization is wired through.
-func TestIdiomaticHandleCloser(t *testing.T) {
+// TestHandleCloser drives the generated [RAIIFree] closer: HANDLE's closer
+// CloseHANDLE forwards to CloseHandle and returns a Go error. Closing a live
+// handle succeeds; closing it again fails (invalid handle), proving the error
+// normalization is wired through.
+func TestHandleCloser(t *testing.T) {
 	event, err := threading.CreateEvent(nil, true, false, "")
 	if err != nil {
 		t.Fatalf("CreateEvent: %v", err)

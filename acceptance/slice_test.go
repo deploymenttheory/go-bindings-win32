@@ -5,29 +5,27 @@ package acceptance
 import (
 	"testing"
 
-	rawfoundation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/threading"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 )
 
-// TestIdiomaticSliceParam drives WaitForMultipleObjects, whose idiomatic
-// wrapper collapses the (lpHandles, nCount) pair into a single []HANDLE
-// (count derived from len) and turns bWaitAll into a Go bool. Correct count
-// derivation is load-bearing: a wrong nCount would read past the slice or
-// wait on the wrong set.
-func TestIdiomaticSliceParam(t *testing.T) {
+// TestSliceParam drives WaitForMultipleObjects, whose signature collapses the
+// (lpHandles, nCount) pair into a single []HANDLE (count derived from len) and
+// turns bWaitAll into a Go bool. Correct count derivation is load-bearing: a
+// wrong nCount would read past the slice or wait on the wrong set.
+func TestSliceParam(t *testing.T) {
 	// Two manual-reset events; only the second is initially signaled.
 	unsignaled, err := threading.CreateEvent(nil, true, false, "")
 	if err != nil {
 		t.Fatalf("CreateEvent(unsignaled): %v", err)
 	}
-	defer rawfoundation.CloseHandle(unsignaled)
+	defer foundation.CloseHandle(unsignaled)
 
 	signaled, err := threading.CreateEvent(nil, true, true, "")
 	if err != nil {
 		t.Fatalf("CreateEvent(signaled): %v", err)
 	}
-	defer rawfoundation.CloseHandle(signaled)
+	defer foundation.CloseHandle(signaled)
 
 	handles := []foundation.HANDLE{unsignaled, signaled}
 

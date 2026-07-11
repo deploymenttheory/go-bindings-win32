@@ -12,34 +12,34 @@ import (
 )
 
 // buildFunctionModels converts a namespace's functions plus the DLL/proc
-// declaration block that dispatches them.
+// declaration block that dispatches them. Each function is emitted once with
+// the best shape: idiomatic Go signature (string/bool/[]T/error/…) dispatching
+// directly through syscall.SyscallN.
 func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports typemap.ImportSet) ([]view.FunctionModel, []view.DLLModel) {
 	var functions []view.FunctionModel
 	dllProcs := map[string][]view.ProcModel{}
 	dllSpelling := map[string]string{}
 
+	// Iterate in metadata order taking the first amd64 entry per name (Win32
+	// has same-named duplicate entries); claim names in that order so the
+	// -W desuffix is deterministic. Output is sorted by Go name below.
+	seen := map[string]bool{}
 	for i := range meta.Functions {
 		function := &meta.Functions[i]
 		if !amd64Compatible(function.Availability.Architectures) {
 			continue
 		}
-		goName := naming.Export(function.Name)
-		if !g.claimName(goName) {
-			g.diag("function %s: name already used in package %s", function.Name, meta.Namespace)
+		rawName := naming.Export(function.Name)
+		if seen[rawName] {
 			continue
 		}
-		model, ok := g.buildFunction(meta, function, imports)
+		seen[rawName] = true
+		model, ok := g.buildFunction(meta, function, rawName, imports)
 		if !ok {
-			g.unclaimName(goName)
 			continue
 		}
-		model.GoName = goName
-		model.ProcVar = "proc" + goName
-		if g.emittedFunctions[meta.Namespace] == nil {
-			g.emittedFunctions[meta.Namespace] = map[string]bool{}
-		}
-		g.emittedFunctions[meta.Namespace][goName] = true
 		functions = append(functions, model)
+
 		exportName := function.Name
 		if function.EntryPoint != "" {
 			exportName = function.EntryPoint
@@ -55,6 +55,7 @@ func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports t
 			ExportName: exportName,
 		})
 	}
+	sort.Slice(functions, func(i, j int) bool { return functions[i].GoName < functions[j].GoName })
 
 	dllKeys := make([]string, 0, len(dllProcs))
 	for key := range dllProcs {
@@ -72,6 +73,41 @@ func (g *Generator) buildFunctionModels(meta *win32meta.NamespaceMeta, imports t
 		})
 	}
 	return functions, dlls
+}
+
+// splitIdents extracts the Go identifiers from a type expression
+// ("*security.SECURITY_ATTRIBUTES" → ["security", "SECURITY_ATTRIBUTES"]),
+// used to detect parameter names that would shadow a type referenced in the
+// signature.
+func splitIdents(expr string) []string {
+	var idents []string
+	var current strings.Builder
+	flush := func() {
+		if current.Len() > 0 {
+			idents = append(idents, current.String())
+			current.Reset()
+		}
+	}
+	for _, r := range expr {
+		if r == '_' || r >= 'a' && r <= 'z' || r >= 'A' && r <= 'Z' || r >= '0' && r <= '9' {
+			current.WriteRune(r)
+			continue
+		}
+		flush()
+	}
+	flush()
+	return idents
+}
+
+// avoidCollision suffixes a parameter name with '_' until it no longer matches
+// any type identifier used in the signature. Go puts parameter names in scope
+// for the result types, so a param named e.g. "Node" would shadow the type
+// "Node" in a "(*Node, error)" return, making it an invalid type reference.
+func avoidCollision(name string, reserved map[string]bool) string {
+	for reserved[name] {
+		name += "_"
+	}
+	return name
 }
 
 func amd64Compatible(architectures []string) bool {
@@ -102,110 +138,241 @@ func dllVarName(dll string) string {
 	return builder.String()
 }
 
-// buildFunction resolves one function into a render model. Functions whose
-// signatures the raw tier cannot marshal (by-value structs, floats) are
-// skipped with a diagnostic.
-func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32meta.Function, imports typemap.ImportSet) (view.FunctionModel, bool) {
+// buildFunction resolves one function into a render model: an idiomatic Go
+// signature whose body converts its params and dispatches via syscall.
+// Functions whose signatures cannot be marshaled (by-value struct/float
+// params or returns) are skipped with a diagnostic.
+func (g *Generator) buildFunction(meta *win32meta.NamespaceMeta, function *win32meta.Function, rawName string, imports typemap.ImportSet) (view.FunctionModel, bool) {
 	context := typemap.Context{Namespace: meta.Namespace}
-	trialImports := typemap.ImportSet{}
+	scratch := typemap.ImportSet{}
 
-	// Resolve parameters.
-	var paramDecls, argExprs []string
+	// Resolve every parameter up front, then plan array→slice collapses
+	// (which span two params: the pointer and its count).
+	resolvedParams := make([]typemap.Resolved, len(function.Params))
+	for i := range function.Params {
+		resolvedParams[i] = g.mapper.GoType(&function.Params[i].Type, context, scratch)
+	}
+	slicePlans, elidedCounts := planSliceParams(function, resolvedParams)
+
+	returnContext := context
+	returnContext.IsReturn = true
+	returnResolved := g.mapper.GoType(&function.Return, returnContext, scratch)
+	retValMode := retValElevationMode(function, returnResolved)
+
+	// Parameter names enter scope for the result types, so rename any that
+	// would shadow a type identifier used anywhere in the signature.
+	reserved := map[string]bool{}
+	for _, ident := range splitIdents(returnResolved.GoType) {
+		reserved[ident] = true
+	}
+	for i := range resolvedParams {
+		for _, ident := range splitIdents(resolvedParams[i].GoType) {
+			reserved[ident] = true
+		}
+	}
+	paramNames := make([]string, len(function.Params))
+	for i := range function.Params {
+		paramNames[i] = avoidCollision(naming.ParamName(function.Params[i].Name), reserved)
+	}
+
+	var decls, preamble, argWords, returnValues, returnTypes []string
+	usesUnsafe := false
 	for i := range function.Params {
 		param := &function.Params[i]
-		resolved := g.mapper.GoType(&param.Type, context, trialImports)
-		argClass := typemap.ArgClassOf(resolved, resolved.GoType)
-		if argClass == typemap.ArgUnsupported || resolved.Kind == typemap.KindVoid {
+		resolved := resolvedParams[i]
+
+		// [out,retval] → elevated Go return value (a COM out is just a typed
+		// pointer here, so no special-casing is needed).
+		if retValMode != retValNone {
+			if element, ok := retValElement(param, resolved); ok {
+				local := "_" + paramNames[i]
+				preamble = append(preamble, "var "+local+" "+element)
+				argWords = append(argWords, "uintptr(unsafe.Pointer(&"+local+"))")
+				returnValues = append(returnValues, local)
+				returnTypes = append(returnTypes, element)
+				usesUnsafe = true
+				continue
+			}
+		}
+		// A count parameter collapsed into a slice: derive from len().
+		if arrayIndex, ok := elidedCounts[i]; ok {
+			argWords = append(argWords, "uintptr(len("+paramNames[arrayIndex]+"))")
+			continue
+		}
+		// An array pointer collapsed into a []T parameter.
+		if plan, ok := slicePlans[i]; ok {
+			name := paramNames[i]
+			local := "_" + name
+			decls = append(decls, name+" []"+plan.element)
+			preamble = append(preamble, "var "+local+" "+plan.rawPointerType)
+			preamble = append(preamble, "if len("+name+") > 0 { "+local+" = &"+name+"[0] }")
+			argWords = append(argWords, "uintptr(unsafe.Pointer("+local+"))")
+			usesUnsafe = true
+			continue
+		}
+
+		decl, pre, word, pointer, ok := shapeParam(paramNames[i], param, resolved)
+		if !ok {
 			g.diag("function %s: param %s not marshalable (%s), function skipped",
 				function.Name, param.Name, resolved.GoType)
 			return view.FunctionModel{}, false
 		}
-		paramName := naming.ParamName(param.Name)
-		paramDecls = append(paramDecls, paramName+" "+resolved.GoType)
-		if argClass == typemap.ArgPointer {
-			argExprs = append(argExprs, "uintptr(unsafe.Pointer("+paramName+"))")
-			imports["unsafe"] = "unsafe"
-		} else {
-			argExprs = append(argExprs, "uintptr("+paramName+")")
+		if decl != "" {
+			decls = append(decls, decl)
 		}
+		preamble = append(preamble, pre...)
+		argWords = append(argWords, word)
+		usesUnsafe = usesUnsafe || pointer
 	}
 
-	// Resolve the return shape.
-	returnContext := context
-	returnContext.IsReturn = true
-	returnResolved := g.mapper.GoType(&function.Return, returnContext, trialImports)
 	model := view.FunctionModel{
-		GoName:   function.Name,
-		ParamStr: strings.Join(paramDecls, ", "),
-		ProcVar:  "proc" + function.Name,
-		ArgExprs: argExprs,
+		ProcVar:  "proc" + rawName,
+		ParamStr: strings.Join(decls, ", "),
+		Preamble: preamble,
+		ArgExprs: argWords,
 	}
-	if !g.buildReturnShape(&model, function, returnResolved) {
+	if len(returnValues) > 0 {
+		model.ReturnValues = returnValues
+		switch retValMode {
+		case retValHRESULT:
+			model.ReturnKind = view.RetRetValHResult
+			model.ReturnSig = "(" + strings.Join(append(returnTypes, "error"), ", ") + ")"
+		case retValRawError:
+			model.ReturnKind = view.RetRetValBoolErr
+			model.ReturnSig = "(" + strings.Join(append(returnTypes, "error"), ", ") + ")"
+		case retValVoid:
+			model.ReturnKind = view.RetRetValVoid
+			if len(returnTypes) == 1 {
+				model.ReturnSig = returnTypes[0]
+			} else {
+				model.ReturnSig = "(" + strings.Join(returnTypes, ", ") + ")"
+			}
+		}
+	} else if !g.buildReturnShape(&model, function, returnResolved) {
 		return view.FunctionModel{}, false
 	}
 
-	// Commit the trial imports plus the packages every body needs.
-	for alias, path := range trialImports {
+	// Choose the exported name: drop a trailing -W when the bare name is free.
+	goName := rawName
+	if function.UnsuffixedName != "" {
+		candidate := naming.Export(function.UnsuffixedName)
+		if g.claimName(candidate) {
+			goName = candidate
+		} else {
+			g.diag("function %s: bare name %s taken, keeping %s", meta.Namespace, candidate, rawName)
+		}
+	}
+	if goName == rawName {
+		if !g.claimName(goName) {
+			g.diag("function %s: name already used in package %s", function.Name, meta.Namespace)
+			return view.FunctionModel{}, false
+		}
+	}
+	model.GoName = goName
+	model.ProcVar = "proc" + goName
+
+	// Commit imports and the packages every body needs.
+	for alias, path := range scratch {
 		imports[alias] = path
 	}
 	imports["syscall"] = "syscall"
 	imports["win32"] = g.mapper.ModulePath + "/bindings/runtime/win32"
-
-	model.CommentLines = functionComments(function)
+	if usesUnsafe {
+		imports["unsafe"] = "unsafe"
+	}
+	model.CommentLines = functionComments(function, goName)
 	return model, true
 }
 
-// buildReturnShape selects the body/return template shape.
+// shapeParam maps one non-slice, non-retval parameter to its idiomatic Go
+// declaration, any conversion preamble, and the syscall word. pointer reports
+// whether the word uses unsafe.Pointer. ok is false when the param cannot be
+// marshaled (float / by-value struct); the caller then skips its function or
+// method with a context-appropriate diagnostic. Shared by functions and COM
+// methods.
+func shapeParam(name string, param *win32meta.Param, resolved typemap.Resolved) (decl string, preamble []string, word string, pointer bool, ok bool) {
+	// Reserved parameters always take NULL — dropped from the signature.
+	if param.IsReserved {
+		return "", nil, "0", false, true
+	}
+	// Input PWSTR/PCWSTR → Go string.
+	if isWideStringPtr(resolved) && !param.IsOut {
+		local := "_" + name
+		return name + " string",
+			[]string{local + " := win32.UTF16Ptr(" + name + ")"},
+			"uintptr(unsafe.Pointer(" + local + "))", true, true
+	}
+	// BOOL input → Go bool.
+	if isBOOL(resolved) && !param.IsOut {
+		local := "_" + name
+		return name + " bool",
+			[]string{local + " := win32.Bool32(" + name + ")"},
+			"uintptr(" + local + ")", false, true
+	}
+	// Everything else passes through with the resolved type.
+	switch typemap.ArgClassOf(resolved, resolved.GoType) {
+	case typemap.ArgScalar:
+		return name + " " + resolved.GoType, nil, "uintptr(" + name + ")", false, true
+	case typemap.ArgPointer:
+		return name + " " + resolved.GoType, nil, "uintptr(unsafe.Pointer(" + name + "))", true, true
+	default:
+		return "", nil, "", false, false
+	}
+}
+
+// buildReturnShape selects the body/return template shape (idiomatic).
 func (g *Generator) buildReturnShape(model *view.FunctionModel, function *win32meta.Function, resolved typemap.Resolved) bool {
 	switch resolved.Kind {
 	case typemap.KindVoid:
 		model.ReturnKind = view.RetVoid
 		return true
-
 	case typemap.KindStruct, typemap.KindUnion, typemap.KindArray, typemap.KindGUID:
 		g.diag("function %s: by-value %s return not marshalable, function skipped",
 			function.Name, resolved.GoType)
 		return false
-
 	case typemap.KindScalar:
-		if resolved.GoType == "float32" || resolved.GoType == "float64" {
-			g.diag("function %s: float return not marshalable, function skipped", function.Name)
-			return false
-		}
-		if resolved.GoType == "bool" {
-			g.diag("function %s: bool return not marshalable, function skipped", function.Name)
+		if resolved.GoType == "float32" || resolved.GoType == "float64" || resolved.GoType == "bool" {
+			g.diag("function %s: %s return not marshalable, function skipped", function.Name, resolved.GoType)
 			return false
 		}
 	}
 
 	model.RetExpr = returnConversion(resolved)
 
-	// BOOL + SetLastError collapses to `error` (the BOOL carries nothing
-	// beyond success/failure).
-	if function.SetLastError && resolved.TypedefApi == "Foundation" && resolved.TypedefName == "BOOL" {
+	// BOOL + SetLastError → error (the BOOL carries nothing beyond success).
+	if function.SetLastError && isBOOL(resolved) {
 		model.ReturnKind = view.RetBoolErr
 		model.ReturnSig = "error"
 		return true
 	}
-
-	if !function.SetLastError {
-		model.ReturnKind = view.RetVal
-		model.ReturnSig = resolved.GoType
+	// HRESULT → error.
+	if isHRESULT(resolved) {
+		model.ReturnKind = view.RetHResultErr
+		model.ReturnSig = "error"
 		return true
 	}
-
-	// SetLastError with a known failure sentinel → clean (T, error).
-	if checks := g.failureChecks(resolved); len(checks) > 0 {
-		model.ReturnKind = view.RetValErr
+	// Plain BOOL (no SetLastError) → bool.
+	if isBOOL(resolved) {
+		model.ReturnKind = view.RetBoolValue
+		model.ReturnSig = "bool"
+		return true
+	}
+	// Value + SetLastError with a known failure sentinel → clean (T, error).
+	if function.SetLastError {
+		if checks := g.failureChecks(resolved); len(checks) > 0 {
+			model.ReturnKind = view.RetValErr
+			model.ReturnSig = "(" + resolved.GoType + ", error)"
+			model.FailureChecks = checks
+			return true
+		}
+		// No derivable sentinel: err is advisory (GetLastError).
+		model.ReturnKind = view.RetValLast
 		model.ReturnSig = "(" + resolved.GoType + ", error)"
-		model.FailureChecks = checks
 		return true
 	}
-
-	// SetLastError with no derivable sentinel: err is advisory (the raw
-	// GetLastError value; consult it only when ret indicates failure).
-	model.ReturnKind = view.RetValLast
-	model.ReturnSig = "(" + resolved.GoType + ", error)"
+	// Plain value → T.
+	model.ReturnKind = view.RetVal
+	model.ReturnSig = resolved.GoType
 	return true
 }
 
@@ -256,10 +423,8 @@ func returnConversion(resolved typemap.Resolved) string {
 }
 
 // functionComments assembles the doc comment lines.
-func functionComments(function *win32meta.Function) []string {
-	var lines []string
-	first := fmt.Sprintf("%s calls %s!%s.", function.Name, strings.TrimSuffix(function.DLL, ".dll"), exportOf(function))
-	lines = append(lines, first)
+func functionComments(function *win32meta.Function, goName string) []string {
+	lines := []string{fmt.Sprintf("%s calls %s!%s.", goName, strings.TrimSuffix(function.DLL, ".dll"), exportOf(function))}
 	if function.Availability.DocURL != "" {
 		lines = append(lines, function.Availability.DocURL)
 	}
@@ -274,4 +439,121 @@ func exportOf(function *win32meta.Function) string {
 		return function.EntryPoint
 	}
 	return function.Name
+}
+
+// ── idiomatic param/return helpers (folded from the former idiomatic tier) ──
+
+// slicePlan describes an array-pointer parameter to collapse into a []T.
+type slicePlan struct {
+	element        string // Go element type
+	rawPointerType string // pointer type of the address-of local ("*foundation.XXX")
+	countIndex     int    // the count parameter this slice supplies
+}
+
+// planSliceParams finds (array pointer, input count) parameter pairs — via the
+// ingested [NativeArrayInfo] CountParamIndex — and plans collapsing each into a
+// single []T parameter. Returns the array-index→plan and count-index→array-
+// index maps. A pair qualifies only when the count is referenced by exactly
+// one array, the array is a typed pointer (not void*), and the count is an
+// input integer.
+func planSliceParams(function *win32meta.Function, resolved []typemap.Resolved) (map[int]slicePlan, map[int]int) {
+	references := map[int]int{}
+	for i := range function.Params {
+		if j := function.Params[i].NativeArrayCountParamIndex; j >= 0 {
+			references[j]++
+		}
+	}
+	plans := map[int]slicePlan{}
+	elided := map[int]int{}
+	for i := range function.Params {
+		param := &function.Params[i]
+		countIndex := param.NativeArrayCountParamIndex
+		if countIndex < 0 || countIndex >= len(function.Params) || countIndex == i {
+			continue
+		}
+		if references[countIndex] != 1 {
+			continue // ambiguous shared count
+		}
+		array := resolved[i]
+		if array.Kind != typemap.KindPointer || !strings.HasPrefix(array.GoType, "*") {
+			continue
+		}
+		element := array.GoType[1:]
+		if element == "" || strings.Contains(element, "unsafe.") {
+			continue
+		}
+		countParam := &function.Params[countIndex]
+		if countParam.IsOut || countParam.IsReserved || !isIntegerCount(resolved[countIndex]) {
+			continue
+		}
+		plans[i] = slicePlan{element: element, rawPointerType: array.GoType, countIndex: countIndex}
+		elided[countIndex] = i
+	}
+	return plans, elided
+}
+
+// retVal elevation modes.
+const (
+	retValNone = iota
+	retValHRESULT
+	retValRawError // syscall status is a BOOL + GetLastError
+	retValVoid
+)
+
+// retValElevationMode decides whether a function's [out,retval] params can be
+// elevated to return values, based on the return status shape. Only a clean
+// status (HRESULT, BOOL+SetLastError, or void) qualifies.
+func retValElevationMode(function *win32meta.Function, returnResolved typemap.Resolved) int {
+	switch {
+	case isHRESULT(returnResolved):
+		return retValHRESULT
+	case function.SetLastError && isBOOL(returnResolved):
+		return retValRawError
+	case returnResolved.Kind == typemap.KindVoid:
+		return retValVoid
+	}
+	return retValNone
+}
+
+// retValElement returns the Go element type behind an elevatable [out,retval]
+// pointer param (a typed pointer, incl. a COM out `IFoo**` whose element is
+// `*IFoo`), or ok=false.
+func retValElement(param *win32meta.Param, resolved typemap.Resolved) (string, bool) {
+	if !param.IsRetVal || param.IsIn {
+		return "", false
+	}
+	if resolved.Kind != typemap.KindPointer || !strings.HasPrefix(resolved.GoType, "*") {
+		return "", false
+	}
+	element := resolved.GoType[1:]
+	if element == "" || strings.Contains(element, "unsafe.") {
+		return "", false
+	}
+	return element, true
+}
+
+// isIntegerCount reports whether a resolved type is an integer usable as a
+// slice length.
+func isIntegerCount(resolved typemap.Resolved) bool {
+	switch resolved.Kind {
+	case typemap.KindScalar:
+		return resolved.GoType != "bool" && resolved.GoType != "float32" && resolved.GoType != "float64"
+	case typemap.KindScalarTypedef, typemap.KindEnum:
+		return true
+	}
+	return false
+}
+
+func isWideStringPtr(resolved typemap.Resolved) bool {
+	return resolved.Kind == typemap.KindPointerTypedef &&
+		resolved.TypedefApi == "Foundation" &&
+		(resolved.TypedefName == "PWSTR" || resolved.TypedefName == "PCWSTR")
+}
+
+func isBOOL(resolved typemap.Resolved) bool {
+	return resolved.TypedefApi == "Foundation" && resolved.TypedefName == "BOOL"
+}
+
+func isHRESULT(resolved typemap.Resolved) bool {
+	return resolved.TypedefApi == "Foundation" && resolved.TypedefName == "HRESULT"
 }

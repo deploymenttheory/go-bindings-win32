@@ -1,39 +1,36 @@
 # Using COM interfaces
 
-COM interfaces are generated as **method-bearing wrapper types**: a Go struct
-that holds the raw interface pointer and dispatches through its vtable, with
-`HRESULT` methods surfaced as `error`.
+COM interfaces are generated as **method-bearing structs**: the generated
+interface struct *is* the COM object. It carries the vtable pointer and
+dispatches through it, with `HRESULT` methods surfaced as `error`.
 
 ## The shape
 
-For an interface `IFoo`, the idiomatic package emits:
+For an interface `IFoo`, the package emits:
 
-- `type IFoo struct { … Raw *rawpkg.IFoo }` — embeds its idiomatic base
-  wrapper (so inherited methods like `QueryInterface` are promoted), and holds
-  the raw pointer.
-- `func WrapIFoo(raw *rawpkg.IFoo) IFoo` — wrap a raw pointer you obtained.
-- methods that forward to the vtable, returning `error` for `HRESULT` and
+- `type IFoo struct { … }` — a **root** interface carries
+  `LpVtbl *[1024]uintptr`; a **derived** interface embeds its base struct (so
+  inherited methods like `QueryInterface` are promoted). The struct *is* the
+  COM object — there is no separate wrapper and no `.Raw` field.
+- methods that dispatch through the vtable, returning `error` for `HRESULT` and
   lifting `[out, retval]` parameters into Go return values.
 
 ## Getting an interface
 
-Most objects come from a factory function that hands back a raw pointer via an
-out parameter; wrap it:
+Most objects come from a factory function (or `QueryInterface`) that hands back
+a typed pointer via an out parameter:
 
 ```go
 import (
-	rawcom "…/bindings/win32/system/com"
+	com "…/bindings/win32/system/com"
 	"…/bindings/win32/system/com/structuredstorage"
-	com "…/opinionated/idiomatic/win32/system/com"
 )
 
-var raw *rawcom.IStream
-if hr := structuredstorage.CreateStreamOnHGlobal(0, 1, &raw); hr != 0 {
-	return win32.HRESULTError(int32(hr))
+var stream *com.IStream
+if err := structuredstorage.CreateStreamOnHGlobal(0, true, &stream); err != nil {
+	return err
 }
-defer raw.Release()
-
-stream := com.WrapIStream(raw)
+defer stream.Release()
 ```
 
 ## Calling methods
@@ -51,11 +48,17 @@ if err := stream.Write(unsafe.Pointer(&data[0]), uint32(len(data)), &written); e
 name, err := eventClass.Get_EventClassID() // (foundation.BSTR, error)
 ```
 
-Interface **parameters** also take wrapper values — pass the wrapper, the
-binding forwards its `.Raw`:
+Interface **parameters** take the typed pointer directly — pass the interface
+struct pointer:
 
 ```go
-appVisibility.Advise(myCallback /* an IAppVisibilityEvents wrapper */, &cookie)
+appVisibility.Advise(myCallback /* an *IAppVisibilityEvents */, &cookie)
+```
+
+Under the hood, each method dispatches through its vtable slot:
+
+```go
+syscall.SyscallN(self.LpVtbl[slot], uintptr(unsafe.Pointer(self)), args…)
 ```
 
 ## Lifetimes
@@ -63,19 +66,17 @@ appVisibility.Advise(myCallback /* an IAppVisibilityEvents wrapper */, &cookie)
 COM uses reference counting. The rules the bindings expect:
 
 - **`Release` what you own.** A factory or `QueryInterface` hands you a
-  reference; release it (`raw.Release()` or the promoted `stream.Release()`)
-  when done — `defer` is idiomatic.
+  reference; release it (`stream.Release()`) when done — `defer` is idiomatic.
 - **`AddRef` if you keep an extra copy.** Storing a second long-lived
   reference means an extra `AddRef` and a matching `Release`.
-- **`QueryInterface`** returns a new reference through a `ComOutPtr`; release
-  it separately.
+- **`QueryInterface`** returns a new reference; release it separately.
 
 ```go
 var unk unsafe.Pointer
-if err := stream.QueryInterface(&rawcom.IID_IUnknown, &unk); err != nil {
+if err := stream.QueryInterface(&com.IID_IUnknown, &unk); err != nil {
 	return err
 }
-(*rawcom.IUnknown)(unk).Release() // release the QI reference
+(*com.IUnknown)(unk).Release() // release the QI reference
 ```
 
 ## Apartments

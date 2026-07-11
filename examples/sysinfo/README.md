@@ -22,9 +22,10 @@ version:    6.2 build 9200 (GetVersionEx; manifest-dependent)
 
 ## What it shows
 
-Everything comes from the **idiomatic** packages (plus the runtime for UTF-16);
-it never imports `bindings/win32`. Along the way it demonstrates three Win32
-patterns the bindings surface faithfully:
+Everything comes from the generated `bindings/win32/system/systeminformation`
+and `bindings/win32/system/windowsprogramming` packages (plus the runtime for
+UTF-16). Along the way it demonstrates three Win32 patterns the bindings surface
+faithfully:
 
 | Pattern | Where | Notes |
 |---|---|---|

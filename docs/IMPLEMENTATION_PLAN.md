@@ -1,9 +1,9 @@
 # go-bindings-win32 — Implementation Plan
 
 > **Status (2026-07-10):** M0, M1, and **M2 are implemented and passing**. The
-> raw tier emits **all 324 namespaces** (17,713 functions, zero compile
-> errors), live acceptance tests exercise Threading end-to-end, and the M2
-> gates are in place: generated ABI layout test (13k structs recorded,
+> single bindings tree emits **all 324 namespaces** (17,713 functions, zero
+> compile errors), live acceptance tests exercise Threading end-to-end, and the
+> M2 gates are in place: generated ABI layout test (13k structs recorded,
 > Sizeof/Offsetof assertions), packed-struct representability skip,
 > struct-initializer constants (DEVPROPKEY/PROPERTYKEY/GUID), `validate`,
 > `diff`, the diagnostics ratchet (`metadata/diagnostics-baseline.json`),
@@ -12,27 +12,34 @@
 > regen/ratchet gate; `winmd-update.yml` scheduled NuGet watcher that opens a
 > diff-annotated PR on new winmd releases).
 > **M3 (COM) is implemented**: all 7,900+ interfaces emit as vtable-dispatch
-> wrappers (43,656 methods) with base-chain embedding, absolute slot
-> numbering, and IID constants; a live acceptance test drives IStream
-> end-to-end (create/write/seek/read/QueryInterface/Release).
-> **M4 (idiomatic tier) is complete**: ~8,200 free-function wrappers (Go
-> strings for PWSTR, bool for BOOL, HRESULT→error, reserved elision, `-W`
-> de-suffixing) plus ~43,600 idiomatic **COM** wrappers (error-returning
-> methods, base-method promotion via embedding), across 289 packages, all
-> live-tested. **M5 (arch)**: generated files are tagged
-> `windows && (amd64 || arm64)` — verified to cross-compile for both; 386 is
-> excluded. The generator (M0–M5) is feature-complete for the raw + idiomatic
-> Win32 surface. **M6 (deeper ergonomics) is implemented**: array+count →
-> Go slices (~600 wrappers), `[out,retval]` elevation to return values
-> (~8,600 COM methods + flat functions), handle RAII — `Close<Handle>`
-> helpers from `[RAIIFree]` (~107 closers), and COM interface params as
-> wrapper types — all live-tested. The **idiomatic layer is self-contained**
-> (re-exports every type/constant/pass-through it doesn't improve, into
-> `_types.go`/`_constants.go`/`_functions.go`), so consumers never import
-> `bindings/win32`; **one `bindings` command clears and re-emits both tiers**,
-> each self-cleaning. A runnable [`examples/localaccount`](../examples) drives
-> the local-account lifecycle through the idiomatic package alone. See
-> CLAUDE.md for the as-built architecture.
+> structs (43,656 methods) with base-chain embedding, absolute slot
+> numbering, and IID constants — the generated struct *is* the COM object
+> (root `LpVtbl *[1024]uintptr`, derived embeds base); a live acceptance test
+> drives IStream end-to-end (create/write/seek/read/QueryInterface/Release).
+> **M4 (idiomatic shaping) is complete** — folded directly into the single
+> tier rather than a separate layer: ~8,200 free functions surface Go strings
+> for PWSTR, bool for BOOL, HRESULT→error, reserved elision, and `-W`
+> de-suffixing, plus ~43,600 **COM** methods return `error` with base-method
+> promotion via embedding, across the emitted packages, all live-tested.
+> **M5 (arch)**: generated files are tagged `windows && (amd64 || arm64)` —
+> verified to cross-compile for both; 386 is excluded. The generator (M0–M5)
+> is feature-complete for the Win32 surface. **M6 (deeper ergonomics) is
+> implemented**: array+count → Go slices (~600 functions), `[out,retval]`
+> elevation to return values (~8,600 COM methods + flat functions), handle
+> RAII — `Close<Handle>` helpers from `[RAIIFree]` (~107 closers), and COM
+> interface params as wrapper types — all live-tested.
+>
+> **Architecture note (post-M6 collapse):** the design originally shipped two
+> code-generation tiers — a raw `bindings/win32` tier and a separate idiomatic
+> `opinionated/idiomatic/win32` layer. These were **collapsed into one tier**:
+> a single idiomatic-shaped package per namespace under `bindings/win32/<ns>`.
+> The `opinionated/` directory is deleted, the second emitter leaf
+> (`internal/codegen/emit/idiomatic`, pkg `idiowin`) is deleted, and idiomatic
+> shaping now happens inside the one emitter's gathers. Sections below that
+> still describe "two tiers", the idiomatic subcommand, `WrapIFoo`/`.Raw`, or
+> `Context.QualifyOwn` are historical design notes — the **current-state**
+> descriptions have been updated to the single-tier reality. See CLAUDE.md for
+> the as-built architecture.
 
 Generate idiomatic Go bindings for the entire Win32 API from Microsoft's
 `win32metadata`, mirroring the architecture of the sibling
@@ -82,7 +89,7 @@ instead of ObjC), and the **runtime** (`syscall` DLL + COM vtable instead of pur
 | Decision | Choice |
 |----------|--------|
 | **Input source** | Native Go ECMA-335 `.winmd` reader against the official `Microsoft.Windows.SDK.Win32Metadata` NuGet winmd. `win32json` = cross-check oracle only. |
-| **Raw-tier errors** | Go `error` — `(T, error)`; HRESULT/`SetLastError`/NTSTATUS wrapped in structured, per-domain error types. |
+| **Errors** | Go `error` — `(T, error)`; HRESULT/`SetLastError`/NTSTATUS wrapped in structured, per-domain error types. |
 | **COM** | **In v1** — the COM vtable pipeline (interfaces, `IUnknown`/`IDispatch` embedding, sealed providers) ships in the first release, not deferred. |
 | **Runtime dependency** | `golang.org/x/sys/windows` — the single external dep (mirrors the macOS repo's single `purego` dep). |
 | **Module path** | `github.com/deploymenttheory/go-bindings-win32`. |
@@ -269,28 +276,33 @@ non-zero methods wins" ownership heuristic**.
 
 ## 6. Phase 3 — Emit — reuse the view→render compiler verbatim in shape
 
-Directory layout mirrors `internal/codegen/emit/`:
+> **As built (single tier):** the design originally sketched two emitter leaves
+> (a raw `rawwin` leaf and an idiomatic `idiowin` leaf). The two were collapsed
+> into **one** emitter. `internal/codegen/emit/idiomatic` (pkg `idiowin`) is
+> deleted; the sole emitter lives at `internal/codegen/emit/raw` (pkg `rawwin`,
+> still named "raw" internally for historical reasons — renaming is a cosmetic
+> follow-up) and emits the single idiomatic-shaped tree to `bindings/win32/`.
 
 ```
 internal/codegen/emit/
-  raw/                (pkg rawwin)   syscall/COM bindings  → bindings/win32/
-  idiomatic/          (pkg idiowin)                        → opinionated/idiomatic/win32/
+  raw/                (pkg rawwin)   idiomatic-shaped syscall/COM bindings  → bindings/win32/
 ```
 
-Each leaf is the identical three-package compiler:
+The one leaf is the three-package compiler:
 
-1. **`<leaf>/*.go` (gather)** — the *only* place type/naming/import decisions live.
-   `structs.go`, `enums.go`, `functions.go`, `interfaces.go`, `delegates.go`,
-   `constants.go`, `typedefs.go`. Consumes `Registry` + `typemap.Mapper`, produces
-   pure-data view IR. May use `fmt.Fprintf` only to build **fragments**
+1. **`raw/*.go` (gather)** — the *only* place type/naming/import decisions live.
+   `types.go`, `functions.go`, `interfaces.go`, `handles.go`, `sizes.go`,
+   `generator.go`. Consumes `Registry` + `typemap.Mapper`, produces pure-data
+   view IR, and performs the idiomatic shaping (string/bool/error/slice/retval
+   lifting) directly. May use `fmt.Fprintf` only to build **fragments**
    (an expression, a comment), never file bodies.
-2. **`<leaf>/view/`** (pkg `view`) — pure-data IR structs, imports nothing from
+2. **`raw/view/`** (pkg `view`) — pure-data IR structs, imports nothing from
    meta/typemap. Carries pre-rendered fragments + enum-like discriminants
    (`ReturnKind`, `DispatchKind ∈ {DllProc, ComVtable}`) so templates only branch.
-3. **`<leaf>/render/`** (pkg `render`) — `//go:embed templates/*.tmpl`, typed
+3. **`raw/render/`** (pkg `render`) — `//go:embed templates/*.tmpl`, typed
    `Execute*` funcs, imports **only** `view` (the render firewall). No Go syntax
    is string-built here.
-4. **`<leaf>/render/templates/*.tmpl`**.
+4. **`raw/render/templates/*.tmpl`**.
 
 **Reuse wholesale:**
 - `internal/codegen/shared/fileasm` — file scaffold (DO-NOT-EDIT header +
@@ -319,15 +331,17 @@ Consumes the structured `TypeRef` tree (no string parsing). Resolution ladder:
    - `Default` struct → by value (param & field) / `unsafe.Pointer` or `*T` per
      context on return.
 3. `PointerTo` → `*<child>`; `PointerTo Void → unsafe.Pointer`;
-   `PointerTo Char/WChar` at param position with `[Const]` → `string` in the
-   idiomatic tier (raw tier keeps `*byte`/`*uint16`).
+   `PointerTo Char/WChar` at param position with `[Const]` → `string` (the
+   idiomatic shaping in the function gather converts at the boundary).
 4. `Array{Shape.Size:N}` → `[N]<child>`; `LPArray` → slice/pointer per attrs
-   (`NativeArrayInfo` count linkage feeds the idiomatic slice params).
+   (`NativeArrayInfo` count linkage feeds the `[]T` slice params).
 
 **Keep the macOS discipline:** `ImportSet` side-effect, the `Diagnostics`
 degradation recorder (every fallthrough-to-`uintptr`/`unsafe.Pointer` logged), and
 cycle-aware degradation via `BlockedImports`. Cross-namespace `ApiRef.Api` →
-qualified package alias + recorded import.
+qualified package alias + recorded import. There is **one Go package per
+namespace**, so same-namespace types stay unqualified — the `Context.QualifyOwn`
+field that an earlier two-package design carried has been removed.
 
 **Architecture skew:** win32json marks arch-specific types/params with
 `Architectures`. Emit per-arch files with `//go:build amd64` / `arm64` build tags
@@ -340,12 +354,14 @@ qualified package alias + recorded import.
 Simpler than ObjC (names are already PascalCase — no selector splitting):
 - **Reserved-word/import-collision escaping** for params — port the macOS
   `goReservedWords` defensive set (keywords + `unsafe`, `runtime`, `context`, …).
-- **Initialism correction** in the idiomatic tier (`Id→ID`, `Url→URL`, `Rpc→RPC`)
-  — port `initialisms.go`.
+- **Initialism correction** (`Id→ID`, `Url→URL`, `Rpc→RPC`) — port
+  `initialisms.go`.
 - `PackageName(namespace)` → lowercased leaf segment (with a collision map for
   duplicate leaves, e.g. two `Common` leaves → namespaced).
-- Optional Hungarian-notation stripping for idiomatic param names (`dwFlags→flags`).
-- Unicode-variant de-suffixing (`MessageBoxW→MessageBox`) in the idiomatic tier.
+- Optional Hungarian-notation stripping for param names (`dwFlags→flags`).
+- Unicode-variant de-suffixing (`MessageBoxW→MessageBox`, when the base name is
+  free). A param whose name would shadow a type used in the signature is
+  suffixed `_`.
 
 ---
 
@@ -375,29 +391,37 @@ The clean 1:1 replacement for `bindings/runtime/purego`. Pure `syscall` +
 
 ---
 
-## 10. Idiomatic layer (`opinionated/idiomatic/win32/`, pkg `idiowin`)
+## 10. Idiomatic shaping (folded into the one tier)
 
-Hermetic (never imports `bindings/win32`; re-does dispatch over the runtime), same
-view→render leaf shape. Port the macOS idiomatic patterns:
+> **As built:** this was originally a *separate* hermetic layer at
+> `opinionated/idiomatic/win32/` (pkg `idiowin`) that re-did dispatch and
+> re-exported everything it didn't improve, so consumers never imported
+> `bindings/win32`. That layer — and the whole `opinionated/` directory — has
+> been **deleted**. The single `bindings/win32/<ns>` package is *itself*
+> idiomatic-shaped; the shaping below happens inside the one emitter's
+> function/COM gathers, not in a second tier.
 
-- **COM interface wrappers** with **base embedding** (`IDispatch` embeds `IUnknown`
-  → promotes `QueryInterface`/`AddRef`/`Release`) and **sealed provider interfaces**
-  for "accept any derived interface" params.
-- **Fluent constructors / failable calls** — `HRESULT`/`SetLastError` calls
-  surface as `(T, error)`; the macOS `errkit.FromObjC` becomes `hresult.From`.
-- **String ergonomics** — `PWSTR`/`PSTR` params become Go `string`, converted at
-  the boundary; array+count param pairs (`NativeArrayInfo`) collapse to `[]T`.
+- **COM: the generated struct IS the COM object.** No `WrapIFoo` constructor and
+  no `.Raw` field — the root interface carries `LpVtbl *[1024]uintptr` and a
+  derived interface embeds its base (`IDispatch` embeds `IUnknown` → promotes
+  `QueryInterface`/`AddRef`/`Release`). Methods return `error` (from HRESULT);
+  `[out,retval]` outs are lifted to `*IFoo` returns; dispatch is
+  `syscall.SyscallN(self.LpVtbl[slot], uintptr(unsafe.Pointer(self)), args…)`.
+- **Failable calls** — `HRESULT`/`SetLastError` calls surface as `error` /
+  `(T, error)`; value+`SetLastError`+sentinel returns become `(T, error)`. The
+  macOS `errkit.FromObjC` becomes `hresult.From`.
+- **String ergonomics** — `PWSTR`/`PCWSTR`/`PSTR` params become Go `string`,
+  converted at the boundary; array-pointer+count param pairs (`NativeArrayInfo`)
+  collapse to `[]T`. `BOOL` → `bool`. Reserved params are elided and `-W` is
+  desuffixed when the base name is free.
 - **Handle RAII** — `[RAIIFree]`/`CloseApi` metadata drives generated
-  `Close()`/`defer`-friendly handle wrappers (`HANDLE→CloseHandle`,
-  `BSTR→SysFreeString`).
+  `Close<Handle>(h) error` closers (`HANDLE→CloseHandle`, `BSTR→SysFreeString`).
+- **Inline dispatch** — flat functions call `syscall.SyscallN` **inline** (no
+  wrapper calling a second generated function).
 - **Bitfield & union accessors** — `[NativeBitfield]` → get/set methods over the
   backing `_bitfieldN`; unions → accessor methods (`WholeValue()`/`WholeValueVal()`
   à la zzl) since Go has no unions.
 - **Enum flags** — `[Flags]` enums get `|`-friendly typed constants.
-
-Hand-crafted escape hatch: `opinionated/library/win32/<domain>/` for hand-written
-QoL helpers the generator never overwrites (only `*_generated.go` is regenerated),
-matching the macOS `opinionated/library/` rule.
 
 ---
 
@@ -410,20 +434,24 @@ matching the macOS `opinionated/library/` rule.
   makes win32json/winmd bumps reviewable instead of eyeballing JSON.
 - **Diagnostics ratchet** — `--diagnostics-baseline metadata/diagnostics-baseline.json`
   fails when a new `unsafe.Pointer`/`uintptr` degradation appears beyond baseline.
-- **Regenerate + `git diff` empty** — the master gate. CI runs `generate bindings`
-  + `generate idiomatic` and fails if `bindings/`/`opinionated/` diff is non-empty.
+- **Regenerate + `git diff` empty** — the master gate. CI runs
+  ingest → validate → `generate bindings` (ratchet) → `abitest`, then fails if
+  the `git diff` over `bindings/` + `acceptance/` is non-empty.
 
 ---
 
 ## 12. CLI (`cmd/generate/main.go`) — `//go:build windows`
 
+> **As built:** there is **no** `idiomatic` subcommand and **no** `--raw-only`/
+> `-idiomatic-out` flag — the single `bindings` command emits the one
+> idiomatic-shaped tree to `bindings/win32` (self-cleaning).
+
 | Sub-command      | Replaces macOS | Does |
 |------------------|----------------|------|
 | `fetch-metadata` | `scan`         | Download+extract NuGet winmd → `metadata/winmd/` |
 | `ingest`         | (scan tail)    | native winmd reader → `metadata/win32/*.w32meta.json` |
-| `bindings`       | `bindings`     | Load Registry → emit `bindings/win32/` |
-| `idiomatic`      | `idiomatic`    | Emit `opinionated/idiomatic/win32/` |
-| `all`            | `all`          | ingest + bindings + idiomatic |
+| `bindings`       | `bindings`     | Load Registry → emit the single `bindings/win32/` tree (self-cleaning) |
+| `abitest`        | (new)          | Emit/refresh the generated ABI Sizeof/Offsetof layout test |
 | `validate`       | `validate`     | Structural QA |
 | `diff`           | `diff`         | Semantic metadata diff |
 | `list`           | `list`         | List namespaces |
@@ -434,18 +462,20 @@ Plus `cmd/inspect` (dump a `.w32meta.json`).
 
 ## 13. Generated output layout
 
+One idiomatic-shaped Go package per namespace (no separate idiomatic tree):
+
 ```
-bindings/win32/<namespace-leaf>/        (raw tier)
+bindings/win32/<namespace-leaf>/        (the single tier)
 ├── doc.go
-├── <leaf>_runtime.go        # DLL load + lazy proc registration
-├── <leaf>_structs.go
+├── <leaf>_typedefs.go       # NativeTypedef handle/alias wrappers
 ├── <leaf>_enums.go
-├── <leaf>_functions.go
-├── <leaf>_constants.go
-├── <leaf>_interfaces.go     # COM
+├── <leaf>_structs.go
 ├── <leaf>_delegates.go      # callback types
+├── <leaf>_constants.go
+├── <leaf>_functions.go      # inline syscall.SyscallN dispatch
+├── <leaf>_interfaces.go     # COM (struct IS the COM object)
+├── <leaf>_handles.go        # Close<Handle> RAII closers
 ├── <leaf>_functions_amd64.go / _arm64.go   # arch-specific
-opinionated/idiomatic/win32/<leaf>/     (idiomatic tier)
 bindings/runtime/win32/                 (hand-written runtime + com/ callbacks/)
 ```
 
@@ -477,9 +507,11 @@ Storage.FileSystem, Security). Wire `validate` + the diagnostics ratchet.
 runtime (`bindings/runtime/win32/com`), sealed providers, `HRESULT`→`error`.
 Prove on `System.Com` + a real interface (e.g. `IFileDialog`, `IShellItem`).
 
-**M4 — Idiomatic tier.** String/handle/slice ergonomics, failable `(T,error)`,
-bitfield/union accessors, flags enums, COM wrappers with embedding. Parity with
-gowin32-quality ergonomics on the M1–M3 namespaces.
+**M4 — Idiomatic shaping.** String/handle/slice ergonomics, failable `(T,error)`,
+bitfield/union accessors, flags enums, COM structs with embedding. Parity with
+gowin32-quality ergonomics on the M1–M3 namespaces. *(Originally scoped as a
+separate idiomatic tier; folded directly into the single `bindings/win32` tier
+during the post-M6 collapse.)*
 
 **M5 — Breadth.** Turn the crank across all ~130+ namespaces (flat + COM). Triage
 degradations via the diagnostics baseline. Add `diff` for winmd version bumps.
@@ -512,8 +544,9 @@ degradations via the diagnostics baseline. Add `diff` for winmd version bumps.
 ## 16. Decisions — resolved & still open
 
 **Resolved (see the "Locked decisions" table in §0):** native `.winmd` reader as
-input · `(T, error)` raw-tier errors · COM in v1 · `x/sys/windows` as the single
-dep · module path `github.com/deploymenttheory/go-bindings-win32`.
+input · `(T, error)` Go errors · COM in v1 · `x/sys/windows` as the single dep ·
+module path `github.com/deploymenttheory/go-bindings-win32` · **a single
+idiomatic-shaped tier** (`bindings/win32`), the two-tier design collapsed.
 
 **Still open (can be decided during M0/M1, don't block the start):**
 1. **winmd version to pin** — which `Microsoft.Windows.SDK.Win32Metadata` release

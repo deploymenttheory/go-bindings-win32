@@ -3,9 +3,8 @@
 // memory, and the (manifest-dependent) reported OS version.
 //
 // Everything it does is read-only and needs no privileges, so it is the
-// gentlest possible tour of the bindings. It imports ONLY the idiomatic
-// packages (plus the shared runtime for UTF-16 conversion) — never
-// bindings/win32.
+// gentlest possible tour of the bindings. It imports the generated packages
+// under bindings/win32 (plus the shared runtime for UTF-16 conversion).
 //
 // It shows three recurring Win32 patterns the bindings surface as-is:
 //   - "size probe then fill": call a string API once with a nil buffer to
@@ -27,9 +26,9 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/foundation"
-	sysinfo "github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/systeminformation"
-	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/windowsprogramming"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	sysinfo "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/systeminformation"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/windowsprogramming"
 )
 
 func main() {

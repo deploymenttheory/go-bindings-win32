@@ -57,9 +57,9 @@ jobs:
             go run ./cmd/generate diff --old old-metadata --new metadata/win32 | head -c 60000
           } > pr-body.md
 
-      # One command regenerates both tiers and rewrites the diagnostics
+      # One command regenerates the bindings tree and rewrites the diagnostics
       # baseline (reviewed via this PR).
-      - name: Regenerate bindings (raw + idiomatic) and baseline
+      - name: Regenerate bindings and baseline
         if: steps.fetch.outputs.updated == 'true'
         run: go run ./cmd/generate bindings --diagnostics metadata/diagnostics-baseline.json
 
@@ -85,6 +85,5 @@ jobs:
             metadata/winmd/
             metadata/diagnostics-baseline.json
             bindings/
-            opinionated/
             acceptance/abi_generated_test.go
           delete-branch: true

@@ -4,14 +4,14 @@ Idiomatic Go bindings for the **Win32 API**, generated from Microsoft's
 [win32metadata](https://github.com/microsoft/win32metadata). Every function,
 struct, enum, constant, and COM interface in the metadata — hundreds of
 namespaces — surfaced as Go you can actually enjoy calling: Go strings, Go
-errors, Go slices, and typed COM wrappers.
+errors, Go slices, and typed COM interfaces.
 
 ```go
 //go:build windows
 
 import (
-	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/foundation"
-	"github.com/deploymenttheory/go-bindings-win32/opinionated/idiomatic/win32/system/threading"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/threading"
 )
 
 event, err := threading.CreateEvent(nil, true, false, "my-event") // (HANDLE, error)
@@ -30,15 +30,14 @@ own C#/Rust projections use — kept honest by a regenerate-and-diff gate and
 live ABI/round-trip tests — so the coverage is broad and the mapping is
 faithful.
 
-## Two layers
+## One tree
 
-| Layer | Import | What you get |
+| Package | Import | What you get |
 |---|---|---|
-| **Idiomatic** *(use this)* | `opinionated/idiomatic/win32/<namespace>` | Go `string` for `PWSTR`, `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, `[out,retval]` lifted to returns, `Close<Handle>` RAII helpers, COM interfaces as method-bearing wrappers. **Self-contained** — it re-exports every type/constant/pass-through it doesn't improve, so you never import the raw package. |
-| **Raw** | `bindings/win32/<namespace>` | The 1:1 `syscall` surface, for the rare un-adapted signature. |
+| **Bindings** | `bindings/win32/<namespace>` | The full typed surface — structs, enums, constants, COM interfaces — with idiomatic-shaped calls: Go `string` for `PWSTR`, `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, `[out,retval]` lifted to returns, `Close<Handle>` RAII helpers, and COM interfaces as method-bearing vtable structs. Each function dispatches through `syscall` inline — no wrapper layer. |
 | **Runtime** | `bindings/runtime/win32` | Shared helpers: `UTF16Ptr`, `UTF16ToString`, `GUID`, `HRESULTError`, `Bool32`. |
 
-Rule of thumb: **import only the idiomatic package and the runtime.**
+Everything lives in one tree: import `bindings/win32/<namespace>` and the runtime.
 
 ## Install
 
@@ -75,11 +74,11 @@ Runnable programs, each with its own README, under [`examples/`](examples):
 
 A native Go reader parses the committed `Windows.Win32.winmd` (ECMA-335, no
 Clang, no .NET) into an intermediate model, then a template-based emitter
-produces the raw and idiomatic trees. One command clears and re-emits both:
+produces the bindings tree. One command clears and re-emits it:
 
 ```sh
 go run ./cmd/generate ingest    # winmd → per-namespace IR
-go run ./cmd/generate bindings  # IR → raw + idiomatic (both self-cleaning)
+go run ./cmd/generate bindings  # IR → bindings/win32 (self-cleaning)
 ```
 
 Regeneration is byte-deterministic and gated in CI, and a scheduled workflow
@@ -89,13 +88,13 @@ pipeline.
 
 ## Status & contributing
 
-The generator covers the flat Win32 surface, COM interfaces, and the idiomatic
-layer across all namespaces on amd64/arm64. Constructs that can't be faithfully
-represented (e.g. some packed structs) are deliberately skipped rather than
-emitted wrong; these are tracked in `metadata/diagnostics-baseline.json`.
+The generator covers the flat Win32 surface and COM interfaces across all
+namespaces on amd64/arm64. Constructs that can't be faithfully represented
+(e.g. some packed structs) are deliberately skipped rather than emitted wrong;
+these are tracked in `metadata/diagnostics-baseline.json`.
 
-Generated code (`bindings/`, `opinionated/`) is never hand-edited — fix the
-generator under `internal/` and regenerate. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Generated code (`bindings/`) is never hand-edited — fix the generator under
+`internal/` and regenerate. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## License
 

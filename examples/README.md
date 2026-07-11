@@ -13,25 +13,24 @@ Everything here is Windows-only, amd64/arm64 (`//go:build windows`).
 | [`sysinfo`](sysinfo) | Read-only host info — computer name, user, CPU topology, memory, OS version. Size-probe strings, self-sized structs, and a C union. | No |
 | [`localaccount`](localaccount) | Full lifecycle of a local user account — create, query, enumerate, delete (`NetUserAdd`/`GetInfo`/`Enum`/`Del`). Structs, constants, `NetApiBuffer` ownership, handle-free cleanup. | Only with `-apply` |
 
-Both import **only** the idiomatic packages (plus the runtime). Run one with
-`go run ./examples/<name>`. `sysinfo` is entirely read-only; `localaccount`
-does a safe read-only dry run unless you pass `-apply` (which needs
-Administrator to create an account) and self-cleans what it creates.
+Both import the generated packages under `bindings/win32` (plus the runtime).
+Run one with `go run ./examples/<name>`. `sysinfo` is entirely read-only;
+`localaccount` does a safe read-only dry run unless you pass `-apply` (which
+needs Administrator to create an account) and self-cleans what it creates.
 
-## Which layer should I use, and why?
+## What you import, and why
 
-The repo offers the same Win32 API at two levels. Prefer the idiomatic layer;
-drop to raw only for something it doesn't cover.
+There is one bindings tree, and it is already idiomatic-shaped. Import the
+generated package for each namespace you use, plus the runtime.
 
-| Layer | Import path | Use it for |
+| Package | Import path | What it gives you |
 |---|---|---|
-| **Idiomatic** | `opinionated/idiomatic/win32/<namespace>` | **The default.** Go strings for `PWSTR`, Go `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, `[out,retval]` lifted to return values, `Close<Handle>` helpers, and COM interfaces as method-bearing wrapper types. It is **self-contained** — it re-exports every struct, constant, and pass-through function it doesn't otherwise improve, so you never import the raw package. |
-| **Raw** | `bindings/win32/<namespace>` | The 1:1 `syscall` surface. Reach for it only if you need a construct the idiomatic layer degraded (rare) or want the un-adapted signature. |
-| **Runtime** | `bindings/runtime/win32` | Shared, low-level helpers both tiers rely on: `UTF16Ptr`/`UTF16ToString`, `GUID`, `HRESULTError`, `Bool32`. Not a binding — a small toolbox for the boundary. |
+| **Bindings** | `bindings/win32/<namespace>` | The generated Win32 surface, shaped for Go: Go strings for `PWSTR`, Go `bool` for `BOOL`, `error` for `HRESULT`/`SetLastError`, `[]T` for array+count pairs, `[out,retval]` lifted to return values, `Close<Handle>` helpers, and COM interfaces as method-bearing wrapper types. Every struct, typed constant, and pass-through function lives here too. Each call dispatches through `syscall.SyscallN` inline. |
+| **Runtime** | `bindings/runtime/win32` | Shared, low-level helpers the bindings rely on: `UTF16Ptr`/`UTF16ToString`, `GUID`, `HRESULTError`, `Bool32`. Not a binding — a small toolbox for the boundary. |
 
-The rule of thumb: **import only the idiomatic package and the runtime.** If you
-find yourself importing `bindings/win32`, check whether the idiomatic package
-already re-exports what you need (it almost always does).
+The rule of thumb: **import the `bindings/win32/<namespace>` packages you need
+and the runtime.** Everything — the improved signatures and the structs and
+constants they use — lives in that one tree.
 
 ## Prerequisites every adopter hits
 
@@ -41,5 +40,5 @@ already re-exports what you need (it almost always does).
   and most `NetworkManagement`/`Security` mutations require an Administrator
   token; the examples detect access-denied and explain rather than crash.
 - **Ownership of unmanaged memory.** Some APIs hand back a buffer you must free
-  (`NetApiBufferFree`, `LocalFree`, `CoTaskMemFree`). The idiomatic layer
-  surfaces these; use `defer` to release them (see `localaccount`).
+  (`NetApiBufferFree`, `LocalFree`, `CoTaskMemFree`). The bindings surface
+  these; use `defer` to release them (see `localaccount`).

@@ -15,7 +15,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	idiowin "github.com/deploymenttheory/go-bindings-win32/internal/codegen/emit/idiomatic"
 	rawwin "github.com/deploymenttheory/go-bindings-win32/internal/codegen/emit/raw"
 	"github.com/deploymenttheory/go-bindings-win32/internal/codegen/pipeline"
 	"github.com/deploymenttheory/go-bindings-win32/internal/diagnostics"
@@ -37,8 +36,6 @@ func main() {
 		err = runIngest(os.Args[2:])
 	case "bindings":
 		err = runBindings(os.Args[2:])
-	case "idiomatic":
-		err = runIdiomatic(os.Args[2:])
 	case "abitest":
 		err = runABITest(os.Args[2:])
 	case "validate":
@@ -63,8 +60,7 @@ func usage() {
 commands:
   fetch-metadata  download the latest winmd from NuGet into metadata/winmd
   ingest          project the winmd into per-namespace .w32meta.json files
-  bindings        emit BOTH the raw bindings and the idiomatic layer (self-cleaning)
-  idiomatic       emit only the idiomatic layer (bindings already does both)
+  bindings        emit the Go bindings from the .w32meta.json metadata (self-cleaning)
   abitest         generate the ABI layout acceptance test
   validate        structural integrity checks over the metadata
   diff            semantic API diff between two metadata trees
@@ -137,19 +133,14 @@ func runIngest(args []string) error {
 	return nil
 }
 
-// runBindings regenerates BOTH tiers from one command: it clears and
-// re-emits the raw bindings (bindings/win32) and then the idiomatic layer
-// (opinionated/idiomatic/win32). Both are self-cleaning — files from an
-// earlier run that this run does not rewrite are pruned. The idiomatic pass
-// runs over exactly the namespaces the raw pass emitted, and shares the raw
-// pass's mapper, so a single load produces both trees consistently.
+// runBindings emits the single idiomatic-shaped bindings tree (bindings/win32)
+// from the committed metadata. It is self-cleaning — files from an earlier run
+// that this run does not rewrite are pruned.
 func runBindings(args []string) error {
 	flags := flag.NewFlagSet("bindings", flag.ExitOnError)
 	metadataDir := flags.String("metadata", filepath.Join("metadata", "win32"), "directory of .w32meta.json files")
-	rawOut := flags.String("out", filepath.Join("bindings", "win32"), "raw bindings output root")
-	idiomaticOut := flags.String("idiomatic-out", filepath.Join("opinionated", "idiomatic", "win32"), "idiomatic output root")
+	outDir := flags.String("out", filepath.Join("bindings", "win32"), "bindings output root")
 	namespaceFilter := flags.String("namespace", "", "comma-separated namespace filter; empty = all loaded")
-	rawOnly := flags.Bool("raw-only", false, "emit only the raw tier (skip the idiomatic layer)")
 	verbose := flags.Bool("v", false, "print diagnostics")
 	writeBaseline := flags.String("diagnostics", "", "write the diagnostics baseline to this path")
 	checkBaseline := flags.String("diagnostics-baseline", "", "fail if any diagnostic is not in this committed baseline")
@@ -168,37 +159,18 @@ func runBindings(args []string) error {
 		}
 	}
 
-	// Raw tier (self-cleaning).
-	rawGen := rawwin.New(registry, modulePath, *rawOut)
-	rawWritten, err := rawGen.EmitAll(filter)
+	generator := rawwin.New(registry, modulePath, *outDir)
+	written, err := generator.EmitAll(filter)
 	if err != nil {
 		return err
 	}
-	fmt.Printf("emitted %d raw packages → %s\n", rawWritten, *rawOut)
-
-	// Idiomatic tier (self-cleaning), over exactly the raw-emitted namespaces.
-	diags := rawGen.Diagnostics
-	if !*rawOnly {
-		idioFilter := map[string]bool(nil)
-		if len(filter) > 0 {
-			idioFilter = rawGen.EmittedNamespaces()
-		}
-		idioGen := idiowin.New(registry, rawGen.Mapper(), rawGen.EmittedFunctions(),
-			rawGen.EmittedComMethods(), reExportsFrom(rawGen), modulePath, *idiomaticOut)
-		idioWritten, err := idioGen.EmitAll(idioFilter)
-		if err != nil {
-			return err
-		}
-		fmt.Printf("emitted %d idiomatic packages → %s\n", idioWritten, *idiomaticOut)
-		diags = append(diags, idioGen.Diagnostics...)
-	}
-
+	diags := generator.Diagnostics
 	if *verbose {
 		for _, diagnostic := range diags {
 			fmt.Fprintln(os.Stderr, "diagnostic:", diagnostic)
 		}
 	}
-	fmt.Printf("total diagnostics: %d\n", len(diags))
+	fmt.Printf("emitted %d packages → %s (%d diagnostics)\n", written, *outDir, len(diags))
 
 	if *writeBaseline != "" {
 		if err := diagnostics.WriteBaseline(*writeBaseline, diags); err != nil {
@@ -225,66 +197,6 @@ func runBindings(args []string) error {
 
 // modulePath is this module's import path root.
 const modulePath = "github.com/deploymenttheory/go-bindings-win32"
-
-// reExportsFrom projects the raw tier's emitted symbols into the neutral
-// re-export list the idiomatic tier consumes (keeping the idiomatic emitter
-// decoupled from the raw emitter's Symbol type).
-func reExportsFrom(rawGen *rawwin.Generator) map[string][]idiowin.ReExport {
-	kinds := map[rawwin.SymbolKind]string{
-		rawwin.SymbolTypedef:  "typedef",
-		rawwin.SymbolEnum:     "enum",
-		rawwin.SymbolStruct:   "struct",
-		rawwin.SymbolDelegate: "delegate",
-		rawwin.SymbolType:     "type",
-		rawwin.SymbolConst:    "const",
-		rawwin.SymbolVar:      "var",
-		rawwin.SymbolFunc:     "func",
-	}
-	out := map[string][]idiowin.ReExport{}
-	for namespace, symbols := range rawGen.EmittedSymbols() {
-		for _, symbol := range symbols {
-			out[namespace] = append(out[namespace], idiowin.ReExport{Name: symbol.Name, Kind: kinds[symbol.Kind]})
-		}
-	}
-	return out
-}
-
-// runIdiomatic emits only the idiomatic tier. `bindings` already emits both
-// tiers in one command; this stays for regenerating the idiomatic layer
-// alone during development. It re-emits the raw tier (idempotently) to the
-// real raw dir first, since the idiomatic pass is derived from it.
-func runIdiomatic(args []string) error {
-	flags := flag.NewFlagSet("idiomatic", flag.ExitOnError)
-	metadataDir := flags.String("metadata", filepath.Join("metadata", "win32"), "directory of .w32meta.json files")
-	rawDir := flags.String("raw", filepath.Join("bindings", "win32"), "raw bindings root (probed for emitted functions)")
-	outDir := flags.String("out", filepath.Join("opinionated", "idiomatic", "win32"), "output root")
-	verbose := flags.Bool("v", false, "print diagnostics")
-	if err := flags.Parse(args); err != nil {
-		return err
-	}
-	registry, err := pipeline.LoadAll(*metadataDir)
-	if err != nil {
-		return err
-	}
-	// Probe the raw tier: emit it to discover the emitted-function set and
-	// populate the shared mapper, writing to the real raw dir (idempotent).
-	rawGen := rawwin.New(registry, modulePath, *rawDir)
-	if _, err := rawGen.EmitAll(nil); err != nil {
-		return err
-	}
-	idioGen := idiowin.New(registry, rawGen.Mapper(), rawGen.EmittedFunctions(), rawGen.EmittedComMethods(), reExportsFrom(rawGen), modulePath, *outDir)
-	written, err := idioGen.EmitAll(nil)
-	if err != nil {
-		return err
-	}
-	if *verbose {
-		for _, diagnostic := range idioGen.Diagnostics {
-			fmt.Fprintln(os.Stderr, "diagnostic:", diagnostic)
-		}
-	}
-	fmt.Printf("emitted %d idiomatic packages → %s (%d diagnostics)\n", written, *outDir, len(idioGen.Diagnostics))
-	return nil
-}
 
 // runABITest regenerates all bindings (collecting expected struct layouts)
 // and writes the sampled ABI acceptance test.

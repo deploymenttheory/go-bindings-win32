@@ -19,6 +19,9 @@ var (
 {{- range .CommentLines}}// {{.}}
 {{end -}}
 func {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{end}} {
+{{- range .Preamble}}
+	{{.}}
+{{- end}}
 {{- if eq .ReturnKind 0}}
 	syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
 {{- else if eq .ReturnKind 1}}
@@ -43,6 +46,24 @@ func {{.GoName}}({{.ParamStr}}){{with .ReturnSig}} {{.}}{{end}} {
 		return {{.RetExpr}}, e1
 	}
 	return {{.RetExpr}}, nil
+{{- else if eq .ReturnKind 5}}
+	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	return win32.HRESULTError(int32(r1))
+{{- else if eq .ReturnKind 6}}
+	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	return r1 != 0
+{{- else if eq .ReturnKind 7}}
+	r1, _, _ := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	return {{range .ReturnValues}}{{.}}, {{end}}win32.HRESULTError(int32(r1))
+{{- else if eq .ReturnKind 8}}
+	r1, _, e1 := syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	if r1 == 0 {
+		return {{range .ReturnValues}}{{.}}, {{end}}win32.LastError(e1)
+	}
+	return {{range .ReturnValues}}{{.}}, {{end}}nil
+{{- else if eq .ReturnKind 9}}
+	syscall.SyscallN({{.ProcVar}}.Addr(){{range .ArgExprs}}, {{.}}{{end}})
+	return {{join .ReturnValues ", "}}
 {{- end}}
 }
 

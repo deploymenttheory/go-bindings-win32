@@ -8,8 +8,8 @@ the rest faithful. This guide covers the patterns you'll hit repeatedly.
 
 Win32 wide strings are `PWSTR`/`PCWSTR` — pointers to NUL-terminated UTF-16.
 
-**Input strings** are already handled: the idiomatic layer turns an input
-`PWSTR` parameter into a Go `string` and converts it for you.
+**Input strings** are already handled: the bindings turn an input
+`PWSTR` parameter into a Go `string` and convert it for you.
 
 ```go
 event, _ := threading.CreateEvent(nil, true, false, "my-event") // Go string in
@@ -59,12 +59,12 @@ arch := uint16(si.Anonymous.Data[0] & 0xFFFF) // wProcessorArchitecture
 
 **Packed structs** that Go cannot reproduce byte-for-byte are deliberately
 **not emitted** (with a diagnostic) rather than emitted with a wrong layout.
-If you need one, define it yourself and call the raw function.
+If you need one, define it yourself and call the function directly.
 
 ## Memory ownership
 
 Some APIs return a buffer they allocated; you must free it with the matching
-function. The idiomatic package re-exports those frees, so `defer` them:
+function. The bindings expose those frees, so `defer` them:
 
 ```go
 var buf *byte
@@ -79,8 +79,8 @@ Common frees: `NetApiBufferFree`, `LocalFree`, `CoTaskMemFree`,
 ## Handles and RAII
 
 Handles are opaque `uintptr`-backed types (`HANDLE`, `HKEY`, …). Where the
-metadata records how a handle is closed (`[RAIIFree]`), the idiomatic package
-generates a `Close<Handle>(h) error` helper — `defer` it:
+metadata records how a handle is closed (`[RAIIFree]`), the bindings
+generate a `Close<Handle>(h) error` helper — `defer` it:
 
 ```go
 h, err := threading.CreateEvent(nil, true, false, "")

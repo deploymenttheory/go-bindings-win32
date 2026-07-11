@@ -19,14 +19,18 @@ type EnumMemberModel struct {
 	Value string
 }
 
-// StructModel is one value struct (or union blob).
+// StructModel is one value struct (or an opaque blob — union or packed).
 type StructModel struct {
 	TypeName string
 	DocURL   string
 	// IsUnionBlob marks a union emitted as an opaque, correctly sized and
 	// aligned backing array; Fields then holds the single backing field.
 	IsUnionBlob bool
-	Fields      []StructFieldModel
+	// IsPackedBlob marks a packed C struct (non-default field alignment that
+	// Go cannot reproduce with typed fields) emitted the same way: an opaque,
+	// correctly sized and aligned backing array in the single Fields entry.
+	IsPackedBlob bool
+	Fields       []StructFieldModel
 }
 
 // StructFieldModel is one struct field, fully resolved.

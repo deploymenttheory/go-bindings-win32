@@ -219,7 +219,7 @@ func (g *Generator) buildStructTree(meta *win32meta.NamespaceMeta, name string, 
 	model := view.StructModel{TypeName: name, DocURL: definition.Availability.DocURL}
 
 	if definition.IsUnion {
-		blob, ok := g.unionBlobField(definition, name)
+		blob, ok := g.opaqueBlobFields(definition, name, "union")
 		if !ok {
 			g.unclaimName(name)
 			return nil
@@ -230,15 +230,24 @@ func (g *Generator) buildStructTree(meta *win32meta.NamespaceMeta, name string, 
 		return []view.StructModel{model}
 	}
 
-	// A struct whose packed C layout differs from Go's natural layout of
-	// the same fields cannot be represented; emitting it would silently
-	// corrupt every offset after the first packed field.
+	// A struct whose packed C layout differs from Go's natural layout of the
+	// same fields cannot be represented field-by-field — emitting typed fields
+	// would silently corrupt every offset after the first packed field. Emit
+	// it as an opaque, correctly sized and aligned blob (like a union) so the
+	// type still exists: references to it resolve to the precise named type
+	// (FOO / *FOO) instead of degrading to unsafe.Pointer or being skipped.
 	packedLayout := g.structLayoutOf(definition, true)
 	naturalLayout := g.structLayoutOf(definition, false)
 	if packedLayout.ok && naturalLayout.ok && !sameLayout(packedLayout, naturalLayout) {
-		g.diag("struct %s: packed layout (pack=%d) not representable in Go, skipped", name, definition.PackingSize)
-		g.unclaimName(name)
-		return nil
+		blob, ok := g.opaqueBlobFields(definition, name, "packed struct")
+		if !ok {
+			g.unclaimName(name)
+			return nil
+		}
+		model.IsPackedBlob = true
+		model.Fields = blob
+		g.recordABI(meta.Namespace, name, definition, nil)
+		return []view.StructModel{model}
 	}
 
 	// Emit anonymous nested types as siblings first (they precede the parent
@@ -361,11 +370,12 @@ func (g *Generator) layoutBlobType(ref *win32meta.TypeRef) (string, bool) {
 	return fmt.Sprintf("[%d]%s", refLayout.size/elementSize, element), true
 }
 
-// unionBlobField sizes a union and renders its opaque backing field(s).
-func (g *Generator) unionBlobField(definition *win32meta.Struct, name string) ([]view.StructFieldModel, bool) {
+// opaqueBlobFields sizes a composite (union or packed struct) and renders its
+// opaque backing field(s). kind labels the construct in the skip diagnostic.
+func (g *Generator) opaqueBlobFields(definition *win32meta.Struct, name, kind string) ([]view.StructFieldModel, bool) {
 	unionLayout := g.layoutOfStruct(definition)
-	if !unionLayout.ok {
-		g.diag("union %s: layout not computable, skipped", name)
+	if !unionLayout.ok || unionLayout.size == 0 {
+		g.diag("%s %s: layout not computable, skipped", kind, name)
 		return nil, false
 	}
 	var element string
